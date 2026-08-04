@@ -1,0 +1,102 @@
+<!doctype html><html><head><meta charset="utf-8">
+<title>contact — the seven</title>
+<style>html,body{margin:0;background:#777}#stage{display:block;margin:0 auto}</style>
+</head><body>
+<canvas id="stage"></canvas>
+<script type="module">
+/* CONTACT SHEET — the seven, in one frame, at one scale.
+
+   Every asset is drawn into an identical sub-frame, so each module's OWN
+   `scale` decides relative height and nobody is resized by hand: Iona is
+   smaller than Niko because iona.mjs says 0.86 and niko.mjs says 1.03, not
+   because a contact sheet was composed. The POST pass runs ONCE over the whole
+   sheet, so all seven share a single halftone lattice — which is the actual
+   test the sheet exists for. Same world, same hand, same paper.
+
+   The two butterflies are placed side by side in COMPARABLE WING STATES —
+   both open — because that is the only way the sheet can test what it is here
+   to test: the laboratory insect with its crisp black venation and the crescent
+   punched out of one hindwing, the old one with the same outline gone frayed,
+   its venation three levels lighter, and the mark divided across its hindwings. If they read as two species the world's own
+   argument ("This one has the same marking." / "Marking is not memory.")
+   fails, and this is the frame where that is checkable. */
+import { compositePipeline, RENDER_PIPELINES, INK, ACCENT } from "/engine/halfworld-engine.mjs";
+
+const MODS = [
+  ["/assets/character/mara.mjs",       ""],
+  ["/assets/character/niko.mjs",       ""],
+  ["/assets/character/iona.mjs",       ""],
+  ["/assets/character/thegirl.mjs",    ""],
+  ["/assets/character/elise.mjs",      "behind"],
+  ["/assets/creature/swallowtail.mjs", "damaged"],
+  ["/assets/creature/oldbutterfly.mjs", "open"],
+];
+
+const CELL_W = 400, CELL_H = 880, DPR = 1.25;
+const SW = CELL_W * MODS.length, SH = CELL_H;
+
+const cv = document.getElementById("stage");
+cv.width = SW * DPR; cv.height = SH * DPR;
+cv.style.width = SW + "px"; cv.style.height = SH + "px";
+
+(async () => {
+  const out = { ok: false, errors: [], names: [] };
+  try {
+    const off = document.createElement("canvas"); off.width = SW; off.height = SH;
+    const og = off.getContext("2d", { willReadFrequently: true });
+    og.fillStyle = "#ffffff"; og.fillRect(0, 0, SW, SH);
+
+    const names = [], words = [];
+    for (let i = 0; i < MODS.length; i++) {
+      const [path, stateName] = MODS[i];
+      const m = await import(path);
+      const a = m.asset || m.default;
+      let st = a.preview ? a.preview() : {};
+      if (stateName && a.states && a.states.nodes && a.states.nodes[stateName])
+        st = { ...st, ...(a.states.nodes[stateName].preview || {}) };
+      og.save();
+      og.beginPath(); og.rect(i * CELL_W, 0, CELL_W, CELL_H); og.clip();
+      og.translate(i * CELL_W, 0);
+      a.draw(og, CELL_W, CELL_H, st);
+      og.restore();
+      names.push((a.name || a.id).toUpperCase());
+      words.push((a.statusWord || "").toUpperCase());
+    }
+    out.names = names;
+
+    const g = cv.getContext("2d");
+    compositePipeline(g, off, og, cv.width, cv.height, RENDER_PIPELINES.MESH, DPR, true);
+
+    g.save(); g.setTransform(1, 0, 0, 1, 0, 0);
+    const pad = 10 * DPR;
+    g.strokeStyle = INK; g.lineWidth = Math.max(2, DPR * 2);
+    g.strokeRect(pad, pad, cv.width - pad * 2, cv.height - pad * 2);
+    const tracked = (t, x, y, tr) => { let cx = x; for (const ch of t) { g.fillText(ch, cx, y); cx += g.measureText(ch).width + tr; } };
+    g.fillStyle = INK; g.font = `800 ${Math.round(13 * DPR)}px Helvetica,Arial,sans-serif`;
+    tracked("I REMEMBER BEING A BUTTERFLY · B01 · CAST", pad + 12 * DPR, pad + 22 * DPR, 2.2 * DPR);
+    g.fillStyle = ACCENT; g.fillRect(cv.width - pad - 16 * DPR, pad + 8 * DPR, 9 * DPR, 9 * DPR);
+    for (let i = 0; i < names.length; i++) {
+      if (i) {   // hairline cell rule, top and bottom only — never a full bar
+        g.strokeStyle = "#b9b9b3"; g.lineWidth = Math.max(1, DPR);
+        g.beginPath();
+        g.moveTo(i * CELL_W * DPR, pad + 30 * DPR); g.lineTo(i * CELL_W * DPR, pad + 58 * DPR);
+        g.moveTo(i * CELL_W * DPR, cv.height - pad - 62 * DPR); g.lineTo(i * CELL_W * DPR, cv.height - pad - 30 * DPR);
+        g.stroke();
+      }
+      g.fillStyle = ACCENT; g.font = `800 ${Math.round(11 * DPR)}px Helvetica,Arial,sans-serif`;
+      tracked(names[i], i * CELL_W * DPR + 16 * DPR, cv.height - pad - 30 * DPR, 1.6 * DPR);
+      g.fillStyle = "#6a6a64"; g.font = `800 ${Math.round(9.5 * DPR)}px Helvetica,Arial,sans-serif`;
+      tracked(words[i], i * CELL_W * DPR + 16 * DPR, cv.height - pad - 14 * DPR, 1.6 * DPR);
+    }
+    g.restore();
+
+    out.ok = true;
+    out.dataURL = cv.toDataURL("image/png");
+  } catch (e) {
+    out.errors.push("THROW: " + (e && e.stack ? e.stack.split("\n").slice(0, 4).join(" | ") : String(e)));
+  }
+  window.__RESULT__ = out;
+  window.__DONE__ = true;
+})();
+</script>
+</body></html>

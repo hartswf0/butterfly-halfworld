@@ -1,0 +1,22 @@
+{
+  "title": "I REMEMBER BEING A BUTTERFLY",
+  "source": "source.json",
+  "//planOf": "Six rooms for forty units. The facility carries the last third and is the equivalent of a court: chrysalis wall, tiled pool, projector, and a white rectangle that waits.",
+  "planOf": {
+    "INT. OBSERVATION BOX": "the-maze",
+    "INT. THE MAZE": "the-maze",
+    "INT. LABORATORY": "the-laboratory",
+    "INT. MILL": "the-mill",
+    "EXT. SERVICE ALLEY": "the-lot",
+    "EXT. THE LOT": "the-lot",
+    "EXT. THE WAREHOUSE": "the-lot",
+    "INT. REARING FACILITY": "the-facility"
+  },
+  "planPrefix": true,
+  "castHints": {
+    "swallowtail": "\\b(swallowtail|butterfly|wings?|scales?)\\b",
+    "oldbutterfly": "\\b(frayed|antenna|older)\\b"
+  },
+  "sameHeading": "^(SAME|CONTINUOUS)$",
+  "defaultLocation": "INT. LABORATORY"
+}

@@ -1,0 +1,52 @@
+{
+  "id": "BF-17",
+  "mod": "scenes/BF-17.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:31:35.768Z",
+  "motion": "HOLD",
+  "seconds": 5,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 60,
+    "rendered": 60,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 5,
+    "webmSec": 5,
+    "gifSec": 5,
+    "renderWallSec": 5
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 0.3684,
+    "wrapMeanAbs": 0.1647,
+    "meanStepChangedPct": 0.2276,
+    "maxStepChangedPct": 0.3322,
+    "meanStepMeanAbs": 0.1147,
+    "ratio": 1.619,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-17.webm",
+      "bytes": 539374
+    },
+    "gif": {
+      "path": "renders/motion/BF-17.gif",
+      "bytes": 435984
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

@@ -1,0 +1,52 @@
+{
+  "id": "BF-07",
+  "mod": "scenes/BF-07.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:30:45.804Z",
+  "motion": "TRANSFER",
+  "seconds": 4,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 48,
+    "rendered": 48,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 4,
+    "webmSec": 4,
+    "gifSec": 4,
+    "renderWallSec": 3.7
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 1.0818,
+    "wrapMeanAbs": 1.3575,
+    "meanStepChangedPct": 1.8072,
+    "maxStepChangedPct": 3.438,
+    "meanStepMeanAbs": 2.6488,
+    "ratio": 0.599,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-07.webm",
+      "bytes": 669244
+    },
+    "gif": {
+      "path": "renders/motion/BF-07.gif",
+      "bytes": 842556
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

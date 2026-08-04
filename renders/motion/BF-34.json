@@ -1,0 +1,52 @@
+{
+  "id": "BF-34",
+  "mod": "scenes/BF-34.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:33:05.908Z",
+  "motion": "HOLD",
+  "seconds": 5,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 60,
+    "rendered": 60,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 5,
+    "webmSec": 5,
+    "gifSec": 5,
+    "renderWallSec": 5.4
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 3.9727,
+    "wrapMeanAbs": 4.006,
+    "meanStepChangedPct": 2.8644,
+    "maxStepChangedPct": 3.5019,
+    "meanStepMeanAbs": 2.4337,
+    "ratio": 1.387,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-34.webm",
+      "bytes": 2732182
+    },
+    "gif": {
+      "path": "renders/motion/BF-34.gif",
+      "bytes": 2536848
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

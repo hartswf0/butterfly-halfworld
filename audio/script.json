@@ -1,0 +1,2018 @@
+{
+ "schema": "butterfly/script/v1",
+ "built": "2026-08-04T23:49:16.671Z",
+ "fps": 12,
+ "totals": {
+  "scenes": 40,
+  "lines": 105,
+  "words": 482,
+  "speakers": 9,
+  "silentScenes": 9,
+  "soundCues": 9,
+  "scenesWithSound": 19
+ },
+ "cast": {
+  "VO": {
+   "id": "swallowtail",
+   "voice": "Enceladus",
+   "rate": 0.88,
+   "note": "the insect's own interior monologue, not a person in a room",
+   "from": "\"I remember being a butterfly. I remember the roof as a brightness I could not enter.\"",
+   "dir": "Interior monologue, close and unplaced — no room around it. Past tense recalled without nostalgia. Very slow. No performance of wonder; it is stating what it did."
+  },
+  "MARA": {
+   "id": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "note": "a researcher deciding in real time whether to delete her own evidence",
+   "from": "\"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\"",
+   "dir": "Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something."
+  },
+  "NIKO": {
+   "id": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "note": "treats procedural distinctions as moral ones",
+   "from": "\"He still treated procedural distinctions as if they were moral ones.\"",
+   "dir": "Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers."
+  },
+  "IONA": {
+   "id": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "note": "expressions arrive before the features can contain them",
+   "from": "\"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\"",
+   "dir": "Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed."
+  },
+  "IONA (V.O.)": {
+   "id": "iona",
+   "voice": "Gacrux",
+   "rate": 0.82,
+   "note": "the voicemail — through a phone, over breathing like water on stone",
+   "from": "\"a larger rhythm, rough and receding, like water dragged over stone\"",
+   "dir": "The same woman, through a telephone. Slower. Breath audible before and after each clause. Flat, certain, and not addressed to anyone who can reply."
+  },
+  "ELISE (V.O.)": {
+   "id": "elise",
+   "voice": "Autonoe",
+   "rate": 1,
+   "note": "not the voice from the illness — the voice from childhood",
+   "from": "\"impatient and amused, calling from the front seat while Mara knelt backward in the car\"",
+   "dir": "Warm, impatient, amused. Calling forward over road noise to a child in the back. Absolutely ordinary — this is a mother telling a kid to face front, and it must not sound supernatural."
+  },
+  "THE GIRL": {
+   "id": "thegirl",
+   "voice": "Leda",
+   "rate": 0.94,
+   "note": "quiet, embarrassed, sorry to require attention",
+   "from": "\"The sound was quiet, embarrassed, as if the child had been waiting a long time and was sorry to require attention.\"",
+   "dir": "Eight years old. Small, level, apologetic. Not frightened and not sing-song. She is delivering information she assumes is unwelcome."
+  },
+  "IONA (O.S.)": {
+   "id": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "note": "the same woman, speaking from the dark at the pool's edge",
+   "from": "\"Iona's voice came from the dark. 'You see why it survives.'\"",
+   "dir": "Iona exactly, but unplaced — she is behind the listener, in a room with the lights out. No projection, no raise. Closer than a room should allow."
+  },
+  "PROJECTED MARA": {
+   "id": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "note": "Mara's own voice, off a film that has no soundtrack",
+   "from": "\"Her lips moved. This time there was sound.\"",
+   "dir": "Mara exactly, but recorded — thinner, band-limited, one room further away. She is saying the film's first line back to her own face."
+  }
+ },
+ "sound": [
+  {
+   "id": "tap_ring",
+   "cue": "the tapping at equal intervals",
+   "scenes": [
+    "BF-14",
+    "BF-21"
+   ],
+   "from": "\"Not wildly. It moves around the circumference, testing the glass at equal intervals.\"",
+   "kind": "quantised",
+   "spec": {
+    "hits": 8,
+    "perLoop": 1,
+    "timbre": "glass",
+    "quantise": true
+   },
+   "note": "EIGHT hits per loop, on the same eight stations the scene draws. Must be dead-quantised — an eased tap is the wrong sound and the wrong drawing."
+  },
+  {
+   "id": "maze_fans",
+   "cue": "fans inside the maze",
+   "scenes": [
+    "BF-01",
+    "BF-03",
+    "BF-37"
+   ],
+   "from": "\"Fans sighed inside the maze.\"",
+   "kind": "bed",
+   "spec": {
+    "band": [
+     180,
+     900
+    ],
+    "drift": 0.06
+   }
+  },
+  {
+   "id": "vent_complaint",
+   "cue": "the ventilation changing pressure",
+   "scenes": [
+    "BF-10",
+    "BF-13"
+   ],
+   "from": "\"The ventilation system changed pressure. A soft metallic complaint moved through the ductwork.\"",
+   "kind": "event",
+   "spec": {
+    "sweep": [
+     420,
+     300
+    ],
+    "sec": 1.8
+   }
+  },
+  {
+   "id": "legs_on_glass",
+   "cue": "legs making slow dry sounds too small for the room",
+   "scenes": [
+    "BF-05",
+    "BF-13"
+   ],
+   "from": "\"its legs making slow, dry sounds too small for the room\"",
+   "kind": "grain",
+   "spec": {
+    "rate": 5,
+    "tiny": true
+   }
+  },
+  {
+   "id": "chrysalis_cascade",
+   "cue": "the clicking travelling down the rows",
+   "scenes": [
+    "BF-32"
+   ],
+   "from": "\"A clicking came from the wall. One chrysalis moved. Then another. The sound travelled down the rows.\"",
+   "kind": "sweep",
+   "spec": {
+    "count": 75,
+    "order": "date",
+    "width": 0.06
+   },
+   "note": "SEVENTY-FIVE clicks, in date order, oldest first, on the same wavefront the picture sweeps. The sound and the image are one event."
+  },
+  {
+   "id": "projector",
+   "cue": "the shutter",
+   "scenes": [
+    "BF-30",
+    "BF-33",
+    "BF-35",
+    "BF-36",
+    "BF-38",
+    "BF-40"
+   ],
+   "from": "\"The projector turned on. Its fan rose to speed.\"",
+   "kind": "shutter",
+   "spec": {
+    "hz": 12,
+    "fan": [
+     90,
+     240
+    ]
+   },
+   "note": "AT THE FILM'S OWN FRAME RATE. 12Hz is not an effect over the picture; it is the picture's clock made audible."
+  },
+  {
+   "id": "water",
+   "cue": "the pool",
+   "scenes": [
+    "BF-30",
+    "BF-36",
+    "BF-39",
+    "BF-40"
+   ],
+   "from": "\"Mara smelled water. Not rainwater or drainage. Chlorine, faint but unmistakable.\"",
+   "kind": "bed",
+   "spec": {
+    "band": [
+     120,
+     480
+    ],
+    "drift": 0.03
+   }
+  },
+  {
+   "id": "summer",
+   "cue": "everything at once, at the break",
+   "scenes": [
+    "BF-25"
+   ],
+   "from": "\"Heat, traffic, hot rubber, river damp, cut weeds, diesel, sunlight.\"",
+   "kind": "break",
+   "spec": {
+    "at": 0.58,
+    "bands": 7
+   },
+   "note": "Enters ON the declared break with no ramp. Before it: interior. After it: seven bands at once."
+  },
+  {
+   "id": "fluorescent",
+   "cue": "the tubes",
+   "scenes": [
+    "BF-29",
+    "BF-30",
+    "BF-31",
+    "BF-32"
+   ],
+   "from": "\"Inside, fluorescent tubes came on one after another.\"",
+   "kind": "bed",
+   "spec": {
+    "band": [
+     100,
+     120
+    ],
+    "drift": 0
+   }
+  }
+ ],
+ "scenes": [
+  {
+   "id": "BF-01",
+   "title": "INT. OBSERVATION BOX -- MORNING",
+   "plan": "the-maze",
+   "motion": "CYCLE",
+   "loop": false,
+   "lines": 3,
+   "sound": [
+    "maze_fans"
+   ]
+  },
+  {
+   "id": "BF-02",
+   "title": "INT. LABORATORY · MONITOR -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "TRACE",
+   "loop": false,
+   "lines": 1,
+   "sound": []
+  },
+  {
+   "id": "BF-03",
+   "title": "INT. LABORATORY -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 5,
+   "sound": [
+    "maze_fans"
+   ]
+  },
+  {
+   "id": "BF-04",
+   "title": "INT. LABORATORY · THE BENCH -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "TRANSFER",
+   "loop": false,
+   "lines": 0,
+   "sound": []
+  },
+  {
+   "id": "BF-05",
+   "title": "INT. LABORATORY · THE PARTITION -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 4,
+   "sound": [
+    "legs_on_glass"
+   ]
+  },
+  {
+   "id": "BF-06",
+   "title": "INT. LABORATORY · MONITOR -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 5,
+   "sound": []
+  },
+  {
+   "id": "BF-07",
+   "title": "INT. LABORATORY · HER HAND -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "TRANSFER",
+   "loop": false,
+   "lines": 2,
+   "sound": []
+  },
+  {
+   "id": "BF-08",
+   "title": "INT. LABORATORY · THE TALL WINDOWS -- MORNING",
+   "plan": "the-laboratory",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 0,
+   "sound": []
+  },
+  {
+   "id": "BF-09",
+   "title": "INT. LABORATORY · THE CABINET -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 4,
+   "sound": []
+  },
+  {
+   "id": "BF-10",
+   "title": "INT. LABORATORY · THE REVERSE -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 6,
+   "sound": [
+    "vent_complaint"
+   ]
+  },
+  {
+   "id": "BF-11",
+   "title": "INT. LABORATORY -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "CYCLE",
+   "loop": true,
+   "lines": 7,
+   "sound": []
+  },
+  {
+   "id": "BF-12",
+   "title": "INT. LABORATORY · THE VIAL -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "BREAK",
+   "loop": false,
+   "lines": 2,
+   "sound": []
+  },
+  {
+   "id": "BF-13",
+   "title": "INT. LABORATORY · THE PHONE -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 3,
+   "sound": [
+    "vent_complaint",
+    "legs_on_glass"
+   ]
+  },
+  {
+   "id": "BF-14",
+   "title": "INT. LABORATORY · RECOVERY RACK -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "CYCLE",
+   "loop": true,
+   "lines": 0,
+   "sound": [
+    "tap_ring"
+   ]
+  },
+  {
+   "id": "BF-15",
+   "title": "INT. MILL · THE FIRE DOOR -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "TRANSFER",
+   "loop": false,
+   "lines": 1,
+   "sound": []
+  },
+  {
+   "id": "BF-16",
+   "title": "INT. MILL · THE STAIRCASE -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "ADVANCE",
+   "loop": false,
+   "lines": 0,
+   "sound": []
+  },
+  {
+   "id": "BF-17",
+   "title": "INT. MILL · THE LOBBY -- NOON",
+   "plan": "the-mill",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 5,
+   "sound": []
+  },
+  {
+   "id": "BF-18",
+   "title": "INT. MILL · THE LOBBY -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 5,
+   "sound": []
+  },
+  {
+   "id": "BF-19",
+   "title": "INT. MILL · THE LOBBY -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 4,
+   "sound": []
+  },
+  {
+   "id": "BF-20",
+   "title": "INT. MILL · THE GLASS DOOR -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "TRANSFER",
+   "loop": false,
+   "lines": 0,
+   "sound": []
+  },
+  {
+   "id": "BF-21",
+   "title": "INT. MILL · THE LOBBY FLOOR -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "CYCLE",
+   "loop": true,
+   "lines": 2,
+   "sound": [
+    "tap_ring"
+   ]
+  },
+  {
+   "id": "BF-22",
+   "title": "INT. MILL · THE LOBBY -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 5,
+   "sound": []
+  },
+  {
+   "id": "BF-23",
+   "title": "INT. MILL · THE OPEN CANISTER -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "CYCLE",
+   "loop": false,
+   "lines": 0,
+   "sound": []
+  },
+  {
+   "id": "BF-24",
+   "title": "INT. MILL · THE REEL -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "CYCLE",
+   "loop": false,
+   "lines": 2,
+   "sound": []
+  },
+  {
+   "id": "BF-25",
+   "title": "INT. MILL · THE ENTRANCE DOOR -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "BREAK",
+   "loop": false,
+   "lines": 3,
+   "sound": [
+    "summer"
+   ]
+  },
+  {
+   "id": "BF-26",
+   "title": "EXT. SERVICE ALLEY -- CONTINUOUS",
+   "plan": "the-lot",
+   "motion": "ADVANCE",
+   "loop": false,
+   "lines": 4,
+   "sound": []
+  },
+  {
+   "id": "BF-27",
+   "title": "EXT. THE LOT · THE SPILLED LAVENDER -- CONTINUOUS",
+   "plan": "the-lot",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 6,
+   "sound": []
+  },
+  {
+   "id": "BF-28",
+   "title": "EXT. THE WAREHOUSE · PLYWOOD -- CONTINUOUS",
+   "plan": "the-lot",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 3,
+   "sound": []
+  },
+  {
+   "id": "BF-29",
+   "title": "INT. REARING FACILITY -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 5,
+   "sound": [
+    "fluorescent"
+   ]
+  },
+  {
+   "id": "BF-30",
+   "title": "INT. REARING FACILITY · THE TILED POOL -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 3,
+   "sound": [
+    "projector",
+    "water",
+    "fluorescent"
+   ]
+  },
+  {
+   "id": "BF-31",
+   "title": "INT. REARING FACILITY · THE FILM IN HER HAND -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "ADVANCE",
+   "loop": false,
+   "lines": 3,
+   "sound": [
+    "fluorescent"
+   ]
+  },
+  {
+   "id": "BF-32",
+   "title": "INT. REARING FACILITY · THE WALL -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "SWEEP",
+   "loop": false,
+   "lines": 5,
+   "sound": [
+    "chrysalis_cascade",
+    "fluorescent"
+   ]
+  },
+  {
+   "id": "BF-33",
+   "title": "INT. REARING FACILITY · THE PROJECTION -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "DISSOLVE",
+   "loop": false,
+   "lines": 2,
+   "sound": [
+    "projector"
+   ]
+  },
+  {
+   "id": "BF-34",
+   "title": "INT. REARING FACILITY -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 1,
+   "sound": []
+  },
+  {
+   "id": "BF-35",
+   "title": "INT. REARING FACILITY · THE WALL -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "DISSOLVE",
+   "loop": false,
+   "lines": 1,
+   "sound": [
+    "projector"
+   ]
+  },
+  {
+   "id": "BF-36",
+   "title": "INT. REARING FACILITY · THE POOL -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "ADVANCE",
+   "loop": false,
+   "lines": 0,
+   "sound": [
+    "projector",
+    "water"
+   ]
+  },
+  {
+   "id": "BF-37",
+   "title": "INT. THE MAZE · THE BUTTERFLY'S VIEW -- CONTINUOUS",
+   "plan": "the-maze",
+   "motion": "CYCLE",
+   "loop": false,
+   "lines": 0,
+   "sound": [
+    "maze_fans"
+   ]
+  },
+  {
+   "id": "BF-38",
+   "title": "INT. REARING FACILITY · DARKNESS -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "TRANSFER",
+   "loop": false,
+   "lines": 0,
+   "sound": [
+    "projector"
+   ]
+  },
+  {
+   "id": "BF-39",
+   "title": "INT. REARING FACILITY · DARKNESS -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 2,
+   "sound": [
+    "water"
+   ]
+  },
+  {
+   "id": "BF-40",
+   "title": "INT. REARING FACILITY · THE POOL'S EDGE -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "BREAK",
+   "loop": false,
+   "lines": 1,
+   "sound": [
+    "projector",
+    "water"
+   ]
+  }
+ ],
+ "lines": [
+  {
+   "id": "BF-01-L01",
+   "scene": "BF-01",
+   "sceneOrder": 0,
+   "motion": "CYCLE",
+   "who": "VO",
+   "character": "swallowtail",
+   "voice": "Enceladus",
+   "rate": 0.88,
+   "words": 5,
+   "text": "I remember being a butterfly.",
+   "direction": "the insect's own interior monologue, not a person in a room. Interior monologue, close and unplaced — no room around it. Past tense recalled without nostalgia. Very slow. No performance of wonder; it is stating what it did. Source: \"I remember being a butterfly. I remember the roof as a brightness I could not enter.\""
+  },
+  {
+   "id": "BF-01-L02",
+   "scene": "BF-01",
+   "sceneOrder": 0,
+   "motion": "CYCLE",
+   "who": "VO",
+   "character": "swallowtail",
+   "voice": "Enceladus",
+   "rate": 0.88,
+   "words": 11,
+   "text": "I remember the roof as a brightness I could not enter.",
+   "direction": "the insect's own interior monologue, not a person in a room. Interior monologue, close and unplaced — no room around it. Past tense recalled without nostalgia. Very slow. No performance of wonder; it is stating what it did. Source: \"I remember being a butterfly. I remember the roof as a brightness I could not enter.\""
+  },
+  {
+   "id": "BF-01-L03",
+   "scene": "BF-01",
+   "sceneOrder": 0,
+   "motion": "CYCLE",
+   "who": "VO",
+   "character": "swallowtail",
+   "voice": "Enceladus",
+   "rate": 0.88,
+   "words": 4,
+   "text": "I did not choose.",
+   "direction": "the insect's own interior monologue, not a person in a room. Interior monologue, close and unplaced — no room around it. Past tense recalled without nostalgia. Very slow. No performance of wonder; it is stating what it did. Source: \"I remember being a butterfly. I remember the roof as a brightness I could not enter.\""
+  },
+  {
+   "id": "BF-02-L01",
+   "scene": "BF-02",
+   "sceneOrder": 1,
+   "motion": "TRACE",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 3,
+   "text": "Stop the trial.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-03-L01",
+   "scene": "BF-03",
+   "sceneOrder": 2,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 3,
+   "text": "Stop means stop.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-03-L02",
+   "scene": "BF-03",
+   "sceneOrder": 2,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 2,
+   "text": "It's stopped.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-03-L03",
+   "scene": "BF-03",
+   "sceneOrder": 2,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 4,
+   "text": "The odor is stopped.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-03-L04",
+   "scene": "BF-03",
+   "sceneOrder": 2,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 4,
+   "text": "That's what I meant.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-03-L05",
+   "scene": "BF-03",
+   "sceneOrder": 2,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 3,
+   "text": "No, it isn't.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-05-L01",
+   "scene": "BF-05",
+   "sceneOrder": 4,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 3,
+   "text": "Trial 6F-19. Non-completion.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-05-L02",
+   "scene": "BF-05",
+   "sceneOrder": 4,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 3,
+   "text": "It completed something.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-05-L03",
+   "scene": "BF-05",
+   "sceneOrder": 4,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 4,
+   "text": "It chose the ceiling?",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-05-L04",
+   "scene": "BF-05",
+   "sceneOrder": 4,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 4,
+   "text": "It rejected the premise.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-06-L01",
+   "scene": "BF-06",
+   "sceneOrder": 5,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 4,
+   "text": "Delete the path visualization.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-06-L02",
+   "scene": "BF-06",
+   "sceneOrder": 5,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 5,
+   "text": "The path is the record.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-06-L03",
+   "scene": "BF-06",
+   "sceneOrder": 5,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 6,
+   "text": "The arm choice is the record.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-06-L04",
+   "scene": "BF-06",
+   "sceneOrder": 5,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 5,
+   "text": "It didn't choose an arm.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-06-L05",
+   "scene": "BF-06",
+   "sceneOrder": 5,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 4,
+   "text": "Then the trial failed.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-07-L01",
+   "scene": "BF-07",
+   "sceneOrder": 6,
+   "motion": "TRANSFER",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 3,
+   "text": "What is that?",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-07-L02",
+   "scene": "BF-07",
+   "sceneOrder": 6,
+   "motion": "TRANSFER",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 2,
+   "text": "Wing scale.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-09-L01",
+   "scene": "BF-09",
+   "sceneOrder": 8,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 3,
+   "text": "Who are they?",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-09-L02",
+   "scene": "BF-09",
+   "sceneOrder": 8,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 3,
+   "text": "I don't know.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-09-L03",
+   "scene": "BF-09",
+   "sceneOrder": 8,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 1,
+   "text": "Family?",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-09-L04",
+   "scene": "BF-09",
+   "sceneOrder": 8,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 8,
+   "text": "The woman is supposed to be my grandmother.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-10-L01",
+   "scene": "BF-10",
+   "sceneOrder": 9,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 6,
+   "text": "Your mother was alive in 1945?",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-10-L02",
+   "scene": "BF-10",
+   "sceneOrder": 9,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 1,
+   "text": "No.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-10-L03",
+   "scene": "BF-10",
+   "sceneOrder": 9,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 6,
+   "text": "My mother was born in 1963.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-10-L04",
+   "scene": "BF-10",
+   "sceneOrder": 9,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 5,
+   "text": "Then Elise isn't your mother.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-10-L05",
+   "scene": "BF-10",
+   "sceneOrder": 9,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 4,
+   "text": "It was her name.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-10-L06",
+   "scene": "BF-10",
+   "sceneOrder": 9,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 6,
+   "text": "She said she remembered being there.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-11-L01",
+   "scene": "BF-11",
+   "sceneOrder": 10,
+   "motion": "CYCLE",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 7,
+   "text": "Could it have gotten into the intake?",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-11-L02",
+   "scene": "BF-11",
+   "sceneOrder": 10,
+   "motion": "CYCLE",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 6,
+   "text": "The sensor would have caught it.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-11-L03",
+   "scene": "BF-11",
+   "sceneOrder": 10,
+   "motion": "CYCLE",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 5,
+   "text": "Could the sensor be wrong?",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-11-L04",
+   "scene": "BF-11",
+   "sceneOrder": 10,
+   "motion": "CYCLE",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 1,
+   "text": "Yes.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-11-L05",
+   "scene": "BF-11",
+   "sceneOrder": 10,
+   "motion": "CYCLE",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 5,
+   "text": "Could the cleaning have failed?",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-11-L06",
+   "scene": "BF-11",
+   "sceneOrder": 10,
+   "motion": "CYCLE",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 1,
+   "text": "Yes.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-11-L07",
+   "scene": "BF-11",
+   "sceneOrder": 10,
+   "motion": "CYCLE",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 10,
+   "text": "Then why are we looking at a photograph from 1945?",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-12-L01",
+   "scene": "BF-12",
+   "sceneOrder": 11,
+   "motion": "BREAK",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 4,
+   "text": "Was that there before?",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-12-L02",
+   "scene": "BF-12",
+   "sceneOrder": 11,
+   "motion": "BREAK",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 1,
+   "text": "No.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-13-L01",
+   "scene": "BF-13",
+   "sceneOrder": 12,
+   "motion": "HOLD",
+   "who": "IONA (V.O.)",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.82,
+   "words": 4,
+   "text": "You opened the lavender.",
+   "direction": "the voicemail — through a phone, over breathing like water on stone. The same woman, through a telephone. Slower. Breath audible before and after each clause. Flat, certain, and not addressed to anyone who can reply. Source: \"a larger rhythm, rough and receding, like water dragged over stone\""
+  },
+  {
+   "id": "BF-13-L02",
+   "scene": "BF-13",
+   "sceneOrder": 12,
+   "motion": "HOLD",
+   "who": "IONA (V.O.)",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.82,
+   "words": 22,
+   "text": "You always open it too early. Your mother did. Her mother did. The insects wake before the story is ready for them.",
+   "direction": "the voicemail — through a phone, over breathing like water on stone. The same woman, through a telephone. Slower. Breath audible before and after each clause. Flat, certain, and not addressed to anyone who can reply. Source: \"a larger rhythm, rough and receding, like water dragged over stone\""
+  },
+  {
+   "id": "BF-13-L03",
+   "scene": "BF-13",
+   "sceneOrder": 12,
+   "motion": "HOLD",
+   "who": "IONA (V.O.)",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.82,
+   "words": 11,
+   "text": "I found the boy. He has been dead for eleven years.",
+   "direction": "the voicemail — through a phone, over breathing like water on stone. The same woman, through a telephone. Slower. Breath audible before and after each clause. Flat, certain, and not addressed to anyone who can reply. Source: \"a larger rhythm, rough and receding, like water dragged over stone\""
+  },
+  {
+   "id": "BF-15-L01",
+   "scene": "BF-15",
+   "sceneOrder": 14,
+   "motion": "TRANSFER",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 3,
+   "text": "Call building security.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-17-L01",
+   "scene": "BF-17",
+   "sceneOrder": 16,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 4,
+   "text": "You have her shoulders.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-17-L02",
+   "scene": "BF-17",
+   "sceneOrder": 16,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 4,
+   "text": "Are you Iona Ash?",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-17-L03",
+   "scene": "BF-17",
+   "sceneOrder": 16,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 6,
+   "text": "That depends which paper you're reading.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-17-L04",
+   "scene": "BF-17",
+   "sceneOrder": 16,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 4,
+   "text": "My mother is dead.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-17-L05",
+   "scene": "BF-17",
+   "sceneOrder": 16,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 7,
+   "text": "Yes. That was what made it difficult.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-18-L01",
+   "scene": "BF-18",
+   "sceneOrder": 17,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 5,
+   "text": "I brought you the film.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-18-L02",
+   "scene": "BF-18",
+   "sceneOrder": 17,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 5,
+   "text": "Where did these come from?",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-18-L03",
+   "scene": "BF-18",
+   "sceneOrder": 17,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 2,
+   "text": "The envelope.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-18-L04",
+   "scene": "BF-18",
+   "sceneOrder": 17,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 6,
+   "text": "Was there a butterfly in it?",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-18-L05",
+   "scene": "BF-18",
+   "sceneOrder": 17,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 5,
+   "text": "Not when I closed it.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-19-L01",
+   "scene": "BF-19",
+   "sceneOrder": 18,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 6,
+   "text": "You work for the clean version.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-19-L02",
+   "scene": "BF-19",
+   "sceneOrder": 18,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 5,
+   "text": "And you work for what?",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-19-L03",
+   "scene": "BF-19",
+   "sceneOrder": 18,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 4,
+   "text": "The version that survived.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-19-L04",
+   "scene": "BF-19",
+   "sceneOrder": 18,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 6,
+   "text": "This is exactly how contamination happens.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-21-L01",
+   "scene": "BF-21",
+   "sceneOrder": 20,
+   "motion": "CYCLE",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 3,
+   "text": "Put it down.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-21-L02",
+   "scene": "BF-21",
+   "sceneOrder": 20,
+   "motion": "CYCLE",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 3,
+   "text": "That isn't possible.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-22-L01",
+   "scene": "BF-22",
+   "sceneOrder": 21,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 15,
+   "text": "The first time you see it, you will think the picture is remembering the event.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-22-L02",
+   "scene": "BF-22",
+   "sceneOrder": 21,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 14,
+   "text": "The second time, you will think the event was arranged to resemble the picture.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-22-L03",
+   "scene": "BF-22",
+   "sceneOrder": 21,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 7,
+   "text": "Do not watch it a third time.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-22-L04",
+   "scene": "BF-22",
+   "sceneOrder": 21,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 1,
+   "text": "Why?",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-22-L05",
+   "scene": "BF-22",
+   "sceneOrder": 21,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 7,
+   "text": "Because then you will remember being there.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-24-L01",
+   "scene": "BF-24",
+   "sceneOrder": 23,
+   "motion": "CYCLE",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 8,
+   "text": "Now you understand why it cannot be photographed.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-24-L02",
+   "scene": "BF-24",
+   "sceneOrder": 23,
+   "motion": "CYCLE",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 6,
+   "text": "Of course it can be photographed.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-25-L01",
+   "scene": "BF-25",
+   "sceneOrder": 24,
+   "motion": "BREAK",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 3,
+   "text": "Open the door.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-25-L02",
+   "scene": "BF-25",
+   "sceneOrder": 24,
+   "motion": "BREAK",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 4,
+   "text": "If it gets outside—",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-25-L03",
+   "scene": "BF-25",
+   "sceneOrder": 24,
+   "motion": "BREAK",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 4,
+   "text": "It will kill itself.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-26-L01",
+   "scene": "BF-26",
+   "sceneOrder": 25,
+   "motion": "ADVANCE",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 4,
+   "text": "Where is it going?",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-26-L02",
+   "scene": "BF-26",
+   "sceneOrder": 25,
+   "motion": "ADVANCE",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 3,
+   "text": "To the boy.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-26-L03",
+   "scene": "BF-26",
+   "sceneOrder": 25,
+   "motion": "ADVANCE",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 4,
+   "text": "You said he's dead.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-26-L04",
+   "scene": "BF-26",
+   "sceneOrder": 25,
+   "motion": "ADVANCE",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 5,
+   "text": "I said we found him.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-27-L01",
+   "scene": "BF-27",
+   "sceneOrder": 26,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 3,
+   "text": "It isn't afraid.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-27-L02",
+   "scene": "BF-27",
+   "sceneOrder": 26,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 4,
+   "text": "Why would it be?",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-27-L03",
+   "scene": "BF-27",
+   "sceneOrder": 26,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 2,
+   "text": "Our colony—",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-27-L04",
+   "scene": "BF-27",
+   "sceneOrder": 26,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 4,
+   "text": "Your colony was taught.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-27-L05",
+   "scene": "BF-27",
+   "sceneOrder": 26,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 6,
+   "text": "This one has the same marking.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-27-L06",
+   "scene": "BF-27",
+   "sceneOrder": 26,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 4,
+   "text": "Marking is not memory.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-28-L01",
+   "scene": "BF-28",
+   "sceneOrder": 27,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 5,
+   "text": "That wasn't here last week.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-28-L02",
+   "scene": "BF-28",
+   "sceneOrder": 27,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 3,
+   "text": "You come here?",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-28-L03",
+   "scene": "BF-28",
+   "sceneOrder": 27,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 1,
+   "text": "Lunch.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-29-L01",
+   "scene": "BF-29",
+   "sceneOrder": 28,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 5,
+   "text": "This is a rearing facility.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-29-L02",
+   "scene": "BF-29",
+   "sceneOrder": 28,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 1,
+   "text": "No.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-29-L03",
+   "scene": "BF-29",
+   "sceneOrder": 28,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 7,
+   "text": "This is the part that keeps reappearing.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-29-L04",
+   "scene": "BF-29",
+   "sceneOrder": 28,
+   "motion": "HOLD",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 3,
+   "text": "You built this.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-29-L05",
+   "scene": "BF-29",
+   "sceneOrder": 28,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 3,
+   "text": "I remembered it.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-30-L01",
+   "scene": "BF-30",
+   "sceneOrder": 29,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 6,
+   "text": "Someone has been running experiments here.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-30-L02",
+   "scene": "BF-30",
+   "sceneOrder": 29,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 2,
+   "text": "How many?",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-30-L03",
+   "scene": "BF-30",
+   "sceneOrder": 29,
+   "motion": "HOLD",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 7,
+   "text": "Enough to keep it from becoming evidence.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-31-L01",
+   "scene": "BF-31",
+   "sceneOrder": 30,
+   "motion": "ADVANCE",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 4,
+   "text": "What did you see?",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-31-L02",
+   "scene": "BF-31",
+   "sceneOrder": 30,
+   "motion": "ADVANCE",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 3,
+   "text": "I saw today.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-31-L03",
+   "scene": "BF-31",
+   "sceneOrder": 30,
+   "motion": "ADVANCE",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 7,
+   "text": "You saw yourself arranged as a memory.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-32-L01",
+   "scene": "BF-32",
+   "sceneOrder": 31,
+   "motion": "SWEEP",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 2,
+   "text": "Temperature change?",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-32-L02",
+   "scene": "BF-32",
+   "sceneOrder": 31,
+   "motion": "SWEEP",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 1,
+   "text": "No.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-32-L03",
+   "scene": "BF-32",
+   "sceneOrder": 31,
+   "motion": "SWEEP",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 1,
+   "text": "Vibration?",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-32-L04",
+   "scene": "BF-32",
+   "sceneOrder": 31,
+   "motion": "SWEEP",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 1,
+   "text": "No.",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-32-L05",
+   "scene": "BF-32",
+   "sceneOrder": 31,
+   "motion": "SWEEP",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 6,
+   "text": "You have to give me something.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-33-L01",
+   "scene": "BF-33",
+   "sceneOrder": 32,
+   "motion": "DISSOLVE",
+   "who": "MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 3,
+   "text": "Who is filming?",
+   "direction": "a researcher deciding in real time whether to delete her own evidence. Level, precise, under-pitched. She answers questions with the fewest words that are true. Never raises. Where she is certain she gets shorter, not louder. Audible held breath before the sentences that cost her something. Source: \"both hands inside the sleeves, although there was nothing left for her hands to do\" · \"a woman held her breath\""
+  },
+  {
+   "id": "BF-33-L02",
+   "scene": "BF-33",
+   "sceneOrder": 32,
+   "motion": "DISSOLVE",
+   "who": "IONA",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 4,
+   "text": "The person who remembers.",
+   "direction": "expressions arrive before the features can contain them. Old, dry, unhurried, and faintly amused at being doubted. She answers a question with a different question's answer. Aphoristic — each line lands like something she has said before and expects not to be believed. Source: \"the expressions moving beneath it were quick, almost juvenile, arriving before the features could contain them\""
+  },
+  {
+   "id": "BF-34-L01",
+   "scene": "BF-34",
+   "sceneOrder": 33,
+   "motion": "HOLD",
+   "who": "ELISE (V.O.)",
+   "character": "elise",
+   "voice": "Autonoe",
+   "rate": 1,
+   "words": 4,
+   "text": "Do not turn around.",
+   "direction": "not the voice from the illness — the voice from childhood. Warm, impatient, amused. Calling forward over road noise to a child in the back. Absolutely ordinary — this is a mother telling a kid to face front, and it must not sound supernatural. Source: \"impatient and amused, calling from the front seat while Mara knelt backward in the car\""
+  },
+  {
+   "id": "BF-35-L01",
+   "scene": "BF-35",
+   "sceneOrder": 34,
+   "motion": "DISSOLVE",
+   "who": "PROJECTED MARA",
+   "character": "mara",
+   "voice": "Erinome",
+   "rate": 0.96,
+   "words": 5,
+   "text": "I remember being a butterfly.",
+   "direction": "Mara's own voice, off a film that has no soundtrack. Mara exactly, but recorded — thinner, band-limited, one room further away. She is saying the film's first line back to her own face. Source: \"Her lips moved. This time there was sound.\""
+  },
+  {
+   "id": "BF-39-L01",
+   "scene": "BF-39",
+   "sceneOrder": 38,
+   "motion": "HOLD",
+   "who": "IONA (O.S.)",
+   "character": "iona",
+   "voice": "Gacrux",
+   "rate": 0.86,
+   "words": 5,
+   "text": "You see why it survives.",
+   "direction": "the same woman, speaking from the dark at the pool's edge. Iona exactly, but unplaced — she is behind the listener, in a room with the lights out. No projection, no raise. Closer than a room should allow. Source: \"Iona's voice came from the dark. 'You see why it survives.'\""
+  },
+  {
+   "id": "BF-39-L02",
+   "scene": "BF-39",
+   "sceneOrder": 38,
+   "motion": "HOLD",
+   "who": "NIKO",
+   "character": "niko",
+   "voice": "Puck",
+   "rate": 1.08,
+   "words": 1,
+   "text": "Mara.",
+   "direction": "treats procedural distinctions as moral ones. Quick, clean, faintly indignant — the tone of someone quoting a rule he believes in. Rising on the correction. He is younger than her and it shows in how fast he answers. Source: \"He still treated procedural distinctions as if they were moral ones.\""
+  },
+  {
+   "id": "BF-40-L01",
+   "scene": "BF-40",
+   "sceneOrder": 39,
+   "motion": "BREAK",
+   "who": "THE GIRL",
+   "character": "thegirl",
+   "voice": "Leda",
+   "rate": 0.94,
+   "words": 4,
+   "text": "Someone is still inside.",
+   "direction": "quiet, embarrassed, sorry to require attention. Eight years old. Small, level, apologetic. Not frightened and not sing-song. She is delivering information she assumes is unwelcome. Source: \"The sound was quiet, embarrassed, as if the child had been waiting a long time and was sorry to require attention.\""
+  }
+ ]
+}

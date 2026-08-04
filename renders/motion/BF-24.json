@@ -1,0 +1,55 @@
+{
+  "id": "BF-24",
+  "mod": "scenes/BF-24.mjs",
+  "ok": true,
+  "t": "2026-08-04T23:58:04.954Z",
+  "motion": "CYCLE",
+  "seconds": 4,
+  "loopClosed": false,
+  "beats": 2,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 48,
+    "rendered": 48,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 4,
+    "webmSec": 4,
+    "gifSec": 4,
+    "renderWallSec": 4.3
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": true
+  },
+  "loop": {
+    "wrapChangedPct": 5.5169,
+    "wrapMeanAbs": 7.6584,
+    "meanStepChangedPct": 4.0934,
+    "maxStepChangedPct": 7.1927,
+    "meanStepMeanAbs": 5.2977,
+    "ratio": 1.348,
+    "verdict": "seamless"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-24.webm",
+      "bytes": 1832947
+    },
+    "gif": {
+      "path": "renders/motion/BF-24.gif",
+      "bytes": 1763916
+    },
+    "contact": {
+      "path": "renders/motion/BF-24-contact.png",
+      "bytes": 318006
+    },
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

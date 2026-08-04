@@ -1,0 +1,52 @@
+{
+  "id": "BF-26",
+  "mod": "scenes/BF-26.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:32:17.124Z",
+  "motion": "ADVANCE",
+  "seconds": 5.5,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 66,
+    "rendered": 66,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 5.5,
+    "webmSec": 5.5,
+    "gifSec": 5.5,
+    "renderWallSec": 7.9
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 3.3144,
+    "wrapMeanAbs": 5.6318,
+    "meanStepChangedPct": 1.0209,
+    "maxStepChangedPct": 2.5414,
+    "meanStepMeanAbs": 1.5119,
+    "ratio": 3.247,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-26.webm",
+      "bytes": 861820
+    },
+    "gif": {
+      "path": "renders/motion/BF-26.gif",
+      "bytes": 723872
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

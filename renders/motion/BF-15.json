@@ -1,0 +1,52 @@
+{
+  "id": "BF-15",
+  "mod": "scenes/BF-15.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:31:25.474Z",
+  "motion": "TRANSFER",
+  "seconds": 3,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 36,
+    "rendered": 36,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 3,
+    "webmSec": 3,
+    "gifSec": 3,
+    "renderWallSec": 2.5
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 1.2538,
+    "wrapMeanAbs": 1.5913,
+    "meanStepChangedPct": 0.7847,
+    "maxStepChangedPct": 1.1513,
+    "meanStepMeanAbs": 1.0011,
+    "ratio": 1.598,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-15.webm",
+      "bytes": 464779
+    },
+    "gif": {
+      "path": "renders/motion/BF-15.gif",
+      "bytes": 438795
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

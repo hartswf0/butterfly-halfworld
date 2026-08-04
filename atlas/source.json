@@ -1,0 +1,2624 @@
+{
+ "title": "I REMEMBER BEING A BUTTERFLY",
+ "docs": [
+  {
+   "id": "BF-01",
+   "kind": "scene",
+   "num": "01",
+   "title": "INT. OBSERVATION BOX -- MORNING",
+   "place": "INT. OBSERVATION BOX",
+   "motion": "CYCLE",
+   "loop": false,
+   "cast": [
+    "swallowtail",
+    "mara"
+   ],
+   "beats": [
+    "A swallowtail rises into the clear acrylic lid of a choice maze and strikes it.",
+    "It falls, rights itself in air, and strikes again. The roof offers no resistance until contact.",
+    "Below, lavender divides the world: one corridor carries it, the other does not.",
+    "The choice interval has run 43 seconds and should have ended after 30. It does not choose."
+   ],
+   "el": [
+    [
+     "VO",
+     "I remember being a butterfly."
+    ],
+    [
+     "VO",
+     "I remember the roof as a brightness I could not enter."
+    ],
+    [
+     "VO",
+     "I did not choose."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "refusal",
+     "h": 9
+    },
+    {
+     "concept": "transparency",
+     "h": 7
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-maze"
+  },
+  {
+   "id": "BF-02",
+   "kind": "scene",
+   "num": "02",
+   "title": "INT. LABORATORY · MONITOR -- CONTINUOUS",
+   "place": "INT. LABORATORY · MONITOR",
+   "motion": "TRACE",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko"
+   ],
+   "beats": [
+    "The software draws the flight path as a green line.",
+    "The line gathers over itself, loop after loop.",
+    "A figure appears: an almost closed circle crossed near its lower edge by a crooked stroke."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Stop the trial."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "mark",
+     "h": 10
+    },
+    {
+     "concept": "accumulation",
+     "h": 8
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-laboratory"
+  },
+  {
+   "id": "BF-03",
+   "kind": "scene",
+   "num": "03",
+   "title": "INT. LABORATORY -- CONTINUOUS",
+   "place": "INT. LABORATORY",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko",
+    "swallowtail"
+   ],
+   "beats": [
+    "Niko presses the manual switch. Fans sigh. The lavender thins into the extraction hood.",
+    "The butterfly continues its pattern regardless.",
+    "Mara has not moved. Her hands are still inside the sleeves of the observation box."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Stop means stop."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "It's stopped."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "The odor is stopped."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "That's what I meant."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "No, it isn't."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "refusal",
+     "h": 6
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-laboratory"
+  },
+  {
+   "id": "BF-04",
+   "kind": "scene",
+   "num": "04",
+   "title": "INT. LABORATORY · THE BENCH -- CONTINUOUS",
+   "place": "INT. LABORATORY · THE BENCH",
+   "motion": "TRANSFER",
+   "loop": false,
+   "cast": [
+    "mara",
+    "swallowtail"
+   ],
+   "beats": [
+    "The butterfly passes over her wrist before she can lower the vial.",
+    "Its feet touch her skin: not pressure but arrangement — six points becoming twelve, twelve becoming none.",
+    "It lifts and strikes the ceiling once more. A yellow powder remains on her glove."
+   ],
+   "el": [],
+   "concepts": [
+    {
+     "concept": "transfer",
+     "h": 9
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-laboratory"
+  },
+  {
+   "id": "BF-05",
+   "kind": "scene",
+   "num": "05",
+   "title": "INT. LABORATORY · THE PARTITION -- CONTINUOUS",
+   "place": "INT. LABORATORY · THE PARTITION",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara",
+    "swallowtail"
+   ],
+   "beats": [
+    "The swallowtail settles on the white partition between the two corridors.",
+    "Its wings close, opening the false eyes on their undersides.",
+    "The eyes look backward."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Trial 6F-19. Non-completion."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "It completed something."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "It chose the ceiling?"
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "It rejected the premise."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "watching",
+     "h": 8
+    },
+    {
+     "concept": "refusal",
+     "h": 7
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-laboratory"
+  },
+  {
+   "id": "BF-06",
+   "kind": "scene",
+   "num": "06",
+   "title": "INT. LABORATORY · MONITOR -- CONTINUOUS",
+   "place": "INT. LABORATORY · MONITOR",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko"
+   ],
+   "beats": [
+    "Mara asks for the path visualization to be deleted from the report.",
+    "Niko discovers a loose wire and cannot yet tell whether it is live."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "Delete the path visualization."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "The path is the record."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "The arm choice is the record."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "It didn't choose an arm."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "Then the trial failed."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "cleanversion",
+     "h": 9
+    },
+    {
+     "concept": "mark",
+     "h": 5
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-laboratory"
+  },
+  {
+   "id": "BF-07",
+   "kind": "scene",
+   "num": "07",
+   "title": "INT. LABORATORY · HER HAND -- CONTINUOUS",
+   "place": "INT. LABORATORY · HER HAND",
+   "motion": "TRANSFER",
+   "loop": false,
+   "cast": [
+    "mara"
+   ],
+   "beats": [
+    "Yellow scales have passed through a puncture near the thumb and settled on her skin.",
+    "They lie in the lines of her palm like ground metal.",
+    "She rubs them with the side of her finger. Instead of disappearing, they brighten."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "What is that?"
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "Wing scale."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "transfer",
+     "h": 10
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-laboratory"
+  },
+  {
+   "id": "BF-08",
+   "kind": "scene",
+   "num": "08",
+   "title": "INT. LABORATORY · THE TALL WINDOWS -- MORNING",
+   "place": "INT. LABORATORY · THE TALL WINDOWS",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara"
+   ],
+   "beats": [
+    "The laboratory occupies the upper floor of a converted textile mill; the windows are too tall for modern use.",
+    "Water towers, apartment roofs, the white rind of a stadium appear not outside but preserved within the glass.",
+    "The butterfly room once housed looms. Their floor bolts remain — dark circles surrounded by rust."
+   ],
+   "el": [],
+   "concepts": [
+    {
+     "concept": "preservation",
+     "h": 7
+    },
+    {
+     "concept": "mark",
+     "h": 4
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-laboratory"
+  },
+  {
+   "id": "BF-09",
+   "kind": "scene",
+   "num": "09",
+   "title": "INT. LABORATORY · THE CABINET -- CONTINUOUS",
+   "place": "INT. LABORATORY · THE CABINET",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko"
+   ],
+   "beats": [
+    "Four people stand outside a glasshouse whose windows have been painted white for blackout.",
+    "A woman in a pale dress holds a shallow wooden tray of chrysalides, each tied upright to a narrow card.",
+    "Someone has drawn a mark above one child's head: a broken circle with a stroke through its lower edge."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Who are they?"
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "I don't know."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Family?"
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "The woman is supposed to be my grandmother."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "mark",
+     "h": 9
+    },
+    {
+     "concept": "recurrence",
+     "h": 8
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-laboratory"
+  },
+  {
+   "id": "BF-10",
+   "kind": "scene",
+   "num": "10",
+   "title": "INT. LABORATORY · THE REVERSE -- CONTINUOUS",
+   "place": "INT. LABORATORY · THE REVERSE",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko"
+   ],
+   "beats": [
+    "On the back, in blue fountain pen: ASTER HOUSE / AUGUST 1945 / IONA, ELISE, THOMAS / DO NOT TURN AROUND.",
+    "Below the writing is the same broken circle. The ink has faded from black to brown but the shape is clean."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Your mother was alive in 1945?"
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "No."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "My mother was born in 1963."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Then Elise isn't your mother."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "It was her name."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "She said she remembered being there."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "recurrence",
+     "h": 10
+    },
+    {
+     "concept": "turnback",
+     "h": 9
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-laboratory"
+  },
+  {
+   "id": "BF-11",
+   "kind": "scene",
+   "num": "11",
+   "title": "INT. LABORATORY -- CONTINUOUS",
+   "place": "INT. LABORATORY",
+   "motion": "CYCLE",
+   "loop": true,
+   "cast": [
+    "mara",
+    "niko"
+   ],
+   "beats": [
+    "A closed loop of question and concession that returns exactly to where it began.",
+    "Every answer is yes. Nothing is resolved by any of them."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Could it have gotten into the intake?"
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "The sensor would have caught it."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Could the sensor be wrong?"
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "Yes."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Could the cleaning have failed?"
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "Yes."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Then why are we looking at a photograph from 1945?"
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "cleanversion",
+     "h": 8
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-laboratory"
+  },
+  {
+   "id": "BF-12",
+   "kind": "scene",
+   "num": "12",
+   "title": "INT. LABORATORY · THE VIAL -- CONTINUOUS",
+   "place": "INT. LABORATORY · THE VIAL",
+   "motion": "BREAK",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko",
+    "swallowtail"
+   ],
+   "beats": [
+    "One hindwing is damaged. A small crescent has been removed from its edge, as neatly as if cut with a punch.",
+    "Through the missing portion, the white card behind shows with impossible brightness.",
+    "There is nothing sharp in the maze."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Was that there before?"
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "No."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "damage",
+     "h": 9
+    },
+    {
+     "concept": "transparency",
+     "h": 6
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-laboratory"
+  },
+  {
+   "id": "BF-13",
+   "kind": "scene",
+   "num": "13",
+   "title": "INT. LABORATORY · THE PHONE -- CONTINUOUS",
+   "place": "INT. LABORATORY · THE PHONE",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko",
+    "iona"
+   ],
+   "beats": [
+    "For several seconds there is only breathing — a larger rhythm, rough and receding, like water dragged over stone.",
+    "An old woman's voice arrives from a number Mara does not know."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "IONA (V.O.)"
+    ],
+    [
+     "DIAL",
+     "You opened the lavender."
+    ],
+    [
+     "CHAR",
+     "IONA (V.O.)"
+    ],
+    [
+     "DIAL",
+     "You always open it too early. Your mother did. Her mother did. The insects wake before the story is ready for them."
+    ],
+    [
+     "CHAR",
+     "IONA (V.O.)"
+    ],
+    [
+     "DIAL",
+     "I found the boy. He has been dead for eleven years."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "recurrence",
+     "h": 9
+    },
+    {
+     "concept": "waking",
+     "h": 8
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-laboratory"
+  },
+  {
+   "id": "BF-14",
+   "kind": "scene",
+   "num": "14",
+   "title": "INT. LABORATORY · RECOVERY RACK -- CONTINUOUS",
+   "place": "INT. LABORATORY · RECOVERY RACK",
+   "motion": "CYCLE",
+   "loop": true,
+   "cast": [
+    "swallowtail"
+   ],
+   "beats": [
+    "From the recovery rack comes a dry tapping.",
+    "The butterfly strikes the vial once, then again. Not wildly.",
+    "It moves around the circumference, testing the glass at equal intervals."
+   ],
+   "el": [],
+   "concepts": [
+    {
+     "concept": "refusal",
+     "h": 7
+    },
+    {
+     "concept": "mark",
+     "h": 6
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-laboratory"
+  },
+  {
+   "id": "BF-15",
+   "kind": "scene",
+   "num": "15",
+   "title": "INT. MILL · THE FIRE DOOR -- CONTINUOUS",
+   "place": "INT. MILL · THE FIRE DOOR",
+   "motion": "TRANSFER",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko"
+   ],
+   "beats": [
+    "A smell rises from the stairwell — not the measured concentration of the maze.",
+    "This is green and bitter. Crushed stems warming in a hand."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "Call building security."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "transfer",
+     "h": 7
+    },
+    {
+     "concept": "waking",
+     "h": 6
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-mill"
+  },
+  {
+   "id": "BF-16",
+   "kind": "scene",
+   "num": "16",
+   "title": "INT. MILL · THE STAIRCASE -- CONTINUOUS",
+   "place": "INT. MILL · THE STAIRCASE",
+   "motion": "ADVANCE",
+   "loop": false,
+   "cast": [
+    "mara"
+   ],
+   "beats": [
+    "Light enters from windows at each landing and falls in long dusty columns.",
+    "Mara moves down through them, one after another.",
+    "A strip of red satin slides across her shoe like a tongue."
+   ],
+   "el": [],
+   "concepts": [
+    {
+     "concept": "advance",
+     "h": 6
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-mill"
+  },
+  {
+   "id": "BF-17",
+   "kind": "scene",
+   "num": "17",
+   "title": "INT. MILL · THE LOBBY -- NOON",
+   "place": "INT. MILL · THE LOBBY",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara",
+    "iona"
+   ],
+   "beats": [
+    "A small woman in a navy coat with a flattened fur collar, holding a grocery bag darkened at the bottom.",
+    "Lavender protrudes from it in a thick bundle.",
+    "She looks not up the stairs but at their reflection in the glass door.",
+    "Her face has an unfinished quality — expressions arriving before the features can contain them."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "You have her shoulders."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "Are you Iona Ash?"
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "That depends which paper you're reading."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "My mother is dead."
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "Yes. That was what made it difficult."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "recurrence",
+     "h": 8
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-mill"
+  },
+  {
+   "id": "BF-18",
+   "kind": "scene",
+   "num": "18",
+   "title": "INT. MILL · THE LOBBY -- CONTINUOUS",
+   "place": "INT. MILL · THE LOBBY",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara",
+    "iona",
+    "niko"
+   ],
+   "beats": [
+    "A dented circular canister no wider than her palm. Rust spreads from the hinge in branching lines.",
+    "Around the edge, black electrical tape. Beneath the rust, a fragment of white label: ASTER.",
+    "Yellow scales cling to the tape, caught in the adhesive. They are fresh enough to shine."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "I brought you the film."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "Where did these come from?"
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "The envelope."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "Was there a butterfly in it?"
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "Not when I closed it."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "transfer",
+     "h": 9
+    },
+    {
+     "concept": "containment",
+     "h": 7
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-mill"
+  },
+  {
+   "id": "BF-19",
+   "kind": "scene",
+   "num": "19",
+   "title": "INT. MILL · THE LOBBY -- CONTINUOUS",
+   "place": "INT. MILL · THE LOBBY",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko",
+    "iona"
+   ],
+   "beats": [
+    "Niko reaches for the canister. Mara moves it away from him.",
+    "The gesture is small. It enters the room like a confession."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "You work for the clean version."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "And you work for what?"
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "The version that survived."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "This is exactly how contamination happens."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "cleanversion",
+     "h": 10
+    },
+    {
+     "concept": "containment",
+     "h": 8
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-mill"
+  },
+  {
+   "id": "BF-20",
+   "kind": "scene",
+   "num": "20",
+   "title": "INT. MILL · THE GLASS DOOR -- CONTINUOUS",
+   "place": "INT. MILL · THE GLASS DOOR",
+   "motion": "TRANSFER",
+   "loop": false,
+   "cast": [
+    "mara"
+   ],
+   "beats": [
+    "Through the glass the street stands white in the noon heat. A bus passes.",
+    "For an instant its windows reflect the mill's brick façade, and the lobby appears occupied by rows of seated people moving backward."
+   ],
+   "el": [],
+   "concepts": [
+    {
+     "concept": "preservation",
+     "h": 8
+    },
+    {
+     "concept": "turnback",
+     "h": 7
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-mill"
+  },
+  {
+   "id": "BF-21",
+   "kind": "scene",
+   "num": "21",
+   "title": "INT. MILL · THE LOBBY FLOOR -- CONTINUOUS",
+   "place": "INT. MILL · THE LOBBY FLOOR",
+   "motion": "CYCLE",
+   "loop": true,
+   "cast": [
+    "mara",
+    "niko",
+    "iona"
+   ],
+   "beats": [
+    "The canister clicks. All three hear it.",
+    "The sound comes again, faint and exact. Not metal contracting.",
+    "Something taps from inside, moving around the circumference at equal intervals."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Put it down."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "That isn't possible."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "waking",
+     "h": 9
+    },
+    {
+     "concept": "containment",
+     "h": 8
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-mill"
+  },
+  {
+   "id": "BF-22",
+   "kind": "scene",
+   "num": "22",
+   "title": "INT. MILL · THE LOBBY -- CONTINUOUS",
+   "place": "INT. MILL · THE LOBBY",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara",
+    "iona"
+   ],
+   "beats": [
+    "Iona catches Mara's wrist. Her hand is unexpectedly strong.",
+    "At the base of her thumb is a scar: a broken circle crossed by a crooked line."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "The first time you see it, you will think the picture is remembering the event."
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "The second time, you will think the event was arranged to resemble the picture."
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "Do not watch it a third time."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "Why?"
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "Because then you will remember being there."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "mark",
+     "h": 9
+    },
+    {
+     "concept": "recurrence",
+     "h": 9
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-mill"
+  },
+  {
+   "id": "BF-23",
+   "kind": "scene",
+   "num": "23",
+   "title": "INT. MILL · THE OPEN CANISTER -- CONTINUOUS",
+   "place": "INT. MILL · THE OPEN CANISTER",
+   "motion": "CYCLE",
+   "loop": false,
+   "cast": [
+    "mara",
+    "oldbutterfly"
+   ],
+   "beats": [
+    "Inside: a coil of 8mm film wrapped in waxed paper, and a dry chrysalis resting in the hollow centre of the reel.",
+    "Larger than any swallowtail chrysalis Mara has seen. Split along one side. Empty.",
+    "A black leg appears beneath the film, withdraws, appears again.",
+    "The butterfly pushes upward through a nest of its own discarded history."
+   ],
+   "el": [],
+   "concepts": [
+    {
+     "concept": "waking",
+     "h": 10
+    },
+    {
+     "concept": "recurrence",
+     "h": 7
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-mill"
+  },
+  {
+   "id": "BF-24",
+   "kind": "scene",
+   "num": "24",
+   "title": "INT. MILL · THE REEL -- CONTINUOUS",
+   "place": "INT. MILL · THE REEL",
+   "motion": "CYCLE",
+   "loop": false,
+   "cast": [
+    "mara",
+    "oldbutterfly"
+   ],
+   "beats": [
+    "Across the left hindwing the scales form a pale broken circle. No line crosses it.",
+    "The butterfly raises its wings. On the right hindwing is the line.",
+    "The mark exists only when the wings are closed together.",
+    "It opens: the symbol divides. It closes: the symbol becomes whole."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "Now you understand why it cannot be photographed."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Of course it can be photographed."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "mark",
+     "h": 10
+    },
+    {
+     "concept": "transparency",
+     "h": 8
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-mill"
+  },
+  {
+   "id": "BF-25",
+   "kind": "scene",
+   "num": "25",
+   "title": "INT. MILL · THE ENTRANCE DOOR -- CONTINUOUS",
+   "place": "INT. MILL · THE ENTRANCE DOOR",
+   "motion": "BREAK",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko",
+    "oldbutterfly"
+   ],
+   "beats": [
+    "The butterfly climbs the white brightness of the door. Impact. Drop. Recovery.",
+    "The orange cup breaks without drama, pieces sliding apart over the stone.",
+    "Niko shoves the crash bar. Heat, traffic, hot rubber, river damp, cut weeds, diesel, sunlight.",
+    "The butterfly passes into all of it and vanishes above the awning."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "Open the door."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "If it gets outside—"
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "It will kill itself."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "refusal",
+     "h": 8
+    },
+    {
+     "concept": "transparency",
+     "h": 9
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-mill"
+  },
+  {
+   "id": "BF-26",
+   "kind": "scene",
+   "num": "26",
+   "title": "EXT. SERVICE ALLEY -- CONTINUOUS",
+   "place": "EXT. SERVICE ALLEY",
+   "motion": "ADVANCE",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko",
+    "iona",
+    "oldbutterfly"
+   ],
+   "beats": [
+    "The butterfly turns at the alley's end. Therefore they turn.",
+    "It crosses a fenced lot where waist-high weeds have grown through the chassis of a delivery truck.",
+    "Iona is fast for perhaps twenty paces. Then her body remembers its age."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "Where is it going?"
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "To the boy."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "You said he's dead."
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "I said we found him."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "advance",
+     "h": 8
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-lot"
+  },
+  {
+   "id": "BF-27",
+   "kind": "scene",
+   "num": "27",
+   "title": "EXT. THE LOT · THE SPILLED LAVENDER -- CONTINUOUS",
+   "place": "EXT. THE LOT · THE SPILLED LAVENDER",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara",
+    "iona",
+    "oldbutterfly"
+   ],
+   "beats": [
+    "The bag splits, releasing lavender stems across the pavement.",
+    "The butterfly descends and touches one flower. It does not recoil."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "It isn't afraid."
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "Why would it be?"
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "Our colony—"
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "Your colony was taught."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "This one has the same marking."
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "Marking is not memory."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "mark",
+     "h": 8
+    },
+    {
+     "concept": "waking",
+     "h": 6
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-lot"
+  },
+  {
+   "id": "BF-28",
+   "kind": "scene",
+   "num": "28",
+   "title": "EXT. THE WAREHOUSE · PLYWOOD -- CONTINUOUS",
+   "place": "EXT. THE WAREHOUSE · PLYWOOD",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko"
+   ],
+   "beats": [
+    "A low brick structure attached to the rear of the warehouse, windows covered in plywood.",
+    "On the nearest board, painted: a broken circle with a line through it. The paint is new."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "That wasn't here last week."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "You come here?"
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Lunch."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "mark",
+     "h": 9
+    },
+    {
+     "concept": "recurrence",
+     "h": 7
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-lot"
+  },
+  {
+   "id": "BF-29",
+   "kind": "scene",
+   "num": "29",
+   "title": "INT. REARING FACILITY -- CONTINUOUS",
+   "place": "INT. REARING FACILITY",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko",
+    "iona"
+   ],
+   "beats": [
+    "Clear plastic sheeting divides the loading room into narrow chambers. Tubes run along the floor. Fans turn behind filters.",
+    "Hundreds of chrysalides hang from cards along the far wall. Each card bears a date: 1951, 1952, 1953, 1954, 1955.",
+    "The oldest cards are brown and soft at the corners. The newest are clean white plastic.",
+    "Every chrysalis, old or new, is fastened identically: a loop of silk around the thorax, a drop of adhesive beneath the tail."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "This is a rearing facility."
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "No."
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "This is the part that keeps reappearing."
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "You built this."
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "I remembered it."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "recurrence",
+     "h": 10
+    },
+    {
+     "concept": "preservation",
+     "h": 9
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-facility"
+  },
+  {
+   "id": "BF-30",
+   "kind": "scene",
+   "num": "30",
+   "title": "INT. REARING FACILITY · THE TILED POOL -- CONTINUOUS",
+   "place": "INT. REARING FACILITY · THE TILED POOL",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara",
+    "iona"
+   ],
+   "beats": [
+    "A shallow tiled pool at the centre. Lavender grows in galvanized troughs around its edge.",
+    "A projector stands on a wheeled cart. Its power light is on. Opposite, a white rectangle waits."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Someone has been running experiments here."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "How many?"
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "Enough to keep it from becoming evidence."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "containment",
+     "h": 8
+    },
+    {
+     "concept": "preservation",
+     "h": 7
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-facility"
+  },
+  {
+   "id": "BF-31",
+   "kind": "scene",
+   "num": "31",
+   "title": "INT. REARING FACILITY · THE FILM IN HER HAND -- CONTINUOUS",
+   "place": "INT. REARING FACILITY · THE FILM IN HER HAND",
+   "motion": "ADVANCE",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko"
+   ],
+   "beats": [
+    "She holds the strip toward the fluorescent light and advances it between her fingers.",
+    "The child straightens. The woman turns. The butterfly descends.",
+    "Then the image changes: the next frame shows Mara herself standing in the lobby with the canister in her hands.",
+    "She drops the film. Niko catches it. He lifts it to the light and sees only the glasshouse."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "What did you see?"
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "I saw today."
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "You saw yourself arranged as a memory."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "advance",
+     "h": 10
+    },
+    {
+     "concept": "turnback",
+     "h": 8
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-facility"
+  },
+  {
+   "id": "BF-32",
+   "kind": "scene",
+   "num": "32",
+   "title": "INT. REARING FACILITY · THE WALL -- CONTINUOUS",
+   "place": "INT. REARING FACILITY · THE WALL",
+   "motion": "SWEEP",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko",
+    "iona"
+   ],
+   "beats": [
+    "A clicking comes from the wall. One chrysalis moves. Then another. The sound travels down the rows.",
+    "Each seam splits at once — a synchronized line passing across the wall from left to right.",
+    "The oldest open first. Empty. Then the next. Empty. Every chrysalis is empty.",
+    "Yet the wall continues to move: something passes through the husks without occupying them, a distortion like wind crossing tall grass."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Temperature change?"
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "No."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Vibration?"
+    ],
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "No."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "You have to give me something."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "waking",
+     "h": 10
+    },
+    {
+     "concept": "recurrence",
+     "h": 9
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-facility"
+  },
+  {
+   "id": "BF-33",
+   "kind": "scene",
+   "num": "33",
+   "title": "INT. REARING FACILITY · THE PROJECTION -- CONTINUOUS",
+   "place": "INT. REARING FACILITY · THE PROJECTION",
+   "motion": "DISSOLVE",
+   "loop": false,
+   "cast": [
+    "mara",
+    "iona"
+   ],
+   "beats": [
+    "The projector turns on. Its fan rises to speed. Light strikes the wall.",
+    "No one has threaded the film. Nevertheless an image appears.",
+    "A glasshouse. White-painted windows. Lavender beside a pool. Three children with their backs to the camera.",
+    "A woman enters carrying a tray of chrysalides. Mara knows her before she turns — not her face. Her shoulders."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "MARA"
+    ],
+    [
+     "DIAL",
+     "Who is filming?"
+    ],
+    [
+     "CHAR",
+     "IONA"
+    ],
+    [
+     "DIAL",
+     "The person who remembers."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "preservation",
+     "h": 9
+    },
+    {
+     "concept": "turnback",
+     "h": 8
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-facility"
+  },
+  {
+   "id": "BF-34",
+   "kind": "scene",
+   "num": "34",
+   "title": "INT. REARING FACILITY -- CONTINUOUS",
+   "place": "INT. REARING FACILITY",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara",
+    "elise"
+   ],
+   "beats": [
+    "The sound comes from behind her.",
+    "Not the voice thinned by medication and made formal by the effort to appear lucid.",
+    "This is the voice from childhood — impatient and amused, calling from the front seat while Mara knelt backward in the car to watch a storm disappear behind them."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "ELISE (V.O.)"
+    ],
+    [
+     "DIAL",
+     "Do not turn around."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "turnback",
+     "h": 10
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-facility"
+  },
+  {
+   "id": "BF-35",
+   "kind": "scene",
+   "num": "35",
+   "title": "INT. REARING FACILITY · THE WALL -- CONTINUOUS",
+   "place": "INT. REARING FACILITY · THE WALL",
+   "motion": "DISSOLVE",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko"
+   ],
+   "beats": [
+    "Mara turns. Therefore the film changes.",
+    "She now sees the laboratory lobby: Iona handing her the canister, Niko dropping the orange cup, the butterfly striking the door.",
+    "Within the projected image, the small projected Mara turns toward the camera. Her lips move. This time there is sound."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "PROJECTED MARA"
+    ],
+    [
+     "DIAL",
+     "I remember being a butterfly."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "turnback",
+     "h": 9
+    },
+    {
+     "concept": "recurrence",
+     "h": 10
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-facility"
+  },
+  {
+   "id": "BF-36",
+   "kind": "scene",
+   "num": "36",
+   "title": "INT. REARING FACILITY · THE POOL -- CONTINUOUS",
+   "place": "INT. REARING FACILITY · THE POOL",
+   "motion": "ADVANCE",
+   "loop": false,
+   "cast": [
+    "mara",
+    "niko"
+   ],
+   "beats": [
+    "The reel slips and rolls in a widening circle across the floor, film unwinding behind it.",
+    "It strikes the tiled edge and falls into the water. Therefore the strip tightens.",
+    "Therefore every frame between the cart and the water becomes briefly visible:",
+    "A man raising his hand. A woman in a green dress. A burning barn. A hotel corridor. A child on an airport platform. A face reflected in an artificial eye. A car sinking through blue light. A witness pointing across a courtroom. A dead wife opening her eyes on a space station."
+   ],
+   "el": [],
+   "concepts": [
+    {
+     "concept": "advance",
+     "h": 10
+    },
+    {
+     "concept": "preservation",
+     "h": 8
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-facility"
+  },
+  {
+   "id": "BF-37",
+   "kind": "scene",
+   "num": "37",
+   "title": "INT. THE MAZE · THE BUTTERFLY'S VIEW -- CONTINUOUS",
+   "place": "INT. THE MAZE · THE BUTTERFLY'S VIEW",
+   "motion": "CYCLE",
+   "loop": false,
+   "cast": [
+    "mara",
+    "swallowtail"
+   ],
+   "beats": [
+    "The projection cuts to a butterfly beating against a transparent ceiling — the same trial from that morning.",
+    "But the viewpoint is inside the maze.",
+    "Mara sees herself beyond the acrylic: enormous, distorted, holding her breath.",
+    "The butterfly strikes the lid. The image goes white."
+   ],
+   "el": [],
+   "concepts": [
+    {
+     "concept": "transparency",
+     "h": 10
+    },
+    {
+     "concept": "refusal",
+     "h": 9
+    },
+    {
+     "concept": "watching",
+     "h": 9
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-maze"
+  },
+  {
+   "id": "BF-38",
+   "kind": "scene",
+   "num": "38",
+   "title": "INT. REARING FACILITY · DARKNESS -- CONTINUOUS",
+   "place": "INT. REARING FACILITY · DARKNESS",
+   "motion": "TRANSFER",
+   "loop": false,
+   "cast": [
+    "mara"
+   ],
+   "beats": [
+    "Every fluorescent tube goes out. Darkness arrives complete except for the projector beam.",
+    "Within it, scales drift. Thousands of them.",
+    "They move across the light in slow currents, each scale briefly becoming a bright rectangle — a frame too small to contain the event it had carried."
+   ],
+   "el": [],
+   "concepts": [
+    {
+     "concept": "transfer",
+     "h": 10
+    },
+    {
+     "concept": "preservation",
+     "h": 10
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-facility"
+  },
+  {
+   "id": "BF-39",
+   "kind": "scene",
+   "num": "39",
+   "title": "INT. REARING FACILITY · DARKNESS -- CONTINUOUS",
+   "place": "INT. REARING FACILITY · DARKNESS",
+   "motion": "HOLD",
+   "loop": false,
+   "cast": [
+    "mara"
+   ],
+   "beats": [
+    "The memory enters through no opening she can name. Not a vision. Not information. A pressure toward action.",
+    "She knows a child stands behind her at the edge of the pool.",
+    "She knows the child will fall if she does not turn. She knows turning will cause the glass above them to break.",
+    "She knows her mother stood in this position. She knows Iona did. She knows none of these things can all be true."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "IONA (O.S.)"
+    ],
+    [
+     "DIAL",
+     "You see why it survives."
+    ],
+    [
+     "CHAR",
+     "NIKO"
+    ],
+    [
+     "DIAL",
+     "Mara."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "turnback",
+     "h": 10
+    },
+    {
+     "concept": "recurrence",
+     "h": 10
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-facility"
+  },
+  {
+   "id": "BF-40",
+   "kind": "scene",
+   "num": "40",
+   "title": "INT. REARING FACILITY · THE POOL'S EDGE -- CONTINUOUS",
+   "place": "INT. REARING FACILITY · THE POOL'S EDGE",
+   "motion": "BREAK",
+   "loop": false,
+   "cast": [
+    "mara",
+    "thegirl"
+   ],
+   "beats": [
+    "At the pool's edge stands a girl in a yellow dress. Water streams from her hair.",
+    "In both hands she holds a chrysalis split neatly along one side. She looks eight years old.",
+    "She has Mara's face. She raises the empty chrysalis to her ear.",
+    "Then the projector stops. In the darkness, something opens its wings."
+   ],
+   "el": [
+    [
+     "CHAR",
+     "THE GIRL"
+    ],
+    [
+     "DIAL",
+     "Someone is still inside."
+    ]
+   ],
+   "concepts": [
+    {
+     "concept": "waking",
+     "h": 10
+    },
+    {
+     "concept": "recurrence",
+     "h": 10
+    },
+    {
+     "concept": "mark",
+     "h": 7
+    }
+   ],
+   "ep": "B01",
+   "eptitle": "I REMEMBER BEING A BUTTERFLY",
+   "plan": "the-facility"
+  }
+ ],
+ "eps": [
+  {
+   "id": "B01",
+   "num": "01",
+   "title": "I REMEMBER BEING A BUTTERFLY",
+   "part": "ONE MOVEMENT",
+   "scenes": [
+    "BF-01",
+    "BF-02",
+    "BF-03",
+    "BF-04",
+    "BF-05",
+    "BF-06",
+    "BF-07",
+    "BF-08",
+    "BF-09",
+    "BF-10",
+    "BF-11",
+    "BF-12",
+    "BF-13",
+    "BF-14",
+    "BF-15",
+    "BF-16",
+    "BF-17",
+    "BF-18",
+    "BF-19",
+    "BF-20",
+    "BF-21",
+    "BF-22",
+    "BF-23",
+    "BF-24",
+    "BF-25",
+    "BF-26",
+    "BF-27",
+    "BF-28",
+    "BF-29",
+    "BF-30",
+    "BF-31",
+    "BF-32",
+    "BF-33",
+    "BF-34",
+    "BF-35",
+    "BF-36",
+    "BF-37",
+    "BF-38",
+    "BF-39",
+    "BF-40"
+   ]
+  }
+ ],
+ "chars": [
+  {
+   "id": "mara",
+   "name": "Mara Venn",
+   "wt": null
+  },
+  {
+   "id": "niko",
+   "name": "Niko Alvarez",
+   "wt": null
+  },
+  {
+   "id": "iona",
+   "name": "Iona Ash",
+   "wt": null
+  },
+  {
+   "id": "elise",
+   "name": "Elise",
+   "wt": null
+  },
+  {
+   "id": "thegirl",
+   "name": "The Girl in the Yellow Dress",
+   "wt": null
+  },
+  {
+   "id": "swallowtail",
+   "name": "The Swallowtail",
+   "wt": null
+  },
+  {
+   "id": "oldbutterfly",
+   "name": "The Older Butterfly",
+   "wt": null
+  }
+ ],
+ "concepts": [
+  {
+   "id": "mark",
+   "name": "THE BROKEN CIRCLE",
+   "src": "",
+   "gloss": "A shape that only completes when two halves are brought together, and which appears in flight path, photograph, scar, wing and new paint.",
+   "docs": [
+    {
+     "d": "BF-02",
+     "h": 10
+    },
+    {
+     "d": "BF-06",
+     "h": 5
+    },
+    {
+     "d": "BF-08",
+     "h": 4
+    },
+    {
+     "d": "BF-09",
+     "h": 9
+    },
+    {
+     "d": "BF-14",
+     "h": 6
+    },
+    {
+     "d": "BF-22",
+     "h": 9
+    },
+    {
+     "d": "BF-24",
+     "h": 10
+    },
+    {
+     "d": "BF-27",
+     "h": 8
+    },
+    {
+     "d": "BF-28",
+     "h": 9
+    },
+    {
+     "d": "BF-40",
+     "h": 7
+    }
+   ]
+  },
+  {
+   "id": "transfer",
+   "name": "TRANSFER",
+   "src": "",
+   "gloss": "A substance that moves between surfaces without changing: butterfly to glove to skin to tape to film to the beam. It brightens rather than fades when rubbed.",
+   "docs": [
+    {
+     "d": "BF-04",
+     "h": 9
+    },
+    {
+     "d": "BF-07",
+     "h": 10
+    },
+    {
+     "d": "BF-15",
+     "h": 7
+    },
+    {
+     "d": "BF-18",
+     "h": 9
+    },
+    {
+     "d": "BF-38",
+     "h": 10
+    }
+   ]
+  },
+  {
+   "id": "refusal",
+   "name": "REFUSAL",
+   "src": "",
+   "gloss": "Rejecting the premise rather than the options. The insect does not choose an arm; it strikes the ceiling.",
+   "docs": [
+    {
+     "d": "BF-01",
+     "h": 9
+    },
+    {
+     "d": "BF-03",
+     "h": 6
+    },
+    {
+     "d": "BF-05",
+     "h": 7
+    },
+    {
+     "d": "BF-14",
+     "h": 7
+    },
+    {
+     "d": "BF-25",
+     "h": 8
+    },
+    {
+     "d": "BF-37",
+     "h": 9
+    }
+   ]
+  },
+  {
+   "id": "transparency",
+   "name": "TRANSPARENCY",
+   "src": "",
+   "gloss": "A barrier that offers no resistance until the instant of contact. Mistaking transparency for permission.",
+   "docs": [
+    {
+     "d": "BF-01",
+     "h": 7
+    },
+    {
+     "d": "BF-12",
+     "h": 6
+    },
+    {
+     "d": "BF-24",
+     "h": 8
+    },
+    {
+     "d": "BF-25",
+     "h": 9
+    },
+    {
+     "d": "BF-37",
+     "h": 10
+    }
+   ]
+  },
+  {
+   "id": "recurrence",
+   "name": "RECURRENCE",
+   "src": "",
+   "gloss": "The part that keeps reappearing. Three generations opening the lavender too early.",
+   "docs": [
+    {
+     "d": "BF-09",
+     "h": 8
+    },
+    {
+     "d": "BF-10",
+     "h": 10
+    },
+    {
+     "d": "BF-13",
+     "h": 9
+    },
+    {
+     "d": "BF-17",
+     "h": 8
+    },
+    {
+     "d": "BF-22",
+     "h": 9
+    },
+    {
+     "d": "BF-23",
+     "h": 7
+    },
+    {
+     "d": "BF-28",
+     "h": 7
+    },
+    {
+     "d": "BF-29",
+     "h": 10
+    },
+    {
+     "d": "BF-32",
+     "h": 9
+    },
+    {
+     "d": "BF-35",
+     "h": 10
+    },
+    {
+     "d": "BF-39",
+     "h": 10
+    },
+    {
+     "d": "BF-40",
+     "h": 10
+    }
+   ]
+  },
+  {
+   "id": "turnback",
+   "name": "DO NOT TURN AROUND",
+   "src": "",
+   "gloss": "The instruction that governs the whole text, written on a photograph in 1945 and spoken aloud in the dark.",
+   "docs": [
+    {
+     "d": "BF-10",
+     "h": 9
+    },
+    {
+     "d": "BF-20",
+     "h": 7
+    },
+    {
+     "d": "BF-31",
+     "h": 8
+    },
+    {
+     "d": "BF-33",
+     "h": 8
+    },
+    {
+     "d": "BF-34",
+     "h": 10
+    },
+    {
+     "d": "BF-35",
+     "h": 9
+    },
+    {
+     "d": "BF-39",
+     "h": 10
+    }
+   ]
+  },
+  {
+   "id": "waking",
+   "name": "WAKING TOO EARLY",
+   "src": "",
+   "gloss": "The insects wake before the story is ready for them. Empty chrysalides that still move.",
+   "docs": [
+    {
+     "d": "BF-13",
+     "h": 8
+    },
+    {
+     "d": "BF-15",
+     "h": 6
+    },
+    {
+     "d": "BF-21",
+     "h": 9
+    },
+    {
+     "d": "BF-23",
+     "h": 10
+    },
+    {
+     "d": "BF-27",
+     "h": 6
+    },
+    {
+     "d": "BF-32",
+     "h": 10
+    },
+    {
+     "d": "BF-40",
+     "h": 10
+    }
+   ]
+  },
+  {
+   "id": "cleanversion",
+   "name": "THE CLEAN VERSION",
+   "src": "",
+   "gloss": "The record that omits the path. Deleting the visualization while keeping the trial.",
+   "docs": [
+    {
+     "d": "BF-06",
+     "h": 9
+    },
+    {
+     "d": "BF-11",
+     "h": 8
+    },
+    {
+     "d": "BF-19",
+     "h": 10
+    }
+   ]
+  },
+  {
+   "id": "containment",
+   "name": "CONTAINMENT",
+   "src": "",
+   "gloss": "Sealed things that tap from inside. Tape, vials, canisters, plastic sheeting, glass.",
+   "docs": [
+    {
+     "d": "BF-18",
+     "h": 7
+    },
+    {
+     "d": "BF-19",
+     "h": 8
+    },
+    {
+     "d": "BF-21",
+     "h": 8
+    },
+    {
+     "d": "BF-30",
+     "h": 8
+    }
+   ]
+  },
+  {
+   "id": "preservation",
+   "name": "PRESERVATION",
+   "src": "",
+   "gloss": "Windows that hold the city rather than showing it. Factories pretending they have forgotten what they made.",
+   "docs": [
+    {
+     "d": "BF-08",
+     "h": 7
+    },
+    {
+     "d": "BF-20",
+     "h": 8
+    },
+    {
+     "d": "BF-29",
+     "h": 9
+    },
+    {
+     "d": "BF-30",
+     "h": 7
+    },
+    {
+     "d": "BF-33",
+     "h": 9
+    },
+    {
+     "d": "BF-36",
+     "h": 8
+    },
+    {
+     "d": "BF-38",
+     "h": 10
+    }
+   ]
+  },
+  {
+   "id": "watching",
+   "name": "THE EYES LOOK BACKWARD",
+   "src": "",
+   "gloss": "False eyes on the underside of a wing. Being observed by the thing you are observing.",
+   "docs": [
+    {
+     "d": "BF-05",
+     "h": 8
+    },
+    {
+     "d": "BF-37",
+     "h": 9
+    }
+   ]
+  },
+  {
+   "id": "advance",
+   "name": "ADVANCE",
+   "src": "",
+   "gloss": "Frames stepping past a gate one at a time — film, landings, corridors of light.",
+   "docs": [
+    {
+     "d": "BF-16",
+     "h": 6
+    },
+    {
+     "d": "BF-26",
+     "h": 8
+    },
+    {
+     "d": "BF-31",
+     "h": 10
+    },
+    {
+     "d": "BF-36",
+     "h": 10
+    }
+   ]
+  },
+  {
+   "id": "accumulation",
+   "name": "ACCUMULATION",
+   "src": "",
+   "gloss": "A figure that only appears after enough time has passed over itself.",
+   "docs": [
+    {
+     "d": "BF-02",
+     "h": 8
+    }
+   ]
+  },
+  {
+   "id": "damage",
+   "name": "DAMAGE",
+   "src": "",
+   "gloss": "A crescent removed as neatly as if cut with a punch, from a place nothing sharp could reach.",
+   "docs": [
+    {
+     "d": "BF-12",
+     "h": 9
+    }
+   ]
+  }
+ ]
+}

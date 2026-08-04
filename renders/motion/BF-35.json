@@ -1,0 +1,52 @@
+{
+  "id": "BF-35",
+  "mod": "scenes/BF-35.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:34:59.809Z",
+  "motion": "DISSOLVE",
+  "seconds": 6,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 72,
+    "rendered": 72,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 6,
+    "webmSec": 6,
+    "gifSec": 6,
+    "renderWallSec": 7.1
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 13.9633,
+    "wrapMeanAbs": 19.4981,
+    "meanStepChangedPct": 0.4532,
+    "maxStepChangedPct": 1.1884,
+    "meanStepMeanAbs": 0.5537,
+    "ratio": 30.81,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-35.webm",
+      "bytes": 813651
+    },
+    "gif": {
+      "path": "renders/motion/BF-35.gif",
+      "bytes": 572417
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

@@ -1,0 +1,54 @@
+{
+  "id": "BF-11",
+  "mod": "scenes/BF-11.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:31:07.669Z",
+  "motion": "CYCLE",
+  "seconds": 4,
+  "loopClosed": true,
+  "beats": 4,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 48,
+    "rendered": 48,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 4,
+    "webmSec": 4,
+    "gifSec": 4,
+    "renderWallSec": 4.2
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 0.6678,
+    "wrapMeanAbs": 0.296,
+    "meanStepChangedPct": 0.4092,
+    "maxStepChangedPct": 1.3999,
+    "meanStepMeanAbs": 0.2542,
+    "ratio": 1.632,
+    "verdict": "seamless"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-11.webm",
+      "bytes": 498493
+    },
+    "gif": {
+      "path": "renders/motion/BF-11.gif",
+      "bytes": 524172
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": [
+    "CYCLE with loopClosed:true — is this an apparatus and not a body?"
+  ]
+}

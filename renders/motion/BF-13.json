@@ -1,0 +1,52 @@
+{
+  "id": "BF-13",
+  "mod": "scenes/BF-13.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:31:19.495Z",
+  "motion": "HOLD",
+  "seconds": 5.5,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 66,
+    "rendered": 66,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 5.5,
+    "webmSec": 5.5,
+    "gifSec": 5.5,
+    "renderWallSec": 7
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 1.3125,
+    "wrapMeanAbs": 1.9729,
+    "meanStepChangedPct": 0.3683,
+    "maxStepChangedPct": 0.6588,
+    "meanStepMeanAbs": 0.3586,
+    "ratio": 3.564,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-13.webm",
+      "bytes": 707312
+    },
+    "gif": {
+      "path": "renders/motion/BF-13.gif",
+      "bytes": 446706
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

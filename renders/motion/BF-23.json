@@ -1,0 +1,52 @@
+{
+  "id": "BF-23",
+  "mod": "scenes/BF-23.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:31:59.565Z",
+  "motion": "CYCLE",
+  "seconds": 4.5,
+  "loopClosed": false,
+  "beats": 3,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 54,
+    "rendered": 54,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 4.5,
+    "webmSec": 4.5,
+    "gifSec": 4.5,
+    "renderWallSec": 6.4
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 2.4596,
+    "wrapMeanAbs": 3.6665,
+    "meanStepChangedPct": 2.0545,
+    "maxStepChangedPct": 2.4521,
+    "meanStepMeanAbs": 2.9338,
+    "ratio": 1.197,
+    "verdict": "seamless"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-23.webm",
+      "bytes": 1089164
+    },
+    "gif": {
+      "path": "renders/motion/BF-23.gif",
+      "bytes": 1046191
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

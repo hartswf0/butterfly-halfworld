@@ -1,0 +1,52 @@
+{
+  "id": "BF-02",
+  "mod": "scenes/BF-02.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:30:23.519Z",
+  "motion": "TRACE",
+  "seconds": 5,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 60,
+    "rendered": 60,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 5,
+    "webmSec": 5,
+    "gifSec": 5,
+    "renderWallSec": 4.1
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 2.734,
+    "wrapMeanAbs": 4.4002,
+    "meanStepChangedPct": 0.2461,
+    "maxStepChangedPct": 0.7575,
+    "meanStepMeanAbs": 0.2485,
+    "ratio": 11.109,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-02.webm",
+      "bytes": 462145
+    },
+    "gif": {
+      "path": "renders/motion/BF-02.gif",
+      "bytes": 333150
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

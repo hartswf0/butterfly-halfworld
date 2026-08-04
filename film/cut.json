@@ -1,0 +1,614 @@
+{
+ "built": "2026-08-04T23:56:42.793Z",
+ "provisional": false,
+ "fps": 12,
+ "totalSeconds": 367,
+ "measured": 33,
+ "estimated": 0,
+ "scenes": [
+  {
+   "id": "BF-01",
+   "title": "INT. OBSERVATION BOX -- MORNING",
+   "plan": "the-maze",
+   "motion": "CYCLE",
+   "loop": false,
+   "lines": 3,
+   "sound": [
+    "maze_fans"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-01.webm",
+   "loopSec": 4,
+   "loops": 3,
+   "voiceSec": 9.411,
+   "duration": 12
+  },
+  {
+   "id": "BF-02",
+   "title": "INT. LABORATORY · MONITOR -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "TRACE",
+   "loop": false,
+   "lines": 1,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-02.webm",
+   "loopSec": 5,
+   "loops": 1,
+   "voiceSec": 2.291,
+   "duration": 5
+  },
+  {
+   "id": "BF-03",
+   "title": "INT. LABORATORY -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 5,
+   "sound": [
+    "maze_fans"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-03.webm",
+   "loopSec": 5,
+   "loops": 2,
+   "voiceSec": 8.611,
+   "duration": 10
+  },
+  {
+   "id": "BF-04",
+   "title": "INT. LABORATORY · THE BENCH -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "TRANSFER",
+   "loop": false,
+   "lines": 0,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-04.webm",
+   "loopSec": 4.5,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 4.5
+  },
+  {
+   "id": "BF-05",
+   "title": "INT. LABORATORY · THE PARTITION -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 4,
+   "sound": [
+    "legs_on_glass"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-05.webm",
+   "loopSec": 5,
+   "loops": 2,
+   "voiceSec": 9.731,
+   "duration": 10
+  },
+  {
+   "id": "BF-06",
+   "title": "INT. LABORATORY · MONITOR -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 5,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-06.webm",
+   "loopSec": 5,
+   "loops": 3,
+   "voiceSec": 11.611,
+   "duration": 15
+  },
+  {
+   "id": "BF-07",
+   "title": "INT. LABORATORY · HER HAND -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "TRANSFER",
+   "loop": false,
+   "lines": 2,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-07.webm",
+   "loopSec": 4,
+   "loops": 1,
+   "voiceSec": 3.371,
+   "duration": 4
+  },
+  {
+   "id": "BF-08",
+   "title": "INT. LABORATORY · THE TALL WINDOWS -- MORNING",
+   "plan": "the-laboratory",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 0,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-08.webm",
+   "loopSec": 6,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 6
+  },
+  {
+   "id": "BF-09",
+   "title": "INT. LABORATORY · THE CABINET -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 4,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-09.webm",
+   "loopSec": 5.5,
+   "loops": 2,
+   "voiceSec": 6.491,
+   "duration": 11
+  },
+  {
+   "id": "BF-10",
+   "title": "INT. LABORATORY · THE REVERSE -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 6,
+   "sound": [
+    "vent_complaint"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-10.webm",
+   "loopSec": 5.5,
+   "loops": 3,
+   "voiceSec": 12.571,
+   "duration": 16.5
+  },
+  {
+   "id": "BF-11",
+   "title": "INT. LABORATORY -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "CYCLE",
+   "loop": true,
+   "lines": 7,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-11.webm",
+   "loopSec": 4,
+   "loops": 4,
+   "voiceSec": 14.211,
+   "duration": 16
+  },
+  {
+   "id": "BF-12",
+   "title": "INT. LABORATORY · THE VIAL -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "BREAK",
+   "loop": false,
+   "lines": 2,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-12.webm",
+   "loopSec": 4,
+   "loops": 1,
+   "voiceSec": 3.291,
+   "duration": 4
+  },
+  {
+   "id": "BF-13",
+   "title": "INT. LABORATORY · THE PHONE -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 3,
+   "sound": [
+    "vent_complaint",
+    "legs_on_glass"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-13.webm",
+   "loopSec": 5.5,
+   "loops": 6,
+   "voiceSec": 29.891,
+   "duration": 33
+  },
+  {
+   "id": "BF-14",
+   "title": "INT. LABORATORY · RECOVERY RACK -- CONTINUOUS",
+   "plan": "the-laboratory",
+   "motion": "CYCLE",
+   "loop": true,
+   "lines": 0,
+   "sound": [
+    "tap_ring"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-14.webm",
+   "loopSec": 4,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 4
+  },
+  {
+   "id": "BF-15",
+   "title": "INT. MILL · THE FIRE DOOR -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "TRANSFER",
+   "loop": false,
+   "lines": 1,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-15.webm",
+   "loopSec": 3,
+   "loops": 1,
+   "voiceSec": 2.651,
+   "duration": 3
+  },
+  {
+   "id": "BF-16",
+   "title": "INT. MILL · THE STAIRCASE -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "ADVANCE",
+   "loop": false,
+   "lines": 0,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-16.webm",
+   "loopSec": 5,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 5
+  },
+  {
+   "id": "BF-17",
+   "title": "INT. MILL · THE LOBBY -- NOON",
+   "plan": "the-mill",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 5,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-17.webm",
+   "loopSec": 5,
+   "loops": 3,
+   "voiceSec": 11.891,
+   "duration": 15
+  },
+  {
+   "id": "BF-18",
+   "title": "INT. MILL · THE LOBBY -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 5,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-18.webm",
+   "loopSec": 4.5,
+   "loops": 3,
+   "voiceSec": 9.891,
+   "duration": 13.5
+  },
+  {
+   "id": "BF-19",
+   "title": "INT. MILL · THE LOBBY -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 4,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-19.webm",
+   "loopSec": 4,
+   "loops": 3,
+   "voiceSec": 9.891,
+   "duration": 12
+  },
+  {
+   "id": "BF-20",
+   "title": "INT. MILL · THE GLASS DOOR -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "TRANSFER",
+   "loop": false,
+   "lines": 0,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-20.webm",
+   "loopSec": 3.5,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 3.5
+  },
+  {
+   "id": "BF-21",
+   "title": "INT. MILL · THE LOBBY FLOOR -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "CYCLE",
+   "loop": true,
+   "lines": 2,
+   "sound": [
+    "tap_ring"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-21.webm",
+   "loopSec": 4,
+   "loops": 2,
+   "voiceSec": 4.051,
+   "duration": 8
+  },
+  {
+   "id": "BF-22",
+   "title": "INT. MILL · THE LOBBY -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 5,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-22.webm",
+   "loopSec": 5,
+   "loops": 4,
+   "voiceSec": 16.811,
+   "duration": 20
+  },
+  {
+   "id": "BF-23",
+   "title": "INT. MILL · THE OPEN CANISTER -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "CYCLE",
+   "loop": false,
+   "lines": 0,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-23.webm",
+   "loopSec": 4.5,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 4.5
+  },
+  {
+   "id": "BF-24",
+   "title": "INT. MILL · THE REEL -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "CYCLE",
+   "loop": false,
+   "lines": 2,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-24.webm",
+   "loopSec": 4,
+   "loops": 2,
+   "voiceSec": 6.571,
+   "duration": 8
+  },
+  {
+   "id": "BF-25",
+   "title": "INT. MILL · THE ENTRANCE DOOR -- CONTINUOUS",
+   "plan": "the-mill",
+   "motion": "BREAK",
+   "loop": false,
+   "lines": 3,
+   "sound": [
+    "summer"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-25.webm",
+   "loopSec": 5,
+   "loops": 2,
+   "voiceSec": 5.131,
+   "duration": 10
+  },
+  {
+   "id": "BF-26",
+   "title": "EXT. SERVICE ALLEY -- CONTINUOUS",
+   "plan": "the-lot",
+   "motion": "ADVANCE",
+   "loop": false,
+   "lines": 4,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-26.webm",
+   "loopSec": 5.5,
+   "loops": 2,
+   "voiceSec": 6.811,
+   "duration": 11
+  },
+  {
+   "id": "BF-27",
+   "title": "EXT. THE LOT · THE SPILLED LAVENDER -- CONTINUOUS",
+   "plan": "the-lot",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 6,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-27.webm",
+   "loopSec": 5,
+   "loops": 3,
+   "voiceSec": 11.811,
+   "duration": 15
+  },
+  {
+   "id": "BF-28",
+   "title": "EXT. THE WAREHOUSE · PLYWOOD -- CONTINUOUS",
+   "plan": "the-lot",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 3,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-28.webm",
+   "loopSec": 5.5,
+   "loops": 1,
+   "voiceSec": 4.971,
+   "duration": 5.5
+  },
+  {
+   "id": "BF-29",
+   "title": "INT. REARING FACILITY -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 5,
+   "sound": [
+    "fluorescent"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-29.webm",
+   "loopSec": 4.5,
+   "loops": 3,
+   "voiceSec": 9.842,
+   "duration": 13.5
+  },
+  {
+   "id": "BF-30",
+   "title": "INT. REARING FACILITY · THE TILED POOL -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 3,
+   "sound": [
+    "projector",
+    "water",
+    "fluorescent"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-30.webm",
+   "loopSec": 5,
+   "loops": 2,
+   "voiceSec": 7.491,
+   "duration": 10
+  },
+  {
+   "id": "BF-31",
+   "title": "INT. REARING FACILITY · THE FILM IN HER HAND -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "ADVANCE",
+   "loop": false,
+   "lines": 3,
+   "sound": [
+    "fluorescent"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-31.webm",
+   "loopSec": 4,
+   "loops": 2,
+   "voiceSec": 7.882,
+   "duration": 8
+  },
+  {
+   "id": "BF-32",
+   "title": "INT. REARING FACILITY · THE WALL -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "SWEEP",
+   "loop": false,
+   "lines": 5,
+   "sound": [
+    "chrysalis_cascade",
+    "fluorescent"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-32.webm",
+   "loopSec": 5,
+   "loops": 2,
+   "voiceSec": 6.691,
+   "duration": 10
+  },
+  {
+   "id": "BF-33",
+   "title": "INT. REARING FACILITY · THE PROJECTION -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "DISSOLVE",
+   "loop": false,
+   "lines": 2,
+   "sound": [
+    "projector"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-33.webm",
+   "loopSec": 5.5,
+   "loops": 1,
+   "voiceSec": 4.611,
+   "duration": 5.5
+  },
+  {
+   "id": "BF-34",
+   "title": "INT. REARING FACILITY -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 1,
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-34.webm",
+   "loopSec": 5,
+   "loops": 1,
+   "voiceSec": 2.691,
+   "duration": 5
+  },
+  {
+   "id": "BF-35",
+   "title": "INT. REARING FACILITY · THE WALL -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "DISSOLVE",
+   "loop": false,
+   "lines": 1,
+   "sound": [
+    "projector"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-35.webm",
+   "loopSec": 6,
+   "loops": 1,
+   "voiceSec": 3.411,
+   "duration": 6
+  },
+  {
+   "id": "BF-36",
+   "title": "INT. REARING FACILITY · THE POOL -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "ADVANCE",
+   "loop": false,
+   "lines": 0,
+   "sound": [
+    "projector",
+    "water"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-36.webm",
+   "loopSec": 3.5,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 3.5
+  },
+  {
+   "id": "BF-37",
+   "title": "INT. THE MAZE · THE BUTTERFLY'S VIEW -- CONTINUOUS",
+   "plan": "the-maze",
+   "motion": "CYCLE",
+   "loop": false,
+   "lines": 0,
+   "sound": [
+    "maze_fans"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-37.webm",
+   "loopSec": 4,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 4
+  },
+  {
+   "id": "BF-38",
+   "title": "INT. REARING FACILITY · DARKNESS -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "TRANSFER",
+   "loop": false,
+   "lines": 0,
+   "sound": [
+    "projector"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-38.webm",
+   "loopSec": 5.5,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 5.5
+  },
+  {
+   "id": "BF-39",
+   "title": "INT. REARING FACILITY · DARKNESS -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "HOLD",
+   "loop": false,
+   "lines": 2,
+   "sound": [
+    "water"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-39.webm",
+   "loopSec": 5.5,
+   "loops": 1,
+   "voiceSec": 3.971,
+   "duration": 5.5
+  },
+  {
+   "id": "BF-40",
+   "title": "INT. REARING FACILITY · THE POOL'S EDGE -- CONTINUOUS",
+   "plan": "the-facility",
+   "motion": "BREAK",
+   "loop": false,
+   "lines": 1,
+   "sound": [
+    "projector",
+    "water"
+   ],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-40.webm",
+   "loopSec": 5.5,
+   "loops": 1,
+   "voiceSec": 3.611,
+   "duration": 5.5
+  }
+ ]
+}

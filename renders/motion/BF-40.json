@@ -1,0 +1,52 @@
+{
+  "id": "BF-40",
+  "mod": "scenes/BF-40.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:33:44.327Z",
+  "motion": "BREAK",
+  "seconds": 5.5,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": 0.72,
+  "frames": {
+    "declared": 66,
+    "rendered": 66,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 5.5,
+    "webmSec": 5.5,
+    "gifSec": 5.5,
+    "renderWallSec": 7.7
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 88.4568,
+    "wrapMeanAbs": 144.1459,
+    "meanStepChangedPct": 2.2186,
+    "maxStepChangedPct": 89.9525,
+    "meanStepMeanAbs": 3.0387,
+    "ratio": 39.871,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-40.webm",
+      "bytes": 1460707
+    },
+    "gif": {
+      "path": "renders/motion/BF-40.gif",
+      "bytes": 1269938
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

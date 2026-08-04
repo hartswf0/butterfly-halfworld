@@ -1,0 +1,121 @@
+{
+ "sr": 24000,
+ "fps": 12,
+ "cues": [
+  {
+   "id": "tap_ring",
+   "kind": "quantised",
+   "scenes": [
+    "BF-14",
+    "BF-21"
+   ],
+   "sec": 4,
+   "peak": 0.665,
+   "rms": 0.0689,
+   "file": "audio/sound/tap_ring.wav"
+  },
+  {
+   "id": "maze_fans",
+   "kind": "bed",
+   "scenes": [
+    "BF-01",
+    "BF-03",
+    "BF-37"
+   ],
+   "sec": 6,
+   "peak": 0.105,
+   "rms": 0.0268,
+   "file": "audio/sound/maze_fans.wav"
+  },
+  {
+   "id": "vent_complaint",
+   "kind": "event",
+   "scenes": [
+    "BF-10",
+    "BF-13"
+   ],
+   "sec": 2.4,
+   "peak": 0.243,
+   "rms": 0.0732,
+   "file": "audio/sound/vent_complaint.wav"
+  },
+  {
+   "id": "legs_on_glass",
+   "kind": "grain",
+   "scenes": [
+    "BF-05",
+    "BF-13"
+   ],
+   "sec": 5,
+   "peak": 0.154,
+   "rms": 0.0129,
+   "file": "audio/sound/legs_on_glass.wav"
+  },
+  {
+   "id": "chrysalis_cascade",
+   "kind": "sweep",
+   "scenes": [
+    "BF-32"
+   ],
+   "sec": 6,
+   "peak": 0.443,
+   "rms": 0.082,
+   "file": "audio/sound/chrysalis_cascade.wav"
+  },
+  {
+   "id": "projector",
+   "kind": "shutter",
+   "scenes": [
+    "BF-30",
+    "BF-33",
+    "BF-35",
+    "BF-36",
+    "BF-38",
+    "BF-40"
+   ],
+   "sec": 6,
+   "peak": 0.198,
+   "rms": 0.024,
+   "file": "audio/sound/projector.wav"
+  },
+  {
+   "id": "water",
+   "kind": "bed",
+   "scenes": [
+    "BF-30",
+    "BF-36",
+    "BF-39",
+    "BF-40"
+   ],
+   "sec": 6,
+   "peak": 0.039,
+   "rms": 0.0089,
+   "file": "audio/sound/water.wav"
+  },
+  {
+   "id": "summer",
+   "kind": "break",
+   "scenes": [
+    "BF-25"
+   ],
+   "sec": 5,
+   "peak": 0.104,
+   "rms": 0.0159,
+   "file": "audio/sound/summer.wav"
+  },
+  {
+   "id": "fluorescent",
+   "kind": "bed",
+   "scenes": [
+    "BF-29",
+    "BF-30",
+    "BF-31",
+    "BF-32"
+   ],
+   "sec": 6,
+   "peak": 0.054,
+   "rms": 0.028,
+   "file": "audio/sound/fluorescent.wav"
+  }
+ ]
+}

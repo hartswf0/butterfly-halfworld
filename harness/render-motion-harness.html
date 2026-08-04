@@ -1,0 +1,174 @@
+<!doctype html><html><head><meta charset="utf-8"><title>render-motion-harness</title>
+<style>html,body{margin:0;background:#777}canvas{display:block;margin:0 auto}</style></head><body>
+<canvas id="stage"></canvas>
+<script type="module">
+/* ============================================================================
+   render-motion-harness.html — the page side of the ANIMATION renderer.
+
+   The still harness (render-scene-harness.html) loads a module, draws ONE
+   frame, and hands back one dataURL. This page is the same pattern extended to
+   sequences, with three differences that matter:
+
+   1. It stays loaded for the WHOLE sequence. render-motion.mjs calls
+      window.__FRAME__(i) once per frame; the module is imported once and the
+      page never reloads. A reload per frame would be ~40x slower and would
+      also make the loop-closure comparison impossible.
+
+   2. It measures pixels HERE, in the page, not in node. Comparing frame n-1
+      against frame 0 needs decoded pixels; doing it here means node never has
+      to decode a PNG, and it means the comparison runs on the real dotified
+      output rather than on a re-encode.
+
+   3. It measures the ARTWORK, not the card. getImageData() is called after the
+      halftone pass and BEFORE drawCard(), because the card's progress meter
+      advances every frame — measuring with the card on would make every loop
+      look discontinuous by exactly one progress bar.
+
+   Motion scene contract (see MOTION-BRIEF.md):
+     export const id, motion, seconds, frames, loopClosed
+     export function at(u, ctx) -> state      // PURE function of u
+     export function draw(g, W, H, state)     // solid tones; the engine dotifies
+   ========================================================================= */
+import { RENDER_PIPELINES, compositePipeline, drawCard, INK, ACCENT, clamp01 }
+  from "/engine/halfworld-engine.mjs";
+
+const q = new URLSearchParams(location.search);
+const MODPATH = q.get("mod");
+const PIPE    = RENDER_PIPELINES[q.get("pipeline") || "MESH"] || RENDER_PIPELINES.MESH;
+const SW      = +(q.get("w")   || 1120);      // source space (what draw() sees)
+const SH      = +(q.get("h")   || 760);
+const DPR     = +(q.get("dpr") || 1);         // output canvas = source * DPR
+const CARD    = q.get("card") !== "0";
+const ENDPOINT_BUG = q.get("endpointbug") === "1";   // self-test only; see __FRAME__
+
+const stage = document.getElementById("stage");
+stage.width = Math.round(SW * DPR); stage.height = Math.round(SH * DPR);
+stage.style.width = SW + "px";
+
+let mod = null, FRAMES = 0;
+let firstPix = null, prevPix = null;      // pixel snapshots for the loop check
+
+/* --- pixel difference between two dotified frames -------------------------
+   Two numbers, because they answer different questions:
+     changedPct — what fraction of the field switched allegiance (dot-law
+                  native: a dot is on or off, so this counts moved dots)
+     meanAbs    — mean |luminance| difference, 0..255 (magnitude, not extent)
+   Sampled every 2nd pixel on both axes: 4x faster, same number to 2dp. */
+function diffPix(a, b, w, h) {
+  let changed = 0, sum = 0, n = 0;
+  const rowStep = 2, colStep = 2;
+  for (let y = 0; y < h; y += rowStep) {
+    let i = y * w * 4;
+    for (let x = 0; x < w; x += colStep, i += 4 * colStep) {
+      const la = a[i] * .299 + a[i + 1] * .587 + a[i + 2] * .114;
+      const lb = b[i] * .299 + b[i + 1] * .587 + b[i + 2] * .114;
+      const d = Math.abs(la - lb);
+      if (d > 8) changed++;
+      sum += d; n++;
+    }
+  }
+  return { changedPct: +(100 * changed / n).toFixed(4), meanAbs: +(sum / n).toFixed(4) };
+}
+
+/* --- paint one frame at normalised time u into an arbitrary canvas --------
+   Same three-step shape as renderScene(): solid tones into an offscreen
+   source, one halftone pass over the whole field, crisp card on top. */
+function paintFrame(cv, u, { card = false, label = "", status = "" } = {}) {
+  const g = cv.getContext("2d", { willReadFrequently: true });
+  const off = document.createElement("canvas"); off.width = SW; off.height = SH;
+  const og = off.getContext("2d", { willReadFrequently: true });
+  og.fillStyle = "#ffffff"; og.fillRect(0, 0, SW, SH);
+  const state = mod.at(u, { u, W: SW, H: SH, frames: FRAMES, seconds: mod.seconds });
+  mod.draw(og, SW, SH, state);
+  // dot density tracks output size so a contact-sheet cell and a full frame
+  // carry comparable dots-per-inch rather than comparable dots-per-frame.
+  compositePipeline(g, off, og, cv.width, cv.height, PIPE, cv.width / SW, true);
+  return { g, state };
+}
+
+/* --- the per-frame entry point called from node --------------------------- */
+window.__FRAME__ = function (i) {
+  // u = i / frames.  NOT i / (frames - 1).  See render-motion.mjs.
+  // ENDPOINT_BUG is the deliberately wrong divisor, reachable only via
+  // --endpoint-bug, so the loop check can be shown to detect the very fault it
+  // exists to detect instead of merely asserting that it would.
+  const u = i / (ENDPOINT_BUG ? (FRAMES - 1) : FRAMES);
+  const { g } = paintFrame(stage, u);
+  // MEASURE BEFORE THE CARD (see header note 3).
+  const pix = g.getImageData(0, 0, stage.width, stage.height).data;
+  const dPrev  = prevPix  ? diffPix(pix, prevPix,  stage.width, stage.height) : null;
+  const dFirst = firstPix ? diffPix(pix, firstPix, stage.width, stage.height) : null;
+  if (i === 0) firstPix = new Uint8ClampedArray(pix);
+  prevPix = new Uint8ClampedArray(pix);
+  if (CARD) drawCard(g, stage.width, stage.height, {
+    label: mod.title || mod.id || "", status: mod.motion || "", progress: u, DPR,
+  });
+  return { i, u, diffPrev: dPrev, diffFirst: dFirst, dataURL: stage.toDataURL("image/png") };
+};
+
+/* --- contact sheet: the whole loop, readable at a glance ------------------
+   A human (or a model with a Read tool) cannot watch a webm. This is the
+   substitute, and per MOTION-BRIEF it is the thing you actually judge. Every
+   cell is labelled with its frame index and u so a discontinuity can be
+   located, not just noticed. */
+window.__CONTACT__ = function (indices, { cols = 4, cellW = 356, pad = 8, band = 26, ss = 2 } = {}) {
+  const cellH = Math.round(cellW * SH / SW);
+  const rows = Math.ceil(indices.length / cols);
+  const cv = document.createElement("canvas");
+  cv.width  = cols * cellW + pad * (cols + 1);
+  cv.height = rows * (cellH + band) + pad * (rows + 1);
+  const g = cv.getContext("2d");
+  g.fillStyle = "#d8d8d2"; g.fillRect(0, 0, cv.width, cv.height);
+  /* SUPERSAMPLE. A contact cell is ~1/3 of the frame, so its halftone samples
+     the drawing every ~10 source pixels and any feature thinner than that dies
+     — the first sheet lost the entire acrylic lid this way and told me the
+     scene was broken when the frame was fine. Painting the cell at ss× and
+     scaling down keeps the structure legible. The dots go slightly muddy; the
+     contact sheet is a reading instrument, not a deliverable, and structure
+     beats dot purity here. */
+  const cell = document.createElement("canvas");
+  cell.width = cellW * ss; cell.height = cellH * ss;
+  g.imageSmoothingEnabled = true; g.imageSmoothingQuality = "high";
+  indices.forEach((idx, k) => {
+    const cx = pad + (k % cols) * (cellW + pad);
+    const cy = pad + Math.floor(k / cols) * (cellH + band + pad);
+    paintFrame(cell, idx / FRAMES);
+    g.drawImage(cell, 0, 0, cell.width, cell.height, cx, cy, cellW, cellH);
+    g.strokeStyle = INK; g.lineWidth = 1.5; g.strokeRect(cx + .75, cy + .75, cellW - 1.5, cellH - 1.5);
+    g.fillStyle = INK; g.font = "700 13px Helvetica,Arial,sans-serif"; g.textBaseline = "top";
+    g.fillText(`f${String(idx).padStart(2, "0")}   u=${(idx / FRAMES).toFixed(3)}`, cx + 2, cy + cellH + 5);
+    // beat ticks: a CYCLE's beat boundaries, so the reader can see where the
+    // strike is supposed to land without counting frames.
+    if (mod.beats) {
+      const b = Math.floor((idx / FRAMES) * mod.beats);
+      g.fillStyle = ACCENT;
+      g.fillRect(cx + cellW - 10 - b * 12, cy + cellH + 6, 8, 8);
+    }
+  });
+  return cv.toDataURL("image/png");
+};
+
+(async () => {
+  const out = { mod: MODPATH, ok: false, errors: [], warnings: [] };
+  try {
+    mod = await import(MODPATH);
+    for (const k of ["motion", "seconds", "frames", "at", "draw"])
+      if (mod[k] === undefined) out.errors.push(`missing export: ${k}`);
+    if (typeof mod.loopClosed !== "boolean") out.warnings.push("loopClosed not declared (boolean)");
+    if (mod.motion === "CYCLE" && mod.loopClosed === true)
+      out.warnings.push("CYCLE with loopClosed:true — is this an apparatus and not a body?");
+    FRAMES = mod.frames | 0;
+    if (!(FRAMES > 1)) out.errors.push("frames must be > 1");
+    out.meta = {
+      id: mod.id || MODPATH.split("/").pop().replace(/\.mjs$/, ""),
+      title: mod.title || null, motion: mod.motion, seconds: mod.seconds,
+      frames: FRAMES, loopClosed: mod.loopClosed ?? null, beats: mod.beats ?? null,
+      declaredBreak: mod.breakAt ?? null,
+    };
+    out.ok = out.errors.length === 0;
+  } catch (e) {
+    out.errors.push("THROW: " + (e && e.stack ? e.stack.split("\n").slice(0, 4).join(" | ") : String(e)));
+  }
+  window.__RESULT__ = out; window.__DONE__ = true;
+})();
+</script></body></html>

@@ -1,0 +1,52 @@
+{
+  "id": "BF-22",
+  "mod": "scenes/BF-22.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:31:53.059Z",
+  "motion": "HOLD",
+  "seconds": 5,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 60,
+    "rendered": 60,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 5,
+    "webmSec": 5,
+    "gifSec": 5,
+    "renderWallSec": 4.5
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 4.6823,
+    "wrapMeanAbs": 7.0467,
+    "meanStepChangedPct": 1.0317,
+    "maxStepChangedPct": 1.8031,
+    "meanStepMeanAbs": 0.9364,
+    "ratio": 4.538,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-22.webm",
+      "bytes": 1169888
+    },
+    "gif": {
+      "path": "renders/motion/BF-22.gif",
+      "bytes": 1081881
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

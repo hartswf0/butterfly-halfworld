@@ -1,0 +1,54 @@
+{
+  "id": "BF-21",
+  "mod": "scenes/BF-21.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:31:48.634Z",
+  "motion": "CYCLE",
+  "seconds": 4,
+  "loopClosed": true,
+  "beats": 8,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 48,
+    "rendered": 48,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 4,
+    "webmSec": 4,
+    "gifSec": 4,
+    "renderWallSec": 5.5
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 1.7453,
+    "wrapMeanAbs": 2.15,
+    "meanStepChangedPct": 0.6863,
+    "maxStepChangedPct": 2.4126,
+    "meanStepMeanAbs": 0.8688,
+    "ratio": 2.543,
+    "verdict": "open drift at the wrap (expected if loopClosed:false)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-21.webm",
+      "bytes": 666256
+    },
+    "gif": {
+      "path": "renders/motion/BF-21.gif",
+      "bytes": 535802
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": [
+    "CYCLE with loopClosed:true — is this an apparatus and not a body?"
+  ]
+}

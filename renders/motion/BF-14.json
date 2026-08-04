@@ -1,0 +1,54 @@
+{
+  "id": "BF-14",
+  "mod": "scenes/BF-14.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:31:22.961Z",
+  "motion": "CYCLE",
+  "seconds": 4,
+  "loopClosed": true,
+  "beats": 8,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 48,
+    "rendered": 48,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 4,
+    "webmSec": 4,
+    "gifSec": 4,
+    "renderWallSec": 3.5
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 1.6264,
+    "wrapMeanAbs": 2.4669,
+    "meanStepChangedPct": 0.9823,
+    "maxStepChangedPct": 2.2157,
+    "meanStepMeanAbs": 1.3204,
+    "ratio": 1.656,
+    "verdict": "seamless"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-14.webm",
+      "bytes": 551508
+    },
+    "gif": {
+      "path": "renders/motion/BF-14.gif",
+      "bytes": 513347
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": [
+    "CYCLE with loopClosed:true — is this an apparatus and not a body?"
+  ]
+}

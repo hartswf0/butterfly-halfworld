@@ -1,0 +1,52 @@
+{
+  "id": "BF-33",
+  "mod": "scenes/BF-33.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:33:00.478Z",
+  "motion": "DISSOLVE",
+  "seconds": 5.5,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 66,
+    "rendered": 66,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 5.5,
+    "webmSec": 5.5,
+    "gifSec": 5.5,
+    "renderWallSec": 5.8
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 18.3882,
+    "wrapMeanAbs": 17.8873,
+    "meanStepChangedPct": 0.7654,
+    "maxStepChangedPct": 4.7274,
+    "meanStepMeanAbs": 0.9109,
+    "ratio": 24.024,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-33.webm",
+      "bytes": 1048222
+    },
+    "gif": {
+      "path": "renders/motion/BF-33.gif",
+      "bytes": 633529
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

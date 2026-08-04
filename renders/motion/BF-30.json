@@ -1,0 +1,52 @@
+{
+  "id": "BF-30",
+  "mod": "scenes/BF-30.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:32:39.649Z",
+  "motion": "HOLD",
+  "seconds": 5,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 60,
+    "rendered": 60,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 5,
+    "webmSec": 5,
+    "gifSec": 5,
+    "renderWallSec": 4.3
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 0.2284,
+    "wrapMeanAbs": 0.1606,
+    "meanStepChangedPct": 0.2655,
+    "maxStepChangedPct": 0.3647,
+    "meanStepMeanAbs": 0.1634,
+    "ratio": 0.86,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-30.webm",
+      "bytes": 501291
+    },
+    "gif": {
+      "path": "renders/motion/BF-30.gif",
+      "bytes": 479680
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

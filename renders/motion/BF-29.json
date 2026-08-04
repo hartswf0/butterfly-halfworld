@@ -1,0 +1,52 @@
+{
+  "id": "BF-29",
+  "mod": "scenes/BF-29.mjs",
+  "ok": true,
+  "t": "2026-08-04T18:34:52.698Z",
+  "motion": "HOLD",
+  "seconds": 4.5,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 54,
+    "rendered": 54,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 4.5,
+    "webmSec": 4.5,
+    "gifSec": 4.5,
+    "renderWallSec": 3.6
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 0.6565,
+    "wrapMeanAbs": 0.7985,
+    "meanStepChangedPct": 0.4797,
+    "maxStepChangedPct": 0.6081,
+    "meanStepMeanAbs": 0.6017,
+    "ratio": 1.369,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/BF-29.webm",
+      "bytes": 466289
+    },
+    "gif": {
+      "path": "renders/motion/BF-29.gif",
+      "bytes": 448253
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

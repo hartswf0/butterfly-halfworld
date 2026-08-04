@@ -1,0 +1,96 @@
+<!doctype html><html><head><meta charset="utf-8">
+<title>motion strip</title>
+<style>html,body{margin:0;background:#777}#stage{display:block;margin:0 auto}</style>
+</head><body>
+<canvas id="stage"></canvas>
+<script type="module">
+/* MOTION STRIP. One row per entry in asset.motions, eight frames across one
+   cycle (u = 0, 1/8 … 7/8), rendered into ONE offscreen buffer so the whole
+   sheet shares a single halftone lattice — which is the only way to judge
+   whether a loop reads, rather than whether eight separate pictures read.
+
+   MOTION-BRIEF: "Judge the loop, not the frame … A frame that reads well and a
+   loop that reads well are different achievements." Frame 7 sits next to frame
+   0 on the page for exactly that reason: a CYCLE that does not close shows the
+   step at the wrap, right there, side by side. */
+import { compositePipeline, RENDER_PIPELINES, INK, ACCENT } from "/engine/halfworld-engine.mjs";
+
+const q = new URLSearchParams(location.search);
+const modPath = q.get("mod");
+const stateName = q.get("state") || "";
+const N = +(q.get("n") || 8);
+const CW = +(q.get("cw") || 250), CH = +(q.get("ch") || 330), DPR = 1.4;
+
+const cv = document.getElementById("stage");
+
+(async () => {
+  const out = { mod: modPath, ok: false, errors: [], motions: [] };
+  try {
+    const m = await import(modPath);
+    const a = m.asset || m.default;
+    const names = Object.keys(a.motions || {});
+    if (!names.length) throw new Error("no motions");
+    out.motions = names;
+
+    const SW = CW * N, SH = CH * names.length;
+    cv.width = SW * DPR; cv.height = SH * DPR;
+    cv.style.width = SW + "px"; cv.style.height = SH + "px";
+
+    const off = document.createElement("canvas"); off.width = SW; off.height = SH;
+    const og = off.getContext("2d", { willReadFrequently: true });
+    og.fillStyle = "#ffffff"; og.fillRect(0, 0, SW, SH);
+
+    let base = a.preview ? a.preview() : {};
+    if (stateName && a.states && a.states.nodes && a.states.nodes[stateName])
+      base = { ...base, ...(a.states.nodes[stateName].preview || {}) };
+
+    for (let r = 0; r < names.length; r++) {
+      for (let i = 0; i < N; i++) {
+        const u = i / N;
+        const st = { ...base, ...a.motions[names[r]](u) };
+        og.save();
+        og.beginPath(); og.rect(i * CW, r * CH, CW, CH); og.clip();
+        og.translate(i * CW, r * CH);
+        a.draw(og, CW, CH, st);
+        og.restore();
+      }
+    }
+
+    const g = cv.getContext("2d");
+    compositePipeline(g, off, og, cv.width, cv.height, RENDER_PIPELINES.MESH, DPR, true);
+
+    // crisp overlay: frame, row labels, cell ticks
+    g.save(); g.setTransform(1, 0, 0, 1, 0, 0);
+    g.strokeStyle = INK; g.lineWidth = 2;
+    g.strokeRect(3, 3, cv.width - 6, cv.height - 6);
+    g.font = `800 ${Math.round(13 * DPR)}px Helvetica,Arial,sans-serif`;
+    for (let r = 0; r < names.length; r++) {
+      g.fillStyle = ACCENT;
+      g.fillText(names[r].toUpperCase(), 10 * DPR, (r * CH + 20) * DPR);
+      if (r) {
+        g.strokeStyle = "#c0c0ba"; g.lineWidth = 1;
+        g.beginPath(); g.moveTo(0, r * CH * DPR); g.lineTo(cv.width, r * CH * DPR); g.stroke();
+      }
+      for (let i = 1; i < N; i++) {           // short tick between frames, not a rule
+        g.strokeStyle = "#c8c8c2"; g.lineWidth = 1;
+        g.beginPath();
+        g.moveTo(i * CW * DPR, (r * CH + 4) * DPR);
+        g.lineTo(i * CW * DPR, (r * CH + 16) * DPR);
+        g.stroke();
+      }
+    }
+    g.fillStyle = INK;
+    g.font = `800 ${Math.round(11 * DPR)}px Helvetica,Arial,sans-serif`;
+    g.fillText((a.name || a.id).toUpperCase() + "  ·  u = 0 … 7/8", 10 * DPR, cv.height - 8 * DPR);
+    g.restore();
+
+    out.ok = true;
+    out.dataURL = cv.toDataURL("image/png");
+  } catch (e) {
+    out.errors.push("THROW: " + (e && e.stack ? e.stack.split("\n").slice(0, 4).join(" | ") : String(e)));
+  }
+  window.__RESULT__ = out;
+  window.__DONE__ = true;
+})();
+</script>
+</body></html>
