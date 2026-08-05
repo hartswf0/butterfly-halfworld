@@ -1,0 +1,55 @@
+{
+  "id": "_TEST-CAST",
+  "mod": "scenes/_test-cast.mjs",
+  "ok": true,
+  "t": "2026-08-05T01:54:01.917Z",
+  "motion": "ADVANCE",
+  "seconds": 0.8333333333333334,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 10,
+    "rendered": 10,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 0.833,
+    "webmSec": 0.833,
+    "gifSec": 0.83,
+    "renderWallSec": 1.4
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": true
+  },
+  "loop": {
+    "wrapChangedPct": 12.2039,
+    "wrapMeanAbs": 16.4072,
+    "meanStepChangedPct": 11.7337,
+    "maxStepChangedPct": 26.1565,
+    "meanStepMeanAbs": 16.5326,
+    "ratio": 1.04,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/_TEST-CAST.webm",
+      "bytes": 574165
+    },
+    "gif": {
+      "path": "renders/motion/_TEST-CAST.gif",
+      "bytes": 647938
+    },
+    "contact": {
+      "path": "renders/motion/_TEST-CAST-contact.png",
+      "bytes": 180991
+    },
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

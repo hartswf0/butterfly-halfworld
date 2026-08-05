@@ -1,0 +1,52 @@
+{
+  "id": "CU-BF-19-0-2",
+  "mod": "scenes/_close/CU-BF-19-0-2.mjs",
+  "ok": true,
+  "t": "2026-08-05T01:59:13.149Z",
+  "motion": "SPEAK",
+  "seconds": 2.015,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 24,
+    "rendered": 24,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 2,
+    "webmSec": 2,
+    "gifSec": 2,
+    "renderWallSec": 2.1
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 2.9507,
+    "wrapMeanAbs": 3.6619,
+    "meanStepChangedPct": 2.1027,
+    "maxStepChangedPct": 3.937,
+    "meanStepMeanAbs": 2.7118,
+    "ratio": 1.403,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/CU-BF-19-0-2.webm",
+      "bytes": 629831
+    },
+    "gif": {
+      "path": "renders/motion/CU-BF-19-0-2.gif",
+      "bytes": 657801
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

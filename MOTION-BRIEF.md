@@ -133,3 +133,27 @@ A frame that reads well and a loop that reads well are different achievements. L
 - **Making the empty chrysalides move like they contain something.** They are empty. *"something
   passes through the husks without occupying them, a distortion like wind crossing tall grass."* The
   motion is in the field, not in the objects.
+
+---
+
+## THE NINTH MOTION: SPEAK
+
+Everything above says the unit of authorship here is a **cycle**, because the text's central images
+do not exist in any single frame. That argument is sound, and one class of unit breaks it.
+
+A sentence is not periodic. It does not come round again. If it did it would not be a sentence.
+
+`scenes/_close/CU-*.mjs` — ninety generated close-ups, one per speaker run — therefore declare
+`motion = "SPEAK"`, `loopClosed: false`, `beats: null`, and their whole content is that they run once
+and stop. Declared, not smuggled. The film's cycles are bodies and apparatus, which repeat; testimony
+does not. In a film about a witness that cannot verify its own memory, the one thing that happens
+exactly once ought to be somebody saying so.
+
+The jaw in those units is driven by the **recorded waveform**, not by a wave function of `u` —
+the envelope is baked into each module as a literal array so `at(u)` stays pure. See
+[CLOSE-UP.md](CLOSE-UP.md) for the whole system, including the five passes the head took and the
+four things I misdiagnosed on the way.
+
+**The rule that carries over unchanged:** judge the loop, not the frame. Every defect in this
+build — the eyes half a head too high, the hair that read as a beret, the anvil jaw, the drift at
+assembly — was found by looking at a rendered image. Not one was found by a test.

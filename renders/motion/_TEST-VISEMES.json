@@ -1,0 +1,55 @@
+{
+  "id": "_TEST-VISEMES",
+  "mod": "scenes/_test-visemes.mjs",
+  "ok": true,
+  "t": "2026-08-05T01:50:35.499Z",
+  "motion": "ADVANCE",
+  "seconds": 0.9166666666666666,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 11,
+    "rendered": 11,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 0.917,
+    "webmSec": 0.916,
+    "gifSec": 0.91,
+    "renderWallSec": 1.7
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": true
+  },
+  "loop": {
+    "wrapChangedPct": 1.6461,
+    "wrapMeanAbs": 2.5118,
+    "meanStepChangedPct": 1.2719,
+    "maxStepChangedPct": 2.367,
+    "meanStepMeanAbs": 1.7591,
+    "ratio": 1.294,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/_TEST-VISEMES.webm",
+      "bytes": 259439
+    },
+    "gif": {
+      "path": "renders/motion/_TEST-VISEMES.gif",
+      "bytes": 206384
+    },
+    "contact": {
+      "path": "renders/motion/_TEST-VISEMES-contact.png",
+      "bytes": 150789
+    },
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

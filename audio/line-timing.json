@@ -1,0 +1,1485 @@
+{
+ "built": "2026-08-05T01:55:32.944Z",
+ "method": "rms envelope 100Hz -> silence runs >=100ms -> DP assignment against word-count prior",
+ "hop": 0.01,
+ "minGap": 0.1,
+ "measuredTakes": 33,
+ "fallbackTakes": 0,
+ "displacement": {
+  "median": 0.2807,
+  "p90": 0.8312,
+  "overHalfSecond": 17
+ },
+ "takes": [
+  {
+   "id": "BF-01__0",
+   "scene": "BF-01",
+   "speakers": [
+    "VO"
+   ],
+   "file": "audio/scenes/BF-01__0.wav",
+   "duration": 8.610958,
+   "lines": [
+    {
+     "id": "BF-01-L01",
+     "who": "VO",
+     "text": "I remember being a butterfly.",
+     "t0": 0,
+     "dur": 2.545,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.59
+    },
+    {
+     "id": "BF-01-L02",
+     "who": "VO",
+     "text": "I remember the roof as a brightness I could not enter.",
+     "t0": 2.545,
+     "dur": 4.5,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.35
+    },
+    {
+     "id": "BF-01-L03",
+     "who": "VO",
+     "text": "I did not choose.",
+     "t0": 7.045,
+     "dur": 1.566,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-02__0",
+   "scene": "BF-02",
+   "speakers": [
+    "NIKO"
+   ],
+   "file": "audio/scenes/BF-02__0.wav",
+   "duration": 1.490958,
+   "lines": [
+    {
+     "id": "BF-02-L01",
+     "who": "NIKO",
+     "text": "Stop the trial.",
+     "t0": 0,
+     "dur": 1.491,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-03__0",
+   "scene": "BF-03",
+   "speakers": [
+    "NIKO",
+    "MARA"
+   ],
+   "file": "audio/scenes/BF-03__0.wav",
+   "duration": 7.810958,
+   "lines": [
+    {
+     "id": "BF-03-L01",
+     "who": "NIKO",
+     "text": "Stop means stop.",
+     "t0": 0,
+     "dur": 1.74,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.66
+    },
+    {
+     "id": "BF-03-L02",
+     "who": "MARA",
+     "text": "It's stopped.",
+     "t0": 1.74,
+     "dur": 0.84,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.12
+    },
+    {
+     "id": "BF-03-L03",
+     "who": "NIKO",
+     "text": "The odor is stopped.",
+     "t0": 2.58,
+     "dur": 1.805,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.11
+    },
+    {
+     "id": "BF-03-L04",
+     "who": "MARA",
+     "text": "That's what I meant.",
+     "t0": 4.385,
+     "dur": 2.015,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.78
+    },
+    {
+     "id": "BF-03-L05",
+     "who": "NIKO",
+     "text": "No, it isn't.",
+     "t0": 6.4,
+     "dur": 1.411,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-05__0",
+   "scene": "BF-05",
+   "speakers": [
+    "NIKO",
+    "MARA"
+   ],
+   "file": "audio/scenes/BF-05__0.wav",
+   "duration": 8.930958,
+   "lines": [
+    {
+     "id": "BF-05-L01",
+     "who": "NIKO",
+     "text": "Trial 6F-19. Non-completion.",
+     "t0": 0,
+     "dur": 2.095,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.47
+    },
+    {
+     "id": "BF-05-L02",
+     "who": "MARA",
+     "text": "It completed something.",
+     "t0": 2.095,
+     "dur": 1.515,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.6
+    },
+    {
+     "id": "BF-05-L03",
+     "who": "NIKO",
+     "text": "It chose the ceiling?",
+     "t0": 3.61,
+     "dur": 3.4,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.52
+    },
+    {
+     "id": "BF-05-L04",
+     "who": "MARA",
+     "text": "It rejected the premise.",
+     "t0": 7.01,
+     "dur": 1.921,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-06__0",
+   "scene": "BF-06",
+   "speakers": [
+    "MARA",
+    "NIKO"
+   ],
+   "file": "audio/scenes/BF-06__0.wav",
+   "duration": 10.810958,
+   "lines": [
+    {
+     "id": "BF-06-L01",
+     "who": "MARA",
+     "text": "Delete the path visualization.",
+     "t0": 0,
+     "dur": 2.66,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.84
+    },
+    {
+     "id": "BF-06-L02",
+     "who": "NIKO",
+     "text": "The path is the record.",
+     "t0": 2.66,
+     "dur": 2.12,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.8
+    },
+    {
+     "id": "BF-06-L03",
+     "who": "MARA",
+     "text": "The arm choice is the record.",
+     "t0": 4.78,
+     "dur": 2.19,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.8
+    },
+    {
+     "id": "BF-06-L04",
+     "who": "NIKO",
+     "text": "It didn't choose an arm.",
+     "t0": 6.97,
+     "dur": 2.03,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.82
+    },
+    {
+     "id": "BF-06-L05",
+     "who": "MARA",
+     "text": "Then the trial failed.",
+     "t0": 9,
+     "dur": 1.811,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-07__0",
+   "scene": "BF-07",
+   "speakers": [
+    "NIKO",
+    "MARA"
+   ],
+   "file": "audio/scenes/BF-07__0.wav",
+   "duration": 2.570958,
+   "lines": [
+    {
+     "id": "BF-07-L01",
+     "who": "NIKO",
+     "text": "What is that?",
+     "t0": 0,
+     "dur": 1.31,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.86
+    },
+    {
+     "id": "BF-07-L02",
+     "who": "MARA",
+     "text": "Wing scale.",
+     "t0": 1.31,
+     "dur": 1.261,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-09__0",
+   "scene": "BF-09",
+   "speakers": [
+    "NIKO",
+    "MARA"
+   ],
+   "file": "audio/scenes/BF-09__0.wav",
+   "duration": 5.690958,
+   "lines": [
+    {
+     "id": "BF-09-L01",
+     "who": "NIKO",
+     "text": "Who are they?",
+     "t0": 0,
+     "dur": 1.205,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.59
+    },
+    {
+     "id": "BF-09-L02",
+     "who": "MARA",
+     "text": "I don't know.",
+     "t0": 1.205,
+     "dur": 1.165,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.52
+    },
+    {
+     "id": "BF-09-L03",
+     "who": "NIKO",
+     "text": "Family?",
+     "t0": 2.37,
+     "dur": 0.94,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.48
+    },
+    {
+     "id": "BF-09-L04",
+     "who": "MARA",
+     "text": "The woman is supposed to be my grandmother.",
+     "t0": 3.31,
+     "dur": 2.381,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-10__0",
+   "scene": "BF-10",
+   "speakers": [
+    "NIKO",
+    "MARA"
+   ],
+   "file": "audio/scenes/BF-10__0.wav",
+   "duration": 11.770958,
+   "lines": [
+    {
+     "id": "BF-10-L01",
+     "who": "NIKO",
+     "text": "Your mother was alive in 1945?",
+     "t0": 0,
+     "dur": 3.01,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.5
+    },
+    {
+     "id": "BF-10-L02",
+     "who": "MARA",
+     "text": "No.",
+     "t0": 3.01,
+     "dur": 0.845,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.71
+    },
+    {
+     "id": "BF-10-L03",
+     "who": "MARA",
+     "text": "My mother was born in 1963.",
+     "t0": 3.855,
+     "dur": 2.55,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.39
+    },
+    {
+     "id": "BF-10-L04",
+     "who": "NIKO",
+     "text": "Then Elise isn't your mother.",
+     "t0": 6.405,
+     "dur": 2.03,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.47
+    },
+    {
+     "id": "BF-10-L05",
+     "who": "MARA",
+     "text": "It was her name.",
+     "t0": 8.435,
+     "dur": 1.235,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.54
+    },
+    {
+     "id": "BF-10-L06",
+     "who": "MARA",
+     "text": "She said she remembered being there.",
+     "t0": 9.67,
+     "dur": 2.101,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-11__0",
+   "scene": "BF-11",
+   "speakers": [
+    "NIKO",
+    "MARA"
+   ],
+   "file": "audio/scenes/BF-11__0.wav",
+   "duration": 13.410958,
+   "lines": [
+    {
+     "id": "BF-11-L01",
+     "who": "NIKO",
+     "text": "Could it have gotten into the intake?",
+     "t0": 0,
+     "dur": 2.375,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.79
+    },
+    {
+     "id": "BF-11-L02",
+     "who": "MARA",
+     "text": "The sensor would have caught it.",
+     "t0": 2.375,
+     "dur": 1.775,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.56
+    },
+    {
+     "id": "BF-11-L03",
+     "who": "NIKO",
+     "text": "Could the sensor be wrong?",
+     "t0": 4.15,
+     "dur": 1.885,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.65
+    },
+    {
+     "id": "BF-11-L04",
+     "who": "MARA",
+     "text": "Yes.",
+     "t0": 6.035,
+     "dur": 0.95,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.49
+    },
+    {
+     "id": "BF-11-L05",
+     "who": "NIKO",
+     "text": "Could the cleaning have failed?",
+     "t0": 6.985,
+     "dur": 1.855,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.66
+    },
+    {
+     "id": "BF-11-L06",
+     "who": "MARA",
+     "text": "Yes.",
+     "t0": 8.84,
+     "dur": 1.02,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.58
+    },
+    {
+     "id": "BF-11-L07",
+     "who": "NIKO",
+     "text": "Then why are we looking at a photograph from 1945?",
+     "t0": 9.86,
+     "dur": 3.551,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-12__0",
+   "scene": "BF-12",
+   "speakers": [
+    "NIKO",
+    "MARA"
+   ],
+   "file": "audio/scenes/BF-12__0.wav",
+   "duration": 2.490958,
+   "lines": [
+    {
+     "id": "BF-12-L01",
+     "who": "NIKO",
+     "text": "Was that there before?",
+     "t0": 0,
+     "dur": 1.645,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.53
+    },
+    {
+     "id": "BF-12-L02",
+     "who": "MARA",
+     "text": "No.",
+     "t0": 1.645,
+     "dur": 0.846,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-13__0",
+   "scene": "BF-13",
+   "speakers": [
+    "IONA (V.O.)"
+   ],
+   "file": "audio/scenes/BF-13__0.wav",
+   "duration": 29.090958,
+   "lines": [
+    {
+     "id": "BF-13-L01",
+     "who": "IONA (V.O.)",
+     "text": "You opened the lavender.",
+     "t0": 0,
+     "dur": 3.37,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 2.84
+    },
+    {
+     "id": "BF-13-L02",
+     "who": "IONA (V.O.)",
+     "text": "You always open it too early. Your mother did. Her mother did. The insects wake before the story is ready for them.",
+     "t0": 3.37,
+     "dur": 16.96,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 2.4
+    },
+    {
+     "id": "BF-13-L03",
+     "who": "IONA (V.O.)",
+     "text": "I found the boy. He has been dead for eleven years.",
+     "t0": 20.33,
+     "dur": 8.761,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-15__0",
+   "scene": "BF-15",
+   "speakers": [
+    "MARA"
+   ],
+   "file": "audio/scenes/BF-15__0.wav",
+   "duration": 1.850958,
+   "lines": [
+    {
+     "id": "BF-15-L01",
+     "who": "MARA",
+     "text": "Call building security.",
+     "t0": 0,
+     "dur": 1.851,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-17__0",
+   "scene": "BF-17",
+   "speakers": [
+    "IONA",
+    "MARA"
+   ],
+   "file": "audio/scenes/BF-17__0.wav",
+   "duration": 11.090958,
+   "lines": [
+    {
+     "id": "BF-17-L01",
+     "who": "IONA",
+     "text": "You have her shoulders.",
+     "t0": 0,
+     "dur": 1.99,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.44
+    },
+    {
+     "id": "BF-17-L02",
+     "who": "MARA",
+     "text": "Are you Iona Ash?",
+     "t0": 1.99,
+     "dur": 1.85,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.58
+    },
+    {
+     "id": "BF-17-L03",
+     "who": "IONA",
+     "text": "That depends which paper you're reading.",
+     "t0": 3.84,
+     "dur": 2.775,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.59
+    },
+    {
+     "id": "BF-17-L04",
+     "who": "MARA",
+     "text": "My mother is dead.",
+     "t0": 6.615,
+     "dur": 1.62,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.49
+    },
+    {
+     "id": "BF-17-L05",
+     "who": "IONA",
+     "text": "Yes. That was what made it difficult.",
+     "t0": 8.235,
+     "dur": 2.856,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-18__0",
+   "scene": "BF-18",
+   "speakers": [
+    "IONA",
+    "MARA"
+   ],
+   "file": "audio/scenes/BF-18__0.wav",
+   "duration": 9.090958,
+   "lines": [
+    {
+     "id": "BF-18-L01",
+     "who": "IONA",
+     "text": "I brought you the film.",
+     "t0": 0,
+     "dur": 1.785,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.57
+    },
+    {
+     "id": "BF-18-L02",
+     "who": "MARA",
+     "text": "Where did these come from?",
+     "t0": 1.785,
+     "dur": 2.01,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.55
+    },
+    {
+     "id": "BF-18-L03",
+     "who": "IONA",
+     "text": "The envelope.",
+     "t0": 3.795,
+     "dur": 1.115,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.54
+    },
+    {
+     "id": "BF-18-L04",
+     "who": "MARA",
+     "text": "Was there a butterfly in it?",
+     "t0": 4.91,
+     "dur": 2.275,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.49
+    },
+    {
+     "id": "BF-18-L05",
+     "who": "IONA",
+     "text": "Not when I closed it.",
+     "t0": 7.185,
+     "dur": 1.906,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-19__0",
+   "scene": "BF-19",
+   "speakers": [
+    "IONA",
+    "NIKO"
+   ],
+   "file": "audio/scenes/BF-19__0.wav",
+   "duration": 9.090958,
+   "lines": [
+    {
+     "id": "BF-19-L01",
+     "who": "IONA",
+     "text": "You work for the clean version.",
+     "t0": 0,
+     "dur": 2.32,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.54
+    },
+    {
+     "id": "BF-19-L02",
+     "who": "NIKO",
+     "text": "And you work for what?",
+     "t0": 2.32,
+     "dur": 1.695,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.49
+    },
+    {
+     "id": "BF-19-L03",
+     "who": "IONA",
+     "text": "The version that survived.",
+     "t0": 4.015,
+     "dur": 2.015,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.6
+    },
+    {
+     "id": "BF-19-L04",
+     "who": "NIKO",
+     "text": "This is exactly how contamination happens.",
+     "t0": 6.03,
+     "dur": 3.061,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-21__0",
+   "scene": "BF-21",
+   "speakers": [
+    "NIKO"
+   ],
+   "file": "audio/scenes/BF-21__0.wav",
+   "duration": 3.250958,
+   "lines": [
+    {
+     "id": "BF-21-L01",
+     "who": "NIKO",
+     "text": "Put it down.",
+     "t0": 0,
+     "dur": 1.315,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 1.01
+    },
+    {
+     "id": "BF-21-L02",
+     "who": "NIKO",
+     "text": "That isn't possible.",
+     "t0": 1.315,
+     "dur": 1.936,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-22__0",
+   "scene": "BF-22",
+   "speakers": [
+    "IONA",
+    "MARA"
+   ],
+   "file": "audio/scenes/BF-22__0.wav",
+   "duration": 16.010958,
+   "lines": [
+    {
+     "id": "BF-22-L01",
+     "who": "IONA",
+     "text": "The first time you see it, you will think the picture is remembering the event.",
+     "t0": 0,
+     "dur": 4.845,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.61
+    },
+    {
+     "id": "BF-22-L02",
+     "who": "IONA",
+     "text": "The second time, you will think the event was arranged to resemble the picture.",
+     "t0": 4.845,
+     "dur": 5.07,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.69
+    },
+    {
+     "id": "BF-22-L03",
+     "who": "IONA",
+     "text": "Do not watch it a third time.",
+     "t0": 9.915,
+     "dur": 2.475,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.78
+    },
+    {
+     "id": "BF-22-L04",
+     "who": "MARA",
+     "text": "Why?",
+     "t0": 12.39,
+     "dur": 0.995,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.71
+    },
+    {
+     "id": "BF-22-L05",
+     "who": "IONA",
+     "text": "Because then you will remember being there.",
+     "t0": 13.385,
+     "dur": 2.626,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-24__0",
+   "scene": "BF-24",
+   "speakers": [
+    "IONA",
+    "NIKO"
+   ],
+   "file": "audio/scenes/BF-24__0.wav",
+   "duration": 5.770958,
+   "lines": [
+    {
+     "id": "BF-24-L01",
+     "who": "IONA",
+     "text": "Now you understand why it cannot be photographed.",
+     "t0": 0,
+     "dur": 3.745,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.55
+    },
+    {
+     "id": "BF-24-L02",
+     "who": "NIKO",
+     "text": "Of course it can be photographed.",
+     "t0": 3.745,
+     "dur": 2.026,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-25__0",
+   "scene": "BF-25",
+   "speakers": [
+    "MARA",
+    "NIKO"
+   ],
+   "file": "audio/scenes/BF-25__0.wav",
+   "duration": 4.330958,
+   "lines": [
+    {
+     "id": "BF-25-L01",
+     "who": "MARA",
+     "text": "Open the door.",
+     "t0": 0,
+     "dur": 1.22,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.66
+    },
+    {
+     "id": "BF-25-L02",
+     "who": "NIKO",
+     "text": "If it gets outside—",
+     "t0": 1.22,
+     "dur": 1.625,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.59
+    },
+    {
+     "id": "BF-25-L03",
+     "who": "MARA",
+     "text": "It will kill itself.",
+     "t0": 2.845,
+     "dur": 1.486,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-26__0",
+   "scene": "BF-26",
+   "speakers": [
+    "MARA",
+    "IONA"
+   ],
+   "file": "audio/scenes/BF-26__0.wav",
+   "duration": 6.010958,
+   "lines": [
+    {
+     "id": "BF-26-L01",
+     "who": "MARA",
+     "text": "Where is it going?",
+     "t0": 0,
+     "dur": 1.695,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.49
+    },
+    {
+     "id": "BF-26-L02",
+     "who": "IONA",
+     "text": "To the boy.",
+     "t0": 1.695,
+     "dur": 1.115,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.48
+    },
+    {
+     "id": "BF-26-L03",
+     "who": "MARA",
+     "text": "You said he's dead.",
+     "t0": 2.81,
+     "dur": 1.465,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.55
+    },
+    {
+     "id": "BF-26-L04",
+     "who": "IONA",
+     "text": "I said we found him.",
+     "t0": 4.275,
+     "dur": 1.736,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-27__0",
+   "scene": "BF-27",
+   "speakers": [
+    "MARA",
+    "IONA"
+   ],
+   "file": "audio/scenes/BF-27__0.wav",
+   "duration": 11.010958,
+   "lines": [
+    {
+     "id": "BF-27-L01",
+     "who": "MARA",
+     "text": "It isn't afraid.",
+     "t0": 0,
+     "dur": 1.735,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.47
+    },
+    {
+     "id": "BF-27-L02",
+     "who": "IONA",
+     "text": "Why would it be?",
+     "t0": 1.735,
+     "dur": 1.365,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.44
+    },
+    {
+     "id": "BF-27-L03",
+     "who": "MARA",
+     "text": "Our colony—",
+     "t0": 3.1,
+     "dur": 1.46,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.44
+    },
+    {
+     "id": "BF-27-L04",
+     "who": "IONA",
+     "text": "Your colony was taught.",
+     "t0": 4.56,
+     "dur": 1.81,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.18
+    },
+    {
+     "id": "BF-27-L05",
+     "who": "MARA",
+     "text": "This one has the same marking.",
+     "t0": 6.37,
+     "dur": 2.395,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.45
+    },
+    {
+     "id": "BF-27-L06",
+     "who": "IONA",
+     "text": "Marking is not memory.",
+     "t0": 8.765,
+     "dur": 2.246,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-28__0",
+   "scene": "BF-28",
+   "speakers": [
+    "NIKO",
+    "MARA"
+   ],
+   "file": "audio/scenes/BF-28__0.wav",
+   "duration": 4.170958,
+   "lines": [
+    {
+     "id": "BF-28-L01",
+     "who": "NIKO",
+     "text": "That wasn't here last week.",
+     "t0": 0,
+     "dur": 1.99,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.48
+    },
+    {
+     "id": "BF-28-L02",
+     "who": "MARA",
+     "text": "You come here?",
+     "t0": 1.99,
+     "dur": 1.185,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.55
+    },
+    {
+     "id": "BF-28-L03",
+     "who": "NIKO",
+     "text": "Lunch.",
+     "t0": 3.175,
+     "dur": 0.996,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-29__0",
+   "scene": "BF-29",
+   "speakers": [
+    "NIKO",
+    "IONA"
+   ],
+   "file": "audio/scenes/BF-29__0.wav",
+   "duration": 5.490958,
+   "lines": [
+    {
+     "id": "BF-29-L01",
+     "who": "NIKO",
+     "text": "This is a rearing facility.",
+     "t0": 0,
+     "dur": 2.035,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.49
+    },
+    {
+     "id": "BF-29-L02",
+     "who": "IONA",
+     "text": "No.",
+     "t0": 2.035,
+     "dur": 0.89,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.51
+    },
+    {
+     "id": "BF-29-L03",
+     "who": "IONA",
+     "text": "This is the part that keeps reappearing.",
+     "t0": 2.925,
+     "dur": 2.566,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-29__1",
+   "scene": "BF-29",
+   "speakers": [
+    "MARA",
+    "IONA"
+   ],
+   "file": "audio/scenes/BF-29__1.wav",
+   "duration": 3.050958,
+   "lines": [
+    {
+     "id": "BF-29-L04",
+     "who": "MARA",
+     "text": "You built this.",
+     "t0": 0,
+     "dur": 1.605,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.47
+    },
+    {
+     "id": "BF-29-L05",
+     "who": "IONA",
+     "text": "I remembered it.",
+     "t0": 1.605,
+     "dur": 1.446,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-30__0",
+   "scene": "BF-30",
+   "speakers": [
+    "NIKO",
+    "IONA"
+   ],
+   "file": "audio/scenes/BF-30__0.wav",
+   "duration": 6.690958,
+   "lines": [
+    {
+     "id": "BF-30-L01",
+     "who": "NIKO",
+     "text": "Someone has been running experiments here.",
+     "t0": 0,
+     "dur": 2.665,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.65
+    },
+    {
+     "id": "BF-30-L02",
+     "who": "NIKO",
+     "text": "How many?",
+     "t0": 2.665,
+     "dur": 1.19,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.91
+    },
+    {
+     "id": "BF-30-L03",
+     "who": "IONA",
+     "text": "Enough to keep it from becoming evidence.",
+     "t0": 3.855,
+     "dur": 2.836,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-31__0",
+   "scene": "BF-31",
+   "speakers": [
+    "NIKO",
+    "MARA"
+   ],
+   "file": "audio/scenes/BF-31__0.wav",
+   "duration": 3.010958,
+   "lines": [
+    {
+     "id": "BF-31-L01",
+     "who": "NIKO",
+     "text": "What did you see?",
+     "t0": 0,
+     "dur": 1.465,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.61
+    },
+    {
+     "id": "BF-31-L02",
+     "who": "MARA",
+     "text": "I saw today.",
+     "t0": 1.465,
+     "dur": 1.546,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-31__1",
+   "scene": "BF-31",
+   "speakers": [
+    "IONA"
+   ],
+   "file": "audio/scenes/BF-31__1.wav",
+   "duration": 3.570958,
+   "lines": [
+    {
+     "id": "BF-31-L03",
+     "who": "IONA",
+     "text": "You saw yourself arranged as a memory.",
+     "t0": 0,
+     "dur": 3.571,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-32__0",
+   "scene": "BF-32",
+   "speakers": [
+    "NIKO",
+    "MARA"
+   ],
+   "file": "audio/scenes/BF-32__0.wav",
+   "duration": 5.890958,
+   "lines": [
+    {
+     "id": "BF-32-L01",
+     "who": "NIKO",
+     "text": "Temperature change?",
+     "t0": 0,
+     "dur": 1.35,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.62
+    },
+    {
+     "id": "BF-32-L02",
+     "who": "MARA",
+     "text": "No.",
+     "t0": 1.35,
+     "dur": 0.855,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.49
+    },
+    {
+     "id": "BF-32-L03",
+     "who": "NIKO",
+     "text": "Vibration?",
+     "t0": 2.205,
+     "dur": 1.035,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.48
+    },
+    {
+     "id": "BF-32-L04",
+     "who": "MARA",
+     "text": "No.",
+     "t0": 3.24,
+     "dur": 0.83,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.58
+    },
+    {
+     "id": "BF-32-L05",
+     "who": "NIKO",
+     "text": "You have to give me something.",
+     "t0": 4.07,
+     "dur": 1.821,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-33__0",
+   "scene": "BF-33",
+   "speakers": [
+    "MARA",
+    "IONA"
+   ],
+   "file": "audio/scenes/BF-33__0.wav",
+   "duration": 3.810958,
+   "lines": [
+    {
+     "id": "BF-33-L01",
+     "who": "MARA",
+     "text": "Who is filming?",
+     "t0": 0,
+     "dur": 1.63,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.72
+    },
+    {
+     "id": "BF-33-L02",
+     "who": "IONA",
+     "text": "The person who remembers.",
+     "t0": 1.63,
+     "dur": 2.181,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-34__0",
+   "scene": "BF-34",
+   "speakers": [
+    "ELISE (V.O.)"
+   ],
+   "file": "audio/scenes/BF-34__0.wav",
+   "duration": 1.890958,
+   "lines": [
+    {
+     "id": "BF-34-L01",
+     "who": "ELISE (V.O.)",
+     "text": "Do not turn around.",
+     "t0": 0,
+     "dur": 1.891,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-35__0",
+   "scene": "BF-35",
+   "speakers": [
+    "PROJECTED MARA"
+   ],
+   "file": "audio/scenes/BF-35__0.wav",
+   "duration": 2.610958,
+   "lines": [
+    {
+     "id": "BF-35-L01",
+     "who": "PROJECTED MARA",
+     "text": "I remember being a butterfly.",
+     "t0": 0,
+     "dur": 2.611,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-39__0",
+   "scene": "BF-39",
+   "speakers": [
+    "IONA (O.S.)",
+    "NIKO"
+   ],
+   "file": "audio/scenes/BF-39__0.wav",
+   "duration": 3.170958,
+   "lines": [
+    {
+     "id": "BF-39-L01",
+     "who": "IONA (O.S.)",
+     "text": "You see why it survives.",
+     "t0": 0,
+     "dur": 2.17,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0.64
+    },
+    {
+     "id": "BF-39-L02",
+     "who": "NIKO",
+     "text": "Mara.",
+     "t0": 2.17,
+     "dur": 1.001,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  },
+  {
+   "id": "BF-40__0",
+   "scene": "BF-40",
+   "speakers": [
+    "THE GIRL"
+   ],
+   "file": "audio/scenes/BF-40__0.wav",
+   "duration": 2.810958,
+   "lines": [
+    {
+     "id": "BF-40-L01",
+     "who": "THE GIRL",
+     "text": "Someone is still inside.",
+     "t0": 0,
+     "dur": 2.811,
+     "apportioned": false,
+     "measured": true,
+     "gapAfter": 0
+    }
+   ],
+   "measured": true
+  }
+ ]
+}

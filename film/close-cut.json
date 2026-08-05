@@ -1,0 +1,843 @@
+{
+ "built": "2026-08-05T02:06:01.149Z",
+ "totalSeconds": 409,
+ "closeSeconds": 184.6,
+ "cuts": 139,
+ "dropped": [],
+ "segments": [
+  {
+   "t0": 0,
+   "seconds": 6,
+   "kind": "wide",
+   "label": "C00"
+  },
+  {
+   "t0": 6,
+   "seconds": 7.5,
+   "kind": "wide",
+   "label": "C01"
+  },
+  {
+   "t0": 13.5,
+   "seconds": 8,
+   "kind": "wide",
+   "label": "C02"
+  },
+  {
+   "t0": 21.5,
+   "seconds": 12,
+   "kind": "wide",
+   "label": "BF-01"
+  },
+  {
+   "t0": 33.5,
+   "seconds": 1.491,
+   "kind": "close",
+   "label": "NIKO · CU-BF-02-0-0"
+  },
+  {
+   "t0": 34.991,
+   "seconds": 3.509,
+   "kind": "wide",
+   "label": "BF-02"
+  },
+  {
+   "t0": 38.5,
+   "seconds": 1.74,
+   "kind": "close",
+   "label": "NIKO · CU-BF-03-0-0"
+  },
+  {
+   "t0": 40.24,
+   "seconds": 0.84,
+   "kind": "close",
+   "label": "MARA · CU-BF-03-0-1"
+  },
+  {
+   "t0": 41.08,
+   "seconds": 1.805,
+   "kind": "close",
+   "label": "NIKO · CU-BF-03-0-2"
+  },
+  {
+   "t0": 42.885,
+   "seconds": 2.015,
+   "kind": "close",
+   "label": "MARA · CU-BF-03-0-3"
+  },
+  {
+   "t0": 44.9,
+   "seconds": 1.411,
+   "kind": "close",
+   "label": "NIKO · CU-BF-03-0-4"
+  },
+  {
+   "t0": 46.311,
+   "seconds": 2.189,
+   "kind": "wide",
+   "label": "BF-03"
+  },
+  {
+   "t0": 48.5,
+   "seconds": 4.5,
+   "kind": "wide",
+   "label": "BF-04"
+  },
+  {
+   "t0": 53,
+   "seconds": 2.095,
+   "kind": "close",
+   "label": "NIKO · CU-BF-05-0-0"
+  },
+  {
+   "t0": 55.095,
+   "seconds": 1.515,
+   "kind": "close",
+   "label": "MARA · CU-BF-05-0-1"
+  },
+  {
+   "t0": 56.61,
+   "seconds": 3.4,
+   "kind": "close",
+   "label": "NIKO · CU-BF-05-0-2"
+  },
+  {
+   "t0": 60.01,
+   "seconds": 1.921,
+   "kind": "close",
+   "label": "MARA · CU-BF-05-0-3"
+  },
+  {
+   "t0": 61.931,
+   "seconds": 1.069,
+   "kind": "wide",
+   "label": "BF-05"
+  },
+  {
+   "t0": 63,
+   "seconds": 2.66,
+   "kind": "close",
+   "label": "MARA · CU-BF-06-0-0"
+  },
+  {
+   "t0": 65.66,
+   "seconds": 2.12,
+   "kind": "close",
+   "label": "NIKO · CU-BF-06-0-1"
+  },
+  {
+   "t0": 67.78,
+   "seconds": 2.19,
+   "kind": "close",
+   "label": "MARA · CU-BF-06-0-2"
+  },
+  {
+   "t0": 69.97,
+   "seconds": 2.03,
+   "kind": "close",
+   "label": "NIKO · CU-BF-06-0-3"
+  },
+  {
+   "t0": 72,
+   "seconds": 1.811,
+   "kind": "close",
+   "label": "MARA · CU-BF-06-0-4"
+  },
+  {
+   "t0": 73.811,
+   "seconds": 4.189,
+   "kind": "wide",
+   "label": "BF-06"
+  },
+  {
+   "t0": 78,
+   "seconds": 1.31,
+   "kind": "close",
+   "label": "NIKO · CU-BF-07-0-0"
+  },
+  {
+   "t0": 79.31,
+   "seconds": 1.261,
+   "kind": "close",
+   "label": "MARA · CU-BF-07-0-1"
+  },
+  {
+   "t0": 80.571,
+   "seconds": 1.429,
+   "kind": "wide",
+   "label": "BF-07"
+  },
+  {
+   "t0": 82,
+   "seconds": 7,
+   "kind": "wide",
+   "label": "C03"
+  },
+  {
+   "t0": 89,
+   "seconds": 6,
+   "kind": "wide",
+   "label": "BF-08"
+  },
+  {
+   "t0": 95,
+   "seconds": 1.205,
+   "kind": "close",
+   "label": "NIKO · CU-BF-09-0-0"
+  },
+  {
+   "t0": 96.205,
+   "seconds": 1.165,
+   "kind": "close",
+   "label": "MARA · CU-BF-09-0-1"
+  },
+  {
+   "t0": 97.37,
+   "seconds": 0.94,
+   "kind": "close",
+   "label": "NIKO · CU-BF-09-0-2"
+  },
+  {
+   "t0": 98.31,
+   "seconds": 2.381,
+   "kind": "close",
+   "label": "MARA · CU-BF-09-0-3"
+  },
+  {
+   "t0": 100.691,
+   "seconds": 5.309,
+   "kind": "wide",
+   "label": "BF-09"
+  },
+  {
+   "t0": 106,
+   "seconds": 3.01,
+   "kind": "close",
+   "label": "NIKO · CU-BF-10-0-0"
+  },
+  {
+   "t0": 109.01,
+   "seconds": 3.395,
+   "kind": "close",
+   "label": "MARA · CU-BF-10-0-1"
+  },
+  {
+   "t0": 112.405,
+   "seconds": 2.03,
+   "kind": "close",
+   "label": "NIKO · CU-BF-10-0-2"
+  },
+  {
+   "t0": 114.435,
+   "seconds": 3.336,
+   "kind": "close",
+   "label": "MARA · CU-BF-10-0-3"
+  },
+  {
+   "t0": 117.771,
+   "seconds": 4.729,
+   "kind": "wide",
+   "label": "BF-10"
+  },
+  {
+   "t0": 122.5,
+   "seconds": 2.375,
+   "kind": "close",
+   "label": "NIKO · CU-BF-11-0-0"
+  },
+  {
+   "t0": 124.875,
+   "seconds": 1.775,
+   "kind": "close",
+   "label": "MARA · CU-BF-11-0-1"
+  },
+  {
+   "t0": 126.65,
+   "seconds": 1.885,
+   "kind": "close",
+   "label": "NIKO · CU-BF-11-0-2"
+  },
+  {
+   "t0": 128.535,
+   "seconds": 0.95,
+   "kind": "close",
+   "label": "MARA · CU-BF-11-0-3"
+  },
+  {
+   "t0": 129.485,
+   "seconds": 1.855,
+   "kind": "close",
+   "label": "NIKO · CU-BF-11-0-4"
+  },
+  {
+   "t0": 131.34,
+   "seconds": 1.02,
+   "kind": "close",
+   "label": "MARA · CU-BF-11-0-5"
+  },
+  {
+   "t0": 132.36,
+   "seconds": 3.551,
+   "kind": "close",
+   "label": "NIKO · CU-BF-11-0-6"
+  },
+  {
+   "t0": 135.911,
+   "seconds": 2.589,
+   "kind": "wide",
+   "label": "BF-11"
+  },
+  {
+   "t0": 138.5,
+   "seconds": 1.645,
+   "kind": "close",
+   "label": "NIKO · CU-BF-12-0-0"
+  },
+  {
+   "t0": 140.145,
+   "seconds": 0.846,
+   "kind": "close",
+   "label": "MARA · CU-BF-12-0-1"
+  },
+  {
+   "t0": 140.991,
+   "seconds": 1.509,
+   "kind": "wide",
+   "label": "BF-12"
+  },
+  {
+   "t0": 142.5,
+   "seconds": 33,
+   "kind": "wide",
+   "label": "BF-13"
+  },
+  {
+   "t0": 175.5,
+   "seconds": 4,
+   "kind": "wide",
+   "label": "BF-14"
+  },
+  {
+   "t0": 179.5,
+   "seconds": 1.851,
+   "kind": "close",
+   "label": "MARA · CU-BF-15-0-0"
+  },
+  {
+   "t0": 181.351,
+   "seconds": 1.149,
+   "kind": "wide",
+   "label": "BF-15"
+  },
+  {
+   "t0": 182.5,
+   "seconds": 5,
+   "kind": "wide",
+   "label": "BF-16"
+  },
+  {
+   "t0": 187.5,
+   "seconds": 6.5,
+   "kind": "wide",
+   "label": "C04"
+  },
+  {
+   "t0": 194,
+   "seconds": 1.99,
+   "kind": "close",
+   "label": "IONA · CU-BF-17-0-0"
+  },
+  {
+   "t0": 195.99,
+   "seconds": 1.85,
+   "kind": "close",
+   "label": "MARA · CU-BF-17-0-1"
+  },
+  {
+   "t0": 197.84,
+   "seconds": 2.775,
+   "kind": "close",
+   "label": "IONA · CU-BF-17-0-2"
+  },
+  {
+   "t0": 200.615,
+   "seconds": 1.62,
+   "kind": "close",
+   "label": "MARA · CU-BF-17-0-3"
+  },
+  {
+   "t0": 202.235,
+   "seconds": 2.856,
+   "kind": "close",
+   "label": "IONA · CU-BF-17-0-4"
+  },
+  {
+   "t0": 205.091,
+   "seconds": 3.909,
+   "kind": "wide",
+   "label": "BF-17"
+  },
+  {
+   "t0": 209,
+   "seconds": 1.785,
+   "kind": "close",
+   "label": "IONA · CU-BF-18-0-0"
+  },
+  {
+   "t0": 210.785,
+   "seconds": 2.01,
+   "kind": "close",
+   "label": "MARA · CU-BF-18-0-1"
+  },
+  {
+   "t0": 212.795,
+   "seconds": 1.115,
+   "kind": "close",
+   "label": "IONA · CU-BF-18-0-2"
+  },
+  {
+   "t0": 213.91,
+   "seconds": 2.275,
+   "kind": "close",
+   "label": "MARA · CU-BF-18-0-3"
+  },
+  {
+   "t0": 216.185,
+   "seconds": 1.906,
+   "kind": "close",
+   "label": "IONA · CU-BF-18-0-4"
+  },
+  {
+   "t0": 218.091,
+   "seconds": 4.409,
+   "kind": "wide",
+   "label": "BF-18"
+  },
+  {
+   "t0": 222.5,
+   "seconds": 2.32,
+   "kind": "close",
+   "label": "IONA · CU-BF-19-0-0"
+  },
+  {
+   "t0": 224.82,
+   "seconds": 1.695,
+   "kind": "close",
+   "label": "NIKO · CU-BF-19-0-1"
+  },
+  {
+   "t0": 226.515,
+   "seconds": 2.015,
+   "kind": "close",
+   "label": "IONA · CU-BF-19-0-2"
+  },
+  {
+   "t0": 228.53,
+   "seconds": 3.061,
+   "kind": "close",
+   "label": "NIKO · CU-BF-19-0-3"
+  },
+  {
+   "t0": 231.591,
+   "seconds": 2.909,
+   "kind": "wide",
+   "label": "BF-19"
+  },
+  {
+   "t0": 234.5,
+   "seconds": 3.5,
+   "kind": "wide",
+   "label": "BF-20"
+  },
+  {
+   "t0": 238,
+   "seconds": 3.251,
+   "kind": "close",
+   "label": "NIKO · CU-BF-21-0-0"
+  },
+  {
+   "t0": 241.251,
+   "seconds": 4.749,
+   "kind": "wide",
+   "label": "BF-21"
+  },
+  {
+   "t0": 246,
+   "seconds": 12.39,
+   "kind": "close",
+   "label": "IONA · CU-BF-22-0-0"
+  },
+  {
+   "t0": 258.39,
+   "seconds": 0.995,
+   "kind": "close",
+   "label": "MARA · CU-BF-22-0-1"
+  },
+  {
+   "t0": 259.385,
+   "seconds": 2.626,
+   "kind": "close",
+   "label": "IONA · CU-BF-22-0-2"
+  },
+  {
+   "t0": 262.011,
+   "seconds": 3.989,
+   "kind": "wide",
+   "label": "BF-22"
+  },
+  {
+   "t0": 266,
+   "seconds": 4.5,
+   "kind": "wide",
+   "label": "BF-23"
+  },
+  {
+   "t0": 270.5,
+   "seconds": 3.745,
+   "kind": "close",
+   "label": "IONA · CU-BF-24-0-0"
+  },
+  {
+   "t0": 274.245,
+   "seconds": 2.026,
+   "kind": "close",
+   "label": "NIKO · CU-BF-24-0-1"
+  },
+  {
+   "t0": 276.271,
+   "seconds": 2.229,
+   "kind": "wide",
+   "label": "BF-24"
+  },
+  {
+   "t0": 278.5,
+   "seconds": 1.22,
+   "kind": "close",
+   "label": "MARA · CU-BF-25-0-0"
+  },
+  {
+   "t0": 279.72,
+   "seconds": 1.625,
+   "kind": "close",
+   "label": "NIKO · CU-BF-25-0-1"
+  },
+  {
+   "t0": 281.345,
+   "seconds": 1.486,
+   "kind": "close",
+   "label": "MARA · CU-BF-25-0-2"
+  },
+  {
+   "t0": 282.831,
+   "seconds": 5.669,
+   "kind": "wide",
+   "label": "BF-25"
+  },
+  {
+   "t0": 288.5,
+   "seconds": 1.695,
+   "kind": "close",
+   "label": "MARA · CU-BF-26-0-0"
+  },
+  {
+   "t0": 290.195,
+   "seconds": 1.115,
+   "kind": "close",
+   "label": "IONA · CU-BF-26-0-1"
+  },
+  {
+   "t0": 291.31,
+   "seconds": 1.465,
+   "kind": "close",
+   "label": "MARA · CU-BF-26-0-2"
+  },
+  {
+   "t0": 292.775,
+   "seconds": 1.736,
+   "kind": "close",
+   "label": "IONA · CU-BF-26-0-3"
+  },
+  {
+   "t0": 294.511,
+   "seconds": 4.989,
+   "kind": "wide",
+   "label": "BF-26"
+  },
+  {
+   "t0": 299.5,
+   "seconds": 1.735,
+   "kind": "close",
+   "label": "MARA · CU-BF-27-0-0"
+  },
+  {
+   "t0": 301.235,
+   "seconds": 1.365,
+   "kind": "close",
+   "label": "IONA · CU-BF-27-0-1"
+  },
+  {
+   "t0": 302.6,
+   "seconds": 1.46,
+   "kind": "close",
+   "label": "MARA · CU-BF-27-0-2"
+  },
+  {
+   "t0": 304.06,
+   "seconds": 1.81,
+   "kind": "close",
+   "label": "IONA · CU-BF-27-0-3"
+  },
+  {
+   "t0": 305.87,
+   "seconds": 2.395,
+   "kind": "close",
+   "label": "MARA · CU-BF-27-0-4"
+  },
+  {
+   "t0": 308.265,
+   "seconds": 2.246,
+   "kind": "close",
+   "label": "IONA · CU-BF-27-0-5"
+  },
+  {
+   "t0": 310.511,
+   "seconds": 3.989,
+   "kind": "wide",
+   "label": "BF-27"
+  },
+  {
+   "t0": 314.5,
+   "seconds": 1.99,
+   "kind": "close",
+   "label": "NIKO · CU-BF-28-0-0"
+  },
+  {
+   "t0": 316.49,
+   "seconds": 1.185,
+   "kind": "close",
+   "label": "MARA · CU-BF-28-0-1"
+  },
+  {
+   "t0": 317.675,
+   "seconds": 0.996,
+   "kind": "close",
+   "label": "NIKO · CU-BF-28-0-2"
+  },
+  {
+   "t0": 318.671,
+   "seconds": 1.329,
+   "kind": "wide",
+   "label": "BF-28"
+  },
+  {
+   "t0": 320,
+   "seconds": 2.035,
+   "kind": "close",
+   "label": "NIKO · CU-BF-29-0-0"
+  },
+  {
+   "t0": 322.035,
+   "seconds": 3.456,
+   "kind": "close",
+   "label": "IONA · CU-BF-29-0-1"
+  },
+  {
+   "t0": 325.491,
+   "seconds": 0.5,
+   "kind": "wide",
+   "label": "BF-29"
+  },
+  {
+   "t0": 325.991,
+   "seconds": 1.605,
+   "kind": "close",
+   "label": "MARA · CU-BF-29-1-0"
+  },
+  {
+   "t0": 327.596,
+   "seconds": 1.446,
+   "kind": "close",
+   "label": "IONA · CU-BF-29-1-1"
+  },
+  {
+   "t0": 329.042,
+   "seconds": 4.458,
+   "kind": "wide",
+   "label": "BF-29"
+  },
+  {
+   "t0": 333.5,
+   "seconds": 3.855,
+   "kind": "close",
+   "label": "NIKO · CU-BF-30-0-0"
+  },
+  {
+   "t0": 337.355,
+   "seconds": 2.836,
+   "kind": "close",
+   "label": "IONA · CU-BF-30-0-1"
+  },
+  {
+   "t0": 340.191,
+   "seconds": 3.309,
+   "kind": "wide",
+   "label": "BF-30"
+  },
+  {
+   "t0": 343.5,
+   "seconds": 1.465,
+   "kind": "close",
+   "label": "NIKO · CU-BF-31-0-0"
+  },
+  {
+   "t0": 344.965,
+   "seconds": 1.546,
+   "kind": "close",
+   "label": "MARA · CU-BF-31-0-1"
+  },
+  {
+   "t0": 346.511,
+   "seconds": 0.5,
+   "kind": "wide",
+   "label": "BF-31"
+  },
+  {
+   "t0": 347.011,
+   "seconds": 3.571,
+   "kind": "close",
+   "label": "IONA · CU-BF-31-1-0"
+  },
+  {
+   "t0": 350.582,
+   "seconds": 0.918,
+   "kind": "wide",
+   "label": "BF-31"
+  },
+  {
+   "t0": 351.5,
+   "seconds": 1.35,
+   "kind": "close",
+   "label": "NIKO · CU-BF-32-0-0"
+  },
+  {
+   "t0": 352.85,
+   "seconds": 0.855,
+   "kind": "close",
+   "label": "MARA · CU-BF-32-0-1"
+  },
+  {
+   "t0": 353.705,
+   "seconds": 1.035,
+   "kind": "close",
+   "label": "NIKO · CU-BF-32-0-2"
+  },
+  {
+   "t0": 354.74,
+   "seconds": 0.83,
+   "kind": "close",
+   "label": "MARA · CU-BF-32-0-3"
+  },
+  {
+   "t0": 355.57,
+   "seconds": 1.821,
+   "kind": "close",
+   "label": "NIKO · CU-BF-32-0-4"
+  },
+  {
+   "t0": 357.391,
+   "seconds": 4.109,
+   "kind": "wide",
+   "label": "BF-32"
+  },
+  {
+   "t0": 361.5,
+   "seconds": 1.63,
+   "kind": "close",
+   "label": "MARA · CU-BF-33-0-0"
+  },
+  {
+   "t0": 363.13,
+   "seconds": 2.181,
+   "kind": "close",
+   "label": "IONA · CU-BF-33-0-1"
+  },
+  {
+   "t0": 365.311,
+   "seconds": 1.689,
+   "kind": "wide",
+   "label": "BF-33"
+  },
+  {
+   "t0": 367,
+   "seconds": 5,
+   "kind": "wide",
+   "label": "BF-34"
+  },
+  {
+   "t0": 372,
+   "seconds": 2.611,
+   "kind": "close",
+   "label": "PROJECTED MARA · CU-BF-35-0-0"
+  },
+  {
+   "t0": 374.611,
+   "seconds": 3.389,
+   "kind": "wide",
+   "label": "BF-35"
+  },
+  {
+   "t0": 378,
+   "seconds": 3.5,
+   "kind": "wide",
+   "label": "BF-36"
+  },
+  {
+   "t0": 381.5,
+   "seconds": 4,
+   "kind": "wide",
+   "label": "BF-37"
+  },
+  {
+   "t0": 385.5,
+   "seconds": 5.5,
+   "kind": "wide",
+   "label": "BF-38"
+  },
+  {
+   "t0": 391,
+   "seconds": 2.17,
+   "kind": "wide",
+   "label": "BF-39"
+  },
+  {
+   "t0": 393.17,
+   "seconds": 1.001,
+   "kind": "close",
+   "label": "NIKO · CU-BF-39-0-1"
+  },
+  {
+   "t0": 394.171,
+   "seconds": 2.329,
+   "kind": "wide",
+   "label": "BF-39"
+  },
+  {
+   "t0": 396.5,
+   "seconds": 2.811,
+   "kind": "close",
+   "label": "THE GIRL · CU-BF-40-0-0"
+  },
+  {
+   "t0": 399.311,
+   "seconds": 2.689,
+   "kind": "wide",
+   "label": "BF-40"
+  },
+  {
+   "t0": 402,
+   "seconds": 7,
+   "kind": "wide",
+   "label": "C05"
+  }
+ ]
+}

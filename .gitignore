@@ -6,3 +6,5 @@ audio/scenes/*.wav
 audio/master.wav
 film/.tmp/
 .claude-serve.txt
+
+film/.tmpclose/
