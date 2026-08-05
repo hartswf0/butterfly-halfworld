@@ -19,7 +19,16 @@ const PAPER="#f4f1e8", INK="#141210";
 function field(g,W,H){ g.fillStyle=PAPER; g.fillRect(0,0,W,H); }
 function txt(g,s,x,y,size,{align="center",weight=400,track=0,ink=INK}={}){
   g.save(); g.fillStyle=ink; g.textAlign=align; g.textBaseline="middle";
-  g.font=`${weight} ${size}px "Iowan Old Style", Georgia, serif`;
+  /* PASS 3. Body copy on the cards was set in a serif, and a serif is made of
+     hairline strokes — precisely the thing a 3.4px dot lattice cannot render.
+     The first pass lost it at 23px; the second reset it at 26-52px and it was
+     STILL dissolving at 36. The size was never the whole problem: the family
+     was. Above 44px a serif has enough meat on it to survive the halftone and
+     it earns the display line its authority; below that it is a rumour.
+     So the family is chosen by size, and nothing small is ever a serif. */
+  g.font = size >= 44
+    ? `${weight} ${size}px "Iowan Old Style", Georgia, serif`
+    : `${Math.max(500, weight)} ${size}px Helvetica, Arial, sans-serif`;
   if(track){ // manual tracking, because letter-spacing is not on canvas
     const chars=[...s]; const wid=chars.reduce((n,c)=>n+g.measureText(c).width+track,0)-track;
     let cx = align==="center" ? x-wid/2 : x;

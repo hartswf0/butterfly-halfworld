@@ -2,7 +2,7 @@
   "id": "C02",
   "mod": "scenes/C02.mjs",
   "ok": true,
-  "t": "2026-08-05T01:02:49.836Z",
+  "t": "2026-08-05T03:27:54.297Z",
   "motion": "ADVANCE",
   "seconds": 8,
   "loopClosed": false,
@@ -17,36 +17,33 @@
     "nominalSec": 8,
     "webmSec": 8,
     "gifSec": 8,
-    "renderWallSec": 2.8
+    "renderWallSec": 2.3
   },
   "size": {
     "w": 1120,
     "h": 760,
     "pipeline": "MESH",
-    "card": true
+    "card": false
   },
   "loop": {
-    "wrapChangedPct": 4.0296,
-    "wrapMeanAbs": 7.624,
-    "meanStepChangedPct": 0.043,
-    "maxStepChangedPct": 1.8177,
-    "meanStepMeanAbs": 0.0803,
-    "ratio": 93.712,
+    "wrapChangedPct": 4.0446,
+    "wrapMeanAbs": 7.6496,
+    "meanStepChangedPct": 0.0432,
+    "maxStepChangedPct": 1.8242,
+    "meanStepMeanAbs": 0.0806,
+    "ratio": 93.625,
     "verdict": "n/a (not a CYCLE)"
   },
   "files": {
     "webm": {
       "path": "renders/motion/C02.webm",
-      "bytes": 69023
+      "bytes": 60995
     },
     "gif": {
       "path": "renders/motion/C02.gif",
-      "bytes": 44014
+      "bytes": 42329
     },
-    "contact": {
-      "path": "renders/motion/C02-contact.png",
-      "bytes": 110241
-    },
+    "contact": null,
     "frames": null
   },
   "encodeErrors": [],

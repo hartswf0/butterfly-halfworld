@@ -1,8 +1,8 @@
 {
- "built": "2026-08-05T01:03:40.323Z",
+ "built": "2026-08-05T03:29:52.938Z",
  "provisional": false,
  "fps": 12,
- "totalSeconds": 409,
+ "totalSeconds": 476.6,
  "measured": 33,
  "estimated": 0,
  "scenes": [
@@ -727,6 +727,18 @@
    "loops": 1,
    "voiceSec": 0,
    "duration": 7
+  },
+  {
+   "id": "CREDITS",
+   "card": true,
+   "why": "the end roll: who the film stands on, where it departs from them, and which of its facts is contested",
+   "title": "CREDITS",
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/CREDITS.webm",
+   "loopSec": 67.6,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 67.6
   }
  ]
 }

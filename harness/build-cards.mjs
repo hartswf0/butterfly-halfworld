@@ -62,7 +62,16 @@ const PAPER="#f4f1e8", INK="#141210";
 function field(g,W,H){ g.fillStyle=PAPER; g.fillRect(0,0,W,H); }
 function txt(g,s,x,y,size,{align="center",weight=400,track=0,ink=INK}={}){
   g.save(); g.fillStyle=ink; g.textAlign=align; g.textBaseline="middle";
-  g.font=\`\${weight} \${size}px "Iowan Old Style", Georgia, serif\`;
+  /* PASS 3. Body copy on the cards was set in a serif, and a serif is made of
+     hairline strokes — precisely the thing a 3.4px dot lattice cannot render.
+     The first pass lost it at 23px; the second reset it at 26-52px and it was
+     STILL dissolving at 36. The size was never the whole problem: the family
+     was. Above 44px a serif has enough meat on it to survive the halftone and
+     it earns the display line its authority; below that it is a rumour.
+     So the family is chosen by size, and nothing small is ever a serif. */
+  g.font = size >= 44
+    ? \`\${weight} \${size}px "Iowan Old Style", Georgia, serif\`
+    : \`\${Math.max(500, weight)} \${size}px Helvetica, Arial, sans-serif\`;
   if(track){ // manual tracking, because letter-spacing is not on canvas
     const chars=[...s]; const wid=chars.reduce((n,c)=>n+g.measureText(c).width+track,0)-track;
     let cx = align==="center" ? x-wid/2 : x;
@@ -130,7 +139,7 @@ export function draw(g,W,H,s){
     "he was a butterfly,",
     "or a butterfly dreaming he was a man.",
   ];
-  const size=Math.max(34,W*0.038), lead=size*1.55;
+  const size=Math.max(36,W*0.040), lead=size*1.55;
   L.forEach((l,i)=>{ if(l) txt(g,l,cx,H*0.365+i*lead,size,{}); });
   // the film's own claim, set against it
   const y=H*0.885;
@@ -171,7 +180,7 @@ export function draw(g,W,H,s){
     mono(g,"SUGAR",cx-sc*0.66,H*0.50-sc*0.64,Math.max(28,W*0.028),{});
     mono(g,"SUGAR",cx+sc*0.66,H*0.50-sc*0.64,Math.max(28,W*0.028),{});
     mono(g,"+ LAVENDER",cx-sc*0.66,H*0.50-sc*0.50,Math.max(24,W*0.024),{});
-    txt(g,"Both arms feed you.",cx,H*0.775,Math.max(36,W*0.040),{});
+    txt(g,"Both arms feed you.",cx,H*0.775,Math.max(38,W*0.042),{});
   }
   if(st>=2){
     const bw=W*0.055, by=H*0.70, bh=H*0.13;
@@ -222,8 +231,8 @@ export function draw(g,W,H,s){
   }
   g.restore();
 
-  txt(g,"The first was a killing agent.",cx,H*0.700,Math.max(36,W*0.040),{});
-  txt(g,"A child chose the kinder smell.",cx,H*0.775,Math.max(36,W*0.040),{});
+  txt(g,"The first was a killing agent.",cx,H*0.700,Math.max(38,W*0.042),{});
+  txt(g,"A child chose the kinder smell.",cx,H*0.775,Math.max(38,W*0.042),{});
   rule(g,W*0.20,W*0.80,H*0.845,2);
   mono(g,"IT IS THE ONE THAT HURT THEM",cx,H*0.920,Math.max(32,W*0.033),{});
 }
@@ -256,8 +265,8 @@ export function draw(g,W,H,s){
   mono(g,"1951",x0,y0+H*0.105,Math.max(26,W*0.026),{});
   mono(g,"2024",x1,y0+H*0.105,Math.max(26,W*0.026),{});
 
-  txt(g,"Moths remembered a smell",cx,H*0.660,Math.max(36,W*0.040),{});
-  txt(g,"they had learned as caterpillars.",cx,H*0.735,Math.max(36,W*0.040),{});
+  txt(g,"Moths remembered a smell",cx,H*0.660,Math.max(38,W*0.042),{});
+  txt(g,"they had learned as caterpillars.",cx,H*0.735,Math.max(38,W*0.042),{});
   rule(g,W*0.22,W*0.78,H*0.815,2);
   mono(g,"NOBODY BELIEVED IT",cx,H*0.895,Math.max(32,W*0.033),{});
 }
@@ -271,10 +280,10 @@ export function draw(g,W,H,s){
   field(g,W,H);
   const cx=W*0.5;
   mono(g,"物化",cx,H*0.28,Math.max(70,W*0.095),{weight:600});
-  txt(g,"wùhuà — the transformation of things",cx,H*0.435,Math.max(34,W*0.038),{});
+  txt(g,"wùhuà — the transformation of things",cx,H*0.435,Math.max(36,W*0.040),{});
   rule(g,W*0.30,W*0.70,H*0.50,1);
-  txt(g,"It is also the word",cx,H*0.585,Math.max(36,W*0.040),{});
-  txt(g,"for what a chrysalis does.",cx,H*0.655,Math.max(36,W*0.040),{});
+  txt(g,"It is also the word",cx,H*0.585,Math.max(38,W*0.042),{});
+  txt(g,"for what a chrysalis does.",cx,H*0.655,Math.max(38,W*0.042),{});
 
   // one empty husk, split along its side, breathing very slightly
   const bx=cx, by=H*0.86, r=Math.min(W,H)*0.052*(1+0.02*s.h.breath);

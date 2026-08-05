@@ -53,7 +53,13 @@ import { execFileSync } from "node:child_process";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const FILM = path.join(ROOT, "film");
 const CUT = JSON.parse(fs.readFileSync(path.join(FILM, "cut.json"), "utf8"));
-const CLOSE = JSON.parse(fs.readFileSync(path.join(FILM, "closeups.json"), "utf8"));
+/* PASS 2. This used to read film/closeups.json — all ninety available faces —
+   and cut to every one of them, which put 45% of the picture on a talking head
+   and took the film away from its own images to do it. It now reads
+   film/direction.json, which is the THIRTEEN that were argued for one at a
+   time. The generator still makes ninety; choosing among them is a different
+   job and belongs to harness/direct.mjs. */
+const CLOSE = JSON.parse(fs.readFileSync(path.join(FILM, "direction.json"), "utf8"));
 const TAKES = JSON.parse(fs.readFileSync(path.join(ROOT, "audio", "line-timing.json"), "utf8"));
 const PLAN_ONLY = process.argv.includes("--plan");
 const FPS = CUT.fps || 12;
@@ -77,7 +83,7 @@ for (const [scene, list] of Object.entries(takesBy)) {
   for (const t of list) { takeStart[t.id] = off; off += t.duration + TAKE_GAP; }
 }
 const unitsBy = {};
-for (const u of CLOSE.units) if (u.face) (unitsBy[u.scene] ||= []).push(u);
+for (const u of CLOSE.kept) (unitsBy[u.scene] ||= []).push(u);
 
 /* ---- the timeline ------------------------------------------------------- */
 const segs = [];                          // { src, in, out, kind, label }
@@ -148,6 +154,7 @@ for (const sc of CUT.scenes) {
 /* ---- report ------------------------------------------------------------- */
 console.log(`THE SPEAKING CUT\n`);
 console.log(`  ${CUT.scenes.length} scenes · ${(clock / 60).toFixed(2)} min — the same length as the wide cut`);
+console.log(`  ${CLOSE.kept.length} of ${CLOSE.kept.length + CLOSE.cut.length} available faces were argued for; the rest stay on the image`);
 console.log(`  ${nClose} close-ups · ${(closeSec / 60).toFixed(2)} min of face (${(100 * closeSec / clock).toFixed(1)}% of the film)`);
 console.log(`  ${nWide} wide passages · ${segs.length} cuts in total`);
 const thin = segs.filter((s) => s.thin);

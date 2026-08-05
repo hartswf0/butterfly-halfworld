@@ -250,3 +250,46 @@ export function speechCarriage(env, hz, t, seed = 0) {
 }
 
 export const SPEECH_VERSION = "speech/1.0.0";
+
+/* ---- listenCarriage ------------------------------------------------------
+   A REACTION SHOT is not a close-up with the mouth switched off.
+
+   The face on screen is not making the sound, so nothing about it can be
+   derived from its own voice — there isn't one. What it CAN be derived from is
+   the envelope of the person who IS talking, because that is what the listener
+   is responding to, and responding is the only thing the shot contains.
+
+   Three things follow, and the third is the one that makes it read:
+
+   1. THE LAG IS LONG. Speech carriage lags the voice by one frame; a listener
+      lags it by a third of a second, because they have to hear the thing before
+      it can move them. Set this too short and the listener appears to be
+      anticipating the line, which reads as an actor who has read the script.
+
+   2. THE MOUTH STAYS SHUT, but not rigid — a held closure with a slow
+      compression cycle. A frozen mouth is a mannequin; a mouth doing nothing
+      is a person waiting for their turn.
+
+   3. THE BLINK IS SUPPRESSED WHILE THE VOICE IS LOUD. People do not blink
+      through the part they are concentrating on; they blink in the gaps, and
+      they blink at the END of a difficult sentence. That single correlation
+      does more to make a face look like it is listening than any amount of
+      brow movement, and it costs one term.  */
+export function listenCarriage(env, hz, t, seed = 0) {
+  const now = clamp01(envelopeAt(env, hz, t));
+  const heard = clamp01(envelopeAt(env, hz, t - 0.33));      // what has landed
+  const before = clamp01(envelopeAt(env, hz, t - 0.90));     // what it followed
+  const rising = clamp01((heard - before) * 1.6);
+  return {
+    // a small nod on the beats that land, arriving a third of a second late
+    pitch: smooth(heard) * 0.030 + rising * 0.022,
+    yaw: Math.sin(t * 0.62 + seed * 1.9) * 0.022,
+    roll: Math.sin(t * 0.47 + seed * 1.1) * 0.014,
+    brow: clamp01((heard - 0.55) * 1.8) * 0.42,
+    chest: 0.22 + 0.20 * heard,
+    // the mouth: shut, with a slow press that is not a held pose
+    press: 0.22 + 0.12 * Math.sin(t * 0.8 + seed),
+    // 1 while they are concentrating, 0 in the gaps — multiply your blink by it
+    blinkGate: 1 - smooth(clamp01(now * 1.4)),
+  };
+}

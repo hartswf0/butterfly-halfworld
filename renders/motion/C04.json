@@ -2,7 +2,7 @@
   "id": "C04",
   "mod": "scenes/C04.mjs",
   "ok": true,
-  "t": "2026-08-05T01:02:56.587Z",
+  "t": "2026-08-05T03:27:59.243Z",
   "motion": "SWEEP",
   "seconds": 6.5,
   "loopClosed": false,
@@ -17,13 +17,13 @@
     "nominalSec": 6.5,
     "webmSec": 6.5,
     "gifSec": 6.5,
-    "renderWallSec": 2.6
+    "renderWallSec": 2.3
   },
   "size": {
     "w": 1120,
     "h": 760,
     "pipeline": "MESH",
-    "card": true
+    "card": false
   },
   "loop": {
     "wrapChangedPct": 2.1884,
@@ -37,16 +37,13 @@
   "files": {
     "webm": {
       "path": "renders/motion/C04.webm",
-      "bytes": 107142
+      "bytes": 100317
     },
     "gif": {
       "path": "renders/motion/C04.gif",
-      "bytes": 93057
+      "bytes": 70150
     },
-    "contact": {
-      "path": "renders/motion/C04-contact.png",
-      "bytes": 136326
-    },
+    "contact": null,
     "frames": null
   },
   "encodeErrors": [],

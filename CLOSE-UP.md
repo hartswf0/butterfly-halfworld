@@ -202,3 +202,100 @@ node harness/render-motion.mjs scenes/_test-visemes.mjs --contact --step 1
 node harness/render-motion.mjs scenes/_test-cast.mjs --contact --step 1
 # can you tell five faces apart at the close framing? (this is the sheet that caught the anvil)
 ```
+
+---
+
+# PASS 2 — "many of the most valuable shots have been replaced with close ups"
+
+Correct, and it was a directorial failure, not a technical one. The first speaking cut gave a
+close-up to **every one of the ninety speaker runs**, because that is a rule and rules are easy to
+apply ninety times. 45% of the picture became a talking head, and it got there by cutting away from
+a green line gathering over itself, a wall of dated husks emptying left to right, and 1945 being
+replaced dot by dot by thirty minutes ago. Those images are the reason the film exists.
+
+### the law I should have used, and it was in the repo already
+
+> **A close-up may only interrupt a motion that comes round again.**
+
+CYCLE repeats and HOLD persists — leave one and come back and it is still doing what it was doing.
+**TRACE, SWEEP, DISSOLVE, ADVANCE, TRANSFER and BREAK happen once and accumulate.** Their content is
+the difference between the beginning and the end, so cutting away means the audience misses the only
+time it happens. Sixteen scenes carry one of those and were never candidates.
+
+MOTION-BRIEF already said this about stills — *"if it is legible in one frame, you have drawn the
+wrong thing"* — and the same sentence governs the cut.
+
+### the law says permitted, not deserved
+
+That part is a reading of the script, not a rule, so `harness/direct.mjs` carries **fifteen authored
+turns**, each with the line it is for and the argument for it. Thirteen survive the budget.
+**7.1% of the picture is now a face**, down from 45%.
+
+Two are **reactions** — the camera on the person receiving the line — which is the shot the film most
+needed and had none of. "I remembered it" is not interesting on the face of the woman who believes
+it; it is interesting on the face of the man who has to decide what to do with it. A reaction is a
+genuinely different asset (`listenCarriage`): mouth shut, head lagging the voice by a third of a
+second rather than one frame, and **the blink suppressed while the other voice is loud**, because
+people blink in the gaps, not through the part they are concentrating on. It also gets a **hold** —
+there is no lip-sync to protect, so it stays on screen after the line lands.
+
+**My own ranking was the bug twice.** The budget takes turns in authoring order, and I had listed
+lesser lines above both "Then why are we looking at a photograph from 1945?" and the film's climax
+reaction. Both were dropped by my own ordering. If the order is the ranking, the order has to be
+written down correctly.
+
+---
+
+# SOUND
+
+**Score** (`build-score.mjs`) — the film had none. The idea: *the score and the room tone are the same
+material at different densities.* Every room already hums; `room_lab` is mains at 60Hz. So the score
+is rooted on **60Hz — the frequency the laboratory hums at** — and is what happens when the hum
+resolves into pitch. There is no moment where music starts, which is also why a cut cannot break it.
+
+The material is the film's own: the **pulse** is the butterfly's tapping at half rate (60bpm); the
+**theme** is the chrysalis wall's dates, 1951→2024, read left to right as an ascending line; the
+**mark** is four notes that land one step from where they started and never close. The
+**substitution** cue obeys the picture's dissolve law — the two chords exchange *harmonic by
+harmonic* on an ordered schedule rather than cross-fading, so you hear one substance replacing
+another. The film opens in **Aeolian** and ends in **Dorian**: one note different, which is what a
+chrysalis is. 14 cues placed; **33 scenes carry no music at all.**
+
+**Foley** (`build-foley.mjs`) — 19 events. The old library was 13 beds and one pair: a photograph of
+a room. A fire door opens in BF-15 — the scene whose *entire subject* is a smell crossing the gap
+under it — and it was silent. So: doors, steps, a canister, a tin with something alive in it, film
+sprockets, a CRT's line-scan whistle, breath. 34 placements.
+
+**The mix** (`build-master.mjs`) — the film's first stereo field, replacing twenty lines that added
+two mono arrays together.
+
+- **Where everyone sits.** Distinct prebuilt voices were already assigned and it did not help,
+  because the ear identifies a speaker from *where they are* first and timbre second. Mara **left**,
+  Niko **right**, Iona **centre** — fixed for the whole film, and the close-ups' eye lines come from
+  the same table.
+- **Whether they are present.** The other half of "voice vs speaker" was a distinction the film never
+  made: in-room voices go through the **location's early reflections** (tiled lab, brick mill, open
+  lot, concrete facility); voice-overs get **none**. You can hear the mill in Iona's voice in BF-17
+  and hear that there is no room at all around her in BF-13. `(O.S.)` is low-passed at 1.2kHz because
+  it is through a door; PROJECTED MARA is band-limited 300–3000Hz with flutter because she is an
+  optical track. This is possible only because the line boundaries were measured — a two-speaker take
+  is now placed **line by line**.
+- **The room does not stop at a cut.** Beds run per contiguous *location block*, cross-fading only
+  where the place actually changes. Framing cards break the blocks deliberately: a card is outside
+  the film, and the silence is a caesura.
+
+---
+
+# CREDITS
+
+`build-credits.mjs` → a 67.6s end roll stating what the film stands on, exactly where it departs, and
+which of its facts is contested — the things the film cannot say for itself.
+
+**The type law, learned for the third time:** nothing under 30px and **no serif**. A serif is made of
+hairlines and a 3.4px dot lattice cannot render a hairline. The framing cards lost their body copy to
+this twice; the fix there was `size >= 44 ? serif : sans`, because above 44px a serif has enough meat
+to survive the halftone and below it is a rumour.
+
+**And the same lesson again:** the first roll was 66 lines and **two minutes on a film that runs
+under seven**. A constraint asks you to say *less*, and I keep answering it by saying the same amount
+more carefully.

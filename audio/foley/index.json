@@ -1,0 +1,138 @@
+{
+ "sr": 24000,
+ "events": [
+  {
+   "id": "step_stone",
+   "sec": 0.9,
+   "peak": 0.406,
+   "rms": 0.0293,
+   "file": "audio/foley/step_stone.wav"
+  },
+  {
+   "id": "step_soft",
+   "sec": 0.9,
+   "peak": 0.208,
+   "rms": 0.014,
+   "file": "audio/foley/step_soft.wav"
+  },
+  {
+   "id": "stairs",
+   "sec": 3.2,
+   "peak": 0.349,
+   "rms": 0.0305,
+   "file": "audio/foley/stairs.wav"
+  },
+  {
+   "id": "coat",
+   "sec": 1.1,
+   "peak": 0.062,
+   "rms": 0.0133,
+   "file": "audio/foley/coat.wav"
+  },
+  {
+   "id": "sleeve",
+   "sec": 0.7,
+   "peak": 0.035,
+   "rms": 0.0084,
+   "file": "audio/foley/sleeve.wav"
+  },
+  {
+   "id": "canister",
+   "sec": 2.2,
+   "peak": 0.57,
+   "rms": 0.0858,
+   "file": "audio/foley/canister.wav"
+  },
+  {
+   "id": "tin_set",
+   "sec": 2.4,
+   "peak": 0.424,
+   "rms": 0.0521,
+   "file": "audio/foley/tin_set.wav"
+  },
+  {
+   "id": "glass_set",
+   "sec": 1.6,
+   "peak": 0.339,
+   "rms": 0.0413,
+   "file": "audio/foley/glass_set.wav"
+  },
+  {
+   "id": "paper",
+   "sec": 1.4,
+   "peak": 0.052,
+   "rms": 0.0115,
+   "file": "audio/foley/paper.wav"
+  },
+  {
+   "id": "photo_turn",
+   "sec": 1,
+   "peak": 0.067,
+   "rms": 0.0065,
+   "file": "audio/foley/photo_turn.wav"
+  },
+  {
+   "id": "door_fire",
+   "sec": 3,
+   "peak": 0.423,
+   "rms": 0.048,
+   "file": "audio/foley/door_fire.wav"
+  },
+  {
+   "id": "door_glass",
+   "sec": 2,
+   "peak": 0.25,
+   "rms": 0.0248,
+   "file": "audio/foley/door_glass.wav"
+  },
+  {
+   "id": "monitor",
+   "sec": 6,
+   "peak": 0.032,
+   "rms": 0.0165,
+   "file": "audio/foley/monitor.wav"
+  },
+  {
+   "id": "film_advance",
+   "sec": 3,
+   "peak": 0.142,
+   "rms": 0.0063,
+   "file": "audio/foley/film_advance.wav"
+  },
+  {
+   "id": "shutter_close",
+   "sec": 1.2,
+   "peak": 0.144,
+   "rms": 0.0204,
+   "file": "audio/foley/shutter_close.wav"
+  },
+  {
+   "id": "wind_lot",
+   "sec": 8,
+   "peak": 0.122,
+   "rms": 0.0278,
+   "file": "audio/foley/wind_lot.wav"
+  },
+  {
+   "id": "drip",
+   "sec": 7,
+   "peak": 0.14,
+   "rms": 0.0098,
+   "file": "audio/foley/drip.wav"
+  },
+  {
+   "id": "breath_out",
+   "sec": 1.8,
+   "peak": 0.043,
+   "rms": 0.0097,
+   "file": "audio/foley/breath_out.wav"
+  },
+  {
+   "id": "breath_in",
+   "sec": 1.2,
+   "peak": 0.035,
+   "rms": 0.0068,
+   "file": "audio/foley/breath_in.wav"
+  }
+ ]
+}

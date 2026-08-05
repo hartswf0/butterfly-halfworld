@@ -19,7 +19,16 @@ const PAPER="#f4f1e8", INK="#141210";
 function field(g,W,H){ g.fillStyle=PAPER; g.fillRect(0,0,W,H); }
 function txt(g,s,x,y,size,{align="center",weight=400,track=0,ink=INK}={}){
   g.save(); g.fillStyle=ink; g.textAlign=align; g.textBaseline="middle";
-  g.font=`${weight} ${size}px "Iowan Old Style", Georgia, serif`;
+  /* PASS 3. Body copy on the cards was set in a serif, and a serif is made of
+     hairline strokes — precisely the thing a 3.4px dot lattice cannot render.
+     The first pass lost it at 23px; the second reset it at 26-52px and it was
+     STILL dissolving at 36. The size was never the whole problem: the family
+     was. Above 44px a serif has enough meat on it to survive the halftone and
+     it earns the display line its authority; below that it is a rumour.
+     So the family is chosen by size, and nothing small is ever a serif. */
+  g.font = size >= 44
+    ? `${weight} ${size}px "Iowan Old Style", Georgia, serif`
+    : `${Math.max(500, weight)} ${size}px Helvetica, Arial, sans-serif`;
   if(track){ // manual tracking, because letter-spacing is not on canvas
     const chars=[...s]; const wid=chars.reduce((n,c)=>n+g.measureText(c).width+track,0)-track;
     let cx = align==="center" ? x-wid/2 : x;
@@ -60,8 +69,8 @@ export function draw(g,W,H,s){
   mono(g,"1951",x0,y0+H*0.105,Math.max(26,W*0.026),{});
   mono(g,"2024",x1,y0+H*0.105,Math.max(26,W*0.026),{});
 
-  txt(g,"Moths remembered a smell",cx,H*0.660,Math.max(36,W*0.040),{});
-  txt(g,"they had learned as caterpillars.",cx,H*0.735,Math.max(36,W*0.040),{});
+  txt(g,"Moths remembered a smell",cx,H*0.660,Math.max(38,W*0.042),{});
+  txt(g,"they had learned as caterpillars.",cx,H*0.735,Math.max(38,W*0.042),{});
   rule(g,W*0.22,W*0.78,H*0.815,2);
   mono(g,"NOBODY BELIEVED IT",cx,H*0.895,Math.max(32,W*0.033),{});
 }

@@ -1,0 +1,52 @@
+{
+  "id": "CREDITS",
+  "mod": "scenes/CREDITS.mjs",
+  "ok": true,
+  "t": "2026-08-05T03:28:49.782Z",
+  "motion": "ADVANCE",
+  "seconds": 67.6,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 811,
+    "rendered": 811,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 67.583,
+    "webmSec": 67.583,
+    "gifSec": 67.58,
+    "renderWallSec": 27.7
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 0,
+    "wrapMeanAbs": 0,
+    "meanStepChangedPct": 5.0859,
+    "maxStepChangedPct": 9.5301,
+    "meanStepMeanAbs": 7.993,
+    "ratio": 0,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/CREDITS.webm",
+      "bytes": 24360963
+    },
+    "gif": {
+      "path": "renders/motion/CREDITS.gif",
+      "bytes": 29008288
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

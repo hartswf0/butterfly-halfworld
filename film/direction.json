@@ -1,0 +1,858 @@
+{
+ "built": "2026-08-05T03:18:40.327Z",
+ "law": "a close-up may only interrupt a motion that comes round again (CYCLE, HOLD)",
+ "interruptible": [
+  "CYCLE",
+  "HOLD"
+ ],
+ "minShot": 1.3,
+ "maxPerScene": 4,
+ "maxShare": 0.55,
+ "kept": [
+  {
+   "id": "CU-BF-03-0-4",
+   "scene": "BF-03",
+   "take": "BF-03__0",
+   "who": "NIKO",
+   "face": "niko",
+   "t0": 6.4,
+   "t1": 7.811,
+   "seconds": 1.411,
+   "frames": 17,
+   "lines": 1,
+   "head": 0.4,
+   "tail": 0.28,
+   "src": "renders/motion/CU-BF-03-0-4.webm",
+   "text": "No, it isn't.",
+   "on": "NIKO",
+   "react": false,
+   "why": "the first crack between them. Three exchanges of a procedural correction, and then he refuses her the retreat. It is the moment the scene stops being about the odour.",
+   "line": "No, it isn't.",
+   "motion": "HOLD",
+   "sceneSubject": "two gloved hands inside the box, with nothing left to do",
+   "speaker": "NIKO"
+  },
+  {
+   "id": "CU-BF-05-0-3",
+   "scene": "BF-05",
+   "take": "BF-05__0",
+   "who": "MARA",
+   "face": "mara",
+   "t0": 7.01,
+   "t1": 8.931,
+   "seconds": 1.921,
+   "frames": 23,
+   "lines": 1,
+   "head": 0.26,
+   "tail": 0.28,
+   "src": "renders/motion/CU-BF-05-0-3.webm",
+   "text": "It rejected the premise.",
+   "on": "MARA",
+   "react": false,
+   "why": "the film's thesis, said out loud by a scientist who knows how it sounds. She is choosing to believe an animal declined a question. You have to see her decide it.",
+   "line": "It rejected the premise.",
+   "motion": "HOLD",
+   "sceneSubject": "the closed wings on the white partition, and what is on them",
+   "speaker": "MARA"
+  },
+  {
+   "id": "CU-BF-10-0-3-react-niko",
+   "scene": "BF-10",
+   "take": "BF-10__0",
+   "who": "MARA",
+   "face": "niko",
+   "t0": 8.435,
+   "t1": 13.370958,
+   "seconds": 4.936,
+   "frames": 59,
+   "lines": 2,
+   "head": 0.24,
+   "tail": 0.26,
+   "src": "renders/motion/CU-BF-10-0-3-react-niko.webm",
+   "text": "It was her name. She said she remembered being there.",
+   "on": "NIKO",
+   "react": true,
+   "why": "REACTION. Mara says the film's title claim about her own mother; the shot is on the man hearing it, because his problem — that this is not a claim a person can make — is the audience's problem.",
+   "line": "She said she remembered being there.",
+   "motion": "HOLD",
+   "sceneSubject": "four lines in fountain pen, and the same shape under them",
+   "speaker": "MARA"
+  },
+  {
+   "id": "CU-BF-11-0-6",
+   "scene": "BF-11",
+   "take": "BF-11__0",
+   "who": "NIKO",
+   "face": "niko",
+   "t0": 9.86,
+   "t1": 13.411,
+   "seconds": 3.551,
+   "frames": 43,
+   "lines": 1,
+   "head": 0.28,
+   "tail": 0.38,
+   "src": "renders/motion/CU-BF-11-0-6.webm",
+   "text": "Then why are we looking at a photograph from 1945?",
+   "on": "NIKO",
+   "react": false,
+   "why": "the loop closing on the question it began with, and the only line in the scene that is not a procedure",
+   "line": "Then why are we looking at a photograph from 1945?",
+   "motion": "CYCLE",
+   "sceneSubject": "two people arriving back at the question they started from",
+   "speaker": "NIKO"
+  },
+  {
+   "id": "CU-BF-11-0-0",
+   "scene": "BF-11",
+   "take": "BF-11__0",
+   "who": "NIKO",
+   "face": "niko",
+   "t0": 0,
+   "t1": 2.375,
+   "seconds": 2.375,
+   "frames": 29,
+   "lines": 1,
+   "head": 0.3,
+   "tail": 0.4,
+   "src": "renders/motion/CU-BF-11-0-0.webm",
+   "text": "Could it have gotten into the intake?",
+   "on": "NIKO",
+   "react": false,
+   "why": "the loop, first pass — a procedure being run on something that is not going to yield to one",
+   "line": "Could it have gotten into the intake?",
+   "motion": "CYCLE",
+   "sceneSubject": "two people arriving back at the question they started from",
+   "speaker": "NIKO"
+  },
+  {
+   "id": "CU-BF-17-0-0",
+   "scene": "BF-17",
+   "take": "BF-17__0",
+   "who": "IONA",
+   "face": "iona",
+   "t0": 0,
+   "t1": 1.99,
+   "seconds": 1.99,
+   "frames": 24,
+   "lines": 1,
+   "head": 0.18,
+   "tail": 0.24,
+   "src": "renders/motion/CU-BF-17-0-0.webm",
+   "text": "You have her shoulders.",
+   "on": "IONA",
+   "react": false,
+   "why": "the only scene in the corpus whose declared subject IS a face — 'a face arriving before its features can contain it'. At MEDIUM that face is 150px; the text's one animation note has nowhere to happen. This is the close-up the film was always missing.",
+   "line": "You have her shoulders.",
+   "motion": "HOLD",
+   "sceneSubject": "a face arriving before its features can contain it",
+   "speaker": "IONA"
+  },
+  {
+   "id": "CU-BF-17-0-2",
+   "scene": "BF-17",
+   "take": "BF-17__0",
+   "who": "IONA",
+   "face": "iona",
+   "t0": 3.84,
+   "t1": 6.615,
+   "seconds": 2.775,
+   "frames": 33,
+   "lines": 1,
+   "head": 0.28,
+   "tail": 0.3,
+   "src": "renders/motion/CU-BF-17-0-2.webm",
+   "text": "That depends which paper you're reading.",
+   "on": "IONA",
+   "react": false,
+   "why": "her evasion, on the face that arrives before it can contain anything",
+   "line": "That depends which paper you're reading.",
+   "motion": "HOLD",
+   "sceneSubject": "a face arriving before its features can contain it",
+   "speaker": "IONA"
+  },
+  {
+   "id": "CU-BF-19-0-2",
+   "scene": "BF-19",
+   "take": "BF-19__0",
+   "who": "IONA",
+   "face": "iona",
+   "t0": 4.015,
+   "t1": 6.03,
+   "seconds": 2.015,
+   "frames": 24,
+   "lines": 1,
+   "head": 0.26,
+   "tail": 0.3,
+   "src": "renders/motion/CU-BF-19-0-2.webm",
+   "text": "The version that survived.",
+   "on": "IONA",
+   "react": false,
+   "why": "she answers a contamination protocol with an epistemology. One line, one face, then back to the canister.",
+   "line": "The version that survived.",
+   "motion": "HOLD",
+   "sceneSubject": "the gap between a reaching hand and the canister",
+   "speaker": "IONA"
+  },
+  {
+   "id": "CU-BF-22-0-2",
+   "scene": "BF-22",
+   "take": "BF-22__0",
+   "who": "IONA",
+   "face": "iona",
+   "t0": 13.385,
+   "t1": 16.011,
+   "seconds": 2.626,
+   "frames": 32,
+   "lines": 1,
+   "head": 0.36,
+   "tail": 0.16,
+   "src": "renders/motion/CU-BF-22-0-2.webm",
+   "text": "Because then you will remember being there.",
+   "on": "IONA",
+   "react": false,
+   "why": "the scene belongs to the scar on her thumb and stays there for three sentences. This is the fourth, and it is the threat the whole film turns on — the only line that earns leaving the scar.",
+   "line": "Because then you will remember being there.",
+   "motion": "HOLD",
+   "sceneSubject": "the broken circle at the base of Iona's thumb",
+   "speaker": "IONA"
+  },
+  {
+   "id": "CU-BF-24-0-1",
+   "scene": "BF-24",
+   "take": "BF-24__0",
+   "who": "NIKO",
+   "face": "niko",
+   "t0": 3.745,
+   "t1": 5.771,
+   "seconds": 2.026,
+   "frames": 24,
+   "lines": 1,
+   "head": 0.28,
+   "tail": 0.34,
+   "src": "renders/motion/CU-BF-24-0-1.webm",
+   "text": "Of course it can be photographed.",
+   "on": "NIKO",
+   "react": false,
+   "why": "the last time anyone in this film is certain about anything. It should be on a face so the certainty has somewhere to be wrong.",
+   "line": "Of course it can be photographed.",
+   "motion": "CYCLE",
+   "sceneSubject": "the broken circle, which exists only when the wings are closed",
+   "speaker": "NIKO"
+  },
+  {
+   "id": "CU-BF-27-0-5",
+   "scene": "BF-27",
+   "take": "BF-27__0",
+   "who": "IONA",
+   "face": "iona",
+   "t0": 8.765,
+   "t1": 11.011,
+   "seconds": 2.246,
+   "frames": 27,
+   "lines": 1,
+   "head": 0.24,
+   "tail": 0.28,
+   "src": "renders/motion/CU-BF-27-0-5.webm",
+   "text": "Marking is not memory.",
+   "on": "IONA",
+   "react": false,
+   "why": "the counter-thesis, and the sentence that makes the film an argument rather than a mystery. The scene is a butterfly's foot on lavender and returns to it immediately.",
+   "line": "Marking is not memory.",
+   "motion": "HOLD",
+   "sceneSubject": "a butterfly's foot on a lavender flower, not recoiling",
+   "speaker": "IONA"
+  },
+  {
+   "id": "CU-BF-29-1-1-react-niko",
+   "scene": "BF-29",
+   "take": "BF-29__1",
+   "who": "IONA",
+   "face": "niko",
+   "t0": 1.605,
+   "t1": 4.650958,
+   "seconds": 3.046,
+   "frames": 37,
+   "lines": 1,
+   "head": 0.24,
+   "tail": 0.24,
+   "src": "renders/motion/CU-BF-29-1-1-react-niko.webm",
+   "text": "I remembered it.",
+   "on": "NIKO",
+   "react": true,
+   "why": "REACTION, and the most important cut in the film. Iona has just answered 'You built this' with a claim that a building was assembled out of memory. It is not interesting on the face of the woman who believes it. It is interesting on the face of the man who has to decide what to do with it.",
+   "line": "I remembered it.",
+   "motion": "HOLD",
+   "sceneSubject": "the far wall of dated chrysalides",
+   "speaker": "IONA"
+  },
+  {
+   "id": "CU-BF-30-0-1",
+   "scene": "BF-30",
+   "take": "BF-30__0",
+   "who": "IONA",
+   "face": "iona",
+   "t0": 3.855,
+   "t1": 6.691,
+   "seconds": 2.836,
+   "frames": 34,
+   "lines": 1,
+   "head": 0.46,
+   "tail": 0.26,
+   "src": "renders/motion/CU-BF-30-0-1.webm",
+   "text": "Enough to keep it from becoming evidence.",
+   "on": "IONA",
+   "react": false,
+   "why": "the admission that the record has been managed — spoken over a white rectangle that waits, which is the film telling you the same thing in the other channel",
+   "line": "Enough to keep it from becoming evidence.",
+   "motion": "HOLD",
+   "sceneSubject": "the white rectangle that waits",
+   "speaker": "IONA"
+  }
+ ],
+ "cut": [
+  {
+   "id": "CU-BF-11-0-2",
+   "scene": "BF-11",
+   "who": "NIKO",
+   "seconds": 1.885,
+   "reason": "the scene would become mostly faces; a later turn yielded to an earlier one",
+   "authored": true,
+   "line": "Could the sensor be wrong?"
+  },
+  {
+   "id": "CU-BF-29-0-1",
+   "scene": "BF-29",
+   "who": "IONA",
+   "seconds": 3.456,
+   "reason": "the scene would become mostly faces; a later turn yielded to an earlier one",
+   "authored": true,
+   "line": "This is the part that keeps reappearing."
+  },
+  {
+   "id": "CU-BF-02-0-0",
+   "scene": "BF-02",
+   "who": "NIKO",
+   "seconds": 1.491,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-03-0-0",
+   "scene": "BF-03",
+   "who": "NIKO",
+   "seconds": 1.74,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-03-0-1",
+   "scene": "BF-03",
+   "who": "MARA",
+   "seconds": 0.84,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-03-0-2",
+   "scene": "BF-03",
+   "who": "NIKO",
+   "seconds": 1.805,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-03-0-3",
+   "scene": "BF-03",
+   "who": "MARA",
+   "seconds": 2.015,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-05-0-0",
+   "scene": "BF-05",
+   "who": "NIKO",
+   "seconds": 2.095,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-05-0-1",
+   "scene": "BF-05",
+   "who": "MARA",
+   "seconds": 1.515,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-05-0-2",
+   "scene": "BF-05",
+   "who": "NIKO",
+   "seconds": 3.4,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-06-0-0",
+   "scene": "BF-06",
+   "who": "MARA",
+   "seconds": 2.66,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-06-0-1",
+   "scene": "BF-06",
+   "who": "NIKO",
+   "seconds": 2.12,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-06-0-2",
+   "scene": "BF-06",
+   "who": "MARA",
+   "seconds": 2.19,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-06-0-3",
+   "scene": "BF-06",
+   "who": "NIKO",
+   "seconds": 2.03,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-06-0-4",
+   "scene": "BF-06",
+   "who": "MARA",
+   "seconds": 1.811,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-07-0-0",
+   "scene": "BF-07",
+   "who": "NIKO",
+   "seconds": 1.31,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-07-0-1",
+   "scene": "BF-07",
+   "who": "MARA",
+   "seconds": 1.261,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-09-0-0",
+   "scene": "BF-09",
+   "who": "NIKO",
+   "seconds": 1.205,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-09-0-1",
+   "scene": "BF-09",
+   "who": "MARA",
+   "seconds": 1.165,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-09-0-2",
+   "scene": "BF-09",
+   "who": "NIKO",
+   "seconds": 0.94,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-09-0-3",
+   "scene": "BF-09",
+   "who": "MARA",
+   "seconds": 2.381,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-10-0-0",
+   "scene": "BF-10",
+   "who": "NIKO",
+   "seconds": 3.01,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-10-0-1",
+   "scene": "BF-10",
+   "who": "MARA",
+   "seconds": 3.395,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-10-0-2",
+   "scene": "BF-10",
+   "who": "NIKO",
+   "seconds": 2.03,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-11-0-1",
+   "scene": "BF-11",
+   "who": "MARA",
+   "seconds": 1.775,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-11-0-3",
+   "scene": "BF-11",
+   "who": "MARA",
+   "seconds": 0.95,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-11-0-4",
+   "scene": "BF-11",
+   "who": "NIKO",
+   "seconds": 1.855,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-11-0-5",
+   "scene": "BF-11",
+   "who": "MARA",
+   "seconds": 1.02,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-12-0-0",
+   "scene": "BF-12",
+   "who": "NIKO",
+   "seconds": 1.645,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-12-0-1",
+   "scene": "BF-12",
+   "who": "MARA",
+   "seconds": 0.846,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-15-0-0",
+   "scene": "BF-15",
+   "who": "MARA",
+   "seconds": 1.851,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-17-0-1",
+   "scene": "BF-17",
+   "who": "MARA",
+   "seconds": 1.85,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-17-0-3",
+   "scene": "BF-17",
+   "who": "MARA",
+   "seconds": 1.62,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-17-0-4",
+   "scene": "BF-17",
+   "who": "IONA",
+   "seconds": 2.856,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-18-0-0",
+   "scene": "BF-18",
+   "who": "IONA",
+   "seconds": 1.785,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-18-0-1",
+   "scene": "BF-18",
+   "who": "MARA",
+   "seconds": 2.01,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-18-0-2",
+   "scene": "BF-18",
+   "who": "IONA",
+   "seconds": 1.115,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-18-0-3",
+   "scene": "BF-18",
+   "who": "MARA",
+   "seconds": 2.275,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-18-0-4",
+   "scene": "BF-18",
+   "who": "IONA",
+   "seconds": 1.906,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-19-0-0",
+   "scene": "BF-19",
+   "who": "IONA",
+   "seconds": 2.32,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-19-0-1",
+   "scene": "BF-19",
+   "who": "NIKO",
+   "seconds": 1.695,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-19-0-3",
+   "scene": "BF-19",
+   "who": "NIKO",
+   "seconds": 3.061,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-21-0-0",
+   "scene": "BF-21",
+   "who": "NIKO",
+   "seconds": 3.251,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-22-0-0",
+   "scene": "BF-22",
+   "who": "IONA",
+   "seconds": 12.39,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-22-0-1",
+   "scene": "BF-22",
+   "who": "MARA",
+   "seconds": 0.995,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-24-0-0",
+   "scene": "BF-24",
+   "who": "IONA",
+   "seconds": 3.745,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-25-0-0",
+   "scene": "BF-25",
+   "who": "MARA",
+   "seconds": 1.22,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-25-0-1",
+   "scene": "BF-25",
+   "who": "NIKO",
+   "seconds": 1.625,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-25-0-2",
+   "scene": "BF-25",
+   "who": "MARA",
+   "seconds": 1.486,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-26-0-0",
+   "scene": "BF-26",
+   "who": "MARA",
+   "seconds": 1.695,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-26-0-1",
+   "scene": "BF-26",
+   "who": "IONA",
+   "seconds": 1.115,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-26-0-2",
+   "scene": "BF-26",
+   "who": "MARA",
+   "seconds": 1.465,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-26-0-3",
+   "scene": "BF-26",
+   "who": "IONA",
+   "seconds": 1.736,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-27-0-0",
+   "scene": "BF-27",
+   "who": "MARA",
+   "seconds": 1.735,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-27-0-1",
+   "scene": "BF-27",
+   "who": "IONA",
+   "seconds": 1.365,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-27-0-2",
+   "scene": "BF-27",
+   "who": "MARA",
+   "seconds": 1.46,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-27-0-3",
+   "scene": "BF-27",
+   "who": "IONA",
+   "seconds": 1.81,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-27-0-4",
+   "scene": "BF-27",
+   "who": "MARA",
+   "seconds": 2.395,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-28-0-0",
+   "scene": "BF-28",
+   "who": "NIKO",
+   "seconds": 1.99,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-28-0-1",
+   "scene": "BF-28",
+   "who": "MARA",
+   "seconds": 1.185,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-28-0-2",
+   "scene": "BF-28",
+   "who": "NIKO",
+   "seconds": 0.996,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-29-0-0",
+   "scene": "BF-29",
+   "who": "NIKO",
+   "seconds": 2.035,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-29-1-0",
+   "scene": "BF-29",
+   "who": "MARA",
+   "seconds": 1.605,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-30-0-0",
+   "scene": "BF-30",
+   "who": "NIKO",
+   "seconds": 3.855,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-31-0-0",
+   "scene": "BF-31",
+   "who": "NIKO",
+   "seconds": 1.465,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-31-0-1",
+   "scene": "BF-31",
+   "who": "MARA",
+   "seconds": 1.546,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-31-1-0",
+   "scene": "BF-31",
+   "who": "IONA",
+   "seconds": 3.571,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-32-0-0",
+   "scene": "BF-32",
+   "who": "NIKO",
+   "seconds": 1.35,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-32-0-1",
+   "scene": "BF-32",
+   "who": "MARA",
+   "seconds": 0.855,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-32-0-2",
+   "scene": "BF-32",
+   "who": "NIKO",
+   "seconds": 1.035,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-32-0-3",
+   "scene": "BF-32",
+   "who": "MARA",
+   "seconds": 0.83,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-32-0-4",
+   "scene": "BF-32",
+   "who": "NIKO",
+   "seconds": 1.821,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-33-0-0",
+   "scene": "BF-33",
+   "who": "MARA",
+   "seconds": 1.63,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-33-0-1",
+   "scene": "BF-33",
+   "who": "IONA",
+   "seconds": 2.181,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-35-0-0",
+   "scene": "BF-35",
+   "who": "PROJECTED MARA",
+   "seconds": 2.611,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-39-0-1",
+   "scene": "BF-39",
+   "who": "NIKO",
+   "seconds": 1.001,
+   "reason": "no turn here — the image is the shot"
+  },
+  {
+   "id": "CU-BF-40-0-0",
+   "scene": "BF-40",
+   "who": "THE GIRL",
+   "seconds": 2.811,
+   "reason": "no turn here — the image is the shot"
+  }
+ ],
+ "unmatched": []
+}

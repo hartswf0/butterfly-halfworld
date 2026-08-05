@@ -2,7 +2,7 @@
   "id": "C03",
   "mod": "scenes/C03.mjs",
   "ok": true,
-  "t": "2026-08-05T01:02:53.447Z",
+  "t": "2026-08-05T03:27:56.917Z",
   "motion": "DISSOLVE",
   "seconds": 7,
   "loopClosed": false,
@@ -17,13 +17,13 @@
     "nominalSec": 7,
     "webmSec": 7,
     "gifSec": 7,
-    "renderWallSec": 3.1
+    "renderWallSec": 2.6
   },
   "size": {
     "w": 1120,
     "h": 760,
     "pipeline": "MESH",
-    "card": true
+    "card": false
   },
   "loop": {
     "wrapChangedPct": 0.648,
@@ -37,16 +37,13 @@
   "files": {
     "webm": {
       "path": "renders/motion/C03.webm",
-      "bytes": 78414
+      "bytes": 70748
     },
     "gif": {
       "path": "renders/motion/C03.gif",
-      "bytes": 75521
+      "bytes": 47665
     },
-    "contact": {
-      "path": "renders/motion/C03-contact.png",
-      "bytes": 145477
-    },
+    "contact": null,
     "frames": null
   },
   "encodeErrors": [],

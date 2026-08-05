@@ -1,0 +1,52 @@
+{
+  "id": "CU-BF-29-1-1-react-niko",
+  "mod": "scenes/_close/CU-BF-29-1-1-react-niko.mjs",
+  "ok": true,
+  "t": "2026-08-05T03:18:47.577Z",
+  "motion": "LISTEN",
+  "seconds": 3.046,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 37,
+    "rendered": 37,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 3.083,
+    "webmSec": 3.083,
+    "gifSec": 3.08,
+    "renderWallSec": 2.4
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 1.3195,
+    "wrapMeanAbs": 1.4454,
+    "meanStepChangedPct": 0.451,
+    "maxStepChangedPct": 1.2176,
+    "meanStepMeanAbs": 0.453,
+    "ratio": 2.926,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/CU-BF-29-1-1-react-niko.webm",
+      "bytes": 407528
+    },
+    "gif": {
+      "path": "renders/motion/CU-BF-29-1-1-react-niko.gif",
+      "bytes": 425283
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

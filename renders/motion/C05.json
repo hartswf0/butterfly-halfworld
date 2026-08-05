@@ -2,7 +2,7 @@
   "id": "C05",
   "mod": "scenes/C05.mjs",
   "ok": true,
-  "t": "2026-08-05T01:02:59.722Z",
+  "t": "2026-08-05T03:28:01.545Z",
   "motion": "HOLD",
   "seconds": 7,
   "loopClosed": false,
@@ -17,13 +17,13 @@
     "nominalSec": 7,
     "webmSec": 7,
     "gifSec": 7,
-    "renderWallSec": 2.7
+    "renderWallSec": 2.3
   },
   "size": {
     "w": 1120,
     "h": 760,
     "pipeline": "MESH",
-    "card": true
+    "card": false
   },
   "loop": {
     "wrapChangedPct": 0.032,
@@ -37,16 +37,13 @@
   "files": {
     "webm": {
       "path": "renders/motion/C05.webm",
-      "bytes": 74984
+      "bytes": 68786
     },
     "gif": {
       "path": "renders/motion/C05.gif",
-      "bytes": 75178
+      "bytes": 56941
     },
-    "contact": {
-      "path": "renders/motion/C05-contact.png",
-      "bytes": 158001
-    },
+    "contact": null,
     "frames": null
   },
   "encodeErrors": [],
