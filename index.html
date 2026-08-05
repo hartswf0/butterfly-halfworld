@@ -1,0 +1,122 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>I REMEMBER BEING A BUTTERFLY — a halfworld</title>
+<meta name="description" content="An 8-minute film in which every image is code. 40 scenes in ordered-dot halftone, a score synthesised at 60Hz, and a periodic table of the world's 81 elements you can play and stage.">
+<style>
+/* The front page obeys the film's law: cream paper, hard contour, eight ink
+   levels, no gradients, no rounded corners. A door in a different language
+   than the room is a lie about the room. */
+:root{--paper:#f4f4f0;--paper2:#fdfdfa;--ink:#141414;--dim:#8a8a86;--accent:#0033cc;--l1:#e0e0dc;--l3:#a8a8a4}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+body{background:var(--paper);color:var(--ink);
+  font:400 15px/1.62 "Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;
+  padding:0 22px 90px}
+.wrap{max-width:800px;margin:0 auto}
+header{border-bottom:3px solid var(--ink);padding:40px 0 20px;margin-bottom:30px}
+.mark{width:26px;height:26px;margin-bottom:22px;
+  background:radial-gradient(circle 3.4px at 6px 6px,var(--ink) 98%,transparent),
+             radial-gradient(circle 3.4px at 20px 6px,var(--ink) 98%,transparent),
+             radial-gradient(circle 3.4px at 6px 20px,var(--ink) 98%,transparent),
+             radial-gradient(circle 3.4px at 20px 20px,var(--ink) 98%,transparent)}
+h1{font:900 clamp(26px,5.4vw,46px)/1.06 Helvetica,Arial;letter-spacing:.03em;text-transform:uppercase}
+h1 small{display:block;font:900 11px/1 Helvetica;letter-spacing:.34em;color:var(--dim);margin-top:14px}
+.lede{margin:26px 0 0;font-size:17px;max-width:62ch}
+.lede b{font-weight:900}
+h2{font:900 11px/1 Helvetica;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);
+  margin:44px 0 14px;padding-bottom:7px;border-bottom:1px solid var(--l3)}
+p{margin:14px 0;max-width:66ch}
+a{color:var(--accent)}
+.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:12px;margin:6px 0}
+.door{border:3px solid var(--ink);background:var(--paper2);padding:17px 18px;text-decoration:none;color:var(--ink);display:block}
+.door:hover{background:var(--ink);color:var(--paper)}
+.door .k{font:900 9px/1 Helvetica;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.door:hover .k{color:var(--l3)}
+.door .t{font:900 17px/1.2 Helvetica;letter-spacing:.04em;margin:9px 0 7px;text-transform:uppercase}
+.door .d{font-size:13px;line-height:1.5}
+code{font:700 13px ui-monospace,Menlo,monospace;background:var(--l1);padding:2px 6px}
+pre{background:var(--paper2);border:2px solid var(--ink);padding:13px 15px;overflow:auto;margin:14px 0}
+pre code{background:none;padding:0;font-size:13px;line-height:1.7}
+.f{font:700 15px ui-monospace,Menlo,monospace;letter-spacing:.02em}
+blockquote{border-left:4px solid var(--ink);padding-left:16px;margin:18px 0;color:#3a3a38}
+ul{margin:12px 0 12px 20px}li{margin:6px 0;max-width:64ch}
+footer{margin-top:56px;padding-top:18px;border-top:3px solid var(--ink);font-size:12.5px;color:var(--dim)}
+</style></head><body><div class="wrap">
+
+<header>
+  <div class="mark"></div>
+  <h1>I Remember<br>Being a Butterfly<small>a halfworld</small></h1>
+  <p class="lede">An eight-minute film in which <b>every image is code</b>. No photographs, no footage,
+  no samples. Forty scenes in ordered-dot halftone, a score synthesised at 60Hz — the frequency the
+  laboratory hums at — and a periodic table of the world's eighty-one elements you can play.</p>
+</header>
+
+<h2>Three doors</h2>
+<div class="doors">
+  <a class="door" href="periodic.html">
+    <div class="k">interactive</div><div class="t">The Periodic Table</div>
+    <div class="d">81 elements, 57 compounds. Every one rendered live by the module that defines it —
+    there are no thumbnails. Stage them by chat.</div></a>
+  <a class="door" href="butterfly-chat.html">
+    <div class="k">interactive</div><div class="t">The Memory Chat</div>
+    <div class="d">Memory as a stage. A scale becomes a scene; a scene becomes lived only when the
+    emergence names it in its own speech.</div></a>
+  <a class="door" href="README.md">
+    <div class="k">document</div><div class="t">The Write-Up</div>
+    <div class="d">The story, the three real referents and exactly where the film departs from them,
+    the five laws, and the mistakes.</div></a>
+</div>
+<p style="font-size:13px;color:var(--dim)">The two cuts — <code>film/BUTTERFLY.mp4</code> (wide) and
+<code>film/BUTTERFLY-CLOSE.mp4</code> (speaking) — are in the repository. Both are the same length and
+share one sound master, sample for sample.</p>
+
+<h2>What it stands on</h2>
+<p>In 2024 a ten-year-old, <b>Joe Nagai</b>, presented work in Kyoto: swallowtails trained to avoid a
+scent as caterpillars still avoided it as butterflies. Untrained animals split 50/50 between the arms
+of a Y-maze; trained ones avoided the scented arm about 70% of the time. He had found
+<b>Martha Weiss</b>'s moth work — a learned aversion surviving pupation — and repeated its shape.</p>
+<p>The standard protocol uses ethyl acetate, a killing agent. He replaced it with <b>lavender oil</b>
+because it was pleasanter for animals he considered friends, and tested the shock levels on his own
+arm first.</p>
+<blockquote>In this film lavender is the trauma cue. The mercy and the injury are the same molecule.
+Nothing in the film says this out loud and everything in it depends on it.</blockquote>
+<p>The title is <b>莊周夢蝶</b> — Zhuang Zhou dreams he is a butterfly, wakes, and does not know which
+he is — <em>with the doubt taken out</em>. And the departure: the real experiment has exactly two
+outcomes and both are choices between two arms. The animal in this film produces a third that is in
+neither dataset. It refuses both and draws on the ceiling.</p>
+
+<h2>Elements and compounds</h2>
+<p>The world is a small number of primitives that combine, and fifty-seven compounds that are
+combinations of them — not a metaphor applied afterwards, but how the repository is built. A scene
+imports two or three assets, declares one of ten motions, names one of five plans, lists its cues.
+So BF-17 is not "a scene". It is:</p>
+<p class="f">Mi·St·Ml·Ki·Io·Ho·Rm·T1·Co·Se</p>
+<p>a mill, a stage, the mill's set module, the creature kit, Iona, a HOLD, the mill's room tone, the
+arrival theme, a coat and a footstep. Written that way you can see that five other units are the same
+columns with one substitution — a fact about the film that watching it will not tell you.</p>
+
+<h2>Run it</h2>
+<pre><code>git clone https://github.com/hartswf0/butterfly-halfworld
+cd butterfly-halfworld
+node harness/serve.mjs        # → http://127.0.0.1:8181/</code></pre>
+<p>No build step and nothing is bundled. The server exists only because a browser will not import an
+ES module over <code>file://</code>; the page imports the film's actual modules and runs them. Change
+a module, reload, and the atlas changes.</p>
+
+<h2>The mistakes</h2>
+<p>Kept in the write-up because they are the most useful thing there. In four passes of work the
+pattern held every single time: <b>every serious defect produced a plausible picture, and every one
+was caught by looking at an image rather than by a test.</b></p>
+<ul>
+  <li>The close-up puppet came back long-jawed and I blamed the jaw. <b>The eyes were half a head too high</b> — everything below them had lengthened to compensate.</li>
+  <li>A scalloped shape appeared on three faces and never on the fourth. I read it as a hairstyle bug and rewrote the hair code <b>twice</b>. It was the jaw-width parameter overshooting into an anvil.</li>
+  <li>The frame instrument reported one of the best shots in the film as <b>blank</b>. Its single sample had landed inside an authored whiteout.</li>
+  <li>Told the frames were empty, I pushed the lens in and <b>made two of them worse</b>. Zooming does not create ink; there was nothing behind the subject to get closer to.</li>
+  <li>A constraint asks you to say <em>less</em>. Three separate times I answered by saying the same amount more carefully.</li>
+</ul>
+
+<footer>
+  Eight ink levels. No photographs, no footage, no samples — every image is code.<br>
+  Aeolian at the start, Dorian at the end. One note different. 物化.<br><br>
+  <a href="https://github.com/hartswf0/butterfly-halfworld">github.com/hartswf0/butterfly-halfworld</a>
+</footer>
+</div></body></html>
