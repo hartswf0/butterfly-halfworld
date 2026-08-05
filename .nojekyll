@@ -1,0 +1,13 @@
+Disables Jekyll on GitHub Pages.
+
+Without this file Pages runs the published tree through Jekyll, which EXCLUDES
+every directory whose name begins with an underscore. This world keeps its
+private modules exactly that way — scenes/_plans/ (the five coordinate spaces),
+scenes/_close/ (95 generated close-ups), assets/*/_kit.mjs and the rest — so
+Jekyll was 404ing the five plan modules the periodic table imports when you
+click a PLACE, and would have 404'd anything else under an underscore later.
+
+It failed as a 404 inside a dynamic import, which surfaces as a plan that
+simply never draws: no error on the page, nothing in the console the user would
+look at. Found by checking every URL the atlas loads rather than by opening the
+page and glancing at it.
