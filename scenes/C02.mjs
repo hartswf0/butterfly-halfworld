@@ -19,16 +19,24 @@ const PAPER="#f4f1e8", INK="#141210";
 function field(g,W,H){ g.fillStyle=PAPER; g.fillRect(0,0,W,H); }
 function txt(g,s,x,y,size,{align="center",weight=400,track=0,ink=INK}={}){
   g.save(); g.fillStyle=ink; g.textAlign=align; g.textBaseline="middle";
-  /* PASS 3. Body copy on the cards was set in a serif, and a serif is made of
-     hairline strokes — precisely the thing a 3.4px dot lattice cannot render.
-     The first pass lost it at 23px; the second reset it at 26-52px and it was
-     STILL dissolving at 36. The size was never the whole problem: the family
-     was. Above 44px a serif has enough meat on it to survive the halftone and
-     it earns the display line its authority; below that it is a rumour.
-     So the family is chosen by size, and nothing small is ever a serif. */
-  g.font = size >= 44
-    ? `${weight} ${size}px "Iowan Old Style", Georgia, serif`
-    : `${Math.max(500, weight)} ${size}px Helvetica, Arial, sans-serif`;
+  /* PASS 4. The rule was "serif above 44px, sans below", and it never fired:
+     every body line on these cards computes to W*0.042 = 47px, so all of them
+     stayed serif and all of them stayed mush.
+
+     Size was the wrong test. Look at what actually survives on this lattice and
+     what does not: "I REMEMBER BEING A BUTTERFLY" is serif at 47px and reads
+     perfectly; "Zhuang Zhou dreamed he was a butterfly." is serif at the same
+     47px and dissolves. The difference is CASE. A capital is a few thick
+     strokes and a generous counter; a lowercase serif is ascenders, descenders,
+     thin joins and tiny counters — four features per glyph that are all at or
+     under the dot pitch, at any size this frame can hold.
+
+     So the test is the string, not the number: anything containing a lowercase
+     letter is set in sans. Serif is reserved for the uppercase display lines,
+     where it is doing real work and can afford to. */
+  g.font = /[a-z]/.test(s)
+    ? `${Math.max(500,weight)} ${size}px Helvetica, Arial, sans-serif`
+    : `${weight} ${size}px "Iowan Old Style", Georgia, serif`;
   if(track){ // manual tracking, because letter-spacing is not on canvas
     const chars=[...s]; const wid=chars.reduce((n,c)=>n+g.measureText(c).width+track,0)-track;
     let cx = align==="center" ? x-wid/2 : x;
@@ -39,7 +47,7 @@ function txt(g,s,x,y,size,{align="center",weight=400,track=0,ink=INK}={}){
 }
 function mono(g,s,x,y,size,opt={}){
   g.save(); g.fillStyle=opt.ink||INK; g.textAlign=opt.align||"center"; g.textBaseline="middle";
-  g.font=`${opt.weight||400} ${size}px ui-monospace, Menlo, monospace`;
+  g.font=`${opt.weight||600} ${size}px ui-monospace, Menlo, monospace`;
   g.fillText(s,x,y); g.restore();
 }
 function rule(g,x0,x1,y,w=3){ g.save(); g.strokeStyle=INK; g.lineWidth=w;
@@ -73,17 +81,18 @@ export function draw(g,W,H,s){
     mono(g,"SUGAR",cx-sc*0.66,H*0.50-sc*0.64,Math.max(28,W*0.028),{});
     mono(g,"SUGAR",cx+sc*0.66,H*0.50-sc*0.64,Math.max(28,W*0.028),{});
     mono(g,"+ LAVENDER",cx-sc*0.66,H*0.50-sc*0.50,Math.max(24,W*0.024),{});
-    txt(g,"Both arms feed you.",cx,H*0.775,Math.max(38,W*0.042),{});
   }
   if(st>=2){
     const bw=W*0.055, by=H*0.70, bh=H*0.13;
     bar(g,cx-W*0.20-bw,by,bw,bh,0.50); bar(g,cx-W*0.20,by,bw,bh,0.50);
-    mono(g,"UNTRAINED 50/50",cx-W*0.175,by+H*0.070,Math.max(26,W*0.026),{});
+    mono(g,"UNTRAINED",cx-W*0.175,by+H*0.060,Math.max(26,W*0.026),{});
+    mono(g,"50 / 50",cx-W*0.175,by+H*0.125,Math.max(26,W*0.026),{});
   }
   if(st>=3){
     const bw=W*0.055, by=H*0.70, bh=H*0.13;
     bar(g,cx+W*0.14,by,bw,bh,0.30); bar(g,cx+W*0.14+bw,by,bw,bh,0.70);
-    mono(g,"TRAINED 30/70",cx+W*0.168,by+H*0.070,Math.max(26,W*0.026),{});
-    mono(g,"THIS ONE GAVE NEITHER",cx,H*0.945,Math.max(32,W*0.033),{});
+    mono(g,"TRAINED",cx+W*0.168,by+H*0.060,Math.max(26,W*0.026),{});
+    mono(g,"30 / 70",cx+W*0.168,by+H*0.125,Math.max(26,W*0.026),{});
+    mono(g,"THIS ONE GAVE NEITHER",cx,H*0.955,Math.max(32,W*0.033),{});
   }
 }

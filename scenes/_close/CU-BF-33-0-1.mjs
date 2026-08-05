@@ -13,6 +13,7 @@
 import { sampleMouth, speechCarriage } from "../../engine/speech.mjs";
 import { NW, NH } from "../../assets/set/_stage.mjs";
 import { FACES, drawCloseup, closeGeom, idleFace } from "../../assets/character/_face.mjs";
+import { INK } from "../../engine/halfworld-engine.mjs";
 
 export const id = "CU-BF-33-0-1";
 export const title = "IONA";
@@ -36,6 +37,9 @@ const ENV = [0,0,0,0,0,0,0,0,0,0,0.01,0.01,0,0,0,0.01,0.01,0.01,0.23,0.78,0.4,1.
 const TRACK = [[0,0.087,"TH"],[0.087,0.211,"EE"],[0.211,0.255,"REST"],[0.255,0.323,"MM"],[0.323,0.447,"EE"],[0.447,0.553,"RR"],[0.553,0.634,"SS"],[0.634,0.77,"OH"],[0.77,0.833,"DD"],[0.833,0.876,"REST"],[0.876,1,"OO"],[1,1.137,"OH"],[1.137,1.181,"REST"],[1.181,1.286,"RR"],[1.286,1.411,"EE"],[1.411,1.479,"MM"],[1.479,1.603,"EE"],[1.603,1.671,"MM"],[1.671,1.796,"EE"],[1.796,1.901,"RR"],[1.901,1.982,"SS"],[1.982,2.181,"REST"]].map(([t0, t1, v]) => ({ t0, t1, v }));
 const AXIS = -1;                   // +1 looks screen-right, -1 screen-left
 const SEED = 2;
+/* Set only on an INTRODUCTION — the first time this person speaks in the film.
+   harness/direct.mjs rewrites this one line and nothing else. */
+const NAME = null;
 
 export function at(u) {
   const t = u * seconds;
@@ -63,6 +67,18 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
   drawCloseup(g, FACES[face], s, closeGeom(NW, NH));
+  if (NAME) {
+    /* A name, once, the first time you see the person. Bottom left, mono, and
+       held for the whole shot rather than faded in — this world has no alpha
+       and a caption that arrives is a caption you notice arriving. */
+    g.fillStyle = INK;
+    g.font = "700 34px ui-monospace, Menlo, monospace";
+    g.textAlign = "left"; g.textBaseline = "alphabetic";
+    let x = NW * 0.055;
+    for (const c of NAME) { g.fillText(c, x, NH * 0.935); x += g.measureText(c).width + 9; }
+    g.strokeStyle = INK; g.lineWidth = 4;
+    g.beginPath(); g.moveTo(NW * 0.055, NH * 0.958); g.lineTo(x - 9, NH * 0.958); g.stroke();
+  }
   g.restore();
 }
 

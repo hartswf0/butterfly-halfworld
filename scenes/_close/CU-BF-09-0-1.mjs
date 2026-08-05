@@ -13,6 +13,7 @@
 import { sampleMouth, speechCarriage } from "../../engine/speech.mjs";
 import { NW, NH } from "../../assets/set/_stage.mjs";
 import { FACES, drawCloseup, closeGeom, idleFace } from "../../assets/character/_face.mjs";
+import { INK } from "../../engine/halfworld-engine.mjs";
 
 export const id = "CU-BF-09-0-1";
 export const title = "MARA";
@@ -36,6 +37,9 @@ const ENV = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.01,0.07,0.14,0.13,0.59,1.06,1.13,1.16
 const TRACK = [[0,0.137,"EE"],[0.137,0.185,"REST"],[0.185,0.254,"DD"],[0.254,0.404,"OH"],[0.404,0.473,"DD"],[0.473,0.61,"REST"],[0.61,0.678,"DD"],[0.678,0.726,"REST"],[0.726,0.795,"DD"],[0.795,0.946,"OH"],[0.946,1.165,"REST"]].map(([t0, t1, v]) => ({ t0, t1, v }));
 const AXIS = -1;                   // +1 looks screen-right, -1 screen-left
 const SEED = 0;
+/* Set only on an INTRODUCTION — the first time this person speaks in the film.
+   harness/direct.mjs rewrites this one line and nothing else. */
+const NAME = null;
 
 export function at(u) {
   const t = u * seconds;
@@ -63,6 +67,18 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
   drawCloseup(g, FACES[face], s, closeGeom(NW, NH));
+  if (NAME) {
+    /* A name, once, the first time you see the person. Bottom left, mono, and
+       held for the whole shot rather than faded in — this world has no alpha
+       and a caption that arrives is a caption you notice arriving. */
+    g.fillStyle = INK;
+    g.font = "700 34px ui-monospace, Menlo, monospace";
+    g.textAlign = "left"; g.textBaseline = "alphabetic";
+    let x = NW * 0.055;
+    for (const c of NAME) { g.fillText(c, x, NH * 0.935); x += g.measureText(c).width + 9; }
+    g.strokeStyle = INK; g.lineWidth = 4;
+    g.beginPath(); g.moveTo(NW * 0.055, NH * 0.958); g.lineTo(x - 9, NH * 0.958); g.stroke();
+  }
   g.restore();
 }
 

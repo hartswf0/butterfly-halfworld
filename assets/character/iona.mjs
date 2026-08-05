@@ -260,37 +260,88 @@ function thumbScar(ctx, W, H, at, size, rot) {
    Precedent for a CHARACTER asset that is a framing rather than a figure is
    character.mona in the sibling world, whose entire asset is a wall plate. */
 function handClose(ctx, W, H) {
+  /* PASS 2. This drew a hand and nothing else, and it read as a balloon with a
+     sausage taped to it — the same failure as the cast's hands two passes ago,
+     for a different reason.
+
+     The text is "Iona catches MARA'S WRIST. Her hand is unexpectedly strong."
+     The wrist was not in the frame. A hand closing on nothing has nothing to
+     close on, so there is no grip to read: the fingers have no reason to curl,
+     the mass has no axis, and what is left is an oval. The scene's whole
+     content — a strong old hand stopping a younger one — needs both hands.
+
+     So: Mara's forearm runs through the frame, Iona's hand wraps it, and FOUR
+     FINGER BACKS cross it and show past the far edge. That last detail is what
+     makes a grip legible at a glance, in any medium; without it a hand on an
+     arm is a hand behind an arm. The scar stays exactly where the anchor says,
+     because BF-22 frames the shot from that anchor. */
   const cx = W * 0.50, cy = H * 0.52, R = W * 0.30;
+  const SKIN_O = SURFACE.skinOld, SKIN_Y = SURFACE.skin;
   ctx.save();
-  // forearm in coat sleeve, entering from below left
-  ctx.strokeStyle = INK; ctx.lineWidth = 5; ctx.lineCap = "round";
-  ctx.strokeStyle = INK; ctx.lineWidth = R * 0.86 + 9;
-  ctx.beginPath(); ctx.moveTo(cx - R * 1.5, cy + R * 1.5); ctx.lineTo(cx - R * 0.30, cy + R * 0.42); ctx.stroke();
-  ctx.strokeStyle = gray(0x56); ctx.lineWidth = R * 0.86;
-  ctx.beginPath(); ctx.moveTo(cx - R * 1.5, cy + R * 1.5); ctx.lineTo(cx - R * 0.30, cy + R * 0.42); ctx.stroke();
-  // the hand: ONE closed silhouette, the law figure-hero draws hands under
-  ctx.fillStyle = SURFACE.skinOld; ctx.strokeStyle = INK; ctx.lineWidth = 5; ctx.lineJoin = "round";
+  ctx.lineJoin = "round"; ctx.lineCap = "round";
+
+  /* ---- 1. MARA'S FOREARM, behind everything, entering top and leaving bottom.
+     Lighter skin than Iona's, which is the cast's own two-value distinction and
+     the only thing telling you these are two different people's arms. */
+  ctx.fillStyle = SKIN_Y; ctx.strokeStyle = INK; ctx.lineWidth = 6;
   ctx.beginPath();
-  ctx.moveTo(cx - R * 0.58, cy + R * 0.52);
-  ctx.quadraticCurveTo(cx - R * 0.86, cy - R * 0.20, cx - R * 0.42, cy - R * 0.72);
-  ctx.quadraticCurveTo(cx + R * 0.10, cy - R * 1.06, cx + R * 0.62, cy - R * 0.72);
-  ctx.quadraticCurveTo(cx + R * 1.00, cy - R * 0.34, cx + R * 0.86, cy + R * 0.18);
-  ctx.quadraticCurveTo(cx + R * 0.60, cy + R * 0.86, cx + R * 0.02, cy + R * 0.82);
+  ctx.moveTo(cx + R * 0.42, cy - R * 2.4);
+  ctx.quadraticCurveTo(cx + R * 0.26, cy - R * 0.4, cx + R * 0.10, cy + R * 2.4);
+  ctx.lineTo(cx - R * 0.54, cy + R * 2.4);
+  ctx.quadraticCurveTo(cx - R * 0.40, cy - R * 0.4, cx - R * 0.22, cy - R * 2.4);
   ctx.closePath(); ctx.fill(); ctx.stroke();
-  // the thumb, a lobe merged into the same contour
+
+  /* ---- 2. IONA'S SLEEVE, the navy coat, entering from the lower left */
+  ctx.strokeStyle = INK; ctx.lineWidth = R * 0.92 + 10;
+  ctx.beginPath(); ctx.moveTo(cx - R * 2.2, cy + R * 1.9); ctx.lineTo(cx - R * 0.62, cy + R * 0.50); ctx.stroke();
+  ctx.strokeStyle = SURFACE.navy; ctx.lineWidth = R * 0.92;
+  ctx.beginPath(); ctx.moveTo(cx - R * 2.2, cy + R * 1.9); ctx.lineTo(cx - R * 0.62, cy + R * 0.50); ctx.stroke();
+
+  /* ---- 3. THE FINGERS, crossing the wrist and showing past its far edge.
+     Drawn BEFORE the back of the hand so the hand's own contour closes over
+     their roots — four separate shapes would otherwise print four seams across
+     the knuckles, which is the trap the cast's hands were rebuilt to avoid. */
+  ctx.fillStyle = SKIN_O; ctx.strokeStyle = INK; ctx.lineWidth = 5;
+  for (let i = 0; i < 4; i++) {
+    const t = i / 3;
+    const y = cy - R * 0.50 + t * R * 0.88;
+    const len = R * (0.92 - 0.10 * Math.abs(t - 0.35) * 2);
+    const th = R * (0.21 - 0.02 * t);
+    ctx.beginPath();
+    ctx.moveTo(cx - R * 0.30, y - th);
+    ctx.lineTo(cx - R * 0.30 + len, y - th * 0.86);
+    ctx.quadraticCurveTo(cx - R * 0.30 + len + th * 0.95, y, cx - R * 0.30 + len, y + th * 0.86);
+    ctx.lineTo(cx - R * 0.30, y + th);
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+  }
+
+  /* ---- 4. THE BACK OF THE HAND, one closed silhouette over the finger roots */
+  ctx.fillStyle = SKIN_O; ctx.strokeStyle = INK; ctx.lineWidth = 6;
   ctx.beginPath();
-  ctx.moveTo(cx - R * 0.56, cy + R * 0.30);
-  ctx.quadraticCurveTo(cx - R * 1.18, cy + R * 0.10, cx - R * 1.26, cy - R * 0.44);
-  ctx.quadraticCurveTo(cx - R * 1.10, cy - R * 0.78, cx - R * 0.76, cy - R * 0.56);
-  ctx.quadraticCurveTo(cx - R * 0.50, cy - R * 0.10, cx - R * 0.40, cy + R * 0.30);
+  ctx.moveTo(cx - R * 0.72, cy + R * 0.62);
+  ctx.quadraticCurveTo(cx - R * 0.98, cy - R * 0.10, cx - R * 0.70, cy - R * 0.78);
+  ctx.quadraticCurveTo(cx - R * 0.36, cy - R * 1.02, cx - R * 0.02, cy - R * 0.86);
+  ctx.quadraticCurveTo(cx + R * 0.16, cy - R * 0.40, cx + R * 0.12, cy + R * 0.26);
+  ctx.quadraticCurveTo(cx - R * 0.10, cy + R * 0.86, cx - R * 0.48, cy + R * 0.82);
   ctx.closePath(); ctx.fill(); ctx.stroke();
-  // knuckle creases and the tendon line — an old hand, not a young one
+
+  /* ---- 5. THE THUMB, near side, lying along the wrist. Its base is the anchor
+     the scene frames on, so its geometry is not free. */
+  ctx.beginPath();
+  ctx.moveTo(cx - R * 0.66, cy + R * 0.34);
+  ctx.quadraticCurveTo(cx - R * 0.30, cy + R * 0.46, cx + R * 0.06, cy + R * 0.34);
+  ctx.quadraticCurveTo(cx + R * 0.24, cy + R * 0.20, cx + R * 0.12, cy + R * 0.02);
+  ctx.quadraticCurveTo(cx - R * 0.24, cy + R * 0.12, cx - R * 0.62, cy + R * 0.02);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+
+  /* ---- 6. an old hand: tendons over the knuckles, and nothing more */
   ctx.strokeStyle = gray(0x8a); ctx.lineWidth = 3;
   for (let i = 0; i < 3; i++) {
     const t = i / 2;
     ctx.beginPath();
-    ctx.moveTo(cx - R * 0.10 + t * R * 0.60, cy - R * 0.58 + t * R * 0.16);
-    ctx.lineTo(cx - R * 0.02 + t * R * 0.66, cy + R * 0.06 + t * R * 0.10);
+    ctx.moveTo(cx - R * 0.56 + t * R * 0.20, cy - R * 0.62 + t * R * 0.30);
+    ctx.quadraticCurveTo(cx - R * 0.40 + t * R * 0.22, cy - R * 0.20 + t * R * 0.26,
+      cx - R * 0.34 + t * R * 0.24, cy + R * 0.14 + t * R * 0.22);
     ctx.stroke();
   }
   ctx.restore();

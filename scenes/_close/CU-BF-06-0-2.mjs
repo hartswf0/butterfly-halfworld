@@ -13,6 +13,7 @@
 import { sampleMouth, speechCarriage } from "../../engine/speech.mjs";
 import { NW, NH } from "../../assets/set/_stage.mjs";
 import { FACES, drawCloseup, closeGeom, idleFace } from "../../assets/character/_face.mjs";
+import { INK } from "../../engine/halfworld-engine.mjs";
 
 export const id = "CU-BF-06-0-2";
 export const title = "MARA";
@@ -36,6 +37,9 @@ const ENV = [0.01,0,0,0,0,0,0,0,0.01,0,0,0,0,0,0.01,0.01,0.01,0,0.01,0.02,0.69,1
 const TRACK = [[0,0.079,"TH"],[0.079,0.193,"EE"],[0.193,0.233,"REST"],[0.233,0.363,"AH"],[0.363,0.46,"RR"],[0.46,0.522,"MM"],[0.522,0.562,"REST"],[0.562,0.635,"SS"],[0.635,0.76,"OH"],[0.76,0.834,"SS"],[0.834,0.948,"EE"],[0.948,0.987,"REST"],[0.987,1.101,"EE"],[1.101,1.174,"SS"],[1.174,1.214,"REST"],[1.214,1.294,"TH"],[1.294,1.407,"EE"],[1.407,1.447,"REST"],[1.447,1.543,"RR"],[1.543,1.657,"EE"],[1.657,1.73,"SS"],[1.73,1.855,"OH"],[1.855,1.952,"RR"],[1.952,2.008,"DD"],[2.008,2.19,"REST"]].map(([t0, t1, v]) => ({ t0, t1, v }));
 const AXIS = 1;                   // +1 looks screen-right, -1 screen-left
 const SEED = 0;
+/* Set only on an INTRODUCTION — the first time this person speaks in the film.
+   harness/direct.mjs rewrites this one line and nothing else. */
+const NAME = null;
 
 export function at(u) {
   const t = u * seconds;
@@ -63,6 +67,18 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
   drawCloseup(g, FACES[face], s, closeGeom(NW, NH));
+  if (NAME) {
+    /* A name, once, the first time you see the person. Bottom left, mono, and
+       held for the whole shot rather than faded in — this world has no alpha
+       and a caption that arrives is a caption you notice arriving. */
+    g.fillStyle = INK;
+    g.font = "700 34px ui-monospace, Menlo, monospace";
+    g.textAlign = "left"; g.textBaseline = "alphabetic";
+    let x = NW * 0.055;
+    for (const c of NAME) { g.fillText(c, x, NH * 0.935); x += g.measureText(c).width + 9; }
+    g.strokeStyle = INK; g.lineWidth = 4;
+    g.beginPath(); g.moveTo(NW * 0.055, NH * 0.958); g.lineTo(x - 9, NH * 0.958); g.stroke();
+  }
   g.restore();
 }
 

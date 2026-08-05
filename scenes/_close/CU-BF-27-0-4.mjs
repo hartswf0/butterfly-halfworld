@@ -13,6 +13,7 @@
 import { sampleMouth, speechCarriage } from "../../engine/speech.mjs";
 import { NW, NH } from "../../assets/set/_stage.mjs";
 import { FACES, drawCloseup, closeGeom, idleFace } from "../../assets/character/_face.mjs";
+import { INK } from "../../engine/halfworld-engine.mjs";
 
 export const id = "CU-BF-27-0-4";
 export const title = "MARA";
@@ -36,6 +37,9 @@ const ENV = [0.01,0.01,0,0.01,0,0.2,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0,0.
 const TRACK = [[0,0.081,"TH"],[0.081,0.197,"EE"],[0.197,0.272,"SS"],[0.272,0.312,"REST"],[0.312,0.44,"OH"],[0.44,0.497,"DD"],[0.497,0.613,"EE"],[0.613,0.654,"REST"],[0.654,0.769,"REST"],[0.769,0.902,"AH"],[0.902,0.978,"SS"],[0.978,1.018,"REST"],[1.018,1.099,"TH"],[1.099,1.215,"EE"],[1.215,1.255,"REST"],[1.255,1.331,"SS"],[1.331,1.464,"AH"],[1.464,1.527,"MM"],[1.527,1.643,"EE"],[1.643,1.683,"REST"],[1.683,1.747,"MM"],[1.747,1.88,"AH"],[1.88,1.978,"RR"],[1.978,2.036,"DD"],[2.036,2.152,"EE"],[2.152,2.21,"DD"],[2.21,2.395,"REST"]].map(([t0, t1, v]) => ({ t0, t1, v }));
 const AXIS = 1;                   // +1 looks screen-right, -1 screen-left
 const SEED = 0;
+/* Set only on an INTRODUCTION — the first time this person speaks in the film.
+   harness/direct.mjs rewrites this one line and nothing else. */
+const NAME = null;
 
 export function at(u) {
   const t = u * seconds;
@@ -63,6 +67,18 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
   drawCloseup(g, FACES[face], s, closeGeom(NW, NH));
+  if (NAME) {
+    /* A name, once, the first time you see the person. Bottom left, mono, and
+       held for the whole shot rather than faded in — this world has no alpha
+       and a caption that arrives is a caption you notice arriving. */
+    g.fillStyle = INK;
+    g.font = "700 34px ui-monospace, Menlo, monospace";
+    g.textAlign = "left"; g.textBaseline = "alphabetic";
+    let x = NW * 0.055;
+    for (const c of NAME) { g.fillText(c, x, NH * 0.935); x += g.measureText(c).width + 9; }
+    g.strokeStyle = INK; g.lineWidth = 4;
+    g.beginPath(); g.moveTo(NW * 0.055, NH * 0.958); g.lineTo(x - 9, NH * 0.958); g.stroke();
+  }
   g.restore();
 }
 

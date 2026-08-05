@@ -2,7 +2,7 @@
   "id": "C00",
   "mod": "scenes/C00.mjs",
   "ok": true,
-  "t": "2026-08-05T03:27:49.202Z",
+  "t": "2026-08-05T03:56:06.897Z",
   "motion": "TRACE",
   "seconds": 6,
   "loopClosed": false,
@@ -17,7 +17,7 @@
     "nominalSec": 6,
     "webmSec": 6,
     "gifSec": 6,
-    "renderWallSec": 1.7
+    "renderWallSec": 2
   },
   "size": {
     "w": 1120,
@@ -26,22 +26,22 @@
     "card": false
   },
   "loop": {
-    "wrapChangedPct": 2.9413,
-    "wrapMeanAbs": 5.5343,
-    "meanStepChangedPct": 0.0425,
+    "wrapChangedPct": 2.9981,
+    "wrapMeanAbs": 5.6564,
+    "meanStepChangedPct": 0.0433,
     "maxStepChangedPct": 1.5428,
-    "meanStepMeanAbs": 0.078,
-    "ratio": 69.207,
+    "meanStepMeanAbs": 0.0797,
+    "ratio": 69.24,
     "verdict": "n/a (not a CYCLE)"
   },
   "files": {
     "webm": {
       "path": "renders/motion/C00.webm",
-      "bytes": 41972
+      "bytes": 42035
     },
     "gif": {
       "path": "renders/motion/C00.gif",
-      "bytes": 31545
+      "bytes": 31840
     },
     "contact": null,
     "frames": null

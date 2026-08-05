@@ -2,7 +2,7 @@
   "id": "BF-22",
   "mod": "scenes/BF-22.mjs",
   "ok": true,
-  "t": "2026-08-04T18:31:53.059Z",
+  "t": "2026-08-05T04:04:49.429Z",
   "motion": "HOLD",
   "seconds": 5,
   "loopClosed": false,
@@ -17,7 +17,7 @@
     "nominalSec": 5,
     "webmSec": 5,
     "gifSec": 5,
-    "renderWallSec": 4.5
+    "renderWallSec": 4.3
   },
   "size": {
     "w": 1120,
@@ -26,22 +26,22 @@
     "card": false
   },
   "loop": {
-    "wrapChangedPct": 4.6823,
-    "wrapMeanAbs": 7.0467,
-    "meanStepChangedPct": 1.0317,
-    "maxStepChangedPct": 1.8031,
-    "meanStepMeanAbs": 0.9364,
-    "ratio": 4.538,
+    "wrapChangedPct": 5.8914,
+    "wrapMeanAbs": 9.0221,
+    "meanStepChangedPct": 1.2528,
+    "maxStepChangedPct": 2.226,
+    "meanStepMeanAbs": 1.1577,
+    "ratio": 4.703,
     "verdict": "n/a (not a CYCLE)"
   },
   "files": {
     "webm": {
       "path": "renders/motion/BF-22.webm",
-      "bytes": 1169888
+      "bytes": 1286846
     },
     "gif": {
       "path": "renders/motion/BF-22.gif",
-      "bytes": 1081881
+      "bytes": 1246997
     },
     "contact": null,
     "frames": null

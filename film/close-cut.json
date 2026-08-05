@@ -1,8 +1,8 @@
 {
- "built": "2026-08-05T03:28:58.853Z",
- "totalSeconds": 476.6,
- "closeSeconds": 33.75,
- "cuts": 71,
+ "built": "2026-08-05T04:05:36.815Z",
+ "totalSeconds": 485.6,
+ "closeSeconds": 36.1,
+ "cuts": 77,
  "dropped": [],
  "segments": [
   {
@@ -19,414 +19,450 @@
   },
   {
    "t0": 13.5,
+   "seconds": 1.8,
+   "kind": "wide",
+   "label": "P00"
+  },
+  {
+   "t0": 15.3,
    "seconds": 8,
    "kind": "wide",
    "label": "C02"
   },
   {
-   "t0": 21.5,
+   "t0": 23.3,
    "seconds": 12,
    "kind": "wide",
    "label": "BF-01"
   },
   {
-   "t0": 33.5,
+   "t0": 35.3,
+   "seconds": 1.8,
+   "kind": "wide",
+   "label": "P01"
+  },
+  {
+   "t0": 37.1,
    "seconds": 5,
    "kind": "wide",
    "label": "BF-02"
   },
   {
-   "t0": 38.5,
-   "seconds": 6.4,
-   "kind": "wide",
-   "label": "BF-03"
-  },
-  {
-   "t0": 44.9,
-   "seconds": 1.411,
+   "t0": 42.1,
+   "seconds": 1.74,
    "kind": "close",
-   "label": "NIKO · CU-BF-03-0-4"
+   "label": "NIKO · CU-BF-03-0-0-intro"
   },
   {
-   "t0": 46.311,
-   "seconds": 2.189,
+   "t0": 43.84,
+   "seconds": 2.645,
    "kind": "wide",
    "label": "BF-03"
+  },
+  {
+   "t0": 46.485,
+   "seconds": 2.015,
+   "kind": "close",
+   "label": "MARA · CU-BF-03-0-3-intro"
   },
   {
    "t0": 48.5,
+   "seconds": 3.6,
+   "kind": "wide",
+   "label": "BF-03"
+  },
+  {
+   "t0": 52.1,
    "seconds": 4.5,
    "kind": "wide",
    "label": "BF-04"
   },
   {
-   "t0": 53,
+   "t0": 56.6,
    "seconds": 7.01,
    "kind": "wide",
    "label": "BF-05"
   },
   {
-   "t0": 60.01,
+   "t0": 63.61,
    "seconds": 1.921,
    "kind": "close",
    "label": "MARA · CU-BF-05-0-3"
   },
   {
-   "t0": 61.931,
+   "t0": 65.531,
    "seconds": 1.069,
    "kind": "wide",
    "label": "BF-05"
   },
   {
-   "t0": 63,
+   "t0": 66.6,
    "seconds": 15,
    "kind": "wide",
    "label": "BF-06"
   },
   {
-   "t0": 78,
+   "t0": 81.6,
    "seconds": 4,
    "kind": "wide",
    "label": "BF-07"
   },
   {
-   "t0": 82,
+   "t0": 85.6,
    "seconds": 7,
    "kind": "wide",
    "label": "C03"
   },
   {
-   "t0": 89,
+   "t0": 92.6,
    "seconds": 6,
    "kind": "wide",
    "label": "BF-08"
   },
   {
-   "t0": 95,
+   "t0": 98.6,
    "seconds": 11,
    "kind": "wide",
    "label": "BF-09"
   },
   {
-   "t0": 106,
+   "t0": 109.6,
    "seconds": 8.435,
    "kind": "wide",
    "label": "BF-10"
   },
   {
-   "t0": 114.435,
+   "t0": 118.035,
    "seconds": 4.936,
    "kind": "close",
    "label": "MARA · CU-BF-10-0-3-react-niko"
   },
   {
-   "t0": 119.371,
+   "t0": 122.971,
    "seconds": 3.129,
    "kind": "wide",
    "label": "BF-10"
   },
   {
-   "t0": 122.5,
+   "t0": 126.1,
    "seconds": 2.375,
    "kind": "close",
    "label": "NIKO · CU-BF-11-0-0"
   },
   {
-   "t0": 124.875,
+   "t0": 128.475,
    "seconds": 7.485,
    "kind": "wide",
    "label": "BF-11"
   },
   {
-   "t0": 132.36,
+   "t0": 135.96,
    "seconds": 3.551,
    "kind": "close",
    "label": "NIKO · CU-BF-11-0-6"
   },
   {
-   "t0": 135.911,
+   "t0": 139.511,
    "seconds": 2.589,
    "kind": "wide",
    "label": "BF-11"
   },
   {
-   "t0": 138.5,
+   "t0": 142.1,
    "seconds": 4,
    "kind": "wide",
    "label": "BF-12"
   },
   {
-   "t0": 142.5,
+   "t0": 146.1,
    "seconds": 33,
    "kind": "wide",
    "label": "BF-13"
   },
   {
-   "t0": 175.5,
+   "t0": 179.1,
    "seconds": 4,
    "kind": "wide",
    "label": "BF-14"
   },
   {
-   "t0": 179.5,
+   "t0": 183.1,
+   "seconds": 1.8,
+   "kind": "wide",
+   "label": "P02"
+  },
+  {
+   "t0": 184.9,
    "seconds": 3,
    "kind": "wide",
    "label": "BF-15"
   },
   {
-   "t0": 182.5,
+   "t0": 187.9,
    "seconds": 5,
    "kind": "wide",
    "label": "BF-16"
   },
   {
-   "t0": 187.5,
+   "t0": 192.9,
    "seconds": 6.5,
    "kind": "wide",
    "label": "C04"
   },
   {
-   "t0": 194,
+   "t0": 199.4,
    "seconds": 1.99,
    "kind": "close",
-   "label": "IONA · CU-BF-17-0-0"
+   "label": "IONA · CU-BF-17-0-0-intro"
   },
   {
-   "t0": 195.99,
+   "t0": 201.39,
    "seconds": 1.85,
    "kind": "wide",
    "label": "BF-17"
   },
   {
-   "t0": 197.84,
+   "t0": 203.24,
    "seconds": 2.775,
    "kind": "close",
    "label": "IONA · CU-BF-17-0-2"
   },
   {
-   "t0": 200.615,
+   "t0": 206.015,
    "seconds": 8.385,
    "kind": "wide",
    "label": "BF-17"
   },
   {
-   "t0": 209,
+   "t0": 214.4,
    "seconds": 13.5,
    "kind": "wide",
    "label": "BF-18"
   },
   {
-   "t0": 222.5,
+   "t0": 227.9,
    "seconds": 4.015,
    "kind": "wide",
    "label": "BF-19"
   },
   {
-   "t0": 226.515,
+   "t0": 231.915,
    "seconds": 2.015,
    "kind": "close",
    "label": "IONA · CU-BF-19-0-2"
   },
   {
-   "t0": 228.53,
+   "t0": 233.93,
    "seconds": 5.97,
    "kind": "wide",
    "label": "BF-19"
   },
   {
-   "t0": 234.5,
+   "t0": 239.9,
    "seconds": 3.5,
    "kind": "wide",
    "label": "BF-20"
   },
   {
-   "t0": 238,
+   "t0": 243.4,
    "seconds": 8,
    "kind": "wide",
    "label": "BF-21"
   },
   {
-   "t0": 246,
+   "t0": 251.4,
    "seconds": 13.385,
    "kind": "wide",
    "label": "BF-22"
   },
   {
-   "t0": 259.385,
+   "t0": 264.785,
    "seconds": 2.626,
    "kind": "close",
    "label": "IONA · CU-BF-22-0-2"
   },
   {
-   "t0": 262.011,
+   "t0": 267.411,
    "seconds": 3.989,
    "kind": "wide",
    "label": "BF-22"
   },
   {
-   "t0": 266,
+   "t0": 271.4,
    "seconds": 4.5,
    "kind": "wide",
    "label": "BF-23"
   },
   {
-   "t0": 270.5,
+   "t0": 275.9,
    "seconds": 3.745,
    "kind": "wide",
    "label": "BF-24"
   },
   {
-   "t0": 274.245,
+   "t0": 279.645,
    "seconds": 2.026,
    "kind": "close",
    "label": "NIKO · CU-BF-24-0-1"
   },
   {
-   "t0": 276.271,
+   "t0": 281.671,
    "seconds": 2.229,
    "kind": "wide",
    "label": "BF-24"
   },
   {
-   "t0": 278.5,
+   "t0": 283.9,
    "seconds": 10,
    "kind": "wide",
    "label": "BF-25"
   },
   {
-   "t0": 288.5,
+   "t0": 293.9,
+   "seconds": 1.8,
+   "kind": "wide",
+   "label": "P03"
+  },
+  {
+   "t0": 295.7,
    "seconds": 11,
    "kind": "wide",
    "label": "BF-26"
   },
   {
-   "t0": 299.5,
+   "t0": 306.7,
    "seconds": 8.765,
    "kind": "wide",
    "label": "BF-27"
   },
   {
-   "t0": 308.265,
+   "t0": 315.465,
    "seconds": 2.246,
    "kind": "close",
    "label": "IONA · CU-BF-27-0-5"
   },
   {
-   "t0": 310.511,
+   "t0": 317.711,
    "seconds": 3.989,
    "kind": "wide",
    "label": "BF-27"
   },
   {
-   "t0": 314.5,
+   "t0": 321.7,
    "seconds": 5.5,
    "kind": "wide",
    "label": "BF-28"
   },
   {
-   "t0": 320,
+   "t0": 327.2,
+   "seconds": 1.8,
+   "kind": "wide",
+   "label": "P04"
+  },
+  {
+   "t0": 329,
    "seconds": 7.596,
    "kind": "wide",
    "label": "BF-29"
   },
   {
-   "t0": 327.596,
+   "t0": 336.596,
    "seconds": 3.046,
    "kind": "close",
    "label": "IONA · CU-BF-29-1-1-react-niko"
   },
   {
-   "t0": 330.642,
+   "t0": 339.642,
    "seconds": 2.858,
    "kind": "wide",
    "label": "BF-29"
   },
   {
-   "t0": 333.5,
+   "t0": 342.5,
    "seconds": 3.855,
    "kind": "wide",
    "label": "BF-30"
   },
   {
-   "t0": 337.355,
+   "t0": 346.355,
    "seconds": 2.836,
    "kind": "close",
    "label": "IONA · CU-BF-30-0-1"
   },
   {
-   "t0": 340.191,
+   "t0": 349.191,
    "seconds": 3.309,
    "kind": "wide",
    "label": "BF-30"
   },
   {
-   "t0": 343.5,
+   "t0": 352.5,
    "seconds": 8,
    "kind": "wide",
    "label": "BF-31"
   },
   {
-   "t0": 351.5,
+   "t0": 360.5,
    "seconds": 10,
    "kind": "wide",
    "label": "BF-32"
   },
   {
-   "t0": 361.5,
+   "t0": 370.5,
    "seconds": 5.5,
    "kind": "wide",
    "label": "BF-33"
   },
   {
-   "t0": 367,
+   "t0": 376,
    "seconds": 5,
    "kind": "wide",
    "label": "BF-34"
   },
   {
-   "t0": 372,
+   "t0": 381,
    "seconds": 6,
    "kind": "wide",
    "label": "BF-35"
   },
   {
-   "t0": 378,
+   "t0": 387,
    "seconds": 3.5,
    "kind": "wide",
    "label": "BF-36"
   },
   {
-   "t0": 381.5,
+   "t0": 390.5,
    "seconds": 4,
    "kind": "wide",
    "label": "BF-37"
   },
   {
-   "t0": 385.5,
+   "t0": 394.5,
    "seconds": 5.5,
    "kind": "wide",
    "label": "BF-38"
   },
   {
-   "t0": 391,
+   "t0": 400,
    "seconds": 5.5,
    "kind": "wide",
    "label": "BF-39"
   },
   {
-   "t0": 396.5,
+   "t0": 405.5,
    "seconds": 5.5,
    "kind": "wide",
    "label": "BF-40"
   },
   {
-   "t0": 402,
+   "t0": 411,
    "seconds": 7,
    "kind": "wide",
    "label": "C05"
   },
   {
-   "t0": 409,
+   "t0": 418,
    "seconds": 67.6,
    "kind": "wide",
    "label": "CREDITS"

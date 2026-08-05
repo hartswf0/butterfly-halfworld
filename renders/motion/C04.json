@@ -2,7 +2,7 @@
   "id": "C04",
   "mod": "scenes/C04.mjs",
   "ok": true,
-  "t": "2026-08-05T03:27:59.243Z",
+  "t": "2026-08-05T03:56:20.111Z",
   "motion": "SWEEP",
   "seconds": 6.5,
   "loopClosed": false,
@@ -17,7 +17,7 @@
     "nominalSec": 6.5,
     "webmSec": 6.5,
     "gifSec": 6.5,
-    "renderWallSec": 2.3
+    "renderWallSec": 3
   },
   "size": {
     "w": 1120,
@@ -37,11 +37,11 @@
   "files": {
     "webm": {
       "path": "renders/motion/C04.webm",
-      "bytes": 100317
+      "bytes": 105911
     },
     "gif": {
       "path": "renders/motion/C04.gif",
-      "bytes": 70150
+      "bytes": 73346
     },
     "contact": null,
     "frames": null

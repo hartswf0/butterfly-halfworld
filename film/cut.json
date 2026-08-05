@@ -1,8 +1,8 @@
 {
- "built": "2026-08-05T03:29:52.938Z",
+ "built": "2026-08-05T04:05:06.854Z",
  "provisional": false,
  "fps": 12,
- "totalSeconds": 476.6,
+ "totalSeconds": 485.6,
  "measured": 33,
  "estimated": 0,
  "scenes": [
@@ -29,6 +29,18 @@
    "loops": 1,
    "voiceSec": 0,
    "duration": 7.5
+  },
+  {
+   "id": "P00",
+   "card": true,
+   "why": "where we are: the observation box",
+   "title": "P00",
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/P00.webm",
+   "loopSec": 1.8,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 1.8
   },
   {
    "id": "C02",
@@ -58,6 +70,18 @@
    "loops": 3,
    "voiceSec": 9.411,
    "duration": 12
+  },
+  {
+   "id": "P01",
+   "card": true,
+   "why": "where we are: the laboratory",
+   "title": "P01",
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/P01.webm",
+   "loopSec": 1.8,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 1.8
   },
   {
    "id": "BF-02",
@@ -283,6 +307,18 @@
    "duration": 4
   },
   {
+   "id": "P02",
+   "card": true,
+   "why": "where we are: the mill",
+   "title": "P02",
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/P02.webm",
+   "loopSec": 1.8,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 1.8
+  },
+  {
    "id": "BF-15",
    "title": "INT. MILL · THE FIRE DOOR -- CONTINUOUS",
    "plan": "the-mill",
@@ -472,6 +508,18 @@
    "duration": 10
   },
   {
+   "id": "P03",
+   "card": true,
+   "why": "where we are: the lot",
+   "title": "P03",
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/P03.webm",
+   "loopSec": 1.8,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 1.8
+  },
+  {
    "id": "BF-26",
    "title": "EXT. SERVICE ALLEY -- CONTINUOUS",
    "plan": "the-lot",
@@ -519,6 +567,18 @@
    "loops": 1,
    "voiceSec": 4.971,
    "duration": 5.5
+  },
+  {
+   "id": "P04",
+   "card": true,
+   "why": "where we are: the rearing facility",
+   "title": "P04",
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/P04.webm",
+   "loopSec": 1.8,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 1.8
   },
   {
    "id": "BF-29",

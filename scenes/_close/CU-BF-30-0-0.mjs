@@ -13,6 +13,7 @@
 import { sampleMouth, speechCarriage } from "../../engine/speech.mjs";
 import { NW, NH } from "../../assets/set/_stage.mjs";
 import { FACES, drawCloseup, closeGeom, idleFace } from "../../assets/character/_face.mjs";
+import { INK } from "../../engine/halfworld-engine.mjs";
 
 export const id = "CU-BF-30-0-0";
 export const title = "NIKO";
@@ -36,6 +37,9 @@ const ENV = [0.01,0,0,0.01,0.01,0.01,0,0.01,0.01,0,0,0.01,0.08,0.52,0.68,0.72,0.
 const TRACK = [[0,0.059,"SS"],[0.059,0.158,"OH"],[0.158,0.207,"MM"],[0.207,0.298,"EE"],[0.298,0.397,"OH"],[0.397,0.442,"DD"],[0.442,0.532,"EE"],[0.532,0.564,"REST"],[0.564,0.654,"REST"],[0.654,0.758,"AH"],[0.758,0.816,"SS"],[0.816,0.848,"REST"],[0.848,0.897,"MM"],[0.897,0.988,"EE"],[0.988,1.033,"DD"],[1.033,1.064,"REST"],[1.064,1.141,"RR"],[1.141,1.231,"OO"],[1.231,1.276,"DD"],[1.276,1.366,"EE"],[1.366,1.411,"DD"],[1.411,1.443,"REST"],[1.443,1.533,"EE"],[1.533,1.592,"SS"],[1.592,1.641,"MM"],[1.641,1.732,"EE"],[1.732,1.808,"RR"],[1.808,1.898,"EE"],[1.898,1.948,"MM"],[1.948,2.038,"EE"],[2.038,2.083,"DD"],[2.083,2.142,"SS"],[2.142,2.174,"REST"],[2.174,2.264,"REST"],[2.264,2.354,"EE"],[2.354,2.43,"RR"],[2.43,2.521,"EE"],[2.521,2.665,"REST"],[2.665,2.829,"REST"],[2.829,3.01,"OH"],[3.01,3.067,"REST"],[3.067,3.157,"MM"],[3.157,3.346,"AH"],[3.346,3.428,"DD"],[3.428,3.592,"EE"],[3.592,3.855,"REST"]].map(([t0, t1, v]) => ({ t0, t1, v }));
 const AXIS = 1;                   // +1 looks screen-right, -1 screen-left
 const SEED = 1;
+/* Set only on an INTRODUCTION — the first time this person speaks in the film.
+   harness/direct.mjs rewrites this one line and nothing else. */
+const NAME = null;
 
 export function at(u) {
   const t = u * seconds;
@@ -63,6 +67,18 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
   drawCloseup(g, FACES[face], s, closeGeom(NW, NH));
+  if (NAME) {
+    /* A name, once, the first time you see the person. Bottom left, mono, and
+       held for the whole shot rather than faded in — this world has no alpha
+       and a caption that arrives is a caption you notice arriving. */
+    g.fillStyle = INK;
+    g.font = "700 34px ui-monospace, Menlo, monospace";
+    g.textAlign = "left"; g.textBaseline = "alphabetic";
+    let x = NW * 0.055;
+    for (const c of NAME) { g.fillText(c, x, NH * 0.935); x += g.measureText(c).width + 9; }
+    g.strokeStyle = INK; g.lineWidth = 4;
+    g.beginPath(); g.moveTo(NW * 0.055, NH * 0.958); g.lineTo(x - 9, NH * 0.958); g.stroke();
+  }
   g.restore();
 }
 

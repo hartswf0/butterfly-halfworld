@@ -13,6 +13,7 @@
 import { sampleMouth, speechCarriage } from "../../engine/speech.mjs";
 import { NW, NH } from "../../assets/set/_stage.mjs";
 import { FACES, drawCloseup, closeGeom, idleFace } from "../../assets/character/_face.mjs";
+import { INK } from "../../engine/halfworld-engine.mjs";
 
 export const id = "CU-BF-29-0-1";
 export const title = "IONA";
@@ -36,6 +37,9 @@ const ENV = [0,0,0,0,0,0,0,0,0,0,0.01,0.01,0.04,0.67,0.95,1.26,1.15,0.97,0.94,0.
 const TRACK = [[0,0.139,"DD"],[0.139,0.445,"OH"],[0.445,0.89,"REST"],[0.89,0.967,"TH"],[0.967,1.078,"EE"],[1.078,1.149,"SS"],[1.149,1.188,"REST"],[1.188,1.298,"EE"],[1.298,1.37,"SS"],[1.37,1.409,"REST"],[1.409,1.486,"TH"],[1.486,1.596,"EE"],[1.596,1.635,"REST"],[1.635,1.696,"MM"],[1.696,1.823,"AH"],[1.823,1.916,"RR"],[1.916,1.972,"DD"],[1.972,2.01,"REST"],[2.01,2.087,"TH"],[2.087,2.214,"AH"],[2.214,2.27,"DD"],[2.27,2.308,"REST"],[2.308,2.363,"DD"],[2.363,2.474,"EE"],[2.474,2.534,"MM"],[2.534,2.606,"SS"],[2.606,2.645,"REST"],[2.645,2.739,"RR"],[2.739,2.849,"EE"],[2.849,2.91,"MM"],[2.91,3.02,"EE"],[3.02,3.114,"RR"],[3.114,3.224,"EE"],[3.224,3.279,"DD"],[3.279,3.456,"REST"]].map(([t0, t1, v]) => ({ t0, t1, v }));
 const AXIS = -1;                   // +1 looks screen-right, -1 screen-left
 const SEED = 2;
+/* Set only on an INTRODUCTION — the first time this person speaks in the film.
+   harness/direct.mjs rewrites this one line and nothing else. */
+const NAME = null;
 
 export function at(u) {
   const t = u * seconds;
@@ -63,6 +67,18 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
   drawCloseup(g, FACES[face], s, closeGeom(NW, NH));
+  if (NAME) {
+    /* A name, once, the first time you see the person. Bottom left, mono, and
+       held for the whole shot rather than faded in — this world has no alpha
+       and a caption that arrives is a caption you notice arriving. */
+    g.fillStyle = INK;
+    g.font = "700 34px ui-monospace, Menlo, monospace";
+    g.textAlign = "left"; g.textBaseline = "alphabetic";
+    let x = NW * 0.055;
+    for (const c of NAME) { g.fillText(c, x, NH * 0.935); x += g.measureText(c).width + 9; }
+    g.strokeStyle = INK; g.lineWidth = 4;
+    g.beginPath(); g.moveTo(NW * 0.055, NH * 0.958); g.lineTo(x - 9, NH * 0.958); g.stroke();
+  }
   g.restore();
 }
 

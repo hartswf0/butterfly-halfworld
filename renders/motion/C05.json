@@ -2,7 +2,7 @@
   "id": "C05",
   "mod": "scenes/C05.mjs",
   "ok": true,
-  "t": "2026-08-05T03:28:01.545Z",
+  "t": "2026-08-05T03:56:23.318Z",
   "motion": "HOLD",
   "seconds": 7,
   "loopClosed": false,
@@ -17,7 +17,7 @@
     "nominalSec": 7,
     "webmSec": 7,
     "gifSec": 7,
-    "renderWallSec": 2.3
+    "renderWallSec": 3.2
   },
   "size": {
     "w": 1120,
@@ -37,11 +37,11 @@
   "files": {
     "webm": {
       "path": "renders/motion/C05.webm",
-      "bytes": 68786
+      "bytes": 72003
     },
     "gif": {
       "path": "renders/motion/C05.gif",
-      "bytes": 56941
+      "bytes": 58440
     },
     "contact": null,
     "frames": null

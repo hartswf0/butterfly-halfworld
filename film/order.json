@@ -1,6 +1,31 @@
 {
  "cards": [
   {
+   "card": "P00",
+   "before": "BF-01",
+   "why": "where we are: the observation box"
+  },
+  {
+   "card": "P01",
+   "before": "BF-02",
+   "why": "where we are: the laboratory"
+  },
+  {
+   "card": "P02",
+   "before": "BF-15",
+   "why": "where we are: the mill"
+  },
+  {
+   "card": "P03",
+   "before": "BF-26",
+   "why": "where we are: the lot"
+  },
+  {
+   "card": "P04",
+   "before": "BF-29",
+   "why": "where we are: the rearing facility"
+  },
+  {
    "card": "C00",
    "why": "the mark draws itself before anything is named"
   },

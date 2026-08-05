@@ -2,7 +2,7 @@
   "id": "C03",
   "mod": "scenes/C03.mjs",
   "ok": true,
-  "t": "2026-08-05T03:27:56.917Z",
+  "t": "2026-08-05T03:56:17.102Z",
   "motion": "DISSOLVE",
   "seconds": 7,
   "loopClosed": false,
@@ -17,7 +17,7 @@
     "nominalSec": 7,
     "webmSec": 7,
     "gifSec": 7,
-    "renderWallSec": 2.6
+    "renderWallSec": 3.4
   },
   "size": {
     "w": 1120,
@@ -37,11 +37,11 @@
   "files": {
     "webm": {
       "path": "renders/motion/C03.webm",
-      "bytes": 70748
+      "bytes": 72496
     },
     "gif": {
       "path": "renders/motion/C03.gif",
-      "bytes": 47665
+      "bytes": 49612
     },
     "contact": null,
     "frames": null

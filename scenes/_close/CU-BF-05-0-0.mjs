@@ -13,6 +13,7 @@
 import { sampleMouth, speechCarriage } from "../../engine/speech.mjs";
 import { NW, NH } from "../../assets/set/_stage.mjs";
 import { FACES, drawCloseup, closeGeom, idleFace } from "../../assets/character/_face.mjs";
+import { INK } from "../../engine/halfworld-engine.mjs";
 
 export const id = "CU-BF-05-0-0";
 export const title = "NIKO";
@@ -36,6 +37,9 @@ const ENV = [0,0.01,0,0,0.01,0,0,0.01,0.01,0,0,0,0.06,0.62,0.77,0.63,0.37,0.3,0.
 const TRACK = [[0,0.061,"DD"],[0.061,0.164,"RR"],[0.164,0.285,"EE"],[0.285,0.425,"AH"],[0.425,0.486,"DD"],[0.486,0.528,"REST"],[0.528,0.613,"FF"],[0.613,0.808,"REST"],[0.808,0.868,"DD"],[0.868,1.002,"OH"],[1.002,1.063,"DD"],[1.063,1.142,"SS"],[1.142,1.275,"OH"],[1.275,1.342,"MM"],[1.342,1.403,"DD"],[1.403,1.524,"EE"],[1.524,1.585,"DD"],[1.585,1.706,"EE"],[1.706,1.84,"OH"],[1.84,1.901,"DD"],[1.901,2.095,"REST"]].map(([t0, t1, v]) => ({ t0, t1, v }));
 const AXIS = 1;                   // +1 looks screen-right, -1 screen-left
 const SEED = 1;
+/* Set only on an INTRODUCTION — the first time this person speaks in the film.
+   harness/direct.mjs rewrites this one line and nothing else. */
+const NAME = null;
 
 export function at(u) {
   const t = u * seconds;
@@ -63,6 +67,18 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
   drawCloseup(g, FACES[face], s, closeGeom(NW, NH));
+  if (NAME) {
+    /* A name, once, the first time you see the person. Bottom left, mono, and
+       held for the whole shot rather than faded in — this world has no alpha
+       and a caption that arrives is a caption you notice arriving. */
+    g.fillStyle = INK;
+    g.font = "700 34px ui-monospace, Menlo, monospace";
+    g.textAlign = "left"; g.textBaseline = "alphabetic";
+    let x = NW * 0.055;
+    for (const c of NAME) { g.fillText(c, x, NH * 0.935); x += g.measureText(c).width + 9; }
+    g.strokeStyle = INK; g.lineWidth = 4;
+    g.beginPath(); g.moveTo(NW * 0.055, NH * 0.958); g.lineTo(x - 9, NH * 0.958); g.stroke();
+  }
   g.restore();
 }
 

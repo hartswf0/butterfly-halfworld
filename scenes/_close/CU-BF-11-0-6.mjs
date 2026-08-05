@@ -13,6 +13,7 @@
 import { sampleMouth, speechCarriage } from "../../engine/speech.mjs";
 import { NW, NH } from "../../assets/set/_stage.mjs";
 import { FACES, drawCloseup, closeGeom, idleFace } from "../../assets/character/_face.mjs";
+import { INK } from "../../engine/halfworld-engine.mjs";
 
 export const id = "CU-BF-11-0-6";
 export const title = "NIKO";
@@ -36,6 +37,9 @@ const ENV = [0,0.01,0.01,0,0.01,0,0,0,0,0,0,0,0.01,0.01,0.14,0.26,1.35,1.35,1.35
 const TRACK = [[0,0.083,"TH"],[0.083,0.201,"EE"],[0.201,0.26,"DD"],[0.26,0.301,"REST"],[0.301,0.419,"OO"],[0.419,0.538,"EE"],[0.538,0.579,"REST"],[0.579,0.715,"AH"],[0.715,0.815,"RR"],[0.815,0.933,"EE"],[0.933,0.975,"REST"],[0.975,1.093,"OO"],[1.093,1.211,"EE"],[1.211,1.253,"REST"],[1.253,1.312,"DD"],[1.312,1.43,"OO"],[1.43,1.489,"DD"],[1.489,1.607,"EE"],[1.607,1.666,"DD"],[1.666,1.708,"REST"],[1.708,1.843,"AH"],[1.843,1.903,"DD"],[1.903,1.944,"REST"],[1.944,2.08,"AH"],[2.08,2.121,"REST"],[2.121,2.204,"FF"],[2.204,2.334,"OH"],[2.334,2.393,"DD"],[2.393,2.523,"OH"],[2.523,2.582,"DD"],[2.582,2.683,"RR"],[2.683,2.818,"AH"],[2.818,2.901,"FF"],[2.901,2.942,"REST"],[2.942,3.025,"FF"],[3.025,3.126,"RR"],[3.126,3.256,"OH"],[3.256,3.321,"MM"],[3.321,3.362,"REST"],[3.362,3.551,"REST"]].map(([t0, t1, v]) => ({ t0, t1, v }));
 const AXIS = 1;                   // +1 looks screen-right, -1 screen-left
 const SEED = 1;
+/* Set only on an INTRODUCTION — the first time this person speaks in the film.
+   harness/direct.mjs rewrites this one line and nothing else. */
+const NAME = null;
 
 export function at(u) {
   const t = u * seconds;
@@ -63,6 +67,18 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
   drawCloseup(g, FACES[face], s, closeGeom(NW, NH));
+  if (NAME) {
+    /* A name, once, the first time you see the person. Bottom left, mono, and
+       held for the whole shot rather than faded in — this world has no alpha
+       and a caption that arrives is a caption you notice arriving. */
+    g.fillStyle = INK;
+    g.font = "700 34px ui-monospace, Menlo, monospace";
+    g.textAlign = "left"; g.textBaseline = "alphabetic";
+    let x = NW * 0.055;
+    for (const c of NAME) { g.fillText(c, x, NH * 0.935); x += g.measureText(c).width + 9; }
+    g.strokeStyle = INK; g.lineWidth = 4;
+    g.beginPath(); g.moveTo(NW * 0.055, NH * 0.958); g.lineTo(x - 9, NH * 0.958); g.stroke();
+  }
   g.restore();
 }
 

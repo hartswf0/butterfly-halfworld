@@ -138,6 +138,44 @@ const TURNS = [
     why: "the admission that the record has been managed — spoken over a white rectangle that waits, which is the film telling you the same thing in the other channel" },
 ];
 
+/* ---- INTRODUCTIONS ------------------------------------------------------
+   THE NOTE THIS ANSWERS: "it's too hard to follow — we don't know who is
+   speaking."
+
+   Placing the voices in the stereo field was necessary and not sufficient. A
+   fixed seat tells you that the person on the left is the same person as last
+   time; it cannot tell you WHO that is, because the film never introduced them.
+   Mara, Niko and Iona speak for three minutes and the audience is asked to
+   assemble three people out of nothing but alternation.
+
+   Film has had the answer to this for a century, and I did not use it: THE
+   FIRST TIME SOMEBODY SPEAKS, YOU SEE THEIR FACE. Once. After that the voice
+   carries them, because the voice now has a face attached to it and a seat in
+   the room.
+
+   And because this film is abstract enough that a face alone may not stick,
+   the introduction carries a NAME — mono, bottom left, held for the whole shot.
+   Three captions in a seven-minute film. The film already has a card grammar
+   and this is the same grammar doing the most basic job there is.
+
+   These are found, not authored: the earliest run by each in-room speaker that
+   is long enough to be a shot and sits in a motion that may be interrupted. If
+   the first line is too short or lands inside a DISSOLVE, the introduction
+   moves to the next one that works, and the report says which. */
+const INTRO_MIN = 1.45;
+const seenSpeaker = new Set();
+const introTurns = [];
+for (const u of [...CLOSE.units].filter((x) => x.face)
+  .sort((a, b) => a.scene.localeCompare(b.scene) || a.t0 - b.t0)) {
+  if (seenSpeaker.has(u.who)) continue;
+  const info = MOTION[u.scene] || {};
+  if (!INTERRUPTIBLE.has(info.motion) || u.seconds < INTRO_MIN) continue;
+  seenSpeaker.add(u.who);
+  introTurns.push({ scene: u.scene, line: u.text.slice(0, 40), on: u.who, intro: true, name: u.who,
+    why: `INTRODUCTION. The first time ${u.who} speaks with a face available. One shot, one caption, and after this the voice carries them.` });
+}
+TURNS.unshift(...introTurns);
+
 /* ---- selection ----------------------------------------------------------
    Three passes, in this order, because the order is the argument.
 
@@ -156,18 +194,26 @@ const kept = [], cut = [], unmatched = [];
 const byScene = {};
 for (const u of CLOSE.units) if (u.face) (byScene[u.scene] ||= []).push(u);
 
-// 1. match
+// 1. match. One unit, one turn: the introduction pass runs first and can land
+// on the same run a later turn wanted (Iona's introduction and the BF-17 turn
+// are both "You have her shoulders."), which would cut to the same shot twice
+// in a row. First claim wins, and the loser is reported rather than dropped.
+const claimed = new Set();
 for (const t of TURNS) {
   const units = byScene[t.scene] || [];
   const key = norm(t.line).slice(0, 26);
-  t.unit = units.find((u) => norm(u.text).includes(key));
-  if (!t.unit) unmatched.push(t);
+  t.unit = units.find((u) => norm(u.text).includes(key) && !claimed.has(u.id));
+  if (t.unit) claimed.add(t.unit.id);
+  else if (units.some((u) => norm(u.text).includes(key))) t.dup = true;
+  else unmatched.push(t);
 }
+const dups = TURNS.filter((t) => t.dup);
 
 // 2. the law, and the minimum shot
 for (const t of TURNS) {
   if (!t.unit) continue;
   const info = MOTION[t.scene] || {};
+  if (t.dup) { t.forbidden = "the introduction already took this shot"; continue; }
   if (!INTERRUPTIBLE.has(info.motion))
     t.forbidden = `${info.motion} accumulates — leaving it means the audience misses the only time it happens`;
   else if (t.unit.seconds < MIN_SHOT && !t.react)
@@ -192,8 +238,11 @@ for (const t of TURNS) {
     // clock. It is generated below, and it is NOT the speaker's clip with a
     // different label — that mistake would put the talker's own mouth on screen
     // and call it a reaction.
-    id: t.react ? `${t.unit.id}-react-${t.on.toLowerCase().replace(/[^a-z]/g, "")}` : t.unit.id,
-    src: t.react ? `renders/motion/${t.unit.id}-react-${t.on.toLowerCase().replace(/[^a-z]/g, "")}.webm` : t.unit.src,
+    intro: !!t.intro, name: t.name || null,
+    id: t.react ? `${t.unit.id}-react-${t.on.toLowerCase().replace(/[^a-z]/g, "")}`
+       : t.intro ? `${t.unit.id}-intro` : t.unit.id,
+    src: t.react ? `renders/motion/${t.unit.id}-react-${t.on.toLowerCase().replace(/[^a-z]/g, "")}.webm`
+       : t.intro ? `renders/motion/${t.unit.id}-intro.webm` : t.unit.src,
     speaker: t.unit.who });
 }
 for (const t of TURNS) if (t.unit && t.forbidden)
@@ -326,6 +375,19 @@ export const SCENE_VERSION = "reaction/1.0.0";
 `);
 }
 
+/* ---- write the introduction variants ------------------------------------
+   A one-line substitution on a file this program generated itself, rather than
+   a second code path that could drift from the first. The introduction shot IS
+   the ordinary close-up; the only difference is that it says who it is. */
+for (const k of kept.filter((x) => x.intro)) {
+  const srcPath = path.join(CLOSE_DIR, `${k.id.replace(/-intro$/, "")}.mjs`);
+  if (!fs.existsSync(srcPath)) { console.warn(`  no module for ${k.id}`); continue; }
+  let src = fs.readFileSync(srcPath, "utf8");
+  src = src.replace("const NAME = null;", `const NAME = ${JSON.stringify(k.name)};`)
+           .replace(/export const id = "[^"]+";/, `export const id = ${JSON.stringify(k.id)};`);
+  if (!REPORT) fs.writeFileSync(path.join(CLOSE_DIR, `${k.id}.mjs`), src);
+}
+
 /* ---- report ------------------------------------------------------------- */
 const missed = unmatched;
 console.log(`DIRECTION\n`);
@@ -336,13 +398,15 @@ console.log(`  ${kept.reduce((n, k) => n + k.seconds, 0).toFixed(1)}s of face in
 
 console.log(`  THE CUT\n`);
 for (const k of kept) {
-  console.log(`  ${k.scene.padEnd(6)} ${k.motion.padEnd(9)} ${(k.react ? "REACT " : "      ")}${String(k.on).padEnd(6)} ` +
+  console.log(`  ${k.scene.padEnd(6)} ${k.motion.padEnd(9)} ${(k.react ? "REACT " : k.intro ? "INTRO " : "      ")}${String(k.on).padEnd(6)} ` +
     `${k.seconds.toFixed(1)}s  ${JSON.stringify(k.line)}`);
 }
 if (missed.length) {
   console.log(`\n  ** ${missed.length} authored turn(s) matched no run — a typo above, not a decision:`);
   for (const t of missed) console.log(`      ${t.scene}  ${JSON.stringify(t.line)}  (${t.on})`);
 }
+if (dups.length) { console.log(`\n  ${dups.length} turn(s) folded into an introduction that had already claimed the shot:`);
+  for (const t of dups) console.log(`      ${t.scene}  ${JSON.stringify(t.line)}`); }
 const overruled = cut.filter((c) => c.authored);
 if (overruled.length) {
   console.log(`\n  TURNS I WANTED AND DID NOT GET (${overruled.length})`);

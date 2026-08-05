@@ -299,3 +299,56 @@ to survive the halftone and below it is a rumour.
 **And the same lesson again:** the first roll was 66 lines and **two minutes on a film that runs
 under seven**. A constraint asks you to say *less*, and I keep answering it by saying the same amount
 more carefully.
+
+---
+
+# PASS 3 — "we don't know who is speaking. we don't know what's going on"
+
+Placing the voices in the stereo field was necessary and not sufficient. A fixed seat tells you the
+person on the left is the same person as last time; it cannot tell you **who that is**, because the
+film never introduced them. Mara, Niko and Iona speak for three minutes and the audience is asked to
+assemble three people out of alternation alone.
+
+### introductions
+
+Film has had the answer for a century and I didn't use it: **the first time somebody speaks, you see
+their face.** Once. After that the voice carries them, because it now has a face and a seat.
+
+Found rather than authored — the earliest run by each in-room speaker that is long enough to be a
+shot *and* sits in a motion that may be interrupted. Niko's actual first line is BF-02 "Stop the
+trial", but BF-02 is a **TRACE**, so the introduction moves to BF-03 and the report says so. Each
+carries a **name**, mono, bottom left, held for the whole shot. Three captions in eight minutes.
+
+The introduction pass runs first and can claim a shot a later turn wanted — Iona's introduction and
+the BF-17 turn are both *"You have her shoulders."* First claim wins, and the loser is folded rather
+than cut twice.
+
+### place slates
+
+The film moves through five places and **never names one of them.** The sound layer already knew
+there were five, and had been mixing them as five continuous acoustic blocks with cross-fades at the
+four boundaries. The picture had the same structure and never stated it.
+
+Five slates, 1.8s each, placed at exactly those boundaries so picture and room arrive in the new
+place on the same frame. They say where you are and nothing else — a place card that editorialises
+is a title card, and the film has six of those.
+
+This is not an admission that the images failed; it is the grammar the film is already in. The
+alternative was forty scenes each explaining their own geography, which is how you get forty scenes
+about establishing rather than about anything.
+
+### the frame that was unreadable
+
+BF-22 read as a balloon with a sausage taped to it. The text is *"Iona catches **Mara's wrist**"* —
+and the wrist was not in the frame. A hand closing on nothing has nothing to close on, so the
+fingers have no reason to curl and the mass has no axis. Now Mara's forearm runs through the shot in
+the cast's lighter skin value, Iona's hand wraps it, and **four finger backs cross it and show past
+the far edge** — the detail that makes a grip legible at a glance in any medium. Without it, a hand
+on an arm is a hand *behind* an arm.
+
+### the bug that ate the credits, twice
+
+`build-cards.mjs` wrote `{ cards: ORDER }` and nothing else, silently deleting every entry in the
+running order it does not own. The end roll fell out twice, once unnoticed until the film came back
+67 seconds short. **A generator may replace its own entries. It may not replace somebody else's.**
+Each generator now merges rather than overwrites, and each one owns its own placement.

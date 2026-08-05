@@ -2,7 +2,7 @@
   "id": "C02",
   "mod": "scenes/C02.mjs",
   "ok": true,
-  "t": "2026-08-05T03:27:54.297Z",
+  "t": "2026-08-05T03:56:13.696Z",
   "motion": "ADVANCE",
   "seconds": 8,
   "loopClosed": false,
@@ -17,7 +17,7 @@
     "nominalSec": 8,
     "webmSec": 8,
     "gifSec": 8,
-    "renderWallSec": 2.3
+    "renderWallSec": 3
   },
   "size": {
     "w": 1120,
@@ -26,22 +26,22 @@
     "card": false
   },
   "loop": {
-    "wrapChangedPct": 4.0446,
-    "wrapMeanAbs": 7.6496,
-    "meanStepChangedPct": 0.0432,
-    "maxStepChangedPct": 1.8242,
-    "meanStepMeanAbs": 0.0806,
-    "ratio": 93.625,
+    "wrapChangedPct": 3.8172,
+    "wrapMeanAbs": 7.3622,
+    "meanStepChangedPct": 0.0402,
+    "maxStepChangedPct": 1.9859,
+    "meanStepMeanAbs": 0.0775,
+    "ratio": 94.955,
     "verdict": "n/a (not a CYCLE)"
   },
   "files": {
     "webm": {
       "path": "renders/motion/C02.webm",
-      "bytes": 60995
+      "bytes": 52853
     },
     "gif": {
       "path": "renders/motion/C02.gif",
-      "bytes": 42329
+      "bytes": 38820
     },
     "contact": null,
     "frames": null

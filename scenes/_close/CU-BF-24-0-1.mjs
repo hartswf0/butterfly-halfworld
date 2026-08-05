@@ -13,6 +13,7 @@
 import { sampleMouth, speechCarriage } from "../../engine/speech.mjs";
 import { NW, NH } from "../../assets/set/_stage.mjs";
 import { FACES, drawCloseup, closeGeom, idleFace } from "../../assets/character/_face.mjs";
+import { INK } from "../../engine/halfworld-engine.mjs";
 
 export const id = "CU-BF-24-0-1";
 export const title = "NIKO";
@@ -36,6 +37,9 @@ const ENV = [0,0,0,0,0,0,0,0,0,0,0,0.01,0.06,0.05,0.56,0.65,0.49,0.48,0.61,0.33,
 const TRACK = [[0,0.098,"OH"],[0.098,0.16,"FF"],[0.16,0.191,"REST"],[0.191,0.248,"SS"],[0.248,0.346,"OH"],[0.346,0.421,"RR"],[0.421,0.479,"SS"],[0.479,0.568,"EE"],[0.568,0.599,"REST"],[0.599,0.687,"EE"],[0.687,0.732,"DD"],[0.732,0.762,"REST"],[0.762,0.82,"SS"],[0.82,0.922,"AH"],[0.922,0.967,"DD"],[0.967,0.998,"REST"],[0.998,1.046,"MM"],[1.046,1.135,"EE"],[1.135,1.166,"REST"],[1.166,1.228,"FF"],[1.228,1.325,"OH"],[1.325,1.37,"DD"],[1.37,1.467,"OH"],[1.467,1.512,"DD"],[1.512,1.587,"RR"],[1.587,1.689,"AH"],[1.689,1.751,"FF"],[1.751,1.84,"EE"],[1.84,1.884,"DD"],[1.884,2.026,"REST"]].map(([t0, t1, v]) => ({ t0, t1, v }));
 const AXIS = -1;                   // +1 looks screen-right, -1 screen-left
 const SEED = 1;
+/* Set only on an INTRODUCTION — the first time this person speaks in the film.
+   harness/direct.mjs rewrites this one line and nothing else. */
+const NAME = null;
 
 export function at(u) {
   const t = u * seconds;
@@ -63,6 +67,18 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
   drawCloseup(g, FACES[face], s, closeGeom(NW, NH));
+  if (NAME) {
+    /* A name, once, the first time you see the person. Bottom left, mono, and
+       held for the whole shot rather than faded in — this world has no alpha
+       and a caption that arrives is a caption you notice arriving. */
+    g.fillStyle = INK;
+    g.font = "700 34px ui-monospace, Menlo, monospace";
+    g.textAlign = "left"; g.textBaseline = "alphabetic";
+    let x = NW * 0.055;
+    for (const c of NAME) { g.fillText(c, x, NH * 0.935); x += g.measureText(c).width + 9; }
+    g.strokeStyle = INK; g.lineWidth = 4;
+    g.beginPath(); g.moveTo(NW * 0.055, NH * 0.958); g.lineTo(x - 9, NH * 0.958); g.stroke();
+  }
   g.restore();
 }
 

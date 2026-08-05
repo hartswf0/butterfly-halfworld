@@ -13,6 +13,7 @@
 import { sampleMouth, speechCarriage } from "../../engine/speech.mjs";
 import { NW, NH } from "../../assets/set/_stage.mjs";
 import { FACES, drawCloseup, closeGeom, idleFace } from "../../assets/character/_face.mjs";
+import { INK } from "../../engine/halfworld-engine.mjs";
 
 export const id = "CU-BF-19-0-2";
 export const title = "IONA";
@@ -36,6 +37,9 @@ const ENV = [0.01,0.01,0.01,0.01,0.01,0.01,0.01,0,0,0.02,0.01,0.02,0.02,0.3,0.46
 const TRACK = [[0,0.075,"TH"],[0.075,0.181,"EE"],[0.181,0.219,"REST"],[0.219,0.293,"FF"],[0.293,0.4,"EE"],[0.4,0.49,"RR"],[0.49,0.56,"SS"],[0.56,0.666,"EE"],[0.666,0.784,"OH"],[0.784,0.837,"DD"],[0.837,0.874,"REST"],[0.874,0.949,"TH"],[0.949,1.071,"AH"],[1.071,1.125,"DD"],[1.125,1.162,"REST"],[1.162,1.231,"SS"],[1.231,1.338,"OO"],[1.338,1.429,"RR"],[1.429,1.503,"FF"],[1.503,1.61,"EE"],[1.61,1.685,"FF"],[1.685,1.791,"EE"],[1.791,1.844,"DD"],[1.844,2.015,"REST"]].map(([t0, t1, v]) => ({ t0, t1, v }));
 const AXIS = 1;                   // +1 looks screen-right, -1 screen-left
 const SEED = 2;
+/* Set only on an INTRODUCTION — the first time this person speaks in the film.
+   harness/direct.mjs rewrites this one line and nothing else. */
+const NAME = null;
 
 export function at(u) {
   const t = u * seconds;
@@ -63,6 +67,18 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
   drawCloseup(g, FACES[face], s, closeGeom(NW, NH));
+  if (NAME) {
+    /* A name, once, the first time you see the person. Bottom left, mono, and
+       held for the whole shot rather than faded in — this world has no alpha
+       and a caption that arrives is a caption you notice arriving. */
+    g.fillStyle = INK;
+    g.font = "700 34px ui-monospace, Menlo, monospace";
+    g.textAlign = "left"; g.textBaseline = "alphabetic";
+    let x = NW * 0.055;
+    for (const c of NAME) { g.fillText(c, x, NH * 0.935); x += g.measureText(c).width + 9; }
+    g.strokeStyle = INK; g.lineWidth = 4;
+    g.beginPath(); g.moveTo(NW * 0.055, NH * 0.958); g.lineTo(x - 9, NH * 0.958); g.stroke();
+  }
   g.restore();
 }
 

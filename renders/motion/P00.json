@@ -1,0 +1,52 @@
+{
+  "id": "P00",
+  "mod": "scenes/P00.mjs",
+  "ok": true,
+  "t": "2026-08-05T04:01:27.243Z",
+  "motion": "HOLD",
+  "seconds": 1.8,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 22,
+    "rendered": 22,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 1.833,
+    "webmSec": 1.833,
+    "gifSec": 1.83,
+    "renderWallSec": 0.9
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": false
+  },
+  "loop": {
+    "wrapChangedPct": 0,
+    "wrapMeanAbs": 0,
+    "meanStepChangedPct": 0,
+    "maxStepChangedPct": 0,
+    "meanStepMeanAbs": 0,
+    "ratio": null,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/P00.webm",
+      "bytes": 29007
+    },
+    "gif": {
+      "path": "renders/motion/P00.gif",
+      "bytes": 20331
+    },
+    "contact": null,
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

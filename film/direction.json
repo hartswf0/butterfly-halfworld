@@ -1,5 +1,5 @@
 {
- "built": "2026-08-05T03:18:40.327Z",
+ "built": "2026-08-05T04:00:39.612Z",
  "law": "a close-up may only interrupt a motion that comes round again (CYCLE, HOLD)",
  "interruptible": [
   "CYCLE",
@@ -10,27 +10,79 @@
  "maxShare": 0.55,
  "kept": [
   {
-   "id": "CU-BF-03-0-4",
+   "id": "CU-BF-03-0-0-intro",
    "scene": "BF-03",
    "take": "BF-03__0",
    "who": "NIKO",
    "face": "niko",
-   "t0": 6.4,
-   "t1": 7.811,
-   "seconds": 1.411,
-   "frames": 17,
+   "t0": 0,
+   "t1": 1.74,
+   "seconds": 1.74,
+   "frames": 21,
    "lines": 1,
-   "head": 0.4,
-   "tail": 0.28,
-   "src": "renders/motion/CU-BF-03-0-4.webm",
-   "text": "No, it isn't.",
+   "head": 0.2,
+   "tail": 0.46,
+   "src": "renders/motion/CU-BF-03-0-0-intro.webm",
+   "text": "Stop means stop.",
    "on": "NIKO",
    "react": false,
-   "why": "the first crack between them. Three exchanges of a procedural correction, and then he refuses her the retreat. It is the moment the scene stops being about the odour.",
-   "line": "No, it isn't.",
+   "why": "INTRODUCTION. The first time NIKO speaks with a face available. One shot, one caption, and after this the voice carries them.",
+   "line": "Stop means stop.",
    "motion": "HOLD",
    "sceneSubject": "two gloved hands inside the box, with nothing left to do",
+   "intro": true,
+   "name": "NIKO",
    "speaker": "NIKO"
+  },
+  {
+   "id": "CU-BF-03-0-3-intro",
+   "scene": "BF-03",
+   "take": "BF-03__0",
+   "who": "MARA",
+   "face": "mara",
+   "t0": 4.385,
+   "t1": 6.4,
+   "seconds": 2.015,
+   "frames": 24,
+   "lines": 1,
+   "head": 0.06,
+   "tail": 0.4,
+   "src": "renders/motion/CU-BF-03-0-3-intro.webm",
+   "text": "That's what I meant.",
+   "on": "MARA",
+   "react": false,
+   "why": "INTRODUCTION. The first time MARA speaks with a face available. One shot, one caption, and after this the voice carries them.",
+   "line": "That's what I meant.",
+   "motion": "HOLD",
+   "sceneSubject": "two gloved hands inside the box, with nothing left to do",
+   "intro": true,
+   "name": "MARA",
+   "speaker": "MARA"
+  },
+  {
+   "id": "CU-BF-17-0-0-intro",
+   "scene": "BF-17",
+   "take": "BF-17__0",
+   "who": "IONA",
+   "face": "iona",
+   "t0": 0,
+   "t1": 1.99,
+   "seconds": 1.99,
+   "frames": 24,
+   "lines": 1,
+   "head": 0.18,
+   "tail": 0.24,
+   "src": "renders/motion/CU-BF-17-0-0-intro.webm",
+   "text": "You have her shoulders.",
+   "on": "IONA",
+   "react": false,
+   "why": "INTRODUCTION. The first time IONA speaks with a face available. One shot, one caption, and after this the voice carries them.",
+   "line": "You have her shoulders.",
+   "motion": "HOLD",
+   "sceneSubject": "a face arriving before its features can contain it",
+   "intro": true,
+   "name": "IONA",
+   "speaker": "IONA"
   },
   {
    "id": "CU-BF-05-0-3",
@@ -53,6 +105,8 @@
    "line": "It rejected the premise.",
    "motion": "HOLD",
    "sceneSubject": "the closed wings on the white partition, and what is on them",
+   "intro": false,
+   "name": null,
    "speaker": "MARA"
   },
   {
@@ -76,6 +130,8 @@
    "line": "She said she remembered being there.",
    "motion": "HOLD",
    "sceneSubject": "four lines in fountain pen, and the same shape under them",
+   "intro": false,
+   "name": null,
    "speaker": "MARA"
   },
   {
@@ -99,6 +155,8 @@
    "line": "Then why are we looking at a photograph from 1945?",
    "motion": "CYCLE",
    "sceneSubject": "two people arriving back at the question they started from",
+   "intro": false,
+   "name": null,
    "speaker": "NIKO"
   },
   {
@@ -122,30 +180,9 @@
    "line": "Could it have gotten into the intake?",
    "motion": "CYCLE",
    "sceneSubject": "two people arriving back at the question they started from",
+   "intro": false,
+   "name": null,
    "speaker": "NIKO"
-  },
-  {
-   "id": "CU-BF-17-0-0",
-   "scene": "BF-17",
-   "take": "BF-17__0",
-   "who": "IONA",
-   "face": "iona",
-   "t0": 0,
-   "t1": 1.99,
-   "seconds": 1.99,
-   "frames": 24,
-   "lines": 1,
-   "head": 0.18,
-   "tail": 0.24,
-   "src": "renders/motion/CU-BF-17-0-0.webm",
-   "text": "You have her shoulders.",
-   "on": "IONA",
-   "react": false,
-   "why": "the only scene in the corpus whose declared subject IS a face — 'a face arriving before its features can contain it'. At MEDIUM that face is 150px; the text's one animation note has nowhere to happen. This is the close-up the film was always missing.",
-   "line": "You have her shoulders.",
-   "motion": "HOLD",
-   "sceneSubject": "a face arriving before its features can contain it",
-   "speaker": "IONA"
   },
   {
    "id": "CU-BF-17-0-2",
@@ -168,6 +205,8 @@
    "line": "That depends which paper you're reading.",
    "motion": "HOLD",
    "sceneSubject": "a face arriving before its features can contain it",
+   "intro": false,
+   "name": null,
    "speaker": "IONA"
   },
   {
@@ -191,6 +230,8 @@
    "line": "The version that survived.",
    "motion": "HOLD",
    "sceneSubject": "the gap between a reaching hand and the canister",
+   "intro": false,
+   "name": null,
    "speaker": "IONA"
   },
   {
@@ -214,6 +255,8 @@
    "line": "Because then you will remember being there.",
    "motion": "HOLD",
    "sceneSubject": "the broken circle at the base of Iona's thumb",
+   "intro": false,
+   "name": null,
    "speaker": "IONA"
   },
   {
@@ -237,6 +280,8 @@
    "line": "Of course it can be photographed.",
    "motion": "CYCLE",
    "sceneSubject": "the broken circle, which exists only when the wings are closed",
+   "intro": false,
+   "name": null,
    "speaker": "NIKO"
   },
   {
@@ -260,6 +305,8 @@
    "line": "Marking is not memory.",
    "motion": "HOLD",
    "sceneSubject": "a butterfly's foot on a lavender flower, not recoiling",
+   "intro": false,
+   "name": null,
    "speaker": "IONA"
   },
   {
@@ -283,6 +330,8 @@
    "line": "I remembered it.",
    "motion": "HOLD",
    "sceneSubject": "the far wall of dated chrysalides",
+   "intro": false,
+   "name": null,
    "speaker": "IONA"
   },
   {
@@ -306,10 +355,21 @@
    "line": "Enough to keep it from becoming evidence.",
    "motion": "HOLD",
    "sceneSubject": "the white rectangle that waits",
+   "intro": false,
+   "name": null,
    "speaker": "IONA"
   }
  ],
  "cut": [
+  {
+   "id": "CU-BF-03-0-4",
+   "scene": "BF-03",
+   "who": "NIKO",
+   "seconds": 1.411,
+   "reason": "the scene would become mostly faces; a later turn yielded to an earlier one",
+   "authored": true,
+   "line": "No, it isn't."
+  },
   {
    "id": "CU-BF-11-0-2",
    "scene": "BF-11",
@@ -336,13 +396,6 @@
    "reason": "no turn here — the image is the shot"
   },
   {
-   "id": "CU-BF-03-0-0",
-   "scene": "BF-03",
-   "who": "NIKO",
-   "seconds": 1.74,
-   "reason": "no turn here — the image is the shot"
-  },
-  {
    "id": "CU-BF-03-0-1",
    "scene": "BF-03",
    "who": "MARA",
@@ -354,13 +407,6 @@
    "scene": "BF-03",
    "who": "NIKO",
    "seconds": 1.805,
-   "reason": "no turn here — the image is the shot"
-  },
-  {
-   "id": "CU-BF-03-0-3",
-   "scene": "BF-03",
-   "who": "MARA",
-   "seconds": 2.015,
    "reason": "no turn here — the image is the shot"
   },
   {

@@ -13,6 +13,7 @@
 import { sampleMouth, speechCarriage } from "../../engine/speech.mjs";
 import { NW, NH } from "../../assets/set/_stage.mjs";
 import { FACES, drawCloseup, closeGeom, idleFace } from "../../assets/character/_face.mjs";
+import { INK } from "../../engine/halfworld-engine.mjs";
 
 export const id = "CU-BF-27-0-5";
 export const title = "IONA";
@@ -36,6 +37,9 @@ const ENV = [0,0.01,0,0,0,0,0,0,0.01,0.01,0.01,0.09,1.1,1.35,1.35,1.1,0.96,1.08,
 const TRACK = [[0,0.077,"MM"],[0.077,0.239,"AH"],[0.239,0.358,"RR"],[0.358,0.428,"DD"],[0.428,0.569,"EE"],[0.569,0.639,"DD"],[0.639,0.688,"REST"],[0.688,0.828,"EE"],[0.828,0.919,"SS"],[0.919,0.969,"REST"],[0.969,1.039,"DD"],[1.039,1.193,"OH"],[1.193,1.263,"DD"],[1.263,1.313,"REST"],[1.313,1.39,"MM"],[1.39,1.53,"EE"],[1.53,1.607,"MM"],[1.607,1.762,"OH"],[1.762,1.881,"RR"],[1.881,2.021,"EE"],[2.021,2.246,"REST"]].map(([t0, t1, v]) => ({ t0, t1, v }));
 const AXIS = -1;                   // +1 looks screen-right, -1 screen-left
 const SEED = 2;
+/* Set only on an INTRODUCTION — the first time this person speaks in the film.
+   harness/direct.mjs rewrites this one line and nothing else. */
+const NAME = null;
 
 export function at(u) {
   const t = u * seconds;
@@ -63,6 +67,18 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
   drawCloseup(g, FACES[face], s, closeGeom(NW, NH));
+  if (NAME) {
+    /* A name, once, the first time you see the person. Bottom left, mono, and
+       held for the whole shot rather than faded in — this world has no alpha
+       and a caption that arrives is a caption you notice arriving. */
+    g.fillStyle = INK;
+    g.font = "700 34px ui-monospace, Menlo, monospace";
+    g.textAlign = "left"; g.textBaseline = "alphabetic";
+    let x = NW * 0.055;
+    for (const c of NAME) { g.fillText(c, x, NH * 0.935); x += g.measureText(c).width + 9; }
+    g.strokeStyle = INK; g.lineWidth = 4;
+    g.beginPath(); g.moveTo(NW * 0.055, NH * 0.958); g.lineTo(x - 9, NH * 0.958); g.stroke();
+  }
   g.restore();
 }
 

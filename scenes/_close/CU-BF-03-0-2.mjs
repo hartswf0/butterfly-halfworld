@@ -13,6 +13,7 @@
 import { sampleMouth, speechCarriage } from "../../engine/speech.mjs";
 import { NW, NH } from "../../assets/set/_stage.mjs";
 import { FACES, drawCloseup, closeGeom, idleFace } from "../../assets/character/_face.mjs";
+import { INK } from "../../engine/halfworld-engine.mjs";
 
 export const id = "CU-BF-03-0-2";
 export const title = "NIKO";
@@ -36,6 +37,9 @@ const ENV = [0.01,0.01,0.01,0.29,0.21,0.07,0.02,0.01,0.01,0,0,0,0,0,0,0,0,0,0,0,
 const TRACK = [[0,0.091,"TH"],[0.091,0.222,"EE"],[0.222,0.267,"REST"],[0.267,0.41,"OH"],[0.41,0.476,"DD"],[0.476,0.619,"OH"],[0.619,0.73,"RR"],[0.73,0.775,"REST"],[0.775,0.906,"EE"],[0.906,0.991,"SS"],[0.991,1.036,"REST"],[1.036,1.121,"SS"],[1.121,1.186,"DD"],[1.186,1.329,"OH"],[1.329,1.401,"MM"],[1.401,1.531,"EE"],[1.531,1.597,"DD"],[1.597,1.805,"REST"]].map(([t0, t1, v]) => ({ t0, t1, v }));
 const AXIS = 1;                   // +1 looks screen-right, -1 screen-left
 const SEED = 1;
+/* Set only on an INTRODUCTION — the first time this person speaks in the film.
+   harness/direct.mjs rewrites this one line and nothing else. */
+const NAME = null;
 
 export function at(u) {
   const t = u * seconds;
@@ -63,6 +67,18 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
   drawCloseup(g, FACES[face], s, closeGeom(NW, NH));
+  if (NAME) {
+    /* A name, once, the first time you see the person. Bottom left, mono, and
+       held for the whole shot rather than faded in — this world has no alpha
+       and a caption that arrives is a caption you notice arriving. */
+    g.fillStyle = INK;
+    g.font = "700 34px ui-monospace, Menlo, monospace";
+    g.textAlign = "left"; g.textBaseline = "alphabetic";
+    let x = NW * 0.055;
+    for (const c of NAME) { g.fillText(c, x, NH * 0.935); x += g.measureText(c).width + 9; }
+    g.strokeStyle = INK; g.lineWidth = 4;
+    g.beginPath(); g.moveTo(NW * 0.055, NH * 0.958); g.lineTo(x - 9, NH * 0.958); g.stroke();
+  }
   g.restore();
 }
 

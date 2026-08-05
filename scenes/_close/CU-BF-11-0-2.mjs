@@ -13,6 +13,7 @@
 import { sampleMouth, speechCarriage } from "../../engine/speech.mjs";
 import { NW, NH } from "../../assets/set/_stage.mjs";
 import { FACES, drawCloseup, closeGeom, idleFace } from "../../assets/character/_face.mjs";
+import { INK } from "../../engine/halfworld-engine.mjs";
 
 export const id = "CU-BF-11-0-2";
 export const title = "NIKO";
@@ -36,6 +37,9 @@ const ENV = [0,0,0,0.01,0,0,0,0,0,0,0,0,0,0,0.13,0.03,0.03,0,0.15,0.23,0.26,1.21
 const TRACK = [[0,0.073,"SS"],[0.073,0.198,"OH"],[0.198,0.254,"DD"],[0.254,0.293,"REST"],[0.293,0.372,"TH"],[0.372,0.485,"EE"],[0.485,0.525,"REST"],[0.525,0.598,"SS"],[0.598,0.711,"EE"],[0.711,0.767,"DD"],[0.767,0.841,"SS"],[0.841,0.965,"OH"],[0.965,1.061,"RR"],[1.061,1.101,"REST"],[1.101,1.163,"MM"],[1.163,1.276,"EE"],[1.276,1.315,"REST"],[1.315,1.428,"OO"],[1.428,1.524,"RR"],[1.524,1.648,"OH"],[1.648,1.704,"DD"],[1.704,1.885,"REST"]].map(([t0, t1, v]) => ({ t0, t1, v }));
 const AXIS = 1;                   // +1 looks screen-right, -1 screen-left
 const SEED = 1;
+/* Set only on an INTRODUCTION — the first time this person speaks in the film.
+   harness/direct.mjs rewrites this one line and nothing else. */
+const NAME = null;
 
 export function at(u) {
   const t = u * seconds;
@@ -63,6 +67,18 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
   drawCloseup(g, FACES[face], s, closeGeom(NW, NH));
+  if (NAME) {
+    /* A name, once, the first time you see the person. Bottom left, mono, and
+       held for the whole shot rather than faded in — this world has no alpha
+       and a caption that arrives is a caption you notice arriving. */
+    g.fillStyle = INK;
+    g.font = "700 34px ui-monospace, Menlo, monospace";
+    g.textAlign = "left"; g.textBaseline = "alphabetic";
+    let x = NW * 0.055;
+    for (const c of NAME) { g.fillText(c, x, NH * 0.935); x += g.measureText(c).width + 9; }
+    g.strokeStyle = INK; g.lineWidth = 4;
+    g.beginPath(); g.moveTo(NW * 0.055, NH * 0.958); g.lineTo(x - 9, NH * 0.958); g.stroke();
+  }
   g.restore();
 }
 
