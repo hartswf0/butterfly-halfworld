@@ -75,6 +75,64 @@ function strike(out, at, { f = 2400, decay = 0.06, gain = 0.5, partials = [1, 2.
 /* ------------------------------------------------------------------ cues */
 const CUES = {};
 
+/* ---- THE PAIRING — the cause of everything, and never seen -------------
+   A scent arriving, a gap, then the tick. The gap is the point: the animal
+   had time to notice the smell before anything happened to it. That interval
+   is what makes it a memory rather than a reflex.                          */
+CUES.shock_pairing = (sec = 4.0) => {
+  const out = buf(sec), r = rng(313);
+  const per = 1.6;
+  for (let k = 0; k * per < sec; k++) {
+    const t0 = k * per;
+    // the scent: a soft rising hiss, 0.9s
+    const i0 = Math.round(t0 * SR), n = Math.round(0.9 * SR);
+    for (let i = 0; i < n && i0 + i < out.length; i++) {
+      const u = i / n;
+      out[i0 + i] += r() * 0.10 * Math.sin(Math.PI * u);
+    }
+    // the gap — 0.35s of nothing. This is the interval that makes it learning.
+    // then the tick: brief, dry, small. Never a zap.
+    strike(out, t0 + 0.9 + 0.35, { f: 900, decay: 0.008, gain: 0.16, partials: [1, 3.7], seed: 700 + k });
+  }
+  return band(out, 200, 6000);
+};
+
+/* ---- ROOM TONES — three rooms that must not sound alike ---------------- */
+function room(seed, lo, hi, drift, hum, gain) {
+  return (sec = 8) => {
+    const out = buf(sec), r = rng(seed);
+    for (let i = 0; i < out.length; i++) out[i] = r() * 0.5;
+    band(out, lo, hi);
+    for (let i = 0; i < out.length; i++) {
+      const t = i / SR;
+      let v = out[i] * gain * (1 + drift * Math.sin(2 * Math.PI * t / 6.7));
+      if (hum) v += Math.sin(2 * Math.PI * hum * t) * gain * 0.35;
+      out[i] = v;
+    }
+    return out;
+  };
+}
+CUES.room_lab  = room(1009, 70, 320, 0.02, 60, 0.075);    // mains hum under a high room
+CUES.room_mill = room(2011, 50, 260, 0.05, 0,  0.060);    // brick, no machine
+CUES.room_lot  = room(3019, 90, 2400, 0.10, 0, 0.055);    // open air, wide band
+
+/* ---- THE HINGE — not a flutter ----------------------------------------
+   "I remember striking it with the soft hinge of my body." A dull soft
+   contact at 9 Hz, felt more than heard, with no attack worth the name.  */
+CUES.wingbeat = (sec = 4.0) => {
+  const out = buf(sec), hz = 9;
+  const per = 1 / hz;
+  for (let k = 0; k * per < sec; k++) {
+    const i0 = Math.round(k * per * SR), n = Math.round(0.055 * SR);
+    for (let i = 0; i < n && i0 + i < out.length; i++) {
+      const u = i / n;
+      out[i0 + i] += Math.sin(Math.PI * u) * Math.sin(2 * Math.PI * 62 * (i / SR)) * 0.055;
+    }
+  }
+  return out;
+};
+
+
 /** THE TAP — eight, quantised, one revolution per loop. */
 CUES.tap_ring = (sec = 4.0) => {
   const out = buf(sec), hits = 8;

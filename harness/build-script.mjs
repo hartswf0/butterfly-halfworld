@@ -91,6 +91,28 @@ const CAST = {
 
 /* ---- the sound elements, each cited ------------------------------------- */
 const SOUND = [
+  { id: "shock_pairing", cue: "the pairing that made the memory", scenes: ["BF-02", "BF-11", "BF-27"],
+    from: "the referent: a scent paired with a mild shock at the caterpillar stage — the levels tested on the researcher's own arm first",
+    kind: "pair", spec: { sec: 0.9, gap: 0.35 },
+    note: "THE CAUSE OF EVERYTHING IN THIS FILM, and it is never seen. A soft scent-hiss, a gap, then a tick. It plays under the scenes that are ABOUT the memory rather than the scenes that contain it." },
+
+  { id: "room_lab", cue: "the laboratory", scenes: ["BF-02","BF-03","BF-04","BF-06","BF-07","BF-08","BF-09","BF-12"],
+    from: "\"a converted textile mill … windows too tall for modern use\"", kind: "room",
+    spec: { band: [70, 320], drift: 0.02, hum: 60 } },
+
+  { id: "room_mill", cue: "the stairwell and the lobby", scenes: ["BF-15","BF-16","BF-17","BF-18","BF-19","BF-20","BF-22"],
+    from: "\"Fabric scraps pushed against the baseboards when the air system turned on.\"", kind: "room",
+    spec: { band: [50, 260], drift: 0.05 } },
+
+  { id: "room_lot", cue: "outside", scenes: ["BF-26","BF-27","BF-28"],
+    from: "\"Heat, traffic, hot rubber, river damp, cut weeds, diesel, sunlight.\"", kind: "room",
+    spec: { band: [90, 2400], drift: 0.10 } },
+
+  { id: "wingbeat", cue: "the soft hinge of the body", scenes: ["BF-01","BF-23","BF-24","BF-25","BF-37"],
+    from: "\"I remember striking it with the soft hinge of my body\"", kind: "beat",
+    spec: { hz: 9, soft: true },
+    note: "Not a flutter. A hinge — a dull soft contact, nine per second, felt more than heard." },
+
   { id: "tap_ring", cue: "the tapping at equal intervals", scenes: ["BF-14", "BF-21"],
     from: "\"Not wildly. It moves around the circumference, testing the glass at equal intervals.\"",
     kind: "quantised", spec: { hits: 8, perLoop: 1, timbre: "glass", quantise: true },

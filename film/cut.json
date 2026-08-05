@@ -1,5 +1,5 @@
 {
- "built": "2026-08-05T00:14:51.140Z",
+ "built": "2026-08-05T00:43:11.024Z",
  "provisional": false,
  "fps": 12,
  "totalSeconds": 367,
@@ -14,6 +14,7 @@
    "loop": false,
    "lines": 3,
    "sound": [
+    "wingbeat",
     "maze_fans"
    ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-01.webm",
@@ -29,7 +30,10 @@
    "motion": "TRACE",
    "loop": false,
    "lines": 1,
-   "sound": [],
+   "sound": [
+    "shock_pairing",
+    "room_lab"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-02.webm",
    "loopSec": 5,
    "loops": 1,
@@ -44,6 +48,7 @@
    "loop": false,
    "lines": 5,
    "sound": [
+    "room_lab",
     "maze_fans"
    ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-03.webm",
@@ -59,7 +64,9 @@
    "motion": "TRANSFER",
    "loop": false,
    "lines": 0,
-   "sound": [],
+   "sound": [
+    "room_lab"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-04.webm",
    "loopSec": 4.5,
    "loops": 1,
@@ -89,7 +96,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 5,
-   "sound": [],
+   "sound": [
+    "room_lab"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-06.webm",
    "loopSec": 5,
    "loops": 3,
@@ -103,7 +112,9 @@
    "motion": "TRANSFER",
    "loop": false,
    "lines": 2,
-   "sound": [],
+   "sound": [
+    "room_lab"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-07.webm",
    "loopSec": 4,
    "loops": 1,
@@ -117,7 +128,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 0,
-   "sound": [],
+   "sound": [
+    "room_lab"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-08.webm",
    "loopSec": 6,
    "loops": 1,
@@ -131,7 +144,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 4,
-   "sound": [],
+   "sound": [
+    "room_lab"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-09.webm",
    "loopSec": 5.5,
    "loops": 2,
@@ -161,7 +176,9 @@
    "motion": "CYCLE",
    "loop": true,
    "lines": 7,
-   "sound": [],
+   "sound": [
+    "shock_pairing"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-11.webm",
    "loopSec": 4,
    "loops": 4,
@@ -175,7 +192,9 @@
    "motion": "BREAK",
    "loop": false,
    "lines": 2,
-   "sound": [],
+   "sound": [
+    "room_lab"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-12.webm",
    "loopSec": 4,
    "loops": 1,
@@ -222,7 +241,9 @@
    "motion": "TRANSFER",
    "loop": false,
    "lines": 1,
-   "sound": [],
+   "sound": [
+    "room_mill"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-15.webm",
    "loopSec": 3,
    "loops": 1,
@@ -236,7 +257,9 @@
    "motion": "ADVANCE",
    "loop": false,
    "lines": 0,
-   "sound": [],
+   "sound": [
+    "room_mill"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-16.webm",
    "loopSec": 5,
    "loops": 1,
@@ -250,7 +273,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 5,
-   "sound": [],
+   "sound": [
+    "room_mill"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-17.webm",
    "loopSec": 5,
    "loops": 3,
@@ -264,7 +289,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 5,
-   "sound": [],
+   "sound": [
+    "room_mill"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-18.webm",
    "loopSec": 4.5,
    "loops": 3,
@@ -278,7 +305,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 4,
-   "sound": [],
+   "sound": [
+    "room_mill"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-19.webm",
    "loopSec": 4,
    "loops": 3,
@@ -292,7 +321,9 @@
    "motion": "TRANSFER",
    "loop": false,
    "lines": 0,
-   "sound": [],
+   "sound": [
+    "room_mill"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-20.webm",
    "loopSec": 3.5,
    "loops": 1,
@@ -322,7 +353,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 5,
-   "sound": [],
+   "sound": [
+    "room_mill"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-22.webm",
    "loopSec": 5,
    "loops": 4,
@@ -336,7 +369,9 @@
    "motion": "CYCLE",
    "loop": false,
    "lines": 0,
-   "sound": [],
+   "sound": [
+    "wingbeat"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-23.webm",
    "loopSec": 4.5,
    "loops": 1,
@@ -350,7 +385,9 @@
    "motion": "CYCLE",
    "loop": false,
    "lines": 2,
-   "sound": [],
+   "sound": [
+    "wingbeat"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-24.webm",
    "loopSec": 4,
    "loops": 2,
@@ -365,6 +402,7 @@
    "loop": false,
    "lines": 3,
    "sound": [
+    "wingbeat",
     "summer"
    ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-25.webm",
@@ -380,7 +418,9 @@
    "motion": "ADVANCE",
    "loop": false,
    "lines": 4,
-   "sound": [],
+   "sound": [
+    "room_lot"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-26.webm",
    "loopSec": 5.5,
    "loops": 2,
@@ -394,7 +434,10 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 6,
-   "sound": [],
+   "sound": [
+    "shock_pairing",
+    "room_lot"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-27.webm",
    "loopSec": 5,
    "loops": 3,
@@ -408,7 +451,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 3,
-   "sound": [],
+   "sound": [
+    "room_lot"
+   ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-28.webm",
    "loopSec": 5.5,
    "loops": 1,
@@ -553,6 +598,7 @@
    "loop": false,
    "lines": 0,
    "sound": [
+    "wingbeat",
     "maze_fans"
    ],
    "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/BF-37.webm",

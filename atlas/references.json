@@ -1,0 +1,85 @@
+{
+  "schema": "butterfly/references/v1",
+  "note": "The world this film invents stands on three real things and never named any of them. A fiction's departure from a fact is only legible if the fact is in the room. These are wired into the atlas so every scene that touches one carries it, and so the chat can be asked about them.",
+
+  "references": [
+    {
+      "id": "nagai",
+      "kind": "experiment",
+      "title": "Joe Nagai · swallowtail memory through metamorphosis",
+      "where": "presented at the International Congress of Entomology, Kyoto, 2024",
+      "who": "a ten-year-old elementary-school student who had kept hundreds of pages of handwritten butterfly observations by second grade",
+      "what": [
+        "He noticed that butterflies he had raised from caterpillars behaved differently around him than wild ones — fluttering toward him when he tried to release them, as if they recognised him.",
+        "He found Martha Weiss's moth work and repeated its shape on swallowtails.",
+        "He paired a scent with a mild shock at the caterpillar stage, waited out metamorphosis, then offered the emerged butterflies a Y-maze with sugar water on BOTH arms and the scent on one.",
+        "Untrained butterflies split evenly — about 50% each arm. Trained butterflies avoided the scented arm about 70% of the time.",
+        "He then raised the untrained offspring of trained caterpillars. They avoided the scent in nearly the same ratio. A third generation did too."
+      ],
+      "theSubstitution": {
+        "fact": "The original protocol used ethyl acetate — which smells like nail-polish remover and is a standard killing agent for insects. Nagai judged that caterpillars might be innately sensitive to it, which would confound the result, and replaced it with LAVENDER OIL as a pleasanter scent for animals he considered friends. He also tested the shock levels on his own arm first.",
+        "whyItMattersHere": "In this film lavender is the trauma cue. So the smell in the corridor is the KINDEST AVAILABLE SUBSTITUTION, and it is the thing that carries the harm. The mercy and the injury are the same molecule. Nothing in the film says this out loud and everything in it depends on it."
+      },
+      "honestly": "The within-lifetime finding sits on established ground (see weiss). The transgenerational claim — a learned aversion appearing in untrained offspring across three generations — is a much stronger claim than the first, came from a student project, and should be described as reported rather than as settled. The film does not need it to be true. It needs someone to have wanted it to be true, which is a different and safer thing to build on.",
+      "attachesTo": ["BF-01", "BF-02", "BF-05", "BF-11", "BF-27", "BF-37"]
+    },
+
+    {
+      "id": "weiss",
+      "kind": "precedent",
+      "title": "Martha Weiss · retention of memory through metamorphosis",
+      "where": "Georgetown University; the moth work Nagai found and later met her for",
+      "what": [
+        "Weiss and colleagues trained tobacco hornworm caterpillars (Manduca sexta) to avoid an odour paired with a mild shock, and showed the avoidance survived pupation into the adult moth.",
+        "This was contested, because the received view was that the dramatic reorganisation of the insect brain during metamorphosis wipes what came before."
+      ],
+      "whyItMattersHere": "Iona Ash is the Weiss figure: the one who did it before, who arrives carrying the old film and the old dates, and who says 'your colony was taught' — the precedent that the new researcher has to discover already exists. The chrysalis wall dated 1951 onward is a precedent made physical.",
+      "attachesTo": ["BF-17", "BF-18", "BF-22", "BF-27", "BF-29"]
+    },
+
+    {
+      "id": "zhuangzi",
+      "kind": "text",
+      "title": "莊周夢蝶 · Zhuang Zhou dreams the butterfly",
+      "where": "the Inner Chapters of the Zhuangzi, c. 4th century BCE",
+      "chinese": "昔者莊周夢為胡蝶，栩栩然蝴蝶也。自喻適志與！不知周也。俄然覺，則蘧蘧然周也。不知周之夢為胡蝶與？蝴蝶之夢為周與？周與蝴蝶，則必有分矣。此之謂物化。",
+      "what": [
+        "Once Zhuang Zhou dreamed he was a butterfly, fluttering about, doing as he pleased, and not knowing he was Zhou.",
+        "Suddenly he woke, and he was solidly and unmistakably Zhou.",
+        "He did not know whether he was Zhou who had dreamed he was a butterfly, or a butterfly dreaming he was Zhou.",
+        "Between Zhou and the butterfly there must be some distinction. This is called 物化 — wùhuà, the transformation of things."
+      ],
+      "whyItMattersHere": "The film's title is this passage with the doubt taken out. Zhuang Zhou does NOT know which he is; that not-knowing is the whole point of the parable. The first line of this film is 'I remember being a butterfly' — a flat claim of continuous memory across a transformation, asserted by something that cannot possibly verify it. The story is what happens when Zhuangzi's question is answered in the affirmative by a witness with no way to check.",
+      "wuhua": "物化 is usually rendered 'the transformation of things', and it is also the word for what a chrysalis does. The wall of dated husks is a wall of wùhuà, and every one of them is empty.",
+      "attachesTo": ["BF-01", "BF-23", "BF-32", "BF-35", "BF-37", "BF-40"]
+    },
+
+    {
+      "id": "the-departure",
+      "kind": "reading",
+      "title": "What the fiction changes, and why it only works if you know the fact",
+      "what": [
+        "IN THE EXPERIMENT there are exactly two outcomes. Untrained: 50/50. Trained: about 70/30 away from the scent. Both are CHOICES between two arms.",
+        "IN THIS FILM the butterfly produces a third outcome that is in neither dataset: it refuses both arms and strikes the ceiling until it draws a shape. That is not avoidance and it is not indifference. It is a refusal of the premise.",
+        "A refusal is only legible against the choices it declines. Without the 50/50 and the 70/30 in the room, the animal is simply behaving oddly.",
+        "Likewise the sugar water: in the real maze BOTH arms are baited equally, so the only variable is memory. That is what makes it an experiment about remembering rather than about hunger. This film never says it, and should."
+      ],
+      "attachesTo": ["BF-01", "BF-02", "BF-06", "BF-11"]
+    }
+  ],
+
+  "conceptsToAdd": [
+    { "id": "substitution", "name": "THE KINDEST AVAILABLE SMELL",
+      "gloss": "Lavender is in the corridor because a child refused to use a killing agent. The mercy and the injury are the same molecule.",
+      "from": "nagai.theSubstitution" },
+    { "id": "wuhua", "name": "物化 · THE TRANSFORMATION OF THINGS",
+      "gloss": "Zhuangzi's word for what a chrysalis does, and for the distinction that must exist between the dreamer and the dreamt. A wall of dated husks is a wall of wuhua, every one of them empty.",
+      "from": "zhuangzi.wuhua" },
+    { "id": "precedent", "name": "IT HAS BEEN DONE BEFORE",
+      "gloss": "Someone ran this experiment already, was doubted, and is still alive to arrive carrying the film. Your colony was taught.",
+      "from": "weiss" },
+    { "id": "thirdoutcome", "name": "NEITHER FIFTY NOR SEVENTY",
+      "gloss": "The two real results are 50/50 and 70/30. This animal produces a third that is in no dataset: it declines the question. Only legible against the two it refuses.",
+      "from": "the-departure" }
+  ]
+}

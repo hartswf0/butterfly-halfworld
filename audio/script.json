@@ -1,6 +1,6 @@
 {
  "schema": "butterfly/script/v1",
- "built": "2026-08-04T23:49:16.671Z",
+ "built": "2026-08-05T00:40:09.570Z",
  "fps": 12,
  "totals": {
   "scenes": 40,
@@ -8,8 +8,8 @@
   "words": 482,
   "speakers": 9,
   "silentScenes": 9,
-  "soundCues": 9,
-  "scenesWithSound": 19
+  "soundCues": 14,
+  "scenesWithSound": 39
  },
  "cast": {
   "VO": {
@@ -86,6 +86,104 @@
   }
  },
  "sound": [
+  {
+   "id": "shock_pairing",
+   "cue": "the pairing that made the memory",
+   "scenes": [
+    "BF-02",
+    "BF-11",
+    "BF-27"
+   ],
+   "from": "the referent: a scent paired with a mild shock at the caterpillar stage — the levels tested on the researcher's own arm first",
+   "kind": "pair",
+   "spec": {
+    "sec": 0.9,
+    "gap": 0.35
+   },
+   "note": "THE CAUSE OF EVERYTHING IN THIS FILM, and it is never seen. A soft scent-hiss, a gap, then a tick. It plays under the scenes that are ABOUT the memory rather than the scenes that contain it."
+  },
+  {
+   "id": "room_lab",
+   "cue": "the laboratory",
+   "scenes": [
+    "BF-02",
+    "BF-03",
+    "BF-04",
+    "BF-06",
+    "BF-07",
+    "BF-08",
+    "BF-09",
+    "BF-12"
+   ],
+   "from": "\"a converted textile mill … windows too tall for modern use\"",
+   "kind": "room",
+   "spec": {
+    "band": [
+     70,
+     320
+    ],
+    "drift": 0.02,
+    "hum": 60
+   }
+  },
+  {
+   "id": "room_mill",
+   "cue": "the stairwell and the lobby",
+   "scenes": [
+    "BF-15",
+    "BF-16",
+    "BF-17",
+    "BF-18",
+    "BF-19",
+    "BF-20",
+    "BF-22"
+   ],
+   "from": "\"Fabric scraps pushed against the baseboards when the air system turned on.\"",
+   "kind": "room",
+   "spec": {
+    "band": [
+     50,
+     260
+    ],
+    "drift": 0.05
+   }
+  },
+  {
+   "id": "room_lot",
+   "cue": "outside",
+   "scenes": [
+    "BF-26",
+    "BF-27",
+    "BF-28"
+   ],
+   "from": "\"Heat, traffic, hot rubber, river damp, cut weeds, diesel, sunlight.\"",
+   "kind": "room",
+   "spec": {
+    "band": [
+     90,
+     2400
+    ],
+    "drift": 0.1
+   }
+  },
+  {
+   "id": "wingbeat",
+   "cue": "the soft hinge of the body",
+   "scenes": [
+    "BF-01",
+    "BF-23",
+    "BF-24",
+    "BF-25",
+    "BF-37"
+   ],
+   "from": "\"I remember striking it with the soft hinge of my body\"",
+   "kind": "beat",
+   "spec": {
+    "hz": 9,
+    "soft": true
+   },
+   "note": "Not a flutter. A hinge — a dull soft contact, nine per second, felt more than heard."
+  },
   {
    "id": "tap_ring",
    "cue": "the tapping at equal intervals",
@@ -251,6 +349,7 @@
    "loop": false,
    "lines": 3,
    "sound": [
+    "wingbeat",
     "maze_fans"
    ]
   },
@@ -261,7 +360,10 @@
    "motion": "TRACE",
    "loop": false,
    "lines": 1,
-   "sound": []
+   "sound": [
+    "shock_pairing",
+    "room_lab"
+   ]
   },
   {
    "id": "BF-03",
@@ -271,6 +373,7 @@
    "loop": false,
    "lines": 5,
    "sound": [
+    "room_lab",
     "maze_fans"
    ]
   },
@@ -281,7 +384,9 @@
    "motion": "TRANSFER",
    "loop": false,
    "lines": 0,
-   "sound": []
+   "sound": [
+    "room_lab"
+   ]
   },
   {
    "id": "BF-05",
@@ -301,7 +406,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 5,
-   "sound": []
+   "sound": [
+    "room_lab"
+   ]
   },
   {
    "id": "BF-07",
@@ -310,7 +417,9 @@
    "motion": "TRANSFER",
    "loop": false,
    "lines": 2,
-   "sound": []
+   "sound": [
+    "room_lab"
+   ]
   },
   {
    "id": "BF-08",
@@ -319,7 +428,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 0,
-   "sound": []
+   "sound": [
+    "room_lab"
+   ]
   },
   {
    "id": "BF-09",
@@ -328,7 +439,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 4,
-   "sound": []
+   "sound": [
+    "room_lab"
+   ]
   },
   {
    "id": "BF-10",
@@ -348,7 +461,9 @@
    "motion": "CYCLE",
    "loop": true,
    "lines": 7,
-   "sound": []
+   "sound": [
+    "shock_pairing"
+   ]
   },
   {
    "id": "BF-12",
@@ -357,7 +472,9 @@
    "motion": "BREAK",
    "loop": false,
    "lines": 2,
-   "sound": []
+   "sound": [
+    "room_lab"
+   ]
   },
   {
    "id": "BF-13",
@@ -389,7 +506,9 @@
    "motion": "TRANSFER",
    "loop": false,
    "lines": 1,
-   "sound": []
+   "sound": [
+    "room_mill"
+   ]
   },
   {
    "id": "BF-16",
@@ -398,7 +517,9 @@
    "motion": "ADVANCE",
    "loop": false,
    "lines": 0,
-   "sound": []
+   "sound": [
+    "room_mill"
+   ]
   },
   {
    "id": "BF-17",
@@ -407,7 +528,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 5,
-   "sound": []
+   "sound": [
+    "room_mill"
+   ]
   },
   {
    "id": "BF-18",
@@ -416,7 +539,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 5,
-   "sound": []
+   "sound": [
+    "room_mill"
+   ]
   },
   {
    "id": "BF-19",
@@ -425,7 +550,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 4,
-   "sound": []
+   "sound": [
+    "room_mill"
+   ]
   },
   {
    "id": "BF-20",
@@ -434,7 +561,9 @@
    "motion": "TRANSFER",
    "loop": false,
    "lines": 0,
-   "sound": []
+   "sound": [
+    "room_mill"
+   ]
   },
   {
    "id": "BF-21",
@@ -454,7 +583,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 5,
-   "sound": []
+   "sound": [
+    "room_mill"
+   ]
   },
   {
    "id": "BF-23",
@@ -463,7 +594,9 @@
    "motion": "CYCLE",
    "loop": false,
    "lines": 0,
-   "sound": []
+   "sound": [
+    "wingbeat"
+   ]
   },
   {
    "id": "BF-24",
@@ -472,7 +605,9 @@
    "motion": "CYCLE",
    "loop": false,
    "lines": 2,
-   "sound": []
+   "sound": [
+    "wingbeat"
+   ]
   },
   {
    "id": "BF-25",
@@ -482,6 +617,7 @@
    "loop": false,
    "lines": 3,
    "sound": [
+    "wingbeat",
     "summer"
    ]
   },
@@ -492,7 +628,9 @@
    "motion": "ADVANCE",
    "loop": false,
    "lines": 4,
-   "sound": []
+   "sound": [
+    "room_lot"
+   ]
   },
   {
    "id": "BF-27",
@@ -501,7 +639,10 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 6,
-   "sound": []
+   "sound": [
+    "shock_pairing",
+    "room_lot"
+   ]
   },
   {
    "id": "BF-28",
@@ -510,7 +651,9 @@
    "motion": "HOLD",
    "loop": false,
    "lines": 3,
-   "sound": []
+   "sound": [
+    "room_lot"
+   ]
   },
   {
    "id": "BF-29",
@@ -610,6 +753,7 @@
    "loop": false,
    "lines": 0,
    "sound": [
+    "wingbeat",
     "maze_fans"
    ]
   },

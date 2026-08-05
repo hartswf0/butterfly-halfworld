@@ -3,6 +3,82 @@
  "fps": 12,
  "cues": [
   {
+   "id": "shock_pairing",
+   "kind": "pair",
+   "scenes": [
+    "BF-02",
+    "BF-11",
+    "BF-27"
+   ],
+   "sec": 4,
+   "peak": 0.194,
+   "rms": 0.0263,
+   "file": "audio/sound/shock_pairing.wav"
+  },
+  {
+   "id": "room_lab",
+   "kind": "room",
+   "scenes": [
+    "BF-02",
+    "BF-03",
+    "BF-04",
+    "BF-06",
+    "BF-07",
+    "BF-08",
+    "BF-09",
+    "BF-12"
+   ],
+   "sec": 8,
+   "peak": 0.04,
+   "rms": 0.019,
+   "file": "audio/sound/room_lab.wav"
+  },
+  {
+   "id": "room_mill",
+   "kind": "room",
+   "scenes": [
+    "BF-15",
+    "BF-16",
+    "BF-17",
+    "BF-18",
+    "BF-19",
+    "BF-20",
+    "BF-22"
+   ],
+   "sec": 8,
+   "peak": 0.013,
+   "rms": 0.0029,
+   "file": "audio/sound/room_mill.wav"
+  },
+  {
+   "id": "room_lot",
+   "kind": "room",
+   "scenes": [
+    "BF-26",
+    "BF-27",
+    "BF-28"
+   ],
+   "sec": 8,
+   "peak": 0.027,
+   "rms": 0.0086,
+   "file": "audio/sound/room_lot.wav"
+  },
+  {
+   "id": "wingbeat",
+   "kind": "beat",
+   "scenes": [
+    "BF-01",
+    "BF-23",
+    "BF-24",
+    "BF-25",
+    "BF-37"
+   ],
+   "sec": 4,
+   "peak": 0.055,
+   "rms": 0.0193,
+   "file": "audio/sound/wingbeat.wav"
+  },
+  {
    "id": "tap_ring",
    "kind": "quantised",
    "scenes": [

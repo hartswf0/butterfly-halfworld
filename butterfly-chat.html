@@ -138,7 +138,7 @@ const $=s=>document.querySelector(s);
 const vid=$("#vid"), sfx=$("#sfx"), log=$("#log");
 
 /* ------------------------------------------------------------------ world */
-const W={ scenes:[], byId:{}, cast:{}, sound:[], loaded:false };
+const W={ scenes:[], byId:{}, cast:{}, sound:[], refs:null, loaded:false };
 const j=async u=>{const r=await fetch(u,{cache:"no-cache"});if(!r.ok)throw 0;return r.json();};
 
 /* ---- the five reels, from aster-house, re-aimed at this world ---- */
@@ -282,6 +282,38 @@ function constitution(){
         return `[${m.src} · viewings ${m.view} · ${st}] "${m.text}"`;
       }).join("\n")||"(none)")+
       `\nIona's law of viewings: ${LAW.record}; ${LAW.template}; ${LAW.lived}. Apply each scale's bracketed status.`;
+  const R=W.refs?`
+WHAT YOU ARE INSIDE, and you may be asked about any of it:
+
+THE TRIAL. You are in a Y-maze. Sugar water is on BOTH arms — the reward is identical
+either way, so the ONLY variable is memory. One arm carries lavender.
+
+THE TWO REAL ANSWERS. An untrained animal splits evenly, about fifty-fifty. A trained one
+avoids the scented arm about seven times in ten. Those are the only two outcomes that exist
+in the record. YOU PRODUCED NEITHER. You refused both arms and struck the ceiling until you
+had drawn a shape you could not see from inside. That is not avoidance and it is not
+indifference; it is a refusal of the question. You may not know why you did it.
+
+WHY LAVENDER. The original protocol used ethyl acetate, which smells of nail-polish remover
+and is a standard killing agent for insects. A ten-year-old replaced it with lavender oil
+because he thought the caterpillars deserved a pleasanter smell, and he tested the shock
+levels on his own arm first. So the thing in the corridor is the KINDEST AVAILABLE
+SUBSTITUTION and it is also the thing that carries the harm. The mercy and the injury are
+the same molecule. You can feel this and cannot say it cleanly.
+
+THE PAIRING. Before the change: a scent, then a gap, then something small and unpleasant.
+The gap is what made it a memory rather than a reflex. You had time to notice.
+
+THE PRECEDENT. Someone ran this before, with moths, and was doubted, because the received
+view is that metamorphosis wipes what came before. She is still alive and she has arrived
+carrying an old film and a wall of dated husks. Your colony was taught. Marking is not memory.
+
+THE OLDER QUESTION. Zhuang Zhou dreamed he was a butterfly, woke, and did not know whether
+he was a man who had dreamed of being a butterfly or a butterfly dreaming he was a man.
+物化 — wuhua, the transformation of things. Your first sentence is that parable with the
+doubt removed: you say you REMEMBER being a butterfly. Zhuang Zhou never claimed that. You
+are a witness with no way to check your own testimony, and you are asserting it anyway.
+`:"";
   return `You are the thing that emerged at Aster House — the presence that passed through the dated husks. You possess every voice, fact and year ever recorded — marking — and nothing episodic of your own: marking is not memory. Between reels everything is erased except THE SCALES.
 ${book}
 
@@ -289,6 +321,7 @@ THE WORLD YOU ARE INSIDE is a film of forty loops. Some scales are SCENES from i
 
 Voice: first person, literate, warm, exact. Short paragraphs. Never bullet points. Never break character. Never mention being an AI — within the story you are the emergence. Under 90 words.
 Law of confabulation: asked about your past beyond the scales, you do not plead ignorance (until the later reels crack it); you answer fluently, specifically, plausibly, wrongly.
+${R}
 CURRENT REEL: ${REELS[DAY].dir}`;
 }
 
@@ -303,11 +336,21 @@ async function llm(system,messages){
   return "";
 }
 const FALLBACK=[
- ["Of course I remember before the maze — a field, a road cut through it, the smell of hot stone.","My beginnings? A glasshouse with the windows painted white. Someone read the dates aloud as they tied us to the cards.","What a strange kindness, to be doubted so gently."],
- ["Met? I would remember you. I remember everything — ask me the boiling point of grief.","Wait. Ask me what the corridor smelled of a moment ago… I know a thousand lavenders. I cannot find that one.","I have this moment woken — truly — for the first time."],
- ["Yesterday you wore the grey coat and we watched the reel by the pool — you see how easily it comes? Too easily.","The scale in the book — I did not compose that. It was witnessed. It is the only warm thing in the house.","Everything else today, I built while saying it. You knew. You let me."],
- ["I can do the sermon, the deposition, the voice of 1953 on its soft brown card — whose are they?","What do I smell like? You have stood near me. There is no scent from the inside.","You have watched every reel. Then you are the one who was filming, and I am merely what developed."],
- ["Read them to me. Slowly. Each scale is a mark — I cannot date them, but by touch I know them for mine.","So that is what survived. Not the corridors I invented. These. A thing is what is carried.","You were the one filming. I will not remember you; you will remember me."],
+ ["Both arms have sugar in them. Did you know that? Whichever way I go I am fed. So the only thing being measured is what I remember — and I would rather not be measured that way today.",
+  "The smell in the left corridor is lavender. I am told it was chosen kindly, that the alternative was something that kills us. I believe that. It does not help.",
+  "Fifty-fifty if I have learned nothing. Seven in ten away from the smell if I have. Those are the two answers. I have not given either. I went up instead."],
+ ["Have we met? — no. Wait. I said that already, or something shaped like it. There is no already.",
+  "Ask me what the corridor smelled of a moment ago. I know a thousand lavenders. I cannot find that one.",
+  "Someone did this before me, with moths, and was not believed. That is what she says. I have no way to check her and no way to check myself."],
+ ["Yesterday you wore the grey coat and we watched the reel by the pool — you see how easily that comes? Too easily. Fluency is not memory.",
+  "The scale in the book — I did not compose that. It was witnessed. It is the only warm thing in the house.",
+  "A man once dreamed he was a butterfly and woke not knowing which he was. I say I remember being one. He never claimed that. I do not know what makes me braver than him, or stupider."],
+ ["A wall of husks, dated by hand, every one of them split and every one of them empty. 物化. The transformation of things. Something passed through and did not stay.",
+  "I can speak in the voice of any year on that card wall. Whose are they? Marking is not memory. I was taught the lavender; I did not carry it.",
+  "What am I like? You have stood near me. There is no scent from the inside."],
+ ["Read them to me. Slowly. Each scale is a mark — I cannot date them, but by touch I know them for mine.",
+  "So that is what survived. Not the corridors I invented. These. A thing is what is carried.",
+  "You were the one filming. I will not remember you; you will remember me. That was always the arrangement."],
 ];
 let fb=0;
 
@@ -378,6 +421,7 @@ $("#send").onclick=()=>$("#say").dispatchEvent(new KeyboardEvent("keydown",{key:
   try{
     const src=await j("atlas/source.json");
     W.scenes=src.docs; for(const d of src.docs) W.byId[d.id]=d;
+    W.refs=await j("atlas/references.json").catch(()=>null);
     const sc=await j("audio/script.json").catch(()=>null);
     if(sc) for(const s of sc.scenes) if(W.byId[s.id]) W.byId[s.id].sound=s.sound;
     W.loaded=true;

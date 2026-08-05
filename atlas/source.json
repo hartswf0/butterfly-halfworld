@@ -17,7 +17,9 @@
     "A swallowtail rises into the clear acrylic lid of a choice maze and strikes it.",
     "It falls, rights itself in air, and strikes again. The roof offers no resistance until contact.",
     "Below, lavender divides the world: one corridor carries it, the other does not.",
-    "The choice interval has run 43 seconds and should have ended after 30. It does not choose."
+    "Sugar water is on BOTH arms. The only variable is memory.",
+    "The choice interval has run 43 seconds and should have ended after 30. It does not choose.",
+    "An untrained animal splits evenly. A trained one avoids the scented arm about seven times in ten. This one does neither."
    ],
    "el": [
     [
@@ -41,11 +43,24 @@
     {
      "concept": "transparency",
      "h": 7
+    },
+    {
+     "concept": "thirdoutcome",
+     "h": 10
+    },
+    {
+     "concept": "substitution",
+     "h": 8
     }
    ],
    "ep": "B01",
    "eptitle": "I REMEMBER BEING A BUTTERFLY",
-   "plan": "the-maze"
+   "plan": "the-maze",
+   "refs": [
+    "nagai",
+    "zhuangzi",
+    "the-departure"
+   ]
   },
   {
    "id": "BF-02",
@@ -86,7 +101,11 @@
    ],
    "ep": "B01",
    "eptitle": "I REMEMBER BEING A BUTTERFLY",
-   "plan": "the-laboratory"
+   "plan": "the-laboratory",
+   "refs": [
+    "nagai",
+    "the-departure"
+   ]
   },
   {
    "id": "BF-03",
@@ -249,7 +268,10 @@
    ],
    "ep": "B01",
    "eptitle": "I REMEMBER BEING A BUTTERFLY",
-   "plan": "the-laboratory"
+   "plan": "the-laboratory",
+   "refs": [
+    "nagai"
+   ]
   },
   {
    "id": "BF-06",
@@ -321,7 +343,10 @@
    ],
    "ep": "B01",
    "eptitle": "I REMEMBER BEING A BUTTERFLY",
-   "plan": "the-laboratory"
+   "plan": "the-laboratory",
+   "refs": [
+    "the-departure"
+   ]
   },
   {
    "id": "BF-07",
@@ -625,7 +650,11 @@
    ],
    "ep": "B01",
    "eptitle": "I REMEMBER BEING A BUTTERFLY",
-   "plan": "the-laboratory"
+   "plan": "the-laboratory",
+   "refs": [
+    "nagai",
+    "the-departure"
+   ]
   },
   {
    "id": "BF-12",
@@ -900,7 +929,10 @@
    ],
    "ep": "B01",
    "eptitle": "I REMEMBER BEING A BUTTERFLY",
-   "plan": "the-mill"
+   "plan": "the-mill",
+   "refs": [
+    "weiss"
+   ]
   },
   {
    "id": "BF-18",
@@ -974,7 +1006,10 @@
    ],
    "ep": "B01",
    "eptitle": "I REMEMBER BEING A BUTTERFLY",
-   "plan": "the-mill"
+   "plan": "the-mill",
+   "refs": [
+    "weiss"
+   ]
   },
   {
    "id": "BF-19",
@@ -1191,7 +1226,10 @@
    ],
    "ep": "B01",
    "eptitle": "I REMEMBER BEING A BUTTERFLY",
-   "plan": "the-mill"
+   "plan": "the-mill",
+   "refs": [
+    "weiss"
+   ]
   },
   {
    "id": "BF-23",
@@ -1224,7 +1262,10 @@
    ],
    "ep": "B01",
    "eptitle": "I REMEMBER BEING A BUTTERFLY",
-   "plan": "the-mill"
+   "plan": "the-mill",
+   "refs": [
+    "zhuangzi"
+   ]
   },
   {
    "id": "BF-24",
@@ -1477,7 +1518,11 @@
    ],
    "ep": "B01",
    "eptitle": "I REMEMBER BEING A BUTTERFLY",
-   "plan": "the-lot"
+   "plan": "the-lot",
+   "refs": [
+    "nagai",
+    "weiss"
+   ]
   },
   {
    "id": "BF-28",
@@ -1608,7 +1653,10 @@
    ],
    "ep": "B01",
    "eptitle": "I REMEMBER BEING A BUTTERFLY",
-   "plan": "the-facility"
+   "plan": "the-facility",
+   "refs": [
+    "weiss"
+   ]
   },
   {
    "id": "BF-30",
@@ -1797,7 +1845,10 @@
    ],
    "ep": "B01",
    "eptitle": "I REMEMBER BEING A BUTTERFLY",
-   "plan": "the-facility"
+   "plan": "the-facility",
+   "refs": [
+    "zhuangzi"
+   ]
   },
   {
    "id": "BF-33",
@@ -1925,7 +1976,10 @@
    ],
    "ep": "B01",
    "eptitle": "I REMEMBER BEING A BUTTERFLY",
-   "plan": "the-facility"
+   "plan": "the-facility",
+   "refs": [
+    "zhuangzi"
+   ]
   },
   {
    "id": "BF-36",
@@ -1995,7 +2049,11 @@
    ],
    "ep": "B01",
    "eptitle": "I REMEMBER BEING A BUTTERFLY",
-   "plan": "the-maze"
+   "plan": "the-maze",
+   "refs": [
+    "nagai",
+    "zhuangzi"
+   ]
   },
   {
    "id": "BF-38",
@@ -2121,7 +2179,10 @@
    ],
    "ep": "B01",
    "eptitle": "I REMEMBER BEING A BUTTERFLY",
-   "plan": "the-facility"
+   "plan": "the-facility",
+   "refs": [
+    "zhuangzi"
+   ]
   }
  ],
  "eps": [
@@ -2617,6 +2678,122 @@
     {
      "d": "BF-12",
      "h": 9
+    }
+   ]
+  },
+  {
+   "id": "substitution",
+   "name": "THE KINDEST AVAILABLE SMELL",
+   "src": "nagai",
+   "gloss": "Lavender is in the corridor because a child refused to use a killing agent. The mercy and the injury are the same molecule.",
+   "docs": [
+    {
+     "d": "BF-01",
+     "h": 9
+    },
+    {
+     "d": "BF-02",
+     "h": 6
+    },
+    {
+     "d": "BF-05",
+     "h": 6
+    },
+    {
+     "d": "BF-11",
+     "h": 6
+    },
+    {
+     "d": "BF-27",
+     "h": 6
+    },
+    {
+     "d": "BF-37",
+     "h": 6
+    }
+   ]
+  },
+  {
+   "id": "wuhua",
+   "name": "物化 · THE TRANSFORMATION OF THINGS",
+   "src": "zhuangzi",
+   "gloss": "Zhuangzi's word for what a chrysalis does, and for the distinction that must exist between the dreamer and the dreamt. A wall of dated husks is a wall of wuhua, every one of them empty.",
+   "docs": [
+    {
+     "d": "BF-01",
+     "h": 9
+    },
+    {
+     "d": "BF-23",
+     "h": 6
+    },
+    {
+     "d": "BF-32",
+     "h": 6
+    },
+    {
+     "d": "BF-35",
+     "h": 6
+    },
+    {
+     "d": "BF-37",
+     "h": 6
+    },
+    {
+     "d": "BF-40",
+     "h": 6
+    }
+   ]
+  },
+  {
+   "id": "precedent",
+   "name": "IT HAS BEEN DONE BEFORE",
+   "src": "weiss",
+   "gloss": "Someone ran this experiment already, was doubted, and is still alive to arrive carrying the film. Your colony was taught.",
+   "docs": [
+    {
+     "d": "BF-17",
+     "h": 9
+    },
+    {
+     "d": "BF-18",
+     "h": 6
+    },
+    {
+     "d": "BF-22",
+     "h": 6
+    },
+    {
+     "d": "BF-27",
+     "h": 6
+    },
+    {
+     "d": "BF-29",
+     "h": 6
+    }
+   ]
+  },
+  {
+   "id": "thirdoutcome",
+   "name": "NEITHER FIFTY NOR SEVENTY",
+   "src": "the-departure",
+   "gloss": "The two real results are 50/50 and 70/30. This animal produces a third that is in no dataset: it declines the question. Only legible against the two it refuses.",
+   "docs": [
+    {
+     "d": "BF-01",
+     "h": 9
+    },
+    {
+     "d": "BF-02",
+     "h": 6
+    },
+    {
+     "d": "BF-06",
+     "h": 6
+    },
+    {
+     "d": "BF-11",
+     "h": 6
     }
    ]
   }
