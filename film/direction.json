@@ -1,5 +1,23 @@
 {
- "built": "2026-08-05T04:00:39.612Z",
+ "inserts": [
+  {
+   "scene": "BF-13",
+   "at": 8.5,
+   "seconds": 6,
+   "from": "BF-10",
+   "why": "'your mother did, her mother did' — over the photograph that is both of them",
+   "src": "renders/motion/BF-10.webm"
+  },
+  {
+   "scene": "BF-13",
+   "at": 17,
+   "seconds": 5.5,
+   "from": "BF-14",
+   "why": "'the insects wake before the story is ready for them' — over the animal testing the vial",
+   "src": "renders/motion/BF-14.webm"
+  }
+ ],
+ "built": "2026-08-05T05:33:34.448Z",
  "law": "a close-up may only interrupt a motion that comes round again (CYCLE, HOLD)",
  "interruptible": [
   "CYCLE",

@@ -138,6 +138,38 @@ const TURNS = [
     why: "the admission that the record has been managed — spoken over a white rectangle that waits, which is the film telling you the same thing in the other channel" },
 ];
 
+/* ---- INSERTS ------------------------------------------------------------
+   BF-13 is thirty-three seconds long — the longest unit in the film by eleven
+   seconds — and it is one static shot of a handset hanging off a hook. It is
+   thirty-three seconds long because Iona's voice-over runs 29.1s and the
+   film's clock gives a scene the greater of its dialogue and a whole number of
+   its own loops. Nobody chose to hold that image for half a minute; the
+   arithmetic chose it, and then it was never looked at again.
+
+   measure-frames.mjs scores it 17.4 "empty seconds" — more than three times
+   the next worst shot in the film — and no amount of pushing in fixes it,
+   because the defect is not the framing. Holding ONE image under a long
+   voice-over is the thing an edit exists to prevent.
+
+   So the voice stays exactly where it is and the picture cuts. Three images the
+   film has already established, chosen because the voice is talking about them:
+
+     "You always open it too early. Your mother did. Her mother did."
+        -> the photograph, which is the mother and the grandmother
+     "The insects wake before the story is ready for them."
+        -> the vial, with something testing its circumference
+     "I found the boy. He has been dead for eleven years."
+        -> back to the phone, because that is who is on it
+
+   No new material. A cut, which is free, against a shot that was costing
+   seventeen seconds. */
+const INSERTS = [
+  { scene: "BF-13", at: 8.5,  seconds: 6.0, from: "BF-10",
+    why: "'your mother did, her mother did' — over the photograph that is both of them" },
+  { scene: "BF-13", at: 17.0, seconds: 5.5, from: "BF-14",
+    why: "'the insects wake before the story is ready for them' — over the animal testing the vial" },
+];
+
 /* ---- INTRODUCTIONS ------------------------------------------------------
    THE NOTE THIS ANSWERS: "it's too hard to follow — we don't know who is
    speaking."
@@ -418,11 +450,15 @@ console.log(`\n  WHY THE OTHER ${cut.length} STAY ON THE IMAGE`);
 for (const [r, n] of Object.entries(byReason).sort((a, b) => b[1] - a[1])) console.log(`      ${String(n).padStart(3)}  ${r}`);
 
 const nonInt = Object.entries(MOTION).filter(([, m]) => !INTERRUPTIBLE.has(m.motion));
+console.log(`\n  ${INSERTS.length} INSERTS — a long voice-over cutting away from a held image:`);
+for (const i of INSERTS)
+  console.log(`      ${i.scene} @${i.at}s for ${i.seconds}s -> ${i.from}   ${i.why}`);
 console.log(`\n  ${nonInt.length} scenes carry a motion that cannot be interrupted and were never candidates:`);
 console.log(`      ${nonInt.map(([s, m]) => `${s}(${m.motion})`).join(" ")}`);
 
 if (!REPORT) {
   fs.writeFileSync(path.join(ROOT, "film", "direction.json"), JSON.stringify({
+    inserts: INSERTS.map((i) => ({ ...i, src: `renders/motion/${i.from}.webm` })),
     built: new Date().toISOString(),
     law: "a close-up may only interrupt a motion that comes round again (CYCLE, HOLD)",
     interruptible: [...INTERRUPTIBLE], minShot: MIN_SHOT, maxPerScene: MAX_PER_SCENE, maxShare: MAX_SHARE,

@@ -61,6 +61,7 @@ import { theMill, MOVES_BF18 } from "./_plans/the-mill.mjs";
 import { lens, NW, NH, BODY_H, propSize } from "../assets/set/_stage.mjs";
 import { canister } from "../assets/set/canister.mjs";
 import { fingersOver } from "../assets/set/_hands.mjs";
+import { lobbyWall, stoneFloor } from "../assets/set/mill.mjs";
 import { LV, brokenLine } from "../assets/set/_kit.mjs";
 import { exitOccupancy as exitOccupancyBF17 } from "./BF-17.mjs";
 
@@ -87,8 +88,15 @@ export const leftOut  = [
 ];
 
 /* ---- framing ------------------------------------------------------------ */
-const ZOOM = 14.2;
-const station = lens(theMill, { zoom: ZOOM, cx: 0.5402, cy: 0.8382 });
+/* PASS 2. 4.2% ink over 13.5s, and a bounding box covering 14% of the frame —
+   a disc floating in white. Unlike BF-13 this is not an under-zoom: at 14.2 the
+   canister is already large. What is missing is EVERYTHING ELSE. The scene is
+   called "the canister, changing hands" and neither hand is legible in it,
+   because the lens is centred on the object rather than on the exchange.
+   Widening slightly and dropping the centre brings both hands and the floor
+   into frame — the transaction instead of the merchandise. */
+const ZOOM = 11.4;
+const station = lens(theMill, { zoom: ZOOM, cx: 0.5402, cy: 0.8560 });
 const OUT  = station("iona_hand_out");
 const TAKE = station("mara_hand_take");
 /* a palm is 0.055 of a standing body and the canister is "no wider than" one,
@@ -118,9 +126,21 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
 
-  /* ---- the room, at this crop: two broken lines a long way off, and paper. */
-  brokenLine(g, -20, NW + 20, 96, 55, { lw: 3.4, segs: 3, gap: 0.06, color: LV(2) });
-  brokenLine(g, -20, NW + 20, NH - 74, 57, { lw: 4, segs: 4, gap: 0.05, color: LV(2) });
+  /* ---- PASS 2. THE ROOM WAS TWO LINES AND PAPER, and the comment that used to
+     be here said so out loud: "two broken lines a long way off, and paper."
+     measure-frames.mjs put this scene at 4.2% ink coverage — an object floating
+     on a blank page for 13.5 seconds — and I first tried to fix it by pushing the
+     lens in, which made it worse, because zooming does not create ink. There
+     was nothing behind the subject to get closer to.
+
+     The mill HAS surfaces. BF-17 stands Iona against a brick wall over a stone
+     floor eight scenes earlier, in this same lobby, from the same plan. This
+     crop is lower and tighter, so we are against the wall rather than looking
+     down the room — but it is the same wall, and an exchange happening in front
+     of it is an exchange happening somewhere. */
+  lobbyWall(g, -20, NW + 20, -160, 470, { seed: 63, columns: [] });
+  brokenLine(g, -20, NW + 20, 470, 55, { lw: 6, segs: 4, gap: 0.03 });
+  stoneFloor(g, 470, NH + 20, -20, NW + 20, { seed: 64, courses: 3 });
 
   /* the deniable residue, in pixels: 4 up and down, 3 side to side, over 4.5s */
   const dy = s.breath * 4 - 2, dx = s.weight * 3;

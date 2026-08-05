@@ -84,17 +84,29 @@ for (const [scene, list] of Object.entries(takesBy)) {
 }
 const unitsBy = {};
 for (const u of CLOSE.kept) (unitsBy[u.scene] ||= []).push(u);
+/* INSERTS enter the same timeline as close-ups and by the same rule: an
+   absolute in-point inside a scene, a duration, and a source. The assembler
+   does not care whether the thing it cuts to is a face or another scene's
+   picture — which is why the machinery for the one gave the other for free. */
+for (const i of (CLOSE.inserts || [])) {
+  (unitsBy[i.scene] ||= []).push({
+    id: `INS-${i.scene}-${i.from}`, scene: i.scene, who: i.from, face: "insert",
+    t0: i.at, t1: i.at + i.seconds, seconds: i.seconds, head: 0,
+    src: i.src, text: "", insert: true, why: i.why, take: null,
+  });
+}
 
 /* ---- the timeline ------------------------------------------------------- */
 const segs = [];                          // { src, in, out, kind, label }
-let clock = 0, nClose = 0, nWide = 0, closeSec = 0, dropped = [], shortLead = [];
+let clock = 0, nClose = 0, nWide = 0, nInsert = 0, closeSec = 0, dropped = [], shortLead = [];
 const perScene = [];
 
 for (const sc of CUT.scenes) {
   const D = sc.duration;
   const wide = path.join(ROOT, "renders", "motion", `${sc.id}.webm`);
   const units = (unitsBy[sc.id] || [])
-    .map((u) => ({ ...u, abs0: takeStart[u.take] + u.t0, abs1: takeStart[u.take] + u.t1 }))
+    .map((u) => ({ ...u, abs0: (u.insert ? 0 : takeStart[u.take]) + u.t0,
+                          abs1: (u.insert ? 0 : takeStart[u.take]) + u.t1 }))
     .filter((u) => {
       const src = path.join(ROOT, u.src);
       if (!fs.existsSync(src)) { dropped.push(`${u.id} — no render`); return false; }
@@ -137,14 +149,16 @@ for (const sc of CUT.scenes) {
     if (gap >= MIN_WIDE) local.push({ src: wide, in: t, out: u.abs0, kind: "wide", label: sc.id, loop: true });
     else if (gap > 0) local.push({ src: wide, in: t, out: u.abs0, kind: "wide", label: sc.id, loop: true, thin: true });
     local.push({ src: path.join(ROOT, u.src), in: u.abs0, out: Math.min(D, u.abs1),
-                 kind: "close", label: `${u.who} · ${u.id}`, loop: false, skip: u.skip || 0 });
+                 kind: u.insert ? "insert" : "close", label: `${u.who} · ${u.id}`,
+                 loop: !!u.insert, skip: u.skip || 0 });
     t = Math.min(D, u.abs1);
   }
   if (t < D - 0.001) local.push({ src: wide, in: t, out: D, kind: "wide", label: sc.id, loop: true });
 
   for (const s of local) {
     s.t0 = clock + s.in; s.t1 = clock + s.out; s.seconds = +(s.out - s.in).toFixed(3);
-    if (s.kind === "close") { nClose++; closeSec += s.seconds; } else nWide++;
+    if (s.kind === "close") { nClose++; closeSec += s.seconds; }
+    else if (s.kind === "insert") nInsert++; else nWide++;
     segs.push(s);
   }
   perScene.push({ id: sc.id, D, close: local.filter((s) => s.kind === "close").length });
@@ -156,7 +170,7 @@ console.log(`THE SPEAKING CUT\n`);
 console.log(`  ${CUT.scenes.length} scenes · ${(clock / 60).toFixed(2)} min — the same length as the wide cut`);
 console.log(`  ${CLOSE.kept.length} of ${CLOSE.kept.length + CLOSE.cut.length} available faces were argued for; the rest stay on the image`);
 console.log(`  ${nClose} close-ups · ${(closeSec / 60).toFixed(2)} min of face (${(100 * closeSec / clock).toFixed(1)}% of the film)`);
-console.log(`  ${nWide} wide passages · ${segs.length} cuts in total`);
+console.log(`  ${nInsert} inserts · ${nWide} wide passages · ${segs.length} cuts in total`);
 const thin = segs.filter((s) => s.thin);
 if (thin.length) console.log(`  ${thin.length} wide beats under ${MIN_WIDE}s were kept anyway (they sit between takes, not inside one)`);
 if (dropped.length) { console.log(`\n  ** ${dropped.length} close-ups DROPPED:`); for (const d of dropped) console.log(`      ${d}`); }

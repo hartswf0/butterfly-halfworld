@@ -2,7 +2,7 @@
   "id": "BF-13",
   "mod": "scenes/BF-13.mjs",
   "ok": true,
-  "t": "2026-08-04T18:31:19.495Z",
+  "t": "2026-08-05T05:32:03.035Z",
   "motion": "HOLD",
   "seconds": 5.5,
   "loopClosed": false,
@@ -17,7 +17,7 @@
     "nominalSec": 5.5,
     "webmSec": 5.5,
     "gifSec": 5.5,
-    "renderWallSec": 7
+    "renderWallSec": 6.6
   },
   "size": {
     "w": 1120,
@@ -26,22 +26,22 @@
     "card": false
   },
   "loop": {
-    "wrapChangedPct": 1.3125,
-    "wrapMeanAbs": 1.9729,
-    "meanStepChangedPct": 0.3683,
-    "maxStepChangedPct": 0.6588,
-    "meanStepMeanAbs": 0.3586,
-    "ratio": 3.564,
+    "wrapChangedPct": 1.3567,
+    "wrapMeanAbs": 1.9656,
+    "meanStepChangedPct": 0.3998,
+    "maxStepChangedPct": 0.7425,
+    "meanStepMeanAbs": 0.3648,
+    "ratio": 3.393,
     "verdict": "n/a (not a CYCLE)"
   },
   "files": {
     "webm": {
       "path": "renders/motion/BF-13.webm",
-      "bytes": 707312
+      "bytes": 813445
     },
     "gif": {
       "path": "renders/motion/BF-13.gif",
-      "bytes": 446706
+      "bytes": 535383
     },
     "contact": null,
     "frames": null

@@ -46,6 +46,7 @@ import { theMill, MOVES_BF19 } from "./_plans/the-mill.mjs";
 import { lens, NW, NH, propSize } from "../assets/set/_stage.mjs";
 import { canister } from "../assets/set/canister.mjs";
 import { fingersOver } from "../assets/set/_hands.mjs";
+import { lobbyWall, stoneFloor } from "../assets/set/mill.mjs";
 import { LV, brokenLine } from "../assets/set/_kit.mjs";
 import { exitOccupancy as exitOccupancyBF18 } from "./BF-18.mjs";
 
@@ -75,7 +76,14 @@ export const leftOut  = [
    with the subject cropped at the right edge. The lens is centred on the
    midpoint of the travel, at the zoom that fits both — 5.0 puts the withdrawal
    at 410px and the gap at 148px, and neither end of the move touches an edge. */
-const ZOOM = 5.0;
+/* PASS 2. 1.4% ink over twelve seconds — the emptiest frame in the film. The
+   header below argues 5.0 from the ENDPOINTS of the travel, which is the right
+   argument for keeping the move on screen and the wrong one for whether there
+   is anything to look at: at 5.0 the hand and the canister are two specks with
+   380px of blank mill between them, and the scene's declared subject is THE GAP
+   BETWEEN THEM. A gap you cannot see the sides of is not a gap. 8.6 keeps both
+   ends in frame and makes the space between them legible. */
+const ZOOM = 8.6;
 const station = lens(theMill, { zoom: ZOOM, cx: 0.49105, cy: 0.84640 });
 const REACH = station("niko_reach");            // where his hand stops
 const HELD  = station("canister_withheld");     // where the object ends up
@@ -106,8 +114,21 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
 
-  brokenLine(g, -20, NW + 20, 74, 55, { lw: 3.4, segs: 3, gap: 0.06, color: LV(2) });
-  brokenLine(g, -20, NW + 20, NH - 58, 57, { lw: 4, segs: 4, gap: 0.05, color: LV(2) });
+  /* ---- PASS 2. THE ROOM WAS TWO LINES AND PAPER, and the comment that used to
+     be here said so out loud: "two broken lines a long way off, and paper."
+     measure-frames.mjs put this scene at 1.4% ink coverage — an object floating
+     on a blank page for 12 seconds — and I first tried to fix it by pushing the
+     lens in, which made it worse, because zooming does not create ink. There
+     was nothing behind the subject to get closer to.
+
+     The mill HAS surfaces. BF-17 stands Iona against a brick wall over a stone
+     floor eight scenes earlier, in this same lobby, from the same plan. This
+     crop is lower and tighter, so we are against the wall rather than looking
+     down the room — but it is the same wall, and an exchange happening in front
+     of it is an exchange happening somewhere. */
+  lobbyWall(g, -20, NW + 20, -160, 455, { seed: 71, columns: [] });
+  brokenLine(g, -20, NW + 20, 455, 55, { lw: 6, segs: 4, gap: 0.03 });
+  stoneFloor(g, 455, NH + 20, -20, NW + 20, { seed: 72, courses: 3 });
 
   const dy = s.breath * 4 - 2, dx = s.weight * 3;
   const cx = s.cx + dx, cy = s.cy + dy;

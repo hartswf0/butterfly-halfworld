@@ -100,7 +100,13 @@ export function at(u, _ctx) {
 
 /* ============================================================ draw() ======= */
 const NW = 1120, NH = 760;
-const F = lens(theLaboratory, { centre: "wall_phone", zoom: 2.6,
+/* PASS 2. harness/measure-frames.mjs: THIRTY-THREE SECONDS — the longest scene
+   in the film — at THREE PER CENT ink coverage. 18.7 "empty seconds", more than
+   twice the next worst shot. At zoom 2.6 the phone occupied a fifth of the
+   frame and the rest was wall, and the wall has nothing on it, because the
+   whole point of this unit is that there is nobody in the room. An empty room
+   is a composition. An empty frame is not, and this was the second. */
+const F = lens(theLaboratory, { centre: "wall_phone", zoom: 3.4,
                                 at: { x: 470, y: 960 }, W: NW, H: NH });
 
 export function draw(g, W, H, s) {
@@ -108,7 +114,12 @@ export function draw(g, W, H, s) {
   g.scale(W / NW, H / NH);
   g.lineJoin = "round"; g.lineCap = "round";
 
-  room(g, F, { z0: 0.14, z1: 0.95, ceiling: false, joints: false, wallLevel: 1 });
+  /* PASS 2. 3% ink over 33 seconds, the emptiest shot in the film by a factor of
+     two. `joints:false, wallLevel:1` is a wall with nothing on it and almost no
+     tone, so the phone hung on a blank page. The room is a tiled laboratory;
+     giving it its joints and one more ink level costs nothing and gives the
+     handset a surface to hang against. */
+  room(g, F, { z0: 0.10, z1: 0.98, ceiling: true, joints: true, wallLevel: 2 });
   const p = wallPhone(g, F);
 
   // the handset, hanging. It swings; the cord follows it.

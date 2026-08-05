@@ -1,8 +1,8 @@
 {
- "built": "2026-08-05T04:05:36.815Z",
+ "built": "2026-08-05T05:34:11.892Z",
  "totalSeconds": 485.6,
  "closeSeconds": 36.1,
- "cuts": 77,
+ "cuts": 81,
  "dropped": [],
  "segments": [
   {
@@ -175,7 +175,31 @@
   },
   {
    "t0": 146.1,
-   "seconds": 33,
+   "seconds": 8.5,
+   "kind": "wide",
+   "label": "BF-13"
+  },
+  {
+   "t0": 154.6,
+   "seconds": 6,
+   "kind": "insert",
+   "label": "BF-10 · INS-BF-13-BF-10"
+  },
+  {
+   "t0": 160.6,
+   "seconds": 2.5,
+   "kind": "wide",
+   "label": "BF-13"
+  },
+  {
+   "t0": 163.1,
+   "seconds": 5.5,
+   "kind": "insert",
+   "label": "BF-14 · INS-BF-13-BF-14"
+  },
+  {
+   "t0": 168.6,
+   "seconds": 10.5,
    "kind": "wide",
    "label": "BF-13"
   },

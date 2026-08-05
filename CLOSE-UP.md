@@ -352,3 +352,53 @@ on an arm is a hand *behind* an arm.
 running order it does not own. The end roll fell out twice, once unnoticed until the film came back
 67 seconds short. **A generator may replace its own entries. It may not replace somebody else's.**
 Each generator now merges rather than overwrites, and each one owns its own placement.
+
+---
+
+# PASS 4 — the frames
+
+"many of the frames are bad and crowded, can't read." Both halves are true and they are **opposite
+faults**, which is why squinting at a contact sheet was never going to sort them. So:
+`harness/measure-frames.mjs`, two numbers per scene off the rendered webm.
+
+**COVER** — how much ink is actually on the page. **SPREAD** — how many ink levels are in use,
+as 2^entropy, so one level scores 1.0 and eight equal levels score 8.0. A frame putting 90% of its
+ink into one level has no hierarchy, and with no hierarchy everything competes equally for
+attention, which is exactly what "crowded" is. It isn't that there's too much in BF-16; it's that
+the brick, the stairs and the tiles are the same grey.
+
+### the instrument was wrong three times before it was right
+
+| pass | what it said | what was actually true |
+|---|---|---|
+| 1 | ranked by bounding box | one horizon line spanning the frame gave **BF-13 a fill of 0.70** while its real ink coverage was **3%**, held for 33 seconds. A box measures where ink reaches; coverage measures whether there is any |
+| 2 | **"BF-37 is BLANK — 0.0% ink"** | it sampled one frame and landed inside an **authored whiteout** — the animal strikes the lid, the frame blows out for 3 frames, the picture returns as an ordered per-dot swap. Now every scene is decoded whole and reported at its **median** frame, which is immune to the extremes this world builds on purpose |
+| 3 | billed BF-13 17.4 empty-seconds *after* it was fixed | it was reading how long the scene **is**, not how long it is **on screen**. Those stopped being the same number the moment the assembler learned to cut away |
+
+### the fix was not the zoom
+
+I first pushed the lens in on the three worst — and **made two of them worse.** BF-13 went 3.0% →
+1.8%. Zooming does not create ink; there was nothing behind the subject to get closer to. BF-18's
+own comment said so out loud: *"the room, at this crop: two broken lines a long way off, and paper."*
+
+The mill **has** surfaces — BF-17 stands Iona against a brick wall over a stone floor eight scenes
+earlier, in the same lobby, from the same plan. BF-18 and BF-19 now use them; the laboratory gets its
+tile joints and one more ink level. **BF-19: 1.4% → 7.5%** (passes). BF-18: 4.2% → 5.8%.
+
+### BF-13 was an editing problem wearing a framing problem's clothes
+
+Thirty-three seconds — the longest unit in the film by eleven — of one static shot of a handset.
+It is that long because Iona's voice-over runs 29.1s and the clock gives a scene the greater of its
+dialogue and a whole number of its loops. **Nobody chose to hold that image for half a minute; the
+arithmetic chose it,** and then it was never looked at again.
+
+So the voice stays exactly where it is and the picture cuts — two inserts, to images the film has
+already established, chosen because the voice is talking about them: the photograph under *"your
+mother did, her mother did"*, the vial under *"the insects wake before the story is ready for them."*
+No new material. The insert mechanism is the close-up mechanism — the assembler does not care whether
+it cuts to a face or to another scene's picture, which is why building the one gave the other free.
+
+**8.5s + 6s + 2.5s + 5.5s + 10.5s.** Longest held shot 10.5s, down from 33. 18.7 → 11.3 empty-seconds.
+
+**Still open:** BF-13 remains the worst frame in the film even intercut. BF-38 and BF-40 sit at 80%+
+ink in a single value — the opposite fault, and untouched.

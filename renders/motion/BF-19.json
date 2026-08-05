@@ -2,7 +2,7 @@
   "id": "BF-19",
   "mod": "scenes/BF-19.mjs",
   "ok": true,
-  "t": "2026-08-04T18:31:40.033Z",
+  "t": "2026-08-05T05:32:11.557Z",
   "motion": "HOLD",
   "seconds": 4,
   "loopClosed": false,
@@ -17,7 +17,7 @@
     "nominalSec": 4,
     "webmSec": 4,
     "gifSec": 4,
-    "renderWallSec": 1.8
+    "renderWallSec": 4
   },
   "size": {
     "w": 1120,
@@ -26,22 +26,22 @@
     "card": false
   },
   "loop": {
-    "wrapChangedPct": 2.5493,
-    "wrapMeanAbs": 4.0163,
-    "meanStepChangedPct": 0.436,
-    "maxStepChangedPct": 1.5992,
-    "meanStepMeanAbs": 0.5838,
-    "ratio": 5.847,
+    "wrapChangedPct": 6.1414,
+    "wrapMeanAbs": 9.0065,
+    "meanStepChangedPct": 1.0176,
+    "maxStepChangedPct": 4.0475,
+    "meanStepMeanAbs": 1.3915,
+    "ratio": 6.035,
     "verdict": "n/a (not a CYCLE)"
   },
   "files": {
     "webm": {
       "path": "renders/motion/BF-19.webm",
-      "bytes": 206795
+      "bytes": 650308
     },
     "gif": {
       "path": "renders/motion/BF-19.gif",
-      "bytes": 208047
+      "bytes": 531915
     },
     "contact": null,
     "frames": null
