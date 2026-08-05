@@ -1,0 +1,641 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>I REMEMBER BEING A BUTTERFLY · the periodic table</title>
+<style>
+/* ============================================================================
+   The page obeys the film's own law: cream paper, hard black contour, eight
+   ink levels, no gradients and no rounded corners. A front door built in a
+   different visual language than the thing behind it is a lie about what is
+   behind it.
+   ========================================================================= */
+:root{
+  --paper:#f4f4f0; --paper2:#fdfdfa; --ink:#141414; --dim:#8a8a86;
+  --accent:#0033cc; --line:2px;
+  --l1:#e0e0dc; --l2:#c6c6c2; --l3:#a8a8a4; --l5:#6e6e6a;
+}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);overflow:hidden;
+  font:400 13px/1.5 "Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column}
+button,input,textarea{font:inherit;color:inherit}
+h1,h2,h3{font-weight:900;letter-spacing:.16em;text-transform:uppercase}
+
+header{display:flex;align-items:baseline;gap:14px;padding:9px 16px;border-bottom:var(--line) solid var(--ink);flex:none}
+header .mark{width:12px;height:12px;flex:none;align-self:center;
+  background:radial-gradient(circle 1.7px at 3px 3px,var(--ink) 98%,transparent),
+             radial-gradient(circle 1.7px at 9px 3px,var(--ink) 98%,transparent),
+             radial-gradient(circle 1.7px at 3px 9px,var(--ink) 98%,transparent),
+             radial-gradient(circle 1.7px at 9px 9px,var(--ink) 98%,transparent)}
+header h1{font-size:11px}
+header .sub{font-size:10px;color:var(--dim);letter-spacing:.10em;text-transform:uppercase}
+header nav{margin-left:auto;display:flex;border:var(--line) solid var(--ink)}
+header nav button{border:0;background:var(--paper2);padding:6px 13px;cursor:pointer;
+  font:900 10px/1 Helvetica;letter-spacing:.15em;text-transform:uppercase}
+header nav button+button{border-left:var(--line) solid var(--ink)}
+header nav button.on{background:var(--ink);color:var(--paper)}
+
+main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(360px,1fr)}
+#left{min-width:0;overflow:auto;padding:14px 16px 40px;border-right:var(--line) solid var(--ink)}
+#right{min-width:0;display:flex;flex-direction:column;overflow:hidden}
+
+/* ---- the table ---- */
+.grp{margin-bottom:20px}
+.grp h2{font-size:10px;display:flex;align-items:baseline;gap:10px}
+.grp h2 em{font-style:normal;font-weight:400;letter-spacing:0;text-transform:none;color:var(--dim);font-size:11px}
+.grp .row{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.el{width:78px;height:78px;border:var(--line) solid var(--ink);background:var(--paper2);
+  cursor:pointer;padding:5px 6px;display:flex;flex-direction:column;position:relative;text-align:left}
+.el:hover{background:var(--ink);color:var(--paper)}
+.el.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.el .z{font:700 8px/1 Helvetica;opacity:.65}
+.el .sym{font:900 24px/1 Helvetica;letter-spacing:.02em;margin-top:auto}
+.el .nm{font:700 7.5px/1.15 Helvetica;letter-spacing:.05em;text-transform:uppercase;
+  overflow:hidden;max-height:18px}
+.el .v{position:absolute;right:5px;top:4px;font:700 8px/1 Helvetica;opacity:.5}
+.el.zero{opacity:.42}
+
+/* ---- compounds ---- */
+table.cmp{width:100%;border-collapse:collapse;font-size:11.5px}
+table.cmp th{text-align:left;font:900 9px/1 Helvetica;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);padding:5px 7px;border-bottom:var(--line) solid var(--ink)}
+table.cmp td{padding:5px 7px;border-bottom:1px solid var(--l1);vertical-align:top}
+table.cmp tr{cursor:pointer}
+table.cmp tr:hover td{background:var(--l1)}
+table.cmp tr.on td{background:var(--accent);color:#fff}
+td.f{font:700 11px/1.4 ui-monospace,Menlo,monospace;white-space:nowrap}
+td.i{font:900 10px/1.4 Helvetica;letter-spacing:.08em;white-space:nowrap}
+td.s{color:var(--dim)}
+tr.on td.s{color:#dde}
+
+/* ---- inspector / stage ---- */
+#stagewrap{flex:none;border-bottom:var(--line) solid var(--ink);background:var(--paper2);position:relative}
+#stage{display:block;width:100%;height:auto}
+#stagebar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:8px;
+  padding:6px 9px;background:rgba(244,244,240,.92);border-top:1px solid var(--l2)}
+#stagebar .t{font:900 9px/1 Helvetica;letter-spacing:.13em;text-transform:uppercase}
+#stagebar .sp{margin-left:auto}
+#stagebar button{border:var(--line) solid var(--ink);background:var(--paper2);padding:4px 9px;cursor:pointer;
+  font:900 9px/1 Helvetica;letter-spacing:.12em}
+#stagebar button.on{background:var(--ink);color:var(--paper)}
+#scrub{flex:1;max-width:210px;accent-color:var(--accent)}
+
+#info{flex:1;min-height:0;overflow:auto;padding:13px 15px}
+#info h3{font-size:13px;letter-spacing:.10em}
+#info .kick{font:700 9px/1 Helvetica;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:5px}
+#info p{margin:9px 0;max-width:62ch}
+#info .meta{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}
+#info .meta span{border:1px solid var(--l3);padding:2px 7px;font:700 9px/1.5 Helvetica;letter-spacing:.08em;text-transform:uppercase}
+#info .meta span.k{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#info code{font:700 11px ui-monospace,Menlo,monospace;background:var(--l1);padding:1px 5px}
+#info .chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+#info .chips button{border:1px solid var(--ink);background:var(--paper2);padding:3px 8px;cursor:pointer;
+  font:700 9px/1.4 Helvetica;letter-spacing:.06em}
+#info .chips button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+#info .why{border-left:3px solid var(--ink);padding-left:10px;color:#3a3a38}
+
+/* ---- chat ---- */
+#chat{flex:none;border-top:var(--line) solid var(--ink);display:flex;flex-direction:column}
+#log{overflow:auto;padding:10px 15px;display:flex;flex-direction:column;gap:8px;min-height:56px;max-height:150px}
+.msg{font-size:12px;max-width:94%}
+.msg .r{font:900 8px/1 Helvetica;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-bottom:3px}
+.msg.you{align-self:flex-end;text-align:right}
+.msg.you .b{border-right:3px solid var(--accent);padding-right:9px;color:var(--accent)}
+.msg.sys .b{border-left:3px solid var(--ink);padding-left:9px}
+.msg.err .b{border-left:3px solid #c00;padding-left:9px;color:#900}
+#ask{display:flex;border-top:1px solid var(--l2)}
+#ask input{flex:1;border:0;background:var(--paper2);padding:11px 14px;outline:none;font-weight:700}
+#ask input:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+#ask button{border:0;border-left:var(--line) solid var(--ink);background:var(--paper2);padding:0 16px;cursor:pointer;
+  font:900 10px/1 Helvetica;letter-spacing:.14em}
+#ask button:hover{background:var(--ink);color:var(--paper)}
+#hint{padding:5px 15px;font:700 9px/1.5 Helvetica;color:var(--dim);border-top:1px solid var(--l2)}
+
+.hidden{display:none!important}
+@media(max-width:960px){ main{grid-template-columns:1fr;grid-template-rows:1fr 1fr} #left{border-right:0;border-bottom:var(--line) solid var(--ink)} }
+</style></head><body>
+
+<header>
+  <div class="mark"></div>
+  <h1>I Remember Being a Butterfly</h1>
+  <div class="sub" id="counts">loading…</div>
+  <nav id="tabs">
+    <button data-t="elements" class="on">Elements</button>
+    <button data-t="compounds">Compounds</button>
+  </nav>
+</header>
+
+<main>
+  <div id="left"></div>
+  <div id="right">
+    <div id="stagewrap">
+      <canvas id="stage" width="1120" height="760"></canvas>
+      <div id="stagebar">
+        <span class="t" id="stagelabel">THE STAGE</span>
+        <input type="range" id="scrub" min="0" max="999" value="0">
+        <span class="sp"></span>
+        <button id="play" class="on">PAUSE</button>
+      </div>
+    </div>
+    <div id="info"></div>
+    <div id="chat">
+      <div id="log"></div>
+      <div id="ask">
+        <input id="line" placeholder="stage iona in the mill, holding, close…" autocomplete="off">
+        <button id="send">STAGE</button>
+      </div>
+      <div id="hint">Name a place, anyone in the cast, and a motion. “niko and mara in the lab, cycle” · “the swallowtail in the maze” · “iona close”</div>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+/* ============================================================================
+   THE POINT OF THIS PAGE
+
+   Everything below imports the FILM'S OWN MODULES and runs them. Nothing here
+   is a picture of an asset; there are no thumbnails, no sprite sheets, no
+   exported PNGs. Clicking Iona imports assets/character/iona.mjs, calls her
+   draw() into an offscreen canvas in solid tones, and runs the same halftone
+   pass the film runs. If you change her module and reload, this changes.
+
+   That is the whole reason to build an atlas out of the repo instead of
+   alongside it: an atlas that can go stale WILL go stale, and then it is
+   describing a film that no longer exists.
+   ========================================================================= */
+import { RENDER_PIPELINES, compositePipeline, drawCard, INK, PAPER, inkLevel, clamp01 }
+  from "./engine/halfworld-engine.mjs";
+import * as MOTION from "./engine/motion.mjs";
+import { project } from "./engine/blocking.mjs";
+
+const $ = (s) => document.querySelector(s);
+const el = (t, c, h) => { const n = document.createElement(t); if (c) n.className = c; if (h != null) n.innerHTML = h; return n; };
+const NW = 1120, NH = 760;
+const stage = $("#stage"), sg = stage.getContext("2d");
+const off = document.createElement("canvas"); off.width = NW; off.height = NH;
+const og = off.getContext("2d", { willReadFrequently: true });
+
+let ATLAS = null, TAB = "elements", SEL = null, PLAYING = true, U = 0, MANUAL = false;
+const modCache = new Map();
+const load = async (p) => { if (!modCache.has(p)) modCache.set(p, import("./" + p)); return modCache.get(p); };
+
+/* ---------------------------------------------------------------- boot --- */
+const A = await (await fetch("./atlas/periodic.json")).json();
+ATLAS = A;
+$("#counts").textContent = `${A.elements.length} elements · ${A.compounds.length} compounds`;
+const byId = Object.fromEntries(A.elements.map((e) => [e.id, e]));
+
+/* ---------------------------------------------------------------- table -- */
+function drawTable() {
+  const L = $("#left"); L.innerHTML = "";
+  for (const g of A.groups) {
+    const es = A.elements.filter((e) => e.group === g.id);
+    if (!es.length) continue;
+    const box = el("div", "grp");
+    box.appendChild(el("h2", null, `${g.name} <em>${g.gloss}</em>`));
+    const row = el("div", "row");
+    for (const e of es) {
+      const b = el("button", "el" + (e.valence === 0 ? " zero" : "") + (SEL === e.id ? " on" : ""),
+        `<span class="z">${e.z}</span><span class="v">${e.valence || ""}</span>` +
+        `<span class="sym">${e.symbol}</span><span class="nm">${e.name}</span>`);
+      b.title = `${e.name} — used in ${e.valence} compound${e.valence === 1 ? "" : "s"}`;
+      b.onclick = () => selectElement(e.id);
+      row.appendChild(b);
+    }
+    box.appendChild(row); L.appendChild(box);
+  }
+}
+function drawCompounds() {
+  const L = $("#left"); L.innerHTML = "";
+  const t = el("table", "cmp");
+  t.innerHTML = `<thead><tr><th>unit</th><th>formula</th><th>motion</th><th>sec</th><th>subject</th></tr></thead>`;
+  const tb = el("tbody");
+  for (const c of A.compounds) {
+    const tr = el("tr", SEL === c.id ? "on" : "");
+    tr.innerHTML = `<td class="i">${c.id}</td><td class="f">${c.formula || "—"}</td>` +
+      `<td class="i">${c.motion || ""}</td><td>${c.seconds || ""}</td><td class="s">${c.subject || c.title || ""}</td>`;
+    tr.onclick = () => selectCompound(c.id);
+    tb.appendChild(tr);
+  }
+  t.appendChild(tb); L.appendChild(t);
+}
+const redraw = () => (TAB === "elements" ? drawTable() : drawCompounds());
+
+$("#tabs").onclick = (ev) => {
+  const b = ev.target.closest("button"); if (!b) return;
+  TAB = b.dataset.t;
+  [...ev.currentTarget.children].forEach((c) => c.classList.toggle("on", c === b));
+  redraw();
+};
+
+/* ============================================================================
+   THE STAGE — one render loop, and a `SCENE` object that says what to draw.
+
+   Every mode below produces the same thing: a function of u that paints solid
+   tones into the offscreen buffer. The halftone pass then runs once over the
+   whole field, exactly as renderScene does, so a diagram of a motion and a
+   staged body go through the same lattice. If they did not, this page would be
+   showing you something the film cannot make.
+   ========================================================================= */
+let SCENE = { label: "THE STAGE", seconds: 4, paint: paintEmpty };
+
+function paintEmpty(g, u) {
+  g.fillStyle = "#fff"; g.fillRect(0, 0, NW, NH);
+  g.strokeStyle = INK; g.lineWidth = 6;
+  g.strokeRect(NW * 0.18, NH * 0.20, NW * 0.64, NH * 0.60);
+  g.fillStyle = inkLevel(4);
+  g.font = "900 30px Helvetica"; g.textAlign = "center";
+  g.fillText("PICK AN ELEMENT", NW / 2, NH / 2);
+  g.font = "400 24px Helvetica";
+  g.fillText("or describe a shot below", NW / 2, NH / 2 + 46);
+}
+
+function frame() {
+  if (PLAYING && !MANUAL) { U = (U + 1 / (12 * (SCENE.seconds || 4))) % 1; $("#scrub").value = Math.round(U * 999); }
+  og.setTransform(1, 0, 0, 1, 0, 0);
+  og.fillStyle = "#ffffff"; og.fillRect(0, 0, NW, NH);
+  try { SCENE.paint(og, U); } catch (e) { paintError(og, e); }
+  compositePipeline(sg, off, og, stage.width, stage.height, RENDER_PIPELINES.MESH, 1, true);
+  setTimeout(() => requestAnimationFrame(frame), 1000 / 12);   // the film's own rate
+}
+function paintError(g, e) {
+  g.fillStyle = "#fff"; g.fillRect(0, 0, NW, NH);
+  g.fillStyle = INK; g.font = "900 26px Helvetica"; g.textAlign = "left";
+  g.fillText("this element will not render", 60, 120);
+  g.font = "400 20px ui-monospace,Menlo,monospace";
+  String(e && e.message || e).slice(0, 400).match(/.{1,64}/g).forEach((l, i) => g.fillText(l, 60, 170 + i * 30));
+}
+$("#play").onclick = () => { PLAYING = !PLAYING; MANUAL = false; $("#play").textContent = PLAYING ? "PAUSE" : "PLAY"; $("#play").classList.toggle("on", PLAYING); };
+$("#scrub").oninput = (e) => { MANUAL = true; U = e.target.value / 999; };
+$("#scrub").onchange = () => { MANUAL = false; };
+const setScene = (s) => { SCENE = s; U = 0; $("#stagelabel").textContent = s.label; };
+
+/* ============================================================================
+   THE FIVE WAYS AN ELEMENT SHOWS ITSELF
+
+   Each group gets the representation it deserves rather than one generic card.
+   A motion is a function, so it is drawn as a function. A plan is a coordinate
+   space, so it is drawn as a map. A body is a body. Forcing all three into a
+   thumbnail would be tidy and would tell you nothing.
+   ========================================================================= */
+
+/* 1. MOTION — plot it. The curve IS the definition. */
+function motionScene(e) {
+  const fnName = { CYCLE: "cycle", TRACE: "trace", SWEEP: "sweep", TRANSFER: "transfer",
+    ADVANCE: "advance", DISSOLVE: "dissolve", HOLD: "hold", BREAK: "brk" }[e.id];
+  return { label: `MOTION · ${e.id}`, seconds: 4, paint(g, u) {
+    g.fillStyle = "#fff"; g.fillRect(0, 0, NW, NH);
+    const x0 = 120, x1 = NW - 90, y0 = 150, y1 = NH - 170;
+    g.strokeStyle = inkLevel(2); g.lineWidth = 3;
+    for (let i = 0; i <= 4; i++) { const y = y0 + (y1 - y0) * i / 4;
+      g.beginPath(); g.moveTo(x0, y); g.lineTo(x1, y); g.stroke(); }
+    g.strokeStyle = INK; g.lineWidth = 5;
+    g.beginPath(); g.moveTo(x0, y1); g.lineTo(x1, y1); g.stroke();
+    /* sample the real function across the interval */
+    const N = 240, pts = [];
+    for (let i = 0; i < N; i++) {
+      const uu = i / N;
+      let v = 0;
+      try {
+        if (e.id === "CYCLE") v = MOTION.cycle(uu, { beats: 3 }).beat / 3 + MOTION.cycle(uu, { beats: 3 }).wear;
+        else if (e.id === "HOLD") v = 0.5 + MOTION.hold(uu, { breathSec: 4.1, dur: 4 }).breath * 6;
+        else if (e.id === "ADVANCE") v = MOTION.advance(uu, 5, { dwell: 0.8 }).index / 4;
+        else if (e.id === "SWEEP") v = MOTION.sweep(uu, [0, .25, .5, .75, 1], { width: .2 })[2] ?? uu;
+        else if (e.id === "DISSOLVE") v = MOTION.dissolve(uu, 4, 4) ? 1 : 0;
+        else if (e.id === "BREAK") v = MOTION.brk(uu, 0.5).after ? 1 : 0;
+        else if (e.id === "TRANSFER") v = MOTION.transfer(uu, 6, {})[0]?.k ?? uu;
+        else if (e.id === "SPEAK") v = clamp01(Math.abs(Math.sin(uu * 21)) * (uu < .82 ? 1 : 0));
+        else if (e.id === "LISTEN") v = 0.5 + 0.06 * Math.sin(uu * 6.3);
+        else v = uu;
+      } catch { v = uu; }
+      pts.push([x0 + (x1 - x0) * uu, y1 - (y1 - y0) * clamp01(v)]);
+    }
+    g.strokeStyle = INK; g.lineWidth = 7; g.lineJoin = "round"; g.lineCap = "round";
+    g.beginPath(); pts.forEach((p, i) => i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1])); g.stroke();
+    const cx = x0 + (x1 - x0) * u;
+    g.strokeStyle = inkLevel(5); g.lineWidth = 4;
+    g.beginPath(); g.moveTo(cx, y0 - 30); g.lineTo(cx, y1 + 22); g.stroke();
+    g.fillStyle = INK; g.font = "900 46px Helvetica"; g.textAlign = "left";
+    g.fillText(e.id, x0, 96);
+    g.font = "700 22px ui-monospace,Menlo,monospace"; g.fillStyle = inkLevel(5);
+    g.fillText(fnName ? `engine/motion.mjs → ${fnName}(u)` : "engine/speech.mjs", x0, NH - 100);
+    g.fillText(`u = ${u.toFixed(3)}`, x1 - 190, NH - 100);
+  } };
+}
+
+/* 2. CAST / ANIMAL — their own draw(), their own states and motions. */
+async function bodyScene(e, stateName, motionName) {
+  const mod = (await load(e.file)).default || (await load(e.file)).asset;
+  const nodes = mod.states?.nodes || {};
+  const st0 = stateName && nodes[stateName] ? nodes[stateName].preview
+    : (nodes[mod.states?.initial]?.preview || mod.preview?.() || {});
+  const mfn = motionName && mod.motions && mod.motions[motionName];
+  return { label: `${e.name.toUpperCase()}${stateName ? " · " + stateName : ""}${motionName ? " · " + motionName : ""}`,
+    seconds: 4, mod, paint(g, u) {
+      g.fillStyle = "#fff"; g.fillRect(0, 0, NW, NH);
+      const st = { ...st0, t: u, ...(mfn ? mfn(u) : {}) };
+      const w = NH * 0.80, h = NH * 0.92;
+      g.save(); g.translate(NW / 2 - w / 2, NH * 0.5 - h * 0.52);
+      mod.draw(g, w, h, st);
+      g.restore();
+    } };
+}
+
+/* 3. PLACE — a plan is a coordinate space, so it is drawn as a map: every
+   station projected through the same depth law the film stages bodies with. */
+async function planScene(e) {
+  const m = await load(e.file);
+  const plan = m.default || Object.values(m).find((v) => v && v.stations);
+  const stations = plan?.stations || {};
+  return { label: `PLAN · ${e.name}`, seconds: 6, paint(g, u) {
+    g.fillStyle = "#fff"; g.fillRect(0, 0, NW, NH);
+    g.strokeStyle = inkLevel(2); g.lineWidth = 3;
+    for (let i = 0; i <= 10; i++) {
+      const t = i / 10;
+      g.beginPath(); g.moveTo(90 + t * (NW - 180), 120); g.lineTo(90 + t * (NW - 180), NH - 90); g.stroke();
+    }
+    const names = Object.keys(stations);
+    for (const n of names) {
+      const s = stations[n];
+      const p = project(s, {});
+      const x = 90 + (s.x ?? 0.5) * (NW - 180);
+      const y = 130 + (p.y ?? (0.5 + 0.46 * Math.pow(s.z ?? 0.5, 1.08))) * (NH - 240);
+      const r = 9 + 26 * (s.z ?? 0.5);
+      g.fillStyle = INK; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill();
+      g.fillStyle = inkLevel(6); g.font = "700 17px Helvetica"; g.textAlign = "center";
+      g.fillText(n.replace(/_/g, " "), x, y + r + 20);
+    }
+    g.fillStyle = INK; g.font = "900 40px Helvetica"; g.textAlign = "left";
+    g.fillText(e.name, 90, 84);
+    g.font = "700 20px Helvetica"; g.fillStyle = inkLevel(5);
+    g.fillText(`${names.length} stations · x left→right, z far→near`, 90, NH - 44);
+  } };
+}
+
+/* 4. SET — most set modules are libraries of drawing functions with different
+   signatures, so there is nothing honest to auto-render. Show what it exports
+   and say so, rather than invent a call and print a broken picture. */
+/* NAMED setPieceScene, not setScene: the obvious name for "the scene for a SET
+   element" is already the name of the function that sets the scene, and the
+   collision is a SyntaxError that kills the whole module at parse time with no
+   console output — the page just renders "loading…" forever. */
+function setPieceScene(e) {
+  return { label: `SET · ${e.name}`, seconds: 4, paint(g) {
+    g.fillStyle = "#fff"; g.fillRect(0, 0, NW, NH);
+    g.fillStyle = INK; g.font = "900 40px Helvetica"; g.textAlign = "left";
+    g.fillText(e.name, 90, 110);
+    g.font = "700 22px ui-monospace,Menlo,monospace";
+    g.fillStyle = inkLevel(5); g.fillText(e.file, 90, 152);
+    g.fillStyle = INK; g.font = "700 26px ui-monospace,Menlo,monospace";
+    (e.exports || []).slice(0, 14).forEach((fn, i) => g.fillText(`${fn}()`, 110, 230 + i * 40));
+    g.fillStyle = inkLevel(5); g.font = "400 20px Helvetica";
+    g.fillText("a library of drawing functions — see the units that use it", 90, NH - 50);
+  } };
+}
+
+/* 5. SOUND — the waveform, and it plays. */
+async function soundScene(e) {
+  const r = await fetch("./" + e.file);
+  const buf = await r.arrayBuffer();
+  const dv = new DataView(buf);
+  const n = Math.floor((buf.byteLength - 44) / 2);
+  const peaks = [];
+  const step = Math.max(1, Math.floor(n / 900));
+  for (let i = 0; i < n; i += step) {
+    let mx = 0;
+    for (let j = i; j < Math.min(n, i + step); j++) mx = Math.max(mx, Math.abs(dv.getInt16(44 + j * 2, true) / 32768));
+    peaks.push(mx);
+  }
+  return { label: `${e.group.toUpperCase()} · ${e.name}`, seconds: e.seconds || 4, peaks, file: e.file,
+    paint(g, u) {
+      g.fillStyle = "#fff"; g.fillRect(0, 0, NW, NH);
+      const mid = NH * 0.5, H = NH * 0.30;
+      g.strokeStyle = inkLevel(2); g.lineWidth = 3;
+      g.beginPath(); g.moveTo(80, mid); g.lineTo(NW - 80, mid); g.stroke();
+      g.fillStyle = INK;
+      peaks.forEach((p, i) => {
+        const x = 80 + (NW - 160) * i / peaks.length;
+        g.fillRect(x, mid - p * H, Math.max(2, (NW - 160) / peaks.length - 1), p * H * 2);
+      });
+      const cx = 80 + (NW - 160) * u;
+      g.strokeStyle = "#0033cc"; g.lineWidth = 5;
+      g.beginPath(); g.moveTo(cx, mid - H - 30); g.lineTo(cx, mid + H + 30); g.stroke();
+      g.fillStyle = INK; g.font = "900 38px Helvetica"; g.textAlign = "left";
+      g.fillText(e.name, 80, 110);
+      g.font = "700 20px ui-monospace,Menlo,monospace"; g.fillStyle = inkLevel(5);
+      g.fillText(`${(e.seconds || 0).toFixed(2)}s · peak ${e.peak} · rms ${e.rms}`, 80, NH - 70);
+    } };
+}
+
+/* ---------------------------------------------------------------- select -- */
+let audio = null;
+async function selectElement(id, opts = {}) {
+  SEL = id; redraw();
+  const e = byId[id];
+  if (audio) { audio.pause(); audio = null; }
+  let sc;
+  try {
+    if (e.group === "motion") sc = motionScene(e);
+    else if (e.group === "cast" || e.group === "creature") sc = await bodyScene(e, opts.state, opts.motion);
+    else if (e.group === "place") sc = await planScene(e);
+    else if (e.group === "set") sc = setPieceScene(e);
+    else { sc = await soundScene(e); audio = new Audio("./" + e.file); audio.loop = true; audio.play().catch(() => {}); }
+  } catch (err) { sc = { label: e.name, seconds: 4, paint: (g) => paintError(g, err) }; }
+  setScene(sc);
+  showElementInfo(e, opts);
+}
+
+function showElementInfo(e, opts) {
+  const used = A.compounds.filter((c) => c.elements.includes(e.id));
+  const I = $("#info"); I.innerHTML = "";
+  I.appendChild(el("div", "kick", `${e.group} · element ${e.z}`));
+  I.appendChild(el("h3", null, `${e.symbol} — ${e.name}`));
+  if (e.gloss) I.appendChild(el("p", "why", e.gloss));
+  const meta = el("div", "meta");
+  meta.appendChild(el("span", "k", `used in ${used.length}`));
+  if (e.file) meta.appendChild(el("span", null, e.file));
+  if (e.stations) meta.appendChild(el("span", null, `${e.stations} stations`));
+  if (e.seconds) meta.appendChild(el("span", null, `${e.seconds}s`));
+  I.appendChild(meta);
+
+  /* a body's own state machine and motion channels, as buttons — this is the
+     "play with them" part, and it is playing with the real state machine */
+  if (e.states?.length) {
+    I.appendChild(el("div", "kick", "states"));
+    const c = el("div", "chips");
+    for (const s of e.states) {
+      const b = el("button", opts.state === s ? "on" : "", s);
+      b.onclick = () => selectElement(e.id, { ...opts, state: s });
+      c.appendChild(b);
+    }
+    I.appendChild(c);
+  }
+  if (e.motions?.length) {
+    I.appendChild(el("div", "kick", "motions"));
+    const c = el("div", "chips");
+    const b0 = el("button", !opts.motion ? "on" : "", "none");
+    b0.onclick = () => selectElement(e.id, { ...opts, motion: null }); c.appendChild(b0);
+    for (const m of e.motions) {
+      const b = el("button", opts.motion === m ? "on" : "", m);
+      b.onclick = () => selectElement(e.id, { ...opts, motion: m });
+      c.appendChild(b);
+    }
+    I.appendChild(c);
+  }
+  if (used.length) {
+    I.appendChild(el("div", "kick", "appears in"));
+    const c = el("div", "chips");
+    for (const u of used.slice(0, 40)) {
+      const b = el("button", null, u.id);
+      b.onclick = () => { TAB = "compounds"; [...$("#tabs").children].forEach((x) => x.classList.toggle("on", x.dataset.t === "compounds")); selectCompound(u.id); };
+      c.appendChild(b);
+    }
+    I.appendChild(c);
+  }
+}
+
+async function selectCompound(id) {
+  SEL = id; redraw();
+  const c = A.compounds.find((x) => x.id === id);
+  if (audio) { audio.pause(); audio = null; }
+  if (c.render) {
+    setScene({ label: `${c.id} · ${c.title}`, seconds: c.seconds || 4, paint: () => {} });
+    playVideo(c.render, c.id, c.title);
+  } else if (c.file && c.file.endsWith(".mjs")) {
+    try {
+      const m = await load(c.file);
+      setScene({ label: `${c.id} · ${c.title}`, seconds: m.seconds || 4,
+        paint: (g, u) => m.draw(g, NW, NH, m.at(u, { u, W: NW, H: NH, frames: m.frames, seconds: m.seconds })) });
+    } catch (err) { setScene({ label: c.id, seconds: 4, paint: (g) => paintError(g, err) }); }
+  } else setScene({ label: c.id, seconds: 4, paint: paintEmpty });
+  showCompoundInfo(c);
+}
+/* a rendered unit is a webm and the film already made it; painting it into the
+   same canvas keeps one surface rather than two */
+let vid = null;
+function playVideo(src, label) {
+  if (!vid) { vid = document.createElement("video"); vid.loop = true; vid.muted = true; vid.playsInline = true; }
+  vid.src = "./" + src; vid.play().catch(() => {});
+  SCENE.paint = (g) => {
+    g.fillStyle = "#fff"; g.fillRect(0, 0, NW, NH);
+    if (vid.readyState >= 2) g.drawImage(vid, 0, 0, NW, NH);
+  };
+}
+function showCompoundInfo(c) {
+  const I = $("#info"); I.innerHTML = "";
+  I.appendChild(el("div", "kick", `compound${c.generated ? " · generated" : ""}`));
+  I.appendChild(el("h3", null, `${c.id} — ${c.title || ""}`));
+  if (c.subject) I.appendChild(el("p", "why", c.subject));
+  const meta = el("div", "meta");
+  meta.appendChild(el("span", "k", c.formula || "—"));
+  if (c.motion) meta.appendChild(el("span", null, c.motion));
+  if (c.distance) meta.appendChild(el("span", null, c.distance));
+  if (c.seconds) meta.appendChild(el("span", null, `${c.seconds}s`));
+  if (c.count) meta.appendChild(el("span", null, `${c.count} units`));
+  I.appendChild(meta);
+  I.appendChild(el("div", "kick", "made of"));
+  const ch = el("div", "chips");
+  for (const eid of c.elements) {
+    const e = byId[eid]; if (!e) continue;
+    const b = el("button", null, `${e.symbol} ${e.name}`);
+    b.onclick = () => { TAB = "elements"; [...$("#tabs").children].forEach((x) => x.classList.toggle("on", x.dataset.t === "elements")); selectElement(eid); };
+    ch.appendChild(b);
+  }
+  I.appendChild(ch);
+  if (c.file) { const p = el("p"); p.innerHTML = `<code>${c.file}</code>`; I.appendChild(p); }
+}
+
+/* ============================================================================
+   CHAT — staging by description.
+
+   Deliberately a PARSER and not a model call. The vocabulary of this world is
+   eighty-one named things; a parser over eighty-one names is not a degraded
+   version of understanding, it is the correct tool, and it works offline, with
+   no key, forever. It also cannot hallucinate an element that does not exist,
+   which a model asked to "stage a scene" absolutely will.
+
+   What it understands is the world's own nouns: any element name or symbol,
+   the five places, the ten motions, and the three framings.
+   ========================================================================= */
+const say = (kind, role, text) => {
+  const m = el("div", `msg ${kind}`, `<div class="r">${role}</div><div class="b">${text}</div>`);
+  $("#log").appendChild(m); $("#log").scrollTop = 1e9;
+};
+
+function parse(text) {
+  const t = " " + text.toLowerCase().replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ") + " ";
+  const hit = (e) => t.includes(" " + e.name.toLowerCase() + " ") || t.includes(" " + e.id.toLowerCase().replace(/^the-/, "") + " ")
+    || t.includes(" " + e.id.toLowerCase() + " ");
+  const found = A.elements.filter(hit);
+  return {
+    place: found.find((e) => e.group === "place"),
+    bodies: found.filter((e) => e.group === "cast" || e.group === "creature"),
+    motion: found.find((e) => e.group === "motion"),
+    sound: found.find((e) => ["room", "foley", "score"].includes(e.group)),
+    close: /\bclose\b|\bcloser\b|\bface\b/.test(t),
+    wide: /\bwide\b|\bfar\b/.test(t),
+    all: found,
+  };
+}
+
+async function stageIt(text) {
+  const p = parse(text);
+  if (!p.all.length) { say("err", "no", "Nothing in that names an element. Try a place, a body, or a motion — click anything in the table to see what it is called."); return; }
+  if (p.sound && !p.bodies.length && !p.place) { selectElement(p.sound.id); say("sys", "staged", `Playing <b>${p.sound.name}</b>.`); return; }
+  if (p.bodies.length === 1 && !p.place) {
+    const e = p.bodies[0];
+    const mo = p.motion && (byId[e.id].motions || []).find((m) => m.toUpperCase().includes(p.motion.id)) || null;
+    await selectElement(e.id, { motion: mo });
+    say("sys", "staged", `<b>${e.name}</b>${mo ? " · " + mo : ""}${p.close ? " · close" : ""}. Its states and motions are listed above.`);
+    return;
+  }
+  if (p.place && !p.bodies.length) { await selectElement(p.place.id); say("sys", "staged", `The plan for <b>${p.place.name}</b> — ${byId[p.place.id].stations} named stations.`); return; }
+
+  /* a place AND bodies: compose. Bodies are placed across the plan's own depth
+     law rather than at arbitrary x — the same law blocking.mjs stages with. */
+  const bodies = [];
+  for (const b of p.bodies.slice(0, 3)) {
+    const m = await load(b.file);
+    bodies.push({ e: b, mod: m.default || m.asset });
+  }
+  const K = p.close ? 1.35 : p.wide ? 0.62 : 0.92;
+  setScene({ label: `${p.place ? p.place.name : "STAGE"} · ${bodies.map((b) => b.e.name).join(" + ")}`,
+    seconds: 4, paint(g, u) {
+      g.fillStyle = "#fff"; g.fillRect(0, 0, NW, NH);
+      const horizon = NH * (p.close ? 0.30 : 0.42);
+      g.fillStyle = inkLevel(1); g.fillRect(0, 0, NW, horizon);
+      g.fillStyle = inkLevel(2); g.fillRect(0, horizon, NW, NH - horizon);
+      g.strokeStyle = INK; g.lineWidth = 6;
+      g.beginPath(); g.moveTo(0, horizon); g.lineTo(NW, horizon); g.stroke();
+      bodies.forEach((b, i) => {
+        const n = bodies.length;
+        const x = NW * ((i + 1) / (n + 1));
+        const h = NH * 0.62 * K;
+        const nodes = b.mod.states?.nodes || {};
+        const st0 = nodes[b.mod.states?.initial]?.preview || b.mod.preview?.() || {};
+        const mfn = p.motion && b.mod.motions
+          ? Object.entries(b.mod.motions).find(([k]) => k.toUpperCase().includes(p.motion.id))?.[1] : null;
+        const st = { ...st0, t: u, ...(mfn ? mfn(u) : {}) };
+        g.save(); g.translate(x - h * 0.42, horizon + NH * 0.06 - h);
+        try { b.mod.draw(g, h * 0.84, h, st); } catch (e) {}
+        g.restore();
+      });
+      g.fillStyle = INK; g.font = "900 26px Helvetica"; g.textAlign = "left";
+      g.fillText((p.place ? p.place.name : "STAGE") + (p.motion ? " · " + p.motion.id : ""), 40, 54);
+    } });
+  say("sys", "staged", `<b>${bodies.map((b) => b.e.name).join("</b> and <b>")}</b> in <b>${p.place ? p.place.name : "no place"}</b>` +
+    `${p.motion ? `, ${p.motion.id.toLowerCase()}` : ""}${p.close ? ", close" : p.wide ? ", wide" : ""}. ` +
+    `Formula <code>${[p.place, ...p.bodies, p.motion].filter(Boolean).map((e) => e.symbol).join("·")}</code>`);
+}
+
+$("#send").onclick = () => { const v = $("#line").value.trim(); if (!v) return; $("#line").value = ""; say("you", "you", v); stageIt(v); };
+$("#line").onkeydown = (e) => { if (e.key === "Enter") $("#send").click(); };
+
+/* ---------------------------------------------------------------- go ----- */
+drawTable();
+setScene({ label: "THE STAGE", seconds: 4, paint: paintEmpty });
+say("sys", "atlas", `${A.elements.length} elements, ${A.compounds.length} compounds. Everything on this page is rendered by the film's own modules — there are no thumbnails. Click an element, or describe a shot.`);
+requestAnimationFrame(frame);
+window.__ATLAS = A;
+</script>
+</body></html>
