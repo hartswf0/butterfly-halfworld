@@ -1,0 +1,55 @@
+{
+  "id": "C03",
+  "mod": "scenes/C03.mjs",
+  "ok": true,
+  "t": "2026-08-05T01:02:53.447Z",
+  "motion": "DISSOLVE",
+  "seconds": 7,
+  "loopClosed": false,
+  "beats": null,
+  "declaredBreak": null,
+  "frames": {
+    "declared": 84,
+    "rendered": 84,
+    "fps": 12
+  },
+  "duration": {
+    "nominalSec": 7,
+    "webmSec": 7,
+    "gifSec": 7,
+    "renderWallSec": 3.1
+  },
+  "size": {
+    "w": 1120,
+    "h": 760,
+    "pipeline": "MESH",
+    "card": true
+  },
+  "loop": {
+    "wrapChangedPct": 0.648,
+    "wrapMeanAbs": 1.2235,
+    "meanStepChangedPct": 0.0084,
+    "maxStepChangedPct": 0.0404,
+    "meanStepMeanAbs": 0.0151,
+    "ratio": 77.143,
+    "verdict": "n/a (not a CYCLE)"
+  },
+  "files": {
+    "webm": {
+      "path": "renders/motion/C03.webm",
+      "bytes": 78414
+    },
+    "gif": {
+      "path": "renders/motion/C03.gif",
+      "bytes": 75521
+    },
+    "contact": {
+      "path": "renders/motion/C03-contact.png",
+      "bytes": 145477
+    },
+    "frames": null
+  },
+  "encodeErrors": [],
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "warnings": []
+}

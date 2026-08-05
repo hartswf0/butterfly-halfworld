@@ -53,6 +53,24 @@ const dur = (f) => {
     "-of", "default=nw=1:nk=1", f], { encoding: "utf8" }).trim()); } catch (_) { return null; }
 };
 
+/* ---- 0. the cards -------------------------------------------------------
+   Framing cards are scenes, so they enter the cut the same way scenes do —
+   by position, not by being special-cased at mux time. A card earns its place
+   by answering a question the next scene will otherwise raise silently. */
+const ORDER = fs.existsSync(path.join(FILM, "order.json"))
+  ? JSON.parse(fs.readFileSync(path.join(FILM, "order.json"), "utf8")).cards : [];
+function withCards(list) {
+  const out = [];
+  const opening = ORDER.filter((c) => !c.before && !c.after);
+  for (const c of opening) out.push({ id: c.card, card: true, why: c.why });
+  for (const sc of list) {
+    for (const c of ORDER) if (c.before === sc.id) out.push({ id: c.card, card: true, why: c.why });
+    out.push(sc);
+    for (const c of ORDER) if (c.after === sc.id) out.push({ id: c.card, card: true, why: c.why });
+  }
+  return out;
+}
+
 /* ---- 1. the clock -------------------------------------------------------- */
 const takes = fs.existsSync(path.join(ROOT, "audio", "scene-takes.json"))
   ? JSON.parse(fs.readFileSync(path.join(ROOT, "audio", "scene-takes.json"), "utf8")).takes : [];
@@ -61,9 +79,17 @@ for (const t of takes) (takesBy[t.scene] ||= []).push(t);
 
 let measured = 0, estimated = 0;
 const cut = [];
-for (const s of SCRIPT.scenes) {
+for (const s of withCards(SCRIPT.scenes)) {
   const meta = path.join(MOTION, `${s.id}.json`);
   if (!fs.existsSync(meta)) { console.warn(`  no render for ${s.id}`); continue; }
+  // a card holds for exactly one revolution: it has nothing to say twice
+  if (s.card) {
+    const M = JSON.parse(fs.readFileSync(meta, "utf8"));
+    cut.push({ id: s.id, card: true, why: s.why, title: s.id, sound: [],
+               src: path.join(MOTION, `${s.id}.webm`), loopSec: M.seconds, loops: 1,
+               voiceSec: 0, duration: +M.seconds.toFixed(3) });
+    continue;
+  }
   const M = JSON.parse(fs.readFileSync(meta, "utf8"));
   const loopSec = M.seconds;
   const src = path.join(MOTION, `${s.id}.webm`);
@@ -90,7 +116,8 @@ const total = cut.reduce((n, c) => n + c.duration, 0);
 const provisional = estimated > 0;
 
 console.log(`I REMEMBER BEING A BUTTERFLY — the cut`);
-console.log(`  ${cut.length} scenes · ${(total / 60).toFixed(2)} min · ${FPS}fps`);
+const nCards = cut.filter((c) => c.card).length;
+console.log(`  ${cut.length - nCards} scenes + ${nCards} framing cards · ${(total / 60).toFixed(2)} min · ${FPS}fps`);
 console.log(`  ${measured} takes measured, ${estimated} estimated`);
 console.log(`  ${cut.reduce((n, c) => n + c.loops, 0)} loop revolutions in total`);
 const rep = cut.filter((c) => c.loops > 1);

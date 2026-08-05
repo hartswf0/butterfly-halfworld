@@ -1,0 +1,32 @@
+{
+ "cards": [
+  {
+   "card": "C00",
+   "why": "the mark draws itself before anything is named"
+  },
+  {
+   "card": "C01",
+   "why": "the older question, before the film answers it in the affirmative"
+  },
+  {
+   "card": "C02",
+   "before": "BF-01",
+   "why": "you cannot read a refusal without the two choices it declines"
+  },
+  {
+   "card": "C03",
+   "after": "BF-07",
+   "why": "after the scales are on her hand: why the smell is the kindest one available"
+  },
+  {
+   "card": "C04",
+   "before": "BF-17",
+   "why": "before Iona arrives: someone did this, and was doubted"
+  },
+  {
+   "card": "C05",
+   "after": "BF-40",
+   "why": "the last word, and it is a chrysalis"
+  }
+ ]
+}

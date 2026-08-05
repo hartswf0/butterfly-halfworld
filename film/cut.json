@@ -1,11 +1,47 @@
 {
- "built": "2026-08-05T00:43:11.024Z",
+ "built": "2026-08-05T01:03:40.323Z",
  "provisional": false,
  "fps": 12,
- "totalSeconds": 367,
+ "totalSeconds": 409,
  "measured": 33,
  "estimated": 0,
  "scenes": [
+  {
+   "id": "C00",
+   "card": true,
+   "why": "the mark draws itself before anything is named",
+   "title": "C00",
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/C00.webm",
+   "loopSec": 6,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 6
+  },
+  {
+   "id": "C01",
+   "card": true,
+   "why": "the older question, before the film answers it in the affirmative",
+   "title": "C01",
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/C01.webm",
+   "loopSec": 7.5,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 7.5
+  },
+  {
+   "id": "C02",
+   "card": true,
+   "why": "you cannot read a refusal without the two choices it declines",
+   "title": "C02",
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/C02.webm",
+   "loopSec": 8,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 8
+  },
   {
    "id": "BF-01",
    "title": "INT. OBSERVATION BOX -- MORNING",
@@ -120,6 +156,18 @@
    "loops": 1,
    "voiceSec": 3.371,
    "duration": 4
+  },
+  {
+   "id": "C03",
+   "card": true,
+   "why": "after the scales are on her hand: why the smell is the kindest one available",
+   "title": "C03",
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/C03.webm",
+   "loopSec": 7,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 7
   },
   {
    "id": "BF-08",
@@ -265,6 +313,18 @@
    "loops": 1,
    "voiceSec": 0,
    "duration": 5
+  },
+  {
+   "id": "C04",
+   "card": true,
+   "why": "before Iona arrives: someone did this, and was doubted",
+   "title": "C04",
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/C04.webm",
+   "loopSec": 6.5,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 6.5
   },
   {
    "id": "BF-17",
@@ -655,6 +715,18 @@
    "loops": 1,
    "voiceSec": 3.611,
    "duration": 5.5
+  },
+  {
+   "id": "C05",
+   "card": true,
+   "why": "the last word, and it is a chrysalis",
+   "title": "C05",
+   "sound": [],
+   "src": "/Users/gaia/Downloads/butterfly-halfworld/renders/motion/C05.webm",
+   "loopSec": 7,
+   "loops": 1,
+   "voiceSec": 0,
+   "duration": 7
   }
  ]
 }
