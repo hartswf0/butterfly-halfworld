@@ -2,7 +2,7 @@
   "id": "BF-24",
   "mod": "scenes/BF-24.mjs",
   "ok": true,
-  "t": "2026-08-04T23:58:04.954Z",
+  "t": "2026-08-05T00:10:53.058Z",
   "motion": "CYCLE",
   "seconds": 4,
   "loopClosed": false,
@@ -17,7 +17,7 @@
     "nominalSec": 4,
     "webmSec": 4,
     "gifSec": 4,
-    "renderWallSec": 4.3
+    "renderWallSec": 4.9
   },
   "size": {
     "w": 1120,
@@ -26,28 +26,28 @@
     "card": true
   },
   "loop": {
-    "wrapChangedPct": 5.5169,
-    "wrapMeanAbs": 7.6584,
-    "meanStepChangedPct": 4.0934,
-    "maxStepChangedPct": 7.1927,
-    "meanStepMeanAbs": 5.2977,
-    "ratio": 1.348,
-    "verdict": "seamless"
+    "wrapChangedPct": 11.5461,
+    "wrapMeanAbs": 15.0017,
+    "meanStepChangedPct": 5.0952,
+    "maxStepChangedPct": 12.0559,
+    "meanStepMeanAbs": 6.4824,
+    "ratio": 2.266,
+    "verdict": "open drift at the wrap (expected if loopClosed:false)"
   },
   "files": {
     "webm": {
       "path": "renders/motion/BF-24.webm",
-      "bytes": 1832947
+      "bytes": 2318598
     },
     "gif": {
       "path": "renders/motion/BF-24.gif",
-      "bytes": 1763916
+      "bytes": 2277811
     },
     "contact": {
       "path": "renders/motion/BF-24-contact.png",
-      "bytes": 318006
+      "bytes": 403045
     },
-    "frames": null
+    "frames": "renders/motion/.frames-BF-24"
   },
   "encodeErrors": [],
   "ffmpeg": "/opt/homebrew/bin/ffmpeg",
