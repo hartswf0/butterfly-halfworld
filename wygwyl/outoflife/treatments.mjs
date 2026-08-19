@@ -330,36 +330,119 @@ export function structureLines(img, opts = {}) {
    `key:"bright"` inverts the test, for a shot where the figure is the LIT
    mass instead (the ember, the sparks around him in THE FALL).
    ========================================================================= */
-export function figureSilhouette(img, opts = {}) {
-  const { channel = "luma", key = "dark", threshold = 0.32, minArea = 40,
-          level = 7, erode = 1 } = opts;
-  const v = readChannel(img, { channel });
-  const isFg = new Uint8Array(CELLS);
-  for (let q = 0; q < CELLS; q++) isFg[q] = (key === "dark" ? v[q] < threshold : v[q] > threshold) ? 1 : 0;
-
+function erode1(mask) {
+  const out = new Uint8Array(CELLS);
+  for (let y = 0; y < FH; y++) for (let x = 0; x < FW; x++) {
+    const q = y * FW + x;
+    if (!mask[q]) continue;
+    out[q] = (x > 0 && mask[q - 1]) && (x < FW - 1 && mask[q + 1])
+           && (y > 0 && mask[q - FW]) && (y < FH - 1 && mask[q + FW]) ? 1 : 0;
+  }
+  return out;
+}
+function dilate1(mask) {
+  const out = new Uint8Array(CELLS);
+  for (let y = 0; y < FH; y++) for (let x = 0; x < FW; x++) {
+    const q = y * FW + x;
+    out[q] = mask[q] || (x > 0 && mask[q - 1]) || (x < FW - 1 && mask[q + 1])
+                      || (y > 0 && mask[q - FW]) || (y < FH - 1 && mask[q + FW]) ? 1 : 0;
+  }
+  return out;
+}
+/* label every 4-connected component of `mask`, iteratively (not recursively
+   — 27,648 cells can exceed a real call stack). Returns {label, comps}, comps
+   keyed by label id: {area, x0,y0,x1,y1}. */
+function components(mask) {
   const label = new Int32Array(CELLS).fill(-1);
   const stack = [];
-  let bestLabel = -1, bestArea = 0, nextLabel = 0;
+  const comps = [];
   for (let start = 0; start < CELLS; start++) {
-    if (!isFg[start] || label[start] !== -1) continue;
-    let area = 0;
-    stack.push(start); label[start] = nextLabel;
+    if (!mask[start] || label[start] !== -1) continue;
+    const id = comps.length;
+    let area = 0, x0 = FW, x1 = 0, y0 = FH, y1 = 0;
+    stack.push(start); label[start] = id;
     while (stack.length) {
       const q = stack.pop(); area++;
       const x = q % FW, y = (q / FW) | 0;
-      if (x > 0 && isFg[q - 1] && label[q - 1] === -1) { label[q - 1] = nextLabel; stack.push(q - 1); }
-      if (x < FW - 1 && isFg[q + 1] && label[q + 1] === -1) { label[q + 1] = nextLabel; stack.push(q + 1); }
-      if (y > 0 && isFg[q - FW] && label[q - FW] === -1) { label[q - FW] = nextLabel; stack.push(q - FW); }
-      if (y < FH - 1 && isFg[q + FW] && label[q + FW] === -1) { label[q + FW] = nextLabel; stack.push(q + FW); }
+      if (x < x0) x0 = x; if (x > x1) x1 = x;
+      if (y < y0) y0 = y; if (y > y1) y1 = y;
+      if (x > 0 && mask[q - 1] && label[q - 1] === -1) { label[q - 1] = id; stack.push(q - 1); }
+      if (x < FW - 1 && mask[q + 1] && label[q + 1] === -1) { label[q + 1] = id; stack.push(q + 1); }
+      if (y > 0 && mask[q - FW] && label[q - FW] === -1) { label[q - FW] = id; stack.push(q - FW); }
+      if (y < FH - 1 && mask[q + FW] && label[q + FW] === -1) { label[q + FW] = id; stack.push(q + FW); }
     }
-    if (area > bestArea) { bestArea = area; bestLabel = nextLabel; }
-    nextLabel++;
+    comps.push({ area, x0, y0, x1, y1 });
   }
+  return { label, comps };
+}
+
+export function figureSilhouette(img, opts = {}) {
+  const { channel = "luma", key = "dark", threshold = 0.32, minArea = 40,
+          level = 7, erode = 1, marginBottom = 0, sever = 1 } = opts;
+  const v = readChannel(img, { channel });
+  /* isFgFull: the true threshold test, every cell. isFg: the same, with the
+     bottom `marginBottom` rows forced OUT — used only to find which blob is
+     the person (see below). The legs-recovery pass after component
+     selection reads isFgFull, not isFg — an earlier version of this
+     function reused isFg there by mistake, which is a cell array that is
+     BY CONSTRUCTION always empty below the cut, so "grow back into the
+     rows you just excluded" grew into nothing every time. */
+  const isFgFull = new Uint8Array(CELLS);
+  const isFg = new Uint8Array(CELLS);
+  /* marginBottom: cells excluded from the foreground test at the very
+     bottom of the frame. This footage's figures usually stand on ground
+     nearly as dark as they are (a rooftop, a shadowed floor), so a plain
+     threshold connects the silhouette to the ground it's standing on. */
+  const cutY = FH - Math.max(0, marginBottom | 0);
+  for (let q = 0; q < CELLS; q++) {
+    const y = (q / FW) | 0;
+    const fg = (key === "dark" ? v[q] < threshold : v[q] > threshold) ? 1 : 0;
+    isFgFull[q] = fg;
+    isFg[q] = y < cutY ? fg : 0;
+  }
+
+  /* SEVER BEFORE YOU LABEL, NOT AFTER. The first version of this function
+     found the largest component THEN eroded it — which cannot undo a bad
+     merge, because by the time erosion runs, the wrong (fused) blob has
+     already won "largest" on its now-inflated area. This footage is dark
+     almost everywhere a figure stands (a wall, a floor, a doorway all read
+     as "dark" too), so two unrelated dark shapes touching at a single
+     pixel — a shoulder grazing a doorframe — silently produces one
+     component the size of half the room. MORPHOLOGICAL OPENING (erode by
+     `sever`, then dilate the SAME mask back by `sever`) run BEFORE
+     labelling severs any bridge narrower than 2×`sever` cells while
+     leaving genuinely wide shapes close to their original size, so the
+     component search below sees the person and the doorframe as two
+     things, not one. */
+  let opened = isFg;
+  for (let e = 0; e < Math.max(0, sever | 0); e++) opened = erode1(opened);
+  for (let e = 0; e < Math.max(0, sever | 0); e++) opened = dilate1(opened);
+
+  const { label, comps } = components(opened);
+  /* largest surviving component, full stop — see below for why this isn't
+     "largest AND taller than wide." */
+  let bestId = -1, bestArea = 0;
+  comps.forEach((c, id) => {
+    if (c.area >= minArea && c.area > bestArea) { bestArea = c.area; bestId = id; }
+  });
+  /* REJECTED: preferring the largest component that is at least as tall as
+     wide, on the reasoning that a standing person always is and a merged
+     wall-and-floor blob almost never is. Tried, measured (bbox logged per
+     shot), and made things WORSE — on a shot where the true figure is still
+     partly fused to something else, opening can erode the figure's own
+     thin extremities (an arm, the gap under raised elbow) down to nothing
+     while leaving a small, blocky, TALL-BY-CHANCE fragment of wall texture
+     intact, which then wins outright. A wrong "largest, full stop" is at
+     least a big enough wrong answer to be visibly wrong; a wrong "largest
+     tall one" can be a confident, small, silent wrong answer. Left as a
+     comment rather than deleted, because the next attempt at this should
+     start from a genuine skeleton/second-moment check (elongation, not raw
+     aspect of an axis-aligned box) instead of repeating this one. */
 
   let mask = new Uint8Array(CELLS);
   let sx = 0, sy = 0, n = 0, x0 = FW, x1 = 0, y0 = FH, y1 = 0;
-  if (bestArea >= minArea) {
-    for (let q = 0; q < CELLS; q++) if (label[q] === bestLabel) {
+  if (bestId >= 0) {
+    for (let q = 0; q < CELLS; q++) if (label[q] === bestId) {
       mask[q] = 1;
       const x = q % FW, y = (q / FW) | 0;
       sx += x; sy += y; n++;
@@ -367,6 +450,39 @@ export function figureSilhouette(img, opts = {}) {
       if (y < y0) y0 = y; if (y > y1) y1 = y;
     }
   }
+
+  /* RECOVER THE LEGS. `marginBottom` cut the ground out of the foreground
+     test so the flood fill above can't cross into it — right for finding
+     WHICH blob is the person, wrong for MEASURING them, because a body's
+     own legs live in exactly the rows that got cut (found by looking: with
+     the cut left in, a hooded figure's tracedFigure pose came out as its
+     own torso's aspect ratio — squat and wide — because the legs simply
+     weren't in the number). Grow the winning mask back down into the
+     ORIGINAL, uncut foreground, one row at a time, staying within a
+     corridor around whatever is already there — wide enough to cross a
+     stance, narrow enough that a floor spanning the whole frame can't walk
+     back in sideways the moment the cut ends. */
+  if (marginBottom > 0 && n > 0) {
+    const corridor = Math.max(6, (x1 - x0) * 0.6);
+    let cx0 = x0, cx1 = x1;
+    for (let y = cutY; y < FH; y++) {
+      let rowLo = FW, rowHi = -1;
+      const xLo = Math.max(0, Math.floor(cx0 - corridor)), xHi = Math.min(FW - 1, Math.ceil(cx1 + corridor));
+      for (let x = xLo; x <= xHi; x++) {
+        const q = y * FW + x;
+        if (!isFgFull[q]) continue;
+        const touchesAbove = mask[q - FW] || (x > 0 && mask[q - FW - 1]) || (x < FW - 1 && mask[q - FW + 1]);
+        if (!touchesAbove) continue;
+        mask[q] = 1; n++; sx += x; sy += y;
+        if (x < x0) x0 = x; if (x > x1) x1 = x;
+        if (y > y1) y1 = y;
+        if (x < rowLo) rowLo = x; if (x > rowHi) rowHi = x;
+      }
+      if (rowHi < rowLo) break;      // nothing extended this row — the legs ended, or were never there
+      cx0 = rowLo; cx1 = rowHi;
+    }
+  }
+
   let cx = n ? sx / n : FW / 2, cy = n ? sy / n : FH / 2, angle = Math.PI / 2;
   if (n > 4) {
     let mu20 = 0, mu02 = 0, mu11 = 0;
@@ -379,19 +495,10 @@ export function figureSilhouette(img, opts = {}) {
     if (angle < 0) angle += Math.PI;                 // fold to 0..π — a major AXIS has no head or tail
   }
 
-  /* erode: drop any mask cell touching background — clears single-cell
-     noise off the silhouette's own edge without a gradient to do it with */
-  for (let e = 0; e < Math.max(0, erode | 0); e++) {
-    const m2 = new Uint8Array(CELLS);
-    for (let y = 0; y < FH; y++) for (let x = 0; x < FW; x++) {
-      const q = y * FW + x;
-      if (!mask[q]) continue;
-      const solid = (x === 0 || mask[q - 1]) && (x === FW - 1 || mask[q + 1])
-                 && (y === 0 || mask[q - FW]) && (y === FH - 1 || mask[q + FW]);
-      m2[q] = solid ? 1 : 0;
-    }
-    mask = m2;
-  }
+  /* a light COSMETIC erode on top of the already-separated mask, purely to
+     clean single-cell noise off the silhouette's own edge — unrelated to
+     `sever` above, which has already done the structural work. */
+  for (let e = 0; e < Math.max(0, erode | 0); e++) mask = erode1(mask);
 
   const field = alloc();
   for (let q = 0; q < CELLS; q++) if (mask[q]) field[q] = level;

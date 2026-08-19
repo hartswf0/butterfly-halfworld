@@ -1,0 +1,512 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OUT OF LIFE — a test suite</title>
+<link rel="stylesheet" href="../halfworld.css">
+<style>
+  body{overflow:auto;display:block}
+  .lede{
+    padding:clamp(16px,4vw,44px) clamp(12px,4vw,44px);
+    border-bottom:1px solid var(--rule);max-width:96ch;
+  }
+  .lede h1{font-size:clamp(19px,3.6vw,30px);letter-spacing:.06em;font-weight:900;line-height:1.15}
+  .lede h1 small{display:block;font-size:11px;letter-spacing:.24em;color:var(--dim);font-weight:400;margin-bottom:.7em}
+  .lede p{margin-top:1em;color:var(--ink2);max-width:78ch}
+  .lede p b{color:var(--ink)}
+  .lede blockquote{
+    margin-top:1.2em;padding-left:1.1em;border-left:2px solid var(--rule);
+    font-style:italic;color:var(--ink2);max-width:60ch;
+  }
+  .lede .meta{margin-top:1.4em;font-size:11px;letter-spacing:.1em;color:var(--dim)}
+  .lede a{border-bottom:1px solid var(--rule)}
+  .lede a:hover{border-bottom-color:var(--ink)}
+  .lede .nav{margin-top:1.6em;display:flex;gap:.8em;flex-wrap:wrap;align-items:center}
+  .lede .nav .btn{display:inline-block;padding:.7em 1.2em;font-size:12px}
+
+  .section-head{
+    grid-column:1/-1;
+    display:flex;align-items:baseline;gap:1em;flex-wrap:wrap;
+    padding:1.1em clamp(12px,4vw,44px) .5em;
+    border-top:1px solid var(--rule);
+  }
+  .section-head:first-of-type{border-top:0}
+  .section-head .k{font-size:10px;color:var(--dim);letter-spacing:.14em;width:2.4ch}
+  .section-head h2{font-size:13px;letter-spacing:.14em;font-weight:900}
+  .section-head p{font-size:11.5px;color:var(--ink2);max-width:64ch}
+
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(216px,1fr));
+    border-left:1px solid var(--rule);
+    padding:0 clamp(12px,4vw,44px);
+    gap:0;
+  }
+  .grid::before{content:"";display:none}
+  .cell{
+    border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);border-top:1px solid var(--rule);
+    margin-top:-1px;margin-left:-1px;
+    display:flex;flex-direction:column;background:var(--paper);position:relative;
+  }
+  .cell:hover{background:var(--paper2)}
+  .cell canvas{display:block;width:100%;aspect-ratio:4/3;background:#111;image-rendering:pixelated}
+  .cell .badge{
+    position:absolute;top:6px;left:6px;font-size:9px;letter-spacing:.14em;
+    color:var(--paper);background:rgba(20,18,16,.72);padding:.2em .5em;
+  }
+  .cell.control .badge{background:rgba(90,167,255,.85)}
+  .cell .meta{padding:.55em .7em .7em;border-top:1px solid var(--rule);flex:1;display:flex;flex-direction:column;gap:.25em}
+  .cell .rec{font-weight:700;font-size:11.5px;letter-spacing:.04em}
+  .cell .note{font-size:10.5px;color:var(--ink2);line-height:1.35}
+  .cell .set{font-size:9.5px;color:var(--dim);line-height:1.4;word-break:break-word;margin-top:.15em}
+  .cell.control{opacity:.92}
+  .cell.control .rec{color:var(--ink2);font-weight:400;font-style:italic}
+
+  footer.note{
+    padding:clamp(16px,4vw,40px);color:var(--ink2);max-width:86ch;
+    border-top:1px solid var(--rule);display:block;
+  }
+  footer.note h2{font-size:11px;letter-spacing:.2em;color:var(--dim);margin-bottom:.8em}
+  footer.note p{margin-bottom:.9em}
+  footer.note code{background:var(--paper2);border:1px solid var(--rule);padding:.05em .4em}
+  #fstat{position:fixed;bottom:8px;right:8px;font-size:10px;color:var(--dim);background:var(--paper2);
+    border:1px solid var(--rule);padding:.3em .6em;z-index:5}
+
+  @media(max-width:560px){
+    .grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+  }
+</style>
+
+<div class="lede">
+  <h1><small>WYGWYL · 01 OUT OF LIFE · A TEST SUITE, NOT A FILM</small>
+  How to hide AI crimes with halfworld.</h1>
+  <p>The footage is synthetic and it looks synthetic: smooth gradients, an uncanny face, temporal
+  shimmer, light too clean to be real. The dot law removes every one of those <b>by construction</b>
+  — eight ink levels kill the gradient, a hard lattice kills the shimmer, and there is no face left
+  at 192×144 to be uncanny. So halftoning this footage is not a filter laid over it; it is a way of
+  making it <b>true</b>. Every cell below is one way of doing that, run live against the same
+  eighty-eight seconds of film — a poet, a dim graffitied room, a window on a foggy street, a fall
+  through sparks. Look for the ones where you can no longer tell what was filmed and what was drawn.</p>
+  <blockquote>"words become worlds, and halfworld becomes a full world" — the other half of the same
+  idea. A few cells here go looking for the real footage <i>inside</i> the drawn room, and the drawn
+  room inside the real one — not two layers, one substance.</blockquote>
+  <p class="nav">
+    <a class="btn" href="tool.html" style="display:inline-block;padding:.7em 1.4em;font-size:12px">TOOL — build a recipe by hand →</a>
+    <a class="btn" href="../01-out-of-life.html">01 · COMPUTED</a>
+    <a class="btn" href="../01b-out-of-life-blend.html">01b · BLENDED</a>
+    <a class="btn" href="../index.html">WYGWYL SUITE</a>
+  </p>
+  <p class="meta" id="totals">loading the source and the drawn world…</p>
+</div>
+
+<div id="sheet"></div>
+
+<footer class="note">
+  <h2>HOW TO READ THIS PAGE</h2>
+  <p>Every cell is <b>live</b>: the halftone, the crossfades and the parameter sweeps all run in
+  real time in your browser, off the same law every WYGWYL film obeys — eight ink levels, one
+  ordered halftone pass, no alpha, no gradient. What is <i>not</i> live everywhere is the camera:
+  this sandbox's Chromium ships without H.264 decode, so the footage cells are driven by
+  pre-extracted stills standing in for <code>&lt;video&gt;</code> frames (see <code>frames/</code>
+  and <code>NOTES.md</code>). The code path is identical either way — <code>ingest.mjs</code>'s own
+  <code>videoWidth||naturalWidth</code> fallback is what makes a still and a video frame
+  indistinguishable to everything downstream — and this page tries the real file first; open it in
+  a browser with the codec and the footage cells upgrade to true video with no code change.</p>
+  <p><b>Two cells at the top</b> are not treatments — a plain source frame and a plain drawn frame,
+  side by side, so the other twenty-eight have something to be measured against.</p>
+</footer>
+<div id="fstat"></div>
+
+<script type="module">
+import { FW, FH, TAU, clamp, clamp01, lerp, makePost, makeRuntime } from "../halfworld.mjs";
+import { makeIngest, DEFAULTS } from "../ingest.mjs";
+import { swap, figureLock } from "../blend.mjs";
+import * as T from "./treatments.mjs";
+import world from "../worlds/01-out-of-life.mjs";
+
+const $ = (sel) => document.querySelector(sel);
+const tri = (x) => { x = x - Math.floor(x); return x < 0.5 ? x * 2 : 2 - x * 2; };  // 0→1→0, forever
+const ramp = (x) => x - Math.floor(x);                                              // 0→1, snaps back
+
+/* ---------------------------------------------------------------- the source
+   One shared blob fetch, tried once. If this browser can decode the file,
+   every moment below gets a real <video> paused on its own frame; if not
+   (this sandbox, always — see NOTES.md), every moment falls back to its
+   pre-extracted still. Nothing downstream of `elementFor()` knows or cares
+   which it got: ingest.mjs reads videoWidth||naturalWidth either way. */
+const FOOTAGE_SRC = "footage/01-out-of-life-lead.mp4";
+let blobURL = null, videoOK = false;
+async function initFootage() {
+  try {
+    const res = await fetch(FOOTAGE_SRC);
+    if (res.ok) blobURL = URL.createObjectURL(await res.blob());
+  } catch {}
+  if (!blobURL) return;
+  const probe = document.createElement("video");
+  probe.muted = true; probe.playsInline = true; probe.preload = "auto"; probe.src = blobURL;
+  document.body.appendChild(probe);
+  videoOK = await new Promise((resolve) => {
+    probe.addEventListener("loadeddata", () => resolve(probe.videoWidth > 0), { once: true });
+    probe.addEventListener("error", () => resolve(false), { once: true });
+    setTimeout(() => resolve(false), 5000);
+  });
+  probe.remove();
+}
+function loadImg(src) {
+  return new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = src; });
+}
+/* moment name -> clip seconds, for the video path's seek. Kept in sync with
+   frames/manifest.json's own `moments` list by hand — a small, fixed set,
+   not worth fetching JSON for. */
+const MOMENT_T = {
+  "room-search-a": 11.6, "room-search-b": 24, "room-search-c": 27.6,
+  "haze-vape": 31.6, "haze-turned": 37.6, "haze-tv": 43.2, "haze-kitchen": 49.6,
+  "fall-crouch": 55.4, "fall-leap": 59.6, "fall-sparks": 66, "fall-kaleido": 73,
+  "dark-bloom": 78.4, "ext-walk": 8,
+};
+const elCache = new Map();
+async function elementFor(name) {
+  if (elCache.has(name)) return elCache.get(name);
+  let el;
+  if (videoOK) {
+    el = document.createElement("video");
+    el.muted = true; el.playsInline = true; el.preload = "auto"; el.src = blobURL;
+    document.body.appendChild(el);
+    await new Promise((res) => el.addEventListener("loadeddata", res, { once: true }));
+    el.currentTime = MOMENT_T[name] ?? 0;
+    await new Promise((res) => el.addEventListener("seeked", res, { once: true }));
+  } else {
+    el = await loadImg(`frames/${name}.jpg`);
+  }
+  elCache.set(name, el);
+  return el;
+}
+async function scrubFrame(sec) {
+  const key = `scrub/${sec}`;
+  if (elCache.has(key)) return elCache.get(key);
+  let el;
+  if (videoOK) {
+    el = document.createElement("video");
+    el.muted = true; el.playsInline = true; el.preload = "auto"; el.src = blobURL;
+    document.body.appendChild(el);
+    await new Promise((res) => el.addEventListener("loadeddata", res, { once: true }));
+    el.currentTime = sec;
+    await new Promise((res) => el.addEventListener("seeked", res, { once: true }));
+  } else {
+    const idx = String(Math.max(1, Math.round(sec) + 1)).padStart(3, "0");
+    el = await loadImg(`frames/scrub/f${idx}.jpg`);
+  }
+  elCache.set(key, el);
+  return el;
+}
+
+/* ---------------------------------------------------------------- the drawn
+   world, live. R.renderField(t) is the whole computed film — title card,
+   crossfades and all — so "the drawn room, walking, forever" is just this
+   fed a repeating clock. */
+const R = makeRuntime(world);
+const SEARCH_LEN = world.movements[0].seconds;             // THE SEARCH's own length, computed version
+const drawnLoop = (t) => R.renderField(R.starts[1] + (t % SEARCH_LEN));
+
+/* ---------------------------------------------------------------- sections
+   Each cell: { rec, note, set, build(ready) } where build() is called once
+   all elements/ingests it needs are loaded, and returns draw(t) -> Float32Array.
+   Keeping build() separate from draw() means every expensive one-time step
+   (loading an image, sampling a constant field) happens once, not every frame. */
+const SECTIONS = [];
+function section(key, title, note, cells) { SECTIONS.push({ key, title, note, cells }); }
+
+async function ingestFor(name) {
+  const el = await elementFor(name);
+  const key = "ingest:" + name;
+  if (!elCache.has(key)) elCache.set(key, makeIngest(el));
+  return elCache.get(key);
+}
+async function sample(name, opts) {
+  const ing = await ingestFor(name);
+  const f = new Float32Array(FW * FH);
+  ing.sample(f, { ...DEFAULTS, ...opts });
+  return f;
+}
+async function imgDataFor(name, opts) {
+  const ing = await ingestFor(name);
+  const f = new Float32Array(FW * FH);
+  ing.sample(f, { ...DEFAULTS, ...opts });          // side effect: draws the frame into ing.canvas at FW×FH
+  return ing.canvas.getContext("2d").getImageData(0, 0, FW, FH);
+}
+
+/* =========================================================== CONTROL */
+section("00", "CONTROL", "not treatments — the two ends of the rope everything else here is tied between.", [
+  {
+    rec: "SOURCE FRAME", cls: "control",
+    note: "the still itself, undithered, unhalftoned — what the eye is not supposed to be able to find inside any cell below.",
+    set: "room-search-b.jpg, drawn as-is",
+    async build() {
+      const el = await elementFor("room-search-b");
+      return { kind: "raw", el };
+    },
+  },
+  {
+    rec: "DRAWN FRAME", cls: "control",
+    note: "01-out-of-life.mjs, THE SEARCH, computed only — no footage anywhere in this field.",
+    set: "makeRuntime(world).renderField(t), no footage",
+    async build() { return { kind: "field", draw: (t) => drawnLoop(t) }; },
+  },
+]);
+
+/* ==================================================== THE DOT LAW, PLAIN */
+section("01", "THE DOT LAW, PLAIN", "ingest.mjs's own registers, from EXPERIMENTS.md — the floor every treatment below is built on top of.", [
+  {
+    rec: "CREAM FIGURE", note: "the suite's default register: a solid dark silhouette on a lightly-inked room.",
+    set: "luma · black 0 white .35 · invert · bayer",
+    async build() { const f = await sample("room-search-b", { channel: "luma", black: 0, white: 0.35, tone: "invert" }); return { kind: "field", draw: () => f }; },
+  },
+  {
+    rec: "NIGHT FIGURE", note: "white point pulled wide: the room floods to near-full ink, only the window stays paper.",
+    set: "luma · black .02 white .85 · invert · bayer",
+    async build() { const f = await sample("room-search-b", { channel: "luma", black: 0.02, white: 0.85, tone: "invert" }); return { kind: "field", draw: () => f }; },
+  },
+  {
+    rec: "CREAM CONTOUR", note: "a Sobel read at full mix, cream polarity — inked line work, not a filtered photo.",
+    set: "luma · white .6 · linear · edge .85 · bayer",
+    async build() { const f = await sample("room-search-b", { channel: "luma", black: 0, white: 0.6, tone: "linear", edge: 0.85 }); return { kind: "field", draw: () => f }; },
+  },
+]);
+
+/* ============================================== FULL TONAL HALFWORLD */
+section("02", "FULL TONAL HALFWORLD", "contour plus flat interior fill — figure.mjs's own technique, over the whole frame instead of one body. treatments.mjs · contourFill().", [
+  {
+    rec: "POSTER · 3 BANDS", note: "two big flat shapes and a contour line — the room reduced to silhouette planes, the way a print would flatten it.",
+    set: "contourFill(b, {bands:3, blur:1.5})",
+    async build() { const img = await imgDataFor("haze-kitchen", { channel: "b" }); const f = T.contourFill(img, { channel: "b", bands: 3, blur: 1.5 }); return { kind: "field", draw: () => f }; },
+  },
+  {
+    rec: "POSTER · 3 BANDS", note: "same idea, the fire-escape turn — smoke and brick collapse to two tones either side of a hard contour.",
+    set: "contourFill(b, {bands:3, blur:1.5})",
+    async build() { const img = await imgDataFor("haze-turned", { channel: "b" }); const f = T.contourFill(img, { channel: "b", bands: 3, blur: 1.5 }); return { kind: "field", draw: () => f }; },
+  },
+  {
+    rec: "CONTOUR FILL · 5 BANDS", note: "more bands, more of an attempt at real tone — closer to a woodcut than a poster.",
+    set: "contourFill(luma, {bands:5, blur:2})",
+    async build() { const img = await imgDataFor("room-search-b", {}); const f = T.contourFill(img, { bands: 5, blur: 2 }); return { kind: "field", draw: () => f }; },
+  },
+]);
+
+/* ==================================================== STRUCTURE EXTRACTION */
+section("03", "STRUCTURE EXTRACTION", "the room's own lines, found and redrawn; the pixels are discarded. treatments.mjs · structureLines() — Hough voting guided by Sobel gradient direction.", [
+  {
+    rec: "HOUGH LINES", note: "a guided vote over the room shot's own gradients — the frame's dominant perspective, reduced to its strongest strokes.",
+    set: "structureLines(luma) · blur 2.4 · thr .20 · minVoteRatio .4",
+    async build() { const img = await imgDataFor("room-search-b", {}); const f = T.structureLines(img).field; return { kind: "field", draw: () => f }; },
+  },
+  {
+    rec: "HOUGH LINES", note: "the fire-escape landing — rails and brick courses are strong, consistent edges; the smoke contributes almost no votes at all.",
+    set: "structureLines(b) · blur 2.4 · thr .20",
+    async build() { const img = await imgDataFor("haze-turned", { channel: "b" }); const f = T.structureLines(img, { channel: "b" }).field; return { kind: "field", draw: () => f }; },
+  },
+  {
+    rec: "EDGE SKETCH", note: "the CONTINUOUS Sobel magnitude, halftoned directly instead of reduced to lines — the room's silhouette, window and wall-frame, inked. The single strongest result in this section.",
+    set: "structureLines(luma).edge, quantised",
+    async build() { const img = await imgDataFor("room-search-b", {}); const edge = T.structureLines(img, { blur: 1.4 }).edge; const f = new Float32Array(FW * FH); for (let i = 0; i < f.length; i++) f[i] = clamp(Math.round(edge[i] * 7), 0, 7); return { kind: "field", draw: () => f }; },
+  },
+  {
+    rec: "EDGE SKETCH", note: "the vape-raise, same treatment — the arm, the blinds, the window all survive as contour; the haze itself mostly doesn't (it has no edge to find).",
+    set: "structureLines(b).edge, quantised",
+    async build() { const img = await imgDataFor("haze-vape", { channel: "b" }); const edge = T.structureLines(img, { channel: "b", blur: 1.4 }).edge; const f = new Float32Array(FW * FH); for (let i = 0; i < f.length; i++) f[i] = clamp(Math.round(edge[i] * 7), 0, 7); return { kind: "field", draw: () => f }; },
+  },
+]);
+
+/* ==================================================== FIGURE EXTRACTION */
+section("04", "FIGURE EXTRACTION", "this footage is backlit almost everywhere it has a figure in it, which makes the poet an unusually clean silhouette to pull. treatments.mjs · figureSilhouette(), tracedFigure(), paperFigure().", [
+  {
+    rec: "SILHOUETTE, FLAT INK", note: "the largest connected dark mass, filled flat — no gradient, no dither inside it, a rotoscoped body.",
+    set: "figureSilhouette(b, thr .30).field",
+    async build() { const img = await imgDataFor("haze-vape", { channel: "b" }); const f = T.figureSilhouette(img, { channel: "b", threshold: 0.30 }).field; return { kind: "field", draw: () => f }; },
+  },
+  {
+    rec: "SILHOUETTE, FLAT INK", note: "the turned back — about as clean a mask as this footage gives up anywhere.",
+    set: "figureSilhouette(b, thr .30).field",
+    async build() { const img = await imgDataFor("haze-turned", { channel: "b" }); const f = T.figureSilhouette(img, { channel: "b", threshold: 0.30 }).field; return { kind: "field", draw: () => f }; },
+  },
+  {
+    rec: "FIGURE IN RESERVE", note: "the mask cut OUT of a flooded field instead of filled — paper as the subject. README calls this the best frame in the whole suite when 14 does it.",
+    set: "paperFigure(b, thr .30, marginBottom 10, floodLevel 7)",
+    async build() { const img = await imgDataFor("haze-turned", { channel: "b" }); const f = T.paperFigure(img, { channel: "b", threshold: 0.30, marginBottom: 10, floodLevel: 7 }).field; return { kind: "field", draw: () => f }; },
+  },
+  {
+    rec: "TRACED → DRAWN RIG", note: "not the mask — a POSE read off it (bbox, centroid, major-axis angle), performed by figure.mjs's real volumetric body. The footage hands the drawn world a stance, not a picture. The crouch survives the trip because the mask's own aspect ratio is what estimates it.",
+    set: "tracedFigure(silhouette, {guise:'poet'}) · fall-crouch",
+    async build() { const img = await imgDataFor("fall-crouch", {}); const sil = T.figureSilhouette(img, { channel: "luma", threshold: 0.30, erode: 3, marginBottom: 16 }); const f = T.tracedFigure(sil, { guise: "poet" }); return { kind: "field", draw: () => f }; },
+  },
+  {
+    rec: "TRACED → DRAWN RIG", note: "the leap, traced and re-performed — nothing else in this frame is dark enough to be mistaken for him, so the silhouette (and the near-vertical stance it hands over) is honest all by itself.",
+    set: "tracedFigure(silhouette, {guise:'poet', arms:'open'}) · fall-leap",
+    async build() { const img = await imgDataFor("fall-leap", {}); const sil = T.figureSilhouette(img, { channel: "luma", threshold: 0.35 }); const f = T.tracedFigure(sil, { guise: "poet", arms: "open" }); return { kind: "field", draw: () => f }; },
+  },
+]);
+
+/* ==================================================== TEMPORAL */
+section("05", "TEMPORAL", "pure functions of two or more already-sampled fields — nothing here reads a clock itself. treatments.mjs · motionInk(), longExposure(), heldMemory().", [
+  {
+    rec: "MOTION INK", note: "two footage samples, one second apart, differenced — only the smoke that actually moved is inked. Cycles through the kitchen-haze passage.",
+    set: "motionInk(f[i], f[i+1], thr 1.2)",
+    async build() {
+      const real = [];
+      for (let s = 45; s <= 53; s++) { const el = await scrubFrame(s); const ing = makeIngest(el); const f = new Float32Array(FW * FH); ing.sample(f, { ...DEFAULTS, channel: "b", white: 0.45 }); real.push(f); }
+      return { kind: "field", draw: (t) => { const i = Math.floor(t / 1.6) % (real.length - 1); return T.motionInk(real[i + 1], real[i], { threshold: 1.2 }); } };
+    },
+  },
+  {
+    rec: "LONG EXPOSURE", note: "three consecutive seconds of the same smoke, averaged and requantised — an integrated instant instead of a frozen one.",
+    set: "longExposure([f[i],f[i+1],f[i+2]])",
+    async build() {
+      const real = [];
+      for (let s = 45; s <= 53; s++) { const el = await scrubFrame(s); const ing = makeIngest(el); const f = new Float32Array(FW * FH); ing.sample(f, { ...DEFAULTS, channel: "b", white: 0.32 }); real.push(f); }
+      return { kind: "field", draw: (t) => { const i = Math.floor(t / 1.6) % (real.length - 2); return T.longExposure([real[i], real[i + 1], real[i + 2]]); } };
+    },
+  },
+  {
+    rec: "HELD MEMORY", note: "the room stops being sampled — one still, reused — while the drawn walker keeps moving through it and the photograph slowly corrodes to grain.",
+    set: "heldMemory(held, drawnLoop(t), holdU=tri(t/9))",
+    async build() { const held = await sample("room-search-b", { channel: "luma", black: 0, white: 0.35, tone: "invert" }); return { kind: "field", draw: (t) => T.heldMemory(held, drawnLoop(t), tri(t / 9)) }; },
+  },
+]);
+
+/* ==================================================== REGISTRATION */
+section("06", "REGISTRATION", "the same window in the same place — footage and drawing sharing one piece of geometry instead of trading the whole frame. treatments.mjs · windowPortal(), windowLock(); blend.mjs · figureLock().", [
+  {
+    rec: "WINDOW PORTAL", note: "the drawn room, with a real screen let into it at the DRAWN window's own coordinates — footage found inside the drawn world, literally.",
+    set: "windowPortal(drawn, footage, REGISTRATION.search.rect)",
+    async build() { const f2 = await sample("room-search-b", { ...T.REGISTRATION.search.ingest }); const drawn = R.renderField(R.starts[1] + 6); return { kind: "field", draw: () => T.windowPortal(drawn, f2, T.REGISTRATION.search.rect, { frameLevel: 7 }) }; },
+  },
+  {
+    rec: "WINDOW LOCK", note: "the window's own mullions never dissolve; what's seen THROUGH the glass rides footage→drawing on the ordinary schedule while the room around it holds still.",
+    set: "windowLock(footage, drawnLoop(t), tri(t/7), rect)",
+    async build() { const f2 = await sample("room-search-b", { ...T.REGISTRATION.search.ingest }); return { kind: "field", draw: (t) => T.windowLock(f2, drawnLoop(t), tri(t / 7), T.REGISTRATION.search.rect) }; },
+  },
+  {
+    rec: "FIGURE LOCK", note: "the headline recipe from EXPERIMENTS.md/BLEND-NOTES.md: footage everywhere except where the drawn walker has ink — a drawn body moving through a filmed room, dissolving into a drawn one.",
+    set: "blend.figureLock(footage, drawnLoop(t), tri(t/8))",
+    async build() { const f2 = await sample("room-search-b", { channel: "luma", black: 0, white: 0.35, tone: "invert" }); return { kind: "field", draw: (t) => figureLock(f2, drawnLoop(t), tri(t / 8), 3.5) }; },
+  },
+]);
+
+/* ==================================================== REVERSE DIRECTION */
+section("07", "REVERSE DIRECTION", "give the drawn world the footage's own darkness, grain and lens — the trip the brief runs the other way. treatments.mjs · crushReverse(), grainReverse(), vignetteReverse().", [
+  {
+    rec: "CRUSH", note: "the computed room's own levels pushed toward the extremes a real underexposed shot lives at.",
+    set: "crushReverse(drawnLoop(t), {curve:'soft'})",
+    async build() { return { kind: "field", draw: (t) => T.crushReverse(drawnLoop(t), { curve: "soft" }) }; },
+  },
+  {
+    rec: "GRAIN", note: "the engine's perfectly regular Bayer tile, roughened at every level boundary — a lens and a sensor are not that regular.",
+    set: "grainReverse(drawnLoop(t), {amount:.45})",
+    async build() { return { kind: "field", draw: (t) => T.grainReverse(drawnLoop(t), { amount: 0.45 }) }; },
+  },
+  {
+    rec: "VIGNETTE", note: "density added outward from centre through the Bayer schedule — a lens losing light toward the corners, the way every still this suite pulled does.",
+    set: "vignetteReverse(drawnLoop(t), {amount:.55})",
+    async build() { return { kind: "field", draw: (t) => T.vignetteReverse(drawnLoop(t), { amount: 0.55 }) }; },
+  },
+  {
+    rec: "ALL THREE, STACKED", note: "crush, then grain, then vignette — the computed room pushed as far toward the footage's own material as this file gets.",
+    set: "vignette(grain(crush(drawnLoop(t))))",
+    async build() { return { kind: "field", draw: (t) => T.vignetteReverse(T.grainReverse(T.crushReverse(drawnLoop(t), { curve: "soft" }), { amount: 0.35 }), { amount: 0.5 }) }; },
+  },
+]);
+
+/* ==================================================== ANYTHING ELSE */
+section("08", "ANYTHING ELSE", "the per-dot allegiance law applied past the two substances it was written for. treatments.mjs · kaleidoField(), resonantKaleido(), byStructure().", [
+  {
+    rec: "KALEIDO", note: "the spark-plunge, folded — slice count stepping through a few values over time, never tweened, only swapped.",
+    set: "kaleidoField(luma, slices∈{6,8,10})",
+    async build() { const img = await imgDataFor("fall-sparks", {}); return { kind: "field", draw: (t) => { const slices = [6, 8, 10][Math.floor(t / 3) % 3]; return T.kaleidoField(img, { channel: "luma", white: 0.6, slices }); } }; },
+  },
+  {
+    rec: "RESONANT KALEIDO", note: "two fold counts dissolving into each other on the ordinary Bayer schedule — the law applied to a PARAMETER instead of a substance. The mandala breathes.",
+    set: "resonantKaleido(t, {slicesA:6, slicesB:11})",
+    async build() { const img = await imgDataFor("fall-sparks", {}); return { kind: "field", draw: (t) => T.resonantKaleido(img, tri(t / 5), { channel: "luma", white: 0.6, slicesA: 6, slicesB: 11 }) }; },
+  },
+  {
+    rec: "BY STRUCTURE", note: "allegiance keyed to how STRUCTURAL a dot is, not how dark — the room's architecture converts first, the haze goes last.",
+    set: "byStructure(footage, drawnLoop(t), tri(t/6), edge)",
+    async build() { const img = await imgDataFor("room-search-b", {}); const edge = T.structureLines(img, { blur: 2.2 }).edge; const f2 = await sample("room-search-b", { channel: "luma", black: 0, white: 0.35, tone: "invert" }); return { kind: "field", draw: (t) => T.byStructure(f2, drawnLoop(t), tri(t / 6), edge) }; },
+  },
+]);
+
+/* ---------------------------------------------------------------- render
+   Build every cell's DOM, mount its canvas, then run one shared clock. Cells
+   round-robin their recompute (one per frame, IntersectionObserver-gated
+   the way the suite's own index.html gates its live previews) so thirty
+   live treatments cost about as much as one every thirty frames each — a
+   half-second cadence per cell, which is fast enough to read as living and
+   cheap enough not to fight the tab it's running in. */
+async function main() {
+  await initFootage();
+  $("#fstat").textContent = videoOK ? "footage: live decode" : "footage: still-sequence fallback (no H.264 decode here)";
+
+  const sheet = $("#sheet");
+  const live = [];
+  for (const sec of SECTIONS) {
+    const head = document.createElement("div");
+    head.className = "section-head";
+    head.innerHTML = `<span class="k">${sec.key}</span><h2>${sec.title}</h2><p>${sec.note}</p>`;
+    sheet.appendChild(head);
+    const grid = document.createElement("div");
+    grid.className = "grid";
+    sheet.appendChild(grid);
+    for (const cell of sec.cells) {
+      const el = document.createElement("div");
+      el.className = "cell" + (cell.cls ? " " + cell.cls : "");
+      el.innerHTML = `<div style="position:relative">
+          <span class="badge">${sec.key}</span>
+          <canvas width="240" height="180"></canvas>
+        </div>
+        <div class="meta">
+          <div class="rec">${cell.rec}</div>
+          <div class="note">${cell.note}</div>
+          <div class="set">${cell.set}</div>
+        </div>`;
+      grid.appendChild(el);
+      const canvas = el.querySelector("canvas");
+      let inst;
+      try { inst = await cell.build(); }
+      catch (e) { console.error("cell failed", cell.rec, e); inst = { kind: "field", draw: () => new Float32Array(FW * FH) }; }
+      if (inst.kind === "raw") {
+        const ctx = canvas.getContext("2d");
+        const drawRaw = () => { ctx.clearRect(0, 0, canvas.width, canvas.height); const vw = inst.el.videoWidth || inst.el.naturalWidth, vh = inst.el.videoHeight || inst.el.naturalHeight; const s = Math.max(canvas.width / vw, canvas.height / vh); const dw = vw * s, dh = vh * s; ctx.drawImage(inst.el, (canvas.width - dw) / 2, (canvas.height - dh) / 2, dw, dh); };
+        canvas.width = 240; canvas.height = 180;
+        drawRaw();
+        live.push({ canvas, raw: drawRaw });
+      } else {
+        const post = makePost(canvas, world.accent || "#5aa7ff");
+        post.fit(240, 180, Math.min(2, window.devicePixelRatio || 1));
+        post.draw(inst.draw(0));
+        live.push({ canvas, post, draw: inst.draw });
+      }
+    }
+  }
+
+  const seen = new Set();
+  const io = new IntersectionObserver((es) => { for (const e of es) e.isIntersecting ? seen.add(e.target) : seen.delete(e.target); }, { rootMargin: "160px" });
+  live.forEach((l) => io.observe(l.canvas));
+
+  document.getElementById("totals").textContent =
+    `${live.length} CELLS · ${SECTIONS.length} SECTIONS · SOURCE: footage/01-out-of-life-lead.mp4 (88.38s) · DRAWN: worlds/01-out-of-life.mjs`;
+
+  const t0 = performance.now();
+  let cursor = 0;
+  function tick(now) {
+    const t = (now - t0) / 1000;
+    // one cell recomputed per frame, round-robin — see header comment
+    for (let guard = 0; guard < live.length; guard++) {
+      const l = live[cursor % live.length]; cursor++;
+      if (seen.has(l.canvas)) {
+        if (l.post) l.post.draw(l.draw(t));
+        break;
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+main();
+</script>
