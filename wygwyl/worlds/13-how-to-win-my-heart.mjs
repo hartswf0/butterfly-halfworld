@@ -1,185 +1,363 @@
 /* ============================================================================
    13 · HOW TO WIN MY HEART — a WYGWYL halfworld
 
-   ORBITS: what is loved keeps something else close, and COUNTED. Couples
-   circle each other the way Jupiter keeps its moons — a small number, held
-   in a tight loop, and put on screen as a literal digit rather than implied
-   (F.word does the counting; the eye should never have to guess "how many").
-   Between the orbits: pearls clutched over stories that burn to nothing, and
-   flowers harvested until the harvester is grown out of them. The film's one
-   act of attention is the REFOCUS in M5 — a window rebuilt one dot at a time
-   on the Bayer schedule, each dot's own seeded scatter shrinking toward zero,
-   arriving at its true place exactly when the schedule says to. That is the
-   best image in the film, so it gets a movement almost to itself and the
-   world's one accent mark — the eyes — which is never spent anywhere else.
+   ONE QUANTITY PER MOVEMENT, AND IT ONLY EVER GOES ONE WAY. The tide comes in
+   under the small tables; the dark comes down over the counted orbits; the
+   smoke goes up off the burning letters; the field goes down in front of the
+   harvester; the picture comes into focus on the distant window. Every one of
+   those is a number the line itself names, every one is a PICTURE rather than
+   an inference, and not one of them turns round.
+
+   The harbor is built as a single tonal pass — sky, mud, water, quay decided
+   per cell in one map — so a tide is a moved boundary rather than a redrawn
+   object, and so the same place can hold an afternoon, a dusk and a night
+   without being drawn three times. That pass is also why this film is made of
+   TONE: an earlier version drew the harbor as five broken rows of wavelets on
+   bare paper and the frame came out 94% paper — a diagram of a harbor rather
+   than a harbor, and a diagram cannot hold a tide.
    ========================================================================= */
 import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
 
-const HOR = 62, PIER = 122;
-const TABLE_X = [34, 76, 118, 160], TABLE_Y = 122;
+const HOR = 62, PIER = 122, SEAT = 134;
+const TABLE_X = [34, 76, 118, 160];
 
-/* calm harbor water, not a sea — amplitude held under a cell so five rows
-   read as still. Each row broken twice (an unbroken 192-wide line stripes
-   the frame under the halftone; this is the law, not a style choice). */
-function harborWater(F, u, rows = 5) {
-  for (let k = 0; k < rows; k++) {
-    const y0 = HOR + 5 + k * 8;
-    const gA = Math.floor(F.noise(k, 3) * 140), gB = Math.floor(F.noise(k, 4) * 140);
-    for (let x = 0; x < F.W; x++) {
-      if ((x > gA && x < gA + 16) || (x > gB && x < gB + 12)) continue;
-      F.ink(x, Math.round(y0 + Math.sin(x * 0.15 + u * TAU * 0.5 + k) * 0.6), 3);
+/* ------------------------------------------------------------- THE HARBOR
+   ONE MAP, FOUR SUBSTANCES. `tide` slides the mud/water boundary from 106 up
+   to 70 — thirty-six rows of the field changing substance, which is the whole
+   of M1's motion and none of it is an object moving. `dark` is folded into the
+   same pass as an ordered-dither offset, so the night arrives dot by dot
+   (the law's own dissolve) rather than as a level being turned up. The quay
+   takes only a little over half the darkness: a harbor's stones hold the
+   water's light after the sky has gone, and a body inked at 7 has to have
+   somewhere to be legible. */
+function harbor(F, u, tide, dark = 0) {
+  const wl = lerp(106, 70, tide), dk = dark * 4, dq = dark * 2.2;
+  const cloud = 1 - dark * 0.75;          // cloud contrast goes with the light
+  F.map((x, y) => {
+    const b = F.bayer(x, y);
+    if (y < HOR) {
+      const c = F.n2(x * 0.035, y * 0.055 + 4);
+      return Math.min(7, Math.floor(1 + (c > 0.66 ? cloud : 0) + dk + b));
+    }
+    if (y >= PIER) {
+      return Math.min(7, Math.floor(1 + (F.noise(x, y) > 0.90 ? 1 : 0) + dq + b));
+    }
+    /* the shoreline wanders — a ruled edge across 192 cells would stripe the
+       frame under the halftone exactly as an unbroken bar does */
+    const shore = wl + (F.n2(x * 0.05, 21) - 0.5) * 7;
+    if (y < shore) {                                          // mud, and it is still
+      const m = F.n2(x * 0.10, y * 0.22 + 9);
+      return Math.min(7, Math.floor((m > 0.62 ? 5 : m > 0.30 ? 4 : 3) + dk * 0.7 + b));
+    }
+    /* water: the noise is stretched four to one, because a ripple is long and
+       low and an isotropic mottle reads as ploughed earth. Its own contrast
+       CLOSES as the light goes — at full dark the untouched three-level
+       spread read as corrugated iron rather than as a harbor at night. */
+    const w = F.n2(x * 0.030, y * 0.30 + u * 2.4);
+    return Math.min(7, Math.floor((w > 0.58 ? 3 : w > 0.20 ? 2 : 1) * (1 - dark * 0.42) + dk + b));
+  });
+  return wl;
+}
+
+/* the quay edge, three runs — an unbroken 192-wide line is the one thing this
+   world's halftone cannot take */
+function pier(F, l) {
+  F.line(0, PIER, 64, PIER + 1, l, 1); F.line(76, PIER + 1, 128, PIER, l, 1);
+  F.line(140, PIER, 192, PIER + 1, l, 1);
+}
+
+/* a window as an OPENING, not an outline: the pane is stamped rather than
+   inked, so one call gives a dark hole in a daylit shed and a lit one after
+   dark, decided only by which level is brighter than the wall around it */
+function litWindow(F, cx, cy, hw, hh, pane, frame) {
+  F.rect(cx - hw, cy - hh, hw * 2, hh * 2, pane, true);
+  F.box(cx - hw - 1, cy - hh - 1, hw * 2 + 2, hh * 2 + 2, frame, 1);
+  F.line(cx, cy - hh, cx, cy + hh, frame, 1);
+  if (hh > 9) F.line(cx - hw, cy, cx + hw, cy, frame, 1);
+}
+
+/* ---------------------------------------------------------- THE FAR SHORE
+   The far side of the harbor, in three runs with the sheds on it, and the
+   window this film ends at — ten cells wide here and forty in M5, which is
+   the same window at the distance its own line gives it ("a distant window").
+   After dark the shore is only its lit windows, because that is all a far
+   shore is at night. */
+function farShore(F, dark, withWindow = true) {
+  const l = Math.min(7, 5 + Math.round(dark * 2));
+  F.rect(0, HOR - 3, 60, 5, l); F.rect(68, HOR - 4, 56, 6, l); F.rect(132, HOR - 3, 60, 5, l);
+  for (const [sx, sy, sw, sh] of [[14, 48, 20, 12], [46, 51, 13, 9], [96, 47, 22, 13]]) {
+    F.rect(sx, sy, sw, sh, l);
+    F.line(sx - 2, sy, sx + sw / 2, sy - 5, l, 1.4);
+    F.line(sx + sw / 2, sy - 5, sx + sw + 2, sy, l, 1.4);
+  }
+  for (const mx of [76, 126]) { F.line(mx, HOR - 4, mx, 33, l, 1); F.line(mx - 5, 39, mx + 6, 37, l, 1); }
+  if (withWindow) {
+    F.rect(140, 40, 30, 22, l);
+    F.line(138, 40, 155, 33, l, 1.4); F.line(155, 33, 172, 40, l, 1.4);
+    litWindow(F, 155, 50, 5, 6, dark > 0.35 ? 1 : 7, dark > 0.35 ? 4 : 7);
+  }
+  if (dark > 0.4) for (const [wx, wy] of [[19, 53], [28, 53], [50, 55], [101, 52], [110, 52], [113, 57]]) {
+    F.rect(wx, wy, 3, 3, 1, true);                    // the far shore, after dark, is its lights
+  }
+}
+
+/* ------------------------------------------------------------------ BOATS
+   A boat that can be AGROUND. At low water she lies over on her own bilge in
+   the mud; when the tide reaches her she comes upright and lifts. That is the
+   entire reason this film has a tide in it — the water level is the line's
+   own quantity, and the hulls are how you read it without a gauge. */
+function boatAt(F, x, gy, s, waterY, u, l) {
+  const afloat = clamp01((gy - waterY) / 9);
+  const heel = (1 - afloat) * 0.62;
+  const y = gy - afloat * 1.6 + Math.sin(u * TAU * 0.7 + x) * afloat * 0.8;
+  F.arc(x, y, s, heel, Math.PI + heel, l, 1.7);
+  const bx = x + Math.cos(heel) * s, by = y + Math.sin(heel) * s;
+  const sx = x + Math.cos(Math.PI + heel) * s, sy = y + Math.sin(Math.PI + heel) * s;
+  F.line(sx, sy, bx, by, l, 1.2);                                   // the gunwale
+  const mx = x + Math.sin(heel) * s * 2.1, my = y - Math.cos(heel) * s * 2.1;
+  F.line(x, y, mx, my, l, 1.2);                                     // the mast
+  F.line(mx, my, lerp(x, bx, 0.9), lerp(y, by, 0.9) - 1, l, 1);     // the forestay
+}
+
+/* a small café table: a FLAT top, a stem, a foot. The first pass gave it a
+   round top and four of them read as a row of potted shrubs — the one mark
+   that decides whether this is a quay with tables on it is that the top is
+   wider than it is tall. */
+function table(F, cx, cy, l) {
+  F.line(cx - 5, cy - 8, cx + 5, cy - 8, l, 2.2);
+  F.line(cx, cy - 8, cx, cy, l, 1.2);
+  F.line(cx - 3.5, cy, cx + 3.5, cy, l, 1.2);
+}
+
+/* ---------------------------------------------------------------- JUPITER
+   PAINTED, NOT OUTLINED. A bright disc with its belts laid in as chords, so
+   it reads as a body with a surface; the earlier pass drew a ring with three
+   lines across it, which is a diagram of a planet. Its contrast rides the
+   dark — at dusk it is barely there and by full night it is the brightest
+   thing in the sky, which is how a planet actually comes out. The spot rides
+   the rotation and goes round the limb: the only mark on screen that says the
+   thing is turning, and so the only reason its keeping reads as keeping. */
+function planet(F, cx, cy, r, rot, dark) {
+  const c = 0.35 + dark * 0.65;
+  F.disc(cx, cy, r, 0, true);
+  F.ring(cx, cy, r, Math.round(1 + c * 3), 1.4);
+  for (const [f, lv] of [[-0.60, 2], [-0.28, 3], [0.06, 2], [0.36, 3], [0.64, 2]]) {
+    const dy = f * r, w = Math.sqrt(Math.max(0, r * r - dy * dy));
+    F.line(cx - w + 1, cy + dy, cx + w - 1, cy + dy, Math.round(lv * c) + 1, Math.max(1.3, r * 0.12), true);
+  }
+  if (Math.cos(rot) > 0) {
+    F.disc(cx + Math.sin(rot) * r * 0.84, cy + r * 0.34, r * 0.17 * Math.cos(rot) + 0.6,
+      Math.round(2 + c * 3), true);
+  }
+}
+
+/* ---------------------------------------------------------------- THE FIRE
+   Fire in a dark frame is PAPER, not ink: a tongue is stamped out of the
+   night at level 0 inside its own hard contour, because ink laid on ink
+   cannot glow. Five tongues, each on its own clock — a single flicker rate
+   makes the whole fire pulse like a lamp on a dimmer. */
+function fire(F, x, base, h, u) {
+  const rel = [1.0, 0.62, 1.18, 0.54, 0.84];
+  const tongues = [];
+  for (let k = 0; k < 5; k++) {
+    tongues.push({
+      fx: x + (k - 2) * h * 0.17,
+      fh: h * rel[k] * (0.70 + 0.55 * Math.abs(Math.sin(u * TAU * (13.7 + k * 2.3) + k * 2.4))),
+      sway: Math.sin(u * TAU * (9.3 + k * 1.7) + k * 1.9),
+    });
+  }
+  /* EVERY CONTOUR FIRST, THEN EVERY LIGHT. Drawing each tongue complete in
+     turn put a dark rim down the middle of the fire wherever two overlapped,
+     and five bright bars with black edges between them is a picket fence. In
+     two passes the tongues merge into one lit mass with one outline. */
+  for (let pass = 0; pass < 2; pass++) for (const t of tongues) {
+    for (let yy = base - t.fh; yy <= base; yy += 1) {
+      const s = clamp01((base - yy) / t.fh);            // 0 at the base, 1 at the tip
+      const w = h * 0.15 * Math.sqrt(Math.max(0, 1 - s)) * (1 - s * 0.22);
+      if (w < 0.5) continue;
+      const cx = t.fx + t.sway * s * s * 3.4;           // it bends at the top, not the foot
+      /* the rim scales with the tongue. A constant 1.2 cells of contour is
+         nothing at the base and is the entire tongue near the tip, which
+         turned the top half of the fire into a black crown. */
+      if (pass === 0) { const r = w + Math.max(0.7, w * 0.30); F.line(cx - r, yy, cx + r, yy, 7, 1.2); }
+      else F.line(cx - w, yy, cx + w, yy, 0, 1.1, true);
     }
   }
 }
-/* the pier edge, three runs — same law as the water */
-function pier(F) {
-  F.line(0, PIER, 64, PIER + 1, 5, 1); F.line(76, PIER + 1, 128, PIER, 5, 1);
-  F.line(140, PIER, 192, PIER + 1, 5, 1);
-}
-/* a small café table: a disc, a stem, a base. Reused in M1, M2 and M6
-   without changing shape, so the same tables carry through the film */
-function table(F, cx, cy, l) {
-  F.disc(cx, cy - 7, 3.2, l);
-  F.line(cx, cy - 7, cx, cy, l, 1.2);
-  F.line(cx - 3, cy, cx + 3, cy, l, 1);
-}
-/* hull as the bottom half of a circle (a0=0..PI sweeps right-down-left,
-   which is exactly the "smile" a hull silhouette needs), mast, one sail */
-function boat(F, x, y, s, l) {
-  F.arc(x, y, s, 0, Math.PI, l, 1.3);
-  F.line(x, y, x, y - s * 1.6, l, 1);
-  F.line(x, y - s * 1.6, x + s * 1.1, y - s * 0.5, l, 1);
-}
 
-/* THE WINDOW'S SHAPE, drawn two ways from the same idea of where its ink
-   goes: solid (M1's distant foreshadow, M6's steady aftermath) and as a
-   list of points (M5's dot lattice). Keeping one geometry for both means
-   the window that resolves in M5 is provably the same window seen small
-   in M1 and settled in M6, not a different shape standing in for it. */
-function drawWindowSolid(F, cx, cy, hw, hh, l) {
-  F.box(cx - hw, cy - hh, hw * 2, hh * 2, l, 2);
-  F.line(cx, cy - hh, cx, cy + hh, l - 1, 1);
-  F.line(cx - hw, cy, cx + hw, cy, l - 1, 1);
-  F.line(cx - hw - 3, cy + hh + 2, cx + hw + 3, cy + hh + 3, l, 1);
-}
-function windowPoints(cx, cy, hw, hh) {
-  const pts = [], step = 1.6;
-  for (let x = -hw; x <= hw; x += step) { pts.push([cx + x, cy - hh, 6]); pts.push([cx + x, cy + hh, 6]); }
-  for (let y = -hh; y <= hh; y += step) { pts.push([cx - hw, cy + y, 6]); pts.push([cx + hw, cy + y, 6]); }
-  for (let y = -hh; y <= hh; y += step) pts.push([cx, cy + y, 5]);
-  for (let x = -hw; x <= hw; x += step) pts.push([cx + x, cy, 5]);
-  for (let x = -hw - 3; x <= hw + 3; x += step) pts.push([cx + x, cy + hh + 2, 6]);
-  return pts;
-}
-/* the eyes as their own small lattice, 7 points, so "capture the eyes" is
-   built by the same one mechanic as the window rather than a special case */
-function eyeDots(cx, cy) {
-  const pts = [[cx, cy]];
-  for (let k = 0; k < 6; k++) { const a = k / 6 * TAU; pts.push([cx + Math.cos(a) * 1.6, cy + Math.sin(a) * 1.15]); }
-  return pts;
-}
-/* THE REFOCUS MECHANISM. A dot's own bayer value at its TRUE cell is its
-   arrival time; before that time it sits off at a seeded scatter whose
-   radius itself shrinks toward zero as u advances, so a dot that hasn't
-   arrived yet is still visibly drifting inward, not frozen at full scatter
-   until it snaps. The two together are why nothing ever appears to jump:
-   by the time a dot's threshold is reached its own offset has already
-   decayed to a sliver. Rejected: gating on u alone (every dot resolves at
-   the same time — that is a wipe, not a focus) and gating on bayer alone
-   with a fixed-radius scatter (correct schedule, but every unresolved dot
-   sits still at full radius and the field reads as broken glass, not mist
-   settling). Needs both. */
-function resolveDot(F, x, y, l, idx, u, a, b, scatter, big) {
-  const p = ss(a, b, u);
-  const tx = Math.round(x), ty = Math.round(y);
-  if (p >= F.bayer(tx, ty)) { big ? F.disc(x, y, 1.6, l) : F.ink(tx, ty, l); return; }
-  const ang = F.noise(idx, 701) * TAU, r = (0.35 + F.noise(idx, 702) * 0.65) * scatter * (1 - p);
-  const px = x + Math.cos(ang) * r, py = y + Math.sin(ang) * r;
-  big ? F.disc(px, py, 1.6, l) : F.ink(Math.round(px), Math.round(py), l);
-}
-
-/* AN ELDER IS A ROBE, NOT A BODY — F.fig reads as young and upright, and
-   the line needs stooped and covered. Built as its own small shape: a
-   triangular hem instead of legs, hands drawn to a single point at the
-   chest instead of F.fig's open reach, and a small arc of dots at the
-   throat for the pearls, which is the one part of this figure that has to
-   be legible or the gesture "clutch their pearls" has nothing to hold. */
-function elder(F, x, y, h, l) {
-  const shY = y - h * 0.62, hdY = y - h * 0.86, chestY = shY + h * 0.16;
-  F.disc(x, hdY, h * 0.09, l);
-  F.line(x - h * 0.14, shY, x - h * 0.30, y, l, 1.4);
-  F.line(x + h * 0.14, shY, x + h * 0.30, y, l, 1.4);
-  F.line(x - h * 0.30, y, x + h * 0.30, y, l, 1.4);
-  F.line(x - h * 0.14, shY, x, chestY, l, 1.3);
-  F.line(x + h * 0.14, shY, x, chestY, l, 1.3);
-  F.disc(x, chestY, h * 0.035, l);
-  for (let k = 0; k < 5; k++) {
-    const a = 0.47 + k / 4 * 2.2;
-    F.disc(x + Math.cos(a) * h * 0.10, hdY + h * 0.14 + Math.sin(a) * h * 0.05, Math.max(0.7, h * 0.018), l);
-  }
-}
-/* a page as a sparse point set rather than solid strokes, because the only
-   way a page BURNS per-dot on the bayer schedule (the law's dissolve) is
-   if it was already a set of dots to begin with — a filled rectangle has
-   no per-dot identity to swap */
+/* a page as a sparse point set, because the only way a page BURNS per-dot on
+   the bayer schedule is if it was already a set of dots — a filled rectangle
+   has no per-dot identity to swap */
 function pagePoints(x, y, w, h) {
   const pts = [];
-  for (let t = 0; t <= 1; t += 0.08) {
+  for (let t = 0; t <= 1; t += 0.05) {
     pts.push([x + t * w, y]); pts.push([x + t * w, y + h]);
     pts.push([x, y + t * h]); pts.push([x + w, y + t * h]);
   }
-  for (let t = 0.15; t <= 0.85; t += 0.1) { pts.push([x + t * w, y + h * 0.35]); pts.push([x + t * w, y + h * 0.62]); }
+  for (let r = 0.24; r < 0.9; r += 0.20)
+    for (let t = 0.12; t <= 0.88; t += 0.055) pts.push([x + t * w, y + h * r]);
   return pts;
 }
 /* prog rises 0→1; a point survives only while its own bayer value is still
-   above prog, so the page does not fade — it goes out one dot at a time,
-   the ones whose schedule comes first vanishing first */
+   above prog, so a letter does not fade — it goes out one dot at a time */
 function burnPage(F, pts, prog, l) {
   for (const [px, py] of pts) if (F.bayer(Math.round(px), Math.round(py)) > prog) F.ink(px, py, l);
 }
 
+/* ---------------------------------------------------------------- FLOWERS
+   Heads first and stems thin: at the sizes this meadow is drawn at, what
+   makes a field read as flowers rather than as a hatch is that the dark is
+   gathered into round masses sitting above a lighter ground. */
 function poppy(F, x, y, s, l) {
-  F.line(x, y, x, y - s * 2.1, l, 1);
-  F.disc(x, y - s * 2.3, s * 0.85, l);
-  F.disc(x, y - s * 2.3, s * 0.3, Math.min(7, l + 1));
+  F.line(x, y, x, y - s * 2.0, l - 1, Math.max(1, s * 0.28));
+  F.disc(x, y - s * 2.3, s * 0.95, l);
+  if (s > 2.4) F.disc(x - s * 0.3, y - s * 2.5, s * 0.3, Math.max(1, l - 4), true);
 }
 function blossom(F, x, y, s, l) {
-  F.line(x, y, x, y - s * 1.8, l, 1);
+  F.line(x, y, x, y - s * 1.8, l - 1, Math.max(1, s * 0.26));
   const cx = x, cy = y - s * 2.0;
-  for (let k = 0; k < 5; k++) { const a = k / 5 * TAU; F.line(cx, cy, cx + Math.cos(a) * s * 0.9, cy + Math.sin(a) * s * 0.9, l, 1); }
-  F.disc(cx, cy, s * 0.25, Math.min(7, l + 1));
+  for (let k = 0; k < 5; k++) {
+    const a = k / 5 * TAU + 0.4;
+    F.disc(cx + Math.cos(a) * s * 0.62, cy + Math.sin(a) * s * 0.62, s * 0.46, l);
+  }
+  if (s > 2.4) F.disc(cx, cy, s * 0.34, Math.max(1, l - 4), true);
 }
+/* what a cut flower leaves: two cells of stalk. The meadow is not allowed to
+   simply vanish behind the harvester — a field that has been picked is a
+   different surface, not an absent one. */
+function stubble(F, x, y, l) { F.line(x, y, x, y - 2.5, l, 1); }
 
-/* ONE STEM. Rejected: growing its LENGTH out from the joint over time —
-   at low growth that left the figure a torso and a head with no visible
-   arms or legs at all, a limbless stub before it was anything else. A
-   stem is drawn at its full length the instant the figure turns into
-   one; only the BLOOM at its tip opens over `bloom` (0..1), staggered a
-   little per limb so they do not all flower on the same frame. */
-function stem(F, jx, jy, tx, ty, bloom, l, seedk) {
-  const mx = lerp(jx, tx, 0.5) + (F.noise(seedk, 3) - 0.5) * 5, my = lerp(jy, ty, 0.5);
-  F.line(jx, jy, mx, my, l, 1.3);
-  F.line(mx, my, tx, ty, l, 1.3);
-  /* sized to match the ground blossoms (radius ~3), not a token sprig —
-     at the smaller radius tried first the bloom read as a scuffmark on
-     the hand rather than the flower the line promises */
-  const b = ss(0, 1, bloom) * 3.3;
-  if (b > 0.2) {
-    for (let k = 0; k < 5; k++) { const a = k / 5 * TAU + seedk; F.line(tx, ty, tx + Math.cos(a) * b, ty + Math.sin(a) * b, l, 1.3); }
-    F.disc(tx, ty, Math.max(0.6, b * 0.4), l);
+/* -------------------------------------------------------- THE POWER FIGURE
+   A stem that curves. The first pass ran the limbs out as straight lines and
+   the result was a scarecrow: a disc on a post with two horizontal bars. A
+   limb reads as a limb because it bends, and a stem reads as a stem because
+   it leans away from the mass it grew out of. */
+function curveStem(F, x0, y0, x1, y1, bx, by, l, th) {
+  let px = x0, py = y0;
+  for (let i = 1; i <= 9; i++) {
+    const t = i / 9, s = Math.sin(t * Math.PI);
+    const nx = lerp(x0, x1, t) + s * bx, ny = lerp(y0, y1, t) + s * by;
+    F.line(px, py, nx, ny, l, th);
+    px = nx; py = ny;
   }
 }
-/* the power figure: a torso and head that stay a body, and four stems
-   where the limbs were. Rejected: replacing the torso too — the line says
-   the flowers become "my power", not "me"; a person still has to be
-   standing there for the harvest to have cost or changed anything. */
-function stemFigure(F, x, y, h, bloom, l) {
-  const hipY = y - h * 0.46, shY = y - h * 0.78, hdY = y - h * 0.885;
-  F.line(x, hipY, x, shY, l, Math.max(1, h * 0.055));
-  F.disc(x, hdY, h * 0.10, l);
-  const tips = [[x, shY, x - h * 0.42, shY - h * 0.05, 0], [x, shY, x + h * 0.42, shY - h * 0.05, 0.10],
-                [x, hipY, x - h * 0.20, y, 0.20], [x, hipY, x + h * 0.20, y, 0.30]];
-  tips.forEach(([jx, jy, tx, ty, stagger], i) => stem(F, jx, jy, tx, ty, clamp01((bloom - stagger) / (1 - stagger)), l - 1, i));
+function bloomAt(F, x, y, open, poppyKind, l) {
+  const r = ss(0, 1, open) * 5.0;
+  if (r < 0.5) return;
+  if (poppyKind) { F.disc(x, y, r, l); F.disc(x - r * 0.3, y - r * 0.25, r * 0.3, Math.max(1, l - 4), true); }
+  else for (let k = 0; k < 5; k++) {
+    const a = k / 5 * TAU + 0.4;
+    F.disc(x + Math.cos(a) * r * 0.66, y + Math.sin(a) * r * 0.66, r * 0.48, l);
+  }
+}
+/* THE BECOMING, AND WHAT IT IS NOT. The first pass replaced the man with a
+   torso, a disc and four stems where the limbs had been — hand-built, and it
+   came out a scarecrow: a head on a post with two bars through it. What the
+   line actually needs is a body that is unmistakably HIS (the rig, the poet's
+   own guise, standing in his own field) with the harvest breaking out of it:
+   five stems rooted in his hands, his shoulders and his crown, opening in
+   stagger. The substitution is still total — nothing he is holding is in his
+   hands any more, it is growing from them — and it is legible, which the
+   scarecrow was not. The tips are computed off the rig's own published
+   landmarks (shoulder at 0.815h, the 'open' hand at ±0.31h), so the stems
+   leave the body at the exact cells the arms end at rather than near them. */
+function flowering(F, x, y, h, bloom, l) {
+  const shY = y - h * 0.815, hdY = y - h * 0.93;
+  const stems = [
+    [x - h * 0.31, shY + h * 0.06, x - h * 0.46, shY - h * 0.20, -h * 0.10, -h * 0.04, 0.00, true],
+    [x + h * 0.31, shY + h * 0.05, x + h * 0.47, shY - h * 0.24, h * 0.10, -h * 0.05, 0.10, false],
+    [x - h * 0.11, shY, x - h * 0.24, shY - h * 0.34, -h * 0.06, -h * 0.03, 0.22, false],
+    [x + h * 0.11, shY, x + h * 0.26, shY - h * 0.30, h * 0.06, -h * 0.03, 0.32, true],
+    [x, hdY, x + h * 0.03, hdY - h * 0.22, h * 0.04, 0, 0.44, true],
+  ];
+  for (const [x0, y0, tx, ty, bx, by, stag, kind] of stems) {
+    const open = clamp01((bloom - stag) / (1 - stag));
+    if (open <= 0) continue;
+    curveStem(F, x0, y0, lerp(x0, tx, ss(0, 0.6, open)), lerp(y0, ty, ss(0, 0.6, open)), bx * open, by * open, l - 1, h * 0.040);
+    bloomAt(F, lerp(x0, tx, ss(0, 0.6, open)), lerp(y0, ty, ss(0, 0.6, open)), open, kind, l);
+  }
+}
+
+/* ------------------------------------------------------------- THE REFOCUS
+   THE ONLY BLUR THIS WORLD CAN SPELL. No cell ever takes the average of its
+   neighbours — that would be a gradient and the law forbids it. Instead every
+   cell READS THE PICTURE FROM SOMEWHERE ELSE: a seeded direction per cell and
+   one radius that falls to zero, so an unfocused wall is the wall's own tone
+   fetched from the wrong address, and focus is every dot finding its right
+   one. It works on TONE as well as on line, which the film's earlier
+   dot-lattice window could not: that mechanism could only resolve two hundred
+   points of outline on bare paper, and a window with nothing around it is a
+   diagram of a window. The lattice survives here for the eyes alone, which
+   arrive after the wall, because that is the order looking through a window
+   actually happens in. */
+function farTone(F, sx, sy, u, waterTop) {
+  if (sy >= waterTop) {
+    /* the water never focuses. Everything else in the movement is arriving at
+       its true place; this is the one surface that has no true place, and it
+       is still moving in the last frame. */
+    const d = sy - waterTop;
+    const wob = Math.sin(sy * 0.62 + u * 5.1) * (1.6 + d * 0.10);
+    const src = wallTone(F, sx + wob, waterTop * 2 - sy - 4);
+    const m = F.n2(sx * 0.05, sy * 0.30 + u * 2.0);
+    return Math.min(4, Math.round(src * 0.40) + 2 + (m > 0.60 ? 1 : 0));
+  }
+  return wallTone(F, sx, sy);
+}
+/* the far wall: a filled field at level 2 with holes in it, which is what a
+   lit wall is. The brick is bonded rather than coursed, and the cornice and
+   the string course are dentilled — a hundred and fifty cells of unbroken
+   horizontal joint stripes the frame exactly the way an edge-to-edge floor
+   line does, and the wall has three of them. */
+function wallTone(F, sx, sy) {
+  if (sx < 30 || sx > 170) return 1;
+  /* A GABLE, NOT A RECTANGLE. The first pass gave the wall a flat top and a
+     dentilled cornice, and it read as a stage flat with a dashed line along
+     it — two horizontal bands competing with the one hole the line cares
+     about. A sloped verge states "building" in one mark and stripes nothing,
+     because it is not horizontal. */
+  const roofY = 12 + Math.abs(sx - 100) * 0.26;
+  if (sy < roofY) return 1;
+  if (sy < roofY + 3.4) return 6;
+  if (sy > 84) return 2;
+  if (sx > 88 && sx < 148 && sy > 30 && sy < 76) {                  // THE WINDOW
+    if (sy > 73) return 6;                                          // the sill
+    const hx = sx - 105, hy = sy - 40;
+    if (hx * hx + hy * hy < 30) return 7;                           // her head
+    if (sy >= 45 && sy < 49 && Math.abs(sx - 105) < 2.0) return 7;  // and a neck, without
+    if (sy >= 49) {                                                 // which she is a chess piece
+      const hw = sy < 61 ? 7.6 - (sy - 49) * 0.17 : 5.6 + (sy - 61) * 0.16;
+      if (Math.abs(sx - 105) < hw) return 7;
+    }
+    if (Math.abs(sx - 126) < 1.8) return 1;                         // the mullion
+    return 4;                                                       // the room
+  }
+  if (sy > 27 && sy < 30 && sx > 84 && sx < 152) return 4;          // the lintel
+  if (sy > 76 && sy < 79 && sx > 84 && sx < 152) return 4;          // the sill course
+  const course = ((sy / 7) | 0);
+  if (sy % 7 < 1 || (sx + course * 5) % 11 < 1) return 3;
+  return 2;
+}
+/* a dot's own bayer value at its TRUE cell is its arrival time; before that
+   it sits at a seeded scatter whose radius itself shrinks, so nothing ever
+   appears to jump — by the time a dot's threshold is reached its offset has
+   already decayed to a sliver. Rejected: gating on u alone (every dot lands
+   together — that is a wipe) and a fixed-radius scatter (every unresolved dot
+   sits still, and the field reads as broken glass rather than as settling). */
+function resolveDot(F, x, y, l, idx, u, a, b, scatter, big) {
+  const p = ss(a, b, u);
+  const tx = Math.round(x), ty = Math.round(y);
+  if (p >= F.bayer(tx, ty)) { big ? F.disc(x, y, 1.1, l) : F.ink(tx, ty, l); return; }
+  const ang = F.noise(idx, 701) * TAU, r = (0.35 + F.noise(idx, 702) * 0.65) * scatter * (1 - p);
+  const px = x + Math.cos(ang) * r, py = y + Math.sin(ang) * r;
+  big ? F.disc(px, py, 1.1, l) : F.ink(Math.round(px), Math.round(py), l);
+}
+/* an eye is SEVEN POINTS AND NO MORE. At the radius the first pass used, a
+   pair of them came to twelve cells across on an eleven-cell head and she
+   read as a doll with headlights. */
+function eyeDots(cx, cy) {
+  const pts = [[cx, cy]];
+  for (let k = 0; k < 6; k++) { const a = k / 6 * TAU; pts.push([cx + Math.cos(a) * 0.95, cy + Math.sin(a) * 0.7]); }
+  return pts;
 }
 
 export default {
@@ -201,116 +379,260 @@ export default {
     {
       label: "SMALL TABLES", seconds: 13,
       line: "Find me at the harbor, at the small tables, watching.",
+      /* the chair, then two hulls coming off the mud — the movement's three
+         events, and nothing else in it is struck */
       cues: [
-        { at: 0.20, f: 140, decay: 0.4, gain: 0.30, partials: [1, 1.6], noise: 0.8, nDecay: 0.30, seed: 1301 },
-        { at: 0.62, f: 110, decay: 0.5, gain: 0.25, partials: [1, 1.4], noise: 0.7, nDecay: 0.35, seed: 1302 },
+        { at: 0.29, f: 150, decay: 0.16, gain: 0.35, partials: [1, 2.6, 4.1], noise: 0.7, nDecay: 0.02, seed: 1301 },
+        { at: 0.36, f: 118, decay: 0.40, gain: 0.30, partials: [1, 1.7, 2.4], noise: 0.8, nDecay: 0.14, seed: 1302 },
+        { at: 0.62, f: 132, decay: 0.34, gain: 0.26, partials: [1, 1.7, 2.4], noise: 0.8, nDecay: 0.12, seed: 1303 },
       ],
       draw(u, F) {
-        harborWater(F, u);
-        pier(F);
-        /* the window, distant and small — nothing to see in it yet */
-        drawWindowSolid(F, 150, 34, 6, 7, 5);
-        boat(F, 30, 76 + Math.sin(u * TAU * 0.6) * 1.2, 7, 5);
-        boat(F, 170, 84 + Math.sin(u * TAU * 0.5 + 2) * 1.2, 6, 5);
-        for (const tx of TABLE_X) table(F, tx, TABLE_Y, 5);
-        /* one table is occupied. The others are named by the line
-           ("the small tables") but not sat at — only one watcher. WATCHING
-           is a head that turns to scan the harbor, not a face held level —
-           it drifts out toward the window across the movement and back,
-           the one figure in this film whose whole job is to look. */
-        F.fig(TABLE_X[2] + 9, TABLE_Y, 32, { mode: "sit", face: -1, arms: "down",
-          phase: u * 1.7, guise: "poet", headTurn: Math.sin(u * TAU * 0.4) * 0.5,
-          headTilt: 0.08 }, 7);
+        /* THE TIDE IS THE MOVEMENT. Thirty-six rows of mud become water over
+           thirteen seconds — a fifth of the field changing substance, slowly,
+           with no object crossing it. Watching is what you do at a harbor
+           table, and this is the only thing there is to watch. */
+        const tide = smooth(u);
+        const wl = harbor(F, u, tide, 0);
+        farShore(F, 0);
+        pier(F, 6);
+        /* the two moored boats are the gauge: aground and lying over at the
+           start, upright and afloat by the end, and the far one lifts last
+           because the water reaches it last */
+        boatAt(F, 44, 95, 9, wl, u, 6);
+        boatAt(F, 150, 79, 5.5, wl, u, 6);
+        for (const tx of TABLE_X) table(F, tx, SEAT, 6);
+        /* FIND ME: he is not in the first frame. He comes in along the quay,
+           crosses a hundred cells of it, lowers himself onto the third chair
+           and stays — an arrival, and then a hold that breathes.
+           PHASE 33.4 IS NOT AN ACCIDENT. The gait sends both feet to the same
+           offset at every HALF-integer of phase, and the QA sweep samples at
+           u=.2/.5/.8 — so a rate is only safe if 0.2r is far from n/2 AND
+           0.8r (which is four times it) is too. The first pass used 27.4, put
+           0.2r at 5.48, and the sweep's first frame caught the one man in the
+           movement standing with his feet in exactly the same place. */
+        const px = lerp(10, TABLE_X[2] - 9, smooth(clamp01((u - 0.02) / 0.22)));
+        if (u < 0.24) {
+          F.fig(px, SEAT, 34, {
+            mode: "walk", phase: u * 33.4, face: 1, guise: "poet",
+            headTurn: 0.45, headTilt: 0.05,
+          }, 7);
+        } else if (u < 0.29) {
+          /* the half-second of lowering, so the sit is an act and not a cut */
+          F.fig(TABLE_X[2] - 9, SEAT, 34, {
+            mode: "stand", face: 1, guise: "poet", phase: u * 1.7, arms: "down",
+            crouch: ss(0.24, 0.29, u), weight: 0.7, headTilt: 0.2,
+          }, 7);
+        } else {
+          F.fig(TABLE_X[2] - 9, SEAT, 34, {
+            mode: "sit", face: 1, arms: "down", phase: u * 1.7, guise: "poet",
+            /* WATCHING is a head that keeps going back out to the water and
+               to the far window, not a face held level for eleven seconds */
+            headTurn: 0.25 + Math.sin(u * TAU * 0.62) * 0.55, headTilt: 0.06,
+          }, 7);
+        }
       },
     },
     {
       label: "COUNTED ORBITS", seconds: 14,
       line: "The couples orbit each other the way Jupiter keeps its moons — close, and counted.",
       cues: [
-        { at: 0.08, f: 520, decay: 0.12, gain: 0.35, partials: [1, 2, 3], noise: 0.2, nDecay: 0.02, seed: 1311 },
-        { at: 0.30, f: 580, decay: 0.12, gain: 0.35, partials: [1, 2, 3], noise: 0.2, nDecay: 0.02, seed: 1312 },
-        { at: 0.52, f: 640, decay: 0.12, gain: 0.35, partials: [1, 2, 3], noise: 0.2, nDecay: 0.02, seed: 1313 },
+        { at: 0.24, f: 520, decay: 0.14, gain: 0.32, partials: [1, 2, 3], noise: 0.2, nDecay: 0.02, seed: 1311 },
+        { at: 0.60, f: 620, decay: 0.14, gain: 0.32, partials: [1, 2, 3], noise: 0.2, nDecay: 0.02, seed: 1312 },
+        { at: 0.80, f: 740, decay: 0.14, gain: 0.34, partials: [1, 2, 3], noise: 0.2, nDecay: 0.02, seed: 1313 },
       ],
       draw(u, F) {
-        /* THE SIMILE, STAGED LITERALLY: Jupiter and its moons at top, the
-           same small number of couples orbiting the same small tables
-           below. Rejected: drawing only the couples and leaving Jupiter as
-           a caption — the line's comparison is the point, so both halves
-           of it are on screen at once, not one illustrating the other. */
-        const jx = 158, jy = 30, jr = 12;
-        F.disc(jx, jy, jr, 3);
-        for (const dy of [-6, -1, 4]) { const w = Math.sqrt(Math.max(0, jr * jr - dy * dy)); F.line(jx - w, jy + dy, jx + w, jy + dy, 5, 1); }
-        const speeds = [3.1, 2.3, 1.6, 1.0], radii = [16, 20, 24, 29];
-        for (let m = 0; m < 4; m++) F.ring(jx, jy, radii[m], 2, 1);
+        /* YOU CANNOT COUNT THEM UNTIL IT IS DARK. The dark is this movement's
+           one quantity: it comes down the sky dot by dot on the ordered
+           schedule, the moons come out of it one at a time, and the numeral
+           follows them. That is the whole mechanism — the count is a function
+           of the dark rather than a caption laid over it.
+           Rejected: the simile staged as a labelled diagram in daylight,
+           which is what the first pass did — a circle with three lines in it
+           and a nine-pixel "4" in the corner. */
+        const dark = smooth(clamp01((u - 0.04) / 0.72));
+        harbor(F, u, 1, dark);
+        /* Jupiter RISES: the climb any planet makes across an evening. Drawn
+           before the far shore, so the shore occludes it on the way up. */
+        const jx = 134, jy = lerp(58, 26, smooth(u)), jr = 21;
+        planet(F, jx, jy, jr, u * TAU * 0.62 + 1.1, dark);
+        /* close, and counted. A moon on the far side of its swing goes behind
+           the planet and comes out the other side — keeping is what the line
+           says Jupiter does, and an occultation is what keeping looks like. */
+        const beats = [0.24, 0.38, 0.60, 0.80], radii = [32, 39, 46, 54], speeds = [0.95, 0.66, 0.46, 0.31];
+        let seen = 0;
         for (let m = 0; m < 4; m++) {
-          const a = m * 1.7 + u * TAU * speeds[m];
-          F.disc(jx + Math.cos(a) * radii[m], jy + Math.sin(a) * radii[m] * 0.4, 1.6, 6);
+          if (u < beats[m]) continue;
+          seen++;
+          const a = m * 1.7 + (u - beats[m]) * TAU * speeds[m];
+          const mx = jx + Math.cos(a) * radii[m], my = jy + Math.sin(a) * radii[m] * 0.17;
+          if (Math.sin(a) > 0 && Math.abs(mx - jx) < jr) continue;
+          F.disc(mx, my, 1.8, 0, true); F.ring(mx, my, 2.6, 4, 1);
         }
-        /* the count, put on screen rather than left to be tallied by eye */
-        F.ring(10, 10, 4, 2, 1); F.disc(14, 10, 1, 6);
-        F.word("4", 24, 10, 9, 6, true);
-        pier(F);
+        farShore(F, dark);
+        /* the same two boats as M1, riding the tide that came in under it */
+        boatAt(F, 44, 95, 9, 70, u, Math.min(7, 6 + Math.round(dark)));
+        boatAt(F, 150, 79, 5.5, 70, u, Math.min(7, 6 + Math.round(dark)));
+        pier(F, 6);
+        /* the count, put on screen rather than left to be tallied by eye —
+           and stamped as paper, because by the time there is anything to
+           count, the sky it sits in is ink */
+        if (seen) F.word(String(seen), 26, 24, 20, 0, true);
+        /* CLOSE: four couples come onto the quay, one to a table, each pair's
+           orbit tightening from seventeen cells to seven for as long as it
+           turns. They arrive walking, and no two share a lane at the same
+           time — the first pass let two couples enter from the same edge at
+           once and they read as one black crowd. */
+        const arriveAt = [0.02, 0.38, 0.16, 0.58];
         for (let t = 0; t < TABLE_X.length; t++) {
-          const cx = TABLE_X[t], cy = TABLE_Y - 9, orbitR = 8;
-          F.ring(cx, cy, orbitR, 2, 1);
-          const ang = t * 1.4 + u * TAU * (0.7 + t * 0.12);
-          const p1 = [cx + Math.cos(ang) * orbitR, cy + Math.sin(ang) * orbitR * 0.35];
-          const p2 = [cx + Math.cos(ang + Math.PI) * orbitR, cy + Math.sin(ang + Math.PI) * orbitR * 0.35];
-          /* each half of a couple leans INTO its own orbit — a body being
-             carried around a curve tips toward the centre it's turning on,
-             the same lean any small body in this kit can still perform */
-          F.fig(p1[0], p1[1] + 9, 15, { mode: "stand", face: p1[0] < cx ? 1 : -1, arms: "open", rot: Math.sin(ang) * 0.16 }, 6);
-          F.fig(p2[0], p2[1] + 9, 15, { mode: "stand", face: p2[0] < cx ? 1 : -1, arms: "open", rot: Math.sin(ang + Math.PI) * 0.16 }, 6);
-          table(F, cx, TABLE_Y, 3);
+          const cx = TABLE_X[t], arrive = arriveAt[t], entry = t < 2 ? -10 : 202;
+          const p = clamp01((u - arrive) / 0.20);
+          if (p <= 0) continue;
+          const orbitR = lerp(17, 7, clamp01((u - arrive - 0.20) / 0.40));
+          const ang = (u - arrive) * TAU * 0.62 + t * 1.3;
+          /* the ellipse is only half flattened. At a third it was nearly
+             edge-on, and twice a turn the two bodies stood at the same x and
+             merged into one four-legged mass; at 0.55 the far one is a clear
+             ten cells further back and is drawn first, so the pair occludes
+             instead of fusing. */
+          const ox = Math.cos(ang) * orbitR, oy = Math.sin(ang) * orbitR * 0.55;
+          const walking = p < 1;
+          const A = [lerp(entry, cx + ox, smooth(p)), SEAT + (walking ? 0 : oy)];
+          const B = [lerp(entry - 11, cx - ox, smooth(p)), SEAT - (walking ? 0 : oy)];
+          const pose = (self, other, ph) => ({
+            mode: walking ? "walk" : "stand",
+            phase: walking ? u * 27.3 + ph : u * 1.7 + ph,
+            face: walking ? (entry < 0 ? 1 : -1) : (self < other ? 1 : -1),
+            arms: walking ? "swing" : "reach",
+            weight: walking ? 0.5 : 0.5 + Math.sin(ang + ph) * 0.28,
+            headTurn: walking ? 0.3 : 0.25,
+          });
+          /* the nearer body second, so a couple occludes itself as it turns */
+          const order = A[1] >= B[1] ? [B, A] : [A, B];
+          const hOf = (b) => 27 + (b[1] - SEAT) * 0.16;      // the near one is the bigger one
+          F.fig(order[0][0], order[0][1], hOf(order[0]), pose(order[0][0], order[1][0], 0), 7);
+          F.fig(order[1][0], order[1][1], hOf(order[1]), pose(order[1][0], order[0][0], 1.9), 7);
+          table(F, cx, SEAT, 6);
         }
       },
     },
     {
       label: "BURNED STORIES", seconds: 13,
       line: "The elders clutch their pearls and pray. Life has burned all my love stories — victory-less seasons.",
-      fx: { shake: (u) => win(u, 0.08, 0.14, 0.5, 0.6) * 1.3 },
       cues: [
-        { at: 0.15, f: 200, decay: 0.30, gain: 0.40, partials: [1, 1.8, 2.6], noise: 0.9, nDecay: 0.20, seed: 1321 },
-        { at: 0.55, f: 180, decay: 0.35, gain: 0.35, partials: [1, 1.7, 2.4], noise: 0.95, nDecay: 0.25, seed: 1322 },
+        { at: 0.14, f: 200, decay: 0.30, gain: 0.40, partials: [1, 1.8, 2.6], noise: 0.9, nDecay: 0.20, seed: 1321 },
+        { at: 0.42, f: 180, decay: 0.35, gain: 0.35, partials: [1, 1.7, 2.4], noise: 0.95, nDecay: 0.25, seed: 1322 },
+        { at: 0.71, f: 160, decay: 0.40, gain: 0.32, partials: [1, 1.6, 2.3], noise: 0.95, nDecay: 0.28, seed: 1323 },
       ],
       draw(u, F) {
-        pier(F);
-        elder(F, 26, 128, 40, 6);
-        elder(F, 54, 130, 36, 6);
-        /* five letters, each catching fire a little after the last — a
-           front sweeping the stack rather than one flash. Rejected: one
-           bulk fade over the whole cluster, which read as a single object
-           dimming rather than five separate stories going out */
-        const pagesDefs = [[92, 84, 16, 11], [112, 92, 15, 10], [100, 102, 17, 12], [128, 86, 14, 10], [118, 106, 16, 11]];
-        const front = smooth(u);
-        pagesDefs.forEach((pd, i) => {
-          const gone = clamp01((front - i * 0.13) * 2.4);
-          burnPage(F, pagePoints(pd[0], pd[1], pd[2], pd[3]), gone, 5);
-          /* WHAT BURNING LEAVES: once a page is more than half gone it
-             starts leaving soot at its own foot — otherwise the second
-             half of the movement empties out to bare paper exactly where
-             "all my love stories" used to be, which reads as the story
-             erased rather than burned. A scorch is what stays behind. */
-          if (gone > 0.5) {
-            const R = F.rng(200 + i);
-            for (let k = 0; k < Math.round((gone - 0.5) * 12); k++) F.disc(pd[0] + R() * pd[2], pd[1] + pd[3] + 1 + R() * 2, 0.9, 2);
-          }
-        });
-        const idxBurning = Math.floor(front / 0.13);
-        if (idxBurning >= 0 && idxBurning < pagesDefs.length) {
-          const pd = pagesDefs[idxBurning];
-          for (let k = 0; k < 3; k++) {
-            const fx0 = pd[0] + pd[2] * 0.5 + Math.sin(u * 40 + k) * 2, fy0 = pd[1] + pd[3] - 2 - k * 3;
-            F.line(fx0, fy0, fx0 + Math.sin(u * 30 + k * 2) * 3, fy0 - 5, 6, 1.2);
-          }
+        /* THE SMOKE IS THE MOVEMENT'S QUANTITY, AND IT IS PALE. A pall over a
+           big fire at night is lit from underneath, so it climbs the frame as
+           paper on ink rather than ink on ink — which is also the only way it
+           could be seen at all, the sky it climbs into being already at five.
+           Rejected: dark smoke on a night sky. It measured as motion and
+           looked like nothing. */
+        harbor(F, u, 1, 1);
+        farShore(F, 1);
+        const FX = 122;
+        /* the wave tops nearest the fire catch it, and nothing else in this
+           water is lit. The glints blink because water does. */
+        for (let k = 0; k < 70; k++) {
+          const off = (F.noise(k, 31) - 0.5) * 90;
+          const gx = FX + off, gy = PIER - 3 - F.noise(k, 32) * (26 - Math.abs(off) * 0.16);
+          if (Math.sin(gy * 0.5 + u * TAU * 1.7 + k) < 0.52 + Math.abs(off) * 0.006) continue;
+          F.put(gx, gy, 1); F.put(gx + 1, gy, 2);
         }
-        /* ash, rising off whichever page has already caught */
-        for (let k = 0; k < 16; k++) {
-          const pIdx = k % pagesDefs.length, pd = pagesDefs[pIdx], spawnU = pIdx * 0.13 + 0.05;
-          if (u <= spawnU) continue;
-          const age = u - spawnU, bx = pd[0] + F.noise(k, 11) * pd[2];
-          const y = pd[1] - age * 66, x = bx + Math.sin(age * 6 + k) * 3;
-          if (y > 18) F.disc(x, y, 0.9, 3);
+        /* the firelight on the stones: bright at the fire, dithered out to
+           the ambient at its rim, and it rises and dies with the fire */
+        const heat = 0.30 + 0.70 * win(u, 0.05, 0.34, 0.62, 0.97);
+        F.map((x, y) => {
+          if (y < PIER) return;
+          const d = Math.hypot((x - FX) * 0.62, y - (PIER + 6)) / (26 + heat * 46);
+          if (d < 1) return Math.min(4, Math.floor(d * 4.2 + F.bayer(x, y)));
+        });
+        const top = 128 - smooth(u) * 132;
+        /* the plume runs all the way DOWN to the stones, not from the horizon
+           up: cut off at the skyline it read as weather that happened to be
+           over the harbor rather than as the smoke of this particular fire */
+        F.map((x, y) => {
+          if (y >= PIER || y < top) return;
+          const rise = clamp01((128 - y) / 118);
+          const cxp = FX - rise * 40 + F.n2(rise * 4.2 + u * 0.5, 3) * 16 - 8;
+          const w = (7 + rise * 66) * (0.72 + 0.56 * F.n2(rise * 3.1 + u * 0.4, 9));
+          const d = 1 - Math.abs(x - cxp) / w;
+          if (d <= 0) return;
+          /* two scales of texture, and it is never allowed all the way to
+             paper: a plume at level 0 read as a searchlight beam, and smoke
+             is a substance you can see the far shore through */
+          const tex = F.n2(x * 0.075 + u * 0.6, y * 0.10) * 0.6 + F.n2(x * 0.022, y * 0.035 + u * 0.3) * 0.55;
+          const dens = d * (0.35 + tex) * clamp01((y - top) / 16) * (1 - rise * 0.40);
+          if (dens < 0.16) return;
+          return Math.max(1, Math.min(6, Math.floor(6.4 - dens * 5.4 + F.bayer(x, y))));
+        });
+        pier(F, 7);
+        /* FIVE LOVE STORIES, GOING ONE AT A TIME. They lie in a heap on the
+           stones and catch in sequence — a front sweeping the stack, not one
+           flash over the cluster, so the stack COMES APART across the
+           movement instead of dimming as a single object. */
+        /* the letters lie ON THE STONES, inside the firelight. The first pass
+           stacked them up the frame and the top of the heap stood in the dark
+           water, where ink at 7 on ink at 6 is nothing at all. */
+        /* spread wide enough that the outer letters are not standing inside
+           the fire: the ones under the flame are erased by their own light */
+        const heap = [[62, 123, 21, 9], [96, 125, 20, 9], [148, 122, 21, 9], [78, 134, 20, 8], [132, 135, 21, 8]];
+        let lit = 0;
+        heap.forEach((pd, i) => {
+          const gone = clamp01((u - (0.10 + i * 0.145)) / 0.20);
+          if (gone > 0) lit++;
+          burnPage(F, pagePoints(pd[0], pd[1], pd[2], pd[3]), gone, 7);
+        });
+        /* it takes hold as the letters go in, and it is embers by the end —
+           "victory-less" is a fire you are still sitting beside when it stops
+           being one */
+        fire(F, FX, 132, (11 + lit * 3.6) * (1 - 0.62 * ss(0.74, 1, u)), u);
+        for (let k = 0; k < 26; k++) {
+          const pi = k % 5, t0 = 0.10 + pi * 0.145 + (k / 26) * 0.09;
+          if (u <= t0) continue;
+          const age = u - t0;
+          const ex = FX + (F.noise(k, 11) - 0.5) * 26 + Math.sin(age * 8 + k) * 6 - age * 26;
+          const ey = 126 - age * 190;
+          if (ey > 5) F.disc(ex, ey, F.noise(k, 12) > 0.72 ? 1.3 : 0.85, 0, true);
+        }
+        /* THE ELDERS PRAY, AND A PRAYER IS A BODY GOING DOWN. arms:'hold' is
+           the rig's own two-hands-at-the-chest, which is exactly the clutch
+           the line names, so the pearls have something to be held by; crouch
+           and headTilt climb across the whole thirteen seconds — the
+           movement's second monotone number. Rejected: a hand-built robe, a
+           triangle with a knob on it, which read as a traffic cone. */
+        /* Level 6, not 7: at 7 the fill comes out at 4, which is the same tone
+           as the night water they stand against, and two elders turned into
+           two x-rays. At 6 the body fills at 3 — lighter than the water
+           behind them and darker than the lit stones under them, so one
+           figure reads against both surfaces it crosses. */
+        for (const [ex2, ey2, eh, delay] of [[38, 138, 44, 0.06], [68, 141, 39, 0.16]]) {
+          const bow = ss(delay, delay + 0.84, u);
+          F.fig(ex2, ey2, eh, {
+            mode: "stand", face: 1, arms: "hold", guise: "elder", phase: u * 1.7 + delay * 9,
+            crouch: 0.10 + bow * 0.42, headTilt: -0.15 - bow * 0.55, weight: 0.42,
+            lean: bow * 0.10, headTurn: 0.2,
+          }, 6);
+          /* AND THE ROBE. The rig gives a body, and a body in trousers is a
+             bystander; the line says elders, and what makes an elder at
+             twenty cells is that the legs are covered. Stamped, not inked,
+             because it has to close over the legs the rig has already drawn. */
+          const hipY = ey2 - eh * (0.50 - (0.10 + bow * 0.42) * 0.16);
+          const lean2 = bow * eh * 0.10;
+          for (let yy = Math.round(hipY); yy <= ey2; yy++) {
+            const t = (yy - hipY) / (ey2 - hipY);
+            const hw = eh * (0.105 + t * t * 0.115), rx = ex2 + lean2 * (1 - t);
+            F.line(rx - hw, yy, rx + hw, yy, 3, 1, true);
+            F.put(Math.round(rx - hw), yy, 6); F.put(Math.round(rx + hw), yy, 6);
+          }
+          F.line(ex2 - eh * 0.22, ey2, ex2 + eh * 0.22, ey2, 6, 1.4);
+          for (let k = 0; k < 6; k++) {
+            const a = 0.5 + k / 5 * 2.2;
+            F.disc(ex2 + Math.cos(a) * eh * 0.11 + bow * eh * 0.05,
+              ey2 - eh * (0.74 - bow * 0.12) + Math.sin(a) * eh * 0.05, Math.max(0.85, eh * 0.026), 7);
+          }
         }
       },
     },
@@ -318,81 +640,102 @@ export default {
       label: "HARVESTED POWER", seconds: 14,
       line: "So I harvest the flowers instead — scarlet poppies, purple blossoms — and they become my power.",
       cues: [
-        { at: 0.10, f: 700, decay: 0.08, gain: 0.40, partials: [1, 2.4], noise: 0.6, nDecay: 0.02, seed: 1331 },
-        { at: 0.30, f: 650, decay: 0.08, gain: 0.40, partials: [1, 2.4], noise: 0.6, nDecay: 0.02, seed: 1332 },
+        { at: 0.18, f: 700, decay: 0.08, gain: 0.40, partials: [1, 2.4], noise: 0.6, nDecay: 0.02, seed: 1331 },
+        { at: 0.31, f: 650, decay: 0.08, gain: 0.40, partials: [1, 2.4], noise: 0.6, nDecay: 0.02, seed: 1332 },
         { at: 0.70, f: 220, decay: 0.60, gain: 0.40, partials: [1, 2.0, 3.0], noise: 0.3, nDecay: 0.10, seed: 1333 },
       ],
       draw(u, F) {
-        /* AN ABUNDANCE THAT DOES NOT EMPTY. The first pass had the sweep
-           erase every flower it passed, and by the second half of the
-           movement the field was bare and the frame was 98% paper — one
-           harvester cannot be "instead of" a whole meadow if the meadow
-           is gone. So the meadow (three rows, eighteen heads, the back
-           row's stems reaching well past the mid-line) is drawn every
-           frame and never removed; what the sweep actually harvests is a
-           handful of taller, separate stalks in front of it. Abundance
-           stays on screen the entire movement; the harvesting is still a
-           real, visible subtraction, just not of the whole picture. */
-        for (let i = 0; i < 7; i++) poppy(F, 10 + i * 26 + (F.noise(i, 3) - 0.5) * 8, 140, 4.0, 5);
-        for (let i = 0; i < 6; i++) blossom(F, 24 + i * 29 + (F.noise(i, 9) - 0.5) * 8, 128, 3.0, 5);
-        for (let i = 0; i < 5; i++) poppy(F, 18 + i * 36 + (F.noise(i, 15) - 0.5) * 10, 114, 2.2, 4);
-        F.line(0, 141, 70, 142, 4, 1); F.line(82, 142, 140, 141, 4, 1); F.line(152, 141, 192, 142, 4, 1);
-        /* the harvest targets: four tall stalks, stems long enough to
-           clear the mid-line, plucked one at a time as the sweep passes.
-           The walker starts at x=188 and moves toward x=6, so a stalk
-           counts as reached once sweepX has fallen BELOW its x — i.e.
-           t.x > sweepX means already passed. A first pass had this
-           inverted (t.x <= sweepX for "passed"), which harvested the
-           stalks in the opposite order to the walker's own motion — the
-           two nearest the start were the last things picked. */
-        const targets = [26, 74, 122, 170].map((x, i) => ({ x, top: 48 + (F.noise(i, 21) - 0.5) * 14, poppy: i % 2 === 0 }));
-        const sweepT = clamp01(u / 0.55);
-        const sweepX = lerp(188, 6, smooth(sweepT));
+        /* THE FIELD GOES DOWN IN FRONT OF HIM. The first pass drew the meadow
+           as a row of specimens and erased whatever the sweep passed, and by
+           the second half the frame was 98% paper — one harvester cannot be
+           "instead of" a whole meadow if the meadow is gone. So the meadow is
+           a MASS; the far half of it is never touched and the near half is
+           only ever cut back to the middle of the frame; and what the sweep
+           leaves is not absence but a different surface — cut ground, two
+           cells of stalk each, lighter by two levels than the standing crop.
+           The sky is the night this line turns away from: M3's smoke, going
+           off the top of the frame while he works. "Instead" is a word about
+           the movement before this one, and it is the only reason there is
+           weather in this one. */
+        const sweepX = lerp(194, 96, smooth(clamp01(u / 0.46)));
+        const cutAt = (y) => sweepX + (y - 116) * 0.09 + (F.n2(y * 0.20, 7) - 0.5) * 9;
+        const rest = 1 - smooth(clamp01(u / 0.74));
+        F.map((x, y) => {
+          const b = F.bayer(x, y);
+          /* the skyline is not ruled: a straight tone boundary across 192
+             cells stripes the frame as surely as a drawn bar does */
+          if (y < 58 + (F.n2(x * 0.04, 13) - 0.5) * 9) return Math.min(7, Math.floor(1 + rest * 2.4 + b));
+          if (y < 92) return Math.min(7, Math.floor(2 + F.n2(x * 0.06, y * 0.10) * 1.5 + b * 0.8));
+          const cut = x > cutAt(y);
+          const g = F.n2(x * 0.07, y * 0.13 + 3);
+          return Math.min(7, Math.floor((cut ? 0.5 : 2.4) + g * (cut ? 1.0 : 1.6) + b));
+        });
+        /* the far half of the field: four rows that recede and are never cut,
+           so the abundance is on screen for the whole movement */
+        for (const [ry, n, s, l, k] of [[70, 40, 0.9, 4, 41], [77, 36, 1.1, 4, 43], [84, 32, 1.4, 5, 45], [91, 28, 1.7, 5, 47]])
+          for (let i = 0; i < n; i++) {
+            const fx = 2 + i * (188 / (n - 1)) + (F.noise(i, k) - 0.5) * 6;
+            (i + k) % 2 ? blossom(F, fx, ry, s, l) : poppy(F, fx, ry, s, l);
+          }
+        /* the near half: five rows, and every head in them is either standing
+           or cut, decided one flower at a time by where the sweep has got to */
+        const rows = [[100, 30, 2.0, 5], [110, 27, 2.4, 6], [121, 24, 2.9, 6], [132, 21, 3.5, 6], [143, 18, 4.1, 7]];
+        rows.forEach(([ry, n, s, l], r) => {
+          for (let i = 0; i < n; i++) {
+            const fx = 2 + i * (188 / (n - 1)) + (F.noise(i, 50 + r) - 0.5) * 7;
+            if (fx > cutAt(ry)) { stubble(F, fx, ry, 3); continue; }
+            (i + r) % 2 ? blossom(F, fx, ry, s, l) : poppy(F, fx, ry, s, l);
+          }
+        });
+        /* the four tall stalks he actually takes. The hand goes ON the stem,
+           at the bend — the bloom sits four heads above the shoulder and a
+           hand sent up there stretches the arm into a rod, which reads as
+           broken rather than as reaching. */
+        const targets = [104, 132, 158, 182].map((x, i) => ({ x, top: 92 + (F.noise(i, 21) - 0.5) * 10, poppy: i % 2 === 0 }));
         for (const t of targets) {
-          if (t.x > sweepX) continue;
-          const bend = (F.noise(t.x, 77) - 0.5) * 9, midY = (140 + t.top) / 2;
-          F.line(t.x, 140, t.x + bend, midY, 6, 1.2); F.line(t.x + bend, midY, t.x, t.top, 6, 1.2);
-          t.poppy ? (F.disc(t.x, t.top, 3.2, 6), F.disc(t.x, t.top, 1.1, 7))
-                  : [0, 1, 2, 3, 4].forEach((k) => F.line(t.x, t.top, t.x + Math.cos(k / 5 * TAU) * 3.2, t.top + Math.sin(k / 5 * TAU) * 3.2, 6, 1));
+          if (t.x > cutAt(141)) { stubble(F, t.x, 142, 4); continue; }
+          const bend = (F.noise(t.x, 77) - 0.5) * 9, midY = (142 + t.top) / 2;
+          F.line(t.x, 142, t.x + bend, midY, 6, 1.4); F.line(t.x + bend, midY, t.x, t.top, 6, 1.4);
+          t.poppy ? poppy(F, t.x, t.top + 8, 3.6, 7) : blossom(F, t.x, t.top + 8, 3.4, 7);
         }
-        const held = targets.filter((t) => t.x > sweepX);
-        if (u < 0.58) {
-          /* phase 6.35, not 7 — the walk cycle hits "feet together" at every
-             HALF-integer of phase, not just every integer, and u=0.5 * 7 is
-             exactly 3.5. A non-integer rate keeps every sweep checkpoint
-             (0.2 / 0.5 / 0.8) off of both. */
-          /* THE HAND GOES ON THE FLOWER, not a generic reach mimed near the
-             row of stalks. `gesture` is body-local (feet at the origin,
-             +y up), so a target's screen coordinates convert directly. The
-             grip lands at the STEM'S BEND (the same midY the stalk-drawing
-             loop above uses), not the bloom at its tip — the tip sits four
-             heads above the shoulder and a hand sent there stretched the
-             arm into a rod, which read as broken rather than reaching.
-             Only the NEXT stalk still standing counts, and only once it's
-             close enough to actually be in reach — otherwise he is caught
-             reaching at empty air between them. */
-          const ahead = targets.filter((t) => t.x <= sweepX);
+        const held = targets.filter((t) => t.x > cutAt(141));
+        if (u < 0.68) {
+          const ahead = targets.filter((t) => t.x <= cutAt(141));
           const nextT = ahead.length ? ahead.reduce((a, b) => (b.x > a.x ? b : a)) : null;
           const reachIn = nextT ? sweepX - nextT.x : 999;
-          const gripY = nextT ? (140 + nextT.top) / 2 : 0;
-          const gesture = nextT && reachIn < 16 ? [nextT.x - sweepX, 128 - gripY] : undefined;
-          F.fig(sweepX, 128, 38, { mode: "walk", phase: u * 6.35, face: -1, arms: "reach", gesture }, 7);
-          held.forEach((t, i) => { const c = i % 6, r = (i / 6) | 0; const bx = sweepX + 9 + c * 3.2, by = 92 - r * 4;
-            t.poppy ? poppy(F, bx, by, 1.4, 6) : blossom(F, bx, by, 1.5, 6); });
+          const gesture = nextT && reachIn < 18 && reachIn > -6 ? [nextT.x - sweepX, 142 - (142 + nextT.top) / 2] : undefined;
+          /* after the sweep he walks back into what he has cut, so the
+             becoming happens with the standing field behind it */
+          const back = ss(0.50, 0.68, u);
+          const hx = back > 0 ? lerp(sweepX, 122, back) : sweepX;
+          F.fig(hx, 139, 52, {
+            mode: "walk", phase: u * 21.3, face: back > 0.02 ? 1 : -1, guise: "poet",
+            arms: gesture ? "reach" : "swing", gesture, headTurn: back > 0.02 ? 0.2 : -0.35,
+          }, 7);
+          /* the armful, and it is a count: one more bloom in the crook of the
+             arm every time a stalk goes down */
+          held.forEach((t, i) => {
+            const bx = hx - 10 + (i % 2) * 6, by = 106 - ((i / 2) | 0) * 6;
+            t.poppy ? poppy(F, bx, by, 2.0, 7) : blossom(F, bx, by, 2.0, 7);
+          });
         } else {
-          /* BECOMING happens in two beats, not one: the harvester walks to
-             centre-frame FIRST (settle), stands, and only once still does
-             the bloom open at each stem's tip — settle and bloom are
-             sequential, not overlapping, so it never has to grow flowers
-             while it is still mid-stride. Big, because the substitution
-             of limb for stem only reads at a size where an arm and a
-             flowering stem are both clearly legible. */
-          const settle = ss(0.55, 0.72, u), bloom = ss(0.72, 0.90, u);
-          const px = lerp(6, 96, settle);
-          stemFigure(F, px, 122, 64, bloom, 7);
-          const remain = held.slice(0, Math.round(held.length * (1 - bloom)));
-          remain.forEach((t, i) => { const c = i % 6, r = (i / 6) | 0; const bx = px + 11 + c * 3.2, by = 86 - r * 4;
-            t.poppy ? poppy(F, bx, by, 1.4, 6) : blossom(F, bx, by, 1.5, 6); });
+          /* THE BECOMING, DECLARED: he stops, and then it happens to him. It
+             is sequential and not overlapping — the walk ends, the body
+             settles, and only then do the stems open, so nothing has to
+             flower mid-stride. The armful empties into him as they open:
+             what he was carrying and what is growing out of him are the same
+             four flowers, and the count of one is the count of the other. */
+          const bloom = ss(0.68, 0.86, u);
+          F.fig(122, 139, 52, {
+            mode: "stand", arms: "open", guise: "poet", phase: u * 1.7,
+            weight: 0.38, headTilt: -0.22 - bloom * 0.18, headTurn: 0.15,
+          }, 7);
+          flowering(F, 122, 139, 52, bloom, 7);
+          const keep = held.slice(0, Math.round(held.length * (1 - bloom)));
+          keep.forEach((t, i) => {
+            const bx = 110 + (i % 2) * 6, by = 108 - ((i / 2) | 0) * 6;
+            t.poppy ? poppy(F, bx, by, 2.0, 7) : blossom(F, bx, by, 2.0, 7);
+          });
         }
       },
     },
@@ -400,31 +743,45 @@ export default {
       label: "REFOCUS", seconds: 14,
       line: "Then, a distant window. She says: you'll see me. Capture the eyes. Refocus. Step back. Say hello.",
       cues: [
-        { at: 0.06, f: 900, decay: 0.05, gain: 0.30, partials: [1, 1.5], noise: 0.4, nDecay: 0.02, seed: 1341 },
-        { at: 0.62, f: 500, decay: 0.40, gain: 0.45, partials: [1, 2.01, 3.02], noise: 0.15, nDecay: 0.05, seed: 1342 },
+        { at: 0.08, f: 900, decay: 0.05, gain: 0.30, partials: [1, 1.5], noise: 0.4, nDecay: 0.02, seed: 1341 },
+        { at: 0.56, f: 500, decay: 0.40, gain: 0.45, partials: [1, 2.01, 3.02], noise: 0.15, nDecay: 0.05, seed: 1342 },
+        { at: 0.90, f: 330, decay: 0.30, gain: 0.30, partials: [1, 2.0, 2.9], noise: 0.25, nDecay: 0.04, seed: 1343 },
       ],
       draw(u, F) {
-        /* THE BEST IMAGE IN THE FILM — no fx, nothing competing with it.
-           Every other tool in the kit was tried here and cut: a smear made
-           the arriving dots look like they were moving rather than
-           choosing when to arrive, and a shake read as the window
-           trembling rather than the picture sharpening. */
-        const cx = 110, cy = 58, hw = 26, hh = 30;
-        windowPoints(cx, cy, hw, hh).forEach((p, i) => resolveDot(F, p[0], p[1], p[2], i, u, 0.04, 0.58, 32));
-        /* the eyes arrive a little after the frame — focus finds the frame
-           first, the face inside it second, which is the order looking
-           through a window actually happens in */
-        [eyeDots(cx - 9, cy - 3), eyeDots(cx + 9, cy - 3)].forEach((eye, ei) =>
-          eye.forEach((p, i) => resolveDot(F, p[0], p[1], 8, 4000 + ei * 50 + i, u, 0.30, 0.76, 26, true)));
-        F.line(30, 132, 80, 133, 4, 1); F.line(96, 133, 150, 132, 4, 1);
-        /* step back: smaller, and a half-step further from the glass. The
-           head tilts up toward the window as she resolves in it, and lifts
-           further the instant the arm does — "say hello" is a chin coming
-           up before it is a wave. */
-        const back = ss(0.80, 0.98, u);
-        F.fig(96, lerp(136, 127, back), lerp(30, 21, back), { mode: "stand", face: 1,
-          phase: u * 1.7, arms: u > 0.90 ? "up" : "down",
-          headTilt: 0.15 + back * 0.15, guise: "poet" }, 7);
+        /* THE WHOLE FAR HALF OF THE FRAME IS OUT OF FOCUS, AND COMES IN. No
+           fx anywhere near it: a smear made the arriving dots look as though
+           they were moving rather than choosing when to arrive, and a shake
+           read as the window trembling rather than as the picture sharpening. */
+        const WATER = 86, NEAR = 112;
+        const blur = (1 - ss(0.04, 0.62, u)) * 12;
+        F.map((x, y) => {
+          if (y > NEAR) return;
+          const a = F.n2(x * 0.10, y * 0.10) * TAU * 2;
+          return farTone(F, x + Math.cos(a) * blur, y + Math.sin(a) * blur, u, WATER);
+        });
+        /* the near quay: sunlit stone, sharp from the first frame, and the
+           one surface in the movement that never had to arrive */
+        F.map((x, y) => (y <= NEAR ? undefined
+          : Math.min(7, Math.floor(1 + (F.noise(x, y) > 0.88 ? 1 : 0) + F.bayer(x, y)))));
+        F.line(0, NEAR, 70, NEAR + 1, 6, 1.6); F.line(84, NEAR + 1, 192, NEAR, 6, 1.6);
+        /* CAPTURE THE EYES: the film's one accent, and the only thing in it
+           that arrives as a lattice rather than as tone — the frame first and
+           the face inside it second, which is the order looking through a
+           window happens in */
+        [eyeDots(102, 40), eyeDots(108, 40)].forEach((eye, ei) =>
+          eye.forEach((p, i) => resolveDot(F, p[0], p[1], 8, 4000 + ei * 50 + i, u, 0.42, 0.80, 22, true)));
+        /* STEP BACK: away from the rail and toward us, so he GROWS instead of
+           shrinking — the only way this world can spell a step toward the
+           camera, there being no scaling pass in it. Then the chin comes up,
+           and only then the hand: "say hello" is a head before it is a wave. */
+        const back = ss(0.72, 0.94, u), hello = ss(0.88, 1, u);
+        const h = lerp(46, 58, back);
+        F.fig(44, lerp(126, 143, back), h, {
+          mode: "stand", face: 1, arms: hello > 0.02 ? "reach" : "down",
+          phase: u * 1.7, guise: "poet", weight: lerp(0.32, 0.62, back),
+          headTurn: 0.55, headTilt: 0.12 + back * 0.22,
+          gesture: hello > 0.02 ? [h * 0.22, h * (0.78 + hello * 0.20)] : undefined,
+        }, 7);
       },
     },
     {
@@ -435,26 +792,42 @@ export default {
         { at: 0.70, f: 130, decay: 0.4, gain: 0.30, partials: [1, 1.4], noise: 0.6, nDecay: 0.25, seed: 1352 },
       ],
       draw(u, F) {
-        harborWater(F, u, 4);
-        pier(F);
-        /* the window, resolved now and staying that way — same geometry
-           as M1's tiny box and M5's lattice, just held still */
-        const wx = 146, wy = 38;
-        drawWindowSolid(F, wx, wy, 15, 17, 5);
+        /* THE SAME QUAY AS M1, THE SAME CHAIR, THE NEXT DAY. The tide that
+           came in under the small tables is still in; the window that was ten
+           cells wide across the water in M1 and forty in M5 is here in the
+           wall it belongs to, holding, because this is the movement in which
+           nothing is asked to arrive. */
+        const wl = harbor(F, u, 1, 0);
+        farShore(F, 0, false);
+        pier(F, 6);
+        const wx = 148, wy = 40;
+        F.rect(wx - 30, wy - 24, 60, 48, 3);
+        for (let dx = -33; dx < 33; dx += 9) F.rect(wx + dx, wy - 27, 6, 4, 6);   // a dentilled eave
+        F.rect(wx - 33, wy - 28, 66, 2, 6);
+        litWindow(F, wx, wy, 14, 16, 5, 7);
+        /* SHE IS STILL IN IT. M5 spent eighteen seconds bringing this window
+           and this figure into focus; leaving the pane empty here would have
+           thrown that away for a rectangle. */
+        F.disc(wx - 1, wy - 8, 4.2, 7);
+        for (let yy = wy - 4; yy < wy + 15; yy++) {
+          const t = (yy - (wy - 4)) / 19;
+          F.line(wx - 1 - (5 - t * 1.6 + t * t * 3), yy, wx - 1 + (5 - t * 1.6 + t * t * 3), yy, 7, 1);
+        }
         const pulse = 0.7 + 0.3 * Math.sin(u * TAU * 1.4);
-        F.disc(wx - 6, wy - 2, 1.6 * pulse, 8); F.disc(wx + 6, wy - 2, 1.6 * pulse, 8);
+        F.disc(wx - 3, wy - 9, 1.5 * pulse, 8); F.disc(wx + 1.5, wy - 9, 1.5 * pulse, 8);
         /* a boat leaves without them — the one thing in frame that goes */
         const s = smooth(u);
-        boat(F, lerp(60, 150, s), lerp(96, HOR + 4, s), lerp(9, 3, s), 4);
-        for (const tx of TABLE_X) table(F, tx, TABLE_Y, 4);
-        table(F, TABLE_X[2], TABLE_Y, 6);
+        boatAt(F, lerp(56, 118, s), lerp(112, 76, s), lerp(10, 4, s), wl, u, 6);
+        for (const tx of TABLE_X) table(F, tx, SEAT, 5);
+        table(F, TABLE_X[2], SEAT, 7);
         /* HOLDING ON: the reaching hand lands on the table's own edge, not
-           mimed in the air past it — "don't make me leave" gripping the
-           one thing here that isn't going anywhere, while the head still
-           follows the boat that is. */
-        F.fig(TABLE_X[2] + 9, TABLE_Y, 32, { mode: "sit", face: -1, arms: "reach",
-          phase: u * 1.7, guise: "poet", gesture: [-9, 9],
-          headTurn: -0.35, headTilt: -0.12 }, 7);
+           mimed in the air past it — "don't make me leave" gripping the one
+           thing here that isn't going anywhere, while the head still follows
+           the boat that is. */
+        F.fig(TABLE_X[2] - 9, SEAT, 34, {
+          mode: "sit", face: 1, arms: "reach", phase: u * 1.7, guise: "poet",
+          gesture: [9, 12], headTurn: 0.45, headTilt: -0.10,
+        }, 7);
       },
     },
   ],

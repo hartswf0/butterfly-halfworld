@@ -9,14 +9,20 @@
    BUILD array and the same clip is reused in five different movements, the
    way BLOODLINES reused one graph in four costumes. The waterline itself is
    drawn as the one unbroken span the dot law allows, because its entire
-   meaning IS that it has no gap in it.
+   meaning IS that it has no gap in it — and in M1 it is also the horizon
+   the sky ends at and the vanishing point the road runs to, because the
+   yellow brick road is a causeway out over that water.
 
    "LEAVING BEHIND CROSSHAIRS FOR CONTINUUMS" is built literally in M5: a
    scope reticle (four arms that stop short of the centre) is, cell by cell
    on the Bayer schedule, REPLACED by a ring at the same radius — a shape
-   with no ends and no gap. The same swap stands in for "strains for
-   serendipity" too: a taut, aimed thing loosening into an endless one is one
-   mechanism, not two, so no second image was built for the second clause.
+   with no ends and no gap — and each ring then widens away off the edges of
+   the world, because a continuum that holds still is only a circle. The
+   whole movement is seen through the last of those scopes: its aperture is
+   the one that opens, until it is wider than the frame and there is no
+   instrument left to look through. "Strains for serendipity" is the same
+   release read in the body — a man who starts braced and ends open — rather
+   than a second image built for the second clause.
 
    THE ONE UTOPIA IN THE SUITE. Populated on purpose — the plaza in the last
    movement is never one figure, it is a crowd that raises its arms
@@ -209,16 +215,24 @@ function crossRing(F, cx, cy, arm, rK, l) {
 
 /* a comet: a shrinking, dimming trail of discs along a straight fall, active
    only inside its own [ts,te] window so it reads as one arrival rather than
-   a loop. soul marks the one comet that is this film's single accent. */
+   a loop. soul marks the one comet that is this film's single accent.
+
+   THE TAIL IS LONG ENOUGH TO BE A TAIL. The first pass ran eight discs at
+   two hundredths of the path apart and dimmed them to level 1 — a comet
+   sixteen cells long that vanished entirely once the sky behind it was
+   given a tone, in the movement named after them. Fourteen discs over a
+   quarter of the fall, floored at level 3, is a streak you can see crossing
+   a night. */
 function comet(F, u, ts, te, x0, y0, x1, y1, l, soul) {
-  if (u < ts || u > te + 0.05) return;
+  if (u < ts || u > te) return;
   const p = clamp01((u - ts) / (te - ts));
-  for (let k = 0; k < 8; k++) {
-    const pk = p - k * 0.02;
+  for (let k = 0; k < 14; k++) {
+    const pk = p - k * 0.024;
     if (pk < 0) break;
-    F.disc(lerp(x0, x1, pk), lerp(y0, y1, pk), Math.max(0.5, 1.7 - k * 0.18), Math.max(1, l - k));
+    F.disc(lerp(x0, x1, pk), lerp(y0, y1, pk), Math.max(0.55, 1.9 - k * 0.22),
+           Math.max(3, l - Math.floor(k * 0.42)));
   }
-  if (soul && p < 1) F.put(Math.round(lerp(x0, x1, p)), Math.round(lerp(y0, y1, p)), 8);
+  if (soul) F.put(Math.round(lerp(x0, x1, p)), Math.round(lerp(y0, y1, p)), 8);
 }
 
 export default {
@@ -238,51 +252,114 @@ export default {
     {
       label: "THE COMETS", seconds: 13,
       line: "Poets, who eased generations down yellow brick roads — and plucked our souls out of their secret places, to follow comets to the capital city of our collective consciousness.",
+      /* the three landings, and nothing else: each cue is a comet reaching
+         the dome, so the bell and the arrival are the same event */
       cues: [
-        { at: 0.12, f: 660, decay: 0.22, gain: 0.42, partials: [1, 2.4, 3.9], noise: 0.5, nDecay: 0.015, seed: 611 },
-        { at: 0.42, f: 520, decay: 0.24, gain: 0.40, partials: [1, 2.3, 3.7], noise: 0.5, nDecay: 0.015, seed: 612 },
-        { at: 0.75, f: 780, decay: 0.20, gain: 0.46, partials: [1, 2.5, 4.1], noise: 0.55, nDecay: 0.012, seed: 613 },
+        { at: 0.55, f: 660, decay: 0.22, gain: 0.42, partials: [1, 2.4, 3.9], noise: 0.5, nDecay: 0.015, seed: 611 },
+        { at: 0.70, f: 520, decay: 0.24, gain: 0.40, partials: [1, 2.3, 3.7], noise: 0.5, nDecay: 0.015, seed: 612 },
+        { at: 0.92, f: 780, decay: 0.34, gain: 0.50, partials: [1, 2.5, 4.1], noise: 0.55, nDecay: 0.012, seed: 613 },
       ],
       draw(u, F) {
-        const VPX = 96, VPY = 40;
-        /* the sky the road runs to. Sparser than a full night — this is a
-           rumour of a city, not the city yet */
+        /* THE ROAD IS A CAUSEWAY. This film's whole geography is one falling
+           waterline, so the road that generations were eased down runs out
+           ACROSS the water to a city still under it — its vanishing point is
+           the waterline itself, and it moves down with it. Rejected: a road
+           on dry paper with the sea nowhere in the frame, which made M1 the
+           only movement in the film that was not about water. */
+        const waterY = lerp(30, 38, smooth(u));
+        const NEAR = waterY + 2, DEEP = 146;
+        /* ONE DEPTH MAPPING FOR THE WHOLE MOVEMENT. d = 1 is the brick under
+           our own feet and d = 0 is the city gate; the road's width, its
+           courses, and every walker's station and height are all read off
+           it. The first pass spaced the rungs on one curve and drew the
+           road's edges on another, so the rungs' ends missed the kerb by a
+           few cells all the way down and the walkers stood a little beside
+           the road rather than on it. */
+        const DY = (d) => lerp(NEAR, DEEP, Math.pow(d, 1.6));
+        const HW = (y) => lerp(2.5, 74, (y - NEAR) / (DEEP - NEAR));
+        const SZ = (y) => lerp(3.5, 30, (y - NEAR) / (DEEP - NEAR));
+        /* NIGHT AS A TONE, NOT BARE PAPER WITH SPECKS ON IT. The sky is laid
+           down as a field and the stars are cut OUT of it, which is how a
+           woodcut has always made a star. Its lower edge is the waterline —
+           the one unbroken full-width span this world allows itself, for the
+           reason the header gives — so the tone ends where the sea begins
+           and nowhere else. */
+        F.rect(0, 0, F.W, waterY, 1);
         const S = F.rng(60);
         for (let k = 0; k < 60; k++) {
-          const sx = Math.round(S() * F.W), sy = Math.round(S() * VPY);
-          F.ink(sx, sy, S() > 0.82 ? 3 : 1);
+          F.disc(Math.round(S() * F.W), Math.round(S() * (waterY - 4)), S() > 0.82 ? 1.2 : 0.6, 0, true);
         }
-        const waterY = lerp(30, 38, smooth(u));
         cityscape(F, waterY, u, 0.14);
-        /* YELLOW BRICK ROAD. A perspective ladder like 01's hallway, but with
-           joints ticked across the nearer rows so it reads as paving and not
-           just converging lines — the first pass was rails with no ties and
-           looked like a train track, not a road generations walk down. */
-        for (let k = 0; k < 13; k++) {
-          const t = k / 12, y = lerp(VPY + 4, 144, Math.pow(t, 1.6)), half = lerp(3, 72, t);
-          F.line(96 - half, y, 96 + half, y, 4, 1);
-          if (t > 0.5) for (let bx = -half; bx < half; bx += lerp(14, 7, t)) F.ink(96 + bx, y - 1, 3);
-        }
-        F.line(VPX - 2, VPY, VPX - 74, 144, 4, 1);
-        F.line(VPX + 2, VPY, VPX + 74, 144, 4, 1);
-        /* generations, walking away from us and down toward the city */
-        for (let i = 0; i < 6; i++) {
-          const t = 0.12 + i * 0.16, y = lerp(VPY + 6, 140, Math.pow(t, 1.6)), h = lerp(4, 24, t);
-          const x = 96 + Math.sin(i * 2.1) * lerp(2, 24, t) * 0.35;
-          F.fig(x, y, h, { mode: "walk", phase: u * 3.35 + i * 0.4, face: 1, lean: 0.03, headTurn: 0.3 }, 6);
-          /* PLUCKED FROM THEIR SECRET PLACES: a soul lifts straight off two
-             of the walkers and does not come back down — it is taken, not
-             dropped and re-caught */
-          if (i === 2 || i === 4) {
-            const t2 = ss(0.10 + i * 0.05, 0.55 + i * 0.05, u);
-            if (t2 > 0.01 && t2 < 0.97) F.disc(x, y - h * 0.9 - t2 * 30, 1.0, 5);
+        /* THE COLLECTIVE CONSCIOUSNESS FILLS. The souls plucked off the road
+           below go up into it and stay, and in an ink field a thing that is
+           filling gets DARKER — so the sky is walked from level 1 to level 3
+           on the ordered schedule across the whole movement, dot by dot, and
+           only where it is still sky: the cut stars and the city's own ink
+           are left exactly where they are. Rejected: a drift of separate
+           motes standing in for the souls arriving, which at this scale is
+           grit on the lens. The tone IS the count. */
+        const filled = ss(0.04, 0.96, u);
+        const lv = 1 + filled * 2.2, lo = Math.floor(lv), fr = lv - lo;
+        F.map((x, y, v) => {
+          if (v === 1 && y < waterY) return F.bayer(x, y) < fr ? lo + 1 : lo;
+        });
+        waterBelow(F, waterY, u);
+        /* YELLOW BRICK ROAD, AS A SURFACE AND NOT A LADDER. Laid down over
+           the sea with `set`, so the swell stops at its kerb; mottled two
+           cells at a time, coursed, and jointed between courses with the
+           bond staggered. The first pass drew rungs between two rails with
+           nothing in between, which is a railway, not a road. */
+        for (let y = Math.ceil(NEAR); y < F.H; y++) {
+          const half = HW(y), x0 = Math.max(0, Math.round(96 - half));
+          for (let x = x0; x <= 96 + half && x < F.W; x++) {
+            F.put(x, y, F.noise(x >> 1, y >> 1) > 0.74 ? 2 : 1);
           }
         }
-        /* three comets converging on the capital dome's tip, one carrying
-           this film's single accent — the soul the poem names */
-        comet(F, u, 0.05, 0.55, 8, -8, 100, 22, 6, false);
-        comet(F, u, 0.20, 0.68, 186, 2, 100, 22, 6, false);
-        comet(F, u, 0.34, 0.86, 150, -12, 100, 22, 6, true);
+        for (let k = 0; k <= 13; k++) {
+          const y = DY(k / 13), half = HW(y), yN = DY(Math.min(1, (k + 1) / 13));
+          const bw = lerp(3.2, 16, (y - NEAR) / (DEEP - NEAR));
+          for (let bx = -half + (k % 2 ? bw * 0.5 : 0); bx < half; bx += bw) {
+            const x0 = Math.max(-half, bx), x1 = Math.min(half, bx + bw - 2.4);
+            if (x1 - x0 > 0.6) F.line(96 + x0, y, 96 + x1, y, 3, 1);
+            if (k < 13 && bx > -half + 0.5) F.line(96 + bx, y + 1, 96 + bx * HW(yN) / HW(y), yN - 1, 2, 1);
+          }
+        }
+        F.line(96 - HW(NEAR), NEAR, 96 - HW(DEEP), DEEP, 4, 1);
+        F.line(96 + HW(NEAR), NEAR, 96 + HW(DEEP), DEEP, 4, 1);
+        /* GENERATIONS, EASED DOWN. Twelve of them at one shared pace, stationed
+           from the gate back past the bottom edge of the frame, so the road
+           empties from the front and fills again from behind us for the
+           whole movement: the word in the line is plural and it is a plural
+           that does not run out. Rejected: six bodies at a pace proportional
+           to what each had left, so that they would arrive together — they
+           bunched into one black lump at the vanishing point, which is what
+           six people converging on four cells looks like. */
+        const D0 = [0.30, 0.45, 0.60, 0.76, 0.92, 1.08, 1.24, 1.40, 1.56, 1.72, 1.88, 2.04];
+        for (let i = 0; i < D0.length; i++) {
+          const d = D0[i] - u * 0.92;
+          if (d < 0.03 || d > 1.12) continue;         // through the gate, or not yet past us
+          const y = DY(d), h = Math.min(34, SZ(y));
+          const x = 96 + Math.sin(i * 2.1) * HW(y) * 0.42;
+          F.fig(x, y, h, { mode: "walk", phase: u * 5.35 + i * 0.6, face: 1, lean: 0.03, headTurn: 0.28 }, 6);
+          /* PLUCKED OUT OF THEIR SECRET PLACES: it leaves the body once and
+             goes up into the sky that is filling — taken, not dropped and
+             re-caught, so nothing here ever descends but the comets. */
+          const t2 = ss(0.04 + i * 0.09, 0.54 + i * 0.09, u);
+          if (t2 > 0.01) F.disc(x, y - h * 0.92 - t2 * (y + 14), Math.max(0.7, 1.7 - t2), 5);
+        }
+        /* three comets converging on the capital dome's own tip, one
+           carrying this film's single accent — the soul the poem names,
+           which is left standing on that dome and will be the beacon lit on
+           it in M6. Their throws are shallow and start at the frame's own
+           edges: the sky here is thirty cells deep, so a comet lobbed from
+           high above it spends four fifths of its window off the top and
+           arrives as a dot with no streak behind it, which is what the
+           first pass of this movement did three times over. */
+        const tipX = CAPITAL.x + CAPITAL.w / 2, tipY = GY - CAPITAL.h + 5;
+        comet(F, u, 0.06, 0.55, -12, 2, tipX, tipY, 7, false);
+        comet(F, u, 0.26, 0.70, 206, 5, tipX, tipY, 7, false);
+        comet(F, u, 0.46, 0.92, 22, 0, tipX, tipY, 7, true);
+        if (u > 0.92) F.put(Math.round(tipX), Math.round(tipY), 8);
       },
     },
     {
@@ -425,10 +502,12 @@ export default {
     {
       label: "CROSSHAIRS TO CONTINUUMS", seconds: 13,
       line: "I know my soul — and it could stay here forever. Leaving behind crosshairs for continuums, and strains for serendipity.",
+      /* three cues, and each one is a reticle going whole: the swaps are
+         timed to land on them rather than near them */
       cues: [
-        { at: 0.20, f: 660, decay: 0.30, gain: 0.40, partials: [1, 2.0, 3.0], noise: 0.20, nDecay: 0.02, seed: 651 },
-        { at: 0.50, f: 880, decay: 0.35, gain: 0.40, partials: [1, 2.0, 3.0], noise: 0.20, nDecay: 0.02, seed: 652 },
-        { at: 0.80, f: 1100, decay: 0.40, gain: 0.42, partials: [1, 2.0, 3.0], noise: 0.15, nDecay: 0.02, seed: 653 },
+        { at: 0.16, f: 660, decay: 0.30, gain: 0.40, partials: [1, 2.0, 3.0], noise: 0.20, nDecay: 0.02, seed: 651 },
+        { at: 0.46, f: 880, decay: 0.35, gain: 0.40, partials: [1, 2.0, 3.0], noise: 0.20, nDecay: 0.02, seed: 652 },
+        { at: 0.76, f: 1100, decay: 0.55, gain: 0.44, partials: [1, 2.0, 3.0], noise: 0.15, nDecay: 0.02, seed: 653 },
       ],
       draw(u, F) {
         cityscape(F, 999, u, 0.55);   // fully surfaced now; waterY plays no further part
@@ -438,27 +517,61 @@ export default {
            streets, each on its own clock so the frame holds crosshairs and
            continuums at once rather than cutting between them */
         const CROSS = [
-          [20, 22, 5], [46, 14, 4], [150, 18, 5], [172, 28, 4],
-          [34, 60, 6], [64, 40, 5], [124, 36, 6], [158, 56, 5],
-          [14, 96, 5], [178, 100, 5], [60, 112, 4], [132, 108, 4],
-          [96, 50, 6], [96, 130, 5],
+          [20, 22, 5], [150, 18, 5], [34, 60, 6], [124, 36, 6],
+          [64, 40, 5], [158, 56, 5], [14, 96, 5], [178, 100, 5],
+          [60, 112, 4], [132, 108, 4],
         ];
         for (let k = 0; k < CROSS.length; k++) {
           const [cx, cy, arm] = CROSS[k];
-          const start = (k / CROSS.length) * 0.55;
-          crossRing(F, cx, cy, arm, ss(start, start + 0.22, u), 6);
+          const start = 0.04 + (k / CROSS.length) * 0.72;
+          const sw = ss(start, start + 0.16, u);
+          if (sw < 1) { crossRing(F, cx, cy, arm, sw, 6); continue; }
+          /* AND THEN IT DOES NOT STOP. A ring already has the property the
+             line wants — no ends, no gap — but a ring that holds still is
+             only a ring; the continuum is that it keeps widening after the
+             aim has been let go of. Rejected: floating them away upward,
+             which reads as the continuum leaving rather than as the man
+             staying inside it. Also rejected: fifty cells of growth apiece,
+             which by the last third had the sky full of overlapping circles
+             — a compass drawing, not a city. Each one now opens by its own
+             ten to twenty-four and no two arrive at the same size. */
+          F.ring(cx, cy, arm + ss(start + 0.16, start + 0.96, u) * (10 + (k % 3) * 7), 6, 1);
         }
         /* the one figure the line is spoken in — not the crowd's "we" but a
-           single "I," standing still while everything around it resolves.
-           The head sweeps slowly across the crosshairs still resolving
-           around it — watching its own aim loosen into a ring, which is
-           the only thing this movement is about. */
-        F.fig(96, GY, 34, {
-          mode: "stand", arms: "open", guise: "poet", phase: u * 1.7,
-          weight: 0.4, headTurn: Math.sin(u * TAU * 0.5) * 0.5,
-        }, 7);
+           single "I", inside the aperture from the first frame because he is
+           the thing that stays. STRAINS FOR SERENDIPITY IS A BODY: he starts
+           held — braced, weight jammed onto one leg, near hand tucked at the
+           chest, chin down — and unclenches across the whole movement into a
+           man standing level with an open hand and his head up. One number
+           does all of it, the same number the scope opens on. */
+        const open = smooth(clamp01((u - 0.08) / 0.86));
         const R = F.rng(65);
         for (let i = 0; i < 5; i++) F.fig(18 + i * 40 + R() * 10, GY, 13 + R() * 4, { mode: "stand", arms: "down" }, 5);
+        F.fig(96, GY, 34, {
+          mode: "stand", arms: "hold", guise: "poet", phase: u * 1.7,
+          weight: lerp(0.16, 0.5, open), crouch: lerp(0.26, 0, open),
+          headTilt: lerp(-0.35, 0.30, open),
+          headTurn: Math.sin(u * TAU * 0.5) * 0.35,
+          gesture: [lerp(4.5, -12, open), lerp(21, 27.5, open)],
+        }, 7);
+        /* THE SCOPE OPENS, AND IT IS THE LAST THING DRAWN. What the line
+           leaves behind is not only the shape of a crosshair, it is looking
+           at anything through one — so the movement begins inside the
+           instrument, with the city dim outside a small aperture, and ends
+           with the aperture wider than the frame. Outside, paper takes a
+           tone and every drawn cell goes two levels darker, which keeps the
+           skyline a silhouette instead of blanking it: the rest of the city
+           is still there, it is only not being aimed at. Rejected: a solid
+           black surround — 02's iris is that, and is a pupil; this is a
+           barrel. The aperture is centred on the man, not on the frame,
+           because what he could stay in forever is what the light widens to
+           include. */
+        const scopeR = lerp(36, 158, Math.pow(u, 0.86));
+        F.map((x, y, v) => {
+          const d = Math.hypot((x - 96) * 0.94, y - 108) - scopeR;
+          if (d <= 0) return;
+          if (F.bayer(x, y) < d / 5) return v > 0.5 ? Math.min(7, v + 2) : 3;
+        });
       },
     },
     {

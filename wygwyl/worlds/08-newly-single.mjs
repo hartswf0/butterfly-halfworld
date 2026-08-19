@@ -15,7 +15,12 @@
    is a planet because it curves at all, and "much larger than my own" is
    the fact that you cannot see it curve. The equator is ticks nailed into
    that line, not a second line drawn over it — a boundary marked is a
-   boundary kept.
+   boundary kept. Over it, in M4, hangs the only sky this film draws: thick
+   air at 4 and 5, never at 3, because the soul is drawn at 3 and a level it
+   shares with the sky is a level it cannot be seen against. "Much hotter" is
+   then a subtraction rather than an addition — the glare leaves the sun and
+   blows that air off the frame, dot by dot, until the plain is standing in
+   white and there is nothing left up there to look at.
 
    ONE ACCENT, THE SPARK OF HIM. It does not exist while he is whole (M1) or
    once he is settled and unresolved (M7 gives it back its quiet). Everywhere
@@ -159,16 +164,23 @@ function planetGround(F, cy) {
   return gy;
 }
 
-/* one dashed stream, flowing — drawn as connected segments with real width
-   rather than single dots, because a pour that is one cell wide reads as a
-   sprinkle. The dash offset steps with u so the water reads as moving
-   without ever being two different drawings crossfaded. */
-function pour(F, u, x0, y0, x1, y1, lvl) {
-  const n = 15, off = Math.floor(u * 13);
-  for (let k = 0; k < n; k++) {
-    if (((k + off) % 4) >= 2) continue;
-    const t0 = k / n, t1 = (k + 1) / n;
-    F.line(lerp(x0, x1, t0), lerp(y0, y1, t0), lerp(x0, x1, t1), lerp(y0, y1, t1), lvl, 1.5);
+/* ONE POUR, BRAIDED. A single dashed line is a scratch, and three of them
+   ruled across an empty frame is a diagram of a pour — which is what the first
+   version of M5 rendered as. A column of falling water is several strands that
+   spread as they fall and step downstream on their own dash phases, so no two
+   of them are ever in register and the fall is motion rather than two drawings
+   that happen to differ. */
+function pour(F, u, x0, y0, x1, y1, lvl, seedK) {
+  const n = 24;
+  for (let s = -1; s <= 1; s++) {
+    const off = Math.floor(u * 26 + s * 3 + seedK);
+    for (let k = 0; k < n; k++) {
+      if ((((k - off) % 4) + 4) % 4 >= 2) continue;
+      const t0 = k / n, t1 = (k + 1.05) / n;
+      const w0 = s * (1.2 + t0 * 2.6), w1 = s * (1.2 + t1 * 2.6);
+      F.line(lerp(x0, x1, t0) + w0, lerp(y0, y1, t0), lerp(x0, x1, t1) + w1, lerp(y0, y1, t1),
+             s === 0 ? lvl : Math.max(2, lvl - 2), 1.4);
+    }
   }
 }
 
@@ -328,37 +340,110 @@ export default {
       line: "Now let us put my soul in the middle of an open field — at the equator of a planet much larger than my own, and much hotter.",
       cues: [
         { at: 0.05, f: 46, decay: 1.2, gain: 0.5, partials: [1, 1.4, 2.1], noise: 0.5, nDecay: 0.4, seed: 831 },
-        { at: 0.62, f: 2600, decay: 0.15, gain: 0.3, partials: [1, 1.8], noise: 1.0, nDecay: 0.08, seed: 832 },
+        { at: 0.34, f: 98, decay: 0.30, gain: 0.45, partials: [1, 1.7, 2.6], noise: 0.85, nDecay: 0.05, seed: 832 },
+        { at: 0.72, f: 2600, decay: 0.15, gain: 0.3, partials: [1, 1.8], noise: 1.0, nDecay: 0.08, seed: 833 },
       ],
       draw(u, F) {
         F.clear(0);
+        /* MUCH HOTTER IS A SUBTRACTION. Past a certain temperature heat stops
+           adding anything to a picture and starts taking the picture away, so
+           the one monotone quantity this movement runs on is the GLARE: it
+           leaves the sun and blows the thick air off the sky, dot by dot on
+           the ordered schedule, until there is nothing left up there to look
+           at and the plain is standing in white. Rejected: haze that thickens
+           with u, which is what the first pass drew — the frame got darker as
+           it got hotter and read as weather closing in, not as noon. */
+        const heat = u;
+        /* the sun climbs toward the vertical, which is the only thing the word
+           "equator" actually promises, and it grows the whole way up */
+        const sunX = lerp(164, 110, smooth(heat)), sunY = lerp(46, 21, smooth(heat));
+        const sunR = lerp(8, 17, heat), glare = lerp(5, 120, heat);
+        /* THE AIR IS ONE SURFACE WITH NO GAP IN IT — rule 3's exception, taken
+           deliberately, because a sky broken into runs is a set of clouds and
+           this planet has none. It is held at 4 and never at 3: the soul is
+           drawn at 3, and a level it shares with the sky is a level it cannot
+           be seen against.
+           ITS BOTTOM EDGE IS A DITHER BAND, NOT A COASTLINE. The first pass
+           gave it a big slow wobble and a heavier band along the bottom, and
+           the render came back with a range of hills standing where the sky
+           was meant to be — the eye reads a dark mass with a rolling top edge
+           as land every time, whatever it is called. Thinning it downward on
+           the ordered schedule reads as air instead, because air is the only
+           thing that ends by running out. */
+        F.map((x, y, v) => {
+          const lip = 58 + (F.n2(x * 0.10, 3.7) - 0.5) * 5;
+          if (y > lip) return;
+          if (y > lip - 13 && F.bayer(x, y) > (lip - y) / 13) return;
+          const d = Math.hypot((x - sunX) * 0.9, y - sunY);
+          const g = glare - d;
+          if (g > 7) return 0;
+          if (g > -7 && F.bayer(x, y) < (g + 7) / 14) return 0;
+          return y < 16 ? 5 : 4;
+        });
         const gy = planetGround(F, 118);
         /* MY OWN PLANET, FOR SCALE. A whole second horizon would have
            argued with the one that matters; a marble in the corner argues
            nothing — it just makes the big one big by being small next to
-           it. */
-        F.disc(15, 15, 3, 4); F.ring(15, 15, 4.2, 3, 1);
-        /* a sun too close and too big for its own sky — that is "hotter" */
-        const sunX = 158, sunY = 20;
-        F.disc(sunX, sunY, 13, 6);
-        for (let k = 0; k < 9; k++) {
-          const a = k / 9 * TAU + u * 0.25;
-          F.line(sunX + Math.cos(a) * 15, sunY + Math.sin(a) * 15, sunX + Math.cos(a) * 22, sunY + Math.sin(a) * 22, 5, 1);
-        }
-        /* heat off the ground, rising and wavering, never settling into a
-           shape — a gradient would have been smoke, this has to be heat */
-        for (let k = 0; k < 16; k++) {
-          const x = 8 + k * 12, y0 = gy(x) - 2, wob = Math.sin(u * TAU * (1.4 + k * 0.1) + k) * 3;
-          F.line(x, y0, x + wob, y0 - 9, 2, 1);
+           it. Drawn as paper with a rim so it is the same small world in a
+           thick sky and in a white one. Rejected: shrinking it across the
+           movement, which says it is going away; the line says it is smaller,
+           not that it is leaving. */
+        F.disc(15, 15, 4.5, 0, true); F.ring(15, 15, 5.4, 6, 1);
+        /* heat off the ground: SHORT SIDEWAYS RIPPLES STACKED IN THE AIR, and
+           the tiers come up one at a time as the temperature climbs, so the
+           count is the thermometer. Two drafts got this wrong the same way —
+           an upright stroke that leans a little reads as a mast, and an
+           upright stroke that wavers and is rooted at the ground line reads as
+           a tuft of grass, on the one planet whose entire claim is that the
+           field is empty. Heat displaces what is behind it SIDEWAYS; drawn
+           sideways, and standing clear of the soil, it cannot be mistaken for
+           anything that grows. */
+        for (let k = 0; k < 34; k++) {
+          const bx = 6 + F.noise(k, 21) * 176;
+          const tier = k % 5;
+          const on = clamp01(heat * 1.9 - tier * 0.16 - F.noise(k, 7) * 0.35);
+          if (on < 0.15) continue;
+          const y = gy(bx) - 4 - tier * 4.5;
+          const wob = Math.sin(u * TAU * (0.9 + tier * 0.18) + k * 1.7) * 3.4;
+          const len = (4 + F.noise(k, 33) * 5) * (0.4 + on * 0.6);
+          F.line(bx + wob, y, bx + wob + len, y - 1, tier > 2 ? 2 : 3, 1);
         }
         /* THE FIELD IS OPEN, WHICH MEANS EMPTY. Rejected: scattering rocks
            or scrub to fill it — the line's whole claim is that there is
            nothing here but him and the curve of the ground. */
-        /* alone on a whole planet, looking up at the sun that makes it
-           "much hotter" — the one direction the line actually points */
-        soulFig(F, u, 96, gy(96), 26, { mode: "stand", arms: "open",
-          weight: lerp(0.3, 0.55, smooth(u)), headTilt: 0.4, headTurn: 0.3 }, 2.0, 0);
-        spark(F, 96, gy(96) - 26 * 0.885);
+        /* NOW LET US PUT MY SOUL. It is set down out of the air onto the middle
+           of the field, from the high right where M3 left it imagining, and the
+           equator is what its feet find. For the first beat it is inside air
+           heavier than it is and simply cannot be seen — a body at 3 in a sky
+           at 4 is not a faint body, it is no body — so it does not become a
+           figure until it is below the lip. That emergence is the arrival, and
+           it costs nothing but the order of two numbers. */
+        const drop = smooth(clamp01(u / 0.34));
+        const land = win(u, 0.29, 0.345, 0.38, 0.50);       // the knees taking it
+        const bake = ss(0.52, 0.96, u);                     // how far the heat is into him
+        const sx = lerp(113, 96, drop), sy = lerp(50, gy(96), drop), sh = lerp(21, 26, drop);
+        soulFig(F, u, sx, sy, sh, {
+          mode: "stand", arms: "open", rot: lerp(0.22, 0, drop),
+          weight: lerp(0.5, 0.28, drop) + bake * 0.34,
+          crouch: land * 0.24 + bake * 0.14,
+          headTilt: lerp(0.05, 0.45, drop) - bake * 0.80,
+          headTurn: lerp(-0.35, 0.5, drop) * (1 - bake * 0.7),
+          /* the shielding hand starts exactly where the open arm already had
+             it, so it comes up out of the pose instead of snapping into one */
+          gesture: [lerp(-sh * 0.31, sh * 0.19, bake), lerp(sh * 0.755, sh * 0.99, bake)],
+        }, 2.0, 0);
+        spark(F, sx, sy - sh * 0.885);
+        /* the sun is drawn AFTER the glare it is the source of. Drawn before,
+           it is inside the region its own light has already cleared, and the
+           map takes it. At 7, not 6: a sun one level darker than the sky it
+           hangs in is a smudge. */
+        F.disc(sunX, sunY, sunR, 7);
+        for (let k = 0; k < 9; k++) {
+          const a = k / 9 * TAU + u * 0.25;
+          const r0 = sunR + 2, r1 = sunR + lerp(4, 15, heat);
+          F.line(sunX + Math.cos(a) * r0, sunY + Math.sin(a) * r0,
+                 sunX + Math.cos(a) * r1, sunY + Math.sin(a) * r1, 6, 1);
+        }
       },
     },
     {
@@ -372,10 +457,18 @@ export default {
       draw(u, F) {
         F.clear(0);
         const gy = planetGround(F, 118);
-        /* the closest moons: too near to be background, too small to be
-           suns */
-        F.ring(28, 13, 4, 4, 1); F.disc(31, 11, 1, 3); F.ring(172, 9, 3, 4, 1);
-        const tx = 96, ty = gy(96) - 5;
+        /* THE ONE MONOTONE QUANTITY: how far down it has got him. Everything
+           in this movement is hung on it — the baths empty, the salt piles up,
+           the pool spreads, and the body opens out of the brace it walked in
+           with. The heat is the only thing here that does not run one way, and
+           it is drawn as the steam that is leaving. */
+        const cool = smooth(u);
+        /* the closest moons: too near to be background, too small to be suns.
+           Paper with a rim, so they read the same over the white plain that
+           the sun burned M4 down to. */
+        F.disc(28, 13, 4.5, 0, true); F.ring(28, 13, 5.4, 6, 1); F.disc(30, 11, 1.2, 4);
+        F.disc(172, 10, 3.4, 0, true); F.ring(172, 10, 4.2, 6, 1);
+        const tx = 96, ty = gy(96) - 4;
         /* THE ANGLES OF THE NEWEST RELIGIONS: three pours from three
            unrelated directions — one source would have been one religion,
            not several. Two carry an ice bath at their origin; the third is
@@ -383,27 +476,82 @@ export default {
            the same gesture at two ink weights, and the film never says
            which stream is which. */
         const STREAMS = [
-          { x0: 16, y0: 8, lvl: 5, ice: true },
-          { x0: 178, y0: 4, lvl: 3, ice: true },
-          { x0: 96, y0: 2, lvl: 4, ice: false },
+          { x0: 18, y0: 12, lvl: 5, ice: true, k: 0 },
+          { x0: 174, y0: 20, lvl: 3, ice: true, k: 2 },
+          { x0: 96, y0: 2, lvl: 4, ice: false, k: 4 },
         ];
         for (const s of STREAMS) {
-          if (s.ice) F.box(s.x0 - 7, s.y0 - 5, 14, 7, 5, 1);
-          pour(F, u, s.x0, s.y0, tx, ty, s.lvl);
+          if (s.ice) {
+            /* A BATH THAT IS BEING POURED OUT IS A BATH THAT IS EMPTYING. The
+               level inside it is the pour seen from the other end, and it is
+               the cheapest place in the frame to put the same number twice. */
+            const bw = 17, bh = 10;
+            F.box(s.x0 - bw / 2, s.y0 - bh, bw, bh, 6, 1);
+            const lv = Math.round(lerp(bh - 3, 0, cool));
+            if (lv > 0) F.rect(s.x0 - bw / 2 + 1, s.y0 - 1 - lv, bw - 2, lv, 4);
+            for (let q = 0; q < 3; q++)                       // ice, still floating on what is left
+              if (lv > 2) F.box(s.x0 - 6 + q * 5, s.y0 - 1 - lv, 3, 3, 6, 1);
+          }
+          pour(F, u, s.x0, s.y0, tx, ty, s.lvl, s.k);
         }
-        /* salt, off the water rather than in it — a scatter near the
-           landing, not a stream of its own */
+        /* where three streams land on one spot, water leaves it again */
+        for (let k = 0; k < 11; k++) {
+          const p = ((u * 3.1 + k * 0.317) % 1), a = Math.PI * (0.08 + k / 11 * 0.84);
+          const r = p * 17;
+          F.ink(Math.round(tx - Math.cos(a) * r), Math.round(ty - Math.sin(a) * r * 0.55 + p * p * 9 - 3), 4);
+        }
+        /* STEAM: cold water on ground the last movement left too hot to stand
+           on. It is the one quantity here that does not only grow — it comes up
+           when the water lands and it is gone once the ground has given in,
+           which is the whole of "cool me down" said once in a substance. */
+        const steam = win(u, 0.02, 0.18, 0.42, 0.84);
+        for (let k = 0; k < 30; k++) {
+          const bx = tx + (F.noise(k, 41) - 0.5) * 104;
+          const rise = (0.4 + F.noise(k, 43) * 0.9) * 30 * steam;
+          if (rise < 2.5) continue;
+          const t = ((u * 0.8 + F.noise(k, 45)) % 1);
+          const yy = gy(bx) - 2 - t * rise, drift = Math.sin(t * 4 + k) * (1.4 + t * 5);
+          F.line(bx + drift, yy, bx + drift + 3.5, yy - 1, t > 0.55 ? 1 : 3, 1);
+        }
+        /* THE POOL. It spreads from where the three streams land and it never
+           drains: "cool me down" is a quantity that only goes one way. By the
+           end it has reached both edges of the frame and stopped nowhere in it,
+           which is what the line's last sentence says out loud. A sheet of
+           standing water is rule 3's exception, taken deliberately — its whole
+           meaning is that it has no gap in it — and its outer edge is a
+           dithered arc rather than an end, so nothing here is ruled. */
+        const reach = lerp(4, 132, cool);
+        F.map((x, y, v) => {
+          if (v > 0.4 || y < gy(x) - 1) return;
+          const d = Math.abs(x - tx) + (F.n2(x * 0.08, 9.1) - 0.5) * 16;
+          if (d > reach) return;
+          if (d > reach - 11) return F.bayer(x, y) < (reach - d) / 11 ? 2 : undefined;
+          return y - gy(x) > 13 ? 3 : 2;
+        });
+        /* SALTED FROM THE CLOSEST MOONS: it comes off the water rather than in
+           it, and there is more of it every second — a count, spreading with
+           the pool that carries it. */
         const R = F.rng(51);
-        for (let k = 0; k < 10; k++) F.disc(tx + (R() - 0.5) * 20, ty + 2 + R() * 6, 0.8, 3);
+        for (let k = 0, n = Math.round(7 + cool * 34); k < n; k++) {
+          const a = R(), b = R();
+          F.disc(tx + (a - 0.5) * (24 + cool * 96), gy(96) + 1 + b * 6, 0.9, 5);
+        }
         /* the flinch: a small crouch and a downward head, timed to the same
            three `at` values the pours strike so the cold LANDS on the
-           picture the instant it lands on the ear */
+           picture the instant it lands on the ear. Under it runs the longer
+           motion — a body braced against M4's heat, opening as the cold works
+           through it: the crouch comes off, the weight settles, the head comes
+           up. Rejected: holding the flinch pose for the whole movement, which
+           made three separate shocks read as one continuous wince. */
         const flinch = Math.max(
           win(u, 0.06, 0.10, 0.13, 0.20),
           win(u, 0.38, 0.42, 0.45, 0.52),
           win(u, 0.70, 0.74, 0.77, 0.84));
         soulFig(F, u, 96, gy(96), 26, { mode: "stand", arms: "open",
-          crouch: 0.03 + flinch * 0.14, headTilt: -flinch * 0.5 }, 2.0, 0);
+          crouch: lerp(0.20, 0.02, cool) + flinch * 0.14,
+          weight: lerp(0.72, 0.42, cool),
+          headTilt: lerp(-0.35, 0.30, cool) - flinch * 0.5,
+          headTurn: lerp(0.30, 0, cool) }, 2.0, 0);
         spark(F, 96, gy(96) - 26 * 0.885);
         /* ONLY INFINITY WILL TELL: the ground the equator ticks are nailed
            to runs to both edges of the frame and stops nowhere in it. */

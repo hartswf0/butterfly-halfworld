@@ -9,6 +9,13 @@
    the diverging rings, the three roads) is staged honestly around that same
    number. Level 8 is spent exactly once, on the silver lining in M6, per the
    director's note — nowhere else in this file reads or writes it.
+
+   THE FIRST TWO MOVEMENTS ARE MASSES, NOT OUTLINES. M1's arch is a hole cut
+   in a filled wall that closes and deepens on him course by course, and M2's
+   vineyard is a filled field the light goes out of from the far end inward.
+   Both were line drawings on bare paper and both read as diagrams of a
+   scene rather than as the scene: at this size a tone is the only way to
+   have somewhere for a body to be.
    ========================================================================= */
 import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
 
@@ -19,6 +26,13 @@ import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
    broken the pure-function-of-u law the instant the film looped. */
 const AMP = [0.05, 0.15, 0.28, 0.42, 0.55, 0.70, 0.95];
 const scaleOf = (amp) => lerp(0.62, 1.32, amp);
+
+/* M1's three landings, named once. The cues fire on these values, the
+   courses of brick finish falling on them, and the settle in the body is
+   read off them — one array, so the sound and the weight arriving cannot
+   drift apart. M7 already carries the scar of that mistake in its own
+   comment: its icons used to arrive a tenth before their strike. */
+const NEST = [0.16, 0.50, 0.82];
 
 /* the meter: nine bars, gapped, never full-width. Height and ink both track
    amplitude; the per-bar jitter comes from n2 so a "quiet" reading is a
@@ -69,26 +83,58 @@ function archStage(G, cx, floorY, w, h, l) {
   G.line(cx + w / 2, floorY, cx + w / 2, floorY - h, l, 1.4);
   G.arc(cx, floorY - h, w / 2, Math.PI, TAU, l, 1.6);
 }
+/* THE SAME ARCH, CUT OUT OF A WALL INSTEAD OF DRAWN AS ONE. In M1 the arch
+   IS the weight, so it cannot be three thin strokes on bare paper — it has
+   to have mass behind it. The room is laid down as a filled tone and the
+   opening is where the mass is not, which reads as a lit wall where the
+   outline read as a schematic, and it puts the man inside something.
+   `tone` is fractional: the level between two rungs is dithered on the Bayer
+   schedule, so the wall can deepen a fifth of a level at a time without any
+   cell ever being two levels at once. */
+function archWall(F, cx, floorY, half, hgt, tone) {
+  const crown = floorY - hgt, spring = crown + half;
+  const lo = Math.floor(tone), fr = tone - lo;
+  for (let y = 0; y < floorY; y++) {
+    let hw = 0;
+    if (y >= spring) hw = half;
+    else if (y >= crown) hw = Math.sqrt(Math.max(0, half * half - (spring - y) ** 2));
+    const xL = cx - hw, xR = cx + hw;
+    for (let x = 0; x < F.W; x++) {
+      if (hw > 0 && x > xL && x < xR) continue;
+      F.put(x, y, F.bayer(x, y) < fr ? lo + 1 : lo);
+    }
+  }
+  /* the opening's own edge, so it reads as built and not merely absent */
+  F.line(cx - half, floorY, cx - half, spring, 6, 1.4);
+  F.line(cx + half, floorY, cx + half, spring, 6, 1.4);
+  F.arc(cx, spring, half, Math.PI, TAU, 6, 1.6);
+}
 function micStand(G, x, floorY, h, l) {
   G.line(x, floorY, x, floorY - h, l, 1.3);
   G.line(x - 6, floorY, x + 6, floorY, l, 1.6);
   G.ring(x, floorY - h - 3, 2.6, l, 1.3);
   G.disc(x, floorY - h - 3, 1.1, l);
 }
-/* the weight of these spoken words, staged literally: bricks pressing down
-   on the head, heaviest and widest closest to it. Rejected: individual
-   letterforms, illegible at this scale and beside the point — the line
-   names a WEIGHT, not a text. Drawn through G so it presses on the same
-   head the amplitude is growing. */
-function wordWeight(G, cx, headTopLocal, l) {
-  /* three bricks, stepped well clear of the head and of each other — the
-     first pass put the stack flush against the skull and it read as an odd
-     hairline instead of a separate load; the gap between bricks now has to
-     survive being shrunk by the movement's own (starved) scale, so it is
-     bigger, locally, than it needs to look once drawn. */
-  for (let k = 0; k < 3; k++) {
-    const w = 17 - k * 4, yy = headTopLocal - 4 - k * 7;
-    G.rect(cx - w / 2, yy - 4, w, 4, l);
+/* the weight of these spoken words, staged literally: three courses of
+   brick that come DOWN out of the top of the frame, one at a time, and
+   stack on his head. Rejected: individual letterforms, illegible at this
+   scale and beside the point — the line names a WEIGHT, not a text.
+   Rejected also: the first pass's three bricks that simply existed above
+   him for the whole movement, which is a hat. A weight that was always
+   there never lands, and a load that never lands cannot press.
+
+   Each course arrives ON its cue (the fall ends exactly at `gate`), and the
+   widest and heaviest is the one that gets there first and takes his head.
+   `s` is the movement's amplitude scale, so the load is starved with the
+   voice it is sitting on. */
+function wordWeight(F, cx, restY, u, gates, s) {
+  for (let k = 0; k < gates.length; k++) {
+    const p = ss(gates[k] - 0.13, gates[k], u);
+    if (p <= 0.001) continue;
+    const w = (19 - k * 4) * s, h = 5 * s, gap = 1.8 * s;
+    const y = lerp(-16, restY - h - k * (h + gap), p);
+    F.rect(cx - w / 2, y, w, h, 4);
+    F.box(cx - w / 2, y, w, h, 6, 1);
   }
 }
 /* a tapered stroke — the sole shape this film needs twice, once as a petal,
@@ -160,68 +206,163 @@ export default {
     {
       label: "CHIN NESTED", seconds: 13,
       line: "DJ, turn me up, please. Eyes wide shut, chin nested at the arch of the weight of these spoken words.",
+      /* the three courses landing, and nothing else. Every one of them is a
+         dull, short, inharmonic body — a brick is not a bell — and they
+         descend in pitch as the load gets heavier. */
       cues: [
-        { at: 0.12, f: 260, decay: 0.10, gain: 0.30, partials: [1, 2.2], noise: 0.5, nDecay: 0.03, seed: 701 },
-        { at: 0.70, f: 95, decay: 0.35, gain: 0.35, partials: [1, 1.6, 2.3], noise: 0.5, nDecay: 0.10, seed: 702 },
+        { at: NEST[0], f: 190, decay: 0.26, gain: 0.30, partials: [1, 1.63, 2.31], noise: 0.6, nDecay: 0.05, seed: 701 },
+        { at: NEST[1], f: 132, decay: 0.30, gain: 0.33, partials: [1, 1.58, 2.24], noise: 0.6, nDecay: 0.07, seed: 702 },
+        { at: NEST[2], f: 88, decay: 0.38, gain: 0.36, partials: [1, 1.52, 2.18], noise: 0.6, nDecay: 0.10, seed: 703 },
       ],
       draw(u, F) {
         const amp = clamp01(AMP[0] + (F.n2(1.7, u * 3) - 0.5) * 0.03);
-        const scale = scaleOf(AMP[0]), FLOOR = 124, cx = 96;
+        const scale = scaleOf(AMP[0]), FLOOR = 124, cx = 96, h = 40;
+        /* PRESS IS THE WHOLE MOVEMENT. One number, never decreasing: a slow
+           continuous settle plus three abrupt ones at the courses' own
+           landings, so the room is always closing AND articulates exactly
+           three times. It drives the opening's width and height, the wall's
+           tone, and the man's crouch and chin together — the arch coming
+           down on him and his head going down under it are one event, which
+           is what "chin nested at the arch of the weight" says.
+           Rejected: a pure staircase, which held thirteen still seconds
+           between three jumps and made a slideshow of a settling. */
+        const beats = (ss(NEST[0] - 0.12, NEST[0], u) + ss(NEST[1] - 0.12, NEST[1], u)
+                     + ss(NEST[2] - 0.12, NEST[2], u)) / 3;
+        const press = clamp01(0.45 * u + 0.55 * beats);
+        archWall(F, cx, FLOOR, lerp(58, 24, press), lerp(100, 41, press), 1 + press * 2.2);
         floorRuns(F, FLOOR);
         const G = rig(F, scale, cx, FLOOR);
-        archStage(G, cx, FLOOR, 74, 60, 3);
         micStand(G, cx - 16, FLOOR, 34, 6);
-        const h = 40;
-        /* the second cue is the weight of the words actually landing —
-           a small settle in the crouch on the same `at` the sound strikes,
-           so the bricks in wordWeight look like they have just come to
-           rest on him rather than always having been there */
-        const land = Math.exp(-(((u - 0.70) / 0.05) ** 2));
+        /* each landing is felt: a settle in the crouch on the same `at` the
+           sound strikes, so a course looks like it has just come to rest on
+           him rather than like a thing that was always there */
+        let land = 0;
+        for (const g of NEST) land = Math.max(land, Math.exp(-(((u - g) / 0.045) ** 2)));
         /* nested, bowed: a small forward rot carries the head down toward
            the mic rather than the whole torso folding, which read as
            sitting when the first pass tried it */
         G.fig(cx, FLOOR, h, {
-          mode: "stand", arms: "down", rot: 0.16, lean: 0.05, guise: "poet",
-          phase: u * 1.7, weight: 0.35, headTilt: -0.20, crouch: 0.04 + land * 0.10,
+          mode: "stand", arms: "down", rot: 0.16 + press * 0.06, lean: 0.05, guise: "poet",
+          phase: u * 1.7, weight: 0.35, headTilt: -0.20 - press * 0.22,
+          crouch: 0.04 + press * 0.16 + land * 0.09,
         }, 7);
-        wordWeight(G, cx + 4, FLOOR - h * 0.885 - h * 0.12, 5);
+        wordWeight(F, cx + 2, FLOOR - h * scale - 1.4 + press * 1.6, u, NEST, scale);
         meter(F, u, amp);
       },
     },
     {
       label: "VINEYARD GHOSTS", seconds: 13,
       line: "I have a love story to tell — of ghosts, whispering unfolded dilutions, birthed in purity, and dying in the vineyards of sun-soaked evergreen fields, unnourished.",
+      /* a birth and two dyings: the first strike is the pair arriving whole
+         and near, the other two are each ghost reaching the far end of the
+         rows and not coming back. Their `at` values are the same numbers
+         the walks are solved from. */
       cues: [
-        { at: 0.22, f: 220, decay: 0.5, gain: 0.28, partials: [1, 1.8, 2.6], noise: 0.85, nDecay: 0.30, seed: 711 },
-        { at: 0.78, f: 66, decay: 0.6, gain: 0.30, partials: [1, 1.5, 2.1], noise: 0.4, nDecay: 0.20, seed: 712 },
+        { at: 0.08, f: 220, decay: 0.5, gain: 0.28, partials: [1, 1.8, 2.6], noise: 0.85, nDecay: 0.30, seed: 711 },
+        { at: 0.64, f: 88, decay: 0.6, gain: 0.28, partials: [1, 1.5, 2.1], noise: 0.5, nDecay: 0.22, seed: 712 },
+        { at: 0.94, f: 66, decay: 0.7, gain: 0.30, partials: [1, 1.5, 2.1], noise: 0.4, nDecay: 0.20, seed: 713 },
       ],
       draw(u, F) {
         const amp = clamp01(AMP[1] + (F.n2(4.4, u * 3.4) - 0.5) * 0.03);
-        const scale = scaleOf(AMP[1]), HOR = 46, FLOOR = 118, vx = 96;
-        floorRuns(F, FLOOR, 4);
-        /* the rows recede to a vanishing point: purity near the viewer,
-           unnourished toward the horizon, so distance itself tells the
-           decay instead of a caption doing it. Levels skip 3 on purpose —
-           that level is reserved for the ghosts below, so the flicker map
-           only ever catches them, never a row or a post. */
-        for (let r = 0; r < 9; r++) {
-          const t = r / 8, x0 = 4 + t * 184, nourished = 1 - t;
-          const rowL = nourished > 0.66 ? 4 : nourished > 0.33 ? 2 : 1;
-          F.line(x0, FLOOR, lerp(x0, vx, 0.86), lerp(FLOOR, HOR, 0.86), rowL, 1);
-          for (let p = 1; p < 6; p++) {
-            const pt = p / 6;
-            const px = lerp(x0, vx, pt * 0.86), py = lerp(FLOOR, HOR, pt * 0.86);
-            if (F.noise(r, p) < nourished * 0.8 + 0.1) F.ink(px, py - 1, nourished > 0.66 ? 5 : nourished > 0.33 ? 2 : 1);
+        /* the vanishing point is off centre on purpose: with it at 96 the
+           middle row of eleven runs dead vertical up the middle of the
+           frame, which is correct perspective and looks like a dropped
+           wire. */
+        const HOR = 46, FLOOR = 118, vx = 112;
+        /* UNNOURISHED IS THE SUN GOING OFF THE FIELD, and it goes off the far
+           end first. One boundary, lumpy per column and dithered on the
+           ordered schedule, walks up the field from the horizon to our feet
+           across the movement and takes every row it passes with it: a vine
+           drawn at level 2 simply stops existing once the ground it stands
+           on is at 3, because ink only ever darkens. So the vineyard is not
+           annotated as dying, it dies.
+           Rejected: diluting the field toward paper instead of toward shade.
+           "Dilution" is the poem's word for what happens to the ghosts, and
+           it happens to them; a field losing its light is what leaves them
+           unnourished. */
+        /* a plain ramp, not a smoothstep: an eased front loiters at both
+           ends and this one has to cross the whole field steadily, the
+           way the light actually goes */
+        const shade = clamp01(u * 1.04);
+        const wob = [], top = [];
+        for (let x = 0; x < F.W; x++) {
+          wob.push((F.n2(x * 0.07, 5.5) - 0.5) * 0.22);
+          top.push(HOR + (F.n2(x * 0.09, 2.2) - 0.5) * 7);      // an evergreen treeline, never a ruled horizon
+        }
+        /* THE SUN ITSELF, going down behind the treeline — the shade above
+           is its own shadow reaching toward us, so the field is unnourished
+           BY something rather than merely getting darker. Drawn before the
+           ground, so the ground takes it as it sinks. */
+        F.disc(146, lerp(12, HOR + 7, shade), 6.5, 6);
+        const ground = (x, y) => {
+          const far = Math.min(0.985, (FLOOR - y) / (FLOOR - HOR));
+          const s = (far - (1 - shade) + wob[x]) * 3.4;
+          /* the ground's own tone is PLANTED: solving each cell back to the
+             row line it stands on makes the field darker along the rows and
+             barer between them, so the mass agrees with the drawing on top
+             of it. Rejected: a plain noise mottle, which at this density
+             reads as static rather than as a crop. */
+          const row = (x - vx * far) / (1 - far);
+          const f = Math.abs((((row + 8) / 20.8) % 1 + 1) % 1 - 0.5) * 2;
+          const base = f < 0.40 + (F.noise(x >> 1, y >> 1) - 0.5) * 0.34 ? 2 : 1;
+          if (s <= 0 || F.bayer(x, y) >= s) return base;
+          /* and it keeps going down. The front is where the light leaves,
+             but the far end left it first and has been leaving ever since,
+             so shade deepens with how long a cell has been in it — one more
+             rung, on a second dot schedule offset from the first so the two
+             thresholds cannot land on the same cells and band. */
+          const more = clamp01((s - 1.2) * 0.55);
+          return base + 2 + (F.bayer(x + 3, y + 5) < more ? 1 : 0);
+        };
+        for (let x = 0; x < F.W; x++)
+          for (let y = Math.round(top[x]); y < FLOOR; y++) F.put(x, y, ground(x, y));
+        /* THE ROWS ARE VINES, NOT WIRES: each one is ten separate lengths
+           with air between them, and its ink falls with distance, so the
+           recession is told by the drawing and not by a left-to-right
+           gradient. The first pass tied the decay to the row's INDEX, which
+           made the field darker on the left and paler on the right — a
+           lighting effect, in a movement about distance. */
+        for (let r = 0; r < 11; r++) {
+          const x0 = -8 + (r / 10) * 208;
+          for (let k = 0; k < 10; k++) {
+            const p0 = (k / 10) * 0.94, p1 = ((k + 0.72) / 10) * 0.94, near = 1 - p0;
+            const l = near > 0.6 ? 5 : near > 0.3 ? 3 : 2;
+            F.line(lerp(x0, vx, p0), lerp(FLOOR, HOR, p0), lerp(x0, vx, p1), lerp(FLOOR, HOR, p1), l, 1);
+            if (near > 0.45 && k % 3 === 1) {                    // stakes, only where they can still be seen
+              const px = lerp(x0, vx, p0), py = lerp(FLOOR, HOR, p0);
+              F.line(px, py, px, py - 3 * near, 5, 1);
+            }
           }
         }
-        /* ghosts: whispering, so they never speak in full ink — held at 3,
-           and taken apart dot by dot on the ordered schedule, never faded */
-        const G = rig(F, scale, 96, FLOOR);
-        /* ghosts do not breathe — the one free mark the pose vocabulary
-           gives a dead thing, spent here exactly as it is in 02 */
-        for (const gx of [62, 128]) G.fig(gx, FLOOR, 30, { mode: "stand", arms: "open", face: gx < 96 ? 1 : -1, guise: "poet", breath: 0, headTilt: -0.2 }, 3);
+        floorRuns(F, FLOOR, 5);
+        /* BIRTHED IN PURITY, DYING IN THE VINEYARDS. The love story's two
+           ghosts walk away from us down the rows, from whole and near to
+           small and gone at the vanishing point — the poet's own silhouette
+           and the turned back the suite already knows him by, because the
+           line says a love story and a love story has two people in it.
+           They do not breathe: the one free mark the pose vocabulary gives
+           a dead thing, spent here exactly as 02 spends it. */
+        for (const [gx0, off, guise, face] of [[52, 0.30, "poet", 1], [140, 0.0, "turned", -1]]) {
+          const p = (u + off) * 1.06;
+          if (p >= 1) continue;
+          const q = smooth(clamp01(p));
+          F.fig(lerp(gx0, vx, q), lerp(FLOOR, HOR + 3, q), lerp(36, 6, q), {
+            mode: "walk", phase: u * 5.35 + off * 4, face, guise, breath: 0, headTilt: -0.15,
+          }, 7);
+        }
+        /* WHISPERING UNFOLDED DILUTIONS. A ghost is never at full ink: its
+           cells are kept or given back to the field on the ordered schedule,
+           and the fraction kept falls with the same distance the vines fade
+           over — so walking away IS diluting, one mechanism and not two. The
+           dissolved cells return the exact ground they are standing in
+           rather than paper, which is what dilution means: not a hole, the
+           same field with less of them in it. */
         F.map((x, y, v) => {
-          if (v === 3 && F.bayer(x, y) > 0.30 + 0.30 * Math.sin(u * TAU * 2.2 + x * 0.05)) return 0;
+          if (v !== 7 && v !== 4) return;
+          const far = clamp01((FLOOR - y) / (FLOOR - HOR));
+          const keep = lerp(0.92, 0.22, far) * (0.86 + 0.14 * Math.sin(u * TAU * 2.2 + x * 0.05));
+          if (F.bayer(x, y) < keep) return;
+          return y < top[x] ? 0 : ground(x, y);
         });
         meter(F, u, amp);
       },

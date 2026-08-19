@@ -12,11 +12,14 @@
    again inside movement five itself. Words never erode as they shrink: a
    glyph mid-dissolve for most of a movement is not a word, it is noise, so
    every dissolve here is a short beat at one end and whole or absent
-   everywhere else. Elders are drawn hollow-headed, because presence without
-   mass is what a memory is. Hourglasses do not pour — pouring is a
-   transport, and this film has nothing left to move from one place to
-   another, only something to spend — so they burn outward from the neck
-   and never finish emptying. It ends in the widest silence in the film,
+   everywhere else. Elders are cut OUT of the past rather than drawn on top of
+   it: for one movement the film's polarity turns over, the ink is the memory
+   and the elders are the paper, and what ends them is not their leaving but
+   the dark they were visible against draining away. Hourglasses both run and
+   burn, and neither clock is allowed to finish — the sand falls, the glass
+   gutters, and the number of them still alight comes down to one, which is
+   the only answer this film gives to "is this a one-time occasion?".
+   It ends in the widest silence in the film,
    while the one ember this world is allowed drifts through the gap the
    wind has opened.
    ========================================================================= */
@@ -43,9 +46,9 @@ function brothers(F, gap, h, armsL, armsR, l, breathe = 0, u = 0) {
   const bx = breathe ? Math.sin(u * TAU * 1.3) * breathe : 0;
   /* THE BROTHERS BREATHE; THE ELDERS DO NOT. That single difference — a
      `phase` so the pose solver's own idle rise-and-fall actually runs,
-     against elder()'s hand-drawn line figure which has no such clock at
+     against elderCut()'s hand-drawn line figure, which has no such clock at
      all — is what tells a living man from a memory of one, for free, and
-     it is why elder() below is never rebuilt on top of F.fig. Weight
+     it is why elderCut() below is never rebuilt on top of F.fig. Weight
      settles onto opposite hips (mirrored by `face`) so two men standing
      and talking don't stand in the same diagram twice. */
   F.fig(CX - gap / 2 - bx, GROUND_Y, h, { mode: "stand", face: 1,
@@ -67,62 +70,133 @@ function heardRings(F, u, cy, n, maxR) {
   }
 }
 
-/* AN ELDER IS AN OUTLINE. The living men in this film get F.fig's filled
-   head; the one difference the eye needs to read "this one is a memory, not
-   a person" is a hollow head and nothing else — so this is built by hand
-   rather than by tinting a normal figure, which at low ink still read as
-   someone merely standing far away. */
-function elder(F, x, y, h, arms, l) {
-  const th = Math.max(1, h * 0.05);
+/* AN ELDER CUT OUT OF THE PAST. For one movement the polarity of the whole
+   film turns over: the yard in M3 is being remembered out of a dark, so the
+   ink is the past and the elders are the paper. Laid down with `set`, which is
+   how a line writes light into a dark field — F.line takes that flag and
+   F.ring does not, which is why the head here is a disc and not a hoop.
+   It does not need to be a hoop either. The earlier version of this drew an
+   elder as a dark outline with one hollow mark for a head, on the reasoning
+   that presence without mass is what a memory is; in reserve the whole body is
+   that hollow, so the one mark is no longer carrying the idea by itself. That
+   version is gone: M3 was its only caller. */
+function elderCut(F, x, y, h, arms) {
+  const th = Math.max(1.8, h * 0.10);
   const hip = [x, y - h * 0.46], sh = [x, y - h * 0.78], hd = [x, y - h * 0.885];
   const ft = [[x - h * 0.09, y], [x + h * 0.09, y]];
   const hn = arms === "up" ? [[x - h * 0.20, y - h * 1.02], [x + h * 0.20, y - h * 1.02]]
     : arms === "open" ? [[x - h * 0.30, y - h * 0.62], [x + h * 0.30, y - h * 0.62]]
     : [[x - h * 0.10, y - h * 0.38], [x + h * 0.10, y - h * 0.38]];
-  F.line(hip[0], hip[1], sh[0], sh[1], l, th);
-  F.line(hip[0], hip[1], ft[0][0], ft[0][1], l, th * 0.8);
-  F.line(hip[0], hip[1], ft[1][0], ft[1][1], l, th * 0.8);
-  F.line(sh[0], sh[1], hn[0][0], hn[0][1], l, th * 0.7);
-  F.line(sh[0], sh[1], hn[1][0], hn[1][1], l, th * 0.7);
-  F.ring(hd[0], hd[1], h * 0.10, l, 1);
+  F.line(hip[0], hip[1], sh[0], sh[1], 0, th * 1.35, true);
+  F.line(hip[0], hip[1], ft[0][0], ft[0][1], 0, th, true);
+  F.line(hip[0], hip[1], ft[1][0], ft[1][1], 0, th, true);
+  F.line(sh[0], sh[1], hn[0][0], hn[0][1], 0, th * 0.8, true);
+  F.line(sh[0], sh[1], hn[1][0], hn[1][1], 0, th * 0.8, true);
+  F.disc(hd[0], hd[1], h * 0.115, 0, true);
 }
 
-/* BURN, NOT POUR. Pouring is a transport — grains leaving the top bulb and
-   arriving in the bottom one — and this line has nothing left to move from
-   one place to another, only something to spend. So the sand does not fall:
-   it turns to ash IN PLACE, from the neck outward, and the ash never reaches
-   the outer edge — the burn radius is capped short of the corners, because
-   "will we make time?" is a question this film refuses to answer with an
-   empty glass. Smoke is the only thing that leaves, and it leaves upward. */
-function hourglass(F, u, cx, cy, w, h, seedK, l, withEmber) {
-  const hw = w / 2;
-  F.line(cx - hw, cy - h / 2, cx + hw, cy - h / 2, l, 1);
-  F.line(cx - hw, cy - h / 2, cx, cy, l, 1);
-  F.line(cx + hw, cy - h / 2, cx, cy, l, 1);
-  F.line(cx - hw, cy + h / 2, cx + hw, cy + h / 2, l, 1);
-  F.line(cx - hw, cy + h / 2, cx, cy, l, 1);
-  F.line(cx + hw, cy + h / 2, cx, cy, l, 1);
-  const burn = Math.min(0.58, u * 0.66);
-  const R = F.rng(seedK);
-  const n = Math.round(w * h * 0.10);
+/* THE CREED, TOLD. M1's hearts are dark rings leaving a body on paper; these
+   are light rings leaving one in the dark — the same law from the other side
+   of it, because a creed told decades ago still arrives the way a voice does.
+   Clipped at the yard so a ring never writes paper over ground the living are
+   standing on. */
+function creedRing(F, cx, cy, r, th) {
+  const n = Math.max(10, Math.ceil(TAU * r * 1.5));
   for (let k = 0; k < n; k++) {
-    const half = R() < 0.5 ? -1 : 1;
-    const t = R();
-    const yy = cy + half * t * (h / 2);
-    const localHw = hw * t;
-    const xx = cx + (R() * 2 - 1) * localHw;
-    F.ink(Math.round(xx), Math.round(yy), t < burn ? 3 : 1);
+    const a = k / n * TAU;
+    const px = cx + Math.cos(a) * r, py = cy + Math.sin(a) * r;
+    if (py > GROUND_Y - 3) continue;
+    F.disc(px, py, th / 2, 0, true);
   }
-  for (let k = 0; k < 4; k++) {
-    const sx = cx + (F.noise(seedK, k) - 0.5) * hw * 0.6;
-    for (let j = 0; j < 7; j++) {
-      const t = j / 7;
-      const yy = cy - t * h * 0.85 - u * 3;
-      const drift = Math.sin(t * 5 + k + u * 6) * (1.5 + t * 4);
-      F.ink(Math.round(sx + drift), Math.round(yy), 2);
+}
+
+/* AN HOURGLASS THAT IS ON FIRE AND STILL RUNNING. The first version of this
+   file refused both: the sand turned to ash in place, on the reasoning that
+   pouring is a transport and this line has nothing left to move — and the
+   glass held a clean outline for sixteen seconds. What that produced was a
+   diagram of an hourglass with a texture on it, held still. The line names two
+   clocks and both have to run. THE SAND FALLS, drawn as a mass leaving one
+   bulb and arriving in the other — filled runs, not a sprinkle, because a
+   quantity you are meant to watch go down has to have a level you can see.
+   THE GLASS BURNS: its outline is laid in short runs that go out where the
+   fire has been at it, flame stands off the rims, and smoke leaves upward.
+   Neither clock finishes on the one that matters — at the end of the movement
+   the survivor is still running and still alight, because "will we make time?"
+   is a question and this film will not answer it with an empty glass. */
+function hourglass(F, u, cx, cy, w, h, seedK, l, run, fire, ember) {
+  const hw = w / 2, hh = h / 2, top = cy - hh, bot = cy + hh;
+  /* the vessel, guttering. Seven runs a side and a run drops out once the
+     fire has eaten that far, so the glass is consumed rather than outlined. */
+  const seg = (x0, y0, x1, y1, kB) => {
+    for (let k = 0; k < 7; k++) {
+      if (F.noise(seedK * 7 + kB, k) < (1 - fire) * 0.02 + run * 0.30) continue;
+      const t0 = k / 7, t1 = (k + 0.92) / 7;
+      F.line(lerp(x0, x1, t0), lerp(y0, y1, t0), lerp(x0, x1, t1), lerp(y0, y1, t1), l, 1);
+    }
+  };
+  seg(cx - hw, top, cx + hw, top, 1); seg(cx - hw, bot, cx + hw, bot, 4);
+  seg(cx - hw, top, cx, cy, 2); seg(cx + hw, top, cx, cy, 3);
+  seg(cx - hw, bot, cx, cy, 5); seg(cx + hw, bot, cx, cy, 6);
+  /* THE UPPER BULB, EMPTYING. Its surface descends toward the neck and the
+     runs are never wider than the glass, so nothing here is a full-width bar. */
+  const surf = cy - hh * (1 - run);
+  for (let y = Math.ceil(surf); y < cy; y++) {
+    const half = hw * (cy - y) / hh - 1.1;
+    if (half > 0.6) F.rect(cx - half, y, half * 2, 1, 4);
+  }
+  /* THE LOWER BULB, FILLING, with a heap under the stream — sand landing makes
+     a cone, and the cone is most of what tells the eye which way this is going */
+  const pileTop = bot - hh * run * 0.90, apex = pileTop - hh * 0.30 * run;
+  for (let y = Math.ceil(cy) + 1; y <= Math.floor(bot); y++) {
+    const half = hw * (y - cy) / hh - 1.1;
+    if (half < 0.6) continue;
+    const hf = y >= pileTop ? half : (y > apex ? Math.min(half, (y - apex) * 0.95) : -1);
+    if (hf > 0.5) F.rect(cx - hf, y, hf * 2, 1, 4);
+  }
+  /* the stream, dashed and stepping downward, so falling is visible as motion
+     and not merely as two levels that happen to differ next frame */
+  if (run > 0.02 && run < 0.99) {
+    const off = Math.floor(u * 19);
+    for (let y = Math.ceil(cy) + 1; y < apex; y++) {
+      if ((((y - off) % 3) + 3) % 3 === 2) continue;
+      F.ink(Math.round(cx), y, 5);
     }
   }
-  if (withEmber) {
+  /* FLAME, ALONG THE RIMS. Each tongue is three segments off one point, dark at
+     the root and lighter at the tip, on its own flicker clock so no two of them
+     ever agree — a row of tongues in step reads as a fence of them. */
+  const tongue = (x, y, len, ph) => {
+    let px = x, py = y;
+    for (let j = 1; j <= 3; j++) {
+      const t = j / 3;
+      const nx = x + Math.sin(ph + t * 2.7) * len * 0.42 * t, ny = y - t * len;
+      F.line(px, py, nx, ny, t < 0.7 ? 6 : 4, t < 0.5 ? 1.5 : 1);
+      px = nx; py = ny;
+    }
+  };
+  const nT = Math.max(2, Math.round(2 + fire * 4));
+  for (let k = 0; k < nT; k++) {
+    const t = (k + 0.5) / nT;
+    const fl = h * (0.14 + 0.24 * F.noise(seedK, k + 3)) * fire
+             * (0.62 + 0.38 * Math.sin(u * TAU * (2.4 + k * 0.53) + seedK));
+    if (fl < 1.2) continue;
+    tongue(cx - hw + t * w, top, fl, seedK + k * 1.7 + u * 4);
+  }
+  for (const s of [-1, 1]) {
+    const fl = h * 0.30 * fire * (0.55 + 0.45 * Math.sin(u * TAU * 3.1 + s + seedK));
+    if (fl > 1.2) tongue(cx + s * hw, bot, fl, seedK + s + u * 5);
+  }
+  /* smoke: the only thing that leaves, and it leaves upward */
+  if (fire > 0.05) for (let k = 0; k < 4; k++) {
+    const sx = cx + (F.noise(seedK, k + 20) - 0.5) * w * 0.7;
+    for (let j = 0; j < 8; j++) {
+      const t = (j / 8 + u * 0.55 + F.noise(seedK, k)) % 1;
+      const yy = top - 3 - t * (h * 1.4 + 18);
+      const drift = Math.sin(t * 4.4 + k + u * 3.2) * (2 + t * 9);
+      F.ink(Math.round(sx + drift), Math.round(yy), t > 0.6 ? 1 : 2);
+    }
+  }
+  if (ember) {
     const flick = 0.5 + 0.5 * Math.sin(u * TAU * 9 + seedK);
     F.put(cx, cy, 8);
     if (flick > 0.55) F.put(cx + (flick > 0.78 ? 1 : -1), cy, 8);
@@ -267,20 +341,80 @@ export default {
       label: "ELDERS, NOW PAST", seconds: 13,
       line: "Reflecting on legacies, and creeds once told — of elders, now past.",
       cues: [
-        { at: 0.20, f: 220, decay: 0.9, gain: 0.35, partials: [1, 2.01, 3.02], noise: 0.2, nDecay: 0.10, seed: 125 },
-        { at: 0.62, f: 165, decay: 1.1, gain: 0.35, partials: [1, 2.01, 3.02], noise: 0.15, nDecay: 0.10, seed: 126 },
+        { at: 0.18, f: 220, decay: 0.9, gain: 0.35, partials: [1, 2.01, 3.02], noise: 0.2, nDecay: 0.10, seed: 125 },
+        { at: 0.52, f: 165, decay: 1.1, gain: 0.35, partials: [1, 2.01, 3.02], noise: 0.15, nDecay: 0.10, seed: 126 },
+        { at: 0.86, f: 82, decay: 1.7, gain: 0.30, partials: [1, 1.5, 2.2], noise: 0.10, nDecay: 0.25, seed: 132 },
       ],
       draw(u, F) {
+        /* THE PAST IS THE GROUND HERE AND THE ELDERS ARE THE FIGURE. Every
+           other movement in this film is black on light; this one turns over,
+           because what is being looked at is not the yard — it is the dark the
+           yard is being remembered out of. And that dark is the movement's one
+           quantity: it recedes from the edges inward, dot by dot on the ordered
+           schedule, until it has gone and the two brothers are standing in a
+           plain bright yard with more space between them than they started
+           with. THE ELDERS DO NOT LEAVE. What leaves is the only thing they
+           were ever visible against, which is what "now past" actually
+           describes and what a memory actually does.
+           REJECTED: three faint line figures on paper, held still for fifteen
+           seconds, which is what this movement was — a legible diagram of the
+           idea, and a photograph of it. */
+        const gone = ss(0.10, 0.94, u);
+        /* IT DRAINS DOWNWARD, AND THE ELDERS GO HEAD FIRST. Rejected: an
+           ellipse contracting on the elders from the frame's edges — it
+           narrowed to a dome, and with the creed's own rings nested inside it
+           the frame read as a domed hall, which is a building and not a
+           memory. A ceiling that comes down is the same monotone quantity with
+           none of that in it, and it takes each elder from the crown
+           downward, which is the order a face actually goes in.
+           Both of its edges wander — the front on its own noise, the lower lip
+           across the yard line — so neither is ever a ruled bar. */
+        const front = lerp(-14, GROUND_Y + 8, gone);
+        F.map((x, y, v) => {
+          const lip = GROUND_Y + 1 + (F.n2(x * 0.06, 5.1) - 0.5) * 11;
+          if (y > lip) return;
+          const f = front + (F.n2(x * 0.05, 7.3) - 0.5) * 13;
+          if (y < f - 7) return;
+          if (y < f + 7) return F.bayer(x, y) < (y - f + 7) / 14 ? 3 : undefined;
+          return 3;
+        });
         ground(F);
-        brothers(F, 62, 32,
-          { arms: "down", lean: -0.05 }, { arms: "down", lean: 0.05 }, 7, 1.2, u);
-        /* THE ELDERS STAND IN THE ROOM THE BROTHERS' DISTANCE OPENED UP —
-           the space that "more space" bought is where the past now stands.
-           Faint (level 2-3): they are recalled, not present. One arm raised,
-           because a creed has to be told by somebody. */
-        elder(F, 74, GROUND_Y - 2, 26, "down", 2);
-        elder(F, CX, GROUND_Y - 4, 30, "up", 3);
-        elder(F, 118, GROUND_Y - 2, 24, "down", 2);
+        /* CREEDS ONCE TOLD, and told twice here — once on each bell. The reach
+           of the rings is the reach of the telling, so they go out further on
+           the second one and then there is no third. */
+        const tell = Math.max(win(u, 0.10, 0.18, 0.34, 0.44), win(u, 0.44, 0.52, 0.66, 0.78));
+        if (tell > 0.02) for (let k = 0; k < 3; k++) {
+          const p = (u * 1.05 + k / 3) % 1;
+          creedRing(F, CX, GROUND_Y - 33, lerp(4, 10 + 22 * tell, p), 1.2);
+        }
+        /* THE ELDERS STAND IN THE ROOM THE BROTHERS' DISTANCE OPENED UP — the
+           space that "more space" bought is where the past now stands. Three
+           of them near and told apart, and behind those a row of the rest,
+           because "legacies" and "elders" are both plural and a lineage is
+           not three people. One arm raised: a creed has to be told by
+           somebody. */
+        const G = F.rng(66);
+        for (let k = 0; k < 10; k++) {
+          const g1 = G(), g2 = G(), g3 = G(), g4 = G();
+          const gx = 8 + k * 19.5 + (g1 - 0.5) * 9;
+          if (Math.abs(gx - 82) < 14 || Math.abs(gx - CX) < 15 || Math.abs(gx - 110) < 14) continue;
+          elderCut(F, gx, GROUND_Y - 5 - g2 * 6, 17 + g3 * 7, g4 > 0.72 ? "open" : "down");
+        }
+        elderCut(F, 82, GROUND_Y - 2, 26, "down");
+        elderCut(F, CX, GROUND_Y - 4, 31, "up");
+        elderCut(F, 110, GROUND_Y - 2, 24, "down");
+        /* REFLECTING: the two of them look into it while it is there and back
+           at each other when it is not, and the gap opens the whole time. At
+           29 the pose solver draws them solid rather than contour-and-fill,
+           which is the difference between two black men standing in a grey
+           yard and two outlines of men lost in one. */
+        const look = win(u, 0.02, 0.14, 0.60, 0.84);
+        const carry = {
+          arms: "down", headTilt: -0.34 + look * 0.26,
+          weight: lerp(0.66, 0.34, smooth(u)), headTurn: look * 0.55,
+        };
+        brothers(F, lerp(54, 70, smooth(u)), 29,
+          { ...carry, lean: -0.04 }, { ...carry, lean: 0.04 }, 7, 1.2, u);
         typeset(F, "ELDERS", CX, 15, 9, 7, u, 0.08, 0.24, false);
       },
     },
@@ -291,22 +425,102 @@ export default {
       cues: [
         { at: 0.12, f: 1800, decay: 0.06, gain: 0.35, partials: [1, 1.4, 2.3], noise: 1.0, nDecay: 0.05, seed: 127 },
         { at: 0.44, f: 1600, decay: 0.06, gain: 0.30, partials: [1, 1.5, 2.1], noise: 1.0, nDecay: 0.05, seed: 128 },
-        { at: 0.76, f: 1700, decay: 0.06, gain: 0.30, partials: [1, 1.4, 2.4], noise: 1.0, nDecay: 0.05, seed: 129 },
+        { at: 0.78, f: 1700, decay: 0.06, gain: 0.30, partials: [1, 1.4, 2.4], noise: 1.0, nDecay: 0.05, seed: 129 },
       ],
       draw(u, F) {
         ground(F);
-        /* both of them reaching for the same object instead of for each
-           other — the question is between them now, not the embrace */
-        brothers(F, 78, 32,
-          { arms: "reach" }, { arms: "reach" }, 7, 1.6, u);
+        /* THE COUNT IS THE QUESTION. "Is this a one-time occasion?" is not a
+           mood, it is a number, and the number is how many of these are still
+           alight: the yard starts full of them and they go out one at a time,
+           each slumping as it burns down, until exactly ONE is left — the one
+           the two of them are still asking about, and the one whose ember the
+           wind carries off in the last movement. Rejected: three glasses held
+           for sixteen seconds, two of them flanking the third to make "sands"
+           plural. Plural was true of that frame and nothing else was.
+           A yard of them is also what finally gives this movement a mass to
+           work with; three line drawings on paper never had one. */
+        const R = F.rng(61);
+        const N = 12;
+        let lit = 1;                             // the one on the shelf, always
+        /* LAID ON A GRID, AND THERE ARE ONLY TWELVE. Placed by chance alone
+           they overlapped into knots of three and four and the yard read as
+           wreckage — the same failure 08's crowd had to be given a minimum
+           separation to cure. Eighteen was then too many for the grid as well:
+           at fifteen cells across apiece, eighteen of them need more frame
+           than the frame has, and a grid that has to be crowded is a scatter
+           with extra steps. Four to a rank, three ranks interleaved, fourteen
+           cells apart across and eight apart back — and any that would stand
+           where a brother is standing simply does not. */
+        for (let k = 0; k < N; k++) {
+          const r1 = R(), r2 = R(), r3 = R(), r4 = R();
+          const rank = k % 3, idx = (k / 3) | 0;
+          /* THEY DO NOT GO OUT LEFT TO RIGHT. Ordering the deaths by k made
+             them die in the order they were laid down, which is across the
+             frame, and the yard emptied like a fuse — by two thirds through it
+             was bare on the left and crowded on the right. Seven is coprime
+             with twelve, so stepping by it visits every glass exactly once in
+             an order that has nothing to do with where any of them stands. */
+          const ord = (k * 7) % N;
+          const dies = 0.04 + 0.62 * (ord / (N - 1)) + (r2 - 0.5) * 0.05;
+          const alive = 1 - ss(dies, dies + 0.13, u);
+          if (alive < 0.02) continue;
+          lit++;
+          /* NUDGED CLEAR OF THE LIVING. No uniform grid across this frame can
+             miss both brothers, and the render of the one that did not put a
+             burning glass directly behind a man's head — flames standing off
+             his crown like a candelabra, which is exactly the kind of
+             plausible picture the shooter's numbers never catch. Pushed aside
+             rather than dropped, so the count the movement is about survives
+             the composition fix. */
+          let x = 10 + idx * 46 + rank * 15.5 + (r1 - 0.5) * 5;
+          const half = lerp(70, 78, smooth(u)) / 2;
+          for (const bx of [CX - half, CX + half])
+            if (Math.abs(x - bx) < 13) x += (x < bx ? -1 : 1) * (13 - Math.abs(x - bx));
+          const gy = GROUND_Y - 1 - rank * 8;
+          const hk = (32 - rank * 6) * (0.82 + r3 * 0.36) * (0.36 + alive * 0.64);
+          hourglass(F, u, x, gy - hk / 2, hk * 0.64, hk, 70 + k, 5,
+                    clamp01(0.05 + u * 1.5 + r4 * 0.25), alive * 0.85, false);
+        }
         F.line(64, 96, 82, 96, 4, 1); F.line(110, 96, 128, 96, 4, 1);   // the shelf it sits on
-        hourglass(F, u, CX, 74, 30, 38, 41, 6, true);
-        /* THE SANDS ARE PLURAL: two small glasses flank the one being
-           watched, burning on their own slower schedule, unlit — this
-           world only spends one ember, on the one that is being asked
-           about */
-        hourglass(F, u * 0.7, 66, 96, 12, 15, 42, 5, false);
-        hourglass(F, u * 0.85, 126, 96, 12, 15, 43, 5, false);
+        /* the one being asked about. Its sand runs the whole movement and does
+           not run out; its fire only grows. */
+        hourglass(F, u, CX, 74, 32, 40, 41, 6, 0.06 + u * 0.60, 0.55 + 0.45 * ss(0.1, 0.8, u), true);
+        /* the smoke of eighteen fires standing in the top of the frame — the
+           same count again, in the substance the count leaves behind, thinning
+           as they go out. Only paper is eligible, so nothing already drawn is
+           dimmed by it. */
+        /* A LAYER, NOT A WEATHER SYSTEM. Two drafts spread it as a soft field
+           over the whole upper third and both came back as four or five big
+           masses hanging off the top edge, which reads as a stain on the paper.
+           Smoke from a room full of small fires does what smoke does indoors:
+           it collects under the ceiling in a layer, deepest at the top and
+           ragged along its own underside. The layer's depth is the count of
+           fires still lit, which is the movement's one number again in the
+           substance the number leaves behind. */
+        const haze = clamp01(0.10 + lit / 11);
+        const layer = 6 + haze * 34;
+        F.map((x, y, v) => {
+          if (v > 0.4) return;
+          const lip = layer + (F.n2(x * 0.07, 4.2) - 0.5) * 12;
+          if (y > lip) return;
+          const s = F.n2(x * 0.09 + u * 0.9, y * 0.11 - u * 1.4);
+          if (s > 0.62) return;                        // holes in it: smoke is not a slab
+          if (F.bayer(x, y) < 0.45 + clamp01((lip - y) / 12) * 0.55) return 2;
+        });
+        /* BOTH OF THEM REACHING FOR THE SAME OBJECT instead of for each other —
+           the question is between them now, not the embrace. The hands rise
+           over the movement rather than starting up: they ask it, and then
+           they reach. The two gestures are mirrored by hand because `gesture`
+           is a raw body-local point and does not know which way a body faces.
+           At 29 the solver draws them solid, which is what lets a glass stand
+           behind one and be cleanly hidden by it rather than showing through a
+           level-4 fill at exactly the weight of its own sand. */
+        const t = ss(0.15, 0.78, u);
+        const gx = lerp(-2.3, 9.5, t), gyH = lerp(13.5, 26.5, t);   // scaled to h=29's own shoulder
+        const carry = { headTilt: -0.05 + t * 0.20, weight: lerp(0.62, 0.40, smooth(u)) };
+        brothers(F, lerp(70, 78, smooth(u)), 29,
+          { ...carry, gesture: [gx, gyH], lean: 0.03 * t },
+          { ...carry, gesture: [-gx, gyH], lean: -0.03 * t }, 7, 1.6, u);
         /* held at ph 9, not 7 — at 7 the B-U pair compresses into a shape
            that reads as "W" at a glance, which is exactly the failure this
            film cannot afford in its own title word */

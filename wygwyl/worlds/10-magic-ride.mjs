@@ -16,9 +16,15 @@
    them, which is the same mechanism applied to a different substance.
 
    THE BIKE IS WHEELS AND ANGLES: two rings and a triangulated strut frame,
-   never a drawn silhouette. A head that turns to watch is a disc nudged off
-   its neck point toward the thing it's watching — rotating the whole small
-   body over-rotated at this scale and stopped reading as a person.
+   never a drawn silhouette — except in M1, which is the film's one close shot
+   and its one movement with a hand on the machine. There the frame's open
+   triangles fill in with plates as he works his aggressions into them, and the
+   bike stands at 1.5 against the 1.05 the ride runs at. It is still fixed at
+   frame centre; the camera has only stopped being far away. From the road it
+   is a skeleton again, which is all anyone sees of a machine going past.
+   A head that turns to watch is a disc nudged off its neck point toward the
+   thing it's watching — rotating the whole small body over-rotated at this
+   scale and stopped reading as a person.
 
    ONE ACCENT: a glint off the tank. It is lit by whatever light is out —
    moonlight in M1–M3, its own last spark as dawn reaches the bike in M4,
@@ -167,6 +173,103 @@ function rider(F, B, s, l) {
 /* the film's one accent, always on the same two cells of tank steel */
 function glint(F, x, y) { F.put(x, y, 8); F.put(x + 1, y, 8); }
 
+/* --------------------------------------------------------- the aggressions
+   "I rub my aggressions into your steel coverings" is not a mood, it is a
+   TRANSPORT — they start his and end the machine's — and a transport is the
+   one thing this world has an exact mechanism for. So the night he walks up
+   through is scored with them: short hard strokes, every one leaning at the
+   tank, filling the empty half of the frame the way a scratched plate fills
+   it. They are taken in from the OUTSIDE IN, farthest first, so the field
+   closes on the bike and is gone; and what the air gives up, the steel keeps.
+   REJECTED: a cloud of them travelling with him. A mark that follows a body
+   reads as an aura, and this man is not haunted — he is carrying something he
+   came here to put down. */
+const AGGR = 1060;
+function aggressions(F, u, drain, tx, ty, mx, my, mr) {
+  const R = F.rng(77);
+  for (let k = 0; k < AGGR; k++) {
+    const rx = R(), ry = R(), rl = R(), rs = R(), rw = R(), rv = R(), rc = R();
+    const x = rx * 212 - 10, y = ry * 158 - 8;
+    const d = Math.hypot(tx - x, ty - y);
+    if (d < 24) continue;                 // never on the machine itself; that is what the grain is for
+    if (Math.hypot(x - mx, y - my) < mr + 4) continue;      // and never across the moon
+    /* THE NIGHT IS SCORED TOP TO BOTTOM, not just below the horizon. Holding
+       the hatch under the skyline left the sky a dead flat tone for sixteen
+       seconds — forty-four per cent of the frame with nothing in it, in the
+       one movement whose whole subject is a man full of something. Above the
+       horizon the strokes go in at 7, because the night is already at 5 and a
+       mark that does not outrank its ground is not a mark. */
+    const sky = y < HORIZON;
+    /* WHEN A STROKE GOES IN is two thirds how near it already is and one third
+       its own business. Distance alone put the whole exchange in the middle of
+       the movement — the ring of strokes at any one radius left together, and
+       since most of the field sits at middling radii, the first and last three
+       seconds had nothing leaving at all. A third of it drawn by lot spreads
+       the same total evenly across the whole sixteen seconds and still clears
+       visibly from the outside in. */
+    if (drain > 0.06 + 0.88 * (rs * 0.35 + (1 - clamp01(d / 150)) * 0.65)) continue;
+    /* TWO DIRECTIONS, NOT ONE, AND NOT A RADIUS EITHER. Draft one leant every
+       stroke at the tank, on the reasoning that they were all going there, and
+       the render came back with a sunburst — seven hundred lines converging on
+       a point is a star whatever each of them is called, and a star is the
+       spinning thing this suite does not do. Draft two laid them all down at
+       the same angle and got rain, which is worse: it is a plausible picture
+       of weather this film never mentions, arriving in M1 and gone by M2. A
+       quarter of them crossing the rest, at half the length, is a HATCH —
+       plate scoring, which reads as somebody having gone at a surface, and
+       which is the only thing that was ever going to fill the empty half of
+       this frame with tone. The travelling is carried by the drain instead,
+       which is where it belonged. */
+    const a = (rc > 0.74 ? 0.55 : -1.05) + (rw - 0.5) * 0.5 + Math.sin(u * TAU * 0.75 + k) * 0.13;
+    const len = 4 + rl * 6;
+    F.line(x, y, x + Math.cos(a) * len, y + Math.sin(a) * len,
+           sky ? 7 : rv > 0.72 ? 5 : rv > 0.34 ? 3 : 2, 1);
+  }
+}
+/* THE COVERINGS ARRIVE. "your steel coverings" is the only place in the film
+   where the machine is described as having a skin, and it is the only movement
+   in which anybody is close enough to touch one, so this is the one movement
+   where the frame's open triangles fill in: three plates, each arriving on the
+   ordered schedule, in the order his hand works across them. From the road the
+   bike is a skeleton of rings and angles again, which is all you see of a
+   machine going past at speed.
+   REJECTED: grain scattered along the struts. It drew a speckled haze hanging
+   round the tank, which reads as exhaust, and a spreading stipple is a
+   gradient wearing a disguise. A plate that arrives dot by dot is the law's
+   own dissolve and it is also, unlike a haze, a shape. */
+const PANELS = [
+  [[-6, -15], [1, -19], [12, -17]],        // the plate under the top tube
+  [[1, -19], [15, -24], [12, -17]],        // the neck
+  [[-6, -15], [12, -17], [-3, -13]],       // the flank, forward of the pivot
+];
+function covering(F, cx, gy, s, amount) {
+  for (let p = 0; p < PANELS.length; p++) {
+    const arrive = clamp01((amount - p * 0.20) / 0.30);
+    if (arrive <= 0.01) continue;
+    const T = PANELS[p].map(q => [cx + q[0] * s, gy + q[1] * s]);
+    const gxc = (T[0][0] + T[1][0] + T[2][0]) / 3, gyc = (T[0][1] + T[1][1] + T[2][1]) / 3;
+    /* pulled in toward its own centroid, so the struts stay as edges and the
+       plate is a face inside them rather than a blot over them */
+    const Q = T.map(q => [lerp(q[0], gxc, 0.20), lerp(q[1], gyc, 0.20)]);
+    let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+    for (const q of Q) { x0 = Math.min(x0, q[0]); x1 = Math.max(x1, q[0]); y0 = Math.min(y0, q[1]); y1 = Math.max(y1, q[1]); }
+    for (let y = Math.ceil(y0); y <= Math.floor(y1); y++)
+      for (let x = Math.ceil(x0); x <= Math.floor(x1); x++) {
+        const a = (Q[1][0] - Q[0][0]) * (y - Q[0][1]) - (Q[1][1] - Q[0][1]) * (x - Q[0][0]);
+        const b = (Q[2][0] - Q[1][0]) * (y - Q[1][1]) - (Q[2][1] - Q[1][1]) * (x - Q[1][0]);
+        const c = (Q[0][0] - Q[2][0]) * (y - Q[2][1]) - (Q[0][1] - Q[2][1]) * (x - Q[2][0]);
+        if (!((a >= 0 && b >= 0 && c >= 0) || (a <= 0 && b <= 0 && c <= 0))) continue;
+        if (F.bayer(x, y) < arrive) F.ink(x, y, 6);
+      }
+  }
+}
+/* THE ONE CLOSE SHOT IN THE FILM. Everything after M1 is taken from the
+   distance a moving bike keeps; here he is close enough to put a hand on it,
+   so the machine stands at 1.5 against the 1.05 the ride runs at. The camera
+   has not moved — the film's one camera never does — it has only stopped
+   being far away. */
+const S1 = 1.5, STAND_X = 88;
+
 /* --------------------------------------------------------- the roadside
    A HEAD THAT TURNS IS A DISC OFFSET FROM ITS OWN NECK POINT, the same
    mechanism 04-nevermore uses for a bloom facing the camera. Rotating the
@@ -252,46 +355,95 @@ export default {
       label: "HOP ON", seconds: 13,
       line: "I wasn't looking for a ride, but here you are — blissful, and oddly sensitive. I rub my aggressions into your steel coverings, and hop on.",
       cues: [
-        { at: 0.16, f: 130, decay: 0.08, gain: 0.4, partials: [1, 1.6], noise: 0.6, nDecay: 0.02, seed: 1 },
-        { at: 0.34, f: 125, decay: 0.08, gain: 0.4, partials: [1, 1.6], noise: 0.6, nDecay: 0.02, seed: 2 },
+        { at: 0.14, f: 130, decay: 0.08, gain: 0.4, partials: [1, 1.6], noise: 0.6, nDecay: 0.02, seed: 1 },
+        { at: 0.29, f: 125, decay: 0.08, gain: 0.4, partials: [1, 1.6], noise: 0.6, nDecay: 0.02, seed: 2 },
         { at: 0.60, f: 300, decay: 0.10, gain: 0.35, partials: [1, 2.3], noise: 0.9, nDecay: 0.05, seed: 3 },
-        { at: 0.88, f: 55, decay: 0.6, gain: 0.55, partials: [1, 1.3, 1.8], noise: 0.8, nDecay: 0.3, seed: 4 },
+        { at: 0.87, f: 55, decay: 0.6, gain: 0.55, partials: [1, 1.3, 1.8], noise: 0.8, nDecay: 0.3, seed: 4 },
       ],
       draw(u, F) {
         /* NOTHING STREAMS YET. The bike is still and so is the world behind
            it — speed is M2's word, not this one's, so the parallax rig is
-           called with speed 0 rather than being a second mechanism. */
-        skyBase(F); starsAt(F, 1); moonAt(F, 150, 24, 9);
+           called with speed 0 rather than being a second mechanism. The wheels
+           are still too: a parked machine whose spokes creep round is a
+           machine nobody has walked up to yet. */
+        skyBase(F); starsAt(F, 1); moonAt(F, 150, 22, 12);
         skyline(F, 0, 0, 6);
         groundLine(F);
-        const B = bike(F, 96, ROAD, 1.28, u * 1.1, 7);
-        /* HE WALKS UP, THEN HE IS SIMPLY SEATED. A cut, not a cross-fade —
-           the dot law forbids blending two drawings but says nothing about
-           a cut, and "hop on" is an instant, not a dissolve. */
-        const walkP = clamp01(u / 0.55);
+        /* the machine's own geometry, solved before anything is drawn on it,
+           because both the hand and the hatch need to know where its tank is */
+        const tank = [96 - S1, ROAD - 16 * S1], seat = [96 + S1, ROAD - 19 * S1];
+        /* THE ONE NUMBER THIS MOVEMENT RUNS ON: how much of him is in the steel
+           yet. It opens as he comes over the horizon toward it and it only
+           rises — "here you are" is a machine that has started taking them
+           before he reaches it, and the hand is the last and hardest part of a
+           transfer already under way. Rejected: starting it at the touch,
+           which put the whole exchange inside four hundredths of the movement
+           and left the two thirds either side of it as a photograph. */
+        const rub = clamp01((u - 0.04) / 0.88);
+        aggressions(F, u, rub, tank[0], tank[1], 150, 22, 12);
+        const walkP = clamp01(u / 0.32);
         if (walkP < 1) {
-          const wx = lerp(14, B.footpeg[0] - 3, smooth(walkP));
-          /* phase 6.35, not 6 — an integer rate lands the gait's own
-             degenerate frame exactly on a QA sample. He looks at the bike
-             the whole walk up, not straight ahead — this is the one figure
-             in the film who is ever looking at anything but the road. */
-          F.fig(wx, ROAD, 32, { mode: "walk", phase: u * 6.35, face: 1, headTurn: 0.5 }, 7);
-        } else {
-          rider(F, B, 1.28, 7);
+          /* HE COMES IN FROM OFF-FRAME. "I wasn't looking for a ride" is a man
+             already walking, so the movement opens on him arriving rather than
+             on him standing beside a thing he has not yet found. The gait runs
+             three strides and lands feet-together exactly as he stops, so
+             walking becomes standing by a body planting rather than by a cut.
+             Three, not an integer multiple of u: the gait's degenerate frame
+             falls at walkP = 1, where the body is deliberately square anyway,
+             and every sample inside the walk misses it. */
+          F.fig(lerp(-18, STAND_X, walkP), ROAD, 46, {
+            mode: "walk", phase: walkP * 3, face: 1, lean: 0.05,
+            headTurn: 0.15 + ss(0.30, 0.95, walkP) * 0.55,   // he sees it before he reaches it
+          }, 7);
+        } else if (u < 0.87) {
+          /* AT THE MACHINE, THEN ON IT. The hand is a gesture target on the
+             tank's own cells rather than a reach in its direction, so he is
+             touching a thing that exists in the scene; it travels to the seat
+             as the mount comes on, the knees load under it, and the coil
+             extends into the cut. REJECTED: lifting his feet off the road for
+             the last three hundredths. Behind a machine that now has a body,
+             an airborne figure loses its legs to the panels and reads as a
+             man standing in a bike; and with the seat that far below his
+             shoulder the reaching arm came out half again as long as the
+             other one. A deep coil and a cut is the more legible hop, and
+             the cut is the one this movement was already built around. */
+          const load = ss(0.66, 0.83, u);
+          const push = ss(0.83, 0.868, u);      // the extension out of the coil
+          const fx = STAND_X + push * 3;
+          const hx = lerp(tank[0], seat[0], load), hy = lerp(tank[1] - 4, seat[1] - 1, load);
+          F.fig(fx, ROAD, 46, {
+            mode: "stand", face: 1, phase: u * 1.7,
+            weight: lerp(0.72, 0.18, load),
+            crouch: load * 0.34 * (1 - push),
+            lean: 0.04 + load * 0.10 + push * 0.10,
+            headTurn: 0.55, headTilt: -0.25 + load * 0.20 + push * 0.18,
+            gesture: [hx - fx, ROAD - hy],
+          }, 7);
         }
-        /* THE RUBBING: aggression worked into the steel as short radial
-           strokes at the tank, thickening the closer he gets to it. */
-        const touch = ss(0.28, 0.55, u);
-        if (touch > 0) {
-          const R = F.rng(77);
-          const n = Math.round(touch * 9);
-          for (let k = 0; k < n; k++) {
+        /* THE MACHINE IS DRAWN OVER HIM, NOT UNDER HIM. Placed in front, a
+           forty-six cell body standing where a man actually stands to mount
+           swallowed the tank, the seat and half the rear wheel, and the two
+           read as one silhouette. Behind it he is a man on the far side of a
+           motorcycle — head and shoulders over the frame line, legs between
+           the wheels — which is both the clearer picture and the truer one. */
+        const B = bike(F, 96, ROAD, S1, 0.62, 7);
+        covering(F, 96, ROAD, S1, rub);
+        /* THE RUBBING ITSELF: short radial strokes at the tank, thickening as
+           the hand works, so the point of entry is a mark on the steel and not
+           merely implied by a hand resting near it. */
+        if (rub > 0) {
+          const R = F.rng(78);
+          for (let k = 0, n = Math.round(rub * 11); k < n; k++) {
             const a = R() * TAU;
             F.line(B.tank[0] + Math.cos(a) * 3, B.tank[1] + Math.sin(a) * 3,
-                   B.tank[0] + Math.cos(a) * 5.5, B.tank[1] + Math.sin(a) * 5.5, 5, 1);
+                   B.tank[0] + Math.cos(a) * 6.5, B.tank[1] + Math.sin(a) * 6.5, 5, 1);
           }
           glint(F, B.tank[0], B.tank[1] - 1);
         }
+        /* HE IS SIMPLY SEATED. A cut, not a cross-fade — the dot law forbids
+           blending two drawings but says nothing about a cut, and it lands on
+           the movement's own low cue, which is the seat taking his weight. */
+        if (u >= 0.87) rider(F, B, S1, 7);
       },
     },
     {
