@@ -209,7 +209,15 @@ export const footage = {
       clipStart: 3.08,
       segments: [
         { u0: 0, u1: 0.3475,
-          opts: { channel: "luma", black: 0, white: 0.5, tone: "invert", dither: "bayer" },
+          /* channel "b", not luma — see BLEND-NOTES.md "THE LUMA BUG THIS
+             FILM FOUND". This shot (and most of MORE HAZE) is graded almost
+             entirely into one blue channel; luma's own weights (0.2126R +
+             0.7152G + 0.0722B) discount blue so hard that the silhouette and
+             its background come out nearly the same reading. Reading blue
+             directly restores the separation EXPERIMENTS.md's plain-luma
+             recipe relied on, which only ever tested a mixed-temperature
+             shot (the room, with a warm practical light in it). */
+          opts: { channel: "b", black: 0, white: 0.45, tone: "invert", dither: "bayer" },
           blend: "swap", blendOpts: {},
           mix: (p) => 0.05 + 0.17 * smooth(p) },
         { u0: 0.3475, u1: 1,
@@ -218,34 +226,39 @@ export const footage = {
           mix: (p) => 0.22 + 0.78 * smooth(p) },
       ],
     },
-    /* 1 · MORE HAZE — clip 28.75 → 54.50 (25.75s), FOUR beats in the source:
+    /* 1 · MORE HAZE — clip 28.75 → 54.50 (25.75s), FOUR beats in the source,
+       every one of them channel "b" (see the note on THE SEARCH's seg A
+       above — this whole passage is graded almost entirely into blue, and
+       luma's own weights erase exactly the contrast a silhouette needs):
        haze/vape (byLevel — "he empties out before the room does," the
        poet's own dark mass is the first thing to convert), the turned back
        at the fire-escape landing (figureLock, GUISES.turned), a framed TV
        showing something else entirely ("my vision blurs" — kept deliberately
        LOW in the mix: it is not his room and should not read as if it were,
-       so the mix DROPS here rather than continuing to climb), then the
-       kitchen haze closing back in (byLevel again) as he fails to reach the
-       window. */
+       so the mix DROPS here rather than continuing to climb; narrow white
+       so the TV's own bezel stays a clean graphic frame and the busy crowd
+       footage inside it reduces to soft marks, not noise — see
+       BLEND-NOTES.md), then the kitchen haze closing back in (byLevel
+       again) as he fails to reach the window. */
     {
       clipStart: 28.75,
       segments: [
         { u0: 0, u1: 0.2233,
-          opts: { channel: "luma", black: 0, white: 0.55, tone: "invert", dither: "bayer" },
+          opts: { channel: "b", black: 0, white: 0.45, tone: "invert", dither: "bayer" },
           blend: "byLevel", blendOpts: { reverse: false },
           mix: (p) => lerp(0.0, 0.55, smooth(p)) },
         { u0: 0.2233, u1: 0.4175,
-          opts: { channel: "luma", black: 0, white: 0.5, tone: "invert", dither: "bayer" },
+          opts: { channel: "b", black: 0, white: 0.45, tone: "invert", dither: "bayer" },
           blend: "figureLock", blendOpts: { threshold: 3.5 },
           mix: (p) => lerp(0.55, 0.75, smooth(p)) },
         { u0: 0.4175, u1: 0.6699,
-          opts: { channel: "luma", black: 0, white: 0.6, tone: "linear", edge: 0.6, dither: "bayer" },
+          opts: { channel: "luma", black: 0, white: 0.38, tone: "invert", dither: "bayer" },
           blend: "noiseSwap", blendOpts: { s: 0.5, opts: { scale: 0.04, seed: 39 } },
-          mix: (p) => lerp(0.75, 0.25, smooth(p)) },
+          mix: (p) => lerp(0.75, 0.2, smooth(p)) },
         { u0: 0.6699, u1: 1,
-          opts: { channel: "luma", black: 0, white: 0.55, tone: "invert", dither: "bayer" },
+          opts: { channel: "b", black: 0, white: 0.4, tone: "invert", dither: "bayer" },
           blend: "byLevel", blendOpts: { reverse: false },
-          mix: (p) => lerp(0.25, 0.7, smooth(p)) },
+          mix: (p) => lerp(0.2, 0.7, smooth(p)) },
       ],
     },
     /* 2 · THE FALL — clip 54.50 → 75.80 (21.30s), the surreal one, three
@@ -262,7 +275,7 @@ export const footage = {
       clipStart: 54.5,
       segments: [
         { u0: 0, u1: 0.3521,
-          opts: { channel: "luma", black: 0, white: 0.55, tone: "invert", dither: "bayer" },
+          opts: { channel: "luma", black: 0, white: 0.5, tone: "invert", dither: "bayer" },
           blend: "figureLockTorn", blendOpts: { threshold: 3.5, s: 0.5, opts: { scale: 0.05, seed: 21 } },
           mix: (p) => lerp(0.3, 0.55, smooth(p)) },
         { u0: 0.3521, u1: 0.7277,
