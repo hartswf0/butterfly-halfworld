@@ -158,6 +158,86 @@ defect produced a plausible picture.**
 
 ---
 
+## THE BODY
+
+The first pass drew people as stick figures — single-cell lines from a hip to a shoulder
+to a head-disc. They read as people, which is why they survived fourteen films. But they
+cannot **act**: a line has no mass, so it cannot take weight on one leg; no width, so it
+cannot turn; no volume, so nothing can be occluded by it and a body can never be in front
+of its own arm.
+
+[`figure.mjs`](figure.mjs) replaces it, and keeps the same call — `F.fig(x, y, h, pose, l)`
+with `x,y` at the feet — so all fourteen films improved without one of them being edited.
+
+**Volume.** Every limb is a tapered capsule: a run of discs whose radius interpolates from
+proximal to distal, so a thigh is thicker than a shin. The torso is a real quadrilateral
+from shoulders to hips.
+
+**Contour then fill, with the dot law intact.** Each part goes down twice — the whole shape
+at the contour level with `ink` (which only darkens, so it never erases the world behind
+it), then the shape inset by a cell at the fill level with `put` (which overwrites, but
+only inside ground the contour pass just claimed). Hard black edge, flat mid tone, no
+gradient anywhere.
+
+**Drawing order is occlusion**, and this is the one that matters. Because the fill pass
+overwrites, a part drawn later hides one drawn earlier — so parts are emitted far arm, far
+leg, torso, near leg, near arm, head, and a body is suddenly in front of itself. That is
+what makes a reach read as a reach instead of as a line crossing a line, and it costs
+nothing but the order of six calls.
+
+Two things the lattice forced that the anatomy book does not say. **Widths had to go up**:
+an arm at the correct 0.031 of height is under three cells across at h=44 and the halftone
+eats it. And **a small body must be a stockier body** — width scales with height, but
+legibility is set by the lattice, which does not get finer when the figure does. Widths are
+multiplied back up as height falls: identity at 40 cells, half again as wide by 16. Below
+16 a different drawing takes over with the same silhouette, because crowds get staged at
+h=9 and they have to stay people.
+
+The performance controls — `weight`, `breath`, `crouch`, `headTurn`, `headTilt`, `gesture`
+— are in [`WORLD-BRIEF.md`](WORLD-BRIEF.md). `weight` is the one that matters most: which
+leg the body is standing on, and therefore whether it is a person or a diagram of one.
+
+---
+
+## THE TITLE SEQUENCE
+
+John Whitney's work is **harmonic motion**, not animation of shapes: a field of N identical
+elements where element *k* is driven at *k* times a base rate. Let it run and the field
+passes through order, apparent chaos, and order again, and every rosette, cardioid and
+caustic is a by-product of that one differential. Nothing is keyframed.
+
+Which gives the title its mechanism: **the title is not typed on, it is resolved into.**
+Points fly in a Whitney field; at a resonant instant they arrive at the positions that spell
+the words, hold, and dissolve back into a field that never stopped moving.
+
+Three options, three different formal devices — a rosette, a nested counter-rotating
+arabesque, and a live catalogue of Lissajous cells. See [`titles.html`](titles.html).
+
+---
+
+## THE FOOTAGE
+
+There is live-action for the first poem: a poet in a dim room, a rain-wet street in fog,
+streetlights in green and cyan. Compositing it over the halftone would be a lie about the
+world, so instead it **enters the law** — sampled down to the 192×144 ink field, quantised
+to eight levels, and halftoned by the same pass that draws everything else. Once it is in
+the lattice, footage and drawing are the same substance, and a transition between them is
+what every other transition here is: a per-dot allegiance swap.
+
+- [`ingest.mjs`](ingest.mjs) — video to ink. Tone, levels, channel (this clip is green-cyan,
+  so a chroma read gives a completely different image from a luma read), dither, Sobel edge,
+  kaleido, warp.
+- [`blend.mjs`](blend.mjs) — the transitions, all per-dot: straight swap, directional wipe,
+  by-level (dark dots change allegiance first, so one image is eaten out of the other),
+  noise-torn, and **figureLock** — footage everywhere except where the drawing has ink, so a
+  drawn body moves through a filmed room.
+- [`dj.html`](dj.html) — the instrument. Every treatment on a fader, both sources running,
+  eight cue slots, and an export that dumps a look as JSON to paste into a film module.
+- [`EXPERIMENTS.md`](EXPERIMENTS.md) — the looks that worked, with their settings, and the
+  dead ends.
+
+---
+
 ## THE SHAPE OF A WORLD
 
 ```js
