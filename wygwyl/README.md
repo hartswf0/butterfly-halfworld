@@ -93,6 +93,29 @@ reverb tail longer than the room it rings into.
 
 A long tail is the audio equivalent of a gradient, and this world does not have those.
 
+**And it is in the same key as the record.** There is a real 24-minute score for this
+suite — the drone piece the beflix cut played under. [`analyse-score.mjs`](analyse-score.mjs)
+decodes it and measures it: folded chroma, the low-register partials, and an onset
+envelope autocorrelated for a pulse. The answers:
+
+- **Tonal centre C**, with G a close second pole. The strongest bass partial is 64.15 Hz
+  (C2), and the top nine bass partials spell C D E F♯ G A B — no F natural. That is C
+  Lydian and G major, which are the same seven notes read from two places.
+- **No credible pulse.** Confidence 0.30 against a 0.35 threshold, no autocorrelation
+  peak standing above its own decay anywhere from 20 to 240 BPM. It is sustained
+  material with no metric grid, and the honest thing was to report that rather than
+  quantise to an invented tempo.
+
+So the fourteen synthesised beds were retuned onto C and G at four octaves, with one
+modal palette across the suite: Phrygian and Aeolian for the films of loss, Dorian for
+the ones that turn, Ionian and Lydian for the ones that lift, and 14 ending on the
+tonic because it is the last film. Verified by rendering the audio back out and
+measuring it, not by asserting it.
+
+The absence of a pulse has a consequence for the picture: **the film's rhythm has to
+come from the film.** There is no beat to cut to, so the beats are the movements
+themselves and the foley strikes, and the picture is asked to accent where they do.
+
 ### 5. Look at the picture
 
 Law 5 of the butterfly halfworld, inherited without changes, because it held here too:

@@ -49,7 +49,14 @@ export default {
           const p = (u * 1.6 + k / 5) % 1;
           F.ring(hx, hy + 2, lerp(52, 4, p), Math.round(lerp(1, 5, p)), 1);
         }
-        F.fig(hx, 132, 46, { mode: "stand", arms: "up" }, 7);
+        /* the scream tightens him: crouch and weight both climb with `cave`,
+           so the same number that closes the walls also closes the body —
+           one mechanism, not a wall event and a body event coinciding by
+           chance. Head thrown back is the scream's own shape. */
+        F.fig(hx, 132, 46, {
+          mode: "stand", arms: "up", phase: u * 3.35, weight: 0.22,
+          crouch: 0.10 + cave * 0.22, headTilt: -0.7,
+        }, 7);
         F.disc(hx, hy + 8, 3.2, 0);                              // the open mouth
         /* the pending marriage: two rings that approach and do not touch */
         const d = lerp(30, 9, smooth(u));
@@ -71,7 +78,20 @@ export default {
         F.line(0, 128, 88, 128, 6, 1);
         F.box(10, 26, 62, 74, 5, 2);                             // the mirror frame
         const sway = Math.sin(u * TAU * 1.5) * 3;
-        F.fig(44 + sway, 128, 52, { mode: "stand", arms: "reach", face: 1 }, 7);
+        /* three dial-tone cues, three small flinches — the ring landing
+           on his shoulder before he can decide not to react to it */
+        const ring1 = Math.max(
+          Math.exp(-(((u - 0.10) / 0.03) ** 2)),
+          Math.exp(-(((u - 0.18) / 0.03) ** 2)),
+          Math.exp(-(((u - 0.62) / 0.03) ** 2)),
+        );
+        /* the phone is a gesture target, not a nearby prop — the hand lands
+           exactly where the disc is drawn, so the call is held rather than
+           mimed. He digests the truth with his chin down, not up at himself. */
+        F.fig(44 + sway, 128, 52, {
+          mode: "stand", arms: "hold", face: 1, guise: "poet", phase: u * 1.7,
+          weight: 0.35, headTilt: -0.30 - ring1 * 0.35, gesture: [9, 46],
+        }, 7);
         /* the phone at the ear; the call is silent both ways */
         F.disc(44 + sway + 9, 128 - 46, 3, 7);
         const dial = Math.floor(u * 7) % 7;
@@ -123,11 +143,22 @@ export default {
           const x = p * 240 - 40, y = 20 + ((k * 37) % 100) + Math.sin(p * 6 + k) * 5;
           F.line(x, y, x + 11, y + 4, 2, 1);
         }
-        F.fig(64, 130, 30, { mode: "stand", arms: "down" }, 7);         // six
-        /* the ghost is a year older and flickers on the ordered schedule */
+        /* SIX BREATHES; SEVEN DOES NOT. This is the one free difference the
+           pose vocabulary gives the whole film, and it is the scene: a boy
+           alone in his own house, drifting toward whatever is talking to
+           him, and a dead child standing dead level because nothing is
+           holding her up against her own weight any more. */
         const gx = 96 + Math.sin(u * TAU * 0.7) * 8;
+        F.fig(64, 130, 30, {
+          mode: "stand", arms: "down", guise: "child", phase: u * 1.7,
+          weight: 0.28, crouch: 0.08, headTurn: Math.min(1, (gx - 64) / 40),
+        }, 7);         // six
+        /* the ghost is a year older and flickers on the ordered schedule */
         const gh = 35;
-        F.fig(gx, 128, gh, { mode: "stand", arms: "open" }, 3);
+        F.fig(gx, 128, gh, {
+          mode: "stand", arms: "open", guise: "child", breath: 0, weight: 0.5,
+          headTurn: -0.3,
+        }, 3);
         F.map((x, y, v) => {
           if (v === 3 && F.bayer(x, y) > 0.35 + 0.35 * Math.sin(u * TAU * 3)) return 0;
         });

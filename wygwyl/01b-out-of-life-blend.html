@@ -3,7 +3,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>01b-out-of-life-blend — a WYGWYL halfworld</title>
 <link rel="stylesheet" href="halfworld.css">
-<video id="foot" preload="auto" playsinline muted style="position:absolute;width:2px;height:2px;opacity:0;pointer-events:none;left:-9999px"></video>
 <script type="module">
 /* ============================================================================
    01b-out-of-life-blend.html — A HAND-WRITTEN SHELL, NOT A GENERATED ONE.
@@ -70,7 +69,12 @@ document.body.innerHTML = `
   </footer>`;
 
 const $ = (id) => document.getElementById(id);
-const video = document.getElementById("foot");
+/* built after innerHTML, not before — the innerHTML assignment above wipes
+   anything placed in <body> ahead of it, video element included */
+const video = document.createElement("video");
+video.id = "foot"; video.preload = "auto"; video.playsInline = true; video.muted = true;
+video.style.cssText = "position:absolute;width:2px;height:2px;opacity:0;pointer-events:none;left:-9999px";
+document.body.appendChild(video);
 const canvas = $("stage");
 const post = makePost(canvas, world.accent || "#5aa7ff");
 const sound = makeSound(world);

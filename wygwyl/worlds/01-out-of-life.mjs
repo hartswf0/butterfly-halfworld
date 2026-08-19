@@ -67,7 +67,7 @@ export default {
         const p = smooth(Math.abs(((u * 2.2) % 2) - 1));
         const x = lerp(34, 140, p);
         const face = ((u * 2.2) % 2) < 1 ? 1 : -1;
-        const startle = Math.max(Math.exp(-((u - 0.28) / 0.045) ** 2), Math.exp(-((u - 0.62) / 0.045) ** 2));
+        const startle = Math.max(Math.exp(-(((u - 0.28) / 0.045) ** 2)), Math.exp(-(((u - 0.62) / 0.045) ** 2)));
         F.fig(x, FLOOR, 34, {
           mode: "walk", phase: u * 7.35, face, lean: face * 0.06, guise: "poet",
           /* scanning while he walks, then a sharp glance at the startle */

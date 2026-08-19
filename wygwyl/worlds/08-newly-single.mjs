@@ -26,8 +26,13 @@
 import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
 
 /* the flesh: the ordinary F.fig call, named so a reader never has to ask
-   which of the two bodies a given line draws */
-function flesh(F, x, y, h, pose) { F.fig(x, y, h, pose, 7); }
+   which of the two bodies a given line draws. GUISE POET, always — this is
+   the same man every other film in the suite recognises by silhouette, and
+   a standing body that never got a `phase` was holding its breath for
+   thirteen seconds, so one is supplied here whenever a call site forgets. */
+function flesh(F, u, x, y, h, pose) {
+  F.fig(x, y, h, { guise: "poet", phase: pose.phase ?? u * 1.7, ...pose }, 7);
+}
 
 /* the soul: same figure, level 3, head hollowed to a ring (a solid skull on
    a level-3 body read as flesh with the volume turned down, not as an
@@ -38,7 +43,10 @@ function flesh(F, x, y, h, pose) { F.fig(x, y, h, pose, 7); }
    level 3 elsewhere in the frame. */
 function soulFig(F, u, x, y, h, pose, freq = 3, phase = 0) {
   const mode = pose.mode || "stand";
-  F.fig(x, y, h, pose, 3);
+  /* GUISE POET, ALWAYS — the soul is the same man as the flesh, only drawn
+     thinner, and a standing pose still needs a clock or it holds its
+     breath for the whole shot (see flesh() above for the same fix). */
+  F.fig(x, y, h, { guise: "poet", phase: pose.phase ?? u * 1.7, ...pose }, 3);
   const hy = y - h * (mode === "sit" ? 0.73 : 0.885), hr = h * 0.10;
   for (let yy = Math.floor(hy - hr); yy <= Math.ceil(hy + hr); yy++)
     for (let xx = Math.floor(x - hr); xx <= Math.ceil(x + hr); xx++)
@@ -107,7 +115,14 @@ function crowd(F, u, n, seedBase, opts = {}) {
     const y = yBand[0] + r2 * (yBand[1] - yBand[0]);
     const h = 20 + r3 * 9, face = r4 > 0.5 ? 1 : -1;
     const phase = u * (2.2 + r1 * 3.4) + r2 * 6;
-    F.fig(x, y, h, { mode: "stand", arms: "swing", phase, face, lean: Math.sin(phase * TAU) * 0.12 }, 4);
+    /* WEIGHT RIDES THE SAME CLOCK AS THE SWING: a crowd standing at 0.5 is
+       a diagram wearing motion, not a body dancing — hips have to actually
+       carry the shift the arms are already performing. Each dancer's own
+       phase decides which hip, so the room never falls into lockstep. */
+    F.fig(x, y, h, { mode: "stand", arms: "swing", phase, face,
+      weight: 0.5 + Math.sin(phase * TAU * 0.5) * 0.32,
+      headTurn: Math.sin(phase * TAU * 0.5 + 0.8) * 0.4,
+      lean: Math.sin(phase * TAU) * 0.12 }, 4);
   }
 }
 
@@ -183,9 +198,20 @@ export default {
         /* HE IS THE ONE STILL BODY ON A MOVING FLOOR. The crowd swings on
            its own phase; he barely does — arms down, a hair of lean —
            because "empty on a crowded floor" is a contrast the crowd has
-           to supply, not a caption he can perform by himself. */
+           to supply, not a caption he can perform by himself. His weight
+           still drifts, slowly, hip to hip across the whole movement —
+           even someone standing still shifts eventually — and the throb
+           lands as a wince (a small crouch, the head dipping) on the SAME
+           three `at` values the cues strike, so the ache is seen and heard
+           on the same beat rather than one merely scoring the other. */
         const sway = Math.sin(u * TAU * 1.1) * 0.05;
-        flesh(F, 96, 138, 34, { mode: "stand", arms: "down", lean: sway });
+        const wince = Math.max(
+          win(u, 0.10, 0.15, 0.17, 0.24),
+          win(u, 0.45, 0.50, 0.52, 0.59),
+          win(u, 0.80, 0.85, 0.87, 0.94));
+        flesh(F, u, 96, 138, 34, { mode: "stand", arms: "down", lean: sway,
+          weight: lerp(0.32, 0.68, smooth(u)),
+          crouch: 0.04 + wince * 0.11, headTilt: -wince * 0.5 });
         /* the throb: three rings on the same clock as the floor, centred on
            his head and nowhere else — a headache, not a halo */
         const hx = 96, hy = 138 - 34 * 0.885;
