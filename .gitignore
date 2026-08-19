@@ -23,15 +23,17 @@ renders/wygwyl/*.png
 !renders/wygwyl/CONTACT.png
 renders/wygwyl/dj-*.png
 renders/wygwyl/_*.png
-renders/wygwyl/_clip/
 
 # agent worktrees are their own repositories
 .claude/worktrees/
-renders/wygwyl/_frames*/
-
-# renders are outputs of this repository, not files in it
-renders/outoflife/
 
 # agent scratch shooters
 .at-tmp.mjs
-renders/wygwyl/_suite/
+
+# WORKING RENDERS ARE OUTPUTS, NOT FILES IN THE REPOSITORY.
+# The pages are the work and the pictures come out of the pages. Anything
+# under renders/ whose directory name starts with an underscore is a scratch
+# pile from a shoot, a frame dump, or a still pulled out of a finished film to
+# look at — it is how the work was checked, not the work.
+renders/wygwyl/_*/
+renders/outoflife/
