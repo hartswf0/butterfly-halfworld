@@ -145,8 +145,9 @@ for (const f of FILMS) {
   seg.style.left = (f.start / T * 100) + "%";
   seg.style.width = (f.rt.total / T * 100) + "%";
   bar.appendChild(seg);
+  const slate = f.world.slate === false ? 0 : 1;
   f.rt.starts.forEach((s, i) => {
-    if (i === 0) return;                        // the title card is not a movement
+    if (i < slate) return;                      // the title card is not a movement
     const m = document.createElement("div");
     m.className = "mseg";
     m.style.left = ((f.start + s) / T * 100) + "%";
@@ -212,7 +213,7 @@ function frame(now) {
   }
   $("now").innerHTML =
     `<b>${f.world.title}</b><span>${f.world.tagline || ""}</span><br><br>` +
-    `<span>MOVEMENT ${mi}/${f.rt.movements.length - 1} · ${m.label}<br>` +
+    `<span>MOVEMENT ${mi + (f.world.slate === false ? 1 : 0)}/${f.rt.movements.length - (f.world.slate === false ? 0 : 1)} · ${m.label}<br>` +
     `FILM ${fi + 1} OF ${FILMS.length}</span>`;
   requestAnimationFrame(frame);
 }
@@ -253,7 +254,11 @@ function drawAt(tt) {
   post.draw(FILMS[fi].rt.renderField(tt - FILMS[fi].start));
 }
 window.__hw = {
-  films: FILMS, total: T,
+  films: FILMS, total: T, record: RECORD,
+  /* the harness has to be able to ask whether the record actually landed
+     where the film says it should — `new Audio()` is not in the document, so
+     there is nothing to query without this */
+  setRecord(on) { recordOn = on; RECORD.volume = on ? 0.85 : 0; if (!on) RECORD.pause(); },
   seek(tt) { t = tt; playing = false; },
   halt() { halted = true; playing = false; },
   renderAt(tt) { t = tt; drawAt(tt); },

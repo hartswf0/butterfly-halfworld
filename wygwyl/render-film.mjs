@@ -10,7 +10,9 @@
      node wygwyl/render-film.mjs                  the whole suite → film/WYGWYL.mp4
      node wygwyl/render-film.mjs 07               one film → film/WYGWYL-07.mp4
      node wygwyl/render-film.mjs --fps 12         default is 12
-     node wygwyl/render-film.mjs --silent         picture only, skip the score
+     node wygwyl/render-film.mjs --silent         picture only, no sound at all
+     node wygwyl/render-film.mjs --no-record      our foley only, without the record
+     node wygwyl/render-film.mjs --foley 0.35     how loud our foley sits under it
 
    ffmpeg is found on PATH, in the usual places, or in node_modules — install
    it with `npm i ffmpeg-static` if this machine has none.
@@ -27,6 +29,21 @@
 
    The picture has no such split. Frames come out of the page itself, through
    the same engine, the same halftone pass and the same canvas the viewer sees.
+
+   ---------------------------------------------------------------------------
+   AND THE RECORD
+
+   The suite is not scored by this repository. It is scored by a twenty-four
+   minute drone piece that already exists, and each poem occupies a known
+   passage of it — which is what `window: [a, b]` in a world module means, and
+   why the runtime stretches every film to fill its own. Our foley is not a
+   soundtrack; it is the articulation laid over one. So the film's audio is the
+   record, cut into those same passages and laid end to end against the
+   picture, with the synthesised score mixed underneath at `--foley`. The
+   passages are cut rather than played straight through because the manifest's
+   windows do not quite abut — there are four hundred milliseconds of silence
+   between NEVERMORE and BLOODLINES — and a continuous play would drift by
+   exactly that much for the remaining nine films.
    ========================================================================= */
 import { chromium } from "playwright";
 import fs from "node:fs";
@@ -50,10 +67,13 @@ const FPS = +flag("fps", 12);
    round, and it is most of an hour faster. */
 const SIZE = +flag("size", 768);
 const SILENT = argv.includes("--silent");
+const NORECORD = argv.includes("--no-record");
+const FOLEY = +flag("foley", 0.5);
+const RECORD = path.join(HERE, "footage", "unified-drones.mp3");
 /* A FILM NUMBER IS TWO DIGITS AND IS NOT A FLAG'S VALUE. Matching every
    two-digit argument turned `--fps 12 --crf 20` into a request for films 12
    and 20, and wrote one film into a file called WYGWYL-01-12-20.mp4. */
-const VALUED = new Set(["--fps", "--crf", "--size"]);
+const VALUED = new Set(["--fps", "--crf", "--size", "--foley"]);
 const only = argv.filter((a, i) => /^\d\d$/.test(a) && !VALUED.has(argv[i - 1]));
 
 /* ---------------------------------------------------------------- ffmpeg -- */
@@ -213,7 +233,7 @@ const meta = await page.evaluate(() => ({
   total: window.__hw.total,
   films: window.__hw.films.map(f => ({
     n: f.world.n, title: f.world.title, slug: f.slug, start: f.start, end: f.end,
-    drone: f.world.drone, seed: f.world.seed,
+    drone: f.world.drone, seed: f.world.seed, window: f.world.window || null,
     starts: f.rt.starts,
     movements: f.rt.movements.map(m => ({ seconds: m.seconds, cues: m.cues || [] })),
   })),
@@ -244,13 +264,55 @@ if (!SILENT) {
   writeWav(wav, pcm);
 }
 
+/* ---- the record, cut to the passages the films actually occupy ---------- */
+let cuts = null;
+if (!SILENT && !NORECORD) {
+  if (!fs.existsSync(RECORD)) {
+    console.log("  no record at " + path.relative(ROOT, RECORD) + " — foley only");
+  } else {
+    cuts = meta.films
+      .filter(f => f.window && f.end > T0 + 1e-6 && f.start < T1 - 1e-6)
+      .map(f => ({ at: f.start - T0, a: f.window[0], b: f.window[1] }));
+    if (!cuts.length) cuts = null;
+    else console.log(`  record: ${cuts.length} passage(s), ${cuts[0].a.toFixed(1)}s–${cuts[cuts.length - 1].b.toFixed(1)}s, laid in at +${cuts[0].at.toFixed(1)}s`);
+  }
+}
+
 const name = NAME + ".mp4";
 const dest = path.join(OUT, name);
 const args = ["-y", "-f", "image2pipe", "-framerate", String(FPS), "-i", "-"];
+if (cuts) args.push("-i", RECORD);
 if (wav) args.push("-i", wav);
 args.push("-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", String(flag("crf", "18")),
   "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2");
-if (wav) args.push("-c:a", "aac", "-b:a", "160k", "-shortest");
+
+if (cuts) {
+  /* One input, many passages: ffmpeg will not let the same stream be trimmed
+     twice without being split first, so split it as many ways as there are
+     films, trim each to its own window, concatenate them back in order, and
+     delay the whole run to where the first film starts. Because every film's
+     picture is exactly as long as its window, the concatenation lands sample
+     for sample on the picture and no per-film delay is needed. */
+  const wavIdx = cuts && wav ? 2 : 1;
+  const g = [];
+  const n = cuts.length;
+  if (n > 1) g.push(`[1:a]asplit=${n}${cuts.map((_, k) => `[x${k}]`).join("")}`);
+  cuts.forEach((c, k) => g.push(
+    `[${n > 1 ? `x${k}` : "1:a"}]atrim=start=${c.a.toFixed(4)}:end=${c.b.toFixed(4)},asetpts=PTS-STARTPTS[c${k}]`));
+  g.push(`${cuts.map((_, k) => `[c${k}]`).join("")}concat=n=${n}:v=0:a=1[rc]`);
+  const d = Math.round(cuts[0].at * 1000);
+  g.push(`[rc]adelay=${d}|${d},aresample=async=1[rec]`);
+  if (wav) {
+    g.push(`[${wavIdx}:a]volume=${FOLEY}[fol]`);
+    g.push(`[rec][fol]amix=inputs=2:normalize=0:dropout_transition=0[aout]`);
+  } else {
+    g.push(`[rec]anull[aout]`);
+  }
+  args.push("-filter_complex", g.join(";"), "-map", "0:v", "-map", "[aout]",
+    "-c:a", "aac", "-b:a", "192k", "-shortest");
+} else if (wav) {
+  args.push("-c:a", "aac", "-b:a", "160k", "-shortest");
+}
 args.push(dest);
 
 const ff = spawn(FF, args, { stdio: ["pipe", "ignore", "pipe"] });
