@@ -56,7 +56,7 @@ page.on("console", m => { if (m.type() === "error") console.log("  !! CONSOLE: "
    step and a low span is a photograph, and the retime just made it a longer
    one. */
 console.log(MOTION
-  ? "per movement: seconds · step% (mean change between samples) · span% (start vs end)"
+  ? "per movement: seconds · step% (mean change between samples) · span% (start vs end, crossfade excluded)"
   : "per sample: coverage% / mean-ink-level / edge% · samples at u=" + AT.join(", "));
 let bad = 0;
 for (const shell of shells) {
@@ -79,9 +79,17 @@ for (const shell of shells) {
     if (MOTION) {
       const mv = await page.evaluate(({ t0, span }) => {
         const R = window.__hw.runtime, N = 9, W = 192, H = 144, CELLS = W * H;
+        /* STAY OUT OF THE CROSSFADE. renderField dissolves the last 1.5s of a
+           movement into the first frame of the next one, dot by dot. A sample
+           taken at u=0.98 of a fifteen-second movement is therefore four
+           fifths the NEXT movement, and `span` measured against it reports the
+           cut rather than the movement — which read as motion in a movement
+           that had none, and passed four flags it should have failed. */
+        const XF = 1.5, pad = 0.15;
+        const last = Math.max(0.30, 1 - (XF + pad) / span);
         const shots = [];
         for (let k = 0; k < N; k++) {
-          const f = R.renderField(t0 + span * (0.02 + 0.96 * k / (N - 1)));
+          const f = R.renderField(t0 + span * (0.02 + (last - 0.02) * k / (N - 1)));
           shots.push(Float32Array.from(f));
         }
         const diff = (a, b) => {
