@@ -85,7 +85,7 @@ import { makeRuntime, makePost, makeSound } from "./halfworld.mjs";
 /* The head of the suite is a title sequence, and which of the three Whitney
    options plays is a URL question rather than an edit: ?title=b swaps it, and
    ?title=none drops it. The poems are the running order and never move. */
-const TITLE = new URLSearchParams(location.search).get("title") || "d";
+const TITLE = new URLSearchParams(location.search).get("title") || "e";
 const SLUGS = [
   ...(TITLE === "none" ? [] : ["00-title-" + TITLE]),
   "01-out-of-life", "02-flashing-lights", "03-how-to-break-off-an-engagement",
@@ -190,7 +190,7 @@ function frame(now) {
   const m = f.rt.movements[mi];
   const words = (m.line || "").split(" ");
   $("voice").textContent = words.slice(0, Math.ceil(Math.min(1, u * 1.18) * words.length)).join(" ");
-  $("chip").textContent = `${f.world.n} · ${mi === 0 ? "TITLE" : "M" + mi + " " + m.label}`;
+  $("chip").textContent = `${f.world.n} · ${m.label === "TITLE" ? "TITLE" : "M" + mi + " " + m.label}`;
   $("clock").textContent = `${fmt(t)} / ${fmt(T)}`;
   $("head").style.left = (t / T * 100) + "%";
   if (!scrubbing) $("scrub").value = Math.round(t / T * 2000);

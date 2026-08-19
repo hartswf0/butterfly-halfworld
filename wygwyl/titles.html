@@ -42,14 +42,21 @@
 </style>
 
 <div class="lede">
-  <h1><small>WHERE YOU GO WHEN YOU LEAVE · TITLE SEQUENCE, FOUR WAYS</small>
-  A title card in the manner of John Whitney.</h1>
-  <p>Fourteen films need one thing in front of them, and Whitney's own rule for a title is
-  that <b>it is never typed on</b> — it is what a field of moving elements looks like at the
-  instant their motion happens to agree with itself. Every option below is a single
-  differential law, run for its own thirty seconds, with the words of the suite's own title
-  read directly out of the law's resonant moments rather than drawn over the top of it.</p>
-  <p>All four are the real films, running live below, not a thumbnail of one — the same
+  <h1><small>WHERE YOU GO WHEN YOU LEAVE · TITLE SEQUENCE, FIVE WAYS</small>
+  Four in the manner of John Whitney, and the one that plays.</h1>
+  <p>Fourteen films need one thing in front of them. <b>A</b> through <b>D</b> take Whitney's
+  own rule — that a title is never typed on, it is what a field of moving elements looks like
+  at the instant their motion agrees with itself — and each is a single differential law run
+  for its own thirty seconds, the words read out of the law's resonant moments rather than
+  drawn over the top of them.</p>
+  <p>They are beautiful and they were the wrong thing to put in front of these poems. A
+  harmonic field is busy where the poems are spare; it announces its own cleverness; and its
+  only relation to the films behind it was a few icons scattered on a rotation. <b>E</b> is
+  the answer to that: no field, no law, no mathematics on display. A man in a dim room with
+  a window he does not take, the room lifting away, a long walk past fourteen small marks on
+  the horizon, and a door that opens onto paper. It is the suite in one minute, told with the
+  same marks the films are made of — and it is the one the suite plays.</p>
+  <p>All five are the real films, running live below, not thumbnails — the same
   <code>drawPreview</code> the fourteen-film index uses. Open any card for its own page,
   transport and sound.</p>
 </div>
@@ -57,7 +64,7 @@
 <div class="grid" id="grid"></div>
 
 <footer class="note">
-  <h2>THE FOUR DEVICES</h2>
+  <h2>THE FIVE</h2>
   <p><b>A · The Rosette.</b> One dense field on differential phase — point k turns k times
   the base rate about its own anchor. Nothing else moves it; the loops, flowers and caustics
   are what nineteen hundred clocks running at nineteen hundred different speeds look like from
@@ -78,8 +85,21 @@
   window, the moon, the temple, the eleven-petalled daisy, the burning hourglass, the ride,
   the candle, the named stars. They arrive faint, hold for a breath, and the rotation takes
   them back. If you have seen the films they are memories; if you have not they are
-  ornament, and both readings are correct. This one plays the record rather than the
-  synth — the suite's own drone piece is its bed.</p>
+  ornament, and both readings are correct.</p>
+  <p><b>E · The Walk.</b> The one that plays. Read the fourteen poems end to end and they
+  make one sentence: a man is in a room with a window he does not take, he leaves, he walks
+  past a storm and a shore and a city and a stage and a dance floor and three phone calls
+  and a road and a temple and a reunion and a harbor, and at the end of all of it there is a
+  door, and this time he goes through the door. Five movements, long holds, nothing spins,
+  and the only thing that ever crosses the frame is a man. The picture is built out of tone
+  rather than line — a room here is not a rectangle in outline floating on cream, which is a
+  diagram, but a <i>wall</i>: a flat field of ink with a hole in it where the window is, and
+  the hole is paper. Light falls off from that hole in whole levels, because whole levels are
+  the only falloff this lattice has. The whole story is legible as light: he is in the dark,
+  he walks in the cream, he arrives at a dark wall, and the door opens onto paper. The one
+  accent mark in the sequence is the blue lying across that threshold. It carries no bed from
+  the record — the title sits <i>before</i> the record starts, so the first poem's music no
+  longer plays underneath it — and it ends on the names.</p>
 </footer>
 
 <script type="module">
@@ -90,6 +110,7 @@ const OPTIONS = [
   { slug: "00-title-b", letter: "B", desc: "the arabesque — nested rings, counter-rotating, collapsing inward" },
   { slug: "00-title-c", letter: "C", desc: "the catalogue — a grid of lissajous cells locking to letters" },
   { slug: "00-title-d", letter: "D", desc: "the aura — B and C fused, and haunted by the fourteen films" },
+  { slug: "00-title-e", letter: "E", desc: "the walk — a man, a room, fourteen milestones, a door · THE ONE THAT PLAYS" },
 ];
 
 const grid = document.getElementById("grid");
@@ -118,13 +139,14 @@ for (const opt of OPTIONS) {
      is already 4:3, so handing the CSS box back to the stylesheet keeps the
      picture correct and puts the row back in line. */
   cv.style.width = "100%"; cv.style.height = "auto";
-  card.querySelector(".mv").textContent = `${rt.movements.length - 1} MV · ${Math.round(rt.total)}S`;
+  const slate = world.slate === false ? 0 : 1;
+  card.querySelector(".mv").textContent = `${rt.movements.length - slate} MV · ${Math.round(rt.total)}S`;
   /* Skip past the shared 5s auto title-card and stagger the three by a
      third of a film each — otherwise all three open on the same generic
      "00 · WHERE YOU GO WHEN YOU LEAVE" card at once, which is the one
      thing the three devices have in common and the least interesting
      thing to show side by side. */
-  const off = 5 + rt.total * (live.length / OPTIONS.length);
+  const off = (slate ? 5 : 0) + rt.total * (live.length / OPTIONS.length);
   live.push({ cv, world, rt, off });
 }
 

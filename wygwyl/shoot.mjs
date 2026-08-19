@@ -30,7 +30,7 @@ const only = args.filter(a => !a.startsWith("--"));
 const AT = SWEEP ? [0.2, 0.5, 0.8] : [0.55];
 
 const shells = fs.readdirSync(HERE).filter(f => /^\d\d-.*\.html$/.test(f)).sort()
-  .filter(f => !only.length || only.includes(f.slice(0, 2)));   /* select by number */
+  .filter(f => !only.length || only.some(o => f.startsWith(o)));  /* by number, or by any stem prefix */
 
 const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium" });
 const page = await browser.newPage({ viewport: { width: 1100, height: 800 }, deviceScaleFactor: 1 });

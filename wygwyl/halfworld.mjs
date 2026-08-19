@@ -188,9 +188,19 @@ function wordRaster(text, ph) {
   const im = q2.getImageData(0, 0, c.width, c.height).data;
   const w = Math.ceil(c.width / S), h = Math.ceil(c.height / S);
   const data = new Uint8Array(w * h);
+  /* COVERAGE, NOT A POINT SAMPLE. The old reader took one pixel at the centre
+     of each cell, which is fine at 13 cells tall and destroys a word at 6 —
+     the stroke simply falls between the samples and the credit reads PDEHS EY.
+     Averaging the whole S×S block and thresholding low keeps thin strokes, so
+     small type is legible everywhere in the suite, not just here. */
   for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
-    const px = Math.min(c.width - 1, x * S + (S >> 1)), py = Math.min(c.height - 1, y * S + (S >> 1));
-    data[y * w + x] = im[(py * c.width + px) * 4 + 3] > 120 ? 1 : 0;
+    let a = 0, n = 0;
+    for (let sy = 0; sy < S; sy++) for (let sx = 0; sx < S; sx++) {
+      const px = x * S + sx, py = y * S + sy;
+      if (px >= c.width || py >= c.height) continue;
+      a += im[(py * c.width + px) * 4 + 3]; n++;
+    }
+    data[y * w + x] = n && a / n > 78 ? 1 : 0;
   }
   const g = { w, h, data };
   WORDS.set(key, g);
@@ -342,7 +352,9 @@ export function makeRuntime(world) {
      one factor to fill it. One factor, not per-movement fitting: the relative
      weight of the movements is the poem's shape and was chosen, and only the
      tempo is being corrected. */
-  const movements = [title, ...world.movements];
+  /* A world may refuse the slate. The title film IS the slate; stamping a
+     solid black card in front of it announces the picture twice. */
+  const movements = world.slate === false ? [...world.movements] : [title, ...world.movements];
   const rawTotal = movements.reduce((a, m) => a + m.seconds, 0);
   const wantTotal = world.window ? world.window[1] - world.window[0] : rawTotal;
   const stretch = world.window ? wantTotal / rawTotal : 1;
@@ -550,8 +562,8 @@ export function mount(world) {
     const nWords = Math.ceil(clamp01(u * 1.18) * words.length);
     $("voice").textContent = words.slice(0, nWords).join(" ");
     $("linebar").style.visibility = m.line ? "visible" : "hidden";
-    $("chip").textContent = i === 0 ? `${world.n} · TITLE`
-      : `${world.n} · M${i}/${R.movements.length - 1} · ${m.label}`;
+    $("chip").textContent = m.label === "TITLE" ? `${world.n} · TITLE`
+      : `${world.n} · M${i + (world.slate === false ? 1 : 0)}/${R.movements.length - (world.slate === false ? 0 : 1)} · ${m.label}`;
     $("clock").textContent = `${fmt(t)} / ${fmt(R.total)}`;
     if (!scrubbing) $("scrub").value = Math.round(t / R.total * 1000);
     requestAnimationFrame(frame);
