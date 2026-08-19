@@ -132,7 +132,7 @@ const ramp = (x) => x - Math.floor(x);                                          
    (this sandbox, always — see NOTES.md), every moment falls back to its
    pre-extracted still. Nothing downstream of `elementFor()` knows or cares
    which it got: ingest.mjs reads videoWidth||naturalWidth either way. */
-const FOOTAGE_SRC = "footage/01-out-of-life-lead.mp4";
+const FOOTAGE_SRC = "../footage/01-out-of-life-lead.mp4";
 let blobURL = null, videoOK = false;
 async function initFootage() {
   try {
