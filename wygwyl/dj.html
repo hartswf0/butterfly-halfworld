@@ -245,7 +245,7 @@
   <span style="font-size:10px;letter-spacing:.08em;color:var(--dim)">FOOTAGE — 01 OUT OF LIFE (LEAD)</span>
 </footer>
 
-<video id="foot" src="footage/01-out-of-life-lead.mp4" preload="auto" playsinline muted loop></video>
+<video id="foot" preload="auto" playsinline muted loop></video>
 
 <script type="module">
 import { FW, FH, makePost, makeRuntime, TAU } from "./halfworld.mjs";
@@ -261,6 +261,18 @@ const ingest = makeIngest(video);
 const R = makeRuntime(world);
 
 const fieldA = new Float32Array(FW * FH);   // footage, rewritten every frame
+
+/* the dev server advertises accept-ranges but does not actually honour a
+   Range request, which makes a plain <video src> load abort under Chromium
+   (it issues a ranged GET the moment it can). Fetching the file whole and
+   handing the video element a blob: URL sidesteps ranged requests entirely —
+   this is a dj.html concern only, not a fix to the shared server. */
+async function loadFootage() {
+  const res = await fetch("footage/01-out-of-life-lead.mp4");
+  const blob = await res.blob();
+  video.src = URL.createObjectURL(blob);
+}
+const footageReady = loadFootage();
 
 /* ---------------------------------------------------------------- layout */
 function fit() {
