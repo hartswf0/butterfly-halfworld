@@ -32,7 +32,7 @@ import { chromium } from "playwright";
 import fs from "node:fs";
 import path from "node:path";
 import { spawn, spawnSync } from "node:child_process";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { fileURLToPath } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, "..");
@@ -74,10 +74,19 @@ const clamp = (x) => (x < -1 ? -1 : x > 1 ? 1 : x);
 const rng = (seed) => { let s = (seed >>> 0) || 1;
   return () => { s ^= s << 13; s ^= s >>> 17; s ^= s << 5; return ((s >>> 0) / 4294967296) * 2 - 1; }; };
 
+/* `films` here is a PLAIN DATA SPEC READ OUT OF THE RUNNING PAGE, not a set of
+   modules loaded a second time in Node. That distinction is the whole fix for
+   a bug this renderer shipped with: it used to rebuild the film list by
+   globbing worlds/*.mjs, which silently started matching the title options the
+   moment those were added — so the audio timeline ran ~100s longer than the
+   picture's, every strike landed past the end of the buffer, and the render
+   came out digitally silent while looking perfectly correct.
+   Two lists of films that must agree is one list too many. There is now
+   exactly one, and it is the one the picture is drawn from. */
 function renderScore(films, total) {
   const out = new Float32Array(Math.ceil(total * SR));
   for (const f of films) {
-    const spec = f.world.drone || { base: 55, steps: [0, 3, 7, 10] };
+    const spec = f.drone || { base: 55, steps: [0, 3, 7, 10] };
     const air = spec.bright ? 900 : 260;
     /* THE BED. Three detuned partials, and the root steps with the movements.
        The browser sweeps between roots with setTargetAtTime; the same
@@ -85,12 +94,13 @@ function renderScore(films, total) {
     const partials = [[1, 0.16], [1.007, 0.05], [2.003, 0.045]];
     const phase = partials.map(() => 0);
     let root = spec.base * Math.pow(2, spec.steps[0] / 12);
-    const nz = rng(f.world.seed || 1);
+    const nz = rng(f.seed || 1);
     let lp = 0;
     const i0 = Math.round(f.start * SR), i1 = Math.min(out.length, Math.round(f.end * SR));
     for (let i = i0; i < i1; i++) {
       const t = (i - i0) / SR;
-      const [mi] = f.rt.locate(t);
+      let mi = f.starts.length - 1;
+      while (mi > 0 && t < f.starts[mi]) mi--;
       const target = spec.base * Math.pow(2, spec.steps[mi % spec.steps.length] / 12);
       root += (target - root) * (1 - Math.exp(-1 / (1.2 * SR)));      // τ = 1.2s
       let v = 0;
@@ -103,10 +113,10 @@ function renderScore(films, total) {
       out[i] += (v + lp * 0.05) * 0.55;
     }
     /* THE FOLEY, at the absolute second each cue's beat falls on. */
-    for (let mi = 0; mi < f.rt.movements.length; mi++) {
-      const m = f.rt.movements[mi];
+    for (let mi = 0; mi < f.movements.length; mi++) {
+      const m = f.movements[mi];
       for (const c of m.cues || []) {
-        const at = f.start + f.rt.starts[mi] + c.at * m.seconds;
+        const at = f.start + f.starts[mi] + c.at * m.seconds;
         strike(out, at, c);
       }
     }
@@ -191,7 +201,12 @@ await page.waitForTimeout(300);
 
 const meta = await page.evaluate(() => ({
   total: window.__hw.total,
-  films: window.__hw.films.map(f => ({ n: f.world.n, title: f.world.title, start: f.start, end: f.end })),
+  films: window.__hw.films.map(f => ({
+    n: f.world.n, title: f.world.title, slug: f.slug, start: f.start, end: f.end,
+    drone: f.world.drone, seed: f.world.seed,
+    starts: f.rt.starts,
+    movements: f.rt.movements.map(m => ({ seconds: m.seconds, cues: m.cues || [] })),
+  })),
 }));
 
 const picked = only.length ? meta.films.filter(f => only.includes(f.n)) : null;
@@ -208,24 +223,15 @@ console.log(`${meta.films.length} films · ${(meta.total / 60).toFixed(1)} min �
 let wav = null;
 if (!SILENT) {
   console.log("  synthesising the score");
-  /* The runtimes are needed to place the cues in absolute time, and they come
-     from the same modules the page imported. */
-  const mods = fs.readdirSync(path.join(HERE, "worlds")).filter(f => /^\d\d-.*\.mjs$/.test(f)).sort();
-  /* The engine imports cleanly under Node: nothing touches `document` at module
-     scope, and the score never calls draw(). makeRuntime is wanted here only
-     for its clock — starts, seconds, and the movement a second belongs to. */
-  const { makeRuntime } = await import(pathToFileURL(path.join(HERE, "halfworld.mjs")).href);
-  const films = []; let T = 0;
-  for (const f of mods) {
-    const world = (await import(pathToFileURL(path.join(HERE, "worlds", f)).href)).default;
-    const rt = makeRuntime(world);
-    films.push({ world, rt, start: T, end: T + rt.total });
-    T += rt.total;
-  }
-  const use = picked ? films.filter(f => picked.some(p => p.n === f.world.n)) : films;
-  const span = use.map(f => ({ ...f, start: f.start - T0, end: f.end - T0 }));
+  const span = meta.films
+    .filter(f => f.end > T0 + 1e-6 && f.start < T1 - 1e-6)
+    .map(f => ({ ...f, start: f.start - T0, end: Math.min(f.end, T1) - T0 }));
   wav = path.join(TMP, "score.wav");
-  writeWav(wav, renderScore(span, T1 - T0));
+  const pcm = renderScore(span, T1 - T0);
+  let peak = 0; for (let i = 0; i < pcm.length; i++) peak = Math.max(peak, Math.abs(pcm[i]));
+  console.log(`  score: ${span.length} films, ${(T1 - T0).toFixed(0)}s, peak ${(20 * Math.log10(peak || 1e-9)).toFixed(1)} dBFS`);
+  if (peak < 1e-4) throw new Error("the score came out silent — the film spec and the picture timeline disagree");
+  writeWav(wav, pcm);
 }
 
 const name = NAME + ".mp4";
