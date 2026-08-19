@@ -37,3 +37,6 @@ renders/wygwyl/_*.png
 # look at — it is how the work was checked, not the work.
 renders/wygwyl/_*/
 renders/outoflife/
+
+# carve outputs — sheets and strips are how a source was looked at, not the work
+renders/carve/
