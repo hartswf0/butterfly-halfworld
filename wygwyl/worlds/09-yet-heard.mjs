@@ -137,8 +137,13 @@ function cordFootsteps(F, x0, y0, x1, y1, adv, l) {
    one dissolve this world otherwise withholds, because a call itself has no
    fade, only a cord. His is the exception, and it is a person arriving, not
    a picture fading in. */
-function summon(F, x, floor, h, arrive, l) {
-  F.fig(x, floor, h, { mode: "stand", face: -1, arms: "down" }, l);
+function summon(F, u, x, floor, h, arrive, l) {
+  /* CALMING DEMEANOR: guise elder (this world's mark for an older man), a
+     weight settled rather than shifting — he arrives already steady, which
+     is the "calming" the line names — and the chin lifts slightly as he
+     resolves, an open, unhurried carriage rather than a blank arrival. */
+  F.fig(x, floor, h, { mode: "stand", face: -1, arms: "down", guise: "elder",
+    phase: u * 1.7 + 2.1, weight: 0.62, headTilt: clamp01(arrive) * 0.18 }, l);
   F.map((xx, yy, v) => {
     if (xx < x - h * 0.4 || xx > x + h * 0.4 || yy < floor - h - 3 || yy > floor + 2) return;
     if (v > 0 && F.bayer(xx, yy) > arrive) return 0;
@@ -261,11 +266,14 @@ export default {
            the stretch itself leans east before the walk ever says so */
         const xL = lerp(84, 52, t), xR = lerp(108, 168, t);
         const floor = 108, h = 66, ay = floor - h * 0.70;
-        speaker(F, xL, floor, h, 1, "down", 7);
+        const arrive = ss(-0.06, 0.30, u);
+        /* the poet turns to face the arrival as it resolves — watching him
+           come in rather than standing there regardless of him */
+        speaker(F, u, xL, floor, h, 1, "down", 7, { guise: "poet", headTurn: arrive * 0.4 });
         /* summoned, not conjured: he is never at literal zero, even in the
            first instant, because "from the yonders" is a distance being
            closed, not a switch being thrown */
-        summon(F, xR, floor, h, ss(-0.06, 0.30, u), 7);
+        summon(F, u, xR, floor, h, arrive, 7);
         cord(F, xL, ay, xR, ay, 5, u * 2.0);
         cordFootsteps(F, xL, ay, xR, ay, u * 1.15, 6);
         waveShadows(F, 136, 3, u * 0.6);
@@ -301,14 +309,23 @@ export default {
         waveShadows(F, 134, 3, u * 0.5);
         waveShadows(F, 139, 2, u * 0.5 + 3);
         groundTrail(F, 46, floor + 2, cx, 6);
-        const xf = cx - 9, xs = cx + 9;
+        /* widened from ±9: at ±9 the two bodies' torsos overlapped into one
+           silhouette and "father and son" read as a single four-legged
+           figure. ±14 keeps them shoulder to shoulder without merging. */
+        const xf = cx - 14, xs = cx + 14;
         /* a walk cycle's stride crosses through zero separation twice a
            lap — the instant both feet sit under the hip — and at this
            resolution anything short of a wide stance reads as one leg, not
            two. Picked so neither figure is ever near that crossing at the
            moments the eye actually lands on the frame. */
-        F.fig(xf, floor, hf, { mode: "walk", phase: u * 6.5, face: 1 }, 7);
-        F.fig(xs, floor, hs, { mode: "walk", phase: u * 6.5 + 0.49, face: 1 }, 7);
+        /* FATHER AND SON, NAMED BY GUISE: the same elder build that arrived
+           in M3 and the same poet the rest of the suite knows by
+           silhouette — a small, occasional turn of the head toward each
+           other, because a stroll with someone is not two people walking
+           in parallel, it is two people walking together and glancing over. */
+        const glance = Math.sin(u * TAU * 0.35) * 0.3;
+        F.fig(xf, floor, hf, { mode: "walk", phase: u * 6.5, face: 1, guise: "elder", headTurn: glance }, 7);
+        F.fig(xs, floor, hs, { mode: "walk", phase: u * 6.5 + 0.49, face: 1, guise: "poet", headTurn: -glance }, 7);
         /* SOMEONE BLUE: the suite's one accent mark, one occurrence, held
            back until the last fifth of the last movement — everywhere else
            in this world "blue" is only the tagline's color name. Kept clear

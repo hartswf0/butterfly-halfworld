@@ -22,7 +22,7 @@
    making the surface's own amplitude a number that goes to zero under his
    feet and nowhere else — the miracle is arithmetic, not a caption.
    ========================================================================= */
-import { TAU, lerp, clamp01, smooth, ss } from "../halfworld.mjs";
+import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
 
 /* ------------------------------------------------------------- the temple
    `progress` counts finished pieces, 0..19, fractional mid-arrival. Every
@@ -263,7 +263,15 @@ export default {
         }
         groundTexture(F, T_GY, 140, 201);
         temple(F, u * 9, 7);
-        F.fig(20, T_GY, 14, { mode: "stand", arms: "open" }, 6);
+        /* THE WITNESS CHEERS ON THE SAME BEAT THE CUES STRIKE: arms punch
+           up at the two `at` values instead of holding one open shrug for
+           thirteen seconds — a small body (h14) only answers to phase, rot
+           and arms in this kit, so those are the whole performance it can
+           give, and a cut from open to up is honest here the way 10's
+           walk-to-ride cut is: a beat, not a blend. */
+        const cheer = Math.max(win(u, 0.24, 0.30, 0.34, 0.42), win(u, 0.72, 0.78, 0.82, 0.90)) > 0.5;
+        F.fig(20, T_GY, 14, { mode: "stand", arms: cheer ? "up" : "open",
+          rot: Math.sin(u * TAU * 1.3) * 0.10 }, 6);
       },
     },
     {
@@ -280,7 +288,10 @@ export default {
         dewWinks(F, u, 132);
         temple(F, 9 + u * 9, 7);
         F.fig(18, T_GY, 13, { mode: "walk", phase: u * 4 + 0.15, face: 1 }, 6);
-        F.fig(170, T_GY, 13, { mode: "stand", arms: "reach", face: -1 }, 6);
+        /* the reaching figure sways into the reach rather than holding it
+           frozen — a small rot doing the job weight/lean can't at this size */
+        F.fig(170, T_GY, 13, { mode: "stand", arms: "reach", face: -1,
+          rot: 0.10 + Math.sin(u * TAU * 0.8) * 0.06 }, 6);
       },
     },
     {
@@ -355,7 +366,16 @@ export default {
             F.ink(x, Math.round(yy), 4);
           }
         }
-        F.fig(px, lerp(y0, y1, 0.75), 26, { mode: "stand", arms: "open" }, 7);
+        /* DEEP BREATHS, MADE VISIBLE: a standing figure with no phase holds
+           its breath for the whole shot, which is exactly wrong for a line
+           that names breathing — so phase drives it here and `breath` is
+           pushed past its quiet default to make the rise and fall an
+           actual, visible act rather than a deniable one. Weight settles
+           rather than drifts: he is not shifting his feet, he is standing
+           on water on purpose, and a body that is sure of its footing
+           holds one hip and stays there. */
+        F.fig(px, lerp(y0, y1, 0.75), 26, { mode: "stand", arms: "open",
+          phase: u * 1.7, breath: 1.6, weight: 0.38, headTilt: 0.15 }, 7);
       },
     },
     {
@@ -382,8 +402,12 @@ export default {
            them at the base between the columns and the platform, drawn
            after them, simply buried them; a welcome nobody can see is not
            a welcome. */
-        F.fig(14, T_GY, 13, { mode: "stand", arms: "open" }, 6);
-        F.fig(178, T_GY, 13, { mode: "stand", arms: "open", face: -1 }, 6);
+        /* welcome as a small, gentle sway rather than a frozen shrug — the
+           two lean IN toward the temple, out of phase with each other, so
+           the welcome reads as two people gesturing and not one pose
+           mirrored twice */
+        F.fig(14, T_GY, 13, { mode: "stand", arms: "open", rot: 0.08 + Math.sin(u * TAU * 0.5) * 0.08 }, 6);
+        F.fig(178, T_GY, 13, { mode: "stand", arms: "open", face: -1, rot: -0.08 - Math.sin(u * TAU * 0.5 + 1.4) * 0.08 }, 6);
       },
     },
   ],

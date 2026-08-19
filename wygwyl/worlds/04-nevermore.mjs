@@ -284,7 +284,11 @@ export default {
         trail(F, u * 1.15, 18, P, 5);
         const p = clamp01(u * 0.95) * 0.80;
         const [fx0, fy0] = P(p);
-        F.fig(fx0, fy0, 34 * (1 - p * 0.5), { mode: "walk", phase: u * 3.4, face: 1, lean: 0.05 }, 7);
+        /* he is reading the trail, not the horizon — the head stays down
+           at what his feet are following */
+        F.fig(fx0, fy0, 34 * (1 - p * 0.5), {
+          mode: "walk", phase: u * 3.4, face: 1, lean: 0.05, guise: "poet", headTilt: -0.35,
+        }, 7);
       },
     },
     {
@@ -329,7 +333,13 @@ export default {
            heart travels 33 cells over half the movement, never overshoots,
            and ENDS AT HIS REACHING HAND rather than near it; the first pass
            parked it fifteen cells short and the gesture read as pointing */
-        F.fig(52, 132, 38, { mode: "sit", face: 1, arms: "reach" }, 7);
+        /* the reach itself is left untouched — its hand was already tuned
+           to land exactly where the heart arrives, and a `gesture` target
+           here would fight that tuning rather than sharpen it. Only the
+           carriage is added: he is kneeling over something, so his head
+           stays down at it, and he still needs a clock or he holds his
+           breath through the whole approach. */
+        F.fig(52, 132, 38, { mode: "sit", face: 1, arms: "reach", guise: "poet", phase: u * 1.7, headTilt: -0.4 }, 7);
         const lift = ss(0.30, 0.86, u), beat = throb(u, 7);
         heart(F, lerp(104, 66, lift), lerp(124, 105, lift), 6.0 + beat * 0.9, 7, beat);
       },
@@ -517,7 +527,9 @@ export default {
         for (let k = 0; k < 40; k++) F.disc(px - 46 + P2() * 92, 88 + P2() * 50, 1.0, 3);
         hand(F, 148, 106, 15, 1.57, 0.34, 6);
         hand(F, 166, 117, 15, 4.71, 0.34, 6);
-        F.fig(px - 6, 126, 30, { mode: "sit", face: 1, arms: "reach" }, 7);
+        /* extra hard work, in the dark: he is bent low over the ground he
+           can touch, not sitting upright on it */
+        F.fig(px - 6, 126, 30, { mode: "sit", face: 1, arms: "reach", guise: "poet", phase: u * 1.7, crouch: 0.18, headTilt: -0.5 }, 7);
       },
     },
     {
@@ -547,7 +559,11 @@ export default {
           F.disc(mx, 74 + r1 * 54 - Math.sin(u * TAU * (0.5 + r2 * 0.8) + mx * 0.3) * 5 - u * 10, 0.9, 3);
         }
         const fit = ss(0.28, 0.70, u);
-        F.fig(96, 130, 44, { mode: "stand", arms: "open" }, 7);
+        /* the one arc this quiet movement is allowed: his head is down at
+           the hands while they are still being fitted, and only lifts once
+           they are his again — the same `fit` number that seats the hands
+           raises the gaze, so it is one event read twice, not two. */
+        F.fig(96, 130, 44, { mode: "stand", arms: "open", guise: "poet", phase: u * 1.7, weight: 0.38, headTilt: -0.35 * (1 - fit) }, 7);
         /* they used to be mine: found on the ground, lifted, and set back on
            the ends of the arms — and they turn as they travel, from lying
            palm-down on the ground to hanging off a wrist. The travel is short

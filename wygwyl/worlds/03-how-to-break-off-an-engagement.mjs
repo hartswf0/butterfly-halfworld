@@ -91,7 +91,13 @@ export default {
            is quartered too, which is what a rose window does to any light */
         roseWindow(F, 96, 72, 58, u, 6);
         const p = smooth(u);
-        tambourine(F, lerp(30, 96, p), lerp(20, 72, p), lerp(4, 12, p), u * TAU * 3, 7);
+        const tx = lerp(30, 96, p), ty = lerp(20, 72, p);
+        tambourine(F, tx, ty, lerp(4, 12, p), u * TAU * 3, 7);
+        /* the cue is the moment it actually crosses the glass — a ring
+           struck from the object itself, not the window, because the
+           object is what is making the sound */
+        const strike = clamp01((u - 0.44) / 0.14);
+        if (strike > 0 && strike < 1) F.ring(tx, ty, strike * 22, Math.max(1, Math.round(7 - strike * 6)), 1);
         F.arc(96, 118, 26, Math.PI, TAU, 4, 1);                       // the pool below
       },
     },
@@ -180,6 +186,14 @@ export default {
           const s = 1 - p * 0.55;
           F.disc(x, y, 3 * s, 5); F.disc(x + 5 * s, y - 5 * s, 2.6 * s, 5);
         }
+        /* THE STEP THAT LANDS ON THE CUE. n at u=0.3 is the print the sound
+           belongs to; a ring of mud thrown up around it is the only frame
+           the strike and the footfall are the same event. */
+        const strikeP = clamp01((u - 0.30) / 0.12);
+        if (strikeP > 0 && strikeP < 1) {
+          const sp = n / 22, sx = 172 - sp * 168, sy = 138 - sp * 36;
+          F.ring(sx, sy, strikeP * 10, Math.max(1, Math.round(6 - strikeP * 5)), 1);
+        }
         /* what the water kept, behind them: a shape under a flat surface */
         F.line(4, 90, 60, 90, 4, 1); F.line(72, 90, 188, 90, 4, 1);
         F.arc(150, 90, 14, Math.PI, TAU, 3, 1);
@@ -199,6 +213,12 @@ export default {
            now runs the whole length, so the object is legible while it goes. */
         const b = smooth(u) * 0.92;
         const N = 11, r = 34, CX = 96, CY = 62;
+        /* THE STRIKE ITSELF, at the cue's own `at`: a burst from the ring's
+           centre outrunning the shards, which are still close to their
+           seats at u=0.24 — this is the impact, they are only starting to
+           leave it. */
+        const impact = clamp01((u - 0.24) / 0.10);
+        if (impact > 0 && impact < 1) F.ring(CX, CY, impact * 20, Math.max(1, Math.round(7 - impact * 6)), 1);
         for (let k = 0; k < N; k++) {
           const a0 = k / N * TAU, a1 = (k + 0.78) / N * TAU, mid = (a0 + a1) / 2;
           /* Each shard KEEPS ITS SEAT ON THE RING and travels outward along its

@@ -267,7 +267,11 @@ export default {
         const walkP = clamp01(u / 0.55);
         if (walkP < 1) {
           const wx = lerp(14, B.footpeg[0] - 3, smooth(walkP));
-          F.fig(wx, ROAD, 32, { mode: "walk", phase: u * 6, face: 1 }, 7);
+          /* phase 6.35, not 6 — an integer rate lands the gait's own
+             degenerate frame exactly on a QA sample. He looks at the bike
+             the whole walk up, not straight ahead — this is the one figure
+             in the film who is ever looking at anything but the road. */
+          F.fig(wx, ROAD, 32, { mode: "walk", phase: u * 6.35, face: 1, headTurn: 0.5 }, 7);
         } else {
           rider(F, B, 1.28, 7);
         }

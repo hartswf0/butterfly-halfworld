@@ -152,7 +152,12 @@ export default {
           for (let k = 0; k <= n * reach; k++)
             if (k % 2 === 0) F.ink(lerp(HX, tx, k / n), lerp(HY, ty, k / n), 4);
         }
-        F.fig(34, gy(34), 26, { mode: "stand", arms: "reach", face: 1 }, 7);
+        /* the reach hand already lands within a few cells of HX,HY by the
+           pose solver's own default — a `gesture` override here would only
+           re-tune what the original hand-placed dashed line already trusts.
+           He is looking up at what he's naming, which `arms:"reach"` alone
+           cannot say. */
+        F.fig(34, gy(34), 26, { mode: "stand", arms: "reach", face: 1, guise: "poet", phase: u * 1.7, weight: 0.72, headTilt: 0.5 }, 7);
 
         /* EVEN GALAXIES, IF I MAY. It arrives late, it is bigger than the
            whole constellation, and NO LABEL LANDS ON IT: the line asks
@@ -236,7 +241,12 @@ export default {
            of the other: at rot ≈ −1.5 a standing pose puts head, hips, both
            feet and both hands on one scanline. Arms are forced down for the
            same reason — 'open' threw one arm straight up out of the bed. */
-        F.fig(106, 140, 50, { mode: "walk", phase: 0.09, rot: -1.5, face: -1, arms: "down" }, 7);
+        /* the 0.09 constant still does the one job it was tuned for — one
+           knee clear of the other at any u — but a body that lies still for
+           fifteen humid seconds is not a held frame, it shifts. A slow drift
+           on top of the constant keeps the knee separation intact at every
+           u while giving him a restless half-turn across the movement. */
+        F.fig(106, 140, 50, { mode: "walk", phase: 0.09 + u * 0.15, rot: -1.5, face: -1, arms: "down", guise: "poet" }, 7);
         /* THE MEASURE FROM THE PINE TO HIS BACK. This is the number the line
            is about: it breathes and it never closes, which is the whole of
            "could comfort my spine. It didn't." Rejected: drawing the spine as
@@ -347,7 +357,7 @@ export default {
            Everything he invents is drawn around this line. */
         for (let y = 46; y < 116; y += 4) F.ink(96, y, 4);
         F.line(58, 136, 88, 136, 5, 1); F.line(104, 136, 134, 136, 5, 1);
-        F.fig(96, 136, 16, { mode: "stand", arms: "up" }, 7);
+        F.fig(96, 136, 16, { mode: "stand", arms: "up", guise: "poet" }, 7);
         /* EVEN GRANT MIRACLES: one node stops obeying the scale of the
            universe it belongs to. That is the only definition of a miracle
            this world can draw. */
@@ -560,10 +570,13 @@ export default {
             const nx = 96 + off, w = F.wordW(KIN[i].n, ph);
             if (Math.abs(off) + w / 2 < GAP - 3) F.word(KIN[i].n, nx, ny, ph, 4);
           }
+          /* an orchestra, not a chorus line: the outer two carry the elder
+             guise so the crowd reads as generations rather than a repeated
+             stencil of the same body five times */
           for (let j = -2; j <= 2; j++) {
             const fx2 = 96 + j * 15;
             if (Math.abs(fx2 - 96) > GAP - 8) continue;
-            F.fig(fx2, 126, 14 - Math.abs(j), { mode: "stand", arms: "open" }, 6);
+            F.fig(fx2, 126, 14 - Math.abs(j), { mode: "stand", arms: "open", guise: Math.abs(j) === 2 ? "elder" : "everyman" }, 6);
           }
         }
         /* the light he inherited, last seen at the core of his own print,
