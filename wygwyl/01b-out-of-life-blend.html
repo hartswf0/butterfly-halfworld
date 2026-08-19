@@ -1,0 +1,217 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>01b-out-of-life-blend — a WYGWYL halfworld</title>
+<link rel="stylesheet" href="halfworld.css">
+<video id="foot" preload="auto" playsinline muted style="position:absolute;width:2px;height:2px;opacity:0;pointer-events:none;left:-9999px"></video>
+<script type="module">
+/* ============================================================================
+   01b-out-of-life-blend.html — A HAND-WRITTEN SHELL, NOT A GENERATED ONE.
+
+   Every other film in the suite gets its shell from build-shells.mjs, which
+   writes nothing but a `mount(world)` call — the right choice when a world
+   module is a pure function of u with no I/O. This world is different: it
+   declares a `footage` export (see the bottom of
+   worlds/01b-out-of-life-blend.mjs) asking for real video pixels, and pure
+   functions cannot fetch, decode or seek a <video>. Something has to own the
+   element, hand ingest.mjs a frame, and composite it against the computed
+   field through blend.mjs before it reaches makePost — that something is
+   this file. It is deliberately NOT folded into build-shells.mjs: every other
+   shell must stay a one-liner generated from nothing but the world's file
+   name, and teaching the generator about a `footage` export would make it
+   respond differently to different modules, which is the one thing a
+   generator here is not supposed to do. build-shells.mjs is untouched.
+
+   THE CONTRACT this shell fulfils (documented in full at the foot of
+   worlds/01b-out-of-life-blend.mjs): `footage.movements[i]` is an array of
+   segments covering slices of movement i's own u ∈ [0,1); a segment names a
+   footage time window (scrubbed by u, not played at the clip's own rate), an
+   ingest.mjs treatment, a blend.mjs mode, and a `mix(p)` from local segment
+   progress to that blend's own t.
+
+   DEGRADE PATH. If the video element never produces a decodable frame —
+   this sandbox's Chromium ships without H.264 decode, see EXPERIMENTS.md and
+   BLEND-NOTES.md — `footageUsable` below stays false forever and every frame
+   falls back to `R.renderField(t)` alone: the computed layer, unmodified,
+   exactly what the shooter and any future film-renderer need to keep
+   working. Nothing here throws or blocks on the video; the whole footage
+   path is a pure addition when available, never a dependency.
+   ========================================================================= */
+import { FW, FH, TAU, makeRuntime, makePost, makeSound, clamp01 } from "./halfworld.mjs";
+import world, { footage } from "./worlds/01b-out-of-life-blend.mjs";
+import { makeIngest } from "./ingest.mjs";
+import { swap, wipe, byLevel, noiseSwap, figureLock } from "./blend.mjs";
+
+document.title = `${world.n} · ${world.title} (blend) — a WYGWYL halfworld`;
+document.body.innerHTML = `
+  <header>
+    <span class="brand"><span class="dot"></span>WYGWYL</span>
+    <span class="ttl">${world.n} · ${world.title} · BLEND</span>
+    <span class="tagline">${world.tagline || ""}</span>
+    <span class="sp"></span>
+    <a class="btn" href="01-out-of-life.html">01 · COMPUTED</a>
+    <a class="btn" href="index.html">SUITE</a>
+  </header>
+  <main>
+    <div id="stagewrap">
+      <canvas id="stage"></canvas>
+      <div id="chip"></div>
+    </div>
+    <div id="linebar"><span id="voice"></span></div>
+  </main>
+  <footer>
+    <button id="play" aria-label="play/pause">▶</button>
+    <button id="prev">◀◀</button>
+    <button id="next">▶▶</button>
+    <input id="scrub" type="range" min="0" max="1000" step="1" value="0">
+    <span id="clock"></span>
+    <button id="snd" aria-pressed="false">SOUND</button>
+    <button id="cin">CINEMA</button>
+  </footer>`;
+
+const $ = (id) => document.getElementById(id);
+const video = document.getElementById("foot");
+const canvas = $("stage");
+const post = makePost(canvas, world.accent || "#5aa7ff");
+const sound = makeSound(world);
+const R = makeRuntime(world);
+const ingest = makeIngest(video);
+
+const fieldA = new Float32Array(FW * FH);   // scratch: this frame's footage sample
+
+/* the dev server advertises Accept-Ranges but doesn't honour a Range
+   request, which aborts a plain <video src> load under Chromium the instant
+   it issues a ranged GET (see dj.html, same fix, same reason). Fetching the
+   file whole and handing the element a blob: URL sidesteps ranged requests
+   entirely. If this fails — no network, no file, wrong origin — the catch
+   leaves `video` with no source, and footageUsable below simply never
+   becomes true; the film still plays, computed-only. */
+let footageUsable = false;
+(async () => {
+  try {
+    const res = await fetch(footage.src);
+    if (!res.ok) return;
+    const blob = await res.blob();
+    video.src = URL.createObjectURL(blob);
+  } catch { /* degrade — see file header */ }
+})();
+video.addEventListener("loadeddata", () => {
+  footageUsable = video.videoWidth > 0 || video.readyState >= 2;
+});
+video.addEventListener("error", () => { footageUsable = false; });
+
+/* ---------------------------------------------------------- the blend call
+   Each blend.mjs export takes a different tail of positional args beyond
+   (a, b, t) — this is the one place that has to know the shape of each, so
+   footage.movements' segments stay declarative data. */
+function applyBlend(name, a, b, t, blendOpts = {}) {
+  switch (name) {
+    case "wipe": return wipe(a, b, t, blendOpts.angle ?? 0, blendOpts.opts || {});
+    case "byLevel": return byLevel(a, b, t, !!blendOpts.reverse);
+    case "noiseSwap": return noiseSwap(a, b, t, blendOpts.s ?? 0.4, blendOpts.opts || {});
+    case "figureLock": return figureLock(a, b, t, blendOpts.threshold ?? 3.5);
+    case "swap": default: return swap(a, b, t);
+  }
+}
+
+/* pick the segment owning this movement-local u, and how far into it we are */
+function pickSegment(segs, u) {
+  for (const seg of segs) {
+    if (u >= seg.u0 && (u < seg.u1 || seg.u1 >= 1)) {
+      const p = clamp01((u - seg.u0) / ((seg.u1 - seg.u0) || 1e-6));
+      return [seg, p];
+    }
+  }
+  return [segs[segs.length - 1], 1];
+}
+
+/* -------------------------------------------------------------- the frame
+   `drawn` is the engine's own composite for absolute time t — it already
+   carries the built-in movement-boundary crossfade, so this shell never
+   needs a private per-movement field, only the public renderField(t). The
+   footage layer is an ADDITIONAL per-dot swap on top of that, keyed to the
+   real movement (footage has no opinion during the title card, or during
+   the last half-second of engine crossfade into it — see BLEND-NOTES.md). */
+function frame(t) {
+  const [i, u] = R.locate(t);
+  const drawn = R.renderField(t);
+  const movFootage = i >= 1 ? footage.movements[i - 1] : null;
+  if (!footageUsable || !movFootage) { post.draw(drawn); return; }
+
+  const [seg, p] = pickSegment(movFootage, u);
+  const ft = seg.t0 + (seg.t1 - seg.t0) * p;
+  video.currentTime = Math.min(footage.duration - 0.05, Math.max(0, ft));
+  ingest.sample(fieldA, seg.opts);
+  const mixT = (seg.mix ? seg.mix(p) : p);
+  post.draw(applyBlend(seg.blend, fieldA, drawn, clamp01(mixT), seg.blendOpts));
+}
+
+/* ------------------------------------------------------------------ layout
+   identical wiring to halfworld.mjs's own mount() — duplicated, not
+   imported, because mount() draws with post.draw(R.renderField(t)) directly
+   and has no hook for a footage layer between renderField and the canvas. */
+function fit() {
+  const w = $("stagewrap");
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  post.fit(w.clientWidth, w.clientHeight, dpr);
+}
+window.addEventListener("resize", fit);
+const fmt = (s) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+
+let t = 0, playing = true, lastNow = performance.now(), lastI = -1, prevU = 0;
+const startAt = new URLSearchParams(location.search).get("m");
+if (startAt) t = R.starts[Math.min(R.movements.length - 1, +startAt)] || 0;
+
+function loop(now) {
+  const dt = Math.min(0.05, (now - lastNow) / 1000);
+  lastNow = now;
+  if (playing) t = (t + dt) % R.total;
+  const [i, u] = R.locate(t);
+  const m = R.movements[i];
+  if (i !== lastI) { sound.step(i); lastI = i; prevU = 0; }
+  for (const c of m.cues || []) { if (c.at > prevU && c.at <= u) sound.cue(c); }
+  prevU = u;
+
+  frame(t);
+
+  const words = (m.line || "").split(" ");
+  const nWords = Math.ceil(clamp01(u * 1.18) * words.length);
+  $("voice").textContent = words.slice(0, nWords).join(" ");
+  $("linebar").style.visibility = m.line ? "visible" : "hidden";
+  $("chip").textContent = i === 0 ? `${world.n} · TITLE`
+    : `${world.n} · M${i}/${R.movements.length - 1} · ${m.label}${footageUsable ? " · FILMED" : " · DRAWN"}`;
+  $("clock").textContent = `${fmt(t)} / ${fmt(R.total)}`;
+  if (!scrubbing) $("scrub").value = Math.round(t / R.total * 1000);
+  requestAnimationFrame(loop);
+}
+
+let scrubbing = false;
+$("play").onclick = () => { playing = !playing; $("play").textContent = playing ? "Ⅱ" : "▶"; };
+$("prev").onclick = () => { const [i] = R.locate(t - 0.01); t = R.starts[(i - 1 + R.movements.length) % R.movements.length]; };
+$("next").onclick = () => { const [i] = R.locate(t); t = R.starts[(i + 1) % R.movements.length]; };
+$("scrub").addEventListener("input", (e) => { scrubbing = true; t = +e.target.value / 1000 * R.total; });
+$("scrub").addEventListener("change", () => { scrubbing = false; });
+$("snd").onclick = (e) => { const on = sound.toggle(); e.target.setAttribute("aria-pressed", String(on)); };
+$("cin").onclick = () => document.body.classList.toggle("cinema");
+canvas.addEventListener("dblclick", () => document.body.classList.toggle("cinema"));
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space") { e.preventDefault(); $("play").click(); }
+  if (e.key === "ArrowRight") $("next").click();
+  if (e.key === "ArrowLeft") $("prev").click();
+  if (e.key === "f" || e.key === "F") $("cin").click();
+  if (e.key === "s" || e.key === "S") $("snd").click();
+});
+
+/* headless QA hook, same shape as every other film's window.__hw, plus the
+   footage bit so a harness can tell which path a given seek actually took. */
+window.__hw = {
+  world, runtime: R,
+  seek(tt) { t = tt; playing = false; },
+  play() { playing = true; },
+  get footageUsable() { return footageUsable; },
+};
+
+fit();
+$("play").textContent = "Ⅱ";
+requestAnimationFrame(loop);
+</script>

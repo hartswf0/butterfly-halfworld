@@ -101,6 +101,12 @@ for (const opt of OPTIONS) {
   grid.appendChild(card);
   const cv = card.querySelector("canvas");
   const rt = drawPreview(world, cv, 0);
+  /* makePost.fit sizes the element in pixels, which overrides the sheet's
+     `width:100%; aspect-ratio:4/3` and left the three cards at three different
+     heights with their captions at three different depths. The backing store
+     is already 4:3, so handing the CSS box back to the stylesheet keeps the
+     picture correct and puts the row back in line. */
+  cv.style.width = "100%"; cv.style.height = "auto";
   card.querySelector(".mv").textContent = `${rt.movements.length - 1} MV · ${Math.round(rt.total)}S`;
   /* Skip past the shared 5s auto title-card and stagger the three by a
      third of a film each — otherwise all three open on the same generic

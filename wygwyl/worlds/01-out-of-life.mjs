@@ -60,11 +60,20 @@ export default {
       draw(u, F) {
         const { FLOOR } = room(F, u);
         windowAt(F, 158, FLOOR);
-        /* he searches: crossing the room, turning, crossing back */
+        /* he searches: crossing the room, turning, crossing back. The two
+           cues are what he startles at — a drawer, a latch — and the head
+           catches the sound a beat before the body would, which is what
+           makes it a reaction instead of a coincidence of timing. */
         const p = smooth(Math.abs(((u * 2.2) % 2) - 1));
         const x = lerp(34, 140, p);
         const face = ((u * 2.2) % 2) < 1 ? 1 : -1;
-        F.fig(x, FLOOR, 34, { mode: "walk", phase: u * 7, face, lean: face * 0.06 }, 7);
+        const startle = Math.max(Math.exp(-((u - 0.28) / 0.045) ** 2), Math.exp(-((u - 0.62) / 0.045) ** 2));
+        F.fig(x, FLOOR, 34, {
+          mode: "walk", phase: u * 7.35, face, lean: face * 0.06, guise: "poet",
+          /* scanning while he walks, then a sharp glance at the startle */
+          headTurn: Math.max(-1, Math.min(1, face * (0.45 + 0.30 * Math.sin(u * TAU * 4.4)) - startle * face * 0.9)),
+          headTilt: startle * 0.5,
+        }, 7);
       },
     },
     {
@@ -81,10 +90,23 @@ export default {
         /* the window is the EX: every step toward it, it gets further away */
         const wx = lerp(150, 176, smooth(u));
         windowAt(F, wx, FLOOR);
-        F.fig(wx + 13, 84, 22, { mode: "stand", arms: "down" }, 5);   // the turned back
+        /* the turned back — the guise is set from the same clip figure.mjs
+           was measured off, so the silhouette here is unmistakably her even
+           with no face to read. She has stopped moving toward anything;
+           weight settles onto one hip the way a body does at a window it
+           has given up on reaching. */
+        F.fig(wx + 13, 84, 22, {
+          mode: "stand", arms: "down", guise: "turned", phase: u * 1.7,
+          weight: 0.82, headTilt: -0.25,
+        }, 5);
         F.ink(wx + 16, 66, 8);                                        // the ember
+        /* the ember breathes with the drag she is not taking yet */
+        if (Math.sin(u * TAU * 1.3 + 2) > 0.72) F.ink(wx + 17, 65, 7);
         const px = lerp(50, wx - 22, smooth(u * 0.9));
-        F.fig(px, FLOOR, 34, { mode: "walk", phase: u * 6, face: 1, arms: "reach" }, 7);
+        F.fig(px, FLOOR, 34, {
+          mode: "walk", phase: u * 6.35, face: 1, arms: "reach", guise: "poet",
+          headTurn: 0.5,                                    // he leads with his eyes on her
+        }, 7);
         /* the haze claims the room left to right — dot by dot, an allegiance
            swap. one substance replacing another, never two coexisting */
         const claim = u * 1.25;
@@ -127,9 +149,19 @@ export default {
         const gap = 24 + Math.sin(u * TAU * 2) * 3;
         const cy = 40 + smooth(u) * 30;
         const roll = Math.sin(u * TAU * 0.8) * 0.5;
-        F.fig(84, cy + gap, 30, { mode: "stand", rot: 1.5 + roll, arms: "open" }, 7);   // the EX, falling first
+        /* both bodies brace against the tumble — a crouch that tightens as
+           the fall goes on, not the loose open pose of somebody standing */
+        const brace = 0.10 + smooth(u) * 0.22;
+        F.fig(84, cy + gap, 30, {
+          mode: "stand", rot: 1.5 + roll, arms: "open", phase: u * 5.35,
+          crouch: brace, headTilt: -0.4,
+        }, 7);   // the EX, falling first
         F.ink(90, cy + gap - 20, 8);                                                     // the ember, still lit
-        F.fig(110, cy, 33, { mode: "stand", rot: -1.4 - roll, arms: "reach", face: -1 }, 7);
+        F.fig(110, cy, 33, {
+          mode: "stand", rot: -1.4 - roll, arms: "reach", face: -1, phase: u * 4.35,
+          guise: "poet", crouch: brace, headTurn: -0.6, headTilt: -0.3,
+          gesture: [-15, 8],                                 // reaching back for her
+        }, 7);
         /* he trips on his own words: they fall beside him as tumbling dashes,
            each one keeping its own rate, none of them landing */
         const R = F.rng(31);
@@ -149,8 +181,11 @@ export default {
            takes them. the flood is per-dot, scheduled from the edges in */
         const gap = 24 + Math.sin(u * TAU * 2) * 3;
         const cy = 60;
-        F.fig(86, cy + gap, 24, { mode: "stand", rot: 1.9, arms: "open" }, 2);
-        F.fig(112, cy, 27, { mode: "stand", rot: -2.1, arms: "reach", face: -1 }, 3);
+        F.fig(86, cy + gap, 24, { mode: "stand", rot: 1.9, arms: "open", phase: u * 3.35, crouch: 0.28 }, 2);
+        F.fig(112, cy, 27, {
+          mode: "stand", rot: -2.1, arms: "reach", face: -1, phase: u * 2.35,
+          guise: "poet", crouch: 0.28, gesture: [-15, 8],
+        }, 3);
         const flood = u * 1.35;
         F.map((x, y, v) => {
           const d = Math.hypot(x - 100, y - 44) / 150;     // distance from the ember
