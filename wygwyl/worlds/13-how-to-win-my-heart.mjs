@@ -320,7 +320,7 @@ function wallTone(F, sx, sy) {
   if (sy < roofY + 3.4) return 6;
   if (sy > 84) return 2;
   if (sx > 88 && sx < 148 && sy > 30 && sy < 76) {                  // THE WINDOW
-    if (sy > 73) return 6;                                          // the sill
+    if (sy > 73) return 5;                                          // the sill
     const hx = sx - 105, hy = sy - 40;
     if (hx * hx + hy * hy < 30) return 7;                           // her head
     if (sy >= 45 && sy < 49 && Math.abs(sx - 105) < 2.0) return 7;  // and a neck, without
@@ -346,17 +346,17 @@ function wallTone(F, sx, sy) {
 function resolveDot(F, x, y, l, idx, u, a, b, scatter, big) {
   const p = ss(a, b, u);
   const tx = Math.round(x), ty = Math.round(y);
-  if (p >= F.bayer(tx, ty)) { big ? F.disc(x, y, 1.1, l) : F.ink(tx, ty, l); return; }
+  if (p >= F.bayer(tx, ty)) { big ? F.disc(x, y, 0.9, l) : F.ink(tx, ty, l); return; }
   const ang = F.noise(idx, 701) * TAU, r = (0.35 + F.noise(idx, 702) * 0.65) * scatter * (1 - p);
   const px = x + Math.cos(ang) * r, py = y + Math.sin(ang) * r;
-  big ? F.disc(px, py, 1.1, l) : F.ink(Math.round(px), Math.round(py), l);
+  big ? F.disc(px, py, 0.9, l) : F.ink(Math.round(px), Math.round(py), l);
 }
 /* an eye is SEVEN POINTS AND NO MORE. At the radius the first pass used, a
    pair of them came to twelve cells across on an eleven-cell head and she
    read as a doll with headlights. */
 function eyeDots(cx, cy) {
   const pts = [[cx, cy]];
-  for (let k = 0; k < 6; k++) { const a = k / 6 * TAU; pts.push([cx + Math.cos(a) * 0.95, cy + Math.sin(a) * 0.7]); }
+  for (let k = 0; k < 6; k++) { const a = k / 6 * TAU; pts.push([cx + Math.cos(a) * 0.7, cy + Math.sin(a) * 0.5]); }
   return pts;
 }
 
@@ -578,7 +578,7 @@ export default {
            water, where ink at 7 on ink at 6 is nothing at all. */
         /* spread wide enough that the outer letters are not standing inside
            the fire: the ones under the flame are erased by their own light */
-        const heap = [[62, 123, 21, 9], [96, 125, 20, 9], [148, 122, 21, 9], [78, 134, 20, 8], [132, 135, 21, 8]];
+        const heap = [[62, 123, 21, 8], [96, 124, 20, 8], [148, 122, 21, 8], [78, 132, 20, 7], [132, 133, 21, 7]];
         let lit = 0;
         heap.forEach((pd, i) => {
           const gone = clamp01((u - (0.10 + i * 0.145)) / 0.20);
@@ -772,7 +772,7 @@ export default {
            that arrives as a lattice rather than as tone — the frame first and
            the face inside it second, which is the order looking through a
            window happens in */
-        [eyeDots(102, 40), eyeDots(108, 40)].forEach((eye, ei) =>
+        [eyeDots(102.6, 39.2), eyeDots(107.4, 39.2)].forEach((eye, ei) =>
           eye.forEach((p, i) => resolveDot(F, p[0], p[1], 8, 4000 + ei * 50 + i, u, 0.42, 0.80, 22, true)));
         /* STEP BACK: away from the rail and toward us, so he GROWS instead of
            shrinking — the only way this world can spell a step toward the

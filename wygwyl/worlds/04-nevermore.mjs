@@ -540,46 +540,78 @@ export default {
       label: "I PUT THEM BACK ON", seconds: 14,
       line: "Hands that once could touch dust after dusk, and feel good — they too used to be mine. I put them back on, with the care of my future at stake: nevermore.",
       cues: [
-        { at: 0.16, f: 200, decay: 0.1, gain: 0.4, partials: [1, 2.4], noise: 0.9, nDecay: 0.03, seed: 91 },
-        { at: 0.60, f: 150, decay: 0.3, gain: 0.45, partials: [1, 2.0, 3.3], noise: 0.5, nDecay: 0.05, seed: 92 },
+        { at: 0.18, f: 200, decay: 0.1, gain: 0.4, partials: [1, 2.4], noise: 0.9, nDecay: 0.03, seed: 91 },
+        { at: 0.55, f: 150, decay: 0.3, gain: 0.45, partials: [1, 2.0, 3.3], noise: 0.5, nDecay: 0.05, seed: 92 },
         { at: 0.80, f: 330, decay: 1.4, gain: 0.5, partials: [1, 2.01, 3.02, 4.04], noise: 0.12, nDecay: 0.03, seed: 93 },
       ],
       draw(u, F) {
         F.clear(7);
-        /* the same island of touch as M5, held still and opened wide — he has
-           stopped searching, so the ground stops moving under him */
+        /* PUTTING THEM ON IS AN ACT WITH A BEGINNING AND AN END, and `fit` is
+           the whole of it: one number that opens the reach, seats the hands,
+           unfolds the crouch and lifts the gaze. This movement used to be a
+           photograph of the result — the hands already fitted, the man already
+           upright, twenty-two seconds of nothing moving but dust.
+
+           THE ISLAND IS HIS REACH. M5 called it "the reach of touch": the
+           ground a man with no hands can still get his forearms onto. So it
+           begins at exactly the size M5 left it and OPENS as the hands go back
+           on, because the reach of touch is precisely the thing being put back.
+           Nothing in this world brightens — the dark is untouched and the film
+           is still the darkest it has been. What grows is the hole in it. */
+        const fit = ss(0.22, 0.74, u);
+        const rx = lerp(49, 75, fit), ry = lerp(33, 55, fit);
         F.map((x, y) => {
-          const d = Math.hypot((x - 96) / 64, (y - 98) / 48);
+          const d = Math.hypot((x - 96) / rx, (y - 98) / ry);
           if (d < 1 && F.bayer(x, y) < (1 - d) * 1.5) return 0;
         });
-        F.line(34, 128, 84, 127, 4, 1); F.line(96, 127, 158, 128, 4, 1);
+        F.line(96 - rx * 0.78, 128, 96 - rx * 0.16, 127, 4, 1);
+        F.line(96 - rx * 0.02, 127, 96 + rx * 0.76, 128, 4, 1);
         const G = F.rng(13);
-        for (let k = 0; k < 70; k++) F.disc(38 + G() * 116, 102 + G() * 38, 1.0, 3);
-        /* dust after dusk: it does not settle, it hangs and turns over, and
-           it is the one thing in this half of the film allowed to feel good */
+        for (let k = 0; k < 90; k++) F.disc(96 + (G() - 0.5) * rx * 1.8, 102 + G() * 38, 1.0, 3);
+        /* DUST AFTER DUSK. It does not settle: it hangs, turns over and lifts,
+           and it is the one thing in this half of the film allowed to feel
+           good. Every mote keeps its own rate and its own start, so the field
+           drifts rather than pulsing as one body — and it wraps, because a
+           mote that leaves the top has to be replaced by one at the bottom or
+           the air empties out over twenty-two seconds. */
         const D = F.rng(21);
-        for (let k = 0; k < 60; k++) {
-          const mx = 38 + D() * 116, r1 = D(), r2 = D();
-          F.disc(mx, 74 + r1 * 54 - Math.sin(u * TAU * (0.5 + r2 * 0.8) + mx * 0.3) * 5 - u * 10, 0.9, 3);
+        for (let k = 0; k < 150; k++) {
+          const bx = D(), by = D(), r2 = D();
+          const my = 62 + (((by * 74 - u * (16 + r2 * 34)) % 74) + 74) % 74;
+          F.disc(96 + (bx - 0.5) * rx * 1.95 + Math.sin(u * TAU * (0.4 + r2 * 0.7) + bx * 9) * 3, my, 0.9, 3);
         }
-        const fit = ss(0.28, 0.70, u);
-        /* the one arc this quiet movement is allowed: his head is down at
-           the hands while they are still being fitted, and only lifts once
-           they are his again — the same `fit` number that seats the hands
-           raises the gaze, so it is one event read twice, not two. */
-        F.fig(96, 130, 44, { mode: "stand", arms: "open", guise: "poet", phase: u * 1.7, weight: 0.38, headTilt: -0.35 * (1 - fit) }, 7);
-        /* they used to be mine: found on the ground, lifted, and set back on
-           the ends of the arms — and they turn as they travel, from lying
-           palm-down on the ground to hanging off a wrist. The travel is short
-           and slow. Rejected: throwing them, which made a juggling act of the
-           one gesture in the film that is supposed to cost something. */
-        hand(F, lerp(54, 82, fit), lerp(122, 104, fit), 17, lerp(1.57, 4.07, fit), lerp(0.34, 0.26, fit), 7);
-        hand(F, lerp(140, 110, fit), lerp(118, 104, fit), 17, lerp(4.71, 2.22, fit), lerp(0.34, 0.26, fit), 7);
-        /* and the heart is where it was put back, still keeping time. It sits
-           high on the chest and is drawn wide, because the torso is two cells
-           across and at its old size the organ simply vanished into it */
+        /* HE GETS UP OFF THE BARE GROUND. At the start he is folded over the
+           place M5 left him searching, one wrist down in the grit against the
+           hand lying there; by the end he is standing at full height with both
+           of them on. The crouch unfolds, the gaze comes up off the ground,
+           the weight settles onto one leg — four facts off one number, which
+           is the only way a body reads as performing rather than as being
+           posed twice and cut between. */
+        const HX = 96, HY = 138, HH = 54;
+        const crouch = lerp(1.45, 0, fit);
+        const gx = lerp(-27, 21, fit), gy = lerp(3, 31, fit);
+        const hipY = HH * 0.5 - HH * 0.16 * crouch, shY = HH * 0.815 - HH * 0.20 * crouch;
+        F.fig(HX, HY, HH, {
+          mode: "stand", face: 1, guise: "poet", phase: u * 1.7, arms: "reach",
+          crouch, weight: lerp(0.5, 0.74, fit), headTilt: lerp(-0.55, 0.14, fit),
+          gesture: [gx, gy],
+        }, 7);
+        /* THEY USED TO BE MINE. The near one is the one he already had hold
+           of: it rides the wrist the rig puts there, so it comes up off the
+           ground because his arm does, not on a schedule of its own. The far
+           one is still lying where the search found it and travels to the
+           other wrist — and both TURN as they go, from palm-down in the grit
+           to hanging off a joint. Rejected: throwing them, which made a
+           juggling act of the one gesture in the film that costs something. */
+        hand(F, HX + gx, HY - gy, 18, lerp(1.42, 4.10, fit), 0.32, 7);
+        hand(F, lerp(132, HX + HH * 0.09, fit), lerp(129, HY - hipY + HH * 0.02, fit),
+             18, lerp(4.78, 2.16, fit), 0.32, 7);
+        /* and the heart is where it was put back, still keeping time — and it
+           rides the chest up as he rises, because an organ that stays at a
+           fixed height while the man stands is a mark on the picture rather
+           than a thing inside him */
         const beat = throb(u, 7);
-        heart(F, 96, 103, 7.0 + beat * 0.9, 7, beat);
+        heart(F, HX + 2, HY - shY + 6, 7.0 + beat * 0.9, 7, beat);
         /* THE SAME VOW AS M2, IN THE INVERTED MATERIAL: there it was ink
            arriving over a flat sea, here it is paper cut out of the dark.
            Same word, same schedule, opposite substance — the only way I found
