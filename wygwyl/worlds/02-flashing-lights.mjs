@@ -82,15 +82,23 @@ export default {
       label: "WE GO THROUGH", seconds: 13,
       line: "A winless insomnia. An epiphany of a road winding down. My eyes dilate — and we go through.",
       draw(u, F) {
-        /* the road winds down and away, seen through an aperture that is
-           opening — a pupil dilating is the only zoom this world allows */
+        /* THE ROAD IS SEEN THROUGH A PUPIL THAT IS OPENING. A dilating iris is
+           the only zoom this world allows: there is no scaling pass, so getting
+           closer to something has to be done by uncovering more of it.
+           The aperture starts at 14 cells, and the first pass put nothing but
+           the road's vanishing point inside it — twelve seconds that opened on
+           blank paper. The horizon and the far light are drawn AT the vanishing
+           point so the smallest aperture still contains a picture. */
         const vy = 66;
+        F.line(52, vy, 88, vy, 3, 1); F.line(104, vy, 140, vy, 3, 1);   // horizon
+        F.disc(96, vy - 3, 3.4, 6);                                      // the far light
         for (let k = 0; k < 26; k++) {
           const p = (k / 26 + u * 0.6) % 1, z = 1 - p;
           const w = 4 + z * z * 150, y = vy + (1 - z * z) * 66;
           const bend = Math.sin(p * 3.1 + u * 1.4) * 26 * (1 - z);
-          F.line(96 + bend - w / 2, y, 96 + bend - w / 2 + w * 0.22, y, 5, 1);
-          F.line(96 + bend + w / 2 - w * 0.22, y, 96 + bend + w / 2, y, 5, 1);
+          const seg = Math.max(2, w * 0.22);
+          F.line(96 + bend - w / 2, y, 96 + bend - w / 2 + seg, y, 5, 1.4);
+          F.line(96 + bend + w / 2 - seg, y, 96 + bend + w / 2, y, 5, 1.4);
         }
         const R = lerp(14, 108, smooth(u));
         F.map((x, y, v) => {
