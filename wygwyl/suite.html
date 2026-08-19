@@ -85,7 +85,7 @@ import { makeRuntime, makePost, makeSound } from "./halfworld.mjs";
 /* The head of the suite is a title sequence, and which of the three Whitney
    options plays is a URL question rather than an edit: ?title=b swaps it, and
    ?title=none drops it. The poems are the running order and never move. */
-const TITLE = new URLSearchParams(location.search).get("title") || "a";
+const TITLE = new URLSearchParams(location.search).get("title") || "d";
 const SLUGS = [
   ...(TITLE === "none" ? [] : ["00-title-" + TITLE]),
   "01-out-of-life", "02-flashing-lights", "03-how-to-break-off-an-engagement",

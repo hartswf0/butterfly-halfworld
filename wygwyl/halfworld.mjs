@@ -207,10 +207,25 @@ export function makeSound(world) {
   let ac = null, master = null, oscs = [], noiseGain = null, on = false;
   let spec = world.drone || { base: 55, steps: [0, 3, 7, 10] };
   let seed = world.seed || 1;
+  /* A WORLD MAY DECLARE A REAL RECORDING INSTEAD OF THE SYNTH BED.
+     Thirteen of these films generate their own sound because no recording of
+     them exists. The suite as a whole DOES have one — the drone piece the
+     beflix cut played under — and where a world names it, that file is the bed
+     and the oscillators stay silent. The foley still plays on top, because the
+     strikes belong to the picture and the picture is new.
+     `from` is the second of the mp3 this world starts at, so a film can borrow
+     the passage of the record that belongs to it. */
+  let bedEl = null;
+  if (world.audio && typeof Audio !== "undefined") {
+    bedEl = new Audio(world.audio.src);
+    bedEl.loop = true;
+    bedEl.preload = "auto";
+    bedEl.volume = 0;
+  }
   function boot() {
     ac = new (window.AudioContext || window.webkitAudioContext)();
     master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
-    const defs = [[1, "sine", 0.16], [1.007, "triangle", 0.05], [2.003, "sine", 0.045]];
+    const defs = bedEl ? [] : [[1, "sine", 0.16], [1.007, "triangle", 0.05], [2.003, "sine", 0.045]];
     oscs = defs.map(([m, type, g]) => {
       const o = ac.createOscillator(), og = ac.createGain();
       o.type = type; o.frequency.value = spec.base * m;
@@ -224,7 +239,7 @@ export function makeSound(world) {
     const src = ac.createBufferSource(); src.buffer = nb; src.loop = true;
     const f = ac.createBiquadFilter(); f.type = "lowpass"; f.Q.value = 0.7;
     f.frequency.value = spec.bright ? 900 : 260;
-    noiseGain = ac.createGain(); noiseGain.gain.value = 0.05;
+    noiseGain = ac.createGain(); noiseGain.gain.value = bedEl ? 0 : 0.05;
     src.connect(f); f.connect(noiseGain); noiseGain.connect(master); src.start();
     boot.air = f;
   }
@@ -233,6 +248,10 @@ export function makeSound(world) {
     /* the suite player calls this at every film boundary */
     setWorld(w) {
       spec = w.drone || spec; seed = w.seed || seed;
+      if (bedEl && w.audio && w.audio.src !== bedEl.getAttribute("src")) {
+        bedEl.src = w.audio.src; bedEl.currentTime = w.audio.from || 0;
+        if (on) bedEl.play().catch(() => {});
+      }
       if (ac && boot.air) boot.air.frequency.setTargetAtTime(spec.bright ? 900 : 260, ac.currentTime, 0.8);
     },
     toggle() {
@@ -241,10 +260,16 @@ export function makeSound(world) {
       on = !on;
       master.gain.cancelScheduledValues(ac.currentTime);
       master.gain.setTargetAtTime(on ? 0.55 : 0, ac.currentTime, 0.4);
+      if (bedEl) {
+        bedEl.volume = on ? (world.audio.gain ?? 0.85) : 0;
+        if (on) {
+          if (bedEl.paused) { bedEl.currentTime = world.audio.from || 0; bedEl.play().catch(() => {}); }
+        } else bedEl.pause();
+      }
       return on;
     },
     step(i) {
-      if (!ac) return;
+      if (!ac || bedEl) return;
       const st = spec.steps[i % spec.steps.length];
       const root = spec.base * Math.pow(2, st / 12);
       const t = ac.currentTime;
