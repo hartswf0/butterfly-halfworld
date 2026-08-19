@@ -24,8 +24,11 @@ recorded command stream — `PNT`, `LIN`, `CLR` — replayed at eight frames a s
 This is not that. Each poem here is **remade as its own halfworld** under the laws of
 [I REMEMBER BEING A BUTTERFLY](../README.md): the picture is computed, the sound is
 synthesised, and neither exists until you open the page. There is no video file, no audio
-file, no sprite sheet, no build step and no `node_modules`. Fourteen films, and the whole
-suite is a few thousand lines of arithmetic.
+file, no sprite sheet and no build step — the pages import the modules and run them, and
+they need nothing installed. (The two harnesses that look at the films from outside —
+`shoot.mjs` and `render-film.mjs` — do need Playwright, and the film renderer needs an
+ffmpeg. Nothing you *watch* does.) Fourteen films, eighty movements, nineteen minutes, and
+the whole suite is a few thousand lines of arithmetic.
 
 The trade is deliberate. A recording can be anything and remembers nothing; a world has
 rules, and **the rules do the authoring**. Ask a recording for a dissolve and you get a
@@ -96,22 +99,62 @@ Law 5 of the butterfly halfworld, inherited without changes, because it held her
 **every serious defect produced a plausible picture.**
 
 ```bash
-node wygwyl/shoot.mjs        # renders/wygwyl/NN-mNN.png + ink coverage per frame
+node wygwyl/shoot.mjs --sweep      # three frames per movement → PNG, + numbers
+node wygwyl/contact-sheet.mjs      # all eighty movements on one page
 ```
 
-The shooter reports ink coverage because 0% and 96% are bugs a contact sheet can hide but
-a number cannot. The numbers only catch the extremes, though. Three of the defects fixed
-during the build had perfectly ordinary coverage:
+### the instrument had to be rebuilt twice, and each rebuild found something
+
+The shooter started by reporting **ink coverage**, because 0% and 96% are bugs a contact
+sheet can hide but a number cannot. That was wrong twice over, and both errors were
+instructive.
+
+**First: coverage cannot tell a haze from a blackout.** A field entirely at level 1 is a
+light mist and reports as 100% covered. The end of 01's MORE HAZE — the room finally,
+completely taken — was flagged as a blackout on every single run. Carrying the **mean ink
+level** alongside coverage separated them: the haze reads 97%/1.5, an actual blackout
+reads 87%/6.1.
+
+**Then: coverage cannot see a subject drawn in reserve.** 14's *"All black again. But no
+walls this time"* is a figure cut out of the ink — paper as the subject, on a horizon with
+no verticals anywhere. 99% covered, mean level 6.8, and the rule called it dead. It is the
+best frame in the film.
+
+So the flag now counts **edges**: cells whose level differs from a neighbour by three or
+more. That measures whether anything is *drawn*, and it does not care which side of the
+contrast the subject is on. Coverage and mean level are still printed, because they say
+useful things about a frame; they no longer get a vote. On its first run the new rule
+found something neither predecessor could: the end of 14's opening movement has **zero**
+edges — everything the suite built has finished learning to be weather, which is exactly
+what the line says, and which read as static rather than as a place that is gone.
+
+### and the numbers still only catch the extremes
+
+Every one of these had perfectly ordinary coverage:
 
 - **The fall in 01 was a smear on wallpaper.** The city streaking upward past the falling
   bodies was drawn at full ink across the whole frame, so the two people the scene is
-  about had nowhere to be legible. Fixed by holding the towers at levels 2–4 and pushing
-  them to the edges. The numbers said 14%; the picture said nothing.
+  about had nowhere to be legible. Held the towers at levels 2–4 and pushed them to the
+  edges. The number said 14%; the picture said nothing.
 - **The tambourine in 03 shattered inward.** Each shard was rebased to the centre before
-  being moved outward, so all eleven piled into one blob. Coverage was unremarkable.
-- **The subtitle covered the bottom sixth of every film**, because it was positioned over
-  the canvas. It now has its own strip. No instrument would ever have flagged this; it
-  took one look.
+  being moved outward, so all eleven flew into a single pile.
+- **The pupil in 02 opened onto nothing.** The road's vanishing point is the one part of a
+  road with no width, so for the first seconds of *"my eyes dilate — and we go through"*
+  the aperture contained no picture at all. A single sample per movement never saw it;
+  `--sweep` did.
+- **A walk cycle sampled at a degenerate phase reads as a flagpole.** Two films hit this
+  independently. `F.fig`'s gait sends both feet to the same offset twice per stride, and
+  if your phase rate is an integer multiple the QA sample lands exactly there — a person
+  collapses into one vertical stroke. The fix is a non-integer phase rate, and the lesson
+  is that a frame can be a correct render of a wrong instant.
+- **Figures vanished into the floor they were standing on.** 08's dance floor lit its
+  brightest tiles at level 5 and its dancers at 4, and `F.ink` keeps the darker value — so
+  bodies crossing a lit square were absorbed by it.
+- **The subtitle covered the bottom sixth of every film**, because it was drawn over the
+  canvas. It has its own strip now. No instrument would ever have flagged that one.
+
+The pattern from the butterfly build held without a single exception: **every serious
+defect produced a plausible picture.**
 
 ---
 

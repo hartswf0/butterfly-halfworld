@@ -286,6 +286,18 @@ export default {
            the first pass stopped the claim at exactly 1 and left a rind of
            untouched sky along the top the line does not admit to. */
         weatherClaim(F, u, smooth(u) * 1.30, 0);
+        /* THE ONE TRACE THAT SURVIVES: put down LAST and unconditionally,
+           so it outlives the dissolve instead of being swallowed by it.
+           "Everything became weather" is a sadder claim if a viewer can
+           still find the edge of what it used to be by the end of the
+           movement — a rooftop, a pediment, a pier arm, held at a level low
+           enough to read as an ember of structure, not a building still
+           standing. Rejected: leaving it to weatherClaim's own fbm texture,
+           which by u=0.8 is uniform enough to carry no edge at all — the
+           frame said "static," not "a place that is gone." */
+        for (let x = 84; x <= 99; x++) F.put(x, 44, 3);                        // the tallest roofline
+        for (let x = 152; x <= 190; x++) F.put(x, Math.round(plateau - 38), 3); // the temple's eave
+        for (let x = 28; x <= 46; x++) F.put(x, WATER - 26, 3);                 // the pier arm
       },
     },
     {
