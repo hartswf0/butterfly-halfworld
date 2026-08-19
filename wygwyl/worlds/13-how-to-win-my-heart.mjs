@@ -753,7 +753,11 @@ export default {
            they were moving rather than choosing when to arrive, and a shake
            read as the window trembling rather than as the picture sharpening. */
         const WATER = 86, NEAR = 112;
-        const blur = (1 - ss(0.04, 0.62, u)) * 12;
+        /* it starts resolving on the first frame and finishes on the word
+           "refocus" — the line's fourth beat. Held at full scatter for the
+           first fifth, the movement opened on eleven seconds of mush and the
+           first beat ("a distant window") had nothing in it to be distant. */
+        const blur = (1 - ss(0, 0.58, u)) * 10;
         F.map((x, y) => {
           if (y > NEAR) return;
           const a = F.n2(x * 0.10, y * 0.10) * TAU * 2;
@@ -802,19 +806,24 @@ export default {
         pier(F, 6);
         const wx = 148, wy = 40;
         F.rect(wx - 30, wy - 24, 60, 48, 3);
-        for (let dx = -33; dx < 33; dx += 9) F.rect(wx + dx, wy - 27, 6, 4, 6);   // a dentilled eave
-        F.rect(wx - 33, wy - 28, 66, 2, 6);
-        litWindow(F, wx, wy, 14, 16, 5, 7);
-        /* SHE IS STILL IN IT. M5 spent eighteen seconds bringing this window
-           and this figure into focus; leaving the pane empty here would have
-           thrown that away for a rectangle. */
-        F.disc(wx - 1, wy - 8, 4.2, 7);
+        /* the eave in two runs with a gap, not a row of blocks: the dentils
+           the first pass used came out as battlements and the wall the film
+           has been walking toward turned into a castle */
+        F.rect(wx - 33, wy - 28, 30, 3, 6); F.rect(wx + 1, wy - 28, 32, 3, 6);
+        F.line(wx - 30, wy - 25, wx + 8, wy - 25, 5, 1); F.line(wx + 14, wy - 25, wx + 30, wy - 25, 5, 1);
+        litWindow(F, wx, wy, 15, 16, 5, 7);
+        /* SHE IS STILL IN IT, and in the same half of it as in M5. Eighteen
+           seconds were spent bringing this window and this figure into focus;
+           leaving the pane empty here would have spent that on a rectangle. */
+        const hx = wx - 8;
+        F.disc(hx, wy - 8, 4.0, 7);
         for (let yy = wy - 4; yy < wy + 15; yy++) {
           const t = (yy - (wy - 4)) / 19;
-          F.line(wx - 1 - (5 - t * 1.6 + t * t * 3), yy, wx - 1 + (5 - t * 1.6 + t * t * 3), yy, 7, 1);
+          const hw = t < 0.55 ? 5.2 - t * 2.2 : 4.0 + (t - 0.55) * 6;
+          F.line(hx - hw, yy, hx + hw, yy, 7, 1);
         }
         const pulse = 0.7 + 0.3 * Math.sin(u * TAU * 1.4);
-        F.disc(wx - 3, wy - 9, 1.5 * pulse, 8); F.disc(wx + 1.5, wy - 9, 1.5 * pulse, 8);
+        F.disc(hx - 1.8, wy - 9, 1.3 * pulse, 8); F.disc(hx + 1.8, wy - 9, 1.3 * pulse, 8);
         /* a boat leaves without them — the one thing in frame that goes */
         const s = smooth(u);
         boatAt(F, lerp(56, 118, s), lerp(112, 76, s), lerp(10, 4, s), wl, u, 6);

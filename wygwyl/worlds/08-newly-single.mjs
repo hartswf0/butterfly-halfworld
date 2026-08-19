@@ -465,10 +465,16 @@ export default {
         const cool = smooth(u);
         /* the closest moons: too near to be background, too small to be suns.
            Paper with a rim, so they read the same over the white plain that
-           the sun burned M4 down to. */
-        F.disc(28, 13, 4.5, 0, true); F.ring(28, 13, 5.4, 6, 1); F.disc(30, 11, 1.2, 4);
-        F.disc(172, 10, 3.4, 0, true); F.ring(172, 10, 4.2, 6, 1);
-        const tx = 96, ty = gy(96) - 4;
+           the sun burned M4 down to. They sit between the baths rather than
+           over them: at the corners each moon landed inside a basin's outline
+           and the two read as one object with a bubble in it. */
+        F.disc(58, 9, 4.5, 0, true); F.ring(58, 9, 5.4, 6, 1); F.disc(60, 7, 1.2, 4);
+        F.disc(136, 7, 3.4, 0, true); F.ring(136, 7, 4.2, 6, 1);
+        /* the streams land ON HIM, which is what "cool me down" says, but they
+           land on his crown and not through his chest: converging at the ground
+           put three columns of water straight down the middle of a level-3
+           body and the figure simply went missing inside its own scene. */
+        const tx = 96, ty = gy(96) - 31;
         /* THE ANGLES OF THE NEWEST RELIGIONS: three pours from three
            unrelated directions — one source would have been one religion,
            not several. Two carry an ice bath at their origin; the third is
@@ -476,8 +482,8 @@ export default {
            the same gesture at two ink weights, and the film never says
            which stream is which. */
         const STREAMS = [
-          { x0: 18, y0: 12, lvl: 5, ice: true, k: 0 },
-          { x0: 174, y0: 20, lvl: 3, ice: true, k: 2 },
+          { x0: 26, y0: 16, lvl: 5, ice: true, k: 0 },
+          { x0: 166, y0: 24, lvl: 3, ice: true, k: 2 },
           { x0: 96, y0: 2, lvl: 4, ice: false, k: 4 },
         ];
         for (const s of STREAMS) {
@@ -520,13 +526,17 @@ export default {
            standing water is rule 3's exception, taken deliberately — its whole
            meaning is that it has no gap in it — and its outer edge is a
            dithered arc rather than an end, so nothing here is ruled. */
-        const reach = lerp(4, 132, cool);
+        const reach = lerp(4, 138, cool);
         F.map((x, y, v) => {
           if (v > 0.4 || y < gy(x) - 1) return;
-          const d = Math.abs(x - tx) + (F.n2(x * 0.08, 9.1) - 0.5) * 16;
+          /* the waterline wanders on a long wavelength AND a short one; on the
+             short one alone the pool ended in two near-vertical cuts and read
+             as a rectangle of water laid on the plain */
+          const d = Math.abs(x - tx) + (F.n2(x * 0.021, 9.1) - 0.5) * 34
+                                     + (F.n2(x * 0.10, 3.3) - 0.5) * 9;
           if (d > reach) return;
-          if (d > reach - 11) return F.bayer(x, y) < (reach - d) / 11 ? 2 : undefined;
-          return y - gy(x) > 13 ? 3 : 2;
+          if (d > reach - 17) return F.bayer(x, y) < (reach - d) / 17 ? 2 : undefined;
+          return y - gy(x) > 20 ? 3 : 2;
         });
         /* SALTED FROM THE CLOSEST MOONS: it comes off the water rather than in
            it, and there is more of it every second — a count, spreading with
@@ -603,39 +613,72 @@ export default {
         { at: 0.30, f: 130, decay: 0.9, gain: 0.3, partials: [1, 1.5, 2], noise: 0.2, nDecay: 0.3, seed: 861 },
       ],
       draw(u, F) {
+        /* MOUNTAINS ARE A MASS WITH A TOP EDGE, NOT A TOP EDGE. The first pass
+           drew both ranges as polylines and the render came back as a line
+           chart — two zigzags on blank paper, which is a schematic of a
+           landscape and not a landscape. Filled, they finally give this
+           movement the one thing it never had: a ground for the man to be
+           seen against. Held at 1 and 3, low: a distant range is PALE, and a
+           black seated body needs somewhere to be black.
+           BOTH RANGES ARE THE SAME SILHOUETTE. H() is sampled once in node
+           space and both calls read it, so "unfamiliar, yet relatable" is
+           literally one shape drawn twice — the second raised and offset, and
+           the offset only grows, which is the shape you almost recognise
+           getting less like the one you know. */
+        const H = (i) => 18 + F.noise(i * 15, 5) * 44;
+        const ridge = (shiftX, raise, lvl) => {
+          for (let x = 0; x < 192; x++) {
+            const t = (x - shiftX) / 15, i = Math.floor(t);
+            const y = 132 - raise - lerp(H(i), H(i + 1), t - i);
+            F.rect(x, y, 1, 133 - y, lvl);
+          }
+        };
+        const nearY = (x) => {
+          const t = x / 15, i = Math.floor(t);
+          return 132 - lerp(H(i), H(i + 1), t - i);
+        };
+        ridge(lerp(6, 40, smooth(u)), 26, 1);          // the one that is going
+        ridge(0, 0, 3);                                // the one that stays
         /* the ground, broken — even a horizon this quiet doesn't get to be
            one unbroken bar */
-        F.line(0, 132, 70, 132, 4, 1); F.line(82, 132, 192, 132, 4, 1);
-        /* UNFAMILIAR, YET RELATABLE: a second, fainter ridge sits half a
-           step behind the first — the same silhouette, offset — which is
-           what a shape looks like when you almost recognise it. Static
-           across the movement: the mountains are the one thing here that
-           does not move, because the line puts them "in the distance," not
-           in play. */
-        for (const [dx, lvl, drop] of [[7, 2, 8], [0, 4, 0]]) {
-          let px = -8, py = 132 - drop;
-          for (let x = -8; x <= 200; x += 15) {
-            const h = drop + 18 + F.noise(x + dx, 5) * 44, nx = x + dx, ny = 132 - h;
-            if (x > -8) F.line(px, py, nx, ny, lvl, 1.3);
-            px = nx; py = ny;
-          }
-        }
+        F.line(0, 132, 70, 132, 5, 1); F.line(82, 132, 192, 132, 5, 1);
+        /* IN THE DISTANCE, AND GETTING FURTHER. Distance in any graphic
+           tradition is air, so the air is the movement: it fills the valleys
+           and climbs, at the same weight as the far range, until the far range
+           is not a shape any more but part of what is between him and it.
+           Monotone, and it never reaches the top of the frame — this film does
+           not get to close over. */
+        const air = lerp(133, 34, smooth(u));
+        F.map((x, y, v) => {
+          if (v > 0.4) return;
+          const top = air + (F.n2(x * 0.035, 6.4) - 0.5) * 18;
+          if (y < top || y > nearY(x)) return;
+          if (y < top + 12 && F.bayer(x, y) > (y - top) / 12) return;
+          if (F.n2(x * 0.06, y * 0.09) < 0.34) return;    // it has holes; air is not a wall
+          return 1;
+        });
         /* the two of him, quiet, still two — the film never draws them as
-           one body, because the line does not claim they became one. Both
-           look down and inward, toward the thoughts orbiting at arm's
-           reach rather than out at the mountains — "wandering thoughts
-           within reach" is closer to him than the horizon is. */
-        flesh(F, u, 96, 132, 30, { mode: "sit", arms: "down", face: 1, headTilt: -0.18 });
-        soulFig(F, u, 96, 132, 30, { mode: "sit", arms: "down", face: 1, headTilt: -0.22, headTurn: 0.2 }, 0.6, 0);
-        const hx = 96, hy = 132 - 30 * 0.73;
+           one body, because the line does not claim they became one. At 29
+           the flesh draws solid, so the black silhouette holds against the
+           range behind it, and the soul's one contribution is the hollow it
+           puts where the head is. Both look down and inward, toward the
+           thoughts orbiting at arm's reach rather than out at the horizon —
+           "wandering thoughts within reach" is closer to him than the
+           mountains are. */
+        flesh(F, u, 96, 132, 29, { mode: "sit", arms: "down", face: 1, headTilt: -0.18 });
+        soulFig(F, u, 96, 132, 29, { mode: "sit", arms: "down", face: 1, headTilt: -0.22, headTurn: 0.2 }, 0.6, 0);
+        const hx = 96, hy = 132 - 29 * 0.73;
         spark(F, hx, hy);
-        /* WANDERING THOUGHTS WITHIN REACH: they orbit, they don't leave —
-           the radius is arm's length and it holds for the whole movement,
-           the last quiet fact this film states. */
-        for (let k = 0; k < 5; k++) {
-          const wx = hx + Math.sin(u * TAU * (0.28 + k * 0.06) + k * 2.1) * 9 + (F.n2(k, 3) - 0.5) * 3;
-          const wy = hy - 5 + Math.cos(u * TAU * (0.22 + k * 0.05) + k * 1.3) * 6;
-          F.disc(wx, wy, 0.9, 3);
+        /* WANDERING THOUGHTS WITHIN REACH: they orbit, they don't leave — the
+           radius is arm's length and it holds for the whole movement, the last
+           quiet fact this film states. There are fourteen of them, not five:
+           at five they were specks and the only moving thing in the frame was
+           too small to be a thing. */
+        for (let k = 0; k < 14; k++) {
+          const wx = hx + Math.sin(u * TAU * (0.24 + k * 0.031) + k * 2.1) * (7 + (k % 3) * 3.5)
+                        + (F.n2(k, 3) - 0.5) * 3;
+          const wy = hy - 3 + Math.cos(u * TAU * (0.19 + k * 0.027) + k * 1.3) * (5 + (k % 4) * 2);
+          F.disc(wx, wy, k % 3 === 0 ? 1.4 : 1.0, 5);
         }
       },
     },

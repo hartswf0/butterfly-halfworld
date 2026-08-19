@@ -370,37 +370,70 @@ export default {
     {
       label: "THOUSAND LIGHT YEARS", seconds: 14,
       line: "One by one, treasures escaping — devaluing themselves after unsullied stars diminished their glares. I walked a thousand light years to be heard. So DJ — please — turn me up.",
-      fx: { smear: { taps: 1, spread: 0.018, fall: 2.2 } },
+      fx: { smear: { taps: 1, spread: 0.012, fall: 2.2 } },
+      /* the first treasure leaving, and the mic reached. Nothing between
+         them: the fourteen exits are one continuous emptying and would be
+         fourteen taps on a bell, which is a countdown, not a loss. */
       cues: [
         { at: 0.10, f: 1200, decay: 0.10, gain: 0.30, partials: [1, 2.4, 3.7], noise: 0.7, nDecay: 0.02, seed: 721 },
-        { at: 0.90, f: 340, decay: 0.20, gain: 0.35, partials: [1, 2.1], noise: 0.4, nDecay: 0.03, seed: 722 },
+        { at: 0.80, f: 340, decay: 0.20, gain: 0.35, partials: [1, 2.1], noise: 0.4, nDecay: 0.03, seed: 722 },
       ],
       draw(u, F) {
         const amp = clamp01(AMP[2] + (F.n2(2.1, u * 4) - 0.5) * 0.03);
-        const scale = scaleOf(AMP[2]), FLOOR = 122;
-        floorRuns(F, FLOOR, 3);
-        /* treasures escaping one by one: each star has its own scheduled
-           exit, spread evenly across the whole movement so the loss reads
-           as a sequence and not a single flicker */
+        const scale = scaleOf(AMP[2]), FLOOR = 122, HOR = 100;
+        /* THE GLARE IS THE HOLE, NOT THE MARK. A star drawn as a speck of ink
+           on paper is a diagram of a star; this sky is the field, laid down
+           whole, and each star is the pool of light it has burned in it —
+           three discrete steps out from the core, because a lattice cannot
+           have a soft edge and a stepped one is what a woodcut uses instead.
+           So "diminished their glares" is the pools closing, and "one by one,
+           treasures escaping" is each pool's own last moment: one mechanism
+           carrying both clauses of the line rather than two images sharing a
+           frame. What it ends on is an unsullied sky — dark, even, nothing
+           left in it that was showing off.
+           The horizon is lumpy per column: a tone that ended on a ruled line
+           at a constant y would be an unbroken full-width span and would
+           stripe the whole frame under the halftone. */
+        for (let x = 0; x < F.W; x++) F.rect(x, 0, 1, HOR + (F.n2(x * 0.08, 9.3) - 0.5) * 9, 3);
         const N = 14, R = F.rng(73), stars = [];
-        for (let k = 0; k < N; k++) stars.push([R() * 188 + 2, R() * 78 + 6, R()]);
-        const glare = lerp(5, 2, u);   // unsullied stars diminished their glares
+        /* diminishing runs on ONE number for all fourteen, since the line
+           says the stars did it, plural and together */
+        const dim = 1 - 0.62 * u;
         for (let k = 0; k < N; k++) {
-          const [sx, sy, r0] = stars[k], te = (k + 1) / (N + 1);
-          const life = u < te ? 1 : clamp01(1 - (u - te) / 0.10);
-          if (life <= 0) continue;
-          F.disc(sx, sy, Math.max(0.6, (0.9 + r0 * 1.1) * life), Math.round(glare));
+          const sx = R() * 172 + 10, sy = R() * 62 + 10, r0 = 9 + R() * 12;
+          const te = 0.10 + k * 0.052;                       // its own escape, on the cue for k=0
+          const life = u < te ? 1 : clamp01(1 - (u - te) / 0.05);
+          stars.push([sx, sy, Math.max(0, r0 * dim * life)]);
         }
-        /* a thousand light years is told as distance, not as a body — a
-           trail of fading footprints carries it better than the figure */
-        const wx = lerp(16, 176, smooth(u));
-        for (let k = 0; k < 14; k++) {
-          const fx = wx - k * 5.2;
-          if (fx < 4) break;
-          F.ink(fx, FLOOR - 1 + (k % 2 ? 1 : 0), Math.max(1, 5 - k * 0.32));
-        }
+        /* three passes, dimmest first, so where two glares overlap the
+           brighter core always survives — one pass per star would let a
+           late star's outer step cut a grey bite out of its neighbour */
+        for (const [t, l] of [[1, 2], [0.72, 1], [0.40, 0]])
+          for (const [sx, sy, r] of stars) if (r * t > 0.7) F.disc(sx, sy, r * t, l, true);
         const G = rig(F, scale, 96, FLOOR);
-        G.fig(wx, FLOOR, 30, { mode: "walk", phase: u * 6.35, face: 1, guise: "poet", headTilt: -0.2 }, 7);
+        /* A THOUSAND LIGHT YEARS IS A LENGTH, so it is drawn as one: the
+           trail behind him is not a fixed tail of fourteen prints that
+           travels with the body, it starts at the edge he came from and
+           grows the entire width of the frame. The distance walked is the
+           only quantity in this movement that goes up. */
+        const p = clamp01(u / 0.80), wx = lerp(6, 160, p);
+        for (let px = 6; px < wx; px += 6) {
+          const age = (wx - px) / 154;
+          G.disc(px, FLOOR - 1 + ((px / 6) % 2 ? 1 : 0), 1.3, Math.max(2, Math.round(6 - age * 4)));
+        }
+        floorRuns(F, FLOOR, 3);
+        /* TO BE HEARD. The mic has been standing at the far end since the
+           first frame, so the walk has an object and the movement has an
+           arrival — he reaches it exactly on the second cue and takes hold
+           of it, and "so DJ, please, turn me up" is a man with his hand on
+           the stand rather than a man still walking when the line ends. */
+        micStand(G, 174, FLOOR, 27, 6);
+        G.fig(wx, FLOOR, 34, {
+          mode: p < 1 ? "walk" : "stand", phase: u * 6.35, face: 1, guise: "poet",
+          weight: p < 1 ? undefined : 0.72,
+          headTilt: lerp(-0.22, 0.24, ss(0.78, 0.88, u)),
+          gesture: p < 1 ? undefined : [10, 24],
+        }, 7);
         meter(F, u, amp);
       },
     },

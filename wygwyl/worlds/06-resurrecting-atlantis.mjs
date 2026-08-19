@@ -160,6 +160,29 @@ function groundLine(F, waterY) {
   F.line(0, GY, 60, GY, 4, 1); F.line(70, GY, 130, GY, 4, 1); F.line(140, GY, F.W, GY, 4, 1);
 }
 
+/* THE CITY'S OWN OUTLINE, COLUMN BY COLUMN — the y of the highest ink this
+   column carries, following the actual roof rather than a bounding box, so a
+   dome is a dome and a spire is a spire. M6 fills everything above it, which
+   is how that movement draws the city: as the part of the page the night is
+   not allowed to have. Columns in the two-cell streets between buildings
+   belong to no building and return the ground, so the night comes all the way
+   down those and they read as the narrow streets M4 already named. */
+function skylineY(x) {
+  for (const b of BUILD) {
+    if (x < b.x || x > b.x + b.w) continue;
+    const apex = GY - b.h;
+    const roofH = b.roof === "dome" ? b.w / 2 : b.roof === "spire" ? Math.min(b.w * 1.3, b.h * 0.4) : 3;
+    const bodyTop = apex + roofH, cx = b.x + b.w / 2, half = b.w / 2;
+    if (b.roof === "dome") {
+      const dx = Math.abs(x - cx);
+      return bodyTop - Math.sqrt(Math.max(0, half * half - dx * dx));
+    }
+    if (b.roof === "spire") return bodyTop - roofH * (1 - Math.min(1, Math.abs(x - cx) / half));
+    return bodyTop;
+  }
+  return GY;
+}
+
 /* a small round window with a face in it — the "illuminating smiles" of M3.
    Rejected: putting the face on a whole figure's head, which at this scale
    is under two cells wide and cannot hold two eyes and a mouth. A window is
@@ -583,38 +606,81 @@ export default {
         { at: 0.85, f: 392, decay: 1.5, gain: 0.55, partials: [1, 2, 3, 4, 5, 6], noise: 0.10, nDecay: 0.03, seed: 663 },
       ],
       draw(u, F) {
-        cityscape(F, 999, u, 0.72);   // richest window count in the film — fully back on life
+        /* BORN IN UNISON, OUT OF THE PUREST OF FICTIONS. The city is not
+           drawn into this frame — everything that is NOT the city is, and
+           what is left unfilled is therefore the city, born out of the blank
+           page it was always standing on. One number and one Bayer schedule
+           govern every cell of that night at once, which is what "in unison"
+           has to be if it is a mechanism rather than a caption: not sixteen
+           buildings arriving one after another, one arrival that the whole
+           field takes part in. The fill starts at zero, so the film's last
+           movement opens exactly where M5 closed it — a bright city, no
+           night in it yet — and the birth is the eighteen seconds after.
+           Rejected: the finished city held whole while the crowd bobbed its
+           arms on a sine, which is what this movement was. The resolution of
+           the film was the one photograph in it. */
+        const born = ss(0.10, 0.74, u);
+        /* the windows come on WITH the night. warmth is a threshold on fixed
+           noise, so a rising warmth lights more of them and can never put one
+           out: the count of lit windows only ever climbs, and that count is
+           the welcome — by the last frame there is no dark window left. */
+        cityscape(F, 999, u, 0.42 + born * 0.50);
         groundLine(F, 999);
-        /* BORN IN UNISON: one shared beat decides every figure's arms at
-           once, so the crowd moves as a single gesture rather than each
-           person animating on their own clock — that IS unison as a
-           mechanism, not a description of one */
-        const up = Math.sin(u * TAU * 1.4) > 0.55;
+        const bx = Math.round(CAPITAL.x + CAPITAL.w / 2), by = GY - CAPITAL.h;
+        const halo = 3 + born * 4.5;
+        const sky = [];
+        for (let x = 0; x < F.W; x++) sky.push(skylineY(x));
+        const lv = born * 3.2, lo = Math.floor(lv), fr = lv - lo;
+        F.map((x, y, v) => {
+          if (v > 0.5 || y >= sky[x]) return;
+          /* the one place the night is not allowed to close: around the
+             beacon, which is a light and therefore has to have a dark it is
+             clearing rather than a dark it is sitting in */
+          if (Math.hypot(x - bx, (y - by) * 1.15) < halo) return;
+          return F.bayer(x, y) < fr ? lo + 1 : lo;
+        });
+        /* WELCOMING ME, AND WELCOMING ALL — the clause order is the staging.
+           One man walks in from the edge and is met at the middle of the
+           plaza on the second cue; then ten more, each entering from the
+           edge it is nearest. The stations fill from the centre OUTWARD, so
+           nobody ever crosses in front of somebody already standing and the
+           welcome spreads from the one it began with. The count is the
+           movement: one body at the start, twelve at the end, and every one
+           of them walked here. */
+        const STATION = [78, 114, 60, 132, 42, 150, 26, 166, 10, 182];
+        const rise = ss(0.85, 0.91, u);            // every arm, on the last cue
         const R = F.rng(66);
-        /* unison in the arms, not in the bodies — every fourth figure is
-           given the elder guise and each one's own R() seeds a little
-           weight and phase drift, so a city "born in unison" still reads
-           as people and not one stencil repeated nine times */
-        for (let i = 0; i < 9; i++) {
+        for (let i = 0; i < STATION.length; i++) {
+          /* the stream is read before anything can skip: a figure's height
+             and build must not change because time passed */
           const r1 = R(), r2 = R();
-          const x = 10 + i * 20 + R() * 6;
-          F.fig(x, GY, 19 + R() * 4, {
-            mode: "stand", arms: up ? "up" : "open", face: i % 2 ? 1 : -1,
-            guise: i % 4 === 0 ? "elder" : "everyman", phase: u * 1.7 + i * 0.4,
-            weight: 0.3 + r1 * 0.4, headTilt: up ? 0.3 + r2 * 0.2 : 0,
+          const p = clamp01((u - (0.26 + i * 0.042)) / 0.17);
+          if (p <= 0) continue;
+          const side = STATION[i] < 96 ? -1 : 1;
+          F.fig(lerp(side < 0 ? -14 : 206, STATION[i], smooth(p)), GY, 19 + r1 * 5, {
+            mode: p < 1 ? "walk" : "stand", face: -side,
+            arms: rise > 0.5 ? "up" : p < 1 ? "swing" : "open",
+            guise: i % 4 === 0 ? "elder" : "everyman", phase: u * 5.35 + i * 0.7,
+            weight: p < 1 ? undefined : 0.28 + r2 * 0.44,
+            headTilt: rise > 0.5 ? 0.30 + r2 * 0.2 : 0.05,
           }, 6);
         }
-        for (let i = 0; i < 8; i++) {
-          const x = 20 + i * 20 + R() * 6;
-          F.fig(x, GY - 17, 13 + R() * 3, { mode: "stand", arms: up ? "up" : "open" }, 5);
-        }
-        /* the beacon: the same soul that departed on a comet in M1, now
-           settled and lighting the tallest dome it was always headed for */
-        const bx = CAPITAL.x + CAPITAL.w / 2, by = GY - CAPITAL.h;
-        const glow = ss(0.0, 0.6, u);
-        F.put(Math.round(bx), Math.round(by), 8);
-        if (glow > 0.4) F.put(Math.round(bx) + 1, Math.round(by), 8);
-        if (glow > 0.75) F.put(Math.round(bx), Math.round(by) - 1, 8);
+        const pw = clamp01(u / 0.50);
+        F.fig(lerp(-16, 96, smooth(pw)), GY, 34, {
+          mode: pw < 1 ? "walk" : "stand", face: 1, guise: "poet",
+          arms: rise > 0.5 ? "up" : pw < 1 ? "swing" : "open",
+          phase: u * 5.35, weight: pw < 1 ? undefined : 0.38,
+          headTurn: pw < 1 ? 0.30 : 0, headTilt: lerp(0.15, 0.45, rise),
+        }, 7);
+        /* the beacon: the same soul that departed on a comet in M1, settled
+           on the dome it was always headed for. It is spent as the film's
+           accent twice and this is the second time; it strengthens with the
+           night, because a light only becomes visible once there is a dark
+           for it to be in. */
+        F.put(bx, by, 8);
+        if (born > 0.35) F.put(bx + 1, by, 8);
+        if (born > 0.60) F.put(bx, by - 1, 8);
+        if (born > 0.85) F.put(bx - 1, by, 8);
       },
     },
   ],
