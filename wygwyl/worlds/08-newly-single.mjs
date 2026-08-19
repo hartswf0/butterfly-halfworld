@@ -654,7 +654,15 @@ export default {
           const top = air + (F.n2(x * 0.035, 6.4) - 0.5) * 18;
           if (y < top || y > nearY(x)) return;
           if (y < top + 12 && F.bayer(x, y) > (y - top) / 12) return;
-          if (F.n2(x * 0.06, y * 0.09) < 0.34) return;    // it has holes; air is not a wall
+          /* AIR IS NOT A WALL — BUT A HOLE IN IT IS NOT AIR EITHER. The
+             thinning used to be a hard cut on a low-frequency noise, and at
+             this scale that put two round paper holes in the sky that read as
+             the render dropping out rather than as clearer air. The noise now
+             sets a DENSITY and the Bayer schedule spends it, with a floor
+             under it: the thin places are thin and never empty. */
+          const th = F.n2(x * 0.10, y * 0.14);
+          const dens = 0.22 + 0.78 * clamp01((th - 0.26) / 0.42);
+          if (F.bayer(x, y) > dens) return;
           return 1;
         });
         /* the two of him, quiet, still two — the film never draws them as
