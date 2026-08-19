@@ -504,6 +504,16 @@ export default {
            interlocked, which is what a pair of wedding bands is when it is
            still one thing. */
         const d = lerp(14, 172, smooth(u));
+        /* THEY DIVERGE ON A DIAGONAL, AND THAT IS NOT A STYLE CHOICE.
+           Two equal rings at equal height either side of a dark mass is a
+           face. Not a face in the sense of resembling one — a face, which is
+           what a reader's eye assembles out of that arrangement before it
+           sees anything else, and no amount of lumpiness in the mass talks
+           them out of it. Divergence does not owe anyone bilateral symmetry:
+           one band rises as it goes and the other falls, the gulf between
+           them tilts with them, and the pareidolia has nothing to hold. */
+        const tilt = smooth(u) * 23;
+        const midOf = (x) => (x - 96) / 96 * tilt;
         const G = rig(F, scaleOf(AMP[3]), 96, cy);
         /* THE GULF IS THE SUBJECT, AND IT IS DRAWN. What the line calls an
            abstract sky is the space the two bands are opening between them,
@@ -527,9 +537,9 @@ export default {
              and this is a gap being made. Lumpy top and bottom: a tone that
              ended on two ruled lines a hundred and fifty cells long would
              stripe the frame. */
-          const grow = clamp01(w / 34);
-          const t0 = lerp(cy - 7, 8 + (F.n2(x * 0.045, 3.1) - 0.5) * 13, grow);
-          const t1 = lerp(cy + 7, 54 + (F.n2(x * 0.05, 8.4) - 0.5) * 14, grow);
+          const grow = clamp01(w / 34), mid = midOf(x);
+          const t0 = lerp(cy - 7, 8 + (F.n2(x * 0.045, 3.1) - 0.5) * 13, grow) + mid;
+          const t1 = lerp(cy + 7, 54 + (F.n2(x * 0.05, 8.4) - 0.5) * 14, grow) + mid;
           for (let y = Math.round(t0); y < t1; y++) {
             if (F.bayer(x, y) >= edge) continue;
             F.put(x, y, F.bayer(x + 3, y + 5) < fr ? lo + 1 : lo);
@@ -541,7 +551,7 @@ export default {
            only thing the line claims about their number. */
         const R = F.rng(74);
         for (let k = 0; k < 18; k++) {
-          const sx = 96 + (R() - 0.5) * 178, sy = 10 + R() * 42;
+          const sx = 96 + (R() - 0.5) * 178, sy = 10 + R() * 42 + midOf(sx);
           if (Math.abs(sx - 96) > w - 4) continue;
           F.line(sx - 2.6, sy, sx + 2.6, sy, 0, 1, true);
           F.line(sx, sy - 2.6, sx, sy + 2.6, 0, 1, true);
@@ -550,8 +560,9 @@ export default {
            ring once the tone is behind it — an outline at level 6 on a field
            at 4 is a wire, and these are the last solid things in the frame */
         for (const s of [-1, 1]) {
-          G.disc(96 + s * d / 2, cy, 8, 0, true);
-          G.ring(96 + s * d / 2, cy, 10, 6, 2.4);
+          const rx = 96 + s * d / 2, ry = cy + midOf(rx);
+          G.disc(rx, ry, 8, 0, true);
+          G.ring(rx, ry, 10, 6, 2.4);
         }
         /* A SHARED HOME, BOXED AND TRUCKED. It stands whole in the wedge
            between the two streets for the first third; the roof comes off on
