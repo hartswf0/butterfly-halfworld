@@ -55,9 +55,9 @@ F.ring(cx,cy,r,l,th)
 F.arc(cx,cy,r,a0,a1,l,th)
 F.word(text,cx,cy,pixelHeight,l,set)   rasterised mono, cached. ph ≥ 6 to be legible.
 F.wordW(text,ph)                        measure it first if you need to lay out
-F.fig(x,y,h,pose,l)   a stick body. x,y is the FEET. h is total height.
-                      pose {mode:'stand'|'walk'|'sit', phase, face:1|-1,
-                            lean, rot, arms:'down'|'open'|'up'|'reach'|'swing'}
+F.fig(x,y,h,pose,l)   A BODY. x,y is the FEET. h is total height. See figure.mjs.
+                      Volumetric: tapered limbs, a real torso, contour plus fill,
+                      and parts emitted back-to-front so a body occludes itself.
                       Keep |rot| under ~1.6 rad or it stops reading as a person.
 F.noise(x,y)          deterministic 0..1
 F.n2(x,y)             smooth value noise
@@ -70,6 +70,50 @@ F.map((x,y,v) => newValue | undefined)   rewrite the whole field
 Helpers imported from `../halfworld.mjs`:
 `TAU, lerp, clamp01, smooth, ss(a,b,x), win(u,a,b,c,d)`
 — `ss` is a smoothstep between two edges, `win` is a rise-and-fall window.
+
+---
+
+## THE POSE — WHAT A BODY CAN DO
+
+```
+mode      'stand' | 'walk' | 'sit' | 'fall'
+phase     the gait/breath clock. NEVER an integer multiple of u — see below.
+face      1 | -1        which way the body is turned
+arms      'down' | 'open' | 'up' | 'reach' | 'hold' | 'swing'
+lean      shear, small; a body pushing into or away from something
+rot       whole-body rotation about the hip, in radians. |rot| < ~1.6.
+```
+
+and the performance controls, which are what separate a body from a diagram:
+
+```
+weight    0..1   WHICH LEG THE BODY IS STANDING ON. 0.5 is even and dead;
+                 0.15 or 0.85 is contrapposto — the free hip drops, the
+                 shoulders counter-tilt. One number, and most of the
+                 difference between a person standing and a drawing of one.
+breath    0..1   scales the idle rise and fall. Under 1% of frame, deniable,
+                 and it is what keeps a held figure alive. Default 1.
+                 Set 0 for a body that is not breathing — the dead, a statue,
+                 a ghost — and that reads, because everything else breathes.
+crouch    0..1   sinks hips and shoulders. Grief, cold, bracing, listening.
+headTurn  -1..1  the head leads the body. A figure that looks before it walks
+                 reads as intending; one that does not reads as dragged.
+headTilt  -1..1  the jaw swings with it. Tilt down is shame or reading;
+                 tilt up is looking at a moon.
+gesture   [x,y]  put the near hand HERE, in body-local coordinates (origin at
+                 the feet, +y up). The elbow solves itself. Use this to make
+                 a hand touch a thing that exists in the scene rather than
+                 miming near it.
+```
+
+**Phase must not be an integer multiple of `u`.** The gait sends both feet to
+the same offset twice per stride; if your rate is `u*6` the QA sample at u=0.5
+lands exactly there and the body collapses into one vertical stroke. Two films
+hit this independently. Use `u*6.35`, not `u*6`.
+
+**A held figure still needs a clock.** `phase` drives breath as well as gait, so
+a standing body given `phase: 0` is holding its breath for the whole movement.
+Pass `phase: u * 1.7` even when nobody is walking.
 
 ---
 
