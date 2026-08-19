@@ -233,8 +233,30 @@ Which gives the title its mechanism: **the title is not typed on, it is resolved
 Points fly in a Whitney field; at a resonant instant they arrive at the positions that spell
 the words, hold, and dissolve back into a field that never stopped moving.
 
-Three options, three different formal devices — a rosette, a nested counter-rotating
-arabesque, and a live catalogue of Lissajous cells. See [`titles.html`](titles.html).
+Four options, four formal devices — a rosette, a nested counter-rotating arabesque, a live
+catalogue of Lissajous cells, and **the aura**, which fuses the second and third and is
+what plays at the head of the suite. See [`titles.html`](titles.html).
+
+The aura is B and C at the same time: the rings are the ground and never stop, and the
+Lissajous cells live *on* them rather than in a grid, each cell's frequency pair derived
+from the ring it rides — so it is still one law read at two distances rather than two laws
+bolted together.
+
+And one thing that is not Whitney at all. A title for fourteen poems should be haunted by
+them, so at each resonance the field throws up **an image from the films behind it**: the
+tambourine that goes through a window in 02 and shatters in 03, the rose window, the moon
+of 09, the temple of 11, the daisy with its eleven petals, the burning hourglass, the ride,
+the candle, the named stars. They arrive faint, hold for a breath, and the rotation takes
+them back. Nothing announces them. If you have seen the films they are memories; if you
+have not they are ornament, and both readings are correct — the same trick the guise plays
+with a face. The tambourine and the rose window are *imported from the films that own
+them*, never redrawn, because a motif that exists twice is two motifs.
+
+**A world may play a recording instead of the synth.** `audio: { src, from, gain }` makes
+the engine use that file as the bed with the oscillators silent; the foley still plays over
+it, because the strikes belong to the picture and the picture is new. Thirteen films
+generate their own sound because no recording of them exists. The suite as a whole has one
+— the drone piece the beflix cut played under — and the title is where it belongs.
 
 ---
 
