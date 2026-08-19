@@ -3,14 +3,20 @@
 
    Same poem as 01-out-of-life.mjs, same four movements, same four verbatim
    lines — this version is not a rewrite, it is the same film with the actual
-   lead footage let into the dot law. The computed room, haze, fall and flood
-   below are UNCHANGED in their mechanism; what's new is the `footage` export,
-   which tells the shell which seconds of `01-out-of-life-lead.mp4` to sample,
-   through which ingest treatment, blended against the computed field by which
-   per-dot rule — see blend.mjs and BLEND-NOTES.md for the reasoning behind
-   each choice. THE FIGURE now carries GUISES.poet / GUISES.turned, measured
-   off this same clip, so the silhouette reads as the same man whether the
-   dot under him belongs to the camera or to the drawing.
+   lead footage let into the dot law. THE FIGURE carries GUISES.poet /
+   GUISES.turned, measured off this same clip, so the silhouette reads as the
+   same man whether the dot under him belongs to the camera or the drawing.
+
+   TIMING IS THE CLIP'S, NOT THE COMPUTED FILM'S. `01-out-of-life-lead.mp4` is
+   already cut to its own reading of this poem — the picture in it is timed to
+   the voice. So `movements[i].seconds` below is not a round production number
+   the way it is in 01-out-of-life.mjs; it is the measured length, in the
+   source clip, of the passage that carries that movement's line. The mapping
+   (silence-gap analysis + the visual scene order, since no transcript or ASR
+   was available in this environment) is recorded in full in BLEND-NOTES.md —
+   read that before changing any number here. The four durations replace the
+   original 13/13/13/14 with 25.67/25.75/21.30/12.58, which is why this film
+   runs to about 90s against the computed version's 58s.
    ========================================================================= */
 import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
 
@@ -47,15 +53,18 @@ export default {
   n: "01", slug: "01b-out-of-life-blend", title: "OUT OF LIFE",
   tagline: "the filmed room and the drawn one, one substance",
   accent: "#5aa7ff", seed: 1015,
+  /* UNUSED — see BLEND-NOTES.md "THE SOUND." The clip has the poet's own
+     reading on its audio track, which the shell plays directly; layering the
+     suite's synthesised drone/foley under a real voice was tried by reasoning
+     it through (not by ear — see the note) and rejected as very likely to
+     compete with the voice rather than support it. `drone` is kept only so
+     this module still matches the documented world shape; makeSound(world)
+     is never called by 01b-out-of-life-blend.html. */
   drone: { base: 16.35, steps: [0, 0, -11, -9, -12] },
   movements: [
     {
-      label: "THE SEARCH", seconds: 13,
+      label: "THE SEARCH", seconds: 25.67,
       line: "What we've made, we don't want. What we've sold — to the world, to ourselves — doesn't exist. I look for a way out: through the hallways, within the drawers, and fire escapes.",
-      cues: [
-        { at: 0.28, f: 190, decay: 0.10, gain: 0.5, partials: [1, 2.7, 5.3], noise: 0.7, nDecay: 0.012, seed: 11 },
-        { at: 0.62, f: 160, decay: 0.12, gain: 0.5, partials: [1, 2.7, 5.3], noise: 0.7, nDecay: 0.012, seed: 12 },
-      ],
       draw(u, F) {
         const { FLOOR } = room(F, u);
         windowAt(F, 158, FLOOR);
@@ -70,7 +79,7 @@ export default {
       },
     },
     {
-      label: "MORE HAZE", seconds: 13,
+      label: "MORE HAZE", seconds: 25.75,
       fx: { smear: { taps: 1, spread: 0.014, fall: 2.0 } },
       line: "The vape gathers, inside and out. My vision blurs. I move toward the window — and you only get further away. More haze.",
       draw(u, F) {
@@ -98,9 +107,8 @@ export default {
       },
     },
     {
-      label: "THE FALL", seconds: 13,
+      label: "THE FALL", seconds: 21.30,
       line: "It was the maze, constructed by a tainted love. You fall off the fire escape, into darkness — and the city streaks upward like it's leaving too.",
-      cues: [{ at: 0.06, f: 90, decay: 0.5, gain: 0.6, partials: [1, 1.5, 2.2], noise: 0.9, nDecay: 0.09, seed: 21 }],
       draw(u, F) {
         const v = u * 640;
         for (const [bx, bw, sp] of [[2, 30, 1.00], [36, 18, 1.22], [140, 20, 1.14], [166, 26, 0.94]]) {
@@ -132,9 +140,8 @@ export default {
       },
     },
     {
-      label: "AS DARK AS BLACK", seconds: 14,
+      label: "AS DARK AS BLACK", seconds: 12.58,
       line: "I trip on my own words, falling out of life — and find where you go when you leave. The gap between us breathes, and never closes.",
-      cues: [{ at: 0.62, f: 62, decay: 1.1, gain: 0.5, partials: [1, 2.01, 3.02], noise: 0.2, nDecay: 0.3, seed: 41 }],
       draw(u, F) {
         const gap = 24 + Math.sin(u * TAU * 2) * 3;
         const cy = 60;
@@ -158,95 +165,135 @@ export default {
 /* ============================================================================
    FOOTAGE — what the shell overlays on top of the computed field above.
 
-   Aligned positionally with `movements` (index 0 = THE SEARCH, no title-card
-   entry — the title card is always pure drawing). Each entry is an ARRAY of
-   SEGMENTS covering successive slices of that movement's own u ∈ [0,1); a
-   movement may have one segment (a single treatment ridden the whole way) or
-   several (a movement that changes footage, register or blend mode partway
-   through, per BLEND-NOTES.md).
+   Positionally aligned with `movements` (index 0 = THE SEARCH; no entry for
+   the title card, which is always pure drawing — the clip hasn't started
+   "playing" yet at that point, see 01b-out-of-life-blend.html).
 
-   A segment:
-     u0, u1     the slice of the movement's u this segment owns
-     t0, t1     footage seconds at u0 and u1 — sampled by linear interpolation
-                of local progress, NOT by the video's own playback rate. The
-                clip is scrubbed by u, exactly like the drawing is.
-     opts       passed straight to ingest.mjs's sample()
-     blend      one of blend.mjs's exports: swap | wipe | byLevel | noiseSwap
-                | figureLock
-     blendOpts  the extra positional args each blend fn takes beyond (a,b,t)
-     mix(p)     p is LOCAL progress through the segment, 0..1 — returns the
-                blend's own t. Defaults to identity (a straight ride) when
-                omitted.
+     clipStart   the source clip's OWN timecode, in seconds, where this
+                 movement's u=0 begins. clipStart + movements[i].seconds is
+                 therefore always exactly the next movement's clipStart (or
+                 the end of the file, for the last one) — the shell's clock
+                 for movements 1..4 IS the video's real playback position,
+                 not something scrubbed frame by frame, because the clip's
+                 own audio is this film's soundtrack now (see BLEND-NOTES.md)
+                 and audio wants to play forward, not be sought every frame.
+     segments    sub-ranges of that movement's own u ∈ [0,1) — a movement may
+                 change footage register, blend mode, or both partway through
+                 (most of them do; the source clip itself cuts scenes inside
+                 a single spoken line). Each segment:
+       u0, u1      the slice of u this segment owns
+       opts        passed straight to ingest.mjs's sample()
+       blend       swap | wipe | byLevel | noiseSwap | figureLock, OR
+                   "figureLockTorn" — a composite defined in the shell (not
+                   in blend.mjs, which is not edited): noiseSwap's torn
+                   schedule for the environment, with the drawn figure(s)
+                   still locked in per figureLock's own rule. Used where the
+                   brief asks for BOTH a torn dissolve AND a protected body.
+       blendOpts   the extra positional args that blend fn takes
+       mix(p)      p is local progress through the segment, 0..1 — returns
+                   the blend's own t (absolute, 0..1, not relative to the
+                   segment before it — see BLEND-NOTES.md for why each curve
+                   is shaped the way it is, including the deliberate DROPS).
    ========================================================================= */
 export const footage = {
   src: "footage/01-out-of-life-lead.mp4",
   duration: 88.38,
   movements: [
-    /* 0 · THE SEARCH — footage of the room stays footage; the drawn figure
-       is locked in at full ink from the first frame (figureLock does not
-       schedule the figure itself). `mix` rides the ROOM from footage to
-       drawing across the whole thirteen seconds, so by the time he reaches
-       the window the room has become the same ink he is. */
-    [
-      { u0: 0, u1: 1, t0: 20.0, t1: 29.0,
-        opts: { channel: "luma", black: 0, white: 0.35, tone: "invert", dither: "bayer" },
-        blend: "figureLock", blendOpts: { threshold: 3.5 },
-        mix: (p) => smooth(p) },
-    ],
-    /* 1 · MORE HAZE — "he empties out before the room does." Segment A keys
-       the dissolve to the FOOTAGE's own darkness (byLevel): the poet, raising
-       his hand into the haze, is the darkest mass on screen and is the first
-       thing to convert. Segment B is the turned back at the fire escape —
-       figureLock again, GUISES.turned locked in, the smoke-choked landing
-       around him still footage until the very end of the movement. */
-    [
-      { u0: 0, u1: 0.55, t0: 29.5, t1: 34.0,
-        opts: { channel: "luma", black: 0, white: 0.55, tone: "invert", dither: "bayer" },
-        blend: "byLevel", blendOpts: { reverse: false },
-        mix: (p) => ss(0, 1, p) * 0.85 },
-      { u0: 0.55, u1: 1, t0: 35.0, t1: 39.0,
-        opts: { channel: "luma", black: 0, white: 0.5, tone: "invert", dither: "bayer" },
-        blend: "figureLock", blendOpts: { threshold: 3.5 },
-        mix: (p) => 0.55 + ss(0, 1, p) * 0.4 },
-    ],
-    /* 2 · THE FALL — the surreal one, three registers in thirteen seconds.
-       Seg 1: the roof, the leap — a torn noiseSwap, the schedule starting to
-       tear before he's even off the ledge. Seg 2: WARP RIPPLE through the
-       sparks (EXPERIMENTS #6) — a coordinate remap costs the falling body
-       nothing, so he stays crisp while the field around him buckles. Seg 3:
-       kaleido "radial" folds the sparks into a rose window — which, per
-       EXPERIMENTS, blots any FILMED body caught in it into a Rorschach smear.
-       That is used on purpose here: the footage becomes pure vision-texture
-       and the two DRAWN bodies (unaffected — they are `b`, not `a`) are what
-       stays legible. Going further than EXPERIMENTS shipped, because this is
-       the one movement the brief asks to. */
-    [
-      { u0: 0, u1: 0.3, t0: 56.0, t1: 60.5,
-        opts: { channel: "luma", black: 0, white: 0.55, tone: "invert", dither: "bayer" },
-        blend: "noiseSwap", blendOpts: { s: 0.4, opts: { scale: 0.05, seed: 21 } },
-        mix: (p) => p },
-      { u0: 0.3, u1: 0.68, t0: 62.0, t1: 69.0,
-        opts: { channel: "luma", black: 0, white: 0.7, tone: "invert", dither: "bayer",
-                warp: 0.6, warpScale: 0.02 },
-        blend: "swap", blendOpts: {},
-        mix: (p) => smooth(p) },
-      { u0: 0.68, u1: 1, t0: 71.0, t1: 79.5,
-        opts: { channel: "luma", black: 0, white: 0.6, tone: "invert", dither: "bayer",
-                kaleido: "radial", radialSlices: 8, warp: 0.25, warpScale: 0.03 },
-        blend: "noiseSwap", blendOpts: { s: 0.75, opts: { scale: 0.03, seed: 62 } },
-        mix: (p) => 0.15 + smooth(p) * 0.75 },
-    ],
-    /* 3 · AS DARK AS BLACK — the night register (EXPERIMENTS #2): the footage
-       is the tail of the clip fading through its own bright flare to black,
-       widened white point so only the fading highlight stays paper and
-       everything else is already ink — the same field the flood is filling.
-       An even swap, because this movement's own drama is the flood, not the
-       footage; the footage just needed to already agree with it. */
-    [
-      { u0: 0, u1: 0.7, t0: 82.0, t1: 87.0,
-        opts: { channel: "luma", black: 0.02, white: 0.85, tone: "invert", dither: "bayer" },
-        blend: "swap", blendOpts: {},
-        mix: (p) => Math.min(1, p * 1.4) },
-    ],
+    /* 0 · THE SEARCH — clip 3.08 → 28.75 (25.67s). Seg A is the exterior fog
+       shot with its own walking silhouette (a different vantage of the same
+       man, low in the mix — this is atmosphere arriving before the room
+       does, not the room itself). Seg B carries the neon title card's own
+       fade and then the room; figureLock keeps the drawn walker solid ink
+       throughout while the room around him rides footage → drawing. */
+    {
+      clipStart: 3.08,
+      segments: [
+        { u0: 0, u1: 0.3475,
+          opts: { channel: "luma", black: 0, white: 0.5, tone: "invert", dither: "bayer" },
+          blend: "swap", blendOpts: {},
+          mix: (p) => 0.05 + 0.17 * smooth(p) },
+        { u0: 0.3475, u1: 1,
+          opts: { channel: "luma", black: 0, white: 0.35, tone: "invert", dither: "bayer" },
+          blend: "figureLock", blendOpts: { threshold: 3.5 },
+          mix: (p) => 0.22 + 0.78 * smooth(p) },
+      ],
+    },
+    /* 1 · MORE HAZE — clip 28.75 → 54.50 (25.75s), FOUR beats in the source:
+       haze/vape (byLevel — "he empties out before the room does," the
+       poet's own dark mass is the first thing to convert), the turned back
+       at the fire-escape landing (figureLock, GUISES.turned), a framed TV
+       showing something else entirely ("my vision blurs" — kept deliberately
+       LOW in the mix: it is not his room and should not read as if it were,
+       so the mix DROPS here rather than continuing to climb), then the
+       kitchen haze closing back in (byLevel again) as he fails to reach the
+       window. */
+    {
+      clipStart: 28.75,
+      segments: [
+        { u0: 0, u1: 0.2233,
+          opts: { channel: "luma", black: 0, white: 0.55, tone: "invert", dither: "bayer" },
+          blend: "byLevel", blendOpts: { reverse: false },
+          mix: (p) => lerp(0.0, 0.55, smooth(p)) },
+        { u0: 0.2233, u1: 0.4175,
+          opts: { channel: "luma", black: 0, white: 0.5, tone: "invert", dither: "bayer" },
+          blend: "figureLock", blendOpts: { threshold: 3.5 },
+          mix: (p) => lerp(0.55, 0.75, smooth(p)) },
+        { u0: 0.4175, u1: 0.6699,
+          opts: { channel: "luma", black: 0, white: 0.6, tone: "linear", edge: 0.6, dither: "bayer" },
+          blend: "noiseSwap", blendOpts: { s: 0.5, opts: { scale: 0.04, seed: 39 } },
+          mix: (p) => lerp(0.75, 0.25, smooth(p)) },
+        { u0: 0.6699, u1: 1,
+          opts: { channel: "luma", black: 0, white: 0.55, tone: "invert", dither: "bayer" },
+          blend: "byLevel", blendOpts: { reverse: false },
+          mix: (p) => lerp(0.25, 0.7, smooth(p)) },
+      ],
+    },
+    /* 2 · THE FALL — clip 54.50 → 75.80 (21.30s), the surreal one, three
+       registers, figureLock (or its torn cousin) the whole way so the two
+       drawn bodies never dissolve even as the environment tears itself
+       apart around them: roof + leap (torn), the plunge through sparks
+       (WARP RIPPLE, EXPERIMENTS #6 — a coordinate remap costs the locked
+       bodies nothing), then the climb into the golden climax (kaleido
+       "radial" + torn noiseSwap — per EXPERIMENTS this blots any FILMED
+       body caught in it into a Rorschach smear, which is fine, even good,
+       because the bodies that have to read here are the DRAWN ones,
+       unaffected because figureLock reads them off `b`, not `a`). */
+    {
+      clipStart: 54.5,
+      segments: [
+        { u0: 0, u1: 0.3521,
+          opts: { channel: "luma", black: 0, white: 0.55, tone: "invert", dither: "bayer" },
+          blend: "figureLockTorn", blendOpts: { threshold: 3.5, s: 0.5, opts: { scale: 0.05, seed: 21 } },
+          mix: (p) => lerp(0.3, 0.55, smooth(p)) },
+        { u0: 0.3521, u1: 0.7277,
+          opts: { channel: "luma", black: 0, white: 0.7, tone: "invert", dither: "bayer",
+                  warp: 0.6, warpScale: 0.02 },
+          blend: "figureLock", blendOpts: { threshold: 3.5 },
+          mix: (p) => lerp(0.55, 0.65, smooth(p)) },
+        { u0: 0.7277, u1: 1,
+          opts: { channel: "luma", black: 0, white: 0.6, tone: "invert", dither: "bayer",
+                  kaleido: "radial", radialSlices: 8, warp: 0.25, warpScale: 0.03 },
+          blend: "figureLockTorn", blendOpts: { threshold: 3.5, s: 0.75, opts: { scale: 0.03, seed: 62 } },
+          mix: (p) => lerp(0.65, 0.85, smooth(p)) },
+      ],
+    },
+    /* 3 · AS DARK AS BLACK — clip 75.80 → 88.38 (12.58s): the SAME shot THE
+       FALL was just in, continuing past the hand-off — the golden climax
+       blooming into a halo, the clip's own closing title card fading over
+       it, then true black. Widened white point (EXPERIMENTS #2, the NIGHT
+       register) so only that fading highlight stays paper and everything
+       else is already ink, agreeing with the computed flood this movement
+       is doing anyway. No figureLock: the two bodies here are drawn faint
+       (levels 2–3, "the gap between us breathes") and are meant to be as
+       dissolvable as everything else in this movement, not protected. */
+    {
+      clipStart: 75.8,
+      segments: [
+        { u0: 0, u1: 1,
+          opts: { channel: "luma", black: 0.02, white: 0.85, tone: "invert", dither: "bayer" },
+          blend: "swap", blendOpts: {},
+          mix: (p) => Math.min(1, smooth(p) * 1.3) },
+      ],
+    },
   ],
 };

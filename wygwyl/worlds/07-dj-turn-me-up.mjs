@@ -168,10 +168,18 @@ export default {
         archStage(G, cx, FLOOR, 74, 60, 3);
         micStand(G, cx - 16, FLOOR, 34, 6);
         const h = 40;
+        /* the second cue is the weight of the words actually landing —
+           a small settle in the crouch on the same `at` the sound strikes,
+           so the bricks in wordWeight look like they have just come to
+           rest on him rather than always having been there */
+        const land = Math.exp(-(((u - 0.70) / 0.05) ** 2));
         /* nested, bowed: a small forward rot carries the head down toward
            the mic rather than the whole torso folding, which read as
            sitting when the first pass tried it */
-        G.fig(cx, FLOOR, h, { mode: "stand", arms: "down", rot: 0.16, lean: 0.05 }, 7);
+        G.fig(cx, FLOOR, h, {
+          mode: "stand", arms: "down", rot: 0.16, lean: 0.05, guise: "poet",
+          phase: u * 1.7, weight: 0.35, headTilt: -0.20, crouch: 0.04 + land * 0.10,
+        }, 7);
         wordWeight(G, cx + 4, FLOOR - h * 0.885 - h * 0.12, 5);
         meter(F, u, amp);
       },
@@ -205,7 +213,9 @@ export default {
         /* ghosts: whispering, so they never speak in full ink — held at 3,
            and taken apart dot by dot on the ordered schedule, never faded */
         const G = rig(F, scale, 96, FLOOR);
-        for (const gx of [62, 128]) G.fig(gx, FLOOR, 30, { mode: "stand", arms: "open", face: gx < 96 ? 1 : -1 }, 3);
+        /* ghosts do not breathe — the one free mark the pose vocabulary
+           gives a dead thing, spent here exactly as it is in 02 */
+        for (const gx of [62, 128]) G.fig(gx, FLOOR, 30, { mode: "stand", arms: "open", face: gx < 96 ? 1 : -1, guise: "poet", breath: 0, headTilt: -0.2 }, 3);
         F.map((x, y, v) => {
           if (v === 3 && F.bayer(x, y) > 0.30 + 0.30 * Math.sin(u * TAU * 2.2 + x * 0.05)) return 0;
         });
@@ -245,7 +255,7 @@ export default {
           F.ink(fx, FLOOR - 1 + (k % 2 ? 1 : 0), Math.max(1, 5 - k * 0.32));
         }
         const G = rig(F, scale, 96, FLOOR);
-        G.fig(wx, FLOOR, 30, { mode: "walk", phase: u * 6, face: 1 }, 7);
+        G.fig(wx, FLOOR, 30, { mode: "walk", phase: u * 6.35, face: 1, guise: "poet", headTilt: -0.2 }, 7);
         meter(F, u, amp);
       },
     },
@@ -396,14 +406,18 @@ export default {
         const G = rig(F, scale, cx, FLOOR);
         archStage(G, cx, FLOOR, 74, 60, 3);
         micStand(G, cx - 16, FLOOR, 34, 6);
-        /* chin high: rot goes the OTHER way from M1, and nothing is
-           stacked on the head — the weight from M1 never returns here */
-        G.fig(cx, FLOOR, 42, { mode: "stand", arms: "open", rot: -0.14 }, 7);
+        /* chin high: rot goes the OTHER way from M1, and headTilt does too
+           — M1 nested down at -0.20, this ends up at +0.35. Same figure,
+           same clock, the film's whole arc read in one number twice. */
+        G.fig(cx, FLOOR, 42, { mode: "stand", arms: "open", rot: -0.14, guise: "poet", phase: u * 1.7, weight: 0.6, headTilt: 0.35 }, 7);
         /* one night, one tear, one open mic — three marks arriving in the
            order the line names them, each one a per-dot arrival on the
-           ordered schedule rather than a pop-in */
+           ordered schedule rather than a pop-in. Gated on the cues' own
+           `at` values now, not a separate guess at where they'd fall — the
+           first pass used 0.12/0.42/0.70 against cues fired at
+           0.15/0.50/0.86 and the icons kept arriving before their sound. */
         const icons = [[40, 16, "night"], [96, 12, "tear"], [152, 16, "mic"]];
-        const gate = [0.12, 0.42, 0.70];
+        const gate = [0.15, 0.50, 0.86];
         for (let idx = 0; idx < icons.length; idx++) {
           const [ix, iy, kind] = icons[idx];
           if (u < gate[idx]) continue;

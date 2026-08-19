@@ -210,8 +210,13 @@ export default {
         boat(F, 170, 84 + Math.sin(u * TAU * 0.5 + 2) * 1.2, 6, 5);
         for (const tx of TABLE_X) table(F, tx, TABLE_Y, 5);
         /* one table is occupied. The others are named by the line
-           ("the small tables") but not sat at — only one watcher */
-        F.fig(TABLE_X[2] + 9, TABLE_Y, 32, { mode: "sit", face: -1, arms: "down" }, 7);
+           ("the small tables") but not sat at — only one watcher. WATCHING
+           is a head that turns to scan the harbor, not a face held level —
+           it drifts out toward the window across the movement and back,
+           the one figure in this film whose whole job is to look. */
+        F.fig(TABLE_X[2] + 9, TABLE_Y, 32, { mode: "sit", face: -1, arms: "down",
+          phase: u * 1.7, guise: "poet", headTurn: Math.sin(u * TAU * 0.4) * 0.5,
+          headTilt: 0.08 }, 7);
       },
     },
     {
@@ -247,8 +252,11 @@ export default {
           const ang = t * 1.4 + u * TAU * (0.7 + t * 0.12);
           const p1 = [cx + Math.cos(ang) * orbitR, cy + Math.sin(ang) * orbitR * 0.35];
           const p2 = [cx + Math.cos(ang + Math.PI) * orbitR, cy + Math.sin(ang + Math.PI) * orbitR * 0.35];
-          F.fig(p1[0], p1[1] + 9, 15, { mode: "stand", face: p1[0] < cx ? 1 : -1, arms: "open" }, 6);
-          F.fig(p2[0], p2[1] + 9, 15, { mode: "stand", face: p2[0] < cx ? 1 : -1, arms: "open" }, 6);
+          /* each half of a couple leans INTO its own orbit — a body being
+             carried around a curve tips toward the centre it's turning on,
+             the same lean any small body in this kit can still perform */
+          F.fig(p1[0], p1[1] + 9, 15, { mode: "stand", face: p1[0] < cx ? 1 : -1, arms: "open", rot: Math.sin(ang) * 0.16 }, 6);
+          F.fig(p2[0], p2[1] + 9, 15, { mode: "stand", face: p2[0] < cx ? 1 : -1, arms: "open", rot: Math.sin(ang + Math.PI) * 0.16 }, 6);
           table(F, cx, TABLE_Y, 3);
         }
       },
@@ -349,7 +357,22 @@ export default {
              HALF-integer of phase, not just every integer, and u=0.5 * 7 is
              exactly 3.5. A non-integer rate keeps every sweep checkpoint
              (0.2 / 0.5 / 0.8) off of both. */
-          F.fig(sweepX, 128, 38, { mode: "walk", phase: u * 6.35, face: -1, arms: "reach" }, 7);
+          /* THE HAND GOES ON THE FLOWER, not a generic reach mimed near the
+             row of stalks. `gesture` is body-local (feet at the origin,
+             +y up), so a target's screen coordinates convert directly. The
+             grip lands at the STEM'S BEND (the same midY the stalk-drawing
+             loop above uses), not the bloom at its tip — the tip sits four
+             heads above the shoulder and a hand sent there stretched the
+             arm into a rod, which read as broken rather than reaching.
+             Only the NEXT stalk still standing counts, and only once it's
+             close enough to actually be in reach — otherwise he is caught
+             reaching at empty air between them. */
+          const ahead = targets.filter((t) => t.x <= sweepX);
+          const nextT = ahead.length ? ahead.reduce((a, b) => (b.x > a.x ? b : a)) : null;
+          const reachIn = nextT ? sweepX - nextT.x : 999;
+          const gripY = nextT ? (140 + nextT.top) / 2 : 0;
+          const gesture = nextT && reachIn < 16 ? [nextT.x - sweepX, 128 - gripY] : undefined;
+          F.fig(sweepX, 128, 38, { mode: "walk", phase: u * 6.35, face: -1, arms: "reach", gesture }, 7);
           held.forEach((t, i) => { const c = i % 6, r = (i / 6) | 0; const bx = sweepX + 9 + c * 3.2, by = 92 - r * 4;
             t.poppy ? poppy(F, bx, by, 1.4, 6) : blossom(F, bx, by, 1.5, 6); });
         } else {
@@ -390,9 +413,14 @@ export default {
         [eyeDots(cx - 9, cy - 3), eyeDots(cx + 9, cy - 3)].forEach((eye, ei) =>
           eye.forEach((p, i) => resolveDot(F, p[0], p[1], 8, 4000 + ei * 50 + i, u, 0.30, 0.76, 26, true)));
         F.line(30, 132, 80, 133, 4, 1); F.line(96, 133, 150, 132, 4, 1);
-        /* step back: smaller, and a half-step further from the glass */
+        /* step back: smaller, and a half-step further from the glass. The
+           head tilts up toward the window as she resolves in it, and lifts
+           further the instant the arm does — "say hello" is a chin coming
+           up before it is a wave. */
         const back = ss(0.80, 0.98, u);
-        F.fig(96, lerp(136, 127, back), lerp(30, 21, back), { mode: "stand", face: 1, arms: u > 0.90 ? "up" : "down" }, 7);
+        F.fig(96, lerp(136, 127, back), lerp(30, 21, back), { mode: "stand", face: 1,
+          phase: u * 1.7, arms: u > 0.90 ? "up" : "down",
+          headTilt: 0.15 + back * 0.15, guise: "poet" }, 7);
       },
     },
     {
@@ -416,7 +444,13 @@ export default {
         boat(F, lerp(60, 150, s), lerp(96, HOR + 4, s), lerp(9, 3, s), 4);
         for (const tx of TABLE_X) table(F, tx, TABLE_Y, 4);
         table(F, TABLE_X[2], TABLE_Y, 6);
-        F.fig(TABLE_X[2] + 9, TABLE_Y, 32, { mode: "sit", face: -1, arms: "reach" }, 7);
+        /* HOLDING ON: the reaching hand lands on the table's own edge, not
+           mimed in the air past it — "don't make me leave" gripping the
+           one thing here that isn't going anywhere, while the head still
+           follows the boat that is. */
+        F.fig(TABLE_X[2] + 9, TABLE_Y, 32, { mode: "sit", face: -1, arms: "reach",
+          phase: u * 1.7, guise: "poet", gesture: [-9, 9],
+          headTurn: -0.35, headTilt: -0.12 }, 7);
       },
     },
   ],

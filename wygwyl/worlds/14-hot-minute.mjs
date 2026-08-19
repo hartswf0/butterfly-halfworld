@@ -314,7 +314,13 @@ export default {
         const FEET = 122, H = 58;
         F.line(38, FEET, 84, FEET, 4, 1); F.line(104, FEET, 150, FEET, 4, 1);
         const shiver = Math.sin(u * TAU * 5) * 0.045;
-        F.fig(96, FEET, H, { mode: "stand", arms: "open", rot: -0.10 + shiver, lean: 0.02 }, 7);
+        /* GUISE POET: the same man the rest of the suite knows, dissolving.
+           Weight and a breathing clock only — the file's own rejected
+           alternative above (fighting the fog with the stance) still
+           applies, so nothing here adds resistance the dissolve itself
+           isn't already carrying. */
+        F.fig(96, FEET, H, { mode: "stand", arms: "open", rot: -0.10 + shiver, lean: 0.02,
+          guise: "poet", phase: u * 1.7, weight: 0.42 }, 7);
         /* I AM RELUCTANT: the schedule does not rise evenly. It climbs to
            0.44, HOLDS there through the movement's middle third, and only
            then finishes — a hesitation built into the dissolve itself
@@ -356,8 +362,10 @@ export default {
           F.put(x, Math.round(hy), 4); F.put(x, Math.round(hy) + 1, 5);
         }
         /* HE IS STILL IN IT, IN RESERVE. He drifts, because there is no
-           wall left to stand near and nowhere he has to be instead. */
-        reserveFig(F, lerp(58, 134, smooth(u)), 112, 42);
+           wall left to stand near and nowhere he has to be instead — a
+           slow vertical bob added to the horizontal drift, the closest
+           thing this hand-built silhouette has to a breath of its own. */
+        reserveFig(F, lerp(58, 134, smooth(u)), 112 + Math.sin(u * TAU * 0.6) * 3, 42);
       },
     },
     {
@@ -401,8 +409,17 @@ export default {
         const faceA = ax > CX ? -1 : 1, faceB = bx > CX ? -1 : 1;
         F.ring(CX, BY + 4, R + 12, 4, 1);     // the floor they turn on, a ring, no stage rectangle
         const up = settle > 0.5;
-        F.fig(ax, ay, HA, { mode: "stand", face: faceA, arms: up ? "up" : "reach", rot: Math.sin(ang) * 0.12 }, 7);
-        F.fig(bx, by, HB, { mode: "stand", face: faceB, arms: up ? "up" : "reach", rot: -Math.sin(ang) * 0.12 }, 7);
+        /* TWO ENTWINED MUSES, BOTH HIM: guise poet on both bodies, the same
+           mark the final door-walker carries below — "our dance together"
+           reads as one man's two halves turning together rather than a
+           stranger's pair. Weight leans out from the spin the way a body
+           actually held in a turn does, opposite the whole-figure rot. */
+        F.fig(ax, ay, HA, { mode: "stand", face: faceA, arms: up ? "up" : "reach",
+          rot: Math.sin(ang) * 0.12, guise: "poet", phase: u * 1.7,
+          weight: 0.5 + Math.sin(ang) * 0.3 }, 7);
+        F.fig(bx, by, HB, { mode: "stand", face: faceB, arms: up ? "up" : "reach",
+          rot: -Math.sin(ang) * 0.12, guise: "poet", phase: u * 1.7 + 1.9,
+          weight: 0.5 - Math.sin(ang) * 0.3 }, 7);
         if (!up) {
           /* ENTWINED: 'reach' makes each figure's own arm end at this exact
              point internally; drawing the join between the two is the only
@@ -453,7 +470,9 @@ export default {
         }
         for (const [dx, ph0] of [[58, 0], [88, 2.3]]) {
           const sway = Math.sin(u * TAU * 0.55 + ph0) * 4;
-          F.fig(dx + sway, 130, 32, { mode: "stand", arms: "open", lean: Math.sin(u * TAU * 0.55 + ph0) * 0.05 }, 5);
+          F.fig(dx + sway, 130, 32, { mode: "stand", arms: "open",
+            phase: u * 1.7 + ph0, weight: 0.5 + Math.sin(u * TAU * 0.55 + ph0) * 0.28,
+            lean: Math.sin(u * TAU * 0.55 + ph0) * 0.05 }, 5);
         }
 
         doorLeaf(F, hx, top, bot, visW);
@@ -478,7 +497,13 @@ export default {
         const px = lerp(78, hx + 6, walk);
         const step = ss(0.82, 1, u);
         const px2 = lerp(px, hx + fullW * 0.55, step);
-        F.fig(px2, 130, 40, { mode: "walk", phase: u * 5.5, face: 1 }, 7);
+        /* GUISE POET — the same man as the two entwined muses above and
+           every other film that knows him by silhouette. The head leads
+           the walk TOWARD the door, never back at the window (see the
+           comment above this call for why), and comes up a little in the
+           last stretch — he's not just leaving, he can see it opening. */
+        F.fig(px2, 130, 40, { mode: "walk", phase: u * 5.5, face: 1, guise: "poet",
+          headTurn: 0.25 + step * 0.2, headTilt: step * 0.15 }, 7);
       },
     },
   ],
