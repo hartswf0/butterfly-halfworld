@@ -258,13 +258,13 @@ export default {
         waveShadows(F, 139, 2, u * 0.5 + 3);
         groundTrail(F, 46, floor + 2, cx, 6);
         const xf = cx - 9, xs = cx + 9;
-        /* the two gait phases are offset by a fifth of a stride, not a half
-           — half made their legs snap shut together at the exact same
-           instant, which for one unlucky frame read as a single pole where
-           a person should be. An odd offset means they are never both
-           mid-crossing at once. */
-        F.fig(xf, floor, hf, { mode: "walk", phase: u * 6.3, face: 1 }, 7);
-        F.fig(xs, floor, hs, { mode: "walk", phase: u * 6.3 + 0.4, face: 1 }, 7);
+        /* a walk cycle's stride crosses through zero separation twice a
+           lap — the instant both feet sit under the hip — and at this
+           resolution anything short of a wide stance reads as one leg, not
+           two. Picked so neither figure is ever near that crossing at the
+           moments the eye actually lands on the frame. */
+        F.fig(xf, floor, hf, { mode: "walk", phase: u * 6.5, face: 1 }, 7);
+        F.fig(xs, floor, hs, { mode: "walk", phase: u * 6.5 + 0.49, face: 1 }, 7);
         /* SOMEONE BLUE: the suite's one accent mark, one occurrence, held
            back until the last few frames of the last movement — everywhere
            else in this world "blue" is only the tagline's color name */

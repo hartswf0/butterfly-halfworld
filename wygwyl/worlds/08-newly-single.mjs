@@ -84,15 +84,21 @@ function danceFloor(F, u, opts = {}) {
 }
 
 /* the crowd: deterministic, so the same seed redraws the same club across
-   M1–M3 and M6 — one room, thinning, not four different rooms of extras */
+   M1–M3 and M6 — one room, thinning, not four different rooms of extras.
+   MINIMUM SEPARATION IS ENFORCED. The first pass placed x by chance alone
+   and two dancers eight cells apart, staggered in y, chained into a single
+   silhouette twice anyone's height — a fourth figure nobody asked for. */
 function crowd(F, u, n, seedBase, opts = {}) {
-  const { yBand = [100, 138], gap = 18 } = opts;
+  const { yBand = [100, 138], gap = 18, minSep = 17 } = opts;
   const R = F.rng(seedBase);
+  const used = [];
   for (let k = 0; k < n; k++) {
     const r1 = R(), r2 = R(), r3 = R(), r4 = R();
     let x = 14 + r1 * 164;
     if (Math.abs(x - 96) < gap) x += (x < 96 ? -1 : 1) * gap;
+    for (const ux of used) if (Math.abs(x - ux) < minSep) x += (x < ux ? -1 : 1) * (minSep - Math.abs(x - ux));
     x = Math.max(6, Math.min(186, x));
+    used.push(x);
     const y = yBand[0] + r2 * (yBand[1] - yBand[0]);
     const h = 20 + r3 * 9, face = r4 > 0.5 ? 1 : -1;
     const phase = u * (2.2 + r1 * 3.4) + r2 * 6;

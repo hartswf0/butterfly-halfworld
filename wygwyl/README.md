@@ -157,8 +157,11 @@ Full API and house style: [`WORLD-BRIEF.md`](WORLD-BRIEF.md).
 | **07** | [DJ TURN ME UP](07-dj-turn-me-up.html) | amplitude, and eleven petals | 7 | 100s |
 | **08** | [NEWLY SINGLE](08-newly-single.html) | a soul leaves a body on a dance floor | 7 | 99s |
 | **09** | [YET, HEARD](09-yet-heard.html) | three calls before leaving | 4 | 74s |
+| **10** | [MAGIC RIDE](10-magic-ride.html) | night replaced by morning, dot by dot | 6 | 85s |
+| **11** | [NEW DAY](11-new-day.html) | the temple assembles, one course at a time | 6 | 85s |
 | **12** | [REUNION](12-reunion.html) | less time for words, more space for laughter | 5 | 67s |
-| | **10 films** | | **56** | **13m 32s** |
+| **13** | [HOW TO WIN MY HEART](13-how-to-win-my-heart.html) | orbits, close and counted | 6 | 85s |
+| | **13 films** | | **74** | **17m 47s** |
 <!-- FILMS:END -->
 
 The suite is a sequence and it behaves like one. The tambourine thrown through a window
