@@ -150,3 +150,20 @@ It prints ink coverage per movement and writes `renders/wygwyl/07-mNN.png`.
 is an empty frame; over 93% is a solid one; both are usually bugs. But the
 numbers only catch the extremes — the middle is your eye's job. Fix and re-shoot
 until every frame is a picture you would put in the film.
+
+---
+
+## KEEP THE FRAME UNDER BUDGET
+
+A field is 27,648 cells and the film wants 16.6 ms. Two things blow that:
+
+- **`F.map` with expensive noise inside it.** `F.fbm(x, y, 3)` per cell is twelve
+  value-noise lookups times 27,648. Two octaves is usually indistinguishable and
+  costs a third less. Prefer `F.n2` over `F.fbm` when you only need softness.
+- **`fx.smear` multiplies everything.** Each tap is a *full redraw* of your
+  movement. A 6 ms draw with three taps is 24 ms and drops frames. If your draw
+  already ends in a per-cell `F.map`, you get at most one tap.
+
+Measure rather than guess: `renderField` is on `window.__hw.runtime`, so in the
+page console `performance.now()` around `__hw.runtime.renderField(t)` tells you
+the truth for the timestamp you are actually worried about.

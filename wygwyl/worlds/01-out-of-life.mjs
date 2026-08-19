@@ -67,7 +67,12 @@ export default {
     {
       label: "MORE HAZE", seconds: 13,
       line: "The vape gathers, inside and out. My vision blurs. I move toward the window — and you only get further away. More haze.",
-      fx: { smear: { taps: 2, spread: 0.012, fall: 2.2 } },
+      /* ONE TAP, NOT TWO. Every smear tap is a full redraw, and this movement's
+         redraw ends in an fbm evaluated per cell — at two taps the frame cost
+         hit 19ms and the film dropped frames on the one movement whose subject
+         is that seeing is getting harder. One tap still blurs the figure, and
+         the haze supplies the rest of the softness by itself. */
+      fx: { smear: { taps: 1, spread: 0.014, fall: 2.0 } },
       draw(u, F) {
         const { FLOOR } = room(F, u, 0.5);
         /* the window is the EX: every step toward it, it gets further away */
@@ -83,8 +88,8 @@ export default {
         F.map((x, y, v) => {
           const edge = x / F.W + (F.n2(x * 0.06, y * 0.06) - 0.5) * 0.22;
           if (edge < claim - 0.04) {
-            const h = F.fbm(x * 0.09 + u * 2.2, y * 0.11, 3);
-            return h > 0.62 ? 3 : h > 0.45 ? 2 : 1;
+            const h = F.fbm(x * 0.09 + u * 2.2, y * 0.11, 2);
+            return h > 0.60 ? 3 : h > 0.43 ? 2 : 1;
           }
           if (edge < claim && F.bayer(x, y) < (claim - edge) / 0.04) {
             return 2;
