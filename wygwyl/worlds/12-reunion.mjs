@@ -17,11 +17,13 @@ import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
 
 const CX = 96, GROUND_Y = 128;
 
-/* the yard the whole film stands in. broken once, off-centre, so the meeting
-   point between the brothers is never sitting on a drawn line */
-function ground(F, l = 6) {
-  F.line(0, GROUND_Y, 82, GROUND_Y, l, 1);
-  F.line(94, GROUND_Y, 192, GROUND_Y, l, 1);
+/* the yard the whole film stands in. THREE runs, not two — two runs with one
+   narrow gap still reads as a single bar under the halftone at this width;
+   splitting it again on the far side is what actually breaks it. */
+function ground(F, l = 6, th = 1) {
+  F.line(0, GROUND_Y, 54, GROUND_Y, l, th);
+  F.line(66, GROUND_Y, 126, GROUND_Y, l, th);
+  F.line(138, GROUND_Y, 192, GROUND_Y, l, th);
 }
 
 /* THE ONE NUMBER THE FILM IS ABOUT: the half-gap the brothers stand at. It
@@ -150,12 +152,15 @@ export default {
         heardRings(F, u, 96, 4, 78);
         /* THE HUG: the gap is small enough that the reaching arms cross
            past centre and overlap, which is the only way two stick figures
-           in this kit can read as embracing rather than facing off */
-        brothers(F, 12, 34,
-          { arms: "open", lean: 0.09 }, { arms: "open", lean: -0.09 }, 7, 1.4, u);
+           in this kit can read as embracing rather than facing off.
+           Rejected: gap 12 with taller figures — the two heads fused into
+           one blob at that radius and the hug read as conjoined twins. */
+        brothers(F, 15, 33,
+          { arms: "open", lean: 0.08 }, { arms: "open", lean: -0.08 }, 7, 1.2, u);
         /* the thesis, stated in full — this is the loudest, wordiest frame
            in the film on purpose, because everything after it only takes
-           words away */
+           words away. Measured at 169 cells wide, ph 12: the widest legal
+           margin before the halftone starts clipping descenders at 192. */
         F.word("LESS TIME FOR WORDS", CX, 16, 12, 7, true);
         F.word("MORE SPACE FOR LAUGHTER", CX, 33, 12, 7, true);
       },
@@ -169,14 +174,21 @@ export default {
          back. Two words only, and one of them is leaving. */
       cues: [{ at: 0.5, f: 300, decay: 0.10, gain: 0.20, partials: [1, 2], noise: 0.5, nDecay: 0.03, seed: 124 }],
       draw(u, F) {
-        ground(F);
-        brothers(F, lerp(28, 52, smooth(u)), 22,
+        ground(F, 6, 1.4);
+        brothers(F, lerp(28, 52, smooth(u)), 27,
           { arms: "up" }, { arms: "up" }, 6, 1, u);
         /* WORDS empties out of the frame as the line spends itself; LAUGHTER
            grows into the room it leaves — the same per-dot allegiance swap
            as every other dissolve in the suite, run once in each direction */
         typeset(F, "WORDS", 40, 18, 9, 7, smooth(u), true);
         typeset(F, "LAUGHTER", 150, 18, 9, 7, smooth(u * 0.9), false);
+        /* THE ROOM ITSELF, MADE VISIBLE: a nearly-empty frame is still a
+           frame, not a void, so the open air gets a few grains of its own —
+           sparse enough to read as daylight and not as texture. Held under
+           30 points because past that this stopped being "nearly empty"
+           and started being a sky. */
+        const R = F.rng(19);
+        for (let k = 0; k < 26; k++) F.ink(Math.round(R() * F.W), Math.round(40 + R() * 70), 1);
       },
     },
     {

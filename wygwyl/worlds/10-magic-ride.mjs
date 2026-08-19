@@ -284,7 +284,6 @@ export default {
          the roadside carries two full rows of watchers and a third tap put
          the frame within a hair of budget for a scene that has to hold that
          cost for fourteen seconds, not a hundred milliseconds. */
-      fx: { smear: { taps: 2, spread: 0.016, fall: 1.9 } },
       line: "Loneliness is having everything with no one to tell — being everywhere, with no one to love. I let the noise block the noise. The way I ride: eyes turn, heads twist — and prove the magic still exists.",
       cues: [
         { at: 0.04, f: 200, decay: 0.3, gain: 0.4, partials: [1, 1.8], noise: 1.0, nDecay: 0.15, seed: 11 },
@@ -298,7 +297,7 @@ export default {
         watcherRow(F, u, NEAR_Y, 13, 430, 6, 272, 6);
         groundLine(F); roadTicks(F, u, 760);
         const B = bike(F, 96, ROAD, 1.05, u * 30, 7);
-        rider(F, 96, ROAD, 1.05, 7);
+        rider(F, B, 1.05, 7);
         /* the glint answers "eyes turn, heads twist" and again "the magic
            still exists" — the same mark, twice, because it is one object */
         if (Math.max(win(u, 0.50, 0.54, 0.58, 0.62), win(u, 0.82, 0.85, 0.88, 0.92)) > 0.5)
@@ -331,8 +330,8 @@ export default {
         });
         skyline(F, u, 110, 6);
         groundLine(F); roadTicks(F, u, 520);
-        bike(F, 96, ROAD, 1.05, u * 24, 7);
-        rider(F, 96, ROAD, 1.05, 7);
+        const B = bike(F, 96, ROAD, 1.05, u * 24, 7);
+        rider(F, B, 1.05, 7);
       },
     },
     {
@@ -354,7 +353,7 @@ export default {
         groundLine(F); roadTicks(F, u, 620);
         const front = lerp(FW + 40, -60, smooth(u));
         const B = bike(F, 96, ROAD, 1.05, u * 28, 7);
-        rider(F, 96, ROAD, 1.05, 7);
+        rider(F, B, 1.05, 7);
         /* the glint is lit only while the bike's OWN patch of sky is still
            night — once the front has passed x=96 the steel is in daylight
            and needs no spark of its own. The last one is the film's ember. */
@@ -387,7 +386,7 @@ export default {
         roadTicks(F, u, 380);
         flock(F, u, 3, 6);
         const B = bike(F, 96, ROAD, 1.05, u * 20, 7);
-        rider(F, 96, ROAD, 1.05, 7);
+        rider(F, B, 1.05, 7);
         /* the same glint, now lit by the sun instead of by its own spark —
            one object, one meaning, a different light on it */
         glint(F, B.tank[0], B.tank[1] - 1);
@@ -395,7 +394,7 @@ export default {
     },
     {
       label: "CHILLY MORNING", seconds: 14,
-      fx: { smear: { taps: 2, spread: 0.016, fall: 1.9 } },
+      fx: { smear: { taps: 2, spread: 0.006, fall: 2.1 } },
       line: "Riding in a way you can't help but double-click — and prove the magic still exists. Even here, it's chilly in the morning.",
       cues: [
         { at: 0.615, f: 2600, decay: 0.04, gain: 0.45, partials: [1, 1.2], noise: 0.9, nDecay: 0.01, seed: 51 },
@@ -412,7 +411,7 @@ export default {
            them — a count that rises is legible; a cut to more birds is not */
         flock(F, u, Math.round(lerp(3, 6, ss(0.55, 0.95, u))), 6);
         const B = bike(F, 96, ROAD, 1.05, u * 30, 7);
-        rider(F, 96, ROAD, 1.05, 7);
+        rider(F, B, 1.05, 7);
         /* "double-click": two identical pulses of the one accent, close
            together, timed to the two click cues rather than to one long
            glow — the line names an action with a count, not a duration */

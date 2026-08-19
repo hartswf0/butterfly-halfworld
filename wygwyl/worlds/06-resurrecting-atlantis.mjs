@@ -127,17 +127,25 @@ function cityscape(F, waterY, u, warmth) {
 
 /* the water itself: the waterline is unbroken (see header), the ripples
    under it are broken twice per row exactly like every other floor in the
-   suite. Below the line is where the city still isn't. */
+   suite. Rows are spaced across the WHOLE remaining depth rather than a
+   fixed few near the surface — the first pass put three rows right under
+   the line and left the rest of the frame bare paper, which at high water
+   (waterY near the top, M1-M2) meant most of the picture was empty and read
+   as a bug rather than a sea. */
 function waterBelow(F, waterY, u) {
   if (waterY >= F.H) return;
   F.line(0, waterY, F.W, waterY, 5, 1);
-  for (let r = 0; r < 3; r++) {
-    const ry = waterY + 5 + r * 7 + Math.sin(u * TAU * 0.4 + r * 1.7) * 1.1;
+  const depth = F.H - waterY;
+  const rows = Math.max(2, Math.min(12, Math.round(depth / 9)));
+  for (let r = 0; r < rows; r++) {
+    const t = rows > 1 ? r / (rows - 1) : 0;
+    const ry = waterY + 4 + t * (depth - 6) + Math.sin(u * TAU * 0.35 + r * 1.7) * 1.0;
     if (ry >= F.H) continue;
-    const gA = 14 + (r * 53) % 150;
+    const lvl = t < 0.4 ? 3 : 2;
+    const gA = 10 + (r * 53) % 150;
     for (let x = 0; x < F.W; x += 3) {
       if (x > gA && x < gA + 20) continue;
-      F.ink(x, ry, 3); F.ink(x + 1, ry, 3);
+      F.ink(x, Math.round(ry), lvl); F.ink(x + 1, Math.round(ry), lvl);
     }
   }
 }
@@ -292,10 +300,14 @@ export default {
            shoreline, so the crowd and the falling water are the same event
            — they are not walking toward the city, the city is rising to
            meet them where they already stand. */
+        /* figures at this scale need real height before two legs read as
+           two legs rather than one merged stroke — the first pass held them
+           to nine or ten cells and the whole crowd read as a row of small
+           crosses, which is exactly the shape M5 later means something by */
         const R = F.rng(62);
         for (let i = 0; i < 9; i++) {
           const x = 12 + i * 21 + (R() - 0.5) * 6;
-          F.fig(x, waterY, 9 + R() * 3, { mode: "stand", arms: i % 3 ? "open" : "up", face: R() > 0.5 ? 1 : -1 }, 6);
+          F.fig(x, waterY, 15 + R() * 4, { mode: "stand", arms: i % 3 ? "open" : "down", face: R() > 0.5 ? 1 : -1 }, 6);
         }
       },
     },
@@ -322,13 +334,13 @@ export default {
         for (let i = 0; i < 5; i++) {
           const p = clamp01(u * 1.1 - i * 0.12);
           const x = lerp(20, 74, p);
-          F.fig(x, waterY, 10, { mode: "walk", phase: u * 4 + i, face: 1 }, 6);
+          F.fig(x, waterY, 15, { mode: "walk", phase: u * 4 + i, face: 1 }, 6);
           if (p > 0.85) F.ring(lerp(x + 4, booth.x + 5, ss(0.85, 1, p)), waterY - 8, 1.1, 6, 1);
         }
         /* here we are all safe: the ones already through, small, warm */
         for (let i = 0; i < 5; i++) {
           const x = 82 + i * 6, y = waterY - 3 - (i % 2) * 3;
-          F.fig(x, y, 7, { mode: "stand", arms: "down" }, 5);
+          F.fig(x, y, 12, { mode: "stand", arms: "down" }, 5);
         }
         /* illuminating smiles at night: two lantern-windows on the gate
            itself, each with a face flickering behind it */
@@ -367,11 +379,16 @@ export default {
         /* JOYFUL NOISES THAT COLOR RAINBOWS: seven arcs, one per ink level —
            the level ladder itself standing in for colour, since this engine
            has none. Rejected: one flat band at a single level, which read
-           as a grey arch and not a rainbow at all. Arrives dot by dot on the
-           Bayer schedule, like every dissolve here. */
+           as a grey arch and not a rainbow at all. Also rejected: a huge
+           radius centred far below the frame — the first pass only ever
+           showed the very top sliver of that circle, which is nearly flat,
+           and seven flat stacked lines read as a radar sweep, not a bow.
+           This radius is small enough that both feet of the arc land inside
+           the frame, so the curve itself is what is on screen. Arrives dot
+           by dot on the Bayer schedule, like every dissolve here. */
         const reveal = ss(0.05, 0.55, u);
         for (let l = 1; l <= 7; l++) {
-          const r = 130 + l * 7, cx = 96, cy = 180;
+          const r = 27 + l * 3, cx = 96, cy = 48;
           const n = Math.max(8, Math.ceil(Math.PI * r * 1.4));
           for (let k = 0; k <= n; k++) {
             const a = Math.PI + (Math.PI * k) / n;
@@ -391,7 +408,7 @@ export default {
         const R = F.rng(64);
         for (let i = 0; i < 6; i++) {
           const x = 10 + i * 30 + R() * 8;
-          F.fig(x, GY, 8 + R() * 3, { mode: "walk", phase: u * 3.5 + i, face: R() > 0.5 ? 1 : -1 }, 5);
+          F.fig(x, GY, 13 + R() * 4, { mode: "walk", phase: u * 3.5 + i, face: R() > 0.5 ? 1 : -1 }, 5);
           if (i % 3 === 0) for (let j = 0; j < 4; j++) {
             const a = j / 4 * TAU + u * TAU * 0.6;
             F.line(x + Math.cos(a) * 3, GY - 9 + Math.sin(a) * 3, x + Math.cos(a) * 5.5, GY - 9 + Math.sin(a) * 5.5, 4, 1);
@@ -429,7 +446,7 @@ export default {
            single "I," standing still while everything around it resolves */
         F.fig(96, GY, 34, { mode: "stand", arms: "open" }, 7);
         const R = F.rng(65);
-        for (let i = 0; i < 5; i++) F.fig(18 + i * 40 + R() * 10, GY, 8 + R() * 3, { mode: "stand", arms: "down" }, 5);
+        for (let i = 0; i < 5; i++) F.fig(18 + i * 40 + R() * 10, GY, 13 + R() * 4, { mode: "stand", arms: "down" }, 5);
       },
     },
     {
@@ -451,11 +468,11 @@ export default {
         const R = F.rng(66);
         for (let i = 0; i < 9; i++) {
           const x = 10 + i * 20 + R() * 6;
-          F.fig(x, GY, 12 + R() * 3, { mode: "stand", arms: up ? "up" : "open", face: i % 2 ? 1 : -1 }, 6);
+          F.fig(x, GY, 19 + R() * 4, { mode: "stand", arms: up ? "up" : "open", face: i % 2 ? 1 : -1 }, 6);
         }
         for (let i = 0; i < 8; i++) {
           const x = 20 + i * 20 + R() * 6;
-          F.fig(x, GY - 15, 7 + R() * 2, { mode: "stand", arms: up ? "up" : "open" }, 4);
+          F.fig(x, GY - 17, 13 + R() * 3, { mode: "stand", arms: up ? "up" : "open" }, 5);
         }
         /* the beacon: the same soul that departed on a comet in M1, now
            settled and lighting the tallest dome it was always headed for */

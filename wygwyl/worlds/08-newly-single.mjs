@@ -65,7 +65,12 @@ function spark(F, x, y, extra = false) {
 /* the dance floor: a tile grid whose level pulses outward from its own
    centre — flat quantised tones, never a gradient, and the 1-cell gutter
    between tiles is what keeps sixteen rows of a grid from reading as
-   stripes under the halftone. */
+   stripes under the halftone. CAPPED AT LEVEL 3. A lit tile at 5 sat level
+   with a crowd figure at 4–5 and `ink` only keeps the brighter of the two —
+   at the first pass a body crossing a lit square simply vanished into it,
+   and once a whole column of tiles happened to pulse together it read as a
+   third body standing in the room. Every figure in this film outranks the
+   floor now, on purpose. */
 const FLOOR_Y0 = 92, FLOOR_COLS = 16, FLOOR_ROWS = 4;
 function danceFloor(F, u, opts = {}) {
   const { rate = 2.2, cx = 96 } = opts;
@@ -75,7 +80,7 @@ function danceFloor(F, u, opts = {}) {
       const cxT = (c + 0.5) * tw, cyT = FLOOR_Y0 + (r + 0.5) * th;
       const d = Math.hypot(cxT - cx, cyT - FLOOR_Y0) / 70;
       const v = (Math.sin(u * TAU * rate - d * 5) + 1) / 2;
-      const lvl = v > 0.72 ? 5 : v > 0.42 ? 3 : 1;
+      const lvl = v > 0.72 ? 3 : v > 0.42 ? 2 : 1;
       F.rect(c * tw + 1, FLOOR_Y0 + r * th + 1, tw - 2, th - 2, lvl);
     }
   }
@@ -139,14 +144,16 @@ function planetGround(F, cy) {
   return gy;
 }
 
-/* one dashed stream, flowing — the dash offset steps with u so the water
-   reads as moving without ever being two different drawings crossfaded */
+/* one dashed stream, flowing — drawn as connected segments with real width
+   rather than single dots, because a pour that is one cell wide reads as a
+   sprinkle. The dash offset steps with u so the water reads as moving
+   without ever being two different drawings crossfaded. */
 function pour(F, u, x0, y0, x1, y1, lvl) {
-  const n = 22;
+  const n = 15, off = Math.floor(u * 13);
   for (let k = 0; k < n; k++) {
-    if (((k + Math.floor(u * 20)) % 3) === 0) continue;
-    const t = k / n;
-    F.ink(lerp(x0, x1, t), lerp(y0, y1, t), lvl);
+    if (((k + off) % 4) >= 2) continue;
+    const t0 = k / n, t1 = (k + 1) / n;
+    F.line(lerp(x0, x1, t0), lerp(y0, y1, t0), lerp(x0, x1, t1), lerp(y0, y1, t1), lvl, 1.5);
   }
 }
 
@@ -327,7 +334,7 @@ export default {
           { x0: 96, y0: 2, lvl: 4, ice: false },
         ];
         for (const s of STREAMS) {
-          if (s.ice) { F.box(s.x0 - 6, s.y0 - 4, 12, 6, 5, 1); F.disc(s.x0 - 2, s.y0 - 1, 1, 6); F.disc(s.x0 + 2, s.y0, 1, 6); }
+          if (s.ice) F.box(s.x0 - 7, s.y0 - 5, 14, 7, 5, 1);
           pour(F, u, s.x0, s.y0, tx, ty, s.lvl);
         }
         /* salt, off the water rather than in it — a scatter near the
@@ -362,11 +369,14 @@ export default {
         soulFig(F, u, sx, sy, sh, { mode: "stand", arms: "open", rot: lerp(-0.2, -0.05, ret) }, freq, 1.1);
         spark(F, sx, sy - sh * 0.885, ret > 0.8);
         /* THE SMOKE FILLS THE ROOM: a per-dot allegiance the room concedes
-           to, not a fog laid over it — the dot law, applied to weather */
-        const fill = ret * 0.85;
+           to, not a fog laid over it — the dot law, applied to weather. The
+           first pass ran the noise at 0.045 and got four or five cloud-sized
+           blobs, which read as weather rather than smoke; a smaller wave-
+           length gives many small wisps instead of one big one. */
+        const fill = ret * 0.55;
         F.map((x, y, v) => {
-          const s = F.fbm(x * 0.045 + u * 1.1, y * 0.06, 2);
-          if (s > 0.5 && F.bayer(x, y) < fill * (s - 0.42) * 2.6) return Math.max(v, 2);
+          const s = F.fbm(x * 0.10 + u * 1.6, y * 0.11, 2);
+          if (s > 0.56 && F.bayer(x, y) < fill * (s - 0.5) * 3.4) return Math.max(v, 2);
         });
       },
     },

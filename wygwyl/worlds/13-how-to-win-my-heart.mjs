@@ -312,7 +312,7 @@ export default {
         for (const fl of FIELD) { if (fl.x > sweepX) continue; fl.poppy ? poppy(F, fl.x, fl.y, fl.s, 5) : blossom(F, fl.x, fl.y, fl.s, 5); }
         const harvested = FIELD.filter((fl) => fl.x > sweepX);
         if (u < 0.58) {
-          F.fig(sweepX, 128, 32, { mode: "walk", phase: u * 6, face: -1, arms: "reach" }, 7);
+          F.fig(sweepX, 128, 32, { mode: "walk", phase: u * 7, face: -1, arms: "reach" }, 7);
           harvested.forEach((fl, i) => { const c = i % 5, r = (i / 5) | 0; const bx = sweepX + 8 + c * 3.4, by = 92 - r * 4;
             fl.poppy ? poppy(F, bx, by, 1.5, 6) : blossom(F, bx, by, 1.6, 6); });
         } else {

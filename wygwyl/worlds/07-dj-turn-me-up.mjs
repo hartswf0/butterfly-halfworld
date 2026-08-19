@@ -30,7 +30,10 @@ function meter(F, u, amp) {
   for (let k = 0; k < N; k++) {
     const jit = (F.n2(k * 2.3, u * 5.2 + k * 0.7) - 0.5) * (0.30 + amp * 0.35);
     const lvl = clamp01(amp + jit);
-    const h = 2 + lvl * 22;
+    /* capped short of full height on purpose — the tallest reading still
+       sits under every stage floor this film uses, so the meter never
+       reaches up into the scene it is measuring */
+    const h = 2 + lvl * 15;
     const x = x0 + k * (bw + gap);
     F.rect(x, y1 - h, bw, h, Math.max(1, Math.round(lvl * 7)));
   }
@@ -77,10 +80,15 @@ function micStand(G, x, floorY, h, l) {
    letterforms, illegible at this scale and beside the point — the line
    names a WEIGHT, not a text. Drawn through G so it presses on the same
    head the amplitude is growing. */
-function wordWeight(G, cx, headYLocal, l) {
-  for (let k = 0; k < 4; k++) {
-    const w = 15 - k * 2.6, yy = headYLocal - k * 3.4;
-    G.rect(cx - w / 2, yy - 3, w, 3, l);
+function wordWeight(G, cx, headTopLocal, l) {
+  /* three bricks, stepped well clear of the head and of each other — the
+     first pass put the stack flush against the skull and it read as an odd
+     hairline instead of a separate load; the gap between bricks now has to
+     survive being shrunk by the movement's own (starved) scale, so it is
+     bigger, locally, than it needs to look once drawn. */
+  for (let k = 0; k < 3; k++) {
+    const w = 17 - k * 4, yy = headTopLocal - 4 - k * 7;
+    G.rect(cx - w / 2, yy - 4, w, 4, l);
   }
 }
 /* a tapered stroke — the sole shape this film needs twice, once as a petal,
@@ -161,7 +169,7 @@ export default {
            the mic rather than the whole torso folding, which read as
            sitting when the first pass tried it */
         G.fig(cx, FLOOR, h, { mode: "stand", arms: "down", rot: 0.16, lean: 0.05 }, 7);
-        wordWeight(G, cx + 4, FLOOR - h * 0.885, 5);
+        wordWeight(G, cx + 4, FLOOR - h * 0.885 - h * 0.12, 5);
         meter(F, u, amp);
       },
     },

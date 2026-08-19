@@ -27,7 +27,7 @@ import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
    line, where what she is carrying visibly pulls the cord out of true. */
 function cord(F, x0, y0, x1, y1, l, flow, sag = 0) {
   const n = Math.max(1, Math.ceil(Math.hypot(x1 - x0, y1 - y0)));
-  const period = 7, on = 4, shift = Math.floor(flow * period * 5);
+  const period = 7, on = 5, shift = Math.floor(flow * period * 5);
   for (let k = 0; k <= n; k++) {
     if (((k + shift) % period + period) % period >= on) continue;
     const t = k / n;
@@ -178,7 +178,7 @@ export default {
       draw(u, F) {
         const t = smooth(u);
         const xL = lerp(76, 34, t), xR = lerp(116, 160, t);
-        const floor = 122, h = 44, ay = floor - h * 0.62;
+        const floor = 122, h = 48, ay = floor - h * 0.62;
         speaker(F, xL, floor, h, 1, "down", 7);
         speaker(F, xR, floor, h, -1, "down", 7);
         cord(F, xL, ay, xR, ay, 5, u * 1.6);
@@ -195,7 +195,7 @@ export default {
       draw(u, F) {
         const t = smooth(u);
         const xL = lerp(80, 48, t), xR = lerp(112, 146, t);
-        const floor = 122, h = 44, ay = floor - h * 0.62;
+        const floor = 122, h = 48, ay = floor - h * 0.62;
         const sag = lerp(2, 21, t);
         speaker(F, xL, floor, h, 1, "down", 7);
         speaker(F, xR, floor, h, -1, "open", 7);
@@ -219,7 +219,7 @@ export default {
         /* asymmetric on purpose: his side is pulled further than ours, so
            the stretch itself leans east before the walk ever says so */
         const xL = lerp(84, 52, t), xR = lerp(108, 168, t);
-        const floor = 122, h = 44, ay = floor - h * 0.62;
+        const floor = 122, h = 48, ay = floor - h * 0.62;
         speaker(F, xL, floor, h, 1, "down", 7);
         summon(F, xR, floor, h, ss(0, 0.30, u), 7);
         cord(F, xL, ay, xR, ay, 5, u * 2.0);

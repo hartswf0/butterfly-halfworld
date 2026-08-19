@@ -89,8 +89,13 @@ function temple(F, progress, l = 7) {
   /* seven entablature blocks: five bays plus two overhangs, gapped where
      stone actually joints. Rejected: one long beam rect — besides being
      the unbroken span the dot law warns about, it made "one beam at a
-     time" a lie, since there was only ever one beam to arrive. */
-  const beamY = colsTop - 6;
+     time" a lie, since there was only ever one beam to arrive. Sits flush
+     ABOVE the capitals (colsTop-3) rather than overlapping them — the
+     first pass put its floor at colsTop and the capitals, already present
+     from every column, filled the beam's own bottom half before a single
+     beam piece had arrived, so "one beam at a time" read as "the beam is
+     already there." */
+  const beamY = colsTop - 9;
   for (let i = 0; i < 7; i++) {
     const k = 9 + i, amt = stepAmt(progress, k);
     if (amt <= 0) continue;
@@ -167,8 +172,13 @@ function fogSweep(F, u, y0, y1) {
     if (y < y0 || y >= y1) return;
     const edge = x / F.W + (F.n2(x * 0.07, y * 0.09) - 0.5) * 0.28;
     if (edge < sweep - 0.05) {
-      const h = F.n2(x * 0.09, y * 0.11 + u * 1.4);
-      return h > 0.62 ? 3 : h > 0.4 ? 2 : 1;
+      /* finer and lighter than the first pass (0.09/0.62): that frequency
+         put three cell-wide clumps across the whole 192-cell band and the
+         fog read as a spotted hide, not a mist. Higher frequency plus a
+         higher floor for the darkest tone keeps most of the claimed band
+         at 1-2 with only sparse denser wisps. */
+      const h = F.n2(x * 0.17, y * 0.21 + u * 1.6);
+      return h > 0.76 ? 3 : h > 0.32 ? 2 : 1;
     }
     if (edge < sweep && F.bayer(x, y) < (sweep - edge) / 0.05) return 2;
   });
@@ -232,8 +242,12 @@ export default {
            several equally loud shapes. The first pass gave the hills their
            usual 4–6 and the frame read as two competing landscapes. */
         hillsRidge(F, 46, 10, 3);
-        const sunY = lerp(64, 54, smooth(u));
-        F.disc(158, sunY, 7, 3); F.ring(158, sunY, 10, 2, 1);
+        /* the sun sits clear of the hill's own peak (y≈36 at its highest)
+           — the first pass put it at y 54-64 and it landed inside the
+           hill's tree stipple, and a disc drawn into a noise field reads
+           as more noise, not as a sun */
+        const sunY = lerp(26, 16, smooth(u));
+        F.disc(174, sunY, 6, 3); F.ring(174, sunY, 8, 2, 1);
         /* recycled airs: a few soft wisps, drifting — NOT the fog wavefront
            of M1, which is a claimed front. These only ever add a little
            ink; they never cover anything, because dawn is clearing, not
@@ -294,7 +308,7 @@ export default {
            lengths of pool this figure is given are the two ends of it */
         const lapT = u < 0.5 ? smooth(u * 2) : smooth((1 - u) * 2);
         const px = lerp(28, 166, lapT);
-        F.fig(px, 70, 15, { mode: "walk", phase: u * 5, face: u < 0.5 ? 1 : -1, arms: "swing" }, 6);
+        F.fig(px, 70, 20, { mode: "walk", phase: u * 5, face: u < 0.5 ? 1 : -1, arms: "swing" }, 6);
       },
     },
     {
@@ -354,9 +368,13 @@ export default {
            so the back 60% of the movement is the completed building, not
            the completing of it. */
         temple(F, 18 + ss(0, 0.4, u) * 1.4, 7);
-        F.fig(48, T_GY, 13, { mode: "stand", arms: "open" }, 6);
-        F.fig(96 + 40, T_GY, 12, { mode: "stand", arms: "open", face: -1 }, 6);
-        F.fig(140, T_GY, 11, { mode: "stand", arms: "open", face: -1 }, 5);
+        /* WELCOME: two figures flanking, arms open — placed OUTSIDE the
+           platform's own footprint (it spans cx±65). The first pass put
+           them at the base between the columns and the platform, drawn
+           after them, simply buried them; a welcome nobody can see is not
+           a welcome. */
+        F.fig(14, T_GY, 13, { mode: "stand", arms: "open" }, 6);
+        F.fig(178, T_GY, 13, { mode: "stand", arms: "open", face: -1 }, 6);
       },
     },
   ],
