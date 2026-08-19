@@ -82,9 +82,10 @@
 <script type="module">
 import { makeRuntime, makePost, makeSound } from "./halfworld.mjs";
 
-/* The head of the suite is a title sequence, and which of the three Whitney
-   options plays is a URL question rather than an edit: ?title=b swaps it, and
-   ?title=none drops it. The poems are the running order and never move. */
+/* The head of the suite is a title sequence, and which one plays is a URL
+   question rather than an edit: ?title=b swaps it and ?title=none drops it.
+   A-D are the Whitney options and E is THE WALK, which is the one that plays.
+   The poems are the running order and never move. */
 const TITLE = new URLSearchParams(location.search).get("title") || "e";
 const SLUGS = [
   ...(TITLE === "none" ? [] : ["00-title-" + TITLE]),

@@ -79,6 +79,12 @@ Helpers imported from `../halfworld.mjs`:
 mode      'stand' | 'walk' | 'sit' | 'fall'
 phase     the gait/breath clock. NEVER an integer multiple of u — see below.
 face      1 | -1        which way the body is turned
+turn      0..1          HOW FAR ROUND. 0 is square to the viewer, 1 is full
+                        profile. A walk sets 0.88 and a sit 0.55 on its own;
+                        you rarely need to pass this. What it does is
+                        foreshorten the trunk and collapse the shoulder and
+                        hip JOINTS onto the centre line, which is what lets
+                        the legs pass each other instead of straddling.
 arms      'down' | 'open' | 'up' | 'reach' | 'hold' | 'swing'
 lean      shear, small; a body pushing into or away from something
 rot       whole-body rotation about the hip, in radians. |rot| < ~1.6.
@@ -110,6 +116,15 @@ gesture   [x,y]  put the near hand HERE, in body-local coordinates (origin at
 the same offset twice per stride; if your rate is `u*6` the QA sample at u=0.5
 lands exactly there and the body collapses into one vertical stroke. Two films
 hit this independently. Use `u*6.35`, not `u*6`.
+
+**One stride per `phase` of 1.** `phase: u * 6.35` is a bit over six strides
+across the movement. A body crossing 200 cells in six strides is taking 33-cell
+steps, and a body crossing 40 cells in six strides is mincing. Set the rate
+from the distance the figure actually travels: roughly one stride per 0.30 of
+its own height. There is a bench for this — `wygwyl/zz-gait.html`, eight phases
+of one cycle laid out flat, shot with `node wygwyl/shoot.mjs zz-gait`. A gait
+is wrong in ways that are obvious across a row and invisible in a single
+frame, which is exactly how the first one survived fourteen films.
 
 **A held figure still needs a clock.** `phase` drives breath as well as gait, so
 a standing body given `phase: 0` is holding its breath for the whole movement.

@@ -31,7 +31,7 @@ const MOTION = args.includes("--motion");
 const only = args.filter(a => !a.startsWith("--"));
 const AT = SWEEP ? [0.2, 0.5, 0.8] : [0.55];
 
-const shells = fs.readdirSync(HERE).filter(f => /^\d\d-.*\.html$/.test(f)).sort()
+const shells = fs.readdirSync(HERE).filter(f => /^(\d\d|zz)-.*\.html$/.test(f)).sort()
   .filter(f => !only.length || only.some(o => f.startsWith(o)));  /* by number, or by any stem prefix */
 
 const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium" });

@@ -36,7 +36,7 @@ console.log("wrote " + files.length + " shells: " + files.map(s => s.slice(0, 2)
 const rows = [];
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.round(t % 60)).padStart(2, "0")}`;
 let movements = 0, seconds = 0;
-for (const f of files.filter(f => !f.startsWith("00-"))) {
+for (const f of files.filter(f => !/^(00|zz)-/.test(f))) {
   const w = (await import(pathToFileURL(path.join(HERE, "worlds", f)).href)).default;
   /* A film that declares `window` is stretched by the runtime to fill its own
      passage of the record, so the sum of its written movement lengths is not
@@ -53,7 +53,7 @@ const table = [
   "| | | | mv | | on the record |",
   "|---|---|---|---|---|---|",
   ...rows,
-  `| | **${files.filter(f=>!f.startsWith("00-")).length} films** | | **${movements}** | **${Math.floor(Math.round(seconds) / 60)}m ${Math.round(seconds) % 60}s** | **+ the title, 59s** |`,
+  `| | **${files.filter(f=>!/^(00|zz)-/.test(f)).length} films** | | **${movements}** | **${Math.floor(Math.round(seconds) / 60)}m ${Math.round(seconds) % 60}s** | **+ the title, 59s** |`,
   "<!-- FILMS:END -->",
 ].join("\n");
 
@@ -62,7 +62,7 @@ const src = fs.readFileSync(readme, "utf8");
 const re = /<!-- FILMS:BEGIN[\s\S]*?<!-- FILMS:END -->/;
 if (re.test(src)) {
   fs.writeFileSync(readme, src.replace(re, table));
-  console.log(`rewrote the film table: ${files.filter(f=>!f.startsWith("00-")).length} films · ${movements} movements · ${Math.floor(Math.round(seconds) / 60)}m${Math.round(seconds) % 60}s`);
+  console.log(`rewrote the film table: ${files.filter(f=>!/^(00|zz)-/.test(f)).length} films · ${movements} movements · ${Math.floor(Math.round(seconds) / 60)}m${Math.round(seconds) % 60}s`);
 } else {
   console.log("README has no FILMS:BEGIN/END markers — table not written");
 }

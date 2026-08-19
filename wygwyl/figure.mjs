@@ -199,6 +199,27 @@ function solve(h, pose, stocky = 1, G = GUISES.everyman) {
   const mode = pose.mode || "stand";
   const ph = pose.phase || 0;
   const a = pose.arms || (mode === "walk" ? "swing" : "down");
+  /* THE TURN. 0 is square to the viewer, 1 is full profile. What a turn does
+     on a flat lattice is foreshorten the spans: a chest seen edge-on is a bit
+     over half as wide as it is across the shoulders, a pelvis about two thirds
+     as deep as it is wide, and the two hip JOINTS project almost on top of
+     each other — which is why the legs can pass each other at all. Everything
+     else is drawing order, which this rig already gets right.
+
+     A walk is a profile act, so a walk turns unless a caller says otherwise.
+     Standing stays square: a person standing still and facing you is a
+     picture, and a person walking towards you is a shot this suite never
+     takes. */
+  const turn = pose.turn ?? (mode === "walk" ? 0.88 : mode === "sit" ? 0.55 : 0);
+  /* AND THE ARMS HANG BEHIND THE CHEST, NOT DOWN THE MIDDLE OF IT.
+     Once the joints collapse onto the centre line, a hanging arm is drawn on
+     top of the torso and comes out as an arm-shaped outline stamped on the
+     chest — worse than the sash it replaced, because at least a sash was
+     outside the body. In profile the arm hangs at the BACK of the trunk, so
+     the whole arm chain is offset against the direction of travel by about
+     half the trunk's depth. Half the limb then falls outside the silhouette
+     and reads as what it is: an arm at a man's side. */
+  const back = -(pose.face === -1 ? -1 : 1) * W.shoulder * h * 0.34 * turn;
 
   /* breath is under one percent of frame and deniable, which is exactly what
      the butterfly halfworld calls a HOLD — it keeps a standing body alive
@@ -214,14 +235,76 @@ function solve(h, pose, stocky = 1, G = GUISES.everyman) {
   let hipY = L.hip * h, shY = L.shoulder * h + breath;
   let footA = [-W.hipHalf * h * 0.85, 0], footB = [W.hipHalf * h * 0.85, 0];
   let kneeA = null, kneeB = null;
+  let pitchA = 0, pitchB = 0;                 // heel-strike / toe-off roll
   let crouch = pose.crouch || 0;
 
   if (mode === "walk") {
-    const s = Math.sin(ph * TAU), c = Math.cos(ph * TAU);
-    footA = [s * h * 0.20, -Math.max(0, Math.sin(ph * TAU + 1.7)) * h * 0.055];
-    footB = [-s * h * 0.20, -Math.max(0, Math.sin(ph * TAU + TAU / 2 + 1.7)) * h * 0.055];
-    hipY -= Math.abs(c) * h * 0.014;
-    shY -= Math.abs(c) * h * 0.010;
+    /* THE WALK. Four things were wrong with the first one and they compounded
+       into a man doing the splits with his chest to the camera.
+
+       THE BODY WAS FRONTAL AND THE GAIT WAS NOT. Shoulders and hips spread
+       along screen x — which, for a figure seen from the side, is the axis the
+       legs swing along. So the legs never scissored fore and aft past each
+       other; they straddled left and right of a wide frontal pelvis. A walking
+       body TURNS, and the turn is handled below by foreshortening the spans.
+
+       THE SWING FOOT WENT INTO THE GROUND. The lift was written as a negative
+       height and in this body space positive is up, so every step drove the
+       foot below the line the figure stands on.
+
+       THE BODY BOBBED THE WRONG WAY. The hip dropped at mid-stance, when the
+       stance leg is vertical and the hip is at its HIGHEST; it should drop at
+       double support, when both legs are splayed and the same fixed leg cannot
+       reach as far up. Inverted bob is most of what makes a cycle read as a
+       waddle.
+
+       THE KNEES DID NOT KNOW WHAT PHASE THEY WERE IN. One fixed backward bend
+       on both legs at all times — the stance leg bent while carrying weight,
+       and the swing leg stayed straight, when a swing knee folding as it
+       passes under the body is the single thing that says "walking" rather
+       than "compass".
+
+       The parameterisation: each leg has its own phase q. Foot travel is
+       stride·sin q in the sagittal axis. cos q > 0 is the half of the cycle
+       where the foot is moving forward — that is the swing, so that is when it
+       leaves the ground, and it is highest at q = 0, exactly as it passes the
+       standing leg. */
+    const q = ph * TAU;
+    /* THE SWING FOOT CLEARS THE GROUND BY ALMOST NOTHING. Seven percent of
+       height was a march: the knee came up, the foot hung under it, and a man
+       walking to a door looked like a man in a parade. Real clearance at the
+       passing position is a couple of centimetres on a person — under three
+       percent here, which at forty cells is one cell, which is the correct
+       answer for this lattice. */
+    const stride = h * 0.150, lift = h * 0.028;
+    const sway = Math.abs(Math.sin(q));
+    hipY -= sway * h * 0.024;                 // lowest at double support
+    shY -= sway * h * 0.020;
+    const foot = (qq) => {
+      const sw = Math.max(0, Math.cos(qq));
+      return [Math.sin(qq) * stride, lift * sw * sw];
+    };
+    footA = foot(q); footB = foot(q + Math.PI);
+    /* knees: at the anatomical knee height, carried forward by the swing. The
+       stance knee keeps a few percent of flex so the leg is a leg and not a
+       strut. */
+    const knee = (qq, ft) => {
+      const sw = Math.max(0, Math.cos(qq));
+      const ky = lerp(hipY, ft[1], 0.54);
+      const kx = lerp(0, ft[0], 0.54)
+        + face * h * (0.018 + 0.052 * sw * sw + 0.022 * Math.abs(Math.sin(qq)));
+      return [kx, ky];
+    };
+    kneeA = knee(q, footA); kneeB = knee(q + Math.PI, footB);
+    /* THE FOOT ROLLS. A foot that stays flat to the ground through the whole
+       cycle is the last thing that makes a walk read as a puppet on a track:
+       a real one lands on its heel with the toe up and leaves off its toe with
+       the heel up. One number does both — the pitch follows the foot's own
+       fore-and-aft position while it is carrying weight, and goes nearly flat
+       while it is in the air. At forty cells this is one cell of movement and
+       it is worth every bit of it. */
+    const pitch = (qq) => Math.sin(qq) * (Math.cos(qq) <= 0 ? 1 : 0.25);
+    pitchA = pitch(q); pitchB = pitch(q + Math.PI);
   } else if (mode === "sit") {
     hipY = L.hip * h * 0.56; shY = L.shoulder * h * 0.74 + breath;
     footA = [face * h * 0.26, 0]; footB = [face * h * 0.32, 0];
@@ -242,8 +325,9 @@ function solve(h, pose, stocky = 1, G = GUISES.everyman) {
   let handA, handB, elbowA = null, elbowB = null;   /* elbows may be solved by a pose */
   const armLen = h * (L.shoulder - L.hip) * 1.34;
   if (a === "down") {
-    handA = [hip[0] - W.hipHalf * h * 0.95, hipY - h * 0.03];
-    handB = [hip[0] + W.hipHalf * h * 0.95, hipY - h * 0.05];
+    const sp = W.hipHalf * h * 0.95 * lerp(1, 0.34, turn);
+    handA = [hip[0] - sp + back, hipY - h * 0.03];
+    handB = [hip[0] + sp + back, hipY - h * 0.05];
   } else if (a === "open") {
     handA = [-h * 0.31, shY - h * 0.06]; handB = [h * 0.31, shY - h * 0.05];
   } else if (a === "up") {
@@ -259,9 +343,25 @@ function solve(h, pose, stocky = 1, G = GUISES.everyman) {
   } else if (a === "hold") {
     handA = [face * h * 0.13, shY - h * 0.10]; handB = [face * h * 0.15, shY - h * 0.13];
   } else {                                   // swing
+    /* CONTRALATERAL, AND WITH ITS OWN ELBOW.
+
+       Arm A used to swing WITH leg A — same sign, same phase — which is a gait
+       no animal has and reads as wrong instantly even when you cannot say why.
+       The arm opposes its own side's leg, and it travels about a third of what
+       the leg does.
+
+       And the elbow is solved here rather than left to the generic
+       perpendicular-bend rule. On a turned body the shoulder and the hand sit
+       almost on one vertical, so "bend away from the line between them" threw
+       the elbow out sideways and the upper arm read as a sash laid diagonally
+       across the chest. An elbow belongs at elbow height, a little behind the
+       shoulder, taking about half the hand's travel. */
     const s = Math.sin(ph * TAU);
-    handA = [s * h * 0.17, hipY - h * 0.02];
-    handB = [-s * h * 0.17, hipY - h * 0.04];
+    const swA = -s * h * 0.070 + back, swB = s * h * 0.070 + back;
+    handA = [swA, hipY - h * 0.045];
+    handB = [swB, hipY - h * 0.065];
+    elbowA = [swA * 0.45 + back * 0.55 - face * h * 0.014, shY - h * 0.190];
+    elbowB = [swB * 0.45 + back * 0.55 - face * h * 0.014, shY - h * 0.200];
   }
   if (pose.gesture) {                        // a caller-supplied hand target
     handA = [pose.gesture[0], pose.gesture[1]];
@@ -275,19 +375,34 @@ function solve(h, pose, stocky = 1, G = GUISES.everyman) {
     const len = Math.hypot(dx, dy) || 1;
     return [mx - (dy / len) * out * k, my + (dx / len) * out * k];
   };
-  const SW = W.shoulder * h * stocky * G.shoulderWide, HW = W.hipHalf * h * stocky;
+  /* TWO DIFFERENT WIDTHS PER GIRDLE, AND THIS IS THE WHOLE TRICK.
+     A torso seen edge-on is still a solid: a chest is a bit over half as deep
+     as it is wide, a pelvis about two thirds. But the JOINTS inside it — the
+     two shoulders, the two hip sockets — project onto very nearly the same
+     point, which is exactly why in profile a limb can pass in front of its
+     own body and the far leg can swing through where the near one was.
+     Hanging the limbs off the torso's outline instead of off its joints is
+     what put an arm diagonally across the chest like a sash: the far shoulder
+     sat seven cells to one side and the far hand swung eleven to the other. */
+  const SW = W.shoulder * h * stocky * G.shoulderWide * lerp(1, 0.56, turn);
+  const HW = W.hipHalf * h * stocky * lerp(1, 0.66, turn);
+  const AW = W.shoulder * h * stocky * G.shoulderWide * lerp(1, 0.15, turn);  // arm roots
+  const LW = W.hipHalf * h * stocky * lerp(1, 0.22, turn);                    // leg roots
   /* fallen shoulders drop at the OUTER end only — the neck stays where it is,
      which is what makes it read as carriage rather than as a shrug */
   const drop = G.shoulderSlope * SW * 0.55;
   const shA = [sh[0] - SW, sh[1] - drop], shB = [sh[0] + SW, sh[1] - drop];
-  elbowA = elbowA || bend(shA, handA, h * 0.055, -face);
-  elbowB = elbowB || bend(shB, handB, h * 0.055, -face);
+  const armA = [sh[0] - AW + back, sh[1] - drop * (AW / (SW || 1))];
+  const armB = [sh[0] + AW + back, sh[1] - drop * (AW / (SW || 1))];
+  elbowA = elbowA || bend(armA, handA, h * 0.055, -face);
+  elbowB = elbowB || bend(armB, handB, h * 0.055, -face);
   const hipA = [hip[0] - HW, hip[1]], hipB = [hip[0] + HW, hip[1]];
-  kneeA = kneeA || bend(hipA, footA, h * 0.045, face);
-  kneeB = kneeB || bend(hipB, footB, h * 0.045, face);
+  const legA = [hip[0] - LW, hip[1]], legB = [hip[0] + LW, hip[1]];
+  kneeA = kneeA || bend(legA, footA, h * 0.045, face);
+  kneeB = kneeB || bend(legB, footB, h * 0.045, face);
 
-  return { face, hip, sh, shA, shB, hipA, hipB, neck, headC,
-           handA, handB, elbowA, elbowB, footA, footB, kneeA, kneeB, armLen };
+  return { face, hip, sh, shA, shB, armA, armB, hipA, hipB, legA, legB, neck, headC,
+           handA, handB, elbowA, elbowB, footA, footB, kneeA, kneeB, pitchA, pitchB, armLen };
 }
 
 /* ------------------------------------------------------------ small bodies
@@ -393,6 +508,8 @@ export function drawFigure(K, x, y, h, pose = {}, level = 7) {
   const lT = W.legTop * h * stocky, lM = W.legMid * h * stocky, lE = W.legEnd * h * stocky;
   const [shA, shB] = [T(P.shA), T(P.shB)];
   const [hipA, hipB] = [T(P.hipA), T(P.hipB)];
+  const [legA, legB] = [T(P.legA), T(P.legB)];
+  const [armA, armB] = [T(P.armA), T(P.armB)];
   const [elA, elB] = [T(P.elbowA), T(P.elbowB)];
   const [haA, haB] = [T(P.handA), T(P.handB)];
   const [knA, knB] = [T(P.kneeA), T(P.kneeB)];
@@ -404,7 +521,7 @@ export function drawFigure(K, x, y, h, pose = {}, level = 7) {
      the chest. This is the whole reason a reach reads as a reach. */
   const far = P.face >= 0 ? "A" : "B", near = far === "A" ? "B" : "A";
   const arm = (which) => {
-    const s = which === "A" ? shA : shB, e = which === "A" ? elA : elB;
+    const s = which === "A" ? armA : armB, e = which === "A" ? elA : elB;
     const ha = which === "A" ? haA : haB;
     capsule(K, s[0], s[1], e[0], e[1], aT, aM, contour, fill, solid);
     capsule(K, e[0], e[1], ha[0], ha[1], aM, aE, contour, fill, solid);
@@ -412,12 +529,18 @@ export function drawFigure(K, x, y, h, pose = {}, level = 7) {
     if (!solid) K.disc(ha[0], ha[1], W.hand * h - 1.1, fill, true);
   };
   const leg = (which) => {
-    const hp = which === "A" ? hipA : hipB, k = which === "A" ? knA : knB;
+    const hp = which === "A" ? legA : legB, k = which === "A" ? knA : knB;
     const ft = which === "A" ? ftA : ftB;
     capsule(K, hp[0], hp[1], k[0], k[1], lT, lM, contour, fill, solid);
     capsule(K, k[0], k[1], ft[0], ft[1], lM, lE, contour, fill, solid);
-    const fw = W.foot * h * P.face;
-    capsule(K, ft[0], ft[1], ft[0] + fw, ft[1] + 0.5, lE * 0.8, lE * 0.55, contour, fill, true);
+    /* A FOOT IS LONG AND LOW. The first one was as deep as it was long and
+       came out a clog; at the sizes this suite walks at, a wide blob under the
+       ankle is the single mark that most makes a body look like a toy. */
+    const fw = W.foot * h * 1.45 * P.face;
+    const pt = which === "A" ? P.pitchA : P.pitchB, roll = lE * 1.15;
+    capsule(K, ft[0] - fw * 0.22, ft[1] - 0.2 - Math.max(0, -pt) * roll,   // heel
+            ft[0] + fw, ft[1] + 0.3 - Math.max(0, pt) * roll,              // toe
+            lE * 0.62, lE * 0.40, contour, fill, true);
   };
 
   arm(far); leg(far);

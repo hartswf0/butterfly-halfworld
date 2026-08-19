@@ -179,7 +179,10 @@ function fire(F, x, base, h, u) {
       /* the rim scales with the tongue. A constant 1.2 cells of contour is
          nothing at the base and is the entire tongue near the tip, which
          turned the top half of the fire into a black crown. */
-      if (pass === 0) { const r = w + Math.max(0.7, w * 0.30); F.line(cx - r, yy, cx + r, yy, 7, 1.2); }
+      /* no rim on the last cell of a tongue: a contour drawn a cell wider than
+         a half-cell-wide tip IS the tip, and every flame ended in a black
+         drip */
+      if (pass === 0) { if (w < 1.1) continue; const r = w + w * 0.30; F.line(cx - r, yy, cx + r, yy, 7, 1.2); }
       else F.line(cx - w, yy, cx + w, yy, 0, 1.1, true);
     }
   }
@@ -225,7 +228,10 @@ function blossom(F, x, y, s, l) {
 /* what a cut flower leaves: two cells of stalk. The meadow is not allowed to
    simply vanish behind the harvester — a field that has been picked is a
    different surface, not an absent one. */
-function stubble(F, x, y, l) { F.line(x, y, x, y - 2.5, l, 1); }
+function stubble(F, x, y, l) {
+  F.line(x, y, x, y - 3.2, l, 1);
+  F.line(x + 2.6, y, x + 2.6, y - 2.2, l, 1);
+}
 
 /* -------------------------------------------------------- THE POWER FIGURE
    A stem that curves. The first pass ran the limbs out as straight lines and
@@ -380,7 +386,8 @@ export default {
       label: "SMALL TABLES", seconds: 13,
       line: "Find me at the harbor, at the small tables, watching.",
       /* the chair, then two hulls coming off the mud — the movement's three
-         events, and nothing else in it is struck */
+         events, struck at the u the picture actually reaches them: 0.36 is
+         where the tide passes the near boat's keel and 0.62 the far one's */
       cues: [
         { at: 0.29, f: 150, decay: 0.16, gain: 0.35, partials: [1, 2.6, 4.1], noise: 0.7, nDecay: 0.02, seed: 1301 },
         { at: 0.36, f: 118, decay: 0.40, gain: 0.30, partials: [1, 1.7, 2.4], noise: 0.8, nDecay: 0.14, seed: 1302 },
@@ -477,27 +484,41 @@ export default {
            and stamped as paper, because by the time there is anything to
            count, the sky it sits in is ink */
         if (seen) F.word(String(seen), 26, 24, 20, 0, true);
-        /* CLOSE: four couples come onto the quay, one to a table, each pair's
-           orbit tightening from seventeen cells to seven for as long as it
-           turns. They arrive walking, and no two share a lane at the same
-           time — the first pass let two couples enter from the same edge at
-           once and they read as one black crowd. */
-        const arriveAt = [0.02, 0.38, 0.16, 0.58];
+        /* CLOSE: four couples come onto the quay, one to a table, and each
+           pair's orbit tightens for as long as it turns. They arrive walking,
+           and THE FURTHEST TABLE ON EACH SIDE FILLS FIRST — ordered left to
+           right, the second couple walked straight through the first one's
+           table, and four bodies inside twenty cells read as one black
+           crowd. Filling outward-in means nobody ever crosses ground that is
+           already occupied. */
+        const arriveAt = [0.38, 0.02, 0.16, 0.58];
         for (let t = 0; t < TABLE_X.length; t++) {
           const cx = TABLE_X[t], arrive = arriveAt[t], entry = t < 2 ? -10 : 202;
           const p = clamp01((u - arrive) / 0.20);
           if (p <= 0) continue;
-          const orbitR = lerp(17, 7, clamp01((u - arrive - 0.20) / 0.40));
-          const ang = (u - arrive) * TAU * 0.62 + t * 1.3;
-          /* the ellipse is only half flattened. At a third it was nearly
+          /* CLOSE, not merged. Closing to seven cells put two twenty-seven-cell
+             bodies inside one silhouette and four couples read as four
+             individuals — the one thing this movement cannot say. Thirteen is
+             as close as two people can stand and still be two. */
+          const orbitR = lerp(19, 13, clamp01((u - arrive - 0.20) / 0.40));
+          /* A THIRD OF A TURN IN EIGHTEEN SECONDS. At two thirds every pair
+             passed through its own crossing twice, and an edge-on crossing is
+             two silhouettes in one place however the depth is drawn. Slower,
+             with the four tables offset, keeps almost every couple side by
+             side almost all the time — and a slow orbit is what the line is
+             describing anyway. */
+          const ang = (u - arrive) * TAU * 0.36 + t * 0.8;
+          /* the ellipse is only a quarter flattened. At a third it was nearly
              edge-on, and twice a turn the two bodies stood at the same x and
-             merged into one four-legged mass; at 0.55 the far one is a clear
-             ten cells further back and is drawn first, so the pair occludes
-             instead of fusing. */
-          const ox = Math.cos(ang) * orbitR, oy = Math.sin(ang) * orbitR * 0.55;
+             merged into one four-legged mass; at 0.72 the far one is nineteen
+             cells further back, drawn first and drawn smaller, so a pair
+             occludes instead of fusing. */
+          const ox = Math.cos(ang) * orbitR, oy = Math.sin(ang) * orbitR * 0.72;
           const walking = p < 1;
-          const A = [lerp(entry, cx + ox, smooth(p)), SEAT + (walking ? 0 : oy)];
-          const B = [lerp(entry - 11, cx - ox, smooth(p)), SEAT - (walking ? 0 : oy)];
+          /* the orbit's centre sits two cells up the quay from the chairs, so
+             the near half of it does not walk anybody off the bottom edge */
+          const A = [lerp(entry, cx + ox, smooth(p)), SEAT - 2 + (walking ? 0 : oy)];
+          const B = [lerp(entry - 11, cx - ox, smooth(p)), SEAT - 2 - (walking ? 0 : oy)];
           const pose = (self, other, ph) => ({
             mode: walking ? "walk" : "stand",
             phase: walking ? u * 27.3 + ph : u * 1.7 + ph,
@@ -508,9 +529,21 @@ export default {
           });
           /* the nearer body second, so a couple occludes itself as it turns */
           const order = A[1] >= B[1] ? [B, A] : [A, B];
-          const hOf = (b) => 27 + (b[1] - SEAT) * 0.16;      // the near one is the bigger one
+          const hOf = (b) => 27 + (b[1] - SEAT + 2) * 0.30;      // the near one is the bigger one
           F.fig(order[0][0], order[0][1], hOf(order[0]), pose(order[0][0], order[1][0], 0), 7);
           F.fig(order[1][0], order[1][1], hOf(order[1]), pose(order[1][0], order[0][0], 1.9), 7);
+          /* CLOSE, and it has to be drawn: 'reach' ends each body's own arm at
+             a point, and the join between the two points is the only mark that
+             says they are holding on rather than standing near each other.
+             Only while the gap is a gap — once they cross, there is nothing
+             to bridge. */
+          const gap = Math.abs(order[1][0] - order[0][0]);
+          if (!walking && gap > 9 && gap < 30) {
+            const h0 = hOf(order[0]), h1 = hOf(order[1]);
+            const f0 = order[0][0] < order[1][0] ? 1 : -1;
+            F.line(order[0][0] + f0 * h0 * 0.36, order[0][1] - h0 * 0.72,
+                   order[1][0] - f0 * h1 * 0.36, order[1][1] - h1 * 0.72, 7, 1.4);
+          }
           table(F, cx, SEAT, 6);
         }
       },
@@ -640,8 +673,8 @@ export default {
       label: "HARVESTED POWER", seconds: 14,
       line: "So I harvest the flowers instead — scarlet poppies, purple blossoms — and they become my power.",
       cues: [
-        { at: 0.18, f: 700, decay: 0.08, gain: 0.40, partials: [1, 2.4], noise: 0.6, nDecay: 0.02, seed: 1331 },
-        { at: 0.31, f: 650, decay: 0.08, gain: 0.40, partials: [1, 2.4], noise: 0.6, nDecay: 0.02, seed: 1332 },
+        { at: 0.19, f: 700, decay: 0.08, gain: 0.40, partials: [1, 2.4], noise: 0.6, nDecay: 0.02, seed: 1331 },
+        { at: 0.36, f: 650, decay: 0.08, gain: 0.40, partials: [1, 2.4], noise: 0.6, nDecay: 0.02, seed: 1332 },
         { at: 0.70, f: 220, decay: 0.60, gain: 0.40, partials: [1, 2.0, 3.0], noise: 0.3, nDecay: 0.10, seed: 1333 },
       ],
       draw(u, F) {
@@ -651,8 +684,9 @@ export default {
            "instead of" a whole meadow if the meadow is gone. So the meadow is
            a MASS; the far half of it is never touched and the near half is
            only ever cut back to the middle of the frame; and what the sweep
-           leaves is not absence but a different surface — cut ground, two
-           cells of stalk each, lighter by two levels than the standing crop.
+           leaves is not absence but a different surface — cut ground with two
+           stalks of stubble per head taken, lighter by two levels than the
+           standing crop.
            The sky is the night this line turns away from: M3's smoke, going
            off the top of the frame while he works. "Instead" is a word about
            the movement before this one, and it is the only reason there is
@@ -664,11 +698,11 @@ export default {
           const b = F.bayer(x, y);
           /* the skyline is not ruled: a straight tone boundary across 192
              cells stripes the frame as surely as a drawn bar does */
-          if (y < 58 + (F.n2(x * 0.04, 13) - 0.5) * 9) return Math.min(7, Math.floor(1 + rest * 2.4 + b));
+          if (y < 58 + (F.n2(x * 0.09, 13) - 0.5) * 11) return Math.min(7, Math.floor(1 + rest * 2.4 + b));
           if (y < 92) return Math.min(7, Math.floor(2 + F.n2(x * 0.06, y * 0.10) * 1.5 + b * 0.8));
           const cut = x > cutAt(y);
           const g = F.n2(x * 0.07, y * 0.13 + 3);
-          return Math.min(7, Math.floor((cut ? 0.5 : 2.4) + g * (cut ? 1.0 : 1.6) + b));
+          return Math.min(7, Math.floor((cut ? 0.9 : 2.4) + g * (cut ? 1.2 : 1.6) + b));
         });
         /* the far half of the field: four rows that recede and are never cut,
            so the abundance is on screen for the whole movement */
@@ -683,7 +717,7 @@ export default {
         rows.forEach(([ry, n, s, l], r) => {
           for (let i = 0; i < n; i++) {
             const fx = 2 + i * (188 / (n - 1)) + (F.noise(i, 50 + r) - 0.5) * 7;
-            if (fx > cutAt(ry)) { stubble(F, fx, ry, 3); continue; }
+            if (fx > cutAt(ry)) { stubble(F, fx, ry, 4); continue; }
             (i + r) % 2 ? blossom(F, fx, ry, s, l) : poppy(F, fx, ry, s, l);
           }
         });
@@ -693,7 +727,7 @@ export default {
            broken rather than as reaching. */
         const targets = [104, 132, 158, 182].map((x, i) => ({ x, top: 92 + (F.noise(i, 21) - 0.5) * 10, poppy: i % 2 === 0 }));
         for (const t of targets) {
-          if (t.x > cutAt(141)) { stubble(F, t.x, 142, 4); continue; }
+          if (t.x > cutAt(141)) { stubble(F, t.x, 142, 5); continue; }
           const bend = (F.noise(t.x, 77) - 0.5) * 9, midY = (142 + t.top) / 2;
           F.line(t.x, 142, t.x + bend, midY, 6, 1.4); F.line(t.x + bend, midY, t.x, t.top, 6, 1.4);
           t.poppy ? poppy(F, t.x, t.top + 8, 3.6, 7) : blossom(F, t.x, t.top + 8, 3.4, 7);
