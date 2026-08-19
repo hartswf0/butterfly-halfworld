@@ -78,7 +78,10 @@ function web(F, cx, cy, r, k, grow, anchors) {
   const turns = 7, tot = turns * N, seg = Math.floor(spi * tot);
   for (let q = 0; q < seg; q++) {
     const j = q % N, t0 = q / tot, t1 = (q + 1) / tot;
-    const r0 = r * (0.10 + 0.90 * t0), r1 = r * (0.10 + 0.90 * t1);
+    /* the spiral wanders a little: a perfect one is a doily, and nothing in
+       a building this far gone is still being drawn to a rule */
+    const j0 = 1 + (F.noise(q, k) - 0.5) * 0.16, j1 = 1 + (F.noise(q + 1, k) - 0.5) * 0.16;
+    const r0 = r * (0.10 + 0.90 * t0) * j0, r1 = r * (0.10 + 0.90 * t1) * j1;
     const a0 = th[j], a1 = th[(j + 1) % N] + (j === N - 1 ? TAU : 0);
     F.line(cx + Math.cos(a0) * r0, cy + Math.sin(a0) * r0,
            cx + Math.cos(a1) * r1, cy + Math.sin(a1) * r1, 4, 1);
@@ -248,7 +251,7 @@ export default {
           /* the weather goes off to the north-east: east because it came from
              the west, and up because a storm ending lifts off the horizon
              before it lets go of the sky */
-          const e = x / F.W * 0.55 + (1 - y / SH) * 0.30 + (F.n2(x * 0.05, y * 0.06) - 0.5) * 0.30;
+          const e = x / F.W * 0.55 + (1 - y / SH) * 0.32 + (F.n2(x * 0.030, y * 0.038) - 0.5) * 0.36;
           if (e > clear) F.ink(x, y, e > clear + 0.12 ? 4 : 2);
         }
         /* and the last of the rain, which only falls where the cloud still is */
@@ -332,8 +335,13 @@ export default {
            wash rather than on dry sand at a distance from the sea. */
         const edge = [], tide = 96 + smooth(u) * 17;
         for (let x = 0; x < F.W; x++) edge.push(tide + (F.n2(x * 0.07, 3) - 0.5) * 9);
+        /* THREE TONES AND A FIGURE HAS TO SURVIVE ALL OF THEM. The water was
+           a level 4 for one pass, which is exactly the fill level of a body
+           drawn at 7 — the man waded into the sea and turned into a black
+           post. Water 3, wet sand 2, dry sand 1: nothing in the ground shares
+           a level with anything standing on it. */
         for (let y = SEA; y < 144; y++) for (let x = 0; x < F.W; x++)
-          F.ink(x, y, y < edge[x] ? 4 : y > edge[x] + 16 ? 1 : 2);
+          F.ink(x, y, y < edge[x] ? 3 : y > edge[x] + 16 ? 1 : 2);
         /* the foam is the only paper below the horizon, and it is what makes
            the tideline a line of water rather than a change of tone */
         for (let x = 0; x < F.W; x++) {
@@ -372,7 +380,7 @@ export default {
           };
           for (let rr = 1.5; rr < r - 1; rr += 1.0) {
             const st = 1.0 / rr;
-            for (let aa = a0; aa <= a1; aa += st) { const q = T(rr, aa); F.ink(q[0], q[1], 3); }
+            for (let aa = a0; aa <= a1; aa += st) { const q = T(rr, aa); F.ink(q[0], q[1], 4); }
           }
           for (let aa = a0; aa <= a1; aa += 1 / r) { const q = T(r, aa); F.disc(q[0], q[1], 1.3, 7); }
           if (b > 0.01) for (const aa of [a0, a1])
@@ -385,10 +393,12 @@ export default {
         const p = clamp01((u - 0.06) / 0.86);
         const made = Math.floor(p * 15);
         for (let k = 0; k < made; k++) {
-          const q = k / 15, x = 2 + q * 34, y = 136 - q * 4;
-          F.disc(x, y, 2.2, 5); F.disc(x + 2.6, y - 2.6, 1.5, 5);
+          const q = k / 15, x = 0 + q * 34, y = 141 - q * 2;
+          F.disc(x, y, 2.6, 5); F.disc(x + 3.0, y - 3.0, 1.8, 5);
         }
-        F.fig(2 + p * 34, 136 - p * 4, 27, {
+        /* he is the nearest thing in the frame and the last thing drawn, so
+           the pieces are behind him however deep into them he gets */
+        F.fig(0 + p * 34, 141 - p * 2, 42, {
           mode: "walk", phase: u * 9.35, face: 1, guise: "poet", headTurn: 0.4,
         }, 7);
       },

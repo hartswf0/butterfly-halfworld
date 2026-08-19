@@ -19,7 +19,7 @@ for (const f of files) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>${slug} — a WYGWYL halfworld</title>
-<link rel="stylesheet" href="halfworld.css">
+<link rel="icon" href="dot.svg">\n<link rel="stylesheet" href="halfworld.css">
 <script type="module">
   import { mount } from "./halfworld.mjs";
   import world from "./worlds/${f}";

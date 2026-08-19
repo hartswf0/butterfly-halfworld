@@ -11,7 +11,16 @@
    columns: the discipline of this film is that there is only ever one
    drawing of this building.
 
-   Fog is the other advancing front: an edge that sweeps across x, in on the
+   LIGHT IS THE OTHER THING BEING COUNTED, and it only ever goes one way.
+   Fog claims the ground in M1 and gives it back; then the night comes off the
+   sky from the horizon up (M2), the last of the air is cut away by wedges
+   opening from the risen sun (M3), and in M6 the whole of it happens again at
+   full strength and on the ground — a terminator running west across the
+   valley floor as the sun clears the ridge. Each is a different mechanism for
+   the same one-way fact, and all four are per-dot allegiance swaps: this
+   world has no dimmer.
+
+   Fog is the first of those fronts: an edge that sweeps across x, in on the
    first half of M1 and out on the second — one triangular number for
    "floating... as it exhales." The infinity pool (M4) never draws its own
    reflection: it draws the sky once, in the top half of the field, and lets
@@ -368,12 +377,18 @@ export default {
         /* the dews only wink where the light has actually landed on them,
            which is the line's own causal claim about morning and luck */
         if (glory > 0.22) dewWinks(F, u, 132);
+        /* HE WALKS THE STYLOBATE, AND HE WALKS BEHIND THE COLONNADE — drawn
+           before the temple, so each column takes him and each gap gives him
+           back. It is the one place in this film where the rig's own occlusion
+           rule can be used on the building instead of on a body, and it is
+           what a crew actually does: the man setting beams is up there among
+           them, not standing next to the site pointing at it.
+           Rejected: walking him across the ground. The platform spans cx±65,
+           the temple is drawn after him at level 7, and he simply vanished
+           into it for two thirds of the crossing. */
+        F.fig(lerp(50, 142, smooth(clamp01(u / 0.94))), T_GY - 12, 15,
+          { mode: "walk", phase: u * 10.35 + 0.15, face: 1 }, 6);
         temple(F, 9 + u * 9, 7);
-        /* one of them walks the length of the platform with the beams; the
-           other is at the far end taking them */
-        const walk = clamp01((u - 0.02) / 0.72);
-        F.fig(lerp(-18, 66, smooth(walk)), T_GY, 13,
-          { mode: walk < 1 ? "walk" : "stand", phase: u * 8.35 + 0.15, face: 1 }, 6);
         F.fig(172, T_GY, 13, { mode: "stand", arms: "reach", face: -1,
           rot: 0.10 + Math.sin(u * TAU * 0.8) * 0.06 }, 6);
       },
@@ -439,8 +454,14 @@ export default {
            footprints — both make the water react to him, and the line's claim
            is that it doesn't. */
         const SEA = 52, FY = 112;
-        F.disc(150, 18, 5, 4);
-        for (let k = 0; k < 4; k++) F.disc(30 + k * 22, 14 + F.noise(k, 4) * 6, 2.6, 2);
+        F.disc(150, 20, 6, 6);
+        /* two low streaks, not four discs: a disc in an empty sky reads as a
+           seed head, and cloud at this hour lies along the horizon */
+        for (const [cx, cy, w] of [[54, 28, 26], [110, 20, 18]])
+          for (let dx = -w; dx <= w; dx++) {
+            const h = 1.8 * (1 - (dx / w) * (dx / w)) + 0.5;
+            for (let dy = -h; dy <= h; dy++) F.ink(Math.round(cx + dx), Math.round(cy + dy), 2);
+          }
         /* DEEP BREATHS: the stillness itself rises and falls on one slow sine
            of u — a number that breathes, not a caption saying so. It sets both
            how flat the sea is and how far the flatness reaches, so the breath
@@ -455,10 +476,13 @@ export default {
           /* the horizon is not a ruled seam: the tone arrives on the ordered
              schedule over the first few rows, which is also what distance
              does to a surface */
-          if (t < 0.09 && F.bayer(x, y) > t / 0.09) return;
-          return t > 0.58 ? 3 : 2;
+          if (t < 0.14 && F.bayer(x, y) > t / 0.14) return;
+          /* the seam between the two depths is wobbled, because a straight
+             tonal boundary across 192 cells is the stripe the dot law warns
+             about even when it is a change of one level */
+          return t + (F.n2(x * 0.045, 5) - 0.5) * 0.13 > 0.58 ? 3 : 2;
         });
-        const rows = 10, y0 = 56, y1 = 140;
+        const rows = 10, y0 = 64, y1 = 140;
         for (let k = 0; k < rows; k++) {
           const t = k / (rows - 1), y = lerp(y0, y1, t);
           const ampBase = 2.6 * (1 - breath * 0.7) * (0.4 + t * 0.8);
@@ -469,7 +493,14 @@ export default {
             if (near > 0.52) continue;                  // flat, and lit, under him
             const amp = ampBase * (1 - near);
             const yy = y + Math.sin(x * 0.085 + u * TAU * 0.35 + k * 1.2) * amp;
-            F.ink(x, Math.round(yy), 5);
+            /* THE LEVEL IS MODULATED ALONG THE RUN. A crest is a nearly
+               horizontal line, and a nearly horizontal line at one level over
+               a toned sea is a bar — the two gaps per row are not enough once
+               there is something behind them. No two adjacent cells agree
+               strongly enough now for the halftone to find a rule in it, and
+               the crests read as broken water instead. */
+            const n = F.noise(x, k * 7);
+            F.ink(x, Math.round(yy), n > 0.72 ? 4 : n > 0.40 ? 5 : 6);
           }
         }
         /* the stride is matched to the crossing: a hundred and fifty-two
@@ -515,7 +546,7 @@ export default {
         /* the building's own shadow, thrown west off the platform while the
            sun is low and drawn in as it climbs — the one piece of the dark
            that belongs to the temple rather than to the hills */
-        const shade = lerp(148, 5, rise);
+        const shade = lerp(150, 0, clamp01(rise / 0.78));
         F.map((x, y) => {
           const ry = ridgeYAt(x, HY, AMP);
           if (y < ry) {
@@ -523,7 +554,10 @@ export default {
             return d < bright * 0.34 ? 0 : d < bright * 0.62 ? 1 : d < bright ? 2 : 3;
           }
           const dark = (y - ry) > 46 ? 4 : 3;
-          if (y > 114 && x < 31 && x > 31 - shade) return dark;
+          if (y > 120 && x < 31) {
+            const w = 31 - x;
+            if (w < shade && F.bayer(x, y) < 0.22 + 0.78 * (1 - w / shade)) return dark;
+          }
           const lit = (x + (F.n2(x * 0.05, 7) - 0.5) * 10) - term;
           if (lit <= 0) return dark;
           if (F.bayer(x, y) < clamp01(lit / 22)) return F.noise(x, y) > 0.90 ? 1 : 0;
@@ -570,14 +604,17 @@ export default {
            nobody can see is not a welcome. The one in the east comes in first
            and raises his arms first, because that is the order the light
            reaches them in. */
-        const ea = ss(0.08, 0.44, u), we = ss(0.24, 0.64, u);
+        /* the west one comes in later because the light does: he is still in
+           the hills' shadow until past the middle of the movement, and a body
+           at level 6 standing on a level-4 shadow is a smudge */
+        const ea = ss(0.08, 0.44, u), we = ss(0.46, 0.82, u);
         F.fig(lerp(208, 178, ea), T_GY, 13, {
           mode: ea < 1 ? "walk" : "stand", phase: u * 7.35 + 0.15, face: -1,
           arms: ea < 1 ? "swing" : (u > 0.52 ? "up" : "open"),
         }, 6);
         F.fig(lerp(-16, 14, we), T_GY, 13, {
           mode: we < 1 ? "walk" : "stand", phase: u * 7.35 + 0.42, face: 1,
-          arms: we < 1 ? "swing" : (u > 0.72 ? "up" : "open"),
+          arms: we < 1 ? "swing" : (u > 0.90 ? "up" : "open"),
         }, 6);
       },
     },

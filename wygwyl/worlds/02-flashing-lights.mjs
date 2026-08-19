@@ -406,7 +406,7 @@ export default {
         const mx = lerp(66, 96, walk);
         /* the hand the thing is in swings across him as he turns, so the
            handover, the carry and the throw are one continuous hold */
-        const hx = mx + lerp(-14, 15, walk), hy = GY - lerp(34, 40, walk);
+        const hx = mx + lerp(-14, 15, walk), hy = GY - lerp(34, 36, walk);
         const toGlass = ss(0.56, 0.66, u), beyond = clamp01((u - 0.66) / 0.24);
         let tx, ty;
         if (beyond > 0) {
