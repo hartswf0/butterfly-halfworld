@@ -36,11 +36,20 @@ const CELLS = FW * FH;
    for a dim shot, ordered-dithered on the world's own schedule. This alone
    is enough to put the footage "in the lattice" — everything below it is
    creative range on top of that baseline. */
+/* CREAM, not NIGHT: the suite's ground is black ink on cream paper, and three
+   of this poem's four movements stay there — only AS DARK AS BLACK goes to a
+   solid-ink field. black=0/white=0.35 keeps the levels remap narrow enough
+   that only the footage's true shadow (which is where the poet's own body
+   sits, underlit against a room lit by streetlight through the window) clips
+   to full ink; the room around him stays paper. Widen white toward ~0.85 for
+   the night register instead — see EXPERIMENTS.md's REGISTERS section for
+   both, and why the wide version is not simply "more of the same" but a
+   different point the exposure fader has no in-between way to reach. */
 export const DEFAULTS = {
   channel: "luma",        // luma | r | g | b | chroma
   chromaHue: 165,          // degrees; 165 sits between green(120) and cyan(180) — this footage's streetlights
   chromaTol: 55,           // degrees either side counted as a match
-  black: 0.02, white: 0.85,// levels: black/white point, 0..1, before the tone curve
+  black: 0.0, white: 0.35, // levels: black/white point, 0..1, before the tone curve
   tone: "invert",          // linear | gamma | posterise | solarise | invert
   gamma: 1.0,
   posterise: 4,             // steps, when tone === "posterise"

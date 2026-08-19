@@ -12,3 +12,6 @@ film/.tmpclose/
 film/.measure/
 node_modules/
 package-lock.json
+
+# rendered suite films — outputs, rebuilt by wygwyl/render-film.mjs
+film/WYGWYL*.mp4

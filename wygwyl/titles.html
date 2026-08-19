@@ -1,0 +1,124 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>titles.html — a WYGWYL halfworld</title>
+<link rel="stylesheet" href="halfworld.css">
+<style>
+  body{overflow:auto;display:block}
+  .lede{
+    padding:clamp(16px,4vw,44px) clamp(12px,4vw,44px);
+    border-bottom:1px solid var(--rule);max-width:92ch;
+  }
+  .lede h1{font-size:clamp(19px,3.6vw,30px);letter-spacing:.06em;font-weight:900;line-height:1.15}
+  .lede h1 small{display:block;font-size:11px;letter-spacing:.24em;color:var(--dim);font-weight:400;margin-bottom:.7em}
+  .lede p{margin-top:1em;color:var(--ink2);max-width:74ch}
+  .lede p b{color:var(--ink)}
+  .lede a{border-bottom:1px solid var(--rule)}
+  .lede a:hover{border-bottom-color:var(--ink)}
+
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    border-top:1px solid var(--rule);border-left:1px solid var(--rule);
+  }
+  .card{
+    border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    display:flex;flex-direction:column;background:var(--paper);
+  }
+  .card canvas{display:block;width:100%;aspect-ratio:4/3;background:var(--paper2)}
+  .card .meta{padding:.9em 1em 1.1em;border-top:1px solid var(--rule)}
+  .card .n{font-size:10.5px;letter-spacing:.2em;color:var(--dim)}
+  .card .t{font-weight:700;letter-spacing:.03em;margin-top:.2em;line-height:1.25;font-size:15px}
+  .card .g{font-size:11.5px;color:var(--ink2);margin-top:.5em;line-height:1.45}
+  .card .row{display:flex;align-items:center;gap:1ch;margin-top:.9em}
+  .card .btn{font-size:10.5px;padding:.5em 1em}
+  .card .mv{font-size:10px;letter-spacing:.1em;color:var(--dim);margin-left:auto}
+
+  footer.note{
+    padding:clamp(16px,4vw,40px);color:var(--ink2);max-width:82ch;
+    border-top:0;display:block;
+  }
+  footer.note h2{font-size:11px;letter-spacing:.2em;color:var(--dim);margin-bottom:.8em}
+  footer.note p{margin-bottom:.9em}
+</style>
+
+<div class="lede">
+  <h1><small>WHERE YOU GO WHEN YOU LEAVE · TITLE SEQUENCE, THREE WAYS</small>
+  A title card in the manner of John Whitney.</h1>
+  <p>Fourteen films need one thing in front of them, and Whitney's own rule for a title is
+  that <b>it is never typed on</b> — it is what a field of moving elements looks like at the
+  instant their motion happens to agree with itself. Every option below is a single
+  differential law, run for its own thirty seconds, with the words of the suite's own title
+  read directly out of the law's resonant moments rather than drawn over the top of it.</p>
+  <p>All three are the real films, running live below, not a thumbnail of one — the same
+  <code>drawPreview</code> the fourteen-film index uses. Open any card for its own page,
+  transport and sound.</p>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<footer class="note">
+  <h2>THE THREE DEVICES</h2>
+  <p><b>A · The Rosette.</b> One dense field on differential phase — point k turns k times
+  the base rate about its own anchor. Nothing else moves it; the loops, flowers and caustics
+  are what nineteen hundred clocks running at nineteen hundred different speeds look like from
+  above, and the title is a cell lifted from that same field at the moment it resonates.</p>
+  <p><b>B · The Arabesque.</b> Six rings, each turning at an integer multiple of one rate and
+  alternating direction, breathing in and out of phase with each other. The two lines of the
+  title are built by two different generations of rings collapsing inward in turn, while the
+  rest of the arabesque keeps running behind them.</p>
+  <p><b>C · The Catalogue.</b> A grid of independent Lissajous cells, each one's frequency
+  ratio drifting by a constant amount every step until it passes an integer and the figure
+  snaps to a closed loop — a resonance solved backward so it lands on a chosen instant. Letter
+  by letter, left to right, a cell's loop is swapped for its own slice of the word and stays.</p>
+</footer>
+
+<script type="module">
+import { drawPreview } from "./halfworld.mjs";
+
+const OPTIONS = [
+  { slug: "00-title-a", letter: "A", desc: "the rosette — a differential-phase field resolving into type" },
+  { slug: "00-title-b", letter: "B", desc: "the arabesque — nested rings, counter-rotating, collapsing inward" },
+  { slug: "00-title-c", letter: "C", desc: "the catalogue — a grid of lissajous cells locking to letters" },
+];
+
+const grid = document.getElementById("grid");
+const live = [];
+
+for (const opt of OPTIONS) {
+  const world = (await import(`./worlds/${opt.slug}.mjs`)).default;
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `<canvas width="320" height="240"></canvas>
+    <div class="meta">
+      <div class="n">OPTION ${opt.letter} · ${world.n}</div>
+      <div class="t">${world.title}</div>
+      <div class="g">${opt.desc}</div>
+      <div class="row">
+        <a class="btn" href="${opt.slug}.html">OPEN ▶</a>
+        <span class="mv"></span>
+      </div>
+    </div>`;
+  grid.appendChild(card);
+  const cv = card.querySelector("canvas");
+  const rt = drawPreview(world, cv, 0);
+  card.querySelector(".mv").textContent = `${rt.movements.length - 1} MV · ${Math.round(rt.total)}S`;
+  /* Skip past the shared 5s auto title-card and stagger the three by a
+     third of a film each — otherwise all three open on the same generic
+     "00 · WHERE YOU GO WHEN YOU LEAVE" card at once, which is the one
+     thing the three devices have in common and the least interesting
+     thing to show side by side. */
+  const off = 5 + rt.total * (live.length / OPTIONS.length);
+  live.push({ cv, world, rt, off });
+}
+
+/* One shared clock. Each option keeps its own real duration and loops on
+   it independently, so the three cards drift in and out of phase with one
+   another rather than resetting in lockstep — three separate films, run
+   side by side, not one film mirrored three times. */
+let t0 = performance.now();
+(function tick(now) {
+  const t = (now - t0) / 1000;
+  for (const l of live) drawPreview(l.world, l.cv, t + l.off);
+  requestAnimationFrame(tick);
+})(t0);
+</script>
