@@ -229,7 +229,7 @@ export default {
      is the one utopia — and the only drone that only ever climbs */
   /* KEY: G Lydian, bright — the raised 4th is the city coming up out of the
      water; paired with 11 as the suite's highest, lightest register. */
-  drone: { base: 98.00, steps: [0, 2, 6, 4, 9, 12], bright: true },
+  drone: { base: 98.00, steps: [0, 0, 2, 6, 4, 9, 12], bright: true },
   movements: [
     {
       label: "THE COMETS", seconds: 13,

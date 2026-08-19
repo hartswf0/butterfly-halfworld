@@ -242,7 +242,7 @@ export default {
   /* KEY: C Lydian, bright, and the ONLY drone in the suite whose steps
      return to 0 — the suite's tonic — because 14 is the finale and this
      is where everything else in it resolves. */
-  drone: { base: 65.41, steps: [0, 4, 6, 9, 11, 0], bright: true },
+  drone: { base: 65.41, steps: [0, 0, 4, 6, 9, 11, 0], bright: true },
   movements: [
     {
       label: "EVERYTHING I BUILT", seconds: 13,

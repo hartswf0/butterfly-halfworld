@@ -220,8 +220,14 @@ function synthRenderFilm(world, rt, { includeCues = true } = {}) {
 }
 /* fold+summarise one PCM buffer's chroma/partials — used for both the
    drone-only pass and the full-mix (drone+foley) pass below. */
-function chromaSummary(samples, sr, fMin = 15) {
-  const N = 8192, hop = 4096, w = hann(N);
+function chromaSummary(samples, sr, fMin = 15, N = 8192) {
+  /* Bin width = sr/N must resolve a SEMITONE at fMin, or a low tone's energy
+     smears across several neighbouring pitch classes and the measurement is
+     noise. At fMin=8Hz a semitone is ~0.46Hz wide — 8192 bins (2.9Hz @
+     24kHz) cannot see that; this caller is expected to pass a large enough N
+     for whatever fMin it asks for (the --synth path below does, since this
+     suite's bass drones run as low as 16Hz). */
+  const hop = N / 2, w = hann(N);
   const re = new Float32Array(N), im = new Float32Array(N);
   const chroma = new Float64Array(12), ltas = new Float64Array(N / 2);
   for (let start = 0; start + N <= samples.length; start += hop) {
@@ -252,7 +258,7 @@ if (synthIdx >= 0) {
      are untouched foley (contact sounds), never meant to be diatonic — mixing
      them in would make an honest key-match measurement report a false miss. */
   const droneOnly = synthRenderFilm(world, rt, { includeCues: false });
-  const d = chromaSummary(droneOnly, SYNTH_SR, 8); // low fMin: some bases sit near 16Hz
+  const d = chromaSummary(droneOnly, SYNTH_SR, 8, 131072); // N=131072 → 0.18Hz/bin, resolves a semitone down to ~16Hz
   console.log(`  DRONE ONLY  (the thing this task retuned):`);
   console.log(`    top pitch classes: ${d.top.map(t => `${NOTE_NAMES[t.pc]}(${(t.v * 100).toFixed(1)}%)`).join(", ")}`);
   console.log(`    K-S best fit: ${NOTE_NAMES[d.key.pc]} ${d.key.mode} (r=${d.key.score.toFixed(3)})`);
@@ -263,7 +269,7 @@ if (synthIdx >= 0) {
      mp3's key" by, since the foley layer is deliberately non-diatonic. */
   const fullMix = synthRenderFilm(world, rt, { includeCues: true });
   let peak = 0; for (const v of fullMix) peak = Math.max(peak, Math.abs(v));
-  const f = chromaSummary(fullMix, SYNTH_SR, 8);
+  const f = chromaSummary(fullMix, SYNTH_SR, 8, 131072);
   console.log(`  FULL MIX (drone + untouched foley cues, peak=${peak.toFixed(3)}):`);
   console.log(`    top pitch classes: ${f.top.map(t => `${NOTE_NAMES[t.pc]}(${(t.v * 100).toFixed(1)}%)`).join(", ")}`);
   console.log(`    K-S best fit: ${NOTE_NAMES[f.key.pc]} ${f.key.mode} (r=${f.key.score.toFixed(3)})`);

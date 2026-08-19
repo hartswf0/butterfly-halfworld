@@ -71,6 +71,67 @@ const W = {
    is no arm — the body silently loses its limbs and reads as a smudge. */
 const MINR = 0.85;
 
+/* ---------------------------------------------------------------- THE GUISE
+   HOW A DRAWN BODY CAN BE UNMISTAKABLY ONE MAN AND ALSO ANYBODY.
+
+   This world has no faces. At the sizes it draws at, a face is four cells and
+   any attempt at one produces a doll. So a likeness cannot be carried by
+   features — which turns out to be the useful constraint, because it forces
+   the likeness into the SILHOUETTE, and a silhouette is exactly the register
+   where both halves of that sentence can be true at once.
+
+   Five marks, all of them outline, none of them a feature:
+
+     hair      the mass on the back and top of the skull, and where its edge
+               falls. This is the single strongest identity signal at any
+               distance — you know people by their heads from across a street.
+     beard     jaw mass. Squares and lengthens the lower head.
+     shoulderSlope   square shoulders or fallen ones. Posture, not anatomy.
+     stoop     the habitual forward carry of the chest.
+     neck      thickness, which reads as build.
+
+   Set them from a real person and the drawn body is recognisably that person
+   in every scene, including the dark ones where nothing but the outline
+   survives — which is the case this was built for. Describe the same figure in
+   words and you have said "a man with short hair and a beard, shoulders a
+   little rounded", which is nobody in particular. That is the whole idea: the
+   recognition is real and the description is universal.
+
+   POET is measured off the lead clip for OUT OF LIFE — the standing silhouette
+   against the hazed window, which is the frame where his outline is clearest. */
+export const GUISES = {
+  everyman: { hair: 0, beard: 0, shoulderSlope: 0, shoulderWide: 1, stoop: 0, neck: 1, headScale: 1 },
+  poet:     { hair: 0.34, beard: 0.30, shoulderSlope: 0.26, shoulderWide: 1.09, stoop: 0.05, neck: 1.22, headScale: 1.05 },
+  /* the turned back in MORE HAZE: same build, no beard read from behind, and
+     the hair is the only thing you have to know them by */
+  turned:   { hair: 0.40, beard: 0, shoulderSlope: 0.24, shoulderWide: 1.07, stoop: 0.02, neck: 1.18, headScale: 1.04 },
+  elder:    { hair: 0.14, beard: 0.42, shoulderSlope: 0.44, shoulderWide: 0.94, stoop: 0.16, neck: 0.92, headScale: 1.06 },
+  child:    { hair: 0.26, beard: 0, shoulderSlope: 0.10, shoulderWide: 0.84, stoop: 0, neck: 0.85, headScale: 1.30 },
+};
+function guiseOf(g) {
+  if (!g) return GUISES.everyman;
+  if (typeof g === "string") return GUISES[g] || GUISES.everyman;
+  return { ...GUISES.everyman, ...g };
+}
+
+/* the mass on the back and top of the skull — an arc of discs, so it hugs the
+   head instead of sitting on it as a hat, and it never crosses the face side */
+function hairCap(K, cx, cy, r, face, amount, level) {
+  if (amount <= 0.01) return;
+  const t = Math.max(0.24, amount) * r * 0.95;
+  /* Solved in a canonical frame where the face points +x, then mirrored by
+     `face`. The sweep runs hairline → crown → nape and stops there. An earlier
+     version ran it all the way round to the front-bottom, which put a mass of
+     hair under the chin and read as a growth on the shoulder. */
+  const a0 = 0.18 * Math.PI, a1 = 1.22 * Math.PI;
+  const n = Math.max(7, Math.ceil((a1 - a0) * r * 0.95));
+  const rr = r - t * 0.30;
+  for (let i = 0; i <= n; i++) {
+    const a = a0 + (a1 - a0) * (i / n);
+    K.disc(cx + Math.cos(a) * rr * face, cy - Math.sin(a) * rr, t * 0.62, level);
+  }
+}
+
 /* a tapered capsule: the whole vocabulary of a limb in this world */
 function capsule(K, x0, y0, x1, y1, r0, r1, contour, fill, solid) {
   r0 = Math.max(MINR, r0); r1 = Math.max(MINR, r1);
@@ -122,7 +183,7 @@ function quad(K, p, contour, fill, solid) {
    each is a set of joint targets rather than a drawing. `face` is +1/-1 and
    flips the whole rig; `u`-driven values arrive from the caller because
    nothing in this world may keep state. */
-function solve(h, pose, stocky = 1) {
+function solve(h, pose, stocky = 1, G = GUISES.everyman) {
   const face = pose.face === -1 ? -1 : 1;
   const mode = pose.mode || "stand";
   const ph = pose.phase || 0;
@@ -161,7 +222,7 @@ function solve(h, pose, stocky = 1) {
   if (crouch) { hipY -= h * 0.16 * crouch; shY -= h * 0.20 * crouch; }
 
   const hip = [hipTilt * 0.5, hipY];
-  const sh = [shTilt * 0.5, shY];
+  const sh = [shTilt * 0.5 + face * G.stoop * h * 0.5, shY];
   const neck = [sh[0] + face * h * 0.004, shY + h * 0.030];
   const headC = [neck[0] + (pose.headTurn || 0) * h * 0.03 * face,
                  shY + h * (L.crown - L.shoulder) * 0.60 + breath];
@@ -203,8 +264,11 @@ function solve(h, pose, stocky = 1) {
     const len = Math.hypot(dx, dy) || 1;
     return [mx - (dy / len) * out * k, my + (dx / len) * out * k];
   };
-  const SW = W.shoulder * h * stocky, HW = W.hipHalf * h * stocky;
-  const shA = [sh[0] - SW, sh[1]], shB = [sh[0] + SW, sh[1]];
+  const SW = W.shoulder * h * stocky * G.shoulderWide, HW = W.hipHalf * h * stocky;
+  /* fallen shoulders drop at the OUTER end only — the neck stays where it is,
+     which is what makes it read as carriage rather than as a shrug */
+  const drop = G.shoulderSlope * SW * 0.55;
+  const shA = [sh[0] - SW, sh[1] - drop], shB = [sh[0] + SW, sh[1] - drop];
   elbowA = elbowA || bend(shA, handA, h * 0.055, -face);
   elbowB = elbowB || bend(shB, handB, h * 0.055, -face);
   const hipA = [hip[0] - HW, hip[1]], hipB = [hip[0] + HW, hip[1]];
@@ -227,6 +291,7 @@ function solve(h, pose, stocky = 1) {
    and arms wide enough to survive the lattice. It answers the same poses,
    because a crowd still has to walk and raise its arms. */
 function drawSmall(K, x, y, h, pose, contour) {
+  const G = guiseOf(pose.guise);
   const face = pose.face === -1 ? -1 : 1;
   const mode = pose.mode || "stand";
   const ph = pose.phase || 0;
@@ -239,8 +304,8 @@ function drawSmall(K, x, y, h, pose, contour) {
      rather than as the wires between them. Everything here is deliberately
      heavier than proportion allows, because at this size the silhouette is the
      only information that survives. */
-  const hr = Math.max(1.7, h * 0.150);
-  const tw = Math.max(2.0, h * 0.155);
+  const hr = Math.max(1.7, h * 0.150) * G.headScale;
+  const tw = Math.max(2.0, h * 0.155) * G.shoulderWide;
   const lw = Math.max(1.35, h * 0.088);
   const aw = Math.max(1.15, h * 0.072);
   const rot = pose.rot || 0, cs = Math.cos(rot), sn = Math.sin(rot);
@@ -274,6 +339,7 @@ function drawSmall(K, x, y, h, pose, contour) {
   seg(hip, sh, tw * 0.82, tw);
   const hd = T(0, shY + h * 0.115);
   K.disc(hd[0], hd[1], hr, contour);
+  hairCap(K, hd[0], hd[1], hr, face, G.hair, contour);
 }
 
 /* --------------------------------------------------------------- the draw */
@@ -297,7 +363,8 @@ export function drawFigure(K, x, y, h, pose = {}, level = 7) {
      says it should be. */
   const stocky = clamp(1 + (40 - h) / 24 * 0.30, 1, 1.55);
 
-  const P = solve(h, pose, stocky);
+  const G = guiseOf(pose.guise);
+  const P = solve(h, pose, stocky, G);
   const rot = pose.rot || 0, lean = pose.lean || 0;
   const cs = Math.cos(rot), sn = Math.sin(rot);
   const px = P.hip[0], py = P.hip[1];
@@ -310,7 +377,7 @@ export function drawFigure(K, x, y, h, pose = {}, level = 7) {
     return [x + px + rx + lean * (py - p[1]) * 0.8, y - (py + ry)];
   };
 
-  const HR = W.head * h * (1 + (stocky - 1) * 0.6), JR = W.jaw * h;
+  const HR = W.head * h * (1 + (stocky - 1) * 0.6) * G.headScale, JR = W.jaw * h * (1 + G.beard * 0.55);
   const aT = W.armTop * h * stocky, aM = W.armMid * h * stocky, aE = W.armEnd * h * stocky;
   const lT = W.legTop * h * stocky, lM = W.legMid * h * stocky, lE = W.legEnd * h * stocky;
   const [shA, shB] = [T(P.shA), T(P.shB)];
@@ -361,15 +428,17 @@ export function drawFigure(K, x, y, h, pose = {}, level = 7) {
   /* neck, then head. The head is an oval with a jaw: a circle alone reads as a
      ball on a stick, and the jaw is the cheapest mark that makes it a skull. */
   capsule(K, (shA[0] + shB[0]) / 2, (shA[1] + shB[1]) / 2, nk[0], nk[1],
-          W.neck * h * 1.25, W.neck * h, contour, fill, solid);
+          W.neck * h * 1.25 * G.neck, W.neck * h * G.neck, contour, fill, solid);
   const tilt = (pose.headTilt || 0) * 0.5;
   K.disc(hd[0], hd[1], HR, contour);
-  capsule(K, hd[0] - Math.sin(tilt) * JR * 0.3, hd[1] + JR * 0.55,
-          hd[0] + P.face * JR * 0.42, hd[1] + JR * 0.80, JR * 0.72, JR * 0.5, contour, fill, true);
+  capsule(K, hd[0] - Math.sin(tilt) * JR * 0.3, hd[1] + JR * (0.55 + G.beard * 0.25),
+          hd[0] + P.face * JR * 0.42, hd[1] + JR * (0.80 + G.beard * 0.30),
+          JR * 0.72, JR * (0.5 + G.beard * 0.34), contour, fill, true);
   if (!solid) {
     K.disc(hd[0], hd[1], HR - 1.15, fill, true);
     /* One mark for where the face points. Not a face — this world does not
        have faces at this scale, and drawing eyes at nine cells makes a doll. */
     K.disc(hd[0] + P.face * HR * 0.44, hd[1] + HR * 0.10, Math.max(0.8, HR * 0.17), contour);
   }
+  hairCap(K, hd[0], hd[1], HR, P.face, G.hair, contour);
 }

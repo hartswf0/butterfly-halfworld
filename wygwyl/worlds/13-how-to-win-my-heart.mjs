@@ -192,7 +192,7 @@ export default {
   /* KEY: C Dorian — the raised 6th keeps the courtship open rather than
      settled; the steps land on the 5th, not the tonic, because "won't
      leave" is a wish here, not yet a fact. */
-  drone: { base: 65.41, steps: [0, 2, -3, 5, 9, 7] },
+  drone: { base: 65.41, steps: [0, 0, 2, -3, 5, 9, 7] },
   movements: [
     {
       label: "SMALL TABLES", seconds: 13,

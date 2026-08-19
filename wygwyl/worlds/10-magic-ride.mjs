@@ -242,7 +242,7 @@ export default {
   accent: "#5aa7ff", seed: 1010,
   /* KEY: C Dorian, bright — the raised 6th and the climb to the octave
      carry the film's own turn from night into "chilly morning". */
-  drone: { base: 65.41, steps: [0, 3, -2, 5, 9, 12], bright: true },
+  drone: { base: 65.41, steps: [0, 0, 3, -2, 5, 9, 12], bright: true },
   movements: [
     {
       label: "HOP ON", seconds: 13,

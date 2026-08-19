@@ -48,7 +48,7 @@ export default {
   /* KEY: C Phrygian, two octaves down (C0) — the suite's tonal centre at its
      darkest register, because 01 ends "as dark as black" and nothing after
      it goes lower; the flat 2nd is the haze closing in before the fall. */
-  drone: { base: 16.35, steps: [0, -11, -9, -12] },
+  drone: { base: 16.35, steps: [0, 0, -11, -9, -12] },
   movements: [
     {
       label: "THE SEARCH", seconds: 13,

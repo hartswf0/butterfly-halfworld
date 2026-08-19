@@ -167,7 +167,7 @@ export default {
   /* KEY: C Aeolian, one octave down — natural minor for a soul that leaves
      its body and, by "back to my body", returns to the tonic it started
      from; not bright, this is a loss film even where it dances. */
-  drone: { base: 32.70, steps: [0, 7, -4, 2, -9, 0, -7] },
+  drone: { base: 32.70, steps: [0, 0, 7, -4, 2, -9, 0, -7] },
   movements: [
     {
       label: "PULSING", seconds: 13,

@@ -151,7 +151,7 @@ export default {
   /* KEY: G Dorian, bright — envelope starved to turnt up needs headroom, so
      the drone sits on the fifth and the steps climb a full octave across
      the seven movements, ending exactly where "chin high" would put it. */
-  drone: { base: 98.00, steps: [-12, -5, 0, 3, 7, 9, 12], bright: true },
+  drone: { base: 98.00, steps: [0, -12, -5, 0, 3, 7, 9, 12], bright: true },
   movements: [
     {
       label: "CHIN NESTED", seconds: 13,

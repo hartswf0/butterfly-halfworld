@@ -53,7 +53,7 @@ export default {
   /* KEY: G Aeolian, two octaves down — natural minor for a heartbreak that
      is sad rather than violent, and low because 03 is one of the three
      darkest films in the suite (with 01 and 09). */
-  drone: { base: 24.50, steps: [0, 7, 3, -9, -5, -12] },
+  drone: { base: 24.50, steps: [0, 0, 7, 3, -9, -5, -12] },
   movements: [
     {
       label: "ODE TO FOREVER", seconds: 13,

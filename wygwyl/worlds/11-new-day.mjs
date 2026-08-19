@@ -218,7 +218,7 @@ export default {
   /* KEY: G Lydian, bright — paired with 06 as the suite's brightest
      register; the temple assembles toward the octave the way the film
      assembles toward daylight. */
-  drone: { base: 98.00, steps: [0, 2, 6, 7, 9, 12], bright: true },
+  drone: { base: 98.00, steps: [0, 0, 2, 6, 7, 9, 12], bright: true },
   movements: [
     {
       label: "MORNING FOG", seconds: 13,

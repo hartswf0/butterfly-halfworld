@@ -232,7 +232,7 @@ export default {
   /* KEY: G Dorian, one octave down — the raised 6th is the vow's small,
      stubborn hope inside a trail that keeps repeating; not bright, because
      the hope stays inside a minor frame the film never fully leaves. */
-  drone: { base: 49.00, steps: [0, 9, 2, -3, -12, 9] },
+  drone: { base: 49.00, steps: [0, 0, 9, 2, -3, -12, 9] },
   movements: [
     {
       label: "WASHED ASHORE", seconds: 13,

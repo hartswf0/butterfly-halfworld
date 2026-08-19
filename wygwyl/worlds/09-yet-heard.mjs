@@ -177,7 +177,7 @@ export default {
   /* KEY: C Aeolian, one octave down — the suite's root at its lowest
      register for the last of the three darkest films (with 01 and 03);
      grief with nowhere further to fall by "east, at the harbor". */
-  drone: { base: 32.70, steps: [0, -9, -5, -12] },
+  drone: { base: 32.70, steps: [0, 0, -9, -5, -12] },
   movements: [
     {
       label: "THE SHARED MOON", seconds: 17,

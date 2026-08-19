@@ -33,7 +33,7 @@ export default {
   /* KEY: G Phrygian (the suite's fifth), one octave down — the flat 2nd
      keeps the scream turned inward instead of resolving outward, so no
      bright: this drone stays as dark as the loss films around it. */
-  drone: { base: 49.00, steps: [1, 8, 3, -2, 5, 1] },
+  drone: { base: 49.00, steps: [0, 1, 8, 3, -2, 5, 1] },
   movements: [
     {
       label: "SILENT SCREAM", seconds: 13,

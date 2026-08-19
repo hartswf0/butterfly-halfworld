@@ -686,76 +686,11 @@
   ],
   "synthVerification": [
     {
-      "file": "wygwyl/worlds/06-resurrecting-atlantis.mjs",
-      "drone": {
-        "base": 98,
-        "steps": [
-          0,
-          2,
-          6,
-          4,
-          9,
-          12
-        ],
-        "bright": true
-      },
-      "seconds": 87,
-      "peak": 0.89,
-      "topPitchClasses": [
-        {
-          "note": "G",
-          "weight": 0.2044
-        },
-        {
-          "note": "C#",
-          "weight": 0.1124
-        },
-        {
-          "note": "B",
-          "weight": 0.1103
-        },
-        {
-          "note": "A",
-          "weight": 0.1066
-        }
-      ],
-      "krumhanslSchmuckler": {
-        "pc": "G",
-        "mode": "major",
-        "r": 0.7297
-      },
-      "partials": [
-        {
-          "hz": 195.97,
-          "note": "G3"
-        },
-        {
-          "hz": 98.57,
-          "note": "G2"
-        },
-        {
-          "hz": 138.02,
-          "note": "C#3"
-        },
-        {
-          "hz": 123.81,
-          "note": "B2"
-        },
-        {
-          "hz": 109.41,
-          "note": "A2"
-        },
-        {
-          "hz": 164.31,
-          "note": "E3"
-        }
-      ]
-    },
-    {
       "file": "wygwyl/worlds/01-out-of-life.mjs",
       "drone": {
         "base": 16.35,
         "steps": [
+          0,
           0,
           -11,
           -9,
@@ -766,51 +701,51 @@
       "droneOnly": {
         "topPitchClasses": [
           {
+            "note": "C",
+            "weight": 0.2424
+          },
+          {
             "note": "C#",
-            "weight": 0.405
+            "weight": 0.1474
           },
           {
-            "note": "F#",
-            "weight": 0.1824
+            "note": "D#",
+            "weight": 0.1442
           },
           {
-            "note": "A#",
-            "weight": 0.155
-          },
-          {
-            "note": "E",
-            "weight": 0.0715
+            "note": "D",
+            "weight": 0.0966
           }
         ],
         "krumhanslSchmuckler": {
-          "pc": "F#",
-          "mode": "major",
-          "r": 0.6896
+          "pc": "C",
+          "mode": "minor",
+          "r": 0.6687
         },
         "partials": [
           {
-            "hz": 9.14,
-            "note": "D-1"
-          },
-          {
-            "hz": 16.6,
+            "hz": 16.35,
             "note": "C0"
           },
           {
-            "hz": 32.34,
+            "hz": 32.75,
             "note": "C1"
           },
           {
-            "hz": 84.68,
-            "note": "E2"
+            "hz": 19.43,
+            "note": "D#0"
           },
           {
-            "hz": 55.87,
-            "note": "A1"
+            "hz": 17.39,
+            "note": "C#0"
           },
           {
-            "hz": 110.1,
-            "note": "A2"
+            "hz": 13.29,
+            "note": "G#-1"
+          },
+          {
+            "hz": 13.66,
+            "note": "A-1"
           }
         ]
       },
@@ -818,26 +753,26 @@
         "peak": 0.89,
         "topPitchClasses": [
           {
+            "note": "C",
+            "weight": 0.1441
+          },
+          {
             "note": "C#",
-            "weight": 0.3168
+            "weight": 0.1053
           },
           {
-            "note": "F#",
-            "weight": 0.1637
+            "note": "D#",
+            "weight": 0.0993
           },
           {
-            "note": "A#",
-            "weight": 0.1324
-          },
-          {
-            "note": "E",
-            "weight": 0.0656
+            "note": "B",
+            "weight": 0.0948
           }
         ],
         "krumhanslSchmuckler": {
-          "pc": "F#",
-          "mode": "major",
-          "r": 0.7219
+          "pc": "C",
+          "mode": "minor",
+          "r": 0.6048
         }
       }
     },
@@ -846,6 +781,7 @@
       "drone": {
         "base": 98,
         "steps": [
+          0,
           -12,
           -5,
           0,
@@ -861,50 +797,50 @@
         "topPitchClasses": [
           {
             "note": "G",
-            "weight": 0.2034
+            "weight": 0.1562
           },
           {
             "note": "D",
-            "weight": 0.1469
+            "weight": 0.1313
           },
           {
             "note": "E",
-            "weight": 0.1057
+            "weight": 0.0937
           },
           {
             "note": "A#",
-            "weight": 0.101
+            "weight": 0.0915
           }
         ],
         "krumhanslSchmuckler": {
           "pc": "G",
           "mode": "minor",
-          "r": 0.7591
+          "r": 0.783
         },
         "partials": [
           {
-            "hz": 146.5,
-            "note": "D3"
-          },
-          {
-            "hz": 49.5,
-            "note": "G1"
-          },
-          {
-            "hz": 97.77,
+            "hz": 97.99,
             "note": "G2"
           },
           {
-            "hz": 195.74,
-            "note": "G3"
+            "hz": 146.82,
+            "note": "D3"
           },
           {
-            "hz": 164.39,
+            "hz": 116.51,
+            "note": "A#2"
+          },
+          {
+            "hz": 164.77,
             "note": "E3"
           },
           {
-            "hz": 116.35,
-            "note": "A#2"
+            "hz": 73.38,
+            "note": "D2"
+          },
+          {
+            "hz": 49.08,
+            "note": "G1"
           }
         ]
       },
@@ -913,25 +849,119 @@
         "topPitchClasses": [
           {
             "note": "G",
-            "weight": 0.167
+            "weight": 0.119
           },
           {
             "note": "D",
-            "weight": 0.1311
+            "weight": 0.1134
           },
           {
             "note": "A#",
-            "weight": 0.0958
+            "weight": 0.0892
           },
           {
-            "note": "E",
-            "weight": 0.0956
+            "note": "C#",
+            "weight": 0.0854
           }
         ],
         "krumhanslSchmuckler": {
           "pc": "G",
-          "mode": "minor",
-          "r": 0.7362
+          "mode": "major",
+          "r": 0.7852
+        }
+      }
+    },
+    {
+      "file": "wygwyl/worlds/06-resurrecting-atlantis.mjs",
+      "drone": {
+        "base": 98,
+        "steps": [
+          0,
+          0,
+          2,
+          6,
+          4,
+          9,
+          12
+        ],
+        "bright": true
+      },
+      "seconds": 87,
+      "droneOnly": {
+        "topPitchClasses": [
+          {
+            "note": "G",
+            "weight": 0.1395
+          },
+          {
+            "note": "C#",
+            "weight": 0.1184
+          },
+          {
+            "note": "B",
+            "weight": 0.1083
+          },
+          {
+            "note": "A",
+            "weight": 0.0996
+          }
+        ],
+        "krumhanslSchmuckler": {
+          "pc": "G",
+          "mode": "major",
+          "r": 0.5924
+        },
+        "partials": [
+          {
+            "hz": 97.99,
+            "note": "G2"
+          },
+          {
+            "hz": 109.97,
+            "note": "A2"
+          },
+          {
+            "hz": 138.55,
+            "note": "C#3"
+          },
+          {
+            "hz": 123.53,
+            "note": "B2"
+          },
+          {
+            "hz": 164.77,
+            "note": "E3"
+          },
+          {
+            "hz": 98.68,
+            "note": "G2"
+          }
+        ]
+      },
+      "fullMix": {
+        "peak": 0.89,
+        "topPitchClasses": [
+          {
+            "note": "G",
+            "weight": 0.129
+          },
+          {
+            "note": "C",
+            "weight": 0.1173
+          },
+          {
+            "note": "C#",
+            "weight": 0.1065
+          },
+          {
+            "note": "A",
+            "weight": 0.1058
+          }
+        ],
+        "krumhanslSchmuckler": {
+          "pc": "G",
+          "mode": "major",
+          "r": 0.6429
         }
       }
     }

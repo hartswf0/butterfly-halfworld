@@ -191,7 +191,7 @@ export default {
   accent: "#5aa7ff", seed: 1212,
   /* KEY: C major (Ionian) at the suite's root — plain and warm for a
      reunion that is "less time for words, more space for laughter". */
-  drone: { base: 65.41, steps: [0, 4, -3, 7, 12], bright: true },
+  drone: { base: 65.41, steps: [0, 0, 4, -3, 7, 12], bright: true },
   movements: [
     {
       label: "HUGS WITH NO REASON", seconds: 14,
