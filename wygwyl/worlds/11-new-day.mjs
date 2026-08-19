@@ -215,6 +215,10 @@ export default {
   n: "11", slug: "11-new-day", title: "NEW DAY",
   tagline: "the temple assembles, one course at a time",
   accent: "#5aa7ff", seed: 1111,
+  /* THE FILM'S OWN PASSAGE of the suite's 24-minute score, taken from the
+     original running order. The runtime stretches this film's movements to
+     fill it, so picture and record line up without either being cut. */
+  window: [1056.659, 1168.019],
   /* KEY: G Lydian, bright — paired with 06 as the suite's brightest
      register; the temple assembles toward the octave the way the film
      assembles toward daylight. */

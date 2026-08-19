@@ -176,6 +176,10 @@ export default {
   n: "08", slug: "08-newly-single", title: "NEWLY SINGLE",
   tagline: "a soul leaves a body on a dance floor",
   accent: "#5aa7ff", seed: 808,
+  /* THE FILM'S OWN PASSAGE of the suite's 24-minute score, taken from the
+     original running order. The runtime stretches this film's movements to
+     fill it, so picture and record line up without either being cut. */
+  window: [732.136, 833.386],
   /* the bed follows the body: level through the crowd, up at the separation,
      a hard jump for the planet ("much larger... and much hotter"), down
      through the cooling, and lowest at the end — settled, not resolved */

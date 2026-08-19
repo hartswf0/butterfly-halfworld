@@ -236,6 +236,10 @@ export default {
   n: "14", slug: "14-hot-minute", title: "HOT MINUTE",
   tagline: "everything learns to be weather, then a door",
   accent: "#5aa7ff", seed: 1414,
+  /* THE FILM'S OWN PASSAGE of the suite's 24-minute score, taken from the
+     original running order. The runtime stretches this film's movements to
+     fill it, so picture and record line up without either being cut. */
+  window: [1352.982, 1440.072],
   /* low and grieving through the dissolve, bottoming out at the black, then
      climbing back up through the reel into the dance and the open door —
      the only drone motion in this film is upward, once it starts */

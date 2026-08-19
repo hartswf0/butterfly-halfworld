@@ -108,6 +108,30 @@ for (const slug of SLUGS) {
   T += rt.total;
 }
 
+/* ---------------------------------------------------------------- THE RECORD
+   There is a real 24-minute score for this suite, and each poem occupies a
+   known window of it. The films are stretched to those windows by the runtime,
+   so the correct thing here is simple and absolute: at any moment the record
+   should be at (this film's window start + how far into this film we are).
+
+   It is driven by correction rather than by seeking every frame. Setting
+   currentTime on an <audio> element restarts its decoder, and doing that sixty
+   times a second is an audible stutter; so the element runs free and is only
+   pulled back when it has drifted more than a fifth of a second. The title has
+   no window and therefore no record — it plays its own synth over silence,
+   which is the whole reason the first poem stopped playing underneath it. */
+const RECORD = new Audio("footage/unified-drones.mp3");
+RECORD.preload = "auto"; RECORD.volume = 0;
+let recordOn = false;
+function record(film, local) {
+  if (!recordOn) return;
+  const w = film.world.window;
+  if (!w) { if (!RECORD.paused) RECORD.pause(); return; }
+  const want = w[0] + local;
+  if (RECORD.paused) { RECORD.currentTime = want; RECORD.play().catch(() => {}); return; }
+  if (Math.abs(RECORD.currentTime - want) > 0.2) RECORD.currentTime = want;
+}
+
 const $ = (id) => document.getElementById(id);
 const post = makePost($("stage"), FILMS[0]?.world.accent || "#0033cc");
 const sound = makeSound(FILMS[0].world);
@@ -160,6 +184,7 @@ function frame(now) {
   const f = FILMS[fi];
   const local = t - f.start;
   post.draw(f.rt.renderField(local));
+  record(f, local);
 
   const [mi, u] = f.rt.locate(local);
   const m = f.rt.movements[mi];
@@ -201,7 +226,12 @@ $("scrub").addEventListener("input", e => { scrubbing = true; t = +e.target.valu
 $("scrub").addEventListener("change", () => { scrubbing = false; });
 $("cin").onclick = () => { document.body.classList.toggle("cinema"); fit(); };
 $("stage").ondblclick = () => { document.body.classList.toggle("cinema"); fit(); };
-$("snd").onclick = (e) => e.target.setAttribute("aria-pressed", String(sound.toggle()));
+$("snd").onclick = (e) => {
+  const on = sound.toggle();
+  recordOn = on; RECORD.volume = on ? 0.85 : 0;
+  if (!on) RECORD.pause();
+  e.target.setAttribute("aria-pressed", String(on));
+};
 addEventListener("keydown", e => {
   if (e.code === "Space") { e.preventDefault(); $("play").click(); }
   if (e.key === "ArrowRight") $("next").click();

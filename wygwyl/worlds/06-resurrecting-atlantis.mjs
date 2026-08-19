@@ -225,6 +225,10 @@ export default {
   n: "06", slug: "06-resurrecting-atlantis", title: "RESURRECTING ATLANTIS",
   tagline: "a city comes up out of the water",
   accent: "#5aa7ff", seed: 606,
+  /* THE FILM'S OWN PASSAGE of the suite's 24-minute score, taken from the
+     original running order. The runtime stretches this film's movements to
+     fill it, so picture and record line up without either being cut. */
+  window: [513.212, 623.452],
   /* higher and brighter than anything else in the suite, per the note this
      is the one utopia — and the only drone that only ever climbs */
   /* KEY: G Lydian, bright — the raised 4th is the city coming up out of the

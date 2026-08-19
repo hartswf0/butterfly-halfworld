@@ -198,6 +198,10 @@ export default {
   n: "12", slug: "12-reunion", title: "REUNION",
   tagline: "less time for words, more space for laughter",
   accent: "#5aa7ff", seed: 1212,
+  /* THE FILM'S OWN PASSAGE of the suite's 24-minute score, taken from the
+     original running order. The runtime stretches this film's movements to
+     fill it, so picture and record line up without either being cut. */
+  window: [1168.019, 1242.999],
   /* KEY: C major (Ionian) at the suite's root — plain and warm for a
      reunion that is "less time for words, more space for laughter". */
   drone: { base: 65.41, steps: [0, 0, 4, -3, 7, 12], bright: true },

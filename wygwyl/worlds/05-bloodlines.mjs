@@ -65,6 +65,10 @@ export default {
   n: "05", slug: "05-bloodlines", title: "BLOODLINES",
   tagline: "he names the stars after the people who made him",
   accent: "#5aa7ff", seed: 505,
+  /* THE FILM'S OWN PASSAGE of the suite's 24-minute score, taken from the
+     original running order. The runtime stretches this film's movements to
+     fill it, so picture and record line up without either being cut. */
+  window: [422.184, 513.214],
   /* the bed RISES with the ambition — the only drone in the suite that never
      steps back down */
   /* KEY: C major (Ionian) at the suite's root — the plainest, warmest scale

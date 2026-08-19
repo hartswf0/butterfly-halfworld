@@ -240,6 +240,10 @@ export default {
   n: "10", slug: "10-magic-ride", title: "MAGIC RIDE",
   tagline: "night replaced by morning, dot by dot",
   accent: "#5aa7ff", seed: 1010,
+  /* THE FILM'S OWN PASSAGE of the suite's 24-minute score, taken from the
+     original running order. The runtime stretches this film's movements to
+     fill it, so picture and record line up without either being cut. */
+  window: [950.937, 1056.657],
   /* KEY: C Dorian, bright — the raised 6th and the climb to the octave
      carry the film's own turn from night into "chilly morning". */
   drone: { base: 65.41, steps: [0, 0, 3, -2, 5, 9, 12], bright: true },

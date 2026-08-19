@@ -165,8 +165,10 @@ export default {
   n: "00", slug: "00-title-d", title: "WHERE YOU GO WHEN YOU LEAVE",
   tagline: "the aura — rings and cells, haunted by the fourteen",
   accent: "#5aa7ff", seed: 9004,
-  /* the mp3 IS the score for this suite; the title borrows its opening. */
-  audio: { src: "footage/unified-drones.mp3", from: 0, gain: 0.85 },
+  /* NO `audio` HERE. The title used to borrow the opening of the record, which
+     is the opening of film 01's own passage — so the first poem's music played
+     under the title and every film after it was hearing someone else's bar.
+     The record belongs to the poems; the title has its synth and its silence. */
   drone: { base: 65.41, steps: [0, 0, 7, 12, 0] },
   movements: [
     {

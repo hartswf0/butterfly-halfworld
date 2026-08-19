@@ -186,6 +186,10 @@ export default {
   n: "13", slug: "13-how-to-win-my-heart", title: "HOW TO WIN MY HEART",
   tagline: "orbits, close and counted",
   accent: "#5aa7ff", seed: 1313,
+  /* THE FILM'S OWN PASSAGE of the suite's 24-minute score, taken from the
+     original running order. The runtime stretches this film's movements to
+     fill it, so picture and record line up without either being cut. */
+  window: [1243.003, 1352.983],
   /* low and warm at the harbor, up through the count, down for the burning,
      climbing back through the harvest to the refocus, settling just above
      where it started — bittersweet, not resolved */

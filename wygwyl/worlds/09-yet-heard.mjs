@@ -185,6 +185,10 @@ export default {
   n: "09", slug: "09-yet-heard", title: "YET, HEARD",
   tagline: "three calls before leaving",
   accent: "#5aa7ff", seed: 909,
+  /* THE FILM'S OWN PASSAGE of the suite's 24-minute score, taken from the
+     original running order. The runtime stretches this film's movements to
+     fill it, so picture and record line up without either being cut. */
+  window: [833.385, 950.935],
   /* the dip belongs to the mother's call, the deepest step in the film; the
      father's call starts the climb back and the walk ends above the root —
      the one place this world is allowed to sound like relief. */

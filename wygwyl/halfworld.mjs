@@ -333,9 +333,21 @@ export function makeRuntime(world) {
       F.map((x, y, v) => (v < 3.5 && F.bayer(x, y) > u * 2.4 ? 7 : undefined));
     },
   };
+  /* THE FILM IS STRETCHED TO ITS OWN PASSAGE OF THE RECORD.
+     Each poem occupies a known window of the suite's 24-minute score, and the
+     movements were written at whatever length felt right — which left every
+     film about 40% shorter than its music. The title then played over the
+     opening of film 01's passage, and nothing after it lined up with anything.
+     So a world may declare `window: [a, b]`, and every movement is scaled by
+     one factor to fill it. One factor, not per-movement fitting: the relative
+     weight of the movements is the poem's shape and was chosen, and only the
+     tempo is being corrected. */
   const movements = [title, ...world.movements];
+  const rawTotal = movements.reduce((a, m) => a + m.seconds, 0);
+  const wantTotal = world.window ? world.window[1] - world.window[0] : rawTotal;
+  const stretch = world.window ? wantTotal / rawTotal : 1;
   const starts = []; let total = 0;
-  for (const m of movements) { starts.push(total); total += m.seconds; }
+  for (const m of movements) { m.seconds *= stretch; starts.push(total); total += m.seconds; }
 
   const bufA = new Float32Array(CELLS), bufB = new Float32Array(CELLS), bufT = new Float32Array(CELLS);
 

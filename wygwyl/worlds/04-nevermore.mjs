@@ -227,6 +227,10 @@ export default {
   n: "04", slug: "04-nevermore", title: "NEVERMORE",
   tagline: "a trail followed twice, a vow made twice",
   accent: "#5aa7ff", seed: 404,
+  /* THE FILM'S OWN PASSAGE of the suite's 24-minute score, taken from the
+     original running order. The runtime stretches this film's movements to
+     fill it, so picture and record line up without either being cut. */
+  window: [286.513, 421.782],
   /* low and slow, per the note. The two vows sit at the extremes — M2 on the
      deepest step of the film, M6 back on the root. It ends where it swore. */
   /* KEY: G Dorian, one octave down — the raised 6th is the vow's small,

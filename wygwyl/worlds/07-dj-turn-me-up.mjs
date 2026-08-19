@@ -148,6 +148,10 @@ export default {
   n: "07", slug: "07-dj-turn-me-up", title: "DJ TURN ME UP",
   tagline: "amplitude, and eleven petals",
   accent: "#5aa7ff", seed: 707,
+  /* THE FILM'S OWN PASSAGE of the suite's 24-minute score, taken from the
+     original running order. The runtime stretches this film's movements to
+     fill it, so picture and record line up without either being cut. */
+  window: [623.454, 732.134],
   /* KEY: G Dorian, bright — envelope starved to turnt up needs headroom, so
      the drone sits on the fifth and the steps climb a full octave across
      the seven movements, ending exactly where "chin high" would put it. */

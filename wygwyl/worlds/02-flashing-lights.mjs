@@ -30,6 +30,10 @@ export default {
   n: "02", slug: "02-flashing-lights", title: "FLASHING LIGHTS",
   tagline: "the scream that travels inward",
   accent: "#5aa7ff", seed: 202,
+  /* THE FILM'S OWN PASSAGE of the suite's 24-minute score, taken from the
+     original running order. The runtime stretches this film's movements to
+     fill it, so picture and record line up without either being cut. */
+  window: [122.987, 214.107],
   /* KEY: G Phrygian (the suite's fifth), one octave down — the flat 2nd
      keeps the scream turned inward instead of resolving outward, so no
      bright: this drone stays as dark as the loss films around it. */

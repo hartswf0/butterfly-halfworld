@@ -50,6 +50,10 @@ export default {
   n: "03", slug: "03-how-to-break-off-an-engagement", title: "HOW TO BREAK OFF AN ENGAGEMENT",
   tagline: "the storm takes everything that was ever called goods",
   accent: "#5aa7ff", seed: 303,
+  /* THE FILM'S OWN PASSAGE of the suite's 24-minute score, taken from the
+     original running order. The runtime stretches this film's movements to
+     fill it, so picture and record line up without either being cut. */
+  window: [214.108, 286.508],
   /* KEY: G Aeolian, two octaves down — natural minor for a heartbreak that
      is sad rather than violent, and low because 03 is one of the three
      darkest films in the suite (with 01 and 09). */

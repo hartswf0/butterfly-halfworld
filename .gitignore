@@ -24,3 +24,6 @@ renders/wygwyl/*.png
 renders/wygwyl/dj-*.png
 renders/wygwyl/_*.png
 renders/wygwyl/_clip/
+
+# agent worktrees are their own repositories
+.claude/worktrees/
