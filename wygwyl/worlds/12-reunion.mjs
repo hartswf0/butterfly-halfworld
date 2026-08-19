@@ -118,15 +118,69 @@ function hourglass(F, u, cx, cy, w, h, seedK, l, withEmber) {
    picks the direction: false grows a word out of paper, true erodes one back
    into it. Boxed tight to the glyph's own footprint so nothing else at this
    ink level nearby gets caught in the sweep. */
-function typeset(F, text, cx, cy, ph, l, amt, leaving) {
+/* A WORD ARRIVES OR LEAVES on the ordered schedule, never a cross-fade — but
+   ONLY ACROSS A SHORT WINDOW (t0..t1 typically 12-18% of the movement).
+   Rejected: running the dissolve across most of the movement's length, which
+   was the first draft of this file — a word that is half-scattered dots for
+   forty percent of its screen time is not a word for forty percent of its
+   screen time, it is noise, and this is the one film in the suite where the
+   type has to survive being looked at. Outside [t0,t1] the glyph is either
+   whole or absent; it is never partial for long. */
+function typeset(F, text, cx, cy, ph, l, u, t0, t1, leaving) {
+  const amt = leaving ? 1 - ss(t0, t1, u) : ss(t0, t1, u);
+  if (amt <= 0.002) return;
   const w = F.wordW(text, ph), hgt = Math.ceil(ph * 1.6) + 2;
   F.word(text, cx, cy, ph, l, true);
+  if (amt >= 0.998) return;                    // fully arrived: draw whole, skip the sweep
   const x0 = cx - w / 2 - 2, x1 = cx + w / 2 + 2, y0 = cy - hgt / 2, y1 = cy + hgt / 2;
   F.map((x, y, v) => {
     if (v !== l || x < x0 || x > x1 || y < y0 || y > y1) return;
-    const gone = F.bayer(x, y) < amt;
-    return leaving ? (gone ? 0 : l) : (gone ? l : 0);
+    return F.bayer(x, y) < amt ? l : 0;
   });
+}
+
+/* WORDS DOES NOT ERODE, IT SHRINKS: the same complete glyph redrawn smaller
+   every frame, which is legible at every single size right up until it is
+   gone, and only "gone" is allowed to be a dissolve — a short one, at the
+   very end, never the whole shrink. Rejected: eroding the glyph dot by dot
+   as it also got smaller, which is what the size number in the line
+   actually became on screen, but which is unreadable while it is happening;
+   the line asks for less time for words, not for words that fall apart. */
+function shrinkAway(F, text, cx, cy, ph0, ph1, l, u, shrinkEnd, goneBy) {
+  if (u >= goneBy) return;
+  if (u < shrinkEnd) {
+    const ph = lerp(ph0, ph1, smooth(u / shrinkEnd));
+    F.word(text, cx, cy, ph, l, true);
+    return;
+  }
+  const amt = ss(shrinkEnd, goneBy, u);
+  const w = F.wordW(text, ph1), hgt = Math.ceil(ph1 * 1.6) + 2;
+  F.word(text, cx, cy, ph1, l, true);
+  const x0 = cx - w / 2 - 2, x1 = cx + w / 2 + 2, y0 = cy - hgt / 2, y1 = cy + hgt / 2;
+  F.map((x, y, v) => {
+    if (v !== l || x < x0 || x > x1 || y < y0 || y > y1) return;
+    return F.bayer(x, y) < amt ? 0 : l;
+  });
+}
+
+/* LAUGHTER's mirror: a short arrival, whole from the moment it lands, and
+   then it is given the room WORDS just gave up — it grows, never erodes,
+   for the rest of the movement. */
+function growIn(F, text, cx, cy, ph0, ph1, l, u, arriveStart, arriveEnd) {
+  if (u < arriveStart) return;
+  if (u < arriveEnd) {
+    const amt = ss(arriveStart, arriveEnd, u);
+    const w = F.wordW(text, ph0), hgt = Math.ceil(ph0 * 1.6) + 2;
+    F.word(text, cx, cy, ph0, l, true);
+    const x0 = cx - w / 2 - 2, x1 = cx + w / 2 + 2, y0 = cy - hgt / 2, y1 = cy + hgt / 2;
+    F.map((x, y, v) => {
+      if (v !== l || x < x0 || x > x1 || y < y0 || y > y1) return;
+      return F.bayer(x, y) < amt ? l : 0;
+    });
+    return;
+  }
+  const ph = lerp(ph0, ph1, smooth((u - arriveEnd) / (1 - arriveEnd)));
+  F.word(text, cx, cy, ph, l, true);
 }
 
 export default {
@@ -177,11 +231,12 @@ export default {
         ground(F, 6, 1.4);
         brothers(F, lerp(28, 52, smooth(u)), 27,
           { arms: "up" }, { arms: "up" }, 6, 1, u);
-        /* WORDS empties out of the frame as the line spends itself; LAUGHTER
-           grows into the room it leaves — the same per-dot allegiance swap
-           as every other dissolve in the suite, run once in each direction */
-        typeset(F, "WORDS", 40, 18, 9, 7, smooth(u), true);
-        typeset(F, "LAUGHTER", 150, 18, 9, 7, smooth(u * 0.9), false);
+        /* WORDS shrinks, whole at every size, then goes in one short beat;
+           LAUGHTER lands in one short beat and then grows into the room
+           WORDS gave up. Neither is ever a half-formed scatter for long —
+           see shrinkAway / growIn for why that draft was rejected. */
+        shrinkAway(F, "WORDS", 40, 18, 11, 8, 7, u, 0.55, 0.70);
+        growIn(F, "LAUGHTER", 150, 18, 9, 11, 7, u, 0.18, 0.34);
         /* THE ROOM ITSELF, MADE VISIBLE: a nearly-empty frame is still a
            frame, not a void, so the open air gets a few grains of its own —
            sparse enough to read as daylight and not as texture. Held under

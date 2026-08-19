@@ -295,36 +295,47 @@ export default {
         { at: 0.70, f: 220, decay: 0.60, gain: 0.40, partials: [1, 2.0, 3.0], noise: 0.3, nDecay: 0.10, seed: 1333 },
       ],
       draw(u, F) {
-        /* TWO ROWS, NOT ONE — a single row of flowers at one height left
-           three-quarters of the frame blank once the harvest passed
-           through it, which read as an empty field rather than a full
-           one. A back row (smaller, higher) and a front row (bigger,
-           lower) fill the same depth a real bed of flowers would. */
-        const FIELD = [];
-        for (let i = 0; i < 8; i++) FIELD.push({ x: 10 + i * 23.5, y: 104 + (F.noise(i, 3) - 0.5) * 5, s: 2.3, poppy: i % 2 === 0 });
-        for (let i = 0; i < 8; i++) FIELD.push({ x: 22 + i * 23.5, y: 132 + (F.noise(i, 9) - 0.5) * 5, s: 3.6, poppy: i % 2 === 1 });
-        F.line(0, 137, 70, 138, 4, 1); F.line(82, 138, 140, 137, 4, 1); F.line(152, 137, 192, 138, 4, 1);
-        /* the sweep runs right to left across the first half of the
-           movement, and freezes there — the harvester does not keep
-           walking while becoming something else */
+        /* AN ABUNDANCE THAT DOES NOT EMPTY. The first pass had the sweep
+           erase every flower it passed, and by the second half of the
+           movement the field was bare and the frame was 98% paper — one
+           harvester cannot be "instead of" a whole meadow if the meadow
+           is gone. So the meadow (three rows, eighteen heads, the back
+           row's stems reaching well past the mid-line) is drawn every
+           frame and never removed; what the sweep actually harvests is a
+           handful of taller, separate stalks in front of it. Abundance
+           stays on screen the entire movement; the harvesting is still a
+           real, visible subtraction, just not of the whole picture. */
+        for (let i = 0; i < 7; i++) poppy(F, 10 + i * 26 + (F.noise(i, 3) - 0.5) * 8, 140, 4.0, 5);
+        for (let i = 0; i < 6; i++) blossom(F, 24 + i * 29 + (F.noise(i, 9) - 0.5) * 8, 128, 3.0, 5);
+        for (let i = 0; i < 5; i++) poppy(F, 18 + i * 36 + (F.noise(i, 15) - 0.5) * 10, 114, 2.2, 4);
+        F.line(0, 141, 70, 142, 4, 1); F.line(82, 142, 140, 141, 4, 1); F.line(152, 141, 192, 142, 4, 1);
+        /* the harvest targets: six tall stalks, stems long enough to
+           clear the mid-line, plucked one at a time as the sweep passes */
+        const targets = [20, 52, 84, 112, 144, 174].map((x, i) => ({ x, top: 50 + (F.noise(i, 21) - 0.5) * 14, poppy: i % 2 === 0 }));
         const sweepT = clamp01(u / 0.55);
-        const sweepX = lerp(184, 30, smooth(sweepT));
-        for (const fl of FIELD) { if (fl.x > sweepX) continue; fl.poppy ? poppy(F, fl.x, fl.y, fl.s, 5) : blossom(F, fl.x, fl.y, fl.s, 5); }
-        const harvested = FIELD.filter((fl) => fl.x > sweepX);
+        const sweepX = lerp(188, 6, smooth(sweepT));
+        for (const t of targets) {
+          if (t.x <= sweepX) continue;
+          F.line(t.x, 140, t.x, t.top, 6, 1.2);
+          t.poppy ? (F.disc(t.x, t.top, 3.2, 6), F.disc(t.x, t.top, 1.1, 7))
+                  : [0, 1, 2, 3, 4].forEach((k) => F.line(t.x, t.top, t.x + Math.cos(k / 5 * TAU) * 3.2, t.top + Math.sin(k / 5 * TAU) * 3.2, 6, 1));
+        }
+        const held = targets.filter((t) => t.x <= sweepX);
         if (u < 0.58) {
-          F.fig(sweepX, 128, 32, { mode: "walk", phase: u * 7, face: -1, arms: "reach" }, 7);
-          harvested.forEach((fl, i) => { const c = i % 5, r = (i / 5) | 0; const bx = sweepX + 8 + c * 3.4, by = 92 - r * 4;
-            fl.poppy ? poppy(F, bx, by, 1.5, 6) : blossom(F, bx, by, 1.6, 6); });
+          F.fig(sweepX, 128, 38, { mode: "walk", phase: u * 7, face: -1, arms: "reach" }, 7);
+          held.forEach((t, i) => { const c = i % 6, r = (i / 6) | 0; const bx = sweepX + 9 + c * 3.2, by = 92 - r * 4;
+            t.poppy ? poppy(F, bx, by, 1.4, 6) : blossom(F, bx, by, 1.5, 6); });
         } else {
-          /* BECOMING: the harvester settles near centre, then grows stems
-             out of the shoulders and hips where the arms and legs were —
-             see stemFigure for why the torso stays and the limbs don't */
-          const settle = ss(0.55, 0.70, u), growth = ss(0.55, 0.90, u);
-          const px = lerp(30, 96, settle);
-          stemFigure(F, px, 128, 46, growth, 7);
-          const remain = harvested.slice(0, Math.round(harvested.length * (1 - growth)));
-          remain.forEach((fl, i) => { const c = i % 5, r = (i / 5) | 0; const bx = px + 9 + c * 3.4, by = 96 - r * 4;
-            fl.poppy ? poppy(F, bx, by, 1.5, 6) : blossom(F, bx, by, 1.6, 6); });
+          /* BECOMING: the harvester settles centre-frame and grows large —
+             the substitution of limb for stem only reads at a size where
+             an arm and a flowering stem are both clearly legible. See
+             stemFigure for why the torso stays and only the limbs turn. */
+          const settle = ss(0.55, 0.72, u), growth = ss(0.55, 0.92, u);
+          const px = lerp(6, 96, settle);
+          stemFigure(F, px, 122, 64, growth, 7);
+          const remain = held.slice(0, Math.round(held.length * (1 - growth)));
+          remain.forEach((t, i) => { const c = i % 6, r = (i / 6) | 0; const bx = px + 11 + c * 3.2, by = 86 - r * 4;
+            t.poppy ? poppy(F, bx, by, 1.4, 6) : blossom(F, bx, by, 1.5, 6); });
         }
       },
     },
