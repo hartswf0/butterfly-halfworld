@@ -227,6 +227,31 @@ nobody trusts. Press **SOUND** in any film.
 
 ---
 
+## THE FILM IS AN OUTPUT, NOT A FILE
+
+```bash
+node wygwyl/render-film.mjs             # the whole suite  → film/WYGWYL.mp4
+node wygwyl/render-film.mjs 07          # one film
+node wygwyl/render-film.mjs --silent    # picture only
+```
+
+The pages are the work. This exists for people who do not have a browser open, and it is
+built from the same modules the pages run — frames come out of the page itself, through
+the same engine, the same halftone pass and the same canvas a viewer sees, with the chrome
+hidden because a film that carries its own transport controls is a screen recording.
+
+The score is the one place with two implementations, and it is worth saying why that is
+allowed. The browser plays it through WebAudio; the renderer writes it as samples. What is
+shared is the part that matters — `drone` and `cues` in the world modules **are** the
+score, neither realisation invents a note, and a world module stays the only place a sound
+can be changed. Only the plumbing differs.
+
+Frames are piped into ffmpeg rather than written out. Fourteen films at 12fps is about
+14,000 PNGs, and staging 700MB of them on disk to hand straight to an encoder is work
+nobody asked for; the pipe also runs the encode while Chromium is still rendering.
+
+---
+
 ## RUNNING AND EXTENDING
 
 ```bash
