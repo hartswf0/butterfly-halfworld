@@ -253,10 +253,10 @@ export default {
            he was six, she is seven, and the difference between the living and
            the dead is one notch he has not reached. They are cut to PAPER, so
            the room can go as dark as it likes and the years stay legible. */
-        const PX = 34, YEAR = 7.7;
+        const PX = 36, YEAR = 7.7;
         for (let k = 1; k <= 7; k++) {
           if (u < 0.04 + k * 0.096) break;
-          const y = GY - k * YEAR, w = 12 + F.noise(k, 9) * 5;
+          const y = GY - k * YEAR, w = 13 + F.noise(k, 9) * 5;
           const kink = F.noise(k, 4) > 0.5 ? 1 : 0;            // cut by a hand, not a rule
           F.line(PX - w, y + kink, PX, y, 0, 1, true);
           F.line(PX - w, y + 1 + kink, PX, y + 1, 0, 1, true);
@@ -288,13 +288,16 @@ export default {
            nothing is holding her up against her own weight any more. */
         const here = ss(0.24, 0.52, u);
         if (here > 0.01) {
-          F.fig(50, GY, 8 * YEAR, {
+          /* SEVEN YEARS TALL, TO THE CELL. Her crown lands on the seventh
+             notch and his lands on the sixth, so the year between them is a
+             distance on a wall and not an assertion. */
+          F.fig(44, GY, 7 * YEAR, {
             mode: "stand", arms: "down", guise: "child", breath: 0,
             weight: 0.5, face: 1, headTurn: 0.3,
           }, 7);
           F.map((x, y, v) => {
-            if (x < 36 || x > 64 || y < GY - 66 || y > GY + 2) return;
-            if (v === 7 && F.bayer(x, y) > here * 0.80) return 2;
+            if (x < 28 || x > 60 || y < GY - 60 || y > GY + 2) return;
+            if (v === 7 && F.bayer(x, y) > here * (0.60 + 0.08 * Math.sin(u * TAU * 2.2))) return 2;
           });
         }
         /* THE ROOM GOES OUT WITH THE LIGHT, from the corners toward the
@@ -313,7 +316,7 @@ export default {
            that is not coming, and turns and crosses to the post */
         const cross = ss(0.30, 0.64, u);
         const going = cross > 0.03 && cross < 0.97;
-        F.fig(lerp(WCX - 8, 76, cross), GY, 6 * YEAR, {
+        F.fig(lerp(170, 70, cross), GY, 6 * YEAR, {
           mode: going ? "walk" : "stand", face: cross > 0.03 ? -1 : 1,
           guise: "child", phase: going ? u * 8.35 : u * 1.7,
           weight: 0.32, crouch: 0.05,

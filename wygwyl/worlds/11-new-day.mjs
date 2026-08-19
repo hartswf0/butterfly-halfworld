@@ -302,9 +302,11 @@ export default {
           const cy = 92 + Math.sin(u * TAU * 0.3 + k * 1.3) * 5;
           /* a lens, not a disc: two stacked circles read as eggs lying in the
              field, and air lies along the ground in a streak */
-          for (let dx = -10; dx <= 10; dx++) {
-            const h = 2.3 * (1 - (dx / 10) * (dx / 10));
-            for (let dy = -h; dy <= h; dy++) F.put(Math.round(cx + dx), Math.round(cy + dy), 0);
+          for (let dx = -15; dx <= 15; dx++) {
+            const h = 2.0 * (1 - (dx / 15) * (dx / 15)) + 0.6;
+            for (let dy = -h; dy <= h; dy++)
+              if (F.bayer(cx + dx, cy + dy) < 1.35 * (1 - Math.abs(dy) / h))
+                F.put(Math.round(cx + dx), Math.round(cy + dy), 0);
           }
         }
         groundTexture(F, T_GY, 140, 201, 5);
@@ -317,8 +319,8 @@ export default {
            crossing and a cut from open to up on the cue beat is the whole
            performance it can give — and a cut on a struck note is honest here
            the way 10's walk-to-ride cut is: a beat, not a blend. */
-        const walk = clamp01((u - 0.04) / 0.44);
-        F.fig(lerp(-8, 24, smooth(walk)), T_GY, 14,
+        const walk = clamp01((u - 0.06) / 0.50);
+        F.fig(lerp(-22, 26, smooth(walk)), T_GY, 14,
           { mode: walk < 1 ? "walk" : "stand", phase: u * 6.35 + 0.15, face: 1,
             arms: walk < 1 ? "swing" : (win(u, 0.72, 0.78, 0.84, 0.92) > 0.5 ? "up" : "open") }, 6);
         F.fig(174, T_GY, 13, { mode: "stand", face: -1,
@@ -334,15 +336,45 @@ export default {
         { at: 0.85, f: 1200, decay: 0.12, gain: 0.4, partials: [1, 2.7, 4.3], noise: 0.8, nDecay: 0.02, seed: 32 },
       ],
       draw(u, F) {
-        sunDisc(F, 158, 30, 9, 0.7 + 0.3 * smooth(u), 6);
-        F.line(0, 26, 60, 25, 2, 1); F.line(72, 25, 122, 26, 2, 1); F.line(134, 26, 192, 25, 2, 1);
-        groundTexture(F, T_GY, 140, 301);
-        dewWinks(F, u, 132);
+        const glory = smooth(u);
+        const SX = 158, SY = 30, RAYS = 11;
+        /* VIBRANT SUN RAYS OF GLORY. A shaft of light cannot be drawn as ink
+           on cream, because in this world light IS the paper — so the AIR is
+           given a tone and the rays are cut out of it: eleven wedges opening
+           from the disc and lengthening until the field is more light than
+           air. The wedges turn a tenth of a radian in eighteen seconds, which
+           is under a cell a second at the frame's edge — enough that the light
+           is alive, not enough to be a thing that spins.
+           Rejected: the eight ink sticks that used to come off the disc. They
+           are what a sun looks like in a pictogram, they were nine cells long,
+           and lengthening them by four was this movement's only event. */
+        F.map((x, y) => {
+          const dx = x - SX, dy = y - SY;
+          const d = Math.hypot(dx, dy);
+          let p = (Math.atan2(dy, dx) + glory * 0.10) * RAYS / TAU;
+          p -= Math.floor(p);
+          const w = Math.abs(p - 0.5) * 2;                  // 1 on a ray's axis
+          const reach = lerp(16, 300, glory) * (0.42 + w * 1.05);
+          if (d < reach) return;
+          if (d < reach + 20 && F.bayer(x, y) < (reach + 20 - d) / 20) return;
+          return F.noise(x, y) > 0.93 ? 2 : 1;
+        });
+        /* the same hills as the movement before it, because it is the same
+           morning and the same valley — held at 4 so the tone the rays are
+           cutting stays the subject */
+        hillsRidge(F, 46, 10, 4);
+        sunDisc(F, SX, SY, 10, 0, 6);
+        groundTexture(F, T_GY, 140, 301, 5);
+        /* the dews only wink where the light has actually landed on them,
+           which is the line's own causal claim about morning and luck */
+        if (glory > 0.22) dewWinks(F, u, 132);
         temple(F, 9 + u * 9, 7);
-        F.fig(18, T_GY, 13, { mode: "walk", phase: u * 4 + 0.15, face: 1 }, 6);
-        /* the reaching figure sways into the reach rather than holding it
-           frozen — a small rot doing the job weight/lean can't at this size */
-        F.fig(170, T_GY, 13, { mode: "stand", arms: "reach", face: -1,
+        /* one of them walks the length of the platform with the beams; the
+           other is at the far end taking them */
+        const walk = clamp01((u - 0.02) / 0.72);
+        F.fig(lerp(-18, 66, smooth(walk)), T_GY, 13,
+          { mode: walk < 1 ? "walk" : "stand", phase: u * 8.35 + 0.15, face: 1 }, 6);
+        F.fig(172, T_GY, 13, { mode: "stand", arms: "reach", face: -1,
           rot: 0.10 + Math.sin(u * TAU * 0.8) * 0.06 }, 6);
       },
     },
@@ -392,42 +424,63 @@ export default {
         { at: 0.82, f: 170, decay: 0.15, gain: 0.35, partials: [1, 1.8], noise: 0.5, nDecay: 0.05, seed: 53 },
       ],
       draw(u, F) {
-        F.disc(150, 18, 5, 2);
-        for (let k = 0; k < 4; k++) F.disc(30 + k * 22, 14 + F.noise(k, 4) * 6, 2.4, 1);
-        /* DEEP BREATHS: the water's own stillness rises and falls on one
-           slow sine of u — a number that breathes, not a caption that
-           says so. THE MIRACLE IS ALSO A NUMBER: amplitude is multiplied
-           by (1-near), which goes to zero within 26 cells of his feet, so
-           the surface is flat exactly under him and nowhere else. Rejected:
-           parting the water or drawing footprints on it — both make the
-           water react to him, and the line's claim is that it doesn't. */
+        /* THE LINE SAYS WALK, so he walks — the whole width, once, without
+           stopping. What was here was a standing body slid sideways between
+           three marks over seventeen seconds: a man on castors, on a sea
+           drawn as ten dotted rules on cream. A man standing on a diagram is
+           not walking on water.
+
+           SO THE SEA IS A FIELD. It is a tone that deepens toward the viewer,
+           the crests are drawn into it rather than being all there is of it,
+           and THE MIRACLE IS A HOLE: within about thirty cells of him the
+           swell's amplitude goes to zero AND the surface goes to paper, so
+           the stillness he is standing on is a pool of light that travels
+           with him and exists nowhere else. Rejected: parting the water, or
+           footprints — both make the water react to him, and the line's claim
+           is that it doesn't. */
+        const SEA = 52, FY = 112;
+        F.disc(150, 18, 5, 4);
+        for (let k = 0; k < 4; k++) F.disc(30 + k * 22, 14 + F.noise(k, 4) * 6, 2.6, 2);
+        /* DEEP BREATHS: the stillness itself rises and falls on one slow sine
+           of u — a number that breathes, not a caption saying so. It sets both
+           how flat the sea is and how far the flatness reaches, so the breath
+           is one fact with two visible consequences. */
         const breath = 0.72 + 0.24 * Math.sin(u * TAU * 0.55);
-        const POS = [26, 96, 166];
-        const a = ss(0.15, 0.35, u), b = ss(0.58, 0.78, u);
-        const px = lerp(lerp(POS[0], POS[1], a), POS[2], b);
-        const y0 = 50, y1 = 136, rows = 10;
+        const px = lerp(20, 172, u);
+        F.map((x, y) => {
+          if (y < SEA) return;
+          const near = clamp01(1 - Math.hypot((x - px) / (38 * breath + 10), (y - FY) / (28 * breath + 8)));
+          if (near > 0 && F.bayer(x, y) < near * 2.4) return 0;
+          const t = (y - SEA) / (F.H - SEA);
+          /* the horizon is not a ruled seam: the tone arrives on the ordered
+             schedule over the first few rows, which is also what distance
+             does to a surface */
+          if (t < 0.09 && F.bayer(x, y) > t / 0.09) return;
+          return t > 0.58 ? 3 : 2;
+        });
+        const rows = 10, y0 = 56, y1 = 140;
         for (let k = 0; k < rows; k++) {
           const t = k / (rows - 1), y = lerp(y0, y1, t);
           const ampBase = 2.6 * (1 - breath * 0.7) * (0.4 + t * 0.8);
           const gA = (F.noise(k, 41) * 180) | 0, gB = (F.noise(k, 53) * 180) | 0;
           for (let x = 0; x < F.W; x++) {
             if ((x > gA && x < gA + 16) || (x > gB && x < gB + 12)) continue;
-            const near = clamp01(1 - Math.abs(x - px) / 26);
+            const near = clamp01(1 - Math.abs(x - px) / (38 * breath + 10));
+            if (near > 0.52) continue;                  // flat, and lit, under him
             const amp = ampBase * (1 - near);
             const yy = y + Math.sin(x * 0.085 + u * TAU * 0.35 + k * 1.2) * amp;
-            F.ink(x, Math.round(yy), 4);
+            F.ink(x, Math.round(yy), 5);
           }
         }
-        /* DEEP BREATHS, MADE VISIBLE: a standing figure with no phase holds
-           its breath for the whole shot, which is exactly wrong for a line
-           that names breathing — so phase drives it here and `breath` is
-           pushed past its quiet default to make the rise and fall an
-           actual, visible act rather than a deniable one. Weight settles
-           rather than drifts: he is not shifting his feet, he is standing
-           on water on purpose, and a body that is sure of its footing
-           holds one hip and stays there. */
-        F.fig(px, lerp(y0, y1, 0.75), 26, { mode: "stand", arms: "open",
-          phase: u * 1.7, breath: 1.6, weight: 0.38, headTilt: 0.15 }, 7);
+        /* the stride is matched to the crossing: a hundred and fifty-two
+           cells at 0.4h a step is six and a bit strides, so his feet land
+           where he actually is instead of skating. And 6.35 rather than 6 —
+           an integer rate puts both feet at the same offset at u=0.5 and the
+           body collapses into one vertical stroke. */
+        F.fig(px, FY, 30, {
+          mode: "walk", phase: u * 6.35 + 0.15, face: 1, guise: "poet",
+          arms: "swing", breath: 1.6, headTurn: 0.2,
+        }, 7);
       },
     },
     {
@@ -439,27 +492,93 @@ export default {
         { at: 0.85, f: 1320, decay: 0.9, gain: 0.3, partials: [1, 2, 3], noise: 0.4, nDecay: 0.15, seed: 63 },
       ],
       draw(u, F) {
-        /* the same hills as M1, unmoved — the world is at peace again, and
-           it is the SAME peace, not a new one drawn to match */
-        hillsRidge(F, 58, 16, 3);
-        sunDisc(F, 158, 24, 10, 1, 6);
-        groundTexture(F, T_GY, 140, 601);
+        /* A NEW DAY IS A CHANGE OF LIGHT OVER TIME, and it is the only thing
+           in this suite that unambiguously is one — so the film's last
+           movement is that change and nothing else. It used to be a finished
+           building under a finished sun, held without a cell moving for
+           eighteen seconds: the most complete picture in the film and the
+           worst still in the suite, and it was the last thing the film did.
+
+           It opens in the blue hour. The valley is under the hills' own
+           shadow, the temple is a black shape standing in it, the sun is
+           still under the ridge and there are stars. Nothing is revealed:
+           the night is REPLACED, cell by cell on the ordered schedule, and
+           the edge doing the replacing is the terminator running west across
+           the floor as the sun comes up. Rejected: raising the whole field on
+           a ramp, which is a gradient in time — a dimmer being turned up,
+           not a sunrise. */
+        const HY = 58, AMP = 16;
+        const rise = smooth(clamp01((u - 0.04) / 0.78));
+        const SX = 158, SY = lerp(78, 22, rise);
+        const term = lerp(250, -90, rise);
+        const bright = lerp(8, 470, rise);
+        /* the building's own shadow, thrown west off the platform while the
+           sun is low and drawn in as it climbs — the one piece of the dark
+           that belongs to the temple rather than to the hills */
+        const shade = lerp(148, 5, rise);
+        F.map((x, y) => {
+          const ry = ridgeYAt(x, HY, AMP);
+          if (y < ry) {
+            const d = Math.hypot((x - SX) * 0.72, y - SY);
+            return d < bright * 0.34 ? 0 : d < bright * 0.62 ? 1 : d < bright ? 2 : 3;
+          }
+          const dark = (y - ry) > 46 ? 4 : 3;
+          if (y > 114 && x < 31 && x > 31 - shade) return dark;
+          const lit = (x + (F.n2(x * 0.05, 7) - 0.5) * 10) - term;
+          if (lit <= 0) return dark;
+          if (F.bayer(x, y) < clamp01(lit / 22)) return F.noise(x, y) > 0.90 ? 1 : 0;
+          return dark;
+        });
+        /* the stars go out one at a time, each on its own hour, so the sky
+           empties raggedly the way it does. They are holes: a star on a night
+           at level 3 cannot be ink, and light in this world is paper. */
+        const S = F.rng(77);
+        for (let k = 0; k < 16; k++) {
+          const sx = 6 + S() * 180, sy = 4 + S() * 34, when = 0.08 + S() * 0.44;
+          if (rise <= when) F.disc(sx, sy, 1.4, 0, true);
+        }
+        /* THE SUN COMES UP OUT OF THE HILLS, so it is drawn only where it has
+           cleared them. The ridge is opaque to it, which is the whole reason
+           there is a moment when it arrives rather than a disc that was
+           always in the frame getting higher. */
+        for (let dy = -10; dy <= 10; dy++) for (let dx = -10; dx <= 10; dx++) {
+          if (dx * dx + dy * dy > 100) continue;
+          const x = Math.round(SX + dx), y = Math.round(SY + dy);
+          if (y < ridgeYAt(x, HY, AMP)) F.ink(x, y, 6);
+        }
+        if (rise > 0.58) {
+          const g = ss(0.58, 0.96, rise) * 11;
+          for (let k = 0; k < 8; k++) {
+            const a = k / 8 * TAU + 0.2;
+            lineD(F, SX + Math.cos(a) * 12.5, SY + Math.sin(a) * 12.5,
+                     SX + Math.cos(a) * (12.5 + g), SY + Math.sin(a) * (12.5 + g), 1, 4);
+          }
+        }
+        /* the same hills as M1, unmoved — the world is at peace again, and it
+           is the SAME peace, not a new one drawn to match */
+        hillsRidge(F, HY, AMP, 6);
+        groundTexture(F, T_GY, 140, 601, 5);
         /* THE FINIAL ARRIVES EARLY AND HOLDS: catharsis is the arrival,
-           welcome is everything after it. progress caps at 19.4 by u≈0.4,
-           so the back 60% of the movement is the completed building, not
-           the completing of it. */
+           welcome is everything after it. progress caps at 19.4 by u≈0.4, so
+           the back 60% of the movement is the completed building standing in
+           a light that is still changing around it. */
         temple(F, 18 + ss(0, 0.4, u) * 1.4, 7);
-        /* WELCOME: two figures flanking, arms open — placed OUTSIDE the
-           platform's own footprint (it spans cx±65). The first pass put
-           them at the base between the columns and the platform, drawn
-           after them, simply buried them; a welcome nobody can see is not
-           a welcome. */
-        /* welcome as a small, gentle sway rather than a frozen shrug — the
-           two lean IN toward the temple, out of phase with each other, so
-           the welcome reads as two people gesturing and not one pose
-           mirrored twice */
-        F.fig(14, T_GY, 13, { mode: "stand", arms: "open", rot: 0.08 + Math.sin(u * TAU * 0.5) * 0.08 }, 6);
-        F.fig(178, T_GY, 13, { mode: "stand", arms: "open", face: -1, rot: -0.08 - Math.sin(u * TAU * 0.5 + 1.4) * 0.08 }, 6);
+        /* WELCOME: two of them, and they ARRIVE — walking in from the frame's
+           own edges to stand clear of the platform's footprint (it spans
+           cx±65). The first pass put them at the base between the columns and
+           the platform, drawn after them, and simply buried them; a welcome
+           nobody can see is not a welcome. The one in the east comes in first
+           and raises his arms first, because that is the order the light
+           reaches them in. */
+        const ea = ss(0.08, 0.44, u), we = ss(0.24, 0.64, u);
+        F.fig(lerp(208, 178, ea), T_GY, 13, {
+          mode: ea < 1 ? "walk" : "stand", phase: u * 7.35 + 0.15, face: -1,
+          arms: ea < 1 ? "swing" : (u > 0.52 ? "up" : "open"),
+        }, 6);
+        F.fig(lerp(-16, 14, we), T_GY, 13, {
+          mode: we < 1 ? "walk" : "stand", phase: u * 7.35 + 0.42, face: 1,
+          arms: we < 1 ? "swing" : (u > 0.72 ? "up" : "open"),
+        }, 6);
       },
     },
   ],

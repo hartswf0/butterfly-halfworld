@@ -65,9 +65,12 @@ function web(F, cx, cy, r, k, grow, anchors) {
   const N = 9;
   const R = F.rng(40 + k), th = [];
   for (let j = 0; j < N; j++) th.push(j / N * TAU + (R() - 0.5) * 0.30);
-  /* the bridge threads first: they are what the web hangs from, and a web
-     hanging from nothing is a snowflake */
-  for (const a of anchors) F.line(cx, cy, a[0], a[1], 3, 1);
+  /* the bridge threads first — a web hanging from nothing is a snowflake.
+     They are given as ANGLES and land just outside the spiral: run to the
+     corners of the frame instead and three webs put nine long rays across the
+     picture, which is a starburst and not a temple with webs in it. */
+  for (const a of anchors)
+    F.line(cx, cy, cx + Math.cos(a) * r * 1.30, cy + Math.sin(a) * r * 1.30, 2, 1);
   const rad = clamp01((grow - 0.06) / 0.34), spi = clamp01((grow - 0.34) / 0.66);
   const shown = Math.floor(rad * N + 1e-6);
   for (let j = 0; j < shown; j++)
@@ -171,9 +174,9 @@ export default {
         /* THE WEBS ARE BUILT. Three of them, started at different moments, so
            the room is at three ages of the same decay at once. Each hangs off
            the architecture it is eating. */
-        web(F, 30, 42, 34, 1, clamp01(u / 0.80), [[2, 8], [66, 12], [8, 96]]);
-        web(F, 162, 54, 26, 2, clamp01((u - 0.18) / 0.72), [[190, 10], [130, 20], [186, 108]]);
-        web(F, 128, 100, 17, 3, clamp01((u - 0.42) / 0.54), [[110, 76], [152, 84], [140, 132]]);
+        web(F, 30, 42, 34, 1, clamp01(u / 0.80), [-2.4, -0.6, 1.5]);
+        web(F, 162, 54, 26, 2, clamp01((u - 0.18) / 0.72), [-2.0, -0.7, 1.9]);
+        web(F, 128, 100, 17, 3, clamp01((u - 0.42) / 0.54), [-2.5, -1.0, 1.2]);
         /* the side doors, and what the spirits left outside them: boxes with
            the light still in them, which is the only paper left in the frame */
         for (const [dx, s] of [[0, 1], [180, -1]]) {
@@ -240,7 +243,7 @@ export default {
            western edge, and it is handed back to the paper dot by dot as it
            goes east. A sky that dims is a fade and this world has none; a sky
            that LEAVES is a storm ending. */
-        const clear = -0.17 + ss(0.02, 0.90, u) * 1.22;
+        const clear = -0.17 + ss(0.02, 0.90, u) * 1.10;
         for (let y = 0; y < SH; y++) for (let x = 0; x < F.W; x++) {
           /* the weather goes off to the north-east: east because it came from
              the west, and up because a storm ending lifts off the horizon
@@ -278,13 +281,15 @@ export default {
         const N = 26, made = Math.floor(clamp01(u / 0.88) * N);
         const tx = (p) => 140 - p * 118, ty = (p) => 132 - p * 34;
         for (let k = 0; k < made && k < N; k++) {
-          const p = k / N, sc = 1 - p * 0.62;
-          for (const lane of [-1, 1]) {
-            const x = tx(p) + lane * 13 * sc + (k % 2 ? 2.4 : -2.4) * sc;
-            const y = ty(p) + (k % 2 ? 1 : 0);
-            F.disc(x, y, 3.2 * sc, 6);
-            F.disc(x + 3.6 * sc, y - 3.6 * sc, 2.3 * sc, 6);
-          }
+          const p = k / N, sc = 1 - p * 0.62, lane = k % 2 ? 1 : -1;
+          /* THE TWO SETS TAKE ALTERNATE STEPS. Giving both of them every step
+             put a print every four cells and the trail became one chain of
+             blobs; a stride is about two and a half feet long, and out of
+             step is also what two people walking actually are. */
+          const x = tx(p) + lane * (13 * sc + 4) + (k % 4 < 2 ? 2.4 : -2.4) * sc;
+          const y = ty(p) + (k % 4 < 2 ? 1 : 0);
+          F.disc(x, y, 3.2 * sc, 6);
+          F.disc(x + 3.6 * sc, y - 3.6 * sc, 2.3 * sc, 6);
         }
         /* THE STEPS THAT LAND ON THE CUES: mud thrown up around the print the
            sound belongs to, which is the only frame where the strike and the
@@ -300,7 +305,7 @@ export default {
         for (const lane of [-1, 1]) {
           const p = clamp01(clamp01(u / 0.88) - (lane < 0 ? 0.055 : 0));
           const sc = 1 - p * 0.62;
-          F.fig(tx(p) + lane * 13 * sc, ty(p), 13 + 19 * sc * sc, {
+          F.fig(tx(p) + lane * (13 * sc + 4), ty(p), 13 + 19 * sc * sc, {
             mode: "walk", phase: u * 11.35 + (lane < 0 ? 0.7 : 0), face: -1,
             guise: lane < 0 ? "poet" : "turned",
           }, 7);
@@ -315,14 +320,18 @@ export default {
         { at: 0.74, f: 380, decay: 0.35, gain: 0.28, partials: [1, 1.7, 3.1], noise: 0.8, nDecay: 0.08, seed: 112 },
       ],
       draw(u, F) {
-        const CX = 96, CY = 46, r = 30, N = 13, SEA = 76;
+        const CX = 96, CY = 42, r = 30, N = 13, SEA = 76;
         /* THE SHORE, because the line names one: sky is paper, water is the
            darkest field in the frame, sand is what is between them. The sea's
            top edge is the one unbroken horizontal in this film — a horizon
            whose whole meaning is that it has no gap in it. The tideline below
            it wanders, because that one is water on sand and never straight. */
-        const edge = [];
-        for (let x = 0; x < F.W; x++) edge.push(104 + (F.n2(x * 0.07, 3) - 0.5) * 9);
+        /* AND THE TIDE COMES IN, which is what "washed ashore" is the name of.
+           The waterline climbs the beach through the whole movement and the
+           pieces come down to meet it, so the last frame has them lying in the
+           wash rather than on dry sand at a distance from the sea. */
+        const edge = [], tide = 96 + smooth(u) * 17;
+        for (let x = 0; x < F.W; x++) edge.push(tide + (F.n2(x * 0.07, 3) - 0.5) * 9);
         for (let y = SEA; y < 144; y++) for (let x = 0; x < F.W; x++)
           F.ink(x, y, y < edge[x] ? 4 : y > edge[x] + 16 ? 1 : 2);
         /* the foam is the only paper below the horizon, and it is what makes
@@ -376,10 +385,10 @@ export default {
         const p = clamp01((u - 0.06) / 0.86);
         const made = Math.floor(p * 15);
         for (let k = 0; k < made; k++) {
-          const q = k / 15, x = 2 + q * 44, y = 136 - q * 4;
+          const q = k / 15, x = 2 + q * 34, y = 136 - q * 4;
           F.disc(x, y, 2.2, 5); F.disc(x + 2.6, y - 2.6, 1.5, 5);
         }
-        F.fig(2 + p * 44, 136 - p * 4, 27, {
+        F.fig(2 + p * 34, 136 - p * 4, 27, {
           mode: "walk", phase: u * 9.35, face: 1, guise: "poet", headTurn: 0.4,
         }, 7);
       },
