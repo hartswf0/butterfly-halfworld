@@ -6,6 +6,11 @@
 node harness/serve.mjs        # → http://127.0.0.1:8181/wygwyl/
 ```
 
+Two doors. [`index.html`](index.html) is fourteen films you choose between — every card
+on it is the real film running, not a thumbnail of one. [`suite.html`](suite.html) is one
+film that happens to have fourteen parts: a single clock, a single transport, the whole
+running order down the side, and no way to be in two places at once.
+
 ---
 
 ## WHAT THIS IS, AND WHAT IT IS NOT

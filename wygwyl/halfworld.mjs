@@ -231,9 +231,13 @@ function wordRaster(text, ph) {
 /* ------------------------------------------------------------------- sound
    All synthesis, nothing sampled. A bed of detuned partials whose root
    steps with the movements, plus foley: decaying partials + shaped noise. */
-function makeSound(world) {
+/* One audio context serves a whole session. The bed is retuned when the film
+   changes rather than rebuilt — a second AudioContext per film would cost a
+   hardware stream each and browsers cap how many you may have. */
+export function makeSound(world) {
   let ac = null, master = null, oscs = [], noiseGain = null, on = false;
-  const spec = world.drone || { base: 55, steps: [0, 3, 7, 10] };
+  let spec = world.drone || { base: 55, steps: [0, 3, 7, 10] };
+  let seed = world.seed || 1;
   function boot() {
     ac = new (window.AudioContext || window.webkitAudioContext)();
     master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
@@ -246,15 +250,22 @@ function makeSound(world) {
     });
     const nb = ac.createBuffer(1, ac.sampleRate * 2, ac.sampleRate);
     const nd = nb.getChannelData(0);
-    let s = (world.seed >>> 0) || 1;
+    let s = (seed >>> 0) || 1;
     for (let i = 0; i < nd.length; i++) { s ^= s << 13; s ^= s >>> 17; s ^= s << 5; nd[i] = (((s >>> 0) / 4294967296) * 2 - 1) * 0.5; }
     const src = ac.createBufferSource(); src.buffer = nb; src.loop = true;
-    const f = ac.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = spec.bright ? 900 : 260; f.Q.value = 0.7;
+    const f = ac.createBiquadFilter(); f.type = "lowpass"; f.Q.value = 0.7;
+    f.frequency.value = spec.bright ? 900 : 260;
     noiseGain = ac.createGain(); noiseGain.gain.value = 0.05;
     src.connect(f); f.connect(noiseGain); noiseGain.connect(master); src.start();
+    boot.air = f;
   }
   return {
     get on() { return on; },
+    /* the suite player calls this at every film boundary */
+    setWorld(w) {
+      spec = w.drone || spec; seed = w.seed || seed;
+      if (ac && boot.air) boot.air.frequency.setTargetAtTime(spec.bright ? 900 : 260, ac.currentTime, 0.8);
+    },
     toggle() {
       if (!ac) boot();
       if (ac.state === "suspended") ac.resume();

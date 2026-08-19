@@ -1,0 +1,209 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>WYGWYL — the whole suite from one clock</title>
+<link rel="stylesheet" href="halfworld.css">
+<style>
+  /* The suite player is the index's opposite: the index is fourteen films you
+     can choose between, this is one film that happens to have fourteen parts.
+     So there is one clock, one transport, and no way to be in two places.
+     The shared sheet stacks main for the single-film page; here the picture
+     and the running order sit side by side, so it is turned back to a row. */
+  main{flex-direction:row}
+  #side{
+    flex:none;width:min(310px,34vw);border-left:1px solid var(--rule);
+    display:flex;flex-direction:column;min-height:0;
+  }
+  #wrap{flex:1;min-width:0;display:flex;flex-direction:column;min-height:0}
+  .pane{border-bottom:1px solid var(--rule);padding:.6em .8em;min-height:0}
+  .pane h2{font-size:10px;letter-spacing:.2em;color:var(--dim);margin-bottom:.5em}
+  #films{flex:1;overflow:auto;overscroll-behavior:contain}
+  .film{
+    display:grid;grid-template-columns:3ch minmax(0,1fr) auto;gap:.7ch;
+    align-items:baseline;width:100%;text-align:left;
+    border:0;border-bottom:1px solid var(--rule);padding:.5em .8em;
+    font-size:11.5px;letter-spacing:.02em;
+  }
+  .film:hover{background:var(--paper2);border-color:var(--rule)}
+  .film b{color:var(--dim);font-size:10px;letter-spacing:.1em}
+  .film span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .film i{font-style:normal;color:var(--dim);font-size:10px}
+  .film.on{background:var(--ink);color:var(--paper)}
+  .film.on b,.film.on i{color:var(--paper)}
+  #bar{
+    flex:none;position:relative;height:30px;border-bottom:1px solid var(--rule);
+    cursor:crosshair;overflow:hidden;
+  }
+  .fseg{position:absolute;top:0;bottom:0;border-right:1px solid var(--rule)}
+  .fseg.on{background:rgba(0,0,0,.08)}
+  .mseg{position:absolute;top:19px;height:5px;background:var(--ink2)}
+  #head{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);z-index:2}
+  #now{font-size:11px;line-height:1.5}
+  #now b{display:block;font-size:12.5px;letter-spacing:.04em}
+  #now span{color:var(--ink2)}
+  @media(max-width:760px){
+    main{flex-direction:column}
+    #side{width:auto;border-left:0;border-top:1px solid var(--rule);max-height:38svh}
+  }
+  body.cinema #side,body.cinema #bar{display:none}
+</style>
+
+<header>
+  <span class="brand"><span class="dot"></span>WYGWYL</span>
+  <span class="ttl" id="ttl">THE SUITE</span>
+  <span class="tagline">fourteen halfworlds, one clock</span>
+  <span class="sp"></span>
+  <a class="btn" href="index.html">INDEX</a>
+</header>
+
+<main>
+  <div id="wrap">
+    <div id="stagewrap"><canvas id="stage"></canvas><div id="chip"></div></div>
+    <div id="bar"><div id="head"></div></div>
+    <div id="linebar"><span id="voice"></span></div>
+  </div>
+  <aside id="side">
+    <div class="pane"><h2>NOW</h2><div id="now">—</div></div>
+    <div class="pane" style="flex:none"><h2>FILMS</h2></div>
+    <div id="films"></div>
+  </aside>
+</main>
+
+<footer>
+  <button id="play">Ⅱ</button>
+  <button id="prev">◀◀</button>
+  <button id="next">▶▶</button>
+  <input id="scrub" type="range" min="0" max="2000" step="1" value="0">
+  <span id="clock"></span>
+  <button id="snd" aria-pressed="false">SOUND</button>
+  <button id="cin">CINEMA</button>
+</footer>
+
+<script type="module">
+import { makeRuntime, makePost, makeSound } from "./halfworld.mjs";
+
+const SLUGS = [
+  "01-out-of-life", "02-flashing-lights", "03-how-to-break-off-an-engagement",
+  "04-nevermore", "05-bloodlines", "06-resurrecting-atlantis", "07-dj-turn-me-up",
+  "08-newly-single", "09-yet-heard", "10-magic-ride", "11-new-day", "12-reunion",
+  "13-how-to-win-my-heart", "14-hot-minute",
+];
+
+/* Every film is loaded and kept. Fourteen runtimes is fourteen closures over a
+   few constants — the expensive thing in this engine is drawing, not existing,
+   and only one of them draws at a time. */
+const FILMS = [];
+let T = 0;
+for (const slug of SLUGS) {
+  let world;
+  try { world = (await import(`./worlds/${slug}.mjs`)).default; }
+  catch (_) { continue; }                      // a world not yet written is simply absent
+  const rt = makeRuntime(world);
+  FILMS.push({ slug, world, rt, start: T, end: T + rt.total });
+  T += rt.total;
+}
+
+const $ = (id) => document.getElementById(id);
+const post = makePost($("stage"), FILMS[0]?.world.accent || "#0033cc");
+const sound = makeSound(FILMS[0].world);
+const fmt = (s) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+
+/* ---- the strip: every film, and every movement inside every film ---- */
+const bar = $("bar");
+for (const f of FILMS) {
+  const seg = document.createElement("div");
+  seg.className = "fseg"; seg.dataset.slug = f.slug;
+  seg.style.left = (f.start / T * 100) + "%";
+  seg.style.width = (f.rt.total / T * 100) + "%";
+  bar.appendChild(seg);
+  f.rt.starts.forEach((s, i) => {
+    if (i === 0) return;                        // the title card is not a movement
+    const m = document.createElement("div");
+    m.className = "mseg";
+    m.style.left = ((f.start + s) / T * 100) + "%";
+    m.style.width = (f.rt.movements[i].seconds / T * 100) + "%";
+    bar.appendChild(m);
+  });
+}
+bar.onclick = (e) => { const r = bar.getBoundingClientRect(); t = (e.clientX - r.left) / r.width * T; };
+
+const list = $("films");
+FILMS.forEach((f, i) => {
+  const b = document.createElement("button");
+  b.className = "film"; b.dataset.i = i;
+  b.innerHTML = `<b>${f.world.n}</b><span>${f.world.title}</span><i>${Math.round(f.rt.total)}s</i>`;
+  b.onclick = () => { t = f.start + 0.01; };
+  list.appendChild(b);
+});
+
+let t = 0, playing = true, last = performance.now(), lastFilm = -1, lastMv = -1, prevU = 0, scrubbing = false;
+const jump = new URLSearchParams(location.search).get("f");
+if (jump) { const f = FILMS.find(x => x.slug.startsWith(jump)); if (f) t = f.start + 0.01; }
+
+function fit() {
+  const w = $("stagewrap");
+  post.fit(w.clientWidth, w.clientHeight, Math.min(2, window.devicePixelRatio || 1));
+}
+addEventListener("resize", fit);
+
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  if (playing) t = (t + dt) % T;
+  let fi = FILMS.length - 1;
+  while (fi > 0 && t < FILMS[fi].start) fi--;
+  const f = FILMS[fi];
+  const local = t - f.start;
+  post.draw(f.rt.renderField(local));
+
+  const [mi, u] = f.rt.locate(local);
+  const m = f.rt.movements[mi];
+  const words = (m.line || "").split(" ");
+  $("voice").textContent = words.slice(0, Math.ceil(Math.min(1, u * 1.18) * words.length)).join(" ");
+  $("chip").textContent = `${f.world.n} · ${mi === 0 ? "TITLE" : "M" + mi + " " + m.label}`;
+  $("clock").textContent = `${fmt(t)} / ${fmt(T)}`;
+  $("head").style.left = (t / T * 100) + "%";
+  if (!scrubbing) $("scrub").value = Math.round(t / T * 2000);
+
+  /* Foley fires on crossing its beat, not on being past it, so seeking
+     backwards through a film does not replay every cue it contains. */
+  if (mi !== lastMv || fi !== lastFilm) { sound.step(mi); lastMv = mi; prevU = 0; }
+  for (const c of m.cues || []) if (c.at > prevU && c.at <= u) sound.cue(c);
+  prevU = u;
+
+  if (fi !== lastFilm) {
+    lastFilm = fi;
+    sound.setWorld(f.world);
+    $("ttl").textContent = `${f.world.n} · ${f.world.title}`;
+    document.querySelectorAll(".film").forEach(b => b.classList.toggle("on", +b.dataset.i === fi));
+    document.querySelectorAll(".fseg").forEach(s => s.classList.toggle("on", s.dataset.slug === f.slug));
+    const on = document.querySelector(".film.on");
+    if (on) on.scrollIntoView({ block: "nearest" });
+  }
+  $("now").innerHTML =
+    `<b>${f.world.title}</b><span>${f.world.tagline || ""}</span><br><br>` +
+    `<span>MOVEMENT ${mi}/${f.rt.movements.length - 1} · ${m.label}<br>` +
+    `FILM ${fi + 1} OF ${FILMS.length}</span>`;
+  requestAnimationFrame(frame);
+}
+
+$("play").onclick = () => { playing = !playing; $("play").textContent = playing ? "Ⅱ" : "▶"; };
+$("prev").onclick = () => { let fi = FILMS.length - 1; while (fi > 0 && t < FILMS[fi].start) fi--;
+  t = (t - FILMS[fi].start > 1.5) ? FILMS[fi].start + 0.01 : FILMS[Math.max(0, fi - 1)].start + 0.01; };
+$("next").onclick = () => { let fi = FILMS.length - 1; while (fi > 0 && t < FILMS[fi].start) fi--;
+  t = FILMS[(fi + 1) % FILMS.length].start + 0.01; };
+$("scrub").addEventListener("input", e => { scrubbing = true; t = +e.target.value / 2000 * T; });
+$("scrub").addEventListener("change", () => { scrubbing = false; });
+$("cin").onclick = () => { document.body.classList.toggle("cinema"); fit(); };
+$("stage").ondblclick = () => { document.body.classList.toggle("cinema"); fit(); };
+$("snd").onclick = (e) => e.target.setAttribute("aria-pressed", String(sound.toggle()));
+addEventListener("keydown", e => {
+  if (e.code === "Space") { e.preventDefault(); $("play").click(); }
+  if (e.key === "ArrowRight") $("next").click();
+  if (e.key === "ArrowLeft") $("prev").click();
+  if (e.key === "f" || e.key === "F") $("cin").click();
+});
+
+window.__hw = { films: FILMS, total: T, seek(tt) { t = tt; playing = false; } };
+fit();
+requestAnimationFrame(frame);
+</script>
