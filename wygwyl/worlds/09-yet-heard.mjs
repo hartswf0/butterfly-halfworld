@@ -155,7 +155,8 @@ function dock(F, l) {
 }
 function boat(F, x, y, l) {
   F.arc(x, y, 8, 0.15, Math.PI - 0.15, l, 1.2);
-  F.line(x, y - 7, x, y - 13, l, 1); F.line(x - 3, y - 12, x + 4, y - 9, l, 1);
+  F.line(x - 2, y - 7, x - 2, y - 15, l, 1);
+  F.line(x - 2, y - 15, x + 5, y - 7, l, 1);
 }
 
 export default {
@@ -177,7 +178,7 @@ export default {
       draw(u, F) {
         const t = smooth(u);
         const xL = lerp(76, 34, t), xR = lerp(116, 160, t);
-        const floor = 122, h = 40, ay = floor - h * 0.62;
+        const floor = 122, h = 44, ay = floor - h * 0.62;
         speaker(F, xL, floor, h, 1, "down", 7);
         speaker(F, xR, floor, h, -1, "down", 7);
         cord(F, xL, ay, xR, ay, 5, u * 1.6);
@@ -194,12 +195,15 @@ export default {
       draw(u, F) {
         const t = smooth(u);
         const xL = lerp(80, 48, t), xR = lerp(112, 146, t);
-        const floor = 122, h = 40, ay = floor - h * 0.62;
-        const sag = lerp(2, 24, t);
+        const floor = 122, h = 44, ay = floor - h * 0.62;
+        const sag = lerp(2, 21, t);
         speaker(F, xL, floor, h, 1, "down", 7);
         speaker(F, xR, floor, h, -1, "open", 7);
         cord(F, xL, ay, xR, ay, 5, u * 1.1, sag);
-        abyss(F, (xL + xR) / 2, ay + sag, lerp(8, 30, t), 6);
+        /* the abyss is capped short of the frame's own floor: a depth that
+           ran off the bottom edge read as a cropping bug rather than
+           something merely unseen, so the cap keeps its tip inside paper */
+        abyss(F, (xL + xR) / 2, ay + sag, lerp(7, 23, t), 6);
         tears(F, xL, ay, xR, ay, sag, u, 6);
       },
     },
@@ -215,7 +219,7 @@ export default {
         /* asymmetric on purpose: his side is pulled further than ours, so
            the stretch itself leans east before the walk ever says so */
         const xL = lerp(84, 52, t), xR = lerp(108, 168, t);
-        const floor = 122, h = 40, ay = floor - h * 0.62;
+        const floor = 122, h = 44, ay = floor - h * 0.62;
         speaker(F, xL, floor, h, 1, "down", 7);
         summon(F, xR, floor, h, ss(0, 0.30, u), 7);
         cord(F, xL, ay, xR, ay, 5, u * 2.0);
@@ -254,8 +258,13 @@ export default {
         waveShadows(F, 139, 2, u * 0.5 + 3);
         groundTrail(F, 46, floor + 2, cx, 6);
         const xf = cx - 9, xs = cx + 9;
-        F.fig(xf, floor, hf, { mode: "walk", phase: u * 5.4, face: 1 }, 7);
-        F.fig(xs, floor, hs, { mode: "walk", phase: u * 5.4 + 0.18, face: 1 }, 7);
+        /* the two gait phases are offset by a fifth of a stride, not a half
+           — half made their legs snap shut together at the exact same
+           instant, which for one unlucky frame read as a single pole where
+           a person should be. An odd offset means they are never both
+           mid-crossing at once. */
+        F.fig(xf, floor, hf, { mode: "walk", phase: u * 6.3, face: 1 }, 7);
+        F.fig(xs, floor, hs, { mode: "walk", phase: u * 6.3 + 0.4, face: 1 }, 7);
         /* SOMEONE BLUE: the suite's one accent mark, one occurrence, held
            back until the last few frames of the last movement — everywhere
            else in this world "blue" is only the tagline's color name */
