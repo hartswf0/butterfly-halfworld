@@ -10,3 +10,5 @@ film/.tmp/
 film/.tmpclose/
 
 film/.measure/
+node_modules/
+package-lock.json
