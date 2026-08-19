@@ -10,12 +10,23 @@
    number. Level 8 is spent exactly once, on the silver lining in M6, per the
    director's note — nowhere else in this file reads or writes it.
 
-   THE FIRST TWO MOVEMENTS ARE MASSES, NOT OUTLINES. M1's arch is a hole cut
-   in a filled wall that closes and deepens on him course by course, and M2's
-   vineyard is a filled field the light goes out of from the far end inward.
-   Both were line drawings on bare paper and both read as diagrams of a
-   scene rather than as the scene: at this size a tone is the only way to
-   have somewhere for a body to be.
+   THE MOVEMENTS ARE MASSES, NOT OUTLINES. M1's arch is a hole cut in a filled
+   wall that closes and deepens on him course by course; M2's vineyard is a
+   filled field the light goes out of from the far end inward; M3's sky is a
+   field with the stars' glares burned into it as pools of light that close
+   one by one; M4's abstract sky is the gulf the two bands open between them,
+   laid down as tone whose width IS the divergence; M5's daisy reaches the
+   edges of the world, so a year coming off it takes a piece of the picture
+   with it. All five were line drawings on bare paper, and all five read as
+   diagrams of a scene rather than as the scene: at this size a tone is the
+   only way to have somewhere for a body to be.
+
+   AND EACH OF THEM GOES SOMEWHERE. The retime onto the record left the middle
+   of this film holding near-still pictures for fifteen seconds apiece — a
+   walker crossing empty paper, two rings drifting, eleven small marks coming
+   off a flower. What each one has now is one quantity the line itself names
+   moving the whole way across: a sky emptying, a gap opening, a count going
+   down to nothing — and an arrival at the end of it.
    ========================================================================= */
 import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
 
@@ -139,42 +150,75 @@ function wordWeight(F, cx, restY, u, gates, s) {
 }
 /* a tapered stroke — the sole shape this film needs twice, once as a petal,
    once (in M7) as a single tear. Zero width at both ends, fattest at the
-   middle: a lens laid along one axis. */
-function petal(F, cx, cy, ang, len, wid, l) {
+   middle: a lens laid along one axis. `set` overwrites, which is what makes
+   a second narrower pass inside a first one read as a fill inside a rim
+   rather than as nothing at all. */
+function petal(F, cx, cy, ang, len, wid, l, set = false) {
   const c = Math.cos(ang), s = Math.sin(ang);
   const n = Math.max(4, Math.round(len));
   for (let k = 0; k <= n; k++) {
     const t = k / n, r = wid * Math.sin(t * Math.PI) * 0.5;
-    F.disc(cx + c * len * t, cy + s * len * t, Math.max(0.6, r), l);
+    F.disc(cx + c * len * t, cy + s * len * t, Math.max(0.6, r), l, set);
   }
 }
 
 /* eleven years, eleven petals — the loop below runs exactly eleven times
    and nothing adds or removes an iteration, so the count is checkable by
    reading the loop bound, not by counting pixels. Each petal is on the
-   flower or on the ground, never both, never neither. */
+   flower or in the air, never both, never neither.
+
+   THE PETALS ARE MASS AND THE FLOWER IS THE FRAME. Drawn as outline strokes
+   at this scale it was a diagram of a daisy — six discs a couple of cells
+   wide per petal, eleven of them, four percent of the field, and eleven
+   years came off it without the picture changing. Each petal is now a lens
+   with a rim at 6 and a fill at 3, long enough that the flower reaches the
+   edges of the world, so a year leaving is a piece of the picture leaving. */
 const PETAL_N = 11;
-function daisy(F, G, cx, cy, R, u) {
-  G.disc(cx, cy, 3, 6);
+function daisy(F, G, cx, cy, R, r0, u, pluckAt) {
   for (let k = 0; k < PETAL_N; k++) {
     const ang = (k / PETAL_N) * TAU - Math.PI / 2;
-    const c = Math.cos(ang), s = Math.sin(ang);
-    const pluckAt = (k + 1) / (PETAL_N + 1);
-    if (u < pluckAt) {
-      for (let t = 0; t <= 6; t++) {
-        const tt = t / 6, len = R * (0.5 + tt * 0.62);
-        const w = Math.max(0.6, 2.1 * Math.sin(tt * Math.PI));
-        G.disc(cx + c * len, cy + s * len, w, 5);
-      }
-    } else {
-      /* plucked: drifts off, alternating sides — "we love" one way, "we
-         not" the other, so the refrain is a direction, not a caption */
-      const since = u - pluckAt, side = k % 2 === 0 ? 1 : -1;
-      const dx = cx + side * (10 + since * 60) + c * R * 0.3;
-      const dy = cy + R * 1.7 + since * 34;
-      if (dy < 143) F.disc(dx, dy, 1.6, 4);
+    const c = Math.cos(ang), s = Math.sin(ang), len = R - r0;
+    const t = pluckAt(k);
+    if (u < t) {
+      petal(G, cx + c * r0, cy + s * r0, ang, len, 19, 6);
+      petal(G, cx + c * (r0 + 2.4), cy + s * (r0 + 2.4), ang, len - 4.8, 14.4, 3, true);
+      continue;
     }
+    /* A FUTURE GONE SWIFTLY: it leaves along the line it was pointing and it
+       is off the world inside a seventh of the movement, turning as it goes.
+       "We love, we not" is the side it is thrown to — the refrain read as a
+       direction rather than printed as a caption. Rejected: petals settling
+       on the ground, which makes a pile, and a pile is a past you still
+       have. */
+    const q = (u - t) / 0.14;
+    if (q > 1) continue;
+    /* it leaves from exactly where it was attached — the first pass launched
+       it from the petal's own midpoint, so every year jumped twenty cells
+       outward at the instant it came off */
+    const side = k % 2 === 0 ? 1 : -1, fl = len * (1 - q * 0.25), fw = 19 - q * 6;
+    const fx = cx + c * (r0 + q * 150) + side * q * q * 46;
+    const fy = cy + s * (r0 + q * 150) + q * q * 30;
+    const fa = ang + side * q * 1.1, fc = Math.cos(fa), fs = Math.sin(fa);
+    petal(G, fx, fy, fa, fl, fw, 6);
+    petal(G, fx + fc * 2.4, fy + fs * 2.4, fa, fl - 4.8, fw * 0.76, 3, true);
   }
+}
+
+/* the hand that did the plucking. It comes in from off the world and opens
+   as the count goes down, so "empty-handed" is a state the picture arrives
+   at, not a prop switched on at the end. Five fingers, because a hand that
+   is the subject of a line has to be a hand. */
+function hand(F, hx, hy, s, open, l) {
+  F.disc(hx, hy, 8 * s, l);
+  F.disc(hx, hy - 1, 8 * s - 2.2, 3, true);
+  for (let f = 0; f < 4; f++) {
+    const a = -Math.PI / 2 + (f - 1.5) * (0.20 + open * 0.26);
+    F.line(hx + Math.cos(a) * 6 * s, hy + Math.sin(a) * 6 * s,
+           hx + Math.cos(a) * 17 * s, hy + Math.sin(a) * 17 * s, l, 2.6 * s);
+  }
+  const th = -Math.PI / 2 - (0.95 + open * 0.35);
+  F.line(hx + Math.cos(th) * 5 * s, hy + Math.sin(th) * 5 * s,
+         hx + Math.cos(th) * 14 * s, hy + Math.sin(th) * 14 * s, l, 3 * s);
 }
 
 /* one road, drawn small enough that three of them fit with real gaps
@@ -400,7 +444,7 @@ export default {
            says the stars did it, plural and together */
         const dim = 1 - 0.62 * u;
         for (let k = 0; k < N; k++) {
-          const sx = R() * 172 + 10, sy = R() * 62 + 10, r0 = 9 + R() * 12;
+          const sx = R() * 172 + 10, sy = R() * 70 + 9, r0 = 9 + R() * 12;
           const te = 0.10 + k * 0.052;                       // its own escape, on the cue for k=0
           const life = u < te ? 1 : clamp01(1 - (u - te) / 0.05);
           stars.push([sx, sy, Math.max(0, r0 * dim * life)]);
@@ -416,7 +460,7 @@ export default {
            travels with the body, it starts at the edge he came from and
            grows the entire width of the frame. The distance walked is the
            only quantity in this movement that goes up. */
-        const p = clamp01(u / 0.80), wx = lerp(6, 160, p);
+        const p = clamp01(u / 0.74), wx = lerp(6, 160, p);
         for (let px = 6; px < wx; px += 6) {
           const age = (wx - px) / 154;
           G.disc(px, FLOOR - 1 + ((px / 6) % 2 ? 1 : 0), 1.3, Math.max(2, Math.round(6 - age * 4)));
@@ -428,11 +472,15 @@ export default {
            of it, and "so DJ, please, turn me up" is a man with his hand on
            the stand rather than a man still walking when the line ends. */
         micStand(G, 174, FLOOR, 27, 6);
+        /* the feet stop first and the hand goes out after them, landing on
+           the stand exactly on the cue — an arrival is a reach completing,
+           not a walk cycle ending */
+        const grab = ss(0.74, 0.80, u);
         G.fig(wx, FLOOR, 34, {
           mode: p < 1 ? "walk" : "stand", phase: u * 6.35, face: 1, guise: "poet",
           weight: p < 1 ? undefined : 0.72,
-          headTilt: lerp(-0.22, 0.24, ss(0.78, 0.88, u)),
-          gesture: p < 1 ? undefined : [10, 24],
+          headTilt: lerp(-0.22, 0.24, ss(0.74, 0.86, u)),
+          gesture: p < 1 ? undefined : [lerp(3, 10, grab), lerp(11, 24, grab)],
         }, 7);
         meter(F, u, amp);
       },
@@ -440,37 +488,103 @@ export default {
     {
       label: "DIVERGING RINGS", seconds: 14,
       line: "So I can speak: of wedding bands diverging across abstract skies of wounded souls. Of a shared home, boxed and trucked on separate one-way streets — not built with U-turns, or stop, maybe-we-shouldn't signs.",
+      /* the two bands letting go of each other, the roof coming off, and the
+         last room leaving the foundation — the three beats the line has */
       cues: [
         { at: 0.05, f: 660, decay: 0.30, gain: 0.30, partials: [1, 2.0, 3.0], noise: 0.2, nDecay: 0.04, seed: 731 },
-        { at: 0.55, f: 520, decay: 0.30, gain: 0.28, partials: [1, 2.0, 3.0], noise: 0.2, nDecay: 0.04, seed: 732 },
+        { at: 0.30, f: 520, decay: 0.30, gain: 0.28, partials: [1, 2.0, 3.0], noise: 0.2, nDecay: 0.04, seed: 732 },
+        { at: 0.78, f: 300, decay: 0.45, gain: 0.30, partials: [1, 1.6, 2.3], noise: 0.5, nDecay: 0.08, seed: 733 },
       ],
       draw(u, F) {
         const amp = clamp01(AMP[3] + (F.n2(5.5, u * 3) - 0.5) * 0.03), cy = 30;
-        /* wounded souls: thin scratches scattered in the sky, never
-           gathering into a figure — kept as texture so the rings stay the
-           only thing in the sky the eye is asked to follow */
-        const R = F.rng(74);
-        for (let k = 0; k < 18; k++) {
-          const sx = R() * 188 + 2, sy = 6 + R() * 34;
-          F.line(sx - 1.4, sy, sx + 1.4, sy, 2, 1);
-          F.line(sx, sy - 1.4, sx, sy + 1.4, 2, 1);
-        }
         /* THE RINGS WILL NOT RE-CONVERGE. d(u) is built from `smooth`,
            therefore strictly non-decreasing across the movement — there is
            no term anywhere in it that could pull the two rings back
-           together, which is the whole claim the line makes. */
-        const d = lerp(5, 78, smooth(u));
+           together, which is the whole claim the line makes. They begin
+           interlocked, which is what a pair of wedding bands is when it is
+           still one thing. */
+        const d = lerp(14, 172, smooth(u));
         const G = rig(F, scaleOf(AMP[3]), 96, cy);
-        G.ring(96 - d / 2, cy, 7, 6, 1.5);
-        G.ring(96 + d / 2, cy, 7, 6, 1.5);
-        /* the shared home: two straight one-way streets — rejected outright
-           any curve in them, a U-turn is exactly what the line disowns —
-           each carrying a boxed truck further from the other, below the
-           same divergence the rings are making above */
-        const FLOOR = 132;
-        floorRuns(F, FLOOR, 5);
+        /* THE GULF IS THE SUBJECT, AND IT IS DRAWN. What the line calls an
+           abstract sky is the space the two bands are opening between them,
+           so it is not a backdrop they happen to be crossing — it IS the
+           divergence, and it is laid down as tone whose width is exactly the
+           gap between their inner edges. It deepens as it widens, on a
+           second dot schedule offset from the first so the arriving edge and
+           the deepening level cannot land on the same cells and band.
+           Rejected: the two rings alone on bare paper, which is a diagram of
+           a separation — thirty-two cells of ink moving apart over fifteen
+           seconds while the other twenty-seven thousand held still. */
+        const w = d / 2 - 9;
+        const lv = 2 + smooth(u) * 1.7, lo = Math.floor(lv), fr = lv - lo;
+        for (let x = 0; x < F.W; x++) {
+          const dx = Math.abs(x - 96);
+          if (dx > w) continue;
+          const edge = clamp01((w - dx) / 6);
+          /* it opens in both directions at once, out of the pocket the two
+             interlocked bands leave between them — a strip that was full
+             height from the first frame would be a curtain being drawn back,
+             and this is a gap being made. Lumpy top and bottom: a tone that
+             ended on two ruled lines a hundred and fifty cells long would
+             stripe the frame. */
+          const grow = clamp01(w / 34);
+          const t0 = lerp(cy - 7, 8 + (F.n2(x * 0.045, 3.1) - 0.5) * 13, grow);
+          const t1 = lerp(cy + 7, 54 + (F.n2(x * 0.05, 8.4) - 0.5) * 14, grow);
+          for (let y = Math.round(t0); y < t1; y++) {
+            if (F.bayer(x, y) >= edge) continue;
+            F.put(x, y, F.bayer(x + 3, y + 5) < fr ? lo + 1 : lo);
+          }
+        }
+        /* WOUNDED SOULS: the sky is made OF them, so they are cut into the
+           tone rather than drawn on top of it, and the count of them rises
+           with the width — a wider gap has more of them in it, which is the
+           only thing the line claims about their number. */
+        const R = F.rng(74);
+        for (let k = 0; k < 18; k++) {
+          const sx = 96 + (R() - 0.5) * 178, sy = 10 + R() * 42;
+          if (Math.abs(sx - 96) > w - 4) continue;
+          F.line(sx - 2.6, sy, sx + 2.6, sy, 0, 1, true);
+          F.line(sx, sy - 2.6, sx, sy + 2.6, 0, 1, true);
+        }
+        /* each band is a hole in that sky with a heavy rim, so it stays a
+           ring once the tone is behind it — an outline at level 6 on a field
+           at 4 is a wire, and these are the last solid things in the frame */
         for (const s of [-1, 1]) {
-          const rx = 96 + s * 4, ry = FLOOR, ex = 96 + s * 86, ey = 70;
+          G.disc(96 + s * d / 2, cy, 8, 0, true);
+          G.ring(96 + s * d / 2, cy, 10, 6, 2.4);
+        }
+        /* A SHARED HOME, BOXED AND TRUCKED. It stands whole in the wedge
+           between the two streets for the first third; the roof comes off on
+           the second cue, and then the rooms leave one at a time, alternating
+           streets, until the foundation is bare on the third. Rejected: the
+           two trucks alone, which asserts the boxing and never shows it — the
+           home has to be a mass that is there and then is not, or "boxed and
+           trucked" is a caption on a pair of moving rectangles. */
+        const HX = 74, HY = 84, CW = 11, CH = 13;
+        /* the order it comes apart in: the outer column first, both storeys,
+           then the next one in — so what is left is always a block and never
+           a room floating where its neighbours used to be, and the half that
+           goes left is the half that was on the left. Eight rooms, and the
+           even ones take the left street. */
+        const CELL = [[0, 0], [3, 0], [0, 1], [3, 1], [1, 0], [2, 0], [1, 1], [2, 1]];
+        const roof = ss(0.30, 0.36, u);
+        const leftAt = (k) => 0.36 + k * 0.06;               // the last one at 0.78
+        F.line(HX - 6, HY + 2 * CH, HX + 4 * CW + 6, HY + 2 * CH, 5, 1);   // the foundation
+        for (let k = 0; k < CELL.length; k++) {
+          if (u >= leftAt(k)) continue;
+          const bx = HX + CELL[k][0] * CW, by = HY + CELL[k][1] * CH;
+          F.rect(bx, by, CW, CH, 4);
+          F.box(bx, by, CW, CH, 6, 1);
+          F.rect(bx + 4, by + 4, 4, 5, 0, true);             // the room's own light
+        }
+        if (roof < 1) {
+          F.line(HX - 4, HY, 96, HY - 15, 6, 1.6);
+          F.line(HX + 4 * CW + 4, HY, 96, HY - 15, 6, 1.6);
+        }
+        const FLOOR = 124;
+        floorRuns(F, FLOOR, 3);
+        for (const s of [-1, 1]) {
+          const rx = 96 + s * 5, ry = FLOOR, ex = 96 + s * 88, ey = 78;
           F.line(rx, ry, ex, ey, 4, 1.4);
           /* one-way chevrons, not stop signs — a stop sign is an octagon
              and this street was never built with the option to stop */
@@ -480,9 +594,24 @@ export default {
             F.line(ax, ay, ax - Math.cos(ang) * 3 + Math.sin(ang) * 2, ay - Math.sin(ang) * 3 - Math.cos(ang) * 2, 5, 1);
             F.line(ax, ay, ax - Math.cos(ang) * 3 - Math.sin(ang) * 2, ay - Math.sin(ang) * 3 + Math.cos(ang) * 2, 5, 1);
           }
-          const p = smooth(u), tx = lerp(rx, ex, 0.15 + p * 0.75), ty = lerp(ry, ey, 0.15 + p * 0.75);
-          F.rect(tx - 5, ty - 4, 10, 6, 6);
-          F.disc(tx - 3, ty + 2, 1.3, 7); F.disc(tx + 3, ty + 2, 1.3, 7);
+          const along = (t, hw, hh, l) => {
+            const q = clamp01(t), z = 1 - q * 0.45;          // it gets further, so it gets smaller
+            const ax = lerp(rx, ex, 0.10 + q * 0.84), ay = lerp(ry, ey, 0.10 + q * 0.84);
+            F.rect(ax - hw * z, ay - hh * z, hw * 2 * z, hh * 2 * z, l);
+            F.box(ax - hw * z, ay - hh * z, hw * 2 * z, hh * 2 * z, 6, 1);
+            return [ax, ay, z];
+          };
+          if (roof > 0) {
+            const [tx, ty, z] = along((u - 0.30) / 0.62, 5, 3, 6);
+            F.disc(tx - 3 * z, ty + 4 * z, 1.3 * z, 7); F.disc(tx + 3 * z, ty + 4 * z, 1.3 * z, 7);
+            /* the left truck takes the roof; a house leaves in the order it
+               comes apart, and the roof came off first */
+            if (s < 0) { F.line(tx - 5 * z, ty - 3 * z, tx, ty - 8 * z, 6, 1.2); F.line(tx + 5 * z, ty - 3 * z, tx, ty - 8 * z, 6, 1.2); }
+          }
+          for (let k = 0; k < CELL.length; k++) {
+            if ((k % 2 ? 1 : -1) !== s || u < leftAt(k)) continue;
+            along((u - leftAt(k)) / 0.62, 3.4, 3.0, 4);
+          }
         }
         meter(F, u, amp);
       },
@@ -490,24 +619,41 @@ export default {
     {
       label: "ELEVEN PETALS", seconds: 14,
       line: "A love story of years — eleven years — each plunkled off as daisy petals. We love, we not. Of a future gone swiftly, and a past left empty-handed.",
+      /* the first year off and the last: the cues are the two ends of the
+         count, and the eleventh pluck is also the moment the hand is empty */
       cues: [
         { at: 0.08, f: 480, decay: 0.10, gain: 0.30, partials: [1, 2.3], noise: 0.6, nDecay: 0.02, seed: 741 },
-        { at: 0.92, f: 140, decay: 0.30, gain: 0.28, partials: [1, 1.7], noise: 0.5, nDecay: 0.06, seed: 742 },
+        { at: 0.80, f: 140, decay: 0.30, gain: 0.28, partials: [1, 1.7], noise: 0.5, nDecay: 0.06, seed: 742 },
       ],
       draw(u, F) {
         const amp = clamp01(AMP[4] + (F.n2(6.6, u * 3) - 0.5) * 0.03);
-        const scale = scaleOf(AMP[4]), cx = 96, cy = 68;
-        floorRuns(F, 106, 3);
+        const scale = scaleOf(AMP[4]), cx = 96, cy = 62;
+        /* eleven evenly spaced in time as well as in angle: the first comes
+           off on the first cue and the eleventh on the second, and the two
+           seconds after that are the line's last clause with nothing else in
+           the frame to look at. */
+        const pluckAt = (k) => 0.08 + k * 0.072;
+        const gone = clamp01((u - 0.08) / 0.72);
+        floorRuns(F, 124, 2);
         const G = rig(F, scale, cx, cy);
-        G.line(cx, cy + 6, cx, cy + 38, 4, 1.6);
-        daisy(F, G, cx, cy, 22, u);
-        /* a future gone swiftly, a past left empty-handed: the hand that
-           did the plucking, open and holding nothing, once all eleven are
-           down — it arrives only after the loop above has emptied */
-        if (u > PETAL_N / (PETAL_N + 1)) {
-          F.rect(cx - 6, 104, 12, 5, 4);
-          for (let f = 0; f < 4; f++) F.line(cx - 4 + f * 2.6, 104, cx - 4 + f * 2.6, 100, 4, 1);
+        G.line(cx, cy, cx, 128, 5, 3.4);                   // the stem, behind everything
+        daisy(F, G, cx, cy, 60, 14, u, pluckAt);
+        /* the head is drawn last so it caps every petal's inner end, and it
+           is a disc of florets rather than a dot: it is what the eleven were
+           attached to and it is all that is left holding at the end */
+        G.disc(cx, cy, 14, 6);
+        G.disc(cx, cy, 11.4, 3, true);
+        for (let f = 0; f < 26; f++) {
+          const a = f * 2.399, r = 2 + (f / 26) * 8.6;
+          G.disc(cx + Math.cos(a) * r, cy + Math.sin(a) * r, 1.1, 6);
         }
+        /* A PAST LEFT EMPTY-HANDED. It reaches in from off the world, arrives
+           under the flower as the last year comes off, and opens. */
+        const hp = smooth(clamp01((u - 0.04) / 0.76));
+        /* it comes in from the side, not up out of the bottom edge: the
+           meter lives down there and a hand rising through it read as a hand
+           coming out of the instrument */
+        hand(F, lerp(214, 136, hp), lerp(116, 100, hp), 1.35, gone, 6);
         meter(F, u, amp);
       },
     },

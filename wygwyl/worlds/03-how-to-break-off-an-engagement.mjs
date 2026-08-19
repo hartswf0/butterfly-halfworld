@@ -5,6 +5,15 @@
    window, still whole, and leaves in pieces. Between those two facts: an empty
    temple, a storm that takes everything that was ever called goods, and two
    sets of footprints walking away from what the water kept.
+
+   THREE OF THESE ARE THINGS THAT HAPPEN OVER TIME AND WERE DRAWN AS THINGS
+   THAT WERE ALREADY OVER. A cobweb is BUILT — bridge, frame, radials, then the
+   spiral wound outward turn by turn — and drawing the finished doily is
+   drawing the wrong noun. Footsteps are made one at a time and there are more
+   of them at the end. A tambourine that shatters stops being one object; the
+   pieces travel, land, and stay landed. So each of those three is now a
+   quantity that only goes one way, and the frame is built out of tone under
+   it: dust, mud, water, sand.
    ========================================================================= */
 import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
 import { tambourine } from "./02-flashing-lights.mjs";
@@ -46,6 +55,33 @@ export function roseWindow(F, cx, cy, r, u, l = 6) {
   }
 }
 
+/* A WEB IS BUILT IN AN ORDER, AND THE ORDER IS THE PICTURE. A spider lays a
+   bridge, then the frame, then every radial, and only then winds the spiral
+   outward turn by turn. Drawn all at once it is a doily laid on the film; laid
+   down in its own order across a movement it is the one thing in this temple
+   that is still working. `grow` runs 0..1 and nothing here ever comes back. */
+function web(F, cx, cy, r, k, grow, anchors) {
+  if (grow <= 0.005) return;
+  const N = 9;
+  const R = F.rng(40 + k), th = [];
+  for (let j = 0; j < N; j++) th.push(j / N * TAU + (R() - 0.5) * 0.30);
+  /* the bridge threads first: they are what the web hangs from, and a web
+     hanging from nothing is a snowflake */
+  for (const a of anchors) F.line(cx, cy, a[0], a[1], 3, 1);
+  const rad = clamp01((grow - 0.06) / 0.34), spi = clamp01((grow - 0.34) / 0.66);
+  const shown = Math.floor(rad * N + 1e-6);
+  for (let j = 0; j < shown; j++)
+    F.line(cx, cy, cx + Math.cos(th[j]) * r, cy + Math.sin(th[j]) * r, 5, 1);
+  const turns = 7, tot = turns * N, seg = Math.floor(spi * tot);
+  for (let q = 0; q < seg; q++) {
+    const j = q % N, t0 = q / tot, t1 = (q + 1) / tot;
+    const r0 = r * (0.10 + 0.90 * t0), r1 = r * (0.10 + 0.90 * t1);
+    const a0 = th[j], a1 = th[(j + 1) % N] + (j === N - 1 ? TAU : 0);
+    F.line(cx + Math.cos(a0) * r0, cy + Math.sin(a0) * r0,
+           cx + Math.cos(a1) * r1, cy + Math.sin(a1) * r1, 4, 1);
+  }
+}
+
 export default {
   n: "03", slug: "03-how-to-break-off-an-engagement", title: "HOW TO BREAK OFF AN ENGAGEMENT",
   tagline: "the storm takes everything that was ever called goods",
@@ -81,7 +117,7 @@ export default {
           const p = clamp01((u - at) / 0.16);
           if (p > 0 && p < 1) F.ring(96, 74, p * 44, Math.max(1, Math.round(7 - p * 6)), 1);
         }
-        tambourine(F, 96, 74, 11, u * TAU, 7);
+        tambourine(F, 96, 74, 11, u * TAU, 7, 8, 3);
         F.box(38, 96, 22, 14, 4, 1); F.box(132, 96, 22, 14, 4, 1);   // baptism pools, dry
       },
     },
@@ -96,7 +132,7 @@ export default {
         roseWindow(F, 96, 72, 58, u, 6);
         const p = smooth(u);
         const tx = lerp(30, 96, p), ty = lerp(20, 72, p);
-        tambourine(F, tx, ty, lerp(4, 12, p), u * TAU * 3, 7);
+        tambourine(F, tx, ty, lerp(4, 12, p), u * TAU * 3, 7, 8, 3);
         /* the cue is the moment it actually crosses the glass — a ring
            struck from the object itself, not the window, because the
            object is what is making the sound */
@@ -108,30 +144,48 @@ export default {
     {
       label: "COBWEBS", seconds: 13,
       line: "Pews taken by cobwebs, and doused in disintegration. Spirits have left salvations in opened gift boxes, placed outside the side doors.",
+      cues: [
+        { at: 0.22, f: 190, decay: 0.60, gain: 0.26, partials: [1, 1.6, 2.4], noise: 0.85, nDecay: 0.22, seed: 82 },
+        { at: 0.68, f: 140, decay: 0.80, gain: 0.28, partials: [1, 1.4, 2.1], noise: 0.90, nDecay: 0.34, seed: 83 },
+      ],
       draw(u, F) {
-        nave(F, u, u * 0.3);
-        /* the webs arrive on the ordered schedule — the pews are not covered,
-           they are replaced, dot by dot */
-        const take = smooth(u);
-        F.map((x, y, v) => {
-          if (v < 1) return;
-          const w = F.fbm(x * 0.11, y * 0.11 + 3, 2);
-          if (F.bayer(x, y) < take * w * 1.6) return 2;
-        });
-        for (let k = 0; k < 5; k++) {
-          const cx = 20 + k * 40, cy = 40 + (k % 2) * 18;
-          for (let j = 0; j < 6; j++) {
-            const a = j / 6 * TAU + k;
-            F.line(cx, cy, cx + Math.cos(a) * 16, cy + Math.sin(a) * 16, 2, 1);
-          }
-          for (let r = 5; r <= 15; r += 5) F.ring(cx, cy, r, 2, 1);
+        /* DOUSED IN DISINTEGRATION. The dust is not laid over the room, the
+           room is handed to it — dot by dot on the ordered schedule, from the
+           floor up, until the air itself is a tone and the building is what
+           shows through it. This is the movement the film's only tonal ground
+           belongs to: an outlined nave on cream is a drawing of a church, and
+           a church full of dust is a place. */
+        const dust = ss(0.0, 0.90, u);
+        for (let y = 0; y < 144; y++) {
+          const h = clamp01((y - 14) / 118);
+          const s = dust * 1.22 - (1 - h) * 0.70;
+          if (s <= 0) continue;
+          /* it stops short of the whole field on purpose: a room dusted to
+             the last cell is a grey rectangle, and the thing this movement is
+             about has to stay visible through it */
+          const l = h > 0.80 ? 3 : 2;
+          for (let x = 0; x < 192; x++) if (F.bayer(x, y) < s) F.ink(x, y, l);
         }
-        /* the gift boxes, opened, outside the side doors */
-        for (const [bx, lid] of [[16, 0.7], [46, 0.4], [148, 0.9], [172, 0.55]]) {
-          F.box(bx, 112, 16, 12, 6, 1);
-          const a = lid * 1.1 + Math.sin(u * TAU + bx) * 0.06;
-          F.line(bx, 112, bx + Math.cos(-a) * 17, 112 - Math.sin(a) * 17, 5, 1);
-          F.line(bx, 118, bx + 16, 118, 3, 1);
+        /* and the pews go one at a time under it */
+        nave(F, u, 0.08 + u * 0.55);
+        /* THE WEBS ARE BUILT. Three of them, started at different moments, so
+           the room is at three ages of the same decay at once. Each hangs off
+           the architecture it is eating. */
+        web(F, 30, 42, 34, 1, clamp01(u / 0.80), [[2, 8], [66, 12], [8, 96]]);
+        web(F, 162, 54, 26, 2, clamp01((u - 0.18) / 0.72), [[190, 10], [130, 20], [186, 108]]);
+        web(F, 128, 100, 17, 3, clamp01((u - 0.42) / 0.54), [[110, 76], [152, 84], [140, 132]]);
+        /* the side doors, and what the spirits left outside them: boxes with
+           the light still in them, which is the only paper left in the frame */
+        for (const [dx, s] of [[0, 1], [180, -1]]) {
+          F.rect(dx, 92, 12, 40, 6);
+          F.line(dx + (s > 0 ? 12 : 0), 92, dx + (s > 0 ? 12 : 0), 132, 7, 1.6);
+        }
+        for (const [bx, lid] of [[16, 0.72], [44, 0.44], [146, 0.90], [170, 0.58]]) {
+          F.rect(bx, 116, 18, 13, 5);
+          F.rect(bx + 3, 118, 12, 6, 0, true);
+          F.line(bx, 116, bx + 18, 116, 7, 1.4);
+          const a = lid * 1.2 + Math.sin(u * TAU * 0.6 + bx) * 0.05;
+          F.line(bx, 116, bx + Math.cos(a) * 19, 116 - Math.sin(a) * 19, 6, 1.4);
         }
       },
     },
@@ -176,81 +230,158 @@ export default {
     {
       label: "TWO SETS OF FOOTSTEPS", seconds: 13,
       line: "Ode to the storm ending. Ode to two sets of mud-imprinted footsteps, leading away from what the water kept.",
-      cues: [{ at: 0.3, f: 150, decay: 0.09, gain: 0.35, partials: [1, 2.2], noise: 0.9, nDecay: 0.03, seed: 101 }],
+      cues: [
+        { at: 0.30, f: 150, decay: 0.09, gain: 0.35, partials: [1, 2.2], noise: 0.9, nDecay: 0.03, seed: 101 },
+        { at: 0.62, f: 132, decay: 0.10, gain: 0.32, partials: [1, 2.2], noise: 0.9, nDecay: 0.03, seed: 102 },
+      ],
       draw(u, F) {
-        /* mud: a flat quantised field, not a texture. the water kept the rest */
-        F.rect(0, 96, F.W, 48, 2);
-        F.map((x, y, v) => (y > 96 && F.fbm(x * 0.08, y * 0.14, 2) > 0.56 ? 3 : undefined));
-        F.line(0, 96, 74, 95, 5, 1); F.line(86, 95, 192, 96, 5, 1);
-        /* the prints arrive one at a time — ADVANCE, with a dwell */
-        const n = Math.floor(u * 22);
-        for (let k = 0; k <= n && k < 22; k++) {
-          const p = k / 22;
-          const x = 172 - p * 168, y = 138 - p * 36;
-          const s = 1 - p * 0.55;
-          F.disc(x, y, 3 * s, 5); F.disc(x + 5 * s, y - 5 * s, 2.6 * s, 5);
+        const SH = 92;                                   // where the mud starts
+        /* ODE TO THE STORM ENDING. The cloud is a field of ink with a ragged
+           western edge, and it is handed back to the paper dot by dot as it
+           goes east. A sky that dims is a fade and this world has none; a sky
+           that LEAVES is a storm ending. */
+        const clear = -0.17 + ss(0.02, 0.90, u) * 1.22;
+        for (let y = 0; y < SH; y++) for (let x = 0; x < F.W; x++) {
+          /* the weather goes off to the north-east: east because it came from
+             the west, and up because a storm ending lifts off the horizon
+             before it lets go of the sky */
+          const e = x / F.W * 0.55 + (1 - y / SH) * 0.30 + (F.n2(x * 0.05, y * 0.06) - 0.5) * 0.30;
+          if (e > clear) F.ink(x, y, e > clear + 0.12 ? 4 : 2);
         }
-        /* THE STEP THAT LANDS ON THE CUE. n at u=0.3 is the print the sound
-           belongs to; a ring of mud thrown up around it is the only frame
-           the strike and the footfall are the same event. */
-        const strikeP = clamp01((u - 0.30) / 0.12);
-        if (strikeP > 0 && strikeP < 1) {
-          const sp = n / 22, sx = 172 - sp * 168, sy = 138 - sp * 36;
-          F.ring(sx, sy, strikeP * 10, Math.max(1, Math.round(6 - strikeP * 5)), 1);
+        /* and the last of the rain, which only falls where the cloud still is */
+        const R = F.rng(5);
+        for (let k = 0; k < 110; k++) {
+          const x = R() * 236 - 22, y0 = (R() * 210 + u * 640) % 210 - 34;
+          if (x / F.W * 0.55 < clear - 0.10 || y0 > SH) continue;
+          F.line(x, y0, x + 1, y0 + 6, 5, 1);
         }
-        /* what the water kept, behind them: a shape under a flat surface */
-        F.line(4, 90, 60, 90, 4, 1); F.line(72, 90, 188, 90, 4, 1);
-        F.arc(150, 90, 14, Math.PI, TAU, 3, 1);
-        tambourine(F, 150, 84, 10, 0.4, 3, 8);
+        /* the mud: a flat quantised field, not a texture. the water kept the rest */
+        F.rect(0, SH, F.W, 144 - SH, 2);
+        F.map((x, y, v) => (y > SH && F.n2(x * 0.09, y * 0.16) > 0.58 ? 3 : undefined));
+        F.line(0, SH, 74, SH - 1, 5, 1); F.line(86, SH - 1, 192, SH, 5, 1);
+        /* WHAT THE WATER KEPT: a pool that did not drain, with the thing still
+           in it. The trail starts here, which is what "leading away from" means
+           — the near end of the trail is the end they left. */
+        const PX = 158, PY = 128;
+        for (let y = -7; y <= 7; y++) {
+          const w = Math.round(Math.sqrt(Math.max(0, 1 - (y / 7) ** 2)) * 26);
+          for (let x = -w; x <= w; x++) F.ink(PX + x, PY + y, 4);
+        }
+        F.arc(PX - 4, PY + 3, 12, Math.PI, TAU, 7, 1.8);
+        for (let k = 1; k < 5; k++) {
+          const a = Math.PI + k / 5 * Math.PI;
+          F.disc(PX - 4 + Math.cos(a) * 12, PY + 3 + Math.sin(a) * 12, 1.8, 7);
+        }
+        /* THE PRINTS ARRIVE ONE AT A TIME, TWO SETS OF THEM, alternating feet,
+           and the pair converges with distance because everything does. There
+           are twenty-six at the end and none at the beginning. */
+        const N = 26, made = Math.floor(clamp01(u / 0.88) * N);
+        const tx = (p) => 140 - p * 118, ty = (p) => 132 - p * 34;
+        for (let k = 0; k < made && k < N; k++) {
+          const p = k / N, sc = 1 - p * 0.62;
+          for (const lane of [-1, 1]) {
+            const x = tx(p) + lane * 13 * sc + (k % 2 ? 2.4 : -2.4) * sc;
+            const y = ty(p) + (k % 2 ? 1 : 0);
+            F.disc(x, y, 3.2 * sc, 6);
+            F.disc(x + 3.6 * sc, y - 3.6 * sc, 2.3 * sc, 6);
+          }
+        }
+        /* THE STEPS THAT LAND ON THE CUES: mud thrown up around the print the
+           sound belongs to, which is the only frame where the strike and the
+           footfall are the same event. */
+        for (const at of [0.30, 0.62]) {
+          const sp = clamp01((u - at) / 0.12);
+          if (sp > 0 && sp < 1) {
+            const p = (made - 1) / N;
+            F.ring(tx(p), ty(p), sp * 9, Math.max(1, Math.round(6 - sp * 5)), 1);
+          }
+        }
+        /* the two who made them, at the head of their own trails, going */
+        for (const lane of [-1, 1]) {
+          const p = clamp01(clamp01(u / 0.88) - (lane < 0 ? 0.055 : 0));
+          const sc = 1 - p * 0.62;
+          F.fig(tx(p) + lane * 13 * sc, ty(p), 13 + 19 * sc * sc, {
+            mode: "walk", phase: u * 11.35 + (lane < 0 ? 0.7 : 0), face: -1,
+            guise: lane < 0 ? "poet" : "turned",
+          }, 7);
+        }
       },
     },
     {
       label: "SHATTERED", seconds: 13,
       line: "And a tambourine, shattered into pieces. What if I followed this trail, to where the broken pieces have washed ashore?",
-      cues: [{ at: 0.24, f: 1600, decay: 0.25, gain: 0.6, partials: [1, 1.6, 2.8, 4.9], noise: 1.0, nDecay: 0.05, seed: 111 }],
+      cues: [
+        { at: 0.22, f: 1600, decay: 0.25, gain: 0.60, partials: [1, 1.6, 2.8, 4.9], noise: 1.0, nDecay: 0.05, seed: 111 },
+        { at: 0.74, f: 380, decay: 0.35, gain: 0.28, partials: [1, 1.7, 3.1], noise: 0.8, nDecay: 0.08, seed: 112 },
+      ],
       draw(u, F) {
-        /* IT COMES APART ALONG THE RING and every piece keeps its curvature —
-           a shard of a circle is still a circle's worth of information, which
-           is the only reason the eye can still assemble a tambourine from it.
-           The first pass flew the shards apart in the first fifth of the
-           movement and left eleven seconds of nearly empty paper; the break
-           now runs the whole length, so the object is legible while it goes. */
-        const b = smooth(u) * 0.92;
-        const N = 11, r = 34, CX = 96, CY = 62;
-        /* THE STRIKE ITSELF, at the cue's own `at`: a burst from the ring's
-           centre outrunning the shards, which are still close to their
-           seats at u=0.24 — this is the impact, they are only starting to
-           leave it. */
-        const impact = clamp01((u - 0.24) / 0.10);
-        if (impact > 0 && impact < 1) F.ring(CX, CY, impact * 20, Math.max(1, Math.round(7 - impact * 6)), 1);
+        const CX = 96, CY = 46, r = 30, N = 13, SEA = 76;
+        /* THE SHORE, because the line names one: sky is paper, water is the
+           darkest field in the frame, sand is what is between them. The sea's
+           top edge is the one unbroken horizontal in this film — a horizon
+           whose whole meaning is that it has no gap in it. The tideline below
+           it wanders, because that one is water on sand and never straight. */
+        const edge = [];
+        for (let x = 0; x < F.W; x++) edge.push(104 + (F.n2(x * 0.07, 3) - 0.5) * 9);
+        for (let y = SEA; y < 144; y++) for (let x = 0; x < F.W; x++)
+          F.ink(x, y, y < edge[x] ? 4 : y > edge[x] + 16 ? 1 : 2);
+        /* the foam is the only paper below the horizon, and it is what makes
+           the tideline a line of water rather than a change of tone */
+        for (let x = 0; x < F.W; x++) {
+          if (F.n2(x * 0.19, 8) < 0.42) continue;
+          F.put(x, Math.round(edge[x]), 0); F.put(x, Math.round(edge[x]) + 1, 0);
+        }
+        /* IT COMES APART ALONG THE RING and every piece keeps its curvature.
+           Each shard KEEPS ITS SEAT and travels outward along its own radius,
+           turning about its own middle: an earlier pass rebased every shard to
+           the centre first and the whole thing imploded.
+           A TAMBOURINE HAS A HEAD ON IT. Drawn as a hoop it was eleven curved
+           strokes in an empty frame and 3% of the field; drawn as a skin, the
+           break is a solid thing coming apart into solid things, which is what
+           the eye needs to follow eleven pieces at once. */
+        const impact = clamp01((u - 0.22) / 0.10);
+        if (impact > 0 && impact < 1) F.ring(CX, CY, impact * 24, Math.max(1, Math.round(7 - impact * 6)), 1);
         for (let k = 0; k < N; k++) {
-          const a0 = k / N * TAU, a1 = (k + 0.78) / N * TAU, mid = (a0 + a1) / 2;
-          /* Each shard KEEPS ITS SEAT ON THE RING and travels outward along its
-             own radius, turning about its own middle. An earlier pass rebased
-             every shard to the centre before moving it, which piled all eleven
-             into one blob — a tambourine that shattered inward. */
-          const fly = b * (14 + F.noise(k, 1) * 58);
-          const drop = b * b * 46;
-          const spin = b * (F.noise(k, 2) - 0.5) * 3.4;
-          const mx = CX + Math.cos(mid) * r, my = CY + Math.sin(mid) * r;
-          const ox = Math.cos(mid) * fly, oy = Math.sin(mid) * fly + drop;
+          const a0 = k / N * TAU, a1 = (k + 0.93) / N * TAU, mid = (a0 + a1) / 2;
+          /* not every piece lets go at once: an eighth of a second of stagger
+             is the difference between a break and a pinwheel opening */
+          const b = smooth(clamp01((u - 0.22 - F.noise(k, 5) * 0.07) / 0.60));
+          const mx = CX + Math.cos(mid) * r * 0.62, my = CY + Math.sin(mid) * r * 0.62;
+          const fly = 8 + F.noise(k, 1) * 28;
+          /* WHERE IT COMES TO REST. The fall is solved for the moment this
+             piece reaches its own place on the sand, and after that it does
+             not move again — pieces that have washed ashore have stopped. */
+          const land = 112 + F.noise(k, 3) * 20, A = 88, L = 15;
+          const bl = Math.min(1, (L + Math.sqrt(L * L + 4 * A * Math.max(2, land - my))) / (2 * A));
+          const bb = Math.min(b, bl);
+          const ox = Math.cos(mid) * fly * bb, oy = -L * bb + A * bb * bb;
+          const spin = bb * (F.noise(k, 2) - 0.5) * 3.0;
           const cs = Math.cos(spin), sn = Math.sin(spin);
-          const P = (t) => {
-            const a = a0 + (a1 - a0) * t;
-            const dx = CX + Math.cos(a) * r - mx, dy = CY + Math.sin(a) * r - my;
+          const T = (rr, aa) => {
+            const dx = CX + Math.cos(aa) * rr - mx, dy = CY + Math.sin(aa) * rr - my;
             return [mx + dx * cs - dy * sn + ox, my + dx * sn + dy * cs + oy];
           };
-          const seg = 8;
-          for (let j = 0; j < seg; j++) {
-            const [px, py] = P(j / seg), [qx, qy] = P((j + 1) / seg);
-            F.line(px, py, qx, qy, 7, 2);
+          for (let rr = 1.5; rr < r - 1; rr += 1.0) {
+            const st = 1.0 / rr;
+            for (let aa = a0; aa <= a1; aa += st) { const q = T(rr, aa); F.ink(q[0], q[1], 3); }
           }
-          F.disc(mx + ox, my + oy, 2.4, 6);          // the jingle it tore loose with
+          for (let aa = a0; aa <= a1; aa += 1 / r) { const q = T(r, aa); F.disc(q[0], q[1], 1.3, 7); }
+          if (b > 0.01) for (const aa of [a0, a1])
+            for (let rr = 0; rr < r; rr += 0.7) { const q = T(rr, aa); F.ink(q[0], q[1], 6); }
+          const j = T(r, mid); F.disc(j[0], j[1], 2.3, 7);       // its jingle
         }
-        /* and the trail, already leaving the frame toward 04 */
-        F.line(0, 128, 70, 126, 3, 1); F.line(84, 126, 192, 124, 3, 1);
-        const n = Math.floor(clamp01((u - 0.35) / 0.65) * 12);
-        for (let k = 0; k <= n && k < 12; k++) F.disc(12 + k * 15, 134 - k * 0.5, 2.4, 4);
+        /* WHAT IF I FOLLOWED THIS TRAIL. He comes along the sand behind the
+           pieces, laying prints of his own, and they are landing where he is
+           going — the film ends with him still walking toward them. */
+        const p = clamp01((u - 0.06) / 0.86);
+        const made = Math.floor(p * 15);
+        for (let k = 0; k < made; k++) {
+          const q = k / 15, x = 2 + q * 44, y = 136 - q * 4;
+          F.disc(x, y, 2.2, 5); F.disc(x + 2.6, y - 2.6, 1.5, 5);
+        }
+        F.fig(2 + p * 44, 136 - p * 4, 27, {
+          mode: "walk", phase: u * 9.35, face: 1, guise: "poet", headTurn: 0.4,
+        }, 7);
       },
     },
   ],

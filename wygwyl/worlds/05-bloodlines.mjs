@@ -79,106 +79,172 @@ export default {
       label: "NAME MY OWN STARS", seconds: 13,
       line: "Now go, they tell me. To ask if I can inherit the earth — to ask if I can name my own stars. Even galaxies, if I may.",
       cues: [
-        { at: 0.10, f: 880, decay: 0.30, gain: 0.50, partials: [1, 2.01, 3.01, 4.02], noise: 0.35, nDecay: 0.012, seed: 51 },
-        { at: 0.37, f: 740, decay: 0.26, gain: 0.40, partials: [1, 2.01, 3.01], noise: 0.35, nDecay: 0.012, seed: 52 },
-        { at: 0.64, f: 620, decay: 0.30, gain: 0.40, partials: [1, 2.01, 3.01], noise: 0.35, nDecay: 0.012, seed: 53 },
+        { at: 0.30, f: 880, decay: 0.30, gain: 0.50, partials: [1, 2.01, 3.01, 4.02], noise: 0.35, nDecay: 0.012, seed: 51 },
+        { at: 0.53, f: 990, decay: 0.28, gain: 0.42, partials: [1, 2.01, 3.01], noise: 0.35, nDecay: 0.012, seed: 52 },
+        { at: 0.76, f: 1180, decay: 0.34, gain: 0.42, partials: [1, 2.01, 3.01], noise: 0.35, nDecay: 0.012, seed: 53 },
       ],
       draw(u, F) {
-        const SKY = { x: 16, y: 20, w: 146, h: 70 };
-        /* THE EARTH HE IS ASKING FOR IS A GLOBE, so the horizon is convex —
-           sixteen cells of camber, which is enough to be a planet and not so
-           much as to be a hill. Four runs: the first pass drew it as one
-           span and the halftone turned it into a rule under a diagram. */
-        const gy = (x) => 112 + (300 - Math.sqrt(300 * 300 - (x - 96) * (x - 96)));
-        for (const [a, b] of [[0, 44], [52, 92], [100, 140], [148, 192]])
-          for (let x = a; x < b; x++) F.ink(x, gy(x), 6);
-        /* and it is solid ground: the stipple thickens with depth so the
-           earth has mass under the horizon rather than blotches on it */
+        /* THE ASK ESCALATES — the earth, then the stars, then galaxies — so
+           the PICTURE escalates with it, because the line's subject is an
+           order of magnitude and not a mood. This movement used to hold one
+           fixed camera on a small constellation for sixteen seconds: the
+           naming was real and it was two per cent of the field, which is a
+           photograph of somebody naming stars rather than the naming.
+           So the frame goes where the ask goes. The earth he asks for shrinks
+           under his feet into a lit cap at the bottom of the field; the sky he
+           is naming deepens two whole levels around it; and in the last third
+           there is a galaxy across it that no name is allowed to land on. */
+        const away = smooth(u);
+        const R = lerp(320, 84, away), TOP = lerp(106, 130, away), CY = TOP + R;
+        const gy = (x) => {
+          const dx = x - 96, s = R * R - dx * dx;
+          return s <= 0 ? null : CY - Math.sqrt(s);
+        };
+        /* THE NIGHT ARRIVES IN WHOLE LEVELS, keyed to height above the surface
+           he is leaving: the last of the day sits as a lit rim on the limb and
+           the sky steps down twice above it to the dark stars are visible in.
+           The bands close as he goes, which is what leaving an atmosphere
+           looks like. Rejected: a flat level-2 sky switched on at u=0, which
+           is a backdrop; the point is that the dark is arriving.
+           THE ANONYMOUS STARS COME OUT BY THEMSELVES. A faint star is a patch
+           of sky two levels short of the dark around it, so they live in the
+           same map and cost nothing — invisible at dusk, thick by the middle,
+           which is the honest order of events and not a schedule. */
+        const night = ss(0, 0.34, u);
+        const t1 = lerp(160, 9, night), t2 = lerp(230, 22, night), t3 = lerp(320, 50, night);
+        F.map((x, y) => {
+          const a = Math.hypot(x - 96, y - CY) - R;
+          const l = a < t1 ? 0 : a < t2 ? 1 : a < t3 ? 2 : 3;
+          if (l === 0) return;
+          return F.noise(x >> 1, y >> 1) > 0.986 ? Math.max(0, l - 2) : l;
+        });
+        /* EVEN GALAXIES, IF I MAY. It arrives last, it is bigger than the
+           whole constellation — one arm leaves the frame — and NO NAME LANDS
+           ON IT: the line asks permission and this film does not grant it. It
+           is cut out of the night as light, the same substance the stars he
+           did claim are made of, so that what he is refused is legible as the
+           same thing he was given. Rejected: two thin spiral strokes, which is
+           what was here before and read as a diagram of a galaxy at the size
+           of a coin. */
+        const gal = ss(0.58, 0.98, u);
+        if (gal > 0.01) {
+          const GX = 172, GY = 32, GR = gal * 126;
+          F.map((x, y, v) => {
+            if (y > 106 || v === 0) return;
+            const dx = (x - GX) * 0.58, dy = y - GY;
+            const rr = Math.hypot(dx, dy);
+            if (rr > GR) return;
+            if (rr < GR * 0.09) return 0;                              // the core
+            if (rr < GR * 0.18) return F.noise(x, y) < 0.70 ? 0 : 1;   // the bulge
+            /* ARMS, NOT A SMEAR. The first pass gave each arm half a sector of
+               angular width and tapered its density — which on a lattice is a
+               cloud, and the frame read as weather. An arm is narrow and it
+               either has stars in it or it does not. */
+            let p = (Math.atan2(dy, dx) - Math.log(rr) * 2.6) / Math.PI;
+            p -= Math.floor(p);
+            const w = Math.max(0, 1 - Math.min(p, 1 - p) * 4.5);
+            const dens = w * w * (1.15 - rr / GR);
+            if (F.noise(x, y) < dens * 0.85) return 0;
+            if (F.noise(x + 7, y + 3) < dens * 0.45) return 1;
+          });
+        }
+        /* THE EARTH HE IS ASKING FOR IS A GLOBE, so the horizon is convex and
+           the camber strengthens as it recedes — the one honest cue that the
+           thing is round and is going away. Past the halfway point its limb
+           has come inside the frame by itself and there is no full-width span
+           left to break. Its stipple thickens with depth, so the earth has
+           mass under the horizon instead of blotches on it. */
         for (let x = 0; x < F.W; x++) {
           const g0 = gy(x);
-          for (let y = g0 + 1; y < F.H; y++) {
+          if (g0 === null || g0 >= F.H) continue;
+          for (let y = Math.max(0, Math.ceil(g0)); y < F.H; y++) {
             const d = clamp01((y - g0) / 26);
-            if (F.fbm(x * 0.075, y * 0.09, 3) > 0.52 - d * 0.17) F.ink(x, y, d > 0.5 ? 3 : 2);
+            if (F.fbm(x * 0.075, y * 0.09, 2) > 0.50 - d * 0.18) F.ink(x, y, d > 0.45 ? 5 : 4);
           }
         }
-        /* the sky he has not claimed: dim, anonymous, and more numerous than
-           the nine. Without it the named stars read as diagram, not sky. */
-        const R = F.rng(11);
-        for (let k = 0; k < 170; k++) {
-          const sx = 3 + R() * 186, sy = 2 + R() * 96, br = R();
-          F.ink(sx, sy, br > 0.86 ? 3 : 1);
-        }
+        for (const [a, b] of [[0, 44], [52, 92], [100, 140], [148, 192]])
+          for (let x = a; x < b; x++) {
+            const g0 = gy(x);
+            if (g0 !== null && g0 >= 0 && g0 < F.H) F.ink(x, Math.round(g0), 6);
+          }
         /* THE GATE is in every frame of this film. Here it is the smallest
            thing in it — ten cells of doorway at the top of the sky, where he
            is looking. It grows every movement until it is the movement. */
-        F.arc(96, 8, 5, Math.PI, TAU, 4, 1);
-        F.line(91, 8, 91, 15, 4, 1); F.line(101, 8, 101, 15, 4, 1);
+        F.arc(96, 8, 5, Math.PI, TAU, 6, 1);
+        F.line(91, 8, 91, 15, 6, 1); F.line(101, 8, 101, 15, 6, 1);
+        /* NOW GO, THEY TELL ME — so he goes, and the ground goes with him. He
+           walks the crown of a world getting smaller under his feet, which is
+           the only way a body stays in the same frame as an escalation from
+           earth to galaxies and stays the size the line says he is. */
+        const mh = lerp(34, 13, away);
+        const mx = 96 + lerp(-54, -4, away) * (0.62 + 0.38 * R / 320);
+        const my = gy(mx) ?? 143;
+        F.fig(mx, my, mh, {
+          mode: "walk", phase: u * 5.35, face: 1, arms: "reach", guise: "poet",
+          headTilt: 0.5, headTurn: 0.35,
+        }, 7);
+        const HX = mx + mh * 0.36, HY = my - mh * 0.865;
 
-        const prog = clamp01((u - 0.04) / 0.58) * KIN.length;
+        const SKY = { x: 10, y: 22, w: 126, h: 76 };
+        const prog = clamp01((u - 0.24) / 0.52) * KIN.length;
         const done = Math.min(KIN.length, Math.floor(prog));
         const f = clamp01(prog - done);
-
-        /* A TIE IS A CONSEQUENCE OF TWO NAMES. Nothing joins the stars but
-           the fact that both ends have been claimed — so the constellation
-           assembles itself out of the naming rather than being revealed by
-           it. Dotted: a solid line here reads as scaffolding. */
+        /* A TIE IS A CONSEQUENCE OF TWO NAMES. Nothing joins the stars but the
+           fact that both ends have been claimed — so the constellation
+           assembles itself out of the naming rather than being revealed by it.
+           Dotted, and in light: a dark line drawn between two lights is a
+           diagram of a constellation, not a constellation. */
         for (const [a, b] of TIES) {
           if (rankOf(a) >= done || rankOf(b) >= done) continue;
           const [ax, ay] = kinAt(a, SKY), [bx, by] = kinAt(b, SKY);
           const n = Math.max(2, Math.round(Math.hypot(bx - ax, by - ay) / 4));
-          for (let k = 0; k <= n; k++) F.ink(lerp(ax, bx, k / n), lerp(ay, by, k / n), 3);
-        }
-        for (let i = 0; i < KIN.length; i++) {
-          const [sx, sy] = kinAt(i, SKY), r = rankOf(i);
-          if (r > done) { F.ink(sx, sy, 2); continue; }
-          const lit = r < done ? 1 : f;
-          const arm = 2 + lit * 3.6;
-          F.line(sx - arm, sy, sx + arm, sy, 7, 1);
-          F.line(sx, sy - arm, sx, sy + arm, 7, 1);
-          F.disc(sx, sy, 0.8 + lit, 7);
-          /* the label TYPES: naming is an act with a duration, and the frame
-             where half a name has landed is the frame the film is about */
-          const nm = KIN[i].n;
-          const shown = r < done ? nm : nm.slice(0, Math.ceil(f * nm.length));
-          if (shown) {
-            const fw = F.wordW(nm, 6), cw = F.wordW(shown, 6);
-            F.word(shown, sx + KIN[i].lx - fw / 2 + cw / 2, sy + KIN[i].ly, 6, 5);
-          }
-          if (i === HEIR && r < done) { F.put(sx, sy, 8); F.put(sx + 1, sy, 8); }
+          for (let k = 0; k <= n; k++) F.put(lerp(ax, bx, k / n), lerp(ay, by, k / n), 0);
         }
         /* the claim itself: a dashed reach from his hand to the star being
-           taken. Dashed, because he has no beam — he only has nerve. */
-        const HX = 43.4, HY = 99.8;
+           taken. Dashed and dim, because he has no beam — he only has nerve. */
         if (done < KIN.length) {
           const [tx, ty] = kinAt(CLAIM[done], SKY);
           const n = Math.max(3, Math.round(Math.hypot(tx - HX, ty - HY) / 3));
           const reach = Math.min(1, f * 1.7);
           for (let k = 0; k <= n * reach; k++)
-            if (k % 2 === 0) F.ink(lerp(HX, tx, k / n), lerp(HY, ty, k / n), 4);
+            if (k % 2 === 0) F.put(lerp(HX, tx, k / n), lerp(HY, ty, k / n), 1);
         }
-        /* the reach hand already lands within a few cells of HX,HY by the
-           pose solver's own default — a `gesture` override here would only
-           re-tune what the original hand-placed dashed line already trusts.
-           He is looking up at what he's naming, which `arms:"reach"` alone
-           cannot say. */
-        F.fig(34, gy(34), 26, { mode: "stand", arms: "reach", face: 1, guise: "poet", phase: u * 1.7, weight: 0.72, headTilt: 0.5 }, 7);
-
-        /* EVEN GALAXIES, IF I MAY. It arrives late, it is bigger than the
-           whole constellation, and NO LABEL LANDS ON IT: the line asks
-           permission and this film does not grant it. The ask goes out as a
-           thinner dash than the ones that worked. */
-        const gal = ss(0.70, 0.96, u);
-        if (gal > 0.01) {
-          const gcx = 163, gcy = 24, gr = gal * 23;
-          for (let armi = 0; armi < 2; armi++)
-            for (let k = 0; k < 36; k++) {
-              const t = k / 36, a = armi * Math.PI + t * 3.1 + u * 0.4;
-              const rr = gr * (0.14 + t * 0.86);
-              F.ink(gcx + Math.cos(a) * rr * 1.3, gcy + Math.sin(a) * rr * 0.6, t > 0.62 ? 2 : 4);
-            }
-          F.disc(gcx, gcy, 1.4 + gal * 1.6, 6);
-          for (let k = 0; k <= 30; k++)
-            if (k % 3 === 0) F.ink(lerp(HX, gcx, k / 30), lerp(HY, gcy, k / 30), 2);
+        for (let i = 0; i < KIN.length; i++) {
+          const r = rankOf(i);
+          if (r > done) continue;         // still one of the anonymous specks
+          const [sx, sy] = kinAt(i, SKY);
+          const lit = r < done ? 1 : f;
+          /* A NAMED STAR IS A HOLE OF LIGHT. Ink cannot brighten and a star
+             you have taken is the brightest thing in your sky, so the claim is
+             a piece of the night handed back to paper — and it opens as the
+             name lands rather than switching on. */
+          F.disc(sx, sy, 1.4 + lit * 3.4, 0, true);
+          const arm = 3 + lit * 9;
+          F.line(sx - arm, sy, sx + arm, sy, 0, 1, true);
+          F.line(sx, sy - arm, sx, sy + arm, 0, 1, true);
+          /* the label TYPES: naming is an act with a duration, and the frame
+             where half a name has landed is the frame the film is about */
+          const nm = KIN[i].n;
+          const shown = r < done ? nm : nm.slice(0, Math.ceil(f * nm.length));
+          if (shown) {
+            const fw = F.wordW(nm, 7), cw = F.wordW(shown, 7);
+            /* THE NAME COMES ON A PLATE — the same plate the lumber carries in
+               movement two. One mark that reads on paper and on night alike,
+               and the film's own rhyme: the name he gives a star up here is
+               the name branded on the beam over his head down there. No border
+               on it: nine bordered tags is a star chart, and this is a sky.
+               Clamped into the frame, because a name half off the edge is the
+               one thing a movement about naming cannot afford. */
+            const bx = clamp01((sx + KIN[i].lx * 1.3 - fw / 2 + cw / 2 - cw / 2 - 5) / (F.W - cw - 10)) * (F.W - cw - 10) + cw / 2 + 5;
+            /* a name that would run off the top of the sky goes UNDER its star
+               instead of being shoved down into it — and the top of the sky is
+               where the gate is, which nothing else in this film may cover */
+            const ly = KIN[i].ly * 1.45;
+            const by = sy + (sy + ly < 22 ? -ly : ly);
+            F.rect(bx - cw / 2 - 2, by - 6, cw + 4, 12, 0, true);
+            F.word(shown, bx, by, 7, 7);
+          }
+          if (i === HEIR && r < done) { F.put(sx, sy, 8); F.put(sx + 1, sy, 8); F.put(sx, sy + 1, 8); }
         }
       },
     },

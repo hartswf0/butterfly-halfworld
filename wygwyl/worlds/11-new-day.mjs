@@ -130,15 +130,27 @@ function temple(F, progress, l = 7) {
 
 /* ---------------------------------------------------------------- weather
    Hills, water and fog — the world before and around the temple. */
+/* THE RIDGE AS ONE FUNCTION. Three movements have to know where the hills are
+   before they can decide which cells are sky and which are valley floor, so
+   the profile is named rather than being re-typed inside the drawing that
+   happens to use it. */
+const ridgeYAt = (x, y0, amp) =>
+  y0 - amp * 0.6 * Math.sin(x * 0.021 + 0.4) - amp * 0.35 * Math.sin(x * 0.05 + 2.1);
 function hillsRidge(F, y0, amp, l = 4) {
-  const ridgeY = (x) => y0 - amp * 0.6 * Math.sin(x * 0.021 + 0.4) - amp * 0.35 * Math.sin(x * 0.05 + 2.1);
+  const ridgeY = (x) => ridgeYAt(x, y0, amp);
   for (const [a, b] of [[0, 68], [78, 128], [138, 192]])
     for (let x = a; x < b; x++) F.ink(x, Math.round(ridgeY(x)), l);
+  /* THE TREE COVER THINS TOWARD THE FOOT OF THE HILL rather than stopping on
+     a ruled line at y0+18. On paper that line was invisible; over a toned
+     valley it drew a hard full-width tonal seam across the frame — the stripe
+     the dot law warns about, arriving through the back door of a texture that
+     simply ended. */
   for (let x = 0; x < F.W; x++) {
-    const ry = ridgeY(x);
-    for (let y = Math.ceil(ry); y < y0 + 18; y++) {
+    const ry = ridgeY(x), foot = y0 + 18;
+    for (let y = Math.ceil(ry); y < foot; y++) {
       const n = F.n2(x * 0.15, y * 0.22);
-      if (n > 0.58) F.ink(x, y, n > 0.76 ? l - 1 : l - 2);
+      const t = (y - ry) / Math.max(1, foot - ry);
+      if (n > 0.58 + t * t * 0.34) F.ink(x, y, n > 0.76 ? l - 1 : l - 2);
     }
   }
 }
@@ -205,10 +217,12 @@ function dewWinks(F, u, y) {
     if (phase === 0) { F.disc(x, yy, 1, 6); F.put(Math.round(x), Math.round(yy) - 1, 6); }
   }
 }
-function groundTexture(F, y0, y1, seedK) {
+/* `l` because half this film's ground is now standing on a toned field rather
+   than on paper, and a level-2 speck on a level-3 shadow is not a speck */
+function groundTexture(F, y0, y1, seedK, l = 2) {
   const R = F.rng(seedK);
-  for (let k = 0; k < 70; k++) F.disc(R() * F.W, y0 + R() * (y1 - y0), 0.8, 2);
-  for (const [a, b] of [[0, 60], [70, 130], [140, 192]]) F.line(a, y0, b, y0, 3, 1);
+  for (let k = 0; k < 70; k++) F.disc(R() * F.W, y0 + R() * (y1 - y0), 0.8, l);
+  for (const [a, b] of [[0, 60], [70, 130], [140, 192]]) F.line(a, y0, b, y0, l + 1, 1);
 }
 
 export default {
@@ -245,37 +259,71 @@ export default {
         { at: 0.78, f: 520, decay: 0.8, gain: 0.42, partials: [1, 2.01, 3.02], noise: 0.15, nDecay: 0.03, seed: 22 },
       ],
       draw(u, F) {
-        /* FRESH MUTED COLORS: the hills and dawn sit at 2–4 so the temple,
-           the only thing at 7, is unmistakably the subject and not one of
-           several equally loud shapes. The first pass gave the hills their
-           usual 4–6 and the frame read as two competing landscapes. */
-        hillsRidge(F, 46, 10, 3);
-        /* the sun sits clear of the hill's own peak (y≈36 at its highest)
-           — the first pass put it at y 54-64 and it landed inside the
-           hill's tree stipple, and a disc drawn into a noise field reads
-           as more noise, not as a sun */
-        const sunY = lerp(26, 16, smooth(u));
-        F.disc(174, sunY, 6, 3); F.ring(174, sunY, 8, 2, 1);
-        /* recycled airs: a few soft wisps, drifting — NOT the fog wavefront
-           of M1, which is a claimed front. These only ever add a little
-           ink; they never cover anything, because dawn is clearing, not
-           arriving. */
+        /* THE AWAKENING OF DAWN IS A THING THAT HAPPENS TO THE WHOLE FIELD,
+           and this movement used to open on paper — which meant nothing in it
+           could awaken, because nothing in it was asleep. Seventeen seconds of
+           three stones and six columns arriving at one per cent of the frame
+           apiece is a photograph of a building site.
+
+           So the night is here at the start and the light takes it from the
+           HORIZON UP, which is where dawn comes from, and tallest in the east,
+           because the sun that is still under the hills is over there. Two
+           whole levels of night above the glow line: quantised falloff is the
+           only falloff this lattice has, and it is what makes a sky a sky
+           rather than a wash. No sun disc anywhere in the movement — the
+           awakening of dawn is the hour BEFORE the sun, and drawing one here
+           would spend the sunrise the last movement needs. */
+        const dawn = smooth(u);
+        const HY = 46, AMP = 10;
+        const glow = lerp(1, 74, dawn);
+        /* the valley is still under the night and only catches up dot by dot:
+           the first courses are laid before the light gets down here, which is
+           what "in fresh muted colors" is a description of */
+        const lift = clamp01((dawn - 0.28) / 0.66);
+        F.map((x, y) => {
+          const ry = ridgeYAt(x, HY, AMP);
+          const a = ry - y;
+          if (a >= 0) {
+            const g = glow * (0.55 + 0.80 * x / F.W);
+            return a < g ? 0 : a < g + 26 ? 1 : 2;
+          }
+          const d = (y - ry + (F.n2(x * 0.04, 3) - 0.5) * 12) / 100;
+          const base = d > 0.66 ? 3 : d > 0.28 ? 2 : 1;
+          return F.bayer(x, y) < lift ? base - 1 : base;
+        });
+        hillsRidge(F, HY, AMP, 6);
+        /* recycled airs: a few soft wisps, drifting. They are CLEARINGS now,
+           not ink — on a valley that is itself a tone, a level-1 smudge is
+           invisible, and air that has been recycled is air you can see
+           through. They never claim territory, which is what separates them
+           from M1's fog: dawn is clearing, not arriving. */
         for (let k = 0; k < 5; k++) {
-          const dx = 20 + k * 34 + Math.sin(u * TAU * 0.5 + k) * 6;
-          const dy = 96 + Math.sin(u * TAU * 0.3 + k * 1.3) * 3;
-          F.disc(dx, dy, 2.4, 1); F.disc(dx + 4, dy + 1, 1.6, 1);
+          const cx = 20 + k * 34 + Math.sin(u * TAU * 0.5 + k) * 7;
+          const cy = 92 + Math.sin(u * TAU * 0.3 + k * 1.3) * 5;
+          /* a lens, not a disc: two stacked circles read as eggs lying in the
+             field, and air lies along the ground in a streak */
+          for (let dx = -10; dx <= 10; dx++) {
+            const h = 2.3 * (1 - (dx / 10) * (dx / 10));
+            for (let dy = -h; dy <= h; dy++) F.put(Math.round(cx + dx), Math.round(cy + dy), 0);
+          }
         }
-        groundTexture(F, T_GY, 140, 201);
+        groundTexture(F, T_GY, 140, 201, 5);
         temple(F, u * 9, 7);
-        /* THE WITNESS CHEERS ON THE SAME BEAT THE CUES STRIKE: arms punch
-           up at the two `at` values instead of holding one open shrug for
-           thirteen seconds — a small body (h14) only answers to phase, rot
-           and arms in this kit, so those are the whole performance it can
-           give, and a cut from open to up is honest here the way 10's
-           walk-to-ride cut is: a beat, not a blend. */
-        const cheer = Math.max(win(u, 0.24, 0.30, 0.34, 0.42), win(u, 0.72, 0.78, 0.82, 0.90)) > 0.5;
-        F.fig(20, T_GY, 14, { mode: "stand", arms: cheer ? "up" : "open",
-          rot: Math.sin(u * TAU * 1.3) * 0.10 }, 6);
+        /* WE CAN REBUILD THIS TEMPLE — so there are two of them, and one of
+           them arrives. The mason walks in from off the frame and reaches the
+           stone he is setting at about the moment the third course goes down;
+           the other is already at the far end of the platform. A small body
+           (h14) only answers to mode, phase, arms and rot in this kit, so a
+           crossing and a cut from open to up on the cue beat is the whole
+           performance it can give — and a cut on a struck note is honest here
+           the way 10's walk-to-ride cut is: a beat, not a blend. */
+        const walk = clamp01((u - 0.04) / 0.44);
+        F.fig(lerp(-8, 24, smooth(walk)), T_GY, 14,
+          { mode: walk < 1 ? "walk" : "stand", phase: u * 6.35 + 0.15, face: 1,
+            arms: walk < 1 ? "swing" : (win(u, 0.72, 0.78, 0.84, 0.92) > 0.5 ? "up" : "open") }, 6);
+        F.fig(174, T_GY, 13, { mode: "stand", face: -1,
+          arms: win(u, 0.24, 0.30, 0.36, 0.44) > 0.5 ? "up" : "reach",
+          rot: -0.08 + Math.sin(u * TAU * 0.9) * 0.06 }, 6);
       },
     },
     {

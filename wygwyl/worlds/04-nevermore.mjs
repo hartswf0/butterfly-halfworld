@@ -558,54 +558,65 @@ export default {
            on, because the reach of touch is precisely the thing being put back.
            Nothing in this world brightens — the dark is untouched and the film
            is still the darkest it has been. What grows is the hole in it. */
-        const fit = ss(0.22, 0.74, u);
-        const rx = lerp(49, 75, fit), ry = lerp(33, 55, fit);
+        const HX = 96, HY = 128, HH = 54;
+        const fit = ss(0.20, 0.76, u);
+        const rx = lerp(48, 80, fit), ry = lerp(42, 60, fit);
+        /* THE RIM FIRMS UP TOO. M5's island was mostly rim — three fifths of
+           it dither — because a man feeling for ground with his forearms has
+           more edge to his reach than centre. Here the schedule is steeper, so
+           the middle of it is solid paper and things can be SEEN lying in it;
+           at M5's setting the two hands lay in the speckle and disappeared. */
         F.map((x, y) => {
-          const d = Math.hypot((x - 96) / rx, (y - 98) / ry);
-          if (d < 1 && F.bayer(x, y) < (1 - d) * 1.5) return 0;
+          const d = Math.hypot((x - HX) / rx, (y - 106) / ry);
+          if (d < 1 && F.bayer(x, y) < (1 - d) * 2.6) return 0;
         });
-        F.line(96 - rx * 0.78, 128, 96 - rx * 0.16, 127, 4, 1);
-        F.line(96 - rx * 0.02, 127, 96 + rx * 0.76, 128, 4, 1);
+        F.line(HX - rx * 0.80, 127, HX - rx * 0.20, 126, 4, 1);
+        F.line(HX - rx * 0.04, 126, HX + rx * 0.78, 127, 4, 1);
         const G = F.rng(13);
-        for (let k = 0; k < 90; k++) F.disc(96 + (G() - 0.5) * rx * 1.8, 102 + G() * 38, 1.0, 3);
+        for (let k = 0; k < 80; k++) F.disc(HX + (G() - 0.5) * rx * 1.7, 106 + G() * 30, 1.0, 3);
         /* DUST AFTER DUSK. It does not settle: it hangs, turns over and lifts,
            and it is the one thing in this half of the film allowed to feel
            good. Every mote keeps its own rate and its own start, so the field
            drifts rather than pulsing as one body — and it wraps, because a
            mote that leaves the top has to be replaced by one at the bottom or
-           the air empties out over twenty-two seconds. */
+           the air empties out over twenty-two seconds. It is also, once the
+           island is the only lit thing left, the only motion in the frame that
+           is not him: a room with dust in it is a room with air in it. */
         const D = F.rng(21);
-        for (let k = 0; k < 150; k++) {
+        for (let k = 0; k < 220; k++) {
           const bx = D(), by = D(), r2 = D();
-          const my = 62 + (((by * 74 - u * (16 + r2 * 34)) % 74) + 74) % 74;
-          F.disc(96 + (bx - 0.5) * rx * 1.95 + Math.sin(u * TAU * (0.4 + r2 * 0.7) + bx * 9) * 3, my, 0.9, 3);
+          const my = 58 + (((by * 78 - u * (26 + r2 * 54)) % 78) + 78) % 78;
+          F.disc(HX + (bx - 0.5) * rx * 1.9 + Math.sin(u * TAU * (0.4 + r2 * 0.7) + bx * 9) * 3,
+                 my, 0.9, r2 > 0.86 ? 5 : 3);
         }
         /* HE GETS UP OFF THE BARE GROUND. At the start he is folded over the
-           place M5 left him searching, one wrist down in the grit against the
-           hand lying there; by the end he is standing at full height with both
-           of them on. The crouch unfolds, the gaze comes up off the ground,
-           the weight settles onto one leg — four facts off one number, which
-           is the only way a body reads as performing rather than as being
-           posed twice and cut between. */
-        const HX = 96, HY = 138, HH = 54;
-        const crouch = lerp(1.45, 0, fit);
-        const gx = lerp(-27, 21, fit), gy = lerp(3, 31, fit);
-        const hipY = HH * 0.5 - HH * 0.16 * crouch, shY = HH * 0.815 - HH * 0.20 * crouch;
+           place M5 left him searching, arms spread on the ground where the two
+           hands are lying; by the end he is standing at full height with them
+           on. THE ARMS NEVER CHANGE POSE — they are open the whole way, and
+           the same open arms that were a man on his knees over a thing in the
+           dirt become a man asserting he has his hands back. The crouch
+           unfolds, the gaze comes up off the ground, the weight settles onto
+           one leg: three facts off one number, which is how a body performs
+           rather than being posed twice and cut between. */
+        const crouch = lerp(0.82, 0, fit);
+        const shY = HH * 0.815 - HH * 0.20 * crouch;
         F.fig(HX, HY, HH, {
-          mode: "stand", face: 1, guise: "poet", phase: u * 1.7, arms: "reach",
-          crouch, weight: lerp(0.5, 0.74, fit), headTilt: lerp(-0.55, 0.14, fit),
-          gesture: [gx, gy],
+          mode: "stand", face: 1, guise: "poet", phase: u * 1.7, arms: "open",
+          crouch, weight: lerp(0.5, 0.74, fit), headTilt: lerp(-0.62, 0.14, fit),
+          lean: lerp(-0.13, 0, fit),
         }, 7);
-        /* THEY USED TO BE MINE. The near one is the one he already had hold
-           of: it rides the wrist the rig puts there, so it comes up off the
-           ground because his arm does, not on a schedule of its own. The far
-           one is still lying where the search found it and travels to the
-           other wrist — and both TURN as they go, from palm-down in the grit
-           to hanging off a joint. Rejected: throwing them, which made a
-           juggling act of the one gesture in the film that costs something. */
-        hand(F, HX + gx, HY - gy, 18, lerp(1.42, 4.10, fit), 0.32, 7);
-        hand(F, lerp(132, HX + HH * 0.09, fit), lerp(129, HY - hipY + HH * 0.02, fit),
-             18, lerp(4.78, 2.16, fit), 0.32, 7);
+        /* THEY USED TO BE MINE. Both lie palm-down in the grit where the
+           search left them, and both travel to the wrist the rig actually puts
+           there — the `open` hands are at ∓0.31h and shoulder height, so the
+           arithmetic below IS the wrist and not an eyeballed approximation of
+           one. They TURN as they go, from flat on the ground to hanging off a
+           joint. Rejected: throwing them, which made a juggling act of the one
+           gesture in the film that is supposed to cost something. */
+        const wy = HY - shY;
+        hand(F, lerp(69, HX - HH * 0.31, fit), lerp(122, wy + HH * 0.06 + 5, fit), 15,
+             lerp(1.42, 3.44, fit), lerp(0.34, 0.17, fit), 7);
+        hand(F, lerp(123, HX + HH * 0.31, fit), lerp(120, wy + HH * 0.05 + 5, fit), 15,
+             lerp(4.78, 2.86, fit), lerp(0.34, 0.17, fit), 7);
         /* and the heart is where it was put back, still keeping time — and it
            rides the chest up as he rises, because an organ that stays at a
            fixed height while the man stands is a mark on the picture rather

@@ -24,6 +24,15 @@
    release read in the body — a man who starts braced and ends open — rather
    than a second image built for the second clause.
 
+   AND THE LAST MOVEMENT DRAWS THE CITY BY NOT DRAWING IT. M6 fills every
+   cell the city is NOT — one number, one Bayer schedule, the whole night
+   arriving at once — so the city is left standing as reserve, out of the
+   blank page it was always on, which is what "born in unison, out of the
+   purest of fictions" says. Its second clause is a count: one man walks in
+   from the edge and is met at the middle of the plaza, and then ten more,
+   until the ground the film spent five movements raising out of the water
+   has twelve people standing on it.
+
    THE ONE UTOPIA IN THE SUITE. Populated on purpose — the plaza in the last
    movement is never one figure, it is a crowd that raises its arms
    together. The single accent (level 8) is one object seen twice: the spark

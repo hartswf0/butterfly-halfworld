@@ -51,7 +51,7 @@ function house(F) {
      hundred and eighty cells long stripes the frame under the halftone */
   for (let x = 5; x < 187; x++) {
     const j = F.noise(x, 3) > 0.72 ? 1 : 0;
-    for (let y = GY + j; y < 138; y++) F.ink(x, y, 4);
+    for (let y = GY + j; y < 138; y++) F.ink(x, y, F.n2(x * 0.13, y * 0.34) > 0.60 ? 3 : 4);
   }
   F.rect(WX, WY, WW, WH, 0, true);
   F.box(WX - 3, WY - 3, WW + 6, WH + 6, 6, 3);              // the casing
@@ -116,8 +116,8 @@ export default {
         { at: 0.76, f: 165, decay: 1.10, gain: 0.45, partials: [1, 2.02, 3.01], noise: 0.25, nDecay: 0.22, seed: 33 },
       ],
       draw(u, F) {
-        const GY = 116, MX = 50, MY = 26;
-        const BX = 8, BY = 96, BW = 44;
+        const GY = 116, MX = 72, MY = 28;
+        const BX = 6, BY = 98, BW = 54;
         /* A DARK ROOM WITH TWO HOLES IN IT, and both holes are paper: the bed
            he cannot stay in, and the glass he ends up at. The first pass drew
            this room as an outlined rectangle on cream and then held it for
@@ -128,43 +128,50 @@ export default {
         F.line(6, GY, 44, GY, 5, 1); F.line(52, GY, 95, GY, 5, 1);
         F.rect(MX, MY, 96 - MX, GY - MY, 0, true);
         F.rect(MX - 4, MY - 4, 4, GY - MY + 8, 6);              // the near stile
-        F.line(MX - 4, MY - 3, 68, MY - 3, 6, 2); F.line(76, MY - 3, 95, MY - 3, 6, 2);
-        F.line(MX - 4, GY + 2, 68, GY + 2, 6, 2); F.line(76, GY + 2, 95, GY + 2, 6, 2);
+        F.line(MX - 4, MY - 3, 80, MY - 3, 6, 2); F.line(86, MY - 3, 95, MY - 3, 6, 2);
+        F.line(MX - 4, GY + 2, 80, GY + 2, 6, 2); F.line(86, GY + 2, 95, GY + 2, 6, 2);
         F.rect(BX, BY, BW, GY - BY, 0, true);                   // the sheets
         F.box(BX, BY, BW, GY - BY, 5, 1);
-        F.rect(BX - 4, BY - 13, 4, 13, 5);                      // the headboard
-        /* MIDNIGHT IS THE ONE TIME A CLOCK IS SYMMETRICAL. One hand is drawn,
-           leaning left of twelve, and the mirror gives it back leaning right,
-           so the pair opens like a V as the hour gets later. It is the only
-           quantity in the movement that goes one way and does not come back. */
-        F.disc(95, 18, 9, 0, true);
+        F.rect(BX, BY - 13, 3, 13, 5);                          // the headboard
+        /* MIDNIGHT IS THE ONE TIME A CLOCK IS SYMMETRICAL, so the clock is
+           hung on the wall BEHIND him and we only ever see it in the glass —
+           which also means the mirror has something in it before he arrives.
+           One hand is drawn, leaning left of twelve, and the mirror gives it
+           back leaning right, so the pair opens like a V as the hour gets
+           later: the only quantity here that goes one way and stays gone. */
+        F.ring(95, 46, 11, 6, 1.6);
+        for (let k = 0; k < 3; k++) F.line(95 - 11 + k, 46, 95 - 8 + k, 46, 6, 1);
         /* THE ROOM CLOSES IN FROM THE EDGES, dot by dot on the ordered
            schedule, toward the one thing he is looking at. This world's rings
            travel inward and so does its dark; the room is not dimmed, it is
            replaced, and the glass keeps its light because paper is exempt. */
-        const dark = ss(0.18, 0.90, u);
+        const dark = ss(0.16, 0.90, u);
         F.map((x, y, v) => {
           if (v < 1 || x < 6 || x > 95 || y < 8 || y > 136) return;
           const dx = Math.max(0, MX - x), dy = Math.max(0, MY - y, y - GY);
-          const near = 1 - Math.min(1, Math.hypot(dx, dy) / 48);
-          if (F.bayer(x, y) < dark * 2 - near) return 7;
+          const near = 1 - Math.min(1, Math.hypot(dx, dy) / 52);
+          /* an EDGE that advances, not a density that rises: the multiplier
+             narrows the schedule's band to about a fifth of the movement, so
+             what crosses the room is a line of dark rather than a fog. It
+             stops at 5 — the walls of this room have to stay lighter than the
+             man crossing them or he is a black shape on a black ground. */
+          if (F.bayer(x, y) < (dark * 1.5 - near) * 3.0) return Math.max(v, 5);
         });
-        F.ring(95, 18, 9, 6, 1.4);
         const late = ss(0.04, 0.96, u) * 1.15;
-        F.line(95, 18, 95, 10, 6, 1.6);                          // still at twelve
-        F.line(95, 18, 95 - Math.sin(late) * 8, 18 - Math.cos(late) * 8, 5, 1.4);
+        F.line(95, 46, 95, 37, 6, 1.8);                          // still at twelve
+        F.line(95, 46, 95 - Math.sin(late) * 10, 46 - Math.cos(late) * 10, 5, 1.4);
         /* the emergency call: a handset on the sheets, and the ring arriving
            as rings that CLOSE on it — in this film sound collapses inward */
         F.rect(BX + 31, BY + 5, 8, 3, 6);
         for (const at of [0.09, 0.17]) {
           const p = clamp01((u - at) / 0.10);
-          if (p > 0 && p < 1) F.ring(BX + 35, BY + 6, lerp(30, 3, p), Math.max(1, Math.round(2 + p * 4)), 1);
+          if (p > 0 && p < 1) F.ring(BX + 35, BY + 6, lerp(17, 3, p), Math.max(1, Math.round(2 + p * 4)), 1);
         }
         /* the bed goes when he does: the paper is taken back at the rate he
            crosses the floor, so what he got out of stops being lit */
         const left = ss(0.44, 0.88, u);
-        for (let y = BY - 14; y <= GY; y++) for (let x = BX - 5; x <= BX + BW; x++)
-          if (F.bayer(x, y) < left * 1.35) F.put(x, y, 7);
+        for (let y = BY - 14; y <= GY; y++) for (let x = BX; x <= BX + BW; x++)
+          if (F.bayer(x, y) < left * 1.35) F.put(x, y, 5);
         /* ONE CLOCK FOR THE WHOLE PERFORMANCE: he tosses, the phone rings
            twice in the dark, he sits up, he crosses the room, and he puts a
            hand flat on the glass — where his own hand comes out to meet it,
@@ -172,8 +179,8 @@ export default {
            seconds, and the room closing behind him is the only other event. */
         const ring = Math.max(Math.exp(-(((u - 0.09) / 0.035) ** 2)), Math.exp(-(((u - 0.17) / 0.035) ** 2)));
         const rise = ss(0.24, 0.46, u), walk = ss(0.48, 0.74, u);
-        const H = 46;
-        const fx = lerp(lerp(30, 48, rise), 80, walk);
+        const H = 54;
+        const fx = lerp(lerp(32, 58, rise), 84, walk);
         const moving = walk > 0.02 && walk < 0.98;
         F.fig(fx, lerp(BY + H / 2, GY, rise), H, {
           mode: moving ? "walk" : "stand", face: 1, guise: "poet",
@@ -183,8 +190,21 @@ export default {
           crouch: (1 - rise) * (0.16 + ring * 0.30) + win(u, 0.28, 0.38, 0.42, 0.52) * 0.26,
           headTilt: -0.34 + ss(0.76, 0.94, u) * 0.5,
           headTurn: walk * 0.35,
-          gesture: walk > 0.98 ? [15, 30] : undefined,
+          gesture: walk > 0.98 ? [12, 33] : undefined,
         }, 7);
+        /* HE IS UNDER THE COVERS. The rig laid horizontal reads as a heap of
+           limbs and not as a man in a bed; what says man-in-a-bed is a mound
+           with a head at one end of it. So the blanket is drawn over him, it
+           moves while he does, and it slides off him as he sits up. */
+        if (rise < 0.98) {
+          const bl = lerp(BX + 9, BX + 42, rise), be = BX + BW - 2;
+          for (let x = Math.round(bl); x < be; x++) {
+            const t = (x - bl) / Math.max(1, be - bl);
+            const top = BY + 1 - Math.sin(t * Math.PI) * 3.5
+                      + Math.sin(u * TAU * 2.3 + t * 3.4) * 1.6;
+            for (let y = Math.round(top); y < GY - 1; y++) F.put(x, y, 6);
+          }
+        }
       },
     },
     {
@@ -233,20 +253,22 @@ export default {
            he was six, she is seven, and the difference between the living and
            the dead is one notch he has not reached. They are cut to PAPER, so
            the room can go as dark as it likes and the years stay legible. */
-        const PX = 30, YEAR = 7.7;
-        F.rect(PX, GY - 8 * YEAR, 2, 8 * YEAR, 0, true);
+        const PX = 34, YEAR = 7.7;
         for (let k = 1; k <= 7; k++) {
           if (u < 0.04 + k * 0.096) break;
-          F.rect(PX - 11, GY - k * YEAR - 1, 13, 2, 0, true);
+          const y = GY - k * YEAR, w = 12 + F.noise(k, 9) * 5;
+          const kink = F.noise(k, 4) > 0.5 ? 1 : 0;            // cut by a hand, not a rule
+          F.line(PX - w, y + kink, PX, y, 0, 1, true);
+          F.line(PX - w, y + 1 + kink, PX, y + 1, 0, 1, true);
         }
         /* THE AFTERNOON GOES. The window lays a slab of light on the floor and
            it retreats toward the window as the sun drops — the only clock in a
            house with a child left alone in it. */
         const day = smooth(u);
-        const a0 = lerp(40, 118, day), a1 = lerp(152, 170, day);
-        for (let x = Math.round(a0); x < a1; x++) {
-          const t = (x - a0) / (a1 - a0);
-          for (let y = Math.round(GY + 2 + (1 - t) * 3); y < GY + 17 - t * 5; y++) F.put(x, y, 0);
+        const a0 = lerp(44, 120, day), a1 = lerp(158, 174, day);
+        for (let y = GY + 2; y < 136; y++) {
+          const sh = (y - GY) * 0.85;                          // the sun's own angle
+          for (let x = Math.round(a0 - sh); x < a1 - sh * 0.7; x++) F.put(x, y, 0);
         }
         /* the warm heavy breeze, in at the window and across the room. Heavy
            is the adjective a lattice can keep, so these are drawn at 6 and
@@ -266,13 +288,13 @@ export default {
            nothing is holding her up against her own weight any more. */
         const here = ss(0.24, 0.52, u);
         if (here > 0.01) {
-          F.fig(46, GY, 8 * YEAR, {
+          F.fig(50, GY, 8 * YEAR, {
             mode: "stand", arms: "down", guise: "child", breath: 0,
             weight: 0.5, face: 1, headTurn: 0.3,
-          }, 6);
+          }, 7);
           F.map((x, y, v) => {
-            if (x < 24 || x > 70 || y < GY - 64 || y > GY + 2) return;
-            if (v === 6 && F.bayer(x, y) > here * 0.74) return 2;
+            if (x < 36 || x > 64 || y < GY - 66 || y > GY + 2) return;
+            if (v === 7 && F.bayer(x, y) > here * 0.80) return 2;
           });
         }
         /* THE ROOM GOES OUT WITH THE LIGHT, from the corners toward the
@@ -286,12 +308,12 @@ export default {
         /* told in advance: two rings on the sill, going apart and not stopping.
            In SILENT SCREAM the same two rings approach and never touch. */
         const apart = smooth(u);
-        for (const s of [-1, 1]) F.ring(WCX + s * lerp(8, 23, apart), WY + WH - 8, 5, 7, 1.6);
+        for (const s of [-1, 1]) F.ring(WCX + s * lerp(8, 23, apart), WY + WH - 3, 5, 7, 1.6);
         /* he starts at the window with his back to the room, waiting for a car
            that is not coming, and turns and crosses to the post */
         const cross = ss(0.30, 0.64, u);
         const going = cross > 0.03 && cross < 0.97;
-        F.fig(lerp(WCX - 8, 74, cross), GY, 6 * YEAR, {
+        F.fig(lerp(WCX - 8, 76, cross), GY, 6 * YEAR, {
           mode: going ? "walk" : "stand", face: cross > 0.03 ? -1 : 1,
           guise: "child", phase: going ? u * 8.35 : u * 1.7,
           weight: 0.32, crouch: 0.05,
@@ -351,13 +373,16 @@ export default {
            her with it. She is the one who hands the thing over and she has no
            further business here. */
         const pass = ss(0.14, 0.28, u);
-        F.fig(24, GY, 48, {
+        F.fig(30, GY, 48, {
           mode: "stand", arms: "reach", guise: "child", breath: 0, weight: 0.5,
-          face: 1, headTurn: 0.4, gesture: [16, 30],
-        }, 6);
+          face: 1, headTurn: 0.4, gesture: [14, 30],
+        }, 7);
+        /* her outline breaks and re-forms on the ordered schedule. The first
+           pass knocked two thirds of her out and she stopped being a child and
+           became a column of specks — a ghost still has to be somebody. */
         F.map((x, y, v) => {
-          if (x < 4 || x > 48 || y < GY - 56 || y > GY + 2) return;
-          if (v === 6 && F.bayer(x, y) > 0.34 + 0.30 * Math.sin(u * TAU * 2.4)) return 2;
+          if (x < 10 || x > 54 || y < GY - 54 || y > GY + 2) return;
+          if (v === 7 && F.bayer(x, y) > 0.70 + 0.18 * Math.sin(u * TAU * 2.4)) return 2;
         });
         /* THE ROOM IS WHAT LEAVES. One object goes through the glass and the
            break does not stop at the window: the wall is handed back to the
@@ -366,17 +391,19 @@ export default {
            on nothing is falling, and this one is not falling. */
         const gone = ss(0.66, 0.99, u);
         if (gone > 0) F.map((x, y, v) => {
-          if (v < 1 || y > GY) return;
+          if (v < 1) return;
           const d = Math.hypot((x - EX) * 0.62, y - EY) / 128;
-          if (F.bayer(x, y) < (gone * 1.9 - d) * 0.92) return 0;
+          if (F.bayer(x, y) < (gone * 1.9 - d) * (y > GY ? 0.40 : 0.92)) return 0;
         });
         /* he takes it, turns, crosses the room, and throws. The arc is cut in
            two at the pane so the crossing lands on the cue's own value rather
            than wherever a single smoothstep happens to put it: the first pass
            broke the glass eleven hundredths after the sound. */
         const walk = ss(0.32, 0.56, u);
-        const mx = lerp(62, 96, walk);
-        const hx = mx + 14, hy = GY - 40;
+        const mx = lerp(66, 96, walk);
+        /* the hand the thing is in swings across him as he turns, so the
+           handover, the carry and the throw are one continuous hold */
+        const hx = mx + lerp(-14, 15, walk), hy = GY - lerp(34, 40, walk);
         const toGlass = ss(0.56, 0.66, u), beyond = clamp01((u - 0.66) / 0.24);
         let tx, ty;
         if (beyond > 0) {
@@ -386,7 +413,7 @@ export default {
           tx = lerp(hx, EX, toGlass);
           ty = lerp(hy, EY, toGlass) - Math.sin(toGlass * Math.PI) * 20;
         } else {
-          tx = lerp(40, hx, pass); ty = lerp(GY - 30, hy, pass);
+          tx = lerp(44, hx, pass); ty = lerp(88, hy, pass);
         }
         const moving = walk > 0.03 && walk < 0.97;
         F.fig(mx, GY, 52, {
