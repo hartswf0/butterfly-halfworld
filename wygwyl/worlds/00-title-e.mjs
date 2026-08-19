@@ -123,10 +123,10 @@ const MILE = [
    doorway in whole levels, because whole levels are the only falloff this
    lattice has — two steps of wall instead of one, and the room stops being a
    flat panel and becomes a room with a light in it. */
-function litBy(F, lx, ly) {
+function litBy(F, lx, ly, reach = 1) {
   F.map((x, y, v) => {
     if (v !== 2) return;
-    const d = Math.hypot((x - lx) * 0.62, y - ly);
+    const d = Math.hypot((x - lx) * 0.62, y - ly) / reach;
     return d > 96 ? 4 : d > 58 ? 3 : 2;
   });
 }
@@ -159,9 +159,17 @@ export default {
          poem is a man going out of a window, and the title's job is to make
          you feel he could have, and didn't, yet. */
       label: "A ROOM", seconds: 11, line: "",
+      cues: [{ at: 0.62, f: 118, decay: 0.7, gain: 0.22, partials: [1, 2.0, 3.1], noise: 0.3, nDecay: 0.08, seed: 950 }],
       draw(u, F) {
         wall(F);
-        litBy(F, 137, 59);
+        /* THE DAY GOES OUT OF THE ROOM WHILE HE STANDS IN IT.
+           The one thing that must happen in a first movement about a man who
+           does not take a window is that the light he could have left by runs
+           out. The lit reach shrinks by a factor of two and a half across the
+           movement, so the wall walks from tone 2 to tone 4 in whole levels —
+           ten thousand cells changing, which is a movement, and it is also
+           the only thing in the picture that says any time has passed. */
+        litBy(F, 137, 59, lerp(1.42, 0.52, smooth(u)));
         /* the window is a HOLE in the wall, not a box drawn on it */
         F.rect(120, 34, 34, 50, 0, true);
         F.box(120, 34, 34, 50, 5, 1);
@@ -170,10 +178,14 @@ export default {
         ground(F, 6);
         /* weight settles across the movement and his head comes round to the
            window — that is the whole performance and it is enough of one */
-        F.fig(70, HZ, 50, {
-          mode: "stand", face: 1, guise: "poet", phase: u * 1.4,
+        /* he comes to it, and stops at it; the walk is over by the halfway
+           mark so the rest of the movement is a man standing in a darkening
+           room, which is the picture the poems keep making */
+        const p = smooth(clamp01(u / 0.46));
+        F.fig(lerp(28, 70, p), HZ, 50, {
+          mode: p < 0.97 ? "walk" : "stand", phase: u * 6.35, face: 1, guise: "poet",
           weight: lerp(0.5, 0.84, smooth(u)),
-          breath: 0.6, headTurn: smooth(u) * 0.55,
+          breath: 0.6, headTurn: smooth(clamp01((u - 0.42) / 0.5)) * 0.55,
         }, 7);
         /* the first half of the title, small and low, where a signature goes */
         say(F, "WHERE YOU GO", 52, 126, 9, ss(0.22, 0.62, u));
@@ -189,7 +201,7 @@ export default {
       draw(u, F) {
         const lift = smooth(clamp01((u - 0.18) / 0.66)) * 122;
         wall(F, -lift);
-        litBy(F, 137, 59 - lift);
+        litBy(F, 137, 59 - lift, 0.52);
         if (HZ - lift > 0) {
           F.rect(120, 34 - lift, 34, 50, 0, true);
           F.box(120, 34 - lift, 34, 50, 5, 1);
@@ -214,19 +226,36 @@ export default {
         /* the milestones drift right to left at the speed he is going, so the
            parallax says he is the one moving. The wrap is wider than the span
            of the marks, so no two of them ever land on top of each other. */
-        const pan = u * 560;
+        /* THE FOURTEEN RUN OUT BEFORE HE DOES. They drift right to left at
+           the speed he is going, and the pan is longer than the wrap, so the
+           last of them goes off the left edge with a third of the walk still
+           to run — he passes everything the suite contains and then keeps
+           walking, which is the sentence the fourteen poems make. */
+        const pan = u * 640;
         for (let k = 0; k < MILE.length; k++) {
-          const x = (((k * 46.66 + 250 - pan) % 420) + 420) % 420 - 60;
+          const x = k * 46.66 + 250 - pan;
           if (x < -30 || x > 222) continue;
           MILE[k](F, x, HZ - 1, 8 + (k % 3) * 2);
         }
         /* HAZE WITH NO TOP EDGE. A band of dots at constant density is a
            rectangle of dots; the density has to fall off with height or the
            lattice draws you the edge of the effect instead of the distance. */
+        /* AND THE WEATHER COMES UP WHILE HE WALKS. The haze starts as a
+           thread on the horizon and ends as a bank two fifths of the frame
+           deep — the distance closing in around a man who has run out of
+           landmarks. No top edge on it: the density falls off with height,
+           because a band of dots at constant density is a rectangle of dots
+           and the lattice will draw you the edge of the effect instead. */
+        const w = ss(0.06, 0.94, u);
+        const deep = lerp(6, 60, w), dens = lerp(0.34, 1.06, w);
         F.map((x, y, v) => {
-          if (y > HZ - 2 || y < HZ - 34 || v > 0) return;
-          const d = (HZ - 2 - y) / 32;
-          if (F.bayer(x, y) < 0.62 * (1 - d) * (1 - d) * (1 - d)) return 1;
+          if (y > HZ - 2 || y < HZ - deep || v > 0) return;
+          const d = (HZ - 2 - y) / deep, f = (1 - d) * (1 - d);
+          const b = F.bayer(x, y);
+          /* two tones, not one: a bank of weather has a body to it, and a
+             single density of dots is a dust rather than a distance */
+          if (b < dens * f * f * 0.55) return 2;
+          if (b < dens * f) return 1;
         });
         const x = lerp(-14, 206, u);
         F.fig(x, HZ, 42, {
@@ -248,7 +277,13 @@ export default {
         /* the doorway is the same hole the window was, one movement later and
            at the bottom of the wall instead of the middle of it */
         const open = smooth(clamp01((u - 0.30) / 0.44));
-        litBy(F, DX + DW / 2, DY + DH * 0.5);
+        /* THE DOOR LIGHTS THE WALL. Thirty cells by sixty-six is two percent
+           of the field, so a door that only opens is a small event no matter
+           how important it is. What makes it the size it deserves is that the
+           room around it goes from unlit to lit as it opens — the wall walks
+           from tone 4 back to tone 2 across ten thousand cells, and the man
+           arrives out of the dark into it. */
+        litBy(F, DX + DW / 2, DY + DH * 0.5, lerp(0.42, 1.55, open));
         F.rect(DX, DY, DW, DH, 0, true);                    // what is behind it is paper
         F.box(DX, DY, DW, DH, 5, 1);
         /* the leaf: a closed slab of ink that swings out of the way. Drawn as
