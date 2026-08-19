@@ -6,7 +6,7 @@
    off the bare ground. So the film is built as two identical arcs in inverted
    material — the first half is ink arriving on paper, the second is paper
    carved out of ink, and the vow is the same word both times, arriving on the
-   Bayer schedule in whichever substance the half is made of.
+   Bayer schedule in whichever substance that half is made of.
 
    The descent is monotone and one-way: dusk shore (paper sky) → moonlit field
    (a flat level-2 night) → the deepest dark the suite has. Nothing in this
@@ -18,20 +18,27 @@ import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
    Horizontal wavefronts. calm ∈ 0..1 does TWO things at once, because the
    line asks for both: it kills the amplitude AND collapses the row spacing,
    so the sea does not merely go still, it FOLDS — ten swells stacking into a
-   tight sheaf of whispers. An earlier pass only flattened the sine and the
-   result was a ruled page: nine identical parallels, evenly spaced, dead.
-   Every row is broken twice at its own x, because ten unbroken full-width
-   lines is exactly the stripe the dot law warns about. */
-const SEA_TOP = 6, SEA_ROWS = 10, FOLD_Y = 22, HOR = 53;
+   tight sheaf of whispers.
+
+   The rows are spaced in perspective (crowded at the horizon, open at the
+   shore) and each row's amplitude is held strictly under half its spacing.
+   The first pass gave every row the same spacing and let amplitude grow with
+   nearness: neighbouring crests crossed each other and the whole sea came out
+   as a diamond fishnet — a plausible picture of nothing.
+
+   Every row is broken twice at its own x. Ten unbroken full-width lines is
+   exactly the stripe the dot law warns about. */
+const SEA_TOP = 8, SEA_ROWS = 10, FOLD_Y = 13, HOR = 53;
 function seaRowY(F, u, calm, k, x) {
-  const y0 = lerp(SEA_TOP + k * 4.4, FOLD_Y + k * 1.7, calm);
-  const amp = (1 - calm) * (1.3 + k * 0.5);
-  return y0 + Math.sin(x * 0.085 + u * TAU * (0.45 + k * 0.07) + k * 1.7) * amp;
+  const t = k / (SEA_ROWS - 1);
+  const y0 = lerp(SEA_TOP + Math.pow(t, 1.55) * (HOR - 5 - SEA_TOP), FOLD_Y + k * 1.6, calm);
+  const amp = (1 - calm) * (0.3 + t * t * 2.5);
+  return y0 + Math.sin(x * (0.17 - t * 0.11) + u * TAU * (0.4 + t * 0.5) + k * 1.7) * amp;
 }
 function wavefronts(F, u, calm) {
+  const l = calm > 0.55 ? 4 : 3;
   for (let k = 0; k < SEA_ROWS; k++) {
     const gA = (F.noise(k, 11) * 150) | 0, gB = (F.noise(k, 23) * 150) | 0;
-    const l = calm > 0.55 ? 4 : 3;
     for (let x = 0; x < F.W; x++) {
       if ((x > gA && x < gA + 15) || (x > gB && x < gB + 11)) continue;
       F.ink(x, Math.round(seaRowY(F, u, calm, k, x)), l);
@@ -39,46 +46,64 @@ function wavefronts(F, u, calm) {
   }
 }
 
-/* the sand under the ash of expired wildfires. A flat quantised drift, three
-   tones, no ramp — the ash is a deposit, not a shading. */
+/* the sand under the ash of expired wildfires. Three flat tones and a loose
+   grain — the ash is a deposit, not a shading. Held at a fine frequency
+   because the wide one read as weather rather than as ground. */
 function ashSand(F) {
   F.map((x, y) => {
     if (y <= HOR + 1) return;
-    const a = F.fbm(x * 0.045, y * 0.075, 3);
-    if (a > 0.615) return 3;
-    if (a > 0.50) return 2;
-    if (a > 0.42) return 1;
+    const a = F.fbm(x * 0.085, y * 0.13, 3);
+    if (a > 0.63) return 3;
+    if (a > 0.53) return 2;
+    if (F.noise(x, y) > 0.90) return 1;
   });
   F.line(0, HOR + 1, 66, HOR + 2, 4, 1);
   F.line(78, HOR + 2, 140, HOR + 1, 4, 1);
   F.line(150, HOR + 1, 192, HOR + 2, 4, 1);
 }
 
-/* an arc torn out of a ring. A shard of a circle carries a circle's worth of
-   information, which is the only reason a broken tambourine is still legible
-   as a tambourine lying in the sand. */
-function shard(F, cx, cy, r, a0, a1, rot, l) {
-  const n = Math.max(4, Math.ceil((a1 - a0) * r * 1.4));
-  const c = Math.cos(rot), s = Math.sin(rot);
+/* an arc torn out of a ring, squashed because it is lying flat in the sand.
+   A shard of a circle carries a circle's worth of information, which is the
+   only reason a smashed tambourine is still legible as a tambourine. */
+function shard(F, cx, cy, r, a0, a1, squash, l) {
+  const n = Math.max(4, Math.ceil((a1 - a0) * r * 1.6));
   let px = 0, py = 0;
   for (let k = 0; k <= n; k++) {
     const a = a0 + (a1 - a0) * k / n;
-    const dx = Math.cos(a) * r, dy = Math.sin(a) * r;
-    const x = cx + dx * c - dy * s, y = cy + dx * s + dy * c;
-    if (k) F.line(px, py, x, y, l, 1.6);
+    const x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r * squash;
+    if (k) F.line(px, py, x, y, l, 1.8);
     px = x; py = y;
+  }
+}
+/* four arcs still seated on the ring they came off, each pushed out along its
+   own radius. Scattering them freely made a handful of scribbles; keeping the
+   seat is what lets the eye close the circle back up. */
+function brokenRing(F, cx, cy, r, squash, l) {
+  for (const [a0, a1] of [[0.20, 1.60], [1.95, 3.05], [3.40, 4.60], [4.95, 6.10]]) {
+    const m = (a0 + a1) / 2;
+    const ox = Math.cos(m) * r * 0.17, oy = Math.sin(m) * r * squash * 0.17;
+    shard(F, cx + ox, cy + oy, r, a0, a1, squash, l);
+    F.disc(cx + ox + Math.cos(a0) * r, cy + oy + Math.sin(a0) * r * squash, 2.1, l);
+    F.disc(cx + ox + Math.cos(a1) * r, cy + oy + Math.sin(a1) * r * squash, 2.1, l);
   }
 }
 
 /* the trail. Drawn by the same function both times it is followed — that
-   sameness is the whole grammar, so it is one function and not two. */
+   sameness is the whole grammar, so it is one function and not two. A print
+   is an elongated sole with a toe pad set off it: two equal discs read as a
+   pair of pebbles, and in the garden they were indistinguishable from the
+   seeds lying beside them. */
 function trail(F, adv, N, P, l) {
   const n = Math.floor(clamp01(adv) * N);
   for (let k = 0; k <= n && k < N; k++) {
     const [x, y, s] = P(k / (N - 1));
-    const off = (k % 2 ? 1 : -1) * 2.4 * s;
-    F.disc(x + off, y, Math.max(0.9, 2.5 * s), l);
-    F.disc(x + off * 0.45, y - 3.6 * s, Math.max(0.7, 1.8 * s), l);
+    const off = (k % 2 ? 1 : -1) * 2.8 * s;
+    const rw = Math.max(0.9, 1.7 * s), rh = Math.max(1.2, 2.9 * s);
+    for (let dy = -rh; dy <= rh; dy++) {
+      const w = rw * Math.sqrt(Math.max(0, 1 - (dy / rh) * (dy / rh)));
+      F.line(x + off - w, y + dy, x + off + w, y + dy, l, 1);
+    }
+    F.disc(x + off * 0.75, y - rh - 1.5 * s, Math.max(0.8, 1.3 * s), l);
   }
 }
 
@@ -99,46 +124,57 @@ function heart(F, cx, cy, s, l, beat) {
     const w = s * 0.98 * (1 - y / H);
     F.line(cx - w, cy - s * 0.14 + y, cx + w, cy - s * 0.14 + y, l, 1);
   }
-  /* THE ONE ACCENT IN THE FILM is this pulse, and it is the same object each
+  /* THE ONE ACCENT IN THE FILM is this pulse, and it is the same object every
      time it appears — lifted in M2, leading the second trail in M3, back in
      the chest in M6. Rejected: an accent on the moon, on the blooms, on the
      vow. A world gets one blue mark and it belongs to the thing being taken
-     back. */
+     back, which is why it never lands on anything else. */
   F.put(cx, cy - s * 0.15, 8);
   if (beat > 0.45) { F.put(cx - 1, cy - s * 0.15, 8); F.put(cx + 1, cy - s * 0.15, 8); }
   if (beat > 0.80) { F.put(cx, cy - s * 0.15 - 1, 8); F.put(cx, cy - s * 0.15 + 1, 8); }
 }
 
-/* a hand: palm, four fingers, a thumb set off to the side. The thumb is the
-   only reason this reads as a hand and not a rake, so it is never omitted. */
+/* A HAND IS A SLAB WITH FIVE THINGS OFF IT, and the slab is most of it. Two
+   passes were thrown away here: fingers radiating from a round palm gave a
+   starfish, and long fingers off a small palm gave a broom. What reads at
+   this size is a filled rectangular palm roughly as long as the fingers are,
+   four short strokes off its top edge, a thumb off one side and a wrist stub
+   off the bottom — the thumb and the wrist are what fix which way the hand
+   is facing, so neither is ever omitted. Built in the hand's own frame and
+   rotated once at the end, so `rot` really is which way the fingers point. */
 function hand(F, cx, cy, s, rot, spread, l) {
   const c = Math.cos(rot), sn = Math.sin(rot);
-  const R = (px, py) => [cx + px * c - py * sn, cy + px * sn + py * c];
-  F.disc(cx, cy, s * 0.40, l);
+  const W = (px, py) => [cx + px * c - py * sn, cy + px * sn + py * c];
+  const pw = s * 0.30, ph = s * 0.34;
+  for (let ly = -ph; ly <= ph; ly += 0.7)
+    for (let lx = -pw; lx <= pw; lx += 0.7) {
+      const [X, Y] = W(lx, ly);
+      F.ink(Math.round(X), Math.round(Y), l);
+    }
   for (let k = 0; k < 4; k++) {
-    const a = -Math.PI / 2 + (k - 1.5) * spread;
-    const len = s * (0.98 - Math.abs(k - 1.3) * 0.11);
-    const [bx, by] = R(Math.cos(a) * s * 0.34, Math.sin(a) * s * 0.34);
-    const [tx, ty] = R(Math.cos(a) * len, Math.sin(a) * len);
-    F.line(bx, by, tx, ty, l, Math.max(1, s * 0.13));
+    const bx = -pw + (k + 0.5) * (pw * 2 / 4);
+    const a = (k - 1.5) * spread;
+    const len = s * (0.54 - Math.abs(k - 1.2) * 0.055);
+    const [x0, y0] = W(bx, -ph + 0.6);
+    const [x1, y1] = W(bx + Math.sin(a) * len, -ph + 0.6 - Math.cos(a) * len);
+    F.line(x0, y0, x1, y1, l, 1.7);
   }
-  const ta = -2.72;
-  const [bx, by] = R(Math.cos(ta) * s * 0.32, Math.sin(ta) * s * 0.32);
-  const [tx, ty] = R(Math.cos(ta) * s * 0.76, Math.sin(ta) * s * 0.76);
-  F.line(bx, by, tx, ty, l, Math.max(1, s * 0.16));
-  const [wx, wy] = R(0, s * 0.62);
-  F.line(cx, cy, wx, wy, l, Math.max(1, s * 0.20));
+  const [t0x, t0y] = W(-pw, ph * 0.2), [t1x, t1y] = W(-pw - s * 0.32, -ph * 0.5);
+  F.line(t0x, t0y, t1x, t1y, l, 2);
+  const [w0x, w0y] = W(0, ph), [w1x, w1y] = W(0, ph + s * 0.26);
+  F.line(w0x, w0y, w1x, w1y, l, Math.max(2, s * 0.21));
 }
 
-/* THE VOW. Same word, same schedule, twice — but M2 lays it down as ink on a
-   flat sea and M6 cuts it out of the dark. The gate needs a level nothing
-   else in the band uses, so the glyphs go down at `mark` and are then
-   resolved per-dot; the map is boxed to the word's own band so no other
-   element of that level is caught in it. */
+/* THE VOW. Same word, same schedule, twice — but M2 lays it down as ink over
+   a flat sea and M6 cuts it out of the dark. The gate needs a level nothing
+   else in that band uses, so the glyphs go down at `mark` and are resolved
+   per-dot afterwards; the map is boxed to the word's own band so no other
+   element of that level is caught in it. Held at pixelHeight 14: at 10 the
+   strokes were one cell wide and a half-arrived word was unreadable scatter. */
 function vow(F, cy, arrive, mark, onTaken, onLeft) {
-  F.word("NEVERMORE", 96, cy, 10, mark, true);
+  F.word("NEVERMORE", 96, cy, 14, mark, true);
   F.map((x, y, v) => {
-    if (y < cy - 10 || y > cy + 10 || x < 56 || x > 136) return;
+    if (y < cy - 14 || y > cy + 14 || x < 46 || x > 146) return;
     if (v !== mark) return;
     return F.bayer(x, y) < arrive ? onTaken : onLeft;
   });
@@ -146,31 +182,29 @@ function vow(F, cy, arrive, mark, onTaken, onLeft) {
 
 /* -------------------------------------------------------------- the garden
    The night arrives here as a flat level-2 tone and never leaves. Its lower
-   edge is wobbled by noise, because a ruled horizon across 192 cells is the
-   stripe again — this is the same law as the broken floor, applied to a
-   boundary between two tones rather than to a line. */
+   edge is wobbled by noise, because a ruled boundary across 192 cells is the
+   stripe again — the same law as the broken floor, applied to the seam
+   between two tones instead of to a line. */
+const VP = 60;
 function gardenNight(F, u, withMoon) {
-  F.map((x, y) => (y < 64 + (F.n2(x * 0.045, 9) - 0.5) * 8 ? 2 : undefined));
+  F.map((x, y) => (y < VP - 2 + (F.n2(x * 0.045, 9) - 0.5) * 8 ? 2 : undefined));
   if (withMoon) {
-    F.disc(156, 24, 13, 0, true);
-    F.ring(156, 24, 13.8, 4, 1);
-    F.disc(151, 20, 2.4, 2); F.disc(160, 28, 1.7, 2); F.disc(158, 17, 1.3, 2);
+    F.disc(170, 21, 11, 0, true);
+    F.ring(170, 21, 11.8, 4, 1);
+    F.disc(166, 18, 2.2, 2); F.disc(174, 25, 1.6, 2); F.disc(172, 15, 1.2, 2);
   }
-  /* furrows converging on a vanishing point at the wobbled horizon */
   for (let k = 0; k <= 13; k++) {
-    const t = k / 13;
-    const bx = -150 + t * 492;
-    const g0 = 0.18 + F.noise(k, 5) * 0.3;
+    const t = k / 13, bx = -150 + t * 492, g0 = 0.18 + F.noise(k, 5) * 0.3;
     for (let j = 0; j < 26; j++) {
       const t0 = j / 26, t1 = (j + 1) / 26;
       if (t0 > g0 && t0 < g0 + 0.13) continue;
-      F.line(lerp(bx, 96, t0), lerp(146, 66, t0), lerp(bx, 96, t1), lerp(146, 66, t1), 4, 1);
+      F.line(lerp(bx, 96, t0), lerp(148, VP, t0), lerp(bx, 96, t1), lerp(148, VP, t1), 4, 1);
     }
   }
-  /* the cross-rows, in runs — these ARE full-width and so they are cut */
+  /* the cross-rows, in runs — these ARE full-width, so they are cut */
   for (let r = 0; r < 5; r++) {
-    const y = 66 + Math.pow((r + 1) / 5, 1.75) * 74;
-    const a = 20 + F.noise(r, 7) * 90, b = 110 + F.noise(r, 8) * 60;
+    const y = VP + Math.pow((r + 1) / 5, 1.75) * 80;
+    const a = 20 + F.noise(r, 7) * 90, b = 112 + F.noise(r, 8) * 58;
     F.line(0, y, a, y, 3, 1); F.line(a + 16, y, b, y, 3, 1); F.line(b + 14, y, 192, y, 3, 1);
   }
 }
@@ -180,13 +214,12 @@ function gardenNight(F, u, withMoon) {
    negative version has to be built by hand. */
 function cutFig(F, x, y, h, arms) {
   const th = Math.max(1, h * 0.095);
-  const hip = [x, y - h * 0.46], sh = [x, y - h * 0.78];
-  F.line(hip[0], hip[1], sh[0], sh[1], 0, th, true);
-  F.line(hip[0], hip[1], x - h * 0.17, y, 0, th * 0.85, true);
-  F.line(hip[0], hip[1], x + h * 0.17, y, 0, th * 0.85, true);
+  F.line(x, y - h * 0.46, x, y - h * 0.78, 0, th, true);
+  F.line(x, y - h * 0.46, x - h * 0.17, y, 0, th * 0.85, true);
+  F.line(x, y - h * 0.46, x + h * 0.17, y, 0, th * 0.85, true);
   const a = arms === "up" ? -h * 0.30 : -h * 0.52;
-  F.line(sh[0], sh[1], x - h * 0.30, y + a, 0, th * 0.8, true);
-  F.line(sh[0], sh[1], x + h * 0.30, y + a, 0, th * 0.8, true);
+  F.line(x, y - h * 0.78, x - h * 0.30, y + a, 0, th * 0.8, true);
+  F.line(x, y - h * 0.78, x + h * 0.30, y + a, 0, th * 0.8, true);
   F.disc(x, y - h * 0.89, h * 0.11, 0, true);
 }
 
@@ -194,8 +227,8 @@ export default {
   n: "04", slug: "04-nevermore", title: "NEVERMORE",
   tagline: "a trail followed twice, a vow made twice",
   accent: "#5aa7ff", seed: 404,
-  /* low and slow, per the note. The two vows land on the root (M2 is the
-     deepest step, M6 returns) — the film ends where it swore it would. */
+  /* low and slow, per the note. The two vows sit at the extremes — M2 on the
+     deepest step of the film, M6 back on the root. It ends where it swore. */
   drone: { base: 46, steps: [0, -5, -7, 0, 4, -12, 0] },
   movements: [
     {
@@ -210,37 +243,44 @@ export default {
         wavefronts(F, u, 0);
         ashSand(F);
         /* the wildfires are expired: what is left of them is four charred
-           stubs and the ash they became. Rejected: drawing flame, which is
-           not in the line and would have been the only warm thing here. */
-        for (const [sx, sy, sh] of [[26, 92, 13], [58, 78, 9], [112, 104, 15], [176, 86, 10]]) {
-          const tl = (F.noise(sx, 3) - 0.5) * 0.5;
-          F.line(sx, sy, sx + Math.sin(tl) * sh, sy - sh, 6, 2);
-          F.line(sx + Math.sin(tl) * sh * 0.6, sy - sh * 0.6, sx + 6, sy - sh * 0.85, 5, 1);
-          F.line(sx + Math.sin(tl) * sh * 0.4, sy - sh * 0.4, sx - 5, sy - sh * 0.75, 5, 1);
+           stumps with their tops torn off, and the ash they became. Two
+           passes of branches were cut — upright limbs, then a single side
+           stub — because each time four small stick figures appeared on the
+           beach and competed with the only person in the frame. A stump is
+           squat, thicker than it is tall at the base, and its break is a
+           ragged horizontal, never a pair of raised arms. Rejected outright:
+           drawing flame, which is not in the line and would have been the one
+           warm thing in the film. */
+        for (const [sx, sy, sh] of [[26, 92, 8], [58, 76, 6], [114, 108, 9], [176, 86, 7]]) {
+          const tl = (F.noise(sx, 3) - 0.5) * 2.5, tx = sx + tl, ty = sy - sh;
+          F.disc(sx, sy, 4.2, 3);
+          F.line(sx - 2, sy, tx - 1.6, ty, 6, 3.4);
+          F.line(sx + 2, sy, tx + 1.6, ty, 6, 3.4);
+          F.line(tx - 3.4, ty + 1.2, tx - 1, ty - 1.4, 6, 1);
+          F.line(tx - 1, ty - 1.4, tx + 1.4, ty + 0.6, 6, 1);
+          F.line(tx + 1.4, ty + 0.6, tx + 3.4, ty - 1, 6, 1);
         }
         /* the broken pieces, at the top of the trail where the water left
-           them: arcs off one ring, plus the jingles they tore loose with */
-        const D = [[152, 80, 0.2, 2.1, 0.4], [166, 88, 2.4, 4.0, -0.8],
-                   [140, 92, 3.4, 5.0, 1.9], [174, 76, 1.1, 2.6, 2.7],
-                   [158, 96, 4.6, 6.1, 0.3]];
-        for (const [cx, cy, a0, a1, rot] of D) shard(F, cx, cy, 9, a0, a1, rot, 6);
-        for (let k = 0; k < 7; k++) {
+           them — the tambourine that went out through the window in 02 and
+           came apart in 03, lying open in the sand */
+        brokenRing(F, 152, 84, 19, 0.5, 6);
+        for (let k = 0; k < 6; k++) {
           const j = F.rng(2 + k);
-          F.disc(136 + j() * 48, 74 + j() * 28, 2.1, 5);
+          F.disc(122 + j() * 26, 96 + j() * 22, 2.0, 5);
         }
-        F.line(128, 100, 148, 97, 6, 2); F.line(160, 104, 182, 102, 6, 2);   // planks
+        F.rect(120, 104, 22, 3, 6); F.disc(124, 105, 1, 3); F.disc(138, 105, 1, 3);   // a plank
         /* debris still out on the water, riding the swell it was lifted by —
            each piece sits ON a wavefront, so the sea carries it honestly */
-        for (const [dx, row, r] of [[42, 8, 3.2], [96, 7, 2.4], [70, 9, 4.0]]) {
+        for (const [dx, row, r] of [[42, 8, 3.2], [98, 7, 2.4], [70, 9, 4.0]]) {
           const dy = seaRowY(F, u, 0, row, dx);
           F.arc(dx, dy, r, Math.PI, TAU, 5, 1);
           F.line(dx - r, dy, dx + r, dy, 5, 1);
         }
         /* the trail, and the man a little way behind its head */
-        const P = (t) => [8 + t * 154, 138 - t * 56, 1 - t * 0.58];
-        trail(F, u * 1.15, 20, P, 5);
-        const p = clamp01(u * 0.95) * 0.82;
-        const [fx0, fy0, fs] = P(p);
+        const P = (t) => [8 + t * 150, 138 - t * 54, 1 - t * 0.58];
+        trail(F, u * 1.15, 18, P, 5);
+        const p = clamp01(u * 0.95) * 0.80;
+        const [fx0, fy0] = P(p);
         F.fig(fx0, fy0, 34 * (1 - p * 0.5), { mode: "walk", phase: u * 3.4, face: 1, lean: 0.05 }, 7);
       },
     },
@@ -257,83 +297,98 @@ export default {
       ],
       draw(u, F) {
         const calm = ss(0.08, 0.62, u);
+        /* the vow goes down FIRST so the whispers can run behind the letters
+           rather than through them; the wavefronts ink at 4 and cannot climb
+           over a 7, so the sheaf passes behind the word by itself */
+        vow(F, 21, ss(0.32, 0.58, u), 7, 7, 0);
         wavefronts(F, u, calm);
         ashSand(F);
         /* the winds mute the trees: the sway amplitude is the SAME calm the
            sea obeys, so one number silences both and the mute is a single
-           event rather than two coincidences */
+           event rather than two coincidences. They stand on the sand, below
+           the waterline in frame — set level with it they read as four trees
+           growing out of the sea. */
         for (let k = 0; k < 4; k++) {
-          const x = 12 + k * 11, base = 58 - k * 1.5, h = 20 + F.noise(k, 3) * 11;
+          const x = 146 + k * 11, base = 66 - k * 1.5, h = 15 + F.noise(k, 3) * 6;
           const sway = (1 - calm) * Math.sin(u * TAU * (1.1 + k * 0.3) + k) * 0.24;
           const tx = x + Math.sin(sway) * h * 0.5, ty = base - h;
-          F.line(x, base, tx, ty, 5, 1.8);
+          F.line(x, base, tx, ty, 5, 2);
           for (let j = 0; j < 7; j++) {
-            const a = -Math.PI / 2 + (j - 3) * 0.42 + sway * 1.7;
-            const L = h * (0.42 + F.noise(k, j) * 0.32);
+            const a = -Math.PI / 2 + (j - 3) * 0.44 + sway * 1.7;
+            const L = h * (0.34 + F.noise(k, j) * 0.28);
             F.line(tx, ty, tx + Math.cos(a) * L, ty + Math.sin(a) * L, 5, 1);
           }
         }
-        /* the debris pile it was found in, half-buried and going nowhere */
-        for (const [cx, cy, a0, a1, rot] of [[86, 118, 0.4, 2.2, 0.6], [110, 124, 2.8, 4.3, -0.4], [98, 130, 3.6, 5.2, 1.4]])
-          shard(F, cx, cy, 11, a0, a1, rot, 5);
-        F.line(74, 132, 96, 129, 5, 2); F.line(112, 134, 134, 132, 5, 2);
-        /* he kneels at it. The lift is slow because the line says care: the
-           heart travels 34 cells over half the movement and never overshoots */
-        F.fig(64, 132, 42, { mode: "sit", face: 1, arms: "reach" }, 7);
-        const lift = ss(0.30, 0.86, u);
-        const beat = throb(u, 7);
-        const hx = lerp(92, 80, lift), hy = lerp(122, 96, lift);
-        heart(F, hx, hy, 5.6 + beat * 0.9, 7, beat);
-        /* and the vow, laid into the folded sheaf as ink */
-        vow(F, 29, ss(0.42, 0.74, u), 6, 6, 0);
+        /* the pile it was found in: the same ring, half-buried, going nowhere */
+        brokenRing(F, 122, 126, 16, 0.45, 5);
+        F.rect(84, 134, 20, 3, 5);
+        /* he kneels at it. The lift is slow because the line says care — the
+           heart travels 33 cells over half the movement, never overshoots,
+           and ENDS AT HIS REACHING HAND rather than near it; the first pass
+           parked it fifteen cells short and the gesture read as pointing */
+        F.fig(52, 132, 38, { mode: "sit", face: 1, arms: "reach" }, 7);
+        const lift = ss(0.30, 0.86, u), beat = throb(u, 7);
+        heart(F, lerp(104, 66, lift), lerp(124, 105, lift), 6.0 + beat * 0.9, 7, beat);
       },
     },
     {
       label: "MUSTARD SEEDS", seconds: 13,
       line: "What if I followed this reclaimed heart, to where the puzzle pieces of faith are handcrafted — scrambled and scattered as mustard seeds into the vast moonlit night’s garden fields.",
-      fx: { shake: (u) => win(u, 0.16, 0.22, 0.32, 0.40) * 2.1 },
+      fx: { shake: (u) => win(u, 0.14, 0.20, 0.30, 0.38) * 2.1 },
       cues: [
-        { at: 0.10, f: 520, decay: 0.09, gain: 0.4, partials: [1, 2.3, 3.7], noise: 0.6, nDecay: 0.015, seed: 61 },
-        { at: 0.24, f: 390, decay: 0.2, gain: 0.45, partials: [1, 2.1, 3.4], noise: 0.9, nDecay: 0.03, seed: 62 },
-        { at: 0.70, f: 880, decay: 0.08, gain: 0.45, partials: [1, 3.3, 5.9], noise: 1.0, nDecay: 0.06, seed: 63 },
+        { at: 0.08, f: 520, decay: 0.09, gain: 0.4, partials: [1, 2.3, 3.7], noise: 0.6, nDecay: 0.015, seed: 61 },
+        { at: 0.22, f: 390, decay: 0.2, gain: 0.45, partials: [1, 2.1, 3.4], noise: 0.9, nDecay: 0.03, seed: 62 },
+        { at: 0.62, f: 880, decay: 0.08, gain: 0.45, partials: [1, 3.3, 5.9], noise: 1.0, nDecay: 0.06, seed: 63 },
       ],
       draw(u, F) {
         gardenNight(F, u, true);
-        /* THE PIECES ARE HANDCRAFTED FIRST, then scrambled, then scattered,
-           and each piece keeps its own delay — so the frame always holds all
-           three states at once. The first pass moved them in lockstep and the
-           block simply slid down: an object being lowered, not faith coming
-           apart into something you could plant. */
+        /* HANDCRAFTED FIRST, THEN SCRAMBLED, THEN SCATTERED, and each piece
+           carries its own delay — so the frame holds all three states at once
+           and the change is legible as a process rather than a cut. The
+           scramble pushes each piece OUT ALONG ITS OWN RADIUS from the centre
+           of the block: the first pass jittered them randomly and twenty-four
+           squares simply piled into one illegible knot. Rotation is capped
+           near half a radian, because a square turned forty-five degrees
+           reads as a diamond and stops being a puzzle piece. */
         const R = F.rng(5);
         for (let k = 0; k < 24; k++) {
           const r0 = R(), r1 = R(), r2 = R(), r3 = R();
           const col = k % 8, row = (k / 8) | 0;
-          const hx = 96 + (col - 3.5) * 13, hy = 34 + (row - 1) * 13;
-          const dk = r0 * 0.42;
-          const scr = ss(0.14, 0.36, u), sca = ss(0.28 + dk, 0.74 + dk, u);
-          const x = lerp(hx + (r1 - 0.5) * 26 * scr, 96 + (r3 - 0.5) * 2 * (16 + r2 * 88), sca);
-          const y = lerp(hy + (r2 - 0.5) * 20 * scr, 72 + Math.pow(r2, 1.4) * 66, sca);
-          const s = lerp(13, 2.6, sca);
-          const rot = r1 * TAU * scr + u * TAU * 0.5 * sca;
+          const hx = 88 + (col - 3.5) * 12, hy = 32 + (row - 1) * 12;
+          const dl = Math.hypot(hx - 88, hy - 32) || 1;
+          const scr = ss(0.12, 0.34, u), sca = ss(0.22 + r0 * 0.40, 0.56 + r0 * 0.40, u);
+          const sx = hx + (hx - 88) / dl * scr * 17 + (r1 - 0.5) * 7 * scr;
+          const sy = hy + (hy - 32) / dl * scr * 13 + (r2 - 0.5) * 6 * scr;
+          const x = lerp(sx, 96 + (r3 - 0.5) * 2 * (18 + r2 * 84), sca);
+          const y = lerp(sy, 68 + Math.pow(r2, 1.4) * 68, sca);
+          const s = lerp(12, 2.6, sca);
+          const rot = (r1 - 0.5) * 1.0 * scr + u * TAU * 0.35 * sca;
           if (s > 5.2) {
             const h = s * 0.5, c = Math.cos(rot), sn = Math.sin(rot);
             const P = (px, py) => [x + px * c - py * sn, y + px * sn + py * c];
             const q = [P(-h, -h), P(h, -h), P(h, h), P(-h, h)];
             for (let j = 0; j < 4; j++) F.line(q[j][0], q[j][1], q[(j + 1) % 4][0], q[(j + 1) % 4][1], 6, 1);
             const tab = P(h, 0), slot = P(-h, 0);
-            F.ring(tab[0], tab[1], s * 0.20, 6, 1);
-            F.ring(slot[0], slot[1], s * 0.20, 6, 1);
+            F.ring(tab[0], tab[1], s * 0.21, 6, 1);
+            F.ring(slot[0], slot[1], s * 0.21, 6, 1);
           } else {
-            F.disc(x, y, Math.max(1.1, s * 0.46), 6);
+            /* a piece does not land as one seed. Scrambled means it arrives
+               as a small broadcast, which is also the only way twenty-four
+               objects fill a field instead of dotting it */
+            const c3 = F.rng(40 + k);
+            for (let j = 0; j < 3; j++) F.disc(x + (c3() - 0.5) * 10, y + (c3() - 0.5) * 7, 1.3, 6);
           }
         }
-        /* the second trail, and the thing at its head doing the leading */
-        const P2 = (t) => [96 + Math.sin(t * 2.3) * (1 - t) * 26, 142 - t * 70, 1 - t * 0.78];
+        /* the second trail, and the thing at its head doing the leading. It
+           runs on a diagonal: an earlier straight-down path stacked its own
+           prints into a single lumpy column. */
+        const P2 = (t) => [96 + (1 - t) * (1 - t) * 32 + Math.sin(t * 3.0) * (1 - t) * 9,
+                           144 - t * 78, 1.15 - t * 0.92];
         const adv = clamp01(u * 1.2);
-        trail(F, adv, 18, P2, 5);
+        trail(F, adv, 12, P2, 5);
         const [hx2, hy2] = P2(Math.min(0.97, adv * 0.97));
         const beat = throb(u, 7);
-        heart(F, hx2, hy2 - 12, 5.0 + beat * 0.8, 6, beat);
+        heart(F, hx2, hy2 - 13, 5.2 + beat * 0.8, 6, beat);
       },
     },
     {
@@ -346,48 +401,52 @@ export default {
       draw(u, F) {
         gardenNight(F, u, false);
         const open = ss(0.05, 0.52, u);
-        const lane = 11 + smooth(u) * 17;
+        const lane = 12 + smooth(u) * 17;
         /* A HEAD THAT TURNS IS AN ELLIPSE WHOSE X-RADIUS OPENS. That is the
-           entire mechanism and it is the only one that makes "face toward me"
-           a fact rather than a caption: at face=0 the bloom is a vertical
-           sliver seen edge-on, at face=1 it is a full disc with a punched
-           centre. The turn is staggered by noise so the field turns raggedly,
-           the way a thing that is alive does. Rejected: rotating the whole
-           plant, which just made the rows wobble. */
-        for (let r = 0; r < 5; r++) {
-          const z = r / 4;
-          const gy = 140 - z * 60, sc = 1 - z * 0.60;
-          const per = 5 + r * 2, spread = lerp(210, 66, z);
+           whole mechanism, and it is the only one that makes "face toward me"
+           a fact instead of a caption: at face=0 the bloom is a vertical
+           sliver seen edge-on, at face=1 a full disc with its centre punched
+           out to paper. The turn is staggered by noise so the field turns
+           raggedly, the way a thing that is alive does. Rejected: rotating
+           the whole plant, which only made the rows wobble. */
+        for (let r = 0; r < 6; r++) {
+          const z = r / 5;
+          const gy = 142 - z * 74, sc = 1 - z * 0.68;
+          const per = 4 + Math.round(r * 1.8), spread = lerp(212, 56, z);
           for (let i = 0; i < per; i++) {
             const x = 96 + ((i + 0.5) / per - 0.5) * spread;
             if (Math.abs(x - 96) < lane) continue;
             const n = F.noise(r, i);
             const face = ss(0.16 + n * 0.30, 0.56 + n * 0.30, u);
-            const H = 26 * sc, hx = x, hy = gy - H;
-            F.line(x, gy, hx, hy + 5 * sc, 4, Math.max(1, 1.6 * sc));
-            F.line(x, gy - H * 0.45, x - 7 * sc, gy - H * 0.62, 3, 1);
-            F.line(x, gy - H * 0.30, x + 7 * sc, gy - H * 0.48, 3, 1);
-            const rr = 6.2 * sc, rx = Math.max(0.8, rr * face);
+            const H = 27 * sc, hy = gy - H;
+            F.line(x, gy, x, hy + 5 * sc, 4, Math.max(1, 1.6 * sc));
+            F.line(x, gy - H * 0.42, x - 6 * sc, gy - H * 0.58, 3, 1);
+            F.line(x, gy - H * 0.28, x + 6 * sc, gy - H * 0.44, 3, 1);
+            const rr = 6.4 * sc, rx = Math.max(0.8, rr * face);
             for (let dy = -rr; dy <= rr; dy++) {
               const w = rx * Math.sqrt(Math.max(0, 1 - (dy / rr) * (dy / rr)));
-              F.line(hx - w, hy + dy, hx + w, hy + dy, 5, 1);
+              F.line(x - w, hy + dy, x + w, hy + dy, 5, 1);
             }
             for (let k = 0; k < 10; k++) {
               const a = k / 10 * TAU;
-              F.line(hx + Math.cos(a) * rx, hy + Math.sin(a) * rr,
-                     hx + Math.cos(a) * rx * (1 + open * 0.85), hy + Math.sin(a) * rr * (1 + open * 0.85), 5, 1);
+              F.line(x + Math.cos(a) * rx, hy + Math.sin(a) * rr,
+                     x + Math.cos(a) * rx * (1 + open * 0.85), hy + Math.sin(a) * rr * (1 + open * 0.85), 5, 1);
             }
             /* the golden hue is a hole: the centre is punched to paper, so a
                bloom facing you is the brightest thing on a level-2 night */
-            if (face > 0.3) F.disc(hx, hy, Math.max(0.8, rx * 0.44), 0, true);
+            if (face > 0.3) F.disc(x, hy, Math.max(0.8, rx * 0.44), 0, true);
           }
         }
-        /* the weeds repel — they do not wilt, they let go and fall */
-        const fall = smooth(clamp01((u - 0.18) / 0.66));
-        for (let k = 0; k < 13; k++) {
-          const wx = 14 + F.noise(k, 21) * 168, wy0 = 88 + F.noise(k, 22) * 44;
-          if (Math.abs(wx - 96) < lane * 0.6) continue;
-          const wy = wy0 + fall * (60 + F.noise(k, 23) * 30);
+        /* the weeds repel — they do not wilt, they let go and fall. They
+           start high and fall slowly enough to still be in the air when the
+           shadow reaches them: an earlier pass dropped them off the bottom of
+           the frame before the shadow had risen, so the line's one causal
+           claim — they fall INTO it — never happened on screen. */
+        const fall = smooth(clamp01((u - 0.28) / 0.60));
+        for (let k = 0; k < 10; k++) {
+          const wx = 16 + F.noise(k, 21) * 162;
+          if (Math.abs(wx - 96) < lane * 0.7) continue;
+          const wy = 70 + F.noise(k, 22) * 32 + fall * (66 + F.noise(k, 23) * 26);
           const tw = fall * (F.noise(k, 24) - 0.5) * 4;
           for (let j = 0; j < 5; j++) {
             const a = -Math.PI / 2 + (j - 2) * 0.5 + tw;
@@ -403,11 +462,11 @@ export default {
           if (d > 0 && F.bayer(x, y) < d) return 7;
         });
         /* and inside it, what hides there: two figures cut out of the dark,
-           small enough to mean so little. They are only visible BECAUSE the
-           shadow arrived, which is the line's whole claim. */
-        if (sh < 128) { cutFig(F, 46, 140, 19); cutFig(F, 62, 138, 17, "up"); }
+           small enough to mean so little. They are visible only BECAUSE the
+           shadow arrived, which is the line's whole claim about memory. */
+        if (sh < 128) { cutFig(F, 44, 141, 20); cutFig(F, 62, 139, 18, "up"); }
         /* called forward: the lane opens and the prints come at the camera */
-        trail(F, u, 9, (t) => [96 + Math.sin(t * 1.6) * 5, 70 + t * t * 72, 0.35 + t * 0.85], 6);
+        trail(F, u * 1.5, 8, (t) => [96 + Math.sin(t * 1.4) * 6, VP + 6 + t * t * 74, 0.3 + t * 1.0], 6);
       },
     },
     {
@@ -418,14 +477,14 @@ export default {
         { at: 0.78, f: 170, decay: 0.08, gain: 0.35, partials: [1, 2.4], noise: 0.9, nDecay: 0.02, seed: 82 },
       ],
       draw(u, F) {
-        /* THE DARKEST FRAME IN THE FILM, and it gets there in the first two
-           fifths so that the remaining eight seconds are the work rather than
+        /* THE DARKEST FRAME IN THE FILM, and it gets there inside the first
+           two fifths so the remaining eight seconds are the work rather than
            the arrival. Rejected: ramping the dark across the whole movement,
            which spent the movement on a dimmer and left no time to search. */
         const dark = ss(0.0, 0.40, u);
         const S = F.rng(9);
         for (let k = 0; k < 46; k++) {
-          const sx = Math.round(S() * F.W), sy = Math.round(S() * 56), big = S() > 0.8;
+          const sx = Math.round(S() * F.W), sy = Math.round(S() * 54), big = S() > 0.8;
           F.ink(sx, sy, 5);
           if (big) { F.ink(sx + 1, sy, 4); F.ink(sx - 1, sy, 4); F.ink(sx, sy + 1, 4); F.ink(sx, sy - 1, 4); }
         }
@@ -439,10 +498,13 @@ export default {
           const d = dark * 1.38 - 0.30 + (c - 0.5) * 0.9;
           if (F.bayer(x, y) < d) return 7;
         });
-        /* the reach of touch: an island of ground he has actually got his
-           hands on, dithered out at its own edge. It drifts right across the
-           movement while shuddering — the search is not a sweep, it is work */
-        const px = lerp(46, 138, smooth(u)) + Math.sin(u * TAU * 2.4) * 14;
+        /* THE REACH OF TOUCH: an island of ground he actually has his hands
+           on, dithered out at its own edge, drifting right while it shudders.
+           Everything after this is drawn with ink, which cannot lighten — so
+           the island is the only place anything is visible at all, and the
+           two hands need no reveal schedule of their own. They are found
+           exactly when the search arrives at them, which is the line. */
+        const px = lerp(46, 142, smooth(u)) + Math.sin(u * TAU * 2.4) * 13;
         F.map((x, y) => {
           const d = Math.hypot((x - px) / 50, (y - 108) / 34);
           if (d < 1 && F.bayer(x, y) < (1 - d) * 1.5) return 0;
@@ -450,17 +512,9 @@ export default {
         F.line(px - 40, 112, px - 8, 111, 3, 1); F.line(px + 4, 111, px + 38, 112, 3, 1);
         const P2 = F.rng(11);
         for (let k = 0; k < 40; k++) F.disc(px - 46 + P2() * 92, 88 + P2() * 50, 1.0, 3);
-        F.fig(px - 4, 124, 30, { mode: "sit", face: 1, arms: "reach" }, 7);
-        /* what he has not found yet, at the far lip of the island, arriving
-           only as far as the dither lets it */
-        const near = ss(0.45, 0.95, u);
-        if (near > 0.02) {
-          hand(F, 140, 116, 12, 2.5, 0.36, 3);
-          hand(F, 158, 122, 12, 2.1, 0.32, 3);
-          F.map((x, y, v) => {
-            if (v === 3 && x > 126 && y > 100 && F.bayer(x, y) > near) return 7;
-          });
-        }
+        hand(F, 148, 106, 15, 1.57, 0.34, 6);
+        hand(F, 166, 117, 15, 4.71, 0.34, 6);
+        F.fig(px - 6, 126, 30, { mode: "sit", face: 1, arms: "reach" }, 7);
       },
     },
     {
@@ -476,38 +530,38 @@ export default {
         /* the same island of touch as M5, held still and opened wide — he has
            stopped searching, so the ground stops moving under him */
         F.map((x, y) => {
-          const d = Math.hypot((x - 96) / 64, (y - 100) / 46);
+          const d = Math.hypot((x - 96) / 64, (y - 98) / 48);
           if (d < 1 && F.bayer(x, y) < (1 - d) * 1.5) return 0;
         });
         F.line(34, 128, 84, 127, 4, 1); F.line(96, 127, 158, 128, 4, 1);
         const G = F.rng(13);
-        for (let k = 0; k < 70; k++) F.disc(38 + G() * 116, 100 + G() * 40, 1.0, 3);
+        for (let k = 0; k < 70; k++) F.disc(38 + G() * 116, 102 + G() * 38, 1.0, 3);
         /* dust after dusk: it does not settle, it hangs and turns over, and
-           it is the one thing here that is allowed to feel good */
+           it is the one thing in this half of the film allowed to feel good */
         const D = F.rng(21);
         for (let k = 0; k < 60; k++) {
           const mx = 38 + D() * 116, r1 = D(), r2 = D();
-          const my = 78 + r1 * 54 - Math.sin(u * TAU * (0.5 + r2 * 0.8) + mx * 0.3) * 5 - u * 10;
-          F.disc(mx, my, 0.9, 3);
+          F.disc(mx, 74 + r1 * 54 - Math.sin(u * TAU * (0.5 + r2 * 0.8) + mx * 0.3) * 5 - u * 10, 0.9, 3);
         }
         const fit = ss(0.28, 0.70, u);
         F.fig(96, 130, 44, { mode: "stand", arms: "open" }, 7);
         /* they used to be mine: found on the ground, lifted, and set back on
-           the ends of the arms. The travel is short and slow — a fitting, not
-           a catch. Rejected: throwing them, which made a juggling act of the
+           the ends of the arms — and they turn as they travel, from lying
+           palm-down on the ground to hanging off a wrist. The travel is short
+           and slow. Rejected: throwing them, which made a juggling act of the
            one gesture in the film that is supposed to cost something. */
-        const L = [lerp(60, 82, fit), lerp(124, 103, fit)];
-        const Rt = [lerp(134, 110, fit), lerp(120, 103, fit)];
-        hand(F, L[0], L[1], 13, lerp(2.6, 3.14, fit), lerp(0.36, 0.24, fit), 7);
-        hand(F, Rt[0], Rt[1], 13, lerp(-2.4, 3.14, fit), lerp(0.34, 0.24, fit), 7);
-        /* and the heart is where it was put back, still keeping time */
+        hand(F, lerp(54, 82, fit), lerp(122, 104, fit), 17, lerp(1.57, 4.07, fit), lerp(0.34, 0.26, fit), 7);
+        hand(F, lerp(140, 110, fit), lerp(118, 104, fit), 17, lerp(4.71, 2.22, fit), lerp(0.34, 0.26, fit), 7);
+        /* and the heart is where it was put back, still keeping time. It sits
+           high on the chest and is drawn wide, because the torso is two cells
+           across and at its old size the organ simply vanished into it */
         const beat = throb(u, 7);
-        heart(F, 96, 108, 3.6 + beat * 0.7, 7, beat);
+        heart(F, 96, 103, 7.0 + beat * 0.9, 7, beat);
         /* THE SAME VOW AS M2, IN THE INVERTED MATERIAL: there it was ink
-           arriving on a flat sea, here it is paper cut out of the dark. Same
-           word, same schedule, opposite substance — which is the only way I
-           found to say a thing twice and have it mean more the second time. */
-        vow(F, 20, ss(0.38, 0.74, u), 1, 0, 7);
+           arriving over a flat sea, here it is paper cut out of the dark.
+           Same word, same schedule, opposite substance — the only way I found
+           to say a thing twice and have it mean more the second time. */
+        vow(F, 22, ss(0.34, 0.60, u), 1, 0, 7);
       },
     },
   ],
