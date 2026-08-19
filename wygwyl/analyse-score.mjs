@@ -14,7 +14,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, "..");
@@ -130,6 +130,164 @@ function loadFilmWindows() {
     t += dur;
   }
   return { films, source: "worlds/*.mjs seconds (fallback, no manifest)" };
+}
+
+/* --------------------------------------------------------- synth mode ----
+   DISCOVERED WHILE VERIFYING, NOT INTRODUCED HERE: render-film.mjs builds
+   its film list with `readdirSync("worlds").filter(f => /^\d\d-.*\.mjs$/)`
+   — a pattern that also matches worlds/00-title-a/b/c.mjs, three files
+   another agent is actively adding in this same repository right now. Node
+   then sums THOSE durations into every real film's absolute start time,
+   while the browser-side `window.__hw` (which the video and the `--only`
+   window are keyed off) never counted them — so the WAV `renderScore`
+   writes is offset by ~100s from the buffer it is written into, and comes
+   out silent (confirmed: even the intermediate score.wav, before ffmpeg
+   ever touches it, measures -91dB — silence with AAC dither, not signal).
+   This reproduces for every invocation, `--only` or whole-suite alike, and
+   the fix is inside render-film.mjs, which is out of this task's lane
+   (worlds/*.mjs drone/cue edits and this file only) and is being actively
+   edited by someone else besides. So: verify with the SAME algorithm
+   instead of the broken wrapper. `synth()` below is renderScore()/strike()
+   from render-film.mjs copied verbatim (byte-identical formulas, checked
+   against it), run directly against a world module's own [0, rt.total)
+   window — the offset a correct render would use. What comes out has been
+   cross-checked against render-film.mjs's own writeWav() output for a
+   correct offset and matches to the sample.
+
+     node wygwyl/analyse-score.mjs --synth wygwyl/worlds/07-dj-turn-me-up.mjs
+   ========================================================================= */
+const SYNTH_SR = 24000;
+function synthClamp(x) { return x < -1 ? -1 : x > 1 ? 1 : x; }
+function synthRng(seed) { let s = (seed >>> 0) || 1; return () => { s ^= s << 13; s ^= s >>> 17; s ^= s << 5; return ((s >>> 0) / 4294967296) * 2 - 1; }; }
+function synthStrike(out, at, c) {
+  const i0 = Math.round(at * SYNTH_SR);
+  const f = c.f || 800, decay = c.decay || 0.15, gain = (c.gain ?? 0.5) * 0.5;
+  const ps = c.partials || [1, 2.4, 4.1];
+  const n = Math.round(Math.max(decay * 2.5, (c.nDecay || 0.05) * 4) * SYNTH_SR);
+  for (let i = 0; i < n; i++) {
+    const q = i0 + i; if (q < 0 || q >= out.length) continue;
+    const t = i / SYNTH_SR; let v = 0;
+    for (let p = 0; p < ps.length; p++) v += Math.sin(2 * Math.PI * f * ps[p] * t) * (gain / (p + 1)) * Math.exp(-t / (decay * (1 + p * 0.2)));
+    out[q] += v;
+  }
+  if (c.noise) {
+    const dur = c.nDecay || 0.05, r = synthRng(c.seed || 1);
+    const nn = Math.round(dur * 4 * SYNTH_SR);
+    let b1 = 0, b2 = 0; const w = 2 * Math.PI * f * 2.2 / SYNTH_SR;
+    for (let i = 0; i < nn; i++) {
+      const q = i0 + i; if (q < 0 || q >= out.length) continue;
+      const x = r() * Math.exp(-i / (SYNTH_SR * dur));
+      const y = x - b2; b2 = b1; b1 = y * 0.5 + b1 * Math.cos(w) * 1.4;
+      out[q] += y * gain * c.noise;
+    }
+  }
+}
+function synthRenderFilm(world, rt, { includeCues = true } = {}) {
+  const total = rt.total;
+  const out = new Float32Array(Math.ceil(total * SYNTH_SR));
+  const spec = world.drone || { base: 55, steps: [0, 3, 7, 10] };
+  const air = spec.bright ? 900 : 260;
+  const partials = [[1, 0.16], [1.007, 0.05], [2.003, 0.045]];
+  const phase = partials.map(() => 0);
+  let root = spec.base * Math.pow(2, spec.steps[0] / 12);
+  const nz = synthRng(world.seed || 1);
+  let lp = 0;
+  for (let i = 0; i < out.length; i++) {
+    const t = i / SYNTH_SR;
+    const [mi] = rt.locate(t);
+    const target = spec.base * Math.pow(2, spec.steps[mi % spec.steps.length] / 12);
+    root += (target - root) * (1 - Math.exp(-1 / (1.2 * SYNTH_SR)));
+    let v = 0;
+    for (let p = 0; p < partials.length; p++) { phase[p] += (root * partials[p][0]) / SYNTH_SR; v += Math.sin(phase[p] * Math.PI * 2) * partials[p][1]; }
+    const k = Math.exp(-2 * Math.PI * air / SYNTH_SR);
+    lp = lp * k + nz() * 0.5 * (1 - k);
+    out[i] += (v + lp * 0.05) * 0.55;
+  }
+  if (!includeCues) {
+    let peak = 0; for (let i = 0; i < out.length; i++) peak = Math.max(peak, Math.abs(out[i]));
+    const g = peak > 0.001 ? 0.89 / peak : 1;
+    for (let i = 0; i < out.length; i++) out[i] = synthClamp(out[i] * g);
+    return out;
+  }
+  for (let mi = 0; mi < rt.movements.length; mi++) {
+    const m = rt.movements[mi];
+    for (const c of m.cues || []) synthStrike(out, rt.starts[mi] + c.at * m.seconds, c);
+  }
+  let peak = 0; for (let i = 0; i < out.length; i++) peak = Math.max(peak, Math.abs(out[i]));
+  const g = peak > 0.001 ? 0.89 / peak : 1;
+  for (let i = 0; i < out.length; i++) out[i] = synthClamp(out[i] * g);
+  return out;
+}
+/* fold+summarise one PCM buffer's chroma/partials — used for both the
+   drone-only pass and the full-mix (drone+foley) pass below. */
+function chromaSummary(samples, sr, fMin = 15) {
+  const N = 8192, hop = 4096, w = hann(N);
+  const re = new Float32Array(N), im = new Float32Array(N);
+  const chroma = new Float64Array(12), ltas = new Float64Array(N / 2);
+  for (let start = 0; start + N <= samples.length; start += hop) {
+    for (let i = 0; i < N; i++) { re[i] = samples[start + i] * w[i]; im[i] = 0; }
+    fftInPlace(re, im);
+    for (let k = 1; k < N / 2; k++) {
+      const f = (k * sr) / N, mag = Math.hypot(re[k], im[k]);
+      ltas[k] += mag;
+      if (f >= fMin && f <= 5000) chroma[freqToPc(f)] += mag;
+    }
+  }
+  const chromaN = norm(chroma);
+  const top = chromaN.map((v, pc) => ({ pc, v })).sort((a, b) => b.v - a.v).slice(0, 4);
+  const key = bestKey(chromaN);
+  const bass = pickPeaks(ltas, N, sr, 10, 250, 6).map(p => ({ hz: +p.f.toFixed(2), note: freqToNoteName(p.f) }));
+  return { chromaN, top, key, bass };
+}
+const synthIdx = process.argv.indexOf("--synth");
+if (synthIdx >= 0) {
+  const target = process.argv[synthIdx + 1];
+  if (!target || !fs.existsSync(target)) { console.error("--synth needs an existing worlds/*.mjs path"); process.exit(1); }
+  const { makeRuntime } = await import(pathToFileURL(path.join(HERE, "halfworld.mjs")).href);
+  const world = (await import(pathToFileURL(path.resolve(target)).href)).default;
+  const rt = makeRuntime(world);
+  console.log(`synthesising ${target}  (drone: base=${world.drone?.base}, steps=[${world.drone?.steps}], bright=${!!world.drone?.bright})  ${rt.total}s, ${rt.movements.length} movements`);
+
+  /* DRONE ONLY — no cue strikes. This is what was retuned, and cue f/partials
+     are untouched foley (contact sounds), never meant to be diatonic — mixing
+     them in would make an honest key-match measurement report a false miss. */
+  const droneOnly = synthRenderFilm(world, rt, { includeCues: false });
+  const d = chromaSummary(droneOnly, SYNTH_SR, 8); // low fMin: some bases sit near 16Hz
+  console.log(`  DRONE ONLY  (the thing this task retuned):`);
+  console.log(`    top pitch classes: ${d.top.map(t => `${NOTE_NAMES[t.pc]}(${(t.v * 100).toFixed(1)}%)`).join(", ")}`);
+  console.log(`    K-S best fit: ${NOTE_NAMES[d.key.pc]} ${d.key.mode} (r=${d.key.score.toFixed(3)})`);
+  console.log(`    partials: ${d.bass.map(p => `${p.hz}Hz(${p.note})`).join(", ")}`);
+
+  /* FULL MIX — drone + foley cues, i.e. what the mp4 would actually play.
+     Reported for transparency; NOT the number to judge "does this match the
+     mp3's key" by, since the foley layer is deliberately non-diatonic. */
+  const fullMix = synthRenderFilm(world, rt, { includeCues: true });
+  let peak = 0; for (const v of fullMix) peak = Math.max(peak, Math.abs(v));
+  const f = chromaSummary(fullMix, SYNTH_SR, 8);
+  console.log(`  FULL MIX (drone + untouched foley cues, peak=${peak.toFixed(3)}):`);
+  console.log(`    top pitch classes: ${f.top.map(t => `${NOTE_NAMES[t.pc]}(${(t.v * 100).toFixed(1)}%)`).join(", ")}`);
+  console.log(`    K-S best fit: ${NOTE_NAMES[f.key.pc]} ${f.key.mode} (r=${f.key.score.toFixed(3)})`);
+
+  let prior = {};
+  if (fs.existsSync(OUT_JSON)) { try { prior = JSON.parse(fs.readFileSync(OUT_JSON, "utf8")); } catch (e) { /* ignore */ } }
+  prior.synthVerification = prior.synthVerification || [];
+  prior.synthVerification = prior.synthVerification.filter(v => v.file !== target);
+  prior.synthVerification.push({
+    file: target, drone: world.drone, seconds: rt.total,
+    droneOnly: {
+      topPitchClasses: d.top.map(t => ({ note: NOTE_NAMES[t.pc], weight: +t.v.toFixed(4) })),
+      krumhanslSchmuckler: { pc: NOTE_NAMES[d.key.pc], mode: d.key.mode, r: +d.key.score.toFixed(4) },
+      partials: d.bass,
+    },
+    fullMix: {
+      peak: +peak.toFixed(4),
+      topPitchClasses: f.top.map(t => ({ note: NOTE_NAMES[t.pc], weight: +t.v.toFixed(4) })),
+      krumhanslSchmuckler: { pc: NOTE_NAMES[f.key.pc], mode: f.key.mode, r: +f.key.score.toFixed(4) },
+    },
+  });
+  fs.writeFileSync(OUT_JSON, JSON.stringify(prior, null, 2));
+  console.log(`  appended to ${path.relative(ROOT, OUT_JSON)} .synthVerification[]`);
+  process.exit(0);
 }
 
 /* --------------------------------------------------------- verify mode ---

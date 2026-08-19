@@ -231,9 +231,18 @@ function drawSmall(K, x, y, h, pose, contour) {
   const mode = pose.mode || "stand";
   const ph = pose.phase || 0;
   const a = pose.arms || (mode === "walk" ? "swing" : "down");
-  const hr = Math.max(1.4, h * 0.125);
-  const tw = Math.max(1.3, h * 0.105);
-  const lw = Math.max(0.95, h * 0.062);
+  /* A SMALL FIGURE IS A SILHOUETTE, NOT A SKELETON. The first version of this
+     path drew thin capsules on the joint solution, and thin capsules ARE stick
+     figures — the very thing the rig replaced, still turning up in every crowd
+     and every distant body in the suite. A small body has to be a MASS: a big
+     head, a trunk with real width, and limbs thick enough to be seen as limbs
+     rather than as the wires between them. Everything here is deliberately
+     heavier than proportion allows, because at this size the silhouette is the
+     only information that survives. */
+  const hr = Math.max(1.7, h * 0.150);
+  const tw = Math.max(2.0, h * 0.155);
+  const lw = Math.max(1.35, h * 0.088);
+  const aw = Math.max(1.15, h * 0.072);
   const rot = pose.rot || 0, cs = Math.cos(rot), sn = Math.sin(rot);
   const hipY = h * 0.46, shY = h * 0.78;
   const T = (bx, by) => {
@@ -253,13 +262,17 @@ function drawSmall(K, x, y, h, pose, contour) {
   else if (a === "swing") { const s = Math.sin(ph * TAU);
     hA = [s * h * 0.16, hipY - h * 0.02]; hB = [-s * h * 0.16, hipY - h * 0.03]; }
   else { hA = [-h * 0.13, hipY - h * 0.02]; hB = [h * 0.13, hipY - h * 0.02]; }
-  const seg = (p0, p1, r) => { const A = T(p0[0], p0[1]), B = T(p1[0], p1[1]);
-    capsule(K, A[0], A[1], B[0], B[1], r, r * 0.85, contour, contour, true); };
+  const seg = (p0, p1, r0, r1) => { const A = T(p0[0], p0[1]), B = T(p1[0], p1[1]);
+    capsule(K, A[0], A[1], B[0], B[1], r0, r1 ?? r0 * 0.8, contour, contour, true); };
   const hip = [0, hipY], sh = [0, shY];
+  /* arms are hung from the OUTSIDE of the shoulder, so the silhouette gets the
+     bump that says "arm" instead of a line leaving the middle of a trunk */
+  const shL = [-tw * 0.55, shY], shR = [tw * 0.55, shY];
+  seg(shL, hA, aw); seg(shR, hB, aw);
   seg(hip, fA, lw); seg(hip, fB, lw);
-  seg(sh, hA, lw * 0.85); seg(sh, hB, lw * 0.85);
-  seg(hip, sh, tw);
-  const hd = T(0, shY + h * 0.12);
+  /* the trunk last and widest: shoulders broader than hips, one solid mass */
+  seg(hip, sh, tw * 0.82, tw);
+  const hd = T(0, shY + h * 0.115);
   K.disc(hd[0], hd[1], hr, contour);
 }
 
@@ -268,8 +281,11 @@ export function drawFigure(K, x, y, h, pose = {}, level = 7) {
   if (h < 4) return;
   const contour = clamp(level, 1, 7);
   const fill = clamp(contour - 3, 1, 7);
-  if (h < 16) { drawSmall(K, x, y, h, pose, contour); return; }
-  const solid = h < 22;            // volumes, but no hollow: the fill would close up
+  /* Raised from 16: between 16 and 21 the proportional rig produced limbs
+     one and two cells wide, which is a stick figure however it was derived.
+     The silhouette path carries that range now. */
+  if (h < 22) { drawSmall(K, x, y, h, pose, contour); return; }
+  const solid = h < 30;            // volumes, but no hollow: the fill would close up
 
   /* A SMALL BODY MUST BE A STOCKIER BODY. Width scales with h, but legibility
      does not — it is set by the lattice, which does not get finer when the
