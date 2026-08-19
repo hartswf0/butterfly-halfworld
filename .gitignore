@@ -28,3 +28,6 @@ renders/wygwyl/_clip/
 # agent worktrees are their own repositories
 .claude/worktrees/
 renders/wygwyl/_frames*/
+
+# renders are outputs of this repository, not files in it
+renders/outoflife/
