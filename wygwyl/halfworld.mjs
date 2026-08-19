@@ -327,6 +327,14 @@ export function makeRuntime(world) {
   const title = {
     label: "TITLE", line: "", seconds: 5,
     draw(u, F) {
+      /* THE CARD RESOLVES IN ITS OWN TIME, NOT IN A FRACTION OF THE FILM'S.
+         The slate is stretched with everything else onto the record, so a
+         reveal written as a fraction of u took two seconds when the slate was
+         five and takes five when the slate is eleven — five seconds of a film
+         opening on type too broken to read. The emergence is pinned to about
+         two and a half seconds of wall clock; what the stretch buys is a
+         longer hold on the finished card, which is what a slate is for. */
+      const uu = Math.min(1, u * Math.max(1, this.seconds / 5));
       F.clear(7);
       F.word(world.n, F.W / 2, F.H * 0.30, 13, 0, true);
       const words = world.title.split(" ");
@@ -340,7 +348,7 @@ export function makeRuntime(world) {
       }
       F.word("A WYGWYL HALFWORLD", F.W / 2, F.H * 0.78, 8, 2, true);
       /* the carve arrives dot by dot, on the ordered schedule */
-      F.map((x, y, v) => (v < 3.5 && F.bayer(x, y) > u * 2.4 ? 7 : undefined));
+      F.map((x, y, v) => (v < 3.5 && F.bayer(x, y) > uu * 2.4 ? 7 : undefined));
     },
   };
   /* THE FILM IS STRETCHED TO ITS OWN PASSAGE OF THE RECORD.

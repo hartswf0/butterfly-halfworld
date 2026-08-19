@@ -213,7 +213,10 @@ export default {
         F.fig(x, HZ, 50, {
           mode: "walk", phase: u * 5.35, face: 1, guise: "poet", headTurn: 0.3, breath: 0.5,
         }, 7);
-        say(F, "WHERE YOU GO", 52, 126, 9, 1, ss(0.66, 0.96, u));
+        /* it goes when the room goes, not over three slow seconds before it —
+           a title breaking up letter by letter in an empty frame reads as
+           debris rather than as a departure */
+        say(F, "WHERE YOU GO", 52, 126, 9, 1, ss(0.88, 1.0, u));
       },
     },
     {
