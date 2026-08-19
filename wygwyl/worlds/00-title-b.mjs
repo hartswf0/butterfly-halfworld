@@ -21,7 +21,9 @@ import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
 const CX = 96, CY = 72;
 const RINGS = 6;                       // r = 0 innermost … 5 outermost
 const BASE_RATE = 0.9;                 // turns of ring 0 per whole u
-const N0 = 34, DN = 22;                // points on ring r: N0 + r·DN
+const N0 = 110, DN = 55;               // points on ring r: N0 + r·DN — dense;
+                                        // a few dozen points per ring read as
+                                        // a scatter of beads, not an arabesque
 const R0 = 9, DR = 9.5;                // radius of ring r: R0 + r·DR
 const BREATHE = 5;                     // shared breathing amplitude, in cells
 
@@ -41,30 +43,40 @@ function wordTargets(F, text, ph) {
    (or omit xs/ys) to leave it as pure counter-rotating geometry. Radius
    breathes for every ring at all times — even a ring that is currently
    spelling a word keeps the shared pulse as its resting position, so the
-   flight target is the only thing holding it still. */
-function ring(F, u, r, env, xs, ys, T) {
+   flight target is the only thing holding it still. `rankRef` is a shared
+   counter across every ring drawn this frame: a first pass gave each ring
+   its OWN i mod T, and every ring's i=0 piled onto the same first target
+   cell while the far end of a short word never got a point at all. One
+   running counter spends the flying rings' points across the whole word
+   evenly instead. Idle points are leveled by radius — a slow band of
+   darker and lighter rings — so the resting arabesque has depth instead of
+   being one flat tone of ink. */
+function ring(F, u, r, env, xs, ys, T, rankRef) {
   const n = ringPoints(r);
   const dir = r % 2 === 0 ? 1 : -1;
   const rate = (r + 1) * BASE_RATE * dir;
   const rad = R0 + r * DR + Math.sin(u * TAU * 0.6 + r * 0.9) * BREATHE;
+  const band = 2 + Math.round((0.5 + 0.5 * Math.sin(rad * 0.5)) * 3) + (r % 2 === 0 ? 1 : 0);
   for (let i = 0; i < n; i++) {
     const a = (i / n) * TAU + u * TAU * rate;
     let px = CX + Math.cos(a) * rad;
     let py = CY + Math.sin(a) * rad;
+    let lvl = band;
     if (env > 0.002 && T) {
-      const ti = i % T;
+      const ti = rankRef.v % T; rankRef.v++;
       px = lerp(px, xs[ti], env);
       py = lerp(py, ys[ti], env);
+      lvl = env > 0.5 ? 7 : 6;
     }
-    const lvl = 4 + (r % 2 === 0 ? 1 : 0) + (env > 0.5 ? 1 : 0);
     F.ink(Math.round(px), Math.round(py), Math.min(7, lvl));
   }
 }
 
 function allRings(F, u, envFor) {
+  const rankRef = { v: 0 };
   for (let r = 0; r < RINGS; r++) {
     const e = envFor(r);
-    ring(F, u, r, e.env, e.xs, e.ys, e.n);
+    ring(F, u, r, e.env, e.xs, e.ys, e.n, rankRef);
   }
 }
 const IDLE = { env: 0, xs: null, ys: null, n: 0 };

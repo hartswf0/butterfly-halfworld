@@ -161,14 +161,18 @@ export function makeIngest(videoEl) {
     return [dx, dy];
   }
 
+  /* valGrid is already the final 0..1 ink amount — levels and tone were both
+     applied per-cell above. Quantising is purely "which of the 8 levels does
+     this land on", and dither is only how the fractional remainder is
+     resolved: dropped (none), scheduled on the world's own lattice (bayer),
+     or pushed into neighbours (diffuse). */
   function quantize(opts, out) {
-    const black = opts.black ?? 0, white = opts.white ?? 1, span = (white - black) || 1e-6;
     if (opts.dither === "diffuse") {
       /* Floyd-Steinberg over a scratch copy scaled to 0..7 — the error only
          ever propagates within this one call, never across frames, so this
          stays pure: same inputs, same tear pattern, every time. */
       const work = new Float32Array(CELLS);
-      for (let q = 0; q < CELLS; q++) work[q] = clamp01((valGrid[q] - black) / span) * 7;
+      for (let q = 0; q < CELLS; q++) work[q] = clamp01(valGrid[q]) * 7;
       for (let y = 0; y < FH; y++) for (let x = 0; x < FW; x++) {
         const q = y * FW + x, v = work[q];
         const lvl = clamp(Math.round(v), 0, 7);
@@ -185,7 +189,7 @@ export function makeIngest(videoEl) {
     }
     for (let y = 0; y < FH; y++) for (let x = 0; x < FW; x++) {
       const q = y * FW + x;
-      const t = clamp01((valGrid[q] - black) / span) * 7;
+      const t = clamp01(valGrid[q]) * 7;
       const base = Math.floor(t), frac = t - base;
       let lvl;
       if (opts.dither === "bayer") lvl = frac > bayer(x, y) ? base + 1 : base;
@@ -230,10 +234,20 @@ export function makeIngest(videoEl) {
         const sq = iy * FW + ix;
         let v = chGrid[sq];
         if (needEdge) v = lerp(v, edgeGrid[sq], clamp01(opts.edge));
+        /* LEVELS before TONE: black/white is what a dim shot's exposure gets
+           opened with, and that has to happen on the raw reading, not on an
+           already-inverted or already-posterised one — apply the curve to
+           the wrong side of the levels remap and every fader clips to the
+           same one or two output levels no matter where you set it (this was
+           a real bug: levels remap lived in quantize(), downstream of the
+           tone curve, and clipped nearly everything to full ink). */
+        const black = opts.black ?? 0, white = opts.white ?? 1, span = (white - black) || 1e-6;
+        v = clamp01((v - black) / span);
         valGrid[y * FW + x] = applyTone(v, opts);
       }
 
       quantize(opts, F);
+      if (debug) { debug.chGrid = chGrid.slice(); debug.valGrid = valGrid.slice(); }
       return F;
     },
   };

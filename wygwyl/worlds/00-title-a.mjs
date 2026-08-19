@@ -8,7 +8,7 @@
    alone just sort into straight radial spokes, which is a wheel, not a
    rosette. The local orbit is what turns the same law into loops — at any
    instant every anchor's satellite is somewhere on its own little circle,
-   and the ENVELOPE of nine hundred little circles, all turning at
+   and the ENVELOPE of nineteen hundred little circles, all turning at
    different multiples of one rate, is the rosette.
 
    When Ω·u drifts near a low rational p/q, every k-th satellite shares a
@@ -18,19 +18,22 @@
    triggered by hand.
 
    THE TITLE RIDES THE SAME LAW rather than interrupting it: at the resolve
-   windows the same N points are ALSO given a second position — a cell read
-   back out of the word's own raster — and u simply blends between the two.
-   The flight paths are the rosette's own geometry deciding how a letter
-   gets built, which is why they arrive from everywhere at once instead of
-   left-to-right like a typewriter.
+   windows an even sample of the field — spread across every anchor angle,
+   never all of it — is ALSO given a second position, a cell read back out
+   of the word's own raster, and u blends between the two. The rest of the
+   field keeps turning, so the word arrives as one resonance the rosette is
+   currently holding, in front of a rosette that never stopped.
    ========================================================================= */
 import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
 
 const CX = 96, CY = 72;           // the pivot every point turns around
 const ANCHOR_R = 38;               // radius of the ring the anchors sit on
 const OMEGA = 4;                  // Ω·u is an integer at u=.25/.5/.75/1
-const SWARM = 900;                // the chaos population. Letters draw MORE
-                                   // ink by reusing points, never fewer of them
+const SWARM = 1900;                // Whitney's fields are dense — a few dozen
+                                   // points reads as scatter, not a harmonic
+                                   // field; the caustics only appear once
+                                   // there are enough loops for the eye to
+                                   // find the envelope curve through them
 
 /* Rasterise a word, read its ink back as a flight-target list, erase it —
    one F.map pass either way, so a chaos-only movement never pays for text
@@ -47,29 +50,44 @@ function wordTargets(F, text, ph) {
 }
 
 /* THE FIELD. env is how much of the argument the word has won: 0 is pure
-   differential phase, 1 is the word, the run between is the flight. Point k
-   is assigned target k mod T — sorting points to their nearest target was
-   tried and cost a full sort every frame for a result no more legible than
-   modulo; the spare points from SWARM > T just thicken the stroke, which a
-   halftone wants anyway. `pivot` moves the whole field's centre; the
-   kaleido movement needs one off the field's own mirror line (72,96) or
-   the fold reads a still-empty mirrored half back over a populated one
-   and erases it — found by an all-black frame at the exact u where the
-   field collapses onto that row. */
+   differential phase, 1 is the word, the run between is the flight. `pivot`
+   moves the whole field's centre; the kaleido movement needs one off the
+   field's own mirror line (x=96,y=72) or the fold reads a still-empty
+   mirrored half back over a populated one and erases it — caught as an
+   all-black frame at the exact u the field collapsed onto that row.
+
+   ONLY A SUBSET OF THE FIELD EVER FLIES. Letting all nineteen hundred
+   points fly resolved the word onto empty paper — a stronger and truer
+   picture keeps most of the field turning behind and around the settled
+   letters, so the title is one resonance the field is currently holding,
+   not a state it has replaced itself with. Membership is every `stride`-th
+   point, which — because k also sets the anchor angle — samples the whole
+   ring evenly rather than draining one arc of the rosette bare. */
 function field(F, u, env, xs, ys, T, pivot) {
   const [px0, py0] = pivot || [CX, CY];
+  const FLY = Math.max(700, T || 0);
+  const stride = T ? Math.max(1, Math.floor(SWARM / FLY)) : 0;
+  const phase = OMEGA * u, frac = phase - Math.floor(phase);
+  const resGlow = Math.min(frac, 1 - frac) < 0.05 ? 1 : 0;
+  let rank = 0;
   for (let k = 0; k < SWARM; k++) {
     const anchor = (k / SWARM) * TAU;
     const spin = k * OMEGA * u * TAU;
-    const rSat = 15 + 6 * Math.sin(k * 0.021);
+    const rSat = 15 + 7 * Math.sin(k * 0.021);
     let px = px0 + Math.cos(anchor) * ANCHOR_R + Math.cos(spin) * rSat;
     let py = py0 + Math.sin(anchor) * ANCHOR_R + Math.sin(spin) * rSat;
-    if (env > 0.002 && T) {
-      const ti = k % T;
+    const flies = stride > 0 && k % stride === 0;
+    const ti = flies ? rank++ % T : -1;
+    let lvl;
+    if (flies && env > 0.002) {
       px = lerp(px, xs[ti], env);
       py = lerp(py, ys[ti], env);
+      lvl = env > 0.5 ? 7 : 6;
+    } else {
+      const dist = Math.hypot(px - px0, py - py0);
+      const band = 0.5 + 0.5 * Math.sin(dist * 0.55);
+      lvl = 2 + Math.round(band * 3) + resGlow;
     }
-    const lvl = 4 + (F.noise(k, 3) > 0.72 ? 2 : 0) + (env > 0.5 ? 1 : 0);
     F.ink(Math.round(px), Math.round(py), Math.min(7, lvl));
   }
 }
@@ -97,10 +115,13 @@ export default {
         { at: 0.52, f: 660, decay: 0.6, gain: 0.5, partials: [1, 2, 3, 4], noise: 0.15, nDecay: 0.04, seed: 22 },
       ],
       /* Rise, hold, and let go again — the word is one resonance among the
-         others, not a destination the field stops at. */
+         others, not a destination the field stops at. Hold is wide (u∈
+         [.38,.62]) rather than a single instant: a narrow hold left the
+         letters mid-flight — softened, not wrong — at the exact moment
+         meant to be the readable one. */
       draw(u, F) {
         const { xs, ys, n } = wordTargets(F, "WHERE YOU GO", 14);
-        const env = win(u, 0.30, 0.52, 0.68, 0.88);
+        const env = win(u, 0.20, 0.38, 0.62, 0.80);
         field(F, u, env, xs, ys, n);
       },
     },
@@ -113,8 +134,9 @@ export default {
       /* Same law, mirrored into four quadrants — a second look at the same
          differential, folded into the mandala the un-mirrored version only
          gestures at. Rejected: mirroring the text movements too, where a
-         letter reflected reads as a different letter, not a bigger one. */
-      draw(u, F) { field(F, u, 0, null, null, 0); },
+         letter reflected reads as a different letter, not a bigger one.
+         Pivot is nudged off (96,72) — see the note on `field`'s `pivot`. */
+      draw(u, F) { field(F, u, 0, null, null, 0, [93, 68]); },
     },
     {
       label: "WHEN YOU LEAVE", seconds: 9, line: "",
@@ -122,12 +144,13 @@ export default {
         { at: 0.28, f: 392, decay: 0.25, gain: 0.4, partials: [1, 2.5, 4], noise: 0.5, nDecay: 0.03, seed: 41 },
         { at: 0.46, f: 588, decay: 1.4, gain: 0.55, partials: [1, 2.01, 3.02, 4.04], noise: 0.15, nDecay: 0.04, seed: 42 },
       ],
-      /* The last word doesn't let go: env rises once and holds through the
-         rest of the movement, so the suite's own title is the last thing
-         standing when this film loops back into its own title card. */
+      /* The last word doesn't let go: env rises once, fully locked well
+         before the movement's midpoint, and holds through the rest of it —
+         so the suite's own title is the last thing standing when this film
+         loops back into its own title card. */
       draw(u, F) {
         const { xs, ys, n } = wordTargets(F, "WHEN YOU LEAVE", 14);
-        const env = ss(0.28, 0.58, u);
+        const env = ss(0.12, 0.32, u);
         field(F, u, env, xs, ys, n);
       },
     },

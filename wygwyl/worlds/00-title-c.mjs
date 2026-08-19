@@ -22,7 +22,9 @@ import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
 
 const P = 4;              // every cell's fixed frequency — see below
 const DRIFT = 6;           // q(u) = q0 + DRIFT·u
-const BASE_PTS = 26;       // points tracing a cell's curve when it is idle
+const BASE_PTS = 36;       // points tracing a cell's curve when it is idle —
+                            // a contact sheet needs enough grain per frame
+                            // to read as a curve and not six dots
 
 /* Read one line's ink back as per-character buckets. wordW gives the exact
    glyph width the font laid out, so the column boundaries are the same
@@ -60,7 +62,11 @@ function planColumns(cols, a, d) {
 
 /* One cell: idle it draws its own curve, locked (env from an ss() snap
    around uLock) it flies from that curve onto its own bucket of glyph ink
-   and stays — "assembles" is cumulative, so this env only ever rises. */
+   and stays — "assembles" is cumulative, so this env only ever rises. Idle
+   ink is banded by each point's own distance from the cell's centre, the
+   same device as the other two titles use for depth — a flat level 5 for
+   every dancing curve read as wallpaper, not a figure with a near side and
+   a far side. */
 function cell(F, u, cx, cy, ampX, ampY, phase, q0, uLock, bucket) {
   const q = q0 + DRIFT * u;
   const env = uLock == null ? 0 : ss(uLock - 0.05, uLock + 0.05, u);
@@ -69,12 +75,30 @@ function cell(F, u, cx, cy, ampX, ampY, phase, q0, uLock, bucket) {
     const t = j / pts;
     let px = cx + Math.sin(TAU * (P * t + phase)) * ampX;
     let py = cy + Math.sin(TAU * (q * t + phase * 1.6 + 0.25)) * ampY;
+    let lvl;
     if (env > 0.002 && bucket && bucket.xs.length) {
       const bi = j % bucket.xs.length;
       px = lerp(px, bucket.xs[bi], env);
       py = lerp(py, bucket.ys[bi], env);
+      lvl = env > 0.5 ? 7 : 6;
+    } else {
+      const d = Math.hypot(px - cx, py - cy);
+      lvl = 2 + Math.round((0.5 + 0.5 * Math.sin(d * 0.6)) * 3);
     }
-    F.ink(Math.round(px), Math.round(py), env > 0.5 ? 7 : 5);
+    F.ink(Math.round(px), Math.round(py), lvl);
+  }
+}
+
+/* A strip of small cells that never lock, run above and below the row that
+   is currently assembling. The catalogue this world is named for has to
+   still be visible once a line of it turns into type, or the title lands
+   on a blank sheet instead of a live one. */
+function decorRow(F, u, cy, cols, h) {
+  const cw = F.W / cols;
+  for (let c = 0; c < cols; c++) {
+    const R = F.rng(c + 400 + Math.round(cy));
+    const uSnap = 0.1 + R() * 0.8, q0 = P - DRIFT * uSnap;
+    cell(F, u, (c + 0.5) * cw, cy, cw * 0.34, h, R() * TAU, q0, null, null);
   }
 }
 
@@ -90,13 +114,13 @@ export default {
         { at: 0.35, f: 587, decay: 0.3, gain: 0.35, partials: [1, 2, 3], noise: 0.2, nDecay: 0.05, seed: 81 },
         { at: 0.68, f: 494, decay: 0.3, gain: 0.35, partials: [1, 2, 3], noise: 0.2, nDecay: 0.05, seed: 82 },
       ],
-      /* Eighteen cells, none of them tied to a word yet. Each one's own q0
-         is solved so it resonates at its OWN random moment within the
+      /* Thirty-two cells, none of them tied to a word yet. Each one's own
+         q0 is solved so it resonates at its OWN random moment within the
          movement — every cell in the sheet snaps to its ellipse exactly
          once, at a different time, entirely from the drift crossing P; no
          cell's lock time is chosen by anything watching the clock. */
       draw(u, F) {
-        const cols = 6, rows = 3, cw = F.W / cols, ch = F.H / rows;
+        const cols = 8, rows = 4, cw = F.W / cols, ch = F.H / rows;
         for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
           const k = r * cols + c, R = F.rng(k);
           const uSnap = 0.12 + R() * 0.76;
@@ -114,7 +138,9 @@ export default {
         { at: 0.68, f: 660, decay: 0.5, gain: 0.45, partials: [1, 2, 3], noise: 0.15, nDecay: 0.04, seed: 93 },
       ],
       /* One row, one column per character. Occupied columns lock left to
-         right across u∈[.16,.72]; the two spaces never do. */
+         right across u∈[.16,.72]; the two spaces never do. A thin strip of
+         permanently-idle cells runs above and below the word row, so the
+         sheet is still visibly turning once the row itself has locked. */
       draw(u, F) {
         const text = "WHERE YOU GO", cy = 66, ph = 14;
         const { cols, left, cellW } = harvestColumns(F, text, ph, F.W / 2, cy);
@@ -124,6 +150,8 @@ export default {
           cell(F, u, left + (c + 0.5) * cellW, cy, cellW * 0.42, 11,
                R() * TAU, plan[c].q0, plan[c].uLock, cols[c]);
         }
+        decorRow(F, u, 18, 9, 10);
+        decorRow(F, u, 122, 9, 10);
       },
     },
     {
@@ -136,7 +164,8 @@ export default {
       /* Same mechanism, the second line, locking a little earlier and a
          little tighter (u∈[.14,.66]) so the whole phrase reads as one
          gesture speeding up toward its own end rather than two identical
-         passes back to back. Holds from full lock to the end of the film. */
+         passes back to back. Holds from full lock to the end of the film,
+         with the same idle strips still turning above and below it. */
       draw(u, F) {
         const text = "WHEN YOU LEAVE", cy = 78, ph = 14;
         const { cols, left, cellW } = harvestColumns(F, text, ph, F.W / 2, cy);
@@ -146,6 +175,8 @@ export default {
           cell(F, u, left + (c + 0.5) * cellW, cy, cellW * 0.42, 11,
                R() * TAU, plan[c].q0, plan[c].uLock, cols[c]);
         }
+        decorRow(F, u, 30, 9, 10);
+        decorRow(F, u, 132, 9, 10);
       },
     },
   ],

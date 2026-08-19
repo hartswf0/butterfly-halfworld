@@ -132,6 +132,66 @@ function loadFilmWindows() {
   return { films, source: "worlds/*.mjs seconds (fallback, no manifest)" };
 }
 
+/* --------------------------------------------------------- verify mode ---
+   Step 4 needs the SAME measurement applied to a rendered film's audio, to
+   confirm a retuned drone actually lands where the mp3 does — a claim
+   without this is not a result. Reuses every function above; only the
+   whole-piece chroma + bass-peak measurement applies (a single rendered
+   film has no manifest windows and, being mostly one drone, no pulse
+   worth re-deriving).
+
+     node wygwyl/analyse-score.mjs --verify film/WYGWYL-01.mp4 [--label "01 out of life"]
+   ========================================================================= */
+const argv = process.argv.slice(2);
+const verifyIdx = argv.indexOf("--verify");
+if (verifyIdx >= 0) {
+  const target = argv[verifyIdx + 1];
+  const labelIdx = argv.indexOf("--label");
+  const label = labelIdx >= 0 ? argv[labelIdx + 1] : path.basename(target);
+  if (!target || !fs.existsSync(target)) { console.error("--verify needs an existing audio/video file"); process.exit(1); }
+  console.log(`decoding ${target} → f32 mono @ ${SR}Hz  (verify: ${label})`);
+  const vpcm = decode(target);
+  const vN = 8192, vHop = 4096;
+  const vWin = hann(vN);
+  const vRe = new Float32Array(vN), vIm = new Float32Array(vN);
+  const vChroma = new Float64Array(12);
+  const vLtas = new Float64Array(vN / 2);
+  let vFrames = 0;
+  for (let start = 0; start + vN <= vpcm.length; start += vHop) {
+    for (let i = 0; i < vN; i++) { vRe[i] = vpcm[start + i] * vWin[i]; vIm[i] = 0; }
+    fftInPlace(vRe, vIm);
+    for (let k = 1; k < vN / 2; k++) {
+      const f = (k * SR) / vN;
+      const mag = Math.hypot(vRe[k], vIm[k]);
+      vLtas[k] += mag;
+      if (f >= 27.5 && f <= 5000) vChroma[freqToPc(f)] += mag;
+    }
+    vFrames++;
+  }
+  const vChromaN = norm(vChroma);
+  const vKey = bestKey(vChromaN);
+  const vTop = vChromaN.map((v, pc) => ({ pc, v })).sort((a, b) => b.v - a.v).slice(0, 4);
+  const vBass = pickPeaks(vLtas, vN, SR, 15, 250, 6).map(p => ({ hz: +p.f.toFixed(2), note: freqToNoteName(p.f), mag: +p.mag.toFixed(1) }));
+  console.log(`  ${vFrames} frames`);
+  console.log(`  top pitch classes: ${vTop.map(t => `${NOTE_NAMES[t.pc]}(${(t.v * 100).toFixed(1)}%)`).join(", ")}`);
+  console.log(`  K-S best fit: ${NOTE_NAMES[vKey.pc]} ${vKey.mode} (r=${vKey.score.toFixed(3)})`);
+  console.log(`  low-register partials: ${vBass.map(p => `${p.hz}Hz(${p.note})`).join(", ")}`);
+  // record into score-analysis.json under "verification" without disturbing the main report
+  let prior = {};
+  if (fs.existsSync(OUT_JSON)) { try { prior = JSON.parse(fs.readFileSync(OUT_JSON, "utf8")); } catch (e) { /* ignore */ } }
+  prior.verification = prior.verification || [];
+  prior.verification = prior.verification.filter(v => v.label !== label);
+  prior.verification.push({
+    label, file: target, frames: vFrames,
+    topPitchClasses: vTop.map(t => ({ note: NOTE_NAMES[t.pc], weight: +t.v.toFixed(4) })),
+    krumhanslSchmuckler: { pc: NOTE_NAMES[vKey.pc], mode: vKey.mode, r: +vKey.score.toFixed(4) },
+    lowRegisterPartials: vBass,
+  });
+  fs.writeFileSync(OUT_JSON, JSON.stringify(prior, null, 2));
+  console.log(`  appended to ${path.relative(ROOT, OUT_JSON)} .verification[]`);
+  process.exit(0);
+}
+
 /* ------------------------------------------------------------------ main */
 console.log("decoding", MP3, `→ f32 mono @ ${SR}Hz`);
 const pcm = decode(MP3);

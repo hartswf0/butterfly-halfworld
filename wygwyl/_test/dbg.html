@@ -1,0 +1,19 @@
+<!doctype html>
+<meta charset="utf-8">
+<script type="module">
+import { makeIngest } from "../ingest.mjs";
+const img = document.createElement("img");
+document.body.appendChild(img);
+await new Promise((res) => { img.onload = res; img.src = "frames/f24.png"; });
+const ingest = makeIngest(img);
+const F = new Float32Array(192*144);
+const dbg = {};
+ingest.sample(F, { channel:"luma", black:0.005, white:0.55, tone:"invert", dither:"bayer" }, dbg);
+function hist(arr, n=10) {
+  let mn=99,mx=-99; for (const v of arr) { if(v<mn)mn=v; if(v>mx)mx=v; }
+  const h = new Array(n).fill(0);
+  for (const v of arr) h[Math.min(n-1,Math.floor((v-mn)/(mx-mn+1e-9)*n))]++;
+  return {mn,mx,h};
+}
+window.__r = { ch: hist(dbg.chGrid), val: hist(dbg.valGrid), F: hist(F,8) };
+</script>

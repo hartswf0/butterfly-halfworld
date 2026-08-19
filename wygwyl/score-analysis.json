@@ -652,5 +652,36 @@
         "z": 0.6141986465207951
       }
     ]
-  }
+  },
+  "verification": [
+    {
+      "label": "01 out-of-life (rendered, C Phrygian)",
+      "file": "film/WYGWYL-01.mp4",
+      "frames": 311,
+      "topPitchClasses": [
+        {
+          "note": "C",
+          "weight": 0
+        },
+        {
+          "note": "C#",
+          "weight": 0
+        },
+        {
+          "note": "D",
+          "weight": 0
+        },
+        {
+          "note": "D#",
+          "weight": 0
+        }
+      ],
+      "krumhanslSchmuckler": {
+        "pc": "C",
+        "mode": "major",
+        "r": 0
+      },
+      "lowRegisterPartials": []
+    }
+  ]
 }
