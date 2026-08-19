@@ -152,6 +152,7 @@ function fit() {
 addEventListener("resize", fit);
 
 function frame(now) {
+  if (halted) return;
   const dt = Math.min(0.05, (now - last) / 1000); last = now;
   if (playing) t = (t + dt) % T;
   let fi = FILMS.length - 1;
@@ -208,7 +209,25 @@ addEventListener("keydown", e => {
   if (e.key === "f" || e.key === "F") $("cin").click();
 });
 
-window.__hw = { films: FILMS, total: T, seek(tt) { t = tt; playing = false; } };
+/* THE HARNESS HOOK, AND A WAY TO GET OUT OF THE WAY.
+   The film renderer seeks to a timestamp and screenshots, once per frame. With
+   the animation loop still running it also redraws the whole field sixty times
+   a second between those screenshots, which is roughly ten wasted renders per
+   captured frame and was most of the cost of a twenty-minute render.
+   `halt()` stops the loop; `renderAt(t)` then draws exactly one frame and
+   returns, so the renderer pays for precisely the frames it keeps. */
+let halted = false;
+function drawAt(tt) {
+  let fi = FILMS.length - 1;
+  while (fi > 0 && tt < FILMS[fi].start) fi--;
+  post.draw(FILMS[fi].rt.renderField(tt - FILMS[fi].start));
+}
+window.__hw = {
+  films: FILMS, total: T,
+  seek(tt) { t = tt; playing = false; },
+  halt() { halted = true; playing = false; },
+  renderAt(tt) { t = tt; drawAt(tt); },
+};
 fit();
 requestAnimationFrame(frame);
 </script>

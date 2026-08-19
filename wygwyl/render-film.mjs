@@ -43,11 +43,17 @@ const SR = 24000;
 const argv = process.argv.slice(2);
 const flag = (n, d) => { const i = argv.indexOf("--" + n); return i < 0 ? d : argv[i + 1]; };
 const FPS = +flag("fps", 12);
+/* THE PICTURE IS 192x144 CELLS. Everything above that is halftone dot quality,
+   and a frame's cost here is dominated by the screenshot round-trip out of the
+   browser, which scales with pixels. 960x720 is five cells to the dot and put
+   a twenty-minute suite at two hours; 768x576 is four, the dots are still
+   round, and it is most of an hour faster. */
+const SIZE = +flag("size", 768);
 const SILENT = argv.includes("--silent");
 /* A FILM NUMBER IS TWO DIGITS AND IS NOT A FLAG'S VALUE. Matching every
    two-digit argument turned `--fps 12 --crf 20` into a request for films 12
    and 20, and wrote one film into a file called WYGWYL-01-12-20.mp4. */
-const VALUED = new Set(["--fps", "--crf"]);
+const VALUED = new Set(["--fps", "--crf", "--size"]);
 const only = argv.filter((a, i) => /^\d\d$/.test(a) && !VALUED.has(argv[i - 1]));
 
 /* ---------------------------------------------------------------- ffmpeg -- */
@@ -184,7 +190,7 @@ fs.rmSync(TMP, { recursive: true, force: true });
 fs.mkdirSync(TMP, { recursive: true });
 
 const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium" });
-const page = await browser.newPage({ viewport: { width: 960, height: 720 }, deviceScaleFactor: 1 });
+const page = await browser.newPage({ viewport: { width: SIZE, height: Math.round(SIZE * 3 / 4) }, deviceScaleFactor: 1 });
 page.on("pageerror", e => console.error("  page error: " + e.message));
 
 const url = `http://127.0.0.1:${PORT}/wygwyl/suite.html`;
@@ -192,10 +198,14 @@ await page.goto(url, { waitUntil: "load" });
 await page.waitForFunction(() => window.__hw, null, { timeout: 20000 });
 await page.evaluate(() => {
   /* Render the picture alone: the chrome is for a person at a desk, and a
-     film that carries its own transport controls is a screen recording. */
+     film that carries its own transport controls is a screen recording.
+     And stop the page's own animation loop — the renderer draws each frame it
+     wants explicitly, so leaving the loop running just redraws the field sixty
+     times a second between screenshots. */
   document.body.classList.add("cinema");
   document.getElementById("linebar").style.display = "none";
   window.dispatchEvent(new Event("resize"));
+  if (window.__hw.halt) window.__hw.halt();
 });
 await page.waitForTimeout(300);
 
@@ -257,7 +267,7 @@ ff.stdin.on("error", () => {});
 const stage = page.locator("#stage");
 for (let i = 0; i < N; i++) {
   const t = T0 + i / FPS;
-  await page.evaluate((tt) => window.__hw.seek(tt), t);
+  await page.evaluate((tt) => (window.__hw.renderAt || window.__hw.seek)(tt), t);
   const png = await stage.screenshot({ type: "png" });
   if (!ff.stdin.write(png)) await new Promise(r => ff.stdin.once("drain", r));
   if (i % (FPS * 10) === 0) {
