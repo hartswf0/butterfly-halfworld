@@ -11,6 +11,7 @@
      node wygwyl/shoot.mjs                 every world, one frame per movement
      node wygwyl/shoot.mjs 01 07           only these
      node wygwyl/shoot.mjs --sweep 04      three frames per movement (u=.2/.5/.8)
+     node wygwyl/shoot.mjs --motion        no pictures: does each movement MOVE?
 
    --sweep is the one that finds real defects. A movement that is a picture at
    its midpoint can still be empty paper for its first three seconds, and a
@@ -26,6 +27,7 @@ fs.mkdirSync(OUT, { recursive: true });
 const PORT = +(process.env.PORT || 8181);
 const args = process.argv.slice(2);
 const SWEEP = args.includes("--sweep");
+const MOTION = args.includes("--motion");
 const only = args.filter(a => !a.startsWith("--"));
 const AT = SWEEP ? [0.2, 0.5, 0.8] : [0.55];
 
@@ -42,7 +44,20 @@ page.on("console", m => { if (m.type() === "error") console.log("  !! CONSOLE: "
    in fact at 1.7ms and 2.4ms, and the 92 and 142 were edge percentages, which
    can exceed 100 because each cell is compared to two neighbours. A number
    with no unit on it will be given one by whoever reads it. */
-console.log("per sample: coverage% / mean-ink-level / edge% · samples at u=" + AT.join(", "));
+/* --motion: DOES THIS MOVEMENT MOVE?
+   Stretching every film to its own passage of the record made each movement
+   about half again as long. Coverage and edge percentages cannot answer
+   whether that extra time has anything in it — a figure walking clean across
+   the frame barely changes either number, and a still picture held for
+   twenty-eight seconds does not change them at all. So this samples the field
+   itself at nine points and counts the cells that differ: `step` is the mean
+   change between consecutive samples, `span` is how much of the field is
+   different at the end of the movement from the start. A movement with a low
+   step and a low span is a photograph, and the retime just made it a longer
+   one. */
+console.log(MOTION
+  ? "per movement: seconds · step% (mean change between samples) · span% (start vs end)"
+  : "per sample: coverage% / mean-ink-level / edge% · samples at u=" + AT.join(", "));
 let bad = 0;
 for (const shell of shells) {
   /* TAG BY THE WHOLE STEM, NOT THE NUMBER. Three title options all carry the
@@ -61,6 +76,38 @@ for (const shell of shells) {
   for (let i = 0; i < info.labels.length; i++) {
     const span = i + 1 < info.starts.length ? info.starts[i + 1] - info.starts[i]
                                             : info.total - info.starts[i];
+    if (MOTION) {
+      const mv = await page.evaluate(({ t0, span }) => {
+        const R = window.__hw.runtime, N = 9, W = 192, H = 144, CELLS = W * H;
+        const shots = [];
+        for (let k = 0; k < N; k++) {
+          const f = R.renderField(t0 + span * (0.02 + 0.96 * k / (N - 1)));
+          shots.push(Float32Array.from(f));
+        }
+        const diff = (a, b) => {
+          let d = 0;
+          for (let q = 0; q < CELLS; q++) if (Math.abs(a[q] - b[q]) >= 0.5) d++;
+          return d / CELLS;
+        };
+        let step = 0;
+        for (let k = 1; k < N; k++) step += diff(shots[k - 1], shots[k]);
+        return { step: step / (N - 1), span: diff(shots[0], shots[N - 1]) };
+      }, { t0: info.starts[i], span });
+      /* A held picture is a legitimate thing to do for eight seconds and a
+         mistake at twenty-five, so the flag reads both numbers and the clock.
+         Two tiers, because they call for different repairs: STILL wants
+         something to happen at all, QUIET wants the beat it already has to be
+         worth the time it now takes. Stretching the films onto the record made
+         every movement about half again as long, and half again as long is
+         exactly how a small gesture turns into a wait. */
+      const still = mv.step < 0.012 && mv.span < 0.05 && span > 12;
+      const quiet = !still && mv.step < 0.035 && mv.span < 0.12 && span > 12;
+      if (still || quiet) bad++;
+      console.log(`   m${i} ${info.labels[i].padEnd(24)} ${span.toFixed(0).padStart(3)}s`
+        + `  step ${(mv.step * 100).toFixed(1).padStart(5)}%  span ${(mv.span * 100).toFixed(1).padStart(5)}%`
+        + (still ? "  <<< A LONG HOLD WITH NOTHING IN IT" : quiet ? "  <<< QUIET FOR THIS LONG" : ""));
+      continue;
+    }
     const covs = [];
     for (const at of AT) {
       const t = info.starts[i] + span * at;
@@ -101,4 +148,7 @@ for (const shell of shells) {
   }
 }
 await browser.close();
-console.log(bad ? `\n${bad} frame(s) flagged — look at them.` : "\nno frame flagged empty or solid.");
+console.log(MOTION
+  ? (bad ? `\n${bad} movement(s) flagged — they are photographs, and long ones.`
+         : "\nevery movement moves.")
+  : (bad ? `\n${bad} frame(s) flagged — look at them.` : "\nno frame flagged empty or solid."));
