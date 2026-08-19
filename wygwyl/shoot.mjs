@@ -37,6 +37,12 @@ const page = await browser.newPage({ viewport: { width: 1100, height: 800 }, dev
 page.on("pageerror", e => console.log("  !! PAGE ERROR: " + e.message));
 page.on("console", m => { if (m.type() === "error") console.log("  !! CONSOLE: " + m.text()); });
 
+/* LABEL THE COLUMNS. A reader took the third number for milliseconds and
+   reported two movements as being nine times over the frame budget; they were
+   in fact at 1.7ms and 2.4ms, and the 92 and 142 were edge percentages, which
+   can exceed 100 because each cell is compared to two neighbours. A number
+   with no unit on it will be given one by whoever reads it. */
+console.log("per sample: coverage% / mean-ink-level / edge% · samples at u=" + AT.join(", "));
 let bad = 0;
 for (const shell of shells) {
   /* TAG BY THE WHOLE STEM, NOT THE NUMBER. Three title options all carry the
