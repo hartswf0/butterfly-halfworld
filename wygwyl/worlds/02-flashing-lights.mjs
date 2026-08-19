@@ -194,7 +194,7 @@ export default {
         for (const s of [-1, 1]) {
           const p = (u * 0.9 + (s > 0 ? 0.18 : 0)) % 1, z = 1 - p;
           const y = 80 + (1 - z * z) * 46;
-          F.fig(96 + s * (6 + z * 30), y, 8 + z * 26, { mode: "walk", phase: u * 5 + s, face: s }, 6);
+          F.fig(96 + s * (6 + z * 30), y, 8 + z * 26, { mode: "walk", phase: u * 5.35 + s, face: s }, 6);
         }
       },
     },
@@ -207,22 +207,36 @@ export default {
         const wx = 118, wy = 34, ww = 58, wh = 58;
         F.box(wx, wy, ww, wh, 6, 2);
         const hand = ss(0.05, 0.34, u), fly = ss(0.5, 0.78, u);
-        F.fig(28, 130, 34, { mode: "stand", arms: "open" }, 3);        // the ghost
-        F.fig(62, 130, 40, { mode: "stand", arms: "reach", face: 1 }, 7);
-        /* handed over, then thrown; the arc is the only thing that leaves */
+        /* handed over, then thrown; the arc is the only thing that leaves.
+           Computed before the bodies so both figures can put a hand exactly
+           on it rather than reaching near it. */
         const tx = lerp(lerp(36, 72, hand), wx + ww / 2, fly);
         const ty = lerp(96, wy + wh / 2, fly) - Math.sin(fly * Math.PI) * 22;
+        F.fig(28, 130, 34, {
+          mode: "stand", arms: "open", guise: "child", breath: 0, weight: 0.5,
+          gesture: fly < 0.05 ? [tx - 28, 130 - ty] : undefined,
+        }, 3);        // the ghost
+        F.fig(62, 130, 40, {
+          mode: "stand", arms: "reach", face: 1, guise: "poet", phase: u * 1.7,
+          weight: 0.30, headTurn: 0.5,
+          gesture: fly < 0.98 ? [tx - 62, 130 - ty] : undefined,
+        }, 7);
         tambourine(F, tx, ty, 9, u * TAU * 2, 7);
-        if (u > 0.72) {
+        /* THE BREAK LANDS ON THE CUE. The first pass opened the shard burst
+           at u>0.72, eleven hundredths after the strike this movement's cue
+           actually fires at 0.66 — sound and glass arrived on two different
+           schedules. Moved to the cue's own value so the strike is the
+           break. */
+        if (u > 0.66) {
           /* the glass: cracks radiating from the point of exit, and the
              shards keep going because nothing here comes back */
           const R = F.rng(7);
           for (let k = 0; k < 16; k++) {
-            const a = R() * TAU, r = (u - 0.72) * 240 * (0.5 + R());
+            const a = R() * TAU, r = (u - 0.66) * 240 * (0.5 + R());
             F.line(wx + ww / 2, wy + wh / 2, wx + ww / 2 + Math.cos(a) * r, wy + wh / 2 + Math.sin(a) * r, 6, 1);
           }
           F.map((x, y, v) => {
-            if (x > wx && x < wx + ww && y > wy && y < wy + wh && F.bayer(x, y) < (u - 0.72) * 2) return 0;
+            if (x > wx && x < wx + ww && y > wy && y < wy + wh && F.bayer(x, y) < (u - 0.66) * 2) return 0;
           });
         }
       },

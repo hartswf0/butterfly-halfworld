@@ -69,6 +69,14 @@ export default {
           const p = ((u * 1.3 + k / 4) % 1);
           F.ring(96, 74, p * 130, Math.max(1, Math.round(4 - p * 3)), 1);
         }
+        /* THE PICTURE STRIKES WHEN THE CUE DOES. Two beats, on the same `at`
+           the sound uses — a ring that starts at radius zero and outruns
+           the ambient ones, so the two struck frames read as struck and not
+           just as more of the same drift. */
+        for (const at of [0.20, 0.66]) {
+          const p = clamp01((u - at) / 0.16);
+          if (p > 0 && p < 1) F.ring(96, 74, p * 44, Math.max(1, Math.round(7 - p * 6)), 1);
+        }
         tambourine(F, 96, 74, 11, u * TAU, 7);
         F.box(38, 96, 22, 14, 4, 1); F.box(132, 96, 22, 14, 4, 1);   // baptism pools, dry
       },

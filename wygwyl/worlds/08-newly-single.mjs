@@ -245,16 +245,25 @@ export default {
         crowd(F, u, 3, 11, { yBand: [106, 132], gap: 26 });
         const esc = smooth(u), bx = 96, by = 138;
         /* JUST FLESH AND BONES: arms down, a small forward tilt — the pose
-           of someone still standing because standing takes no decision */
-        flesh(F, bx, by, 34, { mode: "stand", arms: "down", rot: 0.07, lean: 0.03 });
+           of someone still standing because standing takes no decision.
+           The weight settles onto one hip and the crouch deepens as the
+           escape completes — a body left behind SAGS, it does not hold
+           its own posture once the thing animating it has gone. */
+        flesh(F, u, bx, by, 34, { mode: "stand", arms: "down", rot: 0.07, lean: 0.03,
+          weight: lerp(0.5, 0.72, esc), crouch: esc * 0.09,
+          breath: lerp(1, 0.65, esc), headTilt: -esc * 0.18 });
         /* THE SOUL STARTS WHERE HE IS. It shares his position at u=0 and
            only then peels off — an escape has to begin coincident with the
            thing it's escaping, or it reads as a second person arriving
            rather than a first person leaving. Rejected: starting the soul
-           already apart, which made M2 a reunion shot run backward. */
+           already apart, which made M2 a reunion shot run backward. It
+           looks BACK as it goes — headTurn against its own direction of
+           travel — because an escape that never glances behind it reads as
+           indifference, not as leaving. */
         const sx = lerp(bx, bx + 32, esc), sy = lerp(by - 6, 40, esc);
         const sh = lerp(34, 21, esc * 0.55);
-        soulFig(F, u, sx, sy, sh, { mode: "stand", arms: esc > 0.5 ? "open" : "down", rot: -esc * 0.2 }, 3.2, 0);
+        soulFig(F, u, sx, sy, sh, { mode: "stand", arms: esc > 0.5 ? "open" : "down", rot: -esc * 0.2,
+          headTurn: -esc * 0.45, headTilt: esc * 0.2 }, 3.2, 0);
         spark(F, sx, sy - sh * 0.885, esc > 0.85);
         /* NO FEELINGS AFLOAT: everything else in this frame that leaves the
            body goes up. These don't — small weights that settle at his
@@ -285,18 +294,27 @@ export default {
         /* two strangers on a collision course that repeats — the line
            watches it happen more than once, so it is a cycle, not an
            event */
+        /* phase 3.35, not 3 — an integer rate lands both strangers on the
+           gait's own degenerate frame at u=0.5 (see WORLD-BRIEF's phase
+           law). Each also turns its head toward the other as they close
+           the gap — a collision that never looks at what it's colliding
+           with reads as two props sliding together, not two people. */
         const t = Math.sin(u * TAU * 2.2), x1 = 66 - t * 9, x2 = 126 + t * 9, cy = 118;
-        F.fig(x1, cy, 23, { mode: "stand", arms: "reach", face: 1, phase: u * 3 }, 5);
-        F.fig(x2, cy, 23, { mode: "stand", arms: "reach", face: -1, phase: u * 3 }, 5);
+        F.fig(x1, cy, 23, { mode: "stand", arms: "reach", face: 1, phase: u * 3.35,
+          weight: 0.5 + t * 0.3, headTurn: 0.5 }, 5);
+        F.fig(x2, cy, 23, { mode: "stand", arms: "reach", face: -1, phase: u * 3.35 + 1.1,
+          weight: 0.5 - t * 0.3, headTurn: -0.5 }, 5);
         if (x2 - x1 < 24) lightning(F, x1 + 6, cy - 15, x2 - 6, cy - 15, 6, 40 + Math.floor(u * 10));
         /* the flesh, still dancing — the one figure in the room not
-           counting down to leaving */
-        flesh(F, 96, 138, 34, { mode: "stand", arms: "swing", phase: u * 7, lean: Math.sin(u * TAU * 1.1) * 0.05 });
+           counting down to leaving. Phase 7.35, same reason as above. */
+        flesh(F, u, 96, 138, 34, { mode: "stand", arms: "swing", phase: u * 7.35,
+          weight: 0.5 + Math.sin(u * TAU * 3.35) * 0.3,
+          lean: Math.sin(u * TAU * 1.1) * 0.05 });
         /* the soul, small and apart, imagining rather than inhabiting — the
            reach down to the body is dashed because imagining isn't a wire,
-           it's intermittent */
+           it's intermittent. Head tilted down at what it's imagining. */
         const sx = 158, sy = 30;
-        soulFig(F, u, sx, sy, 15, { mode: "stand", arms: "open" }, 2.1, 0.6);
+        soulFig(F, u, sx, sy, 15, { mode: "stand", arms: "open", headTilt: -0.4, headTurn: -0.3 }, 2.1, 0.6);
         spark(F, sx, sy - 15 * 0.885);
         for (let k = 0; k < 24; k += 3) F.ink(lerp(sx, 96, k / 24), lerp(sy, 108, k / 24), 2);
       },
@@ -332,7 +350,10 @@ export default {
         /* THE FIELD IS OPEN, WHICH MEANS EMPTY. Rejected: scattering rocks
            or scrub to fill it — the line's whole claim is that there is
            nothing here but him and the curve of the ground. */
-        soulFig(F, u, 96, gy(96), 26, { mode: "stand", arms: "open" }, 2.0, 0);
+        /* alone on a whole planet, looking up at the sun that makes it
+           "much hotter" — the one direction the line actually points */
+        soulFig(F, u, 96, gy(96), 26, { mode: "stand", arms: "open",
+          weight: lerp(0.3, 0.55, smooth(u)), headTilt: 0.4, headTurn: 0.3 }, 2.0, 0);
         spark(F, 96, gy(96) - 26 * 0.885);
       },
     },
@@ -370,7 +391,15 @@ export default {
            landing, not a stream of its own */
         const R = F.rng(51);
         for (let k = 0; k < 10; k++) F.disc(tx + (R() - 0.5) * 20, ty + 2 + R() * 6, 0.8, 3);
-        soulFig(F, u, 96, gy(96), 26, { mode: "stand", arms: "open" }, 2.0, 0);
+        /* the flinch: a small crouch and a downward head, timed to the same
+           three `at` values the pours strike so the cold LANDS on the
+           picture the instant it lands on the ear */
+        const flinch = Math.max(
+          win(u, 0.06, 0.10, 0.13, 0.20),
+          win(u, 0.38, 0.42, 0.45, 0.52),
+          win(u, 0.70, 0.74, 0.77, 0.84));
+        soulFig(F, u, 96, gy(96), 26, { mode: "stand", arms: "open",
+          crouch: 0.03 + flinch * 0.14, headTilt: -flinch * 0.5 }, 2.0, 0);
         spark(F, 96, gy(96) - 26 * 0.885);
         /* ONLY INFINITY WILL TELL: the ground the equator ticks are nailed
            to runs to both edges of the frame and stops nowhere in it. */
@@ -388,14 +417,20 @@ export default {
         crowd(F, u, 1, 41, { yBand: [112, 130], gap: 40 });
         const ret = smooth(u), bx = 96, by = 138;
         /* TO LEAN BACK: rot goes negative, the one direction this world's
-           figures otherwise never fall */
-        flesh(F, bx, by, 34, { mode: "stand", arms: "open", rot: -0.15, lean: -0.05 });
+           figures otherwise never fall. Breathing in the smoke, chin
+           lifting as the lungs fill — and the weight settles back onto its
+           heel as arrival completes, the opposite drift from M2's sag. */
+        flesh(F, u, bx, by, 34, { mode: "stand", arms: "open", rot: -0.15, lean: -0.05,
+          weight: lerp(0.7, 0.4, ret), headTilt: 0.15 + Math.sin(u * TAU * 0.6) * 0.08 });
         /* the soul comes home along the kind of path it left by — high and
            to the side, down onto him — and the flicker itself slows as it
-           arrives, so settling in is a frequency change, not a fade */
+           arrives, so settling in is a frequency change, not a fade. Its
+           gaze comes down from wherever it was to meet the body it is
+           rejoining — headTilt and headTurn both resolve to level at ret=1. */
         const sx = lerp(bx + 32, bx, ret), sy = lerp(38, by - 24, ret), sh = lerp(20, 34, ret);
         const freq = lerp(4.4, 1.0, ret);
-        soulFig(F, u, sx, sy, sh, { mode: "stand", arms: "open", rot: lerp(-0.2, -0.05, ret) }, freq, 1.1);
+        soulFig(F, u, sx, sy, sh, { mode: "stand", arms: "open", rot: lerp(-0.2, -0.05, ret),
+          headTilt: lerp(0.35, 0, ret), headTurn: lerp(-0.4, 0, ret) }, freq, 1.1);
         spark(F, sx, sy - sh * 0.885, ret > 0.8);
         /* THE SMOKE FILLS THE ROOM: a per-dot allegiance the room concedes
            to, not a fog laid over it — the dot law, applied to weather. The
@@ -434,9 +469,12 @@ export default {
           }
         }
         /* the two of him, quiet, still two — the film never draws them as
-           one body, because the line does not claim they became one */
-        flesh(F, 96, 132, 30, { mode: "sit", arms: "down", face: 1 });
-        soulFig(F, u, 96, 132, 30, { mode: "sit", arms: "down", face: 1 }, 0.6, 0);
+           one body, because the line does not claim they became one. Both
+           look down and inward, toward the thoughts orbiting at arm's
+           reach rather than out at the mountains — "wandering thoughts
+           within reach" is closer to him than the horizon is. */
+        flesh(F, u, 96, 132, 30, { mode: "sit", arms: "down", face: 1, headTilt: -0.18 });
+        soulFig(F, u, 96, 132, 30, { mode: "sit", arms: "down", face: 1, headTilt: -0.22, headTurn: 0.2 }, 0.6, 0);
         const hx = 96, hy = 132 - 30 * 0.73;
         spark(F, hx, hy);
         /* WANDERING THOUGHTS WITHIN REACH: they orbit, they don't leave —

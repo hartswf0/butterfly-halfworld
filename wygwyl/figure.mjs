@@ -124,11 +124,22 @@ function hairCap(K, cx, cy, r, face, amount, level) {
      version ran it all the way round to the front-bottom, which put a mass of
      hair under the chin and read as a growth on the shoulder. */
   const a0 = 0.18 * Math.PI, a1 = 1.22 * Math.PI;
-  const n = Math.max(7, Math.ceil((a1 - a0) * r * 0.95));
-  const rr = r - t * 0.30;
+  const n = Math.max(9, Math.ceil((a1 - a0) * r * 1.4));
+  /* A CRESCENT, NOT A RING. Placing discs along one radius drew a hoop around
+     the skull that read as a helmet at any size worth looking at. Each angle
+     now lays a short radial run from inside the skull out past its edge, so
+     the marks overlap into one mass with a soft outer profile — hair sitting
+     ON the head rather than orbiting it. */
+  const rIn = r * 0.62, rOut = r + t * 0.22;
   for (let i = 0; i <= n; i++) {
     const a = a0 + (a1 - a0) * (i / n);
-    K.disc(cx + Math.cos(a) * rr * face, cy - Math.sin(a) * rr, t * 0.62, level);
+    const cs = Math.cos(a) * face, sn = -Math.sin(a);
+    /* the mass is deepest at the crown and thins toward hairline and nape,
+       which is where a head of hair actually loses its depth */
+    const d = 0.45 + 0.55 * Math.sin(Math.PI * (i / n));
+    const ro = lerp(r * 0.96, rOut, d);
+    capsule(K, cx + cs * rIn, cy + sn * rIn, cx + cs * ro, cy + sn * ro,
+            t * 0.42, t * 0.30, level, level, true);
   }
 }
 

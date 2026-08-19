@@ -41,9 +41,18 @@ function cord(F, x0, y0, x1, y1, l, flow, sag = 0) {
 /* a speaker: the pose is almost nothing, because the cord is the subject
    and a figure at rest does not compete with it. A short tick under each
    pair of feet, not a floor across the frame — a call happens in no
-   particular room, so no room is built under it. */
-function speaker(F, x, floor, h, face, arms, l) {
-  F.fig(x, floor, h, { mode: "stand", face, arms }, l);
+   particular room, so no room is built under it. Still needs a clock — a
+   standing figure with no `phase` holds its breath for the whole call —
+   and a slow weight drift, because "almost nothing" is not "nothing": two
+   people on a long call shift their feet without ever pacing. `extra`
+   carries the performance a given call needs beyond that common ground
+   (headTilt to the moon, a stoop over grief) without every caller having
+   to restate weight and phase by hand. */
+function speaker(F, u, x, floor, h, face, arms, l, extra = {}) {
+  F.fig(x, floor, h, { mode: "stand", face, arms,
+    phase: u * 1.7 + x * 0.03,
+    weight: 0.5 + Math.sin(u * TAU * 0.18 + x * 0.05) * 0.28,
+    ...extra }, l);
   F.line(x - h * 0.22, floor + 1, x + h * 0.22, floor + 1, Math.max(2, l - 3), 1);
 }
 
@@ -196,8 +205,16 @@ export default {
            deepening like the mother's sag: this call is not escalating,
            it is two people already looking at the same fixed point. */
         const sag = -32;
-        speaker(F, xL, floor, h, 1, "down", 7);
-        speaker(F, xR, floor, h, -1, "down", 7);
+        /* "WE LOOK AT THE MOON": both heads tilt up at the fixed point the
+           cord crests toward, and turn a little as the moon itself drifts
+           along that crest — a sightline that tracks, not two faces held
+           level while a moon happens to be drawn above them. */
+        const moonT = 0.5 + 0.16 * Math.sin(u * TAU * 2);
+        const moonX = lerp(xL, xR, moonT);
+        speaker(F, u, xL, floor, h, 1, "down", 7,
+          { headTilt: 0.55, headTurn: clamp01((moonX - xL) / 90) * 0.6 });
+        speaker(F, u, xR, floor, h, -1, "down", 7,
+          { headTilt: 0.55, headTurn: -clamp01((xR - moonX) / 90) * 0.6 });
         cord(F, xL, ay, xR, ay, 5, u * 1.6, sag);
         sharedMoon(F, xL, ay, xR, ay, sag, u, 6);
       },
@@ -214,8 +231,15 @@ export default {
         const xL = lerp(80, 48, t), xR = lerp(112, 146, t);
         const floor = 108, h = 66, ay = floor - h * 0.70;
         const sag = lerp(2, 26, t);
-        speaker(F, xL, floor, h, 1, "down", 7);
-        speaker(F, xR, floor, h, -1, "open", 7);
+        /* HE LISTENS, BOWED. SHE WEEPS, CROUCHED OVER IT. The cord's own
+           sag already carries the abyss opening between them; the two
+           bodies carry the grief that opened it — his head dropping as
+           hers goes further, hers folding forward the way someone folds
+           around what they are saying, not standing to deliver it. */
+        speaker(F, u, xL, floor, h, 1, "down", 7,
+          { guise: "poet", headTilt: -0.25 - t * 0.15, crouch: t * 0.05 });
+        speaker(F, u, xR, floor, h, -1, "open", 7,
+          { headTilt: -0.35 - t * 0.25, crouch: 0.04 + t * 0.14 });
         cord(F, xL, ay, xR, ay, 5, u * 1.1, sag);
         /* the abyss is capped short of the frame's own floor: a depth that
            ran off the bottom edge read as a cropping bug rather than
