@@ -265,7 +265,7 @@ export default {
         for (let i = 0; i < 6; i++) {
           const t = 0.12 + i * 0.16, y = lerp(VPY + 6, 140, Math.pow(t, 1.6)), h = lerp(4, 24, t);
           const x = 96 + Math.sin(i * 2.1) * lerp(2, 24, t) * 0.35;
-          F.fig(x, y, h, { mode: "walk", phase: u * 3 + i * 0.4, face: 1, lean: 0.03 }, 6);
+          F.fig(x, y, h, { mode: "walk", phase: u * 3.35 + i * 0.4, face: 1, lean: 0.03, headTurn: 0.3 }, 6);
           /* PLUCKED FROM THEIR SECRET PLACES: a soul lifts straight off two
              of the walkers and does not come back down — it is taken, not
              dropped and re-caught */
@@ -336,7 +336,7 @@ export default {
         for (let i = 0; i < 5; i++) {
           const p = clamp01(u * 1.1 - i * 0.12);
           const x = lerp(20, 74, p);
-          F.fig(x, waterY, 15, { mode: "walk", phase: u * 4 + i, face: 1 }, 6);
+          F.fig(x, waterY, 15, { mode: "walk", phase: u * 4.35 + i, face: 1 }, 6);
           if (p > 0.85) F.ring(lerp(x + 4, booth.x + 5, ss(0.85, 1, p)), waterY - 8, 1.1, 6, 1);
         }
         /* here we are all safe: the ones already through, small, warm */
@@ -445,8 +445,14 @@ export default {
           crossRing(F, cx, cy, arm, ss(start, start + 0.22, u), 6);
         }
         /* the one figure the line is spoken in — not the crowd's "we" but a
-           single "I," standing still while everything around it resolves */
-        F.fig(96, GY, 34, { mode: "stand", arms: "open" }, 7);
+           single "I," standing still while everything around it resolves.
+           The head sweeps slowly across the crosshairs still resolving
+           around it — watching its own aim loosen into a ring, which is
+           the only thing this movement is about. */
+        F.fig(96, GY, 34, {
+          mode: "stand", arms: "open", guise: "poet", phase: u * 1.7,
+          weight: 0.4, headTurn: Math.sin(u * TAU * 0.5) * 0.5,
+        }, 7);
         const R = F.rng(65);
         for (let i = 0; i < 5; i++) F.fig(18 + i * 40 + R() * 10, GY, 13 + R() * 4, { mode: "stand", arms: "down" }, 5);
       },
@@ -468,9 +474,18 @@ export default {
            mechanism, not a description of one */
         const up = Math.sin(u * TAU * 1.4) > 0.55;
         const R = F.rng(66);
+        /* unison in the arms, not in the bodies — every fourth figure is
+           given the elder guise and each one's own R() seeds a little
+           weight and phase drift, so a city "born in unison" still reads
+           as people and not one stencil repeated nine times */
         for (let i = 0; i < 9; i++) {
+          const r1 = R(), r2 = R();
           const x = 10 + i * 20 + R() * 6;
-          F.fig(x, GY, 19 + R() * 4, { mode: "stand", arms: up ? "up" : "open", face: i % 2 ? 1 : -1 }, 6);
+          F.fig(x, GY, 19 + R() * 4, {
+            mode: "stand", arms: up ? "up" : "open", face: i % 2 ? 1 : -1,
+            guise: i % 4 === 0 ? "elder" : "everyman", phase: u * 1.7 + i * 0.4,
+            weight: 0.3 + r1 * 0.4, headTilt: up ? 0.3 + r2 * 0.2 : 0,
+          }, 6);
         }
         for (let i = 0; i < 8; i++) {
           const x = 20 + i * 20 + R() * 6;

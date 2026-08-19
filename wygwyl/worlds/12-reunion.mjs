@@ -41,8 +41,17 @@ function ground(F, l = 6, th = 1) {
    standing condition of every scene. */
 function brothers(F, gap, h, armsL, armsR, l, breathe = 0, u = 0) {
   const bx = breathe ? Math.sin(u * TAU * 1.3) * breathe : 0;
-  F.fig(CX - gap / 2 - bx, GROUND_Y, h, { mode: "stand", face: 1, ...armsL }, l);
-  F.fig(CX + gap / 2 + bx, GROUND_Y, h, { mode: "stand", face: -1, ...armsR }, l);
+  /* THE BROTHERS BREATHE; THE ELDERS DO NOT. That single difference — a
+     `phase` so the pose solver's own idle rise-and-fall actually runs,
+     against elder()'s hand-drawn line figure which has no such clock at
+     all — is what tells a living man from a memory of one, for free, and
+     it is why elder() below is never rebuilt on top of F.fig. Weight
+     settles onto opposite hips (mirrored by `face`) so two men standing
+     and talking don't stand in the same diagram twice. */
+  F.fig(CX - gap / 2 - bx, GROUND_Y, h, { mode: "stand", face: 1,
+    phase: u * 1.7 + 0.3, weight: 0.62, guise: "poet", ...armsL }, l);
+  F.fig(CX + gap / 2 + bx, GROUND_Y, h, { mode: "stand", face: -1,
+    phase: u * 1.7 + 2.6, weight: 0.62, ...armsR }, l);
 }
 
 /* LOUD VOICES, HEARTS OVERHEARD: rings that leave the chest and do not come
