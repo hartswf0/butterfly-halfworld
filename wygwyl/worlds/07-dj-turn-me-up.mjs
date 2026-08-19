@@ -148,7 +148,10 @@ export default {
   n: "07", slug: "07-dj-turn-me-up", title: "DJ TURN ME UP",
   tagline: "amplitude, and eleven petals",
   accent: "#5aa7ff", seed: 707,
-  drone: { base: 58, steps: [0, -9, -6, -4, -1, 2, 5, 9], bright: true },
+  /* KEY: G Dorian, bright — envelope starved to turnt up needs headroom, so
+     the drone sits on the fifth and the steps climb a full octave across
+     the seven movements, ending exactly where "chin high" would put it. */
+  drone: { base: 98.00, steps: [-12, -5, 0, 3, 7, 9, 12], bright: true },
   movements: [
     {
       label: "CHIN NESTED", seconds: 13,

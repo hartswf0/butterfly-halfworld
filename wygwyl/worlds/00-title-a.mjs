@@ -1,12 +1,18 @@
 /* ============================================================================
    00 · WHERE YOU GO WHEN YOU LEAVE — TITLE A: THE ROSETTE — a WYGWYL halfworld
 
-   ONE LAW, nothing else: a field of N points where point k sits at angle
-   k·Ω·u — the differential-phase device, undiluted. Because the angular step
-   is proportional to k, the field is never a shape someone drew; it is what
-   N clocks running at N different speeds look like from directly above.
-   When Ω·u drifts near a low rational p/q, every k-th point shares an angle
-   with q−1 neighbours and the fan collapses into a q-spoke star. That
+   ONE LAW, nothing else: N points sit at fixed anchors evenly around a
+   ring, and EVERY point also spins about its own anchor — point k at
+   k·Ω·u turns, the differential-phase device, undiluted. A first pass put
+   the points directly on the ring with no local spin: proportional angles
+   alone just sort into straight radial spokes, which is a wheel, not a
+   rosette. The local orbit is what turns the same law into loops — at any
+   instant every anchor's satellite is somewhere on its own little circle,
+   and the ENVELOPE of nine hundred little circles, all turning at
+   different multiples of one rate, is the rosette.
+
+   When Ω·u drifts near a low rational p/q, every k-th satellite shares a
+   phase with q−1 neighbours and the loops snap into a q-fold flower. That
    collapse is the resonance, and Ω = 4 makes it land on its own at
    u = .25, .5, .75, 1 — four total collapses a movement, for free, never
    triggered by hand.
@@ -21,6 +27,7 @@
 import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
 
 const CX = 96, CY = 72;           // the pivot every point turns around
+const ANCHOR_R = 38;               // radius of the ring the anchors sit on
 const OMEGA = 4;                  // Ω·u is an integer at u=.25/.5/.75/1
 const SWARM = 900;                // the chaos population. Letters draw MORE
                                    // ink by reusing points, never fewer of them
@@ -44,14 +51,19 @@ function wordTargets(F, text, ph) {
    is assigned target k mod T — sorting points to their nearest target was
    tried and cost a full sort every frame for a result no more legible than
    modulo; the spare points from SWARM > T just thicken the stroke, which a
-   halftone wants anyway. */
-function field(F, u, env, xs, ys, T) {
+   halftone wants anyway. `pivot` moves the whole field's centre; the
+   kaleido movement needs one off the field's own mirror line (72,96) or
+   the fold reads a still-empty mirrored half back over a populated one
+   and erases it — found by an all-black frame at the exact u where the
+   field collapses onto that row. */
+function field(F, u, env, xs, ys, T, pivot) {
+  const [px0, py0] = pivot || [CX, CY];
   for (let k = 0; k < SWARM; k++) {
-    const turns = k * OMEGA * u;
-    const th = (turns - Math.floor(turns)) * TAU;
-    const rad = 6 + (k / SWARM) * 60;
-    let px = CX + Math.cos(th) * rad;
-    let py = CY + Math.sin(th) * rad;
+    const anchor = (k / SWARM) * TAU;
+    const spin = k * OMEGA * u * TAU;
+    const rSat = 15 + 6 * Math.sin(k * 0.021);
+    let px = px0 + Math.cos(anchor) * ANCHOR_R + Math.cos(spin) * rSat;
+    let py = py0 + Math.sin(anchor) * ANCHOR_R + Math.sin(spin) * rSat;
     if (env > 0.002 && T) {
       const ti = k % T;
       px = lerp(px, xs[ti], env);

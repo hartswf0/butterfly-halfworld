@@ -50,7 +50,10 @@ export default {
   n: "03", slug: "03-how-to-break-off-an-engagement", title: "HOW TO BREAK OFF AN ENGAGEMENT",
   tagline: "the storm takes everything that was ever called goods",
   accent: "#5aa7ff", seed: 303,
-  drone: { base: 49, steps: [0, -5, -3, -8, -5, 0] },
+  /* KEY: G Aeolian, two octaves down — natural minor for a heartbreak that
+     is sad rather than violent, and low because 03 is one of the three
+     darkest films in the suite (with 01 and 09). */
+  drone: { base: 24.50, steps: [0, 7, 3, -9, -5, -12] },
   movements: [
     {
       label: "ODE TO FOREVER", seconds: 13,

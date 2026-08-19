@@ -215,7 +215,10 @@ export default {
   n: "11", slug: "11-new-day", title: "NEW DAY",
   tagline: "the temple assembles, one course at a time",
   accent: "#5aa7ff", seed: 1111,
-  drone: { base: 50, steps: [0, 0, 3, 7, 5, 2, 12], bright: true },
+  /* KEY: G Lydian, bright — paired with 06 as the suite's brightest
+     register; the temple assembles toward the octave the way the film
+     assembles toward daylight. */
+  drone: { base: 98.00, steps: [0, 2, 6, 7, 9, 12], bright: true },
   movements: [
     {
       label: "MORNING FOG", seconds: 13,

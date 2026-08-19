@@ -229,7 +229,10 @@ export default {
   accent: "#5aa7ff", seed: 404,
   /* low and slow, per the note. The two vows sit at the extremes — M2 on the
      deepest step of the film, M6 back on the root. It ends where it swore. */
-  drone: { base: 46, steps: [0, -5, -7, 0, 4, -12, 0] },
+  /* KEY: G Dorian, one octave down — the raised 6th is the vow's small,
+     stubborn hope inside a trail that keeps repeating; not bright, because
+     the hope stays inside a minor frame the film never fully leaves. */
+  drone: { base: 49.00, steps: [0, 9, 2, -3, -12, 9] },
   movements: [
     {
       label: "WASHED ASHORE", seconds: 13,

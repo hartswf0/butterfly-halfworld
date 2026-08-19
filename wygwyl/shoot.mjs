@@ -30,7 +30,7 @@ const only = args.filter(a => !a.startsWith("--"));
 const AT = SWEEP ? [0.2, 0.5, 0.8] : [0.55];
 
 const shells = fs.readdirSync(HERE).filter(f => /^\d\d-.*\.html$/.test(f)).sort()
-  .filter(f => !only.length || only.includes(f.slice(0, 2)));
+  .filter(f => !only.length || only.includes(f.slice(0, 2)));   /* select by number */
 
 const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium" });
 const page = await browser.newPage({ viewport: { width: 1100, height: 800 }, deviceScaleFactor: 1 });
@@ -39,7 +39,11 @@ page.on("console", m => { if (m.type() === "error") console.log("  !! CONSOLE: "
 
 let bad = 0;
 for (const shell of shells) {
-  const n = shell.slice(0, 2);
+  /* TAG BY THE WHOLE STEM, NOT THE NUMBER. Three title options all carry the
+     number 00, and tagging by the first two characters made them write over
+     each other's PNGs — so a sweep of three films left one film's renders on
+     disk under all three names. The selector still matches on the number. */
+  const n = shell.replace(/\.html$/, "");
   await page.goto(`http://127.0.0.1:${PORT}/wygwyl/${shell}`, { waitUntil: "load" });
   await page.waitForFunction(() => window.__hw, null, { timeout: 10000 });
   const info = await page.evaluate(() => ({

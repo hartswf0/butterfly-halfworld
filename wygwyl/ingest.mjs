@@ -68,7 +68,13 @@ export function makeIngest(videoEl) {
   const valGrid = new Float32Array(CELLS);     // post levels/tone value, 0..1
 
   function drawFrame(opts) {
-    const vw = videoEl.videoWidth || 1280, vh = videoEl.videoHeight || 720;
+    /* videoWidth/videoHeight falls back to naturalWidth/naturalHeight so the
+       same pipeline also accepts a still <img> — useful for driving this
+       module from a single extracted frame when no video decoder is present
+       (e.g. a codec-less headless browser), without changing anything about
+       how a real <video> element is read. */
+    const vw = videoEl.videoWidth || videoEl.naturalWidth || 1280;
+    const vh = videoEl.videoHeight || videoEl.naturalHeight || 720;
     ctx.fillStyle = "#000"; ctx.fillRect(0, 0, FW, FH);
     const zoom = Math.max(0.05, opts.zoom ?? 1);
     const panX = clamp01(opts.panX ?? 0.5), panY = clamp01(opts.panY ?? 0.5);

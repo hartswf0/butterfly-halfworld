@@ -29,10 +29,13 @@ for (const f of files) {
 }
 console.log("wrote " + files.length + " shells: " + files.map(s => s.slice(0, 2)).join(" "));
 
-/* ---- the running order, read out of the modules ------------------------- */
+/* ---- the running order, read out of the modules -------------------------
+   Numbered 00 is a TITLE OPTION, not a poem. They mount and shoot exactly like
+   films because that is the cheapest way to build them, but the running order
+   is the fourteen poems and the table must not claim seventeen. */
 const rows = [];
 let movements = 0, seconds = 0;
-for (const f of files) {
+for (const f of files.filter(f => !f.startsWith("00-"))) {
   const w = (await import(pathToFileURL(path.join(HERE, "worlds", f)).href)).default;
   const s = w.movements.reduce((a, m) => a + m.seconds, 0) + 5;   // + the title card
   movements += w.movements.length;
@@ -44,7 +47,7 @@ const table = [
   "| | | | mv | |",
   "|---|---|---|---|---|",
   ...rows,
-  `| | **${files.length} films** | | **${movements}** | **${Math.floor(seconds / 60)}m ${Math.round(seconds % 60)}s** |`,
+  `| | **${files.filter(f=>!f.startsWith("00-")).length} films** | | **${movements}** | **${Math.floor(seconds / 60)}m ${Math.round(seconds % 60)}s** |`,
   "<!-- FILMS:END -->",
 ].join("\n");
 
@@ -53,7 +56,7 @@ const src = fs.readFileSync(readme, "utf8");
 const re = /<!-- FILMS:BEGIN[\s\S]*?<!-- FILMS:END -->/;
 if (re.test(src)) {
   fs.writeFileSync(readme, src.replace(re, table));
-  console.log(`rewrote the film table: ${files.length} films · ${movements} movements · ${Math.floor(seconds / 60)}m${Math.round(seconds % 60)}s`);
+  console.log(`rewrote the film table: ${files.filter(f=>!f.startsWith("00-")).length} films · ${movements} movements · ${Math.floor(seconds / 60)}m${Math.round(seconds % 60)}s`);
 } else {
   console.log("README has no FILMS:BEGIN/END markers — table not written");
 }

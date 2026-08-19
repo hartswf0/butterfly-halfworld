@@ -67,7 +67,9 @@ export default {
   accent: "#5aa7ff", seed: 505,
   /* the bed RISES with the ambition — the only drone in the suite that never
      steps back down */
-  drone: { base: 48, steps: [0, 0, 3, 7, 12, 19], bright: true },
+  /* KEY: C major (Ionian) at the suite's root — the plainest, warmest scale
+     in the palette, because the ancestors being named are not a mystery. */
+  drone: { base: 65.41, steps: [0, 5, 7, 11, 12], bright: true },
   movements: [
     {
       label: "NAME MY OWN STARS", seconds: 13,

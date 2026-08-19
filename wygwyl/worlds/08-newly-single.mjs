@@ -164,7 +164,10 @@ export default {
   /* the bed follows the body: level through the crowd, up at the separation,
      a hard jump for the planet ("much larger... and much hotter"), down
      through the cooling, and lowest at the end — settled, not resolved */
-  drone: { base: 57, steps: [0, 0, 4, 6, 11, 8, 2, -3], bright: true },
+  /* KEY: C Aeolian, one octave down — natural minor for a soul that leaves
+     its body and, by "back to my body", returns to the tonic it started
+     from; not bright, this is a loss film even where it dances. */
+  drone: { base: 32.70, steps: [0, 7, -4, 2, -9, 0, -7] },
   movements: [
     {
       label: "PULSING", seconds: 13,

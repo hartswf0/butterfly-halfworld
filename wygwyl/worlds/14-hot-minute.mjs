@@ -239,7 +239,10 @@ export default {
   /* low and grieving through the dissolve, bottoming out at the black, then
      climbing back up through the reel into the dance and the open door —
      the only drone motion in this film is upward, once it starts */
-  drone: { base: 50, steps: [0, -5, -8, -10, -3, 4, 9], bright: true },
+  /* KEY: C Lydian, bright, and the ONLY drone in the suite whose steps
+     return to 0 — the suite's tonic — because 14 is the finale and this
+     is where everything else in it resolves. */
+  drone: { base: 65.41, steps: [0, 4, 6, 9, 11, 0], bright: true },
   movements: [
     {
       label: "EVERYTHING I BUILT", seconds: 13,

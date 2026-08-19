@@ -227,7 +227,9 @@ export default {
   accent: "#5aa7ff", seed: 606,
   /* higher and brighter than anything else in the suite, per the note this
      is the one utopia — and the only drone that only ever climbs */
-  drone: { base: 64, steps: [0, 3, 7, 9, 12, 16, 19], bright: true },
+  /* KEY: G Lydian, bright — the raised 4th is the city coming up out of the
+     water; paired with 11 as the suite's highest, lightest register. */
+  drone: { base: 98.00, steps: [0, 2, 6, 4, 9, 12], bright: true },
   movements: [
     {
       label: "THE COMETS", seconds: 13,

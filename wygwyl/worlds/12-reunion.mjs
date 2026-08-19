@@ -189,7 +189,9 @@ export default {
   n: "12", slug: "12-reunion", title: "REUNION",
   tagline: "less time for words, more space for laughter",
   accent: "#5aa7ff", seed: 1212,
-  drone: { base: 58, steps: [0, 4, 2, -3, -1, 5], bright: true },
+  /* KEY: C major (Ionian) at the suite's root — plain and warm for a
+     reunion that is "less time for words, more space for laughter". */
+  drone: { base: 65.41, steps: [0, 4, -3, 7, 12], bright: true },
   movements: [
     {
       label: "HUGS WITH NO REASON", seconds: 14,

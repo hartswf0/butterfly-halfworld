@@ -174,7 +174,10 @@ export default {
   /* the dip belongs to the mother's call, the deepest step in the film; the
      father's call starts the climb back and the walk ends above the root —
      the one place this world is allowed to sound like relief. */
-  drone: { base: 52, steps: [0, -3, -5, -1, 5] },
+  /* KEY: C Aeolian, one octave down — the suite's root at its lowest
+     register for the last of the three darkest films (with 01 and 03);
+     grief with nowhere further to fall by "east, at the harbor". */
+  drone: { base: 32.70, steps: [0, -9, -5, -12] },
   movements: [
     {
       label: "THE SHARED MOON", seconds: 17,

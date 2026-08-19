@@ -1,0 +1,47 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>ingest test harness</title>
+<style>body{margin:0;background:#111}canvas{display:block}</style>
+<canvas id="stage" width="960" height="720"></canvas>
+<img id="src" style="display:none">
+<script type="module">
+import { makePost, makeRuntime, FW, FH, TAU } from "../halfworld.mjs";
+import { makeIngest } from "../ingest.mjs";
+import { swap, wipe, byLevel, noiseSwap, figureLock } from "../blend.mjs";
+import world from "../worlds/01-out-of-life.mjs";
+
+const img = document.getElementById("src");
+const canvas = document.getElementById("stage");
+const post = makePost(canvas, world.accent || "#5aa7ff");
+post.fit(960, 720, 1);
+const ingest = makeIngest(img);
+const R = makeRuntime(world);
+const field = new Float32Array(FW * FH);
+
+const MODES = { swap, wipe, byLevel, noiseSwap, figureLock };
+
+window.__t = {
+  async load(src) {
+    await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = src; });
+  },
+  render(opts) {
+    ingest.sample(field, opts);
+    post.draw(field);
+  },
+  renderBlend(opts, drawingT, mode, t, extra) {
+    ingest.sample(field, opts);
+    const bufB = R.renderField(drawingT);
+    const fn = MODES[mode];
+    const out = mode === "wipe" ? fn(field, bufB, t, extra?.angle ?? 0, extra)
+      : mode === "byLevel" ? fn(field, bufB, t, extra?.reverse ?? false)
+      : mode === "noiseSwap" ? fn(field, bufB, t, extra?.s ?? 0.4, extra)
+      : mode === "figureLock" ? fn(field, bufB, t, extra?.threshold ?? 3.5)
+      : fn(field, bufB, t);
+    post.draw(out);
+  },
+  renderDrawing(drawingT) { post.draw(R.renderField(drawingT)); },
+  total: () => R.total,
+  starts: () => R.starts,
+  labels: () => R.movements.map(m => m.label),
+};
+</script>

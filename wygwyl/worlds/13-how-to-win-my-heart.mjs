@@ -189,7 +189,10 @@ export default {
   /* low and warm at the harbor, up through the count, down for the burning,
      climbing back through the harvest to the refocus, settling just above
      where it started — bittersweet, not resolved */
-  drone: { base: 58, steps: [0, 2, 4, -3, 1, 6, 3] },
+  /* KEY: C Dorian — the raised 6th keeps the courtship open rather than
+     settled; the steps land on the 5th, not the tonic, because "won't
+     leave" is a wish here, not yet a fact. */
+  drone: { base: 65.41, steps: [0, 2, -3, 5, 9, 7] },
   movements: [
     {
       label: "SMALL TABLES", seconds: 13,

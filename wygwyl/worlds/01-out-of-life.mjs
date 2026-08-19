@@ -45,7 +45,10 @@ export default {
   n: "01", slug: "01-out-of-life", title: "OUT OF LIFE",
   tagline: "the maze, the haze, the fall, the ember",
   accent: "#5aa7ff", seed: 101,
-  drone: { base: 55, steps: [0, 0, -2, -4, -7] },
+  /* KEY: C Phrygian, two octaves down (C0) — the suite's tonal centre at its
+     darkest register, because 01 ends "as dark as black" and nothing after
+     it goes lower; the flat 2nd is the haze closing in before the fall. */
+  drone: { base: 16.35, steps: [0, -11, -9, -12] },
   movements: [
     {
       label: "THE SEARCH", seconds: 13,
