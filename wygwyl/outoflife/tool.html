@@ -1,0 +1,802 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TOOL — a WYGWYL / OUT OF LIFE instrument</title>
+<link rel="stylesheet" href="../halfworld.css">
+<style>
+  /* Same idiom as dj.html: picture beside controls instead of the site's
+     usual picture-over-linebar, because this is an instrument, not a film.
+     No new colours, no radius, same type. */
+  #main{flex:1;min-height:0;display:flex;flex-direction:row}
+  #stagewrap{position:relative;flex:1;min-width:0;min-height:0;background:var(--paper2);display:flex}
+  #stageA,#stageB{position:relative;flex:1;min-width:0}
+  #stage,#stageAcv,#stageBcv{position:absolute;inset:0;display:block;width:100%;height:100%}
+  #stageB{display:none;border-left:1px solid var(--rule)}
+  body.compare #stageA{flex:1}
+  body.compare #stageB{display:block;flex:1}
+  #chip{position:absolute;top:8px;left:8px;font-size:10px;letter-spacing:.1em;color:var(--ink2);
+    background:var(--paper2);border:1px solid var(--rule);padding:.3em .6em;pointer-events:none;max-width:calc(100% - 16px)}
+  .lbl{position:absolute;top:8px;right:8px;font-size:9.5px;letter-spacing:.16em;color:var(--paper);
+    background:rgba(20,18,16,.75);padding:.2em .55em}
+
+  #panel{flex:none;width:380px;max-width:46vw;overflow-y:auto;border-left:1px solid var(--rule);background:var(--paper)}
+  .grp{border-bottom:1px solid var(--rule)}
+  .grp>summary{cursor:pointer;list-style:none;font-size:10.5px;font-weight:700;letter-spacing:.14em;
+    color:var(--ink2);background:var(--paper2);padding:.5em .8em;border-bottom:1px solid var(--rule);
+    display:flex;align-items:center;gap:.6em}
+  .grp>summary::before{content:"▸";color:var(--dim);width:1em}
+  .grp[open]>summary::before{content:"▾"}
+  .grp>summary::-webkit-details-marker{display:none}
+  .grp-body{padding:.6em .8em .9em;display:flex;flex-direction:column;gap:.5em}
+  .lane-tag{font-size:9px;letter-spacing:.18em;color:var(--paper);padding:.1em .5em;margin-left:auto}
+  .lane-tag.a{background:#5aa7ff}
+  .lane-tag.b{background:#b23b2e}
+  .row{display:flex;align-items:center;gap:.6em}
+  .row label{flex:none;width:9.5ch;font-size:10px;letter-spacing:.06em;color:var(--dim)}
+  .row input[type=range]{flex:1;min-width:0;accent-color:var(--ink)}
+  .row input[type=number]{width:5.5ch}
+  .row .val{flex:none;width:4ch;text-align:right;font-size:10px;color:var(--ink2);font-variant-numeric:tabular-nums}
+  select,input[type=number],input[type=text],textarea{font:inherit;font-size:11px;color:var(--ink);
+    background:var(--paper2);border:1px solid var(--rule);padding:.25em .4em}
+  select{flex:1;min-width:0}
+  .row.check label{width:auto;flex:1}
+  .subnote{font-size:10px;color:var(--dim);line-height:1.4;margin-top:-.1em}
+  .mini{display:flex;gap:.35em;flex-wrap:wrap}
+  .mini button{padding:.3em .6em;font-size:10px}
+  .divider{height:1px;background:var(--rule);margin:.3em 0}
+
+  #cues{display:grid;grid-template-columns:repeat(4,1fr);gap:.4em}
+  #cues button{padding:.6em .2em;font-size:11px;position:relative}
+  #cues button.filled{border-color:var(--ink)}
+  #cues button.filled::after{content:"";position:absolute;top:4px;right:4px;width:5px;height:5px;background:var(--ink)}
+  #storeArm[aria-pressed="true"]{background:#b23b2e;border-color:#b23b2e;color:var(--paper)}
+  #compareBtn[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+  #holdA[data-filled="1"],#holdB[data-filled="1"]{border-color:var(--ink)}
+
+  #exportBox{width:100%;height:10em;resize:vertical}
+  .params{display:none;flex-direction:column;gap:.5em}
+  .params.active{display:flex}
+
+  #transport{display:flex;align-items:center;gap:1ch;flex-wrap:wrap}
+  #transport .grow{flex:1;min-width:120px}
+  #tclock,#dclock{font-size:11px;letter-spacing:.08em;color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+  #transport .div{width:1px;align-self:stretch;background:var(--rule);margin:0 .4em}
+
+  /* the timeline's own ruler: four labelled spans, drawn once we know the
+     boundaries (BLEND-NOTES.md's own clip mapping), a tick per movement. */
+  #ruler{position:relative;height:1.6em;border:1px solid var(--rule);background:var(--paper2);flex:none}
+  #ruler .seg{position:absolute;top:0;bottom:0;border-right:1px solid var(--rule);font-size:9px;
+    letter-spacing:.06em;color:var(--dim);display:flex;align-items:center;padding-left:.4em;overflow:hidden;white-space:nowrap;cursor:pointer}
+  #ruler .seg:hover{background:var(--paper)}
+  #ruler .now{position:absolute;top:0;bottom:0;width:2px;background:#b23b2e;pointer-events:none}
+
+  video{position:absolute;width:2px;height:2px;opacity:0;pointer-events:none;left:-9999px}
+
+  @media(max-width:900px){
+    #main{flex-direction:column}
+    #panel{width:auto;max-width:none;flex:none;max-height:50vh;border-left:0;border-top:1px solid var(--rule)}
+    body.compare #stagewrap{flex-direction:column}
+  }
+</style>
+
+<header>
+  <span class="brand"><span class="dot"></span>WYGWYL</span>
+  <span class="ttl">TOOL · OUT OF LIFE</span>
+  <span class="tagline">the thinking tool — build a recipe, audition it against the cut</span>
+  <span class="sp"></span>
+  <a class="btn" href="index.html">CONTACT SHEET</a>
+  <a class="btn" href="../index.html">SUITE</a>
+</header>
+
+<main id="main">
+  <div id="stagewrap">
+    <div id="stageA">
+      <canvas id="stage"></canvas>
+      <div id="chip"></div>
+    </div>
+    <div id="stageB">
+      <canvas id="stageBcv"></canvas>
+      <div class="lbl" id="lblB">B</div>
+    </div>
+  </div>
+
+  <aside id="panel">
+    <details class="grp" open>
+      <summary>TIMELINE · FOOTAGE'S OWN CUT</summary>
+      <div class="grp-body">
+        <div id="ruler"></div>
+        <div class="row"><button id="play" style="width:4ch">▶</button>
+          <input id="scrub" type="range" min="0" max="1000" step="1" value="0" class="grow">
+          <span id="tclock">00:00 / 01:28</span></div>
+        <div class="mini" id="movements"></div>
+        <p class="subnote">this is the CLIP's own timeline — the ruler is BLEND-NOTES.md's own scene-boundary
+          measurements, not a guess. Lane A follows it by default; pin lane A to hold one moment still while
+          this keeps playing (useful for A/B, below).</p>
+      </div>
+    </details>
+
+    <details class="grp" open>
+      <summary>LANE A · FOOTAGE<span class="lane-tag a">A</span></summary>
+      <div class="grp-body">
+        <div class="row check"><label for="aFollow">follow the timeline above</label><input type="checkbox" id="aFollow" checked></div>
+        <div class="row"><label>pinned at</label><input type="number" id="aPinT" min="0" max="88.38" step="0.1" value="24" style="width:7ch"><span class="subnote" style="margin:0">sec, when not following</span></div>
+        <div class="row"><label>treatment</label>
+          <select id="aTreatment">
+            <option value="none">none — plain ingest</option>
+            <option value="contourFill">contour fill (poster)</option>
+            <option value="structureLines">structure lines (Hough)</option>
+            <option value="edgeSketch">edge sketch</option>
+            <option value="figureSilhouette">figure silhouette</option>
+            <option value="paperFigure">figure in reserve</option>
+            <option value="kaleidoField">kaleido field</option>
+          </select>
+        </div>
+
+        <div class="params active" data-a="none">
+          <div class="row"><label>channel</label>
+            <select id="channel"><option value="luma">luminance</option><option value="r">red</option><option value="g">green</option><option value="b">blue</option><option value="chroma">chroma key</option></select></div>
+          <div class="row"><label>hue</label><input type="range" id="chromaHue" min="0" max="360" value="165"><span class="val" id="chromaHueV"></span></div>
+          <div class="row"><label>tolerance</label><input type="range" id="chromaTol" min="5" max="180" value="55"><span class="val" id="chromaTolV"></span></div>
+          <div class="divider"></div>
+          <div class="row"><label>black</label><input type="range" id="black" min="0" max="100" value="0"><span class="val" id="blackV"></span></div>
+          <div class="row"><label>white</label><input type="range" id="white" min="0" max="100" value="35"><span class="val" id="whiteV"></span></div>
+          <div class="row"><label>tone</label>
+            <select id="tone"><option value="linear">linear</option><option value="gamma">gamma</option><option value="posterise">posterise</option><option value="solarise">solarise</option><option value="invert" selected>invert</option></select></div>
+          <div class="row"><label>gamma</label><input type="range" id="gamma" min="20" max="400" value="100"><span class="val" id="gammaV"></span></div>
+          <div class="row"><label>posterise</label><input type="range" id="posterise" min="2" max="8" value="4"><span class="val" id="posteriseV"></span></div>
+          <div class="row"><label>solarise</label><input type="range" id="solarise" min="0" max="100" value="50"><span class="val" id="solariseV"></span></div>
+          <div class="divider"></div>
+          <div class="row"><label>edge mix</label><input type="range" id="edge" min="0" max="100" value="0"><span class="val" id="edgeV"></span></div>
+          <div class="row"><label>dither</label>
+            <select id="dither"><option value="none">none</option><option value="bayer" selected>bayer</option><option value="diffuse">error diffuse</option></select></div>
+          <div class="row"><label>kaleido</label>
+            <select id="kaleido"><option value="none" selected>none</option><option value="x">mirror x</option><option value="y">mirror y</option><option value="quad">quad</option><option value="radial">radial</option></select></div>
+          <div class="row"><label>slices</label><input type="range" id="radialSlices" min="2" max="16" value="6"><span class="val" id="radialSlicesV"></span></div>
+          <div class="row"><label>warp</label><input type="range" id="warp" min="0" max="100" value="0"><span class="val" id="warpV"></span></div>
+          <div class="row"><label>warp scale</label><input type="range" id="warpScale" min="1" max="40" value="12"><span class="val" id="warpScaleV"></span></div>
+          <div class="divider"></div>
+          <div class="row"><label>fit</label><select id="fit"><option value="cover" selected>cover</option><option value="contain">contain</option></select></div>
+          <div class="row"><label>zoom</label><input type="range" id="zoom" min="20" max="300" value="100"><span class="val" id="zoomV"></span></div>
+          <div class="row"><label>pan x</label><input type="range" id="panX" min="0" max="100" value="50"><span class="val" id="panXV"></span></div>
+          <div class="row"><label>pan y</label><input type="range" id="panY" min="0" max="100" value="50"><span class="val" id="panYV"></span></div>
+          <div class="mini"><button id="applyRegistration">USE REGISTRATION.search PRESET</button></div>
+        </div>
+
+        <div class="params" data-a="contourFill">
+          <div class="row"><label>channel</label><select id="cfChannel"><option>luma</option><option>r</option><option>g</option><option>b</option><option>max</option></select></div>
+          <div class="row"><label>bands</label><input type="range" id="cfBands" min="2" max="8" value="4"><span class="val" id="cfBandsV"></span></div>
+          <div class="row"><label>blur</label><input type="range" id="cfBlur" min="0" max="6" value="2"><span class="val" id="cfBlurV"></span></div>
+          <div class="row"><label>min lvl</label><input type="range" id="cfMin" min="0" max="7" value="1"><span class="val" id="cfMinV"></span></div>
+          <div class="row"><label>max lvl</label><input type="range" id="cfMax" min="0" max="7" value="6"><span class="val" id="cfMaxV"></span></div>
+          <p class="subnote">contour plus flat interior fill — figure.mjs's own technique, over the whole frame.</p>
+        </div>
+
+        <div class="params" data-a="structureLines">
+          <div class="row"><label>channel</label><select id="slChannel"><option>luma</option><option>r</option><option>g</option><option>b</option></select></div>
+          <div class="row"><label>blur</label><input type="range" id="slBlur" min="0" max="6" value="24" style="accent-color:var(--ink)"><span class="val" id="slBlurV"></span></div>
+          <div class="row"><label>threshold</label><input type="range" id="slThresh" min="1" max="60" value="20"><span class="val" id="slThreshV"></span></div>
+          <div class="row"><label>max lines</label><input type="range" id="slMax" min="1" max="24" value="10"><span class="val" id="slMaxV"></span></div>
+          <div class="row"><label>vote ratio</label><input type="range" id="slRatio" min="5" max="90" value="40"><span class="val" id="slRatioV"></span></div>
+          <p class="subnote">a guided Hough vote — see treatments.mjs. Fewer lines (higher vote ratio) reads
+            as a floor plan; more reads as a scribble.</p>
+        </div>
+
+        <div class="params" data-a="edgeSketch">
+          <div class="row"><label>channel</label><select id="esChannel"><option>luma</option><option>r</option><option>g</option><option>b</option></select></div>
+          <div class="row"><label>blur</label><input type="range" id="esBlur" min="0" max="6" value="14"><span class="val" id="esBlurV"></span></div>
+          <p class="subnote">the CONTINUOUS Sobel magnitude, halftoned directly — no line-picking.</p>
+        </div>
+
+        <div class="params" data-a="figureSilhouette">
+          <div class="row"><label>channel</label><select id="fsChannel"><option>luma</option><option>r</option><option>g</option><option>b</option></select></div>
+          <div class="row"><label>key</label><select id="fsKey"><option value="dark">dark (a silhouette)</option><option value="bright">bright (a glow)</option></select></div>
+          <div class="row"><label>threshold</label><input type="range" id="fsThresh" min="1" max="60" value="30"><span class="val" id="fsThreshV"></span></div>
+          <div class="row"><label>margin btm</label><input type="range" id="fsMargin" min="0" max="40" value="0"><span class="val" id="fsMarginV"></span></div>
+          <div class="row"><label>sever</label><input type="range" id="fsSever" min="0" max="4" value="1"><span class="val" id="fsSeverV"></span></div>
+          <div class="row"><label>erode</label><input type="range" id="fsErode" min="0" max="4" value="1"><span class="val" id="fsErodeV"></span></div>
+          <p class="subnote">margin-bottom severs the figure from the ground it's standing on — try it if the
+            mask looks wider than a person has any business being.</p>
+        </div>
+
+        <div class="params" data-a="paperFigure">
+          <div class="row"><label>channel</label><select id="pfChannel"><option>luma</option><option>r</option><option>g</option><option>b</option></select></div>
+          <div class="row"><label>threshold</label><input type="range" id="pfThresh" min="1" max="60" value="30"><span class="val" id="pfThreshV"></span></div>
+          <div class="row"><label>margin btm</label><input type="range" id="pfMargin" min="0" max="40" value="10"><span class="val" id="pfMarginV"></span></div>
+          <div class="row"><label>flood lvl</label><input type="range" id="pfFlood" min="0" max="7" value="7"><span class="val" id="pfFloodV"></span></div>
+        </div>
+
+        <div class="params" data-a="kaleidoField">
+          <div class="row"><label>channel</label><select id="kfChannel"><option>luma</option><option>r</option><option>g</option><option>b</option></select></div>
+          <div class="row"><label>slices</label><input type="range" id="kfSlices" min="2" max="16" value="6"><span class="val" id="kfSlicesV"></span></div>
+          <div class="row"><label>white</label><input type="range" id="kfWhite" min="0" max="100" value="55"><span class="val" id="kfWhiteV"></span></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="grp" open>
+      <summary>LANE B · DRAWN<span class="lane-tag b">B</span></summary>
+      <div class="grp-body">
+        <div class="row"><label>world</label>
+          <select id="bWorld">
+            <option value="01-out-of-life" selected>01 out of life</option>
+            <option value="02-flashing-lights">02 flashing lights</option>
+            <option value="03-how-to-break-off-an-engagement">03 break off an engagement</option>
+            <option value="04-nevermore">04 nevermore</option>
+            <option value="05-bloodlines">05 bloodlines</option>
+            <option value="06-resurrecting-atlantis">06 resurrecting atlantis</option>
+            <option value="07-dj-turn-me-up">07 dj turn me up</option>
+            <option value="08-newly-single">08 newly single</option>
+            <option value="09-yet-heard">09 yet, heard</option>
+            <option value="10-magic-ride">10 magic ride</option>
+            <option value="11-new-day">11 new day</option>
+            <option value="12-reunion">12 reunion</option>
+            <option value="13-how-to-win-my-heart">13 how to win my heart</option>
+            <option value="14-hot-minute">14 hot minute</option>
+            <option value="TRACED">— traced from lane A, live —</option>
+          </select>
+        </div>
+        <div class="params active" data-bsrc="world">
+          <div class="row"><button id="dplay" style="width:4ch">▶</button>
+            <input type="range" id="dscrub" min="0" max="1000" value="0" style="flex:1">
+            <span id="dclock">00:00 / 00:00</span></div>
+          <div class="row"><label>speed</label><input type="number" id="dspeed" min="0" max="4" step="0.1" value="1"></div>
+        </div>
+        <div class="params" data-bsrc="TRACED">
+          <div class="row"><label>guise</label><select id="tfGuise"><option>poet</option><option>turned</option><option>elder</option><option>child</option><option>everyman</option></select></div>
+          <div class="row"><label>arms</label><select id="tfArms"><option value="down">down</option><option value="open">open</option><option value="up">up</option><option value="reach">reach</option></select></div>
+          <p class="subnote">re-performs LANE A's current footage sample as a pose, through figure.mjs's real
+            rig — reads lane A's own channel/threshold from its figureSilhouette params if that's the active
+            A treatment, else uses luma/.30 as a sane default.</p>
+        </div>
+        <div class="divider"></div>
+        <div class="row"><label>treatment</label>
+          <select id="bTreatment">
+            <option value="none">none</option>
+            <option value="crush">crush</option>
+            <option value="grain">grain</option>
+            <option value="vignette">vignette</option>
+            <option value="stack">all three, stacked</option>
+          </select>
+        </div>
+        <div class="params" data-b="crush">
+          <div class="row"><label>curve</label><select id="bCurve"><option value="soft">soft</option><option value="hard">hard</option></select></div>
+        </div>
+        <div class="params" data-b="grain">
+          <div class="row"><label>amount</label><input type="range" id="bGrainAmt" min="0" max="100" value="45"><span class="val" id="bGrainAmtV"></span></div>
+        </div>
+        <div class="params" data-b="vignette">
+          <div class="row"><label>amount</label><input type="range" id="bVigAmt" min="0" max="100" value="55"><span class="val" id="bVigAmtV"></span></div>
+        </div>
+        <div class="params" data-b="stack">
+          <div class="row"><label>curve</label><select id="bsCurve"><option value="soft">soft</option><option value="hard">hard</option></select></div>
+          <div class="row"><label>grain</label><input type="range" id="bsGrain" min="0" max="100" value="35"><span class="val" id="bsGrainV"></span></div>
+          <div class="row"><label>vignette</label><input type="range" id="bsVig" min="0" max="100" value="50"><span class="val" id="bsVigV"></span></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="grp" open>
+      <summary>COMBINE · A ⇄ B</summary>
+      <div class="grp-body">
+        <div class="row"><label>t</label><input type="range" id="crossfade" min="0" max="100" value="0"><span class="val" id="crossfadeV"></span></div>
+        <div class="mini"><button id="toA">ALL A</button><button id="toMid">50/50</button><button id="toB">ALL B</button></div>
+        <div class="row"><label>mode</label>
+          <select id="combineMode">
+            <option value="swap">swap</option>
+            <option value="wipe">wipe</option>
+            <option value="byLevel">byLevel</option>
+            <option value="noiseSwap">noiseSwap</option>
+            <option value="figureLock">figureLock</option>
+            <option value="windowPortal">windowPortal — B, a screen of A</option>
+            <option value="paintedWindow">paintedWindow — A, a vision of B</option>
+            <option value="windowLock">windowLock</option>
+            <option value="byStructure">byStructure</option>
+            <option value="heldMemory">heldMemory (t = how long held)</option>
+            <option value="motionInk">motionInk (A now vs A − Δt)</option>
+          </select>
+        </div>
+        <div class="params" data-c="wipe">
+          <div class="row"><label>angle</label><input type="range" id="wipeAngle" min="0" max="360" value="0"><span class="val" id="wipeAngleV"></span></div>
+          <div class="row"><label>band</label><input type="range" id="wipeBand" min="2" max="60" value="22"><span class="val" id="wipeBandV"></span></div>
+        </div>
+        <div class="params" data-c="byLevel">
+          <div class="row check"><label for="byLevelReverse">reverse (light first)</label><input type="checkbox" id="byLevelReverse"></div>
+        </div>
+        <div class="params" data-c="noiseSwap">
+          <div class="row"><label>tear</label><input type="range" id="noiseS" min="0" max="100" value="40"><span class="val" id="noiseSV"></span></div>
+          <div class="row"><label>scale</label><input type="range" id="noiseScale" min="1" max="60" value="18"><span class="val" id="noiseScaleV"></span></div>
+          <div class="row"><label>seed</label><input type="number" id="noiseSeed" min="0" max="999" value="0"></div>
+        </div>
+        <div class="params" data-c="figureLock">
+          <div class="row"><label>threshold</label><input type="range" id="figThresh" min="5" max="70" value="35"><span class="val" id="figThreshV"></span></div>
+          <p class="subnote">B is the figure — wherever B's own ink is at/above threshold, that dot is always B.</p>
+        </div>
+        <div class="params" data-c="windowPortal">
+          <div class="row"><label>frame lvl</label><input type="range" id="wpFrame" min="0" max="7" value="7"><span class="val" id="wpFrameV"></span></div>
+          <p class="subnote">the rect is REGISTRATION.search.rect — the DRAWN window's own coordinates.</p>
+        </div>
+        <div class="params" data-c="windowLock">
+          <div class="row"><label>frame thr</label><input type="range" id="wlFrame" min="0" max="70" value="45"><span class="val" id="wlFrameV"></span></div>
+        </div>
+        <div class="params" data-c="byStructure">
+          <div class="row check"><label for="bsReverse">reverse (haze first)</label><input type="checkbox" id="bsReverse"></div>
+          <div class="row"><label>mix</label><input type="range" id="bsMix" min="0" max="100" value="75"><span class="val" id="bsMixV"></span></div>
+          <p class="subnote">keys allegiance to A's own structure (a fresh structureLines edge read on A),
+            not its darkness — the room's architecture converts first.</p>
+        </div>
+        <div class="params" data-c="heldMemory">
+          <div class="row"><label>corrode</label><input type="range" id="hmCorrode" min="0" max="100" value="60"><span class="val" id="hmCorrodeV"></span></div>
+          <p class="subnote">A is sampled ONCE (at whatever it shows now) and held; B keeps moving through it
+            as `t` above corrodes the hold. Pin lane A first, or the "hold" resamples every frame.</p>
+        </div>
+        <div class="params" data-c="motionInk">
+          <div class="row"><label>Δt</label><input type="number" id="miDt" min="0.05" max="3" step="0.05" value="1"></div>
+          <div class="row"><label>threshold</label><input type="range" id="miThresh" min="1" max="40" value="12"><span class="val" id="miThreshV"></span></div>
+          <p class="subnote">ignores B entirely — differences A's current footage sample against A, Δt
+            seconds earlier.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="grp">
+      <summary>A/B COMPARE</summary>
+      <div class="grp-body">
+        <div class="row"><button id="holdA" style="flex:1">HOLD CURRENT → A</button><button id="holdB" style="flex:1">HOLD CURRENT → B</button></div>
+        <div class="row"><button id="compareBtn" aria-pressed="false" style="flex:1">SPLIT VIEW: A | B</button></div>
+        <p class="subnote">holds a full recipe (both lanes, both treatments, combine mode) into a slot. Split
+          view renders both slots side by side at the SAME timeline position, live, so a straight cut and a
+          torn one can be judged on the same frame instead of from memory.</p>
+      </div>
+    </details>
+
+    <details class="grp">
+      <summary>CUES</summary>
+      <div class="grp-body">
+        <div class="row"><button id="storeArm" aria-pressed="false" style="flex:1">STORE ⏺</button>
+          <span class="subnote" id="cueStatus" style="margin:0">arm, then pick a slot</span></div>
+        <div id="cues"></div>
+      </div>
+    </details>
+
+    <details class="grp">
+      <summary>EXPORT</summary>
+      <div class="grp-body">
+        <div class="mini"><button id="doExport">DUMP CURRENT RECIPE</button><button id="doCopy">COPY</button></div>
+        <textarea id="exportBox" readonly spellcheck="false" placeholder="click DUMP — the JSON lands here"></textarea>
+      </div>
+    </details>
+  </aside>
+</main>
+
+<footer id="footerbar">
+  <span style="font-size:10px;letter-spacing:.08em;color:var(--dim)" id="fstat">footage: checking decode…</span>
+  <span class="sp"></span>
+  <span style="font-size:10px;letter-spacing:.08em;color:var(--dim)">01-OUT-OF-LIFE-LEAD.MP4 · 88.38s</span>
+</footer>
+
+<video id="foot" preload="auto" playsinline muted loop></video>
+
+<script type="module">
+import { FW, FH, makePost, makeRuntime, TAU, clamp01, clamp } from "../halfworld.mjs";
+import { makeIngest, DEFAULTS } from "../ingest.mjs";
+import { swap, wipe, byLevel, noiseSwap, figureLock, bayer } from "../blend.mjs";
+import * as T from "./treatments.mjs";
+
+const $ = (id) => document.getElementById(id);
+const CLIP_DURATION = 88.38;
+
+/* ---------------------------------------------------------------- source
+   Same upgrade path as index.html: try the real file, fall back to the
+   pre-extracted stills if this Chromium can't decode it (see NOTES.md). */
+const video = $("foot");
+let footageUsable = false, blobURL = null;
+(async () => {
+  try {
+    const res = await fetch("footage/01-out-of-life-lead.mp4");
+    if (res.ok) blobURL = URL.createObjectURL(await res.blob());
+  } catch {}
+  if (blobURL) video.src = blobURL;
+  else afterFootageReady();   // no network/file at all — still-sequence only, and say so rather than leaving the status line reading "checking…" forever
+})();
+video.addEventListener("loadeddata", () => { footageUsable = video.videoWidth > 0; afterFootageReady(); });
+video.addEventListener("error", () => { footageUsable = false; afterFootageReady(); });
+
+function loadImg(src) { return new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = src; }); }
+const stillCache = new Map();
+function nearestStill(t) {
+  const idx = String(Math.max(1, Math.min(89, Math.round(t) + 1))).padStart(3, "0");
+  return `frames/scrub/f${idx}.jpg`;
+}
+async function stillAt(t) {
+  const src = nearestStill(t);
+  if (stillCache.has(src)) return stillCache.get(src);
+  const im = await loadImg(src);
+  stillCache.set(src, im);
+  return im;
+}
+/* the element ingest.mjs should read FOR THIS INSTANT — a live <video> if
+   this browser can decode it (seeked once, synchronously good enough for a
+   paused sample the instant after), or the nearest still otherwise. Every
+   caller in this file goes through this one function, which is the whole
+   reason ingest.mjs's own videoWidth||naturalWidth fallback is enough to
+   make the two paths indistinguishable downstream. */
+let currentStillEl = null, currentStillT = -1;
+async function footageElementAt(t) {
+  if (footageUsable) { video.currentTime = clamp(t, 0, video.duration || CLIP_DURATION); return video; }
+  if (Math.round(t) !== Math.round(currentStillT)) {
+    currentStillEl = await stillAt(t);
+    currentStillT = t;
+  }
+  return currentStillEl || (await stillAt(t));
+}
+
+/* ---------------------------------------------------------------- worlds
+   loaded on demand, cached — switching lanes B's world is instant after
+   the first time. */
+const worldCache = new Map();
+async function loadWorld(slug) {
+  if (worldCache.has(slug)) return worldCache.get(slug);
+  const mod = await import(`../worlds/${slug}.mjs`);
+  const world = mod.default;
+  const runtime = makeRuntime(world);
+  const entry = { world, runtime };
+  worldCache.set(slug, entry);
+  return entry;
+}
+await loadWorld("01-out-of-life");
+
+/* ---------------------------------------------------------------- ingest
+   one instance per element identity would thrash the cache every seek —
+   instead, one SHARED ingest whose videoEl reference is swapped just
+   before sample(), which is safe because sample() reads the element
+   synchronously and keeps no state from the previous call (see
+   ingest.mjs's own purity note). */
+let ingestBox = { current: null, inst: null };
+function ingestFor(el) {
+  if (ingestBox.current !== el) { ingestBox.current = el; ingestBox.inst = makeIngest(el); }
+  return ingestBox.inst;
+}
+
+/* ---------------------------------------------------------------- state
+   Every control lives in the DOM (the usual house style here — see
+   dj.html) and readState()/writeState() are the single source of truth
+   used by the render loop, cue store/recall, export, and A/B hold alike. */
+function readIngestOpts() {
+  return {
+    channel: $("channel").value, chromaHue: +$("chromaHue").value, chromaTol: +$("chromaTol").value,
+    black: +$("black").value / 100, white: +$("white").value / 100, tone: $("tone").value,
+    gamma: +$("gamma").value / 100, posterise: +$("posterise").value, solarise: +$("solarise").value / 100,
+    edge: +$("edge").value / 100, dither: $("dither").value, kaleido: $("kaleido").value,
+    radialSlices: +$("radialSlices").value, warp: +$("warp").value / 100, warpScale: +$("warpScale").value / 500,
+    fit: $("fit").value, zoom: +$("zoom").value / 100, panX: +$("panX").value / 100, panY: +$("panY").value / 100,
+  };
+}
+function writeIngestOpts(o) {
+  $("channel").value = o.channel; $("chromaHue").value = o.chromaHue; $("chromaTol").value = o.chromaTol;
+  $("black").value = Math.round(o.black * 100); $("white").value = Math.round(o.white * 100);
+  $("tone").value = o.tone; $("gamma").value = Math.round(o.gamma * 100);
+  $("posterise").value = o.posterise; $("solarise").value = Math.round(o.solarise * 100);
+  $("edge").value = Math.round(o.edge * 100); $("dither").value = o.dither; $("kaleido").value = o.kaleido;
+  $("radialSlices").value = o.radialSlices; $("warp").value = Math.round(o.warp * 100);
+  $("warpScale").value = Math.round(o.warpScale * 500); $("fit").value = o.fit;
+  $("zoom").value = Math.round(o.zoom * 100); $("panX").value = Math.round(o.panX * 100); $("panY").value = Math.round(o.panY * 100);
+}
+
+function readState() {
+  return {
+    footage: { follow: $("aFollow").checked, pinT: +$("aPinT").value },
+    aTreatment: $("aTreatment").value, ingest: readIngestOpts(),
+    cf: { channel: $("cfChannel").value, bands: +$("cfBands").value, blur: +$("cfBlur").value, minLevel: +$("cfMin").value, maxLevel: +$("cfMax").value },
+    sl: { channel: $("slChannel").value, blur: +$("slBlur").value / 10, threshold: +$("slThresh").value / 100, maxLines: +$("slMax").value, minVoteRatio: +$("slRatio").value / 100 },
+    es: { channel: $("esChannel").value, blur: +$("esBlur").value / 10 },
+    fs: { channel: $("fsChannel").value, key: $("fsKey").value, threshold: +$("fsThresh").value / 100, marginBottom: +$("fsMargin").value, sever: +$("fsSever").value, erode: +$("fsErode").value },
+    pf: { channel: $("pfChannel").value, threshold: +$("pfThresh").value / 100, marginBottom: +$("pfMargin").value, floodLevel: +$("pfFlood").value },
+    kf: { channel: $("kfChannel").value, slices: +$("kfSlices").value, white: +$("kfWhite").value / 100 },
+    bWorld: $("bWorld").value, drawing: { t: dT, playing: dPlaying, speed: +$("dspeed").value },
+    tf: { guise: $("tfGuise").value, arms: $("tfArms").value },
+    bTreatment: $("bTreatment").value,
+    bCrush: { curve: $("bCurve").value }, bGrain: { amount: +$("bGrainAmt").value / 100 }, bVig: { amount: +$("bVigAmt").value / 100 },
+    bStack: { curve: $("bsCurve").value, grain: +$("bsGrain").value / 100, vig: +$("bsVig").value / 100 },
+    crossfade: +$("crossfade").value / 100, combineMode: $("combineMode").value,
+    wipe: { angle: +$("wipeAngle").value, band: +$("wipeBand").value / 100 },
+    byLevelReverse: $("byLevelReverse").checked,
+    noiseSwap: { s: +$("noiseS").value / 100, scale: +$("noiseScale").value / 1000, seed: +$("noiseSeed").value },
+    figThresh: +$("figThresh").value / 10,
+    wpFrame: +$("wpFrame").value, wlFrame: +$("wlFrame").value / 10,
+    byStruct: { reverse: $("bsReverse").checked, mix: +$("bsMix").value / 100 },
+    hmCorrode: +$("hmCorrode").value / 100,
+    motionInk: { dt: +$("miDt").value, threshold: +$("miThresh").value / 10 },
+    footT: footT,
+  };
+}
+function writeState(s) {
+  if (!s) return;
+  $("aFollow").checked = s.footage.follow; $("aPinT").value = s.footage.pinT;
+  $("aTreatment").value = s.aTreatment; writeIngestOpts(s.ingest);
+  $("cfChannel").value = s.cf.channel; $("cfBands").value = s.cf.bands; $("cfBlur").value = s.cf.blur; $("cfMin").value = s.cf.minLevel; $("cfMax").value = s.cf.maxLevel;
+  $("slChannel").value = s.sl.channel; $("slBlur").value = Math.round(s.sl.blur * 10); $("slThresh").value = Math.round(s.sl.threshold * 100); $("slMax").value = s.sl.maxLines; $("slRatio").value = Math.round(s.sl.minVoteRatio * 100);
+  $("esChannel").value = s.es.channel; $("esBlur").value = Math.round(s.es.blur * 10);
+  $("fsChannel").value = s.fs.channel; $("fsKey").value = s.fs.key; $("fsThresh").value = Math.round(s.fs.threshold * 100); $("fsMargin").value = s.fs.marginBottom; $("fsSever").value = s.fs.sever; $("fsErode").value = s.fs.erode;
+  $("pfChannel").value = s.pf.channel; $("pfThresh").value = Math.round(s.pf.threshold * 100); $("pfMargin").value = s.pf.marginBottom; $("pfFlood").value = s.pf.floodLevel;
+  $("kfChannel").value = s.kf.channel; $("kfSlices").value = s.kf.slices; $("kfWhite").value = Math.round(s.kf.white * 100);
+  $("bWorld").value = s.bWorld;
+  dT = s.drawing.t; dPlaying = s.drawing.playing; $("dplay").textContent = dPlaying ? "Ⅱ" : "▶"; $("dspeed").value = s.drawing.speed;
+  $("tfGuise").value = s.tf.guise; $("tfArms").value = s.tf.arms;
+  $("bTreatment").value = s.bTreatment;
+  $("bCurve").value = s.bCrush.curve; $("bGrainAmt").value = Math.round(s.bGrain.amount * 100); $("bVigAmt").value = Math.round(s.bVig.amount * 100);
+  $("bsCurve").value = s.bStack.curve; $("bsGrain").value = Math.round(s.bStack.grain * 100); $("bsVig").value = Math.round(s.bStack.vig * 100);
+  $("crossfade").value = Math.round(s.crossfade * 100); $("combineMode").value = s.combineMode;
+  $("wipeAngle").value = s.wipe.angle; $("wipeBand").value = Math.round(s.wipe.band * 100);
+  $("byLevelReverse").checked = s.byLevelReverse;
+  $("noiseS").value = Math.round(s.noiseSwap.s * 100); $("noiseScale").value = Math.round(s.noiseSwap.scale * 1000); $("noiseSeed").value = s.noiseSwap.seed;
+  $("figThresh").value = Math.round(s.figThresh * 10);
+  $("wpFrame").value = s.wpFrame; $("wlFrame").value = Math.round(s.wlFrame * 10);
+  $("bsReverse").checked = s.byStruct.reverse; $("bsMix").value = Math.round(s.byStruct.mix * 100);
+  $("hmCorrode").value = Math.round(s.hmCorrode * 100);
+  $("miDt").value = s.motionInk.dt; $("miThresh").value = Math.round(s.motionInk.threshold * 10);
+  footT = s.footT ?? footT;
+  showParams(); refreshReadouts();
+}
+
+/* ---------------------------------------------------------- the pipeline
+   One function computes everything a recipe needs for a given absolute
+   footage time `t` — the render loop calls it for the live state every
+   frame, and the A/B compare view calls it once per held slot. Pure in
+   (state, t) plus whatever the DOM/world caches currently hold, same
+   honesty ingest.mjs itself claims: the only impurity is which frame the
+   source elements are currently parked on, which this function's own first
+   steps are what pin down. */
+async function computeA(s, t) {
+  const at = s.footage.follow ? t : s.footage.pinT;
+  const el = await footageElementAt(at);
+  const ingest = ingestFor(el);
+  const field = new Float32Array(FW * FH);
+  if (s.aTreatment === "none") { ingest.sample(field, s.ingest); return { field, at, el, ingest }; }
+  // every treatment needs the raw sampled canvas — one sample() call primes it (opts mostly irrelevant here, drawFrame only reads fit/zoom/pan/warp/kaleido, all in s.ingest)
+  ingest.sample(field, s.ingest);
+  const img = ingest.canvas.getContext("2d").getImageData(0, 0, FW, FH);
+  let out;
+  switch (s.aTreatment) {
+    case "contourFill": out = T.contourFill(img, s.cf); break;
+    case "structureLines": out = T.structureLines(img, s.sl).field; break;
+    case "edgeSketch": { const edge = T.structureLines(img, { channel: s.es.channel, blur: s.es.blur }).edge; out = new Float32Array(FW * FH); for (let i = 0; i < out.length; i++) out[i] = clamp(Math.round(edge[i] * 7), 0, 7); break; }
+    case "figureSilhouette": out = T.figureSilhouette(img, s.fs).field; break;
+    case "paperFigure": out = T.paperFigure(img, s.pf).field; break;
+    case "kaleidoField": out = T.kaleidoField(img, { channel: s.kf.channel, slices: s.kf.slices, white: s.kf.white }); break;
+    default: out = field;
+  }
+  return { field: out, at, el, ingest, img };
+}
+function applyBTreatment(s, field) {
+  switch (s.bTreatment) {
+    case "crush": return T.crushReverse(field, s.bCrush);
+    case "grain": return T.grainReverse(field, { amount: s.bGrain.amount });
+    case "vignette": return T.vignetteReverse(field, { amount: s.bVig.amount });
+    case "stack": return T.vignetteReverse(T.grainReverse(T.crushReverse(field, { curve: s.bStack.curve }), { amount: s.bStack.grain }), { amount: s.bStack.vig });
+    default: return field;
+  }
+}
+async function computeB(s, aResult) {
+  if (s.bWorld === "TRACED") {
+    const fsOpts = s.aTreatment === "figureSilhouette" ? s.fs : { channel: "luma", threshold: 0.30 };
+    const img = aResult.img || aResult.ingest.canvas.getContext("2d").getImageData(0, 0, FW, FH);
+    const sil = T.figureSilhouette(img, fsOpts);
+    const field = T.tracedFigure(sil, { guise: s.tf.guise, arms: s.tf.arms });
+    return applyBTreatment(s, field);
+  }
+  const { runtime } = await loadWorld(s.bWorld);
+  const field = runtime.renderField(s.drawing.t);
+  return applyBTreatment(s, field);
+}
+function combine(s, a, b, edgeCache) {
+  const t = clamp01(s.crossfade);
+  switch (s.combineMode) {
+    case "wipe": return wipe(a, b, t, s.wipe.angle * TAU / 360, { band: s.wipe.band });
+    case "byLevel": return byLevel(a, b, t, s.byLevelReverse);
+    case "noiseSwap": return noiseSwap(a, b, t, s.noiseSwap.s, { scale: s.noiseSwap.scale, seed: s.noiseSwap.seed });
+    case "figureLock": return figureLock(a, b, t, s.figThresh);
+    case "windowPortal": return T.windowPortal(b, a, T.REGISTRATION.search.rect, { frameLevel: s.wpFrame });
+    case "paintedWindow": return T.paintedWindow(a, b, T.REGISTRATION.search.rect, { frameLevel: s.wpFrame });
+    case "windowLock": return T.windowLock(a, b, t, T.REGISTRATION.search.rect, { frameThreshold: s.wlFrame });
+    case "byStructure": { const edge = edgeCache(); return T.byStructure(a, b, t, edge, s.byStruct); }
+    case "heldMemory": return T.heldMemory(a, b, t, { corrode: s.hmCorrode });
+    case "motionInk": return null; // handled by caller — needs a second A sample
+    case "swap": default: return swap(a, b, t);
+  }
+}
+async function renderRecipe(s, t) {
+  const aResult = await computeA(s, t);
+  if (s.combineMode === "motionInk") {
+    const prevState = { ...s, footage: { follow: false, pinT: (s.footage.follow ? t : s.footage.pinT) - s.motionInk.dt } };
+    const prev = await computeA(prevState, t);
+    return { field: T.motionInk(aResult.field, prev.field, { threshold: s.motionInk.threshold }), aResult };
+  }
+  const bField = await computeB(s, aResult);
+  let edgeMemo = null;
+  const edgeCache = () => edgeMemo || (edgeMemo = T.structureLines(aResult.img || aResult.ingest.canvas.getContext("2d").getImageData(0, 0, FW, FH), { channel: s.sl?.channel || "luma" }).edge);
+  const field = combine(s, aResult.field, bField, edgeCache);
+  return { field, aResult };
+}
+
+/* ------------------------------------------------------------- UI wiring */
+function showParams() {
+  const a = $("aTreatment").value;
+  document.querySelectorAll("[data-a]").forEach((el) => el.classList.toggle("active", el.dataset.a === a));
+  const bsrc = $("bWorld").value === "TRACED" ? "TRACED" : "world";
+  document.querySelectorAll("[data-bsrc]").forEach((el) => el.classList.toggle("active", el.dataset.bsrc === bsrc));
+  const b = $("bTreatment").value;
+  document.querySelectorAll("[data-b]").forEach((el) => el.classList.toggle("active", el.dataset.b === b));
+  const c = $("combineMode").value;
+  document.querySelectorAll("[data-c]").forEach((el) => el.classList.toggle("active", el.dataset.c === c));
+}
+function refreshReadouts() {
+  $("chromaHueV").textContent = $("chromaHue").value + "°"; $("chromaTolV").textContent = "±" + $("chromaTol").value;
+  $("blackV").textContent = $("black").value + "%"; $("whiteV").textContent = $("white").value + "%";
+  $("gammaV").textContent = (+$("gamma").value / 100).toFixed(2); $("posteriseV").textContent = $("posterise").value;
+  $("solariseV").textContent = $("solarise").value + "%"; $("edgeV").textContent = $("edge").value + "%";
+  $("radialSlicesV").textContent = $("radialSlices").value; $("warpV").textContent = $("warp").value + "%";
+  $("warpScaleV").textContent = (+$("warpScale").value / 500).toFixed(3);
+  $("zoomV").textContent = (+$("zoom").value / 100).toFixed(2) + "×"; $("panXV").textContent = $("panX").value + "%"; $("panYV").textContent = $("panY").value + "%";
+  $("cfBandsV").textContent = $("cfBands").value; $("cfBlurV").textContent = $("cfBlur").value; $("cfMinV").textContent = $("cfMin").value; $("cfMaxV").textContent = $("cfMax").value;
+  $("slBlurV").textContent = (+$("slBlur").value / 10).toFixed(1); $("slThreshV").textContent = (+$("slThresh").value / 100).toFixed(2); $("slMaxV").textContent = $("slMax").value; $("slRatioV").textContent = (+$("slRatio").value / 100).toFixed(2);
+  $("esBlurV").textContent = (+$("esBlur").value / 10).toFixed(1);
+  $("fsThreshV").textContent = (+$("fsThresh").value / 100).toFixed(2); $("fsMarginV").textContent = $("fsMargin").value; $("fsSeverV").textContent = $("fsSever").value; $("fsErodeV").textContent = $("fsErode").value;
+  $("pfThreshV").textContent = (+$("pfThresh").value / 100).toFixed(2); $("pfMarginV").textContent = $("pfMargin").value; $("pfFloodV").textContent = $("pfFlood").value;
+  $("kfSlicesV").textContent = $("kfSlices").value; $("kfWhiteV").textContent = $("kfWhite").value + "%";
+  $("bGrainAmtV").textContent = $("bGrainAmt").value + "%"; $("bVigAmtV").textContent = $("bVigAmt").value + "%";
+  $("bsGrainV").textContent = $("bsGrain").value + "%"; $("bsVigV").textContent = $("bsVig").value + "%";
+  $("crossfadeV").textContent = $("crossfade").value + "%"; $("wipeAngleV").textContent = $("wipeAngle").value + "°"; $("wipeBandV").textContent = $("wipeBand").value + "%";
+  $("noiseSV").textContent = $("noiseS").value + "%"; $("noiseScaleV").textContent = (+$("noiseScale").value / 1000).toFixed(3);
+  $("figThreshV").textContent = (+$("figThresh").value / 10).toFixed(1);
+  $("wpFrameV").textContent = $("wpFrame").value; $("wlFrameV").textContent = (+$("wlFrame").value / 10).toFixed(1);
+  $("bsMixV").textContent = $("bsMix").value + "%"; $("hmCorrodeV").textContent = $("hmCorrode").value + "%";
+  $("miThreshV").textContent = (+$("miThresh").value / 10).toFixed(1);
+  $("chipMode");
+}
+document.querySelectorAll("#panel input,#panel select").forEach((el) => el.addEventListener("input", refreshReadouts));
+$("aTreatment").addEventListener("change", showParams); $("bWorld").addEventListener("change", async (e) => { if (e.target.value !== "TRACED") await loadWorld(e.target.value); showParams(); });
+$("bTreatment").addEventListener("change", showParams); $("combineMode").addEventListener("change", showParams);
+$("applyRegistration").addEventListener("click", () => { writeIngestOpts({ ...DEFAULTS, ...T.REGISTRATION.search.ingest }); refreshReadouts(); });
+
+/* ---------------------------------------------------------------- timeline
+   The clip's own cut, from BLEND-NOTES.md's measured boundaries — not
+   guessed here a second time. */
+const MOVEMENTS = [
+  { label: "THE SEARCH", start: 3.08, end: 28.75 },
+  { label: "MORE HAZE", start: 28.75, end: 54.50 },
+  { label: "THE FALL", start: 54.50, end: 75.80 },
+  { label: "AS DARK AS BLACK", start: 75.80, end: 88.38 },
+];
+function buildRuler() {
+  const ruler = $("ruler");
+  ruler.innerHTML = "";
+  for (const m of MOVEMENTS) {
+    const seg = document.createElement("div");
+    seg.className = "seg";
+    seg.style.left = (m.start / CLIP_DURATION * 100) + "%";
+    seg.style.width = ((m.end - m.start) / CLIP_DURATION * 100) + "%";
+    seg.textContent = m.label;
+    seg.title = `${m.label} — ${m.start.toFixed(2)}s to ${m.end.toFixed(2)}s`;
+    seg.addEventListener("click", () => { footT = m.start; if (footageUsable) video.currentTime = m.start; });
+    ruler.appendChild(seg);
+  }
+  const now = document.createElement("div"); now.className = "now"; now.id = "rulerNow";
+  ruler.appendChild(now);
+}
+buildRuler();
+const mv = $("movements");
+MOVEMENTS.forEach((m) => {
+  const b = document.createElement("button"); b.textContent = m.label;
+  b.onclick = () => { footT = m.start; if (footageUsable) video.currentTime = m.start; };
+  mv.appendChild(b);
+});
+
+let footT = 12, footPlaying = false, dT = 0, dPlaying = false, scrubbingF = false, scrubbingD = false;
+const fmt = (s) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+
+$("play").onclick = () => {
+  footPlaying = !footPlaying; $("play").textContent = footPlaying ? "Ⅱ" : "▶";
+  if (footageUsable) { footPlaying ? video.play().catch(() => {}) : video.pause(); }
+};
+$("scrub").addEventListener("input", (e) => { scrubbingF = true; footT = +e.target.value / 1000 * CLIP_DURATION; if (footageUsable) video.currentTime = footT; });
+$("scrub").addEventListener("change", () => { scrubbingF = false; });
+$("dplay").onclick = () => { dPlaying = !dPlaying; $("dplay").textContent = dPlaying ? "Ⅱ" : "▶"; };
+$("dscrub").addEventListener("input", async (e) => { scrubbingD = true; const { runtime } = await loadWorld($("bWorld").value === "TRACED" ? "01-out-of-life" : $("bWorld").value); dT = +e.target.value / 1000 * runtime.total; });
+$("dscrub").addEventListener("change", () => { scrubbingD = false; });
+
+function afterFootageReady() {
+  $("fstat").textContent = footageUsable ? "footage: live decode" : "footage: still-sequence fallback (no H.264 decode here — see NOTES.md)";
+  if (footageUsable) video.currentTime = footT;
+}
+
+/* -------------------------------------------------------------------- A/B */
+let heldA = null, heldB = null, comparing = false;
+$("holdA").onclick = () => { heldA = readState(); $("holdA").dataset.filled = "1"; };
+$("holdB").onclick = () => { heldB = readState(); $("holdB").dataset.filled = "1"; };
+$("compareBtn").onclick = () => {
+  comparing = !comparing;
+  $("compareBtn").setAttribute("aria-pressed", String(comparing));
+  document.body.classList.toggle("compare", comparing);
+  if (comparing) { fit(); }
+};
+
+/* ------------------------------------------------------------------ cues */
+const cues = new Array(8).fill(null);
+let armed = false;
+$("storeArm").onclick = () => {
+  armed = !armed; $("storeArm").setAttribute("aria-pressed", String(armed));
+  $("cueStatus").textContent = armed ? "pick a slot to store into…" : "arm, then pick a slot";
+};
+const cueGrid = $("cues");
+for (let i = 0; i < 8; i++) {
+  const b = document.createElement("button"); b.textContent = String(i + 1);
+  b.onclick = () => {
+    if (armed) { cues[i] = readState(); b.classList.add("filled"); armed = false; $("storeArm").setAttribute("aria-pressed", "false"); $("cueStatus").textContent = `stored cue ${i + 1}`; }
+    else if (cues[i]) { writeState(cues[i]); $("cueStatus").textContent = `recalled cue ${i + 1}`; }
+  };
+  cueGrid.appendChild(b);
+}
+
+$("toA").onclick = () => { $("crossfade").value = 0; refreshReadouts(); };
+$("toMid").onclick = () => { $("crossfade").value = 50; refreshReadouts(); };
+$("toB").onclick = () => { $("crossfade").value = 100; refreshReadouts(); };
+
+$("doExport").onclick = () => { $("exportBox").value = JSON.stringify(readState(), null, 2); $("exportBox").select(); };
+$("doCopy").onclick = async () => {
+  if (!$("exportBox").value) $("doExport").onclick();
+  try { await navigator.clipboard.writeText($("exportBox").value); }
+  catch { $("exportBox").select(); try { document.execCommand("copy"); } catch {} }
+};
+
+/* -------------------------------------------------------------- the clock */
+const post = makePost($("stage"), "#5aa7ff");
+let postBcv = null;
+
+function fit() {
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  const wa = $("stageA");
+  post.fit(wa.clientWidth, wa.clientHeight, dpr);
+  if (comparing) {
+    const wb = $("stageB");
+    if (!postBcv) postBcv = makePost($("stageBcv"), "#b23b2e");
+    postBcv.fit(wb.clientWidth, wb.clientHeight, dpr);
+  }
+}
+window.addEventListener("resize", fit);
+
+let last = performance.now();
+async function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  if (footPlaying && !footageUsable) footT = (footT + dt) % CLIP_DURATION;
+  if (footageUsable && !video.paused) footT = video.currentTime;
+  if (dPlaying) { const { runtime } = await loadWorld($("bWorld").value === "TRACED" ? "01-out-of-life" : $("bWorld").value); dT = (dT + dt * (+$("dspeed").value || 1)) % runtime.total; }
+
+  const s = readState();
+  if (!comparing) {
+    const { field, aResult } = await renderRecipe(s, footT);
+    post.draw(field);
+    $("chip").textContent = `A: ${s.aTreatment} (${footageUsable ? "video" : "still"} @ ${footT.toFixed(1)}s) ⇄ B: ${s.bWorld === "TRACED" ? "traced" : s.bWorld} · ${s.combineMode} t=${Math.round(s.crossfade * 100)}%`;
+  } else {
+    const rA = await renderRecipe(heldA || s, footT);
+    const rB = await renderRecipe(heldB || s, footT);
+    post.draw(rA.field);
+    if (postBcv) postBcv.draw(rB.field);
+    $("chip").textContent = "A (held)"; $("lblB").textContent = "B (held)";
+  }
+
+  if (!scrubbingF) $("scrub").value = Math.round(footT / CLIP_DURATION * 1000);
+  $("tclock").textContent = `${fmt(footT)} / ${fmt(CLIP_DURATION)}`;
+  const rn = $("rulerNow"); if (rn) rn.style.left = (footT / CLIP_DURATION * 100) + "%";
+  const { runtime: rt } = await loadWorld($("bWorld").value === "TRACED" ? "01-out-of-life" : $("bWorld").value);
+  if (!scrubbingD) $("dscrub").value = Math.round(dT / rt.total * 1000);
+  $("dclock").textContent = `${fmt(dT)} / ${fmt(rt.total)}`;
+
+  requestAnimationFrame(frame);
+}
+
+/* headless QA hook */
+window.__tool = { readState, writeState, renderRecipe, seekFootage(t) { footT = t; if (footageUsable) video.currentTime = t; }, seekDrawing(t) { dT = t; }, setCompare(on) { comparing = on; document.body.classList.toggle("compare", on); fit(); } };
+
+showParams(); refreshReadouts(); fit();
+requestAnimationFrame(frame);
+</script>
