@@ -142,10 +142,21 @@ function bike(F, cx, gy, s, spin, l) {
   F.line(piv[0], piv[1], fpeg[0], fpeg[1], l, 1.2 * s);
   F.rect(cx - 5 * s, gy - 17 * s, 10 * s, 6 * s, l);
   F.disc(tail[0] - 1 * s, tail[1], 1.1 * s, l);
-  return { tank, footpeg: fpeg };
+  return { tank, footpeg: fpeg, seat, bar: hB2 };
 }
-function rider(F, cx, gy, s, l) {
-  F.fig(cx - 3 * s, gy - 13 * s, 22 * s, { mode: "sit", arms: "reach", face: 1, lean: 0.05, rot: -0.18 }, l);
+/* F.fig's 'sit'+'reach' was tried first and put the reaching hand ABOVE the
+   head — that pose is built for reaching down at something on the ground,
+   not forward at a handlebar, and at this scale the mismatch reads as a
+   knot, not a rider. Built by hand instead, anchored to the bike's own
+   seat/bar/peg points so the body always fits the machine it's riding. */
+function rider(F, B, s, l) {
+  const hip = [B.seat[0], B.seat[1] - 1.5 * s];
+  const sh = [hip[0] + 3.5 * s, hip[1] - 9 * s];
+  const head = [sh[0] + 1.2 * s, sh[1] - 3.6 * s];
+  F.line(hip[0], hip[1], B.footpeg[0], B.footpeg[1], l, 1.3 * s);
+  F.line(hip[0], hip[1], sh[0], sh[1], l, 1.6 * s);
+  F.line(sh[0], sh[1], B.bar[0], B.bar[1], l, 1.2 * s);
+  F.disc(head[0], head[1], 1.9 * s, l);
 }
 /* the film's one accent, always on the same two cells of tank steel */
 function glint(F, x, y) { F.put(x, y, 8); F.put(x + 1, y, 8); }
@@ -250,7 +261,7 @@ export default {
           const wx = lerp(14, B.footpeg[0] - 3, smooth(walkP));
           F.fig(wx, ROAD, 32, { mode: "walk", phase: u * 6, face: 1 }, 7);
         } else {
-          rider(F, 96, ROAD, 1.28, 7);
+          rider(F, B, 1.28, 7);
         }
         /* THE RUBBING: aggression worked into the steel as short radial
            strokes at the tank, thickening the closer he gets to it. */

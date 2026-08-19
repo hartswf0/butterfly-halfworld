@@ -266,9 +266,12 @@ export default {
         F.fig(xf, floor, hf, { mode: "walk", phase: u * 6.5, face: 1 }, 7);
         F.fig(xs, floor, hs, { mode: "walk", phase: u * 6.5 + 0.49, face: 1 }, 7);
         /* SOMEONE BLUE: the suite's one accent mark, one occurrence, held
-           back until the last few frames of the last movement — everywhere
-           else in this world "blue" is only the tagline's color name */
-        if (u > 0.93) F.disc(xs, floor - hs * 0.62, 1.3, 8);
+           back until the last fifth of the last movement — everywhere else
+           in this world "blue" is only the tagline's color name. Kept clear
+           of the engine's own 1.5s crossfade back into the title card
+           (u > ~0.906 at this length): a mark that only ever appeared
+           already dissolving would never have been seen whole. */
+        if (u > 0.80) F.disc(xs, floor - hs * 0.62, 1.3, 8);
       },
     },
   ],
