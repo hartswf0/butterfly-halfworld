@@ -247,7 +247,6 @@ export function makeIngest(videoEl) {
       }
 
       quantize(opts, F);
-      if (debug) { debug.chGrid = chGrid.slice(); debug.valGrid = valGrid.slice(); }
       return F;
     },
   };

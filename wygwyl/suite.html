@@ -82,7 +82,12 @@
 <script type="module">
 import { makeRuntime, makePost, makeSound } from "./halfworld.mjs";
 
+/* The head of the suite is a title sequence, and which of the three Whitney
+   options plays is a URL question rather than an edit: ?title=b swaps it, and
+   ?title=none drops it. The poems are the running order and never move. */
+const TITLE = new URLSearchParams(location.search).get("title") || "a";
 const SLUGS = [
+  ...(TITLE === "none" ? [] : ["00-title-" + TITLE]),
   "01-out-of-life", "02-flashing-lights", "03-how-to-break-off-an-engagement",
   "04-nevermore", "05-bloodlines", "06-resurrecting-atlantis", "07-dj-turn-me-up",
   "08-newly-single", "09-yet-heard", "10-magic-ride", "11-new-day", "12-reunion",

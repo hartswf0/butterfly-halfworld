@@ -55,10 +55,17 @@ function ring(F, u, r, env, xs, ys, T, rankRef) {
   const n = ringPoints(r);
   const dir = r % 2 === 0 ? 1 : -1;
   const rate = (r + 1) * BASE_RATE * dir;
-  const rad = R0 + r * DR + Math.sin(u * TAU * 0.6 + r * 0.9) * BREATHE;
-  const band = 2 + Math.round((0.5 + 0.5 * Math.sin(rad * 0.5)) * 3) + (r % 2 === 0 ? 1 : 0);
+  const baseRad = R0 + r * DR + Math.sin(u * TAU * 0.6 + r * 0.9) * BREATHE;
+  const band = 2 + Math.round((0.5 + 0.5 * Math.sin(baseRad * 0.5)) * 3) + (r % 2 === 0 ? 1 : 0);
   for (let i = 0; i < n; i++) {
-    const a = (i / n) * TAU + u * TAU * rate;
+    /* the ring's own (r+1)-fold lobe, fixed to its points and so carried
+       around by the same rotation they turn with — a plain circle looks
+       identical at every u no matter how fast it spins; the lobe is what
+       lets a single still frame show which way, and how far, it has
+       turned. */
+    const local = (i / n) * TAU;
+    const rad = baseRad * (1 + 0.07 * Math.cos(local * (r + 1)));
+    const a = local + u * TAU * rate;
     let px = CX + Math.cos(a) * rad;
     let py = CY + Math.sin(a) * rad;
     let lvl = band;
