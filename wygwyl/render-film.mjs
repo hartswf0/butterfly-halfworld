@@ -37,7 +37,6 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, "..");
 const OUT = path.join(ROOT, "film");
-const TMP = path.join(ROOT, "renders", "wygwyl", "_frames");
 const PORT = +(process.env.PORT || 8181);
 const SR = 24000;
 
@@ -45,7 +44,11 @@ const argv = process.argv.slice(2);
 const flag = (n, d) => { const i = argv.indexOf("--" + n); return i < 0 ? d : argv[i + 1]; };
 const FPS = +flag("fps", 12);
 const SILENT = argv.includes("--silent");
-const only = argv.filter(a => /^\d\d$/.test(a));
+/* A FILM NUMBER IS TWO DIGITS AND IS NOT A FLAG'S VALUE. Matching every
+   two-digit argument turned `--fps 12 --crf 20` into a request for films 12
+   and 20, and wrote one film into a file called WYGWYL-01-12-20.mp4. */
+const VALUED = new Set(["--fps", "--crf"]);
+const only = argv.filter((a, i) => /^\d\d$/.test(a) && !VALUED.has(argv[i - 1]));
 
 /* ---------------------------------------------------------------- ffmpeg -- */
 function findFfmpeg() {
@@ -158,7 +161,14 @@ function writeWav(file, data) {
   fs.writeFileSync(file, buf);
 }
 
-/* ------------------------------------------------------------- the picture */
+/* ------------------------------------------------------------- the picture
+   THE SCRATCH DIRECTORY IS NAMED FOR ITS OUTPUT. It used to be one shared
+   `_frames` path, which is fine until two renders run at once — and two did,
+   because this is a repository several people (and several agents) build in.
+   The second run wiped the first's score out from under a live encode. A
+   scratch path that cannot collide costs one string. */
+const NAME = only.length ? `WYGWYL-${only.join("-")}` : "WYGWYL";
+const TMP = path.join(ROOT, "renders", "wygwyl", "_frames-" + NAME);
 fs.mkdirSync(OUT, { recursive: true });
 fs.rmSync(TMP, { recursive: true, force: true });
 fs.mkdirSync(TMP, { recursive: true });
@@ -218,7 +228,7 @@ if (!SILENT) {
   writeWav(wav, renderScore(span, T1 - T0));
 }
 
-const name = picked ? `WYGWYL-${picked.map(f => f.n).join("-")}.mp4` : "WYGWYL.mp4";
+const name = NAME + ".mp4";
 const dest = path.join(OUT, name);
 const args = ["-y", "-f", "image2pipe", "-framerate", String(FPS), "-i", "-"];
 if (wav) args.push("-i", wav);

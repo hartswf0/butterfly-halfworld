@@ -29,6 +29,8 @@
                      draw(u, F) } ] }
    ========================================================================= */
 
+import { drawFigure } from "./figure.mjs";
+
 export const TAU = Math.PI * 2;
 export const FW = 192, FH = 144;            // the ink field, 4:3
 const CELLS = FW * FH;
@@ -127,48 +129,15 @@ function makeKit(seed) {
         if (g.data[y * g.w + x]) K.stamp(x0 + x, y0 + y, l, set);
     },
     wordW(text, ph) { return wordRaster(text, ph).w; },
-    /* a stick body. pose: {mode:'stand'|'walk'|'fall'|'sit', phase, face,
-       lean, rot, arms:'down'|'open'|'up'|'reach'} — enough to stage grief,
-       dance, and a fall from a fire escape. */
-    fig(x, y, h, pose = {}, l = 7) {
-      const face = pose.face || 1, ph2 = pose.phase || 0;
-      const mode = pose.mode || "stand";
-      const th = Math.max(1, h * 0.055);
-      let hip = [0, -h * 0.46], sh = [0, -h * 0.78], hd = [0, -h * 0.885];
-      let ft = [[-h * 0.09, 0], [h * 0.09, 0]], hn;
-      if (mode === "walk") {
-        const s = Math.sin(ph2 * TAU) * 0.30;
-        ft = [[Math.sin(ph2 * TAU) * h * 0.20, -Math.max(0, Math.sin(ph2 * TAU + 1.7)) * h * 0.05],
-              [-Math.sin(ph2 * TAU) * h * 0.20, -Math.max(0, Math.sin(ph2 * TAU + TAU / 2 + 1.7)) * h * 0.05]];
-        hip = [s * h * 0.02, -h * 0.46 - Math.abs(Math.cos(ph2 * TAU)) * h * 0.012];
-      }
-      if (mode === "sit") { hip = [0, -h * 0.28]; sh = [0, -h * 0.62]; hd = [0, -h * 0.73];
-        ft = [[h * 0.24 * face, 0], [h * 0.30 * face, 0]]; }
-      const arms = pose.arms || (mode === "walk" ? "swing" : "down");
-      if (arms === "down") hn = [[-h * 0.10, -h * 0.38], [h * 0.10, -h * 0.38]];
-      else if (arms === "open") hn = [[-h * 0.32, -h * 0.62], [h * 0.32, -h * 0.62]];
-      else if (arms === "up") hn = [[-h * 0.20, -h * 1.02], [h * 0.20, -h * 1.02]];
-      else if (arms === "reach") hn = [[face * h * 0.36, -h * 0.72], [face * h * 0.10, -h * 0.40]];
-      else hn = [[Math.sin(ph2 * TAU + TAU / 2) * h * 0.16, -h * 0.42],
-                 [Math.sin(ph2 * TAU) * h * 0.16, -h * 0.42]];
-      let pts = [hip, sh, hd, ft[0], ft[1], hn[0], hn[1]];
-      const rot = pose.rot || 0, ln = pose.lean || 0;
-      if (rot || ln) {
-        const c = Math.cos(rot), s = Math.sin(rot), py = -h * 0.46;
-        pts = pts.map(([px, pyy]) => {
-          let dx = px, dy = pyy - py;
-          const rx = dx * c - dy * s, ry = dx * s + dy * c;
-          return [rx + ln * (py - pyy) * 0.8, ry + py];
-        });
-      }
-      const [H, S, D, F0, F1, H0, H1] = pts.map(([px, py]) => [x + px, y + py]);
-      K.line(H[0], H[1], S[0], S[1], l, th);          // torso
-      K.line(H[0], H[1], F0[0], F0[1], l, th * 0.8);  // legs
-      K.line(H[0], H[1], F1[0], F1[1], l, th * 0.8);
-      K.line(S[0], S[1], H0[0], H0[1], l, th * 0.7);  // arms
-      K.line(S[0], S[1], H1[0], H1[1], l, th * 0.7);
-      K.disc(D[0], D[1], h * 0.10, l);                // head
-    },
+    /* A BODY. x,y is at the feet. See figure.mjs — it is a volumetric rig with
+       contour and fill, drawn back to front so a body can occlude itself.
+       pose: {mode:'stand'|'walk'|'sit'|'fall', phase, face:1|-1, lean, rot,
+              arms:'down'|'open'|'up'|'reach'|'hold'|'swing',
+              weight, breath, crouch, headTurn, headTilt, gesture:[x,y]}
+       Every pose name the stick figure understood still means what it meant,
+       so the fourteen films that were written against it all improve at once
+       without one of them being edited. */
+    fig(x, y, h, pose = {}, l = 7) { drawFigure(K, x, y, h, pose, l); },
     /* deterministic noise — this is where "no wall clock" is enforced */
     noise(x, y) {
       let n = Math.imul(x | 0, 374761393) + Math.imul(y | 0, 668265263) + Math.imul(seed, 69069);
