@@ -235,7 +235,10 @@ export default {
         const xL = lerp(84, 52, t), xR = lerp(108, 168, t);
         const floor = 108, h = 66, ay = floor - h * 0.70;
         speaker(F, xL, floor, h, 1, "down", 7);
-        summon(F, xR, floor, h, ss(0, 0.30, u), 7);
+        /* summoned, not conjured: he is never at literal zero, even in the
+           first instant, because "from the yonders" is a distance being
+           closed, not a switch being thrown */
+        summon(F, xR, floor, h, ss(-0.06, 0.30, u), 7);
         cord(F, xL, ay, xR, ay, 5, u * 2.0);
         cordFootsteps(F, xL, ay, xR, ay, u * 1.15, 6);
         waveShadows(F, 136, 3, u * 0.6);

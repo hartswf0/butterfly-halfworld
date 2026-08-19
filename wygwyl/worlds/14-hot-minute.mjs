@@ -37,6 +37,21 @@ function weatherClaim(F, u, claim, ph = 0) {
   });
 }
 
+/* A BODY IN RESERVE: paper cut out of the ink instead of ink laid onto
+   paper, the same formal idea 04 built for a shadow (not imported — 04
+   exports nothing — but the same reasoning: on an all-dark field, F.ink can
+   only ever darken it further, so the only way to put a man in a black
+   room is to punch him out of the black). */
+function reserveFig(F, x, y, h, l = 0) {
+  const th = Math.max(1, h * 0.08);
+  F.line(x, y - h * 0.46, x, y - h * 0.78, l, th, true);
+  F.line(x, y - h * 0.46, x - h * 0.17, y, l, th * 0.85, true);
+  F.line(x, y - h * 0.46, x + h * 0.17, y, l, th * 0.85, true);
+  F.line(x, y - h * 0.78, x - h * 0.26, y - h * 0.52, l, th * 0.8, true);
+  F.line(x, y - h * 0.78, x + h * 0.26, y - h * 0.52, l, th * 0.8, true);
+  F.disc(x, y - h * 0.89, h * 0.11, l, true);
+}
+
 /* ---- nine small, undecorated functions. Movement 4 needs each one legible
    in a beat under two seconds, so every one of these stops at the noun: a
    window that also carried curtains stopped being a window and started
@@ -69,19 +84,41 @@ function star(F, cx, cy, r, l) {
   F.line(cx - r * 0.6, cy + r * 0.6, cx + r * 0.6, cy - r * 0.6, l, 1.1);
 }
 function starsGlyph(F, cx, cy) {
-  star(F, cx, cy - 6, 13, 7);
-  star(F, cx - 28, cy + 10, 7, 6);
-  star(F, cx + 26, cy - 4, 6, 6);
-  star(F, cx - 10, cy + 28, 6, 6);
-  star(F, cx + 16, cy + 22, 5, 6);
+  /* FIVE BURSTS ALONE TESTED AS ASTERISKS, NOT A SKY: what makes a mark
+     read as "stars" and not "sparkle" is a FIELD of them. Forty-odd dim
+     points, fixed and deterministic (F.noise, not F.rng — this glyph takes
+     no seed of its own), do that job; the five bright crosses are the
+     ones a viewer's eye actually lands on. */
+  for (let k = 0; k < 46; k++) {
+    const sx = cx + (F.noise(k, 501) - 0.5) * 178, sy = cy + (F.noise(k, 502) - 0.5) * 116;
+    F.disc(sx, sy, F.noise(k, 503) > 0.78 ? 1.4 : 0.9, F.noise(k, 504) > 0.5 ? 3 : 2);
+  }
+  star(F, cx, cy - 6, 23, 7);
+  star(F, cx - 54, cy + 18, 14, 6);
+  star(F, cx + 52, cy - 12, 12, 6);
+  star(F, cx - 20, cy + 46, 11, 6);
+  star(F, cx + 30, cy + 38, 10, 6);
 }
 function candleGlyph(F, cx, cy, h, l) {
-  const bw = h * 0.22, bTop = cy - h * 0.04, bBot = cy + h * 0.34;
+  const bw = h * 0.17, bTop = cy - h * 0.02, bBot = cy + h * 0.36;
   F.rect(cx - bw / 2, bTop, bw, bBot - bTop, l);
-  F.line(cx - bw * 0.5, bBot, cx + bw * 0.5, bBot, l, 1.6);
-  F.disc(cx, bTop - h * 0.10, h * 0.085, l);
-  F.line(cx - h * 0.045, bTop - h * 0.10, cx, bTop - h * 0.24, l, 1.3);
-  F.line(cx + h * 0.045, bTop - h * 0.10, cx, bTop - h * 0.24, l, 1.3);
+  /* the saucer: a candle alone is a thin vertical mark lost in a wide
+     frame, and a holder is part of the noun, not decoration on it */
+  const sw = bw * 4.0;
+  F.arc(cx, bBot, sw / 2, Math.PI * 0.06, Math.PI * 0.94, l, 2.4);
+  F.line(cx - sw / 2 + 2, bBot, cx + sw / 2 - 2, bBot, l, 1.8);
+  /* THE FLAME IS A TAPER, NOT A DISC: the first pass put a circle at the
+     wick and at this scale a circle is a lollipop, not a flame. Width
+     rises from zero at the tip to a maximum at the base on a t^1.3 curve,
+     so it stays a sliver near the top and only fills out low down — the
+     one shape difference that makes it read as fire instead of a ball. */
+  const wick = bTop - h * 0.03, fTip = wick - h * 0.30, fw = h * 0.042;
+  for (let yy = fTip; yy <= wick; yy += 1) {
+    const t = (yy - fTip) / (wick - fTip);
+    const w = fw * Math.pow(t, 1.3);
+    if (w > 0.3) F.line(cx - w, yy, cx + w, yy, l, 1.2);
+  }
+  F.line(cx, bTop, cx, wick, l, 1.4);
 }
 function daisyGlyph(F, cx, cy, r, l) {
   for (let k = 0; k < 9; k++) {
@@ -90,8 +127,12 @@ function daisyGlyph(F, cx, cy, r, l) {
   }
   F.disc(cx, cy, r * 0.44, 0, true);      // the centre is a hole, not a fill —
   F.ring(cx, cy, r * 0.44, l, 1.4);       // the same trick 04 used on a bloom
-  F.line(cx, cy + r * 0.9, cx, cy + r * 1.9, l, 1.8);
-  F.line(cx, cy + r * 1.3, cx - r * 0.55, cy + r * 1.55, l, 1.3);
+  /* the stem: SHORT, on purpose. A first pass ran it out to r*1.9 below
+     centre, which at this glyph's scale (r large enough to fill the field)
+     put the stem tip fifty cells past the bottom of the frame — a flower
+     with no visible stem reads as a wheel of circles instead. */
+  F.line(cx, cy + r * 0.92, cx, cy + r * 1.42, l, 1.8);
+  F.line(cx, cy + r * 1.16, cx - r * 0.42, cy + r * 1.32, l, 1.3);
 }
 function rideGlyph(F, cx, cy, r, l) {
   F.ring(cx, cy, r, l, 2);
@@ -130,25 +171,49 @@ function hourglassGlyph(F, cx, cy, h, l) {
   for (let k = 0; k < 4; k++) F.disc(cx - 3 + k * 2, bot - 3, 1, l);   // the pile
 }
 
-/* the reel: nine functions, weights that only ever get smaller — "getting
-   faster" is a claim about the SCHEDULE, not about drawing motion blur onto
-   frames that are each meant to be read whole. No cross-fade between them:
-   a reel does not dissolve one frame into the next, it cuts, so this is the
-   one movement allowed a hard cut and the only one that takes it. */
-const REEL_W = [1.8, 1.6, 1.45, 1.3, 1.15, 1.05, 0.95, 0.85, 0.75];
-const REEL_SUM = REEL_W.reduce((a, b) => a + b, 0);
-const REEL_BOUND = REEL_W.reduce((acc, w) => { acc.push(acc[acc.length - 1] + w / REEL_SUM); return acc; }, [0]);
+/* the reel: eight equal beats (~1.43s, under the 1.5s target) and a ninth
+   that runs longer. The ninth is not favouritism — the ENGINE cross-fades
+   the last 1.5s of every movement into the next one (XFADE in
+   halfworld.mjs, which this module does not touch), so whatever icon lands
+   last always loses its final second-and-a-half to the dance beginning
+   underneath it. Give it only 1/9 of the movement and the hourglass is
+   never once seen clean — it is born already dissolving. Giving it a wider
+   share buys it real, unblended time before that dissolve starts, which
+   also happens to be the one icon in the poem that is ABOUT running out of
+   time, so the film's own engine constraint becomes the joke instead of a
+   bug. Rejected: beats that shrink beat to beat for "getting faster" — it
+   read as the reel spending most of its length on the FIRST icon and
+   blinking the rest; the cut carries the acceleration instead, below.
+   Every icon is sized to fill most of the field, because a viewer has
+   about a second and only a shape that big lands in it. No cross-fade
+   between icons: a reel does not dissolve one frame into the next, it
+   cuts — the only dissolve in this movement is the one the engine imposes
+   at its very end, which no movement in this suite can opt out of. */
+const REEL_BOUND = [0, 0.095, 0.19, 0.285, 0.38, 0.475, 0.57, 0.665, 0.76, 1.0];
 const REEL = [
-  (F) => windowGlyph(F, 96, 68, 64, 80, 7),
-  (F) => tambourine(F, 96, 72, 34, 0.5, 7, 10),
-  (F) => fieldGlyph(F, 96, 78, 152, 66),
-  (F) => starsGlyph(F, 96, 66),
-  (F) => candleGlyph(F, 96, 96, 96, 7),
-  (F) => daisyGlyph(F, 96, 76, 23, 7),
-  (F) => rideGlyph(F, 96, 66, 33, 7),
-  (F) => templeGlyph(F, 96, 92, 92, 70, 7),
-  (F) => hourglassGlyph(F, 96, 76, 82, 7),
+  (F) => windowGlyph(F, 96, 70, 140, 112, 7),
+  (F) => tambourine(F, 96, 72, 54, 0.5, 7, 12),
+  (F) => fieldGlyph(F, 96, 82, 172, 100),
+  (F) => starsGlyph(F, 96, 70),
+  (F) => candleGlyph(F, 96, 84, 138, 7),
+  (F) => daisyGlyph(F, 96, 60, 38, 7),
+  (F) => rideGlyph(F, 96, 70, 50, 7),
+  (F) => templeGlyph(F, 96, 84, 168, 104, 7),
+  (F) => hourglassGlyph(F, 96, 76, 118, 7),
 ];
+/* THE CUT HAS WEIGHT: a black frame at the head of each beat, standing for
+   the frame-line a real reel carries between exposures. Its share of the
+   beat shrinks from one icon to the next — 22% of ~1.44s down to 5% —
+   which is where "getting faster" actually lives: the cuts sharpen while
+   the icons themselves keep an equal, legible hold. */
+function filmFrame(F) {
+  const L = 5, R = 187, T = 5, B = 139;
+  F.line(L, T, R, T, 6, 1.6); F.line(L, B, R, B, 6, 1.6);
+  F.line(L, T, L, B, 6, 1.6); F.line(R, T, R, B, 6, 1.6);
+  for (let x = L + 7; x < R - 7; x += 11) {
+    F.rect(x, 0, 4, 3, 5); F.rect(x, F.H - 3, 4, 3, 5);
+  }
+}
 
 /* the door: hinged at its LEFT edge, its visible width shrinking by the
    cosine of the swing — the same foreshortening 05 used on its gates, one
@@ -251,29 +316,37 @@ export default {
     {
       label: "NO WALLS", seconds: 13,
       line: "All black again. But no walls this time.",
-      cues: [{ at: 0.05, f: 46, decay: 1.6, gain: 0.5, partials: [1, 1.3, 1.8], noise: 0.5, nDecay: 0.6, seed: 1405 }],
+      cues: [
+        { at: 0.05, f: 46, decay: 1.6, gain: 0.5, partials: [1, 1.3, 1.8], noise: 0.5, nDecay: 0.6, seed: 1405 },
+        { at: 0.58, f: 130, decay: 0.3, gain: 0.2, partials: [1, 1.8], noise: 0.9, nDecay: 0.1, seed: 1415 },
+      ],
       draw(u, F) {
-        /* THE WHOLE MOVEMENT IS THE EXCEPTION LAW 3 ALLOWS: a surface whose
-           entire meaning is that it has no gap in it. And there is not one
-           F.rect or F.box call anywhere in this function — every movement
-           before this one built something with a corner (a tower, a
-           window, a stance); this is what is left once none of it is
-           standing. The aperture that closes is 02's dilating pupil,
-           mechanism intact, sign reversed: there it opened onto a road,
-           here it constricts onto nothing, because a finale gets to run
-           its own suite's tricks backward. */
-        const R = lerp(38, -6, smooth(u));
-        F.map((x, y) => {
-          const d = Math.hypot((x - 96) * 0.9, y - 66);
-          if (d > R) return 7;
-          if (d > R - 3) return F.bayer(x, y) < (R - d) / 3 ? 7 : 5;
-          const m = F.fbm(x * 0.09 + u * 0.6, y * 0.11, 2);   // the last of the weather, thinning
-          return m > 0.62 ? 2 : m > 0.40 ? 1 : 0;
-        });
+        /* THE BLACK BREATHES: the base level drifts between 6 and 7 on the
+           ordered schedule, so "solid black" is a texture that is faintly,
+           slowly alive for the whole movement rather than one flat number
+           held for thirteen seconds. Rejected: the first pass, a pupil that
+           finished closing two-fifths in and left the remaining eight
+           seconds truly empty — a frame with nothing in it just looks like
+           the film stopped, which is not the line. */
+        const breathe = 0.5 + 0.45 * Math.sin(u * TAU * 0.35);
+        F.map((x, y) => (F.bayer(x, y) < breathe ? 7 : 6));
+        /* THE ONE EDGE IN THE MOVEMENT: an open horizon, noise-bent, that
+           never closes and never turns a corner — no F.rect or F.box call
+           appears anywhere in this function. Every movement before this one
+           built something with a right angle (a tower, a window, a
+           stance); this is what is left once none of it is standing, and
+           the only "wall" law it obeys is that there are none. */
+        for (let x = 0; x < F.W; x++) {
+          const hy = 78 + (F.n2(x * 0.026, u * 0.6 + 4) - 0.5) * 20 + Math.sin(u * TAU * 0.2) * 3;
+          F.put(x, Math.round(hy), 4); F.put(x, Math.round(hy) + 1, 5);
+        }
+        /* HE IS STILL IN IT, IN RESERVE. He drifts, because there is no
+           wall left to stand near and nowhere he has to be instead. */
+        reserveFig(F, lerp(58, 134, smooth(u)), 112, 42);
       },
     },
     {
-      label: "THE REEL", seconds: 13,
+      label: "THE REEL", seconds: 15,
       line: "A life flashes the way a reel does: the window, the tambourine, the field, the stars, the candle, the daisy, the ride, the temple, the hourglass.",
       cues: [
         { at: 0.02, f: 700, decay: 0.06, gain: 0.35, partials: [1, 2.3], noise: 0.7, nDecay: 0.02, seed: 1406 },
@@ -281,9 +354,14 @@ export default {
         { at: 0.80, f: 700, decay: 0.06, gain: 0.35, partials: [1, 2.3], noise: 0.7, nDecay: 0.02, seed: 1408 },
       ],
       draw(u, F) {
-        let i = 0;
-        while (i < REEL.length - 1 && u >= REEL_BOUND[i + 1]) i++;
-        REEL[i](F);
+        const n = REEL.length;
+        let i = 0; while (i < n - 1 && u >= REEL_BOUND[i + 1]) i++;
+        const segStart = REEL_BOUND[i], segEnd = REEL_BOUND[i + 1];
+        const p = (u - segStart) / (segEnd - segStart);      // 0..1 local progress through this beat
+        const cut = lerp(0.22, 0.05, i / (n - 1));            // the flash shrinks — this is where "faster" lives
+        filmFrame(F);
+        if (p < cut) F.rect(6, 6, 180, 132, 7);               // the black frame-line between exposures
+        else REEL[i](F);
       },
     },
     {

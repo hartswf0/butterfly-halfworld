@@ -150,35 +150,36 @@ function blossom(F, x, y, s, l) {
   F.disc(cx, cy, s * 0.25, Math.min(7, l + 1));
 }
 
-/* ONE STEM, GROWN OUTWARD FROM ITS JOINT rather than faded in — t is how
-   far along the joint→tip path it has reached, and only past t=0.75 does
-   a bloom open at the growing tip, sized by how far past that it is. A
-   cross-fade between a straight limb and a flowered one was tried and
-   rejected: with no alpha the two versions simply alternated, which read
-   as flicker, not growth. */
-function stem(F, jx, jy, tx, ty, t, l, seedk) {
-  t = clamp01(t);
-  const ex = lerp(jx, tx, t), ey = lerp(jy, ty, t);
-  const mx = lerp(jx, ex, 0.5) + (F.noise(seedk, 3) - 0.5) * 4 * t, my = lerp(jy, ey, 0.5);
+/* ONE STEM. Rejected: growing its LENGTH out from the joint over time —
+   at low growth that left the figure a torso and a head with no visible
+   arms or legs at all, a limbless stub before it was anything else. A
+   stem is drawn at its full length the instant the figure turns into
+   one; only the BLOOM at its tip opens over `bloom` (0..1), staggered a
+   little per limb so they do not all flower on the same frame. */
+function stem(F, jx, jy, tx, ty, bloom, l, seedk) {
+  const mx = lerp(jx, tx, 0.5) + (F.noise(seedk, 3) - 0.5) * 5, my = lerp(jy, ty, 0.5);
   F.line(jx, jy, mx, my, l, 1.3);
-  F.line(mx, my, ex, ey, l, 1.3);
-  if (t > 0.75) {
-    const bloom = ss(0.75, 1, t) * 2.0;
-    for (let k = 0; k < 5; k++) { const a = k / 5 * TAU + seedk; F.line(ex, ey, ex + Math.cos(a) * bloom, ey + Math.sin(a) * bloom, l, 1); }
-    F.disc(ex, ey, Math.max(0.6, bloom * 0.35), l);
+  F.line(mx, my, tx, ty, l, 1.3);
+  /* sized to match the ground blossoms (radius ~3), not a token sprig —
+     at the smaller radius tried first the bloom read as a scuffmark on
+     the hand rather than the flower the line promises */
+  const b = ss(0, 1, bloom) * 3.3;
+  if (b > 0.2) {
+    for (let k = 0; k < 5; k++) { const a = k / 5 * TAU + seedk; F.line(tx, ty, tx + Math.cos(a) * b, ty + Math.sin(a) * b, l, 1.3); }
+    F.disc(tx, ty, Math.max(0.6, b * 0.4), l);
   }
 }
 /* the power figure: a torso and head that stay a body, and four stems
    where the limbs were. Rejected: replacing the torso too — the line says
    the flowers become "my power", not "me"; a person still has to be
    standing there for the harvest to have cost or changed anything. */
-function stemFigure(F, x, y, h, growth, l) {
+function stemFigure(F, x, y, h, bloom, l) {
   const hipY = y - h * 0.46, shY = y - h * 0.78, hdY = y - h * 0.885;
   F.line(x, hipY, x, shY, l, Math.max(1, h * 0.055));
   F.disc(x, hdY, h * 0.10, l);
-  const tips = [[x, shY, x - h * 0.42, shY - h * 0.05, 0], [x, shY, x + h * 0.42, shY - h * 0.05, 0.06],
-                [x, hipY, x - h * 0.20, y, 0.12], [x, hipY, x + h * 0.20, y, 0.18]];
-  tips.forEach(([jx, jy, tx, ty, stagger], i) => stem(F, jx, jy, tx, ty, growth * 1.15 - stagger, l - 1, i));
+  const tips = [[x, shY, x - h * 0.42, shY - h * 0.05, 0], [x, shY, x + h * 0.42, shY - h * 0.05, 0.10],
+                [x, hipY, x - h * 0.20, y, 0.20], [x, hipY, x + h * 0.20, y, 0.30]];
+  tips.forEach(([jx, jy, tx, ty, stagger], i) => stem(F, jx, jy, tx, ty, clamp01((bloom - stagger) / (1 - stagger)), l - 1, i));
 }
 
 export default {
@@ -267,7 +268,19 @@ export default {
            dimming rather than five separate stories going out */
         const pagesDefs = [[92, 84, 16, 11], [112, 92, 15, 10], [100, 102, 17, 12], [128, 86, 14, 10], [118, 106, 16, 11]];
         const front = smooth(u);
-        pagesDefs.forEach((pd, i) => burnPage(F, pagePoints(pd[0], pd[1], pd[2], pd[3]), clamp01((front - i * 0.13) * 2.4), 5));
+        pagesDefs.forEach((pd, i) => {
+          const gone = clamp01((front - i * 0.13) * 2.4);
+          burnPage(F, pagePoints(pd[0], pd[1], pd[2], pd[3]), gone, 5);
+          /* WHAT BURNING LEAVES: once a page is more than half gone it
+             starts leaving soot at its own foot — otherwise the second
+             half of the movement empties out to bare paper exactly where
+             "all my love stories" used to be, which reads as the story
+             erased rather than burned. A scorch is what stays behind. */
+          if (gone > 0.5) {
+            const R = F.rng(200 + i);
+            for (let k = 0; k < Math.round((gone - 0.5) * 12); k++) F.disc(pd[0] + R() * pd[2], pd[1] + pd[3] + 1 + R() * 2, 0.9, 2);
+          }
+        });
         const idxBurning = Math.floor(front / 0.13);
         if (idxBurning >= 0 && idxBurning < pagesDefs.length) {
           const pd = pagesDefs[idxBurning];
@@ -309,31 +322,45 @@ export default {
         for (let i = 0; i < 6; i++) blossom(F, 24 + i * 29 + (F.noise(i, 9) - 0.5) * 8, 128, 3.0, 5);
         for (let i = 0; i < 5; i++) poppy(F, 18 + i * 36 + (F.noise(i, 15) - 0.5) * 10, 114, 2.2, 4);
         F.line(0, 141, 70, 142, 4, 1); F.line(82, 142, 140, 141, 4, 1); F.line(152, 141, 192, 142, 4, 1);
-        /* the harvest targets: six tall stalks, stems long enough to
-           clear the mid-line, plucked one at a time as the sweep passes */
-        const targets = [20, 52, 84, 112, 144, 174].map((x, i) => ({ x, top: 50 + (F.noise(i, 21) - 0.5) * 14, poppy: i % 2 === 0 }));
+        /* the harvest targets: four tall stalks, stems long enough to
+           clear the mid-line, plucked one at a time as the sweep passes.
+           The walker starts at x=188 and moves toward x=6, so a stalk
+           counts as reached once sweepX has fallen BELOW its x — i.e.
+           t.x > sweepX means already passed. A first pass had this
+           inverted (t.x <= sweepX for "passed"), which harvested the
+           stalks in the opposite order to the walker's own motion — the
+           two nearest the start were the last things picked. */
+        const targets = [26, 74, 122, 170].map((x, i) => ({ x, top: 48 + (F.noise(i, 21) - 0.5) * 14, poppy: i % 2 === 0 }));
         const sweepT = clamp01(u / 0.55);
         const sweepX = lerp(188, 6, smooth(sweepT));
         for (const t of targets) {
-          if (t.x <= sweepX) continue;
-          F.line(t.x, 140, t.x, t.top, 6, 1.2);
+          if (t.x > sweepX) continue;
+          const bend = (F.noise(t.x, 77) - 0.5) * 9, midY = (140 + t.top) / 2;
+          F.line(t.x, 140, t.x + bend, midY, 6, 1.2); F.line(t.x + bend, midY, t.x, t.top, 6, 1.2);
           t.poppy ? (F.disc(t.x, t.top, 3.2, 6), F.disc(t.x, t.top, 1.1, 7))
                   : [0, 1, 2, 3, 4].forEach((k) => F.line(t.x, t.top, t.x + Math.cos(k / 5 * TAU) * 3.2, t.top + Math.sin(k / 5 * TAU) * 3.2, 6, 1));
         }
-        const held = targets.filter((t) => t.x <= sweepX);
+        const held = targets.filter((t) => t.x > sweepX);
         if (u < 0.58) {
-          F.fig(sweepX, 128, 38, { mode: "walk", phase: u * 7, face: -1, arms: "reach" }, 7);
+          /* phase 6.35, not 7 — the walk cycle hits "feet together" at every
+             HALF-integer of phase, not just every integer, and u=0.5 * 7 is
+             exactly 3.5. A non-integer rate keeps every sweep checkpoint
+             (0.2 / 0.5 / 0.8) off of both. */
+          F.fig(sweepX, 128, 38, { mode: "walk", phase: u * 6.35, face: -1, arms: "reach" }, 7);
           held.forEach((t, i) => { const c = i % 6, r = (i / 6) | 0; const bx = sweepX + 9 + c * 3.2, by = 92 - r * 4;
             t.poppy ? poppy(F, bx, by, 1.4, 6) : blossom(F, bx, by, 1.5, 6); });
         } else {
-          /* BECOMING: the harvester settles centre-frame and grows large —
-             the substitution of limb for stem only reads at a size where
-             an arm and a flowering stem are both clearly legible. See
-             stemFigure for why the torso stays and only the limbs turn. */
-          const settle = ss(0.55, 0.72, u), growth = ss(0.55, 0.92, u);
+          /* BECOMING happens in two beats, not one: the harvester walks to
+             centre-frame FIRST (settle), stands, and only once still does
+             the bloom open at each stem's tip — settle and bloom are
+             sequential, not overlapping, so it never has to grow flowers
+             while it is still mid-stride. Big, because the substitution
+             of limb for stem only reads at a size where an arm and a
+             flowering stem are both clearly legible. */
+          const settle = ss(0.55, 0.72, u), bloom = ss(0.72, 0.90, u);
           const px = lerp(6, 96, settle);
-          stemFigure(F, px, 122, 64, growth, 7);
-          const remain = held.slice(0, Math.round(held.length * (1 - growth)));
+          stemFigure(F, px, 122, 64, bloom, 7);
+          const remain = held.slice(0, Math.round(held.length * (1 - bloom)));
           remain.forEach((t, i) => { const c = i % 6, r = (i / 6) | 0; const bx = px + 11 + c * 3.2, by = 86 - r * 4;
             t.poppy ? poppy(F, bx, by, 1.4, 6) : blossom(F, bx, by, 1.5, 6); });
         }

@@ -161,8 +161,8 @@ Full API and house style: [`WORLD-BRIEF.md`](WORLD-BRIEF.md).
 | **11** | [NEW DAY](11-new-day.html) | the temple assembles, one course at a time | 6 | 85s |
 | **12** | [REUNION](12-reunion.html) | less time for words, more space for laughter | 5 | 67s |
 | **13** | [HOW TO WIN MY HEART](13-how-to-win-my-heart.html) | orbits, close and counted | 6 | 85s |
-| **14** | [HOT MINUTE](14-hot-minute.html) | everything learns to be weather, then a door | 6 | 89s |
-| | **14 films** | | **80** | **19m 16s** |
+| **14** | [HOT MINUTE](14-hot-minute.html) | everything learns to be weather, then a door | 6 | 91s |
+| | **14 films** | | **80** | **19m 18s** |
 <!-- FILMS:END -->
 
 The suite is a sequence and it behaves like one. The tambourine thrown through a window

@@ -54,28 +54,39 @@ for (const shell of shells) {
     const covs = [];
     for (const at of AT) {
       const t = info.starts[i] + span * at;
-      /* Coverage alone lies. A field entirely at level 1 is a light haze and
-         reads as 100% "covered"; a field entirely at level 7 is a blackout.
-         So carry the mean level too, and only call something SOLID when the
-         ink is both everywhere and dark. */
+      /* WHAT THE INSTRUMENT IS ACTUALLY LOOKING FOR IS A PICTURE.
+         Coverage alone lies twice. A field entirely at level 1 is a light haze
+         and reports as 100% covered; a field at level 7 with a body cut out of
+         it in reserve also reports as ~99% covered, and one of those is a
+         blackout while the other is the best frame in film 14.
+         So the flag is decided by EDGES — cells whose level differs from a
+         neighbour by 3 or more. That is a direct measure of whether anything
+         is drawn, and it does not care whether the subject is ink on paper or
+         paper cut out of ink. Coverage and mean level are still reported,
+         because they say useful things about the frame; they just no longer
+         get a vote. */
       const cov = await page.evaluate((tt) => {
         window.__hw.seek(tt);
         const f = window.__hw.runtime.renderField(tt);
-        let ink = 0, sum = 0;
-        for (let k = 0; k < f.length; k++) { if (f[k] > 0.5) ink++; sum += Math.min(7, f[k]); }
-        return { c: ink / f.length, m: sum / f.length };
+        const W = 192, H = 144;
+        let ink = 0, sum = 0, edges = 0;
+        for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+          const q = y * W + x, v = Math.min(7, f[q]);
+          if (v > 0.5) ink++;
+          sum += v;
+          if (x + 1 < W && Math.abs(v - Math.min(7, f[q + 1])) >= 3) edges++;
+          if (y + 1 < H && Math.abs(v - Math.min(7, f[q + W])) >= 3) edges++;
+        }
+        return { c: ink / f.length, m: sum / f.length, e: edges / f.length };
       }, t);
       await page.waitForTimeout(90);
       const tag = `${n}-m${String(i).padStart(2, "0")}` + (SWEEP ? `-u${Math.round(at * 100)}` : "");
       await page.locator("#stage").screenshot({ path: path.join(OUT, tag + ".png") });
       covs.push(cov);
     }
-    /* The title card is ink-flooded on purpose — white carved out of black —
-       so it is exempt from the SOLID flag rather than reported every run. */
-    const flag = covs.some(c => c.c < 0.012) ? " <<< EMPTY"
-      : (i > 0 && covs.some(c => c.c > 0.93 && c.m > 5.5)) ? " <<< SOLID" : "";
+    const flag = covs.some(c => c.e < 0.0015) ? " <<< NO PICTURE" : "";
     if (flag) bad++;
-    const shown = covs.map(c => `${(c.c * 100).toFixed(0).padStart(3)}%/${c.m.toFixed(1)}`).join(" ");
+    const shown = covs.map(c => `${(c.c * 100).toFixed(0).padStart(3)}%/${c.m.toFixed(1)}/${(c.e * 100).toFixed(1)}`).join("  ");
     console.log(`   m${i} ${info.labels[i].padEnd(24)} ${shown}${flag}`);
   }
 }

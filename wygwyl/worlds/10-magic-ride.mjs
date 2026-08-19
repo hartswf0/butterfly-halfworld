@@ -102,12 +102,18 @@ function sunAt(F, x, y, r) {
    just stops being silhouetted against black. REJECTED: an alpha wipe — the
    whole point of this film's one dissolve is that it is never that. */
 function dawnSweep(F, u) {
+  /* front starts past the right edge (still full night everywhere visible)
+     and recedes past the left edge (full morning everywhere) — a cell is
+     claimed once the front has swept LEFT PAST it, i.e. once x exceeds
+     front. REJECTED FIRST DRAFT: had this comparison backwards and the
+     whole sky flipped to paper in the movement's first second, then
+     un-flipped by its last — looked right lit but ran in reverse. */
   const front = lerp(FW + 40, -60, smooth(u));
   F.map((x, y, v) => {
     if (y >= HORIZON || v > NIGHT + 0.4) return;
     const local = x - front + (F.n2(x * 0.06, y * 0.08) - 0.5) * 16;
-    if (local < -4) return 0;
-    if (local < 8) return F.bayer(x, y) < (8 - local) / 12 ? 0 : undefined;
+    if (local > 4) return 0;
+    if (local > -8) return F.bayer(x, y) < (local + 8) / 12 ? 0 : undefined;
   });
 }
 
@@ -280,10 +286,13 @@ export default {
     },
     {
       label: "HEADS TWIST", seconds: 14,
-      /* THIS IS THE MOVEMENT fx.smear WAS BUILT FOR. Two taps, not three —
-         the roadside carries two full rows of watchers and a third tap put
-         the frame within a hair of budget for a scene that has to hold that
-         cost for fourteen seconds, not a hundred milliseconds. */
+      /* THIS IS THE MOVEMENT fx.smear WAS BUILT FOR — one tap, tightly
+         spread. A first pass used two taps at a wide spread sized for the
+         road; against the roadside watchers (a few cells wide, moving fast
+         in world-space) that spread put full copies of a person several
+         body-widths apart, and "heads twist" read as a fence of ghosts, not
+         people in motion. Tight spread keeps a small figure legible while
+         still streaking the road and the skyline into real speed. */
       fx: { smear: { taps: 1, spread: 0.010, fall: 2.0 } },
       line: "Loneliness is having everything with no one to tell — being everywhere, with no one to love. I let the noise block the noise. The way I ride: eyes turn, heads twist — and prove the magic still exists.",
       cues: [
@@ -345,12 +354,15 @@ export default {
       ],
       draw(u, F) {
         skyBase(F); starsAt(F, 1);
-        const sgrow = ss(0.05, 0.55, u);
-        if (sgrow > 0) sunAt(F, 156, lerp(70, 34, sgrow), 3 + sgrow * 10);
         skyline(F, u, 140, 6);
         /* THE TURN. Everything above HORIZON that is still pure night is
-           handed to the front; buildings, drawn darker, are left alone. */
+           handed to the front; buildings, drawn darker, are left alone. The
+           sun is drawn AFTER, not before — a first pass drew it first and
+           the sweep, which only spares cells darker than the night tone,
+           took the sun's own ring and rays right along with the sky. */
         dawnSweep(F, u);
+        const sgrow = ss(0.05, 0.55, u);
+        if (sgrow > 0) sunAt(F, 156, lerp(70, 34, sgrow), 3 + sgrow * 10);
         groundLine(F); roadTicks(F, u, 620);
         const front = lerp(FW + 40, -60, smooth(u));
         const B = bike(F, 96, ROAD, 1.05, u * 28, 7);

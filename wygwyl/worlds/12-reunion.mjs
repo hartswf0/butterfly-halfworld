@@ -120,11 +120,6 @@ function hourglass(F, u, cx, cy, w, h, seedK, l, withEmber) {
   }
 }
 
-/* A WORD ARRIVES OR LEAVES on the ordered schedule, never a cross-fade — the
-   same dot-allegiance swap every dissolve in the suite obeys. `leaving`
-   picks the direction: false grows a word out of paper, true erodes one back
-   into it. Boxed tight to the glyph's own footprint so nothing else at this
-   ink level nearby gets caught in the sweep. */
 /* A WORD ARRIVES OR LEAVES on the ordered schedule, never a cross-fade — but
    ONLY ACROSS A SHORT WINDOW (t0..t1 typically 12-18% of the movement).
    Rejected: running the dissolve across most of the movement's length, which
@@ -271,7 +266,7 @@ export default {
         elder(F, 74, GROUND_Y - 2, 26, "down", 2);
         elder(F, CX, GROUND_Y - 4, 30, "up", 3);
         elder(F, 118, GROUND_Y - 2, 24, "down", 2);
-        typeset(F, "ELDERS", CX, 15, 8, 7, u, 0.08, 0.24, false);
+        typeset(F, "ELDERS", CX, 15, 9, 7, u, 0.08, 0.24, false);
       },
     },
     {
@@ -341,12 +336,14 @@ export default {
           const ex = lerp(CX - gapHalf * 0.6, CX + gapHalf * 0.7, clamp01((part - 0.55) / 0.4));
           F.put(Math.round(ex), 70, 8);
         }
-        /* BROTHERHOOD holds at ph 8, not the film's numeric floor of 6-7 —
-           rejected outright once the render showed it: an eleven-letter
-           word with a double O collapses into noise at 6 or 7, and this is
-           the one word the whole film has been saving its space for. The
-           shrink still reads (12 -> 9 -> 8 -> 7 -> 8): four movements of
-           strict descent and the last one held rather than broken. */
+        /* BROTHERHOOD holds at ph 8, one size down from the ph-9 plateau
+           M3 and M4 share — rejected outright once the render showed it: an
+           eleven-letter word with a double O collapses into noise below 8,
+           and this is the one word the whole film has been saving its space
+           for. The arc is 12 in M1, down to 8-11 across M2's shrink-and-grow,
+           a ph-9 floor for M3 and M4, and one size smaller again here — a
+           trend, not a ruler, because the last movement's word had to win
+           the argument with the pattern every time the two disagreed. */
         typeset(F, "BROTHERHOOD", CX, 18, 8, 7, u, 0.55, 0.68, false);
       },
     },
