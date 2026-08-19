@@ -172,13 +172,14 @@ function fogSweep(F, u, y0, y1) {
     if (y < y0 || y >= y1) return;
     const edge = x / F.W + (F.n2(x * 0.07, y * 0.09) - 0.5) * 0.28;
     if (edge < sweep - 0.05) {
-      /* finer and lighter than the first pass (0.09/0.62): that frequency
-         put three cell-wide clumps across the whole 192-cell band and the
-         fog read as a spotted hide, not a mist. Higher frequency plus a
-         higher floor for the darkest tone keeps most of the claimed band
-         at 1-2 with only sparse denser wisps. */
-      const h = F.n2(x * 0.17, y * 0.21 + u * 1.6);
-      return h > 0.76 ? 3 : h > 0.32 ? 2 : 1;
+      /* FLAT, not blobby. The first two passes shaded this by value noise
+         (F.n2) at rising frequencies and every one of them still rolled up
+         into a few soft continents across the 192-cell band — that is what
+         interpolated noise does at any frequency, and it read as a hide or
+         a cloud layer, not as mist sitting on the ground. Mist is closer to
+         one flat tone than to weather, so it is one level with a sparse
+         uncorrelated fleck (raw F.noise, no interpolation) on top. */
+      return F.noise(x, y) > 0.93 ? 3 : 2;
     }
     if (edge < sweep && F.bayer(x, y) < (sweep - edge) / 0.05) return 2;
   });
@@ -275,7 +276,7 @@ export default {
         groundTexture(F, T_GY, 140, 301);
         dewWinks(F, u, 132);
         temple(F, 9 + u * 9, 7);
-        F.fig(18, T_GY, 13, { mode: "walk", phase: u * 4, face: 1 }, 6);
+        F.fig(18, T_GY, 13, { mode: "walk", phase: u * 4 + 0.15, face: 1 }, 6);
         F.fig(170, T_GY, 13, { mode: "stand", arms: "reach", face: -1 }, 6);
       },
     },
@@ -308,7 +309,12 @@ export default {
            lengths of pool this figure is given are the two ends of it */
         const lapT = u < 0.5 ? smooth(u * 2) : smooth((1 - u) * 2);
         const px = lerp(28, 166, lapT);
-        F.fig(px, 70, 20, { mode: "walk", phase: u * 5, face: u < 0.5 ? 1 : -1, arms: "swing" }, 6);
+        /* phase carries a +0.15 offset because u*5 alone lands exactly on
+           a whole stride at u=0.5 — legs and swinging arms both pass
+           through the centreline at once and the figure collapses to a
+           single stroke. He's mid-stride when the movement opens, not at
+           the top of a cycle, which is the more natural place to start. */
+        F.fig(px, 70, 20, { mode: "walk", phase: u * 5 + 0.15, face: u < 0.5 ? 1 : -1, arms: "swing" }, 6);
       },
     },
     {

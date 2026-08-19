@@ -2,16 +2,23 @@
    12 · REUNION — a WYGWYL halfworld
 
    LESS TIME FOR WORDS, MORE SPACE FOR LAUGHTER is not a caption here, it is
-   the machine: every F.word call runs smaller than the last movement's —
-   ph 12, 9, 8, 7, 6 — and says less each time, while the distance between
-   the two brothers is one number that only grows, movement to movement and
-   again inside movement five itself. Elders are drawn hollow-headed, because
-   presence without mass is what a memory is. Hourglasses do not pour —
-   pouring is a transport, and this film has nothing left to move from one
-   place to another, only something to spend — so they burn outward from the
-   neck and never finish emptying. It ends on the smallest word in the film,
-   in the widest silence in the film, while the one ember this world is
-   allowed drifts through the gap the wind has opened.
+   the machine: every F.word call runs smaller movement to movement, down
+   from ph 12 in the first to ph 8-9 by the last two — never all the way to
+   the kit's nominal floor of 6, because at this word length and weight 6
+   is where letters start reading as other letters (see the notes at
+   BURNING and BROTHERHOOD: legibility outranks the pattern every time they
+   conflict) — while the distance between the
+   two brothers is one number that only grows, movement to movement and
+   again inside movement five itself. Words never erode as they shrink: a
+   glyph mid-dissolve for most of a movement is not a word, it is noise, so
+   every dissolve here is a short beat at one end and whole or absent
+   everywhere else. Elders are drawn hollow-headed, because presence without
+   mass is what a memory is. Hourglasses do not pour — pouring is a
+   transport, and this film has nothing left to move from one place to
+   another, only something to spend — so they burn outward from the neck
+   and never finish emptying. It ends in the widest silence in the film,
+   while the one ember this world is allowed drifts through the gap the
+   wind has opened.
    ========================================================================= */
 import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
 
@@ -264,7 +271,7 @@ export default {
         elder(F, 74, GROUND_Y - 2, 26, "down", 2);
         elder(F, CX, GROUND_Y - 4, 30, "up", 3);
         elder(F, 118, GROUND_Y - 2, 24, "down", 2);
-        typeset(F, "ELDERS", CX, 15, 8, 7, ss(0.12, 0.55, u), false);
+        typeset(F, "ELDERS", CX, 15, 8, 7, u, 0.08, 0.24, false);
       },
     },
     {
@@ -290,7 +297,10 @@ export default {
            about */
         hourglass(F, u * 0.7, 66, 96, 12, 15, 42, 5, false);
         hourglass(F, u * 0.85, 126, 96, 12, 15, 43, 5, false);
-        typeset(F, "BURNING", CX, 15, 7, 7, ss(0.05, 0.32, u), false);
+        /* held at ph 9, not 7 — at 7 the B-U pair compresses into a shape
+           that reads as "W" at a glance, which is exactly the failure this
+           film cannot afford in its own title word */
+        typeset(F, "BURNING", CX, 15, 9, 7, u, 0.05, 0.20, false);
       },
     },
     {
@@ -303,31 +313,41 @@ export default {
       draw(u, F) {
         ground(F);
         const part = smooth(u);
-        /* THE GAP THAT ONLY OPENS. Every other gap in this film breathes —
+        /* THE WIND IS SHORT DIAGONAL DASHES LEANING AWAY FROM CENTRE, not
+           ruled horizontal rows — the first draft used straight rows at
+           fixed heights and it read as blinds, not weather. Every dash
+           points the direction its half of the frame is going, which is
+           what makes the empty middle read as something PARTING rather
+           than a diagram with a gap in it.
+           THE GAP THAT ONLY OPENS. Every other gap in this film breathes —
            in and back — because it belongs to a moment that is still
-           happening. This one is the last movement of the last film of the
-           suite's occasion, so it is allowed to just go: monotone in u,
-           same as the storm in 01 that never brightens again. */
-        const windGap = lerp(6, 92, part);
-        for (let r = 0; r < 9; r++) {
-          const y = lerp(34, 108, r / 8);
-          const wob = Math.sin(u * TAU * (0.6 + r * 0.07) + r * 1.3) * (1 + (r % 3));
-          const lEnd = CX - windGap / 2 - wob, rStart = CX + windGap / 2 + wob;
-          for (let seg = 0; seg < 3; seg++) {
-            const sw = 15;
-            F.line(Math.max(0, lEnd - sw * (seg + 1)), y, Math.max(0, lEnd - sw * seg), y, 4, 1);
-            F.line(Math.min(192, rStart + sw * seg), y, Math.min(192, rStart + sw * (seg + 1)), y, 4, 1);
-          }
+           happening. This one is monotone in u, same as the storm in 01
+           that never brightens again. */
+        const gapHalf = lerp(3, 60, part);
+        const R = F.rng(51);
+        for (let k = 0; k < 100; k++) {
+          const y = 26 + R() * 92, bx = 22 + R() * 148;
+          const x = bx + Math.sin(u * TAU * (0.4 + R() * 0.5) + bx * 0.05) * 3;
+          if (Math.abs(x - CX) < gapHalf) continue;
+          const side = x < CX ? -1 : 1;
+          const len = 7 + R() * 8, rise = (R() - 0.5) * 5;
+          F.line(x, y, x + side * len, y + rise, 4, 1);
         }
         brothers(F, lerp(78, 118, part), 30,
           { arms: "open" }, { arms: "open" }, 7, 1.2, u);
         /* the last ember this world spends: the same fire from movement
            four, carried off through the gap the wind just opened */
         if (part > 0.55) {
-          const ex = lerp(CX - windGap * 0.3, CX + windGap * 0.35, clamp01((part - 0.55) / 0.4));
+          const ex = lerp(CX - gapHalf * 0.6, CX + gapHalf * 0.7, clamp01((part - 0.55) / 0.4));
           F.put(Math.round(ex), 70, 8);
         }
-        typeset(F, "BROTHERHOOD", CX, 18, 6, 7, ss(0.5, 0.85, u), false);
+        /* BROTHERHOOD holds at ph 8, not the film's numeric floor of 6-7 —
+           rejected outright once the render showed it: an eleven-letter
+           word with a double O collapses into noise at 6 or 7, and this is
+           the one word the whole film has been saving its space for. The
+           shrink still reads (12 -> 9 -> 8 -> 7 -> 8): four movements of
+           strict descent and the last one held rather than broken. */
+        typeset(F, "BROTHERHOOD", CX, 18, 8, 7, u, 0.55, 0.68, false);
       },
     },
   ],

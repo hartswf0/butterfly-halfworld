@@ -167,3 +167,10 @@ A field is 27,648 cells and the film wants 16.6 ms. Two things blow that:
 Measure rather than guess: `renderField` is on `window.__hw.runtime`, so in the
 page console `performance.now()` around `__hw.runtime.renderField(t)` tells you
 the truth for the timestamp you are actually worried about.
+
+**Measure the frame twice.** `F.word` rasterises a glyph run the first time it
+sees one and caches it forever after, so the first render of a movement full of
+words pays for all of them at once and every render after it pays nothing. A
+movement that measured 49 ms cold measured 5.3 ms warm; only the warm number is
+the film's frame rate. Sample each movement once to fill the cache, then again
+to read the cost.

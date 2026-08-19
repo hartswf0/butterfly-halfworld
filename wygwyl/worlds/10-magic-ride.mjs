@@ -284,6 +284,7 @@ export default {
          the roadside carries two full rows of watchers and a third tap put
          the frame within a hair of budget for a scene that has to hold that
          cost for fourteen seconds, not a hundred milliseconds. */
+      fx: { smear: { taps: 1, spread: 0.010, fall: 2.0 } },
       line: "Loneliness is having everything with no one to tell — being everywhere, with no one to love. I let the noise block the noise. The way I ride: eyes turn, heads twist — and prove the magic still exists.",
       cues: [
         { at: 0.04, f: 200, decay: 0.3, gain: 0.4, partials: [1, 1.8], noise: 1.0, nDecay: 0.15, seed: 11 },
@@ -394,7 +395,7 @@ export default {
     },
     {
       label: "CHILLY MORNING", seconds: 14,
-      fx: { smear: { taps: 2, spread: 0.006, fall: 2.1 } },
+      fx: { smear: { taps: 1, spread: 0.010, fall: 2.0 } },
       line: "Riding in a way you can't help but double-click — and prove the magic still exists. Even here, it's chilly in the morning.",
       cues: [
         { at: 0.615, f: 2600, decay: 0.04, gain: 0.45, partials: [1, 1.2], noise: 0.9, nDecay: 0.01, seed: 51 },

@@ -22,9 +22,11 @@ import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
 
 /* THE CORD. Dashed, never solid — a call is pulses, not a wire — and its
    dash pattern is stepped by `flow` so the connection reads as live rather
-   than printed on. `sag` bows it downward at the midpoint; it stays at 0 for
-   the two calls that hold level and is only ever earned by the mother's
-   line, where what she is carrying visibly pulls the cord out of true. */
+   than printed on. `sag` bows the midpoint away from level: positive pulls
+   it down, negative lifts it into the sky. It is 0 for the father's call,
+   which holds level; negative for the lover's, which rises to a shared
+   moon; and only ever positive for the mother's, where what she is
+   carrying visibly pulls the cord out of true. */
 function cord(F, x0, y0, x1, y1, l, flow, sag = 0) {
   const n = Math.max(1, Math.ceil(Math.hypot(x1 - x0, y1 - y0)));
   const period = 7, on = 5, shift = Math.floor(flow * period * 5);
@@ -45,15 +47,21 @@ function speaker(F, x, floor, h, face, arms, l) {
   F.line(x - h * 0.22, floor + 1, x + h * 0.22, floor + 1, Math.max(2, l - 3), 1);
 }
 
-/* M1's payload: one moon, shared, so it never settles on either side. It
-   swings the length of the cord and back, twice across the movement, riding
-   just above it like a bead threaded on the line rather than a thing either
-   speaker owns outright. */
-function sharedMoon(F, x0, y0, x1, y1, u, l) {
-  const t = 0.5 + 0.5 * Math.sin(u * TAU * 2 - Math.PI / 2);
-  const x = lerp(x0, x1, t), y = lerp(y0, y1, t) - 4;
-  F.disc(x, y, 3.2, l - 2);
-  F.ring(x, y, 3.6, l);
+/* M1's payload: one moon, shared, so it never settles on either side. It is
+   what the cord rises to see — not a bead riding a flat wire, which was the
+   first pass and read as a ball being passed hand to hand rather than a
+   moon looked at. It stays up near the cord's own peak, drifting a short
+   way along the topmost stretch of the arc and never far enough to close
+   on either speaker's head. Drawn large: the moon has to be the biggest
+   round thing in the frame or it is competing with the people for the
+   word "moon" and losing. */
+function sharedMoon(F, x0, y0, x1, y1, sag, u, l) {
+  const t = 0.5 + 0.16 * Math.sin(u * TAU * 2);
+  const x = lerp(x0, x1, t), y = y0 + Math.sin(t * Math.PI) * sag;
+  F.disc(x, y, 8.5, l - 2);
+  F.ring(x, y, 9.6, l);
+  F.disc(x - 3, y - 1.5, 1.8, l);
+  F.disc(x + 2.6, y + 2.4, 1.3, l);
 }
 
 /* M2's payload, half of it. Never a filled black wedge: "an abyss she's
@@ -150,8 +158,8 @@ function groundTrail(F, x0, y, x1, l) {
   }
 }
 function dock(F, l) {
-  F.line(14, 118, 14, 138, l, 1.4); F.line(24, 122, 24, 138, l, 1.4);
-  F.line(10, 118, 30, 118, l, 1);
+  F.line(14, 104, 14, 138, l, 1.4); F.line(24, 110, 24, 138, l, 1.4);
+  F.line(10, 104, 30, 104, l, 1);
 }
 function boat(F, x, y, l) {
   F.arc(x, y, 8, 0.15, Math.PI - 0.15, l, 1.2);
@@ -178,11 +186,17 @@ export default {
       draw(u, F) {
         const t = smooth(u);
         const xL = lerp(76, 34, t), xR = lerp(116, 160, t);
-        const floor = 122, h = 48, ay = floor - h * 0.62;
+        const floor = 108, h = 66, ay = floor - h * 0.70;
+        /* the cord rises instead of running flat between the two heads — a
+           sightline, not a wire at chin height — cresting in the upper
+           third where the moon actually sits. Held constant rather than
+           deepening like the mother's sag: this call is not escalating,
+           it is two people already looking at the same fixed point. */
+        const sag = -32;
         speaker(F, xL, floor, h, 1, "down", 7);
         speaker(F, xR, floor, h, -1, "down", 7);
-        cord(F, xL, ay, xR, ay, 5, u * 1.6);
-        sharedMoon(F, xL, ay, xR, ay, u, 6);
+        cord(F, xL, ay, xR, ay, 5, u * 1.6, sag);
+        sharedMoon(F, xL, ay, xR, ay, sag, u, 6);
       },
     },
     {
@@ -195,15 +209,15 @@ export default {
       draw(u, F) {
         const t = smooth(u);
         const xL = lerp(80, 48, t), xR = lerp(112, 146, t);
-        const floor = 122, h = 48, ay = floor - h * 0.62;
-        const sag = lerp(2, 21, t);
+        const floor = 108, h = 66, ay = floor - h * 0.70;
+        const sag = lerp(2, 26, t);
         speaker(F, xL, floor, h, 1, "down", 7);
         speaker(F, xR, floor, h, -1, "open", 7);
         cord(F, xL, ay, xR, ay, 5, u * 1.1, sag);
         /* the abyss is capped short of the frame's own floor: a depth that
            ran off the bottom edge read as a cropping bug rather than
            something merely unseen, so the cap keeps its tip inside paper */
-        abyss(F, (xL + xR) / 2, ay + sag, lerp(7, 23, t), 6);
+        abyss(F, (xL + xR) / 2, ay + sag, lerp(7, 30, t), 6);
         tears(F, xL, ay, xR, ay, sag, u, 6);
       },
     },
@@ -219,7 +233,7 @@ export default {
         /* asymmetric on purpose: his side is pulled further than ours, so
            the stretch itself leans east before the walk ever says so */
         const xL = lerp(84, 52, t), xR = lerp(108, 168, t);
-        const floor = 122, h = 48, ay = floor - h * 0.62;
+        const floor = 108, h = 66, ay = floor - h * 0.70;
         speaker(F, xL, floor, h, 1, "down", 7);
         summon(F, xR, floor, h, ss(0, 0.30, u), 7);
         cord(F, xL, ay, xR, ay, 5, u * 2.0);
@@ -233,7 +247,7 @@ export default {
         for (let k = 0; k < 3; k++) {
           const ph = R(), speed = 0.5 + R() * 0.3;
           const drop = (u * speed + ph) % 1;
-          F.disc(xL - 6 + k * 5, 128 + drop * 10, 0.9, 5);
+          F.disc(xL - 6 + k * 5, 114 + drop * 24, 0.9, 5);
         }
       },
     },
@@ -251,9 +265,9 @@ export default {
       draw(u, F) {
         const t = smooth(u);
         const cx = lerp(46, 150, t);
-        const floor = 130, hf = 42, hs = 40;
+        const floor = 118, hf = 64, hs = 60;
         dock(F, 6);
-        boat(F, 172, 122, 5);
+        boat(F, 172, 112, 5);
         waveShadows(F, 134, 3, u * 0.5);
         waveShadows(F, 139, 2, u * 0.5 + 3);
         groundTrail(F, 46, floor + 2, cx, 6);
