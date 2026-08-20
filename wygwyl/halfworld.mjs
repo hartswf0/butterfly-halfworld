@@ -160,7 +160,35 @@ function makeKit(seed) {
        Every pose name the stick figure understood still means what it meant,
        so the fourteen films that were written against it all improve at once
        without one of them being edited. */
-    fig(x, y, h, pose = {}, l = 7) { drawFigure(K, x, y, h, pose, l); },
+    /* A BODY — AND, WHEN ASKED, WHAT IT IS.
+
+       `renderTagged` already fills a parallel field with which draw call owns
+       each cell, and because drawFigure runs on the unwrapped kit an entire
+       body shares ONE tag. So the instance mask already exists; what it does
+       not have is a name. Turn `K.__cast` into an array and every fig() call
+       deposits its tag alongside what it drew — guise, pose, height, and the
+       foot position the caller passed, which is the one thing about a body in
+       this frame that nobody downstream could recover from pixels.
+
+       Intersect the id field with a cast entry's tag and you have that body's
+       exact silhouette, labelled. This is the annotation real video datasets
+       pay people to draw. Here we are not inferring where the body is — we are
+       the ones who put it there.
+
+       It costs one push per figure and does not touch the picture. A ground
+       truth that alters the thing it measures is not one. */
+    fig(x, y, h, pose = {}, l = 7) {
+      if (K.__cast) K.__cast.push({
+        tag: TAG, kind: "figure",
+        /* a guise may be a named string or an inline spec; a label has to be a
+           label, so an inline one is reported as what it is rather than
+           spilling its whole table into the annotation */
+        guise: typeof pose.guise === "string" ? pose.guise : pose.guise ? "custom" : "everyman",
+        mode: pose.mode || "stand",
+        face: pose.face === -1 ? -1 : 1, foot: [x, y], height: h,
+      });
+      drawFigure(K, x, y, h, pose, l);
+    },
     /* deterministic noise — this is where "no wall clock" is enforced */
     noise(x, y) {
       let n = Math.imul(x | 0, 374761393) + Math.imul(y | 0, 668265263) + Math.imul(seed, 69069);
@@ -535,7 +563,23 @@ export function makeRuntime(world) {
     tagOff();
     return bufA;
   }
-  return { movements, starts, total, locate, renderField, renderTagged };
+  /* THE WHOLE ANNOTATED FRAME: levels, who owns each cell, and what they are.
+     `cast[k].tag` indexes into `ids`, so a labelled instance mask is one
+     comparison per cell. The crossfade is excluded on purpose — for 1.5s at
+     every cut two movements are on screen at once, and an instance mask that
+     spans a cut is a lie about what is in the shot, so those frames say so. */
+  function renderScene(t, ids) {
+    const [i, u] = locate(t);
+    const m = movements[i];
+    K.__cast = [];
+    tagOn(ids);
+    renderMovement(m, u, bufA);
+    tagOff();
+    const cast = K.__cast; K.__cast = null;
+    return { levels: bufA, ids, cast, movement: i, label: m.label, u,
+             mixing: (1 - u) * m.seconds < XFADE };
+  }
+  return { movements, starts, total, locate, renderField, renderTagged, renderScene };
 }
 
 /* the halftone pass: paper, faint mesh, dots by darkness. The one place the
