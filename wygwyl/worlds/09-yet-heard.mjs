@@ -66,6 +66,7 @@ const CHANNEL = [[66, 84], [120, 146]];
    round a night landscape actually goes — and the reason a black figure has
    somewhere to be legible in all four movements, since every standing body
    here crosses the water band between its chest and its shins. */
+
 const CLAMP = (l) => (l < 0 ? 0 : l > 7 ? 7 : l);
 
 function profile(F, base, amp, freq, sd) {
@@ -80,7 +81,18 @@ function shoreProfile(F) {
     for (const [sx, sw, sh] of SHEDS) if (x >= sx && x < sx + sw) t = Math.min(t, HOR - sh);
     out[x] = t;
   }
-  for (const [a, b] of CHANNEL) for (let x = a; x < b; x++) out[x] = 1e9;
+  /* THE LAND FALLS AWAY INTO A CHANNEL, it is not cut out of it. Setting a
+     run of the profile to nothing left a pale rectangle with two vertical
+     sides standing in the middle of the far shore — a hole in the picture,
+     not a gap in a coastline. Ramped, each channel is a pair of headlands
+     going down to the water, and the sky still reaches the water twice. */
+  for (const [a, b] of CHANNEL) {
+    const mid = (a + b) / 2, half = (b - a) / 2 + 9;
+    for (let x = Math.max(0, Math.floor(mid - half)); x < Math.min(out.length, Math.ceil(mid + half)); x++) {
+      const g = smooth(1 - Math.abs(x - mid) / half);
+      out[x] += (HOR + 7 - out[x]) * g;
+    }
+  }
   return out;
 }
 
@@ -93,6 +105,13 @@ function shoreProfile(F) {
    `L.lift` caps how many of those levels a given light is strong enough to
    spend: a moon spends all six and a town spends three, which is the whole
    difference between the first movement and the second.
+
+   `L.a` and `L.b` stretch the falloff in x and in y, and they are the reason
+   a dawn reads as a dawn. A round glow low in the frame draws a hard arch
+   across the sky like the mouth of a tunnel — the bands cut vertically
+   through a sky whose own structure is horizontal. Squashed (a low, b high)
+   the same six bands lie ALONG the horizon, spread east to west and fall away
+   quickly upward, which is what first light actually does.
 
    `roads` are the paths of light on the water, one per person the light is
    reaching. A moon path is not a property of the moon — it points at whoever
@@ -115,11 +134,12 @@ function harbour(F, u, S) {
      the dot law warns about — so it is bent, and cut through twice by the
      channels, where the sky comes all the way down to the water. */
   const wl = profile(F, HOR, 6, 0.075, 17);
-  const w1 = profile(F, HOR + 13, 7, 0.045, 23);
-  const w2 = profile(F, HOR + 28, 8, 0.038, 27);
+  const w0 = profile(F, HOR + 7, 5, 0.055, 19);
+  const w1 = profile(F, HOR + 18, 7, 0.045, 23);
+  const w2 = profile(F, HOR + 30, 8, 0.038, 27);
   const lip = profile(F, LIP, 5, 0.065, 31);
   const back = profile(F, LIP + 20, 8, 0.048, 41);
-  const fore = profile(F, LIP + 36, 18, 0.036, 43);
+  const fore = profile(F, LIP + 36, 17, 0.029, 43);
   const L = S.L, roads = S.roads || [], A = S.abyss, sky = S.sky;
   const wob = u * 2.2, nR = roads.length;
   F.map((x, y) => {
@@ -132,14 +152,22 @@ function harbour(F, u, S) {
          many a given light is strong enough to spend, so the same three lines
          are a full moon, a town's glow and a sunrise. */
       l = y < b1[x] ? sky[3] : y < b2[x] ? sky[2] : y < b3[x] ? sky[1] : sky[0];
-      const d = Math.hypot((x - L.x) * L.a, y - L.y) / L.r;
+      /* THE SAME WEATHER BREAKS THE BANDS AND MAKES THE CLOUD. One noise
+         lookup, two jobs: it shifts the falloff distance by a tenth before
+         the bands are cut, and it decides where cloud is. Without the shift,
+         six clean concentric bands drew a geometric dome across the sky —
+         the light was quantised, which is the technique, but its EDGES were
+         ruled, which is not what light through air looks like. Ragged, the
+         same six levels read as haze. */
+      const c = F.n2(x * 0.026, y * 0.055 + 2.5);
+      const d = Math.hypot((x - L.x) * L.a, (y - L.y) * L.b) / L.r + (c - 0.5) * 0.16;
       const k = d < 0.14 ? 6 : d < 0.26 ? 5 : d < 0.40 ? 4 : d < 0.58 ? 3
               : d < 0.82 ? 2 : d < 1.12 ? 1 : 0;
       l -= k < L.lift ? k : L.lift;
       /* cloud is one level either way and WHICH way is decided by the light:
          cloud with the moon behind it is the brightest thing in a night sky
          and cloud away from it is a blot. One test, two weathers. */
-      if (F.n2(x * 0.026, y * 0.055 + 2.5) > 0.72) l += k >= 3 ? -1 : 1;
+      if (c > 0.72) l += k >= 3 ? -1 : 1;
       /* THE SKY NEVER REACHES PAPER. Two things in this film are allowed to
          be level 0 and they are the moon and the sun; when the glow around
          the moon was also 0 the disc disappeared into its own halo and what
@@ -162,13 +190,21 @@ function harbour(F, u, S) {
          and the halftone drew corrugated iron. */
       const w = F.n2(x * 0.058, y * 0.30 + wob);
       const dep = (y - wl[x]) / (lip[x] - wl[x]);
-      l = S.water - (y < w1[x] ? 1 : 0) + (y > w2[x] ? 1 : 0)
+      l = S.water - 2 + (y > w0[x] ? 1 : 0) + (y > w1[x] ? 1 : 0) + (y > w2[x] ? 1 : 0)
                   + (w > 0.60 ? 1 : w > 0.28 ? 0 : -1);
+      /* THE FAR BANK'S REFLECTION. Four ragged rows of dark water under the
+         shore, and only where there IS a shore above the waterline to be
+         reflected — in the channels the sky comes down to the water and there
+         is nothing to lie on it. Without this the horizon was a pale field
+         meeting a pale field and the whole middle of the frame went to one
+         wash: a harbour whose far side does not lie on the water is a cut-out
+         standing behind a puddle. */
+      if (shore[x] < wl[x] && y < wl[x] + 4 + F.noise(x, 61) * 3) l += 2;
       /* WATER STAYS THE BRIGHT SURFACE, WHATEVER THE HOUR. Every standing
          body in this film crosses the water band between its chest and its
          shins — a standing head lands at the horizon, and there is no
          arrangement of a quay where that is not true — so a dark harbour and
-         a legible figure cannot both be had. The water is capped at 3 and the
+         a legible figure cannot both be had. The water is capped at 4 and the
          night lives in the sky, the shore and the abyss instead. */
       if (l > 4) l = 4; else if (l < 0) l = 0;
       /* THE ROAD ONLY LIGHTS THE WAVE FACES TURNED TOWARD IT. Without that
@@ -185,11 +221,14 @@ function harbour(F, u, S) {
         /* THE ABYSS IS THE WATER'S OWN DEPTH. Three whole levels stepping
            inward and NO RIPPLE inside it — you cannot see the surface of
            something that deep, and the stopping of the texture is what makes
-           a dark ellipse read as a hole rather than as a stain. The light
-           gathers on its rim, so it has an edge without being outlined. */
+           a dark ellipse read as a hole rather than as a stain. */
         const ax = (x - A.x) / A.rx, az = (y - A.y) / A.ry, q = ax * ax + az * az;
         if (q < 1) l = q < 0.30 ? 7 : q < 0.62 ? 6 : 5;
-        else if (q < 1.30) l -= 2;
+        /* the light gathers on the FAR rim, and only there — it gives the
+           hole an edge without outlining it. Ringed all the way round it came
+           out as a dish with a bright lip: you look INTO a hole across its far
+           edge, and the near edge of one is just where the surface stops. */
+        else if (q < 1.24 && az < 0.15) l -= 1;
       }
     } else {
       /* THE QUAY. Wet stone under a low light: near the water it holds the
@@ -208,10 +247,9 @@ function harbour(F, u, S) {
   return lip;
 }
 
-/* THE QUAY'S OWN EDGE, in three runs with a gap at each break, plus the two
-   things that say a wall rather than a beach: bollards standing on it, and a
-   ladder going down the face of it into the water. An unbroken 192-wide line
-   is the one thing this world's halftone cannot take. */
+/* THE QUAY'S OWN EDGE, plus the two things that say a wall rather than a
+   beach: bollards standing on it, and a ladder going down its face into the
+   water. */
 function quayEdge(F, lip) {
   const at = (x) => Math.round(lip[x]);
   /* THE LEVEL IS MODULATED ALONG THE RUN rather than the run being cut. A
@@ -237,9 +275,6 @@ function quayEdge(F, lip) {
 /* the masts and the crane's jib. At 7 rather than at the shore's own tone:
    these are the only marks in the upper half of the frame that are not
    weather, and a mast that matches the shed it stands behind is a smudge. */
-/* the crane sits at 44 and not at 100 because the summoned father resolves out
-   of the sky around x=112 and his dissolve is bounded by a box, not by his own
-   outline — anything ink-black standing inside that box speckles with him */
 function rigging(F) {
   F.line(14, HOR - 8, 14, HOR - 23, 7, 1); F.line(8, HOR - 19, 21, HOR - 21, 7, 1);
   F.line(44, HOR - 6, 44, HOR - 21, 7, 1); F.line(44, HOR - 21, 57, HOR - 17, 7, 1);
@@ -269,11 +304,12 @@ function harbourLights(F, on) {
 function moon(F, cx, cy, r) {
   F.disc(cx, cy, r, 0, true);
   F.ring(cx, cy, r, 3, 1);
-  /* the maria at 1, not at 2: a second ring inside the rim made a doughnut
-     and maria at 2 made a face. What is wanted is a disc that is not blank. */
-  F.disc(cx - r * 0.38, cy - r * 0.14, r * 0.30, 1, true);
-  F.disc(cx + r * 0.24, cy + r * 0.34, r * 0.22, 1, true);
-  F.disc(cx + r * 0.02, cy - r * 0.52, r * 0.15, 1, true);
+  /* the maria are small and at 1. A second ring inside the rim made a
+     doughnut; three big blots at 2 merged into a face. What is wanted is a
+     disc that is not blank, and nothing more than that. */
+  F.disc(cx - r * 0.34, cy - r * 0.10, r * 0.20, 1, true);
+  F.disc(cx + r * 0.28, cy + r * 0.30, r * 0.14, 1, true);
+  F.disc(cx - r * 0.06, cy + r * 0.46, r * 0.11, 1, true);
 }
 /* THE SUN COMES UP OUT OF THE WATER, so it is drawn as the part of a disc
    that is above the waterline and nothing else — a half sun sitting on the
@@ -420,8 +456,8 @@ function trail(F, x0, x1, y, l, upto) {
    start of the call, he arrives dot by dot on the ordered schedule — the one
    dissolve this world otherwise withholds, because a call has no fade, only a
    cord. He resolves out of the paling eastern sky, which is where a man
-   summoned from the yonders would come from. The map is bounded to his own
-   bounding box: an unbounded pass here would be a second full field. */
+   summoned from the yonders would come from. The gate is the compositor's,
+   so only cells that are HIS are ever withheld. */
 function summon(F, tmp, u, x, h, arrive) {
   figure(F, tmp, x, h, { mode: "stand", face: -1, arms: "down", guise: "elder",
     phase: u * 1.7 + 2.1, weight: 0.62, headTilt: clamp01(arrive) * 0.18,
@@ -458,19 +494,19 @@ export default {
         const h = 72, ay = FLOOR - h * 0.84;
         /* THE MOON CLIMBS, AND THAT IS THE HOUR PASSING. "We talk for years,
            travel through time" is a night going by, and the only clock a
-           harbour has is where the moon is — so it rises through twenty-two
-           rows and its six levels of glow re-band the whole sky as it goes.
+           harbour has is where the moon is — so it climbs fifteen rows and
+           its six levels of glow re-band the whole sky as it goes.
            Ten thousand cells change tone across the movement and no object
            crosses the frame, which is the same trade 13 makes with its tide. */
-        const mx = 96, my = lerp(34, 16, t), mr = 12;
+        const mx = 96, my = lerp(36, 21, t), mr = 12;
         /* TWO ROADS, ONE MOON. A path of light on water is not a property of
            the moon — it points at whoever is looking, so two people standing
            apart on one quay each get their own, and both run back to the same
-           disc. That is what "the shared moon" is, and as they drift apart
-           the two roads open from a single blaze into a V. */
+           disc. That is what "the shared moon" is, and as the two of them
+           drift apart the roads open with them into a V. */
         const lip = harbour(F, u, {
           sky: [3, 5, 6, 7], water: 3, quay: 2, shore: 5,
-          L: { x: mx, y: my, r: 38, a: 0.86, lift: 6 }, roads: [xL, xR],
+          L: { x: mx, y: my, r: 40, a: 0.86, b: 1.0, lift: 6 }, roads: [xL, xR],
         });
         rigging(F);
         harbourLights(F, 1);
@@ -481,6 +517,16 @@ export default {
            tracks, not two faces held level while a moon happens to be above
            them. The tilt deepens as the moon gets higher, because it has to. */
         const tilt = 0.42 + t * 0.30;
+        /* THE CORD'S CREST IS THE MOON. It does not run flat between two
+           chins with a moon drawn above it; it goes up to the thing they are
+           both looking at, stops just under its limb — a dashed arc across a
+           disc is a headband — and comes down the other side.
+           AND IT GOES BEHIND THEM. Drawn after the bodies, its last four
+           dashes ran across a head, and a dash landing on ink is stamped as
+           paper: the far speaker came out with a white notch bitten out of
+           her neck. Behind, it leaves each head at the silhouette's own edge,
+           which is where a voice leaves a person. */
+        cord(F, xL, ay, xR, ay, u * 1.6, my + mr + 3 - ay);
         speaker(F, T, u, xL, h, 1,
           { guise: "poet", headTilt: tilt, headTurn: clamp01((mx - xL) / 90) * 0.6 });
         /* SHE IS NOT AN EVERYMAN. With no hair mass and a default neck the
@@ -489,14 +535,6 @@ export default {
            own silhouette or she reads as a mannequin. */
         speaker(F, T, u, xR, h, -1,
           { guise: LOVER, headTilt: tilt, headTurn: -clamp01((xR - mx) / 90) * 0.6 });
-        /* the cord's crest IS the moon: it does not run flat between two
-           chins with a moon drawn above it, it goes up to the thing they are
-           both looking at and comes down the other side */
-        /* the crest sits just UNDER the moon's limb rather than through its
-           middle: a dashed arc drawn across a disc is a headband, and what
-           two sightlines meeting at a moon look like is a pair of lines that
-           stop at it */
-        cord(F, xL, ay, xR, ay, u * 1.6, my + mr + 3 - ay);
       },
     },
     {
@@ -511,7 +549,12 @@ export default {
         const t = smooth(u);
         const xL = lerp(78, 46, t), xR = lerp(114, 148, t);
         const h = 72, ay = FLOOR - h * 0.84;
-        const sag = lerp(4, 30, t);
+        /* the cord crosses the MIDDLE of the hole, not its floor. Sagged to
+           30 its crest traced the abyss's own lower edge, and a bright dashed
+           line lying along the bottom of a dark ellipse turns the whole thing
+           into a bowl. At 22 it is a thread over a void, which is the picture
+           the line is making. */
+        const sag = lerp(4, 22, t);
         /* THE MOON HAS GONE and what is left is the town's own glow along the
            far shore — a weak light, three levels where the moon spent six, and
            low, so the sky is darkest overhead and palest exactly where their
@@ -524,14 +567,15 @@ export default {
            capped short of both shores: something spoken of and never seen
            whole. The first version of this film drew it as nine falling lines
            on bare paper, which is a diagram of a chasm; a chasm is a tone. */
-        const A = { x: (xL + xR) / 2, y: 84, rx: lerp(9, 46, t), ry: lerp(4, 15, t) };
+        const A = { x: (xL + xR) / 2, y: 85, rx: lerp(9, 46, t), ry: lerp(4, 16, t) };
         const lip = harbour(F, u, {
           sky: [5, 6, 7, 7], water: 3, quay: 2, shore: 5,
-          L: { x: 100, y: HOR - 2, r: 70, a: 0.42, lift: 3 }, roads: [100], abyss: A,
+          L: { x: 100, y: HOR - 2, r: 52, a: 0.55, b: 1.7, lift: 3 }, roads: [100], abyss: A,
         });
         rigging(F);
         harbourLights(F, 1);
         quayEdge(F, lip);
+        cord(F, xL, ay, xR, ay, u * 1.1, sag);
         /* HE LISTENS, BOWED. SHE WEEPS, CROUCHED OVER IT. The cord's own sag
            carries the abyss opening between them; the two bodies carry the
            grief that opened it — his head dropping as hers goes further, hers
@@ -541,7 +585,6 @@ export default {
           { guise: "poet", headTilt: -0.25 - t * 0.15, crouch: t * 0.05 });
         speaker(F, T, u, xR, h, -1,
           { guise: MOTHER, headTilt: -0.35 - t * 0.25, crouch: 0.04 + t * 0.14 });
-        cord(F, xL, ay, xR, ay, u * 1.1, sag);
         /* the tears fall from her side, and the water takes them — except the
            ones that fall where the water has gone. "What isn't mine, I still
            can not give": what the abyss is given, it does not answer for. */
@@ -569,18 +612,21 @@ export default {
         const arrive = ss(-0.06, 0.30, u);
         /* EAST TOWARD THE SUNRISES. The light is still under the horizon —
            its centre sits four rows below the waterline in the eastern
-           channel — so nothing is risen and everything is lit. It climbs from
-           three levels of lift to five across the movement, which walks the
-           eastern sky from 5 down to 0 in whole steps while the west stays
-           night: the whole sky re-bands, and that is the movement's motion. */
+           channel — so nothing is risen and everything is lit. Its lift goes
+           from three whole levels to five across the movement, which walks the
+           eastern sky from 5 down to the film's own floor while the west stays
+           at 5 to 7: the whole sky re-bands, and that is the movement's
+           motion. Squashed flat (a low, b high) so the bands lie along the
+           water rather than arching over it. */
         const lip = harbour(F, u, {
           sky: [5, 6, 7, 7], water: 3, quay: 2, shore: 5,
-          L: { x: 133, y: HOR + 4, r: lerp(66, 108, t), a: 0.40, lift: 4 + Math.round(t * 2) },
+          L: { x: 133, y: HOR + 4, r: lerp(52, 76, t), a: 0.70, b: 1.7, lift: 3 + Math.round(t * 2) },
           roads: [xL],
         });
         rigging(F);
         harbourLights(F, 1 - t);
         quayEdge(F, lip);
+        cord(F, xL, ay, xR, ay, u * 2.0, -16);
         /* the poet turns to face the arrival as it resolves — watching him
            come in rather than standing there regardless of him */
         speaker(F, T, u, xL, h, 1, { guise: "poet", headTurn: arrive * 0.4 });
@@ -588,7 +634,6 @@ export default {
            first instant, because "from the yonders" is a distance being
            closed, not a switch being thrown */
         summon(F, T, u, xR, h, arrive);
-        cord(F, xL, ay, xR, ay, u * 2.0, -16);
         /* RETRACING HIS FOOTSTEPS. They are not a payload riding the cord —
            they are already on the quay, older than the call, running east out
            of frame past the poet's own feet, and they are counted off one at a
@@ -596,16 +641,15 @@ export default {
            it is the darkest thing on the ground and nothing else has to say
            it. Rejected: the same marks strung along the cord, which made a
            man's whole life into eight beads on a wire. */
-        trail(F, xL + 14, 198, FLOOR + 4, 7, u * 1.15);
+        trail(F, xL + 14, 198, FLOOR + 2, 7, u * 1.15);
         /* "MY TEARS FALLING IN THE WAVE SHADOWS OF THE INNER HARBOR." The wave
            shadows are not two dashed rows drawn along the bottom edge any
            more; they are the dark faces of the harbour's own ripple, which
            the water pass has been laying down since the first frame. All this
-           has to add is the falling. */
-        /* they fall off the CALL and not off his face, because a tear that
-           leaves a head in this frame lands on stone — the water is behind
-           him, and behind is up. Off the cord they go into the harbour
-           between the two men, and each one ends in a ring on the surface. */
+           has to add is the falling — and it falls off the CALL and not off
+           his face, because a tear leaving a head in this frame lands on
+           stone: the water is behind him, and behind is up. Off the cord they
+           go into the harbour between the two men, each ending in a ring. */
         const R = F.rng(37), hit = 96;
         for (let k = 0; k < 3; k++) {
           const speed = 0.5 + R() * 0.3, ph = R();
@@ -637,12 +681,14 @@ export default {
            cut for this: the disc rises out of open water rather than from
            behind a shed, so the one thing the film has been walking toward
            arrives with nothing in front of it. Its glow spends all six levels
-           and the sky goes from night to paper — the largest tonal change in
-           the film, in the last movement, which is where it belongs. */
-        const sx = 133, sy = lerp(HOR + 11, HOR - 16, t), sr = 13;
+           and the sky walks from 7 down to the last step before paper, with
+           the disc itself the only paper in the frame — the largest tonal
+           change in the film, in its last movement, which is where it
+           belongs. */
+        const sx = 133, sy = lerp(HOR + 17, HOR - 16, t), sr = 13;
         const lip = harbour(F, u, {
           sky: [3, 5, 6, 7], water: 3, quay: 2, shore: 5,
-          L: { x: sx, y: sy, r: lerp(50, 104, t), a: 0.62, lift: 6 }, roads: [cx],
+          L: { x: sx, y: sy, r: lerp(46, 78, t), a: 0.70, b: 1.25, lift: 6 }, roads: [cx],
         });
         rigging(F);
         /* the harbour lights go out as the sun comes up, which is the only
@@ -652,7 +698,7 @@ export default {
         sunUp(F, sx, sy, sr);
         /* the prints are already on the stone, laid down in the call before
            this one, and now two men are walking on them */
-        trail(F, 30, 198, FLOOR + 4, 7, 1);
+        trail(F, 30, 198, FLOOR + 2, 7, 1);
         /* widened from ±9: at ±9 the two bodies' torsos overlapped into one
            silhouette and "father and son" read as a single four-legged
            figure. ±14 keeps them shoulder to shoulder without merging. */
