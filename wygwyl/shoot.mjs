@@ -12,6 +12,7 @@
      node wygwyl/shoot.mjs 01 07           only these
      node wygwyl/shoot.mjs --sweep 04      three frames per movement (u=.2/.5/.8)
      node wygwyl/shoot.mjs --motion        no pictures: does each movement MOVE?
+     node wygwyl/shoot.mjs --texture       no pictures: is it made of mass or scatter?
 
    --sweep is the one that finds real defects. A movement that is a picture at
    its midpoint can still be empty paper for its first three seconds, and a
@@ -28,6 +29,7 @@ const PORT = +(process.env.PORT || 8181);
 const args = process.argv.slice(2);
 const SWEEP = args.includes("--sweep");
 const MOTION = args.includes("--motion");
+const TEXTURE = args.includes("--texture");
 const only = args.filter(a => !a.startsWith("--"));
 const AT = SWEEP ? [0.2, 0.5, 0.8] : [0.55];
 
@@ -55,7 +57,19 @@ page.on("console", m => { if (m.type() === "error") console.log("  !! CONSOLE: "
    different at the end of the movement from the start. A movement with a low
    step and a low span is a photograph, and the retime just made it a longer
    one. */
-console.log(MOTION
+/* --texture: IS THIS PICTURE A MASS OR A SCATTER?
+   Coverage says how much ink a frame carries and mean level says how dark it
+   is. Neither can tell a filled wall from the same amount of ink thrown across
+   the frame in specks — and that difference is most of what separates a
+   painting from a diagram in this suite. Run-length encoding the field into
+   the fewest rectangles that reconstruct it exactly gives a count that answers
+   it: a mass is a few big rectangles, a scatter is thousands of small ones.
+   Divided by coverage so it measures the BREAKING UP and not the amount.
+   Borrowed from the ICARO decompiler, which cannot do this to its own pictures
+   because it only ever sees them after the halftone; ours runs on the field. */
+console.log(TEXTURE
+  ? "per movement: seconds · tokens · coverage% · texture (tokens per 1% coverage; mass is low, scatter is high)"
+  : MOTION
   ? "per movement: seconds · step% (mean change between samples) · span% (start vs end, crossfade excluded)"
   : "per sample: coverage% / mean-ink-level / edge% · samples at u=" + AT.join(", "));
 let bad = 0;
@@ -67,6 +81,10 @@ for (const shell of shells) {
   const n = shell.replace(/\.html$/, "");
   await page.goto(`http://127.0.0.1:${PORT}/wygwyl/${shell}`, { waitUntil: "load" });
   await page.waitForFunction(() => window.__hw, null, { timeout: 10000 });
+  if (TEXTURE) await page.evaluate(async () => {
+    const m = await import("/wygwyl/tokens.mjs");
+    window.__tex = m.textureOf;
+  });
   const info = await page.evaluate(() => ({
     total: window.__hw.runtime.total,
     labels: window.__hw.runtime.movements.map(m => m.label),
@@ -76,6 +94,22 @@ for (const shell of shells) {
   for (let i = 0; i < info.labels.length; i++) {
     const span = i + 1 < info.starts.length ? info.starts[i + 1] - info.starts[i]
                                             : info.total - info.starts[i];
+    if (TEXTURE) {
+      const tx = await page.evaluate(({ t0, span }) => {
+        const R = window.__hw.runtime, N = 5;
+        const rows = [];
+        for (let k = 0; k < N; k++) {
+          const f = R.renderField(t0 + span * (0.08 + 0.72 * k / (N - 1)));
+          rows.push(window.__tex(f, 192, 144));
+        }
+        const m = (key) => rows.reduce((a, r) => a + r[key], 0) / rows.length;
+        return { tokens: m("tokens"), coverage: m("coverage"), texture: m("texture") };
+      }, { t0: info.starts[i], span });
+      console.log(`   m${i} ${info.labels[i].padEnd(24)} ${span.toFixed(0).padStart(3)}s`
+        + `  ${Math.round(tx.tokens).toString().padStart(5)} tok  ${(tx.coverage * 100).toFixed(1).padStart(5)}%`
+        + `  texture ${tx.texture.toFixed(0).padStart(4)}`);
+      continue;
+    }
     if (MOTION) {
       const mv = await page.evaluate(({ t0, span }) => {
         const R = window.__hw.runtime, N = 9, W = 192, H = 144, CELLS = W * H;
@@ -156,7 +190,7 @@ for (const shell of shells) {
   }
 }
 await browser.close();
-console.log(MOTION
+console.log(TEXTURE ? "" : MOTION
   ? (bad ? `\n${bad} movement(s) flagged — they are photographs, and long ones.`
          : "\nevery movement moves.")
   : (bad ? `\n${bad} frame(s) flagged — look at them.` : "\nno frame flagged empty or solid."));

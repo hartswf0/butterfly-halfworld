@@ -260,3 +260,152 @@ result above holds. The first reading was mine, not the program's.
 External dependencies: `cdn.jsdelivr.net/gif.js` for GIF export, and
 `api.openai.com/v1/chat/completions` behind a user-typed key for text→BEFLIX macro
 generation. No embedded credentials. Neither is on the analysis path.
+
+---
+
+# PART TWO — WHAT CAME OF FOLLOWING S3
+
+S3 was: *their token decompiler dies on dithered input, and our `renderField()`
+returns levels before the halftone pass — so feed it the field.* Followed, with
+their code unmodified and only `getGridForFrame` overridden. 192×144 downsamples to
+their 128×96 by exactly 1.5, nearest-neighbour, never averaging — an average would
+mint levels the dot law does not have.
+
+## THE BRANCH HELD, AND BY MORE THAN PREDICTED
+
+Same decompiler, 90 fields across all fifteen films:
+
+| input | tokens/frame | % of raw | ms/frame |
+|---|---|---|---|
+| OUT OF LIFE, halftoned (their path) | 6322 | 51.45% | 297 |
+| OUT OF LIFE, thresholded (their best) | 280 | 2.28% | 2 |
+| **our pre-halftone field** | **686** | **5.58%** | **6.8** |
+
+**Nine times fewer tokens and forty-four times faster than the mode that makes footage
+look like BEFLIX.** The whole code-tensor architecture is viable on our films. It was
+never viable on the pictures it was written for, because it only ever meets them after
+the halftone.
+
+## AND THEN THE ARCHITECTURE FAILED ITS FIRST HONEST TEST
+
+Our films are pure functions of `u`. Frame N+1 is not the future — it is computable,
+exactly, at any `t`. **That makes this suite the ground truth a frame predictor never
+gets**, and it is the reason the following measurement was possible at all. Their own
+project cannot run it: a predicted frame there has nothing to be checked against.
+
+Their token-delta predictor against exact truth, one frame ahead at 12fps, 75 samples,
+scored where either field has ink:
+
+| | predictor | repeat the last frame | delta |
+|---|---|---|---|
+| overall | **85.5%** | **89.8%** | **−4.3** |
+| films where the predictor wins | **0 / 15** | | |
+
+It loses on every film, by 0.8 to 11.4 points. Sweeping the gap between the two frames
+it learns from, across a 32× range:
+
+| gap (s) | mean token displacement | predictor | persistence | delta |
+|---|---|---|---|---|
+| 0.042 | 0.14 cells | 89.9% | 92.9% | −3.0 |
+| 0.083 | 0.18 | 85.8% | 90.3% | −4.5 |
+| 0.167 | 0.28 | 80.3% | 85.9% | −5.6 |
+| 0.333 | 0.43 | 74.2% | 80.6% | −6.4 |
+| 0.667 | 0.61 | 64.3% | 71.1% | −6.8 |
+| 1.333 | 1.13 | 55.7% | 63.3% | −7.5 |
+
+**No crossover, and the gap widens as motion grows.** That is the opposite of a
+predictor that merely needs more signal.
+
+### THE LAW UNDERNEATH IT
+
+Mean token displacement is 0.14 to 1.13 cells. The predictor is estimating **sub-cell
+motion on a quantised lattice** and rounding the answer to integers. For most tokens
+the estimate rounds to 0 — which is persistence — or to ±1, which is a wrong move that
+costs twice: the rectangle is wrong where it went and wrong where it left. Persistence
+is wrong once.
+
+> **On a quantised lattice, a displacement predictor cannot beat persistence until mean
+> displacement exceeds about one cell per step — and by then the matcher's own error has
+> grown with it, so it never catches up. The lattice that makes the picture legible is
+> the lattice that makes motion unestimable.**
+
+This also reconciles the two projects rather than scoring a point off one. Their
+predictor is *correct for material authored in their own macro language*, where motion
+arrives as `SHF dx dy` — integer by construction, many cells at a time. It is wrong for
+anything sampled from continuous motion. **The tool is right about the world it was made
+for.** Ours is not that world.
+
+## THE INSTRUMENT THAT CAME OUT OF THE FAILURE
+
+Token count is not ink coverage: across the fourteen films they correlate at only
+**0.690**, so half of what a token count knows, coverage does not. The remainder is
+**texture** — how broken up a picture is, independent of how much of it there is.
+
+    texture = tokens / (coverage × 100)
+
+`wygwyl/tokens.mjs` is the decompiler ported to our lattice and parameterised, with the
+O(n²) vertical merge replaced by a keyed single pass. `shoot.mjs --texture` runs it over
+every movement in the suite.
+
+It reads the films correctly. `10 MOON SETTLES` is **8** — night and morning as large
+flat fields. `03 COBWEBS` is **102** — a picture made of scattered fragments, which is
+what the poem is. `13 WON'T LEAVE` is **10** at *100% coverage*, because nearly all of
+that is one tone; `13 HARVESTED POWER` is **74** at the same coverage, because it is a
+meadow of two hundred and fifty separate heads.
+
+### AND IT FOUND SOMETHING NOTHING ELSE COULD
+
+The suite's quality bar in the author's words is *"each of these frames should be a
+painting that the poet would be proud to hang on his wall."* A painting is built out of
+tone. A diagram is line on paper. **High texture at low coverage is the signature of a
+diagram**, and one film reads that way from beginning to end:
+
+    09 YET, HEARD — the longest film in the suite, 118 seconds
+      m1 THE SHARED MOON        8.0% coverage   texture 65
+      m2 TEARS, AN ABYSS        7.5%            texture 61
+      m3 HIS FOOTSTEPS          7.7%            texture 73
+      m4 EAST, AT THE HARBOR    6.6%            texture 63
+
+Every other instrument passed it. `--motion` reported 8.3 step / 10.2 span — moving.
+`--sweep` flagged nothing empty or solid. Coverage alone read 7–8%, which in this suite
+means *spare*, not *wrong*. Looking at `HIS FOOTSTEPS, RETRACED` confirms the number:
+two well-drawn bodies and a dotted line, floating on bare cream. No ground plane, no
+light, no space. It is the one film with no toned movement anywhere in it.
+
+**A foreign project's broken compressor, run on the one input it was never given, became
+the instrument that found the last structural weakness in our film.** That is the whole
+argument for collecting stepping stones rather than solving problems, and it is not an
+argument — it is a measurement.
+
+## FURTHER STONES, FROM HERE
+
+**S7 · The suite is a computed benchmark.** Video benchmarks are expensive because
+ground truth must be annotated by people. Ours is *computed*: pure functions of `u`, so
+exact truth at any timestamp, at any frame rate, for free, with no ambiguity. Frame
+prediction was measured against it above in an afternoon. Optical flow, shot detection,
+compression and interpolation are all measurable the same way, and the films do not care
+that they are being used this way.
+
+**S8 · Emit the true motion field.** Worse: we do not merely know the next frame, we
+know *why*. `F.fig(x, y, …)` is called with a position we compute. A film could export
+its own exact per-object motion field alongside its picture — the annotation that costs
+real datasets the most, generated for nothing. Nobody asked for this and it has no
+bearing on the poems.
+
+**S9 · Texture as a direction, not a score.** The index has no good or bad end. What it
+gives is a vocabulary the project did not have: mass or scatter, independent of amount.
+Once a film can be placed on it, a film can be *moved* along it deliberately — a
+movement that begins at 90 and ends at 10 is a picture resolving out of noise into
+substance, and that is a shot nobody has written here yet.
+
+**S10 · Heat as a score.** Still untaken from Part One, and cheaper than it looked now
+that texture works: `heat` is a per-frame scalar of change, and our films already
+synthesise foley from `drone` and `cues`. Derive amplitude from heat and the sound stops
+being written against the picture and starts being caused by it.
+
+**S11 · The failed predictor is a rehearsal detector.** It loses because it moves things
+that did not move. Where it loses *least* — 04 NEVERMORE at −0.8, 13 at −0.8 — the
+picture's motion is genuinely token-like: whole objects translating. Where it loses most
+— 09 at −11.4, 00 at −7.5, 08 at −7.4 — motion is continuous and sub-cell. **Prediction
+error is therefore a classifier of what kind of motion a film has**, which is a use for
+a broken predictor that requires it to stay broken.
