@@ -40,3 +40,6 @@ renders/outoflife/
 
 # carve outputs — sheets and strips are how a source was looked at, not the work
 renders/carve/
+
+# the motion benchmark is generated, not stored
+renders/benchmark/

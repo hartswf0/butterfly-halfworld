@@ -13,6 +13,7 @@
      node wygwyl/shoot.mjs --sweep 04      three frames per movement (u=.2/.5/.8)
      node wygwyl/shoot.mjs --motion        no pictures: does each movement MOVE?
      node wygwyl/shoot.mjs --texture       no pictures: is it made of mass or scatter?
+     node wygwyl/shoot.mjs --flow          no pictures: is the motion below the lattice?
 
    --sweep is the one that finds real defects. A movement that is a picture at
    its midpoint can still be empty paper for its first three seconds, and a
@@ -30,6 +31,7 @@ const args = process.argv.slice(2);
 const SWEEP = args.includes("--sweep");
 const MOTION = args.includes("--motion");
 const TEXTURE = args.includes("--texture");
+const FLOW = args.includes("--flow");
 const only = args.filter(a => !a.startsWith("--"));
 const AT = SWEEP ? [0.2, 0.5, 0.8] : [0.55];
 
@@ -67,7 +69,18 @@ page.on("console", m => { if (m.type() === "error") console.log("  !! CONSOLE: "
    Divided by coverage so it measures the BREAKING UP and not the amount.
    Borrowed from the ICARO decompiler, which cannot do this to its own pictures
    because it only ever sees them after the halftone; ours runs on the field. */
-console.log(TEXTURE
+/* --flow: IS THE MOTION BELOW THE LATTICE?
+   The films remember which draw call wrote each cell, so the same object can
+   be found in two frames exactly and its displacement is known rather than
+   estimated. What that exposes is a defect nothing else here can see: motion
+   written into a movement that is too small for the lattice to carry. A figure
+   crossing forty cells in twenty seconds at twelve frames a second moves a
+   sixth of a cell per frame — it animates in the source and stutters on the
+   screen, and every other instrument passes it because the picture is fine and
+   the movement does change over its span. */
+console.log(FLOW
+  ? "per movement: cells/frame at 12fps · carried (>=1 cell/frame) · ticking (travels, but under one) · still · frames between one-cell steps"
+  : TEXTURE
   ? "per movement: seconds · tokens · coverage% · texture (tokens per 1% coverage; mass is low, scatter is high)"
   : MOTION
   ? "per movement: seconds · step% (mean change between samples) · span% (start vs end, crossfade excluded)"
@@ -85,6 +98,10 @@ for (const shell of shells) {
     const m = await import("/wygwyl/tokens.mjs");
     window.__tex = m.textureOf;
   });
+  if (FLOW) await page.evaluate(async () => {
+    const m = await import("/wygwyl/flow.mjs");
+    window.__flow = m.trueFlow;
+  });
   const info = await page.evaluate(() => ({
     total: window.__hw.runtime.total,
     labels: window.__hw.runtime.movements.map(m => m.label),
@@ -94,6 +111,33 @@ for (const shell of shells) {
   for (let i = 0; i < info.labels.length; i++) {
     const span = i + 1 < info.starts.length ? info.starts[i + 1] - info.starts[i]
                                             : info.total - info.starts[i];
+    if (FLOW) {
+      const fl = await page.evaluate(({ t0, span }) => {
+        const R = window.__hw.runtime, N = 6, DT = 1 / 12;
+        const rows = [];
+        for (let k = 0; k < N; k++) {
+          const t = t0 + span * (0.10 + 0.70 * k / (N - 1));
+          rows.push(window.__flow(R, t, DT, 192, 144));
+        }
+        const m = (key) => rows.reduce((a, r) => a + r[key], 0) / rows.length;
+        return { disp: m("meanDisp"), sub: m("subCellShare"), carried: m("carriedShare"),
+                 still: m("stillShare"), arrived: m("arrivedShare"), tick: m("tickFrames") };
+      }, { t0: info.starts[i], span });
+      /* a movement whose moving ink is mostly sub-cell is animating where
+         nobody can see it. Below half is fine; above three quarters is a walk
+         nobody watching will read as a walk. */
+      /* travelling ink that steps a cell less often than every four frames is
+         a thing the source is moving and the screen is ticking */
+      const blind = fl.sub > 0.80 && fl.carried < 0.08 && fl.tick > 4;
+      if (blind) bad++;
+      console.log(`   m${i} ${info.labels[i].padEnd(24)} ${fl.disp.toFixed(2).padStart(5)} c/f`
+        + `  carried ${(fl.carried * 100).toFixed(0).padStart(3)}%`
+        + `  ticking ${(fl.sub * 100).toFixed(0).padStart(3)}%`
+        + `  still ${(fl.still * 100).toFixed(0).padStart(3)}%`
+        + `  1 cell/${fl.tick > 0 ? fl.tick.toFixed(1).padStart(5) : "    -"} frames`
+        + (blind ? "  <<< TICKING, NOT MOVING" : ""));
+      continue;
+    }
     if (TEXTURE) {
       const tx = await page.evaluate(({ t0, span }) => {
         const R = window.__hw.runtime, N = 5;
@@ -190,7 +234,10 @@ for (const shell of shells) {
   }
 }
 await browser.close();
-console.log(TEXTURE ? "" : MOTION
+console.log(FLOW
+  ? (bad ? `\n${bad} movement(s) ticking rather than moving — the source travels, the screen jumps.`
+         : "\nevery movement that travels, travels fast enough for the lattice to show it.")
+  : TEXTURE ? "" : MOTION
   ? (bad ? `\n${bad} movement(s) flagged — they are photographs, and long ones.`
          : "\nevery movement moves.")
   : (bad ? `\n${bad} frame(s) flagged — look at them.` : "\nno frame flagged empty or solid."));

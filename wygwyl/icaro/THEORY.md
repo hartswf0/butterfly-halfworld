@@ -409,3 +409,114 @@ picture's motion is genuinely token-like: whole objects translating. Where it lo
 — 09 at −11.4, 00 at −7.5, 08 at −7.4 — motion is continuous and sub-cell. **Prediction
 error is therefore a classifier of what kind of motion a film has**, which is a use for
 a broken predictor that requires it to stay broken.
+
+---
+
+# PART THREE — S7 AND S8, TAKEN
+
+*The suite is a computed benchmark; and the films know **why** their next frame
+differs, not merely that it does.*
+
+## THE IDENTITY CHANNEL
+
+Every other measurement in this project reads the picture back and infers what
+happened — which is what a viewer must do, and what every video tool must do,
+because footage does not remember being made. **These films do.** `F.fig(x, y, …)`
+is called with a position this code computed, and so is every disc, line and rect.
+
+`halfworld.mjs` now carries an optional identity field: with tagging on, each
+top-level call from a movement takes a serial, and every cell it writes records
+that serial beside its level. `rt.renderTagged(t, ids)` fills it. Off, it is one
+null check per write.
+
+**The serial alone is not enough, and pretending otherwise produced the first
+wrong answer.** A movement containing `if (open > 0.06)` makes a different number
+of calls at different `u`, so every serial after that conditional shifts by one,
+and trusting it across two frames reports a door opening as a room teleporting.
+
+What the tag actually delivers is **perfect segmentation** — which cells belong to
+one object is known, not inferred — and that is the hard half of correspondence.
+Matching those known objects between two frames is then a small assignment problem
+over a handful of shapes with areas and tones, not a dense search over 27,648
+cells. `flow.mjs` does that, greedily, largest first.
+
+## THE SECOND WRONG ANSWER, AND THE THRESHOLD IT FOUND
+
+First run flagged nine movements as "animating below the lattice." Every one was a
+false positive, and the cause was worth more than the flag: **a wall does not move,
+but the set of cells it owns shifts by one here and there as the light on it
+changes, and its centroid wobbles a few hundredths of a cell.** Ten thousand cells
+of wall at 0.07 cells/frame outvoted the man walking through it.
+
+So: below **0.125 cells per frame** — one cell of travel per second — motion cannot
+be told from a static object being re-inked, and is called still. Between there and
+a whole cell is the band that matters, where an object genuinely travels and the
+screen shows it in ticks.
+
+Corrected, `shoot.mjs --flow` reports the opposite of its first run: **every
+movement that travels, travels fast enough for the lattice to show it**, with ink
+stepping a cell every 0.1 to 2.8 frames throughout. The defect I built the
+instrument to find is not in the film. That is the result, and it is worth as much
+as finding one would have been.
+
+## THE LAW, ESTABLISHED THREE WAYS
+
+`benchmark.mjs` emits the dataset — levels at `t`, levels at `t + dt`, dense
+displacement, and a validity mask that is 0 wherever ink arrived with no
+counterpart, because new ink has no displacement and inventing one is exactly the
+lie an estimator tells.
+
+Its first use was to score the flow engine that started all of this.
+**ICARO `computeKinematics`, 9×9 integer block matching, 60 samples, against exact
+truth:**
+
+| | ICARO | claim nothing moved | |
+|---|---|---|---|
+| mean endpoint error | **1.26 cells** | **0.39 cells** | 3.2× worse |
+| vectors within 1 cell | **20%** | **93%** | |
+| beats the null baseline on | **18 / 60 samples** | | |
+
+That is the third independent measurement of one thing:
+
+1. Token-delta **prediction** loses to repeating the last frame, 0 films of 15.
+2. Sweeping the learning gap 32× finds **no crossover**, and the deficit widens.
+3. Block-matching **flow** scores 3.2× worse than zero-flow.
+
+> **On a coarse quantised lattice, motion estimators that emit integer
+> displacements are worse than assuming stillness, because true inter-frame motion
+> is predominantly sub-cell. Ninety percent of cells are moving, and almost all of
+> them are moving less than one cell per frame. Estimate motion at sub-cell
+> precision, or do not estimate it.**
+
+For ICARO specifically that is not a rewrite. `computeKinematics` searches integer
+offsets in a `for (let sy = -SEARCH; sy <= SEARCH; sy++)` loop and can only ever
+emit integers. Sub-pixel refinement on the matching cost — a parabola through the
+three best scores, which is ten lines — would let it express the motion that is
+actually there. **The engine is not wrong about the world. It is quantised in the
+one place it should not have been.**
+
+## STONES FROM HERE
+
+**S12 · Score everything against zero-flow first.** The null baseline is 0.39 cells
+on this material and almost nothing beats it. Any flow method, any interpolator,
+any codec evaluated on stylised or quantised material should publish its
+zero-flow number, and most will not want to.
+
+**S13 · The dataset is free and does not end.** Fourteen films, twenty-five
+minutes, any timestamp, any frame rate, exact truth, regenerated by one command
+and stored by nobody. Change `--dt` and the same films become a different
+difficulty. The motion statistics vary by film by an order of magnitude, so the
+difficulty is already stratified and labelled.
+
+**S14 · Truth for the things nobody annotates.** The identity channel does not
+only know displacement. It knows **occlusion** — a cell whose owner changed
+between frames without that owner moving is a cell that got covered — and
+**object birth and death**, exactly, which is the `valid` mask. Occlusion
+boundaries are the most expensive annotation in the field and here they are a
+comparison of two integers.
+
+**S15 · Point the instrument at the film again.** `--flow` says every movement's
+travel clears the lattice. It has not yet been asked the more interesting
+question: does the motion *agree with the poem*? A line about stillness played
+over ink travelling four cells a frame is a mismatch nothing here can currently
+see, and the number to see it with now exists.

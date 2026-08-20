@@ -56,9 +56,28 @@ const B8 = [
 ];
 const bayerAt = (x, y) => B8[((y & 7) << 3) | (x & 7)] / 64;
 
-/* ---------------------------------------------------------------- field kit
-   Everything a movement draws with. Bound to one Float32Array at a time.
-   Levels: 0 = paper … 7 = full ink, 8 = the accent mark (one per world). */
+/* ------------------------------------------------------- the identity channel
+   A FILM THAT KNOWS WHY ITS NEXT FRAME IS DIFFERENT.
+
+   Every other measurement in this project reads the picture back and infers
+   what happened. That is what a person watching would have to do, and it is
+   what every video tool has to do, because footage does not remember being
+   made. These films do. `F.fig(x, y, …)` is called with a position this code
+   computed, and the same is true of every disc, line and rect on the frame.
+
+   So: when tagging is on, each top-level call from a movement gets a serial
+   number, and every cell it writes remembers that number alongside its level.
+   Render twice, a frame apart, and the same object's cells can be found in
+   both fields — which gives EXACT correspondence, per object, for nothing.
+   Real footage cannot be annotated this way at any price; it is the single
+   most expensive thing in an optical-flow dataset and here it falls out of
+   the fact that the picture is a pure function.
+
+   It costs nothing when off: IDBUF is null and every write skips one branch. */
+let IDBUF = null, TAG = 0;
+export function tagOn(buf) { IDBUF = buf; TAG = 0; if (buf) buf.fill(0); }
+export function tagOff() { IDBUF = null; }
+
 function makeKit(seed) {
   const K = {
     W: FW, H: FH, buf: null, u: 0,
@@ -68,13 +87,17 @@ function makeKit(seed) {
     clear(l = 0) { K.buf.fill(l); },
     put(x, y, l) {
       x |= 0; y |= 0;
-      if (x >= 0 && x < FW && y >= 0 && y < FH) K.buf[y * FW + x] = l;
+      if (x >= 0 && x < FW && y >= 0 && y < FH) {
+        const q = y * FW + x;
+        K.buf[q] = l;
+        if (IDBUF) IDBUF[q] = TAG;
+      }
     },
     ink(x, y, l) {
       x |= 0; y |= 0;
       if (x >= 0 && x < FW && y >= 0 && y < FH) {
         const q = y * FW + x;
-        if (l > K.buf[q]) K.buf[q] = l;
+        if (l > K.buf[q]) { K.buf[q] = l; if (IDBUF) IDBUF[q] = TAG; }
       }
     },
     stamp(x, y, l, set) { (set ? K.put : K.ink)(x, y, l); },
@@ -165,6 +188,20 @@ function makeKit(seed) {
         if (nv !== undefined) b[q] = nv;
       }
     },
+  };
+  /* The world calls the kit; the kit calls itself. Only the outermost call is
+     an OBJECT — a figure is one figure however many discs it is made of — so
+     the serial advances on the way in from a movement and not on the way down
+     through the primitives, which reach `K` directly through the closure and
+     never pass through here. */
+  K.__tagged = () => {
+    const w = {};
+    for (const k of Object.keys(K)) {
+      const v = K[k];
+      w[k] = typeof v === "function" ? (...a) => { TAG++; return v(...a); } : v;
+    }
+    w.buf = K.buf; w.bind = (b) => { K.bind(b); w.buf = K.buf; return w; };
+    return w;
   };
   return K;
 }
@@ -377,10 +414,14 @@ export function makeRuntime(world) {
     while (i > 0 && t < starts[i]) i--;
     return [i, (t - starts[i]) / movements[i].seconds, t];
   }
+  const KT = K.__tagged();
   function renderMovement(m, u, buf) {
     K.bind(buf); K.u = u;
     K.clear(0);
-    m.draw(clamp01(u), K);
+    /* the tagged kit is the same kit with a serial bumped on the way in; it is
+       handed to the movement only while an identity field is being collected */
+    if (IDBUF) { KT.bind(buf); KT.u = u; m.draw(clamp01(u), KT); }
+    else m.draw(clamp01(u), K);
     const fx = m.fx || {};
     if (fx.smear) {
       const { taps = 2, spread = 0.02, fall = 1.6 } = fx.smear;
@@ -442,7 +483,17 @@ export function makeRuntime(world) {
     }
     return bufA;
   }
-  return { movements, starts, total, locate, renderField };
+  /* renderField, but also filling `ids` with which object wrote each cell.
+     No crossfade: a dissolve is two movements at once and an identity would
+     have to belong to both, so the tagged path renders the movement alone. */
+  function renderTagged(t, ids) {
+    const [i, u] = locate(t);
+    tagOn(ids);
+    renderMovement(movements[i], u, bufA);
+    tagOff();
+    return bufA;
+  }
+  return { movements, starts, total, locate, renderField, renderTagged };
 }
 
 /* the halftone pass: paper, faint mesh, dots by darkness. The one place the
