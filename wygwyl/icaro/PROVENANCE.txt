@@ -1,0 +1,6 @@
+upstream commit: 55571ffafc315f028df4f71415a585f4acecc471 2026-05-22
+source:  https://github.com/hartswf0/abc-flix
+files:   icaro-flow.html, icaro-flow-sp.html
+pulled:  verbatim and unmodified, for study.
+Do not edit these in place — they are a snapshot of another repository,
+not a fork of it. Anything learned here belongs in wygwyl/, not in these.
