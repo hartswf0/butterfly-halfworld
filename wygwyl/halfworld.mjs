@@ -181,6 +181,48 @@ function makeKit(seed) {
       let s = ((seed ^ Math.imul(k, 2654435761)) >>> 0) || 1;
       return () => { s ^= s << 13; s ^= s >>> 17; s ^= s << 5; return ((s >>> 0) % 100000) / 100000; };
     },
+    /* DRAW SOMETHING OVER A TONED WORLD AND KEEP IT LEGIBLE.
+
+       The rig contours at 7 and fills at `level - 3`, so a body drawn at the
+       default fills with 4. `ink` only darkens, so where the world's own tone
+       is already 4 the fill changes nothing and the body comes out a WIREFRAME
+       with the ground showing through it. That is not a fault in the rig — a
+       figure over paper wants exactly that — it is what happens when a large
+       tonal band lands at body height, which some locations make unavoidable:
+       a standing figure at a shore crosses the water between chest and shin
+       however the ground is arranged.
+
+       Compositing alone does not fix it. Four over four is four. What
+       compositing buys is that every returned cell is KNOWN TO BE THE BODY'S,
+       and knowing that is what lets its fill be moved out of the way:
+
+         F.over(G => G.fig(x, HZ, 44, pose, 7), { remap: v => v === 4 ? 6 : v })
+
+       Six and not seven, because one level between fill and contour is what
+       keeps an arm in front of a torso instead of inside it. The world keeps
+       all eight levels; only the body is moved.
+
+       `gate(x, y)` may refuse a cell. Hand it `F.bayer(x,y) < a` and the body
+       arrives on the ordered schedule, and unlike a bounded `map` it can never
+       touch a cell that was not the drawing's. */
+    over(fn, opts = {}) {
+      if (K.__over) throw new Error("over() is already drawing — do not nest it");
+      const main = K.buf;
+      /* one scratch for the whole film rather than a buffer per figure per
+         frame: at twelve frames a second with three bodies in shot that is a
+         hundred and ten kilobytes of garbage every twenty-seven milliseconds */
+      const tmp = K.__scratch || (K.__scratch = new Float32Array(FW * FH));
+      tmp.fill(0);
+      K.__over = 1; K.buf = tmp;
+      try { fn(K); } finally { K.buf = main; K.__over = 0; }
+      const { gate, remap } = opts;
+      for (let q = 0; q < FW * FH; q++) {
+        const v = tmp[q];
+        if (v <= 0) continue;
+        if (gate && !gate(q % FW, (q / FW) | 0)) continue;
+        main[q] = remap ? remap(v) : v;
+      }
+    },
     map(fn) {
       const b = K.buf;
       for (let y = 0; y < FH; y++) for (let x = 0; x < FW; x++) {

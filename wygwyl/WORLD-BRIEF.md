@@ -112,6 +112,39 @@ gesture   [x,y]  put the near hand HERE, in body-local coordinates (origin at
                  miming near it.
 ```
 
+**A BODY OVER TONE NEEDS `F.over`.** The rig contours at 7 and fills at
+`level - 3`, so a figure drawn at the default fills with **4**. `ink` only
+darkens. Where the world's own tone is already 4, the fill changes nothing and
+the body comes out a **wireframe with the ground showing through it**.
+
+This is not a fault in the rig — a figure over paper wants exactly that — and it
+does not bite most films. It bites when a large tonal band sits at body height,
+which some locations make unavoidable: a standing figure at a shore crosses the
+water between chest and shin however you arrange the ground. Film 09 hit it the
+moment its harbour was built out of tone, and capping the water at 4 to protect
+the bodies then broke the sky, because every glow band that landed on 4 jumped
+two levels and the dawn drew a hard arch like a tunnel mouth.
+
+The way out is not to reserve a level. It is to let the body own its own cells:
+
+Compositing alone does not fix it — four over four is four. What compositing buys
+is that every returned cell is **known to be the body's**, and knowing that is
+what lets its fill be moved out of the way:
+
+```js
+F.over(G => G.fig(x, HZ, 44, { mode: "walk", phase: u * 6.35, guise: "poet" }, 7),
+       { remap: v => (v === 4 ? 6 : v) });
+```
+
+Six and not seven, because one level between fill and contour is what keeps an arm
+in front of a torso instead of inside it. The world keeps all eight levels; only
+the body moves. `opts.gate` may refuse a cell — `(x, y) => F.bayer(x, y) < a`
+brings a body in on the ordered schedule, and unlike a bounded `F.map` it can
+never touch a cell that was not the drawing's.
+
+There is a bench for this: `wygwyl/zz-over.html`, one figure drawn straight and
+one through `over`, on ground set to the fill level exactly.
+
 **Phase must not be an integer multiple of `u`.** The gait sends both feet to
 the same offset twice per stride; if your rate is `u*6` the QA sample at u=0.5
 lands exactly there and the body collapses into one vertical stroke. Two films
