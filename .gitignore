@@ -44,3 +44,4 @@ renders/carve/
 # the motion benchmark is generated, not stored
 renders/benchmark/
 renders/see/
+renders/deep/
