@@ -1,0 +1,390 @@
+<!doctype html><html lang=en><head>
+<meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>HALFWORLD STUDIO</title>
+<style>
+:root{--paper:#f2efe6;--ink:#161513;--acc:#5aa7ff;--dim:#8b8175;--rule:#cfc8ba;
+ --hot:#d63e30;--warm:#f3b028}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+html,body{height:100%;overflow:hidden}
+body{background:var(--paper);color:var(--ink);
+ font:11px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em;
+ display:grid;grid-template-columns:250px 1fr 268px;grid-template-rows:34px 1fr 132px;
+ grid-template-areas:"top top top" "tab stage lib" "tab bind lib"}
+#top{grid-area:top;border-bottom:2px solid var(--ink);display:flex;align-items:center;
+ gap:14px;padding:0 12px;background:var(--paper)}
+#top b{letter-spacing:.3em}
+#top select,#top button{font:inherit;background:var(--paper);color:var(--ink);
+ border:1px solid var(--ink);padding:2px 8px;cursor:pointer}
+#top button.on{background:var(--ink);color:var(--paper)}
+#top input[type=range]{width:190px}
+#tab{grid-area:tab;border-right:2px solid var(--ink);overflow:auto;padding:8px}
+#stage{grid-area:stage;display:flex;align-items:center;justify-content:center;
+ background:#e7e3d8;overflow:hidden}
+canvas{background:var(--paper);border:1px solid var(--ink);cursor:crosshair}
+#bind{grid-area:bind;border-top:2px solid var(--ink);overflow:auto;padding:8px 10px}
+#lib{grid-area:lib;border-left:2px solid var(--ink);overflow:auto;padding:8px}
+h3{font-size:9px;letter-spacing:.22em;color:var(--dim);margin:0 0 6px;
+ border-bottom:1px solid var(--rule);padding-bottom:4px}
+h3 span{color:var(--ink);float:right}
+.el{display:grid;grid-template-columns:1fr 30px 30px;gap:2px;padding:3px 5px;
+ border:1px solid var(--rule);margin-bottom:3px;cursor:pointer;background:var(--paper)}
+.el:hover{border-color:var(--ink)}
+.el.sel{background:var(--ink);color:var(--paper)}
+.el.swap{border-left:3px solid var(--acc)}
+.el.keep{border-left:3px solid var(--rule);opacity:.55}
+.el b{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.el i{font-style:normal;color:var(--dim);text-align:right}
+.el.sel i{color:#b9b2a4}
+#lib .card{display:inline-block;width:74px;margin:0 4px 6px 0;cursor:pointer;
+ border:1px solid var(--rule);background:
+ repeating-conic-gradient(#e6e1d5 0 25%,#f2efe6 0 50%) 0 0/10px 10px}
+#lib .card:hover{border-color:var(--ink)}
+#lib .card.sel{border:2px solid var(--acc)}
+#lib .card img{width:100%;height:56px;object-fit:contain;display:block}
+#lib .card em{font-style:normal;font-size:9px;color:var(--dim);display:block;
+ padding:1px 3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+table{width:100%;border-collapse:collapse;font-size:10px}
+td,th{border:1px solid var(--rule);padding:2px 6px;text-align:left}
+th{background:#e9e4d8;letter-spacing:.1em}
+tr.hit{background:#dbe7f5}
+.chip{display:inline-block;border:1px solid var(--rule);padding:1px 5px;margin:0 3px 3px 0;
+ cursor:pointer;color:var(--dim)}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#hud{position:absolute;left:10px;top:44px;color:var(--dim);font-size:10px;
+ pointer-events:none;line-height:1.5}
+
+/* ══ A NARROW WINDOW ═══════════════════════════════════════════════════════
+   Three fixed columns put the stage off the right edge of a phone, so the tool
+   was not cramped there, it was gone. This will never be a touch instrument —
+   it is built on drag, hover and a pointer — but it should at least be legible
+   and reachable on a small screen instead of invisible. The panels become
+   collapsible drawers stacked under the stage; open one at a time. */
+@media (max-width:820px){
+  body{grid-template-columns:1fr;grid-template-rows:auto minmax(38vh,1fr) auto;
+       grid-template-areas:"top" "stage" "drawers"}
+  #tab,#lib,#bind{grid-area:drawers;max-height:44vh;overflow:auto;border:0;border-top:1px solid #333}
+  #top{overflow-x:auto;white-space:nowrap;padding:4px 8px}
+  button,select,input{min-height:34px;padding:5px 9px}
+}
+</style></head><body>
+
+<div id=top>
+ <b>HALFWORLD STUDIO</b>
+ <select id=world></select>
+ <input type=range id=time min=0 max=1000 value=300>
+ <span id=tlabel class=dim>—</span>
+ <button id=play>PLAY</button>
+ <button id=mode class=on>LOOSE</button>
+ <button id=showdraw class=on>DRAWN</button>
+ <button id=showskin class=on>SKIN</button>
+ <button id=showbody class=on>BODIES</button>
+ <button id=auto>AUTO-BIND</button>
+ <button id=clear>UNBIND</button>
+</div>
+
+<div id=tab><h3>THE PARTS <span id=pcount></span></h3><div id=parts></div></div>
+<div id=stage><canvas id=cv width=960 height=720></canvas><div id=hud></div></div>
+<div id=bind><h3>BINDINGS <span id=bcount></span></h3><div id=btable></div></div>
+<div id=lib><h3>THE ARCHIVE <span id=lcount></span></h3>
+ <div id=nouns></div><div id=cards></div></div>
+
+<script type="module">
+const FW=192, FH=144, CELL=5;
+const PAPER="#f2efe6", INK="#161513", ACC="#5aa7ff";
+const cv=document.getElementById('cv'), cx=cv.getContext('2d');
+const $=id=>document.getElementById(id);
+
+/* the stamp law, exactly as makePost draws it */
+const RAD=[];for(let l=1;l<=8;l++)RAD.push(l>7?CELL*0.44:CELL*0.5*Math.pow(l/7,0.72)*1.24);
+
+globalThis.document.__c=globalThis.document.createElement;
+const HW = await import('./halfworld.mjs');
+HW.wantParts(true);
+
+const ELEMENTS = await (await fetch('./elements.json')).json();
+const PARTS    = await (await fetch('./parts.json')).json();
+const WORLDS   = await (await fetch('./worlds.json')).json();
+const byNoun={}; for(const e of ELEMENTS){(byNoun[e.p] ||= []).push(e);}
+/* AN OUTLINE IS NOT A MASS. `windows` is drawn with box+rect — a filled thing —
+   and skinning its cells works. `building` is drawn with line+arc: it is the
+   CONTOUR of a tower, not the tower, and skinning the strokes smears a photograph
+   along a wire. The vocabulary already records which primitives each part uses, so
+   an outline part is skinned across the area it ENCLOSES and keeps its own drawn
+   line on top of that. The photograph goes inside the drawing. */
+const FILLED=new Set(['rect','box','ink','put','disc','stamp']);
+const isOutline=nm=>{const m=PARTS.find(p=>p.part===nm);
+  if(!m||!m.prims||!m.prims.length)return false;
+  return m.prims.filter(x=>FILLED.has(x)).length*2 < m.prims.length;};
+const NOUNS=Object.keys(byNoun).sort((a,b)=>byNoun[b].length-byNoun[a].length);
+
+let rt=null, world=null, ids=new Int32Array(FW*FH), scene=null;
+let bindings={}, selPart=null, selNoun=NOUNS[0], selEl=null;
+let t=0, playing=false, drag=null, puppet={};
+const IMG=new Map();
+function img(id){
+  if(IMG.has(id))return IMG.get(id);
+  const im=new Image(); im.src=`../thumbs/${id}.webp`;
+  im.onload=()=>draw(); IMG.set(id,im); return im;
+}
+
+/* ---- the world ---------------------------------------------------------- */
+async function loadWorld(slug){
+  world=(await import(`./worlds/${slug}.mjs`)).default;
+  rt=HW.makeRuntime(world);
+  $('tlabel').textContent=`${rt.total.toFixed(0)}s`;
+  t=rt.total*0.45; $('time').value=1000*t/rt.total;
+  puppet={}; draw();
+}
+
+function scan(){
+  scene=rt.renderScene(t,ids);
+  const byTag=new Map(); for(const p of scene.parts||[]) byTag.set(p.tag,p.part);
+  const cells=new Map(), owner=new Int16Array(FW*FH);
+  const names=[]; const order=new Map();
+  for(let i=0;i<ids.length;i++){
+    if(!ids[i]){owner[i]=0;continue;}
+    const nm=byTag.get(ids[i])||'?';
+    if(!order.has(nm)){order.set(nm,order.size+1);names.push(nm);}
+    owner[i]=order.get(nm);
+    cells.set(nm,(cells.get(nm)||0)+1);
+  }
+  return {owner,names,cells};
+}
+
+/* connected components of one part, in field cells */
+function slots(owner,idx){
+  const seen=new Int8Array(FW*FH), out=[];
+  for(let i=0;i<FW*FH;i++){
+    if(owner[i]!==idx||seen[i])continue;
+    let q=[i]; seen[i]=1; let x0=1e9,y0=1e9,x1=-1,y1=-1,n=0; const cells=[];
+    while(q.length){
+      const j=q.pop(); const x=j%FW, y=(j/FW)|0; n++; cells.push(j);
+      if(x<x0)x0=x; if(x>x1)x1=x; if(y<y0)y0=y; if(y>y1)y1=y;
+      for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){
+        const nx=x+dx, ny=y+dy; if(nx<0||ny<0||nx>=FW||ny>=FH)continue;
+        const k=ny*FW+nx; if(owner[k]===idx&&!seen[k]){seen[k]=1;q.push(k);}
+      }
+    }
+    if(n>=3) out.push({x0,y0,w:x1-x0+1,h:y1-y0+1,n,cells});
+  }
+  return out;
+}
+
+/* ---- render -------------------------------------------------------------- */
+function draw(){
+  if(!rt) return;
+  const S=scan();
+  const lv=scene.levels;
+  cx.fillStyle=PAPER; cx.fillRect(0,0,cv.width,cv.height);
+  const loose=$('mode').classList.contains('on');
+  const skinned=new Set(Object.keys(bindings));
+  /* 1. everything not skinned, drawn */
+  if($('showdraw').classList.contains('on')){
+    cx.fillStyle=INK;
+    for(let y=0;y<FH;y++)for(let x=0;x<FW;x++){
+      const i=y*FW+x, l=lv[i]; if(!l)continue;
+      const nm=S.names[S.owner[i]-1];
+      /* an outline part keeps its line even when skinned — the drawing stays and
+         the photograph fills what it encloses */
+      if(skinned.has(nm) && !isOutline(nm))continue;
+      cx.beginPath();
+      cx.arc((x+0.5)*CELL,(y+0.5)*CELL,Math.max(0.6,RAD[Math.min(7,l)-1]),0,6.3);
+      cx.fill();
+    }
+  }
+  /* 2. skinned parts */
+  if($('showskin').classList.contains('on')){
+    for(const nm of skinned){
+      const idx=S.names.indexOf(nm); if(idx<0)continue;
+      const eid=bindings[nm]; const im=img(eid);
+      if(!im.complete||!im.naturalWidth)continue;
+      const outline=isOutline(nm);
+      let sl=slots(S.owner,idx+1);
+      if(outline){
+        /* merge the strokes of one figure into the region they bound: any slot
+           whose box overlaps another belongs to the same object */
+        const merged=[];
+        for(const s of sl){
+          let hit=null;
+          for(const m of merged)
+            if(!(s.x0>m.x0+m.w+1||s.x0+s.w+1<m.x0||s.y0>m.y0+m.h+1||s.y0+s.h+1<m.y0)){hit=m;break;}
+          if(hit){const x1=Math.max(hit.x0+hit.w,s.x0+s.w), y1=Math.max(hit.y0+hit.h,s.y0+s.h);
+            hit.x0=Math.min(hit.x0,s.x0); hit.y0=Math.min(hit.y0,s.y0);
+            hit.w=x1-hit.x0; hit.h=y1-hit.y0; hit.cells=hit.cells.concat(s.cells);}
+          else merged.push({...s});
+        }
+        sl=merged.filter(m=>m.w>1&&m.h>1);
+      }
+      for(const s of sl){
+        const px=s.x0*CELL, py=s.y0*CELL, pw=s.w*CELL, ph=s.h*CELL;
+        if(loose||outline){ cx.drawImage(im,px,py,pw,ph); }
+        else{
+          const o=document.createElement('canvas'); o.width=pw; o.height=ph;
+          const oc=o.getContext('2d');
+          oc.fillStyle='#000';
+          for(const j of s.cells){
+            const x=j%FW-s.x0, y=((j/FW)|0)-s.y0;
+            oc.fillRect(x*CELL,y*CELL,CELL,CELL);
+          }
+          oc.globalCompositeOperation='source-in';
+          oc.drawImage(im,0,0,pw,ph);
+          cx.drawImage(o,px,py);
+        }
+      }
+    }
+  }
+  /* 3. bodies — puppetable */
+  const figs=(scene.cast||[]).filter(c=>c.kind==='figure');
+  if($('showbody').classList.contains('on')){
+    figs.forEach((f,k)=>{
+      const key=`fig${k}`;
+      const fx=(puppet[key]?.x ?? f.foot[0]), fy=(puppet[key]?.y ?? f.foot[1]);
+      const eid=bindings[`__body_${f.mode}`];
+      if(eid){
+        const im=img(eid);
+        if(im.complete&&im.naturalWidth){
+          const hp=f.height*CELL*1.5, wp=hp*im.naturalWidth/im.naturalHeight;
+          cx.save();
+          if(f.face===-1){cx.translate(fx*CELL+wp/2,0);cx.scale(-1,1);
+            cx.drawImage(im,0,fy*CELL-hp,wp,hp);}
+          else cx.drawImage(im,fx*CELL-wp/2,fy*CELL-hp,wp,hp);
+          cx.restore();
+        }
+      }
+      cx.strokeStyle=drag===key?ACC:'rgba(22,21,19,.45)';
+      cx.lineWidth=drag===key?2:1;
+      cx.beginPath(); cx.arc(fx*CELL,fy*CELL,7,0,6.3); cx.stroke();
+    });
+  }
+  $('hud').innerHTML=`${scene.label}<br>t ${t.toFixed(2)}s · ${S.names.length} parts · `+
+    `${figs.length} bodies · ${Object.keys(bindings).length} bound`;
+  paintParts(S);
+  paintBind(S);
+}
+
+/* ---- the periodic table -------------------------------------------------- */
+function paintParts(S){
+  const rows=[...S.cells].sort((a,b)=>b[1]-a[1]);
+  $('pcount').textContent=`${rows.length} here / ${PARTS.length} known`;
+  $('parts').innerHTML=rows.map(([nm,n])=>{
+    const meta=PARTS.find(p=>p.part===nm)||{};
+    const cls=bindings[nm]?'el sel':(meta.swap?'el swap':(meta.keep?'el keep':'el'));
+    return `<div class="${cls}" data-part="${nm}">`+
+      `<b>${nm}</b><i>${n}</i><i>${meta.swap?'→':''}</i></div>`;
+  }).join('');
+  document.querySelectorAll('#parts .el').forEach(d=>d.onclick=()=>{
+    selPart=d.dataset.part;
+    const meta=PARTS.find(p=>p.part===selPart);
+    if(meta?.swap && byNoun[meta.swap]) selNoun=meta.swap;
+    paintNouns(); paintCards(); draw();
+  });
+}
+
+/* ---- the archive --------------------------------------------------------- */
+function paintNouns(){
+  $('lcount').textContent=`${ELEMENTS.length}`;
+  $('nouns').innerHTML=NOUNS.map(nrm=>
+    `<span class="chip ${nrm===selNoun?'on':''}" data-n="${nrm}">${nrm} ${byNoun[nrm].length}</span>`
+  ).join('');
+  document.querySelectorAll('#nouns .chip').forEach(c=>c.onclick=()=>{
+    selNoun=c.dataset.n; paintNouns(); paintCards();});
+}
+function paintCards(){
+  const list=(byNoun[selNoun]||[]).slice(0,160);
+  $('cards').innerHTML=list.map(e=>
+    `<div class="card ${selEl===e.id?'sel':''}" data-id="${e.id}" `+
+    `title="${e.id}\naspect ${e.a}  fill ${e.f}  range ${e.t}">`+
+    `<img src="../thumbs/${e.id}.webp" loading=lazy><em>${e.patch}</em></div>`).join('');
+  document.querySelectorAll('#cards .card').forEach(c=>c.onclick=()=>{
+    selEl=c.dataset.id;
+    if(selPart){ bindings[selPart]=selEl; }
+    paintCards(); draw();
+  });
+}
+
+/* ---- bindings ------------------------------------------------------------ */
+function paintBind(S){
+  const ks=Object.keys(bindings);
+  $('bcount').textContent=ks.length;
+  $('btable').innerHTML='<table><tr><th>part</th><th>element</th><th>noun</th>'+
+    '<th>fit</th><th></th></tr>'+ks.map(k=>{
+    const e=ELEMENTS.find(x=>x.id===bindings[k]);
+    const here=S.names.includes(k);
+    return `<tr class="${here?'hit':''}"><td>${k}</td><td>${bindings[k]}</td>`+
+      `<td>${e?e.p:'?'}</td><td>${e?e.a.toFixed(2):''}</td>`+
+      `<td><span class=chip data-un="${k}">drop</span></td></tr>`;
+  }).join('')+'</table>';
+  document.querySelectorAll('#btable .chip').forEach(c=>c.onclick=()=>{
+    delete bindings[c.dataset.un]; draw();});
+}
+
+/* AUTO-BIND: the dictionary, plus a greedy shape fit for the noun it names */
+function autobind(){
+  const S=scan();
+  for(const nm of S.names){
+    const meta=PARTS.find(p=>p.part===nm);
+    if(!meta?.swap||!byNoun[meta.swap])continue;
+    const sl=slots(S.owner,S.names.indexOf(nm)+1);
+    if(!sl.length)continue;
+    const a=sl.reduce((s,x)=>s+x.w/x.h,0)/sl.length;
+    const fill=sl.reduce((s,x)=>s+x.n/(x.w*x.h),0)/sl.length;
+    let best=null,bc=1e9;
+    for(const e of byNoun[meta.swap]){
+      const c=1.7*Math.abs(Math.log(Math.max(1e-3,e.a))-Math.log(Math.max(1e-3,a)))
+             +1.0*Math.abs(e.f-fill);
+      if(c<bc){bc=c;best=e;}
+    }
+    if(best)bindings[nm]=best.id;
+  }
+  for(const m of ['stand','walk','sit','fall']){
+    const pool=byNoun[m==='fall'?'a person in mid-air':'a person']||[];
+    const want={stand:.38,walk:.52,sit:.80,fall:.85}[m];
+    let best=null,bc=1e9;
+    for(const e of pool){ if(e.c>0.55)continue;
+      const c=Math.abs(Math.log(Math.max(1e-3,e.a))-Math.log(want)); if(c<bc){bc=c;best=e;} }
+    if(best)bindings[`__body_${m}`]=best.id;
+  }
+  draw();
+}
+
+/* ---- puppeteering -------------------------------------------------------- */
+cv.addEventListener('pointerdown',ev=>{
+  const r=cv.getBoundingClientRect();
+  const mx=(ev.clientX-r.left)*cv.width/r.width/CELL;
+  const my=(ev.clientY-r.top)*cv.height/r.height/CELL;
+  const figs=(scene?.cast||[]).filter(c=>c.kind==='figure');
+  let best=null,bd=9;
+  figs.forEach((f,k)=>{
+    const key=`fig${k}`;
+    const fx=puppet[key]?.x??f.foot[0], fy=puppet[key]?.y??f.foot[1];
+    const d=Math.hypot(fx-mx,fy-my); if(d<bd){bd=d;best=key;}
+  });
+  if(best){drag=best; cv.setPointerCapture(ev.pointerId); draw();}
+});
+cv.addEventListener('pointermove',ev=>{
+  if(!drag)return;
+  const r=cv.getBoundingClientRect();
+  puppet[drag]={x:(ev.clientX-r.left)*cv.width/r.width/CELL,
+                y:(ev.clientY-r.top)*cv.height/r.height/CELL};
+  draw();
+});
+cv.addEventListener('pointerup',()=>{drag=null;draw();});
+
+/* ---- chrome -------------------------------------------------------------- */
+$('world').innerHTML=WORLDS.map(w=>`<option>${w}</option>`).join('');
+$('world').onchange=e=>loadWorld(e.target.value);
+$('time').oninput=e=>{ if(rt){t=rt.total*e.target.value/1000; draw();} };
+$('play').onclick=e=>{playing=!playing;e.target.classList.toggle('on',playing);tick();};
+for(const b of ['mode','showdraw','showskin','showbody'])
+  $(b).onclick=e=>{e.target.classList.toggle('on');draw();};
+$('auto').onclick=autobind;
+$('clear').onclick=()=>{bindings={};draw();};
+let last=0;
+function tick(ts){
+  if(!playing)return;
+  if(ts-last>70){ last=ts; t=(t+0.08)%rt.total; $('time').value=1000*t/rt.total; draw(); }
+  requestAnimationFrame(tick);
+}
+paintNouns(); paintCards();
+await loadWorld(WORLDS.find(w=>w.startsWith('06'))||WORLDS[0]);
+</script></body></html>

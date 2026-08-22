@@ -1,0 +1,96 @@
+<!doctype html><html lang=en><head>
+<meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>TEXTULE</title><style>
+:root{--paper:#f2efe6;--ink:#161513;--scar:#f0a822;--dim:#8b8175;--rule:#cfc8ba}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+body{background:var(--paper);color:var(--ink);padding:5vh 5vw 14vh;
+ font:13px/1.68 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
+.w{max-width:1180px;margin:0 auto}
+h1{font-size:13px;letter-spacing:.36em;font-weight:700;border-bottom:3px solid var(--ink);
+ padding-bottom:12px;margin-bottom:8px}
+h2{font-size:11px;letter-spacing:.22em;color:var(--dim);margin:44px 0 10px;
+ border-bottom:1px solid var(--rule);padding-bottom:6px}
+p{max-width:78ch;margin:13px 0} b{font-weight:700} i{color:var(--dim);font-style:normal}
+em{font-style:normal;color:var(--scar);font-weight:700}
+blockquote{border-left:4px solid var(--ink);padding-left:18px;margin:20px 0;
+ max-width:74ch;color:#3a3a38;font-style:italic}
+code{background:#e9e4d8;padding:1px 6px}
+table{border-collapse:collapse;font-size:12px;margin:14px 0}
+td,th{border:1px solid var(--rule);padding:5px 13px;text-align:right}
+th{background:#e9e4d8;text-align:left}
+#g{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px}
+figure{margin:0} video{width:100%;display:block;border:2px solid var(--ink);background:var(--paper)}
+figcaption{margin-top:6px;color:var(--dim)}
+ul{margin:10px 0 0 20px} li{margin:6px 0;max-width:76ch}
+a{color:#3f7fc4}
+</style></head><body><div class=w>
+<h1>TEXTULE</h1>
+<p style="color:var(--dim);margin-top:0">textura + module. Not a tubelet &mdash; a tubelet is an
+object moving through time. This is a knot in a fabric that can be unpicked from the side.</p>
+
+<blockquote>Do not bind photographs to temporary dots. Bind them to a persistent surface
+underneath the marks. Motion is the carrier. Collage is the skin. BEFLIX is the
+scaffold, aperture, mortar and fallback.</blockquote>
+
+<h2>WHY EVERY EARLIER ATTEMPT FAILED</h2>
+<p>Every compositor built before this bound imagery to <b>raster</b>. A slot's cells, a
+pane's cells. Cells are frame-local: at <i>t</i> and <i>t+1</i> a walking body occupies a
+different set of them, so every binding was destroyed by motion. That was hidden by
+rendering stills, or by re-fitting each frame &mdash; which is the same as having no binding.</p>
+<p>But the dots are <b>emitted by a rig</b>. <code>solve(h, pose, stocky, guise)</code> returns
+thirteen named joints, and <code>drawFigure</code> maps them into the field with one documented
+transform. <b>That rig is the same object at every t.</b> The persistent surface was already
+there; nothing needed to be invented, only exposed.</p>
+
+<h2>STEP 0 &mdash; the test that decided the theory</h2>
+<p>A coordinate <code>(bone, u, v)</code> must name the same place on the body at every pose.
+Measured, not assumed: 90 fixed body-space samples across full cycles.</p>
+<table><tr><th>pose</th><th>coverage</th><th>persistence</th><th>worst step</th></tr>
+<tr><th>stand</th><td>98.5%</td><td>98.1%</td><td>0.06 cells</td></tr>
+<tr><th>walk</th><td>98.0%</td><td>98.0%</td><td>1.94</td></tr>
+<tr><th>sit</th><td>98.4%</td><td>99.9%</td><td>0.06</td></tr>
+<tr><th>fall</th><td>98.6%</td><td>99.2%</td><td>0.06</td></tr></table>
+<p><b>Invariant I2 holds.</b> One real limit found: at <b>h=20 coverage falls to 78.7%</b>,
+because <code>drawFigure</code> hands off to <code>drawSmall()</code> below h=22 &mdash; a different
+path that does not use the rig. <b>Textule can only skin figures at h &ge; 22.</b></p>
+
+<h2>ONE COLLAGE, EVERY POSE</h2>
+<p>Five sockets &mdash; head, torso, armA, armB, legs &mdash; each holding one SAM cutout, bound once
+in body space and never rebound. The same five fragments across a walk, a stand, a sit and
+a fall. The trousers swing because they were never on the legs' pixels; they were on the legs.</p>
+<div id=g>
+<figure><video src="walk_big.mp4" controls loop muted playsinline></video>
+<figcaption>walk &middot; coverage 61.2%</figcaption></figure>
+<figure><video src="stand.mp4" controls loop muted playsinline></video>
+<figcaption>stand &middot; 54.6%</figcaption></figure>
+<figure><video src="sit.mp4" controls loop muted playsinline></video>
+<figcaption>sit &middot; 59.7%</figcaption></figure>
+<figure><video src="fall.mp4" controls loop muted playsinline></video>
+<figcaption>fall &middot; 54.3%</figcaption></figure>
+</div>
+
+<h2>THE MORTAR AND <em>THE SCAR</em></h2>
+<p>Coverage is never assumed. Every frame, every cell the figure occupies is asked for its
+body coordinate; where the skin has a hole or the coordinate falls outside a socket, the
+cell becomes <b>mortar</b> &mdash; a BEFLIX mark. Roughly 40% of every figure is mortar, and that
+is not a defect being tolerated. It is the seam being reported.</p>
+<p>And a mortar cell touching a painted one is a <em>seam</em>, which is the only site of colour
+in the system. Amber, on an otherwise achromatic field. <b>Colour is a report of damage
+rather than decoration</b> &mdash; the repair finished in gold, the break made the most valuable
+surface. Look at any frame: the figure is outlined in the history of its own failure to
+be covered.</p>
+
+<h2>WHAT THE CODE DOES NOT CAPTURE</h2>
+<ul>
+<li><b>Why binding to dots is forbidden</b> becomes invisible once the system works, precisely
+because it works. The prohibition is written where someone would break it.</li>
+<li><b>The gusset.</b> Time as a dressmaker who only does alterations &mdash; take in a seam, let
+out a dart, add a gusset. No code here contains the answer to what a gusset in time is;
+there is only a place where that operation would go.</li>
+<li><b>Coverage is a diagnostic, never a goal.</b> A maintainer optimising for it will make the
+seams disappear and destroy the work. <i>What holds me together is what marks my dispersal.</i></li>
+</ul>
+<p style="margin-top:40px"><a href="../studio/compose.html">the composer</a> &middot;
+<a href="../studio/glass.html">stained glass</a> &middot;
+<a href="../../../../index.html">the halfworld</a></p>
+</div></body></html>

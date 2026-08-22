@@ -68,10 +68,41 @@ h3 span{float:right;color:#ddd}
  pointer-events:none;white-space:pre}
 #help{position:absolute;right:10px;bottom:8px;color:#4a4a4a;font-size:9px;
  pointer-events:none;text-align:right;line-height:1.6}
+
+/* ══ A PHONE ══════════════════════════════════════════════════════════════
+   The three columns are 250 + 1fr + 292. On a 375px screen that puts the
+   stage — the entire point of the tool — off the right edge, so PASTE was
+   not "cramped" on mobile, it was unusable. One column, and the two panels
+   become sheets you pull up over the stage instead of strips beside it.
+   `fit()` already CSS-scales the canvas to whatever the stage is, and every
+   pointer number already converts through it, so nothing else has to change. */
+@media (max-width:900px){
+  body{grid-template-columns:1fr;grid-template-rows:auto 1fr;
+       grid-template-areas:"top" "stage"}
+  #left,#lib{position:fixed;left:0;right:0;bottom:0;top:auto;
+             max-height:66vh;z-index:30;border:0;border-top:1px solid #444;
+             box-shadow:0 -18px 40px rgba(0,0,0,.6);
+             transform:translateY(101%);transition:transform .18s ease;
+             padding-bottom:env(safe-area-inset-bottom)}
+  #left.open,#lib.open{transform:none}
+  #top{padding:4px 8px;gap:5px}
+  .mob{display:inline-block!important}
+  /* a finger cannot hit a 2px-padded button */
+  button,select,input{min-height:38px;padding:5px 10px}
+  #top button,#top select,#top input{min-height:34px}
+  .card{width:78px;margin:0 5px 6px 0}
+  .card img{height:58px}
+  .chip{padding:5px 8px;margin:0 4px 4px 0}
+  .lay{grid-template-columns:18px 1fr 34px 38px;padding:8px 7px}
+  .row{grid-template-columns:40px 1fr 46px}
+  input[type=range]{height:30px}
+  #help{display:none}
+}
+.mob{display:none}
 </style></head><body>
 
 <div id=top>
- <b>PASTE</b>
+ <b>PASTE</b><button id=tlib class=mob>ARCHIVE</button><button id=tlay class=mob>LAYERS</button>
  <span id=mode class=none>—</span>
  <button id=bprev title="previous blend mode (Shift-B)">&lt;</button>
  <button id=bnext title="next blend mode (B)">&gt;</button>
@@ -169,7 +200,10 @@ let lastPt={x:640,y:400};     /* ⌘V has no coordinates, so paste lands under t
    across layers that share a source. */
 const SRC=new Map();
 const keyOf=s=>s.k+':'+(s.k==='url'?s.u:s.id);
-const urlOf=s=>s.k==='el'?`../elements/${s.id}.png`:s.k==='data'?BLOBS.get(s.id):s.u;
+/* the shipped archive is ../thumbs: cropped to content, long edge 256, WebP.
+   1209MB of full-frame PNGs became 3MB, which is the difference between a tool
+   that runs on one machine and a tool anyone can open. */
+const urlOf=s=>s.k==='el'?`../thumbs/${s.id}.webp`:s.k==='data'?BLOBS.get(s.id):s.u;
 
 function getSrc(s){
   const k=keyOf(s); let e=SRC.get(k); if(e) return e;
@@ -603,7 +637,7 @@ $('stage').addEventListener('drop',ev=>{
 /* ---------------------------------------------------------------- archive --- */
 let ELEMENTS=[], byNoun={}, NOUNS=[], selNoun='', q='';
 try{
-  ELEMENTS=await (await fetch('../studio/elements.json')).json();
+  ELEMENTS=await (await fetch('../thumbs/index.json')).json();
   for(const e of ELEMENTS)(byNoun[e.p]||=[]).push(e);
   NOUNS=Object.keys(byNoun).sort((a,b)=>byNoun[b].length-byNoun[a].length);
   selNoun=NOUNS[0];
@@ -622,7 +656,7 @@ function paintCards(){
               :(byNoun[selNoun]||[]);
   $('cards').innerHTML=base.slice(0,160).map(e=>
     `<div class=card draggable=true data-id="${e.id}" title="${e.id}">`+
-    `<img src="../elements/${e.id}.png" loading=lazy><em>${e.patch}</em></div>`).join('');
+    `<img src="../thumbs/${e.id}.webp" loading=lazy><em>${e.patch}</em></div>`).join('');
   for(const c of document.querySelectorAll('.card')){
     c.ondragstart=ev=>{ ev.dataTransfer.setData('application/x-element',c.dataset.id);
       ev.dataTransfer.setData('text/plain',c.dataset.id);
@@ -632,6 +666,32 @@ function paintCards(){
   }
 }
 $('q').oninput=e=>{q=e.target.value.trim();paintCards();};
+
+/* ── the sheets ──────────────────────────────────────────────────────────── */
+const TOUCH=matchMedia('(pointer:coarse)').matches;
+function sheet(which){
+  const a=$('left'), b=$('lib');
+  const want=which==='left'?a:b, other=which==='left'?b:a;
+  other.classList.remove('open');
+  want.classList.toggle('open');
+  $('tlay').classList.toggle('on', a.classList.contains('open'));
+  $('tlib').classList.toggle('on', b.classList.contains('open'));
+  /* the stage did not change size, but the canvas may have been laid out while
+     a sheet was covering it */
+  requestAnimationFrame(()=>{fit();render();});
+}
+$('tlay').onclick=()=>sheet('left');
+$('tlib').onclick=()=>sheet('lib');
+/* dropping onto the stage is a mouse gesture; a finger has no drag-and-drop, so
+   a tap places the element at the centre and closes the sheet behind it */
+addEventListener('click',ev=>{
+  const c=ev.target.closest && ev.target.closest('.card');
+  if(!c||!TOUCH) return;
+  const e=ELEMENTS.find(x=>x.id===c.dataset.id); if(!e) return;
+  add({k:'el',id:e.id},`${e.p} ${e.patch}`,{x:CV.width/2,y:CV.height/2});
+  $('lib').classList.remove('open'); $('tlib').classList.remove('on');
+  hud('placed '+e.id+' — drag it, or open LAYERS for depth and blend');
+});
 
 /* ------------------------------------------------------------------ chrome --- */
 $('imode').innerHTML=MODES.map(m=>`<option value="${m}">${MODENAME(m)}</option>`).join('');

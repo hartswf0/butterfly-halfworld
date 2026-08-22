@@ -1,0 +1,50 @@
+<!doctype html><html lang=en><head>
+<meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>THE LOOM</title><style>
+:root{--paper:#f2efe6;--ink:#161513;--acc:#5aa7ff;--dim:#8b8175;--rule:#cfc8ba}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+body{background:var(--paper);color:var(--ink);padding:5vh 4vw 12vh;
+ font:12px/1.62 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
+.w{max-width:1340px;margin:0 auto}
+h1{font-size:13px;letter-spacing:.34em;font-weight:700;border-bottom:3px solid var(--ink);
+ padding-bottom:12px;margin-bottom:18px}
+h2{font-size:11px;letter-spacing:.22em;color:var(--dim);margin:40px 0 10px;
+ border-bottom:1px solid var(--rule);padding-bottom:6px}
+p{max-width:80ch;margin:12px 0} b{font-weight:700} i{color:var(--dim);font-style:normal}
+#g{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:22px}
+figure{margin:0} video{width:100%;display:block;border:2px solid var(--ink);background:var(--paper)}
+figcaption{margin-top:7px;color:var(--dim);line-height:1.55}
+figcaption b{color:var(--ink);letter-spacing:.12em}
+ul{margin:10px 0 0 18px} li{margin:5px 0;max-width:78ch}
+a{color:var(--acc)}
+</style></head><body><div class=w>
+<h1>THE LOOM &mdash; a weave that moves</h1>
+<p>Run beflix-E once a frame and the obvious thing happens: every cell re-picks its
+element and the picture boils. It reads as noise, because nothing on screen lasts
+long enough to be a thing.</p>
+<p>So the elements are <b>agents</b>. Each one is a specific cut-out &mdash; this person,
+that window &mdash; and it keeps that identity for the whole film. What changes is where
+it stands. Every frame the ink field is recomputed and each agent seeks a cell that
+wants ink, preferring the one it already holds. When the picture changes they do not
+blink out and reappear. <b>They migrate.</b></p>
+<ul>
+<li><b>Hysteresis</b> &mdash; an agent keeps its cell while that cell still wants ink, so a
+standing figure stays standing instead of flickering.</li>
+<li><b>Assignment</b> &mdash; the homeless claim the nearest unclaimed hungry cell, so the
+crowd flows rather than teleports.</li>
+<li><b>Damping</b> &mdash; positions ease toward their target. That is what makes it motion
+and not a cut.</li>
+<li><b>A reserve</b> &mdash; an agent with nowhere to go drifts and waits at the margin
+rather than dying. Without it the crowd fell from 929 to 333 over two hundred
+frames, which is a population collapse dressed up as an effect.</li>
+</ul>
+<h2>THE MORPH IS WHAT PERSISTENCE IS FOR</h2>
+<p>Given two sources the field crossfades while <i>the agents do not change</i>. The
+same fourteen hundred cut-outs that built a city walk into the shape of a face.
+That is a claim about the archive, not an effect: the same material makes both
+pictures, and you can watch it change its mind.</p>
+<div id=g><figure><video src='shot_P031_into_11.mp4' controls loop muted playsinline></video><figcaption><b>A ROOM BECOMES A HALFWORLD</b><br>The inverse: a photograph reorganising into a drawn world, out of the same crowd.</figcaption></figure><figure><video src='shot_P133.mp4' controls loop muted playsinline></video><figcaption><b>THREE GENERATIONS, WOVEN</b><br>A photograph held still while the weave settles into it - the loom finding a face.</figcaption></figure><figure><video src='world_06.mp4' controls loop muted playsinline></video><figcaption><b>THE CITY WEAVES ITSELF</b><br>Poem 06's halfworld, woven live. Every mark is a cut-out from the archive, sized by how much ink its cell wants and turned to run with the grain.</figcaption></figure><figure><video src='world_06_into_P133.mp4' controls loop muted playsinline></video><figcaption><b>THE CITY BECOMES THREE FACES</b><br>The morph. One population of 1,400 elements, two pictures. The field crossfades and the agents do not change - the same cut-outs that built a city walk into the shape of a face. Nothing dissolves; everybody moves.</figcaption></figure></div>
+<p style="margin-top:36px"><a href="../sheets/index.html">the woven sheets</a> &middot;
+<a href="../collage/index.html">the collages</a> &middot;
+<a href="../../../../index.html">the halfworld</a></p>
+</div></body></html>

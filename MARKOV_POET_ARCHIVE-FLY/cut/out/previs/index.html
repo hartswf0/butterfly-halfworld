@@ -1,0 +1,58 @@
+<!doctype html><html lang=en><head>
+<meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>PREVIS</title><style>
+:root{--paper:#f2efe6;--ink:#161513;--acc:#5aa7ff;--dim:#8b8175;--rule:#cfc8ba}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+body{background:var(--paper);color:var(--ink);padding:5vh 4vw 12vh;
+ font:12px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
+.w{max-width:1400px;margin:0 auto}
+h1{font-size:13px;letter-spacing:.34em;font-weight:700;border-bottom:3px solid var(--ink);
+ padding-bottom:12px;margin-bottom:18px}
+h2{font-size:11px;letter-spacing:.22em;color:var(--dim);margin:40px 0 10px;
+ border-bottom:1px solid var(--rule);padding-bottom:6px}
+p{max-width:80ch;margin:12px 0} b{font-weight:700} i{color:var(--dim);font-style:normal}
+code{background:#e9e4d8;padding:1px 6px}
+ul{margin:10px 0 0 20px} li{margin:6px 0;max-width:78ch}
+#g{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:22px}
+figure{margin:0}
+video{width:100%;display:block;border:2px solid var(--ink);background:var(--paper)}
+figcaption{margin-top:6px;color:var(--dim)}
+a{color:var(--acc)}
+</style></head><body><div class=w>
+<h1>PREVIS &mdash; the halfworld blocks it, the archive fills it</h1>
+<p>The eighty movements are already staged: THE FALL, HARBOR STREETS, WALKING ON
+WATER, COLUMNS AND BEARS. Somebody blocked those. And for every body in every frame
+the runtime hands over exactly what a previs engine needs:</p>
+<p><code>{ guise, mode, face, foot: [x, y], height }</code></p>
+<p><b>foot</b> is where the body stands in the 192&times;144 field, <b>height</b> is how
+tall it is there, <b>face</b> is which way it looks. That is a camera-space transform,
+given away free, for a figure that is already walking. So the drawn body does not
+have to be kept &mdash; it can be <b>replaced, at its own position, at its own scale,
+facing its own way</b>, by a photographed person cut out of the film.</p>
+<ul>
+<li><b>the halfworld</b> &rarr; blocking, timing, staging, camera</li>
+<li><b>the archive</b> &rarr; the actual bodies, windows, water, buildings</li>
+<li><b>beflix</b> &rarr; the one surface that lets those two share a frame</li>
+</ul>
+<h2>COLOUR COMES BACK, AND IT IS MEASURED</h2>
+<p>Every version before this was cream, ink and one accent &mdash; the suite's law, and
+the reason fourteen films look like one film. For previs that is wrong: a board has
+to be <b>memorable</b>. So each poem's key is taken by k-means from its own footage.</p>
+<p>The first attempt returned lavender and slate for every single poem, because
+ranking clusters by SIZE always finds the grey: in tone-mapped night footage the
+biggest cluster is the dark. Ranked by <b>saturation &times; size</b> instead &mdash; the colour
+that is most itself, weighted by how much of the film it covers &mdash; the fourteen
+separate immediately: MORE HAZE at teal, THE GHOST WAS SEVEN at orange, TWO SETS OF
+FOOTSTEPS at crimson, I CHOOSE THE DOOR at red.</p>
+<h2>IDENTITY IS STABLE</h2>
+<p>A body keeps the same photographed person for as long as it exists, keyed on its
+footing and guise, so nobody flickers between takes mid-stride. Figures are drawn
+back to front by depth, so a nearer body occludes a further one. And the set is
+built from nouns chosen by the MOVEMENT's own name &mdash; a movement called HARBOR
+STREETS is assembled from water, buildings and sky; one called BLINDS UP from
+windows, walls and a bed.</p>
+<figure><video src='01_01-out-of-life.mp4' controls loop muted playsinline></video><figcaption>01 &middot; OUT OF LIFE</figcaption></figure><figure><video src='02_02-flashing-lights.mp4' controls loop muted playsinline></video><figcaption>02 &middot; FLASHING LIGHTS</figcaption></figure><figure><video src='03_03-how-to-break-off-an-engagement.mp4' controls loop muted playsinline></video><figcaption>03 &middot; HOW TO BREAK OFF AN ENGAGEMENT</figcaption></figure><figure><video src='04_04-nevermore.mp4' controls loop muted playsinline></video><figcaption>04 &middot; NEVERMORE</figcaption></figure><figure><video src='05_05-bloodlines.mp4' controls loop muted playsinline></video><figcaption>05 &middot; BLOODLINES</figcaption></figure><figure><video src='06_06-resurrecting-atlantis.mp4' controls loop muted playsinline></video><figcaption>06 &middot; RESURRECTING ATLANTIS</figcaption></figure><figure><video src='07_07-dj-turn-me-up.mp4' controls loop muted playsinline></video><figcaption>07 &middot; DJ TURN ME UP</figcaption></figure><figure><video src='08_08-newly-single.mp4' controls loop muted playsinline></video><figcaption>08 &middot; NEWLY SINGLE</figcaption></figure><figure><video src='09_09-yet-heard.mp4' controls loop muted playsinline></video><figcaption>09 &middot; YET, HEARD</figcaption></figure><figure><video src='10_10-magic-ride.mp4' controls loop muted playsinline></video><figcaption>10 &middot; MAGIC RIDE</figcaption></figure><figure><video src='11_11-new-day.mp4' controls loop muted playsinline></video><figcaption>11 &middot; NEW DAY</figcaption></figure><figure><video src='12_12-reunion.mp4' controls loop muted playsinline></video><figcaption>12 &middot; REUNION</figcaption></figure><figure><video src='13_13-how-to-win-my-heart.mp4' controls loop muted playsinline></video><figcaption>13 &middot; HOW TO WIN MY HEART</figcaption></figure><figure><video src='14_14-hot-minute.mp4' controls loop muted playsinline></video><figcaption>14 &middot; HOT MINUTE</figcaption></figure>
+<p style="margin-top:36px"><a href="../inhabit/index.html">the drawn bodies version</a> &middot;
+<a href="../scene/index.html">the sets</a> &middot;
+<a href="../../../../index.html">the halfworld</a></p>
+</div></body></html>

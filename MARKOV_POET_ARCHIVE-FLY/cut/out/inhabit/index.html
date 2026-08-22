@@ -1,0 +1,56 @@
+<!doctype html><html lang=en><head>
+<meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>INHABIT</title><style>
+:root{--paper:#f2efe6;--ink:#161513;--acc:#5aa7ff;--dim:#8b8175;--rule:#cfc8ba}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+body{background:var(--paper);color:var(--ink);padding:5vh 4vw 12vh;
+ font:12px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
+.w{max-width:1400px;margin:0 auto}
+h1{font-size:13px;letter-spacing:.34em;font-weight:700;border-bottom:3px solid var(--ink);
+ padding-bottom:12px;margin-bottom:18px}
+h2{font-size:11px;letter-spacing:.22em;color:var(--dim);margin:40px 0 10px;
+ border-bottom:1px solid var(--rule);padding-bottom:6px}
+p{max-width:80ch;margin:12px 0} b{font-weight:700} i{color:var(--dim);font-style:normal}
+ol{margin:12px 0 0 22px} li{margin:6px 0;max-width:78ch}
+#g{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:22px}
+figure{margin:0}
+video{width:100%;display:block;border:2px solid var(--ink);background:var(--paper)}
+figcaption{margin-top:6px;color:var(--dim)}
+a{color:var(--acc)}
+</style></head><body><div class=w>
+<h1>INHABIT &mdash; the suite's own people, in a world we built for them</h1>
+<p>The fourteen halfworlds are not backgrounds. They are worlds with drawn people
+in them who already walk, stand, turn and fall. And the runtime knows exactly where
+those people are: <code>renderScene(t, ids)</code> returns the ink field, a parallel
+field saying which draw call owns each cell, and a <b>cast</b> in which every figure
+has deposited its guise, pose, facing, height and foot position.</p>
+<p><b>So the character mask is not segmented. It is read.</b> Nothing here is inferred
+from pixels. We are not guessing where the body is &mdash; we are the ones who put it
+there. In poem 06 that is 334 of 360 frames carrying figures: 2,511 <i>everyman</i>
+and 55 <i>poet</i>, walking and standing, across five named movements.</p>
+<h2>WHAT EACH FRAME DOES</h2>
+<ol>
+<li>take the halfworld's ink field and its figure mask</li>
+<li><b>throw the background away</b></li>
+<li>put in its place a field built from the archive &mdash; sky, skyline, facade, stair,
+water &mdash; quantised by the same dot law, so it is the same material</li>
+<li>put the characters back on top, in their own ink, untouched</li>
+<li>light it, in the accent, after the ink &mdash; and a character is never the accent</li>
+</ol>
+<p>The characters keep their animation because it was never touched. What changes is
+the world they walk through: a set assembled out of 2,033 photographed elements and
+then drawn, so that a figure computed by arithmetic and a window cut out of a film
+are, at the moment they meet, the same two inks on the same page.</p>
+<h2>TWO THINGS THAT HAD TO BE FOUND</h2>
+<p><b>The set has to carry weight or it is fog.</b> Mapped linearly the field's pedestal
+left most inked cells at level one and the city read as haze behind the walkers. A
+gamma below one lifts the middle so a wall is a wall while the paper stays empty.</p>
+<p><b>Where the people are.</b> Three of the fourteen came back empty &mdash; their bodies do
+not appear in the first sixteen seconds, because a title or a landscape runs first.
+Each world is now scanned at 2fps and the densest window of population is what gets
+rendered. NEW DAY's people arrive at 24s, HOT MINUTE's at 70s.</p>
+<div id=g><figure><video src='01_01-out-of-life.mp4' controls loop muted playsinline></video><figcaption>01 &middot; OUT OF LIFE</figcaption></figure><figure><video src='02_02-flashing-lights.mp4' controls loop muted playsinline></video><figcaption>02 &middot; FLASHING LIGHTS</figcaption></figure><figure><video src='03_03-how-to-break-off-an-engagement.mp4' controls loop muted playsinline></video><figcaption>03 &middot; HOW TO BREAK OFF AN ENGAGEMENT</figcaption></figure><figure><video src='04_04-nevermore.mp4' controls loop muted playsinline></video><figcaption>04 &middot; NEVERMORE</figcaption></figure><figure><video src='05_05-bloodlines.mp4' controls loop muted playsinline></video><figcaption>05 &middot; BLOODLINES</figcaption></figure><figure><video src='06_06-resurrecting-atlantis.mp4' controls loop muted playsinline></video><figcaption>06 &middot; RESURRECTING ATLANTIS</figcaption></figure><figure><video src='07_07-dj-turn-me-up.mp4' controls loop muted playsinline></video><figcaption>07 &middot; DJ TURN ME UP</figcaption></figure><figure><video src='08_08-newly-single.mp4' controls loop muted playsinline></video><figcaption>08 &middot; NEWLY SINGLE</figcaption></figure><figure><video src='09_09-yet-heard.mp4' controls loop muted playsinline></video><figcaption>09 &middot; YET, HEARD</figcaption></figure><figure><video src='10_10-magic-ride.mp4' controls loop muted playsinline></video><figcaption>10 &middot; MAGIC RIDE</figcaption></figure><figure><video src='11_11-new-day.mp4' controls loop muted playsinline></video><figcaption>11 &middot; NEW DAY</figcaption></figure><figure><video src='12_12-reunion.mp4' controls loop muted playsinline></video><figcaption>12 &middot; REUNION</figcaption></figure><figure><video src='13_13-how-to-win-my-heart.mp4' controls loop muted playsinline></video><figcaption>13 &middot; HOW TO WIN MY HEART</figcaption></figure><figure><video src='14_14-hot-minute.mp4' controls loop muted playsinline></video><figcaption>14 &middot; HOT MINUTE</figcaption></figure></div>
+<p style="margin-top:36px"><a href="../scene/index.html">the sets they walk in</a> &middot;
+<a href="../loom/index.html">the loom</a> &middot;
+<a href="../../../../index.html">the halfworld</a></p>
+</div></body></html>

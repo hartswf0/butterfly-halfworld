@@ -1,0 +1,510 @@
+<!doctype html><html lang=en><head>
+<meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>HALFWORLD COMPOSER</title>
+<style>
+:root{--paper:#f2efe6;--ink:#161513;--acc:#5aa7ff;--dim:#8b8175;--rule:#cfc8ba;--sel:#2f7fd6}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+html,body{height:100%;overflow:hidden}
+body{background:#1b1b1a;color:#e8e4da;
+ font:11px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em;
+ display:grid;grid-template-columns:236px 1fr 300px;grid-template-rows:32px 1fr;
+ grid-template-areas:"top top top" "layers stage lib"}
+#top{grid-area:top;background:#111;border-bottom:1px solid #333;display:flex;
+ align-items:center;gap:8px;padding:0 10px;overflow-x:auto;white-space:nowrap}
+#top b{letter-spacing:.28em;color:#fff;margin-right:6px}
+button,select,input{font:inherit;background:#222;color:#e8e4da;border:1px solid #444;
+ padding:2px 7px;cursor:pointer}
+button:hover{border-color:#888}
+button.on{background:var(--acc);color:#062;border-color:var(--acc);color:#04203f}
+input[type=text],input[type=number]{cursor:text;width:60px}
+#layers{grid-area:layers;background:#161616;border-right:1px solid #333;overflow:auto}
+#stage{grid-area:stage;background:#0d0d0d;overflow:hidden;position:relative;
+ display:flex;align-items:center;justify-content:center}
+#wrap{position:relative}
+canvas{display:block;box-shadow:0 0 0 1px #333}
+#lib{grid-area:lib;background:#161616;border-left:1px solid #333;overflow:auto;padding:8px}
+h3{font-size:9px;letter-spacing:.2em;color:#888;padding:7px 9px;border-bottom:1px solid #333;
+ position:sticky;top:0;background:#161616;z-index:2}
+h3 span{float:right;color:#ddd}
+.lay{display:grid;grid-template-columns:16px 1fr 18px 18px;gap:4px;align-items:center;
+ padding:4px 8px;border-bottom:1px solid #262626;cursor:pointer;font-size:10px}
+.lay:hover{background:#1f1f1f}
+.lay.sel{background:var(--sel);color:#fff}
+.lay em{font-style:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lay i{font-style:normal;text-align:center;color:#888}
+.lay.sel i{color:#dbe9ff}
+.chip{display:inline-block;border:1px solid #3a3a3a;padding:1px 5px;margin:0 3px 3px 0;
+ cursor:pointer;color:#999;font-size:10px}
+.chip.on{background:var(--acc);color:#04203f;border-color:var(--acc)}
+.card{display:inline-block;width:64px;margin:0 4px 5px 0;cursor:grab;border:1px solid #333;
+ background:repeating-conic-gradient(#242424 0 25%,#1c1c1c 0 50%) 0 0/9px 9px}
+.card:hover{border-color:var(--acc)}
+.card img{width:100%;height:48px;object-fit:contain;display:block;pointer-events:none}
+.card em{font-style:normal;font-size:8px;color:#777;display:block;padding:0 2px;
+ overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#insp{padding:6px 8px;border-top:1px solid #333;font-size:10px;background:#131313}
+#insp label{display:inline-block;width:34px;color:#888}
+#insp input{width:52px}
+#insp .row{margin-bottom:3px}
+.handle{position:absolute;width:9px;height:9px;background:var(--acc);border:1px solid #04203f}
+#box{position:absolute;border:1px solid var(--acc);pointer-events:none}
+#hud{position:absolute;left:8px;bottom:6px;color:#777;font-size:10px;pointer-events:none}
+
+/* ══ A NARROW WINDOW ═══════════════════════════════════════════════════════
+   Three fixed columns put the stage off the right edge of a phone, so the tool
+   was not cramped there, it was gone. This will never be a touch instrument —
+   it is built on drag, hover and a pointer — but it should at least be legible
+   and reachable on a small screen instead of invisible. The panels become
+   collapsible drawers stacked under the stage; open one at a time. */
+@media (max-width:820px){
+  body{grid-template-columns:1fr;grid-template-rows:auto minmax(38vh,1fr) auto;
+       grid-template-areas:"top" "stage" "drawers"}
+  #layers,#lib{grid-area:drawers;max-height:44vh;overflow:auto;border:0;border-top:1px solid #333}
+  #top{overflow-x:auto;white-space:nowrap;padding:4px 8px}
+  button,select,input{min-height:34px;padding:5px 9px}
+}
+</style></head><body>
+
+<div id=top>
+ <b>COMPOSER</b>
+ <select id=world></select>
+ <input type=number id=wtime value=45 step=1 style="width:54px">
+ <button id=addfield>+ WORLD INK</button>
+ <button id=addfigs>+ FIGURES</button>
+ <button id=addsky>+ SKY</button>
+ <span style="color:#444">|</span>
+ <input type=number id=arrn value=14 style="width:44px" title="count">
+ <input type=number id=arrp value=0.55 step=0.05 style="width:48px" title="depth / gap">
+ <button id=mrow>ROW</button><button id=mgrid>GRID</button>
+ <button id=mpath>PATH</button><button id=mscat>SCATTER</button>
+ <button id=matt>ATTACH</button><button id=mtime>TIME-GRID</button>
+ <span style="color:#444">|</span>
+ <button id=sbar>BAR</button><button id=srule>RULE</button><button id=sgrid>UNDERLAY</button>
+ <span style="color:#444">|</span>
+ <button id=solo>SOLO</button><button id=hide>HIDE</button>
+ <button id=dup>DUP</button><button id=del>DEL</button>
+ <button id=up>↑</button><button id=down>↓</button>
+ <span style="color:#444">|</span>
+ <button id=half>HALFTONE</button><input type=number id=htc value=6 step=1
+ style="width:38px" title="screen ruling: px per dot"><button id=glow>GLOW</button><button id=flip>FLIP</button>
+ <span style="color:#444">|</span>
+ <button id=save>SAVE</button><button id=load>LOAD</button><button id=png>PNG</button>
+</div>
+
+<div id=layers><h3>LAYERS <span id=lcount>0</span></h3><div id=llist></div>
+ <div id=insp></div></div>
+<div id=stage><div id=wrap><canvas id=cv width=1280 height=720></canvas>
+ <div id=box style="display:none"></div></div><div id=hud></div></div>
+<div id=lib><h3>ARCHIVE <span id=ecount></span></h3>
+ <input type=text id=q placeholder="search id / patch" style="width:100%;margin-bottom:6px">
+ <div id=nouns></div><div id=cards></div></div>
+
+<script type="module">
+const FW=192,FH=144,CELL=5;
+const $=id=>document.getElementById(id);
+const cv=$('cv'), cx=cv.getContext('2d');
+const ELEMENTS=await (await fetch('./elements.json')).json();
+const WORLDS=await (await fetch('./worlds.json')).json();
+const HW=await import('./halfworld.mjs'); HW.wantParts(false);
+const byNoun={}; for(const e of ELEMENTS)(byNoun[e.p]||=[]).push(e);
+const NOUNS=Object.keys(byNoun).sort((a,b)=>byNoun[b].length-byNoun[a].length);
+
+let L=[], sel=new Set(), selNoun=NOUNS[0], q='', soloOn=false, uid=1;
+const IMG=new Map();
+function img(src){ if(IMG.has(src))return IMG.get(src);
+  const i=new Image(); i.src=src; i.onload=render; IMG.set(src,i); return i; }
+
+/* ---------- halftone: the dot law, per layer ---------- */
+const HT=new Map();
+let HTCELL=6;   /* dots per this many pixels — the screen ruling */
+function halftone(im,w,h,key){
+  const k=key+'|'+w+'x'+h+'|'+HTCELL; if(HT.has(k))return HT.get(k);
+  /* THE SCREEN HAS TO BE COARSE ENOUGH TO SEE. At w/6 a small layer got four
+     dots across and read as a black blob; the reference boards screen at a
+     consistent ruling regardless of how big the element is on the page. */
+  const cw=Math.max(6,Math.round(w/HTCELL)), ch=Math.max(5,Math.round(h/HTCELL));
+  const s=document.createElement('canvas'); s.width=cw; s.height=ch;
+  const sc=s.getContext('2d'); sc.drawImage(im,0,0,cw,ch);
+  const d=sc.getImageData(0,0,cw,ch).data;
+  const o=document.createElement('canvas'); o.width=w; o.height=h;
+  const oc=o.getContext('2d'); const px=w/cw;
+  for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){
+    const i=(y*cw+x)*4, a=d[i+3]/255; if(a<0.35)continue;
+    const lum=(0.299*d[i]+0.587*d[i+1]+0.114*d[i+2])/255;
+    const lv=Math.min(7,Math.max(0,Math.round((1-lum)*7.6)));
+    if(lv<1)continue;
+    const r=px*0.5*Math.pow(lv/7,0.72)*1.24;
+    oc.fillStyle=`rgb(${d[i]},${d[i+1]},${d[i+2]})`;
+    oc.beginPath(); oc.arc((x+0.5)*px,(y+0.5)*(h/ch),Math.max(0.5,r),0,6.3); oc.fill();
+  }
+  if(HT.size>240)HT.clear();
+  HT.set(k,o); return o;
+}
+
+/* ---------- render ---------- */
+function render(){
+  cx.save(); cx.fillStyle='#c9d6df'; cx.fillRect(0,0,cv.width,cv.height); cx.restore();
+  const vis=L.filter(l=>l.on && (!soloOn || sel.has(l.id)));
+  for(const l of vis){
+    const src=l.kind==='el'?`../thumbs/${l.id2}.webp`:l.data;
+    const im=(l.kind==='raw')?l.bitmap:img(src);
+    if(!im||(im.naturalWidth===0&&!l.bitmap))continue;
+    cx.save(); cx.globalAlpha=l.a;
+    cx.translate(l.x+l.w/2,l.y+l.h/2); cx.rotate(l.r*Math.PI/180);
+    if(l.fx)cx.scale(-1,1);
+    if(l.glow){ cx.shadowColor='#3fa0ff'; cx.shadowBlur=34; }
+    const draw=l.ht?halftone(im,Math.max(4,Math.round(l.w)),Math.max(4,Math.round(l.h)),
+                             l.kind==='el'?l.id2:('r'+l.id)):im;
+    cx.drawImage(draw,-l.w/2,-l.h/2,l.w,l.h);
+    cx.restore();
+  }
+  drawBox();
+  $('hud').textContent=`${L.length} layers · ${sel.size} selected`+(soloOn?' · SOLO':'');
+  paintLayers();
+}
+function drawBox(){
+  const b=$('box'); const s=[...sel].map(id=>L.find(l=>l.id===id)).filter(Boolean);
+  document.querySelectorAll('.handle').forEach(h=>h.remove());
+  if(s.length!==1){b.style.display='none';return;}
+  const l=s[0], r=cv.getBoundingClientRect(), k=r.width/cv.width;
+  b.style.display='block'; b.style.left=l.x*k+'px'; b.style.top=l.y*k+'px';
+  b.style.width=l.w*k+'px'; b.style.height=l.h*k+'px';
+  for(const [hx,hy,name] of [[0,0,'nw'],[1,0,'ne'],[0,1,'sw'],[1,1,'se'],
+                             [.5,0,'n'],[.5,1,'s'],[0,.5,'w'],[1,.5,'e'],
+                             [.5,-0.12,'rot']]){
+    const d=document.createElement('div'); d.className='handle'; d.dataset.h=name;
+    d.style.left=(l.x+l.w*hx)*k-4.5+'px'; d.style.top=(l.y+l.h*hy)*k-4.5+'px';
+    $('wrap').appendChild(d);
+  }
+}
+
+/* ---------- layers ---------- */
+function add(kind,payload,box){
+  const l={id:uid++,kind,on:true,a:1,r:0,fx:false,ht:false,glow:false,
+           x:box?.x??cv.width*0.35,y:box?.y??cv.height*0.35,
+           w:box?.w??220,h:box?.h??160,...payload};
+  L.push(l); sel=new Set([l.id]); render(); return l;
+}
+function addElement(e,box){
+  const im=img(`../thumbs/${e.id}.webp`);
+  const put=()=>{ const ar=im.naturalWidth/im.naturalHeight||1.2;
+    const h=box?.h??200, w=box?.w??h*ar;
+    const l=L.find(x=>x.__pending===e.id);
+    if(l){l.w=w;l.h=h;delete l.__pending;render();} };
+  const l=add('el',{id2:e.id,name:`${e.p} ${e.patch}`,__pending:e.id},box);
+  if(im.complete&&im.naturalWidth)put(); else im.addEventListener('load',put,{once:true});
+  return l;
+}
+function paintLayers(){
+  $('lcount').textContent=L.length;
+  $('llist').innerHTML=[...L].reverse().map(l=>
+    `<div class="lay ${sel.has(l.id)?'sel':''}" data-id="${l.id}">`+
+    `<i>${l.on?'●':'○'}</i><em>${l.name||l.kind}</em>`+
+    `<i>${l.ht?'H':''}</i><i>${l.glow?'G':''}</i></div>`).join('');
+  document.querySelectorAll('.lay').forEach(d=>d.onclick=ev=>{
+    const id=+d.dataset.id;
+    if(ev.shiftKey)sel.has(id)?sel.delete(id):sel.add(id); else sel=new Set([id]);
+    render();});
+  const s=[...sel].map(id=>L.find(l=>l.id===id)).filter(Boolean);
+  $('insp').innerHTML = s.length!==1 ? '' :
+    `<div class=row><label>x</label><input id=ix value="${Math.round(s[0].x)}">
+      <label>y</label><input id=iy value="${Math.round(s[0].y)}"></div>
+     <div class=row><label>w</label><input id=iw value="${Math.round(s[0].w)}">
+      <label>h</label><input id=ih value="${Math.round(s[0].h)}"></div>
+     <div class=row><label>rot</label><input id=ir value="${s[0].r.toFixed(1)}">
+      <label>α</label><input id=ia value="${s[0].a.toFixed(2)}"></div>`;
+  for(const [k,f] of [['ix','x'],['iy','y'],['iw','w'],['ih','h'],['ir','r'],['ia','a']]){
+    const el=$(k); if(el)el.onchange=()=>{s[0][f]=+el.value;render();};
+  }
+}
+
+/* ---------- pointer: move, scale, marquee ---------- */
+let drag=null;
+$('wrap').addEventListener('pointerdown',ev=>{
+  const r=cv.getBoundingClientRect(), k=cv.width/r.width;
+  const mx=(ev.clientX-r.left)*k, my=(ev.clientY-r.top)*k;
+  if(ev.target.classList?.contains('handle')){
+    const l=L.find(x=>x.id===[...sel][0]);
+    drag=ev.target.dataset.h==='rot'
+      ? {mode:'rot',l,cx:l.x+l.w/2,cy:l.y+l.h/2,or:l.r}
+      : {mode:'scale',h:ev.target.dataset.h,l,mx,my,ox:l.x,oy:l.y,ow:l.w,oh:l.h};
+    $('wrap').setPointerCapture(ev.pointerId); return;
+  }
+  let hit=null;
+  for(let i=L.length-1;i>=0;i--){const l=L[i];
+    if(!l.on)continue;
+    if(mx>=l.x&&mx<=l.x+l.w&&my>=l.y&&my<=l.y+l.h){hit=l;break;}}
+  if(hit){ if(!ev.shiftKey&&!sel.has(hit.id))sel=new Set([hit.id]);
+    else if(ev.shiftKey)sel.add(hit.id);
+    drag={mode:'move',mx,my,start:[...sel].map(id=>{const l=L.find(x=>x.id===id);
+      return {l,x:l.x,y:l.y};})};
+    $('wrap').setPointerCapture(ev.pointerId);
+  } else { sel=new Set(); }
+  render();
+});
+$('wrap').addEventListener('pointermove',ev=>{
+  if(!drag)return;
+  const r=cv.getBoundingClientRect(), k=cv.width/r.width;
+  const mx=(ev.clientX-r.left)*k, my=(ev.clientY-r.top)*k;
+  if(drag.mode==='rot'){
+    drag.l.r=Math.atan2(my-drag.cy,mx-drag.cx)*180/Math.PI+90;
+    if(ev.shiftKey)drag.l.r=Math.round(drag.l.r/15)*15;
+  }
+  else if(drag.mode==='move'){ for(const s of drag.start){
+      s.l.x=s.x+(mx-drag.mx); s.l.y=s.y+(my-drag.my); } }
+  else{ const l=drag.l, dx=mx-drag.mx, dy=my-drag.my, h=drag.h;
+    if(h.includes('e'))l.w=Math.max(6,drag.ow+dx);
+    if(h.includes('s'))l.h=Math.max(6,drag.oh+dy);
+    if(h.includes('w')){l.w=Math.max(6,drag.ow-dx);l.x=drag.ox+dx;}
+    if(h.includes('n')){l.h=Math.max(6,drag.oh-dy);l.y=drag.oy+dy;}
+    if(ev.shiftKey){const ar=drag.ow/drag.oh; l.h=l.w/ar;}
+  }
+  render();
+});
+$('wrap').addEventListener('pointerup',()=>{drag=null;});
+
+/* ---------- library, drag & drop ---------- */
+function paintNouns(){
+  $('ecount').textContent=ELEMENTS.length;
+  $('nouns').innerHTML=NOUNS.map(n=>
+    `<span class="chip ${n===selNoun?'on':''}" data-n="${n}">${n} ${byNoun[n].length}</span>`).join('');
+  document.querySelectorAll('#nouns .chip').forEach(c=>c.onclick=()=>{
+    selNoun=c.dataset.n; paintNouns(); paintCards();});
+}
+function paintCards(){
+  const base=q?ELEMENTS.filter(e=>e.id.includes(q)||e.patch.includes(q.toUpperCase()))
+               :(byNoun[selNoun]||[]);
+  $('cards').innerHTML=base.slice(0,200).map(e=>
+    `<div class=card draggable=true data-id="${e.id}" title="${e.id}\naspect ${e.a} fill ${e.f}">`+
+    `<img src="../thumbs/${e.id}.webp" loading=lazy><em>${e.patch}</em></div>`).join('');
+  document.querySelectorAll('.card').forEach(c=>{
+    c.ondragstart=ev=>ev.dataTransfer.setData('text/plain',c.dataset.id);
+    c.ondblclick=()=>{const e=ELEMENTS.find(x=>x.id===c.dataset.id); addElement(e);};
+  });
+}
+$('wrap').addEventListener('dragover',ev=>ev.preventDefault());
+$('wrap').addEventListener('drop',ev=>{
+  ev.preventDefault();
+  const id=ev.dataTransfer.getData('text/plain'); if(!id)return;
+  const e=ELEMENTS.find(x=>x.id===id); if(!e)return;
+  const r=cv.getBoundingClientRect(), k=cv.width/r.width;
+  addElement(e,{x:(ev.clientX-r.left)*k-110,y:(ev.clientY-r.top)*k-100,h:200});
+});
+$('q').oninput=e=>{q=e.target.value.trim();paintCards();};
+
+/* ---------- the halfworld as source ---------- */
+let rt=null,curWorld=null;
+async function loadWorld(slug){ curWorld=slug;
+  rt=HW.makeRuntime((await import(`./worlds/${slug}.mjs`)).default); }
+function fieldCanvas(){
+  const ids=new Int32Array(FW*FH); const S=rt.renderScene(+$('wtime').value,ids);
+  const o=document.createElement('canvas'); o.width=FW*CELL; o.height=FH*CELL;
+  const oc=o.getContext('2d'); oc.fillStyle='rgba(0,0,0,0)'; oc.fillRect(0,0,o.width,o.height);
+  oc.fillStyle='#161513';
+  for(let y=0;y<FH;y++)for(let x=0;x<FW;x++){
+    const l=S.levels[y*FW+x]; if(!l)continue;
+    const r=l>7?CELL*0.44:CELL*0.5*Math.pow(l/7,0.72)*1.24;
+    oc.beginPath(); oc.arc((x+0.5)*CELL,(y+0.5)*CELL,Math.max(0.6,r),0,6.3); oc.fill();
+  }
+  return {canvas:o,scene:S};
+}
+$('addfield').onclick=()=>{ if(!rt)return;
+  const {canvas}=fieldCanvas();
+  add('raw',{bitmap:canvas,name:`ink ${curWorld} @${$('wtime').value}s`},
+      {x:0,y:0,w:cv.width,h:cv.width*FH/FW});
+};
+$('addfigs').onclick=()=>{ if(!rt)return;
+  const ids=new Int32Array(FW*FH); const S=rt.renderScene(+$('wtime').value,ids);
+  const figs=(S.cast||[]).filter(c=>c.kind==='figure');
+  const sc=cv.width/(FW*CELL);
+  for(const f of figs){
+    const o=document.createElement('canvas');
+    const hp=Math.max(6,Math.round(f.height*CELL)), wp=Math.max(4,Math.round(hp*0.55));
+    o.width=wp;o.height=hp; const oc=o.getContext('2d');
+    oc.fillStyle='#161513';
+    for(let y=0;y<FH;y++)for(let x=0;x<FW;x++){
+      if(ids[y*FW+x]!==f.tag)continue;
+      const l=S.levels[y*FW+x]; if(!l)continue;
+      oc.fillRect((x*CELL-(f.foot[0]*CELL-wp/2)),(y*CELL-(f.foot[1]*CELL-hp)),CELL,CELL);
+    }
+    add('raw',{bitmap:o,name:`${f.guise} ${f.mode}`},
+        {x:(f.foot[0]*CELL-wp/2)*sc,y:(f.foot[1]*CELL-hp)*sc,w:wp*sc,h:hp*sc});
+  }
+  render();
+};
+$('addsky').onclick=()=>{
+  const o=document.createElement('canvas'); o.width=8;o.height=256;
+  const oc=o.getContext('2d'); const g=oc.createLinearGradient(0,0,0,256);
+  g.addColorStop(0,'#2a3a5c');g.addColorStop(.45,'#8fa9c4');g.addColorStop(.8,'#e0b487');
+  g.addColorStop(1,'#f0d9c0'); oc.fillStyle=g; oc.fillRect(0,0,8,256);
+  const l=add('raw',{bitmap:o,name:'sky'},{x:0,y:0,w:cv.width,h:cv.height});
+  L.splice(L.indexOf(l),1); L.unshift(l); render();
+};
+
+/* ---------- MULTIPLIERS — one layer becomes a structure ----------
+   These are the operations the reference boards actually need. Each takes the
+   selected layer as a seed and emits copies; none of them is a filter. */
+let VP={x:640,y:250};                 /* one vanishing point, shared by every PATH */
+function seed(){const s=[...sel].map(id=>L.find(l=>l.id===id)).filter(Boolean);
+  return s.length===1?s[0]:null;}
+function emit(src,list){ L.push(...list.map(o=>({...src,id:uid++,...o})));
+  sel=new Set(); render(); }
+
+function mRow(n,gap){const s=seed();if(!s)return;
+  emit(s,Array.from({length:n-1},(_,i)=>({x:s.x+(s.w+gap)*(i+1),name:s.name+' r'+(i+1)})));}
+
+function mGrid(cols,rows,gap){const s=seed();if(!s)return;
+  const out=[];
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){ if(!r&&!c)continue;
+    out.push({x:s.x+(s.w+gap)*c,y:s.y+(s.h+gap)*r,name:`${s.name} ${c},${r}`});}
+  emit(s,out);}
+
+function mPath(n,depth,jit){const s=seed();if(!s)return;
+  /* copies march toward the shared vanishing point, shrinking as they go, and are
+     emitted in DEPTH ORDER so the near ones occlude the far ones without any
+     sorting pass */
+  const out=[];
+  for(let i=n;i>=1;i--){
+    const t=i/(n+1), k=1-depth*t;
+    out.push({x:s.x+(VP.x-s.x)*t+(Math.random()-0.5)*jit,
+              y:s.y+(VP.y-s.y)*t, w:s.w*k, h:s.h*k, name:s.name+' p'+i});
+  }
+  out.sort((a,b)=>a.y-b.y); emit(s,out);}
+
+function mScatter(n,box,rot,flow){const s=seed();if(!s)return;
+  /* spread relative to the FRAME, not the seed — a drift field fills the page */
+  box=box||cv.width*0.78;
+  /* a drift field: position spread over a box, rotation spread around a flow
+     angle, scale jittered. This is THE FALL. */
+  const out=[]; const fr=flow*Math.PI/180;
+  for(let i=0;i<n;i++){
+    const u=(Math.random()-0.5), v=(Math.random()-0.5);
+    const dx=(u*Math.cos(fr)-v*Math.sin(fr))*box, dy=(u*Math.sin(fr)+v*Math.cos(fr))*box*0.48;
+    const k=0.55+Math.random()*0.9;
+    out.push({x:s.x+dx,y:s.y+dy,w:s.w*k,h:s.h*k,
+              r:s.r+(Math.random()-0.5)*2*rot,name:s.name+' s'+i});
+  }
+  emit(s,out);}
+
+function mAttach(n){const s=seed();if(!s)return;
+  /* CLING. the copies are placed on the surface of the layer BELOW the seed —
+     climbers on a tower, birds on a wire. Host is whatever sits under it in z. */
+  const i=L.indexOf(s), host=L[i-1]; if(!host)return;
+  const out=[];
+  for(let k2=0;k2<n;k2++){
+    const t=Math.random(), edge=Math.random()<0.5?0:1;
+    const sc=0.5+Math.random()*0.7;
+    out.push({x:host.x+host.w*(edge?0.86:0.06)+ (Math.random()-0.5)*host.w*0.5,
+              y:host.y+host.h*t, w:s.w*sc, h:s.h*sc,
+              r:(Math.random()-0.5)*50, name:s.name+' a'+k2});
+  }
+  emit(s,out);}
+
+function mTime(n,t0,t1,cols){
+  /* THE ONE THAT CHANGES WHAT THIS IS. a multiplier whose axis is TIME: each cell
+     holds the world at a DIFFERENT MOMENT, so a grid becomes a filmstrip laid out
+     as architecture. This is ref 6's "334 frames of figures". */
+  if(!rt)return; const s=seed();
+  const bw=s?s.w:120, bh=s?s.h:150, ox=s?s.x:60, oy=s?s.y:60, gap=6;
+  const ids=new Int32Array(FW*FH);
+  for(let i=0;i<n;i++){
+    const t=t0+(t1-t0)*i/Math.max(1,n-1);
+    const S=rt.renderScene(t,ids);
+    const figs=(S.cast||[]).filter(c=>c.kind==='figure');
+    if(!figs.length)continue;
+    const f=figs[i%figs.length];
+    const hp=Math.max(8,Math.round(f.height*CELL)), wp=Math.max(6,Math.round(hp*0.6));
+    const o=document.createElement('canvas'); o.width=wp;o.height=hp;
+    const oc=o.getContext('2d'); oc.fillStyle='#161513';
+    for(let y=0;y<FH;y++)for(let x=0;x<FW;x++){
+      if(ids[y*FW+x]!==f.tag)continue; if(!S.levels[y*FW+x])continue;
+      oc.fillRect(x*CELL-(f.foot[0]*CELL-wp/2), y*CELL-(f.foot[1]*CELL-hp), CELL,CELL);
+    }
+    const c=i%cols, r=(i/cols)|0;
+    L.push({id:uid++,kind:'raw',bitmap:o,name:`t${t.toFixed(1)} ${f.mode}`,
+            on:true,a:1,r:0,fx:f.face===-1,ht:false,glow:false,
+            x:ox+(bw+gap)*c, y:oy+(bh+gap)*r, w:bw, h:bh});
+  }
+  sel=new Set(); render();}
+
+/* ---------- flat shapes and title bars — refs 2, 4, 5 ---------- */
+function mShape(kind){
+  const o=document.createElement('canvas');
+  if(kind==='bar'){o.width=200;o.height=40;const c2=o.getContext('2d');
+    c2.fillStyle='#1e5fd6';c2.fillRect(0,0,200,40);
+    c2.fillStyle='#7fb0ff';for(let i=6;i<200;i+=13)c2.fillRect(i,4,5,32);}
+  else if(kind==='rule'){o.width=400;o.height=6;const c2=o.getContext('2d');
+    c2.fillStyle='#e8e4da';c2.fillRect(0,0,400,6);}
+  else {o.width=300;o.height=200;const c2=o.getContext('2d');
+    c2.strokeStyle='rgba(180,200,215,.5)';c2.lineWidth=1;
+    for(let i=0;i<300;i+=12){c2.beginPath();c2.moveTo(i,0);c2.lineTo(i,200);c2.stroke();}
+    for(let j=0;j<200;j+=12){c2.beginPath();c2.moveTo(0,j);c2.lineTo(300,j);c2.stroke();}}
+  add('raw',{bitmap:o,name:kind},{x:cv.width*0.3,y:cv.height*0.4,w:o.width,h:o.height});}
+
+/* ---------- array: the crowd and the facade ---------- */
+$('mrow').onclick=()=>mRow(+$('arrn').value,10);
+$('mgrid').onclick=()=>{const n=+$('arrn').value;const c=Math.ceil(Math.sqrt(n));
+  mGrid(c,Math.ceil(n/c),6);};
+$('mpath').onclick=()=>mPath(+$('arrn').value,+$('arrp').value,40);
+$('mscat').onclick=()=>mScatter(+$('arrn').value,0,40,25);
+$('matt').onclick=()=>mAttach(+$('arrn').value);
+$('mtime').onclick=()=>{const n=+$('arrn').value;
+  mTime(n,+$('wtime').value,+$('wtime').value+8,Math.ceil(Math.sqrt(n)));};
+$('sbar').onclick=()=>mShape('bar');
+$('srule').onclick=()=>mShape('rule');
+$('sgrid').onclick=()=>mShape('underlay');
+const _oldArr=()=>{
+  const s=[...sel].map(id=>L.find(l=>l.id===id)).filter(Boolean); if(s.length!==1)return;
+  const src=s[0], n=Math.max(2,+$('arrn').value), p=Math.min(1,Math.max(0,+$('arrp').value));
+  /* p=0 lays a flat row; p=1 drives it to a vanishing point, scaling as it goes —
+     one control that makes both the facade grid and the crowd on the causeway */
+  const vx=cv.width/2, vy=cv.height*0.34;
+  for(let i=1;i<=n;i++){
+    const t=i/(n+1);
+    const k=1-p*t;
+    const w=src.w*k, h=src.h*k;
+    const x=src.x+(vx-src.x)*p*t+(1-p)*(src.w*1.08*i);
+    const y=src.y+(vy-src.y)*p*t;
+    L.push({...src,id:uid++,x,y,w,h,name:src.name+` ${i}`});
+  }
+  render();
+};
+
+/* ---------- chrome ---------- */
+const each=f=>{[...sel].forEach(id=>{const l=L.find(x=>x.id===id); if(l)f(l);});render();};
+$('half').onclick=()=>each(l=>l.ht=!l.ht);
+$('htc').onchange=e=>{HTCELL=Math.max(2,+e.target.value);HT.clear();render();};
+$('glow').onclick=()=>each(l=>l.glow=!l.glow);
+$('flip').onclick=()=>each(l=>l.fx=!l.fx);
+$('hide').onclick=()=>each(l=>l.on=!l.on);
+$('del').onclick=()=>{L=L.filter(l=>!sel.has(l.id));sel=new Set();render();};
+$('dup').onclick=()=>{const add2=[...sel].map(id=>{const l=L.find(x=>x.id===id);
+  return {...l,id:uid++,x:l.x+24,y:l.y+24};}); L.push(...add2);
+  sel=new Set(add2.map(l=>l.id)); render();};
+$('up').onclick=()=>{[...sel].forEach(id=>{const i=L.findIndex(l=>l.id===id);
+  if(i<L.length-1)[L[i],L[i+1]]=[L[i+1],L[i]];});render();};
+$('down').onclick=()=>{[...sel].forEach(id=>{const i=L.findIndex(l=>l.id===id);
+  if(i>0)[L[i],L[i-1]]=[L[i-1],L[i]];});render();};
+$('solo').onclick=e=>{soloOn=!soloOn;e.target.classList.toggle('on',soloOn);render();};
+$('save').onclick=()=>{
+  const data=L.filter(l=>l.kind==='el').map(({bitmap,...r})=>r);
+  localStorage.setItem('composer',JSON.stringify(data));
+  $('hud').textContent=`saved ${data.length} element layers`;};
+$('load').onclick=()=>{const d=localStorage.getItem('composer'); if(!d)return;
+  L=JSON.parse(d); uid=Math.max(1,...L.map(l=>l.id))+1; sel=new Set(); render();};
+$('png').onclick=()=>{const a=document.createElement('a');
+  a.download='composition.png'; a.href=cv.toDataURL('image/png'); a.click();};
+addEventListener('keydown',ev=>{
+  if(ev.target.tagName==='INPUT')return;
+  const step=ev.shiftKey?10:1;
+  if(ev.key==='Backspace'||ev.key==='Delete'){$('del').click();ev.preventDefault();}
+  if(ev.key==='ArrowLeft')each(l=>l.x-=step); if(ev.key==='ArrowRight')each(l=>l.x+=step);
+  if(ev.key==='ArrowUp')each(l=>l.y-=step);   if(ev.key==='ArrowDown')each(l=>l.y+=step);
+  if(ev.key==='h')$('half').click(); if(ev.key==='g')$('glow').click();
+});
+$('world').innerHTML=WORLDS.map(w=>`<option>${w}</option>`).join('');
+$('world').onchange=e=>loadWorld(e.target.value);
+paintNouns(); paintCards();
+await loadWorld(WORLDS.find(w=>w.startsWith('06'))||WORLDS[0]);
+render();
+</script></body></html>

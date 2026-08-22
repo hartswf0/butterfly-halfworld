@@ -16,47 +16,84 @@
   #stage{position:fixed;inset:0;display:block;width:100%;height:100%}
 
   .chrome{position:fixed;z-index:5}
-  #line{left:14px;bottom:calc(62px + env(safe-area-inset-bottom));font-size:11px;letter-spacing:.14em;
-        text-transform:uppercase;pointer-events:none;white-space:nowrap;mix-blend-mode:difference;color:#fff}
+
+  /* THE BOTTOM BAR.
+     `#line` and `#acts` used to be two fixed elements at 62px and 32px from the
+     bottom. On a phone the act row wraps to two lines and the second line prints
+     straight through the status line — the layout only ever worked because the
+     buttons happened to fit on one row. They are one flow now, so wrapping
+     pushes the line up instead of through it. */
+  #bar{left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:6px;
+       padding:8px 12px calc(8px + env(safe-area-inset-bottom));
+       background:color-mix(in srgb, var(--paper) 88%, transparent);
+       backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+       border-top:1px solid var(--ink)}
+  /* difference-blend read beautifully over the dots and became invisible the
+     moment the bar got a ground of its own */
+  #line{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
+        pointer-events:none;line-height:1.35;overflow-wrap:anywhere}
   #line b{font-weight:500;border-bottom:2px solid var(--seam);padding-bottom:1px}
   #line i{font-style:normal;border-bottom:2px solid var(--live);padding-bottom:1px}
 
-  #acts{left:14px;bottom:calc(32px + env(safe-area-inset-bottom));display:flex;gap:6px;flex-wrap:wrap;
-        max-width:calc(100vw - 84px)}
+  #acts{display:flex;gap:6px;flex-wrap:wrap}
   .act{font:inherit;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
        background:var(--paper);color:var(--ink);border:1px solid var(--ink);border-radius:0;
-       padding:6px 11px;min-height:30px;cursor:pointer;white-space:nowrap}
+       padding:6px 11px;min-height:32px;cursor:pointer;white-space:nowrap}
   .act:active,.act[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
   .act:focus-visible{outline:2px solid var(--live);outline-offset:2px}
+  /* a finger is not a mouse: 44px is the smallest target that can be hit
+     reliably, and every control here is one a finger has to find */
+  @media (pointer:coarse){
+    .act{min-height:44px;padding:10px 14px;font-size:12px}
+  }
+  /* five 44px buttons wrap to two rows on a phone and the bar took 182px of an
+     812px screen — a fifth of the stage, to show one extra button. one row that
+     scrolls costs nothing and the canvas gets it back. */
+  @media (max-width:560px){
+    #acts{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    #acts::-webkit-scrollbar{display:none}
+    .act{flex:0 0 auto}
+  }
 
   #panel{display:none;flex-direction:column;gap:6px;padding:6px;background:var(--paper);
-         border:1px solid var(--ink);max-width:calc(100vw - 20px)}
+         border:1px solid var(--ink);max-width:min(300px, calc(100vw - 20px));
+         max-height:calc(100vh - 190px);overflow-y:auto}
   #panel.on{display:flex}
-  #swatches{display:flex;gap:5px;flex-wrap:wrap;max-width:270px;max-height:98px;overflow-y:auto}
-  .sw{width:40px;height:40px;border:1px solid var(--ink);border-radius:0;padding:0;background:var(--paper);
+  #swatches{display:flex;gap:5px;flex-wrap:wrap;max-width:100%;max-height:120px;overflow-y:auto}
+  .sw{width:44px;height:44px;border:1px solid var(--ink);border-radius:0;padding:0;background:var(--paper);
       cursor:pointer;display:block;position:relative;overflow:hidden}
   .sw canvas{display:block;width:100%;height:100%;image-rendering:pixelated}
   .sw span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
            font:inherit;font-size:9px;letter-spacing:.06em;text-transform:uppercase}
   .sw[aria-pressed="true"]{outline:2px solid var(--live);outline-offset:-3px}
   #modes{display:flex;gap:5px;flex-wrap:wrap}
-  #nouns{display:none;gap:4px;flex-wrap:wrap;max-width:270px;max-height:46px;overflow-y:auto}
+  #nouns{display:none;gap:4px;flex-wrap:wrap;max-width:100%;max-height:56px;overflow-y:auto}
   #nouns.on{display:flex}
   .noun{font:inherit;font-size:9px;letter-spacing:.06em;text-transform:uppercase;background:var(--paper);
-        color:var(--ink);border:1px solid var(--ink);padding:3px 6px;cursor:pointer;white-space:nowrap}
+        color:var(--ink);border:1px solid var(--ink);padding:5px 7px;min-height:26px;
+        cursor:pointer;white-space:nowrap}
   .noun[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 
-  #shots{right:10px;top:10px;bottom:74px;display:none;flex-direction:column;gap:6px;
+  #shots{right:10px;top:10px;bottom:120px;display:none;flex-direction:column;gap:6px;
          overflow-y:auto;overflow-x:hidden;align-items:flex-end}
   #shots.on{display:flex}
+  /* a 48px right rail is a seventh of a phone. across the top it costs nothing
+     the canvas was using. */
+  @media (max-width:560px){
+    #shots{left:10px;right:10px;top:8px;bottom:auto;flex-direction:row;
+           align-items:flex-start;overflow-x:auto;overflow-y:hidden}
+  }
   .shot{width:48px;height:30px;border:1px solid var(--ink);border-radius:0;padding:0;background:var(--paper);
         cursor:pointer;display:block;flex:0 0 auto}
   .shot canvas{display:block;width:100%;height:100%}
   .shot[aria-pressed="true"]{outline:2px solid var(--live);outline-offset:-3px}
 
-  #scrub{left:0;right:0;bottom:0;height:30px;padding-bottom:env(safe-area-inset-bottom);
-         display:none;align-items:center;cursor:ew-resize}
+  /* the scrub used to be fixed at bottom:0, which is where the bar now lives.
+     it is a row of the bar, so it can never be sat on. */
+  #scrub{position:relative;height:30px;display:none;align-items:center;
+         cursor:ew-resize;touch-action:none}
   #scrub.on{display:flex}
+  @media (pointer:coarse){ #scrub{height:44px} }
   #track{position:absolute;left:14px;right:14px;height:1px;background:var(--live)}
   #head{position:absolute;width:10px;height:10px;background:var(--live);transform:translate(-50%,0)}
   #file{display:none}
@@ -64,15 +101,17 @@
 </head>
 <body>
 <canvas id="stage"></canvas>
-<div id="line" class="chrome">draw a region · drop or paste images</div>
-<div id="acts" class="chrome"></div>
+<div id="bar" class="chrome">
+  <div id="scrub" aria-hidden="true"><div id="track"></div><div id="head"></div></div>
+  <div id="line">draw a region · drop or paste images</div>
+  <div id="acts"></div>
+</div>
 <div id="panel" class="chrome">
   <div id="nouns" role="group" aria-label="archive filter"></div>
   <div id="swatches" role="group" aria-label="material"></div>
   <div id="modes"></div>
 </div>
 <div id="shots" class="chrome" role="group" aria-label="shots"></div>
-<div id="scrub" class="chrome" aria-hidden="true"><div id="track"></div><div id="head"></div></div>
 <input id="file" type="file" accept="image/*,video/*" multiple>
 <video id="cam" playsinline muted style="display:none"></video>
 
@@ -370,7 +409,7 @@ function resize(){
   LAY={cell:Math.max(4,Math.round(Math.min(W,H)/112)),unit:Math.min(W/150,H/210),
        bunit:Math.min(W/192,H/144),w:W,h:H};
 }
-addEventListener('resize',resize); resize();
+addEventListener('resize',()=>{resize();syncScrub();}); resize();
 
 /* figure transform: normalized anchor + relative scale */
 const unitOf=(f,L)=>(f.kind==='body'?(L.bunit||L.unit):L.unit)*f.scale;
@@ -685,7 +724,7 @@ function buildSwatches(){
       const b=document.createElement('button');
       b.className='sw'; b.type='button'; b.setAttribute('aria-label',e.id); b.title=e.id;
       const im=document.createElement('img');
-      im.src='../elements/'+e.id+'.png'; im.loading='lazy';
+      im.src='../thumbs/'+e.id+'.webp'; im.loading='lazy';
       im.style.cssText='width:100%;height:100%;object-fit:contain;display:block;background:#ddd';
       b.appendChild(im);
       b.addEventListener('click',async()=>{
@@ -781,14 +820,14 @@ async function armCamera(){
 async function loadArchive(){
   if(ARCH) return ARCH;
   try{
-    const r=await fetch('../studio/elements.json');
+    const r=await fetch('../thumbs/index.json');
     const rows=await r.json();
     /* best score first, so the top of every noun is the cleanest cut */
     rows.sort((a,b)=>b.sc-a.sc);
     const by={}; for(const e of rows) (by[e.p]=by[e.p]||[]).push(e);
     ARCH={rows,by,nouns:Object.keys(by).sort((a,b)=>by[b].length-by[a].length)};
     NOUN=ARCH.nouns[0];
-  }catch(e){ lineEl.textContent='no archive at ../studio/elements.json'; ARCH={rows:[],by:{},nouns:[]}; }
+  }catch(e){ lineEl.textContent='no archive at ../thumbs/index.json'; ARCH={rows:[],by:{},nouns:[]}; }
   return ARCH;
 }
 /* an element becomes material the moment it is asked for, not when it is shown */
@@ -800,7 +839,7 @@ function elementMaterial(id){
     img.onload=()=>{ const m=media(id,img,img.width,img.height,'img',512,
                                    contentBox(img,img.width,img.height));
                      ELCACHE.set(id,m); res(m); };
-    img.onerror=rej; img.src='../elements/'+id+'.png';
+    img.onerror=rej; img.src='../thumbs/'+id+'.webp';
   });
 }
 function buildNouns(){
@@ -867,8 +906,10 @@ function placePanel(){
   const a=panelAnchor(); if(!a){panel.classList.remove('on');return;}
   panel.classList.add('on');
   const w=panel.offsetWidth||282, h=panel.offsetHeight||110;
-  panel.style.left=clamp(a[0]-w/2,10,Math.max(10,W-w-62))+'px';
-  panel.style.top=clamp(a[1]+16,10,Math.max(10,H-h-88))+'px';
+  const barH=($('bar').offsetHeight||90)+10;
+  const rail=(W>560&&S.shots.length)?62:10;      /* the shots rail only exists wide */
+  panel.style.left=clamp(a[0]-w/2,10,Math.max(10,W-w-rail))+'px';
+  panel.style.top=clamp(a[1]+16,10,Math.max(10,H-h-barH))+'px';
   const so=findSock(S.sel);
   [...swEl.children].forEach(b=>b.setAttribute('aria-pressed',
     String(!!(so.mat&&b.getAttribute('aria-label')===so.mat.name))));
@@ -983,6 +1024,7 @@ function setMode(m){
   if(S.order.length){ acts.push(['undo',undo]); acts.push(['take',take]); }
   setActs(acts); buildModes(); placePanel(); report();
   scrubEl.classList.toggle('on',S.cast.length>0);
+  syncScrub();
 }
 castOne(); S.placing.ox=0.5; S.placing.oy=0.55; S.placing.scale=0.9; S.placing.flip=false;
 S.cast.push(S.placing); S.order.push({t:'figure',id:S.placing.id}); S.placing=null;
@@ -992,10 +1034,14 @@ setInterval(()=>{ placePanel(); report(); },160);
 /* ══ SCRUB ════════════════════════════════════════════════ */
 function syncScrub(){
   if(!scrubEl.classList.contains('on')) return;
-  headEl.style.left=(14+(W-28)*S.t)+'px';
+  /* measured, not assumed: the bar has padding now, so the track no longer
+     starts 14px from the window edge */
+  const r=$('track').getBoundingClientRect(), b=scrubEl.getBoundingClientRect();
+  headEl.style.left=(r.left-b.left+r.width*S.t)+'px';
   headEl.style.top=(scrubEl.offsetHeight/2-5)+'px';
 }
-const scrubTo=x=>{S.t=clamp((x-14)/(W-28),0,1);};
+const scrubTo=x=>{const r=$('track').getBoundingClientRect();
+  S.t=clamp((x-r.left)/Math.max(1,r.width),0,1);};
 scrubEl.addEventListener('pointerdown',e=>{scrubEl.setPointerCapture(e.pointerId);S.scrubbing=true;scrubTo(e.clientX);});
 scrubEl.addEventListener('pointermove',e=>{if(S.scrubbing)scrubTo(e.clientX);});
 scrubEl.addEventListener('pointerup',()=>{S.scrubbing=false;});

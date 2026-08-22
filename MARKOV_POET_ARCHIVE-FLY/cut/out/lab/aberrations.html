@@ -1,0 +1,73 @@
+<!doctype html><html lang=en><head>
+<meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>THE ABERRATIONS</title><style>
+:root{--paper:#f2efe6;--ink:#161513;--acc:#5aa7ff;--dim:#8b8175;--rule:#cfc8ba}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+body{background:var(--paper);color:var(--ink);padding:5vh 5vw 14vh;
+ font:14px/1.62 ui-monospace,SFMono-Regular,Menlo,monospace}
+.w{max-width:1080px;margin:0 auto}
+h1{font-size:13px;letter-spacing:.34em;font-weight:700;border-bottom:3px solid var(--ink);
+ padding-bottom:12px;margin-bottom:20px}
+h2{font-size:12px;letter-spacing:.2em;margin:44px 0 8px}
+h2 b{color:var(--acc)}
+p{max-width:76ch;margin:11px 0}
+i{color:var(--dim);font-style:italic}
+table{border-collapse:collapse;margin:14px 0;font-size:12px;width:100%}
+th,td{border:1px solid var(--rule);padding:6px 9px;text-align:left}
+th{background:#e9e4d8;letter-spacing:.1em}
+td:first-child{font-weight:700;width:64px}
+.n{font-size:34px;font-weight:700;letter-spacing:-.02em}
+.k{display:inline-block;border:1px solid var(--rule);padding:2px 7px;margin:2px 3px 2px 0;
+ color:var(--dim)}
+a{color:var(--acc)}
+</style></head><body><div class=w>
+<h1>THE ABERRATIONS</h1>
+<p>Every shot in the archive was parsed and <b>nothing was thrown away</b>. The
+hand-typed lexicon and a panoptic model were asked to describe the same 135
+pictures; they agree on <b>91 of 135</b>. What
+follows is the other 44 — not an error rate,
+a map of where two describers of one object diverge. These are the rows worth
+having found.</p>
+
+<h2>ONE · <b>The figure that reads as weather</b></h2>
+<p>The lexicon types these POET. The model does not find a person in them at all
+— it finds <i>sky</i>. Three of the four are NEON SKELETON: a body drawn in light
+against black, which to something trained on photographs of the world is not a
+man, it is a night. This is also the shot the earliest cuts leaned on hardest and
+were told off for. The most over-used picture in the archive turns out to be the
+one picture in it that cannot be seen as a person.</p>
+<table><tr><th>shot</th><th>class</th><th>lexicon</th><th>what the model sees</th></tr><tr><td>P019</td><td>THE FOG ROOM</td><td>POET</td><td>wall-other-merged · ceiling-merged · couch</td></tr><tr><td>P081</td><td>NEON SKELETON</td><td>POET</td><td>sky-other-merged · person · vase</td></tr><tr><td>P082</td><td>NEON SKELETON</td><td>POET</td><td>sky-other-merged · vase · building-other-merged</td></tr><tr><td>P134</td><td>NEON SKELETON</td><td>POET</td><td>sky-other-merged · vase · light</td></tr></table>
+
+<h2>TWO · <b>The extras</b></h2>
+<p>40 shots hold a figure the lexicon never named one in. Across the whole
+archive the model finds <b>person</b> in <b>98 of 135</b> — the
+archive is far more populated than its own vocabulary admits. THE STARBURST is
+typed SURGE, <i>pure kinetic</i>, explicitly not a body; there is a person in it
+at two thirds of frame.</p>
+<table><tr><th>shot</th><th>class</th><th>lexicon</th><th>subject</th><th>what the model sees</th></tr><tr><td>P057</td><td>THE STARBURST</td><td>SURGE</td><td>0.67</td><td>person · wall-other-merged · building-other-merged</td></tr><tr><td>P040</td><td>THE STARBURST</td><td>SURGE</td><td>0.65</td><td>bird · water-other</td></tr><tr><td>P076</td><td>THE RIDE</td><td>SURGE</td><td>0.52</td><td>car · building-other-merged · road</td></tr><tr><td>P064</td><td>RED SUBMERSION</td><td>INSERT</td><td>0.50</td><td>person · sky-other-merged · tree-merged</td></tr><tr><td>P044</td><td>THE STARBURST</td><td>SURGE</td><td>0.46</td><td>person · water-other · sky-other-merged</td></tr><tr><td>P045</td><td>THE STARBURST</td><td>SURGE</td><td>0.45</td><td>person · water-other · sky-other-merged</td></tr><tr><td>P046</td><td>RUNNING AT CAMERA</td><td>SURGE</td><td>0.43</td><td>bird · wall-other-merged · person</td></tr><tr><td>P043</td><td>THE STARBURST</td><td>SURGE</td><td>0.43</td><td>bird · floor-other-merged · person</td></tr><tr><td>P058</td><td>LOVELESS / BURNING CAR</td><td>ESTABLISH</td><td>0.35</td><td>building-other-merged · sky-other-merged · person</td></tr><tr><td>P072</td><td>THE RIDE</td><td>SURGE</td><td>0.23</td><td>wall-other-merged · person · building-other-merged</td></tr><tr><td>P056</td><td>SCREEN IN THE ROOM</td><td>INSERT</td><td>0.19</td><td>wall-brick · tv · building-other-merged</td></tr><tr><td>P026</td><td>STEAM ALLEY</td><td>ESTABLISH</td><td>0.18</td><td>wall-brick · window-other · person</td></tr><tr><td>P036</td><td>STEAM ALLEY</td><td>ESTABLISH</td><td>0.18</td><td>wall-other-merged · person · wall-brick</td></tr><tr><td>P110</td><td>GOLDEN WATER</td><td>LONG</td><td>0.16</td><td>light · sky-other-merged · water-other</td></tr></table>
+
+<h2>THREE · <b>The subject that will not hold still</b></h2>
+<p>Coverage measured at three moments in the shot, and the swing between them.
+A one-point-oh swing means the figure is the entire frame at one moment and
+absent at another. These are not bad parses — they are pictures in which the
+question <i>how much of this is the subject</i> has no stable answer. A boundary
+that breathes is a dissolve the footage computed for itself.</p>
+<table><tr><th>shot</th><th>class</th><th>swing</th><th>mean</th><th>what the model sees</th></tr><tr><td>P043</td><td>THE STARBURST</td><td>1.00</td><td>0.43</td><td>bird · floor-other-merged · person</td></tr><tr><td>P057</td><td>THE STARBURST</td><td>0.99</td><td>0.67</td><td>person · wall-other-merged · building-other-merged</td></tr><tr><td>P046</td><td>RUNNING AT CAMERA</td><td>0.98</td><td>0.43</td><td>bird · wall-other-merged · person</td></tr><tr><td>P040</td><td>THE STARBURST</td><td>0.93</td><td>0.65</td><td>bird · water-other</td></tr><tr><td>P044</td><td>THE STARBURST</td><td>0.92</td><td>0.46</td><td>person · water-other · sky-other-merged</td></tr><tr><td>P045</td><td>THE STARBURST</td><td>0.92</td><td>0.45</td><td>person · water-other · sky-other-merged</td></tr><tr><td>P076</td><td>THE RIDE</td><td>0.91</td><td>0.52</td><td>car · building-other-merged · road</td></tr><tr><td>P071</td><td>BLUE FACE</td><td>0.85</td><td>0.55</td><td>wall-other-merged · person</td></tr><tr><td>P085</td><td>TRAIN WINDOW</td><td>0.68</td><td>0.55</td><td>person · window-other · light</td></tr><tr><td>P061</td><td>RED PLASMA FIGURE</td><td>0.66</td><td>0.59</td><td>person · light · wall-other-merged</td></tr></table>
+
+<h2>FOUR · <b>Nouns this world has no word for</b></h2>
+<p>The model's vocabulary is COCO's: eighty things photographed in ordinary life.
+Turned on a generated film about leaving, it reaches for the nearest domestic
+object it knows and finds cake, and a vase, and birds. Nothing in the poems is a
+cake. These are not detections, they are the model's own furniture showing
+through — and they are the only nouns in this project that neither the poet nor
+the lexicon chose.</p>
+<p><span class=k>tv ×15</span><span class=k>bird ×9</span><span class=k>cake ×7</span><span class=k>vase ×7</span><span class=k>chair ×5</span><span class=k>umbrella ×3</span><span class=k>potted plant ×2</span></p>
+
+<h2>FIVE · <b>The full vocabulary, by frequency</b></h2>
+<p><span class=k>person ×98</span><span class=k>wall-other-merged ×68</span><span class=k>sky-other-merged ×64</span><span class=k>building-other-merged ×50</span><span class=k>light ×36</span><span class=k>window-other ×27</span><span class=k>ceiling-merged ×24</span><span class=k>tree-merged ×24</span><span class=k>bed ×23</span><span class=k>road ×21</span><span class=k>pavement-merged ×21</span><span class=k>tv ×15</span><span class=k>window-blind ×10</span><span class=k>fence-merged ×10</span><span class=k>car ×9</span><span class=k>bird ×9</span><span class=k>water-other ×8</span><span class=k>floor-other-merged ×7</span><span class=k>wall-brick ×7</span><span class=k>cake ×7</span><span class=k>vase ×7</span><span class=k>table-merged ×6</span><span class=k>grass-merged ×6</span><span class=k>curtain ×5</span><span class=k>couch ×5</span><span class=k>chair ×5</span><span class=k>mountain-merged ×5</span><span class=k>paper-merged ×4</span><span class=k>cabinet-merged ×4</span><span class=k>sea ×4</span><span class=k>wall-wood ×3</span><span class=k>umbrella ×3</span><span class=k>flower ×3</span><span class=k>railroad ×3</span><span class=k>train ×3</span><span class=k>rug-merged ×2</span><span class=k>potted plant ×2</span><span class=k>stairs ×2</span><span class=k>snowboard ×2</span><span class=k>counter ×2</span></p>
+
+<p style="margin-top:42px"><a href="index.html">← the lab</a> ·
+<a href="../arspoetica/ars-poetica.html">ARS POETICA</a> ·
+<a href="../moussa/index.html">MOUSSA</a> ·
+<a href="../../../../index.html">the halfworld</a></p>
+</div></body></html>

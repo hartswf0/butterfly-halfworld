@@ -1,0 +1,242 @@
+[
+ {
+  "patch": "P031",
+  "rows": [
+   {
+    "name": "THRESH",
+    "cover": 0.06741898148148148,
+    "agree": 0.5121067837852604,
+    "conf": null,
+    "area_ok": true
+   },
+   {
+    "name": "GRABCUT",
+    "cover": 0.07682291666666667,
+    "agree": 0.5788983657492858,
+    "conf": null,
+    "area_ok": true
+   },
+   {
+    "name": "SAM-PTS",
+    "cover": 0.14850983796296297,
+    "agree": 0.6957402253490923,
+    "conf": 0.9708314538002014,
+    "area_ok": true
+   },
+   {
+    "name": "SAM-BOX",
+    "cover": 0.142578125,
+    "agree": 0.7099856593372571,
+    "conf": 0.9679802656173706,
+    "area_ok": true
+   },
+   {
+    "name": "ENSEMBLE",
+    "cover": 0.1392505787037037,
+    "agree": 0.717398812981227,
+    "conf": 0.7239263264009812,
+    "area_ok": true
+   }
+  ]
+ },
+ {
+  "patch": "P073",
+  "rows": [
+   {
+    "name": "THRESH",
+    "cover": 0.055736400462962965,
+    "agree": 0.1964164895016832,
+    "conf": null,
+    "area_ok": true
+   },
+   {
+    "name": "GRABCUT",
+    "cover": 0.07034866898148148,
+    "agree": 0.20322169187801603,
+    "conf": null,
+    "area_ok": true
+   },
+   {
+    "name": "SAM-PTS",
+    "cover": 0.599609375,
+    "agree": 0.3249783581451565,
+    "conf": 0.8794959783554077,
+    "area_ok": true
+   },
+   {
+    "name": "SAM-BOX",
+    "cover": 0.24522569444444445,
+    "agree": 0.2206638343103572,
+    "conf": 0.7706912755966187,
+    "area_ok": true
+   },
+   {
+    "name": "ENSEMBLE",
+    "cover": 0.41015625,
+    "agree": 0.24804016972013937,
+    "conf": 0.6715516949364697,
+    "area_ok": true
+   }
+  ]
+ },
+ {
+  "patch": "P084",
+  "rows": [
+   {
+    "name": "THRESH",
+    "cover": 0.06260850694444445,
+    "agree": 0.1953664091837304,
+    "conf": null,
+    "area_ok": true
+   },
+   {
+    "name": "GRABCUT",
+    "cover": 0.0921947337962963,
+    "agree": 0.21441201115610928,
+    "conf": null,
+    "area_ok": true
+   },
+   {
+    "name": "SAM-PTS",
+    "cover": 0.9462890625,
+    "agree": 0.16167061747425493,
+    "conf": 0.882756233215332,
+    "area_ok": false
+   },
+   {
+    "name": "SAM-BOX",
+    "cover": 0.13288483796296297,
+    "agree": 0.13852037564488265,
+    "conf": 0.7837188243865967,
+    "area_ok": true
+   },
+   {
+    "name": "ENSEMBLE",
+    "cover": 0.3361183449074074,
+    "agree": 0.1028872089472966,
+    "conf": 0.7235182001154219,
+    "area_ok": true
+   }
+  ]
+ },
+ {
+  "patch": "P133",
+  "rows": [
+   {
+    "name": "THRESH",
+    "cover": 0.28464988425925924,
+    "agree": 0.299074341589419,
+    "conf": null,
+    "area_ok": true
+   },
+   {
+    "name": "GRABCUT",
+    "cover": 0.38686342592592593,
+    "agree": 0.3239141705957484,
+    "conf": null,
+    "area_ok": true
+   },
+   {
+    "name": "SAM-PTS",
+    "cover": 0.5770399305555556,
+    "agree": 0.2676761275605365,
+    "conf": 0.9175841808319092,
+    "area_ok": true
+   },
+   {
+    "name": "SAM-BOX",
+    "cover": 0.29680266203703703,
+    "agree": 0.18190757604440252,
+    "conf": 0.955657958984375,
+    "area_ok": true
+   },
+   {
+    "name": "ENSEMBLE",
+    "cover": 0.23791956018518517,
+    "agree": 0.07576727658874945,
+    "conf": 0.6961895129121379,
+    "area_ok": true
+   }
+  ]
+ },
+ {
+  "patch": "P054",
+  "rows": [
+   {
+    "name": "THRESH",
+    "cover": 0.07338686342592593,
+    "agree": 0.24948933081551083,
+    "conf": null,
+    "area_ok": true
+   },
+   {
+    "name": "GRABCUT",
+    "cover": 0.07099971064814815,
+    "agree": 0.26109851670495315,
+    "conf": null,
+    "area_ok": true
+   },
+   {
+    "name": "SAM-PTS",
+    "cover": 0.9338831018518519,
+    "agree": 0.21343140034368643,
+    "conf": 0.9743301868438721,
+    "area_ok": false
+   },
+   {
+    "name": "SAM-BOX",
+    "cover": 0.3759765625,
+    "agree": 0.36907003891495704,
+    "conf": 0.9719139337539673,
+    "area_ok": true
+   },
+   {
+    "name": "ENSEMBLE",
+    "cover": 0.2770182291666667,
+    "agree": 0.32834539727399437,
+    "conf": 0.6650070054057359,
+    "area_ok": true
+   }
+  ]
+ },
+ {
+  "patch": "P118",
+  "rows": [
+   {
+    "name": "THRESH",
+    "cover": 0.21618200231481483,
+    "agree": 0.43461510087121813,
+    "conf": null,
+    "area_ok": true
+   },
+   {
+    "name": "GRABCUT",
+    "cover": 0.28121383101851855,
+    "agree": 0.48643155851614756,
+    "conf": null,
+    "area_ok": true
+   },
+   {
+    "name": "SAM-PTS",
+    "cover": 0.4947554976851852,
+    "agree": 0.40201706796458003,
+    "conf": 0.9795005321502686,
+    "area_ok": true
+   },
+   {
+    "name": "SAM-BOX",
+    "cover": 0.1646050347222222,
+    "agree": 0.14545906584704568,
+    "conf": 0.9224604964256287,
+    "area_ok": true
+   },
+   {
+    "name": "ENSEMBLE",
+    "cover": 0.20912905092592593,
+    "agree": 0.31807835846403354,
+    "conf": 0.7151508731610805,
+    "area_ok": true
+   }
+  ]
+ }
+]

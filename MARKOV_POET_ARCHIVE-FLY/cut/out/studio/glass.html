@@ -1,0 +1,366 @@
+<!doctype html><html lang=en><head>
+<meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>STAINED GLASS — the halfworld as a colouring book</title>
+<style>
+:root{--paper:#f2efe6;--ink:#161513;--acc:#5aa7ff;--dim:#8b8175}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+html,body{height:100%;overflow:hidden}
+body{background:#141413;color:#e8e4da;
+ font:11px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em;
+ display:grid;grid-template-columns:224px 1fr 292px;grid-template-rows:32px 1fr;
+ grid-template-areas:"top top top" "panes stage lib"}
+#top{grid-area:top;background:#0f0f0f;border-bottom:1px solid #333;display:flex;
+ align-items:center;gap:7px;padding:0 10px;overflow-x:auto;white-space:nowrap}
+#top b{letter-spacing:.26em;color:#fff;margin-right:6px}
+button,select,input{font:inherit;background:#222;color:#e8e4da;border:1px solid #444;
+ padding:2px 7px;cursor:pointer}
+button:hover{border-color:#999} button.on{background:var(--acc);color:#04203f;border-color:var(--acc)}
+input[type=number]{width:46px;cursor:text}
+#panes{grid-area:panes;background:#161616;border-right:1px solid #333;overflow:auto}
+#stage{grid-area:stage;background:#0a0a0a;display:flex;align-items:center;
+ justify-content:center;position:relative;overflow:hidden}
+#wrap{position:relative}
+canvas{display:block;box-shadow:0 0 0 1px #333}
+#lib{grid-area:lib;background:#161616;border-left:1px solid #333;overflow:auto;padding:8px}
+h3{font-size:9px;letter-spacing:.2em;color:#888;padding:7px 9px;border-bottom:1px solid #333;
+ position:sticky;top:0;background:#161616;z-index:2}
+h3 span{float:right;color:#ddd}
+.pane{display:grid;grid-template-columns:1fr 44px 14px;gap:4px;padding:3px 8px;
+ border-bottom:1px solid #242424;cursor:pointer;font-size:10px}
+.pane:hover{background:#1e1e1e} .pane.sel{background:#2f7fd6;color:#fff}
+.pane i{font-style:normal;color:#888;text-align:right}.pane.sel i{color:#dbe9ff}
+.chip{display:inline-block;border:1px solid #3a3a3a;padding:1px 5px;margin:0 3px 3px 0;
+ cursor:pointer;color:#999;font-size:10px}
+.chip.on{background:var(--acc);color:#04203f;border-color:var(--acc)}
+.card{display:inline-block;width:62px;margin:0 4px 5px 0;cursor:grab;border:1px solid #333;
+ background:repeating-conic-gradient(#242424 0 25%,#1c1c1c 0 50%) 0 0/9px 9px}
+.card:hover{border-color:var(--acc)} .card img{width:100%;height:46px;object-fit:contain;
+ display:block;pointer-events:none}
+.node{position:absolute;width:11px;height:11px;background:var(--acc);
+ border:1px solid #04203f;cursor:grab;margin:-6px 0 0 -6px}
+#hud{position:absolute;left:8px;bottom:6px;color:#888;font-size:10px;pointer-events:none}
+
+/* ══ A NARROW WINDOW ═══════════════════════════════════════════════════════
+   Three fixed columns put the stage off the right edge of a phone, so the tool
+   was not cramped there, it was gone. This will never be a touch instrument —
+   it is built on drag, hover and a pointer — but it should at least be legible
+   and reachable on a small screen instead of invisible. The panels become
+   collapsible drawers stacked under the stage; open one at a time. */
+@media (max-width:820px){
+  body{grid-template-columns:1fr;grid-template-rows:auto minmax(38vh,1fr) auto;
+       grid-template-areas:"top" "stage" "drawers"}
+  #panes,#lib{grid-area:drawers;max-height:44vh;overflow:auto;border:0;border-top:1px solid #333}
+  #top{overflow-x:auto;white-space:nowrap;padding:4px 8px}
+  button,select,input{min-height:34px;padding:5px 9px}
+}
+</style></head><body>
+
+<div id=top>
+ <b>STAINED GLASS</b>
+ <select id=world></select>
+ <input type=number id=wtime value=45 step=1>
+ <button id=cut>CUT PANES</button>
+ <span style="color:#444">|</span>
+ <label style="color:#888">came</label><input type=number id=came value=1 step=1
+   title="dilate the leading to seal gaps">
+ <label style="color:#888">min</label><input type=number id=minc value=6>
+ <button id=lead class=on>LEADING</button>
+ <input type=number id=leadw value=1 step=.5 title="came weight">
+ <button id=ht class=on>HALFTONE</button><input type=number id=htc value=7>
+ <span style="color:#444">|</span>
+ <button id=fillall>FILL ALL</button>
+ <button id=fillsel>FILL SEL</button>
+ <button id=clear>CLEAR</button>
+ <button id=warp class=on>NODES</button>
+ <button id=reset>RESET WARP</button>
+ <span style="color:#444">|</span>
+ <button id=png>PNG</button>
+</div>
+
+<div id=panes><h3>PANES <span id=pc>0</span></h3><div id=plist></div></div>
+<div id=stage><div id=wrap><canvas id=cv width=1152 height=864></canvas></div>
+ <div id=hud></div></div>
+<div id=lib><h3>GLASS <span id=ec></span></h3>
+ <div id=nouns></div><div id=cards></div></div>
+
+<script type="module">
+const FW=192,FH=144,CELL=6;              /* 1152x864 */
+const $=id=>document.getElementById(id);
+const cv=$('cv'), cx=cv.getContext('2d');
+const ELEMENTS=await (await fetch('./elements.json')).json();
+const WORLDS=await (await fetch('./worlds.json')).json();
+const HW=await import('./halfworld.mjs'); HW.wantParts(false);
+const byNoun={}; for(const e of ELEMENTS)(byNoun[e.p]||=[]).push(e);
+const NOUNS=Object.keys(byNoun).sort((a,b)=>byNoun[b].length-byNoun[a].length);
+
+let rt=null, levels=null, panes=[], sel=-1, selNoun=NOUNS[0], dragNode=null;
+const IMG=new Map();
+const img=id=>{ if(IMG.has(id))return IMG.get(id);
+  const i=new Image(); i.src=`../thumbs/${id}.webp`; i.onload=render; IMG.set(id,i); return i;};
+
+/* ─── CUTTING THE PANES ────────────────────────────────────────────────────
+   The leading is the halfworld's own ink. A pane is a connected region of cells
+   the ink does NOT touch — the glass between the lines. This is a different
+   object from a draw-call part: a part is what the author drew, a pane is what
+   the drawing ENCLOSES, and only the second one can be coloured in. */
+function cutPanes(){
+  const ids=new Int32Array(FW*FH);
+  const S=rt.renderScene(+$('wtime').value, ids);
+  levels=S.levels;
+  /* THE CAME HAS THICKNESS, AND THAT IS WHAT CLOSES THE PANES.
+     Flood-filling against the raw ink gave 26 regions where there should be
+     hundreds: the halfworld's lines are one cell wide and its shapes are drawn as
+     outlines with gaps, so a tower's interior leaks into the sky and the whole
+     background becomes one pane. A glazier does not solder a hairline; the lead
+     has width. Dilating the ink by `came` cells before the fill seals the
+     drawing's small gaps and the picture becomes colourable. */
+  const came=Math.max(0,+$('came').value);
+  let blocked=Uint8Array.from(levels, v=>v?1:0);
+  for(let pass=0;pass<came;pass++){
+    const nx=Uint8Array.from(blocked);
+    for(let y=0;y<FH;y++)for(let x=0;x<FW;x++){
+      if(blocked[y*FW+x])continue;
+      for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){
+        const ax=x+dx, ay=y+dy;
+        if(ax<0||ay<0||ax>=FW||ay>=FH)continue;
+        if(blocked[ay*FW+ax]){nx[y*FW+x]=1;break;}
+      }
+    }
+    blocked=nx;
+  }
+  const minc=Math.max(2,+$('minc').value);
+  const seen=new Uint8Array(FW*FH); panes=[];
+  for(let i=0;i<FW*FH;i++){
+    if(seen[i]||blocked[i])continue;
+    const q=[i]; seen[i]=1; const cells=[];
+    let x0=1e9,y0=1e9,x1=-1,y1=-1;
+    while(q.length){
+      const j=q.pop(); cells.push(j);
+      const x=j%FW,y=(j/FW)|0;
+      if(x<x0)x0=x; if(x>x1)x1=x; if(y<y0)y0=y; if(y>y1)y1=y;
+      for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){
+        const nx=x+dx, ny=y+dy;
+        if(nx<0||ny<0||nx>=FW||ny>=FH)continue;
+        const k=ny*FW+nx;
+        if(!seen[k]&&!blocked[k]){seen[k]=1;q.push(k);}
+      }
+    }
+    if(cells.length<minc)continue;
+    const w=x1-x0+1,h=y1-y0+1;
+    /* WHICH EDGES A PANE RUNS OFF DECIDES WHAT IT IS. A region open at the top of
+       frame is the sky; one open at the bottom is the ground or the water; one
+       closed on every side is glass. Filling all three the same way is what left
+       the picture white — the sky is not a pane, it is what the window is set in. */
+    const edge={t:y0===0,b:y1===FH-1,l:x0===0,r:x1===FW-1};
+    panes.push({cells,x0,y0,w,h,n:cells.length,edge,
+      role: edge.t&&!edge.b ? 'sky' : (edge.b&&!edge.t ? 'ground' :
+            (edge.t&&edge.b ? 'field' : 'glass')),
+      fill:null, nodes:corners(x0,y0,w,h), open:(edge.t||edge.b||edge.l||edge.r)});
+  }
+  panes.sort((a,b)=>b.n-a.n);
+  sel=-1; render();
+}
+const corners=(x0,y0,w,h)=>[{x:x0*CELL,y:y0*CELL},{x:(x0+w)*CELL,y:y0*CELL},
+                            {x:(x0+w)*CELL,y:(y0+h)*CELL},{x:x0*CELL,y:(y0+h)*CELL}];
+
+/* ─── THE WARP ─────────────────────────────────────────────────────────────
+   Four nodes, and the glass is mapped onto the quad they make. Canvas has no
+   perspective transform, so the quad is subdivided into a mesh and each little
+   quad drawn as two affine triangles — which is exactly how a texture is warped
+   anywhere else, and is why a pane can be an irregular shape and still hold a
+   photograph without shearing it. */
+function bilerp(N,u,v){
+  const top={x:N[0].x+(N[1].x-N[0].x)*u, y:N[0].y+(N[1].y-N[0].y)*u};
+  const bot={x:N[3].x+(N[2].x-N[3].x)*u, y:N[3].y+(N[2].y-N[3].y)*u};
+  return {x:top.x+(bot.x-top.x)*v, y:top.y+(bot.y-top.y)*v};
+}
+function drawTri(ctx,im,sx0,sy0,sx1,sy1,sx2,sy2,d0,d1,d2){
+  ctx.save(); ctx.beginPath();
+  ctx.moveTo(d0.x,d0.y); ctx.lineTo(d1.x,d1.y); ctx.lineTo(d2.x,d2.y); ctx.closePath();
+  ctx.clip();
+  const den=(sx1-sx0)*(sy2-sy0)-(sx2-sx0)*(sy1-sy0);
+  if(Math.abs(den)>1e-6){
+    const a=((d1.x-d0.x)*(sy2-sy0)-(d2.x-d0.x)*(sy1-sy0))/den;
+    const b=((d2.x-d0.x)*(sx1-sx0)-(d1.x-d0.x)*(sx2-sx0))/den;
+    const c=((d1.y-d0.y)*(sy2-sy0)-(d2.y-d0.y)*(sy1-sy0))/den;
+    const d=((d2.y-d0.y)*(sx1-sx0)-(d1.y-d0.y)*(sx2-sx0))/den;
+    ctx.transform(a,c,b,d,d0.x-a*sx0-b*sy0,d0.y-c*sx0-d*sy0);
+    ctx.drawImage(im,0,0);
+  }
+  ctx.restore();
+}
+function warpInto(ctx,im,N,M=7){
+  const iw=im.naturalWidth||im.width, ih=im.naturalHeight||im.height;
+  for(let j=0;j<M;j++)for(let i=0;i<M;i++){
+    const u0=i/M,u1=(i+1)/M,v0=j/M,v1=(j+1)/M;
+    const p00=bilerp(N,u0,v0),p10=bilerp(N,u1,v0),p11=bilerp(N,u1,v1),p01=bilerp(N,u0,v1);
+    const s00=[u0*iw,v0*ih],s10=[u1*iw,v0*ih],s11=[u1*iw,v1*ih],s01=[u0*iw,v1*ih];
+    drawTri(ctx,im,s00[0],s00[1],s10[0],s10[1],s11[0],s11[1],p00,p10,p11);
+    drawTri(ctx,im,s00[0],s00[1],s11[0],s11[1],s01[0],s01[1],p00,p11,p01);
+  }
+}
+
+/* the screen, applied to a whole finished pane so the glass reads as one material */
+function screenIt(src,w,h){
+  const r=Math.max(2,+$('htc').value);
+  const cw=Math.max(4,Math.round(w/r)), ch=Math.max(4,Math.round(h/r));
+  const s=document.createElement('canvas'); s.width=cw;s.height=ch;
+  s.getContext('2d').drawImage(src,0,0,cw,ch);
+  const d=s.getContext('2d').getImageData(0,0,cw,ch).data;
+  const o=document.createElement('canvas'); o.width=w;o.height=h;
+  const oc=o.getContext('2d'); const px=w/cw, py=h/ch;
+  for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){
+    const i=(y*cw+x)*4, a=d[i+3]/255; if(a<0.3)continue;
+    const lum=(0.299*d[i]+0.587*d[i+1]+0.114*d[i+2])/255;
+    const lv=Math.min(7,Math.round((1-lum)*7.4)); if(lv<1)continue;
+    oc.fillStyle=`rgba(${d[i]},${d[i+1]},${d[i+2]},${a})`;
+    oc.beginPath();
+    oc.arc((x+.5)*px,(y+.5)*py,Math.max(.6,px*0.5*Math.pow(lv/7,0.72)*1.3),0,6.3);
+    oc.fill();
+  }
+  return o;
+}
+
+/* ─── RENDER ───────────────────────────────────────────────────────────────*/
+function render(){
+  cx.fillStyle='#f2efe6'; cx.fillRect(0,0,cv.width,cv.height);
+  const doHT=$('ht').classList.contains('on');
+  for(const p of panes){
+    if(!p.fill)continue;
+    const im=img(p.fill); if(!im.complete||!im.naturalWidth)continue;
+    /* the glass is cut to the pane, then warped, then screened */
+    /* THE WARP AND THE MASK CANNOT SHARE A CANVAS.
+       `source-in` intersects the WHOLE canvas with each new source, so drawing the
+       ninety-eight mesh triangles one after another into a masked canvas erased
+       every triangle with the next one and only the last survived. The glass is
+       warped whole on its own surface first, and the mask is applied once. */
+    const g=document.createElement('canvas'); g.width=cv.width; g.height=cv.height;
+    warpInto(g.getContext('2d'),im,p.nodes);
+    const o=document.createElement('canvas'); o.width=cv.width; o.height=cv.height;
+    const oc=o.getContext('2d');
+    oc.fillStyle='#000';
+    for(const j of p.cells) oc.fillRect((j%FW)*CELL,((j/FW)|0)*CELL,CELL,CELL);
+    oc.globalCompositeOperation='source-in';
+    oc.drawImage(g,0,0);
+    cx.drawImage(doHT?screenIt(o,cv.width,cv.height):o,0,0);
+  }
+  if($('lead').classList.contains('on')&&levels){
+    const wgt=+$('leadw').value;
+    cx.fillStyle='#161513';
+    for(let y=0;y<FH;y++)for(let x=0;x<FW;x++){
+      const l=levels[y*FW+x]; if(!l)continue;
+      const r=(l>7?CELL*0.44:CELL*0.5*Math.pow(l/7,0.72)*1.24)*wgt;
+      cx.beginPath(); cx.arc((x+.5)*CELL,(y+.5)*CELL,Math.max(.6,r),0,6.3); cx.fill();
+    }
+  }
+  drawNodes(); paintPanes();
+  const filled=panes.filter(p=>p.fill).length;
+  $('hud').textContent=`${panes.length} panes · ${filled} filled`+
+    (sel>=0?` · pane ${sel} (${panes[sel].n} cells)`:'');
+}
+function drawNodes(){
+  document.querySelectorAll('.node').forEach(n=>n.remove());
+  if(sel<0||!$('warp').classList.contains('on'))return;
+  const r=cv.getBoundingClientRect(), k=r.width/cv.width;
+  panes[sel].nodes.forEach((n,i)=>{
+    const d=document.createElement('div'); d.className='node'; d.dataset.i=i;
+    d.style.left=n.x*k+'px'; d.style.top=n.y*k+'px'; $('wrap').appendChild(d);
+  });
+}
+function paintPanes(){
+  $('pc').textContent=panes.length;
+  $('plist').innerHTML=panes.slice(0,260).map((p,i)=>
+    `<div class="pane ${i===sel?'sel':''}" data-i="${i}">`+
+    `<span>${p.role==='glass'?'▣':'▤'} ${p.role} ${p.w}×${p.h}</span><i>${p.n}</i>`+
+    `<i>${p.fill?'●':''}</i></div>`).join('');
+  document.querySelectorAll('.pane').forEach(d=>d.onclick=()=>{sel=+d.dataset.i;render();});
+}
+
+/* ─── interaction ──────────────────────────────────────────────────────────*/
+$('wrap').addEventListener('pointerdown',ev=>{
+  if(ev.target.classList.contains('node')){
+    dragNode=+ev.target.dataset.i; $('wrap').setPointerCapture(ev.pointerId); return;}
+  const r=cv.getBoundingClientRect(), k=cv.width/r.width;
+  const mx=(ev.clientX-r.left)*k, my=(ev.clientY-r.top)*k;
+  const cxi=Math.floor(mx/CELL), cyi=Math.floor(my/CELL);
+  const idx=cyi*FW+cxi;
+  sel=panes.findIndex(p=>p.cells.includes(idx));
+  render();
+});
+$('wrap').addEventListener('pointermove',ev=>{
+  if(dragNode===null||sel<0)return;
+  const r=cv.getBoundingClientRect(), k=cv.width/r.width;
+  panes[sel].nodes[dragNode]={x:(ev.clientX-r.left)*k,y:(ev.clientY-r.top)*k};
+  render();
+});
+$('wrap').addEventListener('pointerup',()=>{dragNode=null;});
+$('wrap').addEventListener('dragover',e=>e.preventDefault());
+$('wrap').addEventListener('drop',ev=>{
+  ev.preventDefault();
+  const id=ev.dataTransfer.getData('text/plain'); if(!id)return;
+  const r=cv.getBoundingClientRect(), k=cv.width/r.width;
+  const mx=(ev.clientX-r.left)*k, my=(ev.clientY-r.top)*k;
+  const idx=Math.floor(my/CELL)*FW+Math.floor(mx/CELL);
+  const i=panes.findIndex(p=>p.cells.includes(idx));
+  if(i>=0){ panes[i].fill=id; sel=i; render(); }
+});
+
+/* AUTO-FILL: big panes take big nouns, small panes take small ones. the pane's
+   own aspect picks the piece of glass — a tall hole gets a tall photograph. */
+function autofill(only=null){
+  const tiers=[[0.030,'a building'],[0.012,'a wall'],[0.004,'a window'],[0,'a light']];
+  const total=FW*FH;
+  panes.forEach((p,i)=>{
+    if(only!==null&&i!==only)return;
+    if(p.fill&&only===null)return;
+    const frac=p.n/total;
+    const noun = p.role==='sky' ? 'the sky'
+               : p.role==='ground' ? 'water'
+               : p.role==='field' ? 'a wall'
+               : (tiers.find(t=>frac>=t[0])||tiers[3])[1];
+    const pool=byNoun[noun]||ELEMENTS;
+    const want=p.w/p.h;
+    let best=pool[0],bc=1e9;
+    for(const e of pool){const c=Math.abs(Math.log(Math.max(1e-3,e.a))-Math.log(want));
+      if(c<bc){bc=c;best=e;}}
+    p.fill=best.id;
+  });
+  render();
+}
+
+/* ─── library ──────────────────────────────────────────────────────────────*/
+function paintNouns(){
+  $('ec').textContent=ELEMENTS.length;
+  $('nouns').innerHTML=NOUNS.map(n=>
+    `<span class="chip ${n===selNoun?'on':''}" data-n="${n}">${n} ${byNoun[n].length}</span>`).join('');
+  document.querySelectorAll('#nouns .chip').forEach(c=>c.onclick=()=>{
+    selNoun=c.dataset.n;paintNouns();paintCards();});
+}
+function paintCards(){
+  $('cards').innerHTML=(byNoun[selNoun]||[]).slice(0,180).map(e=>
+    `<div class=card draggable=true data-id="${e.id}" title="${e.id}">`+
+    `<img src="../thumbs/${e.id}.webp" loading=lazy></div>`).join('');
+  document.querySelectorAll('.card').forEach(c=>{
+    c.ondragstart=ev=>ev.dataTransfer.setData('text/plain',c.dataset.id);
+    c.onclick=()=>{ if(sel>=0){panes[sel].fill=c.dataset.id;render();} };
+  });
+}
+
+/* ─── chrome ───────────────────────────────────────────────────────────────*/
+$('world').innerHTML=WORLDS.map(w=>`<option>${w}</option>`).join('');
+$('world').onchange=async e=>{
+  rt=HW.makeRuntime((await import(`./worlds/${e.target.value}.mjs`)).default); cutPanes();};
+$('cut').onclick=cutPanes;
+$('fillall').onclick=()=>autofill();
+$('fillsel').onclick=()=>{if(sel>=0)autofill(sel);};
+$('clear').onclick=()=>{panes.forEach(p=>p.fill=null);render();};
+$('reset').onclick=()=>{if(sel>=0){const p=panes[sel];p.nodes=corners(p.x0,p.y0,p.w,p.h);render();}};
+for(const b of ['lead','ht','warp'])$(b).onclick=e=>{e.target.classList.toggle('on');render();};
+for(const n of ['leadw','htc'])$(n).onchange=()=>render();
+for(const n of ['wtime','came','minc'])$(n).onchange=()=>cutPanes();
+$('png').onclick=()=>{const a=document.createElement('a');
+  a.download='glass.png'; a.href=cv.toDataURL('image/png'); a.click();};
+paintNouns(); paintCards();
+rt=HW.makeRuntime((await import(`./worlds/${WORLDS.find(w=>w.startsWith('06'))||WORLDS[0]}.mjs`)).default);
+cutPanes();
+</script></body></html>

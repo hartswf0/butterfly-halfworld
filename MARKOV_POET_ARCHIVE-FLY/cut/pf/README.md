@@ -134,3 +134,35 @@ placement is an affine map of a rectangle, so the rectangle is clipped instead �
 exact, and indifferent to interpolation. It now reads 0 in frame and 0.38 when
 38% hangs off it. J2 says a node reports a metric it computed; it does not
 excuse computing the wrong one.
+
+## the archive, shipped
+
+    python3 pf/atlas_web.py 256 78   # -> out/thumbs/  (2033 files, 3 MB)
+    python3 pf/web_pass.py           # the galleries
+    python3 pf/web_films.py          # the films that can travel
+
+`out/elements/` is 1.1 GB, so PASTE and HELD's archive shelf only ever worked on
+the machine that made them, and 23 of the 28 doors on the front page pointed at
+files nobody else had. That is not a deployment detail — a tool nobody can open
+is a tool that does not exist.
+
+Two facts made it shippable. The median cut-out's **content** is 163x231 inside a
+768x576 frame, so most of every file is transparent nothing; and nothing samples
+a cut-out above a few hundred pixels, because a socket is at most a few dozen
+cells wide.
+
+    crop to alpha -> cap the long edge at 256 -> WebP with alpha
+    1209 MB -> 3.0 MB, all 2033 kept, none dropped
+
+Cropping is not only a size trick. Both tools already cropped at runtime, because
+a skin mapped across the file instead of the subject measured **87.4% seam**. The
+shipped file now IS the subject, so the runtime crop finds nothing left to do.
+
+The galleries took 178 MB -> 10.5 MB the same way at 1400px. The films took the
+saving in RESOLUTION rather than quality — h264 handles halftone badly, and these
+are 1600x1200 for a 192x144 field where a cell already lands on eight pixels.
+Scaled to 1024 and crf 20: **58 MB -> 32 MB at 42.8 dB, mean error 0.74 of 255.**
+
+What does not travel is said plainly rather than linked: CHURN is 1.1 GB, MOUSSA
+1.3 GB, the harvest 796 MB. Those doors came off the page and the renderers are
+named in their place. **22 doors, 0 that 404.**

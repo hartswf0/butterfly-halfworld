@@ -1,0 +1,81 @@
+<!doctype html><html lang=en><head>
+<meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>PATCHFIELD</title><style>
+:root{--paper:#f2efe6;--ink:#161513;--scar:#f0a822;--dim:#8b8175;--rule:#cfc8ba}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+body{background:var(--paper);color:var(--ink);padding:5vh 5vw 14vh;
+ font:13px/1.68 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
+.w{max-width:1180px;margin:0 auto}
+h1{font-size:13px;letter-spacing:.36em;font-weight:700;border-bottom:3px solid var(--ink);
+ padding-bottom:12px;margin-bottom:8px}
+h2{font-size:11px;letter-spacing:.22em;color:var(--dim);margin:44px 0 10px;
+ border-bottom:1px solid var(--rule);padding-bottom:6px}
+p{max-width:78ch;margin:13px 0} b{font-weight:700} i{color:var(--dim);font-style:normal}
+em{font-style:normal;color:var(--scar);font-weight:700}
+code{background:#e9e4d8;padding:1px 6px}
+table{border-collapse:collapse;font-size:12px;margin:14px 0}
+td,th{border:1px solid var(--rule);padding:5px 13px;text-align:left}
+th{background:#e9e4d8}
+video,img{width:100%;display:block;border:2px solid var(--ink);background:var(--paper)}
+figure{margin:0 0 22px} figcaption{margin-top:6px;color:var(--dim)}
+ul{margin:10px 0 0 20px} li{margin:6px 0;max-width:76ch}
+a{color:#3f7fc4}
+</style></head><body><div class=w>
+<h1>PATCHFIELD</h1>
+<p style="color:var(--dim);margin-top:0">Carriers of two kinds, skins of many, and layers
+that mix.</p>
+
+<p>TEXTULE proved the binding on one carrier: a halfworld rig, whose thirteen named joints
+give a body chart surviving every pose. But the theory's own Change Test said it only holds
+if <b><code>&lt;Surface&gt;</code> is an interface rather than that one class</b> &mdash; if a
+photographic region tracked through video satisfies the same invariant. This is that test.</p>
+
+<h2>TWO CARRIERS, ONE INTERFACE</h2>
+<table><tr><th>carrier</th><th>surface</th><th>bones</th><th>fidelity</th></tr>
+<tr><td>RigCarrier &mdash; halfworld figure</td><td><code>solve()</code> joints</td><td>10</td><td>exact</td></tr>
+<tr><td>TrackCarrier &mdash; SAM 2 mask track</td><td>image moments</td><td>1</td><td>approximate</td></tr></table>
+<p>A tracked blob has no joints. What it has is a mask per frame, and a mask has a centroid
+and a principal axis &mdash; <b>which is a bone</b>. So a TrackCarrier is a one-bone rig whose
+bone is the body's long axis: <code>u</code> runs head-to-foot, <code>v</code> across. The
+sign is resolved by the end with less mass, because a person is heavier at the hips than the
+head and that is more reliable than assuming up is up.</p>
+<p><i>Crude, and crude is correct.</i> The surface should be exactly as rich as the carrier's
+actual structure and no richer. Where the halfworld knows where an elbow is, we know where an
+elbow is. Where a tracked photograph does not, <b>we do not pretend</b>.</p>
+
+<figure><video src="track_P046.mp4" controls loop muted playsinline></video>
+<figcaption>photographic carrier &middot; a screened skin bound to the torso, following the body
+across 48 frames &middot; <em>amber tracing the seam</em></figcaption></figure>
+
+<h2>THE RICHER VOCABULARY</h2>
+<ul>
+<li><b>Banded skins.</b> A skin occupies a range <code>u0..u1</code> of the body, so a
+skeleton sits on the torso while a face sits on the head &mdash; several skins, one carrier.</li>
+<li><b>Seven blend modes</b> &mdash; normal, multiply, screen, overlay, burn, dodge, difference.
+<b>Categorical, never interpolated</b>: there is no tween from multiply to dodge, so a change
+of mode is a held keyframe or a crossfade of two parallel branches.</li>
+<li><b>Screened skins.</b> A skin arrives already through the dot law, so a photograph laid on
+a photograph still reads as a <i>mark</i> rather than a patch.</li>
+<li><b>Mortar and scar</b>, carried over: any cell inside the body that no skin reached is a
+seam, and a seam is the only site of colour in the system.</li>
+</ul>
+
+<figure><img src="modes.webp">
+<figcaption>four modes on one carrier &mdash; and an honest failure: SAM 2 locked onto a scrap in
+the top corner rather than the walking figure, so cover is 0.016 and the skin is a fragment.
+<b>The mechanism is right; the track is not.</b></figcaption></figure>
+
+<h2>WHAT THIS DOES NOT YET DO</h2>
+<ul>
+<li><b>Carrier quality is the bottleneck now, not binding.</b> A one-bone surface is fine for a
+standing or walking body and wrong for a body that folds. Multi-part tracking &mdash; SAM 3
+prompted per limb &mdash; would give a tracked photograph more than one bone.</li>
+<li><b>No mesh nodes.</b> A socket is still one flat skin with no corrective keyframes, which
+is why an elbow reads bluntly.</li>
+<li><b>No federated clock.</b> <code>head=f40, torso=f12, arm=live</code> remains unrenderable.
+That is invariant I5 and it is the most radical piece left.</li>
+</ul>
+<p style="margin-top:40px"><a href="../textule/index.html">textule</a> &middot;
+<a href="../studio/compose.html">the composer</a> &middot;
+<a href="../../../../index.html">the halfworld</a></p>
+</div></body></html>
