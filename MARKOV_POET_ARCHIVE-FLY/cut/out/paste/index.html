@@ -1,0 +1,778 @@
+<!doctype html><html lang=en><head>
+<meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>PASTE — the blend table</title>
+<style>
+:root{--paper:#f2efe6;--ink:#161513;--acc:#5aa7ff;--dim:#8b8175}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+html,body{height:100%;overflow:hidden}
+body{background:#1b1b1a;color:#e8e4da;
+ font:11px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em;
+ display:grid;grid-template-columns:250px 1fr 292px;grid-template-rows:34px 1fr;
+ grid-template-areas:"top top top" "left stage lib"}
+#top{grid-area:top;background:#111;border-bottom:1px solid #333;display:flex;
+ align-items:center;gap:6px;padding:0 10px;overflow-x:auto;white-space:nowrap}
+#top b{letter-spacing:.3em;color:#fff;margin-right:4px}
+#top s{text-decoration:none;color:#3a3a3a}
+button,select,input{font:inherit;background:#222;color:#e8e4da;border:1px solid #444;
+ padding:2px 7px;cursor:pointer;vertical-align:middle}
+button:hover{border-color:#999}
+button.on{background:var(--acc);border-color:var(--acc);color:#04203f}
+input[type=text],input[type=number]{cursor:text}
+input[type=color]{padding:0;width:26px;height:19px}
+input[type=range]{cursor:ew-resize;padding:0;height:14px;width:100%}
+/* the current blend mode has to be readable without hunting for it — it is the
+   verb this tool is built around, so it gets the loudest chip in the bar */
+#mode{background:var(--acc);color:#04203f;border:1px solid var(--acc);padding:2px 9px;
+ font-weight:700;letter-spacing:.12em;min-width:104px;text-align:center;display:inline-block}
+#mode.none{background:#2a2a2a;color:#666;border-color:#3a3a3a}
+#left{grid-area:left;background:#161616;border-right:1px solid #333;overflow:auto;
+ display:flex;flex-direction:column}
+#stage{grid-area:stage;background:#0d0d0d;overflow:hidden;position:relative;
+ display:flex;align-items:center;justify-content:center}
+#wrap{position:relative;line-height:0}
+canvas{display:block}
+#cv{box-shadow:0 0 0 1px #333,0 14px 44px #000}
+#ov{position:absolute;left:0;top:0;width:100%;height:100%;cursor:default}
+#stage.drop::after{content:"";position:absolute;inset:8px;border:2px dashed var(--acc);
+ pointer-events:none}
+#lib{grid-area:lib;background:#161616;border-left:1px solid #333;overflow:auto;padding:7px}
+h3{font-size:9px;letter-spacing:.2em;color:#8b8175;padding:6px 9px;border-bottom:1px solid #333;
+ position:sticky;top:0;background:#161616;z-index:2}
+h3 span{float:right;color:#ddd}
+#llist{overflow:auto;flex:0 1 auto;min-height:60px}
+.lay{display:grid;grid-template-columns:14px 1fr 30px 34px;gap:5px;align-items:center;
+ padding:4px 8px;border-bottom:1px solid #242424;cursor:pointer;font-size:10px}
+.lay:hover{background:#1f1f1f}
+.lay.sel{background:#2f7fd6;color:#fff}
+.lay em{font-style:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lay i{font-style:normal;color:#7d7d7d;font-size:9px;text-align:right}
+.lay.sel i{color:#d6e6ff}
+#insp{border-top:1px solid #333;background:#131313;padding:7px 9px;font-size:10px}
+#insp.off{opacity:.32;pointer-events:none}
+.row{display:grid;grid-template-columns:38px 1fr 44px;gap:6px;align-items:center;
+ margin-bottom:4px}
+.row label{color:#8b8175}
+.row b{font-weight:400;color:#ddd;text-align:right;font-variant-numeric:tabular-nums}
+.row.wide{grid-template-columns:38px 1fr}
+.btns{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+.chip{display:inline-block;border:1px solid #3a3a3a;padding:1px 5px;margin:0 3px 3px 0;
+ cursor:pointer;color:#999;font-size:9px}
+.chip.on{background:var(--acc);color:#04203f;border-color:var(--acc)}
+.card{display:inline-block;width:64px;margin:0 4px 5px 0;cursor:grab;border:1px solid #333;
+ background:repeating-conic-gradient(#242424 0 25%,#1c1c1c 0 50%) 0 0/9px 9px}
+.card:hover{border-color:var(--acc)}
+.card img{width:100%;height:48px;object-fit:contain;display:block;pointer-events:none}
+.card em{font-style:normal;font-size:8px;color:#777;display:block;padding:0 2px;
+ overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#hud{position:absolute;left:10px;bottom:8px;color:#6d6d6d;font-size:10px;
+ pointer-events:none;white-space:pre}
+#help{position:absolute;right:10px;bottom:8px;color:#4a4a4a;font-size:9px;
+ pointer-events:none;text-align:right;line-height:1.6}
+</style></head><body>
+
+<div id=top>
+ <b>PASTE</b>
+ <span id=mode class=none>—</span>
+ <button id=bprev title="previous blend mode (Shift-B)">&lt;</button>
+ <button id=bnext title="next blend mode (B)">&gt;</button>
+ <s>|</s>
+ <label style="color:#8b8175">screen</label>
+ <input type=number id=ruling value=6 min=2 max=40 step=1 style="width:44px"
+  title="ABSOLUTE screen ruling: canvas pixels per dot, shared by every screened layer">
+ <button id=bhalf title="halftone selected (H)">HALFTONE</button>
+ <s>|</s>
+ <label style="color:#8b8175">haze</label>
+ <input type=range id=haze min=0 max=1 step=.01 value=.55 style="width:70px">
+ <input type=color id=hazec value="#f2efe6" title="the colour distance mixes toward">
+ <label style="color:#8b8175">blur</label>
+ <input type=range id=blur min=0 max=8 step=.1 value=3 style="width:60px">
+ <s>|</s>
+ <label style="color:#8b8175">paper</label>
+ <input type=color id=bg value="#f2efe6">
+ <input type=number id=dw value=1280 step=10 style="width:56px" title="canvas width">
+ <input type=number id=dh value=800 step=10 style="width:52px" title="canvas height">
+ <s>|</s>
+ <button id=bsave>SAVE</button><button id=bload>LOAD</button>
+ <button id=bexp>EXPORT JSON</button><button id=bimp>IMPORT</button>
+ <button id=bpng>PNG</button><button id=bclear>CLEAR</button>
+ <input type=file id=file accept="image/*" multiple hidden>
+ <input type=file id=jfile accept=".json,application/json" hidden>
+</div>
+
+<div id=left>
+ <h3>LAYERS <span id=lcount>0</span></h3>
+ <div id=llist></div>
+ <div id=insp class=off>
+  <div class="row wide"><label>name</label><input type=text id=iname style="width:100%"></div>
+  <div class=row><label>blend</label><select id=imode style="width:100%"></select><b></b></div>
+  <div class=row><label>opac</label><input type=range id=iop min=0 max=1 step=.01><b id=vop>1.00</b></div>
+  <div class=row><label>depth</label><input type=range id=idep min=0 max=1 step=.005><b id=vdep>0.00</b></div>
+  <div class=row><label>rot</label><input type=range id=irot min=-180 max=180 step=.5><b id=vrot>0</b></div>
+  <div class=btns>
+   <button id=bflip>FLIP</button><button id=bhide>HIDE</button><button id=bsolo>SOLO</button>
+   <button id=bdup>DUP</button><button id=bdel>DEL</button>
+   <button id=bfront>FRONT</button><button id=bback>BACK</button><button id=bfit>FIT</button>
+  </div>
+ </div>
+</div>
+
+<div id=stage>
+ <div id=wrap><canvas id=cv width=1280 height=800></canvas><canvas id=ov></canvas></div>
+ <div id=hud></div>
+ <div id=help>paste ⌘V · drop files/URLs · drag from archive
+B blend · H halftone · wheel = depth · [ ] depth · F flip
+arrows nudge · ⌥drag duplicate · del remove</div>
+</div>
+
+<div id=lib>
+ <h3>ARCHIVE <span id=ecount>…</span></h3>
+ <input type=text id=q placeholder="search noun / id / patch" style="width:100%;margin:6px 0">
+ <div id=nouns></div><div id=cards></div>
+</div>
+
+<script type="module">
+/* ============================================================================
+   PASTE — a second compositor for the halfworld boards.
+   The first one (studio/compose.html) is a MULTIPLIER: you seed a layer and it
+   emits structures. This one is the opposite hand. It assumes the image already
+   exists somewhere — a screenshot, a file, the archive — and that the whole job
+   is getting it onto the page and finding the blend and the distance at which it
+   belongs. So: no node graph, no part binding, no generators. Paste, drag,
+   blend, recede.
+   ========================================================================== */
+
+const $=id=>document.getElementById(id);
+const CV=$('cv'), CX=CV.getContext('2d');
+const OV=$('ov'), OX=OV.getContext('2d');
+
+const PAPER='#f2efe6', ACC='#5aa7ff';
+/* depth 1 draws at half size. Anything stronger and a receded layer stops being
+   legible as the same object; anything weaker and depth reads as a z-sort only. */
+const DEPTH_SCALE=0.50;
+/* 'source-over' is canvas's name for normal; everything after it is a real blend.
+   These are CATEGORICAL — there is no halfway between multiply and screen — so
+   the UI cycles them rather than offering a slider. */
+const MODES=['source-over','multiply','screen','overlay','soft-light','hard-light',
+             'color-dodge','color-burn','difference','exclusion',
+             'hue','saturation','color','luminosity'];
+const MODENAME=m=>m==='source-over'?'NORMAL':m.replace('-',' ').toUpperCase();
+
+let DOC={w:1280,h:800,bg:PAPER,haze:PAPER,hazeAmt:0.55,blurAmt:3,ruling:6};
+let L=[], sel=new Set(), uid=1, zc=1, solo=false;
+let BLOBS=new Map();          /* dataurl id -> data url, for pasted/dropped pixels */
+let blobN=1;
+let tainted=false;            /* a no-CORS remote image poisons toDataURL; we warn */
+let lastPt={x:640,y:400};     /* ⌘V has no coordinates, so paste lands under the mouse */
+
+/* ---------------------------------------------------------------- sources ---
+   One entry per distinct image, keyed so buffers and alpha probes can be cached
+   across layers that share a source. */
+const SRC=new Map();
+const keyOf=s=>s.k+':'+(s.k==='url'?s.u:s.id);
+const urlOf=s=>s.k==='el'?`../elements/${s.id}.png`:s.k==='data'?BLOBS.get(s.id):s.u;
+
+function getSrc(s){
+  const k=keyOf(s); let e=SRC.get(k); if(e) return e;
+  e={key:k, img:new Image(), ready:false, retried:false,
+     crop:null, probe:null, pw:0, ph:0};
+  /* Remote URLs: ask for CORS first so PNG export keeps working. If the host
+     refuses we retry without it — a picture you can see and cannot export beats
+     no picture — and flag the document tainted so the PNG button can say why. */
+  if(s.k==='url') e.img.crossOrigin='anonymous';
+  e.img.onload=()=>{ e.ready=true; probe(e); render(); };
+  e.img.onerror=()=>{
+    if(s.k==='url' && !e.retried){ e.retried=true; e.img.crossOrigin=null;
+      tainted=true; e.img.src=urlOf(s); }
+    else hud('could not load '+urlOf(s));
+  };
+  e.img.src=urlOf(s);
+  SRC.set(k,e); return e;
+}
+
+/* The archive cut-outs are 768x576 frames with the subject floating inside a lot
+   of transparency. Sizing a layer by the FILE box made every drop feel wrong —
+   you grabbed a 400px rectangle to move a 90px bird, and the bbox hit-test ate
+   clicks meant for the layer behind. So: probe the alpha once at low res, keep a
+   tight crop, and let the layer BE the subject. */
+function probe(e){
+  const iw=e.img.naturalWidth, ih=e.img.naturalHeight; if(!iw||!ih) return;
+  const s=96/Math.max(iw,ih), pw=Math.max(1,Math.round(iw*s)), ph=Math.max(1,Math.round(ih*s));
+  const c=document.createElement('canvas'); c.width=pw; c.height=ph;
+  const cc=c.getContext('2d',{willReadFrequently:true}); cc.drawImage(e.img,0,0,pw,ph);
+  let d; try{ d=cc.getImageData(0,0,pw,ph).data; }
+  catch(err){ e.crop={sx:0,sy:0,sw:iw,sh:ih}; e.probe=null; tainted=true; return; }
+  let x0=pw,y0=ph,x1=-1,y1=-1;
+  const a=new Uint8Array(pw*ph);
+  for(let y=0;y<ph;y++)for(let x=0;x<pw;x++){
+    const v=d[(y*pw+x)*4+3]; a[y*pw+x]=v;
+    if(v>12){ if(x<x0)x0=x; if(x>x1)x1=x; if(y<y0)y0=y; if(y>y1)y1=y; }
+  }
+  e.probe=a; e.pw=pw; e.ph=ph;
+  if(x1<0){ e.crop={sx:0,sy:0,sw:iw,sh:ih}; return; }
+  x0=Math.max(0,x0-1); y0=Math.max(0,y0-1); x1=Math.min(pw-1,x1+1); y1=Math.min(ph-1,y1+1);
+  e.crop={sx:x0/pw*iw, sy:y0/ph*ih, sw:(x1-x0+1)/pw*iw, sh:(y1-y0+1)/ph*ih};
+}
+/* u,v are 0..1 inside the CROP; answer whether the subject is actually there. */
+function solidAt(e,u,v){
+  if(!e.probe||!e.crop) return true;
+  const iw=e.img.naturalWidth, ih=e.img.naturalHeight;
+  const px=Math.floor((e.crop.sx+u*e.crop.sw)/iw*e.pw);
+  const py=Math.floor((e.crop.sy+v*e.crop.sh)/ih*e.ph);
+  if(px<0||py<0||px>=e.pw||py>=e.ph) return false;
+  return e.probe[py*e.pw+px]>14;
+}
+
+/* --------------------------------------------------------------- halftone ---
+   The dot law from the halfworld renderer: per cell,
+       r = CELL * 0.5 * (level/7)^0.72 * 1.24,  8 levels.
+   The thing that matters here is that CELL is ABSOLUTE — canvas pixels per dot,
+   one number for the whole document. My first pass copied compose.html's
+   `Math.max(6, w/ruling)` floor on the cell COUNT, which silently turns the
+   ruling relative again below a certain size: a small layer got six fat dots and
+   read as a black blob while a big one stayed airy, and the two could not belong
+   to the same printed sheet. No floor now. A small layer gets few dots. That is
+   what a real screen does. */
+function halftone(e,W,H){
+  const cw=Math.max(1,Math.round(W/DOC.ruling)), ch=Math.max(1,Math.round(H/DOC.ruling));
+  const s=document.createElement('canvas'); s.width=cw; s.height=ch;
+  const sc=s.getContext('2d',{willReadFrequently:true});
+  const c=e.crop; sc.drawImage(e.img,c.sx,c.sy,c.sw,c.sh,0,0,cw,ch);
+  let d; try{ d=sc.getImageData(0,0,cw,ch).data; }
+  catch(err){ return null; }   /* tainted remote image — fall back to the photo */
+  const o=document.createElement('canvas'); o.width=W; o.height=H;
+  const oc=o.getContext('2d'), px=W/cw, py=H/ch;
+  for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){
+    const i=(y*cw+x)*4; if(d[i+3]<89) continue;          /* 0.35 alpha */
+    const lum=(0.299*d[i]+0.587*d[i+1]+0.114*d[i+2])/255;
+    const lv=Math.min(7,Math.max(0,Math.round((1-lum)*7.6)));
+    if(lv<1) continue;
+    /* radius off DOC.ruling, not off px: rounding the cell count would otherwise
+       drift the dot size a few percent per layer and break the shared material */
+    const r=DOC.ruling*0.5*Math.pow(lv/7,0.72)*1.24;
+    oc.fillStyle=`rgb(${d[i]},${d[i+1]},${d[i+2]})`;
+    oc.beginPath(); oc.arc((x+0.5)*px,(y+0.5)*py,Math.max(0.4,r),0,6.2832); oc.fill();
+  }
+  return o;
+}
+
+/* ------------------------------------------------------------------ depth ---
+   Depth is not a sort key with a label on it. One number moves four things at
+   once, which is the only reason it feels like distance:
+     order  — far draws first, so near occludes it
+     scale  — it gets smaller about its own centre
+     haze   — it mixes toward the ground colour (atmospheric perspective)
+     blur   — optional, and the last thing to reach for */
+const dscale=l=>1-DEPTH_SCALE*l.depth;
+function rectOf(l){ const k=dscale(l);
+  return {cx:l.x+l.w/2, cy:l.y+l.h/2, w:l.w*k, h:l.h*k}; }
+const order=()=>L.slice().sort((a,b)=> b.depth-a.depth || a.z-b.z);
+
+/* Haze and blur are baked into a per-layer buffer rather than applied with
+   ctx.filter at draw time: filter + globalCompositeOperation together is not
+   worth trusting across engines, and baking makes the result cacheable. */
+const BUF=new Map();
+function prep(l){
+  const e=getSrc(l.src); if(!e.ready||!e.crop) return null;
+  const R=rectOf(l);
+  const W=Math.max(2,Math.round(R.w)), H=Math.max(2,Math.round(R.h));
+  const dq=Math.round(l.depth*128)/128;          /* quantise so wheel-drag hits cache */
+  const blur=dq*DOC.blurAmt, pad=Math.ceil(blur*3)+2;
+  const key=[e.key,W,H,l.ht?DOC.ruling:0,dq,DOC.hazeAmt,DOC.blurAmt,DOC.haze].join('|');
+  const hit=BUF.get(key); if(hit) return hit;
+
+  const base=document.createElement('canvas');
+  base.width=W+pad*2; base.height=H+pad*2;
+  const bc=base.getContext('2d');
+  const art=l.ht?halftone(e,W,H):null;
+  if(art) bc.drawImage(art,pad,pad);
+  else bc.drawImage(e.img,e.crop.sx,e.crop.sy,e.crop.sw,e.crop.sh,pad,pad,W,H);
+
+  const ha=dq*DOC.hazeAmt;
+  if(ha>0.002){
+    /* source-atop keeps the cut-out's own alpha as the mask, so haze veils the
+       subject and never fills its transparent surround */
+    bc.globalCompositeOperation='source-atop';
+    bc.globalAlpha=ha; bc.fillStyle=DOC.haze;
+    bc.fillRect(0,0,base.width,base.height);
+  }
+  let out=base;
+  if(blur>0.06){
+    const o=document.createElement('canvas'); o.width=base.width; o.height=base.height;
+    const oc=o.getContext('2d'); oc.filter=`blur(${blur.toFixed(2)}px)`;
+    oc.drawImage(base,0,0); out=o;
+  }
+  const res={c:out,pad,W,H};
+  if(BUF.size>180) BUF.clear();
+  BUF.set(key,res); return res;
+}
+
+/* ----------------------------------------------------------------- render --- */
+let pending=false;
+const render=()=>{ if(pending)return; pending=true;
+  requestAnimationFrame(()=>{ pending=false; draw(); }); };
+
+function draw(){
+  CX.setTransform(1,0,0,1,0,0);
+  CX.globalAlpha=1; CX.globalCompositeOperation='source-over';
+  CX.fillStyle=DOC.bg; CX.fillRect(0,0,CV.width,CV.height);
+  for(const l of order()){
+    if(!l.on) continue;
+    if(solo && !sel.has(l.id)) continue;
+    const b=prep(l); if(!b) continue;
+    const R=rectOf(l);
+    CX.save();
+    CX.globalAlpha=l.op;
+    CX.globalCompositeOperation=l.mode;
+    CX.translate(R.cx,R.cy);
+    if(l.r) CX.rotate(l.r*Math.PI/180);
+    if(l.flip) CX.scale(-1,1);
+    CX.drawImage(b.c,-b.W/2-b.pad,-b.H/2-b.pad);
+    CX.restore();
+  }
+  CX.setTransform(1,0,0,1,0,0); CX.globalCompositeOperation='source-over';
+  overlay(); paintList(); paintInsp();
+}
+
+/* ------------------------------------------------- selection box + handles --- */
+function handlesOf(l){
+  const R=rectOf(l), a=l.r*Math.PI/180, co=Math.cos(a), si=Math.sin(a);
+  const P=(lx,ly)=>({x:R.cx+lx*co-ly*si, y:R.cy+lx*si+ly*co});
+  const out=[];
+  for(const [hx,hy] of [[-1,-1],[1,-1],[1,1],[-1,1],[0,-1],[1,0],[0,1],[-1,0]])
+    out.push({hx,hy,...P(hx*R.w/2,hy*R.h/2)});
+  out.push({rot:true,hx:0,hy:0,...P(0,-R.h/2-30/vk())});
+  return out;
+}
+const vk=()=>CV.getBoundingClientRect().width/CV.width;   /* display px per canvas px */
+
+function overlay(){
+  OX.setTransform(1,0,0,1,0,0); OX.clearRect(0,0,OV.width,OV.height);
+  const one=only();
+  const k=1/vk();                       /* keep the chrome one screen pixel thick */
+  OX.lineWidth=Math.max(1,k);
+  for(const id of sel){
+    const l=L.find(x=>x.id===id); if(!l) continue;
+    const R=rectOf(l);
+    OX.save(); OX.translate(R.cx,R.cy); OX.rotate(l.r*Math.PI/180);
+    OX.strokeStyle=ACC; OX.setLineDash(l===one?[]:[6*k,4*k]);
+    OX.strokeRect(-R.w/2,-R.h/2,R.w,R.h);
+    OX.restore();
+  }
+  if(!one) return;
+  OX.setLineDash([]);
+  const R=rectOf(one), a=one.r*Math.PI/180;
+  OX.save(); OX.translate(R.cx,R.cy); OX.rotate(a);
+  OX.strokeStyle=ACC; OX.beginPath();
+  OX.moveTo(0,-R.h/2); OX.lineTo(0,-R.h/2-30*k); OX.stroke();
+  OX.restore();
+  for(const h of handlesOf(one)){
+    const s=(h.rot?5:4.5)*k;
+    OX.fillStyle=h.rot?'#fff':ACC; OX.strokeStyle='#04203f';
+    OX.beginPath();
+    if(h.rot) OX.arc(h.x,h.y,s,0,6.2832); else OX.rect(h.x-s,h.y-s,s*2,s*2);
+    OX.fill(); OX.stroke();
+  }
+}
+
+/* ----------------------------------------------------------------- layers --- */
+function add(src,name,pt,opt={}){
+  const l={id:uid++, z:zc++, src, name, on:true,
+           x:0,y:0,w:240,h:180, r:0, flip:false,
+           depth:0, mode:'source-over', op:1, ht:false, ...opt};
+  L.push(l); sel=new Set([l.id]);
+  const e=getSrc(src);
+  /* size once the pixels arrive: the drop point is the CENTRE, which is what
+     "it lands where you dropped it" has to mean for an object you aimed at */
+  const place=()=>{
+    if(!e.crop) return;
+    const ar=e.crop.sw/e.crop.sh || 1;
+    const long=opt.long ?? Math.min(CV.width,CV.height)*0.42;
+    l.w = ar>=1 ? long : long*ar;
+    l.h = ar>=1 ? long/ar : long;
+    const p=pt||lastPt;
+    l.x=p.x-l.w/2; l.y=p.y-l.h/2;
+    render();
+  };
+  if(e.ready) place(); else e.img.addEventListener('load',place,{once:true});
+  render(); return l;
+}
+const only=()=>sel.size===1?L.find(l=>l.id===[...sel][0]):null;
+const each=f=>{ for(const id of sel){const l=L.find(x=>x.id===id); if(l)f(l);} render(); };
+
+function paintList(){
+  $('lcount').textContent=L.length;
+  /* listed in draw order, nearest first — the panel is a section through the
+     picture, not the order you happened to paste things in */
+  $('llist').innerHTML=order().reverse().map(l=>
+    `<div class="lay ${sel.has(l.id)?'sel':''}" data-id="${l.id}" title="${l.mode}">`+
+    `<i style="text-align:left">${l.on?'●':'○'}</i><em>${l.name}</em>`+
+    `<i>${l.ht?'▦ ':''}${l.mode==='source-over'?'':MODENAME(l.mode).slice(0,3)}</i>`+
+    `<i>d${l.depth.toFixed(2).slice(1)}</i></div>`).join('');
+  for(const d of document.querySelectorAll('.lay')) d.onclick=ev=>{
+    const id=+d.dataset.id;
+    if(ev.shiftKey||ev.metaKey) sel.has(id)?sel.delete(id):sel.add(id);
+    else sel=new Set([id]);
+    render();
+  };
+  hud(`${L.length} layers · ${sel.size} selected`+(solo?' · SOLO':'')+
+      (tainted?' · remote image: PNG export blocked':''));
+}
+function hud(t){ $('hud').textContent=t; }
+
+let inspLock=false;
+function paintInsp(){
+  const l=only();
+  $('mode').textContent=l?MODENAME(l.mode):'—';
+  $('mode').className=l&&l.mode!=='source-over'?'':'none';
+  $('insp').className=l?'':'off';
+  if(!l||inspLock) return;
+  $('iname').value=l.name;
+  $('imode').value=l.mode;
+  $('iop').value=l.op;  $('vop').textContent=l.op.toFixed(2);
+  $('idep').value=l.depth; $('vdep').textContent=l.depth.toFixed(2);
+  $('irot').value=l.r;  $('vrot').textContent=Math.round(l.r);
+  $('bhide').classList.toggle('on',!l.on);
+  $('bhalf').classList.toggle('on',l.ht);
+}
+
+/* --------------------------------------------------------------- pointing ---
+   Hit test walks the DRAW ORDER backwards (nearest first) and consults the alpha
+   probe, so clicking the gap inside a cut-out selects what is behind it. */
+function pick(mx,my){
+  const o=order();
+  for(let i=o.length-1;i>=0;i--){
+    const l=o[i]; if(!l.on||(solo&&!sel.has(l.id))) continue;
+    const R=rectOf(l), a=-l.r*Math.PI/180;
+    const dx=mx-R.cx, dy=my-R.cy;
+    let lx=dx*Math.cos(a)-dy*Math.sin(a), ly=dx*Math.sin(a)+dy*Math.cos(a);
+    if(Math.abs(lx)>R.w/2||Math.abs(ly)>R.h/2) continue;
+    let u=(lx+R.w/2)/R.w; const v=(ly+R.h/2)/R.h;
+    if(l.flip) u=1-u;
+    const e=SRC.get(keyOf(l.src));
+    if(e&&!solidAt(e,u,v)) continue;
+    return l;
+  }
+  return null;
+}
+const toCv=ev=>{ const r=CV.getBoundingClientRect(), k=CV.width/r.width;
+  return {x:(ev.clientX-r.left)*k, y:(ev.clientY-r.top)*k}; };
+
+let drag=null;
+OV.addEventListener('pointerdown',ev=>{
+  const m=toCv(ev); lastPt=m; OV.setPointerCapture(ev.pointerId);
+  const one=only();
+  if(one){
+    const grab=12/vk();
+    for(const h of handlesOf(one))
+      if(Math.hypot(h.x-m.x,h.y-m.y)<grab){
+        const R=rectOf(one);
+        if(h.rot){ drag={mode:'rot',l:one,cx:R.cx,cy:R.cy,
+                         off:one.r-Math.atan2(m.y-R.cy,m.x-R.cx)*180/Math.PI}; }
+        else drag=startScale(one,h,R);
+        return;
+      }
+  }
+  const hit=pick(m.x,m.y);
+  if(!hit){ if(!ev.shiftKey) sel=new Set(); render(); return; }
+  if(ev.shiftKey) sel.add(hit.id);
+  else if(!sel.has(hit.id)) sel=new Set([hit.id]);
+  /* alt-drag duplicates, the one shortcut every collage tool has and nobody
+     wants to look up */
+  if(ev.altKey){
+    const copies=[...sel].map(id=>{const s=L.find(x=>x.id===id);
+      return {...s,id:uid++,z:zc++};});
+    L.push(...copies); sel=new Set(copies.map(c=>c.id));
+  }
+  drag={mode:'move',m,start:[...sel].map(id=>{const l=L.find(x=>x.id===id);
+        return {l,x:l.x,y:l.y};})};
+  render();
+});
+
+/* Scale keeps the OPPOSITE handle pinned in world space. Doing it the naive way
+   (edit w/h, leave x/y) makes a rotated layer swim sideways as you drag, because
+   the rectangle grows about its top-left in a frame that is itself rotated. */
+function startScale(l,h,R){
+  const a=l.r*Math.PI/180, co=Math.cos(a), si=Math.sin(a);
+  const ax=-h.hx*R.w/2, ay=-h.hy*R.h/2;           /* anchor, in layer-local space */
+  return {mode:'scale',l,h,co,si,
+          ax:R.cx+ax*co-ay*si, ay:R.cy+ax*si+ay*co,
+          w0:R.w,h0:R.h,ar:R.w/R.h};
+}
+OV.addEventListener('pointermove',ev=>{
+  const m=toCv(ev); lastPt=m;
+  if(!drag){ OV.style.cursor=hoverCursor(m); return; }
+  if(drag.mode==='move'){
+    for(const s of drag.start){ s.l.x=s.x+(m.x-drag.m.x); s.l.y=s.y+(m.y-drag.m.y); }
+  } else if(drag.mode==='rot'){
+    let d=Math.atan2(m.y-drag.cy,m.x-drag.cx)*180/Math.PI+drag.off;
+    if(ev.shiftKey) d=Math.round(d/15)*15;
+    drag.l.r=((d+180)%360+360)%360-180;
+  } else {
+    const {l,h,co,si}=drag;
+    const dx=m.x-drag.ax, dy=m.y-drag.ay;
+    let lx=dx*co+dy*si, ly=-dx*si+dy*co;          /* into layer-local space */
+    let W=h.hx?Math.max(8,lx/h.hx):drag.w0;
+    let H=h.hy?Math.max(8,ly/h.hy):drag.h0;
+    if(ev.shiftKey&&h.hx&&h.hy){                  /* shift = keep the aspect */
+      if(W/H>drag.ar) W=H*drag.ar; else H=W/drag.ar;
+    }
+    const k=dscale(l);
+    const cx2=drag.ax+(h.hx*W/2)*co-(h.hy*H/2)*si;
+    const cy2=drag.ay+(h.hx*W/2)*si+(h.hy*H/2)*co;
+    l.w=W/k; l.h=H/k; l.x=cx2-l.w/2; l.y=cy2-l.h/2;
+  }
+  render();
+});
+function hoverCursor(m){
+  const one=only();
+  if(one){ const g=12/vk();
+    for(const h of handlesOf(one)) if(Math.hypot(h.x-m.x,h.y-m.y)<g)
+      return h.rot?'grab':(h.hx*h.hy>0?'nwse-resize':h.hx*h.hy<0?'nesw-resize':
+             h.hx?'ew-resize':'ns-resize'); }
+  return pick(m.x,m.y)?'move':'default';
+}
+addEventListener('pointerup',()=>{drag=null;});
+
+/* Wheel over the stage is DEPTH. It is the gesture the tool is about, so it gets
+   the wheel outright — there is no canvas pan/zoom to compete for it. */
+$('stage').addEventListener('wheel',ev=>{
+  const m=toCv(ev);
+  const t=(sel.size?null:pick(m.x,m.y));
+  const targets=t?[t]:[...sel].map(id=>L.find(l=>l.id===id)).filter(Boolean);
+  if(!targets.length) return;
+  ev.preventDefault();
+  const d=Math.sign(ev.deltaY)*(ev.shiftKey?0.02:0.005)*Math.min(6,Math.abs(ev.deltaY)/8+1);
+  for(const l of targets) l.depth=Math.min(1,Math.max(0,l.depth+d));
+  render();
+},{passive:false});
+
+/* --------------------------------------------------------------- intake -----
+   Four doors, one landing pad. Everything below funnels into add(). */
+function dropPt(ev){ const r=CV.getBoundingClientRect(), k=CV.width/r.width;
+  return {x:(ev.clientX-r.left)*k, y:(ev.clientY-r.top)*k}; }
+
+function fromBlob(blob,pt,name){
+  const fr=new FileReader();
+  /* Data URLs, not object URLs: the recipe has to survive a reload, and an
+     object URL is dead the moment the tab is. */
+  fr.onload=()=>{ const id='b'+(blobN++); BLOBS.set(id,fr.result);
+    add({k:'data',id}, name||blob.name||'pasted', pt); };
+  fr.readAsDataURL(blob);
+}
+function fromURL(u,pt){
+  u=u.trim().split(/\s+/)[0];
+  if(!/^https?:|^data:image\//i.test(u)) return false;
+  if(u.startsWith('data:')){ const id='b'+(blobN++); BLOBS.set(id,u);
+    add({k:'data',id},'dropped',pt); return true; }
+  add({k:'url',u}, u.split('/').pop().split('?')[0]||'url', pt); return true;
+}
+
+addEventListener('paste',ev=>{
+  const items=[...(ev.clipboardData?.items||[])];
+  const im=items.find(i=>i.type.startsWith('image/'));
+  if(im){ ev.preventDefault(); fromBlob(im.getAsFile(),lastPt,'pasted'); return; }
+  if(document.activeElement&&/INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
+  const t=ev.clipboardData?.getData('text/plain')||'';
+  if(t&&fromURL(t,lastPt)) ev.preventDefault();
+});
+
+for(const ev of ['dragenter','dragover'])
+  $('stage').addEventListener(ev,e=>{e.preventDefault();
+    e.dataTransfer.dropEffect='copy'; $('stage').classList.add('drop');});
+for(const ev of ['dragleave','dragend'])
+  $('stage').addEventListener(ev,()=>$('stage').classList.remove('drop'));
+
+$('stage').addEventListener('drop',ev=>{
+  ev.preventDefault(); $('stage').classList.remove('drop');
+  const pt=dropPt(ev), dt=ev.dataTransfer;
+  /* archive cards first: they carry a private type so a library drag never gets
+     mistaken for a text/plain URL drop */
+  const eid=dt.getData('application/x-element');
+  if(eid){ const e=ELEMENTS.find(x=>x.id===eid);
+    add({k:'el',id:eid}, e?`${e.p} ${e.patch}`:eid, pt); return; }
+  const files=[...(dt.files||[])].filter(f=>f.type.startsWith('image/'));
+  if(files.length){
+    files.forEach((f,i)=>fromBlob(f,{x:pt.x+i*26,y:pt.y+i*26},f.name));
+    return;
+  }
+  const u=dt.getData('text/uri-list')||dt.getData('text/plain');
+  if(u&&fromURL(u,pt)) return;
+  hud('nothing droppable in that');
+});
+
+/* ---------------------------------------------------------------- archive --- */
+let ELEMENTS=[], byNoun={}, NOUNS=[], selNoun='', q='';
+try{
+  ELEMENTS=await (await fetch('../studio/elements.json')).json();
+  for(const e of ELEMENTS)(byNoun[e.p]||=[]).push(e);
+  NOUNS=Object.keys(byNoun).sort((a,b)=>byNoun[b].length-byNoun[a].length);
+  selNoun=NOUNS[0];
+}catch(err){ $('ecount').textContent='offline'; }
+
+function paintNouns(){
+  $('ecount').textContent=ELEMENTS.length;
+  $('nouns').innerHTML=NOUNS.slice(0,90).map(n=>
+    `<span class="chip ${n===selNoun?'on':''}" data-n="${n}">${n} ${byNoun[n].length}</span>`).join('');
+  for(const c of document.querySelectorAll('#nouns .chip'))
+    c.onclick=()=>{ selNoun=c.dataset.n; q=''; $('q').value=''; paintNouns(); paintCards(); };
+}
+function paintCards(){
+  const t=q.toLowerCase();
+  const base=t?ELEMENTS.filter(e=>e.id.toLowerCase().includes(t)||e.p.includes(t))
+              :(byNoun[selNoun]||[]);
+  $('cards').innerHTML=base.slice(0,160).map(e=>
+    `<div class=card draggable=true data-id="${e.id}" title="${e.id}">`+
+    `<img src="../elements/${e.id}.png" loading=lazy><em>${e.patch}</em></div>`).join('');
+  for(const c of document.querySelectorAll('.card')){
+    c.ondragstart=ev=>{ ev.dataTransfer.setData('application/x-element',c.dataset.id);
+      ev.dataTransfer.setData('text/plain',c.dataset.id);
+      ev.dataTransfer.effectAllowed='copy'; };
+    c.ondblclick=()=>{ const e=ELEMENTS.find(x=>x.id===c.dataset.id);
+      add({k:'el',id:e.id},`${e.p} ${e.patch}`,{x:CV.width/2,y:CV.height/2}); };
+  }
+}
+$('q').oninput=e=>{q=e.target.value.trim();paintCards();};
+
+/* ------------------------------------------------------------------ chrome --- */
+$('imode').innerHTML=MODES.map(m=>`<option value="${m}">${MODENAME(m)}</option>`).join('');
+const live=(el,f)=>{ el.oninput=()=>{inspLock=true; f(+el.value); inspLock=false;}; };
+live($('iop'), v=>each(l=>l.op=v));
+live($('idep'),v=>each(l=>l.depth=v));
+live($('irot'),v=>each(l=>l.r=v));
+$('imode').onchange=()=>each(l=>l.mode=$('imode').value);
+$('iname').oninput=()=>{const l=only(); if(l){inspLock=true;l.name=$('iname').value;
+  render();inspLock=false;}};
+
+function cycle(d){ each(l=>{ const i=MODES.indexOf(l.mode);
+  l.mode=MODES[(i+d+MODES.length)%MODES.length]; }); }
+$('bnext').onclick=()=>cycle(1); $('bprev').onclick=()=>cycle(-1);
+$('bhalf').onclick=()=>each(l=>l.ht=!l.ht);
+$('bflip').onclick=()=>each(l=>l.flip=!l.flip);
+$('bhide').onclick=()=>each(l=>l.on=!l.on);
+$('bsolo').onclick=()=>{solo=!solo;$('bsolo').classList.toggle('on',solo);render();};
+$('bdel').onclick=()=>{L=L.filter(l=>!sel.has(l.id));sel=new Set();render();};
+$('bdup').onclick=()=>{const c=[...sel].map(id=>{const l=L.find(x=>x.id===id);
+  return {...l,id:uid++,z:zc++,x:l.x+26,y:l.y+26};});
+  L.push(...c); sel=new Set(c.map(x=>x.id)); render();};
+/* FRONT/BACK move within the depth plane you are already on — they set the
+   tiebreak, never the depth, so bringing something forward cannot secretly
+   change how hazy it is */
+$('bfront').onclick=()=>each(l=>l.z=zc++);
+$('bback').onclick=()=>each(l=>l.z=-(zc++));
+$('bfit').onclick=()=>each(l=>{ const e=SRC.get(keyOf(l.src)); if(!e?.crop)return;
+  const ar=e.crop.sw/e.crop.sh, cx=l.x+l.w/2, cy=l.y+l.h/2;
+  const long=Math.min(CV.width,CV.height)*0.42;
+  l.w=ar>=1?long:long*ar; l.h=ar>=1?long/ar:long; l.x=cx-l.w/2; l.y=cy-l.h/2;});
+
+const gset=(id,f)=>$(id).oninput=()=>{f($(id).value); BUF.clear(); render();};
+gset('ruling',v=>DOC.ruling=Math.max(2,+v));
+gset('haze',  v=>DOC.hazeAmt=+v);
+gset('hazec', v=>DOC.haze=v);
+gset('blur',  v=>DOC.blurAmt=+v);
+$('bg').oninput=()=>{DOC.bg=$('bg').value;render();};
+for(const id of ['dw','dh']) $(id).onchange=()=>resize(+$('dw').value,+$('dh').value);
+function resize(w,h){ DOC.w=CV.width=OV.width=Math.max(64,w|0);
+  DOC.h=CV.height=OV.height=Math.max(64,h|0); fit(); BUF.clear(); render(); }
+/* The canvas is drawn at document resolution and CSS-scaled to fit the stage;
+   every pointer number is converted through vk() so nothing depends on the zoom */
+function fit(){
+  const s=$('stage').getBoundingClientRect();
+  const k=Math.min((s.width-40)/CV.width,(s.height-40)/CV.height,1);
+  $('wrap').style.width=CV.width*k+'px'; $('wrap').style.height=CV.height*k+'px';
+  CV.style.width=CV.width*k+'px'; CV.style.height=CV.height*k+'px';
+}
+addEventListener('resize',()=>{fit();render();});
+
+/* --------------------------------------------------------------- the recipe ---
+   A document is a list of instructions, not a bitmap: element id, transform,
+   depth, mode, opacity, screen flag. Only pasted pixels — which exist nowhere
+   else — are carried as data URLs. */
+function doc(){
+  const used=new Set(L.filter(l=>l.src.k==='data').map(l=>l.src.id));
+  return {v:1, w:CV.width, h:CV.height, bg:DOC.bg, haze:DOC.haze,
+          hazeAmt:DOC.hazeAmt, blurAmt:DOC.blurAmt, ruling:DOC.ruling,
+          blobs:Object.fromEntries([...BLOBS].filter(([k])=>used.has(k))),
+          layers:L.map(l=>({src:l.src,name:l.name,on:l.on,x:l.x,y:l.y,w:l.w,h:l.h,
+            r:l.r,flip:l.flip,depth:l.depth,mode:l.mode,op:l.op,ht:l.ht,z:l.z}))};
+}
+/* <input type=color> only accepts #rrggbb and warns to the console on anything
+   else, so a hand-edited recipe saying "#fff" would otherwise spray warnings */
+const hex=(c,fb)=>{ c=String(c||'').trim();
+  if(/^#[0-9a-f]{6}$/i.test(c)) return c.toLowerCase();
+  if(/^#[0-9a-f]{3}$/i.test(c)) return '#'+[...c.slice(1)].map(h=>h+h).join('').toLowerCase();
+  return fb; };
+function open(d){
+  if(!d||!d.layers) return;
+  BLOBS=new Map(Object.entries(d.blobs||{}));
+  blobN=1+Math.max(0,...[...BLOBS.keys()].map(k=>+k.slice(1)||0));
+  DOC={w:d.w|0||1280, h:d.h|0||800, bg:hex(d.bg,PAPER), haze:hex(d.haze,PAPER),
+       hazeAmt:+d.hazeAmt||0, blurAmt:+d.blurAmt||0, ruling:Math.max(2,+d.ruling||6)};
+  SRC.clear(); BUF.clear();
+  L=d.layers.map((l,i)=>({...l,id:i+1,z:l.z??i}));
+  uid=L.length+1; zc=Math.max(1,...L.map(l=>l.z))+1; sel=new Set();
+  $('bg').value=DOC.bg; $('hazec').value=DOC.haze; $('haze').value=DOC.hazeAmt;
+  $('blur').value=DOC.blurAmt; $('ruling').value=DOC.ruling;
+  $('dw').value=DOC.w; $('dh').value=DOC.h;
+  resize(DOC.w,DOC.h);
+}
+const KEY='paste.compositor.v1';
+$('bsave').onclick=()=>{
+  try{ localStorage.setItem(KEY,JSON.stringify(doc())); hud('saved to localStorage'); }
+  /* pasted screenshots are big; localStorage gives up around 5MB and the only
+     honest thing to do is send you to the JSON file instead of failing silently */
+  catch(err){ hud('localStorage full — use EXPORT JSON ('+err.name+')'); }
+};
+$('bload').onclick=()=>{ const s=localStorage.getItem(KEY);
+  if(!s) return hud('nothing saved');
+  open(JSON.parse(s)); hud('loaded'); };
+$('bexp').onclick=()=>{
+  const b=new Blob([JSON.stringify(doc(),null,1)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(b);
+  a.download='paste-recipe.json'; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+};
+$('bimp').onclick=()=>$('jfile').click();
+$('jfile').onchange=async e=>{ const f=e.target.files[0]; if(!f)return;
+  try{ open(JSON.parse(await f.text())); hud('imported '+f.name); }
+  catch(err){ hud('bad recipe: '+err.message); }
+  e.target.value=''; };
+$('bpng').onclick=()=>{
+  sel=new Set(); draw();                       /* no selection chrome in the plate */
+  try{ const a=document.createElement('a');
+    a.download='paste.png'; a.href=CV.toDataURL('image/png'); a.click(); }
+  catch(err){ hud('PNG blocked: a remote image tainted the canvas'); }
+};
+$('bclear').onclick=()=>{ if(L.length&&!confirm('discard '+L.length+' layers?'))return;
+  L=[];sel=new Set();render(); };
+
+/* ------------------------------------------------------------------- keys --- */
+addEventListener('keydown',ev=>{
+  if(/INPUT|TEXTAREA|SELECT/.test(ev.target.tagName)) return;
+  const k=ev.key;
+  if(k==='Backspace'||k==='Delete'){ $('bdel').click(); ev.preventDefault(); return; }
+  if(k==='b'||k==='B'){ cycle(k==='B'?-1:1); ev.preventDefault(); return; }
+  if(k==='h'||k==='H'){ $('bhalf').click(); return; }
+  if(k==='f'||k==='F'){ $('bflip').click(); return; }
+  if(k==='s'||k==='S'){ $('bsolo').click(); return; }
+  if(k==='d'&&(ev.metaKey||ev.ctrlKey)){ $('bdup').click(); ev.preventDefault(); return; }
+  if(k==='a'&&(ev.metaKey||ev.ctrlKey)){ sel=new Set(L.map(l=>l.id)); render();
+    ev.preventDefault(); return; }
+  if(k==='['){ each(l=>l.depth=Math.max(0,l.depth-0.05)); return; }
+  if(k===']'){ each(l=>l.depth=Math.min(1,l.depth+0.05)); return; }
+  const step=ev.shiftKey?12:1;
+  if(k==='ArrowLeft') { each(l=>l.x-=step); ev.preventDefault(); }
+  if(k==='ArrowRight'){ each(l=>l.x+=step); ev.preventDefault(); }
+  if(k==='ArrowUp')   { each(l=>l.y-=step); ev.preventDefault(); }
+  if(k==='ArrowDown') { each(l=>l.y+=step); ev.preventDefault(); }
+});
+
+/* ------------------------------------------------------------------- boot --- */
+if(NOUNS.length){ paintNouns(); paintCards(); }
+resize(DOC.w,DOC.h);
+hud('paste an image, drop a file, or drag one in from the archive');
+
+/* a small test hook so the browser harness can exercise intake without a real
+   clipboard; harmless in normal use */
+window.PASTE={add,doc,open,get L(){return L},get sel(){return sel},
+  set sel(s){sel=s;render();},render,MODES};
+</script></body></html>

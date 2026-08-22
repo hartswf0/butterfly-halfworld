@@ -1,0 +1,53 @@
+{
+  "name": "c02 — four of them, at four distances",
+  "note": "No aperture. Depth is the whole argument: four carriers at four depths, hazed toward the paper. The far one is deliberately below the rig floor to see whether the map notices.",
+  "piles": { "studio": "out/studio/elements.json" },
+  "nodes": [
+    { "id": "elems", "op": "pile.select",
+      "params": { "pile": "studio", "order": "-sc", "expect": 2033 } },
+
+    { "id": "skinA", "op": "skin.assign", "in": ["elems"],
+      "params": { "sockets": {
+        "head": { "p": "a human face", "order": "-sc", "nth": 0 },
+        "torso": { "p": "a neon sign", "order": "-sc", "nth": 0 },
+        "armA": { "p": "a building", "order": "-sc", "nth": 0 },
+        "armB": { "p": "a building", "order": "-sc", "nth": 1 },
+        "legs": { "p": "water", "order": "-sc", "nth": 0 } } } },
+    { "id": "skinB", "op": "skin.assign", "in": ["elems"],
+      "params": { "sockets": {
+        "head": { "p": "a light", "order": "-sc", "nth": 3 },
+        "torso": { "p": "the sky", "order": "-sc", "nth": 0 },
+        "armA": { "p": "a wall", "order": "-sc", "nth": 4 },
+        "armB": { "p": "a wall", "order": "-sc", "nth": 5 },
+        "legs": { "p": "a road", "order": "-sc", "nth": 2 } } } },
+
+    { "id": "near", "op": "carrier.rig",
+      "params": { "figures": [
+        { "x": 58, "y": 138, "h": 88, "pose": { "mode": "walk", "phase": 0.2, "face": 1 } } ] } },
+    { "id": "mids", "op": "carrier.rig",
+      "params": { "figures": [
+        { "x": 118, "y": 112, "h": 46, "pose": { "mode": "stand", "phase": 0, "face": -1 } },
+        { "x": 146, "y": 108, "h": 40, "pose": { "mode": "walk", "phase": 1.3, "face": -1 } } ] } },
+    { "id": "far", "op": "carrier.rig",
+      "params": { "figures": [
+        { "x": 172, "y": 92, "h": 18, "pose": { "mode": "walk", "phase": 0.8, "face": 1 } } ] } },
+
+    { "id": "bodyN", "op": "dress", "in": ["near", "skinA"],
+      "params": { "depth": 0.95, "tag": "bodyN", "radius": 0.66 } },
+    { "id": "bodyM", "op": "dress", "in": ["mids", "skinB"],
+      "params": { "depth": 0.55, "tag": "bodyM", "radius": 0.62 } },
+    { "id": "bodyF", "op": "dress", "in": ["far", "skinB"],
+      "params": { "depth": 0.18, "tag": "bodyF", "radius": 0.58 } },
+
+    { "id": "ground", "op": "plate",
+      "params": { "element": "P084_a-light_1", "depth": 0.02, "tag": "ground" } },
+
+    { "id": "comp", "op": "stack", "in": ["ground", "bodyF", "bodyM", "bodyN"],
+      "params": { "haze": 0.72, "bg": [230, 239, 242],
+                  "modes": { "ground": "multiply" },
+                  "opacity": { "ground": 0.5 } } },
+
+    { "id": "seam", "op": "mortar", "in": ["comp"], "params": { "scar": true } },
+    { "id": "out", "op": "output", "in": ["seam"], "params": { "path": "out/pf/c02.png" } }
+  ]
+}

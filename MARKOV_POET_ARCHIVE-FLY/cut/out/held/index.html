@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>HELD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#000;--paper:#fff;--seam:#ffd23f;--live:#19e6c8}
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%;overflow:hidden;background:#fff}
+  body{font-family:'IBM Plex Mono',ui-monospace,monospace;color:var(--ink);touch-action:none;
+       -webkit-user-select:none;user-select:none}
+  #stage{position:fixed;inset:0;display:block;width:100%;height:100%}
+
+  .chrome{position:fixed;z-index:5}
+  #line{left:14px;bottom:calc(62px + env(safe-area-inset-bottom));font-size:11px;letter-spacing:.14em;
+        text-transform:uppercase;pointer-events:none;white-space:nowrap;mix-blend-mode:difference;color:#fff}
+  #line b{font-weight:500;border-bottom:2px solid var(--seam);padding-bottom:1px}
+  #line i{font-style:normal;border-bottom:2px solid var(--live);padding-bottom:1px}
+
+  #acts{left:14px;bottom:calc(32px + env(safe-area-inset-bottom));display:flex;gap:6px;flex-wrap:wrap;
+        max-width:calc(100vw - 84px)}
+  .act{font:inherit;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+       background:var(--paper);color:var(--ink);border:1px solid var(--ink);border-radius:0;
+       padding:6px 11px;min-height:30px;cursor:pointer;white-space:nowrap}
+  .act:active,.act[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+  .act:focus-visible{outline:2px solid var(--live);outline-offset:2px}
+
+  #panel{display:none;flex-direction:column;gap:6px;padding:6px;background:var(--paper);
+         border:1px solid var(--ink);max-width:calc(100vw - 20px)}
+  #panel.on{display:flex}
+  #swatches{display:flex;gap:5px;flex-wrap:wrap;max-width:270px;max-height:98px;overflow-y:auto}
+  .sw{width:40px;height:40px;border:1px solid var(--ink);border-radius:0;padding:0;background:var(--paper);
+      cursor:pointer;display:block;position:relative;overflow:hidden}
+  .sw canvas{display:block;width:100%;height:100%;image-rendering:pixelated}
+  .sw span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+           font:inherit;font-size:9px;letter-spacing:.06em;text-transform:uppercase}
+  .sw[aria-pressed="true"]{outline:2px solid var(--live);outline-offset:-3px}
+  #modes{display:flex;gap:5px;flex-wrap:wrap}
+  #nouns{display:none;gap:4px;flex-wrap:wrap;max-width:270px;max-height:46px;overflow-y:auto}
+  #nouns.on{display:flex}
+  .noun{font:inherit;font-size:9px;letter-spacing:.06em;text-transform:uppercase;background:var(--paper);
+        color:var(--ink);border:1px solid var(--ink);padding:3px 6px;cursor:pointer;white-space:nowrap}
+  .noun[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+  #shots{right:10px;top:10px;bottom:74px;display:none;flex-direction:column;gap:6px;
+         overflow-y:auto;overflow-x:hidden;align-items:flex-end}
+  #shots.on{display:flex}
+  .shot{width:48px;height:30px;border:1px solid var(--ink);border-radius:0;padding:0;background:var(--paper);
+        cursor:pointer;display:block;flex:0 0 auto}
+  .shot canvas{display:block;width:100%;height:100%}
+  .shot[aria-pressed="true"]{outline:2px solid var(--live);outline-offset:-3px}
+
+  #scrub{left:0;right:0;bottom:0;height:30px;padding-bottom:env(safe-area-inset-bottom);
+         display:none;align-items:center;cursor:ew-resize}
+  #scrub.on{display:flex}
+  #track{position:absolute;left:14px;right:14px;height:1px;background:var(--live)}
+  #head{position:absolute;width:10px;height:10px;background:var(--live);transform:translate(-50%,0)}
+  #file{display:none}
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+<div id="line" class="chrome">draw a region · drop or paste images</div>
+<div id="acts" class="chrome"></div>
+<div id="panel" class="chrome">
+  <div id="nouns" role="group" aria-label="archive filter"></div>
+  <div id="swatches" role="group" aria-label="material"></div>
+  <div id="modes"></div>
+</div>
+<div id="shots" class="chrome" role="group" aria-label="shots"></div>
+<div id="scrub" class="chrome" aria-hidden="true"><div id="track"></div><div id="head"></div></div>
+<input id="file" type="file" accept="image/*,video/*" multiple>
+<video id="cam" playsinline muted style="display:none"></video>
+
+<script>
+(() => {
+'use strict';
+const TAU=Math.PI*2, D=Math.PI/180;
+const lerp=(a,b,k)=>a+(b-a)*k, dir=d=>[Math.cos(d*D),Math.sin(d*D)];
+const add=(p,d,n)=>[p[0]+d[0]*n,p[1]+d[1]*n], clamp=(v,a,b)=>v<a?a:v>b?b:v;
+const lum=(r,g,b)=>0.299*r+0.587*g+0.114*b;
+
+/* ══ CARRIER ══════════════════════════════════════════════ */
+function partsAt(t){
+  const p=0.5-0.5*Math.cos(t*TAU), sway=Math.sin(t*TAU)*1.1, bob=Math.sin(t*TAU*2)*0.8;
+  const cx=50+sway;
+  const hip=[cx,100+bob], neck=[cx+sway*0.4,56+bob], hx=cx+sway*0.7;
+  const shL=[neck[0]-11,60+bob], shR=[neck[0]+11,60+bob];
+  const elL=add(shL,dir(84),18), wrL=add(elL,dir(88),17), fiL=add(wrL,dir(90),7);
+  const aR1=lerp(86,-4,p), aR2=lerp(80,3,p);
+  const elR=add(shR,dir(aR1),18);
+  const wrR=add(elR,dir(aR2),17*(1+0.15*p));
+  const fiR=add(wrR,dir(aR2),9);
+  const hipL=[cx-6,hip[1]], hipR=[cx+6,hip[1]];
+  const knL=add(hipL,dir(93),26), ftL=add(knL,dir(88),26);
+  const knR=add(hipR,dir(87),26), ftR=add(knR,dir(92),26);
+  const P=(id,a,b,w,rest,tone,shape)=>({id,a,b,w,rest,tone,shape:shape||'rect'});
+  return [
+    P('thigh_r',hipR,knR,12,26,0.95), P('shin_r',knR,ftR,10,26,0.95),
+    P('shoe_r',ftR,[ftR[0]+8,ftR[1]+2],7,8,1.0),
+    P('thigh_l',hipL,knL,12,26,0.95), P('shin_l',knL,ftL,10,26,0.95),
+    P('shoe_l',ftL,[ftL[0]-8,ftL[1]+2],7,8,1.0),
+    P('arm_l',shL,elL,9,18,0.85), P('fore_l',elL,wrL,8,17,0.80), P('hand_l',wrL,fiL,6,7,0.75),
+    P('torso',neck,hip,30,44,0.88),
+    P('head',[hx,26],[hx,52],22,26,0.58,'ellipse'), P('hat',[hx,20],[hx,34],24,14,1.0,'ellipse'),
+    P('arm_r',shR,elR,9,18,0.85), P('fore_r',elR,wrR,8,17,0.80), P('hand_r',wrR,fiR,6,9,0.75),
+  ];
+}
+/* ══ THE REAL CARRIER ═════════════════════════════════════
+   partsAt() above is a mannequin: a hip, a hat, a sway, all
+   invented. MOUSSA has the actual poet — 135 shots and a
+   segmenter that tracked his body through them — so a cast
+   member can be a BODY instead of a rig.
+
+   A silhouette has no joints, so it cannot offer (bone,u,v).
+   But it has second moments: a centroid, a principal axis,
+   an extent along it and a half-width across. That is one
+   bone, measured rather than authored, and it gives u and v
+   the same meaning the mannequin's limbs do — which is why
+   sockets, lassoing and rendering below need no second path.
+
+   The body's figure space IS the 192x144 field, so `space`
+   carries each kind's origin and one transform serves both.
+   ═════════════════════════════════════════════════════════ */
+const BODY=new Map();                       /* patch -> {img,n,surface,w,h} */
+let PACK=null;
+async function loadPack(){
+  if(PACK) return PACK;
+  try{
+    const r=await fetch('pack/pack.json'); PACK=await r.json();
+  }catch(e){ PACK={shots:[]}; lineEl.textContent='no pack at pack/pack.json'; }
+  return PACK;
+}
+function loadBody(sh){
+  if(BODY.has(sh.patch)) return Promise.resolve(BODY.get(sh.patch));
+  return new Promise((res,rej)=>{
+    const img=new Image();
+    img.onload=()=>{
+      /* one strip: n photograph frames, then n mask frames. two files could
+         drift apart; one cannot. */
+      const c=document.createElement('canvas'); c.width=img.width; c.height=img.height;
+      const g=c.getContext('2d',{willReadFrequently:true});
+      g.drawImage(img,0,0);
+      const d=g.getImageData(0,0,img.width,img.height).data;
+      const b={patch:sh.patch,n:sh.n,w:sh.w,h:sh.h,surface:sh.surface,data:d,stride:img.width,
+               meta:sh};
+      BODY.set(sh.patch,b); res(b);
+    };
+    img.onerror=rej; img.src='pack/'+sh.patch+'.png';
+  });
+}
+/* the photograph and the mask at one field cell of one frame */
+function bodyAt(b,k,x,y){
+  if(x<0||y<0||x>=b.w||y>=b.h) return null;
+  const S=b.stride;
+  const mi=((b.n*b.h + k*b.h + y)*S + x)*4;
+  if(b.data[mi]<110) return null;                       /* not the body */
+  const pi=((k*b.h + y)*S + x)*4;
+  return [b.data[pi],b.data[pi+1],b.data[pi+2]];
+}
+/* the measured surface, as one part in the mannequin's own vocabulary */
+function bodyPart(b,k){
+  const s=b.surface[k%b.n];
+  if(!s) return null;
+  const ax=s.ax, n=[-ax[1],ax[0]];
+  /* u=0 is the head end, whichever end the pack resolved that to be */
+  const A=s.head===0?s.a0:s.a1, B=s.head===0?s.a1:s.a0;
+  const pa=[s.cx+ax[0]*A, s.cy+ax[1]*A], pb=[s.cx+ax[0]*B, s.cy+ax[1]*B];
+  return {id:'body', a:pa, b:pb, w:Math.max(4,s.half*2), rest:Math.abs(B-A)||1,
+          tone:0.9, shape:'mask', _b:b, _k:k%b.n, _agrees:s.agrees!==false};
+}
+/* ONE ENTRY POINT. every call site below asks for a cast member's parts at t and
+   does not care which kind it got. */
+function partsOf(f,t){
+  if(f.kind==='body'){
+    const b=BODY.get(f.patch); if(!b) return [];
+    const k=Math.floor(((t+f.phase)%1)*b.n)%b.n;
+    const p=bodyPart(b,k); return p?[p]:[];
+  }
+  return partsAt((t+f.phase)%1);
+}
+const SPACE={rig:[50,85], body:[96,72]};
+const spaceOf=f=>SPACE[f.kind==='body'?'body':'rig'];
+
+const frameOf=p=>{const ax=p.b[0]-p.a[0],ay=p.b[1]-p.a[1],len=Math.hypot(ax,ay)||1e-6;
+  return {ux:ax/len,uy:ay/len,len};};
+function local(part,x,y){
+  const f=frameOf(part), dx=x-part.a[0], dy=y-part.a[1], along=dx*f.ux+dy*f.uy;
+  return {u:(-dx*f.uy+dy*f.ux)/part.w+0.5, v:along/part.rest, s:along/f.len};
+}
+function unlocal(part,u,v){
+  const f=frameOf(part), n=v*part.rest, k=(u-0.5)*part.w;
+  return [part.a[0]+f.ux*n-f.uy*k, part.a[1]+f.uy*n+f.ux*k];
+}
+function contains(part,x,y){
+  const l=local(part,x,y);
+  if(part.shape==='mask'){
+    /* the bone is a bounding claim; the mask is the truth. asking the bone first
+       is only a cheap reject — a silhouette is not an oriented box and pretending
+       otherwise is what made the mannequin a mannequin. */
+    if(l.u<-0.4||l.u>1.4||l.s<-0.25||l.s>1.25) return null;
+    return bodyAt(part._b,part._k,Math.round(x),Math.round(y))?l:null;
+  }
+  if(l.u<0||l.u>1||l.s<0||l.s>1) return null;
+  if(part.shape==='ellipse'){const du=(l.u-.5)*2,ds=(l.s-.5)*2;if(du*du+ds*ds>1)return null;}
+  return l;
+}
+function inPoly(poly,x,y){
+  let inside=false;
+  for(let i=0,j=poly.length-1;i<poly.length;j=i++){
+    const xi=poly[i][0],yi=poly[i][1],xj=poly[j][0],yj=poly[j][1];
+    if((yi>y)!==(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi) inside=!inside;
+  }
+  return inside;
+}
+function bbox(poly){let a=1e9,b=1e9,c=-1e9,d=-1e9;
+  for(const p of poly){a=Math.min(a,p[0]);c=Math.max(c,p[0]);b=Math.min(b,p[1]);d=Math.max(d,p[1]);}
+  return [a,b,c,d];}
+
+/* ══ STOCK ════════════════════════════════════════════════ */
+const SW=96;
+const rng=s=>()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296;};
+function tearIt(g,seed){
+  const r=rng(seed); g.globalCompositeOperation='destination-out';
+  for(let k=0;k<2;k++){
+    const cx=r()<.5?r()*22:SW-r()*22, cy=r()<.5?r()*20:SW-r()*20;
+    g.beginPath();
+    for(let i=0;i<=14;i++){const a=i/14*TAU,rad=9+r()*11;
+      const x=cx+Math.cos(a)*rad,y=cy+Math.sin(a)*rad;i?g.lineTo(x,y):g.moveTo(x,y);}
+    g.closePath();g.fill();
+  }
+  g.globalCompositeOperation='source-over';
+}
+function mat(name,paint,seed,torn){
+  const c=document.createElement('canvas'); c.width=c.height=SW;
+  const g=c.getContext('2d',{willReadFrequently:true});
+  if(paint) paint(g,rng(seed));
+  if(torn!==false) tearIt(g,seed*7+11);
+  const m={name,kind:'tex',canvas:c,ctx:g,w:SW,h:SW,data:g.getImageData(0,0,SW,SW).data};
+  m.refresh=()=>{m.data=g.getImageData(0,0,SW,SW).data;};
+  return m;
+}
+/* any drawable (image, video, canvas) becomes material at its own aspect */
+let MID=0;
+function media(name,src,natW,natH,kind,maxEdge,crop){
+  const cw=crop?crop.sw:(natW||maxEdge), ch=crop?crop.sh:(natH||maxEdge);
+  const sc=Math.min(1,maxEdge/Math.max(cw||1,ch||1));
+  const w=Math.max(1,Math.round(cw*sc)), h=Math.max(1,Math.round(ch*sc));
+  const c=document.createElement('canvas'); c.width=w; c.height=h;
+  const g=c.getContext('2d',{willReadFrequently:true});
+  const m={name,kind,canvas:c,ctx:g,w,h,src,crop,data:null};
+  m.refresh=()=>{ try{
+    g.clearRect(0,0,w,h);
+    if(crop) g.drawImage(src,crop.sx,crop.sy,crop.sw,crop.sh,0,0,w,h);
+    else g.drawImage(src,0,0,w,h);
+    m.data=g.getImageData(0,0,w,h).data; }catch(e){} };
+  m.refresh(); return m;
+}
+/* WHERE THE MATERIAL ACTUALLY IS.
+
+   The stock textures fill their own canvas, so `cover` works on them. An archive
+   cut-out does not: it is a subject floating inside a 768x576 transparent frame,
+   and mapping a socket across that frame lands almost every cell on nothing —
+   which HELD then honestly reports as amber seam, so the head fills with damage
+   and none of it is the tool's fault. Bind to the CONTENT, not to the file. */
+function contentBox(src,w,h){
+  const n=Math.min(160,Math.max(w,h));
+  const k=n/Math.max(w,h), pw=Math.max(1,Math.round(w*k)), ph=Math.max(1,Math.round(h*k));
+  const c=document.createElement('canvas'); c.width=pw; c.height=ph;
+  const g=c.getContext('2d',{willReadFrequently:true});
+  try{ g.drawImage(src,0,0,pw,ph); }catch(e){ return null; }
+  let d; try{ d=g.getImageData(0,0,pw,ph).data; }catch(e){ return null; }
+  let x0=pw,y0=ph,x1=-1,y1=-1;
+  for(let y=0;y<ph;y++) for(let x=0;x<pw;x++){
+    if(d[(y*pw+x)*4+3]<12) continue;
+    if(x<x0)x0=x; if(x>x1)x1=x; if(y<y0)y0=y; if(y>y1)y1=y;
+  }
+  if(x1<0) return null;                                  /* wholly transparent */
+  const f=w/pw;
+  const box={sx:Math.floor(x0*f), sy:Math.floor(y0*f),
+             sw:Math.max(1,Math.round((x1-x0+1)*f)), sh:Math.max(1,Math.round((y1-y0+1)*f))};
+  /* if the content already fills the file there is nothing to crop, and cropping
+     anyway would only cost a resample */
+  return (box.sw>=w*0.97&&box.sh>=h*0.97)?null:box;
+}
+const VIDEOS=[];
+const STOCK=[
+  mat('canvas',(g,r)=>{g.fillStyle='#ab8d63';g.fillRect(0,0,SW,SW);g.strokeStyle='#8b7048';g.lineWidth=1;
+    for(let i=-SW;i<SW*2;i+=3){g.beginPath();g.moveTo(i,0);g.lineTo(i+SW,SW);g.stroke();}
+    for(let i=0;i<900;i++){g.fillStyle=r()<.5?'#c2a67d':'#7b6340';g.fillRect(r()*SW,r()*SW,1,1);}},3),
+  mat('denim',(g,r)=>{g.fillStyle='#43597a';g.fillRect(0,0,SW,SW);g.strokeStyle='#31435e';g.lineWidth=1;
+    for(let i=-SW;i<SW*2;i+=4){g.beginPath();g.moveTo(i,0);g.lineTo(i+SW,SW);g.stroke();}
+    for(let i=0;i<1100;i++){g.fillStyle=r()<.35?'#dfe6ef':'#5a7093';g.fillRect(r()*SW,r()*SW,1,1);}},9),
+  mat('wool',(g,r)=>{g.fillStyle='#3b4a41';g.fillRect(0,0,SW,SW);
+    for(let i=0;i<2600;i++){g.fillStyle=r()<.5?'#2b352f':'#516459';g.fillRect(r()*SW,r()*SW,1+(r()<.2?1:0),1);}},17),
+  mat('leather',(g,r)=>{g.fillStyle='#6a4630';g.fillRect(0,0,SW,SW);
+    for(let i=0;i<160;i++){g.strokeStyle=r()<.5?'#4c3122':'#876044';g.lineWidth=1;
+      const x=r()*SW,y=r()*SW;g.beginPath();g.moveTo(x,y);g.lineTo(x+(r()-.5)*14,y+(r()-.5)*14);g.stroke();}},23),
+  mat('ticking',(g,r)=>{g.fillStyle='#e7dfd0';g.fillRect(0,0,SW,SW);g.fillStyle='#242424';
+    for(let i=0;i<SW;i+=11)g.fillRect(i,0,3,SW);
+    for(let i=0;i<600;i++){g.fillStyle=r()<.5?'#cfc6b4':'#f3ede1';g.fillRect(r()*SW,r()*SW,1,1);}},31),
+  mat('sky',(g,r)=>{const gr=g.createLinearGradient(0,0,0,SW);
+    gr.addColorStop(0,'#12325e');gr.addColorStop(.55,'#4b7fb5');gr.addColorStop(1,'#c9dcea');
+    g.fillStyle=gr;g.fillRect(0,0,SW,SW);
+    for(let i=0;i<60;i++){g.fillStyle='rgba(255,255,255,'+(0.05+r()*0.18)+')';
+      g.beginPath();g.arc(r()*SW,r()*SW*0.7,4+r()*13,0,TAU);g.fill();}},41,false),
+];
+
+
+/* ══ BLEND ════════════════════════════════════════════════ */
+const BLENDS=['normal','multiply','screen','burn','dodge','difference'];
+const FITS=['cover','fill','tile'];
+function blendCh(mode,a,b){
+  switch(mode){
+    case 'multiply':return a*b/255;
+    case 'screen':return 255-(255-a)*(255-b)/255;
+    case 'burn':return b<=0?0:255-Math.min(255,(255-a)*255/b);
+    case 'dodge':return b>=255?255:Math.min(255,a*255/(255-b));
+    case 'difference':return Math.abs(a-b);
+    default:return b;
+  }
+}
+
+/* ══ STATE ════════════════════════════════════════════════
+   Two kinds of surface: the GROUND (frame-fixed) and CAST
+   figures (pose-fixed). A socket is a polygon in a surface's
+   UV, with one of four renders:
+     none  · leave what is underneath
+     marks · report that nothing is known here
+     flat  · material as mosaic cells
+     dots  · material reported as tone — halftone
+   ═════════════════════════════════════════════════════════ */
+let SID=0, FID=0;
+const mkSocket=(poly,render)=>({id:++SID,poly,bb:bbox(poly),render:render||'marks',
+                                mat:null,blend:'normal',fit:'cover'});
+const GROUND_BASE=mkSocket([[0,0],[1,0],[1,1],[0,1]],'none'); GROUND_BASE.base=true;
+
+const S={
+  mode:'REST', t:0, playing:true, last:0, scrubbing:false,
+  paper:'#ffffff',
+  sockets:{ground:[GROUND_BASE]},   // surfaceKey -> [socket]
+  cast:[],                          // {id,ox,oy,scale,phase,flip}
+  order:[], sel:null, fit:null, placing:null,
+  lasso:null, seams:0, shots:[], activeShot:-1,
+};
+const surfSockets=k=>S.sockets[k]||(S.sockets[k]=[]);
+const findSock=ref=>ref?(S.sockets[ref.key]||[]).find(s=>s.id===ref.id)||null:null;
+
+const stage=document.getElementById('stage');
+const ctx=stage.getContext('2d',{alpha:false});
+const lineEl=document.getElementById('line'), actsEl=document.getElementById('acts');
+const panel=document.getElementById('panel'), swEl=document.getElementById('swatches');
+const modesEl=document.getElementById('modes'), shotsEl=document.getElementById('shots');
+const scrubEl=document.getElementById('scrub'), headEl=document.getElementById('head');
+const fileEl=document.getElementById('file'), camEl=document.getElementById('cam');
+
+let W=0,H=0,DPR=1,LAY={cell:7,unit:1,w:0,h:0};
+function resize(){
+  DPR=Math.min(devicePixelRatio||1,2); W=innerWidth; H=innerHeight;
+  stage.width=Math.floor(W*DPR); stage.height=Math.floor(H*DPR);
+  stage.style.width=W+'px'; stage.style.height=H+'px';
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  /* two carriers, two natural sizes: the mannequin is drawn in a 150x210 space
+     and a packed body in the 192x144 field, so a single `unit` made the poet
+     fill the screen four times over */
+  LAY={cell:Math.max(4,Math.round(Math.min(W,H)/112)),unit:Math.min(W/150,H/210),
+       bunit:Math.min(W/192,H/144),w:W,h:H};
+}
+addEventListener('resize',resize); resize();
+
+/* figure transform: normalized anchor + relative scale */
+const unitOf=(f,L)=>(f.kind==='body'?(L.bunit||L.unit):L.unit)*f.scale;
+function figScreen(f,x,y,L){
+  const S=spaceOf(f), u=unitOf(f,L), sx=(x-S[0])*(f.flip?-1:1);
+  return [L.w*f.ox+sx*u, L.h*f.oy+(y-S[1])*u];
+}
+function figFigure(f,px,py,L){
+  const S=spaceOf(f), u=unitOf(f,L);
+  return [S[0]+((px-L.w*f.ox)/u)*(f.flip?-1:1), S[1]+(py-L.h*f.oy)/u];
+}
+
+/* ══ RENDER ═══════════════════════════════════════════════ */
+function sampleMat(m,bb,u,v,fit,asp){
+  if(!m.data) return null;
+  let s=(u-bb[0])/Math.max(1e-6,bb[2]-bb[0]), t=(v-bb[1])/Math.max(1e-6,bb[3]-bb[1]);
+  if(fit==='tile'){ s=((s*4)%1+1)%1; t=((t*4)%1+1)%1; }
+  else if(fit!=='fill'){
+    const ma=m.w/m.h, ba=asp||1;            // cover: keep the photograph's own aspect
+    if(ma>ba) s=0.5+(s-0.5)*(ba/ma); else t=0.5+(t-0.5)*(ma/ba);
+  }
+  const px=clamp(Math.round(s*(m.w-1)),0,m.w-1), py=clamp(Math.round(t*(m.h-1)),0,m.h-1);
+  const i=(py*m.w+px)*4, d=m.data;
+  return d[i+3]<128?null:[d[i],d[i+1],d[i+2]];
+}
+
+function renderScene(g,L,st,t,opt){
+  opt=opt||{};
+  const C=L.cell, w=L.w, h=L.h;
+  const pg=st.paper==='#000000'?[0,0,0]:[255,255,255];
+  g.fillStyle=st.paper; g.fillRect(0,0,w,h);
+
+  // cast figures resolved once per frame, back to front
+  const cast=st.cast.map(f=>({f,parts:partsOf(f,t)}));
+  // each socket's pixel aspect, so 'cover' can keep a photograph undistorted
+  for(const so of (st.sockets.ground||[]))
+    so._asp=((so.bb[2]-so.bb[0])*w)/Math.max(1e-6,(so.bb[3]-so.bb[1])*h);
+  for(const cc of cast) for(const p of cc.parts){
+    const l=st.sockets['f'+cc.f.id+':'+p.id]; if(!l) continue;
+    for(const so of l) so._asp=((so.bb[2]-so.bb[0])*p.w)/Math.max(1e-6,(so.bb[3]-so.bb[1])*p.rest);
+  }
+  let seams=0;
+
+  for(let sy=0;sy<h;sy+=C){
+    for(let sx=0;sx<w;sx+=C){
+      const cx=sx+C/2, cy=sy+C/2;
+      let bg=pg, dot=null, seam=false;
+
+      /* — ground stack — */
+      const gu=cx/w, gv=cy/h;
+      const gl=st.sockets.ground||[];
+      for(const so of gl){
+        if(so.render==='none') continue;
+        const bb=so.bb;
+        if(gu<bb[0]||gu>bb[2]||gv<bb[1]||gv>bb[3]) continue;
+        if(!so.base && !inPoly(so.poly,gu,gv)) continue;
+        const r=apply(so,bb,gu,gv,bg,0.8,opt);
+        if(r.seam){seam=true;continue;}
+        if(r.bg) bg=r.bg;
+        if(r.dot) dot=r.dot; else if(r.clear) dot=null;
+      }
+
+      /* — cast, front-most wins — */
+      for(let k=cast.length-1;k>=0;k--){
+        const {f,parts}=cast[k];
+        const fp=figFigure(f,cx,cy,L);
+        let hit=null,l=null;
+        for(let q=parts.length-1;q>=0;q--){const r=contains(parts[q],fp[0],fp[1]);if(r){hit=parts[q];l=r;break;}}
+        if(!hit) continue;
+        let tone=hit.tone;
+        if(hit.id==='head') tone=l.s>0.58?0.92:0.5;
+        const edge=1-Math.abs(l.u-0.5)*2;
+        const k2=clamp(0.42+0.5*tone*(0.55+0.55*edge),0,1);
+        const key='f'+f.id+':'+hit.id;
+        const list=st.sockets[key];
+        let rendered=false;
+        if(list) for(const so of list){
+          const bb=so.bb;
+          if(l.u<bb[0]||l.u>bb[2]||l.v<bb[1]||l.v>bb[3]) continue;
+          if(!inPoly(so.poly,l.u,l.v)) continue;
+          const r=apply(so,bb,l.u,l.v,bg,k2,opt);
+          if(r.seam){seam=true;rendered=true;continue;}
+          if(r.bg){bg=r.bg;rendered=true;}
+          if(r.dot){dot=r.dot;rendered=true;} else if(r.clear){dot=null;rendered=true;}
+        }
+        if(!rendered){
+          if(hit.shape==='mask'){
+            /* MOUSSA's law, unchanged: the photograph is not cut against the
+               drawn world, it is put THROUGH it — same field, same levels, same
+               disc radius, and no colour but the ink. The tone is the poet's
+               own; only the size of the mark carries it. */
+            const px=bodyAt(hit._b,hit._k,Math.round(fp[0]),Math.round(fp[1]));
+            if(px){
+              const tr=(hit._b.meta.tone||[])[hit._k]||[0,255];
+              /* stretched to the body's own range in THIS frame: a night shot is
+                 read by its modelling, not by its exposure */
+              const pl=clamp((lum(px[0],px[1],px[2])-tr[0])/Math.max(1,tr[1]-tr[0]),0,1)*255;
+              const dark=lum(bg[0],bg[1],bg[2])<128;
+              const amt=clamp(dark?pl/255:1-pl/255,0,1);
+              dot={r:C*0.74*Math.sqrt(amt), c:st.trueColour?px:inkOn(bg)};
+            } else dot=null;
+          } else dot={r:C*0.5*k2, c:inkOn(bg)};
+        }
+        break;
+      }
+
+      if(bg!==pg){ g.fillStyle='rgb('+bg[0]+','+bg[1]+','+bg[2]+')'; g.fillRect(sx,sy,C,C); }
+      if(seam){ seams++; g.fillStyle='#ffd23f'; const s=C*0.66; g.fillRect(cx-s/2,cy-s/2,s,s); continue; }
+      if(dot&&dot.r>0.35){
+        g.fillStyle='rgb('+dot.c[0]+','+dot.c[1]+','+dot.c[2]+')';
+        g.beginPath(); g.arc(cx,cy,Math.min(C*0.72,dot.r),0,TAU); g.fill();
+      }
+    }
+  }
+  return seams;
+}
+
+const inkOn=bg=>lum(bg[0],bg[1],bg[2])<128?[255,255,255]:[0,0,0];
+
+/* one socket's contribution at one cell */
+function apply(so,bb,u,v,bg,markTone,opt){
+  if(so.render==='none') return {};
+  if(so.render==='marks'){
+    return {clear:false, dot:{r:LAYCELL()*0.5*markTone, c:inkOn(bg)}};
+  }
+  if(!so.mat) return {};
+  if(opt.fit&&opt.fit.id===so.id){
+    const prog=(v-bb[1])/Math.max(1e-6,bb[3]-bb[1]);
+    if(prog>opt.fit.p*1.15) return {};
+  }
+  const s=sampleMat(so.mat,bb,u,v,so.fit,so._asp);
+  if(!s) return {seam:true};
+  if(so.render==='flat'){
+    return {bg:[Math.round(clamp(blendCh(so.blend,bg[0],s[0]),0,255)),
+                Math.round(clamp(blendCh(so.blend,bg[1],s[1]),0,255)),
+                Math.round(clamp(blendCh(so.blend,bg[2],s[2]),0,255))], clear:true};
+  }
+  // dots: report the material as tone. bright ground → darkness sizes the dot,
+  // dark ground → light sizes it. the same rule makes both references work.
+  const L=lum(s[0],s[1],s[2]);
+  const dark=lum(bg[0],bg[1],bg[2])<128;
+  const amt=clamp(dark?L/255:1-L/255,0,1);
+  return {dot:{r:LAYCELL()*0.72*Math.sqrt(amt), c:s}};
+}
+let _cell=7; const LAYCELL=()=>_cell;
+
+/* ══ FRAME ════════════════════════════════════════════════ */
+function draw(){
+  _cell=LAY.cell;
+  S.seams=renderScene(ctx,LAY,S,S.t,{fit:S.fit});
+  // selection outline
+  const so=findSock(S.sel);
+  if(so&&!so.base){
+    ctx.strokeStyle='#19e6c8'; ctx.lineWidth=1.5; ctx.beginPath();
+    if(S.sel.key==='ground'){
+      so.poly.forEach((q,i)=>{const x=q[0]*W,y=q[1]*H;i?ctx.lineTo(x,y):ctx.moveTo(x,y);});
+    }else{
+      const f=S.cast.find(c=>'f'+c.id===S.sel.key.split(':')[0]);
+      const pid=S.sel.key.split(':')[1];
+      const part=f&&partsOf(f,S.t).find(p=>p.id===pid);
+      if(part) so.poly.forEach((q,i)=>{
+        const p=unlocal(part,q[0],q[1]), s=figScreen(f,p[0],p[1],LAY);
+        i?ctx.lineTo(s[0],s[1]):ctx.moveTo(s[0],s[1]);
+      });
+    }
+    ctx.closePath(); ctx.stroke();
+  }
+  if(S.placing){
+    const f=S.placing, parts=partsOf(f,S.t);
+    ctx.strokeStyle='#19e6c8'; ctx.lineWidth=1.5;
+    for(const p of parts){
+      const a=figScreen(f,p.a[0],p.a[1],LAY), b=figScreen(f,p.b[0],p.b[1],LAY);
+      ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke();
+    }
+  }
+  if(S.lasso&&S.lasso.length>1){
+    ctx.strokeStyle='#19e6c8'; ctx.lineWidth=2; ctx.beginPath();
+    ctx.moveTo(S.lasso[0][0],S.lasso[0][1]);
+    for(let i=1;i<S.lasso.length;i++) ctx.lineTo(S.lasso[i][0],S.lasso[i][1]);
+    ctx.stroke();
+  }
+}
+function tick(ms){
+  const dt=S.last?Math.min(0.05,(ms-S.last)/1000):0; S.last=ms;
+  if(S.playing&&!S.scrubbing) S.t=(S.t+dt/5.2)%1;
+  for(const m of VIDEOS) if(m.src.readyState>=2) m.refresh();
+  if(S.fit){ S.fit.p+=dt/0.6; if(S.fit.p>=1){const r={key:S.fit.key,id:S.fit.id};S.fit=null;S.sel=r;setMode('CHANGED');} }
+  draw(); syncScrub();
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
+/* ══ DRAW A REGION ════════════════════════════════════════ */
+function hitCast(px,py){
+  for(let k=S.cast.length-1;k>=0;k--){
+    const f=S.cast[k], parts=partsOf(f,S.t), fp=figFigure(f,px,py,LAY);
+    for(let q=parts.length-1;q>=0;q--){
+      const l=contains(parts[q],fp[0],fp[1]);
+      if(l) return {f,part:parts[q],l};
+    }
+  }
+  return null;
+}
+function makeSocket(pts){
+  const bb=[Math.min(...pts.map(p=>p[0])),Math.min(...pts.map(p=>p[1])),
+            Math.max(...pts.map(p=>p[0])),Math.max(...pts.map(p=>p[1]))];
+  const tally={}; const N=11;
+  for(let i=0;i<=N;i++) for(let j=0;j<=N;j++){
+    const x=lerp(bb[0],bb[2],i/N), y=lerp(bb[1],bb[3],j/N);
+    if(!inPoly(pts,x,y)) continue;
+    const h=hitCast(x,y);
+    const key=h?('f'+h.f.id+':'+h.part.id):'ground';
+    tally[key]=(tally[key]||0)+1;
+  }
+  let key=null,bv=0; for(const k in tally) if(tally[k]>bv){bv=tally[k];key=k;}
+  if(!key) return null;
+
+  let poly;
+  if(key==='ground'){ poly=pts.map(p=>[p[0]/W,p[1]/H]); }
+  else{
+    const f=S.cast.find(c=>'f'+c.id===key.split(':')[0]);
+    const pid=key.split(':')[1];
+    const part=partsOf(f,S.t).find(p=>p.id===pid);
+    poly=pts.map(p=>{const fp=figFigure(f,p[0],p[1],LAY);const l=local(part,fp[0],fp[1]);return [l.u,l.v];});
+  }
+  if(poly.length>64){const st=Math.ceil(poly.length/64);poly=poly.filter((_,i)=>i%st===0);}
+  const so=mkSocket(poly,'marks');
+  surfSockets(key).push(so);
+  S.order.push({t:'socket',key,id:so.id});
+  return {key,id:so.id};
+}
+
+function selectGroundBase(){
+  const gb=(S.sockets.ground||[]).find(s=>s.base)||GROUND_BASE;
+  S.sel={key:'ground',id:gb.id}; setMode(gb.mat?'CHANGED':'READY');
+}
+/* tapping the same place again steps down through everything stacked there */
+function selectAt(x,y){
+  const cands=[];
+  const h=hitCast(x,y);
+  if(h){
+    const key='f'+h.f.id+':'+h.part.id, list=S.sockets[key]||[];
+    for(let i=list.length-1;i>=0;i--) if(inPoly(list[i].poly,h.l.u,h.l.v)) cands.push({key,id:list[i].id});
+  }
+  const gl=S.sockets.ground||[];
+  for(let i=gl.length-1;i>=0;i--){
+    if(gl[i].base) continue;
+    if(inPoly(gl[i].poly,x/W,y/H)) cands.push({key:'ground',id:gl[i].id});
+  }
+  const gb=gl.find(s=>s.base); if(gb) cands.push({key:'ground',id:gb.id});
+  if(!cands.length){ S.sel=null; setMode(S.order.length?'COMPLETE':'REST'); return; }
+  let idx=0;
+  if(S.sel){ const j=cands.findIndex(c=>c.key===S.sel.key&&c.id===S.sel.id);
+             if(j>=0) idx=(j+1)%cands.length; }
+  S.sel=cands[idx];
+  const so=findSock(S.sel); setMode(so&&so.mat?'CHANGED':'READY');
+}
+
+let drag=null;
+stage.addEventListener('pointerdown',e=>{
+  if(S.fit) return;
+  if(S.placing){ S.placing.oy=e.clientY/H; S.placing.ox=e.clientX/W; return; }
+  stage.setPointerCapture(e.pointerId); drag=[[e.clientX,e.clientY]]; S.lasso=drag;
+});
+stage.addEventListener('pointermove',e=>{
+  if(S.placing){
+    S.placing.ox=e.clientX/W; S.placing.oy=e.clientY/H;
+    S.placing.scale=(S.placing.kind==='body'?0.35:0.30)+
+                    (S.placing.kind==='body'?0.85:0.95)*clamp(e.clientY/H,0,1); return;
+  }
+  if(!drag) return;
+  const p=drag[drag.length-1];
+  if(Math.hypot(e.clientX-p[0],e.clientY-p[1])>3) drag.push([e.clientX,e.clientY]);
+});
+stage.addEventListener('pointerup',e=>{
+  if(S.placing){
+    S.placing.ox=e.clientX/W; S.placing.oy=e.clientY/H;
+    S.placing.scale=(S.placing.kind==='body'?0.35:0.30)+
+                    (S.placing.kind==='body'?0.85:0.95)*clamp(e.clientY/H,0,1);
+    S.cast.push(S.placing); S.order.push({t:'figure',id:S.placing.id});
+    S.placing=null; S.sel=null; setMode('COMPLETE'); return;
+  }
+  if(!drag) return;
+  const pts=drag; drag=null; S.lasso=null;
+  if(pts.length>5){
+    const ref=makeSocket(pts);
+    if(ref){ S.sel=ref; S.activeShot=-1; setMode('READY'); return; }
+  }else{ selectAt(pts[0][0],pts[0][1]); return; }
+  S.sel=null; setMode(S.order.length?'COMPLETE':'REST');
+});
+stage.addEventListener('pointercancel',()=>{drag=null;S.lasso=null;});
+
+/* ══ STOCK STRIP ══════════════════════════════════════════ */
+/* declared here, not down in ARCHIVE, because buildSwatches() runs at load and
+   a `let` read before its declaration is a dead zone, not an undefined */
+let ARCH=null, NOUN=null, SHELF='stock';
+const nounsEl=document.getElementById('nouns');
+function applyMaterial(m){
+  const so=findSock(S.sel); if(!so) return;
+  so.mat=m; if(so.render==='none'||so.render==='marks') so.render='flat';
+  S.fit={key:S.sel.key,id:so.id,p:0}; setMode('WORKING');
+}
+const previews=[];
+function buildSwatches(){
+  swEl.innerHTML=''; previews.length=0;
+  if(SHELF==='archive'){
+    swEl.appendChild(mkSw('stock',()=>{SHELF='stock';buildNouns();buildSwatches();}));
+    const list=(ARCH&&ARCH.by[NOUN])||[];
+    /* the strip scrolls; showing all 499 lights at once would cost 499 decodes
+       for a panel 270px wide, so it is capped and the cap is stated */
+    for(const e of list.slice(0,120)){
+      const b=document.createElement('button');
+      b.className='sw'; b.type='button'; b.setAttribute('aria-label',e.id); b.title=e.id;
+      const im=document.createElement('img');
+      im.src='../elements/'+e.id+'.png'; im.loading='lazy';
+      im.style.cssText='width:100%;height:100%;object-fit:contain;display:block;background:#ddd';
+      b.appendChild(im);
+      b.addEventListener('click',async()=>{
+        try{ const m=await elementMaterial(e.id); applyMaterial(m); }
+        catch(err){ lineEl.textContent='could not read '+e.id; }
+      });
+      swEl.appendChild(b);
+    }
+    if(list.length>120) swEl.appendChild(mkSw('+'+(list.length-120),()=>{},'9px'));
+    return;
+  }
+  STOCK.forEach(m=>{
+    const b=document.createElement('button');
+    b.className='sw'; b.type='button'; b.setAttribute('aria-label',m.name);
+    const c=document.createElement('canvas'); c.width=m.w; c.height=m.h;
+    c.getContext('2d').drawImage(m.canvas,0,0);
+    b.appendChild(c); if(m.kind==='video') previews.push({m,c});
+    b.addEventListener('click',()=>applyMaterial(m));
+    swEl.appendChild(b);
+  });
+  swEl.appendChild(mkSw('arch',async()=>{ await loadArchive(); SHELF='archive';
+                                          buildNouns(); buildSwatches(); },'9px'));
+  swEl.appendChild(mkSw('live',armCamera));
+  swEl.appendChild(mkSw('+',()=>fileEl.click(),'16px'));
+}
+function mkSw(label,fn,size){
+  const b=document.createElement('button');
+  b.className='sw'; b.type='button'; b.setAttribute('aria-label',label);
+  const s=document.createElement('span'); s.textContent=label;
+  if(size) s.style.fontSize=size; b.appendChild(s);
+  b.addEventListener('click',fn); return b;
+}
+buildSwatches();
+setInterval(()=>{ for(const p of previews){
+  const g=p.c.getContext('2d'); try{g.drawImage(p.m.canvas,0,0);}catch(e){} } },250);
+
+function loadDrawable(file){
+  return new Promise((res,rej)=>{
+    const url=URL.createObjectURL(file);
+    if(file.type.startsWith('video/')){
+      const v=document.createElement('video');
+      v.src=url; v.loop=true; v.muted=true; v.playsInline=true; v.autoplay=true;
+      v.onloadeddata=()=>{ v.play().catch(()=>{});
+        const m=media('clip'+(++MID),v,v.videoWidth,v.videoHeight,'video',224);
+        VIDEOS.push(m); res(m); };
+      v.onerror=rej;
+    }else{
+      const img=new Image();
+      img.onload=()=>{ res(media('photo'+(++MID),img,img.width,img.height,'img',512,
+                                 contentBox(img,img.width,img.height)));
+                       URL.revokeObjectURL(url); };
+      img.onerror=rej; img.src=url;
+    }
+  });
+}
+async function addFiles(files,x,y){
+  const list=[...files].filter(f=>/^(image|video)\//.test(f.type));
+  if(!list.length) return;
+  if(x!==undefined) selectAt(x,y); else if(!findSock(S.sel)) selectGroundBase();
+  for(let i=0;i<list.length;i++){
+    try{ const m=await loadDrawable(list[i]); STOCK.push(m); buildSwatches();
+         if(i===0) applyMaterial(m); }
+    catch(e){ lineEl.textContent='could not read that file'; }
+  }
+}
+fileEl.addEventListener('change',()=>{ addFiles(fileEl.files); fileEl.value=''; });
+addEventListener('dragover',e=>{e.preventDefault();});
+addEventListener('drop',e=>{ e.preventDefault();
+  if(e.dataTransfer&&e.dataTransfer.files.length) addFiles(e.dataTransfer.files,e.clientX,e.clientY); });
+addEventListener('paste',e=>{
+  const items=[...((e.clipboardData&&e.clipboardData.items)||[])];
+  const files=items.filter(i=>i.kind==='file').map(i=>i.getAsFile()).filter(Boolean);
+  if(files.length) addFiles(files);
+});
+async function armCamera(){
+  try{
+    const st=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false});
+    camEl.srcObject=st; await camEl.play();
+    const m=media('camera',camEl,camEl.videoWidth||320,camEl.videoHeight||240,'video',224);
+    VIDEOS.push(m); STOCK.push(m); buildSwatches();
+    if(findSock(S.sel)) applyMaterial(m); else lineEl.textContent='camera is in the stock';
+  }catch(e){ lineEl.textContent='no camera available'; }
+}
+
+/* ══ ARCHIVE ══════════════════════════════════════════════
+   2033 cut-outs already measured and sitting on disk. HELD
+   could always take a photograph — it could not take one
+   from the pile everything else in this repo is built on,
+   which left it a beautiful tool beside the work instead of
+   inside it. A cut-out is just another drawable, so this is
+   an extra shelf in the stock, not a new kind of thing.
+   ═════════════════════════════════════════════════════════ */
+async function loadArchive(){
+  if(ARCH) return ARCH;
+  try{
+    const r=await fetch('../studio/elements.json');
+    const rows=await r.json();
+    /* best score first, so the top of every noun is the cleanest cut */
+    rows.sort((a,b)=>b.sc-a.sc);
+    const by={}; for(const e of rows) (by[e.p]=by[e.p]||[]).push(e);
+    ARCH={rows,by,nouns:Object.keys(by).sort((a,b)=>by[b].length-by[a].length)};
+    NOUN=ARCH.nouns[0];
+  }catch(e){ lineEl.textContent='no archive at ../studio/elements.json'; ARCH={rows:[],by:{},nouns:[]}; }
+  return ARCH;
+}
+/* an element becomes material the moment it is asked for, not when it is shown */
+const ELCACHE=new Map();
+function elementMaterial(id){
+  if(ELCACHE.has(id)) return Promise.resolve(ELCACHE.get(id));
+  return new Promise((res,rej)=>{
+    const img=new Image();
+    img.onload=()=>{ const m=media(id,img,img.width,img.height,'img',512,
+                                   contentBox(img,img.width,img.height));
+                     ELCACHE.set(id,m); res(m); };
+    img.onerror=rej; img.src='../elements/'+id+'.png';
+  });
+}
+function buildNouns(){
+  nounsEl.innerHTML='';
+  nounsEl.classList.toggle('on',SHELF==='archive');
+  if(SHELF!=='archive'||!ARCH) return;
+  for(const n of ARCH.nouns){
+    const b=document.createElement('button');
+    b.className='noun'; b.type='button'; b.textContent=n.replace(/^(a|the) /,'')+' '+ARCH.by[n].length;
+    b.setAttribute('aria-pressed',String(n===NOUN));
+    b.addEventListener('click',()=>{ NOUN=n; buildNouns(); buildSwatches(); });
+    nounsEl.appendChild(b);
+  }
+}
+
+/* ══ MODES ════════════════════════════════════════════════ */
+function mkBtn(label,fn,pressed){
+  const b=document.createElement('button'); b.className='act'; b.type='button'; b.textContent=label;
+  if(pressed!==undefined) b.setAttribute('aria-pressed',String(pressed));
+  b.addEventListener('click',fn); return b;
+}
+function buildModes(){
+  modesEl.innerHTML='';
+  const so=findSock(S.sel); if(!so) return;
+  ['marks','flat','dots'].forEach(r=>{
+    modesEl.appendChild(mkBtn(r,()=>{
+      if(r!=='marks'&&!so.mat) return;
+      so.render=r; S.fit=null; setMode(so.mat&&r!=='marks'?'CHANGED':'READY');
+    },so.render===r));
+  });
+  if(so.mat&&so.render!=='marks'){
+    const c=mkBtn(so.blend,()=>{
+      so.blend=BLENDS[(BLENDS.indexOf(so.blend)+1)%BLENDS.length];
+      c.textContent=so.blend; report();
+    });
+    modesEl.appendChild(c);
+    const f=mkBtn(so.fit,()=>{
+      so.fit=FITS[(FITS.indexOf(so.fit)+1)%FITS.length]; f.textContent=so.fit; report();
+    });
+    modesEl.appendChild(f);
+  }
+  if(!so.base) modesEl.appendChild(mkBtn('raise',raise));
+}
+function raise(){
+  const so=findSock(S.sel); if(!so||so.base) return;
+  const a=S.sockets[S.sel.key], i=a.indexOf(so);
+  if(i>=0){ a.splice(i,1); a.push(so); }
+  setMode(S.mode);
+}
+function panelAnchor(){
+  const so=findSock(S.sel); if(!so) return null;
+  if(S.sel.key==='ground'){
+    const bb=so.bb; return [((bb[0]+bb[2])/2)*W, bb[3]*H];
+  }
+  const f=S.cast.find(c=>'f'+c.id===S.sel.key.split(':')[0]);
+  const pid=S.sel.key.split(':')[1];
+  const part=f&&partsOf(f,S.t).find(p=>p.id===pid);
+  if(!part) return null;
+  const p=unlocal(part,(so.bb[0]+so.bb[2])/2,so.bb[3]);
+  return figScreen(f,p[0],p[1],LAY);
+}
+function placePanel(){
+  if(!findSock(S.sel)||S.mode==='REST'||S.mode==='COMPLETE'||S.placing){panel.classList.remove('on');return;}
+  const a=panelAnchor(); if(!a){panel.classList.remove('on');return;}
+  panel.classList.add('on');
+  const w=panel.offsetWidth||282, h=panel.offsetHeight||110;
+  panel.style.left=clamp(a[0]-w/2,10,Math.max(10,W-w-62))+'px';
+  panel.style.top=clamp(a[1]+16,10,Math.max(10,H-h-88))+'px';
+  const so=findSock(S.sel);
+  [...swEl.children].forEach(b=>b.setAttribute('aria-pressed',
+    String(!!(so.mat&&b.getAttribute('aria-label')===so.mat.name))));
+  buildNouns();
+}
+
+/* ══ ACTIONS ══════════════════════════════════════════════ */
+function setActs(list){ actsEl.innerHTML=''; list.forEach(a=>actsEl.appendChild(mkBtn(a[0],a[1]))); }
+function stop(){ const so=findSock({key:S.fit.key,id:S.fit.id});
+  if(so){so.mat=null;so.render=so.base?'none':'marks';} S.fit=null; setMode('READY'); }
+function undo(){
+  const last=S.order.pop(); if(!last){ setMode('REST'); return; }
+  if(last.t==='socket'){
+    const a=S.sockets[last.key]||[]; const i=a.findIndex(s=>s.id===last.id);
+    if(i>=0) a.splice(i,1);
+  }else{
+    const i=S.cast.findIndex(f=>f.id===last.id); if(i>=0) S.cast.splice(i,1);
+    for(const k in S.sockets) if(k.startsWith('f'+last.id+':')) delete S.sockets[k];
+  }
+  S.sel=null; S.fit=null; setMode(S.order.length?'COMPLETE':'REST');
+}
+let POETI=0;
+async function castPoet(){
+  const P=await loadPack();
+  if(!P.shots||!P.shots.length){ lineEl.textContent='pack is empty — run pf/buildpack.py'; return; }
+  const sh=P.shots[POETI%P.shots.length]; POETI++;
+  try{ await loadBody(sh); }catch(e){ lineEl.textContent='could not read '+sh.patch; return; }
+  S.placing={id:++FID, kind:'body', patch:sh.patch, ox:0.5, oy:0.55,
+             scale:0.8, phase:0, flip:false};
+  S.sel=null; setMode('PLACING');
+  /* the pack knows how sure it is, so the tool can say so before you build on it */
+  const d=sh.disputed||0;
+  lineEl.innerHTML='tap to set '+sh.patch+' · '+(sh.cls||'')
+    +(d? ' · <b>'+d+' of '+sh.n+' frames dispute the axis</b>' : '');
+}
+function castOne(){
+  S.placing={id:++FID, ox:0.5, oy:0.55, scale:0.85, phase:Math.random(), flip:Math.random()<0.4};
+  S.sel=null; setMode('PLACING');
+}
+function ground(){
+  S.paper=S.paper==='#ffffff'?'#000000':'#ffffff';
+  document.documentElement.style.background=S.paper;
+  setMode(S.mode);
+}
+function snapshot(){
+  return {
+    t:S.t, paper:S.paper,
+    cast:JSON.parse(JSON.stringify(S.cast)),
+    order:S.order.slice(),
+    sockets:Object.fromEntries(Object.entries(S.sockets).map(([k,v])=>[k,
+      v.map(s=>({id:s.id,poly:s.poly,bb:s.bb,render:s.render,blend:s.blend,fit:s.fit,
+                 matName:s.mat?s.mat.name:null,base:!!s.base}))]))
+  };
+}
+function hydrate(sn){
+  const out={};
+  for(const k in sn.sockets) out[k]=sn.sockets[k].map(s=>{
+    const o=mkSocket(s.poly,s.render); if(s.base) o.base=true;
+    o.id=s.id;o.poly=s.poly;o.bb=s.bb;o.render=s.render;o.blend=s.blend;o.fit=s.fit||'cover';
+    o.mat=s.matName?(STOCK.find(m=>m.name===s.matName)||ELCACHE.get(s.matName)||null):null;
+    return o;
+  });
+  return out;
+}
+function take(){ S.shots.push(snapshot()); S.activeShot=S.shots.length-1; buildShots(); setMode(S.mode); }
+function buildShots(){
+  shotsEl.innerHTML=''; shotsEl.classList.toggle('on',S.shots.length>0);
+  S.shots.forEach((sh,i)=>{
+    const b=document.createElement('button');
+    b.className='shot'; b.type='button'; b.setAttribute('aria-label','shot '+(i+1));
+    b.setAttribute('aria-pressed',String(i===S.activeShot));
+    const c=document.createElement('canvas'); c.width=96; c.height=60;
+    const g=c.getContext('2d');
+    const L={cell:3,unit:Math.min(96/150,60/210)*(Math.min(W,H)/Math.min(W,H)),w:96,h:60};
+    L.unit=Math.min(96/150,60/210);
+    const prev={paper:sh.paper,cast:sh.cast,sockets:hydrate(sh)};
+    const oc=_cell; _cell=3;
+    renderScene(g,L,prev,sh.t,{});
+    _cell=oc;
+    b.appendChild(c);
+    b.addEventListener('click',()=>{
+      S.sockets=hydrate(sh); S.cast=JSON.parse(JSON.stringify(sh.cast));
+      for(const f of S.cast) if(f.kind==='body'&&!BODY.has(f.patch)){
+        const m=(PACK&&PACK.shots||[]).find(x=>x.patch===f.patch); if(m) loadBody(m); }
+      S.order=sh.order.slice(); S.t=sh.t; S.paper=sh.paper;
+      document.documentElement.style.background=S.paper;
+      S.sel=null;S.fit=null;S.activeShot=i;
+      buildShots(); setMode(S.order.length?'COMPLETE':'REST');
+    });
+    shotsEl.appendChild(b);
+  });
+}
+
+/* ══ STATES ═══════════════════════════════════════════════ */
+function report(){
+  if(S.mode!=='CHANGED') return;
+  const so=findSock(S.sel), n=S.seams;
+  lineEl.innerHTML=(n>0?'held · <b>'+n+' open at the seam</b>':'held')
+    +(so&&so.blend!=='normal'?' · <i>'+so.blend+'</i>':'')
+    +(so?' · <i>'+so.render+'</i>':'');
+}
+function setMode(m){
+  S.mode=m;
+  const acts=[];
+  if(m==='REST'){ S.sel=null; lineEl.textContent='draw a region · drop or paste images'; }
+  if(m==='READY') lineEl.textContent='fill it, mark it, or leave it';
+  if(m==='WORKING'){ lineEl.textContent='fitting'; acts.push(['stop',stop]); }
+  if(m==='PLACING'){ lineEl.textContent='tap to set the figure'; acts.push(['stop',()=>{S.placing=null;setMode('REST');}]); }
+  if(m==='COMPLETE') lineEl.textContent='scrub to check it holds';
+  if(m!=='PLACING'&&m!=='WORKING'){ acts.push(['poet',castPoet]); acts.push(['cast',castOne]);
+                                    acts.push(['ground',ground]); }
+  if(S.order.length){ acts.push(['undo',undo]); acts.push(['take',take]); }
+  setActs(acts); buildModes(); placePanel(); report();
+  scrubEl.classList.toggle('on',S.cast.length>0);
+}
+castOne(); S.placing.ox=0.5; S.placing.oy=0.55; S.placing.scale=0.9; S.placing.flip=false;
+S.cast.push(S.placing); S.order.push({t:'figure',id:S.placing.id}); S.placing=null;
+setMode('REST');
+setInterval(()=>{ placePanel(); report(); },160);
+
+/* ══ SCRUB ════════════════════════════════════════════════ */
+function syncScrub(){
+  if(!scrubEl.classList.contains('on')) return;
+  headEl.style.left=(14+(W-28)*S.t)+'px';
+  headEl.style.top=(scrubEl.offsetHeight/2-5)+'px';
+}
+const scrubTo=x=>{S.t=clamp((x-14)/(W-28),0,1);};
+scrubEl.addEventListener('pointerdown',e=>{scrubEl.setPointerCapture(e.pointerId);S.scrubbing=true;scrubTo(e.clientX);});
+scrubEl.addEventListener('pointermove',e=>{if(S.scrubbing)scrubTo(e.clientX);});
+scrubEl.addEventListener('pointerup',()=>{S.scrubbing=false;});
+scrubEl.addEventListener('pointercancel',()=>{S.scrubbing=false;});
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'){ if(S.placing){S.placing=null;setMode('REST');} else if(S.fit) stop();
+    else {S.sel=null;setMode(S.order.length?'COMPLETE':'REST');} }
+  if((e.metaKey||e.ctrlKey)&&e.key==='z'){e.preventDefault();undo();}
+});
+})();
+</script>
+</body>
+</html>

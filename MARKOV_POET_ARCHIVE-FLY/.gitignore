@@ -1,0 +1,8 @@
+__pycache__/
+
+# 1.1GB of SAM cut-outs and 307MB of tracked masks: derived from the archive by
+# sam3_index.py and bodymask.py, regenerable, and far past what a repo should
+# carry. cut/out/held/pack/ IS committed — that is the web-sized extract.
+cut/out/elements/
+cut/bodycache/
+cut/.leadtmp/

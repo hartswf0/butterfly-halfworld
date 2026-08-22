@@ -1,0 +1,102 @@
+{
+ "doc": "converted from a paste recipe",
+ "ledger": [
+  {
+   "node": "L0",
+   "op": "place",
+   "ms": 34,
+   "name": "on_frame",
+   "value": 0.0544,
+   "threshold": 0.02,
+   "worse": "low",
+   "scale": 0.02,
+   "strain": 0.0,
+   "note": "share of frame this element occupies"
+  },
+  {
+   "node": "L0",
+   "op": "place",
+   "ms": 34,
+   "name": "cropped_away",
+   "value": 0.0,
+   "threshold": 0.15,
+   "worse": "high",
+   "scale": 0.5,
+   "strain": 0.0,
+   "note": "share of the placed rectangle that fell outside the frame"
+  },
+  {
+   "node": "L1",
+   "op": "place",
+   "ms": 19,
+   "name": "on_frame",
+   "value": 0.0172,
+   "threshold": 0.02,
+   "worse": "low",
+   "scale": 0.02,
+   "strain": 0.1425,
+   "note": "share of frame this element occupies"
+  },
+  {
+   "node": "L1",
+   "op": "place",
+   "ms": 19,
+   "name": "cropped_away",
+   "value": 0.0,
+   "threshold": 0.15,
+   "worse": "high",
+   "scale": 0.5,
+   "strain": 0.0,
+   "note": "share of the placed rectangle that fell outside the frame"
+  },
+  {
+   "node": "comp",
+   "op": "stack",
+   "ms": 50,
+   "name": "layers",
+   "value": 2.0,
+   "threshold": 1.0,
+   "worse": "low",
+   "scale": 1.0,
+   "strain": 0.0,
+   "note": ""
+  },
+  {
+   "node": "comp",
+   "op": "stack",
+   "ms": 50,
+   "name": "depth_separation",
+   "value": 0.96,
+   "threshold": 0.25,
+   "worse": "low",
+   "scale": 0.25,
+   "strain": 0.0,
+   "note": "if every layer shares a depth, the stack is flat and haze does nothing"
+  },
+  {
+   "node": "out",
+   "op": "output",
+   "ms": 16,
+   "name": "tonal_range",
+   "value": 0.9216,
+   "threshold": 0.55,
+   "worse": "low",
+   "scale": 0.55,
+   "strain": 0.0,
+   "note": "a frame with no range is a grey card"
+  },
+  {
+   "node": "out",
+   "op": "output",
+   "ms": 16,
+   "name": "ink_share",
+   "value": 0.0523,
+   "threshold": 0.55,
+   "worse": "high",
+   "scale": 0.55,
+   "strain": 0.0,
+   "note": "mass of dark; past this the page has closed up"
+  }
+ ],
+ "total_strain": 0.1425
+}

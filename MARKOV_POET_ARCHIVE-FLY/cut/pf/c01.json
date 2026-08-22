@@ -1,0 +1,46 @@
+{
+  "name": "c01 — the poet is wearing the room he is leaving",
+  "note": "Authored as JSON with no interface open. Every parameter here was typed, not dragged. If this renders, J5 holds: an interface would be a view over this file, not the place the work lives.",
+  "piles": { "studio": "out/studio/elements.json" },
+  "nodes": [
+    { "id": "elems", "op": "pile.select",
+      "params": { "pile": "studio", "order": "-sc", "expect": 2033 } },
+
+    { "id": "skins", "op": "skin.assign", "in": ["elems"],
+      "params": { "sockets": {
+        "head":  { "p": "a human face", "order": "-sc", "nth": 0 },
+        "torso": { "p": "a window",     "order": "-sc", "nth": 0 },
+        "armA":  { "p": "a wall",       "order": "-sc", "nth": 1 },
+        "armB":  { "p": "a wall",       "order": "-sc", "nth": 2 },
+        "legs":  { "p": "a road",       "order": "-sc", "nth": 0 } } } },
+
+    { "id": "poet", "op": "carrier.rig",
+      "params": { "figures": [
+        { "x": 92, "y": 128, "h": 74, "pose": { "mode": "walk", "phase": 0.62, "face": 1 } } ] } },
+
+    { "id": "body", "op": "dress", "in": ["poet", "skins"],
+      "params": { "depth": 0.95, "tag": "body", "radius": 0.66 } },
+
+    { "id": "through", "op": "plate",
+      "params": { "element": "P117_a-staircase_0", "depth": 0.05, "tag": "through" } },
+    { "id": "between", "op": "plate",
+      "params": { "color": [230, 239, 242], "depth": 0.4, "tag": "between" } },
+    { "id": "screen",  "op": "plate",
+      "params": { "element": "P006_a-window_0", "depth": 0.5, "tag": "screen" } },
+
+    { "id": "hole", "op": "aperture", "in": ["screen", "through", "between"],
+      "params": { "depth": 0.3, "tag": "hole",
+                  "gamma": 0.85, "ped": 0.10, "k": 1.42,
+                  "polarity": -1, "stretch": true } },
+
+    { "id": "comp", "op": "stack", "in": ["hole", "body"],
+      "params": { "haze": 0.42, "bg": [230, 239, 242],
+                  "modes": { "hole": "over", "body": "over" } } },
+
+    { "id": "seam", "op": "mortar", "in": ["comp"],
+      "params": { "scar": true, "scar_budget": 220 } },
+
+    { "id": "out", "op": "output", "in": ["seam"],
+      "params": { "path": "out/pf/c01.png" } }
+  ]
+}

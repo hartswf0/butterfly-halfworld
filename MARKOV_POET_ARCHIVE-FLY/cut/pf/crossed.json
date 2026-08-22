@@ -1,0 +1,75 @@
+{
+ "name": "converted from a paste recipe",
+ "note": "Authored by dragging, resolved by the graph. every layer crossed. 1 halftoned layers crossed unscreened: a person P006 \u2014 `place` has no screen, only `aperture` does, and an aperture needs three inputs. ",
+ "piles": {
+  "studio": "out/studio/elements.json"
+ },
+ "nodes": [
+  {
+   "id": "L0",
+   "op": "place",
+   "params": {
+    "element": "P006_a-person_0",
+    "tag": "L0",
+    "x": 0.41547656250000004,
+    "y": 0.479375,
+    "w": 0.226296875,
+    "h": 0.42,
+    "rot": 0,
+    "flip": false,
+    "opacity": 1,
+    "depth": 1.0
+   }
+  },
+  {
+   "id": "L1",
+   "op": "place",
+   "params": {
+    "element": "P015_a-building_2",
+    "tag": "L1",
+    "x": 0.6446953125,
+    "y": 0.36933750000000004,
+    "w": 0.091,
+    "h": 0.2184,
+    "rot": 0,
+    "flip": false,
+    "opacity": 1,
+    "depth": 0.040000000000000036
+   }
+  },
+  {
+   "id": "comp",
+   "op": "stack",
+   "in": [
+    "L0",
+    "L1"
+   ],
+   "params": {
+    "haze": 0.55,
+    "modes": {
+     "L0": "over",
+     "L1": "over"
+    },
+    "opacity": {
+     "L0": 1,
+     "L1": 1
+    },
+    "bg": [
+     230,
+     239,
+     242
+    ]
+   }
+  },
+  {
+   "id": "out",
+   "op": "output",
+   "in": [
+    "comp"
+   ],
+   "params": {
+    "path": "out/pf/from_paste.png"
+   }
+  }
+ ]
+}
