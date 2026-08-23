@@ -800,13 +800,23 @@
     <div><label class="mini">Time <span id="hw-tv">0.0s</span></label><input type="range" id="hw-t" min="0" max="1000" value="450" style="width:100%"></div>
     <div id="hw-parts" style="display:flex;flex-wrap:wrap;gap:4px;margin-top:8px"></div>
     <div class="row" style="margin-top:8px">
-      <button class="primary" id="hw-stamp" type="button" style="flex:2">Stamp the chosen parts</button>
+      <button class="primary" id="hw-stamp" type="button" style="flex:2">Stamp the parts</button>
+      <button id="hw-erase" type="button" style="flex:2">Take them out</button>
       <button id="hw-all" type="button" style="flex:1">All</button>
     </div>
     <div class="row" style="margin-top:8px">
-      <div style="flex:2"><label class="mini">Run &middot; frames <span id="hw-nv">12</span></label><input type="range" id="hw-n" min="2" max="24" value="12" style="width:100%"></div>
-      <div style="flex:3"><label class="mini">&nbsp;</label><button id="hw-clip" type="button" style="width:100%">Stream the world in</button></div>
+      <div style="flex:2"><label class="mini">Sample &middot; frames <span id="hw-nv">12</span></label><input type="range" id="hw-n" min="2" max="24" value="12" style="width:100%"></div>
+      <div style="flex:3"><label class="mini">&nbsp;</label><button id="hw-clip" type="button" style="width:100%">Add a short run</button></div>
     </div>
+    <div class="seclabel" style="margin-top:12px"><b>Poemfield</b><span>the whole world, as a film</span></div>
+    <div class="mini">Fourteen worlds, one per poem. Streamed at 8fps for their own full
+    duration they become a <b>film</b> &mdash; the same road the twinstrips come in on, so every
+    frame is a node you can draw on, branch from and take apart.</div>
+    <div class="row" style="margin-top:8px">
+      <div style="flex:2"><label class="mini">Rate</label><select id="hw-fps" style="width:100%;min-height:42px;border:3px solid var(--k);font-weight:700"><option value="8" selected>8 fps</option><option value="6">6</option><option value="12">12</option></select></div>
+      <div style="flex:3"><label class="mini">&nbsp;</label><button class="primary" id="hw-stream" type="button" style="width:100%">Stream the poemfield</button></div>
+    </div>
+    <div class="row" style="margin-top:8px"><button id="hw-break" type="button" style="width:100%">Break this frame down</button></div>
     <div class="mini" id="hw-state">not loaded</div>
   </details>
   <div class="seclabel"><b>Frame</b><span>change this moment</span></div>
@@ -5773,7 +5783,17 @@ function hwScan(){
   var t=hwTime();
   _hwIds.fill(0);
   try{ HWSCENE=HWRT.renderScene(t,_hwIds); }catch(e){ hwState('render failed'); return; }
-  var byTag={}; (HWSCENE.parts||[]).forEach(function(p){ byTag[p.tag]=p.part; });
+  /* WHEN A WORLD HAS NO NAMES, SEPARATE IT BY HAND.
+     A world whose drawing lives in named helpers tags beautifully — MAGIC RIDE
+     is 16 parts and 100% of its ink. A world that draws inline from its movement
+     function reports one part called `movement` and nothing can be pulled out of
+     it: YET, HEARD is 1 part and 9%. Measured across all fourteen, 41%.
+     But the runtime already records which PRIMITIVE made each mark, so those
+     worlds can still come apart — by kind rather than by name. A `~` marks the
+     weaker separation, because being able to lift out all the rings is not the
+     same as being able to lift out the gate. */
+  var byTag={}; (HWSCENE.parts||[]).forEach(function(p){
+    byTag[p.tag]=(p.part&&p.part!=='movement')?p.part:('~'+(p.prim||'mark')); });
   var count={}, i;
   for(i=0;i<_hwIds.length;i++){ var tg=_hwIds[i]; if(!tg)continue;
     var nm=byTag[tg]||'?'; count[nm]=(count[nm]||0)+1; }
@@ -5855,6 +5875,123 @@ function hwClip(){
   };
   step();
 }
+/* ====================================================================
+   THE POEMFIELD AS A FILM.
+
+   `Add a short run` samples a world at a dozen moments — useful, and not what
+   these are. A poemfield is 70 to 135 seconds of authored motion, one per poem,
+   and sampling it is like quoting a film by its posters.
+
+   So it comes in the way the twinstrips do: as a STREAM through OPERATOR's own
+   loader. Not a parallel importer — literally `streamStripReader`, fed by a
+   reader that renders frames instead of reading bytes. Everything that makes
+   that road good comes free: nodes arrive carrying COMMANDS and not pixels, so
+   882 frames cost strings rather than 11MB of grids; the strip pools; the atlas
+   caches; frames appear before the render finishes.
+
+   A batch per read() is what keeps a phone answering. Rendering 882 frames in
+   one go locks the main thread for ten seconds and the progress bar never
+   paints; eight at a time yields between chunks and the film builds visibly.
+
+   EVERY FRAME REMEMBERS ITS MOMENT. The node's note carries `hw:<slug>@<t>`, so
+   a frame streamed out of a world can be put back in front of the runtime that
+   made it and taken apart by name — which is the difference between importing
+   a picture of a world and importing the world.
+   ==================================================================== */
+function hwIdFor(slug,i){
+  var p=(slug.replace(/[^a-z]/g,'')+'zzz').slice(0,3);
+  return p+'B'+String(i+1).padStart(8,'0');
+}
+function hwStream(){
+  if(!HWRT){ fireToast('Open a world first'); return; }
+  var slug=document.getElementById('hw-world').value;
+  var fps=parseInt(document.getElementById('hw-fps').value,10)||8;
+  var total=HWRT.total, count=Math.max(2,Math.round(total*fps));
+  if(count>NODE_MAX){ fireToast('That is longer than the tree can hold'); return; }
+  var enc=new TextEncoder(), i=0, phase=0, BATCH=8;
+  var title=slug.replace(/^\d+-/,'').replace(/-/g,' ').toUpperCase();
+  Progress.start('Streaming '+title,{total:count,stage:'Rendering the poemfield…',cancelable:true,
+    onCancel:function(){ i=count; }});
+  var reader={ read:function(){
+    if(phase===0){ phase=1;
+      var head='#TWINSTRIP v1\n'+JSON.stringify({title:title,fps:fps,frames:count,
+        collaborator:'HALFWORLD',source:slug,
+        audio_lock:{structure:'a drawn world, streamed at its own duration'}})+'\n'
+        +hwIdFor(slug,0)+'~'+count+'\f';
+      return Promise.resolve({value:enc.encode(head),done:false});
+    }
+    if(i>=count) return Promise.resolve({done:true});
+    var out='', n=0, g=null;
+    while(n<BATCH && i<count){
+      var t=total*(i/count);
+      _hwIds.fill(0);
+      try{ HWSCENE=HWRT.renderScene(t,_hwIds); }catch(e){}
+      var byTag={}; (HWSCENE.parts||[]).forEach(function(p){
+        byTag[p.tag]=(p.part&&p.part!=='movement')?p.part:('~'+(p.prim||'mark')); });
+      HWSCENE._byTag=byTag;
+      g=hwDown(null);
+      /* the note is what lets this frame be taken apart again later */
+      var meta='TSHOT;N'+encodeURIComponent(String(i+1))
+             +';Kflow;P'+encodeURIComponent('hw:'+slug+'@'+t.toFixed(3));
+      out+=hwIdFor(slug,i)+'|'+(i?hwIdFor(slug,i-1):'')+'|HALFWORLD|'+meta+'>'
+        +frameToCmds(g).join('\n')+'\f';
+      i++; n++;
+    }
+    Progress.set(i,count); Progress.stage('Frame '+i+' of '+count);
+    if(g && i%32<BATCH) Progress.preview(g);
+    /* A yield that survives losing focus. The renders are synchronous, so
+       without a yield the bar never paints and the page looks hung for the whole
+       film. But setTimeout(0) is clamped to about a second in a background tab,
+       and a 600-frame world then takes ten minutes instead of one — put your
+       phone down mid-stream and the film stops building. A MessageChannel task
+       is not throttled that way, so the stream keeps its rate whether or not
+       anyone is watching. setTimeout is kept as the fallback. */
+    return new Promise(function(res){
+      var send=function(){ res({value:enc.encode(out),done:false}); };
+      if(window.MessageChannel){ var mc=new MessageChannel();
+        mc.port1.onmessage=send; mc.port2.postMessage(0); }
+      else setTimeout(send,0);
+    });
+  }};
+  stopPlay();
+  streamStripReader(reader, slug+'.poemfield', null);
+  var poll=setInterval(function(){ if(i>=count){ clearInterval(poll);
+    setTimeout(function(){ Progress.done(count+' frames'); Progress.hide(500); },200); } },120);
+}
+/* take the CURRENT frame apart, whichever world it came from */
+function hwBreak(){
+  var nd=nodes[myNode];
+  var note=(nd&&nd.note)||'';
+  var m=/^hw:([^@]+)@([\d.]+)$/.exec(note);
+  if(!m){ fireToast('This frame did not come from a world'); return; }
+  var slug=m[1], t=parseFloat(m[2]);
+  var det=document.getElementById('hw-stamp').closest('details'); if(det) det.open=true;
+  hwLoad().then(function(){
+    var sel=document.getElementById('hw-world');
+    var go=function(){
+      sel.value=slug;
+      var r=document.getElementById('hw-t');
+      r.value=Math.round(1000*t/Math.max(1e-6,HWRT.total));
+      HWSEL={}; hwScan();
+      fireToast('Broken down · '+slug+' @ '+t.toFixed(1)+'s');
+    };
+    if(sel.value!==slug) hwOpen(slug).then(go); else go();
+  });
+}
+/* ADJUSTING a frame: a part can be taken OUT as well as put in. Erase writes
+   level 0 over exactly the cells that part owns — the frame keeps everything
+   else, which is what makes this editing rather than re-rendering. */
+function hwErase(){
+  if(!HWSCENE){ fireToast('Open a world first'); return; }
+  var any=false,k; for(k in HWSEL) if(HWSEL[k]){any=true;break;}
+  if(!any){ fireToast('Choose a part to take out'); return; }
+  var g=hwDown(HWSEL), lines=[],y,x;
+  for(y=0;y<H;y++){ x=0; var rb=y*W;
+    while(x<W){ if(g[rb+x]>0){ var s0=x; while(x<W&&g[rb+x]>0)x++; lines.push('PNT '+s0+' '+y+' '+(x-s0)+' 1 0'); }
+      else x++; } }
+  if(!lines.length){ fireToast('Those parts ink nothing here'); return; }
+  playThud(); draw(lines); flash(); fireToast('Taken out · '+lines.length+' runs');
+}
 (function(){
   var t=document.getElementById('hw-t'); if(t) t.addEventListener('input',function(){ hwScan(); });
   var wsel=document.getElementById('hw-world'); if(wsel) wsel.addEventListener('change',function(){ hwOpen(this.value); });
@@ -5864,6 +6001,9 @@ function hwClip(){
   var st=document.getElementById('hw-stamp'); if(st) st.addEventListener('click', guard(function(){ hwStamp(false); },'hw-stamp'));
   var al=document.getElementById('hw-all'); if(al) al.addEventListener('click', guard(function(){ hwStamp(true); },'hw-all'));
   var cl=document.getElementById('hw-clip'); if(cl) cl.addEventListener('click', guard(hwClip,'hw-clip'));
+  var sr=document.getElementById('hw-stream'); if(sr) sr.addEventListener('click', guard(hwStream,'hw-stream'));
+  var bk=document.getElementById('hw-break'); if(bk) bk.addEventListener('click', guard(hwBreak,'hw-break'));
+  var er=document.getElementById('hw-erase'); if(er) er.addEventListener('click', guard(hwErase,'hw-erase'));
   var det=st&&st.closest&&st.closest('details');
   if(det) det.addEventListener('toggle',function(){ if(det.open) hwLoad(); });
 })();

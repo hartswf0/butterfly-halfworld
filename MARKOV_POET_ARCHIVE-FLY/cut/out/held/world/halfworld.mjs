@@ -292,13 +292,19 @@ function makeKit(seed) {
          name became a fact about the caller. The boundary is the render entry
          point, so name it once rather than naming every possible caller. */
       const BOUNDARY = ["renderScene", "renderTagged", "renderField"];
-      const SKIP = ["draw", "renderMovement", "Object", "Module", "w"];
+      const SKIP = ["draw", "renderMovement", "Object", "Module", "w", "who"];
       /* the DOTTED name, and then its last segment. `rt.renderScene(...)` shows
          up as `at Object.renderScene`, so a pattern that stops at the first
          token reads it as `Object`, skips it as noise, and walks straight past
          the boundary into the caller. That is why the old list needed a caller's
          name in it at all. */
-      for (let i = 3; i < Math.min(st.length, 12); i++) {
+      /* start at 1, not 3. A fixed index is a guess about how many frames the
+         engine puts between here and the drawing function, and V8 in a browser
+         does not lay them out the way V8 in node does — the same walk that read
+         `movement` under node read the CALLER's name in Chrome, because the two
+         skipped frames were not where the number said they were. Names are
+         facts; positions are not. */
+      for (let i = 1; i < Math.min(st.length, 14); i++) {
         const m = /at (?:async )?([\w$.]+)\s/.exec(st[i]);
         if (!m) continue;
         const nm = m[1].split(".").pop();
