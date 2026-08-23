@@ -490,7 +490,15 @@ const fileEl=document.getElementById('file'), camEl=document.getElementById('cam
    a cell lookup instead of an aspect calculation, because
    there is no longer an aspect to reconcile.
    ═════════════════════════════════════════════════════════ */
-const FW=192, FH=144;
+/* THE FIELD IS A PROPERTY OF WHAT IS LOADED, not a constant.
+   MOUSSA and the halfworlds are drawn on 192x144. OPERATOR's strips are drawn
+   on 128x96. Both are 4:3 and neither is wrong — they are different films. The
+   last fix made the frame the field's own size instead of the window's; this is
+   the same argument one step out. Resampling a 128x96 film onto a 192x144 grid
+   would repeat every second cell, which is the exact fault that made MOUSSA's
+   dots "never the film's". */
+let FW=192, FH=144;
+function setField(w,h){ if(FW===w&&FH===h) return; FW=w; FH=h; _geo=''; resize(); }
 let W=0,H=0,DPR=1,LAY={cell:7,unit:1,w:0,h:0,fx:0,fy:0,fw:0,fh:0};
 let _geo='';
 function resize(){
@@ -778,6 +786,12 @@ function draw(){
 }
 /* what the clock has on screen at S.time, resolved once per frame */
 function advance(){
+  if(STRIP){
+    const i=Math.min(STRIP.order.length-1, Math.floor(S.time*STRIP.fps));
+    const g=stripGrid(Math.max(0,i));
+    S.plate=g?{kind:'world', lv:g, strip:true, i:Math.max(0,i)}:null;
+    return;
+  }
   const st=S.station; if(!st){ S.plate=null; return; }
   const e=eventAt(st,S.time); if(!e){ S.plate=null; return; }
   if(e.k==='s'){
@@ -800,7 +814,15 @@ function advance(){
 }
 function tick(ms){
   const dt=S.last?Math.min(0.05,(ms-S.last)/1000):0; S.last=ms;
-  if(S.station){
+  if(STRIP){
+    const run=S.playing&&!S.scrubbing&&S.psel==null;
+    if(run) S.time=(S.time+dt)%STRIP.secs;
+    if(AUD){ if(run&&AUD.paused){ audioSeek(S.time); AUD.play().catch(()=>{}); }
+             else if(!run&&!AUD.paused) AUD.pause();
+             else if(run&&Math.abs((AUD.currentTime-(STRIP.aOffset||0))-S.time)>0.35) audioSeek(S.time); }
+    S.t=(S.t+dt/5.2)%1;
+    advance();
+  } else if(S.station){
     /* the clock stops while you are handling a piece. composing against a frame
        that changes under you is not composing — and the cut you are working on
        is the one you stopped at. */
@@ -1113,6 +1135,118 @@ function buildNouns(){
   }
 }
 
+/* ══ TWINSTRIP ════════════════════════════════════════════
+   OPERATOR's strip format, and a much stronger spine than the
+   two seconds of shot HELD was packing.
+
+     line 1   #TWINSTRIP v1
+     line 2   meta JSON — title, fps, frames, audio_lock
+     body     \f-separated nodes, each  id|parent|author|meta>
+              followed by BEFLIX lines: CLR 0 / PNT x y w h v
+
+   01-out-of-life is 984 nodes at 8fps: 123 seconds, which is
+   station 01 exactly, and its audio_lock says where the drone
+   ends and the poem starts. A film, authored, with sound.
+
+   THE TRICK WORTH STEALING is that a node carries its COMMANDS
+   and not its pixels. 984 grids at 128x96 would be 12MB held
+   forever; 984 command strings are 1.4MB and a grid is built
+   only when it is looked at, then dropped. OP-14 keeps 128 hot
+   and calls it "what makes frame count irrelevant" — it is
+   right, and it is why that tool can hold a whole film on a
+   phone while this one was holding two seconds.
+   ═════════════════════════════════════════════════════════ */
+let STRIP=null;
+const SGRID=new Map(); let SLRU=[]; const SLRU_MAX=128;
+function parseTwinstrip(text){
+  const i1=text.indexOf('\n'); if(i1<0||text.slice(0,10).indexOf('#TWINSTRIP')!==0) return null;
+  const i2=text.indexOf('\n',i1+1);
+  let meta={}; try{ meta=JSON.parse(text.slice(i1+1,i2)); }catch(e){}
+  const segs=text.slice(i2+1).split('\f');
+  const head=(segs[0]||'').split('~');
+  const nodes=new Map(); let order=[];
+  for(let i=1;i<segs.length;i++){
+    const seg=segs[i], gt=seg.indexOf('>'); if(gt<0) continue;
+    const key=seg.slice(0,gt);
+    if(key==='@SEQ'){ order=seg.slice(gt+1).split(',').filter(Boolean); continue; }
+    const m=key.split('|');
+    nodes.set(m[0],{id:m[0],parent:m[1]||null,author:m[2]||'?',cmds:seg.slice(gt+1)});
+  }
+  /* the running order is the path from the root down the first child at every
+     step — the same walk OP-14 calls activePath, minus the branch choices,
+     because nothing here is choosing a branch yet */
+  if(!order.length){
+    const kids=new Map();
+    for(const n of nodes.values()) if(n.parent){ (kids.get(n.parent)||kids.set(n.parent,[]).get(n.parent)).push(n.id); }
+    for(const a of kids.values()) a.sort();
+    let c=head[0], guard=0; order=[];
+    while(c&&nodes.has(c)&&guard++<100000){ order.push(c); const k=kids.get(c); c=k&&k[0]; }
+  }
+  return {meta, nodes, order, fps:meta.fps||8,
+          w:128, h:96,                       /* OPERATOR's field */
+          secs:(order.length)/(meta.fps||8)};
+}
+/* CLR fills, PNT paints a run. levels are 0..7, the same eight this whole
+   archive uses, so nothing has to be converted. */
+function applyCmds(grid,text,w,h){
+  const lines=text.split('\n');
+  for(let i=0;i<lines.length;i++){
+    const L=lines[i]; if(!L||L.charCodeAt(0)===59) continue;
+    const p=L.split(' ');
+    if(p[0]==='CLR'){ grid.fill(+p[1]||0); continue; }
+    if(p[0]!=='PNT') continue;
+    const x=+p[1],y=+p[2],ww=+p[3],hh=+p[4],v=+p[5];
+    for(let dy=0;dy<hh;dy++){ const yy=y+dy; if(yy<0||yy>=h) continue;
+      for(let dx=0;dx<ww;dx++){ const xx=x+dx; if(xx<0||xx>=w) continue; grid[yy*w+xx]=v; } }
+  }
+  return grid;
+}
+function stripGrid(i){
+  if(!STRIP) return null;
+  const id=STRIP.order[i]; if(!id) return null;
+  let g=SGRID.get(id);
+  if(g) return g;
+  const n=STRIP.nodes.get(id); if(!n) return null;
+  g=applyCmds(new Uint8Array(STRIP.w*STRIP.h), n.cmds, STRIP.w, STRIP.h);
+  SGRID.set(id,g); SLRU.push(id);
+  /* bounded, or a long scrub materialises the whole film and we are back to
+     holding 12MB of pixels */
+  if(SLRU.length>SLRU_MAX) SGRID.delete(SLRU.shift());
+  return g;
+}
+async function loadStrip(url,mp3){
+  lineEl.textContent='streaming '+url.split('/').pop()+' …';
+  let t;
+  try{ const r=await fetch(url); if(!r.ok) throw new Error(r.status); t=await r.text(); }
+  catch(e){ lineEl.textContent='could not fetch the strip ('+e.message+')'; return null; }
+  const S=parseTwinstrip(t);
+  if(!S){ lineEl.textContent='not a twinstrip'; return null; }
+  STRIP=S; SGRID.clear(); SLRU=[];
+  setField(S.w,S.h);
+  S.time=0;
+  if(mp3) stripAudio(mp3, S);
+  return S;
+}
+
+/* THE AUDIO LOCK. The strip's meta says where the drone runs and where the poem
+   starts — container_s and poem_s, in seconds of the master. HELD had no sound
+   at all: the songs sat beside films too large to ship, so the one thing the
+   whole archive is cut TO was the one thing the tool could not hear. */
+let AUD=null;
+function stripAudio(url,S){
+  const a=new Audio(); a.src=url; a.loop=false; a.preload='auto';
+  a.addEventListener('error',()=>{ lineEl.textContent='no audio at '+url; });
+  AUD=a; S.audioURL=url;
+  const lock=(S.meta&&S.meta.audio_lock)||{};
+  S.aOffset=(lock.container_s&&lock.container_s[0])||0;
+  S.poemAt=(lock.poem_s&&lock.poem_s[0])||null;
+}
+function audioSeek(t){
+  if(!AUD||!STRIP) return;
+  const want=(STRIP.aOffset||0)+t;
+  if(Math.abs(AUD.currentTime-want)>0.25){ try{ AUD.currentTime=Math.max(0,want); }catch(e){} }
+}
+
 /* ══ PIECES ═══════════════════════════════════════════════
    Everything HELD could put on the field was bound: a socket
    is a hole in a surface, and it goes where the surface goes.
@@ -1296,6 +1430,32 @@ function undo(){
   S.sel=null; S.fit=null; setMode(S.order.length?'COMPLETE':'REST');
 }
 /* ── the stations ───────────────────────────────────────────────────────── */
+/* ?strip=…&mp3=…  — OPERATOR's own convention, so a link that opens a film
+   there opens the same film here. The strips live beside that tool; a relative
+   name is resolved against it rather than copied. */
+const STRIP_BASE='https://hartswf0.github.io/prompt-language/WYGWYL-BK/OP-51/wygwyl-site/';
+const abs=u=>/^https?:|^\.|^\//.test(u)?u:STRIP_BASE+u;
+async function openStrip(url,mp3){
+  const strip=await loadStrip(abs(url), mp3?abs(mp3):null);
+  if(!strip) return;
+  strip.url=url;
+  /* a strip is its own film. the station clock and the mannequin scaffolding
+     belong to a different one, so they go — anything carrying a socket stays,
+     because someone worked on it. */
+  S.station=null; S.time=0; S.playing=true;
+  S.cast=S.cast.filter(f=>Object.keys(S.sockets).some(k=>k.startsWith('f'+f.id+':')&&S.sockets[k].length));
+  advance(); setMode('STRIP');
+}
+function stripLine(){
+  if(!STRIP) return '';
+  const m=STRIP.meta||{}, i=(S.plate&&S.plate.i)||0;
+  const mm=Math.floor(S.time/60), ss=Math.floor(S.time%60);
+  const inPoem=STRIP.poemAt!=null&&S.time>=STRIP.poemAt;
+  return `${m.title||'strip'} · ${mm}:${String(ss).padStart(2,'0')} · `
+    +`f${i+1}/${STRIP.order.length} · ${STRIP.fps}fps`
+    +(STRIP.poemAt!=null?` · <i>${inPoem?'poem':(m.audio_lock&&m.audio_lock.header_track)||'drone'}</i>`:'')
+    +(AUD?(AUD.paused?'':' · <b>sound</b>'):'');
+}
 let SHOTONLY=false, STI=-1;
 /* THE SHOT'S OWN ELEMENTS. SAM cut 2,033 pieces out of these frames and each
    one remembers its shot, so "what is this frame made of" is a filter, not a
@@ -1398,6 +1558,16 @@ function hydrate(sn){
 }
 function paintCuts(){
   const c=$('cuts');
+  if(STRIP){
+    /* 984 frames is not a cut list, it is a fog. what a strip's clock actually
+       has boundaries at is the audio lock: where the drone gives way to the
+       poem and back. */
+    if(c.dataset.for==='strip:'+(STRIP.url||'')) return;
+    c.dataset.for='strip:'+(STRIP.url||'');
+    const L=(STRIP.meta&&STRIP.meta.audio_lock)||{}, P=L.poem_s;
+    c.innerHTML=P?P.map(t=>`<i class="w" style="left:${(100*t/STRIP.secs).toFixed(3)}%"></i>`).join(''):'';
+    return;
+  }
   if(!S.station){ c.innerHTML=''; c.dataset.for=''; return; }
   if(c.dataset.for===S.station.n) return;         /* only when the station changes */
   c.dataset.for=S.station.n;
@@ -1444,9 +1614,9 @@ function buildShots(){
 
 /* ══ STATES ═══════════════════════════════════════════════ */
 function report(){
-  if(S.station&&S.mode!=='WORKING'&&S.mode!=='READY'&&S.mode!=='PLACING'&&S.mode!=='PIECE'){
-    lineEl.innerHTML=stationLine(); return;
-  }
+  const busy=S.mode==='WORKING'||S.mode==='READY'||S.mode==='PLACING'||S.mode==='PIECE';
+  if(STRIP&&!busy){ lineEl.innerHTML=stripLine(); return; }
+  if(S.station&&!busy){ lineEl.innerHTML=stationLine(); return; }
   if(S.mode!=='CHANGED') return;
   const so=findSock(S.sel), n=S.seams;
   lineEl.innerHTML=(n>0?'held · <b>'+n+' open at the seam</b>':'held')
@@ -1462,6 +1632,7 @@ function setMode(m){
   if(m==='PLACING'){ lineEl.textContent='tap to set the figure'; acts.push(['stop',()=>{S.placing=null;setMode('REST');}]); }
   if(m==='COMPLETE') lineEl.textContent='scrub to check it holds';
   if(m==='STATION') lineEl.innerHTML=stationLine();
+  if(m==='STRIP') lineEl.innerHTML=stripLine();
   if(m==='PIECE'){
     const p=S.pieces.find(x=>x.id===S.psel);
     if(p) lineEl.innerHTML=`${p.name} · ${Math.round(p.x)},${Math.round(p.y)} · `
@@ -1469,15 +1640,21 @@ function setMode(m){
       +(p.op<1?` · ${Math.round(p.op*100)}%`:'');
     acts.push(['done',()=>{S.psel=null;setMode(S.order.length?'COMPLETE':'REST');}]);
   }
-  if(m!=='PLACING'&&m!=='WORKING'){ acts.push(['station',pickStation]);
+  if(m!=='PLACING'&&m!=='WORKING'){
+    acts.push(['strip',()=>openStrip('strips/01-out-of-life-BEATKILLER.twinstrip','audio/unified-drones.mp3')]);
+    if(STRIP) acts.push([AUD&&!AUD.paused?'pause':'play',()=>{S.playing=!S.playing;setMode('STRIP');}]);
+    acts.push(['station',pickStation]);
                                     acts.push(['parts',shotParts]);
                                     acts.push(['poet',castPoet]); acts.push(['cast',castOne]);
                                     acts.push(['ground',ground]); }
   if(S.order.length){ acts.push(['undo',undo]); acts.push(['take',take]); }
   setActs(acts); buildModes(); placePanel(); report();
-  scrubEl.classList.toggle('on',S.cast.length>0||!!S.station);
+  scrubEl.classList.toggle('on',S.cast.length>0||!!S.station||!!STRIP);
   paintCuts(); syncScrub();
 }
+/* ?strip=…&mp3=… opens straight into the film, the way OPERATOR's links do */
+(function(){ const q=new URLSearchParams(location.search);
+  const st=q.get('strip'); if(st) setTimeout(()=>openStrip(st,q.get('mp3')),60); })();
 castOne(); S.placing.ox=0.5; S.placing.oy=0.55; S.placing.scale=0.9; S.placing.flip=false;
 S.cast.push(S.placing); S.order.push({t:'figure',id:S.placing.id}); S.placing=null;
 setMode('REST');
@@ -1486,9 +1663,10 @@ setInterval(()=>{ placePanel(); report(); },160);
 /* ══ SCRUB ════════════════════════════════════════════════ */
 function syncScrub(){
   if(!scrubEl.classList.contains('on')) return;
-  if(S.station){
+  const dur=STRIP?STRIP.secs:(S.station&&S.station.secs);
+  if(dur){
     const r=$('track').getBoundingClientRect(), b=scrubEl.getBoundingClientRect();
-    headEl.style.left=(r.left-b.left+r.width*(S.time/S.station.secs))+'px';
+    headEl.style.left=(r.left-b.left+r.width*(S.time/dur))+'px';
     headEl.style.top=(scrubEl.offsetHeight/2-5)+'px';
     return;
   }
@@ -1500,7 +1678,8 @@ function syncScrub(){
 }
 const scrubTo=x=>{const r=$('track').getBoundingClientRect();
   const u=clamp((x-r.left)/Math.max(1,r.width),0,1);
-  if(S.station){ S.time=u*S.station.secs; advance(); } else S.t=u;};
+  const dur=STRIP?STRIP.secs:(S.station&&S.station.secs);
+  if(dur){ S.time=u*dur; advance(); if(AUD)audioSeek(S.time); } else S.t=u;};
 scrubEl.addEventListener('pointerdown',e=>{scrubEl.setPointerCapture(e.pointerId);S.scrubbing=true;scrubTo(e.clientX);});
 scrubEl.addEventListener('pointermove',e=>{if(S.scrubbing)scrubTo(e.clientX);});
 scrubEl.addEventListener('pointerup',()=>{S.scrubbing=false;});
