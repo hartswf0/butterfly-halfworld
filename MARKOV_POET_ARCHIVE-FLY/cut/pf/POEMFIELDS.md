@@ -26,6 +26,30 @@ And a part can be taken **out** as well as put in: `Take them out` writes level 
 over exactly the cells a part owns, so the frame keeps everything else. That is
 editing rather than re-rendering.
 
+## where they are
+
+They were in a **dropdown of slugs**. A slug is a filename, and picking a
+poemfield by filename is like picking a record by its catalogue number — possible
+only if you already know what you want.
+
+Every world module already carries what a card needs: `n`, `title`, `tagline`,
+and a `movements` array whose length is the movement count and whose entries hold
+the poem's lines. The runtime supplies the duration. So the picker looks like the
+index the worlds already have, and nothing was authored twice:
+
+    01 OUT OF LIFE      the maze, the haze, the fall, the ember     4 MOVEMENTS · 123s
+    02 FLASHING LIGHTS  the scream that travels inward             6 MOVEMENTS ·  91s
+    04 NEVERMORE        a trail followed twice, a vow made twice   6 MOVEMENTS · 135s
+    12 REUNION          less time for words, more space for laughter 5 MOVEMENTS · 75s
+
+Fourteen cards, each with a live thumbnail rendered from the world itself at 45%
+through. They render **one at a time with a yield between**, because fourteen
+halfworld renders back to back is a second of frozen page on a phone, and a
+gallery that appears row by row beats one that appears late.
+
+Scrubbing now also shows **where you are in the poem** — the movement number, its
+label, and the line spoken during it, read from the module.
+
 ## how much of each world actually comes apart
 
 This is the honest part, and it varies enormously. Five samples per world, all

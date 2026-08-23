@@ -793,10 +793,13 @@
     <div class="mini">The drawn worlds are not pictures &mdash; they are <b>programs</b>, and every
     cell they ink remembers which part drew it. So a world can be taken apart by name and
     put back one piece at a time: the water without the building, the gate without the windows.</div>
+    <div id="hw-gallery" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));
+         gap:6px;max-height:260px;overflow:auto;margin-top:8px;border:3px solid var(--k);padding:6px"></div>
     <div class="row" style="margin-top:8px">
       <div style="flex:3"><label class="mini">World</label><select id="hw-world" style="width:100%;min-height:42px;border:3px solid var(--k);font-weight:700"></select></div>
       <div style="flex:1"><label class="mini">Fit</label><select id="hw-fit" style="width:100%;min-height:42px;border:3px solid var(--k);font-weight:700"><option value="max" selected>ink</option><option value="mid">mid</option></select></div>
     </div>
+    <div class="mini" id="hw-line" style="margin-top:6px;min-height:2.6em"></div>
     <div><label class="mini">Time <span id="hw-tv">0.0s</span></label><input type="range" id="hw-t" min="0" max="1000" value="450" style="width:100%"></div>
     <div id="hw-parts" style="display:flex;flex-wrap:wrap;gap:4px;margin-top:8px"></div>
     <div class="row" style="margin-top:8px">
@@ -5764,9 +5767,102 @@ function hwLoad(){
     HW_LIST=list;
     var sel=document.getElementById('hw-world'); sel.innerHTML='';
     list.forEach(function(w){ var o=document.createElement('option'); o.value=w; o.textContent=w; sel.appendChild(o); });
-    sel.value=list.indexOf('06-resurrecting-atlantis')>=0?'06-resurrecting-atlantis':list[0];
+    sel.value=list.indexOf('01-out-of-life')>=0?'01-out-of-life':list[0];
+    hwGallery(list).then(function(){ hwGalleryMark(document.getElementById('hw-world').value); });
     return hwOpen(sel.value);
   }).catch(function(e){ hwState('no halfworld engine ('+e.message+')'); HW=null; });
+}
+/* ====================================================================
+   THE GALLERY — where the fourteen worlds are.
+
+   They were in a dropdown of slugs. A slug is a filename, and choosing a
+   poemfield by filename is like choosing a record by its catalogue number:
+   you can do it, but only if you already know what you want.
+
+   Every world module already carries what a card needs — `n`, `title`,
+   `tagline`, and a `movements` array whose length is the movement count and
+   whose entries hold the poem's own lines. The runtime supplies the duration.
+   So the picker can look like the index the worlds already have, and nothing
+   had to be authored twice.
+
+   Thumbnails render one at a time with a yield between, because fourteen
+   halfworld renders back to back is a second of frozen page on a phone, and a
+   gallery that appears row by row is better than one that appears late.
+   ==================================================================== */
+var HWMODS={}, HWMETA={};
+function hwCard(slug){
+  var d=document.createElement('button'); d.type='button'; d.dataset.slug=slug;
+  d.style.cssText='display:block;text-align:left;padding:0;border:3px solid var(--k);background:#fff;overflow:hidden';
+  var cv=document.createElement('canvas'); cv.width=96; cv.height=72;
+  cv.style.cssText='display:block;width:100%;height:auto;image-rendering:pixelated;border-bottom:3px solid var(--k)';
+  var t=document.createElement('div');
+  t.style.cssText='padding:4px 5px;font:9px/1.25 ui-monospace,monospace';
+  t.innerHTML='<b style="letter-spacing:.08em">'+slug.slice(0,2)+'</b> <span class="hw-t">…</span>'
+    +'<div class="hw-g" style="color:#777;margin-top:2px"></div>'
+    +'<div class="hw-m" style="color:#aaa;margin-top:3px;letter-spacing:.06em"></div>';
+  d.appendChild(cv); d.appendChild(t);
+  d.onclick=function(){ playTick();
+    var sel=document.getElementById('hw-world'); sel.value=slug;
+    hwGalleryMark(slug); hwOpen(slug); };
+  return d;
+}
+function hwGalleryMark(slug){
+  [].slice.call(document.querySelectorAll('#hw-gallery button')).forEach(function(b){
+    b.style.outline=(b.dataset.slug===slug)?'3px solid var(--aB)':''; });
+}
+/* one world's thumbnail: render it at 45% through and draw the level grid */
+function hwThumb(slug,card){
+  return import('../held/world/worlds/'+slug+'.mjs').then(function(m){
+    var w=m.default; HWMODS[slug]=w;
+    var rt=HW.makeRuntime(w);
+    var meta={title:w.title||slug, tag:w.tagline||'', moves:(w.movements||[]).length,
+              secs:Math.round(rt.total), n:w.n||slug.slice(0,2)};
+    HWMETA[slug]=meta;
+    card.querySelector('.hw-t').textContent=meta.title;
+    card.querySelector('.hw-g').textContent=meta.tag;
+    card.querySelector('.hw-m').textContent=meta.moves+' MOVEMENTS · '+meta.secs+'s';
+    var ids=new Int16Array(HW_W*HW_H), sc;
+    try{ sc=rt.renderScene(rt.total*0.45, ids); }catch(e){ return; }
+    var cv=card.querySelector('canvas'), x=cv.getContext('2d');
+    x.fillStyle='#fff'; x.fillRect(0,0,96,72); x.fillStyle='#000';
+    /* every other cell: a 96x72 card cannot show 192x144 and pretending it can
+       just makes mud */
+    for(var gy=0;gy<HW_H;gy+=2) for(var gx=0;gx<HW_W;gx+=2){
+      var v=sc.levels[gy*HW_W+gx]; if(!v)continue;
+      var r=Math.max(0.4,(DOTR[Math.min(7,v)]||0.1)*2.0);
+      x.beginPath(); x.arc(gx/2+0.5,gy/2+0.5,r,0,6.2832); x.fill();
+    }
+  }).catch(function(){ card.querySelector('.hw-t').textContent=slug; });
+}
+function hwGallery(list){
+  var box=document.getElementById('hw-gallery'); if(!box)return Promise.resolve();
+  box.innerHTML='';
+  var poems=list.filter(function(w){ return /^\d\d-/.test(w)&&!/^00/.test(w)&&w.indexOf('b-')<0; });
+  var cards=poems.map(function(sl){ var c=hwCard(sl); box.appendChild(c); return {sl:sl,c:c}; });
+  var i=0;
+  return new Promise(function(done){
+    var step=function(){
+      if(i>=cards.length){ done(); return; }
+      var it=cards[i++];
+      hwThumb(it.sl,it.c).then(function(){
+        if(window.MessageChannel){ var mc=new MessageChannel(); mc.port1.onmessage=step; mc.port2.postMessage(0); }
+        else setTimeout(step,0);
+      });
+    };
+    step();
+  });
+}
+/* the line you are standing in. renderScene names the movement; the module
+   holds what is said during it. */
+function hwLine(){
+  var el=document.getElementById('hw-line'); if(!el)return;
+  var slug=document.getElementById('hw-world').value, w=HWMODS[slug];
+  if(!w||!HWSCENE){ el.textContent=''; return; }
+  var mv=(w.movements||[])[HWSCENE.movement||0];
+  var meta=HWMETA[slug]||{};
+  el.innerHTML='<b>'+(meta.title||'')+'</b> · M'+((HWSCENE.movement||0)+1)
+    +' '+(HWSCENE.label||'')+(mv&&mv.line?'<br><span style="color:#777">'
+    +escHtml(String(mv.line).slice(0,150))+(String(mv.line).length>150?'…':'')+'</span>':'');
 }
 function hwOpen(slug){
   hwState('opening '+slug+'…');
@@ -5810,7 +5906,8 @@ function hwScan(){
     box.appendChild(b);
   });
   var inked=0; for(i=0;i<HWSCENE.levels.length;i++) if(HWSCENE.levels[i])inked++;
-  hwState(names.length+' parts · '+inked+' inked · '+HWSCENE.label);
+  hwState(names.length+' parts · '+inked+' inked · '+Math.round(100*[].concat(names).reduce(function(a,n){return a+count[n];},0)/Math.max(1,inked))+'% named');
+  hwLine();
 }
 /* 192x144 -> 128x96. MAX over the covered rect, so a one-cell mark survives. */
 function hwDown(want){
