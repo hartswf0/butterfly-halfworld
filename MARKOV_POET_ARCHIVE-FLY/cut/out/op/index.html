@@ -426,12 +426,35 @@
   #stage{ flex:1 1 auto; min-height:0; position:relative; background:var(--k); padding:4px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
   #board-wrap{ position:relative; background:var(--w); box-shadow:0 0 0 3px var(--k); overflow:hidden; }
   canvas#board{ image-rendering:auto; display:block; touch-action:none; cursor:crosshair; background:var(--w); }
-  #board-empty{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:5px; font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--k); opacity:.4; padding:1rem; pointer-events:none; }
+  #board-empty{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:5px; font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--k); padding:1rem; pointer-events:none; }
+  /* the .4 used to sit on the container. A parent's opacity is a ceiling — the
+     thumbnails could not be more solid than the hint text they sit under, so
+     fourteen worlds arrived as a grey smudge. It belongs on the words. */
+  #board-empty > span, #board-empty > i{ opacity:.4 }
+  #board-empty{ color:rgba(20,20,20,.42) }
+  #be-worlds{ color:var(--k) }
   #edit-badge{ position:absolute; top:8px; left:8px; z-index:6; display:flex; align-items:stretch; border:2px solid var(--k); box-shadow:2px 2px 0 var(--k); font-size:10px; font-weight:700; letter-spacing:.05em; pointer-events:none; }
   #edit-badge .eb-k{ background:var(--aD); color:#fff; padding:4px 6px; }
   #edit-badge .eb-pos{ background:var(--aB); color:var(--k); padding:4px 6px; border-left:2px solid var(--k); }
   #edit-badge .eb-ser{ background:var(--w); color:var(--k); padding:4px 6px; border-left:2px solid var(--k); }
   #board-empty span{ font-weight:400; font-size:10px; text-transform:none; letter-spacing:0; opacity:.85; }
+  /* THE EMPTY FRAME IS THE QUESTION. "Where are the worlds" is asked here, on
+     an empty board, so it is answered here — not four steps deep in a sheet
+     behind a disclosure triangle. The panel keeps the full drawer; this is the
+     door. It only exists while the frame is empty, and it takes pointer events
+     back so the cards can be tapped. */
+  #board-empty{ pointer-events:none }
+  #board-empty{ font-size:13px }
+  #be-worlds{ pointer-events:auto; margin-top:10px; width:100%; max-width:520px; opacity:1 }
+  #be-worlds b{ display:block; font:700 10px/1 ui-monospace,monospace; letter-spacing:.22em; margin-bottom:6px }
+  #be-worlds em{ display:block; font-style:normal; font:400 9px/1.3 ui-monospace,monospace;
+                 text-transform:none; letter-spacing:0; margin-top:6px; opacity:.7 }
+  #be-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:3px }
+  #be-grid button{ padding:0; border:2px solid var(--k); background:#fff; cursor:pointer; overflow:hidden;
+                   display:block; line-height:0 }
+  #be-grid canvas{ display:block; width:100%; height:auto; image-rendering:pixelated }
+  #be-grid button:hover{ outline:2px solid var(--aB) }
+  @media (max-width:560px){ #be-grid{ grid-template-columns:repeat(5,1fr) } }
 
   /* collapsible panels — they SHRINK the stage, never cover it */
   .panel{ position:fixed; left:0; right:0; bottom:calc(var(--tab-h) + var(--pad)); max-height:72vh; overflow-y:auto; -webkit-overflow-scrolling:touch; background:var(--w); border-top:3px solid var(--k); padding:14px 16px calc(16px + var(--pad)); z-index:80; transform:translateY(115%); visibility:hidden; transition:transform .30s cubic-bezier(.25,1,.5,1), visibility 0s linear .30s; }
@@ -752,7 +775,9 @@
 <div id="stage">
   <div id="board-wrap">
     <canvas id="board" width="640" height="480"></canvas>
-    <div id="board-empty">FRAME <span id="be-n">1</span><i>draw here · or LENS / WRITE / PROMPT in AUTHOR</i></div>
+    <div id="board-empty">FRAME <span id="be-n">1</span><i>draw here · or LENS / WRITE / PROMPT in AUTHOR</i>
+      <div id="be-worlds" hidden><b>THE FOURTEEN</b><div id="be-grid"></div>
+      <em>tap a poem to put it in this frame</em></div></div>
     <div id="edit-badge" hidden></div>
   </div>
   <div id="coach" hidden><span id="coach-txt"></span></div>
@@ -5276,7 +5301,9 @@ function renderGridToBoard(grid){ bctx.setTransform(1,0,0,1,0,0); bctx.clearRect
   return any; }
 function paintBoardNow(){ var grid=curGrid(); var any=renderGridToBoard(grid); if(typeof paintGhost==='function')paintGhost();
   if(theirPen.on&&theirPen.node===myNode){ var c=BOARD_CELL; bctx.fillStyle='#000'; bctx.fillRect((theirPen.x-3)*c,theirPen.y*c,7*c,Math.max(1,c/2)); bctx.fillRect(theirPen.x*c,(theirPen.y-3)*c,Math.max(1,c/2),7*c); bctx.strokeStyle='#000'; bctx.lineWidth=1; bctx.strokeRect((theirPen.x-4)*c,(theirPen.y-4)*c,8*c,8*c); }
-  var be=document.getElementById('board-empty'); _frameEmpty=!any; if(be)be.style.display=(_frameEmpty&&_boardOK)?'flex':'none';
+  var be=document.getElementById('board-empty'); _frameEmpty=!any;
+  if(be)be.style.display=(_frameEmpty&&_boardOK)?'flex':'none';
+  if(_frameEmpty&&_boardOK) beWorlds();
 }
 function thumbInto(grid,cv){ var x=cv.getContext('2d'); x.fillStyle='#fff'; x.fillRect(0,0,cv.width,cv.height); x.fillStyle='#000'; for(var gy=0;gy<H;gy+=2){ for(var gx=0;gx<W;gx+=2){ if(grid[gy*W+gx]>0) x.fillRect((gx/W*cv.width)|0,(gy/H*cv.height)|0,1,1); } } }
 /* ── OP-14 THUMB ATLAS: one offscreen canvas, 128 LRU slots. The strip, BRANCH
@@ -5775,7 +5802,9 @@ function hwLoad(){
     var sel=document.getElementById('hw-world'); sel.innerHTML='';
     list.forEach(function(w){ var o=document.createElement('option'); o.value=w; o.textContent=w; sel.appendChild(o); });
     sel.value=list.indexOf('01-out-of-life')>=0?'01-out-of-life':list[0];
-    hwGallery(list).then(function(){ hwGalleryMark(document.getElementById('hw-world').value); });
+    /* kept so anything that needs a finished gallery can wait for one instead of
+       copying blank canvases out of it */
+    HW_GAL=hwGallery(list).then(function(){ hwGalleryMark(document.getElementById('hw-world').value); });
     return hwOpen(sel.value);
   }).catch(function(e){ hwState('no halfworld engine ('+e.message+')'); HW=null; });
 }
@@ -5796,12 +5825,12 @@ function hwLoad(){
    halfworld renders back to back is a second of frozen page on a phone, and a
    gallery that appears row by row is better than one that appears late.
    ==================================================================== */
-var HWMODS={}, HWMETA={}, HWBLOB=null;
+var HWMODS={}, HWMETA={}, HWBLOB=null, HW_GAL=null;
 /* A module URL is cached hard and forever, which is right until the engine
    changes underneath a deployed page: the tagging fixes below were live on the
    server and invisible in the browser for three reloads. The tag is bumped when
    the engine changes, so an update actually arrives. */
-var HW_BUILD='4';
+var HW_BUILD='6';
 function hwCard(slug){
   var d=document.createElement('button'); d.type='button'; d.dataset.slug=slug;
   d.style.cssText='display:block;text-align:left;padding:0;border:3px solid var(--k);background:#fff;overflow:hidden';
@@ -6262,6 +6291,40 @@ function hwSuite(){
   streamStripReader(reader,'wygwyl-suite.poemfield',null);
   var poll=setInterval(function(){ if(wi>=poems.length){ clearInterval(poll);
     setTimeout(function(){ Progress.done(made+' frames'); Progress.hide(600); },250); } },150);
+}
+/* ── the fourteen, on the empty frame ──────────────────────────────────────
+   The tool opened on a blank board that said "draw here", and every one of the
+   fourteen poemfields was four steps away: a mode tab, a scroll, a disclosure
+   triangle, a wait. Nothing on the opening screen said they existed.
+
+   The empty frame is where the question gets asked, so it is where the answer
+   goes. The strip loads them lazily and only while the frame is empty; the
+   first mark you make takes them away, because then you are working. */
+var BEW=false;
+function beWorlds(){
+  if(BEW) return; BEW=true;
+  var box=document.getElementById('be-grid'), wrap=document.getElementById('be-worlds');
+  if(!box) return;
+  hwLoad().then(function(){ return HW_GAL||Promise.resolve(); }).then(function(){
+    if(!HW_LIST||!HW_LIST.length) return;
+    var poems=HW_LIST.filter(function(w){ return /^\d\d-/.test(w)&&!/^00/.test(w)&&w.indexOf('b-')<0; });
+    box.innerHTML='';
+    poems.forEach(function(slug){
+      var b=document.createElement('button'); b.type='button';
+      var meta=HWMETA[slug]||{};
+      b.title=(meta.title||slug)+(meta.tag?' — '+meta.tag:'');
+      var cv=document.createElement('canvas'); cv.width=96; cv.height=72; b.appendChild(cv);
+      /* reuse the drawer's own thumbnail, so there is one renderer and not two */
+      var src=document.querySelector('#hw-gallery button[data-slug="'+slug+'"] canvas');
+      if(src) cv.getContext('2d').drawImage(src,0,0);
+      b.onclick=function(){ playTick();
+        var sel=document.getElementById('hw-world'); if(sel) sel.value=slug;
+        hwGalleryMark(slug);
+        hwOpen(slug).then(function(){ hwStamp(true); }); };
+      box.appendChild(b);
+    });
+    if(wrap) wrap.hidden=false;
+  });
 }
 (function(){
   var t=document.getElementById('hw-t'); if(t) t.addEventListener('input',function(){ hwScan(); });

@@ -26,6 +26,24 @@ And a part can be taken **out** as well as put in: `Take them out` writes level 
 over exactly the cells a part owns, so the frame keeps everything else. That is
 editing rather than re-rendering.
 
+## on the empty frame
+
+The tool opened on a blank board that said *draw here*, and all fourteen
+poemfields were four steps away: a mode tab, a scroll, a disclosure triangle, a
+wait. **Nothing on the opening screen said they existed.**
+
+The empty frame is where "where are the worlds" gets asked, so it is where the
+answer goes. `THE FOURTEEN` sits on the board itself while the frame is empty —
+fourteen thumbnails, one tap, and the world is the frame. The first mark you make
+takes them away, because then you are working.
+
+The panel keeps the full drawer. This is the door.
+
+One CSS lesson on the way: the empty-state hint had `opacity:.4` on its
+container, and **a parent's opacity is a ceiling** — the thumbnails could not be
+more solid than the text they sat under, so fourteen worlds arrived as a grey
+smudge. It belongs on the words.
+
 ## where they are
 
 They were in a **dropdown of slugs**. A slug is a filename, and picking a
