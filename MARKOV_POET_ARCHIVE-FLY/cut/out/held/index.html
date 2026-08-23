@@ -83,7 +83,7 @@
     #shots{left:10px;right:10px;top:8px;bottom:auto;flex-direction:row;
            align-items:flex-start;overflow-x:auto;overflow-y:hidden}
   }
-  .shot{width:48px;height:30px;border:1px solid var(--ink);border-radius:0;padding:0;background:var(--paper);
+  .shot{width:48px;height:36px;border:1px solid var(--ink);border-radius:0;padding:0;background:var(--paper);
         cursor:pointer;display:block;flex:0 0 auto}
   .shot canvas{display:block;width:100%;height:100%}
   .shot[aria-pressed="true"]{outline:2px solid var(--live);outline-offset:-3px}
@@ -459,6 +459,7 @@ const S={
   cast:[],                          // {id,ox,oy,scale,phase,flip}
   order:[], sel:null, fit:null, placing:null,
   lasso:null, seams:0, shots:[], activeShot:-1,
+  pieces:[], psel:null,
 };
 const surfSockets=k=>S.sockets[k]||(S.sockets[k]=[]);
 const findSock=ref=>ref?(S.sockets[ref.key]||[]).find(s=>s.id===ref.id)||null:null;
@@ -472,17 +473,45 @@ const modesEl=document.getElementById('modes'), shotsEl=document.getElementById(
 const scrubEl=document.getElementById('scrub'), headEl=document.getElementById('head');
 const fileEl=document.getElementById('file'), camEl=document.getElementById('cam');
 
-let W=0,H=0,DPR=1,LAY={cell:7,unit:1,w:0,h:0};
+/* ══ THE FRAME ════════════════════════════════════════════
+   The cell grid used to be min(W,H)/112 spread over the whole
+   window — a number with no relation to anything. The field
+   this entire archive is drawn on is 192x144: MOUSSA's law,
+   the halfworlds' law, the beflix dot law, all of it. So a
+   shot arriving as 192x144 was being RESAMPLED onto a grid
+   of some other size, and one of its cells landed across two
+   of ours or half of one. The dots were never the film's.
+
+   The field is real now. 192x144 cells at an integer cell
+   size, centred in the window, and the paper around it is
+   the paper the film is printed on. Every mapping below is
+   a cell lookup instead of an aspect calculation, because
+   there is no longer an aspect to reconcile.
+   ═════════════════════════════════════════════════════════ */
+const FW=192, FH=144;
+let W=0,H=0,DPR=1,LAY={cell:7,unit:1,w:0,h:0,fx:0,fy:0,fw:0,fh:0};
 function resize(){
   DPR=Math.min(devicePixelRatio||1,2); W=innerWidth; H=innerHeight;
   stage.width=Math.floor(W*DPR); stage.height=Math.floor(H*DPR);
   stage.style.width=W+'px'; stage.style.height=H+'px';
   ctx.setTransform(DPR,0,0,DPR,0,0);
-  /* two carriers, two natural sizes: the mannequin is drawn in a 150x210 space
-     and a packed body in the 192x144 field, so a single `unit` made the poet
-     fill the screen four times over */
-  LAY={cell:Math.max(4,Math.round(Math.min(W,H)/112)),unit:Math.min(W/150,H/210),
-       bunit:Math.min(W/192,H/144),w:W,h:H};
+  const barH=($('bar')&&$('bar').offsetHeight)||96;
+  const availH=Math.max(120,H-barH-8), availW=Math.max(120,W-16);
+  /* The cell is whatever fits, exactly.
+     Rounding it to a whole number was solving a problem this renderer does not
+     have: the marks are arc() discs, which antialias, so a fractional cell costs
+     nothing. Rounding cost a great deal — 359 CSS px is 1.87 cells across, and
+     flooring that to 1 put a 192px postage stamp in the middle of a phone.
+     Rounding to whole DEVICE pixels was better and still threw away a fifth of
+     the width. Exact uses all of it. */
+  const cell=Math.max(1, Math.min(availW/FW, availH/FH));
+  const fw=cell*FW, fh=cell*FH;
+  LAY={cell, w:W, h:H, fw, fh,
+       fx:(W-fw)/2, fy:4+(availH-fh)/2,
+       /* the mannequin is drawn in a 150x210 space and a packed body in the
+          field itself, so each keeps its own unit — but both are now measured
+          against the FRAME rather than the window */
+       unit:Math.min(fw/150,fh/210), bunit:cell};
 }
 addEventListener('resize',()=>{resize();syncScrub();}); resize();
 
@@ -490,11 +519,11 @@ addEventListener('resize',()=>{resize();syncScrub();}); resize();
 const unitOf=(f,L)=>(f.kind==='body'?(L.bunit||L.unit):L.unit)*f.scale;
 function figScreen(f,x,y,L){
   const S=spaceOf(f), u=unitOf(f,L), sx=(x-S[0])*(f.flip?-1:1);
-  return [L.w*f.ox+sx*u, L.h*f.oy+(y-S[1])*u];
+  return [L.fx+L.fw*f.ox+sx*u, L.fy+L.fh*f.oy+(y-S[1])*u];
 }
 function figFigure(f,px,py,L){
   const S=spaceOf(f), u=unitOf(f,L);
-  return [S[0]+((px-L.w*f.ox)/u)*(f.flip?-1:1), S[1]+(py-L.h*f.oy)/u];
+  return [S[0]+((px-L.fx-L.fw*f.ox)/u)*(f.flip?-1:1), S[1]+(py-L.fy-L.fh*f.oy)/u];
 }
 
 /* ══ RENDER ═══════════════════════════════════════════════ */
@@ -513,9 +542,13 @@ function sampleMat(m,bb,u,v,fit,asp){
 
 function renderScene(g,L,st,t,opt){
   opt=opt||{};
-  const C=L.cell, w=L.w, h=L.h;
+  const C=L.cell, w=L.w, h=L.h, FX=L.fx, FY=L.fy;
   const pg=st.paper==='#000000'?[0,0,0]:[255,255,255];
   g.fillStyle=st.paper; g.fillRect(0,0,w,h);
+  /* the frame is a thing you can see the edge of. a composition needs a border
+     to be composed against — without one there is no inside and no margin. */
+  g.strokeStyle=st.paper==='#000000'?'#333':'#d8d4c8'; g.lineWidth=1;
+  g.strokeRect(FX-0.5,FY-0.5,L.fw+1,L.fh+1);
 
   // cast figures resolved once per frame, back to front
   const cast=st.cast.map(f=>({f,parts:partsOf(f,t)}));
@@ -528,14 +561,16 @@ function renderScene(g,L,st,t,opt){
   }
   let seams=0;
 
-  for(let sy=0;sy<h;sy+=C){
-    for(let sx=0;sx<w;sx+=C){
-      const cx=sx+C/2, cy=sy+C/2;
+  /* THE FIELD, cell by cell. 192x144, the same grid everything in this archive
+     was drawn on, so a shot's cell is our cell and nothing is resampled. */
+  for(let fy=0;fy<FH;fy++){
+    for(let fx=0;fx<FW;fx++){
+      const cx=FX+(fx+0.5)*C, cy=FY+(fy+0.5)*C;
       let bg=pg, dot=null, seam=false;
 
       /* — the plate, then the ground stack — */
-      const gu=cx/w, gv=cy/h;
-      if(st.plate){ const pd=plateAt(st.plate,gu,gv,C,bg); if(pd) dot=pd; }
+      const gu=(fx+0.5)/FW, gv=(fy+0.5)/FH;
+      if(st.plate){ const pd=plateAt(st.plate,fx,fy,C,bg); if(pd) dot=pd; }
       const gl=(st.sockets.ground||[]).concat(
         (st.plate&&st.plate.kind==='shot'&&st.sockets['sh:'+st.plate.patch])||[]);
       for(const so of gl){
@@ -547,6 +582,28 @@ function renderScene(g,L,st,t,opt){
         if(r.seam){seam=true;continue;}
         if(r.bg) bg=r.bg;
         if(r.dot) dot=r.dot; else if(r.clear) dot=null;
+      }
+
+      /* — pieces: collage, over the plate and under the cast — */
+      for(const p of (st.pieces||[])){
+        if(!p.on) continue;
+        const px=pieceAt(p,fx+0.5,fy+0.5); if(!px) continue;
+        if(p.ht){
+          /* screened: the piece is reported as tone, in the field's own law, so
+             a photograph laid on the film joins it instead of sitting on it */
+          const L2=lum(px[0],px[1],px[2]);
+          const dark=lum(bg[0],bg[1],bg[2])<128;
+          const amt=clamp((dark?L2/255:1-L2/255)*p.op,0,1);
+          if(amt>0.02) dot={r:C*0.74*Math.sqrt(amt), c:inkOn(bg)};
+        }else{
+          const nb=[Math.round(clamp(blendCh(p.blend==='over'?'normal':p.blend,bg[0],px[0]),0,255)),
+                    Math.round(clamp(blendCh(p.blend==='over'?'normal':p.blend,bg[1],px[1]),0,255)),
+                    Math.round(clamp(blendCh(p.blend==='over'?'normal':p.blend,bg[2],px[2]),0,255))];
+          bg=[Math.round(bg[0]+(nb[0]-bg[0])*p.op),
+              Math.round(bg[1]+(nb[1]-bg[1])*p.op),
+              Math.round(bg[2]+(nb[2]-bg[2])*p.op)];
+          dot=null;
+        }
       }
 
       /* — cast, front-most wins — */
@@ -593,7 +650,8 @@ function renderScene(g,L,st,t,opt){
         break;
       }
 
-      if(bg!==pg){ g.fillStyle='rgb('+bg[0]+','+bg[1]+','+bg[2]+')'; g.fillRect(sx,sy,C,C); }
+      if(bg!==pg){ g.fillStyle='rgb('+bg[0]+','+bg[1]+','+bg[2]+')';
+                   g.fillRect(FX+fx*C,FY+fy*C,C,C); }
       if(seam){ seams++; g.fillStyle='#ffd23f'; const s=C*0.66; g.fillRect(cx-s/2,cy-s/2,s,s); continue; }
       if(dot&&dot.r>0.35){
         g.fillStyle='rgb('+dot.c[0]+','+dot.c[1]+','+dot.c[2]+')';
@@ -611,11 +669,10 @@ const inkOn=bg=>lum(bg[0],bg[1],bg[2])<128?[255,255,255]:[0,0,0];
    Both arrive as tone and leave as one mark, which is MOUSSA's whole claim:
    the photographs are not cut against the drawn worlds, they are put THROUGH
    them. Same field, same eight levels, same disc radius, no colour but ink. */
-function plateAt(P,gu,gv,C,bg){
+function plateAt(P,fx,fy,C,bg){
   if(!P) return null;
   if(P.kind==='world'){
-    const x=Math.min(191,(gu*192)|0), y=Math.min(143,(gv*144)|0);
-    const lv=P.lv[y*192+x];
+    const lv=P.lv[fy*FW+fx];
     if(!lv) return null;
     return {r:C*0.5*Math.pow(lv/7,0.72)*1.24, c:inkOn(bg)};
   }
@@ -624,12 +681,10 @@ function plateAt(P,gu,gv,C,bg){
      cover threw away two thirds of every frame — MOUSSA cut these; deciding to
      recrop them here would be a different film. Letterbox instead: the paper
      around the frame is the paper the film is printed on. */
-  const fa=P.aspect, ma=b.w/b.h;
-  let s=gu, t=gv;
-  if(ma>fa){ const k=fa/ma; t=(gv-(1-k)/2)/k; }   /* wider than the window: fit width */
-  else     { const k=ma/fa; s=(gu-(1-k)/2)/k; }   /* taller: fit height */
-  if(s<0||s>1||t<0||t>1) return null;             /* outside the frame is paper */
-  const px=photoAt(b,P.k,Math.min(b.w-1,(s*b.w)|0),Math.min(b.h-1,(t*b.h)|0));
+  /* the shot IS the field: 192x144 in, 192x144 out, one cell to one cell.
+     the contain/cover arithmetic this used to need was only ever compensating
+     for a grid that did not belong to the film. */
+  const px=photoAt(b,P.k,fx,fy);
   if(!px) return null;
   const tr=(b.meta.tone||[])[P.k]||[0,255];
   const pl=clamp((lum(px[0],px[1],px[2])-tr[0])/Math.max(1,tr[1]-tr[0]),0,1);
@@ -694,6 +749,7 @@ function draw(){
       ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke();
     }
   }
+  drawPieceChrome(ctx);
   if(S.lasso&&S.lasso.length>1){
     ctx.strokeStyle='#19e6c8'; ctx.lineWidth=2; ctx.beginPath();
     ctx.moveTo(S.lasso[0][0],S.lasso[0][1]);
@@ -713,7 +769,7 @@ function advance(){
        frame if the event outlasts the pack — MOUSSA cut these to the voice, so
        an event can be longer than the two seconds packed */
     const k=Math.min(b.n-1,Math.floor((S.time-e.a)*(b.meta.fps||12)));
-    S.plate={kind:'shot', b, k:Math.max(0,k), aspect:LAY.w/LAY.h, patch:e.p, ev:e};
+    S.plate={kind:'shot', b, k:Math.max(0,k), patch:e.p, ev:e};
   }else{
     const rt=WORLD.get(e.world);
     if(rt===undefined){ world(e.world); S.plate=null; return; }
@@ -726,7 +782,10 @@ function advance(){
 function tick(ms){
   const dt=S.last?Math.min(0.05,(ms-S.last)/1000):0; S.last=ms;
   if(S.station){
-    if(S.playing&&!S.scrubbing) S.time=(S.time+dt)%S.station.secs;
+    /* the clock stops while you are handling a piece. composing against a frame
+       that changes under you is not composing — and the cut you are working on
+       is the one you stopped at. */
+    if(S.playing&&!S.scrubbing&&S.psel==null) S.time=(S.time+dt)%S.station.secs;
     /* the cast still walks on its own loop; only the plate is on the poet's */
     S.t=(S.t+dt/5.2)%1;
     advance();
@@ -815,13 +874,34 @@ function selectAt(x,y){
   const so=findSock(S.sel); setMode(so&&so.mat?'CHANGED':'READY');
 }
 
-let drag=null;
+let drag=null, pgrab=null;
 stage.addEventListener('pointerdown',e=>{
   if(S.fit) return;
   if(S.placing){ S.placing.oy=e.clientY/H; S.placing.ox=e.clientX/W; return; }
+  const h=pieceHit(e.clientX,e.clientY);
+  if(h){
+    stage.setPointerCapture(e.pointerId);
+    const [fx,fy]=s2f(e.clientX,e.clientY);
+    pgrab={...h, ox:fx-h.p.x, oy:fy-h.p.y, w0:h.p.w, h0:h.p.h, r0:h.p.rot};
+    S.psel=h.p.id; S.sel=null; setMode('PIECE'); return;
+  }
   stage.setPointerCapture(e.pointerId); drag=[[e.clientX,e.clientY]]; S.lasso=drag;
 });
 stage.addEventListener('pointermove',e=>{
+  if(pgrab){
+    const p=pgrab.p, [fx,fy]=s2f(e.clientX,e.clientY);
+    if(pgrab.mode==='move'){ p.x=fx-pgrab.ox; p.y=fy-pgrab.oy; }
+    else if(pgrab.mode==='turn'){
+      p.rot=Math.round((Math.atan2(fy-p.y,fx-p.x)*180/Math.PI+90)*2)/2;
+    }else{
+      /* corner: size about the centre, aspect kept — a cut-out stretched is a
+         different object, and every element here was cut to a real thing */
+      const d=Math.hypot(fx-p.x,fy-p.y), d0=Math.hypot(pgrab.w0,pgrab.h0)/2;
+      const k=Math.max(0.08,d/Math.max(1e-6,d0));
+      p.w=Math.max(2,pgrab.w0*k); p.h=Math.max(2,pgrab.h0*k);
+    }
+    return;
+  }
   if(S.placing){
     S.placing.ox=e.clientX/W; S.placing.oy=e.clientY/H;
     S.placing.scale=(S.placing.kind==='body'?0.35:0.30)+
@@ -832,6 +912,7 @@ stage.addEventListener('pointermove',e=>{
   if(Math.hypot(e.clientX-p[0],e.clientY-p[1])>3) drag.push([e.clientX,e.clientY]);
 });
 stage.addEventListener('pointerup',e=>{
+  if(pgrab){ pgrab=null; report(); return; }
   if(S.placing){
     S.placing.ox=e.clientX/W; S.placing.oy=e.clientY/H;
     S.placing.scale=(S.placing.kind==='body'?0.35:0.30)+
@@ -847,7 +928,7 @@ stage.addEventListener('pointerup',e=>{
   }else{ selectAt(pts[0][0],pts[0][1]); return; }
   S.sel=null; setMode(S.order.length?'COMPLETE':'REST');
 });
-stage.addEventListener('pointercancel',()=>{drag=null;S.lasso=null;});
+stage.addEventListener('pointercancel',()=>{drag=null;S.lasso=null;pgrab=null;});
 
 /* ══ STOCK STRIP ══════════════════════════════════════════ */
 /* declared here, not down in ARCHIVE, because buildSwatches() runs at load and
@@ -863,8 +944,10 @@ const previews=[];
 function buildSwatches(){
   swEl.innerHTML=''; previews.length=0;
   if(SHELF==='archive'){
-    swEl.appendChild(mkSw('stock',()=>{SHELF='stock';buildNouns();buildSwatches();}));
-    const list=(ARCH&&ARCH.by[NOUN])||[];
+    swEl.appendChild(mkSw('stock',()=>{SHELF='stock';SHOTONLY=false;buildNouns();buildSwatches();}));
+    const list=SHOTONLY&&S.plate&&S.plate.kind==='shot'
+      ? shotElements(S.plate.patch)
+      : ((ARCH&&ARCH.by[NOUN])||[]);
     /* the strip scrolls; showing all 499 lights at once would cost 499 decodes
        for a panel 270px wide, so it is capped and the cap is stated */
     for(const e of list.slice(0,120)){
@@ -875,8 +958,17 @@ function buildSwatches(){
       im.style.cssText='width:100%;height:100%;object-fit:contain;display:block;background:#ddd';
       b.appendChild(im);
       b.addEventListener('click',async()=>{
-        try{ const m=await elementMaterial(e.id); applyMaterial(m); }
-        catch(err){ lineEl.textContent='could not read '+e.id; }
+        /* with a socket selected the element DRESSES it; with none it is LIFTED
+           OUT as a piece you can move. one gesture, and which it is depends on
+           whether you have said where it goes. */
+        /* the BASE ground socket is not a region anyone chose — it is the whole
+           frame, selected so the panel has somewhere to hang. Dressing it would
+           wallpaper the film. Only a region someone drew counts as "here". */
+        const so=findSock(S.sel);
+        if(so&&!so.base){
+          try{ const m=await elementMaterial(e.id); applyMaterial(m); }
+          catch(err){ lineEl.textContent='could not read '+e.id; }
+        } else liftElement(e);
       });
       swEl.appendChild(b);
     }
@@ -997,9 +1089,54 @@ function buildNouns(){
     const b=document.createElement('button');
     b.className='noun'; b.type='button'; b.textContent=n.replace(/^(a|the) /,'')+' '+ARCH.by[n].length;
     b.setAttribute('aria-pressed',String(n===NOUN));
-    b.addEventListener('click',()=>{ NOUN=n; buildNouns(); buildSwatches(); });
+    b.addEventListener('click',()=>{ NOUN=n; SHOTONLY=false; buildNouns(); buildSwatches(); });
     nounsEl.appendChild(b);
   }
+}
+
+/* ══ PIECES ═══════════════════════════════════════════════
+   Everything HELD could put on the field was bound: a socket
+   is a hole in a surface, and it goes where the surface goes.
+   There was no way to take a thing OUT and put it somewhere
+   else — no way to collage.
+
+   A PIECE is the other kind of thing: an archive cut-out with
+   its own position, size, turn and blend, owing nothing to
+   any carrier. And the separation it needs is already done —
+   SAM cut 2,033 elements out of these shots and every one
+   knows which shot it came from. P008 has ten: a person, three
+   windows, two walls, a bed. Lift any of them off the frame
+   and it becomes a piece.
+
+   Position is in FIELD CELLS, not pixels or fractions, so a
+   piece placed at (96,72) is at the middle of the field at
+   every window size and in the exported frame.
+   ═════════════════════════════════════════════════════════ */
+let PID=0;
+const PBLEND=['over','multiply','screen','burn','dodge','difference'];
+function mkPiece(id,name){
+  return {id:++PID, el:id, name, x:FW/2, y:FH/2, w:60, h:45, rot:0,
+          flip:false, blend:'over', op:1, ht:true, on:true};
+}
+/* a piece samples its own cut-out through its own turn — one inverse rotation
+   per cell, which is what lets it be rotated without resampling into a buffer */
+function pieceAt(p,fx,fy){
+  const im=ELCACHE.get(p.el); if(!im||!im.data) return null;
+  let dx=fx-p.x, dy=fy-p.y;
+  if(p.rot){ const a=-p.rot*Math.PI/180, c=Math.cos(a), s=Math.sin(a);
+             const rx=dx*c-dy*s, ry=dx*s+dy*c; dx=rx; dy=ry; }
+  let u=dx/p.w+0.5, v=dy/p.h+0.5;
+  if(u<0||u>1||v<0||v>1) return null;
+  if(p.flip) u=1-u;
+  const px=Math.min(im.w-1,(u*im.w)|0), py=Math.min(im.h-1,(v*im.h)|0);
+  const i=(py*im.w+px)*4;
+  if(im.data[i+3]<110) return null;
+  return [im.data[i],im.data[i+1],im.data[i+2]];
+}
+/* which elements this shot is made of */
+function shotElements(patch){
+  if(!ARCH) return [];
+  return ARCH.rows.filter(e=>e.patch===patch);
 }
 
 /* ══ MODES ════════════════════════════════════════════════ */
@@ -1049,7 +1186,8 @@ function panelAnchor(){
   return figScreen(f,p[0],p[1],LAY);
 }
 function placePanel(){
-  if(!findSock(S.sel)||S.mode==='REST'||S.mode==='COMPLETE'||S.placing){panel.classList.remove('on');return;}
+  if(!findSock(S.sel)||S.mode==='REST'||S.mode==='COMPLETE'||S.mode==='PIECE'||S.placing){
+    panel.classList.remove('on');return;}
   const a=panelAnchor(); if(!a){panel.classList.remove('on');return;}
   panel.classList.add('on');
   const w=panel.offsetWidth||282, h=panel.offsetHeight||110;
@@ -1063,13 +1201,73 @@ function placePanel(){
   buildNouns();
 }
 
+/* ══ HANDLING A PIECE ═════════════════════════════════════
+   Four handles and the body: drag to move, a corner to size,
+   the stalk to turn. Everything in FIELD CELLS, and the arrow
+   keys move exactly one cell — which is the precision the
+   tool did not have. A lasso can only ever say "about here".
+   ═════════════════════════════════════════════════════════ */
+const f2s=(fx,fy)=>[LAY.fx+fx*LAY.cell, LAY.fy+fy*LAY.cell];
+const s2f=(sx,sy)=>[(sx-LAY.fx)/LAY.cell, (sy-LAY.fy)/LAY.cell];
+function pieceCorners(p){
+  const a=p.rot*Math.PI/180, c=Math.cos(a), sn=Math.sin(a);
+  const R=(dx,dy)=>[p.x+dx*c-dy*sn, p.y+dx*sn+dy*c];
+  const hw=p.w/2, hh=p.h/2;
+  return {tl:R(-hw,-hh), tr:R(hw,-hh), br:R(hw,hh), bl:R(-hw,hh), turn:R(0,-hh-9)};
+}
+function pieceHit(sx,sy){
+  const [fx,fy]=s2f(sx,sy);
+  for(let i=S.pieces.length-1;i>=0;i--){
+    const p=S.pieces[i];
+    const K=pieceCorners(p), grab=Math.max(7,10/LAY.cell);
+    for(const k of ['br','turn']){
+      if(Math.hypot(fx-K[k][0],fy-K[k][1])<grab) return {p,mode:k};
+    }
+    let dx=fx-p.x, dy=fy-p.y;
+    if(p.rot){ const a=-p.rot*Math.PI/180,c=Math.cos(a),sn=Math.sin(a);
+               const rx=dx*c-dy*sn, ry=dx*sn+dy*c; dx=rx; dy=ry; }
+    if(Math.abs(dx)<=p.w/2&&Math.abs(dy)<=p.h/2) return {p,mode:'move'};
+  }
+  return null;
+}
+function drawPieceChrome(g){
+  for(const p of S.pieces){
+    const sel=S.psel===p.id;
+    const K=pieceCorners(p);
+    g.strokeStyle=sel?'#19e6c8':'rgba(25,230,200,.35)';
+    g.lineWidth=sel?1.5:1;
+    g.beginPath();
+    const c=[K.tl,K.tr,K.br,K.bl].map(q=>f2s(q[0],q[1]));
+    c.forEach((q,i)=>i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]));
+    g.closePath(); g.stroke();
+    if(!sel) continue;
+    const t=f2s(K.turn[0],K.turn[1]), tp=f2s(K.tl[0],K.tl[1]), tq=f2s(K.tr[0],K.tr[1]);
+    g.beginPath(); g.moveTo((tp[0]+tq[0])/2,(tp[1]+tq[1])/2); g.lineTo(t[0],t[1]); g.stroke();
+    g.fillStyle='#19e6c8';
+    for(const q of [f2s(K.br[0],K.br[1]),t]) g.fillRect(q[0]-4,q[1]-4,8,8);
+  }
+}
+async function liftElement(e){
+  try{ await elementMaterial(e.id); }catch(err){ lineEl.textContent='could not read '+e.id; return; }
+  const im=ELCACHE.get(e.id);
+  const p=mkPiece(e.id,e.p);
+  /* it arrives at the size it is in the shot it came from, so lifting a window
+     out of P008 puts a window-sized window on the field, not a token */
+  const ar=im?im.w/im.h:1.33, span=Math.min(FW,FH)*0.45;
+  p.w=ar>=1?span:span*ar; p.h=ar>=1?span/ar:span;
+  S.pieces.push(p); S.psel=p.id; S.order.push({t:'piece',id:p.id});
+  setMode('PIECE');
+}
+
 /* ══ ACTIONS ══════════════════════════════════════════════ */
 function setActs(list){ actsEl.innerHTML=''; list.forEach(a=>actsEl.appendChild(mkBtn(a[0],a[1]))); }
 function stop(){ const so=findSock({key:S.fit.key,id:S.fit.id});
   if(so){so.mat=null;so.render=so.base?'none':'marks';} S.fit=null; setMode('READY'); }
 function undo(){
   const last=S.order.pop(); if(!last){ setMode('REST'); return; }
-  if(last.t==='socket'){
+  if(last.t==='piece'){
+    S.pieces=S.pieces.filter(p=>p.id!==last.id); S.psel=null;
+  } else if(last.t==='socket'){
     const a=S.sockets[last.key]||[]; const i=a.findIndex(s=>s.id===last.id);
     if(i>=0) a.splice(i,1);
   }else{
@@ -1079,7 +1277,20 @@ function undo(){
   S.sel=null; S.fit=null; setMode(S.order.length?'COMPLETE':'REST');
 }
 /* ── the stations ───────────────────────────────────────────────────────── */
-let STI=-1;
+let SHOTONLY=false, STI=-1;
+/* THE SHOT'S OWN ELEMENTS. SAM cut 2,033 pieces out of these frames and each
+   one remembers its shot, so "what is this frame made of" is a filter, not a
+   new pass. P008 answers: a person, three windows, two walls, a bed. */
+async function shotParts(){
+  await loadArchive();
+  if(!(S.plate&&S.plate.kind==='shot')){ lineEl.textContent='no shot on screen'; return; }
+  const els=shotElements(S.plate.patch);
+  if(!els.length){ lineEl.textContent=S.plate.patch+' has no cut elements'; return; }
+  SHOTONLY=true; SHELF='archive';
+  if(!findSock(S.sel)) selectGroundBase();
+  buildNouns(); buildSwatches(); placePanel();
+  lineEl.innerHTML=S.plate.patch+' is made of <b>'+els.length+'</b> — tap one to lift it out';
+}
 async function pickStation(){
   const P=await loadStations();
   if(!P.stations||!P.stations.length){ lineEl.textContent='no stations — run pf/stations.py'; return; }
@@ -1148,6 +1359,8 @@ function snapshot(){
   return {
     t:S.t, paper:S.paper,
     cast:JSON.parse(JSON.stringify(S.cast)),
+    pieces:JSON.parse(JSON.stringify(S.pieces)),
+    station:S.station?S.station.n:null, time:S.time,
     order:S.order.slice(),
     sockets:Object.fromEntries(Object.entries(S.sockets).map(([k,v])=>[k,
       v.map(s=>({id:s.id,poly:s.poly,bb:s.bb,render:s.render,blend:s.blend,fit:s.fit,
@@ -1179,12 +1392,15 @@ function buildShots(){
     const b=document.createElement('button');
     b.className='shot'; b.type='button'; b.setAttribute('aria-label','shot '+(i+1));
     b.setAttribute('aria-pressed',String(i===S.activeShot));
-    const c=document.createElement('canvas'); c.width=96; c.height=60;
+    const c=document.createElement('canvas'); c.width=FW; c.height=FH;
     const g=c.getContext('2d');
-    const L={cell:3,unit:Math.min(96/150,60/210)*(Math.min(W,H)/Math.min(W,H)),w:96,h:60};
-    L.unit=Math.min(96/150,60/210);
-    const prev={paper:sh.paper,cast:sh.cast,sockets:hydrate(sh)};
-    const oc=_cell; _cell=3;
+    /* the same field at one pixel a cell: a thumbnail of this film is the film,
+       smaller, not a differently-composed picture of it */
+    const L={cell:1,w:FW,h:FH,fx:0,fy:0,fw:FW,fh:FH,
+             unit:Math.min(FW/150,FH/210),bunit:1};
+    const prev={paper:sh.paper,cast:sh.cast,sockets:hydrate(sh),
+                pieces:sh.pieces||[],plate:null};
+    const oc=_cell; _cell=1;
     renderScene(g,L,prev,sh.t,{});
     _cell=oc;
     b.appendChild(c);
@@ -1192,6 +1408,12 @@ function buildShots(){
       S.sockets=hydrate(sh); S.cast=JSON.parse(JSON.stringify(sh.cast));
       for(const f of S.cast) if(f.kind==='body'&&!BODY.has(f.patch)){
         const m=(PACK&&PACK.shots||[]).find(x=>x.patch===f.patch); if(m) loadBody(m); }
+      S.pieces=JSON.parse(JSON.stringify(sh.pieces||[]));
+      for(const p of S.pieces) elementMaterial(p.el).catch(()=>{});
+      if(sh.station&&STATIONS){
+        const st=(STATIONS.stations||[]).find(x=>x.n===sh.station);
+        if(st){ S.station=st; S.time=sh.time||0; advance(); }
+      }
       S.order=sh.order.slice(); S.t=sh.t; S.paper=sh.paper;
       document.documentElement.style.background=S.paper;
       S.sel=null;S.fit=null;S.activeShot=i;
@@ -1203,7 +1425,7 @@ function buildShots(){
 
 /* ══ STATES ═══════════════════════════════════════════════ */
 function report(){
-  if(S.station&&S.mode!=='WORKING'&&S.mode!=='READY'&&S.mode!=='PLACING'){
+  if(S.station&&S.mode!=='WORKING'&&S.mode!=='READY'&&S.mode!=='PLACING'&&S.mode!=='PIECE'){
     lineEl.innerHTML=stationLine(); return;
   }
   if(S.mode!=='CHANGED') return;
@@ -1221,11 +1443,19 @@ function setMode(m){
   if(m==='PLACING'){ lineEl.textContent='tap to set the figure'; acts.push(['stop',()=>{S.placing=null;setMode('REST');}]); }
   if(m==='COMPLETE') lineEl.textContent='scrub to check it holds';
   if(m==='STATION') lineEl.innerHTML=stationLine();
+  if(m==='PIECE'){
+    const p=S.pieces.find(x=>x.id===S.psel);
+    if(p) lineEl.innerHTML=`${p.name} · ${Math.round(p.x)},${Math.round(p.y)} · `
+      +`${Math.round(p.w)}x${Math.round(p.h)} · ${p.rot}&deg; · <i>${p.ht?'dots':p.blend}</i>`
+      +(p.op<1?` · ${Math.round(p.op*100)}%`:'');
+    acts.push(['done',()=>{S.psel=null;setMode(S.order.length?'COMPLETE':'REST');}]);
+  }
   if(m!=='PLACING'&&m!=='WORKING'){ acts.push(['station',pickStation]);
+                                    acts.push(['parts',shotParts]);
                                     acts.push(['poet',castPoet]); acts.push(['cast',castOne]);
                                     acts.push(['ground',ground]); }
   if(S.order.length){ acts.push(['undo',undo]); acts.push(['take',take]); }
-  setActs(acts); buildModes(); placePanel(); report();
+  setActs(acts); resize(); buildModes(); placePanel(); report();
   scrubEl.classList.toggle('on',S.cast.length>0||!!S.station);
   paintCuts(); syncScrub();
 }
@@ -1257,8 +1487,31 @@ scrubEl.addEventListener('pointermove',e=>{if(S.scrubbing)scrubTo(e.clientX);});
 scrubEl.addEventListener('pointerup',()=>{S.scrubbing=false;});
 scrubEl.addEventListener('pointercancel',()=>{S.scrubbing=false;});
 addEventListener('keydown',e=>{
+  const p=S.pieces.find(x=>x.id===S.psel);
+  if(p){
+    const step=e.shiftKey?10:1;                 /* one cell, or ten */
+    let done=true;
+    switch(e.key){
+      case 'ArrowLeft':  p.x-=step; break;
+      case 'ArrowRight': p.x+=step; break;
+      case 'ArrowUp':    p.y-=step; break;
+      case 'ArrowDown':  p.y+=step; break;
+      case '[': p.rot-=e.shiftKey?15:1; break;
+      case ']': p.rot+=e.shiftKey?15:1; break;
+      case '-': p.w*=0.94; p.h*=0.94; break;
+      case '=': case '+': p.w/=0.94; p.h/=0.94; break;
+      case 'f': p.flip=!p.flip; break;
+      case 'h': p.ht=!p.ht; break;
+      case 'b': p.blend=PBLEND[(PBLEND.indexOf(p.blend)+1)%PBLEND.length]; break;
+      case 'o': p.op=p.op<=0.25?1:p.op-0.25; break;
+      case 'Backspace': case 'Delete':
+        S.pieces=S.pieces.filter(x=>x.id!==p.id); S.psel=null; break;
+      default: done=false;
+    }
+    if(done){ e.preventDefault(); setMode('PIECE'); return; }
+  }
   if(e.key==='Escape'){ if(S.placing){S.placing=null;setMode('REST');} else if(S.fit) stop();
-    else {S.sel=null;setMode(S.order.length?'COMPLETE':'REST');} }
+    else {S.sel=null;S.psel=null;setMode(S.order.length?'COMPLETE':'REST');} }
   if((e.metaKey||e.ctrlKey)&&e.key==='z'){e.preventDefault();undo();}
 });
 })();

@@ -96,6 +96,56 @@ is a real measurement of a real thing — it is just not evidence of damage.
 
 Shot scale does not predict any of this (MS 75%, WS 72%, CU 46%). Cover does.
 
+## the frame, and why the aspect was wrong
+
+The cell grid was `min(W,H)/112` spread over the whole window — a number with no
+relation to anything. **The field this entire archive is drawn on is 192x144**:
+MOUSSA's law, the halfworlds' law, the beflix dot law, all of it. So a shot
+arriving as 192x144 was being resampled onto a grid of some other size, and one
+of its cells landed across two of ours or half of one. The dots were never the
+film's.
+
+The field is real now: 192x144 centred in the window with a visible border, and
+the paper around it is the paper the film is printed on. Every mapping became a
+cell lookup instead of an aspect calculation, because there is no longer an
+aspect to reconcile — `plateAt` is one array index.
+
+Cell size took three tries. Whole CSS pixels put a **192px postage stamp** in the
+middle of a phone, because 359px is 1.87 cells across and flooring that gives 1.
+Whole device pixels was better and still threw away a fifth of the width. The
+marks are `arc()` discs, which antialias, so the whole-number argument was
+solving a problem this renderer does not have. **Exact** uses all of it.
+
+## pieces: separating, modifying, collaging
+
+Everything HELD could put on the field was **bound**. A socket is a hole in a
+surface and it goes where the surface goes; there was no way to take a thing out
+and put it somewhere else.
+
+A **piece** is the other kind of thing: a cut-out with its own position, size,
+turn and blend, owing nothing to any carrier. And the separation was already
+done — SAM cut 2,033 elements out of these shots and every one remembers which
+shot it came from, so *what is this frame made of* is a filter, not a new pass:
+
+    P008 is made of 10 — a person, three windows, two walls, a bed, two skies
+
+`parts` lists them; tapping one lifts it out. Position is in **field cells**, so
+a piece at 96,72 is at the middle of the field at every window size. Drag to
+move, corner to size, stalk to turn, and the keys are the precision a lasso can
+never have:
+
+    arrows  one cell        shift-arrows  ten
+    [ ]     one degree      shift          fifteen
+    - =     size            f  flip        h  screened / photographic
+    b       blend           o  opacity     delete
+
+`h` decides whether the piece joins the film or sits on it: screened, it is
+reported as tone in the field's own law; photographic, it blends as itself.
+
+The clock **stops** while a piece is in hand. Composing against a frame that
+changes under you is not composing, and the cut you are working on is the one
+you stopped at.
+
 ## what is still missing
 
 The station plays the drawn worlds and the shots, but not the songs — the audio
