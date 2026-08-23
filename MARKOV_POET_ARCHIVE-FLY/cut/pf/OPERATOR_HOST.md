@@ -62,6 +62,66 @@ A bare `strips/x.twinstrip` resolves back to the OP-51 site, because this copy
 sits beside the archive rather than beside the strips and every existing link
 uses the bare form.
 
+## the halfworld, taken apart by name
+
+Confirmed, and it is better than I expected. The drawn worlds are not pictures,
+they are **programs**, and the runtime tags every cell it inks with the part that
+drew it. One frame of RESURRECTING ATLANTIS at 49.6s:
+
+    7 parts · clipLine 777 · waterBelow 726 · windows 653 · movement 603
+              building 271 · gate 144 · facewindow 98
+    3272 inked · 3272 tagged · lossless
+
+**Nothing unassigned.** So a world can be stamped by name — the water and the
+building without the windows, the gate without the movement — which is a kind of
+access no amount of work on a photograph will ever give. 20 worlds, 109 parts.
+
+### the grids do not match
+
+A halfworld is 192×144 and OPERATOR is 128×96: both 4:3, ratio exactly 1.5, so
+each cell here covers a cell and a half there. Averaging dissolves single-cell
+marks and these worlds are largely made of them, so the default is **max** over
+the covered rect — a mark survives at the cost of thickening. `mid` is there for
+parts that are washes rather than lines.
+
+### a bug the integration exposed
+
+The first scan reported a part called **`hwScan`** — my own function's name. The
+engine derives a part name by walking the stack for the first frame not on a
+denylist, and a denylist cannot know about a caller it has never met. Worse, the
+pattern captured only the first token of a dotted frame, so `rt.renderScene(…)`
+read as `Object`, got skipped as noise, and the walk went straight past the
+render boundary into whoever asked for it.
+
+Fixed at the boundary rather than by adding another name to the list: the walk
+**stops** at `renderScene`/`renderTagged`/`renderField`, because everything below
+those frames is the caller and not the drawing. Verified from a caller named
+`hwScan`: `movement 603`, still 3272 = 3272.
+
+## placing: drop it and drag it
+
+Stamping by slider is remote control, not authoring — type an X, type a Y, press,
+look, adjust, press again. The rest of this tool is pointer-driven.
+
+Drop an image on the board, or drag a piece out of the Archive, and it becomes
+**pending**: drag to move, wheel or ± to size, PLACE to commit. What you see
+while dragging is the real quantisation — the same `stampGrid()` that will be
+written — because a preview prettier than the result is a lie you find out about
+after you press the button. Nothing touches the node until PLACE, so a placement
+can be abandoned without an undo.
+
+Paste works, and on a touch screen a tap sends the piece straight to the middle
+of the board to be moved with a finger, since there is no drag there.
+
+## a crash in the atlas
+
+`atlasDrop` deleted a map entry without returning its **slot**, while `atlasUsed`
+only ever counted up. After 128 slots had been handed out and edits emptied the
+map, the allocator took the eviction branch, scanned an empty map and
+dereferenced null. A free list closes the invariant — a slot is in the map or on
+the list and never lost between them — with a fallback so it can never
+dereference null again.
+
 ## not done
 
 The stamp has no handles — position and size are sliders, not a drag on the

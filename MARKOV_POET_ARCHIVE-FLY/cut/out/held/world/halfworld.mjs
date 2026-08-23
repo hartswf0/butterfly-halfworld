@@ -284,10 +284,26 @@ function makeKit(seed) {
     const w = {};
     const who = () => {
       const st = (new Error()).stack.split("\n");
-      for (let i = 3; i < Math.min(st.length, 9); i++) {
-        const m = /at (?:async )?([A-Za-z_$][\w$]*)\s/.exec(st[i]);
-        if (m && !["draw", "renderMovement", "renderScene", "renderTagged",
-                   "renderField", "Object", "Module", "w"].includes(m[1])) return m[1];
+      /* The walk STOPS at renderScene/renderTagged/renderField. Everything below
+         those frames is whoever ASKED for the render, not part of the drawing —
+         and a denylist of known callers cannot know that. Called from a page
+         that wrapped it in `hwScan`, the old walk fell through the anonymous
+         movement function and labelled a sixth of the frame `hwScan`: the part
+         name became a fact about the caller. The boundary is the render entry
+         point, so name it once rather than naming every possible caller. */
+      const BOUNDARY = ["renderScene", "renderTagged", "renderField"];
+      const SKIP = ["draw", "renderMovement", "Object", "Module", "w"];
+      /* the DOTTED name, and then its last segment. `rt.renderScene(...)` shows
+         up as `at Object.renderScene`, so a pattern that stops at the first
+         token reads it as `Object`, skips it as noise, and walks straight past
+         the boundary into the caller. That is why the old list needed a caller's
+         name in it at all. */
+      for (let i = 3; i < Math.min(st.length, 12); i++) {
+        const m = /at (?:async )?([\w$.]+)\s/.exec(st[i]);
+        if (!m) continue;
+        const nm = m[1].split(".").pop();
+        if (BOUNDARY.includes(nm)) break;
+        if (!SKIP.includes(nm) && /^[A-Za-z_$]/.test(nm)) return nm;
       }
       return "movement";
     };
