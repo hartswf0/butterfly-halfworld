@@ -80,6 +80,10 @@ let WANT_PARTS = false;
 export function wantParts(on) { WANT_PARTS = !!on; }
 export function tagOn(buf) { IDBUF = buf; TAG = 0; if (buf) buf.fill(0); }
 export function tagOff() { IDBUF = null; }
+/* swap the identity field WITHOUT resetting the serial. The effects below need
+   to collect identities into a scratch buffer and then merge them, and a reset
+   would make the scratch tags collide with the frame's own. */
+function tagSwap(buf) { const p = IDBUF; IDBUF = buf; return p; }
 
 function makeKit(seed) {
   const K = {
@@ -87,7 +91,19 @@ function makeKit(seed) {
     bind(buf) { K.buf = buf; return K; },
     i(x, y) { return y * FW + x; },
     bayer: bayerAt,
-    clear(l = 0) { K.buf.fill(l); },
+    /* clear(7) fills the whole field with INK, and a fill that writes no
+       identity leaves every one of those cells unselectable. NEVERMORE opens a
+       movement that way. Clearing to paper still owns nothing, because paper is
+       not a thing anyone wants to lift out. */
+    clear(l = 0) {
+      K.buf.fill(l);
+      if (IDBUF) {
+        /* only tag when the names are being collected — a tag with no entry in
+           __parts shows up as `?` and is a handle you cannot label */
+        if (l > 0 && K.__parts) { TAG++; K.__parts.push({ tag: TAG, prim: "clear", part: "~ground" }); IDBUF.fill(TAG); }
+        else IDBUF.fill(0);
+      }
+    },
     put(x, y, l) {
       x |= 0; y |= 0;
       if (x >= 0 && x < FW && y >= 0 && y < FH) {
@@ -304,8 +320,15 @@ function makeKit(seed) {
          `movement` under node read the CALLER's name in Chrome, because the two
          skipped frames were not where the number said they were. Names are
          facts; positions are not. */
-      for (let i = 1; i < Math.min(st.length, 14); i++) {
-        const m = /at (?:async )?([\w$.]+)\s/.exec(st[i]);
+      for (let i = 1; i < Math.min(st.length, 18); i++) {
+        const line = st[i];
+        /* Tried and reverted: breaking on any frame whose URL is not the engine
+           or a world. It removes the rare leak of a caller's name — and takes
+           every real name with it, 8% named to 0%, because the frames in between
+           are not all attributable to a file the way the reasoning assumed. The
+           leak is 84 cells in 25,129. A fix that costs every name to remove
+           three tenths of a percent of wrong ones is not a fix. */
+        const m = /at (?:async )?([\w$.]+)\s/.exec(line);
         if (!m) continue;
         const nm = m[1].split(".").pop();
         if (BOUNDARY.includes(nm)) break;
@@ -538,6 +561,7 @@ export function makeRuntime(world) {
     return [i, (t - starts[i]) / movements[i].seconds, t];
   }
   const KT = K.__tagged();
+  let idT = null;                     /* scratch identity field for the effects */
   function renderMovement(m, u, buf) {
     K.bind(buf); K.u = u;
     K.clear(0);
@@ -545,15 +569,32 @@ export function makeRuntime(world) {
        handed to the movement only while an identity field is being collected */
     if (IDBUF) { KT.bind(buf); KT.u = u; m.draw(clamp01(u), KT); }
     else m.draw(clamp01(u), K);
+    /* THE EFFECTS HAVE TO CARRY THE IDENTITY TOO.
+       Every one of these writes straight to `buf`, so before this the ink they
+       made had no owner and could not be selected by name. It is not a small
+       share: twelve of the fourteen poemfields use at least one, and a world
+       that smears heavily was reporting a tenth of its ink as nameable. A
+       mirrored cell belongs to what it mirrors; a smear tap belongs to whatever
+       drew it in the tap; ink the effect invents belongs to the effect. */
     const fx = m.fx || {};
     if (fx.smear) {
       const { taps = 2, spread = 0.02, fall = 1.6 } = fx.smear;
       for (let k = 1; k <= taps; k++) {
         K.bind(bufT); K.clear(0);
-        m.draw(clamp01(u - k * spread), K);
+        if (IDBUF) {
+          if (!idT) idT = new Int16Array(CELLS);
+          idT.fill(0);
+          const prev = tagSwap(idT);
+          KT.bind(bufT); KT.u = clamp01(u - k * spread);
+          m.draw(clamp01(u - k * spread), KT);
+          tagSwap(prev);
+        } else m.draw(clamp01(u - k * spread), K);
         for (let q = 0; q < CELLS; q++) {
           const v = bufT[q] - k * fall;
-          if (v > buf[q] && bufT[q] <= 7) buf[q] = v;
+          if (v > buf[q] && bufT[q] <= 7) {
+            buf[q] = v;
+            if (IDBUF && idT && idT[q]) IDBUF[q] = idT[q];
+          }
         }
       }
       K.bind(buf);
@@ -563,15 +604,28 @@ export function makeRuntime(world) {
       for (let y = 0; y < FH; y++) for (let x = 0; x < FW; x++) {
         const sx = (mode === "x" || mode === "quad") && x >= FW / 2 ? FW - 1 - x : x;
         const sy = (mode === "y" || mode === "quad") && y >= FH / 2 ? FH - 1 - y : y;
-        if (sx !== x || sy !== y) buf[y * FW + x] = buf[sy * FW + sx];
+        if (sx !== x || sy !== y) {
+          buf[y * FW + x] = buf[sy * FW + sx];
+          if (IDBUF) IDBUF[y * FW + x] = IDBUF[sy * FW + sx];
+        }
       }
     }
     if (fx.invert) {
       const amt = typeof fx.invert === "function" ? fx.invert(u) : fx.invert;
+      /* an inverted cell that was already inked keeps its owner — only its level
+         changed. one that was paper becomes ink the EFFECT made, so it gets a
+         tag of its own and can be lifted out as a layer. */
+      let invTag = 0;
+      if (IDBUF && amt > 0 && K.__parts) { invTag = ++TAG; K.__parts.push({ tag: invTag, prim: "invert", part: "~invert" }); }
       if (amt > 0) for (let y = 0; y < FH; y++) for (let x = 0; x < FW; x++) {
         if (bayerAt(x, y) < amt) {
           const q = y * FW + x;
-          if (buf[q] <= 7) buf[q] = 7 - buf[q];
+          if (buf[q] <= 7) {
+            const was = buf[q];
+            buf[q] = 7 - buf[q];
+            if (IDBUF && buf[q] > 0 && !was) IDBUF[q] = invTag;
+            else if (IDBUF && !buf[q]) IDBUF[q] = 0;
+          }
         }
       }
     }
@@ -582,9 +636,13 @@ export function makeRuntime(world) {
         const dy = Math.round((K.noise(Math.floor(u * 431), 13) - 0.5) * 2 * amp);
         if (dx || dy) {
           bufT.set(buf);
+          if (IDBUF) { if (!idT) idT = new Int16Array(CELLS); idT.set(IDBUF); }
           for (let y = 0; y < FH; y++) for (let x = 0; x < FW; x++) {
             const sx = x + dx, sy = y + dy;
-            buf[y * FW + x] = (sx >= 0 && sx < FW && sy >= 0 && sy < FH) ? bufT[sy * FW + sx] : 0;
+            const inside = sx >= 0 && sx < FW && sy >= 0 && sy < FH;
+            buf[y * FW + x] = inside ? bufT[sy * FW + sx] : 0;
+            /* a shaken frame is the same frame moved; ownership moves with it */
+            if (IDBUF) IDBUF[y * FW + x] = inside ? idT[sy * FW + sx] : 0;
           }
         }
       }
