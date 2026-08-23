@@ -50,6 +50,31 @@ gallery that appears row by row beats one that appears late.
 Scrubbing now also shows **where you are in the poem** — the movement number, its
 label, and the line spoken during it, read from the module.
 
+## ingested, not linked
+
+A gallery is still a website: you look at fourteen worlds and then go elsewhere
+to use one. Two things close that.
+
+**A tap on a card puts the world in the frame.** Not select-then-find-a-button —
+the card opens the world and stamps its moment into the frame you are standing
+on, in one gesture. `Tap = just look` turns it off for browsing.
+
+**`Ingest all fourteen`** streams the whole suite in as ONE film. Not fourteen
+links: fourteen worlds rendered in order into a single node tree, through the
+same `streamStripReader` the twinstrips arrive on.
+
+    STREAMED · 112 FRAMES · READY        14 worlds × 8 frames, ~50s
+    LOCAL 8/112 · LOCAL BRANCH           navigable, every cell authored HALFWORLD
+
+Rate is a dial because the honest full version is not tractable in one press:
+twenty-four minutes of drawn film at 8fps is 11,760 frames and twenty-two
+minutes of rendering. At 24 frames each it is 336 nodes and about a minute — the
+whole poem cycle sitting in the tree rather than behind a fetch.
+
+Every frame keeps `hw:<slug>@<t>`, so an ingested frame is still a frame of a
+world: draw on it, branch from it, or press `Break this frame down` and put it
+back in front of the runtime that made it.
+
 ## how much of each world actually comes apart
 
 This is the honest part, and it varies enormously. Five samples per world, all

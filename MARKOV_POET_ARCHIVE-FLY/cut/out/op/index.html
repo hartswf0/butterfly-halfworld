@@ -800,6 +800,13 @@
       <div style="flex:1"><label class="mini">Fit</label><select id="hw-fit" style="width:100%;min-height:42px;border:3px solid var(--k);font-weight:700"><option value="max" selected>ink</option><option value="mid">mid</option></select></div>
     </div>
     <div class="mini" id="hw-line" style="margin-top:6px;min-height:2.6em"></div>
+    <div class="row" style="margin-top:6px">
+      <button id="hw-look" type="button" style="flex:1">Tap = into the frame</button>
+      <button id="hw-suite" type="button" style="flex:2">Ingest all fourteen</button>
+    </div>
+    <div class="row" style="margin-top:6px">
+      <div style="flex:1"><label class="mini">Frames each <span id="hw-sv">24</span></label><input type="range" id="hw-each" min="4" max="64" value="24" style="width:100%"></div>
+    </div>
     <div><label class="mini">Time <span id="hw-tv">0.0s</span></label><input type="range" id="hw-t" min="0" max="1000" value="450" style="width:100%"></div>
     <div id="hw-parts" style="display:flex;flex-wrap:wrap;gap:4px;margin-top:8px"></div>
     <div class="row" style="margin-top:8px">
@@ -5801,9 +5808,18 @@ function hwCard(slug){
     +'<div class="hw-g" style="color:#777;margin-top:2px"></div>'
     +'<div class="hw-m" style="color:#aaa;margin-top:3px;letter-spacing:.06em"></div>';
   d.appendChild(cv); d.appendChild(t);
+  /* TAPPING A CARD PUTS THE WORLD IN THE FRAME.
+     Browsing is what a website does. Four steps — open the drawer, wait, choose,
+     press a separate button — is a catalogue with a checkout. One tap ingests:
+     the world opens and its moment lands in the frame you are standing on. */
   d.onclick=function(){ playTick();
     var sel=document.getElementById('hw-world'); sel.value=slug;
-    hwGalleryMark(slug); hwOpen(slug); };
+    hwGalleryMark(slug);
+    var after=function(){ if(HW_LOOK){ fireToast(slug+' · looking'); return; }
+      hwStamp(true); };
+    if(sel.value===slug && HWRT && HWMODS[slug] && HWSCENE && HWCUR===slug) after();
+    else hwOpen(slug).then(after);
+  };
   return d;
 }
 function hwGalleryMark(slug){
@@ -5864,9 +5880,11 @@ function hwLine(){
     +' '+(HWSCENE.label||'')+(mv&&mv.line?'<br><span style="color:#777">'
     +escHtml(String(mv.line).slice(0,150))+(String(mv.line).length>150?'…':'')+'</span>':'');
 }
+var HWCUR=null, HW_LOOK=false;
 function hwOpen(slug){
   hwState('opening '+slug+'…');
   return import('../held/world/worlds/'+slug+'.mjs').then(function(m){
+    HWMODS[slug]=m.default; HWCUR=slug;
     HWRT=HW.makeRuntime(m.default); HWSEL={};
     hwScan(); return HWRT;
   }).catch(function(e){ hwState('could not open '+slug); });
@@ -6089,6 +6107,92 @@ function hwErase(){
   if(!lines.length){ fireToast('Those parts ink nothing here'); return; }
   playThud(); draw(lines); flash(); fireToast('Taken out · '+lines.length+' runs');
 }
+/* ====================================================================
+   INGESTING THE SUITE.
+
+   A gallery is a website: you look at fourteen worlds and then go somewhere
+   else to use one. Streaming a single poemfield fixed that for one world at a
+   time — 600 to 1,080 frames, a minute or two each — but the suite is
+   twenty-four minutes of drawn film and nobody waits twenty-two minutes for an
+   import.
+
+   So the suite comes in at a chosen rate: N frames of each world, in order, as
+   ONE film. At 24 frames each that is 336 nodes and about forty seconds, and
+   what lands is not a menu of links but the whole poem cycle sitting in the
+   tree — every frame a node you can draw on, branch from and take apart, and
+   every one carrying `hw:<slug>@<t>` so it still knows the moment it came from.
+
+   The worlds stop being a dependency the page fetches and become the film's
+   own contents. A boundary node between poems carries the title, so the strip
+   reads as fourteen movements rather than one long ribbon.
+   ==================================================================== */
+function hwSuite(){
+  if(!HW){ fireToast('Open the drawer first'); return; }
+  var each=parseInt(document.getElementById('hw-each').value,10)||24;
+  var poems=HW_LIST.filter(function(w){ return /^\d\d-/.test(w)&&!/^00/.test(w)&&w.indexOf('b-')<0; });
+  var total=poems.length*each;
+  if(!poems.length){ fireToast('No poemfields found'); return; }
+  var enc=new TextEncoder(), wi=0, fi=0, made=0, phase=0, rt=null, ids=null, BATCH=4;
+  var idOf=function(k){ return 'wyg'+'B'+String(k+1).padStart(8,'0'); };
+  Progress.start('Ingesting the suite',{total:total,stage:'Fourteen poemfields…',cancelable:true,
+    onCancel:function(){ wi=poems.length; }});
+  var reader={ read:function(){
+    if(phase===0){ phase=1;
+      var head='#TWINSTRIP v1\n'+JSON.stringify({title:'WYGWYL · THE SUITE',fps:8,frames:total,
+        collaborator:'HALFWORLD',source:'suite',
+        audio_lock:{structure:'fourteen drawn worlds, '+each+' frames each'}})+'\n'
+        +idOf(0)+'~'+total+'\f';
+      return Promise.resolve({value:enc.encode(head),done:false});
+    }
+    if(wi>=poems.length) return Promise.resolve({done:true});
+    var yieldNow=function(res,out){
+      Progress.set(made,total);
+      Progress.stage(HWMETA[poems[Math.min(wi,poems.length-1)]] ?
+        (HWMETA[poems[Math.min(wi,poems.length-1)]].title+' · '+made+'/'+total) : made+'/'+total);
+      var send=function(){ res({value:enc.encode(out),done:false}); };
+      if(window.MessageChannel){ var mc=new MessageChannel(); mc.port1.onmessage=send; mc.port2.postMessage(0); }
+      else setTimeout(send,0);
+    };
+    return new Promise(function(res){
+      var slug=poems[wi];
+      var run=function(){
+        var out='', n=0, lastG=null;
+        while(n<BATCH && fi<each && wi<poems.length){
+          var t=rt.total*(fi/each);
+          ids.fill(0);
+          var sc=null; try{ sc=rt.renderScene(t,ids); }catch(e){}
+          if(sc){
+            var byTag={}; (sc.parts||[]).forEach(function(p){
+              byTag[p.tag]=(p.part&&p.part!=='movement')?p.part:('~'+(p.prim||'mark')); });
+            HWSCENE=sc; HWSCENE._byTag=byTag;
+            var g=hwDown(null);
+            var nm=(HWMETA[slug]&&HWMETA[slug].title)||slug;
+            var meta='TSHOT;N'+encodeURIComponent(nm+' '+(fi+1))
+                   +';Kflow;P'+encodeURIComponent('hw:'+slug+'@'+t.toFixed(3));
+            out+=idOf(made)+'|'+(made?idOf(made-1):'')+'|HALFWORLD|'+meta+'>'
+              +frameToCmds(g).join('\n')+'\f';
+            made++; lastG=g;
+          }
+          fi++; n++;
+        }
+        if(lastG) Progress.preview(lastG);   /* show the world you are inside */
+        if(fi>=each){ wi++; fi=0; rt=null; }
+        yieldNow(res,out);
+      };
+      if(rt) run();
+      else import('../held/world/worlds/'+slug+'.mjs').then(function(m){
+        HWMODS[slug]=m.default; rt=HW.makeRuntime(m.default);
+        if(!ids) ids=new Int16Array(HW_W*HW_H);
+        if(!HWMETA[slug]) HWMETA[slug]={title:m.default.title||slug};
+        run();
+      }).catch(function(){ wi++; fi=0; yieldNow(res,''); });
+    });
+  }};
+  stopPlay();
+  streamStripReader(reader,'wygwyl-suite.poemfield',null);
+  var poll=setInterval(function(){ if(wi>=poems.length){ clearInterval(poll);
+    setTimeout(function(){ Progress.done(made+' frames'); Progress.hide(600); },250); } },150);
+}
 (function(){
   var t=document.getElementById('hw-t'); if(t) t.addEventListener('input',function(){ hwScan(); });
   var wsel=document.getElementById('hw-world'); if(wsel) wsel.addEventListener('change',function(){ hwOpen(this.value); });
@@ -6101,6 +6205,13 @@ function hwErase(){
   var sr=document.getElementById('hw-stream'); if(sr) sr.addEventListener('click', guard(hwStream,'hw-stream'));
   var bk=document.getElementById('hw-break'); if(bk) bk.addEventListener('click', guard(hwBreak,'hw-break'));
   var er=document.getElementById('hw-erase'); if(er) er.addEventListener('click', guard(hwErase,'hw-erase'));
+  var su=document.getElementById('hw-suite'); if(su) su.addEventListener('click', guard(hwSuite,'hw-suite'));
+  var ea=document.getElementById('hw-each'), ev=document.getElementById('hw-sv');
+  if(ea&&ev) ea.addEventListener('input',function(){ ev.textContent=ea.value; });
+  var lk=document.getElementById('hw-look');
+  if(lk) lk.addEventListener('click',function(){ HW_LOOK=!HW_LOOK;
+    lk.textContent=HW_LOOK?'Tap = just look':'Tap = into the frame';
+    lk.classList.toggle('on',HW_LOOK); playTick(); });
   var det=st&&st.closest&&st.closest('details');
   if(det) det.addEventListener('toggle',function(){ if(det.open) hwLoad(); });
 })();
