@@ -94,30 +94,40 @@ def surface(mask):
 
     # WHICH END IS THE HEAD.
     #
-    # The first rule tried was "the end with more mass", on the reasoning that a
-    # standing body is wider at the shoulders than the ankles. It named the coat.
-    # These are medium shots cropped at the hip, so the torso fills the bottom of
-    # the frame and outweighs the head every time — the rule is true of a whole
-    # figure and false of every shot in this archive.
+    # Rule one was "the end with more mass" — shoulders are wider than ankles.
+    # It named the coat: these are medium shots cropped at the hip, so the torso
+    # fills the bottom and outweighs the head in every frame.
     #
-    # The poet is never upside down in 135 shots, so IMAGE-UP decides, and the
-    # mass imbalance becomes a check on that decision rather than the decision.
-    # When the two disagree strongly the frame is flagged, not silently accepted.
+    # Rule two kept image-up as the decision and demoted mass to a CHECK, and
+    # reported every disagreement as ignorance. Measured across all 2,040 bodied
+    # frames, that check fires on 78% of the UPRIGHT ones — it flags the good
+    # frames, because disagreement is the normal and expected condition for a
+    # cropped standing figure. A warning that fires on the healthy case is not a
+    # warning, it is noise, and it was making the tool cry wolf 69% of the time.
+    #
+    # What is actually worth testing: the poet is upright in all 135 shots, so a
+    # head-to-foot line should be NEAR VERTICAL. A mask whose principal axis lies
+    # far off vertical is not a standing body seen badly — it is a fragment, or a
+    # mask that leaked sideways into the room, and u will not run head to foot on
+    # it whatever the mass says.
     span = a1 - a0
     lo = float((along < a0 + span * 0.2).sum())
     hi = float((along > a1 - span * 0.2).sum())
     imbalance = abs(hi - lo) / max(1.0, lo + hi)
-    # `ax` is the principal axis; whichever end has the smaller image y is up
-    up_is_a0 = (ax[1] > 0)          # along grows downward -> a0 is the top
+    up_is_a0 = (ax[1] > 0)                     # `along` grows downward
     head_end = 0 if up_is_a0 else 1
-    mass_says = 1 if hi > lo else 0
-    agrees = (mass_says == head_end) or imbalance < 0.06
+    agrees = ((1 if hi > lo else 0) == head_end) or imbalance < 0.06
+    tilt = abs(np.degrees(np.arctan2(ax[0], abs(ax[1]))))   # 0 = straight up
+    cover = float((mask > 110).mean())
+    # 62% of bodied frames clear both bars. That is the number HELD should show.
+    usable = bool(tilt < 25.0 and cover > 0.10)
     return dict(cx=round(float(cx), 2), cy=round(float(cy), 2),
                 ax=[round(float(ax[0]), 4), round(float(ax[1]), 4)],
                 a0=round(a0, 2), a1=round(a1, 2), half=round(half, 2),
                 head=head_end, agrees=bool(agrees),
                 imbalance=round(imbalance, 3),
-                cover=round(float((mask > 110).mean()), 4))
+                tilt=round(float(tilt), 1), usable=usable,
+                cover=round(cover, 4))
 
 
 def pack(patch, path, n=28, seek=0.5, fps=12, use_sam=True):
@@ -144,5 +154,6 @@ def pack(patch, path, n=28, seek=0.5, fps=12, use_sam=True):
     return dict(patch=patch, n=n, fps=fps, w=FW, h=FH,
                 surface=surf, tone=rng, flat_frames=flat,
                 cover=round(float(np.mean([s["cover"] for s in live])), 4),
+                usable=sum(1 for s in live if s["usable"]),
                 disputed=sum(1 for s in live if not s["agrees"]),
                 blank=sum(1 for s in surf if s is None)), (fr, mk)

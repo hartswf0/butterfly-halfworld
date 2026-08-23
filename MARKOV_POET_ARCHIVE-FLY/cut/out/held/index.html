@@ -95,6 +95,12 @@
   #scrub.on{display:flex}
   @media (pointer:coarse){ #scrub{height:44px} }
   #track{position:absolute;left:14px;right:14px;height:1px;background:var(--live)}
+  /* every event boundary is a place the voice broke. drawn on the track, the
+     scrub stops being a slider and becomes the film's own cut list. */
+  #cuts{position:absolute;left:14px;right:14px;top:50%;height:14px;margin-top:-7px;
+        pointer-events:none}
+  #cuts i{position:absolute;top:0;width:1px;height:100%;background:var(--ink);opacity:.55}
+  #cuts i.w{background:var(--live);opacity:.9}
   #head{position:absolute;width:10px;height:10px;background:var(--live);transform:translate(-50%,0)}
   #file{display:none}
 </style>
@@ -102,7 +108,7 @@
 <body>
 <canvas id="stage"></canvas>
 <div id="bar" class="chrome">
-  <div id="scrub" aria-hidden="true"><div id="track"></div><div id="head"></div></div>
+  <div id="scrub" aria-hidden="true"><div id="track"></div><div id="cuts"></div><div id="head"></div></div>
   <div id="line">draw a region · drop or paste images</div>
   <div id="acts"></div>
 </div>
@@ -179,8 +185,13 @@ function loadBody(sh){
   return new Promise((res,rej)=>{
     const img=new Image();
     img.onload=()=>{
-      /* one strip: n photograph frames, then n mask frames. two files could
-         drift apart; one cannot. */
+      /* one file, two panels: n photograph frames, then n mask frames.
+         The mask was in the alpha channel first — half the pixels — but
+         drawImage composites, so wherever alpha is 0 the source contributes
+         nothing and the photograph OUTSIDE the body is destroyed on load. The
+         carrier never noticed; the plate, which needs the whole frame, would
+         have shown a poet floating in nothing. Two panels cost the same and
+         the mask survives the codec at 100.00%, measured. */
       const c=document.createElement('canvas'); c.width=img.width; c.height=img.height;
       const g=c.getContext('2d',{willReadFrequently:true});
       g.drawImage(img,0,0);
@@ -189,18 +200,80 @@ function loadBody(sh){
                meta:sh};
       BODY.set(sh.patch,b); res(b);
     };
-    img.onerror=rej; img.src='pack/'+sh.patch+'.png';
+    img.onerror=rej; img.src='pack/'+sh.patch+'.webp';
   });
 }
 /* the photograph and the mask at one field cell of one frame */
 function bodyAt(b,k,x,y){
   if(x<0||y<0||x>=b.w||y>=b.h) return null;
   const S=b.stride;
-  const mi=((b.n*b.h + k*b.h + y)*S + x)*4;
-  if(b.data[mi]<110) return null;                       /* not the body */
-  const pi=((k*b.h + y)*S + x)*4;
-  return [b.data[pi],b.data[pi+1],b.data[pi+2]];
+  if(b.data[((b.n*b.h + k*b.h + y)*S + x)*4]<110) return null;   /* not the body */
+  const i=((k*b.h + y)*S + x)*4;
+  return [b.data[i],b.data[i+1],b.data[i+2]];
 }
+/* the photograph at a cell, mask or no mask. `bodyAt` answers "is this the
+   body, and what colour is it there"; a ground wants the second half only. */
+function photoAt(b,k,x,y){
+  if(x<0||y<0||x>=b.w||y>=b.h) return null;
+  const i=((k*b.h + y)*b.stride + x)*4;
+  return [b.data[i],b.data[i+1],b.data[i+2]];
+}
+
+/* ══ THE CLOCK ════════════════════════════════════════════
+   HELD's scrub ran over twenty-four frames of one shot, on a
+   loop, while fourteen finished films sat beside it — as if
+   the archive were a bag of pictures rather than a thing
+   with a duration and a running order already decided.
+
+   MOUSSA decided it. Fourteen timelines say which shot is on
+   screen at which second, which halfworld is drawn when the
+   footage has nothing fresh, and 2,805 word timings say what
+   is being said while it is. None of that needed making.
+
+   A station is a clock, and the clock is the poet's: an
+   event boundary is a place the voice broke, not a bar line.
+   ═════════════════════════════════════════════════════════ */
+let STATIONS=null, HW=null, WORLD=new Map();
+async function loadStations(){
+  if(STATIONS) return STATIONS;
+  try{ STATIONS=await (await fetch('pack/stations.json')).json(); }
+  catch(e){ STATIONS={stations:[]}; lineEl.textContent='no stations.json'; }
+  return STATIONS;
+}
+/* the drawn half. the world engine is only fetched if a station actually
+   reaches a drawn event, so a shot-only station costs nothing. */
+async function world(slug){
+  if(WORLD.has(slug)) return WORLD.get(slug);
+  try{
+    HW=HW||await import('./world/halfworld.mjs');
+    const w=(await import(`./world/worlds/${slug}.mjs`)).default;
+    const rt=HW.makeRuntime(w);
+    WORLD.set(slug,rt); return rt;
+  }catch(e){ WORLD.set(slug,null); return null; }
+}
+/* which event owns this second. the list is short and in order, so a scan is
+   cheaper than the bookkeeping an index would need. */
+function eventAt(st,t){
+  if(!st) return null;
+  const ev=st.events;
+  for(let i=ev.length-1;i>=0;i--) if(t>=ev[i].a) return ev[i];
+  return ev[0]||null;
+}
+function wordsAt(st,t,back){
+  if(!st||!st.words.length) return null;
+  let last=null, live=null;
+  for(const w of st.words){
+    if(w[1]>t) break;
+    if(t<=w[2]) live=w;
+    if(t-w[2]<(back||2.2)) last=last||null;
+  }
+  /* the word being said, or the last one said, so the line does not blink out
+     between words — a pause is part of the recitation, not an absence */
+  if(live) return {w:live[0], live:true};
+  let prev=null; for(const w of st.words){ if(w[2]<=t) prev=w; else break; }
+  return prev?{w:prev[0], live:false}:null;
+}
+
 /* the measured surface, as one part in the mannequin's own vocabulary */
 function bodyPart(b,k){
   const s=b.surface[k%b.n];
@@ -380,6 +453,7 @@ const GROUND_BASE=mkSocket([[0,0],[1,0],[1,1],[0,1]],'none'); GROUND_BASE.base=t
 
 const S={
   mode:'REST', t:0, playing:true, last:0, scrubbing:false,
+  station:null, time:0, plate:null,   /* the clock, and what it puts on screen */
   paper:'#ffffff',
   sockets:{ground:[GROUND_BASE]},   // surfaceKey -> [socket]
   cast:[],                          // {id,ox,oy,scale,phase,flip}
@@ -389,6 +463,7 @@ const S={
 const surfSockets=k=>S.sockets[k]||(S.sockets[k]=[]);
 const findSock=ref=>ref?(S.sockets[ref.key]||[]).find(s=>s.id===ref.id)||null:null;
 
+const $=id=>document.getElementById(id);
 const stage=document.getElementById('stage');
 const ctx=stage.getContext('2d',{alpha:false});
 const lineEl=document.getElementById('line'), actsEl=document.getElementById('acts');
@@ -458,9 +533,11 @@ function renderScene(g,L,st,t,opt){
       const cx=sx+C/2, cy=sy+C/2;
       let bg=pg, dot=null, seam=false;
 
-      /* — ground stack — */
+      /* — the plate, then the ground stack — */
       const gu=cx/w, gv=cy/h;
-      const gl=st.sockets.ground||[];
+      if(st.plate){ const pd=plateAt(st.plate,gu,gv,C,bg); if(pd) dot=pd; }
+      const gl=(st.sockets.ground||[]).concat(
+        (st.plate&&st.plate.kind==='shot'&&st.sockets['sh:'+st.plate.patch])||[]);
       for(const so of gl){
         if(so.render==='none') continue;
         const bb=so.bb;
@@ -529,6 +606,38 @@ function renderScene(g,L,st,t,opt){
 
 const inkOn=bg=>lum(bg[0],bg[1],bg[2])<128?[255,255,255]:[0,0,0];
 
+/* THE PLATE — the shot, or the drawn world, under everything else.
+
+   Both arrive as tone and leave as one mark, which is MOUSSA's whole claim:
+   the photographs are not cut against the drawn worlds, they are put THROUGH
+   them. Same field, same eight levels, same disc radius, no colour but ink. */
+function plateAt(P,gu,gv,C,bg){
+  if(!P) return null;
+  if(P.kind==='world'){
+    const x=Math.min(191,(gu*192)|0), y=Math.min(143,(gv*144)|0);
+    const lv=P.lv[y*192+x];
+    if(!lv) return null;
+    return {r:C*0.5*Math.pow(lv/7,0.72)*1.24, c:inkOn(bg)};
+  }
+  const b=P.b;
+  /* CONTAIN, not cover. The shots are 4:3 and a phone held upright is 9:16, so
+     cover threw away two thirds of every frame — MOUSSA cut these; deciding to
+     recrop them here would be a different film. Letterbox instead: the paper
+     around the frame is the paper the film is printed on. */
+  const fa=P.aspect, ma=b.w/b.h;
+  let s=gu, t=gv;
+  if(ma>fa){ const k=fa/ma; t=(gv-(1-k)/2)/k; }   /* wider than the window: fit width */
+  else     { const k=ma/fa; s=(gu-(1-k)/2)/k; }   /* taller: fit height */
+  if(s<0||s>1||t<0||t>1) return null;             /* outside the frame is paper */
+  const px=photoAt(b,P.k,Math.min(b.w-1,(s*b.w)|0),Math.min(b.h-1,(t*b.h)|0));
+  if(!px) return null;
+  const tr=(b.meta.tone||[])[P.k]||[0,255];
+  const pl=clamp((lum(px[0],px[1],px[2])-tr[0])/Math.max(1,tr[1]-tr[0]),0,1);
+  const dark=lum(bg[0],bg[1],bg[2])<128;
+  const amt=clamp(dark?pl:1-pl,0,1);
+  return {r:C*0.74*Math.sqrt(amt), c:inkOn(bg)};
+}
+
 /* one socket's contribution at one cell */
 function apply(so,bb,u,v,bg,markTone,opt){
   if(so.render==='none') return {};
@@ -564,7 +673,7 @@ function draw(){
   const so=findSock(S.sel);
   if(so&&!so.base){
     ctx.strokeStyle='#19e6c8'; ctx.lineWidth=1.5; ctx.beginPath();
-    if(S.sel.key==='ground'){
+    if(S.sel.key==='ground'||S.sel.key.startsWith('sh:')){
       so.poly.forEach((q,i)=>{const x=q[0]*W,y=q[1]*H;i?ctx.lineTo(x,y):ctx.moveTo(x,y);});
     }else{
       const f=S.cast.find(c=>'f'+c.id===S.sel.key.split(':')[0]);
@@ -592,9 +701,36 @@ function draw(){
     ctx.stroke();
   }
 }
+/* what the clock has on screen at S.time, resolved once per frame */
+function advance(){
+  const st=S.station; if(!st){ S.plate=null; return; }
+  const e=eventAt(st,S.time); if(!e){ S.plate=null; return; }
+  if(e.k==='s'){
+    const b=BODY.get(e.p);
+    if(!b){ const m=(PACK&&PACK.shots||[]).find(x=>x.patch===e.p);
+            if(m) loadBody(m); S.plate=null; return; }
+    /* the shot plays at its own rate inside the event and holds on its last
+       frame if the event outlasts the pack — MOUSSA cut these to the voice, so
+       an event can be longer than the two seconds packed */
+    const k=Math.min(b.n-1,Math.floor((S.time-e.a)*(b.meta.fps||12)));
+    S.plate={kind:'shot', b, k:Math.max(0,k), aspect:LAY.w/LAY.h, patch:e.p, ev:e};
+  }else{
+    const rt=WORLD.get(e.world);
+    if(rt===undefined){ world(e.world); S.plate=null; return; }
+    if(!rt){ S.plate=null; return; }
+    const ids=new Int16Array(192*144);
+    let sc=null; try{ sc=rt.renderScene((e.seek||0)+(S.time-e.a), ids); }catch(err){}
+    S.plate=sc?{kind:'world', lv:sc.levels||sc.lv||sc, ev:e}:null;
+  }
+}
 function tick(ms){
   const dt=S.last?Math.min(0.05,(ms-S.last)/1000):0; S.last=ms;
-  if(S.playing&&!S.scrubbing) S.t=(S.t+dt/5.2)%1;
+  if(S.station){
+    if(S.playing&&!S.scrubbing) S.time=(S.time+dt)%S.station.secs;
+    /* the cast still walks on its own loop; only the plate is on the poet's */
+    S.t=(S.t+dt/5.2)%1;
+    advance();
+  } else if(S.playing&&!S.scrubbing) S.t=(S.t+dt/5.2)%1;
   for(const m of VIDEOS) if(m.src.readyState>=2) m.refresh();
   if(S.fit){ S.fit.p+=dt/0.6; if(S.fit.p>=1){const r={key:S.fit.key,id:S.fit.id};S.fit=null;S.sel=r;setMode('CHANGED');} }
   draw(); syncScrub();
@@ -626,6 +762,13 @@ function makeSocket(pts){
   }
   let key=null,bv=0; for(const k in tally) if(tally[k]>bv){bv=tally[k];key=k;}
   if(!key) return null;
+  /* THE POINT OF A STATION. A region drawn on the frame while P073 is up is not
+     a region of "the ground" — the ground is a different photograph two seconds
+     later. Key it to the shot, and it comes back every time MOUSSA cuts back,
+     which is nine times in some stations. Marking one thing marks every return
+     of it. */
+  if(key==='ground'&&S.station&&S.plate&&S.plate.kind==='shot')
+    key='sh:'+S.plate.patch;
 
   let poly;
   if(key==='ground'){ poly=pts.map(p=>[p[0]/W,p[1]/H]); }
@@ -653,6 +796,10 @@ function selectAt(x,y){
   if(h){
     const key='f'+h.f.id+':'+h.part.id, list=S.sockets[key]||[];
     for(let i=list.length-1;i>=0;i--) if(inPoly(list[i].poly,h.l.u,h.l.v)) cands.push({key,id:list[i].id});
+  }
+  if(S.plate&&S.plate.kind==='shot'){
+    const k='sh:'+S.plate.patch, l=S.sockets[k]||[];
+    for(let i=l.length-1;i>=0;i--) if(inPoly(l[i].poly,x/W,y/H)) cands.push({key:k,id:l[i].id});
   }
   const gl=S.sockets.ground||[];
   for(let i=gl.length-1;i>=0;i--){
@@ -891,7 +1038,7 @@ function raise(){
 }
 function panelAnchor(){
   const so=findSock(S.sel); if(!so) return null;
-  if(S.sel.key==='ground'){
+  if(S.sel.key==='ground'||S.sel.key.startsWith('sh:')){
     const bb=so.bb; return [((bb[0]+bb[2])/2)*W, bb[3]*H];
   }
   const f=S.cast.find(c=>'f'+c.id===S.sel.key.split(':')[0]);
@@ -931,19 +1078,62 @@ function undo(){
   }
   S.sel=null; S.fit=null; setMode(S.order.length?'COMPLETE':'REST');
 }
+/* ── the stations ───────────────────────────────────────────────────────── */
+let STI=-1;
+async function pickStation(){
+  const P=await loadStations();
+  if(!P.stations||!P.stations.length){ lineEl.textContent='no stations — run pf/stations.py'; return; }
+  STI=(STI+1)%(P.stations.length+1);
+  if(STI===P.stations.length){                    /* one past the end is OFF */
+    S.station=null; S.plate=null; STI=-1;
+    setMode(S.order.length?'COMPLETE':'REST'); lineEl.textContent='no station'; return;
+  }
+  const st=P.stations[STI];
+  /* the mannequin HELD opens with is scaffolding — something to draw on before
+     there is anything else. Over a station it is just a stranger standing in
+     the film, so any cast member nobody has marked is cleared. One that carries
+     a socket has been worked on and stays. */
+  S.cast=S.cast.filter(f=>Object.keys(S.sockets).some(k=>k.startsWith('f'+f.id+':')&&S.sockets[k].length));
+  S.station=st; S.time=0;
+  await loadPack();
+  /* pull in the shots this station opens on, so the first seconds are not blank */
+  const want=[...new Set(st.events.filter(e=>e.k==='s').map(e=>e.p))].slice(0,6);
+  for(const p of want){ const m=(PACK.shots||[]).find(x=>x.patch===p); if(m) loadBody(m).catch(()=>{}); }
+  advance(); setMode('STATION');
+}
+/* a station puts its own report in the line: the poet's word, and how much of
+   this station had to be DRAWN because the footage had nothing fresh to say */
+function stationLine(){
+  const st=S.station; if(!st) return '';
+  const e=eventAt(st,S.time), w=wordsAt(st,S.time);
+  const mm=Math.floor(S.time/60), ss=Math.floor(S.time%60);
+  let out=`${st.n} ${st.title} · ${mm}:${String(ss).padStart(2,'0')}`;
+  if(e) out+= e.k==='w' ? ` · <i>drawn ${e.world}</i>` : ` · ${e.p}${e.role?' '+e.role:''}`;
+  if(w) out+= ` · ${w.live?'<b>'+w.w+'</b>':w.w}`;
+  return out;
+}
 let POETI=0;
 async function castPoet(){
   const P=await loadPack();
   if(!P.shots||!P.shots.length){ lineEl.textContent='pack is empty — run pf/buildpack.py'; return; }
-  const sh=P.shots[POETI%P.shots.length]; POETI++;
+  const bodies=P.shots.filter(s=>s.body!==false);
+  if(!bodies.length){ lineEl.textContent='no bodied shots in the pack'; return; }
+  const sh=bodies[POETI%bodies.length]; POETI++;
   try{ await loadBody(sh); }catch(e){ lineEl.textContent='could not read '+sh.patch; return; }
   S.placing={id:++FID, kind:'body', patch:sh.patch, ox:0.5, oy:0.55,
              scale:0.8, phase:0, flip:false};
   S.sel=null; setMode('PLACING');
-  /* the pack knows how sure it is, so the tool can say so before you build on it */
-  const d=sh.disputed||0;
+  /* THE PACK KNOWS HOW SURE IT IS.
+     It used to report every frame where mass disagreed with image-up. Measured
+     across all 2,040 bodied frames that fires on 78% of the UPRIGHT ones —
+     disagreement is the normal condition for a figure cropped at the hip, so the
+     warning was firing on the healthy case. What is worth saying is whether the
+     axis is a plausible head-to-foot line at all: near vertical, with enough
+     body to have two ends. 62% of frames clear both. */
+  const u=sh.usable==null?sh.n:sh.usable, bad=sh.n-u;
   lineEl.innerHTML='tap to set '+sh.patch+' · '+(sh.cls||'')
-    +(d? ' · <b>'+d+' of '+sh.n+' frames dispute the axis</b>' : '');
+    +' · '+((POETI-1)%bodies.length+1)+' of '+bodies.length
+    +(bad? ' · <b>axis holds on '+u+' of '+sh.n+' frames</b>' : '');
 }
 function castOne(){
   S.placing={id:++FID, ox:0.5, oy:0.55, scale:0.85, phase:Math.random(), flip:Math.random()<0.4};
@@ -973,6 +1163,14 @@ function hydrate(sn){
     return o;
   });
   return out;
+}
+function paintCuts(){
+  const c=$('cuts');
+  if(!S.station){ c.innerHTML=''; c.dataset.for=''; return; }
+  if(c.dataset.for===S.station.n) return;         /* only when the station changes */
+  c.dataset.for=S.station.n;
+  c.innerHTML=S.station.events.map(e=>
+    `<i class="${e.k==='w'?'w':''}" style="left:${(100*e.a/S.station.secs).toFixed(3)}%"></i>`).join('');
 }
 function take(){ S.shots.push(snapshot()); S.activeShot=S.shots.length-1; buildShots(); setMode(S.mode); }
 function buildShots(){
@@ -1005,6 +1203,9 @@ function buildShots(){
 
 /* ══ STATES ═══════════════════════════════════════════════ */
 function report(){
+  if(S.station&&S.mode!=='WORKING'&&S.mode!=='READY'&&S.mode!=='PLACING'){
+    lineEl.innerHTML=stationLine(); return;
+  }
   if(S.mode!=='CHANGED') return;
   const so=findSock(S.sel), n=S.seams;
   lineEl.innerHTML=(n>0?'held · <b>'+n+' open at the seam</b>':'held')
@@ -1019,12 +1220,14 @@ function setMode(m){
   if(m==='WORKING'){ lineEl.textContent='fitting'; acts.push(['stop',stop]); }
   if(m==='PLACING'){ lineEl.textContent='tap to set the figure'; acts.push(['stop',()=>{S.placing=null;setMode('REST');}]); }
   if(m==='COMPLETE') lineEl.textContent='scrub to check it holds';
-  if(m!=='PLACING'&&m!=='WORKING'){ acts.push(['poet',castPoet]); acts.push(['cast',castOne]);
+  if(m==='STATION') lineEl.innerHTML=stationLine();
+  if(m!=='PLACING'&&m!=='WORKING'){ acts.push(['station',pickStation]);
+                                    acts.push(['poet',castPoet]); acts.push(['cast',castOne]);
                                     acts.push(['ground',ground]); }
   if(S.order.length){ acts.push(['undo',undo]); acts.push(['take',take]); }
   setActs(acts); buildModes(); placePanel(); report();
-  scrubEl.classList.toggle('on',S.cast.length>0);
-  syncScrub();
+  scrubEl.classList.toggle('on',S.cast.length>0||!!S.station);
+  paintCuts(); syncScrub();
 }
 castOne(); S.placing.ox=0.5; S.placing.oy=0.55; S.placing.scale=0.9; S.placing.flip=false;
 S.cast.push(S.placing); S.order.push({t:'figure',id:S.placing.id}); S.placing=null;
@@ -1034,6 +1237,12 @@ setInterval(()=>{ placePanel(); report(); },160);
 /* ══ SCRUB ════════════════════════════════════════════════ */
 function syncScrub(){
   if(!scrubEl.classList.contains('on')) return;
+  if(S.station){
+    const r=$('track').getBoundingClientRect(), b=scrubEl.getBoundingClientRect();
+    headEl.style.left=(r.left-b.left+r.width*(S.time/S.station.secs))+'px';
+    headEl.style.top=(scrubEl.offsetHeight/2-5)+'px';
+    return;
+  }
   /* measured, not assumed: the bar has padding now, so the track no longer
      starts 14px from the window edge */
   const r=$('track').getBoundingClientRect(), b=scrubEl.getBoundingClientRect();
@@ -1041,7 +1250,8 @@ function syncScrub(){
   headEl.style.top=(scrubEl.offsetHeight/2-5)+'px';
 }
 const scrubTo=x=>{const r=$('track').getBoundingClientRect();
-  S.t=clamp((x-r.left)/Math.max(1,r.width),0,1);};
+  const u=clamp((x-r.left)/Math.max(1,r.width),0,1);
+  if(S.station){ S.time=u*S.station.secs; advance(); } else S.t=u;};
 scrubEl.addEventListener('pointerdown',e=>{scrubEl.setPointerCapture(e.pointerId);S.scrubbing=true;scrubTo(e.clientX);});
 scrubEl.addEventListener('pointermove',e=>{if(S.scrubbing)scrubTo(e.clientX);});
 scrubEl.addEventListener('pointerup',()=>{S.scrubbing=false;});
