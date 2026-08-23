@@ -25,9 +25,11 @@
      pushes the line up instead of through it. */
   #bar{left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:6px;
        padding:8px 12px calc(8px + env(safe-area-inset-bottom));
-       background:color-mix(in srgb, var(--paper) 88%, transparent);
-       backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-       border-top:1px solid var(--ink)}
+       /* opaque, and no backdrop-filter. A blurred backdrop over a canvas that
+          is being redrawn every frame is an extra composited layer for no gain —
+          the bar has a border and a ground of its own, so nothing shows through
+          it anyway. */
+       background:var(--paper);border-top:1px solid var(--ink)}
   /* difference-blend read beautifully over the dots and became invisible the
      moment the bar got a ground of its own */
   #line{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
@@ -490,12 +492,25 @@ const fileEl=document.getElementById('file'), camEl=document.getElementById('cam
    ═════════════════════════════════════════════════════════ */
 const FW=192, FH=144;
 let W=0,H=0,DPR=1,LAY={cell:7,unit:1,w:0,h:0,fx:0,fy:0,fw:0,fh:0};
+let _geo='';
 function resize(){
-  DPR=Math.min(devicePixelRatio||1,2); W=innerWidth; H=innerHeight;
+  /* IDEMPOTENT ON PURPOSE.
+     Assigning stage.width tears down the canvas backing store and allocates a
+     new one. This was being called from setMode, and setMode runs on every
+     arrow key — so nudging a piece one cell reallocated the canvas dozens of
+     times a second, and the compositor was left holding stale layers of the
+     fixed chrome. The page appeared to render twice.
+     Recomputing is cheap; reallocating is not. Only touch the canvas when the
+     geometry actually moved. */
+  const dpr=Math.min(devicePixelRatio||1,2);
+  const barH=($('bar')&&$('bar').offsetHeight)||96;
+  const key=innerWidth+'x'+innerHeight+'x'+dpr+'x'+barH;
+  if(key===_geo) return;
+  _geo=key;
+  DPR=dpr; W=innerWidth; H=innerHeight;
   stage.width=Math.floor(W*DPR); stage.height=Math.floor(H*DPR);
   stage.style.width=W+'px'; stage.style.height=H+'px';
   ctx.setTransform(DPR,0,0,DPR,0,0);
-  const barH=($('bar')&&$('bar').offsetHeight)||96;
   const availH=Math.max(120,H-barH-8), availW=Math.max(120,W-16);
   /* The cell is whatever fits, exactly.
      Rounding it to a whole number was solving a problem this renderer does not
@@ -514,6 +529,10 @@ function resize(){
        unit:Math.min(fw/150,fh/210), bunit:cell};
 }
 addEventListener('resize',()=>{resize();syncScrub();}); resize();
+/* the bar grows a row when the act list does, and the frame has to give that
+   space back. watching it is exact; calling resize() from setMode was a guess
+   that fired hundreds of times more often than the bar actually changed. */
+if(window.ResizeObserver) new ResizeObserver(()=>{resize();syncScrub();}).observe($('bar'));
 
 /* figure transform: normalized anchor + relative scale */
 const unitOf=(f,L)=>(f.kind==='body'?(L.bunit||L.unit):L.unit)*f.scale;
@@ -1455,7 +1474,7 @@ function setMode(m){
                                     acts.push(['poet',castPoet]); acts.push(['cast',castOne]);
                                     acts.push(['ground',ground]); }
   if(S.order.length){ acts.push(['undo',undo]); acts.push(['take',take]); }
-  setActs(acts); resize(); buildModes(); placePanel(); report();
+  setActs(acts); buildModes(); placePanel(); report();
   scrubEl.classList.toggle('on',S.cast.length>0||!!S.station);
   paintCuts(); syncScrub();
 }
