@@ -828,6 +828,9 @@
       <div style="flex:2"><label class="mini">Shot &middot; frames <span id="arc-nv">12</span></label><input type="range" id="arc-n" min="2" max="24" value="12" style="width:100%"></div>
       <div style="flex:3"><label class="mini">&nbsp;</label><button id="arc-clip" type="button" style="width:100%">Stream the shot in</button></div>
     </div>
+    <div class="row" style="margin-top:6px">
+      <div style="flex:1"><button id="arc-layer" type="button" style="width:100%">Bring the shot in as a layer</button></div>
+    </div>
     <div class="mini" id="arc-state">not loaded</div>
   </details>
   <div class="seclabel"><b>Halfworld</b><span>20 drawn worlds, 109 named parts</span></div>
@@ -4900,6 +4903,30 @@ function groundPatch(id){
 function patchCmds(p, done){
   if(!p||!p.on) return done([]);
   if(p.kind==='ground'||p.kind==='ink') return done(String(p.src.cmds||'').split('\n'));
+  if(p.kind==='clip'){
+    /* A CLIP IS A PATCH THAT KNOWS ITS FRAME. The packed shots are one file per
+       shot — n photographs stacked above n masks — so a clip patch is a shot id
+       and an index into it. Laid across many frames it is the same patch with a
+       different k, which is why bringing a clip in is not an import: it is one
+       layer that happens to advance. */
+    var cp=p.place||{};
+    var draw1=function(im){
+      if(!im){ done([]); return; }
+      var rows=144, count=Math.max(1,Math.round(im.naturalHeight/(rows*2)));
+      var k=Math.max(0,Math.min(count-1, p.src.k|0));
+      var tmp=document.createElement('canvas'); tmp.width=192; tmp.height=rows;
+      var tc=tmp.getContext('2d',{willReadFrequently:true});
+      tc.drawImage(im, 0, k*rows, im.naturalWidth, rows, 0,0,192,rows);
+      done(stampCmds(tmp, cp.x||W/2, cp.y||H/2, cp.size||W, cp.floor||1)||[]);
+    };
+    var hv=ARC_IMG['clip:'+p.src.patch];
+    if(hv&&hv.complete&&hv.naturalWidth) return draw1(hv);
+    var ci=new Image();
+    ci.onload=function(){ ARC_IMG['clip:'+p.src.patch]=ci; draw1(ci); };
+    ci.onerror=function(){ done([]); };
+    ci.src='../held/pack/'+p.src.patch+'.webp';
+    return;
+  }
   if(p.kind==='element'){
     /* OPERATOR keeps its archive images in ARC_IMG, not in a cache borrowed from
        another tool. Using HELD's names here threw inside the promise chain, the
@@ -4908,7 +4935,30 @@ function patchCmds(p, done){
        two codebases invites. */
     var pl=p.place||{};
     var lay=function(im){
-      done(im?(stampCmds(im, pl.x||W/2, pl.y||H/2, pl.size||64, pl.floor||2)||[]):[]);
+      if(!im){ done([]); return; }
+      var r=p.repeat;
+      if(!r||!r.n||r.n<2) return done(stampCmds(im, pl.x||W/2, pl.y||H/2, pl.size||64, pl.floor||2)||[]);
+      /* A MOSAIC IS ONE PATCH THAT REPEATS. Making fifty layers to lay fifty
+         tiles would be fifty things to manage and one thing to think about, so
+         the repetition lives on the patch: change the count, the whole field
+         re-lays. */
+      var out=[], i, sd=(r.seed||7);
+      var rnd=function(){ sd=(sd*1664525+1013904223)>>>0; return sd/4294967296; };
+      var n=Math.min(400,r.n|0), gap=r.gap||Math.round((pl.size||64)*1.1);
+      var cols=r.cols||Math.max(1,Math.round(Math.sqrt(n)));
+      for(i=0;i<n;i++){
+        var cx,cy,sz=(pl.size||64);
+        if(r.mode==='row'){ cx=(pl.x||W/2)+(i-(n-1)/2)*gap; cy=(pl.y||H/2); }
+        else if(r.mode==='scatter'){ cx=rnd()*W; cy=rnd()*H; sz=sz*(0.55+rnd()*0.9); }
+        else { var col=i%cols, row=(i/cols)|0, rows2=Math.ceil(n/cols);
+               cx=(pl.x||W/2)+(col-(cols-1)/2)*gap;
+               cy=(pl.y||H/2)+(row-(rows2-1)/2)*gap; }
+        if(r.jitter){ cx+=(rnd()-0.5)*r.jitter; cy+=(rnd()-0.5)*r.jitter; }
+        if(r.scale) sz=sz*(1+(rnd()-0.5)*r.scale);
+        var c1=stampCmds(im, cx, cy, Math.max(3,sz), pl.floor||2);
+        if(c1&&c1.length) out=out.concat(c1);
+      }
+      done(out);
     };
     var have=ARC_IMG[p.src.id];
     if(have && have.complete && have.naturalWidth) return lay(have);
@@ -5954,6 +6004,21 @@ function arcStamp(){
   flash();
   fireToast('Stamped · '+ARC_PICK);
 }
+/* THE SHOT AS ONE LAYER, not a run of frames.
+   Streaming a shot in makes N nodes and commits you to a cut. Often what you
+   want is the shot IN this frame — a photograph the size of the field, under
+   everything else, that you can move, resize and step through a frame at a
+   time. That is a clip patch: the shot's id and an index into it. */
+function arcLayer(){
+  if(!ARC_PICK){ fireToast('Pick a piece first — its shot is the clip'); return; }
+  var patch=(ARC_PICK.split('_')[0])||'';
+  if(!/^P\d+$/.test(patch)){ fireToast('No shot behind that piece'); return; }
+  playThud();
+  addPatch(myNode, mkPatch('clip',{patch:patch,k:0},
+    {place:{x:W/2,y:H/2,size:W,floor:1}, name:patch+' · clip'}), function(){
+      paintStack(); fireToast(patch+' in as a layer — tap it to step the frame');
+    });
+}
 /* a shot streams in as its own run of frames. the pack is one file per shot:
    n photographs stacked above n masks, so a slice is a crop, not a decode. */
 function arcClip(){
@@ -5995,6 +6060,7 @@ function arcClip(){
   if(n&&nv) n.addEventListener('input',function(){ nv.textContent=n.value; });
   var st=document.getElementById('arc-stamp'); if(st) st.addEventListener('click', guard(arcStamp,'arc-stamp'));
   var cl=document.getElementById('arc-clip'); if(cl) cl.addEventListener('click', guard(arcClip,'arc-clip'));
+  var la=document.getElementById('arc-layer'); if(la) la.addEventListener('click', guard(arcLayer,'arc-layer'));
   /* the index is fetched the first time the drawer is opened, not on boot —
      this tool is meant to work on the least network it can */
   var det=st&&st.closest&&st.closest('details');
@@ -7111,9 +7177,26 @@ board.addEventListener('pointerup',function(e){
   paintBoard(); pickBar(true);
 },true);
 
-/* the stack, shown. one row per patch, bottom of the frame at the bottom of
-   the list, because that is the order the ink goes down in. */
-var PKIND={ground:'▤', world:'◈', element:'■', ink:'✒'};
+/* THE STACK, SHOWN AND HANDLED.
+   A layer you cannot see is not a layer, it is a line of text claiming one. Each
+   row carries a thumbnail of ITSELF — that patch alone, baked and drawn small —
+   so the list is a set of pictures rather than a set of names. Tap a row to
+   select it and its own controls appear underneath: where it sits, how big, and
+   for an element how many times it repeats, which is the whole mosaic. */
+var PKIND={ground:'▤', world:'◈', element:'■', ink:'✒', clip:'▶'};
+var PSEL=null;
+function patchThumb(p, cv){
+  patchCmds(p, function(lines){
+    var g=applyCmds(new Uint8Array(N), cleanCmdLines(lines));
+    var x=cv.getContext('2d');
+    x.fillStyle='#fff'; x.fillRect(0,0,cv.width,cv.height); x.fillStyle='#000';
+    var sx=W/cv.width, sy=H/cv.height, cx2,cy2;
+    for(cy2=0;cy2<cv.height;cy2++) for(cx2=0;cx2<cv.width;cx2++){
+      var q=Math.min(H-1,(cy2*sy)|0)*W + Math.min(W-1,(cx2*sx)|0);
+      if(g[q]) x.fillRect(cx2,cy2,1,1);
+    }
+  });
+}
 function paintStack(){
   var box=document.getElementById('pstack'); if(!box) return;
   var st=pstack(myNode).slice().sort(function(a,b){ return (b.z||0)-(a.z||0); });
@@ -7124,15 +7207,22 @@ function paintStack(){
   box.innerHTML='';
   st.forEach(function(p){
     var row=document.createElement('div');
-    row.style.cssText='display:flex;gap:4px;align-items:center;border:2px solid var(--k);'
-      +'padding:4px 5px;margin-bottom:4px;font:9px/1.2 ui-monospace,monospace'
+    row.style.cssText='display:flex;gap:5px;align-items:center;border:'
+      +(PSEL===p.id?'3px solid var(--aB)':'2px solid var(--k)')
+      +';padding:3px 4px;margin-bottom:4px;font:9px/1.2 ui-monospace,monospace'
       +(p.on?'':';opacity:.45');
-    var tag=(PKIND[p.kind]||'?')+' '+(p.name||p.kind);
-    row.innerHTML='<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'
-      +escHtml(tag)+'</span>';
-    var mk=function(t,fn,dis){ var b=document.createElement('button'); b.type='button';
-      b.textContent=t; b.style.cssText='min-height:26px;padding:2px 6px;font:9px ui-monospace,monospace';
-      if(dis) b.disabled=true; else b.onclick=fn; return b; };
+    var cv=document.createElement('canvas'); cv.width=34; cv.height=26;
+    cv.style.cssText='flex:0 0 auto;border:1px solid var(--k);background:#fff;image-rendering:pixelated';
+    patchThumb(p,cv); row.appendChild(cv);
+    var lab=document.createElement('span');
+    lab.style.cssText='flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer';
+    lab.textContent=(PKIND[p.kind]||'?')+' '+(p.name||p.kind)
+      +(p.repeat&&p.repeat.n>1?(' ×'+p.repeat.n):'');
+    lab.onclick=function(){ PSEL=(PSEL===p.id?null:p.id); playTick(); paintStack(); };
+    row.appendChild(lab);
+    var mk=function(t,fn){ var b=document.createElement('button'); b.type='button';
+      b.textContent=t; b.style.cssText='min-height:26px;padding:2px 5px;font:9px ui-monospace,monospace';
+      b.onclick=fn; return b; };
     if(p.kind!=='ground'){
       row.appendChild(mk('▲',function(){ patchMove(myNode,p.id,1); }));
       row.appendChild(mk('▼',function(){ patchMove(myNode,p.id,-1); }));
@@ -7140,13 +7230,64 @@ function paintStack(){
     row.appendChild(mk(p.on?'ON':'OFF',function(){ patchSet(myNode,p.id,!p.on); }));
     if(p.kind!=='ground') row.appendChild(mk('✕',function(){ patchDrop(myNode,p.id); }));
     box.appendChild(row);
+    if(PSEL===p.id) box.appendChild(patchControls(p));
   });
   var n=st.filter(function(p){return p.kind!=='ground';}).length;
   var foot=document.createElement('div'); foot.className='mini';
   foot.style.marginTop='4px';
-  foot.textContent=n+' patch'+(n===1?'':'es')+' over the ground';
+  foot.textContent=n+' patch'+(n===1?'':'es')+' over the ground · tap one to handle it';
   box.appendChild(foot);
 }
+/* the selected patch's own controls, and only the ones it can answer to */
+function patchControls(p){
+  var w=document.createElement('div');
+  w.style.cssText='border:2px solid var(--aB);border-top:0;padding:6px;margin:-4px 0 6px';
+  var add=function(label,min,max,val,fn){
+    var r=document.createElement('div'); r.style.cssText='display:flex;gap:6px;align-items:center;margin-bottom:4px';
+    var l=document.createElement('label'); l.className='mini'; l.style.cssText='flex:0 0 52px'; l.textContent=label;
+    var i=document.createElement('input'); i.type='range'; i.min=min; i.max=max; i.value=val; i.style.flex='1';
+    var v=document.createElement('span'); v.className='mini'; v.style.cssText='flex:0 0 34px;text-align:right'; v.textContent=val;
+    i.addEventListener('input',function(){ v.textContent=i.value; });
+    i.addEventListener('change',function(){ fn(+i.value); });
+    r.appendChild(l); r.appendChild(i); r.appendChild(v); w.appendChild(r); return i;
+  };
+  var re=function(){ bakeNode(myNode, paintStack); };
+  if(p.kind==='element'||p.kind==='clip'){
+    p.place=p.place||{x:W/2,y:H/2,size:64,floor:2};
+    add('x',0,W-1,Math.round(p.place.x),function(v){ p.place.x=v; re(); });
+    add('y',0,H-1,Math.round(p.place.y),function(v){ p.place.y=v; re(); });
+    add('size',6,Math.max(W,H),Math.round(p.place.size),function(v){ p.place.size=v; re(); });
+    add('floor',1,4,p.place.floor||2,function(v){ p.place.floor=v; re(); });
+  }
+  if(p.kind==='element'){
+    p.repeat=p.repeat||{mode:'grid',n:1,gap:0,jitter:0,scale:0,seed:7};
+    var modes=document.createElement('div');
+    modes.style.cssText='display:flex;gap:4px;margin:6px 0';
+    ['grid','row','scatter'].forEach(function(m){
+      var b=document.createElement('button'); b.type='button'; b.textContent=m;
+      b.style.cssText='flex:1;min-height:28px;font:9px ui-monospace,monospace';
+      if(p.repeat.mode===m) b.classList.add('on');
+      b.onclick=function(){ p.repeat.mode=m; if(p.repeat.n<2)p.repeat.n=9; re(); };
+      modes.appendChild(b);
+    });
+    w.appendChild(modes);
+    add('repeat',1,144,p.repeat.n||1,function(v){ p.repeat.n=v; if(!p.repeat.gap) p.repeat.gap=Math.round((p.place.size||64)*1.05); re(); });
+    add('gap',4,120,p.repeat.gap||Math.round((p.place.size||64)*1.05),function(v){ p.repeat.gap=v; re(); });
+    add('jitter',0,60,p.repeat.jitter||0,function(v){ p.repeat.jitter=v; re(); });
+    add('vary',0,90,Math.round((p.repeat.scale||0)*100),function(v){ p.repeat.scale=v/100; re(); });
+  }
+  if(p.kind==='clip'){
+    add('frame',0,23,p.src.k||0,function(v){ p.src.k=v; re(); });
+  }
+  if(p.kind==='world'){
+    var m=document.createElement('div'); m.className='mini';
+    m.textContent=p.src.slug+' @ '+(+p.src.t).toFixed(1)+'s'
+      +(p.src.parts?(' · '+p.src.parts.length+' parts'):' · whole world');
+    w.appendChild(m);
+  }
+  return w;
+}
+
 /* the stack belongs to the frame you are standing on */
 (function(){ var _g=window.gotoNode;
   if(typeof gotoNode==='function'){ var orig=gotoNode;
