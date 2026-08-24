@@ -1,0 +1,524 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DJ — a WYGWYL halfworld instrument</title>
+<link rel="icon" href="dot.svg">
+<link rel="stylesheet" href="halfworld.css">
+<style>
+  /* the site chrome is column-flex (picture over line-bar); this page is an
+     instrument, not a film, so it goes picture-beside-controls instead. Every
+     rule below only rearranges the shared chrome — no new colours, no radius,
+     same type. */
+  #djmain{flex:1;min-height:0;display:flex;flex-direction:row}
+  #stagewrap{position:relative;flex:1;min-width:0;min-height:0;background:var(--paper2)}
+  #stage{position:absolute;inset:0;display:block}
+  #chip{position:absolute;top:10px;left:10px;font-size:10.5px;letter-spacing:.16em;color:var(--ink2);
+    background:var(--paper2);border:1px solid var(--rule);padding:.3em .7em;pointer-events:none}
+  #chip b{color:var(--ink)}
+
+  #panel{
+    flex:none;width:340px;max-width:44vw;overflow-y:auto;
+    border-left:1px solid var(--rule);background:var(--paper);
+  }
+  .grp{border-bottom:1px solid var(--rule)}
+  .grp>summary{
+    cursor:pointer;list-style:none;font-size:10.5px;font-weight:700;letter-spacing:.16em;
+    color:var(--ink2);background:var(--paper2);padding:.5em .8em;border-bottom:1px solid var(--rule);
+    display:flex;align-items:center;gap:.6em;
+  }
+  .grp>summary::before{content:"▸";color:var(--dim);width:1em}
+  .grp[open]>summary::before{content:"▾"}
+  .grp>summary::-webkit-details-marker{display:none}
+  .grp-body{padding:.6em .8em .9em;display:flex;flex-direction:column;gap:.5em}
+  .row{display:flex;align-items:center;gap:.6em}
+  .row label{flex:none;width:9.5ch;font-size:10px;letter-spacing:.08em;color:var(--dim)}
+  .row input[type=range]{flex:1;min-width:0;accent-color:var(--ink)}
+  .row input[type=number]{width:5ch}
+  .row .val{flex:none;width:3.6ch;text-align:right;font-size:10px;color:var(--ink2);font-variant-numeric:tabular-nums}
+  select,input[type=number],input[type=text],textarea{
+    font:inherit;font-size:11px;color:var(--ink);background:var(--paper2);
+    border:1px solid var(--rule);padding:.25em .4em;
+  }
+  select{flex:1;min-width:0}
+  .row.check label{width:auto;flex:1}
+  .subnote{font-size:10px;color:var(--dim);line-height:1.4;margin-top:-.1em}
+  .mini{display:flex;gap:.35em;flex-wrap:wrap}
+  .mini button{padding:.3em .6em;font-size:10px}
+
+  #cues{display:grid;grid-template-columns:repeat(4,1fr);gap:.4em}
+  #cues button{padding:.6em .2em;font-size:11px;position:relative}
+  #cues button.filled{border-color:var(--ink)}
+  #cues button.filled::after{content:"";position:absolute;top:4px;right:4px;width:5px;height:5px;background:var(--ink)}
+  #storeArm[aria-pressed="true"]{background:#b23b2e;border-color:#b23b2e;color:var(--paper)}
+
+  #exportBox{width:100%;height:11em;resize:vertical}
+  .modeParams{display:none;flex-direction:column;gap:.5em}
+  .modeParams.active{display:flex}
+
+  #transport{display:flex;align-items:center;gap:1ch;flex-wrap:wrap}
+  #transport .grow{flex:1;min-width:120px}
+  #tclock,#dclock{font-size:11px;letter-spacing:.08em;color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+  #transport .div{width:1px;align-self:stretch;background:var(--rule);margin:0 .4em}
+  #speed,#dspeed{width:5ch}
+
+  video{position:absolute;width:2px;height:2px;opacity:0;pointer-events:none;left:-9999px}
+
+  @media(max-width:820px){
+    #djmain{flex-direction:column}
+    #panel{width:auto;max-width:none;flex:none;max-height:46vh;border-left:0;border-top:1px solid var(--rule)}
+  }
+</style>
+
+<header>
+  <span class="brand"><span class="dot"></span>WYGWYL</span>
+  <span class="ttl">DJ · LIVE BLEND</span>
+  <span class="tagline">footage entering the dot law, driven by hand</span>
+  <span class="sp"></span>
+  <a class="btn" href="01-out-of-life.html">01 · FILM</a>
+  <a class="btn" href="index.html">SUITE</a>
+</header>
+
+<main id="djmain">
+  <div id="stagewrap">
+    <canvas id="stage"></canvas>
+    <div id="chip">A <b id="chipA">FOOTAGE</b> &nbsp;⇄&nbsp; B <b id="chipB">DRAWING</b> &nbsp;·&nbsp; <span id="chipMode">swap</span> &nbsp;·&nbsp; <span id="chipT">0%</span></div>
+  </div>
+
+  <aside id="panel">
+    <details class="grp" open>
+      <summary>INGEST · CHANNEL</summary>
+      <div class="grp-body">
+        <div class="row"><label>channel</label>
+          <select id="channel">
+            <option value="luma">luminance</option>
+            <option value="r">red</option>
+            <option value="g">green</option>
+            <option value="b">blue</option>
+            <option value="chroma">chroma key</option>
+          </select>
+        </div>
+        <div class="row"><label>hue</label><input type="range" id="chromaHue" min="0" max="360" value="165"><span class="val" id="chromaHueV"></span></div>
+        <div class="row"><label>tolerance</label><input type="range" id="chromaTol" min="5" max="180" value="55"><span class="val" id="chromaTolV"></span></div>
+        <p class="subnote">this clip is green-cyan streetlight; hue≈165° with a wide tolerance keys the haze and the window glow off, tight tolerance keys the skin/brick out instead.</p>
+      </div>
+    </details>
+
+    <details class="grp" open>
+      <summary>INGEST · LEVELS &amp; TONE</summary>
+      <div class="grp-body">
+        <div class="row"><label>black</label><input type="range" id="black" min="0" max="100" value="0"><span class="val" id="blackV"></span></div>
+        <div class="row"><label>white</label><input type="range" id="white" min="0" max="100" value="35"><span class="val" id="whiteV"></span></div>
+        <div class="row"><label>tone</label>
+          <select id="tone">
+            <option value="linear">linear</option>
+            <option value="gamma">gamma</option>
+            <option value="posterise">posterise</option>
+            <option value="solarise">solarise</option>
+            <option value="invert" selected>invert</option>
+          </select>
+        </div>
+        <div class="row"><label>gamma</label><input type="range" id="gamma" min="20" max="400" value="100"><span class="val" id="gammaV"></span></div>
+        <div class="row"><label>posterise</label><input type="range" id="posterise" min="2" max="8" value="4"><span class="val" id="posteriseV"></span></div>
+        <div class="row"><label>solarise</label><input type="range" id="solarise" min="0" max="100" value="50"><span class="val" id="solariseV"></span></div>
+      </div>
+    </details>
+
+    <details class="grp">
+      <summary>INGEST · EDGE &amp; DITHER</summary>
+      <div class="grp-body">
+        <div class="row"><label>edge mix</label><input type="range" id="edge" min="0" max="100" value="0"><span class="val" id="edgeV"></span></div>
+        <div class="row"><label>dither</label>
+          <select id="dither">
+            <option value="none">none</option>
+            <option value="bayer" selected>bayer</option>
+            <option value="diffuse">error diffuse</option>
+          </select>
+        </div>
+      </div>
+    </details>
+
+    <details class="grp">
+      <summary>INGEST · KALEIDO &amp; WARP</summary>
+      <div class="grp-body">
+        <div class="row"><label>kaleido</label>
+          <select id="kaleido">
+            <option value="none" selected>none</option>
+            <option value="x">mirror x</option>
+            <option value="y">mirror y</option>
+            <option value="quad">quad</option>
+            <option value="radial">radial</option>
+          </select>
+        </div>
+        <div class="row"><label>slices</label><input type="range" id="radialSlices" min="2" max="16" value="6"><span class="val" id="radialSlicesV"></span></div>
+        <div class="row"><label>warp</label><input type="range" id="warp" min="0" max="100" value="0"><span class="val" id="warpV"></span></div>
+        <div class="row"><label>warp scale</label><input type="range" id="warpScale" min="1" max="40" value="12"><span class="val" id="warpScaleV"></span></div>
+      </div>
+    </details>
+
+    <details class="grp">
+      <summary>INGEST · FRAME</summary>
+      <div class="grp-body">
+        <div class="row"><label>fit</label>
+          <select id="fit"><option value="cover" selected>cover</option><option value="contain">contain</option></select>
+        </div>
+        <div class="row"><label>zoom</label><input type="range" id="zoom" min="50" max="300" value="100"><span class="val" id="zoomV"></span></div>
+        <div class="row"><label>pan x</label><input type="range" id="panX" min="0" max="100" value="50"><span class="val" id="panXV"></span></div>
+        <div class="row"><label>pan y</label><input type="range" id="panY" min="0" max="100" value="50"><span class="val" id="panYV"></span></div>
+      </div>
+    </details>
+
+    <details class="grp" open>
+      <summary>DRAWING · SOURCE B — 01 OUT OF LIFE</summary>
+      <div class="grp-body">
+        <div class="row"><button id="dplay" style="width:4ch">▶</button>
+          <input type="range" id="dscrub" min="0" max="1000" value="0" style="flex:1">
+          <span id="dclock">00:00 / 00:00</span>
+        </div>
+        <div class="row"><label>speed</label><input type="number" id="dspeed" min="0" max="4" step="0.1" value="1"></div>
+        <div class="mini" id="movements"></div>
+      </div>
+    </details>
+
+    <details class="grp" open>
+      <summary>BLEND</summary>
+      <div class="grp-body">
+        <div class="row"><label>A ⇄ B</label><input type="range" id="crossfade" min="0" max="100" value="0"><span class="val" id="crossfadeV"></span></div>
+        <div class="mini">
+          <button id="toA">FOOTAGE</button><button id="toMid">50/50</button><button id="toB">DRAWING</button>
+        </div>
+        <div class="row"><label>mode</label>
+          <select id="blendMode">
+            <option value="swap">swap</option>
+            <option value="wipe">wipe</option>
+            <option value="byLevel">byLevel</option>
+            <option value="noiseSwap">noiseSwap</option>
+            <option value="figureLock">figureLock</option>
+          </select>
+        </div>
+        <div class="modeParams" data-for="wipe">
+          <div class="row"><label>angle</label><input type="range" id="wipeAngle" min="0" max="360" value="0"><span class="val" id="wipeAngleV"></span></div>
+          <div class="row"><label>band</label><input type="range" id="wipeBand" min="2" max="60" value="22"><span class="val" id="wipeBandV"></span></div>
+        </div>
+        <div class="modeParams" data-for="byLevel">
+          <div class="row check"><label for="byLevelReverse">reverse (light first)</label><input type="checkbox" id="byLevelReverse"></div>
+        </div>
+        <div class="modeParams" data-for="noiseSwap">
+          <div class="row"><label>tear</label><input type="range" id="noiseS" min="0" max="100" value="40"><span class="val" id="noiseSV"></span></div>
+          <div class="row"><label>scale</label><input type="range" id="noiseScale" min="1" max="60" value="18"><span class="val" id="noiseScaleV"></span></div>
+          <div class="row"><label>seed</label><input type="number" id="noiseSeed" min="0" max="999" value="0"></div>
+        </div>
+        <div class="modeParams" data-for="figureLock">
+          <div class="row"><label>threshold</label><input type="range" id="figThresh" min="5" max="70" value="35"><span class="val" id="figThreshV"></span></div>
+          <p class="subnote">the room dissolves A→B on the crossfader; wherever the drawing already has ink above threshold, that dot is always the drawing — the figure is locked in, not scheduled.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="grp" open>
+      <summary>CUES</summary>
+      <div class="grp-body">
+        <div class="row"><button id="storeArm" aria-pressed="false" style="flex:1">STORE ⏺</button>
+          <span class="subnote" id="cueStatus" style="margin:0">arm, then pick a slot</span></div>
+        <div id="cues"></div>
+      </div>
+    </details>
+
+    <details class="grp">
+      <summary>EXPORT</summary>
+      <div class="grp-body">
+        <div class="mini"><button id="doExport">DUMP CURRENT SETTINGS</button><button id="doCopy">COPY</button></div>
+        <textarea id="exportBox" readonly spellcheck="false" placeholder="click DUMP CURRENT SETTINGS — the JSON lands here, ready to paste into a film module"></textarea>
+      </div>
+    </details>
+  </aside>
+</main>
+
+<footer id="transport">
+  <button id="play" aria-label="play/pause" style="width:4ch">▶</button>
+  <input id="scrub" type="range" min="0" max="1000" step="1" value="0" class="grow">
+  <span id="tclock">00:00 / 00:00</span>
+  <span class="div"></span>
+  <label style="font-size:10px;letter-spacing:.08em;color:var(--dim)">SPEED</label>
+  <input id="speed" type="number" min="0.1" max="4" step="0.1" value="1">
+  <button id="loop" aria-pressed="false">LOOP</button>
+  <button id="mute" aria-pressed="true">MUTE</button>
+  <span class="div"></span>
+  <span style="font-size:10px;letter-spacing:.08em;color:var(--dim)">FOOTAGE — 01 OUT OF LIFE (LEAD)</span>
+</footer>
+
+<video id="foot" preload="auto" playsinline muted loop></video>
+
+<script type="module">
+import { FW, FH, makePost, makeRuntime, TAU } from "./halfworld.mjs";
+import world from "./worlds/01-out-of-life.mjs";
+import { makeIngest } from "./ingest.mjs";
+import { swap, wipe, byLevel, noiseSwap, figureLock } from "./blend.mjs";
+
+const $ = (id) => document.getElementById(id);
+const video = $("foot");
+const canvas = $("stage");
+const post = makePost(canvas, world.accent || "#5aa7ff");
+const ingest = makeIngest(video);
+const R = makeRuntime(world);
+
+const fieldA = new Float32Array(FW * FH);   // footage, rewritten every frame
+
+/* the dev server advertises accept-ranges but does not actually honour a
+   Range request, which makes a plain <video src> load abort under Chromium
+   (it issues a ranged GET the moment it can). Fetching the file whole and
+   handing the video element a blob: URL sidesteps ranged requests entirely —
+   this is a dj.html concern only, not a fix to the shared server. */
+async function loadFootage() {
+  const res = await fetch("footage/01-out-of-life-lead.mp4");
+  const blob = await res.blob();
+  video.src = URL.createObjectURL(blob);
+}
+const footageReady = loadFootage();
+
+/* ---------------------------------------------------------------- layout */
+function fit() {
+  const w = $("stagewrap");
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  post.fit(w.clientWidth, w.clientHeight, dpr);
+}
+window.addEventListener("resize", fit);
+
+/* ------------------------------------------------------------ every fader
+   A single source of truth: readIngestOpts() is called by the render loop
+   AND by state capture (cues, export), so what you see is always exactly
+   what a recalled cue or an exported blob will reproduce. */
+function readIngestOpts() {
+  return {
+    channel: $("channel").value,
+    chromaHue: +$("chromaHue").value,
+    chromaTol: +$("chromaTol").value,
+    black: +$("black").value / 100,
+    white: +$("white").value / 100,
+    tone: $("tone").value,
+    gamma: +$("gamma").value / 100,
+    posterise: +$("posterise").value,
+    solarise: +$("solarise").value / 100,
+    edge: +$("edge").value / 100,
+    dither: $("dither").value,
+    kaleido: $("kaleido").value,
+    radialSlices: +$("radialSlices").value,
+    warp: +$("warp").value / 100,
+    warpScale: +$("warpScale").value / 500,
+    fit: $("fit").value,
+    zoom: +$("zoom").value / 100,
+    panX: +$("panX").value / 100,
+    panY: +$("panY").value / 100,
+  };
+}
+function writeIngestOpts(o) {
+  $("channel").value = o.channel; $("chromaHue").value = o.chromaHue; $("chromaTol").value = o.chromaTol;
+  $("black").value = Math.round(o.black * 100); $("white").value = Math.round(o.white * 100);
+  $("tone").value = o.tone; $("gamma").value = Math.round(o.gamma * 100);
+  $("posterise").value = o.posterise; $("solarise").value = Math.round(o.solarise * 100);
+  $("edge").value = Math.round(o.edge * 100); $("dither").value = o.dither;
+  $("kaleido").value = o.kaleido; $("radialSlices").value = o.radialSlices;
+  $("warp").value = Math.round(o.warp * 100); $("warpScale").value = Math.round(o.warpScale * 500);
+  $("fit").value = o.fit; $("zoom").value = Math.round(o.zoom * 100);
+  $("panX").value = Math.round(o.panX * 100); $("panY").value = Math.round(o.panY * 100);
+  refreshReadouts();
+}
+
+/* ------------------------------------------------------------------ blend */
+function readBlend() {
+  return {
+    mode: $("blendMode").value,
+    crossfade: +$("crossfade").value / 100,
+    wipeAngle: +$("wipeAngle").value,
+    wipeBand: +$("wipeBand").value / 100,
+    byLevelReverse: $("byLevelReverse").checked,
+    noiseS: +$("noiseS").value / 100,
+    noiseScale: +$("noiseScale").value / 1000,
+    noiseSeed: +$("noiseSeed").value,
+    figThresh: +$("figThresh").value / 10,
+  };
+}
+function writeBlend(b) {
+  $("blendMode").value = b.mode; $("crossfade").value = Math.round(b.crossfade * 100);
+  $("wipeAngle").value = b.wipeAngle; $("wipeBand").value = Math.round(b.wipeBand * 100);
+  $("byLevelReverse").checked = !!b.byLevelReverse;
+  $("noiseS").value = Math.round(b.noiseS * 100); $("noiseScale").value = Math.round(b.noiseScale * 1000);
+  $("noiseSeed").value = b.noiseSeed; $("figThresh").value = Math.round(b.figThresh * 10);
+  showModeParams(); refreshReadouts();
+}
+function showModeParams() {
+  const m = $("blendMode").value;
+  document.querySelectorAll(".modeParams").forEach(el => el.classList.toggle("active", el.dataset.for === m));
+}
+function applyBlend(a, b, bl) {
+  /* +0.06 headroom so every mode reaches a TRUE pure-A / pure-B at the
+     crossfader's extremes, even the modes whose per-cell key ranges slightly
+     overshoot 0..1 (byLevel, noiseSwap) — see blend.mjs. */
+  const t = Math.min(1, bl.crossfade * 1.06);
+  switch (bl.mode) {
+    case "wipe": return wipe(a, b, t, bl.wipeAngle * TAU / 360, { band: bl.wipeBand });
+    case "byLevel": return byLevel(a, b, t, bl.byLevelReverse);
+    case "noiseSwap": return noiseSwap(a, b, t, bl.noiseS, { scale: bl.noiseScale, seed: bl.noiseSeed });
+    case "figureLock": return figureLock(a, b, t, bl.figThresh);
+    case "swap": default: return swap(a, b, t);
+  }
+}
+
+/* -------------------------------------------------------------- transport
+   FOOTAGE plays natively; the canvas just samples whatever frame is current.
+   DRAWING has no player of its own here, so its clock is kept by hand. */
+let dT = 0, dPlaying = false, scrubbingD = false, scrubbingF = false;
+const fmt = (s) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+
+$("play").onclick = () => { video.paused ? video.play() : video.pause(); };
+video.addEventListener("play", () => $("play").textContent = "Ⅱ");
+video.addEventListener("pause", () => $("play").textContent = "▶");
+$("scrub").addEventListener("input", (e) => { scrubbingF = true; video.currentTime = +e.target.value / 1000 * (video.duration || 88.38); });
+$("scrub").addEventListener("change", () => { scrubbingF = false; });
+$("speed").addEventListener("input", () => { video.playbackRate = Math.max(0.1, +$("speed").value || 1); });
+$("loop").onclick = () => { video.loop = !video.loop; $("loop").setAttribute("aria-pressed", String(video.loop)); };
+$("mute").onclick = () => { video.muted = !video.muted; $("mute").setAttribute("aria-pressed", String(video.muted)); };
+
+$("dplay").onclick = () => { dPlaying = !dPlaying; $("dplay").textContent = dPlaying ? "Ⅱ" : "▶"; };
+$("dscrub").addEventListener("input", (e) => { scrubbingD = true; dT = +e.target.value / 1000 * R.total; });
+$("dscrub").addEventListener("change", () => { scrubbingD = false; });
+
+const mv = $("movements");
+R.movements.forEach((m, i) => {
+  if (i === 0) return;   // skip the title card
+  const b = document.createElement("button");
+  b.textContent = m.label; b.title = m.line;
+  b.onclick = () => { dT = R.starts[i]; };
+  mv.appendChild(b);
+});
+
+/* --------------------------------------------------------------- readouts */
+function refreshReadouts() {
+  $("chromaHueV").textContent = $("chromaHue").value + "°";
+  $("chromaTolV").textContent = "±" + $("chromaTol").value;
+  $("blackV").textContent = $("black").value + "%";
+  $("whiteV").textContent = $("white").value + "%";
+  $("gammaV").textContent = (+$("gamma").value / 100).toFixed(2);
+  $("posteriseV").textContent = $("posterise").value;
+  $("solariseV").textContent = $("solarise").value + "%";
+  $("edgeV").textContent = $("edge").value + "%";
+  $("radialSlicesV").textContent = $("radialSlices").value;
+  $("warpV").textContent = $("warp").value + "%";
+  $("warpScaleV").textContent = (+$("warpScale").value / 500).toFixed(3);
+  $("zoomV").textContent = (+$("zoom").value / 100).toFixed(2) + "×";
+  $("panXV").textContent = $("panX").value + "%";
+  $("panYV").textContent = $("panY").value + "%";
+  $("crossfadeV").textContent = $("crossfade").value + "%";
+  $("wipeAngleV").textContent = $("wipeAngle").value + "°";
+  $("wipeBandV").textContent = $("wipeBand").value + "%";
+  $("noiseSV").textContent = $("noiseS").value + "%";
+  $("noiseScaleV").textContent = (+$("noiseScale").value / 1000).toFixed(3);
+  $("figThreshV").textContent = (+$("figThresh").value / 10).toFixed(1);
+  $("chipMode").textContent = $("blendMode").value;
+  $("chipT").textContent = $("crossfade").value + "%";
+}
+document.querySelectorAll('#panel input,#panel select').forEach(el => {
+  el.addEventListener("input", refreshReadouts);
+});
+$("blendMode").addEventListener("change", showModeParams);
+showModeParams(); refreshReadouts();
+
+/* -------------------------------------------------------------------- cues
+   STORE arms a single write: press STORE, then click a slot to save the
+   complete current state into it. An unarmed click on a filled slot recalls
+   it instantly. A cue is a picture, not a knob position — every fader, both
+   transports' times, and the blend all travel together. */
+const cues = new Array(8).fill(null);
+let armed = false;
+$("storeArm").onclick = () => {
+  armed = !armed;
+  $("storeArm").setAttribute("aria-pressed", String(armed));
+  $("cueStatus").textContent = armed ? "pick a slot to store into…" : "arm, then pick a slot";
+};
+function getState() {
+  return {
+    ingest: readIngestOpts(),
+    blend: readBlend(),
+    footage: { t: video.currentTime, playing: !video.paused, speed: video.playbackRate, loop: video.loop, muted: video.muted },
+    drawing: { t: dT, playing: dPlaying, speed: +$("dspeed").value },
+  };
+}
+function setState(s) {
+  if (!s) return;
+  writeIngestOpts(s.ingest); writeBlend(s.blend);
+  if (s.footage) {
+    video.currentTime = s.footage.t; video.playbackRate = s.footage.speed || 1;
+    video.loop = !!s.footage.loop; $("loop").setAttribute("aria-pressed", String(video.loop));
+    video.muted = s.footage.muted !== false; $("mute").setAttribute("aria-pressed", String(video.muted));
+    $("speed").value = s.footage.speed || 1;
+    if (s.footage.playing) video.play().catch(() => {}); else video.pause();
+  }
+  if (s.drawing) {
+    dT = s.drawing.t || 0; dPlaying = !!s.drawing.playing;
+    $("dplay").textContent = dPlaying ? "Ⅱ" : "▶";
+    $("dspeed").value = s.drawing.speed || 1;
+  }
+}
+const cueGrid = $("cues");
+for (let i = 0; i < 8; i++) {
+  const b = document.createElement("button");
+  b.textContent = String(i + 1);
+  b.onclick = () => {
+    if (armed) {
+      cues[i] = getState(); b.classList.add("filled"); armed = false;
+      $("storeArm").setAttribute("aria-pressed", "false");
+      $("cueStatus").textContent = `stored cue ${i + 1}`;
+    } else if (cues[i]) {
+      setState(cues[i]);
+      $("cueStatus").textContent = `recalled cue ${i + 1}`;
+    }
+  };
+  cueGrid.appendChild(b);
+}
+
+/* ------------------------------------------------------------------ B A/B
+   quick throws to the crossfader's extremes and its centre, for judging a
+   treatment against the drawing without hand-riding the fader. */
+$("toA").onclick = () => { $("crossfade").value = 0; refreshReadouts(); };
+$("toMid").onclick = () => { $("crossfade").value = 50; refreshReadouts(); };
+$("toB").onclick = () => { $("crossfade").value = 100; refreshReadouts(); };
+
+/* ---------------------------------------------------------------- export */
+$("doExport").onclick = () => { $("exportBox").value = JSON.stringify(getState(), null, 2); $("exportBox").select(); };
+$("doCopy").onclick = async () => {
+  if (!$("exportBox").value) $("doExport").onclick();
+  try { await navigator.clipboard.writeText($("exportBox").value); }
+  catch { $("exportBox").select(); try { document.execCommand("copy"); } catch {} }
+};
+
+/* -------------------------------------------------------------- the clock
+   One rAF loop drives both the drawing's own hand-kept clock and the redraw;
+   the footage needs no clock of its own, its currentTime IS the clock. */
+let last = performance.now();
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  if (dPlaying) dT = (dT + dt * (+$("dspeed").value || 1)) % R.total;
+
+  ingest.sample(fieldA, readIngestOpts());
+  const bufB = R.renderField(dT);
+  post.draw(applyBlend(fieldA, bufB, readBlend()));
+
+  if (!scrubbingF) $("scrub").value = Math.round((video.currentTime / (video.duration || 88.38)) * 1000);
+  $("tclock").textContent = `${fmt(video.currentTime)} / ${fmt(video.duration || 88.38)}`;
+  if (!scrubbingD) $("dscrub").value = Math.round(dT / R.total * 1000);
+  $("dclock").textContent = `${fmt(dT)} / ${fmt(R.total)}`;
+
+  requestAnimationFrame(frame);
+}
+
+fit();
+video.addEventListener("loadedmetadata", fit, { once: true });
+/* headless QA hook, same shape as the film pages' window.__hw */
+window.__dj = {
+  video, runtime: R, ingest, fieldA,
+  readIngestOpts, writeIngestOpts, readBlend, writeBlend, applyBlend,
+  getState, setState, cues,
+  seekFootage(t) { video.currentTime = t; },
+  seekDrawing(t) { dT = t; },
+};
+requestAnimationFrame(frame);
+</script>

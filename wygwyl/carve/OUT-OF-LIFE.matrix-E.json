@@ -1,0 +1,82 @@
+{
+  "Scene_Blueprint": {
+    "MAN": {
+      "Previous_Scene": {
+        "who": "An unlocated body; the road is empty for the first 4.4s and he is not in it.",
+        "what": "Enters an already-running wide shot and walks directly away from camera until fog takes his detail.",
+        "when": "01:00:04:09 to 01:00:11:14, the head of the source.",
+        "where": "WET ROAD — fog, receding teal streetlamps, standing water, a magenta source at right.",
+        "why": "Observable pressure only: he moves away from the camera and toward lower visibility, and nothing enters frame to push him. The motion is unopposed and self-initiated.",
+        "how": "Lateral, unhurried, dead-centre of a static frame, losing scale for seven seconds until only mass reads."
+      },
+      "Current_Scene": {
+        "who": "An enclosed body, seated and covered, in four interiors that share one window wall.",
+        "what": "Stands almost motionless at a green window (10.3s), raises an arm to a blue window while vapour fills the room, appears from behind on a fire escape in steam, then crosses the smoke room right to left, sinks in two stages, and comes to rest seated with both hands at his face.",
+        "when": "01:00:19:12 to 01:00:54:08, the middle third.",
+        "where": "BEDROOM, SMOKE ROOM, BRICK ALLEY, CRT ROOM — cut together as if adjacent, three joins hidden in dissolves.",
+        "why": "Observable pressure: the vapour he stands in thickens until it erases him; the only inserted material is a burning street seen through a monitor. He lowers his own height twice with nothing touching him.",
+        "how": "Shot length collapses from 10.3s to 4.7s across this passage. He is backlit in every frame and never resolves."
+      },
+      "Update_Scene": {
+        "who": "An unsupported body, then for six seconds an identified face, then absence.",
+        "what": "Steps off a metal platform out of frame top, tumbles away down a canted fire escape, falls with his back to camera through a radial tunnel of city light for 11.4s, then the camera reverses beneath him and he falls toward it, arms wide, until his face resolves and he passes the lens.",
+        "when": "01:00:54:08 to 01:01:28:09, the last third.",
+        "where": "LEDGE, then FALL SPACE — a volume with no floor, lit only by streaking city windows.",
+        "why": "Observable pressure: a threshold is crossed at 01:00:57:12 and the kinetic vector converts from lateral to vertical and never reverts. Nothing pursues him and nothing catches him.",
+        "how": "One threshold crossing, one camera reversal at 01:01:14:07, one face at 01:01:22:00, then black with drifting smoke and a held title."
+      }
+    },
+    "CAMERA": {
+      "Previous_Scene": {
+        "who": "A static observer at street level, locked off.",
+        "what": "Holds one axis for the first 11.6s across a cut, letting the subject leave under its own power.",
+        "when": "01:00:00:00 to 01:00:11:14.",
+        "where": "WET ROAD, low, on the road's own centre line.",
+        "why": "It does not reframe when the body enters or when the body recedes, so it is not tracking him; it is holding a place.",
+        "how": "No pan, no tilt, no push. Two shots, same axis, one cut."
+      },
+      "Current_Scene": {
+        "who": "A static observer indoors, still refusing to move.",
+        "what": "Holds four interiors from a fixed position each, at medium to medium-wide, while the subject traverses and descends within frame.",
+        "when": "01:00:19:12 to 01:00:54:08.",
+        "where": "BEDROOM, SMOKE ROOM, BRICK ALLEY, CRT ROOM.",
+        "why": "It never adjusts to keep him well-placed, so his sinking out of the frame's centre is allowed to happen.",
+        "how": "Locked. The only motion in these 35 seconds belongs to vapour and to him."
+      },
+      "Update_Scene": {
+        "who": "A camera that finally moves, and moves once, decisively.",
+        "what": "Goes to a low angle at the ledge, cants ~30 degrees over the fire escape, locks behind the falling body for 11.4s, then reverses to directly beneath it and faces it.",
+        "when": "01:00:54:08 to 01:01:22:07.",
+        "where": "LEDGE and FALL SPACE.",
+        "why": "The reversal at 01:01:14:07 is the only shot in the piece where the subject's front is toward the lens, and it is the only shot where a face resolves. The two facts are the same fact.",
+        "how": "Angle, then cant, then lock, then reverse. Four decisions in twenty-eight seconds after seventy-four seconds of none."
+      }
+    },
+    "SMOKE": {
+      "Previous_Scene": {
+        "who": "Atmospheric haze, diffuse, ambient.",
+        "what": "Fills the road, softens the lamps, and takes the walking body's detail as he recedes.",
+        "when": "01:00:00:00 to 01:00:11:14.",
+        "where": "WET ROAD.",
+        "why": "It is the medium the light travels in; it is what makes the lamps into volumes rather than points.",
+        "how": "Even, low-contrast, no source visible."
+      },
+      "Current_Scene": {
+        "who": "A source-driven volume with a direction and a rate.",
+        "what": "Builds from frame right in the blue room until it erases the standing body; pours across the lower half of the brick alley; returns thick enough to bloom the window when he sits.",
+        "when": "01:00:29:19 to 01:00:54:08.",
+        "where": "SMOKE ROOM, BRICK ALLEY.",
+        "why": "It arrives after he raises his arm and increases while he is standing, and it is at its densest at the moment he sits down.",
+        "how": "Directional, accelerating, opaque enough to remove a silhouette."
+      },
+      "Update_Scene": {
+        "who": "The ground itself, and then the last thing in the frame.",
+        "what": "Boils under the ledge so the platform appears to stand on cloud, breaks into blue during the fall, and returns as slow pale drift over black after the body has passed the lens.",
+        "when": "01:00:54:08 to 01:01:28:09.",
+        "where": "LEDGE, FALL SPACE.",
+        "why": "It is the only element present in every location in the piece, and it is the only element still present after the body is gone.",
+        "how": "White and boiling, then streaked, then still."
+      }
+    }
+  }
+}

@@ -1,0 +1,159 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>WYGWYL — fourteen halfworlds</title>
+<link rel="icon" href="dot.svg">
+<link rel="stylesheet" href="halfworld.css">
+<style>
+  body{overflow:auto;display:block}
+  .lede{
+    padding:clamp(16px,4vw,44px) clamp(12px,4vw,44px);
+    border-bottom:1px solid var(--rule);max-width:92ch;
+  }
+  .lede h1{font-size:clamp(19px,3.6vw,30px);letter-spacing:.06em;font-weight:900;line-height:1.15}
+  .lede h1 small{display:block;font-size:11px;letter-spacing:.24em;color:var(--dim);font-weight:400;margin-bottom:.7em}
+  .lede p{margin-top:1em;color:var(--ink2);max-width:74ch}
+  .lede p b{color:var(--ink)}
+  .lede .meta{margin-top:1.4em;font-size:11px;letter-spacing:.1em;color:var(--dim)}
+  .lede a{border-bottom:1px solid var(--rule)}
+  .lede a:hover{border-bottom-color:var(--ink)}
+
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    border-top:1px solid var(--rule);border-left:1px solid var(--rule);
+  }
+  .card{
+    border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    display:flex;flex-direction:column;background:var(--paper);
+  }
+  .card:hover{background:var(--paper2)}
+  .card canvas{display:block;width:100%;aspect-ratio:4/3;background:var(--paper2)}
+  .card .meta{padding:.6em .8em;border-top:1px solid var(--rule)}
+  .card .n{font-size:10.5px;letter-spacing:.2em;color:var(--dim)}
+  .card .t{font-weight:700;letter-spacing:.03em;margin-top:.15em;line-height:1.2}
+  .card .g{font-size:11px;color:var(--ink2);margin-top:.3em;line-height:1.35}
+  .card .mv{font-size:10px;letter-spacing:.12em;color:var(--dim);margin-top:.5em}
+  footer.note{
+    padding:clamp(16px,4vw,40px);color:var(--ink2);max-width:82ch;
+    border-top:0;display:block;
+  }
+  footer.note h2{font-size:11px;letter-spacing:.2em;color:var(--dim);margin-bottom:.8em}
+  footer.note p{margin-bottom:.9em}
+  footer.note code{background:var(--paper2);border:1px solid var(--rule);padding:.05em .4em}
+</style>
+
+<div class="lede">
+  <h1><small>WHERE YOU GO WHEN YOU LEAVE · PART 2 OF 3: FUTURE</small>
+  Fourteen poems, fourteen halfworlds.</h1>
+  <p>The <a href="https://hartswf0.github.io/prompt-language/WYGWYL-BK/OP-51/wygwyl-site/wygwyl-suite-player.html">beflix
+  suite</a> plays the film back: 128×96, eight shades, a recorded command stream and one mp3.
+  This <b>remakes each poem as its own world</b> under the laws of
+  <a href="../index.html">I REMEMBER BEING A BUTTERFLY</a> — eight ink levels and a single
+  halftone pass, every movement a pure function of normalised time, every dissolve a per-dot
+  allegiance swap rather than a cross-fade, and every sound synthesised at load.</p>
+  <p>Nothing here is a recording. There is no video file, no audio file, no sprite sheet and no
+  build step. Each film is <b>a few hundred lines of arithmetic</b> that resolve to a picture
+  eight times a second, which is why you can seek anywhere in one instantly and why frame 400
+  does not need frame 399 to have happened.</p>
+  <p style="margin-top:1.6em;display:flex;gap:.8em;flex-wrap:wrap;align-items:center">
+    <a class="btn" href="suite.html" style="display:inline-block;padding:.7em 1.4em;font-size:12px">▶&nbsp;&nbsp;PLAY THE WHOLE SUITE</a>
+    <a class="btn" href="titles.html" style="display:inline-block;padding:.7em 1.1em;font-size:12px">TITLES</a>
+    <a class="btn" href="dj.html" style="display:inline-block;padding:.7em 1.1em;font-size:12px">DJ</a>
+    <a class="btn" href="../MARKOV_POET_ARCHIVE-FLY/cut/out/op15/index.html" style="display:inline-block;padding:.7em 1.1em;font-size:12px">OPERATOR&nbsp;15</a>
+    <span style="font-size:11px;color:var(--dim)">one clock, fourteen films · three Whitney title options · the footage instrument · the editor</span>
+  </p>
+  <p><b>OPERATOR 15</b> is where these come apart. It runs at the field the worlds are
+  actually drawn on — 192×144, not the suite player's 128×96 — so a part arrives the size it
+  was authored rather than the size a downsample left it. Tap a poem on its empty frame and the
+  world <i>is</i> the frame; then pick the windows out of a city, take them away, widen the
+  selection to the whole waterfront, or drop one of 2,033 cut elements from the filmed archive
+  in beside them. Frames branch, journal to the device and export.</p>
+  <p class="meta" id="totals">reading the suite…</p>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<footer class="note">
+  <h2>THE LAWS</h2>
+  <p><b>The dot law.</b> Everything is drawn in flat quantised tones into a 192×144 ink field
+  and one ordered-halftone pass runs over the whole field at the end, so a body and a wall are
+  quantised by the same lattice. There is no alpha, which means a dissolve <i>cannot</i> be a
+  cross-fade — it has to be a per-dot allegiance swap on a Bayer schedule, and that reads as one
+  substance replacing another rather than two briefly coexisting. Poem 01 is about a haze
+  claiming a room and poem 14 is about everything learning to be weather. The constraint and the
+  content agree.</p>
+  <p><b>Pure time.</b> Every movement is <code>draw(u, F)</code> — a function of normalised time
+  and nothing else. No wall clock, no accumulated state, no reading the previous frame. Motion
+  blur is therefore not a trail that was stored; it is the same pure function sampled two more
+  times, a little way into its own past, and drawn lighter.</p>
+  <p><b>Sound no smoother than the picture.</b> The bed is three detuned partials whose root
+  steps with the movements. Foley is a struck body: a few decaying partials for the material, a
+  burst of shaped noise for the contact, and no tail longer than the room it rings into — a long
+  reverb tail is the audio equivalent of a gradient, and this world does not have those.
+  Press <b>SOUND</b> in any film.</p>
+  <h2>KEYS</h2>
+  <p><code>space</code> play · <code>←</code> <code>→</code> movement ·
+  <code>F</code> cinema · <code>S</code> sound · double-click the picture for cinema.</p>
+</footer>
+
+<script type="module">
+import { drawPreview } from "./halfworld.mjs";
+
+const SLUGS = [
+  "01-out-of-life", "02-flashing-lights", "03-how-to-break-off-an-engagement",
+  "04-nevermore", "05-bloodlines", "06-resurrecting-atlantis", "07-dj-turn-me-up",
+  "08-newly-single", "09-yet-heard", "10-magic-ride", "11-new-day", "12-reunion",
+  "13-how-to-win-my-heart", "14-hot-minute",
+];
+
+const grid = document.getElementById("grid");
+const live = [];
+let movements = 0, seconds = 0, made = 0;
+
+for (const slug of SLUGS) {
+  let world;
+  try { world = (await import(`./worlds/${slug}.mjs`)).default; }
+  catch (e) { console.warn(slug + " not built yet", e); continue; }
+  made++;
+  const a = document.createElement("a");
+  a.className = "card";
+  a.href = slug + ".html";
+  a.innerHTML = `<canvas width="288" height="216"></canvas>
+    <div class="meta">
+      <div class="n">${world.n}</div>
+      <div class="t">${world.title}</div>
+      <div class="g">${world.tagline || ""}</div>
+      <div class="mv"></div>
+    </div>`;
+  grid.appendChild(a);
+  const cv = a.querySelector("canvas");
+  /* Each card runs the real film, not a thumbnail of one. They are staggered
+     across the suite's running time so the page is never fourteen title cards. */
+  const rt = drawPreview(world, cv, 0);
+  movements += rt.movements.length - 1;
+  seconds += rt.total;
+  a.querySelector(".mv").textContent =
+    `${rt.movements.length - 1} MOVEMENTS · ${Math.round(rt.total)}s`;
+  live.push({ cv, world, rt, off: rt.total * (live.length / SLUGS.length + 0.08) });
+}
+
+document.getElementById("totals").textContent =
+  `${made} FILMS · ${movements} MOVEMENTS · ${Math.round(seconds / 60)} MIN · ` +
+  `EVERY IMAGE COMPUTED, NOTHING RECORDED`;
+
+/* One clock for the whole page. Cards outside the viewport are not drawn —
+   fourteen live films is a lot of arithmetic to spend on something nobody
+   is looking at. */
+const seen = new Set();
+const io = new IntersectionObserver((es) => {
+  for (const e of es) e.isIntersecting ? seen.add(e.target) : seen.delete(e.target);
+}, { rootMargin: "120px" });
+live.forEach(l => io.observe(l.cv));
+
+let t0 = performance.now();
+(function tick(now) {
+  const t = (now - t0) / 1000;
+  for (const l of live) if (seen.has(l.cv)) drawPreview(l.world, l.cv, t * 0.85 + l.off);
+  requestAnimationFrame(tick);
+})(t0);
+</script>

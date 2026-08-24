@@ -1,0 +1,299 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>01b-out-of-life-blend — a WYGWYL halfworld</title>
+<link rel="icon" href="dot.svg">
+<link rel="stylesheet" href="halfworld.css">
+<script type="module">
+/* ============================================================================
+   01b-out-of-life-blend.html — A HAND-WRITTEN SHELL, NOT A GENERATED ONE.
+
+   Every other film in the suite gets its shell from build-shells.mjs, which
+   writes nothing but a `mount(world)` call — the right choice when a world
+   module is a pure function of u with no I/O. This world is different: it
+   declares a `footage` export (see the bottom of
+   worlds/01b-out-of-life-blend.mjs) asking for real video pixels AND real
+   video audio, and pure functions can't fetch, decode, seek or play a
+   <video>. Something has to own the element and drive the composite before
+   it reaches makePost — that something is this file. It is deliberately NOT
+   folded into build-shells.mjs: every other shell must stay a one-liner
+   generated from nothing but a file name, and teaching the generator about a
+   `footage` export would make it respond differently to different modules,
+   which is the one thing a generator here is not supposed to do.
+   build-shells.mjs is untouched.
+
+   THE CLOCK IS THE CLIP'S, NOT rAF's. `01-out-of-life-lead.mp4` carries the
+   poet's own reading as its audio track, and that reading is this film's
+   soundtrack now (see BLEND-NOTES.md — the suite's usual synthesised drone
+   is not used here on purpose). A voice wants to play forward, not be
+   sought every frame — scrubbing `currentTime` 60 times a second is audible
+   as a stutter in most browsers, which is exactly the "seam" the whole rest
+   of this world exists to avoid. So once the title card ends, the video
+   PLAYS (video.play()), and `filmT` — the one clock everything else in this
+   shell reads — is DERIVED from `video.currentTime` every frame, never
+   written to it except on an explicit seek (a scrub, a prev/next, or the
+   `__hw.seek()` QA hook). During the 5s computed title card, before the clip
+   has anything to show, `filmT` runs on requestAnimationFrame deltas exactly
+   the way every other WYGWYL film's clock does.
+
+   DEGRADE PATH. If the video element never produces a decodable frame —
+   this sandbox's Chromium ships without H.264 decode, see EXPERIMENTS.md and
+   BLEND-NOTES.md — `footageUsable` stays false forever, and `filmT` runs on
+   rAF deltas for the WHOLE film, title and movements alike, exactly like
+   01-out-of-life.mjs's own shell. Nothing here throws or blocks on the
+   video; the whole footage-and-its-audio path is a pure addition when
+   available, never a dependency, which is what lets the shooter and any
+   future film-renderer keep working unmodified.
+   ========================================================================= */
+import { FW, FH, makeRuntime, makePost, clamp01 } from "./halfworld.mjs";
+import world, { footage } from "./worlds/01b-out-of-life-blend.mjs";
+import { makeIngest } from "./ingest.mjs";
+import { swap, wipe, byLevel, noiseSwap, figureLock } from "./blend.mjs";
+
+document.title = `${world.n} · ${world.title} (blend) — a WYGWYL halfworld`;
+document.body.innerHTML = `
+  <header>
+    <span class="brand"><span class="dot"></span>WYGWYL</span>
+    <span class="ttl">${world.n} · ${world.title} · BLEND</span>
+    <span class="tagline">${world.tagline || ""}</span>
+    <span class="sp"></span>
+    <a class="btn" href="01-out-of-life.html">01 · COMPUTED</a>
+    <a class="btn" href="index.html">SUITE</a>
+  </header>
+  <main>
+    <div id="stagewrap">
+      <canvas id="stage"></canvas>
+      <div id="chip"></div>
+    </div>
+    <div id="linebar"><span id="voice"></span></div>
+  </main>
+  <footer>
+    <button id="play" aria-label="play/pause">▶</button>
+    <button id="prev">◀◀</button>
+    <button id="next">▶▶</button>
+    <input id="scrub" type="range" min="0" max="1000" step="1" value="0">
+    <span id="clock"></span>
+    <button id="snd" aria-pressed="false">VOICE</button>
+    <button id="cin">CINEMA</button>
+  </footer>`;
+
+const $ = (id) => document.getElementById(id);
+/* built after innerHTML, not before — the innerHTML assignment above wipes
+   anything placed in <body> ahead of it, video element included */
+const video = document.createElement("video");
+video.id = "foot"; video.preload = "auto"; video.playsInline = true; video.muted = true;
+video.style.cssText = "position:absolute;width:2px;height:2px;opacity:0;pointer-events:none;left:-9999px";
+document.body.appendChild(video);
+const canvas = $("stage");
+const post = makePost(canvas, world.accent || "#5aa7ff");
+const R = makeRuntime(world);
+const ingest = makeIngest(video);
+
+const fieldA = new Float32Array(FW * FH);   // scratch: this frame's footage sample
+const TITLE_S = 5;                          // makeRuntime's own title-card length
+
+/* the dev server advertises Accept-Ranges but doesn't honour a Range
+   request, which aborts a plain <video src> load under Chromium the instant
+   it issues a ranged GET (see dj.html, same fix, same reason). Fetching the
+   file whole and handing the element a blob: URL sidesteps ranged requests
+   entirely. If this fails — no network, no file, wrong origin — the catch
+   leaves `video` with no source, and footageUsable below simply never
+   becomes true; the film still plays, computed-only. */
+let footageUsable = false;
+(async () => {
+  try {
+    const res = await fetch(footage.src);
+    if (!res.ok) return;
+    const blob = await res.blob();
+    video.src = URL.createObjectURL(blob);
+  } catch { /* degrade — see file header */ }
+})();
+video.addEventListener("loadeddata", () => {
+  footageUsable = video.videoWidth > 0 || video.readyState >= 2;
+  video.currentTime = footage.movements[0].clipStart;   // parked, ready for the hand-off
+});
+video.addEventListener("error", () => { footageUsable = false; });
+
+/* ------------------------------------------------------------- the blend
+   figureLockTorn is NOT one of blend.mjs's exports — it is a composition of
+   two of them, written here because the brief asks for both a TORN schedule
+   and a PROTECTED figure at once, and blend.mjs's own figureLock always ties
+   the room to the plain Bayer schedule. This does not touch blend.mjs: it
+   calls noiseSwap for the torn field the room dissolves through, then
+   applies figureLock's own rule (wherever the drawing's ink is at or above
+   threshold, that dot is always the drawing) on top. */
+function figureLockTorn(a, b, t, o = {}) {
+  const torn = noiseSwap(a, b, t, o.s ?? 0.4, o.opts || {});
+  const threshold = o.threshold ?? 3.5;
+  const out = new Float32Array(FW * FH);
+  for (let q = 0; q < FW * FH; q++) out[q] = b[q] >= threshold ? b[q] : torn[q];
+  return out;
+}
+function applyBlend(name, a, b, t, blendOpts = {}) {
+  switch (name) {
+    case "wipe": return wipe(a, b, t, blendOpts.angle ?? 0, blendOpts.opts || {});
+    case "byLevel": return byLevel(a, b, t, !!blendOpts.reverse);
+    case "noiseSwap": return noiseSwap(a, b, t, blendOpts.s ?? 0.4, blendOpts.opts || {});
+    case "figureLock": return figureLock(a, b, t, blendOpts.threshold ?? 3.5);
+    case "figureLockTorn": return figureLockTorn(a, b, t, blendOpts);
+    case "swap": default: return swap(a, b, t);
+  }
+}
+function pickSegment(segs, u) {
+  for (const seg of segs) {
+    if (u >= seg.u0 && (u < seg.u1 || seg.u1 >= 1)) {
+      const p = clamp01((u - seg.u0) / ((seg.u1 - seg.u0) || 1e-6));
+      return [seg, p];
+    }
+  }
+  return [segs[segs.length - 1], 1];
+}
+
+/* ------------------------------------------------------------ the picture
+   `drawn` is the engine's own composite for absolute time t — it already
+   carries the built-in movement-boundary crossfade, so this shell never
+   needs a private per-movement field, only the public renderField(t). The
+   footage layer is an ADDITIONAL per-dot swap on top of that. */
+function paint(t) {
+  const [i, u] = R.locate(t);
+  const drawn = R.renderField(t);
+  const movFootage = i >= 1 ? footage.movements[i - 1] : null;
+  if (!footageUsable || !movFootage) { post.draw(drawn); return; }
+  const [seg, p] = pickSegment(movFootage.segments, u);
+  ingest.sample(fieldA, seg.opts);
+  const mixT = seg.mix ? seg.mix(p) : p;
+  post.draw(applyBlend(seg.blend, fieldA, drawn, clamp01(mixT), seg.blendOpts));
+}
+
+/* ------------------------------------------------------------- the clock
+   `phase` is 'title' (rAF-driven, 0..TITLE_S) or 'movie' (video-driven,
+   TITLE_S..R.total). movieFilmT() is a pure function of the video's own
+   currentTime — read every frame, never fed by writing to currentTime,
+   which is what lets the clip's audio play without a seek-stutter. */
+function movieFilmT(vt) {
+  const M = footage.movements;
+  for (let i = 0; i < M.length; i++) {
+    const segDur = world.movements[i].seconds;
+    const nextStart = i + 1 < M.length ? M[i + 1].clipStart : Infinity;
+    if (vt < nextStart || i === M.length - 1) {
+      const local = clamp01((vt - M[i].clipStart) / segDur);
+      return R.starts[i + 1] + local * segDur;
+    }
+  }
+  return R.total - 1e-3;
+}
+/* the inverse: given an absolute film time, where should the video be? Used
+   by every explicit seek (scrub, prev/next, __hw.seek) — the only places
+   currentTime is ever written once the clip is playing. */
+function videoTimeFor(t) {
+  const [i, u] = R.locate(t);
+  if (i < 1) return footage.movements[0].clipStart;
+  const m = footage.movements[i - 1];
+  return m.clipStart + u * world.movements[i - 1].seconds;
+}
+
+let phase = "title", filmT = 0, playing = true;
+let lastNow = performance.now();
+
+function enterMovie() {
+  phase = "movie";
+  if (footageUsable) {
+    video.currentTime = footage.movements[0].clipStart;
+    if (playing) video.play().catch(() => {});
+  }
+}
+function gotoFilmT(tt, keepPlaying = playing) {
+  tt = ((tt % R.total) + R.total) % R.total;
+  filmT = tt;
+  playing = keepPlaying;
+  if (tt < TITLE_S) {
+    phase = "title";
+    if (footageUsable) { video.pause(); video.currentTime = footage.movements[0].clipStart; }
+  } else {
+    phase = "movie";
+    if (footageUsable) {
+      video.currentTime = videoTimeFor(tt);
+      if (playing) video.play().catch(() => {}); else video.pause();
+    }
+  }
+}
+
+const fmt = (s) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+
+function loop(now) {
+  const dt = Math.min(0.05, (now - lastNow) / 1000);
+  lastNow = now;
+
+  if (!footageUsable) {
+    /* DEGRADE PATH — see file header. rAF is the only clock there is. */
+    if (playing) filmT = (filmT + dt) % R.total;
+  } else if (phase === "title") {
+    if (playing) filmT += dt;
+    if (filmT >= TITLE_S) enterMovie();
+  } else {
+    if (video.ended) { gotoFilmT(0, playing); }
+    else filmT = movieFilmT(video.currentTime);
+  }
+
+  paint(filmT);
+  const [i, u] = R.locate(filmT);
+  const m = R.movements[i];
+  const words = (m.line || "").split(" ");
+  const nWords = Math.ceil(clamp01(u * 1.18) * words.length);
+  $("voice").textContent = words.slice(0, nWords).join(" ");
+  $("linebar").style.visibility = m.line ? "visible" : "hidden";
+  $("chip").textContent = i === 0 ? `${world.n} · TITLE`
+    : `${world.n} · M${i}/${R.movements.length - 1} · ${m.label}${footageUsable ? " · FILMED" : " · DRAWN"}`;
+  $("clock").textContent = `${fmt(filmT)} / ${fmt(R.total)}`;
+  if (!scrubbing) $("scrub").value = Math.round(filmT / R.total * 1000);
+  requestAnimationFrame(loop);
+}
+
+function fit() {
+  const w = $("stagewrap");
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  post.fit(w.clientWidth, w.clientHeight, dpr);
+}
+window.addEventListener("resize", fit);
+
+let scrubbing = false;
+$("play").onclick = () => {
+  playing = !playing;
+  $("play").textContent = playing ? "Ⅱ" : "▶";
+  if (footageUsable && phase === "movie") { if (playing) video.play().catch(() => {}); else video.pause(); }
+};
+$("prev").onclick = () => { const [i] = R.locate(filmT - 0.01); gotoFilmT(R.starts[(i - 1 + R.movements.length) % R.movements.length]); };
+$("next").onclick = () => { const [i] = R.locate(filmT); gotoFilmT(R.starts[(i + 1) % R.movements.length]); };
+$("scrub").addEventListener("input", (e) => { scrubbing = true; gotoFilmT(+e.target.value / 1000 * R.total); });
+$("scrub").addEventListener("change", () => { scrubbing = false; });
+/* VOICE, not SOUND — there is no synthesised bed to toggle in this film; the
+   button unmutes the clip's own audio (default muted, like every other
+   film's sound-off default, because browsers block unmuted autoplay before
+   a user gesture and this button IS that gesture). */
+$("snd").onclick = (e) => {
+  video.muted = !video.muted;
+  e.target.setAttribute("aria-pressed", String(!video.muted));
+};
+$("cin").onclick = () => document.body.classList.toggle("cinema");
+canvas.addEventListener("dblclick", () => document.body.classList.toggle("cinema"));
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space") { e.preventDefault(); $("play").click(); }
+  if (e.key === "ArrowRight") $("next").click();
+  if (e.key === "ArrowLeft") $("prev").click();
+  if (e.key === "f" || e.key === "F") $("cin").click();
+  if (e.key === "s" || e.key === "S") $("snd").click();
+});
+
+/* headless QA hook, same shape as every other film's window.__hw, plus the
+   footage bit so a harness can tell which path a given seek actually took. */
+window.__hw = {
+  world, runtime: R,
+  seek(tt) { gotoFilmT(tt, false); },
+  play() { playing = true; if (footageUsable && phase === "movie") video.play().catch(() => {}); },
+  get footageUsable() { return footageUsable; },
+};
+
+fit();
+$("play").textContent = "Ⅱ";
+requestAnimationFrame(loop);
+</script>

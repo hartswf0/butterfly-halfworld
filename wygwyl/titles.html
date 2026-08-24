@@ -1,0 +1,164 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>titles.html — a WYGWYL halfworld</title>
+<link rel="icon" href="dot.svg">
+<link rel="stylesheet" href="halfworld.css">
+<style>
+  body{overflow:auto;display:block}
+  .lede{
+    padding:clamp(16px,4vw,44px) clamp(12px,4vw,44px);
+    border-bottom:1px solid var(--rule);max-width:92ch;
+  }
+  .lede h1{font-size:clamp(19px,3.6vw,30px);letter-spacing:.06em;font-weight:900;line-height:1.15}
+  .lede h1 small{display:block;font-size:11px;letter-spacing:.24em;color:var(--dim);font-weight:400;margin-bottom:.7em}
+  .lede p{margin-top:1em;color:var(--ink2);max-width:74ch}
+  .lede p b{color:var(--ink)}
+  .lede a{border-bottom:1px solid var(--rule)}
+  .lede a:hover{border-bottom-color:var(--ink)}
+
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    border-top:1px solid var(--rule);border-left:1px solid var(--rule);
+  }
+  .card{
+    border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    display:flex;flex-direction:column;background:var(--paper);
+  }
+  .card canvas{display:block;width:100%;aspect-ratio:4/3;background:var(--paper2)}
+  .card .meta{padding:.9em 1em 1.1em;border-top:1px solid var(--rule)}
+  .card .n{font-size:10.5px;letter-spacing:.2em;color:var(--dim)}
+  .card .t{font-weight:700;letter-spacing:.03em;margin-top:.2em;line-height:1.25;font-size:15px}
+  .card .g{font-size:11.5px;color:var(--ink2);margin-top:.5em;line-height:1.45}
+  .card .row{display:flex;align-items:center;gap:1ch;margin-top:.9em}
+  .card .btn{font-size:10.5px;padding:.5em 1em}
+  .card .mv{font-size:10px;letter-spacing:.1em;color:var(--dim);margin-left:auto}
+
+  footer.note{
+    padding:clamp(16px,4vw,40px);color:var(--ink2);max-width:82ch;
+    border-top:0;display:block;
+  }
+  footer.note h2{font-size:11px;letter-spacing:.2em;color:var(--dim);margin-bottom:.8em}
+  footer.note p{margin-bottom:.9em}
+</style>
+
+<div class="lede">
+  <h1><small>WHERE YOU GO WHEN YOU LEAVE · TITLE SEQUENCE, FIVE WAYS</small>
+  Four in the manner of John Whitney, and the one that plays.</h1>
+  <p>Fourteen films need one thing in front of them. <b>A</b> through <b>D</b> take Whitney's
+  own rule — that a title is never typed on, it is what a field of moving elements looks like
+  at the instant their motion agrees with itself — and each is a single differential law run
+  for its own thirty seconds, the words read out of the law's resonant moments rather than
+  drawn over the top of them.</p>
+  <p>They are beautiful and they were the wrong thing to put in front of these poems. A
+  harmonic field is busy where the poems are spare; it announces its own cleverness; and its
+  only relation to the films behind it was a few icons scattered on a rotation. <b>E</b> is
+  the answer to that: no field, no law, no mathematics on display. A man in a dim room with
+  a window he does not take, the room lifting away, a long walk past fourteen small marks on
+  the horizon, and a door that opens onto paper. It is the suite in one minute, told with the
+  same marks the films are made of — and it is the one the suite plays.</p>
+  <p>All five are the real films, running live below, not thumbnails — the same
+  <code>drawPreview</code> the fourteen-film index uses. Open any card for its own page,
+  transport and sound.</p>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<footer class="note">
+  <h2>THE FIVE</h2>
+  <p><b>A · The Rosette.</b> One dense field on differential phase — point k turns k times
+  the base rate about its own anchor. Nothing else moves it; the loops, flowers and caustics
+  are what nineteen hundred clocks running at nineteen hundred different speeds look like from
+  above, and the title is a cell lifted from that same field at the moment it resonates.</p>
+  <p><b>B · The Arabesque.</b> Six rings, each turning at an integer multiple of one rate and
+  alternating direction, breathing in and out of phase with each other. The two lines of the
+  title are built by two different generations of rings collapsing inward in turn, while the
+  rest of the arabesque keeps running behind them.</p>
+  <p><b>C · The Catalogue.</b> A grid of independent Lissajous cells, each one's frequency
+  ratio drifting by a constant amount every step until it passes an integer and the figure
+  snaps to a closed loop — a resonance solved backward so it lands on a chosen instant. Letter
+  by letter, left to right, a cell's loop is swapped for its own slice of the word and stays.</p>
+  <p><b>D · The Aura.</b> B and C fused, and the one that plays at the head of the suite.
+  The rings are the ground and never stop; the Lissajous cells live <i>on</i> them rather
+  than in a grid, and each cell's frequency pair is derived from the ring it rides — so it
+  is still one law read at two distances. What neither of the others had: at each resonance
+  the field also throws up an image from the films behind it — the tambourine, the rose
+  window, the moon, the temple, the eleven-petalled daisy, the burning hourglass, the ride,
+  the candle, the named stars. They arrive faint, hold for a breath, and the rotation takes
+  them back. If you have seen the films they are memories; if you have not they are
+  ornament, and both readings are correct.</p>
+  <p><b>E · The Walk.</b> The one that plays. Read the fourteen poems end to end and they
+  make one sentence: a man is in a room with a window he does not take, he leaves, he walks
+  past a storm and a shore and a city and a stage and a dance floor and three phone calls
+  and a road and a temple and a reunion and a harbor, and at the end of all of it there is a
+  door, and this time he goes through the door. Five movements, long holds, nothing spins,
+  and the only thing that ever crosses the frame is a man. The picture is built out of tone
+  rather than line — a room here is not a rectangle in outline floating on cream, which is a
+  diagram, but a <i>wall</i>: a flat field of ink with a hole in it where the window is, and
+  the hole is paper. Light falls off from that hole in whole levels, because whole levels are
+  the only falloff this lattice has. The whole story is legible as light: he is in the dark,
+  he walks in the cream, he arrives at a dark wall, and the door opens onto paper. The one
+  accent mark in the sequence is the blue lying across that threshold. It carries no bed from
+  the record — the title sits <i>before</i> the record starts, so the first poem's music no
+  longer plays underneath it — and it ends on the names.</p>
+</footer>
+
+<script type="module">
+import { drawPreview } from "./halfworld.mjs";
+
+const OPTIONS = [
+  { slug: "00-title-a", letter: "A", desc: "the rosette — a differential-phase field resolving into type" },
+  { slug: "00-title-b", letter: "B", desc: "the arabesque — nested rings, counter-rotating, collapsing inward" },
+  { slug: "00-title-c", letter: "C", desc: "the catalogue — a grid of lissajous cells locking to letters" },
+  { slug: "00-title-d", letter: "D", desc: "the aura — B and C fused, and haunted by the fourteen films" },
+  { slug: "00-title-e", letter: "E", desc: "the walk — a man, a room, fourteen milestones, a door · THE ONE THAT PLAYS" },
+];
+
+const grid = document.getElementById("grid");
+const live = [];
+
+for (const opt of OPTIONS) {
+  const world = (await import(`./worlds/${opt.slug}.mjs`)).default;
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `<canvas width="320" height="240"></canvas>
+    <div class="meta">
+      <div class="n">OPTION ${opt.letter} · ${world.n}</div>
+      <div class="t">${world.title}</div>
+      <div class="g">${opt.desc}</div>
+      <div class="row">
+        <a class="btn" href="${opt.slug}.html">OPEN ▶</a>
+        <span class="mv"></span>
+      </div>
+    </div>`;
+  grid.appendChild(card);
+  const cv = card.querySelector("canvas");
+  const rt = drawPreview(world, cv, 0);
+  /* makePost.fit sizes the element in pixels, which overrides the sheet's
+     `width:100%; aspect-ratio:4/3` and left the three cards at three different
+     heights with their captions at three different depths. The backing store
+     is already 4:3, so handing the CSS box back to the stylesheet keeps the
+     picture correct and puts the row back in line. */
+  cv.style.width = "100%"; cv.style.height = "auto";
+  const slate = world.slate === false ? 0 : 1;
+  card.querySelector(".mv").textContent = `${rt.movements.length - slate} MV · ${Math.round(rt.total)}S`;
+  /* Skip past the shared 5s auto title-card and stagger the three by a
+     third of a film each — otherwise all three open on the same generic
+     "00 · WHERE YOU GO WHEN YOU LEAVE" card at once, which is the one
+     thing the three devices have in common and the least interesting
+     thing to show side by side. */
+  const off = (slate ? 5 : 0) + rt.total * (live.length / OPTIONS.length);
+  live.push({ cv, world, rt, off });
+}
+
+/* One shared clock. Each option keeps its own real duration and loops on
+   it independently, so the three cards drift in and out of phase with one
+   another rather than resetting in lockstep — three separate films, run
+   side by side, not one film mirrored three times. */
+let t0 = performance.now();
+(function tick(now) {
+  const t = (now - t0) / 1000;
+  for (const l of live) drawPreview(l.world, l.cv, t + l.off);
+  requestAnimationFrame(tick);
+})(t0);
+</script>

@@ -1,0 +1,125 @@
+{
+  "src": "01-out-of-life-lead.mp4",
+  "duration": 88.38,
+  "fps": 24,
+  "moments": [
+    {
+      "name": "title-street",
+      "t": 1.5,
+      "movement": "THE SEARCH",
+      "note": "pre-roll: fog, streetlights, the poem's title over the road",
+      "file": "title-street.jpg"
+    },
+    {
+      "name": "ext-walk",
+      "t": 8,
+      "movement": "THE SEARCH",
+      "note": "exterior — a different vantage of the same man, walking through fog",
+      "file": "ext-walk.jpg"
+    },
+    {
+      "name": "neon-glitch",
+      "t": 15,
+      "movement": "THE SEARCH",
+      "note": "the clip's own title card, glitched neon over the room",
+      "file": "neon-glitch.jpg"
+    },
+    {
+      "name": "room-search-a",
+      "t": 11.6,
+      "movement": "THE SEARCH",
+      "note": "the room: graffiti wall, window, bed — before he stands",
+      "file": "room-search-a.jpg"
+    },
+    {
+      "name": "room-search-b",
+      "t": 24,
+      "movement": "THE SEARCH",
+      "note": "the room, static, window glowing behind him",
+      "file": "room-search-b.jpg"
+    },
+    {
+      "name": "room-search-c",
+      "t": 27.6,
+      "movement": "THE SEARCH",
+      "note": "the room, last beat before the haze",
+      "file": "room-search-c.jpg"
+    },
+    {
+      "name": "haze-vape",
+      "t": 31.6,
+      "movement": "MORE HAZE",
+      "note": "hand raised into the vape, backlit blue",
+      "file": "haze-vape.jpg"
+    },
+    {
+      "name": "haze-turned",
+      "t": 37.6,
+      "movement": "MORE HAZE",
+      "note": "turned back at the fire-escape landing, smoke both sides",
+      "file": "haze-turned.jpg"
+    },
+    {
+      "name": "haze-tv",
+      "t": 43.2,
+      "movement": "MORE HAZE",
+      "note": "the framed TV — a crowd, not his room",
+      "file": "haze-tv.jpg"
+    },
+    {
+      "name": "haze-kitchen",
+      "t": 49.6,
+      "movement": "MORE HAZE",
+      "note": "hunched in the kitchen haze, blue smoke",
+      "file": "haze-kitchen.jpg"
+    },
+    {
+      "name": "fall-crouch",
+      "t": 55.4,
+      "movement": "THE FALL",
+      "note": "the rooftop crouch before the leap",
+      "file": "fall-crouch.jpg"
+    },
+    {
+      "name": "fall-leap",
+      "t": 59.6,
+      "movement": "THE FALL",
+      "note": "mid-leap against a torn sky",
+      "file": "fall-leap.jpg"
+    },
+    {
+      "name": "fall-sparks",
+      "t": 66,
+      "movement": "THE FALL",
+      "note": "the plunge through golden sparks",
+      "file": "fall-sparks.jpg"
+    },
+    {
+      "name": "fall-kaleido",
+      "t": 73,
+      "movement": "THE FALL",
+      "note": "the climb into the golden climax",
+      "file": "fall-kaleido.jpg"
+    },
+    {
+      "name": "dark-bloom",
+      "t": 78.4,
+      "movement": "AS DARK AS BLACK",
+      "note": "the halo blooming, closing card arriving",
+      "file": "dark-bloom.jpg"
+    },
+    {
+      "name": "dark-title",
+      "t": 85.5,
+      "movement": "AS DARK AS BLACK",
+      "note": "true black, the closing title",
+      "file": "dark-title.jpg"
+    }
+  ],
+  "scrub": {
+    "every": 1,
+    "count": 89,
+    "dir": "scrub",
+    "pattern": "f%03d.jpg"
+  }
+}
