@@ -424,6 +424,26 @@
 
   /* stage: the current frame, fills remaining space */
   #stage{ flex:1 1 auto; min-height:0; position:relative; background:var(--k); padding:4px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  /* THE LAYERS BELONG BESIDE THE PICTURE.
+     They were inside a collapsed panel behind a mode tab — four gestures from
+     the thing they describe, which is the same as not having them. A rail on
+     the stage costs 62px and answers "what is this frame made of" without
+     leaving the frame. */
+  #rail{ position:absolute; right:4px; top:4px; bottom:4px; width:62px; z-index:20;
+         display:none; flex-direction:column; gap:3px; overflow-y:auto;
+         background:rgba(0,0,0,.55); padding:3px; }
+  #rail.on{ display:flex }
+  #rail .rl{ position:relative; border:2px solid var(--w); background:var(--w);
+             cursor:pointer; line-height:0; flex:0 0 auto }
+  #rail .rl.sel{ border-color:var(--aB); box-shadow:0 0 0 2px var(--aB) }
+  #rail .rl.off{ opacity:.38 }
+  #rail .rl canvas{ width:100%; height:auto; display:block; image-rendering:pixelated }
+  #rail .rl b{ position:absolute; left:0; right:0; bottom:0; font:700 7px/1.5 ui-monospace,monospace;
+               background:rgba(255,255,255,.86); text-align:center; letter-spacing:.04em;
+               overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding:0 2px }
+  #rail .rh{ font:700 7px/1.4 ui-monospace,monospace; color:#fff; letter-spacing:.14em;
+             text-align:center; padding:2px 0; flex:0 0 auto }
+  @media (max-width:560px){ #rail{ width:52px } }
   #board-wrap{ position:relative; background:var(--w); box-shadow:0 0 0 3px var(--k); overflow:hidden; }
   canvas#board{ image-rendering:auto; display:block; touch-action:none; cursor:crosshair; background:var(--w); }
   #board-empty{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:5px; font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--k); padding:1rem; pointer-events:none; }
@@ -781,6 +801,7 @@
 </div>
 
 <div id="stage">
+  <div id="rail"><div class="rh">LAYERS</div><div id="rail-list" style="display:flex;flex-direction:column;gap:3px"></div></div>
   <div id="board-wrap">
     <canvas id="board" width="640" height="480"></canvas>
     <div id="board-empty">FRAME <span id="be-n">1</span><i>draw here · or LENS / WRITE / PROMPT in AUTHOR</i>
@@ -7285,13 +7306,127 @@ function patchControls(p){
       +(p.src.parts?(' · '+p.src.parts.length+' parts'):' · whole world');
     w.appendChild(m);
   }
+  if(p.kind!=='ground'){
+    var sp=document.createElement('div');
+    sp.style.cssText='display:flex;gap:5px;align-items:center;margin-top:6px;'
+      +'border-top:2px solid var(--k);padding-top:6px';
+    var lab=document.createElement('span'); lab.className='mini'; lab.style.flex='0 0 auto';
+    lab.textContent='across';
+    var num=document.createElement('input'); num.type='number'; num.min=1; num.max=600;
+    num.value=p.span||1;
+    num.style.cssText='width:64px;border:3px solid var(--k);padding:5px;font:11px ui-monospace,monospace;min-height:34px';
+    var go=document.createElement('button'); go.type='button'; go.textContent='FRAMES';
+    go.style.cssText='flex:1;min-height:34px;font:9px ui-monospace,monospace';
+    go.onclick=function(){ patchSpanApply(p.id, +num.value||1); };
+    sp.appendChild(lab); sp.appendChild(num); sp.appendChild(go);
+    w.appendChild(sp);
+    var hint=document.createElement('div'); hint.className='mini'; hint.style.marginTop='4px';
+    hint.textContent = p.kind==='world' ? 'the world plays — t advances 1/8s a frame'
+      : p.kind==='clip' ? 'the shot plays — one packed frame each'
+      : 'the same piece, held across the passage';
+    w.appendChild(hint);
+  }
   return w;
 }
+
+/* ══ SPAN — a patch that reaches across frames ═════════════════════════════
+   Everything so far lands on ONE frame, so a poemfield arrives as a still and a
+   clip sits at a single k. A poem is a duration; a shot is a duration. Putting
+   one into a film as a picture of itself is the same mistake as storing a frame
+   instead of its parts, one level up.
+
+   Spanning walks forward along the branch, making frames if the branch runs out,
+   and puts a copy of the patch on each — with its own moment. A world advances
+   its `t` at the film's rate, so the world PLAYS. A clip advances its `k`. An
+   element repeats as it is, which is how a mosaic holds across a passage.
+
+   The frames are ordinary nodes and each keeps its own stack, so anything
+   already on them survives, and any one of them can still be edited by hand
+   afterwards without the others caring. ═══════════════════════════════════ */
+function patchSpanApply(pid, n, then){
+  var st=pstack(myNode), p=st.filter(function(x){return x.id===pid;})[0];
+  if(!p){ if(then)then(); return; }
+  n=Math.max(1,Math.min(600,n|0));
+  p.span=n;
+  if(n<2){ bakeNode(myNode, function(){ paintStack(); if(then)then(); }); return; }
+  var fps=8, ids=[myNode], cur=myNode, i;
+  /* walk the branch forward, extending it when it ends */
+  for(i=1;i<n;i++){
+    var kid=branchChoice[cur]||(nodes[cur]&&nodes[cur].kids[0]);
+    if(!kid){
+      if(treeSize()>=NODE_MAX){ fireToast('Tree at capacity'); break; }
+      kid=mkId(); mkNode(cur,null,kid,ME,{kind:'flow'}); branchChoice[cur]=kid;
+    }
+    ids.push(kid); cur=kid;
+  }
+  Progress.start('Spanning '+(p.name||p.kind),{total:ids.length,stage:'across '+ids.length+' frames',cancelable:true,
+    onCancel:function(){ ids.length=0; }});
+  var j=0;
+  var step=function(){
+    if(j>=ids.length){
+      Progress.done(ids.length+' frames'); Progress.hide(400);
+      renderStrip(); renderBranches(); paintStack();
+      fireToast((p.name||p.kind)+' across '+ids.length+' frames');
+      if(then)then(); return;
+    }
+    var id=ids[j], off=j; j++;
+    if(id!==myNode){
+      groundPatch(id);
+      var q=JSON.parse(JSON.stringify({kind:p.kind,src:p.src,place:p.place,
+              repeat:p.repeat,name:p.name}));
+      /* each frame gets the patch at ITS moment */
+      if(q.kind==='world') q.src.t=(p.src.t||0)+off/fps;
+      if(q.kind==='clip')  q.src.k=(p.src.k||0)+off;
+      var c=mkPatch(q.kind,q.src,{place:q.place,repeat:q.repeat,name:q.name,span:1});
+      var s2=pstack(id);
+      /* replace a previous cast of the same patch rather than piling up */
+      PSTACK[id]=s2.filter(function(x){ return !(x._from===pid); });
+      c._from=pid; c.z=(PSTACK[id].length?Math.max.apply(null,PSTACK[id].map(function(x){return x.z||0;})):0)+1;
+      PSTACK[id].push(c);
+    }
+    bakeNode(id, function(){
+      Progress.set(j,ids.length);
+      if(window.MessageChannel){ var mc=new MessageChannel(); mc.port1.onmessage=step; mc.port2.postMessage(0); }
+      else setTimeout(step,0);
+    });
+  };
+  step();
+}
+
+/* the rail: the same stack, always on screen. tapping a tile selects the patch
+   and opens the panel's controls for it, so there is one selection and not two. */
+function paintRail(){
+  var rail=document.getElementById('rail'), list=document.getElementById('rail-list');
+  if(!rail||!list) return;
+  var st=pstack(myNode).slice().sort(function(a,b){ return (b.z||0)-(a.z||0); });
+  var real=st.filter(function(p){ return p.kind!=='ground'||((p.src||{}).cmds||'').length; });
+  rail.classList.toggle('on', real.length>0);
+  if(!real.length){ list.innerHTML=''; return; }
+  list.innerHTML='';
+  st.forEach(function(p){
+    if(p.kind==='ground' && !((p.src||{}).cmds||'').length) return;
+    var d=document.createElement('div');
+    d.className='rl'+(PSEL===p.id?' sel':'')+(p.on?'':' off');
+    var cv=document.createElement('canvas'); cv.width=48; cv.height=36;
+    patchThumb(p,cv); d.appendChild(cv);
+    var b=document.createElement('b');
+    b.textContent=(PKIND[p.kind]||'?')+(p.repeat&&p.repeat.n>1?('×'+p.repeat.n):'')
+      +(p.span&&p.span>1?(' '+p.span+'f'):'');
+    d.appendChild(b);
+    d.title=(p.name||p.kind)+' — tap to select, double-tap to hide';
+    d.onclick=function(){ PSEL=(PSEL===p.id?null:p.id); playTick(); paintStack(); paintRail(); };
+    d.ondblclick=function(ev){ ev.preventDefault(); patchSet(myNode,p.id,!p.on); };
+    list.appendChild(d);
+  });
+}
+/* one call updates both views of the stack */
+(function(){ var _ps=paintStack;
+  paintStack=function(){ _ps(); try{ paintRail(); }catch(e){} }; })();
 
 /* the stack belongs to the frame you are standing on */
 (function(){ var _g=window.gotoNode;
   if(typeof gotoNode==='function'){ var orig=gotoNode;
-    gotoNode=function(id){ var r=orig.apply(this,arguments); try{ paintStack(); }catch(e){} return r; }; }
+    gotoNode=function(id){ var r=orig.apply(this,arguments); try{ PSEL=null; paintStack(); }catch(e){} return r; }; }
 })();
 
 /* ---- AI: generate an ANIMATED SEQUENCE as a branch ---- */
