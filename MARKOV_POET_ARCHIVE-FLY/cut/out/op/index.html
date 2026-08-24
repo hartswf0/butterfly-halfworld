@@ -992,6 +992,7 @@
 <div id="tools">
   <div class="tool-grp" role="group" aria-label="Draw tool">
     <button id="dt-pen" class="on" type="button" title="Pen — drag to lay dots"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 15l2-5 7-7 3 3-7 7-5 2z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 4l3 3" stroke="currentColor" stroke-width="1.5"/></svg><span>Pen</span></button>
+    <button id="dt-pick" type="button" title="Pick — tap a shape in the frame to select it"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 3l10 5.5-4.2 1.2L11 15l-2 .8-1.6-5L4 13.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span>Pick</span></button>
     <button id="dt-box" type="button" title="Box — drag a rectangle"><svg viewBox="0 0 18 18" aria-hidden="true"><rect x="3" y="4.5" width="12" height="9" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Box</span></button>
     <button id="dt-erase" type="button" title="Erase — drag to clear"><svg viewBox="0 0 18 18" aria-hidden="true"><g transform="rotate(-38 9 9)"><rect x="3.5" y="6.5" width="11" height="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="3.5" y="6.5" width="4" height="5.5" fill="currentColor"/></g><path d="M3 15.5h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Erase</span></button>
     <button id="wipe-frame" type="button" title="Clear frame — wipe this frame to white"><svg viewBox="0 0 18 18" aria-hidden="true"><rect x="3" y="3" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 5.5l7 7M12.5 5.5l-7 7" stroke="currentColor" stroke-width="1.5"/></svg><span>Clear</span></button>
@@ -5534,8 +5535,11 @@ board.addEventListener('pointerdown',drawGuard('start',function(e){ if(playing||
 board.addEventListener('pointermove',drawGuard('move',function(e){ if(!drawing)return; var p=boardCoord(e); var now=performance.now(); if(now-_curTx>55){ _curTx=now; sendCtl('P '+myNode+' '+p[0]+' '+p[1]); } if(drawTool==='box')return; var ink=drawTool==='erase'?0:drawInk; if(lastPt&&(lastPt[0]!==p[0]||lastPt[1]!==p[1])){ draw(strokeSeg(lastPt[0],lastPt[1],p[0],p[1],ink)); lastPt=p; } }));
 board.addEventListener('pointerup',drawGuard('finish',function(e){ if(!drawing)return; drawing=false; var p=boardCoord(e); if(drawTool==='box'&&lastPt){ var x0=Math.min(lastPt[0],p[0]),y0=Math.min(lastPt[1],p[1]),x1=Math.max(lastPt[0],p[0]),y1=Math.max(lastPt[1],p[1]); draw(['LIN '+x0+' '+y0+' '+x1+' '+y0+' '+drawInk,'LIN '+x1+' '+y0+' '+x1+' '+y1+' '+drawInk,'LIN '+x1+' '+y1+' '+x0+' '+y1+' '+drawInk,'LIN '+x0+' '+y1+' '+x0+' '+y0+' '+drawInk]); playClack(); } lastPt=null; sendCtl('P '+myNode+' -1 -1'); onbCheckTrace(); }));
 
-function setTool(t){ drawTool=t; playTick(); ['pen','box','erase'].forEach(function(k){ var b=document.getElementById('dt-'+k); if(b)b.classList.toggle('on',k===t); }); }
+function setTool(t){ drawTool=t; playTick();
+  if(t!=='pick'&&typeof pickSet==='function') pickSet(null);
+  ['pen','pick','box','erase'].forEach(function(k){ var b=document.getElementById('dt-'+k); if(b)b.classList.toggle('on',k===t); }); }
 document.getElementById('dt-pen').addEventListener('click',function(){setTool('pen');});
+document.getElementById('dt-pick').addEventListener('click',function(){setTool('pick');});
 document.getElementById('dt-box').addEventListener('click',function(){setTool('box');});
 document.getElementById('dt-erase').addEventListener('click',function(){setTool('erase');});
 document.getElementById('brush').addEventListener('input',function(){ brush=parseInt(this.value,10)||3; var bv=document.getElementById('brush-val'); if(bv)bv.textContent=brush; playMicroTick(); });
@@ -5830,7 +5834,7 @@ var HWMODS={}, HWMETA={}, HWBLOB=null, HW_GAL=null;
    changes underneath a deployed page: the tagging fixes below were live on the
    server and invisible in the browser for three reloads. The tag is bumped when
    the engine changes, so an update actually arrives. */
-var HW_BUILD='6';
+var HW_BUILD='7';
 function hwCard(slug){
   var d=document.createElement('button'); d.type='button'; d.dataset.slug=slug;
   d.style.cssText='display:block;text-align:left;padding:0;border:3px solid var(--k);background:#fff;overflow:hidden';
@@ -6064,7 +6068,40 @@ function hwStamp(all){
   var g=hwDown(want), cmds=hwCmds(g);
   if(!cmds.length){ fireToast('Those parts ink nothing at this moment'); return; }
   playThud(); draw(cmds); flash();
+  /* THE WORLD KNOWS ITS PARTS AND THE FRAME DOES NOT.
+     Once this is PNT commands the identity is gone and the frame is baked, so
+     the map comes down WITH the ink: which part owns each cell, at OPERATOR's
+     resolution. Pick then hands back the building rather than a blob that
+     happens to be building-shaped. Kept in memory only — it is a convenience
+     for editing, not a fact about the film, and the film has to stay a film. */
+  hwOwnDown();
   fireToast((all?'World':'Parts')+' stamped · '+cmds.length+' runs');
+}
+/* the owner map, downsampled the same way the ink was */
+function hwOwnDown(){
+  if(!HWSCENE||!_hwIds) return;
+  var ids=new Int16Array(N), names={}, next=1, seen={};
+  var sx=HW_W/W, sy=HW_H/H, x,y,ax,ay;
+  for(y=0;y<H;y++){
+    var y0=Math.floor(y*sy), y1=Math.min(HW_H,Math.ceil((y+1)*sy));
+    for(x=0;x<W;x++){
+      var x0=Math.floor(x*sx), x1=Math.min(HW_W,Math.ceil((x+1)*sx));
+      /* the winning cell of the max-pool is the one whose owner this becomes */
+      var best=-1, own=null;
+      for(ay=y0;ay<y1;ay++) for(ax=x0;ax<x1;ax++){
+        var k=ay*HW_W+ax, v=HWSCENE.levels[k];
+        if(v<=best) continue;
+        best=v;
+        own=_hwIds[k] ? (HWSCENE._byTag[_hwIds[k]]||null)
+                      : (HWBLOB&&HWBLOB[k] ? '#'+HWBLOB[k] : null);
+      }
+      if(best>0&&own){
+        if(!seen[own]){ seen[own]=next; names[next]=own; next++; }
+        ids[y*W+x]=seen[own];
+      }
+    }
+  }
+  ownRemember(myNode, ids, names);
 }
 /* a world streams in as its own run of frames, sampled across its duration */
 function hwClip(){
@@ -6506,6 +6543,196 @@ addEventListener('paste',function(e){
   for(var i=0;i<it.length;i++){ if(it[i].kind==='file'){ var f=it[i].getAsFile();
     if(f&&/^image\//.test(f.type)){ pendFromFile(f,W>>1,H>>1); e.preventDefault(); return; } } }
 });
+
+/* ====================================================================
+   PICK — selecting what is already in the frame.
+
+   Tapping a poemfield puts the whole world down as PNT commands, and from that
+   moment it is BAKED: the ink is there and the identity is not. You cannot ask
+   the frame for the building, because the frame has never heard of a building.
+   Same for a drawn stroke, a stamped photograph, an imported clip. Everything
+   arrives as levels and levels have no parts.
+
+   Two ways to get the parts back, and the tool keeps both because they fail in
+   opposite directions.
+
+   THE PROVENANCE, when it exists. A world knows which part drew every cell, so
+   a stamp records that map against the node. Tap a cell and you select the whole
+   `building` — the real thing, however scattered its pixels.
+
+   THE SHAPE, always. When there is no map — a hand-drawn frame, an imported
+   clip, a world that names nothing — the tap floods out across connected ink and
+   selects that region. Worse than a name, and available on every frame there
+   will ever be.
+
+   A selection is not a mode you are stuck in. It can be dragged, lifted out as
+   a placement to be resized and put somewhere else, duplicated, or deleted, and
+   each of those is written to the node as ordinary commands. That is collage:
+   take a piece of what is there, and move it.
+   ==================================================================== */
+var PICK=null;          /* {cells:Int32Array-ish list, name, level} */
+var OWNMAP=Object.create(null);   /* node id -> {ids:Int16Array, names:{} } */
+function ownRemember(id, ids, names){ OWNMAP[id]={ids:ids.slice(0), names:names}; }
+function ownForget(id){ delete OWNMAP[id]; }
+
+function pickAt(cx,cy){
+  var g=curGrid(), k=cy*W+cx;
+  if(!g[k]) return null;
+  var own=OWNMAP[myNode];
+  if(own && own.ids[k]){
+    /* the real part: every cell the same owner drew, wherever it is */
+    var tag=own.ids[k], cells=[], i;
+    for(i=0;i<g.length;i++) if(g[i] && own.ids[i]===tag) cells.push(i);
+    return {cells:cells, name:own.names[tag]||'part', kind:'named'};
+  }
+  /* the shape: flood across connected ink */
+  var seen=new Uint8Array(W*H), st=[k], out=[];
+  seen[k]=1;
+  while(st.length){
+    var q=st.pop(); out.push(q);
+    var qx=q%W, qy=(q/W)|0, d;
+    for(d=0;d<4;d++){
+      var nx=qx+(d===0?1:d===1?-1:0), ny=qy+(d===2?1:d===3?-1:0);
+      if(nx<0||ny<0||nx>=W||ny>=H) continue;
+      var nq=ny*W+nx;
+      if(seen[nq]||!g[nq]) continue;
+      seen[nq]=1; st.push(nq);
+    }
+  }
+  return {cells:out, name:out.length+' cells', kind:'shape'};
+}
+function pickSet(p){
+  PICK=p;
+  if(p){ p.set=new Uint8Array(W*H); for(var i=0;i<p.cells.length;i++) p.set[p.cells[i]]=1; p.dx=0; p.dy=0; }
+  pickBar(!!p); paintBoard();
+}
+function paintPick(){
+  if(!PICK)return;
+  var c=BOARD_CELL, i, g=curGrid();
+  bctx.fillStyle='rgba(0,51,204,.30)';
+  for(i=0;i<PICK.cells.length;i++){
+    var q=PICK.cells[i], x=(q%W)+PICK.dx, y=((q/W)|0)+PICK.dy;
+    if(x<0||y<0||x>=W||y>=H) continue;
+    bctx.fillRect(x*c,y*c,c,c);
+  }
+  bctx.fillStyle='#000';
+}
+/* the commands that move a selection: lift the old cells, lay the new ones */
+function pickCommit(dx,dy,copy){
+  if(!PICK||(!dx&&!dy&&!copy))return;
+  var g=curGrid(), lines=[], i, moved={};
+  for(i=0;i<PICK.cells.length;i++){
+    var q=PICK.cells[i], x=(q%W)+dx, y=((q/W)|0)+dy;
+    if(x<0||y<0||x>=W||y>=H) continue;
+    moved[y*W+x]=g[q];
+  }
+  if(!copy) for(i=0;i<PICK.cells.length;i++){
+    var q2=PICK.cells[i];
+    if(moved[q2]===undefined) lines.push('PNT '+(q2%W)+' '+((q2/W)|0)+' 1 1 0');
+  }
+  for(var kk in moved) lines.push('PNT '+(kk%W)+' '+((kk/W)|0)+' 1 1 '+moved[kk]);
+  if(!lines.length)return;
+  playTick(); draw(lines);
+  /* the owner map has to follow, or the next pick selects where it used to be */
+  var own=OWNMAP[myNode];
+  if(own){
+    var ni=new Int16Array(own.ids.length);
+    if(copy) ni.set(own.ids);
+    else for(i=0;i<own.ids.length;i++) if(!PICK.set[i]) ni[i]=own.ids[i];
+    for(i=0;i<PICK.cells.length;i++){
+      var q3=PICK.cells[i], nx2=(q3%W)+dx, ny2=((q3/W)|0)+dy;
+      if(nx2>=0&&ny2>=0&&nx2<W&&ny2<H) ni[ny2*W+nx2]=own.ids[q3];
+    }
+    own.ids=ni;
+  }
+  var nc=[]; for(i=0;i<PICK.cells.length;i++){
+    var q4=PICK.cells[i], ax=(q4%W)+dx, ay=((q4/W)|0)+dy;
+    if(ax>=0&&ay>=0&&ax<W&&ay<H) nc.push(ay*W+ax);
+  }
+  PICK.cells=nc; PICK.set=new Uint8Array(W*H);
+  for(i=0;i<nc.length;i++) PICK.set[nc[i]]=1;
+  PICK.dx=0; PICK.dy=0;
+}
+function pickDelete(){
+  if(!PICK)return;
+  var lines=[],i;
+  for(i=0;i<PICK.cells.length;i++){ var q=PICK.cells[i]; lines.push('PNT '+(q%W)+' '+((q/W)|0)+' 1 1 0'); }
+  playThud(); draw(lines);
+  var own=OWNMAP[myNode];
+  if(own) for(i=0;i<PICK.cells.length;i++) own.ids[PICK.cells[i]]=0;
+  pickSet(null); fireToast('Taken out');
+}
+/* lift the selection out as an image you can size and place anywhere */
+function pickLift(){
+  if(!PICK)return;
+  var g=curGrid(), x0=W,y0=H,x1=-1,y1=-1,i;
+  for(i=0;i<PICK.cells.length;i++){ var q=PICK.cells[i], x=q%W, y=(q/W)|0;
+    if(x<x0)x0=x; if(x>x1)x1=x; if(y<y0)y0=y; if(y>y1)y1=y; }
+  if(x1<0)return;
+  var bw=x1-x0+1, bh=y1-y0+1;
+  var cv=document.createElement('canvas'); cv.width=bw; cv.height=bh;
+  var cx2=cv.getContext('2d'), im=cx2.createImageData(bw,bh);
+  for(i=0;i<PICK.cells.length;i++){
+    var q5=PICK.cells[i], px=(q5%W)-x0, py=((q5/W)|0)-y0, v=g[q5];
+    var o=(py*bw+px)*4, t=255-Math.round(v/7*255);
+    im.data[o]=im.data[o+1]=im.data[o+2]=t; im.data[o+3]=255;
+  }
+  cx2.putImageData(im,0,0);
+  var img=new Image();
+  img.onload=function(){ pendStart(img, PICK.name, (x0+x1)/2, (y0+y1)/2, Math.max(bw,bh)); pickSet(null); };
+  img.src=cv.toDataURL();
+}
+function pickBar(on){
+  var b=document.getElementById('pick-bar');
+  if(!b){
+    b=document.createElement('div'); b.id='pick-bar';
+    b.style.cssText='position:fixed;z-index:71;display:none;gap:6px;background:#fff;border:3px solid #000;padding:6px;align-items:center';
+    b.innerHTML='<span id="pick-what" style="font:9px/1 ui-monospace,monospace;padding:0 6px;max-width:30vw;'
+      +'overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>'
+      +'<button type="button" id="pick-lift" style="min-height:40px">LIFT</button>'
+      +'<button type="button" id="pick-dup" style="min-height:40px">COPY</button>'
+      +'<button type="button" id="pick-del" style="min-height:40px">CUT</button>'
+      +'<button type="button" id="pick-no" style="min-height:40px">DONE</button>';
+    document.body.appendChild(b);
+    b.querySelector('#pick-lift').onclick=function(){ pickLift(); };
+    b.querySelector('#pick-dup').onclick=function(){ pickCommit(3,3,true); fireToast('Copied'); };
+    b.querySelector('#pick-del').onclick=function(){ pickDelete(); };
+    b.querySelector('#pick-no').onclick=function(){ pickSet(null); };
+  }
+  b.style.display=on?'flex':'none';
+  if(on&&PICK){
+    b.querySelector('#pick-what').textContent=(PICK.kind==='named'?PICK.name:'shape · '+PICK.cells.length);
+    var r=board.getBoundingClientRect();
+    b.style.left=Math.round(r.left+r.width/2)+'px'; b.style.transform='translateX(-50%)';
+    var below=r.bottom+8; b.style.top=((below+56<innerHeight)?below:Math.max(8,r.top-56))+'px';
+  }
+}
+(function(){ var _pb=paintBoardNow; paintBoardNow=function(){ _pb(); try{ paintPick(); }catch(e){} }; })();
+/* the pick tool takes the pointer before the pen sees it */
+board.addEventListener('pointerdown',function(e){
+  if(drawTool!=='pick'||PEND)return;
+  e.stopPropagation(); e.preventDefault();
+  board.setPointerCapture(e.pointerId);
+  var p=boardCoord(e);
+  if(PICK&&PICK.set[p[1]*W+p[0]]){ PICK._drag=[p[0],p[1]]; return; }   /* drag what is picked */
+  var got=pickAt(p[0],p[1]);
+  if(!got){ pickSet(null); return; }
+  pickSet(got); playTick();
+  fireToast(got.kind==='named'?('Picked '+got.name):('Picked a shape · '+got.cells.length+' cells'));
+},true);
+board.addEventListener('pointermove',function(e){
+  if(drawTool!=='pick'||!PICK||!PICK._drag)return;
+  e.stopPropagation();
+  var p=boardCoord(e);
+  PICK.dx=p[0]-PICK._drag[0]; PICK.dy=p[1]-PICK._drag[1];
+  paintBoard();
+},true);
+board.addEventListener('pointerup',function(e){
+  if(drawTool!=='pick'||!PICK||!PICK._drag)return;
+  e.stopPropagation(); PICK._drag=null;
+  if(PICK.dx||PICK.dy) pickCommit(PICK.dx,PICK.dy,false);
+  paintBoard(); pickBar(true);
+},true);
 
 /* ---- AI: generate an ANIMATED SEQUENCE as a branch ---- */
 var ANIM_SYS=[
