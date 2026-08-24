@@ -450,10 +450,18 @@
   #be-worlds em{ display:block; font-style:normal; font:400 9px/1.3 ui-monospace,monospace;
                  text-transform:none; letter-spacing:0; margin-top:6px; opacity:.7 }
   #be-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:3px }
+  /* the archive is 2,033 pieces; the empty frame shows a handful and says where
+     the rest are. a door, not a catalogue. */
+  #be-arch{ display:grid; grid-template-columns:repeat(9,1fr); gap:3px }
+  #be-arch button{ padding:0; border:2px solid var(--k); background:#fff; cursor:pointer;
+                   aspect-ratio:1; overflow:hidden; display:block }
+  #be-arch img{ width:100%; height:100%; object-fit:contain; display:block }
+  #be-arch button:hover{ outline:2px solid var(--aB) }
   #be-grid button{ padding:0; border:2px solid var(--k); background:#fff; cursor:pointer; overflow:hidden;
                    display:block; line-height:0 }
   #be-grid canvas{ display:block; width:100%; height:auto; image-rendering:pixelated }
   #be-grid button:hover{ outline:2px solid var(--aB) }
+  @media (max-width:560px){ #be-arch{ grid-template-columns:repeat(6,1fr) } }
   @media (max-width:560px){ #be-grid{ grid-template-columns:repeat(5,1fr) } }
 
   /* collapsible panels — they SHRINK the stage, never cover it */
@@ -776,8 +784,10 @@
   <div id="board-wrap">
     <canvas id="board" width="640" height="480"></canvas>
     <div id="board-empty">FRAME <span id="be-n">1</span><i>draw here · or LENS / WRITE / PROMPT in AUTHOR</i>
-      <div id="be-worlds" hidden><b>THE FOURTEEN</b><div id="be-grid"></div>
-      <em>tap a poem to put it in this frame</em></div></div>
+      <div id="be-worlds" hidden><b>THE FOURTEEN &middot; drawn</b><div id="be-grid"></div>
+      <b id="be-arch-h" style="margin-top:9px">THE ARCHIVE &middot; filmed</b>
+      <div id="be-arch"></div>
+      <em>tap either to put it in this frame &middot; more in AUTHOR</em></div></div>
     <div id="edit-badge" hidden></div>
   </div>
   <div id="coach" hidden><span id="coach-txt"></span></div>
@@ -6431,6 +6441,30 @@ function beWorlds(){
       box.appendChild(b);
     });
     if(wrap) wrap.hidden=false;
+    beArchive();
+  });
+}
+/* THE OTHER HALF. The fourteen are what was drawn; the archive is what was
+   filmed, and a frame that can only take one of them is half a tool. A dozen
+   faces of the pile sit here — tap one and it lands in the middle of the frame
+   as a placement you can drag and size. The drawer has the other 2,021. */
+function beArchive(){
+  var box=document.getElementById('be-arch'); if(!box) return;
+  arcLoad().then(function(){
+    if(!ARC||!ARC.rows.length){ var h=document.getElementById('be-arch-h');
+      if(h)h.style.display='none'; return; }
+    box.innerHTML='';
+    /* one of each noun, best score first: the pile's range rather than its top */
+    ARC.nouns.slice(0,9).forEach(function(n){
+      var e=(ARC.by[n]||[])[0]; if(!e) return;
+      var b=document.createElement('button'); b.type='button'; b.title=n+' · '+e.id;
+      var im=document.createElement('img'); im.src='../thumbs/'+e.id+'.webp'; im.loading='lazy';
+      b.appendChild(im);
+      b.onclick=function(){ playTick(); ARC_PICK=e.id; ARC_IMG[e.id]=im;
+        var go=function(){ pendStart(im,e.id,W>>1,H>>1,Math.round(Math.min(W,H)*0.55)); };
+        if(im.complete&&im.naturalWidth) go(); else im.onload=go; };
+      box.appendChild(b);
+    });
   });
 }
 (function(){
