@@ -5117,12 +5117,33 @@ function maskGridQuad(img, quad, rows, count, k){
   return g;
 }
 /* the anchor of one host patch, right now, on this frame */
-function hostAnchor(host, part, done){
+/* ═════════════════════════════════════════════════════════════════════════
+   A PART IS A SLOT, NOT JUST A MOTION
+   ─────────────────────────────────────────────────────────────────────────
+   Binding began as FOLLOW: a patch keeps its own shape and is carried by a
+   part's centre, angle and scale. That is right for a hat above a head.
+
+   It is not what a beflix body is for. A dotted figure is an ARMATURE — a head,
+   a torso, an upper arm, a forearm, a hand — and the thing you want to do with
+   it is put a real photograph INTO one of those, so the picture takes the
+   part's shape and then moves with it. Same for a wall in a drawn building, a
+   handle on a drawn jug, a panel of a facade. The part is a slot.
+
+   FIT does that. The part is rendered by itself, and from its cells come both
+   an oriented box — centre, principal axis, length along it, width across — and
+   a MASK. The image is warped into the box and then cut to the mask, so it
+   lands in the part's shape rather than in a rectangle over it. Every frame it
+   is measured again, so when the part turns or moves the picture turns with it.
+
+   The two are one field on the same record: `binding.fit` says take the part's
+   shape, and without it the patch keeps its own and only rides along.
+   ═════════════════════════════════════════════════════════════════════════ */
+function hostPart(host, part, done){
   if(!host||!host.on) return done(null);
   if(host.kind==='world'){
     var want=(part&&part!=='*')?[part]:(host.src.parts||null);
     return hwRenderAt(host.src.slug, host.src.t, want)
-      .then(function(g){ done(anchorOfGrid(g)); })
+      .then(function(g){ done(g?{grid:g, anchor:anchorOfGrid(g)}:null); })
       .catch(function(){ done(null); });
   }
   if(host.kind==='clip'){
@@ -5133,7 +5154,8 @@ function hostAnchor(host, part, done){
       var k=Math.max(0,Math.min(count-1, host.src.k|0));
       var q=quadFromPlace({x:cp.x!=null?cp.x:W/2, y:cp.y!=null?cp.y:H/2,
                            size:cp.size||W, quad:cp.quad}, 192, rows);
-      done(anchorOfGrid(maskGridQuad(im,q,rows,count,k)));
+      var g=maskGridQuad(im,q,rows,count,k);
+      done(g?{grid:g, anchor:anchorOfGrid(g)}:null);
     };
     var hv=ARC_IMG['clip:'+host.src.patch];
     if(hv&&hv.complete&&hv.naturalWidth) return go(hv);
@@ -5144,6 +5166,21 @@ function hostAnchor(host, part, done){
     return;
   }
   done(null);
+}
+function hostAnchor(host, part, done){
+  hostPart(host, part, function(r){ done(r?r.anchor:null); });
+}
+/* the part's own box: along its axis, not along the screen. A forearm lying at
+   forty degrees wants a sleeve at forty degrees, and an upright rectangle round
+   it is not the same thing at all. */
+function quadFromAnchor(a){
+  if(!a) return null;
+  var hl=Math.max(2,a.len)/2, hw=Math.max(2,a.wid)/2;
+  var co=Math.cos(a.ang), si=Math.sin(a.ang);
+  var pt=function(u,v){ return [a.cx+u*hl*co - v*hw*si, a.cy+u*hl*si + v*hw*co]; };
+  /* the axis runs left-to-right through the box, so the image's width follows
+     the part's length — which is what a sleeve, a plank or a panel wants */
+  return [pt(-1,-1), pt(1,-1), pt(1,1), pt(-1,1)];
 }
 /* the axis is only defined to within a half turn, so take the turn that is
    actually a small one — otherwise a part flips 180 degrees between frames
@@ -5162,10 +5199,11 @@ function quadCarry(q, ref, now){
     return [now.cx+(dx*co-dy*si)*k, now.cy+(dx*si+dy*co)*k];
   });
 }
-/* the quad a patch actually stamps with: its own, unless it is carried */
-function effQuad(p, base, done){
+/* where a patch actually lands: its own quad, unless it is carried by a part
+   or fitted into one — and, when fitted, the part's own silhouette to cut to */
+function effPlace(p, base, done){
   var b=p.binding;
-  if(!b||!b.ref||!b.to) return done(base);
+  if(!b||!b.to || (!b.fit && !b.ref)) return done(base, null);
   /* A span bakes frames you are not looking at, so the host must be looked up
      on the node being baked — myNode would bind every frame to frame one.
      And it is looked up by LINEAGE, not by id: each frame holds its own cast
@@ -5173,10 +5211,22 @@ function effQuad(p, base, done){
      layer. Binding to an id would bind to one frame's copy and nothing else. */
   var here=pstack(_bakeAt||myNode);
   var host=here.filter(function(x){ return (x._from||x.id)===b.to; })[0];
-  if(!host) return done(base);
-  hostAnchor(host, b.part, function(now){
-    done(now?quadCarry(base, b.ref, now):base);
+  if(!host) return done(base, null);
+  hostPart(host, b.part, function(r){
+    if(!r||!r.anchor) return done(base, null);
+    if(b.fit){
+      var q=quadFromAnchor(r.anchor);
+      return done(q||base, (b.loose?null:r.grid));
+    }
+    done(quadCarry(base, b.ref, r.anchor), null);
   });
+}
+/* one stamp for both: warp into the quad, then cut to the mask if there is one */
+function stampInto(im, quad, floor, key, mask){
+  var g=stampGridQuad(im, quad, floor, key);
+  if(!g) return [];
+  if(mask){ for(var i=0;i<N;i++) if(!mask[i]) g[i]=0; }
+  return gridToPnt(g);
 }
 
 function patchCmds(p, done){
@@ -5200,8 +5250,8 @@ function patchCmds(p, done){
          source cache is keyed on the frame, not on the shot */
       var q=quadFromPlace({x:cp.x!=null?cp.x:W/2, y:cp.y!=null?cp.y:H/2,
                            size:cp.size||W, quad:cp.quad}, 192, rows);
-      effQuad(p, q, function(q2){
-        done(stampQuad(tmp, q2, cp.floor||1, 'clipf:'+p.src.patch+':'+k)||[]);
+      effPlace(p, q, function(q2, mask){
+        done(stampInto(tmp, q2, cp.floor||1, 'clipf:'+p.src.patch+':'+k, mask)||[]);
       });
     };
     var hv=ARC_IMG['clip:'+p.src.patch];
@@ -5226,9 +5276,9 @@ function patchCmds(p, done){
       var base0=quadFromPlace(pl, iw, ih);
       /* the binding is resolved ONCE, before the tiles are laid, so a bound
          mosaic travels as a field rather than as four hundred separate things */
-      effQuad(p, base0, function(base){
+      effPlace(p, base0, function(base, mask){
       var bc=quadCentre(base);
-      if(!r||!r.n||r.n<2) return done(stampQuad(im, base, pl.floor||2, 'el:'+p.src.id)||[]);
+      if(!r||!r.n||r.n<2) return done(stampInto(im, base, pl.floor||2, 'el:'+p.src.id, mask)||[]);
       /* A MOSAIC IS ONE PATCH THAT REPEATS. Making fifty layers to lay fifty
          tiles would be fifty things to manage and one thing to think about, so
          the repetition lives on the patch: change the count, the whole field
@@ -5251,7 +5301,7 @@ function patchCmds(p, done){
         var qq=quadShift(base, cx-bc[0], cy-bc[1]);
         var k2=Math.max(3,sz)/((pl.size||64)||1);
         if(Math.abs(k2-1)>1e-6) qq=quadScaleAbout(qq, cx, cy, k2);
-        var c1=stampQuad(im, qq, pl.floor||2, 'el:'+p.src.id);
+        var c1=stampInto(im, qq, pl.floor||2, 'el:'+p.src.id, mask);
         if(c1&&c1.length) out=out.concat(c1);
       }
       done(out);
@@ -7644,12 +7694,17 @@ function boardMenu(x, y, cx, cy){
     real.forEach(function(pt){
       m.item((PKIND[pt.kind]||'')+' '+(pt.name||pt.kind),
         (pt.on?'':'hidden · ')+(BLEND_LABEL[pt.blend||'over']||'OVER').toLowerCase()
-          +(pt.binding?(' · bound to '+(pt.binding.part||'body')):''),
+          +(pt.binding?((pt.binding.fit?' · inside ':' · bound to ')+(pt.binding.part||'body')):''),
         function(){ PSEL=pt.id; paintStack(); layerMenu(pt, x, y); }, PSEL===pt.id);
     });
     var sel=real.filter(function(pt){ return pt.id===PSEL; })[0]||real[0];
     m.rule('THE '+((sel.name||sel.kind)+'').slice(0,18).toUpperCase());
     m.item('Blend…','how it meets what is under it',function(){ blendMenu(sel,x,y); });
+    if(sel.kind==='element'||sel.kind==='clip'){
+      var hs=st.filter(function(q){ return q.id!==sel.id && (q.kind==='world'||q.kind==='clip'); });
+      if(hs.length) m.item('Fit into a part…','it takes the part’s shape and moves with it',
+        function(){ bindMenu(sel, hs, x, y, 'fit'); });
+    }
     m.item('More…','duplicate, hide, reorder, bind, delete',function(){ layerMenu(sel,x,y); });
   }
   m.place();
@@ -8691,13 +8746,16 @@ function layerMenu(p, x, y){
     bakeNode(myNode, paintStack); });
   if(p.kind==='element'||p.kind==='clip'){
     if(p.binding&&p.binding.to){
-      item('Unbind ('+(p.binding.part||'body')+')', function(){
+      item((p.binding.fit?'Take out of ':'Unbind ')+(p.binding.part||'body'), function(){
         undoMark('unbind '+(p.name||p.kind),[myNode]);
         delete p.binding; bakeNode(myNode, paintStack); fireToast('Unbound'); });
     }
     var hosts=pstack(myNode).filter(function(x){
       return x.id!==p.id && (x.kind==='world'||x.kind==='clip'); });
-    if(hosts.length) item('Bind to a part…', function(){ bindMenu(p, hosts, x, y); });
+    if(hosts.length){
+      item('Fit into a part…', function(){ bindMenu(p, hosts, x, y, 'fit'); });
+      item('Follow a part…',   function(){ bindMenu(p, hosts, x, y, 'follow'); });
+    }
   }
   item('Delete', function(){ if(PSEL===p.id)PSEL=null; patchDrop(myNode,p.id); paintCard(); });
   document.body.appendChild(m);
@@ -8708,14 +8766,16 @@ function layerMenu(p, x, y){
   setTimeout(function(){ addEventListener('pointerdown',close,true); },0);
 }
 /* the hosts, and what each of them has to hold on to */
-function bindMenu(p, hosts, x, y){
+function bindMenu(p, hosts, x, y, mode){
+  mode=mode||'follow';
   var old=document.getElementById('lmenu'); if(old) old.remove();
   var m=document.createElement('div'); m.id='lmenu';
   m.style.cssText='position:fixed;z-index:90;background:var(--w);border:3px solid var(--k);'
     +'min-width:168px;max-height:60vh;overflow-y:auto;font:10px/1 ui-monospace,monospace';
   var head=document.createElement('div');
   head.style.cssText='padding:8px 10px;border-bottom:3px solid var(--k);font:9px/1.4 ui-monospace,monospace;opacity:.7';
-  head.textContent='CARRY '+(p.name||p.kind).slice(0,22)+' WITH…';
+  head.textContent=(mode==='fit'?'PUT ':'CARRY ')+(p.name||p.kind).slice(0,20)
+    +(mode==='fit'?' INTO…':' WITH…');
   m.appendChild(head);
   var item=function(txt,sub,fn){
     var b=document.createElement('button'); b.type='button';
@@ -8728,10 +8788,17 @@ function bindMenu(p, hosts, x, y){
   var doBind=function(host, part, label){
     hostAnchor(host, part, function(a){
       if(!a){ fireToast('That part inks nothing here — nothing to hold on to'); return; }
-      undoMark('bind '+(p.name||p.kind),[myNode]);
-      /* the anchor is captured NOW, so binding does not move the patch. It
-         only diverges as the host does — which makes it checkable. */
-      p.binding={to:(host._from||host.id), part:part, ref:a};
+      undoMark((mode==='fit'?'fit ':'bind ')+(p.name||p.kind),[myNode]);
+      if(mode==='fit'){
+        /* FIT takes the part's shape every frame, so there is nothing to
+           capture — no `ref`, because the patch's own placement stops mattering
+           the moment it is put inside something else. */
+        p.binding={to:(host._from||host.id), part:part, fit:true};
+      } else {
+        /* the anchor is captured NOW, so following does not move the patch. It
+           only diverges as the host does — which makes it checkable. */
+        p.binding={to:(host._from||host.id), part:part, ref:a};
+      }
       p.place=p.place||{};
       if(!p.place.quad){
         var im=(p.kind==='element')?ARC_IMG[p.src.id]:null;
@@ -8739,7 +8806,7 @@ function bindMenu(p, hosts, x, y){
       }
       playThud();
       bakeNode(myNode, function(){ paintStack(); });
-      fireToast('Bound to '+label);
+      fireToast((mode==='fit'?'Fitted into ':'Bound to ')+label);
     });
   };
   hosts.forEach(function(h){
