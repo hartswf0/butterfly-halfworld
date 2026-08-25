@@ -443,6 +443,20 @@
                overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding:0 2px }
   #rail .rh{ font:700 7px/1.4 ui-monospace,monospace; color:#fff; letter-spacing:.14em;
              text-align:center; padding:2px 0; flex:0 0 auto }
+  #undo-btn{ flex:0 0 auto; width:100%; min-height:30px; font:700 8px ui-monospace,monospace;
+             letter-spacing:.1em; margin-bottom:3px }
+  /* THE CONTROLS COME TO THE PICTURE. Selecting a layer used to open a
+     full-height sheet over the board, so you chose a layer and then could not
+     see the thing you had chosen it in. This card sits on the stage next to the
+     rail and never covers the frame it is describing. */
+  #lcard{ position:absolute; right:70px; top:4px; z-index:21; width:206px; display:none;
+          background:var(--w); border:3px solid var(--k); padding:7px;
+          max-height:calc(100% - 8px); overflow-y:auto }
+  #lcard.on{ display:block }
+  #lcard h4{ font:700 9px/1.3 ui-monospace,monospace; letter-spacing:.1em; margin:0 0 6px;
+             display:flex; gap:4px; align-items:center }
+  #lcard h4 span{ flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+  @media (max-width:560px){ #lcard{ right:58px; left:4px; width:auto } }
   @media (max-width:560px){ #rail{ width:52px } }
   #board-wrap{ position:relative; background:var(--w); box-shadow:0 0 0 3px var(--k); overflow:hidden; }
   canvas#board{ image-rendering:auto; display:block; touch-action:none; cursor:crosshair; background:var(--w); }
@@ -801,7 +815,10 @@
 </div>
 
 <div id="stage">
-  <div id="rail"><div class="rh">LAYERS</div><div id="rail-list" style="display:flex;flex-direction:column;gap:3px"></div></div>
+  <div id="rail"><div class="rh">LAYERS</div>
+    <button id="undo-btn" type="button" disabled>UNDO</button>
+    <div id="rail-list" style="display:flex;flex-direction:column;gap:3px"></div></div>
+  <div id="lcard"></div>
   <div id="board-wrap">
     <canvas id="board" width="640" height="480"></canvas>
     <div id="board-empty">FRAME <span id="be-n">1</span><i>draw here · or LENS / WRITE / PROMPT in AUTHOR</i>
@@ -4900,6 +4917,53 @@ function renderEdlVizNow(){
    an `ink` patch on top of it, so the rule holds without a special case: there
    is no way to edit a frame that is not adding a patch.
    ══════════════════════════════════════════════════════════════════════════ */
+/* ══ UNDO ══════════════════════════════════════════════════════════════════
+   There was none. Every patch operation was final, which is a strange thing to
+   say about a tool whose whole claim is that nothing is final — a stack you can
+   restack but not un-restack is only half the promise.
+
+   Undo is cheap here precisely because a frame is derived: a step is a snapshot
+   of the STACKS it is about to touch, and undoing is putting them back and
+   re-baking. No inverse operations to get wrong, no command log to replay. The
+   thing that made the frame rebuildable makes it revertable.
+
+   Bounded at 40 steps, because a stack snapshot of a spanned passage is 24
+   arrays and an unbounded history of those is a leak with good intentions. */
+var UNDO=[], UNDO_MAX=40;
+function snapOf(ids){
+  var m={}; ids.forEach(function(id){
+    m[id]=(PSTACK[id]||[]).map(function(p){ return JSON.parse(JSON.stringify(p)); });
+  });
+  return m;
+}
+function undoMark(label, ids){
+  UNDO.push({label:label, at:myNode, snap:snapOf(ids&&ids.length?ids:[myNode])});
+  if(UNDO.length>UNDO_MAX) UNDO.shift();
+  paintUndo();
+}
+function undoStep(){
+  var u=UNDO.pop();
+  if(!u){ fireToast('Nothing to undo'); return; }
+  var ids=Object.keys(u.snap), i=0;
+  ids.forEach(function(id){ PSTACK[id]=u.snap[id]; });
+  playThud();
+  var step=function(){
+    if(i>=ids.length){ if(u.at&&nodes[u.at]&&typeof gotoNode==='function'&&u.at!==myNode) gotoNode(u.at);
+      paintStack(); renderStrip(); fireToast('Undone · '+u.label); paintUndo(); return; }
+    bakeNode(ids[i++], function(){
+      if(window.MessageChannel){ var mc=new MessageChannel(); mc.port1.onmessage=step; mc.port2.postMessage(0); }
+      else setTimeout(step,0);
+    });
+  };
+  step();
+}
+function paintUndo(){
+  var b=document.getElementById('undo-btn'); if(!b) return;
+  b.disabled=!UNDO.length;
+  b.style.opacity=UNDO.length?'1':'.35';
+  b.title=UNDO.length?('Undo '+UNDO[UNDO.length-1].label+' ('+UNDO.length+')'):'Nothing to undo';
+}
+
 var PSTACK=Object.create(null);      /* node id -> [patch] */
 var PID=0;
 function pstack(id){ return PSTACK[id]||(PSTACK[id]=[]); }
@@ -5028,6 +5092,7 @@ function bakeNode(id, then){
 }
 /* add a patch and rebuild. this is the ONLY way anything enters a frame. */
 function addPatch(id, p, then){
+  undoMark('add '+(p.name||p.kind), [id]);
   var st=pstack(id);
   groundPatch(id);
   p.z=(st.length?Math.max.apply(null,st.map(function(x){return x.z||0;})):0)+1;
@@ -5037,13 +5102,18 @@ function addPatch(id, p, then){
 }
 function patchSet(id, pid, on){
   var st=pstack(id), p=st.filter(function(x){return x.id===pid;})[0];
-  if(!p)return; p.on=!!on; bakeNode(id, function(){ paintStack(); });
+  if(!p)return;
+  undoMark((on?'show ':'hide ')+(p.name||p.kind), [id]);
+  p.on=!!on; bakeNode(id, function(){ paintStack(); });
 }
 function patchDrop(id, pid){
+  var gone=pstack(id).filter(function(x){return x.id===pid;})[0];
+  undoMark('remove '+((gone&&gone.name)||'patch'), [id]);
   PSTACK[id]=pstack(id).filter(function(x){return x.id!==pid;});
   bakeNode(id, function(){ paintStack(); });
 }
 function patchMove(id, pid, dir){
+  undoMark('restack', [id]);
   var st=pstack(id).slice().sort(function(a,b){return (a.z||0)-(b.z||0);});
   var i=st.findIndex(function(x){return x.id===pid;});
   var j=i+dir;
@@ -5077,7 +5147,14 @@ function drawRaw(lines){ editNode(myNode, lines); }
 
 // ---- structural ops ----
 function extend(){ if(treeSize()>=NODE_MAX){ fireToast('Tree at capacity ('+NODE_MAX+')'); return; } stopPlay(); playClack(); var id=mkId(); mkNode(myNode,null,id,ME,{kind:'blank'}); sendCtl('K '+myNode+' '+id); branchChoice[myNode]=id; myNode=id; renderStrip(); renderBranches(); paintBoard(); renderLightTable(); sendCursor(); forkGateCheck(myNode); fireToast('Frame added to branch'); }
-function fork(){ if(treeSize()>=NODE_MAX){ fireToast('Tree at capacity ('+NODE_MAX+')'); return; } stopPlay(); playThud(); var par=nodes[myNode].parent; if(par===null)par=myNode; var g=curGrid().slice(); var id=mkId(); mkNode(par,g,id,ME,{kind:'fork'}); sendCtl('K '+par+' '+id); sendCtl('F '+id+'\n'+frameToCmds(g).join('\n')); branchChoice[par]=id; myNode=id; if(!gateHas(GATE.FORK))_onbForkId=id; renderStrip(); renderBranches(); paintBoard(); sendCursor(); fireToast('Forked \u2014 this frame carried in'); }
+function fork(){ if(treeSize()>=NODE_MAX){ fireToast('Tree at capacity ('+NODE_MAX+')'); return; } stopPlay(); playThud(); var par=nodes[myNode].parent; if(par===null)par=myNode; var g=curGrid().slice(); var id=mkId(); mkNode(par,g,id,ME,{kind:'fork'}); sendCtl('K '+par+' '+id); sendCtl('F '+id+'\n'+frameToCmds(g).join('\n'));
+  /* A FORK CARRIES THE STACK, not a photograph of it. Copying the grid alone
+     gave a branch a baked frame with no layers — you could see what the other
+     branch had made and not take it apart, which defeats branching a collage.
+     The copies are deep and their ids are fresh, so the two branches diverge
+     instead of sharing patches. */
+  PSTACK[id]=(PSTACK[myNode]||[]).map(function(p){ var c=JSON.parse(JSON.stringify(p)); c.id='p'+(++PID); return c; });
+  branchChoice[par]=id; myNode=id; if(!gateHas(GATE.FORK))_onbForkId=id; renderStrip(); renderBranches(); paintBoard(); paintStack(); sendCursor(); fireToast('Forked \u2014 frame and its '+Math.max(0,PSTACK[id].length-1)+' patches carried in'); }
 function delNode(id){ if(!nodes[id]||id===rootId)return false; var stack=[id],victims={}; while(stack.length){ var c=stack.pop(); victims[c]=1; atlasDrop(c); if(nodes[c]) nodes[c].kids.forEach(function(k){stack.push(k);}); }
   var par=nodes[id].parent; if(par&&nodes[par]) nodes[par].kids=nodes[par].kids.filter(function(k){return k!==id;});
   for(var v in victims){ delete nodes[v]; if(branchChoice[v])delete branchChoice[v]; }
@@ -7359,6 +7436,7 @@ function patchSpanApply(pid, n, then){
     }
     ids.push(kid); cur=kid;
   }
+  undoMark('span '+(p.name||p.kind)+' × '+ids.length, ids);
   Progress.start('Spanning '+(p.name||p.kind),{total:ids.length,stage:'across '+ids.length+' frames',cancelable:true,
     onCancel:function(){ ids.length=0; }});
   var j=0;
@@ -7393,6 +7471,32 @@ function patchSpanApply(pid, n, then){
   step();
 }
 
+/* the card: the selected layer's controls, on the stage beside the rail */
+function paintCard(){
+  var c=document.getElementById('lcard'); if(!c) return;
+  var p=pstack(myNode).filter(function(x){return x.id===PSEL;})[0];
+  if(!p){ c.classList.remove('on'); c.innerHTML=''; return; }
+  c.innerHTML='';
+  var h=document.createElement('h4');
+  var t=document.createElement('span');
+  t.textContent=(PKIND[p.kind]||'?')+' '+(p.name||p.kind);
+  h.appendChild(t);
+  var mk=function(txt,fn){ var b=document.createElement('button'); b.type='button'; b.textContent=txt;
+    b.style.cssText='min-height:26px;padding:2px 6px;font:9px ui-monospace,monospace'; b.onclick=fn; return b; };
+  if(p.kind!=='ground'){
+    h.appendChild(mk('▲',function(){ patchMove(myNode,p.id,1); }));
+    h.appendChild(mk('▼',function(){ patchMove(myNode,p.id,-1); }));
+    h.appendChild(mk(p.on?'ON':'OFF',function(){ patchSet(myNode,p.id,!p.on); }));
+    h.appendChild(mk('✕',function(){ PSEL=null; patchDrop(myNode,p.id); paintCard(); }));
+  }
+  h.appendChild(mk('×',function(){ PSEL=null; paintStack(); paintCard(); }));
+  c.appendChild(h);
+  c.appendChild(patchControls(p));
+  c.classList.add('on');
+}
+(function(){ var _pr=paintRail;
+  paintRail=function(){ _pr(); try{ paintCard(); }catch(e){} }; })();
+
 /* the rail: the same stack, always on screen. tapping a tile selects the patch
    and opens the panel's controls for it, so there is one selection and not two. */
 function paintRail(){
@@ -7414,7 +7518,7 @@ function paintRail(){
       +(p.span&&p.span>1?(' '+p.span+'f'):'');
     d.appendChild(b);
     d.title=(p.name||p.kind)+' — tap to select, double-tap to hide';
-    d.onclick=function(){ PSEL=(PSEL===p.id?null:p.id); playTick(); paintStack(); paintRail(); };
+    d.onclick=function(){ PSEL=(PSEL===p.id?null:p.id); playTick(); paintStack(); paintRail(); paintCard(); };
     d.ondblclick=function(ev){ ev.preventDefault(); patchSet(myNode,p.id,!p.on); };
     list.appendChild(d);
   });
@@ -7423,6 +7527,13 @@ function paintRail(){
 (function(){ var _ps=paintStack;
   paintStack=function(){ _ps(); try{ paintRail(); }catch(e){} }; })();
 
+(function(){
+  var b=document.getElementById('undo-btn');
+  if(b) b.addEventListener('click', guard(undoStep,'undo'));
+  addEventListener('keydown', function(e){
+    if((e.metaKey||e.ctrlKey) && (e.key==='z'||e.key==='Z')){ e.preventDefault(); undoStep(); }
+  });
+})();
 /* the stack belongs to the frame you are standing on */
 (function(){ var _g=window.gotoNode;
   if(typeof gotoNode==='function'){ var orig=gotoNode;
@@ -7484,7 +7595,8 @@ var seqBatchN=0;
 function buildLinearTree(frames){ if(frames.length>NODE_MAX)frames=frames.slice(0,NODE_MAX); var nn={},prev=null,rid=null; for(var i=0;i<frames.length;i++){ var id=mkId(); nn[id]={id:id,grid:frames[i],parent:prev,kids:[],author:ME,rev:++REV,batch:''}; if(prev)nn[prev].kids.push(id); else rid=id; prev=id; } return {nodes:nn,rootId:rid,tail:prev}; }
 function runScript(replace){ var ta=document.getElementById('mk-script'); var text=ta?ta.value:''; var lines=extractBeflixCommands(text); if(!lines.length){ fireToast('No valid BEFLIX commands'); return; } var frames=runBeflixAnim(lines); if(!frames.length){ fireToast('Nothing to run'); return; } stopPlay(); playThud(); if(replace){ var built=buildLinearTree(frames); var probs=validateTree(built.nodes,built.rootId); if(probs.length){ fireToast('Script rejected'); log('SCRIPT',probs[0]); return; } nodes=built.nodes; rootId=built.rootId; myNode=built.rootId; theirNode=null; theirPen.on=false; branchChoice={}; renderStrip(); renderBranches(); paintBoard(); sendCursor(); sendSnapshot('script-replace'); fireToast('Replaced \u2014 '+frames.length+' frames'); } else { appendSequence(frames,'script'); fireToast('Added \u2014 '+frames.length+' frames'); } }
 function spliceNode(id){ if(!nodes[id]||id===rootId)return false; var par=nodes[id].parent; if(par===null||!nodes[par])return false; var kids=nodes[id].kids.slice(); nodes[par].kids=nodes[par].kids.filter(function(k){return k!==id;}); kids.forEach(function(k){ if(nodes[k]){ nodes[k].parent=par; nodes[par].kids.push(k); } }); nodes[par].kids.sort(); delete nodes[id]; for(var p in branchChoice){ if(p===id||branchChoice[p]===id)delete branchChoice[p]; } if(myNode===id)myNode=kids[0]||par; if(theirNode===id)theirNode=null; if(theirPen.node===id)theirPen.on=false; return true; }
-function duplicateFrameAt(id){ if(!nodes[id])return false; if(treeSize()>=NODE_MAX){ fireToast('Tree at capacity'); return false; } var kids=nodes[id].kids.slice(); var nid=mkId(); nodes[nid]={id:nid,grid:getGrid(id).slice(),parent:id,kids:[],author:ME,rev:++REV,batch:''}; kids.forEach(function(k){ if(nodes[k]){ nodes[k].parent=nid; nodes[nid].kids.push(k); } }); nodes[nid].kids.sort(); nodes[id].kids=[nid]; return true; }
+function duplicateFrameAt(id){ if(!nodes[id])return false; if(treeSize()>=NODE_MAX){ fireToast('Tree at capacity'); return false; } var kids=nodes[id].kids.slice(); var nid=mkId(); nodes[nid]={id:nid,grid:getGrid(id).slice(),parent:id,kids:[],author:ME,rev:++REV,batch:''};
+  PSTACK[nid]=(PSTACK[id]||[]).map(function(p){ var c=JSON.parse(JSON.stringify(p)); c.id='p'+(++PID); return c; }); kids.forEach(function(k){ if(nodes[k]){ nodes[k].parent=nid; nodes[nid].kids.push(k); } }); nodes[nid].kids.sort(); nodes[id].kids=[nid]; return true; }
 function structuralSync(){ var probs=validateTree(nodes,rootId); if(probs.length){ log('EDIT',probs[0]); return false; } sendCtl(snapshotTree()); renderStrip(); renderBranches(); paintBoard(); sendCursor(); return true; }
 var _ctxId=null, _suppressClick=false;
 function showCtx(x,y,id){ _ctxId=id; var m=document.getElementById('ctx'); if(!m)return; var h=document.getElementById('ctx-h'); if(h)h.textContent=addressString(id); var dk=document.getElementById('ctx-deepen'); if(dk)dk.style.display=(TIER_NEXT[tierOf(id)]===tierOf(id)&&tierOf(id)==='SHOT')?'none':'flex'; m.style.left=Math.max(6,Math.min(x,window.innerWidth-242))+'px'; m.style.top=Math.max(6,Math.min(y,window.innerHeight-110))+'px'; m.classList.add('on'); playTick(); }
