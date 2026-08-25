@@ -5018,7 +5018,11 @@ function patchCmds(p, done){
       var tmp=document.createElement('canvas'); tmp.width=192; tmp.height=rows;
       var tc=tmp.getContext('2d',{willReadFrequently:true});
       tc.drawImage(im, 0, k*rows, im.naturalWidth, rows, 0,0,192,rows);
-      done(stampCmds(tmp, cp.x||W/2, cp.y||H/2, cp.size||W, cp.floor||1)||[]);
+      /* the clip's own frame is its quad — the sheet is re-cut each k, so the
+         source cache is keyed on the frame, not on the shot */
+      var q=quadFromPlace({x:cp.x!=null?cp.x:W/2, y:cp.y!=null?cp.y:H/2,
+                           size:cp.size||W, quad:cp.quad}, 192, rows);
+      done(stampQuad(tmp, q, cp.floor||1, 'clipf:'+p.src.patch+':'+k)||[]);
     };
     var hv=ARC_IMG['clip:'+p.src.patch];
     if(hv&&hv.complete&&hv.naturalWidth) return draw1(hv);
@@ -5038,7 +5042,9 @@ function patchCmds(p, done){
     var lay=function(im){
       if(!im){ done([]); return; }
       var r=p.repeat;
-      if(!r||!r.n||r.n<2) return done(stampCmds(im, pl.x||W/2, pl.y||H/2, pl.size||64, pl.floor||2)||[]);
+      var iw=im.naturalWidth||im.width, ih=im.naturalHeight||im.height;
+      var base=quadFromPlace(pl, iw, ih), bc=quadCentre(base);
+      if(!r||!r.n||r.n<2) return done(stampQuad(im, base, pl.floor||2, 'el:'+p.src.id)||[]);
       /* A MOSAIC IS ONE PATCH THAT REPEATS. Making fifty layers to lay fifty
          tiles would be fifty things to manage and one thing to think about, so
          the repetition lives on the patch: change the count, the whole field
@@ -5056,7 +5062,12 @@ function patchCmds(p, done){
                cy=(pl.y||H/2)+(row-(rows2-1)/2)*gap; }
         if(r.jitter){ cx+=(rnd()-0.5)*r.jitter; cy+=(rnd()-0.5)*r.jitter; }
         if(r.scale) sz=sz*(1+(rnd()-0.5)*r.scale);
-        var c1=stampCmds(im, cx, cy, Math.max(3,sz), pl.floor||2);
+        /* every tile is the SAME quad moved and resized, so a warped patch
+           tiles warped — the mosaic inherits whatever the corners say */
+        var qq=quadShift(base, cx-bc[0], cy-bc[1]);
+        var k2=Math.max(3,sz)/((pl.size||64)||1);
+        if(Math.abs(k2-1)>1e-6) qq=quadScaleAbout(qq, cx, cy, k2);
+        var c1=stampQuad(im, qq, pl.floor||2, 'el:'+p.src.id);
         if(c1&&c1.length) out=out.concat(c1);
       }
       done(out);
@@ -6066,6 +6077,126 @@ function arcGrid(){
   });
 }
 /* a piece, quantised to the eight levels and RLE'd into PNT runs */
+/* ═════════════════════════════════════════════════════════════════════════
+   THE QUAD — one representation for scale, rotation and warp
+   ─────────────────────────────────────────────────────────────────────────
+   A patch used to be placed with {x,y,size}: a centre and a width. That can
+   be moved and it can be made bigger, and nothing else. You could not turn a
+   figure, you could not lean a window, and there was nowhere for a control
+   point to write, because a control point IS a corner and there were no
+   corners — only a centre.
+
+   So a placement is four corners, TL TR BR BL, in field coordinates. Scale is
+   dragging one. Rotation is the four of them turning together. Warp is one
+   corner leaving the plane of the others, which no affine transform can do
+   and a projective one can. And BINDING is the same four corners carried by
+   somebody else's motion.
+
+   {x,y,size} still works and still means what it meant — a quad is derived
+   from it when none is stored — so nothing already authored has to change.
+   ═════════════════════════════════════════════════════════════════════════ */
+function quadFromPlace(pl, iw, ih){
+  if(pl && pl.quad && pl.quad.length===4) return pl.quad;
+  var size=(pl&&pl.size)||64, ar=(iw&&ih)?(iw/ih):1;
+  var dw=ar>=1?size:size*ar, dh=ar>=1?size/ar:size;
+  var cx=(pl&&pl.x!=null)?pl.x:W/2, cy=(pl&&pl.y!=null)?pl.y:H/2;
+  var x0=cx-dw/2, y0=cy-dh/2, x1=cx+dw/2, y1=cy+dh/2;
+  return [[x0,y0],[x1,y0],[x1,y1],[x0,y1]];
+}
+function quadCentre(q){
+  return [(q[0][0]+q[1][0]+q[2][0]+q[3][0])/4,
+          (q[0][1]+q[1][1]+q[2][1]+q[3][1])/4];
+}
+/* the unit square (0,0)(1,0)(1,1)(0,1) onto the quad — Heckbert's form,
+   which stays exact when the quad happens to be a parallelogram */
+function quadMatrix(q){
+  var x0=q[0][0],y0=q[0][1], x1=q[1][0],y1=q[1][1],
+      x2=q[2][0],y2=q[2][1], x3=q[3][0],y3=q[3][1];
+  var sx=x0-x1+x2-x3, sy=y0-y1+y2-y3, a,b,c,d,e,f,g,h;
+  if(Math.abs(sx)<1e-9 && Math.abs(sy)<1e-9){
+    a=x1-x0; b=x2-x1; c=x0; d=y1-y0; e=y2-y1; f=y0; g=0; h=0;
+  } else {
+    var dx1=x1-x2, dx2=x3-x2, dy1=y1-y2, dy2=y3-y2;
+    var den=dx1*dy2-dx2*dy1;
+    if(Math.abs(den)<1e-9) return null;
+    g=(sx*dy2-dx2*sy)/den; h=(dx1*sy-sx*dy1)/den;
+    a=x1-x0+g*x1; b=x3-x0+h*x3; c=x0;
+    d=y1-y0+g*y1; e=y3-y0+h*y3; f=y0;
+  }
+  /* inverse, by adjugate — the stamp maps DESTINATION back to source */
+  var A=e-f*h, B=c*h-b, C=b*f-c*e,
+      D=f*g-d,  E=a-c*g, F=c*d-a*f,
+      G=d*h-e*g,Hh=b*g-a*h,I=a*e-b*d;
+  var det=a*A+b*D+c*G;
+  if(Math.abs(det)<1e-9) return null;
+  return [A/det,B/det,C/det, D/det,E/det,F/det, G/det,Hh/det,I/det];
+}
+/* source pixels, once per image — the warp samples them thousands of times */
+var _srcPix={};
+function srcPixels(img, key){
+  var iw=img.naturalWidth||img.width, ih=img.naturalHeight||img.height;
+  if(!iw||!ih) return null;
+  var c=_srcPix[key];
+  if(c && c.w===iw && c.h===ih) return c;
+  var cv=document.createElement('canvas'); cv.width=iw; cv.height=ih;
+  var cx=cv.getContext('2d',{willReadFrequently:true});
+  try{ cx.drawImage(img,0,0); }catch(e){ return null; }
+  c={w:iw,h:ih,data:cx.getImageData(0,0,iw,ih).data};
+  if(Object.keys(_srcPix).length>24) _srcPix={};
+  _srcPix[key]=c;
+  return c;
+}
+function stampGridQuad(img, quad, floor, key){
+  var src=srcPixels(img, key||'q'); if(!src) return null;
+  var M=quadMatrix(quad); if(!M) return null;
+  var minx=Math.max(0,Math.floor(Math.min(quad[0][0],quad[1][0],quad[2][0],quad[3][0]))),
+      maxx=Math.min(W-1,Math.ceil(Math.max(quad[0][0],quad[1][0],quad[2][0],quad[3][0]))),
+      miny=Math.max(0,Math.floor(Math.min(quad[0][1],quad[1][1],quad[2][1],quad[3][1]))),
+      maxy=Math.min(H-1,Math.ceil(Math.max(quad[0][1],quad[1][1],quad[2][1],quad[3][1])));
+  if(maxx<minx||maxy<miny) return null;
+  var lum=new Float32Array(N), on=new Uint8Array(N), vals=[];
+  var px=src.data, iw=src.w, ih=src.h, X,Y;
+  for(Y=miny;Y<=maxy;Y++){
+    for(X=minx;X<=maxx;X++){
+      var xc=X+0.5, yc=Y+0.5;
+      var w=M[6]*xc+M[7]*yc+M[8]; if(Math.abs(w)<1e-12) continue;
+      var u=(M[0]*xc+M[1]*yc+M[2])/w, v=(M[3]*xc+M[4]*yc+M[5])/w;
+      if(u<0||u>=1||v<0||v>=1) continue;
+      var su=(u*iw)|0, sv=(v*ih)|0;
+      var sp=(sv*iw+su)*4;
+      if(px[sp+3]<110) continue;
+      var i=Y*W+X;
+      on[i]=1;
+      var l=px[sp]*0.299+px[sp+1]*0.587+px[sp+2]*0.114;
+      lum[i]=l; vals.push(l);
+    }
+  }
+  if(!vals.length) return null;
+  vals.sort(function(a,b){return a-b;});
+  var lo=vals[(vals.length*0.03)|0], hi=vals[Math.min(vals.length-1,(vals.length*0.97)|0)];
+  var span=(hi-lo)||1, fl=floor||2;
+  var grid=new Uint8Array(N), j;
+  for(j=0;j<N;j++){ if(!on[j])continue;
+    var t=1-Math.min(1,Math.max(0,(lum[j]-lo)/span));
+    var vv=fl+Math.round(t*(7-fl));
+    grid[j]=Math.max(1,Math.min(7,vv));
+  }
+  return grid;
+}
+function gridToPnt(g){
+  if(!g) return [];
+  var lines=[],y,x;
+  for(y=0;y<H;y++){ x=0; var rb=y*W;
+    while(x<W){ var v2=g[rb+x];
+      if(v2>0){ var sx=x; while(x<W&&g[rb+x]===v2)x++; lines.push('PNT '+sx+' '+y+' '+(x-sx)+' 1 '+v2); }
+      else x++; } }
+  return lines;
+}
+function stampQuad(img, quad, floor, key){ return gridToPnt(stampGridQuad(img,quad,floor,key)); }
+/* move a quad bodily, for mosaics and for nudges */
+function quadShift(q,dx,dy){ return q.map(function(c){ return [c[0]+dx,c[1]+dy]; }); }
+function quadScaleAbout(q,cx,cy,k){ return q.map(function(c){ return [cx+(c[0]-cx)*k, cy+(c[1]-cy)*k]; }); }
+
 function stampGrid(img, cx, cy, size, floor){
   var iw=img.naturalWidth||img.width, ih=img.naturalHeight||img.height;
   if(!iw||!ih) return null;
@@ -7000,6 +7131,150 @@ board.addEventListener('wheel',function(e){
   PEND.size=Math.max(6,Math.min(256,Math.round(PEND.size*(e.deltaY>0?0.92:1.09))));
   pendRecalc(); paintBoard(); pendBar(true);
 },{passive:false,capture:true});
+
+/* ═════════════════════════════════════════════════════════════════════════
+   CONTROL POINTS — the corners, on the board
+   ─────────────────────────────────────────────────────────────────────────
+   The quad is only a data structure until you can put your hands on it. Four
+   corner handles and a centre: drag a corner and that corner moves, which is
+   scale when you pull it outward, rotation when the four of them turn, and
+   warp when one of them leaves the plane of the others. Drag the centre and
+   the whole placement travels.
+
+   Only those five small spots take the pointer. Everywhere else the pen still
+   draws — a layer being selected must not turn the canvas into a dead surface,
+   because drawing over what you placed is half of collage.
+   ═════════════════════════════════════════════════════════════════════════ */
+var QDRAG=null, HANDLE_R=9;
+function boardCoordF(e){
+  var r=board.getBoundingClientRect(); if(!r.width)return[0,0];
+  return [(e.clientX-r.left)/r.width*W, (e.clientY-r.top)/r.height*H];
+}
+function boardScale(){ var r=board.getBoundingClientRect(); return r.width?r.width/W:BOARD_CELL; }
+/* the selected patch's corners, materialised on first sight */
+function patchQuad(p){
+  if(!p) return null;
+  if(p.kind!=='element' && p.kind!=='clip') return null;
+  var pl=p.place||(p.place={});
+  if(pl.quad && pl.quad.length===4) return pl.quad;
+  var iw=192, ih=144;
+  if(p.kind==='element'){
+    var im=ARC_IMG[p.src.id];
+    if(!im||!im.naturalWidth) return null;
+    iw=im.naturalWidth; ih=im.naturalHeight;
+  }
+  pl.quad=quadFromPlace(pl, iw, ih);
+  return pl.quad;
+}
+function selPatch(){
+  if(!PSEL) return null;
+  return pstack(myNode).filter(function(x){ return x.id===PSEL; })[0]||null;
+}
+function liveQuad(){
+  if(QDRAG && QDRAG.pid===PSEL) return QDRAG.quad;
+  var p=selPatch(); if(!p||!p.on) return null;
+  return patchQuad(p);
+}
+function paintHandles(){
+  if(PEND) return;                       /* a pending placement owns the board */
+  var q=liveQuad(); if(!q) return;
+  var c=boardScale();
+  bctx.save();
+  bctx.strokeStyle='#0033cc'; bctx.lineWidth=1;
+  bctx.setLineDash([4,3]);
+  bctx.beginPath();
+  bctx.moveTo(q[0][0]*c,q[0][1]*c);
+  bctx.lineTo(q[1][0]*c,q[1][1]*c);
+  bctx.lineTo(q[2][0]*c,q[2][1]*c);
+  bctx.lineTo(q[3][0]*c,q[3][1]*c);
+  bctx.closePath(); bctx.stroke();
+  bctx.setLineDash([]);
+  var i;
+  for(i=0;i<4;i++){
+    var hx=q[i][0]*c, hy=q[i][1]*c, s=(QDRAG&&QDRAG.k===i)?7:5;
+    bctx.fillStyle='#fff'; bctx.fillRect(hx-s,hy-s,s*2,s*2);
+    bctx.strokeStyle='#0033cc'; bctx.lineWidth=2; bctx.strokeRect(hx-s,hy-s,s*2,s*2);
+  }
+  var ctr=quadCentre(q);
+  bctx.beginPath(); bctx.arc(ctr[0]*c,ctr[1]*c,(QDRAG&&QDRAG.k===4)?7:5,0,6.2832);
+  bctx.fillStyle='#fff'; bctx.fill(); bctx.strokeStyle='#0033cc'; bctx.lineWidth=2; bctx.stroke();
+  bctx.restore();
+}
+(function(){ var _p=paintBoardNow;
+  paintBoardNow=function(){ _p(); try{ paintHandles(); }catch(e){} }; })();
+/* selecting a layer has to redraw the board, or the corners of the thing you
+   just selected are not on it — the handles live on the canvas, and nothing
+   else in the selection path touches the canvas */
+(function(){ var _ps=paintStack; var lastSel=null;
+  paintStack=function(){ var r=_ps.apply(this,arguments);
+    if(PSEL!==lastSel){ lastSel=PSEL; try{ paintBoard(); }catch(e){} }
+    return r; }; })();
+/* which handle is under the pointer, in SCREEN pixels so the target stays the
+   same size whatever the zoom — a hit box measured in field cells is a hit box
+   that vanishes when the board is small */
+function handleAt(e){
+  var q=liveQuad(); if(!q) return -1;
+  var c=boardScale(), f=boardCoordF(e), i, best=-1, bd=HANDLE_R*HANDLE_R;
+  for(i=0;i<4;i++){
+    var dx=(f[0]-q[i][0])*c, dy=(f[1]-q[i][1])*c, d=dx*dx+dy*dy;
+    if(d<bd){ bd=d; best=i; }
+  }
+  var ctr=quadCentre(q);
+  var cdx=(f[0]-ctr[0])*c, cdy=(f[1]-ctr[1])*c;
+  if(cdx*cdx+cdy*cdy<bd){ best=4; }
+  return best;
+}
+board.addEventListener('pointerdown',function(e){
+  if(PEND) return;
+  var k=handleAt(e); if(k<0) return;
+  var p=selPatch(); if(!p) return;
+  var q=patchQuad(p); if(!q) return;
+  e.stopPropagation(); e.preventDefault();
+  try{ board.setPointerCapture(e.pointerId); }catch(_){}
+  var f=boardCoordF(e);
+  QDRAG={pid:p.id, k:k, quad:q.map(function(c2){ return [c2[0],c2[1]]; }),
+         start:f, from:q.map(function(c2){ return [c2[0],c2[1]]; })};
+  playMicroTick(); paintBoard();
+},true);
+/* one place decides where the corners are, and both move and release use it —
+   a quick drag can arrive with no pointermove at all, and a gesture that
+   commits nothing is worse than one that commits the wrong thing */
+function qdragTo(e){
+  var f=boardCoordF(e), dx=f[0]-QDRAG.start[0], dy=f[1]-QDRAG.start[1];
+  if(QDRAG.k===4){
+    QDRAG.quad=QDRAG.from.map(function(c2){ return [c2[0]+dx,c2[1]+dy]; });
+  } else {
+    QDRAG.quad=QDRAG.from.map(function(c2){ return [c2[0],c2[1]]; });
+    QDRAG.quad[QDRAG.k]=[QDRAG.from[QDRAG.k][0]+dx, QDRAG.from[QDRAG.k][1]+dy];
+  }
+}
+board.addEventListener('pointermove',function(e){
+  if(!QDRAG) return;
+  e.stopPropagation();
+  qdragTo(e);
+  paintBoard();
+},true);
+board.addEventListener('pointerup',function(e){
+  if(!QDRAG) return;
+  e.stopPropagation();
+  qdragTo(e);
+  var d=QDRAG; QDRAG=null;
+  var p=pstack(myNode).filter(function(x){ return x.id===d.pid; })[0];
+  if(!p){ paintBoard(); return; }
+  var moved=d.quad.some(function(c2,i){ return Math.abs(c2[0]-d.from[i][0])>0.01||Math.abs(c2[1]-d.from[i][1])>0.01; });
+  if(!moved){ paintBoard(); return; }
+  undoMark(d.k===4?'move '+(p.name||p.kind):'shape '+(p.name||p.kind), [myNode]);
+  p.place=p.place||{};
+  p.place.quad=d.quad;
+  /* keep x/y/size honest so anything reading the old placement still agrees */
+  var ctr=quadCentre(d.quad);
+  p.place.x=ctr[0]; p.place.y=ctr[1];
+  var wtop=Math.hypot(d.quad[1][0]-d.quad[0][0], d.quad[1][1]-d.quad[0][1]);
+  var wbot=Math.hypot(d.quad[2][0]-d.quad[3][0], d.quad[2][1]-d.quad[3][1]);
+  p.place.size=Math.max(3,(wtop+wbot)/2);
+  playThud();
+  bakeNode(myNode, function(){ paintStack(); });
+},true);
 
 /* ---- the drop target ---- */
 function pendFromFile(f,cx,cy){
