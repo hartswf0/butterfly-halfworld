@@ -5001,6 +5001,135 @@ function groundPatch(id){
 }
 /* one patch -> commands. everything reduces to BEFLIX, which is why the film
    stays a film no matter how it was assembled. */
+/* ═════════════════════════════════════════════════════════════════════════
+   BINDING — a patch carried by something else's motion
+   ─────────────────────────────────────────────────────────────────────────
+   Everything placed so far is placed in the FRAME. Span it across a passage
+   and it sits exactly where it sat while the world underneath walks out from
+   under it. That is fine for a title and useless for a hat.
+
+   A binding says: this patch belongs to that part of that layer. Not "at these
+   coordinates" but "there, relative to the gate" — and when the gate moves,
+   turns or comes closer, the patch goes with it.
+
+   The whole thing rests on one small measurement. Take the cells a part inks,
+   and compute their centroid and second moments: that gives a centre, a
+   principal axis, and a length along it. One bone from a silhouette. It is the
+   same measurement the MOUSSA track surface makes of a tracked body, which is
+   why a drawn world's named part and a filmed body's mask can be bound to
+   through the same door.
+
+       binding = { to: <host patch id>, part: <name>, ref: <anchor when bound> }
+
+   `ref` is captured at the moment you bind, so binding is a NO-OP on the frame
+   you do it — the patch does not jump. It only diverges as the host moves,
+   which is the only honest way to make this checkable: if it moves on the
+   frame you bind it, something is wrong.
+   ═════════════════════════════════════════════════════════════════════════ */
+var _bakeAt=null;      /* which node the current bake belongs to */
+function anchorOfGrid(g){
+  if(!g) return null;
+  var n=0,sx=0,sy=0,i,x,y;
+  for(i=0;i<N;i++){ if(!g[i])continue; n++; sx+=i%W; sy+=(i/W)|0; }
+  if(n<8) return null;                    /* a handful of cells has no axis */
+  var cx=sx/n, cy=sy/n, mxx=0,myy=0,mxy=0;
+  for(i=0;i<N;i++){ if(!g[i])continue;
+    var dx=(i%W)-cx, dy=((i/W)|0)-cy;
+    mxx+=dx*dx; myy+=dy*dy; mxy+=dx*dy; }
+  mxx/=n; myy/=n; mxy/=n;
+  var ang=0.5*Math.atan2(2*mxy, mxx-myy);
+  var tr=(mxx+myy)/2, dd=Math.sqrt(((mxx-myy)/2)*((mxx-myy)/2)+mxy*mxy);
+  return {cx:cx, cy:cy, ang:ang,
+          len:2*Math.sqrt(Math.max(0.25,tr+dd)),
+          wid:2*Math.sqrt(Math.max(0.25,tr-dd)), n:n};
+}
+/* the mask panel of a packed shot, laid into the field at the clip's own quad —
+   a tracked body's silhouette, in the same coordinates as everything else */
+function maskGridQuad(img, quad, rows, count, k){
+  var M=quadMatrix(quad); if(!M) return null;
+  var cv=document.createElement('canvas'); cv.width=192; cv.height=rows;
+  var cx2=cv.getContext('2d',{willReadFrequently:true});
+  try{ cx2.drawImage(img, 0, (count+k)*rows, img.naturalWidth, rows, 0,0,192,rows); }
+  catch(e){ return null; }
+  var px=cx2.getImageData(0,0,192,rows).data;
+  var g=new Uint8Array(N), X,Y;
+  var minx=Math.max(0,Math.floor(Math.min(quad[0][0],quad[1][0],quad[2][0],quad[3][0]))),
+      maxx=Math.min(W-1,Math.ceil(Math.max(quad[0][0],quad[1][0],quad[2][0],quad[3][0]))),
+      miny=Math.max(0,Math.floor(Math.min(quad[0][1],quad[1][1],quad[2][1],quad[3][1]))),
+      maxy=Math.min(H-1,Math.ceil(Math.max(quad[0][1],quad[1][1],quad[2][1],quad[3][1])));
+  for(Y=miny;Y<=maxy;Y++) for(X=minx;X<=maxx;X++){
+    var xc=X+0.5, yc=Y+0.5, w=M[6]*xc+M[7]*yc+M[8];
+    if(Math.abs(w)<1e-12) continue;
+    var u=(M[0]*xc+M[1]*yc+M[2])/w, v=(M[3]*xc+M[4]*yc+M[5])/w;
+    if(u<0||u>=1||v<0||v>=1) continue;
+    var sp=(((v*rows)|0)*192+((u*192)|0))*4;
+    if(px[sp]>127) g[Y*W+X]=1;            /* the mask is white where the body is */
+  }
+  return g;
+}
+/* the anchor of one host patch, right now, on this frame */
+function hostAnchor(host, part, done){
+  if(!host||!host.on) return done(null);
+  if(host.kind==='world'){
+    var want=(part&&part!=='*')?[part]:(host.src.parts||null);
+    return hwRenderAt(host.src.slug, host.src.t, want)
+      .then(function(g){ done(anchorOfGrid(g)); })
+      .catch(function(){ done(null); });
+  }
+  if(host.kind==='clip'){
+    var cp=host.place||{};
+    var go=function(im){
+      if(!im||!im.naturalWidth) return done(null);
+      var rows=144, count=Math.max(1,Math.round(im.naturalHeight/(rows*2)));
+      var k=Math.max(0,Math.min(count-1, host.src.k|0));
+      var q=quadFromPlace({x:cp.x!=null?cp.x:W/2, y:cp.y!=null?cp.y:H/2,
+                           size:cp.size||W, quad:cp.quad}, 192, rows);
+      done(anchorOfGrid(maskGridQuad(im,q,rows,count,k)));
+    };
+    var hv=ARC_IMG['clip:'+host.src.patch];
+    if(hv&&hv.complete&&hv.naturalWidth) return go(hv);
+    var ci=new Image();
+    ci.onload=function(){ ARC_IMG['clip:'+host.src.patch]=ci; go(ci); };
+    ci.onerror=function(){ done(null); };
+    ci.src='../held/pack/'+host.src.patch+'.webp';
+    return;
+  }
+  done(null);
+}
+/* the axis is only defined to within a half turn, so take the turn that is
+   actually a small one — otherwise a part flips 180 degrees between frames
+   and the thing bound to it cartwheels */
+function angStep(a0,a1){
+  var d=a1-a0;
+  while(d> Math.PI/2) d-=Math.PI;
+  while(d<-Math.PI/2) d+=Math.PI;
+  return d;
+}
+function quadCarry(q, ref, now){
+  var k=Math.max(0.15,Math.min(6, now.len/Math.max(0.5,ref.len)));
+  var th=angStep(ref.ang, now.ang), co=Math.cos(th), si=Math.sin(th);
+  return q.map(function(c){
+    var dx=c[0]-ref.cx, dy=c[1]-ref.cy;
+    return [now.cx+(dx*co-dy*si)*k, now.cy+(dx*si+dy*co)*k];
+  });
+}
+/* the quad a patch actually stamps with: its own, unless it is carried */
+function effQuad(p, base, done){
+  var b=p.binding;
+  if(!b||!b.ref||!b.to) return done(base);
+  /* A span bakes frames you are not looking at, so the host must be looked up
+     on the node being baked — myNode would bind every frame to frame one.
+     And it is looked up by LINEAGE, not by id: each frame holds its own cast
+     of the host with its own id, and `_from` is what says they are the same
+     layer. Binding to an id would bind to one frame's copy and nothing else. */
+  var here=pstack(_bakeAt||myNode);
+  var host=here.filter(function(x){ return (x._from||x.id)===b.to; })[0];
+  if(!host) return done(base);
+  hostAnchor(host, b.part, function(now){
+    done(now?quadCarry(base, b.ref, now):base);
+  });
+}
+
 function patchCmds(p, done){
   if(!p||!p.on) return done([]);
   if(p.kind==='ground'||p.kind==='ink') return done(String(p.src.cmds||'').split('\n'));
@@ -5022,7 +5151,9 @@ function patchCmds(p, done){
          source cache is keyed on the frame, not on the shot */
       var q=quadFromPlace({x:cp.x!=null?cp.x:W/2, y:cp.y!=null?cp.y:H/2,
                            size:cp.size||W, quad:cp.quad}, 192, rows);
-      done(stampQuad(tmp, q, cp.floor||1, 'clipf:'+p.src.patch+':'+k)||[]);
+      effQuad(p, q, function(q2){
+        done(stampQuad(tmp, q2, cp.floor||1, 'clipf:'+p.src.patch+':'+k)||[]);
+      });
     };
     var hv=ARC_IMG['clip:'+p.src.patch];
     if(hv&&hv.complete&&hv.naturalWidth) return draw1(hv);
@@ -5043,7 +5174,11 @@ function patchCmds(p, done){
       if(!im){ done([]); return; }
       var r=p.repeat;
       var iw=im.naturalWidth||im.width, ih=im.naturalHeight||im.height;
-      var base=quadFromPlace(pl, iw, ih), bc=quadCentre(base);
+      var base0=quadFromPlace(pl, iw, ih);
+      /* the binding is resolved ONCE, before the tiles are laid, so a bound
+         mosaic travels as a field rather than as four hundred separate things */
+      effQuad(p, base0, function(base){
+      var bc=quadCentre(base);
       if(!r||!r.n||r.n<2) return done(stampQuad(im, base, pl.floor||2, 'el:'+p.src.id)||[]);
       /* A MOSAIC IS ONE PATCH THAT REPEATS. Making fifty layers to lay fifty
          tiles would be fifty things to manage and one thing to think about, so
@@ -5071,6 +5206,7 @@ function patchCmds(p, done){
         if(c1&&c1.length) out=out.concat(c1);
       }
       done(out);
+      });
     };
     var have=ARC_IMG[p.src.id];
     if(have && have.complete && have.naturalWidth) return lay(have);
@@ -5090,6 +5226,7 @@ function patchCmds(p, done){
 /* the whole stack, in order, into one grid and back out as commands */
 function bakeNode(id, then){
   var st=pstack(id).slice().sort(function(a,b){ return (a.z||0)-(b.z||0); });
+  _bakeAt=id;
   var grid=new Uint8Array(N), i=0;
   var step=function(){
     if(i>=st.length){
@@ -6643,6 +6780,34 @@ function hwRenderAt(slug, t, parts){
     });
   });
 }
+/* the NAMED parts a world has at one moment, for the bind menu. Only names —
+   a `#3` region is a shape the segmenter found, not a thing the world knows
+   about, and it does not survive a scrub, so it is a poor thing to bind to. */
+function hwNamesAt(slug, t){
+  return hwLoad().then(function(){
+    if(!HW) throw new Error('no engine');
+    var run=function(rt){
+      var ids=new Int16Array(HW_W*HW_H);
+      var sc=rt.renderScene(t, ids);
+      var byTag={}; (sc.parts||[]).forEach(function(p){
+        if(p.part && p.part!=='movement') byTag[p.tag]=p.part; });
+      var count={}, i;
+      for(i=0;i<ids.length;i++){
+        if(!sc.levels[i]) continue;
+        var nm=byTag[ids[i]];
+        if(nm) count[nm]=(count[nm]||0)+1;
+      }
+      return Object.keys(count).filter(function(n){ return count[n]>=8; })
+        .sort(function(a,b){ return count[b]-count[a]; })
+        .map(function(n){ return {name:n, cells:count[n]}; });
+    };
+    if(HWRUN[slug]) return run(HWRUN[slug]);
+    if(HWMODS[slug]){ HWRUN[slug]=HW.makeRuntime(HWMODS[slug]); return run(HWRUN[slug]); }
+    return import('../held/world/worlds/'+slug+'.mjs').then(function(m){
+      HWMODS[slug]=m.default; HWRUN[slug]=HW.makeRuntime(m.default); return run(HWRUN[slug]);
+    });
+  });
+}
 function hwStamp(all){
   if(!HWSCENE){ fireToast('Open a world first'); return; }
   var want=null;
@@ -7767,11 +7932,14 @@ function patchSpanApply(pid, n, then){
     if(id!==myNode){
       groundPatch(id);
       var q=JSON.parse(JSON.stringify({kind:p.kind,src:p.src,place:p.place,
-              repeat:p.repeat,name:p.name}));
+              repeat:p.repeat,name:p.name,binding:p.binding||null}));
       /* each frame gets the patch at ITS moment */
       if(q.kind==='world') q.src.t=(p.src.t||0)+off/fps;
       if(q.kind==='clip')  q.src.k=(p.src.k||0)+off;
-      var c=mkPatch(q.kind,q.src,{place:q.place,repeat:q.repeat,name:q.name,span:1});
+      /* the binding travels with the cast — a patch that is carried on frame
+         one and stranded on frame two is not carried at all */
+      var c=mkPatch(q.kind,q.src,{place:q.place,repeat:q.repeat,name:q.name,span:1,
+                                  binding:q.binding||undefined});
       var s2=pstack(id);
       /* replace a previous cast of the same patch rather than piling up */
       PSTACK[id]=s2.filter(function(x){ return !(x._from===pid); });
@@ -7821,7 +7989,85 @@ function layerMenu(p, x, y){
     var st=pstack(myNode).filter(function(x){return x.kind!=='ground';});
     p.z=(st.length?Math.min.apply(null,st.map(function(x){return x.z||0;})):1)-1;
     bakeNode(myNode, paintStack); });
+  if(p.kind==='element'||p.kind==='clip'){
+    if(p.binding&&p.binding.to){
+      item('Unbind ('+(p.binding.part||'body')+')', function(){
+        undoMark('unbind '+(p.name||p.kind),[myNode]);
+        delete p.binding; bakeNode(myNode, paintStack); fireToast('Unbound'); });
+    }
+    var hosts=pstack(myNode).filter(function(x){
+      return x.id!==p.id && (x.kind==='world'||x.kind==='clip'); });
+    if(hosts.length) item('Bind to a part…', function(){ bindMenu(p, hosts, x, y); });
+  }
   item('Delete', function(){ if(PSEL===p.id)PSEL=null; patchDrop(myNode,p.id); paintCard(); });
+  document.body.appendChild(m);
+  var r=m.getBoundingClientRect();
+  m.style.left=Math.max(6,Math.min(x, innerWidth-r.width-6))+'px';
+  m.style.top=Math.max(6,Math.min(y, innerHeight-r.height-6))+'px';
+  var close=function(ev){ if(!m.contains(ev.target)){ m.remove(); removeEventListener('pointerdown',close,true); } };
+  setTimeout(function(){ addEventListener('pointerdown',close,true); },0);
+}
+/* the hosts, and what each of them has to hold on to */
+function bindMenu(p, hosts, x, y){
+  var old=document.getElementById('lmenu'); if(old) old.remove();
+  var m=document.createElement('div'); m.id='lmenu';
+  m.style.cssText='position:fixed;z-index:90;background:var(--w);border:3px solid var(--k);'
+    +'min-width:168px;max-height:60vh;overflow-y:auto;font:10px/1 ui-monospace,monospace';
+  var head=document.createElement('div');
+  head.style.cssText='padding:8px 10px;border-bottom:3px solid var(--k);font:9px/1.4 ui-monospace,monospace;opacity:.7';
+  head.textContent='CARRY '+(p.name||p.kind).slice(0,22)+' WITH…';
+  m.appendChild(head);
+  var item=function(txt,sub,fn){
+    var b=document.createElement('button'); b.type='button';
+    b.style.cssText='display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--k);'
+      +'padding:9px 10px;background:var(--w);font:inherit;min-height:36px';
+    b.innerHTML='<b style="font:inherit">'+txt+'</b>'+(sub?('<i style="display:block;font:8px/1.4 ui-monospace,monospace;font-style:normal;opacity:.6;margin-top:3px">'+sub+'</i>'):'');
+    b.onclick=function(){ m.remove(); fn(); };
+    m.appendChild(b);
+  };
+  var doBind=function(host, part, label){
+    hostAnchor(host, part, function(a){
+      if(!a){ fireToast('That part inks nothing here — nothing to hold on to'); return; }
+      undoMark('bind '+(p.name||p.kind),[myNode]);
+      /* the anchor is captured NOW, so binding does not move the patch. It
+         only diverges as the host does — which makes it checkable. */
+      p.binding={to:(host._from||host.id), part:part, ref:a};
+      p.place=p.place||{};
+      if(!p.place.quad){
+        var im=(p.kind==='element')?ARC_IMG[p.src.id]:null;
+        p.place.quad=quadFromPlace(p.place, im?im.naturalWidth:192, im?im.naturalHeight:144);
+      }
+      playThud();
+      bakeNode(myNode, function(){ paintStack(); });
+      fireToast('Bound to '+label);
+    });
+  };
+  hosts.forEach(function(h){
+    if(h.kind==='clip'){
+      item((h.name||'clip'), 'the tracked body · its mask is the silhouette',
+        function(){ doBind(h,'body',(h.name||'clip')); });
+      return;
+    }
+    var slot=document.createElement('div');
+    slot.style.cssText='padding:7px 10px;border-bottom:1px solid var(--k);font:9px/1.4 ui-monospace,monospace;opacity:.6';
+    slot.textContent=(h.name||h.src.slug)+' · reading parts…';
+    m.appendChild(slot);
+    hwNamesAt(h.src.slug, h.src.t).then(function(ns){
+      slot.remove();
+      if(!ns.length){
+        item((h.name||h.src.slug), 'no named parts at this moment — the whole world',
+          function(){ doBind(h,'*',(h.name||h.src.slug)); });
+        return;
+      }
+      var hd=document.createElement('div');
+      hd.style.cssText='padding:7px 10px;background:var(--k);color:var(--w);font:9px/1.2 ui-monospace,monospace';
+      hd.textContent=(h.name||h.src.slug).slice(0,26);
+      m.appendChild(hd);
+      ns.slice(0,14).forEach(function(n){
+        item(n.name, n.cells+' cells', function(){ doBind(h,n.name,n.name); });
+      });
+    }).catch(function(){ slot.textContent=(h.name||h.src.slug)+' · could not read parts'; });
+  });
   document.body.appendChild(m);
   var r=m.getBoundingClientRect();
   m.style.left=Math.max(6,Math.min(x, innerWidth-r.width-6))+'px';

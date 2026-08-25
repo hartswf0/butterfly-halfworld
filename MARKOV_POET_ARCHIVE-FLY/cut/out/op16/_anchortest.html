@@ -1,0 +1,45 @@
+<!doctype html><meta charset=utf-8><title>anchor test</title><pre id=o>running…</pre>
+<script type="module">
+const W=192,H=144;
+const HW=await import('../held/world/halfworld.mjs');
+if(HW.wantParts) HW.wantParts(true);
+const SLUGS=['01-out-of-life','02-flashing-lights','03-how-to-break-off-an-engagement',
+ '04-nevermore','05-bloodlines','06-resurrecting-atlantis','07-dj-turn-me-up','08-newly-single',
+ '09-yet-heard','10-magic-ride','11-new-day','12-reunion','13-how-to-win-my-heart','14-hot-minute'];
+function anchorOf(rt,t,want){
+  const ids=new Int16Array(W*H);
+  const sc=rt.renderScene(t, ids);
+  const byTag={}; (sc.parts||[]).forEach(p=>{ if(p.part&&p.part!=='movement') byTag[p.tag]=p.part; });
+  if(want===null) return [...new Set(Object.values(byTag))];
+  let n=0,sx=0,sy=0; const on=new Uint8Array(W*H);
+  for(let i=0;i<W*H;i++){ if(!sc.levels[i])continue; if(byTag[ids[i]]!==want)continue;
+    on[i]=1;n++;sx+=i%W;sy+=(i/W)|0; }
+  if(n<8) return null;
+  const cx=sx/n, cy=sy/n; let mxx=0,myy=0,mxy=0;
+  for(let i=0;i<W*H;i++){ if(!on[i])continue; const dx=(i%W)-cx, dy=((i/W)|0)-cy;
+    mxx+=dx*dx;myy+=dy*dy;mxy+=dx*dy; }
+  mxx/=n;myy/=n;mxy/=n;
+  const tr=(mxx+myy)/2, dd=Math.hypot((mxx-myy)/2,mxy);
+  return {n,cx,cy,ang:0.5*Math.atan2(2*mxy,mxx-myy),len:2*Math.sqrt(Math.max(.25,tr+dd))};
+}
+const rows=[];
+for(const slug of SLUGS){
+  let mod; try{ mod=await import('../held/world/worlds/'+slug+'.mjs'); }catch(e){ continue; }
+  const rt=HW.makeRuntime(mod.default);
+  document.getElementById('o').textContent='scanning '+slug+'…';
+  await new Promise(r=>setTimeout(r,0));
+  for(const t0 of [12]){
+    const names=anchorOf(rt,t0,null);
+    for(const nm of names){
+      const a=anchorOf(rt,t0,nm), b=anchorOf(rt,t0+1,nm);
+      if(!a||!b) continue;
+      const d=Math.hypot(b.cx-a.cx,b.cy-a.cy);
+      rows.push({slug,t:t0,nm,d,k:b.len/a.len,n:a.n});
+    }
+  }
+}
+rows.sort((x,y)=>y.d-x.d);
+document.getElementById('o').textContent=rows.slice(0,18).map(r=>
+  r.slug.padEnd(34)+' t='+String(r.t).padEnd(3)+' '+r.nm.padEnd(16)
+  +' moves '+r.d.toFixed(1)+' cells  scale x'+r.k.toFixed(2)+'  ('+r.n+' cells)').join('\n');
+</script>
