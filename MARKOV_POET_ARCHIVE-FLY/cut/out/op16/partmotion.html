@@ -1,4 +1,9 @@
-<!doctype html><meta charset=utf-8><title>anchor test</title><pre id=o>running…</pre>
+<!doctype html><meta charset=utf-8><title>which parts actually move</title><h1 style="font:12px ui-monospace,monospace">WHICH PARTS ACTUALLY MOVE</h1>
+<p style="font:10px/1.6 ui-monospace,monospace;max-width:70ch">Binding carries a patch on a part's
+motion, so before binding it is worth knowing whether the part you picked moves at all. This measures
+the centroid of every named part in every world at one second apart and sorts by distance travelled,
+in field cells out of 192. A part that moves half a cell will look like binding is broken; it is not.</p>
+<pre id=o>measuring…</pre>
 <script type="module">
 const W=192,H=144;
 const HW=await import('../held/world/halfworld.mjs');

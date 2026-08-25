@@ -63,12 +63,48 @@ a world whose named parts hold still and whose movement is elsewhere** — in th
 `movement` tags the part map deliberately excludes. That is worth knowing before
 binding to it and expecting travel.
 
-## Open: the bind menu's counts disagree with the engine
+## Verified: a bound patch travels
 
-The menu reported `gardenNight 211 cells` where a direct render of the same
-world at the same moment counts 2196, and listed two named parts where the
-engine exposes four. The direct measurement is stable — cold runtime and
-scrubbed runtime agree exactly — so the disagreement is on the tool's side of
-the line. Binding works regardless of the count (the anchor is computed from the
-part's own render, not from these numbers), but the numbers shown to the user
-are wrong and the menu is hiding parts you could bind to. Not yet explained.
+ATLANTIS at 10.7 s has a `comet` — the one part in the whole suite that really
+moves, 28 cells a second. A piece was stamped over it, bound to `comet`, and
+both were spanned across sixteen frames.
+
+    frame 1    the piece is centred at about (400, 382) on the board
+    frame 16   it is at about (542, 357) — right and up
+
+and the comet, on frame 16, is at the top right of the field. The piece went
+where the comet went. Unbinding on frame 16 puts it back inside its own quad,
+which is drawn dashed and stays where it was placed: **the corners say where it
+was put, the ink says where it is carried.**
+
+`cut/out/op16/partmotion.html` measures this for every named part in every
+world, sorted by distance travelled, because "binding looks broken" is almost
+always "that part holds still". The suite is mostly still: outside the comet,
+the largest movers are `heardRings` in REUNION (6.1 cells/s) and `aggressions`
+in MAGIC RIDE (3.9), and most named parts move under one cell a second.
+
+## Fixed: the engine was loaded twice
+
+The world modules import the engine as `"../halfworld.mjs"`. OPERATOR imported
+it as `"halfworld.mjs?b=7"` to defeat caching during development — and a query
+string makes a **different module instance**. So the runtime came from one copy
+of the engine and every primitive a world calls came from the other, each with
+its own module-level scratch and identity field.
+
+Measured on 04-nevermore at the same moment, the two copies disagree:
+
+    one instance    13270 inked cells    trail 137 cells
+    forked          13283 inked cells    trail 157 cells
+
+The cache-buster is gone. It cannot come back in that form: the world's own
+import is a bare specifier, so the only way to have one engine is to import it
+bare here too. This is a strong candidate for the unexplained world-patch bake
+drift recorded elsewhere — two engines with separate state, composited as one.
+
+## Earlier confusion, resolved
+
+An earlier note here reported the bind menu's counts as wrong by 10×. That was
+two mistakes of mine stacked: comparing against the un-forked instance, and
+reading a label the narrow menu had clipped (`2112 cells` shown as `211`). With
+one engine the menu and a direct render agree — `clipLine 789`, `windows 714`,
+`waterBelow 606`, `building 279`, `gate 144`, `facewindow 91`.

@@ -6477,7 +6477,15 @@ function hwState(t){ var e=document.getElementById('hw-state'); if(e)e.textConte
 function hwLoad(){
   if(HW) return Promise.resolve(HW);
   hwState('loading the engine…');
-  return import('../held/world/halfworld.mjs?b='+HW_BUILD).then(function(m){
+  /* NO CACHE-BUSTER HERE, and it matters. The world modules import the engine
+     as "../halfworld.mjs" — a bare specifier with no query. Importing it here
+     as "?b=7" made a SECOND module instance: the runtime came from one copy and
+     every primitive the world calls came from the other, each with its own
+     module-level scratch and identity field. Measured on 04-nevermore at the
+     same moment, the two copies disagree — 13270 inked cells against 13283,
+     and `trail` 137 cells against 157. One engine, or the tool is quietly
+     compositing two slightly different worlds. */
+  return import('../held/world/halfworld.mjs').then(function(m){
     HW=m; HW_W=m.FW||192; HW_H=m.FH||144;
     if(m.wantParts) m.wantParts(true);          /* the tags are the whole point */
     _hwIds=new Int16Array(HW_W*HW_H);
