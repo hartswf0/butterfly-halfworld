@@ -495,14 +495,51 @@
                    display:block; line-height:0 }
   #be-grid canvas{ display:block; width:100%; height:auto; image-rendering:pixelated }
   #be-grid button:hover{ outline:2px solid var(--aB) }
+  #be-film-btn{ display:block; width:100%; margin-top:8px; padding:9px 8px; background:var(--k); color:var(--w);
+    border:3px solid var(--k); font:700 9px/1.2 ui-monospace,monospace; letter-spacing:.14em; cursor:pointer;
+    min-height:38px; pointer-events:auto }
+  #be-film-btn:hover{ background:var(--aA); border-color:var(--aA) }
   @media (max-width:560px){ #be-arch{ grid-template-columns:repeat(6,1fr) } }
   @media (max-width:560px){ #be-grid{ grid-template-columns:repeat(5,1fr) } }
 
   /* collapsible panels — they SHRINK the stage, never cover it */
-  .panel{ position:fixed; left:0; right:0; bottom:calc(var(--tab-h) + var(--pad)); max-height:72vh; overflow-y:auto; -webkit-overflow-scrolling:touch; background:var(--w); border-top:3px solid var(--k); padding:14px 16px calc(16px + var(--pad)); z-index:80; transform:translateY(115%); visibility:hidden; transition:transform .30s cubic-bezier(.25,1,.5,1), visibility 0s linear .30s; }
+  #stage.padopen{ align-items:flex-start; }
+  /* the pad yields enough room for the board to stay at a size you can judge
+     a placement by; on a short screen the floor wins and the board goes small
+     rather than the pad becoming unusable */
+  .panel{ position:fixed; left:0; right:0; bottom:calc(var(--tab-h) + var(--pad)); max-height:max(240px, min(58vh, calc(100vh - 560px))); overflow-y:auto; -webkit-overflow-scrolling:touch; background:var(--w); border-top:3px solid var(--k); padding:14px 16px calc(16px + var(--pad)); z-index:80; transform:translateY(115%); visibility:hidden; transition:transform .30s cubic-bezier(.25,1,.5,1), visibility 0s linear .30s; }
   .panel.open{ transform:translateY(0); visibility:visible; transition:transform .30s cubic-bezier(.25,1,.5,1), visibility 0s linear 0s; }
+  /* THE BACKDROP STOPS AT THE PICTURE.
+     It used to cover the whole screen, so opening AUTHOR to add something
+     greyed out the very frame you were adding it to. You cannot choose a piece
+     for a picture you cannot see. Its top is moved to the bottom of the stage
+     when a panel opens, so the board stays bright and the dimming only covers
+     what the panel is replacing. */
   #backdrop{ position:fixed; inset:0; background:rgba(0,0,0,0); pointer-events:none; z-index:70; transition:background .25s; }
   #backdrop.on{ background:rgba(0,0,0,.5); pointer-events:auto; }
+
+  /* SCROLLBARS IN THE SAME INK.
+     Every scrolling surface was drawing the operating system's chrome — soft
+     grey lozenges on a page made of hard black rules. */
+  .panel, #arc-grid, #two-list, #hw-gallery, #tl-strip, #rail-list,
+  .chat-log, #lmenu, #be-grid, #be-arch{ scrollbar-width:thin; scrollbar-color:var(--k) var(--w); }
+  .panel::-webkit-scrollbar, #arc-grid::-webkit-scrollbar, #two-list::-webkit-scrollbar,
+  #hw-gallery::-webkit-scrollbar, #tl-strip::-webkit-scrollbar, #rail-list::-webkit-scrollbar,
+  .chat-log::-webkit-scrollbar, #lmenu::-webkit-scrollbar,
+  #be-grid::-webkit-scrollbar, #be-arch::-webkit-scrollbar{ width:10px; height:10px; }
+  .panel::-webkit-scrollbar-track, #arc-grid::-webkit-scrollbar-track, #two-list::-webkit-scrollbar-track,
+  #hw-gallery::-webkit-scrollbar-track, #tl-strip::-webkit-scrollbar-track, #rail-list::-webkit-scrollbar-track,
+  .chat-log::-webkit-scrollbar-track, #lmenu::-webkit-scrollbar-track,
+  #be-grid::-webkit-scrollbar-track, #be-arch::-webkit-scrollbar-track{
+    background:var(--w); border-left:2px solid var(--k); border-top:2px solid var(--k); }
+  .panel::-webkit-scrollbar-thumb, #arc-grid::-webkit-scrollbar-thumb, #two-list::-webkit-scrollbar-thumb,
+  #hw-gallery::-webkit-scrollbar-thumb, #tl-strip::-webkit-scrollbar-thumb, #rail-list::-webkit-scrollbar-thumb,
+  .chat-log::-webkit-scrollbar-thumb, #lmenu::-webkit-scrollbar-thumb,
+  #be-grid::-webkit-scrollbar-thumb, #be-arch::-webkit-scrollbar-thumb{
+    background:var(--k); border:2px solid var(--w); border-radius:0; }
+  .panel::-webkit-scrollbar-thumb:hover, #arc-grid::-webkit-scrollbar-thumb:hover,
+  #two-list::-webkit-scrollbar-thumb:hover{ background:var(--aC,#0033cc); }
+  .panel::-webkit-scrollbar-corner{ background:var(--w); }
   .ctx{ position:fixed; z-index:200; display:none; min-width:152px; background:var(--w); border:3px solid var(--k); box-shadow:4px 4px 0 var(--k); }
   .ctx.on{ display:block; }
   .ctx-h{ font:700 10px/1 ui-monospace,monospace; letter-spacing:.08em; text-transform:uppercase; padding:9px 12px; background:var(--k); color:var(--w); }
@@ -841,7 +878,8 @@
       <div id="be-worlds" hidden><b>THE FOURTEEN &middot; drawn</b><div id="be-grid"></div>
       <b id="be-arch-h" style="margin-top:9px">THE ARCHIVE &middot; filmed</b>
       <div id="be-arch"></div>
-      <em>tap either to put it in this frame &middot; more in AUTHOR</em></div></div>
+      <em>tap for this moment &middot; hold, or right-click, for the whole film</em>
+      <button id="be-film-btn" type="button">&#9654;&nbsp; THE WHOLE FILM &mdash; drawn, filmed, or both</button></div></div>
     <div id="edit-badge" hidden></div>
   </div>
   <div id="coach" hidden><span id="coach-txt"></span></div>
@@ -6075,7 +6113,8 @@ function tierColor(t){ return t==='ACT'?'#0033cc':(t==='SCN'?'#c8a800':(t==='SYN
 
 /* board sizing */
 var _frameEmpty=true, _boardOK=true;
-function fitBoard(){ var stage=document.getElementById('stage'); if(!stage||!stage.clientWidth)return; var pad=10, fit=Math.floor(Math.min((stage.clientWidth-pad)/W,(stage.clientHeight-pad)/H)), sc=Math.max(1,Math.min(8,fit)); board.style.width=(W*sc)+'px'; board.style.height=(H*sc)+'px'; var wrap=document.getElementById('board-wrap'); wrap.style.width=(W*sc)+'px'; wrap.style.height=(H*sc)+'px'; _boardOK=(W*sc>=260 && H*sc>=170); var be=document.getElementById('board-empty'); if(be)be.style.display=(_frameEmpty&&_boardOK)?'flex':'none'; }
+var _padH=0;   /* height of stage still visible above an open pad, 0 when none */
+function fitBoard(){ var stage=document.getElementById('stage'); if(!stage||!stage.clientWidth)return; var pad=10, hAvail=(_padH?Math.min(stage.clientHeight,_padH):stage.clientHeight), fit=Math.floor(Math.min((stage.clientWidth-pad)/W,(hAvail-pad)/H)), sc=Math.max(1,Math.min(8,fit)); board.style.width=(W*sc)+'px'; board.style.height=(H*sc)+'px'; var wrap=document.getElementById('board-wrap'); wrap.style.width=(W*sc)+'px'; wrap.style.height=(H*sc)+'px'; _boardOK=(W*sc>=260 && H*sc>=170); var be=document.getElementById('board-empty'); if(be)be.style.display=(_frameEmpty&&_boardOK)?'flex':'none'; }
 
 /* ---- DRAWING on current node ---- */
 var drawTool='pen', drawInk=7, brush=3, drawing=false, lastPt=null, _curTx=0;
@@ -6084,9 +6123,14 @@ function brushCmd(x,y,ink){ var s=brush, r=(s/2)|0; return 'PNT '+(x-r)+' '+(y-r
 function strokeSeg(x0,y0,x1,y1,ink){ var lines=[],dx=Math.abs(x1-x0),dy=Math.abs(y1-y0),sx=x0<x1?1:-1,sy=y0<y1?1:-1,err=dx-dy,x=x0,y=y0,gu=0; while(gu++<2000){ lines.push(brushCmd(x,y,ink)); if(x===x1&&y===y1)break; var e2=2*err; if(e2>-dy){err-=dy;x+=sx;} if(e2<dx){err+=dx;y+=sy;} } return lines; }
 function recoverDraw(label,e,pid){ drawing=false; lastPt=null; try{ if(pid!=null&&board.hasPointerCapture&&board.hasPointerCapture(pid))board.releasePointerCapture(pid); }catch(_){} try{ sendCtl('P '+myNode+' -1 -1'); }catch(_){} try{ paintBoard(); renderStrip(); }catch(_){} recoverRuntime('draw '+label,e); }
 function drawGuard(label,fn){ return function(e){ try{ return fn.call(this,e); }catch(err){ recoverDraw(label,err,e&&e.pointerId); } }; }
-board.addEventListener('pointerdown',drawGuard('start',function(e){ if(playing||(typeof ltTimer!=='undefined'&&ltTimer)){stopPlay();return;} closePanels(); initAudio(); board.setPointerCapture(e.pointerId); drawing=true; var p=boardCoord(e); lastPt=p; playMicroTick(); if(drawTool!=='box'){ var ink=drawTool==='erase'?0:drawInk; draw([brushCmd(p[0],p[1],ink)]); sendCtl('P '+myNode+' '+p[0]+' '+p[1]); } }));
-board.addEventListener('pointermove',drawGuard('move',function(e){ if(!drawing)return; var p=boardCoord(e); var now=performance.now(); if(now-_curTx>55){ _curTx=now; sendCtl('P '+myNode+' '+p[0]+' '+p[1]); } if(drawTool==='box')return; var ink=drawTool==='erase'?0:drawInk; if(lastPt&&(lastPt[0]!==p[0]||lastPt[1]!==p[1])){ draw(strokeSeg(lastPt[0],lastPt[1],p[0],p[1],ink)); lastPt=p; } }));
-board.addEventListener('pointerup',drawGuard('finish',function(e){ if(!drawing)return; drawing=false; var p=boardCoord(e); if(drawTool==='box'&&lastPt){ var x0=Math.min(lastPt[0],p[0]),y0=Math.min(lastPt[1],p[1]),x1=Math.max(lastPt[0],p[0]),y1=Math.max(lastPt[1],p[1]); draw(['LIN '+x0+' '+y0+' '+x1+' '+y0+' '+drawInk,'LIN '+x1+' '+y0+' '+x1+' '+y1+' '+drawInk,'LIN '+x1+' '+y1+' '+x0+' '+y1+' '+drawInk,'LIN '+x0+' '+y1+' '+x0+' '+y0+' '+drawInk]); playClack(); } lastPt=null; sendCtl('P '+myNode+' -1 -1'); onbCheckTrace(); }));
+board.addEventListener('pointerdown',drawGuard('start',function(e){ if(playing||(typeof ltTimer!=='undefined'&&ltTimer)){stopPlay();return;}
+  /* THE PEN LISTENS FIRST, so it cannot be stopped by the handle code that runs
+     after it — listeners on the same element all fire whatever anyone calls.
+     It has to decline the event itself: a corner grab is not a stroke. */
+  if(typeof handleAt==='function' && handleAt(e)>=0) return;
+  closePanels(); initAudio(); board.setPointerCapture(e.pointerId); drawing=true; var p=boardCoord(e); lastPt=p; playMicroTick(); if(drawTool!=='box'){ var ink=drawTool==='erase'?0:drawInk; draw([brushCmd(p[0],p[1],ink)]); sendCtl('P '+myNode+' '+p[0]+' '+p[1]); } }));
+board.addEventListener('pointermove',drawGuard('move',function(e){ if(!drawing||(typeof QDRAG!=='undefined'&&QDRAG))return; var p=boardCoord(e); var now=performance.now(); if(now-_curTx>55){ _curTx=now; sendCtl('P '+myNode+' '+p[0]+' '+p[1]); } if(drawTool==='box')return; var ink=drawTool==='erase'?0:drawInk; if(lastPt&&(lastPt[0]!==p[0]||lastPt[1]!==p[1])){ draw(strokeSeg(lastPt[0],lastPt[1],p[0],p[1],ink)); lastPt=p; } }));
+board.addEventListener('pointerup',drawGuard('finish',function(e){ if(!drawing||(typeof QDRAG!=='undefined'&&QDRAG))return; drawing=false; var p=boardCoord(e); if(drawTool==='box'&&lastPt){ var x0=Math.min(lastPt[0],p[0]),y0=Math.min(lastPt[1],p[1]),x1=Math.max(lastPt[0],p[0]),y1=Math.max(lastPt[1],p[1]); draw(['LIN '+x0+' '+y0+' '+x1+' '+y0+' '+drawInk,'LIN '+x1+' '+y0+' '+x1+' '+y1+' '+drawInk,'LIN '+x1+' '+y1+' '+x0+' '+y1+' '+drawInk,'LIN '+x0+' '+y1+' '+x0+' '+y0+' '+drawInk]); playClack(); } lastPt=null; sendCtl('P '+myNode+' -1 -1'); onbCheckTrace(); }));
 
 function setTool(t){ drawTool=t; playTick();
   if(t!=='pick'&&typeof pickSet==='function') pickSet(null);
@@ -7350,6 +7394,12 @@ function beWorlds(){
         var sel=document.getElementById('hw-world'); if(sel) sel.value=slug;
         hwGalleryMark(slug);
         hwOpen(slug).then(function(){ hwStamp(true); }); };
+      /* A TAP IS ONE MOMENT AND THAT WAS ALL THERE WAS.
+         Tapping a world put a single still in the frame, and the way to a whole
+         film was a mode tab, a scroll and a disclosure away — so in practice
+         everyone got one frame and concluded that was the tool. Hold the same
+         tile, or right-click it, and the film is right there. */
+      bindPress(b, function(ev){ filmMenu(slug, ev.clientX, ev.clientY); });
       box.appendChild(b);
     });
     if(wrap) wrap.hidden=false;
@@ -7360,6 +7410,71 @@ function beWorlds(){
    filmed, and a frame that can only take one of them is half a tool. A dozen
    faces of the pile sit here — tap one and it lands in the middle of the frame
    as a placement you can drag and size. The drawer has the other 2,021. */
+/* contextmenu, or a hold — one binding for both, since a phone has no right
+   button and a desktop should not need to learn a long press */
+function bindPress(el, fn){
+  el.addEventListener('contextmenu',function(ev){ ev.preventDefault(); ev.stopPropagation(); fn(ev); });
+  var t=null, sx=0, sy=0;
+  el.addEventListener('pointerdown',function(ev){
+    if(ev.pointerType==='mouse'&&ev.button!==0) return;
+    sx=ev.clientX; sy=ev.clientY;
+    t=setTimeout(function(){ t=null; el._pressed=true; fn(ev); },520);
+  });
+  var kill=function(){ if(t){ clearTimeout(t); t=null; } };
+  el.addEventListener('pointerup',function(){ kill();
+    if(el._pressed){ el._pressed=false; setTimeout(function(){ el._pressed=false; },0); } });
+  el.addEventListener('pointerleave',kill);
+  el.addEventListener('pointermove',function(ev){
+    if(t&&(Math.abs(ev.clientX-sx)>8||Math.abs(ev.clientY-sy)>8)) kill(); });
+  el.addEventListener('click',function(ev){ if(el._pressed){ ev.stopPropagation(); ev.preventDefault(); el._pressed=false; } },true);
+}
+/* everything a world can be: a moment, its drawn film, its filmed shots, both */
+function filmMenu(slug, x, y){
+  var old=document.getElementById('lmenu'); if(old) old.remove();
+  var m=document.createElement('div'); m.id='lmenu';
+  m.style.cssText='position:fixed;z-index:90;background:var(--w);border:3px solid var(--k);'
+    +'min-width:196px;font:10px/1 ui-monospace,monospace';
+  var head=document.createElement('div');
+  head.style.cssText='padding:8px 10px;border-bottom:3px solid var(--k);font:9px/1.4 ui-monospace,monospace;opacity:.7';
+  head.textContent=((HWMETA[slug]&&HWMETA[slug].title)||slug).toUpperCase();
+  m.appendChild(head);
+  var item=function(txt,sub,fn){
+    var b=document.createElement('button'); b.type='button';
+    b.style.cssText='display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--k);'
+      +'padding:9px 10px;background:var(--w);font:inherit;min-height:38px';
+    b.innerHTML='<b style="font:inherit">'+txt+'</b><i style="display:block;font:8px/1.4 ui-monospace,monospace;font-style:normal;opacity:.6;margin-top:3px">'+sub+'</i>';
+    b.onclick=function(){ m.remove(); fn(); };
+    m.appendChild(b);
+  };
+  item('This moment','one frame, the whole world, here',function(){
+    var sel=document.getElementById('hw-world'); if(sel) sel.value=slug;
+    hwGalleryMark(slug); hwOpen(slug).then(function(){ hwStamp(true); });
+  });
+  poemsLoad().then(function(ps){
+    var p=ps.filter(function(q){ return q.world===slug; })[0];
+    if(!p) return;
+    item('The whole drawn film','the world runs, a frame every 1/8s',function(){ poemDrawn(p); });
+    if(p.count) item('The '+p.count+' shot'+(p.count===1?'':'s')+' filmed for it',
+      'from the archive, in stanza order',function(){ filmStream(p); });
+    if(p.count) item('Both','filmed here, drawn on its own branch',function(){ poemBoth(p); });
+  }).catch(function(){});
+  document.body.appendChild(m);
+  var r=m.getBoundingClientRect();
+  m.style.left=Math.max(6,Math.min(x, innerWidth-r.width-6))+'px';
+  m.style.top=Math.max(6,Math.min(y, innerHeight-r.height-6))+'px';
+  var close=function(ev){ if(!m.contains(ev.target)){ m.remove(); removeEventListener('pointerdown',close,true); } };
+  setTimeout(function(){ addEventListener('pointerdown',close,true); },0);
+}
+(function(){ var b=document.getElementById('be-film-btn'); if(!b)return;
+  b.addEventListener('click',function(ev){
+    ev.stopPropagation(); playTick();
+    var tab=document.getElementById('tab-make'); if(tab&&!tab.classList.contains('on')) tab.click();
+    setTimeout(function(){
+      var d=document.getElementById('sec-two');
+      if(d){ d.open=true; d.dispatchEvent(new Event('toggle')); d.scrollIntoView({block:'start'}); }
+    },360);
+  });
+})();
 function beArchive(){
   var box=document.getElementById('be-arch'); if(!box) return;
   arcLoad().then(function(){
@@ -7542,7 +7657,7 @@ board.addEventListener('wheel',function(e){
    draws — a layer being selected must not turn the canvas into a dead surface,
    because drawing over what you placed is half of collage.
    ═════════════════════════════════════════════════════════════════════════ */
-var QDRAG=null, HANDLE_R=9;
+var QDRAG=null, HANDLE_R=9, _qSwallow=false;
 function boardCoordF(e){
   var r=board.getBoundingClientRect(); if(!r.width)return[0,0];
   return [(e.clientX-r.left)/r.width*W, (e.clientY-r.top)/r.height*H];
@@ -7568,7 +7683,10 @@ function selPatch(){
   return pstack(myNode).filter(function(x){ return x.id===PSEL; })[0]||null;
 }
 function liveQuad(){
-  if(QDRAG && QDRAG.pid===PSEL) return QDRAG.quad;
+  if(QDRAG) return QDRAG.quad;
+  /* a live pick owns the handles — Pick is an explicit mode and the selection
+     is the thing in front of you, so its corners come before a layer's */
+  if(typeof PICK!=='undefined' && PICK) return pickQuadOf();
   var p=selPatch(); if(!p||!p.on) return null;
   return patchQuad(p);
 }
@@ -7622,14 +7740,22 @@ function handleAt(e){
   return best;
 }
 board.addEventListener('pointerdown',function(e){
+  _qSwallow=false;
   if(PEND) return;
   var k=handleAt(e); if(k<0) return;
-  var p=selPatch(); if(!p) return;
-  var q=patchQuad(p); if(!q) return;
-  e.stopPropagation(); e.preventDefault();
+  var onPick=(typeof PICK!=='undefined' && !!PICK);
+  var p=onPick?null:selPatch();
+  var q=onPick?pickQuadOf():(p?patchQuad(p):null);
+  if(!q) return;
+  /* stopImmediatePropagation, not stopPropagation: the Pick tool listens on
+     THIS SAME element in the same phase, and stopPropagation does not stop
+     listeners on the element it fires from. Grabbing a corner out in empty ink
+     therefore also reached Pick, which read it as "select what is under the
+     pointer", found nothing, and cleared the selection the corner belonged to. */
+  e.stopImmediatePropagation(); e.preventDefault();
   try{ board.setPointerCapture(e.pointerId); }catch(_){}
   var f=boardCoordF(e);
-  QDRAG={pid:p.id, k:k, quad:q.map(function(c2){ return [c2[0],c2[1]]; }),
+  QDRAG={pid:(p?p.id:null), pick:onPick, k:k, quad:q.map(function(c2){ return [c2[0],c2[1]]; }),
          start:f, from:q.map(function(c2){ return [c2[0],c2[1]]; })};
   playMicroTick(); paintBoard();
 },true);
@@ -7647,15 +7773,33 @@ function qdragTo(e){
 }
 board.addEventListener('pointermove',function(e){
   if(!QDRAG) return;
-  e.stopPropagation();
+  e.stopImmediatePropagation();
   qdragTo(e);
   paintBoard();
 },true);
+/* the CLICK that follows a handle drag must not reach the board. Pick reads a
+   click as "select what is under the pointer", and a corner dragged out over
+   empty ink read as "select nothing" — the selection was cleared before the
+   reshape could be applied to it. */
+board.addEventListener('click',function(e){
+  if(!_qSwallow) return;
+  _qSwallow=false; e.stopImmediatePropagation(); e.preventDefault();
+},true);
 board.addEventListener('pointerup',function(e){
   if(!QDRAG) return;
-  e.stopPropagation();
+  e.stopImmediatePropagation();
+  /* cleared by the click it is meant to eat, or by the next press — NOT by a
+     timer. setTimeout(0) fired before the click was dispatched and the swallow
+     had already expired by the time it was needed. */
+  _qSwallow=true;
   qdragTo(e);
   var d=QDRAG; QDRAG=null;
+  if(d.pick){
+    if(!PICK){ paintBoard(); return; }
+    var movedP=d.quad.some(function(c2,i){ return Math.abs(c2[0]-d.from[i][0])>0.01||Math.abs(c2[1]-d.from[i][1])>0.01; });
+    if(movedP){ PICK.quad=d.quad; pickReshape(d.quad); } else paintBoard();
+    return;
+  }
   var p=pstack(myNode).filter(function(x){ return x.id===d.pid; })[0];
   if(!p){ paintBoard(); return; }
   var moved=d.quad.some(function(c2,i){ return Math.abs(c2[0]-d.from[i][0])>0.01||Math.abs(c2[1]-d.from[i][1])>0.01; });
@@ -7771,9 +7915,96 @@ function pickAt(cx,cy){
   }
   return {cells:out, name:out.length+' cells', kind:'shape'};
 }
+/* ═════════════════════════════════════════════════════════════════════════
+   A PICK HAS CORNERS TOO
+   ─────────────────────────────────────────────────────────────────────────
+   Pick could take a thing out of the frame by name and then only SLIDE it.
+   WIDEN, LIFT, COPY, CUT — every verb but the one you reach for first, which
+   is "make it bigger". A layer had four corners and a selection had none, and
+   they are the same gesture on two different kinds of thing.
+
+   So a pick carries a quad over its bounding box, and the same corner handles
+   appear on it. The reshape samples the PICKED CELLS instead of an image —
+   inverse-mapping every destination cell back through the quad into the
+   selection's own box — so it is the identical projective map the placements
+   use, reading a grid rather than a photograph.
+   ═════════════════════════════════════════════════════════════════════════ */
+function pickBBox(){
+  if(!PICK) return null;
+  if(PICK.bbox) return PICK.bbox;
+  var b={x0:1e9,y0:1e9,x1:-1,y1:-1}, i;
+  for(i=0;i<PICK.cells.length;i++){
+    var q=PICK.cells[i], x=q%W, y=(q/W)|0;
+    if(x<b.x0)b.x0=x; if(x>b.x1)b.x1=x;
+    if(y<b.y0)b.y0=y; if(y>b.y1)b.y1=y;
+  }
+  if(b.x1<0) return null;
+  PICK.bbox=b; return b;
+}
+function pickQuadOf(){
+  if(!PICK) return null;
+  if(!(PICK.quad&&PICK.quad.length===4)){
+    var b=pickBBox(); if(!b) return null;
+    PICK.quad=[[b.x0,b.y0],[b.x1+1,b.y0],[b.x1+1,b.y1+1],[b.x0,b.y1+1]];
+  }
+  /* while the selection is being slid, the corners slide with it — the stored
+     quad stays in the selection's own coordinates and only the view is shifted */
+  if(PICK.dx||PICK.dy) return PICK.quad.map(function(c){ return [c[0]+PICK.dx, c[1]+PICK.dy]; });
+  return PICK.quad;
+}
+/* destination cell -> {v: level, s: source cell}, through the quad */
+function pickWarpMap(quad){
+  if(!PICK) return null;
+  var b=pickBBox(); if(!b) return null;
+  var M=quadMatrix(quad); if(!M) return null;
+  var bw=b.x1-b.x0+1, bh=b.y1-b.y0+1, g=curGrid(), out={}, X, Y;
+  var minx=Math.max(0,Math.floor(Math.min(quad[0][0],quad[1][0],quad[2][0],quad[3][0]))),
+      maxx=Math.min(W-1,Math.ceil(Math.max(quad[0][0],quad[1][0],quad[2][0],quad[3][0]))),
+      miny=Math.max(0,Math.floor(Math.min(quad[0][1],quad[1][1],quad[2][1],quad[3][1]))),
+      maxy=Math.min(H-1,Math.ceil(Math.max(quad[0][1],quad[1][1],quad[2][1],quad[3][1])));
+  for(Y=miny;Y<=maxy;Y++) for(X=minx;X<=maxx;X++){
+    var xc=X+0.5, yc=Y+0.5, w=M[6]*xc+M[7]*yc+M[8];
+    if(Math.abs(w)<1e-12) continue;
+    var u=(M[0]*xc+M[1]*yc+M[2])/w, v=(M[3]*xc+M[4]*yc+M[5])/w;
+    if(u<0||u>=1||v<0||v>=1) continue;
+    var sx=b.x0+Math.min(bw-1,(u*bw)|0), sy=b.y0+Math.min(bh-1,(v*bh)|0);
+    var q=sy*W+sx;
+    if(!PICK.set[q]||!g[q]) continue;
+    out[Y*W+X]={v:g[q], s:q};
+  }
+  return out;
+}
+function pickReshape(quad){
+  var moved=pickWarpMap(quad);
+  if(!moved||!Object.keys(moved).length){ PICK.quad=null; paintBoard(); return; }
+  var lines=[], i, k;
+  for(i=0;i<PICK.cells.length;i++){
+    var q=PICK.cells[i];
+    if(moved[q]===undefined) lines.push('PNT '+(q%W)+' '+((q/W)|0)+' 1 1 0');
+  }
+  for(k in moved) lines.push('PNT '+(k%W)+' '+((k/W)|0)+' 1 1 '+moved[k].v);
+  if(!lines.length){ PICK.quad=null; paintBoard(); return; }
+  playThud(); draw(lines);
+  /* ownership travels with the cell it came from, or the next pick selects
+     where the thing used to be */
+  var own=OWNMAP[myNode];
+  if(own){
+    var ni=new Int16Array(own.ids.length);
+    for(i=0;i<own.ids.length;i++) if(!PICK.set[i]) ni[i]=own.ids[i];
+    for(k in moved) ni[k]=own.ids[moved[k].s];
+    own.ids=ni;
+  }
+  var nc=[]; for(k in moved) nc.push(+k);
+  PICK.cells=nc; PICK.set=new Uint8Array(W*H);
+  for(i=0;i<nc.length;i++) PICK.set[nc[i]]=1;
+  PICK.bbox=null; PICK.quad=null; PICK.dx=0; PICK.dy=0;
+  pickBBox(); pickQuadOf();
+  pickBar(true); paintBoard();
+}
 function pickSet(p){
   PICK=p;
-  if(p){ p.set=new Uint8Array(W*H); for(var i=0;i<p.cells.length;i++) p.set[p.cells[i]]=1; p.dx=0; p.dy=0; }
+  if(p){ p.set=new Uint8Array(W*H); for(var i=0;i<p.cells.length;i++) p.set[p.cells[i]]=1; p.dx=0; p.dy=0;
+         p.bbox=null; p.quad=null; pickBBox(); pickQuadOf(); }
   pickBar(!!p); paintBoard();
 }
 function paintPick(){
@@ -7822,6 +8053,10 @@ function pickCommit(dx,dy,copy){
   PICK.cells=nc; PICK.set=new Uint8Array(W*H);
   for(i=0;i<nc.length;i++) PICK.set[nc[i]]=1;
   PICK.dx=0; PICK.dy=0;
+  /* the box and its corners are derived from the cells — a lift that moves the
+     cells and leaves the corners behind puts the handles somewhere the
+     selection no longer is */
+  PICK.bbox=null; PICK.quad=null; pickBBox(); pickQuadOf();
 }
 /* WIDEN — because a name is a class, not an object.
    `windows` means every window in the city, which is the right answer to "what
@@ -7876,6 +8111,7 @@ function pickWiden(){
   for(i=0;i<add.length;i++){ if(!PICK.set[add[i]]){ PICK.set[add[i]]=1; PICK.cells.push(add[i]); added++; } }
   PICK.name=PICK.cells.length+' cells';
   PICK.kind='grown';
+  PICK.bbox=null; PICK.quad=null; pickBBox(); pickQuadOf();   /* it got bigger */
   playTick(); paintBoard(); pickBar(true);
   fireToast('Widened · +'+added+' cells');
 }
@@ -9465,7 +9701,47 @@ document.getElementById('chat-text').addEventListener('keydown', function(e){ if
 /* ---- NAV: panels shrink the canvas ---- */
 var PANELS={ 'tab-make':'panel-make', 'tab-branches':'panel-branches', 'tab-direct':'panel-direct', 'tab-save':'panel-save', 'tab-chat':'panel-chat', 'tab-crew':'panel-chat' };
 function closePanels(){ ['panel-make','panel-branches','panel-direct','panel-save','panel-chat'].forEach(function(p){ var el=document.getElementById(p); if(el)el.classList.remove('open'); }); ['tab-make','tab-branches','tab-direct','tab-save','tab-chat','tab-crew'].forEach(function(t){ var b=document.getElementById(t); if(b)b.classList.remove('on'); }); var bd=document.getElementById('backdrop'); if(bd)bd.classList.remove('on'); var gs=document.querySelectorAll('.lt-ghost'); for(var gi=0;gi<gs.length;gi++){ try{gs[gi].parentNode.removeChild(gs[gi]);}catch(_){} } }
-Object.keys(PANELS).forEach(function(tabId){ var b=document.getElementById(tabId); if(!b)return; b.addEventListener('click',function(){ playTick(); b.classList.remove('pulse'); if(tabId==='tab-crew'&&typeof onbCrewGate==='function')onbCrewGate(); var pid=PANELS[tabId]; var pan=document.getElementById(pid); var wasOpen=pan.classList.contains('open'); closePanels(); if(!wasOpen){ pan.classList.add('open'); b.classList.add('on'); var bd=document.getElementById('backdrop'); if(bd)bd.classList.add('on'); if(pid==='panel-branches'){ flushNow('tree'); refreshNodeCode(); } if(pid==='panel-direct'){ flushNow('table'); } if(pid==='panel-save'){ if(typeof updateTwinIO==='function')updateTwinIO(); flushNow('edl'); } if(pid==='panel-chat'&&crewLive())document.getElementById('chat-text').focus(); } }); });
+/* ═════════════════════════════════════════════════════════════════════════
+   YOU MUST BE ABLE TO SEE WHAT YOU ARE ADDING TO
+   ─────────────────────────────────────────────────────────────────────────
+   The pads are fixed to the bottom and were tall enough to cover the board,
+   and the backdrop dimmed whatever was left. So opening AUTHOR to put a piece
+   in the frame hid the frame. You were choosing a face for a picture you could
+   not see, and then closing the pad to find out what you had done.
+
+   The board is not resized by the panel — it is refitted ABOVE it. The stage
+   takes whatever height is left over the open pad, `fitBoard` scales the board
+   into that, and the backdrop's top edge is moved to the stage's bottom so the
+   picture stays at full brightness while the pad is open.
+   ═════════════════════════════════════════════════════════════════════════ */
+function padFit(){
+  var stage=document.getElementById('stage'), bd=document.getElementById('backdrop');
+  if(!stage) return;
+  var open=document.querySelector('.panel.open');
+  if(!open){
+    _padH=0; stage.classList.remove('padopen');
+    if(bd){ bd.style.top=''; }
+    if(typeof fitBoard==='function') fitBoard();
+    return;
+  }
+  /* the stage KEEPS its height — it is in the flex column with the toolbar and
+     the tabs under it, and shrinking it dragged the whole bottom of the app up
+     into the middle of the pad. Only the BOARD is refitted, into the strip of
+     stage still showing above the pad, and pinned to the top of it. */
+  var top=stage.getBoundingClientRect().top;
+  _padH=Math.max(110, open.getBoundingClientRect().top - top - 6);
+  stage.classList.add('padopen');
+  if(bd) bd.style.top=(top+_padH)+'px';
+  if(typeof fitBoard==='function') fitBoard();
+}
+addEventListener('resize',function(){ padFit(); });
+(function(){ var _cp=closePanels;
+  closePanels=function(){ var r=_cp.apply(this,arguments); try{ padFit(); }catch(e){} return r; }; })();
+Object.keys(PANELS).forEach(function(tabId){ var b=document.getElementById(tabId); if(!b)return; b.addEventListener('click',function(){ playTick(); b.classList.remove('pulse'); if(tabId==='tab-crew'&&typeof onbCrewGate==='function')onbCrewGate(); var pid=PANELS[tabId]; var pan=document.getElementById(pid); var wasOpen=pan.classList.contains('open'); closePanels(); if(!wasOpen){ pan.classList.add('open'); b.classList.add('on'); var bd=document.getElementById('backdrop'); if(bd)bd.classList.add('on'); if(pid==='panel-branches'){ flushNow('tree'); refreshNodeCode(); } if(pid==='panel-direct'){ flushNow('table'); } if(pid==='panel-save'){ if(typeof updateTwinIO==='function')updateTwinIO(); flushNow('edl'); } if(pid==='panel-chat'&&crewLive())document.getElementById('chat-text').focus();
+  /* the pad slides in over 300ms; fit once now so the board jumps straight to
+     its new size, and again when it has landed so the fit is exact */
+  padFit(); setTimeout(padFit,60); setTimeout(padFit,330);
+} else { padFit(); } }); });
 // D — DIRECT: the light table. Five views of the shots under scope; pure organizing utility.
 var ltDrag={ id:null, dx:0, dy:0, ghost:null };
 var ltPlayId=null, ltFrame=0, ltTimer=0, ltPlayReturn=null;
