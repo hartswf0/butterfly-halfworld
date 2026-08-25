@@ -903,7 +903,7 @@
     <div id="pstack" style="margin-top:8px"></div>
   </details>
   <div class="seclabel"><b>Archive</b><span>2,033 pieces cut from 135 shots</span></div>
-  <details class="grp" name="mk"><summary>Archive</summary>
+  <details class="grp" name="mk" id="sec-arc"><summary>Archive</summary>
     <div class="mini">The Lens films what is in front of you. This is what was already
     filmed &mdash; the MARKOV POET archive, cut apart by a segmenter and measured. A piece
     stamps into <b>this frame</b> as BEFLIX; a shot streams in as its own run of frames.
@@ -5273,6 +5273,57 @@ function patchCmds(p, done){
   done([]);
 }
 /* the whole stack, in order, into one grid and back out as commands */
+/* ═════════════════════════════════════════════════════════════════════════
+   BLENDING, IN INK
+   ─────────────────────────────────────────────────────────────────────────
+   Layers only ever covered each other. Whatever was on top won every cell it
+   touched, which is one way of combining two pictures and not a very good one
+   — it is the only one a stack of opaque cards can do.
+
+   This field is not colour, it is EIGHT WEIGHTS OF INK, 0 empty to 7 heaviest,
+   so the blends that make sense here are the ones a printer would name, not the
+   ones a compositor would. DEEPEN adds weight. LIFT takes it away — that is
+   dodge, and it is the one you reach for when a face is too dark to read
+   against a world. MASK keeps the layer under it only where this one inks, so
+   a shape becomes a window. KNOCK does the opposite and punches a hole.
+
+   None of them touch the patch record beyond one string, and `over` still goes
+   down the original path, so nothing already made changes.
+   ═════════════════════════════════════════════════════════════════════════ */
+var BLENDS=[
+  ['over',   'OVER',   'it covers what is under it'],
+  ['behind', 'BEHIND', 'only where nothing is yet'],
+  ['deepen', 'DEEPEN', 'adds its weight — burn'],
+  ['lift',   'LIFT',   'takes its weight away — dodge'],
+  ['darkest','DARKEST','the heavier of the two'],
+  ['lightest','LIGHTEST','the lighter of the two'],
+  ['diff',   'DIFFER', 'the distance between them'],
+  ['mask',   'MASK',   'keeps what is under it, only here'],
+  ['knock',  'KNOCK',  'takes what is under it away here']
+];
+var BLEND_LABEL={}; BLENDS.forEach(function(b){ BLEND_LABEL[b[0]]=b[1]; });
+function blendGrids(dst, src, mode){
+  var g=dst.slice(), i, d, v;
+  if(mode==='mask'){
+    for(i=0;i<N;i++) if(!src[i]) g[i]=0;
+    return g;
+  }
+  for(i=0;i<N;i++){
+    v=src[i]; if(!v) continue;
+    d=g[i];
+    switch(mode){
+      case 'behind':   if(!d) g[i]=v; break;
+      case 'deepen':   g[i]=Math.min(7, d+v); break;
+      case 'lift':     g[i]=Math.max(0, d-v); break;
+      case 'darkest':  g[i]=Math.max(d,v); break;
+      case 'lightest': g[i]=d?Math.min(d,v):v; break;
+      case 'diff':     g[i]=Math.abs(d-v); break;
+      case 'knock':    g[i]=0; break;
+      default:         g[i]=v;
+    }
+  }
+  return g;
+}
 function bakeNode(id, then){
   var st=pstack(id).slice().sort(function(a,b){ return (a.z||0)-(b.z||0); });
   _bakeAt=id;
@@ -5294,7 +5345,19 @@ function bakeNode(id, then){
     var p=st[i++];
     patchCmds(p, function(lines){
       var clean=cleanCmdLines(lines);
-      if(clean.length) grid=applyCmds(grid, clean);
+      if(clean.length){
+        var mode=p.blend||'over';
+        if(mode==='over'){
+          /* the original path, untouched: commands land straight on the stack,
+             so a layer can legitimately paint level 0 and erase what is under it */
+          grid=applyCmds(grid, clean);
+        } else {
+          /* every other mode needs the layer BY ITSELF before it can be
+             combined, so it is rasterised into an empty field first and the
+             two are folded together a cell at a time */
+          grid=blendGrids(grid, applyCmds(null, clean), mode);
+        }
+      }
       /* a yield between patches: a stack with three world patches is three
          halfworld renders and must not lock the frame */
       if(window.MessageChannel){ var mc=new MessageChannel(); mc.port1.onmessage=step; mc.port2.postMessage(0); }
@@ -6117,20 +6180,29 @@ var _padH=0;   /* height of stage still visible above an open pad, 0 when none *
 function fitBoard(){ var stage=document.getElementById('stage'); if(!stage||!stage.clientWidth)return; var pad=10, hAvail=(_padH?Math.min(stage.clientHeight,_padH):stage.clientHeight), fit=Math.floor(Math.min((stage.clientWidth-pad)/W,(hAvail-pad)/H)), sc=Math.max(1,Math.min(8,fit)); board.style.width=(W*sc)+'px'; board.style.height=(H*sc)+'px'; var wrap=document.getElementById('board-wrap'); wrap.style.width=(W*sc)+'px'; wrap.style.height=(H*sc)+'px'; _boardOK=(W*sc>=260 && H*sc>=170); var be=document.getElementById('board-empty'); if(be)be.style.display=(_frameEmpty&&_boardOK)?'flex':'none'; }
 
 /* ---- DRAWING on current node ---- */
-var drawTool='pen', drawInk=7, brush=3, drawing=false, lastPt=null, _curTx=0;
+var drawTool='pen', drawInk=7, brush=3, drawing=false, lastPt=null, _curTx=0, _penPend=null;
 function boardCoord(e){ var r=board.getBoundingClientRect(); if(!r.width)return[0,0]; return [Math.max(0,Math.min(W-1,Math.floor((e.clientX-r.left)/r.width*W))), Math.max(0,Math.min(H-1,Math.floor((e.clientY-r.top)/r.height*H)))]; }
 function brushCmd(x,y,ink){ var s=brush, r=(s/2)|0; return 'PNT '+(x-r)+' '+(y-r)+' '+s+' '+s+' '+ink; }
 function strokeSeg(x0,y0,x1,y1,ink){ var lines=[],dx=Math.abs(x1-x0),dy=Math.abs(y1-y0),sx=x0<x1?1:-1,sy=y0<y1?1:-1,err=dx-dy,x=x0,y=y0,gu=0; while(gu++<2000){ lines.push(brushCmd(x,y,ink)); if(x===x1&&y===y1)break; var e2=2*err; if(e2>-dy){err-=dy;x+=sx;} if(e2<dx){err+=dx;y+=sy;} } return lines; }
 function recoverDraw(label,e,pid){ drawing=false; lastPt=null; try{ if(pid!=null&&board.hasPointerCapture&&board.hasPointerCapture(pid))board.releasePointerCapture(pid); }catch(_){} try{ sendCtl('P '+myNode+' -1 -1'); }catch(_){} try{ paintBoard(); renderStrip(); }catch(_){} recoverRuntime('draw '+label,e); }
 function drawGuard(label,fn){ return function(e){ try{ return fn.call(this,e); }catch(err){ recoverDraw(label,err,e&&e.pointerId); } }; }
 board.addEventListener('pointerdown',drawGuard('start',function(e){ if(playing||(typeof ltTimer!=='undefined'&&ltTimer)){stopPlay();return;}
+  /* the right button is not a pen. Without this a right-click on the canvas
+     opened the menu AND laid a dot of ink under it. */
+  if(e.button&&e.button!==0) return;
   /* THE PEN LISTENS FIRST, so it cannot be stopped by the handle code that runs
      after it — listeners on the same element all fire whatever anyone calls.
      It has to decline the event itself: a corner grab is not a stroke. */
   if(typeof handleAt==='function' && handleAt(e)>=0) return;
-  closePanels(); initAudio(); board.setPointerCapture(e.pointerId); drawing=true; var p=boardCoord(e); lastPt=p; playMicroTick(); if(drawTool!=='box'){ var ink=drawTool==='erase'?0:drawInk; draw([brushCmd(p[0],p[1],ink)]); sendCtl('P '+myNode+' '+p[0]+' '+p[1]); } }));
-board.addEventListener('pointermove',drawGuard('move',function(e){ if(!drawing||(typeof QDRAG!=='undefined'&&QDRAG))return; var p=boardCoord(e); var now=performance.now(); if(now-_curTx>55){ _curTx=now; sendCtl('P '+myNode+' '+p[0]+' '+p[1]); } if(drawTool==='box')return; var ink=drawTool==='erase'?0:drawInk; if(lastPt&&(lastPt[0]!==p[0]||lastPt[1]!==p[1])){ draw(strokeSeg(lastPt[0],lastPt[1],p[0],p[1],ink)); lastPt=p; } }));
-board.addEventListener('pointerup',drawGuard('finish',function(e){ if(!drawing||(typeof QDRAG!=='undefined'&&QDRAG))return; drawing=false; var p=boardCoord(e); if(drawTool==='box'&&lastPt){ var x0=Math.min(lastPt[0],p[0]),y0=Math.min(lastPt[1],p[1]),x1=Math.max(lastPt[0],p[0]),y1=Math.max(lastPt[1],p[1]); draw(['LIN '+x0+' '+y0+' '+x1+' '+y0+' '+drawInk,'LIN '+x1+' '+y0+' '+x1+' '+y1+' '+drawInk,'LIN '+x1+' '+y1+' '+x0+' '+y1+' '+drawInk,'LIN '+x0+' '+y1+' '+x0+' '+y0+' '+drawInk]); playClack(); } lastPt=null; sendCtl('P '+myNode+' -1 -1'); onbCheckTrace(); }));
+  closePanels(); initAudio(); board.setPointerCapture(e.pointerId); drawing=true; var p=boardCoord(e); lastPt=p; playMicroTick();
+  /* THE FIRST MARK WAITS. It used to be laid the instant the pointer went down,
+     which meant holding the canvas to open a menu also left a dot of ink in the
+     picture. A tap still makes a dot — on the way up — and a drag still starts
+     where it started; only the timing moved. */
+  if(drawTool!=='box'){ _penPend=[p[0],p[1],(drawTool==='erase'?0:drawInk)]; sendCtl('P '+myNode+' '+p[0]+' '+p[1]); } }));
+board.addEventListener('pointermove',drawGuard('move',function(e){ if(!drawing||(typeof QDRAG!=='undefined'&&QDRAG))return; var p=boardCoord(e); var now=performance.now(); if(now-_curTx>55){ _curTx=now; sendCtl('P '+myNode+' '+p[0]+' '+p[1]); } if(drawTool==='box')return; var ink=drawTool==='erase'?0:drawInk; if(lastPt&&(lastPt[0]!==p[0]||lastPt[1]!==p[1])){ if(_penPend){ draw([brushCmd(_penPend[0],_penPend[1],_penPend[2])]); _penPend=null; } draw(strokeSeg(lastPt[0],lastPt[1],p[0],p[1],ink)); lastPt=p; } }));
+board.addEventListener('pointerup',drawGuard('finish',function(e){ if(!drawing||(typeof QDRAG!=='undefined'&&QDRAG))return; drawing=false; var p=boardCoord(e);
+  if(_penPend){ draw([brushCmd(_penPend[0],_penPend[1],_penPend[2])]); _penPend=null; } if(drawTool==='box'&&lastPt){ var x0=Math.min(lastPt[0],p[0]),y0=Math.min(lastPt[1],p[1]),x1=Math.max(lastPt[0],p[0]),y1=Math.max(lastPt[1],p[1]); draw(['LIN '+x0+' '+y0+' '+x1+' '+y0+' '+drawInk,'LIN '+x1+' '+y0+' '+x1+' '+y1+' '+drawInk,'LIN '+x1+' '+y1+' '+x0+' '+y1+' '+drawInk,'LIN '+x0+' '+y1+' '+x0+' '+y0+' '+drawInk]); playClack(); } lastPt=null; sendCtl('P '+myNode+' -1 -1'); onbCheckTrace(); }));
 
 function setTool(t){ drawTool=t; playTick();
   if(t!=='pick'&&typeof pickSet==='function') pickSet(null);
@@ -7153,6 +7225,7 @@ function filmStream(poem, then){
         if(then)then(ids); return;
       }
       var id=ids[j], f=plan[j]; j++;
+      if((j&15)===0){ try{ renderStrip(); }catch(e){} }
       groundPatch(id);
       var st=pstack(id).filter(function(x){ return x.kind!=='clip'; });
       var c=mkPatch('clip',{patch:f.patch,k:f.k},
@@ -7427,6 +7500,159 @@ function bindPress(el, fn){
   el.addEventListener('pointermove',function(ev){
     if(t&&(Math.abs(ev.clientX-sx)>8||Math.abs(ev.clientY-sy)>8)) kill(); });
   el.addEventListener('click',function(ev){ if(el._pressed){ ev.stopPropagation(); ev.preventDefault(); el._pressed=false; } },true);
+}
+/* ═════════════════════════════════════════════════════════════════════════
+   THE CANVAS ANSWERS
+   ─────────────────────────────────────────────────────────────────────────
+   Everything the tool can do to a frame lived somewhere else: layers in a rail,
+   blending nowhere, a whole poem behind a mode tab and a disclosure. And the
+   gallery that offered the fourteen only appeared on an EMPTY frame — so the
+   moment you put anything down, the way in vanished, and coming back to a saved
+   film there was no way in at all. That is why "I still cannot add a whole
+   film" survived building the thing three times.
+
+   So the picture itself answers. Right-click it, or hold it, and you get what
+   is here, what you can do to it, and what you can put in it — at the point you
+   pointed at, on any frame, empty or not.
+   ═════════════════════════════════════════════════════════════════════════ */
+function menuShell(x,y,title){
+  var old=document.getElementById('lmenu'); if(old) old.remove();
+  var m=document.createElement('div'); m.id='lmenu';
+  m.style.cssText='position:fixed;z-index:90;background:var(--w);border:3px solid var(--k);'
+    +'min-width:210px;max-height:74vh;overflow-y:auto;font:10px/1 ui-monospace,monospace';
+  if(title){
+    var h=document.createElement('div');
+    h.style.cssText='padding:8px 10px;border-bottom:3px solid var(--k);font:9px/1.4 ui-monospace,monospace;opacity:.7';
+    h.textContent=title; m.appendChild(h);
+  }
+  m.place=function(){
+    document.body.appendChild(m);
+    var r=m.getBoundingClientRect();
+    m.style.left=Math.max(6,Math.min(x, innerWidth-r.width-6))+'px';
+    m.style.top=Math.max(6,Math.min(y, innerHeight-r.height-6))+'px';
+    var close=function(ev){ if(!m.contains(ev.target)){ m.remove(); removeEventListener('pointerdown',close,true); } };
+    setTimeout(function(){ addEventListener('pointerdown',close,true); },0);
+    return m;
+  };
+  m.rule=function(txt){
+    var d=document.createElement('div');
+    d.style.cssText='padding:6px 10px;background:var(--k);color:var(--w);font:9px/1.2 ui-monospace,monospace;letter-spacing:.1em';
+    d.textContent=txt; m.appendChild(d); return d;
+  };
+  m.item=function(txt,sub,fn,on){
+    var b=document.createElement('button'); b.type='button';
+    b.style.cssText='display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--k);'
+      +'padding:9px 10px;background:'+(on?'var(--aB)':'var(--w)')+';font:inherit;min-height:36px';
+    b.innerHTML='<b style="font:inherit">'+txt+'</b>'+(sub?('<i style="display:block;font:8px/1.4 ui-monospace,monospace;font-style:normal;opacity:.6;margin-top:3px">'+sub+'</i>'):'');
+    b.onclick=function(ev){ ev.stopPropagation(); m.remove(); fn(); };
+    m.appendChild(b); return b;
+  };
+  return m;
+}
+function blendMenu(pt, x, y){
+  var m=menuShell(x,y,'HOW '+((pt.name||pt.kind)+'').slice(0,20).toUpperCase()+' MEETS WHAT IS UNDER IT');
+  BLENDS.forEach(function(b){
+    m.item(b[1], b[2], function(){
+      undoMark('blend '+(pt.name||pt.kind),[myNode]);
+      pt.blend=b[0];
+      bakeNode(myNode, function(){ paintStack(); });
+      fireToast((pt.name||pt.kind)+' · '+b[1]);
+    }, (pt.blend||'over')===b[0]);
+  });
+  m.place();
+}
+function poemAddMenu(x, y){
+  var m=menuShell(x,y,'A WHOLE POEM INTO THIS FILM');
+  m.item('reading the routing…','',function(){});
+  poemsLoad().then(function(ps){
+    var m2=menuShell(x,y,'A WHOLE POEM INTO THIS FILM');
+    ps.forEach(function(pm){
+      m2.item(pm.n+' '+pm.title,
+        (pm.world?'drawn':'no world')+' · '+pm.count+' shot'+(pm.count===1?'':'s')+' filmed',
+        function(){ poemSideMenu(pm, x, y); });
+    });
+    m2.place();
+  }).catch(function(){ fireToast('Could not read poems.json'); });
+  m.place();
+}
+function poemSideMenu(pm, x, y){
+  var m=menuShell(x,y,(pm.n+' '+pm.title).toUpperCase());
+  if(pm.world) m.item('The drawn film','the world runs, a frame every 1/8s',function(){ poemDrawn(pm); });
+  if(pm.count)  m.item('The '+pm.count+' shot'+(pm.count===1?'':'s')+' filmed for it',
+    'from the archive, in stanza order',function(){ filmStream(pm); });
+  if(pm.world&&pm.count) m.item('Both','filmed here, drawn on its own branch',function(){ poemBoth(pm); });
+  if(pm.world) m.item('Just this moment','one frame of the world, here',function(){
+    var sel=document.getElementById('hw-world'); if(sel) sel.value=pm.world;
+    hwOpen(pm.world).then(function(){ hwStamp(true); });
+  });
+  m.place();
+}
+/* right-click, or hold — the same menu either way, because a phone has no
+   right button and neither should have to learn the other's gesture */
+(function(){
+  if(!board) return;
+  board.addEventListener('contextmenu',function(e){
+    e.preventDefault(); e.stopPropagation();
+    if(PEND) return;
+    var p=boardCoord(e);
+    boardMenu(e.clientX, e.clientY, p[0], p[1]);
+  });
+  var t=null, sx=0, sy=0;
+  board.addEventListener('pointerdown',function(e){
+    if(PEND||QDRAG) return;
+    if(e.pointerType==='mouse'&&e.button!==0) return;
+    sx=e.clientX; sy=e.clientY;
+    t=setTimeout(function(){
+      t=null;
+      /* the hold wins the gesture: whatever the tool had begun is abandoned
+         before it marks anything */
+      _penPend=null; drawing=false; lastPt=null; _qSwallow=true;
+      try{ if(board.hasPointerCapture&&board.hasPointerCapture(e.pointerId)) board.releasePointerCapture(e.pointerId); }catch(_){}
+      var p=boardCoord(e);
+      playTick();
+      boardMenu(sx, sy, p[0], p[1]);
+    },520);
+  },true);
+  var kill=function(){ if(t){ clearTimeout(t); t=null; } };
+  board.addEventListener('pointerup',kill,true);
+  board.addEventListener('pointercancel',kill,true);
+  board.addEventListener('pointerleave',kill,true);
+  board.addEventListener('pointermove',function(e){
+    if(t&&(Math.abs(e.clientX-sx)>8||Math.abs(e.clientY-sy)>8)) kill();
+  },true);
+})();
+function boardMenu(x, y, cx, cy){
+  var st=pstack(myNode).slice().sort(function(a,b){ return (b.z||0)-(a.z||0); });
+  var real=st.filter(function(p){ return p.kind!=='ground'; });
+  var m=menuShell(x,y,'FRAME · CELL '+cx+','+cy+' · '+real.length+' LAYER'+(real.length===1?'':'S'));
+  m.item('Pick what is here','take this thing out by name or by shape',function(){
+    if(typeof setTool==='function') setTool('pick');
+    var got=pickAt(cx,cy);
+    if(!got){ fireToast('Nothing inked here'); return; }
+    pickSet(got);
+    fireToast(got.kind==='named'?('Picked '+got.name):('Picked a shape · '+got.cells.length+' cells'));
+  });
+  m.rule('PUT IN');
+  m.item('A whole poem…','its drawn film, its filmed shots, or both',function(){ poemAddMenu(x,y); });
+  m.item('A piece from the archive…','2,033 cut from 135 shots',function(){
+    var tab=document.getElementById('tab-make'); if(tab&&!tab.classList.contains('on')) tab.click();
+    setTimeout(function(){ var d=document.getElementById('sec-arc');
+      if(d){ d.open=true; d.dispatchEvent(new Event('toggle')); d.scrollIntoView({block:'start'}); } },360);
+  });
+  if(real.length){
+    m.rule('LAYERS · TOP FIRST');
+    real.forEach(function(pt){
+      m.item((PKIND[pt.kind]||'')+' '+(pt.name||pt.kind),
+        (pt.on?'':'hidden · ')+(BLEND_LABEL[pt.blend||'over']||'OVER').toLowerCase()
+          +(pt.binding?(' · bound to '+(pt.binding.part||'body')):''),
+        function(){ PSEL=pt.id; paintStack(); layerMenu(pt, x, y); }, PSEL===pt.id);
+    });
+    var sel=real.filter(function(pt){ return pt.id===PSEL; })[0]||real[0];
+    m.rule('THE '+((sel.name||sel.kind)+'').slice(0,18).toUpperCase());
+    m.item('Blend…','how it meets what is under it',function(){ blendMenu(sel,x,y); });
+    m.item('More…','duplicate, hide, reorder, bind, delete',function(){ layerMenu(sel,x,y); });
+  }
+  m.place();
 }
 /* everything a world can be: a moment, its drawn film, its filmed shots, both */
 function filmMenu(slug, x, y){
@@ -8176,6 +8402,7 @@ function pickBar(on){
 /* the pick tool takes the pointer before the pen sees it */
 board.addEventListener('pointerdown',function(e){
   if(drawTool!=='pick'||PEND)return;
+  if(e.button&&e.button!==0) return;      /* right-click belongs to the menu */
   e.stopPropagation(); e.preventDefault();
   board.setPointerCapture(e.pointerId);
   var p=boardCoord(e);
@@ -8416,6 +8643,11 @@ function patchSpanApply(pid, n, then){
     }
     bakeNode(id, function(){
       Progress.set(j,work.length);
+      /* THE FILM APPEARS WHILE IT IS BEING MADE. A six-hundred-frame span is
+         two and a half minutes, and the strip used to stay at 1/1 for all of
+         it — so the only evidence anything was happening was a progress bar,
+         and the honest conclusion from watching that was that it had failed. */
+      if((j&15)===0){ try{ renderStrip(); }catch(e){} }
       if(window.MessageChannel){ var mc=new MessageChannel(); mc.port1.onmessage=step; mc.port2.postMessage(0); }
       else setTimeout(step,0);
     });
@@ -8670,6 +8902,31 @@ function paintCard(){
   }
   h.appendChild(mk('×',function(){ PSEL=null; paintStack(); paintCard(); }));
   c.appendChild(h);
+  if(p.kind!=='ground'){
+    /* BLEND ON THE CARD, not only behind a right-click. How a layer meets what
+       is under it is a choice you make constantly once you have it, and a
+       choice you make constantly does not belong two gestures away. */
+    var bl=document.createElement('div');
+    bl.style.cssText='display:flex;align-items:center;gap:5px;margin:6px 0 2px';
+    var bt=document.createElement('span');
+    bt.style.cssText='font:9px/1 ui-monospace,monospace;opacity:.6;letter-spacing:.1em';
+    bt.textContent='BLEND';
+    var sel=document.createElement('select');
+    sel.style.cssText='flex:1;min-height:32px;border:3px solid var(--k);background:var(--w);'
+      +'font:9px/1 ui-monospace,monospace;font-weight:700;letter-spacing:.06em';
+    BLENDS.forEach(function(b){
+      var o=document.createElement('option'); o.value=b[0]; o.textContent=b[1]+' — '+b[2];
+      if((p.blend||'over')===b[0]) o.selected=true;
+      sel.appendChild(o);
+    });
+    sel.onchange=function(){
+      undoMark('blend '+(p.name||p.kind),[myNode]);
+      p.blend=sel.value; playTick();
+      bakeNode(myNode, function(){ paintStack(); });
+    };
+    bl.appendChild(bt); bl.appendChild(sel);
+    c.appendChild(bl);
+  }
   c.appendChild(patchControls(p));
   c.classList.add('on');
 }
