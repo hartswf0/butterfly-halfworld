@@ -723,6 +723,22 @@
   #coach[hidden]{ display:none; }
   /* the playhead: the only thing that moves during PLAY */
   #tl-strip{ position:relative; }
+  /* ══ TRACKS ══════════════════════════════════════════════════════════════
+     A span was a number typed into a card: you could set it and never see it,
+     and you certainly could not see it against the other layers. A patch that
+     reaches across frames is a BAR across those frames, and the place it
+     belongs is under the frames it covers.
+     The lane lives inside the strip's own scroller, so it scrolls with the cut
+     for free and cannot drift out of register with it. ═══════════════════ */
+  #tl-tracks{ position:absolute; left:0; top:auto; bottom:1px; height:0; pointer-events:none; }
+  #tl-tracks .trk{ position:absolute; height:11px; pointer-events:auto; cursor:pointer;
+                   border:2px solid var(--k); background:var(--w);
+                   font:700 7px/9px ui-monospace,monospace; letter-spacing:.06em;
+                   overflow:hidden; white-space:nowrap; padding:0 3px; box-sizing:border-box }
+  #tl-tracks .trk.sel{ background:var(--aB); border-color:var(--k) }
+  #tl-tracks .trk.off{ opacity:.4 }
+  #tl-tracks .grip{ position:absolute; right:-1px; top:-2px; width:9px; height:13px;
+                    background:var(--k); cursor:ew-resize; pointer-events:auto }
   #tl-playhead{ position:absolute; left:0; top:2px; bottom:2px; width:3px; background:var(--aC); z-index:6; pointer-events:none; will-change:transform; }
   #tl-playhead[hidden]{ display:none; }
   /* recycled strip: strict cells, pooled + transform-positioned over one spacer */
@@ -792,7 +808,7 @@
 
 <div id="timeline">
   <div id="tl-cutbar" class="tl-cutbar"></div>
-  <div id="tl-strip"><div id="tl-playhead" hidden></div></div>
+  <div id="tl-strip"><div id="tl-playhead" hidden></div><div id="tl-tracks"></div></div>
   <div id="tl-ops">
     <div class="tl-grp tl-make">
       <button id="op-cap" class="opx" type="button" aria-label="The Lens" title="The Lens — film the world into frames"><svg viewBox="0 0 22 22" width="20" height="20"><path d="M3 6.5h4l1.4-2h5.2l1.4 2h4v11H3v-11" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="11" cy="11.5" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="16" y="8.2" width="1.8" height="1.8" fill="currentColor"/></svg></button>
@@ -7425,7 +7441,8 @@ function patchSpanApply(pid, n, then){
   if(!p){ if(then)then(); return; }
   n=Math.max(1,Math.min(600,n|0));
   p.span=n;
-  if(n<2){ bakeNode(myNode, function(){ paintStack(); if(then)then(); }); return; }
+  /* n===1 is not a no-op: it is a retraction to this frame alone, so it goes
+     through the same path and lets the tail walk below give the copies back. */
   var fps=8, ids=[myNode], cur=myNode, i;
   /* walk the branch forward, extending it when it ends */
   for(i=1;i<n;i++){
@@ -7436,18 +7453,42 @@ function patchSpanApply(pid, n, then){
     }
     ids.push(kid); cur=kid;
   }
-  undoMark('span '+(p.name||p.kind)+' × '+ids.length, ids);
-  Progress.start('Spanning '+(p.name||p.kind),{total:ids.length,stage:'across '+ids.length+' frames',cancelable:true,
-    onCancel:function(){ ids.length=0; }});
+  /* A shorter span has to RETRACT, not merely stop laying: any frame further
+     along the branch still carrying a cast of this patch must give it back.
+     Without this, dragging a track's grip leftward looked like it did nothing
+     — the copies were still out there and the extent redrew at its old reach. */
+  var tail=[], tcur=cur;
+  for(;;){
+    var tk=branchChoice[tcur]||(nodes[tcur]&&nodes[tcur].kids[0]);
+    if(!tk) break;
+    var has=(PSTACK[tk]||[]).some(function(x){ return x._from===pid; });
+    if(!has) break;
+    tail.push(tk); tcur=tk;
+    if(tail.length>600) break;
+  }
+  var work=ids.map(function(id){ return {id:id, drop:false}; })
+             .concat(tail.map(function(id){ return {id:id, drop:true}; }));
+  undoMark('span '+(p.name||p.kind)+' × '+ids.length, ids.concat(tail));
+  Progress.start('Spanning '+(p.name||p.kind),{total:work.length,stage:'across '+ids.length+' frames',cancelable:true,
+    onCancel:function(){ work.length=0; }});
   var j=0;
   var step=function(){
-    if(j>=ids.length){
+    if(j>=work.length){
       Progress.done(ids.length+' frames'); Progress.hide(400);
       renderStrip(); renderBranches(); paintStack();
       fireToast((p.name||p.kind)+' across '+ids.length+' frames');
       if(then)then(); return;
     }
-    var id=ids[j], off=j; j++;
+    var w=work[j], id=w.id, off=j; j++;
+    if(w.drop){
+      PSTACK[id]=(PSTACK[id]||[]).filter(function(x){ return x._from!==pid; });
+      bakeNode(id, function(){
+        Progress.set(j,work.length);
+        if(window.MessageChannel){ var mc=new MessageChannel(); mc.port1.onmessage=step; mc.port2.postMessage(0); }
+        else setTimeout(step,0);
+      });
+      return;
+    }
     if(id!==myNode){
       groundPatch(id);
       var q=JSON.parse(JSON.stringify({kind:p.kind,src:p.src,place:p.place,
@@ -7463,13 +7504,162 @@ function patchSpanApply(pid, n, then){
       PSTACK[id].push(c);
     }
     bakeNode(id, function(){
-      Progress.set(j,ids.length);
+      Progress.set(j,work.length);
       if(window.MessageChannel){ var mc=new MessageChannel(); mc.port1.onmessage=step; mc.port2.postMessage(0); }
       else setTimeout(step,0);
     });
   };
   step();
 }
+
+/* ══ A MENU ON A LAYER ════════════════════════════════════════════════════
+   Copy and delete were a trip to the card. Right-click on a desktop and a long
+   press on a phone are the same gesture with different hardware, so both open
+   the same short list on whatever layer is under the finger. */
+var _lpTimer=null;
+function layerMenu(p, x, y){
+  var old=document.getElementById('lmenu'); if(old) old.remove();
+  var m=document.createElement('div'); m.id='lmenu';
+  m.style.cssText='position:fixed;z-index:90;background:var(--w);border:3px solid var(--k);'
+    +'min-width:132px;font:10px/1 ui-monospace,monospace';
+  var item=function(txt,fn){
+    var b=document.createElement('button'); b.type='button'; b.textContent=txt;
+    b.style.cssText='display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--k);'
+      +'padding:9px 10px;background:var(--w);font:inherit;min-height:36px';
+    b.onclick=function(){ m.remove(); fn(); };
+    m.appendChild(b);
+  };
+  item('Duplicate', function(){
+    undoMark('duplicate '+(p.name||p.kind),[myNode]);
+    var c=JSON.parse(JSON.stringify(p)); c.id='p'+(++PID); delete c._from;
+    if(c.place){ c.place.x=(c.place.x||W/2)+6; c.place.y=(c.place.y||H/2)+6; }
+    var st=pstack(myNode);
+    c.z=(st.length?Math.max.apply(null,st.map(function(x){return x.z||0;})):0)+1;
+    st.push(c); PSEL=c.id; bakeNode(myNode, paintStack);
+  });
+  item(p.on?'Hide':'Show', function(){ patchSet(myNode,p.id,!p.on); });
+  item('Bring to front', function(){ undoMark('to front',[myNode]);
+    var st=pstack(myNode);
+    p.z=(st.length?Math.max.apply(null,st.map(function(x){return x.z||0;})):0)+1;
+    bakeNode(myNode, paintStack); });
+  item('Send to back', function(){ undoMark('to back',[myNode]);
+    var st=pstack(myNode).filter(function(x){return x.kind!=='ground';});
+    p.z=(st.length?Math.min.apply(null,st.map(function(x){return x.z||0;})):1)-1;
+    bakeNode(myNode, paintStack); });
+  item('Delete', function(){ if(PSEL===p.id)PSEL=null; patchDrop(myNode,p.id); paintCard(); });
+  document.body.appendChild(m);
+  var r=m.getBoundingClientRect();
+  m.style.left=Math.max(6,Math.min(x, innerWidth-r.width-6))+'px';
+  m.style.top=Math.max(6,Math.min(y, innerHeight-r.height-6))+'px';
+  var close=function(ev){ if(!m.contains(ev.target)){ m.remove(); removeEventListener('pointerdown',close,true); } };
+  setTimeout(function(){ addEventListener('pointerdown',close,true); },0);
+}
+function bindLayerGestures(el, p){
+  el.addEventListener('contextmenu',function(ev){ ev.preventDefault(); layerMenu(p, ev.clientX, ev.clientY); });
+  el.addEventListener('pointerdown',function(ev){
+    if(ev.pointerType==='mouse'&&ev.button!==0) return;
+    var X=ev.clientX, Y=ev.clientY;
+    clearTimeout(_lpTimer);
+    _lpTimer=setTimeout(function(){ playTick(); layerMenu(p, X, Y); }, 520);
+  });
+  ['pointerup','pointercancel','pointerleave'].forEach(function(k){
+    el.addEventListener(k,function(){ clearTimeout(_lpTimer); });
+  });
+  el.addEventListener('pointermove',function(){ clearTimeout(_lpTimer); });
+}
+
+/* ══ THE TRACKS ═══════════════════════════════════════════════════════════
+   Every patch that reaches across frames is drawn as a bar under the frames it
+   covers, on its own row, so one layer's reach is legible against the others'.
+
+   A spanned patch leaves a copy on each frame carrying `_from`, which is the
+   id of the patch it came from — so the LINEAGE is already recorded and a track
+   is just that lineage's extent along the path. Nothing new had to be stored to
+   draw this; it was already true and merely invisible.
+   ═════════════════════════════════════════════════════════════════════════ */
+function trackData(){
+  var path=(typeof _stripPath!=='undefined'&&_stripPath.length)?_stripPath:[myNode];
+  var by={}, order=[];
+  path.forEach(function(id,i){
+    (PSTACK[id]||[]).forEach(function(p){
+      if(p.kind==='ground') return;
+      var key=p._from||p.id;
+      if(!by[key]){ by[key]={key:key, name:p.name||p.kind, kind:p.kind, on:p.on,
+                             from:i, to:i, origin:(p._from?null:id), pid:p.id};
+                    order.push(key); }
+      var t=by[key];
+      if(i<t.from) t.from=i;
+      if(i>t.to) t.to=i;
+      if(!p._from){ t.origin=id; t.pid=p.id; }
+      if(p.on) t.on=true;
+    });
+  });
+  return order.map(function(k){ return by[k]; });
+}
+var _dragTrk=null;
+function paintTracks(){
+  var lane=document.getElementById('tl-tracks'), strip=document.getElementById('tl-strip');
+  if(!lane||!strip) return;
+  var tr=trackData();
+  lane.innerHTML='';
+  if(!tr.length){ lane.style.height='0'; strip.style.minHeight='50px'; return; }
+  var rows=Math.min(4,tr.length);
+  lane.style.height=(rows*13)+'px';
+  lane.style.width=((typeof _stripPath!=='undefined'?_stripPath.length:1)*STRIP_CARD_W+8)+'px';
+  strip.style.minHeight=(50+rows*13)+'px';
+  tr.forEach(function(t,i){
+    var d=document.createElement('div');
+    d.className='trk'+(PSEL===t.pid?' sel':'')+(t.on?'':' off');
+    d.style.left=(t.from*STRIP_CARD_W+6)+'px';
+    d.style.width=((t.to-t.from+1)*STRIP_CARD_W-5)+'px';
+    d.style.bottom=((i%4)*13)+'px';
+    d.textContent=(PKIND[t.kind]||'')+' '+t.name+(t.to>t.from?(' '+(t.to-t.from+1)+'f'):'');
+    d.title=t.name+' · frames '+(t.from+1)+'–'+(t.to+1)+' — long-press for more';
+    (function(){ var pp=(PSTACK[t.origin||myNode]||[]).filter(function(x){return x.id===t.pid;})[0];
+      if(pp) bindLayerGestures(d,pp); })();
+    d.onclick=function(ev){ ev.stopPropagation();
+      if(t.origin&&t.origin!==myNode&&typeof gotoNode==='function') gotoNode(t.origin);
+      PSEL=t.pid; playTick(); paintStack(); };
+    /* the right end is the reach: drag it and the passage is re-laid */
+    var g=document.createElement('div'); g.className='grip';
+    g.addEventListener('pointerdown',function(ev){
+      ev.stopPropagation(); ev.preventDefault();
+      try{ g.setPointerCapture(ev.pointerId); }catch(e){}
+      _dragTrk={t:t, x0:ev.clientX, n0:(t.to-t.from+1), el:d};
+    });
+    d.appendChild(g);
+    lane.appendChild(d);
+  });
+}
+addEventListener('pointermove',function(e){
+  if(!_dragTrk)return;
+  var dn=Math.round((e.clientX-_dragTrk.x0)/STRIP_CARD_W);
+  var n=Math.max(1,_dragTrk.n0+dn);
+  _dragTrk.el.style.width=(n*STRIP_CARD_W-5)+'px';
+  _dragTrk.n=n;
+});
+addEventListener('pointerup',function(e){
+  if(!_dragTrk)return;
+  /* read the reach from the RELEASE point, not from the last move: a fast
+     drag (or a synthetic one) can land with no pointermove in between, and
+     the gesture then committed nothing at all. */
+  var t=_dragTrk.t, n=_dragTrk.n;
+  if(e&&typeof e.clientX==='number'){
+    var dn=Math.round((e.clientX-_dragTrk.x0)/STRIP_CARD_W);
+    n=Math.max(1,_dragTrk.n0+dn);
+  }
+  _dragTrk=null;
+  if(!n||n===(t.to-t.from+1)) { paintTracks(); return; }
+  if(t.origin&&t.origin!==myNode&&typeof gotoNode==='function') gotoNode(t.origin);
+  PSEL=t.pid;
+  patchSpanApply(t.pid, n, function(){ paintTracks(); });
+});
+/* renderStrip only marks the strip dirty — the path is not laid until
+   renderStripNow runs on the next frame, so the lane must follow THAT one.
+   Wrapping the scheduler painted tracks against a stale _stripPath and every
+   passage read as one frame wide. */
+(function(){ var _rs=renderStripNow;
+  renderStripNow=function(){ var r=_rs.apply(this,arguments); try{ paintTracks(); }catch(e){} return r; }; })();
 
 /* the card: the selected layer's controls, on the stage beside the rail */
 function paintCard(){
@@ -7495,7 +7685,7 @@ function paintCard(){
   c.classList.add('on');
 }
 (function(){ var _pr=paintRail;
-  paintRail=function(){ _pr(); try{ paintCard(); }catch(e){} }; })();
+  paintRail=function(){ _pr(); try{ paintCard(); paintTracks(); }catch(e){} }; })();
 
 /* the rail: the same stack, always on screen. tapping a tile selects the patch
    and opens the panel's controls for it, so there is one selection and not two. */
@@ -7517,7 +7707,8 @@ function paintRail(){
     b.textContent=(PKIND[p.kind]||'?')+(p.repeat&&p.repeat.n>1?('×'+p.repeat.n):'')
       +(p.span&&p.span>1?(' '+p.span+'f'):'');
     d.appendChild(b);
-    d.title=(p.name||p.kind)+' — tap to select, double-tap to hide';
+    d.title=(p.name||p.kind)+' — tap to select, long-press for more';
+    bindLayerGestures(d,p);
     d.onclick=function(){ PSEL=(PSEL===p.id?null:p.id); playTick(); paintStack(); paintRail(); paintCard(); };
     d.ondblclick=function(ev){ ev.preventDefault(); patchSet(myNode,p.id,!p.on); };
     list.appendChild(d);
