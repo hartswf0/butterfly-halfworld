@@ -928,6 +928,17 @@
     <div class="row" style="margin-top:8px"><button id="hw-break" type="button" style="width:100%">Break this frame down</button></div>
     <div class="mini" id="hw-state">not loaded</div>
   </details>
+  <div class="seclabel" style="margin-top:12px"><b>Both films</b><span>every poem was drawn and filmed</span></div>
+  <details id="sec-two"><summary>THE TWO FILMS</summary>
+    <div class="mini">Each poem exists twice: as a <b>halfworld</b>, a program that runs and can be
+    taken apart by name, and as the <b>shots</b> that were filmed for it &mdash; routed by
+    WYGWYL_COVERAGE_MAP, in stanza order. Take either. Take <b>both</b> and the second
+    lands on its own branch, so BRANCH switches between them and the frames stay side by
+    side. Filmed frames arrive as clip patches, not as pictures: still yours to re-corner,
+    bind and collage.</div>
+    <div id="two-list" style="margin-top:10px;display:flex;flex-direction:column;gap:6px"></div>
+    <div class="mini" id="two-state">not loaded</div>
+  </details>
   <div class="seclabel"><b>Frame</b><span>change this moment</span></div>
   <details class="grp" name="mk"><summary>Write</summary>
     <div class="field"><label>Text</label><input id="mk-text" type="text" maxlength="120" value="HELLO" autocomplete="off"></div>
@@ -6919,6 +6930,217 @@ function hwClip(){
    made it and taken apart by name — which is the difference between importing
    a picture of a world and importing the world.
    ==================================================================== */
+/* ═════════════════════════════════════════════════════════════════════════
+   THE OTHER FILM — the poem as it was filmed
+   ─────────────────────────────────────────────────────────────────────────
+   Every poem has two films. The DRAWN one is the halfworld: a program that
+   runs for a minute or two and can be taken apart by the names it knows. The
+   FILMED one is the shots out of the MARKOV POET archive, packed as sheets of
+   photographs over masks.
+
+   The drawn one streamed from a button. The filmed one would load only if you
+   knew a URL or had a file to pick — which in practice meant it did not load.
+   The routing was never missing: WYGWYL_COVERAGE_MAP.json puts all 135 shots
+   against poems and lines, and `cut/pf/poemfilms.py` writes that out as
+   poems.json. Fourteen poems, a world slug on one side and ordered shots on
+   the other, in STANZA order so the film reads in the order of the poem.
+
+   IT ARRIVES AS PATCHES, NOT AS PIXELS. Each frame is a node carrying a clip
+   patch — a shot id and an index into it — so a streamed film is still a stack
+   you can select, re-corner, bind and collage on. Streaming it as baked
+   commands would have been less code and would have thrown away every reason
+   OP16 exists.
+   ═════════════════════════════════════════════════════════════════════════ */
+var POEMS=null;
+/* the panel: fourteen poems, two sides each, and a way to hold both at once */
+function twoState(t){ var e=document.getElementById('two-state'); if(e)e.textContent=t; }
+function twoBuild(){
+  var box=document.getElementById('two-list'); if(!box) return;
+  /* the flag is set on SUCCESS, not on entry: a build that fails and still
+     marks itself done leaves the section permanently empty and closing and
+     reopening it does nothing, which is the worst way for a list to be missing */
+  if(box.dataset.built||box.dataset.busy) return;
+  box.dataset.busy='1';
+  twoState('reading the routing…');
+  poemsLoad().then(function(ps){
+    box.innerHTML='';
+    var filmed=0, drawn=0;
+    ps.forEach(function(p){
+      filmed+=p.count; if(p.world) drawn++;
+      var row=document.createElement('div');
+      row.style.cssText='border:3px solid var(--k);padding:8px';
+      var h=document.createElement('div');
+      h.style.cssText='font:10px/1.3 ui-monospace,monospace;font-weight:700;letter-spacing:.06em';
+      h.textContent=p.n+' '+p.title;
+      var sub=document.createElement('div');
+      sub.style.cssText='font:8px/1.5 ui-monospace,monospace;opacity:.6;margin:3px 0 7px';
+      sub.textContent=(p.world?'drawn':'no world')+' · '+p.count+' shot'+(p.count===1?'':'s')+' filmed';
+      var bar=document.createElement('div');
+      bar.style.cssText='display:flex;gap:5px';
+      var mk=function(label,title,fn,primary){
+        var b=document.createElement('button'); b.type='button'; b.textContent=label; b.title=title;
+        b.style.cssText='flex:1;min-height:34px;font:9px/1 ui-monospace,monospace'
+          +(primary?';background:var(--k);color:var(--w)':'');
+        b.onclick=fn; return b;
+      };
+      if(p.world) bar.appendChild(mk('DRAWN','stream the halfworld as a film',
+        function(){ closePanels(); poemDrawn(p); }));
+      if(p.count)  bar.appendChild(mk('FILMED','stream the shots routed to this poem',
+        function(){ closePanels(); filmStream(p); }));
+      if(p.world&&p.count) bar.appendChild(mk('BOTH','the filmed film here, the drawn one on its own branch',
+        function(){ closePanels(); poemBoth(p); }, true));
+      row.appendChild(h); row.appendChild(sub); row.appendChild(bar);
+      box.appendChild(row);
+    });
+    box.dataset.built='1'; delete box.dataset.busy;
+    twoState(ps.length+' poems · '+drawn+' drawn · '+filmed+' shots routed and packed');
+  }).catch(function(){ delete box.dataset.busy;
+    twoState('could not read poems.json — run cut/pf/poemfilms.py, then reopen'); });
+}
+/* The drawn side, laid as PATCHES rather than streamed as a strip.
+
+   `hwStream` builds a twinstrip and feeds it to OPERATOR's strip loader, and
+   that loader ADOPTS — it replaces the film. Which is right for opening a
+   twinstrip and fatal for BOTH: the drawn film arrived and the filmed one it
+   was supposed to sit beside was gone. Measured plainly: 24 filmed frames plus
+   729 drawn ones left a tree of 729.
+
+   A world laid down the branch is a world patch spanned across the frames, and
+   patchSpanApply already advances `t` by 1/8 s per frame — the poemfield was
+   always a span, described twice. Doing it this way also makes the drawn film
+   what the filmed one already is: a stack of patches on every frame, still
+   decomposable by name, not a picture of a world.
+
+   The Poemfield section keeps `hwStream` for opening a world as a fresh film. */
+function poemDrawn(p, then){
+  if(!p.world){ fireToast('That poem has no world'); return; }
+  hwLoad().then(function(){
+    var open=(HWCUR===p.world&&HWRT)?Promise.resolve(HWRT):hwOpen(p.world);
+    return open;
+  }).then(function(rt){
+    rt=rt||HWRT;
+    if(!rt){ fireToast('Could not open '+p.world); return; }
+    var fps=8, want=Math.max(2,Math.round((rt.total||60)*fps));
+    /* patchSpanApply caps a passage at 600 frames. Say so — a film quietly
+       cut off at 75 seconds reads as a film that is 75 seconds long. */
+    var n=Math.min(600, want);
+    if(treeSize()+n>NODE_MAX){
+      fireToast(p.title+' is '+n+' frames — longer than the tree can hold'); return;
+    }
+    if(n<want) fireToast(p.title+' runs '+Math.round(want/fps)+'s — laying the first '
+      +Math.round(n/fps)+'s, the span cap');
+    var title=(HWMETA[p.world]&&HWMETA[p.world].title)||p.title;
+    addPatch(myNode, mkPatch('world',{slug:p.world,t:0,parts:null},{name:title}), function(){
+      var st=pstack(myNode), w=st[st.length-1];
+      patchSpanApply(w.id, n, function(){
+        fireToast(title+' · '+n+' drawn frames');
+        if(then)then();
+      });
+    });
+  });
+}
+/* BOTH: the filmed film where you are, the drawn one on a sibling branch from
+   the same root, so BRANCH is the switch between them. Two films of one poem
+   are not two projects — they are two takes, and the tree already knows how to
+   hold two takes of the same moment.
+
+   THE FILMED ONE GOES FIRST, and not for taste: it is bounded and it reports
+   completion. The drawn film is the poem's whole duration at 8fps — NEW DAY is
+   891 frames, minutes of work — and the first version of this waited on a timer
+   for it to finish. A timer long enough is a timer you cannot test and short
+   enough is two films interleaved onto one branch, which is not two takes but
+   one ruined one. filmStream calls back when it is actually done; the branch is
+   made there, and nothing is timed. */
+function poemsLoad(){
+  if(POEMS) return Promise.resolve(POEMS);
+  return fetch('../held/poems.json').then(function(r){ return r.json(); })
+    .then(function(j){ POEMS=j; return j; });
+}
+/* how many frames a packed sheet holds — photographs above masks, 144 rows each */
+function shotFrames(patch){
+  return new Promise(function(res){
+    var have=ARC_IMG['clip:'+patch];
+    var got=function(im){ res(Math.max(1,Math.round(im.naturalHeight/(144*2)))); };
+    if(have&&have.complete&&have.naturalWidth) return got(have);
+    var im=new Image();
+    im.onload=function(){ ARC_IMG['clip:'+patch]=im; got(im); };
+    im.onerror=function(){ res(0); };
+    im.src='../held/pack/'+patch+'.webp';
+  });
+}
+/* the whole filmed poem, laid down the branch one frame at a time */
+function filmStream(poem, then){
+  if(!poem||!poem.shots||!poem.shots.length){ fireToast('No shots routed to that poem'); return; }
+  var title=poem.n+' '+poem.title;
+  Progress.start('Reading '+title,{total:poem.shots.length,stage:'Measuring the sheets…',cancelable:true});
+  var plan=[], si=0;
+  var measure=function(){
+    if(si>=poem.shots.length) return lay();
+    var sh=poem.shots[si];
+    shotFrames(sh.patch).then(function(n){
+      for(var k=0;k<n;k++) plan.push({patch:sh.patch, k:k, line:sh.line, cat:sh.cat});
+      Progress.set(++si, poem.shots.length);
+      if(window.MessageChannel){ var mc=new MessageChannel(); mc.port1.onmessage=measure; mc.port2.postMessage(0); }
+      else setTimeout(measure,0);
+    });
+  };
+  var lay=function(){
+    if(!plan.length){ Progress.hide(0); fireToast('Those sheets hold no frames'); return; }
+    if(treeSize()+plan.length>NODE_MAX){
+      Progress.hide(0);
+      fireToast(title+' is '+plan.length+' frames — longer than the tree can hold');
+      return;
+    }
+    var ids=[myNode], cur=myNode, i;
+    for(i=1;i<plan.length;i++){
+      var kid=branchChoice[cur]||(nodes[cur]&&nodes[cur].kids[0]);
+      if(!kid){ kid=mkId(); mkNode(cur,null,kid,ME,{kind:'clip',batch:'film'+poem.n}); branchChoice[cur]=kid; }
+      ids.push(kid); cur=kid;
+    }
+    undoMark('film '+title, ids);
+    Progress.start('Streaming '+title,{total:ids.length,stage:plan.length+' frames · '+poem.shots.length+' shots',
+      cancelable:true, onCancel:function(){ ids.length=0; }});
+    var j=0;
+    var step=function(){
+      if(j>=ids.length){
+        Progress.done(ids.length+' frames'); Progress.hide(400);
+        renderStrip(); renderBranches(); paintStack();
+        fireToast(title+' · '+ids.length+' frames, '+poem.shots.length+' shots');
+        if(then)then(ids); return;
+      }
+      var id=ids[j], f=plan[j]; j++;
+      groundPatch(id);
+      var st=pstack(id).filter(function(x){ return x.kind!=='clip'; });
+      var c=mkPatch('clip',{patch:f.patch,k:f.k},
+        {place:{x:W/2,y:H/2,size:W,floor:1}, name:f.patch+(f.cat?(' · '+f.cat.toLowerCase().replace(/_/g,' ')):'')});
+      c.z=(st.length?Math.max.apply(null,st.map(function(x){return x.z||0;})):0)+1;
+      PSTACK[id]=st.concat([c]);
+      var nd=nodes[id];
+      if(nd){ nd.note='film:'+poem.n+'/'+f.patch+'@'+f.k+(f.line?(' '+f.line):''); nd.kind='clip'; }
+      bakeNode(id, function(){
+        Progress.set(j,ids.length);
+        if(window.MessageChannel){ var mc=new MessageChannel(); mc.port1.onmessage=step; mc.port2.postMessage(0); }
+        else setTimeout(step,0);
+      });
+    };
+    step();
+  };
+  measure();
+}
+function poemBoth(p){
+  var root=myNode;
+  filmStream(p, function(){
+    if(!nodes[root]){ fireToast('Lost the root — the drawn film did not branch'); return; }
+    gotoNode(root);
+    var sib=mkId();
+    mkNode(root, null, sib, ME, {kind:'flow', name:p.n+' DRAWN'});
+    branchChoice[root]=sib;
+    gotoNode(sib);
+    renderStrip(); renderBranches();
+    fireToast('Filmed: done. Now the drawn one, on its own branch…');
+    poemDrawn(p);
+  });
+}
 function hwIdFor(slug,i){
   var p=(slug.replace(/[^a-z]/g,'')+'zzz').slice(0,3);
   return p+'B'+String(i+1).padStart(8,'0');
@@ -7178,6 +7400,8 @@ function beArchive(){
     lk.classList.toggle('on',HW_LOOK); playTick(); });
   var det=st&&st.closest&&st.closest('details');
   if(det) det.addEventListener('toggle',function(){ if(det.open) hwLoad(); });
+  var two=document.getElementById('sec-two');
+  if(two) two.addEventListener('toggle',function(){ if(two.open) twoBuild(); });
 })();
 
 /* ====================================================================
