@@ -96,6 +96,42 @@ produced soft white cauliflower — the one texture in the whole set that looked
 like a filter rather than a decision. Thresholded hard, the paper comes back in
 flakes.
 
+## The correction: hue is the LAST thing to vary, not the first
+
+The first version of everything above still produced fourteen images that looked
+alike, and the reason is worth stating plainly because it is the most common way
+generative work fails.
+
+**Structure was identical and only hue changed.** Every image got the same
+recursive rectangle split, the same five or six passes, the same full-bleed
+coverage, the same torn edge, the same palette *relationship* — five roles at
+fixed lightness with an accent at the same saturation. Only the hue differed.
+
+But the eye reads structure long before it reads colour. Fourteen identical
+structures in fourteen hues is **one image recoloured fourteen times**, and no
+amount of further palette work can fix that, because the palette was never the
+problem.
+
+So the things that now differ are the ones that are read first:
+
+| what varies | range |
+|---|---|
+| **geometry** | eight: quarters · strata · figure · constellation · spine · corner · flood · fold |
+| **format** | five: portrait · wide · square · tall · panorama |
+| **coverage** | 0.34 to 1.00 — from a sheet mostly untouched to one with no paper left |
+| **palette structure** | mono (one hue, value only) · duo (two hues, nothing between) · bleached (near-paper plus one dark) · full |
+| **register count** | three to six |
+| **mark weight** | scaled inversely with coverage |
+
+That last one matters more than it sounds. When coverage first dropped, the
+sparse images went *thin* rather than spare — they read as unfinished. **Sparse is
+not thin.** A sheet that is a third touched needs those touches to be emphatic, so
+mark weight is now `1 + (1 - coverage) × 1.7`: fewer marks, each much larger.
+
+Two collisions found by looking at the contact sheet rather than the code: three
+voices had been assigned the same geometry, which is why three images rhymed; and
+one voice's coverage was so low it read as unstarted rather than as restraint.
+
 ## What is still missing
 
 Honestly, three things, and none of them is more mechanism:

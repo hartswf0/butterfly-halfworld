@@ -64,20 +64,101 @@ OUT  = os.path.join(ROOT, 'cut', 'out', 'second')
 W, H = 2000, 2600
 PAPER = (236, 231, 220)
 
-# ── 1. PASSAGES ──────────────────────────────────────────────────────────────
+# ── 1. COMPOSITION — eight geometries, not one ───────────────────────────────
+"""
+WHY THEY ALL LOOKED ALIKE.
+
+The first second-pass gave every image the same recursive rectangle split, the
+same five or six passes, the same full-bleed coverage, the same torn edge and the
+same palette RELATIONSHIP — only the hue changed. But the eye reads structure
+long before it reads colour, so fourteen identical structures in fourteen hues is
+one image recoloured fourteen times. Hue is the last thing to vary, not the first.
+
+So composition is now a grammar of eight geometries that disagree with each other
+about the most basic questions: where the weight is, how much of the paper is
+touched at all, and whether the picture is one thing or two.
+"""
 def split(box, depth, out, rnd):
-    """recursive uneven subdivision — a grid is a spreadsheet, not a composition"""
     x, y, w, h = box
-    if depth == 0 or w < 260 or h < 260:
+    if depth == 0 or w < 240 or h < 240:
         out.append(box); return
     vert = (w / float(h)) > (0.85 + rnd.random() * 0.5)
     f = 0.30 + rnd.random() * 0.38
     if vert:
         c = int(w * f)
-        split((x, y, c, h), depth - 1, out, rnd); split((x + c, y, w - c, h), depth - 1, out, rnd)
+        split((x, y, c, h), depth-1, out, rnd); split((x+c, y, w-c, h), depth-1, out, rnd)
     else:
         c = int(h * f)
-        split((x, y, w, c), depth - 1, out, rnd); split((x, y + c, w, h - c), depth - 1, out, rnd)
+        split((x, y, w, c), depth-1, out, rnd); split((x, y+c, w, h-c), depth-1, out, rnd)
+
+def comp_quarters(W, H, rnd):
+    out = []; split((0, 0, W, H), 3, out, rnd); return out
+
+def comp_strata(W, H, rnd):
+    """horizontal bands of wildly unequal depth — the horizon logic"""
+    out, y = [], 0
+    while y < H:
+        h = int(H * (0.05 + rnd.random() ** 2 * 0.34))
+        out.append((0, y, W, min(h, H - y))); y += h
+    return out
+
+def comp_figure(W, H, rnd):
+    """ONE dominant mass, and a great deal of nothing around it"""
+    fw, fh = int(W * (.42 + rnd.random() * .22)), int(H * (.50 + rnd.random() * .26))
+    fx, fy = int((W - fw) * (.2 + rnd.random() * .6)), int((H - fh) * (.15 + rnd.random() * .7))
+    return [(fx, fy, fw, fh),
+            (fx - int(W*.12), fy - int(H*.08), int(W*.20), int(H*.22)),
+            (fx + fw - int(W*.06), fy + fh - int(H*.30), int(W*.22), int(H*.26))]
+
+def comp_constellation(W, H, rnd):
+    """small incidents on a mostly untouched sheet"""
+    return [(rnd.randint(0, int(W*.82)), rnd.randint(0, int(H*.86)),
+             int(W * (.06 + rnd.random()*.20)), int(H * (.05 + rnd.random()*.16)))
+            for _ in range(rnd.randint(7, 13))]
+
+def comp_spine(W, H, rnd):
+    """one axis of density, empty flanks"""
+    diag = rnd.random() < .45
+    out = []
+    n = rnd.randint(5, 8)
+    for i in range(n):
+        t = i / float(n - 1)
+        cx = int(W * (.18 + t * .64)) if diag else int(W * (.34 + rnd.random() * .30))
+        cw = int(W * (.16 + rnd.random() * .22)); ch = int(H / n * (1.0 + rnd.random() * .7))
+        out.append((cx - cw // 2, int(t * (H - ch)), cw, ch))
+    return out
+
+def comp_corner(W, H, rnd):
+    """everything crowded into one edge, a huge void kept"""
+    cx = rnd.choice([0, 1]); cy = rnd.choice([0, 1])
+    out = []
+    for i in range(rnd.randint(5, 8)):
+        w = int(W * (.14 + rnd.random() * .30)); h = int(H * (.10 + rnd.random() * .28))
+        x = rnd.randint(0, int(W*.34)) if cx == 0 else rnd.randint(int(W*.50), max(int(W*.50), W - w))
+        y = rnd.randint(0, int(H*.30)) if cy == 0 else rnd.randint(int(H*.54), max(int(H*.54), H - h))
+        out.append((x, y, w, h))
+    return out
+
+def comp_flood(W, H, rnd):
+    """edge to edge, no paper, everything overlapping everything"""
+    return [(rnd.randint(int(-W*.15), int(W*.5)), rnd.randint(int(-H*.15), int(H*.5)),
+             int(W * (.45 + rnd.random()*.55)), int(H * (.40 + rnd.random()*.60)))
+            for _ in range(rnd.randint(8, 12))]
+
+def comp_fold(W, H, rnd):
+    """two halves that disagree, with a hard seam between them"""
+    c = int(W * (.36 + rnd.random() * .28))
+    L = []; R = []
+    split((0, 0, c, H), 2, L, rnd); split((c, 0, W - c, H), 2, R, rnd)
+    return L + R
+
+COMPS = {'quarters': comp_quarters, 'strata': comp_strata, 'figure': comp_figure,
+         'constellation': comp_constellation, 'spine': comp_spine, 'corner': comp_corner,
+         'flood': comp_flood, 'fold': comp_fold}
+
+# format is part of the difference: a square beside a 3:1 reads as other work
+FORMATS = {'portrait': (2000, 2600), 'wide': (2600, 1800), 'square': (2200, 2200),
+           'tall': (1700, 2900), 'panorama': (3000, 1400)}
 
 # ── 2. REGISTERS OF MAKING ───────────────────────────────────────────────────
 def bleed(box, f, rnd):
@@ -108,11 +189,12 @@ def reg_field(cv, box, ctx):
     x, y, w, h = box
     els = ctx['els']
     if not els: return
-    n = int(ctx['density'] * 210) + 26
-    big = max(20, int(min(w, h) * (0.65 + ctx['rnd'].random() * 0.7)))
+    wt = ctx.get('weight', 1.0)
+    n = int(ctx['density'] * 210 / wt) + 12
+    big = max(20, int(min(w, h) * (0.65 + ctx['rnd'].random() * 0.7) * wt))
     for i in range(n):
         # 3 ELEMENTS ARE HUGE, the rest are crumbs: 25:1 or it reads as one size
-        s = big if i < 3 else max(4, int(big / (8 + ctx['rnd'].random() * 26)))
+        s = big if i < max(3, int(3 * wt)) else max(4, int(big / (8 + ctx['rnd'].random() * 26)))
         e = ctx['rnd'].choice(els)
         im = ctx['open_el'](e)
         if im is None: continue
@@ -132,7 +214,7 @@ def reg_contour(cv, box, ctx):
     lay = Image.new('RGBA', (w, h), (0, 0, 0, 0))
     d = ImageDraw.Draw(lay)
     col = darker(ctx['hue'], .30) + (255,)
-    for _ in range(ctx['rnd'].randint(5, 14)):
+    for _ in range(max(3, int(ctx['rnd'].randint(5, 14) / ctx.get('weight',1.0)))):
         e = ctx['rnd'].choice(ctx['els'])
         im = ctx['open_el'](e)
         if im is None: continue
@@ -142,11 +224,12 @@ def reg_contour(cv, box, ctx):
         if not cs: continue
         c = max(cs, key=cv2.contourArea).reshape(-1, 2).astype(np.float32)
         if len(c) < 8: continue
-        s = (0.25 + ctx['rnd'].random() * 1.5) * min(w, h) / max(1.0, a.shape[0])
+        s = (0.25 + ctx['rnd'].random() * 1.5) * ctx.get('weight',1.0) * min(w, h) / max(1.0, a.shape[0])
         c = c * s
         ox = ctx['rnd'].randint(-w // 4, w); oy = ctx['rnd'].randint(-h // 4, h)
         pts = [(float(px + ox), float(py + oy)) for px, py in c]
-        d.line(pts + [pts[0]], fill=col, width=ctx['rnd'].randint(2, 6), joint='curve')
+        d.line(pts + [pts[0]], fill=col,
+               width=max(2, int(ctx['rnd'].randint(2, 6) * ctx.get('weight',1.0))), joint='curve')
     cv.paste(lay, (x, y), lay)
 
 def reg_halftone(cv, box, ctx):
@@ -179,7 +262,7 @@ def reg_type(cv, box, ctx):
     # AN INCIDENT, NOT A FIELD. At a third of a region's height the type became
     # the loudest thing in eight of fourteen images and every one of them started
     # to look like the same poster. Language is one register among six.
-    size = int(h * (0.09 + ctx['rnd'].random() * 0.11))
+    size = int(h * (0.09 + ctx['rnd'].random() * 0.11) * ctx.get('weight', 1.0))
     try:
         f = ImageFont.truetype('/System/Library/Fonts/Supplemental/Futura.ttc', size)
     except Exception:
@@ -255,20 +338,61 @@ REGISTERS = {
     'erase': reg_erase, 'enlarge': reg_enlarge,
 }
 
-# ── the voice: an operation chosen by the archive ────────────────────────────
+# ── the voice: a WHOLE SHAPE chosen by the archive ───────────────────────────
+"""
+A voice is not a hue. It is: what geometry, what proportion of the sheet is
+touched at all, how many registers are allowed, how the palette is built, and
+what format the thing is. Change only the hue and you have made a swatch book.
+"""
+VOICES = {
+  # name          comp             format      coverage regs                                   event      palette
+  'PALIMPSEST': ('quarters',      'portrait',  0.95, ['stack','field','erase','stack','contour','measure'], 'erase',   'full'),
+  'ENLARGEMENT':('figure',        'square',    0.70, ['wash','enlarge','contour','enlarge','measure'],                          'enlarge', 'duo'),
+  'SATURATION': ('flood',         'portrait',  1.00, ['field','field','halftone','field'],                  'halftone','mono'),
+  'GESTURE':    ('spine',         'tall',      0.42, ['contour','field','contour','measure'],               'contour', 'bleached'),
+  'APERTURE':   ('fold',          'wide',      0.70, ['stack','erase','halftone'],                          'erase',   'duo'),
+  'SURFACE':    ('strata',        'panorama',  0.90, ['stack','halftone','erase'],                          'halftone','mono'),
+  'DISPERSAL':  ('constellation', 'portrait',  0.40, ['wash','field','field','measure'],                    'field',   'bleached'),
+  'PANORAMA':   ('strata',        'panorama',  0.80, ['wash','stack','field','measure'],                    'measure', 'full'),
+  'ASSEMBLY':   ('corner',        'portrait',  0.55, ['wash','stack','field','type'],                       'type',    'full'),
+  'SPINE':      ('spine',         'tall',      0.55, ['wash','field','contour','type'],                     'type',    'duo'),
+}
+
 def voice_of(stat):
-    """what this poem's material is, therefore what should be done to it"""
     n, shots, noun, share, ar = (stat['n'], stat['shots'], stat['noun'],
                                  stat['share'], stat['ar'])
-    if n >= 600:            return ('PALIMPSEST', ['stack','field','erase','stack','contour','measure'], 'erase')
-    if n <= 20:             return ('ENLARGEMENT', ['wash','enlarge','contour','type','erase'], 'enlarge')
-    if share >= 0.55:       return ('SATURATION', ['wash','field','field','halftone','type'], 'halftone')
-    if noun == 'a hand':    return ('GESTURE', ['wash','contour','field','contour','measure','erase'], 'contour')
-    if noun == 'a window':  return ('APERTURE', ['stack','erase','halftone','field','type'], 'erase')
-    if noun == 'a wall':    return ('SURFACE', ['stack','halftone','erase','contour','measure'], 'halftone')
-    if shots >= 7:          return ('DISPERSAL', ['wash','field','field','contour','type','erase'], 'field')
-    if ar >= 1.6:           return ('PANORAMA', ['wash','stack','field','measure','type'], 'measure')
-    return ('ASSEMBLY', ['wash','stack','field','contour','type','erase'], 'type')
+    if n >= 600:            k = 'PALIMPSEST'
+    elif n <= 20:           k = 'ENLARGEMENT'
+    elif share >= 0.55:     k = 'SATURATION'
+    elif noun == 'a hand':  k = 'GESTURE'
+    elif noun == 'a window':k = 'APERTURE'
+    elif noun == 'a wall':  k = 'SURFACE'
+    elif shots >= 7:        k = 'DISPERSAL'
+    elif ar >= 1.6:         k = 'PANORAMA'
+    elif ar <= 0.70:        k = 'SPINE'
+    else:                   k = 'ASSEMBLY'
+    return (k,) + VOICES[k]
+
+def build_palette(raw, mode, rnd):
+    """HOW the palette is built is part of the voice. Five roles at fixed
+       lightness for every image made every image the same picture recoloured."""
+    import colorsys
+    def role(src, l, sat):
+        r, g, b = [v / 255. for v in src]
+        h, _, _ = colorsys.rgb_to_hls(r, g, b)
+        rr, gg, bb = colorsys.hls_to_rgb(h, l, sat)
+        return (int(rr*255), int(gg*255), int(bb*255))
+    if mode == 'mono':      # one hue, carried entirely by value
+        return [role(raw[0], l, .20) for l in (.78, .56, .38, .20, .46)]
+    if mode == 'duo':       # two hues that argue, nothing between them
+        a, b = raw[0], raw[4]
+        return [role(a, .74, .26), role(a, .40, .30), role(b, .30, .44),
+                role(a, .18, .22), role(b, .56, .74)]
+    if mode == 'bleached':  # near-paper, one dark, one accent — mostly nothing
+        return [role(raw[0], .90, .07), role(raw[1], .84, .09), role(raw[2], .78, .11),
+                role(raw[3], .17, .26), role(raw[4], .52, .80)]
+    return [role(raw[0], .70, .22), role(raw[1], .50, .20), role(raw[2], .34, .24),
+            role(raw[3], .22, .20), role(raw[4], .54, .62)]
 
 def main():
     os.makedirs(OUT, exist_ok=True)
@@ -310,52 +434,49 @@ def main():
         stat = {'n': len(els), 'shots': len({e['patch'] for e in els}), 'noun': noun,
                 'share': cnt / float(len(els)),
                 'ar': sum((e.get('w') or 1)/float(e.get('h') or 1) for e in els)/len(els)}
-        name, passes, event = voice_of(stat)
+        name, comp, fmt, coverage, passes, event, pmode = voice_of(stat)
+        Wc, Hc = FORMATS[fmt]
 
         field = Image.open(os.path.join(ROOT,'cut','out','collage','poem_%s.webp'%num)).convert('RGB')
         sky   = Image.open(os.path.join(ROOT,'cut','out','collage','type_the-sky.webp')).convert('RGB')
-        raw = palette_of(field, 5)
-        import colorsys
-        def role(src, l, s):
-            r,g,b = [v/255. for v in src]; h,_,_ = colorsys.rgb_to_hls(r,g,b)
-            rr,gg,bb = colorsys.hls_to_rgb(h,l,s); return (int(rr*255),int(gg*255),int(bb*255))
-        HUES = [role(raw[0],.70,.22), role(raw[1],.50,.20), role(raw[2],.34,.24),
-                role(raw[3],.22,.20), role(raw[4],.54,.62)]
+        HUES = build_palette(palette_of(field, 5), pmode, rnd)
 
-        cv = Image.new('RGB', (W, H), PAPER)
-        regions = []
-        split((0, 0, W, H), 3, regions, rnd)
+        cv = Image.new('RGB', (Wc, Hc), PAPER)
+        regions = COMPS[comp](Wc, Hc, rnd)
         rnd.shuffle(regions)
-        # 5. LOCAL COLOUR — the accent belongs to exactly one region
         accent_i = rnd.randrange(len(regions))
-        # 6. ONE EVENT — a register used nowhere else in this image
-        event_i = rnd.randrange(len(regions))
+        event_i  = rnd.randrange(len(regions))
 
         score = []
         used_type = False
         for pi, op in enumerate(passes):                     # 4. PALIMPSEST
             for ri, box in enumerate(regions):
-                if rnd.random() > (0.82 if pi == 0 else 0.52): continue
+                # COVERAGE IS PART OF THE VOICE. Everything was full-bleed before,
+                # which is a bigger sameness than any palette: a sheet that is a
+                # fifth touched and a sheet with no paper left are not the same
+                # kind of object.
+                if rnd.random() > coverage: continue
                 use = event if ri == event_i and pi == len(passes) - 1 else op
                 if use == 'type':
                     if used_type: continue
                     used_type = True
                 hue = HUES[4] if ri == accent_i else HUES[min(pi, 3)]
                 band = [(.58,.92), (.34,.70), (.24,.58), (.12,.42)][min(pi,3)]
+                if pmode == 'bleached' and ri != accent_i:
+                    band = (max(band[0], .62), .96)
                 ctx = {'field': field, 'sky': sky, 'els': els, 'open_el': open_el,
                        'hue': hue, 'band': band, 'rnd': rnd, 'seed': pi*97+ri*13,
-                       'density': .3 + rnd.random()*.8, 'line': line_of.get(num,'')}
+                       'density': .3 + rnd.random()*.8, 'line': line_of.get(num,''),
+                       'weight': 1.0 + (1.0 - coverage) * 1.7}
                 try: REGISTERS[use](cv, box, ctx)
                 except Exception: continue
-                score.append((pi, use, box, 'accent' if ri==accent_i else ''))
+                score.append((pi, use, box))
 
-        # A CLOSING GRADE. Six independent passes leave six independent surfaces;
-        # one shared contrast curve and a breath of grain is what makes them a
-        # single object rather than a stack of decisions.
         a = np.asarray(cv).astype(np.float32) / 255.
         a = np.clip((a - a.mean()) * 1.16 + a.mean() * .98, 0, 1)
         g = np.random.RandomState(int(num)).normal(0, .012, a.shape[:2])[..., None]
         cv = Image.fromarray(np.clip((a + g) * 255, 0, 255).astype(np.uint8))
+        W, H = Wc, Hc
 
         d = ImageDraw.Draw(cv)
         M = 40
@@ -369,20 +490,24 @@ def main():
         tcol = darker(HUES[3], .5)
         d.text((M+16, H-128), '%s  %s' % (num, title_of.get(num,'').upper()), font=fb, fill=tcol)
         d.text((M+18, H-52),
-               '%s  ·  %d elements from %d shots  ·  %d passes  ·  accent in one region'
-               % (name, stat['n'], stat['shots'], len(passes)), font=fs, fill=tcol)
+               '%s  ·  %s / %s / %s  ·  %d elements from %d shots  ·  %d marks'
+               % (name, comp, fmt, pmode, stat['n'], stat['shots'], len(score)),
+               font=fs, fill=tcol)
 
         fp = os.path.join(OUT, '%s.png' % num)
         cv.save(fp); made.append((num, name, fp))
-        print('  %s  %-12s %-16s %4d els  %2d shots  %d marks'
-              % (num, name, noun[:16], stat['n'], stat['shots'], len(score)))
+        print('  %s  %-12s %-14s %-9s %-9s cov%.2f  %4d els  %d marks'
+              % (num, name, comp, fmt, pmode, coverage, stat['n'], len(score)))
 
     if made and not only:
         cols = 5; rows = int(math.ceil(len(made)/5.0))
-        tw = 340; th = int(340*H/W)
-        sheet = Image.new('RGB', (cols*tw, rows*th), PAPER)
+        cw, chh = 380, 380
+        sheet = Image.new('RGB', (cols*cw, rows*chh), (218, 213, 203))
         for i,(n,v,fp) in enumerate(made):
-            sheet.paste(Image.open(fp).resize((tw,th), Image.LANCZOS), ((i%cols)*tw,(i//cols)*th))
+            im = Image.open(fp); im.thumbnail((cw-16, chh-16), Image.LANCZOS)
+            ox = (i%cols)*cw + (cw-im.size[0])//2
+            oy = (i//cols)*chh + (chh-im.size[1])//2
+            sheet.paste(im, (ox, oy))
         sheet.save(os.path.join(OUT,'CONTACT.png'))
     print('%d -> cut/out/second' % len(made))
 
