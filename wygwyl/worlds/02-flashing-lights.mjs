@@ -73,6 +73,12 @@ export default {
      keeps the scream turned inward instead of resolving outward, so no
      bright: this drone stays as dark as the loss films around it. */
   drone: { base: 49.00, steps: [0, 1, 8, 3, -2, 5, 1] },
+  /* PROSODY · Somalia · Gabay. Nothing accompanies. The ground is mute for the entire film and the silence
+     between lines is exact rather than atmospheric — what carries the line is
+     the line. The mode is the drone's own G Phrygian: the two agree.
+     `deep/sonify.mjs` scans the field under this law. The root is the drone's
+     own base folded into one octave, so the film sings in the key it hums in. */
+  score: { engine: "gabay", mode: "phrygian" },
   movements: [
     {
       label: "SILENT SCREAM", seconds: 13,

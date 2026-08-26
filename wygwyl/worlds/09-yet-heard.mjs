@@ -479,6 +479,12 @@ export default {
      register for the last of the three darkest films (with 01 and 03);
      grief with nowhere further to fall by "east, at the harbor". */
   drone: { base: 32.70, steps: [0, 0, -9, -5, -12] },
+  /* PROSODY · Madagascar · Kabary. The largest vacancy in the suite, and it is placed at the END of the line,
+     which is where an answer would go. Listening is the ceremony, so the
+     instrument spends most of each pass not playing.
+     `deep/sonify.mjs` scans the field under this law. The root is the drone's
+     own base folded into one octave, so the film sings in the key it hums in. */
+  score: { engine: "kabary", mode: "dorian" },
   movements: [
     {
       label: "THE SHARED MOON", seconds: 17,

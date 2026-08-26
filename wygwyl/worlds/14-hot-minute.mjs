@@ -247,6 +247,12 @@ export default {
      return to 0 — the suite's tonic — because 14 is the finale and this
      is where everything else in it resolves. */
   drone: { base: 65.41, steps: [0, 0, 4, 6, 9, 11, 0], bright: true },
+  /* PROSODY · Tuareg · Imzad. The longest breath and the largest silence in the suite. Nothing
+     accumulates: the last stretch removes almost everything the other thirteen
+     built, and what continues after the voice stops is one bowed line and a room.
+     `deep/sonify.mjs` scans the field under this law. The root is the drone's
+     own base folded into one octave, so the film sings in the key it hums in. */
+  score: { engine: "imzad", mode: "penta" },
   movements: [
     {
       label: "EVERYTHING I BUILT", seconds: 13,

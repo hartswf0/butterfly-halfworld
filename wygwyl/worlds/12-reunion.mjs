@@ -279,6 +279,12 @@ export default {
   /* KEY: C major (Ionian) at the suite's root — plain and warm for a
      reunion that is "less time for words, more space for laughter". */
   drone: { base: 65.41, steps: [0, 0, 4, -3, 7, 12], bright: true },
+  /* PROSODY · Mauritania · T'heydinn. The poem is repeatedly interrupted by life: the gate is punched through at
+     irregular places rather than shaped, and the ground is loud from the first
+     second because the others were always in the room.
+     `deep/sonify.mjs` scans the field under this law. The root is the drone's
+     own base folded into one octave, so the film sings in the key it hums in. */
+  score: { engine: "theydinn", mode: "hijaz" },
   movements: [
     {
       label: "HUGS WITH NO REASON", seconds: 14,

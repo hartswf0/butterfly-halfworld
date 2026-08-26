@@ -237,6 +237,12 @@ export default {
      stubborn hope inside a trail that keeps repeating; not bright, because
      the hope stays inside a minor frame the film never fully leaves. */
   drone: { base: 49.00, steps: [0, 0, 9, 2, -3, -12, 9] },
+  /* PROSODY · Xhosa / Zulu · Izibongo. Bursts separated by real silence — the gate floor is 0.06, which is nearly
+     nothing — and every declaration is shorter and harder than the one before
+     it, because praise poetry rebuilds a body by naming its parts.
+     `deep/sonify.mjs` scans the field under this law. The root is the drone's
+     own base folded into one octave, so the film sings in the key it hums in. */
+  score: { engine: "izibongo", mode: "penta2" },
   movements: [
     {
       label: "WASHED ASHORE", seconds: 13,

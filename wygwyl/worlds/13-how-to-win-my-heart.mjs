@@ -381,6 +381,12 @@ export default {
      settled; the steps land on the 5th, not the tonic, because "won't
      leave" is a wish here, not yet a fact. */
   drone: { base: 65.41, steps: [0, 0, 2, -3, 5, 9, 7] },
+  /* PROSODY · Zanzibar / Swahili coast · Taarab. Desire moves sideways. The breath LENGTHENS across the film, so every pass
+     resolves a fraction later than the last, and when the eyes meet the
+     instruments are removed instead of added.
+     `deep/sonify.mjs` scans the field under this law. The root is the drone's
+     own base folded into one octave, so the film sings in the key it hums in. */
+  score: { engine: "taarab", mode: "rast" },
   movements: [
     {
       label: "SMALL TABLES", seconds: 13,
