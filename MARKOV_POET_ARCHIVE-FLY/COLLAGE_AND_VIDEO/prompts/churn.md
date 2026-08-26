@@ -1,0 +1,53 @@
+# churn
+
+`cut/out/churn`
+
+Made by `cut/churn.py`.
+
+## What it was for
+
+Photographic shots are tone-mapped if PQ and cut at 24fps. Halfworld scenes
+    come in at 12fps and are held there — the rate difference is the join, felt as
+    well as seen, which is the dj.html blend written as an edit.
+
+## What is in it
+
+- `CHURN_01_POLISHING_THE_DATA_MIRROR.mp4` · video · 82.3MB
+- `CHURN_02_NON_ABIDING_FLOW__1.mp4` · video · 68.6MB
+- `CHURN_03_ATEN_RISING.mp4` · video · 35.5MB
+- `CHURN_04_PRIME_FOUNDATION___THE_ACTUAL_LIFE_ENGINE.mp4` · video · 38.8MB
+- `CHURN_05_RADIANT_LOCKDOWN_RITUAL.mp4` · video · 86.8MB
+- `CHURN_06_SHAOLIN_SUNRISE_PULSE.mp4` · video · 36.8MB
+- `CHURN_07_SUBMERGED_AFROFUTURIST_IGNITION.mp4` · video · 72.0MB
+- `CHURN_08_DIAL_TONE_ECHOES.mp4` · video · 62.9MB
+- `CHURN_09_FLASHING_LIGHTS__ROADSIDE_OMEN.mp4` · video · 88.2MB
+- `CHURN_10_THE_MASTER_S_ZENITH.mp4` · video · 16.8MB
+- `CHURN_11_CATHEDRAL_OF_GLASS.mp4` · video · 25.2MB
+- `CHURN_12_LONDON_HISS.mp4` · video · 37.9MB
+- `CHURN_13_TUNNEL_LIGHTS___DIRTY_MONEY.mp4` · video · 56.3MB
+- `CHURN_14_DATA_PURGE.mp4` · video · 43.0MB
+- `CHURN_15_STAINED_GLASS_RIMS.mp4` · video · 39.5MB
+- `CHURN_16_VATICAN_VIGIL.mp4` · video · 15.0MB
+- `CHURN_17_INDEXED_EVIDENCE_120.mp4` · video · 71.2MB
+- `CHURN_18_SALTWATER_STATIC__THE_LAST_SHANTY.mp4` · video · 67.2MB
+- `CHURN_19_COMMAND_DECENT.mp4` · video · 76.6MB
+- `CHURN_01_POLISHING_THE_DATA_MIRROR_MUSIC.m4a` · audio · 6.2MB
+- `CHURN_02_NON_ABIDING_FLOW__1_MUSIC.m4a` · audio · 5.3MB
+- `CHURN_03_ATEN_RISING_MUSIC.m4a` · audio · 2.6MB
+- `CHURN_04_PRIME_FOUNDATION___THE_ACTUAL_LIFE_ENGINE_MUSIC.m4a` · audio · 2.1MB
+- `CHURN_05_RADIANT_LOCKDOWN_RITUAL_MUSIC.m4a` · audio · 6.0MB
+- `CHURN_06_SHAOLIN_SUNRISE_PULSE_MUSIC.m4a` · audio · 2.2MB
+- `CHURN_07_SUBMERGED_AFROFUTURIST_IGNITION_MUSIC.m4a` · audio · 5.0MB
+- `CHURN_08_DIAL_TONE_ECHOES_MUSIC.m4a` · audio · 5.0MB
+- `CHURN_09_FLASHING_LIGHTS__ROADSIDE_OMEN_MUSIC.m4a` · audio · 6.2MB
+- `CHURN_10_THE_MASTER_S_ZENITH_MUSIC.m4a` · audio · 1.3MB
+- `CHURN_11_CATHEDRAL_OF_GLASS_MUSIC.m4a` · audio · 1.6MB
+- `CHURN_12_LONDON_HISS_MUSIC.m4a` · audio · 3.2MB
+- `CHURN_13_TUNNEL_LIGHTS___DIRTY_MONEY_MUSIC.m4a` · audio · 4.9MB
+- `CHURN_14_DATA_PURGE_MUSIC.m4a` · audio · 3.4MB
+- `CHURN_15_STAINED_GLASS_RIMS_MUSIC.m4a` · audio · 2.7MB
+- `CHURN_16_VATICAN_VIGIL_MUSIC.m4a` · audio · 902.5KB
+- `CHURN_17_INDEXED_EVIDENCE_120_MUSIC.m4a` · audio · 5.6MB
+- `CHURN_18_SALTWATER_STATIC__THE_LAST_SHANTY_MUSIC.m4a` · audio · 4.7MB
+- `CHURN_19_COMMAND_DECENT_MUSIC.m4a` · audio · 5.8MB
+- `index.html` · page · 132.7KB
