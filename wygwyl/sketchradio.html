@@ -1,0 +1,139 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>SKETCHRADIO — word · voice · timed mark · world · score</title>
+<link rel="icon" href="dot.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{ --bg:#0b0410; --paper:#f6e7c8; --dim:#8d6a70; --hot:#f2a03c; --acc:#e0532c;
+         --edge:#2a1220; --good:#7fd67f }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%}
+  body{background:radial-gradient(120% 90% at 50% -10%,#3a1430 0%,#1b0817 45%,#0b0410 100%);
+       color:var(--paper);font:12.5px/1.5 ui-monospace,"SF Mono",Menlo,monospace}
+  header{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;padding:12px 18px 9px;border-bottom:1px solid var(--edge)}
+  header h1{margin:0;font-size:14px;letter-spacing:.30em;color:var(--hot)}
+  header small{color:var(--dim)}
+  #state{margin-left:auto;color:var(--dim)} #state.ok{color:var(--good)} #state.warn{color:var(--acc)}
+  main{display:grid;grid-template-columns:minmax(0,1.15fr) 268px;gap:16px;padding:14px 18px}
+  @media(max-width:1000px){main{grid-template-columns:1fr}}
+  .col{display:flex;flex-direction:column;gap:10px;min-width:0}
+  canvas{width:100%;height:auto;display:block;image-rendering:pixelated;border:1px solid var(--edge);
+         background:#0b0410;box-shadow:0 16px 50px -22px #000}
+  #scene{cursor:crosshair;touch-action:none}
+  #world{image-rendering:auto;cursor:pointer;height:auto}
+  .row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+  button,select,input[type=number]{font:inherit;color:var(--paper);background:#00000055;
+    border:1px solid var(--edge);border-radius:2px;padding:5px 9px;letter-spacing:.06em;cursor:pointer}
+  button:hover,select:hover{border-color:var(--hot);color:var(--hot)}
+  #play{color:var(--hot);border-color:#5a2a1a;min-width:92px}
+  input[type=range]{accent-color:var(--acc)}
+  label{color:var(--dim);display:flex;gap:5px;align-items:center;white-space:nowrap}
+  #levels{display:flex;gap:3px}
+  #levels button{width:26px;padding:5px 0;text-align:center;font-size:11px;border-radius:0}
+  #levels button.on{outline:2px solid var(--acc);outline-offset:-2px}
+  .panel{border:1px solid var(--edge);background:#00000038;padding:10px 11px}
+  .panel h2{margin:0 0 8px;font-size:10px;letter-spacing:.26em;color:var(--dim);font-weight:600}
+  .meter{display:grid;grid-template-columns:50px 1fr;gap:3px 8px;font-variant-numeric:tabular-nums}
+  .meter i{font-style:normal;color:var(--dim)}
+  .meter span{color:var(--hot);white-space:pre;letter-spacing:-.05em}
+  #mOut{color:var(--acc)}
+  #line{font-size:14px;line-height:1.35;color:var(--paper);min-height:2.6em}
+  #relNote{color:var(--dim);font-size:11px;margin-top:6px}
+  #next,#take{color:var(--dim);font-size:11px}
+  #clock{font-variant-numeric:tabular-nums;color:var(--dim)}
+  .seam{color:var(--dim);font-size:11px;border-left:2px solid var(--edge);padding-left:9px}
+  footer{padding:12px 18px 22px;border-top:1px solid var(--edge);color:var(--dim);max-width:96ch}
+  footer b{color:var(--paper);font-weight:400}
+</style>
+
+<header>
+  <h1>SKETCHRADIO</h1>
+  <small>word · voice · timed mark · world · score</small>
+  <span id="state">loading the record</span>
+</header>
+
+<main>
+  <div class="col">
+    <canvas id="scene"></canvas>
+    <div class="row">
+      <button id="play">▶ PLAY</button>
+      <span id="clock">0:00 / 0:00</span>
+      <span id="next"></span>
+      <label>voice <input id="voiceLvl" type="range" min="0" max="1" step="0.05" value="0.85"></label>
+    </div>
+    <canvas id="world"></canvas>
+    <div class="row">
+      <div id="levels"></div>
+      <label>brush <input id="brush" type="range" min="0" max="10" value="3"><span id="brushN">7</span></label>
+      <button id="undoTake">UNDO</button>
+      <button id="clearTake">CLEAR TAKE</button>
+      <span id="take">nothing performed yet</span>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="panel">
+      <h2>WORD — WHAT IS BEING SAID</h2>
+      <div id="line">—</div>
+    </div>
+    <div class="panel">
+      <h2>THE RELATION</h2>
+      <select id="rel" style="width:100%"></select>
+      <div id="relNote"></div>
+    </div>
+    <div class="panel">
+      <h2>NOW</h2>
+      <div class="meter">
+        <i>voice</i><span id="mVoice">—</span>
+        <i>breath</i><span id="mBreath">—</span>
+        <i>gate</i><span id="mGate">—</span>
+        <i>ground</i><span id="mGround">—</span>
+        <i>attack</i><span id="mAttack">—</span>
+        <i>out</i><span id="mOut">—</span>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>SOURCE</h2>
+      <div class="row" style="gap:5px">
+        <select id="film" style="max-width:100%"></select>
+        <select id="engine" style="max-width:100%"></select>
+      </div>
+      <div class="row" style="margin-top:7px">
+        <label><input id="followFilm" type="checkbox" checked> follow the record</label>
+        <label><input id="traceLive" type="checkbox" checked> film under the mark</label>
+      </div>
+      <div class="row" style="margin-top:7px">
+        <button id="voiceToField">VOICE → FIELD</button>
+        <input id="file" type="file" accept="audio/*" style="display:none">
+        <button id="load">LOAD OTHER</button>
+      </div>
+    </div>
+    <div class="seam">
+      The two places a model would attach — <b>HEAR</b> (read the sound-map back
+      to you) and <b>VOICE→SKETCH</b> (draw what it heard) — are offline here.
+      VOICE→FIELD does the second without one: the envelope is already a curve,
+      so it is written straight into the field as ground.
+    </div>
+  </div>
+</main>
+
+<footer>
+  <b>The clock is the recording.</b> Not a metronome and not a master track — the
+  poet's own <code>currentTime</code>, and everything reads it. <b>The drawing is
+  timed:</b> every point carries the moment you made it, so a stroke made at 0:42
+  is not on the field at 0:41. You do not draw a picture of the voice, you draw
+  along with it, and the mark performs again when the record does.
+  <br><br>
+  <b>And the field is the spectrum</b> — rows are frequency, columns are time, ink
+  is amplitude — so the stroke sounds as you make it, with no key and no round
+  trip. The six relations are rules rather than instructions: HARMONIZE thins
+  while the voice speaks and fills when it rests; ANSWER enters only in what the
+  voice left, and the amber bands on the world panel are exactly that material;
+  SHADOW doubles quietly and late; COUNTERPOINT runs its own line and is rewarded
+  when it happens to meet; RESIST holds a pulse against free speech and never
+  quantises the voice; EMBODY changes the picture instead of the score, and the
+  picture is what makes the sound.
+  &nbsp;·&nbsp; space plays · 0–7 pick a level · click the world panel to seek.
+</footer>
+
+<script type="module" src="sketchradio.mjs"></script>
