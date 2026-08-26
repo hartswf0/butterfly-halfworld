@@ -360,14 +360,38 @@ for (let i = 0; i < N; i++) {
   if (tot < quietest) quietest = tot;
   L[i] = l * gs; R[i] = r * gs;
 }
-/* soft limit rather than normalise: the difference in loudness BETWEEN films
-   is the texture index made audible and must survive */
-for (let i = 0; i < N; i++) { L[i] = Math.tanh(L[i] * 0.9) * 0.9; R[i] = Math.tanh(R[i] * 0.9) * 0.9; }
+/* SCALED BY THE ROOT OF THE BAND COUNT, WHICH IS THE ONLY HONEST CONSTANT.
+   Partials at unrelated frequencies sum in power rather than in amplitude, so
+   a bank of B of them is about sqrt(B) times one of them and dividing by
+   sqrt(B) makes the master level independent of how finely the picture was
+   sliced. Without it, 56 bands ran three times into the limiter and 144 ran
+   nine — ICON was transmitting a square wave and still reconstructing at
+   0.830, which is the sort of thing that only shows up on a meter.
+   The tanh stays, as a safety and not as a mixing decision: the difference in
+   loudness BETWEEN films is the texture index made audible and must survive. */
+let clipPk = 0;
+for (let i = 0; i < N; i++) {
+  const a = Math.abs(L[i]), b2 = Math.abs(R[i]);
+  if (a > clipPk) clipPk = a; if (b2 > clipPk) clipPk = b2;
+}
+/* AND A TRANSMISSION IS NORMALISED WHERE A PIECE OF MUSIC IS LIMITED. There is
+   no reason for one ICON to be louder than another — nothing is being
+   compared, a picture is being carried — so it simply gets all the headroom
+   there is, and the limiter never runs at all. Peak-normalising instead of
+   limiting took the reconstruction from 0.830 to 0.923: every decibel the tanh
+   was flattening was a level of ink. */
+const MASTER = ICON ? 0.92 / Math.max(1e-6, clipPk) : 1 / Math.sqrt(BANDS);
+for (let i = 0; i < N; i++) {
+  L[i] = ICON ? L[i] * MASTER : Math.tanh(L[i] * MASTER) * 0.9;
+  R[i] = ICON ? R[i] * MASTER : Math.tanh(R[i] * MASTER) * 0.9;
+}
+clipPk *= ICON ? MASTER : 1 / Math.sqrt(BANDS);
 const fi = secs(0.4), fo = secs(1.2);
 for (let i = 0; i < fi; i++) { const g = smooth(i / fi); L[i] *= g; R[i] *= g; }
 for (let i = 0; i < fo; i++) { const g = smooth(i / fo); L[N - 1 - i] *= g; R[N - 1 - i] *= g; }
 console.log(`  band energy: loudest ${loudest.toFixed(2)} · quietest ${quietest.toFixed(3)}`
-  + ` · gate mean ${(gsum / N).toFixed(2)} min ${gmin.toFixed(2)}`);
+  + ` · gate mean ${(gsum / N).toFixed(2)} min ${gmin.toFixed(2)}`
+  + ` · peak into the limiter ${clipPk.toFixed(2)}${clipPk > 1.6 ? " — SQUARING" : ""}`);
 
 function writeWav(file, l, r, sr = SR) {
   const n = l.length, b = Buffer.alloc(44 + n * 4);

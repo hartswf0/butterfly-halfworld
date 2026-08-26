@@ -28,37 +28,23 @@
 import zlib from "node:zlib";
 import fs from "node:fs";
 
-/* the spectrogram ramp, as control points */
-const RAMP = [
-  [0, 0, 4], [22, 11, 57], [66, 10, 104], [106, 23, 110], [147, 38, 103],
-  [188, 55, 84], [221, 81, 58], [243, 120, 25], [252, 165, 10], [246, 215, 70],
-  [252, 255, 164],
-];
-export function pal(v) {
-  v = v < 0 ? 0 : v > 1 ? 1 : v;
-  const f = v * (RAMP.length - 1), i = Math.min(RAMP.length - 2, Math.floor(f)), t = f - i;
-  const a = RAMP[i], b = RAMP[i + 1];
-  return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
-}
-
-/* the suite's own 8x8 ordered Bayer, 0..63 */
-export const BAYER8 = (() => {
-  const m = [[0, 2], [3, 1]];
-  let g = m;
-  for (let s = 0; s < 2; s++) {
-    const n = g.length * 2, o = Array.from({ length: n }, () => new Array(n).fill(0));
-    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++)
-      o[y][x] = g[y % (n / 2)][x % (n / 2)] * 4 + m[Math.floor(y / (n / 2))][Math.floor(x / (n / 2))];
-    g = o;
-  }
-  return g;
-})();
+export { pal, BAYER8, RANGE } from "./ramp.mjs";
+import { pal, BAYER8, RANGE } from "./ramp.mjs";
 
 /* value field (w x h, 0..1) -> RGB pixels at `cell` dots per cell.
    `invert` flips which end of the ramp is empty: a spectrogram's silence is
    black and a sheet of paper is not, so a picture printed to sit beside a
    spectrogram and a picture printed to BE one are the same print, reversed. */
-export function print(field, w, h, { cell = 6, invert = false, screen = 0.17, floor = 0 } = {}) {
+/* A PRINT NEVER USES THE WHOLE RAMP. Mapping level 0 to the bottom of the
+   scale and level 7 to the top means a film that is mostly paper comes out as
+   a sheet of near-white and a film that is mostly ink comes out as a sheet of
+   near-black — the two extremes of the ramp are where a picture goes to die,
+   and half the suite lives at one end or the other. Duotone printing has
+   always solved this by giving the plate a range rather than the gamut: paper
+   here is a warm orange and full ink is very nearly black, and everything the
+   film does happens between them. */
+export function print(field, w, h, { cell = 6, invert = false, screen = 0.17, range = RANGE } = {}) {
+  const [rlo, rhi] = range;
   const W = w * cell, H = h * cell;
   const px = Buffer.alloc(W * H * 3);
   for (let y = 0; y < H; y++) {
@@ -68,7 +54,7 @@ export function print(field, w, h, { cell = 6, invert = false, screen = 0.17, fl
       let v = field[cy * w + cx];
       v = v < 0 ? 0 : v > 1 ? 1 : v;
       if (invert) v = 1 - v;
-      v = floor + v * (1 - floor);
+      v = rlo + v * (rhi - rlo);
       /* the dot's contrast closes at both ends: no dots in the solids */
       const amp = screen * 4 * v * (1 - v);
       const thr = (BAYER8[y & 7][x & 7] + 0.5) / 64;
