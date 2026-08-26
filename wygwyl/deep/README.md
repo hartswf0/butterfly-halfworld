@@ -129,3 +129,114 @@ The six single-operator pieces — *One More Day Out*, *The Boat Gets Inside You
 Something*, *The Absent Singer Remains*. Each is one operator in the foreground
 instead of six in sequence, and each is now a short declarative file, because the
 hard part is built.
+
+---
+
+# THE FILM PLAYS ITSELF
+
+    node wygwyl/deep/sonify.mjs 13              a film, under its own prosody
+    node wygwyl/deep/sonify.mjs --cards         what the fourteen laws do
+    node wygwyl/deep/sonify.mjs 13 --icon       transmit one frame as sound
+    node wygwyl/deep/develop.mjs 13 --plate --score    and read it back
+
+A beflix frame is a field: x, y, and a magnitude. A spectrogram is a field: x,
+y, and a magnitude. They are the same object and one of them has simply never
+been asked to make a sound.
+
+## FOURTEEN LAWS FOR HOW SPEECH OCCUPIES TIME
+
+A fixed scan rate is a metronome, and a metronome is the one thing none of
+these poems is. Every film declares a `score` naming an African prosodic
+engine — the same kind of declaration as `drone` and `window` — and the engine
+returns four numbers as a function of position through the film:
+
+| | |
+|---|---|
+| `sweep(u)` | seconds for the head to cross the frame — the breath |
+| `gate(u,p)` | where the vacancies are, `p` being the scan's own phase, so a tradition puts its silence at a place in the **line** rather than in the clock |
+| `ground(u)` | how much of the picture's own background is allowed to speak |
+| `attack(u)` | the amplitude exponent — a wash, or a statement |
+
+Four, and not more, because a law with fifty knobs is a preference. Gabay's
+ground is mute for the whole film: nothing accompanies. Jaliya's cycle does not
+vary and only its ground opens, because the ground is the generations being
+added. Izibongo's floor is 0.06, so its silence is real silence. Imzad has the
+longest breath and the largest vacancy in the suite and nothing accumulates.
+The title declares no engine at all, which is the point of the title: the voice
+before it has learned anything.
+
+Eleven modes come with them and their semitones may be **fractional**, because
+the quantiser is a ratio and not a piano. Bayati's neutral second and rast's
+two neutral degrees are most of the distance between a qsida and a lament. The
+root is each film's own drone base folded into one octave, so the suite keeps
+one key area and gets fourteen prosodies inside it.
+
+Because the breath varies, scan phase is **integrated** rather than taken from
+a modulo. A modulo on a changing period teleports the head, and a teleport is a
+click.
+
+## FIGURE IS CONTRAST IN EITHER DIRECTION
+
+Sounding only ink above the frame's modal level silenced every dark-room
+passage outright — eight seconds of digital black in FLASHING LIGHTS, which
+gabay's gate floor of 0.30 cannot produce. When the room is level 7 and the
+mirror and the window are paper holes, the composition is carried by the holes.
+A pale form on a dark field is exactly as much a figure as a dark form on a
+pale one. Contrast is normalised by the headroom in whichever direction it
+went, so two levels up from a bright ground and two levels down from a dark one
+weigh the same.
+
+Measured across the suite, the ground-ink population runs from **0%** in MAGIC
+RIDE, which is all figure and has no wallpaper to let in, to **69%** in YET,
+HEARD. On MAGIC RIDE the `ground` knob is honestly inert.
+
+## ICON: A FRAME, TRANSMITTED
+
+`--icon` gives up the key to get the picture back — one band per row, six
+octaves of continuous log frequency, one column per column, a single
+left-to-right pass with no return, no gate, no mode, and the frame held still.
+What comes out is not music. It is the frame, sent as sound.
+
+`develop.mjs` receives it by **transforming the rendered audio**, not by
+reprinting the amplitudes that were sent, which would prove nothing at all. If
+a harbour comes out of the far end of an FFT, the harbour was in the sound.
+
+Both go through one printer, `screen.mjs`: the spectrogram's ramp and the
+film's own 8×8 ordered Bayer, applied in output pixels so the dot grid is
+continuous across the print, with the dot's contrast closing at both ends —
+solids stay solid, paper stays paper, and only the midtones are made of dots,
+which is what a halftone actually does. The sound prints in the film's
+polarity, ink dark, because a spectrogram's nothing is black and a sheet of
+paper's nothing is not.
+
+## FOUR THINGS I REASONED MY WAY INTO AND THE NUMBER REFUTED
+
+The true field is right there, so "it looks about right" was never the test.
+`--score` correlates the developed field against the frame it came from, in
+thirds, because the bottom is where the physics bites and an average hides it.
+
+| change | fidelity | why the reasoning failed |
+|---|---|---|
+| peak per row, not sum | 0.389 → 0.607 | a row at 9600 Hz owns 43 bins; summing integrates 43 bins of leakage for the sky and one for the ground |
+| Hann, not Blackman-Harris | 0.510 → 0.607 | BH's 92 dB sidelobes only matter if you *sum* them; a peak never reads a sidelobe, and then only main-lobe width counts |
+| window sized to the column | 0.607 → 0.830 | 16384 samples is 371 ms and a column of a 70 s transmission is 365 ms — so it is computed, not chosen |
+| no companding | 0.697 → 0.830 | the channel is resolution-limited, not noise-limited, and a neighbouring row is not helped by Dolby |
+
+**0.830 overall, 0.841 sky, 0.842 ground.** The moon with its bands, the lit
+shed windows, the boat, the dancers and the benches all come back.
+
+## AND THE PART THAT CANNOT BE FIXED
+
+144 rows over six octaves puts the lowest rows three and a half hertz apart. A
+transform that separates three and a half hertz needs a window a third of a
+second long — longer than the column it is reading. The bottom of the frame
+therefore cannot arrive at any speed, and nothing at the receiving end invents
+it. Five octaves from 300 Hz moves the tightest spacing to seven hertz and the
+picture stands up.
+
+There is a second, tighter limit that is easy to miss: the head crossing 192
+columns amplitude-modulates every band at the column rate, and sidebands land a
+column-rate either side of each carrier. At 40 seconds that is 4.8 Hz against a
+7.3 Hz row spacing — every row bleeding into the one below it, the reader
+printed over the picture. Ninety seconds brings it to 2.1 Hz. A frame takes a
+minute and a half to send. It is a transmission, not a performance.
