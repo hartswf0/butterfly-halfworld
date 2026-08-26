@@ -1,0 +1,156 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>SKETCH RADIO — draw a station, hear it, and measure whether it arrived</title>
+<link rel="icon" href="dot.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{ --bg:#0b0410; --paper:#f6e7c8; --dim:#8d6a70; --hot:#f2a03c; --acc:#e0532c;
+         --edge:#2a1220; --good:#7fd67f; }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{background:radial-gradient(120% 90% at 50% -10%,#3a1430 0%,#1b0817 45%,#0b0410 100%);
+       color:var(--paper);font:13px/1.55 ui-monospace,"SF Mono",Menlo,monospace;
+       display:grid;grid-template-rows:auto 1fr auto;min-height:100%}
+  header{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;padding:13px 20px 10px;
+         border-bottom:1px solid var(--edge)}
+  header h1{margin:0;font-size:14px;letter-spacing:.30em;color:var(--hot)}
+  header small{color:var(--dim)}
+  main{display:grid;grid-template-columns:minmax(0,1fr) 250px minmax(0,1fr);gap:18px;padding:16px 20px;align-items:start}
+  @media(max-width:1080px){main{grid-template-columns:1fr}}
+
+  .pane{display:flex;flex-direction:column;gap:9px;min-width:0}
+  .pane h2{margin:0;font-size:10px;letter-spacing:.28em;color:var(--dim);font-weight:600;
+           display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .pane h2 em{font-style:normal;color:var(--hot);letter-spacing:.06em;font-size:11px}
+  canvas{width:100%;height:auto;display:block;image-rendering:pixelated;border:1px solid var(--edge);
+         background:#0b0410;box-shadow:0 16px 50px -22px #000}
+  #sketch{cursor:crosshair;touch-action:none}
+  .row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+  button,select,input[type=number]{font:inherit;color:var(--paper);background:#00000055;
+    border:1px solid var(--edge);border-radius:2px;padding:5px 10px;cursor:pointer;letter-spacing:.08em}
+  button:hover,select:hover{border-color:var(--hot);color:var(--hot)}
+  select,input[type=number]{cursor:default;min-width:0}
+  #play{color:var(--hot);border-color:#5a2a1a;min-width:96px}
+  #levels{display:flex;gap:3px}
+  #levels button{padding:5px 0;width:26px;text-align:center;border-radius:0;font-size:11px}
+  #levels button.on{outline:2px solid var(--acc);outline-offset:-2px}
+  input[type=range]{accent-color:var(--acc);flex:1;min-width:80px}
+  label{color:var(--dim);display:flex;gap:5px;align-items:center;white-space:nowrap}
+
+  .panel{border:1px solid var(--edge);background:#00000038;padding:11px 12px}
+  .panel h3{margin:0 0 8px;font-size:10px;letter-spacing:.28em;color:var(--dim);font-weight:600}
+  .meter{display:grid;grid-template-columns:52px 1fr;gap:3px 8px;font-variant-numeric:tabular-nums}
+  .meter i{font-style:normal;color:var(--dim)}
+  .meter span{color:var(--hot);white-space:pre-wrap;letter-spacing:-.04em;word-break:break-word;min-width:0}
+  #mLevel{color:var(--acc)}
+  .fid{margin-top:9px;border-top:1px solid var(--edge);padding-top:9px}
+  .fid b{display:block;font-size:26px;font-weight:400;color:var(--hot);font-variant-numeric:tabular-nums;line-height:1.2}
+  .fid b.good{color:var(--good)} .fid b.warn{color:var(--acc)}
+  .fid small{color:var(--dim);display:block}
+  .stack{display:flex;flex-direction:column;gap:11px}
+  .stack .row{gap:5px}
+  .seam{color:var(--dim);font-size:11px;border-left:2px solid var(--edge);padding-left:9px}
+  footer{padding:13px 20px 20px;border-top:1px solid var(--edge);color:var(--dim);max-width:96ch}
+  footer b{color:var(--paper);font-weight:400}
+  body.iconMode #sketch{outline:1px solid var(--acc);outline-offset:2px}
+</style>
+
+<header>
+  <h1>SKETCH RADIO</h1>
+  <small>draw a station · hear it under a prosodic law · watch the sound turn back into a picture</small>
+</header>
+
+<main>
+  <div class="pane">
+    <h2>FROM — THE FIELD <em id="clock">0.0s / 60s</em></h2>
+    <canvas id="sketch"></canvas>
+    <div class="row">
+      <div id="levels"></div>
+      <label>brush <input id="brush" type="range" min="0" max="12" value="4"><span id="brushN">9</span></label>
+    </div>
+    <div class="row">
+      <button id="undo">UNDO</button>
+      <button id="clear">CLEAR</button>
+      <button id="invert">INVERT</button>
+      <select id="film"></select>
+      <label>at <input id="at" type="number" value="40" step="1" style="width:64px"></label>
+      <button id="trace">TRACE</button>
+    </div>
+  </div>
+
+  <div class="stack">
+    <div class="row"><button id="play">▶ PLAY</button></div>
+    <div class="panel">
+      <h3>THROUGH — THE LAW</h3>
+      <div class="stack">
+        <select id="engine"></select>
+        <div class="row">
+          <select id="mode">
+            <option>aeolian</option><option>dorian</option><option>phrygian</option>
+            <option>mixo</option><option>ionian</option><option>hijaz</option>
+            <option selected>bayati</option><option>rast</option><option>penta</option>
+            <option>penta2</option><option>ambassel</option>
+          </select>
+          <label>root <input id="root" type="number" value="41.203" step="0.001" style="width:82px"></label>
+        </div>
+        <div class="row">
+          <select id="bank">
+            <option value="music">MUSIC · 56 bands, in key</option>
+            <option value="icon">ICON · 144 bands, in tune with nothing</option>
+          </select>
+        </div>
+        <label>loop <input id="loop" type="number" value="60" step="5" style="width:64px"> seconds</label>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>THE LAW, NOW</h3>
+      <div class="meter">
+        <i>breath</i><span id="mSweep">—</span>
+        <i>gate</i><span id="mGate">—</span>
+        <i>ground</i><span id="mGround">—</span>
+        <i>attack</i><span id="mAttack">—</span>
+        <i>out</i><span id="mLevel">—</span>
+        <i>field</i><span id="mField">—</span>
+        <i>window</i><span id="mFft">—</span>
+      </div>
+      <div class="fid">
+        <b id="mFid">listening…</b>
+        <small>correlation between what you drew and what came back out of the analyser. MUSIC quantises rows to a mode and cannot score high — that is the price of being in key. Switch to ICON to see the channel's real number.</small>
+      </div>
+    </div>
+    <div class="seam">
+      THE LANGUAGE HALF IS NOT HERE AND IS NOT FAKED. A word→sketch model would
+      attach at the field, and a sketch→word model would read it. Everything on
+      this page runs with no key and no network.
+    </div>
+  </div>
+
+  <div class="pane">
+    <h2>TO — WHAT CAME BACK <em id="modeTag"></em></h2>
+    <canvas id="heard"></canvas>
+    <div class="row"><button id="heardToSketch">HEARD → FIELD</button></div>
+    <div class="seam">
+      This is not a spectrogram scrolling past. The analyser's reading is written
+      into the column the head is sounding, so the picture accumulates into the
+      same geometry you drew in and the two can be laid on top of each other.
+      Press HEARD → FIELD a few times in a row and you are listening to a channel
+      talk to itself.
+    </div>
+  </div>
+</main>
+
+<footer>
+  <b>FROM → THROUGH → TO, with the return arrow closed in signal instead of in language.</b>
+  Sketchsong's spectrogram is a picture <i>of</i> the audio: marks drawn on it go
+  back to a vision model, get described in words, and a second model recomposes —
+  so nothing puts energy at 400&nbsp;Hz because you drew at 400&nbsp;Hz. Here the
+  drawing <i>is</i> the spectrum and it sounds immediately. The fourteen engines
+  are a theory of how a voice occupies time rather than of metre, so the same
+  drawing under <i>gabay</i> and under <i>imzad</i> is two different pieces — one
+  exact and unaccompanied, one enormous and mostly silence. And the mapping is
+  measured while it runs, because a theory that cannot survive the round trip is
+  a decoration.
+  &nbsp;·&nbsp; space plays, 0–7 pick a level, ⌘Z undoes.
+</footer>
+
+<script type="module" src="sketch-radio.mjs"></script>

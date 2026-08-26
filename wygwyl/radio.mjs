@@ -24,7 +24,7 @@
    ========================================================================= */
 import { makeRuntime } from "./halfworld.mjs";
 import { engineOf, modeOf, foldRoot } from "./deep/prosody.mjs";
-import { pal, BAYER8, RANGE } from "./deep/ramp.mjs";
+import { makePainter, inkToDisplay } from "./deep/paint.mjs";
 
 const FW = 192, FH = 144, BANDS = 56, COLS = 64;
 const SLUGS = [
@@ -104,47 +104,16 @@ function reduce(g) {
   return bg;
 }
 
-/* ---- the painter --------------------------------------------------------- */
-const CELL = 5, PW = FW * CELL, PH2 = FH * CELL;
-const cv = $("screen"); cv.width = PW; cv.height = PH2;
-const cx = cv.getContext("2d", { alpha: false });
-const img = cx.createImageData(PW, PH2);
-const PX = img.data;
-/* a 256-entry palette so a frame is a lookup and not eleven interpolations a
-   pixel; and the Bayer threshold precomputed per output pixel modulo eight */
-const LUT = new Uint8ClampedArray(256 * 3);
-for (let i = 0; i < 256; i++) { const c = pal(i / 255); LUT[i * 3] = c[0]; LUT[i * 3 + 1] = c[1]; LUT[i * 3 + 2] = c[2]; }
-const [RLO, RHI] = RANGE;
-const THR = new Float32Array(64);
-for (let y = 0; y < 8; y++) for (let x = 0; x < 8; x++) THR[y * 8 + x] = (BAYER8[y][x] + 0.5) / 64;
-for (let i = 3; i < PX.length; i += 4) PX[i] = 255;
-
-function paint(g, scan, bg) {
-  const headX = Math.round(scan * (FW - 1));
-  for (let y = 0; y < PH2; y++) {
-    const cy = (y / CELL) | 0, row = cy * FW, orow = y * PW;
-    const th8 = (y & 7) * 8;
-    for (let x = 0; x < PW; x++) {
-      const cxx = (x / CELL) | 0;
-      const raw = g[row + cxx];
-      /* the film's own polarity: ink dark, paper bright, the same way the
-         plates print, and the accent kept as the one bright thing */
-      let v = raw > 8.5 ? 0.97 : RLO + (1 - Math.min(7, Math.round(raw)) / 7) * (RHI - RLO);
-      /* THE HEAD IS A HOT LINE WITH DARK SHOULDERS, and it is drawn that way
-         rather than added to what is underneath because half the suite is a
-         pale field and the other half is a dark one — anything additive
-         disappears into one of them. A bright core between two dark ones is
-         legible against every value there is. */
-      const dx = cxx - headX;
-      if (dx === 0) v = 0.99; else if (dx === -1 || dx === 1) v = 0.02;
-      const amp = 0.17 * 4 * v * (1 - v);
-      const s = THR[th8 + (x & 7)] < v ? v + amp : v - amp;
-      const q = ((s < 0 ? 0 : s > 1 ? 1 : s) * 255) | 0;
-      const o = (orow + x) * 4, p3 = q * 3;
-      PX[o] = LUT[p3]; PX[o + 1] = LUT[p3 + 1]; PX[o + 2] = LUT[p3 + 2];
-    }
-  }
-  cx.putImageData(img, 0, 0);
+/* ---- the painter --------------------------------------------------------
+   Shared with the plates and with SKETCH RADIO. One printer, so a film, a hand
+   and a picture recovered from a Fourier transform are painted by identical
+   arithmetic — otherwise a comparison between them measures the painters. */
+const CELL = 5;
+const paint = makePainter($("screen"), FW, FH, CELL);
+const DISP = new Float32Array(FW * FH);
+function show(g, scan) {
+  for (let i = 0; i < DISP.length; i++) DISP[i] = inkToDisplay(g[i]);
+  paint(DISP, Math.round(scan * (FW - 1)));
 }
 
 /* ---- transport ----------------------------------------------------------- */
@@ -197,7 +166,7 @@ function frame(now) {
 
   const g = st.rt.renderField(t);
   const bg = reduce(g);
-  paint(g, scan, bg);
+  show(g, scan);
 
   if (node && playing) {
     node.port.postMessage({ amp: AMP.slice(), scan, gate, ground: gnd, attack: atk, dt: Math.max(1 / 120, dt) });

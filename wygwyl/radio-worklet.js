@@ -51,6 +51,11 @@ class BandBank extends AudioWorkletProcessor {
       if (m.hz) { this.hz.set(m.hz); return; }
       if (m.stop !== undefined) { this.on = !m.stop; return; }
       if (m.reset) { this.ph.fill(0); this.A.fill(0); this.Z.fill(0); return; }
+      /* the page may ride the master. A transmission that saturates loses ink:
+         offline, peak-normalising instead of limiting moved a reconstruction
+         from 0.830 to 0.918, and live there is no future to normalise against,
+         so the level is walked instead. */
+      if (m.gain !== undefined) { this.master = m.gain; return; }
       if (m.amp) {
         this.A.set(this.mix());                // freeze where the fade got to
         this.Z.set(m.amp);
