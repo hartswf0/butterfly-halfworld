@@ -1,0 +1,1072 @@
+[
+ {
+  "id": "CINEOSIS-COLLAGE-001",
+  "title": "The whole archive laid flat has no centre, so it perceives without a perceiver.",
+  "image": "cut/out/collage/GRID_ALL.webp",
+  "stage": "collage",
+  "sign": "gaseous perception",
+  "sign_id": "CINEOSIS-010-03",
+  "file": "CC-001-GRID_ALL.md",
+  "rel": "../cut/out/collage/GRID_ALL.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-002",
+  "title": "Fourteen separate worlds become one world by being ruled into the same grid.",
+  "image": "cut/out/collage/BY_POEM.webp",
+  "stage": "collage",
+  "sign": "vector",
+  "sign_id": "CINEOSIS-010-12",
+  "file": "CC-002-BY_POEM.md",
+  "rel": "../cut/out/collage/BY_POEM.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-003",
+  "title": "Sixteen nouns, each stacked into one picture, make meaning out of recurrence.",
+  "image": "cut/out/collage/BY_TYPE.webp",
+  "stage": "collage",
+  "sign": "mark",
+  "sign_id": "CINEOSIS-010-31",
+  "file": "CC-003-BY_TYPE.md",
+  "rel": "../cut/out/collage/BY_TYPE.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-004",
+  "title": "A room dissolved into its own atmosphere stops being a place and becomes a pressure.",
+  "image": "cut/out/collage/poem_01.webp",
+  "stage": "collage",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-004-poem_01.md",
+  "rel": "../cut/out/collage/poem_01.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-005",
+  "title": "One shot, sixteen pieces, and a white figure climbing out of an orange wall.",
+  "image": "cut/out/collage/poem_02.webp",
+  "stage": "collage",
+  "sign": "figure of the sublime",
+  "sign_id": "CINEOSIS-010-19",
+  "file": "CC-005-poem_02.md",
+  "rel": "../cut/out/collage/poem_02.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-006",
+  "title": "A heart printed on a chest turns a body into the object that carries the story's force.",
+  "image": "cut/out/collage/poem_03.webp",
+  "stage": "collage",
+  "sign": "fetish",
+  "sign_id": "CINEOSIS-010-08",
+  "file": "CC-006-poem_03.md",
+  "rel": "../cut/out/collage/poem_03.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-007",
+  "title": "A figure under an arch, seen past a bottle, at the hour when nothing is decided.",
+  "image": "cut/out/collage/poem_04.webp",
+  "stage": "collage",
+  "sign": "restrained dream",
+  "sign_id": "CINEOSIS-010-26",
+  "file": "CC-007-poem_04.md",
+  "rel": "../cut/out/collage/poem_04.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-008",
+  "title": "A skeleton laid over a living body makes the past act on the present through the flesh.",
+  "image": "cut/out/collage/poem_05.webp",
+  "stage": "collage",
+  "sign": "strong destiny",
+  "sign_id": "CINEOSIS-010-28",
+  "file": "CC-008-poem_05.md",
+  "rel": "../cut/out/collage/poem_05.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-009",
+  "title": "A city built out of faces is a city that has to be read off the people who were in it.",
+  "image": "cut/out/collage/poem_06.webp",
+  "stage": "collage",
+  "sign": "seed and environment",
+  "sign_id": "CINEOSIS-010-37",
+  "file": "CC-009-poem_06.md",
+  "rel": "../cut/out/collage/poem_06.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-010",
+  "title": "Two men, one red coat, and a wall of neon slabs: the crowd as a single instrument.",
+  "image": "cut/out/collage/poem_07.webp",
+  "stage": "collage",
+  "sign": "dividual",
+  "sign_id": "CINEOSIS-010-05",
+  "file": "CC-010-poem_07.md",
+  "rel": "../cut/out/collage/poem_07.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-011",
+  "title": "Rain on glass turns a whole city into something that happens to a surface.",
+  "image": "cut/out/collage/poem_08.webp",
+  "stage": "collage",
+  "sign": "opsign and sonsign",
+  "sign_id": "CINEOSIS-010-34",
+  "file": "CC-011-poem_08.md",
+  "rel": "../cut/out/collage/poem_08.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-012",
+  "title": "A burst of blue light behind two silhouettes turns an encounter into a shape.",
+  "image": "cut/out/collage/poem_09.webp",
+  "stage": "collage",
+  "sign": "icon",
+  "sign_id": "CINEOSIS-010-04",
+  "file": "CC-012-poem_09.md",
+  "rel": "../cut/out/collage/poem_09.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-013",
+  "title": "A night road made of yellow lights is a journey with the journey taken out.",
+  "image": "cut/out/collage/poem_10.webp",
+  "stage": "collage",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-013-poem_10.md",
+  "rel": "../cut/out/collage/poem_10.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-014",
+  "title": "Two men walking on white ground: the world subtracted until only conduct is left.",
+  "image": "cut/out/collage/poem_11.webp",
+  "stage": "collage",
+  "sign": "body of gest",
+  "sign_id": "CINEOSIS-010-42",
+  "file": "CC-014-poem_11.md",
+  "rel": "../cut/out/collage/poem_11.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-015",
+  "title": "A grey tunnel of mist is a place that has already had everything happen in it.",
+  "image": "cut/out/collage/poem_12.webp",
+  "stage": "collage",
+  "sign": "sheets of the past",
+  "sign_id": "CINEOSIS-010-39",
+  "file": "CC-015-poem_12.md",
+  "rel": "../cut/out/collage/poem_12.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-016",
+  "title": "A man in blue smoke, assembled from three shots, is a portrait that will not settle.",
+  "image": "cut/out/collage/poem_13.webp",
+  "stage": "collage",
+  "sign": "body of attitude",
+  "sign_id": "CINEOSIS-010-41",
+  "file": "CC-016-poem_13.md",
+  "rel": "../cut/out/collage/poem_13.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-017",
+  "title": "A red figure in bokeh: the everyday and the catastrophic at the same exposure.",
+  "image": "cut/out/collage/poem_14.webp",
+  "stage": "collage",
+  "sign": "quotidian",
+  "sign_id": "CINEOSIS-010-21",
+  "file": "CC-017-poem_14.md",
+  "rel": "../cut/out/collage/poem_14.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-018",
+  "title": "Four hundred and ninety-nine lights on black become a constellation with no sky.",
+  "image": "cut/out/collage/type_a-light.webp",
+  "stage": "collage",
+  "sign": "gaseous perception",
+  "sign_id": "CINEOSIS-010-03",
+  "file": "CC-018-type_a-light.md",
+  "rel": "../cut/out/collage/type_a-light.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-019",
+  "title": "Three hundred and sixteen people stacked make a mass with no face and no edge.",
+  "image": "cut/out/collage/type_a-person.webp",
+  "stage": "collage",
+  "sign": "dividual",
+  "sign_id": "CINEOSIS-010-05",
+  "file": "CC-019-type_a-person.md",
+  "rel": "../cut/out/collage/type_a-person.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-020",
+  "title": "Two hundred and forty-eight windows agree on one thing: where the light gets in.",
+  "image": "cut/out/collage/type_a-window.webp",
+  "stage": "collage",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-020-type_a-window.md",
+  "rel": "../cut/out/collage/type_a-window.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-021",
+  "title": "Two hundred and twenty buildings stacked make one building that cannot be built.",
+  "image": "cut/out/collage/type_a-building.webp",
+  "stage": "collage",
+  "sign": "milieu",
+  "sign_id": "CINEOSIS-010-13",
+  "file": "CC-021-type_a-building.md",
+  "rel": "../cut/out/collage/type_a-building.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-022",
+  "title": "A hundred and seventy-six walls become a surface with weather on it.",
+  "image": "cut/out/collage/type_a-wall.webp",
+  "stage": "collage",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-022-type_a-wall.md",
+  "rel": "../cut/out/collage/type_a-wall.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-023",
+  "title": "Ninety-nine faces over one another produce a face that belongs to no one and looks back.",
+  "image": "cut/out/collage/type_a-human-face.webp",
+  "stage": "collage",
+  "sign": "dividual",
+  "sign_id": "CINEOSIS-010-05",
+  "file": "CC-023-type_a-human-face.md",
+  "rel": "../cut/out/collage/type_a-human-face.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-024",
+  "title": "Ninety-eight skies produce weather that no day ever had.",
+  "image": "cut/out/collage/type_the-sky.webp",
+  "stage": "collage",
+  "sign": "gaseous perception",
+  "sign_id": "CINEOSIS-010-03",
+  "file": "CC-024-type_the-sky.md",
+  "rel": "../cut/out/collage/type_the-sky.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-025",
+  "title": "Sixty-three hands, scattered and small, on a page that is mostly empty.",
+  "image": "cut/out/collage/type_a-hand.webp",
+  "stage": "collage",
+  "sign": "symptom",
+  "sign_id": "CINEOSIS-010-07",
+  "file": "CC-025-type_a-hand.md",
+  "rel": "../cut/out/collage/type_a-hand.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-026",
+  "title": "Fifty-seven bodies in the air, on black, become one long red fall.",
+  "image": "cut/out/collage/type_a-person-in-mid-air.webp",
+  "stage": "collage",
+  "sign": "originary world",
+  "sign_id": "CINEOSIS-010-09",
+  "file": "CC-026-type_a-person-in-mid-air.md",
+  "rel": "../cut/out/collage/type_a-person-in-mid-air.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-027",
+  "title": "Fifty-six roads averaged into a horizontal smear: direction without destination.",
+  "image": "cut/out/collage/type_a-road.webp",
+  "stage": "collage",
+  "sign": "vector",
+  "sign_id": "CINEOSIS-010-12",
+  "file": "CC-027-type_a-road.md",
+  "rel": "../cut/out/collage/type_a-road.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-028",
+  "title": "Forty-six lamps on black are objects that carry their own reason to be looked at.",
+  "image": "cut/out/collage/type_a-lamp.webp",
+  "stage": "collage",
+  "sign": "fetish",
+  "sign_id": "CINEOSIS-010-08",
+  "file": "CC-028-type_a-lamp.md",
+  "rel": "../cut/out/collage/type_a-lamp.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-029",
+  "title": "Forty-six beds make a low teal mound: the place the whole archive keeps returning to.",
+  "image": "cut/out/collage/type_a-bed.webp",
+  "stage": "collage",
+  "sign": "imprint",
+  "sign_id": "CINEOSIS-010-15",
+  "file": "CC-029-type_a-bed.md",
+  "rel": "../cut/out/collage/type_a-bed.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-030",
+  "title": "Forty-two signs from seven shots: language reduced to colour and left unread.",
+  "image": "cut/out/collage/type_a-neon-sign.webp",
+  "stage": "collage",
+  "sign": "lectosign",
+  "sign_id": "CINEOSIS-010-44",
+  "file": "CC-030-type_a-neon-sign.md",
+  "rel": "../cut/out/collage/type_a-neon-sign.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-031",
+  "title": "Fifty-eight waters make a bright collision of surfaces that were never adjacent.",
+  "image": "cut/out/collage/type_water.webp",
+  "stage": "collage",
+  "sign": "liquid perception",
+  "sign_id": "CINEOSIS-010-02",
+  "file": "CC-031-type_water.md",
+  "rel": "../cut/out/collage/type_water.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-032",
+  "title": "Ten doors on a nearly empty page: too few to average, too many to ignore.",
+  "image": "cut/out/collage/type_a-door.webp",
+  "stage": "collage",
+  "sign": "index of lack",
+  "sign_id": "CINEOSIS-010-10",
+  "file": "CC-032-type_a-door.md",
+  "rel": "../cut/out/collage/type_a-door.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-033",
+  "title": "Ten staircases: an orange flight, a dark frame, and the two never meet.",
+  "image": "cut/out/collage/type_a-staircase.webp",
+  "stage": "collage",
+  "sign": "index of equivocity",
+  "sign_id": "CINEOSIS-010-11",
+  "file": "CC-033-type_a-staircase.md",
+  "rel": "../cut/out/collage/type_a-staircase.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-034",
+  "title": "OUT OF LIFE as a place you could stand in, assembled from things that were never adjacent.",
+  "image": "cut/out/scene/01_PLATE.webp",
+  "stage": "scene",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-034-scene_01_PLATE.md",
+  "rel": "../cut/out/scene/01_PLATE.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-035",
+  "title": "FLASHING LIGHTS as a place you could stand in, assembled from things that were never adjacent.",
+  "image": "cut/out/scene/02_PLATE.webp",
+  "stage": "scene",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-035-scene_02_PLATE.md",
+  "rel": "../cut/out/scene/02_PLATE.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-036",
+  "title": "HOW TO BREAK OFF AN ENGAGEMENT as a place you could stand in, assembled from things that were never adjacent.",
+  "image": "cut/out/scene/03_PLATE.webp",
+  "stage": "scene",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-036-scene_03_PLATE.md",
+  "rel": "../cut/out/scene/03_PLATE.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-037",
+  "title": "NEVERMORE as a place you could stand in, assembled from things that were never adjacent.",
+  "image": "cut/out/scene/04_PLATE.webp",
+  "stage": "scene",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-037-scene_04_PLATE.md",
+  "rel": "../cut/out/scene/04_PLATE.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-038",
+  "title": "BLOODLINES as a place you could stand in, assembled from things that were never adjacent.",
+  "image": "cut/out/scene/05_PLATE.webp",
+  "stage": "scene",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-038-scene_05_PLATE.md",
+  "rel": "../cut/out/scene/05_PLATE.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-039",
+  "title": "RESURRECTING ATLANTIS as a place you could stand in, assembled from things that were never adjacent.",
+  "image": "cut/out/scene/06_PLATE.webp",
+  "stage": "scene",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-039-scene_06_PLATE.md",
+  "rel": "../cut/out/scene/06_PLATE.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-040",
+  "title": "DJ TURN ME UP as a place you could stand in, assembled from things that were never adjacent.",
+  "image": "cut/out/scene/07_PLATE.webp",
+  "stage": "scene",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-040-scene_07_PLATE.md",
+  "rel": "../cut/out/scene/07_PLATE.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-041",
+  "title": "NEWLY SINGLE as a place you could stand in, assembled from things that were never adjacent.",
+  "image": "cut/out/scene/08_PLATE.webp",
+  "stage": "scene",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-041-scene_08_PLATE.md",
+  "rel": "../cut/out/scene/08_PLATE.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-042",
+  "title": "YET, HEARD as a place you could stand in, assembled from things that were never adjacent.",
+  "image": "cut/out/scene/09_PLATE.webp",
+  "stage": "scene",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-042-scene_09_PLATE.md",
+  "rel": "../cut/out/scene/09_PLATE.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-043",
+  "title": "MAGIC RIDE as a place you could stand in, assembled from things that were never adjacent.",
+  "image": "cut/out/scene/10_PLATE.webp",
+  "stage": "scene",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-043-scene_10_PLATE.md",
+  "rel": "../cut/out/scene/10_PLATE.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-044",
+  "title": "NEW DAY as a place you could stand in, assembled from things that were never adjacent.",
+  "image": "cut/out/scene/11_PLATE.webp",
+  "stage": "scene",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-044-scene_11_PLATE.md",
+  "rel": "../cut/out/scene/11_PLATE.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-045",
+  "title": "REUNION as a place you could stand in, assembled from things that were never adjacent.",
+  "image": "cut/out/scene/12_PLATE.webp",
+  "stage": "scene",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-045-scene_12_PLATE.md",
+  "rel": "../cut/out/scene/12_PLATE.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-046",
+  "title": "HOW TO WIN MY HEART as a place you could stand in, assembled from things that were never adjacent.",
+  "image": "cut/out/scene/13_PLATE.webp",
+  "stage": "scene",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-046-scene_13_PLATE.md",
+  "rel": "../cut/out/scene/13_PLATE.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-047",
+  "title": "HOT MINUTE as a place you could stand in, assembled from things that were never adjacent.",
+  "image": "cut/out/scene/14_PLATE.webp",
+  "stage": "scene",
+  "sign": "any-space-whatever",
+  "sign_id": "CINEOSIS-010-06",
+  "file": "CC-047-scene_14_PLATE.md",
+  "rel": "../cut/out/scene/14_PLATE.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-048",
+  "title": "The same place in ink: the photograph and the dot field trade which one is real.",
+  "image": "cut/out/scene/01_01-out-of-life.webp",
+  "stage": "scene",
+  "sign": "limpid and opaque",
+  "sign_id": "CINEOSIS-010-36",
+  "file": "CC-048-scene_01_beflix.md",
+  "rel": "../cut/out/scene/01_01-out-of-life.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-049",
+  "title": "The same place in ink: the photograph and the dot field trade which one is real.",
+  "image": "cut/out/scene/02_02-flashing-lights.webp",
+  "stage": "scene",
+  "sign": "limpid and opaque",
+  "sign_id": "CINEOSIS-010-36",
+  "file": "CC-049-scene_02_beflix.md",
+  "rel": "../cut/out/scene/02_02-flashing-lights.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-050",
+  "title": "The same place in ink: the photograph and the dot field trade which one is real.",
+  "image": "cut/out/scene/03_03-how-to-break-off-an-engagement.webp",
+  "stage": "scene",
+  "sign": "limpid and opaque",
+  "sign_id": "CINEOSIS-010-36",
+  "file": "CC-050-scene_03_beflix.md",
+  "rel": "../cut/out/scene/03_03-how-to-break-off-an-engagement.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-051",
+  "title": "The same place in ink: the photograph and the dot field trade which one is real.",
+  "image": "cut/out/scene/04_04-nevermore.webp",
+  "stage": "scene",
+  "sign": "limpid and opaque",
+  "sign_id": "CINEOSIS-010-36",
+  "file": "CC-051-scene_04_beflix.md",
+  "rel": "../cut/out/scene/04_04-nevermore.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-052",
+  "title": "The same place in ink: the photograph and the dot field trade which one is real.",
+  "image": "cut/out/scene/05_05-bloodlines.webp",
+  "stage": "scene",
+  "sign": "limpid and opaque",
+  "sign_id": "CINEOSIS-010-36",
+  "file": "CC-052-scene_05_beflix.md",
+  "rel": "../cut/out/scene/05_05-bloodlines.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-053",
+  "title": "The same place in ink: the photograph and the dot field trade which one is real.",
+  "image": "cut/out/scene/06_06-resurrecting-atlantis.webp",
+  "stage": "scene",
+  "sign": "limpid and opaque",
+  "sign_id": "CINEOSIS-010-36",
+  "file": "CC-053-scene_06_beflix.md",
+  "rel": "../cut/out/scene/06_06-resurrecting-atlantis.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-054",
+  "title": "The same place in ink: the photograph and the dot field trade which one is real.",
+  "image": "cut/out/scene/07_07-dj-turn-me-up.webp",
+  "stage": "scene",
+  "sign": "limpid and opaque",
+  "sign_id": "CINEOSIS-010-36",
+  "file": "CC-054-scene_07_beflix.md",
+  "rel": "../cut/out/scene/07_07-dj-turn-me-up.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-055",
+  "title": "The same place in ink: the photograph and the dot field trade which one is real.",
+  "image": "cut/out/scene/08_08-newly-single.webp",
+  "stage": "scene",
+  "sign": "limpid and opaque",
+  "sign_id": "CINEOSIS-010-36",
+  "file": "CC-055-scene_08_beflix.md",
+  "rel": "../cut/out/scene/08_08-newly-single.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-056",
+  "title": "The same place in ink: the photograph and the dot field trade which one is real.",
+  "image": "cut/out/scene/09_09-yet-heard.webp",
+  "stage": "scene",
+  "sign": "limpid and opaque",
+  "sign_id": "CINEOSIS-010-36",
+  "file": "CC-056-scene_09_beflix.md",
+  "rel": "../cut/out/scene/09_09-yet-heard.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-057",
+  "title": "The same place in ink: the photograph and the dot field trade which one is real.",
+  "image": "cut/out/scene/10_10-magic-ride.webp",
+  "stage": "scene",
+  "sign": "limpid and opaque",
+  "sign_id": "CINEOSIS-010-36",
+  "file": "CC-057-scene_10_beflix.md",
+  "rel": "../cut/out/scene/10_10-magic-ride.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-058",
+  "title": "The same place in ink: the photograph and the dot field trade which one is real.",
+  "image": "cut/out/scene/11_11-new-day.webp",
+  "stage": "scene",
+  "sign": "limpid and opaque",
+  "sign_id": "CINEOSIS-010-36",
+  "file": "CC-058-scene_11_beflix.md",
+  "rel": "../cut/out/scene/11_11-new-day.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-059",
+  "title": "The same place in ink: the photograph and the dot field trade which one is real.",
+  "image": "cut/out/scene/12_12-reunion.webp",
+  "stage": "scene",
+  "sign": "limpid and opaque",
+  "sign_id": "CINEOSIS-010-36",
+  "file": "CC-059-scene_12_beflix.md",
+  "rel": "../cut/out/scene/12_12-reunion.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-060",
+  "title": "The same place in ink: the photograph and the dot field trade which one is real.",
+  "image": "cut/out/scene/13_13-how-to-win-my-heart.webp",
+  "stage": "scene",
+  "sign": "limpid and opaque",
+  "sign_id": "CINEOSIS-010-36",
+  "file": "CC-060-scene_13_beflix.md",
+  "rel": "../cut/out/scene/13_13-how-to-win-my-heart.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-061",
+  "title": "The same place in ink: the photograph and the dot field trade which one is real.",
+  "image": "cut/out/scene/14_14-hot-minute.webp",
+  "stage": "scene",
+  "sign": "limpid and opaque",
+  "sign_id": "CINEOSIS-010-36",
+  "file": "CC-061-scene_14_beflix.md",
+  "rel": "../cut/out/scene/14_14-hot-minute.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-062",
+  "title": "The cutsheet puts the place on a diagram and prints its own confidence beside it.",
+  "image": "cut/out/sheets/01_01-out-of-life.webp",
+  "stage": "cutsheet",
+  "sign": "cinema of the brain",
+  "sign_id": "CINEOSIS-010-43",
+  "file": "CC-062-sheet_01.md",
+  "rel": "../cut/out/sheets/01_01-out-of-life.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-063",
+  "title": "The cutsheet puts the place on a diagram and prints its own confidence beside it.",
+  "image": "cut/out/sheets/02_02-flashing-lights.webp",
+  "stage": "cutsheet",
+  "sign": "cinema of the brain",
+  "sign_id": "CINEOSIS-010-43",
+  "file": "CC-063-sheet_02.md",
+  "rel": "../cut/out/sheets/02_02-flashing-lights.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-064",
+  "title": "The cutsheet puts the place on a diagram and prints its own confidence beside it.",
+  "image": "cut/out/sheets/03_03-how-to-break-off-an-engagement.webp",
+  "stage": "cutsheet",
+  "sign": "cinema of the brain",
+  "sign_id": "CINEOSIS-010-43",
+  "file": "CC-064-sheet_03.md",
+  "rel": "../cut/out/sheets/03_03-how-to-break-off-an-engagement.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-065",
+  "title": "The cutsheet puts the place on a diagram and prints its own confidence beside it.",
+  "image": "cut/out/sheets/04_04-nevermore.webp",
+  "stage": "cutsheet",
+  "sign": "cinema of the brain",
+  "sign_id": "CINEOSIS-010-43",
+  "file": "CC-065-sheet_04.md",
+  "rel": "../cut/out/sheets/04_04-nevermore.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-066",
+  "title": "The cutsheet puts the place on a diagram and prints its own confidence beside it.",
+  "image": "cut/out/sheets/05_05-bloodlines.webp",
+  "stage": "cutsheet",
+  "sign": "cinema of the brain",
+  "sign_id": "CINEOSIS-010-43",
+  "file": "CC-066-sheet_05.md",
+  "rel": "../cut/out/sheets/05_05-bloodlines.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-067",
+  "title": "The cutsheet puts the place on a diagram and prints its own confidence beside it.",
+  "image": "cut/out/sheets/06_06-resurrecting-atlantis.webp",
+  "stage": "cutsheet",
+  "sign": "cinema of the brain",
+  "sign_id": "CINEOSIS-010-43",
+  "file": "CC-067-sheet_06.md",
+  "rel": "../cut/out/sheets/06_06-resurrecting-atlantis.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-068",
+  "title": "The cutsheet puts the place on a diagram and prints its own confidence beside it.",
+  "image": "cut/out/sheets/07_07-dj-turn-me-up.webp",
+  "stage": "cutsheet",
+  "sign": "cinema of the brain",
+  "sign_id": "CINEOSIS-010-43",
+  "file": "CC-068-sheet_07.md",
+  "rel": "../cut/out/sheets/07_07-dj-turn-me-up.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-069",
+  "title": "The cutsheet puts the place on a diagram and prints its own confidence beside it.",
+  "image": "cut/out/sheets/08_08-newly-single.webp",
+  "stage": "cutsheet",
+  "sign": "cinema of the brain",
+  "sign_id": "CINEOSIS-010-43",
+  "file": "CC-069-sheet_08.md",
+  "rel": "../cut/out/sheets/08_08-newly-single.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-070",
+  "title": "The cutsheet puts the place on a diagram and prints its own confidence beside it.",
+  "image": "cut/out/sheets/09_09-yet-heard.webp",
+  "stage": "cutsheet",
+  "sign": "cinema of the brain",
+  "sign_id": "CINEOSIS-010-43",
+  "file": "CC-070-sheet_09.md",
+  "rel": "../cut/out/sheets/09_09-yet-heard.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-071",
+  "title": "The cutsheet puts the place on a diagram and prints its own confidence beside it.",
+  "image": "cut/out/sheets/10_10-magic-ride.webp",
+  "stage": "cutsheet",
+  "sign": "cinema of the brain",
+  "sign_id": "CINEOSIS-010-43",
+  "file": "CC-071-sheet_10.md",
+  "rel": "../cut/out/sheets/10_10-magic-ride.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-072",
+  "title": "The cutsheet puts the place on a diagram and prints its own confidence beside it.",
+  "image": "cut/out/sheets/11_11-new-day.webp",
+  "stage": "cutsheet",
+  "sign": "cinema of the brain",
+  "sign_id": "CINEOSIS-010-43",
+  "file": "CC-072-sheet_11.md",
+  "rel": "../cut/out/sheets/11_11-new-day.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-073",
+  "title": "The cutsheet puts the place on a diagram and prints its own confidence beside it.",
+  "image": "cut/out/sheets/12_12-reunion.webp",
+  "stage": "cutsheet",
+  "sign": "cinema of the brain",
+  "sign_id": "CINEOSIS-010-43",
+  "file": "CC-073-sheet_12.md",
+  "rel": "../cut/out/sheets/12_12-reunion.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-074",
+  "title": "The cutsheet puts the place on a diagram and prints its own confidence beside it.",
+  "image": "cut/out/sheets/13_13-how-to-win-my-heart.webp",
+  "stage": "cutsheet",
+  "sign": "cinema of the brain",
+  "sign_id": "CINEOSIS-010-43",
+  "file": "CC-074-sheet_13.md",
+  "rel": "../cut/out/sheets/13_13-how-to-win-my-heart.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-075",
+  "title": "The cutsheet puts the place on a diagram and prints its own confidence beside it.",
+  "image": "cut/out/sheets/14_14-hot-minute.webp",
+  "stage": "cutsheet",
+  "sign": "cinema of the brain",
+  "sign_id": "CINEOSIS-010-43",
+  "file": "CC-075-sheet_14.md",
+  "rel": "../cut/out/sheets/14_14-hot-minute.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-076",
+  "title": "The first pass still has a centre: three people, and everything arranged around them.",
+  "image": "cut/out/lucier/shot_P133_g0.webp",
+  "stage": "lucier",
+  "sign": "solid perception",
+  "sign_id": "CINEOSIS-010-01",
+  "file": "CC-076-lucier_shot_P133_g0.md",
+  "rel": "../cut/out/lucier/shot_P133_g0.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-077",
+  "title": "Still centred, but the centre is now made of grain rather than of body.",
+  "image": "cut/out/lucier/shot_P133_g1.webp",
+  "stage": "lucier",
+  "sign": "solid perception",
+  "sign_id": "CINEOSIS-010-01",
+  "file": "CC-077-lucier_shot_P133_g1.md",
+  "rel": "../cut/out/lucier/shot_P133_g1.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-078",
+  "title": "The centre begins to hand itself between the three.",
+  "image": "cut/out/lucier/shot_P133_g2.webp",
+  "stage": "lucier",
+  "sign": "liquid perception",
+  "sign_id": "CINEOSIS-010-02",
+  "file": "CC-078-lucier_shot_P133_g2.md",
+  "rel": "../cut/out/lucier/shot_P133_g2.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-079",
+  "title": "Bodies as vertical currents; the transfer is now continuous.",
+  "image": "cut/out/lucier/shot_P133_g3.webp",
+  "stage": "lucier",
+  "sign": "liquid perception",
+  "sign_id": "CINEOSIS-010-02",
+  "file": "CC-079-lucier_shot_P133_g3.md",
+  "rel": "../cut/out/lucier/shot_P133_g3.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-080",
+  "title": "The centre is gone; only drifts remain where bodies were.",
+  "image": "cut/out/lucier/shot_P133_g4.webp",
+  "stage": "lucier",
+  "sign": "gaseous perception",
+  "sign_id": "CINEOSIS-010-03",
+  "file": "CC-080-lucier_shot_P133_g4.md",
+  "rel": "../cut/out/lucier/shot_P133_g4.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-081",
+  "title": "Fewer marks, and the implication of bodies survives them.",
+  "image": "cut/out/lucier/shot_P133_g5.webp",
+  "stage": "lucier",
+  "sign": "gaseous perception",
+  "sign_id": "CINEOSIS-010-03",
+  "file": "CC-081-lucier_shot_P133_g5.md",
+  "rel": "../cut/out/lucier/shot_P133_g5.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-082",
+  "title": "What is left is only meaningful against the generations before it.",
+  "image": "cut/out/lucier/shot_P133_g6.webp",
+  "stage": "lucier",
+  "sign": "demark",
+  "sign_id": "CINEOSIS-010-32",
+  "file": "CC-082-lucier_shot_P133_g6.md",
+  "rel": "../cut/out/lucier/shot_P133_g6.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-083",
+  "title": "The image now produces content that was never in the source.",
+  "image": "cut/out/lucier/shot_P133_g7.webp",
+  "stage": "lucier",
+  "sign": "powers of the false",
+  "sign_id": "CINEOSIS-010-40",
+  "file": "CC-083-lucier_shot_P133_g7.md",
+  "rel": "../cut/out/lucier/shot_P133_g7.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-084",
+  "title": "At the end there is nothing to see and something to read.",
+  "image": "cut/out/lucier/shot_P133_g8.webp",
+  "stage": "lucier",
+  "sign": "lectosign",
+  "sign_id": "CINEOSIS-010-44",
+  "file": "CC-084-lucier_shot_P133_g8.md",
+  "rel": "../cut/out/lucier/shot_P133_g8.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-085",
+  "title": "The whole descent on one strip: meaning arrives from the series, not from any frame.",
+  "image": "cut/out/lucier/shot_P133_STRIP.webp",
+  "stage": "lucier",
+  "sign": "mark",
+  "sign_id": "CINEOSIS-010-31",
+  "file": "CC-085-lucier_shot_P133_STRIP.md",
+  "rel": "../cut/out/lucier/shot_P133_STRIP.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-086",
+  "title": "The first pass still has a centre: three people, and everything arranged around them.",
+  "image": "cut/out/lucier/world_06_g0.webp",
+  "stage": "lucier",
+  "sign": "solid perception",
+  "sign_id": "CINEOSIS-010-01",
+  "file": "CC-086-lucier_world_06_g0.md",
+  "rel": "../cut/out/lucier/world_06_g0.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-087",
+  "title": "Still centred, but the centre is now made of grain rather than of body.",
+  "image": "cut/out/lucier/world_06_g1.webp",
+  "stage": "lucier",
+  "sign": "solid perception",
+  "sign_id": "CINEOSIS-010-01",
+  "file": "CC-087-lucier_world_06_g1.md",
+  "rel": "../cut/out/lucier/world_06_g1.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-088",
+  "title": "The centre begins to hand itself between the three.",
+  "image": "cut/out/lucier/world_06_g2.webp",
+  "stage": "lucier",
+  "sign": "liquid perception",
+  "sign_id": "CINEOSIS-010-02",
+  "file": "CC-088-lucier_world_06_g2.md",
+  "rel": "../cut/out/lucier/world_06_g2.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-089",
+  "title": "Bodies as vertical currents; the transfer is now continuous.",
+  "image": "cut/out/lucier/world_06_g3.webp",
+  "stage": "lucier",
+  "sign": "liquid perception",
+  "sign_id": "CINEOSIS-010-02",
+  "file": "CC-089-lucier_world_06_g3.md",
+  "rel": "../cut/out/lucier/world_06_g3.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-090",
+  "title": "The centre is gone; only drifts remain where bodies were.",
+  "image": "cut/out/lucier/world_06_g4.webp",
+  "stage": "lucier",
+  "sign": "gaseous perception",
+  "sign_id": "CINEOSIS-010-03",
+  "file": "CC-090-lucier_world_06_g4.md",
+  "rel": "../cut/out/lucier/world_06_g4.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-091",
+  "title": "Fewer marks, and the implication of bodies survives them.",
+  "image": "cut/out/lucier/world_06_g5.webp",
+  "stage": "lucier",
+  "sign": "gaseous perception",
+  "sign_id": "CINEOSIS-010-03",
+  "file": "CC-091-lucier_world_06_g5.md",
+  "rel": "../cut/out/lucier/world_06_g5.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-092",
+  "title": "What is left is only meaningful against the generations before it.",
+  "image": "cut/out/lucier/world_06_g6.webp",
+  "stage": "lucier",
+  "sign": "demark",
+  "sign_id": "CINEOSIS-010-32",
+  "file": "CC-092-lucier_world_06_g6.md",
+  "rel": "../cut/out/lucier/world_06_g6.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-093",
+  "title": "The image now produces content that was never in the source.",
+  "image": "cut/out/lucier/world_06_g7.webp",
+  "stage": "lucier",
+  "sign": "powers of the false",
+  "sign_id": "CINEOSIS-010-40",
+  "file": "CC-093-lucier_world_06_g7.md",
+  "rel": "../cut/out/lucier/world_06_g7.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-094",
+  "title": "At the end there is nothing to see and something to read.",
+  "image": "cut/out/lucier/world_06_g8.webp",
+  "stage": "lucier",
+  "sign": "lectosign",
+  "sign_id": "CINEOSIS-010-44",
+  "file": "CC-094-lucier_world_06_g8.md",
+  "rel": "../cut/out/lucier/world_06_g8.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-095",
+  "title": "The whole descent on one strip: meaning arrives from the series, not from any frame.",
+  "image": "cut/out/lucier/world_06_STRIP.webp",
+  "stage": "lucier",
+  "sign": "mark",
+  "sign_id": "CINEOSIS-010-31",
+  "file": "CC-095-lucier_world_06_STRIP.md",
+  "rel": "../cut/out/lucier/world_06_STRIP.webp"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-096",
+  "title": "The first plate: a poet in a dim room, and a world that agrees to be about him.",
+  "image": "cut/out/parts/P001.png",
+  "stage": "plate",
+  "sign": "solid perception",
+  "sign_id": "CINEOSIS-010-01",
+  "file": "CC-096-plate_P001.md",
+  "rel": "../cut/out/parts/P001.png"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-097",
+  "title": "A second take of the same room proves the centre was specified, not discovered.",
+  "image": "cut/out/parts/P002.png",
+  "stage": "plate",
+  "sign": "solid perception",
+  "sign_id": "CINEOSIS-010-01",
+  "file": "CC-097-plate_P002.md",
+  "rel": "../cut/out/parts/P002.png"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-098",
+  "title": "The third take: repetition begins to look like a category rather than a scene.",
+  "image": "cut/out/parts/P003.png",
+  "stage": "plate",
+  "sign": "solid perception",
+  "sign_id": "CINEOSIS-010-01",
+  "file": "CC-098-plate_P003.md",
+  "rel": "../cut/out/parts/P003.png"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-099",
+  "title": "A fourth: the centre persists while everything around it has been replaced.",
+  "image": "cut/out/parts/P004.png",
+  "stage": "plate",
+  "sign": "solid perception",
+  "sign_id": "CINEOSIS-010-01",
+  "file": "CC-099-plate_P004.md",
+  "rel": "../cut/out/parts/P004.png"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-100",
+  "title": "A plate with two figures: the centre has to be shared and is not.",
+  "image": "cut/out/parts/P031.png",
+  "stage": "plate",
+  "sign": "solid perception",
+  "sign_id": "CINEOSIS-010-01",
+  "file": "CC-100-plate_P031.md",
+  "rel": "../cut/out/parts/P031.png"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-101",
+  "title": "A plate where the light source is the subject and the body is the setting.",
+  "image": "cut/out/parts/P070.png",
+  "stage": "plate",
+  "sign": "solid perception",
+  "sign_id": "CINEOSIS-010-01",
+  "file": "CC-101-plate_P070.md",
+  "rel": "../cut/out/parts/P070.png"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-102",
+  "title": "The face plate: the frame narrows until composition and face are the same thing.",
+  "image": "cut/out/parts/P073.png",
+  "stage": "plate",
+  "sign": "solid perception",
+  "sign_id": "CINEOSIS-010-01",
+  "file": "CC-102-plate_P073.md",
+  "rel": "../cut/out/parts/P073.png"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-103",
+  "title": "A plate with depth: three planes, and only one of them is allowed to matter.",
+  "image": "cut/out/parts/P083.png",
+  "stage": "plate",
+  "sign": "solid perception",
+  "sign_id": "CINEOSIS-010-01",
+  "file": "CC-103-plate_P083.md",
+  "rel": "../cut/out/parts/P083.png"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-104",
+  "title": "Three figures and one made of light: the plate that everything else was cut from.",
+  "image": "cut/out/parts/P133.png",
+  "stage": "plate",
+  "sign": "solid perception",
+  "sign_id": "CINEOSIS-010-01",
+  "file": "CC-104-plate_P133.md",
+  "rel": "../cut/out/parts/P133.png"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-105",
+  "title": "Bodies made entirely out of their own world are the world made durable inside them.",
+  "image": "cut/out/quilt/shot_P133.png",
+  "stage": "quilt",
+  "sign": "imprint",
+  "sign_id": "CINEOSIS-010-15",
+  "file": "CC-105-quilt_P133.md",
+  "rel": "../cut/out/quilt/shot_P133.png"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-106",
+  "title": "Exchanging parts between bodies asks how much can be swapped before identity fails.",
+  "image": "cut/out/partswap/06_ADMISSION_44s.png",
+  "stage": "partswap",
+  "sign": "body of attitude",
+  "sign_id": "CINEOSIS-010-41",
+  "file": "CC-106-partswap_06.md",
+  "rel": "../cut/out/partswap/06_ADMISSION_44s.png"
+ },
+ {
+  "id": "CINEOSIS-COLLAGE-107",
+  "title": "A chart of every way two images can meet is a picture of the grammar itself.",
+  "image": "cut/out/patchfield/modes.webp",
+  "stage": "patchfield",
+  "sign": "cinema of the brain",
+  "sign_id": "CINEOSIS-010-43",
+  "file": "CC-107-patchfield_modes.md",
+  "rel": "../cut/out/patchfield/modes.webp"
+ }
+]
