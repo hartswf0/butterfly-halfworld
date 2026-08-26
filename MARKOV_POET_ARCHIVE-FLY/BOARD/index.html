@@ -1,0 +1,328 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE BOARD — every image, every prompt</title>
+<style>
+:root{
+  --bg:#0a0a0b; --panel:#111114; --line:#26262c; --ink:#e8e6e1;
+  --dim:#7a7a85; --hot:#4ade80; --sel:#4ade80; --warn:#e5484d;
+  --col:172px; --cell:96px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:11px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;overflow:hidden}
+
+/* ── top bar ─────────────────────────────────────────────────────────── */
+#bar{display:flex;align-items:center;gap:6px;padding:8px 10px;background:var(--panel);
+  border-bottom:1px solid var(--line);flex-wrap:wrap;position:relative;z-index:20}
+#bar b{font-size:11px;letter-spacing:.22em;margin-right:8px}
+.btn{background:transparent;color:var(--ink);border:1px solid var(--line);
+  padding:5px 9px;font:10px/1 ui-monospace,monospace;letter-spacing:.1em;cursor:pointer;
+  border-radius:2px;min-height:26px}
+.btn:hover{border-color:var(--dim)}
+.btn.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sep{width:1px;height:20px;background:var(--line);margin:0 4px}
+#count{color:var(--dim);font-size:10px;margin-left:auto}
+#find{background:#000;border:1px solid var(--line);color:var(--ink);padding:5px 8px;
+  font:10px/1 ui-monospace,monospace;width:150px;border-radius:2px;min-height:26px}
+
+/* ── the deck ────────────────────────────────────────────────────────── */
+#deck{position:absolute;inset:41px 0 0 0;overflow:auto;padding:10px 8px 8px;
+  display:flex;gap:8px;align-items:flex-start;scrollbar-width:thin}
+#deck::-webkit-scrollbar{height:10px;width:10px}
+#deck::-webkit-scrollbar-thumb{background:var(--line)}
+.col{flex:0 0 var(--col);width:var(--col);background:var(--panel);
+  border:1px solid var(--line);border-radius:3px;display:flex;flex-direction:column;
+  max-height:calc(100vh - 60px)}
+.col.off{opacity:.32}
+.chead{padding:8px 7px 6px;border-bottom:1px solid var(--line);display:flex;
+  align-items:center;gap:4px;flex-wrap:wrap;position:sticky;top:0;background:var(--panel);z-index:3}
+.cname{font-size:10px;letter-spacing:.06em;width:100%;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.cmeta{color:var(--dim);font-size:9px;margin-right:auto}
+.ct{border:1px solid var(--line);background:transparent;color:var(--dim);
+  font:9px/1 ui-monospace,monospace;padding:3px 5px;cursor:pointer;border-radius:2px}
+.ct:hover{color:var(--ink);border-color:var(--dim)}
+.ct.dl{color:var(--hot);border-color:#1d3d2a}
+.ct.x{color:var(--warn)}
+.cells{overflow-y:auto;overflow-x:hidden;flex:1;scrollbar-width:thin}
+.cells::-webkit-scrollbar{width:8px}
+.cells::-webkit-scrollbar-thumb{background:var(--line)}
+.cell{position:relative;border-bottom:1px solid #000;cursor:pointer;background:#000}
+.cell img{display:block;width:100%;height:var(--cell);object-fit:cover;
+  background:#000;opacity:.92}
+.cell img:not([src]){background:#0e0e11}
+.cell:hover img{opacity:1}
+.cell.sel{outline:2px solid var(--sel);outline-offset:-2px}
+.cell .tag{position:absolute;left:0;bottom:0;right:0;padding:2px 4px;
+  background:linear-gradient(transparent,rgba(0,0,0,.85));color:var(--dim);
+  font-size:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cell .kind{position:absolute;right:3px;top:3px;font-size:8px;color:var(--hot);
+  background:rgba(0,0,0,.7);padding:1px 3px;border-radius:2px}
+
+/* the playhead: one line across the deck, at a fixed height */
+#play{position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(180,220,255,.5);
+  pointer-events:none;z-index:10;box-shadow:0 0 8px rgba(140,200,255,.35)}
+
+/* ── the reader ──────────────────────────────────────────────────────── */
+#read{position:fixed;right:0;top:41px;bottom:0;width:360px;background:var(--panel);
+  border-left:1px solid var(--line);padding:14px;overflow-y:auto;z-index:30;
+  transform:translateX(101%);transition:transform .2s ease}
+#read.on{transform:none}
+#read img{width:100%;height:auto;border:1px solid var(--line);background:#000;display:block}
+#read h3{margin:10px 0 3px;font-size:12px;line-height:1.4}
+#read .m{color:var(--dim);font-size:9px;line-height:1.6;word-break:break-all}
+#read pre{white-space:pre-wrap;font:11px/1.65 ui-monospace,monospace;margin:10px 0 0;
+  border-left:2px solid var(--hot);padding-left:10px}
+#read .close{position:absolute;right:10px;top:10px}
+#toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#000;
+  border:1px solid var(--line);padding:7px 12px;font-size:10px;z-index:60;display:none}
+@media(max-width:700px){ #read{width:100%} :root{--col:132px;--cell:76px} }
+</style>
+
+<div id="bar">
+  <b>THE BOARD</b>
+  <button class="btn on" data-g="poem">POEM</button>
+  <button class="btn" data-g="type">TYPE</button>
+  <button class="btn" data-g="work">WORK</button>
+  <div class="sep"></div>
+  <button class="btn on" data-k="all">ALL</button>
+  <button class="btn" data-k="video">VIDEO</button>
+  <button class="btn" data-k="image">IMAGE</button>
+  <div class="sep"></div>
+  <input id="find" placeholder="find in prompts…">
+  <button class="btn" id="dlall">DOWNLOAD ALL PROMPTS</button>
+  <span id="count"></span>
+</div>
+<div id="deck"><div id="play"></div></div>
+<div id="read"><button class="btn close" onclick="closeRead()">CLOSE</button>
+  <div id="rbody"></div></div>
+<div id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════════
+   A STORE-ONLY ZIP, WRITTEN HERE.
+   Downloading a column means downloading forty files, and forty downloads is
+   not a download. No CDN is reachable from this page by design, so the archive
+   format is implemented rather than imported: ZIP with stored (uncompressed)
+   entries is about sixty lines and needs only CRC32.
+   ═══════════════════════════════════════════════════════════════════════ */
+var CRC=(function(){var t=[],c,n,k;for(n=0;n<256;n++){c=n;
+  for(k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
+function crc32(u8){var c=0xFFFFFFFF;for(var i=0;i<u8.length;i++)
+  c=CRC[(c^u8[i])&0xFF]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+function zip(files){                       /* [{name, data:Uint8Array}] */
+  var parts=[],central=[],off=0,enc=new TextEncoder();
+  function u16(v){return [v&255,(v>>8)&255];}
+  function u32(v){return [v&255,(v>>8)&255,(v>>16)&255,(v>>>24)&255];}
+  files.forEach(function(f){
+    var nm=enc.encode(f.name), c=crc32(f.data), n=f.data.length;
+    var h=[].concat(u32(0x04034b50),u16(20),u16(0),u16(0),u16(0),u16(0),
+                    u32(c),u32(n),u32(n),u16(nm.length),u16(0));
+    parts.push(new Uint8Array(h),nm,f.data);
+    central.push({nm:nm,c:c,n:n,off:off});
+    off+=h.length+nm.length+n;
+  });
+  var cs=0;
+  central.forEach(function(e){
+    var h=[].concat(u32(0x02014b50),u16(20),u16(20),u16(0),u16(0),u16(0),u16(0),
+                    u32(e.c),u32(e.n),u32(e.n),u16(e.nm.length),
+                    u16(0),u16(0),u16(0),u16(0),u32(0),u32(e.off));
+    parts.push(new Uint8Array(h),e.nm); cs+=h.length+e.nm.length;
+  });
+  parts.push(new Uint8Array([].concat(u32(0x06054b50),u16(0),u16(0),
+    u16(files.length),u16(files.length),u32(cs),u32(off),u16(0))));
+  return new Blob(parts,{type:'application/zip'});
+}
+function save(blob,name){
+  var a=document.createElement('a'),u=URL.createObjectURL(blob);
+  a.href=u;a.download=name;document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(u);a.remove();},900);
+}
+function toast(t,ms){var e=document.getElementById('toast');
+  e.textContent=t;e.style.display='block';
+  clearTimeout(toast._t);toast._t=setTimeout(function(){e.style.display='none';},ms||2200);}
+
+/* ── state ─────────────────────────────────────────────────────────── */
+/* every src in board.json is written relative to the REPOSITORY ROOT, because
+   that is the only stable thing to be relative to when four different sources
+   are being reconciled. This page lives one level down, so it resolves them. */
+var BASE='../';
+function url(p){ return BASE + p; }
+var ROWS=[], GROUP='poem', KIND='all', FIND='', OFF={}, SEL=null;
+
+fetch('board.json').then(function(r){return r.json();}).then(function(j){
+  ROWS=j; render();
+}).catch(function(){ toast('could not read board.json — run cut/pf/board.py',6000); });
+
+function visible(){
+  return ROWS.filter(function(r){
+    if(KIND!=='all' && r.kind!==KIND) return false;
+    if(FIND){
+      var h=(r.prompt+' '+r.title+' '+r.id+' '+(r.type||'')).toLowerCase();
+      if(h.indexOf(FIND)<0) return false;
+    }
+    return true;
+  });
+}
+function groups(rows){
+  var g={}, order=[];
+  rows.forEach(function(r){
+    var k=(r[GROUP]||'').trim() || '—  unrouted';
+    if(!g[k]){ g[k]=[]; order.push(k); }
+    g[k].push(r);
+  });
+  order.sort(function(a,b){
+    if(GROUP==='poem') return a.localeCompare(b);
+    return g[b].length-g[a].length;      /* fullest first for type and work */
+  });
+  return order.map(function(k){ return {name:k, rows:g[k]}; });
+}
+
+var SEEN=new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(!e.isIntersecting) return;
+    var i=e.target.querySelector('img');
+    if(i && i.dataset.src){ i.src=i.dataset.src; delete i.dataset.src; }
+    SEEN.unobserve(e.target);
+  });
+}, {rootMargin:'600px 300px'});
+
+function render(){
+  var deck=document.getElementById('deck');
+  [].slice.call(deck.querySelectorAll('.col')).forEach(function(c){c.remove();});
+  var rows=visible(), gs=groups(rows);
+  document.getElementById('count').textContent =
+    rows.length+' of '+ROWS.length+' · '+gs.length+' columns';
+  gs.forEach(function(g){
+    var col=document.createElement('div');
+    col.className='col'+(OFF[g.name]?' off':'');
+    var vids=g.rows.filter(function(r){return r.kind==='video';}).length;
+    col.innerHTML=
+      '<div class="chead"><div class="cname" title="'+esc(g.name)+'">'+esc(g.name)+'</div>'
+      +'<span class="cmeta">'+g.rows.length+(vids?(' · '+vids+'v'):'')+'</span>'
+      +'<button class="ct dl" data-dl="1">ZIP</button>'
+      +'<button class="ct" data-txt="1">TXT</button>'
+      +'<button class="ct x" data-off="1">'+(OFF[g.name]?'ON':'X')+'</button></div>'
+      +'<div class="cells"></div>';
+    var cells=col.querySelector('.cells');
+    g.rows.forEach(function(r){
+      var d=document.createElement('div');
+      d.className='cell'+(SEL===r?' sel':'');
+      /* NO src YET. Two thousand images asked for at once are two thousand
+         requests the browser queues and none of them arrive; loading="lazy"
+         does not help inside a scroller the browser considers already near the
+         viewport. The src is attached when the cell is actually looked at. */
+      d.innerHTML='<img alt="">'
+        +(r.kind==='video'?'<span class="kind">&#9654;</span>':'')
+        +'<span class="tag">'+esc(r.id||r.title)+'</span>';
+      d.querySelector('img').dataset.src=url(r.src);
+      d.onclick=function(){ open_(r,d); };
+      cells.appendChild(d);
+      SEEN.observe(d);
+    });
+    col.querySelector('[data-dl]').onclick=function(){ zipCol(g); };
+    col.querySelector('[data-txt]').onclick=function(){ txtCol(g); };
+    col.querySelector('[data-off]').onclick=function(){
+      OFF[g.name]=!OFF[g.name]; render(); };
+    deck.appendChild(col);
+  });
+}
+function esc(t){return (t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
+
+/* ── the reader ────────────────────────────────────────────────────── */
+function open_(r, el){
+  SEL=r;
+  [].slice.call(document.querySelectorAll('.cell.sel')).forEach(function(c){c.classList.remove('sel');});
+  if(el) el.classList.add('sel');
+  document.getElementById('rbody').innerHTML=
+    '<img src="'+esc(url(r.src))+'" alt="">'
+    +'<h3>'+esc(r.title||r.id)+'</h3>'
+    +'<div class="m">'+esc(r.id)+'<br>'+esc(r.src)
+    +(r.video?('<br>video: '+esc(r.video)):'')
+    +'<br>'+esc([r.poem,r.type,r.work,r.note].filter(Boolean).join(' · '))+'</div>'
+    +'<pre>'+esc(r.prompt)+'</pre>'
+    +'<div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap">'
+    +'<button class="btn" onclick="copyPrompt()">COPY PROMPT</button>'
+    +(r.video?'<button class="btn" onclick="openVideo()">OPEN VIDEO</button>':'')
+    +'</div>';
+  document.getElementById('read').classList.add('on');
+}
+function closeRead(){ document.getElementById('read').classList.remove('on'); }
+function copyPrompt(){ if(!SEL)return;
+  navigator.clipboard.writeText(SEL.prompt).then(function(){toast('prompt copied');},
+    function(){toast('could not copy');}); }
+function openVideo(){ if(SEL&&SEL.video) window.open(url(SEL.video),'_blank'); }
+
+/* ── download a whole column ───────────────────────────────────────── */
+function sheet(g){
+  var L=['# '+g.name,'','THE BOARD · '+g.rows.length+' items','',
+         'Every prompt in this column, in the order it appears on the deck.','','---',''];
+  g.rows.forEach(function(r){
+    L.push('## '+(r.id||r.title));
+    L.push('');
+    L.push([r.poem,r.type,r.work].filter(Boolean).join(' · '));
+    L.push('');
+    L.push(r.prompt);
+    L.push('');
+    L.push('`'+r.src+'`'+(r.video?('  ·  `'+r.video+'`'):''));
+    L.push('');
+    L.push('---');
+    L.push('');
+  });
+  return L.join('\n');
+}
+function safe(s){ return (s||'col').replace(/[^A-Za-z0-9._-]+/g,'_').replace(/^_+|_+$/g,'').slice(0,60); }
+function txtCol(g){ save(new Blob([sheet(g)],{type:'text/markdown'}), safe(g.name)+'_PROMPTS.md');
+  toast(g.rows.length+' prompts'); }
+
+function zipCol(g){
+  var enc=new TextEncoder(), files=[{name:'PROMPTS.md', data:enc.encode(sheet(g))}];
+  var n=g.rows.length, done=0, fail=0;
+  toast('fetching '+n+' files…', 60000);
+  var seen={};
+  Promise.all(g.rows.map(function(r){
+    return fetch(url(r.src)).then(function(x){ if(!x.ok) throw 0; return x.arrayBuffer(); })
+      .then(function(ab){
+        var base=r.src.split('/').pop();
+        if(seen[base]) base=(r.id||'x').replace(/[^A-Za-z0-9._-]+/g,'_')+'_'+base;
+        seen[base]=1;
+        files.push({name:base, data:new Uint8Array(ab)});
+        done++;
+      }).catch(function(){ fail++; });
+  })).then(function(){
+    /* say what did not come, rather than shipping a short archive quietly */
+    if(fail) files.push({name:'MISSING.txt',
+      data:enc.encode(fail+' of '+n+' files could not be fetched and are not in this archive.\n')});
+    save(zip(files), safe(g.name)+'.zip');
+    toast(done+' files'+(fail?(' · '+fail+' missing'):'')+' zipped');
+  });
+}
+
+/* ── controls ──────────────────────────────────────────────────────── */
+[].slice.call(document.querySelectorAll('#bar [data-g]')).forEach(function(b){
+  b.onclick=function(){
+    [].slice.call(document.querySelectorAll('#bar [data-g]')).forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on'); GROUP=b.dataset.g; OFF={}; render();
+  };
+});
+[].slice.call(document.querySelectorAll('#bar [data-k]')).forEach(function(b){
+  b.onclick=function(){
+    [].slice.call(document.querySelectorAll('#bar [data-k]')).forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on'); KIND=b.dataset.k; render();
+  };
+});
+document.getElementById('find').addEventListener('input',function(){
+  FIND=this.value.trim().toLowerCase(); clearTimeout(render._t);
+  render._t=setTimeout(render,180);
+});
+document.getElementById('dlall').onclick=function(){
+  var gs=groups(visible());
+  var L=['# THE BOARD — every prompt','', visible().length+' items · '+gs.length+' columns',
+         '', 'Grouped by '+GROUP+'.','','---',''];
+  gs.forEach(function(g){ L.push(sheet(g)); });
+  save(new Blob([L.join('\n')],{type:'text/markdown'}), 'THE_BOARD_PROMPTS.md');
+  toast('all prompts');
+};
+addEventListener('keydown',function(e){ if(e.key==='Escape') closeRead(); });
+</script>
