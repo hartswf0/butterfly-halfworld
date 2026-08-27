@@ -302,6 +302,19 @@
                 touch-action: none
             }
 
+            /* the seal note adds an extra child to their app grid — give it its own row
+               or the 1fr lands on the trace bar and the workspace collapses off-screen.
+               desktop: 4 rows + note; mobile (≤720px): + the 39px mobileNav row */
+            .app {
+                grid-template-rows: 36px auto 25px minmax(0,1fr) 34px !important
+            }
+
+            @media(max-width: 720px) {
+                .app {
+                    grid-template-rows: 36px auto 25px minmax(0,1fr) 34px 39px !important
+                }
+            }
+
             .sealNote {
                 padding: 3px 10px;
                 font: 500 8px/1.6 ui-monospace,monospace;
