@@ -350,6 +350,12 @@ export default {
   /* KEY: C Dorian, bright — the raised 6th and the climb to the octave
      carry the film's own turn from night into "chilly morning". */
   drone: { base: 65.41, steps: [0, 0, 3, -2, 5, 9, 12], bright: true },
+  /* PROSODY · Egypt · Al-Sirah al-Hilaliyya. Travel is the meter: a steady gait that episodically quickens, and at dawn
+     the percussion leaves and the bow continues — the ground falls from 0.7 to
+     0.15 rather than resolving.
+     `deep/sonify.mjs` scans the field under this law. The root is the drone's
+     own base folded into one octave, so the film sings in the key it hums in. */
+  score: { engine: "epic", mode: "bayati" },
   movements: [
     {
       label: "HOP ON", seconds: 13,

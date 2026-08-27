@@ -53,6 +53,12 @@ export default {
      darkest register, because 01 ends "as dark as black" and nothing after
      it goes lower; the flat 2nd is the haze closing in before the fall. */
   drone: { base: 16.35, steps: [0, 0, -11, -9, -12] },
+  /* PROSODY · Morocco · Malhun / qsida. Free at the head and inevitable at the end: the breath tightens from 9.5s
+     to 4.2s a pass, and the room itself is not allowed to speak until past the
+     halfway mark, so the film speaks in objects before it speaks in weather.
+     `deep/sonify.mjs` scans the field under this law. The root is the drone's
+     own base folded into one octave, so the film sings in the key it hums in. */
+  score: { engine: "malhun", mode: "bayati" },
   movements: [
     {
       label: "THE SEARCH", seconds: 13,

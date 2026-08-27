@@ -152,6 +152,12 @@ export default {
   /* NO WINDOW. The title sits before the record starts, so the first poem's
      music no longer plays underneath it. Its own bed is low and almost still. */
   drone: { base: 32.70, steps: [0, 0, -5, 0, 3, 0], bright: false },
+  /* PROSODY · none, deliberately. The other fourteen each declare an African
+     prosodic engine and the title declares nothing, because the title is the
+     voice before it has learned anything: one unvarying breath, no tradition
+     yet, a man walking out of a room he has no other way of leaving. The
+     sonifier falls back to its default law and says so when it does. */
+  score: { mode: "aeolian" },
   movements: [
     {
       /* A ROOM, AND ALMOST NOTHING ELSE. Dim wall, bright window, one man

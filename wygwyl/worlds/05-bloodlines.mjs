@@ -74,6 +74,12 @@ export default {
   /* KEY: C major (Ionian) at the suite's root — the plainest, warmest scale
      in the palette, because the ancestors being named are not a mystery. */
   drone: { base: 65.41, steps: [0, 0, 5, 7, 11, 12], bright: true },
+  /* PROSODY · Mali / Guinea / Gambia · Jaliya. The cycle does not vary; that is the whole point. The breath is a constant
+     5.85s and only the ground opens, from silence to 0.85, because the ground
+     is the generations being added underneath a voice that is free above it.
+     `deep/sonify.mjs` scans the field under this law. The root is the drone's
+     own base folded into one octave, so the film sings in the key it hums in. */
+  score: { engine: "jaliya", mode: "mixo" },
   movements: [
     {
       label: "NAME MY OWN STARS", seconds: 13,

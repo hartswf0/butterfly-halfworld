@@ -199,6 +199,12 @@ export default {
      its body and, by "back to my body", returns to the tonic it started
      from; not bright, this is a loss film even where it dances. */
   drone: { base: 32.70, steps: [0, 0, 7, -4, 2, -9, 0, -7] },
+  /* PROSODY · Mauritius · Sega Tipik. Grief becomes locomotion by one number — the breath shortens continuously
+     from 7.6s to 3.0s and the gate opens with it, so nothing is announced and
+     the room is simply moving. The last tenth reverses: a collapse, not a climax.
+     `deep/sonify.mjs` scans the field under this law. The root is the drone's
+     own base folded into one octave, so the film sings in the key it hums in. */
+  score: { engine: "sega", mode: "ionian" },
   movements: [
     {
       label: "PULSING", seconds: 13,

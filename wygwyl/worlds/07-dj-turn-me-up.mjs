@@ -246,6 +246,12 @@ export default {
      the drone sits on the fifth and the steps climb a full octave across
      the seven movements, ending exactly where "chin high" would put it. */
   drone: { base: 98.00, steps: [0, -12, -5, 0, 3, 7, 9, 12], bright: true },
+  /* PROSODY · Senegal · Taasu + Sabar. Acceleration by subdivision rather than by tempo: the breath halves, and
+     halves again, so the density rises while the breath stays a breath. Drum
+     and word attack each other.
+     `deep/sonify.mjs` scans the field under this law. The root is the drone's
+     own base folded into one octave, so the film sings in the key it hums in. */
+  score: { engine: "taasu", mode: "penta" },
   movements: [
     {
       label: "CHIN NESTED", seconds: 13,

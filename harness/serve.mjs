@@ -22,6 +22,7 @@ const MIME = {
   ".js": "text/javascript; charset=utf-8", ".json": "application/json; charset=utf-8",
   ".png": "image/png", ".jpg": "image/jpeg", ".gif": "image/gif",
   ".webm": "video/webm", ".mp4": "video/mp4", ".wav": "audio/wav",
+  ".mp3": "audio/mpeg", ".m4a": "audio/mp4", ".ogg": "audio/ogg",
   ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml",
 };
 
@@ -35,9 +36,30 @@ createServer(async (req, res) => {
     if (!file.startsWith(ROOT)) { res.writeHead(403).end("outside the repo"); return; }
     const s = await stat(file);
     if (s.isDirectory()) { res.writeHead(404).end("not found"); return; }
+    const type = MIME[extname(file).toLowerCase()] || "application/octet-stream";
     const body = await readFile(file);
+    /* RANGE, HONESTLY. This used to advertise `accept-ranges: bytes` and then
+       ignore the Range header, which is worse than not offering it: the suite
+       plays a twenty-four minute mp3 and seeks around inside it, and a media
+       element that asks for one byte range and is handed the whole file back
+       with a 200 simply refuses to seek. */
+    const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || "");
+    if (range) {
+      const last = body.length - 1;
+      let a = range[1] === "" ? last - (+range[2] || 0) + 1 : +range[1];
+      let b = range[2] === "" || range[1] === "" ? last : +range[2];
+      a = Math.max(0, a); b = Math.min(last, b);
+      if (a > b) { res.writeHead(416, { "content-range": `bytes */${body.length}` }).end(); return; }
+      res.writeHead(206, {
+        "content-type": type, "content-length": b - a + 1,
+        "content-range": `bytes ${a}-${b}/${body.length}`,
+        "accept-ranges": "bytes", "cache-control": "no-cache",
+      });
+      res.end(body.subarray(a, b + 1));
+      return;
+    }
     res.writeHead(200, {
-      "content-type": MIME[extname(file).toLowerCase()] || "application/octet-stream",
+      "content-type": type,
       "content-length": body.length,
       "cache-control": "no-cache",       // the point is that editing a module reloads
       "accept-ranges": "bytes",

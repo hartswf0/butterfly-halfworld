@@ -246,6 +246,12 @@ export default {
      register; the temple assembles toward the octave the way the film
      assembles toward daylight. */
   drone: { base: 98.00, steps: [0, 0, 2, 6, 7, 9, 12], bright: true },
+  /* PROSODY · Ethiopia · Qene + Baganna. Every phrase dictates its own breath, so the sweep wanders and never
+     settles; the ground opens late, which is the second meaning arriving
+     inside a sentence that had already finished.
+     `deep/sonify.mjs` scans the field under this law. The root is the drone's
+     own base folded into one octave, so the film sings in the key it hums in. */
+  score: { engine: "qene", mode: "ambassel" },
   movements: [
     {
       label: "MORNING FOG", seconds: 13,

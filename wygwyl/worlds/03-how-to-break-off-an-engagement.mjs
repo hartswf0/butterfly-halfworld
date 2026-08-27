@@ -100,6 +100,12 @@ export default {
      is sad rather than violent, and low because 03 is one of the three
      darkest films in the suite (with 01 and 09). */
   drone: { base: 24.50, steps: [0, 0, 7, 3, -9, -5, -12] },
+  /* PROSODY · Ghana · funeral lament. Sorrow becomes ceremony and then debris: density climbs until the
+     shattering, and at the shattering the rhythmic floor is removed entirely,
+     so the last fifth is surf and breath and no pulse at all.
+     `deep/sonify.mjs` scans the field under this law. The root is the drone's
+     own base folded into one octave, so the film sings in the key it hums in. */
+  score: { engine: "dirge", mode: "penta" },
   movements: [
     {
       label: "ODE TO FOREVER", seconds: 13,

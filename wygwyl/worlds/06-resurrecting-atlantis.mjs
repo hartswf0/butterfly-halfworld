@@ -280,6 +280,12 @@ export default {
   /* KEY: G Lydian, bright — the raised 4th is the city coming up out of the
      water; paired with 11 as the suite's highest, lightest register. */
   drone: { base: 98.00, steps: [0, 0, 2, 6, 4, 9, 12], bright: true },
+  /* PROSODY · Algerian Sahara · Ahellil. One voice becomes many. The ground rises to 0.95 because the ground IS the
+     others arriving, and by the end the protagonist is one body among them
+     rather than a soloist with an accompaniment.
+     `deep/sonify.mjs` scans the field under this law. The root is the drone's
+     own base folded into one octave, so the film sings in the key it hums in. */
+  score: { engine: "ahellil", mode: "dorian" },
   movements: [
     {
       label: "THE COMETS", seconds: 13,
