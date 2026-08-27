@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SONG OBSERVATORY</title>
+<style>
+:root{--bg:#0a0c0a;--panel:#10140f;--line:#26301f;--ink:#cfe3c8;--dim:#7d8f74;--faint:#4a5a42;
+  --accent:#9ee06a;--gold:#e8c34a;--teal:#4dd9cc;--water:#5ba8f5;--viol:#c86bd9;--rose:#e05c4f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:13px/1.5 "SF Mono",Menlo,monospace;padding:18px;max-width:1200px;margin:0 auto}
+a{color:var(--teal);text-decoration:none}
+h1{font-size:16px;letter-spacing:.22em;color:var(--accent)}
+#sub{color:var(--dim);font-size:11.5px;margin:6px 0 12px}
+#picker{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+#picker button{background:var(--panel);border:1px solid var(--line);color:var(--ink);font:inherit;
+  font-size:10.5px;padding:3px 9px;border-radius:3px;cursor:pointer}
+#picker button.on{background:var(--viol);color:#0a0c0a;border-color:var(--viol)}
+#head{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px}
+#title{font-size:15px;color:var(--viol)}
+#meta{color:var(--faint);font-size:11px}
+#note{color:var(--gold);font-style:italic;font-size:12px;margin-bottom:10px}
+#head button{background:#161b14;border:1px solid var(--line);color:var(--ink);font:inherit;font-size:11px;padding:3px 10px;border-radius:3px;cursor:pointer}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:5px;margin-bottom:12px;overflow:hidden}
+.ptitle{padding:6px 12px;color:var(--dim);font-size:10px;letter-spacing:.2em;border-bottom:1px solid var(--line)}
+canvas{display:block;width:100%;cursor:crosshair}
+#row2{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+#scorewrap{flex:1;min-width:300px}
+#score{max-height:300px;overflow-y:auto;padding:8px 12px;font-size:11px}
+#score div{cursor:pointer;padding:1px 0;color:var(--dim)}
+#score div:hover{color:var(--accent)}
+#score b{font-weight:normal}
+.ev-SECTION b{color:var(--viol)} .ev-DROP b{color:var(--rose)} .ev-BREAK b{color:var(--water)}
+.ev-KEYCHANGE b{color:var(--teal)} .ev-HOOK b{color:var(--gold)} .ev-TIMBRE_SHIFT b{color:var(--dim)}
+#elwrap{flex:1;min-width:320px}
+#els{max-height:300px;overflow-y:auto;padding:8px 12px;display:flex;flex-wrap:wrap;gap:6px}
+.el{border:1px solid #2e3a26;background:#141a10;border-radius:10px;padding:2px 10px;font-size:11px;cursor:pointer}
+.el:hover{border-color:var(--gold);color:var(--gold)}
+.el.playing{background:var(--gold);color:#0a0c0a}
+.el small{color:var(--faint);font-size:9px}
+#lyrics{padding:8px 12px;font-size:12px;line-height:2}
+#lyrics span{cursor:pointer;border-bottom:1px dotted #33402c;margin-right:3px}
+#lyrics span:hover{color:var(--gold)}
+</style>
+</head>
+<body>
+<h1>SONG OBSERVATORY</h1>
+<div id="sub">observatory-level understanding of each song — structure · energy · rhythm · harmony · timbre · lyrics ·
+an event score, and the ELEMENTS: bar-quantized, seam-scored sample candidates cut on this song's own grid ·
+all statistics song-relative · <a href="families.html">families ↗</a> · <a href="sonicfield.html">sonic field ↗</a> · <a href="atlas.html">atlas ↗</a></div>
+<div id="picker">loading…</div>
+<div id="head" style="display:none">
+  <span id="title"></span><span id="meta"></span>
+  <button id="play">▶ play</button><button id="stop">■</button>
+</div>
+<div id="note"></div>
+<div class="panel" id="lanespanel" style="display:none">
+  <div class="ptitle">LANES — structure (families) · energy+events · rhythm (bar grid, drop) · harmony (chroma, key regions) · timbre</div>
+  <canvas id="cv"></canvas>
+</div>
+<div id="row2" style="display:none">
+  <div class="panel" id="scorewrap"><div class="ptitle">EVENT SCORE</div><div id="score"></div></div>
+  <div class="panel" id="elwrap"><div class="ptitle">ELEMENTS — loop candidates on this song's grid (bars · seam)</div><div id="els"></div></div>
+</div>
+<div class="panel" id="lyrpanel" style="display:none"><div class="ptitle">LYRICS (whisper — approximate)</div><div id="lyrics"></div></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const mmss = t => `${String(Math.floor(t/60)).padStart(2,'0')}:${String(Math.floor(t%60)).padStart(2,'0')}`;
+const PC = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+let SONG = null, audio = null, segT = null, raf = null;
+
+function stop(){ if (audio){ audio.pause(); clearInterval(segT); }
+  cancelAnimationFrame(raf);
+  document.querySelectorAll('.playing').forEach(e=>e.classList.remove('playing')); }
+function play(t0, t1, el, loop){
+  stop();
+  if (!audio || audio._src !== SONG.file){ audio = new Audio(SONG.file); audio._src = SONG.file; }
+  const seek = () => { audio.currentTime = t0; };
+  audio.readyState >= 1 ? seek() : audio.addEventListener('loadedmetadata', seek, {once:true});
+  if (t1 != null){
+    segT = setInterval(() => { if (audio.currentTime >= t1){
+      if (loop) audio.currentTime = t0; else { stop(); } } }, 200);
+  }
+  audio.play().catch(()=>{});
+  if (el) el.classList.add('playing');
+  head();
+}
+function head(){
+  cancelAnimationFrame(raf);
+  (function tick(){ draw(audio && !audio.paused ? audio.currentTime : null);
+    raf = requestAnimationFrame(tick); })();
+}
+
+const LN = [{k:'struct',h:34},{k:'energy',h:72},{k:'rhythm',h:40},{k:'harmony',h:78},{k:'timbre',h:40}];
+function draw(playT){
+  const cv = $('#cv'), dpr = devicePixelRatio||1;
+  const W = cv.parentNode.clientWidth;
+  const H = LN.reduce((a,l)=>a+l.h,0) + 12;
+  if (cv.width !== W*dpr){ cv.width = W*dpr; cv.height = H*dpr; cv.style.height = H+'px'; }
+  const g = cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0);
+  g.clearRect(0,0,W,H);
+  const dur = SONG.dur, X = t => t/dur*W;
+  let y = 6;
+  const famColor = {};
+  let fi = 0;
+  for (const ln of LN){
+    g.fillStyle = '#0d110c'; g.fillRect(0,y,W,ln.h); g.strokeStyle='#1a2117'; g.strokeRect(0,y,W,ln.h);
+    if (ln.k === 'struct'){
+      for (const s of SONG.sections){
+        if (!(s.fam in famColor)) famColor[s.fam] = `hsl(${(fi++*67)%360},55%,58%)`;
+        g.fillStyle = famColor[s.fam] + ''; g.globalAlpha = .5;
+        g.fillRect(X(s.t0), y+3, X(s.t1)-X(s.t0)-1, ln.h-6);
+        g.globalAlpha = 1;
+        if (X(s.t1)-X(s.t0) > 60){ g.fillStyle='#0a0c0a'; g.font='8px monospace';
+          g.fillText(s.fam.slice(0,Math.floor((X(s.t1)-X(s.t0))/5.5)), X(s.t0)+3, y+ln.h/2+2); }
+      }
+    }
+    if (ln.k === 'energy'){
+      const r = SONG.lanes.rms, n = r.length, mid = y+ln.h;
+      g.fillStyle = '#9ee06a66'; g.beginPath(); g.moveTo(0,mid);
+      for (let i=0;i<n;i++) g.lineTo(i/n*W, mid - r[i]*(ln.h-6));
+      g.lineTo(W,mid); g.fill();
+      for (const e of SONG.events){
+        if (e.type==='DROP'){ g.strokeStyle='#e05c4f'; g.lineWidth=1.4;
+          g.beginPath(); g.moveTo(X(e.t),y); g.lineTo(X(e.t),y+ln.h); g.stroke();
+          g.fillStyle='#e05c4f'; g.font='8px monospace'; g.fillText('DROP',X(e.t)+2,y+9); }
+        if (e.type==='BREAK'){ g.fillStyle='#5ba8f533';
+          g.fillRect(X(e.t), y, Math.max(3, X(parseFloat(e.v)||2)), ln.h); }
+      }
+    }
+    if (ln.k === 'rhythm'){
+      const bar = SONG.bar_s;
+      g.strokeStyle = '#26301f';
+      for (let t = SONG.phase; t < dur; t += bar){
+        g.beginPath(); g.moveTo(X(t), y+4); g.lineTo(X(t), y+ln.h-4); g.stroke(); }
+      g.strokeStyle = '#cfe3c8';
+      for (let t = SONG.phase, k = 0; t < dur; t += bar, k++)
+        if (k % 4 === 0){ g.beginPath(); g.moveTo(X(t), y+2); g.lineTo(X(t), y+ln.h-2); g.stroke(); }
+      g.fillStyle='#7d8f74'; g.font='9px monospace';
+      g.fillText(`${SONG.bpm} bpm · bar ${SONG.bar_s}s${SONG.bpm_noted ? ' · noted '+SONG.bpm_noted : ''}`, 6, y+12);
+    }
+    if (ln.k === 'harmony'){
+      const C = SONG.lanes.chroma, T = C[0].length, rh = (ln.h-14)/12;
+      for (let p = 0; p < 12; p++)
+        for (let t = 0; t < T; t++){
+          const v = C[p][t];
+          if (v > 0.25){ g.fillStyle = `rgba(77,217,204,${v*0.8})`;
+            g.fillRect(t/T*W, y+2+(11-p)*rh, Math.max(1,W/T), rh-0.5); }
+        }
+      for (const k of SONG.keys){
+        g.fillStyle = '#e8c34a'; g.font='9px monospace';
+        g.fillText(k.key, X(k.t0)+3, y+ln.h-3);
+        g.strokeStyle='#e8c34a44'; g.beginPath(); g.moveTo(X(k.t0),y); g.lineTo(X(k.t0),y+ln.h); g.stroke();
+      }
+    }
+    if (ln.k === 'timbre'){
+      const c = SONG.lanes.cent, n = c.length, mx = Math.max(...c)+1;
+      g.strokeStyle = '#c86bd9'; g.beginPath();
+      for (let i=0;i<n;i++){ const yy = y+ln.h-4 - (c[i]/mx)*(ln.h-8);
+        i?g.lineTo(i/n*W,yy):g.moveTo(i/n*W,yy); }
+      g.stroke();
+    }
+    g.fillStyle='#4a5a42'; g.font='8px monospace';
+    g.fillText(ln.k.toUpperCase(), 4, y+ln.h-3);
+    y += ln.h + 0;
+  }
+  if (playT != null){ g.fillStyle = '#e8c34a'; g.fillRect(X(playT), 0, 1.2, H); }
+}
+
+function render(){
+  $('#head').style.display='flex'; $('#lanespanel').style.display='block';
+  $('#row2').style.display='flex';
+  $('#title').textContent = SONG.title;
+  $('#meta').textContent = `${SONG.album} · ${mmss(SONG.dur)} · ${SONG.key_global} · ${SONG.bpm} bpm · ${SONG.elements.length} elements`;
+  $('#note').textContent = SONG.note ? `“${SONG.note}” — the listener` : '';
+  const sc = $('#score'); sc.innerHTML='';
+  for (const e of SONG.events){
+    const d = document.createElement('div'); d.className = 'ev-'+e.type;
+    d.innerHTML = `${mmss(e.t)}  <b>${e.type}</b>  ${e.v||''}`;
+    d.onclick = () => play(Math.max(0,e.t-1), e.t+6);
+    sc.appendChild(d);
+  }
+  const els = $('#els'); els.innerHTML='';
+  for (const el of SONG.elements){
+    const c = document.createElement('span'); c.className='el';
+    c.innerHTML = `${el.bars}bar · ${el.fam.slice(0,22)} <small>${mmss(el.t0)} · seam ${el.seam}</small>`;
+    c.title = `${el.t0}–${el.t1}s — plays looped`;
+    c.onclick = () => play(el.t0, el.t1, c, true);
+    els.appendChild(c);
+  }
+  const ly = $('#lyrics'); ly.innerHTML='';
+  if (SONG.lyrics && SONG.lyrics.length){
+    $('#lyrpanel').style.display='block';
+    for (const w of SONG.lyrics){
+      const s = document.createElement('span'); s.textContent = w.w + ' ';
+      s.title = mmss(w.s);
+      s.onclick = () => play(Math.max(0,w.s-0.1), w.e+0.4);
+      ly.appendChild(s);
+    }
+  } else $('#lyrpanel').style.display='none';
+  draw(null);
+  $('#cv').onclick = e => {
+    const r = $('#cv').getBoundingClientRect();
+    play((e.clientX - r.left)/r.width*SONG.dur, null);
+  };
+}
+$('#play').onclick = () => play(0, null);
+$('#stop').onclick = stop;
+
+const SLUGS = ["aeolian-02","aeolian-03","aeolian-05","aeolian-09","aeolian-13","blackwater-10",
+"cathedral-04","cathedral-11","cathedral-14","congregation-13","dustrest-10","dustrest-11",
+"dustrest-12","dustrest-16","dustrest-19","dustrest-20","glass-06","glass-11","glass-15",
+"inthemiddle-10","inthemiddle-38","mallground-18","mallground-19","mallground-27",
+"mareamemory-02","mareamemory-06","mareamemory-14","mareamemory-18","mareamemory-20",
+"mareamemory-25","mareamemory-30","midnightsteppe-17","nightbus-03","nightbus-08"];
+async function open(slug){
+  document.querySelectorAll('#picker button').forEach(b=>b.classList.toggle('on', b.dataset.s===slug));
+  SONG = await (await fetch(`songlanes/${slug}.json`, {cache:'no-cache'})).json();
+  stop(); render();
+}
+const p = $('#picker'); p.innerHTML='';
+for (const s of SLUGS){
+  const b = document.createElement('button'); b.dataset.s = s; b.textContent = s;
+  b.onclick = () => open(s).catch(()=>b.style.opacity=.3);
+  p.appendChild(b);
+}
+open(SLUGS[0]).catch(()=>{ $('#sub').innerHTML += '<br><b style="color:var(--rose)">songlanes/ not built yet — run _dig/song_lanes.py</b>'; });
+addEventListener('resize', ()=>SONG&&draw(null));
+</script>
+</body>
+</html>

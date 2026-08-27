@@ -186,7 +186,13 @@ function nearest(px, py, filter){
 }
 function trigger(s, when){
   const a = player(s);
-  a.loop = (s.eco === 'rhythm' || s.eco === 'keynote');
+  a.loop = (s.eco === 'rhythm' || s.eco === 'keynote') && s.s0 == null;
+  if (s.s0 != null){
+    const seek = () => { a.currentTime = s.s0; };
+    a.readyState >= 1 ? seek() : a.addEventListener('loadedmetadata', seek, {once: true});
+    clearInterval(a._segT);
+    a._segT = setInterval(() => { if (a.currentTime >= s.s1) a.currentTime = s.s0; }, 300);
+  }
   a.play().catch(()=>{});
   paintStamp(s);
   if (tracing) walk.events.push({t: when, id: s.id});
@@ -219,6 +225,7 @@ function updateHover(px, py, when){
   }
 }
 function fadeOut(a){
+  clearInterval(a._segT);
   const t = setInterval(() => { a.volume = Math.max(0, a.volume - 0.12);
     if (a.volume <= 0.01){ a.pause(); clearInterval(t); } }, 40);
 }
@@ -226,7 +233,8 @@ function tip(s){
   const t = $('#tip');
   t.innerHTML = `<b>${s.label}</b><br><small>${s.eco.toUpperCase()} · ${s.cls} · ${s.dur}s` +
     `${s.bpm ? ' · ' + s.bpm + ' bpm' : ''}${s.key ? ' · ' + s.key : ''}` +
-    `${s.hook >= 2 ? ' · ↺' + s.hook : ''}${s.drop ? ' · drop @' + s.drop + 's' : ''}</small>` +
+    `${s.hook >= 2 ? ' · ↺' + s.hook : ''}${s.drop ? ' · drop @' + s.drop + 's' : ''}` +
+    `${s.famname ? '<br>family: “' + s.famname.slice(0, 52) + '”' : ''}</small>` +
     (s.note ? `<br><small style="color:var(--gold);font-style:italic">“${s.note}” — the listener</small>` : '') +
     (s.page ? `<br><small style="color:var(--faint)">alt-click opens its page</small>` : '') +
     (s.phr ? `<br><small style="color:var(--teal)">≈ “${s.phr}”${s.shots ? ' · images: ' + s.shots.join(' ') : ''}</small>` : '');

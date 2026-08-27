@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOUND FAMILIES</title>
+<style>
+:root{--bg:#0a0c0a;--panel:#10140f;--line:#26301f;--ink:#cfe3c8;--dim:#7d8f74;--faint:#4a5a42;
+  --accent:#9ee06a;--gold:#e8c34a;--teal:#4dd9cc;--water:#5ba8f5;--viol:#c86bd9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:13px/1.5 "SF Mono",Menlo,monospace;padding:18px;max-width:1150px;margin:0 auto}
+a{color:var(--teal);text-decoration:none}
+h1{font-size:16px;letter-spacing:.22em;color:var(--accent)}
+#sub{color:var(--dim);font-size:11.5px;margin:6px 0 14px;line-height:1.7}
+#baskets{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:10px 14px;margin-bottom:18px}
+#baskets h2{font-size:10.5px;letter-spacing:.24em;color:var(--gold);margin-bottom:6px}
+#baskets div{font-size:11px;color:var(--dim);padding:1px 0}
+#baskets b{color:var(--viol);font-weight:normal}
+.fam{margin-bottom:22px}
+.fam h2{font-size:13px;color:var(--viol);margin-bottom:2px}
+.fam h2 small{color:var(--faint);font-size:10px;letter-spacing:.1em;margin-left:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;margin-top:8px}
+.seg{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:7px;cursor:pointer}
+.seg:hover{border-color:var(--viol)}
+.seg.playing{border-color:var(--gold)}
+.seg img{width:100%;height:74px;object-fit:fill;border-radius:2px;background:#000;display:block}
+.seg .nm{font-size:10.5px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.seg .tm{color:var(--faint);font-size:9.5px}
+.seg .nt{color:var(--gold);font-size:9.5px;font-style:italic;margin-top:2px;line-height:1.4}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--accent);color:#0a0c0a;
+  padding:5px 14px;border-radius:4px;font-size:11px;display:none;z-index:30}
+</style>
+</head>
+<body>
+<h1>SOUND FAMILIES</h1>
+<div id="sub">discovered from the bottom up — every song segmented where its self-similarity breaks,
+every segment embedded, families found by clustering and <b style="color:var(--ink)">named by their nearest ekphrasis</b> ·
+tiles are difference-amplified spectrograms: <span style="color:#e05c4f">red = mel texture</span> ·
+<span style="color:var(--accent)">green = chroma harmony</span> · <span style="color:var(--water)">blue = onset rhythm</span> ·
+click a segment to hear it (plays the slice out of its parent song) ·
+<a href="sonicfield.html">sonic field ↗</a> · <a href="atlas.html">atlas ↗</a></div>
+<div id="baskets"><h2>THE BASKETS — families that live together inside songs</h2><div id="bl">loading…</div></div>
+<div id="body">loading families…</div>
+<div id="toast"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+let audio = null, timer = null;
+function toast(m){ const t=$('#toast'); t.textContent=m; t.style.display='block';
+  clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',2200); }
+function playSeg(seg, el){
+  if (audio){ audio.pause(); clearInterval(timer); document.querySelectorAll('.playing').forEach(e=>e.classList.remove('playing')); }
+  audio = new Audio(seg.file);
+  const seek = () => { audio.currentTime = seg.s0; };
+  audio.addEventListener('loadedmetadata', seek, {once:true});
+  timer = setInterval(() => { if (audio.currentTime >= seg.s1){ audio.pause(); clearInterval(timer); el.classList.remove('playing'); } }, 250);
+  audio.play().then(()=>el.classList.add('playing')).catch(()=>toast('tap again — browser wanted a gesture'));
+}
+fetch('families.json').then(r=>r.json()).then(j=>{
+  $('#bl').innerHTML = j.baskets.slice(0,10).map(b=>
+    `<div>“<b>${b.a}</b>” &nbsp;+&nbsp; “<b>${b.b}</b>” <span style="color:var(--faint)">— together in ${b.n} songs</span></div>`).join('');
+  const host = $('#body'); host.innerHTML='';
+  const fams = [...j.families].sort((a,b)=>b.segments.length-a.segments.length);
+  for (const f of fams){
+    const el = document.createElement('div'); el.className='fam';
+    el.innerHTML = `<h2>“${f.name}”<small>${f.segments.length} segments</small></h2><div class="grid"></div>`;
+    const g = el.querySelector('.grid');
+    for (const seg of f.segments){
+      const c = document.createElement('div'); c.className='seg';
+      c.innerHTML = `<img loading="lazy" src="${seg.tile}">
+        <div class="nm">${seg.song.split(' — ')[0]}</div>
+        <div class="tm">${seg.s0}–${seg.s1}s · ${(seg.s1-seg.s0).toFixed(0)}s</div>
+        ${seg.note ? `<div class="nt">“${seg.note.slice(0,80)}”</div>` : ''}`;
+      c.onclick = () => playSeg(seg, c);
+      g.appendChild(c);
+    }
+    host.appendChild(el);
+  }
+  toast(`${fams.length} families · ${fams.reduce((a,f)=>a+f.segments.length,0)} segments`);
+}).catch(e=>$('#body').textContent='families.json missing — run _dig/song_families.py · '+e);
+</script>
+</body>
+</html>
