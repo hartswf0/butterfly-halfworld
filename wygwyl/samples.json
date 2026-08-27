@@ -1,0 +1,5330 @@
+{
+ "project": "WYGWYL — the readings, sampleable",
+ "source": "ATLANTIS_VOICE_MASTER (ANT/VO_Mixdowns_RY, session RY 250626)",
+ "drone": "drone/unified-drones-lite.mp3",
+ "counts": {
+  "tracks": 14,
+  "lines": 267,
+  "phrases": 397
+ },
+ "tracks": [
+  {
+   "num": "01",
+   "title": "Out of Life",
+   "mp3": "audio/01_Out of Life_mixdown_RY_250626.mp3",
+   "dur": 88.38,
+   "spec": "spec/01.png",
+   "timing": "timings/01.json",
+   "description": "descriptions/01.md",
+   "halfworld": "01-out-of-life.html",
+   "drone": {
+    "container_start": -0.0,
+    "container_end": 122.99,
+    "poem_start": 29.761875,
+    "poem_end": 117.871875,
+    "offset_in_container": 29.76
+   },
+   "lines": [
+    {
+     "id": "01_L01",
+     "n": 1,
+     "s": 0.05,
+     "e": 6.78,
+     "text": "What we've made we don't want, what we've sold to the world, to ourselves, doesn't exist.",
+     "file": "samples/01/L01.mp3",
+     "phrases": [
+      {
+       "id": "01_L01_P1",
+       "s": 0.05,
+       "e": 2.25,
+       "text": "What we've made we don't want,"
+      },
+      {
+       "id": "01_L01_P2",
+       "s": 3.04,
+       "e": 4.3,
+       "text": "what we've sold to the world,"
+      },
+      {
+       "id": "01_L01_P3",
+       "s": 4.72,
+       "e": 5.58,
+       "text": "to ourselves,"
+      },
+      {
+       "id": "01_L01_P4",
+       "s": 6.0,
+       "e": 6.78,
+       "text": "doesn't exist."
+      }
+     ]
+    },
+    {
+     "id": "01_L02",
+     "n": 2,
+     "s": 7.83,
+     "e": 13.47,
+     "text": "I look for a way out through the hallways, within the drawers and fire escapes, trip",
+     "file": "samples/01/L02.mp3",
+     "phrases": [
+      {
+       "id": "01_L02_P1",
+       "s": 7.83,
+       "e": 9.79,
+       "text": "I look for a way out through the hallways,"
+      },
+      {
+       "id": "01_L02_P2",
+       "s": 10.25,
+       "e": 12.43,
+       "text": "within the drawers and fire escapes,"
+      },
+      {
+       "id": "01_L02_P3",
+       "s": 13.21,
+       "e": 13.47,
+       "text": "trip"
+      }
+     ]
+    },
+    {
+     "id": "01_L03",
+     "n": 3,
+     "s": 13.47,
+     "e": 18.49,
+     "text": "on my own words, falling out of life, and find where you go when you leave.",
+     "file": "samples/01/L03.mp3",
+     "phrases": [
+      {
+       "id": "01_L03_P1",
+       "s": 13.47,
+       "e": 14.41,
+       "text": "on my own words,"
+      },
+      {
+       "id": "01_L03_P2",
+       "s": 14.71,
+       "e": 15.57,
+       "text": "falling out of life,"
+      },
+      {
+       "id": "01_L03_P3",
+       "s": 16.15,
+       "e": 18.49,
+       "text": "and find where you go when you leave."
+      }
+     ]
+    },
+    {
+     "id": "01_L04",
+     "n": 4,
+     "s": 20.22,
+     "e": 26.34,
+     "text": "It was the maze constructed by a tainted love, a known yet unknown pit beneath the quicksands",
+     "file": "samples/01/L04.mp3",
+     "phrases": [
+      {
+       "id": "01_L04_P1",
+       "s": 20.22,
+       "e": 22.94,
+       "text": "It was the maze constructed by a tainted love,"
+      },
+      {
+       "id": "01_L04_P2",
+       "s": 23.48,
+       "e": 26.34,
+       "text": "a known yet unknown pit beneath the quicksands"
+      }
+     ]
+    },
+    {
+     "id": "01_L05",
+     "n": 5,
+     "s": 26.34,
+     "e": 31.97,
+     "text": "of the make-believe haven, and hidden in the overnourished forest of escapism that calls",
+     "file": "samples/01/L05.mp3",
+     "phrases": [
+      {
+       "id": "01_L05_P1",
+       "s": 26.34,
+       "e": 27.58,
+       "text": "of the make -believe haven,"
+      },
+      {
+       "id": "01_L05_P2",
+       "s": 28.67,
+       "e": 31.97,
+       "text": "and hidden in the overnourished forest of escapism that calls"
+      }
+     ]
+    },
+    {
+     "id": "01_L06",
+     "n": 6,
+     "s": 31.97,
+     "e": 32.45,
+     "text": "for you.",
+     "file": "samples/01/L06.mp3",
+     "phrases": [
+      {
+       "id": "01_L06_P1",
+       "s": 31.97,
+       "e": 32.45,
+       "text": "for you."
+      }
+     ]
+    },
+    {
+     "id": "01_L07",
+     "n": 7,
+     "s": 33.18,
+     "e": 39.5,
+     "text": "At this age, I'll follow, following the full distance between us almost having it all and",
+     "file": "samples/01/L07.mp3",
+     "phrases": [
+      {
+       "id": "01_L07_P1",
+       "s": 33.18,
+       "e": 33.98,
+       "text": "At this age,"
+      },
+      {
+       "id": "01_L07_P2",
+       "s": 34.48,
+       "e": 35.18,
+       "text": "I'll follow,"
+      },
+      {
+       "id": "01_L07_P3",
+       "s": 35.84,
+       "e": 39.5,
+       "text": "following the full distance between us almost having it all and"
+      }
+     ]
+    },
+    {
+     "id": "01_L08",
+     "n": 8,
+     "s": 39.5,
+     "e": 42.56,
+     "text": "starting anew, to rediscover when love was real.",
+     "file": "samples/01/L08.mp3",
+     "phrases": [
+      {
+       "id": "01_L08_P1",
+       "s": 39.5,
+       "e": 40.18,
+       "text": "starting anew,"
+      },
+      {
+       "id": "01_L08_P2",
+       "s": 40.88,
+       "e": 42.56,
+       "text": "to rediscover when love was real."
+      }
+     ]
+    },
+    {
+     "id": "01_L09",
+     "n": 9,
+     "s": 43.96,
+     "e": 49.78,
+     "text": "I failed at protecting you from your own vices, crashing the party of your evilest instincts",
+     "file": "samples/01/L09.mp3",
+     "phrases": [
+      {
+       "id": "01_L09_P1",
+       "s": 43.96,
+       "e": 46.7,
+       "text": "I failed at protecting you from your own vices,"
+      },
+      {
+       "id": "01_L09_P2",
+       "s": 47.5,
+       "e": 49.78,
+       "text": "crashing the party of your evilest instincts"
+      }
+     ]
+    },
+    {
+     "id": "01_L10",
+     "n": 10,
+     "s": 49.78,
+     "e": 57.14,
+     "text": "to find vibrations that echo in silence, love and hate languages that translate and slow",
+     "file": "samples/01/L10.mp3",
+     "phrases": [
+      {
+       "id": "01_L10_P1",
+       "s": 49.78,
+       "e": 52.9,
+       "text": "to find vibrations that echo in silence,"
+      },
+      {
+       "id": "01_L10_P2",
+       "s": 53.86,
+       "e": 57.14,
+       "text": "love and hate languages that translate and slow"
+      }
+     ]
+    },
+    {
+     "id": "01_L11",
+     "n": 11,
+     "s": 57.14,
+     "e": 62.58,
+     "text": "dripping blood salivating on imminent doubts, fully awakening to our darkest nights.",
+     "file": "samples/01/L11.mp3",
+     "phrases": [
+      {
+       "id": "01_L11_P1",
+       "s": 57.14,
+       "e": 59.8,
+       "text": "dripping blood salivating on imminent doubts,"
+      },
+      {
+       "id": "01_L11_P2",
+       "s": 60.2,
+       "e": 62.58,
+       "text": "fully awakening to our darkest nights."
+      }
+     ]
+    },
+    {
+     "id": "01_L12",
+     "n": 12,
+     "s": 64.03,
+     "e": 69.63,
+     "text": "Pause for a second, a spectrum of fields will thread needles of garments made of sweet memories",
+     "file": "samples/01/L12.mp3",
+     "phrases": [
+      {
+       "id": "01_L12_P1",
+       "s": 64.03,
+       "e": 65.03,
+       "text": "Pause for a second,"
+      },
+      {
+       "id": "01_L12_P2",
+       "s": 65.77,
+       "e": 69.63,
+       "text": "a spectrum of fields will thread needles of garments made of sweet memories"
+      }
+     ]
+    },
+    {
+     "id": "01_L13",
+     "n": 13,
+     "s": 70.25,
+     "e": 74.57,
+     "text": "and photographs, film and fiction that leave me empty.",
+     "file": "samples/01/L13.mp3",
+     "phrases": [
+      {
+       "id": "01_L13_P1",
+       "s": 70.25,
+       "e": 71.13,
+       "text": "and photographs,"
+      },
+      {
+       "id": "01_L13_P2",
+       "s": 71.47,
+       "e": 74.57,
+       "text": "film and fiction that leave me empty."
+      }
+     ]
+    },
+    {
+     "id": "01_L14",
+     "n": 14,
+     "s": 75.44,
+     "e": 80.92,
+     "text": "With your back faced against me, you offer me a new pursuit of happiness as I stumble",
+     "file": "samples/01/L14.mp3",
+     "phrases": [
+      {
+       "id": "01_L14_P1",
+       "s": 75.44,
+       "e": 77.14,
+       "text": "With your back faced against me,"
+      },
+      {
+       "id": "01_L14_P2",
+       "s": 77.44,
+       "e": 80.92,
+       "text": "you offer me a new pursuit of happiness as I stumble"
+      }
+     ]
+    },
+    {
+     "id": "01_L15",
+     "n": 15,
+     "s": 80.92,
+     "e": 86.34,
+     "text": "on my own words, landing into the secret of where you go when you leave, and I fall",
+     "file": "samples/01/L15.mp3",
+     "phrases": [
+      {
+       "id": "01_L15_P1",
+       "s": 80.92,
+       "e": 81.88,
+       "text": "on my own words,"
+      },
+      {
+       "id": "01_L15_P2",
+       "s": 82.18,
+       "e": 85.14,
+       "text": "landing into the secret of where you go when you leave,"
+      },
+      {
+       "id": "01_L15_P3",
+       "s": 85.54,
+       "e": 86.34,
+       "text": "and I fall"
+      }
+     ]
+    },
+    {
+     "id": "01_L16",
+     "n": 16,
+     "s": 86.34,
+     "e": 86.86,
+     "text": "out of life.",
+     "file": "samples/01/L16.mp3",
+     "phrases": [
+      {
+       "id": "01_L16_P1",
+       "s": 86.34,
+       "e": 86.86,
+       "text": "out of life."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "num": "02",
+   "title": "Flashing Lights",
+   "mp3": "audio/02_Flashing Lights_mixdown_RY_250626.mp3",
+   "dur": 81.58,
+   "spec": "spec/02.png",
+   "timing": "timings/02.json",
+   "description": "descriptions/02.md",
+   "halfworld": "02-flashing-lights.html",
+   "drone": {
+    "container_start": 122.987042,
+    "container_end": 214.107042,
+    "poem_start": 127.634792,
+    "poem_end": 209.174792,
+    "offset_in_container": 4.65
+   },
+   "lines": [
+    {
+     "id": "02_L01",
+     "n": 1,
+     "s": 0.0,
+     "e": 3.98,
+     "text": "I heard a scream for help while falling with my headlights off.",
+     "file": "samples/02/L01.mp3",
+     "phrases": [
+      {
+       "id": "02_L01_P1",
+       "s": 0.0,
+       "e": 3.98,
+       "text": "I heard a scream for help while falling with my headlights off."
+      }
+     ]
+    },
+    {
+     "id": "02_L02",
+     "n": 2,
+     "s": 4.56,
+     "e": 9.36,
+     "text": "It was a type of silent scream a trap lover makes to escape a pending marriage,",
+     "file": "samples/02/L02.mp3",
+     "phrases": [
+      {
+       "id": "02_L02_P1",
+       "s": 4.56,
+       "e": 9.36,
+       "text": "It was a type of silent scream a trap lover makes to escape a pending marriage,"
+      }
+     ]
+    },
+    {
+     "id": "02_L03",
+     "n": 3,
+     "s": 10.04,
+     "e": 16.22,
+     "text": "a concussion, a set of walls caving inward, seething and simmering,",
+     "file": "samples/02/L03.mp3",
+     "phrases": [
+      {
+       "id": "02_L03_P1",
+       "s": 10.04,
+       "e": 10.7,
+       "text": "a concussion,"
+      },
+      {
+       "id": "02_L03_P2",
+       "s": 11.48,
+       "e": 13.32,
+       "text": "a set of walls caving inward,"
+      },
+      {
+       "id": "02_L03_P3",
+       "s": 13.94,
+       "e": 16.22,
+       "text": "seething and simmering,"
+      }
+     ]
+    },
+    {
+     "id": "02_L04",
+     "n": 4,
+     "s": 16.64,
+     "e": 18.76,
+     "text": "and a solitude of crowds and smiles.",
+     "file": "samples/02/L04.mp3",
+     "phrases": [
+      {
+       "id": "02_L04_P1",
+       "s": 16.64,
+       "e": 18.76,
+       "text": "and a solitude of crowds and smiles."
+      }
+     ]
+    },
+    {
+     "id": "02_L05",
+     "n": 5,
+     "s": 20.16,
+     "e": 23.22,
+     "text": "I received an emergency call while tossing and turning.",
+     "file": "samples/02/L05.mp3",
+     "phrases": [
+      {
+       "id": "02_L05_P1",
+       "s": 20.16,
+       "e": 23.22,
+       "text": "I received an emergency call while tossing and turning."
+      }
+     ]
+    },
+    {
+     "id": "02_L06",
+     "n": 6,
+     "s": 23.48,
+     "e": 27.92,
+     "text": "It was a type of silent call a man makes to the mirror after midnight.",
+     "file": "samples/02/L06.mp3",
+     "phrases": [
+      {
+       "id": "02_L06_P1",
+       "s": 23.48,
+       "e": 27.92,
+       "text": "It was a type of silent call a man makes to the mirror after midnight."
+      }
+     ]
+    },
+    {
+     "id": "02_L07",
+     "n": 7,
+     "s": 28.75,
+     "e": 35.66,
+     "text": "To digest the truth, a windless insomnia and epiphany of a road winding down.",
+     "file": "samples/02/L07.mp3",
+     "phrases": [
+      {
+       "id": "02_L07_P1",
+       "s": 28.75,
+       "e": 29.99,
+       "text": "To digest the truth,"
+      },
+      {
+       "id": "02_L07_P2",
+       "s": 31.04,
+       "e": 35.66,
+       "text": "a windless insomnia and epiphany of a road winding down."
+      }
+     ]
+    },
+    {
+     "id": "02_L08",
+     "n": 8,
+     "s": 36.84,
+     "e": 44.41,
+     "text": "After a day of life dilated at the sun as long and as wise as possible, we won't make it.",
+     "file": "samples/02/L08.mp3",
+     "phrases": [
+      {
+       "id": "02_L08_P1",
+       "s": 36.84,
+       "e": 42.46,
+       "text": "After a day of life dilated at the sun as long and as wise as possible,"
+      },
+      {
+       "id": "02_L08_P2",
+       "s": 43.41,
+       "e": 44.41,
+       "text": "we won't make it."
+      }
+     ]
+    },
+    {
+     "id": "02_L09",
+     "n": 9,
+     "s": 45.8,
+     "e": 51.42,
+     "text": "I was six I recall when the ghost of a dead and loveless seven-year-old child appeared",
+     "file": "samples/02/L09.mp3",
+     "phrases": [
+      {
+       "id": "02_L09_P1",
+       "s": 45.8,
+       "e": 51.42,
+       "text": "I was six I recall when the ghost of a dead and loveless seven -year -old child appeared"
+      }
+     ]
+    },
+    {
+     "id": "02_L10",
+     "n": 10,
+     "s": 52.2,
+     "e": 55.16,
+     "text": "and shared that my parents marriage wouldn't last.",
+     "file": "samples/02/L10.mp3",
+     "phrases": [
+      {
+       "id": "02_L10_P1",
+       "s": 52.2,
+       "e": 55.16,
+       "text": "and shared that my parents marriage wouldn't last."
+      }
+     ]
+    },
+    {
+     "id": "02_L11",
+     "n": 11,
+     "s": 56.35,
+     "e": 59.23,
+     "text": "It was a type of warm and heavy breeze in winter",
+     "file": "samples/02/L11.mp3",
+     "phrases": [
+      {
+       "id": "02_L11_P1",
+       "s": 56.35,
+       "e": 59.23,
+       "text": "It was a type of warm and heavy breeze in winter"
+      }
+     ]
+    },
+    {
+     "id": "02_L12",
+     "n": 12,
+     "s": 59.76,
+     "e": 62.09,
+     "text": "where a child is left home alone.",
+     "file": "samples/02/L12.mp3",
+     "phrases": [
+      {
+       "id": "02_L12_P1",
+       "s": 59.76,
+       "e": 62.09,
+       "text": "where a child is left home alone."
+      }
+     ]
+    },
+    {
+     "id": "02_L13",
+     "n": 13,
+     "s": 62.65,
+     "e": 69.03,
+     "text": "With curtains pulled and blinds up as far and as wise as possible to see flashing lights",
+     "file": "samples/02/L13.mp3",
+     "phrases": [
+      {
+       "id": "02_L13_P1",
+       "s": 62.65,
+       "e": 69.03,
+       "text": "With curtains pulled and blinds up as far and as wise as possible to see flashing lights"
+      }
+     ]
+    },
+    {
+     "id": "02_L14",
+     "n": 14,
+     "s": 69.58,
+     "e": 73.95,
+     "text": "and the whispering screams of two souls on a road winding down.",
+     "file": "samples/02/L14.mp3",
+     "phrases": [
+      {
+       "id": "02_L14_P1",
+       "s": 69.58,
+       "e": 73.95,
+       "text": "and the whispering screams of two souls on a road winding down."
+      }
+     ]
+    },
+    {
+     "id": "02_L15",
+     "n": 15,
+     "s": 74.89,
+     "e": 80.75,
+     "text": "And no tears and no fucks, no love to give, old to teach.",
+     "file": "samples/02/L15.mp3",
+     "phrases": [
+      {
+       "id": "02_L15_P1",
+       "s": 74.89,
+       "e": 77.43,
+       "text": "And no tears and no fucks,"
+      },
+      {
+       "id": "02_L15_P2",
+       "s": 77.99,
+       "e": 79.19,
+       "text": "no love to give,"
+      },
+      {
+       "id": "02_L15_P3",
+       "s": 79.77,
+       "e": 80.75,
+       "text": "old to teach."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "num": "03",
+   "title": "How to Break off an Engagement",
+   "mp3": "audio/03_How to Break off an Engagement_mixdown_RY_250626.mp3",
+   "dur": 62.52,
+   "spec": "spec/03.png",
+   "timing": "timings/03.json",
+   "description": "descriptions/03.md",
+   "halfworld": "03-how-to-break-off-an-engagement.html",
+   "drone": {
+    "container_start": 214.108,
+    "container_end": 286.508,
+    "poem_start": 219.509803,
+    "poem_end": 281.169803,
+    "offset_in_container": 5.4
+   },
+   "lines": [
+    {
+     "id": "03_L01",
+     "n": 1,
+     "s": 0.46,
+     "e": 13.74,
+     "text": "Old to forever, a tambourine sounds off an empty temple, empty choir stands, empty prayer lines, and abandoned Baptist pools,",
+     "file": "samples/03/L01.mp3",
+     "phrases": [
+      {
+       "id": "03_L01_P1",
+       "s": 0.46,
+       "e": 1.74,
+       "text": "Old to forever,"
+      },
+      {
+       "id": "03_L01_P2",
+       "s": 3.1,
+       "e": 6.33,
+       "text": "a tambourine sounds off an empty temple,"
+      },
+      {
+       "id": "03_L01_P3",
+       "s": 7.59,
+       "e": 8.79,
+       "text": "empty choir stands,"
+      },
+      {
+       "id": "03_L01_P4",
+       "s": 9.85,
+       "e": 11.05,
+       "text": "empty prayer lines,"
+      },
+      {
+       "id": "03_L01_P5",
+       "s": 12.12,
+       "e": 13.74,
+       "text": "and abandoned Baptist pools,"
+      }
+     ]
+    },
+    {
+     "id": "03_L02",
+     "n": 2,
+     "s": 14.94,
+     "e": 19.7,
+     "text": "pews taken by cobwebs, and doused in disintegration.",
+     "file": "samples/03/L02.mp3",
+     "phrases": [
+      {
+       "id": "03_L02_P1",
+       "s": 14.94,
+       "e": 17.1,
+       "text": "pews taken by cobwebs,"
+      },
+      {
+       "id": "03_L02_P2",
+       "s": 17.66,
+       "e": 19.7,
+       "text": "and doused in disintegration."
+      }
+     ]
+    },
+    {
+     "id": "03_L03",
+     "n": 3,
+     "s": 21.53,
+     "e": 28.47,
+     "text": "Spirits have left salvations and opened gift boxes placed outside the side doors.",
+     "file": "samples/03/L03.mp3",
+     "phrases": [
+      {
+       "id": "03_L03_P1",
+       "s": 21.53,
+       "e": 28.47,
+       "text": "Spirits have left salvations and opened gift boxes placed outside the side doors."
+      }
+     ]
+    },
+    {
+     "id": "03_L04",
+     "n": 4,
+     "s": 28.47,
+     "e": 34.31,
+     "text": "It thunders, then it rains until nothing remains.",
+     "file": "samples/03/L04.mp3",
+     "phrases": [
+      {
+       "id": "03_L04_P1",
+       "s": 28.47,
+       "e": 29.71,
+       "text": "It"
+      },
+      {
+       "id": "03_L04_P2",
+       "s": 30.35,
+       "e": 30.99,
+       "text": "thunders,"
+      },
+      {
+       "id": "03_L04_P3",
+       "s": 31.71,
+       "e": 34.31,
+       "text": "then it rains until nothing remains."
+      }
+     ]
+    },
+    {
+     "id": "03_L05",
+     "n": 5,
+     "s": 35.68,
+     "e": 39.86,
+     "text": "Old to the storm ending, what was once love now goods,",
+     "file": "samples/03/L05.mp3",
+     "phrases": [
+      {
+       "id": "03_L05_P1",
+       "s": 35.68,
+       "e": 36.88,
+       "text": "Old to the storm ending,"
+      },
+      {
+       "id": "03_L05_P2",
+       "s": 37.86,
+       "e": 39.86,
+       "text": "what was once love now goods,"
+      }
+     ]
+    },
+    {
+     "id": "03_L06",
+     "n": 6,
+     "s": 40.68,
+     "e": 43.66,
+     "text": "broken and sealed apart by lightning,",
+     "file": "samples/03/L06.mp3",
+     "phrases": [
+      {
+       "id": "03_L06_P1",
+       "s": 40.68,
+       "e": 43.66,
+       "text": "broken and sealed apart by lightning,"
+      }
+     ]
+    },
+    {
+     "id": "03_L07",
+     "n": 7,
+     "s": 44.52,
+     "e": 48.24,
+     "text": "daily breads soaked and delivered rotted by rain,",
+     "file": "samples/03/L07.mp3",
+     "phrases": [
+      {
+       "id": "03_L07_P1",
+       "s": 44.52,
+       "e": 48.24,
+       "text": "daily breads soaked and delivered rotted by rain,"
+      }
+     ]
+    },
+    {
+     "id": "03_L08",
+     "n": 8,
+     "s": 49.26,
+     "e": 51.9,
+     "text": "and blankets soiled by venomous puppeteers,",
+     "file": "samples/03/L08.mp3",
+     "phrases": [
+      {
+       "id": "03_L08_P1",
+       "s": 49.26,
+       "e": 51.9,
+       "text": "and blankets soiled by venomous puppeteers,"
+      }
+     ]
+    },
+    {
+     "id": "03_L09",
+     "n": 9,
+     "s": 53.52,
+     "e": 56.44,
+     "text": "old to two sets of button-printed footsteps,",
+     "file": "samples/03/L09.mp3",
+     "phrases": [
+      {
+       "id": "03_L09_P1",
+       "s": 53.52,
+       "e": 56.44,
+       "text": "old to two sets of button -printed footsteps,"
+      }
+     ]
+    },
+    {
+     "id": "03_L10",
+     "n": 10,
+     "s": 56.44,
+     "e": 61.18,
+     "text": "and a tambourine shattered into pieces.",
+     "file": "samples/03/L10.mp3",
+     "phrases": [
+      {
+       "id": "03_L10_P1",
+       "s": 56.44,
+       "e": 61.18,
+       "text": "and a tambourine shattered into pieces."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "num": "04",
+   "title": "Nevermore",
+   "mp3": "audio/04_Nevermore_mixdown_RY_250626.mp3",
+   "dur": 130.95,
+   "spec": "spec/04.png",
+   "timing": "timings/04.json",
+   "description": "descriptions/04.md",
+   "halfworld": "04-nevermore.html",
+   "drone": {
+    "container_start": 286.512563,
+    "container_end": 421.781771,
+    "poem_start": 291.411771,
+    "poem_end": 421.781771,
+    "offset_in_container": 4.9
+   },
+   "lines": [
+    {
+     "id": "04_L01",
+     "n": 1,
+     "s": 0.11,
+     "e": 8.09,
+     "text": "What if I follow this trail to where the broken pieces have washed ashore and the ashes of expired wildfires",
+     "file": "samples/04/L01.mp3",
+     "phrases": [
+      {
+       "id": "04_L01_P1",
+       "s": 0.11,
+       "e": 8.09,
+       "text": "What if I follow this trail to where the broken pieces have washed ashore and the ashes of expired wildfires"
+      }
+     ]
+    },
+    {
+     "id": "04_L02",
+     "n": 2,
+     "s": 8.61,
+     "e": 10.25,
+     "text": "cover sands and debris",
+     "file": "samples/04/L02.mp3",
+     "phrases": [
+      {
+       "id": "04_L02_P1",
+       "s": 8.61,
+       "e": 10.25,
+       "text": "cover sands and debris"
+      }
+     ]
+    },
+    {
+     "id": "04_L03",
+     "n": 3,
+     "s": 10.85,
+     "e": 13.27,
+     "text": "lift it from the night seawater's floor.",
+     "file": "samples/04/L03.mp3",
+     "phrases": [
+      {
+       "id": "04_L03_P1",
+       "s": 10.85,
+       "e": 13.27,
+       "text": "lift it from the night seawater's floor."
+      }
+     ]
+    },
+    {
+     "id": "04_L04",
+     "n": 4,
+     "s": 14.63,
+     "e": 21.15,
+     "text": "The waves will calm to fold it whispers and the winds will mute the trees for the right level of silence",
+     "file": "samples/04/L04.mp3",
+     "phrases": [
+      {
+       "id": "04_L04_P1",
+       "s": 14.63,
+       "e": 21.15,
+       "text": "The waves will calm to fold it whispers and the winds will mute the trees for the right level of silence"
+      }
+     ]
+    },
+    {
+     "id": "04_L05",
+     "n": 5,
+     "s": 21.15,
+     "e": 26.95,
+     "text": "to find a throbbing heart left at the midlife corner returned toward the incline.",
+     "file": "samples/04/L05.mp3",
+     "phrases": [
+      {
+       "id": "04_L05_P1",
+       "s": 21.15,
+       "e": 26.95,
+       "text": "to find a throbbing heart left at the midlife corner returned toward the incline."
+      }
+     ]
+    },
+    {
+     "id": "04_L06",
+     "n": 6,
+     "s": 28.35,
+     "e": 29.51,
+     "text": "A familiar heart",
+     "file": "samples/04/L06.mp3",
+     "phrases": [
+      {
+       "id": "04_L06_P1",
+       "s": 28.35,
+       "e": 29.51,
+       "text": "A familiar heart"
+      }
+     ]
+    },
+    {
+     "id": "04_L07",
+     "n": 7,
+     "s": 29.51,
+     "e": 33.53,
+     "text": "which has shaken off every sad blue note life can perform",
+     "file": "samples/04/L07.mp3",
+     "phrases": [
+      {
+       "id": "04_L07_P1",
+       "s": 29.51,
+       "e": 33.53,
+       "text": "which has shaken off every sad blue note life can perform"
+      }
+     ]
+    },
+    {
+     "id": "04_L08",
+     "n": 8,
+     "s": 33.53,
+     "e": 36.07,
+     "text": "to overcome and spread inspiration",
+     "file": "samples/04/L08.mp3",
+     "phrases": [
+      {
+       "id": "04_L08_P1",
+       "s": 33.53,
+       "e": 36.07,
+       "text": "to overcome and spread inspiration"
+      }
+     ]
+    },
+    {
+     "id": "04_L09",
+     "n": 9,
+     "s": 36.94,
+     "e": 43.14,
+     "text": "and it used to be mine. I'll lift it with care putting it back in place and tell myself",
+     "file": "samples/04/L09.mp3",
+     "phrases": [
+      {
+       "id": "04_L09_P1",
+       "s": 36.94,
+       "e": 38.48,
+       "text": "and it used to be mine."
+      },
+      {
+       "id": "04_L09_P2",
+       "s": 39.8,
+       "e": 43.14,
+       "text": "I'll lift it with care putting it back in place and tell myself"
+      }
+     ]
+    },
+    {
+     "id": "04_L10",
+     "n": 10,
+     "s": 44.07,
+     "e": 44.67,
+     "text": "nevermore.",
+     "file": "samples/04/L10.mp3",
+     "phrases": [
+      {
+       "id": "04_L10_P1",
+       "s": 44.07,
+       "e": 44.67,
+       "text": "nevermore."
+      }
+     ]
+    },
+    {
+     "id": "04_L11",
+     "n": 11,
+     "s": 46.16,
+     "e": 50.86,
+     "text": "What if I follow this reclaimed heart to where the puzzle pieces of faith are handcrafted",
+     "file": "samples/04/L11.mp3",
+     "phrases": [
+      {
+       "id": "04_L11_P1",
+       "s": 46.16,
+       "e": 50.86,
+       "text": "What if I follow this reclaimed heart to where the puzzle pieces of faith are handcrafted"
+      }
+     ]
+    },
+    {
+     "id": "04_L12",
+     "n": 12,
+     "s": 51.58,
+     "e": 56.46,
+     "text": "scrambled and scattered as mustard seas into the vast moonlight night's field.",
+     "file": "samples/04/L12.mp3",
+     "phrases": [
+      {
+       "id": "04_L12_P1",
+       "s": 51.58,
+       "e": 56.46,
+       "text": "scrambled and scattered as mustard seas into the vast moonlight night's field."
+      }
+     ]
+    },
+    {
+     "id": "04_L13",
+     "n": 13,
+     "s": 56.46,
+     "e": 62.06,
+     "text": "The plants in a golden hue bloom and face toward me in anticipation.",
+     "file": "samples/04/L13.mp3",
+     "phrases": [
+      {
+       "id": "04_L13_P1",
+       "s": 56.46,
+       "e": 62.06,
+       "text": "The plants in a golden hue bloom and face toward me in anticipation."
+      }
+     ]
+    },
+    {
+     "id": "04_L14",
+     "n": 14,
+     "s": 63.43,
+     "e": 69.61,
+     "text": "The weeds repel falling into the shadows where our memories hide and mean so little in moments of defeat",
+     "file": "samples/04/L14.mp3",
+     "phrases": [
+      {
+       "id": "04_L14_P1",
+       "s": 63.43,
+       "e": 69.61,
+       "text": "The weeds repel falling into the shadows where our memories hide and mean so little in moments of defeat"
+      }
+     ]
+    },
+    {
+     "id": "04_L15",
+     "n": 15,
+     "s": 69.61,
+     "e": 71.47,
+     "text": "as I'm called forward.",
+     "file": "samples/04/L15.mp3",
+     "phrases": [
+      {
+       "id": "04_L15_P1",
+       "s": 69.61,
+       "e": 71.47,
+       "text": "as I'm called forward."
+      }
+     ]
+    },
+    {
+     "id": "04_L16",
+     "n": 16,
+     "s": 73.08,
+     "e": 78.36,
+     "text": "The clouds meet the stars for the deepest level of darkness welcoming extra hard work",
+     "file": "samples/04/L16.mp3",
+     "phrases": [
+      {
+       "id": "04_L16_P1",
+       "s": 73.08,
+       "e": 78.36,
+       "text": "The clouds meet the stars for the deepest level of darkness welcoming extra hard work"
+      }
+     ]
+    },
+    {
+     "id": "04_L17",
+     "n": 17,
+     "s": 78.36,
+     "e": 85.32,
+     "text": "to search for the bare ground for two hands. Hands that once could tusk dusk after dusk",
+     "file": "samples/04/L17.mp3",
+     "phrases": [
+      {
+       "id": "04_L17_P1",
+       "s": 78.36,
+       "e": 81.94,
+       "text": "to search for the bare ground for two hands."
+      },
+      {
+       "id": "04_L17_P2",
+       "s": 82.36,
+       "e": 85.32,
+       "text": "Hands that once could tusk dusk after dusk"
+      }
+     ]
+    },
+    {
+     "id": "04_L18",
+     "n": 18,
+     "s": 85.32,
+     "e": 89.58,
+     "text": "find and celebrate a new life and feel good",
+     "file": "samples/04/L18.mp3",
+     "phrases": [
+      {
+       "id": "04_L18_P1",
+       "s": 85.32,
+       "e": 89.58,
+       "text": "find and celebrate a new life and feel good"
+      }
+     ]
+    },
+    {
+     "id": "04_L19",
+     "n": 19,
+     "s": 90.48,
+     "e": 92.58,
+     "text": "and they too used to be mine.",
+     "file": "samples/04/L19.mp3",
+     "phrases": [
+      {
+       "id": "04_L19_P1",
+       "s": 90.48,
+       "e": 92.58,
+       "text": "and they too used to be mine."
+      }
+     ]
+    },
+    {
+     "id": "04_L20",
+     "n": 20,
+     "s": 94.62,
+     "e": 98.96,
+     "text": "I put them back on with the care of my future at stake and say to myself",
+     "file": "samples/04/L20.mp3",
+     "phrases": [
+      {
+       "id": "04_L20_P1",
+       "s": 94.62,
+       "e": 98.96,
+       "text": "I put them back on with the care of my future at stake and say to myself"
+      }
+     ]
+    },
+    {
+     "id": "04_L21",
+     "n": 21,
+     "s": 98.96,
+     "e": 104.33,
+     "text": "nevermore. I've wanted the world and lost my soul.",
+     "file": "samples/04/L21.mp3",
+     "phrases": [
+      {
+       "id": "04_L21_P1",
+       "s": 98.96,
+       "e": 100.24,
+       "text": "nevermore."
+      },
+      {
+       "id": "04_L21_P2",
+       "s": 102.15,
+       "e": 104.33,
+       "text": "I've wanted the world and lost my soul."
+      }
+     ]
+    },
+    {
+     "id": "04_L22",
+     "n": 22,
+     "s": 105.32,
+     "e": 109.32,
+     "text": "I want nothing more than to just be myself and nothing more",
+     "file": "samples/04/L22.mp3",
+     "phrases": [
+      {
+       "id": "04_L22_P1",
+       "s": 105.32,
+       "e": 109.32,
+       "text": "I want nothing more than to just be myself and nothing more"
+      }
+     ]
+    },
+    {
+     "id": "04_L23",
+     "n": 23,
+     "s": 109.8,
+     "e": 113.68,
+     "text": "and be alright. I do believe I'll be alright.",
+     "file": "samples/04/L23.mp3",
+     "phrases": [
+      {
+       "id": "04_L23_P1",
+       "s": 109.8,
+       "e": 111.24,
+       "text": "and be alright."
+      },
+      {
+       "id": "04_L23_P2",
+       "s": 112.02,
+       "e": 113.68,
+       "text": "I do believe I'll be alright."
+      }
+     ]
+    },
+    {
+     "id": "04_L24",
+     "n": 24,
+     "s": 115.24,
+     "e": 121.84,
+     "text": "This reclaimed and dust settled heart rediscovered but dusted hands remind me",
+     "file": "samples/04/L24.mp3",
+     "phrases": [
+      {
+       "id": "04_L24_P1",
+       "s": 115.24,
+       "e": 121.84,
+       "text": "This reclaimed and dust settled heart rediscovered but dusted hands remind me"
+      }
+     ]
+    },
+    {
+     "id": "04_L25",
+     "n": 25,
+     "s": 121.84,
+     "e": 127.12,
+     "text": "but say to me in this still muted tree in night garden feels silence",
+     "file": "samples/04/L25.mp3",
+     "phrases": [
+      {
+       "id": "04_L25_P1",
+       "s": 121.84,
+       "e": 127.12,
+       "text": "but say to me in this still muted tree in night garden feels silence"
+      }
+     ]
+    },
+    {
+     "id": "04_L26",
+     "n": 26,
+     "s": 127.68,
+     "e": 128.74,
+     "text": "nevermore.",
+     "file": "samples/04/L26.mp3",
+     "phrases": [
+      {
+       "id": "04_L26_P1",
+       "s": 127.68,
+       "e": 128.74,
+       "text": "nevermore."
+      }
+     ]
+    },
+    {
+     "id": "04_L27",
+     "n": 27,
+     "s": 129.26,
+     "e": 129.9,
+     "text": "Now go.",
+     "file": "samples/04/L27.mp3",
+     "phrases": [
+      {
+       "id": "04_L27_P1",
+       "s": 129.26,
+       "e": 129.9,
+       "text": "Now go."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "num": "05",
+   "title": "Bloodline",
+   "mp3": "audio/05_Bloodline_mixdown_RY_250626.mp3",
+   "dur": 74.07,
+   "spec": "spec/05.png",
+   "timing": "timings/05.json",
+   "description": "descriptions/05.md",
+   "halfworld": "05-bloodlines.html",
+   "drone": {
+    "container_start": 422.183771,
+    "container_end": 513.213771,
+    "poem_start": 434.011768,
+    "poem_end": 507.961768,
+    "offset_in_container": 11.83
+   },
+   "lines": [
+    {
+     "id": "05_L01",
+     "n": 1,
+     "s": 0.0,
+     "e": 2.54,
+     "text": "They tell me to ask if I can inherit the earth,",
+     "file": "samples/05/L01.mp3",
+     "phrases": [
+      {
+       "id": "05_L01_P1",
+       "s": 0.0,
+       "e": 2.54,
+       "text": "They tell me to ask if I can inherit the earth,"
+      }
+     ]
+    },
+    {
+     "id": "05_L02",
+     "n": 2,
+     "s": 3.6,
+     "e": 7.7,
+     "text": "to ask if I can name my own stars, even galaxies if I may.",
+     "file": "samples/05/L02.mp3",
+     "phrases": [
+      {
+       "id": "05_L02_P1",
+       "s": 3.6,
+       "e": 5.94,
+       "text": "to ask if I can name my own stars,"
+      },
+      {
+       "id": "05_L02_P2",
+       "s": 6.14,
+       "e": 7.7,
+       "text": "even galaxies if I may."
+      }
+     ]
+    },
+    {
+     "id": "05_L03",
+     "n": 3,
+     "s": 8.96,
+     "e": 10.94,
+     "text": "The past too was waiting for me.",
+     "file": "samples/05/L03.mp3",
+     "phrases": [
+      {
+       "id": "05_L03_P1",
+       "s": 8.96,
+       "e": 10.94,
+       "text": "The past too was waiting for me."
+      }
+     ]
+    },
+    {
+     "id": "05_L04",
+     "n": 4,
+     "s": 11.57,
+     "e": 14.99,
+     "text": "Coming of age in the shared rooms of human basements",
+     "file": "samples/05/L04.mp3",
+     "phrases": [
+      {
+       "id": "05_L04_P1",
+       "s": 11.57,
+       "e": 14.99,
+       "text": "Coming of age in the shared rooms of human basements"
+      }
+     ]
+    },
+    {
+     "id": "05_L05",
+     "n": 5,
+     "s": 14.99,
+     "e": 18.94,
+     "text": "as bedrooms, mattress pads where the wood beams",
+     "file": "samples/05/L05.mp3",
+     "phrases": [
+      {
+       "id": "05_L05_P1",
+       "s": 14.99,
+       "e": 15.77,
+       "text": "as bedrooms,"
+      },
+      {
+       "id": "05_L05_P2",
+       "s": 17.16,
+       "e": 18.94,
+       "text": "mattress pads where the wood beams"
+      }
+     ]
+    },
+    {
+     "id": "05_L06",
+     "n": 6,
+     "s": 18.94,
+     "e": 23.23,
+     "text": "of southern pine could comfort my spine, it didn't.",
+     "file": "samples/05/L06.mp3",
+     "phrases": [
+      {
+       "id": "05_L06_P1",
+       "s": 18.94,
+       "e": 21.26,
+       "text": "of southern pine could comfort my spine,"
+      },
+      {
+       "id": "05_L06_P2",
+       "s": 22.29,
+       "e": 23.23,
+       "text": "it didn't."
+      }
+     ]
+    },
+    {
+     "id": "05_L07",
+     "n": 7,
+     "s": 24.23,
+     "e": 26.19,
+     "text": "To dream was to prevail.",
+     "file": "samples/05/L07.mp3",
+     "phrases": [
+      {
+       "id": "05_L07_P1",
+       "s": 24.23,
+       "e": 26.19,
+       "text": "To dream was to prevail."
+      }
+     ]
+    },
+    {
+     "id": "05_L08",
+     "n": 8,
+     "s": 28.24,
+     "e": 31.16,
+     "text": "They tell me to ask if I can invent a new universe,",
+     "file": "samples/05/L08.mp3",
+     "phrases": [
+      {
+       "id": "05_L08_P1",
+       "s": 28.24,
+       "e": 31.16,
+       "text": "They tell me to ask if I can invent a new universe,"
+      }
+     ]
+    },
+    {
+     "id": "05_L09",
+     "n": 9,
+     "s": 31.5,
+     "e": 34.38,
+     "text": "to ask if God would let me, little old me,",
+     "file": "samples/05/L09.mp3",
+     "phrases": [
+      {
+       "id": "05_L09_P1",
+       "s": 31.5,
+       "e": 33.44,
+       "text": "to ask if God would let me,"
+      },
+      {
+       "id": "05_L09_P2",
+       "s": 33.76,
+       "e": 34.38,
+       "text": "little old me,"
+      }
+     ]
+    },
+    {
+     "id": "05_L10",
+     "n": 10,
+     "s": 34.4,
+     "e": 36.12,
+     "text": "award a blessing here or there.",
+     "file": "samples/05/L10.mp3",
+     "phrases": [
+      {
+       "id": "05_L10_P1",
+       "s": 34.4,
+       "e": 36.12,
+       "text": "award a blessing here or there."
+      }
+     ]
+    },
+    {
+     "id": "05_L11",
+     "n": 11,
+     "s": 37.06,
+     "e": 39.0,
+     "text": "Even grant miracles where the needs",
+     "file": "samples/05/L11.mp3",
+     "phrases": [
+      {
+       "id": "05_L11_P1",
+       "s": 37.06,
+       "e": 39.0,
+       "text": "Even grant miracles where the needs"
+      }
+     ]
+    },
+    {
+     "id": "05_L12",
+     "n": 12,
+     "s": 39.0,
+     "e": 40.62,
+     "text": "of the spoken word exists.",
+     "file": "samples/05/L12.mp3",
+     "phrases": [
+      {
+       "id": "05_L12_P1",
+       "s": 39.0,
+       "e": 40.62,
+       "text": "of the spoken word exists."
+      }
+     ]
+    },
+    {
+     "id": "05_L13",
+     "n": 13,
+     "s": 41.75,
+     "e": 45.31,
+     "text": "In uncertain times, in forsaken times,",
+     "file": "samples/05/L13.mp3",
+     "phrases": [
+      {
+       "id": "05_L13_P1",
+       "s": 41.75,
+       "e": 43.15,
+       "text": "In uncertain times,"
+      },
+      {
+       "id": "05_L13_P2",
+       "s": 43.45,
+       "e": 45.31,
+       "text": "in forsaken times,"
+      }
+     ]
+    },
+    {
+     "id": "05_L14",
+     "n": 14,
+     "s": 46.18,
+     "e": 49.44,
+     "text": "in tears that spoke in lieu of forbidden lines,",
+     "file": "samples/05/L14.mp3",
+     "phrases": [
+      {
+       "id": "05_L14_P1",
+       "s": 46.18,
+       "e": 49.44,
+       "text": "in tears that spoke in lieu of forbidden lines,"
+      }
+     ]
+    },
+    {
+     "id": "05_L15",
+     "n": 15,
+     "s": 50.23,
+     "e": 53.91,
+     "text": "or a history too battered and bruised to travel.",
+     "file": "samples/05/L15.mp3",
+     "phrases": [
+      {
+       "id": "05_L15_P1",
+       "s": 50.23,
+       "e": 53.91,
+       "text": "or a history too battered and bruised to travel."
+      }
+     ]
+    },
+    {
+     "id": "05_L16",
+     "n": 16,
+     "s": 55.13,
+     "e": 56.39,
+     "text": "To dream was to prevail.",
+     "file": "samples/05/L16.mp3",
+     "phrases": [
+      {
+       "id": "05_L16_P1",
+       "s": 55.13,
+       "e": 56.39,
+       "text": "To dream was to prevail."
+      }
+     ]
+    },
+    {
+     "id": "05_L17",
+     "n": 17,
+     "s": 57.43,
+     "e": 59.51,
+     "text": "Their blood flows through my hands.",
+     "file": "samples/05/L17.mp3",
+     "phrases": [
+      {
+       "id": "05_L17_P1",
+       "s": 57.43,
+       "e": 59.51,
+       "text": "Their blood flows through my hands."
+      }
+     ]
+    },
+    {
+     "id": "05_L18",
+     "n": 18,
+     "s": 60.63,
+     "e": 62.93,
+     "text": "Fingerprints that orchestra great powers,",
+     "file": "samples/05/L18.mp3",
+     "phrases": [
+      {
+       "id": "05_L18_P1",
+       "s": 60.63,
+       "e": 62.93,
+       "text": "Fingerprints that orchestra great powers,"
+      }
+     ]
+    },
+    {
+     "id": "05_L19",
+     "n": 19,
+     "s": 63.21,
+     "e": 65.11,
+     "text": "they tell me, sun kissing my skin",
+     "file": "samples/05/L19.mp3",
+     "phrases": [
+      {
+       "id": "05_L19_P1",
+       "s": 63.21,
+       "e": 63.75,
+       "text": "they tell me,"
+      },
+      {
+       "id": "05_L19_P2",
+       "s": 64.01,
+       "e": 65.11,
+       "text": "sun kissing my skin"
+      }
+     ]
+    },
+    {
+     "id": "05_L20",
+     "n": 20,
+     "s": 65.87,
+     "e": 69.29,
+     "text": "and deepening my voice to a baritone of a million cries,",
+     "file": "samples/05/L20.mp3",
+     "phrases": [
+      {
+       "id": "05_L20_P1",
+       "s": 65.87,
+       "e": 69.29,
+       "text": "and deepening my voice to a baritone of a million cries,"
+      }
+     ]
+    },
+    {
+     "id": "05_L21",
+     "n": 21,
+     "s": 70.17,
+     "e": 71.39,
+     "text": "to an unanswered plight.",
+     "file": "samples/05/L21.mp3",
+     "phrases": [
+      {
+       "id": "05_L21_P1",
+       "s": 70.17,
+       "e": 71.39,
+       "text": "to an unanswered plight."
+      }
+     ]
+    },
+    {
+     "id": "05_L22",
+     "n": 22,
+     "s": 72.18,
+     "e": 73.18,
+     "text": "Beware of me.",
+     "file": "samples/05/L22.mp3",
+     "phrases": [
+      {
+       "id": "05_L22_P1",
+       "s": 72.18,
+       "e": 73.18,
+       "text": "Beware of me."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "num": "06",
+   "title": "Resurrecting Atlantis",
+   "mp3": "audio/06_Resurrecting Atlantis_mixdown_RY_250626.mp3",
+   "dur": 100.48,
+   "spec": "spec/06.png",
+   "timing": "timings/06.json",
+   "description": "descriptions/06.md",
+   "halfworld": "06-resurrecting-atlantis.html",
+   "drone": {
+    "container_start": 513.211646,
+    "container_end": 623.451646,
+    "poem_start": 518.081768,
+    "poem_end": 618.371768,
+    "offset_in_container": 4.87
+   },
+   "lines": [
+    {
+     "id": "06_L01",
+     "n": 1,
+     "s": 0.0,
+     "e": 5.86,
+     "text": "The gates open with wings gifted from evolution, and made of marble stones",
+     "file": "samples/06/L01.mp3",
+     "phrases": [
+      {
+       "id": "06_L01_P1",
+       "s": 0.0,
+       "e": 3.22,
+       "text": "The gates open with wings gifted from evolution,"
+      },
+      {
+       "id": "06_L01_P2",
+       "s": 4.4,
+       "e": 5.86,
+       "text": "and made of marble stones"
+      }
+     ]
+    },
+    {
+     "id": "06_L02",
+     "n": 2,
+     "s": 5.86,
+     "e": 12.5,
+     "text": "kissed by the hymns our creator composed with an orchestra of our ancestors wildest dreams to",
+     "file": "samples/06/L02.mp3",
+     "phrases": [
+      {
+       "id": "06_L02_P1",
+       "s": 5.86,
+       "e": 12.5,
+       "text": "kissed by the hymns our creator composed with an orchestra of our ancestors wildest dreams to"
+      }
+     ]
+    },
+    {
+     "id": "06_L03",
+     "n": 3,
+     "s": 12.5,
+     "e": 20.34,
+     "text": "welcome us. Poets who eased generations down yellow brick roads and plucked our souls out",
+     "file": "samples/06/L03.mp3",
+     "phrases": [
+      {
+       "id": "06_L03_P1",
+       "s": 12.5,
+       "e": 13.34,
+       "text": "welcome us."
+      },
+      {
+       "id": "06_L03_P2",
+       "s": 14.42,
+       "e": 20.34,
+       "text": "Poets who eased generations down yellow brick roads and plucked our souls out"
+      }
+     ]
+    },
+    {
+     "id": "06_L04",
+     "n": 4,
+     "s": 20.34,
+     "e": 25.88,
+     "text": "of their secret places to follow comets to the capital city of our collective consciousness,",
+     "file": "samples/06/L04.mp3",
+     "phrases": [
+      {
+       "id": "06_L04_P1",
+       "s": 20.34,
+       "e": 25.88,
+       "text": "of their secret places to follow comets to the capital city of our collective consciousness,"
+      }
+     ]
+    },
+    {
+     "id": "06_L05",
+     "n": 5,
+     "s": 27.55,
+     "e": 34.82,
+     "text": "resurrecting Atlantis. Here we are all one. The pack we've made here with nature",
+     "file": "samples/06/L05.mp3",
+     "phrases": [
+      {
+       "id": "06_L05_P1",
+       "s": 27.55,
+       "e": 28.23,
+       "text": "resurrecting Atlantis."
+      },
+      {
+       "id": "06_L05_P2",
+       "s": 29.39,
+       "e": 31.33,
+       "text": "Here we are all one."
+      },
+      {
+       "id": "06_L05_P3",
+       "s": 32.74,
+       "e": 34.82,
+       "text": "The pack we've made here with nature"
+      }
+     ]
+    },
+    {
+     "id": "06_L06",
+     "n": 6,
+     "s": 35.66,
+     "e": 43.42,
+     "text": "abandon and hope for the best back on life. A relearned currency we reassess as a mission,",
+     "file": "samples/06/L06.mp3",
+     "phrases": [
+      {
+       "id": "06_L06_P1",
+       "s": 35.66,
+       "e": 38.46,
+       "text": "abandon and hope for the best back on life."
+      },
+      {
+       "id": "06_L06_P2",
+       "s": 39.34,
+       "e": 43.42,
+       "text": "A relearned currency we reassess as a mission,"
+      }
+     ]
+    },
+    {
+     "id": "06_L07",
+     "n": 7,
+     "s": 44.43,
+     "e": 52.05,
+     "text": "but here we are all safe. Here we are all one. The pack we've made here with nature",
+     "file": "samples/06/L07.mp3",
+     "phrases": [
+      {
+       "id": "06_L07_P1",
+       "s": 44.43,
+       "e": 46.05,
+       "text": "but here we are all safe."
+      },
+      {
+       "id": "06_L07_P2",
+       "s": 47.12,
+       "e": 48.62,
+       "text": "Here we are all one."
+      },
+      {
+       "id": "06_L07_P3",
+       "s": 49.59,
+       "e": 52.05,
+       "text": "The pack we've made here with nature"
+      }
+     ]
+    },
+    {
+     "id": "06_L08",
+     "n": 8,
+     "s": 52.69,
+     "e": 59.99,
+     "text": "abandon and hope for the best back on life. A relearned currency we reassess as a mission,",
+     "file": "samples/06/L08.mp3",
+     "phrases": [
+      {
+       "id": "06_L08_P1",
+       "s": 52.69,
+       "e": 55.17,
+       "text": "abandon and hope for the best back on life."
+      },
+      {
+       "id": "06_L08_P2",
+       "s": 56.15,
+       "e": 59.99,
+       "text": "A relearned currency we reassess as a mission,"
+      }
+     ]
+    },
+    {
+     "id": "06_L09",
+     "n": 9,
+     "s": 61.46,
+     "e": 68.6,
+     "text": "but here we are all safe. An unfamiliar flickering candlelight illuminating smiles",
+     "file": "samples/06/L09.mp3",
+     "phrases": [
+      {
+       "id": "06_L09_P1",
+       "s": 61.46,
+       "e": 63.48,
+       "text": "but here we are all safe."
+      },
+      {
+       "id": "06_L09_P2",
+       "s": 64.78,
+       "e": 68.6,
+       "text": "An unfamiliar flickering candlelight illuminating smiles"
+      }
+     ]
+    },
+    {
+     "id": "06_L10",
+     "n": 10,
+     "s": 68.6,
+     "e": 75.67,
+     "text": "at night where shadows cast from narrow streets beaming with love, and the joyful noises that",
+     "file": "samples/06/L10.mp3",
+     "phrases": [
+      {
+       "id": "06_L10_P1",
+       "s": 68.6,
+       "e": 73.57,
+       "text": "at night where shadows cast from narrow streets beaming with love,"
+      },
+      {
+       "id": "06_L10_P2",
+       "s": 74.03,
+       "e": 75.67,
+       "text": "and the joyful noises that"
+      }
+     ]
+    },
+    {
+     "id": "06_L11",
+     "n": 11,
+     "s": 75.67,
+     "e": 84.37,
+     "text": "color rainbows, and give us infinite time to heal and set clouds free. I know my soul and",
+     "file": "samples/06/L11.mp3",
+     "phrases": [
+      {
+       "id": "06_L11_P1",
+       "s": 75.67,
+       "e": 77.05,
+       "text": "color rainbows,"
+      },
+      {
+       "id": "06_L11_P2",
+       "s": 77.85,
+       "e": 81.33,
+       "text": "and give us infinite time to heal and set clouds free."
+      },
+      {
+       "id": "06_L11_P3",
+       "s": 82.93,
+       "e": 84.37,
+       "text": "I know my soul and"
+      }
+     ]
+    },
+    {
+     "id": "06_L12",
+     "n": 12,
+     "s": 84.37,
+     "e": 91.55,
+     "text": "it could stay here forever, leaving behind crosshairs for continuums and strains for",
+     "file": "samples/06/L12.mp3",
+     "phrases": [
+      {
+       "id": "06_L12_P1",
+       "s": 84.37,
+       "e": 85.95,
+       "text": "it could stay here forever,"
+      },
+      {
+       "id": "06_L12_P2",
+       "s": 87.11,
+       "e": 91.55,
+       "text": "leaving behind crosshairs for continuums and strains for"
+      }
+     ]
+    },
+    {
+     "id": "06_L13",
+     "n": 13,
+     "s": 91.55,
+     "e": 99.59,
+     "text": "serendipity. A city born in unison out of the purest of fictions welcoming me and welcoming all.",
+     "file": "samples/06/L13.mp3",
+     "phrases": [
+      {
+       "id": "06_L13_P1",
+       "s": 91.55,
+       "e": 92.33,
+       "text": "serendipity."
+      },
+      {
+       "id": "06_L13_P2",
+       "s": 93.47,
+       "e": 99.59,
+       "text": "A city born in unison out of the purest of fictions welcoming me and welcoming all."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "num": "07",
+   "title": "DJ Turn Me Up",
+   "mp3": "audio/07_DJ Turn Me Up_mixdown_RY_250626.mp3",
+   "dur": 98.76,
+   "spec": "spec/07.png",
+   "timing": "timings/07.json",
+   "description": "descriptions/07.md",
+   "halfworld": "07-dj-turn-me-up.html",
+   "drone": {
+    "container_start": 623.454208,
+    "container_end": 732.134208,
+    "poem_start": 628.311768,
+    "poem_end": 726.971768,
+    "offset_in_container": 4.86
+   },
+   "lines": [
+    {
+     "id": "07_L01",
+     "n": 1,
+     "s": 0.0,
+     "e": 6.96,
+     "text": "DJ turn me up please. With eyes wide shut and my chin nested at the arc of the weight of these",
+     "file": "samples/07/L01.mp3",
+     "phrases": [
+      {
+       "id": "07_L01_P1",
+       "s": 0.0,
+       "e": 1.44,
+       "text": "DJ turn me up please."
+      },
+      {
+       "id": "07_L01_P2",
+       "s": 3.0,
+       "e": 6.96,
+       "text": "With eyes wide shut and my chin nested at the arc of the weight of these"
+      }
+     ]
+    },
+    {
+     "id": "07_L02",
+     "n": 2,
+     "s": 6.96,
+     "e": 15.77,
+     "text": "spoken words, I have a story to tell. Of ghosts whispering unfolded delusions, birthed in purity",
+     "file": "samples/07/L02.mp3",
+     "phrases": [
+      {
+       "id": "07_L02_P1",
+       "s": 6.96,
+       "e": 7.8,
+       "text": "spoken words,"
+      },
+      {
+       "id": "07_L02_P2",
+       "s": 8.09,
+       "e": 10.01,
+       "text": "I have a story to tell."
+      },
+      {
+       "id": "07_L02_P3",
+       "s": 11.67,
+       "e": 14.01,
+       "text": "Of ghosts whispering unfolded delusions,"
+      },
+      {
+       "id": "07_L02_P4",
+       "s": 14.81,
+       "e": 15.77,
+       "text": "birthed in purity"
+      }
+     ]
+    },
+    {
+     "id": "07_L03",
+     "n": 3,
+     "s": 15.77,
+     "e": 24.13,
+     "text": "and dying and the veneers of sun-soaked evergreen fields are nourished. A love story of one by one",
+     "file": "samples/07/L03.mp3",
+     "phrases": [
+      {
+       "id": "07_L03_P1",
+       "s": 15.77,
+       "e": 20.61,
+       "text": "and dying and the veneers of sun -soaked evergreen fields are nourished."
+      },
+      {
+       "id": "07_L03_P2",
+       "s": 21.87,
+       "e": 24.13,
+       "text": "A love story of one by one"
+      }
+     ]
+    },
+    {
+     "id": "07_L04",
+     "n": 4,
+     "s": 24.13,
+     "e": 31.93,
+     "text": "treasures escaping and devaluing themselves after defamed unsalted stars diminish their glares.",
+     "file": "samples/07/L04.mp3",
+     "phrases": [
+      {
+       "id": "07_L04_P1",
+       "s": 24.13,
+       "e": 31.93,
+       "text": "treasures escaping and devaluing themselves after defamed unsalted stars diminish their glares."
+      }
+     ]
+    },
+    {
+     "id": "07_L05",
+     "n": 5,
+     "s": 32.53,
+     "e": 40.27,
+     "text": "And I've walked a thousand light years across the greatest divide to be heard. So DJ please turn me",
+     "file": "samples/07/L05.mp3",
+     "phrases": [
+      {
+       "id": "07_L05_P1",
+       "s": 32.53,
+       "e": 37.59,
+       "text": "And I've walked a thousand light years across the greatest divide to be heard."
+      },
+      {
+       "id": "07_L05_P2",
+       "s": 38.03,
+       "e": 40.27,
+       "text": "So DJ please turn me"
+      }
+     ]
+    },
+    {
+     "id": "07_L06",
+     "n": 6,
+     "s": 40.27,
+     "e": 48.05,
+     "text": "up. So I can speak of wedding bands diverging across abstract skies of wounded souls. Of a",
+     "file": "samples/07/L06.mp3",
+     "phrases": [
+      {
+       "id": "07_L06_P1",
+       "s": 40.27,
+       "e": 40.63,
+       "text": "up."
+      },
+      {
+       "id": "07_L06_P2",
+       "s": 41.24,
+       "e": 46.46,
+       "text": "So I can speak of wedding bands diverging across abstract skies of wounded souls."
+      },
+      {
+       "id": "07_L06_P3",
+       "s": 47.71,
+       "e": 48.05,
+       "text": "Of a"
+      }
+     ]
+    },
+    {
+     "id": "07_L07",
+     "n": 7,
+     "s": 48.05,
+     "e": 55.67,
+     "text": "shared home boxed in truck on separate one-way streets not built with u-turns or stop. Maybe",
+     "file": "samples/07/L07.mp3",
+     "phrases": [
+      {
+       "id": "07_L07_P1",
+       "s": 48.05,
+       "e": 55.13,
+       "text": "shared home boxed in truck on separate one -way streets not built with u -turns or stop."
+      },
+      {
+       "id": "07_L07_P2",
+       "s": 55.53,
+       "e": 55.67,
+       "text": "Maybe"
+      }
+     ]
+    },
+    {
+     "id": "07_L08",
+     "n": 8,
+     "s": 55.67,
+     "e": 62.64,
+     "text": "we shouldn't signs. A love story of years 11 years each plucked off as daisy pedals",
+     "file": "samples/07/L08.mp3",
+     "phrases": [
+      {
+       "id": "07_L08_P1",
+       "s": 55.67,
+       "e": 56.75,
+       "text": "we shouldn't signs."
+      },
+      {
+       "id": "07_L08_P2",
+       "s": 58.08,
+       "e": 62.64,
+       "text": "A love story of years 11 years each plucked off as daisy pedals"
+      }
+     ]
+    },
+    {
+     "id": "07_L09",
+     "n": 9,
+     "s": 63.3,
+     "e": 71.29,
+     "text": "we love we not. Of a future gone swiftly and a past left empty handed to pick a road of heavy rain",
+     "file": "samples/07/L09.mp3",
+     "phrases": [
+      {
+       "id": "07_L09_P1",
+       "s": 63.3,
+       "e": 64.24,
+       "text": "we love we not."
+      },
+      {
+       "id": "07_L09_P2",
+       "s": 65.57,
+       "e": 71.29,
+       "text": "Of a future gone swiftly and a past left empty handed to pick a road of heavy rain"
+      }
+     ]
+    },
+    {
+     "id": "07_L10",
+     "n": 10,
+     "s": 71.87,
+     "e": 79.92,
+     "text": "or a frontal fog or of dim night lights under a cloud with the silver lining. Of now turning",
+     "file": "samples/07/L10.mp3",
+     "phrases": [
+      {
+       "id": "07_L10_P1",
+       "s": 71.87,
+       "e": 77.47,
+       "text": "or a frontal fog or of dim night lights under a cloud with the silver lining."
+      },
+      {
+       "id": "07_L10_P2",
+       "s": 78.64,
+       "e": 79.92,
+       "text": "Of now turning"
+      }
+     ]
+    },
+    {
+     "id": "07_L11",
+     "n": 11,
+     "s": 79.92,
+     "e": 88.53,
+     "text": "forth to face the lights and shadows one night at a time, one tear at a time. When called to a friend",
+     "file": "samples/07/L11.mp3",
+     "phrases": [
+      {
+       "id": "07_L11_P1",
+       "s": 79.92,
+       "e": 84.1,
+       "text": "forth to face the lights and shadows one night at a time,"
+      },
+      {
+       "id": "07_L11_P2",
+       "s": 84.48,
+       "e": 86.44,
+       "text": "one tear at a time."
+      },
+      {
+       "id": "07_L11_P3",
+       "s": 87.27,
+       "e": 88.53,
+       "text": "When called to a friend"
+      }
+     ]
+    },
+    {
+     "id": "07_L12",
+     "n": 12,
+     "s": 88.53,
+     "e": 98.04,
+     "text": "at a time. One open mic at a time. Chin now nested high and volume turned up in a story to tell.",
+     "file": "samples/07/L12.mp3",
+     "phrases": [
+      {
+       "id": "07_L12_P1",
+       "s": 88.53,
+       "e": 89.87,
+       "text": "at a time."
+      },
+      {
+       "id": "07_L12_P2",
+       "s": 90.61,
+       "e": 92.45,
+       "text": "One open mic at a time."
+      },
+      {
+       "id": "07_L12_P3",
+       "s": 93.7,
+       "e": 98.04,
+       "text": "Chin now nested high and volume turned up in a story to tell."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "num": "08",
+   "title": "Newly Single",
+   "mp3": "audio/08_Newly Single_mixdown_RY_250626.mp3",
+   "dur": 91.53,
+   "spec": "spec/08.png",
+   "timing": "timings/08.json",
+   "description": "descriptions/08.md",
+   "halfworld": "08-newly-single.html",
+   "drone": {
+    "container_start": 732.1365,
+    "container_end": 833.3865,
+    "poem_start": 737.051768,
+    "poem_end": 828.201768,
+    "offset_in_container": 4.92
+   },
+   "lines": [
+    {
+     "id": "08_L01",
+     "n": 1,
+     "s": 0.0,
+     "e": 6.12,
+     "text": "The soul has escaped my body for the moment and left him on the dance floor. He can now just be",
+     "file": "samples/08/L01.mp3",
+     "phrases": [
+      {
+       "id": "08_L01_P1",
+       "s": 0.0,
+       "e": 4.16,
+       "text": "The soul has escaped my body for the moment and left him on the dance floor."
+      },
+      {
+       "id": "08_L01_P2",
+       "s": 5.3,
+       "e": 6.12,
+       "text": "He can now just be"
+      }
+     ]
+    },
+    {
+     "id": "08_L02",
+     "n": 2,
+     "s": 6.12,
+     "e": 11.18,
+     "text": "flesh and bones, rejection and heartache hit differently when there are no feelings afloat.",
+     "file": "samples/08/L02.mp3",
+     "phrases": [
+      {
+       "id": "08_L02_P1",
+       "s": 6.12,
+       "e": 7.0,
+       "text": "flesh and bones,"
+      },
+      {
+       "id": "08_L02_P2",
+       "s": 7.36,
+       "e": 11.18,
+       "text": "rejection and heartache hit differently when there are no feelings afloat."
+      }
+     ]
+    },
+    {
+     "id": "08_L03",
+     "n": 3,
+     "s": 12.94,
+     "e": 20.32,
+     "text": "I want my soul now to imagine my body pulsing and head throbbing from the music and empty on",
+     "file": "samples/08/L03.mp3",
+     "phrases": [
+      {
+       "id": "08_L03_P1",
+       "s": 12.94,
+       "e": 20.32,
+       "text": "I want my soul now to imagine my body pulsing and head throbbing from the music and empty on"
+      }
+     ]
+    },
+    {
+     "id": "08_L04",
+     "n": 4,
+     "s": 20.32,
+     "e": 27.29,
+     "text": "a crowded floor of sweated perfumes and temptations. Let's watch strangers collide and spark electric",
+     "file": "samples/08/L04.mp3",
+     "phrases": [
+      {
+       "id": "08_L04_P1",
+       "s": 20.32,
+       "e": 23.52,
+       "text": "a crowded floor of sweated perfumes and temptations."
+      },
+      {
+       "id": "08_L04_P2",
+       "s": 24.71,
+       "e": 27.29,
+       "text": "Let's watch strangers collide and spark electric"
+      }
+     ]
+    },
+    {
+     "id": "08_L05",
+     "n": 5,
+     "s": 27.29,
+     "e": 34.53,
+     "text": "currents that gamut the mood, a good one. We want him to be the last one to leave, prolonging the",
+     "file": "samples/08/L05.mp3",
+     "phrases": [
+      {
+       "id": "08_L05_P1",
+       "s": 27.29,
+       "e": 28.75,
+       "text": "currents that gamut the mood,"
+      },
+      {
+       "id": "08_L05_P2",
+       "s": 29.43,
+       "e": 30.07,
+       "text": "a good one."
+      },
+      {
+       "id": "08_L05_P3",
+       "s": 31.47,
+       "e": 33.55,
+       "text": "We want him to be the last one to leave,"
+      },
+      {
+       "id": "08_L05_P4",
+       "s": 33.69,
+       "e": 34.53,
+       "text": "prolonging the"
+      }
+     ]
+    },
+    {
+     "id": "08_L06",
+     "n": 6,
+     "s": 34.53,
+     "e": 42.18,
+     "text": "bitter refraction inside the walls of an escape that few pleasures offer us. Now let us put my",
+     "file": "samples/08/L06.mp3",
+     "phrases": [
+      {
+       "id": "08_L06_P1",
+       "s": 34.53,
+       "e": 39.83,
+       "text": "bitter refraction inside the walls of an escape that few pleasures offer us."
+      },
+      {
+       "id": "08_L06_P2",
+       "s": 41.34,
+       "e": 42.18,
+       "text": "Now let us put my"
+      }
+     ]
+    },
+    {
+     "id": "08_L07",
+     "n": 7,
+     "s": 42.18,
+     "e": 46.86,
+     "text": "soul in the middle of an open field at the equator of a planet much larger than my own",
+     "file": "samples/08/L07.mp3",
+     "phrases": [
+      {
+       "id": "08_L07_P1",
+       "s": 42.18,
+       "e": 46.86,
+       "text": "soul in the middle of an open field at the equator of a planet much larger than my own"
+      }
+     ]
+    },
+    {
+     "id": "08_L08",
+     "n": 8,
+     "s": 46.86,
+     "e": 54.66,
+     "text": "and much hotter. Cool me down by pouring unfiltered water out of the ice bath salted from the closest",
+     "file": "samples/08/L08.mp3",
+     "phrases": [
+      {
+       "id": "08_L08_P1",
+       "s": 46.86,
+       "e": 48.14,
+       "text": "and much hotter."
+      },
+      {
+       "id": "08_L08_P2",
+       "s": 49.44,
+       "e": 54.66,
+       "text": "Cool me down by pouring unfiltered water out of the ice bath salted from the closest"
+      }
+     ]
+    },
+    {
+     "id": "08_L09",
+     "n": 9,
+     "s": 54.66,
+     "e": 62.6,
+     "text": "moons from angels of the newest religions and its joys capturing my body transiting in a flash of",
+     "file": "samples/08/L09.mp3",
+     "phrases": [
+      {
+       "id": "08_L09_P1",
+       "s": 54.66,
+       "e": 62.6,
+       "text": "moons from angels of the newest religions and its joys capturing my body transiting in a flash of"
+      }
+     ]
+    },
+    {
+     "id": "08_L10",
+     "n": 10,
+     "s": 62.6,
+     "e": 71.05,
+     "text": "strobe lights. Their gracious cursor blessed me, only infinity will tell. Now bring my soul back",
+     "file": "samples/08/L10.mp3",
+     "phrases": [
+      {
+       "id": "08_L10_P1",
+       "s": 62.6,
+       "e": 63.32,
+       "text": "strobe lights."
+      },
+      {
+       "id": "08_L10_P2",
+       "s": 64.45,
+       "e": 66.59,
+       "text": "Their gracious cursor blessed me,"
+      },
+      {
+       "id": "08_L10_P3",
+       "s": 66.95,
+       "e": 68.35,
+       "text": "only infinity will tell."
+      },
+      {
+       "id": "08_L10_P4",
+       "s": 69.53,
+       "e": 71.05,
+       "text": "Now bring my soul back"
+      }
+     ]
+    },
+    {
+     "id": "08_L11",
+     "n": 11,
+     "s": 71.05,
+     "e": 78.07,
+     "text": "to my body to lean back, breathe in the smoke that now fills the room and tell myself how good",
+     "file": "samples/08/L11.mp3",
+     "phrases": [
+      {
+       "id": "08_L11_P1",
+       "s": 71.05,
+       "e": 72.83,
+       "text": "to my body to lean back,"
+      },
+      {
+       "id": "08_L11_P2",
+       "s": 73.13,
+       "e": 78.07,
+       "text": "breathe in the smoke that now fills the room and tell myself how good"
+      }
+     ]
+    },
+    {
+     "id": "08_L12",
+     "n": 12,
+     "s": 78.07,
+     "e": 84.37,
+     "text": "it is to finally get acquainted with the night, staring into unfamiliar yet relatable mountains",
+     "file": "samples/08/L12.mp3",
+     "phrases": [
+      {
+       "id": "08_L12_P1",
+       "s": 78.07,
+       "e": 80.59,
+       "text": "it is to finally get acquainted with the night,"
+      },
+      {
+       "id": "08_L12_P2",
+       "s": 81.41,
+       "e": 84.37,
+       "text": "staring into unfamiliar yet relatable mountains"
+      }
+     ]
+    },
+    {
+     "id": "08_L13",
+     "n": 13,
+     "s": 84.37,
+     "e": 89.81,
+     "text": "in the distance and wandering eyes and wandering thoughts within reach.",
+     "file": "samples/08/L13.mp3",
+     "phrases": [
+      {
+       "id": "08_L13_P1",
+       "s": 84.37,
+       "e": 89.81,
+       "text": "in the distance and wandering eyes and wandering thoughts within reach."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "num": "09",
+   "title": "Yet Heard",
+   "mp3": "audio/09_Yet Heard_mixdown_RY_250626.mp3",
+   "dur": 108.82,
+   "spec": "spec/09.png",
+   "timing": "timings/09.json",
+   "description": "descriptions/09.md",
+   "halfworld": "09-yet-heard.html",
+   "drone": {
+    "container_start": 833.385167,
+    "container_end": 950.935167,
+    "poem_start": 837.741768,
+    "poem_end": 946.521768,
+    "offset_in_container": 4.36
+   },
+   "lines": [
+    {
+     "id": "09_L01",
+     "n": 1,
+     "s": 0.0,
+     "e": 4.28,
+     "text": "Accepting you'll never say nor ever feel, my love was real.",
+     "file": "samples/09/L01.mp3",
+     "phrases": [
+      {
+       "id": "09_L01_P1",
+       "s": 0.0,
+       "e": 2.7,
+       "text": "Accepting you'll never say nor ever feel,"
+      },
+      {
+       "id": "09_L01_P2",
+       "s": 3.38,
+       "e": 4.28,
+       "text": "my love was real."
+      }
+     ]
+    },
+    {
+     "id": "09_L02",
+     "n": 2,
+     "s": 5.59,
+     "e": 7.51,
+     "text": "What isn't mine I still cannot give.",
+     "file": "samples/09/L02.mp3",
+     "phrases": [
+      {
+       "id": "09_L02_P1",
+       "s": 5.59,
+       "e": 7.51,
+       "text": "What isn't mine I still cannot give."
+      }
+     ]
+    },
+    {
+     "id": "09_L03",
+     "n": 3,
+     "s": 9.03,
+     "e": 10.53,
+     "text": "I gather my things to go.",
+     "file": "samples/09/L03.mp3",
+     "phrases": [
+      {
+       "id": "09_L03_P1",
+       "s": 9.03,
+       "e": 10.53,
+       "text": "I gather my things to go."
+      }
+     ]
+    },
+    {
+     "id": "09_L04",
+     "n": 4,
+     "s": 11.35,
+     "e": 15.25,
+     "text": "Before I go, we look at the moon the way we used to see it",
+     "file": "samples/09/L04.mp3",
+     "phrases": [
+      {
+       "id": "09_L04_P1",
+       "s": 11.35,
+       "e": 12.19,
+       "text": "Before I go,"
+      },
+      {
+       "id": "09_L04_P2",
+       "s": 12.63,
+       "e": 15.25,
+       "text": "we look at the moon the way we used to see it"
+      }
+     ]
+    },
+    {
+     "id": "09_L05",
+     "n": 5,
+     "s": 15.28,
+     "e": 17.6,
+     "text": "and settle down the stillnessism.",
+     "file": "samples/09/L05.mp3",
+     "phrases": [
+      {
+       "id": "09_L05_P1",
+       "s": 15.28,
+       "e": 17.6,
+       "text": "and settle down the stillnessism."
+      }
+     ]
+    },
+    {
+     "id": "09_L06",
+     "n": 6,
+     "s": 18.9,
+     "e": 21.28,
+     "text": "We talk for years and travel through time",
+     "file": "samples/09/L06.mp3",
+     "phrases": [
+      {
+       "id": "09_L06_P1",
+       "s": 18.9,
+       "e": 21.28,
+       "text": "We talk for years and travel through time"
+      }
+     ]
+    },
+    {
+     "id": "09_L07",
+     "n": 7,
+     "s": 21.8,
+     "e": 22.9,
+     "text": "and it feels so good.",
+     "file": "samples/09/L07.mp3",
+     "phrases": [
+      {
+       "id": "09_L07_P1",
+       "s": 21.8,
+       "e": 22.9,
+       "text": "and it feels so good."
+      }
+     ]
+    },
+    {
+     "id": "09_L08",
+     "n": 8,
+     "s": 23.71,
+     "e": 24.73,
+     "text": "We grow old together.",
+     "file": "samples/09/L08.mp3",
+     "phrases": [
+      {
+       "id": "09_L08_P1",
+       "s": 23.71,
+       "e": 24.73,
+       "text": "We grow old together."
+      }
+     ]
+    },
+    {
+     "id": "09_L09",
+     "n": 9,
+     "s": 24.91,
+     "e": 27.63,
+     "text": "I believe maybe we could have it all,",
+     "file": "samples/09/L09.mp3",
+     "phrases": [
+      {
+       "id": "09_L09_P1",
+       "s": 24.91,
+       "e": 27.63,
+       "text": "I believe maybe we could have it all,"
+      }
+     ]
+    },
+    {
+     "id": "09_L10",
+     "n": 10,
+     "s": 27.83,
+     "e": 31.11,
+     "text": "or swing in my humbled late nights and heartbreaks",
+     "file": "samples/09/L10.mp3",
+     "phrases": [
+      {
+       "id": "09_L10_P1",
+       "s": 27.83,
+       "e": 31.11,
+       "text": "or swing in my humbled late nights and heartbreaks"
+      }
+     ]
+    },
+    {
+     "id": "09_L11",
+     "n": 11,
+     "s": 31.79,
+     "e": 33.45,
+     "text": "and an end story unchanging.",
+     "file": "samples/09/L11.mp3",
+     "phrases": [
+      {
+       "id": "09_L11_P1",
+       "s": 31.79,
+       "e": 33.45,
+       "text": "and an end story unchanging."
+      }
+     ]
+    },
+    {
+     "id": "09_L12",
+     "n": 12,
+     "s": 35.1,
+     "e": 36.8,
+     "text": "You help me gather my things to go.",
+     "file": "samples/09/L12.mp3",
+     "phrases": [
+      {
+       "id": "09_L12_P1",
+       "s": 35.1,
+       "e": 36.8,
+       "text": "You help me gather my things to go."
+      }
+     ]
+    },
+    {
+     "id": "09_L13",
+     "n": 13,
+     "s": 37.98,
+     "e": 39.48,
+     "text": "Before I go, I call on my mother.",
+     "file": "samples/09/L13.mp3",
+     "phrases": [
+      {
+       "id": "09_L13_P1",
+       "s": 37.98,
+       "e": 38.58,
+       "text": "Before I go,"
+      },
+      {
+       "id": "09_L13_P2",
+       "s": 38.74,
+       "e": 39.48,
+       "text": "I call on my mother."
+      }
+     ]
+    },
+    {
+     "id": "09_L14",
+     "n": 14,
+     "s": 40.3,
+     "e": 43.4,
+     "text": "In tears, speaking of an abyss, she's never known.",
+     "file": "samples/09/L14.mp3",
+     "phrases": [
+      {
+       "id": "09_L14_P1",
+       "s": 40.3,
+       "e": 40.74,
+       "text": "In tears,"
+      },
+      {
+       "id": "09_L14_P2",
+       "s": 41.02,
+       "e": 41.8,
+       "text": "speaking of an abyss,"
+      },
+      {
+       "id": "09_L14_P3",
+       "s": 42.48,
+       "e": 43.4,
+       "text": "she's never known."
+      }
+     ]
+    },
+    {
+     "id": "09_L15",
+     "n": 15,
+     "s": 44.45,
+     "e": 47.53,
+     "text": "And we talk for years and we closet wounds",
+     "file": "samples/09/L15.mp3",
+     "phrases": [
+      {
+       "id": "09_L15_P1",
+       "s": 44.45,
+       "e": 47.53,
+       "text": "And we talk for years and we closet wounds"
+      }
+     ]
+    },
+    {
+     "id": "09_L16",
+     "n": 16,
+     "s": 48.34,
+     "e": 52.64,
+     "text": "and we explain my way of birth then and even after prayer.",
+     "file": "samples/09/L16.mp3",
+     "phrases": [
+      {
+       "id": "09_L16_P1",
+       "s": 48.34,
+       "e": 52.64,
+       "text": "and we explain my way of birth then and even after prayer."
+      }
+     ]
+    },
+    {
+     "id": "09_L17",
+     "n": 17,
+     "s": 53.55,
+     "e": 55.99,
+     "text": "What isn't mine I still cannot give.",
+     "file": "samples/09/L17.mp3",
+     "phrases": [
+      {
+       "id": "09_L17_P1",
+       "s": 53.55,
+       "e": 55.99,
+       "text": "What isn't mine I still cannot give."
+      }
+     ]
+    },
+    {
+     "id": "09_L18",
+     "n": 18,
+     "s": 56.73,
+     "e": 59.73,
+     "text": "We grow old together with the moon looking at us",
+     "file": "samples/09/L18.mp3",
+     "phrases": [
+      {
+       "id": "09_L18_P1",
+       "s": 56.73,
+       "e": 59.73,
+       "text": "We grow old together with the moon looking at us"
+      }
+     ]
+    },
+    {
+     "id": "09_L19",
+     "n": 19,
+     "s": 59.73,
+     "e": 60.99,
+     "text": "the way we used to be.",
+     "file": "samples/09/L19.mp3",
+     "phrases": [
+      {
+       "id": "09_L19_P1",
+       "s": 59.73,
+       "e": 60.99,
+       "text": "the way we used to be."
+      }
+     ]
+    },
+    {
+     "id": "09_L20",
+     "n": 20,
+     "s": 61.72,
+     "e": 64.72,
+     "text": "As my tears fall between the creases and faith,",
+     "file": "samples/09/L20.mp3",
+     "phrases": [
+      {
+       "id": "09_L20_P1",
+       "s": 61.72,
+       "e": 64.72,
+       "text": "As my tears fall between the creases and faith,"
+      }
+     ]
+    },
+    {
+     "id": "09_L21",
+     "n": 21,
+     "s": 65.38,
+     "e": 68.72,
+     "text": "dancing on my own, maternal ears in tune.",
+     "file": "samples/09/L21.mp3",
+     "phrases": [
+      {
+       "id": "09_L21_P1",
+       "s": 65.38,
+       "e": 66.82,
+       "text": "dancing on my own,"
+      },
+      {
+       "id": "09_L21_P2",
+       "s": 67.62,
+       "e": 68.72,
+       "text": "maternal ears in tune."
+      }
+     ]
+    },
+    {
+     "id": "09_L22",
+     "n": 22,
+     "s": 70.52,
+     "e": 72.78,
+     "text": "She watches us gather my things to go.",
+     "file": "samples/09/L22.mp3",
+     "phrases": [
+      {
+       "id": "09_L22_P1",
+       "s": 70.52,
+       "e": 72.78,
+       "text": "She watches us gather my things to go."
+      }
+     ]
+    },
+    {
+     "id": "09_L23",
+     "n": 23,
+     "s": 73.68,
+     "e": 75.38,
+     "text": "Before I go, I call on my father.",
+     "file": "samples/09/L23.mp3",
+     "phrases": [
+      {
+       "id": "09_L23_P1",
+       "s": 73.68,
+       "e": 74.34,
+       "text": "Before I go,"
+      },
+      {
+       "id": "09_L23_P2",
+       "s": 74.48,
+       "e": 75.38,
+       "text": "I call on my father."
+      }
+     ]
+    },
+    {
+     "id": "09_L24",
+     "n": 24,
+     "s": 76.51,
+     "e": 79.05,
+     "text": "Summon his calming demeanor from the yonders",
+     "file": "samples/09/L24.mp3",
+     "phrases": [
+      {
+       "id": "09_L24_P1",
+       "s": 76.51,
+       "e": 79.05,
+       "text": "Summon his calming demeanor from the yonders"
+      }
+     ]
+    },
+    {
+     "id": "09_L25",
+     "n": 25,
+     "s": 79.99,
+     "e": 83.45,
+     "text": "and we walk for years and travel east toward the sunrises",
+     "file": "samples/09/L25.mp3",
+     "phrases": [
+      {
+       "id": "09_L25_P1",
+       "s": 79.99,
+       "e": 83.45,
+       "text": "and we walk for years and travel east toward the sunrises"
+      }
+     ]
+    },
+    {
+     "id": "09_L26",
+     "n": 26,
+     "s": 84.47,
+     "e": 87.57,
+     "text": "and retrace his footsteps now and then.",
+     "file": "samples/09/L26.mp3",
+     "phrases": [
+      {
+       "id": "09_L26_P1",
+       "s": 84.47,
+       "e": 87.57,
+       "text": "and retrace his footsteps now and then."
+      }
+     ]
+    },
+    {
+     "id": "09_L27",
+     "n": 27,
+     "s": 88.56,
+     "e": 91.86,
+     "text": "Guiding a settling down moon the way it used to leave",
+     "file": "samples/09/L27.mp3",
+     "phrases": [
+      {
+       "id": "09_L27_P1",
+       "s": 88.56,
+       "e": 91.86,
+       "text": "Guiding a settling down moon the way it used to leave"
+      }
+     ]
+    },
+    {
+     "id": "09_L28",
+     "n": 28,
+     "s": 91.86,
+     "e": 95.08,
+     "text": "and my tears fall between the creases",
+     "file": "samples/09/L28.mp3",
+     "phrases": [
+      {
+       "id": "09_L28_P1",
+       "s": 91.86,
+       "e": 95.08,
+       "text": "and my tears fall between the creases"
+      }
+     ]
+    },
+    {
+     "id": "09_L29",
+     "n": 29,
+     "s": 95.08,
+     "e": 97.18,
+     "text": "and wave shadows of the inner harbor.",
+     "file": "samples/09/L29.mp3",
+     "phrases": [
+      {
+       "id": "09_L29_P1",
+       "s": 95.08,
+       "e": 97.18,
+       "text": "and wave shadows of the inner harbor."
+      }
+     ]
+    },
+    {
+     "id": "09_L30",
+     "n": 30,
+     "s": 98.39,
+     "e": 102.57,
+     "text": "We stroll, father and son, hearted and shaken.",
+     "file": "samples/09/L30.mp3",
+     "phrases": [
+      {
+       "id": "09_L30_P1",
+       "s": 98.39,
+       "e": 98.93,
+       "text": "We stroll,"
+      },
+      {
+       "id": "09_L30_P2",
+       "s": 99.29,
+       "e": 100.57,
+       "text": "father and son,"
+      },
+      {
+       "id": "09_L30_P3",
+       "s": 101.31,
+       "e": 102.57,
+       "text": "hearted and shaken."
+      }
+     ]
+    },
+    {
+     "id": "09_L31",
+     "n": 31,
+     "s": 103.51,
+     "e": 105.71,
+     "text": "Someone borrowed and someone blew.",
+     "file": "samples/09/L31.mp3",
+     "phrases": [
+      {
+       "id": "09_L31_P1",
+       "s": 103.51,
+       "e": 105.71,
+       "text": "Someone borrowed and someone blew."
+      }
+     ]
+    },
+    {
+     "id": "09_L32",
+     "n": 32,
+     "s": 106.37,
+     "e": 108.25,
+     "text": "Yet broken, yet hurt.",
+     "file": "samples/09/L32.mp3",
+     "phrases": [
+      {
+       "id": "09_L32_P1",
+       "s": 106.37,
+       "e": 107.13,
+       "text": "Yet broken,"
+      },
+      {
+       "id": "09_L32_P2",
+       "s": 107.71,
+       "e": 108.25,
+       "text": "yet hurt."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "num": "10",
+   "title": "Magic Ride",
+   "mp3": "audio/10_Magic Ride_mixdown_RY_250626.mp3",
+   "dur": 96.14,
+   "spec": "spec/10.png",
+   "timing": "timings/10.json",
+   "description": "descriptions/10.md",
+   "halfworld": "10-magic-ride.html",
+   "drone": {
+    "container_start": 950.936875,
+    "container_end": 1056.656875,
+    "poem_start": 956.001768,
+    "poem_end": 1051.861768,
+    "offset_in_container": 5.06
+   },
+   "lines": [
+    {
+     "id": "10_L01",
+     "n": 1,
+     "s": 0.14,
+     "e": 6.93,
+     "text": "I wasn't looking for a ride, but here you are, blissful and oddly sensitive,",
+     "file": "samples/10/L01.mp3",
+     "phrases": [
+      {
+       "id": "10_L01_P1",
+       "s": 0.14,
+       "e": 1.92,
+       "text": "I wasn't looking for a ride,"
+      },
+      {
+       "id": "10_L01_P2",
+       "s": 1.92,
+       "e": 3.86,
+       "text": "but here you are,"
+      },
+      {
+       "id": "10_L01_P3",
+       "s": 4.39,
+       "e": 6.93,
+       "text": "blissful and oddly sensitive,"
+      }
+     ]
+    },
+    {
+     "id": "10_L02",
+     "n": 2,
+     "s": 8.04,
+     "e": 12.16,
+     "text": "withering a soul purveying both the dark and the light worlds I've known.",
+     "file": "samples/10/L02.mp3",
+     "phrases": [
+      {
+       "id": "10_L02_P1",
+       "s": 8.04,
+       "e": 12.16,
+       "text": "withering a soul purveying both the dark and the light worlds I've known."
+      }
+     ]
+    },
+    {
+     "id": "10_L03",
+     "n": 3,
+     "s": 12.99,
+     "e": 18.83,
+     "text": "So I rub my aggressions into your steel coverings and hop on to amuse myself.",
+     "file": "samples/10/L03.mp3",
+     "phrases": [
+      {
+       "id": "10_L03_P1",
+       "s": 12.99,
+       "e": 18.83,
+       "text": "So I rub my aggressions into your steel coverings and hop on to amuse myself."
+      }
+     ]
+    },
+    {
+     "id": "10_L04",
+     "n": 4,
+     "s": 20.86,
+     "e": 23.92,
+     "text": "Loneliness is having everything with no one to tell,",
+     "file": "samples/10/L04.mp3",
+     "phrases": [
+      {
+       "id": "10_L04_P1",
+       "s": 20.86,
+       "e": 23.92,
+       "text": "Loneliness is having everything with no one to tell,"
+      }
+     ]
+    },
+    {
+     "id": "10_L05",
+     "n": 5,
+     "s": 24.65,
+     "e": 27.79,
+     "text": "being everywhere with no one to love and escape,",
+     "file": "samples/10/L05.mp3",
+     "phrases": [
+      {
+       "id": "10_L05_P1",
+       "s": 24.65,
+       "e": 27.79,
+       "text": "being everywhere with no one to love and escape,"
+      }
+     ]
+    },
+    {
+     "id": "10_L06",
+     "n": 6,
+     "s": 27.79,
+     "e": 34.05,
+     "text": "wide-eyed and stone but alive and well, wandering with no clear end.",
+     "file": "samples/10/L06.mp3",
+     "phrases": [
+      {
+       "id": "10_L06_P1",
+       "s": 27.79,
+       "e": 31.19,
+       "text": "wide -eyed and stone but alive and well,"
+      },
+      {
+       "id": "10_L06_P2",
+       "s": 32.59,
+       "e": 34.05,
+       "text": "wandering with no clear end."
+      }
+     ]
+    },
+    {
+     "id": "10_L07",
+     "n": 7,
+     "s": 36.1,
+     "e": 41.58,
+     "text": "I let the noise block the noise so the way I ride through the streets with the swag and eyes turn,",
+     "file": "samples/10/L07.mp3",
+     "phrases": [
+      {
+       "id": "10_L07_P1",
+       "s": 36.1,
+       "e": 41.58,
+       "text": "I let the noise block the noise so the way I ride through the streets with the swag and eyes turn,"
+      }
+     ]
+    },
+    {
+     "id": "10_L08",
+     "n": 8,
+     "s": 42.12,
+     "e": 46.16,
+     "text": "has twists, improve, yeah, the magic still exists.",
+     "file": "samples/10/L08.mp3",
+     "phrases": [
+      {
+       "id": "10_L08_P1",
+       "s": 42.12,
+       "e": 42.7,
+       "text": "has twists,"
+      },
+      {
+       "id": "10_L08_P2",
+       "s": 43.4,
+       "e": 43.86,
+       "text": "improve,"
+      },
+      {
+       "id": "10_L08_P3",
+       "s": 44.16,
+       "e": 44.3,
+       "text": "yeah,"
+      },
+      {
+       "id": "10_L08_P4",
+       "s": 45.1,
+       "e": 46.16,
+       "text": "the magic still exists."
+      }
+     ]
+    },
+    {
+     "id": "10_L09",
+     "n": 9,
+     "s": 47.76,
+     "e": 52.0,
+     "text": "All preparations to live and dream in darkness I no longer desire.",
+     "file": "samples/10/L09.mp3",
+     "phrases": [
+      {
+       "id": "10_L09_P1",
+       "s": 47.76,
+       "e": 52.0,
+       "text": "All preparations to live and dream in darkness I no longer desire."
+      }
+     ]
+    },
+    {
+     "id": "10_L10",
+     "n": 10,
+     "s": 53.34,
+     "e": 57.18,
+     "text": "The moon settles and the tease of distant stars subsides",
+     "file": "samples/10/L10.mp3",
+     "phrases": [
+      {
+       "id": "10_L10_P1",
+       "s": 53.34,
+       "e": 57.18,
+       "text": "The moon settles and the tease of distant stars subsides"
+      }
+     ]
+    },
+    {
+     "id": "10_L11",
+     "n": 11,
+     "s": 57.18,
+     "e": 60.43,
+     "text": "and I can see a morning ahead for me.",
+     "file": "samples/10/L11.mp3",
+     "phrases": [
+      {
+       "id": "10_L11_P1",
+       "s": 57.18,
+       "e": 60.43,
+       "text": "and I can see a morning ahead for me."
+      }
+     ]
+    },
+    {
+     "id": "10_L12",
+     "n": 12,
+     "s": 61.43,
+     "e": 63.45,
+     "text": "It looks like a morning I could believe in,",
+     "file": "samples/10/L12.mp3",
+     "phrases": [
+      {
+       "id": "10_L12_P1",
+       "s": 61.43,
+       "e": 63.45,
+       "text": "It looks like a morning I could believe in,"
+      }
+     ]
+    },
+    {
+     "id": "10_L13",
+     "n": 13,
+     "s": 63.51,
+     "e": 69.95,
+     "text": "a morning where loss and life aren't so well, ripe with sunlight that's deceptively warm.",
+     "file": "samples/10/L13.mp3",
+     "phrases": [
+      {
+       "id": "10_L13_P1",
+       "s": 63.51,
+       "e": 66.89,
+       "text": "a morning where loss and life aren't so well,"
+      },
+      {
+       "id": "10_L13_P2",
+       "s": 67.55,
+       "e": 69.95,
+       "text": "ripe with sunlight that's deceptively warm."
+      }
+     ]
+    },
+    {
+     "id": "10_L14",
+     "n": 14,
+     "s": 70.71,
+     "e": 76.15,
+     "text": "The tripping of birds, feeling of nests, spring out of the night that has covered me,",
+     "file": "samples/10/L14.mp3",
+     "phrases": [
+      {
+       "id": "10_L14_P1",
+       "s": 70.71,
+       "e": 71.99,
+       "text": "The tripping of birds,"
+      },
+      {
+       "id": "10_L14_P2",
+       "s": 72.55,
+       "e": 73.51,
+       "text": "feeling of nests,"
+      },
+      {
+       "id": "10_L14_P3",
+       "s": 73.97,
+       "e": 76.15,
+       "text": "spring out of the night that has covered me,"
+      }
+     ]
+    },
+    {
+     "id": "10_L15",
+     "n": 15,
+     "s": 76.54,
+     "e": 81.52,
+     "text": "with my own curiosities for a chance at an end, where everything will be okay.",
+     "file": "samples/10/L15.mp3",
+     "phrases": [
+      {
+       "id": "10_L15_P1",
+       "s": 76.54,
+       "e": 79.82,
+       "text": "with my own curiosities for a chance at an end,"
+      },
+      {
+       "id": "10_L15_P2",
+       "s": 80.04,
+       "e": 81.52,
+       "text": "where everything will be okay."
+      }
+     ]
+    },
+    {
+     "id": "10_L16",
+     "n": 16,
+     "s": 82.68,
+     "e": 87.66,
+     "text": "I want to live in this feeling forever, blissful and oddly innocent,",
+     "file": "samples/10/L16.mp3",
+     "phrases": [
+      {
+       "id": "10_L16_P1",
+       "s": 82.68,
+       "e": 84.9,
+       "text": "I want to live in this feeling forever,"
+      },
+      {
+       "id": "10_L16_P2",
+       "s": 85.5,
+       "e": 87.66,
+       "text": "blissful and oddly innocent,"
+      }
+     ]
+    },
+    {
+     "id": "10_L17",
+     "n": 17,
+     "s": 88.56,
+     "e": 91.74,
+     "text": "riding in a way you can't help but double-click,",
+     "file": "samples/10/L17.mp3",
+     "phrases": [
+      {
+       "id": "10_L17_P1",
+       "s": 88.56,
+       "e": 91.74,
+       "text": "riding in a way you can't help but double -click,"
+      }
+     ]
+    },
+    {
+     "id": "10_L18",
+     "n": 18,
+     "s": 92.92,
+     "e": 95.58,
+     "text": "improve, yeah, the magic still exists.",
+     "file": "samples/10/L18.mp3",
+     "phrases": [
+      {
+       "id": "10_L18_P1",
+       "s": 92.92,
+       "e": 93.28,
+       "text": "improve,"
+      },
+      {
+       "id": "10_L18_P2",
+       "s": 93.7,
+       "e": 93.7,
+       "text": "yeah,"
+      },
+      {
+       "id": "10_L18_P3",
+       "s": 94.62,
+       "e": 95.58,
+       "text": "the magic still exists."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "num": "11",
+   "title": "New Day",
+   "mp3": "audio/11_New Day_mixdown_RY_250626.mp3",
+   "dur": 101.27,
+   "spec": "spec/11.png",
+   "timing": "timings/11.json",
+   "description": "descriptions/11.md",
+   "halfworld": "11-new-day.html",
+   "drone": {
+    "container_start": 1056.659333,
+    "container_end": 1168.019333,
+    "poem_start": 1061.971768,
+    "poem_end": 1162.921768,
+    "offset_in_container": 5.31
+   },
+   "lines": [
+    {
+     "id": "11_L01",
+     "n": 1,
+     "s": 0.34,
+     "e": 2.8,
+     "text": "Even here is chilly in the morning.",
+     "file": "samples/11/L01.mp3",
+     "phrases": [
+      {
+       "id": "11_L01_P1",
+       "s": 0.34,
+       "e": 2.8,
+       "text": "Even here is chilly in the morning."
+      }
+     ]
+    },
+    {
+     "id": "11_L02",
+     "n": 2,
+     "s": 4.21,
+     "e": 7.19,
+     "text": "River rafting fall covers the seas in the distance",
+     "file": "samples/11/L02.mp3",
+     "phrases": [
+      {
+       "id": "11_L02_P1",
+       "s": 4.21,
+       "e": 7.19,
+       "text": "River rafting fall covers the seas in the distance"
+      }
+     ]
+    },
+    {
+     "id": "11_L03",
+     "n": 3,
+     "s": 7.89,
+     "e": 10.29,
+     "text": "and hugs the bases of tree-covered hills.",
+     "file": "samples/11/L03.mp3",
+     "phrases": [
+      {
+       "id": "11_L03_P1",
+       "s": 7.89,
+       "e": 10.29,
+       "text": "and hugs the bases of tree -covered hills."
+      }
+     ]
+    },
+    {
+     "id": "11_L04",
+     "n": 4,
+     "s": 10.91,
+     "e": 12.29,
+     "text": "This world is at peace.",
+     "file": "samples/11/L04.mp3",
+     "phrases": [
+      {
+       "id": "11_L04_P1",
+       "s": 10.91,
+       "e": 12.29,
+       "text": "This world is at peace."
+      }
+     ]
+    },
+    {
+     "id": "11_L05",
+     "n": 5,
+     "s": 13.69,
+     "e": 18.53,
+     "text": "In silent resounds, choir chords calm the nerves of things I can't control",
+     "file": "samples/11/L05.mp3",
+     "phrases": [
+      {
+       "id": "11_L05_P1",
+       "s": 13.69,
+       "e": 15.03,
+       "text": "In silent resounds,"
+      },
+      {
+       "id": "11_L05_P2",
+       "s": 15.61,
+       "e": 18.53,
+       "text": "choir chords calm the nerves of things I can't control"
+      }
+     ]
+    },
+    {
+     "id": "11_L06",
+     "n": 6,
+     "s": 19.38,
+     "e": 22.4,
+     "text": "and offer them as keepsakes back to the higher powers.",
+     "file": "samples/11/L06.mp3",
+     "phrases": [
+      {
+       "id": "11_L06_P1",
+       "s": 19.38,
+       "e": 22.4,
+       "text": "and offer them as keepsakes back to the higher powers."
+      }
+     ]
+    },
+    {
+     "id": "11_L07",
+     "n": 7,
+     "s": 23.3,
+     "e": 26.22,
+     "text": "Exhausted emotions carry forward a diminishing flame",
+     "file": "samples/11/L07.mp3",
+     "phrases": [
+      {
+       "id": "11_L07_P1",
+       "s": 23.3,
+       "e": 26.22,
+       "text": "Exhausted emotions carry forward a diminishing flame"
+      }
+     ]
+    },
+    {
+     "id": "11_L08",
+     "n": 8,
+     "s": 26.22,
+     "e": 30.22,
+     "text": "to emit jazz tuned lyrics that heat and dry the morning dew.",
+     "file": "samples/11/L08.mp3",
+     "phrases": [
+      {
+       "id": "11_L08_P1",
+       "s": 26.22,
+       "e": 30.22,
+       "text": "to emit jazz tuned lyrics that heat and dry the morning dew."
+      }
+     ]
+    },
+    {
+     "id": "11_L09",
+     "n": 9,
+     "s": 30.35,
+     "e": 34.17,
+     "text": "All the remnants of the destruction revealed in the sunlight.",
+     "file": "samples/11/L09.mp3",
+     "phrases": [
+      {
+       "id": "11_L09_P1",
+       "s": 30.35,
+       "e": 34.17,
+       "text": "All the remnants of the destruction revealed in the sunlight."
+      }
+     ]
+    },
+    {
+     "id": "11_L10",
+     "n": 10,
+     "s": 35.52,
+     "e": 36.76,
+     "text": "We can rebuild this temple.",
+     "file": "samples/11/L10.mp3",
+     "phrases": [
+      {
+       "id": "11_L10_P1",
+       "s": 35.52,
+       "e": 36.76,
+       "text": "We can rebuild this temple."
+      }
+     ]
+    },
+    {
+     "id": "11_L11",
+     "n": 11,
+     "s": 38.13,
+     "e": 38.89,
+     "text": "It's a new day.",
+     "file": "samples/11/L11.mp3",
+     "phrases": [
+      {
+       "id": "11_L11_P1",
+       "s": 38.13,
+       "e": 38.89,
+       "text": "It's a new day."
+      }
+     ]
+    },
+    {
+     "id": "11_L12",
+     "n": 12,
+     "s": 40.92,
+     "e": 44.74,
+     "text": "The catharsis evoked by loss in the painful crawl",
+     "file": "samples/11/L12.mp3",
+     "phrases": [
+      {
+       "id": "11_L12_P1",
+       "s": 40.92,
+       "e": 44.74,
+       "text": "The catharsis evoked by loss in the painful crawl"
+      }
+     ]
+    },
+    {
+     "id": "11_L13",
+     "n": 13,
+     "s": 44.74,
+     "e": 47.64,
+     "text": "along the cobblestone boulevards of broken dreams.",
+     "file": "samples/11/L13.mp3",
+     "phrases": [
+      {
+       "id": "11_L13_P1",
+       "s": 44.74,
+       "e": 47.64,
+       "text": "along the cobblestone boulevards of broken dreams."
+      }
+     ]
+    },
+    {
+     "id": "11_L14",
+     "n": 14,
+     "s": 48.9,
+     "e": 51.86,
+     "text": "I can close a chapter and open a journal stored away",
+     "file": "samples/11/L14.mp3",
+     "phrases": [
+      {
+       "id": "11_L14_P1",
+       "s": 48.9,
+       "e": 51.86,
+       "text": "I can close a chapter and open a journal stored away"
+      }
+     ]
+    },
+    {
+     "id": "11_L15",
+     "n": 15,
+     "s": 51.86,
+     "e": 53.82,
+     "text": "from moments of great clarity.",
+     "file": "samples/11/L15.mp3",
+     "phrases": [
+      {
+       "id": "11_L15_P1",
+       "s": 51.86,
+       "e": 53.82,
+       "text": "from moments of great clarity."
+      }
+     ]
+    },
+    {
+     "id": "11_L16",
+     "n": 16,
+     "s": 54.82,
+     "e": 57.92,
+     "text": "Words written from life's triumphs to offer a blueprint",
+     "file": "samples/11/L16.mp3",
+     "phrases": [
+      {
+       "id": "11_L16_P1",
+       "s": 54.82,
+       "e": 57.92,
+       "text": "Words written from life's triumphs to offer a blueprint"
+      }
+     ]
+    },
+    {
+     "id": "11_L17",
+     "n": 17,
+     "s": 57.92,
+     "e": 61.54,
+     "text": "of keeping faith alive and as majestic.",
+     "file": "samples/11/L17.mp3",
+     "phrases": [
+      {
+       "id": "11_L17_P1",
+       "s": 57.92,
+       "e": 61.54,
+       "text": "of keeping faith alive and as majestic."
+      }
+     ]
+    },
+    {
+     "id": "11_L18",
+     "n": 18,
+     "s": 61.54,
+     "e": 66.79,
+     "text": "When words are read aloud and sung alone as gospels",
+     "file": "samples/11/L18.mp3",
+     "phrases": [
+      {
+       "id": "11_L18_P1",
+       "s": 61.54,
+       "e": 62.62,
+       "text": "When"
+      },
+      {
+       "id": "11_L18_P2",
+       "s": 63.13,
+       "e": 66.79,
+       "text": "words are read aloud and sung alone as gospels"
+      }
+     ]
+    },
+    {
+     "id": "11_L19",
+     "n": 19,
+     "s": 66.79,
+     "e": 69.77,
+     "text": "to the lonely mirror's midnight hours,",
+     "file": "samples/11/L19.mp3",
+     "phrases": [
+      {
+       "id": "11_L19_P1",
+       "s": 66.79,
+       "e": 69.77,
+       "text": "to the lonely mirror's midnight hours,"
+      }
+     ]
+    },
+    {
+     "id": "11_L20",
+     "n": 20,
+     "s": 70.57,
+     "e": 74.81,
+     "text": "the left tears drying with time that is common to past.",
+     "file": "samples/11/L20.mp3",
+     "phrases": [
+      {
+       "id": "11_L20_P1",
+       "s": 70.57,
+       "e": 74.81,
+       "text": "the left tears drying with time that is common to past."
+      }
+     ]
+    },
+    {
+     "id": "11_L21",
+     "n": 21,
+     "s": 75.71,
+     "e": 76.95,
+     "text": "We can embrace a new day.",
+     "file": "samples/11/L21.mp3",
+     "phrases": [
+      {
+       "id": "11_L21_P1",
+       "s": 75.71,
+       "e": 76.95,
+       "text": "We can embrace a new day."
+      }
+     ]
+    },
+    {
+     "id": "11_L22",
+     "n": 22,
+     "s": 77.86,
+     "e": 79.18,
+     "text": "We can receive a new day.",
+     "file": "samples/11/L22.mp3",
+     "phrases": [
+      {
+       "id": "11_L22_P1",
+       "s": 77.86,
+       "e": 79.18,
+       "text": "We can receive a new day."
+      }
+     ]
+    },
+    {
+     "id": "11_L23",
+     "n": 23,
+     "s": 79.86,
+     "e": 81.66,
+     "text": "We can welcome a new day.",
+     "file": "samples/11/L23.mp3",
+     "phrases": [
+      {
+       "id": "11_L23_P1",
+       "s": 79.86,
+       "e": 81.66,
+       "text": "We can welcome a new day."
+      }
+     ]
+    },
+    {
+     "id": "11_L24",
+     "n": 24,
+     "s": 83.18,
+     "e": 84.96,
+     "text": "Everything I've known and learned,",
+     "file": "samples/11/L24.mp3",
+     "phrases": [
+      {
+       "id": "11_L24_P1",
+       "s": 83.18,
+       "e": 84.96,
+       "text": "Everything I've known and learned,"
+      }
+     ]
+    },
+    {
+     "id": "11_L25",
+     "n": 25,
+     "s": 86.02,
+     "e": 89.46,
+     "text": "every circumference of life we're celebrating and believing",
+     "file": "samples/11/L25.mp3",
+     "phrases": [
+      {
+       "id": "11_L25_P1",
+       "s": 86.02,
+       "e": 89.46,
+       "text": "every circumference of life we're celebrating and believing"
+      }
+     ]
+    },
+    {
+     "id": "11_L26",
+     "n": 26,
+     "s": 89.62,
+     "e": 93.68,
+     "text": "is here together in this sacred place,",
+     "file": "samples/11/L26.mp3",
+     "phrases": [
+      {
+       "id": "11_L26_P1",
+       "s": 89.62,
+       "e": 93.68,
+       "text": "is here together in this sacred place,"
+      }
+     ]
+    },
+    {
+     "id": "11_L27",
+     "n": 27,
+     "s": 94.47,
+     "e": 96.67,
+     "text": "reveling in the sunlight of a new beginning",
+     "file": "samples/11/L27.mp3",
+     "phrases": [
+      {
+       "id": "11_L27_P1",
+       "s": 94.47,
+       "e": 96.67,
+       "text": "reveling in the sunlight of a new beginning"
+      }
+     ]
+    },
+    {
+     "id": "11_L28",
+     "n": 28,
+     "s": 96.67,
+     "e": 100.81,
+     "text": "with this world and a heart at peace.",
+     "file": "samples/11/L28.mp3",
+     "phrases": [
+      {
+       "id": "11_L28_P1",
+       "s": 96.67,
+       "e": 100.81,
+       "text": "with this world and a heart at peace."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "num": "12",
+   "title": "Reunion",
+   "mp3": "audio/12_Reunion_mixdown_RY_250626.mp3",
+   "dur": 64.81,
+   "spec": "spec/12.png",
+   "timing": "timings/12.json",
+   "description": "descriptions/12.md",
+   "halfworld": "12-reunion.html",
+   "drone": {
+    "container_start": 1168.019354,
+    "container_end": 1242.999354,
+    "poem_start": 1173.171768,
+    "poem_end": 1237.851768,
+    "offset_in_container": 5.15
+   },
+   "lines": [
+    {
+     "id": "12_L01",
+     "n": 1,
+     "s": 0.0,
+     "e": 7.34,
+     "text": "Decades later, there was less time for words and more space for laughter, hugs with no reason,",
+     "file": "samples/12/L01.mp3",
+     "phrases": [
+      {
+       "id": "12_L01_P1",
+       "s": 0.0,
+       "e": 0.98,
+       "text": "Decades later,"
+      },
+      {
+       "id": "12_L01_P2",
+       "s": 1.65,
+       "e": 5.01,
+       "text": "there was less time for words and more space for laughter,"
+      },
+      {
+       "id": "12_L01_P3",
+       "s": 5.86,
+       "e": 7.34,
+       "text": "hugs with no reason,"
+      }
+     ]
+    },
+    {
+     "id": "12_L02",
+     "n": 2,
+     "s": 8.56,
+     "e": 16.04,
+     "text": "loud voices so our hearts can be overheard. My mind drifts into the darkness of our afterlives,",
+     "file": "samples/12/L02.mp3",
+     "phrases": [
+      {
+       "id": "12_L02_P1",
+       "s": 8.56,
+       "e": 11.0,
+       "text": "loud voices so our hearts can be overheard."
+      },
+      {
+       "id": "12_L02_P2",
+       "s": 12.6,
+       "e": 16.04,
+       "text": "My mind drifts into the darkness of our afterlives,"
+      }
+     ]
+    },
+    {
+     "id": "12_L03",
+     "n": 3,
+     "s": 16.75,
+     "e": 24.01,
+     "text": "and those rooms are empty. We are all here, each holding our glasses of burning sands",
+     "file": "samples/12/L03.mp3",
+     "phrases": [
+      {
+       "id": "12_L03_P1",
+       "s": 16.75,
+       "e": 18.27,
+       "text": "and those rooms are empty."
+      },
+      {
+       "id": "12_L03_P2",
+       "s": 19.75,
+       "e": 21.03,
+       "text": "We are all here,"
+      },
+      {
+       "id": "12_L03_P3",
+       "s": 21.03,
+       "e": 24.01,
+       "text": "each holding our glasses of burning sands"
+      }
+     ]
+    },
+    {
+     "id": "12_L04",
+     "n": 4,
+     "s": 24.51,
+     "e": 29.89,
+     "text": "and known journeys, and grateful to every living tree in the forest for the shared years",
+     "file": "samples/12/L04.mp3",
+     "phrases": [
+      {
+       "id": "12_L04_P1",
+       "s": 24.51,
+       "e": 25.73,
+       "text": "and known journeys,"
+      },
+      {
+       "id": "12_L04_P2",
+       "s": 26.37,
+       "e": 29.89,
+       "text": "and grateful to every living tree in the forest for the shared years"
+      }
+     ]
+    },
+    {
+     "id": "12_L05",
+     "n": 5,
+     "s": 29.89,
+     "e": 36.73,
+     "text": "and the shared memories. This is brotherhood. Smiles with no reason,",
+     "file": "samples/12/L05.mp3",
+     "phrases": [
+      {
+       "id": "12_L05_P1",
+       "s": 29.89,
+       "e": 31.59,
+       "text": "and the shared memories."
+      },
+      {
+       "id": "12_L05_P2",
+       "s": 32.72,
+       "e": 33.74,
+       "text": "This is brotherhood."
+      },
+      {
+       "id": "12_L05_P3",
+       "s": 35.65,
+       "e": 36.73,
+       "text": "Smiles with no reason,"
+      }
+     ]
+    },
+    {
+     "id": "12_L06",
+     "n": 6,
+     "s": 37.53,
+     "e": 45.19,
+     "text": "narrow differences so our hearts can be overheard. Decades later, we can place our ears upon the next",
+     "file": "samples/12/L06.mp3",
+     "phrases": [
+      {
+       "id": "12_L06_P1",
+       "s": 37.53,
+       "e": 40.41,
+       "text": "narrow differences so our hearts can be overheard."
+      },
+      {
+       "id": "12_L06_P2",
+       "s": 41.77,
+       "e": 42.53,
+       "text": "Decades later,"
+      },
+      {
+       "id": "12_L06_P3",
+       "s": 43.11,
+       "e": 45.19,
+       "text": "we can place our ears upon the next"
+      }
+     ]
+    },
+    {
+     "id": "12_L07",
+     "n": 7,
+     "s": 45.19,
+     "e": 54.42,
+     "text": "brother's soul and follow paths of hilltops and canyons, of blinding lights and infinite nights,",
+     "file": "samples/12/L07.mp3",
+     "phrases": [
+      {
+       "id": "12_L07_P1",
+       "s": 45.19,
+       "e": 50.94,
+       "text": "brother's soul and follow paths of hilltops and canyons,"
+      },
+      {
+       "id": "12_L07_P2",
+       "s": 51.54,
+       "e": 54.42,
+       "text": "of blinding lights and infinite nights,"
+      }
+     ]
+    },
+    {
+     "id": "12_L08",
+     "n": 8,
+     "s": 54.42,
+     "e": 59.08,
+     "text": "all too familiar and create the type of space for laughter",
+     "file": "samples/12/L08.mp3",
+     "phrases": [
+      {
+       "id": "12_L08_P1",
+       "s": 54.42,
+       "e": 55.92,
+       "text": "all too familiar"
+      },
+      {
+       "id": "12_L08_P2",
+       "s": 56.4,
+       "e": 59.08,
+       "text": "and create the type of space for laughter"
+      }
+     ]
+    },
+    {
+     "id": "12_L09",
+     "n": 9,
+     "s": 59.77,
+     "e": 64.34,
+     "text": "and football and recollections that bring us home every time.",
+     "file": "samples/12/L09.mp3",
+     "phrases": [
+      {
+       "id": "12_L09_P1",
+       "s": 59.77,
+       "e": 64.34,
+       "text": "and football and recollections that bring us home every time."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "num": "13",
+   "title": "How to Win My Heart",
+   "mp3": "audio/13_How to Win My Heart_mixdown_RY_250626.mp3",
+   "dur": 100.73,
+   "spec": "spec/13.png",
+   "timing": "timings/13.json",
+   "description": "descriptions/13.md",
+   "halfworld": "13-how-to-win-my-heart.html",
+   "drone": {
+    "container_start": 1243.002833,
+    "container_end": 1352.982833,
+    "poem_start": 1247.821768,
+    "poem_end": 1347.881768,
+    "offset_in_container": 4.82
+   },
+   "lines": [
+    {
+     "id": "13_L01",
+     "n": 1,
+     "s": 0.0,
+     "e": 3.0,
+     "text": "I want you to notice me in a corner cafe",
+     "file": "samples/13/L01.mp3",
+     "phrases": [
+      {
+       "id": "13_L01_P1",
+       "s": 0.0,
+       "e": 3.0,
+       "text": "I want you to notice me in a corner cafe"
+      }
+     ]
+    },
+    {
+     "id": "13_L02",
+     "n": 2,
+     "s": 3.0,
+     "e": 6.84,
+     "text": "at the Harbor of the Heavens, wandering in thought,",
+     "file": "samples/13/L02.mp3",
+     "phrases": [
+      {
+       "id": "13_L02_P1",
+       "s": 3.0,
+       "e": 5.7,
+       "text": "at the Harbor of the Heavens,"
+      },
+      {
+       "id": "13_L02_P2",
+       "s": 5.7,
+       "e": 6.84,
+       "text": "wandering in thought,"
+      }
+     ]
+    },
+    {
+     "id": "13_L03",
+     "n": 3,
+     "s": 7.34,
+     "e": 9.56,
+     "text": "discovering water on Jupiter's moons,",
+     "file": "samples/13/L03.mp3",
+     "phrases": [
+      {
+       "id": "13_L03_P1",
+       "s": 7.34,
+       "e": 9.56,
+       "text": "discovering water on Jupiter's moons,"
+      }
+     ]
+    },
+    {
+     "id": "13_L04",
+     "n": 4,
+     "s": 10.36,
+     "e": 12.1,
+     "text": "healing the sick with silent prayers",
+     "file": "samples/13/L04.mp3",
+     "phrases": [
+      {
+       "id": "13_L04_P1",
+       "s": 10.36,
+       "e": 12.1,
+       "text": "healing the sick with silent prayers"
+      }
+     ]
+    },
+    {
+     "id": "13_L05",
+     "n": 5,
+     "s": 12.1,
+     "e": 14.64,
+     "text": "and molding a better world to return to",
+     "file": "samples/13/L05.mp3",
+     "phrases": [
+      {
+       "id": "13_L05_P1",
+       "s": 12.1,
+       "e": 14.64,
+       "text": "and molding a better world to return to"
+      }
+     ]
+    },
+    {
+     "id": "13_L06",
+     "n": 6,
+     "s": 14.64,
+     "e": 17.96,
+     "text": "with every pulsing beat after walking alone.",
+     "file": "samples/13/L06.mp3",
+     "phrases": [
+      {
+       "id": "13_L06_P1",
+       "s": 14.64,
+       "e": 17.96,
+       "text": "with every pulsing beat after walking alone."
+      }
+     ]
+    },
+    {
+     "id": "13_L07",
+     "n": 7,
+     "s": 19.34,
+     "e": 21.38,
+     "text": "I want you to really notice me",
+     "file": "samples/13/L07.mp3",
+     "phrases": [
+      {
+       "id": "13_L07_P1",
+       "s": 19.34,
+       "e": 21.38,
+       "text": "I want you to really notice me"
+      }
+     ]
+    },
+    {
+     "id": "13_L08",
+     "n": 8,
+     "s": 21.38,
+     "e": 23.6,
+     "text": "with the distances we couldn't avoid",
+     "file": "samples/13/L08.mp3",
+     "phrases": [
+      {
+       "id": "13_L08_P1",
+       "s": 21.38,
+       "e": 23.6,
+       "text": "with the distances we couldn't avoid"
+      }
+     ]
+    },
+    {
+     "id": "13_L09",
+     "n": 9,
+     "s": 23.6,
+     "e": 26.96,
+     "text": "and our younger selves watching and dreaming,",
+     "file": "samples/13/L09.mp3",
+     "phrases": [
+      {
+       "id": "13_L09_P1",
+       "s": 23.6,
+       "e": 26.96,
+       "text": "and our younger selves watching and dreaming,"
+      }
+     ]
+    },
+    {
+     "id": "13_L10",
+     "n": 10,
+     "s": 27.26,
+     "e": 29.5,
+     "text": "while our elders clutch their pearls,",
+     "file": "samples/13/L10.mp3",
+     "phrases": [
+      {
+       "id": "13_L10_P1",
+       "s": 27.26,
+       "e": 29.5,
+       "text": "while our elders clutch their pearls,"
+      }
+     ]
+    },
+    {
+     "id": "13_L11",
+     "n": 11,
+     "s": 29.5,
+     "e": 31.94,
+     "text": "hold their faith and breath closely,",
+     "file": "samples/13/L11.mp3",
+     "phrases": [
+      {
+       "id": "13_L11_P1",
+       "s": 29.5,
+       "e": 31.94,
+       "text": "hold their faith and breath closely,"
+      }
+     ]
+    },
+    {
+     "id": "13_L12",
+     "n": 12,
+     "s": 32.58,
+     "e": 34.24,
+     "text": "freeing their worries peacefully.",
+     "file": "samples/13/L12.mp3",
+     "phrases": [
+      {
+       "id": "13_L12_P1",
+       "s": 32.58,
+       "e": 34.24,
+       "text": "freeing their worries peacefully."
+      }
+     ]
+    },
+    {
+     "id": "13_L13",
+     "n": 13,
+     "s": 35.87,
+     "e": 38.83,
+     "text": "I've journeyed beyond any place you can conceivably be.",
+     "file": "samples/13/L13.mp3",
+     "phrases": [
+      {
+       "id": "13_L13_P1",
+       "s": 35.87,
+       "e": 38.83,
+       "text": "I've journeyed beyond any place you can conceivably be."
+      }
+     ]
+    },
+    {
+     "id": "13_L14",
+     "n": 14,
+     "s": 39.31,
+     "e": 44.03,
+     "text": "So I thought, life has burned all of my love stories.",
+     "file": "samples/13/L14.mp3",
+     "phrases": [
+      {
+       "id": "13_L14_P1",
+       "s": 39.31,
+       "e": 40.13,
+       "text": "So I thought,"
+      },
+      {
+       "id": "13_L14_P2",
+       "s": 41.65,
+       "e": 44.03,
+       "text": "life has burned all of my love stories."
+      }
+     ]
+    },
+    {
+     "id": "13_L15",
+     "n": 15,
+     "s": 44.37,
+     "e": 46.41,
+     "text": "All ends led to losses,",
+     "file": "samples/13/L15.mp3",
+     "phrases": [
+      {
+       "id": "13_L15_P1",
+       "s": 44.37,
+       "e": 46.41,
+       "text": "All ends led to losses,"
+      }
+     ]
+    },
+    {
+     "id": "13_L16",
+     "n": 16,
+     "s": 47.07,
+     "e": 50.37,
+     "text": "victory-less seasons for a man that wanted just one win.",
+     "file": "samples/13/L16.mp3",
+     "phrases": [
+      {
+       "id": "13_L16_P1",
+       "s": 47.07,
+       "e": 50.37,
+       "text": "victory -less seasons for a man that wanted just one win."
+      }
+     ]
+    },
+    {
+     "id": "13_L17",
+     "n": 17,
+     "s": 50.89,
+     "e": 52.29,
+     "text": "I could celebrate forever.",
+     "file": "samples/13/L17.mp3",
+     "phrases": [
+      {
+       "id": "13_L17_P1",
+       "s": 50.89,
+       "e": 52.29,
+       "text": "I could celebrate forever."
+      }
+     ]
+    },
+    {
+     "id": "13_L18",
+     "n": 18,
+     "s": 54.18,
+     "e": 56.08,
+     "text": "Ice has frozen in thought,",
+     "file": "samples/13/L18.mp3",
+     "phrases": [
+      {
+       "id": "13_L18_P1",
+       "s": 54.18,
+       "e": 56.08,
+       "text": "Ice has frozen in thought,"
+      }
+     ]
+    },
+    {
+     "id": "13_L19",
+     "n": 19,
+     "s": 56.42,
+     "e": 58.74,
+     "text": "friendships in death and departure.",
+     "file": "samples/13/L19.mp3",
+     "phrases": [
+      {
+       "id": "13_L19_P1",
+       "s": 56.42,
+       "e": 58.74,
+       "text": "friendships in death and departure."
+      }
+     ]
+    },
+    {
+     "id": "13_L20",
+     "n": 20,
+     "s": 59.66,
+     "e": 61.52,
+     "text": "I've learned to love myself more,",
+     "file": "samples/13/L20.mp3",
+     "phrases": [
+      {
+       "id": "13_L20_P1",
+       "s": 59.66,
+       "e": 61.52,
+       "text": "I've learned to love myself more,"
+      }
+     ]
+    },
+    {
+     "id": "13_L21",
+     "n": 21,
+     "s": 62.06,
+     "e": 66.06,
+     "text": "manage loss and harvest a wizardry more brilliant",
+     "file": "samples/13/L21.mp3",
+     "phrases": [
+      {
+       "id": "13_L21_P1",
+       "s": 62.06,
+       "e": 66.06,
+       "text": "manage loss and harvest a wizardry more brilliant"
+      }
+     ]
+    },
+    {
+     "id": "13_L22",
+     "n": 22,
+     "s": 66.06,
+     "e": 69.12,
+     "text": "than the scarlet poppies and purple blossoms",
+     "file": "samples/13/L22.mp3",
+     "phrases": [
+      {
+       "id": "13_L22_P1",
+       "s": 66.06,
+       "e": 69.12,
+       "text": "than the scarlet poppies and purple blossoms"
+      }
+     ]
+    },
+    {
+     "id": "13_L23",
+     "n": 23,
+     "s": 69.12,
+     "e": 71.54,
+     "text": "at time and tears have just claimed.",
+     "file": "samples/13/L23.mp3",
+     "phrases": [
+      {
+       "id": "13_L23_P1",
+       "s": 69.12,
+       "e": 71.54,
+       "text": "at time and tears have just claimed."
+      }
+     ]
+    },
+    {
+     "id": "13_L24",
+     "n": 24,
+     "s": 72.84,
+     "e": 76.06,
+     "text": "Yet from a distant window, beautiful and calm,",
+     "file": "samples/13/L24.mp3",
+     "phrases": [
+      {
+       "id": "13_L24_P1",
+       "s": 72.84,
+       "e": 74.3,
+       "text": "Yet from a distant window,"
+      },
+      {
+       "id": "13_L24_P2",
+       "s": 75.0,
+       "e": 76.06,
+       "text": "beautiful and calm,"
+      }
+     ]
+    },
+    {
+     "id": "13_L25",
+     "n": 25,
+     "s": 76.83,
+     "e": 78.71,
+     "text": "hope tells me you'll see me.",
+     "file": "samples/13/L25.mp3",
+     "phrases": [
+      {
+       "id": "13_L25_P1",
+       "s": 76.83,
+       "e": 78.71,
+       "text": "hope tells me you'll see me."
+      }
+     ]
+    },
+    {
+     "id": "13_L26",
+     "n": 26,
+     "s": 79.2,
+     "e": 82.46,
+     "text": "And if you notice me and capture my eyes",
+     "file": "samples/13/L26.mp3",
+     "phrases": [
+      {
+       "id": "13_L26_P1",
+       "s": 79.2,
+       "e": 82.46,
+       "text": "And if you notice me and capture my eyes"
+      }
+     ]
+    },
+    {
+     "id": "13_L27",
+     "n": 27,
+     "s": 82.46,
+     "e": 84.0,
+     "text": "as you refocus yours,",
+     "file": "samples/13/L27.mp3",
+     "phrases": [
+      {
+       "id": "13_L27_P1",
+       "s": 82.46,
+       "e": 84.0,
+       "text": "as you refocus yours,"
+      }
+     ]
+    },
+    {
+     "id": "13_L28",
+     "n": 28,
+     "s": 84.64,
+     "e": 86.94,
+     "text": "stepping back and letting them say hello,",
+     "file": "samples/13/L28.mp3",
+     "phrases": [
+      {
+       "id": "13_L28_P1",
+       "s": 84.64,
+       "e": 86.94,
+       "text": "stepping back and letting them say hello,"
+      }
+     ]
+    },
+    {
+     "id": "13_L29",
+     "n": 29,
+     "s": 87.66,
+     "e": 90.82,
+     "text": "all the fatigue of wandering alone in thought,",
+     "file": "samples/13/L29.mp3",
+     "phrases": [
+      {
+       "id": "13_L29_P1",
+       "s": 87.66,
+       "e": 90.82,
+       "text": "all the fatigue of wandering alone in thought,"
+      }
+     ]
+    },
+    {
+     "id": "13_L30",
+     "n": 30,
+     "s": 91.68,
+     "e": 94.92,
+     "text": "in windless seasons and scarlet poppies",
+     "file": "samples/13/L30.mp3",
+     "phrases": [
+      {
+       "id": "13_L30_P1",
+       "s": 91.68,
+       "e": 94.92,
+       "text": "in windless seasons and scarlet poppies"
+      }
+     ]
+    },
+    {
+     "id": "13_L31",
+     "n": 31,
+     "s": 94.92,
+     "e": 97.48,
+     "text": "won't prevent me from sharing a smile",
+     "file": "samples/13/L31.mp3",
+     "phrases": [
+      {
+       "id": "13_L31_P1",
+       "s": 94.92,
+       "e": 97.48,
+       "text": "won't prevent me from sharing a smile"
+      }
+     ]
+    },
+    {
+     "id": "13_L32",
+     "n": 32,
+     "s": 97.48,
+     "e": 99.66,
+     "text": "worth the promise of my heart.",
+     "file": "samples/13/L32.mp3",
+     "phrases": [
+      {
+       "id": "13_L32_P1",
+       "s": 97.48,
+       "e": 99.66,
+       "text": "worth the promise of my heart."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "num": "14",
+   "title": "Hot Minute",
+   "mp3": "audio/14_Hot Minute_mixdown_RY_250626.mp3",
+   "dur": 69.36,
+   "spec": "spec/14.png",
+   "timing": "timings/14.json",
+   "description": "descriptions/14.md",
+   "halfworld": "14-hot-minute.html",
+   "drone": {
+    "container_start": 1352.982188,
+    "container_end": 1440.072188,
+    "poem_start": 1357.861768,
+    "poem_end": 1427.101768,
+    "offset_in_container": 4.88
+   },
+   "lines": [
+    {
+     "id": "14_L01",
+     "n": 1,
+     "s": 0.02,
+     "e": 3.46,
+     "text": "Don't make me leave and go where promises, hearts,",
+     "file": "samples/14/L01.mp3",
+     "phrases": [
+      {
+       "id": "14_L01_P1",
+       "s": 0.02,
+       "e": 2.22,
+       "text": "Don't make me leave and go where promises,"
+      },
+      {
+       "id": "14_L01_P2",
+       "s": 3.26,
+       "e": 3.46,
+       "text": "hearts,"
+      }
+     ]
+    },
+    {
+     "id": "14_L02",
+     "n": 2,
+     "s": 4.26,
+     "e": 7.0,
+     "text": "spectrums of light-filled constellations are broken.",
+     "file": "samples/14/L02.mp3",
+     "phrases": [
+      {
+       "id": "14_L02_P1",
+       "s": 4.26,
+       "e": 7.0,
+       "text": "spectrums of light -filled constellations are broken."
+      }
+     ]
+    },
+    {
+     "id": "14_L03",
+     "n": 3,
+     "s": 8.08,
+     "e": 9.64,
+     "text": "I escaped here for a reason,",
+     "file": "samples/14/L03.mp3",
+     "phrases": [
+      {
+       "id": "14_L03_P1",
+       "s": 8.08,
+       "e": 9.64,
+       "text": "I escaped here for a reason,"
+      }
+     ]
+    },
+    {
+     "id": "14_L04",
+     "n": 4,
+     "s": 10.32,
+     "e": 12.84,
+     "text": "believing this would give me a sharpened key of answers",
+     "file": "samples/14/L04.mp3",
+     "phrases": [
+      {
+       "id": "14_L04_P1",
+       "s": 10.32,
+       "e": 12.84,
+       "text": "believing this would give me a sharpened key of answers"
+      }
+     ]
+    },
+    {
+     "id": "14_L05",
+     "n": 5,
+     "s": 13.28,
+     "e": 14.78,
+     "text": "in a more grounded bravado",
+     "file": "samples/14/L05.mp3",
+     "phrases": [
+      {
+       "id": "14_L05_P1",
+       "s": 13.28,
+       "e": 14.78,
+       "text": "in a more grounded bravado"
+      }
+     ]
+    },
+    {
+     "id": "14_L06",
+     "n": 6,
+     "s": 15.3,
+     "e": 17.76,
+     "text": "for my life of conquests and queries.",
+     "file": "samples/14/L06.mp3",
+     "phrases": [
+      {
+       "id": "14_L06_P1",
+       "s": 15.3,
+       "e": 17.76,
+       "text": "for my life of conquests and queries."
+      }
+     ]
+    },
+    {
+     "id": "14_L07",
+     "n": 7,
+     "s": 19.04,
+     "e": 22.1,
+     "text": "The way you see things felt safe and timeless.",
+     "file": "samples/14/L07.mp3",
+     "phrases": [
+      {
+       "id": "14_L07_P1",
+       "s": 19.04,
+       "e": 22.1,
+       "text": "The way you see things felt safe and timeless."
+      }
+     ]
+    },
+    {
+     "id": "14_L08",
+     "n": 8,
+     "s": 23.26,
+     "e": 26.22,
+     "text": "Whatever has terminated this moment, damn you,",
+     "file": "samples/14/L08.mp3",
+     "phrases": [
+      {
+       "id": "14_L08_P1",
+       "s": 23.26,
+       "e": 25.0,
+       "text": "Whatever has terminated this moment,"
+      },
+      {
+       "id": "14_L08_P2",
+       "s": 25.72,
+       "e": 26.22,
+       "text": "damn you,"
+      }
+     ]
+    },
+    {
+     "id": "14_L09",
+     "n": 9,
+     "s": 27.33,
+     "e": 31.09,
+     "text": "but let it feel love and lost as we must endure,",
+     "file": "samples/14/L09.mp3",
+     "phrases": [
+      {
+       "id": "14_L09_P1",
+       "s": 27.33,
+       "e": 31.09,
+       "text": "but let it feel love and lost as we must endure,"
+      }
+     ]
+    },
+    {
+     "id": "14_L10",
+     "n": 10,
+     "s": 31.89,
+     "e": 35.35,
+     "text": "absent artificial escapes and machine learning strengths",
+     "file": "samples/14/L10.mp3",
+     "phrases": [
+      {
+       "id": "14_L10_P1",
+       "s": 31.89,
+       "e": 35.35,
+       "text": "absent artificial escapes and machine learning strengths"
+      }
+     ]
+    },
+    {
+     "id": "14_L11",
+     "n": 11,
+     "s": 35.35,
+     "e": 38.15,
+     "text": "for my highs and lows as resource materials.",
+     "file": "samples/14/L11.mp3",
+     "phrases": [
+      {
+       "id": "14_L11_P1",
+       "s": 35.35,
+       "e": 38.15,
+       "text": "for my highs and lows as resource materials."
+      }
+     ]
+    },
+    {
+     "id": "14_L12",
+     "n": 12,
+     "s": 39.88,
+     "e": 41.82,
+     "text": "Well, I can't leave behind the impulse",
+     "file": "samples/14/L12.mp3",
+     "phrases": [
+      {
+       "id": "14_L12_P1",
+       "s": 39.88,
+       "e": 40.12,
+       "text": "Well,"
+      },
+      {
+       "id": "14_L12_P2",
+       "s": 40.14,
+       "e": 41.82,
+       "text": "I can't leave behind the impulse"
+      }
+     ]
+    },
+    {
+     "id": "14_L13",
+     "n": 13,
+     "s": 41.82,
+     "e": 43.6,
+     "text": "that comes from battle scars",
+     "file": "samples/14/L13.mp3",
+     "phrases": [
+      {
+       "id": "14_L13_P1",
+       "s": 41.82,
+       "e": 43.6,
+       "text": "that comes from battle scars"
+      }
+     ]
+    },
+    {
+     "id": "14_L14",
+     "n": 14,
+     "s": 44.14,
+     "e": 47.48,
+     "text": "and can't leave behind the wisdom that brushes gray tones",
+     "file": "samples/14/L14.mp3",
+     "phrases": [
+      {
+       "id": "14_L14_P1",
+       "s": 44.14,
+       "e": 47.48,
+       "text": "and can't leave behind the wisdom that brushes gray tones"
+      }
+     ]
+    },
+    {
+     "id": "14_L15",
+     "n": 15,
+     "s": 47.48,
+     "e": 51.12,
+     "text": "into our melanin after disappointments and defeats.",
+     "file": "samples/14/L15.mp3",
+     "phrases": [
+      {
+       "id": "14_L15_P1",
+       "s": 47.48,
+       "e": 51.12,
+       "text": "into our melanin after disappointments and defeats."
+      }
+     ]
+    },
+    {
+     "id": "14_L16",
+     "n": 16,
+     "s": 52.78,
+     "e": 54.18,
+     "text": "I trust that you'll be fine.",
+     "file": "samples/14/L16.mp3",
+     "phrases": [
+      {
+       "id": "14_L16_P1",
+       "s": 52.78,
+       "e": 54.18,
+       "text": "I trust that you'll be fine."
+      }
+     ]
+    },
+    {
+     "id": "14_L17",
+     "n": 17,
+     "s": 55.0,
+     "e": 56.38,
+     "text": "I escaped here for a reason.",
+     "file": "samples/14/L17.mp3",
+     "phrases": [
+      {
+       "id": "14_L17_P1",
+       "s": 55.0,
+       "e": 56.38,
+       "text": "I escaped here for a reason."
+      }
+     ]
+    },
+    {
+     "id": "14_L18",
+     "n": 18,
+     "s": 57.05,
+     "e": 61.08,
+     "text": "Our dance together is a victory to entwine muses,",
+     "file": "samples/14/L18.mp3",
+     "phrases": [
+      {
+       "id": "14_L18_P1",
+       "s": 57.05,
+       "e": 61.08,
+       "text": "Our dance together is a victory to entwine muses,"
+      }
+     ]
+    },
+    {
+     "id": "14_L19",
+     "n": 19,
+     "s": 61.32,
+     "e": 64.3,
+     "text": "immersed in twisted dons for a hot minute,",
+     "file": "samples/14/L19.mp3",
+     "phrases": [
+      {
+       "id": "14_L19_P1",
+       "s": 61.32,
+       "e": 64.3,
+       "text": "immersed in twisted dons for a hot minute,"
+      }
+     ]
+    },
+    {
+     "id": "14_L20",
+     "n": 20,
+     "s": 65.5,
+     "e": 68.77,
+     "text": "and a genesis of a New Testament as it ends.",
+     "file": "samples/14/L20.mp3",
+     "phrases": [
+      {
+       "id": "14_L20_P1",
+       "s": 65.5,
+       "e": 68.77,
+       "text": "and a genesis of a New Testament as it ends."
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

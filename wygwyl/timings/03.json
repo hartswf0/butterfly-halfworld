@@ -1,0 +1,546 @@
+{
+ "file": "ANT/VO_Mixdowns_RY/03_How to Break off an Engagement_mixdown_RY_250626.wav",
+ "duration": 62.52,
+ "segments": [
+  {
+   "start": 0.46,
+   "end": 13.74,
+   "text": "Old to forever, a tambourine sounds off an empty temple, empty choir stands, empty prayer lines, and abandoned Baptist pools,",
+   "words": [
+    {
+     "w": "Old",
+     "s": 0.46,
+     "e": 1.04
+    },
+    {
+     "w": "to",
+     "s": 1.04,
+     "e": 1.22
+    },
+    {
+     "w": "forever,",
+     "s": 1.22,
+     "e": 1.74
+    },
+    {
+     "w": "a",
+     "s": 3.1,
+     "e": 3.16
+    },
+    {
+     "w": "tambourine",
+     "s": 3.16,
+     "e": 3.68
+    },
+    {
+     "w": "sounds",
+     "s": 3.68,
+     "e": 4.06
+    },
+    {
+     "w": "off",
+     "s": 4.06,
+     "e": 4.52
+    },
+    {
+     "w": "an",
+     "s": 4.52,
+     "e": 5.58
+    },
+    {
+     "w": "empty",
+     "s": 5.61,
+     "e": 5.89
+    },
+    {
+     "w": "temple,",
+     "s": 5.89,
+     "e": 6.33
+    },
+    {
+     "w": "empty",
+     "s": 7.59,
+     "e": 7.77
+    },
+    {
+     "w": "choir",
+     "s": 7.77,
+     "e": 8.13
+    },
+    {
+     "w": "stands,",
+     "s": 8.13,
+     "e": 8.79
+    },
+    {
+     "w": "empty",
+     "s": 9.85,
+     "e": 10.11
+    },
+    {
+     "w": "prayer",
+     "s": 10.11,
+     "e": 10.45
+    },
+    {
+     "w": "lines,",
+     "s": 10.45,
+     "e": 11.05
+    },
+    {
+     "w": "and",
+     "s": 12.12,
+     "e": 12.24
+    },
+    {
+     "w": "abandoned",
+     "s": 12.24,
+     "e": 12.72
+    },
+    {
+     "w": "Baptist",
+     "s": 12.72,
+     "e": 13.14
+    },
+    {
+     "w": "pools,",
+     "s": 13.14,
+     "e": 13.74
+    }
+   ]
+  },
+  {
+   "start": 14.94,
+   "end": 19.7,
+   "text": "pews taken by cobwebs, and doused in disintegration.",
+   "words": [
+    {
+     "w": "pews",
+     "s": 14.94,
+     "e": 15.2
+    },
+    {
+     "w": "taken",
+     "s": 15.2,
+     "e": 15.6
+    },
+    {
+     "w": "by",
+     "s": 15.6,
+     "e": 16.02
+    },
+    {
+     "w": "cobwebs,",
+     "s": 16.02,
+     "e": 17.1
+    },
+    {
+     "w": "and",
+     "s": 17.66,
+     "e": 18.04
+    },
+    {
+     "w": "doused",
+     "s": 18.04,
+     "e": 18.42
+    },
+    {
+     "w": "in",
+     "s": 18.42,
+     "e": 18.84
+    },
+    {
+     "w": "disintegration.",
+     "s": 18.84,
+     "e": 19.7
+    }
+   ]
+  },
+  {
+   "start": 21.53,
+   "end": 28.47,
+   "text": "Spirits have left salvations and opened gift boxes placed outside the side doors.",
+   "words": [
+    {
+     "w": "Spirits",
+     "s": 21.53,
+     "e": 21.53
+    },
+    {
+     "w": "have",
+     "s": 21.53,
+     "e": 22.57
+    },
+    {
+     "w": "left",
+     "s": 22.57,
+     "e": 22.81
+    },
+    {
+     "w": "salvations",
+     "s": 22.81,
+     "e": 23.71
+    },
+    {
+     "w": "and",
+     "s": 23.71,
+     "e": 24.95
+    },
+    {
+     "w": "opened",
+     "s": 24.95,
+     "e": 25.41
+    },
+    {
+     "w": "gift",
+     "s": 25.41,
+     "e": 25.79
+    },
+    {
+     "w": "boxes",
+     "s": 25.79,
+     "e": 26.37
+    },
+    {
+     "w": "placed",
+     "s": 26.37,
+     "e": 26.83
+    },
+    {
+     "w": "outside",
+     "s": 26.83,
+     "e": 27.49
+    },
+    {
+     "w": "the",
+     "s": 27.49,
+     "e": 27.71
+    },
+    {
+     "w": "side",
+     "s": 27.71,
+     "e": 28.03
+    },
+    {
+     "w": "doors.",
+     "s": 28.03,
+     "e": 28.47
+    }
+   ]
+  },
+  {
+   "start": 28.47,
+   "end": 34.31,
+   "text": "It thunders, then it rains until nothing remains.",
+   "words": [
+    {
+     "w": "It",
+     "s": 28.47,
+     "e": 29.71
+    },
+    {
+     "w": "thunders,",
+     "s": 30.35,
+     "e": 30.99
+    },
+    {
+     "w": "then",
+     "s": 31.71,
+     "e": 31.93
+    },
+    {
+     "w": "it",
+     "s": 31.93,
+     "e": 32.09
+    },
+    {
+     "w": "rains",
+     "s": 32.09,
+     "e": 32.41
+    },
+    {
+     "w": "until",
+     "s": 32.41,
+     "e": 32.97
+    },
+    {
+     "w": "nothing",
+     "s": 32.97,
+     "e": 33.45
+    },
+    {
+     "w": "remains.",
+     "s": 33.45,
+     "e": 34.31
+    }
+   ]
+  },
+  {
+   "start": 35.68,
+   "end": 39.86,
+   "text": "Old to the storm ending, what was once love now goods,",
+   "words": [
+    {
+     "w": "Old",
+     "s": 35.68,
+     "e": 35.76
+    },
+    {
+     "w": "to",
+     "s": 35.76,
+     "e": 35.94
+    },
+    {
+     "w": "the",
+     "s": 35.94,
+     "e": 36.1
+    },
+    {
+     "w": "storm",
+     "s": 36.1,
+     "e": 36.42
+    },
+    {
+     "w": "ending,",
+     "s": 36.42,
+     "e": 36.88
+    },
+    {
+     "w": "what",
+     "s": 37.86,
+     "e": 38.08
+    },
+    {
+     "w": "was",
+     "s": 38.08,
+     "e": 38.26
+    },
+    {
+     "w": "once",
+     "s": 38.26,
+     "e": 38.54
+    },
+    {
+     "w": "love",
+     "s": 38.54,
+     "e": 38.92
+    },
+    {
+     "w": "now",
+     "s": 38.92,
+     "e": 39.26
+    },
+    {
+     "w": "goods,",
+     "s": 39.26,
+     "e": 39.86
+    }
+   ]
+  },
+  {
+   "start": 40.68,
+   "end": 43.66,
+   "text": "broken and sealed apart by lightning,",
+   "words": [
+    {
+     "w": "broken",
+     "s": 40.68,
+     "e": 41.14
+    },
+    {
+     "w": "and",
+     "s": 41.14,
+     "e": 42.04
+    },
+    {
+     "w": "sealed",
+     "s": 42.04,
+     "e": 42.46
+    },
+    {
+     "w": "apart",
+     "s": 42.46,
+     "e": 42.84
+    },
+    {
+     "w": "by",
+     "s": 42.84,
+     "e": 43.18
+    },
+    {
+     "w": "lightning,",
+     "s": 43.18,
+     "e": 43.66
+    }
+   ]
+  },
+  {
+   "start": 44.52,
+   "end": 48.24,
+   "text": "daily breads soaked and delivered rotted by rain,",
+   "words": [
+    {
+     "w": "daily",
+     "s": 44.52,
+     "e": 44.9
+    },
+    {
+     "w": "breads",
+     "s": 44.9,
+     "e": 45.5
+    },
+    {
+     "w": "soaked",
+     "s": 45.5,
+     "e": 45.8
+    },
+    {
+     "w": "and",
+     "s": 45.8,
+     "e": 46.34
+    },
+    {
+     "w": "delivered",
+     "s": 46.34,
+     "e": 46.84
+    },
+    {
+     "w": "rotted",
+     "s": 46.84,
+     "e": 47.42
+    },
+    {
+     "w": "by",
+     "s": 47.42,
+     "e": 47.72
+    },
+    {
+     "w": "rain,",
+     "s": 47.72,
+     "e": 48.24
+    }
+   ]
+  },
+  {
+   "start": 49.26,
+   "end": 51.9,
+   "text": "and blankets soiled by venomous puppeteers,",
+   "words": [
+    {
+     "w": "and",
+     "s": 49.26,
+     "e": 49.4
+    },
+    {
+     "w": "blankets",
+     "s": 49.4,
+     "e": 49.92
+    },
+    {
+     "w": "soiled",
+     "s": 49.92,
+     "e": 50.72
+    },
+    {
+     "w": "by",
+     "s": 50.72,
+     "e": 50.92
+    },
+    {
+     "w": "venomous",
+     "s": 50.92,
+     "e": 51.44
+    },
+    {
+     "w": "puppeteers,",
+     "s": 51.44,
+     "e": 51.9
+    }
+   ]
+  },
+  {
+   "start": 53.52,
+   "end": 56.44,
+   "text": "old to two sets of button-printed footsteps,",
+   "words": [
+    {
+     "w": "old",
+     "s": 53.52,
+     "e": 53.9
+    },
+    {
+     "w": "to",
+     "s": 53.9,
+     "e": 54.12
+    },
+    {
+     "w": "two",
+     "s": 54.12,
+     "e": 54.46
+    },
+    {
+     "w": "sets",
+     "s": 54.46,
+     "e": 54.78
+    },
+    {
+     "w": "of",
+     "s": 54.78,
+     "e": 55.06
+    },
+    {
+     "w": "button",
+     "s": 55.06,
+     "e": 55.32
+    },
+    {
+     "w": "-printed",
+     "s": 55.32,
+     "e": 55.76
+    },
+    {
+     "w": "footsteps,",
+     "s": 55.76,
+     "e": 56.44
+    }
+   ]
+  },
+  {
+   "start": 56.44,
+   "end": 61.18,
+   "text": "and a tambourine shattered into pieces.",
+   "words": [
+    {
+     "w": "and",
+     "s": 56.44,
+     "e": 57.66
+    },
+    {
+     "w": "a",
+     "s": 58.02,
+     "e": 58.14
+    },
+    {
+     "w": "tambourine",
+     "s": 58.14,
+     "e": 59.08
+    },
+    {
+     "w": "shattered",
+     "s": 59.08,
+     "e": 60.16
+    },
+    {
+     "w": "into",
+     "s": 60.16,
+     "e": 60.86
+    },
+    {
+     "w": "pieces.",
+     "s": 60.86,
+     "e": 61.18
+    }
+   ]
+  }
+ ]
+}

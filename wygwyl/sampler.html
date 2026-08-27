@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WYGWYL VOICE SAMPLER</title>
+<style>
+:root{--bg:#0a0c0a;--panel:#10140f;--line:#26301f;--ink:#cfe3c8;--dim:#7d8f74;
+  --faint:#4a5a42;--accent:#9ee06a;--gold:#e8c34a;--teal:#4dd9cc;--water:#5ba8f5}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:13px/1.5 "SF Mono",Menlo,monospace;padding:18px;max-width:1100px;margin:0 auto}
+a{color:var(--teal);text-decoration:none}
+h1{font-size:16px;letter-spacing:.22em;color:var(--accent)}
+#sub{color:var(--dim);font-size:11.5px;margin:6px 0 4px}
+#note{color:var(--faint);font-size:10.5px;margin-bottom:18px;line-height:1.7}
+.track{background:var(--panel);border:1px solid var(--line);border-radius:5px;margin-bottom:14px;overflow:hidden}
+.thead{display:flex;gap:12px;align-items:baseline;padding:10px 14px;cursor:pointer;flex-wrap:wrap}
+.thead:hover{background:#161b14}
+.tnum{color:var(--gold);letter-spacing:.1em}
+.ttitle{color:var(--ink);font-size:14px}
+.tmeta{color:var(--faint);font-size:10.5px;margin-left:auto;display:flex;gap:12px;flex-wrap:wrap}
+.strip{position:relative;height:110px;background-size:100% 100%;background-repeat:no-repeat;cursor:crosshair;border-top:1px solid var(--line)}
+.reg{position:absolute;top:0;bottom:0;border-left:1px solid #9ee06a44}
+.reg:hover{background:#9ee06a22}
+.reg.playing{background:#e8c34a33}
+.tools{display:flex;gap:8px;padding:7px 14px;border-top:1px solid var(--line);flex-wrap:wrap;align-items:center}
+.tools a{font-size:11px}
+button{background:#161b14;border:1px solid var(--line);color:var(--ink);font:inherit;font-size:11px;padding:3px 10px;border-radius:3px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button.on{background:var(--accent);color:#0a0c0a}
+.lines{display:none;border-top:1px solid var(--line)}
+.track.open .lines{display:block}
+.lrow{display:flex;gap:10px;padding:7px 14px;border-bottom:1px solid #1a2117;align-items:flex-start}
+.lrow:hover{background:#12160f}
+.lid{color:var(--gold);font-size:10.5px;white-space:nowrap;cursor:pointer;padding-top:2px}
+.lid:hover{color:var(--accent)}
+.lspec{width:120px;min-width:120px;height:34px;background-repeat:no-repeat;border:1px solid var(--line);border-radius:2px;cursor:pointer}
+.ltime{color:var(--faint);font-size:10px;white-space:nowrap;padding-top:3px}
+.ltext{flex:1}
+.ph{cursor:pointer;border-bottom:1px dotted #4a5a42}
+.ph:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.ph.playing{color:var(--gold)}
+.lbtns{display:flex;gap:5px;white-space:nowrap}
+.lbtns a,.lbtns span{font-size:10px;color:var(--water);cursor:pointer;border:1px solid var(--line);padding:1px 6px;border-radius:3px}
+.lbtns a:hover,.lbtns span:hover{border-color:var(--water)}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--accent);color:#0a0c0a;
+  padding:5px 14px;border-radius:4px;font-size:11px;display:none;z-index:9}
+@media(max-width:640px){.lspec{display:none}.tmeta{margin-left:0}}
+</style>
+</head>
+<body>
+<h1>WYGWYL · VOICE SAMPLER</h1>
+<div id="sub">the fourteen readings of <i>Resurrecting Atlantis</i> — dry masters, session RY 2025-06-26 — chopped by line and phrase · <a href="./">fourteen halfworlds ↗</a></div>
+<div id="note">every line is an addressable sample — <code>samples/NN/LII.mp3</code> · manifest: <a href="samples.json">samples.json</a> ·
+word-level timings: <code>timings/NN.json</code> · thick descriptions: <code>descriptions/NN.md</code><br>
+click a spectrogram region or any <u style="text-decoration-style:dotted">dotted phrase</u> to hear it ·
+⬇ downloads the line cut · ⧉ copies its JSON · ≈ plays the same moment inside the unified drone</div>
+<div id="tracks">loading manifest…</div>
+<audio id="droneEl" src="drone/unified-drones-lite.mp3" preload="none"></audio>
+<div id="toast"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const mmss = t => `${String(Math.floor(t/60)).padStart(2,'0')}:${(t%60).toFixed(1).padStart(4,'0')}`;
+let AC = null, buffers = {}, srcNode = null, droneStop = null;
+
+async function buffer(track) {
+  if (buffers[track.num]) return buffers[track.num];
+  if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)();
+  const raw = await (await fetch(track.mp3)).arrayBuffer();
+  buffers[track.num] = await AC.decodeAudioData(raw);
+  return buffers[track.num];
+}
+function stopAll() {
+  if (srcNode) { try { srcNode.stop(); } catch(e) {} srcNode = null; }
+  clearTimeout(droneStop);
+  $('#droneEl').pause();
+  document.querySelectorAll('.playing').forEach(el => el.classList.remove('playing'));
+}
+async function playSlice(track, s, e, el) {
+  stopAll();
+  if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)();
+  if (AC.state === 'suspended') await AC.resume();
+  const buf = await buffer(track);
+  srcNode = AC.createBufferSource();
+  srcNode.buffer = buf; srcNode.connect(AC.destination);
+  srcNode.start(0, s, Math.max(0.05, e - s));
+  if (el) { el.classList.add('playing'); srcNode.onended = () => el.classList.remove('playing'); }
+}
+function playDrone(track, offsetInPoem, span) {
+  stopAll();
+  if (!track.drone) return toast('no drone alignment for this track');
+  const d = $('#droneEl');
+  d.currentTime = track.drone.poem_start + offsetInPoem;
+  d.play();
+  toast(`unified drone @ ${mmss(d.currentTime)} — container S${track.num}`);
+  if (span) droneStop = setTimeout(() => d.pause(), (span + 1.5) * 1000);
+}
+function toast(msg) {
+  const t = $('#toast'); t.textContent = msg; t.style.display = 'block';
+  clearTimeout(t._h); t._h = setTimeout(() => t.style.display = 'none', 2600);
+}
+function copySample(obj) {
+  navigator.clipboard.writeText(JSON.stringify(obj, null, 1)).then(
+    () => toast('sample JSON copied — ' + obj.id),
+    () => toast('clipboard unavailable'));
+}
+
+function render(man) {
+  const host = $('#tracks');
+  host.textContent = '';
+  for (const tr of man.tracks) {
+    const el = document.createElement('div');
+    el.className = 'track';
+    const nph = tr.lines.reduce((a, l) => a + l.phrases.length, 0);
+    const dr = tr.drone ? `in drone ${mmss(tr.drone.poem_start)}–${mmss(tr.drone.poem_end)}` : '';
+    el.innerHTML = `
+      <div class="thead"><span class="tnum">${tr.num}</span><span class="ttitle">${tr.title}</span>
+        <span class="tmeta"><span>${mmss(tr.dur)}</span><span>${tr.lines.length} lines</span>
+        <span>${nph} phrases</span><span>${dr}</span></span></div>
+      <div class="strip" style="background-image:url('${tr.spec}')"></div>
+      <div class="tools">
+        <button data-a="full">▶ full reading</button>
+        <button data-a="stop">■ stop</button>
+        <button data-a="drone">≈ IN DRONE</button>
+        <button data-a="lines">lines ▾</button>
+        <a href="${tr.mp3}" download>⬇ mp3</a>
+        <a href="${tr.description}">description</a>
+        <a href="${tr.timing}">word timings</a>
+        ${tr.halfworld ? `<a href="${tr.halfworld}">halfworld ↗</a>` : ''}
+      </div>
+      <div class="lines"></div>`;
+    const strip = el.querySelector('.strip');
+    for (const l of tr.lines) {
+      const r = document.createElement('div');
+      r.className = 'reg';
+      r.style.left = (l.s / tr.dur * 100) + '%';
+      r.style.width = ((l.e - l.s) / tr.dur * 100) + '%';
+      r.title = `[${l.id}] ${mmss(l.s)}–${mmss(l.e)}  ${l.text}`;
+      r.onclick = ev => { ev.stopPropagation(); playSlice(tr, l.s, l.e, r); };
+      strip.appendChild(r);
+    }
+    const lines = el.querySelector('.lines');
+    for (const l of tr.lines) {
+      const row = document.createElement('div');
+      row.className = 'lrow';
+      row.innerHTML = `
+        <span class="lid" title="play line">L${String(l.n).padStart(2,'0')}</span>
+        <div class="lspec" title="play line" style="background-image:url('${tr.spec}');
+          background-size:${(tr.dur / (l.e - l.s)) * 120}px 34px;
+          background-position:-${(l.s / (l.e - l.s)) * 120}px 0"></div>
+        <span class="ltime">${mmss(l.s)}<br>${mmss(l.e)}</span>
+        <span class="ltext"></span>
+        <span class="lbtns"><a href="${l.file}" download title="download line cut">⬇</a>
+          <span data-c title="copy sample JSON">⧉</span><span data-d title="hear in drone">≈</span></span>`;
+      const txt = row.querySelector('.ltext');
+      for (const p of l.phrases) {
+        const ph = document.createElement('span');
+        ph.className = 'ph';
+        ph.textContent = p.text + ' ';
+        ph.title = `[${p.id}] ${mmss(p.s)}–${mmss(p.e)}`;
+        ph.onclick = () => playSlice(tr, p.s, p.e, ph);
+        txt.appendChild(ph);
+      }
+      row.querySelector('.lid').onclick = () => playSlice(tr, l.s, l.e, row.querySelector('.lid'));
+      row.querySelector('.lspec').onclick = () => playSlice(tr, l.s, l.e, row.querySelector('.lspec'));
+      row.querySelector('[data-c]').onclick = () => copySample({...l, track: tr.num, title: tr.title});
+      row.querySelector('[data-d]').onclick = () => playDrone(tr, l.s, l.e - l.s);
+      lines.appendChild(row);
+    }
+    el.querySelector('[data-a="full"]').onclick = () => playSlice(tr, 0, tr.dur);
+    el.querySelector('[data-a="stop"]').onclick = stopAll;
+    el.querySelector('[data-a="drone"]').onclick = () => playDrone(tr, 0);
+    el.querySelector('[data-a="lines"]').onclick = e => { el.classList.toggle('open'); e.target.classList.toggle('on'); };
+    el.querySelector('.thead').onclick = () => el.classList.toggle('open');
+    host.appendChild(el);
+  }
+}
+
+fetch('samples.json').then(r => r.json()).then(render)
+  .catch(e => { $('#tracks').textContent = 'manifest failed: ' + e; });
+</script>
+</body>
+</html>
