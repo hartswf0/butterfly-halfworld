@@ -1,9 +1,9 @@
 # Every experiment, in one place
 
-43 works · 834 moving · 4354 still · 9.9GB
+45 works · 834 moving · 4384 still · 10.0GB
 
 The media is not copied here — each entry under `media/` is a symlink to the real
-directory, so this folder browses the whole thing without duplicating 9.9GB.
+directory, so this folder browses the whole thing without duplicating 10.0GB.
 
 Open `index.html` to look at it. `prompts/THE_PROMPTS.md` has every generation
 prompt. `catalogue.csv` is the same thing as a table.
@@ -16,13 +16,13 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 `cut/out/WYGWYL_THE_SIX` · 461.7MB
 
-[what it was for](prompts/WYGWYL_THE_SIX.md) · [open it](media/WYGWYL_THE_SIX/)
+[what it was for](prompts/WYGWYL_THE_SIX.md) · [open it](../cut/out/WYGWYL_THE_SIX/)
 
 ### WYGWYL_THE_SIX 2 — 6 moving
 
 `cut/out/WYGWYL_THE_SIX 2` · 461.7MB
 
-[what it was for](prompts/WYGWYL_THE_SIX 2.md) · [open it](media/WYGWYL_THE_SIX 2/)
+[what it was for](prompts/WYGWYL_THE_SIX 2.md) · [open it](../cut/out/WYGWYL_THE_SIX 2/)
 
 ### archigram — 14 still
 
@@ -30,7 +30,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > cv2's Hershey fonts are ASCII only — an em dash came out as ??? across            the whole suite. Typography this project cares about, so the            substitutions are chosen rather than stripped.
 
-[what it was for](prompts/archigram.md) · [open it](media/archigram/)
+[what it was for](prompts/archigram.md) · [open it](../cut/out/archigram/)
 
 ### arspoetica — 40 moving
 
@@ -38,7 +38,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > ARS POETICA — the page where the frame is two realities at once, and the parse    that decided which is which is shown next to it.
 
-[what it was for](prompts/arspoetica.md) · [open it](media/arspoetica/)
+[what it was for](prompts/arspoetica.md) · [open it](../cut/out/arspoetica/)
 
 ### bind — 2 still
 
@@ -46,7 +46,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > Hungarian across the whole noun at once. The cost is a mismatch in shape,        not a similarity in appearance — we are fitting a skin to a frame.
 
-[what it was for](prompts/bind.md) · [open it](media/bind/)
+[what it was for](prompts/bind.md) · [open it](../cut/out/bind/)
 
 ### churn — 19 moving · 19 sound
 
@@ -54,7 +54,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > Photographic shots are tone-mapped if PQ and cut at 24fps. Halfworld scenes     come in at 12fps and are held there — the rate difference is the join, felt as     well as seen, which is the dj.html blend written as an edit.
 
-[what it was for](prompts/churn.md) · [open it](media/churn/)
+[what it was for](prompts/churn.md) · [open it](../cut/out/churn/)
 
 ### collage — 1 moving · 33 still
 
@@ -62,7 +62,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > ALL 2033, each on its own transparency, sorted by nothing anybody chose —        by outline complexity, which is a number that fell out of the measurement        pass and has never been used for anything.
 
-[what it was for](prompts/collage.md) · [open it](media/collage/)
+[what it was for](prompts/collage.md) · [open it](../cut/out/collage/)
 
 ### dress — 15 moving
 
@@ -70,7 +70,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > DRESS — the whole thing, as sequence: every part skinned or kept, every body cast by what it is doing, and the bindings held from frame to frame.     the halfworld  ->  blocking, timing, staging, and the names of its own pieces     the archive    ->  photographed windows, walls, staircases, water, people     the dictionary ->  cut/lexicon_parts.py, 22 words translated, 87 kept drawn     the fit        ->  Hungarian per noun, on shape not appearance
 
-[what it was for](prompts/dress.md) · [open it](media/dress/)
+[what it was for](prompts/dress.md) · [open it](../cut/out/dress/)
 
 ### elements — 2033 still
 
@@ -78,7 +78,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > the element itself, on transparency, so it can be placed somewhere else
 
-[what it was for](prompts/elements.md) · [open it](media/elements/)
+[what it was for](prompts/elements.md) · [open it](../cut/out/elements/)
 
 ### footage — 14 moving
 
@@ -86,7 +86,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > poem -> [(patch, 96)] × 8. One bar per picture, cycling the poem's distinct     pictures until the phrase is full.     A bar is 4.000s and the shortest source in the archive is 5.04s, so nothing     has to loop inside a slot — the first build of this gave a 5s take a 10.7s     slot and it restarted mid-shot, which reads as a dropout. Cycling instead     gives every lead the same one-bar cut rhythm, which is what lets them
 
-[what it was for](prompts/footage.md) · [open it](media/footage/)
+[what it was for](prompts/footage.md) · [open it](../cut/out/footage/)
 
 ### harvest — 258 moving
 
@@ -94,7 +94,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > the same reading as blend.decide, from the stored parse rather than a        fresh one — the atlas already paid for the model
 
-[what it was for](prompts/harvest.md) · [open it](media/harvest/)
+[what it was for](prompts/harvest.md) · [open it](../cut/out/harvest/)
 
 ### harvest_flow — 258 moving
 
@@ -102,7 +102,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > the same reading as blend.decide, from the stored parse rather than a        fresh one — the atlas already paid for the model
 
-[what it was for](prompts/harvest_flow.md) · [open it](media/harvest_flow/)
+[what it was for](prompts/harvest_flow.md) · [open it](../cut/out/harvest_flow/)
 
 ### inhabit — 14 moving
 
@@ -110,7 +110,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > our constructed set, reduced to a level field so it can be swapped in        underneath the characters
 
-[what it was for](prompts/inhabit.md) · [open it](media/inhabit/)
+[what it was for](prompts/inhabit.md) · [open it](../cut/out/inhabit/)
 
 ### journeys — 6 moving · 3 sound
 
@@ -118,7 +118,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > Slot lengths from the track's own loudness: loud cuts fast, quiet holds.
 
-[what it was for](prompts/journeys.md) · [open it](media/journeys/)
+[what it was for](prompts/journeys.md) · [open it](../cut/out/journeys/)
 
 ### lab — 9 still
 
@@ -126,7 +126,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > THE LAB — the contact sheets, browsable, because a decision you cannot see is just an assertion. Every sheet here was the thing that settled an argument.
 
-[what it was for](prompts/lab.md) · [open it](media/lab/)
+[what it was for](prompts/lab.md) · [open it](../cut/out/lab/)
 
 ### loom — 4 moving
 
@@ -134,7 +134,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > THE LOOM — a weave that moves, where the marks keep their identity. beflix-E stamps each cell with an element whose ink weight matches its level. Run that per frame and the obvious thing happens: every cell re-picks, and the picture boils. It reads as noise, because nothing on screen persists long enough to be a thing. So the elements are AGENTS. Each one is a specific cut-out — this person, that
 
-[what it was for](prompts/loom.md) · [open it](media/loom/)
+[what it was for](prompts/loom.md) · [open it](../cut/out/loom/)
 
 ### lucier — 2 moving · 20 still
 
@@ -142,7 +142,15 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > each pass re-describes the previous one in the lattice's vocabulary
 
-[what it was for](prompts/lucier.md) · [open it](media/lucier/)
+[what it was for](prompts/lucier.md) · [open it](../cut/out/lucier/)
+
+### meta — 15 still
+
+`cut/out/meta` · `cut/pf/meta.py` · 20.0MB
+
+> crop a piece of a source collage, tear it, tune it, and lay it down with        its cut edge showing
+
+[what it was for](prompts/meta.md) · [open it](../cut/out/meta/)
 
 ### moussa — 14 moving · 14 sound
 
@@ -150,7 +158,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > Syndication: long enough to carry the station, your named nineteen first,     least-used next. A track whose title is another poem's name is pushed to the     back — MAGIC RIDE played under a song called 'How to Break Off an Engagement'     reads as a mistake, whatever the arithmetic says.
 
-[what it was for](prompts/moussa.md) · [open it](media/moussa/)
+[what it was for](prompts/moussa.md) · [open it](../cut/out/moussa/)
 
 ### music — 2 sound
 
@@ -158,7 +166,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > Largest sustained rise: max over t of mean(next 8s) - mean(previous 8s).
 
-[what it was for](prompts/music.md) · [open it](media/music/)
+[what it was for](prompts/music.md) · [open it](../cut/out/music/)
 
 ### parts — 9 still
 
@@ -166,7 +174,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > the element itself, on transparency, so it can be placed somewhere else
 
-[what it was for](prompts/parts.md) · [open it](media/parts/)
+[what it was for](prompts/parts.md) · [open it](../cut/out/parts/)
 
 ### partswap — 1 still
 
@@ -174,7 +182,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > PART SWAP — trade the halfworld's named set pieces for photographed ones. The halfworld does not need a segmentation pass. It already reports 803 distinct objects in a single frame, and with the parts log every one of them carries the name the author gave it: `building`, `windows`, `gate`, `waterBelow`, `facewindow`, `clipLine`. Running SAM over it would be asking a model to guess at things we wrote. SAM was needed for the VIDEO, which nobody here authored. It is not needed
 
-[what it was for](prompts/partswap.md) · [open it](media/partswap/)
+[what it was for](prompts/partswap.md) · [open it](../cut/out/partswap/)
 
 ### patchfield — 1 moving · 1 still
 
@@ -182,7 +190,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > photographic carrier, skinned. `skins` is a list of        {img, mode, opacity, u0, u1} — a skin may occupy a BAND of the body, so a        skeleton can sit on the torso while a mask sits on the head.
 
-[what it was for](prompts/patchfield.md) · [open it](media/patchfield/)
+[what it was for](prompts/patchfield.md) · [open it](../cut/out/patchfield/)
 
 ### previs — 14 moving
 
@@ -190,7 +198,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > photographed people who can stand, sorted so the pool is stable
 
-[what it was for](prompts/previs.md) · [open it](media/previs/)
+[what it was for](prompts/previs.md) · [open it](../cut/out/previs/)
 
 ### quilt — 1 still
 
@@ -198,7 +206,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > split while the ink varies; stop when it is uniform or too small.        maxw forces the first divisions so one cell can never be the whole frame.
 
-[what it was for](prompts/quilt.md) · [open it](media/quilt/)
+[what it was for](prompts/quilt.md) · [open it](../cut/out/quilt/)
 
 ### scene — 28 still
 
@@ -206,7 +214,15 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > the poem's own first, the archive's after — a thin poem still gets a set
 
-[what it was for](prompts/scene.md) · [open it](media/scene/)
+[what it was for](prompts/scene.md) · [open it](../cut/out/scene/)
+
+### second — 15 still
+
+`cut/out/second` · `cut/pf/second.py` · 84.6MB
+
+> HOW the palette is built is part of the voice. Five roles at fixed        lightness for every image made every image the same picture recoloured.
+
+[what it was for](prompts/second.md) · [open it](../cut/out/second/)
 
 ### sheets — 14 still
 
@@ -214,7 +230,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > THE CUT SHEET — WYGWYL × halfworld ================================== Two cuts, both carved from the same 135-shot archive.   A. THE PQ REEL   — 21 shots. Every genuinely HDR frame the archive holds, kept                      HDR: HEVC 10-bit, BT.2020, SMPTE-2084. Stream-copied, so the                      transfer curve survives the cut. No generation loss.
 
-[what it was for](prompts/sheets.md) · [open it](media/sheets/)
+[what it was for](prompts/sheets.md) · [open it](../cut/out/sheets/)
 
 ### shorts — 12 moving · 6 sound
 
@@ -222,7 +238,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > The archive is a five-second archive: its natural cut is 4-6s and no law can     ask it for a ten-second hold without either looping a shot or slowing it into     judder. Two builds died on that. So the law shapes the RHYTHM and the ORDER,     not the absolute length, and a world is allowed to come back round to its own     pictures to fill its song.     That is the opposite of cut D's ONE PICTURE ONCE, and deliberately. Cut D has
 
-[what it was for](prompts/shorts.md) · [open it](media/shorts/)
+[what it was for](prompts/shorts.md) · [open it](../cut/out/shorts/)
 
 ### sound — 12 sound
 
@@ -230,7 +246,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > monotonic pairing of song events to phrase onsets, keeping only the pairs        that can be met inside the warp bound
 
-[what it was for](prompts/sound.md) · [open it](media/sound/)
+[what it was for](prompts/sound.md) · [open it](../cut/out/sound/)
 
 ### textule — 5 moving
 
@@ -238,7 +254,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > photographic carrier, skinned. `skins` is a list of        {img, mode, opacity, u0, u1} — a skin may occupy a BAND of the body, so a        skeleton can sit on the torso while a mask sits on the head.
 
-[what it was for](prompts/textule.md) · [open it](media/textule/)
+[what it was for](prompts/textule.md) · [open it](../cut/out/textule/)
 
 ## THE CUTS
 
@@ -246,19 +262,19 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 `rendered_cuts` · 570.3MB
 
-[what it was for](prompts/rendered_cuts.md) · [open it](media/rendered_cuts/)
+[what it was for](prompts/rendered_cuts.md) · [open it](../rendered_cuts/)
 
 ### contact_sheets — 135 still
 
 `contact_sheets` · 7.8MB
 
-[what it was for](prompts/contact_sheets.md) · [open it](media/contact_sheets/)
+[what it was for](prompts/contact_sheets.md) · [open it](../contact_sheets/)
 
 ### cut_out_root — 7 moving · 2 sound
 
 `cut/out` · 1.2GB
 
-[what it was for](prompts/cut_out_root.md) · [open it](media/cut_out_root/)
+[what it was for](prompts/cut_out_root.md) · [open it](../cut/out/)
 
 ## THE SOURCE ARCHIVE
 
@@ -268,7 +284,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > The generated archive itself — every shot with the prompt that made it.
 
-[what it was for](prompts/MARKOV_POET.md) · [open it](media/MARKOV_POET/)
+[what it was for](prompts/MARKOV_POET.md) · [open it](../MARKOV_POET/videos/)
 
 ### MARKOV_POET_00 — 58 moving
 
@@ -276,7 +292,7 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > The generated archive itself — every shot with the prompt that made it.
 
-[what it was for](prompts/MARKOV_POET_00.md) · [open it](media/MARKOV_POET_00/)
+[what it was for](prompts/MARKOV_POET_00.md) · [open it](../MARKOV_POET_00/videos/)
 
 ## THE INSTRUMENTS
 
@@ -286,49 +302,49 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > the same local-contrast law as beflix: ink where a cell is darker than the        ground around it, so a flat region stays paper however dark it is
 
-[what it was for](prompts/beflix_e.md) · [open it](media/beflix_e/)
+[what it was for](prompts/beflix_e.md) · [open it](../cut/out/beflix_e/)
 
 ### held — pages
 
 `cut/out/held` · 81.9KB
 
-[what it was for](prompts/held.md) · [open it](media/held/)
+[what it was for](prompts/held.md) · [open it](../cut/out/held/)
 
 ### op — pages
 
 `cut/out/op` · 525.6KB
 
-[what it was for](prompts/op.md) · [open it](media/op/)
+[what it was for](prompts/op.md) · [open it](../cut/out/op/)
 
 ### op15 — pages
 
 `cut/out/op15` · 533.7KB
 
-[what it was for](prompts/op15.md) · [open it](media/op15/)
+[what it was for](prompts/op15.md) · [open it](../cut/out/op15/)
 
 ### op16 — pages
 
 `cut/out/op16` · 649.9KB
 
-[what it was for](prompts/op16.md) · [open it](media/op16/)
+[what it was for](prompts/op16.md) · [open it](../cut/out/op16/)
 
 ### paste — pages
 
 `cut/out/paste` · 39.8KB
 
-[what it was for](prompts/paste.md) · [open it](media/paste/)
+[what it was for](prompts/paste.md) · [open it](../cut/out/paste/)
 
 ### pf — 3 still
 
 `cut/out/pf` · 886.8KB
 
-[what it was for](prompts/pf.md) · [open it](media/pf/)
+[what it was for](prompts/pf.md) · [open it](../cut/out/pf/)
 
 ### studio — pages
 
 `cut/out/studio` · 60.6KB
 
-[what it was for](prompts/studio.md) · [open it](media/studio/)
+[what it was for](prompts/studio.md) · [open it](../cut/out/studio/)
 
 ### thumbs — 2033 still
 
@@ -336,5 +352,5 @@ prompt. `catalogue.csv` is the same thing as a table.
 
 > Build the measured shot database. Measure the ink: nothing is trusted that was not probed.
 
-[what it was for](prompts/thumbs.md) · [open it](media/thumbs/)
+[what it was for](prompts/thumbs.md) · [open it](../cut/out/thumbs/)
 

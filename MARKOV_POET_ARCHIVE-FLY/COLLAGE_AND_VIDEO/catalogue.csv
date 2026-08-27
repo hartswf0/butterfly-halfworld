@@ -18,6 +18,7 @@ journeys,experiment,cut/out/journeys,cut/journeys.py,6,3,0,1,393.0MB
 lab,experiment,cut/out/lab,cut/lab_site.py,0,0,9,3,977.8KB
 loom,experiment,cut/out/loom,cut/loom.py,4,0,0,1,15.8MB
 lucier,experiment,cut/out/lucier,cut/lucier.py,2,0,20,1,4.5MB
+meta,experiment,cut/out/meta,cut/pf/meta.py,0,0,15,0,20.0MB
 moussa,experiment,cut/out/moussa,cut/moussa.py,14,14,0,2,1.1GB
 music,experiment,cut/out/music,cut/music.py,0,2,0,0,11.3MB
 op,tool,cut/out/op,,0,0,0,1,525.6KB
@@ -31,6 +32,7 @@ pf,tool,cut/out/pf,,0,0,3,0,886.8KB
 previs,experiment,cut/out/previs,cut/previs.py,14,0,0,1,5.0MB
 quilt,experiment,cut/out/quilt,cut/quilt.py,0,0,1,0,2.7MB
 scene,experiment,cut/out/scene,cut/scene.py,0,0,28,1,4.0MB
+second,experiment,cut/out/second,cut/pf/second.py,0,0,15,0,84.6MB
 sheets,experiment,cut/out/sheets,cut/cutsheet.py,0,0,14,1,1.3MB
 shorts,experiment,cut/out/shorts,cut/shorts.py,12,6,0,1,923.1MB
 sound,experiment,cut/out/sound,cut/soundcollage.py,0,12,0,0,144.4MB

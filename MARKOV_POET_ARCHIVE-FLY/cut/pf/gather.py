@@ -50,6 +50,8 @@ ALIASES = {
     'thumbs': 'build_db.py',
     'sound': 'soundcollage.py',
     'textule': 'patchfield.py',
+    'meta': 'pf/meta.py',
+    'second': 'pf/second.py',
     'lab': 'lab_site.py',
 }
 
@@ -200,7 +202,7 @@ def write_html(works, tv, ts, tb):
             else:
                 h.append('<div class="intent" style="opacity:.5">No statement of intent was '
                          'written for this one. What it is, is what is in it.</div>')
-            h.append('<a class="open" href="media/%s/">open the folder &rarr;</a>' % w['name'])
+            h.append('<a class="open" href="%s/">open the folder &rarr;</a>' % esc(w['href']))
             h.append('</div><div>')
             h.append('<div class="grid">')
             shown = 0
@@ -208,23 +210,23 @@ def write_html(works, tv, ts, tb):
                 # CLICK TO PLAY. Embedding five hundred <video> elements built a page
                 # that hung the renderer before it finished laying out. A tile costs
                 # nothing until you ask for it.
-                h.append('<figure><div class="tile" data-src="media/%s/%s">'
+                h.append('<figure><div class="tile" data-src="%s/%s">'
                          '<span>&#9654;</span></div>'
                          '<figcaption>%s</figcaption></figure>'
-                         % (w['name'], f['file'], esc(f['file'])))
+                         % (esc(w['href']), f['file'], esc(f['file'])))
                 shown += 1
             for f in w['files']['still'][:12 - min(shown,12)]:
-                h.append('<figure><img loading="lazy" src="media/%s/%s" alt="">'
+                h.append('<figure><img loading="lazy" src="%s/%s" alt="">'
                          '<figcaption>%s</figcaption></figure>'
-                         % (w['name'], f['file'], esc(f['file'])))
+                         % (esc(w['href']), f['file'], esc(f['file'])))
             h.append('</div>')
             rest = c['video'] + c['still'] - 12
             if rest > 0:
                 h.append('<div class="more">&hellip; and %d more in the folder</div>' % rest)
             if c['page']:
                 for f in w['files']['page']:
-                    h.append('<div class="more"><a href="media/%s/%s">%s</a></div>'
-                             % (w['name'], f['file'], esc(f['file'])))
+                    h.append('<div class="more"><a href="%s/%s">%s</a></div>'
+                             % (esc(w['href']), f['file'], esc(f['file'])))
             h.append('</div></section>')
 
     h.append('<script>'
@@ -285,16 +287,19 @@ def main():
     # ── write ────────────────────────────────────────────────────────────────
     os.makedirs(OUT, exist_ok=True)
     os.makedirs(os.path.join(OUT, 'prompts'), exist_ok=True)
-    media = os.path.join(OUT, 'media')
-    os.makedirs(media, exist_ok=True)
 
+    # NO SYMLINKS. The first version made COLLAGE_AND_VIDEO/media/<work> a
+    # directory symlink so the folder would browse everything for a few bytes.
+    # Forty-three of them were committed, and on the build runner tar died trying
+    # to read links pointing at directories a checkout does not contain — which
+    # took down EVERY Pages deploy, not just these links. They were untracked in
+    # a later commit, and that left this page loading with all of its media 404.
+    #
+    # A relative path to where the work actually lives costs the same to write,
+    # survives a clone, and cannot break a build. It is what the zettel library
+    # and the board had been doing all along, which is why those two stayed up.
     for w in works:
-        link = os.path.join(media, w['name'])
-        target = os.path.relpath(os.path.join(ROOT, w['path']), media)
-        if os.path.islink(link):
-            os.unlink(link)
-        if not os.path.exists(link):
-            os.symlink(target, link)
+        w['href'] = os.path.relpath(os.path.join(ROOT, w['path']), OUT)
 
     json.dump(works, io.open(os.path.join(OUT, 'catalogue.json'), 'w', encoding='utf-8'),
               indent=1, ensure_ascii=False)
@@ -385,7 +390,7 @@ def main():
                 first = [ln for ln in w['intent'].split('\n') if ln.strip()]
                 head = ' '.join(first[:6])
                 b += ['> ' + head[:600] + ('…' if len(head) > 600 else ''), '']
-            b += ['[what it was for](prompts/%s.md) · [open it](media/%s/)' % (w['name'], w['name']), '']
+            b += ['[what it was for](prompts/%s.md) · [open it](%s/)' % (w['name'], w['href']), '']
     io.open(os.path.join(OUT, 'INDEX.md'), 'w', encoding='utf-8').write('\n'.join(b) + '\n')
 
     write_html(works, tv, ts, tb)
@@ -401,11 +406,14 @@ def main():
         '- **`prompts/THE_PROMPTS.md`** — every generation prompt, as sent.\n'
         '- **`prompts/<work>.md`** — one file per work: what it was for, and what is in it.\n'
         '- **`catalogue.csv` / `.json`** — the same thing as a table.\n'
-        '- **`media/<work>/`** — a symlink to where the work really lives.\n\n'
+        '- each entry links straight to where the work really lives.\n\n'
         '## Two things to know\n\n'
         '**Nothing is copied.** The media is %s and duplicating it would double the\n'
-        'repository to save a click. Each entry under `media/` is a directory symlink, so\n'
-        'this folder browses all of it and costs about a megabyte.\n\n'
+        'repository to save a click. Each entry links by relative path to where the work\n'
+        'actually lives, so this folder browses all of it and costs about a megabyte.\n'
+        'It used to do this with directory symlinks; forty-three of them were committed and\n'
+        'the build runner\'s tar died reading links to directories a checkout does not have,\n'
+        'which took down every deploy. Relative paths cost the same and cannot do that.\n\n'
         '**Not all of it is in git.** `cut/out/` is committed and travels with the repo.\n'
         '`MARKOV_POET/` and `MARKOV_POET_00/` — the generated source archive, and the only\n'
         'place the real prompts live — are **not tracked**: they are gigabytes of video\n'
