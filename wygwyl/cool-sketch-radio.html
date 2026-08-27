@@ -1,136 +1,134 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>RADIODRAW — a scene under influence</title>
+<title>RADIODRAW — a collage that is a picture and a sound at once</title>
 <link rel="icon" href="dot.svg">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
   :root{ --bg:#0b0410; --paper:#f6e7c8; --dim:#8d6a70; --hot:#f2a03c; --acc:#e0532c;
-         --edge:#2a1220; --good:#7fd67f; }
+         --edge:#2a1220; --good:#7fd67f }
   *{box-sizing:border-box}
   html,body{margin:0;min-height:100%}
   body{background:radial-gradient(120% 90% at 50% -10%,#3a1430 0%,#1b0817 45%,#0b0410 100%);
        color:var(--paper);font:12.5px/1.5 ui-monospace,"SF Mono",Menlo,monospace}
-  header{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;padding:12px 18px 9px;border-bottom:1px solid var(--edge)}
+  header{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;padding:12px 18px 9px;border-bottom:1px solid var(--edge)}
   header h1{margin:0;font-size:14px;letter-spacing:.30em;color:var(--hot)}
   header small{color:var(--dim)}
-  main{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);gap:16px;padding:14px 18px}
-  @media(max-width:1000px){main{grid-template-columns:1fr}}
-  canvas{width:100%;height:auto;display:block;image-rendering:pixelated;border:1px solid var(--edge);
-         background:#0b0410;box-shadow:0 16px 50px -22px #000}
-  .col{display:flex;flex-direction:column;gap:11px;min-width:0}
+  #state{margin-left:auto;color:var(--dim)} #state.ok{color:var(--good)} #state.warn{color:var(--acc)}
+  main{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;padding:14px 18px}
+  @media(max-width:1040px){main{grid-template-columns:1fr}}
+  .col{display:flex;flex-direction:column;gap:10px;min-width:0}
+  .stack{position:relative;line-height:0}
+  .stack canvas{width:100%;height:auto;display:block;image-rendering:pixelated;
+                border:1px solid var(--edge);background:#0b0410}
+  #overlay{position:absolute;inset:0;image-rendering:auto;background:transparent;
+           cursor:crosshair;touch-action:none;box-shadow:0 16px 50px -22px #000}
   .row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-  button,select,input[type=number],input[type=text]{font:inherit;color:var(--paper);background:#00000055;
-    border:1px solid var(--edge);border-radius:2px;padding:5px 9px;letter-spacing:.06em}
-  button{cursor:pointer} button:hover,select:hover{border-color:var(--hot);color:var(--hot)}
+  button,select,input[type=number]{font:inherit;color:var(--paper);background:#00000055;
+    border:1px solid var(--edge);border-radius:2px;padding:5px 9px;letter-spacing:.06em;cursor:pointer}
+  button:hover,select:hover{border-color:var(--hot);color:var(--hot)}
+  button.on{background:#ffb45418;border-color:var(--hot);color:var(--hot)}
   #play{color:var(--hot);border-color:#5a2a1a;min-width:92px}
-  input[type=range]{accent-color:var(--acc)}
+  input[type=range]{accent-color:var(--acc);min-width:0}
+  label{color:var(--dim);display:flex;gap:5px;align-items:center;white-space:nowrap}
   .panel{border:1px solid var(--edge);background:#00000038;padding:10px 11px}
   .panel h2{margin:0 0 8px;font-size:10px;letter-spacing:.26em;color:var(--dim);font-weight:600}
-  .ch,.tg{display:grid;grid-template-columns:56px 1fr auto;gap:8px;align-items:baseline;padding:1px 0}
-  .ch i{font-style:normal;color:var(--dim);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .ch span{color:var(--hot);letter-spacing:-.05em}
-  .ch span.flat{color:var(--acc);letter-spacing:.1em;font-size:11px}
-  .tg span{color:var(--paper);font-variant-numeric:tabular-nums;text-align:right}
-  .tg em{font-style:normal;color:var(--dim);font-variant-numeric:tabular-nums;min-width:5ch;text-align:right}
-  .tg em.moved{color:var(--acc)}
-  .arrow{display:grid;grid-template-columns:auto 14px auto 1fr 74px 46px 22px 22px;gap:5px;align-items:center;
-         padding:4px 0;border-bottom:1px solid #ffffff08}
-  .arrow b{color:var(--paper);font-weight:400}
-  .arrow s{color:var(--dim);text-decoration:none}
-  .arrow select{padding:2px 4px;font-size:11px}
-  .arrow button{padding:2px 5px;font-size:11px}
-  .infl{font-variant-numeric:tabular-nums;text-align:right;color:var(--hot);font-size:11px}
-  .infl.dead{color:var(--acc)} .infl.strong{color:var(--good)}
-  .empty{color:var(--dim);font-size:11px;padding:6px 0}
-  #clock{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px 14px}
-  #clock label{display:grid;grid-template-columns:46px minmax(0,1fr);gap:7px;align-items:center;color:var(--dim);font-size:11px}
-  #clock input{min-width:0;width:100%}
-  #ask{width:100%}
-  #log{max-height:150px;overflow:auto;font-size:11px;color:var(--dim);margin-top:7px}
-  #log div{padding:1px 0;border-bottom:1px solid #ffffff06}
-  #log u{color:var(--paper);text-decoration:none}
-  #log .ok{color:var(--good)} #log .warn{color:var(--acc)} #log .dim{color:var(--dim)}
-  footer{padding:12px 18px 22px;border-top:1px solid var(--edge);color:var(--dim);max-width:100ch}
+  #layers{display:flex;flex-direction:column;gap:3px;max-height:52vh;overflow:auto}
+  .lay{display:grid;grid-template-columns:52px minmax(0,1fr);grid-template-rows:auto auto;
+       gap:4px 7px;align-items:center;padding:5px;border:1px solid transparent;cursor:pointer}
+  .lay img{grid-row:1/3}
+  .lc{display:grid;grid-template-columns:60px minmax(0,1fr) 24px 22px 22px;gap:4px;align-items:center}
+  .lay.on{border-color:var(--acc);background:#e0532c14}
+  .lay img{width:52px;height:39px;border:1px solid var(--edge);display:block;align-self:start}
+  .li{min-width:0;line-height:1.25}
+  .li b{display:block;font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .li i{font-style:normal;color:var(--dim);font-size:10.5px}
+  .lay select,.lay button{padding:2px 3px;font-size:10.5px}
+  .lay button.off{color:var(--dim)}
+  .empty{color:var(--dim);font-size:11px;padding:8px 2px}
+  #sel{color:var(--paper)} #hint{color:var(--hot)}
+  #out{color:var(--acc);letter-spacing:-.05em}
+  #clock{color:var(--dim);font-variant-numeric:tabular-nums}
+  footer{padding:12px 18px 22px;border-top:1px solid var(--edge);color:var(--dim);max-width:96ch}
   footer b{color:var(--paper);font-weight:400}
 </style>
 
 <header>
   <h1>RADIODRAW</h1>
-  <small>cool-sketch-radio · a scene under influence · every arrow reports what it actually did</small>
+  <small>one field · 192 columns of time · 144 rows of pitch · eight levels of ink</small>
+  <span id="state"></span>
 </header>
 
 <main>
   <div class="col">
-    <canvas id="scene"></canvas>
+    <div class="stack">
+      <canvas id="scene"></canvas>
+      <canvas id="overlay"></canvas>
+    </div>
     <div class="row">
       <button id="play">▶ PLAY</button>
-      <select id="film"></select>
-      <label style="color:var(--dim)">at <input id="at" type="number" value="40" step="1" style="width:60px"></label>
-      <select id="engine"></select>
-      <label style="color:var(--dim)">loop <input id="loop" type="number" value="90" step="5" style="width:60px"></label>
+      <span id="clock">0.0 / 12s</span>
+      <label>loop <input id="loop" type="number" value="12" min="2" max="120" style="width:56px"> s</label>
+      <span id="out"></span>
     </div>
-    <div class="panel">
-      <h2>CLOCK — WHO SAYS HOW FAST TIME GOES</h2>
-      <div id="clock"></div>
-    </div>
-    <div class="panel">
-      <h2>ASK THE SCENE</h2>
-      <input id="ask" type="text" placeholder="let the music answer the poem   ·   poet -> sky follow 0.9   ·   clock poet 0.7 pulse 0.3   ·   help">
-      <div id="log"></div>
+    <div class="row">
+      <button id="mmove" class="on">MOVE</button>
+      <button id="mpaint">PAINT</button>
+      <span id="paintbits" class="row" style="display:none">
+        <label>level <input id="plevel" type="range" min="0" max="7" value="6" style="width:80px"></label>
+        <label>brush <input id="brush" type="range" min="0" max="8" value="2" style="width:70px"></label>
+      </span>
+      <span id="sel">nothing selected</span><span id="hint"></span>
     </div>
   </div>
 
   <div class="col">
     <div class="panel">
-      <h2>CHARACTERS</h2>
-      <div id="chars"></div>
-    </div>
-    <div class="panel">
-      <h2>TARGETS — BASE FROM THE ENGINE, MOVED BY THE ARROWS</h2>
-      <div id="tgts"></div>
-    </div>
-    <div class="panel">
-      <h2>ARROWS — SOURCE, TARGET, RELATION, WEIGHT, INFLUENCE</h2>
-      <div id="arrows"></div>
-      <div class="row" style="margin-top:8px">
-        <select id="addSrc"></select><span style="color:var(--dim)">→</span>
-        <select id="addDst"></select><select id="addMode"></select>
-        <button id="add">ADD</button>
+      <h2>ADD A PATCH</h2>
+      <div class="row">
+        <input id="file" type="file" accept="audio/*" style="display:none">
+        <button id="addAudio">+ SOUND FILE</button>
+        <button id="addBlank">+ BLANK</button>
       </div>
+      <div class="row" style="margin-top:6px">
+        <button id="addRecord">+ RECORD</button>
+        <label>at <input id="rat" type="number" value="30" style="width:58px"></label>
+        <label>for <input id="rlen" type="number" value="6" style="width:48px"></label>
+      </div>
+      <div class="row" style="margin-top:6px">
+        <button id="addFrame">+ FRAME</button>
+        <select id="film" style="max-width:150px"></select>
+        <label>at <input id="at" type="number" value="40" style="width:52px"></label>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>LAYERS — TOP OF THE LIST IS ON TOP</h2>
+      <div id="layers"></div>
+      <div class="row" style="margin-top:8px"><button id="clear">CLEAR ALL</button></div>
     </div>
   </div>
 </main>
 
 <footer>
-  <b>Three programs, three answers to where time comes from.</b> The archive radio
-  <i>finds</i> time — its verbs are NEXT, RANDOM, LOOP, and the cadence is already
-  inside the recording. The WYGWYL suite <i>shares</i> time — one audio element is
-  the clock and every medium is a lookup on it, <code>frame = (t − start) × 8</code>.
-  Sketchsong <i>constructs</i> time — FROM → THROUGH → TO, with the translation
-  theory written where you can argue with it.
+  <b>Analysis and playback share one law.</b>
+  <code>row r ↔ LO·(HI/LO)^((143−r)/143)</code>, 140 Hz at the bottom to 7168 at the
+  top. A sound dropped in is transformed through it and quantised to eight
+  levels; the read head crosses the field and resynthesises through it. So a
+  patch laid where it was analysed plays back as itself, and every collage move
+  is a signal operation you can see: <b>up</b> is higher, <b>right</b> is later,
+  <b>wide</b> is slower, <b>tall</b> opens the intervals out, <b>level</b> is
+  quieter, and a hole cut in it is a band gone silent. Those are not metaphors
+  for each other — they are the same thing said twice.
   <br><br>
-  <b>The difference that makes a difference is where their arrows point.</b> In the
-  suite player every medium is a child of <i>t</i> and none is a parent of any
-  other: poem, film, frame and drone are siblings joined on a key, and nothing in
-  that program can make the drone respond to the poem. A join is not a relation.
-  In Sketchsong the arrow between media exists and is editable — the real advance
-  — but it is compiled by a language model, runs one way per generation, and is
-  not live. What is missing from all three is an arrow that is live, reversible
-  and <i>measurable</i>.
-  <br><br>
-  <b>So: a correspondence must be falsifiable.</b> Every arrow here runs twice each
-  frame, once with it and once with it muted, and the difference it made to its
-  target is printed beside it. An arrow that changes nothing says DEAD. And the
-  fourteen prosodic engines were already relation graphs — <code>sweep</code>,
-  <code>gate</code>, <code>ground</code>, <code>attack</code> are four arrows whose
-  source is hard-wired to the clock. With no arrows at all, this page is exactly
-  the sketch radio.
-  <br><br>
-  The poet is here as <b>timing and text only</b> — 111 beats lifted from the
-  suite's twin EDLs. Not as audio. So POET hears nothing and affects everything by
-  construction rather than by good intentions, and the line being spoken is inked
-  into the same field the head crosses: the poem is the picture, and the picture is
-  the sound. &nbsp;·&nbsp; space plays.
+  A patch stops remembering where it came from. A voice, a song, six seconds of
+  the suite's own record, a frame of any of the fourteen films, or a rectangle
+  you paint by hand — once it is in the field it is eight-level ink, and it will
+  be sounded whether it began as a picture or as a sound. Drop a shed roof into
+  the top of the frame and it is a chord. Drop a saxophone into the water and it
+  is weather. <b>max</b> lays a patch over what is beneath without erasing it,
+  <b>over</b> replaces, <b>add</b> accumulates, and <b>cut</b> notches a band out
+  of the sound.
+  &nbsp;·&nbsp; drag to move · corner to resize · <b>m</b> move · <b>p</b> paint ·
+  space plays · backspace deletes.
 </footer>
 
 <script type="module" src="radiodraw.mjs"></script>

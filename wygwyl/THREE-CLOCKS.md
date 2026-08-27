@@ -56,6 +56,51 @@ made of.
 
 ## RADIODRAW — `cool-sketch-radio.html`
 
+*(Rebuilt as a patch collage. The relation-graph version described below was the
+wrong shape — kept here only because the falsification finding stands on its
+own. What the page actually is now: one field, and every layer is a patch of it.)*
+
+### ONE LAW, USED BOTH WAYS
+
+    row r  <->  LO * (HI/LO)^((143-r)/143)          140 Hz .. 7168 Hz
+
+A sound dropped in is transformed through it and quantised to eight levels; the
+read head crosses the field and resynthesises through it. So a patch laid where
+it was analysed plays back as itself, and every collage move is a signal
+operation you can see:
+
+| | |
+|---|---|
+| move it **up** | it is higher |
+| move it **right** | it happens later |
+| stretch it **wide** | it is slower |
+| stretch it **tall** | its intervals open out |
+| lower its **level** | it is quieter |
+| **cut** a hole in it | that band goes silent |
+
+Those are not metaphors for one another. They are the same thing said twice. A
+six-second slice of the record becomes exactly 96 columns wide in a 12-second
+loop, because the field's width **is** the clock — nothing has to be told what
+tempo anything is.
+
+A patch stops remembering where it came from: a voice, a song, a slice of the
+suite's own record, a frame of any of the fourteen films, or a rectangle painted
+by hand. Once it is in the field it is eight-level ink and it will be sounded
+whichever it began as. **max** lays a patch over what is beneath without erasing
+it, **over** replaces, **add** accumulates, **cut** notches a band out.
+
+And the polarity flips here: on every other page ink is dark on a bright field,
+because that is what a beflix frame is. This field **is** a spectrum, and an
+empty region of a spectrum is silence — printed as paper it came out as a
+blinding slab across everything nobody had put a patch on yet. Nothing is dark,
+energy is bright, and a film frame dropped in reads as the spectrogram it has
+become.
+
+---
+
+### the earlier relation-graph version
+
+
 **Characters** emit; **targets** receive; **arrows** relate them with one of six
 relations — FOLLOW, RESIST, ANSWER, SHADOW, UNDERMINE, DRIFT. Six ways one thing
 can attend to another, not fifty parameters.
