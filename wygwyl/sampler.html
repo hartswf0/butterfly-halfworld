@@ -12,22 +12,34 @@ body{background:var(--bg);color:var(--ink);font:13px/1.5 "SF Mono",Menlo,monospa
 a{color:var(--teal);text-decoration:none}
 h1{font-size:16px;letter-spacing:.22em;color:var(--accent)}
 #sub{color:var(--dim);font-size:11.5px;margin:6px 0 4px}
-#note{color:var(--faint);font-size:10.5px;margin-bottom:18px;line-height:1.7}
+#note{color:var(--faint);font-size:10.5px;margin-bottom:14px;line-height:1.7}
+#globals{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+#globals .stat{color:var(--faint);font-size:10.5px}
 .track{background:var(--panel);border:1px solid var(--line);border-radius:5px;margin-bottom:14px;overflow:hidden}
 .thead{display:flex;gap:12px;align-items:baseline;padding:10px 14px;cursor:pointer;flex-wrap:wrap}
 .thead:hover{background:#161b14}
 .tnum{color:var(--gold);letter-spacing:.1em}
 .ttitle{color:var(--ink);font-size:14px}
 .tmeta{color:var(--faint);font-size:10.5px;margin-left:auto;display:flex;gap:12px;flex-wrap:wrap}
-.strip{position:relative;height:110px;background-size:100% 100%;background-repeat:no-repeat;cursor:crosshair;border-top:1px solid var(--line)}
+.strip{position:relative;height:110px;background-size:100% 100%;background-repeat:no-repeat;cursor:crosshair;border-top:1px solid var(--line);touch-action:none}
 .reg{position:absolute;top:0;bottom:0;border-left:1px solid #9ee06a44}
 .reg:hover{background:#9ee06a22}
 .reg.playing{background:#e8c34a33}
+.sel{position:absolute;top:0;bottom:0;background:#5ba8f52e;border-left:1px solid var(--water);border-right:1px solid var(--water);pointer-events:none;display:none}
 .tools{display:flex;gap:8px;padding:7px 14px;border-top:1px solid var(--line);flex-wrap:wrap;align-items:center}
 .tools a{font-size:11px}
 button{background:#161b14;border:1px solid var(--line);color:var(--ink);font:inherit;font-size:11px;padding:3px 10px;border-radius:3px;cursor:pointer}
 button:hover{border-color:var(--accent)}
 button.on{background:var(--accent);color:#0a0c0a}
+.chopbar{display:none;flex-wrap:wrap;gap:5px;padding:9px 14px;border-top:1px solid var(--line)}
+.track.chopsopen .chopbar{display:flex}
+.chip{display:inline-flex;gap:6px;align-items:center;border:1px solid #2e3a26;background:#141a10;
+  border-radius:12px;padding:2px 4px 2px 9px;cursor:pointer;font-size:11px;color:var(--ink)}
+.chip:hover{border-color:var(--gold);color:var(--gold)}
+.chip.playing{background:var(--gold);color:#0a0c0a}
+.chip small{color:var(--faint);font-size:9px}
+.chip.hook{border-color:#4dd9cc66}
+.chip a{color:var(--water);font-size:10px;padding:0 5px;border-left:1px solid var(--line)}
 .lines{display:none;border-top:1px solid var(--line)}
 .track.open .lines{display:block}
 .lrow{display:flex;gap:10px;padding:7px 14px;border-bottom:1px solid #1a2117;align-items:flex-start}
@@ -40,29 +52,41 @@ button.on{background:var(--accent);color:#0a0c0a}
 .ph{cursor:pointer;border-bottom:1px dotted #4a5a42}
 .ph:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .ph.playing{color:var(--gold)}
+.wd{cursor:pointer;border-bottom:1px dotted #33402c;margin-right:1px}
+.wd:hover{color:var(--gold);border-bottom-color:var(--gold)}
+.wd.playing{color:var(--gold)}
 .lbtns{display:flex;gap:5px;white-space:nowrap}
 .lbtns a,.lbtns span{font-size:10px;color:var(--water);cursor:pointer;border:1px solid var(--line);padding:1px 6px;border-radius:3px}
 .lbtns a:hover,.lbtns span:hover{border-color:var(--water)}
+#seltools{position:fixed;display:none;z-index:20;background:var(--panel);border:1px solid var(--water);
+  border-radius:4px;padding:5px 8px;font-size:11px;gap:8px;align-items:center}
+#seltools span{color:var(--water)}
 #toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--accent);color:#0a0c0a;
-  padding:5px 14px;border-radius:4px;font-size:11px;display:none;z-index:9}
+  padding:5px 14px;border-radius:4px;font-size:11px;display:none;z-index:30}
 @media(max-width:640px){.lspec{display:none}.tmeta{margin-left:0}}
 </style>
 </head>
 <body>
 <h1>WYGWYL · VOICE SAMPLER</h1>
-<div id="sub">the fourteen readings of <i>Resurrecting Atlantis</i> — dry masters, session RY 2025-06-26 — chopped by line and phrase · <a href="./">fourteen halfworlds ↗</a></div>
-<div id="note">every line is an addressable sample — <code>samples/NN/LII.mp3</code> · manifest: <a href="samples.json">samples.json</a> ·
-word-level timings: <code>timings/NN.json</code> · thick descriptions: <code>descriptions/NN.md</code><br>
-click a spectrogram region or any <u style="text-decoration-style:dotted">dotted phrase</u> to hear it ·
-⬇ downloads the line cut · ⧉ copies its JSON · ≈ plays the same moment inside the unified drone</div>
+<div id="sub">the fourteen readings of <i>Resurrecting Atlantis</i> — dry masters, session RY 2025-06-26 — chopped by line, phrase, word, and power-chop · <a href="./">fourteen halfworlds ↗</a></div>
+<div id="note">every line is an addressable sample — <code>samples/NN/LII.mp3</code> · chop kit: <code>chops/NN/*.mp3</code> + <a href="chops.json">chops.json</a> · manifest: <a href="samples.json">samples.json</a> · word timings: <code>timings/NN.json</code><br>
+click a spectrogram region, chip, phrase, or word to hear it · <b>drag on any spectrogram to cut your own sample</b> (▶ preview, ⬇ exports WAV) · ≈ plays the moment inside the unified drone</div>
+<div id="globals">
+  <button id="gran">granularity: PHRASES</button>
+  <button id="allchops">all chop kits ▾</button>
+  <span class="stat" id="gstat"></span>
+</div>
 <div id="tracks">loading manifest…</div>
 <audio id="droneEl" src="drone/unified-drones-lite.mp3" preload="none"></audio>
+<div id="seltools"><span id="selrange"></span><button id="selplay">▶</button><button id="selwav">⬇ wav</button><button id="selx">✕</button></div>
 <div id="toast"></div>
 
 <script>
 const $ = s => document.querySelector(s);
 const mmss = t => `${String(Math.floor(t/60)).padStart(2,'0')}:${(t%60).toFixed(1).padStart(4,'0')}`;
 let AC = null, buffers = {}, srcNode = null, droneStop = null;
+let MAN = null, CHOPS = {}, TIMINGS = {}, granularity = 'phrase';
+let sel = null; // {tr, s, e}
 
 async function buffer(track) {
   if (buffers[track.num]) return buffers[track.num];
@@ -102,14 +126,123 @@ function toast(msg) {
 }
 function copySample(obj) {
   navigator.clipboard.writeText(JSON.stringify(obj, null, 1)).then(
-    () => toast('sample JSON copied — ' + obj.id),
+    () => toast('sample JSON copied — ' + (obj.id || '')),
     () => toast('clipboard unavailable'));
 }
+async function ensureTiming(track) {
+  if (TIMINGS[track.num]) return TIMINGS[track.num];
+  TIMINGS[track.num] = await (await fetch(track.timing)).json();
+  return TIMINGS[track.num];
+}
 
-function render(man) {
+/* ---- WAV export of any slice ---- */
+async function exportWav(track, s, e) {
+  const buf = await buffer(track);
+  const sr = buf.sampleRate, ch = Math.min(buf.numberOfChannels, 2);
+  const a = Math.floor(s * sr), b = Math.min(Math.floor(e * sr), buf.length), n = b - a;
+  if (n <= 0) return;
+  const bytes = 44 + n * ch * 2;
+  const ab = new ArrayBuffer(bytes), v = new DataView(ab);
+  const ws = (o, str) => { for (let i = 0; i < str.length; i++) v.setUint8(o + i, str.charCodeAt(i)); };
+  ws(0, 'RIFF'); v.setUint32(4, bytes - 8, true); ws(8, 'WAVE'); ws(12, 'fmt ');
+  v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, ch, true);
+  v.setUint32(24, sr, true); v.setUint32(28, sr * ch * 2, true);
+  v.setUint16(32, ch * 2, true); v.setUint16(34, 16, true); ws(36, 'data');
+  v.setUint32(40, n * ch * 2, true);
+  const chans = Array.from({length: ch}, (_, c) => buf.getChannelData(c));
+  let o = 44;
+  for (let i = a; i < b; i++)
+    for (let c = 0; c < ch; c++) {
+      const x = Math.max(-1, Math.min(1, chans[c][i]));
+      v.setInt16(o, x < 0 ? x * 32768 : x * 32767, true); o += 2;
+    }
+  const url = URL.createObjectURL(new Blob([ab], {type: 'audio/wav'}));
+  const al = document.createElement('a');
+  al.href = url; al.download = `wygwyl_${track.num}_${s.toFixed(2)}-${e.toFixed(2)}.wav`;
+  al.click();
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+  toast(`WAV cut ${mmss(s)}–${mmss(e)} exported`);
+}
+
+/* ---- drag-to-sample on a spectrogram strip ---- */
+function armStrip(strip, tr) {
+  const selEl = document.createElement('div'); selEl.className = 'sel'; strip.appendChild(selEl);
+  let x0 = null, dragging = false;
+  strip.addEventListener('pointerdown', e => { x0 = e.clientX; dragging = false;
+    try { strip.setPointerCapture(e.pointerId); } catch(_) {} });
+  strip.addEventListener('pointermove', e => {
+    if (x0 === null) return;
+    if (Math.abs(e.clientX - x0) > 6) dragging = true;
+    if (!dragging) return;
+    const r = strip.getBoundingClientRect();
+    const a = Math.max(0, Math.min(x0, e.clientX) - r.left), b = Math.min(r.width, Math.max(x0, e.clientX) - r.left);
+    selEl.style.display = 'block';
+    selEl.style.left = (a / r.width * 100) + '%';
+    selEl.style.width = ((b - a) / r.width * 100) + '%';
+  });
+  strip.addEventListener('pointerup', e => {
+    if (x0 === null) return;
+    const r = strip.getBoundingClientRect();
+    if (dragging) {
+      const a = Math.max(0, Math.min(x0, e.clientX) - r.left), b = Math.min(r.width, Math.max(x0, e.clientX) - r.left);
+      sel = {tr, s: a / r.width * tr.dur, e: b / r.width * tr.dur, selEl};
+      const st = $('#seltools');
+      $('#selrange').textContent = `${tr.num} · ${mmss(sel.s)}–${mmss(sel.e)}`;
+      st.style.display = 'flex';
+      st.style.left = Math.min(e.clientX, innerWidth - 230) + 'px';
+      st.style.top = (e.clientY + 14) + 'px';
+      playSlice(tr, sel.s, sel.e);
+    }
+    x0 = null; dragging = false;
+  });
+}
+$('#selplay').onclick = () => sel && playSlice(sel.tr, sel.s, sel.e);
+$('#selwav').onclick = () => sel && exportWav(sel.tr, sel.s, sel.e);
+$('#selx').onclick = () => { $('#seltools').style.display = 'none'; if (sel) sel.selEl.style.display = 'none'; sel = null; stopAll(); };
+
+/* ---- line text at current granularity ---- */
+async function buildText(tr, l, txt) {
+  txt.textContent = '';
+  if (granularity === 'word') {
+    const t = await ensureTiming(tr);
+    const words = (t.segments[l.n - 1] || {}).words || [];
+    for (const w of words) {
+      const el = document.createElement('span');
+      el.className = 'wd'; el.textContent = w.w + ' ';
+      el.title = `${mmss(w.s)}–${mmss(w.e)} · alt-click ⬇ wav`;
+      el.onclick = ev => ev.altKey ? exportWav(tr, w.s, w.e) : playSlice(tr, w.s, w.e, el);
+      txt.appendChild(el);
+    }
+  } else {
+    for (const p of l.phrases) {
+      const el = document.createElement('span');
+      el.className = 'ph'; el.textContent = p.text + ' ';
+      el.title = `[${p.id}] ${mmss(p.s)}–${mmss(p.e)} · alt-click ⬇ wav`;
+      el.onclick = ev => ev.altKey ? exportWav(tr, p.s, p.e) : playSlice(tr, p.s, p.e, el);
+      txt.appendChild(el);
+    }
+  }
+}
+
+function chopChip(tr, c) {
+  const chip = document.createElement('span');
+  chip.className = 'chip' + (c.hook >= 2 ? ' hook' : '');
+  chip.innerHTML = `${c.text} <small>${(c.e - c.s).toFixed(1)}s${c.hook >= 2 ? ' ↺' + c.hook : ''}</small><a href="${c.file}" download title="download chop">⬇</a>`;
+  chip.title = `[${c.id}] ${mmss(c.s)}–${mmss(c.e)} · alt-click ⬇ wav`;
+  chip.onclick = ev => {
+    if (ev.target.tagName === 'A') return;
+    ev.altKey ? exportWav(tr, c.s, c.e) : playSlice(tr, c.s, c.e, chip);
+  };
+  return chip;
+}
+
+function render() {
   const host = $('#tracks');
   host.textContent = '';
-  for (const tr of man.tracks) {
+  let nchops = 0;
+  for (const tr of MAN.tracks) {
+    const chops = (CHOPS[tr.num] || []);
+    nchops += chops.length;
     const el = document.createElement('div');
     el.className = 'track';
     const nph = tr.lines.reduce((a, l) => a + l.phrases.length, 0);
@@ -117,18 +250,20 @@ function render(man) {
     el.innerHTML = `
       <div class="thead"><span class="tnum">${tr.num}</span><span class="ttitle">${tr.title}</span>
         <span class="tmeta"><span>${mmss(tr.dur)}</span><span>${tr.lines.length} lines</span>
-        <span>${nph} phrases</span><span>${dr}</span></span></div>
+        <span>${nph} phrases</span><span>${chops.length} chops</span><span>${dr}</span></span></div>
       <div class="strip" style="background-image:url('${tr.spec}')"></div>
       <div class="tools">
         <button data-a="full">▶ full reading</button>
         <button data-a="stop">■ stop</button>
         <button data-a="drone">≈ IN DRONE</button>
+        <button data-a="chops">chops ▾</button>
         <button data-a="lines">lines ▾</button>
         <a href="${tr.mp3}" download>⬇ mp3</a>
         <a href="${tr.description}">description</a>
         <a href="${tr.timing}">word timings</a>
         ${tr.halfworld ? `<a href="${tr.halfworld}">halfworld ↗</a>` : ''}
       </div>
+      <div class="chopbar"></div>
       <div class="lines"></div>`;
     const strip = el.querySelector('.strip');
     for (const l of tr.lines) {
@@ -137,9 +272,19 @@ function render(man) {
       r.style.left = (l.s / tr.dur * 100) + '%';
       r.style.width = ((l.e - l.s) / tr.dur * 100) + '%';
       r.title = `[${l.id}] ${mmss(l.s)}–${mmss(l.e)}  ${l.text}`;
-      r.onclick = ev => { ev.stopPropagation(); playSlice(tr, l.s, l.e, r); };
       strip.appendChild(r);
     }
+    armStrip(strip, tr);
+    strip.addEventListener('click', e => {
+      if (sel) return;
+      const r = strip.getBoundingClientRect();
+      const t = (e.clientX - r.left) / r.width * tr.dur;
+      const line = tr.lines.find(l => t >= l.s && t <= l.e);
+      if (line) playSlice(tr, line.s, line.e,
+        [...strip.querySelectorAll('.reg')][tr.lines.indexOf(line)]);
+    });
+    const bar = el.querySelector('.chopbar');
+    for (const c of chops) bar.appendChild(chopChip(tr, c));
     const lines = el.querySelector('.lines');
     for (const l of tr.lines) {
       const row = document.createElement('div');
@@ -153,15 +298,7 @@ function render(man) {
         <span class="ltext"></span>
         <span class="lbtns"><a href="${l.file}" download title="download line cut">⬇</a>
           <span data-c title="copy sample JSON">⧉</span><span data-d title="hear in drone">≈</span></span>`;
-      const txt = row.querySelector('.ltext');
-      for (const p of l.phrases) {
-        const ph = document.createElement('span');
-        ph.className = 'ph';
-        ph.textContent = p.text + ' ';
-        ph.title = `[${p.id}] ${mmss(p.s)}–${mmss(p.e)}`;
-        ph.onclick = () => playSlice(tr, p.s, p.e, ph);
-        txt.appendChild(ph);
-      }
+      buildText(tr, l, row.querySelector('.ltext'));
       row.querySelector('.lid').onclick = () => playSlice(tr, l.s, l.e, row.querySelector('.lid'));
       row.querySelector('.lspec').onclick = () => playSlice(tr, l.s, l.e, row.querySelector('.lspec'));
       row.querySelector('[data-c]').onclick = () => copySample({...l, track: tr.num, title: tr.title});
@@ -171,14 +308,40 @@ function render(man) {
     el.querySelector('[data-a="full"]').onclick = () => playSlice(tr, 0, tr.dur);
     el.querySelector('[data-a="stop"]').onclick = stopAll;
     el.querySelector('[data-a="drone"]').onclick = () => playDrone(tr, 0);
+    el.querySelector('[data-a="chops"]').onclick = e => { el.classList.toggle('chopsopen'); e.target.classList.toggle('on'); };
     el.querySelector('[data-a="lines"]').onclick = e => { el.classList.toggle('open'); e.target.classList.toggle('on'); };
     el.querySelector('.thead').onclick = () => el.classList.toggle('open');
     host.appendChild(el);
   }
+  $('#gstat').textContent = `${MAN.tracks.length} tracks · ${MAN.counts.lines} lines · ${MAN.counts.phrases} phrases · ${nchops} chops · alt-click any unit exports WAV`;
 }
 
-fetch('samples.json').then(r => r.json()).then(render)
-  .catch(e => { $('#tracks').textContent = 'manifest failed: ' + e; });
+$('#gran').onclick = async () => {
+  granularity = granularity === 'phrase' ? 'word' : 'phrase';
+  $('#gran').textContent = 'granularity: ' + (granularity === 'phrase' ? 'PHRASES' : 'WORDS');
+  $('#gran').classList.toggle('on', granularity === 'word');
+  for (const trEl of document.querySelectorAll('.track')) {
+    const num = trEl.querySelector('.tnum').textContent;
+    const tr = MAN.tracks.find(t => t.num === num);
+    const rows = trEl.querySelectorAll('.lrow');
+    for (let i = 0; i < rows.length; i++)
+      await buildText(tr, tr.lines[i], rows[i].querySelector('.ltext'));
+  }
+};
+$('#allchops').onclick = e => {
+  const anyOpen = document.querySelector('.track.chopsopen');
+  document.querySelectorAll('.track').forEach(t => t.classList.toggle('chopsopen', !anyOpen));
+  e.target.classList.toggle('on', !anyOpen);
+};
+
+Promise.all([
+  fetch('samples.json').then(r => r.json()),
+  fetch('chops.json').then(r => r.json()).catch(() => null),
+]).then(([man, chops]) => {
+  MAN = man;
+  if (chops) for (const t of chops.tracks) CHOPS[t.num] = t.chops;
+  render();
+}).catch(e => { $('#tracks').textContent = 'manifest failed: ' + e; });
 </script>
 </body>
 </html>
