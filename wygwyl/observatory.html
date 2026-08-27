@@ -62,6 +62,7 @@ and every word typeset as the shape of its own sound · <a href="sampler.html">s
     <span id="ttitle"></span><span id="tmeta"></span>
     <button id="play">▶ play</button><button id="stop">■ stop</button>
     <button id="labels" class="on">labels</button>
+    <button id="scoreBtn" title="export this reading as a fresco score">SCORE</button>
     <a id="halfw" href="#" style="display:none">halfworld ↗</a>
   </div>
   <div class="panel"><div class="ptitle">LANES <small>01 body · 02 pulse (f0, semitones about the speaker's median) · 03 breath · 04 resonance (F1 gold / F2 teal) · 05 timbre · 06 speech · 07 rhythm · 08 phrase (stress)</small></div>
@@ -352,6 +353,28 @@ async function open(num){
 }
 $('#play').onclick = () => play(0, null);
 $('#stop').onclick = stopAll;
+$('#scoreBtn').onclick = () => {
+  if (!cur) return;
+  const tr = cur.tr, L = cur.lanes;
+  const manTr = MAN.tracks.find(t => t.num === tr.num);
+  const clips = manTr.lines.map(l => ({at: l.s, source: tr.mp3, s: l.s, e: l.e, gain: 1,
+    fadeIn: 0.01, fadeOut: 0.03, label: 'L' + String(l.n).padStart(2, '0'),
+    ref: {kind: 'line', id: l.id}}));
+  const pts = L.lanes.f0.map((f, i) => f ? [+(i * L.hop).toFixed(2),
+    +(12 * Math.log2(f / L.f0_median)).toFixed(2)] : null).filter(Boolean);
+  const score = {fresco: '0.1', title: `${tr.num} · ${tr.title} — the reading as a score`,
+    duration: tr.dur, base: '',
+    tracks: [{id: 'voice', name: 'VOICE', gain: 1, clips}],
+    lanes: [
+      {id: 'events', name: 'events', type: 'marker',
+       events: L.events.map(e => ({t: e.t, type: e.type, value: e.word || ''}))},
+      {id: 'pitch', name: 'f0', type: 'contour', unit: 'semitones', points: pts.filter((_, i) => i % 2 === 0)}],
+    provenance: {generator: 'observatory.html', from: [`lanes/${tr.num}.json`]}};
+  const url = URL.createObjectURL(new Blob([JSON.stringify(score, null, 1)], {type: 'application/json'}));
+  const a = document.createElement('a'); a.href = url; a.download = `${tr.num}-reading.fresco.json`; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+  toast('fresco score exported — open it in fresco.html');
+};
 $('#labels').onclick = e => { showLabels = !showLabels; e.target.classList.toggle('on', showLabels);
   document.querySelectorAll('.gw').forEach(g=>g.classList.toggle('nolabel', !showLabels)); };
 addEventListener('resize', () => cur && drawLanes());

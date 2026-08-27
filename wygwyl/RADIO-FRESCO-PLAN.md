@@ -19,14 +19,14 @@ it lands.
 
 ## The stones ahead
 
-- **S3 · ONE SCORE FORMAT** *(the keystone — do this before any UI)*
-  Define `fresco-score.json`: tracks → clips → {source, s, e, gain, at} plus
-  event lanes {t, type, value}. Three writers, one reader:
-  seal EXPORT/PROJECT ⇄ score · observatory event score → score ·
-  radio station program → score. Align with the corpus's own OTIO/hyperEDL
-  (`0_TIMAEUS_UNIFIED_DRONE/S01-S14.json`) so the 2025 timelines replay in it.
-  *Definition of done: one score plays identically in seal and in a bare
-  score-player page.*
+- **S3 · ONE SCORE FORMAT** ✓ *placed* — fresco-score v0.1 is live:
+  `fresco.html` is the bare reader (transport, seek, per-track mute, marker +
+  contour lanes, honest source accounting); writers so far: `fresco_compile.py`
+  (the 2025 unified-drone OTIO timeline replays as `scores/unified-drone.fresco.json`,
+  14 voice clips + 132 accents over 24 min; `scores/reading-06.fresco.json`
+  rebuilds a reading from its line cuts), reconstitute ⬇ score, observatory
+  SCORE. Remaining inside this stone: the seal exports/imports the same
+  contract.
 
 - **S4 · VOICE AS TRACK**
   Reconstitute emits score clips (not just WAV); pack/sampler get "send to

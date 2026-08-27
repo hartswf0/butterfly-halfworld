@@ -51,6 +51,7 @@ button.big{background:var(--accent);color:#0a0c0a;border-color:var(--accent)}
   <button id="play">▶ speak</button>
   <button id="stop">■</button>
   <button id="wav">⬇ export WAV</button>
+  <button id="score">⬇ score</button>
   <label style="color:var(--faint);font-size:11px">pace <input id="pace" type="range" min="30" max="220" value="100"></label>
   <span id="stat" style="color:var(--faint);font-size:11px"></span>
 </div>
@@ -239,6 +240,32 @@ async function exportWav(){
   setTimeout(()=>URL.revokeObjectURL(url),5000);
   toast('reconstituted WAV exported');
 }
+function exportScore(){
+  if (!seq.length) assemble();
+  let t = 0.05;
+  const clips = [], words = [];
+  for (const tok of seq){
+    if (tok.miss){ t += 0.3; continue; }
+    const tr = MAN.tracks.find(x=>x.num===tok.num);
+    const dur = tok.tl - tok.ts;
+    clips.push({at: +t.toFixed(3), source: tr.mp3, s: tok.ts, e: tok.tl, gain: 1,
+      fadeIn: tok.gr==='C'?0.045:0.012, fadeOut: tok.gr==='C'?0.045:0.03,
+      label: tok.shown, ref: {kind:'word', track: tok.num, ix: tok.ix, grade: tok.gr}});
+    words.push({t: +t.toFixed(3), type: 'WORD', value: tok.shown});
+    t += dur + gapAfter(tok);
+  }
+  const score = {fresco:'0.1', title: 'RECONSTITUTED — ' + $('#input').value.trim().slice(0,60),
+    duration: +(t+0.3).toFixed(2), base: '',
+    tracks: [{id:'voice', name:'VOICE', gain:1, clips}],
+    lanes: [{id:'words', name:'words', type:'marker', events: words}],
+    provenance: {generator:'reconstitute.html', generated: new Date().toISOString().slice(0,10),
+      text: $('#input').value.trim()}};
+  const url = URL.createObjectURL(new Blob([JSON.stringify(score,null,1)],{type:'application/json'}));
+  const a = document.createElement('a'); a.href=url; a.download='reconstituted.fresco.json'; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),5000);
+  toast('fresco score exported — open it in fresco.html');
+}
+$('#score').onclick = exportScore;
 $('#go').onclick = assemble;
 $('#play').onclick = speak;
 $('#stop').onclick = stopAll;

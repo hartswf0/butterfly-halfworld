@@ -1,0 +1,982 @@
+{
+ "fresco": "0.1",
+ "title": "UNIFIED DRONE — the 2025 timeline, replayed",
+ "duration": 1440.07,
+ "base": "",
+ "tracks": [
+  {
+   "id": "drone",
+   "name": "DRONE",
+   "gain": 0.9,
+   "clips": [
+    {
+     "at": 0.0,
+     "source": "drone/unified-drones-lite.mp3",
+     "s": 0.0,
+     "e": 1440.07,
+     "gain": 1.0,
+     "fadeIn": 0.02,
+     "fadeOut": 0.5,
+     "label": "unified drones v2.2.2.2.1"
+    }
+   ]
+  },
+  {
+   "id": "voice",
+   "name": "VOICE",
+   "gain": 1.0,
+   "clips": [
+    {
+     "at": 29.762,
+     "source": "audio/01_Out of Life_mixdown_RY_250626.mp3",
+     "s": 0.0,
+     "e": 88.11,
+     "gain": 1.0,
+     "fadeIn": 0.01,
+     "fadeOut": 0.05,
+     "label": "01 Out of Life",
+     "ref": {
+      "kind": "reading",
+      "id": "01"
+     }
+    },
+    {
+     "at": 127.635,
+     "source": "audio/02_Flashing Lights_mixdown_RY_250626.mp3",
+     "s": 0.0,
+     "e": 81.54,
+     "gain": 1.0,
+     "fadeIn": 0.01,
+     "fadeOut": 0.05,
+     "label": "02 Flashing Lights",
+     "ref": {
+      "kind": "reading",
+      "id": "02"
+     }
+    },
+    {
+     "at": 219.51,
+     "source": "audio/03_How to Break off an Engagement_mixdown_RY_250626.mp3",
+     "s": 0.0,
+     "e": 61.66,
+     "gain": 1.0,
+     "fadeIn": 0.01,
+     "fadeOut": 0.05,
+     "label": "03 How to Break off an Engagement",
+     "ref": {
+      "kind": "reading",
+      "id": "03"
+     }
+    },
+    {
+     "at": 291.412,
+     "source": "audio/04_Nevermore_mixdown_RY_250626.mp3",
+     "s": 0.0,
+     "e": 130.37,
+     "gain": 1.0,
+     "fadeIn": 0.01,
+     "fadeOut": 0.05,
+     "label": "04 Nevermore",
+     "ref": {
+      "kind": "reading",
+      "id": "04"
+     }
+    },
+    {
+     "at": 434.012,
+     "source": "audio/05_Bloodline_mixdown_RY_250626.mp3",
+     "s": 0.0,
+     "e": 73.95,
+     "gain": 1.0,
+     "fadeIn": 0.01,
+     "fadeOut": 0.05,
+     "label": "05 Bloodline",
+     "ref": {
+      "kind": "reading",
+      "id": "05"
+     }
+    },
+    {
+     "at": 518.082,
+     "source": "audio/06_Resurrecting Atlantis_mixdown_RY_250626.mp3",
+     "s": 0.0,
+     "e": 100.29,
+     "gain": 1.0,
+     "fadeIn": 0.01,
+     "fadeOut": 0.05,
+     "label": "06 Resurrecting Atlantis",
+     "ref": {
+      "kind": "reading",
+      "id": "06"
+     }
+    },
+    {
+     "at": 628.312,
+     "source": "audio/07_DJ Turn Me Up_mixdown_RY_250626.mp3",
+     "s": 0.0,
+     "e": 98.66,
+     "gain": 1.0,
+     "fadeIn": 0.01,
+     "fadeOut": 0.05,
+     "label": "07 DJ Turn Me Up",
+     "ref": {
+      "kind": "reading",
+      "id": "07"
+     }
+    },
+    {
+     "at": 737.052,
+     "source": "audio/08_Newly Single_mixdown_RY_250626.mp3",
+     "s": 0.0,
+     "e": 91.15,
+     "gain": 1.0,
+     "fadeIn": 0.01,
+     "fadeOut": 0.05,
+     "label": "08 Newly Single",
+     "ref": {
+      "kind": "reading",
+      "id": "08"
+     }
+    },
+    {
+     "at": 837.742,
+     "source": "audio/09_Yet Heard_mixdown_RY_250626.mp3",
+     "s": 0.0,
+     "e": 108.78,
+     "gain": 1.0,
+     "fadeIn": 0.01,
+     "fadeOut": 0.05,
+     "label": "09 Yet Heard",
+     "ref": {
+      "kind": "reading",
+      "id": "09"
+     }
+    },
+    {
+     "at": 956.002,
+     "source": "audio/10_Magic Ride_mixdown_RY_250626.mp3",
+     "s": 0.0,
+     "e": 95.86,
+     "gain": 1.0,
+     "fadeIn": 0.01,
+     "fadeOut": 0.05,
+     "label": "10 Magic Ride",
+     "ref": {
+      "kind": "reading",
+      "id": "10"
+     }
+    },
+    {
+     "at": 1061.972,
+     "source": "audio/11_New Day_mixdown_RY_250626.mp3",
+     "s": 0.0,
+     "e": 100.95,
+     "gain": 1.0,
+     "fadeIn": 0.01,
+     "fadeOut": 0.05,
+     "label": "11 New Day",
+     "ref": {
+      "kind": "reading",
+      "id": "11"
+     }
+    },
+    {
+     "at": 1173.172,
+     "source": "audio/12_Reunion_mixdown_RY_250626.mp3",
+     "s": 0.0,
+     "e": 64.68,
+     "gain": 1.0,
+     "fadeIn": 0.01,
+     "fadeOut": 0.05,
+     "label": "12 Reunion",
+     "ref": {
+      "kind": "reading",
+      "id": "12"
+     }
+    },
+    {
+     "at": 1247.822,
+     "source": "audio/13_How to Win My Heart_mixdown_RY_250626.mp3",
+     "s": 0.0,
+     "e": 100.06,
+     "gain": 1.0,
+     "fadeIn": 0.01,
+     "fadeOut": 0.05,
+     "label": "13 How to Win My Heart",
+     "ref": {
+      "kind": "reading",
+      "id": "13"
+     }
+    },
+    {
+     "at": 1357.862,
+     "source": "audio/14_Hot Minute_mixdown_RY_250626.mp3",
+     "s": 0.0,
+     "e": 69.24,
+     "gain": 1.0,
+     "fadeIn": 0.01,
+     "fadeOut": 0.05,
+     "label": "14 Hot Minute",
+     "ref": {
+      "kind": "reading",
+      "id": "14"
+     }
+    }
+   ]
+  }
+ ],
+ "lanes": [
+  {
+   "id": "sections",
+   "name": "S01–S14",
+   "type": "marker",
+   "events": [
+    {
+     "t": -0.0,
+     "type": "SECTION",
+     "value": "S01 Out of Life"
+    },
+    {
+     "t": 122.99,
+     "type": "SECTION",
+     "value": "S02 Flashing Lights"
+    },
+    {
+     "t": 214.11,
+     "type": "SECTION",
+     "value": "S03 How to Break off an Engagement"
+    },
+    {
+     "t": 286.51,
+     "type": "SECTION",
+     "value": "S04 Nevermore"
+    },
+    {
+     "t": 422.18,
+     "type": "SECTION",
+     "value": "S05 Bloodline"
+    },
+    {
+     "t": 513.21,
+     "type": "SECTION",
+     "value": "S06 Resurrecting Atlantis"
+    },
+    {
+     "t": 623.45,
+     "type": "SECTION",
+     "value": "S07 DJ Turn Me Up"
+    },
+    {
+     "t": 732.14,
+     "type": "SECTION",
+     "value": "S08 Newly Single"
+    },
+    {
+     "t": 833.39,
+     "type": "SECTION",
+     "value": "S09 Yet Heard"
+    },
+    {
+     "t": 950.94,
+     "type": "SECTION",
+     "value": "S10 Magic Ride"
+    },
+    {
+     "t": 1056.66,
+     "type": "SECTION",
+     "value": "S11 New Day"
+    },
+    {
+     "t": 1168.02,
+     "type": "SECTION",
+     "value": "S12 Reunion"
+    },
+    {
+     "t": 1243.0,
+     "type": "SECTION",
+     "value": "S13 How to Win My Heart"
+    },
+    {
+     "t": 1352.98,
+     "type": "SECTION",
+     "value": "S14 Hot Minute"
+    }
+   ]
+  },
+  {
+   "id": "accents",
+   "name": "accents",
+   "type": "marker",
+   "events": [
+    {
+     "t": 50.26,
+     "type": "ACCENT",
+     "value": "was"
+    },
+    {
+     "t": 50.4,
+     "type": "ACCENT",
+     "value": "the"
+    },
+    {
+     "t": 50.58,
+     "type": "ACCENT",
+     "value": "maze"
+    },
+    {
+     "t": 53.24,
+     "type": "ACCENT",
+     "value": "a"
+    },
+    {
+     "t": 53.4,
+     "type": "ACCENT",
+     "value": "known"
+    },
+    {
+     "t": 58.43,
+     "type": "ACCENT",
+     "value": "and"
+    },
+    {
+     "t": 58.57,
+     "type": "ACCENT",
+     "value": "hidden"
+    },
+    {
+     "t": 59.53,
+     "type": "ACCENT",
+     "value": "overnourished"
+    },
+    {
+     "t": 63.14,
+     "type": "ACCENT",
+     "value": "this"
+    },
+    {
+     "t": 83.62,
+     "type": "ACCENT",
+     "value": "love"
+    },
+    {
+     "t": 95.53,
+     "type": "ACCENT",
+     "value": "a"
+    },
+    {
+     "t": 127.91,
+     "type": "ACCENT",
+     "value": "heard"
+    },
+    {
+     "t": 132.35,
+     "type": "ACCENT",
+     "value": "was"
+    },
+    {
+     "t": 132.61,
+     "type": "ACCENT",
+     "value": "type"
+    },
+    {
+     "t": 139.11,
+     "type": "ACCENT",
+     "value": "a"
+    },
+    {
+     "t": 148.03,
+     "type": "ACCENT",
+     "value": "received"
+    },
+    {
+     "t": 148.31,
+     "type": "ACCENT",
+     "value": "an"
+    },
+    {
+     "t": 160.99,
+     "type": "ACCENT",
+     "value": "epiphany"
+    },
+    {
+     "t": 222.67,
+     "type": "ACCENT",
+     "value": "tambourine"
+    },
+    {
+     "t": 234.45,
+     "type": "ACCENT",
+     "value": "pews"
+    },
+    {
+     "t": 251.6,
+     "type": "ACCENT",
+     "value": "rains"
+    },
+    {
+     "t": 264.03,
+     "type": "ACCENT",
+     "value": "daily"
+    },
+    {
+     "t": 292.0,
+     "type": "ACCENT",
+     "value": "if"
+    },
+    {
+     "t": 306.26,
+     "type": "ACCENT",
+     "value": "waves"
+    },
+    {
+     "t": 309.46,
+     "type": "ACCENT",
+     "value": "winds"
+    },
+    {
+     "t": 320.06,
+     "type": "ACCENT",
+     "value": "familiar"
+    },
+    {
+     "t": 337.57,
+     "type": "ACCENT",
+     "value": "What"
+    },
+    {
+     "t": 337.77,
+     "type": "ACCENT",
+     "value": "if"
+    },
+    {
+     "t": 338.31,
+     "type": "ACCENT",
+     "value": "this"
+    },
+    {
+     "t": 355.02,
+     "type": "ACCENT",
+     "value": "weeds"
+    },
+    {
+     "t": 362.5,
+     "type": "ACCENT",
+     "value": "forward."
+    },
+    {
+     "t": 366.37,
+     "type": "ACCENT",
+     "value": "deepest"
+    },
+    {
+     "t": 373.77,
+     "type": "ACCENT",
+     "value": "Hands"
+    },
+    {
+     "t": 386.19,
+     "type": "ACCENT",
+     "value": "put"
+    },
+    {
+     "t": 393.88,
+     "type": "ACCENT",
+     "value": "wanted"
+    },
+    {
+     "t": 403.79,
+     "type": "ACCENT",
+     "value": "do"
+    },
+    {
+     "t": 413.59,
+     "type": "ACCENT",
+     "value": "say"
+    },
+    {
+     "t": 434.19,
+     "type": "ACCENT",
+     "value": "tell"
+    },
+    {
+     "t": 434.45,
+     "type": "ACCENT",
+     "value": "me"
+    },
+    {
+     "t": 462.43,
+     "type": "ACCENT",
+     "value": "tell"
+    },
+    {
+     "t": 464.43,
+     "type": "ACCENT",
+     "value": "new"
+    },
+    {
+     "t": 467.77,
+     "type": "ACCENT",
+     "value": "little"
+    },
+    {
+     "t": 471.07,
+     "type": "ACCENT",
+     "value": "Even"
+    },
+    {
+     "t": 471.51,
+     "type": "ACCENT",
+     "value": "miracles"
+    },
+    {
+     "t": 480.43,
+     "type": "ACCENT",
+     "value": "tears"
+    },
+    {
+     "t": 491.44,
+     "type": "ACCENT",
+     "value": "Their"
+    },
+    {
+     "t": 494.64,
+     "type": "ACCENT",
+     "value": "Fingerprints"
+    },
+    {
+     "t": 506.91,
+     "type": "ACCENT",
+     "value": "me."
+    },
+    {
+     "t": 518.38,
+     "type": "ACCENT",
+     "value": "gates"
+    },
+    {
+     "t": 522.48,
+     "type": "ACCENT",
+     "value": "and"
+    },
+    {
+     "t": 522.52,
+     "type": "ACCENT",
+     "value": "made"
+    },
+    {
+     "t": 533.8,
+     "type": "ACCENT",
+     "value": "generations"
+    },
+    {
+     "t": 547.47,
+     "type": "ACCENT",
+     "value": "Here"
+    },
+    {
+     "t": 557.68,
+     "type": "ACCENT",
+     "value": "relearned"
+    },
+    {
+     "t": 562.75,
+     "type": "ACCENT",
+     "value": "here"
+    },
+    {
+     "t": 565.2,
+     "type": "ACCENT",
+     "value": "Here"
+    },
+    {
+     "t": 565.5,
+     "type": "ACCENT",
+     "value": "we"
+    },
+    {
+     "t": 574.41,
+     "type": "ACCENT",
+     "value": "relearned"
+    },
+    {
+     "t": 585.14,
+     "type": "ACCENT",
+     "value": "illuminating"
+    },
+    {
+     "t": 601.19,
+     "type": "ACCENT",
+     "value": "know"
+    },
+    {
+     "t": 605.19,
+     "type": "ACCENT",
+     "value": "leaving"
+    },
+    {
+     "t": 611.69,
+     "type": "ACCENT",
+     "value": "city"
+    },
+    {
+     "t": 631.43,
+     "type": "ACCENT",
+     "value": "eyes"
+    },
+    {
+     "t": 650.42,
+     "type": "ACCENT",
+     "value": "love"
+    },
+    {
+     "t": 669.87,
+     "type": "ACCENT",
+     "value": "can"
+    },
+    {
+     "t": 687.91,
+     "type": "ACCENT",
+     "value": "11"
+    },
+    {
+     "t": 693.88,
+     "type": "ACCENT",
+     "value": "Of"
+    },
+    {
+     "t": 694.02,
+     "type": "ACCENT",
+     "value": "future"
+    },
+    {
+     "t": 713.03,
+     "type": "ACCENT",
+     "value": "tear"
+    },
+    {
+     "t": 722.01,
+     "type": "ACCENT",
+     "value": "Chin"
+    },
+    {
+     "t": 742.45,
+     "type": "ACCENT",
+     "value": "can"
+    },
+    {
+     "t": 742.57,
+     "type": "ACCENT",
+     "value": "now"
+    },
+    {
+     "t": 768.68,
+     "type": "ACCENT",
+     "value": "want"
+    },
+    {
+     "t": 768.9,
+     "type": "ACCENT",
+     "value": "him"
+    },
+    {
+     "t": 778.59,
+     "type": "ACCENT",
+     "value": "let"
+    },
+    {
+     "t": 779.59,
+     "type": "ACCENT",
+     "value": "in"
+    },
+    {
+     "t": 786.49,
+     "type": "ACCENT",
+     "value": "Cool"
+    },
+    {
+     "t": 786.73,
+     "type": "ACCENT",
+     "value": "me"
+    },
+    {
+     "t": 837.74,
+     "type": "ACCENT",
+     "value": "Accepting"
+    },
+    {
+     "t": 838.38,
+     "type": "ACCENT",
+     "value": "you'll"
+    },
+    {
+     "t": 872.84,
+     "type": "ACCENT",
+     "value": "You"
+    },
+    {
+     "t": 878.92,
+     "type": "ACCENT",
+     "value": "of"
+    },
+    {
+     "t": 908.52,
+     "type": "ACCENT",
+     "value": "watches"
+    },
+    {
+     "t": 918.07,
+     "type": "ACCENT",
+     "value": "we"
+    },
+    {
+     "t": 918.19,
+     "type": "ACCENT",
+     "value": "walk"
+    },
+    {
+     "t": 956.62,
+     "type": "ACCENT",
+     "value": "wasn't"
+    },
+    {
+     "t": 964.04,
+     "type": "ACCENT",
+     "value": "withering"
+    },
+    {
+     "t": 976.86,
+     "type": "ACCENT",
+     "value": "Loneliness"
+    },
+    {
+     "t": 977.06,
+     "type": "ACCENT",
+     "value": "is"
+    },
+    {
+     "t": 992.58,
+     "type": "ACCENT",
+     "value": "noise"
+    },
+    {
+     "t": 1003.76,
+     "type": "ACCENT",
+     "value": "All"
+    },
+    {
+     "t": 1009.58,
+     "type": "ACCENT",
+     "value": "moon"
+    },
+    {
+     "t": 1010.72,
+     "type": "ACCENT",
+     "value": "tease"
+    },
+    {
+     "t": 1014.87,
+     "type": "ACCENT",
+     "value": "see"
+    },
+    {
+     "t": 1017.69,
+     "type": "ACCENT",
+     "value": "looks"
+    },
+    {
+     "t": 1039.0,
+     "type": "ACCENT",
+     "value": "want"
+    },
+    {
+     "t": 1062.31,
+     "type": "ACCENT",
+     "value": "Even"
+    },
+    {
+     "t": 1062.89,
+     "type": "ACCENT",
+     "value": "here"
+    },
+    {
+     "t": 1066.18,
+     "type": "ACCENT",
+     "value": "River"
+    },
+    {
+     "t": 1075.8,
+     "type": "ACCENT",
+     "value": "silent"
+    },
+    {
+     "t": 1097.73,
+     "type": "ACCENT",
+     "value": "rebuild"
+    },
+    {
+     "t": 1111.17,
+     "type": "ACCENT",
+     "value": "close"
+    },
+    {
+     "t": 1116.79,
+     "type": "ACCENT",
+     "value": "Words"
+    },
+    {
+     "t": 1125.1,
+     "type": "ACCENT",
+     "value": "words"
+    },
+    {
+     "t": 1127.16,
+     "type": "ACCENT",
+     "value": "sung"
+    },
+    {
+     "t": 1145.15,
+     "type": "ACCENT",
+     "value": "Everything"
+    },
+    {
+     "t": 1147.99,
+     "type": "ACCENT",
+     "value": "every"
+    },
+    {
+     "t": 1156.44,
+     "type": "ACCENT",
+     "value": "reveling"
+    },
+    {
+     "t": 1179.03,
+     "type": "ACCENT",
+     "value": "hugs"
+    },
+    {
+     "t": 1181.73,
+     "type": "ACCENT",
+     "value": "loud"
+    },
+    {
+     "t": 1185.77,
+     "type": "ACCENT",
+     "value": "My"
+    },
+    {
+     "t": 1185.93,
+     "type": "ACCENT",
+     "value": "mind"
+    },
+    {
+     "t": 1199.54,
+     "type": "ACCENT",
+     "value": "and"
+    },
+    {
+     "t": 1210.7,
+     "type": "ACCENT",
+     "value": "narrow"
+    },
+    {
+     "t": 1248.22,
+     "type": "ACCENT",
+     "value": "want"
+    },
+    {
+     "t": 1248.4,
+     "type": "ACCENT",
+     "value": "you"
+    },
+    {
+     "t": 1248.56,
+     "type": "ACCENT",
+     "value": "to"
+    },
+    {
+     "t": 1250.1,
+     "type": "ACCENT",
+     "value": "corner"
+    },
+    {
+     "t": 1253.52,
+     "type": "ACCENT",
+     "value": "wandering"
+    },
+    {
+     "t": 1258.18,
+     "type": "ACCENT",
+     "value": "healing"
+    },
+    {
+     "t": 1267.36,
+     "type": "ACCENT",
+     "value": "want"
+    },
+    {
+     "t": 1283.79,
+     "type": "ACCENT",
+     "value": "journeyed"
+    },
+    {
+     "t": 1292.19,
+     "type": "ACCENT",
+     "value": "All"
+    },
+    {
+     "t": 1322.82,
+     "type": "ACCENT",
+     "value": "beautiful"
+    },
+    {
+     "t": 1357.88,
+     "type": "ACCENT",
+     "value": "Don't"
+    },
+    {
+     "t": 1358.54,
+     "type": "ACCENT",
+     "value": "me"
+    },
+    {
+     "t": 1368.18,
+     "type": "ACCENT",
+     "value": "believing"
+    },
+    {
+     "t": 1377.2,
+     "type": "ACCENT",
+     "value": "way"
+    },
+    {
+     "t": 1377.36,
+     "type": "ACCENT",
+     "value": "you"
+    },
+    {
+     "t": 1391.97,
+     "type": "ACCENT",
+     "value": "machine"
+    },
+    {
+     "t": 1398.54,
+     "type": "ACCENT",
+     "value": "behind"
+    },
+    {
+     "t": 1415.28,
+     "type": "ACCENT",
+     "value": "dance"
+    }
+   ]
+  }
+ ],
+ "provenance": {
+  "generator": "fresco_compile.py",
+  "generated": "2026-08-27",
+  "from": [
+   "0_TIMAEUS_UNIFIED_DRONE/pdav-drone.json (OTIO hyperEDL 2025-08-10)",
+   "wygwyl/lanes/*.json"
+  ]
+ }
+}

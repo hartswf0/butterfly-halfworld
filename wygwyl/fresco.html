@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRESCO PLAYER</title>
+<style>
+:root{--bg:#0a0c0a;--panel:#10140f;--line:#26301f;--ink:#cfe3c8;--dim:#7d8f74;
+  --faint:#4a5a42;--accent:#9ee06a;--gold:#e8c34a;--teal:#4dd9cc;--water:#5ba8f5;--rose:#c86bd9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:13px/1.5 "SF Mono",Menlo,monospace;padding:18px;max-width:1200px;margin:0 auto}
+a{color:var(--teal);text-decoration:none}
+h1{font-size:16px;letter-spacing:.22em;color:var(--accent)}
+#sub{color:var(--dim);font-size:11.5px;margin:6px 0 12px}
+#bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+button,select{background:#161b14;border:1px solid var(--line);color:var(--ink);font:inherit;font-size:12px;padding:5px 12px;border-radius:3px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+#play{color:var(--gold);min-width:88px}
+#clock{color:var(--dim);font-variant-numeric:tabular-nums}
+#title{color:var(--gold);font-size:13px}
+#load{color:var(--faint);font-size:11px}
+#wall{background:var(--panel);border:1px solid var(--line);border-radius:5px;overflow:hidden}
+canvas{display:block;width:100%;cursor:crosshair}
+#legend{color:var(--faint);font-size:10.5px;margin-top:10px;line-height:1.7}
+input[type=file]{display:none}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--accent);color:#0a0c0a;
+  padding:5px 14px;border-radius:4px;font-size:11px;display:none;z-index:30}
+</style>
+</head>
+<body>
+<h1>FRESCO</h1>
+<div id="sub">the bare score player — one clock, everything else is reference · contract: fresco-score v0.1 ·
+<a href="RADIO-FRESCO-PLAN.md">the plan</a> · <a href="seal-earsketch.html">seal ↗</a> · <a href="observatory.html">observatory ↗</a> · <a href="reconstitute.html">reconstitute ↗</a></div>
+<div id="bar">
+  <select id="pick">
+    <option value="scores/reading-06.fresco.json">READING 06 — rebuilt from line cuts</option>
+    <option value="scores/unified-drone.fresco.json">UNIFIED DRONE — the 2025 timeline (24 min, heavy)</option>
+  </select>
+  <label><button onclick="this.parentNode.querySelector('input').click()">open .fresco.json</button><input id="file" type="file" accept=".json"></label>
+  <button id="play">▶ PLAY</button>
+  <button id="stop">■</button>
+  <span id="clock">00:00 / 00:00</span>
+  <span id="title"></span>
+  <span id="load"></span>
+</div>
+<div id="wall"><canvas id="cv"></canvas></div>
+<div id="legend">click the wall to seek · click a track name to mute it · clips carry their source span; markers and contours ride the same clock ·
+any page that emits this contract (reconstitute ⬇ score, observatory SCORE, the seal to come) plays here identically</div>
+<div id="toast"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const mmss = t => `${String(Math.floor(t/60)).padStart(2,'0')}:${String(Math.floor(t%60)).padStart(2,'0')}`;
+let SCORE = null, AC = null, buffers = {}, playing = [], pos = 0, t0 = 0, isPlaying = false, raf = null, mutes = {};
+const LANE_COL = {SECTION:'#e8c34a', ACCENT:'#9ee06a', PHRASE_END:'#5ba8f5', PAUSE:'#4a5a42', BREATH:'#5ba8f5', PLOSIVE:'#c86bd9', PITCH_HIGH:'#4dd9cc'};
+
+function toast(m){ const t=$('#toast'); t.textContent=m; t.style.display='block';
+  clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',2400); }
+
+async function loadScore(obj){
+  stop();
+  SCORE = obj; buffers = {}; mutes = {}; pos = 0;
+  $('#title').textContent = obj.title || 'untitled score';
+  draw(); clockText();
+  const srcs = [...new Set(obj.tracks.flatMap(t => t.clips.map(c => c.source)))];
+  $('#load').textContent = `decoding 0/${srcs.length}…`;
+  if (!AC) AC = new (window.AudioContext||window.webkitAudioContext)();
+  let n = 0, fail = 0;
+  for (const s of srcs){
+    try {
+      const r = await fetch((obj.base||'') + s);
+      if (!r.ok) throw Error(r.status);
+      buffers[s] = await AC.decodeAudioData(await r.arrayBuffer());
+    } catch(e) { fail++; console.warn('source failed', s, e); }
+    $('#load').textContent = `decoding ${++n}/${srcs.length}…`;
+  }
+  $('#load').textContent = fail ? `${srcs.length - fail} ready · ${fail} FAILED` : `${srcs.length} sources ready`;
+  toast('score loaded — ' + obj.tracks.reduce((a,t)=>a+t.clips.length,0) + ' clips');
+}
+
+/* ---------------- drawing ---------------- */
+let geom = {rows: []};
+function draw(){
+  const cv = $('#cv'), dpr = devicePixelRatio||1;
+  const W = cv.parentNode.clientWidth;
+  const trackH = 46, laneH = 30, headW = 92;
+  const rows = [];
+  if (SCORE){ SCORE.tracks.forEach(t=>rows.push({kind:'track',obj:t,h:trackH}));
+    (SCORE.lanes||[]).forEach(l=>rows.push({kind:'lane',obj:l,h:l.type==='contour'?44:laneH})); }
+  const H = Math.max(80, rows.reduce((a,r)=>a+r.h,0) + 22);
+  cv.width = W*dpr; cv.height = H*dpr; cv.style.height = H+'px';
+  const g = cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0);
+  g.clearRect(0,0,W,H);
+  geom = {rows: [], W, headW, H};
+  if (!SCORE){ g.fillStyle='#4a5a42'; g.fillText('load a score', 20, 40); return; }
+  const dur = SCORE.duration || 1;
+  const X = t => headW + (t/dur)*(W-headW-8);
+  geom.X = X; geom.dur = dur;
+  let y = 12;
+  for (const r of rows){
+    geom.rows.push({...r, y});
+    g.fillStyle = '#0d110c'; g.fillRect(headW, y, W-headW-8, r.h-6);
+    g.strokeStyle = '#1a2117'; g.strokeRect(headW, y, W-headW-8, r.h-6);
+    const name = r.obj.name || r.obj.id;
+    g.fillStyle = r.kind==='track' && mutes[r.obj.id] ? '#4a5a42' : '#7d8f74';
+    g.font = '10px monospace';
+    g.fillText((r.kind==='track' && mutes[r.obj.id] ? '✕ ' : '') + name.toUpperCase().slice(0,11), 6, y + r.h/2);
+    if (r.kind==='track'){
+      for (const c of r.obj.clips){
+        const x0 = X(c.at), x1 = X(c.at + (c.e - c.s));
+        g.fillStyle = r.obj.id==='drone' ? '#5ba8f533' : '#9ee06a44';
+        g.fillRect(x0, y+3, Math.max(2,x1-x0), r.h-12);
+        g.strokeStyle = r.obj.id==='drone' ? '#5ba8f5' : '#9ee06a';
+        g.strokeRect(x0, y+3, Math.max(2,x1-x0), r.h-12);
+        if (x1-x0 > 34 && c.label){ g.fillStyle='#cfe3c8'; g.font='9px monospace';
+          g.fillText(c.label.slice(0,Math.floor((x1-x0)/6)), x0+4, y+r.h/2+1); }
+      }
+    } else if (r.obj.type === 'marker'){
+      for (const ev of r.obj.events){
+        g.fillStyle = LANE_COL[ev.type] || '#7d8f74';
+        g.fillRect(X(ev.t), y+3, 1.4, r.h-12);
+      }
+    } else if (r.obj.type === 'contour'){
+      g.strokeStyle = '#4dd9cc'; g.beginPath();
+      const pts = r.obj.points || [];
+      const vs = pts.map(p=>p[1]);
+      const lo = Math.min(...vs), hi = Math.max(...vs), sp = (hi-lo)||1;
+      pts.forEach((p,i)=>{ const yy = y + (r.h-10) - ((p[1]-lo)/sp)*(r.h-16);
+        i?g.lineTo(X(p[0]),yy):g.moveTo(X(p[0]),yy); });
+      g.stroke();
+    }
+    y += r.h;
+  }
+  drawHead(g);
+}
+function drawHead(g){
+  if (!SCORE) return;
+  g = g || $('#cv').getContext('2d');
+  const x = geom.X(pos);
+  g.fillStyle = '#e8c34a'; g.fillRect(x, 6, 1.2, geom.H-12);
+}
+
+/* ---------------- transport ---------------- */
+function schedule(from){
+  const when0 = AC.currentTime + 0.06;
+  for (const tr of SCORE.tracks){
+    if (mutes[tr.id]) continue;
+    for (const c of tr.clips){
+      const buf = buffers[c.source];
+      if (!buf) continue;
+      const clipDur = c.e - c.s;
+      const end = c.at + clipDur;
+      if (end <= from) continue;
+      const startAt = Math.max(c.at - from, 0);
+      const srcOff = c.s + Math.max(from - c.at, 0);
+      const dur = end - Math.max(from, c.at);
+      const src = AC.createBufferSource(); src.buffer = buf;
+      const gn = AC.createGain(); src.connect(gn); gn.connect(AC.destination);
+      const g0 = (c.gain ?? 1) * (tr.gain ?? 1);
+      const fi = c.fadeIn ?? 0.01, fo = c.fadeOut ?? 0.02;
+      const t = when0 + startAt;
+      gn.gain.setValueAtTime(0, t);
+      gn.gain.linearRampToValueAtTime(g0, t + fi);
+      gn.gain.setValueAtTime(g0, Math.max(t + fi, t + dur - fo));
+      gn.gain.linearRampToValueAtTime(0, t + dur);
+      src.start(t, srcOff, dur);
+      playing.push(src);
+    }
+  }
+  t0 = when0 - from;
+}
+async function play(){
+  if (!SCORE) return;
+  if (!AC) AC = new (window.AudioContext||window.webkitAudioContext)();
+  if (AC.state==='suspended') await AC.resume();
+  stopSources();
+  schedule(pos);
+  isPlaying = true;
+  $('#play').textContent = '❚❚ PAUSE';
+  tick();
+}
+function stopSources(){ playing.forEach(s=>{try{s.stop()}catch(e){}}); playing=[]; cancelAnimationFrame(raf); }
+function pause(){ pos = Math.min(AC.currentTime - t0, SCORE.duration); stopSources(); isPlaying=false; $('#play').textContent='▶ PLAY'; draw(); clockText(); }
+function stop(){ if (AC && isPlaying) stopSources(); isPlaying=false; pos=0; if($('#play'))$('#play').textContent='▶ PLAY'; if(SCORE){draw();clockText();} }
+function tick(){
+  if (!isPlaying) return;
+  pos = AC.currentTime - t0;
+  if (pos >= SCORE.duration){ stop(); return; }
+  draw(); clockText();
+  raf = requestAnimationFrame(tick);
+}
+function clockText(){ $('#clock').textContent = `${mmss(pos)} / ${mmss(SCORE ? SCORE.duration : 0)}`; }
+
+$('#play').onclick = () => isPlaying ? pause() : play();
+$('#stop').onclick = stop;
+$('#cv').addEventListener('click', e => {
+  if (!SCORE) return;
+  const r = $('#cv').getBoundingClientRect();
+  const x = e.clientX - r.left, y = e.clientY - r.top;
+  if (x < geom.headW){
+    const row = geom.rows.find(rr => y >= rr.y && y < rr.y + rr.h);
+    if (row && row.kind === 'track'){ mutes[row.obj.id] = !mutes[row.obj.id];
+      draw(); if (isPlaying){ const p = AC.currentTime - t0; stopSources(); pos = p; schedule(pos); isPlaying = true; tick(); } }
+    return;
+  }
+  pos = Math.max(0, Math.min(1, (x - geom.headW) / (geom.W - geom.headW - 8))) * geom.dur;
+  if (isPlaying){ stopSources(); schedule(pos); isPlaying = true; tick(); } else { draw(); clockText(); }
+});
+$('#pick').onchange = () => fetch($('#pick').value).then(r=>r.json()).then(loadScore);
+$('#file').onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  f.text().then(t => { const j = JSON.parse(t); j.base = j.base ?? ''; loadScore(j); });
+};
+addEventListener('resize', draw);
+
+const q = new URLSearchParams(location.search).get('score');
+fetch(q || $('#pick').value).then(r=>r.json()).then(loadScore).catch(e=>toast('score failed: '+e));
+</script>
+</body>
+</html>
