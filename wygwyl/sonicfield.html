@@ -40,8 +40,17 @@ button.on{background:var(--water);color:#0a0c0a;border-color:var(--water)}
   <a href="atlas.html">atlas</a> · <a href="pack/">pack</a></div>
 </div>
 <div id="tools">
+  <button id="lay-eco" class="on" data-lay="eco">ECOLOGY</button>
+  <button id="lay-form" data-lay="form" disabled title="DINO on the spectrograms — how sounds LOOK">FORM</button>
+  <button id="lay-sem" data-lay="sem" disabled title="CLAP — what sounds MEAN">MEANING</button>
   <button id="horizon">KEYNOTE HORIZON: OFF</button>
   <button id="hush">HUSH ALL</button>
+</div>
+<div id="gate" style="position:fixed;inset:0;z-index:50;background:#0a0c0af2;display:flex;
+  align-items:center;justify-content:center;flex-direction:column;gap:14px;cursor:pointer">
+  <div style="font-size:18px;letter-spacing:.3em;color:var(--accent)">⟡ ENTER THE FIELD</div>
+  <div style="color:var(--dim);font-size:11.5px;max-width:340px;text-align:center;line-height:1.7">
+    one click gives the browser permission to sound —<br>after that, hovering is hearing</div>
 </div>
 <div id="legend">loading the field…</div>
 <div id="pins"></div>
@@ -70,13 +79,17 @@ function resize(){
 }
 addEventListener('resize', resize);
 
-const sx = s => (s.x - cam.x) * cam.z + innerWidth/2;
-const sy = s => (s.y - cam.y) * cam.z + innerHeight/2;
+let LAYOUT = 'eco';
+const tx = s => LAYOUT === 'form' && s.xf != null ? s.xf : LAYOUT === 'sem' && s.xs != null ? s.xs : s.x;
+const ty = s => LAYOUT === 'form' && s.yf != null ? s.yf : LAYOUT === 'sem' && s.ys != null ? s.ys : s.y;
+const sx = s => (s.cx - cam.x) * cam.z + innerWidth/2;
+const sy = s => (s.cy - cam.y) * cam.z + innerHeight/2;
 const rad = s => 3 + Math.log1p(s.dur) * 2.6;
 
 function draw(){
   const g = $('#cv').getContext('2d');
   g.fillStyle = '#0a0c0a'; g.fillRect(0,0,innerWidth,innerHeight);
+  for (const s of SOUNDS){ s.cx += (tx(s) - s.cx) * 0.14; s.cy += (ty(s) - s.cy) * 0.14; }
   for (const s of SOUNDS){
     const x = sx(s), y = sy(s);
     if (x < -30 || x > innerWidth+30 || y < -30 || y > innerHeight+30) continue;
@@ -143,7 +156,8 @@ function tip(s){
   const t = $('#tip');
   t.innerHTML = `<b>${s.label}</b><br><small>${s.eco.toUpperCase()} · ${s.cls} · ${s.dur}s` +
     `${s.bpm ? ' · ' + s.bpm + ' bpm' : ''}${s.key ? ' · ' + s.key : ''}` +
-    `${s.hook >= 2 ? ' · ↺' + s.hook : ''} · ${s.cent} Hz bright</small>`;
+    `${s.hook >= 2 ? ' · ↺' + s.hook : ''} · ${s.cent} Hz bright</small>` +
+    (s.phr ? `<br><small style="color:var(--teal)">≈ “${s.phr}”${s.shots ? ' · images: ' + s.shots.join(' ') : ''}</small>` : '');
   t.style.display = 'block';
   t.style.left = Math.min(mouse.x + 16, innerWidth - 310) + 'px';
   t.style.top = (mouse.y + 16) + 'px';
@@ -207,8 +221,17 @@ $('#hush').onclick = () => {
   pinned.clear(); hoverSnd = null; horizonSnd = null; renderPins();
 };
 
-fetch('sonic/sonic.json').then(r => r.json()).then(j => {
+$('#gate').addEventListener('click', () => { $('#gate').remove();
+  try { new (window.AudioContext||window.webkitAudioContext)().resume(); } catch(e) {} });
+document.querySelectorAll('[data-lay]').forEach(b => b.onclick = () => {
+  LAYOUT = b.dataset.lay;
+  document.querySelectorAll('[data-lay]').forEach(x => x.classList.toggle('on', x === b));
+});
+fetch('sonic/sonic.json', {cache: 'no-cache'}).then(r => r.json()).then(j => {
   SOUNDS = j.sounds;
+  for (const s of SOUNDS){ s.cx = s.x; s.cy = s.y; }
+  if (SOUNDS[0] && SOUNDS[0].xf != null) $('#lay-form').disabled = false;
+  if (SOUNDS[0] && SOUNDS[0].xs != null) $('#lay-sem').disabled = false;
   cam.z = Math.min(innerWidth, innerHeight) * 0.42;
   const c = j.counts;
   $('#legend').innerHTML =
