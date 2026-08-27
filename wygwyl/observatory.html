@@ -44,6 +44,9 @@ h1{font-size:16px;letter-spacing:.22em;color:var(--accent)}
 .gw.playing{background:#26301f}
 .gw small{color:var(--faint);font-size:8.5px;margin-top:1px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .gw.nolabel small{display:none}
+.ggap{display:inline-flex;align-items:flex-end;justify-content:center;height:46px;
+  border-bottom:1px dashed #1a2117;color:#5ba8f5aa;font-size:11px;padding-bottom:2px}
+.gpause{color:var(--faint);font-size:9px;align-self:center;margin-left:10px;white-space:nowrap}
 #toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--accent);color:#0a0c0a;
   padding:5px 14px;border-radius:4px;font-size:11px;display:none;z-index:30}
 </style>
@@ -51,7 +54,7 @@ h1{font-size:16px;letter-spacing:.22em;color:var(--accent)}
 <body>
 <h1>WYGWYL · VOICE OBSERVATORY</h1>
 <div id="sub">one voice, nine lanes — body, pulse, breath, resonance, timbre, speech, rhythm, phrase, meaning —
-and every word typeset as the shape of its own sound · <a href="sampler.html">sampler ↗</a> · <a href="./">fourteen halfworlds ↗</a><br>
+and every word typeset as the shape of its own sound · <a href="sampler.html">sampler ↗</a> · <a href="reconstitute.html">reconstitute ↗</a> · <a href="./">fourteen halfworlds ↗</a><br>
 <span style="color:var(--faint)">click any lane to hear that moment · click a glyph to hear its word · alt-click a glyph to COPY ITS SHAPE (pitch + energy contour as JSON, a morphism source) · events are speaker-relative percentiles with hysteresis, not universal thresholds</span></div>
 <div id="picker"></div>
 <div id="stage">
@@ -75,7 +78,7 @@ and every word typeset as the shape of its own sound · <a href="sampler.html">s
 <script>
 const $ = s => document.querySelector(s);
 const mmss = t => `${String(Math.floor(t/60)).padStart(2,'0')}:${(t%60).toFixed(2).padStart(5,'0')}`;
-let MAN = null, LANES = {}, cur = null, AC = null, buffers = {}, srcNode = null, playT0 = 0, playFrom = 0, raf = null;
+let MAN = null, LANES = {}, CUTS = null, cur = null, AC = null, buffers = {}, srcNode = null, playT0 = 0, playFrom = 0, raf = null;
 
 function toast(m){ const t=$('#toast'); t.textContent=m; t.style.display='block';
   clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',2600); }
@@ -274,24 +277,58 @@ function glyph(w){
 }
 function renderGlyphs(){
   const host = $('#glyphs'); host.innerHTML = '';
+  const words = cur.lanes.words;
+  const cutsW = (cur.cuts || []);
+  const breaths = cur.lanes.events.filter(e => e.type === 'BREATH').map(e => e.t);
   const byLine = {};
-  for (const w of cur.lanes.words) (byLine[w.line] = byLine[w.line]||[]).push(w);
-  for (const li of Object.keys(byLine)){
+  words.forEach((w, gi) => { w._gi = gi; (byLine[w.line] = byLine[w.line]||[]).push(w); });
+  const lineKeys = Object.keys(byLine);
+  for (let lk = 0; lk < lineKeys.length; lk++){
+    const lws = byLine[lineKeys[lk]];
     const row = document.createElement('div'); row.className = 'gline';
-    for (const w of byLine[li]){
+    for (let wi = 0; wi < lws.length; wi++){
+      const w = lws[wi];
+      const cw = cutsW[w._gi];
       const cell = document.createElement('span');
       cell.className = 'gw' + (showLabels?'':' nolabel');
       cell.appendChild(glyph(w));
       const lab = document.createElement('small'); lab.textContent = w.w; cell.appendChild(lab);
-      cell.title = `“${w.w}” ${mmss(w.s)}–${mmss(w.e)} · voi ${w.voi} · stress ${w.stress} · alt-click copies shape`;
+      cell.title = `“${w.w}” ${mmss(w.s)}–${mmss(w.e)}${cw?' · cut '+cw.gr:''} · voi ${w.voi} · stress ${w.stress} · alt-click copies shape`;
       cell.onclick = ev => {
         if (ev.altKey){
           navigator.clipboard.writeText(JSON.stringify({word:w.w, dur:+(w.e-w.s).toFixed(3),
-            pitch_semitones:w.f0c, energy:w.env, voicing:w.voi, brightness_z:w.cent_z, stress:w.stress}));
+            pitch_semitones:w.f0c, energy:w.env, voicing:w.voi, brightness_z:w.cent_z, stress:w.stress,
+            cut: cw ? {start:cw.ts, end:cw.tl, grade:cw.gr} : null}));
           toast(`shape of “${w.w}” copied — bend it onto anything`);
-        } else play(w.s, w.e, cell);
+        } else cw ? play(cw.ts, cw.tl, cell) : play(w.s, w.e, cell);
       };
       row.appendChild(cell);
+      // the negative space: real gap to the next word, drawn to scale
+      const nxt = wi + 1 < lws.length ? lws[wi + 1] : null;
+      if (nxt){
+        const gap = nxt.s - w.e;
+        if (gap >= 0.18){
+          const sp = document.createElement('span');
+          sp.className = 'ggap';
+          sp.style.width = Math.min(gap, 2.4) * 46 + 'px';
+          const hasBreath = breaths.some(t => t > w.e && t < nxt.s);
+          sp.textContent = hasBreath ? '˰' : '';
+          sp.title = `${gap.toFixed(2)} s of ${hasBreath ? 'breath' : 'silence'}`;
+          sp.style.cursor = 'pointer';
+          sp.onclick = () => play(w.e, nxt.s, sp);
+          row.appendChild(sp);
+        }
+      }
+    }
+    // the held silence between lines
+    const nextLine = lk + 1 < lineKeys.length ? byLine[lineKeys[lk + 1]][0] : null;
+    if (nextLine){
+      const lgap = nextLine.s - lws[lws.length - 1].e;
+      if (lgap > 0.25){
+        const pl = document.createElement('span'); pl.className = 'gpause';
+        pl.textContent = `— ${lgap.toFixed(1)} s held —`;
+        row.appendChild(pl);
+      }
     }
     host.appendChild(row);
   }
@@ -304,7 +341,7 @@ async function open(num){
   document.querySelectorAll('#picker button').forEach(b=>b.classList.toggle('on', b.dataset.n===num));
   const tr = MAN.tracks.find(t=>t.num===num);
   if (!LANES[num]) LANES[num] = await (await fetch(`lanes/${num}.json`)).json();
-  cur = {tr, lanes: LANES[num]};
+  cur = {tr, lanes: LANES[num], cuts: (CUTS && CUTS.tracks[num] || {}).words};
   cur.lanes.duration = cur.lanes.duration || tr.dur;
   $('#stage').style.display = 'block';
   $('#ttitle').textContent = `${tr.num} · ${tr.title}`;
@@ -319,6 +356,7 @@ $('#labels').onclick = e => { showLabels = !showLabels; e.target.classList.toggl
   document.querySelectorAll('.gw').forEach(g=>g.classList.toggle('nolabel', !showLabels)); };
 addEventListener('resize', () => cur && drawLanes());
 
+fetch('cuts.json').then(r=>r.json()).then(c=>{ CUTS=c; if(cur) renderGlyphs(); }).catch(()=>{});
 fetch('samples.json').then(r=>r.json()).then(man=>{
   MAN = man;
   const p = $('#picker');

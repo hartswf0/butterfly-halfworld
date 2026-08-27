@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WYGWYL RECONSTITUTE</title>
+<style>
+:root{--bg:#0a0c0a;--panel:#10140f;--line:#26301f;--ink:#cfe3c8;--dim:#7d8f74;
+  --faint:#4a5a42;--accent:#9ee06a;--gold:#e8c34a;--teal:#4dd9cc;--water:#5ba8f5;--rose:#e05c4f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:13px/1.5 "SF Mono",Menlo,monospace;padding:18px;max-width:1000px;margin:0 auto}
+a{color:var(--teal);text-decoration:none}
+h1{font-size:16px;letter-spacing:.22em;color:var(--accent)}
+#sub{color:var(--dim);font-size:11.5px;margin:6px 0 14px}
+textarea{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--ink);
+  font:inherit;font-size:14px;padding:10px;border-radius:4px;min-height:64px}
+textarea:focus{outline:1px solid var(--accent)}
+#bar{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap;align-items:center}
+button{background:#161b14;border:1px solid var(--line);color:var(--ink);font:inherit;font-size:12px;padding:5px 12px;border-radius:3px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button.big{background:var(--accent);color:#0a0c0a;border-color:var(--accent)}
+#pace{width:110px}
+#seq{display:flex;flex-wrap:wrap;gap:6px;align-items:center;background:var(--panel);
+  border:1px solid var(--line);border-radius:4px;padding:12px;min-height:56px;margin-bottom:12px}
+.tok{border:1px solid;border-radius:4px;padding:3px 9px;cursor:pointer;font-size:12.5px;position:relative}
+.tok small{color:var(--faint);font-size:9px;margin-left:5px}
+.tok.gA{border-color:var(--teal)} .tok.gB{border-color:var(--gold)} .tok.gC{border-color:var(--rose)}
+.tok.playing{background:#26301f}
+.tok.miss{border-color:var(--rose);color:var(--rose);text-decoration:line-through;cursor:default}
+.gapchip{color:var(--faint);font-size:10px}
+#legend{color:var(--faint);font-size:10.5px;margin-bottom:14px}
+#legend b{font-weight:normal;padding:0 4px}
+#vocab{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px;
+  max-height:300px;overflow-y:auto;line-height:2}
+#vocab span{cursor:pointer;margin-right:9px;white-space:nowrap;font-size:12px}
+#vocab span:hover{color:var(--accent)}
+#vocab i{font-style:normal;font-size:9px;color:var(--faint)}
+#vocab .dA{color:var(--teal)} #vocab .dB{color:var(--gold)} #vocab .dC{color:var(--dim)}
+.ptitle{color:var(--dim);font-size:10.5px;letter-spacing:.18em;margin:14px 0 6px}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--accent);color:#0a0c0a;
+  padding:5px 14px;border-radius:4px;font-size:11px;display:none;z-index:30}
+</style>
+</head>
+<body>
+<h1>WYGWYL · RECONSTITUTE</h1>
+<div id="sub">the voice rearranged from its own words — type with the poet's vocabulary, hear it spoken, export it ·
+<a href="sampler.html">sampler ↗</a> · <a href="observatory.html">observatory ↗</a></div>
+<textarea id="input" placeholder="type with the vocabulary below…">here we are all one resurrecting the world, out of silence.</textarea>
+<div id="bar">
+  <button id="go" class="big">ASSEMBLE</button>
+  <button id="play">▶ speak</button>
+  <button id="stop">■</button>
+  <button id="wav">⬇ export WAV</button>
+  <label style="color:var(--faint);font-size:11px">pace <input id="pace" type="range" min="30" max="220" value="100"></label>
+  <span id="stat" style="color:var(--faint);font-size:11px"></span>
+</div>
+<div id="seq"><span style="color:var(--faint)">assembled words appear here — click a word to audition it, shift-click to try its next twin</span></div>
+<div id="legend">cut grades, measured not guessed: <b style="color:var(--teal)">A</b> silence-bounded, guaranteed clean ·
+<b style="color:var(--gold)">B</b> safe with its fade · <b style="color:var(--rose)">C</b> fused with neighbors in the original —
+expect its edge, or swap it (shift-click) for a cleaner twin · gaps use the poet's own pause statistics</div>
+<div class="ptitle">THE VOCABULARY <span style="letter-spacing:0">(every word this voice has said — click to add)</span></div>
+<div id="vocab">loading…</div>
+<div id="toast"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+let MAN=null, CUTS=null, VOCAB={}, AC=null, buffers={}, seq=[], playing=[], GAPS={word:.09,comma:.5,period:1.0};
+const normw = s => s.toLowerCase().replace(/[^a-z']/g,'');
+
+function toast(m){ const t=$('#toast'); t.textContent=m; t.style.display='block';
+  clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',2600); }
+
+async function buffer(num){
+  if (buffers[num]) return buffers[num];
+  if (!AC) AC = new (window.AudioContext||window.webkitAudioContext)();
+  const tr = MAN.tracks.find(t=>t.num===num);
+  const raw = await (await fetch(tr.mp3)).arrayBuffer();
+  buffers[num] = await AC.decodeAudioData(raw);
+  return buffers[num];
+}
+function stopAll(){ playing.forEach(s=>{try{s.stop()}catch(e){}}); playing=[];
+  document.querySelectorAll('.playing').forEach(e=>e.classList.remove('playing')); }
+
+function buildVocab(){
+  for (const num in CUTS.tracks){
+    CUTS.tracks[num].words.forEach((w,ix)=>{
+      const k = normw(w.w);
+      if (!k) return;
+      (VOCAB[k]=VOCAB[k]||[]).push({num, ix, ...w});
+    });
+  }
+  for (const k in VOCAB) VOCAB[k].sort((a,b)=>'ABC'.indexOf(a.gr)-'ABC'.indexOf(b.gr) || (b.tl-b.ts)-(a.tl-a.ts));
+  const keys = Object.keys(VOCAB).sort();
+  const host = $('#vocab'); host.innerHTML='';
+  for (const k of keys){
+    const el = document.createElement('span');
+    const best = VOCAB[k][0];
+    el.innerHTML = `<b class="d${best.gr}">●</b> ${k}<i>×${VOCAB[k].length}</i>`;
+    el.onclick = ()=>{ const t=$('#input'); t.value = (t.value.trim()+' '+k).trim(); };
+    host.appendChild(el);
+  }
+  $('#stat').textContent = `${keys.length} unique words · ${Object.values(VOCAB).reduce((a,v)=>a+v.length,0)} takes`;
+}
+
+function pickInstance(k, prevF0, used){
+  const insts = VOCAB[k];
+  let best=null, bs=-1e9;
+  for (const c of insts){
+    let s = {'A':4,'B':2,'C':0}[c.gr] ?? 0;
+    if (prevF0 && c.f0m) s -= Math.abs(c.f0m - prevF0)/25;
+    if (used.has(c.num+':'+c.ix)) s -= 1.5;
+    const d = c.tl - c.ts;
+    s -= Math.abs(d - 0.45)*0.4;
+    if (s > bs){ bs=s; best=c; }
+  }
+  return best;
+}
+
+function assemble(){
+  stopAll();
+  const raw = $('#input').value.trim().split(/\s+/).filter(Boolean);
+  seq = [];
+  const used = new Set();
+  let prevF0 = null;
+  for (const tokRaw of raw){
+    const punct = (tokRaw.match(/[.,;:!?]+$/)||[''])[0];
+    const k = normw(tokRaw);
+    if (!k) continue;
+    if (!VOCAB[k]){ seq.push({miss:true, w:tokRaw}); continue; }
+    const inst = pickInstance(k, prevF0, used);
+    used.add(inst.num+':'+inst.ix);
+    prevF0 = inst.f0m || prevF0;
+    seq.push({...inst, shown: tokRaw, punct, alt:0});
+  }
+  renderSeq();
+}
+function gapAfter(t){
+  const pace = $('#pace').value/100;
+  if (/[.!?]/.test(t.punct||'')) return GAPS.period*0.7*pace;
+  if (/[,;:]/.test(t.punct||'')) return GAPS.comma*0.7*pace;
+  return GAPS.word*pace;
+}
+function renderSeq(){
+  const host = $('#seq'); host.innerHTML='';
+  seq.forEach((t,i)=>{
+    const el = document.createElement('span');
+    if (t.miss){ el.className='tok miss'; el.textContent=t.w; el.title='this voice never said that word'; }
+    else {
+      el.className = 'tok g'+t.gr;
+      el.innerHTML = `${t.shown}<small>${t.num}·${t.gr}</small>`;
+      el.title = `take ${t.alt+1}/${VOCAB[normw(t.shown)].length} · ${(t.tl-t.ts).toFixed(2)}s · shift-click for another take`;
+      el.onclick = async ev=>{
+        if (ev.shiftKey){
+          const insts = VOCAB[normw(t.shown)];
+          t.alt = (t.alt+1)%insts.length;
+          Object.assign(t, insts[t.alt]);
+          renderSeq(); toast(`take ${t.alt+1}/${insts.length} — grade ${t.gr}`);
+        } else { stopAll(); await speakOne(t, el); }
+      };
+    }
+    host.appendChild(el);
+    if (i<seq.length-1){ const g=document.createElement('span'); g.className='gapchip';
+      g.textContent='·'; host.appendChild(g); }
+  });
+}
+async function speakOne(t, el){
+  if (!AC) AC = new (window.AudioContext||window.webkitAudioContext)();
+  if (AC.state==='suspended') await AC.resume();
+  const buf = await buffer(t.num);
+  const src = AC.createBufferSource(); src.buffer = buf;
+  const g = AC.createGain(); src.connect(g); g.connect(AC.destination);
+  const fade = t.gr==='C' ? 0.045 : 0.012;
+  const dur = t.tl - t.ts;
+  const now = AC.currentTime;
+  g.gain.setValueAtTime(0, now);
+  g.gain.linearRampToValueAtTime(1, now+fade);
+  g.gain.setValueAtTime(1, now+dur-fade);
+  g.gain.linearRampToValueAtTime(0, now+dur);
+  src.start(now, t.ts, dur);
+  playing.push(src);
+  if (el){ el.classList.add('playing'); src.onended=()=>el.classList.remove('playing'); }
+}
+async function schedule(ctx, dest, t0){
+  let t = t0;
+  for (const tok of seq){
+    if (tok.miss) { t += 0.3; continue; }
+    const buf = await buffer(tok.num);
+    let b = buf;
+    if (ctx !== AC){
+      // offline context needs its own buffer object of same data
+      b = ctx.createBuffer(buf.numberOfChannels, buf.length, buf.sampleRate);
+      for (let c=0;c<buf.numberOfChannels;c++) b.copyToChannel(buf.getChannelData(c), c);
+    }
+    const src = ctx.createBufferSource(); src.buffer = b;
+    const g = ctx.createGain(); src.connect(g); g.connect(dest);
+    const fade = tok.gr==='C' ? 0.045 : 0.012;
+    const dur = tok.tl - tok.ts;
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(1, t+fade);
+    g.gain.setValueAtTime(1, Math.max(t+fade, t+dur-fade));
+    g.gain.linearRampToValueAtTime(0, t+dur);
+    src.start(t, tok.ts, dur);
+    if (ctx === AC) playing.push(src);
+    t += dur + gapAfter(tok);
+  }
+  return t - t0;
+}
+async function speak(){
+  stopAll();
+  if (!seq.length) assemble();
+  if (!AC) AC = new (window.AudioContext||window.webkitAudioContext)();
+  if (AC.state==='suspended') await AC.resume();
+  await schedule(AC, AC.destination, AC.currentTime + 0.08);
+}
+async function exportWav(){
+  if (!seq.length) assemble();
+  if (!AC) AC = new (window.AudioContext||window.webkitAudioContext)();
+  for (const tok of seq) if (!tok.miss) await buffer(tok.num);
+  let total = 0.2;
+  for (const tok of seq) total += tok.miss ? 0.3 : (tok.tl-tok.ts) + gapAfter(tok);
+  const sr = 44100;
+  const off = new OfflineAudioContext(2, Math.ceil(total*sr), sr);
+  await schedule(off, off.destination, 0.05);
+  const buf = await off.startRendering();
+  const n = buf.length, ch = 2, bytes = 44 + n*ch*2;
+  const ab = new ArrayBuffer(bytes), v = new DataView(ab);
+  const ws=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};
+  ws(0,'RIFF'); v.setUint32(4,bytes-8,true); ws(8,'WAVE'); ws(12,'fmt ');
+  v.setUint32(16,16,true); v.setUint16(20,1,true); v.setUint16(22,ch,true);
+  v.setUint32(24,sr,true); v.setUint32(28,sr*ch*2,true); v.setUint16(32,ch*2,true);
+  v.setUint16(34,16,true); ws(36,'data'); v.setUint32(40,n*ch*2,true);
+  const c0=buf.getChannelData(0), c1=buf.getChannelData(1);
+  let o=44;
+  for(let i=0;i<n;i++){ let a=Math.max(-1,Math.min(1,c0[i])), b2=Math.max(-1,Math.min(1,c1[i]));
+    v.setInt16(o, a<0?a*32768:a*32767, true); o+=2;
+    v.setInt16(o, b2<0?b2*32768:b2*32767, true); o+=2; }
+  const url = URL.createObjectURL(new Blob([ab],{type:'audio/wav'}));
+  const al=document.createElement('a'); al.href=url; al.download='wygwyl-reconstituted.wav'; al.click();
+  setTimeout(()=>URL.revokeObjectURL(url),5000);
+  toast('reconstituted WAV exported');
+}
+$('#go').onclick = assemble;
+$('#play').onclick = speak;
+$('#stop').onclick = stopAll;
+$('#wav').onclick = exportWav;
+$('#input').addEventListener('keydown', e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); assemble(); speak(); }});
+
+Promise.all([
+  fetch('samples.json').then(r=>r.json()),
+  fetch('cuts.json').then(r=>r.json()),
+]).then(([man,cuts])=>{
+  MAN=man; CUTS=cuts;
+  GAPS = {word: Math.min(cuts.gaps.word, 0.14), comma: cuts.gaps.comma, period: cuts.gaps.period};
+  buildVocab();
+  assemble();
+});
+</script>
+</body>
+</html>

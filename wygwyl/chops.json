@@ -96,6 +96,8 @@
      "s": 0.57,
      "e": 1.11,
      "text": "we've made",
+     "i0": 1,
+     "i1": 2,
      "norm": "we've made",
      "n": 2,
      "seg": 0,
@@ -106,12 +108,17 @@
      "id": "01_C01",
      "file": "chops/01/01_C01.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 0.59,
+     "ce": 1.13,
+     "gr": "B"
     },
     {
      "s": 1.33,
      "e": 2.25,
      "text": "don't want,",
+     "i0": 4,
+     "i1": 5,
      "norm": "don't want",
      "n": 2,
      "seg": 0,
@@ -122,12 +129,17 @@
      "id": "01_C02",
      "file": "chops/01/01_C02.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 1.379,
+     "ce": 2.689,
+     "gr": "B"
     },
     {
      "s": 3.12,
      "e": 3.58,
      "text": "we've sold",
+     "i0": 7,
+     "i1": 8,
      "norm": "we've sold",
      "n": 2,
      "seg": 0,
@@ -138,12 +150,17 @@
      "id": "01_C03",
      "file": "chops/01/01_C03.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 3.15,
+     "ce": 3.61,
+     "gr": "C"
     },
     {
      "s": 4.72,
      "e": 5.58,
      "text": "to ourselves,",
+     "i0": 12,
+     "i1": 13,
      "norm": "to ourselves",
      "n": 2,
      "seg": 0,
@@ -154,12 +171,17 @@
      "id": "01_C04",
      "file": "chops/01/01_C04.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 4.7,
+     "ce": 5.88,
+     "gr": "A"
     },
     {
      "s": 6.0,
      "e": 6.78,
      "text": "doesn't exist.",
+     "i0": 14,
+     "i1": 15,
      "norm": "doesn't exist",
      "n": 2,
      "seg": 0,
@@ -170,12 +192,17 @@
      "id": "01_C05",
      "file": "chops/01/01_C05.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 6.0,
+     "ce": 7.479,
+     "gr": "A"
     },
     {
      "s": 9.17,
      "e": 10.57,
      "text": "hallways, within",
+     "i0": 24,
+     "i1": 25,
      "norm": "hallways within",
      "n": 2,
      "seg": 1,
@@ -186,12 +213,17 @@
      "id": "01_C06",
      "file": "chops/01/01_C06.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 9.185,
+     "ce": 10.52,
+     "gr": "C"
     },
     {
      "s": 10.57,
      "e": 11.29,
      "text": "the drawers",
+     "i0": 26,
+     "i1": 27,
      "norm": "the drawers",
      "n": 2,
      "seg": 1,
@@ -202,12 +234,17 @@
      "id": "01_C07",
      "file": "chops/01/01_C07.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 10.651,
+     "ce": 11.315,
+     "gr": "C"
     },
     {
      "s": 11.73,
      "e": 12.43,
      "text": "fire escapes,",
+     "i0": 29,
+     "i1": 30,
      "norm": "fire escapes",
      "n": 2,
      "seg": 1,
@@ -218,12 +255,17 @@
      "id": "01_C08",
      "file": "chops/01/01_C08.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 11.755,
+     "ce": 12.73,
+     "gr": "A"
     },
     {
      "s": 13.73,
      "e": 14.41,
      "text": "own words,",
+     "i0": 34,
+     "i1": 35,
      "norm": "own words",
      "n": 2,
      "seg": 2,
@@ -234,12 +276,17 @@
      "id": "01_C09",
      "file": "chops/01/01_C09.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 13.75,
+     "ce": 14.665,
+     "gr": "B"
     },
     {
      "s": 16.15,
      "e": 16.83,
      "text": "and find",
+     "i0": 40,
+     "i1": 41,
      "norm": "and find",
      "n": 2,
      "seg": 2,
@@ -250,12 +297,17 @@
      "id": "01_C10",
      "file": "chops/01/01_C10.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 16.15,
+     "ce": 16.855,
+     "gr": "B"
     },
     {
      "s": 20.82,
      "e": 21.7,
      "text": "maze constructed",
+     "i0": 51,
+     "i1": 52,
      "norm": "maze constructed",
      "n": 2,
      "seg": 3,
@@ -266,12 +318,17 @@
      "id": "01_C11",
      "file": "chops/01/01_C11.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 20.9,
+     "ce": 21.731,
+     "gr": "C"
     },
     {
      "s": 22.22,
      "e": 22.94,
      "text": "tainted love,",
+     "i0": 55,
+     "i1": 56,
      "norm": "tainted love",
      "n": 2,
      "seg": 3,
@@ -282,12 +339,17 @@
      "id": "01_C12",
      "file": "chops/01/01_C12.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 22.255,
+     "ce": 23.445,
+     "gr": "B"
     },
     {
      "s": 23.64,
      "e": 24.16,
      "text": "known yet",
+     "i0": 58,
+     "i1": 59,
      "norm": "known yet",
      "n": 2,
      "seg": 3,
@@ -298,12 +360,17 @@
      "id": "01_C13",
      "file": "chops/01/01_C13.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 23.681,
+     "ce": 24.189,
+     "gr": "C"
     },
     {
      "s": 24.16,
      "e": 25.1,
      "text": "unknown pit",
+     "i0": 60,
+     "i1": 61,
      "norm": "unknown pit",
      "n": 2,
      "seg": 3,
@@ -314,12 +381,17 @@
      "id": "01_C14",
      "file": "chops/01/01_C14.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 24.225,
+     "ce": 25.13,
+     "gr": "A"
     },
     {
      "s": 27.2,
      "e": 29.09,
      "text": "haven, and hidden",
+     "i0": 69,
+     "i1": 71,
      "norm": "haven and hidden",
      "n": 3,
      "seg": 4,
@@ -330,12 +402,17 @@
      "id": "01_C15",
      "file": "chops/01/01_C15.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 27.2,
+     "ce": 29.055,
+     "gr": "A"
     },
     {
      "s": 29.77,
      "e": 30.75,
      "text": "overnourished forest",
+     "i0": 74,
+     "i1": 75,
      "norm": "overnourished forest",
      "n": 2,
      "seg": 4,
@@ -346,12 +423,17 @@
      "id": "01_C16",
      "file": "chops/01/01_C16.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 29.795,
+     "ce": 30.745,
+     "gr": "C"
     },
     {
      "s": 33.18,
      "e": 33.98,
      "text": "At this age,",
+     "i0": 82,
+     "i1": 84,
      "norm": "at this age",
      "n": 3,
      "seg": 6,
@@ -362,12 +444,17 @@
      "id": "01_C17",
      "file": "chops/01/01_C17.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 33.149,
+     "ce": 34.295,
+     "gr": "A"
     },
     {
      "s": 34.48,
      "e": 35.18,
      "text": "I'll follow,",
+     "i0": 85,
+     "i1": 86,
      "norm": "i'll follow",
      "n": 2,
      "seg": 6,
@@ -378,12 +465,17 @@
      "id": "01_C18",
      "file": "chops/01/01_C18.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 34.374,
+     "ce": 35.836,
+     "gr": "A"
     },
     {
      "s": 35.84,
      "e": 36.68,
      "text": "following the full",
+     "i0": 87,
+     "i1": 89,
      "norm": "following the full",
      "n": 3,
      "seg": 6,
@@ -394,12 +486,17 @@
      "id": "01_C19",
      "file": "chops/01/01_C19.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 35.79,
+     "ce": 36.691,
+     "gr": "C"
     },
     {
      "s": 37.1,
      "e": 37.98,
      "text": "between us almost",
+     "i0": 91,
+     "i1": 93,
      "norm": "between us almost",
      "n": 3,
      "seg": 6,
@@ -410,12 +507,17 @@
      "id": "01_C20",
      "file": "chops/01/01_C20.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 37.18,
+     "ce": 37.97,
+     "gr": "C"
     },
     {
      "s": 39.5,
      "e": 40.18,
      "text": "starting anew,",
+     "i0": 98,
+     "i1": 99,
      "norm": "starting anew",
      "n": 2,
      "seg": 7,
@@ -426,12 +528,17 @@
      "id": "01_C21",
      "file": "chops/01/01_C21.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 39.58,
+     "ce": 40.499,
+     "gr": "B"
     },
     {
      "s": 45.8,
      "e": 46.7,
      "text": "own vices,",
+     "i0": 113,
+     "i1": 114,
      "norm": "own vices",
      "n": 2,
      "seg": 8,
@@ -442,12 +549,17 @@
      "id": "01_C22",
      "file": "chops/01/01_C22.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 45.81,
+     "ce": 46.99,
+     "gr": "A"
     },
     {
      "s": 47.5,
      "e": 48.54,
      "text": "crashing the party",
+     "i0": 115,
+     "i1": 117,
      "norm": "crashing the party",
      "n": 3,
      "seg": 8,
@@ -458,12 +570,17 @@
      "id": "01_C23",
      "file": "chops/01/01_C23.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 47.385,
+     "ce": 48.57,
+     "gr": "B"
     },
     {
      "s": 53.86,
      "e": 54.46,
      "text": "love and",
+     "i0": 129,
+     "i1": 130,
      "norm": "love and",
      "n": 2,
      "seg": 9,
@@ -474,12 +591,17 @@
      "id": "01_C24",
      "file": "chops/01/01_C24.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 53.82,
+     "ce": 54.48,
+     "gr": "B"
     },
     {
      "s": 60.2,
      "e": 61.0,
      "text": "fully awakening",
+     "i0": 143,
+     "i1": 144,
      "norm": "fully awakening",
      "n": 2,
      "seg": 10,
@@ -490,12 +612,17 @@
      "id": "01_C25",
      "file": "chops/01/01_C25.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 60.22,
+     "ce": 61.021,
+     "gr": "B"
     },
     {
      "s": 61.8,
      "e": 62.58,
      "text": "darkest nights.",
+     "i0": 147,
+     "i1": 148,
      "norm": "darkest nights",
      "n": 2,
      "seg": 10,
@@ -506,12 +633,17 @@
      "id": "01_C26",
      "file": "chops/01/01_C26.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 61.829,
+     "ce": 63.254,
+     "gr": "B"
     },
     {
      "s": 65.77,
      "e": 66.27,
      "text": "a spectrum",
+     "i0": 153,
+     "i1": 154,
      "norm": "a spectrum",
      "n": 2,
      "seg": 11,
@@ -522,12 +654,17 @@
      "id": "01_C27",
      "file": "chops/01/01_C27.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 65.615,
+     "ce": 66.205,
+     "gr": "A"
     },
     {
      "s": 66.49,
      "e": 67.03,
      "text": "fields will",
+     "i0": 156,
+     "i1": 157,
      "norm": "fields will",
      "n": 2,
      "seg": 11,
@@ -538,12 +675,17 @@
      "id": "01_C28",
      "file": "chops/01/01_C28.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 66.56,
+     "ce": 67.05,
+     "gr": "B"
     },
     {
      "s": 70.25,
      "e": 71.13,
      "text": "and photographs,",
+     "i0": 166,
+     "i1": 167,
      "norm": "and photographs",
      "n": 2,
      "seg": 12,
@@ -554,12 +696,17 @@
      "id": "01_C29",
      "file": "chops/01/01_C29.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 70.164,
+     "ce": 71.225,
+     "gr": "A"
     },
     {
      "s": 82.18,
      "e": 83.02,
      "text": "landing into",
+     "i0": 196,
+     "i1": 197,
      "norm": "landing into",
      "n": 2,
      "seg": 14,
@@ -570,12 +717,17 @@
      "id": "01_C30",
      "file": "chops/01/01_C30.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 82.161,
+     "ce": 82.985,
+     "gr": "B"
     },
     {
      "s": 85.54,
      "e": 86.34,
      "text": "and I fall",
+     "i0": 207,
+     "i1": 209,
      "norm": "and i fall",
      "n": 3,
      "seg": 14,
@@ -586,12 +738,17 @@
      "id": "01_C31",
      "file": "chops/01/01_C31.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 85.564,
+     "ce": 86.37,
+     "gr": "B"
     },
     {
      "s": 86.34,
      "e": 86.86,
      "text": "out of life.",
+     "i0": 210,
+     "i1": 212,
      "norm": "out of life",
      "n": 3,
      "seg": 15,
@@ -602,7 +759,10 @@
      "id": "01_C32",
      "file": "chops/01/01_C32.mp3",
      "track": "01",
-     "title": "Out of Life"
+     "title": "Out of Life",
+     "cs": 86.415,
+     "ce": 87.155,
+     "gr": "C"
     }
    ]
   },
@@ -614,6 +774,8 @@
      "s": 3.1,
      "e": 3.98,
      "text": "headlights off.",
+     "i0": 10,
+     "i1": 11,
      "norm": "headlights off",
      "n": 2,
      "seg": 0,
@@ -624,12 +786,17 @@
      "id": "02_C01",
      "file": "chops/02/02_C01.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 3.175,
+     "ce": 4.495,
+     "gr": "B"
     },
     {
      "s": 4.98,
      "e": 5.82,
      "text": "type of silent",
+     "i0": 15,
+     "i1": 17,
      "norm": "type of silent",
      "n": 3,
      "seg": 1,
@@ -640,12 +807,17 @@
      "id": "02_C02",
      "file": "chops/02/02_C02.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 4.95,
+     "ce": 5.825,
+     "gr": "C"
     },
     {
      "s": 5.82,
      "e": 6.88,
      "text": "scream a trap",
+     "i0": 18,
+     "i1": 20,
      "norm": "scream a trap",
      "n": 3,
      "seg": 1,
@@ -656,12 +828,17 @@
      "id": "02_C03",
      "file": "chops/02/02_C03.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 5.89,
+     "ce": 6.91,
+     "gr": "C"
     },
     {
      "s": 7.12,
      "e": 8.2,
      "text": "makes to escape",
+     "i0": 22,
+     "i1": 24,
      "norm": "makes to escape",
      "n": 3,
      "seg": 1,
@@ -672,12 +849,17 @@
      "id": "02_C04",
      "file": "chops/02/02_C04.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 7.145,
+     "ce": 8.224,
+     "gr": "B"
     },
     {
      "s": 8.44,
      "e": 9.36,
      "text": "pending marriage,",
+     "i0": 26,
+     "i1": 27,
      "norm": "pending marriage",
      "n": 2,
      "seg": 1,
@@ -688,12 +870,17 @@
      "id": "02_C05",
      "file": "chops/02/02_C05.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 8.48,
+     "ce": 10.03,
+     "gr": "A"
     },
     {
      "s": 10.04,
      "e": 10.7,
      "text": "a concussion,",
+     "i0": 28,
+     "i1": 29,
      "norm": "a concussion",
      "n": 2,
      "seg": 2,
@@ -704,12 +891,17 @@
      "id": "02_C06",
      "file": "chops/02/02_C06.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 9.886,
+     "ce": 11.0,
+     "gr": "A"
     },
     {
      "s": 11.94,
      "e": 12.88,
      "text": "walls caving",
+     "i0": 33,
+     "i1": 34,
      "norm": "walls caving",
      "n": 2,
      "seg": 2,
@@ -720,12 +912,17 @@
      "id": "02_C07",
      "file": "chops/02/02_C07.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 11.91,
+     "ce": 12.811,
+     "gr": "B"
     },
     {
      "s": 17.0,
      "e": 18.04,
      "text": "solitude of crowds",
+     "i0": 41,
+     "i1": 43,
      "norm": "solitude of crowds",
      "n": 3,
      "seg": 3,
@@ -736,12 +933,17 @@
      "id": "02_C08",
      "file": "chops/02/02_C08.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 17.08,
+     "ce": 18.064,
+     "gr": "B"
     },
     {
      "s": 20.4,
      "e": 21.32,
      "text": "received an emergency",
+     "i0": 47,
+     "i1": 49,
      "norm": "received an emergency",
      "n": 3,
      "seg": 4,
@@ -752,12 +954,17 @@
      "id": "02_C09",
      "file": "chops/02/02_C09.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 20.4,
+     "ce": 21.315,
+     "gr": "C"
     },
     {
      "s": 21.32,
      "e": 22.04,
      "text": "call while",
+     "i0": 50,
+     "i1": 51,
      "norm": "call while",
      "n": 2,
      "seg": 4,
@@ -768,12 +975,17 @@
      "id": "02_C10",
      "file": "chops/02/02_C10.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 21.385,
+     "ce": 22.07,
+     "gr": "B"
     },
     {
      "s": 22.04,
      "e": 23.22,
      "text": "tossing and turning.",
+     "i0": 52,
+     "i1": 54,
      "norm": "tossing and turning",
      "n": 3,
      "seg": 4,
@@ -784,12 +996,17 @@
      "id": "02_C11",
      "file": "chops/02/02_C11.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 22.105,
+     "ce": 23.506,
+     "gr": "A"
     },
     {
      "s": 25.1,
      "e": 25.96,
      "text": "silent call",
+     "i0": 60,
+     "i1": 61,
      "norm": "silent call",
      "n": 2,
      "seg": 5,
@@ -800,12 +1017,17 @@
      "id": "02_C12",
      "file": "chops/02/02_C12.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 25.15,
+     "ce": 25.988,
+     "gr": "B"
     },
     {
      "s": 26.14,
      "e": 26.66,
      "text": "man makes",
+     "i0": 63,
+     "i1": 64,
      "norm": "man makes",
      "n": 2,
      "seg": 5,
@@ -816,12 +1038,17 @@
      "id": "02_C13",
      "file": "chops/02/02_C13.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 26.206,
+     "ce": 26.64,
+     "gr": "B"
     },
     {
      "s": 26.98,
      "e": 27.5,
      "text": "mirror after",
+     "i0": 67,
+     "i1": 68,
      "norm": "mirror after",
      "n": 2,
      "seg": 5,
@@ -832,12 +1059,17 @@
      "id": "02_C14",
      "file": "chops/02/02_C14.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 26.95,
+     "ce": 27.44,
+     "gr": "B"
     },
     {
      "s": 29.07,
      "e": 29.99,
      "text": "digest the truth,",
+     "i0": 71,
+     "i1": 73,
      "norm": "digest the truth",
      "n": 3,
      "seg": 6,
@@ -848,12 +1080,17 @@
      "id": "02_C15",
      "file": "chops/02/02_C15.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 29.07,
+     "ce": 30.68,
+     "gr": "A"
     },
     {
      "s": 31.08,
      "e": 32.12,
      "text": "windless insomnia",
+     "i0": 75,
+     "i1": 76,
      "norm": "windless insomnia",
      "n": 2,
      "seg": 6,
@@ -864,12 +1101,17 @@
      "id": "02_C16",
      "file": "chops/02/02_C16.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 31.144,
+     "ce": 32.145,
+     "gr": "B"
     },
     {
      "s": 36.84,
      "e": 37.62,
      "text": "After a day",
+     "i0": 84,
+     "i1": 86,
      "norm": "after a day",
      "n": 3,
      "seg": 7,
@@ -880,12 +1122,17 @@
      "id": "02_C17",
      "file": "chops/02/02_C17.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 36.704,
+     "ce": 37.57,
+     "gr": "C"
     },
     {
      "s": 37.62,
      "e": 38.7,
      "text": "of life dilated",
+     "i0": 87,
+     "i1": 89,
      "norm": "of life dilated",
      "n": 3,
      "seg": 7,
@@ -896,12 +1143,17 @@
      "id": "02_C18",
      "file": "chops/02/02_C18.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 37.695,
+     "ce": 38.73,
+     "gr": "C"
     },
     {
      "s": 38.98,
      "e": 39.54,
      "text": "the sun",
+     "i0": 91,
+     "i1": 92,
      "norm": "the sun",
      "n": 2,
      "seg": 7,
@@ -912,12 +1164,17 @@
      "id": "02_C19",
      "file": "chops/02/02_C19.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 38.996,
+     "ce": 39.56,
+     "gr": "B"
     },
     {
      "s": 41.32,
      "e": 42.46,
      "text": "wise as possible,",
+     "i0": 97,
+     "i1": 99,
      "norm": "wise as possible",
      "n": 3,
      "seg": 7,
@@ -928,12 +1185,17 @@
      "id": "02_C20",
      "file": "chops/02/02_C20.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 41.34,
+     "ce": 42.924,
+     "gr": "A"
     },
     {
      "s": 48.56,
      "e": 49.02,
      "text": "a dead",
+     "i0": 113,
+     "i1": 114,
      "norm": "a dead",
      "n": 2,
      "seg": 8,
@@ -944,12 +1206,17 @@
      "id": "02_C21",
      "file": "chops/02/02_C21.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 48.557,
+     "ce": 49.037,
+     "gr": "C"
     },
     {
      "s": 52.2,
      "e": 52.86,
      "text": "and shared",
+     "i0": 122,
+     "i1": 123,
      "norm": "and shared",
      "n": 2,
      "seg": 9,
@@ -960,12 +1227,17 @@
      "id": "02_C22",
      "file": "chops/02/02_C22.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 52.2,
+     "ce": 52.89,
+     "gr": "C"
     },
     {
      "s": 53.34,
      "e": 54.26,
      "text": "parents marriage",
+     "i0": 126,
+     "i1": 127,
      "norm": "parents marriage",
      "n": 2,
      "seg": 9,
@@ -976,12 +1248,17 @@
      "id": "02_C23",
      "file": "chops/02/02_C23.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 53.395,
+     "ce": 54.29,
+     "gr": "B"
     },
     {
      "s": 54.26,
      "e": 55.16,
      "text": "wouldn't last.",
+     "i0": 128,
+     "i1": 129,
      "norm": "wouldn't last",
      "n": 2,
      "seg": 9,
@@ -992,12 +1269,17 @@
      "id": "02_C24",
      "file": "chops/02/02_C24.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 54.335,
+     "ce": 55.851,
+     "gr": "C"
     },
     {
      "s": 57.21,
      "e": 58.11,
      "text": "warm and heavy",
+     "i0": 135,
+     "i1": 137,
      "norm": "warm and heavy",
      "n": 3,
      "seg": 10,
@@ -1008,12 +1290,17 @@
      "id": "02_C25",
      "file": "chops/02/02_C25.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 57.225,
+     "ce": 58.141,
+     "gr": "C"
     },
     {
      "s": 61.11,
      "e": 62.09,
      "text": "home alone.",
+     "i0": 146,
+     "i1": 147,
      "norm": "home alone",
      "n": 2,
      "seg": 11,
@@ -1024,12 +1311,17 @@
      "id": "02_C26",
      "file": "chops/02/02_C26.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 61.11,
+     "ce": 62.64,
+     "gr": "A"
     },
     {
      "s": 69.95,
      "e": 70.55,
      "text": "the whispering",
+     "i0": 166,
+     "i1": 167,
      "norm": "the whispering",
      "n": 2,
      "seg": 13,
@@ -1040,12 +1332,17 @@
      "id": "02_C27",
      "file": "chops/02/02_C27.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 70.029,
+     "ce": 70.47,
+     "gr": "C"
     },
     {
      "s": 72.61,
      "e": 73.95,
      "text": "road winding down.",
+     "i0": 174,
+     "i1": 176,
      "norm": "road winding down",
      "n": 3,
      "seg": 13,
@@ -1056,12 +1353,17 @@
      "id": "02_C28",
      "file": "chops/02/02_C28.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 72.641,
+     "ce": 74.64,
+     "gr": "A"
     },
     {
      "s": 75.01,
      "e": 75.65,
      "text": "no tears",
+     "i0": 178,
+     "i1": 179,
      "norm": "no tears",
      "n": 2,
      "seg": 14,
@@ -1072,12 +1374,17 @@
      "id": "02_C29",
      "file": "chops/02/02_C29.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 75.09,
+     "ce": 75.669,
+     "gr": "C"
     },
     {
      "s": 76.67,
      "e": 77.43,
      "text": "no fucks,",
+     "i0": 181,
+     "i1": 182,
      "norm": "no fucks",
      "n": 2,
      "seg": 14,
@@ -1088,12 +1395,17 @@
      "id": "02_C30",
      "file": "chops/02/02_C30.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 76.724,
+     "ce": 77.981,
+     "gr": "C"
     },
     {
      "s": 78.27,
      "e": 79.19,
      "text": "love to give,",
+     "i0": 184,
+     "i1": 186,
      "norm": "love to give",
      "n": 3,
      "seg": 14,
@@ -1104,12 +1416,17 @@
      "id": "02_C31",
      "file": "chops/02/02_C31.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 78.316,
+     "ce": 79.749,
+     "gr": "B"
     },
     {
      "s": 79.77,
      "e": 80.75,
      "text": "old to teach.",
+     "i0": 187,
+     "i1": 189,
      "norm": "old to teach",
      "n": 3,
      "seg": 14,
@@ -1120,7 +1437,10 @@
      "id": "02_C32",
      "file": "chops/02/02_C32.mp3",
      "track": "02",
-     "title": "Flashing Lights"
+     "title": "Flashing Lights",
+     "cs": 79.631,
+     "ce": 81.449,
+     "gr": "A"
     }
    ]
   },
@@ -1132,6 +1452,8 @@
      "s": 0.46,
      "e": 1.74,
      "text": "Old to forever,",
+     "i0": 0,
+     "i1": 2,
      "norm": "old to forever",
      "n": 3,
      "seg": 0,
@@ -1142,12 +1464,17 @@
      "id": "03_C01",
      "file": "chops/03/03_C01.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 0.31,
+     "ce": 2.425,
+     "gr": "A"
     },
     {
      "s": 3.1,
      "e": 4.06,
      "text": "a tambourine sounds",
+     "i0": 3,
+     "i1": 5,
      "norm": "a tambourine sounds",
      "n": 3,
      "seg": 0,
@@ -1158,12 +1485,17 @@
      "id": "03_C02",
      "file": "chops/03/03_C02.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 2.976,
+     "ce": 4.079,
+     "gr": "C"
     },
     {
      "s": 5.61,
      "e": 6.33,
      "text": "empty temple,",
+     "i0": 8,
+     "i1": 9,
      "norm": "empty temple",
      "n": 2,
      "seg": 0,
@@ -1174,12 +1506,17 @@
      "id": "03_C03",
      "file": "chops/03/03_C03.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 5.68,
+     "ce": 6.65,
+     "gr": "C"
     },
     {
      "s": 7.59,
      "e": 8.79,
      "text": "empty choir stands,",
+     "i0": 10,
+     "i1": 12,
      "norm": "empty choir stands",
      "n": 3,
      "seg": 0,
@@ -1190,12 +1527,17 @@
      "id": "03_C04",
      "file": "chops/03/03_C04.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 7.485,
+     "ce": 9.07,
+     "gr": "A"
     },
     {
      "s": 9.85,
      "e": 11.05,
      "text": "empty prayer lines,",
+     "i0": 13,
+     "i1": 15,
      "norm": "empty prayer lines",
      "n": 3,
      "seg": 0,
@@ -1206,12 +1548,17 @@
      "id": "03_C05",
      "file": "chops/03/03_C05.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 9.705,
+     "ce": 11.75,
+     "gr": "A"
     },
     {
      "s": 12.24,
      "e": 13.14,
      "text": "abandoned Baptist",
+     "i0": 17,
+     "i1": 18,
      "norm": "abandoned baptist",
      "n": 2,
      "seg": 0,
@@ -1222,12 +1569,17 @@
      "id": "03_C06",
      "file": "chops/03/03_C06.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 12.314,
+     "ce": 13.06,
+     "gr": "C"
     },
     {
      "s": 14.94,
      "e": 15.6,
      "text": "pews taken",
+     "i0": 20,
+     "i1": 21,
      "norm": "pews taken",
      "n": 2,
      "seg": 1,
@@ -1238,12 +1590,17 @@
      "id": "03_C07",
      "file": "chops/03/03_C07.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 14.815,
+     "ce": 15.57,
+     "gr": "B"
     },
     {
      "s": 15.6,
      "e": 17.1,
      "text": "by cobwebs,",
+     "i0": 22,
+     "i1": 23,
      "norm": "by cobwebs",
      "n": 2,
      "seg": 1,
@@ -1254,12 +1611,17 @@
      "id": "03_C08",
      "file": "chops/03/03_C08.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 15.57,
+     "ce": 17.652,
+     "gr": "A"
     },
     {
      "s": 17.66,
      "e": 18.42,
      "text": "and doused",
+     "i0": 24,
+     "i1": 25,
      "norm": "and doused",
      "n": 2,
      "seg": 1,
@@ -1270,12 +1632,17 @@
      "id": "03_C09",
      "file": "chops/03/03_C09.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 17.582,
+     "ce": 18.45,
+     "gr": "B"
     },
     {
      "s": 18.42,
      "e": 19.7,
      "text": "in disintegration.",
+     "i0": 26,
+     "i1": 27,
      "norm": "in disintegration",
      "n": 2,
      "seg": 1,
@@ -1286,12 +1653,17 @@
      "id": "03_C10",
      "file": "chops/03/03_C10.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 18.485,
+     "ce": 20.36,
+     "gr": "B"
     },
     {
      "s": 21.53,
      "e": 22.81,
      "text": "Spirits have left",
+     "i0": 28,
+     "i1": 30,
      "norm": "spirits have left",
      "n": 3,
      "seg": 2,
@@ -1302,12 +1674,17 @@
      "id": "03_C11",
      "file": "chops/03/03_C11.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 21.454,
+     "ce": 22.8,
+     "gr": "A"
     },
     {
      "s": 25.41,
      "e": 26.37,
      "text": "gift boxes",
+     "i0": 34,
+     "i1": 35,
      "norm": "gift boxes",
      "n": 2,
      "seg": 2,
@@ -1318,12 +1695,17 @@
      "id": "03_C12",
      "file": "chops/03/03_C12.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 25.38,
+     "ce": 26.33,
+     "gr": "C"
     },
     {
      "s": 27.71,
      "e": 28.47,
      "text": "side doors.",
+     "i0": 39,
+     "i1": 40,
      "norm": "side doors",
      "n": 2,
      "seg": 2,
@@ -1334,12 +1716,17 @@
      "id": "03_C13",
      "file": "chops/03/03_C13.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 27.79,
+     "ce": 28.39,
+     "gr": "B"
     },
     {
      "s": 30.35,
      "e": 31.93,
      "text": "thunders, then",
+     "i0": 42,
+     "i1": 43,
      "norm": "thunders then",
      "n": 2,
      "seg": 3,
@@ -1350,12 +1737,17 @@
      "id": "03_C14",
      "file": "chops/03/03_C14.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 30.22,
+     "ce": 31.96,
+     "gr": "C"
     },
     {
      "s": 32.09,
      "e": 32.97,
      "text": "rains until",
+     "i0": 45,
+     "i1": 46,
      "norm": "rains until",
      "n": 2,
      "seg": 3,
@@ -1366,12 +1758,17 @@
      "id": "03_C15",
      "file": "chops/03/03_C15.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 32.061,
+     "ce": 33.0,
+     "gr": "C"
     },
     {
      "s": 32.97,
      "e": 34.31,
      "text": "nothing remains.",
+     "i0": 47,
+     "i1": 48,
      "norm": "nothing remains",
      "n": 2,
      "seg": 3,
@@ -1382,12 +1779,17 @@
      "id": "03_C16",
      "file": "chops/03/03_C16.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 33.045,
+     "ce": 35.005,
+     "gr": "B"
     },
     {
      "s": 36.1,
      "e": 36.88,
      "text": "storm ending,",
+     "i0": 52,
+     "i1": 53,
      "norm": "storm ending",
      "n": 2,
      "seg": 4,
@@ -1398,12 +1800,17 @@
      "id": "03_C17",
      "file": "chops/03/03_C17.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 36.18,
+     "ce": 37.58,
+     "gr": "A"
     },
     {
      "s": 38.92,
      "e": 39.86,
      "text": "now goods,",
+     "i0": 58,
+     "i1": 59,
      "norm": "now goods",
      "n": 2,
      "seg": 4,
@@ -1414,12 +1821,17 @@
      "id": "03_C18",
      "file": "chops/03/03_C18.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 38.995,
+     "ce": 40.16,
+     "gr": "B"
     },
     {
      "s": 42.04,
      "e": 42.84,
      "text": "sealed apart",
+     "i0": 62,
+     "i1": 63,
      "norm": "sealed apart",
      "n": 2,
      "seg": 5,
@@ -1430,12 +1842,17 @@
      "id": "03_C19",
      "file": "chops/03/03_C19.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 42.066,
+     "ce": 42.87,
+     "gr": "B"
     },
     {
      "s": 42.84,
      "e": 43.66,
      "text": "by lightning,",
+     "i0": 64,
+     "i1": 65,
      "norm": "by lightning",
      "n": 2,
      "seg": 5,
@@ -1446,12 +1863,17 @@
      "id": "03_C20",
      "file": "chops/03/03_C20.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 42.92,
+     "ce": 43.951,
+     "gr": "A"
     },
     {
      "s": 44.52,
      "e": 45.5,
      "text": "daily breads",
+     "i0": 66,
+     "i1": 67,
      "norm": "daily breads",
      "n": 2,
      "seg": 6,
@@ -1462,12 +1884,17 @@
      "id": "03_C21",
      "file": "chops/03/03_C21.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 44.395,
+     "ce": 45.515,
+     "gr": "B"
     },
     {
      "s": 46.84,
      "e": 48.24,
      "text": "rotted by rain,",
+     "i0": 71,
+     "i1": 73,
      "norm": "rotted by rain",
      "n": 3,
      "seg": 6,
@@ -1478,12 +1905,17 @@
      "id": "03_C22",
      "file": "chops/03/03_C22.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 46.921,
+     "ce": 48.9,
+     "gr": "A"
     },
     {
      "s": 49.4,
      "e": 50.72,
      "text": "blankets soiled",
+     "i0": 75,
+     "i1": 76,
      "norm": "blankets soiled",
      "n": 2,
      "seg": 7,
@@ -1494,12 +1926,17 @@
      "id": "03_C23",
      "file": "chops/03/03_C23.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 49.444,
+     "ce": 50.751,
+     "gr": "B"
     },
     {
      "s": 50.92,
      "e": 51.9,
      "text": "venomous puppeteers,",
+     "i0": 78,
+     "i1": 79,
      "norm": "venomous puppeteers",
      "n": 2,
      "seg": 7,
@@ -1510,12 +1947,17 @@
      "id": "03_C24",
      "file": "chops/03/03_C24.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 50.991,
+     "ce": 51.87,
+     "gr": "B"
     },
     {
      "s": 53.52,
      "e": 54.12,
      "text": "old to",
+     "i0": 80,
+     "i1": 81,
      "norm": "old to",
      "n": 2,
      "seg": 8,
@@ -1526,12 +1968,17 @@
      "id": "03_C25",
      "file": "chops/03/03_C25.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 53.536,
+     "ce": 54.151,
+     "gr": "A"
     },
     {
      "s": 55.32,
      "e": 56.44,
      "text": "-printed footsteps,",
+     "i0": 86,
+     "i1": 87,
      "norm": "printed footsteps",
      "n": 2,
      "seg": 8,
@@ -1542,12 +1989,17 @@
      "id": "03_C26",
      "file": "chops/03/03_C26.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 55.375,
+     "ce": 56.464,
+     "gr": "C"
     },
     {
      "s": 58.02,
      "e": 59.08,
      "text": "a tambourine",
+     "i0": 89,
+     "i1": 90,
      "norm": "a tambourine",
      "n": 2,
      "seg": 9,
@@ -1558,12 +2010,17 @@
      "id": "03_C27",
      "file": "chops/03/03_C27.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 57.871,
+     "ce": 59.11,
+     "gr": "A"
     },
     {
      "s": 60.16,
      "e": 61.18,
      "text": "into pieces.",
+     "i0": 92,
+     "i1": 93,
      "norm": "into pieces",
      "n": 2,
      "seg": 9,
@@ -1574,7 +2031,10 @@
      "id": "03_C28",
      "file": "chops/03/03_C28.mp3",
      "track": "03",
-     "title": "How to Break off an Engagement"
+     "title": "How to Break off an Engagement",
+     "cs": 60.232,
+     "ce": 61.225,
+     "gr": "C"
     }
    ]
   },
@@ -1586,6 +2046,8 @@
      "s": 0.59,
      "e": 1.21,
      "text": "if I follow",
+     "i0": 1,
+     "i1": 3,
      "norm": "if i follow",
      "n": 3,
      "seg": 0,
@@ -1596,12 +2058,17 @@
      "id": "04_C01",
      "file": "chops/04/04_C01.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 0.665,
+     "ce": 1.145,
+     "gr": "C"
     },
     {
      "s": 8.61,
      "e": 9.57,
      "text": "cover sands",
+     "i0": 20,
+     "i1": 21,
      "norm": "cover sands",
      "n": 2,
      "seg": 1,
@@ -1612,12 +2079,17 @@
      "id": "04_C02",
      "file": "chops/04/04_C02.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 8.65,
+     "ce": 9.495,
+     "gr": "C"
     },
     {
      "s": 11.97,
      "e": 12.97,
      "text": "night seawater's",
+     "i0": 28,
+     "i1": 29,
      "norm": "night seawater's",
      "n": 2,
      "seg": 2,
@@ -1628,12 +2100,17 @@
      "id": "04_C03",
      "file": "chops/04/04_C03.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 11.995,
+     "ce": 13.0,
+     "gr": "C"
     },
     {
      "s": 14.85,
      "e": 15.83,
      "text": "waves will calm",
+     "i0": 32,
+     "i1": 34,
      "norm": "waves will calm",
      "n": 3,
      "seg": 3,
@@ -1644,12 +2121,17 @@
      "id": "04_C04",
      "file": "chops/04/04_C04.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 14.864,
+     "ce": 15.829,
+     "gr": "C"
     },
     {
      "s": 18.05,
      "e": 18.81,
      "text": "winds will mute",
+     "i0": 41,
+     "i1": 43,
      "norm": "winds will mute",
      "n": 3,
      "seg": 3,
@@ -1660,12 +2142,17 @@
      "id": "04_C05",
      "file": "chops/04/04_C05.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 18.07,
+     "ce": 18.841,
+     "gr": "B"
     },
     {
      "s": 28.35,
      "e": 29.51,
      "text": "A familiar heart",
+     "i0": 66,
+     "i1": 68,
      "norm": "a familiar heart",
      "n": 3,
      "seg": 5,
@@ -1676,12 +2163,17 @@
      "id": "04_C06",
      "file": "chops/04/04_C06.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 28.2,
+     "ce": 29.43,
+     "gr": "A"
     },
     {
      "s": 30.51,
      "e": 31.49,
      "text": "shaken off every",
+     "i0": 71,
+     "i1": 73,
      "norm": "shaken off every",
      "n": 3,
      "seg": 6,
@@ -1692,12 +2184,17 @@
      "id": "04_C07",
      "file": "chops/04/04_C07.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 30.58,
+     "ce": 31.49,
+     "gr": "C"
     },
     {
      "s": 31.49,
      "e": 32.23,
      "text": "sad blue",
+     "i0": 74,
+     "i1": 75,
      "norm": "sad blue",
      "n": 2,
      "seg": 6,
@@ -1708,12 +2205,17 @@
      "id": "04_C08",
      "file": "chops/04/04_C08.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 31.49,
+     "ce": 32.255,
+     "gr": "C"
     },
     {
      "s": 40.46,
      "e": 41.02,
      "text": "care putting",
+     "i0": 95,
+     "i1": 96,
      "norm": "care putting",
      "n": 2,
      "seg": 8,
@@ -1724,12 +2226,17 @@
      "id": "04_C09",
      "file": "chops/04/04_C09.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 40.465,
+     "ce": 40.984,
+     "gr": "B"
     },
     {
      "s": 46.9,
      "e": 47.6,
      "text": "this reclaimed",
+     "i0": 109,
+     "i1": 110,
      "norm": "this reclaimed",
      "n": 2,
      "seg": 10,
@@ -1740,12 +2247,17 @@
      "id": "04_C10",
      "file": "chops/04/04_C10.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 46.871,
+     "ce": 47.62,
+     "gr": "C"
     },
     {
      "s": 48.54,
      "e": 49.22,
      "text": "puzzle pieces",
+     "i0": 115,
+     "i1": 116,
      "norm": "puzzle pieces",
      "n": 2,
      "seg": 10,
@@ -1756,12 +2268,17 @@
      "id": "04_C11",
      "file": "chops/04/04_C11.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 48.57,
+     "ce": 49.195,
+     "gr": "B"
     },
     {
      "s": 58.38,
      "e": 59.12,
      "text": "golden hue",
+     "i0": 137,
+     "i1": 138,
      "norm": "golden hue",
      "n": 2,
      "seg": 12,
@@ -1772,12 +2289,17 @@
      "id": "04_C12",
      "file": "chops/04/04_C12.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 58.395,
+     "ce": 59.145,
+     "gr": "C"
     },
     {
      "s": 60.36,
      "e": 61.06,
      "text": "face toward",
+     "i0": 141,
+     "i1": 142,
      "norm": "face toward",
      "n": 2,
      "seg": 12,
@@ -1788,12 +2310,17 @@
      "id": "04_C13",
      "file": "chops/04/04_C13.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 60.405,
+     "ce": 61.09,
+     "gr": "C"
     },
     {
      "s": 63.61,
      "e": 64.43,
      "text": "weeds repel",
+     "i0": 147,
+     "i1": 148,
      "norm": "weeds repel",
      "n": 2,
      "seg": 13,
@@ -1804,12 +2331,17 @@
      "id": "04_C14",
      "file": "chops/04/04_C14.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 63.626,
+     "ce": 64.46,
+     "gr": "C"
     },
     {
      "s": 64.43,
      "e": 65.25,
      "text": "falling into",
+     "i0": 149,
+     "i1": 150,
      "norm": "falling into",
      "n": 2,
      "seg": 13,
@@ -1820,12 +2352,17 @@
      "id": "04_C15",
      "file": "chops/04/04_C15.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 64.51,
+     "ce": 65.21,
+     "gr": "B"
     },
     {
      "s": 66.25,
      "e": 67.03,
      "text": "memories hide",
+     "i0": 155,
+     "i1": 156,
      "norm": "memories hide",
      "n": 2,
      "seg": 13,
@@ -1836,12 +2373,17 @@
      "id": "04_C16",
      "file": "chops/04/04_C16.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 66.219,
+     "ce": 67.039,
+     "gr": "C"
     },
     {
      "s": 70.67,
      "e": 71.47,
      "text": "I'm called forward.",
+     "i0": 166,
+     "i1": 168,
      "norm": "i'm called forward",
      "n": 3,
      "seg": 14,
@@ -1852,12 +2394,17 @@
      "id": "04_C17",
      "file": "chops/04/04_C17.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 70.695,
+     "ce": 71.756,
+     "gr": "C"
     },
     {
      "s": 73.34,
      "e": 73.98,
      "text": "clouds meet",
+     "i0": 170,
+     "i1": 171,
      "norm": "clouds meet",
      "n": 2,
      "seg": 15,
@@ -1868,12 +2415,17 @@
      "id": "04_C18",
      "file": "chops/04/04_C18.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 73.359,
+     "ce": 74.009,
+     "gr": "B"
     },
     {
      "s": 74.96,
      "e": 75.58,
      "text": "deepest level",
+     "i0": 176,
+     "i1": 177,
      "norm": "deepest level",
      "n": 2,
      "seg": 15,
@@ -1884,12 +2436,17 @@
      "id": "04_C19",
      "file": "chops/04/04_C19.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 74.984,
+     "ce": 75.549,
+     "gr": "B"
     },
     {
      "s": 75.8,
      "e": 76.72,
      "text": "darkness welcoming",
+     "i0": 179,
+     "i1": 180,
      "norm": "darkness welcoming",
      "n": 2,
      "seg": 15,
@@ -1900,12 +2457,17 @@
      "id": "04_C20",
      "file": "chops/04/04_C20.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 75.812,
+     "ce": 76.675,
+     "gr": "C"
     },
     {
      "s": 79.84,
      "e": 80.66,
      "text": "bare ground",
+     "i0": 188,
+     "i1": 189,
      "norm": "bare ground",
      "n": 2,
      "seg": 16,
@@ -1916,12 +2478,17 @@
      "id": "04_C21",
      "file": "chops/04/04_C21.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 79.86,
+     "ce": 80.69,
+     "gr": "B"
     },
     {
      "s": 81.3,
      "e": 82.56,
      "text": "hands. Hands",
+     "i0": 192,
+     "i1": 193,
      "norm": "hands hands",
      "n": 2,
      "seg": 16,
@@ -1932,12 +2499,17 @@
      "id": "04_C22",
      "file": "chops/04/04_C22.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 81.28,
+     "ce": 82.49,
+     "gr": "C"
     },
     {
      "s": 87.7,
      "e": 88.36,
      "text": "new life",
+     "i0": 205,
+     "i1": 206,
      "norm": "new life",
      "n": 2,
      "seg": 17,
@@ -1948,12 +2520,17 @@
      "id": "04_C23",
      "file": "chops/04/04_C23.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 87.769,
+     "ce": 88.36,
+     "gr": "B"
     },
     {
      "s": 102.15,
      "e": 102.63,
      "text": "I've wanted",
+     "i0": 235,
+     "i1": 236,
      "norm": "i've wanted",
      "n": 2,
      "seg": 20,
@@ -1964,12 +2541,17 @@
      "id": "04_C24",
      "file": "chops/04/04_C24.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 102.0,
+     "ce": 102.66,
+     "gr": "C"
     },
     {
      "s": 105.72,
      "e": 106.72,
      "text": "nothing more",
+     "i0": 245,
+     "i1": 246,
      "norm": "nothing more",
      "n": 2,
      "seg": 21,
@@ -1980,12 +2562,17 @@
      "id": "04_C25",
      "file": "chops/04/04_C25.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 105.785,
+     "ce": 106.64,
+     "gr": "C"
     },
     {
      "s": 109.8,
      "e": 111.24,
      "text": "and be alright.",
+     "i0": 255,
+     "i1": 257,
      "norm": "and be alright",
      "n": 3,
      "seg": 22,
@@ -1996,12 +2583,17 @@
      "id": "04_C26",
      "file": "chops/04/04_C26.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 109.704,
+     "ce": 111.535,
+     "gr": "A"
     },
     {
      "s": 112.38,
      "e": 112.88,
      "text": "do believe",
+     "i0": 259,
+     "i1": 260,
      "norm": "do believe",
      "n": 2,
      "seg": 22,
@@ -2012,12 +2604,17 @@
      "id": "04_C27",
      "file": "chops/04/04_C27.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 112.42,
+     "ce": 112.904,
+     "gr": "C"
     },
     {
      "s": 117.06,
      "e": 117.64,
      "text": "dust settled",
+     "i0": 267,
+     "i1": 268,
      "norm": "dust settled",
      "n": 2,
      "seg": 23,
@@ -2028,12 +2625,17 @@
      "id": "04_C28",
      "file": "chops/04/04_C28.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 117.097,
+     "ce": 117.67,
+     "gr": "A"
     },
     {
      "s": 119.92,
      "e": 121.02,
      "text": "hands remind",
+     "i0": 273,
+     "i1": 274,
      "norm": "hands remind",
      "n": 2,
      "seg": 23,
@@ -2044,12 +2646,17 @@
      "id": "04_C29",
      "file": "chops/04/04_C29.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 119.988,
+     "ce": 121.045,
+     "gr": "B"
     },
     {
      "s": 123.16,
      "e": 124.0,
      "text": "still muted",
+     "i0": 282,
+     "i1": 283,
      "norm": "still muted",
      "n": 2,
      "seg": 24,
@@ -2060,12 +2667,17 @@
      "id": "04_C30",
      "file": "chops/04/04_C30.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 123.24,
+     "ce": 123.976,
+     "gr": "C"
     },
     {
      "s": 125.38,
      "e": 126.12,
      "text": "night garden",
+     "i0": 286,
+     "i1": 287,
      "norm": "night garden",
      "n": 2,
      "seg": 24,
@@ -2076,12 +2688,17 @@
      "id": "04_C31",
      "file": "chops/04/04_C31.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 125.405,
+     "ce": 126.065,
+     "gr": "C"
     },
     {
      "s": 129.26,
      "e": 129.9,
      "text": "Now go.",
+     "i0": 291,
+     "i1": 292,
      "norm": "now go",
      "n": 2,
      "seg": 26,
@@ -2092,7 +2709,10 @@
      "id": "04_C32",
      "file": "chops/04/04_C32.mp3",
      "track": "04",
-     "title": "Nevermore"
+     "title": "Nevermore",
+     "cs": 129.103,
+     "ce": 130.188,
+     "gr": "A"
     }
    ]
   },
@@ -2104,6 +2724,8 @@
      "s": 0.6,
      "e": 1.3,
      "text": "to ask if",
+     "i0": 3,
+     "i1": 5,
      "norm": "to ask if",
      "n": 3,
      "seg": 0,
@@ -2114,12 +2736,17 @@
      "id": "05_C01",
      "file": "chops/05/05_C01.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 0.61,
+     "ce": 1.31,
+     "gr": "A"
     },
     {
      "s": 1.3,
      "e": 2.0,
      "text": "I can inherit",
+     "i0": 6,
+     "i1": 8,
      "norm": "i can inherit",
      "n": 3,
      "seg": 0,
@@ -2130,12 +2757,17 @@
      "id": "05_C02",
      "file": "chops/05/05_C02.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 1.31,
+     "ce": 2.025,
+     "gr": "C"
     },
     {
      "s": 3.62,
      "e": 4.5,
      "text": "ask if I",
+     "i0": 12,
+     "i1": 14,
      "norm": "ask if i",
      "n": 3,
      "seg": 1,
@@ -2146,12 +2778,17 @@
      "id": "05_C03",
      "file": "chops/05/05_C03.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 3.67,
+     "ce": 4.506,
+     "gr": "A"
     },
     {
      "s": 5.4,
      "e": 6.34,
      "text": "stars, even",
+     "i0": 19,
+     "i1": 20,
      "norm": "stars even",
      "n": 2,
      "seg": 1,
@@ -2162,12 +2799,17 @@
      "id": "05_C04",
      "file": "chops/05/05_C04.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 5.367,
+     "ce": 6.371,
+     "gr": "B"
     },
     {
      "s": 9.1,
      "e": 9.88,
      "text": "past too",
+     "i0": 26,
+     "i1": 27,
      "norm": "past too",
      "n": 2,
      "seg": 2,
@@ -2178,12 +2820,17 @@
      "id": "05_C05",
      "file": "chops/05/05_C05.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 9.134,
+     "ce": 9.91,
+     "gr": "B"
     },
     {
      "s": 11.57,
      "e": 12.43,
      "text": "Coming of age",
+     "i0": 32,
+     "i1": 34,
      "norm": "coming of age",
      "n": 3,
      "seg": 3,
@@ -2194,12 +2841,17 @@
      "id": "05_C06",
      "file": "chops/05/05_C06.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 11.535,
+     "ce": 12.45,
+     "gr": "C"
     },
     {
      "s": 12.81,
      "e": 13.57,
      "text": "shared rooms",
+     "i0": 37,
+     "i1": 38,
      "norm": "shared rooms",
      "n": 2,
      "seg": 3,
@@ -2210,12 +2862,17 @@
      "id": "05_C07",
      "file": "chops/05/05_C07.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 12.86,
+     "ce": 13.551,
+     "gr": "B"
     },
     {
      "s": 13.89,
      "e": 14.99,
      "text": "human basements",
+     "i0": 40,
+     "i1": 41,
      "norm": "human basements",
      "n": 2,
      "seg": 3,
@@ -2226,12 +2883,17 @@
      "id": "05_C08",
      "file": "chops/05/05_C08.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 13.96,
+     "ce": 14.955,
+     "gr": "A"
     },
     {
      "s": 14.99,
      "e": 15.77,
      "text": "as bedrooms,",
+     "i0": 42,
+     "i1": 43,
      "norm": "as bedrooms",
      "n": 2,
      "seg": 4,
@@ -2242,12 +2904,17 @@
      "id": "05_C09",
      "file": "chops/05/05_C09.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 14.962,
+     "ce": 15.861,
+     "gr": "A"
     },
     {
      "s": 17.16,
      "e": 17.84,
      "text": "mattress pads",
+     "i0": 44,
+     "i1": 45,
      "norm": "mattress pads",
      "n": 2,
      "seg": 4,
@@ -2258,12 +2925,17 @@
      "id": "05_C10",
      "file": "chops/05/05_C10.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 17.22,
+     "ce": 17.86,
+     "gr": "C"
     },
     {
      "s": 19.2,
      "e": 19.92,
      "text": "southern pine",
+     "i0": 51,
+     "i1": 52,
      "norm": "southern pine",
      "n": 2,
      "seg": 5,
@@ -2274,12 +2946,17 @@
      "id": "05_C11",
      "file": "chops/05/05_C11.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 19.275,
+     "ce": 19.951,
+     "gr": "B"
     },
     {
      "s": 22.29,
      "e": 23.23,
      "text": "it didn't.",
+     "i0": 57,
+     "i1": 58,
      "norm": "it didn't",
      "n": 2,
      "seg": 5,
@@ -2290,12 +2967,17 @@
      "id": "05_C12",
      "file": "chops/05/05_C12.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 22.275,
+     "ce": 23.635,
+     "gr": "A"
     },
     {
      "s": 29.66,
      "e": 30.14,
      "text": "can invent",
+     "i0": 71,
+     "i1": 72,
      "norm": "can invent",
      "n": 2,
      "seg": 7,
@@ -2306,12 +2988,17 @@
      "id": "05_C13",
      "file": "chops/05/05_C13.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 29.675,
+     "ce": 30.169,
+     "gr": "B"
     },
     {
      "s": 30.42,
      "e": 31.16,
      "text": "new universe,",
+     "i0": 74,
+     "i1": 75,
      "norm": "new universe",
      "n": 2,
      "seg": 7,
@@ -2322,12 +3009,17 @@
      "id": "05_C14",
      "file": "chops/05/05_C14.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 30.396,
+     "ce": 31.46,
+     "gr": "B"
     },
     {
      "s": 31.82,
      "e": 32.3,
      "text": "ask if",
+     "i0": 77,
+     "i1": 78,
      "norm": "ask if",
      "n": 2,
      "seg": 8,
@@ -2338,12 +3030,17 @@
      "id": "05_C15",
      "file": "chops/05/05_C15.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 31.84,
+     "ce": 32.305,
+     "gr": "A"
     },
     {
      "s": 32.56,
      "e": 33.44,
      "text": "would let me,",
+     "i0": 80,
+     "i1": 82,
      "norm": "would let me",
      "n": 3,
      "seg": 8,
@@ -2354,12 +3051,17 @@
      "id": "05_C16",
      "file": "chops/05/05_C16.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 32.64,
+     "ce": 33.684,
+     "gr": "C"
     },
     {
      "s": 33.76,
      "e": 34.38,
      "text": "little old me,",
+     "i0": 83,
+     "i1": 85,
      "norm": "little old me",
      "n": 3,
      "seg": 8,
@@ -2370,12 +3072,17 @@
      "id": "05_C17",
      "file": "chops/05/05_C17.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 33.666,
+     "ce": 34.43,
+     "gr": "C"
     },
     {
      "s": 37.06,
      "e": 38.08,
      "text": "Even grant miracles",
+     "i0": 92,
+     "i1": 94,
      "norm": "even grant miracles",
      "n": 3,
      "seg": 10,
@@ -2386,12 +3093,17 @@
      "id": "05_C18",
      "file": "chops/05/05_C18.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 36.914,
+     "ce": 38.11,
+     "gr": "C"
     },
     {
      "s": 39.72,
      "e": 40.62,
      "text": "word exists.",
+     "i0": 101,
+     "i1": 102,
      "norm": "word exists",
      "n": 2,
      "seg": 11,
@@ -2402,12 +3114,17 @@
      "id": "05_C19",
      "file": "chops/05/05_C19.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 39.695,
+     "ce": 40.915,
+     "gr": "A"
     },
     {
      "s": 41.75,
      "e": 43.15,
      "text": "In uncertain times,",
+     "i0": 103,
+     "i1": 105,
      "norm": "in uncertain times",
      "n": 3,
      "seg": 12,
@@ -2418,12 +3135,17 @@
      "id": "05_C20",
      "file": "chops/05/05_C20.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 41.69,
+     "ce": 43.34,
+     "gr": "A"
     },
     {
      "s": 43.45,
      "e": 45.31,
      "text": "in forsaken times,",
+     "i0": 106,
+     "i1": 108,
      "norm": "in forsaken times",
      "n": 3,
      "seg": 12,
@@ -2434,12 +3156,17 @@
      "id": "05_C21",
      "file": "chops/05/05_C21.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 43.34,
+     "ce": 45.906,
+     "gr": "A"
     },
     {
      "s": 46.42,
      "e": 47.48,
      "text": "tears that spoke",
+     "i0": 110,
+     "i1": 112,
      "norm": "tears that spoke",
      "n": 3,
      "seg": 13,
@@ -2450,12 +3177,17 @@
      "id": "05_C22",
      "file": "chops/05/05_C22.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 46.444,
+     "ce": 47.511,
+     "gr": "B"
     },
     {
      "s": 48.3,
      "e": 49.44,
      "text": "forbidden lines,",
+     "i0": 116,
+     "i1": 117,
      "norm": "forbidden lines",
      "n": 2,
      "seg": 13,
@@ -2466,12 +3198,17 @@
      "id": "05_C23",
      "file": "chops/05/05_C23.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 48.345,
+     "ce": 50.105,
+     "gr": "A"
     },
     {
      "s": 50.63,
      "e": 51.17,
      "text": "a history",
+     "i0": 119,
+     "i1": 120,
      "norm": "a history",
      "n": 2,
      "seg": 14,
@@ -2482,12 +3219,17 @@
      "id": "05_C24",
      "file": "chops/05/05_C24.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 50.71,
+     "ce": 51.16,
+     "gr": "C"
     },
     {
      "s": 55.13,
      "e": 55.63,
      "text": "To dream",
+     "i0": 127,
+     "i1": 128,
      "norm": "to dream",
      "n": 2,
      "seg": 15,
@@ -2498,12 +3240,17 @@
      "id": "05_C25",
      "file": "chops/05/05_C25.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 55.144,
+     "ce": 55.654,
+     "gr": "C"
     },
     {
      "s": 57.43,
      "e": 58.37,
      "text": "Their blood flows",
+     "i0": 132,
+     "i1": 134,
      "norm": "their blood flows",
      "n": 3,
      "seg": 16,
@@ -2514,12 +3261,17 @@
      "id": "05_C26",
      "file": "chops/05/05_C26.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 57.376,
+     "ce": 58.4,
+     "gr": "C"
     },
     {
      "s": 60.63,
      "e": 62.09,
      "text": "Fingerprints that orchestra",
+     "i0": 138,
+     "i1": 140,
      "norm": "fingerprints that orchestra",
      "n": 3,
      "seg": 17,
@@ -2530,12 +3282,17 @@
      "id": "05_C27",
      "file": "chops/05/05_C27.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 60.48,
+     "ce": 62.065,
+     "gr": "A"
     },
     {
      "s": 62.09,
      "e": 62.93,
      "text": "great powers,",
+     "i0": 141,
+     "i1": 142,
      "norm": "great powers",
      "n": 2,
      "seg": 17,
@@ -2546,12 +3303,17 @@
      "id": "05_C28",
      "file": "chops/05/05_C28.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 62.065,
+     "ce": 63.23,
+     "gr": "B"
     },
     {
      "s": 63.21,
      "e": 63.75,
      "text": "they tell me,",
+     "i0": 143,
+     "i1": 145,
      "norm": "they tell me",
      "n": 3,
      "seg": 18,
@@ -2562,12 +3324,17 @@
      "id": "05_C29",
      "file": "chops/05/05_C29.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 63.178,
+     "ce": 63.746,
+     "gr": "C"
     },
     {
      "s": 68.49,
      "e": 69.29,
      "text": "million cries,",
+     "i0": 159,
+     "i1": 160,
      "norm": "million cries",
      "n": 2,
      "seg": 19,
@@ -2578,12 +3345,17 @@
      "id": "05_C30",
      "file": "chops/05/05_C30.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 68.47,
+     "ce": 69.441,
+     "gr": "C"
     },
     {
      "s": 70.47,
      "e": 71.39,
      "text": "unanswered plight.",
+     "i0": 163,
+     "i1": 164,
      "norm": "unanswered plight",
      "n": 2,
      "seg": 20,
@@ -2594,12 +3366,17 @@
      "id": "05_C31",
      "file": "chops/05/05_C31.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 70.45,
+     "ce": 72.06,
+     "gr": "A"
     },
     {
      "s": 72.18,
      "e": 73.18,
      "text": "Beware of me.",
+     "i0": 165,
+     "i1": 167,
      "norm": "beware of me",
      "n": 3,
      "seg": 21,
@@ -2610,7 +3387,10 @@
      "id": "05_C32",
      "file": "chops/05/05_C32.mp3",
      "track": "05",
-     "title": "Bloodline"
+     "title": "Bloodline",
+     "cs": 72.116,
+     "ce": 73.834,
+     "gr": "A"
     }
    ]
   },
@@ -2622,6 +3402,8 @@
      "s": 0.3,
      "e": 0.94,
      "text": "gates open",
+     "i0": 1,
+     "i1": 2,
      "norm": "gates open",
      "n": 2,
      "seg": 0,
@@ -2632,12 +3414,17 @@
      "id": "06_C01",
      "file": "chops/06/06_C01.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 0.311,
+     "ce": 0.861,
+     "gr": "B"
     },
     {
      "s": 1.16,
      "e": 2.3,
      "text": "wings gifted",
+     "i0": 4,
+     "i1": 5,
      "norm": "wings gifted",
      "n": 2,
      "seg": 0,
@@ -2648,12 +3435,17 @@
      "id": "06_C02",
      "file": "chops/06/06_C02.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 1.145,
+     "ce": 2.325,
+     "gr": "A"
     },
     {
      "s": 4.44,
      "e": 5.18,
      "text": "made of marble",
+     "i0": 9,
+     "i1": 11,
      "norm": "made of marble",
      "n": 3,
      "seg": 0,
@@ -2664,12 +3456,17 @@
      "id": "06_C03",
      "file": "chops/06/06_C03.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 4.41,
+     "ce": 5.184,
+     "gr": "C"
     },
     {
      "s": 12.5,
      "e": 13.34,
      "text": "welcome us.",
+     "i0": 29,
+     "i1": 30,
      "norm": "welcome us",
      "n": 2,
      "seg": 2,
@@ -2680,12 +3477,17 @@
      "id": "06_C04",
      "file": "chops/06/06_C04.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 12.521,
+     "ce": 13.754,
+     "gr": "B"
     },
     {
      "s": 15.4,
      "e": 16.44,
      "text": "eased generations",
+     "i0": 33,
+     "i1": 34,
      "norm": "eased generations",
      "n": 2,
      "seg": 2,
@@ -2696,12 +3498,17 @@
      "id": "06_C05",
      "file": "chops/06/06_C05.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 15.471,
+     "ce": 16.37,
+     "gr": "A"
     },
     {
      "s": 16.44,
      "e": 17.34,
      "text": "down yellow",
+     "i0": 35,
+     "i1": 36,
      "norm": "down yellow",
      "n": 2,
      "seg": 2,
@@ -2712,12 +3519,17 @@
      "id": "06_C06",
      "file": "chops/06/06_C06.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 16.521,
+     "ce": 17.29,
+     "gr": "C"
     },
     {
      "s": 18.9,
      "e": 20.04,
      "text": "plucked our souls",
+     "i0": 40,
+     "i1": 42,
      "norm": "plucked our souls",
      "n": 3,
      "seg": 2,
@@ -2728,12 +3540,17 @@
      "id": "06_C07",
      "file": "chops/06/06_C07.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 18.97,
+     "ce": 20.066,
+     "gr": "C"
     },
     {
      "s": 22.44,
      "e": 23.32,
      "text": "follow comets",
+     "i0": 49,
+     "i1": 50,
      "norm": "follow comets",
      "n": 2,
      "seg": 3,
@@ -2744,12 +3561,17 @@
      "id": "06_C08",
      "file": "chops/06/06_C08.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 22.52,
+     "ce": 23.301,
+     "gr": "B"
     },
     {
      "s": 27.55,
      "e": 28.23,
      "text": "resurrecting Atlantis.",
+     "i0": 59,
+     "i1": 60,
      "norm": "resurrecting atlantis",
      "n": 2,
      "seg": 4,
@@ -2760,12 +3582,17 @@
      "id": "06_C09",
      "file": "chops/06/06_C09.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 27.549,
+     "ce": 28.93,
+     "gr": "A"
     },
     {
      "s": 30.49,
      "e": 31.33,
      "text": "are all one.",
+     "i0": 63,
+     "i1": 65,
      "norm": "are all one",
      "n": 3,
      "seg": 4,
@@ -2776,12 +3603,17 @@
      "id": "06_C10",
      "file": "chops/06/06_C10.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 30.565,
+     "ce": 32.028,
+     "gr": "C"
     },
     {
      "s": 32.74,
      "e": 33.24,
      "text": "The pack",
+     "i0": 66,
+     "i1": 67,
      "norm": "the pack",
      "n": 2,
      "seg": 4,
@@ -2792,12 +3624,17 @@
      "id": "06_C11",
      "file": "chops/06/06_C11.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 32.666,
+     "ce": 33.255,
+     "gr": "A"
     },
     {
      "s": 39.6,
      "e": 40.84,
      "text": "relearned currency",
+     "i0": 83,
+     "i1": 84,
      "norm": "relearned currency",
      "n": 2,
      "seg": 5,
@@ -2808,12 +3645,17 @@
      "id": "06_C12",
      "file": "chops/06/06_C12.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 39.619,
+     "ce": 40.86,
+     "gr": "C"
     },
     {
      "s": 42.72,
      "e": 43.42,
      "text": "a mission,",
+     "i0": 88,
+     "i1": 89,
      "norm": "a mission",
      "n": 2,
      "seg": 5,
@@ -2824,12 +3666,17 @@
      "id": "06_C13",
      "file": "chops/06/06_C13.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 42.795,
+     "ce": 44.055,
+     "gr": "C"
     },
     {
      "s": 45.27,
      "e": 46.05,
      "text": "are all safe.",
+     "i0": 93,
+     "i1": 95,
      "norm": "are all safe",
      "n": 3,
      "seg": 6,
@@ -2840,12 +3687,17 @@
      "id": "06_C14",
      "file": "chops/06/06_C14.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 45.35,
+     "ce": 46.346,
+     "gr": "C"
     },
     {
      "s": 47.82,
      "e": 48.62,
      "text": "all one.",
+     "i0": 99,
+     "i1": 100,
      "norm": "all one",
      "n": 2,
      "seg": 6,
@@ -2856,12 +3708,17 @@
      "id": "06_C15",
      "file": "chops/06/06_C15.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 47.85,
+     "ce": 49.314,
+     "gr": "A"
     },
     {
      "s": 50.15,
      "e": 50.99,
      "text": "we've made",
+     "i0": 103,
+     "i1": 104,
      "norm": "we've made",
      "n": 2,
      "seg": 6,
@@ -2872,12 +3729,17 @@
      "id": "06_C16",
      "file": "chops/06/06_C16.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 50.23,
+     "ce": 51.022,
+     "gr": "B"
     },
     {
      "s": 52.69,
      "e": 53.67,
      "text": "abandon and hope",
+     "i0": 108,
+     "i1": 110,
      "norm": "abandon and hope",
      "n": 3,
      "seg": 7,
@@ -2888,12 +3750,17 @@
      "id": "06_C17",
      "file": "chops/06/06_C17.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 52.606,
+     "ce": 53.7,
+     "gr": "A"
     },
     {
      "s": 56.15,
      "e": 57.37,
      "text": "A relearned",
+     "i0": 117,
+     "i1": 118,
      "norm": "a relearned",
      "n": 2,
      "seg": 7,
@@ -2904,12 +3771,17 @@
      "id": "06_C18",
      "file": "chops/06/06_C18.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 56.075,
+     "ce": 57.395,
+     "gr": "A"
     },
     {
      "s": 57.47,
      "e": 59.13,
      "text": "we reassess",
+     "i0": 120,
+     "i1": 121,
      "norm": "we reassess",
      "n": 2,
      "seg": 7,
@@ -2920,12 +3792,17 @@
      "id": "06_C19",
      "file": "chops/06/06_C19.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 57.445,
+     "ce": 59.108,
+     "gr": "B"
     },
     {
      "s": 59.13,
      "e": 59.99,
      "text": "as a mission,",
+     "i0": 122,
+     "i1": 124,
      "norm": "as a mission",
      "n": 3,
      "seg": 7,
@@ -2936,12 +3813,17 @@
      "id": "06_C20",
      "file": "chops/06/06_C20.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 59.21,
+     "ce": 60.645,
+     "gr": "B"
     },
     {
      "s": 64.92,
      "e": 66.2,
      "text": "unfamiliar flickering",
+     "i0": 132,
+     "i1": 133,
      "norm": "unfamiliar flickering",
      "n": 2,
      "seg": 8,
@@ -2952,12 +3834,17 @@
      "id": "06_C21",
      "file": "chops/06/06_C21.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 64.98,
+     "ce": 66.134,
+     "gr": "B"
     },
     {
      "s": 67.06,
      "e": 68.6,
      "text": "illuminating smiles",
+     "i0": 135,
+     "i1": 136,
      "norm": "illuminating smiles",
      "n": 2,
      "seg": 8,
@@ -2968,12 +3855,17 @@
      "id": "06_C22",
      "file": "chops/06/06_C22.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 67.14,
+     "ce": 68.525,
+     "gr": "C"
     },
     {
      "s": 68.6,
      "e": 69.18,
      "text": "at night",
+     "i0": 137,
+     "i1": 138,
      "norm": "at night",
      "n": 2,
      "seg": 9,
@@ -2984,12 +3876,17 @@
      "id": "06_C23",
      "file": "chops/06/06_C23.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 68.66,
+     "ce": 69.206,
+     "gr": "C"
     },
     {
      "s": 69.44,
      "e": 70.26,
      "text": "shadows cast",
+     "i0": 140,
+     "i1": 141,
      "norm": "shadows cast",
      "n": 2,
      "seg": 9,
@@ -3000,12 +3897,17 @@
      "id": "06_C24",
      "file": "chops/06/06_C24.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 69.41,
+     "ce": 70.235,
+     "gr": "C"
     },
     {
      "s": 75.67,
      "e": 77.05,
      "text": "color rainbows,",
+     "i0": 153,
+     "i1": 154,
      "norm": "color rainbows",
      "n": 2,
      "seg": 10,
@@ -3016,12 +3918,17 @@
      "id": "06_C25",
      "file": "chops/06/06_C25.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 75.75,
+     "ce": 77.695,
+     "gr": "A"
     },
     {
      "s": 78.39,
      "e": 79.17,
      "text": "infinite time",
+     "i0": 158,
+     "i1": 159,
      "norm": "infinite time",
      "n": 2,
      "seg": 10,
@@ -3032,12 +3939,17 @@
      "id": "06_C26",
      "file": "chops/06/06_C26.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 78.42,
+     "ce": 79.145,
+     "gr": "B"
     },
     {
      "s": 80.41,
      "e": 81.33,
      "text": "set clouds free.",
+     "i0": 163,
+     "i1": 165,
      "norm": "set clouds free",
      "n": 3,
      "seg": 10,
@@ -3048,12 +3960,17 @@
      "id": "06_C27",
      "file": "chops/06/06_C27.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 80.49,
+     "ce": 81.949,
+     "gr": "B"
     },
     {
      "s": 83.23,
      "e": 83.83,
      "text": "my soul",
+     "i0": 168,
+     "i1": 169,
      "norm": "my soul",
      "n": 2,
      "seg": 10,
@@ -3064,12 +3981,17 @@
      "id": "06_C28",
      "file": "chops/06/06_C28.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 83.285,
+     "ce": 83.84,
+     "gr": "C"
     },
     {
      "s": 85.05,
      "e": 85.95,
      "text": "stay here forever,",
+     "i0": 173,
+     "i1": 175,
      "norm": "stay here forever",
      "n": 3,
      "seg": 11,
@@ -3080,12 +4002,17 @@
      "id": "06_C29",
      "file": "chops/06/06_C29.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 85.13,
+     "ce": 86.54,
+     "gr": "C"
     },
     {
      "s": 87.11,
      "e": 87.99,
      "text": "leaving behind",
+     "i0": 176,
+     "i1": 177,
      "norm": "leaving behind",
      "n": 2,
      "seg": 11,
@@ -3096,12 +4023,17 @@
      "id": "06_C30",
      "file": "chops/06/06_C30.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 87.176,
+     "ce": 87.996,
+     "gr": "B"
     },
     {
      "s": 93.61,
      "e": 94.21,
      "text": "city born",
+     "i0": 186,
+     "i1": 187,
      "norm": "city born",
      "n": 2,
      "seg": 12,
@@ -3112,12 +4044,17 @@
      "id": "06_C31",
      "file": "chops/06/06_C31.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 93.685,
+     "ce": 94.185,
+     "gr": "C"
     },
     {
      "s": 94.21,
      "e": 94.79,
      "text": "in unison",
+     "i0": 188,
+     "i1": 189,
      "norm": "in unison",
      "n": 2,
      "seg": 12,
@@ -3128,7 +4065,10 @@
      "id": "06_C32",
      "file": "chops/06/06_C32.mp3",
      "track": "06",
-     "title": "Resurrecting Atlantis"
+     "title": "Resurrecting Atlantis",
+     "cs": 94.275,
+     "ce": 94.805,
+     "gr": "C"
     }
    ]
   },
@@ -3140,6 +4080,8 @@
      "s": 0.0,
      "e": 0.64,
      "text": "DJ turn",
+     "i0": 0,
+     "i1": 1,
      "norm": "dj turn",
      "n": 2,
      "seg": 0,
@@ -3150,12 +4092,17 @@
      "id": "07_C01",
      "file": "chops/07/07_C01.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 0.0,
+     "ce": 0.655,
+     "gr": "B"
     },
     {
      "s": 3.12,
      "e": 3.98,
      "text": "eyes wide shut",
+     "i0": 6,
+     "i1": 8,
      "norm": "eyes wide shut",
      "n": 3,
      "seg": 0,
@@ -3166,12 +4113,17 @@
      "id": "07_C02",
      "file": "chops/07/07_C02.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 3.099,
+     "ce": 4.009,
+     "gr": "B"
     },
     {
      "s": 4.82,
      "e": 5.56,
      "text": "chin nested",
+     "i0": 11,
+     "i1": 12,
      "norm": "chin nested",
      "n": 2,
      "seg": 0,
@@ -3182,12 +4134,17 @@
      "id": "07_C03",
      "file": "chops/07/07_C03.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 4.845,
+     "ce": 5.57,
+     "gr": "B"
     },
     {
      "s": 6.96,
      "e": 7.8,
      "text": "spoken words,",
+     "i0": 21,
+     "i1": 22,
      "norm": "spoken words",
      "n": 2,
      "seg": 1,
@@ -3198,12 +4155,17 @@
      "id": "07_C04",
      "file": "chops/07/07_C04.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 7.04,
+     "ce": 7.729,
+     "gr": "A"
     },
     {
      "s": 11.89,
      "e": 12.67,
      "text": "ghosts whispering",
+     "i0": 30,
+     "i1": 31,
      "norm": "ghosts whispering",
      "n": 2,
      "seg": 1,
@@ -3214,12 +4176,17 @@
      "id": "07_C05",
      "file": "chops/07/07_C05.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 11.902,
+     "ce": 12.655,
+     "gr": "C"
     },
     {
      "s": 12.67,
      "e": 14.01,
      "text": "unfolded delusions,",
+     "i0": 32,
+     "i1": 33,
      "norm": "unfolded delusions",
      "n": 2,
      "seg": 1,
@@ -3230,12 +4197,17 @@
      "id": "07_C06",
      "file": "chops/07/07_C06.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 12.744,
+     "ce": 14.187,
+     "gr": "B"
     },
     {
      "s": 14.81,
      "e": 15.77,
      "text": "birthed in purity",
+     "i0": 34,
+     "i1": 36,
      "norm": "birthed in purity",
      "n": 3,
      "seg": 1,
@@ -3246,12 +4218,17 @@
      "id": "07_C07",
      "file": "chops/07/07_C07.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 14.684,
+     "ce": 15.691,
+     "gr": "B"
     },
     {
      "s": 17.97,
      "e": 18.73,
      "text": "sun -soaked",
+     "i0": 43,
+     "i1": 44,
      "norm": "sun soaked",
      "n": 2,
      "seg": 2,
@@ -3262,12 +4239,17 @@
      "id": "07_C08",
      "file": "chops/07/07_C08.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 17.94,
+     "ce": 18.76,
+     "gr": "B"
     },
     {
      "s": 22.11,
      "e": 22.71,
      "text": "love story",
+     "i0": 50,
+     "i1": 51,
      "norm": "love story",
      "n": 2,
      "seg": 2,
@@ -3278,12 +4260,17 @@
      "id": "07_C09",
      "file": "chops/07/07_C09.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 22.186,
+     "ce": 22.63,
+     "gr": "C"
     },
     {
      "s": 23.07,
      "e": 24.13,
      "text": "one by one",
+     "i0": 53,
+     "i1": 55,
      "norm": "one by one",
      "n": 3,
      "seg": 2,
@@ -3294,12 +4281,17 @@
      "id": "07_C10",
      "file": "chops/07/07_C10.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 23.14,
+     "ce": 24.15,
+     "gr": "A"
     },
     {
      "s": 26.19,
      "e": 27.47,
      "text": "devaluing themselves",
+     "i0": 59,
+     "i1": 60,
      "norm": "devaluing themselves",
      "n": 2,
      "seg": 3,
@@ -3310,12 +4302,17 @@
      "id": "07_C11",
      "file": "chops/07/07_C11.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 26.216,
+     "ce": 27.46,
+     "gr": "C"
     },
     {
      "s": 28.69,
      "e": 30.11,
      "text": "unsalted stars",
+     "i0": 63,
+     "i1": 64,
      "norm": "unsalted stars",
      "n": 2,
      "seg": 3,
@@ -3326,12 +4323,17 @@
      "id": "07_C12",
      "file": "chops/07/07_C12.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 28.76,
+     "ce": 30.035,
+     "gr": "A"
     },
     {
      "s": 41.44,
      "e": 41.94,
      "text": "I can speak",
+     "i0": 89,
+     "i1": 91,
      "norm": "i can speak",
      "n": 3,
      "seg": 5,
@@ -3342,12 +4344,17 @@
      "id": "07_C13",
      "file": "chops/07/07_C13.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 41.41,
+     "ce": 41.966,
+     "gr": "C"
     },
     {
      "s": 42.12,
      "e": 42.96,
      "text": "wedding bands",
+     "i0": 93,
+     "i1": 94,
      "norm": "wedding bands",
      "n": 2,
      "seg": 5,
@@ -3358,12 +4365,17 @@
      "id": "07_C14",
      "file": "chops/07/07_C14.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 42.17,
+     "ce": 42.99,
+     "gr": "C"
     },
     {
      "s": 45.56,
      "e": 46.46,
      "text": "wounded souls.",
+     "i0": 100,
+     "i1": 101,
      "norm": "wounded souls",
      "n": 2,
      "seg": 5,
@@ -3374,12 +4386,17 @@
      "id": "07_C15",
      "file": "chops/07/07_C15.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 45.56,
+     "ce": 46.76,
+     "gr": "A"
     },
     {
      "s": 47.71,
      "e": 48.05,
      "text": "Of a",
+     "i0": 102,
+     "i1": 103,
      "norm": "of a",
      "n": 2,
      "seg": 5,
@@ -3390,12 +4407,17 @@
      "id": "07_C16",
      "file": "chops/07/07_C16.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 47.694,
+     "ce": 48.075,
+     "gr": "B"
     },
     {
      "s": 48.33,
      "e": 49.29,
      "text": "home boxed",
+     "i0": 105,
+     "i1": 106,
      "norm": "home boxed",
      "n": 2,
      "seg": 6,
@@ -3406,12 +4428,17 @@
      "id": "07_C17",
      "file": "chops/07/07_C17.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 48.41,
+     "ce": 49.26,
+     "gr": "B"
     },
     {
      "s": 54.67,
      "e": 55.67,
      "text": "stop. Maybe",
+     "i0": 120,
+     "i1": 121,
      "norm": "stop maybe",
      "n": 2,
      "seg": 6,
@@ -3422,12 +4449,17 @@
      "id": "07_C18",
      "file": "chops/07/07_C18.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 54.729,
+     "ce": 55.661,
+     "gr": "B"
     },
     {
      "s": 55.67,
      "e": 56.75,
      "text": "we shouldn't signs.",
+     "i0": 122,
+     "i1": 124,
      "norm": "we shouldn't signs",
      "n": 3,
      "seg": 7,
@@ -3438,12 +4470,17 @@
      "id": "07_C19",
      "file": "chops/07/07_C19.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 55.747,
+     "ce": 57.05,
+     "gr": "C"
     },
     {
      "s": 58.08,
      "e": 58.94,
      "text": "A love story",
+     "i0": 125,
+     "i1": 127,
      "norm": "a love story",
      "n": 3,
      "seg": 7,
@@ -3454,12 +4491,17 @@
      "id": "07_C20",
      "file": "chops/07/07_C20.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 57.938,
+     "ce": 58.861,
+     "gr": "C"
     },
     {
      "s": 59.6,
      "e": 60.82,
      "text": "11 years each",
+     "i0": 130,
+     "i1": 132,
      "norm": "years each",
      "n": 2,
      "seg": 7,
@@ -3470,12 +4512,17 @@
      "id": "07_C21",
      "file": "chops/07/07_C21.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 59.59,
+     "ce": 60.85,
+     "gr": "B"
     },
     {
      "s": 65.71,
      "e": 66.35,
      "text": "future gone",
+     "i0": 144,
+     "i1": 145,
      "norm": "future gone",
      "n": 2,
      "seg": 8,
@@ -3486,12 +4533,17 @@
      "id": "07_C22",
      "file": "chops/07/07_C22.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 65.765,
+     "ce": 66.381,
+     "gr": "C"
     },
     {
      "s": 74.25,
      "e": 74.89,
      "text": "dim night",
+     "i0": 166,
+     "i1": 167,
      "norm": "dim night",
      "n": 2,
      "seg": 9,
@@ -3502,12 +4554,17 @@
      "id": "07_C23",
      "file": "chops/07/07_C23.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 74.3,
+     "ce": 74.92,
+     "gr": "A"
     },
     {
      "s": 76.81,
      "e": 77.47,
      "text": "silver lining.",
+     "i0": 174,
+     "i1": 175,
      "norm": "silver lining",
      "n": 2,
      "seg": 9,
@@ -3518,12 +4575,17 @@
      "id": "07_C24",
      "file": "chops/07/07_C24.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 76.88,
+     "ce": 78.17,
+     "gr": "A"
     },
     {
      "s": 78.64,
      "e": 79.92,
      "text": "Of now turning",
+     "i0": 176,
+     "i1": 178,
      "norm": "of now turning",
      "n": 3,
      "seg": 9,
@@ -3534,12 +4596,17 @@
      "id": "07_C25",
      "file": "chops/07/07_C25.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 78.615,
+     "ce": 79.865,
+     "gr": "C"
     },
     {
      "s": 83.56,
      "e": 84.72,
      "text": "time, one",
+     "i0": 190,
+     "i1": 191,
      "norm": "time one",
      "n": 2,
      "seg": 10,
@@ -3550,12 +4617,17 @@
      "id": "07_C26",
      "file": "chops/07/07_C26.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 83.56,
+     "ce": 84.75,
+     "gr": "A"
     },
     {
      "s": 85.84,
      "e": 86.44,
      "text": "a time.",
+     "i0": 194,
+     "i1": 195,
      "norm": "a time",
      "n": 2,
      "seg": 10,
@@ -3566,12 +4638,17 @@
      "id": "07_C27",
      "file": "chops/07/07_C27.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 85.92,
+     "ce": 87.14,
+     "gr": "C"
     },
     {
      "s": 88.53,
      "e": 89.87,
      "text": "at a time.",
+     "i0": 201,
+     "i1": 203,
      "norm": "at a time",
      "n": 3,
      "seg": 11,
@@ -3582,12 +4659,17 @@
      "id": "07_C28",
      "file": "chops/07/07_C28.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 88.602,
+     "ce": 90.369,
+     "gr": "B"
     },
     {
      "s": 90.61,
      "e": 91.31,
      "text": "One open mic",
+     "i0": 204,
+     "i1": 206,
      "norm": "one open mic",
      "n": 3,
      "seg": 11,
@@ -3598,12 +4680,17 @@
      "id": "07_C29",
      "file": "chops/07/07_C29.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 90.48,
+     "ce": 91.341,
+     "gr": "A"
     },
     {
      "s": 92.07,
      "e": 93.72,
      "text": "time. Chin",
+     "i0": 209,
+     "i1": 210,
      "norm": "time chin",
      "n": 2,
      "seg": 11,
@@ -3614,12 +4701,17 @@
      "id": "07_C30",
      "file": "chops/07/07_C30.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 92.14,
+     "ce": 93.741,
+     "gr": "C"
     },
     {
      "s": 93.7,
      "e": 94.36,
      "text": "Chin now nested",
+     "i0": 210,
+     "i1": 212,
      "norm": "chin now nested",
      "n": 3,
      "seg": 11,
@@ -3630,12 +4722,17 @@
      "id": "07_C31",
      "file": "chops/07/07_C31.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 93.61,
+     "ce": 94.305,
+     "gr": "B"
     },
     {
      "s": 95.12,
      "e": 95.74,
      "text": "volume turned",
+     "i0": 215,
+     "i1": 216,
      "norm": "volume turned",
      "n": 2,
      "seg": 11,
@@ -3646,7 +4743,10 @@
      "id": "07_C32",
      "file": "chops/07/07_C32.mp3",
      "track": "07",
-     "title": "DJ Turn Me Up"
+     "title": "DJ Turn Me Up",
+     "cs": 95.156,
+     "ce": 95.77,
+     "gr": "C"
     }
    ]
   },
@@ -3658,6 +4758,8 @@
      "s": 0.28,
      "e": 1.12,
      "text": "soul has escaped",
+     "i0": 1,
+     "i1": 3,
      "norm": "soul has escaped",
      "n": 3,
      "seg": 0,
@@ -3668,12 +4770,17 @@
      "id": "08_C01",
      "file": "chops/08/08_C01.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 0.36,
+     "ce": 1.14,
+     "gr": "B"
     },
     {
      "s": 5.4,
      "e": 5.9,
      "text": "can now just",
+     "i0": 17,
+     "i1": 19,
      "norm": "can now just",
      "n": 3,
      "seg": 0,
@@ -3684,12 +4791,17 @@
      "id": "08_C02",
      "file": "chops/08/08_C02.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 5.38,
+     "ce": 5.93,
+     "gr": "A"
     },
     {
      "s": 6.12,
      "e": 7.0,
      "text": "flesh and bones,",
+     "i0": 21,
+     "i1": 23,
      "norm": "flesh and bones",
      "n": 3,
      "seg": 1,
@@ -3700,12 +4812,17 @@
      "id": "08_C03",
      "file": "chops/08/08_C03.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 6.129,
+     "ce": 7.021,
+     "gr": "A"
     },
     {
      "s": 7.36,
      "e": 8.42,
      "text": "rejection and heartache",
+     "i0": 24,
+     "i1": 26,
      "norm": "rejection and heartache",
      "n": 3,
      "seg": 1,
@@ -3716,12 +4833,17 @@
      "id": "08_C04",
      "file": "chops/08/08_C04.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 7.23,
+     "ce": 8.435,
+     "gr": "A"
     },
     {
      "s": 10.44,
      "e": 11.18,
      "text": "feelings afloat.",
+     "i0": 33,
+     "i1": 34,
      "norm": "feelings afloat",
      "n": 2,
      "seg": 1,
@@ -3732,12 +4854,17 @@
      "id": "08_C05",
      "file": "chops/08/08_C05.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 10.51,
+     "ce": 11.484,
+     "gr": "A"
     },
     {
      "s": 13.4,
      "e": 13.98,
      "text": "soul now",
+     "i0": 38,
+     "i1": 39,
      "norm": "soul now",
      "n": 2,
      "seg": 2,
@@ -3748,12 +4875,17 @@
      "id": "08_C06",
      "file": "chops/08/08_C06.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 13.48,
+     "ce": 14.004,
+     "gr": "C"
     },
     {
      "s": 16.74,
      "e": 17.64,
      "text": "head throbbing",
+     "i0": 46,
+     "i1": 47,
      "norm": "head throbbing",
      "n": 2,
      "seg": 2,
@@ -3764,12 +4896,17 @@
      "id": "08_C07",
      "file": "chops/08/08_C07.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 16.76,
+     "ce": 17.666,
+     "gr": "B"
     },
     {
      "s": 20.46,
      "e": 21.22,
      "text": "crowded floor",
+     "i0": 55,
+     "i1": 56,
      "norm": "crowded floor",
      "n": 2,
      "seg": 3,
@@ -3780,12 +4917,17 @@
      "id": "08_C08",
      "file": "chops/08/08_C08.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 20.435,
+     "ce": 21.25,
+     "gr": "C"
     },
     {
      "s": 24.71,
      "e": 25.69,
      "text": "Let's watch strangers",
+     "i0": 62,
+     "i1": 64,
      "norm": "let's watch strangers",
      "n": 3,
      "seg": 3,
@@ -3796,12 +4938,17 @@
      "id": "08_C09",
      "file": "chops/08/08_C09.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 24.665,
+     "ce": 25.655,
+     "gr": "B"
     },
     {
      "s": 29.43,
      "e": 30.07,
      "text": "a good one.",
+     "i0": 74,
+     "i1": 76,
      "norm": "a good one",
      "n": 3,
      "seg": 4,
@@ -3812,12 +4959,17 @@
      "id": "08_C10",
      "file": "chops/08/08_C10.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 29.314,
+     "ce": 30.224,
+     "gr": "A"
     },
     {
      "s": 31.47,
      "e": 32.03,
      "text": "We want him",
+     "i0": 77,
+     "i1": 79,
      "norm": "we want him",
      "n": 3,
      "seg": 4,
@@ -3828,12 +4980,17 @@
      "id": "08_C11",
      "file": "chops/08/08_C11.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 31.345,
+     "ce": 32.06,
+     "gr": "B"
     },
     {
      "s": 32.47,
      "e": 32.99,
      "text": "last one",
+     "i0": 83,
+     "i1": 84,
      "norm": "last one",
      "n": 2,
      "seg": 4,
@@ -3844,12 +5001,17 @@
      "id": "08_C12",
      "file": "chops/08/08_C12.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 32.445,
+     "ce": 32.92,
+     "gr": "C"
     },
     {
      "s": 33.17,
      "e": 34.33,
      "text": "leave, prolonging",
+     "i0": 86,
+     "i1": 87,
      "norm": "leave prolonging",
      "n": 2,
      "seg": 4,
@@ -3860,12 +5022,17 @@
      "id": "08_C13",
      "file": "chops/08/08_C13.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 33.2,
+     "ce": 34.36,
+     "gr": "C"
     },
     {
      "s": 34.53,
      "e": 35.51,
      "text": "bitter refraction",
+     "i0": 89,
+     "i1": 90,
      "norm": "bitter refraction",
      "n": 2,
      "seg": 5,
@@ -3876,12 +5043,17 @@
      "id": "08_C14",
      "file": "chops/08/08_C14.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 34.6,
+     "ce": 35.44,
+     "gr": "A"
     },
     {
      "s": 41.54,
      "e": 42.0,
      "text": "let us put",
+     "i0": 103,
+     "i1": 105,
      "norm": "let us put",
      "n": 3,
      "seg": 5,
@@ -3892,12 +5064,17 @@
      "id": "08_C15",
      "file": "chops/08/08_C15.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 41.62,
+     "ce": 41.986,
+     "gr": "C"
     },
     {
      "s": 43.26,
      "e": 44.06,
      "text": "an open field",
+     "i0": 112,
+     "i1": 114,
      "norm": "an open field",
      "n": 3,
      "seg": 6,
@@ -3908,12 +5085,17 @@
      "id": "08_C16",
      "file": "chops/08/08_C16.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 43.231,
+     "ce": 44.0,
+     "gr": "C"
     },
     {
      "s": 46.86,
      "e": 48.14,
      "text": "and much hotter.",
+     "i0": 126,
+     "i1": 128,
      "norm": "and much hotter",
      "n": 3,
      "seg": 7,
@@ -3924,12 +5106,17 @@
      "id": "08_C17",
      "file": "chops/08/08_C17.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 46.901,
+     "ce": 48.83,
+     "gr": "B"
     },
     {
      "s": 50.72,
      "e": 51.82,
      "text": "unfiltered water",
+     "i0": 134,
+     "i1": 135,
      "norm": "unfiltered water",
      "n": 2,
      "seg": 7,
@@ -3940,12 +5127,17 @@
      "id": "08_C18",
      "file": "chops/08/08_C18.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 50.77,
+     "ce": 51.848,
+     "gr": "C"
     },
     {
      "s": 52.54,
      "e": 53.26,
      "text": "ice bath",
+     "i0": 139,
+     "i1": 140,
      "norm": "ice bath",
      "n": 2,
      "seg": 7,
@@ -3956,12 +5148,17 @@
      "id": "08_C19",
      "file": "chops/08/08_C19.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 52.59,
+     "ce": 53.29,
+     "gr": "B"
     },
     {
      "s": 59.24,
      "e": 60.26,
      "text": "joys capturing",
+     "i0": 154,
+     "i1": 155,
      "norm": "joys capturing",
      "n": 2,
      "seg": 8,
@@ -3972,12 +5169,17 @@
      "id": "08_C20",
      "file": "chops/08/08_C20.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 59.27,
+     "ce": 60.23,
+     "gr": "B"
     },
     {
      "s": 60.26,
      "e": 60.94,
      "text": "my body",
+     "i0": 156,
+     "i1": 157,
      "norm": "my body",
      "n": 2,
      "seg": 8,
@@ -3988,12 +5190,17 @@
      "id": "08_C21",
      "file": "chops/08/08_C21.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 60.23,
+     "ce": 60.969,
+     "gr": "B"
     },
     {
      "s": 62.6,
      "e": 63.32,
      "text": "strobe lights.",
+     "i0": 163,
+     "i1": 164,
      "norm": "strobe lights",
      "n": 2,
      "seg": 9,
@@ -4004,12 +5211,17 @@
      "id": "08_C22",
      "file": "chops/08/08_C22.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 62.57,
+     "ce": 63.32,
+     "gr": "B"
     },
     {
      "s": 67.25,
      "e": 68.35,
      "text": "infinity will tell.",
+     "i0": 171,
+     "i1": 173,
      "norm": "infinity will tell",
      "n": 3,
      "seg": 9,
@@ -4020,12 +5232,17 @@
      "id": "08_C23",
      "file": "chops/08/08_C23.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 67.321,
+     "ce": 69.039,
+     "gr": "B"
     },
     {
      "s": 69.53,
      "e": 70.03,
      "text": "Now bring",
+     "i0": 174,
+     "i1": 175,
      "norm": "now bring",
      "n": 2,
      "seg": 9,
@@ -4036,12 +5253,17 @@
      "id": "08_C24",
      "file": "chops/08/08_C24.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 69.561,
+     "ce": 69.991,
+     "gr": "C"
     },
     {
      "s": 70.03,
      "e": 70.69,
      "text": "my soul",
+     "i0": 176,
+     "i1": 177,
      "norm": "my soul",
      "n": 2,
      "seg": 9,
@@ -4052,12 +5274,17 @@
      "id": "08_C25",
      "file": "chops/08/08_C25.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 70.005,
+     "ce": 70.659,
+     "gr": "C"
     },
     {
      "s": 72.31,
      "e": 73.59,
      "text": "back, breathe",
+     "i0": 184,
+     "i1": 185,
      "norm": "back breathe",
      "n": 2,
      "seg": 10,
@@ -4068,12 +5295,17 @@
      "id": "08_C26",
      "file": "chops/08/08_C26.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 72.388,
+     "ce": 73.61,
+     "gr": "C"
     },
     {
      "s": 75.87,
      "e": 76.69,
      "text": "tell myself",
+     "i0": 195,
+     "i1": 196,
      "norm": "tell myself",
      "n": 2,
      "seg": 10,
@@ -4084,12 +5316,17 @@
      "id": "08_C27",
      "file": "chops/08/08_C27.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 75.862,
+     "ce": 76.72,
+     "gr": "A"
     },
     {
      "s": 76.69,
      "e": 78.07,
      "text": "how good",
+     "i0": 197,
+     "i1": 198,
      "norm": "how good",
      "n": 2,
      "seg": 10,
@@ -4100,12 +5337,17 @@
      "id": "08_C28",
      "file": "chops/08/08_C28.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 76.72,
+     "ce": 78.09,
+     "gr": "C"
     },
     {
      "s": 78.73,
      "e": 79.43,
      "text": "finally get",
+     "i0": 202,
+     "i1": 203,
      "norm": "finally get",
      "n": 2,
      "seg": 11,
@@ -4116,12 +5358,17 @@
      "id": "08_C29",
      "file": "chops/08/08_C29.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 78.785,
+     "ce": 79.35,
+     "gr": "B"
     },
     {
      "s": 81.85,
      "e": 82.71,
      "text": "into unfamiliar",
+     "i0": 209,
+     "i1": 210,
      "norm": "into unfamiliar",
      "n": 2,
      "seg": 11,
@@ -4132,12 +5379,17 @@
      "id": "08_C30",
      "file": "chops/08/08_C30.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 81.89,
+     "ce": 82.675,
+     "gr": "C"
     },
     {
      "s": 82.71,
      "e": 83.87,
      "text": "yet relatable",
+     "i0": 211,
+     "i1": 212,
      "norm": "yet relatable",
      "n": 2,
      "seg": 11,
@@ -4148,12 +5400,17 @@
      "id": "08_C31",
      "file": "chops/08/08_C31.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 82.785,
+     "ce": 83.865,
+     "gr": "C"
     },
     {
      "s": 88.85,
      "e": 89.81,
      "text": "within reach.",
+     "i0": 223,
+     "i1": 224,
      "norm": "within reach",
      "n": 2,
      "seg": 12,
@@ -4164,7 +5421,10 @@
      "id": "08_C32",
      "file": "chops/08/08_C32.mp3",
      "track": "08",
-     "title": "Newly Single"
+     "title": "Newly Single",
+     "cs": 88.82,
+     "ce": 90.511,
+     "gr": "A"
     }
    ]
   },
@@ -4176,6 +5436,8 @@
      "s": 0.0,
      "e": 0.84,
      "text": "Accepting you'll",
+     "i0": 0,
+     "i1": 1,
      "norm": "accepting you'll",
      "n": 2,
      "seg": 0,
@@ -4186,12 +5448,17 @@
      "id": "09_C01",
      "file": "chops/09/09_C01.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 0.0,
+     "ce": 0.865,
+     "gr": "C"
     },
     {
      "s": 0.98,
      "e": 1.88,
      "text": "say nor",
+     "i0": 3,
+     "i1": 4,
      "norm": "say nor",
      "n": 2,
      "seg": 0,
@@ -4202,12 +5469,17 @@
      "id": "09_C02",
      "file": "chops/09/09_C02.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 0.952,
+     "ce": 1.8,
+     "gr": "C"
     },
     {
      "s": 5.75,
      "e": 6.29,
      "text": "isn't mine",
+     "i0": 12,
+     "i1": 13,
      "norm": "isn't mine",
      "n": 2,
      "seg": 1,
@@ -4218,12 +5490,17 @@
      "id": "09_C03",
      "file": "chops/09/09_C03.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 5.831,
+     "ce": 6.27,
+     "gr": "C"
     },
     {
      "s": 6.47,
      "e": 7.09,
      "text": "still cannot",
+     "i0": 15,
+     "i1": 16,
      "norm": "still cannot",
      "n": 2,
      "seg": 1,
@@ -4234,12 +5511,17 @@
      "id": "09_C04",
      "file": "chops/09/09_C04.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 6.451,
+     "ce": 7.104,
+     "gr": "C"
     },
     {
      "s": 9.25,
      "e": 9.89,
      "text": "gather my things",
+     "i0": 19,
+     "i1": 21,
      "norm": "gather my things",
      "n": 3,
      "seg": 2,
@@ -4250,12 +5532,17 @@
      "id": "09_C05",
      "file": "chops/09/09_C05.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 9.266,
+     "ce": 9.903,
+     "gr": "C"
     },
     {
      "s": 11.35,
      "e": 12.19,
      "text": "Before I go,",
+     "i0": 24,
+     "i1": 26,
      "norm": "before i go",
      "n": 3,
      "seg": 3,
@@ -4266,12 +5553,17 @@
      "id": "09_C06",
      "file": "chops/09/09_C06.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 11.3,
+     "ce": 12.624,
+     "gr": "A"
     },
     {
      "s": 13.29,
      "e": 13.89,
      "text": "moon the way",
+     "i0": 31,
+     "i1": 33,
      "norm": "moon the way",
      "n": 3,
      "seg": 3,
@@ -4282,12 +5574,17 @@
      "id": "09_C07",
      "file": "chops/09/09_C07.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 13.37,
+     "ce": 13.914,
+     "gr": "C"
     },
     {
      "s": 19.68,
      "e": 20.64,
      "text": "years and travel",
+     "i0": 47,
+     "i1": 49,
      "norm": "years and travel",
      "n": 3,
      "seg": 5,
@@ -4298,12 +5595,17 @@
      "id": "09_C08",
      "file": "chops/09/09_C08.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 19.675,
+     "ce": 20.666,
+     "gr": "B"
     },
     {
      "s": 23.97,
      "e": 24.73,
      "text": "grow old together.",
+     "i0": 58,
+     "i1": 60,
      "norm": "grow old together",
      "n": 3,
      "seg": 7,
@@ -4314,12 +5616,17 @@
      "id": "09_C09",
      "file": "chops/09/09_C09.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 24.006,
+     "ce": 24.729,
+     "gr": "B"
     },
     {
      "s": 24.99,
      "e": 25.87,
      "text": "believe maybe",
+     "i0": 62,
+     "i1": 63,
      "norm": "believe maybe",
      "n": 2,
      "seg": 8,
@@ -4330,12 +5637,17 @@
      "id": "09_C10",
      "file": "chops/09/09_C10.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 25.009,
+     "ce": 25.855,
+     "gr": "B"
     },
     {
      "s": 32.07,
      "e": 32.69,
      "text": "an end story",
+     "i0": 79,
+     "i1": 81,
      "norm": "an end story",
      "n": 3,
      "seg": 10,
@@ -4346,12 +5658,17 @@
      "id": "09_C11",
      "file": "chops/09/09_C11.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 32.118,
+     "ce": 32.609,
+     "gr": "C"
     },
     {
      "s": 38.26,
      "e": 38.58,
      "text": "I go,",
+     "i0": 92,
+     "i1": 93,
      "norm": "i go",
      "n": 2,
      "seg": 12,
@@ -4362,12 +5679,17 @@
      "id": "09_C12",
      "file": "chops/09/09_C12.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 38.245,
+     "ce": 38.75,
+     "gr": "C"
     },
     {
      "s": 40.3,
      "e": 40.74,
      "text": "In tears,",
+     "i0": 99,
+     "i1": 100,
      "norm": "in tears",
      "n": 2,
      "seg": 13,
@@ -4378,12 +5700,17 @@
      "id": "09_C13",
      "file": "chops/09/09_C13.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 40.15,
+     "ce": 40.96,
+     "gr": "A"
     },
     {
      "s": 42.48,
      "e": 43.4,
      "text": "she's never known.",
+     "i0": 105,
+     "i1": 107,
      "norm": "she's never known",
      "n": 3,
      "seg": 13,
@@ -4394,12 +5721,17 @@
      "id": "09_C14",
      "file": "chops/09/09_C14.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 42.355,
+     "ce": 43.989,
+     "gr": "A"
     },
     {
      "s": 51.78,
      "e": 52.64,
      "text": "even after prayer.",
+     "i0": 126,
+     "i1": 128,
      "norm": "even after prayer",
      "n": 3,
      "seg": 15,
@@ -4410,12 +5742,17 @@
      "id": "09_C15",
      "file": "chops/09/09_C15.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 51.859,
+     "ce": 53.261,
+     "gr": "C"
     },
     {
      "s": 53.55,
      "e": 54.53,
      "text": "What isn't mine",
+     "i0": 129,
+     "i1": 131,
      "norm": "what isn't mine",
      "n": 3,
      "seg": 16,
@@ -4426,12 +5763,17 @@
      "id": "09_C16",
      "file": "chops/09/09_C16.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 53.51,
+     "ce": 54.56,
+     "gr": "C"
     },
     {
      "s": 55.05,
      "e": 55.99,
      "text": "cannot give.",
+     "i0": 134,
+     "i1": 135,
      "norm": "cannot give",
      "n": 2,
      "seg": 16,
@@ -4442,12 +5784,17 @@
      "id": "09_C17",
      "file": "chops/09/09_C17.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 55.125,
+     "ce": 56.69,
+     "gr": "B"
     },
     {
      "s": 56.73,
      "e": 57.43,
      "text": "We grow old",
+     "i0": 136,
+     "i1": 138,
      "norm": "we grow old",
      "n": 3,
      "seg": 17,
@@ -4458,12 +5805,17 @@
      "id": "09_C18",
      "file": "chops/09/09_C18.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 56.596,
+     "ce": 57.456,
+     "gr": "B"
     },
     {
      "s": 58.75,
      "e": 59.25,
      "text": "moon looking",
+     "i0": 142,
+     "i1": 143,
      "norm": "moon looking",
      "n": 2,
      "seg": 17,
@@ -4474,12 +5826,17 @@
      "id": "09_C19",
      "file": "chops/09/09_C19.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 58.831,
+     "ce": 59.195,
+     "gr": "C"
     },
     {
      "s": 62.24,
      "e": 63.0,
      "text": "tears fall",
+     "i0": 154,
+     "i1": 155,
      "norm": "tears fall",
      "n": 2,
      "seg": 19,
@@ -4490,12 +5847,17 @@
      "id": "09_C20",
      "file": "chops/09/09_C20.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 62.28,
+     "ce": 62.98,
+     "gr": "C"
     },
     {
      "s": 66.08,
      "e": 66.82,
      "text": "my own,",
+     "i0": 163,
+     "i1": 164,
      "norm": "my own",
      "n": 2,
      "seg": 20,
@@ -4506,12 +5868,17 @@
      "id": "09_C21",
      "file": "chops/09/09_C21.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 66.055,
+     "ce": 67.349,
+     "gr": "C"
     },
     {
      "s": 70.78,
      "e": 71.6,
      "text": "watches us gather",
+     "i0": 170,
+     "i1": 172,
      "norm": "watches us gather",
      "n": 3,
      "seg": 21,
@@ -4522,12 +5889,17 @@
      "id": "09_C22",
      "file": "chops/09/09_C22.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 70.804,
+     "ce": 71.611,
+     "gr": "C"
     },
     {
      "s": 73.68,
      "e": 74.2,
      "text": "Before I",
+     "i0": 177,
+     "i1": 178,
      "norm": "before i",
      "n": 2,
      "seg": 22,
@@ -4538,12 +5910,17 @@
      "id": "09_C23",
      "file": "chops/09/09_C23.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 73.664,
+     "ce": 74.22,
+     "gr": "B"
     },
     {
      "s": 77.01,
      "e": 78.03,
      "text": "calming demeanor",
+     "i0": 187,
+     "i1": 188,
      "norm": "calming demeanor",
      "n": 2,
      "seg": 23,
@@ -4554,12 +5931,17 @@
      "id": "09_C24",
      "file": "chops/09/09_C24.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 77.09,
+     "ce": 77.96,
+     "gr": "C"
     },
     {
      "s": 81.69,
      "e": 82.69,
      "text": "travel east toward",
+     "i0": 198,
+     "i1": 200,
      "norm": "travel east toward",
      "n": 3,
      "seg": 24,
@@ -4570,12 +5952,17 @@
      "id": "09_C25",
      "file": "chops/09/09_C25.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 81.765,
+     "ce": 82.721,
+     "gr": "B"
     },
     {
      "s": 93.98,
      "e": 95.08,
      "text": "between the creases",
+     "i0": 225,
+     "i1": 227,
      "norm": "between the creases",
      "n": 3,
      "seg": 27,
@@ -4586,12 +5973,17 @@
      "id": "09_C26",
      "file": "chops/09/09_C26.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 94.02,
+     "ce": 95.11,
+     "gr": "C"
     },
     {
      "s": 98.39,
      "e": 98.93,
      "text": "We stroll,",
+     "i0": 235,
+     "i1": 236,
      "norm": "we stroll",
      "n": 2,
      "seg": 29,
@@ -4602,12 +5994,17 @@
      "id": "09_C27",
      "file": "chops/09/09_C27.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 98.26,
+     "ce": 99.225,
+     "gr": "A"
     },
     {
      "s": 99.29,
      "e": 100.57,
      "text": "father and son,",
+     "i0": 237,
+     "i1": 239,
      "norm": "father and son",
      "n": 3,
      "seg": 29,
@@ -4618,12 +6015,17 @@
      "id": "09_C28",
      "file": "chops/09/09_C28.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 99.336,
+     "ce": 101.244,
+     "gr": "A"
     },
     {
      "s": 101.31,
      "e": 102.57,
      "text": "hearted and shaken.",
+     "i0": 240,
+     "i1": 242,
      "norm": "hearted and shaken",
      "n": 3,
      "seg": 29,
@@ -4634,12 +6036,17 @@
      "id": "09_C29",
      "file": "chops/09/09_C29.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 101.206,
+     "ce": 103.26,
+     "gr": "A"
     },
     {
      "s": 103.51,
      "e": 104.27,
      "text": "Someone borrowed",
+     "i0": 243,
+     "i1": 244,
      "norm": "someone borrowed",
      "n": 2,
      "seg": 30,
@@ -4650,12 +6057,17 @@
      "id": "09_C30",
      "file": "chops/09/09_C30.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 103.434,
+     "ce": 104.294,
+     "gr": "C"
     },
     {
      "s": 106.37,
      "e": 107.13,
      "text": "Yet broken,",
+     "i0": 248,
+     "i1": 249,
      "norm": "yet broken",
      "n": 2,
      "seg": 31,
@@ -4666,12 +6078,17 @@
      "id": "09_C31",
      "file": "chops/09/09_C31.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 106.246,
+     "ce": 107.699,
+     "gr": "A"
     },
     {
      "s": 107.71,
      "e": 108.25,
      "text": "yet hurt.",
+     "i0": 250,
+     "i1": 251,
      "norm": "yet hurt",
      "n": 2,
      "seg": 31,
@@ -4682,7 +6099,10 @@
      "id": "09_C32",
      "file": "chops/09/09_C32.mp3",
      "track": "09",
-     "title": "Yet Heard"
+     "title": "Yet Heard",
+     "cs": 107.569,
+     "ce": 108.799,
+     "gr": "A"
     }
    ]
   },
@@ -4694,6 +6114,8 @@
      "s": 0.62,
      "e": 1.12,
      "text": "wasn't looking",
+     "i0": 1,
+     "i1": 2,
      "norm": "wasn't looking",
      "n": 2,
      "seg": 0,
@@ -4704,12 +6126,17 @@
      "id": "10_C01",
      "file": "chops/10/10_C01.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 0.615,
+     "ce": 1.06,
+     "gr": "C"
     },
     {
      "s": 5.93,
      "e": 6.93,
      "text": "oddly sensitive,",
+     "i0": 12,
+     "i1": 13,
      "norm": "oddly sensitive",
      "n": 2,
      "seg": 0,
@@ -4720,12 +6147,17 @@
      "id": "10_C02",
      "file": "chops/10/10_C02.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 5.96,
+     "ce": 7.624,
+     "gr": "C"
     },
     {
      "s": 8.66,
      "e": 9.68,
      "text": "soul purveying",
+     "i0": 16,
+     "i1": 17,
      "norm": "soul purveying",
      "n": 2,
      "seg": 1,
@@ -4736,12 +6168,17 @@
      "id": "10_C03",
      "file": "chops/10/10_C03.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 8.74,
+     "ce": 9.641,
+     "gr": "C"
     },
     {
      "s": 11.38,
      "e": 12.16,
      "text": "I've known.",
+     "i0": 25,
+     "i1": 26,
      "norm": "i've known",
      "n": 2,
      "seg": 1,
@@ -4752,12 +6189,17 @@
      "id": "10_C04",
      "file": "chops/10/10_C04.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 11.46,
+     "ce": 12.72,
+     "gr": "C"
     },
     {
      "s": 13.37,
      "e": 14.41,
      "text": "rub my aggressions",
+     "i0": 29,
+     "i1": 31,
      "norm": "rub my aggressions",
      "n": 3,
      "seg": 2,
@@ -4768,12 +6210,17 @@
      "id": "10_C05",
      "file": "chops/10/10_C05.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 13.354,
+     "ce": 14.415,
+     "gr": "B"
     },
     {
      "s": 20.86,
      "e": 21.82,
      "text": "Loneliness is having",
+     "i0": 42,
+     "i1": 44,
      "norm": "loneliness is having",
      "n": 3,
      "seg": 3,
@@ -4784,12 +6231,17 @@
      "id": "10_C06",
      "file": "chops/10/10_C06.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 20.71,
+     "ce": 21.741,
+     "gr": "C"
     },
     {
      "s": 24.65,
      "e": 25.55,
      "text": "being everywhere",
+     "i0": 51,
+     "i1": 52,
      "norm": "being everywhere",
      "n": 2,
      "seg": 4,
@@ -4800,12 +6252,17 @@
      "id": "10_C07",
      "file": "chops/10/10_C07.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 24.54,
+     "ce": 25.496,
+     "gr": "B"
     },
     {
      "s": 27.79,
      "e": 28.97,
      "text": "wide -eyed",
+     "i0": 60,
+     "i1": 61,
      "norm": "wide eyed",
      "n": 2,
      "seg": 5,
@@ -4816,12 +6273,17 @@
      "id": "10_C08",
      "file": "chops/10/10_C08.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 27.825,
+     "ce": 28.974,
+     "gr": "C"
     },
     {
      "s": 29.29,
      "e": 30.53,
      "text": "stone but alive",
+     "i0": 63,
+     "i1": 65,
      "norm": "stone but alive",
      "n": 3,
      "seg": 5,
@@ -4832,12 +6294,17 @@
      "id": "10_C09",
      "file": "chops/10/10_C09.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 29.284,
+     "ce": 30.515,
+     "gr": "B"
     },
     {
      "s": 36.58,
      "e": 37.26,
      "text": "noise block",
+     "i0": 76,
+     "i1": 77,
      "norm": "noise block",
      "n": 2,
      "seg": 6,
@@ -4848,12 +6315,17 @@
      "id": "10_C10",
      "file": "chops/10/10_C10.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 36.556,
+     "ce": 37.29,
+     "gr": "C"
     },
     {
      "s": 37.26,
      "e": 37.9,
      "text": "the noise",
+     "i0": 78,
+     "i1": 79,
      "norm": "the noise",
      "n": 2,
      "seg": 6,
@@ -4864,12 +6336,17 @@
      "id": "10_C11",
      "file": "chops/10/10_C11.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 37.335,
+     "ce": 37.845,
+     "gr": "C"
     },
     {
      "s": 40.8,
      "e": 41.58,
      "text": "eyes turn,",
+     "i0": 92,
+     "i1": 93,
      "norm": "eyes turn",
      "n": 2,
      "seg": 6,
@@ -4880,12 +6357,17 @@
      "id": "10_C12",
      "file": "chops/10/10_C12.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 40.789,
+     "ce": 41.984,
+     "gr": "B"
     },
     {
      "s": 42.12,
      "e": 42.7,
      "text": "has twists,",
+     "i0": 94,
+     "i1": 95,
      "norm": "has twists",
      "n": 2,
      "seg": 7,
@@ -4896,12 +6378,17 @@
      "id": "10_C13",
      "file": "chops/10/10_C13.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 41.97,
+     "ce": 43.39,
+     "gr": "A"
     },
     {
      "s": 43.4,
      "e": 43.86,
      "text": "improve,",
+     "i0": 96,
+     "i1": 96,
      "norm": "improve",
      "n": 1,
      "seg": 7,
@@ -4912,12 +6399,17 @@
      "id": "10_C14",
      "file": "chops/10/10_C14.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 43.284,
+     "ce": 44.012,
+     "gr": "B"
     },
     {
      "s": 45.24,
      "e": 46.16,
      "text": "magic still exists.",
+     "i0": 99,
+     "i1": 101,
      "norm": "magic still exists",
      "n": 3,
      "seg": 7,
@@ -4928,12 +6420,17 @@
      "id": "10_C15",
      "file": "chops/10/10_C15.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 45.266,
+     "ce": 46.43,
+     "gr": "C"
     },
     {
      "s": 47.76,
      "e": 48.58,
      "text": "All preparations",
+     "i0": 102,
+     "i1": 103,
      "norm": "all preparations",
      "n": 2,
      "seg": 8,
@@ -4944,12 +6441,17 @@
      "id": "10_C16",
      "file": "chops/10/10_C16.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 47.736,
+     "ce": 48.61,
+     "gr": "B"
     },
     {
      "s": 48.94,
      "e": 49.68,
      "text": "live and dream",
+     "i0": 105,
+     "i1": 107,
      "norm": "live and dream",
      "n": 3,
      "seg": 8,
@@ -4960,12 +6462,17 @@
      "id": "10_C17",
      "file": "chops/10/10_C17.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 48.975,
+     "ce": 49.62,
+     "gr": "C"
     },
     {
      "s": 53.58,
      "e": 54.22,
      "text": "moon settles",
+     "i0": 115,
+     "i1": 116,
      "norm": "moon settles",
      "n": 2,
      "seg": 9,
@@ -4976,12 +6483,17 @@
      "id": "10_C18",
      "file": "chops/10/10_C18.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 53.605,
+     "ce": 54.205,
+     "gr": "C"
     },
     {
      "s": 55.38,
      "e": 56.36,
      "text": "distant stars",
+     "i0": 121,
+     "i1": 122,
      "norm": "distant stars",
      "n": 2,
      "seg": 9,
@@ -4992,12 +6504,17 @@
      "id": "10_C19",
      "file": "chops/10/10_C19.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 55.37,
+     "ce": 56.335,
+     "gr": "B"
     },
     {
      "s": 58.51,
      "e": 59.09,
      "text": "can see",
+     "i0": 126,
+     "i1": 127,
      "norm": "can see",
      "n": 2,
      "seg": 10,
@@ -5008,12 +6525,17 @@
      "id": "10_C20",
      "file": "chops/10/10_C20.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 58.411,
+     "ce": 59.015,
+     "gr": "B"
     },
     {
      "s": 59.09,
      "e": 59.87,
      "text": "a morning ahead",
+     "i0": 128,
+     "i1": 130,
      "norm": "a morning ahead",
      "n": 3,
      "seg": 10,
@@ -5024,12 +6546,17 @@
      "id": "10_C21",
      "file": "chops/10/10_C21.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 59.159,
+     "ce": 59.902,
+     "gr": "C"
     },
     {
      "s": 61.43,
      "e": 62.05,
      "text": "It looks like",
+     "i0": 133,
+     "i1": 135,
      "norm": "it looks like",
      "n": 3,
      "seg": 11,
@@ -5040,12 +6567,17 @@
      "id": "10_C22",
      "file": "chops/10/10_C22.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 61.28,
+     "ce": 62.045,
+     "gr": "B"
     },
     {
      "s": 66.43,
      "e": 67.83,
      "text": "well, ripe",
+     "i0": 150,
+     "i1": 151,
      "norm": "well ripe",
      "n": 2,
      "seg": 12,
@@ -5056,12 +6588,17 @@
      "id": "10_C23",
      "file": "chops/10/10_C23.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 66.505,
+     "ce": 67.86,
+     "gr": "B"
     },
     {
      "s": 68.05,
      "e": 68.87,
      "text": "sunlight that's",
+     "i0": 153,
+     "i1": 154,
      "norm": "sunlight that's",
      "n": 2,
      "seg": 12,
@@ -5072,12 +6609,17 @@
      "id": "10_C24",
      "file": "chops/10/10_C24.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 68.125,
+     "ce": 68.885,
+     "gr": "C"
     },
     {
      "s": 72.55,
      "e": 73.51,
      "text": "feeling of nests,",
+     "i0": 161,
+     "i1": 163,
      "norm": "feeling of nests",
      "n": 3,
      "seg": 13,
@@ -5088,12 +6630,17 @@
      "id": "10_C25",
      "file": "chops/10/10_C25.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 72.584,
+     "ce": 73.961,
+     "gr": "A"
     },
     {
      "s": 77.1,
      "e": 78.2,
      "text": "own curiosities",
+     "i0": 175,
+     "i1": 176,
      "norm": "own curiosities",
      "n": 2,
      "seg": 14,
@@ -5104,12 +6651,17 @@
      "id": "10_C26",
      "file": "chops/10/10_C26.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 77.125,
+     "ce": 78.226,
+     "gr": "B"
     },
     {
      "s": 80.5,
      "e": 81.0,
      "text": "everything will",
+     "i0": 184,
+     "i1": 185,
      "norm": "everything will",
      "n": 2,
      "seg": 14,
@@ -5120,12 +6672,17 @@
      "id": "10_C27",
      "file": "chops/10/10_C27.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 80.566,
+     "ce": 81.011,
+     "gr": "C"
     },
     {
      "s": 82.68,
      "e": 83.16,
      "text": "I want",
+     "i0": 188,
+     "i1": 189,
      "norm": "i want",
      "n": 2,
      "seg": 15,
@@ -5136,12 +6693,17 @@
      "id": "10_C28",
      "file": "chops/10/10_C28.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 82.596,
+     "ce": 83.189,
+     "gr": "B"
     },
     {
      "s": 83.92,
      "e": 84.9,
      "text": "feeling forever,",
+     "i0": 194,
+     "i1": 195,
      "norm": "feeling forever",
      "n": 2,
      "seg": 15,
@@ -5152,12 +6714,17 @@
      "id": "10_C29",
      "file": "chops/10/10_C29.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 84.0,
+     "ce": 85.489,
+     "gr": "B"
     },
     {
      "s": 86.82,
      "e": 87.66,
      "text": "oddly innocent,",
+     "i0": 198,
+     "i1": 199,
      "norm": "oddly innocent",
      "n": 2,
      "seg": 15,
@@ -5168,12 +6735,17 @@
      "id": "10_C30",
      "file": "chops/10/10_C30.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 86.835,
+     "ce": 87.975,
+     "gr": "C"
     },
     {
      "s": 92.92,
      "e": 93.7,
      "text": "improve, yeah,",
+     "i0": 210,
+     "i1": 211,
      "norm": "improve yeah",
      "n": 2,
      "seg": 17,
@@ -5184,12 +6756,17 @@
      "id": "10_C31",
      "file": "chops/10/10_C31.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 92.77,
+     "ce": 94.4,
+     "gr": "A"
     },
     {
      "s": 94.62,
      "e": 95.28,
      "text": "the magic still",
+     "i0": 212,
+     "i1": 214,
      "norm": "the magic still",
      "n": 3,
      "seg": 17,
@@ -5200,7 +6777,10 @@
      "id": "10_C32",
      "file": "chops/10/10_C32.mp3",
      "track": "10",
-     "title": "Magic Ride"
+     "title": "Magic Ride",
+     "cs": 94.521,
+     "ce": 95.305,
+     "gr": "A"
     }
    ]
   },
@@ -5212,6 +6792,8 @@
      "s": 1.24,
      "e": 1.84,
      "text": "is chilly",
+     "i0": 2,
+     "i1": 3,
      "norm": "is chilly",
      "n": 2,
      "seg": 0,
@@ -5222,12 +6804,17 @@
      "id": "11_C01",
      "file": "chops/11/11_C01.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 1.315,
+     "ce": 1.791,
+     "gr": "C"
     },
     {
      "s": 4.21,
      "e": 5.03,
      "text": "River rafting",
+     "i0": 7,
+     "i1": 8,
      "norm": "river rafting",
      "n": 2,
      "seg": 1,
@@ -5238,12 +6825,17 @@
      "id": "11_C02",
      "file": "chops/11/11_C02.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 4.171,
+     "ce": 5.059,
+     "gr": "B"
     },
     {
      "s": 5.03,
      "e": 5.87,
      "text": "fall covers",
+     "i0": 9,
+     "i1": 10,
      "norm": "fall covers",
      "n": 2,
      "seg": 1,
@@ -5254,12 +6846,17 @@
      "id": "11_C03",
      "file": "chops/11/11_C03.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 5.1,
+     "ce": 5.789,
+     "gr": "B"
     },
     {
      "s": 8.21,
      "e": 8.99,
      "text": "hugs the bases",
+     "i0": 17,
+     "i1": 19,
      "norm": "hugs the bases",
      "n": 3,
      "seg": 2,
@@ -5270,12 +6867,17 @@
      "id": "11_C04",
      "file": "chops/11/11_C04.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 8.216,
+     "ce": 8.975,
+     "gr": "B"
     },
     {
      "s": 13.69,
      "e": 15.03,
      "text": "In silent resounds,",
+     "i0": 29,
+     "i1": 31,
      "norm": "in silent resounds",
      "n": 3,
      "seg": 4,
@@ -5286,12 +6888,17 @@
      "id": "11_C05",
      "file": "chops/11/11_C05.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 13.635,
+     "ce": 15.465,
+     "gr": "A"
     },
     {
      "s": 15.61,
      "e": 16.23,
      "text": "choir chords",
+     "i0": 32,
+     "i1": 33,
      "norm": "choir chords",
      "n": 2,
      "seg": 4,
@@ -5302,12 +6909,17 @@
      "id": "11_C06",
      "file": "chops/11/11_C06.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 15.454,
+     "ce": 16.249,
+     "gr": "B"
     },
     {
      "s": 19.7,
      "e": 20.18,
      "text": "offer them",
+     "i0": 43,
+     "i1": 44,
      "norm": "offer them",
      "n": 2,
      "seg": 5,
@@ -5318,12 +6930,17 @@
      "id": "11_C07",
      "file": "chops/11/11_C07.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 19.664,
+     "ce": 20.205,
+     "gr": "B"
     },
     {
      "s": 21.68,
      "e": 22.4,
      "text": "higher powers.",
+     "i0": 50,
+     "i1": 51,
      "norm": "higher powers",
      "n": 2,
      "seg": 5,
@@ -5334,12 +6951,17 @@
      "id": "11_C08",
      "file": "chops/11/11_C08.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 21.72,
+     "ce": 22.7,
+     "gr": "B"
     },
     {
      "s": 23.3,
      "e": 24.2,
      "text": "Exhausted emotions",
+     "i0": 52,
+     "i1": 53,
      "norm": "exhausted emotions",
      "n": 2,
      "seg": 6,
@@ -5350,12 +6972,17 @@
      "id": "11_C09",
      "file": "chops/11/11_C09.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 23.165,
+     "ce": 24.19,
+     "gr": "B"
     },
     {
      "s": 24.2,
      "e": 25.02,
      "text": "carry forward",
+     "i0": 54,
+     "i1": 55,
      "norm": "carry forward",
      "n": 2,
      "seg": 6,
@@ -5366,12 +6993,17 @@
      "id": "11_C10",
      "file": "chops/11/11_C10.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 24.19,
+     "ce": 25.044,
+     "gr": "C"
     },
     {
      "s": 26.94,
      "e": 27.84,
      "text": "emit jazz tuned",
+     "i0": 60,
+     "i1": 62,
      "norm": "emit jazz tuned",
      "n": 3,
      "seg": 7,
@@ -5382,12 +7014,17 @@
      "id": "11_C11",
      "file": "chops/11/11_C11.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 26.971,
+     "ce": 27.866,
+     "gr": "C"
     },
     {
      "s": 28.52,
      "e": 29.22,
      "text": "heat and dry",
+     "i0": 65,
+     "i1": 67,
      "norm": "heat and dry",
      "n": 3,
      "seg": 7,
@@ -5398,12 +7035,17 @@
      "id": "11_C12",
      "file": "chops/11/11_C12.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 28.51,
+     "ce": 29.25,
+     "gr": "B"
     },
     {
      "s": 35.52,
      "e": 36.06,
      "text": "We can rebuild",
+     "i0": 81,
+     "i1": 83,
      "norm": "we can rebuild",
      "n": 3,
      "seg": 9,
@@ -5414,12 +7056,17 @@
      "id": "11_C13",
      "file": "chops/11/11_C13.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 35.406,
+     "ce": 36.09,
+     "gr": "C"
     },
     {
      "s": 38.37,
      "e": 38.89,
      "text": "new day.",
+     "i0": 88,
+     "i1": 89,
      "norm": "new day",
      "n": 2,
      "seg": 10,
@@ -5430,12 +7077,17 @@
      "id": "11_C14",
      "file": "chops/11/11_C14.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 38.405,
+     "ce": 39.58,
+     "gr": "C"
     },
     {
      "s": 40.92,
      "e": 42.58,
      "text": "catharsis evoked",
+     "i0": 91,
+     "i1": 92,
      "norm": "catharsis evoked",
      "n": 2,
      "seg": 11,
@@ -5446,12 +7098,17 @@
      "id": "11_C15",
      "file": "chops/11/11_C15.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 40.915,
+     "ce": 42.585,
+     "gr": "A"
     },
     {
      "s": 43.88,
      "e": 44.74,
      "text": "painful crawl",
+     "i0": 97,
+     "i1": 98,
      "norm": "painful crawl",
      "n": 2,
      "seg": 11,
@@ -5462,12 +7119,17 @@
      "id": "11_C16",
      "file": "chops/11/11_C16.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 43.881,
+     "ce": 44.77,
+     "gr": "C"
     },
     {
      "s": 48.9,
      "e": 49.46,
      "text": "I can close",
+     "i0": 106,
+     "i1": 108,
      "norm": "i can close",
      "n": 3,
      "seg": 13,
@@ -5478,12 +7140,17 @@
      "id": "11_C17",
      "file": "chops/11/11_C17.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 48.776,
+     "ce": 49.486,
+     "gr": "C"
     },
     {
      "s": 51.86,
      "e": 52.72,
      "text": "from moments",
+     "i0": 117,
+     "i1": 118,
      "norm": "from moments",
      "n": 2,
      "seg": 14,
@@ -5494,12 +7161,17 @@
      "id": "11_C18",
      "file": "chops/11/11_C18.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 51.935,
+     "ce": 52.71,
+     "gr": "B"
     },
     {
      "s": 52.92,
      "e": 53.82,
      "text": "great clarity.",
+     "i0": 120,
+     "i1": 121,
      "norm": "great clarity",
      "n": 2,
      "seg": 14,
@@ -5510,12 +7182,17 @@
      "id": "11_C19",
      "file": "chops/11/11_C19.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 52.98,
+     "ce": 54.445,
+     "gr": "A"
     },
     {
      "s": 54.82,
      "e": 55.42,
      "text": "Words written",
+     "i0": 122,
+     "i1": 123,
      "norm": "words written",
      "n": 2,
      "seg": 15,
@@ -5526,12 +7203,17 @@
      "id": "11_C20",
      "file": "chops/11/11_C20.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 54.691,
+     "ce": 55.339,
+     "gr": "A"
     },
     {
      "s": 55.68,
      "e": 56.86,
      "text": "life's triumphs",
+     "i0": 125,
+     "i1": 126,
      "norm": "life's triumphs",
      "n": 2,
      "seg": 15,
@@ -5542,12 +7224,17 @@
      "id": "11_C21",
      "file": "chops/11/11_C21.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 55.725,
+     "ce": 56.88,
+     "gr": "B"
     },
     {
      "s": 63.61,
      "e": 64.35,
      "text": "read aloud",
+     "i0": 141,
+     "i1": 142,
      "norm": "read aloud",
      "n": 2,
      "seg": 17,
@@ -5558,12 +7245,17 @@
      "id": "11_C22",
      "file": "chops/11/11_C22.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 63.63,
+     "ce": 64.376,
+     "gr": "B"
     },
     {
      "s": 65.19,
      "e": 66.03,
      "text": "sung alone",
+     "i0": 144,
+     "i1": 145,
      "norm": "sung alone",
      "n": 2,
      "seg": 17,
@@ -5574,12 +7266,17 @@
      "id": "11_C23",
      "file": "chops/11/11_C23.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 65.25,
+     "ce": 66.03,
+     "gr": "C"
     },
     {
      "s": 66.03,
      "e": 66.79,
      "text": "as gospels",
+     "i0": 146,
+     "i1": 147,
      "norm": "as gospels",
      "n": 2,
      "seg": 17,
@@ -5590,12 +7287,17 @@
      "id": "11_C24",
      "file": "chops/11/11_C24.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 66.03,
+     "ce": 66.77,
+     "gr": "C"
     },
     {
      "s": 71.01,
      "e": 71.99,
      "text": "tears drying",
+     "i0": 156,
+     "i1": 157,
      "norm": "tears drying",
      "n": 2,
      "seg": 19,
@@ -5606,12 +7308,17 @@
      "id": "11_C25",
      "file": "chops/11/11_C25.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 71.07,
+     "ce": 72.02,
+     "gr": "B"
     },
     {
      "s": 78.08,
      "e": 78.56,
      "text": "can receive",
+     "i0": 172,
+     "i1": 173,
      "norm": "can receive",
      "n": 2,
      "seg": 21,
@@ -5622,12 +7329,17 @@
      "id": "11_C26",
      "file": "chops/11/11_C26.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 78.077,
+     "ce": 78.584,
+     "gr": "B"
     },
     {
      "s": 78.56,
      "e": 79.18,
      "text": "a new day.",
+     "i0": 174,
+     "i1": 176,
      "norm": "a new day",
      "n": 3,
      "seg": 21,
@@ -5638,12 +7350,17 @@
      "id": "11_C27",
      "file": "chops/11/11_C27.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 78.616,
+     "ce": 79.82,
+     "gr": "C"
     },
     {
      "s": 83.18,
      "e": 84.0,
      "text": "Everything I've known",
+     "i0": 183,
+     "i1": 185,
      "norm": "everything i've known",
      "n": 3,
      "seg": 23,
@@ -5654,12 +7371,17 @@
      "id": "11_C28",
      "file": "chops/11/11_C28.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 83.155,
+     "ce": 84.02,
+     "gr": "C"
     },
     {
      "s": 86.02,
      "e": 86.74,
      "text": "every circumference",
+     "i0": 188,
+     "i1": 189,
      "norm": "every circumference",
      "n": 2,
      "seg": 24,
@@ -5670,12 +7392,17 @@
      "id": "11_C29",
      "file": "chops/11/11_C29.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 85.959,
+     "ce": 86.755,
+     "gr": "A"
     },
     {
      "s": 86.74,
      "e": 87.38,
      "text": "of life",
+     "i0": 190,
+     "i1": 191,
      "norm": "of life",
      "n": 2,
      "seg": 24,
@@ -5686,12 +7413,17 @@
      "id": "11_C30",
      "file": "chops/11/11_C30.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 86.755,
+     "ce": 87.41,
+     "gr": "A"
     },
     {
      "s": 92.66,
      "e": 93.68,
      "text": "sacred place,",
+     "i0": 201,
+     "i1": 202,
      "norm": "sacred place",
      "n": 2,
      "seg": 25,
@@ -5702,12 +7434,17 @@
      "id": "11_C31",
      "file": "chops/11/11_C31.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 92.74,
+     "ce": 94.246,
+     "gr": "C"
     },
     {
      "s": 97.65,
      "e": 98.33,
      "text": "this world",
+     "i0": 212,
+     "i1": 213,
      "norm": "this world",
      "n": 2,
      "seg": 27,
@@ -5718,7 +7455,10 @@
      "id": "11_C32",
      "file": "chops/11/11_C32.mp3",
      "track": "11",
-     "title": "New Day"
+     "title": "New Day",
+     "cs": 97.69,
+     "ce": 98.354,
+     "gr": "B"
     }
    ]
   },
@@ -5730,6 +7470,8 @@
      "s": 0.0,
      "e": 0.98,
      "text": "Decades later,",
+     "i0": 0,
+     "i1": 1,
      "norm": "decades later",
      "n": 2,
      "seg": 0,
@@ -5740,12 +7482,17 @@
      "id": "12_C01",
      "file": "chops/12/12_C01.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 0.001,
+     "ce": 1.641,
+     "gr": "A"
     },
     {
      "s": 2.17,
      "e": 2.71,
      "text": "less time",
+     "i0": 4,
+     "i1": 5,
      "norm": "less time",
      "n": 2,
      "seg": 0,
@@ -5756,12 +7503,17 @@
      "id": "12_C02",
      "file": "chops/12/12_C02.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 2.205,
+     "ce": 2.731,
+     "gr": "C"
     },
     {
      "s": 3.01,
      "e": 3.93,
      "text": "words and more",
+     "i0": 7,
+     "i1": 9,
      "norm": "words and more",
      "n": 3,
      "seg": 0,
@@ -5772,12 +7524,17 @@
      "id": "12_C03",
      "file": "chops/12/12_C03.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 3.069,
+     "ce": 3.854,
+     "gr": "C"
     },
     {
      "s": 4.53,
      "e": 6.3,
      "text": "laughter, hugs",
+     "i0": 12,
+     "i1": 13,
      "norm": "laughter hugs",
      "n": 2,
      "seg": 0,
@@ -5788,12 +7545,17 @@
      "id": "12_C04",
      "file": "chops/12/12_C04.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 4.526,
+     "ce": 6.315,
+     "gr": "C"
     },
     {
      "s": 6.54,
      "e": 7.34,
      "text": "no reason,",
+     "i0": 15,
+     "i1": 16,
      "norm": "no reason",
      "n": 2,
      "seg": 0,
@@ -5804,12 +7566,17 @@
      "id": "12_C05",
      "file": "chops/12/12_C05.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 6.606,
+     "ce": 7.9,
+     "gr": "A"
     },
     {
      "s": 8.56,
      "e": 9.16,
      "text": "loud voices",
+     "i0": 17,
+     "i1": 18,
      "norm": "loud voices",
      "n": 2,
      "seg": 1,
@@ -5820,12 +7587,17 @@
      "id": "12_C06",
      "file": "chops/12/12_C06.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 8.411,
+     "ce": 9.125,
+     "gr": "B"
     },
     {
      "s": 9.68,
      "e": 10.28,
      "text": "hearts can",
+     "i0": 21,
+     "i1": 22,
      "norm": "hearts can",
      "n": 2,
      "seg": 1,
@@ -5836,12 +7608,17 @@
      "id": "12_C07",
      "file": "chops/12/12_C07.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 9.745,
+     "ce": 10.21,
+     "gr": "B"
     },
     {
      "s": 10.28,
      "e": 11.0,
      "text": "be overheard.",
+     "i0": 23,
+     "i1": 24,
      "norm": "be overheard",
      "n": 2,
      "seg": 1,
@@ -5852,12 +7629,17 @@
      "id": "12_C08",
      "file": "chops/12/12_C08.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 10.341,
+     "ce": 11.695,
+     "gr": "C"
     },
     {
      "s": 12.76,
      "e": 13.46,
      "text": "mind drifts",
+     "i0": 26,
+     "i1": 27,
      "norm": "mind drifts",
      "n": 2,
      "seg": 1,
@@ -5868,12 +7650,17 @@
      "id": "12_C09",
      "file": "chops/12/12_C09.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 12.776,
+     "ce": 13.49,
+     "gr": "C"
     },
     {
      "s": 13.46,
      "e": 14.14,
      "text": "into the",
+     "i0": 28,
+     "i1": 29,
      "norm": "into the",
      "n": 2,
      "seg": 1,
@@ -5884,12 +7671,17 @@
      "id": "12_C10",
      "file": "chops/12/12_C10.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 13.54,
+     "ce": 14.15,
+     "gr": "B"
     },
     {
      "s": 15.04,
      "e": 16.04,
      "text": "our afterlives,",
+     "i0": 32,
+     "i1": 33,
      "norm": "our afterlives",
      "n": 2,
      "seg": 1,
@@ -5900,12 +7692,17 @@
      "id": "12_C11",
      "file": "chops/12/12_C11.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 15.021,
+     "ce": 16.319,
+     "gr": "B"
     },
     {
      "s": 17.41,
      "e": 18.27,
      "text": "rooms are empty.",
+     "i0": 36,
+     "i1": 38,
      "norm": "rooms are empty",
      "n": 3,
      "seg": 2,
@@ -5916,12 +7713,17 @@
      "id": "12_C12",
      "file": "chops/12/12_C12.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 17.49,
+     "ce": 18.97,
+     "gr": "B"
     },
     {
      "s": 21.67,
      "e": 22.91,
      "text": "holding our glasses",
+     "i0": 44,
+     "i1": 46,
      "norm": "holding our glasses",
      "n": 3,
      "seg": 2,
@@ -5932,12 +7734,17 @@
      "id": "12_C13",
      "file": "chops/12/12_C13.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 21.7,
+     "ce": 22.91,
+     "gr": "B"
     },
     {
      "s": 24.51,
      "e": 25.73,
      "text": "and known journeys,",
+     "i0": 50,
+     "i1": 52,
      "norm": "and known journeys",
      "n": 3,
      "seg": 3,
@@ -5948,12 +7755,17 @@
      "id": "12_C14",
      "file": "chops/12/12_C14.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 24.446,
+     "ce": 26.361,
+     "gr": "A"
     },
     {
      "s": 26.37,
      "e": 26.87,
      "text": "and grateful",
+     "i0": 53,
+     "i1": 54,
      "norm": "and grateful",
      "n": 2,
      "seg": 3,
@@ -5964,12 +7776,17 @@
      "id": "12_C15",
      "file": "chops/12/12_C15.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 26.28,
+     "ce": 26.865,
+     "gr": "A"
     },
     {
      "s": 30.79,
      "e": 31.59,
      "text": "shared memories.",
+     "i0": 68,
+     "i1": 69,
      "norm": "shared memories",
      "n": 2,
      "seg": 4,
@@ -5980,12 +7797,17 @@
      "id": "12_C16",
      "file": "chops/12/12_C16.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 30.769,
+     "ce": 31.87,
+     "gr": "B"
     },
     {
      "s": 32.72,
      "e": 33.74,
      "text": "This is brotherhood.",
+     "i0": 70,
+     "i1": 72,
      "norm": "this is brotherhood",
      "n": 3,
      "seg": 4,
@@ -5996,12 +7818,17 @@
      "id": "12_C17",
      "file": "chops/12/12_C17.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 32.749,
+     "ce": 34.389,
+     "gr": "A"
     },
     {
      "s": 35.83,
      "e": 36.73,
      "text": "with no reason,",
+     "i0": 74,
+     "i1": 76,
      "norm": "with no reason",
      "n": 3,
      "seg": 4,
@@ -6012,12 +7839,17 @@
      "id": "12_C18",
      "file": "chops/12/12_C18.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 35.905,
+     "ce": 37.424,
+     "gr": "B"
     },
     {
      "s": 37.53,
      "e": 38.43,
      "text": "narrow differences",
+     "i0": 77,
+     "i1": 78,
      "norm": "narrow differences",
      "n": 2,
      "seg": 5,
@@ -6028,12 +7860,17 @@
      "id": "12_C19",
      "file": "chops/12/12_C19.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 37.411,
+     "ce": 38.41,
+     "gr": "B"
     },
     {
      "s": 39.47,
      "e": 40.41,
      "text": "can be overheard.",
+     "i0": 82,
+     "i1": 84,
      "norm": "can be overheard",
      "n": 3,
      "seg": 5,
@@ -6044,12 +7881,17 @@
      "id": "12_C20",
      "file": "chops/12/12_C20.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 39.55,
+     "ce": 41.064,
+     "gr": "B"
     },
     {
      "s": 43.11,
      "e": 43.71,
      "text": "we can place",
+     "i0": 87,
+     "i1": 89,
      "norm": "we can place",
      "n": 3,
      "seg": 5,
@@ -6060,12 +7902,17 @@
      "id": "12_C21",
      "file": "chops/12/12_C21.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 43.04,
+     "ce": 43.735,
+     "gr": "C"
     },
     {
      "s": 47.12,
      "e": 48.02,
      "text": "follow paths",
+     "i0": 98,
+     "i1": 99,
      "norm": "follow paths",
      "n": 2,
      "seg": 6,
@@ -6076,12 +7923,17 @@
      "id": "12_C22",
      "file": "chops/12/12_C22.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 47.17,
+     "ce": 47.965,
+     "gr": "B"
     },
     {
      "s": 49.02,
      "e": 50.94,
      "text": "hilltops and canyons,",
+     "i0": 101,
+     "i1": 103,
      "norm": "hilltops and canyons",
      "n": 3,
      "seg": 6,
@@ -6092,12 +7944,17 @@
      "id": "12_C23",
      "file": "chops/12/12_C23.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 49.0,
+     "ce": 51.529,
+     "gr": "A"
     },
     {
      "s": 51.72,
      "e": 52.66,
      "text": "blinding lights",
+     "i0": 105,
+     "i1": 106,
      "norm": "blinding lights",
      "n": 2,
      "seg": 6,
@@ -6108,12 +7965,17 @@
      "id": "12_C24",
      "file": "chops/12/12_C24.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 51.759,
+     "ce": 52.66,
+     "gr": "C"
     },
     {
      "s": 53.34,
      "e": 54.42,
      "text": "infinite nights,",
+     "i0": 108,
+     "i1": 109,
      "norm": "infinite nights",
      "n": 2,
      "seg": 6,
@@ -6124,12 +7986,17 @@
      "id": "12_C25",
      "file": "chops/12/12_C25.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 53.421,
+     "ce": 54.45,
+     "gr": "B"
     },
     {
      "s": 54.42,
      "e": 55.92,
      "text": "all too familiar",
+     "i0": 110,
+     "i1": 112,
      "norm": "all too familiar",
      "n": 3,
      "seg": 7,
@@ -6140,12 +8007,17 @@
      "id": "12_C26",
      "file": "chops/12/12_C26.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 54.5,
+     "ce": 56.39,
+     "gr": "A"
     },
     {
      "s": 63.36,
      "e": 64.34,
      "text": "home every time.",
+     "i0": 128,
+     "i1": 130,
      "norm": "home every time",
      "n": 3,
      "seg": 8,
@@ -6156,7 +8028,10 @@
      "id": "12_C27",
      "file": "chops/12/12_C27.mp3",
      "track": "12",
-     "title": "Reunion"
+     "title": "Reunion",
+     "cs": 63.415,
+     "ce": 64.795,
+     "gr": "B"
     }
    ]
   },
@@ -6168,6 +8043,8 @@
      "s": 0.0,
      "e": 0.58,
      "text": "I want",
+     "i0": 0,
+     "i1": 1,
      "norm": "i want",
      "n": 2,
      "seg": 0,
@@ -6178,12 +8055,17 @@
      "id": "13_C01",
      "file": "chops/13/13_C01.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 0.0,
+     "ce": 0.611,
+     "gr": "B"
     },
     {
      "s": 2.28,
      "e": 3.0,
      "text": "corner cafe",
+     "i0": 8,
+     "i1": 9,
      "norm": "corner cafe",
      "n": 2,
      "seg": 0,
@@ -6194,12 +8076,17 @@
      "id": "13_C02",
      "file": "chops/13/13_C02.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 2.255,
+     "ce": 3.025,
+     "gr": "C"
     },
     {
      "s": 4.74,
      "e": 6.18,
      "text": "Heavens, wandering",
+     "i0": 15,
+     "i1": 16,
      "norm": "heavens wandering",
      "n": 2,
      "seg": 1,
@@ -6210,12 +8097,17 @@
      "id": "13_C03",
      "file": "chops/13/13_C03.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 4.726,
+     "ce": 6.155,
+     "gr": "B"
     },
     {
      "s": 7.34,
      "e": 8.44,
      "text": "discovering water",
+     "i0": 19,
+     "i1": 20,
      "norm": "discovering water",
      "n": 2,
      "seg": 2,
@@ -6226,12 +8118,17 @@
      "id": "13_C04",
      "file": "chops/13/13_C04.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 7.204,
+     "ce": 8.43,
+     "gr": "B"
     },
     {
      "s": 10.36,
      "e": 11.04,
      "text": "healing the sick",
+     "i0": 24,
+     "i1": 26,
      "norm": "healing the sick",
      "n": 3,
      "seg": 3,
@@ -6242,12 +8139,17 @@
      "id": "13_C05",
      "file": "chops/13/13_C05.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 10.23,
+     "ce": 11.064,
+     "gr": "A"
     },
     {
      "s": 20.0,
      "e": 20.76,
      "text": "really notice",
+     "i0": 49,
+     "i1": 50,
      "norm": "really notice",
      "n": 2,
      "seg": 6,
@@ -6258,12 +8160,17 @@
      "id": "13_C06",
      "file": "chops/13/13_C06.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 20.041,
+     "ce": 20.72,
+     "gr": "C"
     },
     {
      "s": 24.46,
      "e": 25.32,
      "text": "younger selves",
+     "i0": 60,
+     "i1": 61,
      "norm": "younger selves",
      "n": 2,
      "seg": 8,
@@ -6274,12 +8181,17 @@
      "id": "13_C07",
      "file": "chops/13/13_C07.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 24.5,
+     "ce": 25.292,
+     "gr": "C"
     },
     {
      "s": 27.72,
      "e": 28.58,
      "text": "our elders clutch",
+     "i0": 66,
+     "i1": 68,
      "norm": "our elders clutch",
      "n": 3,
      "seg": 9,
@@ -6290,12 +8202,17 @@
      "id": "13_C08",
      "file": "chops/13/13_C08.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 27.795,
+     "ce": 28.5,
+     "gr": "C"
     },
     {
      "s": 29.5,
      "e": 30.6,
      "text": "hold their faith",
+     "i0": 71,
+     "i1": 73,
      "norm": "hold their faith",
      "n": 3,
      "seg": 10,
@@ -6306,12 +8223,17 @@
      "id": "13_C09",
      "file": "chops/13/13_C09.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 29.58,
+     "ce": 30.611,
+     "gr": "A"
     },
     {
      "s": 30.98,
      "e": 31.94,
      "text": "breath closely,",
+     "i0": 75,
+     "i1": 76,
      "norm": "breath closely",
      "n": 2,
      "seg": 10,
@@ -6322,12 +8244,17 @@
      "id": "13_C10",
      "file": "chops/13/13_C10.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 31.04,
+     "ce": 32.53,
+     "gr": "A"
     },
     {
      "s": 32.58,
      "e": 33.64,
      "text": "freeing their worries",
+     "i0": 77,
+     "i1": 79,
      "norm": "freeing their worries",
      "n": 3,
      "seg": 11,
@@ -6338,12 +8265,17 @@
      "id": "13_C11",
      "file": "chops/13/13_C11.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 32.489,
+     "ce": 33.601,
+     "gr": "C"
     },
     {
      "s": 35.97,
      "e": 36.67,
      "text": "journeyed beyond",
+     "i0": 82,
+     "i1": 83,
      "norm": "journeyed beyond",
      "n": 2,
      "seg": 12,
@@ -6354,12 +8286,17 @@
      "id": "13_C12",
      "file": "chops/13/13_C12.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 35.97,
+     "ce": 36.7,
+     "gr": "C"
     },
     {
      "s": 39.31,
      "e": 40.13,
      "text": "So I thought,",
+     "i0": 90,
+     "i1": 92,
      "norm": "so i thought",
      "n": 3,
      "seg": 13,
@@ -6370,12 +8307,17 @@
      "id": "13_C13",
      "file": "chops/13/13_C13.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 39.18,
+     "ce": 40.815,
+     "gr": "A"
     },
     {
      "s": 41.65,
      "e": 42.41,
      "text": "life has burned",
+     "i0": 93,
+     "i1": 95,
      "norm": "life has burned",
      "n": 3,
      "seg": 13,
@@ -6386,12 +8328,17 @@
      "id": "13_C14",
      "file": "chops/13/13_C14.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 41.629,
+     "ce": 42.33,
+     "gr": "C"
     },
     {
      "s": 43.29,
      "e": 44.03,
      "text": "love stories.",
+     "i0": 99,
+     "i1": 100,
      "norm": "love stories",
      "n": 2,
      "seg": 13,
@@ -6402,12 +8349,17 @@
      "id": "13_C15",
      "file": "chops/13/13_C15.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 43.303,
+     "ce": 44.33,
+     "gr": "C"
     },
     {
      "s": 44.65,
      "e": 45.63,
      "text": "ends led",
+     "i0": 102,
+     "i1": 103,
      "norm": "ends led",
      "n": 2,
      "seg": 14,
@@ -6418,12 +8370,17 @@
      "id": "13_C16",
      "file": "chops/13/13_C16.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 44.73,
+     "ce": 45.66,
+     "gr": "B"
     },
     {
      "s": 47.07,
      "e": 47.61,
      "text": "victory -less",
+     "i0": 106,
+     "i1": 107,
      "norm": "victory less",
      "n": 2,
      "seg": 15,
@@ -6434,12 +8391,17 @@
      "id": "13_C17",
      "file": "chops/13/13_C17.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 46.935,
+     "ce": 47.58,
+     "gr": "B"
     },
     {
      "s": 49.39,
      "e": 50.37,
      "text": "just one win.",
+     "i0": 114,
+     "i1": 116,
      "norm": "just one win",
      "n": 3,
      "seg": 15,
@@ -6450,12 +8412,17 @@
      "id": "13_C18",
      "file": "chops/13/13_C18.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 49.464,
+     "ce": 50.878,
+     "gr": "B"
     },
     {
      "s": 54.18,
      "e": 55.4,
      "text": "Ice has frozen",
+     "i0": 121,
+     "i1": 123,
      "norm": "ice has frozen",
      "n": 3,
      "seg": 17,
@@ -6466,12 +8433,17 @@
      "id": "13_C19",
      "file": "chops/13/13_C19.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 54.1,
+     "ce": 55.406,
+     "gr": "C"
     },
     {
      "s": 55.4,
      "e": 56.08,
      "text": "in thought,",
+     "i0": 124,
+     "i1": 125,
      "norm": "in thought",
      "n": 2,
      "seg": 17,
@@ -6482,12 +8454,17 @@
      "id": "13_C20",
      "file": "chops/13/13_C20.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 55.46,
+     "ce": 56.225,
+     "gr": "C"
     },
     {
      "s": 59.66,
      "e": 60.24,
      "text": "I've learned",
+     "i0": 131,
+     "i1": 132,
      "norm": "i've learned",
      "n": 2,
      "seg": 19,
@@ -6498,12 +8475,17 @@
      "id": "13_C21",
      "file": "chops/13/13_C21.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 59.664,
+     "ce": 60.254,
+     "gr": "C"
     },
     {
      "s": 60.44,
      "e": 61.52,
      "text": "love myself more,",
+     "i0": 134,
+     "i1": 136,
      "norm": "love myself more",
      "n": 3,
      "seg": 19,
@@ -6514,12 +8496,17 @@
      "id": "13_C22",
      "file": "chops/13/13_C22.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 60.461,
+     "ce": 62.055,
+     "gr": "B"
     },
     {
      "s": 62.06,
      "e": 62.92,
      "text": "manage loss",
+     "i0": 137,
+     "i1": 138,
      "norm": "manage loss",
      "n": 2,
      "seg": 20,
@@ -6530,12 +8517,17 @@
      "id": "13_C23",
      "file": "chops/13/13_C23.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 61.94,
+     "ce": 62.886,
+     "gr": "B"
     },
     {
      "s": 66.6,
      "e": 67.62,
      "text": "scarlet poppies",
+     "i0": 147,
+     "i1": 148,
      "norm": "scarlet poppies",
      "n": 2,
      "seg": 21,
@@ -6546,12 +8538,17 @@
      "id": "13_C24",
      "file": "chops/13/13_C24.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 66.665,
+     "ce": 67.593,
+     "gr": "A"
     },
     {
      "s": 73.42,
      "e": 74.3,
      "text": "distant window,",
+     "i0": 162,
+     "i1": 163,
      "norm": "distant window",
      "n": 2,
      "seg": 23,
@@ -6562,12 +8559,17 @@
      "id": "13_C25",
      "file": "chops/13/13_C25.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 73.421,
+     "ce": 74.915,
+     "gr": "B"
     },
     {
      "s": 75.0,
      "e": 76.06,
      "text": "beautiful and calm,",
+     "i0": 164,
+     "i1": 166,
      "norm": "beautiful and calm",
      "n": 3,
      "seg": 23,
@@ -6578,12 +8580,17 @@
      "id": "13_C26",
      "file": "chops/13/13_C26.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 74.875,
+     "ce": 76.441,
+     "gr": "A"
     },
     {
      "s": 76.83,
      "e": 77.47,
      "text": "hope tells",
+     "i0": 167,
+     "i1": 168,
      "norm": "hope tells",
      "n": 2,
      "seg": 24,
@@ -6594,12 +8601,17 @@
      "id": "13_C27",
      "file": "chops/13/13_C27.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 76.805,
+     "ce": 77.501,
+     "gr": "B"
     },
     {
      "s": 79.68,
      "e": 80.42,
      "text": "notice me",
+     "i0": 176,
+     "i1": 177,
      "norm": "notice me",
      "n": 2,
      "seg": 25,
@@ -6610,12 +8622,17 @@
      "id": "13_C28",
      "file": "chops/13/13_C28.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 79.67,
+     "ce": 80.448,
+     "gr": "B"
     },
     {
      "s": 82.94,
      "e": 84.0,
      "text": "refocus yours,",
+     "i0": 184,
+     "i1": 185,
      "norm": "refocus yours",
      "n": 2,
      "seg": 26,
@@ -6626,12 +8643,17 @@
      "id": "13_C29",
      "file": "chops/13/13_C29.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 82.95,
+     "ce": 84.63,
+     "gr": "B"
     },
     {
      "s": 85.94,
      "e": 86.94,
      "text": "them say hello,",
+     "i0": 190,
+     "i1": 192,
      "norm": "them say hello",
      "n": 3,
      "seg": 27,
@@ -6642,12 +8664,17 @@
      "id": "13_C30",
      "file": "chops/13/13_C30.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 85.936,
+     "ce": 87.62,
+     "gr": "C"
     },
     {
      "s": 88.8,
      "e": 89.74,
      "text": "of wandering",
+     "i0": 196,
+     "i1": 197,
      "norm": "of wandering",
      "n": 2,
      "seg": 28,
@@ -6658,12 +8685,17 @@
      "id": "13_C31",
      "file": "chops/13/13_C31.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 88.78,
+     "ce": 89.765,
+     "gr": "C"
     },
     {
      "s": 91.76,
      "e": 92.82,
      "text": "windless seasons",
+     "i0": 202,
+     "i1": 203,
      "norm": "windless seasons",
      "n": 2,
      "seg": 29,
@@ -6674,7 +8706,10 @@
      "id": "13_C32",
      "file": "chops/13/13_C32.mp3",
      "track": "13",
-     "title": "How to Win My Heart"
+     "title": "How to Win My Heart",
+     "cs": 91.822,
+     "ce": 92.85,
+     "gr": "C"
     }
    ]
   },
@@ -6686,6 +8721,8 @@
      "s": 0.02,
      "e": 0.68,
      "text": "Don't make",
+     "i0": 0,
+     "i1": 1,
      "norm": "don't make",
      "n": 2,
      "seg": 0,
@@ -6696,12 +8733,17 @@
      "id": "14_C01",
      "file": "chops/14/14_C01.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 0.0,
+     "ce": 0.685,
+     "gr": "B"
     },
     {
      "s": 0.68,
      "e": 1.18,
      "text": "me leave",
+     "i0": 2,
+     "i1": 3,
      "norm": "me leave",
      "n": 2,
      "seg": 0,
@@ -6712,12 +8754,17 @@
      "id": "14_C02",
      "file": "chops/14/14_C02.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 0.685,
+     "ce": 1.201,
+     "gr": "B"
     },
     {
      "s": 1.34,
      "e": 2.22,
      "text": "go where promises,",
+     "i0": 5,
+     "i1": 7,
      "norm": "go where promises",
      "n": 3,
      "seg": 0,
@@ -6728,12 +8775,17 @@
      "id": "14_C03",
      "file": "chops/14/14_C03.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 1.365,
+     "ce": 2.2,
+     "gr": "B"
     },
     {
      "s": 8.08,
      "e": 8.66,
      "text": "I escaped",
+     "i0": 16,
+     "i1": 17,
      "norm": "i escaped",
      "n": 2,
      "seg": 2,
@@ -6744,12 +8796,17 @@
      "id": "14_C04",
      "file": "chops/14/14_C04.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 7.936,
+     "ce": 8.685,
+     "gr": "B"
     },
     {
      "s": 9.06,
      "e": 9.64,
      "text": "a reason,",
+     "i0": 20,
+     "i1": 21,
      "norm": "a reason",
      "n": 2,
      "seg": 2,
@@ -6760,12 +8817,17 @@
      "id": "14_C05",
      "file": "chops/14/14_C05.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 9.031,
+     "ce": 10.296,
+     "gr": "C"
     },
     {
      "s": 10.32,
      "e": 11.04,
      "text": "believing this would",
+     "i0": 22,
+     "i1": 24,
      "norm": "believing this would",
      "n": 3,
      "seg": 3,
@@ -6776,12 +8838,17 @@
      "id": "14_C06",
      "file": "chops/14/14_C06.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 10.266,
+     "ce": 11.04,
+     "gr": "B"
     },
     {
      "s": 11.4,
      "e": 12.22,
      "text": "a sharpened key",
+     "i0": 27,
+     "i1": 29,
      "norm": "a sharpened key",
      "n": 3,
      "seg": 3,
@@ -6792,12 +8859,17 @@
      "id": "14_C07",
      "file": "chops/14/14_C07.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 11.442,
+     "ce": 12.155,
+     "gr": "B"
     },
     {
      "s": 13.58,
      "e": 14.2,
      "text": "a more grounded",
+     "i0": 33,
+     "i1": 35,
      "norm": "a more grounded",
      "n": 3,
      "seg": 4,
@@ -6808,12 +8880,17 @@
      "id": "14_C08",
      "file": "chops/14/14_C08.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 13.635,
+     "ce": 14.225,
+     "gr": "C"
     },
     {
      "s": 16.88,
      "e": 17.76,
      "text": "and queries.",
+     "i0": 42,
+     "i1": 43,
      "norm": "and queries",
      "n": 2,
      "seg": 5,
@@ -6824,12 +8901,17 @@
      "id": "14_C09",
      "file": "chops/14/14_C09.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 16.94,
+     "ce": 18.06,
+     "gr": "C"
     },
     {
      "s": 19.04,
      "e": 19.5,
      "text": "The way",
+     "i0": 44,
+     "i1": 45,
      "norm": "the way",
      "n": 2,
      "seg": 6,
@@ -6840,12 +8922,17 @@
      "id": "14_C10",
      "file": "chops/14/14_C10.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 19.02,
+     "ce": 19.53,
+     "gr": "C"
     },
     {
      "s": 19.66,
      "e": 20.46,
      "text": "see things felt",
+     "i0": 47,
+     "i1": 49,
      "norm": "see things felt",
      "n": 3,
      "seg": 6,
@@ -6856,12 +8943,17 @@
      "id": "14_C11",
      "file": "chops/14/14_C11.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 19.74,
+     "ce": 20.43,
+     "gr": "C"
     },
     {
      "s": 23.26,
      "e": 24.3,
      "text": "Whatever has terminated",
+     "i0": 53,
+     "i1": 55,
      "norm": "whatever has terminated",
      "n": 3,
      "seg": 7,
@@ -6872,12 +8964,17 @@
      "id": "14_C12",
      "file": "chops/14/14_C12.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 23.298,
+     "ce": 24.33,
+     "gr": "C"
     },
     {
      "s": 24.3,
      "e": 25.0,
      "text": "this moment,",
+     "i0": 56,
+     "i1": 57,
      "norm": "this moment",
      "n": 2,
      "seg": 7,
@@ -6888,12 +8985,17 @@
      "id": "14_C13",
      "file": "chops/14/14_C13.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 24.341,
+     "ce": 25.54,
+     "gr": "C"
     },
     {
      "s": 25.72,
      "e": 26.22,
      "text": "damn you,",
+     "i0": 58,
+     "i1": 59,
      "norm": "damn you",
      "n": 2,
      "seg": 7,
@@ -6904,12 +9006,17 @@
      "id": "14_C14",
      "file": "chops/14/14_C14.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 25.595,
+     "ce": 26.708,
+     "gr": "A"
     },
     {
      "s": 27.33,
      "e": 27.91,
      "text": "but let",
+     "i0": 60,
+     "i1": 61,
      "norm": "but let",
      "n": 2,
      "seg": 8,
@@ -6920,12 +9027,17 @@
      "id": "14_C15",
      "file": "chops/14/14_C15.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 27.37,
+     "ce": 27.916,
+     "gr": "B"
     },
     {
      "s": 28.07,
      "e": 28.71,
      "text": "feel love",
+     "i0": 63,
+     "i1": 64,
      "norm": "feel love",
      "n": 2,
      "seg": 8,
@@ -6936,12 +9048,17 @@
      "id": "14_C16",
      "file": "chops/14/14_C16.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 28.07,
+     "ce": 28.739,
+     "gr": "B"
     },
     {
      "s": 30.29,
      "e": 31.09,
      "text": "must endure,",
+     "i0": 69,
+     "i1": 70,
      "norm": "must endure",
      "n": 2,
      "seg": 8,
@@ -6952,12 +9069,17 @@
      "id": "14_C17",
      "file": "chops/14/14_C17.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 30.255,
+     "ce": 31.79,
+     "gr": "B"
     },
     {
      "s": 31.89,
      "e": 32.85,
      "text": "absent artificial",
+     "i0": 71,
+     "i1": 72,
      "norm": "absent artificial",
      "n": 2,
      "seg": 9,
@@ -6968,12 +9090,17 @@
      "id": "14_C18",
      "file": "chops/14/14_C18.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 31.836,
+     "ce": 32.87,
+     "gr": "A"
     },
     {
      "s": 34.11,
      "e": 34.83,
      "text": "machine learning",
+     "i0": 75,
+     "i1": 76,
      "norm": "machine learning",
      "n": 2,
      "seg": 9,
@@ -6984,12 +9111,17 @@
      "id": "14_C19",
      "file": "chops/14/14_C19.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 34.179,
+     "ce": 34.854,
+     "gr": "C"
     },
     {
      "s": 37.23,
      "e": 38.15,
      "text": "resource materials.",
+     "i0": 84,
+     "i1": 85,
      "norm": "resource materials",
      "n": 2,
      "seg": 10,
@@ -7000,12 +9132,17 @@
      "id": "14_C20",
      "file": "chops/14/14_C20.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 37.28,
+     "ce": 38.53,
+     "gr": "A"
     },
     {
      "s": 40.22,
      "e": 41.02,
      "text": "can't leave behind",
+     "i0": 88,
+     "i1": 90,
      "norm": "can't leave behind",
      "n": 3,
      "seg": 11,
@@ -7016,12 +9153,17 @@
      "id": "14_C21",
      "file": "chops/14/14_C21.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 40.255,
+     "ce": 41.047,
+     "gr": "B"
     },
     {
      "s": 42.44,
      "e": 43.16,
      "text": "comes from battle",
+     "i0": 94,
+     "i1": 96,
      "norm": "comes from battle",
      "n": 3,
      "seg": 12,
@@ -7032,12 +9174,17 @@
      "id": "14_C22",
      "file": "chops/14/14_C22.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 42.44,
+     "ce": 43.169,
+     "gr": "B"
     },
     {
      "s": 44.48,
      "e": 45.04,
      "text": "can't leave",
+     "i0": 99,
+     "i1": 100,
      "norm": "can't leave",
      "n": 2,
      "seg": 13,
@@ -7048,12 +9195,17 @@
      "id": "14_C23",
      "file": "chops/14/14_C23.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 44.519,
+     "ce": 45.045,
+     "gr": "B"
     },
     {
      "s": 52.78,
      "e": 53.34,
      "text": "I trust",
+     "i0": 115,
+     "i1": 116,
      "norm": "i trust",
      "n": 2,
      "seg": 15,
@@ -7064,12 +9216,17 @@
      "id": "14_C24",
      "file": "chops/14/14_C24.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 52.849,
+     "ce": 53.26,
+     "gr": "B"
     },
     {
      "s": 53.56,
      "e": 54.18,
      "text": "you'll be fine.",
+     "i0": 118,
+     "i1": 120,
      "norm": "you'll be fine",
      "n": 3,
      "seg": 15,
@@ -7080,12 +9237,17 @@
      "id": "14_C25",
      "file": "chops/14/14_C25.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 53.53,
+     "ce": 54.816,
+     "gr": "B"
     },
     {
      "s": 55.72,
      "e": 56.38,
      "text": "for a reason.",
+     "i0": 124,
+     "i1": 126,
      "norm": "for a reason",
      "n": 3,
      "seg": 16,
@@ -7096,12 +9258,17 @@
      "id": "14_C26",
      "file": "chops/14/14_C26.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 55.79,
+     "ce": 57.039,
+     "gr": "C"
     },
     {
      "s": 57.42,
      "e": 58.1,
      "text": "dance together",
+     "i0": 128,
+     "i1": 129,
      "norm": "dance together",
      "n": 2,
      "seg": 17,
@@ -7112,12 +9279,17 @@
      "id": "14_C27",
      "file": "chops/14/14_C27.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 57.486,
+     "ce": 58.089,
+     "gr": "B"
     },
     {
      "s": 59.0,
      "e": 60.0,
      "text": "to entwine",
+     "i0": 133,
+     "i1": 134,
      "norm": "to entwine",
      "n": 2,
      "seg": 17,
@@ -7128,12 +9300,17 @@
      "id": "14_C28",
      "file": "chops/14/14_C28.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 59.0,
+     "ce": 60.02,
+     "gr": "B"
     },
     {
      "s": 61.32,
      "e": 62.64,
      "text": "immersed in twisted",
+     "i0": 136,
+     "i1": 138,
      "norm": "immersed in twisted",
      "n": 3,
      "seg": 18,
@@ -7144,12 +9321,17 @@
      "id": "14_C29",
      "file": "chops/14/14_C29.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 61.274,
+     "ce": 62.595,
+     "gr": "A"
     },
     {
      "s": 63.78,
      "e": 64.3,
      "text": "hot minute,",
+     "i0": 142,
+     "i1": 143,
      "norm": "hot minute",
      "n": 2,
      "seg": 18,
@@ -7160,12 +9342,17 @@
      "id": "14_C30",
      "file": "chops/14/14_C30.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 63.78,
+     "ce": 64.929,
+     "gr": "C"
     },
     {
      "s": 65.64,
      "e": 66.1,
      "text": "a genesis",
+     "i0": 145,
+     "i1": 146,
      "norm": "a genesis",
      "n": 2,
      "seg": 19,
@@ -7176,12 +9363,17 @@
      "id": "14_C31",
      "file": "chops/14/14_C31.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 65.716,
+     "ce": 66.12,
+     "gr": "C"
     },
     {
      "s": 67.43,
      "e": 68.77,
      "text": "as it ends.",
+     "i0": 151,
+     "i1": 153,
      "norm": "as it ends",
      "n": 3,
      "seg": 19,
@@ -7192,7 +9384,10 @@
      "id": "14_C32",
      "file": "chops/14/14_C32.mp3",
      "track": "14",
-     "title": "Hot Minute"
+     "title": "Hot Minute",
+     "cs": 67.45,
+     "ce": 69.345,
+     "gr": "A"
     }
    ]
   }
