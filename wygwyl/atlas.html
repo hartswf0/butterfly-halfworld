@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WYGWYL ATLAS</title>
+<link rel="icon" href="dot.svg">
+<style>
+:root{--bg:#0a0c0a;--panel:#10140f;--line:#26301f;--ink:#cfe3c8;--dim:#7d8f74;
+  --faint:#4a5a42;--accent:#9ee06a;--gold:#e8c34a;--teal:#4dd9cc;--water:#5ba8f5}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.6 "SF Mono",Menlo,monospace;padding:26px 20px 60px;max-width:760px;margin:0 auto}
+a{color:var(--teal);text-decoration:none}
+a:hover{color:var(--accent)}
+h1{font-size:17px;letter-spacing:.24em;color:var(--accent)}
+#sub{color:var(--dim);font-size:11.5px;margin:8px 0 26px}
+h2{font-size:11px;letter-spacing:.28em;color:var(--gold);margin:26px 0 8px;border-bottom:1px solid var(--line);padding-bottom:5px}
+ul{list-style:none}
+li{padding:4px 0;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+li a{min-width:150px;color:var(--ink)}
+li a:hover{color:var(--accent)}
+li span{color:var(--dim);font-size:11.5px}
+li.data a{color:var(--water);font-size:12.5px;min-width:190px}
+footer{margin-top:34px;color:var(--faint);font-size:10.5px;line-height:1.8}
+</style>
+</head>
+<body>
+<h1>WYGWYL · ATLAS</h1>
+<div id="sub">everything in one place — the films, the voice, the instruments, the data they share ·
+<a href="./">← fourteen halfworlds</a></div>
+
+<h2>WATCH</h2>
+<ul>
+<li><a href="./">FOURTEEN HALFWORLDS</a><span>the films, playing themselves</span></li>
+<li><a href="suite.html">SUITE</a><span>play the whole album</span></li>
+<li><a href="radio.html">RADIO</a><span>pictures scanned into sound — nothing is a recording</span></li>
+<li><a href="sketch-radio.html">SKETCH RADIO</a><span>draw along with the poet</span></li>
+<li><a href="cool-sketch-radio.html">RADIODRAW</a><span>a live, reversible, measurable arrow</span></li>
+</ul>
+
+<h2>THE VOICE</h2>
+<ul>
+<li><a href="sampler.html">SAMPLER</a><span>fourteen readings chopped by line, phrase, word — spectrograms, drag-to-cut</span></li>
+<li><a href="observatory.html">OBSERVATORY</a><span>nine lanes, event score, the poem typeset as glyphs</span></li>
+<li><a href="reconstitute.html">RECONSTITUTE</a><span>type with the poet's 1,048 words; the voice speaks the rearrangement</span></li>
+<li><a href="voicebath.html">VOICEBATH</a><span>one recording, one poem, several listeners — the dig's timings arrive as claims</span></li>
+</ul>
+
+<h2>COMPOSE</h2>
+<ul>
+<li><a href="seal-earsketch.html">ES+ SEAL</a><span>the track workshop, its library the corpus — 916 sounds</span></li>
+<li><a href="pack/">SOUND PACK</a><span>210 mined segments: loops, beds, hits, textures, risers</span></li>
+<li><a href="fresco.html">FRESCO</a><span>the bare score player — one clock, everything else is reference</span></li>
+<li><a href="RADIO-FRESCO-PLAN.md">THE PLAN</a><span>stepping stones to radio-fresco</span></li>
+</ul>
+
+<h2>THE DATA THEY SHARE</h2>
+<ul>
+<li class="data"><a href="samples.json">samples.json</a><span>tracks → lines → phrases, all timed</span></li>
+<li class="data"><a href="cuts.json">cuts.json</a><span>every word recut to energy valleys, graded A/B/C</span></li>
+<li class="data"><a href="chops.json">chops.json</a><span>439 power phrases from the masters</span></li>
+<li class="data"><a href="atlantis-standard.json">atlantis-standard.json</a><span>916 sounds, EarSketch schema</span></li>
+<li class="data"><a href="pack/pack.json">pack/pack.json</a><span>mined segments with feature contours</span></li>
+<li class="data"><a href="lanes/06.json">lanes/NN.json</a><span>per-reading signal lanes + prosody events</span></li>
+<li class="data"><a href="timings/06.json">timings/NN.json</a><span>word-level timestamps, 2,799 words</span></li>
+<li class="data"><a href="scores/unified-drone.fresco.json">scores/*.fresco.json</a><span>fresco-score v0.1 — the shared clock</span></li>
+<li class="data"><a href="descriptions/06.md">descriptions/NN.md</a><span>thick descriptions of the readings</span></li>
+</ul>
+
+<footer>
+the readings are session RY, 2025-06-26 · masters live in ATLANTIS_VOICE_MASTER, this site carries their mp3 twins ·
+every derived file cites its source back into the corpus · analysis must produce affordances, not merely measurements
+</footer>
+</body>
+</html>

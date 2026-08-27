@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<title>VOICEBATH</title>
+<style>
+/* ────────────────────────────────────────────────────────────
+   VOICEBATH — poem · listeners · ledger · bath
+   one MP3, one poem, several listeners, one tall matrix.
+   lineage: moondancer chrome + the claim ledger + tx-160 puppet
+   ──────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+:root{
+  --paper:#f0eee5; --card:#fbfaf4; --ink:#111; --line:#b7b4a8; --dim:#77756a;
+  --amber:#c99700; --teal:#0f9d84; --red:#d23b1e; --blue:#2563d0; --ok:#0f9d84;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;background:var(--paper);color:var(--ink);font-family:'IBM Plex Mono',monospace}
+button,input,select,textarea{font:inherit;color:inherit;background:none}
+button{cursor:pointer}
+.lab{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.hw{border:2px solid var(--ink);background:var(--card);box-shadow:3px 3px 0 var(--ink);
+    padding:6px 10px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.hw:active,.hw.down{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.hw.dark{background:var(--ink);color:var(--card)}
+.hw:disabled{opacity:.4;box-shadow:3px 3px 0 var(--line);border-color:var(--line);cursor:default}
+.sq{width:36px;height:36px;display:grid;place-items:center;padding:0}
+svg{display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.lamp{width:10px;height:10px;border:2px solid var(--ink);background:var(--card);display:inline-block;flex:none}
+.lamp.run{background:var(--amber);animation:bl .5s steps(2) infinite}
+.lamp.ok{background:var(--ok)} .lamp.err{background:var(--red)}
+@keyframes bl{50%{background:var(--card)}}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+#app{height:100dvh;display:grid;grid-template-rows:auto minmax(0,1fr) auto}
+#sys{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:2px solid var(--ink);background:var(--card);flex-wrap:wrap}
+#sys .mark{font-weight:700;font-size:12px;letter-spacing:.18em;white-space:nowrap}
+#sys .mark small{font-weight:400;color:var(--dim);letter-spacing:.1em;font-size:8px;display:block}
+#sys input{border:2px solid var(--ink);background:var(--paper);padding:6px 8px;font-size:10px;outline:0;height:32px}
+#key{width:170px}
+#sysMsg{font-size:9px;color:var(--dim);letter-spacing:.06em;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+label.hw input{display:none}
+
+#deck{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));min-height:0;overflow:hidden}
+.mod{display:grid;grid-template-rows:26px minmax(0,1fr);border-right:2px solid var(--ink);min-width:0;background:var(--paper)}
+.mod:last-child{border-right:0}
+.modHead{display:flex;align-items:center;gap:8px;padding:0 10px;border-bottom:1px solid var(--line);background:var(--card)}
+.modHead b{font-size:10px;letter-spacing:.16em}
+.modHead .sp{flex:1}
+.modBody{position:relative;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:8px;padding:10px}
+
+/* A · POEM */
+#poem{flex:1;min-height:0;border:2px solid var(--ink);background:var(--card);resize:none;outline:0;padding:10px;font-size:13px;line-height:1.5;white-space:pre}
+#tapPad{border:2px solid var(--ink);background:var(--card);height:112px;display:grid;grid-template-rows:1fr auto;padding:8px 10px;user-select:none;touch-action:manipulation;cursor:pointer}
+#tapPad.armed{background:var(--ink);color:var(--card)}
+#tapWord{font-size:26px;font-weight:700;display:grid;place-items:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#tapMeta{display:flex;justify-content:space-between;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+#tapPad.armed #tapMeta{color:#aaa}
+#poemFoot{display:flex;gap:8px;align-items:center}
+#poemFoot .hw{flex:1}
+
+/* B · LISTENERS */
+#listeners{display:grid;grid-auto-rows:44px;border:2px solid var(--ink);background:var(--card)}
+.ls{display:flex;align-items:center;gap:8px;padding:0 10px;border-bottom:1px solid var(--line);text-align:left;width:100%}
+.ls:last-child{border-bottom:0}
+.ls b{font-size:11px;width:60px;flex:none}
+.ls span.d{font-size:9px;color:var(--dim);letter-spacing:.06em;flex:1;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ls .n{font-size:9px;color:var(--dim);flex:none;width:52px;text-align:right}
+.ls .redo{border:1.5px solid var(--ink);width:24px;height:24px;display:grid;place-items:center;background:var(--paper);flex:none}
+.ls.sel{background:var(--ink);color:var(--card)} .ls.sel span.d,.ls.sel .n{color:#bbb}
+#breath{flex:1;min-height:0;border:2px solid var(--ink);background:var(--card);overflow:auto;padding:8px 10px;font-size:10px;line-height:1.6;white-space:pre}
+.mk{display:inline-block;width:8px;height:8px;border:1.5px solid var(--ink);vertical-align:-1px;margin-right:4px}
+.mk.agree{background:var(--ink)} .mk.enj{background:var(--card)} .mk.cae{background:var(--amber)}
+
+/* C · LEDGER */
+#ledTools{display:flex;gap:6px;align-items:center}
+#ledTools select,#ledTools input{border:2px solid var(--ink);background:var(--card);padding:5px 6px;font-size:10px;outline:0;height:30px;text-transform:uppercase;font-weight:700;min-width:0}
+#ledFilter{flex:1}
+#ledger{flex:1;min-height:0;border:2px solid var(--ink);background:var(--card);overflow:auto;font-size:9.5px;line-height:1.5}
+#ledger table{border-collapse:collapse;width:100%}
+#ledger th{position:sticky;top:0;background:var(--ink);color:var(--card);text-align:left;padding:3px 6px;font-size:8px;letter-spacing:.1em}
+#ledger td{padding:2px 6px;border-bottom:1px solid #e4e2d8;white-space:nowrap}
+#ledger tr.w{cursor:pointer} #ledger tr.w:hover td{background:#e9e7dc}
+#ledger tr.sel td{background:var(--ink);color:var(--card)}
+#fp{border:2px solid var(--ink);background:var(--card);padding:8px 10px;font-size:9.5px;line-height:1.55;white-space:pre;height:150px;overflow:auto}
+#fp .kin{cursor:pointer;text-decoration:underline}
+
+/* D · BATH */
+#bathWrap{flex:1;min-height:0;border:2px solid var(--ink);background:var(--card);position:relative}
+#bath{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+#bathHint{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;color:var(--dim);font-size:10px;letter-spacing:.1em;text-align:center;line-height:1.7}
+#rail{height:88px;border:2px solid var(--ink);background:var(--card);display:flex;gap:4px;padding:6px;overflow-x:auto;scrollbar-width:none}
+#rail::-webkit-scrollbar{display:none}
+.crop{flex:0 0 96px;border:2px solid var(--ink);background:var(--paper);padding:4px 6px;font-size:9px;cursor:pointer;position:relative;display:grid;grid-template-rows:auto 1fr auto;text-align:left}
+.crop b{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crop .t{color:var(--dim);font-size:8px}
+.crop .wr{position:absolute;left:0;bottom:0;height:4px;background:var(--red)}
+.crop.on{background:var(--ink);color:var(--card)} .crop.on .t{color:#aaa}
+.crop.prop{border-style:dashed}
+.crop .x{position:absolute;right:2px;top:2px;width:14px;height:14px;font-size:9px;display:grid;place-items:center;border:1.5px solid currentColor}
+#transport{display:flex;gap:8px;align-items:center}
+#zoom{flex:1;-webkit-appearance:none;appearance:none;height:6px;border:2px solid var(--ink);background:var(--card)}
+#zoom::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:20px;background:var(--ink);border:0}
+#wearLab{font-size:8.5px;color:var(--dim);letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+#railNav{display:none;border-top:2px solid var(--ink);background:var(--card)}
+@media (max-width:999px){
+  #deck{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+  #deck::-webkit-scrollbar{display:none}
+  .mod{flex:0 0 100%;scroll-snap-align:start}
+  #railNav{display:grid;grid-template-columns:repeat(4,1fr) 52px}
+  .rbtn{border:0;border-right:2px solid var(--ink);padding:8px 0 10px;display:grid;place-items:center;gap:1px;background:var(--card)}
+  .rbtn:last-child{border-right:0}
+  .rbtn b{font-size:16px} .rbtn .lab{font-size:7px}
+  .rbtn.on{background:var(--ink);color:var(--card)} .rbtn.on .lab{color:#aaa}
+  #sys .mark small{display:none} #key{width:120px}
+}
+#help{position:fixed;inset:0;background:rgba(240,238,229,.96);z-index:40;display:none;place-items:center;padding:18px}
+#help.open{display:grid}
+#help .card{border:2px solid var(--ink);background:var(--card);box-shadow:6px 6px 0 var(--ink);padding:18px;max-width:440px;font-size:11px;line-height:1.8}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:70px;background:var(--ink);color:var(--card);padding:7px 12px;font-size:10px;letter-spacing:.06em;display:none;z-index:50;max-width:88vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#toast.bad{background:var(--red)} #toast.show{display:block}
+@media (prefers-reduced-motion:reduce){.lamp.run{animation:none}}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div id="sys">
+    <div class="mark">VOICEBATH<small>POEM · LISTENERS · LEDGER · BATH</small></div>
+    <label class="hw">LOAD MP3<input id="audioFile" type="file" accept="audio/*"></label>
+    <input id="key" type="password" placeholder="openai key (whisper, optional)" autocomplete="off">
+    <span id="sysLamp" class="lamp"></span>
+    <span id="sysMsg">load a recording, paste its poem, then tap it in</span>
+    <button id="dlBtn" class="hw">JSON</button>
+  </div>
+
+  <div id="deck">
+
+    <section class="mod" id="mPoem">
+      <div class="modHead"><b>A·POEM</b><span class="sp"></span><span class="lab" id="poemState">no text</span></div>
+      <div class="modBody">
+        <textarea id="poem" placeholder="paste the poem — keep its line breaks, they are data" spellcheck="false"></textarea>
+        <div id="tapPad" tabindex="0">
+          <div id="tapWord">—</div>
+          <div id="tapMeta"><span id="tapLeft">TAP · start alignment</span><span id="tapRight">0 / 0</span></div>
+        </div>
+        <div id="poemFoot">
+          <button id="armBtn" class="hw dark">ALIGN BY TAP</button>
+          <button id="whisperBtn" class="hw">WHISPER</button>
+          <button id="resetBtn" class="hw sq" title="clear alignment"><svg width="15" height="15" viewBox="0 0 24 24"><path d="M5 6h14M9 6V4h6v2m-8 0 1 14h8l1-14"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="mod" id="mListen">
+      <div class="modHead"><b>B·LISTENERS</b><span class="sp"></span><span class="lab" id="lsState">idle</span></div>
+      <div class="modBody">
+        <div id="listeners">
+          <button class="ls" data-l="frame"><b>FRAME</b><span class="d">rms · centroid · flatness · spectrogram</span><span class="n" id="n_frame">–</span><span id="l_frame" class="lamp"></span><span class="redo" data-r="frame">↻</span></button>
+          <button class="ls" data-l="pitch"><b>PITCH</b><span class="d">f0 by autocorrelation · confidence</span><span class="n" id="n_pitch">–</span><span id="l_pitch" class="lamp"></span><span class="redo" data-r="pitch">↻</span></button>
+          <button class="ls" data-l="peaks"><b>PEAKS</b><span class="d">F1 F2 from smoothed spectrum</span><span class="n" id="n_peaks">–</span><span id="l_peaks" class="lamp"></span><span class="redo" data-r="peaks">↻</span></button>
+          <button class="ls" data-l="onset"><b>ONSET</b><span class="d">attacks · pauses from energy</span><span class="n" id="n_onset">–</span><span id="l_onset" class="lamp"></span><span class="redo" data-r="onset">↻</span></button>
+          <button class="ls" data-l="novelty"><b>NOVELTY</b><span class="d">how unlike the last second</span><span class="n" id="n_novelty">–</span><span id="l_novelty" class="lamp"></span><span class="redo" data-r="novelty">↻</span></button>
+          <button class="ls" data-l="tap"><b>TAP</b><span class="d">your word boundaries</span><span class="n" id="n_tap">–</span><span id="l_tap" class="lamp"></span><span class="redo" style="visibility:hidden">↻</span></button>
+          <button class="ls" data-l="whisper"><b>WHISPER</b><span class="d">model word boundaries</span><span class="n" id="n_whisper">–</span><span id="l_whisper" class="lamp"></span><span class="redo" data-r="whisper">↻</span></button>
+          <button class="ls" data-l="puppet"><b>PUPPET</b><span class="d">re-utters a crop from the ledger</span><span class="n" id="n_puppet">–</span><span id="l_puppet" class="lamp"></span><span class="redo" style="visibility:hidden">↻</span></button>
+        </div>
+        <div id="breath">BREATH vs LINE
+the poem's line breaks against the lungs.
+needs: a poem with line breaks, ONSET, and a TAP or WHISPER alignment.</div>
+      </div>
+    </section>
+
+    <section class="mod" id="mLedger">
+      <div class="modHead"><b>C·LEDGER</b><span class="sp"></span><span class="lab" id="ledState">0 rows</span></div>
+      <div class="modBody">
+        <div id="ledTools">
+          <select id="ledWho"><option value="">ALL</option><option>tap</option><option>whisper</option><option>onset</option><option>pitch</option><option>peaks</option><option>novelty</option><option>puppet</option><option>breath</option></select>
+          <input id="ledFilter" placeholder="filter value…" autocomplete="off">
+          <button id="kinBtn" class="hw" title="words spoken like the selected word">KIN</button>
+        </div>
+        <div id="ledger"><table><thead><tr><th>WHO</th><th>WHAT</th><th>T0</th><th>T1</th><th>VALUE</th><th>CONF</th></tr></thead><tbody id="ledBody"></tbody></table></div>
+        <div id="fp">select a word row — its fingerprint appears here
+relative to this speaker, not to the world.</div>
+      </div>
+    </section>
+
+    <section class="mod" id="mBath">
+      <div class="modHead"><b>D·BATH</b><span class="sp"></span><span class="lab" id="bathState">empty</span></div>
+      <div class="modBody">
+        <div id="bathWrap"><canvas id="bath"></canvas>
+          <div id="bathHint">THE FIELD<br>rows are listeners · drag to crop · wheel to zoom<br>novelty proposes crops on the rail</div></div>
+        <div id="rail"></div>
+        <div id="transport">
+          <button id="playBtn" class="hw dark sq" title="play crop (original)"><svg width="15" height="15" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></svg></button>
+          <button id="puppetBtn" class="hw sq" title="play crop through the puppet"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M4 12c0-5 3-8 8-8s8 3 8 8-3 8-8 8-8-3-8-8Z"/><path d="M8 14c1.3 1.5 2.7 2 4 2s2.7-.5 4-2"/></svg></button>
+          <button id="stopBtn" class="hw sq" title="stop"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M7 7h10v10H7Z"/></svg></button>
+          <input id="zoom" type="range" min="0" max="100" value="0" title="zoom">
+        </div>
+        <div id="wearLab">wear — the puppet's distance from the poet, per crop</div>
+      </div>
+    </section>
+  </div>
+
+  <div id="railNav">
+    <button class="rbtn on" data-go="0"><b>A</b><span class="lab">POEM</span></button>
+    <button class="rbtn" data-go="1"><b>B</b><span class="lab">LISTEN</span></button>
+    <button class="rbtn" data-go="2"><b>C</b><span class="lab">LEDGER</span></button>
+    <button class="rbtn" data-go="3"><b>D</b><span class="lab">BATH</span></button>
+    <button class="rbtn" id="helpBtn"><b>?</b><span class="lab">HELP</span></button>
+  </div>
+</div>
+
+<div id="help"><div class="card">
+<b>VOICEBATH</b> — one recording, one poem, several listeners, one field.<br><br>
+A·POEM — load the MP3, paste the poem with its line breaks. ALIGN BY TAP plays the recording; tap the pad (or space) on each word. WHISPER asks a model for its own boundaries. Both are kept.<br>
+B·LISTENERS — each listener writes claims into the ledger. ↻ re-runs one. BREATH vs LINE shows where the poet's pauses agree with the page, break mid-line, or run through a line end.<br>
+C·LEDGER — every claim: who heard it, what, when, how sure. Tap a word for its fingerprint. KIN finds words said with the same gesture, meaning ignored.<br>
+D·BATH — the listeners as rows on one clock. Drag to crop. Play the crop as the poet, or through the PUPPET, which re-utters it from the ledger alone. The red bar is wear: how far the puppet fell from the voice.<br><br>
+<span class="lab">tap anywhere to close</span>
+</div></div>
+<div id="toast"></div>
+
+<script>
+"use strict";
+/* ═══ VOICEBATH — the claim ledger, in the browser ═══ */
+const $=q=>document.querySelector(q), $$=q=>[...document.querySelectorAll(q)];
+const N=2048, HOP=512, SPEC_BINS=160;           /* spectrogram keeps bins up to ~SR*160/2048 */
+function toast(m,bad){const t=$("#toast");t.textContent=m;t.className="show"+(bad?" bad":"");
+  clearTimeout(toast.t);toast.t=setTimeout(()=>t.className="",4200);}
+
+/* ── state ───────────────────────────────────────────────────── */
+const S={
+  buf:null, sr:44100, mono:null, dur:0, name:"",
+  frames:0, rms:null, cen:null, flat:null, f0:null, f0c:null, f1:null, f2:null, nov:null, spec:null,
+  onsets:[], pauses:[],
+  words:[], lines:[],           /* poem tokens; word = {i,text,line} */
+  tap:[], whisper:[],           /* word claims: {i,text,t0,t1} */
+  ledger:[],                    /* {who,what,t0,t1,v,c,parent} */
+  crops:[], sel:-1, puppetRender:{}, wear:{},
+  view:{t0:0,t1:0}
+};
+const fmt=t=>t.toFixed(3);
+const hopT=()=>HOP/S.sr;
+const frameAt=t=>Math.max(0,Math.min(S.frames-1,Math.floor(t/hopT())));
+
+/* ── audio in ────────────────────────────────────────────────── */
+let AC=null;
+function audio(){if(AC)return;AC=new (window.AudioContext||window.webkitAudioContext)();}
+$("#audioFile").addEventListener("change",async()=>{
+  const f=$("#audioFile").files[0];if(!f)return;audio();
+  $("#sysLamp").className="lamp run";$("#sysMsg").textContent="decoding "+f.name;
+  try{
+    const ab=await f.arrayBuffer();S.buf=await AC.decodeAudioData(ab);
+    S.sr=S.buf.sampleRate;S.dur=S.buf.duration;S.name=f.name;
+    const ch=S.buf.numberOfChannels, m=new Float32Array(S.buf.length);
+    for(let c=0;c<ch;c++){const d=S.buf.getChannelData(c);for(let i=0;i<m.length;i++)m[i]+=d[i]/ch;}
+    S.mono=m;S.frames=Math.max(1,Math.floor((m.length-N)/HOP));
+    S.view={t0:0,t1:S.dur};
+    $("#sysLamp").className="lamp ok";$("#sysMsg").textContent=(f.name+" · "+S.dur.toFixed(1)+"s · "+S.sr+"Hz").toUpperCase();
+    $("#bathHint").style.display="none";$("#bathState").textContent=S.dur.toFixed(1)+"s";
+    await runListeners(["frame","pitch","peaks","onset","novelty"]);
+    parsePoem();
+  }catch(e){$("#sysLamp").className="lamp err";toast("could not decode — "+String(e.message||e).slice(0,50),true);}
+});
+
+/* ── FFT (radix-2, in place) ─────────────────────────────────── */
+const FFT={re:new Float32Array(N),im:new Float32Array(N),win:new Float32Array(N),rev:new Uint16Array(N),cos:new Float32Array(N/2),sin:new Float32Array(N/2)};
+(function(){const bits=Math.log2(N);for(let i=0;i<N;i++){let r=0;for(let b=0;b<bits;b++)r=(r<<1)|((i>>b)&1);FFT.rev[i]=r;
+  FFT.win[i]=.5-.5*Math.cos(2*Math.PI*i/(N-1));}
+  for(let i=0;i<N/2;i++){FFT.cos[i]=Math.cos(2*Math.PI*i/N);FFT.sin[i]=-Math.sin(2*Math.PI*i/N);}})();
+function fftMag(frameStart,mag){
+  const re=FFT.re,im=FFT.im,src=S.mono;
+  for(let i=0;i<N;i++){re[FFT.rev[i]]=src[frameStart+i]*FFT.win[i];im[FFT.rev[i]]=0;}
+  for(let size=2;size<=N;size<<=1){const half=size>>1,step=N/size;
+    for(let i=0;i<N;i+=size){for(let j=0,k=0;j<half;j++,k+=step){
+      const tr=re[i+j+half]*FFT.cos[k]-im[i+j+half]*FFT.sin[k];
+      const ti=re[i+j+half]*FFT.sin[k]+im[i+j+half]*FFT.cos[k];
+      re[i+j+half]=re[i+j]-tr;im[i+j+half]=im[i+j]-ti;re[i+j]+=tr;im[i+j]+=ti;}}}
+  for(let i=0;i<N/2;i++)mag[i]=Math.hypot(re[i],im[i]);
+}
+
+/* ── listeners ───────────────────────────────────────────────── */
+const LISTEN={
+  frame(){
+    const F=S.frames,mag=new Float32Array(N/2);
+    S.rms=new Float32Array(F);S.cen=new Float32Array(F);S.flat=new Float32Array(F);
+    S.spec=new Uint8Array(F*SPEC_BINS);
+    const binHz=S.sr/N;
+    for(let f=0;f<F;f++){const st=f*HOP;let e=0;
+      for(let i=0;i<N;i++){const v=S.mono[st+i];e+=v*v;}
+      S.rms[f]=Math.sqrt(e/N);
+      fftMag(st,mag);
+      let sum=0,wsum=0,lg=0;const M=N/2;
+      for(let i=1;i<M;i++){sum+=mag[i];wsum+=mag[i]*i*binHz;lg+=Math.log(mag[i]+1e-9);}
+      S.cen[f]=sum>0?wsum/sum:0;
+      S.flat[f]=Math.exp(lg/(M-1))/((sum/(M-1))+1e-9);
+      for(let b=0;b<SPEC_BINS;b++){const db=20*Math.log10(mag[b]+1e-6);
+        S.spec[f*SPEC_BINS+b]=Math.max(0,Math.min(255,Math.round((db+70)*3.6)));}
+    }
+    return F+" frames";
+  },
+  pitch(){
+    const F=S.frames,D=4,L=N/D,ds=new Float32Array(L),sr=S.sr/D;
+    const minLag=Math.floor(sr/400),maxLag=Math.min(L-2,Math.ceil(sr/70));
+    S.f0=new Float32Array(F);S.f0c=new Float32Array(F);
+    for(let f=0;f<F;f++){const st=f*HOP;
+      for(let i=0;i<L;i++){ds[i]=(S.mono[st+i*D]+S.mono[st+i*D+1]+S.mono[st+i*D+2]+S.mono[st+i*D+3])*.25;}
+      let e0=0;for(let i=0;i<L;i++)e0+=ds[i]*ds[i];
+      if(e0<1e-5){S.f0[f]=0;S.f0c[f]=0;continue;}
+      let best=0,bl=0;
+      for(let lag=minLag;lag<=maxLag;lag++){let s=0,e1=0,e2=0;const n=L-lag;
+        for(let i=0;i<n;i++){s+=ds[i]*ds[i+lag];e1+=ds[i]*ds[i];e2+=ds[i+lag]*ds[i+lag];}
+        const r=s/Math.sqrt(e1*e2+1e-12);if(r>best){best=r;bl=lag;}}
+      S.f0[f]=bl?sr/bl:0;S.f0c[f]=Math.max(0,best);
+    }
+    /* median smooth 5 */
+    const o=Float32Array.from(S.f0);
+    for(let f=2;f<F-2;f++){const w=[o[f-2],o[f-1],o[f],o[f+1],o[f+2]].sort((a,b)=>a-b);S.f0[f]=w[2];}
+    const voiced=S.f0c.filter(c=>c>.5).length;
+    return Math.round(100*voiced/F)+"% voiced";
+  },
+  peaks(){
+    const F=S.frames,binHz=S.sr/N;S.f1=new Float32Array(F);S.f2=new Float32Array(F);
+    const lo=Math.floor(200/binHz),hi=Math.ceil(3500/binHz),sm=new Float32Array(SPEC_BINS);
+    for(let f=0;f<F;f++){
+      for(let b=0;b<SPEC_BINS;b++){let s=0,n=0;for(let k=-3;k<=3;k++){const j=b+k;if(j>=0&&j<SPEC_BINS){s+=S.spec[f*SPEC_BINS+j];n++;}}sm[b]=s/n;}
+      const pk=[];
+      for(let b=Math.max(lo,1);b<Math.min(hi,SPEC_BINS-1);b++)if(sm[b]>sm[b-1]&&sm[b]>=sm[b+1]&&sm[b]>60)pk.push({b,v:sm[b]});
+      pk.sort((a,c)=>a.b-c.b);
+      S.f1[f]=pk[0]?pk[0].b*binHz:0;S.f2[f]=pk[1]?pk[1].b*binHz:0;
+    }
+    return "F1/F2 per frame";
+  },
+  onset(){
+    const F=S.frames,db=new Float32Array(F);
+    for(let f=0;f<F;f++)db[f]=20*Math.log10(S.rms[f]+1e-6);
+    let mx=-99;for(let f=0;f<F;f++)mx=Math.max(mx,db[f]);
+    const gate=mx-38;S.onsets=[];S.pauses=[];
+    for(let f=3;f<F;f++){const d=db[f]-db[f-3];
+      if(db[f]>gate&&d>6&&(!S.onsets.length||f-S.onsets[S.onsets.length-1]>6))S.onsets.push(f);}
+    let inP=-1;const minP=Math.round(.12/hopT());
+    for(let f=0;f<=F;f++){const q=f<F&&db[f]<gate;
+      if(q&&inP<0)inP=f;else if(!q&&inP>=0){if(f-inP>=minP)S.pauses.push([inP,f]);inP=-1;}}
+    S.ledger=S.ledger.filter(r=>r.who!=="onset");
+    for(const f of S.onsets)S.ledger.push({who:"onset",what:"attack",t0:f*hopT(),t1:(f+1)*hopT(),v:db[f].toFixed(1)+"dB",c:.6});
+    for(const [a,b] of S.pauses)S.ledger.push({who:"onset",what:"pause",t0:a*hopT(),t1:b*hopT(),v:Math.round((b-a)*hopT()*1000)+"ms",c:.7});
+    return S.onsets.length+" attacks · "+S.pauses.length+" pauses";
+  },
+  novelty(){
+    const F=S.frames;S.nov=new Float32Array(F);const W=Math.round(1/hopT());
+    const vec=f=>[S.rms[f]*20,S.cen[f]/3000,S.flat[f]*3,(S.f0?S.f0[f]:0)/300,(S.f1?S.f1[f]:0)/1000,(S.f2?S.f2[f]:0)/3000];
+    const acc=[0,0,0,0,0,0];let n=0;const q=[];
+    for(let f=0;f<F;f++){const v=vec(f);
+      if(n>W*.4){let d=0;for(let k=0;k<6;k++){const m=acc[k]/n;d+=(v[k]-m)*(v[k]-m);}S.nov[f]=Math.sqrt(d);}
+      q.push(v);for(let k=0;k<6;k++)acc[k]+=v[k];n++;
+      if(q.length>W){const o=q.shift();for(let k=0;k<6;k++)acc[k]-=o[k];n--;}}
+    /* proposals: top local maxima, spaced */
+    S.ledger=S.ledger.filter(r=>r.who!=="novelty");
+    const cand=[];for(let f=W;f<F-W;f++){if(S.nov[f]>S.nov[f-1]&&S.nov[f]>=S.nov[f+1])cand.push(f);}
+    cand.sort((a,b)=>S.nov[b]-S.nov[a]);
+    const picked=[];for(const f of cand){if(picked.every(p=>Math.abs(p-f)>W*2))picked.push(f);if(picked.length>=8)break;}
+    picked.sort((a,b)=>a-b);
+    S.crops=S.crops.filter(c=>!c.prop);
+    for(const f of picked){const t0=Math.max(0,(f-W*.3)*hopT()),t1=Math.min(S.dur,(f+W*.5)*hopT());
+      S.ledger.push({who:"novelty",what:"spike",t0,t1,v:S.nov[f].toFixed(2),c:.5});
+      S.crops.push({name:"?"+t0.toFixed(1),t0,t1,prop:true});}
+    renderRail();
+    return picked.length+" spikes";
+  },
+  async whisper(){
+    const key=$("#key").value.trim();if(!key)throw new Error("needs an OpenAI key");
+    const f=$("#audioFile").files[0];if(!f)throw new Error("no file");
+    const fd=new FormData();fd.append("file",f);fd.append("model","whisper-1");
+    fd.append("response_format","verbose_json");fd.append("timestamp_granularities[]","word");
+    if(S.words.length)fd.append("prompt",S.words.map(w=>w.text).join(" ").slice(0,800));
+    const r=await fetch("https://api.openai.com/v1/audio/transcriptions",{method:"POST",headers:{Authorization:"Bearer "+key},body:fd});
+    const d=await r.json();if(d.error)throw new Error(d.error.message);
+    S.whisper=(d.words||[]).map((w,i)=>({i,text:w.word.trim(),t0:w.start,t1:w.end}));
+    S.ledger=S.ledger.filter(x=>x.who!=="whisper");
+    for(const w of S.whisper)S.ledger.push({who:"whisper",what:"word",t0:w.t0,t1:w.t1,v:w.text,c:.85});
+    return S.whisper.length+" words";
+  }
+};
+function lamp(id,s){$("#l_"+id).className="lamp "+s;}
+async function runListeners(list){
+  for(const id of list){lamp(id,"run");$("#lsState").textContent=id+" listening";await new Promise(r=>setTimeout(r,20));
+    try{const note=await LISTEN[id]();lamp(id,"ok");$("#n_"+id).textContent=String(note).split(" ")[0];
+      $("#lsState").textContent=id+" · "+note;}
+    catch(e){lamp(id,"err");toast(id+" failed — "+String(e.message||e).slice(0,60),true);}
+  }
+  renderLedger();renderBreath();drawBath();
+}
+$$(".redo[data-r]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();
+  if(!S.mono)return toast("load a recording first",true);
+  const id=b.dataset.r;const chain={frame:["frame","peaks","onset","novelty"],pitch:["pitch","novelty"],peaks:["peaks","novelty"],onset:["onset"],novelty:["novelty"],whisper:["whisper"]}[id]||[id];
+  runListeners(chain);}));
+$$(".ls").forEach(b=>b.addEventListener("click",()=>{$("#ledWho").value=b.dataset.l==="frame"?"":b.dataset.l;
+  $$(".ls").forEach(x=>x.classList.toggle("sel",x===b));renderLedger();}));
+$("#whisperBtn").addEventListener("click",()=>{if(!S.mono)return toast("load a recording first",true);runListeners(["whisper"]);});
+
+/* ── poem: tokens, lines ─────────────────────────────────────── */
+function parsePoem(){
+  const txt=$("#poem").value;const lines=txt.split("\n");S.words=[];S.lines=[];
+  lines.forEach((ln,li)=>{const toks=ln.match(/[\p{L}\p{N}'’-]+/gu)||[];const first=S.words.length;
+    for(const t of toks)S.words.push({i:S.words.length,text:t,line:li});
+    S.lines.push({li,first,last:S.words.length-1,text:ln});});
+  $("#poemState").textContent=S.words.length?S.words.length+" words · "+S.lines.filter(l=>l.last>=l.first).length+" lines":"no text";
+  if(!TAP.on)$("#tapRight").textContent=S.tap.length+" / "+S.words.length;
+  renderBreath();
+}
+$("#poem").addEventListener("input",parsePoem);
+
+/* ── tap alignment ───────────────────────────────────────────── */
+const TAP={on:false,src:null,t0:0,idx:0};
+let playSrc=null,playStartT=0,playOff=0,playing=false;
+function stopAll(){if(playSrc){try{playSrc.stop();}catch(e){}playSrc=null;}playing=false;$("#playBtn").classList.remove("down");$("#puppetBtn").classList.remove("down");}
+function playRange(buf,t0,t1){audio();if(AC.state==="suspended")AC.resume();stopAll();
+  const s=AC.createBufferSource();s.buffer=buf;s.connect(AC.destination);
+  const d=Math.max(.02,t1-t0);s.start(0,t0,d);playSrc=s;playStartT=AC.currentTime;playOff=t0;playing=true;
+  s.onended=()=>{if(playSrc===s){playing=false;$("#playBtn").classList.remove("down");$("#puppetBtn").classList.remove("down");}};return s;}
+function armTap(){
+  if(!S.mono)return toast("load a recording first",true);parsePoem();
+  if(!S.words.length)return toast("paste the poem first",true);
+  if(TAP.on)return endTap();
+  S.tap=[];TAP.idx=0;TAP.on=true;$("#tapPad").classList.add("armed");$("#armBtn").textContent="STOP";
+  const s=playRange(S.buf,0,S.dur);TAP.t0=AC.currentTime;s.onended=()=>{if(TAP.on)endTap();};
+  showTap();$("#tapPad").focus();
+}
+function tapNow(){
+  if(!TAP.on)return;const t=AC.currentTime-TAP.t0;const w=S.words[TAP.idx];if(!w)return endTap();
+  S.tap.push({i:w.i,text:w.text,t0:t,t1:t+.2});
+  if(S.tap.length>1)S.tap[S.tap.length-2].t1=t;
+  TAP.idx++;showTap();if(TAP.idx>=S.words.length)endTap();
+}
+function showTap(){const w=S.words[TAP.idx],nx=S.words[TAP.idx+1];
+  $("#tapWord").textContent=w?w.text:"—";$("#tapLeft").textContent=TAP.on?("NEXT · "+(nx?nx.text:"end")):"TAP · start alignment";
+  $("#tapRight").textContent=TAP.idx+" / "+S.words.length;}
+function endTap(){
+  if(!TAP.on)return;TAP.on=false;stopAll();$("#tapPad").classList.remove("armed");$("#armBtn").textContent="ALIGN BY TAP";
+  /* close last word at the next pause or +0.5s */
+  const last=S.tap[S.tap.length-1];if(last){const p=S.pauses.find(([a])=>a*hopT()>last.t0);last.t1=p?Math.min(p[0]*hopT(),last.t0+1.2):Math.min(S.dur,last.t0+.5);}
+  S.ledger=S.ledger.filter(r=>r.who!=="tap");
+  for(const w of S.tap)S.ledger.push({who:"tap",what:"word",t0:w.t0,t1:w.t1,v:w.text,c:1});
+  lamp("tap",S.tap.length?"ok":"");$("#n_tap").textContent=S.tap.length;
+  $("#tapLeft").textContent="TAP · start alignment";$("#tapWord").textContent=S.tap.length?S.tap.length+" words placed":"—";
+  renderLedger();renderBreath();drawBath();
+}
+$("#armBtn").addEventListener("click",armTap);
+$("#tapPad").addEventListener("pointerdown",e=>{e.preventDefault();if(TAP.on)tapNow();else armTap();});
+document.addEventListener("keydown",e=>{if(e.code==="Space"&&TAP.on&&e.target.tagName!=="TEXTAREA"&&e.target.tagName!=="INPUT"){e.preventDefault();tapNow();}});
+$("#resetBtn").addEventListener("click",()=>{endTap();S.tap=[];S.ledger=S.ledger.filter(r=>r.who!=="tap");lamp("tap","");$("#n_tap").textContent="–";$("#tapWord").textContent="—";renderLedger();renderBreath();drawBath();});
+
+/* ── breath vs line ──────────────────────────────────────────── */
+function wordClaims(){return S.tap.length?S.tap:S.whisper.length?alignWhisperToPoem():[];}
+function alignWhisperToPoem(){
+  /* greedy: walk poem words, take the next whisper word whose text matches loosely, else skip */
+  const norm=s=>s.toLowerCase().replace(/[^\p{L}\p{N}]/gu,"");const out=[];let j=0;
+  for(const w of S.words){let k=j;while(k<S.whisper.length&&k<j+3&&norm(S.whisper[k].text)!==norm(w.text))k++;
+    if(k<S.whisper.length&&k<j+3){out.push({i:w.i,text:w.text,t0:S.whisper[k].t0,t1:S.whisper[k].t1});j=k+1;}}
+  return out;
+}
+function renderBreath(){
+  const el=$("#breath");const claims=wordClaims();
+  if(!S.words.length||!claims.length||!S.pauses.length){el.textContent="BREATH vs LINE\nthe poem's line breaks against the lungs.\nneeds: a poem with line breaks, ONSET, and a TAP or WHISPER alignment.";return;}
+  const byI=new Map(claims.map(c=>[c.i,c]));const P=S.pauses.map(([a,b])=>[a*hopT(),b*hopT()]);
+  const pauseNear=t=>P.find(([a,b])=>a<t+.28&&b>t-.05);
+  S.ledger=S.ledger.filter(r=>r.who!=="breath");
+  let html="BREATH vs LINE  <span class='mk agree'></span>agree  <span class='mk enj'></span>run-on  <span class='mk cae'></span>caesura\n\n";
+  let nA=0,nE=0,nC=0;
+  for(const L of S.lines){if(L.last<L.first){html+="\n";continue;}
+    const lw=byI.get(L.last);let mark="";
+    if(lw){const p=pauseNear(lw.t1);
+      if(p){mark="agree";nA++;S.ledger.push({who:"breath",what:"line-end",t0:lw.t1,t1:p[1],v:"agree",c:.7});}
+      else{mark="enj";nE++;S.ledger.push({who:"breath",what:"line-end",t0:lw.t1,t1:lw.t1+.05,v:"run-on",c:.7});}}
+    /* mid-line pauses */
+    let mid="";const fw=byI.get(L.first);
+    if(fw&&lw){for(const [a,b] of P){if(a>fw.t0+.05&&b<lw.t0){mid+="<span class='mk cae'></span>";nC++;
+      S.ledger.push({who:"breath",what:"caesura",t0:a,t1:b,v:Math.round((b-a)*1000)+"ms",c:.6});}}}
+    html+=(mark?"<span class='mk "+mark+"'></span>":"<span class='mk' style='border-color:var(--line)'></span>")+mid+esc(L.text)+"\n";}
+  html+="\n"+nA+" agree · "+nE+" run-on · "+nC+" caesura";
+  el.innerHTML=html;renderLedger();
+}
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+
+/* ── ledger table + fingerprints ─────────────────────────────── */
+let ledSel=null;
+function renderLedger(){
+  const who=$("#ledWho").value,q=$("#ledFilter").value.trim().toLowerCase();
+  const rows=S.ledger.filter(r=>(!who||r.who===who)&&(!q||String(r.v).toLowerCase().includes(q))).sort((a,b)=>a.t0-b.t0).slice(0,1500);
+  $("#ledState").textContent=S.ledger.length+" rows";
+  $("#ledBody").innerHTML=rows.map((r,i)=>"<tr class='"+(r.what==="word"?"w":"")+(ledSel===r?" sel":"")+"' data-k='"+S.ledger.indexOf(r)+"'><td>"+r.who+"</td><td>"+r.what+"</td><td>"+fmt(r.t0)+"</td><td>"+fmt(r.t1)+"</td><td>"+esc(String(r.v))+"</td><td>"+(r.c===undefined?"":r.c.toFixed(2))+"</td></tr>").join("");
+}
+$("#ledWho").addEventListener("change",renderLedger);$("#ledFilter").addEventListener("input",renderLedger);
+$("#ledBody").addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr)return;const r=S.ledger[+tr.dataset.k];
+  ledSel=r;renderLedger();if(r.what==="word")showFingerprint(r);
+  S.view={t0:Math.max(0,r.t0-1),t1:Math.min(S.dur,r.t1+1)};addCrop(r.who+":"+r.v,r.t0,r.t1);});
+function stat(arr,a,b,fn){let s=0,n=0;for(let f=a;f<b;f++){const v=fn(f);if(v!==null){s+=v;n++;}}return n?s/n:0;}
+function fingerprint(r){
+  const a=frameAt(r.t0),b=Math.max(a+1,frameAt(r.t1));const st=x=>x>0?12*Math.log2(x/55):null;
+  const f0s=[];for(let f=a;f<b;f++)if(S.f0c&&S.f0c[f]>.5&&S.f0[f]>0)f0s.push(12*Math.log2(S.f0[f]/55));
+  const half=Math.floor(f0s.length/2);
+  return{dur:r.t1-r.t0,rms:stat(null,a,b,f=>S.rms[f]),cen:stat(null,a,b,f=>S.cen[f]),
+    f0:f0s.length?f0s.reduce((x,y)=>x+y,0)/f0s.length:0,
+    slope:half?(f0s.slice(half).reduce((x,y)=>x+y,0)/(f0s.length-half))-(f0s.slice(0,half).reduce((x,y)=>x+y,0)/half):0,
+    f1:stat(null,a,b,f=>S.f1?S.f1[f]:0),f2:stat(null,a,b,f=>S.f2?S.f2[f]:0),
+    nov:(()=>{let m=0;for(let f=a;f<b;f++)if(S.nov&&S.nov[f]>m)m=S.nov[f];return m;})(),voiced:f0s.length/(b-a)};
+}
+function corpus(){return S.ledger.filter(r=>r.what==="word"&&r.who===(S.tap.length?"tap":"whisper"));}
+function pct(vals,x){const s=[...vals].sort((a,b)=>a-b);let i=0;while(i<s.length&&s[i]<=x)i++;return Math.round(100*i/Math.max(1,s.length));}
+function showFingerprint(r){
+  const fp=fingerprint(r);const C=corpus().map(x=>({r:x,fp:fingerprint(x)}));
+  const P=k=>pct(C.map(c=>c.fp[k]),fp[k])+"th";
+  const shape=fp.slope>1.5?"rise":fp.slope<-1.5?"fall":"level";
+  const med=C.length?[...C.map(c=>c.fp.dur)].sort((a,b)=>a-b)[Math.floor(C.length/2)]:fp.dur;
+  const kin=C.filter(c=>c.r!==r).map(c=>({r:c.r,d:dist(fp,c.fp,C)})).sort((a,b)=>a.d-b.d).slice(0,5);
+  $("#fp").innerHTML="WORD      "+esc(String(r.v))+"   ("+r.who+")\nTIME      "+fmt(r.t0)+" – "+fmt(r.t1)+"   "+Math.round(fp.dur*1000)+"ms · "+(fp.dur/med).toFixed(2)+"× median\n"+
+    "PITCH     "+(fp.f0?(55*Math.pow(2,fp.f0/12)).toFixed(0)+"Hz":"unvoiced")+"   "+P("f0")+" pct · "+shape+" ("+fp.slope.toFixed(1)+" st)\n"+
+    "LOUD      "+P("rms")+" pct\nBRIGHT    "+Math.round(fp.cen)+"Hz   "+P("cen")+" pct\nMOUTH     F1 "+Math.round(fp.f1)+"  F2 "+Math.round(fp.f2)+"\nVOICED    "+Math.round(fp.voiced*100)+"%\nNOVEL     "+P("nov")+" pct\n\nKIN       "+
+    (kin.length?kin.map(k=>"<span class='kin' data-k='"+S.ledger.indexOf(k.r)+"'>"+esc(String(k.r.v))+"</span>").join("  "):"(one word is no corpus)");
+}
+function dist(a,b,C){const ks=["dur","f0","slope","rms","cen","f1","f2"];let d=0;
+  for(const k of ks){const vs=C.map(c=>c.fp[k]);const m=vs.reduce((x,y)=>x+y,0)/vs.length;
+    const sd=Math.sqrt(vs.reduce((x,y)=>x+(y-m)*(y-m),0)/vs.length)||1;d+=Math.pow((a[k]-b[k])/sd,2);}
+  return Math.sqrt(d);}
+$("#fp").addEventListener("click",e=>{const k=e.target.closest(".kin");if(!k)return;const r=S.ledger[+k.dataset.k];ledSel=r;renderLedger();showFingerprint(r);addCrop(r.who+":"+r.v,r.t0,r.t1);});
+$("#kinBtn").addEventListener("click",()=>{if(!ledSel||ledSel.what!=="word")return toast("select a word row first",true);
+  const fp=fingerprint(ledSel);const C=corpus().map(x=>({r:x,fp:fingerprint(x)}));
+  const kin=C.filter(c=>c.r!==ledSel).map(c=>({r:c.r,d:dist(fp,c.fp,C)})).sort((a,b)=>a.d-b.d).slice(0,4);
+  for(const k of kin)addCrop("kin:"+k.r.v,k.r.t0,k.r.t1);toast(kin.length+" kin added to the rail");});
+
+/* ── bath: the field ─────────────────────────────────────────── */
+const bc=$("#bath"),bx=bc.getContext("2d");let bW=0,bH=0;
+function bSize(){const r=bc.parentElement.getBoundingClientRect();const d=Math.min(2,devicePixelRatio||1);
+  bW=r.width;bH=r.height;bc.width=bW*d;bc.height=bH*d;bx.setTransform(d,0,0,d,0,0);drawBath();}
+new ResizeObserver(bSize).observe($("#bathWrap"));
+const ROWS=[["SPEC",4],["F0",1.2],["RMS",.6],["NOVEL",.7],["TAP",.6],["WHISPER",.6],["ONSET",.4],["LINE",.4],["PUPPET",1.2]];
+const LEFT=52;
+const tx=t=>LEFT+(t-S.view.t0)/(S.view.t1-S.view.t0)*(bW-LEFT);
+const xt=x=>S.view.t0+(x-LEFT)/(bW-LEFT)*(S.view.t1-S.view.t0);
+let drag=null,specImg=null,specImgKey="";
+function drawBath(){
+  if(!bW)return;bx.clearRect(0,0,bW,bH);bx.fillStyle="#fbfaf4";bx.fillRect(0,0,bW,bH);
+  if(!S.mono)return;
+  const tot=ROWS.reduce((s,r)=>s+r[1],0);let y=0;const H={};
+  for(const [n,w] of ROWS){const h=w/tot*bH;H[n]=[y,h];y+=h;}
+  const f0v=frameAt(S.view.t0),f1v=frameAt(S.view.t1);
+  /* spectrogram */
+  {const [y0,h]=H.SPEC;const key=f0v+":"+f1v+":"+bW+":"+h;
+    if(key!==specImgKey&&S.spec){const cols=Math.min(bW-LEFT,f1v-f0v);const im=bx.createImageData(Math.max(1,Math.floor(cols)),SPEC_BINS);
+      for(let x=0;x<im.width;x++){const f=f0v+Math.floor(x/im.width*(f1v-f0v));
+        for(let b=0;b<SPEC_BINS;b++){const v=S.spec[f*SPEC_BINS+b];const yy=SPEC_BINS-1-b;const k=(yy*im.width+x)*4;
+          const g=Math.round(250-v*.94);im.data[k]=g;im.data[k+1]=g;im.data[k+2]=Math.round(g*.96);im.data[k+3]=255;}}
+      const oc=document.createElement("canvas");oc.width=im.width;oc.height=SPEC_BINS;oc.getContext("2d").putImageData(im,0,0);specImg=oc;specImgKey=key;}
+    if(specImg){bx.imageSmoothingEnabled=false;bx.drawImage(specImg,LEFT,y0,bW-LEFT,h);}}
+  /* line series */
+  const series=(name,arr,scale,color,conf)=>{const [y0,h]=H[name];bx.strokeStyle=color;bx.lineWidth=1.4;bx.beginPath();let pen=false;
+    for(let x=LEFT;x<bW;x++){const f=frameAt(xt(x));const v=arr[f];const ok=v>0&&(!conf||conf[f]>.5);
+      if(!ok){pen=false;continue;}const yy=y0+h-Math.min(1,v/scale)*(h-4)-2;if(pen)bx.lineTo(x,yy);else{bx.moveTo(x,yy);pen=true;}}
+    bx.stroke();};
+  if(S.f0)series("F0",S.f0,400,"#111",S.f0c);
+  if(S.rms){const [y0,h]=H.RMS;bx.fillStyle="#111";let mx=0;for(let f=0;f<S.frames;f++)mx=Math.max(mx,S.rms[f]);
+    for(let x=LEFT;x<bW;x+=2){const v=S.rms[frameAt(xt(x))]/(mx||1);bx.fillRect(x,y0+h-v*(h-2),1.5,v*(h-2));}}
+  if(S.nov){const [y0,h]=H.NOVEL;bx.fillStyle="#d23b1e";let mx=0;for(let f=0;f<S.frames;f++)mx=Math.max(mx,S.nov[f]);
+    for(let x=LEFT;x<bW;x+=2){const v=S.nov[frameAt(xt(x))]/(mx||1);bx.fillRect(x,y0+h-v*(h-2),1.5,v*(h-2));}}
+  /* word rows */
+  const wordsRow=(name,claims,color)=>{const [y0,h]=H[name];bx.font="9px 'IBM Plex Mono'";bx.textBaseline="middle";
+    for(const w of claims){const x0=tx(w.t0),x1=tx(w.t1);if(x1<LEFT||x0>bW)continue;
+      bx.fillStyle=color;bx.fillRect(x0,y0+3,Math.max(1.5,x1-x0),h-6);
+      if(x1-x0>18){bx.fillStyle="#fbfaf4";bx.fillText(w.text.slice(0,Math.floor((x1-x0)/6)),x0+3,y0+h/2);}}};
+  wordsRow("TAP",S.tap,"#111");wordsRow("WHISPER",S.whisper,"#2563d0");
+  {const [y0,h]=H.ONSET;bx.strokeStyle="#111";for(const f of S.onsets){const x=tx(f*hopT());if(x<LEFT||x>bW)continue;bx.beginPath();bx.moveTo(x,y0+2);bx.lineTo(x,y0+h-2);bx.stroke();}
+    bx.fillStyle="#c99700";for(const [a,b] of S.pauses){const x0=tx(a*hopT()),x1=tx(b*hopT());if(x1<LEFT||x0>bW)continue;bx.fillRect(x0,y0+h/2-2,x1-x0,4);}}
+  {const [y0,h]=H.LINE;for(const r of S.ledger.filter(r=>r.who==="breath")){const x=tx(r.t0);if(x<LEFT||x>bW)continue;
+    bx.fillStyle=r.v==="agree"?"#111":r.what==="caesura"?"#c99700":"#fbfaf4";bx.strokeStyle="#111";
+    bx.beginPath();bx.rect(x-3,y0+h/2-3,6,6);bx.fill();bx.stroke();}}
+  /* puppet row */
+  {const [y0,h]=H.PUPPET;for(const c of S.crops){const pr=S.puppetRender[c.name];if(!pr)continue;const x0=tx(c.t0),x1=tx(c.t1);
+    bx.strokeStyle="#0f9d84";bx.lineWidth=1.4;bx.beginPath();let pen=false;
+    for(let x=Math.max(LEFT,x0);x<Math.min(bW,x1);x++){const k=Math.floor((x-x0)/(x1-x0)*pr.f0.length);const v=pr.f0[k];
+      if(!(v>0)){pen=false;continue;}const yy=y0+h-Math.min(1,v/400)*(h-4)-2;if(pen)bx.lineTo(x,yy);else{bx.moveTo(x,yy);pen=true;}}bx.stroke();}}
+  /* crops */
+  for(const c of S.crops){const x0=tx(c.t0),x1=tx(c.t1);if(x1<LEFT||x0>bW)continue;const on=S.crops[S.sel]===c;
+    bx.fillStyle=on?"rgba(17,17,17,.08)":"rgba(201,151,0,.06)";bx.fillRect(x0,0,x1-x0,bH);
+    bx.strokeStyle=on?"#111":"#c99700";bx.lineWidth=on?2:1;bx.setLineDash(c.prop?[3,3]:[]);bx.strokeRect(x0,1,x1-x0,bH-2);bx.setLineDash([]);}
+  if(drag){bx.fillStyle="rgba(37,99,208,.12)";bx.fillRect(Math.min(drag.x0,drag.x1),0,Math.abs(drag.x1-drag.x0),bH);}
+  /* playhead */
+  if(playing&&AC){const t=playOff+(AC.currentTime-playStartT);const x=tx(t);if(x>=LEFT&&x<=bW){bx.strokeStyle="#d23b1e";bx.lineWidth=1.5;bx.beginPath();bx.moveTo(x,0);bx.lineTo(x,bH);bx.stroke();}}
+  /* labels + gutter */
+  bx.fillStyle="#fbfaf4";bx.fillRect(0,0,LEFT,bH);bx.strokeStyle="#b7b4a8";bx.beginPath();bx.moveTo(LEFT,0);bx.lineTo(LEFT,bH);bx.stroke();
+  bx.font="8px 'IBM Plex Mono'";bx.fillStyle="#77756a";bx.textBaseline="top";
+  for(const [n] of ROWS){const [y0,h]=H[n];bx.fillText(n,6,y0+3);bx.strokeStyle="#e4e2d8";bx.beginPath();bx.moveTo(LEFT,y0+h);bx.lineTo(bW,y0+h);bx.stroke();}
+  bx.fillText(S.view.t0.toFixed(1)+"s",LEFT+4,bH-11);bx.textAlign="right";bx.fillText(S.view.t1.toFixed(1)+"s",bW-4,bH-11);bx.textAlign="left";
+}
+(function tick(){if(playing||drag)drawBath();requestAnimationFrame(tick);})();
+bc.addEventListener("pointerdown",e=>{if(!S.mono)return;const r=bc.getBoundingClientRect();const x=e.clientX-r.left;if(x<LEFT)return;
+  drag={x0:x,x1:x};bc.setPointerCapture(e.pointerId);});
+bc.addEventListener("pointermove",e=>{if(!drag)return;const r=bc.getBoundingClientRect();drag.x1=Math.max(LEFT,Math.min(bW,e.clientX-r.left));});
+bc.addEventListener("pointerup",()=>{if(!drag)return;const a=xt(Math.min(drag.x0,drag.x1)),b=xt(Math.max(drag.x0,drag.x1));drag=null;
+  if(b-a<.03){/* click: select crop under */const k=S.crops.findIndex(c=>c.t0<=a&&c.t1>=a);if(k>=0)selectCrop(k);drawBath();return;}
+  addCrop("crop "+a.toFixed(2),a,b);});
+bc.addEventListener("wheel",e=>{e.preventDefault();if(!S.mono)return;const r=bc.getBoundingClientRect();const t=xt(e.clientX-r.left);
+  const k=e.deltaY>0?1.15:.87;let t0=t-(t-S.view.t0)*k,t1=t+(S.view.t1-t)*k;
+  if(t1-t0>S.dur){t0=0;t1=S.dur;}if(t1-t0<.2){return;}t0=Math.max(0,t0);t1=Math.min(S.dur,t1);S.view={t0,t1};
+  $("#zoom").value=Math.round(100*(1-(t1-t0)/S.dur));drawBath();},{passive:false});
+$("#zoom").addEventListener("input",()=>{if(!S.mono)return;const z=+$("#zoom").value/100;const span=Math.max(.2,S.dur*(1-z));
+  const c=(S.view.t0+S.view.t1)/2;let t0=Math.max(0,c-span/2),t1=Math.min(S.dur,t0+span);t0=Math.max(0,t1-span);S.view={t0,t1};drawBath();});
+
+/* crops + rail */
+function addCrop(name,t0,t1){S.crops=S.crops.filter(c=>!(c.prop&&c.t0<t1&&c.t1>t0));
+  S.crops.push({name,t0,t1});S.sel=S.crops.length-1;renderRail();drawBath();}
+function selectCrop(k){S.sel=k;const c=S.crops[k];if(c&&c.prop){c.prop=false;c.name=c.name.replace("?","spike ");}renderRail();drawBath();}
+function renderRail(){const rail=$("#rail");rail.innerHTML="";
+  S.crops.forEach((c,i)=>{const d=document.createElement("button");d.className="crop"+(i===S.sel?" on":"")+(c.prop?" prop":"");
+    const w=S.wear[c.name];d.innerHTML="<b>"+esc(c.name)+"</b><span class='t'>"+fmt(c.t0)+"\n"+fmt(c.t1)+"</span><span class='t'>"+(w?w.grade:c.prop?"proposed":"")+"</span>"+
+      (w?"<span class='wr' style='width:"+Math.round(w.w*100)+"%'></span>":"")+"<span class='x' title='remove'>×</span>";
+    d.addEventListener("click",e=>{if(e.target.classList.contains("x")){S.crops.splice(i,1);S.sel=Math.min(S.sel,S.crops.length-1);renderRail();drawBath();return;}selectCrop(i);});
+    rail.appendChild(d);});
+  $("#bathState").textContent=S.crops.length?S.crops.length+" crops":S.dur?S.dur.toFixed(1)+"s":"empty";}
+$("#playBtn").addEventListener("click",()=>{const c=S.crops[S.sel];if(!c)return toast("crop something first",true);
+  playRange(S.buf,c.t0,c.t1);$("#playBtn").classList.add("down");});
+$("#stopBtn").addEventListener("click",stopAll);
+
+/* ── puppet: re-utter a crop from the ledger only ────────────── */
+async function renderPuppet(c){
+  const a=frameAt(c.t0),b=Math.max(a+2,frameAt(c.t1));const dur=(b-a)*hopT();const sr=S.sr;
+  const oc=new OfflineAudioContext(1,Math.ceil(dur*sr)+sr*.1,sr);
+  const src=oc.createOscillator();src.type="sawtooth";
+  const noise=oc.createBufferSource();const nb=oc.createBuffer(1,oc.length,sr);const nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;noise.buffer=nb;
+  const vg=oc.createGain(),ng=oc.createGain();src.connect(vg);noise.connect(ng);
+  const F1=oc.createBiquadFilter(),F2=oc.createBiquadFilter();F1.type="bandpass";F2.type="bandpass";F1.Q.value=6;F2.Q.value=8;
+  const mix=oc.createGain();vg.connect(F1);vg.connect(F2);ng.connect(F1);ng.connect(F2);F1.connect(mix);F2.connect(mix);
+  const out=oc.createGain();mix.connect(out);out.connect(oc.destination);
+  let mx=0;for(let f=a;f<b;f++)mx=Math.max(mx,S.rms[f]);
+  let lastF0=120;
+  for(let f=a;f<b;f++){const t=(f-a)*hopT();const voiced=S.f0c&&S.f0c[f]>.5&&S.f0[f]>0;
+    if(voiced)lastF0=S.f0[f];
+    src.frequency.setTargetAtTime(lastF0,t,.01);
+    vg.gain.setTargetAtTime(voiced?1:0,t,.01);ng.gain.setTargetAtTime(voiced?.05:.6,t,.01);
+    F1.frequency.setTargetAtTime(Math.max(150,S.f1?S.f1[f]||500:500),t,.012);
+    F2.frequency.setTargetAtTime(Math.max(600,S.f2?S.f2[f]||1500:1500),t,.012);
+    out.gain.setTargetAtTime((S.rms[f]/(mx||1))*.9,t,.008);}
+  out.gain.setTargetAtTime(0,dur,.02);
+  src.start(0);noise.start(0);src.stop(dur+.1);noise.stop(dur+.1);
+  const buf=await oc.startRendering();
+  /* listen to the puppet with the same ear: f0 by autocorr, rms — then wear */
+  const pd=buf.getChannelData(0);const F=Math.max(1,Math.floor((pd.length-N)/HOP));const pf0=new Float32Array(F),prms=new Float32Array(F);
+  const D=4,L=N/D,ds=new Float32Array(L),dsr=sr/D,minLag=Math.floor(dsr/400),maxLag=Math.min(L-2,Math.ceil(dsr/70));
+  for(let f=0;f<F;f++){const st=f*HOP;let e=0;for(let i=0;i<N;i++)e+=pd[st+i]*pd[st+i];prms[f]=Math.sqrt(e/N);
+    for(let i=0;i<L;i++)ds[i]=(pd[st+i*D]+pd[st+i*D+1]+pd[st+i*D+2]+pd[st+i*D+3])*.25;
+    let best=0,bl=0;for(let lag=minLag;lag<=maxLag;lag+=2){let s=0,e1=0,e2=0;const n=L-lag;for(let i=0;i<n;i+=2){s+=ds[i]*ds[i+lag];e1+=ds[i]*ds[i];e2+=ds[i+lag]*ds[i+lag];}
+      const r=s/Math.sqrt(e1*e2+1e-12);if(r>best){best=r;bl=lag;}}pf0[f]=best>.5&&bl?dsr/bl:0;}
+  let dp=0,dn=0,de=0;let pm=0;for(let f=0;f<F;f++)pm=Math.max(pm,prms[f]);
+  for(let f=0;f<F&&a+f<b;f++){const o=S.f0[a+f],p=pf0[f];if(o>0&&p>0){dp+=Math.abs(12*Math.log2(o/p));dn++;}
+    de+=Math.abs(S.rms[a+f]/(mx||1)-prms[f]/(pm||1));}
+  const pitchErr=dn?dp/dn:6,envErr=de/Math.max(1,Math.min(F,b-a));
+  const w=Math.min(1,(pitchErr/6)*.6+envErr*.8);
+  S.wear[c.name]={w,grade:w<.15?"held":w<.35?"sheen":w<.6?"smear":"tearing",pitchErr:+pitchErr.toFixed(2),envErr:+envErr.toFixed(2)};
+  S.puppetRender[c.name]={buf,f0:pf0};
+  S.ledger=S.ledger.filter(r=>!(r.who==="puppet"&&r.parent===c.name));
+  S.ledger.push({who:"puppet",what:"re-utter",t0:c.t0,t1:c.t1,v:S.wear[c.name].grade+" · "+pitchErr.toFixed(1)+"st",c:1-w,parent:c.name});
+  $("#n_puppet").textContent=Object.keys(S.puppetRender).length;lamp("puppet","ok");
+  return buf;
+}
+$("#puppetBtn").addEventListener("click",async()=>{const c=S.crops[S.sel];if(!c)return toast("crop something first",true);
+  if(!S.f0||!S.f1)return toast("PITCH and PEAKS must have listened",true);
+  lamp("puppet","run");$("#wearLab").textContent="the puppet is reading the ledger…";
+  try{const buf=S.puppetRender[c.name]?S.puppetRender[c.name].buf:await renderPuppet(c);
+    playRange(buf,0,buf.duration);playOff=c.t0;$("#puppetBtn").classList.add("down");
+    const w=S.wear[c.name];$("#wearLab").textContent="WEAR — "+c.name+" · "+w.grade.toUpperCase()+" · pitch off "+w.pitchErr+"st · envelope off "+Math.round(w.envErr*100)+"%";
+    renderRail();renderLedger();drawBath();}
+  catch(e){lamp("puppet","err");toast("puppet failed — "+String(e.message||e).slice(0,60),true);}
+});
+
+/* ── export ──────────────────────────────────────────────────── */
+$("#dlBtn").addEventListener("click",()=>{if(!S.ledger.length)return toast("ledger is empty",true);
+  const out={file:S.name,duration:S.dur,poem:$("#poem").value,ledger:S.ledger,crops:S.crops.map(c=>({name:c.name,t0:c.t0,t1:c.t1,wear:S.wear[c.name]||null}))};
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(out,null,1)],{type:"application/json"}));a.download="voicebath-ledger.json";a.click();});
+
+/* ── mobile rail + help ──────────────────────────────────────── */
+const deck=$("#deck");
+$$(".rbtn[data-go]").forEach(b=>b.addEventListener("click",()=>{deck.scrollTo({left:deck.clientWidth*+b.dataset.go,behavior:"smooth"});}));
+deck.addEventListener("scroll",()=>{const i=Math.round(deck.scrollLeft/Math.max(1,deck.clientWidth));
+  $$(".rbtn[data-go]").forEach(b=>b.classList.toggle("on",+b.dataset.go===i));},{passive:true});
+$("#helpBtn").addEventListener("click",()=>$("#help").classList.add("open"));
+$("#help").addEventListener("click",()=>$("#help").classList.remove("open"));
+</script>
+
+<script>
+/* ═══ ARKADU DOCK — the corpus docks into the bath ═══ */
+(async()=>{
+  let man; try{ man = await (await fetch("samples.json")).json(); }catch(e){ return; }
+  const bar = document.createElement("div");
+  bar.style.cssText = "display:flex;gap:8px;align-items:center;padding:5px 10px;border-bottom:1px solid var(--line,#ccc);flex-wrap:wrap;font-family:inherit";
+  bar.innerHTML = '<b style="font-size:9px;letter-spacing:.22em">ARKADU</b>'
+    + '<select id="digPick" style="font:inherit;font-size:10px;padding:2px 4px">'
+    + man.tracks.map(t=>`<option value="${t.num}">${t.num} · ${t.title}</option>`).join("")
+    + '</select><button id="digLoad" class="hw" style="font-size:9px">LOAD READING</button>'
+    + '<span style="font-size:9px;opacity:.6">mp3 + poem + the dig\u2019s word claims \u00b7 no key needed</span>';
+  const sys = document.getElementById("sys");
+  sys.parentNode.insertBefore(bar, sys.nextSibling);
+  const norm = s=>s.toLowerCase().replace(/[^\p{L}\p{N}]/gu,"");
+  document.getElementById("digLoad").addEventListener("click", async()=>{
+    try{
+      const num = document.getElementById("digPick").value;
+      const tr = man.tracks.find(t=>t.num===num);
+      $("#sysLamp").className="lamp run"; $("#sysMsg").textContent="fetching "+tr.title;
+      audio();
+      const ab = await (await fetch(tr.mp3)).arrayBuffer();
+      S.buf = await AC.decodeAudioData(ab);
+      S.sr=S.buf.sampleRate; S.dur=S.buf.duration; S.name=tr.num+"_"+tr.title;
+      const ch=S.buf.numberOfChannels, m=new Float32Array(S.buf.length);
+      for(let c=0;c<ch;c++){const d=S.buf.getChannelData(c);for(let i=0;i<m.length;i++)m[i]+=d[i]/ch;}
+      S.mono=m; S.frames=Math.max(1,Math.floor((m.length-2048)/512)); S.view={t0:0,t1:S.dur};
+      $("#bathHint").style.display="none"; $("#bathState").textContent=S.dur.toFixed(1)+"s";
+      const timing = await (await fetch("timings/"+num+".json")).json();
+      $("#poem").value = timing.segments.map(s=>s.text).join("\n");
+      await runListeners(["frame","pitch","peaks","onset","novelty"]);
+      parsePoem();
+      /* the dig testifies: word claims from the corpus timings */
+      const flat = timing.segments.flatMap(s=>s.words||[]);
+      const claims=[]; let j=0;
+      for(const w of S.words){ let k=j;
+        while(k<flat.length && k<j+3 && norm(flat[k].w)!==norm(w.text)) k++;
+        if(k<flat.length && k<j+3){ claims.push({i:w.i,text:w.text,t0:flat[k].s,t1:flat[k].e}); j=k+1; } }
+      S.tap=[]; S.whisper=claims;
+      S.ledger=S.ledger.filter(x=>x.who!=="dig"&&x.who!=="whisper");
+      for(const c of claims) S.ledger.push({who:"dig",what:"word",t0:c.t0,t1:c.t1,v:c.text,c:.9});
+      renderBreath(); renderLedger(); drawBath();
+      $("#sysLamp").className="lamp ok";
+      $("#sysMsg").textContent=(tr.num+" \u00b7 "+tr.title+" \u00b7 "+S.dur.toFixed(1)+"s \u00b7 "+claims.length+" dig claims").toUpperCase();
+      toast(claims.length+" word claims from the dig \u2014 tap to contest them");
+    }catch(e){ $("#sysLamp").className="lamp err"; toast("dock failed \u2014 "+String(e.message||e).slice(0,60),true); }
+  });
+})();
+</script>
+</body>
+</html>
