@@ -9,21 +9,23 @@
   --accent:#9ee06a;--gold:#e8c34a;--teal:#4dd9cc;--water:#5ba8f5;--rose:#e05c4f;--viol:#c86bd9}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font:13px/1.5 "SF Mono",Menlo,monospace}
-canvas{position:fixed;inset:0;cursor:crosshair;touch-action:none}
+canvas.layer{position:fixed;inset:0;touch-action:none}
+#cv{cursor:crosshair}
 a{color:var(--teal);text-decoration:none}
-#hud{position:fixed;top:14px;left:14px;z-index:10;max-width:340px}
+#hud{position:fixed;top:14px;left:14px;z-index:10;max-width:330px}
 #hud h1{font-size:15px;letter-spacing:.22em;color:var(--accent)}
 #hud .sub{color:var(--dim);font-size:10.5px;margin-top:4px;line-height:1.6}
 #legend{position:fixed;left:14px;bottom:14px;z-index:10;font-size:10.5px;color:var(--dim);
-  background:#10140fd0;border:1px solid var(--line);border-radius:4px;padding:8px 12px;line-height:1.9}
+  background:#10140fd0;border:1px solid var(--line);border-radius:4px;padding:8px 12px;line-height:1.9;max-width:560px}
 #legend b{font-weight:normal;padding:0 6px;border-radius:2px;color:#0a0c0a}
 #tools{position:fixed;top:14px;right:14px;z-index:10;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
 button{background:#10140fd0;border:1px solid var(--line);color:var(--ink);font:inherit;font-size:11px;
   padding:5px 11px;border-radius:3px;cursor:pointer;letter-spacing:.1em}
 button:hover{border-color:var(--accent)}
 button.on{background:var(--water);color:#0a0c0a;border-color:var(--water)}
+button.rec{background:var(--rose);color:#0a0c0a;border-color:var(--rose)}
 #tip{position:fixed;pointer-events:none;z-index:20;background:#10140ff0;border:1px solid var(--line);
-  border-radius:3px;padding:5px 9px;font-size:11px;display:none;max-width:300px}
+  border-radius:3px;padding:5px 9px;font-size:11px;display:none;max-width:320px}
 #tip b{color:var(--gold);font-weight:normal}
 #tip small{color:var(--faint)}
 #pins{position:fixed;right:14px;bottom:14px;z-index:10;display:flex;flex-direction:column;gap:4px;align-items:flex-end;max-width:300px}
@@ -32,18 +34,24 @@ button.on{background:var(--water);color:#0a0c0a;border-color:var(--water)}
 </style>
 </head>
 <body>
-<canvas id="cv"></canvas>
+<canvas id="topo" class="layer"></canvas>
+<canvas id="paint" class="layer"></canvas>
+<canvas id="cv" class="layer"></canvas>
 <div id="hud">
   <h1>SONIC FIELD</h1>
-  <div class="sub">the library as terrain — <b style="color:var(--ink)">hovering is hearing</b>: sound wraps by distance,
-  the way the ear touches. click pins a sound (loops if it can). the keynote horizon holds the floor under your wandering ·
-  <a href="atlas.html">atlas</a> · <a href="pack/">pack</a></div>
+  <div class="sub">a topography of sound — every sound drawn as its own envelope, a small mountain on the land.
+  <b style="color:var(--ink)">hovering is hearing</b>; the walk can be traced, replayed, exported as a score,
+  and it paints as it goes · <a href="atlas.html">atlas</a> · <a href="pack/">pack</a></div>
 </div>
 <div id="tools">
   <button id="lay-eco" class="on" data-lay="eco">ECOLOGY</button>
   <button id="lay-form" data-lay="form" disabled title="DINO on the spectrograms — how sounds LOOK">FORM</button>
   <button id="lay-sem" data-lay="sem" disabled title="CLAP — what sounds MEAN">MEANING</button>
   <button id="horizon">KEYNOTE HORIZON: OFF</button>
+  <button id="trace">● TRACE</button>
+  <button id="replay" disabled>▶ REPLAY WALK</button>
+  <button id="score" disabled>⬇ WALK AS SCORE</button>
+  <button id="clearpaint">CLEAR PAINT</button>
   <button id="hush">HUSH ALL</button>
 </div>
 <div id="gate" style="position:fixed;inset:0;z-index:50;background:#0a0c0af2;display:flex;
@@ -58,56 +66,115 @@ button.on{background:var(--water);color:#0a0c0a;border-color:var(--water)}
 
 <script>
 const $ = s => document.querySelector(s);
-const COL = {keynote:'#5ba8f5', signal:'#e05c4f', rhythm:'#9ee06a', soundmark:'#e8c34a'};
-let SOUNDS = [], cam = {x:0, y:0, z:300}, mouse = null;
+const COL = {keynote:'#5ba8f5', signal:'#e05c4f', rhythm:'#9ee06a', soundmark:'#e8c34a', song:'#c86bd9'};
+let SOUNDS = [], cam = {x:0, y:0, z:300}, mouse = null, LAYOUT = 'eco';
 let hoverSnd = null, horizonOn = false, horizonSnd = null;
 const players = new Map(), pinned = new Map();
+/* trace / replay */
+let tracing = false, walk = null, replaying = null, ghost = null;
 
 function player(s){
   if (players.has(s.id)) return players.get(s.id);
-  const a = new Audio(s.file);
-  a.preload = 'none'; a.volume = 0;
-  players.set(s.id, a);
-  return a;
+  const a = new Audio(s.file); a.preload = 'none'; a.volume = 0;
+  players.set(s.id, a); return a;
 }
-function setVol(a, v){ a.volume = Math.max(0, Math.min(1, v)); }
-
-function resize(){
-  const cv = $('#cv'), d = Math.min(devicePixelRatio||1, 2);
-  cv.width = innerWidth*d; cv.height = innerHeight*d;
-  cv.getContext('2d').setTransform(d,0,0,d,0,0);
-}
-addEventListener('resize', resize);
-
-let LAYOUT = 'eco';
-const tx = s => LAYOUT === 'form' && s.xf != null ? s.xf : LAYOUT === 'sem' && s.xs != null ? s.xs : s.x;
-const ty = s => LAYOUT === 'form' && s.yf != null ? s.yf : LAYOUT === 'sem' && s.ys != null ? s.ys : s.y;
+const setVol = (a, v) => a.volume = Math.max(0, Math.min(1, v));
+const tx = s => LAYOUT === 'form' ? (s.xf ?? s.x) : LAYOUT === 'sem' ? (s.xs ?? s.x) : s.x;
+const ty = s => LAYOUT === 'form' ? (s.yf ?? s.y) : LAYOUT === 'sem' ? (s.ys ?? s.y) : s.y;
 const sx = s => (s.cx - cam.x) * cam.z + innerWidth/2;
 const sy = s => (s.cy - cam.y) * cam.z + innerHeight/2;
 const rad = s => 3 + Math.log1p(s.dur) * 2.6;
 
-function draw(){
-  const g = $('#cv').getContext('2d');
+function resize(){
+  for (const id of ['topo','paint','cv']){
+    const c = $('#'+id), d = Math.min(devicePixelRatio||1, 2);
+    c.width = innerWidth*d; c.height = innerHeight*d;
+    c.getContext('2d').setTransform(d,0,0,d,0,0);
+  }
+  topoDirty = true;
+}
+addEventListener('resize', resize);
+
+/* ── the land: loudness density as contour bands ── */
+let topoDirty = true, topoT = 0;
+function drawTopo(){
+  const g = $('#topo').getContext('2d');
   g.fillStyle = '#0a0c0a'; g.fillRect(0,0,innerWidth,innerHeight);
-  for (const s of SOUNDS){ s.cx += (tx(s) - s.cx) * 0.14; s.cy += (ty(s) - s.cy) * 0.14; }
+  const off = document.createElement('canvas');
+  const S = 4; off.width = Math.ceil(innerWidth/S); off.height = Math.ceil(innerHeight/S);
+  const og = off.getContext('2d');
+  for (const s of SOUNDS){
+    const x = sx(s)/S, y = sy(s)/S;
+    if (x < -40 || x > off.width+40 || y < -40 || y > off.height+40) continue;
+    const w = ((s.loud ?? -30) + 55) / 40;
+    const r = (16 + rad(s)*3) * Math.min(cam.z/300, 2.4) / S;
+    const gr = og.createRadialGradient(x, y, 0, x, y, r);
+    gr.addColorStop(0, `rgba(255,255,255,${0.16*w})`); gr.addColorStop(1, 'rgba(255,255,255,0)');
+    og.fillStyle = gr; og.beginPath(); og.arc(x, y, r, 0, 7); og.fill();
+  }
+  const img = og.getImageData(0, 0, off.width, off.height);
+  const BANDS = ['#0a0c0a','#0d130f','#101a14','#132118','#17291d','#1b3122'];
+  const out = og.createImageData(off.width, off.height);
+  for (let i = 0; i < img.data.length; i += 4){
+    const v = Math.min(img.data[i+3]/255*2.2, 1);
+    const b = BANDS[Math.min(BANDS.length-1, Math.floor(v*BANDS.length))];
+    out.data[i]   = parseInt(b.slice(1,3),16);
+    out.data[i+1] = parseInt(b.slice(3,5),16);
+    out.data[i+2] = parseInt(b.slice(5,7),16);
+    out.data[i+3] = 255;
+  }
+  og.putImageData(out, 0, 0);
+  g.imageSmoothingEnabled = false;
+  g.drawImage(off, 0, 0, innerWidth, innerHeight);
+}
+
+/* ── the sounds: each drawn as its own envelope, a small mountain ── */
+function drawSquiggle(g, s, x, y){
+  const c = s.c;
+  const w = Math.min(64, 18 + s.dur * 3.4) * Math.min(cam.z/300, 2);
+  const h = (7 + rad(s)) * Math.min(cam.z/300, 2);
+  const hot = (s === hoverSnd || pinned.has(s.id));
+  const col = COL[s.eco];
+  if (!c){ g.beginPath(); g.arc(x, y, rad(s), 0, 7); g.fillStyle = col + (hot?'ff':'aa'); g.fill(); return; }
+  g.beginPath();
+  for (let i = 0; i < c.length; i++){
+    const px = x - w/2 + i/(c.length-1)*w, py = y - c[i]*h;
+    i ? g.lineTo(px, py) : g.moveTo(px, py);
+  }
+  g.strokeStyle = col + (hot ? 'ff' : 'bb');
+  g.lineWidth = hot ? 2 : 1.1 + (s.b || 0.3);
+  g.stroke();
+  g.lineTo(x + w/2, y); g.lineTo(x - w/2, y); g.closePath();
+  g.fillStyle = col + (hot ? '55' : '26'); g.fill();
+  if (s.hook >= 2){ g.strokeStyle = '#4dd9cc88'; g.lineWidth = 1;
+    g.beginPath(); g.arc(x, y - h*0.4, w*0.62, 0, 7); g.stroke(); }
+  if (pinned.has(s.id)){ g.strokeStyle = '#e8c34a'; g.lineWidth = 1.4;
+    g.beginPath(); g.moveTo(x - w/2, y + 3); g.lineTo(x + w/2, y + 3); g.stroke(); }
+}
+
+function draw(ts){
+  let moving = false;
+  for (const s of SOUNDS){
+    const dx = tx(s) - s.cx, dy = ty(s) - s.cy;
+    if (Math.abs(dx) + Math.abs(dy) > 0.0005) moving = true;
+    s.cx += dx * 0.14; s.cy += dy * 0.14;
+  }
+  if (topoDirty || (moving && ts - topoT > 250) ){ drawTopo(); topoT = ts; topoDirty = !!moving; }
+  const g = $('#cv').getContext('2d');
+  g.clearRect(0,0,innerWidth,innerHeight);
   for (const s of SOUNDS){
     const x = sx(s), y = sy(s);
-    if (x < -30 || x > innerWidth+30 || y < -30 || y > innerHeight+30) continue;
-    const r = rad(s);
-    g.beginPath(); g.arc(x, y, r, 0, 7);
-    g.fillStyle = COL[s.eco] + (s === hoverSnd || pinned.has(s.id) ? 'ff' : '99');
-    g.fill();
-    if (s.hook >= 2){ g.strokeStyle = '#4dd9cc'; g.lineWidth = 1.2;
-      g.beginPath(); g.arc(x, y, r + 2.5, 0, 7); g.stroke(); }
-    if (pinned.has(s.id)){ g.strokeStyle = '#e8c34a'; g.lineWidth = 1.5;
-      g.beginPath(); g.arc(x, y, r + 4, 0, 7); g.stroke(); }
-    if (s === horizonSnd && horizonOn){ g.strokeStyle = '#5ba8f5'; g.setLineDash([3,4]);
-      g.beginPath(); g.arc(x, y, r + 7, 0, 7); g.stroke(); g.setLineDash([]); }
+    if (x < -80 || x > innerWidth+80 || y < -60 || y > innerHeight+60) continue;
+    drawSquiggle(g, s, x, y);
   }
+  if (ghost){ g.strokeStyle = '#e05c4f'; g.lineWidth = 1.5;
+    g.beginPath(); g.arc(ghost.x, ghost.y, 14, 0, 7); g.stroke();
+    g.fillStyle = '#e05c4f'; g.fillRect(ghost.x-1, ghost.y-1, 2, 2); }
   requestAnimationFrame(draw);
 }
 
-const TOUCH = 52;   /* px — the reach of the hand */
+/* ── touch = hearing; every trigger can paint and be traced ── */
+const TOUCH = 56;
 function nearest(px, py, filter){
   let best = null, bd = 1e9;
   for (const s of SOUNDS){
@@ -117,33 +184,36 @@ function nearest(px, py, filter){
   }
   return [best, bd];
 }
-
-function updateHover(){
-  if (!mouse) return;
-  const [s, d] = nearest(mouse.x, mouse.y);
+function trigger(s, when){
+  const a = player(s);
+  a.loop = (s.eco === 'rhythm' || s.eco === 'keynote');
+  a.play().catch(()=>{});
+  paintStamp(s);
+  if (tracing) walk.events.push({t: when, id: s.id});
+}
+function updateHover(px, py, when){
+  const [s, d] = nearest(px, py);
   const inReach = s && d < TOUCH + rad(s);
   if (inReach && s !== hoverSnd){
     if (hoverSnd && !pinned.has(hoverSnd.id)) fadeOut(player(hoverSnd));
     hoverSnd = s;
-    const a = player(s);
-    a.loop = (s.eco === 'rhythm' || s.eco === 'keynote');
-    a.play().catch(()=>{});
+    trigger(s, when);
   } else if (!inReach && hoverSnd){
     if (!pinned.has(hoverSnd.id)) fadeOut(player(hoverSnd));
     hoverSnd = null;
   }
   if (hoverSnd){
-    const a = player(hoverSnd);
-    const dd = Math.hypot(sx(hoverSnd) - mouse.x, sy(hoverSnd) - mouse.y);
-    setVol(a, 1 - dd / (TOUCH + rad(hoverSnd)));   /* sound as distant touch */
-    tip(hoverSnd);
+    const dd = Math.hypot(sx(hoverSnd) - px, sy(hoverSnd) - py);
+    setVol(player(hoverSnd), 1 - dd / (TOUCH + rad(hoverSnd)));
+    if (mouse) tip(hoverSnd);
   } else $('#tip').style.display = 'none';
   if (horizonOn){
-    const [k] = nearest(mouse.x, mouse.y, s => s.eco === 'keynote');
+    const [k] = nearest(px, py, x => x.eco === 'keynote');
     if (k && k !== horizonSnd){
       if (horizonSnd && !pinned.has(horizonSnd.id) && horizonSnd !== hoverSnd) fadeOut(player(horizonSnd));
       horizonSnd = k;
       const a = player(k); a.loop = true; a.play().catch(()=>{});
+      if (tracing) walk.events.push({t: when, id: k.id, floor: true});
     }
     if (horizonSnd && horizonSnd !== hoverSnd) setVol(player(horizonSnd), 0.22);
   }
@@ -156,27 +226,81 @@ function tip(s){
   const t = $('#tip');
   t.innerHTML = `<b>${s.label}</b><br><small>${s.eco.toUpperCase()} · ${s.cls} · ${s.dur}s` +
     `${s.bpm ? ' · ' + s.bpm + ' bpm' : ''}${s.key ? ' · ' + s.key : ''}` +
-    `${s.hook >= 2 ? ' · ↺' + s.hook : ''} · ${s.cent} Hz bright</small>` +
+    `${s.hook >= 2 ? ' · ↺' + s.hook : ''}${s.drop ? ' · drop @' + s.drop + 's' : ''}</small>` +
+    (s.note ? `<br><small style="color:var(--gold);font-style:italic">“${s.note}” — the listener</small>` : '') +
+    (s.page ? `<br><small style="color:var(--faint)">alt-click opens its page</small>` : '') +
     (s.phr ? `<br><small style="color:var(--teal)">≈ “${s.phr}”${s.shots ? ' · images: ' + s.shots.join(' ') : ''}</small>` : '');
   t.style.display = 'block';
-  t.style.left = Math.min(mouse.x + 16, innerWidth - 310) + 'px';
+  t.style.left = Math.min(mouse.x + 16, innerWidth - 330) + 'px';
   t.style.top = (mouse.y + 16) + 'px';
 }
 
-function renderPins(){
-  const host = $('#pins'); host.replaceChildren();
-  for (const [id, s] of pinned){
-    const d = document.createElement('div');
-    d.className = 'pin'; d.textContent = '⏺ ' + s.label;
-    d.title = 'unpin';
-    d.onclick = () => { pinned.delete(id); fadeOut(player(s)); renderPins(); };
-    host.appendChild(d);
-  }
+/* ── paint: the walk leaves the sounds' marks on the land ── */
+function paintStamp(s){
+  const g = $('#paint').getContext('2d');
+  g.globalAlpha = 0.5;
+  const x = sx(s), y = sy(s);
+  const save = hoverSnd; /* draw as non-hot */
+  drawSquiggle(g, s, x, y);
+  g.globalAlpha = 1;
+}
+function paintPath(x0, y0, x1, y1){
+  const g = $('#paint').getContext('2d');
+  g.strokeStyle = '#cfe3c81a'; g.lineWidth = 1;
+  g.beginPath(); g.moveTo(x0, y0); g.lineTo(x1, y1); g.stroke();
 }
 
-/* input */
+/* ── trace + replay + score ── */
+function startTrace(){
+  tracing = true; walk = {t0: performance.now(), path: [], events: []};
+  $('#trace').textContent = '■ TRACING…'; $('#trace').classList.add('rec');
+}
+function stopTrace(){
+  tracing = false;
+  $('#trace').textContent = '● TRACE'; $('#trace').classList.remove('rec');
+  if (walk && walk.events.length){ $('#replay').disabled = false; $('#score').disabled = false; }
+}
+function replayWalk(){
+  if (!walk || replaying) return;
+  const t0 = performance.now();
+  replaying = setInterval(() => {
+    const t = performance.now() - t0;
+    while (walk._pi < walk.path.length && walk.path[walk._pi].t <= t){
+      const p = walk.path[walk._pi++];
+      const px = (p.wx - cam.x) * cam.z + innerWidth/2, py = (p.wy - cam.y) * cam.z + innerHeight/2;
+      if (ghost) paintPath(ghost.x, ghost.y, px, py);
+      ghost = {x: px, y: py};
+      updateHover(px, py, t);
+    }
+    if (walk._pi >= walk.path.length){ clearInterval(replaying); replaying = null;
+      setTimeout(() => { ghost = null; if (hoverSnd && !pinned.has(hoverSnd.id)) fadeOut(player(hoverSnd)); hoverSnd = null; }, 900); }
+  }, 40);
+  walk._pi = 0;
+}
+function walkScore(){
+  if (!walk) return;
+  const byId = Object.fromEntries(SOUNDS.map(s => [s.id, s]));
+  const clips = walk.events.filter(e => !e.floor).map(e => {
+    const s = byId[e.id];
+    return {at: +(e.t/1000).toFixed(2), source: s.file, s: 0,
+            e: Math.min(s.dur, 8), gain: 0.9, fadeIn: 0.02, fadeOut: 0.25,
+            label: s.label.slice(0, 24), ref: {kind: 'sound', id: s.id, eco: s.eco}};
+  });
+  const dur = clips.length ? clips[clips.length-1].at + 8 : 1;
+  const score = {fresco: '0.1', title: 'SONIC WALK — ' + new Date().toISOString().slice(0,16),
+    duration: +dur.toFixed(1), base: '',
+    tracks: [{id: 'walk', name: 'THE WALK', gain: 1, clips}],
+    lanes: [{id: 'steps', name: 'steps', type: 'marker',
+             events: walk.events.map(e => ({t: +(e.t/1000).toFixed(2), type: e.floor ? 'FLOOR' : 'STEP', value: e.id}))}],
+    provenance: {generator: 'sonicfield.html', layout: LAYOUT}};
+  const url = URL.createObjectURL(new Blob([JSON.stringify(score, null, 1)], {type: 'application/json'}));
+  const a = document.createElement('a'); a.href = url; a.download = 'sonic-walk.fresco.json'; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+}
+
+/* ── input ── */
 const cv = $('#cv');
-let drag = null;
+let drag = null, lastPt = null;
 cv.addEventListener('pointerdown', e => { drag = {x: e.clientX, y: e.clientY, moved: 0};
   try { cv.setPointerCapture(e.pointerId); } catch(_){} });
 cv.addEventListener('pointermove', e => {
@@ -186,16 +310,25 @@ cv.addEventListener('pointermove', e => {
     drag.moved += Math.abs(dx) + Math.abs(dy);
     cam.x -= dx / cam.z; cam.y -= dy / cam.z;
     drag.x = e.clientX; drag.y = e.clientY;
+    topoDirty = true;
   }
-  updateHover();
+  const when = tracing ? performance.now() - walk.t0 : 0;
+  if (tracing){
+    walk.path.push({t: when, wx: cam.x + (e.clientX - innerWidth/2)/cam.z,
+                    wy: cam.y + (e.clientY - innerHeight/2)/cam.z});
+    if (lastPt) paintPath(lastPt.x, lastPt.y, e.clientX, e.clientY);
+    lastPt = {x: e.clientX, y: e.clientY};
+  }
+  if (!replaying) updateHover(e.clientX, e.clientY, when);
 });
 cv.addEventListener('pointerup', e => {
   if (drag && drag.moved < 6){
     const [s, d] = nearest(e.clientX, e.clientY);
+    if (s && d < TOUCH + rad(s) && e.altKey && s.page){ window.open(s.page, '_blank'); drag = null; return; }
     if (s && d < TOUCH + rad(s)){
       if (pinned.has(s.id)){ pinned.delete(s.id); fadeOut(player(s)); }
       else { pinned.set(s.id, s); const a = player(s);
-        a.loop = (s.eco !== 'signal'); setVol(a, 0.8); a.play().catch(()=>{}); }
+        a.loop = (s.eco !== 'signal'); setVol(a, 0.8); a.play().catch(()=>{}); paintStamp(s); }
       renderPins();
     }
   }
@@ -204,11 +337,22 @@ cv.addEventListener('pointerup', e => {
 cv.addEventListener('wheel', e => {
   e.preventDefault();
   const f = Math.exp(-e.deltaY * 0.0015);
-  const wx = cam.x + (e.clientX - innerWidth/2) / cam.z, wy = cam.y + (e.clientY - innerHeight/2) / cam.z;
+  const wx = cam.x + (e.clientX - innerWidth/2)/cam.z, wy = cam.y + (e.clientY - innerHeight/2)/cam.z;
   cam.z = Math.max(60, Math.min(6000, cam.z * f));
-  cam.x = wx - (e.clientX - innerWidth/2) / cam.z; cam.y = wy - (e.clientY - innerHeight/2) / cam.z;
-  updateHover();
-}, {passive:false});
+  cam.x = wx - (e.clientX - innerWidth/2)/cam.z; cam.y = wy - (e.clientY - innerHeight/2)/cam.z;
+  topoDirty = true;
+  if (!replaying) updateHover(e.clientX, e.clientY, tracing ? performance.now() - walk.t0 : 0);
+}, {passive: false});
+
+function renderPins(){
+  const host = $('#pins'); host.replaceChildren();
+  for (const [id, s] of pinned){
+    const d = document.createElement('div');
+    d.className = 'pin'; d.textContent = '⏺ ' + s.label; d.title = 'unpin';
+    d.onclick = () => { pinned.delete(id); fadeOut(player(s)); renderPins(); };
+    host.appendChild(d);
+  }
+}
 
 $('#horizon').onclick = e => {
   horizonOn = !horizonOn;
@@ -216,17 +360,22 @@ $('#horizon').onclick = e => {
   e.target.classList.toggle('on', horizonOn);
   if (!horizonOn && horizonSnd && !pinned.has(horizonSnd.id)){ fadeOut(player(horizonSnd)); horizonSnd = null; }
 };
+$('#trace').onclick = () => tracing ? stopTrace() : startTrace();
+$('#replay').onclick = replayWalk;
+$('#score').onclick = walkScore;
+$('#clearpaint').onclick = () => { const p = $('#paint');
+  p.getContext('2d').clearRect(0,0,innerWidth,innerHeight); };
 $('#hush').onclick = () => {
   for (const a of players.values()) fadeOut(a);
   pinned.clear(); hoverSnd = null; horizonSnd = null; renderPins();
 };
-
 $('#gate').addEventListener('click', () => { $('#gate').remove();
   try { new (window.AudioContext||window.webkitAudioContext)().resume(); } catch(e) {} });
 document.querySelectorAll('[data-lay]').forEach(b => b.onclick = () => {
-  LAYOUT = b.dataset.lay;
+  LAYOUT = b.dataset.lay; topoDirty = true;
   document.querySelectorAll('[data-lay]').forEach(x => x.classList.toggle('on', x === b));
 });
+
 fetch('sonic/sonic.json', {cache: 'no-cache'}).then(r => r.json()).then(j => {
   SOUNDS = j.sounds;
   for (const s of SOUNDS){ s.cx = s.x; s.cy = s.y; }
@@ -235,12 +384,15 @@ fetch('sonic/sonic.json', {cache: 'no-cache'}).then(r => r.json()).then(j => {
   cam.z = Math.min(innerWidth, innerHeight) * 0.42;
   const c = j.counts;
   $('#legend').innerHTML =
-    `<b style="background:${COL.keynote}">keynote</b> the floor — beds, textures, the drone (${c.keynote||0}) &nbsp;` +
-    `<b style="background:${COL.signal}">signal</b> the event — hits, risers (${c.signal||0}) &nbsp;` +
+    `<b style="background:${COL.keynote}">keynote</b> the floor (${c.keynote||0}) &nbsp;` +
+    `<b style="background:${COL.signal}">signal</b> the event (${c.signal||0}) &nbsp;` +
     `<b style="background:${COL.rhythm}">rhythm</b> loops (${c.rhythm||0}) &nbsp;` +
-    `<b style="background:${COL.soundmark}">soundmark</b> the voice (${c.soundmark||0}) · teal ring = album hook ↺<br>` +
-    `<span style="color:var(--faint)">${j.taxonomy}</span>`;
-  resize(); draw();
+    `<b style="background:${COL.soundmark}">soundmark</b> the voice (${c.soundmark||0}) &nbsp;` +
+    `<b style="background:${COL.song}">song</b> the VOLHOLLA songbook, with the listener's notes (${c.song||0}) · arc = hook ↺ ·
+     each shape is the sound's own envelope · contour bands = loudness of the land<br>` +
+    `<span style="color:var(--faint)">ECOLOGY / FORM (DINO on spectrograms) / MEANING (CLAP) · TRACE records the walk;
+     REPLAY re-performs it; WALK AS SCORE exports it for fresco.html · the walk paints</span>`;
+  resize(); requestAnimationFrame(draw);
 }).catch(e => $('#legend').textContent = 'sonic.json missing — run _dig/sonic_layout.py · ' + e);
 resize();
 </script>
