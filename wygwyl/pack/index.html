@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ATLANTIS SOUND PACK</title>
+<style>
+:root{--bg:#0a0c0a;--panel:#10140f;--line:#26301f;--ink:#cfe3c8;--dim:#7d8f74;
+  --faint:#4a5a42;--accent:#9ee06a;--gold:#e8c34a;--teal:#4dd9cc;--water:#5ba8f5;--rose:#c86bd9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:13px/1.5 "SF Mono",Menlo,monospace;padding:18px;max-width:1150px;margin:0 auto}
+a{color:var(--teal);text-decoration:none}
+h1{font-size:16px;letter-spacing:.22em;color:var(--accent)}
+#sub{color:var(--dim);font-size:11.5px;margin:6px 0 4px}
+#note{color:var(--faint);font-size:10.5px;margin-bottom:16px;line-height:1.7}
+h2{font-size:12px;letter-spacing:.24em;color:var(--gold);margin:20px 0 8px}
+h2 small{color:var(--faint);letter-spacing:.02em;font-weight:normal}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.seg{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:8px;cursor:pointer}
+.seg:hover{border-color:var(--accent)}
+.seg.playing{border-color:var(--gold)}
+.seg img{width:100%;height:52px;object-fit:fill;border-radius:2px;background:#000;display:block}
+.seg .nm{color:var(--ink);font-size:11px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.seg .ft{color:var(--faint);font-size:9.5px;display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
+.seg .src{color:var(--faint);font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.seg .row{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+.seg a{font-size:10px}
+.badge{font-size:9px;color:#0a0c0a;background:var(--dim);border-radius:2px;padding:0 4px}
+.b-LOOP{background:var(--accent)} .b-BED{background:var(--water)} .b-HIT{background:var(--rose)}
+.b-TEXTURE{background:var(--dim)} .b-RISER{background:var(--gold)}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--accent);color:#0a0c0a;
+  padding:5px 14px;border-radius:4px;font-size:11px;display:none;z-index:30}
+</style>
+</head>
+<body>
+<h1>ATLANTIS SOUND PACK</h1>
+<div id="sub">segments mined from the whole corpus — loops that prove their seam, beds that hold still, hits that rise from silence,
+textures, risers — plus the voice shelf · <a href="../sampler.html">sampler ↗</a> · <a href="../reconstitute.html">reconstitute ↗</a> · <a href="../observatory.html">observatory ↗</a></div>
+<div id="note">EarSketch-schema catalog: <a href="../atlantis-standard.json">atlantis-standard.json</a>
+(same record shape as audio-standard_4.json — point an ES+ STATIC base at
+<code>https://hartswf0.github.io/butterfly-halfworld/wygwyl</code> and this whole pack, voice chops and lines included, loads as a sound library) ·
+extended features + contours: <a href="pack.json">pack.json</a> · click to play · ⬇ downloads the cut</div>
+<div id="body">loading pack…</div>
+<div id="toast"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+let audio = null;
+function toast(m){ const t=$('#toast'); t.textContent=m; t.style.display='block';
+  clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',2200); }
+function play(url, el, loop){
+  if (audio){ audio.pause(); document.querySelectorAll('.playing').forEach(e=>e.classList.remove('playing')); }
+  audio = new Audio(url); audio.loop = !!loop;
+  audio.play();
+  el.classList.add('playing');
+  audio.onended = ()=>el.classList.remove('playing');
+}
+const ORDER = ['LOOP','BED','HIT','TEXTURE','RISER'];
+const BLURB = {LOOP:'beat-locked, seam-tested — click plays looped',
+  BED:'sustained harmonic ground, 8 s, loop-friendly',
+  HIT:'one-shots — silence → transient → silence',
+  TEXTURE:'stationary atmospheres and rooms',
+  RISER:'monotonic climbs'};
+fetch('pack.json').then(r=>r.json()).then(p=>{
+  const host = $('#body'); host.innerHTML='';
+  for (const cls of ORDER){
+    const segs = p.segments.filter(s=>s.cls===cls);
+    if (!segs.length) continue;
+    const h = document.createElement('h2');
+    h.innerHTML = `${cls} <small>· ${segs.length} · ${BLURB[cls]}</small>`;
+    host.appendChild(h);
+    const grid = document.createElement('div'); grid.className='grid'; grid.id='';
+    grid.style.cssText='display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px';
+    for (const s of segs){
+      const el = document.createElement('div'); el.className='seg';
+      const dur = (s.e-s.s).toFixed(1);
+      el.innerHTML = `<img loading="lazy" src="../${s.spec}">
+        <div class="nm">${s.name}</div>
+        <div class="ft"><span class="badge b-${s.cls}">${s.cls}</span>
+          <span>${dur}s</span>${s.bpm?`<span>${s.bpm} bpm${s.bars?' · '+s.bars+' bar':''}</span>`:''}
+          ${s.key?`<span>${s.key}</span>`:''}${s.speech?'<span style="color:var(--gold)">voice</span>':''}</div>
+        <div class="src">${s.src}</div>
+        <div class="row"><span style="color:var(--faint);font-size:9px">@${s.s}s</span>
+          <a href="../${s.file}" download onclick="event.stopPropagation()">⬇</a></div>`;
+      el.onclick = ()=>play('../'+s.file, el, s.cls==='LOOP'||s.cls==='BED');
+      grid.appendChild(el);
+    }
+    host.appendChild(grid);
+  }
+  toast(`${p.segments.length} segments across ${Object.keys(p.counts).length} classes`);
+});
+</script>
+</body>
+</html>
