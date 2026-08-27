@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WYGWYL VOICE OBSERVATORY</title>
+<style>
+:root{--bg:#0a0c0a;--panel:#10140f;--line:#26301f;--ink:#cfe3c8;--dim:#7d8f74;
+  --faint:#4a5a42;--accent:#9ee06a;--gold:#e8c34a;--teal:#4dd9cc;--water:#5ba8f5;--rose:#c86bd9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:13px/1.5 "SF Mono",Menlo,monospace;padding:18px;max-width:1200px;margin:0 auto}
+a{color:var(--teal);text-decoration:none}
+h1{font-size:16px;letter-spacing:.22em;color:var(--accent)}
+#sub{color:var(--dim);font-size:11.5px;margin:6px 0 14px}
+#picker{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+#picker button{background:var(--panel);border:1px solid var(--line);color:var(--ink);font:inherit;
+  font-size:11px;padding:4px 10px;border-radius:3px;cursor:pointer}
+#picker button:hover{border-color:var(--accent)}
+#picker button.on{background:var(--accent);color:#0a0c0a}
+#stage{display:none}
+#thead{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin-bottom:10px}
+#ttitle{font-size:15px;color:var(--gold)}
+#tmeta{color:var(--faint);font-size:11px}
+#thead button{background:#161b14;border:1px solid var(--line);color:var(--ink);font:inherit;font-size:11px;padding:3px 10px;border-radius:3px;cursor:pointer}
+#thead button:hover{border-color:var(--accent)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:5px;margin-bottom:14px;overflow:hidden}
+.ptitle{padding:7px 12px;color:var(--dim);font-size:10.5px;letter-spacing:.18em;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center}
+.ptitle small{color:var(--faint);letter-spacing:0}
+#lanes{display:block;width:100%;cursor:crosshair}
+#row2{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+#scorewrap{flex:1;min-width:300px}
+#score{max-height:340px;overflow-y:auto;padding:8px 12px;font-size:11px}
+#score div{cursor:pointer;padding:1px 0;color:var(--dim)}
+#score div:hover{color:var(--accent)}
+#score b{color:var(--gold);font-weight:normal}
+#score .ev-ACCENT b{color:var(--accent)} #score .ev-BREATH b{color:var(--water)}
+#score .ev-PLOSIVE b{color:var(--rose)} #score .ev-PITCH_HIGH b{color:var(--teal)}
+#orbitwrap{width:280px}
+#orbit{display:block;background:#0c100b}
+#glyphs{padding:14px 16px;line-height:1}
+.gline{margin-bottom:14px;display:flex;flex-wrap:wrap;align-items:flex-end;gap:2px}
+.gw{display:inline-flex;flex-direction:column;align-items:center;cursor:pointer;border-radius:3px;padding:1px}
+.gw:hover{background:#161b14}
+.gw.playing{background:#26301f}
+.gw small{color:var(--faint);font-size:8.5px;margin-top:1px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gw.nolabel small{display:none}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--accent);color:#0a0c0a;
+  padding:5px 14px;border-radius:4px;font-size:11px;display:none;z-index:30}
+</style>
+</head>
+<body>
+<h1>WYGWYL · VOICE OBSERVATORY</h1>
+<div id="sub">one voice, nine lanes — body, pulse, breath, resonance, timbre, speech, rhythm, phrase, meaning —
+and every word typeset as the shape of its own sound · <a href="sampler.html">sampler ↗</a> · <a href="./">fourteen halfworlds ↗</a><br>
+<span style="color:var(--faint)">click any lane to hear that moment · click a glyph to hear its word · alt-click a glyph to COPY ITS SHAPE (pitch + energy contour as JSON, a morphism source) · events are speaker-relative percentiles with hysteresis, not universal thresholds</span></div>
+<div id="picker"></div>
+<div id="stage">
+  <div id="thead">
+    <span id="ttitle"></span><span id="tmeta"></span>
+    <button id="play">▶ play</button><button id="stop">■ stop</button>
+    <button id="labels" class="on">labels</button>
+    <a id="halfw" href="#" style="display:none">halfworld ↗</a>
+  </div>
+  <div class="panel"><div class="ptitle">LANES <small>01 body · 02 pulse (f0, semitones about the speaker's median) · 03 breath · 04 resonance (F1 gold / F2 teal) · 05 timbre · 06 speech · 07 rhythm · 08 phrase (stress)</small></div>
+    <canvas id="lanes"></canvas></div>
+  <div id="row2">
+    <div class="panel" id="scorewrap"><div class="ptitle">EVENT SCORE <small>machine-readable choreography</small></div><div id="score"></div></div>
+    <div class="panel" id="orbitwrap"><div class="ptitle">VOWEL ORBIT <small>x=F2 y=F1</small></div><canvas id="orbit" width="280" height="240"></canvas></div>
+  </div>
+  <div class="panel"><div class="ptitle">09 MEANING — THE POEM AS GLYPHS <small>spine = pitch · thickness = loudness · color = brightness · fray = breathiness · tick = attack</small></div>
+    <div id="glyphs"></div></div>
+</div>
+<div id="toast"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const mmss = t => `${String(Math.floor(t/60)).padStart(2,'0')}:${(t%60).toFixed(2).padStart(5,'0')}`;
+let MAN = null, LANES = {}, cur = null, AC = null, buffers = {}, srcNode = null, playT0 = 0, playFrom = 0, raf = null;
+
+function toast(m){ const t=$('#toast'); t.textContent=m; t.style.display='block';
+  clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',2600); }
+
+async function buffer(tr) {
+  if (buffers[tr.num]) return buffers[tr.num];
+  if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)();
+  const raw = await (await fetch(tr.mp3)).arrayBuffer();
+  buffers[tr.num] = await AC.decodeAudioData(raw);
+  return buffers[tr.num];
+}
+function stopAll(){ if(srcNode){try{srcNode.stop()}catch(e){} srcNode=null;}
+  cancelAnimationFrame(raf); drawPlayhead(null);
+  document.querySelectorAll('.playing').forEach(e=>e.classList.remove('playing')); }
+async function play(s, e, el){
+  stopAll();
+  if (!AC) AC = new (window.AudioContext||window.webkitAudioContext)();
+  if (AC.state==='suspended') await AC.resume();
+  const buf = await buffer(cur.tr);
+  srcNode = AC.createBufferSource(); srcNode.buffer = buf; srcNode.connect(AC.destination);
+  const dur = Math.max(0.05, (e ?? buf.duration) - s);
+  srcNode.start(0, s, dur);
+  playT0 = AC.currentTime; playFrom = s;
+  if (el){ el.classList.add('playing'); srcNode.onended = ()=>el.classList.remove('playing'); }
+  tick();
+}
+function tick(){
+  if (!srcNode) return;
+  drawPlayhead(playFrom + (AC.currentTime - playT0));
+  raf = requestAnimationFrame(tick);
+}
+
+/* ------------- lane drawing ------------- */
+const LN = [
+  {key:'body', h:56}, {key:'pulse', h:78}, {key:'breath', h:40}, {key:'reson', h:64},
+  {key:'timbre', h:44}, {key:'speech', h:34}, {key:'rhythm', h:44}, {key:'phrase', h:44}];
+let laneGeom = [];
+
+function drawLanes() {
+  const L = cur.lanes, W = Math.min(1160, innerWidth - 60), dpr = devicePixelRatio || 1;
+  const cv = $('#lanes');
+  const totH = LN.reduce((a,l)=>a+l.h,0) + LN.length*6;
+  cv.width = W*dpr; cv.height = totH*dpr; cv.style.height = totH+'px';
+  const g = cv.getContext('2d'); g.scale(dpr,dpr);
+  g.clearRect(0,0,W,totH);
+  const n = L.lanes.rms.length, X = i => i/n*W, dur = cur.lanes.duration;
+  laneGeom = []; let y = 0;
+  const grid = (yy,h)=>{ g.fillStyle='#0d110c'; g.fillRect(0,yy,W,h); g.strokeStyle='#1a2117';
+    g.strokeRect(0,yy,W,h); };
+  for (const ln of LN) {
+    grid(y, ln.h);
+    laneGeom.push({y, h:ln.h, key:ln.key});
+    const mid = y + ln.h/2;
+    if (ln.key==='body'){
+      g.fillStyle='#9ee06a55';
+      g.beginPath(); g.moveTo(0,mid);
+      for(let i=0;i<n;i++) g.lineTo(X(i), mid - L.lanes.rms[i]*ln.h*0.48);
+      for(let i=n-1;i>=0;i--) g.lineTo(X(i), mid + L.lanes.rms[i]*ln.h*0.48);
+      g.fill();
+    }
+    if (ln.key==='pulse'){
+      for (const ev of cur.lanes.events) if (ev.type==='PITCH_HIGH'){
+        g.fillStyle='#4dd9cc1a'; g.fillRect(ev.t/dur*W, y, Math.max(2,(ev.dur||0)/dur*W), ln.h); }
+      const med = cur.lanes.f0_median;
+      for(let i=0;i<n;i++){ const f=L.lanes.f0[i]; if(!f) continue;
+        const stv = 12*Math.log2(f/med);
+        const yy = mid - stv*(ln.h/26);
+        g.fillStyle = `rgba(158,224,106,${0.15+0.85*L.lanes.voi[i]})`;
+        g.fillRect(X(i), yy, 1.6, 1.6); }
+      g.strokeStyle='#26301f'; g.beginPath(); g.moveTo(0,mid); g.lineTo(W,mid); g.stroke();
+    }
+    if (ln.key==='breath'){
+      const fl = L.lanes.flat, mx = Math.max(...fl)+1e-6;
+      g.fillStyle='#5ba8f544'; g.beginPath(); g.moveTo(0,y+ln.h);
+      for(let i=0;i<n;i++) g.lineTo(X(i), y+ln.h - fl[i]/mx*ln.h*0.9);
+      g.lineTo(W,y+ln.h); g.fill();
+      g.fillStyle='#5ba8f5';
+      for (const ev of cur.lanes.events) if (ev.type==='BREATH') g.fillText('˰', ev.t/dur*W, y+12);
+    }
+    if (ln.key==='reson'){
+      for(let i=0;i<n;i++){
+        const y1=L.lanes.f1[i], y2=L.lanes.f2[i];
+        if(y1){ g.fillStyle='#e8c34aaa'; g.fillRect(X(i), y+ln.h-(y1/3800)*ln.h, 1.6,1.6); }
+        if(y2){ g.fillStyle='#4dd9cc88'; g.fillRect(X(i), y+ln.h-(y2/3800)*ln.h, 1.6,1.6); } }
+    }
+    if (ln.key==='timbre'){
+      g.strokeStyle='#c86bd9'; g.beginPath();
+      for(let i=0;i<n;i++){ const c=L.lanes.cent[i];
+        const yy = y+ln.h - Math.min((c-300)/3200,1)*ln.h*0.9;
+        i?g.lineTo(X(i),yy):g.moveTo(X(i),yy); }
+      g.stroke();
+    }
+    if (ln.key==='speech'){
+      cur.lanes.words.forEach((w,k)=>{
+        g.fillStyle = w.stress>1.2 ? '#9ee06a66' : (k%2?'#26301f88':'#1a211788');
+        g.fillRect(w.s/dur*W, y+4, Math.max(1,(w.e-w.s)/dur*W-1), ln.h-8); });
+    }
+    if (ln.key==='rhythm'){
+      const fx=L.lanes.flux;
+      g.fillStyle='#cfe3c855';
+      for(let i=0;i<n;i++){ const v=Math.max(0,fx[i]); g.fillRect(X(i), y+ln.h-(v/6)*ln.h, 1.2, (v/6)*ln.h); }
+      g.fillStyle='#c86bd9';
+      for (const ev of cur.lanes.events) if (ev.type==='PLOSIVE') g.fillRect(ev.t/dur*W, y, 1.5, ln.h);
+      g.fillStyle='#0a0c0a88';
+      for (const ev of cur.lanes.events) if (ev.type==='PAUSE'||ev.type==='PHRASE_END')
+        g.fillRect(ev.t/dur*W, y, (ev.dur||0.1)/dur*W, ln.h);
+    }
+    if (ln.key==='phrase'){
+      cur.lanes.words.forEach(w=>{
+        const v = Math.max(-2,Math.min(2.5,w.stress));
+        g.fillStyle = v>1.2?'#9ee06a':'#7d8f7466';
+        const hh = (v+2)/4.5*ln.h;
+        g.fillRect(w.s/dur*W, y+ln.h-hh, Math.max(1,(w.e-w.s)/dur*W-1), hh); });
+    }
+    y += ln.h + 6;
+  }
+  cv.onclick = e => {
+    const r = cv.getBoundingClientRect();
+    play((e.clientX - r.left)/r.width*dur, null);
+  };
+}
+let phX = null;
+function drawPlayhead(t){
+  const cv = $('#lanes'), r = cv.getBoundingClientRect();
+  let ov = $('#ph');
+  if (!ov){ ov = document.createElement('div'); ov.id='ph';
+    ov.style.cssText='position:absolute;width:1px;background:#e8c34a;pointer-events:none;z-index:5';
+    document.body.appendChild(ov); }
+  if (t==null){ ov.style.display='none'; return; }
+  ov.style.display='block';
+  ov.style.left = (r.left + scrollX + t/cur.lanes.duration*r.width)+'px';
+  ov.style.top = (r.top + scrollY)+'px'; ov.style.height = r.height+'px';
+}
+
+function drawOrbit(){
+  const g = $('#orbit').getContext('2d'), W=280, H=240;
+  g.clearRect(0,0,W,H); g.fillStyle='#0c100b'; g.fillRect(0,0,W,H);
+  const L = cur.lanes.lanes, n = L.f1.length;
+  for(let i=0;i<n;i++){
+    const f1=L.f1[i], f2=L.f2[i];
+    if(!f1||!f2||f2<600||f2>2600||f1<250||f1>950) continue;
+    const x = W - (f2-600)/2000*W, y = (f1-250)/700*H;
+    g.fillStyle = `hsla(${90+170*i/n},70%,60%,.35)`;
+    g.fillRect(x,y,2,2);
+  }
+  g.fillStyle='#4a5a42'; g.font='9px monospace';
+  g.fillText('i', 8, 14); g.fillText('a', W/2, H-8); g.fillText('u', W-14, 14);
+}
+
+function renderScore(){
+  const el = $('#score'); el.innerHTML = '';
+  for (const ev of cur.lanes.events){
+    const d = document.createElement('div');
+    d.className = 'ev-'+ev.type;
+    d.innerHTML = `${mmss(ev.t)}  <b>${ev.type}</b>${ev.dur?' '+ev.dur.toFixed(2)+'s':''}${ev.word?'  “'+ev.word+'”':''}`;
+    d.onclick = () => play(Math.max(0,ev.t-0.2), ev.t+(ev.dur||1)+0.6);
+    el.appendChild(d);
+  }
+}
+
+/* ------------- glyph typesetting ------------- */
+function glyph(w){
+  const dur = w.e - w.s;
+  const gw = Math.max(26, Math.min(170, dur*115)), gh = 46;
+  const cvs = document.createElement('canvas');
+  const dpr = devicePixelRatio||1;
+  cvs.width = gw*dpr; cvs.height = gh*dpr; cvs.style.width=gw+'px'; cvs.style.height=gh+'px';
+  const g = cvs.getContext('2d'); g.scale(dpr,dpr);
+  const mid = gh/2;
+  const hue = 200 - Math.max(-2,Math.min(2,w.cent_z))*38;   // cold blue -> warm gold
+  const fray = Math.max(0, 0.6 - w.voi) * 22 + Math.min(w.zcr*40, 8);
+  let seed = 0; for (const ch of w.w) seed = (seed*31 + ch.charCodeAt(0))|0;
+  const rnd = () => { seed = (seed*1103515245+12345)|0; return ((seed>>>16)&1023)/1023 - 0.5; };
+  const pts = w.f0c.map((v,i)=>{
+    const x = 3 + i/(w.f0c.length-1)*(gw-6);
+    const y = mid - (v==null?0:Math.max(-9,Math.min(9,v)))*2.0;
+    return [x, y + rnd()*fray*0.4];
+  });
+  for (let i=0;i<pts.length-1;i++){
+    const th = 1 + w.env[i]*9;
+    g.strokeStyle = `hsla(${hue},72%,62%,${0.35+0.6*w.voi})`;
+    g.lineWidth = th; g.lineCap='round';
+    g.beginPath(); g.moveTo(pts[i][0],pts[i][1]); g.lineTo(pts[i+1][0],pts[i+1][1]); g.stroke();
+    if (w.voi < 0.5){
+      g.strokeStyle = `hsla(${hue},60%,70%,.25)`; g.lineWidth = 0.7;
+      for (let k=0;k<2;k++){
+        g.beginPath();
+        g.moveTo(pts[i][0], pts[i][1]+rnd()*fray);
+        g.lineTo(pts[i+1][0], pts[i+1][1]+rnd()*fray);
+        g.stroke(); }
+    }
+  }
+  if (w.atk_z > 1.4){ g.strokeStyle='#e8c34a'; g.lineWidth=1.4;
+    g.beginPath(); g.moveTo(3, mid-14); g.lineTo(3, mid+14); g.stroke(); }
+  return cvs;
+}
+function renderGlyphs(){
+  const host = $('#glyphs'); host.innerHTML = '';
+  const byLine = {};
+  for (const w of cur.lanes.words) (byLine[w.line] = byLine[w.line]||[]).push(w);
+  for (const li of Object.keys(byLine)){
+    const row = document.createElement('div'); row.className = 'gline';
+    for (const w of byLine[li]){
+      const cell = document.createElement('span');
+      cell.className = 'gw' + (showLabels?'':' nolabel');
+      cell.appendChild(glyph(w));
+      const lab = document.createElement('small'); lab.textContent = w.w; cell.appendChild(lab);
+      cell.title = `“${w.w}” ${mmss(w.s)}–${mmss(w.e)} · voi ${w.voi} · stress ${w.stress} · alt-click copies shape`;
+      cell.onclick = ev => {
+        if (ev.altKey){
+          navigator.clipboard.writeText(JSON.stringify({word:w.w, dur:+(w.e-w.s).toFixed(3),
+            pitch_semitones:w.f0c, energy:w.env, voicing:w.voi, brightness_z:w.cent_z, stress:w.stress}));
+          toast(`shape of “${w.w}” copied — bend it onto anything`);
+        } else play(w.s, w.e, cell);
+      };
+      row.appendChild(cell);
+    }
+    host.appendChild(row);
+  }
+}
+let showLabels = true;
+
+/* ------------- boot ------------- */
+async function open(num){
+  stopAll();
+  document.querySelectorAll('#picker button').forEach(b=>b.classList.toggle('on', b.dataset.n===num));
+  const tr = MAN.tracks.find(t=>t.num===num);
+  if (!LANES[num]) LANES[num] = await (await fetch(`lanes/${num}.json`)).json();
+  cur = {tr, lanes: LANES[num]};
+  cur.lanes.duration = cur.lanes.duration || tr.dur;
+  $('#stage').style.display = 'block';
+  $('#ttitle').textContent = `${tr.num} · ${tr.title}`;
+  $('#tmeta').textContent = `${mmss(tr.dur)} · f0 ~${cur.lanes.f0_median} Hz · ${cur.lanes.words.length} word bodies · ${cur.lanes.events.length} events`;
+  const hw = $('#halfw');
+  if (tr.halfworld){ hw.href = tr.halfworld; hw.style.display='inline'; } else hw.style.display='none';
+  drawLanes(); drawOrbit(); renderScore(); renderGlyphs();
+}
+$('#play').onclick = () => play(0, null);
+$('#stop').onclick = stopAll;
+$('#labels').onclick = e => { showLabels = !showLabels; e.target.classList.toggle('on', showLabels);
+  document.querySelectorAll('.gw').forEach(g=>g.classList.toggle('nolabel', !showLabels)); };
+addEventListener('resize', () => cur && drawLanes());
+
+fetch('samples.json').then(r=>r.json()).then(man=>{
+  MAN = man;
+  const p = $('#picker');
+  for (const t of man.tracks){
+    const b = document.createElement('button');
+    b.dataset.n = t.num; b.textContent = `${t.num} ${t.title}`;
+    b.onclick = () => open(t.num);
+    p.appendChild(b);
+  }
+  open(man.tracks[0].num);
+});
+</script>
+</body>
+</html>
