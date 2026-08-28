@@ -50,7 +50,20 @@ GAP = 0.010             # minimum COSINE gap between first and second place
 # gap between first and second place, which cannot be inflated; the softmax
 # probability is kept alongside it for reference only.
 
-AXES = {
+# TWO TAXONOMIES, CHOSEN BY THE MATERIAL.
+#
+# The first version applied one sample vocabulary to everything, and on finished
+# tracks it answered PLUCK 11 times out of 24 and POP 13 out of 24. That is not
+# the model failing; it is being asked the wrong question. "Is this a snare hit
+# or a pad chord" has no good answer for a three-minute song, so it returns
+# whatever is least wrong, every time.
+#
+# A short file is a SAMPLE and the useful question is what role it would play in
+# a beat. A long file is a TRACK and the useful question is what leads it, what
+# it feels like, and how it was made. Duration decides, and which vocabulary was
+# used is recorded on the label so nobody has to guess later.
+
+SAMPLE_AXES = {
  'type': [
    ('MAINBEAT',  'a full drum beat loop'),
    ('KICK',      'a kick drum hit, deep and short'),
@@ -100,6 +113,55 @@ AXES = {
  ],
 }
 
+TRACK_AXES = {
+ 'type': [   # what LEADS the arrangement, not what one hit is
+   ('VOCAL',    'a song with a lead singer carrying the melody'),
+   ('RAP',      'a track with rapped vocals over a beat'),
+   ('PIANO',    'a track led by piano'),
+   ('GUITAR',   'a track led by guitar'),
+   ('SYNTH',    'a track led by synthesizers'),
+   ('STRINGS',  'a track led by orchestral strings'),
+   ('HORNS',    'a track led by brass and horns'),
+   ('DRUMS',    'a track driven mainly by drums and percussion'),
+   ('BASS',     'a track dominated by heavy bass'),
+   ('DRONE',    'a sustained drone with no clear melody or beat'),
+   ('FIELD',    'a field recording of an environment, not composed music'),
+   ('SPOKEN',   'spoken word over music'),
+ ],
+ 'genre': [
+   ('HIPHOP','a hip hop record'), ('SOUL','a soul record'),
+   ('RNB','an r and b record'), ('FUNK','a funk record'),
+   ('JAZZ','a jazz recording'), ('GOSPEL','gospel music with choir'),
+   ('AFRO','afrobeat and west african music'), ('ELECTRONIC','electronic dance music'),
+   ('AMBIENT','ambient music'), ('ORCH','orchestral film score'),
+   ('ROCK','a rock record'), ('EXPERIMENTAL','experimental sound art'),
+ ],
+ 'mood': [
+   ('MOURNFUL','sad, mournful and grieving music'),
+   ('TENDER','tender, warm and intimate music'),
+   ('TRIUMPHANT','triumphant, uplifting, victorious music'),
+   ('MENACING','ominous, tense and menacing music'),
+   ('ECSTATIC','ecstatic, euphoric, celebratory music'),
+   ('CALM','calm, still and meditative music'),
+   ('RESTLESS','restless, agitated, urgent music'),
+   ('DESOLATE','empty, desolate and lonely music'),
+ ],
+ 'production': [
+   ('LOFI','a lo-fi recording with tape hiss and noise'),
+   ('POLISHED','a clean, polished modern studio production'),
+   ('CAVERNOUS','an enormous reverberant space, cathedral sized'),
+   ('CLOSE','a close, dry, intimate recording'),
+   ('DISTORTED','heavily distorted and saturated'),
+   ('SPARSE','a sparse arrangement with few elements'),
+   ('DENSE','a dense, layered, maximal arrangement'),
+ ],
+}
+
+TRACK_MIN_S = 20.0   # longer than this and the sample questions stop making sense
+
+def axes_for(seconds):
+    return (TRACK_AXES, 'track') if seconds >= TRACK_MIN_S else (SAMPLE_AXES, 'sample')
+
 def main():
     limit = None
     if '--limit' in sys.argv:
@@ -128,15 +190,17 @@ def main():
     model = ClapModel.from_pretrained(MODEL).eval()
     proc  = ClapProcessor.from_pretrained(MODEL)
 
-    # the taxonomy, embedded ONCE
+    # both taxonomies, embedded ONCE
     tvecs = {}
     with torch.no_grad():
-        for axis, pairs in AXES.items():
-            ti = proc(text=[p for _, p in pairs], return_tensors='pt', padding=True)
-            e = model.get_text_features(**ti)
-            tvecs[axis] = torch.nn.functional.normalize(e, dim=-1)
-    print('taxonomy embedded: %d phrases across %d axes'
-          % (sum(len(v) for v in AXES.values()), len(AXES)), flush=True)
+        for kind, AX in (('sample', SAMPLE_AXES), ('track', TRACK_AXES)):
+            for axis, pairs in AX.items():
+                ti = proc(text=[p for _, p in pairs], return_tensors='pt', padding=True)
+                e = model.get_text_features(**ti)
+                tvecs[(kind, axis)] = torch.nn.functional.normalize(e, dim=-1)
+    print('taxonomies embedded: %d sample phrases, %d track phrases'
+          % (sum(len(v) for v in SAMPLE_AXES.values()),
+             sum(len(v) for v in TRACK_AXES.values())), flush=True)
 
     done = 0
     for r in todo:
@@ -148,9 +212,10 @@ def main():
                 ai = proc(audios=y, sampling_rate=SR, return_tensors='pt')
                 av = torch.nn.functional.normalize(
                      model.get_audio_features(**ai), dim=-1)
-                out = {}
-                for axis, pairs in AXES.items():
-                    sim = (av @ tvecs[axis].T).squeeze(0).numpy()
+                AX, kind = axes_for(r.get('seconds', 0) or r.get('full_seconds', 0))
+                out = {'taxonomy': kind}
+                for axis, pairs in AX.items():
+                    sim = (av @ tvecs[(kind, axis)].T).squeeze(0).numpy()
                     o = np.argsort(-sim)
                     top, second = int(o[0]), int(o[1])
                     gap = float(sim[top] - sim[second])
@@ -175,7 +240,7 @@ def main():
     seen = {}
     for path in sorted(labels):
         c = labels[path]
-        if 'error' in c or not c: continue
+        if 'error' in c or not c or 'genre' not in c: continue
         g = c['genre']['label']; t = c['type']['label']
         g = g if g != '?' else 'UNK'; t = t if t != '?' else 'UNK'
         stem = 'WYG_%s_%s' % (g, t)

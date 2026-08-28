@@ -211,7 +211,10 @@ def main():
             plate(rel, y, sr, m, parts, dest)
             m.update({'path': rel, 'id': pid, 'plate': 'plates/%s.webp' % pid,
                       'name': os.path.basename(rel),
-                      'family': '/'.join(rel.split('/')[:3])})
+                      # the FOLDER it lives in. Taking the first three path
+                      # segments made every file in a two-deep directory its own
+                      # "family", which produced a legend longer than the plot.
+                      'family': os.path.dirname(rel) or '.'})
             rows.append(m)
         except Exception as e:
             fails.append((rel, str(e)[:70]))
