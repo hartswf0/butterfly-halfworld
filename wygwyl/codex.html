@@ -44,7 +44,10 @@ carries the whole poem</b>. READ plays the poet's dry master at that line; SUNG 
 carrier — the same words in another mouth. TWIN plays them in sequence ·
 <a href="radio-atlantis.html">radio ↗</a> · <a href="poemworlds.html">worlds ↗</a> · <a href="atlas.html">atlas ↗</a></div>
 <div id="picker"></div>
-<div id="head" style="display:none"><span id="title"></span><span id="meta"></span></div>
+<div id="head" style="display:none"><span id="title"></span><span id="meta"></span>
+  <button id="duet" style="display:none;background:var(--gold);color:#0c0a06;border:1px solid var(--gold);font:inherit;font-size:11px;letter-spacing:.14em;padding:5px 14px;border-radius:3px;cursor:pointer" title="the whole poem as call-and-response">⇄ THE DUET</button>
+  <span id="duetinfo" style="color:var(--faint);font-size:10px"></span></div>
+<a id="duets"></a>
 <div id="lines"></div>
 <div id="toast"></div>
 <footer><b>The alignment:</b> whisper transcripts of the carrier songs, line-matched to the poet's word-timed
@@ -54,7 +57,16 @@ voice mark sits at distance 6.8–17.7 — where her own readings sit at 1 — t
 
 <script>
 const $ = s => document.querySelector(s);
-let DATA = null, P = null, cur = null;
+let DATA = null, P = null, cur = null, DUETS = {};
+fetch('duets/duets.json', {cache:'no-cache'}).then(r => r.json())
+  .then(j => { for (const d of j.duets) DUETS[d.num] = d; if (P) duetBtn(); }).catch(() => {});
+function duetBtn(){
+  const d = DUETS[P.num], b = $('#duet');
+  b.style.display = d ? '' : 'none';
+  $('#duetinfo').textContent = d ? `${d.answered} of ${d.lines} lines answered · ${Math.round(d.dur)}s` : '';
+  if (d) b.onclick = () => b.classList.contains('playing')
+    ? stop() : play(b, `duets/${P.num}.mp3`, 0, null);
+}
 
 function toast(m){ const t=$('#toast'); t.textContent=m; t.style.display='block';
   clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',2200); }
@@ -78,6 +90,7 @@ function render(){
   $('#head').style.display = 'flex';
   $('#title').textContent = `${P.num} · ${P.title}`;
   $('#meta').textContent = `${P.extracted} of ${P.n_lines} lines aligned and extracted`;
+  duetBtn();
   const host = $('#lines'); host.innerHTML = '';
   if (!P.lines.length){
     host.innerHTML = '<div class="ln"><span class="tx">no codex carrier for this poem — the codex sings “Temple” in its place</span></div>';

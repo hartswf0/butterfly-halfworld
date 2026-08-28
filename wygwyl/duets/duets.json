@@ -1,0 +1,96 @@
+{
+ "note": "call-and-response duets — her line, then the codex mouth answering",
+ "duets": [
+  {
+   "num": "01",
+   "title": "Out of Life",
+   "dur": 170.7,
+   "lines": 16,
+   "answered": 14
+  },
+  {
+   "num": "02",
+   "title": "Flashing Lights",
+   "dur": 164.2,
+   "lines": 15,
+   "answered": 15
+  },
+  {
+   "num": "03",
+   "title": "How to Break off an Engagement",
+   "dur": 106.5,
+   "lines": 10,
+   "answered": 7
+  },
+  {
+   "num": "04",
+   "title": "Nevermore",
+   "dur": 229.2,
+   "lines": 27,
+   "answered": 20
+  },
+  {
+   "num": "05",
+   "title": "Bloodline",
+   "dur": 149.3,
+   "lines": 22,
+   "answered": 17
+  },
+  {
+   "num": "06",
+   "title": "Resurrecting Atlantis",
+   "dur": 133.1,
+   "lines": 13,
+   "answered": 5
+  },
+  {
+   "num": "07",
+   "title": "DJ Turn Me Up",
+   "dur": 158.9,
+   "lines": 12,
+   "answered": 8
+  },
+  {
+   "num": "08",
+   "title": "Newly Single",
+   "dur": 137.3,
+   "lines": 13,
+   "answered": 7
+  },
+  {
+   "num": "09",
+   "title": "Yet Heard",
+   "dur": 186.9,
+   "lines": 32,
+   "answered": 19
+  },
+  {
+   "num": "10",
+   "title": "Magic Ride",
+   "dur": 181.8,
+   "lines": 18,
+   "answered": 18
+  },
+  {
+   "num": "12",
+   "title": "Reunion",
+   "dur": 92.9,
+   "lines": 9,
+   "answered": 3
+  },
+  {
+   "num": "13",
+   "title": "How to Win My Heart",
+   "dur": 185.2,
+   "lines": 32,
+   "answered": 16
+  },
+  {
+   "num": "14",
+   "title": "Hot Minute",
+   "dur": 101.1,
+   "lines": 20,
+   "answered": 8
+  }
+ ]
+}
