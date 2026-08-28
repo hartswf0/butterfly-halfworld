@@ -20,15 +20,24 @@ h1{font-size:16px;letter-spacing:.22em;color:var(--accent)}
 #meta{color:var(--faint);font-size:11px}
 #head button{background:#161b14;border:1px solid var(--line);color:var(--ink);font:inherit;font-size:11px;padding:4px 12px;border-radius:3px;cursor:pointer}
 #head button.big{background:var(--accent);color:#0a0c0a;border-color:var(--accent)}
+#mixlaw{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:8px 0 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:4px;padding:7px 12px;font-size:10.5px;color:var(--dim)}
+#mixlaw b{color:var(--gold);font-weight:normal;letter-spacing:.14em}
+#mixlaw input[type=range]{width:110px;accent-color:var(--accent)}
+#duckmeter{width:64px;height:6px;background:#000;border:1px solid var(--line);border-radius:3px;overflow:hidden}
+#duckbar{height:100%;width:100%;background:var(--gold);transform-origin:left;transition:transform .08s linear}
 .layer{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:8px 12px;margin-bottom:6px;
   display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .layer b{font-weight:normal;font-size:10px;letter-spacing:.16em;padding:1px 7px;border-radius:2px;color:#0a0c0a;min-width:86px;text-align:center}
 .l-keynote b{background:var(--water)} .l-soundmark b{background:var(--gold)}
 .l-rhythm b{background:var(--accent)} .l-signal b{background:var(--rose)}
 .l-song b{background:var(--viol)}
-.layer .nm{flex:1;min-width:180px;font-size:11.5px}
+.layer .nm{flex:1;min-width:170px;font-size:11.5px}
 .layer .nm small{color:var(--faint);display:block;font-size:9.5px}
-.layer input[type=range]{width:120px;accent-color:var(--gold)}
+.layer .ctl{display:flex;flex-direction:column;gap:1px;align-items:flex-start}
+.layer .ctl span{font-size:8.5px;color:var(--faint);letter-spacing:.14em}
+.layer input[type=range]{width:104px;accent-color:var(--gold)}
+.layer input.depth{accent-color:var(--water)}
 .layer .st{font-size:10px;color:var(--faint);min-width:26px}
 h2{font-size:10.5px;letter-spacing:.24em;color:var(--dim);margin:16px 0 6px}
 #variants div{font-size:11px;color:var(--dim);padding:2px 0}
@@ -40,7 +49,8 @@ h2{font-size:10.5px;letter-spacing:.24em;color:var(--dim);margin:16px 0 6px}
 <h1>POEM WORLDS</h1>
 <div id="sub">an entire world of sound for each poem to live in — its exact span of the unified drone as the keynote floor,
 its reading as the soundmark, and only the sounds whose CLAP-matched ekphrases point at <i>this poem's own shots</i>.
-No generic sounds. Blend the layers; export the world as a fresco score for the video world ·
+<b style="color:var(--ink)">The voice owns the front:</b> every other layer ducks under the poet the instant she speaks
+and rises back in her silences, and each layer has a DEPTH — further layers sit quieter, darker, deeper in echo ·
 <a href="fresco.html">fresco ↗</a> · <a href="sonicfield.html">sonic field ↗</a> · <a href="atlas.html">atlas ↗</a></div>
 <div id="picker"></div>
 <div id="head" style="display:none">
@@ -48,6 +58,12 @@ No generic sounds. Blend the layers; export the world as a fresco score for the 
   <button id="enter" class="big">⟡ ENTER THE WORLD</button>
   <button id="hush">HUSH</button>
   <button id="export">⬇ WORLD AS SCORE</button>
+</div>
+<div id="mixlaw" style="display:none">
+  <span><b>VOICE FIRST</b> — how far the world bows when the poet speaks</span>
+  <input id="duckamt" type="range" min="0" max="100" value="78">
+  <div id="duckmeter" title="the world bus, live"><div id="duckbar"></div></div>
+  <span id="ducklbl">world −0 dB</span>
 </div>
 <div id="layers"></div>
 <h2 id="vh" style="display:none">OTHER RECORDINGS OF THESE LINES — the same words in other mouths and rooms</h2>
@@ -59,47 +75,150 @@ const $ = s => document.querySelector(s);
 const mmss = t => `${String(Math.floor(t/60)).padStart(2,'0')}:${String(Math.floor(t%60)).padStart(2,'0')}`;
 let WORLDS = null, W = null, players = [];
 
+// ---- the mixing desk (built once, lives across worlds) -------------------
+// voice ─────────────► voiceGain ──────────────────────────┐
+//                        └► analyser (the sidechain ear)   ▼
+// each layer ► gain ► lowpass(depth) ► scale ─► worldBus ► duckGain ► master ► comp ► out
+//                        └► send(depth) ► ECHO (two feedback delays, dark) ─┘
+let ctx = null, DESK = null, rafId = 0;
+function desk(){
+  if (DESK) return DESK;
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const master = ctx.createGain(); master.gain.value = 1;
+  const comp = ctx.createDynamicsCompressor();
+  comp.threshold.value = -18; comp.knee.value = 12; comp.ratio.value = 3;
+  comp.attack.value = 0.01; comp.release.value = 0.25;
+  master.connect(comp); comp.connect(ctx.destination);
+
+  const voiceGain = ctx.createGain(); voiceGain.gain.value = 1;
+  const presence = ctx.createBiquadFilter();            // a small lantern on the voice
+  presence.type = 'highshelf'; presence.frequency.value = 2800; presence.gain.value = 2.5;
+  voiceGain.connect(presence); presence.connect(master);
+  const ear = ctx.createAnalyser(); ear.fftSize = 1024;
+  voiceGain.connect(ear);
+
+  const worldBus = ctx.createGain();
+  const midCarve = ctx.createBiquadFilter();          // the dialog mixer's dip:
+  midCarve.type = 'peaking'; midCarve.frequency.value = 1400;  // carve the voice's
+  midCarve.Q.value = 0.7; midCarve.gain.value = 0;             // room out of the music
+  const duckGain = ctx.createGain(); duckGain.gain.value = 1;
+  worldBus.connect(midCarve); midCarve.connect(duckGain); duckGain.connect(master);
+
+  // the echo well — two dark feedback delays; far layers are sent down here
+  const echoIn = ctx.createGain(); echoIn.gain.value = 0.9;
+  const echoWet = ctx.createGain(); echoWet.gain.value = 0.8;
+  for (const [dt, fb] of [[0.29, 0.42], [0.47, 0.36]]){
+    const d = ctx.createDelay(2); d.delayTime.value = dt;
+    const f = ctx.createGain(); f.gain.value = fb;
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2200;
+    echoIn.connect(d); d.connect(lp); lp.connect(f); f.connect(d);   // the well deepens
+    lp.connect(echoWet);
+  }
+  echoWet.connect(duckGain);                                         // echoes bow to the voice too
+
+  DESK = {master, voiceGain, ear, worldBus, duckGain, echoIn, midCarve};
+  return DESK;
+}
+
+// the sidechain: watch the poet's actual signal, bow the world under her
+const earBuf = new Float32Array(1024);
+function sidechain(){
+  const D = DESK; if (!D) return;
+  D.ear.getFloatTimeDomainData(earBuf);
+  let s = 0; for (let i = 0; i < earBuf.length; i++) s += earBuf[i] * earBuf[i];
+  const rms = Math.sqrt(s / earBuf.length);
+  const amt = $('#duckamt').value / 100;
+  const floor = 1 - 0.9 * amt;                                       // 78% → the world drops to ~0.30
+  const speaking = rms > 0.012;
+  const target = speaking ? floor : 1;
+  // fast bow (60ms), slow rise (400ms) — the world steps back quicker than it returns
+  D.duckGain.gain.setTargetAtTime(target, ctx.currentTime, speaking ? 0.03 : 0.16);
+  // and the mid carve deepens with the bow — the music keeps its lows and air,
+  // gives up only the band the voice lives in
+  D.midCarve.gain.setTargetAtTime(speaking ? -7 * amt : 0, ctx.currentTime, speaking ? 0.03 : 0.2);
+  const g = D.duckGain.gain.value;
+  $('#duckbar').style.transform = `scaleX(${g.toFixed(3)})`;
+  $('#ducklbl').textContent = `world ${(20 * Math.log10(Math.max(g, 0.02))).toFixed(0)} dB`;
+  rafId = requestAnimationFrame(sidechain);
+}
+
 function toast(m){ const t=$('#toast'); t.textContent=m; t.style.display='block';
   clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',2600); }
-function hush(){ for (const p of players){ try{p.a.pause()}catch(e){} } players = []; }
+function hush(){
+  for (const p of players){ try{p.a.pause()}catch(e){} try{p.src && p.src.disconnect()}catch(e){} }
+  players = []; cancelAnimationFrame(rafId);
+  if (DESK) DESK.duckGain.gain.value = 1;
+}
 
-function layerRow(kind, name, sub, make){
+// depth d∈[0,1]: further = darker (lowpass), quieter, deeper in the echo well
+function setDepth(p, d){
+  p.lp.frequency.value = 800 + 12000 * Math.pow(1 - d, 1.6);
+  p.scale.gain.value = 1 - 0.4 * d;
+  p.send.gain.value = 0.85 * d * d;
+}
+
+function layerRow(kind, name, sub, make, opts = {}){
+  const isVoice = !!opts.voice;
+  const vol0 = opts.level ?? (isVoice ? 100 : (kind === 'keynote' ? 22 : kind === 'rhythm' ? 30 : 28));
+  const dep0 = opts.depth ?? (kind === 'keynote' ? 70 : kind === 'signal' ? 40 : kind === 'song' ? 65 : 55);
   const d = document.createElement('div');
   d.className = 'layer l-' + kind;
   d.innerHTML = `<b>${kind.toUpperCase()}</b><span class="nm">${name}<small>${sub||''}</small></span>
-    <input type="range" min="0" max="100" value="${kind==='keynote'?28:kind==='soundmark'?90:45}">
+    <span class="ctl"><span>LEVEL</span><input class="vol" type="range" min="0" max="100" value="${vol0}"></span>
+    ${isVoice ? '' : `<span class="ctl"><span>DEPTH</span><input class="depth" type="range" min="0" max="100" value="${dep0}"></span>`}
     <span class="st">·</span>`;
-  const vol = d.querySelector('input'), st = d.querySelector('.st');
-  d._start = () => { const p = make(); if (!p) return;
-    p.a.volume = vol.value/100; players.push(p); st.textContent = '▶'; p.a.play().catch(()=>{}); };
-  vol.oninput = () => { const p = players.find(x=>x.el===d); if (p) p.a.volume = vol.value/100; };
-  d._mk = make; d._vol = vol; d._st = st;
+  const vol = d.querySelector('.vol'), dep = d.querySelector('.depth'), st = d.querySelector('.st');
+  d._mk = () => {
+    const p = make(); if (!p) return null;
+    const D = desk();
+    p.src = ctx.createMediaElementSource(p.a);
+    p.g = ctx.createGain(); p.g.gain.value = vol.value / 100;
+    p.src.connect(p.g);
+    if (isVoice){ p.g.connect(D.voiceGain); }
+    else {
+      p.lp = ctx.createBiquadFilter(); p.lp.type = 'lowpass';
+      p.scale = ctx.createGain();
+      p.send = ctx.createGain();
+      p.pan = ctx.createStereoPanner(); p.pan.pan.value = opts.pan || 0;
+      p.g.connect(p.lp); p.lp.connect(p.scale); p.scale.connect(p.pan); p.pan.connect(D.worldBus);
+      p.scale.connect(p.send); p.send.connect(D.echoIn);
+      setDepth(p, dep.value / 100);
+    }
+    p.el = d;
+    return p;
+  };
+  vol.oninput = () => { const p = players.find(x => x.el === d); if (p) p.g.gain.value = vol.value / 100; };
+  if (dep) dep.oninput = () => { const p = players.find(x => x.el === d); if (p && p.lp) setDepth(p, dep.value / 100); };
+  d._st = st;
   return d;
 }
 
 function enter(){
   hush();
-  const host = $('#layers');
-  for (const d of host.children){
+  desk();
+  if (ctx.state === 'suspended') ctx.resume();
+  for (const d of $('#layers').children){
     if (!d._mk) continue;
     const p = d._mk();
     if (!p) continue;
-    p.el = d;
-    p.a.volume = d._vol.value/100;
     players.push(p);
     p.a.play().catch(()=>{});
     d._st.textContent = '▶';
   }
-  toast('the world is playing — mix with the sliders');
+  $('#mixlaw').style.display = 'flex';
+  cancelAnimationFrame(rafId); sidechain();
+  toast('the world is playing — it bows when the poet speaks');
 }
 
 function slice(file, t0, t1, loop){
   const a = new Audio(file);
+  a.crossOrigin = 'anonymous';
   const seek = () => { if (t0) a.currentTime = t0; };
   a.addEventListener('loadedmetadata', seek, {once:true});
   if (t1 != null){
-    setInterval(() => { if (!a.paused && a.currentTime >= t1){
-      if (loop) a.currentTime = t0 || 0; else a.pause(); } }, 250);
+    const h = setInterval(() => { if (a._dead){ clearInterval(h); return; }
+      if (!a.paused && a.currentTime >= t1){
+        if (loop) a.currentTime = t0 || 0; else a.pause(); } }, 250);
   } else if (loop) a.loop = true;
   return {a};
 }
@@ -107,21 +226,30 @@ function slice(file, t0, t1, loop){
 function render(){
   $('#head').style.display = 'flex';
   $('#title').textContent = `${W.num} · ${W.title}`;
-  $('#meta').textContent = `mood ${W.mood} · ${W.sounds.length} matched sounds · ${W.n_variant_instances} line-variant recordings`;
+  $('#meta').textContent = `mood ${W.mood} · ${W.sounds.length} matched sounds · ${(W.orchestra||[]).length} orchestra chairs · ${W.n_variant_instances} line-variant recordings`;
   const host = $('#layers'); host.innerHTML = '';
+  host.appendChild(layerRow('soundmark', `the reading — ${W.title}`, 'the poet, dry · owns the front — everything below ducks under her',
+    () => slice(W.reading, 0, null, false), {voice: true}));
   if (W.drone && W.drone.t0 != null){
     host.appendChild(layerRow('keynote', 'the unified drone — this poem\'s own span',
-      `${mmss(W.drone.t0)}–${mmss(W.drone.t1)} on the 2025 timeline · loops`,
+      `${mmss(W.drone.t0)}–${mmss(W.drone.t1)} on the 2025 timeline · loops · sits far`,
       () => slice(W.drone.file, W.drone.t0, W.drone.t1, true)));
   }
-  host.appendChild(layerRow('soundmark', `the reading — ${W.title}`, 'the poet, dry',
-    () => slice(W.reading, 0, null, false)));
+  let side = 1;
   for (const s of W.sounds){
     const kind = s.eco === 'soundmark' ? 'soundmark' : s.eco;
     host.appendChild(layerRow(kind === 'keynote' ? 'keynote' : kind,
       s.label, `≈ “${(s.phr||'').slice(0,58)}”${s.strict === false ? ' · weak referral' : ''}`,
-      () => slice(s.file, s.s0 ?? 0, s.s1 ?? null, kind !== 'signal')));
+      () => slice(s.file, s.s0 ?? 0, s.s1 ?? null, kind !== 'signal'), {pan: 0.35 * (side = -side)}));
   }
+  const ODEP = {BASS: 22, DRUMS: 35, PIANO: 45, STRINGS: 55, SYNTH: 62, VOCALS: 72, SFX: 55};
+  (W.orchestra || []).forEach((o, i) => {
+    host.appendChild(layerRow('song', `${o.instrument} — ${o.song}`,
+      `${o.name} · ${Math.round(o.tempo)} bpm · ${o.key} · ${o.kin === 'title' ? 'this poem\'s own song' : 'mood kin'} · loops`,
+      () => slice(o.file, 0, null, true),
+      {pan: (i % 2 ? 1 : -1) * (0.3 + 0.18 * (i % 3)), level: o.instrument === 'DRUMS' ? 18 : 24,
+       depth: ODEP[o.instrument] ?? 55}));
+  });
   const vh = $('#vh'), vs = $('#variants'); vs.innerHTML = '';
   if (W.variants && W.variants.length){
     vh.style.display = 'block';
@@ -136,13 +264,13 @@ function render(){
 function exportScore(){
   let clips = [], lanes = [];
   if (W.drone && W.drone.t0 != null)
-    clips.push({at: 0, source: W.drone.file, s: W.drone.t0, e: W.drone.t1, gain: 0.3,
+    clips.push({at: 0, source: W.drone.file, s: W.drone.t0, e: W.drone.t1, gain: 0.22,
                 fadeIn: 1.5, fadeOut: 2, label: 'drone S' + W.num, ref: {kind: 'keynote'}});
   clips.push({at: W.drone ? W.drone.poem_enters : 0.5, source: W.reading, s: 0, e: W.dur,
               gain: 1, fadeIn: 0.02, fadeOut: 0.1, label: 'the reading', ref: {kind: 'soundmark'}});
   W.sounds.forEach((s, i) => {
     clips.push({at: 2 + i * 3.5, source: s.file, s: s.s0 ?? 0,
-                e: (s.s1 ?? Math.min(12, W.dur)), gain: 0.4, fadeIn: 0.8, fadeOut: 1.2,
+                e: (s.s1 ?? Math.min(12, W.dur)), gain: 0.26, fadeIn: 0.8, fadeOut: 1.2,
                 label: s.label.slice(0, 24), ref: {kind: s.eco, phr: s.phr}});
   });
   const dur = Math.max(...clips.map(c => c.at + (c.e - c.s)));
@@ -150,11 +278,11 @@ function exportScore(){
     tracks: [{id: 'world', name: 'WORLD ' + W.num, gain: 1, clips}],
     lanes: [{id: 'refs', name: 'referrals', type: 'marker',
              events: W.sounds.map((s, i) => ({t: 2 + i * 3.5, type: 'SOUND', value: s.phr || s.label}))}],
-    provenance: {generator: 'poemworlds.html', poem: W.title}};
+    provenance: {generator: 'poemworlds.html', poem: W.title, mix: 'voice-forward'}};
   const url = URL.createObjectURL(new Blob([JSON.stringify(score, null, 1)], {type: 'application/json'}));
   const a = document.createElement('a'); a.href = url; a.download = `world-${W.num}.fresco.json`; a.click();
   setTimeout(() => URL.revokeObjectURL(url), 5000);
-  toast('world exported — open it in fresco.html, or under the film');
+  toast('world exported — for the measured master, see radio-atlantis (the engine ducks offline)');
 }
 
 $('#enter').onclick = enter;

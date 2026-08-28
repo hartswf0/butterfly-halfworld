@@ -50,7 +50,97 @@
      "kind": "spoken"
     }
    ],
-   "n_variant_instances": 702
+   "n_variant_instances": 702,
+   "orchestra": [
+    {
+     "file": "pack/songloops/VOL_glass-15_04.mp3",
+     "name": "VOL_GLASS15_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 136.0,
+     "key": "D# minor",
+     "genre": "WARM",
+     "song": "Tunnel Lights & Dirty Money",
+     "folder": "VOL_GLASS15_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-15_03.mp3",
+     "name": "VOL_GLASS15_PADCHORD_1",
+     "instrument": "SYNTH",
+     "tempo": 136.0,
+     "key": "F# minor",
+     "genre": "WARM",
+     "song": "Tunnel Lights & Dirty Money",
+     "folder": "VOL_GLASS15_PADCHORD",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-06_01.mp3",
+     "name": "VOL_GLASS06_BASSLINE_1",
+     "instrument": "BASS",
+     "tempo": 99.4,
+     "key": "F# major",
+     "genre": "WARM",
+     "song": "Cathedral of Glass",
+     "folder": "VOL_GLASS06_BASSLINE",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-27_05.mp3",
+     "name": "VOL_MALLGROUND27_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 136.0,
+     "key": "G major",
+     "genre": "WARM",
+     "song": "MallNet Paradise System",
+     "folder": "VOL_MALLGROUND27_VOXSUNG",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-27_02.mp3",
+     "name": "VOL_MALLGROUND27_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 136.0,
+     "key": "G major",
+     "genre": "WARM",
+     "song": "MallNet Paradise System",
+     "folder": "VOL_MALLGROUND27_MAINBEAT",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-16_04.mp3",
+     "name": "VOL_DUSTREST16_STRINGS_1",
+     "instrument": "STRINGS",
+     "tempo": 112.4,
+     "key": "G minor",
+     "genre": "WARM",
+     "song": "Frictionless Void",
+     "folder": "VOL_DUSTREST16_STRINGS",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-27_06.mp3",
+     "name": "VOL_MALLGROUND27_GUITAR_1",
+     "instrument": "STRINGS",
+     "tempo": 136.0,
+     "key": "G major",
+     "genre": "WARM",
+     "song": "MallNet Paradise System",
+     "folder": "VOL_MALLGROUND27_GUITAR",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-10_02.mp3",
+     "name": "VOL_DUSTREST10_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 184.6,
+     "key": "G minor",
+     "genre": "WARM",
+     "song": "Non-Abiding Flow",
+     "folder": "VOL_DUSTREST10_PIANO",
+     "kin": "mood"
+    }
+   ]
   },
   {
    "num": "02",
@@ -79,7 +169,97 @@
     }
    ],
    "variants": [],
-   "n_variant_instances": 0
+   "n_variant_instances": 0,
+   "orchestra": [
+    {
+     "file": "pack/songloops/VOL_aeolian-02_03.mp3",
+     "name": "VOL_AEOLIAN02_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 60.1,
+     "key": "A# major",
+     "genre": "WARM",
+     "song": "Flashing Lights (Roadside Omen)",
+     "folder": "VOL_AEOLIAN02_PIANO",
+     "kin": "title"
+    },
+    {
+     "file": "pack/songloops/VOL_aeolian-02_01.mp3",
+     "name": "VOL_AEOLIAN02_SYNTHLEAD_1",
+     "instrument": "SYNTH",
+     "tempo": 60.1,
+     "key": "A# minor",
+     "genre": "WARM",
+     "song": "Flashing Lights (Roadside Omen)",
+     "folder": "VOL_AEOLIAN02_SYNTHLEAD",
+     "kin": "title"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-15_01.mp3",
+     "name": "VOL_GLASS15_BASSLINE_1",
+     "instrument": "BASS",
+     "tempo": 136.0,
+     "key": "D# minor",
+     "genre": "DARK",
+     "song": "Tunnel Lights & Dirty Money",
+     "folder": "VOL_GLASS15_BASSLINE",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-19_05.mp3",
+     "name": "VOL_DUSTREST19_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 117.5,
+     "key": "D# minor",
+     "genre": "WARM",
+     "song": "Ontological Collapse (The Unstainable)",
+     "folder": "VOL_DUSTREST19_VOXSUNG",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-15_02.mp3",
+     "name": "VOL_GLASS15_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 136.0,
+     "key": "D# minor",
+     "genre": "DARK",
+     "song": "Tunnel Lights & Dirty Money",
+     "folder": "VOL_GLASS15_MAINBEAT",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-10_01.mp3",
+     "name": "VOL_DUSTREST10_STRINGS_1",
+     "instrument": "STRINGS",
+     "tempo": 184.6,
+     "key": "B minor",
+     "genre": "DARK",
+     "song": "Non-Abiding Flow",
+     "folder": "VOL_DUSTREST10_STRINGS",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_cathedral-11_01.mp3",
+     "name": "VOL_CATHEDRAL11_PERC_1",
+     "instrument": "DRUMS",
+     "tempo": 129.2,
+     "key": "F minor",
+     "genre": "DARK",
+     "song": "Stained Glass Rims",
+     "folder": "VOL_CATHEDRAL11_PERC",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_cathedral-11_04.mp3",
+     "name": "VOL_CATHEDRAL11_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 129.2,
+     "key": "F# minor",
+     "genre": "DARK",
+     "song": "Stained Glass Rims",
+     "folder": "VOL_CATHEDRAL11_PIANO",
+     "kin": "mood"
+    }
+   ]
   },
   {
    "num": "03",
@@ -168,7 +348,97 @@
     }
    ],
    "variants": [],
-   "n_variant_instances": 0
+   "n_variant_instances": 0,
+   "orchestra": [
+    {
+     "file": "pack/songloops/VOL_dustrest-12_07.mp3",
+     "name": "VOL_DUSTREST12_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 107.7,
+     "key": "F# major",
+     "genre": "OCEANIC",
+     "song": "Non-Abiding Flow",
+     "folder": "VOL_DUSTREST12_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_congregation-13_06.mp3",
+     "name": "VOL_CONGREGATION13_PADCHORD_1",
+     "instrument": "SYNTH",
+     "tempo": 136.0,
+     "key": "D# major",
+     "genre": "MACHINE",
+     "song": "The Master's Zenith",
+     "folder": "VOL_CONGREGATION13_PADCHORD",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-06_01.mp3",
+     "name": "VOL_GLASS06_BASSLINE_1",
+     "instrument": "BASS",
+     "tempo": 99.4,
+     "key": "F# major",
+     "genre": "WARM",
+     "song": "Cathedral of Glass",
+     "folder": "VOL_GLASS06_BASSLINE",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-11_05.mp3",
+     "name": "VOL_GLASS11_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 68.0,
+     "key": "G minor",
+     "genre": "MOURNING",
+     "song": "London Hiss",
+     "folder": "VOL_GLASS11_VOXSUNG",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_cathedral-11_01.mp3",
+     "name": "VOL_CATHEDRAL11_PERC_1",
+     "instrument": "DRUMS",
+     "tempo": 129.2,
+     "key": "F minor",
+     "genre": "DARK",
+     "song": "Stained Glass Rims",
+     "folder": "VOL_CATHEDRAL11_PERC",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_nightbus-08_01.mp3",
+     "name": "VOL_NIGHTBUS08_GUITAR_1",
+     "instrument": "STRINGS",
+     "tempo": 95.7,
+     "key": "G major",
+     "genre": "BRIGHT",
+     "song": "Saltwater Static (The Last Shanty)",
+     "folder": "VOL_NIGHTBUS08_GUITAR",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-12_01.mp3",
+     "name": "VOL_DUSTREST12_ATMOS_1",
+     "instrument": "SFX",
+     "tempo": 107.7,
+     "key": "G major",
+     "genre": "OCEANIC",
+     "song": "Non-Abiding Flow",
+     "folder": "VOL_DUSTREST12_ATMOS",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mareamemory-30_06.mp3",
+     "name": "VOL_MAREAMEMORY30_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 129.2,
+     "key": "E minor",
+     "genre": "WARM",
+     "song": "Submerged Afrofuturist Ignition",
+     "folder": "VOL_MAREAMEMORY30_PIANO",
+     "kin": "mood"
+    }
+   ]
   },
   {
    "num": "04",
@@ -220,7 +490,97 @@
      "kind": "spoken"
     }
    ],
-   "n_variant_instances": 138
+   "n_variant_instances": 138,
+   "orchestra": [
+    {
+     "file": "pack/songloops/VOL_dustrest-11_02.mp3",
+     "name": "VOL_DUSTREST11_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 136.0,
+     "key": "F# major",
+     "genre": "WARM",
+     "song": "Not a Mote of Dust",
+     "folder": "VOL_DUSTREST11_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_aeolian-02_01.mp3",
+     "name": "VOL_AEOLIAN02_SYNTHLEAD_1",
+     "instrument": "SYNTH",
+     "tempo": 60.1,
+     "key": "A# minor",
+     "genre": "WARM",
+     "song": "Flashing Lights (Roadside Omen)",
+     "folder": "VOL_AEOLIAN02_SYNTHLEAD",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-06_01.mp3",
+     "name": "VOL_GLASS06_BASSLINE_1",
+     "instrument": "BASS",
+     "tempo": 99.4,
+     "key": "F# major",
+     "genre": "WARM",
+     "song": "Cathedral of Glass",
+     "folder": "VOL_GLASS06_BASSLINE",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-27_05.mp3",
+     "name": "VOL_MALLGROUND27_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 136.0,
+     "key": "G major",
+     "genre": "WARM",
+     "song": "MallNet Paradise System",
+     "folder": "VOL_MALLGROUND27_VOXSUNG",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-19_05.mp3",
+     "name": "VOL_MALLGROUND19_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 107.7,
+     "key": "C minor",
+     "genre": "WARM",
+     "song": "INDEXED EVIDENCE 120",
+     "folder": "VOL_MALLGROUND19_MAINBEAT",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-27_06.mp3",
+     "name": "VOL_MALLGROUND27_GUITAR_1",
+     "instrument": "STRINGS",
+     "tempo": 136.0,
+     "key": "G major",
+     "genre": "WARM",
+     "song": "MallNet Paradise System",
+     "folder": "VOL_MALLGROUND27_GUITAR",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-16_04.mp3",
+     "name": "VOL_DUSTREST16_STRINGS_1",
+     "instrument": "STRINGS",
+     "tempo": 112.4,
+     "key": "G minor",
+     "genre": "WARM",
+     "song": "Frictionless Void",
+     "folder": "VOL_DUSTREST16_STRINGS",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-19_05.mp3",
+     "name": "VOL_DUSTREST19_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 117.5,
+     "key": "D# minor",
+     "genre": "WARM",
+     "song": "Ontological Collapse (The Unstainable)",
+     "folder": "VOL_DUSTREST19_VOXSUNG",
+     "kin": "mood"
+    }
+   ]
   },
   {
    "num": "05",
@@ -236,7 +596,97 @@
    "mood": "?",
    "sounds": [],
    "variants": [],
-   "n_variant_instances": 0
+   "n_variant_instances": 0,
+   "orchestra": [
+    {
+     "file": "pack/songloops/VOL_dustrest-11_02.mp3",
+     "name": "VOL_DUSTREST11_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 136.0,
+     "key": "F# major",
+     "genre": "WARM",
+     "song": "Not a Mote of Dust",
+     "folder": "VOL_DUSTREST11_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-16_01.mp3",
+     "name": "VOL_DUSTREST16_SYNTHLEAD_1",
+     "instrument": "SYNTH",
+     "tempo": 112.4,
+     "key": "A# major",
+     "genre": "WARM",
+     "song": "Frictionless Void",
+     "folder": "VOL_DUSTREST16_SYNTHLEAD",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-06_01.mp3",
+     "name": "VOL_GLASS06_BASSLINE_1",
+     "instrument": "BASS",
+     "tempo": 99.4,
+     "key": "F# major",
+     "genre": "WARM",
+     "song": "Cathedral of Glass",
+     "folder": "VOL_GLASS06_BASSLINE",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mareamemory-06_01.mp3",
+     "name": "VOL_MAREAMEMORY06_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 60.1,
+     "key": "C major",
+     "genre": "WARM",
+     "song": "Ecstatic Dawn",
+     "folder": "VOL_MAREAMEMORY06_VOXSUNG",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-19_05.mp3",
+     "name": "VOL_MALLGROUND19_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 107.7,
+     "key": "C minor",
+     "genre": "WARM",
+     "song": "INDEXED EVIDENCE 120",
+     "folder": "VOL_MALLGROUND19_MAINBEAT",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-16_04.mp3",
+     "name": "VOL_DUSTREST16_STRINGS_1",
+     "instrument": "STRINGS",
+     "tempo": 112.4,
+     "key": "G minor",
+     "genre": "WARM",
+     "song": "Frictionless Void",
+     "folder": "VOL_DUSTREST16_STRINGS",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_aeolian-02_03.mp3",
+     "name": "VOL_AEOLIAN02_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 60.1,
+     "key": "A# major",
+     "genre": "WARM",
+     "song": "Flashing Lights (Roadside Omen)",
+     "folder": "VOL_AEOLIAN02_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-27_02.mp3",
+     "name": "VOL_MALLGROUND27_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 136.0,
+     "key": "G major",
+     "genre": "WARM",
+     "song": "MallNet Paradise System",
+     "folder": "VOL_MALLGROUND27_MAINBEAT",
+     "kin": "mood"
+    }
+   ]
   },
   {
    "num": "06",
@@ -361,7 +811,97 @@
     }
    ],
    "variants": [],
-   "n_variant_instances": 0
+   "n_variant_instances": 0,
+   "orchestra": [
+    {
+     "file": "pack/songloops/VOL_congregation-13_01.mp3",
+     "name": "VOL_CONGREGATION13_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 136.0,
+     "key": "G# minor",
+     "genre": "MOURNING",
+     "song": "The Master's Zenith",
+     "folder": "VOL_CONGREGATION13_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-11_04.mp3",
+     "name": "VOL_GLASS11_PADCHORD_1",
+     "instrument": "SYNTH",
+     "tempo": 68.0,
+     "key": "A# major",
+     "genre": "MOURNING",
+     "song": "London Hiss",
+     "folder": "VOL_GLASS11_PADCHORD",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_cathedral-11_03.mp3",
+     "name": "VOL_CATHEDRAL11_BASSLINE_1",
+     "instrument": "BASS",
+     "tempo": 129.2,
+     "key": "F minor",
+     "genre": "STREET",
+     "song": "Stained Glass Rims",
+     "folder": "VOL_CATHEDRAL11_BASSLINE",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-11_05.mp3",
+     "name": "VOL_GLASS11_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 68.0,
+     "key": "G minor",
+     "genre": "MOURNING",
+     "song": "London Hiss",
+     "folder": "VOL_GLASS11_VOXSUNG",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_blackwater-10_03.mp3",
+     "name": "VOL_BLACKWATER10_PERC_1",
+     "instrument": "DRUMS",
+     "tempo": 152.0,
+     "key": "C# major",
+     "genre": "MOURNING",
+     "song": "Gray Alley Slow Drag",
+     "folder": "VOL_BLACKWATER10_PERC",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-27_06.mp3",
+     "name": "VOL_MALLGROUND27_GUITAR_1",
+     "instrument": "STRINGS",
+     "tempo": 136.0,
+     "key": "G major",
+     "genre": "WARM",
+     "song": "MallNet Paradise System",
+     "folder": "VOL_MALLGROUND27_GUITAR",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-20_01.mp3",
+     "name": "VOL_DUSTREST20_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 172.3,
+     "key": "D minor",
+     "genre": "MOURNING",
+     "song": "Polishing the Data Mirror",
+     "folder": "VOL_DUSTREST20_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_cathedral-14_01.mp3",
+     "name": "VOL_CATHEDRAL14_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 129.2,
+     "key": "F# minor",
+     "genre": "MOURNING",
+     "song": "Vatican Vigil",
+     "folder": "VOL_CATHEDRAL14_VOXSUNG",
+     "kin": "mood"
+    }
+   ]
   },
   {
    "num": "07",
@@ -546,7 +1086,97 @@
     }
    ],
    "variants": [],
-   "n_variant_instances": 0
+   "n_variant_instances": 0,
+   "orchestra": [
+    {
+     "file": "pack/songloops/VOL_nightbus-08_02.mp3",
+     "name": "VOL_NIGHTBUS08_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 95.7,
+     "key": "G major",
+     "genre": "STREET",
+     "song": "Saltwater Static (The Last Shanty)",
+     "folder": "VOL_NIGHTBUS08_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-18_06.mp3",
+     "name": "VOL_MALLGROUND18_PADCHORD_1",
+     "instrument": "SYNTH",
+     "tempo": 112.4,
+     "key": "E major",
+     "genre": "STREET",
+     "song": "Hidden Systems (Infra-Bass Edit)",
+     "folder": "VOL_MALLGROUND18_PADCHORD",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_cathedral-11_03.mp3",
+     "name": "VOL_CATHEDRAL11_BASSLINE_1",
+     "instrument": "BASS",
+     "tempo": 129.2,
+     "key": "F minor",
+     "genre": "STREET",
+     "song": "Stained Glass Rims",
+     "folder": "VOL_CATHEDRAL11_BASSLINE",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-19_05.mp3",
+     "name": "VOL_DUSTREST19_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 117.5,
+     "key": "D# minor",
+     "genre": "WARM",
+     "song": "Ontological Collapse (The Unstainable)",
+     "folder": "VOL_DUSTREST19_VOXSUNG",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_congregation-13_02.mp3",
+     "name": "VOL_CONGREGATION13_PERC_1",
+     "instrument": "DRUMS",
+     "tempo": 136.0,
+     "key": "G# minor",
+     "genre": "STREET",
+     "song": "The Master's Zenith",
+     "folder": "VOL_CONGREGATION13_PERC",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-10_01.mp3",
+     "name": "VOL_DUSTREST10_STRINGS_1",
+     "instrument": "STRINGS",
+     "tempo": 184.6,
+     "key": "B minor",
+     "genre": "DARK",
+     "song": "Non-Abiding Flow",
+     "folder": "VOL_DUSTREST10_STRINGS",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-18_02.mp3",
+     "name": "VOL_MALLGROUND18_PERC_1",
+     "instrument": "DRUMS",
+     "tempo": 112.4,
+     "key": "E minor",
+     "genre": "STREET",
+     "song": "Hidden Systems (Infra-Bass Edit)",
+     "folder": "VOL_MALLGROUND18_PERC",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_aeolian-05_03.mp3",
+     "name": "VOL_AEOLIAN05_SYNTHLEAD_1",
+     "instrument": "SYNTH",
+     "tempo": 86.1,
+     "key": "G minor",
+     "genre": "STREET",
+     "song": "Pine Floor Orbit",
+     "folder": "VOL_AEOLIAN05_SYNTHLEAD",
+     "kin": "mood"
+    }
+   ]
   },
   {
    "num": "08",
@@ -599,7 +1229,97 @@
     }
    ],
    "variants": [],
-   "n_variant_instances": 0
+   "n_variant_instances": 0,
+   "orchestra": [
+    {
+     "file": "pack/songloops/VOL_nightbus-08_02.mp3",
+     "name": "VOL_NIGHTBUS08_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 95.7,
+     "key": "G major",
+     "genre": "STREET",
+     "song": "Saltwater Static (The Last Shanty)",
+     "folder": "VOL_NIGHTBUS08_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mareamemory-30_07.mp3",
+     "name": "VOL_MAREAMEMORY30_SYNTHLEAD_1",
+     "instrument": "SYNTH",
+     "tempo": 129.2,
+     "key": "A minor",
+     "genre": "STREET",
+     "song": "Submerged Afrofuturist Ignition",
+     "folder": "VOL_MAREAMEMORY30_SYNTHLEAD",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-18_01.mp3",
+     "name": "VOL_MALLGROUND18_BASSLINE_1",
+     "instrument": "BASS",
+     "tempo": 112.4,
+     "key": "G major",
+     "genre": "STREET",
+     "song": "Hidden Systems (Infra-Bass Edit)",
+     "folder": "VOL_MALLGROUND18_BASSLINE",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-19_05.mp3",
+     "name": "VOL_DUSTREST19_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 117.5,
+     "key": "D# minor",
+     "genre": "WARM",
+     "song": "Ontological Collapse (The Unstainable)",
+     "folder": "VOL_DUSTREST19_VOXSUNG",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_midnightsteppe-17_01.mp3",
+     "name": "VOL_MIDNIGHTSTEPPE17_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 80.8,
+     "key": "C minor",
+     "genre": "STREET",
+     "song": "When the Soul Becomes People",
+     "folder": "VOL_MIDNIGHTSTEPPE17_MAINBEAT",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-11_01.mp3",
+     "name": "VOL_DUSTREST11_GUITAR_1",
+     "instrument": "STRINGS",
+     "tempo": 136.0,
+     "key": "D# minor",
+     "genre": "WARM",
+     "song": "Not a Mote of Dust",
+     "folder": "VOL_DUSTREST11_GUITAR",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_cathedral-11_02.mp3",
+     "name": "VOL_CATHEDRAL11_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 129.2,
+     "key": "F# minor",
+     "genre": "STREET",
+     "song": "Stained Glass Rims",
+     "folder": "VOL_CATHEDRAL11_MAINBEAT",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_cathedral-11_03.mp3",
+     "name": "VOL_CATHEDRAL11_BASSLINE_1",
+     "instrument": "BASS",
+     "tempo": 129.2,
+     "key": "F minor",
+     "genre": "STREET",
+     "song": "Stained Glass Rims",
+     "folder": "VOL_CATHEDRAL11_BASSLINE",
+     "kin": "mood"
+    }
+   ]
   },
   {
    "num": "09",
@@ -664,7 +1384,97 @@
     }
    ],
    "variants": [],
-   "n_variant_instances": 0
+   "n_variant_instances": 0,
+   "orchestra": [
+    {
+     "file": "pack/songloops/VOL_glass-15_04.mp3",
+     "name": "VOL_GLASS15_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 136.0,
+     "key": "D# minor",
+     "genre": "WARM",
+     "song": "Tunnel Lights & Dirty Money",
+     "folder": "VOL_GLASS15_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_aeolian-02_01.mp3",
+     "name": "VOL_AEOLIAN02_SYNTHLEAD_1",
+     "instrument": "SYNTH",
+     "tempo": 60.1,
+     "key": "A# minor",
+     "genre": "WARM",
+     "song": "Flashing Lights (Roadside Omen)",
+     "folder": "VOL_AEOLIAN02_SYNTHLEAD",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-06_01.mp3",
+     "name": "VOL_GLASS06_BASSLINE_1",
+     "instrument": "BASS",
+     "tempo": 99.4,
+     "key": "F# major",
+     "genre": "WARM",
+     "song": "Cathedral of Glass",
+     "folder": "VOL_GLASS06_BASSLINE",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-19_05.mp3",
+     "name": "VOL_DUSTREST19_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 117.5,
+     "key": "D# minor",
+     "genre": "WARM",
+     "song": "Ontological Collapse (The Unstainable)",
+     "folder": "VOL_DUSTREST19_VOXSUNG",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-27_02.mp3",
+     "name": "VOL_MALLGROUND27_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 136.0,
+     "key": "G major",
+     "genre": "WARM",
+     "song": "MallNet Paradise System",
+     "folder": "VOL_MALLGROUND27_MAINBEAT",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-11_01.mp3",
+     "name": "VOL_DUSTREST11_GUITAR_1",
+     "instrument": "STRINGS",
+     "tempo": 136.0,
+     "key": "D# minor",
+     "genre": "WARM",
+     "song": "Not a Mote of Dust",
+     "folder": "VOL_DUSTREST11_GUITAR",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-06_02.mp3",
+     "name": "VOL_GLASS06_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 99.4,
+     "key": "E major",
+     "genre": "WARM",
+     "song": "Cathedral of Glass",
+     "folder": "VOL_GLASS06_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-16_01.mp3",
+     "name": "VOL_DUSTREST16_SYNTHLEAD_1",
+     "instrument": "SYNTH",
+     "tempo": 112.4,
+     "key": "A# major",
+     "genre": "WARM",
+     "song": "Frictionless Void",
+     "folder": "VOL_DUSTREST16_SYNTHLEAD",
+     "kin": "mood"
+    }
+   ]
   },
   {
    "num": "10",
@@ -849,7 +1659,97 @@
     }
    ],
    "variants": [],
-   "n_variant_instances": 0
+   "n_variant_instances": 0,
+   "orchestra": [
+    {
+     "file": "pack/songloops/VOL_nightbus-08_02.mp3",
+     "name": "VOL_NIGHTBUS08_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 95.7,
+     "key": "G major",
+     "genre": "STREET",
+     "song": "Saltwater Static (The Last Shanty)",
+     "folder": "VOL_NIGHTBUS08_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-18_06.mp3",
+     "name": "VOL_MALLGROUND18_PADCHORD_1",
+     "instrument": "SYNTH",
+     "tempo": 112.4,
+     "key": "E major",
+     "genre": "STREET",
+     "song": "Hidden Systems (Infra-Bass Edit)",
+     "folder": "VOL_MALLGROUND18_PADCHORD",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-18_01.mp3",
+     "name": "VOL_MALLGROUND18_BASSLINE_1",
+     "instrument": "BASS",
+     "tempo": 112.4,
+     "key": "G major",
+     "genre": "STREET",
+     "song": "Hidden Systems (Infra-Bass Edit)",
+     "folder": "VOL_MALLGROUND18_BASSLINE",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-15_05.mp3",
+     "name": "VOL_GLASS15_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 136.0,
+     "key": "E minor",
+     "genre": "SACRED",
+     "song": "Tunnel Lights & Dirty Money",
+     "folder": "VOL_GLASS15_VOXSUNG",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mareamemory-30_01.mp3",
+     "name": "VOL_MAREAMEMORY30_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 129.2,
+     "key": "G minor",
+     "genre": "STREET",
+     "song": "Submerged Afrofuturist Ignition",
+     "folder": "VOL_MAREAMEMORY30_MAINBEAT",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-27_06.mp3",
+     "name": "VOL_MALLGROUND27_GUITAR_1",
+     "instrument": "STRINGS",
+     "tempo": 136.0,
+     "key": "G major",
+     "genre": "WARM",
+     "song": "MallNet Paradise System",
+     "folder": "VOL_MALLGROUND27_GUITAR",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_aeolian-13_01.mp3",
+     "name": "VOL_AEOLIAN13_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 92.3,
+     "key": "D minor",
+     "genre": "STREET",
+     "song": "How to Win My Heart (Dial-Tone)",
+     "folder": "VOL_AEOLIAN13_MAINBEAT",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_aeolian-05_03.mp3",
+     "name": "VOL_AEOLIAN05_SYNTHLEAD_1",
+     "instrument": "SYNTH",
+     "tempo": 86.1,
+     "key": "G minor",
+     "genre": "STREET",
+     "song": "Pine Floor Orbit",
+     "folder": "VOL_AEOLIAN05_SYNTHLEAD",
+     "kin": "mood"
+    }
+   ]
   },
   {
    "num": "11",
@@ -865,7 +1765,97 @@
    "mood": "?",
    "sounds": [],
    "variants": [],
-   "n_variant_instances": 0
+   "n_variant_instances": 0,
+   "orchestra": [
+    {
+     "file": "pack/songloops/VOL_nightbus-03_01.mp3",
+     "name": "VOL_NIGHTBUS03_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 152.0,
+     "key": "G# minor",
+     "genre": "WARM",
+     "song": "Command Decent",
+     "folder": "VOL_NIGHTBUS03_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_nightbus-03_05.mp3",
+     "name": "VOL_NIGHTBUS03_SYNTHLEAD_1",
+     "instrument": "SYNTH",
+     "tempo": 152.0,
+     "key": "B major",
+     "genre": "WARM",
+     "song": "Command Decent",
+     "folder": "VOL_NIGHTBUS03_SYNTHLEAD",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_congregation-13_04.mp3",
+     "name": "VOL_CONGREGATION13_SUBBASS_1",
+     "instrument": "BASS",
+     "tempo": 136.0,
+     "key": "A major",
+     "genre": "WARM",
+     "song": "The Master's Zenith",
+     "folder": "VOL_CONGREGATION13_SUBBASS",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mareamemory-06_01.mp3",
+     "name": "VOL_MAREAMEMORY06_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 60.1,
+     "key": "C major",
+     "genre": "WARM",
+     "song": "Ecstatic Dawn",
+     "folder": "VOL_MAREAMEMORY06_VOXSUNG",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_cathedral-04_01.mp3",
+     "name": "VOL_CATHEDRAL04_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 99.4,
+     "key": "D major",
+     "genre": "WARM",
+     "song": "Data Purge",
+     "folder": "VOL_CATHEDRAL04_MAINBEAT",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-16_04.mp3",
+     "name": "VOL_DUSTREST16_STRINGS_1",
+     "instrument": "STRINGS",
+     "tempo": 112.4,
+     "key": "G minor",
+     "genre": "WARM",
+     "song": "Frictionless Void",
+     "folder": "VOL_DUSTREST16_STRINGS",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-11_02.mp3",
+     "name": "VOL_DUSTREST11_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 136.0,
+     "key": "F# major",
+     "genre": "WARM",
+     "song": "Not a Mote of Dust",
+     "folder": "VOL_DUSTREST11_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mareamemory-25_01.mp3",
+     "name": "VOL_MAREAMEMORY25_SYNTHLEAD_1",
+     "instrument": "SYNTH",
+     "tempo": 123.1,
+     "key": "E major",
+     "genre": "WARM",
+     "song": "Shaolin Sunrise Pulse",
+     "folder": "VOL_MAREAMEMORY25_SYNTHLEAD",
+     "kin": "mood"
+    }
+   ]
   },
   {
    "num": "12",
@@ -942,7 +1932,97 @@
     }
    ],
    "variants": [],
-   "n_variant_instances": 0
+   "n_variant_instances": 0,
+   "orchestra": [
+    {
+     "file": "pack/songloops/VOL_mareamemory-18_04.mp3",
+     "name": "VOL_MAREAMEMORY18_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 161.5,
+     "key": "F# major",
+     "genre": "WARM",
+     "song": "Prime Foundation — The Actual Life Engine",
+     "folder": "VOL_MAREAMEMORY18_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_aeolian-02_01.mp3",
+     "name": "VOL_AEOLIAN02_SYNTHLEAD_1",
+     "instrument": "SYNTH",
+     "tempo": 60.1,
+     "key": "A# minor",
+     "genre": "WARM",
+     "song": "Flashing Lights (Roadside Omen)",
+     "folder": "VOL_AEOLIAN02_SYNTHLEAD",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-06_01.mp3",
+     "name": "VOL_GLASS06_BASSLINE_1",
+     "instrument": "BASS",
+     "tempo": 99.4,
+     "key": "F# major",
+     "genre": "WARM",
+     "song": "Cathedral of Glass",
+     "folder": "VOL_GLASS06_BASSLINE",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-19_05.mp3",
+     "name": "VOL_DUSTREST19_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 117.5,
+     "key": "D# minor",
+     "genre": "WARM",
+     "song": "Ontological Collapse (The Unstainable)",
+     "folder": "VOL_DUSTREST19_VOXSUNG",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-27_02.mp3",
+     "name": "VOL_MALLGROUND27_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 136.0,
+     "key": "G major",
+     "genre": "WARM",
+     "song": "MallNet Paradise System",
+     "folder": "VOL_MALLGROUND27_MAINBEAT",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-27_06.mp3",
+     "name": "VOL_MALLGROUND27_GUITAR_1",
+     "instrument": "STRINGS",
+     "tempo": 136.0,
+     "key": "G major",
+     "genre": "WARM",
+     "song": "MallNet Paradise System",
+     "folder": "VOL_MALLGROUND27_GUITAR",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-15_03.mp3",
+     "name": "VOL_GLASS15_PADCHORD_1",
+     "instrument": "SYNTH",
+     "tempo": 136.0,
+     "key": "F# minor",
+     "genre": "WARM",
+     "song": "Tunnel Lights & Dirty Money",
+     "folder": "VOL_GLASS15_PADCHORD",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-19_05.mp3",
+     "name": "VOL_MALLGROUND19_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 107.7,
+     "key": "C minor",
+     "genre": "WARM",
+     "song": "INDEXED EVIDENCE 120",
+     "folder": "VOL_MALLGROUND19_MAINBEAT",
+     "kin": "mood"
+    }
+   ]
   },
   {
    "num": "13",
@@ -958,7 +2038,97 @@
    "mood": "?",
    "sounds": [],
    "variants": [],
-   "n_variant_instances": 0
+   "n_variant_instances": 0,
+   "orchestra": [
+    {
+     "file": "pack/songloops/VOL_dustrest-11_02.mp3",
+     "name": "VOL_DUSTREST11_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 136.0,
+     "key": "F# major",
+     "genre": "WARM",
+     "song": "Not a Mote of Dust",
+     "folder": "VOL_DUSTREST11_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_aeolian-02_01.mp3",
+     "name": "VOL_AEOLIAN02_SYNTHLEAD_1",
+     "instrument": "SYNTH",
+     "tempo": 60.1,
+     "key": "A# minor",
+     "genre": "WARM",
+     "song": "Flashing Lights (Roadside Omen)",
+     "folder": "VOL_AEOLIAN02_SYNTHLEAD",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-06_01.mp3",
+     "name": "VOL_GLASS06_BASSLINE_1",
+     "instrument": "BASS",
+     "tempo": 99.4,
+     "key": "F# major",
+     "genre": "WARM",
+     "song": "Cathedral of Glass",
+     "folder": "VOL_GLASS06_BASSLINE",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mareamemory-06_01.mp3",
+     "name": "VOL_MAREAMEMORY06_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 60.1,
+     "key": "C major",
+     "genre": "WARM",
+     "song": "Ecstatic Dawn",
+     "folder": "VOL_MAREAMEMORY06_VOXSUNG",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_aeolian-13_01.mp3",
+     "name": "VOL_AEOLIAN13_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 92.3,
+     "key": "D minor",
+     "genre": "STREET",
+     "song": "How to Win My Heart (Dial-Tone)",
+     "folder": "VOL_AEOLIAN13_MAINBEAT",
+     "kin": "title"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-16_04.mp3",
+     "name": "VOL_DUSTREST16_STRINGS_1",
+     "instrument": "STRINGS",
+     "tempo": 112.4,
+     "key": "G minor",
+     "genre": "WARM",
+     "song": "Frictionless Void",
+     "folder": "VOL_DUSTREST16_STRINGS",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_aeolian-02_03.mp3",
+     "name": "VOL_AEOLIAN02_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 60.1,
+     "key": "A# major",
+     "genre": "WARM",
+     "song": "Flashing Lights (Roadside Omen)",
+     "folder": "VOL_AEOLIAN02_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-27_02.mp3",
+     "name": "VOL_MALLGROUND27_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 136.0,
+     "key": "G major",
+     "genre": "WARM",
+     "song": "MallNet Paradise System",
+     "folder": "VOL_MALLGROUND27_MAINBEAT",
+     "kin": "mood"
+    }
+   ]
   },
   {
    "num": "14",
@@ -1009,7 +2179,97 @@
      "kind": "spoken"
     }
    ],
-   "n_variant_instances": 12
+   "n_variant_instances": 12,
+   "orchestra": [
+    {
+     "file": "pack/songloops/VOL_cathedral-11_04.mp3",
+     "name": "VOL_CATHEDRAL11_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 129.2,
+     "key": "F# minor",
+     "genre": "DARK",
+     "song": "Stained Glass Rims",
+     "folder": "VOL_CATHEDRAL11_PIANO",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mareamemory-18_03.mp3",
+     "name": "VOL_MAREAMEMORY18_PADCHORD_1",
+     "instrument": "SYNTH",
+     "tempo": 161.5,
+     "key": "G# minor",
+     "genre": "STREET",
+     "song": "Prime Foundation — The Actual Life Engine",
+     "folder": "VOL_MAREAMEMORY18_PADCHORD",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-15_01.mp3",
+     "name": "VOL_GLASS15_BASSLINE_1",
+     "instrument": "BASS",
+     "tempo": 136.0,
+     "key": "D# minor",
+     "genre": "DARK",
+     "song": "Tunnel Lights & Dirty Money",
+     "folder": "VOL_GLASS15_BASSLINE",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mareamemory-06_01.mp3",
+     "name": "VOL_MAREAMEMORY06_VOXSUNG_1",
+     "instrument": "VOCALS",
+     "tempo": 60.1,
+     "key": "C major",
+     "genre": "WARM",
+     "song": "Ecstatic Dawn",
+     "folder": "VOL_MAREAMEMORY06_VOXSUNG",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_glass-15_02.mp3",
+     "name": "VOL_GLASS15_MAINBEAT_1",
+     "instrument": "DRUMS",
+     "tempo": 136.0,
+     "key": "D# minor",
+     "genre": "DARK",
+     "song": "Tunnel Lights & Dirty Money",
+     "folder": "VOL_GLASS15_MAINBEAT",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_dustrest-10_01.mp3",
+     "name": "VOL_DUSTREST10_STRINGS_1",
+     "instrument": "STRINGS",
+     "tempo": 184.6,
+     "key": "B minor",
+     "genre": "DARK",
+     "song": "Non-Abiding Flow",
+     "folder": "VOL_DUSTREST10_STRINGS",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_cathedral-11_01.mp3",
+     "name": "VOL_CATHEDRAL11_PERC_1",
+     "instrument": "DRUMS",
+     "tempo": 129.2,
+     "key": "F minor",
+     "genre": "DARK",
+     "song": "Stained Glass Rims",
+     "folder": "VOL_CATHEDRAL11_PERC",
+     "kin": "mood"
+    },
+    {
+     "file": "pack/songloops/VOL_mallground-27_01.mp3",
+     "name": "VOL_MALLGROUND27_PIANO_1",
+     "instrument": "PIANO",
+     "tempo": 136.0,
+     "key": "G major",
+     "genre": "DARK",
+     "song": "MallNet Paradise System",
+     "folder": "VOL_MALLGROUND27_PIANO",
+     "kin": "mood"
+    }
+   ]
   }
  ]
 }

@@ -1,0 +1,588 @@
+{
+ "note": "poet_dist: 1.0 = a typical dry reading; the far end of strangers is every mouth that is not hers",
+ "census": {
+  "items": 141,
+  "clusters": 11,
+  "silhouette": 0.287
+ },
+ "clusters": [
+  {
+   "voice": "H6",
+   "guess": "THE POET — dry readings and their kin",
+   "is_poet": true,
+   "n": 28,
+   "kinds": {
+    "reading": 14,
+    "take": 14
+   },
+   "f0_median": 111.1,
+   "poet_dist_median": 1.0,
+   "members": [
+    "READ_01",
+    "READ_02",
+    "READ_03",
+    "READ_04",
+    "READ_05",
+    "READ_06",
+    "READ_07",
+    "READ_08",
+    "READ_09",
+    "READ_10",
+    "READ_11",
+    "READ_12",
+    "READ_13",
+    "READ_14",
+    "T004",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016",
+    "T017",
+    "T018",
+    "T019",
+    "T020",
+    "T021",
+    "T022"
+   ]
+  },
+  {
+   "voice": "H2",
+   "guess": "contains the ELEVENLABS mortician",
+   "is_poet": false,
+   "n": 31,
+   "kinds": {
+    "take": 30,
+    "line-variant": 1
+   },
+   "f0_median": 96.1,
+   "poet_dist_median": 5.55,
+   "members": [
+    "T003",
+    "T006",
+    "T007",
+    "T025",
+    "T026",
+    "T031",
+    "T032",
+    "T033",
+    "T034",
+    "T035",
+    "T036",
+    "T037",
+    "T038",
+    "T040",
+    "T045",
+    "T046",
+    "T048",
+    "T049",
+    "T050",
+    "T056",
+    "T057",
+    "T065",
+    "T074",
+    "T075",
+    "T076",
+    "T077",
+    "T078",
+    "T079",
+    "T080",
+    "T081",
+    "VAR_01_SH_Out_of_life.mp3"
+   ]
+  },
+  {
+   "voice": "H9",
+   "guess": "OTHER MOUTHS on the poem lines (MANTA)",
+   "is_poet": false,
+   "n": 7,
+   "kinds": {
+    "take": 3,
+    "line-variant": 4
+   },
+   "f0_median": 134.1,
+   "poet_dist_median": 6.52,
+   "members": [
+    "T005",
+    "T023",
+    "T024",
+    "VAR_04_Nevermore.mp4",
+    "VAR_codex_04_Nevermore.mp4",
+    "VAR_04_Nevermore.mp4",
+    "VAR_Where you go when you leave (ancie"
+   ]
+  },
+  {
+   "voice": "H3",
+   "guess": "mixed narration kin",
+   "is_poet": false,
+   "n": 27,
+   "kinds": {
+    "take": 22,
+    "song-vocal": 1,
+    "line-variant": 4
+   },
+   "f0_median": 92.5,
+   "poet_dist_median": 6.89,
+   "members": [
+    "T001",
+    "T002",
+    "T009",
+    "T027",
+    "T028",
+    "T029",
+    "T030",
+    "T039",
+    "T041",
+    "T042",
+    "T043",
+    "T044",
+    "T047",
+    "T051",
+    "T052",
+    "T055",
+    "T062",
+    "T067",
+    "T069",
+    "T070",
+    "T073",
+    "T082",
+    "SING_VOL_midnightsteppe-17",
+    "VAR_01_Out_of_life.mp4",
+    "VAR_14_Hot_Minute.mp4",
+    "VAR_Hot Minute_The New Covenant remix ",
+    "VAR_codex_13_Hot_Minute.mp4"
+   ]
+  },
+  {
+   "voice": "H5",
+   "guess": "AI SINGERS — VOLHOLLA vocal stems",
+   "is_poet": false,
+   "n": 7,
+   "kinds": {
+    "song-vocal": 6,
+    "line-variant": 1
+   },
+   "f0_median": 196.3,
+   "poet_dist_median": 8.06,
+   "members": [
+    "SING_VOL_aeolian-03",
+    "SING_VOL_aeolian-13",
+    "SING_VOL_cathedral-04",
+    "SING_VOL_cathedral-11",
+    "SING_VOL_dustrest-12",
+    "SING_VOL_mareamemory-02",
+    "VAR_Nevermore_Reclaimed Truths.mp3"
+   ]
+  },
+  {
+   "voice": "H8",
+   "guess": "AI SINGERS — VOLHOLLA vocal stems",
+   "is_poet": false,
+   "n": 10,
+   "kinds": {
+    "take": 2,
+    "song-vocal": 8
+   },
+   "f0_median": 193.1,
+   "poet_dist_median": 9.23,
+   "members": [
+    "T058",
+    "T068",
+    "SING_VOL_aeolian-02",
+    "SING_VOL_aeolian-05",
+    "SING_VOL_congregation-13",
+    "SING_VOL_dustrest-10",
+    "SING_VOL_dustrest-19",
+    "SING_VOL_dustrest-20",
+    "SING_VOL_mareamemory-30",
+    "SING_VOL_nightbus-03"
+   ]
+  },
+  {
+   "voice": "H11",
+   "guess": "mixed narration kin",
+   "is_poet": false,
+   "n": 3,
+   "kinds": {
+    "take": 2,
+    "line-variant": 1
+   },
+   "f0_median": 341.5,
+   "poet_dist_median": 10.42,
+   "members": [
+    "T008",
+    "T053",
+    "VAR_Echoes of Departure remix v1_GOOD."
+   ]
+  },
+  {
+   "voice": "H4",
+   "guess": "AI SINGERS — VOLHOLLA vocal stems",
+   "is_poet": false,
+   "n": 20,
+   "kinds": {
+    "take": 9,
+    "song-vocal": 11
+   },
+   "f0_median": 107.0,
+   "poet_dist_median": 10.69,
+   "members": [
+    "T054",
+    "T059",
+    "T060",
+    "T061",
+    "T063",
+    "T064",
+    "T066",
+    "T071",
+    "T072",
+    "SING_VOL_blackwater-10",
+    "SING_VOL_dustrest-11",
+    "SING_VOL_glass-06",
+    "SING_VOL_inthemiddle-10",
+    "SING_VOL_inthemiddle-38",
+    "SING_VOL_mallground-18",
+    "SING_VOL_mallground-19",
+    "SING_VOL_mallground-27",
+    "SING_VOL_mareamemory-14",
+    "SING_VOL_mareamemory-18",
+    "SING_VOL_nightbus-08"
+   ]
+  },
+  {
+   "voice": "H1",
+   "guess": "AI SINGERS — VOLHOLLA vocal stems",
+   "is_poet": false,
+   "n": 5,
+   "kinds": {
+    "song-vocal": 5
+   },
+   "f0_median": 293.7,
+   "poet_dist_median": 11.49,
+   "members": [
+    "SING_VOL_aeolian-09",
+    "SING_VOL_cathedral-14",
+    "SING_VOL_dustrest-16",
+    "SING_VOL_mareamemory-06",
+    "SING_VOL_mareamemory-20"
+   ]
+  },
+  {
+   "voice": "H10",
+   "guess": "AI SINGERS — VOLHOLLA vocal stems",
+   "is_poet": false,
+   "n": 1,
+   "kinds": {
+    "song-vocal": 1
+   },
+   "f0_median": 234.0,
+   "poet_dist_median": 11.87,
+   "members": [
+    "SING_VOL_glass-15"
+   ]
+  },
+  {
+   "voice": "H7",
+   "guess": "AI SINGERS — VOLHOLLA vocal stems",
+   "is_poet": false,
+   "n": 2,
+   "kinds": {
+    "song-vocal": 2
+   },
+   "f0_median": 406.9,
+   "poet_dist_median": 13.54,
+   "members": [
+    "SING_VOL_glass-11",
+    "SING_VOL_mareamemory-25"
+   ]
+  }
+ ],
+ "strangers": [
+  {
+   "id": "SING_VOL_mareamemory-25",
+   "kind": "song-vocal",
+   "f0": 413.9,
+   "poet_dist": 14.24,
+   "src": "_dig/stems/htdemucs/Marea Memory - Shaolin Sunrise Pulse - Treblo/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_glass-11",
+   "kind": "song-vocal",
+   "f0": 400.0,
+   "poet_dist": 12.83,
+   "src": "_dig/stems/htdemucs/Cathedral of Glass - London Hiss - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_aeolian-09",
+   "kind": "song-vocal",
+   "f0": 311.0,
+   "poet_dist": 12.67,
+   "src": "_dig/stems/htdemucs/Aeolian Drift - 09_Dial Tone Echoes - Treblo/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_inthemiddle-38",
+   "kind": "song-vocal",
+   "f0": 209.2,
+   "poet_dist": 12.15,
+   "src": "_dig/stems/htdemucs/In The Middle - Vinyl Incense Ritual - Treblo/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_glass-15",
+   "kind": "song-vocal",
+   "f0": 234.0,
+   "poet_dist": 11.87,
+   "src": "_dig/stems/htdemucs/Cathedral of Glass - Tunnel Lights & Dirty Money - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "T060",
+   "kind": "take",
+   "f0": 96.6,
+   "poet_dist": 11.84,
+   "src": "LIZARD/TEMP_AUDIO/003_mixed.mp4"
+  },
+  {
+   "id": "VAR_Echoes of Departure remix v1_GOOD.",
+   "kind": "line-variant",
+   "f0": 364.9,
+   "poet_dist": 11.74,
+   "src": "slideshows/Echoes of Departure remix v1_GOOD.mp3",
+   "poems": [
+    "01"
+   ]
+  },
+  {
+   "id": "SING_VOL_mallground-19",
+   "kind": "song-vocal",
+   "f0": 129.1,
+   "poet_dist": 11.66,
+   "src": "_dig/stems/htdemucs/Mall Patchworld Ingest - INDEXED EVIDENCE 120 - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_dustrest-16",
+   "kind": "song-vocal",
+   "f0": 293.7,
+   "poet_dist": 11.64,
+   "src": "_dig/stems/htdemucs/No Bright Stand - Frictionless Void - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_glass-06",
+   "kind": "song-vocal",
+   "f0": 175.0,
+   "poet_dist": 11.6,
+   "src": "_dig/stems/htdemucs/Cathedral of Glass - Cathedral of Glass - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_inthemiddle-10",
+   "kind": "song-vocal",
+   "f0": 197.3,
+   "poet_dist": 11.53,
+   "src": "_dig/stems/htdemucs/In The Middle - Dust and Dawn - Treblo/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_mallground-27",
+   "kind": "song-vocal",
+   "f0": 98.6,
+   "poet_dist": 11.5,
+   "src": "_dig/stems/htdemucs/Mall Patchworld Ingest - MallNet Paradise System - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_cathedral-14",
+   "kind": "song-vocal",
+   "f0": 341.9,
+   "poet_dist": 11.49,
+   "src": "_dig/stems/htdemucs/The Cathedral of IV Drips - Vatican Vigil - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "T066",
+   "kind": "take",
+   "f0": 92.2,
+   "poet_dist": 11.36,
+   "src": "LIZARD/TEMP_AUDIO/012_mixed.mp4"
+  },
+  {
+   "id": "SING_VOL_dustrest-11",
+   "kind": "song-vocal",
+   "f0": 144.1,
+   "poet_dist": 11.19,
+   "src": "_dig/stems/htdemucs/No Bright Stand - Not a Mote of Dust - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_mareamemory-14",
+   "kind": "song-vocal",
+   "f0": 162.0,
+   "poet_dist": 10.92,
+   "src": "_dig/stems/htdemucs/Marea Memory - Lost in the Sun - Treblo/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_blackwater-10",
+   "kind": "song-vocal",
+   "f0": 133.7,
+   "poet_dist": 10.72,
+   "src": "_dig/stems/htdemucs/Black Water Run - Gray Alley Slow Drag - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_nightbus-08",
+   "kind": "song-vocal",
+   "f0": 98.9,
+   "poet_dist": 10.67,
+   "src": "_dig/stems/htdemucs/Neon Puddles (Night Bus Edit) - Saltwater Static (The Last Shanty) - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_mareamemory-06",
+   "kind": "song-vocal",
+   "f0": 266.3,
+   "poet_dist": 10.54,
+   "src": "_dig/stems/htdemucs/Marea Memory - Ecstatic Dawn - Treblo/vocals.mp3"
+  },
+  {
+   "id": "T061",
+   "kind": "take",
+   "f0": 86.5,
+   "poet_dist": 10.51,
+   "src": "LIZARD/TEMP_AUDIO/004_mixed.mp4"
+  },
+  {
+   "id": "T053",
+   "kind": "take",
+   "f0": 341.5,
+   "poet_dist": 10.42,
+   "src": "BOY/WN_LEAVE/final_video_with_audio.mp4"
+  },
+  {
+   "id": "SING_VOL_dustrest-10",
+   "kind": "song-vocal",
+   "f0": 197.5,
+   "poet_dist": 10.19,
+   "src": "_dig/stems/htdemucs/No Bright Stand - Non-Abiding Flow - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_congregation-13",
+   "kind": "song-vocal",
+   "f0": 210.5,
+   "poet_dist": 10.17,
+   "src": "_dig/stems/htdemucs/The Great Congregation - The Master's Zenith - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_mareamemory-30",
+   "kind": "song-vocal",
+   "f0": 211.2,
+   "poet_dist": 10.1,
+   "src": "_dig/stems/htdemucs/Marea Memory - Submerged Afrofuturist Ignition - Treblo/vocals.mp3"
+  },
+  {
+   "id": "T002",
+   "kind": "take",
+   "f0": 97.9,
+   "poet_dist": 9.93,
+   "src": "LIZARD/TEMP_AUDIO/001_mixed.mp4"
+  },
+  {
+   "id": "T073",
+   "kind": "take",
+   "f0": 81.7,
+   "poet_dist": 9.87,
+   "src": "LIZARD/TEMP_AUDIO/020_mixed.mp4"
+  },
+  {
+   "id": "SING_VOL_mareamemory-18",
+   "kind": "song-vocal",
+   "f0": 139.9,
+   "poet_dist": 9.85,
+   "src": "_dig/stems/htdemucs/Marea Memory - Prime Foundation — The Actual Life Engine - Treblo/vocals.mp3"
+  },
+  {
+   "id": "T059",
+   "kind": "take",
+   "f0": 98.3,
+   "poet_dist": 9.81,
+   "src": "LIZARD/TEMP_AUDIO/002_mixed.mp4"
+  },
+  {
+   "id": "SING_VOL_aeolian-13",
+   "kind": "song-vocal",
+   "f0": 133.4,
+   "poet_dist": 9.81,
+   "src": "_dig/stems/htdemucs/Aeolian Drift - 13_How to Win My Heart (Dial-Tone) - Treblo/vocals.mp3"
+  },
+  {
+   "id": "T071",
+   "kind": "take",
+   "f0": 77.4,
+   "poet_dist": 9.8,
+   "src": "LIZARD/TEMP_AUDIO/017_mixed.mp4"
+  },
+  {
+   "id": "T072",
+   "kind": "take",
+   "f0": 97.2,
+   "poet_dist": 9.8,
+   "src": "LIZARD/TEMP_AUDIO/019_mixed.mp4"
+  },
+  {
+   "id": "T008",
+   "kind": "take",
+   "f0": 69.8,
+   "poet_dist": 9.78,
+   "src": "DOG/EAR_AUDIO_DELAY_OPTIONS/temp_video_files/step_1.mp4"
+  },
+  {
+   "id": "SING_VOL_mallground-18",
+   "kind": "song-vocal",
+   "f0": 172.3,
+   "poet_dist": 9.75,
+   "src": "_dig/stems/htdemucs/Mall Patchworld Ingest - Hidden Systems (Infra-Bass Edit) - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "T063",
+   "kind": "take",
+   "f0": 100.1,
+   "poet_dist": 9.72,
+   "src": "LIZARD/TEMP_AUDIO/009_mixed.mp4"
+  },
+  {
+   "id": "SING_VOL_mareamemory-02",
+   "kind": "song-vocal",
+   "f0": 197.8,
+   "poet_dist": 9.6,
+   "src": "_dig/stems/htdemucs/Marea Memory - Aten Rising (Voice Memo 1) - Treblo/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_aeolian-02",
+   "kind": "song-vocal",
+   "f0": 124.0,
+   "poet_dist": 9.46,
+   "src": "_dig/stems/htdemucs/Aeolian Drift - 02_Flashing Lights (Roadside Omen) - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_aeolian-03",
+   "kind": "song-vocal",
+   "f0": 227.0,
+   "poet_dist": 9.46,
+   "src": "_dig/stems/htdemucs/Aeolian Drift - 03_How to Break Off an Engagement - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "T054",
+   "kind": "take",
+   "f0": 70.1,
+   "poet_dist": 9.34,
+   "src": "CAT/EYE/LA Thompson- WYGWYL 2025 2/AF5A2272.MP4"
+  },
+  {
+   "id": "SING_VOL_nightbus-03",
+   "kind": "song-vocal",
+   "f0": 159.4,
+   "poet_dist": 9.25,
+   "src": "_dig/stems/htdemucs/Neon Puddles (Night Bus Edit) - Command Decent - Sonauto/vocals.mp3"
+  },
+  {
+   "id": "SING_VOL_aeolian-05",
+   "kind": "song-vocal",
+   "f0": 197.4,
+   "poet_dist": 9.21,
+   "src": "_dig/stems/htdemucs/Aeolian Drift - 05_Pine Floor Orbit - Treblo/vocals.mp3"
+  }
+ ]
+}
