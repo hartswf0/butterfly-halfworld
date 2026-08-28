@@ -122,17 +122,73 @@
      }
     },
     {
-     "at": 57.98,
-     "source": "pack/audio/ATL_LOOP_BGDEEPVINTAGER_40.mp3",
+     "at": 40.39,
+     "source": "codex/03/line_02.mp3",
      "s": 0,
-     "e": 1.4,
-     "gain": 0.42,
-     "fadeIn": 0.02,
-     "fadeOut": 0.35,
-     "label": "foley: rain,",
+     "e": 1.2199999999999975,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: Spirits have left salv",
      "ref": {
       "role": "hit",
-      "pan": -0.5
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 25.779999999999998,
+     "source": "codex/03/line_00.mp3",
+     "s": 0,
+     "e": 1.680000000000002,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: Old to forever, a tamb",
+     "ref": {
+      "role": "hit",
+      "pan": -0.55
+     }
+    },
+    {
+     "at": 57.98,
+     "source": "codex/03/line_05.mp3",
+     "s": 0,
+     "e": 1.4700000000000046,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: daily breads soaked an",
+     "ref": {
+      "role": "hit",
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 71.52000000000001,
+     "source": "codex/03/line_06.mp3",
+     "s": 0,
+     "e": 4.61,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: and a tambourine sha",
+     "ref": {
+      "role": "bed",
+      "pan": -0.4
+     }
+    },
+    {
+     "at": 72.72000000000001,
+     "source": "codex/03/line_02.mp3",
+     "s": 0,
+     "e": 5.0,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: Spirits have left sa",
+     "ref": {
+      "role": "bed",
+      "pan": 0.4
      }
     },
     {
@@ -160,8 +216,8 @@
     "iter": 1,
     "snr_db": 8.7,
     "collisions": 0,
-    "arc_db": 19.8,
-    "clap_margin": 0.4322,
+    "arc_db": 8.8,
+    "clap_margin": 0.4323,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -169,8 +225,8 @@
     "iter": 2,
     "snr_db": 12.5,
     "collisions": 0,
-    "arc_db": 19.3,
-    "clap_margin": 0.4234,
+    "arc_db": 8.4,
+    "clap_margin": 0.4176,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -178,8 +234,8 @@
     "iter": 3,
     "snr_db": 16.3,
     "collisions": 0,
-    "arc_db": 19.0,
-    "clap_margin": 0.4138,
+    "arc_db": 8.1,
+    "clap_margin": 0.4064,
     "passed": true,
     "action": "accepted"
    }

@@ -122,17 +122,73 @@
      }
     },
     {
-     "at": 39.82,
-     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_35.mp3",
+     "at": 17.08,
+     "source": "codex/12/line_00.mp3",
      "s": 0,
-     "e": 1.4,
-     "gain": 0.42,
-     "fadeIn": 0.02,
-     "fadeOut": 0.35,
-     "label": "foley: with",
+     "e": 1.4499999999999997,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: Decades later, there w",
      "ref": {
       "role": "hit",
-      "pan": -0.5
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 24.349999999999998,
+     "source": "codex/12/line_01.mp3",
+     "s": 0,
+     "e": 1.3300000000000005,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: loud voices so our hea",
+     "ref": {
+      "role": "hit",
+      "pan": -0.55
+     }
+    },
+    {
+     "at": 39.82,
+     "source": "codex/12/line_02.mp3",
+     "s": 0,
+     "e": 1.7599999999999967,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: and known journeys, an",
+     "ref": {
+      "role": "hit",
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 73.81,
+     "source": "codex/12/line_00.mp3",
+     "s": 0,
+     "e": 5.0,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: Decades later, there",
+     "ref": {
+      "role": "bed",
+      "pan": -0.4
+     }
+    },
+    {
+     "at": 75.01,
+     "source": "codex/12/line_01.mp3",
+     "s": 0,
+     "e": 5.0,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: loud voices so our h",
+     "ref": {
+      "role": "bed",
+      "pan": 0.4
      }
     },
     {
@@ -160,8 +216,8 @@
     "iter": 1,
     "snr_db": 7.4,
     "collisions": 0,
-    "arc_db": 20.8,
-    "clap_margin": 0.4215,
+    "arc_db": 7.6,
+    "clap_margin": 0.3857,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -169,8 +225,8 @@
     "iter": 2,
     "snr_db": 11.2,
     "collisions": 0,
-    "arc_db": 20.2,
-    "clap_margin": 0.4148,
+    "arc_db": 6.9,
+    "clap_margin": 0.3904,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -178,8 +234,8 @@
     "iter": 3,
     "snr_db": 14.8,
     "collisions": 0,
-    "arc_db": 19.7,
-    "clap_margin": 0.4136,
+    "arc_db": 6.5,
+    "clap_margin": 0.3975,
     "passed": true,
     "action": "accepted"
    }

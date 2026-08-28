@@ -123,16 +123,86 @@
     },
     {
      "at": 39.53,
-     "source": "radio/parts/09_08.mp3",
-     "s": 0.0,
-     "e": 1.4,
-     "gain": 0.42,
-     "fadeIn": 0.02,
-     "fadeOut": 0.35,
-     "label": "foley: moon",
+     "source": "codex/09/line_04.mp3",
+     "s": 0,
+     "e": 1.4999999999999987,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: I believe maybe we cou",
      "ref": {
       "role": "hit",
-      "pan": -0.5
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 74.8,
+     "source": "codex/09/line_10.mp3",
+     "s": 0,
+     "e": 1.6499999999999972,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: the way we used to be.",
+     "ref": {
+      "role": "hit",
+      "pan": -0.55
+     }
+    },
+    {
+     "at": 10.360000000000001,
+     "source": "codex/09/line_00.mp3",
+     "s": 0,
+     "e": 1.1599999999999997,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: Accepting you'll never",
+     "ref": {
+      "role": "hit",
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 13.59,
+     "source": "codex/09/line_01.mp3",
+     "s": 0,
+     "e": 1.3699999999999997,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: What isn't mine I stil",
+     "ref": {
+      "role": "hit",
+      "pan": -0.55
+     }
+    },
+    {
+     "at": 117.82,
+     "source": "codex/09/line_04.mp3",
+     "s": 0,
+     "e": 3.59,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: I believe maybe we c",
+     "ref": {
+      "role": "bed",
+      "pan": -0.4
+     }
+    },
+    {
+     "at": 119.02,
+     "source": "codex/09/line_10.mp3",
+     "s": 0,
+     "e": 2.64,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: the way we used to b",
+     "ref": {
+      "role": "bed",
+      "pan": 0.4
      }
     },
     {
@@ -160,8 +230,8 @@
     "iter": 1,
     "snr_db": 10.4,
     "collisions": 0,
-    "arc_db": 19.2,
-    "clap_margin": 0.3856,
+    "arc_db": 17.8,
+    "clap_margin": 0.3857,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -169,7 +239,7 @@
     "iter": 2,
     "snr_db": 14.0,
     "collisions": 0,
-    "arc_db": 18.9,
+    "arc_db": 17.5,
     "clap_margin": 0.3845,
     "passed": true,
     "action": "accepted"

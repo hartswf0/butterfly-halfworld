@@ -147,7 +147,7 @@
     "snr_db": 1.4,
     "collisions": 0,
     "arc_db": 27.1,
-    "clap_margin": 0.414,
+    "clap_margin": 0.4144,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -156,7 +156,7 @@
     "snr_db": 5.4,
     "collisions": 0,
     "arc_db": 26.4,
-    "clap_margin": 0.4006,
+    "clap_margin": 0.4008,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -174,7 +174,7 @@
     "snr_db": 13.4,
     "collisions": 0,
     "arc_db": 25.7,
-    "clap_margin": 0.3892,
+    "clap_margin": 0.3871,
     "passed": true,
     "action": "accepted"
    }

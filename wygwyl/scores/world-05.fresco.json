@@ -112,13 +112,69 @@
      "source": "radio/parts/05_07.mp3",
      "s": 0.0,
      "e": 26.69,
-     "gain": 0.32,
+     "gain": 0.256,
      "fadeIn": 1.5,
      "fadeOut": 3.5,
      "label": "stem drums",
      "ref": {
       "role": "bed",
       "pan": 0.12
+     }
+    },
+    {
+     "at": 21.849999999999998,
+     "source": "codex/05/line_02.mp3",
+     "s": 0,
+     "e": 1.2400000000000007,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: The past too was waiti",
+     "ref": {
+      "role": "hit",
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 32.269999999999996,
+     "source": "codex/05/line_05.mp3",
+     "s": 0,
+     "e": 1.8999999999999972,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: To dream was to prevai",
+     "ref": {
+      "role": "hit",
+      "pan": -0.55
+     }
+    },
+    {
+     "at": 83.07,
+     "source": "codex/05/line_00.mp3",
+     "s": 0,
+     "e": 5.0,
+     "gain": 0.164,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: They tell me to ask ",
+     "ref": {
+      "role": "bed",
+      "pan": -0.4
+     }
+    },
+    {
+     "at": 84.27,
+     "source": "codex/05/line_01.mp3",
+     "s": 0,
+     "e": 5.0,
+     "gain": 0.164,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: to ask if I can name",
+     "ref": {
+      "role": "bed",
+      "pan": 0.4
      }
     },
     {
@@ -146,7 +202,7 @@
     "iter": 1,
     "snr_db": 2.4,
     "collisions": 0,
-    "arc_db": 19.5,
+    "arc_db": 6.0,
     "clap_margin": 0.3721,
     "passed": false,
     "action": "deepen the bow"
@@ -155,16 +211,16 @@
     "iter": 2,
     "snr_db": 6.3,
     "collisions": 0,
-    "arc_db": 18.8,
+    "arc_db": 5.3,
     "clap_margin": 0.3765,
     "passed": false,
-    "action": "deepen the bow"
+    "action": "deepen the bow, deepen resolve"
    },
    {
     "iter": 3,
     "snr_db": 10.1,
     "collisions": 0,
-    "arc_db": 18.3,
+    "arc_db": 6.5,
     "clap_margin": 0.3833,
     "passed": false,
     "action": "deepen the bow"
@@ -173,7 +229,7 @@
     "iter": 4,
     "snr_db": 13.8,
     "collisions": 0,
-    "arc_db": 18.1,
+    "arc_db": 6.2,
     "clap_margin": 0.3884,
     "passed": true,
     "action": "accepted"

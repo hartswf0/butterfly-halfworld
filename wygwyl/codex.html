@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE CODEX</title>
+<style>
+:root{--bg:#0c0a06;--panel:#151109;--line:#332916;--ink:#ead9b0;--dim:#94815c;--faint:#5c5038;
+  --gold:#e8c34a;--acc:#d97a2e;--teal:#4dd9cc;--rose:#e05c4f;--green:#9ee06a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:13px/1.5 "SF Mono",Menlo,monospace;padding:18px;max-width:980px;margin:0 auto}
+a{color:var(--teal);text-decoration:none}
+h1{font-size:16px;letter-spacing:.3em;color:var(--gold)}
+#sub{color:var(--dim);font-size:11.5px;margin:6px 0 14px;line-height:1.7}
+#picker{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+#picker button{background:var(--panel);border:1px solid var(--line);color:var(--ink);font:inherit;font-size:10.5px;padding:3px 9px;border-radius:3px;cursor:pointer}
+#picker button.on{background:var(--gold);color:#0c0a06;border-color:var(--gold)}
+#picker button small{color:var(--faint);font-size:9px}
+#picker button.on small{color:#0c0a06}
+#head{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin-bottom:10px}
+#title{font-size:15px;color:var(--gold)}
+#meta{color:var(--faint);font-size:11px}
+.ln{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:8px 12px;margin-bottom:6px;
+  display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.ln .tx{flex:1;min-width:230px;font-size:11.5px}
+.ln .tx small{color:var(--faint);display:block;font-size:9.5px}
+.ln button{background:#00000055;border:1px solid var(--line);color:var(--ink);font:inherit;font-size:10.5px;
+  letter-spacing:.1em;padding:4px 11px;border-radius:3px;cursor:pointer;min-width:74px}
+.ln button:hover{border-color:var(--gold);color:var(--gold)}
+.ln button.playing{background:var(--gold);color:#0c0a06;border-color:var(--gold)}
+.ln button.sung{border-color:#5c3a20}
+.jac{font-size:9px;color:var(--faint);min-width:34px;text-align:right}
+.jac.hi{color:var(--green)}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--gold);color:#0c0a06;padding:5px 14px;border-radius:4px;font-size:11px;display:none;z-index:30}
+footer{margin-top:16px;color:var(--dim);font-size:10.5px;line-height:1.8;max-width:80ch}
+footer b{color:var(--ink);font-weight:normal}
+</style>
+</head>
+<body>
+<h1>THE CODEX</h1>
+<div id="sub">the sung album inside <i>Where you go when you leave (codex).mp4</i> — for each poem, every line
+we could align between <b style="color:var(--ink)">her reading</b> and <b style="color:var(--ink)">the song that
+carries the whole poem</b>. READ plays the poet's dry master at that line; SUNG plays the extracted clip from the
+carrier — the same words in another mouth. TWIN plays them in sequence ·
+<a href="radio-atlantis.html">radio ↗</a> · <a href="poemworlds.html">worlds ↗</a> · <a href="atlas.html">atlas ↗</a></div>
+<div id="picker"></div>
+<div id="head" style="display:none"><span id="title"></span><span id="meta"></span></div>
+<div id="lines"></div>
+<div id="toast"></div>
+<footer><b>The alignment:</b> whisper transcripts of the carrier songs, line-matched to the poet's word-timed
+readings (content-token Jaccard ≥ 0.42, in order). <b>The mouths:</b> every codex singer measured against her
+voice mark sits at distance 6.8–17.7 — where her own readings sit at 1 — the same lines, other larynxes.
+157 sung lines extracted; the full map is <a href="codex.json">codex.json</a> and <a href="codex/lines.json">codex/lines.json</a>.</footer>
+
+<script>
+const $ = s => document.querySelector(s);
+let DATA = null, P = null, cur = null;
+
+function toast(m){ const t=$('#toast'); t.textContent=m; t.style.display='block';
+  clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',2200); }
+function stop(){ if (cur){ cur.a.pause(); cur.btn.classList.remove('playing'); cur = null; } }
+
+function play(btn, file, t0, t1, then){
+  stop();
+  const a = new Audio(file);
+  cur = {a, btn};
+  btn.classList.add('playing');
+  if (t0){ a.addEventListener('loadedmetadata', () => a.currentTime = t0, {once:true}); }
+  const h = setInterval(() => {
+    if (cur && cur.a === a && t1 != null && a.currentTime >= t1){ clearInterval(h); stop(); if (then) then(); }
+    if (!cur || cur.a !== a) clearInterval(h);
+  }, 120);
+  a.addEventListener('ended', () => { if (cur && cur.a === a){ stop(); if (then) then(); } });
+  a.play().catch(() => toast('tap again — the browser wanted a gesture'));
+}
+
+function render(){
+  $('#head').style.display = 'flex';
+  $('#title').textContent = `${P.num} · ${P.title}`;
+  $('#meta').textContent = `${P.extracted} of ${P.n_lines} lines aligned and extracted`;
+  const host = $('#lines'); host.innerHTML = '';
+  if (!P.lines.length){
+    host.innerHTML = '<div class="ln"><span class="tx">no codex carrier for this poem — the codex sings “Temple” in its place</span></div>';
+    return;
+  }
+  for (const L of P.lines){
+    const d = document.createElement('div');
+    d.className = 'ln';
+    const v = L.voice || {};
+    d.innerHTML = `<span class="tx">“${L.text}”<small>${L.kind} · ${L.carrier.split('/').pop().slice(0,44)}
+      ${v.f0 ? ` · singer f0 ${v.f0}Hz · dist ${v.poet_dist}` : ''}</small></span>
+      <span class="jac ${L.jaccard >= 0.7 ? 'hi' : ''}">j ${L.jaccard}</span>
+      <button class="rd">▶ READ</button><button class="sg sung">▶ SUNG</button><button class="tw">⇄ TWIN</button>`;
+    const [rd, sg, tw] = d.querySelectorAll('button');
+    rd.onclick = () => play(rd, P.reading, L.read[0], L.read[1]);
+    sg.onclick = () => play(sg, L.sung_clip, 0, null);
+    tw.onclick = () => play(rd, P.reading, L.read[0], L.read[1], () => play(sg, L.sung_clip, 0, null));
+    host.appendChild(d);
+  }
+}
+
+fetch('codex/lines.json', {cache:'no-cache'}).then(r => r.json()).then(j => {
+  DATA = j;
+  const p = $('#picker');
+  for (const poem of j.poems){
+    const b = document.createElement('button');
+    b.innerHTML = `${poem.num} ${poem.title.slice(0,16)} <small>${poem.extracted}</small>`;
+    b.onclick = () => { stop(); P = poem;
+      document.querySelectorAll('#picker button').forEach(x => x.classList.toggle('on', x === b));
+      render(); };
+    p.appendChild(b);
+  }
+  P = j.poems[1] || j.poems[0];
+  p.children[1]?.classList.add('on');
+  render();
+});
+</script>
+</body>
+</html>

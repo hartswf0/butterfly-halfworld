@@ -122,6 +122,76 @@
      }
     },
     {
+     "at": 58.37,
+     "source": "codex/13/line_06.mp3",
+     "s": 0,
+     "e": 1.7400000000000007,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: victory-less seasons f",
+     "ref": {
+      "role": "hit",
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 24.04,
+     "source": "codex/13/line_01.mp3",
+     "s": 0,
+     "e": 1.229999999999999,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: with every pulsing bea",
+     "ref": {
+      "role": "hit",
+      "pan": -0.55
+     }
+    },
+    {
+     "at": 40.32,
+     "source": "codex/13/line_04.mp3",
+     "s": 0,
+     "e": 1.4799999999999955,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: while our elders clutc",
+     "ref": {
+      "role": "hit",
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 109.73,
+     "source": "codex/13/line_05.mp3",
+     "s": 0,
+     "e": 5.0,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: So I thought, life h",
+     "ref": {
+      "role": "bed",
+      "pan": -0.4
+     }
+    },
+    {
+     "at": 110.93,
+     "source": "codex/13/line_12.mp3",
+     "s": 0,
+     "e": 3.97,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: stepping back and le",
+     "ref": {
+      "role": "bed",
+      "pan": 0.4
+     }
+    },
+    {
      "at": 113.73,
      "source": "chops/13/13_C01.mp3",
      "s": 0,
@@ -146,8 +216,8 @@
     "iter": 1,
     "snr_db": 5.0,
     "collisions": 0,
-    "arc_db": 27.7,
-    "clap_margin": 0.4271,
+    "arc_db": 10.5,
+    "clap_margin": 0.4074,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -155,8 +225,8 @@
     "iter": 2,
     "snr_db": 9.0,
     "collisions": 0,
-    "arc_db": 27.3,
-    "clap_margin": 0.4273,
+    "arc_db": 10.1,
+    "clap_margin": 0.4057,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -164,8 +234,8 @@
     "iter": 3,
     "snr_db": 12.7,
     "collisions": 0,
-    "arc_db": 27.1,
-    "clap_margin": 0.4081,
+    "arc_db": 9.9,
+    "clap_margin": 0.3837,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -173,8 +243,8 @@
     "iter": 4,
     "snr_db": 16.3,
     "collisions": 0,
-    "arc_db": 26.9,
-    "clap_margin": 0.3829,
+    "arc_db": 9.7,
+    "clap_margin": 0.3586,
     "passed": true,
     "action": "accepted"
    }

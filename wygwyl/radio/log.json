@@ -8,8 +8,8 @@
      "iter": 1,
      "snr_db": 5.6,
      "collisions": 0,
-     "arc_db": 11.9,
-     "clap_margin": 0.3225,
+     "arc_db": 8.6,
+     "clap_margin": 0.3212,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -17,8 +17,8 @@
      "iter": 2,
      "snr_db": 9.6,
      "collisions": 0,
-     "arc_db": 11.4,
-     "clap_margin": 0.3134,
+     "arc_db": 8.0,
+     "clap_margin": 0.3133,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -26,8 +26,8 @@
      "iter": 3,
      "snr_db": 13.3,
      "collisions": 0,
-     "arc_db": 11.1,
-     "clap_margin": 0.3086,
+     "arc_db": 7.7,
+     "clap_margin": 0.3084,
      "passed": true,
      "action": "accepted"
     }
@@ -36,8 +36,8 @@
     "iter": 3,
     "snr_db": 13.3,
     "collisions": 0,
-    "arc_db": 11.1,
-    "clap_margin": 0.3086,
+    "arc_db": 7.7,
+    "clap_margin": 0.3084,
     "passed": true,
     "action": "accepted"
    },
@@ -50,6 +50,7 @@
     "orch vocals": 1,
     "stem bass": 1,
     "stem drums": 1,
+    "ghost": 3,
     "coda sung": 2,
     "coda": 1
    }
@@ -61,8 +62,8 @@
      "iter": 1,
      "snr_db": 6.8,
      "collisions": 0,
-     "arc_db": 16.4,
-     "clap_margin": 0.4303,
+     "arc_db": 7.2,
+     "clap_margin": 0.4246,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -70,8 +71,8 @@
      "iter": 2,
      "snr_db": 10.4,
      "collisions": 0,
-     "arc_db": 15.7,
-     "clap_margin": 0.4316,
+     "arc_db": 6.5,
+     "clap_margin": 0.4246,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -79,8 +80,8 @@
      "iter": 3,
      "snr_db": 14.4,
      "collisions": 0,
-     "arc_db": 15.2,
-     "clap_margin": 0.433,
+     "arc_db": 6.1,
+     "clap_margin": 0.4257,
      "passed": true,
      "action": "accepted"
     }
@@ -89,8 +90,8 @@
     "iter": 3,
     "snr_db": 14.4,
     "collisions": 0,
-    "arc_db": 15.2,
-    "clap_margin": 0.433,
+    "arc_db": 6.1,
+    "clap_margin": 0.4257,
     "passed": true,
     "action": "accepted"
    },
@@ -103,6 +104,8 @@
     "orch vocals": 1,
     "stem bass": 1,
     "stem drums": 1,
+    "ghost": 2,
+    "coda sung": 2,
     "coda": 1
    }
   },
@@ -113,8 +116,8 @@
      "iter": 1,
      "snr_db": 8.7,
      "collisions": 0,
-     "arc_db": 19.8,
-     "clap_margin": 0.4322,
+     "arc_db": 8.8,
+     "clap_margin": 0.4323,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -122,8 +125,8 @@
      "iter": 2,
      "snr_db": 12.5,
      "collisions": 0,
-     "arc_db": 19.3,
-     "clap_margin": 0.4234,
+     "arc_db": 8.4,
+     "clap_margin": 0.4176,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -131,8 +134,8 @@
      "iter": 3,
      "snr_db": 16.3,
      "collisions": 0,
-     "arc_db": 19.0,
-     "clap_margin": 0.4138,
+     "arc_db": 8.1,
+     "clap_margin": 0.4064,
      "passed": true,
      "action": "accepted"
     }
@@ -141,8 +144,8 @@
     "iter": 3,
     "snr_db": 16.3,
     "collisions": 0,
-    "arc_db": 19.0,
-    "clap_margin": 0.4138,
+    "arc_db": 8.1,
+    "clap_margin": 0.4064,
     "passed": true,
     "action": "accepted"
    },
@@ -155,7 +158,8 @@
     "orch vocals": 1,
     "stem bass": 1,
     "stem drums": 1,
-    "foley": 1,
+    "ghost": 3,
+    "coda sung": 2,
     "coda": 1
    }
   },
@@ -166,8 +170,8 @@
      "iter": 1,
      "snr_db": 7.8,
      "collisions": 0,
-     "arc_db": 8.6,
-     "clap_margin": 0.4098,
+     "arc_db": 16.5,
+     "clap_margin": 0.407,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -175,8 +179,8 @@
      "iter": 2,
      "snr_db": 11.2,
      "collisions": 0,
-     "arc_db": 7.9,
-     "clap_margin": 0.4076,
+     "arc_db": 15.9,
+     "clap_margin": 0.4081,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -184,8 +188,8 @@
      "iter": 3,
      "snr_db": 14.6,
      "collisions": 0,
-     "arc_db": 7.5,
-     "clap_margin": 0.4111,
+     "arc_db": 15.5,
+     "clap_margin": 0.4132,
      "passed": true,
      "action": "accepted"
     }
@@ -194,8 +198,8 @@
     "iter": 3,
     "snr_db": 14.6,
     "collisions": 0,
-    "arc_db": 7.5,
-    "clap_margin": 0.4111,
+    "arc_db": 15.5,
+    "clap_margin": 0.4132,
     "passed": true,
     "action": "accepted"
    },
@@ -208,6 +212,7 @@
     "orch vocals": 1,
     "stem bass": 1,
     "stem drums": 1,
+    "ghost": 4,
     "coda sung": 2,
     "coda": 1
    }
@@ -219,7 +224,7 @@
      "iter": 1,
      "snr_db": 2.4,
      "collisions": 0,
-     "arc_db": 19.5,
+     "arc_db": 6.0,
      "clap_margin": 0.3721,
      "passed": false,
      "action": "deepen the bow"
@@ -228,16 +233,16 @@
      "iter": 2,
      "snr_db": 6.3,
      "collisions": 0,
-     "arc_db": 18.8,
+     "arc_db": 5.3,
      "clap_margin": 0.3765,
      "passed": false,
-     "action": "deepen the bow"
+     "action": "deepen the bow, deepen resolve"
     },
     {
      "iter": 3,
      "snr_db": 10.1,
      "collisions": 0,
-     "arc_db": 18.3,
+     "arc_db": 6.5,
      "clap_margin": 0.3833,
      "passed": false,
      "action": "deepen the bow"
@@ -246,7 +251,7 @@
      "iter": 4,
      "snr_db": 13.8,
      "collisions": 0,
-     "arc_db": 18.1,
+     "arc_db": 6.2,
      "clap_margin": 0.3884,
      "passed": true,
      "action": "accepted"
@@ -256,7 +261,7 @@
     "iter": 4,
     "snr_db": 13.8,
     "collisions": 0,
-    "arc_db": 18.1,
+    "arc_db": 6.2,
     "clap_margin": 0.3884,
     "passed": true,
     "action": "accepted"
@@ -270,6 +275,8 @@
     "orch vocals": 1,
     "stem bass": 1,
     "stem drums": 1,
+    "ghost": 2,
+    "coda sung": 2,
     "coda": 1
    }
   },
@@ -280,25 +287,25 @@
      "iter": 1,
      "snr_db": 6.0,
      "collisions": 0,
-     "arc_db": 15.0,
-     "clap_margin": 0.4119,
+     "arc_db": 3.8,
+     "clap_margin": 0.412,
      "passed": false,
-     "action": "deepen the bow"
+     "action": "deepen the bow, deepen resolve"
     },
     {
      "iter": 2,
      "snr_db": 9.9,
      "collisions": 0,
-     "arc_db": 14.5,
+     "arc_db": 4.9,
      "clap_margin": 0.4167,
      "passed": false,
-     "action": "deepen the bow"
+     "action": "deepen the bow, deepen resolve"
     },
     {
      "iter": 3,
      "snr_db": 13.5,
      "collisions": 0,
-     "arc_db": 14.3,
+     "arc_db": 6.2,
      "clap_margin": 0.4173,
      "passed": true,
      "action": "accepted"
@@ -308,7 +315,7 @@
     "iter": 3,
     "snr_db": 13.5,
     "collisions": 0,
-    "arc_db": 14.3,
+    "arc_db": 6.2,
     "clap_margin": 0.4173,
     "passed": true,
     "action": "accepted"
@@ -322,7 +329,8 @@
     "orch vocals": 1,
     "stem bass": 1,
     "stem drums": 1,
-    "foley": 1,
+    "ghost": 1,
+    "coda sung": 2,
     "coda": 1
    }
   },
@@ -333,8 +341,8 @@
      "iter": 1,
      "snr_db": 9.3,
      "collisions": 0,
-     "arc_db": 19.5,
-     "clap_margin": 0.3739,
+     "arc_db": 8.8,
+     "clap_margin": 0.3639,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -342,8 +350,8 @@
      "iter": 2,
      "snr_db": 12.5,
      "collisions": 0,
-     "arc_db": 18.9,
-     "clap_margin": 0.3674,
+     "arc_db": 8.3,
+     "clap_margin": 0.3548,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -351,8 +359,8 @@
      "iter": 3,
      "snr_db": 15.7,
      "collisions": 0,
-     "arc_db": 18.5,
-     "clap_margin": 0.3592,
+     "arc_db": 7.9,
+     "clap_margin": 0.3488,
      "passed": true,
      "action": "accepted"
     }
@@ -361,8 +369,8 @@
     "iter": 3,
     "snr_db": 15.7,
     "collisions": 0,
-    "arc_db": 18.5,
-    "clap_margin": 0.3592,
+    "arc_db": 7.9,
+    "clap_margin": 0.3488,
     "passed": true,
     "action": "accepted"
    },
@@ -375,6 +383,8 @@
     "orch vocals": 1,
     "stem bass": 1,
     "stem drums": 1,
+    "ghost": 2,
+    "coda sung": 2,
     "coda": 1
    }
   },
@@ -385,8 +395,8 @@
      "iter": 1,
      "snr_db": 12.3,
      "collisions": 0,
-     "arc_db": 20.6,
-     "clap_margin": 0.3602,
+     "arc_db": 17.7,
+     "clap_margin": 0.3586,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -394,7 +404,7 @@
      "iter": 2,
      "snr_db": 15.8,
      "collisions": 0,
-     "arc_db": 20.4,
+     "arc_db": 17.5,
      "clap_margin": 0.3615,
      "passed": true,
      "action": "accepted"
@@ -404,7 +414,7 @@
     "iter": 2,
     "snr_db": 15.8,
     "collisions": 0,
-    "arc_db": 20.4,
+    "arc_db": 17.5,
     "clap_margin": 0.3615,
     "passed": true,
     "action": "accepted"
@@ -418,7 +428,8 @@
     "orch vocals": 1,
     "stem bass": 1,
     "stem drums": 1,
-    "foley": 1,
+    "ghost": 2,
+    "coda sung": 2,
     "coda": 1
    }
   },
@@ -429,8 +440,8 @@
      "iter": 1,
      "snr_db": 10.4,
      "collisions": 0,
-     "arc_db": 19.2,
-     "clap_margin": 0.3856,
+     "arc_db": 17.8,
+     "clap_margin": 0.3857,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -438,7 +449,7 @@
      "iter": 2,
      "snr_db": 14.0,
      "collisions": 0,
-     "arc_db": 18.9,
+     "arc_db": 17.5,
      "clap_margin": 0.3845,
      "passed": true,
      "action": "accepted"
@@ -448,7 +459,7 @@
     "iter": 2,
     "snr_db": 14.0,
     "collisions": 0,
-    "arc_db": 18.9,
+    "arc_db": 17.5,
     "clap_margin": 0.3845,
     "passed": true,
     "action": "accepted"
@@ -462,7 +473,8 @@
     "orch vocals": 1,
     "stem bass": 1,
     "stem drums": 1,
-    "foley": 1,
+    "ghost": 4,
+    "coda sung": 2,
     "coda": 1
    }
   },
@@ -473,17 +485,17 @@
      "iter": 1,
      "snr_db": 11.6,
      "collisions": 0,
-     "arc_db": 32.1,
-     "clap_margin": 0.3564,
+     "arc_db": 5.0,
+     "clap_margin": 0.3699,
      "passed": false,
-     "action": "deepen the bow"
+     "action": "deepen the bow, deepen resolve"
     },
     {
      "iter": 2,
      "snr_db": 14.9,
      "collisions": 0,
-     "arc_db": 31.4,
-     "clap_margin": 0.373,
+     "arc_db": 6.1,
+     "clap_margin": 0.3776,
      "passed": true,
      "action": "accepted"
     }
@@ -492,8 +504,8 @@
     "iter": 2,
     "snr_db": 14.9,
     "collisions": 0,
-    "arc_db": 31.4,
-    "clap_margin": 0.373,
+    "arc_db": 6.1,
+    "clap_margin": 0.3776,
     "passed": true,
     "action": "accepted"
    },
@@ -506,6 +518,8 @@
     "orch vocals": 1,
     "stem bass": 1,
     "stem drums": 1,
+    "ghost": 4,
+    "coda sung": 2,
     "coda": 1
    }
   },
@@ -517,7 +531,7 @@
      "snr_db": 1.4,
      "collisions": 0,
      "arc_db": 27.1,
-     "clap_margin": 0.414,
+     "clap_margin": 0.4144,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -526,7 +540,7 @@
      "snr_db": 5.4,
      "collisions": 0,
      "arc_db": 26.4,
-     "clap_margin": 0.4006,
+     "clap_margin": 0.4008,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -544,7 +558,7 @@
      "snr_db": 13.4,
      "collisions": 0,
      "arc_db": 25.7,
-     "clap_margin": 0.3892,
+     "clap_margin": 0.3871,
      "passed": true,
      "action": "accepted"
     }
@@ -554,7 +568,7 @@
     "snr_db": 13.4,
     "collisions": 0,
     "arc_db": 25.7,
-    "clap_margin": 0.3892,
+    "clap_margin": 0.3871,
     "passed": true,
     "action": "accepted"
    },
@@ -577,8 +591,8 @@
      "iter": 1,
      "snr_db": 7.4,
      "collisions": 0,
-     "arc_db": 20.8,
-     "clap_margin": 0.4215,
+     "arc_db": 7.6,
+     "clap_margin": 0.3857,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -586,8 +600,8 @@
      "iter": 2,
      "snr_db": 11.2,
      "collisions": 0,
-     "arc_db": 20.2,
-     "clap_margin": 0.4148,
+     "arc_db": 6.9,
+     "clap_margin": 0.3904,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -595,8 +609,8 @@
      "iter": 3,
      "snr_db": 14.8,
      "collisions": 0,
-     "arc_db": 19.7,
-     "clap_margin": 0.4136,
+     "arc_db": 6.5,
+     "clap_margin": 0.3975,
      "passed": true,
      "action": "accepted"
     }
@@ -605,8 +619,8 @@
     "iter": 3,
     "snr_db": 14.8,
     "collisions": 0,
-    "arc_db": 19.7,
-    "clap_margin": 0.4136,
+    "arc_db": 6.5,
+    "clap_margin": 0.3975,
     "passed": true,
     "action": "accepted"
    },
@@ -619,7 +633,8 @@
     "orch vocals": 1,
     "stem bass": 1,
     "stem drums": 1,
-    "foley": 1,
+    "ghost": 3,
+    "coda sung": 2,
     "coda": 1
    }
   },
@@ -630,8 +645,8 @@
      "iter": 1,
      "snr_db": 5.0,
      "collisions": 0,
-     "arc_db": 27.7,
-     "clap_margin": 0.4271,
+     "arc_db": 10.5,
+     "clap_margin": 0.4074,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -639,8 +654,8 @@
      "iter": 2,
      "snr_db": 9.0,
      "collisions": 0,
-     "arc_db": 27.3,
-     "clap_margin": 0.4273,
+     "arc_db": 10.1,
+     "clap_margin": 0.4057,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -648,8 +663,8 @@
      "iter": 3,
      "snr_db": 12.7,
      "collisions": 0,
-     "arc_db": 27.1,
-     "clap_margin": 0.4081,
+     "arc_db": 9.9,
+     "clap_margin": 0.3837,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -657,8 +672,8 @@
      "iter": 4,
      "snr_db": 16.3,
      "collisions": 0,
-     "arc_db": 26.9,
-     "clap_margin": 0.3829,
+     "arc_db": 9.7,
+     "clap_margin": 0.3586,
      "passed": true,
      "action": "accepted"
     }
@@ -667,8 +682,8 @@
     "iter": 4,
     "snr_db": 16.3,
     "collisions": 0,
-    "arc_db": 26.9,
-    "clap_margin": 0.3829,
+    "arc_db": 9.7,
+    "clap_margin": 0.3586,
     "passed": true,
     "action": "accepted"
    },
@@ -681,6 +696,8 @@
     "orch vocals": 1,
     "stem bass": 1,
     "stem drums": 1,
+    "ghost": 3,
+    "coda sung": 2,
     "coda": 1
    }
   },
@@ -691,8 +708,8 @@
      "iter": 1,
      "snr_db": 5.2,
      "collisions": 0,
-     "arc_db": 19.2,
-     "clap_margin": 0.4092,
+     "arc_db": 16.2,
+     "clap_margin": 0.3999,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -700,8 +717,8 @@
      "iter": 2,
      "snr_db": 8.8,
      "collisions": 0,
-     "arc_db": 18.8,
-     "clap_margin": 0.405,
+     "arc_db": 15.8,
+     "clap_margin": 0.3981,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -709,8 +726,8 @@
      "iter": 3,
      "snr_db": 12.3,
      "collisions": 0,
-     "arc_db": 18.5,
-     "clap_margin": 0.3943,
+     "arc_db": 15.5,
+     "clap_margin": 0.3891,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -718,8 +735,8 @@
      "iter": 4,
      "snr_db": 15.9,
      "collisions": 0,
-     "arc_db": 18.3,
-     "clap_margin": 0.4,
+     "arc_db": 15.3,
+     "clap_margin": 0.3966,
      "passed": true,
      "action": "accepted"
     }
@@ -728,8 +745,8 @@
     "iter": 4,
     "snr_db": 15.9,
     "collisions": 0,
-    "arc_db": 18.3,
-    "clap_margin": 0.4,
+    "arc_db": 15.3,
+    "clap_margin": 0.3966,
     "passed": true,
     "action": "accepted"
    },
@@ -742,6 +759,7 @@
     "orch vocals": 1,
     "stem bass": 1,
     "stem drums": 1,
+    "ghost": 2,
     "coda sung": 2,
     "coda": 1
    }

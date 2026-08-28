@@ -122,14 +122,70 @@
      }
     },
     {
+     "at": 19.349999999999998,
+     "source": "codex/04/line_01.mp3",
+     "s": 0,
+     "e": 1.2100000000000013,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: cover sands and debris",
+     "ref": {
+      "role": "hit",
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 77.55,
+     "source": "codex/04/line_10.mp3",
+     "s": 0,
+     "e": 1.4599999999999995,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: as I'm called forward.",
+     "ref": {
+      "role": "hit",
+      "pan": -0.55
+     }
+    },
+    {
+     "at": 98.66,
+     "source": "codex/04/line_14.mp3",
+     "s": 0,
+     "e": 1.77,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: and they too used to b",
+     "ref": {
+      "role": "hit",
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 106.32,
+     "source": "codex/04/line_15.mp3",
+     "s": 0,
+     "e": 1.760000000000011,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: I put them back on wit",
+     "ref": {
+      "role": "hit",
+      "pan": -0.55
+     }
+    },
+    {
      "at": 139.95,
-     "source": "radio/parts/04_08.mp3",
-     "s": 0.0,
-     "e": 2.16,
+     "source": "codex/04/line_01.mp3",
+     "s": 0,
+     "e": 2.25,
      "gain": 0.26,
      "fadeIn": 0.8,
      "fadeOut": 2.0,
-     "label": "coda sung: to where the broken ",
+     "label": "coda sung: cover sands and debr",
      "ref": {
       "role": "bed",
       "pan": -0.4
@@ -137,13 +193,13 @@
     },
     {
      "at": 141.14999999999998,
-     "source": "radio/parts/04_09.mp3",
-     "s": 0.0,
-     "e": 4.0,
+     "source": "codex/04/line_10.mp3",
+     "s": 0,
+     "e": 1.73,
      "gain": 0.26,
      "fadeIn": 0.8,
      "fadeOut": 2.0,
-     "label": "coda sung: to where the broken ",
+     "label": "coda sung: as I'm called forwar",
      "ref": {
       "role": "bed",
       "pan": 0.4
@@ -174,8 +230,8 @@
     "iter": 1,
     "snr_db": 7.8,
     "collisions": 0,
-    "arc_db": 8.6,
-    "clap_margin": 0.4098,
+    "arc_db": 16.5,
+    "clap_margin": 0.407,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -183,8 +239,8 @@
     "iter": 2,
     "snr_db": 11.2,
     "collisions": 0,
-    "arc_db": 7.9,
-    "clap_margin": 0.4076,
+    "arc_db": 15.9,
+    "clap_margin": 0.4081,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -192,8 +248,8 @@
     "iter": 3,
     "snr_db": 14.6,
     "collisions": 0,
-    "arc_db": 7.5,
-    "clap_margin": 0.4111,
+    "arc_db": 15.5,
+    "clap_margin": 0.4132,
     "passed": true,
     "action": "accepted"
    }

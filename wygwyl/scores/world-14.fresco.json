@@ -122,14 +122,42 @@
      }
     },
     {
+     "at": 44.23,
+     "source": "codex/14/line_04.mp3",
+     "s": 0,
+     "e": 1.580000000000004,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: but let it feel love a",
+     "ref": {
+      "role": "hit",
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 57.199999999999996,
+     "source": "codex/14/line_07.mp3",
+     "s": 0,
+     "e": 1.5100000000000038,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: and can't leave behind",
+     "ref": {
+      "role": "hit",
+      "pan": -0.55
+     }
+    },
+    {
      "at": 78.36,
-     "source": "radio/parts/14_08.mp3",
-     "s": 0.0,
-     "e": 3.15,
+     "source": "codex/14/line_03.mp3",
+     "s": 0,
+     "e": 4.09,
      "gain": 0.26,
      "fadeIn": 0.8,
      "fadeOut": 2.0,
-     "label": "coda sung: i escaped here for a",
+     "label": "coda sung: Whatever has termina",
      "ref": {
       "role": "bed",
       "pan": -0.4
@@ -137,13 +165,13 @@
     },
     {
      "at": 79.56,
-     "source": "radio/parts/14_09.mp3",
-     "s": 0.0,
-     "e": 3.17,
+     "source": "codex/14/line_00.mp3",
+     "s": 0,
+     "e": 2.97,
      "gain": 0.26,
      "fadeIn": 0.8,
      "fadeOut": 2.0,
-     "label": "coda sung: i escaped here for a",
+     "label": "coda sung: Don't make me leave ",
      "ref": {
       "role": "bed",
       "pan": 0.4
@@ -174,8 +202,8 @@
     "iter": 1,
     "snr_db": 5.2,
     "collisions": 0,
-    "arc_db": 19.2,
-    "clap_margin": 0.4092,
+    "arc_db": 16.2,
+    "clap_margin": 0.3999,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -183,8 +211,8 @@
     "iter": 2,
     "snr_db": 8.8,
     "collisions": 0,
-    "arc_db": 18.8,
-    "clap_margin": 0.405,
+    "arc_db": 15.8,
+    "clap_margin": 0.3981,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -192,8 +220,8 @@
     "iter": 3,
     "snr_db": 12.3,
     "collisions": 0,
-    "arc_db": 18.5,
-    "clap_margin": 0.3943,
+    "arc_db": 15.5,
+    "clap_margin": 0.3891,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -201,8 +229,8 @@
     "iter": 4,
     "snr_db": 15.9,
     "collisions": 0,
-    "arc_db": 18.3,
-    "clap_margin": 0.4,
+    "arc_db": 15.3,
+    "clap_margin": 0.3966,
     "passed": true,
     "action": "accepted"
    }

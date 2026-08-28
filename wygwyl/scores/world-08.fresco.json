@@ -123,16 +123,58 @@
     },
     {
      "at": 17.259999999999998,
-     "source": "pack/audio/ATL_LOOP_BGMODERNMORPHE_46.mp3",
+     "source": "codex/08/line_00.mp3",
      "s": 0,
-     "e": 1.4,
-     "gain": 0.42,
-     "fadeIn": 0.02,
-     "fadeOut": 0.35,
-     "label": "foley: floor.",
+     "e": 1.6099999999999999,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: The soul has escaped m",
      "ref": {
       "role": "hit",
-      "pan": -0.5
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 36.15,
+     "source": "codex/08/line_02.mp3",
+     "s": 0,
+     "e": 1.2499999999999987,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: a crowded floor of swe",
+     "ref": {
+      "role": "hit",
+      "pan": -0.55
+     }
+    },
+    {
+     "at": 100.53,
+     "source": "codex/08/line_00.mp3",
+     "s": 0,
+     "e": 4.25,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: The soul has escaped",
+     "ref": {
+      "role": "bed",
+      "pan": -0.4
+     }
+    },
+    {
+     "at": 101.73,
+     "source": "codex/08/line_06.mp3",
+     "s": 0,
+     "e": 3.73,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: in the distance and ",
+     "ref": {
+      "role": "bed",
+      "pan": 0.4
      }
     },
     {
@@ -160,8 +202,8 @@
     "iter": 1,
     "snr_db": 12.3,
     "collisions": 0,
-    "arc_db": 20.6,
-    "clap_margin": 0.3602,
+    "arc_db": 17.7,
+    "clap_margin": 0.3586,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -169,7 +211,7 @@
     "iter": 2,
     "snr_db": 15.8,
     "collisions": 0,
-    "arc_db": 20.4,
+    "arc_db": 17.5,
     "clap_margin": 0.3615,
     "passed": true,
     "action": "accepted"

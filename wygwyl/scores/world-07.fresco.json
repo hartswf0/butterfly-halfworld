@@ -122,6 +122,62 @@
      }
     },
     {
+     "at": 16.089999999999996,
+     "source": "codex/07/line_00.mp3",
+     "s": 0,
+     "e": 1.5100000000000002,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: DJ turn me up please. ",
+     "ref": {
+      "role": "hit",
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 62.83,
+     "source": "codex/07/line_03.mp3",
+     "s": 0,
+     "e": 1.1799999999999984,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: shared home boxed in t",
+     "ref": {
+      "role": "hit",
+      "pan": -0.55
+     }
+    },
+    {
+     "at": 107.76,
+     "source": "codex/07/line_05.mp3",
+     "s": 0,
+     "e": 5.0,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: or a frontal fog or ",
+     "ref": {
+      "role": "bed",
+      "pan": -0.4
+     }
+    },
+    {
+     "at": 108.96000000000001,
+     "source": "codex/07/line_04.mp3",
+     "s": 0,
+     "e": 5.0,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: we love we not. Of a",
+     "ref": {
+      "role": "bed",
+      "pan": 0.4
+     }
+    },
+    {
      "at": 111.76,
      "source": "chops/07/07_C16.mp3",
      "s": 0,
@@ -146,8 +202,8 @@
     "iter": 1,
     "snr_db": 9.3,
     "collisions": 0,
-    "arc_db": 19.5,
-    "clap_margin": 0.3739,
+    "arc_db": 8.8,
+    "clap_margin": 0.3639,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -155,8 +211,8 @@
     "iter": 2,
     "snr_db": 12.5,
     "collisions": 0,
-    "arc_db": 18.9,
-    "clap_margin": 0.3674,
+    "arc_db": 8.3,
+    "clap_margin": 0.3548,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -164,8 +220,8 @@
     "iter": 3,
     "snr_db": 15.7,
     "collisions": 0,
-    "arc_db": 18.5,
-    "clap_margin": 0.3592,
+    "arc_db": 7.9,
+    "clap_margin": 0.3488,
     "passed": true,
     "action": "accepted"
    }

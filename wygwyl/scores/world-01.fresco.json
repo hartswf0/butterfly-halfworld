@@ -122,14 +122,56 @@
      }
     },
     {
+     "at": 24.569999999999997,
+     "source": "codex/01/line_02.mp3",
+     "s": 0,
+     "e": 1.5800000000000005,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: on my own words, falli",
+     "ref": {
+      "role": "hit",
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 48.64,
+     "source": "codex/01/line_05.mp3",
+     "s": 0,
+     "e": 1.2499999999999987,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: At this age, I'll foll",
+     "ref": {
+      "role": "hit",
+      "pan": -0.55
+     }
+    },
+    {
+     "at": 68.66,
+     "source": "codex/01/line_09.mp3",
+     "s": 0,
+     "e": 1.300000000000003,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: dripping blood salivat",
+     "ref": {
+      "role": "hit",
+      "pan": 0.55
+     }
+    },
+    {
      "at": 97.38,
-     "source": "radio/parts/01_08.mp3",
-     "s": 0.0,
-     "e": 2.28,
+     "source": "codex/01/line_00.mp3",
+     "s": 0,
+     "e": 5.0,
      "gain": 0.26,
      "fadeIn": 0.8,
      "fadeOut": 2.0,
-     "label": "coda sung: made we don't want w",
+     "label": "coda sung: What we've made we d",
      "ref": {
       "role": "bed",
       "pan": -0.4
@@ -137,13 +179,13 @@
     },
     {
      "at": 98.58,
-     "source": "radio/parts/01_09.mp3",
-     "s": 0.0,
-     "e": 2.78,
+     "source": "codex/01/line_03.mp3",
+     "s": 0,
+     "e": 5.0,
      "gain": 0.26,
      "fadeIn": 0.8,
      "fadeOut": 2.0,
-     "label": "coda sung: made we don't want w",
+     "label": "coda sung: It was the maze cons",
      "ref": {
       "role": "bed",
       "pan": 0.4
@@ -174,8 +216,8 @@
     "iter": 1,
     "snr_db": 5.6,
     "collisions": 0,
-    "arc_db": 11.9,
-    "clap_margin": 0.3225,
+    "arc_db": 8.6,
+    "clap_margin": 0.3212,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -183,8 +225,8 @@
     "iter": 2,
     "snr_db": 9.6,
     "collisions": 0,
-    "arc_db": 11.4,
-    "clap_margin": 0.3134,
+    "arc_db": 8.0,
+    "clap_margin": 0.3133,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -192,8 +234,8 @@
     "iter": 3,
     "snr_db": 13.3,
     "collisions": 0,
-    "arc_db": 11.1,
-    "clap_margin": 0.3086,
+    "arc_db": 7.7,
+    "clap_margin": 0.3084,
     "passed": true,
     "action": "accepted"
    }

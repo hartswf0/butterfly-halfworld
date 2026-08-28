@@ -112,13 +112,97 @@
      "source": "radio/parts/10_07.mp3",
      "s": 0.0,
      "e": 34.05,
-     "gain": 0.32,
+     "gain": 0.256,
      "fadeIn": 1.5,
      "fadeOut": 3.5,
      "label": "stem drums",
      "ref": {
       "role": "bed",
       "pan": 0.12
+     }
+    },
+    {
+     "at": 24.909999999999997,
+     "source": "codex/10/line_02.mp3",
+     "s": 0,
+     "e": 1.8800000000000012,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: So I rub my aggression",
+     "ref": {
+      "role": "hit",
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 37.269999999999996,
+     "source": "codex/10/line_03.mp3",
+     "s": 0,
+     "e": 1.2500000000000022,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: Loneliness is having e",
+     "ref": {
+      "role": "hit",
+      "pan": -0.55
+     }
+    },
+    {
+     "at": 40.129999999999995,
+     "source": "codex/10/line_04.mp3",
+     "s": 0,
+     "e": 1.9000000000000044,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: being everywhere with ",
+     "ref": {
+      "role": "hit",
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 58.08,
+     "source": "codex/10/line_08.mp3",
+     "s": 0,
+     "e": 1.1900000000000035,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: All preparations to li",
+     "ref": {
+      "role": "hit",
+      "pan": -0.55
+     }
+    },
+    {
+     "at": 105.14,
+     "source": "codex/10/line_02.mp3",
+     "s": 0,
+     "e": 5.0,
+     "gain": 0.2132,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: So I rub my aggressi",
+     "ref": {
+      "role": "bed",
+      "pan": -0.4
+     }
+    },
+    {
+     "at": 106.34,
+     "source": "codex/10/line_03.mp3",
+     "s": 0,
+     "e": 4.57,
+     "gain": 0.2132,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: Loneliness is having",
+     "ref": {
+      "role": "bed",
+      "pan": 0.4
      }
     },
     {
@@ -146,17 +230,17 @@
     "iter": 1,
     "snr_db": 11.6,
     "collisions": 0,
-    "arc_db": 32.1,
-    "clap_margin": 0.3564,
+    "arc_db": 5.0,
+    "clap_margin": 0.3699,
     "passed": false,
-    "action": "deepen the bow"
+    "action": "deepen the bow, deepen resolve"
    },
    {
     "iter": 2,
     "snr_db": 14.9,
     "collisions": 0,
-    "arc_db": 31.4,
-    "clap_margin": 0.373,
+    "arc_db": 6.1,
+    "clap_margin": 0.3776,
     "passed": true,
     "action": "accepted"
    }

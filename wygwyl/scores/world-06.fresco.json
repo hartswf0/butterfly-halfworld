@@ -112,7 +112,7 @@
      "source": "radio/parts/06_07.mp3",
      "s": 0.0,
      "e": 35.49,
-     "gain": 0.32,
+     "gain": 0.2048,
      "fadeIn": 1.5,
      "fadeOut": 3.5,
      "label": "stem drums",
@@ -123,16 +123,44 @@
     },
     {
      "at": 87.41,
-     "source": "pack/audio/ATL_LOOP_OUTOFLIFENEWAU_20.mp3",
+     "source": "codex/06/line_01.mp3",
      "s": 0,
-     "e": 1.4,
-     "gain": 0.42,
-     "fadeIn": 0.02,
-     "fadeOut": 0.35,
-     "label": "foley: night",
+     "e": 1.4500000000000086,
+     "gain": 0.2,
+     "fadeIn": 0.2,
+     "fadeOut": 0.5,
+     "label": "ghost: at night where shadows",
      "ref": {
       "role": "hit",
-      "pan": -0.5
+      "pan": 0.55
+     }
+    },
+    {
+     "at": 109.48,
+     "source": "codex/06/line_02.mp3",
+     "s": 0,
+     "e": 5.0,
+     "gain": 0.17482399999999998,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: color rainbows, and ",
+     "ref": {
+      "role": "bed",
+      "pan": -0.4
+     }
+    },
+    {
+     "at": 110.68,
+     "source": "codex/06/line_00.mp3",
+     "s": 0,
+     "e": 4.31,
+     "gain": 0.17482399999999998,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: The gates open with ",
+     "ref": {
+      "role": "bed",
+      "pan": 0.4
      }
     },
     {
@@ -160,25 +188,25 @@
     "iter": 1,
     "snr_db": 6.0,
     "collisions": 0,
-    "arc_db": 15.0,
-    "clap_margin": 0.4119,
+    "arc_db": 3.8,
+    "clap_margin": 0.412,
     "passed": false,
-    "action": "deepen the bow"
+    "action": "deepen the bow, deepen resolve"
    },
    {
     "iter": 2,
     "snr_db": 9.9,
     "collisions": 0,
-    "arc_db": 14.5,
+    "arc_db": 4.9,
     "clap_margin": 0.4167,
     "passed": false,
-    "action": "deepen the bow"
+    "action": "deepen the bow, deepen resolve"
    },
    {
     "iter": 3,
     "snr_db": 13.5,
     "collisions": 0,
-    "arc_db": 14.3,
+    "arc_db": 6.2,
     "clap_margin": 0.4173,
     "passed": true,
     "action": "accepted"
