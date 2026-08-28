@@ -184,57 +184,58 @@ def main():
     todo = [r for r in rows if r['path'] not in labels]
     if limit: todo = todo[:limit]
     if not todo:
-        print('nothing to label'); return
+        print('all %d already labelled — reporting only' % len(labels))
 
-    print('loading %s …' % MODEL, flush=True)
-    model = ClapModel.from_pretrained(MODEL).eval()
-    proc  = ClapProcessor.from_pretrained(MODEL)
+    if todo:
+        print('loading %s …' % MODEL, flush=True)
+        model = ClapModel.from_pretrained(MODEL).eval()
+        proc  = ClapProcessor.from_pretrained(MODEL)
 
-    # both taxonomies, embedded ONCE
-    tvecs = {}
-    with torch.no_grad():
-        for kind, AX in (('sample', SAMPLE_AXES), ('track', TRACK_AXES)):
-            for axis, pairs in AX.items():
-                ti = proc(text=[p for _, p in pairs], return_tensors='pt', padding=True)
-                e = model.get_text_features(**ti)
-                tvecs[(kind, axis)] = torch.nn.functional.normalize(e, dim=-1)
-    print('taxonomies embedded: %d sample phrases, %d track phrases'
-          % (sum(len(v) for v in SAMPLE_AXES.values()),
-             sum(len(v) for v in TRACK_AXES.values())), flush=True)
-
-    done = 0
-    for r in todo:
-        try:
-            y, _ = librosa.load(os.path.join(ROOT, r['path']), sr=SR, mono=True,
-                                duration=10.0)
-            if len(y) < 1000: raise ValueError('too short')
-            with torch.no_grad():
-                ai = proc(audios=y, sampling_rate=SR, return_tensors='pt')
-                av = torch.nn.functional.normalize(
-                     model.get_audio_features(**ai), dim=-1)
-                AX, kind = axes_for(r.get('seconds', 0) or r.get('full_seconds', 0))
-                out = {'taxonomy': kind}
+        # both taxonomies, embedded ONCE
+        tvecs = {}
+        with torch.no_grad():
+            for kind, AX in (('sample', SAMPLE_AXES), ('track', TRACK_AXES)):
                 for axis, pairs in AX.items():
-                    sim = (av @ tvecs[(kind, axis)].T).squeeze(0).numpy()
-                    o = np.argsort(-sim)
-                    top, second = int(o[0]), int(o[1])
-                    gap = float(sim[top] - sim[second])
-                    p = torch.softmax(torch.tensor(sim) * 20.0, dim=-1).numpy()
-                    out[axis] = {
-                      'label': pairs[top][0] if gap >= GAP else '?',
-                      'best': pairs[top][0],
-                      'cos': round(float(sim[top]), 4),
-                      'gap': round(gap, 4),
-                      'p': round(float(p[top]), 3),
-                      'runner_up': pairs[second][0],
-                    }
-            labels[r['path']] = out
-            done += 1
-        except Exception as e:
-            labels[r['path']] = {'error': str(e)[:80]}
-        if done % 20 == 0:
-            print('  %d/%d' % (done, len(todo)), flush=True)
-            json.dump(labels, io.open(labp,'w',encoding='utf-8'), separators=(',',':'))
+                    ti = proc(text=[p for _, p in pairs], return_tensors='pt', padding=True)
+                    e = model.get_text_features(**ti)
+                    tvecs[(kind, axis)] = torch.nn.functional.normalize(e, dim=-1)
+        print('taxonomies embedded: %d sample phrases, %d track phrases'
+              % (sum(len(v) for v in SAMPLE_AXES.values()),
+                 sum(len(v) for v in TRACK_AXES.values())), flush=True)
+
+        done = 0
+        for r in todo:
+            try:
+                y, _ = librosa.load(os.path.join(ROOT, r['path']), sr=SR, mono=True,
+                                    duration=10.0)
+                if len(y) < 1000: raise ValueError('too short')
+                with torch.no_grad():
+                    ai = proc(audios=y, sampling_rate=SR, return_tensors='pt')
+                    av = torch.nn.functional.normalize(
+                         model.get_audio_features(**ai), dim=-1)
+                    AX, kind = axes_for(r.get('seconds', 0) or r.get('full_seconds', 0))
+                    out = {'taxonomy': kind}
+                    for axis, pairs in AX.items():
+                        sim = (av @ tvecs[(kind, axis)].T).squeeze(0).numpy()
+                        o = np.argsort(-sim)
+                        top, second = int(o[0]), int(o[1])
+                        gap = float(sim[top] - sim[second])
+                        p = torch.softmax(torch.tensor(sim) * 20.0, dim=-1).numpy()
+                        out[axis] = {
+                          'label': pairs[top][0] if gap >= GAP else '?',
+                          'best': pairs[top][0],
+                          'cos': round(float(sim[top]), 4),
+                          'gap': round(gap, 4),
+                          'p': round(float(p[top]), 3),
+                          'runner_up': pairs[second][0],
+                        }
+                labels[r['path']] = out
+                done += 1
+            except Exception as e:
+                labels[r['path']] = {'error': str(e)[:80]}
+            if done % 20 == 0:
+                print('  %d/%d' % (done, len(todo)), flush=True)
+                json.dump(labels, io.open(labp,'w',encoding='utf-8'), separators=(',',':'))
 
     # assemble the EarSketch-style constant, numbered without collisions
     seen = {}
@@ -252,20 +253,36 @@ def main():
     errs = [c for c in labels.values() if 'error' in c]
     print('\n%d labelled, %d failed, %d not yet attempted'
           % (len(ok), len(errs), len(rows) - len(ok) - len(errs)))
-    for axis in AXES:
-        unsure = sum(1 for c in ok if c[axis]['label'] == '?')
-        gaps = sorted(c[axis]['gap'] for c in ok)
-        if not gaps: continue
-        print('  %-10s %3d of %d under the gap floor  ·  median gap %.4f'
-              % (axis, unsure, len(ok), gaps[len(gaps)//2]))
-    # a taxonomy that answers the same way for everything is not discriminating
     import collections
-    for axis in AXES:
-        c = collections.Counter(x[axis]['label'] for x in ok)
-        top, n = c.most_common(1)[0] if c else ('—', 0)
-        if ok and n / float(len(ok)) > 0.45:
-            print('  ! %s is %d%% "%s" — the taxonomy may not fit this material'
-                  % (axis, round(100*n/len(ok)), top))
+    for kind, AX in (('sample', SAMPLE_AXES), ('track', TRACK_AXES)):
+        grp = [c for c in ok if c.get('taxonomy') == kind]
+        if not grp: continue
+        print('\n  %s taxonomy — %d files' % (kind.upper(), len(grp)))
+        for axis in AX:
+            unsure = sum(1 for c in grp if c[axis]['label'] == '?')
+            gaps = sorted(c[axis]['gap'] for c in grp)
+            cc = collections.Counter(c[axis]['label'] for c in grp)
+            top, n = cc.most_common(1)[0]
+            # AN AXIS THAT ANSWERS THE SAME WAY FOR EVERYTHING IS NOT AN AXIS.
+            # This is the check that caught the first taxonomy answering PLUCK to
+            # half the tracks. It stays in the output so the next stuck vocabulary
+            # is visible without anyone reading a thousand labels by hand.
+            # UNIFORM IS NOT THE SAME AS STUCK. Two very different things look
+            # alike in a histogram. If one answer dominates AND the winning
+            # margins are large, the corpus really is that way — 75% POLISHED at
+            # a median gap of 0.11 is a library of studio renders, correctly
+            # described. If one answer dominates and the margins are thin, the
+            # vocabulary has no purchase and is defaulting. Report which.
+            share = n / float(len(grp))
+            med = gaps[len(gaps)//2]
+            flag = ''
+            if share > 0.45:
+                flag = ('   ! %d%% one answer, %s' % (round(100*share),
+                        'but decided confidently — probably true of the corpus'
+                        if med >= 0.06 else
+                        'on thin margins — vocabulary is defaulting'))
+            print('    %-11s %2d distinct · %3d under floor · median gap %.4f · top %s (%d)%s'
+                  % (axis, len(cc), unsure, gaps[len(gaps)//2], top, n, flag))
 
 if __name__ == '__main__':
     main()
