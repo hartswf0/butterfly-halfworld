@@ -1,0 +1,130 @@
+{
+ "fresco": "0.1",
+ "title": "WORLD SCORE — How to Break off an Engagement",
+ "duration": 80.5,
+ "base": "",
+ "tracks": [
+  {
+   "id": "world",
+   "name": "WORLD 03",
+   "gain": 1,
+   "clips": [
+    {
+     "at": 0,
+     "s": 214.108,
+     "e": 286.508,
+     "gain": 0.3,
+     "label": "drone",
+     "source": "drone/unified-drones-lite.mp3",
+     "fadeIn": 2.5,
+     "fadeOut": 6.0
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 62.52,
+     "gain": 1.0,
+     "label": "reading",
+     "source": "audio/03_How to Break off an Engagement_mixdown_RY_250626.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.1
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 20.84,
+     "gain": 0.24,
+     "label": "texture nativepositi",
+     "source": "pack/audio/ATL_TEXTURE_NATIVEPOSITION_01.mp3",
+     "fadeIn": 2.0,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 26.84,
+     "s": 0,
+     "e": 20.84,
+     "gain": 0.24,
+     "label": "texture bggrittybroa",
+     "source": "pack/audio/ATL_TEXTURE_BGGRITTYBROADC_02.mp3",
+     "fadeIn": 2.0,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 47.68,
+     "s": 0,
+     "e": 20.840000000000003,
+     "gain": 0.24,
+     "label": "texture nativedelaye",
+     "source": "pack/audio/ATL_TEXTURE_NATIVEDELAYED_12.mp3",
+     "fadeIn": 2.0,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 47.68,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_BGDEEPVINTAGER_40.mp3",
+     "fadeIn": 0.8,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 55.68,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_BGDEEPVINTAGER_40.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 63.68,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_BGDEEPVINTAGER_40.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 71.68,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_BGDEEPVINTAGER_40.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 71.52000000000001,
+     "s": 0,
+     "e": 3.0,
+     "gain": 0.55,
+     "label": "coda: old to",
+     "source": "chops/03/03_C25.mp3",
+     "fadeIn": 0.05,
+     "fadeOut": 0.6
+    }
+   ]
+  }
+ ],
+ "lanes": [],
+ "provenance": {
+  "generator": "score_engine.py",
+  "iterations": [
+   {
+    "iter": 1,
+    "snr_db": 14.2,
+    "collisions": 0,
+    "arc_db": 26.5,
+    "clap_margin": 0.2754,
+    "passed": true,
+    "action": "accepted"
+   }
+  ]
+ }
+}

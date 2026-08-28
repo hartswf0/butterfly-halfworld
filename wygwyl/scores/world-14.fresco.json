@@ -1,0 +1,70 @@
+{
+ "fresco": "0.1",
+ "title": "WORLD SCORE — Hot Minute",
+ "duration": 87.4,
+ "base": "",
+ "tracks": [
+  {
+   "id": "world",
+   "name": "WORLD 14",
+   "gain": 1,
+   "clips": [
+    {
+     "at": 0,
+     "s": 1352.982188,
+     "e": 1440.072188,
+     "gain": 0.3,
+     "label": "drone",
+     "source": "drone/unified-drones-lite.mp3",
+     "fadeIn": 2.5,
+     "fadeOut": 6.0
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 69.36,
+     "gain": 1.0,
+     "label": "reading",
+     "source": "audio/14_Hot Minute_mixdown_RY_250626.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.1
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 23.12,
+     "gain": 0.24,
+     "label": "Stained Glass Rims —",
+     "source": "https://hartswf0.github.io/moto/CATHEDRAL%20OF%20IV%20DRIPS/The%20Cathedral%20of%20IV%20Drips%20-%20Stained%20Glass%20Rims%20-%20Sonauto.ogg",
+     "fadeIn": 2.0,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 78.36,
+     "s": 0,
+     "e": 3.0,
+     "gain": 0.55,
+     "label": "coda: The way",
+     "source": "chops/14/14_C10.mp3",
+     "fadeIn": 0.05,
+     "fadeOut": 0.6
+    }
+   ]
+  }
+ ],
+ "lanes": [],
+ "provenance": {
+  "generator": "score_engine.py",
+  "iterations": [
+   {
+    "iter": 1,
+    "snr_db": 14.8,
+    "collisions": 0,
+    "arc_db": 16.1,
+    "clap_margin": 0.3212,
+    "passed": true,
+    "action": "accepted"
+   }
+  ]
+ }
+}

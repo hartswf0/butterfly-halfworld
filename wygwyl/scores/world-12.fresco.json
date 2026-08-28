@@ -1,0 +1,120 @@
+{
+ "fresco": "0.1",
+ "title": "WORLD SCORE — Reunion",
+ "duration": 82.8,
+ "base": "",
+ "tracks": [
+  {
+   "id": "world",
+   "name": "WORLD 12",
+   "gain": 1,
+   "clips": [
+    {
+     "at": 0,
+     "s": 1168.019354,
+     "e": 1242.999354,
+     "gain": 0.3,
+     "label": "drone",
+     "source": "drone/unified-drones-lite.mp3",
+     "fadeIn": 2.5,
+     "fadeOut": 6.0
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 64.81,
+     "gain": 1.0,
+     "label": "reading",
+     "source": "audio/12_Reunion_mixdown_RY_250626.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.1
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 21.603333333333335,
+     "gain": 0.24,
+     "label": "bed whereyougowhen 0",
+     "source": "pack/audio/ATL_BED_WHEREYOUGOWHEN_07.mp3",
+     "fadeIn": 2.0,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 27.603333333333335,
+     "s": 0,
+     "e": 21.603333333333335,
+     "gain": 0.24,
+     "label": "Frictionless Void — ",
+     "source": "https://hartswf0.github.io/moto/WHERE%20CAN%20DUST%20REST/No%20Bright%20Stand%20-%20Frictionless%20Void%20-%20Sonauto.ogg",
+     "fadeIn": 2.0,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 49.20666666666667,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_07.mp3",
+     "fadeIn": 0.8,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 57.20666666666667,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_07.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 65.20666666666668,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_07.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 73.20666666666668,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_07.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 73.81,
+     "s": 0,
+     "e": 3.0,
+     "gain": 0.55,
+     "label": "coda: into the",
+     "source": "chops/12/12_C10.mp3",
+     "fadeIn": 0.05,
+     "fadeOut": 0.6
+    }
+   ]
+  }
+ ],
+ "lanes": [],
+ "provenance": {
+  "generator": "score_engine.py",
+  "iterations": [
+   {
+    "iter": 1,
+    "snr_db": 12.9,
+    "collisions": 0,
+    "arc_db": 39.4,
+    "clap_margin": 0.3225,
+    "passed": true,
+    "action": "accepted"
+   }
+  ]
+ }
+}

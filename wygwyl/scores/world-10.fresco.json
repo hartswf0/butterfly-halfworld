@@ -1,0 +1,140 @@
+{
+ "fresco": "0.1",
+ "title": "WORLD SCORE — Magic Ride",
+ "duration": 114.1,
+ "base": "",
+ "tracks": [
+  {
+   "id": "world",
+   "name": "WORLD 10",
+   "gain": 1,
+   "clips": [
+    {
+     "at": 0,
+     "s": 950.936875,
+     "e": 1056.656875,
+     "gain": 0.3,
+     "label": "drone",
+     "source": "drone/unified-drones-lite.mp3",
+     "fadeIn": 2.5,
+     "fadeOut": 6.0
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 96.14,
+     "gain": 1.0,
+     "label": "reading",
+     "source": "audio/10_Magic Ride_mixdown_RY_250626.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.1
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 32.04666666666667,
+     "gain": 0.24,
+     "label": "texture ambient 10",
+     "source": "pack/audio/ATL_TEXTURE_AMBIENT_10.mp3",
+     "fadeIn": 2.0,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 38.04666666666667,
+     "s": 0,
+     "e": 32.04666666666667,
+     "gain": 0.24,
+     "label": "texture whereyougowh",
+     "source": "pack/audio/ATL_TEXTURE_WHEREYOUGOWHEN_26.mp3",
+     "fadeIn": 2.0,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 70.09333333333333,
+     "s": 0,
+     "e": 32.04666666666667,
+     "gain": 0.24,
+     "label": "When the Soul Become",
+     "source": "https://hartswf0.github.io/moto/MIDNIGHT%20OVER%20THE%20STEPPE/Midnight%20Over%20the%20Steppe%20-%20When%20the%20Soul%20Becomes%20People%20-%20Treblo.ogg",
+     "fadeIn": 2.0,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 70.09333333333333,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_AF5A3002_16.mp3",
+     "fadeIn": 0.8,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 78.09333333333333,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_AF5A3002_16.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 86.09333333333333,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_AF5A3002_16.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 94.09333333333333,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_AF5A3002_16.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 102.09333333333333,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_AF5A3002_16.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 105.14,
+     "s": 0,
+     "e": 3.0,
+     "gain": 0.55,
+     "label": "coda: I want",
+     "source": "chops/10/10_C28.mp3",
+     "fadeIn": 0.05,
+     "fadeOut": 0.6
+    }
+   ]
+  }
+ ],
+ "lanes": [],
+ "provenance": {
+  "generator": "score_engine.py",
+  "iterations": [
+   {
+    "iter": 1,
+    "snr_db": 14.3,
+    "collisions": 0,
+    "arc_db": 155.0,
+    "clap_margin": 0.3345,
+    "passed": true,
+    "action": "accepted"
+   }
+  ]
+ }
+}

@@ -1,0 +1,170 @@
+{
+ "fresco": "0.1",
+ "title": "WORLD SCORE — Newly Single",
+ "duration": 109.5,
+ "base": "",
+ "tracks": [
+  {
+   "id": "world",
+   "name": "WORLD 08",
+   "gain": 1,
+   "clips": [
+    {
+     "at": 0,
+     "s": 732.1365,
+     "e": 833.3865,
+     "gain": 0.3,
+     "label": "drone",
+     "source": "drone/unified-drones-lite.mp3",
+     "fadeIn": 2.5,
+     "fadeOut": 6.0
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 91.53,
+     "gain": 1.0,
+     "label": "reading",
+     "source": "audio/08_Newly Single_mixdown_RY_250626.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.1
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 30.51,
+     "gain": 0.24,
+     "label": "bed howtobreakoffa 4",
+     "source": "pack/audio/ATL_BED_HOWTOBREAKOFFA_40.mp3",
+     "fadeIn": 2.0,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 10.22,
+     "s": 0,
+     "e": 1.6,
+     "gain": 0.5,
+     "label": "hit",
+     "source": "pack/audio/ATL_RISER_CREDITSPADDED_10.mp3",
+     "fadeIn": 0.005,
+     "fadeOut": 0.4
+    },
+    {
+     "at": 17.24,
+     "s": 0,
+     "e": 1.6,
+     "gain": 0.5,
+     "label": "hit",
+     "source": "pack/audio/ATL_RISER_CREDITSPADDED_10.mp3",
+     "fadeIn": 0.005,
+     "fadeOut": 0.4
+    },
+    {
+     "at": 29.58,
+     "s": 0,
+     "e": 1.6,
+     "gain": 0.5,
+     "label": "hit",
+     "source": "pack/audio/ATL_RISER_CREDITSPADDED_10.mp3",
+     "fadeIn": 0.005,
+     "fadeOut": 0.4
+    },
+    {
+     "at": 36.13,
+     "s": 0,
+     "e": 1.6,
+     "gain": 0.5,
+     "label": "hit",
+     "source": "pack/audio/ATL_RISER_CREDITSPADDED_10.mp3",
+     "fadeIn": 0.005,
+     "fadeOut": 0.4
+    },
+    {
+     "at": 45.89,
+     "s": 0,
+     "e": 1.6,
+     "gain": 0.5,
+     "label": "hit",
+     "source": "pack/audio/ATL_RISER_CREDITSPADDED_10.mp3",
+     "fadeIn": 0.005,
+     "fadeOut": 0.4
+    },
+    {
+     "at": 67.02000000000001,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_BGMODERNMORPHE_46.mp3",
+     "fadeIn": 0.8,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 75.02000000000001,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_BGMODERNMORPHE_46.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 83.02000000000001,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_BGMODERNMORPHE_46.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 91.02000000000001,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_BGMODERNMORPHE_46.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 99.02000000000001,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_BGMODERNMORPHE_46.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 100.53,
+     "s": 0,
+     "e": 3.0,
+     "gain": 0.55,
+     "label": "coda: my body",
+     "source": "chops/08/08_C21.mp3",
+     "fadeIn": 0.05,
+     "fadeOut": 0.6
+    }
+   ]
+  }
+ ],
+ "lanes": [],
+ "provenance": {
+  "generator": "score_engine.py",
+  "iterations": [
+   {
+    "iter": 1,
+    "snr_db": 12.6,
+    "collisions": 0,
+    "arc_db": 157.8,
+    "clap_margin": 0.3167,
+    "passed": true,
+    "action": "accepted"
+   }
+  ]
+ }
+}

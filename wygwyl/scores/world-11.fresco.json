@@ -1,0 +1,60 @@
+{
+ "fresco": "0.1",
+ "title": "WORLD SCORE — New Day",
+ "duration": 119.3,
+ "base": "",
+ "tracks": [
+  {
+   "id": "world",
+   "name": "WORLD 11",
+   "gain": 1,
+   "clips": [
+    {
+     "at": 0,
+     "s": 1056.659333,
+     "e": 1168.019333,
+     "gain": 0.3,
+     "label": "drone",
+     "source": "drone/unified-drones-lite.mp3",
+     "fadeIn": 2.5,
+     "fadeOut": 6.0
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 101.27,
+     "gain": 1.0,
+     "label": "reading",
+     "source": "audio/11_New Day_mixdown_RY_250626.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.1
+    },
+    {
+     "at": 110.27,
+     "s": 0,
+     "e": 3.0,
+     "gain": 0.55,
+     "label": "coda: new day.",
+     "source": "chops/11/11_C14.mp3",
+     "fadeIn": 0.05,
+     "fadeOut": 0.6
+    }
+   ]
+  }
+ ],
+ "lanes": [],
+ "provenance": {
+  "generator": "score_engine.py",
+  "iterations": [
+   {
+    "iter": 1,
+    "snr_db": 14.6,
+    "collisions": 0,
+    "arc_db": 71.2,
+    "clap_margin": 0.2625,
+    "passed": true,
+    "action": "accepted"
+   }
+  ]
+ }
+}

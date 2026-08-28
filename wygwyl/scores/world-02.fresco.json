@@ -1,0 +1,70 @@
+{
+ "fresco": "0.1",
+ "title": "WORLD SCORE — Flashing Lights",
+ "duration": 99.6,
+ "base": "",
+ "tracks": [
+  {
+   "id": "world",
+   "name": "WORLD 02",
+   "gain": 1,
+   "clips": [
+    {
+     "at": 0,
+     "s": 122.987042,
+     "e": 214.107042,
+     "gain": 0.3,
+     "label": "drone",
+     "source": "drone/unified-drones-lite.mp3",
+     "fadeIn": 2.5,
+     "fadeOut": 6.0
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 81.58,
+     "gain": 1.0,
+     "label": "reading",
+     "source": "audio/02_Flashing Lights_mixdown_RY_250626.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.1
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 27.19333333333333,
+     "gain": 0.24,
+     "label": "Non-Abiding Flow (1)",
+     "source": "https://hartswf0.github.io/moto/WHERE%20CAN%20DUST%20REST/No%20Bright%20Stand%20-%20Non-Abiding%20Flow%20-%20Sonauto%20%281%29.ogg",
+     "fadeIn": 2.0,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 90.58,
+     "s": 0,
+     "e": 3.0,
+     "gain": 0.55,
+     "label": "coda: type of silent",
+     "source": "chops/02/02_C02.mp3",
+     "fadeIn": 0.05,
+     "fadeOut": 0.6
+    }
+   ]
+  }
+ ],
+ "lanes": [],
+ "provenance": {
+  "generator": "score_engine.py",
+  "iterations": [
+   {
+    "iter": 1,
+    "snr_db": 14.9,
+    "collisions": 0,
+    "arc_db": 154.5,
+    "clap_margin": 0.3012,
+    "passed": true,
+    "action": "accepted"
+   }
+  ]
+ }
+}

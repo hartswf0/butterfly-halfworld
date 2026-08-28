@@ -1,0 +1,60 @@
+{
+ "fresco": "0.1",
+ "title": "WORLD SCORE — How to Win My Heart",
+ "duration": 118.7,
+ "base": "",
+ "tracks": [
+  {
+   "id": "world",
+   "name": "WORLD 13",
+   "gain": 1,
+   "clips": [
+    {
+     "at": 0,
+     "s": 1243.002833,
+     "e": 1352.982833,
+     "gain": 0.3,
+     "label": "drone",
+     "source": "drone/unified-drones-lite.mp3",
+     "fadeIn": 2.5,
+     "fadeOut": 6.0
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 100.73,
+     "gain": 1.0,
+     "label": "reading",
+     "source": "audio/13_How to Win My Heart_mixdown_RY_250626.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.1
+    },
+    {
+     "at": 109.73,
+     "s": 0,
+     "e": 3.0,
+     "gain": 0.55,
+     "label": "coda: I want",
+     "source": "chops/13/13_C01.mp3",
+     "fadeIn": 0.05,
+     "fadeOut": 0.6
+    }
+   ]
+  }
+ ],
+ "lanes": [],
+ "provenance": {
+  "generator": "score_engine.py",
+  "iterations": [
+   {
+    "iter": 1,
+    "snr_db": 12.7,
+    "collisions": 0,
+    "arc_db": 155.0,
+    "clap_margin": 0.3046,
+    "passed": true,
+    "action": "accepted"
+   }
+  ]
+ }
+}

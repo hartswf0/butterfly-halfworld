@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RADIO ATLANTIS</title>
+<style>
+:root{--bg:#0b0410;--panel:#170a1c;--line:#2a1220;--ink:#f6e7c8;--dim:#8d6a70;--hot:#f2a03c;--acc:#e0532c;--teal:#4dd9cc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(120% 90% at 50% -10%, #3a1430 0%, #1b0817 45%, #0b0410 100%);
+  color:var(--ink);font:13px/1.5 "SF Mono",Menlo,monospace;min-height:100vh;padding:20px;max-width:900px;margin:0 auto}
+a{color:var(--teal);text-decoration:none}
+h1{font-size:16px;letter-spacing:.34em;color:var(--hot)}
+#sub{color:var(--dim);font-size:11.5px;margin:6px 0 16px;line-height:1.7}
+#dial{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:6px;margin-bottom:16px}
+#dial button{background:#00000055;border:1px solid var(--line);color:var(--ink);font:inherit;
+  font-size:11px;padding:6px 9px;border-radius:2px;cursor:pointer;text-align:left;letter-spacing:.06em}
+#dial button:hover{border-color:var(--hot);color:var(--hot)}
+#dial button.on{border-left:3px solid var(--acc);background:#ffffff10;color:var(--hot)}
+#dial button small{display:block;color:var(--dim);font-size:9px;letter-spacing:0}
+#now{background:#00000038;border:1px solid var(--line);padding:14px 16px;margin-bottom:12px}
+#nowt{font-size:15px;letter-spacing:.12em;color:var(--ink)}
+#transport{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+button.t{background:#00000055;border:1px solid var(--line);color:var(--ink);font:inherit;
+  letter-spacing:.14em;padding:7px 14px;border-radius:2px;cursor:pointer}
+button.t:hover{border-color:var(--hot);color:var(--hot)}
+#seek{flex:1;min-width:160px;accent-color:var(--acc)}
+#clock{color:var(--dim);font-variant-numeric:tabular-nums;font-size:11px}
+label{color:var(--dim);font-size:11px;display:flex;gap:5px;align-items:center;cursor:pointer}
+#log{background:#00000038;border:1px solid var(--line);padding:12px 16px}
+#log h2{font-size:10px;letter-spacing:.3em;color:var(--dim);margin-bottom:8px}
+#log table{border-collapse:collapse;font-size:10.5px;width:100%}
+#log td,#log th{padding:2px 10px 2px 0;text-align:left;color:var(--dim);font-weight:normal}
+#log td.pass{color:var(--teal)} #log td.fail{color:var(--acc)}
+#log .act{color:var(--hot);font-style:italic}
+footer{margin-top:16px;color:var(--dim);font-size:10.5px;line-height:1.8;max-width:78ch}
+footer b{color:var(--ink);font-weight:normal}
+</style>
+</head>
+<body>
+<h1>RADIO ATLANTIS</h1>
+<div id="sub">fourteen film scores, one per poem — composed from each poem's own world (its drone span, its reading,
+only its referred sounds), then <b style="color:var(--ink)">mastered in a loop</b>: rendered, measured, judged by CLAP,
+and revised until the gate passed. hits land only in the poet's silences ·
+<a href="poemworlds.html">worlds</a> · <a href="fresco.html">fresco</a> · <a href="radio.html">the other radio</a> · <a href="atlas.html">atlas</a></div>
+<div id="dial">tuning…</div>
+<div id="now" style="display:none">
+  <div id="nowt">—</div>
+  <div id="transport">
+    <button class="t" id="prev">◀</button>
+    <button class="t" id="play">▶ PLAY</button>
+    <button class="t" id="next">▶</button>
+    <input id="seek" type="range" min="0" max="1000" value="0">
+    <span id="clock">00:00 / 00:00</span>
+    <label><input id="chain" type="checkbox" checked> chain</label>
+    <a id="scorelink" href="#">the score ↗</a>
+  </div>
+</div>
+<div id="log" style="display:none"><h2>THE MASTERING LOOP — this station's iterations</h2>
+  <table id="logt"></table></div>
+<footer><b>The gate:</b> voice-band SNR ≥ 12 dB during every measured word · zero hit/word collisions ·
+the outro resolves at least 6 dB below the body · and CLAP, as juror, must hear "a cinematic score with clear
+spoken word" more than "a muddy mix". Each station's table shows every pass the engine took to get there.</footer>
+
+<script>
+const $ = s => document.querySelector(s);
+const mmss = t => `${String(Math.floor(t/60)).padStart(2,'0')}:${String(Math.floor(t%60)).padStart(2,'0')}`;
+let LOG = null, NUMS = [], cur = -1, audio = new Audio();
+audio.preload = 'none';
+
+function tune(i){
+  cur = (i + NUMS.length) % NUMS.length;
+  const num = NUMS[cur], st = LOG.stations[num];
+  document.querySelectorAll('#dial button').forEach((b, k) => b.classList.toggle('on', k === cur));
+  $('#now').style.display = 'block'; $('#log').style.display = 'block';
+  $('#nowt').textContent = `S${num} · ${st.title}`;
+  $('#scorelink').href = `fresco.html?score=scores/world-${num}.fresco.json`;
+  const t = $('#logt');
+  t.innerHTML = '<tr><th>pass</th><th>voice snr</th><th>collisions</th><th>resolve</th><th>clap juror</th><th>verdict</th></tr>' +
+    st.iterations.map(it =>
+      `<tr><td>${it.iter}</td><td>${it.snr_db} dB</td><td>${it.collisions}</td>
+       <td>${it.arc_db} dB</td><td>${it.clap_margin}</td>
+       <td class="${it.passed?'pass':'fail'}">${it.passed?'PASSED THE GATE':'<span class=act>'+it.action+'</span>'}</td></tr>`).join('');
+  audio.src = `radio/${num}.mp3`;
+  audio.play().then(()=>$('#play').textContent='❚❚').catch(()=>{});
+}
+audio.addEventListener('timeupdate', () => {
+  if (audio.duration){ $('#seek').value = audio.currentTime / audio.duration * 1000;
+    $('#clock').textContent = `${mmss(audio.currentTime)} / ${mmss(audio.duration)}`; }
+});
+audio.addEventListener('ended', () => { if ($('#chain').checked) tune(cur + 1); });
+$('#play').onclick = () => { if (audio.paused){ audio.play(); $('#play').textContent='❚❚'; }
+  else { audio.pause(); $('#play').textContent='▶ PLAY'; } };
+$('#prev').onclick = () => tune(cur - 1);
+$('#next').onclick = () => tune(cur + 1);
+$('#seek').oninput = e => { if (audio.duration) audio.currentTime = e.target.value / 1000 * audio.duration; };
+addEventListener('keydown', e => { if (e.key === ' '){ e.preventDefault(); $('#play').click(); }
+  if (e.key === 'ArrowRight') tune(cur + 1); if (e.key === 'ArrowLeft') tune(cur - 1); });
+
+fetch('radio/log.json', {cache: 'no-cache'}).then(r => r.json()).then(j => {
+  LOG = j; NUMS = Object.keys(j.stations).sort();
+  const d = $('#dial'); d.innerHTML = '';
+  for (const num of NUMS){
+    const st = j.stations[num];
+    const b = document.createElement('button');
+    b.innerHTML = `S${num} ${st.title.slice(0, 20)}<small>${st.iterations.length} pass${st.iterations.length > 1 ? 'es' : ''} · ${st.final.passed ? 'gate passed' : 'best effort'} · snr ${st.final.snr_db} dB</small>`;
+    b.onclick = () => tune(NUMS.indexOf(num));
+    d.appendChild(b);
+  }
+}).catch(e => $('#dial').textContent = 'the engine has not rendered yet — run _dig/score_engine.py · ' + e);
+</script>
+</body>
+</html>

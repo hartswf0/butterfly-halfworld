@@ -1,0 +1,70 @@
+{
+ "fresco": "0.1",
+ "title": "WORLD SCORE — Out of Life",
+ "duration": 106.4,
+ "base": "",
+ "tracks": [
+  {
+   "id": "world",
+   "name": "WORLD 01",
+   "gain": 1,
+   "clips": [
+    {
+     "at": 0,
+     "s": -0.0,
+     "e": 106.38,
+     "gain": 0.3,
+     "label": "drone",
+     "source": "drone/unified-drones-lite.mp3",
+     "fadeIn": 2.5,
+     "fadeOut": 6.0
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 88.38,
+     "gain": 1.0,
+     "label": "reading",
+     "source": "audio/01_Out of Life_mixdown_RY_250626.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.1
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 29.459999999999997,
+     "gain": 0.24,
+     "label": "Aten Rising (Voice M",
+     "source": "https://hartswf0.github.io/moto/MAREA%20MEMORY/Marea%20Memory%20-%20Aten%20Rising%20%28Voice%20Memo%201%29%20-%20Treblo.ogg",
+     "fadeIn": 2.0,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 97.38,
+     "s": 0,
+     "e": 3.0,
+     "gain": 0.55,
+     "label": "coda: love and",
+     "source": "chops/01/01_C24.mp3",
+     "fadeIn": 0.05,
+     "fadeOut": 0.6
+    }
+   ]
+  }
+ ],
+ "lanes": [],
+ "provenance": {
+  "generator": "score_engine.py",
+  "iterations": [
+   {
+    "iter": 1,
+    "snr_db": 14.3,
+    "collisions": 0,
+    "arc_db": 10.3,
+    "clap_margin": 0.2986,
+    "passed": true,
+    "action": "accepted"
+   }
+  ]
+ }
+}

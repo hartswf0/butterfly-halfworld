@@ -1,0 +1,60 @@
+{
+ "fresco": "0.1",
+ "title": "WORLD SCORE — Bloodline",
+ "duration": 92.1,
+ "base": "",
+ "tracks": [
+  {
+   "id": "world",
+   "name": "WORLD 05",
+   "gain": 1,
+   "clips": [
+    {
+     "at": 0,
+     "s": 422.183771,
+     "e": 513.213771,
+     "gain": 0.3,
+     "label": "drone",
+     "source": "drone/unified-drones-lite.mp3",
+     "fadeIn": 2.5,
+     "fadeOut": 6.0
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 74.07,
+     "gain": 1.0,
+     "label": "reading",
+     "source": "audio/05_Bloodline_mixdown_RY_250626.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.1
+    },
+    {
+     "at": 83.07,
+     "s": 0,
+     "e": 3.0,
+     "gain": 0.55,
+     "label": "coda: to ask if",
+     "source": "chops/05/05_C01.mp3",
+     "fadeIn": 0.05,
+     "fadeOut": 0.6
+    }
+   ]
+  }
+ ],
+ "lanes": [],
+ "provenance": {
+  "generator": "score_engine.py",
+  "iterations": [
+   {
+    "iter": 1,
+    "snr_db": 14.5,
+    "collisions": 0,
+    "arc_db": 15.5,
+    "clap_margin": 0.2669,
+    "passed": true,
+    "action": "accepted"
+   }
+  ]
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "fresco": "0.1",
+ "title": "WORLD SCORE — DJ Turn Me Up",
+ "duration": 116.8,
+ "base": "",
+ "tracks": [
+  {
+   "id": "world",
+   "name": "WORLD 07",
+   "gain": 1,
+   "clips": [
+    {
+     "at": 0,
+     "s": 623.454208,
+     "e": 732.134208,
+     "gain": 0.3,
+     "label": "drone",
+     "source": "drone/unified-drones-lite.mp3",
+     "fadeIn": 2.5,
+     "fadeOut": 6.0
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 98.76,
+     "gain": 1.0,
+     "label": "reading",
+     "source": "audio/07_DJ Turn Me Up_mixdown_RY_250626.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.1
+    },
+    {
+     "at": 7.499999999999999,
+     "s": 0,
+     "e": 1.6,
+     "gain": 0.5,
+     "label": "hit",
+     "source": "pack/audio/ATL_HIT_03HOWTOBREAKOF_41.mp3",
+     "fadeIn": 0.005,
+     "fadeOut": 0.4
+    },
+    {
+     "at": 20.069999999999997,
+     "s": 0,
+     "e": 1.6,
+     "gain": 0.5,
+     "label": "hit",
+     "source": "pack/audio/ATL_HIT_03HOWTOBREAKOF_42.mp3",
+     "fadeIn": 0.005,
+     "fadeOut": 0.4
+    },
+    {
+     "at": 52.52,
+     "s": 0,
+     "e": 1.6,
+     "gain": 0.5,
+     "label": "hit",
+     "source": "pack/audio/ATL_HIT_03HOWTOBREAKOF_41.mp3",
+     "fadeIn": 0.005,
+     "fadeOut": 0.4
+    },
+    {
+     "at": 70.3,
+     "s": 0,
+     "e": 1.6,
+     "gain": 0.5,
+     "label": "hit",
+     "source": "pack/audio/ATL_HIT_03HOWTOBREAKOF_42.mp3",
+     "fadeIn": 0.005,
+     "fadeOut": 0.4
+    },
+    {
+     "at": 92.5,
+     "s": 0,
+     "e": 1.6,
+     "gain": 0.5,
+     "label": "hit",
+     "source": "pack/audio/ATL_HIT_03HOWTOBREAKOF_41.mp3",
+     "fadeIn": 0.005,
+     "fadeOut": 0.4
+    },
+    {
+     "at": 107.76,
+     "s": 0,
+     "e": 3.0,
+     "gain": 0.55,
+     "label": "coda: Of a",
+     "source": "chops/07/07_C16.mp3",
+     "fadeIn": 0.05,
+     "fadeOut": 0.6
+    }
+   ]
+  }
+ ],
+ "lanes": [],
+ "provenance": {
+  "generator": "score_engine.py",
+  "iterations": [
+   {
+    "iter": 1,
+    "snr_db": 13.1,
+    "collisions": 0,
+    "arc_db": 155.6,
+    "clap_margin": 0.3014,
+    "passed": true,
+    "action": "accepted"
+   }
+  ]
+ }
+}

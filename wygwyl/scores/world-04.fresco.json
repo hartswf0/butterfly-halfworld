@@ -1,0 +1,60 @@
+{
+ "fresco": "0.1",
+ "title": "WORLD SCORE — Nevermore",
+ "duration": 148.9,
+ "base": "",
+ "tracks": [
+  {
+   "id": "world",
+   "name": "WORLD 04",
+   "gain": 1,
+   "clips": [
+    {
+     "at": 0,
+     "s": 286.512563,
+     "e": 421.781771,
+     "gain": 0.3,
+     "label": "drone",
+     "source": "drone/unified-drones-lite.mp3",
+     "fadeIn": 2.5,
+     "fadeOut": 6.0
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 130.95,
+     "gain": 1.0,
+     "label": "reading",
+     "source": "audio/04_Nevermore_mixdown_RY_250626.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.1
+    },
+    {
+     "at": 139.95,
+     "s": 0,
+     "e": 3.0,
+     "gain": 0.55,
+     "label": "coda: if I follow",
+     "source": "chops/04/04_C01.mp3",
+     "fadeIn": 0.05,
+     "fadeOut": 0.6
+    }
+   ]
+  }
+ ],
+ "lanes": [],
+ "provenance": {
+  "generator": "score_engine.py",
+  "iterations": [
+   {
+    "iter": 1,
+    "snr_db": 13.5,
+    "collisions": 0,
+    "arc_db": 154.8,
+    "clap_margin": 0.2829,
+    "passed": true,
+    "action": "accepted"
+   }
+  ]
+ }
+}

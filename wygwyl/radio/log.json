@@ -1,0 +1,354 @@
+{
+ "gate": "snr>=12dB during words · zero hit/word collisions · outro >=6dB below body · CLAP juror margin>0",
+ "stations": {
+  "01": {
+   "title": "Out of Life",
+   "iterations": [
+    {
+     "iter": 1,
+     "snr_db": 14.3,
+     "collisions": 0,
+     "arc_db": 10.3,
+     "clap_margin": 0.2986,
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "snr_db": 14.3,
+    "collisions": 0,
+    "arc_db": 10.3,
+    "clap_margin": 0.2986,
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "02": {
+   "title": "Flashing Lights",
+   "iterations": [
+    {
+     "iter": 1,
+     "snr_db": 14.9,
+     "collisions": 0,
+     "arc_db": 154.5,
+     "clap_margin": 0.3012,
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "snr_db": 14.9,
+    "collisions": 0,
+    "arc_db": 154.5,
+    "clap_margin": 0.3012,
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "03": {
+   "title": "How to Break off an Engagement",
+   "iterations": [
+    {
+     "iter": 1,
+     "snr_db": 14.2,
+     "collisions": 0,
+     "arc_db": 26.5,
+     "clap_margin": 0.2754,
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "snr_db": 14.2,
+    "collisions": 0,
+    "arc_db": 26.5,
+    "clap_margin": 0.2754,
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "04": {
+   "title": "Nevermore",
+   "iterations": [
+    {
+     "iter": 1,
+     "snr_db": 13.5,
+     "collisions": 0,
+     "arc_db": 154.8,
+     "clap_margin": 0.2829,
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "snr_db": 13.5,
+    "collisions": 0,
+    "arc_db": 154.8,
+    "clap_margin": 0.2829,
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "05": {
+   "title": "Bloodline",
+   "iterations": [
+    {
+     "iter": 1,
+     "snr_db": 14.5,
+     "collisions": 0,
+     "arc_db": 15.5,
+     "clap_margin": 0.2669,
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "snr_db": 14.5,
+    "collisions": 0,
+    "arc_db": 15.5,
+    "clap_margin": 0.2669,
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "06": {
+   "title": "Resurrecting Atlantis",
+   "iterations": [
+    {
+     "iter": 1,
+     "snr_db": 8.3,
+     "collisions": 0,
+     "arc_db": 155.7,
+     "clap_margin": 0.336,
+     "passed": false,
+     "action": "duck beds"
+    },
+    {
+     "iter": 2,
+     "snr_db": 9.6,
+     "collisions": 0,
+     "arc_db": 155.5,
+     "clap_margin": 0.3335,
+     "passed": false,
+     "action": "duck beds"
+    },
+    {
+     "iter": 3,
+     "snr_db": 11.6,
+     "collisions": 0,
+     "arc_db": 155.4,
+     "clap_margin": 0.3283,
+     "passed": false,
+     "action": "duck beds"
+    },
+    {
+     "iter": 4,
+     "snr_db": 13.5,
+     "collisions": 0,
+     "arc_db": 155.3,
+     "clap_margin": 0.3241,
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 4,
+    "snr_db": 13.5,
+    "collisions": 0,
+    "arc_db": 155.3,
+    "clap_margin": 0.3241,
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "07": {
+   "title": "DJ Turn Me Up",
+   "iterations": [
+    {
+     "iter": 1,
+     "snr_db": 13.1,
+     "collisions": 0,
+     "arc_db": 155.6,
+     "clap_margin": 0.3014,
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "snr_db": 13.1,
+    "collisions": 0,
+    "arc_db": 155.6,
+    "clap_margin": 0.3014,
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "08": {
+   "title": "Newly Single",
+   "iterations": [
+    {
+     "iter": 1,
+     "snr_db": 12.6,
+     "collisions": 0,
+     "arc_db": 157.8,
+     "clap_margin": 0.3167,
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "snr_db": 12.6,
+    "collisions": 0,
+    "arc_db": 157.8,
+    "clap_margin": 0.3167,
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "09": {
+   "title": "Yet Heard",
+   "iterations": [
+    {
+     "iter": 1,
+     "snr_db": 15.7,
+     "collisions": 0,
+     "arc_db": 29.1,
+     "clap_margin": 0.3734,
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "snr_db": 15.7,
+    "collisions": 0,
+    "arc_db": 29.1,
+    "clap_margin": 0.3734,
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "10": {
+   "title": "Magic Ride",
+   "iterations": [
+    {
+     "iter": 1,
+     "snr_db": 14.3,
+     "collisions": 0,
+     "arc_db": 155.0,
+     "clap_margin": 0.3345,
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "snr_db": 14.3,
+    "collisions": 0,
+    "arc_db": 155.0,
+    "clap_margin": 0.3345,
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "11": {
+   "title": "New Day",
+   "iterations": [
+    {
+     "iter": 1,
+     "snr_db": 14.6,
+     "collisions": 0,
+     "arc_db": 71.2,
+     "clap_margin": 0.2625,
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "snr_db": 14.6,
+    "collisions": 0,
+    "arc_db": 71.2,
+    "clap_margin": 0.2625,
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "12": {
+   "title": "Reunion",
+   "iterations": [
+    {
+     "iter": 1,
+     "snr_db": 12.9,
+     "collisions": 0,
+     "arc_db": 39.4,
+     "clap_margin": 0.3225,
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "snr_db": 12.9,
+    "collisions": 0,
+    "arc_db": 39.4,
+    "clap_margin": 0.3225,
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "13": {
+   "title": "How to Win My Heart",
+   "iterations": [
+    {
+     "iter": 1,
+     "snr_db": 12.7,
+     "collisions": 0,
+     "arc_db": 155.0,
+     "clap_margin": 0.3046,
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "snr_db": 12.7,
+    "collisions": 0,
+    "arc_db": 155.0,
+    "clap_margin": 0.3046,
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "14": {
+   "title": "Hot Minute",
+   "iterations": [
+    {
+     "iter": 1,
+     "snr_db": 14.8,
+     "collisions": 0,
+     "arc_db": 16.1,
+     "clap_margin": 0.3212,
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "snr_db": 14.8,
+    "collisions": 0,
+    "arc_db": 16.1,
+    "clap_margin": 0.3212,
+    "passed": true,
+    "action": "accepted"
+   }
+  }
+ }
+}

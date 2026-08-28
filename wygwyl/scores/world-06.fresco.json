@@ -1,0 +1,167 @@
+{
+ "fresco": "0.1",
+ "title": "WORLD SCORE — Resurrecting Atlantis",
+ "duration": 118.5,
+ "base": "",
+ "tracks": [
+  {
+   "id": "world",
+   "name": "WORLD 06",
+   "gain": 1,
+   "clips": [
+    {
+     "at": 0,
+     "s": 513.211646,
+     "e": 623.451646,
+     "gain": 0.16541039999999996,
+     "label": "drone",
+     "source": "drone/unified-drones-lite.mp3",
+     "fadeIn": 2.5,
+     "fadeOut": 6.0
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 100.48,
+     "gain": 1.0,
+     "label": "reading",
+     "source": "audio/06_Resurrecting Atlantis_mixdown_RY_250626.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.1
+    },
+    {
+     "at": 6.0,
+     "s": 0,
+     "e": 33.49333333333333,
+     "gain": 0.08231999999999998,
+     "label": "bed dogfinalvideon 1",
+     "source": "pack/audio/ATL_BED_DOGFINALVIDEON_12.mp3",
+     "fadeIn": 2.0,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 39.49333333333333,
+     "s": 0,
+     "e": 33.49333333333333,
+     "gain": 0.08231999999999998,
+     "label": "bed nativedelayed 01",
+     "source": "pack/audio/ATL_BED_NATIVEDELAYED_01.mp3",
+     "fadeIn": 2.0,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 72.98666666666666,
+     "s": 0,
+     "e": 33.49333333333334,
+     "gain": 0.08231999999999998,
+     "label": "bed outoflifenewau 1",
+     "source": "pack/audio/ATL_BED_OUTOFLIFENEWAU_15.mp3",
+     "fadeIn": 2.0,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 72.98666666666666,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_OUTOFLIFENEWAU_20.mp3",
+     "fadeIn": 0.8,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 80.98666666666666,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_OUTOFLIFENEWAU_20.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 88.98666666666666,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_OUTOFLIFENEWAU_20.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 96.98666666666666,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_OUTOFLIFENEWAU_20.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 0.02
+    },
+    {
+     "at": 104.98666666666666,
+     "s": 0,
+     "e": 8.0,
+     "gain": 0.28,
+     "label": "rhythm",
+     "source": "pack/audio/ATL_LOOP_OUTOFLIFENEWAU_20.mp3",
+     "fadeIn": 0.02,
+     "fadeOut": 2.5
+    },
+    {
+     "at": 109.48,
+     "s": 0,
+     "e": 3.0,
+     "gain": 0.55,
+     "label": "coda: my soul",
+     "source": "chops/06/06_C28.mp3",
+     "fadeIn": 0.05,
+     "fadeOut": 0.6
+    }
+   ]
+  }
+ ],
+ "lanes": [],
+ "provenance": {
+  "generator": "score_engine.py",
+  "iterations": [
+   {
+    "iter": 1,
+    "snr_db": 8.3,
+    "collisions": 0,
+    "arc_db": 155.7,
+    "clap_margin": 0.336,
+    "passed": false,
+    "action": "duck beds"
+   },
+   {
+    "iter": 2,
+    "snr_db": 9.6,
+    "collisions": 0,
+    "arc_db": 155.5,
+    "clap_margin": 0.3335,
+    "passed": false,
+    "action": "duck beds"
+   },
+   {
+    "iter": 3,
+    "snr_db": 11.6,
+    "collisions": 0,
+    "arc_db": 155.4,
+    "clap_margin": 0.3283,
+    "passed": false,
+    "action": "duck beds"
+   },
+   {
+    "iter": 4,
+    "snr_db": 13.5,
+    "collisions": 0,
+    "arc_db": 155.3,
+    "clap_margin": 0.3241,
+    "passed": true,
+    "action": "accepted"
+   }
+  ]
+ }
+}
