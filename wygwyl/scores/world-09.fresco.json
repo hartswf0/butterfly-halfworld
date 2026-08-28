@@ -181,10 +181,10 @@
      "at": 117.82,
      "source": "codex/09/line_04.mp3",
      "s": 0,
-     "e": 3.59,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 3.44,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: I believe maybe we c",
      "ref": {
       "role": "bed",
@@ -192,13 +192,13 @@
      }
     },
     {
-     "at": 119.02,
+     "at": 121.55999999999999,
      "source": "codex/09/line_10.mp3",
      "s": 0,
-     "e": 2.64,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 2.49,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: the way we used to b",
      "ref": {
       "role": "bed",
@@ -206,7 +206,7 @@
      }
     },
     {
-     "at": 121.82,
+     "at": 124.64999999999999,
      "source": "chops/09/09_C21.mp3",
      "s": 0,
      "e": 3.0,
@@ -230,7 +230,7 @@
     "iter": 1,
     "snr_db": 10.4,
     "collisions": 0,
-    "arc_db": 17.8,
+    "arc_db": 11.9,
     "clap_margin": 0.3857,
     "passed": false,
     "action": "deepen the bow"
@@ -239,8 +239,8 @@
     "iter": 2,
     "snr_db": 14.0,
     "collisions": 0,
-    "arc_db": 17.5,
-    "clap_margin": 0.3845,
+    "arc_db": 11.6,
+    "clap_margin": 0.3847,
     "passed": true,
     "action": "accepted"
    }

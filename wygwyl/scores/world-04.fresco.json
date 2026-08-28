@@ -181,10 +181,10 @@
      "at": 139.95,
      "source": "codex/04/line_01.mp3",
      "s": 0,
-     "e": 2.25,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 2.1,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: cover sands and debr",
      "ref": {
       "role": "bed",
@@ -192,13 +192,13 @@
      }
     },
     {
-     "at": 141.14999999999998,
+     "at": 142.35,
      "source": "codex/04/line_10.mp3",
      "s": 0,
-     "e": 1.73,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 1.58,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: as I'm called forwar",
      "ref": {
       "role": "bed",
@@ -206,7 +206,7 @@
      }
     },
     {
-     "at": 143.95,
+     "at": 144.53,
      "source": "chops/04/04_C01.mp3",
      "s": 0,
      "e": 3.0,
@@ -230,7 +230,7 @@
     "iter": 1,
     "snr_db": 7.8,
     "collisions": 0,
-    "arc_db": 16.5,
+    "arc_db": 14.7,
     "clap_margin": 0.407,
     "passed": false,
     "action": "deepen the bow"
@@ -239,7 +239,7 @@
     "iter": 2,
     "snr_db": 11.2,
     "collisions": 0,
-    "arc_db": 15.9,
+    "arc_db": 14.1,
     "clap_margin": 0.4081,
     "passed": false,
     "action": "deepen the bow"
@@ -248,8 +248,8 @@
     "iter": 3,
     "snr_db": 14.6,
     "collisions": 0,
-    "arc_db": 15.5,
-    "clap_margin": 0.4132,
+    "arc_db": 13.7,
+    "clap_margin": 0.4138,
     "passed": true,
     "action": "accepted"
    }

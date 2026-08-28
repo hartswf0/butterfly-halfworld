@@ -112,7 +112,7 @@
      "source": "radio/parts/05_07.mp3",
      "s": 0.0,
      "e": 26.69,
-     "gain": 0.256,
+     "gain": 0.2048,
      "fadeIn": 1.5,
      "fadeOut": 3.5,
      "label": "stem drums",
@@ -153,10 +153,10 @@
      "at": 83.07,
      "source": "codex/05/line_00.mp3",
      "s": 0,
-     "e": 5.0,
-     "gain": 0.164,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.5,
+     "gain": 0.13448,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: They tell me to ask ",
      "ref": {
       "role": "bed",
@@ -164,13 +164,13 @@
      }
     },
     {
-     "at": 84.27,
+     "at": 87.86999999999999,
      "source": "codex/05/line_01.mp3",
      "s": 0,
-     "e": 5.0,
-     "gain": 0.164,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.5,
+     "gain": 0.13448,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: to ask if I can name",
      "ref": {
       "role": "bed",
@@ -178,7 +178,7 @@
      }
     },
     {
-     "at": 87.07,
+     "at": 92.96999999999998,
      "source": "chops/05/05_C01.mp3",
      "s": 0,
      "e": 3.0,
@@ -202,10 +202,10 @@
     "iter": 1,
     "snr_db": 2.4,
     "collisions": 0,
-    "arc_db": 6.0,
-    "clap_margin": 0.3721,
+    "arc_db": 4.3,
+    "clap_margin": 0.3718,
     "passed": false,
-    "action": "deepen the bow"
+    "action": "deepen the bow, deepen resolve"
    },
    {
     "iter": 2,
@@ -230,7 +230,7 @@
     "snr_db": 13.8,
     "collisions": 0,
     "arc_db": 6.2,
-    "clap_margin": 0.3884,
+    "clap_margin": 0.3881,
     "passed": true,
     "action": "accepted"
    }

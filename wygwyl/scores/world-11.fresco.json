@@ -122,7 +122,7 @@
      }
     },
     {
-     "at": 114.27,
+     "at": 110.57,
      "source": "chops/11/11_C14.mp3",
      "s": 0,
      "e": 3.0,
@@ -146,8 +146,8 @@
     "iter": 1,
     "snr_db": 1.4,
     "collisions": 0,
-    "arc_db": 27.1,
-    "clap_margin": 0.4144,
+    "arc_db": 159.1,
+    "clap_margin": 0.414,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -155,8 +155,8 @@
     "iter": 2,
     "snr_db": 5.4,
     "collisions": 0,
-    "arc_db": 26.4,
-    "clap_margin": 0.4008,
+    "arc_db": 158.4,
+    "clap_margin": 0.4006,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -164,8 +164,8 @@
     "iter": 3,
     "snr_db": 9.4,
     "collisions": 0,
-    "arc_db": 25.9,
-    "clap_margin": 0.3956,
+    "arc_db": 158.0,
+    "clap_margin": 0.3949,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -173,8 +173,8 @@
     "iter": 4,
     "snr_db": 13.4,
     "collisions": 0,
-    "arc_db": 25.7,
-    "clap_margin": 0.3871,
+    "arc_db": 157.7,
+    "clap_margin": 0.3892,
     "passed": true,
     "action": "accepted"
    }

@@ -153,10 +153,10 @@
      "at": 107.76,
      "source": "codex/07/line_05.mp3",
      "s": 0,
-     "e": 5.0,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.5,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: or a frontal fog or ",
      "ref": {
       "role": "bed",
@@ -164,13 +164,13 @@
      }
     },
     {
-     "at": 108.96000000000001,
+     "at": 112.56,
      "source": "codex/07/line_04.mp3",
      "s": 0,
-     "e": 5.0,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.5,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: we love we not. Of a",
      "ref": {
       "role": "bed",
@@ -178,7 +178,7 @@
      }
     },
     {
-     "at": 111.76,
+     "at": 117.66,
      "source": "chops/07/07_C16.mp3",
      "s": 0,
      "e": 3.0,
@@ -202,7 +202,7 @@
     "iter": 1,
     "snr_db": 9.3,
     "collisions": 0,
-    "arc_db": 8.8,
+    "arc_db": 10.0,
     "clap_margin": 0.3639,
     "passed": false,
     "action": "deepen the bow"
@@ -211,8 +211,8 @@
     "iter": 2,
     "snr_db": 12.5,
     "collisions": 0,
-    "arc_db": 8.3,
-    "clap_margin": 0.3548,
+    "arc_db": 9.4,
+    "clap_margin": 0.3544,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -220,8 +220,8 @@
     "iter": 3,
     "snr_db": 15.7,
     "collisions": 0,
-    "arc_db": 7.9,
-    "clap_margin": 0.3488,
+    "arc_db": 9.0,
+    "clap_margin": 0.3486,
     "passed": true,
     "action": "accepted"
    }

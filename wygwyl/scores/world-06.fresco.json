@@ -139,10 +139,10 @@
      "at": 109.48,
      "source": "codex/06/line_02.mp3",
      "s": 0,
-     "e": 5.0,
-     "gain": 0.17482399999999998,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.5,
+     "gain": 0.13448,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: color rainbows, and ",
      "ref": {
       "role": "bed",
@@ -150,13 +150,13 @@
      }
     },
     {
-     "at": 110.68,
+     "at": 114.28,
      "source": "codex/06/line_00.mp3",
      "s": 0,
-     "e": 4.31,
-     "gain": 0.17482399999999998,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.159999999999999,
+     "gain": 0.13448,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: The gates open with ",
      "ref": {
       "role": "bed",
@@ -164,7 +164,7 @@
      }
     },
     {
-     "at": 113.48,
+     "at": 119.03999999999999,
      "source": "chops/06/06_C28.mp3",
      "s": 0,
      "e": 3.0,
@@ -188,7 +188,7 @@
     "iter": 1,
     "snr_db": 6.0,
     "collisions": 0,
-    "arc_db": 3.8,
+    "arc_db": 3.6,
     "clap_margin": 0.412,
     "passed": false,
     "action": "deepen the bow, deepen resolve"
@@ -197,7 +197,7 @@
     "iter": 2,
     "snr_db": 9.9,
     "collisions": 0,
-    "arc_db": 4.9,
+    "arc_db": 4.8,
     "clap_margin": 0.4167,
     "passed": false,
     "action": "deepen the bow, deepen resolve"
@@ -206,8 +206,8 @@
     "iter": 3,
     "snr_db": 13.5,
     "collisions": 0,
-    "arc_db": 6.2,
-    "clap_margin": 0.4173,
+    "arc_db": 6.0,
+    "clap_margin": 0.4171,
     "passed": true,
     "action": "accepted"
    }

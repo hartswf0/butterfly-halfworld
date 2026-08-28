@@ -8,8 +8,8 @@
      "iter": 1,
      "snr_db": 5.6,
      "collisions": 0,
-     "arc_db": 8.6,
-     "clap_margin": 0.3212,
+     "arc_db": 8.8,
+     "clap_margin": 0.3224,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -17,7 +17,7 @@
      "iter": 2,
      "snr_db": 9.6,
      "collisions": 0,
-     "arc_db": 8.0,
+     "arc_db": 8.3,
      "clap_margin": 0.3133,
      "passed": false,
      "action": "deepen the bow"
@@ -26,8 +26,8 @@
      "iter": 3,
      "snr_db": 13.3,
      "collisions": 0,
-     "arc_db": 7.7,
-     "clap_margin": 0.3084,
+     "arc_db": 7.9,
+     "clap_margin": 0.3074,
      "passed": true,
      "action": "accepted"
     }
@@ -36,8 +36,8 @@
     "iter": 3,
     "snr_db": 13.3,
     "collisions": 0,
-    "arc_db": 7.7,
-    "clap_margin": 0.3084,
+    "arc_db": 7.9,
+    "clap_margin": 0.3074,
     "passed": true,
     "action": "accepted"
    },
@@ -62,8 +62,8 @@
      "iter": 1,
      "snr_db": 6.8,
      "collisions": 0,
-     "arc_db": 7.2,
-     "clap_margin": 0.4246,
+     "arc_db": 7.4,
+     "clap_margin": 0.4247,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -71,7 +71,7 @@
      "iter": 2,
      "snr_db": 10.4,
      "collisions": 0,
-     "arc_db": 6.5,
+     "arc_db": 6.7,
      "clap_margin": 0.4246,
      "passed": false,
      "action": "deepen the bow"
@@ -80,7 +80,7 @@
      "iter": 3,
      "snr_db": 14.4,
      "collisions": 0,
-     "arc_db": 6.1,
+     "arc_db": 6.2,
      "clap_margin": 0.4257,
      "passed": true,
      "action": "accepted"
@@ -90,7 +90,7 @@
     "iter": 3,
     "snr_db": 14.4,
     "collisions": 0,
-    "arc_db": 6.1,
+    "arc_db": 6.2,
     "clap_margin": 0.4257,
     "passed": true,
     "action": "accepted"
@@ -116,8 +116,8 @@
      "iter": 1,
      "snr_db": 8.7,
      "collisions": 0,
-     "arc_db": 8.8,
-     "clap_margin": 0.4323,
+     "arc_db": 7.4,
+     "clap_margin": 0.4318,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -125,7 +125,7 @@
      "iter": 2,
      "snr_db": 12.5,
      "collisions": 0,
-     "arc_db": 8.4,
+     "arc_db": 7.0,
      "clap_margin": 0.4176,
      "passed": false,
      "action": "deepen the bow"
@@ -134,8 +134,8 @@
      "iter": 3,
      "snr_db": 16.3,
      "collisions": 0,
-     "arc_db": 8.1,
-     "clap_margin": 0.4064,
+     "arc_db": 6.7,
+     "clap_margin": 0.4059,
      "passed": true,
      "action": "accepted"
     }
@@ -144,8 +144,8 @@
     "iter": 3,
     "snr_db": 16.3,
     "collisions": 0,
-    "arc_db": 8.1,
-    "clap_margin": 0.4064,
+    "arc_db": 6.7,
+    "clap_margin": 0.4059,
     "passed": true,
     "action": "accepted"
    },
@@ -170,7 +170,7 @@
      "iter": 1,
      "snr_db": 7.8,
      "collisions": 0,
-     "arc_db": 16.5,
+     "arc_db": 14.7,
      "clap_margin": 0.407,
      "passed": false,
      "action": "deepen the bow"
@@ -179,7 +179,7 @@
      "iter": 2,
      "snr_db": 11.2,
      "collisions": 0,
-     "arc_db": 15.9,
+     "arc_db": 14.1,
      "clap_margin": 0.4081,
      "passed": false,
      "action": "deepen the bow"
@@ -188,8 +188,8 @@
      "iter": 3,
      "snr_db": 14.6,
      "collisions": 0,
-     "arc_db": 15.5,
-     "clap_margin": 0.4132,
+     "arc_db": 13.7,
+     "clap_margin": 0.4138,
      "passed": true,
      "action": "accepted"
     }
@@ -198,8 +198,8 @@
     "iter": 3,
     "snr_db": 14.6,
     "collisions": 0,
-    "arc_db": 15.5,
-    "clap_margin": 0.4132,
+    "arc_db": 13.7,
+    "clap_margin": 0.4138,
     "passed": true,
     "action": "accepted"
    },
@@ -224,10 +224,10 @@
      "iter": 1,
      "snr_db": 2.4,
      "collisions": 0,
-     "arc_db": 6.0,
-     "clap_margin": 0.3721,
+     "arc_db": 4.3,
+     "clap_margin": 0.3718,
      "passed": false,
-     "action": "deepen the bow"
+     "action": "deepen the bow, deepen resolve"
     },
     {
      "iter": 2,
@@ -252,7 +252,7 @@
      "snr_db": 13.8,
      "collisions": 0,
      "arc_db": 6.2,
-     "clap_margin": 0.3884,
+     "clap_margin": 0.3881,
      "passed": true,
      "action": "accepted"
     }
@@ -262,7 +262,7 @@
     "snr_db": 13.8,
     "collisions": 0,
     "arc_db": 6.2,
-    "clap_margin": 0.3884,
+    "clap_margin": 0.3881,
     "passed": true,
     "action": "accepted"
    },
@@ -287,7 +287,7 @@
      "iter": 1,
      "snr_db": 6.0,
      "collisions": 0,
-     "arc_db": 3.8,
+     "arc_db": 3.6,
      "clap_margin": 0.412,
      "passed": false,
      "action": "deepen the bow, deepen resolve"
@@ -296,7 +296,7 @@
      "iter": 2,
      "snr_db": 9.9,
      "collisions": 0,
-     "arc_db": 4.9,
+     "arc_db": 4.8,
      "clap_margin": 0.4167,
      "passed": false,
      "action": "deepen the bow, deepen resolve"
@@ -305,8 +305,8 @@
      "iter": 3,
      "snr_db": 13.5,
      "collisions": 0,
-     "arc_db": 6.2,
-     "clap_margin": 0.4173,
+     "arc_db": 6.0,
+     "clap_margin": 0.4171,
      "passed": true,
      "action": "accepted"
     }
@@ -315,8 +315,8 @@
     "iter": 3,
     "snr_db": 13.5,
     "collisions": 0,
-    "arc_db": 6.2,
-    "clap_margin": 0.4173,
+    "arc_db": 6.0,
+    "clap_margin": 0.4171,
     "passed": true,
     "action": "accepted"
    },
@@ -341,7 +341,7 @@
      "iter": 1,
      "snr_db": 9.3,
      "collisions": 0,
-     "arc_db": 8.8,
+     "arc_db": 10.0,
      "clap_margin": 0.3639,
      "passed": false,
      "action": "deepen the bow"
@@ -350,8 +350,8 @@
      "iter": 2,
      "snr_db": 12.5,
      "collisions": 0,
-     "arc_db": 8.3,
-     "clap_margin": 0.3548,
+     "arc_db": 9.4,
+     "clap_margin": 0.3544,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -359,8 +359,8 @@
      "iter": 3,
      "snr_db": 15.7,
      "collisions": 0,
-     "arc_db": 7.9,
-     "clap_margin": 0.3488,
+     "arc_db": 9.0,
+     "clap_margin": 0.3486,
      "passed": true,
      "action": "accepted"
     }
@@ -369,8 +369,8 @@
     "iter": 3,
     "snr_db": 15.7,
     "collisions": 0,
-    "arc_db": 7.9,
-    "clap_margin": 0.3488,
+    "arc_db": 9.0,
+    "clap_margin": 0.3486,
     "passed": true,
     "action": "accepted"
    },
@@ -395,7 +395,7 @@
      "iter": 1,
      "snr_db": 12.3,
      "collisions": 0,
-     "arc_db": 17.7,
+     "arc_db": 13.5,
      "clap_margin": 0.3586,
      "passed": false,
      "action": "deepen the bow"
@@ -404,7 +404,7 @@
      "iter": 2,
      "snr_db": 15.8,
      "collisions": 0,
-     "arc_db": 17.5,
+     "arc_db": 13.4,
      "clap_margin": 0.3615,
      "passed": true,
      "action": "accepted"
@@ -414,7 +414,7 @@
     "iter": 2,
     "snr_db": 15.8,
     "collisions": 0,
-    "arc_db": 17.5,
+    "arc_db": 13.4,
     "clap_margin": 0.3615,
     "passed": true,
     "action": "accepted"
@@ -440,7 +440,7 @@
      "iter": 1,
      "snr_db": 10.4,
      "collisions": 0,
-     "arc_db": 17.8,
+     "arc_db": 11.9,
      "clap_margin": 0.3857,
      "passed": false,
      "action": "deepen the bow"
@@ -449,8 +449,8 @@
      "iter": 2,
      "snr_db": 14.0,
      "collisions": 0,
-     "arc_db": 17.5,
-     "clap_margin": 0.3845,
+     "arc_db": 11.6,
+     "clap_margin": 0.3847,
      "passed": true,
      "action": "accepted"
     }
@@ -459,8 +459,8 @@
     "iter": 2,
     "snr_db": 14.0,
     "collisions": 0,
-    "arc_db": 17.5,
-    "clap_margin": 0.3845,
+    "arc_db": 11.6,
+    "clap_margin": 0.3847,
     "passed": true,
     "action": "accepted"
    },
@@ -485,7 +485,7 @@
      "iter": 1,
      "snr_db": 11.6,
      "collisions": 0,
-     "arc_db": 5.0,
+     "arc_db": 4.6,
      "clap_margin": 0.3699,
      "passed": false,
      "action": "deepen the bow, deepen resolve"
@@ -494,18 +494,27 @@
      "iter": 2,
      "snr_db": 14.9,
      "collisions": 0,
-     "arc_db": 6.1,
-     "clap_margin": 0.3776,
+     "arc_db": 5.7,
+     "clap_margin": 0.3767,
+     "passed": false,
+     "action": "deepen resolve"
+    },
+    {
+     "iter": 3,
+     "snr_db": 14.9,
+     "collisions": 0,
+     "arc_db": 7.4,
+     "clap_margin": 0.3767,
      "passed": true,
      "action": "accepted"
     }
    ],
    "final": {
-    "iter": 2,
+    "iter": 3,
     "snr_db": 14.9,
     "collisions": 0,
-    "arc_db": 6.1,
-    "clap_margin": 0.3776,
+    "arc_db": 7.4,
+    "clap_margin": 0.3767,
     "passed": true,
     "action": "accepted"
    },
@@ -530,8 +539,8 @@
      "iter": 1,
      "snr_db": 1.4,
      "collisions": 0,
-     "arc_db": 27.1,
-     "clap_margin": 0.4144,
+     "arc_db": 159.1,
+     "clap_margin": 0.414,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -539,8 +548,8 @@
      "iter": 2,
      "snr_db": 5.4,
      "collisions": 0,
-     "arc_db": 26.4,
-     "clap_margin": 0.4008,
+     "arc_db": 158.4,
+     "clap_margin": 0.4006,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -548,8 +557,8 @@
      "iter": 3,
      "snr_db": 9.4,
      "collisions": 0,
-     "arc_db": 25.9,
-     "clap_margin": 0.3956,
+     "arc_db": 158.0,
+     "clap_margin": 0.3949,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -557,8 +566,8 @@
      "iter": 4,
      "snr_db": 13.4,
      "collisions": 0,
-     "arc_db": 25.7,
-     "clap_margin": 0.3871,
+     "arc_db": 157.7,
+     "clap_margin": 0.3892,
      "passed": true,
      "action": "accepted"
     }
@@ -567,8 +576,8 @@
     "iter": 4,
     "snr_db": 13.4,
     "collisions": 0,
-    "arc_db": 25.7,
-    "clap_margin": 0.3871,
+    "arc_db": 157.7,
+    "clap_margin": 0.3892,
     "passed": true,
     "action": "accepted"
    },
@@ -591,7 +600,7 @@
      "iter": 1,
      "snr_db": 7.4,
      "collisions": 0,
-     "arc_db": 7.6,
+     "arc_db": 7.7,
      "clap_margin": 0.3857,
      "passed": false,
      "action": "deepen the bow"
@@ -600,7 +609,7 @@
      "iter": 2,
      "snr_db": 11.2,
      "collisions": 0,
-     "arc_db": 6.9,
+     "arc_db": 7.0,
      "clap_margin": 0.3904,
      "passed": false,
      "action": "deepen the bow"
@@ -609,7 +618,7 @@
      "iter": 3,
      "snr_db": 14.8,
      "collisions": 0,
-     "arc_db": 6.5,
+     "arc_db": 6.6,
      "clap_margin": 0.3975,
      "passed": true,
      "action": "accepted"
@@ -619,7 +628,7 @@
     "iter": 3,
     "snr_db": 14.8,
     "collisions": 0,
-    "arc_db": 6.5,
+    "arc_db": 6.6,
     "clap_margin": 0.3975,
     "passed": true,
     "action": "accepted"
@@ -645,8 +654,8 @@
      "iter": 1,
      "snr_db": 5.0,
      "collisions": 0,
-     "arc_db": 10.5,
-     "clap_margin": 0.4074,
+     "arc_db": 8.8,
+     "clap_margin": 0.4073,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -654,7 +663,7 @@
      "iter": 2,
      "snr_db": 9.0,
      "collisions": 0,
-     "arc_db": 10.1,
+     "arc_db": 8.4,
      "clap_margin": 0.4057,
      "passed": false,
      "action": "deepen the bow"
@@ -663,7 +672,7 @@
      "iter": 3,
      "snr_db": 12.7,
      "collisions": 0,
-     "arc_db": 9.9,
+     "arc_db": 8.1,
      "clap_margin": 0.3837,
      "passed": false,
      "action": "deepen the bow"
@@ -672,7 +681,7 @@
      "iter": 4,
      "snr_db": 16.3,
      "collisions": 0,
-     "arc_db": 9.7,
+     "arc_db": 8.0,
      "clap_margin": 0.3586,
      "passed": true,
      "action": "accepted"
@@ -682,7 +691,7 @@
     "iter": 4,
     "snr_db": 16.3,
     "collisions": 0,
-    "arc_db": 9.7,
+    "arc_db": 8.0,
     "clap_margin": 0.3586,
     "passed": true,
     "action": "accepted"
@@ -708,8 +717,8 @@
      "iter": 1,
      "snr_db": 5.2,
      "collisions": 0,
-     "arc_db": 16.2,
-     "clap_margin": 0.3999,
+     "arc_db": 10.8,
+     "clap_margin": 0.4002,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -717,8 +726,8 @@
      "iter": 2,
      "snr_db": 8.8,
      "collisions": 0,
-     "arc_db": 15.8,
-     "clap_margin": 0.3981,
+     "arc_db": 10.3,
+     "clap_margin": 0.3983,
      "passed": false,
      "action": "deepen the bow"
     },
@@ -726,7 +735,7 @@
      "iter": 3,
      "snr_db": 12.3,
      "collisions": 0,
-     "arc_db": 15.5,
+     "arc_db": 10.0,
      "clap_margin": 0.3891,
      "passed": false,
      "action": "deepen the bow"
@@ -735,7 +744,7 @@
      "iter": 4,
      "snr_db": 15.9,
      "collisions": 0,
-     "arc_db": 15.3,
+     "arc_db": 9.8,
      "clap_margin": 0.3966,
      "passed": true,
      "action": "accepted"
@@ -745,7 +754,7 @@
     "iter": 4,
     "snr_db": 15.9,
     "collisions": 0,
-    "arc_db": 15.3,
+    "arc_db": 9.8,
     "clap_margin": 0.3966,
     "passed": true,
     "action": "accepted"

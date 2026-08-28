@@ -167,10 +167,10 @@
      "at": 73.81,
      "source": "codex/12/line_00.mp3",
      "s": 0,
-     "e": 5.0,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.5,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: Decades later, there",
      "ref": {
       "role": "bed",
@@ -178,13 +178,13 @@
      }
     },
     {
-     "at": 75.01,
+     "at": 78.61,
      "source": "codex/12/line_01.mp3",
      "s": 0,
-     "e": 5.0,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.5,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: loud voices so our h",
      "ref": {
       "role": "bed",
@@ -192,7 +192,7 @@
      }
     },
     {
-     "at": 77.81,
+     "at": 83.71,
      "source": "chops/12/12_C10.mp3",
      "s": 0,
      "e": 3.0,
@@ -216,7 +216,7 @@
     "iter": 1,
     "snr_db": 7.4,
     "collisions": 0,
-    "arc_db": 7.6,
+    "arc_db": 7.7,
     "clap_margin": 0.3857,
     "passed": false,
     "action": "deepen the bow"
@@ -225,7 +225,7 @@
     "iter": 2,
     "snr_db": 11.2,
     "collisions": 0,
-    "arc_db": 6.9,
+    "arc_db": 7.0,
     "clap_margin": 0.3904,
     "passed": false,
     "action": "deepen the bow"
@@ -234,7 +234,7 @@
     "iter": 3,
     "snr_db": 14.8,
     "collisions": 0,
-    "arc_db": 6.5,
+    "arc_db": 6.6,
     "clap_margin": 0.3975,
     "passed": true,
     "action": "accepted"

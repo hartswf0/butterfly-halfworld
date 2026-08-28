@@ -153,10 +153,10 @@
      "at": 100.53,
      "source": "codex/08/line_00.mp3",
      "s": 0,
-     "e": 4.25,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.1,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: The soul has escaped",
      "ref": {
       "role": "bed",
@@ -164,13 +164,13 @@
      }
     },
     {
-     "at": 101.73,
+     "at": 104.93,
      "source": "codex/08/line_06.mp3",
      "s": 0,
-     "e": 3.73,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 3.58,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: in the distance and ",
      "ref": {
       "role": "bed",
@@ -178,7 +178,7 @@
      }
     },
     {
-     "at": 104.53,
+     "at": 109.11,
      "source": "chops/08/08_C21.mp3",
      "s": 0,
      "e": 3.0,
@@ -202,7 +202,7 @@
     "iter": 1,
     "snr_db": 12.3,
     "collisions": 0,
-    "arc_db": 17.7,
+    "arc_db": 13.5,
     "clap_margin": 0.3586,
     "passed": false,
     "action": "deepen the bow"
@@ -211,7 +211,7 @@
     "iter": 2,
     "snr_db": 15.8,
     "collisions": 0,
-    "arc_db": 17.5,
+    "arc_db": 13.4,
     "clap_margin": 0.3615,
     "passed": true,
     "action": "accepted"

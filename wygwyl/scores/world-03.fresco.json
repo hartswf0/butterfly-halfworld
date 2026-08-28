@@ -167,10 +167,10 @@
      "at": 71.52000000000001,
      "source": "codex/03/line_06.mp3",
      "s": 0,
-     "e": 4.61,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.46,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: and a tambourine sha",
      "ref": {
       "role": "bed",
@@ -178,13 +178,13 @@
      }
     },
     {
-     "at": 72.72000000000001,
+     "at": 76.28000000000002,
      "source": "codex/03/line_02.mp3",
      "s": 0,
-     "e": 5.0,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.5,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: Spirits have left sa",
      "ref": {
       "role": "bed",
@@ -192,7 +192,7 @@
      }
     },
     {
-     "at": 75.52000000000001,
+     "at": 81.38000000000001,
      "source": "chops/03/03_C25.mp3",
      "s": 0,
      "e": 3.0,
@@ -216,8 +216,8 @@
     "iter": 1,
     "snr_db": 8.7,
     "collisions": 0,
-    "arc_db": 8.8,
-    "clap_margin": 0.4323,
+    "arc_db": 7.4,
+    "clap_margin": 0.4318,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -225,7 +225,7 @@
     "iter": 2,
     "snr_db": 12.5,
     "collisions": 0,
-    "arc_db": 8.4,
+    "arc_db": 7.0,
     "clap_margin": 0.4176,
     "passed": false,
     "action": "deepen the bow"
@@ -234,8 +234,8 @@
     "iter": 3,
     "snr_db": 16.3,
     "collisions": 0,
-    "arc_db": 8.1,
-    "clap_margin": 0.4064,
+    "arc_db": 6.7,
+    "clap_margin": 0.4059,
     "passed": true,
     "action": "accepted"
    }

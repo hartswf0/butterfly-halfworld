@@ -153,10 +153,10 @@
      "at": 90.58,
      "source": "codex/02/line_00.mp3",
      "s": 0,
-     "e": 5.0,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.5,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: I heard a scream for",
      "ref": {
       "role": "bed",
@@ -164,13 +164,13 @@
      }
     },
     {
-     "at": 91.78,
+     "at": 95.38,
      "source": "codex/02/line_08.mp3",
      "s": 0,
-     "e": 5.0,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.5,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: I was six I recall w",
      "ref": {
       "role": "bed",
@@ -178,7 +178,7 @@
      }
     },
     {
-     "at": 94.58,
+     "at": 100.47999999999999,
      "source": "chops/02/02_C02.mp3",
      "s": 0,
      "e": 3.0,
@@ -202,8 +202,8 @@
     "iter": 1,
     "snr_db": 6.8,
     "collisions": 0,
-    "arc_db": 7.2,
-    "clap_margin": 0.4246,
+    "arc_db": 7.4,
+    "clap_margin": 0.4247,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -211,7 +211,7 @@
     "iter": 2,
     "snr_db": 10.4,
     "collisions": 0,
-    "arc_db": 6.5,
+    "arc_db": 6.7,
     "clap_margin": 0.4246,
     "passed": false,
     "action": "deepen the bow"
@@ -220,7 +220,7 @@
     "iter": 3,
     "snr_db": 14.4,
     "collisions": 0,
-    "arc_db": 6.1,
+    "arc_db": 6.2,
     "clap_margin": 0.4257,
     "passed": true,
     "action": "accepted"

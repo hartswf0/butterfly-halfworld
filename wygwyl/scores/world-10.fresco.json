@@ -112,7 +112,7 @@
      "source": "radio/parts/10_07.mp3",
      "s": 0.0,
      "e": 34.05,
-     "gain": 0.256,
+     "gain": 0.2048,
      "fadeIn": 1.5,
      "fadeOut": 3.5,
      "label": "stem drums",
@@ -181,10 +181,10 @@
      "at": 105.14,
      "source": "codex/10/line_02.mp3",
      "s": 0,
-     "e": 5.0,
-     "gain": 0.2132,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.5,
+     "gain": 0.13448,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: So I rub my aggressi",
      "ref": {
       "role": "bed",
@@ -192,13 +192,13 @@
      }
     },
     {
-     "at": 106.34,
+     "at": 109.94,
      "source": "codex/10/line_03.mp3",
      "s": 0,
-     "e": 4.57,
-     "gain": 0.2132,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.42,
+     "gain": 0.13448,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: Loneliness is having",
      "ref": {
       "role": "bed",
@@ -206,7 +206,7 @@
      }
     },
     {
-     "at": 109.14,
+     "at": 114.96,
      "source": "chops/10/10_C28.mp3",
      "s": 0,
      "e": 3.0,
@@ -230,7 +230,7 @@
     "iter": 1,
     "snr_db": 11.6,
     "collisions": 0,
-    "arc_db": 5.0,
+    "arc_db": 4.6,
     "clap_margin": 0.3699,
     "passed": false,
     "action": "deepen the bow, deepen resolve"
@@ -239,8 +239,17 @@
     "iter": 2,
     "snr_db": 14.9,
     "collisions": 0,
-    "arc_db": 6.1,
-    "clap_margin": 0.3776,
+    "arc_db": 5.7,
+    "clap_margin": 0.3767,
+    "passed": false,
+    "action": "deepen resolve"
+   },
+   {
+    "iter": 3,
+    "snr_db": 14.9,
+    "collisions": 0,
+    "arc_db": 7.4,
+    "clap_margin": 0.3767,
     "passed": true,
     "action": "accepted"
    }

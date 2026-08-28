@@ -167,10 +167,10 @@
      "at": 97.38,
      "source": "codex/01/line_00.mp3",
      "s": 0,
-     "e": 5.0,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.5,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: What we've made we d",
      "ref": {
       "role": "bed",
@@ -178,13 +178,13 @@
      }
     },
     {
-     "at": 98.58,
+     "at": 102.17999999999999,
      "source": "codex/01/line_03.mp3",
      "s": 0,
-     "e": 5.0,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.5,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: It was the maze cons",
      "ref": {
       "role": "bed",
@@ -192,7 +192,7 @@
      }
     },
     {
-     "at": 101.38,
+     "at": 107.27999999999999,
      "source": "chops/01/01_C24.mp3",
      "s": 0,
      "e": 3.0,
@@ -216,8 +216,8 @@
     "iter": 1,
     "snr_db": 5.6,
     "collisions": 0,
-    "arc_db": 8.6,
-    "clap_margin": 0.3212,
+    "arc_db": 8.8,
+    "clap_margin": 0.3224,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -225,7 +225,7 @@
     "iter": 2,
     "snr_db": 9.6,
     "collisions": 0,
-    "arc_db": 8.0,
+    "arc_db": 8.3,
     "clap_margin": 0.3133,
     "passed": false,
     "action": "deepen the bow"
@@ -234,8 +234,8 @@
     "iter": 3,
     "snr_db": 13.3,
     "collisions": 0,
-    "arc_db": 7.7,
-    "clap_margin": 0.3084,
+    "arc_db": 7.9,
+    "clap_margin": 0.3074,
     "passed": true,
     "action": "accepted"
    }

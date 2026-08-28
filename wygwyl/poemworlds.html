@@ -97,7 +97,9 @@ function desk(){
   const ear = ctx.createAnalyser(); ear.fftSize = 1024;
   voiceGain.connect(ear);
 
-  const worldBus = ctx.createGain();
+  const voxBus = ctx.createGain(); voxBus.gain.value = 1;   // other mouths bow DEEP —
+  const worldBus = ctx.createGain();                         // no voice rides under hers
+  voxBus.connect(worldBus);
   const midCarve = ctx.createBiquadFilter();          // the dialog mixer's dip:
   midCarve.type = 'peaking'; midCarve.frequency.value = 1400;  // carve the voice's
   midCarve.Q.value = 0.7; midCarve.gain.value = 0;             // room out of the music
@@ -116,7 +118,7 @@ function desk(){
   }
   echoWet.connect(duckGain);                                         // echoes bow to the voice too
 
-  DESK = {master, voiceGain, ear, worldBus, duckGain, echoIn, midCarve};
+  DESK = {master, voiceGain, ear, worldBus, voxBus, duckGain, echoIn, midCarve};
   return DESK;
 }
 
@@ -136,6 +138,8 @@ function sidechain(){
   // and the mid carve deepens with the bow — the music keeps its lows and air,
   // gives up only the band the voice lives in
   D.midCarve.gain.setTargetAtTime(speaking ? -7 * amt : 0, ctx.currentTime, speaking ? 0.03 : 0.2);
+  // layers that carry a mouth (sung chairs, voice-bearing samples) all but vanish under her
+  D.voxBus.gain.setTargetAtTime(speaking ? 0.12 : 1, ctx.currentTime, speaking ? 0.03 : 0.25);
   const g = D.duckGain.gain.value;
   $('#duckbar').style.transform = `scaleX(${g.toFixed(3)})`;
   $('#ducklbl').textContent = `world ${(20 * Math.log10(Math.max(g, 0.02))).toFixed(0)} dB`;
@@ -180,7 +184,8 @@ function layerRow(kind, name, sub, make, opts = {}){
       p.scale = ctx.createGain();
       p.send = ctx.createGain();
       p.pan = ctx.createStereoPanner(); p.pan.pan.value = opts.pan || 0;
-      p.g.connect(p.lp); p.lp.connect(p.scale); p.scale.connect(p.pan); p.pan.connect(D.worldBus);
+      p.g.connect(p.lp); p.lp.connect(p.scale); p.scale.connect(p.pan);
+      p.pan.connect(opts.vox ? D.voxBus : D.worldBus);
       p.scale.connect(p.send); p.send.connect(D.echoIn);
       setDepth(p, dep.value / 100);
     }
@@ -240,7 +245,8 @@ function render(){
     const kind = s.eco === 'soundmark' ? 'soundmark' : s.eco;
     host.appendChild(layerRow(kind === 'keynote' ? 'keynote' : kind,
       s.label, `≈ “${(s.phr||'').slice(0,58)}”${s.strict === false ? ' · weak referral' : ''}`,
-      () => slice(s.file, s.s0 ?? 0, s.s1 ?? null, kind !== 'signal'), {pan: 0.35 * (side = -side)}));
+      () => slice(s.file, s.s0 ?? 0, s.s1 ?? null, kind !== 'signal'),
+      {pan: 0.35 * (side = -side), vox: kind === 'soundmark' || /vox|voice|word/i.test(s.label)}));
   }
   const ODEP = {BASS: 22, DRUMS: 35, PIANO: 45, STRINGS: 55, SYNTH: 62, VOCALS: 72, SFX: 55};
   (W.orchestra || []).forEach((o, i) => {
@@ -248,7 +254,7 @@ function render(){
       `${o.name} · ${Math.round(o.tempo)} bpm · ${o.key} · ${o.kin === 'title' ? 'this poem\'s own song' : 'mood kin'} · loops`,
       () => slice(o.file, 0, null, true),
       {pan: (i % 2 ? 1 : -1) * (0.3 + 0.18 * (i % 3)), level: o.instrument === 'DRUMS' ? 18 : 24,
-       depth: ODEP[o.instrument] ?? 55}));
+       depth: ODEP[o.instrument] ?? 55, vox: o.instrument === 'VOCALS'}));
   });
   const vh = $('#vh'), vs = $('#variants'); vs.innerHTML = '';
   if (W.variants && W.variants.length){

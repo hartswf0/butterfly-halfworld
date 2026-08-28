@@ -153,10 +153,10 @@
      "at": 78.36,
      "source": "codex/14/line_03.mp3",
      "s": 0,
-     "e": 4.09,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 3.94,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: Whatever has termina",
      "ref": {
       "role": "bed",
@@ -164,13 +164,13 @@
      }
     },
     {
-     "at": 79.56,
+     "at": 82.6,
      "source": "codex/14/line_00.mp3",
      "s": 0,
-     "e": 2.97,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 2.8200000000000003,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: Don't make me leave ",
      "ref": {
       "role": "bed",
@@ -178,7 +178,7 @@
      }
     },
     {
-     "at": 82.36,
+     "at": 86.02,
      "source": "chops/14/14_C10.mp3",
      "s": 0,
      "e": 3.0,
@@ -202,8 +202,8 @@
     "iter": 1,
     "snr_db": 5.2,
     "collisions": 0,
-    "arc_db": 16.2,
-    "clap_margin": 0.3999,
+    "arc_db": 10.8,
+    "clap_margin": 0.4002,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -211,8 +211,8 @@
     "iter": 2,
     "snr_db": 8.8,
     "collisions": 0,
-    "arc_db": 15.8,
-    "clap_margin": 0.3981,
+    "arc_db": 10.3,
+    "clap_margin": 0.3983,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -220,7 +220,7 @@
     "iter": 3,
     "snr_db": 12.3,
     "collisions": 0,
-    "arc_db": 15.5,
+    "arc_db": 10.0,
     "clap_margin": 0.3891,
     "passed": false,
     "action": "deepen the bow"
@@ -229,7 +229,7 @@
     "iter": 4,
     "snr_db": 15.9,
     "collisions": 0,
-    "arc_db": 15.3,
+    "arc_db": 9.8,
     "clap_margin": 0.3966,
     "passed": true,
     "action": "accepted"

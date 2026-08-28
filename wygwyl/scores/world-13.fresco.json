@@ -167,10 +167,10 @@
      "at": 109.73,
      "source": "codex/13/line_05.mp3",
      "s": 0,
-     "e": 5.0,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 4.5,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: So I thought, life h",
      "ref": {
       "role": "bed",
@@ -178,13 +178,13 @@
      }
     },
     {
-     "at": 110.93,
+     "at": 114.53,
      "source": "codex/13/line_12.mp3",
      "s": 0,
-     "e": 3.97,
-     "gain": 0.26,
-     "fadeIn": 0.8,
-     "fadeOut": 2.0,
+     "e": 3.8200000000000003,
+     "gain": 0.2,
+     "fadeIn": 0.6,
+     "fadeOut": 1.2,
      "label": "coda sung: stepping back and le",
      "ref": {
       "role": "bed",
@@ -192,7 +192,7 @@
      }
     },
     {
-     "at": 113.73,
+     "at": 118.95,
      "source": "chops/13/13_C01.mp3",
      "s": 0,
      "e": 3.0,
@@ -216,8 +216,8 @@
     "iter": 1,
     "snr_db": 5.0,
     "collisions": 0,
-    "arc_db": 10.5,
-    "clap_margin": 0.4074,
+    "arc_db": 8.8,
+    "clap_margin": 0.4073,
     "passed": false,
     "action": "deepen the bow"
    },
@@ -225,7 +225,7 @@
     "iter": 2,
     "snr_db": 9.0,
     "collisions": 0,
-    "arc_db": 10.1,
+    "arc_db": 8.4,
     "clap_margin": 0.4057,
     "passed": false,
     "action": "deepen the bow"
@@ -234,7 +234,7 @@
     "iter": 3,
     "snr_db": 12.7,
     "collisions": 0,
-    "arc_db": 9.9,
+    "arc_db": 8.1,
     "clap_margin": 0.3837,
     "passed": false,
     "action": "deepen the bow"
@@ -243,7 +243,7 @@
     "iter": 4,
     "snr_db": 16.3,
     "collisions": 0,
-    "arc_db": 9.7,
+    "arc_db": 8.0,
     "clap_margin": 0.3586,
     "passed": true,
     "action": "accepted"
