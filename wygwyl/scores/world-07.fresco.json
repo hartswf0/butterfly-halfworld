@@ -1,7 +1,7 @@
 {
  "fresco": "0.1",
  "title": "WORLD SCORE — DJ Turn Me Up",
- "duration": 116.8,
+ "duration": 120.8,
  "base": "",
  "tracks": [
   {
@@ -11,97 +11,161 @@
    "clips": [
     {
      "at": 0,
+     "source": "drone/unified-drones-lite.mp3",
      "s": 623.454208,
      "e": 732.134208,
-     "gain": 0.3,
-     "label": "drone",
-     "source": "drone/unified-drones-lite.mp3",
+     "gain": 0.28,
      "fadeIn": 2.5,
-     "fadeOut": 6.0
+     "fadeOut": 6.0,
+     "label": "drone",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "audio/07_DJ Turn Me Up_mixdown_RY_250626.mp3",
      "s": 0,
      "e": 98.76,
      "gain": 1.0,
-     "label": "reading",
-     "source": "audio/07_DJ Turn Me Up_mixdown_RY_250626.mp3",
      "fadeIn": 0.02,
-     "fadeOut": 0.1
+     "fadeOut": 0.1,
+     "label": "reading",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     },
     {
-     "at": 7.499999999999999,
+     "at": 6.0,
+     "source": "pack/songloops/VOL_nightbus-08_02.mp3",
      "s": 0,
-     "e": 1.6,
-     "gain": 0.5,
-     "label": "hit",
-     "source": "pack/audio/ATL_HIT_03HOWTOBREAKOF_41.mp3",
-     "fadeIn": 0.005,
-     "fadeOut": 0.4
+     "e": 65.84,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch piano · Saltwater Static (",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
     },
     {
-     "at": 20.069999999999997,
+     "at": 6.0,
+     "source": "pack/songloops/VOL_dustrest-10_01.mp3",
      "s": 0,
-     "e": 1.6,
-     "gain": 0.5,
-     "label": "hit",
-     "source": "pack/audio/ATL_HIT_03HOWTOBREAKOF_42.mp3",
-     "fadeIn": 0.005,
-     "fadeOut": 0.4
+     "e": 65.84,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch strings · Non-Abiding Flow",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
     },
     {
-     "at": 52.52,
+     "at": 38.92,
+     "source": "pack/songloops/VOL_mallground-18_06.mp3",
      "s": 0,
-     "e": 1.6,
-     "gain": 0.5,
-     "label": "hit",
-     "source": "pack/audio/ATL_HIT_03HOWTOBREAKOF_41.mp3",
-     "fadeIn": 0.005,
-     "fadeOut": 0.4
+     "e": 65.84,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch synth · Hidden Systems (In",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
     },
     {
-     "at": 70.3,
+     "at": 38.92,
+     "source": "pack/songloops/VOL_dustrest-19_05.mp3",
      "s": 0,
-     "e": 1.6,
-     "gain": 0.5,
-     "label": "hit",
-     "source": "pack/audio/ATL_HIT_03HOWTOBREAKOF_42.mp3",
-     "fadeIn": 0.005,
-     "fadeOut": 0.4
+     "e": 65.84,
+     "gain": 0.08448,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch vocals · Ontological Collap",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
     },
     {
-     "at": 92.5,
-     "s": 0,
-     "e": 1.6,
-     "gain": 0.5,
-     "label": "hit",
-     "source": "pack/audio/ATL_HIT_03HOWTOBREAKOF_41.mp3",
-     "fadeIn": 0.005,
-     "fadeOut": 0.4
+     "at": 38.92,
+     "source": "radio/parts/07_06.mp3",
+     "s": 0.0,
+     "e": 69.84,
+     "gain": 0.3,
+     "fadeIn": 2.0,
+     "fadeOut": 4.0,
+     "label": "stem bass",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
-     "at": 107.76,
+     "at": 71.84,
+     "source": "radio/parts/07_07.mp3",
+     "s": 0.0,
+     "e": 34.92,
+     "gain": 0.32,
+     "fadeIn": 1.5,
+     "fadeOut": 3.5,
+     "label": "stem drums",
+     "ref": {
+      "role": "bed",
+      "pan": 0.12
+     }
+    },
+    {
+     "at": 111.76,
+     "source": "chops/07/07_C16.mp3",
      "s": 0,
      "e": 3.0,
      "gain": 0.55,
-     "label": "coda: Of a",
-     "source": "chops/07/07_C16.mp3",
      "fadeIn": 0.05,
-     "fadeOut": 0.6
+     "fadeOut": 0.6,
+     "label": "coda: Of a",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     }
    ]
   }
  ],
  "lanes": [],
  "provenance": {
-  "generator": "score_engine.py",
+  "generator": "score_engine.py v2 — samples, stems, foley, ghosts",
   "iterations": [
    {
     "iter": 1,
-    "snr_db": 13.1,
+    "snr_db": 9.3,
     "collisions": 0,
-    "arc_db": 155.6,
-    "clap_margin": 0.3014,
+    "arc_db": 19.5,
+    "clap_margin": 0.3739,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 2,
+    "snr_db": 12.5,
+    "collisions": 0,
+    "arc_db": 18.9,
+    "clap_margin": 0.3674,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 3,
+    "snr_db": 15.7,
+    "collisions": 0,
+    "arc_db": 18.5,
+    "clap_margin": 0.3592,
     "passed": true,
     "action": "accepted"
    }

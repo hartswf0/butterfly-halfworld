@@ -1,7 +1,7 @@
 {
  "fresco": "0.1",
  "title": "WORLD SCORE — Resurrecting Atlantis",
- "duration": 118.5,
+ "duration": 122.5,
  "base": "",
  "tracks": [
   {
@@ -11,154 +11,175 @@
    "clips": [
     {
      "at": 0,
+     "source": "drone/unified-drones-lite.mp3",
      "s": 513.211646,
      "e": 623.451646,
-     "gain": 0.16541039999999996,
-     "label": "drone",
-     "source": "drone/unified-drones-lite.mp3",
+     "gain": 0.28,
      "fadeIn": 2.5,
-     "fadeOut": 6.0
+     "fadeOut": 6.0,
+     "label": "drone",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "audio/06_Resurrecting Atlantis_mixdown_RY_250626.mp3",
      "s": 0,
      "e": 100.48,
      "gain": 1.0,
-     "label": "reading",
-     "source": "audio/06_Resurrecting Atlantis_mixdown_RY_250626.mp3",
      "fadeIn": 0.02,
-     "fadeOut": 0.1
+     "fadeOut": 0.1,
+     "label": "reading",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "pack/songloops/VOL_congregation-13_01.mp3",
      "s": 0,
-     "e": 33.49333333333333,
-     "gain": 0.08231999999999998,
-     "label": "bed dogfinalvideon 1",
-     "source": "pack/audio/ATL_BED_DOGFINALVIDEON_12.mp3",
-     "fadeIn": 2.0,
-     "fadeOut": 2.5
+     "e": 66.98666666666666,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch piano · The Master's Zenit",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 6.0,
+     "source": "pack/songloops/VOL_mallground-27_06.mp3",
+     "s": 0,
+     "e": 66.98666666666666,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch strings · MallNet Paradise S",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
     },
     {
      "at": 39.49333333333333,
+     "source": "pack/songloops/VOL_glass-11_04.mp3",
      "s": 0,
-     "e": 33.49333333333333,
-     "gain": 0.08231999999999998,
-     "label": "bed nativedelayed 01",
-     "source": "pack/audio/ATL_BED_NATIVEDELAYED_01.mp3",
+     "e": 66.98666666666668,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch synth · London Hiss",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 39.49333333333333,
+     "source": "pack/songloops/VOL_glass-11_05.mp3",
+     "s": 0,
+     "e": 66.98666666666668,
+     "gain": 0.08448,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch vocals · London Hiss",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 39.49333333333333,
+     "source": "radio/parts/06_06.mp3",
+     "s": 0.0,
+     "e": 70.99,
+     "gain": 0.3,
      "fadeIn": 2.0,
-     "fadeOut": 2.5
+     "fadeOut": 4.0,
+     "label": "stem bass",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
      "at": 72.98666666666666,
-     "s": 0,
-     "e": 33.49333333333334,
-     "gain": 0.08231999999999998,
-     "label": "bed outoflifenewau 1",
-     "source": "pack/audio/ATL_BED_OUTOFLIFENEWAU_15.mp3",
-     "fadeIn": 2.0,
-     "fadeOut": 2.5
+     "source": "radio/parts/06_07.mp3",
+     "s": 0.0,
+     "e": 35.49,
+     "gain": 0.32,
+     "fadeIn": 1.5,
+     "fadeOut": 3.5,
+     "label": "stem drums",
+     "ref": {
+      "role": "bed",
+      "pan": 0.12
+     }
     },
     {
-     "at": 72.98666666666666,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
+     "at": 87.41,
      "source": "pack/audio/ATL_LOOP_OUTOFLIFENEWAU_20.mp3",
-     "fadeIn": 0.8,
-     "fadeOut": 0.02
-    },
-    {
-     "at": 80.98666666666666,
      "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_OUTOFLIFENEWAU_20.mp3",
+     "e": 1.4,
+     "gain": 0.42,
      "fadeIn": 0.02,
-     "fadeOut": 0.02
+     "fadeOut": 0.35,
+     "label": "foley: night",
+     "ref": {
+      "role": "hit",
+      "pan": -0.5
+     }
     },
     {
-     "at": 88.98666666666666,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_OUTOFLIFENEWAU_20.mp3",
-     "fadeIn": 0.02,
-     "fadeOut": 0.02
-    },
-    {
-     "at": 96.98666666666666,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_OUTOFLIFENEWAU_20.mp3",
-     "fadeIn": 0.02,
-     "fadeOut": 0.02
-    },
-    {
-     "at": 104.98666666666666,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_OUTOFLIFENEWAU_20.mp3",
-     "fadeIn": 0.02,
-     "fadeOut": 2.5
-    },
-    {
-     "at": 109.48,
+     "at": 113.48,
+     "source": "chops/06/06_C28.mp3",
      "s": 0,
      "e": 3.0,
      "gain": 0.55,
-     "label": "coda: my soul",
-     "source": "chops/06/06_C28.mp3",
      "fadeIn": 0.05,
-     "fadeOut": 0.6
+     "fadeOut": 0.6,
+     "label": "coda: my soul",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     }
    ]
   }
  ],
  "lanes": [],
  "provenance": {
-  "generator": "score_engine.py",
+  "generator": "score_engine.py v2 — samples, stems, foley, ghosts",
   "iterations": [
    {
     "iter": 1,
-    "snr_db": 8.3,
+    "snr_db": 6.0,
     "collisions": 0,
-    "arc_db": 155.7,
-    "clap_margin": 0.336,
+    "arc_db": 15.0,
+    "clap_margin": 0.4119,
     "passed": false,
-    "action": "duck beds"
+    "action": "deepen the bow"
    },
    {
     "iter": 2,
-    "snr_db": 9.6,
+    "snr_db": 9.9,
     "collisions": 0,
-    "arc_db": 155.5,
-    "clap_margin": 0.3335,
+    "arc_db": 14.5,
+    "clap_margin": 0.4167,
     "passed": false,
-    "action": "duck beds"
+    "action": "deepen the bow"
    },
    {
     "iter": 3,
-    "snr_db": 11.6,
-    "collisions": 0,
-    "arc_db": 155.4,
-    "clap_margin": 0.3283,
-    "passed": false,
-    "action": "duck beds"
-   },
-   {
-    "iter": 4,
     "snr_db": 13.5,
     "collisions": 0,
-    "arc_db": 155.3,
-    "clap_margin": 0.3241,
+    "arc_db": 14.3,
+    "clap_margin": 0.4173,
     "passed": true,
     "action": "accepted"
    }

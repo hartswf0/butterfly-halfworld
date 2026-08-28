@@ -1,7 +1,7 @@
 {
  "fresco": "0.1",
  "title": "WORLD SCORE — Hot Minute",
- "duration": 87.4,
+ "duration": 91.4,
  "base": "",
  "tracks": [
   {
@@ -11,57 +11,198 @@
    "clips": [
     {
      "at": 0,
+     "source": "drone/unified-drones-lite.mp3",
      "s": 1352.982188,
      "e": 1440.072188,
-     "gain": 0.3,
-     "label": "drone",
-     "source": "drone/unified-drones-lite.mp3",
+     "gain": 0.28,
      "fadeIn": 2.5,
-     "fadeOut": 6.0
+     "fadeOut": 6.0,
+     "label": "drone",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "audio/14_Hot Minute_mixdown_RY_250626.mp3",
      "s": 0,
      "e": 69.36,
      "gain": 1.0,
-     "label": "reading",
-     "source": "audio/14_Hot Minute_mixdown_RY_250626.mp3",
      "fadeIn": 0.02,
-     "fadeOut": 0.1
+     "fadeOut": 0.1,
+     "label": "reading",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "pack/songloops/VOL_cathedral-11_04.mp3",
      "s": 0,
-     "e": 23.12,
-     "gain": 0.24,
-     "label": "Stained Glass Rims —",
-     "source": "https://hartswf0.github.io/moto/CATHEDRAL%20OF%20IV%20DRIPS/The%20Cathedral%20of%20IV%20Drips%20-%20Stained%20Glass%20Rims%20-%20Sonauto.ogg",
+     "e": 46.24,
+     "gain": 0.11264000000000002,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch piano · Stained Glass Rims",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 6.0,
+     "source": "pack/songloops/VOL_dustrest-10_01.mp3",
+     "s": 0,
+     "e": 46.24,
+     "gain": 0.11264000000000002,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch strings · Non-Abiding Flow",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 29.12,
+     "source": "pack/songloops/VOL_mareamemory-18_03.mp3",
+     "s": 0,
+     "e": 46.239999999999995,
+     "gain": 0.11264000000000002,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch synth · Prime Foundation —",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 29.12,
+     "source": "pack/songloops/VOL_mareamemory-06_01.mp3",
+     "s": 0,
+     "e": 46.239999999999995,
+     "gain": 0.067584,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch vocals · Ecstatic Dawn",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 29.12,
+     "source": "radio/parts/14_06.mp3",
+     "s": 0.0,
+     "e": 50.24,
+     "gain": 0.3,
      "fadeIn": 2.0,
-     "fadeOut": 2.5
+     "fadeOut": 4.0,
+     "label": "stem bass",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
+    },
+    {
+     "at": 52.24,
+     "source": "radio/parts/14_07.mp3",
+     "s": 0.0,
+     "e": 25.12,
+     "gain": 0.32,
+     "fadeIn": 1.5,
+     "fadeOut": 3.5,
+     "label": "stem drums",
+     "ref": {
+      "role": "bed",
+      "pan": 0.12
+     }
     },
     {
      "at": 78.36,
+     "source": "radio/parts/14_08.mp3",
+     "s": 0.0,
+     "e": 3.15,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: i escaped here for a",
+     "ref": {
+      "role": "bed",
+      "pan": -0.4
+     }
+    },
+    {
+     "at": 79.56,
+     "source": "radio/parts/14_09.mp3",
+     "s": 0.0,
+     "e": 3.17,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: i escaped here for a",
+     "ref": {
+      "role": "bed",
+      "pan": 0.4
+     }
+    },
+    {
+     "at": 82.36,
+     "source": "chops/14/14_C10.mp3",
      "s": 0,
      "e": 3.0,
      "gain": 0.55,
-     "label": "coda: The way",
-     "source": "chops/14/14_C10.mp3",
      "fadeIn": 0.05,
-     "fadeOut": 0.6
+     "fadeOut": 0.6,
+     "label": "coda: The way",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     }
    ]
   }
  ],
  "lanes": [],
  "provenance": {
-  "generator": "score_engine.py",
+  "generator": "score_engine.py v2 — samples, stems, foley, ghosts",
   "iterations": [
    {
     "iter": 1,
-    "snr_db": 14.8,
+    "snr_db": 5.2,
     "collisions": 0,
-    "arc_db": 16.1,
-    "clap_margin": 0.3212,
+    "arc_db": 19.2,
+    "clap_margin": 0.4092,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 2,
+    "snr_db": 8.8,
+    "collisions": 0,
+    "arc_db": 18.8,
+    "clap_margin": 0.405,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 3,
+    "snr_db": 12.3,
+    "collisions": 0,
+    "arc_db": 18.5,
+    "clap_margin": 0.3943,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 4,
+    "snr_db": 15.9,
+    "collisions": 0,
+    "arc_db": 18.3,
+    "clap_margin": 0.4,
     "passed": true,
     "action": "accepted"
    }

@@ -1,7 +1,7 @@
 {
  "fresco": "0.1",
  "title": "WORLD SCORE — Yet Heard",
- "duration": 126.8,
+ "duration": 130.8,
  "base": "",
  "tracks": [
   {
@@ -11,137 +11,166 @@
    "clips": [
     {
      "at": 0,
+     "source": "drone/unified-drones-lite.mp3",
      "s": 833.385167,
      "e": 950.935167,
-     "gain": 0.3,
-     "label": "drone",
-     "source": "drone/unified-drones-lite.mp3",
+     "gain": 0.28,
      "fadeIn": 2.5,
-     "fadeOut": 6.0
+     "fadeOut": 6.0,
+     "label": "drone",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "audio/09_Yet Heard_mixdown_RY_250626.mp3",
      "s": 0,
      "e": 108.82,
      "gain": 1.0,
-     "label": "reading",
-     "source": "audio/09_Yet Heard_mixdown_RY_250626.mp3",
      "fadeIn": 0.02,
-     "fadeOut": 0.1
+     "fadeOut": 0.1,
+     "label": "reading",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "pack/songloops/VOL_glass-15_04.mp3",
      "s": 0,
-     "e": 36.27333333333333,
-     "gain": 0.24,
-     "label": "texture nativeaudio ",
-     "source": "pack/audio/ATL_TEXTURE_NATIVEAUDIO_20.mp3",
-     "fadeIn": 2.0,
-     "fadeOut": 2.5
+     "e": 72.54666666666667,
+     "gain": 0.17600000000000002,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch piano · Tunnel Lights & Di",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 6.0,
+     "source": "pack/songloops/VOL_dustrest-11_01.mp3",
+     "s": 0,
+     "e": 72.54666666666667,
+     "gain": 0.17600000000000002,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch strings · Not a Mote of Dust",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
     },
     {
      "at": 42.27333333333333,
+     "source": "pack/songloops/VOL_aeolian-02_01.mp3",
      "s": 0,
-     "e": 36.27333333333333,
-     "gain": 0.24,
-     "label": "How to Break Off an ",
-     "source": "https://hartswf0.github.io/moto/AEOLIAN%20DRIFT/Aeolian%20Drift%20-%2003_How%20to%20Break%20Off%20an%20Engagement%20-%20Sonauto.ogg",
+     "e": 72.54666666666665,
+     "gain": 0.17600000000000002,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch synth · Flashing Lights (R",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 42.27333333333333,
+     "source": "pack/songloops/VOL_dustrest-19_05.mp3",
+     "s": 0,
+     "e": 72.54666666666665,
+     "gain": 0.10560000000000001,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch vocals · Ontological Collap",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 42.27333333333333,
+     "source": "radio/parts/09_06.mp3",
+     "s": 0.0,
+     "e": 76.55,
+     "gain": 0.3,
      "fadeIn": 2.0,
-     "fadeOut": 2.5
+     "fadeOut": 4.0,
+     "label": "stem bass",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
      "at": 78.54666666666667,
-     "s": 0,
-     "e": 36.273333333333326,
-     "gain": 0.24,
-     "label": "Shaolin Sunrise Puls",
-     "source": "https://hartswf0.github.io/moto/MAREA%20MEMORY/Marea%20Memory%20-%20Shaolin%20Sunrise%20Pulse%20-%20Treblo.ogg",
-     "fadeIn": 2.0,
-     "fadeOut": 2.5
+     "source": "radio/parts/09_07.mp3",
+     "s": 0.0,
+     "e": 38.27,
+     "gain": 0.32,
+     "fadeIn": 1.5,
+     "fadeOut": 3.5,
+     "label": "stem drums",
+     "ref": {
+      "role": "bed",
+      "pan": 0.12
+     }
     },
     {
-     "at": 78.54666666666667,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_33.mp3",
-     "fadeIn": 0.8,
-     "fadeOut": 0.02
-    },
-    {
-     "at": 86.54666666666667,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_33.mp3",
+     "at": 39.53,
+     "source": "radio/parts/09_08.mp3",
+     "s": 0.0,
+     "e": 1.4,
+     "gain": 0.42,
      "fadeIn": 0.02,
-     "fadeOut": 0.02
+     "fadeOut": 0.35,
+     "label": "foley: moon",
+     "ref": {
+      "role": "hit",
+      "pan": -0.5
+     }
     },
     {
-     "at": 94.54666666666667,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_33.mp3",
-     "fadeIn": 0.02,
-     "fadeOut": 0.02
-    },
-    {
-     "at": 102.54666666666667,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_33.mp3",
-     "fadeIn": 0.02,
-     "fadeOut": 0.02
-    },
-    {
-     "at": 110.54666666666667,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_33.mp3",
-     "fadeIn": 0.02,
-     "fadeOut": 0.02
-    },
-    {
-     "at": 118.54666666666667,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_33.mp3",
-     "fadeIn": 0.02,
-     "fadeOut": 2.5
-    },
-    {
-     "at": 117.82,
+     "at": 121.82,
+     "source": "chops/09/09_C21.mp3",
      "s": 0,
      "e": 3.0,
      "gain": 0.55,
-     "label": "coda: my own,",
-     "source": "chops/09/09_C21.mp3",
      "fadeIn": 0.05,
-     "fadeOut": 0.6
+     "fadeOut": 0.6,
+     "label": "coda: my own,",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     }
    ]
   }
  ],
  "lanes": [],
  "provenance": {
-  "generator": "score_engine.py",
+  "generator": "score_engine.py v2 — samples, stems, foley, ghosts",
   "iterations": [
    {
     "iter": 1,
-    "snr_db": 15.7,
+    "snr_db": 10.4,
     "collisions": 0,
-    "arc_db": 29.1,
-    "clap_margin": 0.3734,
+    "arc_db": 19.2,
+    "clap_margin": 0.3856,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 2,
+    "snr_db": 14.0,
+    "collisions": 0,
+    "arc_db": 18.9,
+    "clap_margin": 0.3845,
     "passed": true,
     "action": "accepted"
    }

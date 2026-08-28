@@ -1,27 +1,57 @@
 {
- "gate": "snr>=12dB during words · zero hit/word collisions · outro >=6dB below body · CLAP juror margin>0",
+ "gate": "snr>=13dB during words · zero collisions · outro >=6dB below body · CLAP juror margin>0.02 · v2: stems+orchestra+foley+ghosts, stereo, mid-band sidechain",
  "stations": {
   "01": {
    "title": "Out of Life",
    "iterations": [
     {
      "iter": 1,
-     "snr_db": 14.3,
+     "snr_db": 5.6,
      "collisions": 0,
-     "arc_db": 10.3,
-     "clap_margin": 0.2986,
+     "arc_db": 11.9,
+     "clap_margin": 0.3225,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 2,
+     "snr_db": 9.6,
+     "collisions": 0,
+     "arc_db": 11.4,
+     "clap_margin": 0.3134,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 3,
+     "snr_db": 13.3,
+     "collisions": 0,
+     "arc_db": 11.1,
+     "clap_margin": 0.3086,
      "passed": true,
      "action": "accepted"
     }
    ],
    "final": {
-    "iter": 1,
-    "snr_db": 14.3,
+    "iter": 3,
+    "snr_db": 13.3,
     "collisions": 0,
-    "arc_db": 10.3,
-    "clap_margin": 0.2986,
+    "arc_db": 11.1,
+    "clap_margin": 0.3086,
     "passed": true,
     "action": "accepted"
+   },
+   "palette": {
+    "drone": 1,
+    "reading": 1,
+    "orch piano": 1,
+    "orch strings": 1,
+    "orch synth": 1,
+    "orch vocals": 1,
+    "stem bass": 1,
+    "stem drums": 1,
+    "coda sung": 2,
+    "coda": 1
    }
   },
   "02": {
@@ -29,22 +59,51 @@
    "iterations": [
     {
      "iter": 1,
-     "snr_db": 14.9,
+     "snr_db": 6.8,
      "collisions": 0,
-     "arc_db": 154.5,
-     "clap_margin": 0.3012,
+     "arc_db": 16.4,
+     "clap_margin": 0.4303,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 2,
+     "snr_db": 10.4,
+     "collisions": 0,
+     "arc_db": 15.7,
+     "clap_margin": 0.4316,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 3,
+     "snr_db": 14.4,
+     "collisions": 0,
+     "arc_db": 15.2,
+     "clap_margin": 0.433,
      "passed": true,
      "action": "accepted"
     }
    ],
    "final": {
-    "iter": 1,
-    "snr_db": 14.9,
+    "iter": 3,
+    "snr_db": 14.4,
     "collisions": 0,
-    "arc_db": 154.5,
-    "clap_margin": 0.3012,
+    "arc_db": 15.2,
+    "clap_margin": 0.433,
     "passed": true,
     "action": "accepted"
+   },
+   "palette": {
+    "drone": 1,
+    "reading": 1,
+    "orch piano": 1,
+    "orch strings": 1,
+    "orch synth": 1,
+    "orch vocals": 1,
+    "stem bass": 1,
+    "stem drums": 1,
+    "coda": 1
    }
   },
   "03": {
@@ -52,22 +111,52 @@
    "iterations": [
     {
      "iter": 1,
-     "snr_db": 14.2,
+     "snr_db": 8.7,
      "collisions": 0,
-     "arc_db": 26.5,
-     "clap_margin": 0.2754,
+     "arc_db": 19.8,
+     "clap_margin": 0.4322,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 2,
+     "snr_db": 12.5,
+     "collisions": 0,
+     "arc_db": 19.3,
+     "clap_margin": 0.4234,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 3,
+     "snr_db": 16.3,
+     "collisions": 0,
+     "arc_db": 19.0,
+     "clap_margin": 0.4138,
      "passed": true,
      "action": "accepted"
     }
    ],
    "final": {
-    "iter": 1,
-    "snr_db": 14.2,
+    "iter": 3,
+    "snr_db": 16.3,
     "collisions": 0,
-    "arc_db": 26.5,
-    "clap_margin": 0.2754,
+    "arc_db": 19.0,
+    "clap_margin": 0.4138,
     "passed": true,
     "action": "accepted"
+   },
+   "palette": {
+    "drone": 1,
+    "reading": 1,
+    "orch piano": 1,
+    "orch strings": 1,
+    "orch synth": 1,
+    "orch vocals": 1,
+    "stem bass": 1,
+    "stem drums": 1,
+    "foley": 1,
+    "coda": 1
    }
   },
   "04": {
@@ -75,22 +164,52 @@
    "iterations": [
     {
      "iter": 1,
-     "snr_db": 13.5,
+     "snr_db": 7.8,
      "collisions": 0,
-     "arc_db": 154.8,
-     "clap_margin": 0.2829,
+     "arc_db": 8.6,
+     "clap_margin": 0.4098,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 2,
+     "snr_db": 11.2,
+     "collisions": 0,
+     "arc_db": 7.9,
+     "clap_margin": 0.4076,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 3,
+     "snr_db": 14.6,
+     "collisions": 0,
+     "arc_db": 7.5,
+     "clap_margin": 0.4111,
      "passed": true,
      "action": "accepted"
     }
    ],
    "final": {
-    "iter": 1,
-    "snr_db": 13.5,
+    "iter": 3,
+    "snr_db": 14.6,
     "collisions": 0,
-    "arc_db": 154.8,
-    "clap_margin": 0.2829,
+    "arc_db": 7.5,
+    "clap_margin": 0.4111,
     "passed": true,
     "action": "accepted"
+   },
+   "palette": {
+    "drone": 1,
+    "reading": 1,
+    "orch piano": 1,
+    "orch strings": 1,
+    "orch synth": 1,
+    "orch vocals": 1,
+    "stem bass": 1,
+    "stem drums": 1,
+    "coda sung": 2,
+    "coda": 1
    }
   },
   "05": {
@@ -98,22 +217,60 @@
    "iterations": [
     {
      "iter": 1,
-     "snr_db": 14.5,
+     "snr_db": 2.4,
      "collisions": 0,
-     "arc_db": 15.5,
-     "clap_margin": 0.2669,
+     "arc_db": 19.5,
+     "clap_margin": 0.3721,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 2,
+     "snr_db": 6.3,
+     "collisions": 0,
+     "arc_db": 18.8,
+     "clap_margin": 0.3765,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 3,
+     "snr_db": 10.1,
+     "collisions": 0,
+     "arc_db": 18.3,
+     "clap_margin": 0.3833,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 4,
+     "snr_db": 13.8,
+     "collisions": 0,
+     "arc_db": 18.1,
+     "clap_margin": 0.3884,
      "passed": true,
      "action": "accepted"
     }
    ],
    "final": {
-    "iter": 1,
-    "snr_db": 14.5,
+    "iter": 4,
+    "snr_db": 13.8,
     "collisions": 0,
-    "arc_db": 15.5,
-    "clap_margin": 0.2669,
+    "arc_db": 18.1,
+    "clap_margin": 0.3884,
     "passed": true,
     "action": "accepted"
+   },
+   "palette": {
+    "drone": 1,
+    "reading": 1,
+    "orch piano": 1,
+    "orch strings": 1,
+    "orch synth": 1,
+    "orch vocals": 1,
+    "stem bass": 1,
+    "stem drums": 1,
+    "coda": 1
    }
   },
   "06": {
@@ -121,49 +278,52 @@
    "iterations": [
     {
      "iter": 1,
-     "snr_db": 8.3,
+     "snr_db": 6.0,
      "collisions": 0,
-     "arc_db": 155.7,
-     "clap_margin": 0.336,
+     "arc_db": 15.0,
+     "clap_margin": 0.4119,
      "passed": false,
-     "action": "duck beds"
+     "action": "deepen the bow"
     },
     {
      "iter": 2,
-     "snr_db": 9.6,
+     "snr_db": 9.9,
      "collisions": 0,
-     "arc_db": 155.5,
-     "clap_margin": 0.3335,
+     "arc_db": 14.5,
+     "clap_margin": 0.4167,
      "passed": false,
-     "action": "duck beds"
+     "action": "deepen the bow"
     },
     {
      "iter": 3,
-     "snr_db": 11.6,
-     "collisions": 0,
-     "arc_db": 155.4,
-     "clap_margin": 0.3283,
-     "passed": false,
-     "action": "duck beds"
-    },
-    {
-     "iter": 4,
      "snr_db": 13.5,
      "collisions": 0,
-     "arc_db": 155.3,
-     "clap_margin": 0.3241,
+     "arc_db": 14.3,
+     "clap_margin": 0.4173,
      "passed": true,
      "action": "accepted"
     }
    ],
    "final": {
-    "iter": 4,
+    "iter": 3,
     "snr_db": 13.5,
     "collisions": 0,
-    "arc_db": 155.3,
-    "clap_margin": 0.3241,
+    "arc_db": 14.3,
+    "clap_margin": 0.4173,
     "passed": true,
     "action": "accepted"
+   },
+   "palette": {
+    "drone": 1,
+    "reading": 1,
+    "orch piano": 1,
+    "orch strings": 1,
+    "orch synth": 1,
+    "orch vocals": 1,
+    "stem bass": 1,
+    "stem drums": 1,
+    "foley": 1,
+    "coda": 1
    }
   },
   "07": {
@@ -171,22 +331,51 @@
    "iterations": [
     {
      "iter": 1,
-     "snr_db": 13.1,
+     "snr_db": 9.3,
      "collisions": 0,
-     "arc_db": 155.6,
-     "clap_margin": 0.3014,
+     "arc_db": 19.5,
+     "clap_margin": 0.3739,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 2,
+     "snr_db": 12.5,
+     "collisions": 0,
+     "arc_db": 18.9,
+     "clap_margin": 0.3674,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 3,
+     "snr_db": 15.7,
+     "collisions": 0,
+     "arc_db": 18.5,
+     "clap_margin": 0.3592,
      "passed": true,
      "action": "accepted"
     }
    ],
    "final": {
-    "iter": 1,
-    "snr_db": 13.1,
+    "iter": 3,
+    "snr_db": 15.7,
     "collisions": 0,
-    "arc_db": 155.6,
-    "clap_margin": 0.3014,
+    "arc_db": 18.5,
+    "clap_margin": 0.3592,
     "passed": true,
     "action": "accepted"
+   },
+   "palette": {
+    "drone": 1,
+    "reading": 1,
+    "orch piano": 1,
+    "orch strings": 1,
+    "orch synth": 1,
+    "orch vocals": 1,
+    "stem bass": 1,
+    "stem drums": 1,
+    "coda": 1
    }
   },
   "08": {
@@ -194,22 +383,43 @@
    "iterations": [
     {
      "iter": 1,
-     "snr_db": 12.6,
+     "snr_db": 12.3,
      "collisions": 0,
-     "arc_db": 157.8,
-     "clap_margin": 0.3167,
+     "arc_db": 20.6,
+     "clap_margin": 0.3602,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 2,
+     "snr_db": 15.8,
+     "collisions": 0,
+     "arc_db": 20.4,
+     "clap_margin": 0.3615,
      "passed": true,
      "action": "accepted"
     }
    ],
    "final": {
-    "iter": 1,
-    "snr_db": 12.6,
+    "iter": 2,
+    "snr_db": 15.8,
     "collisions": 0,
-    "arc_db": 157.8,
-    "clap_margin": 0.3167,
+    "arc_db": 20.4,
+    "clap_margin": 0.3615,
     "passed": true,
     "action": "accepted"
+   },
+   "palette": {
+    "drone": 1,
+    "reading": 1,
+    "orch piano": 1,
+    "orch strings": 1,
+    "orch synth": 1,
+    "orch vocals": 1,
+    "stem bass": 1,
+    "stem drums": 1,
+    "foley": 1,
+    "coda": 1
    }
   },
   "09": {
@@ -217,22 +427,43 @@
    "iterations": [
     {
      "iter": 1,
-     "snr_db": 15.7,
+     "snr_db": 10.4,
      "collisions": 0,
-     "arc_db": 29.1,
-     "clap_margin": 0.3734,
+     "arc_db": 19.2,
+     "clap_margin": 0.3856,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 2,
+     "snr_db": 14.0,
+     "collisions": 0,
+     "arc_db": 18.9,
+     "clap_margin": 0.3845,
      "passed": true,
      "action": "accepted"
     }
    ],
    "final": {
-    "iter": 1,
-    "snr_db": 15.7,
+    "iter": 2,
+    "snr_db": 14.0,
     "collisions": 0,
-    "arc_db": 29.1,
-    "clap_margin": 0.3734,
+    "arc_db": 18.9,
+    "clap_margin": 0.3845,
     "passed": true,
     "action": "accepted"
+   },
+   "palette": {
+    "drone": 1,
+    "reading": 1,
+    "orch piano": 1,
+    "orch strings": 1,
+    "orch synth": 1,
+    "orch vocals": 1,
+    "stem bass": 1,
+    "stem drums": 1,
+    "foley": 1,
+    "coda": 1
    }
   },
   "10": {
@@ -240,22 +471,42 @@
    "iterations": [
     {
      "iter": 1,
-     "snr_db": 14.3,
+     "snr_db": 11.6,
      "collisions": 0,
-     "arc_db": 155.0,
-     "clap_margin": 0.3345,
+     "arc_db": 32.1,
+     "clap_margin": 0.3564,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 2,
+     "snr_db": 14.9,
+     "collisions": 0,
+     "arc_db": 31.4,
+     "clap_margin": 0.373,
      "passed": true,
      "action": "accepted"
     }
    ],
    "final": {
-    "iter": 1,
-    "snr_db": 14.3,
+    "iter": 2,
+    "snr_db": 14.9,
     "collisions": 0,
-    "arc_db": 155.0,
-    "clap_margin": 0.3345,
+    "arc_db": 31.4,
+    "clap_margin": 0.373,
     "passed": true,
     "action": "accepted"
+   },
+   "palette": {
+    "drone": 1,
+    "reading": 1,
+    "orch piano": 1,
+    "orch strings": 1,
+    "orch synth": 1,
+    "orch vocals": 1,
+    "stem bass": 1,
+    "stem drums": 1,
+    "coda": 1
    }
   },
   "11": {
@@ -263,22 +514,60 @@
    "iterations": [
     {
      "iter": 1,
-     "snr_db": 14.6,
+     "snr_db": 1.4,
      "collisions": 0,
-     "arc_db": 71.2,
-     "clap_margin": 0.2625,
+     "arc_db": 27.1,
+     "clap_margin": 0.414,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 2,
+     "snr_db": 5.4,
+     "collisions": 0,
+     "arc_db": 26.4,
+     "clap_margin": 0.4006,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 3,
+     "snr_db": 9.4,
+     "collisions": 0,
+     "arc_db": 25.9,
+     "clap_margin": 0.3956,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 4,
+     "snr_db": 13.4,
+     "collisions": 0,
+     "arc_db": 25.7,
+     "clap_margin": 0.3892,
      "passed": true,
      "action": "accepted"
     }
    ],
    "final": {
-    "iter": 1,
-    "snr_db": 14.6,
+    "iter": 4,
+    "snr_db": 13.4,
     "collisions": 0,
-    "arc_db": 71.2,
-    "clap_margin": 0.2625,
+    "arc_db": 25.7,
+    "clap_margin": 0.3892,
     "passed": true,
     "action": "accepted"
+   },
+   "palette": {
+    "drone": 1,
+    "reading": 1,
+    "orch piano": 1,
+    "orch strings": 1,
+    "orch synth": 1,
+    "orch vocals": 1,
+    "stem bass": 1,
+    "stem drums": 1,
+    "coda": 1
    }
   },
   "12": {
@@ -286,22 +575,52 @@
    "iterations": [
     {
      "iter": 1,
-     "snr_db": 12.9,
+     "snr_db": 7.4,
      "collisions": 0,
-     "arc_db": 39.4,
-     "clap_margin": 0.3225,
+     "arc_db": 20.8,
+     "clap_margin": 0.4215,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 2,
+     "snr_db": 11.2,
+     "collisions": 0,
+     "arc_db": 20.2,
+     "clap_margin": 0.4148,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 3,
+     "snr_db": 14.8,
+     "collisions": 0,
+     "arc_db": 19.7,
+     "clap_margin": 0.4136,
      "passed": true,
      "action": "accepted"
     }
    ],
    "final": {
-    "iter": 1,
-    "snr_db": 12.9,
+    "iter": 3,
+    "snr_db": 14.8,
     "collisions": 0,
-    "arc_db": 39.4,
-    "clap_margin": 0.3225,
+    "arc_db": 19.7,
+    "clap_margin": 0.4136,
     "passed": true,
     "action": "accepted"
+   },
+   "palette": {
+    "drone": 1,
+    "reading": 1,
+    "orch piano": 1,
+    "orch strings": 1,
+    "orch synth": 1,
+    "orch vocals": 1,
+    "stem bass": 1,
+    "stem drums": 1,
+    "foley": 1,
+    "coda": 1
    }
   },
   "13": {
@@ -309,22 +628,60 @@
    "iterations": [
     {
      "iter": 1,
+     "snr_db": 5.0,
+     "collisions": 0,
+     "arc_db": 27.7,
+     "clap_margin": 0.4271,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 2,
+     "snr_db": 9.0,
+     "collisions": 0,
+     "arc_db": 27.3,
+     "clap_margin": 0.4273,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 3,
      "snr_db": 12.7,
      "collisions": 0,
-     "arc_db": 155.0,
-     "clap_margin": 0.3046,
+     "arc_db": 27.1,
+     "clap_margin": 0.4081,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 4,
+     "snr_db": 16.3,
+     "collisions": 0,
+     "arc_db": 26.9,
+     "clap_margin": 0.3829,
      "passed": true,
      "action": "accepted"
     }
    ],
    "final": {
-    "iter": 1,
-    "snr_db": 12.7,
+    "iter": 4,
+    "snr_db": 16.3,
     "collisions": 0,
-    "arc_db": 155.0,
-    "clap_margin": 0.3046,
+    "arc_db": 26.9,
+    "clap_margin": 0.3829,
     "passed": true,
     "action": "accepted"
+   },
+   "palette": {
+    "drone": 1,
+    "reading": 1,
+    "orch piano": 1,
+    "orch strings": 1,
+    "orch synth": 1,
+    "orch vocals": 1,
+    "stem bass": 1,
+    "stem drums": 1,
+    "coda": 1
    }
   },
   "14": {
@@ -332,22 +689,61 @@
    "iterations": [
     {
      "iter": 1,
-     "snr_db": 14.8,
+     "snr_db": 5.2,
      "collisions": 0,
-     "arc_db": 16.1,
-     "clap_margin": 0.3212,
+     "arc_db": 19.2,
+     "clap_margin": 0.4092,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 2,
+     "snr_db": 8.8,
+     "collisions": 0,
+     "arc_db": 18.8,
+     "clap_margin": 0.405,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 3,
+     "snr_db": 12.3,
+     "collisions": 0,
+     "arc_db": 18.5,
+     "clap_margin": 0.3943,
+     "passed": false,
+     "action": "deepen the bow"
+    },
+    {
+     "iter": 4,
+     "snr_db": 15.9,
+     "collisions": 0,
+     "arc_db": 18.3,
+     "clap_margin": 0.4,
      "passed": true,
      "action": "accepted"
     }
    ],
    "final": {
-    "iter": 1,
-    "snr_db": 14.8,
+    "iter": 4,
+    "snr_db": 15.9,
     "collisions": 0,
-    "arc_db": 16.1,
-    "clap_margin": 0.3212,
+    "arc_db": 18.3,
+    "clap_margin": 0.4,
     "passed": true,
     "action": "accepted"
+   },
+   "palette": {
+    "drone": 1,
+    "reading": 1,
+    "orch piano": 1,
+    "orch strings": 1,
+    "orch synth": 1,
+    "orch vocals": 1,
+    "stem bass": 1,
+    "stem drums": 1,
+    "coda sung": 2,
+    "coda": 1
    }
   }
  }

@@ -1,7 +1,7 @@
 {
  "fresco": "0.1",
  "title": "WORLD SCORE — Flashing Lights",
- "duration": 99.6,
+ "duration": 103.6,
  "base": "",
  "tracks": [
   {
@@ -11,57 +11,161 @@
    "clips": [
     {
      "at": 0,
+     "source": "drone/unified-drones-lite.mp3",
      "s": 122.987042,
      "e": 214.107042,
-     "gain": 0.3,
-     "label": "drone",
-     "source": "drone/unified-drones-lite.mp3",
+     "gain": 0.28,
      "fadeIn": 2.5,
-     "fadeOut": 6.0
+     "fadeOut": 6.0,
+     "label": "drone",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "audio/02_Flashing Lights_mixdown_RY_250626.mp3",
      "s": 0,
      "e": 81.58,
      "gain": 1.0,
-     "label": "reading",
-     "source": "audio/02_Flashing Lights_mixdown_RY_250626.mp3",
      "fadeIn": 0.02,
-     "fadeOut": 0.1
+     "fadeOut": 0.1,
+     "label": "reading",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "pack/songloops/VOL_aeolian-02_03.mp3",
      "s": 0,
-     "e": 27.19333333333333,
-     "gain": 0.24,
-     "label": "Non-Abiding Flow (1)",
-     "source": "https://hartswf0.github.io/moto/WHERE%20CAN%20DUST%20REST/No%20Bright%20Stand%20-%20Non-Abiding%20Flow%20-%20Sonauto%20%281%29.ogg",
-     "fadeIn": 2.0,
-     "fadeOut": 2.5
+     "e": 54.38666666666666,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch piano · Flashing Lights (R",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
     },
     {
-     "at": 90.58,
+     "at": 6.0,
+     "source": "pack/songloops/VOL_dustrest-10_01.mp3",
+     "s": 0,
+     "e": 54.38666666666666,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch strings · Non-Abiding Flow",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 33.19333333333333,
+     "source": "pack/songloops/VOL_aeolian-02_01.mp3",
+     "s": 0,
+     "e": 54.38666666666667,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch synth · Flashing Lights (R",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 33.19333333333333,
+     "source": "pack/songloops/VOL_dustrest-19_05.mp3",
+     "s": 0,
+     "e": 54.38666666666667,
+     "gain": 0.08448,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch vocals · Ontological Collap",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 33.19333333333333,
+     "source": "radio/parts/02_06.mp3",
+     "s": 0.0,
+     "e": 58.39,
+     "gain": 0.3,
+     "fadeIn": 2.0,
+     "fadeOut": 4.0,
+     "label": "stem bass",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
+    },
+    {
+     "at": 60.38666666666666,
+     "source": "radio/parts/02_07.mp3",
+     "s": 0.0,
+     "e": 29.19,
+     "gain": 0.32,
+     "fadeIn": 1.5,
+     "fadeOut": 3.5,
+     "label": "stem drums",
+     "ref": {
+      "role": "bed",
+      "pan": 0.12
+     }
+    },
+    {
+     "at": 94.58,
+     "source": "chops/02/02_C02.mp3",
      "s": 0,
      "e": 3.0,
      "gain": 0.55,
-     "label": "coda: type of silent",
-     "source": "chops/02/02_C02.mp3",
      "fadeIn": 0.05,
-     "fadeOut": 0.6
+     "fadeOut": 0.6,
+     "label": "coda: type of silent",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     }
    ]
   }
  ],
  "lanes": [],
  "provenance": {
-  "generator": "score_engine.py",
+  "generator": "score_engine.py v2 — samples, stems, foley, ghosts",
   "iterations": [
    {
     "iter": 1,
-    "snr_db": 14.9,
+    "snr_db": 6.8,
     "collisions": 0,
-    "arc_db": 154.5,
-    "clap_margin": 0.3012,
+    "arc_db": 16.4,
+    "clap_margin": 0.4303,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 2,
+    "snr_db": 10.4,
+    "collisions": 0,
+    "arc_db": 15.7,
+    "clap_margin": 0.4316,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 3,
+    "snr_db": 14.4,
+    "collisions": 0,
+    "arc_db": 15.2,
+    "clap_margin": 0.433,
     "passed": true,
     "action": "accepted"
    }

@@ -1,7 +1,7 @@
 {
  "fresco": "0.1",
  "title": "WORLD SCORE — Reunion",
- "duration": 82.8,
+ "duration": 86.8,
  "base": "",
  "tracks": [
   {
@@ -11,107 +11,175 @@
    "clips": [
     {
      "at": 0,
+     "source": "drone/unified-drones-lite.mp3",
      "s": 1168.019354,
      "e": 1242.999354,
-     "gain": 0.3,
-     "label": "drone",
-     "source": "drone/unified-drones-lite.mp3",
+     "gain": 0.28,
      "fadeIn": 2.5,
-     "fadeOut": 6.0
+     "fadeOut": 6.0,
+     "label": "drone",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "audio/12_Reunion_mixdown_RY_250626.mp3",
      "s": 0,
      "e": 64.81,
      "gain": 1.0,
-     "label": "reading",
-     "source": "audio/12_Reunion_mixdown_RY_250626.mp3",
      "fadeIn": 0.02,
-     "fadeOut": 0.1
+     "fadeOut": 0.1,
+     "label": "reading",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "pack/songloops/VOL_mareamemory-18_04.mp3",
      "s": 0,
-     "e": 21.603333333333335,
-     "gain": 0.24,
-     "label": "bed whereyougowhen 0",
-     "source": "pack/audio/ATL_BED_WHEREYOUGOWHEN_07.mp3",
-     "fadeIn": 2.0,
-     "fadeOut": 2.5
+     "e": 43.20666666666667,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch piano · Prime Foundation —",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 6.0,
+     "source": "pack/songloops/VOL_mallground-27_06.mp3",
+     "s": 0,
+     "e": 43.20666666666667,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch strings · MallNet Paradise S",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
     },
     {
      "at": 27.603333333333335,
+     "source": "pack/songloops/VOL_aeolian-02_01.mp3",
      "s": 0,
-     "e": 21.603333333333335,
-     "gain": 0.24,
-     "label": "Frictionless Void — ",
-     "source": "https://hartswf0.github.io/moto/WHERE%20CAN%20DUST%20REST/No%20Bright%20Stand%20-%20Frictionless%20Void%20-%20Sonauto.ogg",
+     "e": 43.20666666666666,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch synth · Flashing Lights (R",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 27.603333333333335,
+     "source": "pack/songloops/VOL_dustrest-19_05.mp3",
+     "s": 0,
+     "e": 43.20666666666666,
+     "gain": 0.08448,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch vocals · Ontological Collap",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 27.603333333333335,
+     "source": "radio/parts/12_06.mp3",
+     "s": 0.0,
+     "e": 47.21,
+     "gain": 0.3,
      "fadeIn": 2.0,
-     "fadeOut": 2.5
+     "fadeOut": 4.0,
+     "label": "stem bass",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
      "at": 49.20666666666667,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_07.mp3",
-     "fadeIn": 0.8,
-     "fadeOut": 0.02
+     "source": "radio/parts/12_07.mp3",
+     "s": 0.0,
+     "e": 23.6,
+     "gain": 0.32,
+     "fadeIn": 1.5,
+     "fadeOut": 3.5,
+     "label": "stem drums",
+     "ref": {
+      "role": "bed",
+      "pan": 0.12
+     }
     },
     {
-     "at": 57.20666666666667,
+     "at": 39.82,
+     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_35.mp3",
      "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_07.mp3",
+     "e": 1.4,
+     "gain": 0.42,
      "fadeIn": 0.02,
-     "fadeOut": 0.02
+     "fadeOut": 0.35,
+     "label": "foley: with",
+     "ref": {
+      "role": "hit",
+      "pan": -0.5
+     }
     },
     {
-     "at": 65.20666666666668,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_07.mp3",
-     "fadeIn": 0.02,
-     "fadeOut": 0.02
-    },
-    {
-     "at": 73.20666666666668,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_TITLEEXTENDED_07.mp3",
-     "fadeIn": 0.02,
-     "fadeOut": 2.5
-    },
-    {
-     "at": 73.81,
+     "at": 77.81,
+     "source": "chops/12/12_C10.mp3",
      "s": 0,
      "e": 3.0,
      "gain": 0.55,
-     "label": "coda: into the",
-     "source": "chops/12/12_C10.mp3",
      "fadeIn": 0.05,
-     "fadeOut": 0.6
+     "fadeOut": 0.6,
+     "label": "coda: into the",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     }
    ]
   }
  ],
  "lanes": [],
  "provenance": {
-  "generator": "score_engine.py",
+  "generator": "score_engine.py v2 — samples, stems, foley, ghosts",
   "iterations": [
    {
     "iter": 1,
-    "snr_db": 12.9,
+    "snr_db": 7.4,
     "collisions": 0,
-    "arc_db": 39.4,
-    "clap_margin": 0.3225,
+    "arc_db": 20.8,
+    "clap_margin": 0.4215,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 2,
+    "snr_db": 11.2,
+    "collisions": 0,
+    "arc_db": 20.2,
+    "clap_margin": 0.4148,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 3,
+    "snr_db": 14.8,
+    "collisions": 0,
+    "arc_db": 19.7,
+    "clap_margin": 0.4136,
     "passed": true,
     "action": "accepted"
    }

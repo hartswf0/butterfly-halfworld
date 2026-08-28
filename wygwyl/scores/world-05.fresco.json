@@ -1,7 +1,7 @@
 {
  "fresco": "0.1",
  "title": "WORLD SCORE — Bloodline",
- "duration": 92.1,
+ "duration": 96.1,
  "base": "",
  "tracks": [
   {
@@ -11,47 +11,170 @@
    "clips": [
     {
      "at": 0,
+     "source": "drone/unified-drones-lite.mp3",
      "s": 422.183771,
      "e": 513.213771,
-     "gain": 0.3,
-     "label": "drone",
-     "source": "drone/unified-drones-lite.mp3",
+     "gain": 0.28,
      "fadeIn": 2.5,
-     "fadeOut": 6.0
+     "fadeOut": 6.0,
+     "label": "drone",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "audio/05_Bloodline_mixdown_RY_250626.mp3",
      "s": 0,
      "e": 74.07,
      "gain": 1.0,
-     "label": "reading",
-     "source": "audio/05_Bloodline_mixdown_RY_250626.mp3",
      "fadeIn": 0.02,
-     "fadeOut": 0.1
+     "fadeOut": 0.1,
+     "label": "reading",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     },
     {
-     "at": 83.07,
+     "at": 6.0,
+     "source": "pack/songloops/VOL_dustrest-11_02.mp3",
+     "s": 0,
+     "e": 49.379999999999995,
+     "gain": 0.11264000000000002,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch piano · Not a Mote of Dust",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 6.0,
+     "source": "pack/songloops/VOL_dustrest-16_04.mp3",
+     "s": 0,
+     "e": 49.379999999999995,
+     "gain": 0.11264000000000002,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch strings · Frictionless Void",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 30.689999999999998,
+     "source": "pack/songloops/VOL_dustrest-16_01.mp3",
+     "s": 0,
+     "e": 49.379999999999995,
+     "gain": 0.11264000000000002,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch synth · Frictionless Void",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 30.689999999999998,
+     "source": "pack/songloops/VOL_mareamemory-06_01.mp3",
+     "s": 0,
+     "e": 49.379999999999995,
+     "gain": 0.067584,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch vocals · Ecstatic Dawn",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 30.689999999999998,
+     "source": "radio/parts/05_06.mp3",
+     "s": 0.0,
+     "e": 53.38,
+     "gain": 0.3,
+     "fadeIn": 2.0,
+     "fadeOut": 4.0,
+     "label": "stem bass",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
+    },
+    {
+     "at": 55.379999999999995,
+     "source": "radio/parts/05_07.mp3",
+     "s": 0.0,
+     "e": 26.69,
+     "gain": 0.32,
+     "fadeIn": 1.5,
+     "fadeOut": 3.5,
+     "label": "stem drums",
+     "ref": {
+      "role": "bed",
+      "pan": 0.12
+     }
+    },
+    {
+     "at": 87.07,
+     "source": "chops/05/05_C01.mp3",
      "s": 0,
      "e": 3.0,
      "gain": 0.55,
-     "label": "coda: to ask if",
-     "source": "chops/05/05_C01.mp3",
      "fadeIn": 0.05,
-     "fadeOut": 0.6
+     "fadeOut": 0.6,
+     "label": "coda: to ask if",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     }
    ]
   }
  ],
  "lanes": [],
  "provenance": {
-  "generator": "score_engine.py",
+  "generator": "score_engine.py v2 — samples, stems, foley, ghosts",
   "iterations": [
    {
     "iter": 1,
-    "snr_db": 14.5,
+    "snr_db": 2.4,
     "collisions": 0,
-    "arc_db": 15.5,
-    "clap_margin": 0.2669,
+    "arc_db": 19.5,
+    "clap_margin": 0.3721,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 2,
+    "snr_db": 6.3,
+    "collisions": 0,
+    "arc_db": 18.8,
+    "clap_margin": 0.3765,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 3,
+    "snr_db": 10.1,
+    "collisions": 0,
+    "arc_db": 18.3,
+    "clap_margin": 0.3833,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 4,
+    "snr_db": 13.8,
+    "collisions": 0,
+    "arc_db": 18.1,
+    "clap_margin": 0.3884,
     "passed": true,
     "action": "accepted"
    }

@@ -1,7 +1,7 @@
 {
  "fresco": "0.1",
  "title": "WORLD SCORE — Out of Life",
- "duration": 106.4,
+ "duration": 110.4,
  "base": "",
  "tracks": [
   {
@@ -11,57 +11,189 @@
    "clips": [
     {
      "at": 0,
-     "s": -0.0,
-     "e": 106.38,
-     "gain": 0.3,
-     "label": "drone",
      "source": "drone/unified-drones-lite.mp3",
+     "s": -0.0,
+     "e": 110.38,
+     "gain": 0.28,
      "fadeIn": 2.5,
-     "fadeOut": 6.0
+     "fadeOut": 6.0,
+     "label": "drone",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "audio/01_Out of Life_mixdown_RY_250626.mp3",
      "s": 0,
      "e": 88.38,
      "gain": 1.0,
-     "label": "reading",
-     "source": "audio/01_Out of Life_mixdown_RY_250626.mp3",
      "fadeIn": 0.02,
-     "fadeOut": 0.1
+     "fadeOut": 0.1,
+     "label": "reading",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "pack/songloops/VOL_glass-15_04.mp3",
      "s": 0,
-     "e": 29.459999999999997,
-     "gain": 0.24,
-     "label": "Aten Rising (Voice M",
-     "source": "https://hartswf0.github.io/moto/MAREA%20MEMORY/Marea%20Memory%20-%20Aten%20Rising%20%28Voice%20Memo%201%29%20-%20Treblo.ogg",
+     "e": 58.919999999999995,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch piano · Tunnel Lights & Di",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 6.0,
+     "source": "pack/songloops/VOL_dustrest-16_04.mp3",
+     "s": 0,
+     "e": 58.919999999999995,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch strings · Frictionless Void",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 35.459999999999994,
+     "source": "pack/songloops/VOL_glass-15_03.mp3",
+     "s": 0,
+     "e": 58.92,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch synth · Tunnel Lights & Di",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 35.459999999999994,
+     "source": "pack/songloops/VOL_mallground-27_05.mp3",
+     "s": 0,
+     "e": 58.92,
+     "gain": 0.08448,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch vocals · MallNet Paradise S",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 35.459999999999994,
+     "source": "radio/parts/01_06.mp3",
+     "s": 0.0,
+     "e": 62.92,
+     "gain": 0.3,
      "fadeIn": 2.0,
-     "fadeOut": 2.5
+     "fadeOut": 4.0,
+     "label": "stem bass",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
+    },
+    {
+     "at": 64.91999999999999,
+     "source": "radio/parts/01_07.mp3",
+     "s": 0.0,
+     "e": 31.46,
+     "gain": 0.32,
+     "fadeIn": 1.5,
+     "fadeOut": 3.5,
+     "label": "stem drums",
+     "ref": {
+      "role": "bed",
+      "pan": 0.12
+     }
     },
     {
      "at": 97.38,
+     "source": "radio/parts/01_08.mp3",
+     "s": 0.0,
+     "e": 2.28,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: made we don't want w",
+     "ref": {
+      "role": "bed",
+      "pan": -0.4
+     }
+    },
+    {
+     "at": 98.58,
+     "source": "radio/parts/01_09.mp3",
+     "s": 0.0,
+     "e": 2.78,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: made we don't want w",
+     "ref": {
+      "role": "bed",
+      "pan": 0.4
+     }
+    },
+    {
+     "at": 101.38,
+     "source": "chops/01/01_C24.mp3",
      "s": 0,
      "e": 3.0,
      "gain": 0.55,
-     "label": "coda: love and",
-     "source": "chops/01/01_C24.mp3",
      "fadeIn": 0.05,
-     "fadeOut": 0.6
+     "fadeOut": 0.6,
+     "label": "coda: love and",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     }
    ]
   }
  ],
  "lanes": [],
  "provenance": {
-  "generator": "score_engine.py",
+  "generator": "score_engine.py v2 — samples, stems, foley, ghosts",
   "iterations": [
    {
     "iter": 1,
-    "snr_db": 14.3,
+    "snr_db": 5.6,
     "collisions": 0,
-    "arc_db": 10.3,
-    "clap_margin": 0.2986,
+    "arc_db": 11.9,
+    "clap_margin": 0.3225,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 2,
+    "snr_db": 9.6,
+    "collisions": 0,
+    "arc_db": 11.4,
+    "clap_margin": 0.3134,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 3,
+    "snr_db": 13.3,
+    "collisions": 0,
+    "arc_db": 11.1,
+    "clap_margin": 0.3086,
     "passed": true,
     "action": "accepted"
    }

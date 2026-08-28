@@ -1,7 +1,7 @@
 {
  "fresco": "0.1",
  "title": "WORLD SCORE — Magic Ride",
- "duration": 114.1,
+ "duration": 118.1,
  "base": "",
  "tracks": [
   {
@@ -11,127 +11,152 @@
    "clips": [
     {
      "at": 0,
+     "source": "drone/unified-drones-lite.mp3",
      "s": 950.936875,
      "e": 1056.656875,
-     "gain": 0.3,
-     "label": "drone",
-     "source": "drone/unified-drones-lite.mp3",
+     "gain": 0.28,
      "fadeIn": 2.5,
-     "fadeOut": 6.0
+     "fadeOut": 6.0,
+     "label": "drone",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "audio/10_Magic Ride_mixdown_RY_250626.mp3",
      "s": 0,
      "e": 96.14,
      "gain": 1.0,
-     "label": "reading",
-     "source": "audio/10_Magic Ride_mixdown_RY_250626.mp3",
      "fadeIn": 0.02,
-     "fadeOut": 0.1
+     "fadeOut": 0.1,
+     "label": "reading",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "pack/songloops/VOL_nightbus-08_02.mp3",
      "s": 0,
-     "e": 32.04666666666667,
-     "gain": 0.24,
-     "label": "texture ambient 10",
-     "source": "pack/audio/ATL_TEXTURE_AMBIENT_10.mp3",
-     "fadeIn": 2.0,
-     "fadeOut": 2.5
+     "e": 64.09333333333333,
+     "gain": 0.17600000000000002,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch piano · Saltwater Static (",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 6.0,
+     "source": "pack/songloops/VOL_mallground-27_06.mp3",
+     "s": 0,
+     "e": 64.09333333333333,
+     "gain": 0.17600000000000002,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch strings · MallNet Paradise S",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
     },
     {
      "at": 38.04666666666667,
+     "source": "pack/songloops/VOL_mallground-18_06.mp3",
      "s": 0,
-     "e": 32.04666666666667,
-     "gain": 0.24,
-     "label": "texture whereyougowh",
-     "source": "pack/audio/ATL_TEXTURE_WHEREYOUGOWHEN_26.mp3",
+     "e": 64.09333333333333,
+     "gain": 0.17600000000000002,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch synth · Hidden Systems (In",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 38.04666666666667,
+     "source": "pack/songloops/VOL_glass-15_05.mp3",
+     "s": 0,
+     "e": 64.09333333333333,
+     "gain": 0.10560000000000001,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch vocals · Tunnel Lights & Di",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 38.04666666666667,
+     "source": "radio/parts/10_06.mp3",
+     "s": 0.0,
+     "e": 68.09,
+     "gain": 0.3,
      "fadeIn": 2.0,
-     "fadeOut": 2.5
+     "fadeOut": 4.0,
+     "label": "stem bass",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
      "at": 70.09333333333333,
-     "s": 0,
-     "e": 32.04666666666667,
-     "gain": 0.24,
-     "label": "When the Soul Become",
-     "source": "https://hartswf0.github.io/moto/MIDNIGHT%20OVER%20THE%20STEPPE/Midnight%20Over%20the%20Steppe%20-%20When%20the%20Soul%20Becomes%20People%20-%20Treblo.ogg",
-     "fadeIn": 2.0,
-     "fadeOut": 2.5
+     "source": "radio/parts/10_07.mp3",
+     "s": 0.0,
+     "e": 34.05,
+     "gain": 0.32,
+     "fadeIn": 1.5,
+     "fadeOut": 3.5,
+     "label": "stem drums",
+     "ref": {
+      "role": "bed",
+      "pan": 0.12
+     }
     },
     {
-     "at": 70.09333333333333,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_AF5A3002_16.mp3",
-     "fadeIn": 0.8,
-     "fadeOut": 0.02
-    },
-    {
-     "at": 78.09333333333333,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_AF5A3002_16.mp3",
-     "fadeIn": 0.02,
-     "fadeOut": 0.02
-    },
-    {
-     "at": 86.09333333333333,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_AF5A3002_16.mp3",
-     "fadeIn": 0.02,
-     "fadeOut": 0.02
-    },
-    {
-     "at": 94.09333333333333,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_AF5A3002_16.mp3",
-     "fadeIn": 0.02,
-     "fadeOut": 0.02
-    },
-    {
-     "at": 102.09333333333333,
-     "s": 0,
-     "e": 8.0,
-     "gain": 0.28,
-     "label": "rhythm",
-     "source": "pack/audio/ATL_LOOP_AF5A3002_16.mp3",
-     "fadeIn": 0.02,
-     "fadeOut": 2.5
-    },
-    {
-     "at": 105.14,
+     "at": 109.14,
+     "source": "chops/10/10_C28.mp3",
      "s": 0,
      "e": 3.0,
      "gain": 0.55,
-     "label": "coda: I want",
-     "source": "chops/10/10_C28.mp3",
      "fadeIn": 0.05,
-     "fadeOut": 0.6
+     "fadeOut": 0.6,
+     "label": "coda: I want",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     }
    ]
   }
  ],
  "lanes": [],
  "provenance": {
-  "generator": "score_engine.py",
+  "generator": "score_engine.py v2 — samples, stems, foley, ghosts",
   "iterations": [
    {
     "iter": 1,
-    "snr_db": 14.3,
+    "snr_db": 11.6,
     "collisions": 0,
-    "arc_db": 155.0,
-    "clap_margin": 0.3345,
+    "arc_db": 32.1,
+    "clap_margin": 0.3564,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 2,
+    "snr_db": 14.9,
+    "collisions": 0,
+    "arc_db": 31.4,
+    "clap_margin": 0.373,
     "passed": true,
     "action": "accepted"
    }

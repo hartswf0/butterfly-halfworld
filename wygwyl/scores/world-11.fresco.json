@@ -1,7 +1,7 @@
 {
  "fresco": "0.1",
  "title": "WORLD SCORE — New Day",
- "duration": 119.3,
+ "duration": 123.3,
  "base": "",
  "tracks": [
   {
@@ -11,47 +11,170 @@
    "clips": [
     {
      "at": 0,
+     "source": "drone/unified-drones-lite.mp3",
      "s": 1056.659333,
      "e": 1168.019333,
-     "gain": 0.3,
-     "label": "drone",
-     "source": "drone/unified-drones-lite.mp3",
+     "gain": 0.28,
      "fadeIn": 2.5,
-     "fadeOut": 6.0
+     "fadeOut": 6.0,
+     "label": "drone",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "audio/11_New Day_mixdown_RY_250626.mp3",
      "s": 0,
      "e": 101.27,
      "gain": 1.0,
-     "label": "reading",
-     "source": "audio/11_New Day_mixdown_RY_250626.mp3",
      "fadeIn": 0.02,
-     "fadeOut": 0.1
+     "fadeOut": 0.1,
+     "label": "reading",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     },
     {
-     "at": 110.27,
+     "at": 6.0,
+     "source": "pack/songloops/VOL_nightbus-03_01.mp3",
+     "s": 0,
+     "e": 67.51333333333334,
+     "gain": 0.11264000000000002,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch piano · Command Decent",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 6.0,
+     "source": "pack/songloops/VOL_dustrest-16_04.mp3",
+     "s": 0,
+     "e": 67.51333333333334,
+     "gain": 0.11264000000000002,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch strings · Frictionless Void",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 39.75666666666667,
+     "source": "pack/songloops/VOL_nightbus-03_05.mp3",
+     "s": 0,
+     "e": 67.51333333333332,
+     "gain": 0.11264000000000002,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch synth · Command Decent",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 39.75666666666667,
+     "source": "pack/songloops/VOL_mareamemory-06_01.mp3",
+     "s": 0,
+     "e": 67.51333333333332,
+     "gain": 0.067584,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch vocals · Ecstatic Dawn",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 39.75666666666667,
+     "source": "radio/parts/11_06.mp3",
+     "s": 0.0,
+     "e": 71.51,
+     "gain": 0.3,
+     "fadeIn": 2.0,
+     "fadeOut": 4.0,
+     "label": "stem bass",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
+    },
+    {
+     "at": 73.51333333333334,
+     "source": "radio/parts/11_07.mp3",
+     "s": 0.0,
+     "e": 35.76,
+     "gain": 0.32,
+     "fadeIn": 1.5,
+     "fadeOut": 3.5,
+     "label": "stem drums",
+     "ref": {
+      "role": "bed",
+      "pan": 0.12
+     }
+    },
+    {
+     "at": 114.27,
+     "source": "chops/11/11_C14.mp3",
      "s": 0,
      "e": 3.0,
      "gain": 0.55,
-     "label": "coda: new day.",
-     "source": "chops/11/11_C14.mp3",
      "fadeIn": 0.05,
-     "fadeOut": 0.6
+     "fadeOut": 0.6,
+     "label": "coda: new day.",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     }
    ]
   }
  ],
  "lanes": [],
  "provenance": {
-  "generator": "score_engine.py",
+  "generator": "score_engine.py v2 — samples, stems, foley, ghosts",
   "iterations": [
    {
     "iter": 1,
-    "snr_db": 14.6,
+    "snr_db": 1.4,
     "collisions": 0,
-    "arc_db": 71.2,
-    "clap_margin": 0.2625,
+    "arc_db": 27.1,
+    "clap_margin": 0.414,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 2,
+    "snr_db": 5.4,
+    "collisions": 0,
+    "arc_db": 26.4,
+    "clap_margin": 0.4006,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 3,
+    "snr_db": 9.4,
+    "collisions": 0,
+    "arc_db": 25.9,
+    "clap_margin": 0.3956,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 4,
+    "snr_db": 13.4,
+    "collisions": 0,
+    "arc_db": 25.7,
+    "clap_margin": 0.3892,
     "passed": true,
     "action": "accepted"
    }

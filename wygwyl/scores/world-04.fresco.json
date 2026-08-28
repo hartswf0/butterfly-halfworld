@@ -1,7 +1,7 @@
 {
  "fresco": "0.1",
  "title": "WORLD SCORE — Nevermore",
- "duration": 148.9,
+ "duration": 152.9,
  "base": "",
  "tracks": [
   {
@@ -11,47 +11,189 @@
    "clips": [
     {
      "at": 0,
+     "source": "drone/unified-drones-lite.mp3",
      "s": 286.512563,
      "e": 421.781771,
-     "gain": 0.3,
-     "label": "drone",
-     "source": "drone/unified-drones-lite.mp3",
+     "gain": 0.28,
      "fadeIn": 2.5,
-     "fadeOut": 6.0
+     "fadeOut": 6.0,
+     "label": "drone",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
     },
     {
      "at": 6.0,
+     "source": "audio/04_Nevermore_mixdown_RY_250626.mp3",
      "s": 0,
      "e": 130.95,
      "gain": 1.0,
-     "label": "reading",
-     "source": "audio/04_Nevermore_mixdown_RY_250626.mp3",
      "fadeIn": 0.02,
-     "fadeOut": 0.1
+     "fadeOut": 0.1,
+     "label": "reading",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
+    },
+    {
+     "at": 6.0,
+     "source": "pack/songloops/VOL_dustrest-11_02.mp3",
+     "s": 0,
+     "e": 87.3,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch piano · Not a Mote of Dust",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 6.0,
+     "source": "pack/songloops/VOL_mallground-27_06.mp3",
+     "s": 0,
+     "e": 87.3,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch strings · MallNet Paradise S",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 49.65,
+     "source": "pack/songloops/VOL_aeolian-02_01.mp3",
+     "s": 0,
+     "e": 87.29999999999998,
+     "gain": 0.1408,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch synth · Flashing Lights (R",
+     "ref": {
+      "role": "bed",
+      "pan": 0.45
+     }
+    },
+    {
+     "at": 49.65,
+     "source": "pack/songloops/VOL_mallground-27_05.mp3",
+     "s": 0,
+     "e": 87.29999999999998,
+     "gain": 0.08448,
+     "fadeIn": 2.2,
+     "fadeOut": 3.0,
+     "label": "orch vocals · MallNet Paradise S",
+     "ref": {
+      "role": "bed",
+      "pan": -0.45
+     }
+    },
+    {
+     "at": 49.65,
+     "source": "radio/parts/04_06.mp3",
+     "s": 0.0,
+     "e": 91.3,
+     "gain": 0.3,
+     "fadeIn": 2.0,
+     "fadeOut": 4.0,
+     "label": "stem bass",
+     "ref": {
+      "role": "bed",
+      "pan": 0.0
+     }
+    },
+    {
+     "at": 93.3,
+     "source": "radio/parts/04_07.mp3",
+     "s": 0.0,
+     "e": 45.65,
+     "gain": 0.32,
+     "fadeIn": 1.5,
+     "fadeOut": 3.5,
+     "label": "stem drums",
+     "ref": {
+      "role": "bed",
+      "pan": 0.12
+     }
     },
     {
      "at": 139.95,
+     "source": "radio/parts/04_08.mp3",
+     "s": 0.0,
+     "e": 2.16,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: to where the broken ",
+     "ref": {
+      "role": "bed",
+      "pan": -0.4
+     }
+    },
+    {
+     "at": 141.14999999999998,
+     "source": "radio/parts/04_09.mp3",
+     "s": 0.0,
+     "e": 4.0,
+     "gain": 0.26,
+     "fadeIn": 0.8,
+     "fadeOut": 2.0,
+     "label": "coda sung: to where the broken ",
+     "ref": {
+      "role": "bed",
+      "pan": 0.4
+     }
+    },
+    {
+     "at": 143.95,
+     "source": "chops/04/04_C01.mp3",
      "s": 0,
      "e": 3.0,
      "gain": 0.55,
-     "label": "coda: if I follow",
-     "source": "chops/04/04_C01.mp3",
      "fadeIn": 0.05,
-     "fadeOut": 0.6
+     "fadeOut": 0.6,
+     "label": "coda: if I follow",
+     "ref": {
+      "role": "voice",
+      "pan": 0.0
+     }
     }
    ]
   }
  ],
  "lanes": [],
  "provenance": {
-  "generator": "score_engine.py",
+  "generator": "score_engine.py v2 — samples, stems, foley, ghosts",
   "iterations": [
    {
     "iter": 1,
-    "snr_db": 13.5,
+    "snr_db": 7.8,
     "collisions": 0,
-    "arc_db": 154.8,
-    "clap_margin": 0.2829,
+    "arc_db": 8.6,
+    "clap_margin": 0.4098,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 2,
+    "snr_db": 11.2,
+    "collisions": 0,
+    "arc_db": 7.9,
+    "clap_margin": 0.4076,
+    "passed": false,
+    "action": "deepen the bow"
+   },
+   {
+    "iter": 3,
+    "snr_db": 14.6,
+    "collisions": 0,
+    "arc_db": 7.5,
+    "clap_margin": 0.4111,
     "passed": true,
     "action": "accepted"
    }
