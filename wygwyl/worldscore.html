@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>WORLD SCORE</title>
+<style>
+:root{--bg:#0a0a0c;--line:#26261f;--ink:#e3ddc8;--dim:#8f8a74;--faint:#55523f;
+  --gold:#e8c34a;--teal:#4dd9cc;--rose:#e05c4f;--green:#9ee06a;--viol:#c86bd9}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--ink);font:12.5px/1.5 "SF Mono",Menlo,monospace;overflow:hidden}
+#wrap{display:flex;flex-direction:column;height:100%}
+#stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;background:#000}
+#stage canvas{max-width:100%;max-height:100%;image-rendering:pixelated;aspect-ratio:4/3}
+#tl{height:112px;cursor:crosshair;display:block;width:100%}
+#bar{display:flex;gap:8px;align-items:center;padding:8px 14px;border-top:1px solid var(--line);flex-wrap:wrap}
+#bar h1{font-size:12px;letter-spacing:.22em;color:var(--gold);margin-right:4px}
+select,button{background:#141410;border:1px solid var(--line);color:var(--ink);font:inherit;font-size:11px;
+  padding:4px 10px;border-radius:4px;cursor:pointer;letter-spacing:.06em}
+button:hover{border-color:var(--gold)}
+button.on{background:var(--gold);color:#0a0a0c;border-color:var(--gold)}
+button.play{min-width:70px}
+#status{color:var(--dim);font-size:10.5px;margin-left:auto;max-width:46ch;text-align:right;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div id="stage"><canvas id="cv" width="768" height="576"></canvas></div>
+  <canvas id="tl"></canvas>
+  <div id="bar">
+    <h1>WORLD SCORE</h1>
+    <select id="pick"></select>
+    <button id="play" class="play">▶ PLAY</button>
+    <button id="r-voice" class="on">THE READING</button>
+    <button id="r-beds" class="on">BEDS</button>
+    <button id="r-hits" class="on">HITS ON CUES</button>
+    <button id="r-ghosts" class="on">SUNG GHOSTS</button>
+    <button id="export">⬇ SCORE</button>
+    <span id="status">choose a world…</span>
+  </div>
+</div>
+
+<script type="module">
+import { drawPreview } from "./halfworld.mjs";
+const $ = s => document.querySelector(s);
+const SLUGS = ["01-out-of-life","02-flashing-lights","03-how-to-break-off-an-engagement",
+  "04-nevermore","05-bloodlines","06-resurrecting-atlantis","07-dj-turn-me-up","08-newly-single",
+  "09-yet-heard","10-magic-ride","11-new-day","12-reunion","13-how-to-win-my-heart","14-hot-minute"];
+const R = {voice:true, beds:true, hits:true, ghosts:true};
+let WORLDS = null, CODEX = null, SONIC = null;
+let world = null, rt = null, starts = [], total = 1, num = '06';
+let PLAN = [], T = 0, playing = false, t0ms = 0;
+const curT = () => playing ? (performance.now() - t0ms) / 1000 : T;
+let ctx = null, buffers = new Map(), scheduled = new Set(), bedNow = -1, bedNodes = null;
+
+const toks = s => new Set((s||'').toLowerCase().match(/[a-z]+/g)?.filter(t=>t.length>3)||[]);
+const overlap = (a,b) => { const A=toks(a), B=toks(b); let n=0; for (const t of A) if (B.has(t)) n++; return n; };
+
+async function loadWorld(n){
+  num = n;
+  const slug = SLUGS[+n-1];
+  world = (await import(`./worlds/${slug}.mjs`)).default;
+  $('#cv').__rt = null;                       // fresh runtime
+  rt = drawPreview(world, $('#cv'), 0);
+  starts = []; total = 0;
+  for (const m of rt.movements){ starts.push(total); total += m.seconds; }
+  document.querySelector('#bar h1').style.color = world.accent || 'var(--gold)';
+  await buildPlan();
+  T = 0; scheduled.clear(); stopBed(); draw();
+}
+
+async function buildPlan(){
+  const w = WORLDS.worlds.find(x => x.num === num);
+  const timing = await fetch(`timings/${num}.json`).then(r=>r.json()).catch(()=>null);
+  const segs = timing ? timing.segments : [];
+  const cxPoem = CODEX.poems.find(p => p.num === num);
+  const orch = (w?.orchestra||[]).filter(o => o.instrument !== 'DRUMS');
+  const hitsPool = SONIC.filter(s => s.eco === 'signal' && (s.dur||9) <= 3.5);
+  PLAN = [];
+  let hi = 0;
+  rt.movements.forEach((m, i) => {
+    const t0 = starts[i], sec = m.seconds;
+    if (m.label === 'TITLE'){ return; }
+    // BED — the poem's own orchestra, one chair per movement, rotating
+    if (orch.length)
+      PLAN.push({t: t0, dur: sec, kind: 'bed', file: orch[i % orch.length].file,
+                 gain: 0.12, label: `${m.label} · ${orch[i % orch.length].instrument}`});
+    // THE READING — the line this movement sets, spoken inside it
+    let vEnd = t0;
+    const seg = segs.length ? segs.reduce((b,s)=> overlap(m.line,s.text)>overlap(m.line,b.text)?s:b, segs[0]) : null;
+    if (seg && overlap(m.line, seg.text) >= 2){
+      const dur = Math.min(seg.end - seg.start + 0.1, sec - 0.6);
+      const at = t0 + Math.min(0.8, Math.max(0.2, (sec - dur) * 0.12));
+      PLAN.push({t: at, dur, kind: 'voice', file: w.reading, s0: Math.max(seg.start - 0.05, 0),
+                 gain: 1.0, label: '“' + seg.text.slice(0, 46) + '”'});
+      vEnd = at + dur;
+    }
+    // HITS — the movement's OWN cues; the cue stays the trigger, but a cue
+    // that lands under her words snaps to just after the line
+    for (const c of (m.cues || [])){
+      let at = t0 + c.at * sec;
+      const vEv = PLAN.find(e => e.kind === 'voice' && e.t <= at && at <= e.t + e.dur + 0.15);
+      if (vEv){ at = vEv.t + vEv.dur + 0.15; if (at > t0 + sec - 0.5) continue; }
+      const h = hitsPool[hi++ % hitsPool.length];
+      PLAN.push({t: at, dur: Math.min(h.dur || 2, 2.2), kind: 'hit', file: h.file,
+                 gain: (c.gain || 0.4) * 0.95, pan: hi % 2 ? 0.35 : -0.35,
+                 label: `${m.label} cue · ${h.label}`});
+    }
+    // SUNG GHOST — the same line in the other mouth, if the movement has room
+    if (cxPoem && vEnd > t0 && t0 + sec - vEnd >= 4){
+      const g = cxPoem.lines.reduce((b,L)=> overlap(m.line,L.text)>overlap(m.line,b?.text||'')?L:b, null);
+      if (g && overlap(m.line, g.text) >= 2)
+        PLAN.push({t: vEnd + 0.6, dur: Math.min(g.sung_dur, t0 + sec - vEnd - 1, 6), kind: 'ghost',
+                   file: g.sung_clip, gain: 0.3, pan: i % 2 ? 0.4 : -0.4,
+                   label: 'sung: ' + g.text.slice(0, 40)});
+    }
+  });
+  PLAN = PLAN.filter(e =>
+    (e.kind !== 'voice' || R.voice) && (e.kind !== 'bed' || R.beds) &&
+    (e.kind !== 'hit' || R.hits) && (e.kind !== 'ghost' || R.ghosts));
+  PLAN.sort((a,b) => a.t - b.t);
+  $('#status').textContent = `${world.title} · ` +
+    ['voice','bed','hit','ghost'].map(k => PLAN.filter(e=>e.kind===k).length + ' ' + k + 's').join(' · ');
+  draw();
+}
+
+// ── audition ──
+async function buf(file){
+  if (!buffers.has(file))
+    buffers.set(file, fetch(file).then(r=>r.arrayBuffer()).then(b=>ctx.decodeAudioData(b)).catch(()=>null));
+  return buffers.get(file);
+}
+function playEvent(ev, when){
+  buf(ev.file).then(b => {
+    if (!b || !playing) return;
+    const src = ctx.createBufferSource(); src.buffer = b;
+    const g = ctx.createGain(); const pan = ctx.createStereoPanner();
+    pan.pan.value = ev.pan || 0;
+    src.connect(g); g.connect(pan); pan.connect(ctx.destination);
+    const at = Math.max(ctx.currentTime, when);
+    const dur = Math.min(ev.dur, b.duration - (ev.s0||0));
+    g.gain.setValueAtTime(0, at); g.gain.linearRampToValueAtTime(ev.gain, at + 0.05);
+    g.gain.setValueAtTime(ev.gain, Math.max(at, at + dur - 0.25)); g.gain.linearRampToValueAtTime(0, at + dur);
+    src.start(at, ev.s0 || 0, dur + 0.05);
+    $('#status').textContent = ev.kind.toUpperCase() + ' · ' + ev.label;
+  });
+}
+function stopBed(){ if (bedNodes){ const o = bedNodes;
+  o.g.gain.linearRampToValueAtTime(0, ctx ? ctx.currentTime + 1 : 0);
+  setTimeout(()=>{ try{o.src.stop()}catch(e){} }, 1200); bedNodes = null; } bedNow = -1; }
+function bedTick(){
+  const i = starts.findIndex((s,k) => T >= s && T < s + rt.movements[k].seconds);
+  if (i === bedNow) return;
+  stopBed(); bedNow = i;
+  const ev = PLAN.find(e => e.kind === 'bed' && Math.abs(e.t - starts[i]) < 0.01);
+  if (!ev) return;
+  buf(ev.file).then(b => {
+    if (!b || !playing || bedNow !== i) return;
+    const src = ctx.createBufferSource(); src.buffer = b; src.loop = true;
+    const g = ctx.createGain(); g.gain.value = 0;
+    src.connect(g); g.connect(ctx.destination);
+    g.gain.linearRampToValueAtTime(ev.gain, ctx.currentTime + 1.4);
+    src.start(); bedNodes = {src, g};
+  });
+}
+setInterval(() => {
+  if (!playing) return;
+  T = curT();
+  if (T >= total){ T = total; setPlay(false); return; }
+  for (const ev of PLAN){
+    if (ev.kind === 'bed') continue;
+    if (ev.t < T - 0.05 || ev.t > T + 2.6) continue;   // wide lookahead survives
+    const key = ev.kind + ev.t;                        // hidden-tab throttling
+    if (scheduled.has(key)) continue;
+    scheduled.add(key);
+    playEvent(ev, ctx.currentTime + (ev.t - T));
+  }
+  if (R.beds) bedTick();
+}, 300);
+
+// ── the clock and the picture ──
+function frame(){
+  requestAnimationFrame(frame);
+  if (playing) T = Math.min(curT(), total);
+  if (world) drawPreview(world, $('#cv'), Math.min(T, total - 0.01));
+  draw();
+}
+requestAnimationFrame(frame);
+function setPlay(p){
+  if (p) t0ms = performance.now() - T * 1000;
+  else T = Math.min(curT(), total);
+  playing = p;
+  $('#play').textContent = p ? '❚❚' : '▶ PLAY';
+  if (!p){ scheduled.clear(); stopBed(); }
+}
+$('#play').onclick = () => {
+  if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+  ctx.resume();
+  if (!playing && T >= total) T = 0;
+  setPlay(!playing);
+};
+
+// ── the strip ──
+const tl = $('#tl');
+function draw(){
+  const d = Math.min(devicePixelRatio||1, 2);
+  if (tl.width !== innerWidth*d){ tl.width = innerWidth*d; tl.height = 112*d;
+    tl.getContext('2d').setTransform(d,0,0,d,0,0); }
+  const g = tl.getContext('2d'), W = innerWidth, X = t => t/total*W;
+  g.fillStyle = '#0a0a0c'; g.fillRect(0,0,W,112);
+  if (!rt) return;
+  rt.movements.forEach((m,i) => {                     // MOVEMENTS
+    g.fillStyle = m.label==='TITLE' ? '#101014' : (i%2 ? '#15151a' : '#191920');
+    g.fillRect(X(starts[i]), 6, X(m.seconds), 28);
+    for (const c of (m.cues||[])){
+      g.strokeStyle = '#e8c34a99';
+      const x = X(starts[i] + c.at*m.seconds);
+      g.beginPath(); g.moveTo(x,6); g.lineTo(x,34); g.stroke();
+    }
+    if (m.seconds/total*W > 46){ g.fillStyle = '#55523f'; g.fillText(m.label.slice(0,14), X(starts[i])+3, 17); }
+  });
+  const KC = {voice:'#4dd9cc', bed:'#9ee06a', hit:'#e05c4f', ghost:'#c86bd9'};
+  for (const ev of PLAN){                             // VOICE + SCORE
+    g.fillStyle = KC[ev.kind];
+    if (ev.kind === 'voice') g.fillRect(X(ev.t), 46, Math.max(X(ev.dur),2), 18);
+    else if (ev.kind === 'ghost') g.fillRect(X(ev.t), 58, Math.max(X(ev.dur),2), 10);
+    else if (ev.kind === 'bed'){ g.globalAlpha=.3; g.fillRect(X(ev.t), 92, X(ev.dur), 8); g.globalAlpha=1; }
+    else { g.beginPath(); g.arc(X(ev.t), 84, 3.5, 0, 7); g.fill(); }
+  }
+  g.fillStyle = '#55523f';
+  g.fillText('MOVEMENTS', 6, 44); g.fillText('VOICE + GHOST', W-98, 44); g.fillText('SCORE', 6, 106);
+  g.strokeStyle = '#e3ddc8'; g.beginPath(); g.moveTo(X(T),0); g.lineTo(X(T),112); g.stroke();
+}
+tl.addEventListener('pointerdown', e => { T = e.clientX/innerWidth*total;
+  t0ms = performance.now() - T*1000; scheduled.clear(); stopBed(); });
+
+for (const key of ['voice','beds','hits','ghosts'])
+  $('#r-'+key).onclick = e => { R[key] = !R[key];
+    e.target.classList.toggle('on', R[key]); scheduled.clear(); stopBed(); buildPlan(); };
+$('#export').onclick = () => {
+  const clips = PLAN.map(ev => ({at:+ev.t.toFixed(2), source:ev.file, s:ev.s0||0,
+    e:(ev.s0||0)+ +ev.dur.toFixed(2), gain:ev.gain, fadeIn:ev.kind==='bed'?1.4:.05,
+    fadeOut:ev.kind==='bed'?2:.25, label:ev.label.slice(0,40), ref:{kind:ev.kind, world:world.slug}}));
+  const score = {fresco:'0.1', title:`WORLD SCORE — ${world.title}`, duration:+total.toFixed(1), base:'',
+    tracks:[{id:'ws', name:'WORLD '+num, gain:1, clips}], lanes:[],
+    provenance:{generator:'worldscore.html', rules:{...R}}};
+  const url = URL.createObjectURL(new Blob([JSON.stringify(score,null,1)],{type:'application/json'}));
+  const a = document.createElement('a'); a.href = url; a.download = `worldscore-${num}.fresco.json`; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url), 5000);
+};
+
+const pick = $('#pick');
+SLUGS.forEach((s,i) => { const o = document.createElement('option');
+  o.value = String(i+1).padStart(2,'0'); o.textContent = s; pick.appendChild(o); });
+pick.value = '06';
+pick.onchange = () => { setPlay(false); loadWorld(pick.value); };
+
+Promise.all([
+  fetch('poemworlds.json').then(r=>r.json()),
+  fetch('codex/lines.json').then(r=>r.json()),
+  fetch('sonic/sonic.json').then(r=>r.json()),
+]).then(([w, c, s]) => { WORLDS = w; CODEX = c; SONIC = s.sounds; loadWorld('06'); });
+</script>
+</body>
+</html>
