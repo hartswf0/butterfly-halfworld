@@ -1,0 +1,1262 @@
+{
+ "census": {
+  "speech_files": 492,
+  "unique_takes": 82,
+  "redundant_copies": 410,
+  "voices": 2,
+  "xcorr_threshold": 0.82,
+  "silhouette": 0.237
+ },
+ "voices": [
+  {
+   "voice": "V1",
+   "guess": "unknown/mixed",
+   "f0_median": 94.7,
+   "takes": 38,
+   "files": 393,
+   "take_ids": [
+    "T001",
+    "T002",
+    "T005",
+    "T008",
+    "T009",
+    "T023",
+    "T024",
+    "T027",
+    "T028",
+    "T029",
+    "T030",
+    "T039",
+    "T041",
+    "T042",
+    "T043",
+    "T044",
+    "T047",
+    "T051",
+    "T052",
+    "T053",
+    "T054",
+    "T055",
+    "T058",
+    "T059",
+    "T060",
+    "T061",
+    "T062",
+    "T063",
+    "T064",
+    "T066",
+    "T067",
+    "T068",
+    "T069",
+    "T070",
+    "T071",
+    "T072",
+    "T073",
+    "T082"
+   ]
+  },
+  {
+   "voice": "V2",
+   "guess": "the poet (readings)",
+   "f0_median": 96.1,
+   "takes": 44,
+   "files": 99,
+   "take_ids": [
+    "T003",
+    "T004",
+    "T006",
+    "T007",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016",
+    "T017",
+    "T018",
+    "T019",
+    "T020",
+    "T021",
+    "T022",
+    "T025",
+    "T026",
+    "T031",
+    "T032",
+    "T033",
+    "T034",
+    "T035",
+    "T036",
+    "T037",
+    "T038",
+    "T040",
+    "T045",
+    "T046",
+    "T048",
+    "T049",
+    "T050",
+    "T056",
+    "T057",
+    "T065",
+    "T074",
+    "T075",
+    "T076",
+    "T077",
+    "T078",
+    "T079",
+    "T080",
+    "T081"
+   ]
+  }
+ ],
+ "takes": [
+  {
+   "take": "T001",
+   "n": 243,
+   "canonical": "DOG/EAR/reunion.mp4",
+   "files": [
+    "DOG/EAR/PROJECT_ATLANTIS_COMPLETE_SEQUENCE_WITH_AUDIO.mp4",
+    "DOG/EAR/bloodline.mp4",
+    "DOG/EAR/dj-turn-me-up.mp4",
+    "DOG/EAR/flashing-lights.mp4",
+    "DOG/EAR/hot-minute.mp4",
+    "DOG/EAR/how-to-break-off-an-engagement.mp4",
+    "DOG/EAR/how-to-win-my-heart.mp4",
+    "DOG/EAR/magic-ride.mp4",
+    "DOG/EAR/nevermore.mp4",
+    "DOG/EAR/newly-single.mp4",
+    "DOG/EAR/out-of-life.mp4",
+    "DOG/EAR/resurrecting-atlantis.mp4",
+    "DOG/EAR/reunion.mp4",
+    "DOG/EAR/yet-heard.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/bloodline_delay_0s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/bloodline_delay_1s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/bloodline_delay_2s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/bloodline_delay_3s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/bloodline_delay_4s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/bloodline_delay_5s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/dj-turn-me-up_delay_0s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/dj-turn-me-up_delay_1s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/dj-turn-me-up_delay_2s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/dj-turn-me-up_delay_3s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/dj-turn-me-up_delay_4s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/dj-turn-me-up_delay_5s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/flashing-lights_delay_0s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/flashing-lights_delay_1s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/flashing-lights_delay_2s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/flashing-lights_delay_3s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/flashing-lights_delay_4s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/flashing-lights_delay_5s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/hot-minute_delay_0s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/hot-minute_delay_1s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/hot-minute_delay_2s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/hot-minute_delay_3s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/hot-minute_delay_4s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/hot-minute_delay_5s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/how-to-break-off-an-engagement_delay_0s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/how-to-break-off-an-engagement_delay_1s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/how-to-break-off-an-engagement_delay_2s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/how-to-break-off-an-engagement_delay_3s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/how-to-break-off-an-engagement_delay_4s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/how-to-break-off-an-engagement_delay_5s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/how-to-win-my-heart_delay_0s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/how-to-win-my-heart_delay_1s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/how-to-win-my-heart_delay_2s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/how-to-win-my-heart_delay_3s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/how-to-win-my-heart_delay_4s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/how-to-win-my-heart_delay_5s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/magic-ride_delay_0s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/magic-ride_delay_1s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/magic-ride_delay_2s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/magic-ride_delay_3s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/magic-ride_delay_4s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/magic-ride_delay_5s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/nevermore_delay_0s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/nevermore_delay_1s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/nevermore_delay_2s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/nevermore_delay_3s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/nevermore_delay_4s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/nevermore_delay_5s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/newly-single_delay_0s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/newly-single_delay_1s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/newly-single_delay_2s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/newly-single_delay_3s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/newly-single_delay_4s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/newly-single_delay_5s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/out-of-life_delay_0s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/out-of-life_delay_1s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/out-of-life_delay_2s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/out-of-life_delay_3s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/out-of-life_delay_4s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/out-of-life_delay_5s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/resurrecting-atlantis_delay_0s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/resurrecting-atlantis_delay_1s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/resurrecting-atlantis_delay_2s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/resurrecting-atlantis_delay_3s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/resurrecting-atlantis_delay_4s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/resurrecting-atlantis_delay_5s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/reunion_delay_0s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/reunion_delay_1s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/reunion_delay_2s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/reunion_delay_3s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/reunion_delay_4s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/reunion_delay_5s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/yet-heard_delay_0s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/yet-heard_delay_1s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/yet-heard_delay_2s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/yet-heard_delay_3s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/yet-heard_delay_4s.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/yet-heard_delay_5s.mp4",
+    "DOG/WORK/Bloodline_New Gospel of Creation.mp3",
+    "DOG/WORK/DJ_turn_me_up_Whispers of a Forgotten Love.mp3",
+    "DOG/WORK/Hot Minute_The New Covenant remix v2.mp3",
+    "DOG/WORK/How To Win My Heart_Echoes of Longing remix v2.2.1.mp3",
+    "DOG/WORK/How to break off an engagement_The New Testament.mp3",
+    "DOG/WORK/Magic ride_Awakening of the New Gospel remix v2.mp3",
+    "DOG/WORK/Newly Single_The New Awakening.mp3",
+    "DOG/WORK/Out of Life_Echoes of Departure remix v1_GOOD.mp3",
+    "DOG/WORK/RESURRECTING_ATLANTIS_Resonance of Futures.mp3",
+    "DOG/WORK/Reunion_The New Gospel.mp3",
+    "DOG/WORK/Yet, Heard_The New Covenant.mp3",
+    "DOG/WORK/flashing-lights-potent-Digital Testament remix v1.2.1.2.mp3",
+    "DOG/WORK/nevermore-Reclaimed Truths remix v1.mp3",
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_Bloodline_New_Gospel_of_Creation.mp4",
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_DJ_turn_me_up_Whispers_of_a_Forgotten_Love.mp4",
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_Hot_Minute_The_New_Covenant_remix_v2.mp4",
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_How_To_Win_My_Heart_Echoes_of_Longing_remix_v2.2.1.mp4",
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_How_to_break_off_an_engagement_The_New_Testament.mp4",
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_Magic_ride_Awakening_of_the_New_Gospel_remix_v2.mp4",
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_Newly_Single_The_New_Awakening.mp4",
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_Out_of_Life_Echoes_of_Departure_remix_v1_GOOD.mp4",
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_RESURRECTING_ATLANTIS_Resonance_of_Futures.mp4",
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_Reunion_The_New_Gospel.mp4",
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_Yet,_Heard_The_New_Covenant.mp4",
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_flashing-lights-potent-Digital_Testament_remix_v1.2.1.2.mp4",
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_nevermore-Reclaimed_Truths_remix_v1.mp4",
+    "JELLYFISH/video_output/HT_header_prompt_with_audio.mp4",
+    "JELLYFISH/video_output/HT_header_prompt_with_audio_MISFIT.mp4",
+    "JELLYFISH/video_output/NM_header_prompt_with_audio.mp4",
+    "JELLYFISH/video_output/NM_header_prompt_with_audio_MISFIT_20250604_014834.mp4",
+    "LIZARD/TEMP_LAYERS/echo_delayed.wav",
+    "LIZARD/TEMP_LAYERS/main_delayed.wav",
+    "LIZARD/TEMP_LAYERS/reverb_delayed.wav",
+    "LIZARD/TEMP_MORE_DELAY/voice_delayed.wav",
+    "LIZARD/TEMP_RESTORE/final_mix.wav",
+    "LIZARD/TEMP_RESTORE/voice_delayed.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_RESTORED_VOICE.mp4",
+    "MANTA/DOLPHIN/01_Out_of_life.mp4",
+    "MANTA/DOLPHIN/02_Flashing_Lights.mp4",
+    "MANTA/DOLPHIN/03_How_to_break_off_an_engagement.mp4",
+    "MANTA/DOLPHIN/04_Nevermore.mp4",
+    "MANTA/DOLPHIN/05_Bloodline.mp4",
+    "MANTA/DOLPHIN/06_Resurrecting_Atlantis.mp4",
+    "MANTA/DOLPHIN/07_DJ_Turn_Me_Up.mp4",
+    "MANTA/DOLPHIN/08_Newly_Single.mp4",
+    "MANTA/DOLPHIN/09_Yet_Heard.mp4",
+    "MANTA/DOLPHIN/10_Magic_Ride.mp4",
+    "MANTA/DOLPHIN/12_Reunion.mp4",
+    "MANTA/DOLPHIN/13_How_to_Win_My_Heart.mp4",
+    "MANTA/DOLPHIN/14_Hot_Minute.mp4",
+    "MANTA/audio/Bloodline_New Gospel of Creation.mp3",
+    "MANTA/audio/DJ_turn_me_up_Whispers of a Forgotten Love.mp3",
+    "MANTA/audio/Hot Minute_The New Covenant remix v2.mp3",
+    "MANTA/audio/How To Win My Heart_Echoes of Longing remix v2.2.1.mp3",
+    "MANTA/audio/How to break off an engagement_The New Testament.mp3",
+    "MANTA/audio/Magic ride_Awakening of the New Gospel remix v2.mp3",
+    "MANTA/audio/Newly Single_The New Awakening.mp3",
+    "MANTA/audio/Out of Life_Echoes of Departure remix v1_GOOD.mp3",
+    "MANTA/audio/RESURRECTING_ATLANTIS_Resonance of Futures.mp3",
+    "MANTA/audio/Reunion_The New Gospel.mp3",
+    "MANTA/audio/Yet, Heard_The New Covenant.mp3",
+    "MANTA/audio/flashing-lights-potent-Digital Testament remix v1.2.1.2.mp3",
+    "MANTA/audio/nevermore-Reclaimed Truths remix v1.mp3",
+    "MANTA/codex_segments/codex_01_Out_of_life.mp4",
+    "MANTA/codex_segments/codex_02_Flashing_Lights.mp4",
+    "MANTA/codex_segments/codex_03_How_to_break_off_an_engagement.mp4",
+    "MANTA/codex_segments/codex_04_Nevermore.mp4",
+    "MANTA/codex_segments/codex_05_Bloodline.mp4",
+    "MANTA/codex_segments/codex_06_Resurrecting_Atlantis.mp4",
+    "MANTA/codex_segments/codex_07_DJ_Turn_Me_Up.mp4",
+    "MANTA/codex_segments/codex_08_Newly_Single.mp4",
+    "MANTA/codex_segments/codex_09_Yet_Heard.mp4",
+    "MANTA/codex_segments/codex_10_Magic_Ride.mp4",
+    "MANTA/codex_segments/codex_11_Reunion.mp4",
+    "MANTA/codex_segments/codex_12_How_to_Win_My_Heart.mp4",
+    "MANTA/codex_segments/codex_13_Hot_Minute.mp4",
+    "MANTA/combined/01_Out_of_life.mp4",
+    "MANTA/combined/03_How_to_break_off_an_engagement.mp4",
+    "MANTA/combined/04_Nevermore.mp4",
+    "MANTA/combined/05_Bloodline.mp4",
+    "MANTA/combined/06_Resurrecting_Atlantis.mp4",
+    "MANTA/combined/07_DJ_Turn_Me_Up.mp4",
+    "MANTA/combined/08_Newly_Single.mp4",
+    "MANTA/combined/09_Yet_Heard.mp4",
+    "MANTA/combined/10_Magic_Ride.mp4",
+    "MANTA/combined/12_Reunion.mp4",
+    "MANTA/combined/13_How_to_Win_My_Heart.mp4",
+    "MANTA/final/Where you go when you leave (ancient codex).mp4",
+    "MANTA/final/Where you go when you leave (codex).mp4",
+    "MANTA/final/Where you go when you leave.mp4",
+    "MANTA/final/atlantis_complete.mp4",
+    "MANTA/final/atlantis_crisp_transitions.mp4",
+    "MANTA/final/clean_concat.mp4",
+    "MANTA/final/clean_segments.mp4",
+    "MANTA/final/combined_final.mp4",
+    "MANTA/final/complete_assembly.mp4",
+    "MANTA/final/crisp_butch.mp4",
+    "MANTA/final/crisp_cuts.mp4",
+    "MANTA/final/direct_cuts.mp4",
+    "MANTA/final/dolphin_sequence.mp4",
+    "MANTA/final/final_cooked.mp4",
+    "MANTA/final/fixed_transitions.mp4",
+    "MANTA/final/frame_perfect.mp4",
+    "MANTA/final/normalized_sequence.mp4",
+    "MANTA/final/pro_segments.mp4",
+    "MANTA/final/raw_concat.mp4",
+    "MANTA/final/resurrecting_atlantis_flawless.mp4",
+    "MANTA/final/resurrecting_atlantis_simple.mp4",
+    "MANTA/final/robust_sequence.mp4",
+    "MANTA/final/sequence_assembly.mp4",
+    "MANTA/final/simple_sequence.mp4",
+    "MANTA/final/strict_assembly.mp4",
+    "MANTA/final/strict_final.mp4",
+    "MANTA/segments/ancient_work/work_01_Out_of_life.mp4",
+    "MANTA/segments/ancient_work/work_02_Flashing_Lights.mp4",
+    "MANTA/segments/ancient_work/work_03_How_to_break_off_an_engagement.mp4",
+    "MANTA/segments/ancient_work/work_04_Nevermore.mp4",
+    "MANTA/segments/ancient_work/work_05_Bloodline.mp4",
+    "MANTA/segments/ancient_work/work_06_Resurrecting_Atlantis.mp4",
+    "MANTA/segments/ancient_work/work_07_DJ_Turn_Me_Up.mp4",
+    "MANTA/segments/ancient_work/work_08_Newly_Single.mp4",
+    "MANTA/segments/ancient_work/work_09_Yet_Heard.mp4",
+    "MANTA/segments/ancient_work/work_10_Magic_Ride.mp4",
+    "MANTA/segments/ancient_work/work_12_Reunion.mp4",
+    "MANTA/segments/ancient_work/work_13_How_to_Win_My_Heart.mp4",
+    "MANTA/segments/ancient_work/work_14_Hot_Minute.mp4",
+    "MANTA/segments/seg_00_Newly_Single.mp4",
+    "MANTA/segments/seg_00_Yet_Heard.mp4",
+    "MANTA/segments/seg_01_Out_of_life.mp4",
+    "MANTA/segments/seg_03_How_to_break_off_an_engagement.mp4",
+    "MANTA/segments/seg_04_Nevermore.mp4",
+    "MANTA/segments/seg_05_Bloodline.mp4",
+    "MANTA/segments/seg_06_Resurrecting_Atlantis.mp4",
+    "MANTA/segments/seg_07_DJ_Turn_Me_Up.mp4",
+    "MANTA/segments/seg_10_Magic_Ride.mp4",
+    "MANTA/segments/seg_12_Reunion.mp4",
+    "MANTA/segments/seg_13_How_to_Win_My_Heart.mp4",
+    "MANTA/temp/seg_0.mkv",
+    "MANTA/temp/seg_10.mkv",
+    "MANTA/temp/seg_2.mkv",
+    "MANTA/temp/seg_4.mkv",
+    "MANTA/temp/seg_6.mkv",
+    "MANTA/temp/seg_8.mkv",
+    "slideshows/Echoes of Departure remix v1_GOOD.mp3",
+    "slideshows/Echoes of Longing remix v2.2.1.mp3",
+    "slideshows/HT_slideshow_with_audio.mp4",
+    "slideshows/SH_slideshow_with_audio.mp4",
+    "slideshows/cinematic_trilogy.mp4",
+    "slideshows/combined_trilogy.mp4",
+    "slideshows/perfect_blend_trilogy.mp4",
+    "slideshows/seamless_trilogy_final.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T002",
+   "n": 94,
+   "canonical": "LIZARD/TEMP_AUDIO/001_mixed.mp4",
+   "files": [
+    "LIZARD/Maputo_jazz_mortician_adjusted_speed.mp3",
+    "LIZARD/TEMP_AUDIO/001_mixed.mp4",
+    "LIZARD/TEMP_ENHANCED/mix_BroadcastPerfection.wav",
+    "LIZARD/TEMP_ENHANCED/mix_ConfidentPresence.wav",
+    "LIZARD/TEMP_ENHANCED/mix_CrystalClarity.wav",
+    "LIZARD/TEMP_ENHANCED/mix_ExecutiveVoice.wav",
+    "LIZARD/TEMP_ENHANCED/mix_UltraCrispDefinition.wav",
+    "LIZARD/TEMP_ENHANCED/voice_BroadcastPerfection.wav",
+    "LIZARD/TEMP_ENHANCED/voice_BroadcastPerfection_fixed.wav",
+    "LIZARD/TEMP_ENHANCED/voice_ConfidentPresence.wav",
+    "LIZARD/TEMP_ENHANCED/voice_ConfidentPresence_fixed.wav",
+    "LIZARD/TEMP_ENHANCED/voice_CrystalClarity.wav",
+    "LIZARD/TEMP_ENHANCED/voice_CrystalClarity_fixed.wav",
+    "LIZARD/TEMP_ENHANCED/voice_ExecutiveVoice.wav",
+    "LIZARD/TEMP_ENHANCED/voice_ExecutiveVoice_fixed.wav",
+    "LIZARD/TEMP_ENHANCED/voice_UltraCrispDefinition.wav",
+    "LIZARD/TEMP_ENHANCED/voice_UltraCrispDefinition_fixed.wav",
+    "LIZARD/TEMP_FINAL/voice_audio.wav",
+    "LIZARD/TEMP_FINAL_FIX/audio.wav",
+    "LIZARD/TEMP_FIXED/mix_DeepVintageRadio.wav",
+    "LIZARD/TEMP_FIXED/mix_GrittyBroadcast.wav",
+    "LIZARD/TEMP_FIXED/mix_ModernMorphed.wav",
+    "LIZARD/TEMP_FIXED/mix_VinylCrackle.wav",
+    "LIZARD/TEMP_FIXED/mix_WarpedTape.wav",
+    "LIZARD/TEMP_FIXED/voice_DeepVintageRadio_fixed.wav",
+    "LIZARD/TEMP_FIXED/voice_GrittyBroadcast.wav",
+    "LIZARD/TEMP_FIXED/voice_GrittyBroadcast_fixed.wav",
+    "LIZARD/TEMP_FIXED/voice_ModernMorphed_fixed.wav",
+    "LIZARD/TEMP_FIXED/voice_VinylCrackle_fixed.wav",
+    "LIZARD/TEMP_FIXED/voice_WarpedTape.wav",
+    "LIZARD/TEMP_FIXED/voice_WarpedTape_fixed.wav",
+    "LIZARD/TEMP_FIXED_PITCH/voice_original.wav",
+    "LIZARD/TEMP_FIXED_TIMING/voice_audio.wav",
+    "LIZARD/TEMP_FIXED_TIMING/voice_speed_adjusted.wav",
+    "LIZARD/TEMP_FIXED_VOICE/voice_audio.wav",
+    "LIZARD/TEMP_LAYERED/echo_voice.wav",
+    "LIZARD/TEMP_LAYERED/main_voice.wav",
+    "LIZARD/TEMP_LAYERED/mixed_voice.wav",
+    "LIZARD/TEMP_LAYERS/main_voice.wav",
+    "LIZARD/TEMP_LAYERS/reverb_voice.wav",
+    "LIZARD/TEMP_MORE_DELAY/voice_original.wav",
+    "LIZARD/TEMP_NATIVE_FIRST/voice_original.wav",
+    "LIZARD/TEMP_RESTORE/voice_original.wav",
+    "LIZARD/TEMP_SIMPLE/voice_audio.wav",
+    "LIZARD/TEMP_SIMPLE_DELAY/voice_adjusted.wav",
+    "LIZARD/TEMP_SIMPLE_DELAY/voice_audio.wav",
+    "LIZARD/TEMP_SIMPLE_STRETCH/voice_original.wav",
+    "LIZARD/TEMP_SOUND/voice_ResonantChamber.wav",
+    "LIZARD/TEMP_STRETCHED/voice_original.wav",
+    "LIZARD/TEMP_SYNC/extracted_audio.wav",
+    "LIZARD/TEMP_THREE_LAYER/voice_audio.wav",
+    "LIZARD/TEMP_THREE_LAYER/voice_speed_adjusted.wav",
+    "LIZARD/TEMP_VARIATIONS/voice_original.wav",
+    "LIZARD/TEMP_VINTAGE/mix_GrittyBroadcast.wav",
+    "LIZARD/TEMP_VINTAGE/mix_WarpedTape.wav",
+    "LIZARD/TEMP_VINTAGE/voice_GrittyBroadcast.wav",
+    "LIZARD/TEMP_VINTAGE/voice_WarpedTape.wav",
+    "LIZARD/TEMP_VOICE_AFTER/voice_original.wav",
+    "LIZARD/TEMP_VOICE_DELAY/voice_adjusted.wav",
+    "LIZARD/TEMP_VOICE_DELAY/voice_audio.wav",
+    "LIZARD/VOICE_ADVANCED/Voice_MultiChorus.wav",
+    "LIZARD/VOICE_ADVANCED/Voice_ResonantHarmonics.wav",
+    "LIZARD/VOICE_ADVANCED/Voice_TexturalMorph.wav",
+    "LIZARD/VOICE_ADVANCED/WhereYouGoWhenYouLeave_MultiChorus.mp4",
+    "LIZARD/VOICE_ADVANCED/WhereYouGoWhenYouLeave_ResonantHarmonics.mp4",
+    "LIZARD/VOICE_ADVANCED/WhereYouGoWhenYouLeave_TexturalMorph.mp4",
+    "LIZARD/VOICE_VARIATIONS/Voice_CrystalResonance.wav",
+    "LIZARD/VOICE_VARIATIONS/Voice_Harmonious.wav",
+    "LIZARD/VOICE_VARIATIONS/Voice_OrganicMorph.wav",
+    "LIZARD/VOICE_VARIATIONS/Voice_Radio.wav",
+    "LIZARD/VOICE_VARIATIONS/Voice_Robotic.wav",
+    "LIZARD/VOICE_VARIATIONS/Voice_SpectralGhosts.wav",
+    "LIZARD/VOICE_VARIATIONS/WhereYouGoWhenYouLeave_CrystalResonance.mp4",
+    "LIZARD/VOICE_VARIATIONS/WhereYouGoWhenYouLeave_Harmonious.mp4",
+    "LIZARD/VOICE_VARIATIONS/WhereYouGoWhenYouLeave_OrganicMorph.mp4",
+    "LIZARD/VOICE_VARIATIONS/WhereYouGoWhenYouLeave_Radio.mp4",
+    "LIZARD/VOICE_VARIATIONS/WhereYouGoWhenYouLeave_Robotic.mp4",
+    "LIZARD/VOICE_VARIATIONS/WhereYouGoWhenYouLeave_SpectralGhosts.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_BroadcastPerfection.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_ConfidentPresence.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_CrystalClarity.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_DeepVintageRadio_Fixed.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_ExecutiveVoice.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_FinalWithAudio.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_GrittyBroadcast.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_GrittyBroadcast_Fixed.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_ModernMorphed_Fixed.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_UltraCrispDefinition.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_VinylCrackle_Fixed.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_VoiceTrack.mp3",
+    "LIZARD/WhereYouGoWhenYouLeave_VoiceTrack.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_WarpedTape.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_WarpedTape_Fixed.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_WithVoice.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T003",
+   "n": 18,
+   "canonical": "LIZARD/TEMP_VOICE_AFTER/final_mix.wav",
+   "files": [
+    "LIZARD/TEMP_VARIATIONS/Version_1/final_mix.wav",
+    "LIZARD/TEMP_VARIATIONS/Version_1/voice_positioned.wav",
+    "LIZARD/TEMP_VARIATIONS/Version_2/final_mix.wav",
+    "LIZARD/TEMP_VARIATIONS/Version_2/voice_positioned.wav",
+    "LIZARD/TEMP_VARIATIONS/Version_3/final_mix.wav",
+    "LIZARD/TEMP_VARIATIONS/Version_3/voice_positioned.wav",
+    "LIZARD/TEMP_VARIATIONS/Version_4/final_mix.wav",
+    "LIZARD/TEMP_VARIATIONS/Version_4/voice_positioned.wav",
+    "LIZARD/TEMP_VARIATIONS/Version_5/final_mix.wav",
+    "LIZARD/TEMP_VARIATIONS/Version_5/voice_positioned.wav",
+    "LIZARD/TEMP_VOICE_AFTER/final_mix.wav",
+    "LIZARD/TEMP_VOICE_AFTER/voice_positioned.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_VOICE_AFTER_NATIVE.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_Version_1.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_Version_2.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_Version_3.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_Version_4.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_Version_5.mp4"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T004",
+   "n": 4,
+   "canonical": "ANT/VO_Mixdowns_RY/01_Out of Life_mixdown_RY_250626.wav",
+   "files": [
+    "ANT/VO_Mixdowns_RY/01_Out of Life_mixdown_RY_250626.wav",
+    "ANT/VO_Mixdowns_RY/combined_mixdown.wav",
+    "ANT/VO_Mixdowns_RY_mp3/01_Out of Life_mixdown_RY_250626.mp3",
+    "ANT/VO_Mixdowns_RY_mp3/combined_mixdown.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T005",
+   "n": 4,
+   "canonical": "IMPALA/IBEX/SUNFLOWER/The New Covenant remix v1 ext v2 remix v1.mp3",
+   "files": [
+    "IMPALA/IBEX/SUNFLOWER/The New Covenant remix v1 ext v2 remix v1.mp3",
+    "IMPALA/IBEX/SUNFLOWER/The New Covenant remix v1 ext v2 remix v2.mp3",
+    "IMPALA/final_sequence/sunflower_versions/ResurrectingAtlantis_Sunflower_The_New_Covenant_remix_v1_ext_v2_remix_v1.mp4",
+    "IMPALA/final_sequence/sunflower_versions/ResurrectingAtlantis_Sunflower_The_New_Covenant_remix_v1_ext_v2_remix_v2.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T006",
+   "n": 4,
+   "canonical": "LIZARD/TEMP_FIXED_VOICE/voice_delayed.wav",
+   "files": [
+    "LIZARD/TEMP_FIXED_TIMING/voice_delayed.wav",
+    "LIZARD/TEMP_FIXED_VOICE/voice_delayed.wav",
+    "LIZARD/TEMP_NATIVE_FIRST/voice_delayed.wav",
+    "LIZARD/TEMP_THREE_LAYER/voice_delayed.wav"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T007",
+   "n": 4,
+   "canonical": "LIZARD/TEMP_LAYERS/echo_voice.wav",
+   "files": [
+    "LIZARD/TEMP_LAYERS/echo_voice.wav",
+    "LIZARD/TEMP_SOUND/voice_CathedralResonance.wav",
+    "LIZARD/VOICE_VARIATIONS/Voice_Echo.wav",
+    "LIZARD/VOICE_VARIATIONS/WhereYouGoWhenYouLeave_Echo.mp4"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T008",
+   "n": 3,
+   "canonical": "DOG/EAR_AUDIO_DELAY_OPTIONS/temp_video_files/step_1.mp4",
+   "files": [
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/DOG_FINAL_VIDEO_new_timestamps.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/temp_video_files/step_1.mp4",
+    "DOG/EAR_AUDIO_DELAY_OPTIONS/temp_video_files/step_2.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T009",
+   "n": 3,
+   "canonical": "LIZARD/TEMP_AUDIO/005_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/005_mixed.mp4",
+    "LIZARD/TEMP_AUDIO/008_mixed.mp4",
+    "LIZARD/WhereYouGoWhenYouLeave_MixedAudio.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T010",
+   "n": 2,
+   "canonical": "ANT/VO_Mixdowns_RY/02_Flashing Lights_mixdown_RY_250626.wav",
+   "files": [
+    "ANT/VO_Mixdowns_RY/02_Flashing Lights_mixdown_RY_250626.wav",
+    "ANT/VO_Mixdowns_RY_mp3/02_Flashing Lights_mixdown_RY_250626.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T011",
+   "n": 2,
+   "canonical": "ANT/VO_Mixdowns_RY/03_How to Break off an Engagement_mixdown_RY_250626.wav",
+   "files": [
+    "ANT/VO_Mixdowns_RY/03_How to Break off an Engagement_mixdown_RY_250626.wav",
+    "ANT/VO_Mixdowns_RY_mp3/03_How to Break off an Engagement_mixdown_RY_250626.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T012",
+   "n": 2,
+   "canonical": "ANT/VO_Mixdowns_RY/04_Nevermore_mixdown_RY_250626.wav",
+   "files": [
+    "ANT/VO_Mixdowns_RY/04_Nevermore_mixdown_RY_250626.wav",
+    "ANT/VO_Mixdowns_RY_mp3/04_Nevermore_mixdown_RY_250626.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T013",
+   "n": 2,
+   "canonical": "ANT/VO_Mixdowns_RY/05_Bloodline_mixdown_RY_250626.wav",
+   "files": [
+    "ANT/VO_Mixdowns_RY/05_Bloodline_mixdown_RY_250626.wav",
+    "ANT/VO_Mixdowns_RY_mp3/05_Bloodline_mixdown_RY_250626.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T014",
+   "n": 2,
+   "canonical": "ANT/VO_Mixdowns_RY/06_Resurrecting Atlantis_mixdown_RY_250626.wav",
+   "files": [
+    "ANT/VO_Mixdowns_RY/06_Resurrecting Atlantis_mixdown_RY_250626.wav",
+    "ANT/VO_Mixdowns_RY_mp3/06_Resurrecting Atlantis_mixdown_RY_250626.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T015",
+   "n": 2,
+   "canonical": "ANT/VO_Mixdowns_RY/07_DJ Turn Me Up_mixdown_RY_250626.wav",
+   "files": [
+    "ANT/VO_Mixdowns_RY/07_DJ Turn Me Up_mixdown_RY_250626.wav",
+    "ANT/VO_Mixdowns_RY_mp3/07_DJ Turn Me Up_mixdown_RY_250626.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T016",
+   "n": 2,
+   "canonical": "ANT/VO_Mixdowns_RY/08_Newly Single_mixdown_RY_250626.wav",
+   "files": [
+    "ANT/VO_Mixdowns_RY/08_Newly Single_mixdown_RY_250626.wav",
+    "ANT/VO_Mixdowns_RY_mp3/08_Newly Single_mixdown_RY_250626.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T017",
+   "n": 2,
+   "canonical": "ANT/VO_Mixdowns_RY/09_Yet Heard_mixdown_RY_250626.wav",
+   "files": [
+    "ANT/VO_Mixdowns_RY/09_Yet Heard_mixdown_RY_250626.wav",
+    "ANT/VO_Mixdowns_RY_mp3/09_Yet Heard_mixdown_RY_250626.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T018",
+   "n": 2,
+   "canonical": "ANT/VO_Mixdowns_RY/10_Magic Ride_mixdown_RY_250626.wav",
+   "files": [
+    "ANT/VO_Mixdowns_RY/10_Magic Ride_mixdown_RY_250626.wav",
+    "ANT/VO_Mixdowns_RY_mp3/10_Magic Ride_mixdown_RY_250626.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T019",
+   "n": 2,
+   "canonical": "ANT/VO_Mixdowns_RY/11_New Day_mixdown_RY_250626.wav",
+   "files": [
+    "ANT/VO_Mixdowns_RY/11_New Day_mixdown_RY_250626.wav",
+    "ANT/VO_Mixdowns_RY_mp3/11_New Day_mixdown_RY_250626.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T020",
+   "n": 2,
+   "canonical": "ANT/VO_Mixdowns_RY/12_Reunion_mixdown_RY_250626.wav",
+   "files": [
+    "ANT/VO_Mixdowns_RY/12_Reunion_mixdown_RY_250626.wav",
+    "ANT/VO_Mixdowns_RY_mp3/12_Reunion_mixdown_RY_250626.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T021",
+   "n": 2,
+   "canonical": "ANT/VO_Mixdowns_RY/13_How to Win My Heart_mixdown_RY_250626.wav",
+   "files": [
+    "ANT/VO_Mixdowns_RY/13_How to Win My Heart_mixdown_RY_250626.wav",
+    "ANT/VO_Mixdowns_RY_mp3/13_How to Win My Heart_mixdown_RY_250626.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T022",
+   "n": 2,
+   "canonical": "ANT/VO_Mixdowns_RY/14_Hot Minute_mixdown_RY_250626.wav",
+   "files": [
+    "ANT/VO_Mixdowns_RY/14_Hot Minute_mixdown_RY_250626.wav",
+    "ANT/VO_Mixdowns_RY_mp3/14_Hot Minute_mixdown_RY_250626.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T023",
+   "n": 2,
+   "canonical": "IMPALA/IBEX/SUNFLOWER/The New Covenant remix v2 ext v1.mp3",
+   "files": [
+    "IMPALA/IBEX/SUNFLOWER/The New Covenant remix v2 ext v1.mp3",
+    "IMPALA/final_sequence/sunflower_versions/ResurrectingAtlantis_Sunflower_The_New_Covenant_remix_v2_ext_v1.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T024",
+   "n": 2,
+   "canonical": "IMPALA/IBEX/SUNFLOWER/The New Covenant remix v2.2 ext v1.mp3",
+   "files": [
+    "IMPALA/IBEX/SUNFLOWER/The New Covenant remix v2.2 ext v1.mp3",
+    "IMPALA/final_sequence/sunflower_versions/ResurrectingAtlantis_Sunflower_The_New_Covenant_remix_v2.2_ext_v1.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T025",
+   "n": 2,
+   "canonical": "MANTA/audio/01_SH_Out_of_life.mp3",
+   "files": [
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_01_SH_Out_of_life.mp4",
+    "MANTA/audio/01_SH_Out_of_life.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T026",
+   "n": 2,
+   "canonical": "MANTA/audio/DJ_turn-me-up-Ghosts of Love.mp3",
+   "files": [
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_DJ_turn-me-up-Ghosts_of_Love.mp4",
+    "MANTA/audio/DJ_turn-me-up-Ghosts of Love.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T027",
+   "n": 2,
+   "canonical": "MANTA/audio/How to break off an engagement_Echoes of the New Covenant.mp3",
+   "files": [
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_How_to_break_off_an_engagement_Echoes_of_the_New_Covenant.mp4",
+    "MANTA/audio/How to break off an engagement_Echoes of the New Covenant.mp3"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T028",
+   "n": 2,
+   "canonical": "MANTA/audio/How to break off an engagement_The New Testament of Creation.mp3",
+   "files": [
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_How_to_break_off_an_engagement_The_New_Testament_of_Creation.mp4",
+    "MANTA/audio/How to break off an engagement_The New Testament of Creation.mp3"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T029",
+   "n": 2,
+   "canonical": "MANTA/audio/Nevermore_Reclaimed Truths.mp3",
+   "files": [
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_Nevermore_Reclaimed_Truths.mp4",
+    "MANTA/audio/Nevermore_Reclaimed Truths.mp3"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T030",
+   "n": 2,
+   "canonical": "MANTA/audio/Out of life_The New Covenant.mp3",
+   "files": [
+    "IMPALA/final_sequence/music_versions/ResurrectingAtlantis_Music_Out_of_life_The_New_Covenant.mp4",
+    "MANTA/audio/Out of life_The New Covenant.mp3"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T031",
+   "n": 2,
+   "canonical": "LIZARD/ElevenLabs_2025-05-30T10_23_43_Maputo jazz mortician_gen_sp100_s50_sb75_se0_b_m2.mp3",
+   "files": [
+    "LIZARD/ElevenLabs_2025-05-30T10_23_43_Maputo jazz mortician_gen_sp100_s50_sb75_se0_b_m2.mp3",
+    "LIZARD/WhereYouGoWhenYouLeave_WithAudio.mp4"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T032",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_FINAL_FIX/combined_audio.wav",
+   "files": [
+    "LIZARD/TEMP_FINAL_FIX/combined_audio.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_FINAL_FIXED.mp4"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T033",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_FIXED/voice_DeepVintageRadio.wav",
+   "files": [
+    "LIZARD/TEMP_FIXED/voice_DeepVintageRadio.wav",
+    "LIZARD/TEMP_VINTAGE/voice_DeepVintageRadio.wav"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T034",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_FIXED/voice_ModernMorphed.wav",
+   "files": [
+    "LIZARD/TEMP_FIXED/voice_ModernMorphed.wav",
+    "LIZARD/TEMP_VINTAGE/voice_ModernMorphed.wav"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T035",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_FIXED/voice_VinylCrackle.wav",
+   "files": [
+    "LIZARD/TEMP_FIXED/voice_VinylCrackle.wav",
+    "LIZARD/TEMP_VINTAGE/voice_VinylCrackle.wav"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T036",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_FIXED_VOICE/final_mix.wav",
+   "files": [
+    "LIZARD/TEMP_FIXED_VOICE/final_mix.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_FIXED_VOICE_DELAY.mp4"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T037",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_LAYERED/final_mix.wav",
+   "files": [
+    "LIZARD/TEMP_LAYERED/final_mix.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_FINAL_LAYERED.mp4"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T038",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_MORE_DELAY/final_mix.wav",
+   "files": [
+    "LIZARD/TEMP_MORE_DELAY/final_mix.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_MORE_DELAY.mp4"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T039",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_SIMPLE_DELAY/final_mix.wav",
+   "files": [
+    "LIZARD/TEMP_SIMPLE_DELAY/final_mix.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_2SEC_VOICE_DELAY.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T040",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_STRETCHED/voice_stretched.wav",
+   "files": [
+    "LIZARD/TEMP_SIMPLE_STRETCH/voice_stretched.wav",
+    "LIZARD/TEMP_STRETCHED/voice_stretched.wav"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T041",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_SOUND/mix_AmbientHarmony.wav",
+   "files": [
+    "LIZARD/TEMP_SOUND/mix_AmbientHarmony.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_AmbientHarmony.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T042",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_SOUND/mix_CathedralResonance.wav",
+   "files": [
+    "LIZARD/TEMP_SOUND/mix_CathedralResonance.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_CathedralResonance.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T043",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_SOUND/mix_ResonantChamber.wav",
+   "files": [
+    "LIZARD/TEMP_SOUND/mix_ResonantChamber.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_ResonantChamber.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T044",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_SOUND/mix_SpatialHarmonics.wav",
+   "files": [
+    "LIZARD/TEMP_SOUND/mix_SpatialHarmonics.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_SpatialHarmonics.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T045",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_THREE_LAYER/final_mix.wav",
+   "files": [
+    "LIZARD/TEMP_THREE_LAYER/final_mix.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_THREE_LAYER.mp4"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T046",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_VINTAGE/mix_DeepVintageRadio.wav",
+   "files": [
+    "LIZARD/TEMP_VINTAGE/mix_DeepVintageRadio.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_DeepVintageRadio.mp4"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T047",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_VINTAGE/mix_ModernMorphed.wav",
+   "files": [
+    "LIZARD/TEMP_VINTAGE/mix_ModernMorphed.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_ModernMorphed.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T048",
+   "n": 2,
+   "canonical": "LIZARD/TEMP_VINTAGE/mix_VinylCrackle.wav",
+   "files": [
+    "LIZARD/TEMP_VINTAGE/mix_VinylCrackle.wav",
+    "LIZARD/WhereYouGoWhenYouLeave_VinylCrackle.mp4"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T049",
+   "n": 2,
+   "canonical": "LIZARD/VOICE_ADVANCED/Voice_SequentialTransform.wav",
+   "files": [
+    "LIZARD/VOICE_ADVANCED/Voice_SequentialTransform.wav",
+    "LIZARD/VOICE_ADVANCED/WhereYouGoWhenYouLeave_SequentialTransform.mp4"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T050",
+   "n": 2,
+   "canonical": "LIZARD/VOICE_VARIATIONS/Voice_TimeCollapse.wav",
+   "files": [
+    "LIZARD/VOICE_VARIATIONS/Voice_TimeCollapse.wav",
+    "LIZARD/VOICE_VARIATIONS/WhereYouGoWhenYouLeave_TimeCollapse.mp4"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T051",
+   "n": 2,
+   "canonical": "slideshows/AT_slideshow_with_audio.mp4",
+   "files": [
+    "Resurrecting Atlantis remix v2.1_GOOD.mp3",
+    "slideshows/AT_slideshow_with_audio.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T052",
+   "n": 1,
+   "canonical": "0_TIMAEUS_UNIFIED_DRONE/Unified Drones remix v2.2.2.2.1_LITE.mp3",
+   "files": [
+    "0_TIMAEUS_UNIFIED_DRONE/Unified Drones remix v2.2.2.2.1_LITE.mp3"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T053",
+   "n": 1,
+   "canonical": "BOY/WN_LEAVE/final_video_with_audio.mp4",
+   "files": [
+    "BOY/WN_LEAVE/final_video_with_audio.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T054",
+   "n": 1,
+   "canonical": "CAT/EYE/LA Thompson- WYGWYL 2025 2/AF5A2272.MP4",
+   "files": [
+    "CAT/EYE/LA Thompson- WYGWYL 2025 2/AF5A2272.MP4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T055",
+   "n": 1,
+   "canonical": "CAT/EYE/LA Thompson- WYGWYL 2025 2/AF5A2456.MP4",
+   "files": [
+    "CAT/EYE/LA Thompson- WYGWYL 2025 2/AF5A2456.MP4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T056",
+   "n": 1,
+   "canonical": "LIZARD/ElevenLabs_2025-05-30T10_12_22_Maputo jazz mortician_gen_sp100_s50_sb75_se0_b_m2.mp3",
+   "files": [
+    "LIZARD/ElevenLabs_2025-05-30T10_12_22_Maputo jazz mortician_gen_sp100_s50_sb75_se0_b_m2.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T057",
+   "n": 1,
+   "canonical": "LIZARD/ElevenLabs_2025-05-30T10_18_59_Maputo jazz mortician_gen_sp100_s50_sb75_se70_b_m2.mp3",
+   "files": [
+    "LIZARD/ElevenLabs_2025-05-30T10_18_59_Maputo jazz mortician_gen_sp100_s50_sb75_se70_b_m2.mp3"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T058",
+   "n": 1,
+   "canonical": "LIZARD/ORDERED/014_RU004_215729.mp4",
+   "files": [
+    "LIZARD/ORDERED/014_RU004_215729.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T059",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_AUDIO/002_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/002_mixed.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T060",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_AUDIO/003_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/003_mixed.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T061",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_AUDIO/004_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/004_mixed.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T062",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_AUDIO/007_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/007_mixed.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T063",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_AUDIO/009_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/009_mixed.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T064",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_AUDIO/010_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/010_mixed.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T065",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_AUDIO/011_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/011_mixed.mp4"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T066",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_AUDIO/012_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/012_mixed.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T067",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_AUDIO/013_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/013_mixed.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T068",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_AUDIO/014_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/014_mixed.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T069",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_AUDIO/015_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/015_mixed.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T070",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_AUDIO/016_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/016_mixed.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T071",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_AUDIO/017_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/017_mixed.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T072",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_AUDIO/019_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/019_mixed.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T073",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_AUDIO/020_mixed.mp4",
+   "files": [
+    "LIZARD/TEMP_AUDIO/020_mixed.mp4"
+   ],
+   "voice": "V1"
+  },
+  {
+   "take": "T074",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_FINAL_FIX/shifted_audio.wav",
+   "files": [
+    "LIZARD/TEMP_FINAL_FIX/shifted_audio.wav"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T075",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_LAYERED/reverb_voice.wav",
+   "files": [
+    "LIZARD/TEMP_LAYERED/reverb_voice.wav"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T076",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_LAYERED/voice_shifted.wav",
+   "files": [
+    "LIZARD/TEMP_LAYERED/voice_shifted.wav"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T077",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_SOUND/voice_AmbientHarmony.wav",
+   "files": [
+    "LIZARD/TEMP_SOUND/voice_AmbientHarmony.wav"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T078",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_SOUND/voice_SpatialHarmonics.wav",
+   "files": [
+    "LIZARD/TEMP_SOUND/voice_SpatialHarmonics.wav"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T079",
+   "n": 1,
+   "canonical": "LIZARD/TEMP_SOUND/voice_WetReverb.wav",
+   "files": [
+    "LIZARD/TEMP_SOUND/voice_WetReverb.wav"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T080",
+   "n": 1,
+   "canonical": "LIZARD/VOICE_ADVANCED/WhereYouGoWhenYouLeave_DeepResonance.mp4",
+   "files": [
+    "LIZARD/VOICE_ADVANCED/WhereYouGoWhenYouLeave_DeepResonance.mp4"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T081",
+   "n": 1,
+   "canonical": "LIZARD/WhereYouGoWhenYouLeave_Final_WithTitles.mp4",
+   "files": [
+    "LIZARD/WhereYouGoWhenYouLeave_Final_WithTitles.mp4"
+   ],
+   "voice": "V2"
+  },
+  {
+   "take": "T082",
+   "n": 1,
+   "canonical": "LIZARD/WhereYouGoWhenYouLeave_WetReverb.mp4",
+   "files": [
+    "LIZARD/WhereYouGoWhenYouLeave_WetReverb.mp4"
+   ],
+   "voice": "V1"
+  }
+ ]
+}
