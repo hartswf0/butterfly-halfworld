@@ -1,0 +1,810 @@
+{
+ "note": "the cast — every mouth that sings her lines, named by register and habitat; RY is the spring",
+ "poet": {
+  "name": "RY — THE SPRING",
+  "f0": 111.1,
+  "poet_dist": 1.0
+ },
+ "voices": [
+  {
+   "src": "MANTA/codex_segments/codex_12_How_to_Win_My_Heart.mp4",
+   "name": "THE ABYSSAL CANTOR IV",
+   "f0": 59.9,
+   "poet_dist": 9.53,
+   "kind": "codex",
+   "poems": [
+    "13"
+   ]
+  },
+  {
+   "src": "MANTA/DOLPHIN/13_How_to_Win_My_Heart.mp4",
+   "name": "THE ABYSSAL DOLPHIN IV",
+   "f0": 59.9,
+   "poet_dist": 9.53,
+   "kind": "dolphin",
+   "poems": [
+    "13"
+   ]
+  },
+  {
+   "src": "MANTA/segments/ancient_work/work_13_How_to_Win_My_Heart.mp4",
+   "name": "THE ABYSSAL ELDER IV",
+   "f0": 59.9,
+   "poet_dist": 9.53,
+   "kind": "ancient",
+   "poems": [
+    "13"
+   ]
+  },
+  {
+   "src": "MANTA/combined/08_Newly_Single.mp4",
+   "name": "THE ABYSSAL CHORUS III",
+   "f0": 61.2,
+   "poet_dist": 12.65,
+   "kind": "combined",
+   "poems": [
+    "08"
+   ]
+  },
+  {
+   "src": "MANTA/audio/Newly Single_The New Awakening.mp3",
+   "name": "THE ABYSSAL SINGER III",
+   "f0": 62.0,
+   "poet_dist": 12.9,
+   "kind": "song",
+   "poems": [
+    "08"
+   ]
+  },
+  {
+   "src": "MANTA/codex_segments/codex_08_Newly_Single.mp4",
+   "name": "THE ABYSSAL CANTOR III",
+   "f0": 62.2,
+   "poet_dist": 13.38,
+   "kind": "codex",
+   "poems": [
+    "08"
+   ]
+  },
+  {
+   "src": "MANTA/combined/13_How_to_Win_My_Heart.mp4",
+   "name": "THE ABYSSAL CHORUS IV",
+   "f0": 62.2,
+   "poet_dist": 9.62,
+   "kind": "combined",
+   "poems": [
+    "13"
+   ]
+  },
+  {
+   "src": "MANTA/segments/seg_13_How_to_Win_My_Heart.mp4",
+   "name": "THE ABYSSAL FRAGMENT IV",
+   "f0": 62.2,
+   "poet_dist": 9.6,
+   "kind": "segment",
+   "poems": [
+    "13"
+   ]
+  },
+  {
+   "src": "MANTA/DOLPHIN/08_Newly_Single.mp4",
+   "name": "THE ABYSSAL DOLPHIN III",
+   "f0": 66.1,
+   "poet_dist": 11.97,
+   "kind": "dolphin",
+   "poems": [
+    "08"
+   ]
+  },
+  {
+   "src": "MANTA/segments/ancient_work/work_08_Newly_Single.mp4",
+   "name": "THE ABYSSAL ELDER III",
+   "f0": 66.1,
+   "poet_dist": 11.97,
+   "kind": "ancient",
+   "poems": [
+    "08"
+   ]
+  },
+  {
+   "src": "MANTA/segments/seg_00_Newly_Single.mp4",
+   "name": "THE ABYSSAL FRAGMENT III",
+   "f0": 66.1,
+   "poet_dist": 11.97,
+   "kind": "segment",
+   "poems": [
+    "08"
+   ]
+  },
+  {
+   "src": "MANTA/audio/Bloodline_New Gospel of Creation.mp3",
+   "name": "THE ABYSSAL SINGER",
+   "f0": 69.8,
+   "poet_dist": 12.14,
+   "kind": "song",
+   "poems": [
+    "05"
+   ]
+  },
+  {
+   "src": "MANTA/codex_segments/codex_05_Bloodline.mp4",
+   "name": "THE ABYSSAL CANTOR",
+   "f0": 69.9,
+   "poet_dist": 12.09,
+   "kind": "codex",
+   "poems": [
+    "05"
+   ]
+  },
+  {
+   "src": "MANTA/DOLPHIN/05_Bloodline.mp4",
+   "name": "THE ABYSSAL DOLPHIN",
+   "f0": 69.9,
+   "poet_dist": 12.06,
+   "kind": "dolphin",
+   "poems": [
+    "05"
+   ]
+  },
+  {
+   "src": "MANTA/segments/ancient_work/work_05_Bloodline.mp4",
+   "name": "THE ABYSSAL ELDER",
+   "f0": 69.9,
+   "poet_dist": 12.06,
+   "kind": "ancient",
+   "poems": [
+    "05"
+   ]
+  },
+  {
+   "src": "MANTA/segments/seg_05_Bloodline.mp4",
+   "name": "THE ABYSSAL FRAGMENT",
+   "f0": 69.9,
+   "poet_dist": 12.06,
+   "kind": "segment",
+   "poems": [
+    "05"
+   ]
+  },
+  {
+   "src": "MANTA/combined/05_Bloodline.mp4",
+   "name": "THE ABYSSAL CHORUS",
+   "f0": 70.2,
+   "poet_dist": 12.01,
+   "kind": "combined",
+   "poems": [
+    "05"
+   ]
+  },
+  {
+   "src": "MANTA/audio/Yet, Heard_The New Covenant.mp3",
+   "name": "THE ABYSSAL SINGER IV",
+   "f0": 71.7,
+   "poet_dist": 9.55,
+   "kind": "song",
+   "poems": [
+    "09"
+   ]
+  },
+  {
+   "src": "MANTA/combined/06_Resurrecting_Atlantis.mp4",
+   "name": "THE ABYSSAL CHORUS II",
+   "f0": 72.9,
+   "poet_dist": 9.66,
+   "kind": "combined",
+   "poems": [
+    "06"
+   ]
+  },
+  {
+   "src": "MANTA/codex_segments/codex_06_Resurrecting_Atlantis.mp4",
+   "name": "THE ABYSSAL CANTOR II",
+   "f0": 74.3,
+   "poet_dist": 9.93,
+   "kind": "codex",
+   "poems": [
+    "06"
+   ]
+  },
+  {
+   "src": "MANTA/audio/RESURRECTING_ATLANTIS_Resonance of Futures.mp3",
+   "name": "THE ABYSSAL SINGER II",
+   "f0": 74.3,
+   "poet_dist": 9.88,
+   "kind": "song",
+   "poems": [
+    "06"
+   ]
+  },
+  {
+   "src": "MANTA/segments/seg_06_Resurrecting_Atlantis.mp4",
+   "name": "THE ABYSSAL FRAGMENT II",
+   "f0": 74.6,
+   "poet_dist": 9.87,
+   "kind": "segment",
+   "poems": [
+    "06"
+   ]
+  },
+  {
+   "src": "MANTA/DOLPHIN/06_Resurrecting_Atlantis.mp4",
+   "name": "THE ABYSSAL DOLPHIN II",
+   "f0": 75.4,
+   "poet_dist": 9.28,
+   "kind": "dolphin",
+   "poems": [
+    "06"
+   ]
+  },
+  {
+   "src": "MANTA/segments/ancient_work/work_06_Resurrecting_Atlantis.mp4",
+   "name": "THE ABYSSAL ELDER II",
+   "f0": 75.4,
+   "poet_dist": 9.28,
+   "kind": "ancient",
+   "poems": [
+    "06"
+   ]
+  },
+  {
+   "src": "MANTA/audio/Magic ride_Awakening of the New Gospel remix v2.mp3",
+   "name": "THE DEEP SINGER VI",
+   "f0": 78.5,
+   "poet_dist": 9.37,
+   "kind": "song",
+   "poems": [
+    "10"
+   ]
+  },
+  {
+   "src": "MANTA/combined/10_Magic_Ride.mp4",
+   "name": "THE DEEP CHORUS IV",
+   "f0": 78.5,
+   "poet_dist": 9.4,
+   "kind": "combined",
+   "poems": [
+    "10"
+   ]
+  },
+  {
+   "src": "MANTA/codex_segments/codex_10_Magic_Ride.mp4",
+   "name": "THE DEEP CANTOR IV",
+   "f0": 79.0,
+   "poet_dist": 9.09,
+   "kind": "codex",
+   "poems": [
+    "10"
+   ]
+  },
+  {
+   "src": "MANTA/DOLPHIN/10_Magic_Ride.mp4",
+   "name": "THE DEEP DOLPHIN IV",
+   "f0": 79.1,
+   "poet_dist": 9.24,
+   "kind": "dolphin",
+   "poems": [
+    "10"
+   ]
+  },
+  {
+   "src": "MANTA/segments/ancient_work/work_10_Magic_Ride.mp4",
+   "name": "THE DEEP ELDER IV",
+   "f0": 79.1,
+   "poet_dist": 9.24,
+   "kind": "ancient",
+   "poems": [
+    "10"
+   ]
+  },
+  {
+   "src": "MANTA/segments/seg_10_Magic_Ride.mp4",
+   "name": "THE DEEP FRAGMENT IV",
+   "f0": 79.1,
+   "poet_dist": 9.24,
+   "kind": "segment",
+   "poems": [
+    "10"
+   ]
+  },
+  {
+   "src": "MANTA/audio/How To Win My Heart_Echoes of Longing remix v2.2.1.mp3",
+   "name": "THE DEEP SINGER VIII",
+   "f0": 84.0,
+   "poet_dist": 8.39,
+   "kind": "song",
+   "poems": [
+    "13"
+   ]
+  },
+  {
+   "src": "MANTA/combined/07_DJ_Turn_Me_Up.mp4",
+   "name": "THE DEEP CHORUS III",
+   "f0": 84.6,
+   "poet_dist": 7.84,
+   "kind": "combined",
+   "poems": [
+    "07"
+   ]
+  },
+  {
+   "src": "MANTA/audio/How to break off an engagement_The New Testament of Creation.mp3",
+   "name": "THE DEEP SINGER II",
+   "f0": 86.1,
+   "poet_dist": 9.56,
+   "kind": "song",
+   "poems": [
+    "03"
+   ]
+  },
+  {
+   "src": "MANTA/codex_segments/codex_11_Reunion.mp4",
+   "name": "THE DEEP CANTOR V",
+   "f0": 88.2,
+   "poet_dist": 7.48,
+   "kind": "codex",
+   "poems": [
+    "12"
+   ]
+  },
+  {
+   "src": "MANTA/audio/Reunion_The New Gospel.mp3",
+   "name": "THE DEEP SINGER VII",
+   "f0": 88.2,
+   "poet_dist": 7.58,
+   "kind": "song",
+   "poems": [
+    "12"
+   ]
+  },
+  {
+   "src": "MANTA/combined/12_Reunion.mp4",
+   "name": "THE DEEP CHORUS V",
+   "f0": 88.2,
+   "poet_dist": 7.52,
+   "kind": "combined",
+   "poems": [
+    "12"
+   ]
+  },
+  {
+   "src": "MANTA/DOLPHIN/12_Reunion.mp4",
+   "name": "THE DEEP DOLPHIN V",
+   "f0": 88.3,
+   "poet_dist": 7.51,
+   "kind": "dolphin",
+   "poems": [
+    "12"
+   ]
+  },
+  {
+   "src": "MANTA/segments/ancient_work/work_12_Reunion.mp4",
+   "name": "THE DEEP ELDER V",
+   "f0": 88.3,
+   "poet_dist": 7.51,
+   "kind": "ancient",
+   "poems": [
+    "12"
+   ]
+  },
+  {
+   "src": "MANTA/segments/seg_12_Reunion.mp4",
+   "name": "THE DEEP FRAGMENT V",
+   "f0": 88.3,
+   "poet_dist": 7.51,
+   "kind": "segment",
+   "poems": [
+    "12"
+   ]
+  },
+  {
+   "src": "MANTA/audio/How to break off an engagement_The New Testament.mp3",
+   "name": "THE DEEP SINGER III",
+   "f0": 89.0,
+   "poet_dist": 6.72,
+   "kind": "song",
+   "poems": [
+    "03"
+   ]
+  },
+  {
+   "src": "MANTA/combined/03_How_to_break_off_an_engagement.mp4",
+   "name": "THE DEEP CHORUS II",
+   "f0": 89.0,
+   "poet_dist": 6.75,
+   "kind": "combined",
+   "poems": [
+    "03"
+   ]
+  },
+  {
+   "src": "MANTA/codex_segments/codex_03_How_to_break_off_an_engagement.mp4",
+   "name": "THE DEEP CANTOR II",
+   "f0": 89.3,
+   "poet_dist": 6.94,
+   "kind": "codex",
+   "poems": [
+    "03"
+   ]
+  },
+  {
+   "src": "MANTA/DOLPHIN/03_How_to_break_off_an_engagement.mp4",
+   "name": "THE DEEP DOLPHIN II",
+   "f0": 89.3,
+   "poet_dist": 6.96,
+   "kind": "dolphin",
+   "poems": [
+    "03"
+   ]
+  },
+  {
+   "src": "MANTA/segments/ancient_work/work_03_How_to_break_off_an_engagement.mp4",
+   "name": "THE DEEP ELDER II",
+   "f0": 89.3,
+   "poet_dist": 6.96,
+   "kind": "ancient",
+   "poems": [
+    "03"
+   ]
+  },
+  {
+   "src": "MANTA/segments/seg_03_How_to_break_off_an_engagement.mp4",
+   "name": "THE DEEP FRAGMENT II",
+   "f0": 89.3,
+   "poet_dist": 6.96,
+   "kind": "segment",
+   "poems": [
+    "03"
+   ]
+  },
+  {
+   "src": "MANTA/audio/DJ_turn_me_up_Whispers of a Forgotten Love.mp3",
+   "name": "THE DEEP SINGER V",
+   "f0": 91.0,
+   "poet_dist": 8.12,
+   "kind": "song",
+   "poems": [
+    "07"
+   ]
+  },
+  {
+   "src": "MANTA/codex_segments/codex_07_DJ_Turn_Me_Up.mp4",
+   "name": "THE DEEP CANTOR III",
+   "f0": 91.2,
+   "poet_dist": 8.01,
+   "kind": "codex",
+   "poems": [
+    "07"
+   ]
+  },
+  {
+   "src": "MANTA/DOLPHIN/07_DJ_Turn_Me_Up.mp4",
+   "name": "THE DEEP DOLPHIN III",
+   "f0": 91.2,
+   "poet_dist": 8.03,
+   "kind": "dolphin",
+   "poems": [
+    "07"
+   ]
+  },
+  {
+   "src": "MANTA/segments/ancient_work/work_07_DJ_Turn_Me_Up.mp4",
+   "name": "THE DEEP ELDER III",
+   "f0": 91.2,
+   "poet_dist": 8.03,
+   "kind": "ancient",
+   "poems": [
+    "07"
+   ]
+  },
+  {
+   "src": "MANTA/segments/seg_07_DJ_Turn_Me_Up.mp4",
+   "name": "THE DEEP FRAGMENT III",
+   "f0": 91.2,
+   "poet_dist": 8.03,
+   "kind": "segment",
+   "poems": [
+    "07"
+   ]
+  },
+  {
+   "src": "MANTA/codex_segments/codex_01_Out_of_life.mp4",
+   "name": "THE DEEP CANTOR",
+   "f0": 92.1,
+   "poet_dist": 17.71,
+   "kind": "codex",
+   "poems": [
+    "01"
+   ]
+  },
+  {
+   "src": "MANTA/DOLPHIN/01_Out_of_life.mp4",
+   "name": "THE DEEP DOLPHIN",
+   "f0": 92.1,
+   "poet_dist": 17.83,
+   "kind": "dolphin",
+   "poems": [
+    "01"
+   ]
+  },
+  {
+   "src": "MANTA/segments/ancient_work/work_01_Out_of_life.mp4",
+   "name": "THE DEEP ELDER",
+   "f0": 92.1,
+   "poet_dist": 17.83,
+   "kind": "ancient",
+   "poems": [
+    "01"
+   ]
+  },
+  {
+   "src": "MANTA/audio/Out of Life_Echoes of Departure remix v1_GOOD.mp3",
+   "name": "THE DEEP SINGER",
+   "f0": 92.2,
+   "poet_dist": 17.74,
+   "kind": "song",
+   "poems": [
+    "01"
+   ]
+  },
+  {
+   "src": "MANTA/segments/seg_01_Out_of_life.mp4",
+   "name": "THE DEEP FRAGMENT",
+   "f0": 92.2,
+   "poet_dist": 17.76,
+   "kind": "segment",
+   "poems": [
+    "01"
+   ]
+  },
+  {
+   "src": "MANTA/combined/01_Out_of_life.mp4",
+   "name": "THE DEEP CHORUS",
+   "f0": 92.3,
+   "poet_dist": 17.68,
+   "kind": "combined",
+   "poems": [
+    "01"
+   ]
+  },
+  {
+   "src": "MANTA/audio/Hot Minute_The New Covenant remix v2.mp3",
+   "name": "THE DEEP SINGER IX",
+   "f0": 93.7,
+   "poet_dist": 8.2,
+   "kind": "song",
+   "poems": [
+    "14"
+   ]
+  },
+  {
+   "src": "MANTA/codex_segments/codex_13_Hot_Minute.mp4",
+   "name": "THE DEEP CANTOR VI",
+   "f0": 93.8,
+   "poet_dist": 8.16,
+   "kind": "codex",
+   "poems": [
+    "14"
+   ]
+  },
+  {
+   "src": "MANTA/DOLPHIN/14_Hot_Minute.mp4",
+   "name": "THE DEEP DOLPHIN VI",
+   "f0": 94.4,
+   "poet_dist": 8.15,
+   "kind": "dolphin",
+   "poems": [
+    "14"
+   ]
+  },
+  {
+   "src": "MANTA/segments/ancient_work/work_14_Hot_Minute.mp4",
+   "name": "THE DEEP ELDER VI",
+   "f0": 94.4,
+   "poet_dist": 8.15,
+   "kind": "ancient",
+   "poems": [
+    "14"
+   ]
+  },
+  {
+   "src": "MANTA/audio/DJ_turn-me-up-Ghosts of Love.mp3",
+   "name": "THE DEEP SINGER IV",
+   "f0": 101.7,
+   "poet_dist": 6.85,
+   "kind": "song",
+   "poems": [
+    "07"
+   ]
+  },
+  {
+   "src": "MANTA/combined/09_Yet_Heard.mp4",
+   "name": "THE LOW CHORUS II",
+   "f0": 120.6,
+   "poet_dist": 8.02,
+   "kind": "combined",
+   "poems": [
+    "09"
+   ]
+  },
+  {
+   "src": "MANTA/DOLPHIN/09_Yet_Heard.mp4",
+   "name": "THE LOW DOLPHIN II",
+   "f0": 120.9,
+   "poet_dist": 8.05,
+   "kind": "dolphin",
+   "poems": [
+    "09"
+   ]
+  },
+  {
+   "src": "MANTA/segments/ancient_work/work_09_Yet_Heard.mp4",
+   "name": "THE LOW ELDER II",
+   "f0": 120.9,
+   "poet_dist": 8.05,
+   "kind": "ancient",
+   "poems": [
+    "09"
+   ]
+  },
+  {
+   "src": "MANTA/segments/seg_00_Yet_Heard.mp4",
+   "name": "THE LOW FRAGMENT II",
+   "f0": 120.9,
+   "poet_dist": 8.05,
+   "kind": "segment",
+   "poems": [
+    "09"
+   ]
+  },
+  {
+   "src": "MANTA/codex_segments/codex_09_Yet_Heard.mp4",
+   "name": "THE LOW CANTOR II",
+   "f0": 121.7,
+   "poet_dist": 8.09,
+   "kind": "codex",
+   "poems": [
+    "09"
+   ]
+  },
+  {
+   "src": "MANTA/audio/Nevermore_Reclaimed Truths.mp3",
+   "name": "THE LOW SINGER II",
+   "f0": 132.8,
+   "poet_dist": 7.79,
+   "kind": "song",
+   "poems": [
+    "04"
+   ]
+  },
+  {
+   "src": "MANTA/audio/Out of life_The New Covenant.mp3",
+   "name": "THE LOW SINGER",
+   "f0": 134.2,
+   "poet_dist": 7.9,
+   "kind": "song",
+   "poems": [
+    "01"
+   ]
+  },
+  {
+   "src": "MANTA/audio/nevermore-Reclaimed Truths remix v1.mp3",
+   "name": "THE LOW SINGER III",
+   "f0": 138.0,
+   "poet_dist": 7.66,
+   "kind": "song",
+   "poems": [
+    "04"
+   ]
+  },
+  {
+   "src": "MANTA/combined/04_Nevermore.mp4",
+   "name": "THE LOW CHORUS",
+   "f0": 138.1,
+   "poet_dist": 7.67,
+   "kind": "combined",
+   "poems": [
+    "04"
+   ]
+  },
+  {
+   "src": "MANTA/DOLPHIN/04_Nevermore.mp4",
+   "name": "THE LOW DOLPHIN",
+   "f0": 138.2,
+   "poet_dist": 7.72,
+   "kind": "dolphin",
+   "poems": [
+    "04"
+   ]
+  },
+  {
+   "src": "MANTA/segments/ancient_work/work_04_Nevermore.mp4",
+   "name": "THE LOW ELDER",
+   "f0": 138.2,
+   "poet_dist": 7.72,
+   "kind": "ancient",
+   "poems": [
+    "04"
+   ]
+  },
+  {
+   "src": "MANTA/segments/seg_04_Nevermore.mp4",
+   "name": "THE LOW FRAGMENT",
+   "f0": 138.2,
+   "poet_dist": 7.72,
+   "kind": "segment",
+   "poems": [
+    "04"
+   ]
+  },
+  {
+   "src": "MANTA/codex_segments/codex_04_Nevermore.mp4",
+   "name": "THE LOW CANTOR",
+   "f0": 138.3,
+   "poet_dist": 7.66,
+   "kind": "codex",
+   "poems": [
+    "04"
+   ]
+  },
+  {
+   "src": "MANTA/audio/How to break off an engagement_Echoes of the New Covenant.mp3",
+   "name": "THE HIGH SINGER III",
+   "f0": 146.4,
+   "poet_dist": 8.14,
+   "kind": "song",
+   "poems": [
+    "03"
+   ]
+  },
+  {
+   "src": "MANTA/audio/01_SH_Out_of_life.mp3",
+   "name": "THE HIGH SINGER",
+   "f0": 180.4,
+   "poet_dist": 7.8,
+   "kind": "song",
+   "poems": [
+    "01"
+   ]
+  },
+  {
+   "src": "MANTA/codex_segments/codex_02_Flashing_Lights.mp4",
+   "name": "THE HIGH CANTOR",
+   "f0": 188.0,
+   "poet_dist": 10.65,
+   "kind": "codex",
+   "poems": [
+    "02"
+   ]
+  },
+  {
+   "src": "MANTA/DOLPHIN/02_Flashing_Lights.mp4",
+   "name": "THE HIGH DOLPHIN",
+   "f0": 188.0,
+   "poet_dist": 10.64,
+   "kind": "dolphin",
+   "poems": [
+    "02"
+   ]
+  },
+  {
+   "src": "MANTA/segments/ancient_work/work_02_Flashing_Lights.mp4",
+   "name": "THE HIGH ELDER",
+   "f0": 188.0,
+   "poet_dist": 10.64,
+   "kind": "ancient",
+   "poems": [
+    "02"
+   ]
+  },
+  {
+   "src": "MANTA/audio/flashing-lights-potent-Digital Testament remix v1.2.1.2.mp3",
+   "name": "THE HIGH SINGER II",
+   "f0": 188.2,
+   "poet_dist": 10.53,
+   "kind": "song",
+   "poems": [
+    "02"
+   ]
+  }
+ ]
+}

@@ -30,10 +30,47 @@ const SLUGS = ["01-out-of-life","02-flashing-lights","03-how-to-break-off-an-eng
   "04-nevermore","05-bloodlines","06-resurrecting-atlantis","07-dj-turn-me-up","08-newly-single",
   "09-yet-heard","10-magic-ride","11-new-day","12-reunion","13-how-to-win-my-heart","14-hot-minute"];
 
-const CLOCK = await fetch("clock.json").then(r => r.json());
+const [CLOCK, CAST, LINES, ELS, PWJ] = await Promise.all([
+  fetch("clock.json").then(r => r.json()),
+  fetch("cast.json").then(r => r.json()).catch(() => ({ voices: [] })),
+  fetch("codex/lines.json").then(r => r.json()),
+  fetch("clap-standard.json").then(r => r.json()),
+  fetch("poemworlds.json").then(r => r.json()),
+]);
+const CASTBY = Object.fromEntries(CAST.voices.map(v => [v.src, v]));
+const LINESBY = Object.fromEntries(LINES.poems.map(p => [p.num, p.lines]));
+const PWBY = Object.fromEntries(PWJ.worlds.map(w => [w.num, w]));
+const ELEMENTS = ELS.filter(e => (e.path || "").includes("songloops"));
 const WORLD = {};
 for (let i = 0; i < SLUGS.length; i++)
   try { WORLD[String(i+1).padStart(2,"0")] = (await import(`./worlds/${SLUGS[i]}.mjs`)).default; } catch(_){}
+
+const NOTE = (f) => ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"][
+  ((Math.round(12 * Math.log2(f / 16.3516)) % 12) + 12) % 12];
+const hash = (s) => [...s].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7);
+function keyBedOf(num){
+  /* the keys, finally setting the tone: the bed is an element IN THE POEM'S KEY */
+  const w = WORLD[num] || {};
+  const root = foldRoot((w.score || {}).root || w.drone?.base || 41.2);
+  const chairs = (e) => ["PIANO", "STRINGS", "SYNTH"].includes(e.instrument);
+  for (const tonic of [NOTE(root), NOTE(root * 1.5)]){
+    const pool = ELEMENTS.filter(e => chairs(e) && (e.keySignature || "").split(" ")[0] === tonic);
+    if (pool.length) return pool[hash(num) % pool.length];
+  }
+  const pool = ELEMENTS.filter(chairs);
+  return pool[hash(num) % pool.length];
+}
+function mouthsOf(num){
+  /* only clips the rewhisper protocol passed — no beheaded words on air */
+  return (LINESBY[num] || []).filter(L => L.fit !== false)
+    .sort((a, b) => b.jaccard - a.jaccard).slice(0, 6)
+    .map(L => ({ file: L.sung_clip, text: L.text,
+      who: (CASTBY[L.carrier] || {}).name || "AN UNNAMED MOUTH" }));
+}
+function sfxOf(num){
+  const w = PWBY[num] || {};
+  return (w.sounds || []).filter(s => s.eco === "signal" || s.eco === "rhythm").slice(0, 8);
+}
 
 /* ---- the wear ledger: the archive, changed by being heard ---------------- */
 const WEAR = JSON.parse(localStorage.getItem("wt_wear") || "{}");
@@ -63,18 +100,24 @@ function applyWear(v, dt){
     if (t > v.dropUntil && Math.random() < p){
       const d = 0.09 + Math.random() * 0.17;
       v.g.gain.setTargetAtTime(0.0, t, 0.012);
-      v.g.gain.setTargetAtTime(v.base, t + d, 0.02);
+      v.g.gain.setTargetAtTime(v.target ?? v.base, t + d, 0.02);
       v.dropUntil = t + d + 0.4;
       lastDrop = performance.now();
-    } else if (t > v.dropUntil) v.g.gain.value += (v.base - v.g.gain.value) * 0.2;
+    }
   }
+}
+function seek2(v, target, rate){          // wear may wound; only the station steers
+  v.target = target;
+  if (!ctx || ctx.currentTime > v.dropUntil)
+    v.g.gain.value += (target - v.g.gain.value) * rate;
 }
 const rms = (v) => { v.an.getFloatTimeDomainData(v.buf);
   let s = 0; for (let i = 0; i < v.buf.length; i++) s += v.buf[i] * v.buf[i];
   return Math.sqrt(s / v.buf.length); };
 
-let spring = null, choir = null, ground = null, lastDrop = 0;
+let spring = null, choir = null, ground = null, bed = null, sfx = null, lastDrop = 0;
 let T = 0, playing = false, t0ms = 0, onAir = null, springQuiet = 0, mouthI = -1, mouthWait = 0;
+let sfxWait = 0, sfxI = 0;
 const curT = () => playing ? ((performance.now() - t0ms) / 1000) % CLOCK.duration : T;
 
 function span(t){ return CLOCK.spans.find(s => t >= s.t0 && t < s.t1); }
@@ -83,7 +126,14 @@ function retune(hard){
   const t = curT(), s = span(t);
   if (!s) return;
   if (!onAir || s.num !== onAir.num || hard){
-    onAir = s; mouthI = -1; mouthWait = t + 4;
+    if (master){ master.gain.setTargetAtTime(0.05, ctx.currentTime, 0.12);
+      master.gain.setTargetAtTime(0.95, ctx.currentTime + 0.5, 0.3); }   // no sudden stations
+    onAir = { ...s, mouths: mouthsOf(s.num), sfx: sfxOf(s.num) };
+    mouthI = -1; mouthWait = t + 4; sfxWait = t + 6;
+    const kb = keyBedOf(s.num);
+    if (bed){ bed.el.src = kb.path; bed.el.loop = true; bed.base = 0.10;
+      if (playing) bed.el.play().catch(()=>{});
+      $("mBed").textContent = `${kb.name} · ${kb.keySignature}`; }
     const w = WORLD[s.num] || {}, sc = w.score || {};
     if (node) node.port.postMessage({ hz: bandTable(modeOf(sc.mode || "aeolian"),
       foldRoot(sc.root || w.drone?.base || 41.2)) });
@@ -203,17 +253,33 @@ setInterval(() => {
     if (m){ choir.el.src = m.file; choir.base = 0.85; choir.el.play().catch(()=>{});
       choir.el.addEventListener("ended", () => { mouthWait = T + 7; }, { once: true });
       mouthWait = T + 10;
-      $("mMouth").textContent = "“" + m.text + "”"; }
+      $("mMouth").textContent = `${m.who} — “${m.text}”`; }
   }
-  choir.g.gain.value += (((sRms > 0.02) ? 0.0 : choir.base) - choir.g.gain.value) * 0.3;
-  /* the water recedes: barely there under her, present in silence, fuller after */
-  ground.g.gain.value += ((sRms > 0.02 ? 0.05 : springDone ? 0.16 : 0.10) - ground.g.gain.value) * 0.2;
-  if (wavesG) wavesG.gain.setTargetAtTime(sRms > 0.02 ? 0.03 : springDone ? 0.30 : 0.14,
+  /* nothing stops suddenly: every mouth gets a release tail */
+  const cRel = choir.el.duration && (choir.el.duration - choir.el.currentTime) < 0.55;
+  seek2(choir, (sRms > 0.02 || cRel) ? 0.0 : choir.base, cRel ? 0.12 : 0.3);
+  /* ALWAYS SOME SOUND: the key-bed never leaves — it only kneels */
+  seek2(bed, sRms > 0.02 ? 0.045 : springDone ? 0.13 : 0.09, 0.1);
+  seek2(ground, sRms > 0.02 ? 0.05 : springDone ? 0.14 : 0.09, 0.2);
+  spring.target = 1;
+  if (wavesG) wavesG.gain.setTargetAtTime(sRms > 0.02 ? 0.03 : springDone ? 0.26 : 0.12,
     ctx.currentTime, sRms > 0.02 ? 0.06 : 0.6);
-  applyWear(spring, dt); applyWear(choir, dt); applyWear(ground, dt);
+  /* the mosaic: one sound effect at a time, only off her words, faded both ways */
+  if (playing && onAir && sRms < 0.02 && T > sfxWait && onAir.sfx.length
+      && (sfx.el.paused || sfx.el.ended)){
+    const s2 = onAir.sfx[sfxI++ % onAir.sfx.length];
+    sfx.el.src = s2.file; sfx.base = 0.16;
+    sfx.g.gain.value = 0;
+    sfx.el.play().catch(()=>{});
+    sfxWait = T + 9 + (hash(s2.id || "x") % 7);
+  }
+  const xRel = sfx.el.duration && (sfx.el.duration - sfx.el.currentTime) < 0.7;
+  seek2(sfx, (sRms > 0.02 || xRel) ? 0.0 : sfx.base, 0.1);
+  applyWear(spring, dt); applyWear(choir, dt); applyWear(ground, dt); applyWear(bed, dt);
   const wk = onAir ? wearOf("read:" + onAir.num) : 0;
   $("mWear").textContent = `${wk.toFixed(0)}s worn ${"▮".repeat(Math.min(16, wk / 40 | 0)).padEnd(16, "▯")}`;
-  $("mSpring").textContent = springDone ? "finished — the drone holds" : sRms > 0.02 ? "SPEAKING" : "breath";
+  $("mSpring").textContent = springDone ? "RY has left — the water holds"
+    : sRms > 0.02 ? "RY — THE SPRING · speaking" : "RY — THE SPRING · breath";
   $("clock").textContent = `${String(Math.floor(T/60)).padStart(2,"0")}:${String(Math.floor(T%60)).padStart(2,"0")} / 24:00`;
   window.__wt = { T, num: onAir?.num, playing, sRms, wear: wk, mouthI,
     choirPlaying: !choir.el.paused && !choir.el.ended };
@@ -283,15 +349,22 @@ $("power").onclick = async () => {
     spring = voiceChain($("aSpring")); spring.key = () => "read:" + (onAir?.num || "?");
     choir = voiceChain($("aChoir")); choir.key = () => "mouth:" + (choir.el.src.split("/").pop() || "?");
     ground = voiceChain($("aGround")); ground.key = () => "drone"; ground.base = 0.24;
+    bed = voiceChain($("aBed")); bed.key = () => "bed:" + (onAir?.num || "?"); bed.base = 0.10;
+    sfx = voiceChain($("aSfx")); sfx.key = () => "sfx:" + (sfx.el.src.split("/").pop() || "?"); sfx.base = 0.16;
     ground.el.src = CLOCK.drone; ground.el.loop = true;
   }
   await ctx.resume();
   playing = !playing;
   $("power").textContent = playing ? "◼ OFF AIR" : "⏻ ON AIR";
   if (playing){ t0ms = performance.now() - T * 1000;
-    ground.el.play().catch(()=>{}); retune(true); }
-  else { spring.el.pause(); choir.el.pause(); ground.el.pause();
-    if (node) node.port.postMessage({ stop: 1 }); }
+    master.gain.value = 0; master.gain.setTargetAtTime(0.95, ctx.currentTime, 0.4);
+    ground.el.play().catch(()=>{}); bed.el.src && bed.el.play().catch(()=>{}); retune(true); }
+  else {
+    master.gain.setTargetAtTime(0.0, ctx.currentTime, 0.25);      // no sudden stop, ever
+    setTimeout(() => { spring.el.pause(); choir.el.pause(); ground.el.pause();
+      bed.el.pause(); sfx.el.pause();
+      if (node) node.port.postMessage({ stop: 1 }); }, 900);
+  }
 };
 addEventListener("keydown", (e) => {
   if (e.target.tagName === "INPUT") return;
