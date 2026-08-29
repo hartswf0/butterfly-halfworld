@@ -1,0 +1,103 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>RADIO-SCAPES — the water of atlantis, playing itself</title>
+<link rel="icon" href="dot.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{
+    --ink:#12060f; --paper:#f6e7c8; --dim:#8d6a70; --hot:#f2a03c; --acc:#e0532c;
+    --edge:#2a1220; --sea:#4dd9cc;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:
+      radial-gradient(120% 90% at 50% -10%, #14303a 0%, #081217 45%, #04090b 100%);
+    color:var(--paper); font:13px/1.5 ui-monospace,"SF Mono",Menlo,monospace;
+    display:grid; grid-template-rows:auto 1fr auto; min-height:100%;
+  }
+  header{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+    padding:14px 20px 10px; border-bottom:1px solid var(--edge)}
+  header h1{font-size:15px; letter-spacing:.34em; margin:0; font-weight:700; color:var(--sea)}
+  header small{color:var(--dim); letter-spacing:.06em}
+  main{display:grid; grid-template-columns:minmax(0,1fr) 268px; gap:20px; padding:18px 20px; align-items:start}
+  @media (max-width:900px){ main{grid-template-columns:1fr} }
+  .stage{display:flex; flex-direction:column; gap:12px; min-width:0}
+  canvas{width:100%; height:auto; display:block; image-rendering:pixelated;
+    border:1px solid var(--edge); background:#04090b;
+    box-shadow:0 18px 60px -22px #000, 0 0 0 1px #ffffff08 inset}
+  .plate{display:flex; gap:16px; align-items:baseline; flex-wrap:wrap}
+  .plate b{font-size:15px; letter-spacing:.12em; color:var(--paper)}
+  .plate span{color:var(--dim)}
+  .plate em{color:var(--sea); font-style:normal; letter-spacing:.08em}
+  .transport{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+  button{font:inherit; letter-spacing:.14em; color:var(--paper); background:#00000055;
+    border:1px solid var(--edge); border-radius:2px; padding:7px 14px; cursor:pointer}
+  button:hover{border-color:var(--sea); color:var(--sea)}
+  #play{min-width:104px; color:var(--sea); border-color:#1a4a44}
+  #clock{color:var(--dim); font-variant-numeric:tabular-nums}
+  label{color:var(--dim); display:flex; align-items:center; gap:5px; cursor:pointer}
+  aside{display:flex; flex-direction:column; gap:14px; min-width:0}
+  .panel{border:1px solid var(--edge); padding:12px 13px; background:#00000038}
+  .panel h2{font-size:10px; letter-spacing:.30em; color:var(--dim); margin:0 0 9px; font-weight:600}
+  .meter{display:grid; grid-template-columns:58px 1fr; gap:4px 8px; font-variant-numeric:tabular-nums}
+  .meter i{font-style:normal; color:var(--dim)}
+  .meter span{color:var(--sea); white-space:pre; letter-spacing:-.04em}
+  #mLevel{color:var(--acc)} #mMouth{color:var(--hot)}
+  #dial{max-height:44vh; overflow:auto; display:flex; flex-direction:column}
+  #dial b{display:grid; grid-template-columns:26px 1fr; gap:2px 8px; align-items:baseline;
+    padding:6px 8px; cursor:pointer; font-weight:400; border-left:2px solid transparent}
+  #dial b:hover{background:#ffffff0a}
+  #dial b.on{background:#ffffff10; border-left-color:var(--acc); color:var(--sea)}
+  #dial i{font-style:normal; color:var(--dim); font-variant-numeric:tabular-nums}
+  #dial u{grid-column:2; text-decoration:none; color:var(--dim); font-size:11px; letter-spacing:.10em}
+  #dial b.on u{color:var(--acc)}
+  footer{padding:12px 20px 18px; border-top:1px solid var(--edge); color:var(--dim); max-width:80ch}
+  footer b{color:var(--paper); font-weight:400}
+</style>
+
+<header>
+  <h1>RADIO-SCAPES</h1>
+  <small>the water of atlantis, playing itself · her voice whole, everything else is the sea</small>
+</header>
+
+<main>
+  <div class="stage">
+    <canvas id="screen"></canvas>
+    <div class="plate"><b id="name">—</b><span id="tag"></span></div>
+    <div class="plate"><em id="trad"></em><span id="key"></span></div>
+    <div class="transport">
+      <button id="prev">◀</button>
+      <button id="play">▶ PLAY</button>
+      <button id="next">▶</button>
+      <span id="clock">00:00</span>
+      <label><input id="chain" type="checkbox" checked> chain</label>
+    </div>
+  </div>
+  <aside>
+    <div class="panel">
+      <h2>THE WATER, NOW</h2>
+      <div class="meter">
+        <i>tide</i><span id="mTide">—</span>
+        <i>flood</i><span id="mFlood">—</span>
+        <i>heart</i><span id="mHeart">—</span>
+        <i>mouth</i><span id="mMouth">—</span>
+        <i>out</i><span id="mLevel">—</span>
+      </div>
+    </div>
+    <div class="panel"><h2>STATIONS</h2><div id="dial"></div></div>
+  </aside>
+</main>
+
+<footer>
+  <b>The waves are the instrument.</b> Two or three wave systems of different lengths cross the frame;
+  where they agree the crest darkens, and a darker mark is a louder note — construction and destruction
+  are the score. The poem's own visualized sounds drift on the water as ridgelines; a vertical mark
+  strikes once a beat — the IV drip, the heartbeat. <b>Her reading plays whole and untouched</b>: while
+  she speaks the sea falls to a trickle and the waves flatten; in her silences the flood blooms far past
+  politeness — louder and quieter at the same time, keyed to her breath. When she finishes, the other
+  mouths sing her lines while the water disintegrates back to the tide.
+  &nbsp;·&nbsp; space plays, ← → change station.
+</footer>
+
+<script type="module" src="radio-scapes.mjs"></script>
