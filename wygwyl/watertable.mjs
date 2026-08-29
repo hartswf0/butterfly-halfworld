@@ -43,7 +43,7 @@ function wearAdd(k, s){ WEAR[k] = (WEAR[k] || 0) + s; }
 setInterval(() => localStorage.setItem("wt_wear", JSON.stringify(WEAR)), 4000);
 
 /* ---- the three voices ---------------------------------------------------- */
-let ctx = null, node = null, master = null;
+let ctx = null, node = null, master = null, wavesG = null;
 function voiceChain(el, key){
   const src = ctx.createMediaElementSource(el);
   const lp = ctx.createBiquadFilter(); lp.type = "lowpass";
@@ -143,15 +143,20 @@ function reduce(g){
 }
 const G = new Float32Array(FW * FH);
 const put = (x, y, v) => { x |= 0; y |= 0; if (x >= 0 && x < FW && y >= 0 && y < FH && v < G[y * FW + x]) G[y * FW + x] = v; };
+let memory = new Float32Array(FW);          // the water remembers her, slowly
 function field(){
   G.fill(7);
-  /* the spring's live waveform IS the waterline */
   spring.an.getFloatTimeDomainData(spring.buf);
+  let sr = 0; for (let i = 0; i < spring.buf.length; i++) sr += spring.buf[i] * spring.buf[i];
+  const speaking = Math.sqrt(sr / spring.buf.length) > 0.02;
   for (let x = 0; x < FW; x++){
     const w = spring.buf[Math.floor(x / FW * spring.buf.length)];
-    const y = 66 - w * 150;
-    put(x, y, Math.abs(w) > 0.12 ? 0 : 2);
-    if (Math.abs(w) > 0.2) put(x, y - 1, 8);
+    /* while she speaks the water is NOT her mirror — it lies flat and does not
+       echo her; her shape settles into the water only as she leaves it */
+    memory[x] += ((speaking ? 0 : w) - memory[x]) * (speaking ? 0.008 : 0.06);
+    const y = 66 - memory[x] * 150;
+    put(x, y, Math.abs(memory[x]) > 0.1 ? 0 : 2);
+    if (Math.abs(memory[x]) > 0.18) put(x, y - 1, 8);
   }
   /* the choir's spectrum rises as ridgelines above */
   choir.an.getByteFrequencyData(choir.spec);
@@ -159,12 +164,11 @@ function field(){
     const m = choir.spec[Math.floor(x / FW * 48)] / 255;
     if (m > 0.1) put(x, 40 - m * 26, 1);
   }
-  /* the ground's spectrum is the sea body below */
+  /* the ground's spectrum is the sea body below — thin, not a wash */
   ground.an.getByteFrequencyData(ground.spec);
-  for (let x = 0; x < FW; x++){
+  for (let x = 0; x < FW; x += 2){
     const m = ground.spec[Math.floor(x / FW * 40)] / 255;
-    for (let y = 96; y < 96 + m * 44; y += 3) put(x, y, 6);
-    if (m > 0.5) put(x, 94, 2);
+    for (let y = 100; y < 100 + m * 30; y += 5) put(x, y, 6);
   }
   /* wear shows: recent dropouts tear vertical gaps */
   if (performance.now() - lastDrop < 350){
@@ -189,17 +193,23 @@ setInterval(() => {
   const sRms = rms(spring);
   springQuiet = sRms < 0.015 ? springQuiet + dt : 0;
   const springDone = spring.el.ended || spring.el.paused;
-  /* THE CHOIR LISTENS: it may begin only into her silence, and yields if she returns */
-  if (playing && onAir && (springQuiet > 0.9 || springDone)
+  /* NEGATIVE SPACE LAW: while she reads, no other spoken word exists.
+     The choir gets the poem's aftermath — one mouth, then long air, then
+     the next. Spoken words never mix with spoken words. */
+  if (playing && onAir && springDone && springQuiet > 2.0
       && (choir.el.paused || choir.el.ended) && T > mouthWait){
     mouthI = (mouthI + 1) % Math.max(onAir.mouths.length, 1);
     const m = onAir.mouths[mouthI];
     if (m){ choir.el.src = m.file; choir.base = 0.85; choir.el.play().catch(()=>{});
-      mouthWait = T + 3.5;
+      choir.el.addEventListener("ended", () => { mouthWait = T + 7; }, { once: true });
+      mouthWait = T + 10;
       $("mMouth").textContent = "“" + m.text + "”"; }
   }
-  choir.g.gain.value += (((sRms > 0.02) ? 0.05 : choir.base) - choir.g.gain.value) * 0.3;
-  ground.g.gain.value += ((sRms > 0.02 ? 0.10 : 0.24) - ground.g.gain.value) * 0.2;
+  choir.g.gain.value += (((sRms > 0.02) ? 0.0 : choir.base) - choir.g.gain.value) * 0.3;
+  /* the water recedes: barely there under her, present in silence, fuller after */
+  ground.g.gain.value += ((sRms > 0.02 ? 0.05 : springDone ? 0.16 : 0.10) - ground.g.gain.value) * 0.2;
+  if (wavesG) wavesG.gain.setTargetAtTime(sRms > 0.02 ? 0.03 : springDone ? 0.30 : 0.14,
+    ctx.currentTime, sRms > 0.02 ? 0.06 : 0.6);
   applyWear(spring, dt); applyWear(choir, dt); applyWear(ground, dt);
   const wk = onAir ? wearOf("read:" + onAir.num) : 0;
   $("mWear").textContent = `${wk.toFixed(0)}s worn ${"▮".repeat(Math.min(16, wk / 40 | 0)).padEnd(16, "▯")}`;
@@ -268,8 +278,8 @@ $("power").onclick = async () => {
     node = new AudioWorkletNode(ctx, "bandbank", { numberOfInputs: 0, numberOfOutputs: 1,
       outputChannelCount: [2], processorOptions: { bands: BANDS, cols: COLS } });
     node.port.onmessage = (e) => { if (e.data.lvl !== undefined) lvl = e.data.lvl; };
-    const wg = ctx.createGain(); wg.gain.value = 0.5;
-    node.connect(wg).connect(ctx.destination);
+    wavesG = ctx.createGain(); wavesG.gain.value = 0.0;
+    node.connect(wavesG).connect(ctx.destination);
     spring = voiceChain($("aSpring")); spring.key = () => "read:" + (onAir?.num || "?");
     choir = voiceChain($("aChoir")); choir.key = () => "mouth:" + (choir.el.src.split("/").pop() || "?");
     ground = voiceChain($("aGround")); ground.key = () => "drone"; ground.base = 0.24;
