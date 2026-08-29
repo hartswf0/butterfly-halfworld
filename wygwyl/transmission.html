@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE TRANSMISSION</title>
+<style>
+:root{--bg:#060607;--panel:#0e0e10;--line:#232326;--ink:#d8d2c0;--dim:#8a8574;--faint:#4e4b40;
+  --gold:#e8c34a;--teal:#4dd9cc;--rose:#e05c4f;--green:#9ee06a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(110% 80% at 50% -10%, #141317 0%, #060607 60%);
+  color:var(--ink);font:13px/1.6 "SF Mono",Menlo,monospace;min-height:100vh;padding:22px;max-width:860px;margin:0 auto}
+a{color:var(--teal);text-decoration:none}
+h1{font-size:16px;letter-spacing:.4em;color:var(--gold);text-shadow:0 0 22px #e8c34a33}
+#sub{color:var(--dim);font-size:11.5px;margin:8px 0 18px;line-height:1.8;max-width:74ch}
+#sub b{color:var(--ink);font-weight:normal}
+#broadcast{background:#0e0e10;border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin-bottom:14px;
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+#broadcast b{color:var(--gold);letter-spacing:.2em;font-weight:normal}
+button{background:#141414;border:1px solid var(--line);color:var(--ink);font:inherit;font-size:11px;
+  letter-spacing:.12em;padding:6px 14px;border-radius:4px;cursor:pointer}
+button:hover{border-color:var(--gold)}
+button.on{background:var(--gold);color:#060607;border-color:var(--gold)}
+#dial{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;margin-bottom:14px}
+#dial button{text-align:left;padding:7px 10px}
+#dial small{display:block;color:var(--faint);font-size:9.5px;letter-spacing:0}
+#dial button.on small{color:#060607}
+#log{background:#0e0e10;border:1px solid var(--line);border-radius:6px;padding:12px 16px;display:none}
+#log h2{font-size:10px;letter-spacing:.3em;color:var(--dim);margin-bottom:8px}
+#log .row{font-size:11px;color:var(--dim);padding:3px 0}
+#log .row b{color:var(--green);font-weight:normal}
+#log .row i{color:var(--rose);font-style:normal}
+#clock{color:var(--faint);font-size:11px;font-variant-numeric:tabular-nums}
+input[type=range]{flex:1;min-width:140px;accent-color:var(--gold)}
+footer{margin-top:18px;color:var(--faint);font-size:10.5px;line-height:1.8;max-width:76ch}
+</style>
+</head>
+<body>
+<h1>THE TRANSMISSION</h1>
+<div id="sub">the readings as <b>broadcast radio</b> — each poem a station on the dial. The voice is first class:
+the whole reading, untouched, at its own pacing. Under it, <b>tape loops of three different lengths
+disintegrate</b> as they repeat — darker, dropping out, fluttering into fractured echoes — her own words drift
+through the silences two octaves down, and the dial itself wanders once, in her longest breath.
+Every render is <b>rewhispered</b>: the engine transcribes its own output, and if the mix ate her words, the pass
+fails and it clears the air. What survived is logged below, station by station.</div>
+<div id="broadcast">
+  <b>THE BROADCAST</b>
+  <button id="bplay">▶ SWEEP THE WHOLE DIAL</button>
+  <input id="seek" type="range" min="0" max="1000" value="0">
+  <span id="clock">—</span>
+</div>
+<div id="dial">tuning…</div>
+<div id="log"><h2>REWHISPER — what the radio kept</h2><div id="rows"></div></div>
+<footer>the gate: ≥85% of the poem's words must survive their own mix, as heard by the same ear (whisper) that
+transcribed the corpus · loops decay by law — lowpass per pass, dropout probability rising, wow deepening ·
+no voice is ever cut; nothing lands on a word · <a href="radio-atlantis.html">radio atlantis</a> ·
+<a href="atlas.html">atlas</a></footer>
+
+<script>
+const $ = s => document.querySelector(s);
+const mmss = t => `${String(Math.floor(t/60)).padStart(2,'0')}:${String(Math.floor(t%60)).padStart(2,'0')}`;
+let LOG = null, audio = new Audio(), curBtn = null;
+audio.preload = 'none';
+
+function playSrc(src, btn){
+  if (curBtn === btn && !audio.paused){ audio.pause(); btn.classList.remove('on'); curBtn = null; return; }
+  document.querySelectorAll('button.on').forEach(b => b.classList.remove('on'));
+  audio.src = src; audio.play().catch(()=>{});
+  btn.classList.add('on'); curBtn = btn;
+}
+audio.addEventListener('timeupdate', () => {
+  if (audio.duration){ $('#seek').value = audio.currentTime / audio.duration * 1000;
+    $('#clock').textContent = mmss(audio.currentTime) + ' / ' + mmss(audio.duration); }
+});
+$('#seek').oninput = e => { if (audio.duration) audio.currentTime = e.target.value / 1000 * audio.duration; };
+$('#bplay').onclick = () => playSrc('transmission/broadcast.mp3', $('#bplay'));
+
+function show(num){
+  const st = LOG.stations[num];
+  $('#log').style.display = 'block';
+  $('#rows').innerHTML = `<div class="row" style="color:var(--ink)">S${num} · ${st.title} · ${Math.round(st.dur)}s</div>` +
+    st.iterations.map(it =>
+      `<div class="row">pass ${it.iter}: kept <b>${(it.word_recovery*100).toFixed(0)}%</b> of her words
+       ${it.passed ? '· PASSED' : '· <i>lost: ' + (it.words_lost||[]).join(' ') + '</i> → ' + it.action}</div>`).join('');
+}
+
+fetch('transmission/log.json', {cache:'no-cache'}).then(r => r.json()).then(j => {
+  LOG = j;
+  const d = $('#dial'); d.innerHTML = '';
+  for (const num of Object.keys(j.stations).sort()){
+    const st = j.stations[num];
+    const b = document.createElement('button');
+    b.innerHTML = `S${num} · ${st.title.slice(0,20)}<small>kept ${(st.final.word_recovery*100).toFixed(0)}% of her words · ${st.iterations.length} pass${st.iterations.length>1?'es':''}</small>`;
+    b.onclick = () => { playSrc(`transmission/${num}.mp3`, b); show(num); };
+    d.appendChild(b);
+  }
+}).catch(e => $('#dial').textContent = 'the engine has not rendered yet — run _dig/transmission.py · ' + e);
+</script>
+</body>
+</html>

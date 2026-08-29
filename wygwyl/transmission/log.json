@@ -1,0 +1,551 @@
+{
+ "gate": "rewhisper: the render is transcribed and >=85% of the poem's words must survive the mix",
+ "stations": {
+  "01": {
+   "title": "Out of Life",
+   "dur": 122.9,
+   "iterations": [
+    {
+     "iter": 1,
+     "word_recovery": 0.975,
+     "words_lost": [
+      "it",
+      "the",
+      "maze",
+      "quicksands",
+      "fields"
+     ],
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "word_recovery": 0.975,
+    "words_lost": [
+     "it",
+     "the",
+     "maze",
+     "quicksands",
+     "fields"
+    ],
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "02": {
+   "title": "Flashing Lights",
+   "dur": 116.1,
+   "iterations": [
+    {
+     "iter": 1,
+     "word_recovery": 0.947,
+     "words_lost": [
+      "inward",
+      "and",
+      "winding",
+      "of",
+      "parents",
+      "wouldn't",
+      "with",
+      "curtains",
+      "old"
+     ],
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "word_recovery": 0.947,
+    "words_lost": [
+     "inward",
+     "and",
+     "winding",
+     "of",
+     "parents",
+     "wouldn't",
+     "with",
+     "curtains",
+     "old"
+    ],
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "03": {
+   "title": "How to Break off an Engagement",
+   "dur": 97.0,
+   "iterations": [
+    {
+     "iter": 1,
+     "word_recovery": 0.978,
+     "words_lost": [
+      "and",
+      "doused"
+     ],
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "word_recovery": 0.978,
+    "words_lost": [
+     "and",
+     "doused"
+    ],
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "04": {
+   "title": "Nevermore",
+   "dur": 165.5,
+   "iterations": [
+    {
+     "iter": 1,
+     "word_recovery": 0.93,
+     "words_lost": [
+      "follow",
+      "have",
+      "ashore",
+      "and",
+      "seawater's",
+      "floor",
+      "for",
+      "midlife",
+      "returned",
+      "toward",
+      "the",
+      "follow",
+      "moonlight",
+      "forward"
+     ],
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "word_recovery": 0.93,
+    "words_lost": [
+     "follow",
+     "have",
+     "ashore",
+     "and",
+     "seawater's",
+     "floor",
+     "for",
+     "midlife",
+     "returned",
+     "toward",
+     "the",
+     "follow",
+     "moonlight",
+     "forward"
+    ],
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "05": {
+   "title": "Bloodline",
+   "dur": 108.6,
+   "iterations": [
+    {
+     "iter": 1,
+     "word_recovery": 0.925,
+     "words_lost": [
+      "dream",
+      "award",
+      "or",
+      "exists",
+      "in",
+      "forsaken",
+      "lieu",
+      "of",
+      "dream",
+      "orchestra",
+      "they",
+      "plight"
+     ],
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "word_recovery": 0.925,
+    "words_lost": [
+     "dream",
+     "award",
+     "or",
+     "exists",
+     "in",
+     "forsaken",
+     "lieu",
+     "of",
+     "dream",
+     "orchestra",
+     "they",
+     "plight"
+    ],
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "06": {
+   "title": "Resurrecting Atlantis",
+   "dur": 135.0,
+   "iterations": [
+    {
+     "iter": 1,
+     "word_recovery": 0.938,
+     "words_lost": [
+      "and",
+      "ancestors",
+      "eased",
+      "yellow",
+      "brick",
+      "pack",
+      "on",
+      "pack",
+      "on",
+      "and",
+      "and",
+      "welcoming"
+     ],
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "word_recovery": 0.938,
+    "words_lost": [
+     "and",
+     "ancestors",
+     "eased",
+     "yellow",
+     "brick",
+     "pack",
+     "on",
+     "pack",
+     "on",
+     "and",
+     "and",
+     "welcoming"
+    ],
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "07": {
+   "title": "DJ Turn Me Up",
+   "dur": 133.3,
+   "iterations": [
+    {
+     "iter": 1,
+     "word_recovery": 0.941,
+     "words_lost": [
+      "dj",
+      "and",
+      "are",
+      "nourished",
+      "years",
+      "dj",
+      "boxed",
+      "pedals",
+      "with",
+      "when",
+      "called",
+      "in"
+     ],
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "word_recovery": 0.941,
+    "words_lost": [
+     "dj",
+     "and",
+     "are",
+     "nourished",
+     "years",
+     "dj",
+     "boxed",
+     "pedals",
+     "with",
+     "when",
+     "called",
+     "in"
+    ],
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "08": {
+   "title": "Newly Single",
+   "dur": 126.0,
+   "iterations": [
+    {
+     "iter": 1,
+     "word_recovery": 0.973,
+     "words_lost": [
+      "bones",
+      "hit",
+      "and",
+      "cool",
+      "only",
+      "the"
+     ],
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "word_recovery": 0.973,
+    "words_lost": [
+     "bones",
+     "hit",
+     "and",
+     "cool",
+     "only",
+     "the"
+    ],
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "09": {
+   "title": "Yet Heard",
+   "dur": 143.3,
+   "iterations": [
+    {
+     "iter": 1,
+     "word_recovery": 0.95,
+     "words_lost": [
+      "my",
+      "was",
+      "isn't",
+      "stillnessism",
+      "or",
+      "swing",
+      "in",
+      "humbled",
+      "someone",
+      "borrowed",
+      "someone",
+      "blew"
+     ],
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "word_recovery": 0.95,
+    "words_lost": [
+     "my",
+     "was",
+     "isn't",
+     "stillnessism",
+     "or",
+     "swing",
+     "in",
+     "humbled",
+     "someone",
+     "borrowed",
+     "someone",
+     "blew"
+    ],
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "10": {
+   "title": "Magic Ride",
+   "dur": 130.6,
+   "iterations": [
+    {
+     "iter": 1,
+     "word_recovery": 0.99,
+     "words_lost": [
+      "tease",
+      "subsides"
+     ],
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "word_recovery": 0.99,
+    "words_lost": [
+     "tease",
+     "subsides"
+    ],
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "11": {
+   "title": "New Day",
+   "dur": 135.8,
+   "iterations": [
+    {
+     "iter": 1,
+     "word_recovery": 0.966,
+     "words_lost": [
+      "chords",
+      "to",
+      "emit",
+      "all",
+      "sunlight",
+      "of",
+      "from"
+     ],
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "word_recovery": 0.966,
+    "words_lost": [
+     "chords",
+     "to",
+     "emit",
+     "all",
+     "sunlight",
+     "of",
+     "from"
+    ],
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "12": {
+   "title": "Reunion",
+   "dur": 99.3,
+   "iterations": [
+    {
+     "iter": 1,
+     "word_recovery": 0.962,
+     "words_lost": [
+      "there",
+      "was",
+      "years",
+      "soul",
+      "time"
+     ],
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "word_recovery": 0.962,
+    "words_lost": [
+     "there",
+     "was",
+     "years",
+     "soul",
+     "time"
+    ],
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "13": {
+   "title": "How to Win My Heart",
+   "dur": 135.2,
+   "iterations": [
+    {
+     "iter": 1,
+     "word_recovery": 0.948,
+     "words_lost": [
+      "moons",
+      "beat",
+      "clutch",
+      "can",
+      "in",
+      "thought",
+      "in",
+      "at",
+      "in",
+      "and",
+      "worth"
+     ],
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "word_recovery": 0.948,
+    "words_lost": [
+     "moons",
+     "beat",
+     "clutch",
+     "can",
+     "in",
+     "thought",
+     "in",
+     "at",
+     "in",
+     "and",
+     "worth"
+    ],
+    "passed": true,
+    "action": "accepted"
+   }
+  },
+  "14": {
+   "title": "Hot Minute",
+   "dur": 103.9,
+   "iterations": [
+    {
+     "iter": 1,
+     "word_recovery": 0.93,
+     "words_lost": [
+      "light",
+      "filled",
+      "and",
+      "learning",
+      "for",
+      "my",
+      "well",
+      "wisdom",
+      "gray",
+      "minute"
+     ],
+     "passed": true,
+     "action": "accepted"
+    }
+   ],
+   "final": {
+    "iter": 1,
+    "word_recovery": 0.93,
+    "words_lost": [
+     "light",
+     "filled",
+     "and",
+     "learning",
+     "for",
+     "my",
+     "well",
+     "wisdom",
+     "gray",
+     "minute"
+    ],
+    "passed": true,
+    "action": "accepted"
+   }
+  }
+ }
+}
