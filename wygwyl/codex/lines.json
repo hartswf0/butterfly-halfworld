@@ -46,7 +46,7 @@
       "poet_dist": 7.9,
       "mouth": "another mouth"
      },
-     "heard": "I look for a way out through the hallways, within the tunnels, and fire escapes.",
+     "heard": "I look for a way out through the hallways,  within the tunnels, and fire escapes.",
      "recovery": 0.92,
      "fit": true
     },
@@ -109,8 +109,8 @@
       "poet_dist": 7.8,
       "mouth": "another mouth"
      },
-     "heard": "and hidden in the overnourished forests of escapism",
-     "recovery": 0.5,
+     "heard": "of the make-believe haven and hidden in the overnourished forests of escapism that calls  for you.",
+     "recovery": 0.86,
      "fit": true
     },
     {
@@ -151,7 +151,7 @@
       "poet_dist": 7.8,
       "mouth": "another mouth"
      },
-     "heard": "starting anew, to rediscover when love was real. I failed at protecting you from your own vices.",
+     "heard": "starting anew, to rediscover when love was real.  I failed at protecting you from your own vices.",
      "recovery": 1.0,
      "fit": true
     },
@@ -214,8 +214,8 @@
       "poet_dist": 7.9,
       "mouth": "another mouth"
      },
-     "heard": "I'm elevating our imminent doubts, fully awakening to our darkest night.",
-     "recovery": 0.58,
+     "heard": "style of heading on imminent doubts,  fully awakening to our darkest night.",
+     "recovery": 0.67,
      "fit": true
     },
     {
@@ -256,7 +256,7 @@
       "poet_dist": 17.74,
       "mouth": "another mouth"
      },
-     "heard": "In photographs and film and fiction that leave me",
+     "heard": "in photographs and film and fiction that leave me",
      "recovery": 0.78,
      "fit": true
     },
@@ -277,7 +277,7 @@
       "poet_dist": 17.74,
       "mouth": "another mouth"
      },
-     "heard": "with your back faced against me you offer me a new pursuit of happiness",
+     "heard": "With your back faced against me, you offer me a new pursuit of happiness.",
      "recovery": 0.87,
      "fit": true
     },
@@ -391,7 +391,7 @@
       "poet_dist": 10.65,
       "mouth": "another mouth"
      },
-     "heard": "seething and simmering in a solitude of crowds and smiles",
+     "heard": "Seething and simmering in a solitude of crowds and smiles.",
      "recovery": 1.0,
      "fit": true
     },
@@ -475,7 +475,7 @@
       "poet_dist": 10.65,
       "mouth": "another mouth"
      },
-     "heard": "After a day of life dilated at the sun, as long and as wise as possible.",
+     "heard": "After a day of life dilated at the sun, as long and as wise as possible,",
      "recovery": 0.88,
      "fit": true
     },
@@ -538,8 +538,8 @@
       "poet_dist": 10.65,
       "mouth": "another mouth"
      },
-     "heard": "It was the type of warm and heavy breeze in winter where",
-     "recovery": 1.0,
+     "heard": "was the type of warm and heavy breeze in winter where",
+     "recovery": 0.9,
      "fit": true
     },
     {
@@ -559,7 +559,7 @@
       "poet_dist": 10.53,
       "mouth": "another mouth"
      },
-     "heard": "Where a child is left home alone with curtains pulled.",
+     "heard": "where a child is left home alone with curtains pulled.",
      "recovery": 1.0,
      "fit": true
     },
@@ -652,8 +652,8 @@
       "poet_dist": 6.72,
       "mouth": "another mouth"
      },
-     "heard": "old to forever a tambourine sounds off  an empty temple  empty choirs",
-     "recovery": 0.77,
+     "heard": "Ode to forever, a tambourine sounds off, an empty temple, empty choirs.",
+     "recovery": 0.69,
      "fit": true
     },
     {
@@ -694,8 +694,8 @@
       "poet_dist": 6.72,
       "mouth": "another mouth"
      },
-     "heard": "Spirits have left salvation, an open gift, boxes placed outside the side doors.",
-     "recovery": 0.77,
+     "heard": "spirits have left salvations in open gift boxes placed outside the side doors",
+     "recovery": 0.85,
      "fit": true
     },
     {
@@ -715,8 +715,8 @@
       "poet_dist": 9.56,
       "mouth": "another mouth"
      },
-     "heard": "thunders then rains until nothing remains owed to the storm ending what was once  love now",
-     "recovery": 0.75,
+     "heard": "It thunders, then rains until nothing remains, Ode to the storm ending, what was once love.  Now",
+     "recovery": 0.88,
      "fit": true
     },
     {
@@ -778,7 +778,7 @@
       "poet_dist": 8.14,
       "mouth": "another mouth"
      },
-     "heard": "And the tambourine shattered into pieces into pieces",
+     "heard": "and the tambourine shattered into pieces.",
      "recovery": 1.0,
      "fit": true
     }
@@ -829,7 +829,7 @@
       "poet_dist": 7.66,
       "mouth": "another mouth"
      },
-     "heard": "cover sands and debris",
+     "heard": "cover sands and debris.",
      "recovery": 1.0,
      "fit": true
     },
@@ -850,7 +850,7 @@
       "poet_dist": 7.79,
       "mouth": "another mouth"
      },
-     "heard": "The waves will calm to folded whispers and the winds will mute the trees for the right  level.",
+     "heard": "The waves will calm to folded whispers, and the winds will mute the trees for the right  level.",
      "recovery": 0.82,
      "fit": true
     },
@@ -871,7 +871,7 @@
       "poet_dist": 7.79,
       "mouth": "another mouth"
      },
-     "heard": "level of silence to find a throbbing heart left at the mid-light corner we turn toward the",
+     "heard": "level of silence to find a throbbing heart left at the mid-light corner we turned toward the",
      "recovery": 0.77,
      "fit": true
     },
@@ -892,7 +892,7 @@
       "poet_dist": 7.66,
       "mouth": "another mouth"
      },
-     "heard": "Which is shaking off every sad blue note  Life can perform to overcome and spread inspiration  And it used to be mine",
+     "heard": "Which is shaking off every sad blue note life can perform to overcome and spread inspiration and it used to be mine",
      "recovery": 0.82,
      "fit": true
     },
@@ -913,8 +913,8 @@
       "poet_dist": 7.66,
       "mouth": "another mouth"
      },
-     "heard": "I lift it with care, put it back in place and tell myself",
-     "recovery": 0.56,
+     "heard": "I lift it with care, putting it back in place, and tell myself",
+     "recovery": 0.61,
      "fit": true
     },
     {
@@ -934,7 +934,7 @@
       "poet_dist": 7.66,
       "mouth": "another mouth"
      },
-     "heard": "What if I followed this reclaimed heart to where the puzzle pieces of faith are handcrafted?",
+     "heard": "Never fall, never fall.  Never fall.  What if I followed this reclaimed heart  to where the puzzle pieces of faith are h",
      "recovery": 0.87,
      "fit": true
     },
@@ -955,8 +955,8 @@
       "poet_dist": 7.79,
       "mouth": "another mouth"
      },
-     "heard": "Scrambled and shattered as mustard seeds  Into the vast bloom that night's garden fields  The plant",
-     "recovery": 0.67,
+     "heard": "Scrambled and scattered as mustard seeds  into the vast moonlit night's garden field.  The plant-",
+     "recovery": 0.83,
      "fit": true
     },
     {
@@ -976,7 +976,7 @@
       "poet_dist": 7.72,
       "mouth": "another mouth"
      },
-     "heard": "The plants in a golden blue bloom and face toward me in anticipation",
+     "heard": "the plants in the golden blue bloom and face toward me in anticipation of the",
      "recovery": 0.92,
      "fit": true
     },
@@ -997,8 +997,8 @@
       "poet_dist": 7.72,
       "mouth": "another mouth"
      },
-     "heard": "in the weeds we fell falling into the shadows where our memories hide and mean so little  in moment of defeat as I'm cal",
-     "recovery": 0.87,
+     "heard": "the weeds repel falling into the shadows where our memories hide and mean so little  in moment of defeat as I'm called f",
+     "recovery": 0.93,
      "fit": true
     },
     {
@@ -1018,7 +1018,7 @@
       "poet_dist": 7.79,
       "mouth": "another mouth"
      },
-     "heard": "As I'm called forward, the cloud",
+     "heard": "as I'm called forward, the clap.",
      "recovery": 1.0,
      "fit": true
     },
@@ -1039,8 +1039,8 @@
       "poet_dist": 7.66,
       "mouth": "another mouth"
      },
-     "heard": "Defeat as I'm called forward the clouds meet the stars for the deepest level of darkness welcoming extra hard work to se",
-     "recovery": 1.0,
+     "heard": "defeat as I'm called forward the clouds move the stars for the deepest level of  darkness welcoming extra hard work the ",
+     "recovery": 0.93,
      "fit": true
     },
     {
@@ -1060,7 +1060,7 @@
       "poet_dist": 7.79,
       "mouth": "another mouth"
      },
-     "heard": "to search the bare ground for two hands hands at once to touch dust after dust find and sell",
+     "heard": "to search the bare ground for two hands.  Hands at once, but touch dust after dust.  Find and sell a-",
      "recovery": 0.62,
      "fit": true
     },
@@ -1081,7 +1081,7 @@
       "poet_dist": 7.79,
       "mouth": "another mouth"
      },
-     "heard": "Celebrate a new life and feel good and they too used to be mine",
+     "heard": "celebrate a new life and feel good and they too used to be mine.",
      "recovery": 0.75,
      "fit": true
     },
@@ -1102,8 +1102,8 @@
       "poet_dist": 7.66,
       "mouth": "another mouth"
      },
-     "heard": "And they too used to be mine.",
-     "recovery": 1.0,
+     "heard": "and they too used to be my",
+     "recovery": 0.86,
      "fit": true
     },
     {
@@ -1144,8 +1144,8 @@
       "poet_dist": 7.66,
       "mouth": "another mouth"
      },
-     "heard": "Nevermore I have wanted the world and lost my soul",
-     "recovery": 0.89,
+     "heard": "Never more. I have wanted the world and lost my soul",
+     "recovery": 0.78,
      "fit": true
     },
     {
@@ -1186,8 +1186,8 @@
       "poet_dist": 7.79,
       "mouth": "another mouth"
      },
-     "heard": "The dusk settled hard, rediscovered, but dusted hands remind me, but say to me in this",
-     "recovery": 0.58,
+     "heard": "the dust settled hard rediscovered but dusted hands remind me but say to me in  this",
+     "recovery": 0.67,
      "fit": true
     },
     {
@@ -1237,7 +1237,7 @@
       "poet_dist": 12.09,
       "mouth": "another mouth"
      },
-     "heard": "They tell me to ask if I can inherit the earth",
+     "heard": "They tell me to ask if I can inherit the earth, to ask if I can inherit the earth.",
      "recovery": 1.0,
      "fit": true
     },
@@ -1258,8 +1258,8 @@
       "poet_dist": 12.14,
       "mouth": "another mouth"
      },
-     "heard": "To ask if I can name my own stars, even galaxy's if I may",
-     "recovery": 0.92,
+     "heard": "to ask if I can name my own stars, even galaxies, if I may.",
+     "recovery": 1.0,
      "fit": true
     },
     {
@@ -1279,7 +1279,7 @@
       "poet_dist": 12.09,
       "mouth": "another mouth"
      },
-     "heard": "The past two was way for me",
+     "heard": "The task, too, was way for me.  Wow.",
      "recovery": 0.71,
      "fit": true
     },
@@ -1300,7 +1300,7 @@
       "poet_dist": 12.09,
       "mouth": "another mouth"
      },
-     "heard": "while coming of age in the shared rooms of  pure",
+     "heard": "while coming of age in the shared rooms of humans.",
      "recovery": 0.8,
      "fit": true
     },
@@ -1363,7 +1363,7 @@
       "poet_dist": 12.09,
       "mouth": "another mouth"
      },
-     "heard": "They tell me to ask if I can invent a new universe",
+     "heard": "They tell me to ask if I can invent a new universe.",
      "recovery": 1.0,
      "fit": true
     },
@@ -1384,8 +1384,8 @@
       "poet_dist": 12.09,
       "mouth": "another mouth"
      },
-     "heard": "To ask if God would so let me",
-     "recovery": 0.7,
+     "heard": "to ask if God would select me.",
+     "recovery": 0.6,
      "fit": true
     },
     {
@@ -1426,8 +1426,8 @@
       "poet_dist": 12.09,
       "mouth": "another mouth"
      },
-     "heard": "in uncertain times, in forsaken times.",
-     "recovery": 1.0,
+     "heard": "In uncertain times, it forsake your time.",
+     "recovery": 0.5,
      "fit": true
     },
     {
@@ -1468,7 +1468,7 @@
       "poet_dist": 12.09,
       "mouth": "another mouth"
      },
-     "heard": "Or a history too battered and bruised to travel.",
+     "heard": "or a history too battered and bruised to travel.",
      "recovery": 1.0,
      "fit": true
     },
@@ -1489,7 +1489,7 @@
       "poet_dist": 12.09,
       "mouth": "another mouth"
      },
-     "heard": "The dream was to prevail",
+     "heard": "The dream was to prevail.",
      "recovery": 0.8,
      "fit": true
     },
@@ -1510,7 +1510,7 @@
       "poet_dist": 12.09,
       "mouth": "another mouth"
      },
-     "heard": "The blood flows through my hands",
+     "heard": "The blood flows through my hands.",
      "recovery": 0.83,
      "fit": true
     },
@@ -1573,8 +1573,8 @@
       "poet_dist": 12.09,
       "mouth": "another mouth"
      },
-     "heard": "to an unanswered flight.",
-     "recovery": 0.75,
+     "heard": "to an unanswered plight.",
+     "recovery": 1.0,
      "fit": true
     }
    ]
@@ -1603,7 +1603,7 @@
       "poet_dist": 9.93,
       "mouth": "another mouth"
      },
-     "heard": "Gifted from evolution and made of marble stones",
+     "heard": "Gifted from evolution and made of marble stones.",
      "recovery": 0.62,
      "fit": true
     },
@@ -1645,7 +1645,7 @@
       "poet_dist": 9.28,
       "mouth": "another mouth"
      },
-     "heard": "in the joyful noises that the color rainbows  then give us infinite time to heal and set clouds free.",
+     "heard": "and the joyful noises that the color rainbows then give us infinite time to  heal and set clouds free.",
      "recovery": 0.8,
      "fit": true
     },
@@ -1687,7 +1687,7 @@
       "poet_dist": 9.28,
       "mouth": "another mouth"
      },
-     "heard": "A city born in unison out of the purest of fictions welcoming me",
+     "heard": "A city born in unison out of the purest of fictions welcoming me.",
      "recovery": 0.86,
      "fit": true
     }
@@ -1717,7 +1717,7 @@
       "poet_dist": 8.01,
       "mouth": "another mouth"
      },
-     "heard": "DJ'd, turn me up, please, with eyes wide shut and my chin nested at the arch of the  weight of the eye.",
+     "heard": "DJ'd, turn me up, please, with eyes wide shut and my chin nested at the arch of the weight  of the",
      "recovery": 0.89,
      "fit": true
     },
@@ -1738,8 +1738,8 @@
       "poet_dist": 8.01,
       "mouth": "another mouth"
      },
-     "heard": "of these spoken words, I have a love story to tell, of a ghost whispering unfolded delusions.",
-     "recovery": 0.91,
+     "heard": "of these spoken words, I have a love story to tell, of ghosts whispering unfolded delusions.",
+     "recovery": 1.0,
      "fit": true
     },
     {
@@ -1759,8 +1759,8 @@
       "poet_dist": 6.85,
       "mouth": "another mouth"
      },
-     "heard": "I walked a thousand lights years across the greatest divide to be heard.  So DJ...",
-     "recovery": 0.77,
+     "heard": "walked a thousand light years across the greatest divide to be heard.  So DJ...",
+     "recovery": 0.85,
      "fit": true
     },
     {
@@ -1780,7 +1780,7 @@
       "poet_dist": 7.84,
       "mouth": "another mouth"
      },
-     "heard": "one-way streets not built with u-turns or stop maybe we shouldn't signs a love",
+     "heard": "one-way streets, not built with U-turns or stop. Maybe we shouldn't signs.",
      "recovery": 0.53,
      "fit": true
     },
@@ -1822,8 +1822,8 @@
       "poet_dist": 6.85,
       "mouth": "another mouth"
      },
-     "heard": "dim at night lights, under a cloud with silver lining,",
-     "recovery": 0.53,
+     "heard": "frontal fog, or of dim at night lights, under a cloud with a silver lining, of now turned",
+     "recovery": 0.87,
      "fit": true
     },
     {
@@ -1843,7 +1843,7 @@
       "poet_dist": 6.85,
       "mouth": "another mouth"
      },
-     "heard": "turning forth to face the lights and shadows one night at a time one tear at a time",
+     "heard": "turning forth to face the lights and shadows one night at a time, one tear at a time.",
      "recovery": 0.94,
      "fit": true
     },
@@ -1864,7 +1864,7 @@
       "poet_dist": 8.01,
       "mouth": "another mouth"
      },
-     "heard": "one open mic at a time. Eyes wide shut, chin now nested high, and volume turned up, and the story...",
+     "heard": "one open mic at a time. Eyes wide shut, chin now nested high and volume turned up and the story",
      "recovery": 0.81,
      "fit": true
     }
@@ -1915,9 +1915,9 @@
       "poet_dist": 13.38,
       "mouth": "another mouth"
      },
-     "heard": "I want my soul now to imagine my body",
-     "recovery": 0.53,
-     "fit": true
+     "heard": "I want my soul now to avenge my body.",
+     "recovery": 0.47,
+     "fit": false
     },
     {
      "i": 2,
@@ -1957,8 +1957,8 @@
       "poet_dist": 11.97,
       "mouth": "another mouth"
      },
-     "heard": "Inside the walls of an escape, the few pleasures are for us.",
-     "recovery": 0.64,
+     "heard": "Inside the walls of an escape, the few pleasures offer us.",
+     "recovery": 0.71,
      "fit": true
     },
     {
@@ -1978,7 +1978,7 @@
       "poet_dist": 11.97,
       "mouth": "another mouth"
      },
-     "heard": "At the equator of a planet, much larger than my own",
+     "heard": "at the equator of a planet much larger than my own.",
      "recovery": 0.5,
      "fit": true
     },
@@ -1999,8 +1999,8 @@
       "poet_dist": 12.9,
       "mouth": "another mouth"
      },
-     "heard": "Cool me down by pouring unfiltered water out of ice bath",
-     "recovery": 0.69,
+     "heard": "cool me down by pouring unfiltered water out of ice baths",
+     "recovery": 0.62,
      "fit": true
     },
     {
@@ -2050,8 +2050,8 @@
       "poet_dist": 8.09,
       "mouth": "another mouth"
      },
-     "heard": "Excepting you'll never say nor ever feel my love was real. What is it mine? I still cannot give",
-     "recovery": 0.91,
+     "heard": "Accepting you'll never say nor ever feel my love was real. What is it mine? I still cannot give",
+     "recovery": 1.0,
      "fit": true
     },
     {
@@ -2071,7 +2071,7 @@
       "poet_dist": 9.55,
       "mouth": "another mouth"
      },
-     "heard": "What is it mine, I still cannot give We grow all together with the moon looking at us",
+     "heard": "what is it mine I still cannot give we grow all together with the moon looking  at",
      "recovery": 0.83,
      "fit": true
     },
@@ -2092,7 +2092,7 @@
       "poet_dist": 8.09,
       "mouth": "another mouth"
      },
-     "heard": "I gather my things to go before I go",
+     "heard": "I gather my things to go, before I go.",
      "recovery": 1.0,
      "fit": true
     },
@@ -2113,7 +2113,7 @@
       "poet_dist": 8.09,
       "mouth": "another mouth"
      },
-     "heard": "We look at the moon the way we used to see it and settle down the store system",
+     "heard": "We look at the moon the way we used to see it and settle down the store system.",
      "recovery": 0.86,
      "fit": true
     },
@@ -2134,7 +2134,7 @@
       "poet_dist": 8.09,
       "mouth": "another mouth"
      },
-     "heard": "I believe maybe we can have it all",
+     "heard": "together. I believe maybe we can have it all.",
      "recovery": 0.86,
      "fit": true
     },
@@ -2176,8 +2176,8 @@
       "poet_dist": 8.02,
       "mouth": "another mouth"
      },
-     "heard": "tears speaking of an abyss she's never known and we talk for years and reclose  the booms",
-     "recovery": 0.89,
+     "heard": "in tears, speaking of an abyss she's never known, and we've talked for years, and Rick  Closet booms.",
+     "recovery": 1.0,
      "fit": true
     },
     {
@@ -2218,7 +2218,7 @@
       "poet_dist": 9.55,
       "mouth": "another mouth"
      },
-     "heard": "What is it mine, I still cannot give We grow all together with the moon looking at us",
+     "heard": "what is it mine I still cannot give we grow all together with the moon looking  at",
      "recovery": 0.83,
      "fit": true
     },
@@ -2239,8 +2239,8 @@
       "poet_dist": 9.55,
       "mouth": "another mouth"
      },
-     "heard": "What is it mine, I still cannot give We grow all together with the moon looking at us",
-     "recovery": 0.9,
+     "heard": "what is it mine I still cannot give we grow all together with the moon looking  at",
+     "recovery": 0.8,
      "fit": true
     },
     {
@@ -2260,7 +2260,7 @@
       "poet_dist": 8.02,
       "mouth": "another mouth"
      },
-     "heard": "The way we used to be",
+     "heard": "the way we used to be.",
      "recovery": 1.0,
      "fit": true
     },
@@ -2302,8 +2302,8 @@
       "poet_dist": 8.02,
       "mouth": "another mouth"
      },
-     "heard": "Dancing on my own maternal years and so  She watches us gather my things to go  Before I go",
-     "recovery": 0.62,
+     "heard": "dancing on my own maternal ears and so  She watches us gather my things to go  Before I go",
+     "recovery": 0.75,
      "fit": true
     },
     {
@@ -2323,7 +2323,7 @@
       "poet_dist": 9.55,
       "mouth": "another mouth"
      },
-     "heard": "then guiding us settling down moon  the way it used to leave and my tears fall",
+     "heard": "And then guiding us settling down moon, the way it used to leave and my tears fall.",
      "recovery": 1.0,
      "fit": true
     },
@@ -2365,7 +2365,7 @@
       "poet_dist": 9.55,
       "mouth": "another mouth"
      },
-     "heard": "between the creases and wave shadows of the inner harbor which stroll father and son and",
+     "heard": "between the creases and wave shadows of the inner harbor which stroll father and son and  h-",
      "recovery": 1.0,
      "fit": true
     },
@@ -2386,7 +2386,7 @@
       "poet_dist": 8.09,
       "mouth": "another mouth"
      },
-     "heard": "We stroll, father and son and hearted and shaken",
+     "heard": "We stroll, father and son and hearted and shaken.",
      "recovery": 1.0,
      "fit": true
     },
@@ -2407,7 +2407,7 @@
       "poet_dist": 8.09,
       "mouth": "another mouth"
      },
-     "heard": "Someone borrowed and someone blew  Yet broken yet hurt",
+     "heard": "Someone borrowed and someone blew  Yet broken  Yet hurt",
      "recovery": 1.0,
      "fit": true
     },
@@ -2428,7 +2428,7 @@
       "poet_dist": 8.09,
       "mouth": "another mouth"
      },
-     "heard": "Someone borrowed and someone blew  Yet broken yet hurt",
+     "heard": "Someone borrowed and someone blew  Yet broken  Yet hurt",
      "recovery": 1.0,
      "fit": true
     }
@@ -2458,7 +2458,7 @@
       "poet_dist": 9.24,
       "mouth": "another mouth"
      },
-     "heard": "i wasn't looking for a ride but here you are blissful and oddly sensitive with the ring of",
+     "heard": "I wasn't looking for a ride, but here you are, blissful and oddly sensitive with the ring of",
      "recovery": 1.0,
      "fit": true
     },
@@ -2479,7 +2479,7 @@
       "poet_dist": 9.37,
       "mouth": "another mouth"
      },
-     "heard": "Pervi, both the dark and light worlds I've known",
+     "heard": "Hurvy, both the dark and light worlds I've known.",
      "recovery": 0.67,
      "fit": true
     },
@@ -2500,7 +2500,7 @@
       "poet_dist": 9.37,
       "mouth": "another mouth"
      },
-     "heard": "so i rub my aggressions into your steel coverings and hop on to amuse myself",
+     "heard": "So I rub my aggressions into your steel coverings and hop on to amuse myself.",
      "recovery": 1.0,
      "fit": true
     },
@@ -2521,7 +2521,7 @@
       "poet_dist": 9.37,
       "mouth": "another mouth"
      },
-     "heard": "Loneliness is having everything, with no one to tell.",
+     "heard": "Loneliness is having everything with no one to tell.",
      "recovery": 1.0,
      "fit": true
     },
@@ -2563,7 +2563,7 @@
       "poet_dist": 9.37,
       "mouth": "another mouth"
      },
-     "heard": "Wide-eyed and stone, but alive and well",
+     "heard": "Wide-eyed and stone, but alive and well.",
      "recovery": 0.62,
      "fit": true
     },
@@ -2605,8 +2605,8 @@
       "poet_dist": 9.37,
       "mouth": "another mouth"
      },
-     "heard": "...and prove, yeah, the match still exists.",
-     "recovery": 0.5,
+     "heard": "What, what, what, what, what, what, what, what, what, what, what, what, what, what,  and prove, yeah, the magic still ex",
+     "recovery": 0.62,
      "fit": true
     },
     {
@@ -2626,7 +2626,7 @@
       "poet_dist": 9.24,
       "mouth": "another mouth"
      },
-     "heard": "All preparations to live, dream in darkness I no longer desire, the moon settles in the  tea",
+     "heard": "all preparations to live dream in darkness I no longer desire the moon  settles in the tea",
      "recovery": 0.91,
      "fit": true
     },
@@ -2647,7 +2647,7 @@
       "poet_dist": 9.37,
       "mouth": "another mouth"
      },
-     "heard": "The moon settles and the tease of distant stars subsides",
+     "heard": "fire. The moon settles and the tease of distant stars subsides.",
      "recovery": 1.0,
      "fit": true
     },
@@ -2668,7 +2668,7 @@
       "poet_dist": 9.37,
       "mouth": "another mouth"
      },
-     "heard": "Now I can see a morning ahead for me.",
+     "heard": "I can see a morning ahead for me.",
      "recovery": 0.86,
      "fit": true
     },
@@ -2689,8 +2689,8 @@
       "poet_dist": 9.37,
       "mouth": "another mouth"
      },
-     "heard": "It looks like a morning I could believe it.",
-     "recovery": 0.86,
+     "heard": "It looks like a morning I could believe in.",
+     "recovery": 1.0,
      "fit": true
     },
     {
@@ -2710,8 +2710,8 @@
       "poet_dist": 9.4,
       "mouth": "another mouth"
      },
-     "heard": "A morning where loss and life aren't sold while ripe with sunlight that's deceptively  warm.",
-     "recovery": 0.77,
+     "heard": "a morning where loss and life aren't so well right with sunlight that's  deceptively warm",
+     "recovery": 0.85,
      "fit": true
     },
     {
@@ -2794,7 +2794,7 @@
       "poet_dist": 9.37,
       "mouth": "another mouth"
      },
-     "heard": "in a way you can't help but double click",
+     "heard": "Listen, Rodney, in a way you can't help but double-click.",
      "recovery": 0.89,
      "fit": true
     },
@@ -2815,8 +2815,8 @@
       "poet_dist": 9.37,
       "mouth": "another mouth"
      },
-     "heard": "improve the magic still exists",
-     "recovery": 0.83,
+     "heard": "and prove the magic still exists.",
+     "recovery": 0.67,
      "fit": true
     }
    ]
@@ -2853,7 +2853,7 @@
       "poet_dist": 7.48,
       "mouth": "another mouth"
      },
-     "heard": "Decades later, there is less time for words and more space for laughter  Hugs with no reason",
+     "heard": "Decades later, there is less time for words and more space for laughter, hugs with no reason.",
      "recovery": 0.93,
      "fit": true
     },
@@ -2874,8 +2874,8 @@
       "poet_dist": 7.48,
       "mouth": "another mouth"
      },
-     "heard": "Loud voices so our hearts can be overheard.  My mind drifts into the dark midst of our afterlife.",
-     "recovery": 0.93,
+     "heard": "Loud voices, so our hearts can be overheard.  My mind drips until the darkness of our afterlife.",
+     "recovery": 0.87,
      "fit": true
     },
     {
@@ -2895,7 +2895,7 @@
       "poet_dist": 7.48,
       "mouth": "another mouth"
      },
-     "heard": "I am grateful to every living tree in the forest for the shared ears and the shared memories.",
+     "heard": "grateful to every living tree in the forest  for the shared heirs and the shared memories.",
      "recovery": 0.67,
      "fit": true
     }
@@ -2967,7 +2967,7 @@
       "poet_dist": 9.53,
       "mouth": "another mouth"
      },
-     "heard": "I want you to really notice me with the distances we couldn't avoid our younger self",
+     "heard": "I'd want you to really notice me, with the distances we couldn't avoid, our younger  selves.",
      "recovery": 1.0,
      "fit": true
     },
@@ -2988,7 +2988,7 @@
       "poet_dist": 9.53,
       "mouth": "another mouth"
      },
-     "heard": "I want you to really notice me with the distances we couldn't avoid our younger self",
+     "heard": "I'd want you to really notice me, with the distances we couldn't avoid, our younger  selves.",
      "recovery": 1.0,
      "fit": true
     },
@@ -3009,7 +3009,7 @@
       "poet_dist": 9.62,
       "mouth": "another mouth"
      },
-     "heard": "watching and dreaming while our elders clutch their pearls where you hold their faith and breath.",
+     "heard": "watching and dreaming while our elders clutch their pearls where you hold their faith and  breath.",
      "recovery": 1.0,
      "fit": true
     },
@@ -3030,7 +3030,7 @@
       "poet_dist": 8.39,
       "mouth": "another mouth"
      },
-     "heard": "So I thought, life has burned all my love stories, all and-",
+     "heard": "So I thought, life has burned all my love stories, all an-",
      "recovery": 0.9,
      "fit": true
     },
@@ -3051,7 +3051,7 @@
       "poet_dist": 8.39,
       "mouth": "another mouth"
      },
-     "heard": "ends led to losses, victory-less seasons for a man that wanted just one win.",
+     "heard": "All ends led to losses, victory-less seasons for a man that wanted just one win.",
      "recovery": 1.0,
      "fit": true
     },
@@ -3072,7 +3072,7 @@
       "poet_dist": 9.53,
       "mouth": "another mouth"
      },
-     "heard": "I've learned to love myself more Manage loss and harvest a wizardry more brilliant  than the sky",
+     "heard": "I've learned to love myself more, manage loss and harvest a wizardry more brilliant  than the sky.",
      "recovery": 1.0,
      "fit": true
     },
@@ -3093,7 +3093,7 @@
       "poet_dist": 9.53,
       "mouth": "another mouth"
      },
-     "heard": "I've learned to love myself more Manage loss and harvest a wizardry more brilliant  than the sky",
+     "heard": "I've learned to love myself more, manage loss and harvest a wizardry more brilliant  than the sky.",
      "recovery": 1.0,
      "fit": true
     },
@@ -3114,7 +3114,7 @@
       "poet_dist": 9.53,
       "mouth": "another mouth"
      },
-     "heard": "the scarlet poppies and purple blossoms, that time and tears have disclaimed.",
+     "heard": "the scarlet poppies and purple blossoms, that time and tears have  disclaimed, yet from a dis...",
      "recovery": 0.86,
      "fit": true
     },
@@ -3135,8 +3135,8 @@
       "poet_dist": 9.53,
       "mouth": "another mouth"
      },
-     "heard": "distant window, fearful and calm. Hope tells me, you'll see.",
-     "recovery": 0.57,
+     "heard": "distant window, beautiful and calm. Hope tells me. You'll see.",
+     "recovery": 0.71,
      "fit": true
     },
     {
@@ -3177,7 +3177,7 @@
       "poet_dist": 9.53,
       "mouth": "another mouth"
      },
-     "heard": "back and letting them say hello.",
+     "heard": "back and letting them say hello all the",
      "recovery": 0.86,
      "fit": true
     },
@@ -3291,7 +3291,7 @@
       "poet_dist": 8.16,
       "mouth": "another mouth"
      },
-     "heard": "Spectrums of light-filled constellations are broken.  I escaped here for a reason,  and this would give me an answer.",
+     "heard": "Spectrums of light-filled constellations are broken.  I escaped here for a reason, and this would give me an answer.",
      "recovery": 1.0,
      "fit": true
     },
@@ -3333,7 +3333,7 @@
       "poet_dist": 8.16,
       "mouth": "another mouth"
      },
-     "heard": "Whatever has terminated this moment. Damn you",
+     "heard": "Whatever has terminated this moment, damn you.",
      "recovery": 1.0,
      "fit": true
     },
@@ -3417,7 +3417,7 @@
       "poet_dist": 8.16,
       "mouth": "another mouth"
      },
-     "heard": "And can't leave the wisdom",
+     "heard": "and can't leave the wisdom",
      "recovery": 0.5,
      "fit": true
     }
