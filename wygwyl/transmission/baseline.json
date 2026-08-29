@@ -1,0 +1,75 @@
+{
+ "note": "ceiling = whisper on the clean master; kept_of_possible = mix recovery / ceiling \u2014 1.0 is the real 100%",
+ "poems": {
+  "01": {
+   "ceiling": 0.995,
+   "mix": 0.975,
+   "kept_of_possible": 0.98
+  },
+  "02": {
+   "ceiling": 0.988,
+   "mix": 0.947,
+   "kept_of_possible": 0.958
+  },
+  "03": {
+   "ceiling": 0.978,
+   "mix": 0.978,
+   "kept_of_possible": 1.0
+  },
+  "04": {
+   "ceiling": 0.982,
+   "mix": 0.93,
+   "kept_of_possible": 0.947
+  },
+  "05": {
+   "ceiling": 0.981,
+   "mix": 0.925,
+   "kept_of_possible": 0.943
+  },
+  "06": {
+   "ceiling": 0.99,
+   "mix": 0.938,
+   "kept_of_possible": 0.948
+  },
+  "07": {
+   "ceiling": 0.961,
+   "mix": 0.941,
+   "kept_of_possible": 0.98
+  },
+  "08": {
+   "ceiling": 0.991,
+   "mix": 0.973,
+   "kept_of_possible": 0.982
+  },
+  "09": {
+   "ceiling": 0.979,
+   "mix": 0.95,
+   "kept_of_possible": 0.97
+  },
+  "10": {
+   "ceiling": 1.0,
+   "mix": 0.99,
+   "kept_of_possible": 0.99
+  },
+  "11": {
+   "ceiling": 0.981,
+   "mix": 0.966,
+   "kept_of_possible": 0.985
+  },
+  "12": {
+   "ceiling": 0.992,
+   "mix": 0.962,
+   "kept_of_possible": 0.969
+  },
+  "13": {
+   "ceiling": 0.986,
+   "mix": 0.948,
+   "kept_of_possible": 0.962
+  },
+  "14": {
+   "ceiling": 0.979,
+   "mix": 0.93,
+   "kept_of_possible": 0.95
+  }
+ }
+}

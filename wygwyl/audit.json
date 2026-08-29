@@ -1,0 +1,417 @@
+{
+ "note": "touched = referenced by at least one instrument file; the ranked untouched list is section VI of the genome",
+ "rows": [
+  {
+   "asset": "pack/audio mined segments",
+   "count": 210,
+   "used_by": [
+    "asset_audit.py",
+    "sound_mine.py"
+   ],
+   "touched": true,
+   "could_feed": ""
+  },
+  {
+   "asset": "pack/songloops elements",
+   "count": 223,
+   "used_by": [
+    "asset_audit.py",
+    "butterfly_cues.py",
+    "clapsketch_build.py",
+    "worlds_augment.py"
+   ],
+   "touched": true,
+   "could_feed": ""
+  },
+  {
+   "asset": "pack/spec spectrogram plates",
+   "count": 210,
+   "used_by": [
+    "asset_audit.py",
+    "sound_mine.py"
+   ],
+   "touched": true,
+   "could_feed": "scannable ink for the bandbank — pictures of sound that have never re-sounded"
+  },
+  {
+   "asset": "pack/famspec family plates",
+   "count": 0,
+   "used_by": [
+    "asset_audit.py",
+    "song_families.py"
+   ],
+   "touched": true,
+   "could_feed": "same — the family-level pictures"
+  },
+  {
+   "asset": "codex sung line clips",
+   "count": 157,
+   "used_by": [
+    "asset_audit.py",
+    "atlas.html",
+    "codex.html",
+    "codex_extract.py",
+    "radio-scapes.mjs",
+    "worldscore.html"
+   ],
+   "touched": true,
+   "could_feed": ""
+  },
+  {
+   "asset": "voice chops (chops.json)",
+   "count": 439,
+   "used_by": [
+    "asset_audit.py",
+    "atlas.html",
+    "butterfly_cues.py",
+    "clapsketch_build.py",
+    "sampler.html",
+    "score_engine.py",
+    "sonic_layout.py",
+    "sound_mine.py",
+    "wygwyl_chops.py"
+   ],
+   "touched": true,
+   "could_feed": ""
+  },
+  {
+   "asset": "word cuts (cuts.json)",
+   "count": 2799,
+   "used_by": [
+    "asset_audit.py",
+    "atlas.html",
+    "observatory.html",
+    "reconstitute.html",
+    "voice_cuts.py"
+   ],
+   "touched": true,
+   "could_feed": "A-grade words barely used outside reconstitute"
+  },
+  {
+   "asset": "sonic.json catalogued sounds",
+   "count": 1442,
+   "used_by": [
+    "asset_audit.py",
+    "radio-scapes.mjs",
+    "sonic_contours.py",
+    "sonic_embed.py",
+    "sonic_layout.py",
+    "sonicfield.html",
+    "worldscore.html"
+   ],
+   "touched": true,
+   "could_feed": ""
+  },
+  {
+   "asset": "readings (dry masters, mp3)",
+   "count": 14,
+   "used_by": [
+    "01b-out-of-life-blend.html",
+    "analyse-score.mjs",
+    "asset_audit.py",
+    "atlas.html",
+    "butterfly_cues.py",
+    "codex.html",
+    "codex_align.py",
+    "codex_extract.py",
+    "cool-sketch-radio.html",
+    "duet_engine.py",
+    "echo_index.py",
+    "export_voice.py",
+    "fresco.html",
+    "fresco_compile.py",
+    "genome.html",
+    "index.html",
+    "ingest.mjs",
+    "observatory.html",
+    "onecut_engine.py",
+    "poem_worlds.py",
+    "poemworlds.html",
+    "radio-scapes.html",
+    "radio-scapes.mjs",
+    "reconstitute.html",
+    "sampler.html",
+    "score_engine.py",
+    "serve.py",
+    "sketch-radio.html",
+    "sketch-radio.mjs",
+    "sketchradio.html",
+    "sketchradio.mjs",
+    "sonic_layout.py",
+    "sound_mine.py",
+    "titles.html",
+    "transmission.html",
+    "transmission.py",
+    "voice_cuts.py",
+    "voice_dedupe.py",
+    "voice_hunt.py",
+    "voice_lanes.py",
+    "voicebath.html",
+    "worldscore.html",
+    "wygwyl_build.py",
+    "wygwyl_chops.py"
+   ],
+   "touched": true,
+   "could_feed": ""
+  },
+  {
+   "asset": "radio v2 station renders",
+   "count": 14,
+   "used_by": [
+    "asset_audit.py",
+    "radio-atlantis.html",
+    "score_engine.py"
+   ],
+   "touched": true,
+   "could_feed": ""
+  },
+  {
+   "asset": "transmission stations",
+   "count": 14,
+   "used_by": [
+    "asset_audit.py",
+    "transmission.html",
+    "transmission.py"
+   ],
+   "touched": true,
+   "could_feed": ""
+  },
+  {
+   "asset": "duets / one-cut renders",
+   "count": 26,
+   "used_by": [
+    "asset_audit.py",
+    "atlas.html",
+    "codex.html",
+    "duet_engine.py",
+    "genome.html",
+    "onecut_engine.py"
+   ],
+   "touched": true,
+   "could_feed": ""
+  },
+  {
+   "asset": "demucs stems — bass+drums",
+   "count": 68,
+   "used_by": [
+    "asset_audit.py",
+    "score_engine.py"
+   ],
+   "touched": true,
+   "could_feed": ""
+  },
+  {
+   "asset": "demucs stems — VOCALS (isolated singers)",
+   "count": 34,
+   "used_by": [
+    "asset_audit.py",
+    "voice_hunt.py"
+   ],
+   "touched": true,
+   "could_feed": "the cleanest other-mouth material owned; only voice_hunt ever read them, no mix ever played one"
+  },
+  {
+   "asset": "demucs stems — OTHER (pads/texture)",
+   "count": 34,
+   "used_by": [
+    "asset_audit.py"
+   ],
+   "touched": true,
+   "could_feed": "ready-made beds in each song's own key; never used anywhere"
+  },
+  {
+   "asset": "voice variant takes (82 canonical, 410 copies)",
+   "count": 492,
+   "used_by": [
+    "asset_audit.py",
+    "atlas.html",
+    "genome.html",
+    "voice_dedupe.py",
+    "voice_hunt.py"
+   ],
+   "touched": true,
+   "could_feed": "the DRESSINGS themselves (vintage/delay/room versions) are unplayed as material — decay states already performed by the corpus"
+  },
+  {
+   "asset": "ATLANTIS_VOICE_MASTER thick descriptions",
+   "count": 14,
+   "used_by": [
+    "asset_audit.py",
+    "atlas.html",
+    "export_voice.py",
+    "figure.mjs",
+    "sampler.html",
+    "wygwyl_build.py"
+   ],
+   "touched": true,
+   "could_feed": "per-reading prose never surfaced next to any player"
+  },
+  {
+   "asset": "FIELD: image specimens (atlas textures)",
+   "count": 9644,
+   "used_by": [
+    "asset_audit.py",
+    "delta_full.py",
+    "embed.py",
+    "embed_clip.py",
+    "grammar_test.py",
+    "join_project.py",
+    "project.py",
+    "specimens.py"
+   ],
+   "touched": true,
+   "could_feed": "used only by field/joined pages — no sound instrument has ever scanned a corpus IMAGE through the bandbank"
+  },
+  {
+   "asset": "FIELD: DINO+CLIP embeddings",
+   "count": 2,
+   "used_by": [
+    "asset_audit.py",
+    "delta_full.py",
+    "embed.py",
+    "embed_clip.py",
+    "grammar_test.py",
+    "join_project.py",
+    "project.py"
+   ],
+   "touched": true,
+   "could_feed": "kinship queries (nearest footage to any moment) unused by every audio engine"
+  },
+  {
+   "asset": "FIELD: chains/spines/prompt-delta",
+   "count": 3,
+   "used_by": [
+    "asset_audit.py",
+    "delta_full.py",
+    "embed_clip.py",
+    "grammar_test.py",
+    "project.py"
+   ],
+   "touched": true,
+   "could_feed": "847 prompt spines + the two-arrows loop — the film's own genealogy, absent from all sound work"
+  },
+  {
+   "asset": "FIELD: fingerprints.npy (perceptual)",
+   "count": 1,
+   "used_by": [
+    "asset_audit.py",
+    "embed.py",
+    "project.py",
+    "specimens.py",
+    "voicebath.html"
+   ],
+   "touched": true,
+   "could_feed": "shot-level dedup/kinship for choosing WHICH image transmits"
+  },
+  {
+   "asset": "SONIC FIELD: form_dino on spectrograms",
+   "count": 1,
+   "used_by": [
+    "asset_audit.py",
+    "sonic_embed.py"
+   ],
+   "touched": true,
+   "could_feed": "the images-of-sound embedding — computed, then never consulted by any composer"
+  },
+  {
+   "asset": "SONIC FIELD: contours (c arrays)",
+   "count": 1442,
+   "used_by": [
+    "asset_audit.py",
+    "excavate.py",
+    "join_project.py",
+    "song_families.py",
+    "sonic_contours.py"
+   ],
+   "touched": true,
+   "could_feed": "used as decoration (squiggles); never as CONTROL data (envelope→automation)"
+  },
+  {
+   "asset": "MANTA video variants (audio inside)",
+   "count": 88,
+   "used_by": [
+    "asset_audit.py",
+    "codex_align.py",
+    "export_voice.py",
+    "sound_mine.py"
+   ],
+   "touched": true,
+   "could_feed": "only codex/echo probes read them; the ancient/work/dolphin mixes are unheard states of the songs"
+  },
+  {
+   "asset": "MARKOV_POET_ARCHIVE-FLY audio",
+   "count": 0,
+   "used_by": [
+    "asset_audit.py"
+   ],
+   "touched": true,
+   "could_feed": "the DECK scores CLAP-labeled in butterfly labels.json and then never played by us"
+  },
+  {
+   "asset": "unified drone (the 2025 timeline)",
+   "count": 23,
+   "used_by": [
+    "01b-out-of-life-blend.html",
+    "analyse-score.mjs",
+    "asset_audit.py",
+    "atlas.html",
+    "clap_labeler.py",
+    "duet_engine.py",
+    "export_voice.py",
+    "fresco.html",
+    "fresco_compile.py",
+    "genome.html",
+    "halfworld.mjs",
+    "onecut_engine.py",
+    "poem_worlds.py",
+    "poemworlds.html",
+    "radio-scapes.mjs",
+    "radio.mjs",
+    "radiodraw.mjs",
+    "render-film.mjs",
+    "sampler.html",
+    "score_engine.py",
+    "sketch-radio.mjs",
+    "sketchradio.mjs",
+    "sonic_layout.py",
+    "suite.html",
+    "transmission.py",
+    "wygwyl_build.py"
+   ],
+   "touched": true,
+   "could_feed": ""
+  },
+  {
+   "asset": "butterfly score themes/beds",
+   "count": 9,
+   "used_by": [
+    "asset_audit.py"
+   ],
+   "touched": true,
+   "could_feed": "the halfworld's own composed themes — never once mixed with atlantis material"
+  },
+  {
+   "asset": "butterfly foley + room tones",
+   "count": 33,
+   "used_by": [
+    "asset_audit.py"
+   ],
+   "touched": true,
+   "could_feed": "a complete code-generated foley kit; the pacing desk used atlantis hits instead"
+  },
+  {
+   "asset": "deep/ sonify+prosody engines",
+   "count": 11,
+   "used_by": [
+    "asset_audit.py",
+    "radio-scapes.mjs",
+    "radio.mjs",
+    "radiodraw.mjs",
+    "sketch-radio.mjs",
+    "sketchradio.mjs"
+   ],
+   "touched": true,
+   "could_feed": ""
+  }
+ ]
+}

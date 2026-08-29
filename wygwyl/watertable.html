@@ -1,0 +1,93 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>THE WATER TABLE</title>
+<link rel="icon" href="dot.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{--paper:#f6e7c8;--dim:#8d6a70;--hot:#f2a03c;--acc:#e0532c;--edge:#2a1220;--sea:#4dd9cc}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{background:radial-gradient(120% 90% at 50% -10%, #14303a 0%, #081217 45%, #04090b 100%);
+    color:var(--paper);font:13px/1.5 ui-monospace,"SF Mono",Menlo,monospace;
+    display:grid;grid-template-rows:auto auto 1fr auto;min-height:100%}
+  header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:14px 20px 10px;border-bottom:1px solid var(--edge)}
+  header h1{font-size:15px;letter-spacing:.34em;margin:0;font-weight:700;color:var(--sea)}
+  header small{color:var(--dim)}
+  #dialwrap{padding:10px 20px 4px}
+  #dialcv{width:100%;height:46px;display:block;cursor:crosshair;border:1px solid var(--edge);background:#04090b}
+  main{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:20px;padding:12px 20px;align-items:start}
+  @media (max-width:900px){ main{grid-template-columns:1fr} }
+  canvas#screen{width:100%;height:auto;display:block;image-rendering:pixelated;
+    border:1px solid var(--edge);background:#04090b;box-shadow:0 18px 60px -22px #000}
+  .plate{display:flex;gap:16px;align-items:baseline;flex-wrap:wrap;margin-top:10px}
+  .plate b{font-size:15px;letter-spacing:.12em}
+  .plate span{color:var(--dim)}
+  .transport{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+  button{font:inherit;letter-spacing:.14em;color:var(--paper);background:#00000055;
+    border:1px solid var(--edge);border-radius:2px;padding:7px 14px;cursor:pointer}
+  button:hover{border-color:var(--sea);color:var(--sea)}
+  #power{min-width:110px;color:var(--sea);border-color:#1a4a44}
+  #clock{color:var(--dim);font-variant-numeric:tabular-nums}
+  aside{display:flex;flex-direction:column;gap:14px}
+  .panel{border:1px solid var(--edge);padding:12px 13px;background:#00000038}
+  .panel h2{font-size:10px;letter-spacing:.30em;color:var(--dim);margin:0 0 9px;font-weight:600}
+  .meter{display:grid;grid-template-columns:56px 1fr;gap:5px 8px;font-size:11.5px}
+  .meter i{font-style:normal;color:var(--dim)}
+  .meter span{color:var(--sea);white-space:pre-wrap;letter-spacing:-.02em}
+  #mWear{color:var(--acc)} #mMouth{color:var(--hot)}
+  footer{padding:12px 20px 18px;border-top:1px solid var(--edge);color:var(--dim);max-width:82ch}
+  footer b{color:var(--paper);font-weight:400}
+</style>
+
+<header>
+  <h1>THE WATER TABLE</h1>
+  <small>one substance · one clock · it listens · it costs — the archive is changed by being heard</small>
+</header>
+
+<div id="dialwrap"><canvas id="dialcv"></canvas></div>
+
+<main>
+  <div>
+    <canvas id="screen"></canvas>
+    <div class="plate"><b id="name">—</b><span id="tag">tune the dial — it is the 24 minutes of 2025</span></div>
+    <div class="transport">
+      <button id="power">⏻ ON AIR</button>
+      <span id="clock">00:00 / 24:00</span>
+      <button id="export">⬇ LEDGERS</button>
+    </div>
+  </div>
+  <aside>
+    <div class="panel"><h2>ON AIR</h2>
+      <div class="meter">
+        <i>spring</i><span id="mSpring">—</span>
+        <i>choir</i><span id="mMouth">—</span>
+        <i>wear</i><span id="mWear">—</span>
+        <i>the ear</i><span id="mEar">—</span>
+      </div>
+    </div>
+    <div class="panel"><h2>THE LAWS</h2>
+      <div style="color:var(--dim);font-size:11px;line-height:1.8">
+        the dial is the clock — tuning moves through when ·
+        the spring is her reading, whole; erosion may wound it, no editor may ·
+        a mouth begins only into her silence, plays whole, and yields if she returns ·
+        every second on air adds wear; wear darkens and tears; the red line under each
+        span is what listening has already spent ·
+        <b style="color:var(--paper)">K</b> keep · <b style="color:var(--paper)">X</b> kill ·
+        <b style="color:var(--paper)">N</b> note
+      </div>
+    </div>
+  </aside>
+</main>
+
+<footer>
+  <b>Nothing here is a mix.</b> The drone is the 2025 timeline made audible; her readings and the codex
+  mouths are the only other substance; the picture is drawn from their live signal and scanned back into
+  sound by the bandbank — one clock, closed loop. The wear ledger persists: play a poem often enough and
+  it will not survive you unchanged. Export the ledgers and commit them; that is the archive's memory of
+  being heard. &nbsp;·&nbsp; space toggles air.
+</footer>
+
+<audio id="aSpring" preload="auto" crossorigin="anonymous"></audio>
+<audio id="aChoir" preload="auto" crossorigin="anonymous"></audio>
+<audio id="aGround" preload="auto" crossorigin="anonymous"></audio>
+<script type="module" src="watertable.mjs"></script>

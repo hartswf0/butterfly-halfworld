@@ -1,0 +1,812 @@
+{
+ "note": "the 2025 timeline — the unified drone is the master axis; a dial position is a WHEN",
+ "duration": 1440.1,
+ "drone": "drone/unified-drones-lite.mp3",
+ "spans": [
+  {
+   "num": "01",
+   "title": "Out of Life",
+   "t0": -0.0,
+   "t1": 122.99,
+   "file": "drone/unified-drones-lite.mp3",
+   "reading": "audio/01_Out of Life_mixdown_RY_250626.mp3",
+   "mouths": [
+    {
+     "file": "codex/01/line_00.mp3",
+     "text": "What we've made we don't want, what we've sold to the world,",
+     "dur": 9.69,
+     "read": [
+      0.05,
+      6.78
+     ]
+    },
+    {
+     "file": "codex/01/line_01.mp3",
+     "text": "I look for a way out through the hallways, within the drawer",
+     "dur": 9.98,
+     "read": [
+      7.83,
+      13.47
+     ]
+    },
+    {
+     "file": "codex/01/line_02.mp3",
+     "text": "on my own words, falling out of life, and find where you go ",
+     "dur": 4.81,
+     "read": [
+      13.47,
+      18.49
+     ]
+    },
+    {
+     "file": "codex/01/line_03.mp3",
+     "text": "It was the maze constructed by a tainted love, a known yet u",
+     "dur": 7.45,
+     "read": [
+      20.22,
+      26.34
+     ]
+    },
+    {
+     "file": "codex/01/line_04.mp3",
+     "text": "of the make-believe haven, and hidden in the overnourished f",
+     "dur": 6.49,
+     "read": [
+      26.34,
+      31.97
+     ]
+    },
+    {
+     "file": "codex/01/line_05.mp3",
+     "text": "At this age, I'll follow, following the full distance betwee",
+     "dur": 5.45,
+     "read": [
+      33.18,
+      39.5
+     ]
+    }
+   ]
+  },
+  {
+   "num": "02",
+   "title": "Flashing Lights",
+   "t0": 122.987042,
+   "t1": 214.107042,
+   "file": "drone/unified-drones-lite.mp3",
+   "reading": "audio/02_Flashing Lights_mixdown_RY_250626.mp3",
+   "mouths": [
+    {
+     "file": "codex/02/line_00.mp3",
+     "text": "I heard a scream for help while falling with my headlights o",
+     "dur": 6.44,
+     "read": [
+      0.0,
+      3.98
+     ]
+    },
+    {
+     "file": "codex/02/line_01.mp3",
+     "text": "It was a type of silent scream a trap lover makes to escape ",
+     "dur": 7.75,
+     "read": [
+      4.56,
+      9.36
+     ]
+    },
+    {
+     "file": "codex/02/line_02.mp3",
+     "text": "a concussion, a set of walls caving inward, seething and sim",
+     "dur": 5.25,
+     "read": [
+      10.04,
+      16.22
+     ]
+    },
+    {
+     "file": "codex/02/line_03.mp3",
+     "text": "and a solitude of crowds and smiles.",
+     "dur": 10.12,
+     "read": [
+      16.64,
+      18.76
+     ]
+    },
+    {
+     "file": "codex/02/line_04.mp3",
+     "text": "I received an emergency call while tossing and turning.",
+     "dur": 6.89,
+     "read": [
+      20.16,
+      23.22
+     ]
+    },
+    {
+     "file": "codex/02/line_05.mp3",
+     "text": "It was a type of silent call a man makes to the mirror after",
+     "dur": 5.25,
+     "read": [
+      23.48,
+      27.92
+     ]
+    }
+   ]
+  },
+  {
+   "num": "03",
+   "title": "How to Break off an Engagement",
+   "t0": 214.108,
+   "t1": 286.508,
+   "file": "drone/unified-drones-lite.mp3",
+   "reading": "audio/03_How to Break off an Engagement_mixdown_RY_250626.mp3",
+   "mouths": [
+    {
+     "file": "codex/03/line_00.mp3",
+     "text": "Old to forever, a tambourine sounds off an empty temple, emp",
+     "dur": 14.0,
+     "read": [
+      0.46,
+      13.74
+     ]
+    },
+    {
+     "file": "codex/03/line_01.mp3",
+     "text": "pews taken by cobwebs, and doused in disintegration.",
+     "dur": 10.25,
+     "read": [
+      14.94,
+      19.7
+     ]
+    },
+    {
+     "file": "codex/03/line_02.mp3",
+     "text": "Spirits have left salvations and opened gift boxes placed ou",
+     "dur": 8.35,
+     "read": [
+      21.53,
+      28.47
+     ]
+    },
+    {
+     "file": "codex/03/line_03.mp3",
+     "text": "It thunders, then it rains until nothing remains.",
+     "dur": 11.57,
+     "read": [
+      28.47,
+      34.31
+     ]
+    },
+    {
+     "file": "codex/03/line_04.mp3",
+     "text": "broken and sealed apart by lightning,",
+     "dur": 14.0,
+     "read": [
+      40.68,
+      43.66
+     ]
+    },
+    {
+     "file": "codex/03/line_05.mp3",
+     "text": "daily breads soaked and delivered rotted by rain,",
+     "dur": 12.38,
+     "read": [
+      44.52,
+      48.24
+     ]
+    }
+   ]
+  },
+  {
+   "num": "04",
+   "title": "Nevermore",
+   "t0": 286.512563,
+   "t1": 421.781771,
+   "file": "drone/unified-drones-lite.mp3",
+   "reading": "audio/04_Nevermore_mixdown_RY_250626.mp3",
+   "mouths": [
+    {
+     "file": "codex/04/line_00.mp3",
+     "text": "What if I follow this trail to where the broken pieces have ",
+     "dur": 7.41,
+     "read": [
+      0.11,
+      8.09
+     ]
+    },
+    {
+     "file": "codex/04/line_01.mp3",
+     "text": "cover sands and debris",
+     "dur": 2.25,
+     "read": [
+      8.61,
+      10.25
+     ]
+    },
+    {
+     "file": "codex/04/line_02.mp3",
+     "text": "The waves will calm to fold it whispers and the winds will m",
+     "dur": 4.89,
+     "read": [
+      14.63,
+      21.15
+     ]
+    },
+    {
+     "file": "codex/04/line_03.mp3",
+     "text": "to find a throbbing heart left at the midlife corner returne",
+     "dur": 5.37,
+     "read": [
+      21.15,
+      26.95
+     ]
+    },
+    {
+     "file": "codex/04/line_04.mp3",
+     "text": "which has shaken off every sad blue note life can perform",
+     "dur": 7.15,
+     "read": [
+      29.51,
+      33.53
+     ]
+    },
+    {
+     "file": "codex/04/line_05.mp3",
+     "text": "and it used to be mine. I'll lift it with care putting it ba",
+     "dur": 5.37,
+     "read": [
+      36.94,
+      43.14
+     ]
+    }
+   ]
+  },
+  {
+   "num": "05",
+   "title": "Bloodline",
+   "t0": 422.183771,
+   "t1": 513.213771,
+   "file": "drone/unified-drones-lite.mp3",
+   "reading": "audio/05_Bloodline_mixdown_RY_250626.mp3",
+   "mouths": [
+    {
+     "file": "codex/05/line_00.mp3",
+     "text": "They tell me to ask if I can inherit the earth,",
+     "dur": 5.81,
+     "read": [
+      0.0,
+      2.54
+     ]
+    },
+    {
+     "file": "codex/05/line_01.mp3",
+     "text": "to ask if I can name my own stars, even galaxies if I may.",
+     "dur": 5.91,
+     "read": [
+      3.6,
+      7.7
+     ]
+    },
+    {
+     "file": "codex/05/line_02.mp3",
+     "text": "The past too was waiting for me.",
+     "dur": 4.57,
+     "read": [
+      8.96,
+      10.94
+     ]
+    },
+    {
+     "file": "codex/05/line_03.mp3",
+     "text": "Coming of age in the shared rooms of human basements",
+     "dur": 4.54,
+     "read": [
+      11.57,
+      14.99
+     ]
+    },
+    {
+     "file": "codex/05/line_04.mp3",
+     "text": "as bedrooms, mattress pads where the wood beams",
+     "dur": 7.42,
+     "read": [
+      14.99,
+      18.94
+     ]
+    },
+    {
+     "file": "codex/05/line_05.mp3",
+     "text": "To dream was to prevail.",
+     "dur": 3.34,
+     "read": [
+      24.23,
+      26.19
+     ]
+    }
+   ]
+  },
+  {
+   "num": "06",
+   "title": "Resurrecting Atlantis",
+   "t0": 513.211646,
+   "t1": 623.451646,
+   "file": "drone/unified-drones-lite.mp3",
+   "reading": "audio/06_Resurrecting Atlantis_mixdown_RY_250626.mp3",
+   "mouths": [
+    {
+     "file": "codex/06/line_00.mp3",
+     "text": "The gates open with wings gifted from evolution, and made of",
+     "dur": 4.31,
+     "read": [
+      0.0,
+      5.86
+     ]
+    },
+    {
+     "file": "codex/06/line_01.mp3",
+     "text": "at night where shadows cast from narrow streets beaming with",
+     "dur": 5.02,
+     "read": [
+      68.6,
+      75.67
+     ]
+    },
+    {
+     "file": "codex/06/line_02.mp3",
+     "text": "color rainbows, and give us infinite time to heal and set cl",
+     "dur": 6.49,
+     "read": [
+      75.67,
+      84.37
+     ]
+    },
+    {
+     "file": "codex/06/line_03.mp3",
+     "text": "it could stay here forever, leaving behind crosshairs for co",
+     "dur": 2.25,
+     "read": [
+      84.37,
+      91.55
+     ]
+    },
+    {
+     "file": "codex/06/line_04.mp3",
+     "text": "serendipity. A city born in unison out of the purest of fict",
+     "dur": 5.53,
+     "read": [
+      91.55,
+      99.59
+     ]
+    }
+   ]
+  },
+  {
+   "num": "07",
+   "title": "DJ Turn Me Up",
+   "t0": 623.454208,
+   "t1": 732.134208,
+   "file": "drone/unified-drones-lite.mp3",
+   "reading": "audio/07_DJ Turn Me Up_mixdown_RY_250626.mp3",
+   "mouths": [
+    {
+     "file": "codex/07/line_00.mp3",
+     "text": "DJ turn me up please. With eyes wide shut and my chin nested",
+     "dur": 13.35,
+     "read": [
+      0.0,
+      6.96
+     ]
+    },
+    {
+     "file": "codex/07/line_01.mp3",
+     "text": "spoken words, I have a story to tell. Of ghosts whispering u",
+     "dur": 11.49,
+     "read": [
+      6.96,
+      15.77
+     ]
+    },
+    {
+     "file": "codex/07/line_02.mp3",
+     "text": "And I've walked a thousand light years across the greatest d",
+     "dur": 10.52,
+     "read": [
+      32.53,
+      40.27
+     ]
+    },
+    {
+     "file": "codex/07/line_03.mp3",
+     "text": "shared home boxed in truck on separate one-way streets not b",
+     "dur": 8.66,
+     "read": [
+      48.05,
+      55.67
+     ]
+    },
+    {
+     "file": "codex/07/line_04.mp3",
+     "text": "we love we not. Of a future gone swiftly and a past left emp",
+     "dur": 7.69,
+     "read": [
+      63.3,
+      71.29
+     ]
+    },
+    {
+     "file": "codex/07/line_05.mp3",
+     "text": "or a frontal fog or of dim night lights under a cloud with t",
+     "dur": 7.85,
+     "read": [
+      71.87,
+      79.92
+     ]
+    }
+   ]
+  },
+  {
+   "num": "08",
+   "title": "Newly Single",
+   "t0": 732.1365,
+   "t1": 833.3865,
+   "file": "drone/unified-drones-lite.mp3",
+   "reading": "audio/08_Newly Single_mixdown_RY_250626.mp3",
+   "mouths": [
+    {
+     "file": "codex/08/line_00.mp3",
+     "text": "The soul has escaped my body for the moment and left him on ",
+     "dur": 4.25,
+     "read": [
+      0.0,
+      6.12
+     ]
+    },
+    {
+     "file": "codex/08/line_01.mp3",
+     "text": "I want my soul now to imagine my body pulsing and head throb",
+     "dur": 4.31,
+     "read": [
+      12.94,
+      20.32
+     ]
+    },
+    {
+     "file": "codex/08/line_02.mp3",
+     "text": "a crowded floor of sweated perfumes and temptations. Let's w",
+     "dur": 4.25,
+     "read": [
+      20.32,
+      27.29
+     ]
+    },
+    {
+     "file": "codex/08/line_03.mp3",
+     "text": "bitter refraction inside the walls of an escape that few ple",
+     "dur": 5.37,
+     "read": [
+      34.53,
+      42.18
+     ]
+    },
+    {
+     "file": "codex/08/line_04.mp3",
+     "text": "soul in the middle of an open field at the equator of a plan",
+     "dur": 5.85,
+     "read": [
+      42.18,
+      46.86
+     ]
+    },
+    {
+     "file": "codex/08/line_05.mp3",
+     "text": "and much hotter. Cool me down by pouring unfiltered water ou",
+     "dur": 9.11,
+     "read": [
+      46.86,
+      54.66
+     ]
+    }
+   ]
+  },
+  {
+   "num": "09",
+   "title": "Yet Heard",
+   "t0": 833.385167,
+   "t1": 950.935167,
+   "file": "drone/unified-drones-lite.mp3",
+   "reading": "audio/09_Yet Heard_mixdown_RY_250626.mp3",
+   "mouths": [
+    {
+     "file": "codex/09/line_00.mp3",
+     "text": "Accepting you'll never say nor ever feel, my love was real.",
+     "dur": 6.69,
+     "read": [
+      0.0,
+      4.28
+     ]
+    },
+    {
+     "file": "codex/09/line_01.mp3",
+     "text": "What isn't mine I still cannot give.",
+     "dur": 7.34,
+     "read": [
+      5.59,
+      7.51
+     ]
+    },
+    {
+     "file": "codex/09/line_02.mp3",
+     "text": "I gather my things to go.",
+     "dur": 2.79,
+     "read": [
+      9.03,
+      10.53
+     ]
+    },
+    {
+     "file": "codex/09/line_03.mp3",
+     "text": "Before I go, we look at the moon the way we used to see it",
+     "dur": 4.7,
+     "read": [
+      11.35,
+      15.25
+     ]
+    },
+    {
+     "file": "codex/09/line_04.mp3",
+     "text": "I believe maybe we could have it all,",
+     "dur": 3.59,
+     "read": [
+      24.91,
+      27.63
+     ]
+    },
+    {
+     "file": "codex/09/line_05.mp3",
+     "text": "or swing in my humbled late nights and heartbreaks",
+     "dur": 3.49,
+     "read": [
+      27.83,
+      31.11
+     ]
+    }
+   ]
+  },
+  {
+   "num": "10",
+   "title": "Magic Ride",
+   "t0": 950.936875,
+   "t1": 1056.656875,
+   "file": "drone/unified-drones-lite.mp3",
+   "reading": "audio/10_Magic Ride_mixdown_RY_250626.mp3",
+   "mouths": [
+    {
+     "file": "codex/10/line_00.mp3",
+     "text": "I wasn't looking for a ride, but here you are, blissful and ",
+     "dur": 7.5,
+     "read": [
+      0.14,
+      6.93
+     ]
+    },
+    {
+     "file": "codex/10/line_01.mp3",
+     "text": "withering a soul purveying both the dark and the light world",
+     "dur": 7.29,
+     "read": [
+      8.04,
+      12.16
+     ]
+    },
+    {
+     "file": "codex/10/line_02.mp3",
+     "text": "So I rub my aggressions into your steel coverings and hop on",
+     "dur": 7.17,
+     "read": [
+      12.99,
+      18.83
+     ]
+    },
+    {
+     "file": "codex/10/line_03.mp3",
+     "text": "Loneliness is having everything with no one to tell,",
+     "dur": 4.57,
+     "read": [
+      20.86,
+      23.92
+     ]
+    },
+    {
+     "file": "codex/10/line_04.mp3",
+     "text": "being everywhere with no one to love and escape,",
+     "dur": 4.7,
+     "read": [
+      24.65,
+      27.79
+     ]
+    },
+    {
+     "file": "codex/10/line_05.mp3",
+     "text": "wide-eyed and stone but alive and well, wandering with no cl",
+     "dur": 4.32,
+     "read": [
+      27.79,
+      34.05
+     ]
+    }
+   ]
+  },
+  {
+   "num": "11",
+   "title": "New Day",
+   "t0": 1056.659333,
+   "t1": 1168.019333,
+   "file": "drone/unified-drones-lite.mp3",
+   "reading": "audio/11_New Day_mixdown_RY_250626.mp3",
+   "mouths": []
+  },
+  {
+   "num": "12",
+   "title": "Reunion",
+   "t0": 1168.019354,
+   "t1": 1242.999354,
+   "file": "drone/unified-drones-lite.mp3",
+   "reading": "audio/12_Reunion_mixdown_RY_250626.mp3",
+   "mouths": [
+    {
+     "file": "codex/12/line_00.mp3",
+     "text": "Decades later, there was less time for words and more space ",
+     "dur": 11.17,
+     "read": [
+      0.0,
+      7.34
+     ]
+    },
+    {
+     "file": "codex/12/line_01.mp3",
+     "text": "loud voices so our hearts can be overheard. My mind drifts i",
+     "dur": 14.0,
+     "read": [
+      8.56,
+      16.04
+     ]
+    },
+    {
+     "file": "codex/12/line_02.mp3",
+     "text": "and known journeys, and grateful to every living tree in the",
+     "dur": 5.25,
+     "read": [
+      24.51,
+      29.89
+     ]
+    }
+   ]
+  },
+  {
+   "num": "13",
+   "title": "How to Win My Heart",
+   "t0": 1243.002833,
+   "t1": 1352.982833,
+   "file": "drone/unified-drones-lite.mp3",
+   "reading": "audio/13_How to Win My Heart_mixdown_RY_250626.mp3",
+   "mouths": [
+    {
+     "file": "codex/13/line_00.mp3",
+     "text": "I want you to notice me in a corner cafe",
+     "dur": 14.0,
+     "read": [
+      0.0,
+      3.0
+     ]
+    },
+    {
+     "file": "codex/13/line_01.mp3",
+     "text": "with every pulsing beat after walking alone.",
+     "dur": 5.75,
+     "read": [
+      14.64,
+      17.96
+     ]
+    },
+    {
+     "file": "codex/13/line_02.mp3",
+     "text": "I want you to really notice me",
+     "dur": 5.52,
+     "read": [
+      19.34,
+      21.38
+     ]
+    },
+    {
+     "file": "codex/13/line_03.mp3",
+     "text": "with the distances we couldn't avoid",
+     "dur": 5.52,
+     "read": [
+      21.38,
+      23.6
+     ]
+    },
+    {
+     "file": "codex/13/line_04.mp3",
+     "text": "while our elders clutch their pearls,",
+     "dur": 5.89,
+     "read": [
+      27.26,
+      29.5
+     ]
+    },
+    {
+     "file": "codex/13/line_05.mp3",
+     "text": "So I thought, life has burned all of my love stories.",
+     "dur": 5.4,
+     "read": [
+      39.31,
+      44.03
+     ]
+    }
+   ]
+  },
+  {
+   "num": "14",
+   "title": "Hot Minute",
+   "t0": 1352.982188,
+   "t1": 1440.072188,
+   "file": "drone/unified-drones-lite.mp3",
+   "reading": "audio/14_Hot Minute_mixdown_RY_250626.mp3",
+   "mouths": [
+    {
+     "file": "codex/14/line_00.mp3",
+     "text": "Don't make me leave and go where promises, hearts,",
+     "dur": 2.97,
+     "read": [
+      0.02,
+      3.46
+     ]
+    },
+    {
+     "file": "codex/14/line_01.mp3",
+     "text": "spectrums of light-filled constellations are broken.",
+     "dur": 10.23,
+     "read": [
+      4.26,
+      7.0
+     ]
+    },
+    {
+     "file": "codex/14/line_02.mp3",
+     "text": "The way you see things felt safe and timeless.",
+     "dur": 2.25,
+     "read": [
+      19.04,
+      22.1
+     ]
+    },
+    {
+     "file": "codex/14/line_03.mp3",
+     "text": "Whatever has terminated this moment, damn you,",
+     "dur": 4.09,
+     "read": [
+      23.26,
+      26.22
+     ]
+    },
+    {
+     "file": "codex/14/line_04.mp3",
+     "text": "but let it feel love and lost as we must endure,",
+     "dur": 5.05,
+     "read": [
+      27.33,
+      31.09
+     ]
+    },
+    {
+     "file": "codex/14/line_05.mp3",
+     "text": "absent artificial escapes and machine learning strengths",
+     "dur": 2.47,
+     "read": [
+      31.89,
+      35.35
+     ]
+    }
+   ]
+  }
+ ]
+}
