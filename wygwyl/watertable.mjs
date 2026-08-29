@@ -68,8 +68,9 @@ function mouthsOf(num){
       who: (CASTBY[L.carrier] || {}).name || "AN UNNAMED MOUTH" }));
 }
 function sfxOf(num){
+  /* signals only, short only — the rhythm loops can carry her buried voice */
   const w = PWBY[num] || {};
-  return (w.sounds || []).filter(s => s.eco === "signal" || s.eco === "rhythm").slice(0, 8);
+  return (w.sounds || []).filter(s => s.eco === "signal" && (s.dur || 9) <= 5).slice(0, 8);
 }
 
 /* ---- the wear ledger: the archive, changed by being heard ---------------- */
@@ -108,6 +109,12 @@ function applyWear(v, dt){
 }
 function seek2(v, target, rate){          // wear may wound; only the station steers
   v.target = target;
+  if (target === 0){                      // VOICE PRIORITY IS ABSOLUTE: a yield to
+    v.g.gain.cancelScheduledValues(ctx.currentTime);          // zero overrides wear,
+    v.g.gain.setTargetAtTime(0, ctx.currentTime, 0.045);      // dropouts, everything
+    v.dropUntil = 0;
+    return;
+  }
   if (!ctx || ctx.currentTime > v.dropUntil)
     v.g.gain.value += (target - v.g.gain.value) * rate;
 }
@@ -138,10 +145,15 @@ function retune(hard){
     if (node) node.port.postMessage({ hz: bandTable(modeOf(sc.mode || "aeolian"),
       foldRoot(sc.root || w.drone?.base || 41.2)) });
     spring.el.src = s.reading;
+    spring.started = false; spring.overDone = false;
     const into = t - s.t0;
     spring.el.currentTime = 0;
-    if (into > 0.5) spring.el.addEventListener("loadedmetadata",
-      () => { if (into < spring.el.duration) spring.el.currentTime = into; }, { once: true });
+    spring.el.addEventListener("loadedmetadata", () => {
+      if (into >= spring.el.duration - 0.3){
+        /* tuned into the aftermath — the poem is already over; do not replay it */
+        spring.el.pause(); spring.started = true; spring.overDone = true;
+      } else if (into > 0.5) spring.el.currentTime = into;
+    }, { once: true });
     if (playing) spring.el.play().catch(()=>{});
     choir.el.pause();
     $("name").textContent = `${s.num} · ${s.title}`;
@@ -242,7 +254,9 @@ setInterval(() => {
   retune();
   const sRms = rms(spring);
   springQuiet = sRms < 0.015 ? springQuiet + dt : 0;
-  const springDone = spring.el.ended || spring.el.paused;
+  if (sRms > 0.02) spring.started = true;
+  /* done = she actually spoke and actually finished — a loading gap is not an aftermath */
+  const springDone = spring.overDone || (spring.started && spring.el.ended);
   /* NEGATIVE SPACE LAW: while she reads, no other spoken word exists.
      The choir gets the poem's aftermath — one mouth, then long air, then
      the next. Spoken words never mix with spoken words. */
