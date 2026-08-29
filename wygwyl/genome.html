@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE GENOME</title>
+<style>
+:root{--bg:#0a0c0a;--panel:#10140f;--line:#26301f;--ink:#cfe3c8;--dim:#7d8f74;--faint:#4a5a42;
+  --accent:#9ee06a;--gold:#e8c34a;--teal:#4dd9cc;--rose:#e05c4f;--viol:#c86bd9;--water:#5ba8f5}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:13.5px/1.65 "SF Mono",Menlo,monospace;
+  padding:26px 20px 80px;max-width:88ch;margin:0 auto}
+a{color:var(--teal);text-decoration:none}
+h1{font-size:17px;letter-spacing:.26em;color:var(--gold)}
+#sub{color:var(--dim);font-size:11.5px;margin:8px 0 26px;line-height:1.8;max-width:80ch}
+h2{font-size:11px;letter-spacing:.3em;color:var(--gold);margin:34px 0 10px;
+  border-bottom:1px solid var(--line);padding-bottom:6px}
+h3{font-size:12.5px;letter-spacing:.08em;color:var(--ink);margin:22px 0 4px}
+h3 small{color:var(--faint);font-weight:normal;letter-spacing:0}
+p{margin:8px 0;color:var(--ink)}
+p.dim{color:var(--dim);font-size:12px}
+table{border-collapse:collapse;width:100%;font-size:11.5px;margin:10px 0}
+th{color:var(--faint);text-align:left;font-weight:normal;letter-spacing:.14em;font-size:10px;
+  padding:4px 10px 4px 0;border-bottom:1px solid var(--line)}
+td{padding:5px 10px 5px 0;border-bottom:1px solid #1a2016;vertical-align:top;color:var(--dim)}
+td:first-child{color:var(--ink);white-space:nowrap}
+.gene{color:var(--accent)} .fail{color:var(--rose)} .assume{color:var(--gold)}
+.keep{color:var(--accent)} .mutate{color:var(--gold)} .kill{color:var(--rose)} .hold{color:var(--dim)}
+ul{margin:6px 0 10px 1.4em}
+li{margin:3px 0;color:var(--dim)}
+li b{color:var(--ink);font-weight:normal}
+li.f{color:var(--rose)} li.f b{color:var(--rose)}
+li.a{color:var(--gold)} li.a b{color:var(--gold)}
+blockquote{border-left:2px solid var(--rose);padding:2px 0 2px 12px;margin:10px 0;color:var(--dim);font-style:italic}
+.verdict{font-size:11px;letter-spacing:.16em;padding:1px 8px;border:1px solid var(--line);border-radius:3px}
+</style>
+</head>
+<body>
+<h1>THE GENOME</h1>
+<div id="sub">due diligence on the sound experiments of the dig — what each one assumes, what each one
+demonstrably fails at, and which genes survive into whatever comes next. Written after four course
+corrections in one day, each of which was itself data. No salesmanship below: the failures are stated
+with the same confidence as the wins, and the builder's own wrong assumptions are the last section,
+because they caused more waste than any bug. · <a href="atlas.html">atlas</a></div>
+
+<h2>I · THE GENES — mechanisms that recur, and their standing</h2>
+<table>
+<tr><th>gene</th><th>born in</th><th>claim</th><th>standing</th></tr>
+<tr><td class="gene">ONE CLOCK</td><td>radio.html</td><td>picture and sound from the same instant; sync is structural, not maintained</td><td class="keep">PROVEN — the only experiment the poet's ear singled out ("the most charm")</td></tr>
+<tr><td class="gene">VOICE UNTOUCHED</td><td>transmission</td><td>never cut the reading; its own pacing is the spine</td><td class="keep">PROVEN — every cutting experiment drew a correction; this one didn't</td></tr>
+<tr><td class="gene">MEASURED GATE</td><td>score_engine v1</td><td>render → measure → judge → revise until a stated gate passes</td><td class="keep">PROVEN as a method — but it only ever measures what it names (see SNR≠hearing)</td></tr>
+<tr><td class="gene">REWHISPER</td><td>transmission</td><td>the mix must be transcribable; intelligibility is measured, not assumed</td><td class="keep">PROVEN, with a ceiling: it can only certify what whisper's ear can hear at all</td></tr>
+<tr><td class="gene">SNAP TO BREATH</td><td>radio v2</td><td>the screen/world event is the trigger; the sound lands in the next silence</td><td class="keep">PROVEN twice (film cuts, world cues) — survived both pivots intact</td></tr>
+<tr><td class="gene">SIDECHAIN + MID-CARVE</td><td>poemworlds desk</td><td>duck only the band the voice lives in; bass and air keep playing</td><td class="mutate">MECHANICALLY PROVEN, MUSICALLY INSUFFICIENT — ducking is not blending; the ear still heard collision</td></tr>
+<tr><td class="gene">CUT AND PLACE</td><td>chops → ghosts → duets → one cut</td><td>slice the voice, reposition the slices</td><td class="kill">FAILED REPEATEDLY — "sounds chopped", "cutting it poorly"; whisper marks lexemes, not sounds; every slice risks a beheaded word</td></tr>
+<tr><td class="gene">ONE MOUTH AT A TIME</td><td>de-echo pass</td><td>no voice overlaps another voice</td><td class="mutate">CONTEXT-DEPENDENT — demanded for duets/one-cut, yet the doubled voice was "good" in radio; it is a dial, not a law</td></tr>
+<tr><td class="gene">STRICT REFERRAL</td><td>poemworlds</td><td>a sound may enter a world only if CLAP voted it there</td><td class="mutate">STARVES — 7 of 14 worlds had ≤1 sound; purity produced silence, then the orchestra patch diluted the purity anyway</td></tr>
+<tr><td class="gene">KIN BY NAME</td><td>worlds_augment</td><td>a poem's music is its title-sharing songs</td><td class="mutate">THIN — only 3 of 14 titles match; the other 11 run on a mood-keyword guess dressed as kinship</td></tr>
+<tr><td class="gene">DECAY AS FORM</td><td>transmission</td><td>loops disintegrate; destruction is the composition (Basinski)</td><td class="hold">UNTESTED BY EARS — passed its own gate; no human has said whether the decay moves them</td></tr>
+<tr><td class="gene">TEXT BRIDGE</td><td>joined field</td><td>CLIP and CLAP meet through shared concept prompts</td><td class="mutate">HALF-WORKS — modalities islanded until sounds were force-homed onto image centroids; the "join" is partly staged</td></tr>
+<tr><td class="gene">INTERFERENCE AS SCORE</td><td>radio-scapes</td><td>drawn waves overlap; construction/destruction is heard because it is inked</td><td class="hold">MECHANICALLY VERIFIED, AESTHETICALLY UNJUDGED — flood 0.10↔0.78 measured; nobody has said it feels like water</td></tr>
+<tr><td class="gene">SAME EAR</td><td>rewhisper</td><td>the ear that transcribed the corpus gates the mixes — consistent bias</td><td class="keep">SOUND PRINCIPLE, SHARED BLIND SPOT — whisper mishears singing, names, glossolalia; those words are invisible to every gate we own</td></tr>
+</table>
+
+<h2>II · DUE DILIGENCE — experiment by experiment</h2>
+
+<h3>1 · SONIC FIELD <small>· sonicfield.html · terrain of 1,442 sounds, hovering is hearing</small></h3>
+<ul>
+<li class="a"><b>Assumes</b> spatial neighborhood (UMAP) implies audible kinship — mostly true for CLAP, unverified for the DINO spectrogram layout.</li>
+<li class="a"><b>Assumes</b> a browser can hold 1,400 Audio elements gracefully — it can't; players leak, loops pile up under fast mouse travel.</li>
+<li class="f"><b>Fails:</b> exploration instrument only — it produces walks, not mixes; WALK AS SCORE exports collage, and collage was never once accepted as music here.</li>
+<li class="f"><b>Fails:</b> the ecology default clumps hard; the terrain reads as blobs at rest and only becomes legible in motion.</li>
+</ul>
+<p class="dim">verdict: <span class="verdict keep">KEEP</span> as a library door. Not a composition tool and stops claiming to be.</p>
+
+<h3>2 · POEM WORLDS + THE DESK <small>· poemworlds.html · layers, orchestra, sidechain, mid-carve, depth</small></h3>
+<ul>
+<li class="a"><b>Assumes</b> a world = simultaneous loops; richness = more layers. The correction "cluttered" was aimed exactly here.</li>
+<li class="a"><b>Assumes</b> ducking solves masking. It lowers collision; it does not create relation — nothing in a world listens to anything else.</li>
+<li class="a"><b>Assumes</b> strict CLAP referral defines belonging; when it starved, the orchestra was patched in by name/mood — two incompatible theories of kinship now cohabit one page.</li>
+<li class="f"><b>Fails:</b> static — every layer loops at constant identity; no arc, no memory, no decay. A world that never changes is a screensaver.</li>
+<li class="f"><b>Fails:</b> the ATL_LOOP samples can carry the poet's own buried voice — a second her under her, unlabeled.</li>
+</ul>
+<p class="dim">verdict: <span class="verdict mutate">MUTATE</span> — the desk (sidechain, carve, depth, voxBus) is the keepable organ; the "world as parallel loops" body should be retired in favor of time-structured forms.</p>
+
+<h3>3 · RADIO ATLANTIS v1→v2 <small>· score_engine.py · composed scores, measured loop, CLAP juror</small></h3>
+<ul>
+<li class="a"><b>Assumes</b> SNR during words ≈ intelligibility. Disproven by the transmission: v2 passed 13 dB gates while the ear still lost words — the gate measured energy, not understanding.</li>
+<li class="a"><b>Assumes</b> the CLAP juror's two prompts span the quality axis; margin>0.02 is one binary opinion from a model that has never heard a good film mix.</li>
+<li class="a"><b>Assumes</b> acts-at-thirds is the poem's shape. It is a default, not a reading of any poem.</li>
+<li class="f"><b>Fails:</b> the revision vocabulary is only "quieter" — every failing station converged by turning things down, which is mastering, not composing.</li>
+<li class="f"><b>Fails:</b> ghosts/foley placement consumed silences the transmission later proved were the poem's most important material.</li>
+</ul>
+<p class="dim">verdict: <span class="verdict mutate">MUTATE</span> — keep the loop skeleton and the honesty of the log; replace SNR with rewhisper as the primary gate; give REVISE verbs other than attenuation.</p>
+
+<h3>4 · VOICE CENSUS / HUNT / CODEX <small>· voices.json, voicehunt.json, codex.json — the forensic line</small></h3>
+<ul>
+<li class="a"><b>Assumes</b> MFCC+F0 separates speakers — false on mixes (census sil 0.24), serviceable on clean stems (hunt sil 0.29), never validated against ground truth by a human ear.</li>
+<li class="a"><b>Assumes</b> whisper's transcript of SUNG words is alignable text; codex coverage numbers (23–58% on some poems) are floor estimates distorted by ASR failure on melody, not by absent lines.</li>
+<li class="f"><b>Fails:</b> "100% of the words and the other voices" is not yet achieved anywhere: the codex holds 157 extracted lines of ~277 poem lines; New Day has zero carrier; the mortician and singers were found but never fully mapped line-for-line.</li>
+<li class="f"><b>Fails:</b> the poet/other-mouth voice-mark thresholds (poet&lt;3.0) were set by eye on one distribution, not calibrated.</li>
+</ul>
+<p class="dim">verdict: <span class="verdict keep">KEEP</span> the data, distrust the coverage numbers downward-biased; the missing due diligence is a human pass over the 40 farthest strangers.</p>
+
+<h3>5 · DUETS / ONE CUT <small>· the two voices woven, then spliced</small></h3>
+<ul>
+<li class="a"><b>Assumes</b> whisper segment boundaries are cuttable edges. They are lexeme boundaries; the ear heard the difference immediately.</li>
+<li class="a"><b>Assumes</b> jaccard strength = dramatic strength when choosing "strong places" — a text-overlap number standing in for feeling.</li>
+<li class="f"><b>Fails:</b> the overlap elision ("echo") was praised in one context and ordered removed in another — the experiment had no way to know which context it was in.</li>
+<li class="f"><b>Fails:</b> extracted sung clips carry bleed from adjacent song material; a "line" is really a window.</li>
+</ul>
+<p class="dim">verdict: <span class="verdict mutate">MUTATE</span> — the call-and-response idea survives; the implementation must inherit VOICE UNTOUCHED (whole takes, placement by playback, never by razor).</p>
+
+<h3>6 · THE PACING DESK <small>· butterfly-desk.html — the acknowledged wrong turn</small></h3>
+<ul>
+<li class="a"><b>Assumed</b> "the actual butterfly world" meant the feature film. It meant the WYGWYL worlds. The entire target was wrong.</li>
+<li class="f"><b>Fails</b> by scope, not mechanism — its genes (cut-list as cue sheet, snap to breath, one strip) transplanted cleanly into WORLD SCORE within the hour.</li>
+</ul>
+<p class="dim">verdict: <span class="verdict hold">HOLD</span> — a organ donor, kept in the atlas as labeled.</p>
+
+<h3>7 · WORLD SCORE <small>· worldscore.html — lines into movements, hits on the worlds' cues</small></h3>
+<ul>
+<li class="a"><b>Assumes</b> the reading can be cut per line and placed per movement — violates VOICE UNTOUCHED, re-imports the razor problem the transmission had just solved.</li>
+<li class="a"><b>Assumes</b> token overlap correctly pairs movement lines with timing segments; the observed match "welcome us. Poets who…" shows boundary smear.</li>
+<li class="f"><b>Fails:</b> her pacing is subordinated to the picture's — the exact inversion of "the audio must be first class," shipped hours before that correction arrived.</li>
+</ul>
+<p class="dim">verdict: <span class="verdict mutate">MUTATE</span> — right film, wrong hierarchy. Invert it: her whole reading as the clock, the world's movements stretched to HER (the runtime already knows how to stretch to a record — the record should be the reading).</p>
+
+<h3>8 · THE TRANSMISSION <small>· transmission.py — loops decaying, rewhisper gate</small></h3>
+<ul>
+<li class="a"><b>Assumes</b> 85% word survival is enough — the brief says 100%; and whisper's own ceiling on the clean readings was never measured, so "92–99%" has no baseline to stand against.</li>
+<li class="a"><b>Assumes</b> her voice alone constitutes the words that matter; the other mouths are entirely absent from every station.</li>
+<li class="a"><b>Assumes</b> the mono, band-tilted broadcast voicing serves the material; nobody has confirmed the aesthetic against the actual references (Basinski's decays are stereo, enormous, slow).</li>
+<li class="f"><b>Fails:</b> the loop sources (drone + elements) are the same three chairs as everywhere else — the disintegration is real, but what disintegrates is thin.</li>
+<li class="f"><b>Fails:</b> first-pass 14/14 means the gate never bit — a gate that nothing fails is not yet known to be a gate.</li>
+</ul>
+<p class="dim">verdict: <span class="verdict keep">KEEP + RAISE</span> — measure the clean-reading baseline per poem, gate at ≥ baseline (that IS "100%": lose nothing whisper could ever hear), add the other mouths, and push one station until it fails to prove the gate has teeth.</p>
+
+<h3>9 · RADIO-SCAPES <small>· the water on the bandbank</small></h3>
+<ul>
+<li class="a"><b>Assumes</b> the flood envelope (0.10 under words) IS the mix — there is no rewhisper on a live page; her intelligibility over the bank is asserted by ducking depth, never measured.</li>
+<li class="a"><b>Assumes</b> the bandbank's mode-locked resynthesis reads as "water" — the crests are in tune by construction, which may be exactly the "beyond being in tune" the brief warned against.</li>
+<li class="f"><b>Fails:</b> the visualized-sound squiggles are decorative ink at ridgeline scale — 24-point contours carry almost no figure energy; the sounds' pictures are seen but barely heard.</li>
+<li class="f"><b>Fails:</b> the other mouths queue politely at the end; the brief's ecology wants them IN the water, and the current design has no way to voice a recording through the field.</li>
+</ul>
+<p class="dim">verdict: <span class="verdict keep">KEEP AS TRUNK</span> — it carries ONE CLOCK + VOICE UNTOUCHED + measurable dynamics on the only engine the ear has endorsed. Its named failures are the next work, not reasons to fork again.</p>
+
+<h3>10 · SUPPORTING ORGANS <small>· clap-sketch, families, song observatory, joined field</small></h3>
+<ul>
+<li class="a"><b>Joined field assumes</b> a shared 24-prompt vocabulary spans two models' semantics; the modalities islanded and the fix (re-homing sounds onto image centroids) makes the join partly cosmetic. Ruled "cluttered and hard to navigate" — correct.</li>
+<li class="a"><b>CLAP-labeling assumes</b> zero-shot labels are stable identities; they are one model's guess with a margin, and every downstream mood-match (orchestras, beds, scenes) inherits that softness silently.</li>
+<li class="f"><b>Families fails</b> for sampling (structure-grade, not sample-grade — already conceded) and nothing since has re-tested the segments.</li>
+</ul>
+<p class="dim">verdict: <span class="verdict hold">HOLD</span> — data infrastructure, not instruments; stop presenting them as destinations.</p>
+
+<h2>III · THE BUILDER'S OWN ASSUMPTIONS — the expensive ones</h2>
+<ul>
+<li class="f"><b>"More layers = richer."</b> Cost: the cluttered field, the 19-layer worlds. The corpus's own films prove the opposite — eight ink levels, one accent, one thing at a time.</li>
+<li class="f"><b>"A named referent is the referent."</b> "Butterfly world" → wrong film. "Butterfly WYGWYL prompt" → wrong again until radio.html was pointed at directly. Cost: two full instruments. The fix is boring: confirm the target artifact by URL before building.</li>
+<li class="f"><b>"Metrics I can compute are the qualities that matter."</b> SNR stood in for hearing until rewhisper; jaccard stands in for strength; CLAP margin stands in for beauty. Each proxy was treated as the thing until the ear objected.</li>
+<li class="f"><b>"Approval of a mechanism transfers to its next context."</b> The doubled voice: good in radio, ordered removed in duets. Laws here are context-scoped and each new instrument must re-ask which dials it inherits.</li>
+<li class="f"><b>"Shipping is understanding."</b> Four corrections in one day says otherwise. This document exists because the genome was carried in commit messages and memory files instead of being a first-class, shared artifact.</li>
+</ul>
+
+<h2>IV · THE OPEN DEBTS — due diligence not yet done</h2>
+<ul>
+<li><b>No human listening ledger.</b> Every gate is a machine proxy (whisper, CLAP, SNR). The single most valuable missing dataset is the poet's own per-station verdicts — the volholla_notes practice, applied to our renders. Until it exists, "passed" means "passed a proxy."</li>
+<li><b>No clean-reading whisper baseline.</b> "The radio kept 94%" is unanchored; whisper on the dry master might keep 95%. Measure the ceiling, gate against it.</li>
+<li><b>No adversarial pass on any gate.</b> Nothing has ever been pushed until it failed; gates that always pass are unproven instruments.</li>
+<li><b>No line-level map of the other voices.</b> 82 takes and 11 voices exist as clusters, not as a lyric-sheet of who says which line where — which is what "keep the other voices" actually requires.</li>
+<li><b>The stems are still mostly idle.</b> 34 songs separated; only bass/drums loops used. The isolated vocals — the cleanest other-mouth material we own — have never been placed in a single mix.</li>
+</ul>
+
+<p class="dim" style="margin-top:26px">The genome's summary, honestly: the proven spine is
+<span class="gene">ONE CLOCK</span> + <span class="gene">VOICE UNTOUCHED</span> +
+<span class="gene">MEASURED GATE (rewhisper)</span> + <span class="gene">SNAP TO BREATH</span>.
+Everything that repeatedly failed shares one gene: <span class="fail">the razor</span>.
+Everything that repeatedly disappointed shares one assumption: <span class="assume">that a proxy
+could stand where an ear should be</span>.</p>
+</body>
+</html>
