@@ -2,8 +2,12 @@
 /* ============================================================================
    analyse.mjs — FULL-SPECTRUM ANALYSIS, AND A CUT SHEET.
 
-     node wygwyl/cut/analyse.mjs "path/to/QUIET COMES THROUGH THE BODY"
+     node wygwyl/cut/analyse.mjs "QUIET COMES THROUGH THE BODY"
      node wygwyl/cut/analyse.mjs one-song.mp3 --out renders/cut
+     npm run cut -- "QUIET COMES THROUGH THE BODY"
+
+   Needs ffmpeg: a system one if you have it, otherwise `npm i` fetches
+   ffmpeg-static and this finds it there. Nothing else.
 
    Point it at a folder of audio and it writes, per song:
 
@@ -67,7 +71,12 @@ const FF = (() => {
   const p = path.join(ROOT, "node_modules", "ffmpeg-static", "ffmpeg");
   return fs.existsSync(p) ? fs.realpathSync(p) : null;
 })();
-if (!FF) { console.error("no ffmpeg — cannot decode audio"); process.exit(1); }
+if (!FF) {
+  console.error("no ffmpeg. Either install it (brew install ffmpeg) or run `npm i`,\n"
+    + "which fetches ffmpeg-static — this script looks for a system ffmpeg first\n"
+    + "and falls back to node_modules/ffmpeg-static/ffmpeg.");
+  process.exit(1);
+}
 
 const AUDIO = /\.(mp3|wav|m4a|aac|flac|ogg|opus|aif|aiff|wma)$/i;
 const files = fs.statSync(target).isDirectory()

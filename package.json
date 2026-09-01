@@ -1,0 +1,15 @@
+{
+  "name": "butterfly-halfworld",
+  "private": true,
+  "description": "I REMEMBER BEING A BUTTERFLY / WYGWYL — halfworlds, radios, and the tools that measure them.",
+  "scripts": {
+    "serve": "node harness/serve.mjs",
+    "cut": "node wygwyl/cut/analyse.mjs"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.47.0"
+  }
+}
