@@ -356,6 +356,41 @@ function cutSheet(dur, T, onsets, secs, R, S) {
   return list;
 }
 
+/* ---- a compact spectrum for the cut book ----------------------------------
+   192 columns by 48 rows, log frequency, peak per cell, quantised to sixteen
+   levels and base64'd — about four kilobytes a song. The map.png is for
+   looking at; this is so the cut book can draw its own and stay one fetch. */
+function miniSpectrum(S) {
+  const W = 192, H = 48, LO = 40, HI = 10500, half = S.half;
+  const F = new Float32Array(W * H);
+  let pk = 0;
+  for (let x = 0; x < W; x++) {
+    const f0 = Math.floor(x / W * S.frames), f1 = Math.max(f0 + 1, Math.floor((x + 1) / W * S.frames));
+    for (let r = 0; r < H; r++) {
+      const hz = LO * Math.pow(HI / LO, (H - 1 - r) / (H - 1));
+      const hz2 = LO * Math.pow(HI / LO, (H - r) / (H - 1));
+      const k0 = Math.max(1, Math.round(hz * N / SR)), k1 = Math.min(half - 1, Math.max(k0, Math.round(hz2 * N / SR)));
+      let m = 0;
+      for (let f = f0; f < f1; f++) for (let k = k0; k <= k1; k++) { const v = S.mag[f * half + k]; if (v > m) m = v; }
+      F[r * W + x] = m; if (m > pk) pk = m;
+    }
+  }
+  const b = Buffer.alloc(W * H);
+  for (let i = 0; i < W * H; i++) b[i] = Math.round(Math.pow(F[i] / (pk || 1), 0.42) * 15);
+  return { w: W, h: H, lo: LO, hi: HI, data: b.toString("base64") };
+}
+
+/* ---- the energy envelope, also compact ------------------------------------ */
+function miniEnergy(R, n = 192) {
+  const e = R.energy, mx = Math.max(...e, 1e-9), out = [];
+  for (let i = 0; i < n; i++) {
+    const a = Math.floor(i / n * e.length), b = Math.max(a + 1, Math.floor((i + 1) / n * e.length));
+    let m = 0; for (let k = a; k < b; k++) if (e[k] > m) m = e[k];
+    out.push(+(m / mx).toFixed(3));
+  }
+  return out;
+}
+
 /* ---- the picture ---------------------------------------------------------- */
 const PW = 384, PH = 168;
 function mapImage(file, S, T, onsets, secs, R, cuts, dur) {
@@ -454,6 +489,7 @@ for (const file of files) {
     rest_seconds: +R.rests.reduce((a, c) => a + c.dur, 0).toFixed(2),
     cuts: cuts.map(c => ({ t: +c.t.toFixed(3), type: c.type, mask: c.mask, kill: c.kill, tail: !!c.tail, why: c.why })),
     free_cuts: free.length,
+    spectrum: miniSpectrum(S), envelope: miniEnergy(R),
   };
   fs.writeFileSync(path.join(OUT, base(file) + ".analysis.json"), JSON.stringify(A, null, 1));
   fs.writeFileSync(path.join(OUT, base(file) + ".cuts.tsv"),

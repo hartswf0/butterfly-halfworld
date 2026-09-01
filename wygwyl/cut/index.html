@@ -1,0 +1,98 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>THE CUT BOOK — where the doors are</title>
+<link rel="icon" href="../dot.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{ --bg:#0b0410; --paper:#f6e7c8; --dim:#8d6a70; --hot:#f2a03c; --acc:#e0532c;
+         --edge:#2a1220; --good:#7fd67f }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%}
+  body{background:radial-gradient(120% 90% at 50% -10%,#3a1430 0%,#1b0817 45%,#0b0410 100%);
+       color:var(--paper);font:12.5px/1.55 ui-monospace,"SF Mono",Menlo,monospace}
+  header{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;padding:12px 18px 9px;border-bottom:1px solid var(--edge)}
+  header h1{margin:0;font-size:14px;letter-spacing:.30em;color:var(--hot)}
+  header small{color:var(--dim)}
+  main{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;padding:14px 18px}
+  @media(max-width:1040px){main{grid-template-columns:1fr}}
+  .col{display:flex;flex-direction:column;gap:10px;min-width:0}
+  canvas{width:100%;height:auto;display:block;image-rendering:pixelated;cursor:crosshair;
+         border:1px solid var(--edge);background:#0b0410;box-shadow:0 16px 50px -22px #000}
+  .row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+  button,select{font:inherit;color:var(--paper);background:#00000055;border:1px solid var(--edge);
+    border-radius:2px;padding:5px 9px;letter-spacing:.06em;cursor:pointer}
+  button:hover,select:hover{border-color:var(--hot);color:var(--hot)}
+  #play{color:var(--hot);border-color:#5a2a1a;min-width:96px}
+  .panel{border:1px solid var(--edge);background:#00000038;padding:10px 11px}
+  .panel h2{margin:0 0 8px;font-size:10px;letter-spacing:.26em;color:var(--dim);font-weight:600}
+  #title{font-size:15px;letter-spacing:.06em}
+  #sub{color:var(--dim)}
+  #nums{display:grid;grid-template-columns:74px minmax(0,1fr);gap:2px 9px}
+  #nums i{font-style:normal;color:var(--dim)}
+  #nums span{color:var(--paper)}
+  #read p{margin:0 0 .6em;color:var(--dim)}
+  #read p:last-child{margin:0}
+  #read b{color:var(--paper);font-weight:400}
+  #cuts{display:flex;flex-direction:column;gap:2px;max-height:44vh;overflow:auto}
+  .cut{display:grid;grid-template-columns:78px 62px minmax(0,1fr);gap:7px;text-align:left;
+       padding:4px 6px;border:1px solid transparent;background:none}
+  .cut:hover{background:#ffffff0c}
+  .cut.on{border-color:var(--acc);background:#e0532c16}
+  .cut b{font-weight:400;color:var(--hot);font-variant-numeric:tabular-nums}
+  .cut i{font-style:normal;color:var(--paper);font-size:11px}
+  .cut u{text-decoration:none;color:var(--dim);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .empty{color:var(--dim);font-size:11.5px;padding:6px 2px}
+  #risky{color:var(--dim);font-size:11px;margin-top:7px;border-top:1px solid var(--edge);padding-top:7px}
+  footer{padding:12px 18px 22px;border-top:1px solid var(--edge);color:var(--dim);max-width:98ch}
+  footer b{color:var(--paper);font-weight:400}
+</style>
+
+<header>
+  <h1>THE CUT BOOK</h1>
+  <small>where the doors are · audition every point before you trust it</small>
+</header>
+
+<main>
+  <div class="col">
+    <canvas id="map"></canvas>
+    <div class="row">
+      <button id="play">▶ PLAY</button>
+      <select id="set"></select>
+      <select id="song"></select>
+      <select id="fps" title="frame rate for the timecodes"><option selected>24</option><option>25</option><option>30</option><option>8</option></select>
+      <button id="copy">COPY CUTS</button>
+    </div>
+    <div class="panel">
+      <h2 id="title">—</h2>
+      <div id="sub"></div>
+      <div id="read" style="margin-top:9px"></div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="panel">
+      <h2>THE NUMBERS</h2>
+      <div id="nums"></div>
+    </div>
+    <div class="panel">
+      <h2>FREE CUTS — ← → TO STEP AND AUDITION</h2>
+      <div id="cuts"></div>
+      <div id="risky"></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <b>A cut point you have not heard is a guess with a timecode.</b> Clicking one
+  auditions it: a second and a half either side, with the level dropped to
+  nothing right where the cut would land. You are not listening to the music —
+  you are listening for whether the hole shows. If it is invisible, the cut is
+  free. If the music lurches, the sheet was right to score it.
+  <br><br>
+  The map is the song: spectrum on top, energy under it, then the rests as a
+  band and the free cuts as ticks. White verticals are section boundaries — the
+  places the song already decided something changed. Click anywhere on it to
+  seek. <b>Space</b> plays, <b>← →</b> step the cuts, <b>↑ ↓</b> change song.
+</footer>
+
+<script type="module" src="book.mjs"></script>
