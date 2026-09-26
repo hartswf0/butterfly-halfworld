@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE SPINE KEY</title>
+<meta property="og:title" content="THE SPINE KEY — how every frame of Atlantis is written">
+<meta property="og:description" content="The record anatomy of the prompt-spine database: id, syntagma, cineosis function, operative ekphrasis.">
+<style>
+:root{--bg:#000;--ink:#f2ece0;--dim:#9a8fa0;--gold:#e8c34a;--blue:#6db2ff;--viol:#c86bd9;--cyan:#4dd9cc;--rose:#ff5aa0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.65 ui-monospace,"SF Mono",Menlo,monospace;max-width:72ch;margin:0 auto;padding:0 14px 60px}
+.glyphs{font-size:12px;letter-spacing:2px;padding:8px 0 2px;white-space:nowrap;overflow:hidden;color:var(--gold)}
+.glyphs b{color:var(--viol);font-weight:normal}.glyphs i{color:var(--cyan);font-style:normal}
+.ledger{display:flex;justify-content:space-between;gap:10px;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  padding:7px 2px;font-size:12.5px;flex-wrap:wrap}
+.ledger b{font-weight:normal}
+h2{color:var(--gold);font-size:12px;letter-spacing:.2em;margin:26px 0 8px}
+p{margin:10px 0;color:var(--ink)}
+p.dim{color:var(--dim);font-size:12.5px}
+.card{border:1px solid #2a2433;background:#0a0812;margin:14px 0;padding:12px 12px 14px}
+.row{display:flex;gap:10px;padding:2px 0;font-size:13px;flex-wrap:wrap}
+.row i{font-style:normal;min-width:150px}
+.k1{color:var(--gold)}.k2{color:var(--blue)}.k3{color:var(--viol)}.k4{color:var(--cyan)}.k5{color:var(--rose)}
+code{background:#141020;padding:1px 6px;border-radius:3px;font-size:12px;word-break:break-all}
+a{color:var(--cyan);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="glyphs">✦ ▸ ◎ ♪ ▮ <b>▞ ▟ ◤ ▚</b> ✦ ▸ <i>♫ ▷ ◇</i> ▮ ✦ ◎ ▸ <b>▞ ▚ ◢</b> ♪ ▮ ✦ <i>◇ ▷ ♫</i> ▸ ◎ ✦ ▮ <b>▟ ▞</b> ♪ ✦</div>
+<div class="ledger"><b>ID:KEY</b><b>THE SPINE — record anatomy</b><b>N:847</b></div>
+
+<p style="margin-top:16px">Every generated frame of <i>resurrecting atlantis</i> was written before it was seen —
+as a record in the prompt-spine database (<code>ANT/total-cinome.json</code>, 847 records, with per-poem
+siblings and <code>CAT/storyboard-sequence.json</code>). The card you see in the archive viewers is this
+record, rendered. Its key:</p>
+
+<div class="card">
+  <div class="row"><i class="k1">id</i><span><code>MR001</code> — poem code (2–4 letters) + shot number; MR = Magic Ride</span></div>
+  <div class="row"><i class="k1">poem</i><span>the poem this shot serves</span></div>
+  <div class="row"><i class="k1">timestamp</i><span>its place on the album clock — <code>19:39:00</code></span></div>
+  <div class="row"><i class="k2">content</i><span>the LINE the image sets — the words it answers to</span></div>
+  <div class="row"><i class="k3">imageType</i><span>Descriptive Image · Narrative Image · …</span></div>
+  <div class="row"><i class="k3">syntagmaType</i><span>the grammar class — <code>Descriptive Syntagma (DS)</code>, and kin</span></div>
+  <div class="row"><i class="k4">cineosisFunction</i><span>what the shot DOES — <code>Mood Environment Stabilizer</code>…</span></div>
+  <div class="row"><i class="k5">operativeEkphrasis</i><span>the prompt itself — the sentence that made the picture</span></div>
+  <div class="row"><i class="k1">image_path</i><span>where the frame landed (per-poem dirs, e.g. <code>TIGER/MR/</code>)</span></div>
+</div>
+
+<h2>THE FILENAME IS THE KEY, SERIALIZED</h2>
+<p><code>MR001__DS__Mood_Environment_Stabilizer__Title_arcs__&lt;uuid&gt;_0.png</code></p>
+<p class="dim">id __ syntagma abbreviation __ cineosis function __ ekphrasis stub __ generation uuid.
+Every artifact carries its own provenance in its name — which is how the dig could prove the grammar
+was really steering (linear probes recover the class from the image alone at ~45% against a 26% null).</p>
+
+<h2>WHERE NEW RECORDS ARE WRITTEN</h2>
+<p class="dim">The spine databases are corpus-side (not published — they carry local paths). New records
+of this kind belong beside them, in the same schema, so the excavators keep working:
+<code>total-cinome.json</code> for the album, per-poem json for a single poem's run.
+The published twins of this grammar live here as <a href="atlas.html">the atlas</a>'s data ledgers.</p>
+</body>
+</html>

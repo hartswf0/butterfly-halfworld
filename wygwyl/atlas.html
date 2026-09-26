@@ -5,101 +5,133 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WYGWYL ATLAS</title>
 <link rel="icon" href="dot.svg">
+<meta property="og:title" content="WYGWYL · ATLAS — resurrecting atlantis">
+<meta property="og:description" content="Fourteen poems, fourteen halfworlds, the voice, the instruments, the ledgers — everything in one place.">
 <style>
-:root{--bg:#0a0c0a;--panel:#10140f;--line:#26301f;--ink:#cfe3c8;--dim:#7d8f74;
-  --faint:#4a5a42;--accent:#9ee06a;--gold:#e8c34a;--teal:#4dd9cc;--water:#5ba8f5}
+:root{--bg:#000;--card:#0a0812;--edge:#2a2433;--ink:#f2ece0;--dim:#9a8fa0;--faint:#5e5566;
+  --gold:#e8c34a;--blue:#6db2ff;--viol:#c86bd9;--cyan:#4dd9cc;--rose:#ff5aa0;--green:#9ee06a}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font:14px/1.6 "SF Mono",Menlo,monospace;padding:26px 20px 60px;max-width:760px;margin:0 auto}
-a{color:var(--teal);text-decoration:none}
-a:hover{color:var(--accent)}
-h1{font-size:17px;letter-spacing:.24em;color:var(--accent)}
-#sub{color:var(--dim);font-size:11.5px;margin:8px 0 26px}
-h2{font-size:11px;letter-spacing:.28em;color:var(--gold);margin:26px 0 8px;border-bottom:1px solid var(--line);padding-bottom:5px}
-ul{list-style:none}
-li{padding:4px 0;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
-li a{min-width:150px;color:var(--ink)}
-li a:hover{color:var(--accent)}
-li span{color:var(--dim);font-size:11.5px}
-li.data a{color:var(--water);font-size:12.5px;min-width:190px}
-footer{margin-top:34px;color:var(--faint);font-size:10.5px;line-height:1.8}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:14px/1.6 ui-monospace,"SF Mono",Menlo,monospace;
+  max-width:74ch;margin:0 auto;padding:0 12px 70px}
+.glyphs{font-size:12px;letter-spacing:2px;padding:8px 0 2px;white-space:nowrap;overflow:hidden;color:var(--gold)}
+.glyphs b{color:var(--viol);font-weight:normal}.glyphs i{color:var(--cyan);font-style:normal}
+.glyphs u{color:var(--rose);text-decoration:none}
+.ledger{display:flex;justify-content:space-between;gap:8px 14px;border-top:2px solid var(--ink);
+  border-bottom:2px solid var(--ink);padding:8px 2px;font-size:12px;flex-wrap:wrap;align-items:baseline}
+.ledger b{font-weight:normal;letter-spacing:.06em}
+.ledger .hot{color:var(--gold)}
+#share{background:none;border:1px solid var(--edge);color:var(--cyan);font:inherit;font-size:11px;
+  padding:3px 12px;border-radius:3px;cursor:pointer;letter-spacing:.1em}
+#share:active{background:var(--cyan);color:#000}
+.sec{margin-top:26px}
+.sec h2{display:flex;gap:10px;align-items:baseline;font-size:12px;letter-spacing:.22em;
+  color:var(--gold);border-bottom:1px solid var(--edge);padding-bottom:6px}
+.sec h2 small{color:var(--faint);letter-spacing:.04em;font-weight:normal;font-size:10.5px}
+a.card{display:block;background:var(--card);border:1px solid var(--edge);border-left:3px solid var(--edge);
+  margin:8px 0;padding:10px 12px;color:var(--ink);text-decoration:none}
+a.card:active{background:#151022}
+.w a.card{border-left-color:var(--blue)} .v a.card{border-left-color:var(--gold)}
+.c a.card{border-left-color:var(--viol)} .g a.card{border-left-color:var(--rose)}
+.d a.card{border-left-color:var(--cyan);padding:7px 12px}
+.id{color:var(--faint);font-size:10.5px;letter-spacing:.14em}
+.nm{font-size:14.5px;letter-spacing:.04em;margin:1px 0 2px}
+.w .nm{color:var(--blue)} .v .nm{color:var(--gold)} .c .nm{color:var(--viol)}
+.g .nm{color:var(--rose)} .d .nm{color:var(--cyan);font-size:13px}
+.tx{color:var(--dim);font-size:12px;line-height:1.55}
+footer{margin-top:36px;color:var(--faint);font-size:11px;line-height:1.8;border-top:1px solid var(--edge);padding-top:12px}
+footer b{color:var(--dim);font-weight:normal}
 </style>
 </head>
 <body>
-<h1>WYGWYL · ATLAS</h1>
-<div id="sub">everything in one place — the films, the voice, the instruments, the data they share ·
-<a href="./">← fourteen halfworlds</a></div>
+<div class="glyphs">✦ ▸ ◎ ♪ ▮ <b>▞ ▟ ◤ ▚</b> ✦ ▸ <i>♫ ▷ ◇</i> ▮ ✦ ◎ ▸ <u>▙ ◢ ▚</u> ♪ ▮ ✦ <i>◇ ▷ ♫</i> ▸ ◎ ✦ ▮ <b>▟ ▞</b> ♪ ✦ ▸ ◎ <u>▚ ◤</u> ▮ ✦</div>
+<div class="ledger">
+  <b>ID:<span class="hot">WYGWYL</span></b>
+  <b>ATLAS: resurrecting atlantis</b>
+  <b id="count">ENTRIES: (—)</b>
+  <button id="share">⇪ SEND</button>
+</div>
 
-<h2>WATCH</h2>
-<ul>
-<li><a href="./">FOURTEEN HALFWORLDS</a><span>the films, playing themselves</span></li>
-<li><a href="suite.html">SUITE</a><span>play the whole album</span></li>
-<li><a href="radio.html">RADIO</a><span>pictures scanned into sound — nothing is a recording</span></li>
-<li><a href="sketch-radio.html">SKETCH RADIO</a><span>draw along with the poet</span></li>
-<li><a href="cool-sketch-radio.html">RADIODRAW</a><span>a live, reversible, measurable arrow</span></li>
-</ul>
+<div class="sec w"><h2>WATCH <small>· Descriptive Images — the films play themselves</small></h2>
+<a class="card" href="./"><span class="id">ID:W001 · FILMS</span><div class="nm">FOURTEEN HALFWORLDS</div><div class="tx">the films, playing themselves — every image computed, nothing recorded</div></a>
+<a class="card" href="suite.html"><span class="id">ID:W002 · ALBUM</span><div class="nm">SUITE</div><div class="tx">play the whole album on one clock</div></a>
+<a class="card" href="radio.html"><span class="id">ID:W003 · SONIFY</span><div class="nm">WYGWYL RADIO</div><div class="tx">pictures scanned into sound — nothing is a recording; the read head is what you hear</div></a>
+<a class="card" href="sketch-radio.html"><span class="id">ID:W004 · DRAW</span><div class="nm">SKETCH RADIO</div><div class="tx">draw along with the poet</div></a>
+<a class="card" href="cool-sketch-radio.html"><span class="id">ID:W005 · DRAW</span><div class="nm">RADIODRAW</div><div class="tx">a live, reversible, measurable arrow</div></a>
+</div>
 
-<h2>THE VOICE</h2>
-<ul>
-<li><a href="sampler.html">SAMPLER</a><span>fourteen readings chopped by line, phrase, word — spectrograms, drag-to-cut</span></li>
-<li><a href="observatory.html">OBSERVATORY</a><span>nine lanes, event score, the poem typeset as glyphs</span></li>
-<li><a href="reconstitute.html">RECONSTITUTE</a><span>type with the poet's 1,048 words; the voice speaks the rearrangement</span></li>
-<li><a href="voicebath.html">VOICEBATH</a><span>one recording, one poem, several listeners — the dig's timings arrive as claims</span></li>
-<li><a href="codex.html">THE CODEX</a><span>the sung album — 157 lines aligned read↔sung; the same words, other mouths, twin play</span></li>
-<li><a href="codex.html#duets">CODEX DUETS</a><span>the two voices in call-and-response — her line, then the other mouth answering, the poem's own band underneath</span></li>
-<li><a href="codex.html#duets">ONE CUT</a><span>the two voices as a single take — her reading the unbroken spine, the song carrying the strong lines, every poem exiting sung</span></li>
-</ul>
+<div class="sec v"><h2>THE VOICE <small>· the readings, and every mouth that answers</small></h2>
+<a class="card" href="sampler.html"><span class="id">ID:V001 · SAMPLE</span><div class="nm">SAMPLER</div><div class="tx">fourteen readings chopped by line, phrase, word — spectrograms, drag-to-cut</div></a>
+<a class="card" href="observatory.html"><span class="id">ID:V002 · OBSERVE</span><div class="nm">OBSERVATORY</div><div class="tx">nine lanes, event score, the poem typeset as glyphs</div></a>
+<a class="card" href="reconstitute.html"><span class="id">ID:V003 · SPEAK</span><div class="nm">RECONSTITUTE</div><div class="tx">type with the poet's 1,048 words; the voice speaks the rearrangement</div></a>
+<a class="card" href="voicebath.html"><span class="id">ID:V004 · LISTEN</span><div class="nm">VOICEBATH</div><div class="tx">one recording, one poem, several listeners — the dig's timings arrive as claims</div></a>
+<a class="card" href="codex.html"><span class="id">ID:V005 · TWIN</span><div class="nm">THE CODEX</div><div class="tx">the sung album — 157 lines aligned read↔sung; the same words, other mouths, twin play</div></a>
+<a class="card" href="codex.html#duets"><span class="id">ID:V006 · DUET</span><div class="nm">CODEX DUETS</div><div class="tx">call-and-response — her line, then the other mouth answering, the poem's own band underneath</div></a>
+<a class="card" href="codex.html#duets"><span class="id">ID:V007 · SPLICE</span><div class="nm">ONE CUT</div><div class="tx">a single take — her reading the unbroken spine, the song carrying the strong lines, every poem exiting sung</div></a>
+</div>
 
-<h2>COMPOSE</h2>
-<ul>
-<li><a href="seal-earsketch.html">ES+ SEAL</a><span>the track workshop, its library the corpus — 916 sounds</span></li>
-<li><a href="clap-sketch.html">CLAP-SKETCH</a><span>the strict workshop — only the little samples: bar-cut song elements + voice chops, CLAP-named</span></li>
-<li><a href="pack/">SOUND PACK</a><span>210 mined segments: loops, beds, hits, textures, risers</span></li>
-<li><a href="sonicfield.html">SONIC FIELD</a><span>the library as terrain — hovering is hearing; keynote · signal · rhythm · soundmark · song</span></li>
-<li><a href="families.html">SOUND FAMILIES</a><span>songs segmented where self-similarity breaks; families discovered, ekphrasis-named, basketed</span></li>
-<li><a href="cut/index.html">THE CUT BOOK</a><span>twenty-seven songs measured full-spectrum — where the doors are, cut by cut</span></li>
-<li><a href="song-observatory.html">SONG OBSERVATORY</a><span>five lanes, an event score, and the elements — bar-quantized sample candidates on each song's own grid</span></li>
-<li><a href="radio-atlantis.html">RADIO ATLANTIS</a><span>fourteen film scores from our own samples — orchestras, stems, word-triggered foley, codex ghosts; stereo, sidechained, CLAP as juror</span></li>
-<li><a href="poemworlds.html">POEM WORLDS</a><span>a soundworld per poem — referred sounds + an 8-chair orchestra from its kin songs; the desk ducks and mid-carves under the voice</span></li>
-<li><a href="watertable.html">THE WATER TABLE</a><span>the organism — one substance on the 24-minute clock; the choir listens and yields; wear persists: the archive is changed by being heard; K/X/N is the ear's ledger</span></li>
-<li><a href="radio-scapes.html">RADIO-SCAPES</a><span>the water of atlantis playing itself — interference of drawn waves IS the score; her voice whole, the flood in her silences, the other mouths after; picture and sound one clock</span></li>
-<li><a href="transmission.html">THE TRANSMISSION</a><span>the readings as broadcast radio — the whole voice untouched, disintegrating tape loops beneath, the dial drifting in her breaths; every render rewhispered until ≥85% of her words survive</span></li>
-<li><a href="worldscore.html">WORLD SCORE</a><span>the fourteen halfworlds scored live — each movement's own line spoken inside it, hits on the world's cues, sung ghosts answering, beds from the poem's orchestra</span></li>
-<li><a href="butterfly-desk.html">THE PACING DESK</a><span>the butterfly feature scored by atlantis — beds per scene, hits snapping to the next breath, whispers in the silences (the interesting wrong turn)</span></li>
-<li><a href="fresco.html">FRESCO</a><span>the bare score player — one clock, everything else is reference</span></li>
-<li><a href="RADIO-FRESCO-PLAN.md">THE PLAN</a><span>stepping stones to radio-fresco</span></li>
-</ul>
+<div class="sec c"><h2>COMPOSE <small>· Operative Ekphrasis — the instruments</small></h2>
+<a class="card" href="watertable.html"><span class="id">ID:C001 · ORGANISM</span><div class="nm">THE WATER TABLE</div><div class="tx">one substance on the 24-minute clock; the choir listens and yields; wear persists — the archive is changed by being heard</div></a>
+<a class="card" href="radio-scapes.html"><span class="id">ID:C002 · WATER</span><div class="nm">RADIO-SCAPES</div><div class="tx">interference of drawn waves IS the score; her voice whole, the flood in her silences</div></a>
+<a class="card" href="transmission.html"><span class="id">ID:C003 · BROADCAST</span><div class="nm">THE TRANSMISSION</div><div class="tx">whole readings over disintegrating tape loops; every render rewhispered until her words survive</div></a>
+<a class="card" href="radio-atlantis.html"><span class="id">ID:C004 · SCORE</span><div class="nm">RADIO ATLANTIS</div><div class="tx">fourteen film scores from our own samples — orchestras, stems, foley, codex ghosts; CLAP as juror</div></a>
+<a class="card" href="poemworlds.html"><span class="id">ID:C005 · WORLDS</span><div class="nm">POEM WORLDS</div><div class="tx">a soundworld per poem — referred sounds + an 8-chair orchestra; the desk ducks and mid-carves under the voice</div></a>
+<a class="card" href="worldscore.html"><span class="id">ID:C006 · LIVE</span><div class="nm">WORLD SCORE</div><div class="tx">the halfworlds scored live — each movement's line spoken inside it, hits on the world's own cues</div></a>
+<a class="card" href="sonicfield.html"><span class="id">ID:C007 · TERRAIN</span><div class="nm">SONIC FIELD</div><div class="tx">the library as terrain — hovering is hearing; keynote · signal · rhythm · soundmark · song</div></a>
+<a class="card" href="clap-sketch.html"><span class="id">ID:C008 · WORKSHOP</span><div class="nm">CLAP-SKETCH</div><div class="tx">the strict workshop — only the little samples: bar-cut elements + voice chops, CLAP-named</div></a>
+<a class="card" href="seal-earsketch.html"><span class="id">ID:C009 · WORKSHOP</span><div class="nm">ES+ SEAL</div><div class="tx">the track workshop, its library the corpus — 916 sounds</div></a>
+<a class="card" href="families.html"><span class="id">ID:C010 · FAMILIES</span><div class="nm">SOUND FAMILIES</div><div class="tx">songs segmented where self-similarity breaks; families discovered, ekphrasis-named</div></a>
+<a class="card" href="cut/index.html"><span class="id">ID:C011 · DOORS</span><div class="nm">THE CUT BOOK</div><div class="tx">twenty-seven songs measured full-spectrum — where the doors are, cut by cut</div></a>
+<a class="card" href="song-observatory.html"><span class="id">ID:C012 · GRID</span><div class="nm">SONG OBSERVATORY</div><div class="tx">five lanes, an event score, and the elements on each song's own grid</div></a>
+<a class="card" href="pack/"><span class="id">ID:C013 · PACK</span><div class="nm">SOUND PACK</div><div class="tx">210 mined segments: loops, beds, hits, textures, risers</div></a>
+<a class="card" href="fresco.html"><span class="id">ID:C014 · PLAYER</span><div class="nm">FRESCO</div><div class="tx">the bare score player — one clock, everything else is reference</div></a>
+<a class="card" href="butterfly-desk.html"><span class="id">ID:C015 · APOCRYPHA</span><div class="nm">THE PACING DESK</div><div class="tx">the butterfly feature scored by atlantis — the interesting wrong turn, kept</div></a>
+<a class="card" href="RADIO-FRESCO-PLAN.md"><span class="id">ID:C016 · PLAN</span><div class="nm">THE PLAN</div><div class="tx">stepping stones to radio-fresco</div></a>
+</div>
 
-<h2>DUE DILIGENCE</h2>
-<ul>
-<li><a href="genome.html">THE GENOME</a><span>every sound experiment audited — the genes, what each assumes, what each demonstrably fails at, and the builder's own expensive assumptions</span></li>
-</ul>
+<div class="sec g"><h2>DUE DILIGENCE <small>· Cineosis Function — what everything is FOR</small></h2>
+<a class="card" href="genome.html"><span class="id">ID:G001 · AUDIT</span><div class="nm">THE GENOME</div><div class="tx">every experiment audited — the genes, the assumptions, the failures, the latent design, the untouched</div></a>
+<a class="card" href="spinekey.html"><span class="id">ID:G002 · KEY</span><div class="nm">THE SPINE KEY</div><div class="tx">how every frame was written before it was seen — the record anatomy of the 847-spine prompt database</div></a>
+</div>
 
-<h2>THE DATA THEY SHARE</h2>
-<ul>
-<li class="data"><a href="samples.json">samples.json</a><span>tracks → lines → phrases, all timed</span></li>
-<li class="data"><a href="cuts.json">cuts.json</a><span>every word recut to energy valleys, graded A/B/C</span></li>
-<li class="data"><a href="chops.json">chops.json</a><span>439 power phrases from the masters</span></li>
-<li class="data"><a href="atlantis-standard.json">atlantis-standard.json</a><span>916 sounds, EarSketch schema</span></li>
-<li class="data"><a href="pack/pack.json">pack/pack.json</a><span>mined segments with feature contours</span></li>
-<li class="data"><a href="lanes/06.json">lanes/NN.json</a><span>per-reading signal lanes + prosody events</span></li>
-<li class="data"><a href="timings/06.json">timings/NN.json</a><span>word-level timestamps, 2,799 words</span></li>
-<li class="data"><a href="scores/unified-drone.fresco.json">scores/*.fresco.json</a><span>fresco-score v0.1 — the shared clock</span></li>
-<li class="data"><a href="descriptions/06.md">descriptions/NN.md</a><span>thick descriptions of the readings</span></li>
-<li class="data"><a href="voices.json">voices.json</a><span>the take census — 492 speech files → 82 unique takes, canonical each</span></li>
-<li class="data"><a href="voicehunt.json">voicehunt.json</a><span>141 clean mouths → 11 voices, ranked by distance from the poet</span></li>
-<li class="data"><a href="codex.json">codex.json</a><span>80 full-poem songs, line-aligned to the readings — 740 pairs</span></li>
-<li class="data"><a href="codex/lines.json">codex/lines.json</a><span>157 extracted sung lines, twin-timed read↔sung</span></li>
-<li class="data"><a href="duets/duets.json">duets/duets.json</a><span>13 call-and-response mixes — who answers, where</span></li>
-<li class="data"><a href="onecut/onecut.json">onecut/onecut.json</a><span>13 single takes — which lines the song carries</span></li>
-<li class="data"><a href="cast.json">cast.json</a><span>the 80 named mouths — register, habitat, distance from the poet</span></li>
-<li class="data"><a href="clock.json">clock.json</a><span>the corpus clock — 14 spans, 24 minutes, the drone as master axis</span></li>
-<li class="data"><a href="audit.json">audit.json</a><span>the deeper audit — 29 asset classes, analysed vs played</span></li>
-<li class="data"><a href="transmission/baseline.json">baseline.json</a><span>whisper's ceiling per poem — the anchor of "keep 100%"</span></li>
-</ul>
+<div class="sec d"><h2>THE DATA <small>· the ledgers every instrument shares</small></h2>
+<a class="card" href="clock.json"><span class="id">ID:D001</span><div class="nm">clock.json</div><div class="tx">the corpus clock — 14 spans, 24 minutes, the drone as master axis</div></a>
+<a class="card" href="cast.json"><span class="id">ID:D002</span><div class="nm">cast.json</div><div class="tx">the 80 named mouths — register, habitat, distance from the poet</div></a>
+<a class="card" href="voices.json"><span class="id">ID:D003</span><div class="nm">voices.json</div><div class="tx">the take census — 492 speech files → 82 unique takes</div></a>
+<a class="card" href="voicehunt.json"><span class="id">ID:D004</span><div class="nm">voicehunt.json</div><div class="tx">141 clean mouths → 11 voices, ranked by distance from the poet</div></a>
+<a class="card" href="codex.json"><span class="id">ID:D005</span><div class="nm">codex.json</div><div class="tx">80 full-poem songs line-aligned to the readings — 740 pairs</div></a>
+<a class="card" href="codex/lines.json"><span class="id">ID:D006</span><div class="nm">codex/lines.json</div><div class="tx">157 sung lines, twin-timed, rewhispered — fit and unfit on record</div></a>
+<a class="card" href="audit.json"><span class="id">ID:D007</span><div class="nm">audit.json</div><div class="tx">the deeper audit — 29 asset classes, analysed vs played</div></a>
+<a class="card" href="transmission/baseline.json"><span class="id">ID:D008</span><div class="nm">baseline.json</div><div class="tx">whisper's ceiling per poem — the anchor of "keep 100%"</div></a>
+<a class="card" href="timings/06.json"><span class="id">ID:D009</span><div class="nm">timings/NN.json</div><div class="tx">word-level timestamps, 2,799 words</div></a>
+<a class="card" href="lanes/06.json"><span class="id">ID:D010</span><div class="nm">lanes/NN.json</div><div class="tx">per-reading signal lanes + prosody events</div></a>
+<a class="card" href="samples.json"><span class="id">ID:D011</span><div class="nm">samples.json</div><div class="tx">tracks → lines → phrases, all timed</div></a>
+<a class="card" href="cuts.json"><span class="id">ID:D012</span><div class="nm">cuts.json</div><div class="tx">every word recut to energy valleys, graded A/B/C</div></a>
+<a class="card" href="chops.json"><span class="id">ID:D013</span><div class="nm">chops.json</div><div class="tx">439 power phrases from the masters</div></a>
+<a class="card" href="atlantis-standard.json"><span class="id">ID:D014</span><div class="nm">atlantis-standard.json</div><div class="tx">916 sounds, EarSketch schema</div></a>
+<a class="card" href="pack/pack.json"><span class="id">ID:D015</span><div class="nm">pack/pack.json</div><div class="tx">mined segments with feature contours</div></a>
+<a class="card" href="duets/duets.json"><span class="id">ID:D016</span><div class="nm">duets/duets.json</div><div class="tx">13 call-and-response mixes — who answers, where</div></a>
+<a class="card" href="onecut/onecut.json"><span class="id">ID:D017</span><div class="nm">onecut/onecut.json</div><div class="tx">13 single takes — which lines the song carries</div></a>
+<a class="card" href="scores/unified-drone.fresco.json"><span class="id">ID:D018</span><div class="nm">scores/*.fresco.json</div><div class="tx">fresco-score v0.1 — the shared clock format</div></a>
+<a class="card" href="descriptions/06.md"><span class="id">ID:D019</span><div class="nm">descriptions/NN.md</div><div class="tx">thick descriptions of the readings</div></a>
+</div>
 
 <footer>
-the readings are session RY, 2025-06-26 · masters live in ATLANTIS_VOICE_MASTER, this site carries their mp3 twins ·
-every derived file cites its source back into the corpus · analysis must produce affordances, not merely measurements
+the readings are session RY, 2025-06-26 · masters live in ATLANTIS_VOICE_MASTER; this site carries their mp3 twins ·
+every derived file cites its source back into the corpus · <b>analysis must produce affordances, not merely measurements</b> ·
+<a href="./" style="color:var(--cyan)">← fourteen halfworlds</a>
 </footer>
+
+<script>
+document.getElementById('count').textContent = 'ENTRIES: (' + document.querySelectorAll('a.card').length + ')';
+document.getElementById('share').onclick = async () => {
+  const url = location.href.split('#')[0];
+  try {
+    if (navigator.share) await navigator.share({ title: 'WYGWYL · ATLAS', url });
+    else { await navigator.clipboard.writeText(url);
+      document.getElementById('share').textContent = '✓ COPIED'; }
+  } catch (e) {}
+};
+</script>
 </body>
 </html>
