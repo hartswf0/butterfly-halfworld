@@ -1,0 +1,191 @@
+[
+ {
+  "patch": "P071",
+  "src": "MARKOV_POET/videos/20251019_231955_222c8cca_draft_5s_audio_interpolated_sequence.mp4",
+  "dur": 5.042,
+  "rec_in": 0.0,
+  "stanza": "02_S2",
+  "label": "TRYING TO SEE IN THE DARK",
+  "suite": "02"
+ },
+ {
+  "patch": "P088",
+  "src": "MARKOV_POET/videos/20251019_235926_d847a1b8_draft_5s_audio_sound_ocean_light_heartbreak_heart_soul.mp4",
+  "dur": 5.042,
+  "rec_in": 5.042,
+  "stanza": "03_S6",
+  "label": "AND A TAMBOURINE SHATTERED INTO PIECES",
+  "suite": "03"
+ },
+ {
+  "patch": "P083",
+  "src": "MARKOV_POET/videos/20251019_234957_e05d9393_draft_5s_audio_interpolated_sequence.mp4",
+  "dur": 5.042,
+  "rec_in": 10.084,
+  "stanza": "04_S1",
+  "label": "WHERE THE BROKEN PIECES HAVE WASHED ASHORE",
+  "suite": "04"
+ },
+ {
+  "patch": "P109",
+  "src": "MARKOV_POET/videos/20251020_032340_474a21a0_draft_5s_audio_interpolated_sequence.mp4",
+  "dur": 5.042,
+  "rec_in": 15.126,
+  "stanza": "04_S7",
+  "label": "NEVERMORE. NOW GO.",
+  "suite": "04"
+ },
+ {
+  "patch": "P102",
+  "src": "MARKOV_POET/videos/20251020_014733_6ac81cae_720p_5s_audio_interpolated_sequence.mp4",
+  "dur": 5.042,
+  "rec_in": 20.168,
+  "stanza": "05_S1",
+  "label": "TO ASK IF I CAN NAME MY OWN STARS",
+  "suite": "05"
+ },
+ {
+  "patch": "P118",
+  "src": "MARKOV_POET/videos/20251020_033653_c52c52ca_draft_5s_audio_interpolated_sequence.mp4",
+  "dur": 5.042,
+  "rec_in": 25.21,
+  "stanza": "05_S3",
+  "label": "TO ASK IF I CAN INVENT A NEW UNIVERSE",
+  "suite": "05"
+ },
+ {
+  "patch": "P082",
+  "src": "MARKOV_POET/videos/20251019_234806_f91d5823_draft_5s_audio_sound_tamborine_echo_waves_ocean_drone_b.mp4",
+  "dur": 5.042,
+  "rec_in": 30.252,
+  "stanza": "05_S4",
+  "label": "BEWARE OF ME",
+  "suite": "05"
+ },
+ {
+  "patch": "P073",
+  "src": "MARKOV_POET/videos/20251019_232034_0b99d0ac_draft_5s_audio_sound_drone_breathing_vocoder_echo_deep.mp4",
+  "dur": 5.042,
+  "rec_in": 35.294,
+  "stanza": "07_S7",
+  "label": "CHIN NOW NESTED HIGH",
+  "suite": "07"
+ },
+ {
+  "patch": "P085",
+  "src": "MARKOV_POET/videos/20251019_235513_b71779e4_draft_5s_audio_interpolated_sequence.mp4",
+  "dur": 5.042,
+  "rec_in": 40.336,
+  "stanza": "08_S3",
+  "label": "WATCH STRANGERS COLLIDE AND SPARK",
+  "suite": "08"
+ },
+ {
+  "patch": "P087",
+  "src": "MARKOV_POET/videos/20251019_235726_5edab801_draft_5s_audio_interpolated_sequence.mp4",
+  "dur": 5.042,
+  "rec_in": 45.378,
+  "stanza": "08_S4",
+  "label": "A PLANET MUCH LARGER THAN MY OWN",
+  "suite": "08"
+ },
+ {
+  "patch": "P106",
+  "src": "MARKOV_POET/videos/20251020_032316_653ecfbe_draft_5s_audio_sound_vehicles_zooming_by_light_drone_ti.mp4",
+  "dur": 5.042,
+  "rec_in": 50.42,
+  "stanza": "10_S2",
+  "label": "I LET THE NOISE BLOCK THE NOISE",
+  "suite": "10"
+ },
+ {
+  "patch": "P107",
+  "src": "MARKOV_POET/videos/20251020_032322_fc64e987_draft_5s_audio_sound_magic_ride_light_zooming_by_time_w.mp4",
+  "dur": 5.042,
+  "rec_in": 55.462,
+  "stanza": "10_S3",
+  "label": "THE TEASE OF DISTANT STARS SUBSIDES",
+  "suite": "10"
+ },
+ {
+  "patch": "P097",
+  "src": "MARKOV_POET/videos/20251020_012659_2b779f89_draft_5s_audio_interpolated_sequence.mp4",
+  "dur": 5.042,
+  "rec_in": 60.504,
+  "stanza": "11_S0",
+  "label": "NEW DAY",
+  "suite": "11"
+ },
+ {
+  "patch": "P098",
+  "src": "MARKOV_POET/videos/20251020_012842_9708bfad_draft_5s_audio_interpolated_sequence.mp4",
+  "dur": 5.042,
+  "rec_in": 65.546,
+  "stanza": "11_S1",
+  "label": "AS IT EXHALES ITS INTRODUCTION",
+  "suite": "11"
+ },
+ {
+  "patch": "P091",
+  "src": "MARKOV_POET/videos/20251020_001740_5c7f1747_draft_5s_audio_interpolated_sequence.mp4",
+  "dur": 5.042,
+  "rec_in": 70.588,
+  "stanza": "11_S4",
+  "label": "EDGELESS DREAMS THAT REFLECT THE SKIES",
+  "suite": "11"
+ },
+ {
+  "patch": "P090",
+  "src": "MARKOV_POET/videos/20251020_001028_1cdf9a75_draft_5s_audio_interpolated_sequence.mp4",
+  "dur": 5.042,
+  "rec_in": 75.63,
+  "stanza": "11_S5",
+  "label": "THAT WE TOO CAN WALK ON WATER",
+  "suite": "11"
+ },
+ {
+  "patch": "P100",
+  "src": "MARKOV_POET/videos/20251020_013140_37235c7f_draft_5s_audio_interpolated_sequence.mp4",
+  "dur": 5.042,
+  "rec_in": 80.672,
+  "stanza": "12_S0",
+  "label": "REUNION",
+  "suite": "12"
+ },
+ {
+  "patch": "P099",
+  "src": "MARKOV_POET/videos/20251020_012957_068f796b_draft_5s_audio_sound_make_it_more_deep_dark_ocean_more.mp4",
+  "dur": 5.042,
+  "rec_in": 85.714,
+  "stanza": "12_S1",
+  "label": "HUGS WITH NO REASON",
+  "suite": "12"
+ },
+ {
+  "patch": "P117",
+  "src": "MARKOV_POET/videos/20251020_033605_afa81d04_draft_5s_audio_interpolated_sequence.mp4",
+  "dur": 5.042,
+  "rec_in": 90.756,
+  "stanza": "12_S4",
+  "label": "OR WILL WE MAKE TIME?",
+  "suite": "12"
+ },
+ {
+  "patch": "P105",
+  "src": "MARKOV_POET/videos/20251020_032021_badaf97b_720p_5s_audio_sound_dream_surreal_drone_water.mp4",
+  "dur": 5.042,
+  "rec_in": 95.798,
+  "stanza": "13_S4",
+  "label": "AND THEY BECOME MY POWER",
+  "suite": "13"
+ },
+ {
+  "patch": "P103",
+  "src": "MARKOV_POET/videos/20251020_015442_ce4762b5_draft_5s_audio_interpolated_sequence.mp4",
+  "dur": 5.042,
+  "rec_in": 100.84,
+  "stanza": "14_S1",
+  "label": "EVERYTHING LEARNS TO BE WEATHER",
+  "suite": "14"
+ }
+]

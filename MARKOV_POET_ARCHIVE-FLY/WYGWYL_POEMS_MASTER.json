@@ -1,0 +1,315 @@
+{
+  "collection": "WYGWYL 14-Poem Suite",
+  "author": "Mark Anthony Thomas",
+  "total_poems": 14,
+  "poems": [
+    {
+      "number": "01",
+      "title": "OUT OF LIFE",
+      "slug": "01-out-of-life",
+      "container": [
+        0,
+        122.99
+      ],
+      "poem_range": [
+        29.76,
+        117.87
+      ],
+      "full_verse": "What we've made, we don't want. What we've sold — to the world, to ourselves — doesn't exist. I look for a way out: through the hallways, within the drawers, and fire escapes. The vape gathers, inside and out. My vision blurs. I move toward the window — and you only get further away. More haze. What isn't mine, I still can not give.",
+      "legos": {
+        "location_L": "Domestic Apartment Hallways, Drawers, Fire Escapes & Misty Bedroom Window.",
+        "entity_E": "The Disillusioned Poet & Departing Partner ('You').",
+        "goal_G": "Finding a Way Out — Seeking an authentic exit from manufactured pretenses, false commodities, and domestic stasis.",
+        "obstacle_O": "Suffocating Domestic Haze & Emotional Drift — Vape smoke and detachment blurring vision as the partner moves further away.",
+        "shift_S": "Moving toward the window only for the distance between lovers to widen into an impenetrable haze.",
+        "solution_U": "Severing False Obligations — Acknowledging the departure and accepting: 'What isn't mine, I still can not give.'"
+      }
+    },
+    {
+      "number": "02",
+      "title": "FLASHING LIGHTS",
+      "slug": "02-flashing-lights",
+      "container": [
+        122.99,
+        214.11
+      ],
+      "poem_range": [
+        127.63,
+        209.17
+      ],
+      "full_verse": "It was the type of silent scream a trapped lover makes to escape: a pending marriage, a concussion, a set of walls caving inward. An emergency call while tossing and turning — the silent call a man makes to the mirror after midnight, to digest a truth. A truth he could neither alter nor change. What isn't mine, I still can not give.",
+      "legos": {
+        "location_L": "Midnight Insomnia Bedroom with Caving Walls & Solitary Bathroom Mirror.",
+        "entity_E": "The Trapped Lover / Conflicted Man Facing His Reflection.",
+        "goal_G": "Digesting the Unspoken Truth — Escaping the claustrophobic pressure of an impending marriage and internal concussion.",
+        "obstacle_O": "Caving Walls & Tossing Insonmia — The paralyzing dread of breaking a social commitment and causing pain.",
+        "shift_S": "The silent call made directly into the mirror after midnight during an emergency psychological crisis.",
+        "solution_U": "Solitary Confrontation — Facing the mirror to admit the unalterable truth that love cannot be forced."
+      }
+    },
+    {
+      "number": "03",
+      "title": "HOW TO BREAK OFF AN ENGAGEMENT",
+      "slug": "03-how-to-break-off-an-engagement",
+      "container": [
+        214.11,
+        286.51
+      ],
+      "poem_range": [
+        219.51,
+        281.17
+      ],
+      "full_verse": "Ode to forever — a tambourine sounds off an empty temple, empty choir stands, empty prayer lines. And abandoned baptism pools. It flies in through the rose window — still whole. A broken promise.",
+      "legos": {
+        "location_L": "Abandoned Sacred Sanctuary — Empty choir stands, deserted prayer lines, dry baptism pools, and stained-glass rose window.",
+        "entity_E": "The Betrothed Soul Severing the Lifelong Vow.",
+        "goal_G": "Graceful Dissolution of the Vow — Releasing the heavy mantle of 'forever' without shattering his inner spirit.",
+        "obstacle_O": "Sanctified Permanence — The immense moral and spiritual weight of empty altars and ceremonial expectations.",
+        "shift_S": "A lone tambourine vibrates off empty temple walls, and memory flies unbroken through the stained-glass rose window.",
+        "solution_U": "Sacred Release — Acknowledging that the sanctuary is empty, allowing the broken promise to rest whole without guilt."
+      }
+    },
+    {
+      "number": "04",
+      "title": "NEVERMORE",
+      "slug": "04-nevermore",
+      "container": [
+        286.51,
+        421.78
+      ],
+      "poem_range": [
+        291.41,
+        421.78
+      ],
+      "full_verse": "What if I followed this trail, to where the broken pieces have washed ashore — and the ashes of expired wildfires cover sands, and debris lifted from the night sea water's floor. The waves calm to folded whispers; the winds mute the trees. The right level of silence, to find a throbbing heart — it used to be mine. I lift it with care: nevermore.",
+      "legos": {
+        "location_L": "Night Ocean Shoreline — Wildfire ashes over sand and ancient debris washed ashore from the seabed.",
+        "entity_E": "The Shoreline Wanderer / Recoverer of the Lost Heart.",
+        "goal_G": "Reclaiming the Lost Heart — Tracking washed-up wreckage to locate and salvage his former capacity for feeling.",
+        "obstacle_O": "Wildfire Ashes & Sea Debris — The desolate wreckage of past burns and the roar of ocean waves obscuring the heart.",
+        "shift_S": "Waves calm to folded whispers and winds mute the trees, producing the exact silence needed to hear the heart throbbing in the sand.",
+        "solution_U": "Sacred Reclamation — Lifting the recovered beating heart with delicate care and sealing the boundary: 'nevermore.'"
+      }
+    },
+    {
+      "number": "05",
+      "title": "BLOODLINES",
+      "slug": "05-bloodlines",
+      "container": [
+        422.18,
+        513.21
+      ],
+      "poem_range": [
+        434.01,
+        507.96
+      ],
+      "full_verse": "Now go, they tell me. To ask if I can inherit the earth — to ask if I can name my own stars. Even galaxies, if I may. The past, too, was waiting for me — coming of age in the shared rooms of humid basements as bedrooms; mattress pads where the wood beams of Southern pine could comfort my spine. It didn't. To dream was to prevail.",
+      "legos": {
+        "location_L": "Shared Humid Southern Basement Bedroom & Deep Galactic Starfield.",
+        "entity_E": "The Young Lineage Heir / Galactic Dreamer.",
+        "goal_G": "Inheriting the Earth & Naming Galaxies — Transcending the physical poverty and bone-aches of his origins.",
+        "obstacle_O": "Humid Basement Walls & Rigid Pine Beams — Unyielding wood beams that offered no comfort to his growing spine.",
+        "shift_S": "Realizing that dreaming was not an escape, but the foundational act of prevalence that unlocked cosmic sovereignty.",
+        "solution_U": "Interstellar Sovereign Lineage — Claiming the power to name galaxies while honoring the unbreakable spine built in the basement."
+      }
+    },
+    {
+      "number": "06",
+      "title": "RESURRECTING ATLANTIS",
+      "slug": "06-resurrecting-atlantis",
+      "container": [
+        513.21,
+        623.45
+      ],
+      "poem_range": [
+        518.08,
+        618.37
+      ],
+      "full_verse": "Poets, who eased generations down yellow brick roads — and plucked our souls out of their secret places, to follow comets to the capital city of our collective consciousness. Resurrecting Atlantis. Here we are all one — the pact we've made here with nature, abandoned and hoped for the best, back on life.",
+      "legos": {
+        "location_L": "The Capital City of Collective Consciousness / Submerged Atlantis Resurrected.",
+        "entity_E": "The Lineage of Poets & The United Human Collective.",
+        "goal_G": "Resurrecting Atlantis — Following comet trails to reunite fragmented human souls back into harmony with the natural world.",
+        "obstacle_O": "Generational Amnesia & Abandoned Ecological Pact — The historical severance from nature and lost collective memory.",
+        "shift_S": "Poets pluck hidden souls from their secret shelters, guiding them along cosmic yellow brick roads into unified awareness.",
+        "solution_U": "Universal Oneness — 'Here we are all one' — restoring the sacred pact with life across the resurrected collective matrix."
+      }
+    },
+    {
+      "number": "07",
+      "title": "DJ TURN ME UP",
+      "slug": "07-dj-turn-me-up",
+      "container": [
+        623.45,
+        732.13
+      ],
+      "poem_range": [
+        628.31,
+        726.97
+      ],
+      "full_verse": "DJ, turn me up, please. Eyes wide shut, chin nested at the arch of the weight of these spoken words. I have a love story to tell — of ghosts, whispering unfolded dilutions, birthed in purity, and dying in the vineyards of sun-soaked evergreen fields, unnourished.",
+      "legos": {
+        "location_L": "Subterranean Soundstage Booth & Unnourished Sun-Soaked Evergreen Vineyards.",
+        "entity_E": "The Spoken Word Lyricist & The DJ.",
+        "goal_G": "Amplifying the Unspoken Ghost Story — Channeling acoustic power to testify to pure love that withered unnourished.",
+        "obstacle_O": "Suffocating Weight of Words & Ghostly Dilutions — The crushing heaviness of unexpressed grief dying in silent fields.",
+        "shift_S": "Calling out 'DJ, turn me up, please' with eyes wide shut, nesting chin at the microphone arch to release the narrative.",
+        "solution_U": "Acoustic Catharsis — Transforming silent ghostly sorrow into an amplified, undeniable sonic broadcast."
+      }
+    },
+    {
+      "number": "08",
+      "title": "NEWLY SINGLE",
+      "slug": "08-newly-single",
+      "container": [
+        732.14,
+        833.39
+      ],
+      "poem_range": [
+        737.05,
+        828.2
+      ],
+      "full_verse": "Pulsing, and head throbbing from the music — and empty, on a crowded floor of sweated perfumes and temptations. The soul escapes my body, and leaves him on the dance floor — just flesh and bones. Rejection and heartache hit different, with no feelings afloat.",
+      "legos": {
+        "location_L": "Sweated, Crowded Nightclub Dance Floor Lit by Throbbing Bass.",
+        "entity_E": "The Newly Single Man (Bifurcated into Dancing Flesh and Ascending Soul).",
+        "goal_G": "Surviving Post-Breakup Heartache — Navigating sensual distractions while emotionally hollowed out.",
+        "obstacle_O": "Throbbing Music, Temptation, & Acute Rejection — The suffocating crush of dancing bodies pressing against inner numbness.",
+        "shift_S": "The soul detaches and floats upward out of the physical body, leaving an empty vessel of flesh and bones on the floor.",
+        "solution_U": "Anesthetized Elevation — Overcoming heartbreak by floating above sensation, surviving with zero emotional drag."
+      }
+    },
+    {
+      "number": "09",
+      "title": "YET, HEARD",
+      "slug": "09-yet-heard",
+      "container": [
+        833.39,
+        950.94
+      ],
+      "poem_range": [
+        837.74,
+        946.52
+      ],
+      "full_verse": "Before I go, we look at the moon the way we used to see it. We talk for years, travel through time — we grow old together, I believe. Before I go, I call on my mother — in tears, speaking of an abyss she's never known. Before I go, I call on my father — his calming demeanor summoned from the yonders. We stroll, father and son, hearted and shaken. Someone borrowed, and someone blue — yet, broken. Yet, heard.",
+      "legos": {
+        "location_L": "Moonlit Harbor Horizon & Wave Shadows of the Inner Bay.",
+        "entity_E": "The Departing Son Reconnecting with Mother & Father.",
+        "goal_G": "Ancestral Reconciliation Before Departure — Summoning parental presence to explain his wounds and seek peace.",
+        "obstacle_O": "The Unbridgeable Abyss — Wounds his mother has never known and tears falling in the dark harbor waves.",
+        "shift_S": "Walking east toward the sunrise with his father, retracing generational footsteps while weeping in the harbor shadows.",
+        "solution_U": "Heard Across the Void — Strolling together as father and son: broken, blue, yet profoundly and undeniably heard."
+      }
+    },
+    {
+      "number": "10",
+      "title": "MAGIC RIDE",
+      "slug": "10-magic-ride",
+      "container": [
+        950.94,
+        1056.66
+      ],
+      "poem_range": [
+        956.0,
+        1051.86
+      ],
+      "full_verse": "I wasn't looking for a ride, but here you are — blissful, and oddly sensitive. I rub my aggressions into your steel coverings, and hop on. Loneliness is having everything with no one to tell — being everywhere, with no one to love. I let the noise block the noise. The way I ride: eyes turn, heads twist — and prove the magic still exists. The moon settles, and I can see a morning ahead for me.",
+      "legos": {
+        "location_L": "Open Steel Motorcycle on Coastal Highway Transitioning into Dawn.",
+        "entity_E": "The Solitary Rider on the Steel Machine.",
+        "goal_G": "Proving Magic Still Exists — Drowning out isolation and aggressions through the roar of machine velocity.",
+        "obstacle_O": "Profound Loneliness — Having everything with no one to tell, being everywhere with no one to love.",
+        "shift_S": "Letting the mechanical noise block the psychic noise, leaning into the throttle until heads twist and the morning appears.",
+        "solution_U": "Awakened Morning — Darkness and distant stars subside, revealing a crisp morning of authentic hope and living magic."
+      }
+    },
+    {
+      "number": "11",
+      "title": "NEW DAY",
+      "slug": "11-new-day",
+      "container": [
+        1056.66,
+        1168.02
+      ],
+      "poem_range": [
+        1061.97,
+        1162.92
+      ],
+      "full_verse": "Fog covers the seas and hugs the tree-covered hills, floating through the morning as it exhales its introduction. This world is at peace. In the awakening of dawn, in fresh muted colors: we can rebuild this temple. It's a new day — a catharsis for me to say, with newfound energies and recycled airs. Edgeless dreams that reflect the skies... that we too can walk on water.",
+      "legos": {
+        "location_L": "Morning Hillside Forest Overlooking Coastal Seas & Infinite Edgeless Reflection Pools.",
+        "entity_E": "The Awakened Temple Rebuilder.",
+        "goal_G": "Rebuilding the Temple & Claiming Catharsis — Welcoming a peaceful new day with fresh creative energies.",
+        "obstacle_O": "Past Destructions & Lingering Sea Fog — The historical ruins of previous temples and residual exhaustion.",
+        "shift_S": "Dawn breaks in muted pastels as morning dews and vibrant sun rays illuminate the edgeless waters.",
+        "solution_U": "Miraculous Renewal — Taking deep appreciative breaths of present life: 'We can rebuild this temple... we too can walk on water.'"
+      }
+    },
+    {
+      "number": "12",
+      "title": "REUNION",
+      "slug": "12-reunion",
+      "container": [
+        1168.02,
+        1243.0
+      ],
+      "poem_range": [
+        1173.17,
+        1237.85
+      ],
+      "full_verse": "Decades later, there is less time for words, and more space for laughter — hugs with no reason, and loud voices, so our hearts can be overheard. Reflecting on legacies, and creeds once told — of elders, now past. Or will we make time, in the sands of burning hourglasses? Before our winds part ways — to a next lifetime. This is brotherhood.",
+      "legos": {
+        "location_L": "Sanctuary of Burning Hourglasses & Winds of Legacy.",
+        "entity_E": "Reunited Brothers / Kinship Descendants of Departed Elders.",
+        "goal_G": "Making Time for Brotherhood — Overcoming decades of separation to celebrate shared survival.",
+        "obstacle_O": "The Burning Hourglass & Inevitable Mortality — The rapid passage of time threatening to scatter their winds.",
+        "shift_S": "Abandoning formal words in favor of loud voices, unreasoned hugs, and full-bodied laughter so hearts are overheard.",
+        "solution_U": "Sacred Brotherhood — Forging a triumphant bond that defies time and echoes into the next lifetime."
+      }
+    },
+    {
+      "number": "13",
+      "title": "HOW TO WIN MY HEART",
+      "slug": "13-how-to-win-my-heart",
+      "container": [
+        1243.0,
+        1352.98
+      ],
+      "poem_range": [
+        1247.82,
+        1347.88
+      ],
+      "full_verse": "Find me at the harbor, at the small tables, watching. The couples orbit each other the way Jupiter keeps its moons — close, and counted. Life has burned all my love stories — victory-less seasons. So I harvest the flowers instead — scarlet poppies, purple blossoms — and they become my power. Then, a distant window. She says: you'll see me. Capture the eyes. Refocus. Step back. Say hello. Don't make me leave. I escaped here for a reason.",
+      "legos": {
+        "location_L": "Seaside Harbor Small Tables & Distant Window Looking Over the Bay.",
+        "entity_E": "The Guarded Harbor Watcher & The Distant Muse.",
+        "goal_G": "Protecting Inner Power While Opening to Love — Navigating romantic curiosity after repeated past heartbreak.",
+        "obstacle_O": "Victory-Less Seasons & Past Ashes — All prior love stories burned, creating fear of leaving his harbor refuge.",
+        "shift_S": "Harvesting scarlet poppies and purple blossoms into personal power, then catching her gaze in a distant window.",
+        "solution_U": "Refocused Vulnerability — Stepping back, capturing the eyes, and choosing to say hello without abandoning his sanctuary."
+      }
+    },
+    {
+      "number": "14",
+      "title": "HOT MINUTE",
+      "slug": "14-hot-minute",
+      "container": [
+        1352.98,
+        1440.07
+      ],
+      "poem_range": [
+        1357.86,
+        1427.1
+      ],
+      "full_verse": "A hot minute. The haze gathers on the water — and everything I built here learns to be weather: the city, the temple, the harbor. It takes me last, and from the ground up. I am reluctant — but I have been weather before. All black again. But no walls this time. A life flashes the way a reel does: the window, the tambourine, the field, the stars, the candle, the daisy, the ride, the temple, the hourglass. Our dance together is a victory. An old door, from a vintage somewhere. It opens on a slow party — the kind I once fell out of a window to escape. This time, I choose the door.",
+      "legos": {
+        "location_L": "Atmospheric Dissolution Shoreline (City, Temple, Harbor Becoming Weather) & Vintage Doorway.",
+        "entity_E": "The Transmuted Poet / Sovereign Muse.",
+        "goal_G": "Conscious Narrative Transcendence — Allowing the built world to dissolve into weather and choosing his exit with dignity.",
+        "obstacle_O": "Reluctance to Dissolve & Darkness — The terrifying collapse of all physical structures into black void.",
+        "shift_S": "Life flashes like a film reel (window, tambourine, ride, temple, hourglass); what was once a traumatic escape becomes a dance of victory.",
+        "solution_U": "Choosing the Door — Rather than falling out of a window to escape, consciously and calmly walking through the door into the gathering."
+      }
+    }
+  ]
+}

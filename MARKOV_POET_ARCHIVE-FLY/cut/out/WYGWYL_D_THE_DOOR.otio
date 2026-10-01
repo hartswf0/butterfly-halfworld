@@ -1,0 +1,1213 @@
+{
+ "OTIO_SCHEMA": "Timeline.1",
+ "name": "WYGWYL_D_THE_DOOR",
+ "tracks": {
+  "OTIO_SCHEMA": "Stack.1",
+  "children": [
+   {
+    "OTIO_SCHEMA": "Track.1",
+    "name": "V1",
+    "kind": "Video",
+    "children": [
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P054 [01_title]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 228,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 72,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET_00/videos/20250719_100245_173e50a6_720p_22s_silent_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P009 [01_hold]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 49,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 120,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET_00/videos/20250719_043529_5321a933_720p_9s_silent_id_poet_type_character_name_poet_traits.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P027 [01_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 65,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET_00/videos/20250719_055329_ebe2426d_720p_9s_silent_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P024 [01_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 19,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET_00/videos/20250719_054051_98f0499c_720p_5s_silent_overhead_drone_shot_of_poet_in_an_unknow.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P038 [01_hold]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 95,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 120,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET_00/videos/20250719_073830_8aff03e4_720p_13s_silent_here_in_inky_abyss_a_new_chapter_begins.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P041 [01_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 65,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET_00/videos/20250719_081127_d1dfc1d0_720p_9s_silent_here_in_inky_abyss_a_new_chapter_begins.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P058 [02_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 19,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET_00/videos/20250721_132132_5880d3a4_720p_5s_silent_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P071 [02_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251019_231955_222c8cca_draft_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P126 [02_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 69,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_064323_b38a6302_720p_9s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P115 [03_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_033411_5bcf5bf5_draft_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P111 [03_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_032828_63d387a4_draft_5s_audio_sound_drone_sound_of_morph_vocoder_light.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P064 [03_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251019_230706_0b025dc2_draft_5s_audio_sound_drowning_in_red_light_fluid_bubbli.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P116 [03_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_033443_7b30f724_720p_5s_silent_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P132 [03_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 69,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_072308_447a4780_720p_9s_audio_ocean_light_heartbreak_heart_soul_drone.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P109 [04_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_032340_474a21a0_draft_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P083 [04_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251019_234957_e05d9393_draft_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P121 [04_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 69,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_042303_9c7af8fd_720p_9s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P068 [04_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251019_231453_6017f123_720p_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P102 [05_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_014733_6ac81cae_720p_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P128 [05_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 308,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_065914_d06fff56_720p_29s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P082 [05_hold]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 1,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 120,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251019_234806_f91d5823_draft_5s_audio_sound_tamborine_echo_waves_ocean_drone_b.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P118 [05_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_033653_c52c52ca_draft_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P096 [05_hold]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 1,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 120,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_011907_48a7a55a_draft_5s_silent_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P125 [06_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 69,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_064257_84c43938_720p_9s_audio_tvs_play_water_ocean_atlantis_lost_city.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P056 [06_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 329,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET_00/videos/20250719_102441_46782136_720p_31s_silent_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P123 [06_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 122,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_045322_c0323bcf_720p_14s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P066 [07_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251019_231210_84c137db_draft_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P065 [07_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251019_231205_f3088dc0_draft_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P073 [07_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251019_232034_0b99d0ac_draft_5s_audio_sound_drone_breathing_vocoder_echo_deep.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P084 [08_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251019_235035_08ff0a63_720p_5s_silent_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P069 [08_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251019_231512_5bbf08ef_draft_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P117 [08_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_033605_afa81d04_draft_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P094 [09_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_003144_7dc53bea_720p_5s_silent_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P129 [09_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 69,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_070137_60ea25fc_720p_9s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P063 [09_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251019_230548_02eba2a1_720p_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P106 [10_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_032316_653ecfbe_draft_5s_audio_sound_vehicles_zooming_by_light_drone_ti.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P060 [10_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251019_225855_60c4c35f_720p_5s_audio_sound_drone_heavenly_sound_red_fire_echo.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P122 [10_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 69,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_045239_8bc45974_720p_9s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P131 [11_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 122,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_071957_35855d8a_720p_14s_silent_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P108 [11_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_032325_8a9e7a1e_720p_5s_audio_sound_more_humble_drone_glorious_morph_v.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P105 [11_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_032021_badaf97b_720p_5s_audio_sound_dream_surreal_drone_water.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P100 [12_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_013140_37235c7f_draft_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P099 [12_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_012957_068f796b_draft_5s_audio_sound_make_it_more_deep_dark_ocean_more.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P133 [12_hold]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 53,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 120,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_073316_10440c21_720p_9s_silent_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P036 [13_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 112,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET_00/videos/20250719_071953_5b9ec655_720p_13s_silent_poet_is_currently_in_a_state_of_you_fall.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P110 [13_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_032459_eaea9d0a_720p_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P042 [14_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 289,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET_00/videos/20250719_081608_3af36c41_720p_28s_silent_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P103 [14_hold]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 1,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 120,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_015442_ce4762b5_draft_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P095 [14_shot]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 17,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 88,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_003624_0107df88_draft_5s_silent_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P009 [14_REEL]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 91,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 10,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET_00/videos/20250719_043529_5321a933_720p_9s_silent_id_poet_type_character_name_poet_traits.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P115 [14_REEL]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 51,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 10,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_033411_5bcf5bf5_draft_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P105 [14_REEL]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 51,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 10,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_032021_badaf97b_720p_5s_audio_sound_dream_surreal_drone_water.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P102 [14_REEL]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 51,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 10,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_014733_6ac81cae_720p_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P068 [14_REEL]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 51,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 10,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251019_231453_6017f123_720p_5s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P122 [14_REEL]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 95,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 10,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET/videos/20251020_045239_8bc45974_720p_9s_audio_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P014 [14_hold]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 2,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 120,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET_00/videos/20250719_051147_dc67dc88_720p_5s_silent_interpolated_sequence.mp4"
+      }
+     },
+     {
+      "OTIO_SCHEMA": "Clip.1",
+      "name": "P052 [14_credit]",
+      "source_range": {
+       "OTIO_SCHEMA": "TimeRange.1",
+       "start_time": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 107,
+        "rate": 24
+       },
+       "duration": {
+        "OTIO_SCHEMA": "RationalTime.1",
+        "value": 96,
+        "rate": 24
+       }
+      },
+      "media_reference": {
+       "OTIO_SCHEMA": "ExternalReference.1",
+       "target_url": "MARKOV_POET_00/videos/20250719_095318_b072cfc2_720p_13s_silent_interpolated_sequence.mp4"
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

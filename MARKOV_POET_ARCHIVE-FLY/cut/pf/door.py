@@ -258,8 +258,40 @@ h1 small{display:block;font:700 10px/1 ui-monospace,monospace;letter-spacing:.2e
 .rows a:hover span{color:#a8a8a4}
 .more{margin:22px 0 10px;font:700 10px/1 Helvetica;letter-spacing:.2em;text-transform:uppercase;color:#8a8a86;
  border-top:2px solid #141414;padding-top:12px}
+.absent-note{margin:14px 0 0;max-width:72ch;font:400 12.5px/1.6 ui-monospace,Menlo,monospace;
+ color:#8a6d00;border-left:3px solid #8a6d00;padding-left:11px}
+.absent-note b{color:#141414}
+body.absent .grid{opacity:.4}
+body.absent .it{background:#f0f0ec}
 @media(max-width:560px){body{padding:0 13px 70px}.grid{grid-template-columns:1fr 1fr;gap:8px}}
 """
+
+
+# A sheet listing 300 clips that are not served from this host is 300 grey
+# rectangles and no explanation. Sample a handful on load; if none of them
+# answer, say so at the top instead of letting the page fail silently.
+SHEET_JS = """<script>
+(function(){
+ var m=[].slice.call(document.querySelectorAll('.it img[src], .it video[src], .it audio[src]'));
+ if(!m.length) return;
+ var step=Math.max(1,Math.floor(m.length/6)), s=[];
+ for(var i=0;i<m.length && s.length<6;i+=step) s.push(m[i]);
+ Promise.all(s.map(function(el){
+   return fetch(el.getAttribute('src'),{method:'HEAD'})
+     .then(function(r){return r.ok?1:0;}).catch(function(){return 0;});
+ })).then(function(r){
+   var ok=r.reduce(function(a,b){return a+b;},0);
+   if(ok) return;
+   document.body.classList.add('absent');
+   var h=document.querySelector('header');
+   if(h) h.insertAdjacentHTML('beforeend','<p class="absent-note"><b>None of these files are '
+    + 'served from here.</b> This sheet lists what is in the folder on the disk it was made on; '
+    + 'the files themselves were never pushed \\u2014 they are renders and segments, not sources. '
+    + 'The listing, the names and the sizes are real. Open this from a copy of the archive and '
+    + 'every item plays.</p>');
+ });
+})();
+</script>"""
 
 def sheet(r, base):
     """Write a contact sheet into a directory entry. Never clobbers a page that
@@ -336,7 +368,7 @@ def sheet(r, base):
             + '</p></header>'
             + (f'<div class="grid">{"".join(cards)}</div>' if cards else '')
             + extra + (f'<div class="rows">{"".join(rows)}</div>' if rows else '')
-            + '</div></body></html>')
+            + SHEET_JS + '</div></body></html>')
     open(out, 'w').write(html)
     r['sheet'] = (len(items), min(len(items), SHEET_CAP) if cards else 0)
     return out
@@ -542,6 +574,22 @@ for d, rs in days:
       f'<b>{r["id"]}</b>{esc(r["name"])}</a>' for r in rs)
     order.append(f'<div class="day"><div class="dh">{MON[t.tm_mon-1]} <b>{t.tm_mday}</b>'
                  f'<small>{len(rs)}</small></div><div class="chips">{chips}</div></div>')
+# ---------------------------------------------------------------- the ways in
+NAMES = {r['id']: r for r in rows}
+ways = []
+for title, sub, steps in PATHS:
+    li = []
+    for n, (eid, why) in enumerate(steps, 1):
+        r = NAMES.get(eid)
+        if not r:
+            print(f'  ! path "{title}" names {eid}, which is not an entry'); continue
+        li.append(f'<a class="step" href="#{eid}"><span class="sn">{n}</span>'
+                  f'<span class="st"><b>{esc(r["name"])}</b>{esc(why)}</span>'
+                  f'<span class="sid">{eid}</span></a>')
+    ways.append(f'<div class="way"><h3>{esc(title)}<small>{esc(sub)}</small></h3>{"".join(li)}</div>')
+WAYS = ('<h2 id="start">START <small>three ways in \u00b7 pick the one that is yours</small></h2>'
+        f'<div class="ways">{"".join(ways)}</div>') if ways else ''
+
 WHEN = ('<h2 id="when">WHEN <small>the order the work happened, dated off the filesystem \u00b7 '
         f'{len(days)} days \u00b7 {dated(seq[0]["t_mid"], seq[-1]["t_mid"]) if seq else ""}</small></h2>'
         f'<div class="when">{"".join(order)}</div>') if seq else ''
@@ -581,6 +629,7 @@ h1{{font:900 clamp(26px,5.2vw,44px)/1.05 Helvetica,Arial;letter-spacing:.03em;te
 h1 small{{display:block;font:900 11px/1 Helvetica;letter-spacing:.34em;color:var(--dim);margin-top:14px}}
 .lede{{margin:24px 0 0;font-size:17px;max-width:68ch}} .lede b{{font-weight:900}}
 .tot{{margin:18px 0 0;font:700 12px/1.7 ui-monospace,Menlo,monospace;letter-spacing:.06em;color:var(--dim)}}
+.tot a{{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent)}}
 .bar{{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:1px solid var(--l3);
   padding:12px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap}}
 .tab{{border:1px solid var(--ink);background:var(--paper2);color:var(--ink);font:900 10px/1 Helvetica;
@@ -638,6 +687,23 @@ a.card:hover .apart span{{color:var(--l3)}} a.card:hover .apart b{{color:var(--p
 .where{{font:400 10px/1.4 ui-monospace,Menlo,monospace;color:var(--l3);word-break:break-all;
   border-top:1px solid var(--l1);padding-top:7px}}
 a.card:hover .where{{color:#6a6a68;border-color:#4a4a48}}
+.ways{{display:grid;grid-template-columns:repeat(auto-fit,minmax(286px,1fr));gap:13px}}
+.way{{border:2px solid var(--ink);background:var(--paper2);padding:14px 15px 15px}}
+.way h3{{font:900 12px/1.2 Helvetica;letter-spacing:.14em;text-transform:uppercase;
+  border-bottom:2px solid var(--ink);padding-bottom:9px;margin-bottom:4px}}
+.way h3 small{{display:block;font:400 11.5px/1.45 ui-monospace,Menlo,monospace;color:var(--dim);
+  letter-spacing:0;text-transform:none;margin-top:6px}}
+.step{{display:flex;gap:10px;align-items:baseline;text-decoration:none;color:var(--ink);
+  padding:9px 0;border-bottom:1px solid var(--l1)}}
+.step:last-child{{border-bottom:0}}
+.step:hover{{background:var(--ink);color:var(--paper2);margin:0 -15px;padding-left:15px;padding-right:15px}}
+.sn{{font:700 10px/1.5 ui-monospace,monospace;color:var(--dim);flex:0 0 14px}}
+.st{{flex:1 1 auto;min-width:0;font:400 12px/1.45 ui-monospace,Menlo,monospace;color:var(--dim)}}
+.st b{{display:block;font:900 12px/1.3 Helvetica;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--ink);margin-bottom:3px}}
+.step:hover .st,.step:hover .sn,.step:hover .sid{{color:var(--l3)}}
+.step:hover .st b{{color:var(--paper2)}}
+.sid{{font:700 9px/1.5 ui-monospace,monospace;color:var(--l3);flex:0 0 auto}}
 .when{{border:2px solid var(--ink);background:var(--paper2)}}
 .day{{display:flex;gap:14px;align-items:flex-start;padding:11px 13px;border-bottom:1px solid var(--l1)}}
 .day:last-child{{border-bottom:0}}
@@ -671,7 +737,7 @@ a.card:hover .where{{color:#6a6a68;border-color:#4a4a48}}
   so what turns on each card is the <i>range</i> of what is in there. Under each one, the single
   measurement on which it sits furthest from everything else here: the difference that makes a
   difference. <a href="#when">WHEN</a> puts all of it back in the order it was made.</p>
-  <p class="tot">{len(live)} ENTRIES &nbsp;·&nbsp; {TOT_N:,} FILES &nbsp;·&nbsp; {human(TOT_B)} &nbsp;·&nbsp; BUILT {time.strftime('%Y-%m-%d %H:%M')}</p>
+  <p class="tot"><a href="#start">START</a> &nbsp;\u00b7&nbsp; <a href="#when">WHEN</a> &nbsp;\u00b7&nbsp; {len(live)} ENTRIES &nbsp;·&nbsp; {TOT_N:,} FILES &nbsp;·&nbsp; {human(TOT_B)} &nbsp;·&nbsp; BUILT {time.strftime('%Y-%m-%d %H:%M')}</p>
 </header>
 
 <div class="bar">
@@ -680,6 +746,8 @@ a.card:hover .where{{color:#6a6a68;border-color:#4a4a48}}
   <input id="q" type="search" placeholder="search  /  the whole page" autocomplete="off" spellcheck="false">
   <span id="cnt"></span>
 </div>
+
+{WAYS}
 
 {WHEN}
 

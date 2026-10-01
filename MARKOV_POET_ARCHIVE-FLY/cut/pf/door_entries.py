@@ -168,6 +168,12 @@ E = [
  ('F05','watch','E · THE DOOR, SCORED','cut/out/WYGWYL_E_THE_DOOR_mareamemory_06.mp4',
   'D again, carried on mareamemory 06.',
   '125 MB. Silent version beside it.'),
+ ('F08','watch','THE SCRIPTS \u2014 ALL FIVE CUTS, READABLE','cut/out/script/index.html',
+  'Each cut written out shot by shot: its own mid-frame, where it lands, how long it holds, the '
+  'stanza it serves, the screen text or the line of the poem it carries, and the source clip and '
+  'second it was taken from. 424 shots across the five, every one with a frame on file.',
+  'This is the film written down, not the film. It is also the only way to read the cuts without '
+  'the 920 MB of mp4, and it is what an editor relinks from.'),
  ('F06','watch','THE SUITE PLAYER','wygwyl-suite-player.html',
   'The fourteen poems as a suite, playable in the browser.',
   ''),
@@ -194,6 +200,11 @@ E = [
  ('R06','read','THE COVERAGE MAP','WYGWYL_COVERAGE_MAP.md',
   'The archive measured against the poems, stanza by stanza.',
   ''),
+ ('R08','read','THE EXCHANGE','cut/out',
+  'What another editing room needs: an EDL, an OTIO, a JSON event list and a cue sheet for every '
+  'cut \u2014 source clip, source timecode, record timecode, duration, stanza and label, shot by shot.',
+  'Under cut/out/ beside the cuts themselves. Relinking needs the source shots in '
+  'MARKOV_POET_00/, which is 237 MB and is not in the repository.'),
  ('R07','read','THE SIBLING ATLAS','../wygwyl/atlas.html',
   'The other body of work in this repository, indexed in its own record idiom: the city, the world, the radio, the spine key, sixty-six entries.',
   'Not this archive. Linked because this is the only place the two indexes meet.'),
@@ -207,6 +218,10 @@ E = [
 # because the only image in its folder belongs to something else — a borrowed
 # preview is a small lie told sixteen times.
 MEASURE = {
+ 'F08':'cut/out/script',
+ 'R08':['cut/out/WYGWYL_A_THE_PQ_REEL.edl','cut/out/WYGWYL_B_THE_WINDOW_AND_THE_DOOR.edl',
+        'cut/out/WYGWYL_C_THE_DECK_60BPM.edl','cut/out/WYGWYL_D_THE_DOOR.edl',
+        'cut/out/WYGWYL_E_THE_DOOR_mareamemory_06.edl'],
  'S01':['cut/bastard_segments','cut/churn_segments','cut/deck_segments','cut/journey_segments',
         'cut/moussa_segments','cut/music_segments','cut/short_segments'],
  'S02':['cut/out/elements','cut/out/thumbs'],
@@ -231,6 +246,9 @@ COUNT = {
 # PREVIEW: an explicit member of the collection, where the collection's own
 # folder holds only the page that indexes it.
 PREVIEW = {
+ 'F08':'cut/frames',
+ 'F08':'cut/frames',
+
  'S02':'cut/out/thumbs',
  'L01':'cut/out/collage/GRID_ALL.webp',
  'L02':'cut/out/lucier',
@@ -239,7 +257,7 @@ PREVIEW = {
  'L05':'MARKOV_POET_00/thumbnails',
 }
 # notes get a drawn mark, never the only picture that happens to sit in their folder
-NOPREVIEW = {'R01','R02','R03','R04','R05','R06'}   # notes: a drawn mark, not someone else's picture
+NOPREVIEW = {'R01','R02','R03','R04','R05','R06','R08'}
 
 KINDS = [('operate','OPERATE','tools you work in'),
          ('browse','BROWSE','libraries you search and take from'),
@@ -248,3 +266,30 @@ KINDS = [('operate','OPERATE','tools you work in'),
          ('stock','STOCK','the material it was all cut from'),
          ('read','READ','the record')]
 
+
+
+# ------------------------------------------------------------------ the ways in
+# THE DOOR opens on 55 entries in six registers, which is the right shape for
+# someone who already knows the work and the wrong shape for everyone else.
+# These are routes: a handful of entries in an order, for a named person.
+PATHS = [
+ ('FOR THE POET', 'his own film, his own words, and what was made out of them',
+  [('F08', 'read the cut shot by shot — every frame with the line it carries'),
+   ('R06', 'which stanza each of the 135 shots actually covers'),
+   ('W01', 'fourteen posters, one per poem'),
+   ('W02', 'the same fourteen rebuilt, each with a voice of its own'),
+   ('L03', '107 zettels — every collage with a prompt written for it'),
+   ('F06', 'the fourteen poems as a suite, playing in the browser')]),
+ ('FOR AN EDITOR', 'everything another cutting room needs to take this apart',
+  [('R08', 'EDL, OTIO, JSON and a cue sheet for all five cuts'),
+   ('F08', 'the relink sheet: source clip and in-point for all 424 shots'),
+   ('F07', 'the coverage matrix — what is covered and what is not'),
+   ('L01', '2,275 images with their prompts, downloadable by the row'),
+   ('R01', 'the ledger: what was wrong with the previous cuts, and how')]),
+ ('TO MAKE SOMETHING', 'the benches, in the order they make sense',
+  [('I01', 'the patch studio — lay images into the ink field and bind them'),
+   ('I05', '2,033 cut-out subjects to pull from'),
+   ('I04', 'the blend table: nine ways one grid can meet another'),
+   ('L04', '1,095 sounds, imaged and named, searchable in language'),
+   ('I23', 'and the five cuts to put it back into')]),
+]
