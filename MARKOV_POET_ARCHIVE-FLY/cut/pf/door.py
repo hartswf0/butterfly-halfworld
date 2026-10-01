@@ -22,6 +22,7 @@ dropped: it renders struck through, with the reason, because an index that hides
 its own dead links is worth less than no index.
 """
 import os, sys, json, subprocess, hashlib, time
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np, cv2
 
 BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # .../MARKOV_POET_ARCHIVE-FLY
@@ -29,256 +30,54 @@ OUT  = os.path.join(BASE, 'index.html')
 THUMBS = os.path.join(BASE, 'door_thumbs')
 EDGE, Q = 460, 74
 
-# ---------------------------------------------------------------- the entries
-# kind:  operate | browse | look | watch | read
-# each: (id, kind, name, href, line, note)
-#   line — what it is, in one sentence
-#   note — what it is NOT, or what it costs. '' when there is nothing to warn about.
-E = [
- # ---- OPERATE: live tools. you make something that did not exist before.
- ('I01','operate','OPERATOR 16','cut/out/op16/index.html',
-  'The patch studio: lay images into a 192x144 ink field as corner-dragged quads, bind them to the limbs of a beflix body so they carry when it moves, blend nine ways, and stream a whole poem or a whole film onto the strip.',
-  'Heaviest tool here. A picked region is still not a nameable part — that gap is written up in cut/pf/OP16_FIT.md.'),
- ('I02','operate','OPERATOR 15','cut/out/op15/index.html',
-  'The previous operator, kept whole: single-frame patch work before spans, quads and binding existed.',
-  'Superseded by I01. Kept because it is the last version where a patch was just x, y and size.'),
- ('I03','operate','OPERATOR 14','cut/out/op/index.html',
-  'The first operator — the studio in its original form, where the dot law and the patch ontology were worked out.',
-  'Superseded twice.'),
- ('I04','operate','PASTE','cut/out/paste/index.html',
-  'The blend table: two grids, nine folds — over, behind, deepen, lift, darkest, lightest, differ, mask, knock — on eight ink weights.',
-  'A bench, not a composer. It shows you what a blend does; it does not keep the result.'),
- ('I05','operate','HELD','cut/out/held/index.html',
-  'The archive shelf: 2,033 cut-out subjects, cropped to their own alpha and capped at 256px, pickable into any socket.',
-  ''),
- ('I06','operate','HALFWORLD STUDIO','cut/out/studio/index.html',
-  'The world bench: compose a halfworld from grounds, worlds, elements and ink, and watch it resolve at the dot law.',
-  ''),
- ('I07','operate','THE LAB','cut/out/lab/index.html',
-  'Finding the body: segmentation probes over the archive, looking for the limbs a photograph does not have.',
-  'Research bench. Several probes are dead ends and are left in as dead ends.'),
- ('I08','operate','PATCHFIELD','cut/out/patchfield/index.html',
-  'A field of patches at once — the whole ontology laid out flat so you can see what kind each thing is.',
-  ''),
- ('I09','operate','DRESS','cut/out/dress/index.html',
-  'Skins mapped onto moving bodies: a texture taken across a silhouette as it walks.',
-  ''),
- ('I10','operate','INHABIT','cut/out/inhabit/index.html',
-  'Putting a real subject inside a generated place, and measuring whether the place accepts it.',
-  ''),
- ('I11','operate','THE LOOM','cut/out/loom/index.html',
-  'Weaving two sources into one strip, warp and weft, frame against frame.',
-  ''),
- ('I12','operate','TEXTULE','cut/out/textule/index.html',
-  'Text as texture: the poems rendered as surface rather than as words to read.',
-  ''),
- ('I13','operate','THE CITY','cut/out/archigram/index.html',
-  'Archigram method on the archive: the film’s architecture drawn as plug-in parts.',
-  ''),
- ('I14','operate','THE SETS','cut/out/scene/index.html',
-  'Twenty-eight scenes staged as sets — each one a place the film could be shot in rather than a shot.',
-  ''),
- ('I15','operate','THE WOVEN SHEETS','cut/out/sheets/index.html',
-  'Contact sheets woven from the archive, fourteen of them, one per poem.',
-  ''),
- ('I16','operate','I AM SITTING IN A ROOM','cut/out/lucier/index.html',
-  'Lucier’s method applied to an image: re-render the re-render until only the room is left.',
-  ''),
- ('I17','operate','CHURN','cut/out/churn/index.html',
-  'A radio: the archive cut, re-cut and broadcast against itself, continuously.',
-  '1.1 GB of rendered segments on disk.'),
- ('I18','operate','MOUSSA','cut/out/moussa/index.html',
-  'The carrier study — one body carried through every poem in the suite.',
-  '1.3 GB.'),
- ('I19','operate','THE JOURNEYS','cut/out/journeys/index.html',
-  'Routes through the archive computed as journeys rather than cuts.',
-  '393 MB.'),
- ('I20','operate','THE COLLAGES','cut/out/collage/index.html',
-  'The first collage bench — thirty-three works and the grammar they were built with.',
-  ''),
- ('I21','operate','PREVIS','cut/out/previs/index.html',
-  'Previsualisation of the suite: fourteen leads, one per poem.',
-  ''),
- ('I22','operate','THE SIX','cut/out/shorts/index.html',
-  'Six WYGWYL shorts, cut and playable.',
-  '923 MB.'),
- ('I23','operate','FIVE CUTS','cut/index.html',
-  'The player for the five master cuts, the concordance and the music map, with a pane that tracks the playhead.',
-  ''),
-
- # ---- BROWSE: libraries. you search, sort and take things away.
- ('L01','browse','THE BOARD','BOARD/index.html',
-  '2,275 rows — every image this archive made, each with its prompt, sortable by poem, type, video or still, and downloadable a row at a time as a real ZIP written by hand in the page.',
-  'Images load on an IntersectionObserver; a cold scroll to the bottom pulls a lot of files.'),
- ('L02','browse','EVERY EXPERIMENT','COLLAGE_AND_VIDEO/index.html',
-  'Forty-five works gathered into one folder — 834 moving pieces and 4,384 stills — with the prompt or the inspiration for each written beside it.',
-  '10.0 GB in place. The folder links by relative path, never by symlink: directory symlinks here took down every Pages deploy.'),
- ('L03','browse','THE COLLAGE ZETTELS','COLLAGE_ZETTELS/index.html',
-  '107 zettels, one per collage at every stage, each with the image and a text-to-video cineosis prompt written for it — collage 33, scene 28, cutsheet 14, lucier 20, plate 9, quilt 1, partswap 1, patchfield 1.',
-  ''),
- ('L04','browse','AUDIO RADIOLOGY','../audio/index.html',
-  '1,095 sounds, every one imaged on five planes (waveform, mel, chroma, onset and beat, harmonic/percussive split) with eighteen measurements and a Krumhansl–Schmuckler key, then named by CLAP on four axes with an EarSketch constant.',
-  'Lives at the repository root in audio/, beside the film’s own sound. Plates are 59 MB of WebP and are NOT yet committed — see the note at the foot of this page.'),
- ('L05','browse','MARKOV POET GALLERY','MARKOV_POET_GALLERY.html',
-  'The archive’s own gallery of the 135 generated shots.',
-  ''),
-
- # ---- LOOK: finished images. nothing to operate.
- ('W01','look','THE META COLLAGES','cut/out/meta',
-  'Fourteen posters, one per poem — a collage made out of the collages, on a value ladder that keeps a poster legible, with the hue taken from the most-saturated decile rather than the most common colour.',
-  ''),
- ('W02','look','THE SECOND PASS','cut/out/second',
-  'Fourteen works rebuilt with a voice each: eight geometries, five formats, coverage from 0.34 to 1.00, four palette structures, and mark weight set inverse to coverage so sparse does not read as thin.',
-  'Honest gap: nothing was ever rejected. Fourteen went in and fourteen came out. 06 and 09 still share the constellation geometry. Written up in cut/pf/SECOND_PASS.md.'),
- ('W03','look','THE PARTS','cut/out/parts',
-  'Every shot reduced to its parts — the second-moment anchors that binding carries by.',
-  ''),
- ('W04','look','THE BEFLIX SHEETS','cut/out/beflix_e',
-  'The ink field proved out: the dot law at eight levels, sheet by sheet.',
-  ''),
- ('W05','look','THE QUILT / THE SWAP / THE FIT','cut/out/quilt',
-  'Three small studies that each answered one question: can a shot be quilted, can two parts be swapped, can a piece be fitted to a limb.',
-  'The swap is in cut/out/partswap, the fit in cut/out/bind.'),
-
- # ---- STOCK: the material. not a work and not a tool — what the works were cut from.
- ('S01','stock','THE SEGMENTS','cut/churn_segments',
-  'Every clip the seven cuts were assembled from, kept whole and kept separate: the churn, the deck, the journeys, Moussa, the music, the shorts and the bastard pass.',
-  'Seven folders, one per cut. This is the pile; the cuts are F01–F05.'),
- ('S02','stock','THE CUT-OUTS','cut/out/elements',
-  '2,033 subjects lifted out of the archive, each one a figure floating in a transparent frame — the pile every socket draws from.',
-  'The sheet shows the web-sized twin (cut/out/thumbs \u2014 cropped to alpha, capped at 256px, 8.9 MB); each thumbnail links to its full-size original.'),
- ('S03','stock','THE HARVEST','cut/out/harvest',
-  '521 renders in two passes — each shot read against itself and against its contrary, world over subject and subject over real.',
-  'Two passes: harvest and harvest_flow.'),
- ('S04','stock','ARS POETICA','cut/out/arspoetica',
-  'Four treatments of the same shot rendered side by side — ink, subject-ink, subject-real, world-ground — so the difference between them could be looked at rather than argued about.',
-  ''),
- ('S05','stock','THE LEADS','cut/out/footage',
-  'One lead per poem, cut long: the fourteen pieces of footage the suite was previsualised from.',
-  ''),
- ('S06','stock','THE BEDS AND THE MIXES','cut/out/sound',
-  'The sound beds and mixes built per poem, plus the two pitched takes the music study turned on.',
-  ''),
- ('S07','stock','THE FRAMES AND THE SHEETS','cut/frames',
-  'A mid-frame extracted from all 135 shots, and the contact sheets made from them — the evidence that showed the category field was a garbage bucket.',
-  'Two folders: cut/frames and contact_sheets.'),
- ('S08','stock','THE HALFWORLDS','cut/halfworlds',
-  'Fourteen halfworlds, one per poem: a whole place rendered at the dot law rather than a shot of one.',
-  ''),
-
- # ---- WATCH: the cuts.
- ('F01','watch','A · THE PQ REEL','cut/out/WYGWYL_A_THE_PQ_REEL.mp4',
-  'The reel that never re-encodes: every shot passed through at its real duration, 5.04s to 39.17s, so the HDR is not thrown away by being flattened.',
-  '29 MB.'),
- ('F02','watch','B · THE WINDOW AND THE DOOR','cut/out/WYGWYL_B_THE_WINDOW_AND_THE_DOOR.mp4',
-  'The suite cut to its own script — 111 stanzas with screen text, voiceover and an image-function, which no previous cut had ever referenced.',
-  '373 MB.'),
- ('F03','watch','C · THE DECK AT 60BPM','cut/out/WYGWYL_C_THE_DECK_60BPM.mp4',
-  'Cut to a grid: one bar per shot at sixty beats per minute, with its own score.',
-  '243 MB. A silent version sits beside it.'),
- ('F04','watch','D · THE DOOR','cut/out/WYGWYL_D_THE_DOOR.mp4',
-  'Ends on P014 — the single shot in the whole archive of an open, lit doorway, which had been sitting in the middle of poem 01.',
-  '108 MB.'),
- ('F05','watch','E · THE DOOR, SCORED','cut/out/WYGWYL_E_THE_DOOR_mareamemory_06.mp4',
-  'D again, carried on mareamemory 06.',
-  '125 MB. Silent version beside it.'),
- ('F06','watch','THE SUITE PLAYER','wygwyl-suite-player.html',
-  'The fourteen poems as a suite, playable in the browser.',
-  ''),
- ('F07','watch','THE COVERAGE MATRIX','wygwyl-coverage-matrix.html',
-  'Which stanza every one of the 135 shots actually covers — the page that showed the category field was a garbage bucket.',
-  ''),
-
- # ---- READ: the record.
- ('R01','read','THE LEDGER','cut/LEDGER.md',
-  'What this pass saw, what it changed, and what it got wrong on the way. A ledger with no failures is a falsified ledger.',
-  ''),
- ('R02','read','THE CUT README','cut/README.md',
-  'How the five cuts were made and what each one is for.',
-  ''),
- ('R03','read','THE OPERATOR NOTES','cut/pf',
-  'Twenty-four notes written while building: the patch ontology, the quad warp, binding by follow and by fit, the nine blends, the undo model, what picking is, and the two films problem.',
-  ''),
- ('R04','read','THE SECOND-PASS NOTE','cut/pf/SECOND_PASS.md',
-  'Why the first second pass failed — every work had the same structure and only the hue changed — and what a voice actually needs.',
-  ''),
- ('R05','read','THE FIT NOTE','cut/pf/OP16_FIT.md',
-  'The one gap left open: a picked region is not yet a bindable part. One step, not a system.',
-  ''),
- ('R06','read','THE COVERAGE MAP','WYGWYL_COVERAGE_MAP.md',
-  'The archive measured against the poems, stanza by stanza.',
-  ''),
- ('R07','read','THE SIBLING ATLAS','../wygwyl/atlas.html',
-  'The other body of work in this repository, indexed in its own record idiom: the city, the world, the radio, the spine key, sixty-six entries.',
-  'Not this archive. Linked because this is the only place the two indexes meet.'),
-]
+from door_entries import *
 
 
-# --------------------------------------------- what to measure, what to show
-# An entry's href is a door; the thing behind it is usually a whole directory.
-# MEASURE says which. Default: an index.html measures its own folder, anything
-# else measures itself. A markdown note measures itself and shows no picture,
-# because the only image in its folder belongs to something else — a borrowed
-# preview is a small lie told sixteen times.
-MEASURE = {
- 'S01':['cut/bastard_segments','cut/churn_segments','cut/deck_segments','cut/journey_segments',
-        'cut/moussa_segments','cut/music_segments','cut/short_segments'],
- 'S02':['cut/out/elements','cut/out/thumbs'],
- 'S03':['cut/out/harvest','cut/out/harvest_flow'],
- 'S06':['cut/out/sound','cut/out/music'],
- 'S07':['cut/frames','contact_sheets'],
- # the player is the page; the cuts it plays are counted once, as F01-F05
- 'I23':'cut/index.html',
- 'W05':['cut/out/quilt','cut/out/partswap','cut/out/bind'],
- 'L01':'BOARD', 'L02':'COLLAGE_AND_VIDEO', 'L03':'COLLAGE_ZETTELS', 'L04':'../audio',
- 'L05':'MARKOV_POET_00',
- 'R03':'cut/pf',
-}
-# COUNT: a library's real headline number, read from its own manifest, because
-# "4 files" is true of BOARD/ and tells you nothing about it.
-COUNT = {
- 'L01':('BOARD/board.json','rows'),
- 'L02':('COLLAGE_AND_VIDEO/catalogue.json','works'),
- 'L03':('COLLAGE_ZETTELS/catalogue.json','zettels'),
- 'L04':('../audio/index.json','sounds'),
-}
-# PREVIEW: an explicit member of the collection, where the collection's own
-# folder holds only the page that indexes it.
-PREVIEW = {
- 'S02':'cut/out/thumbs',
- 'L01':'cut/out/collage/GRID_ALL.webp',
- 'L02':'cut/out/lucier',
- 'L03':'cut/out/scene',
- 'L04':'../audio/plates/0035ba4fa124.webp',
- 'L05':'MARKOV_POET_00/thumbnails',
-}
-# notes get a drawn mark, never the only picture that happens to sit in their folder
-NOPREVIEW = {'R01','R02','R03','R04','R05','R06'}   # notes: a drawn mark, not someone else's picture
-
-KINDS = [('operate','OPERATE','tools you work in'),
-         ('browse','BROWSE','libraries you search and take from'),
-         ('look','LOOK','finished images'),
-         ('watch','WATCH','the cuts'),
-         ('stock','STOCK','the material it was all cut from'),
-         ('read','READ','the record')]
-
-IMGX = ('.png','.jpg','.jpeg','.webp')
-VIDX = ('.mp4','.mov','.m4v')
+# This pass writes index.html and door_strips into the archive it is measuring.
+# Counting its own output as evidence would date every entry to today and erase
+# the whole chronology, so it is excluded by name wherever the disk is read.
+MINE_DIRS = {'door_thumbs', 'door_strips'}
+_mine_cache = {}
+def is_mine(path):
+    """An index.html is excluded only if THIS pass wrote it. Excluding the name
+       outright was wrong: OPERATOR 15, OPERATOR 14 and PASTE are each a single
+       index.html, so the rule measured them as zero files and quietly dropped
+       all three out of the chronology. The sheets this pass writes carry a
+       data-door marker; nothing else does."""
+    if os.path.basename(path) != 'index.html': return False
+    if path in _mine_cache: return _mine_cache[path]
+    try:
+        with open(path, 'rb') as fh: head = fh.read(220)
+        v = (b'data-door' in head) or os.path.abspath(path) == os.path.abspath(OUT)
+    except OSError: v = False
+    _mine_cache[path] = v
+    return v
 
 def walk(p, cap=40000):
-    """count, bytes, newest mtime — for a file, itself; for a dir, everything under it"""
+    """count, bytes, and WHEN — for a file, itself; for a dir, everything under it.
+       The dates are the 5th and 95th percentile of the mtimes, not the min and
+       max: one file touched last week should not restate when the work happened."""
     if os.path.isfile(p):
-        s = os.stat(p); return 1, s.st_size, s.st_mtime
-    n = b = 0; t = 0.0
+        s = os.stat(p)
+        return 1, s.st_size, [min(s.st_mtime, getattr(s, 'st_birthtime', s.st_mtime) or s.st_mtime)]
+    n = b = 0; ts = []
     for root, dirs, files in os.walk(p):
-        dirs[:] = [d for d in dirs if not d.startswith('.')]
+        dirs[:] = [d for d in dirs if not d.startswith('.') and d not in MINE_DIRS]
         for f in files:
             if f.startswith('.'): continue
-            try: s = os.stat(os.path.join(root, f))
+            fp = os.path.join(root, f)
+            if is_mine(fp): continue
+            try: s = os.stat(fp)
             except OSError: continue
-            n += 1; b += s.st_size; t = max(t, s.st_mtime)
-            if n >= cap: return n, b, t
-    return n, b, t
+            n += 1; b += s.st_size
+            ts.append(min(s.st_mtime, getattr(s, 'st_birthtime', s.st_mtime) or s.st_mtime))
+            if n >= cap: return n, b, ts
+    return n, b, ts
+
+def when(ts):
+    if not ts: return (0.0, 0.0, 0.0)
+    ts = sorted(ts)
+    return (ts[len(ts)//20], ts[-1 - len(ts)//20], ts[(len(ts)-1)//2])
 
 def pick_source(p):
     """the image this collection should show: its own first image, or a frame from its first clip"""
@@ -302,7 +101,7 @@ def frame_of(path, out):
     dur = 0.0
     try:
         r = subprocess.run(['ffprobe','-v','error','-show_entries','format=duration',
-                            '-of','default:nw=1:nk=1', path], capture_output=True, text=True, timeout=30)
+                            '-of','default=nw=1:nk=1', path], capture_output=True, text=True, timeout=30)
         dur = float((r.stdout or '0').strip() or 0)
     except Exception: pass
     at = max(0.0, dur/3.0) if dur > 1.5 else 0.0
@@ -398,6 +197,15 @@ def git_state():
         return None, None
 
 GIT_TOP, GIT_FILES = git_state()
+
+# What each entry should show of itself, and how it differs from the rest —
+# chosen and measured by cut/pf/strips.py, which is a separate pass because it
+# costs minutes and this one costs seconds.
+try:
+    STRIPS = json.load(open(os.path.join(BASE, 'door_strips', 'index.json')))
+except Exception:
+    STRIPS = {}
+    print('  ! no door_strips/index.json — run cut/pf/strips.py for moving previews')
 
 def tracked(paths):
     """how many files under these roots git knows about"""
@@ -545,7 +353,8 @@ rows, dead, nopreview = [], [], []
 for eid, kind, name, href, line, note in E:
     p = os.path.normpath(os.path.join(BASE, href))
     r = dict(id=eid, kind=kind, name=name, href=href, line=line, note=note,
-             ok=os.path.exists(p), n=0, bytes=0, mtime=0, thumb='', noun='files')
+             ok=os.path.exists(p), n=0, bytes=0, mtime=0, t_lo=0, t_hi=0, t_mid=0,
+             thumb='', noun='files')
     if not r['ok']:
         dead.append((eid, href)); rows.append(r); continue
     m = MEASURE.get(eid)
@@ -554,9 +363,12 @@ for eid, kind, name, href, line, note in E:
     ms = m if isinstance(m, list) else [m]
     ms = [os.path.normpath(os.path.join(BASE, x)) for x in ms if x]
     ms = [x for x in ms if os.path.exists(x)] or [p]
+    stamps = []
     for x in ms:
         n, b, t = walk(x)
-        r['n'] += n; r['bytes'] += b; r['mtime'] = max(r['mtime'], t)
+        r['n'] += n; r['bytes'] += b; stamps += t
+    r['t_lo'], r['t_hi'], r['t_mid'] = when(stamps)
+    r['mtime'] = r['t_hi']
     r['roots'] = ms
     r['git'] = tracked(ms)
     mp = ms[0]
@@ -567,6 +379,12 @@ for eid, kind, name, href, line, note in E:
             r['noun'] = noun
         except Exception as ex:
             print(f'    ! {eid} manifest unreadable: {ex}')
+    r['has_strip'] = bool(STRIPS.get(eid)) and os.path.exists(
+        os.path.join(BASE, 'door_strips', eid + '.webp'))
+    if r['has_strip']:
+        rows.append(r)               # the strip supersedes the still AND the mark
+        print(f"  {eid}  {name[:28]:28s} {r['n']:6d} {r['noun']:7s} {human(r['bytes']):>9s}  strip")
+        continue
     if eid in NOPREVIEW:
         sk, ss = None, None
     else:
@@ -624,12 +442,47 @@ def dots(eid):
     return ('<svg class="dots" viewBox="0 0 110 110" aria-hidden="true">'
             f'<g fill="#141414">{"".join(out)}</g></svg>')
 
+
+# ------------------------------------------- the difference that makes a difference
+# Five measurements per entry, z-scored against all the others by strips.py. The
+# axis an entry sits furthest out on is what actually tells it apart from its
+# neighbours — said in words, with the number and the median it departs from, so
+# the claim can be checked rather than believed.
+APART = {
+ 'light':   ('brighter than anything else here', 'darker than anything else here'),
+ 'contrast':('harder in its blacks and whites',  'flatter — it lives in the middle'),
+ 'detail':  ('busier — more happening per inch', 'emptier — more space than mark'),
+ 'colour':  ('more colour',                      'closest to grey'),
+ 'variety': ('the least alike inside itself',    'the most uniform inside itself'),
+}
+def apart_line(eid):
+    a = (STRIPS.get(eid) or {}).get('apart')
+    if not a or abs(a['z']) < 0.75: return ''      # not actually apart; say nothing
+    words = APART.get(a['axis'], (a['axis'], a['axis']))[0 if a['dir'] == 'more' else 1]
+    v, m = a['value'], a['median']
+    fmt = (lambda x: f'{x:.0f}') if abs(m) >= 10 else (lambda x: f'{x:.2f}')
+    w = max(2, min(100, int(abs(a['z']) / 3.0 * 100)))
+    return (f'<div class="apart"><i style="width:{w}%"></i>'
+            f'<span><b>{esc(words)}</b> \u2014 {fmt(v)} against a median of {fmt(m)}</span></div>')
+
+MON = ('JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC')
+def dated(lo, hi):
+    if not lo: return ''
+    a, b = time.localtime(lo), time.localtime(hi)
+    if (a.tm_year, a.tm_mon, a.tm_mday) == (b.tm_year, b.tm_mon, b.tm_mday):
+        return f'{MON[a.tm_mon-1]} {a.tm_mday}'
+    if (a.tm_year, a.tm_mon) == (b.tm_year, b.tm_mon):
+        return f'{MON[a.tm_mon-1]} {a.tm_mday}\u2013{b.tm_mday}'
+    return f'{MON[a.tm_mon-1]} {a.tm_mday} \u2013 {MON[b.tm_mon-1]} {b.tm_mday}'
+
 cards = []
+seq = sorted([r for r in live if r['t_mid']], key=lambda r: r['t_mid'])
+SEQ = {r['id']: i + 1 for i, r in enumerate(seq)}
 for r in rows:
     cls = 'card' + ('' if r['ok'] else ' gone')
     meta = ('<span class="gonetag">LINK DEAD</span>' if not r['ok'] else
             f"<span>{r['n']:,} {r['noun']}{'' if r['noun'].endswith('s') else 's'}</span><span>{human(r['bytes'])}</span>"
-            f"<span>{time.strftime('%Y-%m-%d', time.localtime(r['mtime']))}</span>"
+            f"<span>{dated(r['t_lo'], r['t_hi'])}</span>"
             + ('' if r.get('git') is None else
                ('<span class="disk">DISK ONLY</span>' if r['git'] == 0 else
                 ('<span class="part">PART IN REPO</span>' if r['git'] < r['n'] else ''))))
@@ -639,21 +492,59 @@ for r in rows:
         made = (f'Contact sheet generated into the folder: {shown} of {n_:,} shown, the rest listed.'
                 if n_ > shown else 'Contact sheet generated into the folder.')
         note = (note + '  ' + made) if note else made
-    pv = ((f'<img src="{esc(r["thumb"])}" alt="" loading="lazy" decoding="async"'
-           + (' class="drawn" title="drawn ink field — this entry has no image of its own">'
-              if r.get('drawn') else '>'))
-          if r['thumb'] else dots(r['id']))
+    st = STRIPS.get(r['id'])
+    if st and os.path.exists(os.path.join(BASE, 'door_strips', r['id'] + '.webp')):
+        pv = (f'<i class="strip" data-n="{st["frames"]}" '
+              f'style="background-image:url(door_strips/{r["id"]}.webp)" '
+              f'title="{st["frames"]} frames chosen to span this, out of {st["n_cand"]} looked at"></i>')
+    elif r['thumb']:
+        pv = (f'<img src="{esc(r["thumb"])}" alt="" loading="lazy" decoding="async"'
+              + (' class="drawn" title="drawn ink field \u2014 this entry has no image of its own">'
+                 if r.get('drawn') else '>'))
+    else:
+        pv = dots(r['id'])
+    where = esc(r['href'] if r['href'].endswith(('.html', '.md', '.mp4')) else r['href'].rstrip('/') + '/')
     body = (f'<div class="pv">{pv}</div>'
             f'<div class="txt"><div class="hd"><span class="eid">{r["id"]}</span>'
-            f'<h3>{esc(r["name"])}</h3></div>'
+            f'<h3>{esc(r["name"])}</h3>'
+            + (f'<span class="seq">{SEQ[r["id"]]}<small>/{len(seq)}</small></span>' if r['id'] in SEQ else '')
+            + '</div>'
             f'<p class="line">{esc(r["line"])}</p>'
+            + apart_line(r['id'])
             + (f'<p class="note">{esc(note)}</p>' if note else '')
-            + f'<div class="meta">{meta}</div></div>')
+            + f'<div class="meta">{meta}</div>'
+            f'<div class="where">{where}</div></div>')
     hay = esc((r['id'] + ' ' + r['name'] + ' ' + r['line'] + ' ' + r['note'] + ' ' + r['href']).lower())
     if r['ok']:
-        cards.append(f'<a class="{cls}" href="{esc(r["href"])}" data-k="{r["kind"]}" data-h="{hay}">{body}</a>')
+        cards.append(f'<a class="{cls}" id="{r["id"]}" href="{esc(r["href"])}" '
+                     f'data-k="{r["kind"]}" data-h="{hay}">{body}</a>')
     else:
-        cards.append(f'<div class="{cls}" data-k="{r["kind"]}" data-h="{hay}">{body}</div>')
+        cards.append(f'<div class="{cls}" id="{r["id"]}" data-k="{r["kind"]}" data-h="{hay}">{body}</div>')
+
+# ------------------------------------------------------------- the chronology
+# The dates are not decoration. Read in order they are the only record of how
+# this went: the halfworlds and the radio first, then the carrier, then the
+# harvest and the cut-outs, then the collages, then the operators, then the
+# zettels and the board, then the meta and the second pass, then the sound. The
+# file system remembered it even where nothing was written down.
+days, order = [], []
+for r in seq:
+    d = time.strftime('%Y-%m-%d', time.localtime(r['t_mid']))
+    if not days or days[-1][0] != d: days.append((d, []))
+    days[-1][1].append(r)
+KCOL = {'operate':'#0033cc','browse':'#8a6d00','look':'#141414',
+        'watch':'#cf222e','stock':'#6a6a6a','read':'#0a5'}
+for d, rs in days:
+    t = time.localtime(time.mktime(time.strptime(d, '%Y-%m-%d')))
+    chips = ''.join(
+      f'<a class="chip" href="#{r["id"]}" data-k="{r["kind"]}" '
+      f'style="--c:{KCOL.get(r["kind"], "#141414")}">'
+      f'<b>{r["id"]}</b>{esc(r["name"])}</a>' for r in rs)
+    order.append(f'<div class="day"><div class="dh">{MON[t.tm_mon-1]} <b>{t.tm_mday}</b>'
+                 f'<small>{len(rs)}</small></div><div class="chips">{chips}</div></div>')
+WHEN = ('<h2 id="when">WHEN <small>the order the work happened, dated off the filesystem \u00b7 '
+        f'{len(days)} days \u00b7 {dated(seq[0]["t_mid"], seq[-1]["t_mid"]) if seq else ""}</small></h2>'
+        f'<div class="when">{"".join(order)}</div>') if seq else ''
 
 tabs = ''.join(f'<button class="tab" data-f="{k}">{lab}<small>{sum(1 for r in live if r["kind"]==k)}</small></button>'
                for k, lab, _ in KINDS)
@@ -733,6 +624,36 @@ footer{{margin-top:56px;border-top:3px solid var(--ink);padding-top:20px;
   font:400 13px/1.62 ui-monospace,Menlo,monospace;color:var(--dim);max-width:78ch}}
 footer b{{color:var(--ink)}} footer p{{margin:12px 0}}
 footer a{{color:var(--accent)}}
+.pv .strip{{display:block;width:100%;height:100%;background-repeat:no-repeat;
+  background-size:800% 100%;background-position:0% 50%}}
+.seq{{margin-left:auto;font:700 10px/1 ui-monospace,monospace;color:var(--dim);flex:0 0 auto;padding-top:2px}}
+.seq small{{font-weight:400;color:var(--l3)}}
+a.card:hover .seq{{color:var(--l3)}}
+.apart{{border-top:1px solid var(--l1);padding-top:8px;display:flex;flex-direction:column;gap:5px}}
+.apart i{{display:block;height:3px;background:var(--ink);min-width:2px}}
+.apart span{{font:400 11.5px/1.45 ui-monospace,Menlo,monospace;color:var(--dim)}}
+.apart b{{color:var(--ink);font-weight:700}}
+a.card:hover .apart{{border-color:#4a4a48}} a.card:hover .apart i{{background:var(--paper2)}}
+a.card:hover .apart span{{color:var(--l3)}} a.card:hover .apart b{{color:var(--paper2)}}
+.where{{font:400 10px/1.4 ui-monospace,Menlo,monospace;color:var(--l3);word-break:break-all;
+  border-top:1px solid var(--l1);padding-top:7px}}
+a.card:hover .where{{color:#6a6a68;border-color:#4a4a48}}
+.when{{border:2px solid var(--ink);background:var(--paper2)}}
+.day{{display:flex;gap:14px;align-items:flex-start;padding:11px 13px;border-bottom:1px solid var(--l1)}}
+.day:last-child{{border-bottom:0}}
+.dh{{flex:0 0 74px;font:900 10px/1.5 Helvetica;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--dim);position:sticky;top:64px}}
+.dh b{{color:var(--ink);font-size:17px;letter-spacing:0;display:block;line-height:1.05}}
+.dh small{{display:block;font:700 10px/1.6 ui-monospace,monospace;letter-spacing:0;color:var(--l3)}}
+.chips{{display:flex;flex-wrap:wrap;gap:6px;min-width:0}}
+.chip{{text-decoration:none;color:var(--ink);font:400 11px/1.3 ui-monospace,Menlo,monospace;
+  border-left:3px solid var(--c);padding:3px 8px 4px 7px;background:var(--paper);max-width:230px}}
+.chip b{{display:block;font:700 9px/1.2 ui-monospace,monospace;color:var(--c);letter-spacing:.08em}}
+.chip:hover{{background:var(--ink);color:var(--paper2)}}
+.chip:hover b{{color:var(--l3)}}
+@media(max-width:560px){{.day{{flex-direction:column;gap:7px}}.dh{{position:static;flex:0 0 auto;
+  display:flex;gap:9px;align-items:baseline}}.dh b{{display:inline}}.dh small{{display:inline}}}}
+.card:target{{outline:4px solid var(--accent);outline-offset:3px}}
 .hide{{display:none!important}}
 .card.unreach{{opacity:.72}}
 @media(max-width:560px){{body{{padding:0 14px 90px}} .grid{{grid-template-columns:1fr}} .pv{{height:200px}}}}
@@ -745,8 +666,11 @@ footer a{{color:var(--accent)}}
   poems, in one place. <b>{sum(1 for r in live if r['kind']=='operate')} instruments</b> you can
   work in, <b>{sum(1 for r in live if r['kind']=='browse')} libraries</b> you can search and take
   from, the finished works, the five cuts, and the record of what went wrong.
-  Every count and every byte on this page was measured off the disk when it was built;
-  every preview is a real frame from the thing it stands for.</p>
+  Every count and every byte was measured off the disk when the page was built. Every preview
+  is eight real frames chosen to span the thing rather than one picked off the top of the pile —
+  so what turns on each card is the <i>range</i> of what is in there. Under each one, the single
+  measurement on which it sits furthest from everything else here: the difference that makes a
+  difference. <a href="#when">WHEN</a> puts all of it back in the order it was made.</p>
   <p class="tot">{len(live)} ENTRIES &nbsp;·&nbsp; {TOT_N:,} FILES &nbsp;·&nbsp; {human(TOT_B)} &nbsp;·&nbsp; BUILT {time.strftime('%Y-%m-%d %H:%M')}</p>
 </header>
 
@@ -756,6 +680,8 @@ footer a{{color:var(--accent)}}
   <input id="q" type="search" placeholder="search  /  the whole page" autocomplete="off" spellcheck="false">
   <span id="cnt"></span>
 </div>
+
+{WHEN}
 
 {''.join(secs)}
 
@@ -777,10 +703,20 @@ footer a{{color:var(--accent)}}
   forearm-and-sleeve case cannot be done by name (<a href="cut/pf/OP16_FIT.md">OP16_FIT</a>).
   The second pass has structure but no subject, and rejected nothing — fourteen in,
   fourteen out (<a href="cut/pf/SECOND_PASS.md">SECOND_PASS</a>).</p>
-  <p><b>How this page is kept true.</b> It is generated, not written:
-  <code>python3 cut/pf/door.py</code>. The builder checks every link against the disk and
-  renders a missing one struck through with LINK DEAD rather than dropping it, so this
-  index cannot quietly outlive what it indexes.</p>
+  <p><b>How this page is kept true.</b> It is generated, not written. <code>cut/pf/door.py</code>
+  builds it in seconds and checks every link against the disk, rendering a missing one struck
+  through with LINK DEAD rather than dropping it. <code>cut/pf/strips.py</code> is the slow pass:
+  it looks at up to twenty-four candidates per entry, measures each one, keeps the best, then
+  repeatedly keeps whatever is <i>furthest</i> from everything kept so far — eight best frames
+  from one folder are eight versions of the same frame, and it is the spread that tells two
+  folders apart. The five measurements are then z-scored across all entries, which is where the
+  line under each card comes from.</p>
+  <p>Two limits, stated. The dates are the filesystem's: a file rewritten later reads as later,
+  and the entry for OPERATOR 16 sat in October until this pass started taking the earlier of
+  each file's creation and modification time — my own one-line fix to its title had moved it.
+  And a preview can only span what it was shown; where an entry had fewer than three readable
+  frames it carries a drawn ink field instead of a strip, rather than one picture repeated eight
+  times to look like eight.</p>
 </footer>
 
 </div><script>
@@ -811,6 +747,32 @@ footer a{{color:var(--accent)}}
   if(e.key==='Escape'&&document.activeElement===q){{q.value='';q.blur();apply();}}
  }});
  apply();
+
+ /* Eight frames chosen to span the thing are worth more than one if you can see
+    all eight. They turn only while on screen, each card on its own phase so the
+    wall does not march in step, and faster under the pointer. */
+ var live=new Set(), tick=0;
+ var io=new IntersectionObserver(function(es){{
+   es.forEach(function(e){{ e.isIntersecting ? live.add(e.target) : live.delete(e.target); }});
+ }},{{rootMargin:'140px'}});
+ var strips=[].slice.call(document.querySelectorAll('.strip'));
+ strips.forEach(function(el,i){{
+   el._i=0; el._p=i%5; el._fast=false; io.observe(el);
+   var c=el.closest('.card');
+   if(c){{ c.addEventListener('pointerenter',function(){{el._fast=true;}});
+           c.addEventListener('pointerleave',function(){{el._fast=false;}}); }}
+ }});
+ function turn(el){{
+   var n=+el.dataset.n||8; if(n<2) return;
+   el._i=(el._i+1)%n;
+   el.style.backgroundPositionX=(el._i*100/(n-1))+'%';
+ }}
+ if(strips.length && !matchMedia('(prefers-reduced-motion: reduce)').matches){{
+   setInterval(function(){{
+     tick++;
+     live.forEach(function(el){{ if(el._fast || (tick+el._p)%5===0) turn(el); }});
+   }},340);
+ }}
 
  /* Whether an entry resolves depends on where this page is being served from,
     which it cannot know when it is built. Two entries live above this folder, and
@@ -849,5 +811,5 @@ if dead:
     print("DEAD LINKS (rendered struck through, not hidden):")
     for eid, h in dead: print(f"    {eid}  {h}")
 if nopreview:
-    print(f"no preview (drawn mark instead): {' '.join(nopreview)}")
+    print(f"no frames to show, drawn ink field instead: {' '.join(nopreview)}")
 print(f"-> {os.path.relpath(OUT, os.getcwd())}")
