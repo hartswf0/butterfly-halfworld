@@ -1,0 +1,2400 @@
+{
+"01": {
+"title": "Out of Life",
+"duration": 88.38,
+"time_of_day": "evening into night (inferred: 'room dim'; spine SH010 places the fire escape at dusk)",
+"weather_light": "dim interior, TV flicker, thick vape haze blurring vision; then cloud and total black; the party is warm with euphoric light leaks",
+"items": [
+{
+"t": 9.17,
+"word": "hallways",
+"cls": "set",
+"type": "rooms",
+"line": "I look for a way out through the hallways, within the drawers and fire escap…"
+},
+{
+"t": 11.73,
+"word": "fire",
+"cls": "land",
+"type": "fire",
+"line": "…hallways, within the drawers and fire escapes, trip"
+},
+{
+"t": 25.64,
+"word": "quicksands",
+"cls": "land",
+"type": "beach",
+"line": "…known yet unknown pit beneath the quicksands"
+},
+{
+"t": 30.41,
+"word": "forest",
+"cls": "land",
+"type": "forest",
+"line": "…, and hidden in the overnourished forest of escapism that calls"
+},
+{
+"t": 62.14,
+"word": "nights",
+"cls": "sky",
+"type": "night",
+"line": "…s, fully awakening to our darkest nights."
+},
+{
+"t": 66.49,
+"word": "fields",
+"cls": "land",
+"type": "field",
+"line": "Pause for a second, a spectrum of fields will thread needles of garments m…"
+},
+{
+"t": 70.59,
+"word": "photographs",
+"cls": "prop",
+"type": "photographs",
+"line": "and photographs, film and fiction that leave me em…"
+},
+{
+"t": 71.47,
+"word": "film",
+"cls": "prop",
+"type": "photographs",
+"line": "and photographs, film and fiction that leave me empty."
+},
+{
+"t": null,
+"word": "fire escape",
+"cls": "set",
+"type": "stairs",
+"line": "fire escape",
+"from": "bible"
+},
+{
+"t": null,
+"word": "brick wall",
+"cls": "set",
+"type": "walls",
+"line": "brick wall",
+"from": "bible"
+},
+{
+"t": null,
+"word": "skyline",
+"cls": "land",
+"type": "city",
+"line": "city skyline",
+"from": "bible"
+},
+{
+"t": null,
+"word": "clouds",
+"cls": "sky",
+"type": "clouds",
+"line": "open air / clouds below the window",
+"from": "bible"
+}
+],
+"needs": [
+{
+"cls": "set",
+"type": "rooms",
+"first": 9.17,
+"count": 1,
+"line": "I look for a way out through the hallways, within the drawers and fire escap…"
+},
+{
+"cls": "land",
+"type": "fire",
+"first": 11.73,
+"count": 1,
+"line": "…hallways, within the drawers and fire escapes, trip"
+},
+{
+"cls": "land",
+"type": "beach",
+"first": 25.64,
+"count": 1,
+"line": "…known yet unknown pit beneath the quicksands"
+},
+{
+"cls": "land",
+"type": "forest",
+"first": 30.41,
+"count": 1,
+"line": "…, and hidden in the overnourished forest of escapism that calls"
+},
+{
+"cls": "sky",
+"type": "night",
+"first": 62.14,
+"count": 1,
+"line": "…s, fully awakening to our darkest nights."
+},
+{
+"cls": "land",
+"type": "field",
+"first": 66.49,
+"count": 1,
+"line": "Pause for a second, a spectrum of fields will thread needles of garments m…"
+},
+{
+"cls": "prop",
+"type": "photographs",
+"first": 70.59,
+"count": 2,
+"line": "and photographs, film and fiction that leave me em…"
+},
+{
+"cls": "set",
+"type": "stairs",
+"first": null,
+"count": 1,
+"line": "fire escape"
+},
+{
+"cls": "set",
+"type": "walls",
+"first": null,
+"count": 1,
+"line": "brick wall"
+},
+{
+"cls": "land",
+"type": "city",
+"first": null,
+"count": 1,
+"line": "city skyline"
+},
+{
+"cls": "sky",
+"type": "clouds",
+"first": null,
+"count": 1,
+"line": "open air / clouds below the window"
+}
+]
+},
+"02": {
+"title": "Flashing Lights",
+"duration": 81.58,
+"time_of_day": "night (void: 'after midnight'); flashback is a winter night",
+"weather_light": "pitch black void with intermittent flashing lights; flashback: dark room raked by moving headlights, curtains pulled and blinds up, a strangely warm heavy winter breeze (inferred snow outside from spine FL044)",
+"items": [
+{
+"t": 3.1,
+"word": "headlights",
+"cls": "light",
+"type": "lights",
+"line": "…am for help while falling with my headlights off."
+},
+{
+"t": 7.8,
+"word": "escape",
+"cls": "set",
+"type": "stairs",
+"line": "…lent scream a trap lover makes to escape a pending marriage,"
+},
+{
+"t": 11.94,
+"word": "walls",
+"cls": "set",
+"type": "walls",
+"line": "a concussion, a set of walls caving inward, seething and simme…"
+},
+{
+"t": 26.98,
+"word": "mirror",
+"cls": "prop",
+"type": "photographs",
+"line": "…of silent call a man makes to the mirror after midnight."
+},
+{
+"t": 27.5,
+"word": "midnight",
+"cls": "sky",
+"type": "night",
+"line": "…l a man makes to the mirror after midnight."
+},
+{
+"t": 31.08,
+"word": "windless",
+"cls": "sky",
+"type": "wind",
+"line": "To digest the truth, a windless insomnia and epiphany of a road w…"
+},
+{
+"t": 34.32,
+"word": "road",
+"cls": "land",
+"type": "road",
+"line": "…ndless insomnia and epiphany of a road winding down."
+},
+{
+"t": 58.11,
+"word": "breeze",
+"cls": "sky",
+"type": "wind",
+"line": "It was a type of warm and heavy breeze in winter"
+},
+{
+"t": 62.87,
+"word": "curtains",
+"cls": "set",
+"type": "window",
+"line": "With curtains pulled and blinds up as far and a…"
+},
+{
+"t": 64.47,
+"word": "blinds",
+"cls": "set",
+"type": "window",
+"line": "With curtains pulled and blinds up as far and as wise as possible…"
+},
+{
+"t": 68.11,
+"word": "flashing",
+"cls": "light",
+"type": "lights",
+"line": "…ar and as wise as possible to see flashing lights"
+},
+{
+"t": 68.51,
+"word": "lights",
+"cls": "light",
+"type": "lights",
+"line": "…wise as possible to see flashing lights"
+},
+{
+"t": 72.61,
+"word": "road",
+"cls": "land",
+"type": "road",
+"line": "…spering screams of two souls on a road winding down."
+},
+{
+"t": null,
+"word": "road",
+"cls": "land",
+"type": "road",
+"line": "a winding downhill road",
+"from": "bible"
+},
+{
+"t": null,
+"word": "street",
+"cls": "land",
+"type": "road",
+"line": "streetlights",
+"from": "bible"
+}
+],
+"needs": [
+{
+"cls": "light",
+"type": "lights",
+"first": 3.1,
+"count": 3,
+"line": "…am for help while falling with my headlights off."
+},
+{
+"cls": "set",
+"type": "stairs",
+"first": 7.8,
+"count": 1,
+"line": "…lent scream a trap lover makes to escape a pending marriage,"
+},
+{
+"cls": "set",
+"type": "walls",
+"first": 11.94,
+"count": 1,
+"line": "a concussion, a set of walls caving inward, seething and simme…"
+},
+{
+"cls": "prop",
+"type": "photographs",
+"first": 26.98,
+"count": 1,
+"line": "…of silent call a man makes to the mirror after midnight."
+},
+{
+"cls": "sky",
+"type": "night",
+"first": 27.5,
+"count": 1,
+"line": "…l a man makes to the mirror after midnight."
+},
+{
+"cls": "sky",
+"type": "wind",
+"first": 31.08,
+"count": 2,
+"line": "To digest the truth, a windless insomnia and epiphany of a road w…"
+},
+{
+"cls": "land",
+"type": "road",
+"first": 34.32,
+"count": 4,
+"line": "…ndless insomnia and epiphany of a road winding down."
+},
+{
+"cls": "set",
+"type": "window",
+"first": 62.87,
+"count": 2,
+"line": "With curtains pulled and blinds up as far and a…"
+}
+]
+},
+"03": {
+"title": "How to Break off an Engagement",
+"duration": 62.52,
+"time_of_day": "time-lapse across days or seasons, ending in storm and its aftermath",
+"weather_light": "dusty single-source interior light, then thunder, lightning and sheets of rain; after the storm a muted wet calm with one sunbeam breaking through (spine BE020)",
+"items": [
+{
+"t": 3.16,
+"word": "tambourine",
+"cls": "prop",
+"type": "instrument",
+"line": "Old to forever, a tambourine sounds off an empty temple, empty…"
+},
+{
+"t": 5.89,
+"word": "temple",
+"cls": "land",
+"type": "temple",
+"line": "…a tambourine sounds off an empty temple, empty choir stands, empty prayer…"
+},
+{
+"t": 7.77,
+"word": "choir",
+"cls": "prop",
+"type": "instrument",
+"line": "…sounds off an empty temple, empty choir stands, empty prayer lines, and a…"
+},
+{
+"t": 12.72,
+"word": "baptist",
+"cls": "land",
+"type": "chapel",
+"line": "…empty prayer lines, and abandoned Baptist pools,"
+},
+{
+"t": 14.94,
+"word": "pews",
+"cls": "land",
+"type": "chapel",
+"line": "pews taken by cobwebs, and doused in d…"
+},
+{
+"t": 25.79,
+"word": "boxes",
+"cls": "prop",
+"type": "boxes",
+"line": "…e left salvations and opened gift boxes placed outside the side doors."
+},
+{
+"t": 28.03,
+"word": "doors",
+"cls": "set",
+"type": "doors",
+"line": "…ift boxes placed outside the side doors."
+},
+{
+"t": 30.35,
+"word": "thunders",
+"cls": "sky",
+"type": "storm",
+"line": "It thunders, then it rains until nothing remai…"
+},
+{
+"t": 32.09,
+"word": "rains",
+"cls": "sky",
+"type": "rain",
+"line": "It thunders, then it rains until nothing remains."
+},
+{
+"t": 36.1,
+"word": "storm",
+"cls": "sky",
+"type": "storm",
+"line": "Old to the storm ending, what was once love now go…"
+},
+{
+"t": 43.18,
+"word": "lightning",
+"cls": "sky",
+"type": "storm",
+"line": "broken and sealed apart by lightning,"
+},
+{
+"t": 47.72,
+"word": "rain",
+"cls": "sky",
+"type": "rain",
+"line": "…ds soaked and delivered rotted by rain,"
+},
+{
+"t": 49.4,
+"word": "blankets",
+"cls": "prop",
+"type": "boxes",
+"line": "and blankets soiled by venomous puppeteers,"
+},
+{
+"t": 58.14,
+"word": "tambourine",
+"cls": "prop",
+"type": "instrument",
+"line": "and a tambourine shattered into pieces."
+},
+{
+"t": null,
+"word": "water",
+"cls": "land",
+"type": "water",
+"line": "open water",
+"from": "bible"
+},
+{
+"t": null,
+"word": "storm",
+"cls": "sky",
+"type": "storm",
+"line": "storm",
+"from": "bible"
+},
+{
+"t": null,
+"word": "door",
+"cls": "set",
+"type": "doors",
+"line": "side doors onto ivy and stone threshold",
+"from": "bible"
+}
+],
+"needs": [
+{
+"cls": "prop",
+"type": "instrument",
+"first": 3.16,
+"count": 3,
+"line": "Old to forever, a tambourine sounds off an empty temple, empty…"
+},
+{
+"cls": "land",
+"type": "temple",
+"first": 5.89,
+"count": 1,
+"line": "…a tambourine sounds off an empty temple, empty choir stands, empty prayer…"
+},
+{
+"cls": "land",
+"type": "chapel",
+"first": 12.72,
+"count": 2,
+"line": "…empty prayer lines, and abandoned Baptist pools,"
+},
+{
+"cls": "prop",
+"type": "boxes",
+"first": 25.79,
+"count": 2,
+"line": "…e left salvations and opened gift boxes placed outside the side doors."
+},
+{
+"cls": "set",
+"type": "doors",
+"first": 28.03,
+"count": 2,
+"line": "…ift boxes placed outside the side doors."
+},
+{
+"cls": "sky",
+"type": "storm",
+"first": 30.35,
+"count": 4,
+"line": "It thunders, then it rains until nothing remai…"
+},
+{
+"cls": "sky",
+"type": "rain",
+"first": 32.09,
+"count": 2,
+"line": "It thunders, then it rains until nothing remains."
+},
+{
+"cls": "land",
+"type": "water",
+"first": null,
+"count": 1,
+"line": "open water"
+}
+]
+},
+"04": {
+"title": "Nevermore",
+"duration": 130.95,
+"time_of_day": "night / twilight, deepening to full dark in the field",
+"weather_light": "twilight-to-night on the shore, calm waves and still wind; moonlight on the field, then clouds hide the stars for the deepest darkness; golden glow from the plants",
+"items": [
+{
+"t": 1.51,
+"word": "trail",
+"cls": "land",
+"type": "road",
+"line": "What if I follow this trail to where the broken pieces have w…"
+},
+{
+"t": 4.17,
+"word": "ashore",
+"cls": "land",
+"type": "water",
+"line": "…ere the broken pieces have washed ashore and the ashes of expired wildfire…"
+},
+{
+"t": 5.87,
+"word": "ashes",
+"cls": "land",
+"type": "fire",
+"line": "…pieces have washed ashore and the ashes of expired wildfires"
+},
+{
+"t": 7.35,
+"word": "wildfires",
+"cls": "land",
+"type": "fire",
+"line": "…d ashore and the ashes of expired wildfires"
+},
+{
+"t": 9.05,
+"word": "sands",
+"cls": "land",
+"type": "beach",
+"line": "cover sands and debris"
+},
+{
+"t": 9.85,
+"word": "debris",
+"cls": "land",
+"type": "fire",
+"line": "cover sands and debris"
+},
+{
+"t": 11.97,
+"word": "night",
+"cls": "sky",
+"type": "night",
+"line": "lift it from the night seawater's floor."
+},
+{
+"t": 12.17,
+"word": "seawaters",
+"cls": "land",
+"type": "water",
+"line": "lift it from the night seawater's floor."
+},
+{
+"t": 12.97,
+"word": "floor",
+"cls": "set",
+"type": "rooms",
+"line": "lift it from the night seawater's floor."
+},
+{
+"t": 14.85,
+"word": "waves",
+"cls": "land",
+"type": "water",
+"line": "The waves will calm to fold it whispers and…"
+},
+{
+"t": 18.05,
+"word": "winds",
+"cls": "sky",
+"type": "wind",
+"line": "…calm to fold it whispers and the winds will mute the trees for the right…"
+},
+{
+"t": 19.01,
+"word": "trees",
+"cls": "land",
+"type": "forest",
+"line": "…spers and the winds will mute the trees for the right level of silence"
+},
+{
+"t": 24.85,
+"word": "corner",
+"cls": "land",
+"type": "road",
+"line": "…robbing heart left at the midlife corner returned toward the incline."
+},
+{
+"t": 53.78,
+"word": "seas",
+"cls": "land",
+"type": "water",
+"line": "…crambled and scattered as mustard seas into the vast moonlight night's f…"
+},
+{
+"t": 54.98,
+"word": "moonlight",
+"cls": "sky",
+"type": "moon",
+"line": "…red as mustard seas into the vast moonlight night's field."
+},
+{
+"t": 55.5,
+"word": "nights",
+"cls": "sky",
+"type": "night",
+"line": "…tard seas into the vast moonlight night's field."
+},
+{
+"t": 56.02,
+"word": "field",
+"cls": "land",
+"type": "field",
+"line": "…s into the vast moonlight night's field."
+},
+{
+"t": 57.46,
+"word": "plants",
+"cls": "land",
+"type": "field",
+"line": "The plants in a golden hue bloom and face to…"
+},
+{
+"t": 59.12,
+"word": "bloom",
+"cls": "land",
+"type": "field",
+"line": "The plants in a golden hue bloom and face toward me in anticipatio…"
+},
+{
+"t": 63.61,
+"word": "weeds",
+"cls": "land",
+"type": "field",
+"line": "The weeds repel falling into the shadows wh…"
+},
+{
+"t": 73.34,
+"word": "clouds",
+"cls": "sky",
+"type": "clouds",
+"line": "The clouds meet the stars for the deepest le…"
+},
+{
+"t": 74.16,
+"word": "stars",
+"cls": "sky",
+"type": "stars",
+"line": "The clouds meet the stars for the deepest level of darkness…"
+},
+{
+"t": 75.8,
+"word": "darkness",
+"cls": "sky",
+"type": "night",
+"line": "…he stars for the deepest level of darkness welcoming extra hard work"
+},
+{
+"t": 80.1,
+"word": "ground",
+"cls": "land",
+"type": "field",
+"line": "to search for the bare ground for two hands. Hands that once co…"
+},
+{
+"t": 83.54,
+"word": "dusk",
+"cls": "sky",
+"type": "dusk",
+"line": "…hands. Hands that once could tusk dusk after dusk"
+},
+{
+"t": 84.56,
+"word": "dusk",
+"cls": "sky",
+"type": "dusk",
+"line": "…hands. Hands that once could tusk dusk after dusk"
+},
+{
+"t": 124.0,
+"word": "tree",
+"cls": "land",
+"type": "forest",
+"line": "but say to me in this still muted tree in night garden feels silence"
+},
+{
+"t": 125.38,
+"word": "night",
+"cls": "sky",
+"type": "night",
+"line": "…to me in this still muted tree in night garden feels silence"
+},
+{
+"t": 125.66,
+"word": "garden",
+"cls": "land",
+"type": "field",
+"line": "…in this still muted tree in night garden feels silence"
+},
+{
+"t": null,
+"word": "sea",
+"cls": "land",
+"type": "water",
+"line": "night sea",
+"from": "bible"
+},
+{
+"t": null,
+"word": "dune",
+"cls": "land",
+"type": "beach",
+"line": "dunes / incline",
+"from": "bible"
+},
+{
+"t": null,
+"word": "trees",
+"cls": "land",
+"type": "forest",
+"line": "burned trees",
+"from": "bible"
+},
+{
+"t": null,
+"word": "field",
+"cls": "land",
+"type": "field",
+"line": "garden fields",
+"from": "bible"
+},
+{
+"t": null,
+"word": "chapel",
+"cls": "land",
+"type": "chapel",
+"line": "the chapel remnants",
+"from": "bible"
+}
+],
+"needs": [
+{
+"cls": "land",
+"type": "road",
+"first": 1.51,
+"count": 2,
+"line": "What if I follow this trail to where the broken pieces have w…"
+},
+{
+"cls": "land",
+"type": "water",
+"first": 4.17,
+"count": 5,
+"line": "…ere the broken pieces have washed ashore and the ashes of expired wildfire…"
+},
+{
+"cls": "land",
+"type": "fire",
+"first": 5.87,
+"count": 3,
+"line": "…pieces have washed ashore and the ashes of expired wildfires"
+},
+{
+"cls": "land",
+"type": "beach",
+"first": 9.05,
+"count": 2,
+"line": "cover sands and debris"
+},
+{
+"cls": "sky",
+"type": "night",
+"first": 11.97,
+"count": 4,
+"line": "lift it from the night seawater's floor."
+},
+{
+"cls": "set",
+"type": "rooms",
+"first": 12.97,
+"count": 1,
+"line": "lift it from the night seawater's floor."
+},
+{
+"cls": "sky",
+"type": "wind",
+"first": 18.05,
+"count": 1,
+"line": "…calm to fold it whispers and the winds will mute the trees for the right…"
+},
+{
+"cls": "land",
+"type": "forest",
+"first": 19.01,
+"count": 3,
+"line": "…spers and the winds will mute the trees for the right level of silence"
+},
+{
+"cls": "sky",
+"type": "moon",
+"first": 54.98,
+"count": 1,
+"line": "…red as mustard seas into the vast moonlight night's field."
+},
+{
+"cls": "land",
+"type": "field",
+"first": 56.02,
+"count": 7,
+"line": "…s into the vast moonlight night's field."
+},
+{
+"cls": "sky",
+"type": "clouds",
+"first": 73.34,
+"count": 1,
+"line": "The clouds meet the stars for the deepest le…"
+},
+{
+"cls": "sky",
+"type": "stars",
+"first": 74.16,
+"count": 1,
+"line": "The clouds meet the stars for the deepest level of darkness…"
+},
+{
+"cls": "sky",
+"type": "dusk",
+"first": 83.54,
+"count": 2,
+"line": "…hands. Hands that once could tusk dusk after dusk"
+},
+{
+"cls": "land",
+"type": "chapel",
+"first": null,
+"count": 1,
+"line": "the chapel remnants"
+}
+]
+},
+"05": {
+"title": "Bloodline",
+"duration": 74.07,
+"time_of_day": "still night (continuous with Nevermore's night garden field)",
+"weather_light": "windless, muted trees, deep starlight; the gifts (stars, galaxies) are the main light sources; afro-futuristic photo-realistic grade. The verse's 'sun-kissing my skin' is a warm glow from the ancestors, not daylight (inferred)",
+"items": [
+{
+"t": 2.22,
+"word": "earth",
+"cls": "land",
+"type": "field",
+"line": "…ll me to ask if I can inherit the earth,"
+},
+{
+"t": 5.4,
+"word": "stars",
+"cls": "sky",
+"type": "stars",
+"line": "to ask if I can name my own stars, even galaxies if I may."
+},
+{
+"t": 6.34,
+"word": "galaxies",
+"cls": "sky",
+"type": "stars",
+"line": "…if I can name my own stars, even galaxies if I may."
+},
+{
+"t": 13.07,
+"word": "rooms",
+"cls": "set",
+"type": "rooms",
+"line": "Coming of age in the shared rooms of human basements"
+},
+{
+"t": 14.43,
+"word": "basements",
+"cls": "set",
+"type": "rooms",
+"line": "…age in the shared rooms of human basements"
+},
+{
+"t": 15.23,
+"word": "bedrooms",
+"cls": "set",
+"type": "rooms",
+"line": "as bedrooms, mattress pads where the wood beam…"
+},
+{
+"t": 17.16,
+"word": "mattress",
+"cls": "prop",
+"type": "boxes",
+"line": "as bedrooms, mattress pads where the wood beams"
+},
+{
+"t": 18.54,
+"word": "beams",
+"cls": "set",
+"type": "rooms",
+"line": "…oms, mattress pads where the wood beams"
+},
+{
+"t": 19.52,
+"word": "pine",
+"cls": "land",
+"type": "forest",
+"line": "of southern pine could comfort my spine, it didn't…"
+},
+{
+"t": 30.64,
+"word": "universe",
+"cls": "sky",
+"type": "stars",
+"line": "…l me to ask if I can invent a new universe,"
+},
+{
+"t": 61.55,
+"word": "orchestra",
+"cls": "prop",
+"type": "instrument",
+"line": "Fingerprints that orchestra great powers,"
+},
+{
+"t": null,
+"word": "gates",
+"cls": "land",
+"type": "gates",
+"line": "the Light Gates of Atlantis",
+"from": "bible"
+},
+{
+"t": null,
+"word": "field",
+"cls": "land",
+"type": "field",
+"line": "open starfield sky",
+"from": "bible"
+}
+],
+"needs": [
+{
+"cls": "land",
+"type": "field",
+"first": 2.22,
+"count": 2,
+"line": "…ll me to ask if I can inherit the earth,"
+},
+{
+"cls": "sky",
+"type": "stars",
+"first": 5.4,
+"count": 3,
+"line": "to ask if I can name my own stars, even galaxies if I may."
+},
+{
+"cls": "set",
+"type": "rooms",
+"first": 13.07,
+"count": 4,
+"line": "Coming of age in the shared rooms of human basements"
+},
+{
+"cls": "prop",
+"type": "boxes",
+"first": 17.16,
+"count": 1,
+"line": "as bedrooms, mattress pads where the wood beams"
+},
+{
+"cls": "land",
+"type": "forest",
+"first": 19.52,
+"count": 1,
+"line": "of southern pine could comfort my spine, it didn't…"
+},
+{
+"cls": "prop",
+"type": "instrument",
+"first": 61.55,
+"count": 1,
+"line": "Fingerprints that orchestra great powers,"
+},
+{
+"cls": "land",
+"type": "gates",
+"first": null,
+"count": 1,
+"line": "the Light Gates of Atlantis"
+}
+]
+},
+"06": {
+"title": "Resurrecting Atlantis",
+"duration": 100.48,
+"time_of_day": "still night",
+"weather_light": "clear night; photo-realistic cyberpunk grade; flickering candlelight, warm-lit windows, shadows down narrow streets, sound-made rainbows and golden light on the risen city (spine)",
+"items": [
+{
+"t": 0.3,
+"word": "gates",
+"cls": "land",
+"type": "gates",
+"line": "The gates open with wings gifted from evolu…"
+},
+{
+"t": 4.9,
+"word": "marble",
+"cls": "land",
+"type": "gates",
+"line": "…ifted from evolution, and made of marble stones"
+},
+{
+"t": 9.56,
+"word": "orchestra",
+"cls": "prop",
+"type": "instrument",
+"line": "…ymns our creator composed with an orchestra of our ancestors wildest dreams t…"
+},
+{
+"t": 17.6,
+"word": "roads",
+"cls": "land",
+"type": "road",
+"line": "…sed generations down yellow brick roads and plucked our souls out"
+},
+{
+"t": 22.82,
+"word": "comets",
+"cls": "sky",
+"type": "stars",
+"line": "of their secret places to follow comets to the capital city of our collec…"
+},
+{
+"t": 23.66,
+"word": "capital",
+"cls": "land",
+"type": "city",
+"line": "…et places to follow comets to the capital city of our collective consciousn…"
+},
+{
+"t": 24.06,
+"word": "city",
+"cls": "land",
+"type": "city",
+"line": "…s to follow comets to the capital city of our collective consciousness,"
+},
+{
+"t": 65.54,
+"word": "flickering",
+"cls": "light",
+"type": "lights",
+"line": "…re we are all safe. An unfamiliar flickering candlelight illuminating smiles"
+},
+{
+"t": 66.2,
+"word": "candlelight",
+"cls": "light",
+"type": "lights",
+"line": "…ll safe. An unfamiliar flickering candlelight illuminating smiles"
+},
+{
+"t": 68.88,
+"word": "night",
+"cls": "sky",
+"type": "night",
+"line": "at night where shadows cast from narrow st…"
+},
+{
+"t": 70.82,
+"word": "streets",
+"cls": "land",
+"type": "road",
+"line": "…ht where shadows cast from narrow streets beaming with love, and the joyful…"
+},
+{
+"t": 76.35,
+"word": "rainbows",
+"cls": "sky",
+"type": "rainbow",
+"line": "color rainbows, and give us infinite time to heal…"
+},
+{
+"t": 80.61,
+"word": "clouds",
+"cls": "sky",
+"type": "clouds",
+"line": "…us infinite time to heal and set clouds free. I know my soul and"
+},
+{
+"t": 93.61,
+"word": "city",
+"cls": "land",
+"type": "city",
+"line": "serendipity. A city born in unison out of the purest…"
+},
+{
+"t": null,
+"word": "field",
+"cls": "land",
+"type": "field",
+"line": "Light Gates and the ancestors' field outside",
+"from": "bible"
+},
+{
+"t": null,
+"word": "jungle",
+"cls": "land",
+"type": "forest",
+"line": "jungle edge (Jungle Interface)",
+"from": "bible"
+},
+{
+"t": null,
+"word": "sea",
+"cls": "land",
+"type": "water",
+"line": "the sea it rises from / the harbor",
+"from": "bible"
+},
+{
+"t": null,
+"word": "mountain",
+"cls": "land",
+"type": "mountains",
+"line": "mountains ringing the city",
+"from": "bible"
+}
+],
+"needs": [
+{
+"cls": "land",
+"type": "gates",
+"first": 0.3,
+"count": 2,
+"line": "The gates open with wings gifted from evolu…"
+},
+{
+"cls": "prop",
+"type": "instrument",
+"first": 9.56,
+"count": 1,
+"line": "…ymns our creator composed with an orchestra of our ancestors wildest dreams t…"
+},
+{
+"cls": "land",
+"type": "road",
+"first": 17.6,
+"count": 2,
+"line": "…sed generations down yellow brick roads and plucked our souls out"
+},
+{
+"cls": "sky",
+"type": "stars",
+"first": 22.82,
+"count": 1,
+"line": "of their secret places to follow comets to the capital city of our collec…"
+},
+{
+"cls": "land",
+"type": "city",
+"first": 23.66,
+"count": 3,
+"line": "…et places to follow comets to the capital city of our collective consciousn…"
+},
+{
+"cls": "light",
+"type": "lights",
+"first": 65.54,
+"count": 2,
+"line": "…re we are all safe. An unfamiliar flickering candlelight illuminating smiles"
+},
+{
+"cls": "sky",
+"type": "night",
+"first": 68.88,
+"count": 1,
+"line": "at night where shadows cast from narrow st…"
+},
+{
+"cls": "sky",
+"type": "rainbow",
+"first": 76.35,
+"count": 1,
+"line": "color rainbows, and give us infinite time to heal…"
+},
+{
+"cls": "sky",
+"type": "clouds",
+"first": 80.61,
+"count": 1,
+"line": "…us infinite time to heal and set clouds free. I know my soul and"
+},
+{
+"cls": "land",
+"type": "field",
+"first": null,
+"count": 1,
+"line": "Light Gates and the ancestors' field outside"
+},
+{
+"cls": "land",
+"type": "forest",
+"first": null,
+"count": 1,
+"line": "jungle edge (Jungle Interface)"
+},
+{
+"cls": "land",
+"type": "water",
+"first": null,
+"count": 1,
+"line": "the sea it rises from / the harbor"
+},
+{
+"cls": "land",
+"type": "mountains",
+"first": null,
+"count": 1,
+"line": "mountains ringing the city"
+}
+]
+},
+"07": {
+"title": "DJ Turn Me Up",
+"duration": 98.76,
+"time_of_day": "late night (midnight booth)",
+"weather_light": "interior: neon, strobe and spotlight, haze creeping across the floor lights, a dark cloud over the dance floor with a moonlit silver rim (spine); photo-realistic cyberpunk grade",
+"items": [
+{
+"t": 18.73,
+"word": "evergreen",
+"cls": "land",
+"type": "forest",
+"line": "…ing and the veneers of sun-soaked evergreen fields are nourished. A love stor…"
+},
+{
+"t": 19.31,
+"word": "fields",
+"cls": "land",
+"type": "field",
+"line": "…e veneers of sun-soaked evergreen fields are nourished. A love story of on…"
+},
+{
+"t": 29.31,
+"word": "stars",
+"cls": "sky",
+"type": "stars",
+"line": "…themselves after defamed unsalted stars diminish their glares."
+},
+{
+"t": 51.25,
+"word": "streets",
+"cls": "land",
+"type": "road",
+"line": "…oxed in truck on separate one-way streets not built with u-turns or stop. M…"
+},
+{
+"t": 61.84,
+"word": "daisy",
+"cls": "land",
+"type": "field",
+"line": "…ears 11 years each plucked off as daisy pedals"
+},
+{
+"t": 70.07,
+"word": "road",
+"cls": "land",
+"type": "road",
+"line": "…past left empty handed to pick a road of heavy rain"
+},
+{
+"t": 70.75,
+"word": "rain",
+"cls": "sky",
+"type": "rain",
+"line": "…ty handed to pick a road of heavy rain"
+},
+{
+"t": 74.55,
+"word": "night",
+"cls": "sky",
+"type": "night",
+"line": "or a frontal fog or of dim night lights under a cloud with the sil…"
+},
+{
+"t": 74.89,
+"word": "lights",
+"cls": "light",
+"type": "lights",
+"line": "or a frontal fog or of dim night lights under a cloud with the silver lin…"
+},
+{
+"t": 75.81,
+"word": "cloud",
+"cls": "sky",
+"type": "clouds",
+"line": "…og or of dim night lights under a cloud with the silver lining. Of now tu…"
+},
+{
+"t": 81.04,
+"word": "lights",
+"cls": "light",
+"type": "lights",
+"line": "forth to face the lights and shadows one night at a time,…"
+},
+{
+"t": 82.88,
+"word": "night",
+"cls": "sky",
+"type": "night",
+"line": "…o face the lights and shadows one night at a time, one tear at a time. Wh…"
+},
+{
+"t": null,
+"word": "street",
+"cls": "land",
+"type": "road",
+"line": "Atlantis Narrow Streets",
+"from": "bible"
+},
+{
+"t": null,
+"word": "street",
+"cls": "land",
+"type": "road",
+"line": "the city's one-way streets",
+"from": "bible"
+}
+],
+"needs": [
+{
+"cls": "land",
+"type": "forest",
+"first": 18.73,
+"count": 1,
+"line": "…ing and the veneers of sun-soaked evergreen fields are nourished. A love stor…"
+},
+{
+"cls": "land",
+"type": "field",
+"first": 19.31,
+"count": 2,
+"line": "…e veneers of sun-soaked evergreen fields are nourished. A love story of on…"
+},
+{
+"cls": "sky",
+"type": "stars",
+"first": 29.31,
+"count": 1,
+"line": "…themselves after defamed unsalted stars diminish their glares."
+},
+{
+"cls": "land",
+"type": "road",
+"first": 51.25,
+"count": 4,
+"line": "…oxed in truck on separate one-way streets not built with u-turns or stop. M…"
+},
+{
+"cls": "sky",
+"type": "rain",
+"first": 70.75,
+"count": 1,
+"line": "…ty handed to pick a road of heavy rain"
+},
+{
+"cls": "sky",
+"type": "night",
+"first": 74.55,
+"count": 2,
+"line": "or a frontal fog or of dim night lights under a cloud with the sil…"
+},
+{
+"cls": "light",
+"type": "lights",
+"first": 74.89,
+"count": 2,
+"line": "or a frontal fog or of dim night lights under a cloud with the silver lin…"
+},
+{
+"cls": "sky",
+"type": "clouds",
+"first": 75.81,
+"count": 1,
+"line": "…og or of dim night lights under a cloud with the silver lining. Of now tu…"
+}
+]
+},
+"08": {
+"title": "Newly Single",
+"duration": 91.53,
+"time_of_day": "deep night, time-shifted (time-lapse feel)",
+"weather_light": "clear night open to the sky; fast strobes and lasers, blue and pink city glow below, then thickening haze/smoke carved by beams; crescent moon over neon-edged peaks",
+"items": [
+{
+"t": 3.82,
+"word": "floor",
+"cls": "set",
+"type": "rooms",
+"line": "…moment and left him on the dance floor. He can now just be"
+},
+{
+"t": 10.8,
+"word": "afloat",
+"cls": "land",
+"type": "water",
+"line": "…rently when there are no feelings afloat."
+},
+{
+"t": 20.82,
+"word": "floor",
+"cls": "set",
+"type": "rooms",
+"line": "a crowded floor of sweated perfumes and temptatio…"
+},
+{
+"t": 37.03,
+"word": "walls",
+"cls": "set",
+"type": "walls",
+"line": "bitter refraction inside the walls of an escape that few pleasures o…"
+},
+{
+"t": 37.71,
+"word": "escape",
+"cls": "set",
+"type": "stairs",
+"line": "…refraction inside the walls of an escape that few pleasures offer us. Now…"
+},
+{
+"t": 43.6,
+"word": "field",
+"cls": "land",
+"type": "field",
+"line": "soul in the middle of an open field at the equator of a planet much l…"
+},
+{
+"t": 51.38,
+"word": "water",
+"cls": "land",
+"type": "water",
+"line": "…ool me down by pouring unfiltered water out of the ice bath salted from t…"
+},
+{
+"t": 54.66,
+"word": "moons",
+"cls": "sky",
+"type": "moon",
+"line": "moons from angels of the newest religio…"
+},
+{
+"t": 63.02,
+"word": "lights",
+"cls": "light",
+"type": "lights",
+"line": "strobe lights. Their gracious cursor blessed me,…"
+},
+{
+"t": 80.27,
+"word": "night",
+"cls": "sky",
+"type": "night",
+"line": "…o finally get acquainted with the night, staring into unfamiliar yet relat…"
+},
+{
+"t": 83.87,
+"word": "mountains",
+"cls": "land",
+"type": "mountains",
+"line": "…ing into unfamiliar yet relatable mountains"
+},
+{
+"t": null,
+"word": "street",
+"cls": "land",
+"type": "road",
+"line": "the Atlantis street and sidewalk directly below (Yet Heard)",
+"from": "bible"
+},
+{
+"t": null,
+"word": "mountain",
+"cls": "land",
+"type": "mountains",
+"line": "unfamiliar mountains on the horizon (later ridden through in Magic Ride)",
+"from": "bible"
+},
+{
+"t": null,
+"word": "field",
+"cls": "land",
+"type": "field",
+"line": "the PLANET / OPEN FIELD the soul visits (map: PLANET (NEWLY SINGLE), OPEN FIELD)",
+"from": "bible"
+}
+],
+"needs": [
+{
+"cls": "set",
+"type": "rooms",
+"first": 3.82,
+"count": 2,
+"line": "…moment and left him on the dance floor. He can now just be"
+},
+{
+"cls": "land",
+"type": "water",
+"first": 10.8,
+"count": 2,
+"line": "…rently when there are no feelings afloat."
+},
+{
+"cls": "set",
+"type": "walls",
+"first": 37.03,
+"count": 1,
+"line": "bitter refraction inside the walls of an escape that few pleasures o…"
+},
+{
+"cls": "set",
+"type": "stairs",
+"first": 37.71,
+"count": 1,
+"line": "…refraction inside the walls of an escape that few pleasures offer us. Now…"
+},
+{
+"cls": "land",
+"type": "field",
+"first": 43.6,
+"count": 2,
+"line": "soul in the middle of an open field at the equator of a planet much l…"
+},
+{
+"cls": "sky",
+"type": "moon",
+"first": 54.66,
+"count": 1,
+"line": "moons from angels of the newest religio…"
+},
+{
+"cls": "light",
+"type": "lights",
+"first": 63.02,
+"count": 1,
+"line": "strobe lights. Their gracious cursor blessed me,…"
+},
+{
+"cls": "sky",
+"type": "night",
+"first": 80.27,
+"count": 1,
+"line": "…o finally get acquainted with the night, staring into unfamiliar yet relat…"
+},
+{
+"cls": "land",
+"type": "mountains",
+"first": 83.87,
+"count": 2,
+"line": "…ing into unfamiliar yet relatable mountains"
+},
+{
+"cls": "land",
+"type": "road",
+"first": null,
+"count": 1,
+"line": "the Atlantis street and sidewalk directly below (Yet Heard)"
+}
+]
+},
+"09": {
+"title": "Yet Heard",
+"duration": 108.82,
+"time_of_day": "late night, moon up; the father walk heads toward a pre-dawn sunrise",
+"weather_light": "moonlight down the street, neon and booth glow, wet pavement with moon reflections in puddles (spine YH010; rain inferred from the Juice Jones 'The Rain' inspo), harbor moonlight on ripples",
+"items": [
+{
+"t": 13.29,
+"word": "moon",
+"cls": "sky",
+"type": "moon",
+"line": "Before I go, we look at the moon the way we used to see it"
+},
+{
+"t": 29.87,
+"word": "nights",
+"cls": "sky",
+"type": "night",
+"line": "or swing in my humbled late nights and heartbreaks"
+},
+{
+"t": 58.75,
+"word": "moon",
+"cls": "sky",
+"type": "moon",
+"line": "We grow old together with the moon looking at us"
+},
+{
+"t": 90.06,
+"word": "moon",
+"cls": "sky",
+"type": "moon",
+"line": "Guiding a settling down moon the way it used to leave"
+},
+{
+"t": 96.8,
+"word": "harbor",
+"cls": "land",
+"type": "harbor",
+"line": "and wave shadows of the inner harbor."
+},
+{
+"t": null,
+"word": "street",
+"cls": "land",
+"type": "road",
+"line": "an Atlantis street running toward the moon",
+"from": "bible"
+},
+{
+"t": null,
+"word": "window",
+"cls": "set",
+"type": "window",
+"line": "by phone: mother's living room in Baltimere (map HOME (URBAN) / WINDOW)",
+"from": "bible"
+},
+{
+"t": null,
+"word": "harbor",
+"cls": "land",
+"type": "harbor",
+"line": "by phone: the Inner Harbor, quiet docks and pier lights in Baltimere",
+"from": "bible"
+}
+],
+"needs": [
+{
+"cls": "sky",
+"type": "moon",
+"first": 13.29,
+"count": 3,
+"line": "Before I go, we look at the moon the way we used to see it"
+},
+{
+"cls": "sky",
+"type": "night",
+"first": 29.87,
+"count": 1,
+"line": "or swing in my humbled late nights and heartbreaks"
+},
+{
+"cls": "land",
+"type": "harbor",
+"first": 96.8,
+"count": 2,
+"line": "and wave shadows of the inner harbor."
+},
+{
+"cls": "land",
+"type": "road",
+"first": null,
+"count": 1,
+"line": "an Atlantis street running toward the moon"
+},
+{
+"cls": "set",
+"type": "window",
+"first": null,
+"count": 1,
+"line": "by phone: mother's living room in Baltimere (map HOME (URBAN) / WINDOW)"
+}
+]
+},
+"10": {
+"title": "Magic Ride",
+"duration": 96.14,
+"time_of_day": "midnight through the last of the night to first light / dawn (treatment says 'dusk' but describes the sky getting lighter)",
+"weather_light": "neon streets with tire spray on wet asphalt, tunnel lights, a setting full moon and fading stars, then a pastel dawn gradient and low, 'deceptively warm' sunlight with a cool blue core",
+"items": [
+{
+"t": 27.27,
+"word": "escape",
+"cls": "set",
+"type": "stairs",
+"line": "…verywhere with no one to love and escape,"
+},
+{
+"t": 39.34,
+"word": "streets",
+"cls": "land",
+"type": "road",
+"line": "…ise so the way I ride through the streets with the swag and eyes turn,"
+},
+{
+"t": 49.88,
+"word": "darkness",
+"cls": "sky",
+"type": "night",
+"line": "…preparations to live and dream in darkness I no longer desire."
+},
+{
+"t": 53.58,
+"word": "moon",
+"cls": "sky",
+"type": "moon",
+"line": "The moon settles and the tease of distant…"
+},
+{
+"t": 55.74,
+"word": "stars",
+"cls": "sky",
+"type": "stars",
+"line": "…settles and the tease of distant stars subsides"
+},
+{
+"t": 59.25,
+"word": "morning",
+"cls": "sky",
+"type": "dawn",
+"line": "and I can see a morning ahead for me."
+},
+{
+"t": 62.17,
+"word": "morning",
+"cls": "sky",
+"type": "dawn",
+"line": "It looks like a morning I could believe in,"
+},
+{
+"t": 63.61,
+"word": "morning",
+"cls": "sky",
+"type": "dawn",
+"line": "a morning where loss and life aren't so wel…"
+},
+{
+"t": 68.05,
+"word": "sunlight",
+"cls": "sky",
+"type": "dawn",
+"line": "…nd life aren't so well, ripe with sunlight that's deceptively warm."
+},
+{
+"t": 74.75,
+"word": "night",
+"cls": "sky",
+"type": "night",
+"line": "…eling of nests, spring out of the night that has covered me,"
+},
+{
+"t": null,
+"word": "street",
+"cls": "land",
+"type": "road",
+"line": "the Atlantis city grid, plazas, tunnels and main avenues (map HIGHWAY/CITY STREETS)",
+"from": "bible"
+},
+{
+"t": null,
+"word": "mountain",
+"cls": "land",
+"type": "mountains",
+"line": "the mountains around Atlantis (map ATLANTIS RIDGE)",
+"from": "bible"
+},
+{
+"t": null,
+"word": "temple",
+"cls": "land",
+"type": "temple",
+"line": "the shore with the decaying chapel where the new temple is built (map ABANDONED TEMPLE, CENTER ZONE)",
+"from": "bible"
+}
+],
+"needs": [
+{
+"cls": "set",
+"type": "stairs",
+"first": 27.27,
+"count": 1,
+"line": "…verywhere with no one to love and escape,"
+},
+{
+"cls": "land",
+"type": "road",
+"first": 39.34,
+"count": 2,
+"line": "…ise so the way I ride through the streets with the swag and eyes turn,"
+},
+{
+"cls": "sky",
+"type": "night",
+"first": 49.88,
+"count": 2,
+"line": "…preparations to live and dream in darkness I no longer desire."
+},
+{
+"cls": "sky",
+"type": "moon",
+"first": 53.58,
+"count": 1,
+"line": "The moon settles and the tease of distant…"
+},
+{
+"cls": "sky",
+"type": "stars",
+"first": 55.74,
+"count": 1,
+"line": "…settles and the tease of distant stars subsides"
+},
+{
+"cls": "sky",
+"type": "dawn",
+"first": 59.25,
+"count": 4,
+"line": "and I can see a morning ahead for me."
+},
+{
+"cls": "land",
+"type": "mountains",
+"first": null,
+"count": 1,
+"line": "the mountains around Atlantis (map ATLANTIS RIDGE)"
+},
+{
+"cls": "land",
+"type": "temple",
+"first": null,
+"count": 1,
+"line": "the shore with the decaying chapel where the new temple is built (map ABANDONED TEMPLE, CENTER ZONE)"
+}
+]
+},
+"11": {
+"title": "New Day",
+"duration": 101.27,
+"time_of_day": "early morning, just after dawn",
+"weather_light": "chilly morning; low sun revealing the ruins; mist on the distant sea; morning dew burning off into full sunlight",
+"items": [
+{
+"t": 2.46,
+"word": "morning",
+"cls": "sky",
+"type": "dawn",
+"line": "Even here is chilly in the morning."
+},
+{
+"t": 6.07,
+"word": "seas",
+"cls": "land",
+"type": "water",
+"line": "River rafting fall covers the seas in the distance"
+},
+{
+"t": 9.23,
+"word": "tree",
+"cls": "land",
+"type": "forest",
+"line": "and hugs the bases of tree-covered hills."
+},
+{
+"t": 15.61,
+"word": "choir",
+"cls": "prop",
+"type": "instrument",
+"line": "In silent resounds, choir chords calm the nerves of things…"
+},
+{
+"t": 29.4,
+"word": "morning",
+"cls": "sky",
+"type": "dawn",
+"line": "…uned lyrics that heat and dry the morning dew."
+},
+{
+"t": 33.85,
+"word": "sunlight",
+"cls": "sky",
+"type": "dawn",
+"line": "…f the destruction revealed in the sunlight."
+},
+{
+"t": 36.38,
+"word": "temple",
+"cls": "land",
+"type": "temple",
+"line": "We can rebuild this temple."
+},
+{
+"t": 68.37,
+"word": "midnight",
+"cls": "sky",
+"type": "night",
+"line": "to the lonely mirror's midnight hours,"
+},
+{
+"t": 95.33,
+"word": "sunlight",
+"cls": "sky",
+"type": "dawn",
+"line": "reveling in the sunlight of a new beginning"
+},
+{
+"t": null,
+"word": "water",
+"cls": "land",
+"type": "water",
+"line": "the Inner Harbor water",
+"from": "bible"
+},
+{
+"t": null,
+"word": "sea",
+"cls": "land",
+"type": "water",
+"line": "the open sea in the distance",
+"from": "bible"
+},
+{
+"t": null,
+"word": "temple",
+"cls": "land",
+"type": "temple",
+"line": "tree-covered hills (Temple Peaks)",
+"from": "bible"
+},
+{
+"t": null,
+"word": "harbor",
+"cls": "land",
+"type": "harbor",
+"line": "the harbor cafe (poem 13)",
+"from": "bible"
+}
+],
+"needs": [
+{
+"cls": "sky",
+"type": "dawn",
+"first": 2.46,
+"count": 4,
+"line": "Even here is chilly in the morning."
+},
+{
+"cls": "land",
+"type": "water",
+"first": 6.07,
+"count": 3,
+"line": "River rafting fall covers the seas in the distance"
+},
+{
+"cls": "land",
+"type": "forest",
+"first": 9.23,
+"count": 1,
+"line": "and hugs the bases of tree-covered hills."
+},
+{
+"cls": "prop",
+"type": "instrument",
+"first": 15.61,
+"count": 1,
+"line": "In silent resounds, choir chords calm the nerves of things…"
+},
+{
+"cls": "land",
+"type": "temple",
+"first": 36.38,
+"count": 2,
+"line": "We can rebuild this temple."
+},
+{
+"cls": "sky",
+"type": "night",
+"first": 68.37,
+"count": 1,
+"line": "to the lonely mirror's midnight hours,"
+},
+{
+"cls": "land",
+"type": "harbor",
+"first": null,
+"count": 1,
+"line": "the harbor cafe (poem 13)"
+}
+]
+},
+"12": {
+"title": "Reunion",
+"duration": 64.81,
+"time_of_day": "compressed across decades; the hall in warm light, then the grounds at twilight and dusk, ending at a lit porch",
+"weather_light": "soft hall light under dim rafters; green twilight through the canopy; cool dusk with visible breath; golden sunset on the meadow",
+"items": [
+{
+"t": 14.14,
+"word": "darkness",
+"cls": "sky",
+"type": "night",
+"line": "…verheard. My mind drifts into the darkness of our afterlives,"
+},
+{
+"t": 17.41,
+"word": "rooms",
+"cls": "set",
+"type": "rooms",
+"line": "and those rooms are empty. We are all here, each…"
+},
+{
+"t": 23.45,
+"word": "sands",
+"cls": "land",
+"type": "beach",
+"line": "…ch holding our glasses of burning sands"
+},
+{
+"t": 27.79,
+"word": "tree",
+"cls": "land",
+"type": "forest",
+"line": "…eys, and grateful to every living tree in the forest for the shared year…"
+},
+{
+"t": 28.45,
+"word": "forest",
+"cls": "land",
+"type": "forest",
+"line": "…teful to every living tree in the forest for the shared years"
+},
+{
+"t": 52.08,
+"word": "lights",
+"cls": "light",
+"type": "lights",
+"line": "…hilltops and canyons, of blinding lights and infinite nights,"
+},
+{
+"t": 53.82,
+"word": "nights",
+"cls": "sky",
+"type": "night",
+"line": "…, of blinding lights and infinite nights,"
+},
+{
+"t": null,
+"word": "temple",
+"cls": "land",
+"type": "temple",
+"line": "the new temple (same building as poem 11)",
+"from": "bible"
+},
+{
+"t": null,
+"word": "harbor",
+"cls": "land",
+"type": "harbor",
+"line": "the Inner Harbor",
+"from": "bible"
+},
+{
+"t": null,
+"word": "forest",
+"cls": "land",
+"type": "forest",
+"line": "forest on the tree-covered hills",
+"from": "bible"
+},
+{
+"t": null,
+"word": "meadow",
+"cls": "land",
+"type": "field",
+"line": "a meadow for football",
+"from": "bible"
+},
+{
+"t": null,
+"word": "porch",
+"cls": "set",
+"type": "doors",
+"line": "a front porch / home",
+"from": "bible"
+}
+],
+"needs": [
+{
+"cls": "sky",
+"type": "night",
+"first": 14.14,
+"count": 2,
+"line": "…verheard. My mind drifts into the darkness of our afterlives,"
+},
+{
+"cls": "set",
+"type": "rooms",
+"first": 17.41,
+"count": 1,
+"line": "and those rooms are empty. We are all here, each…"
+},
+{
+"cls": "land",
+"type": "beach",
+"first": 23.45,
+"count": 1,
+"line": "…ch holding our glasses of burning sands"
+},
+{
+"cls": "land",
+"type": "forest",
+"first": 27.79,
+"count": 3,
+"line": "…eys, and grateful to every living tree in the forest for the shared year…"
+},
+{
+"cls": "light",
+"type": "lights",
+"first": 52.08,
+"count": 1,
+"line": "…hilltops and canyons, of blinding lights and infinite nights,"
+},
+{
+"cls": "land",
+"type": "temple",
+"first": null,
+"count": 1,
+"line": "the new temple (same building as poem 11)"
+},
+{
+"cls": "land",
+"type": "harbor",
+"first": null,
+"count": 1,
+"line": "the Inner Harbor"
+},
+{
+"cls": "land",
+"type": "field",
+"first": null,
+"count": 1,
+"line": "a meadow for football"
+},
+{
+"cls": "set",
+"type": "doors",
+"first": null,
+"count": 1,
+"line": "a front porch / home"
+}
+]
+},
+"13": {
+"title": "How to Win My Heart",
+"duration": 100.73,
+"time_of_day": "daytime",
+"weather_light": "bright sunlight on the water; calm; haze begins gathering over the harbor at the end",
+"items": [
+{
+"t": 2.28,
+"word": "corner",
+"cls": "land",
+"type": "road",
+"line": "I want you to notice me in a corner cafe"
+},
+{
+"t": 4.02,
+"word": "harbor",
+"cls": "land",
+"type": "harbor",
+"line": "at the Harbor of the Heavens, wandering in thou…"
+},
+{
+"t": 7.9,
+"word": "water",
+"cls": "land",
+"type": "water",
+"line": "discovering water on Jupiter's moons,"
+},
+{
+"t": 9.22,
+"word": "moons",
+"cls": "sky",
+"type": "moon",
+"line": "discovering water on Jupiter's moons,"
+},
+{
+"t": 42.09,
+"word": "burned",
+"cls": "land",
+"type": "fire",
+"line": "So I thought, life has burned all of my love stories."
+},
+{
+"t": 67.02,
+"word": "poppies",
+"cls": "land",
+"type": "field",
+"line": "than the scarlet poppies and purple blossoms"
+},
+{
+"t": 73.74,
+"word": "window",
+"cls": "set",
+"type": "window",
+"line": "Yet from a distant window, beautiful and calm,"
+},
+{
+"t": 91.76,
+"word": "windless",
+"cls": "sky",
+"type": "wind",
+"line": "in windless seasons and scarlet poppies"
+},
+{
+"t": 94.24,
+"word": "poppies",
+"cls": "land",
+"type": "field",
+"line": "in windless seasons and scarlet poppies"
+},
+{
+"t": null,
+"word": "harbor",
+"cls": "land",
+"type": "harbor",
+"line": "the harbor promenade and piers",
+"from": "bible"
+},
+{
+"t": null,
+"word": "harbor",
+"cls": "land",
+"type": "harbor",
+"line": "the new temple across or along the harbor",
+"from": "bible"
+},
+{
+"t": null,
+"word": "church",
+"cls": "land",
+"type": "chapel",
+"line": "an old church",
+"from": "bible"
+},
+{
+"t": null,
+"word": "street",
+"cls": "land",
+"type": "road",
+"line": "cobblestone streets",
+"from": "bible"
+},
+{
+"t": null,
+"word": "water",
+"cls": "land",
+"type": "water",
+"line": "Atlantis skyline across the water (visible when it hazes)",
+"from": "bible"
+}
+],
+"needs": [
+{
+"cls": "land",
+"type": "road",
+"first": 2.28,
+"count": 2,
+"line": "I want you to notice me in a corner cafe"
+},
+{
+"cls": "land",
+"type": "harbor",
+"first": 4.02,
+"count": 3,
+"line": "at the Harbor of the Heavens, wandering in thou…"
+},
+{
+"cls": "land",
+"type": "water",
+"first": 7.9,
+"count": 2,
+"line": "discovering water on Jupiter's moons,"
+},
+{
+"cls": "sky",
+"type": "moon",
+"first": 9.22,
+"count": 1,
+"line": "discovering water on Jupiter's moons,"
+},
+{
+"cls": "land",
+"type": "fire",
+"first": 42.09,
+"count": 1,
+"line": "So I thought, life has burned all of my love stories."
+},
+{
+"cls": "land",
+"type": "field",
+"first": 67.02,
+"count": 2,
+"line": "than the scarlet poppies and purple blossoms"
+},
+{
+"cls": "set",
+"type": "window",
+"first": 73.74,
+"count": 1,
+"line": "Yet from a distant window, beautiful and calm,"
+},
+{
+"cls": "sky",
+"type": "wind",
+"first": 91.76,
+"count": 1,
+"line": "in windless seasons and scarlet poppies"
+},
+{
+"cls": "land",
+"type": "chapel",
+"first": null,
+"count": 1,
+"line": "an old church"
+}
+]
+},
+"14": {
+"title": "Hot Minute",
+"duration": 69.36,
+"time_of_day": "timeless (void); the party reads as night",
+"weather_light": "pure black with the POET lit alone; B-roll in natural light; warm vintage party light, euphoric light leakage (per poem 1)",
+"items": [
+{
+"t": null,
+"word": "harbor",
+"cls": "land",
+"type": "harbor",
+"line": "the harbor it dissolves out of",
+"from": "bible"
+}
+],
+"needs": [
+{
+"cls": "land",
+"type": "harbor",
+"first": null,
+"count": 1,
+"line": "the harbor it dissolves out of"
+}
+]
+}
+}
