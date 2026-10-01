@@ -128,10 +128,11 @@ function hsl([r, g, b]) {
 /* SHOT SCALE FROM THE BODY WE DREW. cineosis's vocabulary is five terms and a
    model picks one. Here the figure's height in rows is a number the film
    passed to fig(), so the only judgement left is where the thresholds go, and
-   they go where film grammar puts them: a body is read by how much of it the frame
-   holds. Nothing is ever clipped in this suite — no movement draws a figure
-   taller than the 144-row field — so the two closest terms cannot be reached,
-   and saying so is more honest than stretching the scale to use them. */
+   they go where film grammar puts them: a body is read by how much of it the
+   frame holds. Measured, the tallest figure anywhere in the suite is 72 rows of
+   144 — half the frame — so nothing is ever clipped and the three closest terms
+   are unreachable, not unused. Saying so is more honest than moving the
+   thresholds until the vocabulary looks fully exercised. */
 const FH = 144;
 function scaleOf(maxH) {
   if (maxH == null) return "extreme long shot";       // no body: the frame is weather
