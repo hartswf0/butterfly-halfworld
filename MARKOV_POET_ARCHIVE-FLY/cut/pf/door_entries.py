@@ -200,7 +200,7 @@ E = [
  ('R06','read','THE COVERAGE MAP','WYGWYL_COVERAGE_MAP.md',
   'The archive measured against the poems, stanza by stanza.',
   ''),
- ('R08','read','THE EXCHANGE','cut/out',
+ ('R08','read','THE EXCHANGE','cut/out/script/exchange.html',
   'What another editing room needs: an EDL, an OTIO, a JSON event list and a cue sheet for every '
   'cut \u2014 source clip, source timecode, record timecode, duration, stanza and label, shot by shot.',
   'Under cut/out/ beside the cuts themselves. Relinking needs the source shots in '

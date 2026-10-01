@@ -167,9 +167,59 @@ def page(key, stem, title, blurb):
     open(os.path.join(OUT, f'{key}.html'), 'w').write(h)
     return dict(key=key, title=title, n=len(ev), secs=secs, frames=nframe, lined=lined, stem=stem)
 
+
+FORMATS = [
+ ('.edl',  'CMX3600 edit decision list — what every NLE will open. Event, source clip, '
+           'source in/out, record in/out, and the shot’s name in a comment line.'),
+ ('.otio', 'OpenTimelineIO — the same cut as a timeline object, for anything that speaks it '
+           '(Resolve, Flame, Nuke Studio, otiotool).'),
+ ('.json', 'The event list this archive actually cuts from: patch, source path, source in-point, '
+           'record in-point, duration, stanza, label, screen text, and the poem line where there '
+           'is one. THE SCRIPTS are rendered from these.'),
+ ('.cue',  'Cue sheet for the 60bpm deck.'),
+]
+
+def exchange():
+    rows = []
+    for key, stem, title, _ in CUTS:
+        fs = []
+        for ext, _d in FORMATS:
+            fp = os.path.join(SRC, stem + ext)
+            if os.path.exists(fp):
+                fs.append(f'<a href="../{esc(stem)}{ext}">{ext}<span>{os.path.getsize(fp)//1024} KB</span></a>')
+        rows.append(f'<div class="shot"><div class="fr none">{key}</div><div>'
+                    f'<div class="lab">{esc(title)}</div>'
+                    f'<div class="m">{"".join(fs)}</div>'
+                    f'<div class="src">{esc(stem)}</div></div></div>')
+    defs = ''.join(f'<div class="shot"><div class="fr none">{e[1:].upper()}</div>'
+                   f'<div><div class="lab">{e}</div><div class="text">{esc(d)}</div></div></div>'
+                   for e, d in FORMATS)
+    h = (f'<!doctype html><html lang="en"><head><meta charset="utf-8">'
+         f'<meta name="viewport" content="width=device-width,initial-scale=1">'
+         f'<title>THE EXCHANGE — every cut, in formats another room can open</title>'
+         f'<style>{CSS}'
+         f'.m a{{text-decoration:none;color:var(--accent);border:1px solid var(--accent);'
+         f'padding:5px 9px;display:inline-flex;gap:7px;align-items:baseline;font-weight:700}}'
+         f'.m a span{{color:var(--dim);font-weight:400}}'
+         f'.m a:hover{{background:var(--accent);color:#fff}}.m a:hover span{{color:#cfe}}'
+         f'</style></head><body><div class="wrap"><header>'
+         f'<a class="up" href="../../../index.html">← THE DOOR</a><h1>The Exchange</h1>'
+         f'<p class="lede">Every cut in the formats another editing room can open. These are the '
+         f'decisions, not the pictures: each file says which shot, from which source, at which '
+         f'second, for how long. Relinking needs the source shots in MARKOV_POET_00/, which is '
+         f'237 MB and is not in this repository — but the decisions are, and they are under a '
+         f'megabyte.</p>'
+         f'<p class="tot">5 CUTS &middot; <a href="index.html" style="color:var(--accent)">'
+         f'THE SCRIPTS</a> render from the .json</p></header>'
+         f'{"".join(rows)}<div class="mark">WHAT EACH FORMAT IS</div>{defs}'
+         f'</div></body></html>')
+    open(os.path.join(OUT, 'exchange.html'), 'w').write(h)
+    print(f'  exchange.html  {len(CUTS)} cuts × {len(FORMATS)} formats')
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     made = [page(*c) for c in CUTS]
+    exchange()
     cards = ''.join(
       f'<a class="shot" href="{m["key"]}.html" style="text-decoration:none;color:inherit">'
       f'<div class="fr none">{m["key"]}</div><div>'
