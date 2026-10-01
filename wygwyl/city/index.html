@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ATLANTIS — the city the poems built</title>
+<link rel="icon" href="../dot.svg">
+<meta property="og:title" content="ATLANTIS — the city fourteen poems built">
+<meta property="og:description" content="A Nolli plan generated from the readings: every word a building, every breath a piazza, on Plato's ring plan of Atlantis.">
+<style>
+:root{--paper:#efe7d2;--ink:#17140f;--dim:#6b604c;--red:#8c2a1c;--line:#cdbf9e}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);font:15px/1.55 "Iowan Old Style",Palatino,Georgia,serif}
+header{padding:14px 16px 10px;border-bottom:1px solid var(--line);max-width:860px;margin:0 auto}
+h1{font-size:19px;letter-spacing:.32em;font-weight:normal}
+.sub{color:var(--dim);font-size:13px;font-style:italic;margin-top:3px}
+#wrap{position:relative;height:72vh;min-height:420px;overflow:hidden;touch-action:none;
+  border-bottom:1px solid var(--line);background:var(--paper);cursor:grab}
+#wrap.drag{cursor:grabbing}
+#wrap svg{width:100%;height:100%;display:block}
+#wrap [data-b]{cursor:pointer}
+#wrap [data-b].on{fill:var(--red)!important}
+#tools{position:absolute;right:10px;top:10px;display:flex;flex-direction:column;gap:6px}
+#tools button{width:36px;height:36px;border:1px solid var(--ink);background:var(--paper);font:inherit;font-size:18px;cursor:pointer}
+#card{position:absolute;left:10px;right:10px;bottom:10px;max-width:520px;background:var(--paper);
+  border:1px solid var(--ink);padding:10px 12px;display:none;box-shadow:0 4px 18px #0002}
+#card .t{font-size:16px} #card .m{color:var(--dim);font-size:12.5px;margin-top:3px;font-style:italic}
+main{max-width:860px;margin:0 auto;padding:16px}
+h2{font-size:12px;letter-spacing:.3em;font-weight:normal;margin:22px 0 8px;border-bottom:1px solid var(--line);padding-bottom:5px}
+p{margin:8px 0} p.dim{color:var(--dim);font-size:13.5px}
+ol{list-style:none}
+ol li{display:grid;grid-template-columns:34px 1fr;gap:2px 8px;padding:7px 0;border-bottom:1px dotted var(--line);cursor:pointer}
+ol li b{color:var(--red);font-weight:normal;font-variant-numeric:tabular-nums}
+ol li span{grid-column:2;color:var(--dim);font-size:12.5px;font-style:italic}
+ol li:hover{background:#00000008}
+a{color:var(--red)}
+</style>
+</head>
+<body>
+<header>
+  <h1>ATLANTIS</h1>
+  <div class="sub">the city fourteen poems built — a Nolli plan generated from the readings, on Plato’s ring plan</div>
+</header>
+<div id="wrap"><div id="tools"><button id="zin">+</button><button id="zout">−</button><button id="home" style="font-size:13px">⌂</button></div>
+  <div id="card"><div class="t" id="ct"></div><div class="m" id="cm"></div></div></div>
+<main>
+  <h2>HOW THE POEMS DESIGN THE CITY</h2>
+  <p>Nothing here was placed by hand. Every building is a word as the poet spoke it, its frontage as long as he
+  held it — one unit of the plan is one second of his voice. Words he runs together fuse into a block; a short pause
+  is an alley; a breath is a piazza; a line break is a cross street. The white of the plan — streets, alleys,
+  piazzas — is exactly where he breathes: the city’s public realm is made of his silence.</p>
+  <p>As in Giambattista Nolli’s 1748 plan of Rome, public interiors are drawn white and numbered. Here a building is
+  public when <b>six or more other mouths sing the same line</b> — consensus makes the commons. They are indexed below.</p>
+  <p class="dim">The macro form is Plato’s Atlantis (<i>Critias</i> 113–117): an island, rings of land and water, a canal
+  across the plain to the sea, mountains to the north. The zones come from the album’s own earlier map (ANT/MAPS):
+  Baltimere — sea-edge memories, personal origins — is the outer ring; the Center — moral crucible, repair,
+  recurrence — the inner ring; Atlantis — false heaven, social illusions, techno-faith — the island; Magic Ride, the
+  night highway, lines the canal. The ring widths are not Plato’s: they fall where the poems’ seconds put them, which
+  is why the island is dense and the home ring thin. Each district reads as a walk, row by row, back and forth.
+  Tap any building to hear that phrase.</p>
+  <h2>INDEX OF PUBLIC BUILDINGS</h2>
+  <ol id="idx"></ol>
+  <p class="dim" style="margin-top:18px"><a href="plan.svg">plan.svg</a> · <a href="plan.json">plan.json</a> ·
+  <a href="../atlas.html">← atlas</a></p>
+</main>
+<script>
+const $ = s => document.querySelector(s);
+const wrap = $('#wrap');
+let svg, vb0, vb, P = null, audio = new Audio(), stopT = null, lit = null;
+
+function setVB(){ svg.setAttribute('viewBox', vb.join(' ')); }
+function home(){ vb = vb0.slice(); setVB(); }
+function zoomAt(cx, cy, k){
+  const r = wrap.getBoundingClientRect();
+  const sx = vb[2] / r.width, sy = vb[3] / r.height, s = Math.max(sx, sy);
+  const ox = (r.width - vb[2] / s) / 2, oy = (r.height - vb[3] / s) / 2;
+  const wx = vb[0] + (cx - r.left - ox) * s, wy = vb[1] + (cy - r.top - oy) * s;
+  const nw = Math.min(vb0[2] * 1.2, Math.max(8, vb[2] / k)), nh = nw * vb[3] / vb[2];
+  vb = [wx - (wx - vb[0]) * nw / vb[2], wy - (wy - vb[1]) * nh / vb[3], nw, nh];
+  setVB();
+}
+function play(b){
+  const num = b.num, src = '../' + P.readings[num];
+  if (lit) lit.classList.remove('on');
+  lit = svg.querySelector(`[data-b="${b.i}"]`); if (lit) lit.classList.add('on');
+  const pub = P.index.find(x => x.num === num && b.s >= x.s - .05 && b.e <= x.e + .05);
+  $('#ct').textContent = '“' + b.line + '”';
+  $('#cm').textContent = `${num} · ${(P.titles[num]||'')} · ${b.s.toFixed(1)}–${b.e.toFixed(1)} s` +
+    (pub ? ` · public building ${pub.n}: sung by ${pub.mouths} mouths — ${pub.who.slice(0,3).join(', ')}` : '');
+  $('#card').style.display = 'block';
+  if (!audio.src.endsWith(encodeURI(P.readings[num]))) audio.src = src;
+  const go = () => { audio.currentTime = Math.max(0, b.s - .05); audio.play().catch(()=>{});
+    clearTimeout(stopT); stopT = setTimeout(() => audio.pause(), (b.e - b.s + .25) * 1000); };
+  audio.readyState >= 1 ? go() : audio.addEventListener('loadedmetadata', go, {once:true});
+}
+
+fetch('plan.svg').then(r => r.text()).then(t => {
+  wrap.insertAdjacentHTML('afterbegin', t);
+  svg = wrap.querySelector('svg');
+  vb0 = svg.getAttribute('viewBox').split(/\s+/).map(Number); vb = vb0.slice();
+  svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+  return fetch('plan.json').then(r => r.json());
+}).then(j => {
+  P = j;
+  P.titles = P.titles || {};
+  const byI = Object.fromEntries(P.blocks.map(b => [b.i, b]));
+  // drag, wheel, pinch, tap
+  const pts = new Map(); let moved = 0, last = null, pinch0 = null;
+  wrap.addEventListener('pointerdown', e => { pts.set(e.pointerId, e); moved = 0; last = e;
+    wrap.setPointerCapture(e.pointerId); wrap.classList.add('drag'); });
+  wrap.addEventListener('pointermove', e => {
+    if (!pts.has(e.pointerId)) return;
+    pts.set(e.pointerId, e);
+    if (pts.size === 2){
+      const [a, b] = [...pts.values()];
+      const d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+      if (pinch0) zoomAt((a.clientX + b.clientX) / 2, (a.clientY + b.clientY) / 2, d / pinch0);
+      pinch0 = d; moved += 10; return;
+    }
+    const r = wrap.getBoundingClientRect(), s = Math.max(vb[2] / r.width, vb[3] / r.height);
+    const dx = e.clientX - last.clientX, dy = e.clientY - last.clientY;
+    moved += Math.abs(dx) + Math.abs(dy);
+    vb[0] -= dx * s; vb[1] -= dy * s; setVB(); last = e;
+  });
+  const up = e => { pts.delete(e.pointerId); pinch0 = null; wrap.classList.remove('drag');
+    if (moved < 6 && e.type === 'pointerup'){
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      const bi = el && el.closest('[data-b]');
+      if (bi) play(byI[+bi.dataset.b]);
+    }
+    last = [...pts.values()][0] || null; };
+  wrap.addEventListener('pointerup', up); wrap.addEventListener('pointercancel', up);
+  wrap.addEventListener('wheel', e => { e.preventDefault(); zoomAt(e.clientX, e.clientY, Math.exp(-e.deltaY * .0016)); }, {passive:false});
+  $('#zin').onclick = () => { const r = wrap.getBoundingClientRect(); zoomAt(r.left + r.width/2, r.top + r.height/2, 1.6); };
+  $('#zout').onclick = () => { const r = wrap.getBoundingClientRect(); zoomAt(r.left + r.width/2, r.top + r.height/2, 1/1.6); };
+  $('#home').onclick = home;
+  // the index
+  $('#idx').innerHTML = P.index.map(x =>
+    `<li data-n="${x.n}"><b>${x.n}</b>“${x.line}”<span>${x.num} · ${x.poem} — sung by ${x.mouths} mouths: ${x.who.slice(0,3).join(', ')}${x.mouths > 3 ? '…' : ''}</span></li>`).join('');
+  $('#idx').onclick = e => {
+    const li = e.target.closest('li'); if (!li) return;
+    const x = P.index.find(q => q.n === +li.dataset.n);
+    const b = P.blocks.find(q => q.num === x.num && q.s >= x.s - .05 && q.s <= x.e);
+    if (b){ window.scrollTo({top: 0, behavior: 'smooth'}); play({...b, s: x.s, e: x.e}); }
+  };
+});
+</script>
+</body>
+</html>
