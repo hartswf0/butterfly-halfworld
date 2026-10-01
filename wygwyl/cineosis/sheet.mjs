@@ -14,6 +14,7 @@
    clock, the scale CLIP assigned beside the scale the film's own draw calls
    know, and the four CLIP fields marked absent rather than quietly omitted.
    ========================================================================= */
+import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -22,6 +23,52 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, "..", "..");
 const OUT = path.join(ROOT, "renders", "cineosis");
 const S = JSON.parse(fs.readFileSync(path.join(OUT, "halfworld-shots.json"), "utf8"));
+/* --base rewrites every media path to a published site, because this page is
+   worth sending to someone and 282 files of clip, thumb, strip and cutout are
+   not worth sending with it. The files still have to exist locally: a path that
+   resolves on a server but was never written is the one failure this sheet
+   exists to make visible. */
+const argv = process.argv.slice(2);
+const BASE = ((argv.indexOf("--base") < 0 ? "" : argv[argv.indexOf("--base") + 1]) || "").replace(/\/+$/, "");
+const url = (p) => (BASE ? `${BASE}/renders/cineosis/${p}` : p);
+/* --embed inlines the stills so the page survives being sent somewhere that
+   serves only itself. The clips do not come: 94 of them are 120MB against a
+   16MB page, so the thumb stays and the clip becomes a link. A page that
+   silently shows a blank video element is worse than one that says "clip" and
+   takes you to it. */
+const EMBED = argv.includes("--embed");
+/* AND DOWNSCALED ON THE WAY IN. Inlined at full size the 94 thumbs and 94
+   strips come to 17.4MB of base64 against a 16MB page — over the limit by
+   enough that trimming quality alone would not do it. A card shows the thumb at
+   about 310px and the strip at the same width, so carrying 320 and 1920 is
+   paying for pixels no one sees. */
+const FF = (() => { try {
+  return fs.realpathSync(path.join(ROOT, "node_modules", "ffmpeg-static", "ffmpeg"));
+} catch (_) { return null; } })();
+const MIME = { ".jpg": "image/jpeg", ".png": "image/png" };
+const cache = new Map();
+const data = (p, w) => {
+  if (!p) return null;
+  if (!EMBED) return url(p);
+  if (cache.has(p)) return cache.get(p);
+  const f = path.join(OUT, p);
+  let out = url(p);
+  try {
+    if (FF && w) {
+      const tmp = path.join(OUT, ".sheet-tmp.jpg");
+      const r = spawnSync(FF, ["-v", "error", "-y", "-i", f, "-vf", `scale=${w}:-2`, "-q:v", "6", tmp]);
+      if (r.status === 0 && fs.existsSync(tmp)) {
+        out = "data:image/jpeg;base64," + fs.readFileSync(tmp).toString("base64");
+        fs.unlinkSync(tmp);
+      }
+    } else {
+      out = `data:${MIME[path.extname(p)] || "application/octet-stream"};base64,`
+        + fs.readFileSync(f).toString("base64");
+    }
+  } catch (_) {}
+  cache.set(p, out);
+  return out;
+};
 
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const tc = (t) => `${String(Math.floor(t / 60)).padStart(2, "0")}:${(t % 60).toFixed(2).padStart(5, "0")}`;
@@ -32,10 +79,12 @@ const card = (s) => {
   const h = s.halfworld;
   const dot = (c) => `<i style="background:${esc(c)}"></i>`;
   return `<article data-f="${esc(h.n)}" data-q="${esc((s.title + " " + h.label + " " + h.line + " " + s.scale).toLowerCase())}">
-  <div class="pic">${have(s.thumb)
-    ? `<video preload="none" poster="${esc(s.thumb)}" ${have(s.clip) ? `src="${esc(s.clip)}"` : ""} controls playsinline></video>`
-    : `<div class="none">no media yet</div>`}</div>
-  ${have(s.strip) ? `<img class="strip" src="${esc(s.strip)}" alt="eight frames across the shot" loading="lazy">` : ""}
+  <div class="pic">${!have(s.thumb) ? `<div class="none">no media yet</div>`
+    : EMBED
+      ? `<img src="${esc(data(s.thumb, 300))}" alt="the shot at its representative instant">`
+      : `<video preload="none" poster="${esc(url(s.thumb))}" ${have(s.clip) ? `src="${esc(url(s.clip))}"` : ""} controls playsinline></video>`}</div>
+  ${EMBED && have(s.clip) ? `<a class="clip" href="${esc(url(s.clip))}" target="_blank" rel="noopener">▶ clip · ${(s.end - s.start).toFixed(1)}s</a>` : ""}
+  ${have(s.strip) ? `<img class="strip" src="${esc(data(s.strip, 1000))}" alt="eight frames across the shot" loading="lazy">` : ""}
   <h3>${esc(h.label)} <small>${esc(s.title)}</small></h3>
   ${h.line ? `<p class="line">${esc(h.line)}</p>` : `<p class="line dim">— no line —</p>`}
   <dl>
@@ -79,7 +128,11 @@ article{border:1px solid var(--edge);background:#00000038;padding:9px;min-width:
 .pic{aspect-ratio:4/3;background:#190a1c;border:1px solid var(--edge)}
 .pic video{width:100%;height:100%;object-fit:contain;display:block}
 .none{display:grid;place-items:center;height:100%;color:var(--dim);font-size:11px}
+.pic img{width:100%;height:100%;object-fit:contain;display:block}
 .strip{display:block;width:100%;margin-top:5px;border:1px solid var(--edge)}
+a.clip{display:block;margin-top:5px;padding:3px 7px;font-size:11px;text-decoration:none;
+  color:var(--hot);border:1px solid var(--edge);text-align:center}
+a.clip:hover{border-color:var(--hot);background:#ffb45418}
 h3{margin:9px 0 3px;font-size:12.5px;font-weight:400;color:var(--hot);letter-spacing:.04em}
 h3 small{color:var(--dim);letter-spacing:.02em}
 .line{margin:0 0 8px;font-size:11.5px;line-height:1.5;color:var(--paper);opacity:.86}
