@@ -55,6 +55,14 @@ html,body{height:100%;background:#0b1118;color:var(--ink);font:14px/1.5 "Iowan O
 .tr b{color:var(--violet);font-weight:normal;letter-spacing:.12em;font-size:11px}
 .ev{font-size:11.5px;color:var(--dim);margin:3px 0 3px 12px;text-indent:-12px}
 .oq{font-size:11.5px;color:#f2b38c;margin:3px 0}
+.real{border:1px solid var(--gold);background:rgba(255,210,63,.06);padding:10px 12px;margin:10px 0 4px}
+.real .rk{font-size:10.5px;letter-spacing:.24em;color:var(--gold)}
+.real .rn{font-size:15px;margin:3px 0 2px}
+.real .rm{font-size:11.5px;color:var(--dim)}
+.real a.play{display:inline-block;margin:8px 8px 0 0;padding:7px 12px;border:1px solid var(--gold);color:#111;background:var(--gold);
+  font:700 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.12em;text-decoration:none}
+.real a.play.alt{background:transparent;color:var(--gold)}
+.real a.osm{font-size:11px;color:var(--cyan);margin-left:2px}
 #prof{grid-column:1;background:#0e1217;border-top:1px solid var(--edge);position:relative}
 #prof canvas{width:100%;height:100%;display:block;cursor:pointer}
 #ui{position:absolute;inset:0;pointer-events:none;overflow:hidden}
@@ -116,6 +124,24 @@ html,body{height:100%;background:#0b1118;color:var(--ink);font:14px/1.5 "Iowan O
 <script>
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const III = 'https://hartswf0.github.io/terrarium/unset-04-hartsoe-iii.html';
+const STAGEBASE = new URL('stages/', location.href).href;
+let REAL = {};
+fetch('stages/stages.json').then(r => r.json()).then(j => j.stages.forEach(st => st.poems.forEach(p => REAL[p.num] = {...p, stage: st})))
+  .catch(() => {});
+function realBlock(num){
+  const R = REAL[num]; if (!R) return '';
+  const land = `${III}?land=${R.lat},${R.lon}&wt=${encodeURIComponent(STAGEBASE + 'wt/' + num + '.json')}`;
+  const cart = `${III}?cart=${encodeURIComponent(STAGEBASE + R.stage.key + '.landpack.json')}`;
+  const osm = `https://www.openstreetmap.org/?mlat=${R.lat}&mlon=${R.lon}#map=18/${R.lat}/${R.lon}`;
+  return `<div class="real"><div class="rk sans">THE REAL PLACE · SCOUTED</div>
+    <div class="rn">${esc(R.note)}</div>
+    <div class="rm">${esc(R.stage.name)} · ${R.lat.toFixed(5)}, ${R.lon.toFixed(5)} · stage ground ${R.stage.halfM * 2} m across,
+      ${R.stage.buildings} real buildings, ${R.stage.reliefM} m relief</div>
+    <a class="play" href="${land}" target="_blank" rel="noopener">▶ PLAY THE REAL CITY</a>
+    <a class="play alt" href="${cart}" target="_blank" rel="noopener">▶ WORLDTEXT GROUND</a>
+    <a class="osm" href="${osm}" target="_blank" rel="noopener">open in OpenStreetMap ↗</a></div>`;
+}
 let W = null, view = {x: 0, y: 0, k: 1}, base = 1, sel = null, IMG = {w: 0, h: 0};
 const wrap = $('#mapwrap'), stage = $('#stage');
 
@@ -194,6 +220,7 @@ function select(num, fly = true){
     <h3>${esc(L.name)}</h3>
     <div class="meta">${esc(s.title)} · ${esc(L.kind)}<br>scout analog: ${esc(L.real_analog)}<br>
       ${esc(L.terrain)} · ${esc(L.elevation)} · zone ${esc(L.zone)} · near ${esc((L.near || []).join(', '))}</div>
+    ${realBlock(num)}
     <p>${esc(s.situation)}</p>
     <div class="meta">⏱ ${esc(s.time_of_day)} · ☁ ${esc(s.weather_light)}</div>
     <h4 class="sans">ARRIVAL</h4>
