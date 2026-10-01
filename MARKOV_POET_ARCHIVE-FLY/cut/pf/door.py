@@ -25,8 +25,8 @@ import os, sys, json, subprocess, hashlib, time
 import numpy as np, cv2
 
 BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # .../MARKOV_POET_ARCHIVE-FLY
-OUT  = os.path.join(BASE, 'INDEX.html')
-THUMBS = os.path.join(BASE, 'INDEX_thumbs')
+OUT  = os.path.join(BASE, 'index.html')
+THUMBS = os.path.join(BASE, 'door_thumbs')
 EDGE, Q = 460, 74
 
 # ---------------------------------------------------------------- the entries
@@ -537,7 +537,7 @@ def urlq(x):
     return x.replace('%', '%25').replace('#', '%23').replace('?', '%3F').replace(' ', '%20')
 
 def rel_to_door(tgt, base):
-    return os.path.relpath(os.path.join(base, 'INDEX.html'), tgt).replace(os.sep, '/')
+    return os.path.relpath(os.path.join(base, 'index.html'), tgt).replace(os.sep, '/')
 
 # ------------------------------------------------------------------- measure
 os.makedirs(THUMBS, exist_ok=True)
@@ -575,14 +575,14 @@ for eid, kind, name, href, line, note in E:
     if ss:
         q = os.path.join(THUMBS, f'{eid}.webp')
         if os.path.exists(q) and '--refresh' not in sys.argv:
-            r['thumb'] = f'INDEX_thumbs/{eid}.webp'
+            r['thumb'] = f'door_thumbs/{eid}.webp'
         elif thumb(ss, sk, q):
-            r['thumb'] = f'INDEX_thumbs/{eid}.webp'
+            r['thumb'] = f'door_thumbs/{eid}.webp'
             r['from'] = os.path.relpath(ss, BASE)
     if not r['thumb']:
         q = os.path.join(THUMBS, f'{eid}_mark.webp')
         if (os.path.exists(q) and '--refresh' not in sys.argv) or mark(eid, q):
-            r['thumb'] = f'INDEX_thumbs/{eid}_mark.webp'; r['drawn'] = True
+            r['thumb'] = f'door_thumbs/{eid}_mark.webp'; r['drawn'] = True
         nopreview.append(eid)
     rows.append(r)
     print(f"  {eid}  {name[:28]:28s} {r['n']:6d} {r['noun']}  {human(r['bytes']):>9s}  {'thumb' if r['thumb'] else '—'}", flush=True)
@@ -734,6 +734,7 @@ footer{{margin-top:56px;border-top:3px solid var(--ink);padding-top:20px;
 footer b{{color:var(--ink)}} footer p{{margin:12px 0}}
 footer a{{color:var(--accent)}}
 .hide{{display:none!important}}
+.card.unreach{{opacity:.72}}
 @media(max-width:560px){{body{{padding:0 14px 90px}} .grid{{grid-template-columns:1fr}} .pv{{height:200px}}}}
 </style></head><body><div class="wrap">
 
@@ -810,10 +811,28 @@ footer a{{color:var(--accent)}}
   if(e.key==='Escape'&&document.activeElement===q){{q.value='';q.blur();apply();}}
  }});
  apply();
+
+ /* Two entries point outside this folder. Whether they resolve depends on where
+    the server's root is, which the page cannot know in advance — so it asks,
+    once, and says so on the card rather than handing anyone a silent 404. */
+ cards.filter(function(c){{return c.tagName==='A'&&c.getAttribute('href').indexOf('../')===0;}})
+  .forEach(function(c){{
+   fetch(c.getAttribute('href'),{{method:'HEAD'}}).then(function(r){{
+    if(r.ok) return; throw 0;
+   }}).catch(function(){{
+    c.classList.add('unreach');
+    var m=c.querySelector('.meta');
+    if(m) m.insertAdjacentHTML('afterbegin','<span class="disk">OUTSIDE THIS ROOT</span>');
+    var t=c.querySelector('.txt');
+    if(t) t.insertAdjacentHTML('beforeend','<p class="note">This entry lives above this folder. '
+      + 'Serve the repository root instead — or run the-door.command, which does.</p>');
+   }});
+  }});
 }})();
 </script></body></html>'''
 
 open(OUT, 'w').write(HTML)
+
 
 print(f"\n{len(live)} live · {len(dead)} dead · {TOT_N:,} files · {human(TOT_B)}")
 if dead:
