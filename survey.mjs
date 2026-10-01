@@ -22,8 +22,18 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 
-const ROOT = process.cwd();
+const argv = process.argv.slice(2);
+const opt = (n, d) => { const i = argv.indexOf("--" + n); return i < 0 ? d : argv[i + 1]; };
+const has = (n) => argv.includes("--" + n);
+/* POINTABLE AT ANY REPOSITORY. --root walks somewhere else, --base rewrites
+   every link to a published site so the survey works away from the files, and
+   --embed inlines the covers as data URIs so it is one self-contained page. */
+const ROOT = path.resolve(opt("root", process.cwd()));
+const BASE = (opt("base", "") || "").replace(/\/+$/, "");
+const EMBED = has("embed");
+const OUTFILE = path.resolve(opt("out", path.join(ROOT, "SURVEY.html")));
 const SKIP = new Set([".git", "node_modules", ".claude", "renders", "survey-covers"]);
 const IMG = /\.(png|webp|jpe?g|svg|gif)$/i, VID = /\.(mp4|webm|mov)$/i;
 const AUD = /\.(mp3|wav|m4a|flac|ogg)$/i;
@@ -119,10 +129,34 @@ function coverFor(p) {
   return hits[0];
 }
 
-const title = (p) => {
-  try { return (fs.readFileSync(path.join(ROOT, p), "utf8").match(/<title>([^<]*)</) || [, ""])[1].trim(); }
-  catch (_) { return ""; }
-};
+/* WHAT MAKES THIS ONE DIFFERENT FROM THE OTHERS. A title alone says DRESS and
+   PREVIS and THE LOOM and tells you nothing — these pages all carry their own
+   statement of intent in the first lines of the body, and that is the thing
+   worth surfacing: "the archive fitted to the halfworld, and held there",
+   "the halfworld blocks it, the archive fills it", "a weave that moves".
+   Style and script are stripped first or the first text found is CSS. */
+const ENT = { "&mdash;": "—", "&ndash;": "–", "&amp;": "&", "&lt;": "<", "&gt;": ">",
+  "&rsquo;": "\u2019", "&lsquo;": "\u2018", "&rdquo;": "\u201d", "&ldquo;": "\u201c",
+  "&middot;": "·", "&nbsp;": " ", "&quot;": '"', "&rarr;": "→", "&times;": "×" };
+const deent = (t) => t.replace(/&[a-z]+;|&#\d+;/gi, (m) => ENT[m.toLowerCase()] ?? m);
+function describe(p) {
+  let txt = ""; try { txt = fs.readFileSync(path.join(ROOT, p), "utf8"); } catch (_) { return {}; }
+  const title = deent((txt.match(/<title>([^<]*)</) || [, ""])[1]).trim();
+  const body = txt.replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/gi, "").replace(/<!--[\s\S]*?-->/g, "");
+  const lines = body.replace(/<[^>]+>/g, "\n").split("\n")
+    .map(l => deent(l).replace(/\s+/g, " ").trim()).filter(l => l.length > 3);
+  const norm = (x) => x.toLowerCase().replace(/[^a-z0-9]/g, "");
+  /* the headline is often the title again with a subtitle welded on */
+  let sub = "", prose = "";
+  for (const l of lines.slice(0, 8)) {
+    if (!sub && norm(l) !== norm(title) && norm(l).startsWith(norm(title).slice(0, 6)) && l.length > title.length + 4) {
+      sub = l.replace(/^[^—–-]*[—–-]\s*/, "").trim(); continue;
+    }
+    if (!prose && l.length > 34 && norm(l) !== norm(title) && /[a-z]{3}/.test(l) && !/^[A-Z0-9 ·—/]+$/.test(l)) prose = l;
+  }
+  return { title: title || path.basename(p, ".html"), sub, prose };
+}
+const title = (p) => describe(p).title;
 
 /* ---- group ---------------------------------------------------------------- */
 /* The groups are the shape the work actually took, not a taxonomy imposed on
@@ -142,7 +176,7 @@ const entries = pages.map(p => {
   const isIdx = path.basename(p) === "index.html";
   const f = isIdx ? folder(dir) : null;
   return {
-    path: p, dir, title: title(p) || path.basename(p, ".html"),
+    path: p, dir, ...describe(p),
     reachable: reach.has(p), mentioned: mentionedElsewhere.has(p),
     inbound: [...inb.get(p)], outbound: out.get(p).size,
     isIndex: isIdx, hold: f, cover: (f && f.cover) || coverFor(p),
@@ -163,12 +197,41 @@ const mb = (b) => b > 1 << 30 ? (b / (1 << 30)).toFixed(1) + " GB" : (b / (1 << 
 
 /* ---- print ---------------------------------------------------------------- */
 const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+/* ONE SELF-CONTAINED PAGE. --embed downscales each cover to 300px and inlines
+   it, so the survey can be published, mailed or opened from anywhere without
+   the repository underneath it. Twenty-six covers come to well under a
+   megabyte; the originals are up to several each. */
+const dataCache = new Map();
+function src(rel) {
+  if (!rel) return null;
+  if (!EMBED) return BASE ? `${BASE}/${rel}` : rel;
+  if (dataCache.has(rel)) return dataCache.get(rel);
+  let uri = null;
+  try {
+    const tmp = path.join(ROOT, ".survey-tmp.jpg");
+    const r = spawnSync(FF, ["-v", "error", "-y", "-i", path.join(ROOT, rel),
+      "-vf", "scale=300:-2", "-q:v", "7", tmp], { timeout: 30000 });
+    if (r.status === 0 && fs.existsSync(tmp)) {
+      uri = "data:image/jpeg;base64," + fs.readFileSync(tmp).toString("base64");
+      fs.unlinkSync(tmp);
+    }
+  } catch (_) {}
+  dataCache.set(rel, uri);
+  return uri;
+}
+const href = (p) => BASE ? `${BASE}/${p}` : p;
 const card = (e) => {
   const h = e.hold;
   const bits = h ? [h.img && `${h.img} img`, h.vid && `${h.vid} vid`, h.aud && `${h.aud} audio`, h.md && `${h.md} notes`].filter(Boolean).join(" · ") : "";
-  return `<a class="c${e.reachable ? "" : e.mentioned ? " loose" : " orphan"}" href="${esc(e.path)}" data-g="${e.group}" data-s="${e.reachable ? "linked" : e.mentioned ? "loose" : "orphan"}">
-    ${e.cover ? `<img loading="lazy" src="${esc(e.cover)}" alt="">` : `<span class="noimg"></span>`}
+  const cv = src(e.cover);
+  const line = e.sub || e.prose || "";
+  return `<a class="c${e.reachable ? "" : e.mentioned ? " loose" : " orphan"}" href="${esc(href(e.path))}" target="_blank" rel="noopener"
+     data-g="${e.group}" data-s="${e.reachable ? "linked" : e.mentioned ? "loose" : "orphan"}"
+     data-q="${esc((e.title + " " + line + " " + e.dir).toLowerCase())}">
+    ${cv ? `<img loading="lazy" src="${cv}" alt="">` : `<span class="noimg"></span>`}
     <b>${esc(e.title)}</b>
+    ${line ? `<s>${esc(line.slice(0, 150))}</s>` : ""}
     <i>${esc(e.dir || ".")}</i>
     <u>${bits}${h ? (bits ? " · " : "") + mb(h.bytes) : ""}</u>
     ${e.reachable ? "" : `<em>${e.mentioned ? "not linked, but named in a script" : "ORPHAN — nothing points here"}</em>`}
@@ -182,45 +245,56 @@ const section = (g) => {
   return `<section><h2>${g.name} <span>${es.length} pages${orph ? ` · ${orph} orphaned` : ""}</span></h2>
     ${g.note ? `<p class="note">${g.note}</p>` : ""}<div class="grid">${es.map(card).join("")}</div></section>`;
 };
-const html = `<!doctype html>
-<meta charset="utf-8">
-<title>SURVEY — everything in this repository, and what points at it</title>
-<link rel="icon" href="wygwyl/dot.svg">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+/* --bare drops the document head: a published artifact supplies its own
+   doctype, charset and viewport, and duplicating them is how a page ends up
+   with two viewport metas disagreeing about scale. */
+const BARE = has("bare");
+const TITLE = opt("title", BARE ? "Halfworld Survey" : "SURVEY — everything in this repository, and what points at it");
+const html = `${BARE ? "" : `<!doctype html>
+<meta charset="utf-8">`}
+<title>${esc(TITLE)}</title>
+${BARE ? "" : `<link rel="icon" href="wygwyl/dot.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1">`}
 <style>
-  :root{--bg:#0b0410;--paper:#f6e7c8;--dim:#8d6a70;--hot:#f2a03c;--acc:#e0532c;--edge:#2a1220;--good:#7fd67f}
+  /* one deliberate dark world — the instrument panel the rest of this project
+     is printed in — so the theme is committed rather than omitted */
+  :root{color-scheme:dark;
+        --bg:#0b0410;--paper:#f6e7c8;--dim:#8d6a70;--hot:#f2a03c;--acc:#e0532c;--edge:#2a1220;--good:#7fd67f}
   *{box-sizing:border-box}html,body{margin:0;min-height:100%}
   body{background:radial-gradient(120% 90% at 50% -10%,#3a1430 0%,#1b0817 45%,#0b0410 100%);
        color:var(--paper);font:12.5px/1.55 ui-monospace,"SF Mono",Menlo,monospace}
-  header{padding:16px 20px 12px;border-bottom:1px solid var(--edge)}
+  header{padding-block:16px 12px;padding-inline:20px;border-bottom:1px solid var(--edge)}
   h1{margin:0;font-size:15px;letter-spacing:.30em;color:var(--hot)}
   .tally{margin-top:7px;color:var(--dim);display:flex;gap:16px;flex-wrap:wrap}
   .tally b{color:var(--paper);font-weight:400}
   .tally b.bad{color:var(--acc)}
-  .filters{display:flex;gap:6px;flex-wrap:wrap;padding:11px 20px;border-bottom:1px solid var(--edge)}
+  .filters{display:flex;gap:6px;flex-wrap:wrap;padding-block:11px;padding-inline:20px;border-bottom:1px solid var(--edge);position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5}
   button{font:inherit;color:var(--paper);background:#00000055;border:1px solid var(--edge);
          border-radius:2px;padding:5px 10px;cursor:pointer;letter-spacing:.06em}
   button:hover{border-color:var(--hot);color:var(--hot)}
   button.on{background:#ffb45418;border-color:var(--hot);color:var(--hot)}
-  main{padding:4px 20px 30px}
+  main{padding-block:4px 30px;padding-inline:20px}
   section{margin:22px 0}
   h2{font-size:11px;letter-spacing:.26em;color:var(--paper);font-weight:600;margin:0 0 3px;
      border-bottom:1px solid var(--edge);padding-bottom:6px}
   h2 span{color:var(--dim);letter-spacing:.06em;font-weight:400;margin-left:8px}
   .note{color:var(--dim);margin:6px 0 11px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(188px,1fr));gap:10px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,190px),1fr));gap:10px}
+  .c{min-width:0}
   .c{display:block;text-decoration:none;color:inherit;border:1px solid var(--edge);
      background:#00000038;padding:8px;transition:border-color .12s}
   .c:hover{border-color:var(--hot)}
   .c img,.noimg{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#190a1c;
      border:1px solid var(--edge);margin-bottom:7px;image-rendering:auto}
-  .c b{display:block;font-weight:400;font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .c b{display:block;font-weight:400;font-size:12.5px;color:var(--hot);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .c s{display:block;text-decoration:none;color:var(--paper);font-size:11px;line-height:1.4;margin:3px 0 4px;
+       display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .c i{display:block;font-style:normal;color:var(--dim);font-size:10.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .c u{display:block;text-decoration:none;color:var(--hot);font-size:10.5px;margin-top:3px}
   .c em{display:block;font-style:normal;color:var(--acc);font-size:10.5px;margin-top:4px}
   .c.loose em{color:var(--dim)}
   .c.orphan{border-color:#5a2018}
-  footer{padding:14px 20px 30px;border-top:1px solid var(--edge);color:var(--dim);max-width:96ch}
+  footer{padding-block:14px 30px;padding-inline:20px;border-top:1px solid var(--edge);color:var(--dim);max-width:96ch}
   footer b{color:var(--paper);font-weight:400}
   .hide{display:none}
 </style>
@@ -241,6 +315,7 @@ const html = `<!doctype html>
   <button class="on" data-f="all">ALL</button>
   <button data-f="orphan">ORPHANS ONLY</button>
   <button data-f="linked">LINKED ONLY</button>
+  <input id="q" placeholder="search titles, descriptions, paths…" style="flex:1;min-width:170px;font:inherit;color:var(--paper);background:#00000055;border:1px solid var(--edge);padding:5px 10px;border-radius:2px">
   ${GROUPS.map(g => `<button data-g="${g.id}">${g.name}</button>`).join("")}
 </div>
 <main>${GROUPS.map(section).join("")}</main>
@@ -257,15 +332,18 @@ const html = `<!doctype html>
 <script>
   const cards = [...document.querySelectorAll(".c")];
   let f = "all", g = null;
+  let q = "";
   const apply = () => {
     for (const c of cards) {
       const okF = f === "all" || c.dataset.s === f;
       const okG = !g || c.dataset.g === g;
-      c.classList.toggle("hide", !(okF && okG));
+      const okQ = !q || c.dataset.q.includes(q);
+      c.classList.toggle("hide", !(okF && okG && okQ));
     }
     for (const s of document.querySelectorAll("section"))
       s.classList.toggle("hide", ![...s.querySelectorAll(".c")].some(c => !c.classList.contains("hide")));
   };
+  document.getElementById("q").oninput = (e) => { q = e.target.value.trim().toLowerCase(); apply(); };
   for (const b of document.querySelectorAll("[data-f]")) b.onclick = () => {
     f = b.dataset.f;
     for (const o of document.querySelectorAll("[data-f]")) o.classList.toggle("on", o === b);
@@ -277,9 +355,10 @@ const html = `<!doctype html>
     apply();
   };
 </script>`;
-fs.writeFileSync(path.join(ROOT, "SURVEY.html"), html);
+fs.mkdirSync(path.dirname(OUTFILE), { recursive: true });
+fs.writeFileSync(OUTFILE, html);
 console.log(`${totals.pages} pages · ${totals.reachable} reachable · ${totals.orphans} orphaned`);
 console.log(`${totals.img.toLocaleString()} images · ${totals.vid} videos · ${totals.aud} audio · ${mb(totals.bytes)}`);
 console.log("\norphans:");
 for (const o of orphans) console.log(`  ${o.path}${o.title ? "  — " + o.title : ""}`);
-console.log(`\n→ SURVEY.html`);
+console.log(`\n→ ${path.relative(process.cwd(), OUTFILE)}  ${(fs.statSync(OUTFILE).size / 1024).toFixed(0)} KB`);

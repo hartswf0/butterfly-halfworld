@@ -4,39 +4,45 @@
 <link rel="icon" href="wygwyl/dot.svg">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
-  :root{--bg:#0b0410;--paper:#f6e7c8;--dim:#8d6a70;--hot:#f2a03c;--acc:#e0532c;--edge:#2a1220;--good:#7fd67f}
+  /* one deliberate dark world — the instrument panel the rest of this project
+     is printed in — so the theme is committed rather than omitted */
+  :root{color-scheme:dark;
+        --bg:#0b0410;--paper:#f6e7c8;--dim:#8d6a70;--hot:#f2a03c;--acc:#e0532c;--edge:#2a1220;--good:#7fd67f}
   *{box-sizing:border-box}html,body{margin:0;min-height:100%}
   body{background:radial-gradient(120% 90% at 50% -10%,#3a1430 0%,#1b0817 45%,#0b0410 100%);
        color:var(--paper);font:12.5px/1.55 ui-monospace,"SF Mono",Menlo,monospace}
-  header{padding:16px 20px 12px;border-bottom:1px solid var(--edge)}
+  header{padding-block:16px 12px;padding-inline:20px;border-bottom:1px solid var(--edge)}
   h1{margin:0;font-size:15px;letter-spacing:.30em;color:var(--hot)}
   .tally{margin-top:7px;color:var(--dim);display:flex;gap:16px;flex-wrap:wrap}
   .tally b{color:var(--paper);font-weight:400}
   .tally b.bad{color:var(--acc)}
-  .filters{display:flex;gap:6px;flex-wrap:wrap;padding:11px 20px;border-bottom:1px solid var(--edge)}
+  .filters{display:flex;gap:6px;flex-wrap:wrap;padding-block:11px;padding-inline:20px;border-bottom:1px solid var(--edge);position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5}
   button{font:inherit;color:var(--paper);background:#00000055;border:1px solid var(--edge);
          border-radius:2px;padding:5px 10px;cursor:pointer;letter-spacing:.06em}
   button:hover{border-color:var(--hot);color:var(--hot)}
   button.on{background:#ffb45418;border-color:var(--hot);color:var(--hot)}
-  main{padding:4px 20px 30px}
+  main{padding-block:4px 30px;padding-inline:20px}
   section{margin:22px 0}
   h2{font-size:11px;letter-spacing:.26em;color:var(--paper);font-weight:600;margin:0 0 3px;
      border-bottom:1px solid var(--edge);padding-bottom:6px}
   h2 span{color:var(--dim);letter-spacing:.06em;font-weight:400;margin-left:8px}
   .note{color:var(--dim);margin:6px 0 11px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(188px,1fr));gap:10px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,190px),1fr));gap:10px}
+  .c{min-width:0}
   .c{display:block;text-decoration:none;color:inherit;border:1px solid var(--edge);
      background:#00000038;padding:8px;transition:border-color .12s}
   .c:hover{border-color:var(--hot)}
   .c img,.noimg{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#190a1c;
      border:1px solid var(--edge);margin-bottom:7px;image-rendering:auto}
-  .c b{display:block;font-weight:400;font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .c b{display:block;font-weight:400;font-size:12.5px;color:var(--hot);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .c s{display:block;text-decoration:none;color:var(--paper);font-size:11px;line-height:1.4;margin:3px 0 4px;
+       display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .c i{display:block;font-style:normal;color:var(--dim);font-size:10.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .c u{display:block;text-decoration:none;color:var(--hot);font-size:10.5px;margin-top:3px}
   .c em{display:block;font-style:normal;color:var(--acc);font-size:10.5px;margin-top:4px}
   .c.loose em{color:var(--dim)}
   .c.orphan{border-color:#5a2018}
-  footer{padding:14px 20px 30px;border-top:1px solid var(--edge);color:var(--dim);max-width:96ch}
+  footer{padding-block:14px 30px;padding-inline:20px;border-top:1px solid var(--edge);color:var(--dim);max-width:96ch}
   footer b{color:var(--paper);font-weight:400}
   .hide{display:none}
 </style>
@@ -57,555 +63,829 @@
   <button class="on" data-f="all">ALL</button>
   <button data-f="orphan">ORPHANS ONLY</button>
   <button data-f="linked">LINKED ONLY</button>
+  <input id="q" placeholder="search titles, descriptions, paths…" style="flex:1;min-width:170px;font:inherit;color:var(--paper);background:#00000055;border:1px solid var(--edge);padding:5px 10px;border-radius:2px">
   <button data-g="experiments">THE EXPERIMENTS</button><button data-g="suite">THE SUITE</button><button data-g="tools">TOOLS AND HARNESSES</button><button data-g="rest">EVERYTHING ELSE</button>
 </div>
 <main><section><h2>THE EXPERIMENTS <span>26 pages · 21 orphaned</span></h2>
-    <p class="note">each arrived as a folder with its own index — this is the first thing that points at them</p><div class="grid"><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/dress/index.html" data-g="experiments" data-s="orphan">
+    <p class="note">each arrived as a folder with its own index — this is the first thing that points at them</p><div class="grid"><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/dress/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="dress the archive fitted to the halfworld, and held there markov_poet_archive-fly/cut/out/dress">
     <img loading="lazy" src="survey-covers/MARKOV_POET_ARCHIVE_FLY_cut_out_dress.jpg" alt="">
     <b>DRESS</b>
+    <s>the archive fitted to the halfworld, and held there</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/dress</i>
     <u>15 vid · 8 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/inhabit/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/inhabit/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="inhabit the suite's own people, in a world we built for them markov_poet_archive-fly/cut/out/inhabit">
     <img loading="lazy" src="survey-covers/MARKOV_POET_ARCHIVE_FLY_cut_out_inhabit.jpg" alt="">
     <b>INHABIT</b>
+    <s>the suite's own people, in a world we built for them</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/inhabit</i>
     <u>14 vid · 7 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/previs/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/previs/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="previs the halfworld blocks it, the archive fills it markov_poet_archive-fly/cut/out/previs">
     <img loading="lazy" src="survey-covers/MARKOV_POET_ARCHIVE_FLY_cut_out_previs.jpg" alt="">
     <b>PREVIS</b>
+    <s>the halfworld blocks it, the archive fills it</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/previs</i>
     <u>14 vid · 5 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/held/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/held/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="held draw a region · drop or paste images markov_poet_archive-fly/cut/out/held">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/held/pack/P068.webp" alt="">
     <b>HELD</b>
+    <s>draw a region · drop or paste images</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/held</i>
     <u>135 img · 12 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/textule/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/textule/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="textule textura + module. not a tubelet — a tubelet is an markov_poet_archive-fly/cut/out/textule">
     <span class="noimg"></span>
     <b>TEXTULE</b>
+    <s>textura + module. Not a tubelet — a tubelet is an</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/textule</i>
     <u>5 vid · 1 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/collage/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/collage/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="the collages sam 3 was asked sixteen noun phrases of every shot in the archive and returned markov_poet_archive-fly/cut/out/collage">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/collage/poem_14.webp" alt="">
     <b>THE COLLAGES</b>
+    <s>SAM 3 was asked sixteen noun phrases of every shot in the archive and returned</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/collage</i>
     <u>33 img · 1 vid · 10 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/loom/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/loom/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="the loom a weave that moves markov_poet_archive-fly/cut/out/loom">
     <img loading="lazy" src="survey-covers/MARKOV_POET_ARCHIVE_FLY_cut_out_loom.jpg" alt="">
     <b>THE LOOM</b>
+    <s>a weave that moves</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/loom</i>
     <u>4 vid · 16 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/lucier/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/lucier/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="i am sitting in a room i am recording the sound of my speaking voice and i am going to play it markov_poet_archive-fly/cut/out/lucier">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/lucier/world_06_STRIP.webp" alt="">
     <b>I AM SITTING IN A ROOM</b>
+    <s>I am recording the sound of my speaking voice and I am going to play it</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/lucier</i>
     <u>20 img · 2 vid · 5 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/scene/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/scene/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="the sets built, then drawn, then lit markov_poet_archive-fly/cut/out/scene">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/scene/08_08-newly-single.webp" alt="">
     <b>THE SETS</b>
+    <s>built, then drawn, then lit</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/scene</i>
     <u>28 img · 4 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="the city fourteen sheets markov_poet_archive-fly/cut/out/archigram">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/08_08-newly-single.webp" alt="">
     <b>THE CITY</b>
+    <s>fourteen sheets</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/archigram</i>
     <u>14 img · 2 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/sheets/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/sheets/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="the woven sheets . cut-outs sat on paper as discrete objects, markov_poet_archive-fly/cut/out/sheets">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/sheets/08_08-newly-single.webp" alt="">
     <b>THE WOVEN SHEETS</b>
+    <s>. Cut-outs sat on paper as discrete objects,</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/sheets</i>
     <u>14 img · 1 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/patchfield/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/patchfield/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="patchfield carriers of two kinds, skins of many, and layers markov_poet_archive-fly/cut/out/patchfield">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/patchfield/modes.webp" alt="">
     <b>PATCHFIELD</b>
+    <s>Carriers of two kinds, skins of many, and layers</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/patchfield</i>
     <u>1 img · 1 vid · 3 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/lab/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/lab/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="the lab — finding the body the poet kept coming back as an outline around a blank core. the cause was markov_poet_archive-fly/cut/out/lab">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/lab/body_P054.webp" alt="">
     <b>THE LAB — finding the body</b>
+    <s>The poet kept coming back as an outline around a blank core. The cause was</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/lab</i>
     <u>9 img · 1 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/BOARD/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/BOARD/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="the board — every image, every prompt  markov_poet_archive-fly/board">
     <span class="noimg"></span>
     <b>THE BOARD — every image, every prompt</b>
+    
     <i>MARKOV_POET_ARCHIVE-FLY/BOARD</i>
     <u>1 notes · 1 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/COLLAGE_AND_VIDEO/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/COLLAGE_AND_VIDEO/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="every experiment 45 works · 834 moving · 4384 still · 10.0gb. the media is not copied here — each work is a symlink to where it really lives, so this page browses all of it without duplicating a byte. markov_poet_archive-fly/collage_and_video">
     <span class="noimg"></span>
     <b>Every experiment</b>
+    <s>45 works · 834 moving · 4384 still · 10.0GB. The media is not copied here — each work is a symlink to where it really lives, so this page browses all </s>
     <i>MARKOV_POET_ARCHIVE-FLY/COLLAGE_AND_VIDEO</i>
     <u>48 notes · 1 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/COLLAGE_ZETTELS/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/COLLAGE_ZETTELS/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="the collage zettels 107 collage images, each with the film it is asking for. every one is filed against a sign from deamer’s taxonomy — not as decoration but because the sign names the operation the image is already performing. markov_poet_archive-fly/collage_zettels">
     <span class="noimg"></span>
     <b>The collage zettels</b>
+    <s>107 collage images, each with the film it is asking for. Every one is filed against a sign from Deamer’s taxonomy — not as decoration but because the </s>
     <i>MARKOV_POET_ARCHIVE-FLY/COLLAGE_ZETTELS</i>
     <u>109 notes · 1 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c loose" href="MARKOV_POET_ARCHIVE-FLY/cut/out/lab/aberrations.html" data-g="experiments" data-s="loose">
+  </a><a class="c loose" href="MARKOV_POET_ARCHIVE-FLY/cut/out/lab/aberrations.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="loose"
+     data-q="the aberrations every shot in the archive was parsed and markov_poet_archive-fly/cut/out/lab">
     <span class="noimg"></span>
     <b>THE ABERRATIONS</b>
+    <s>Every shot in the archive was parsed and</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/lab</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="MARKOV_POET_ARCHIVE-FLY/cut/out/lab/sam3-run.html" data-g="experiments" data-s="loose">
+  </a><a class="c loose" href="MARKOV_POET_ARCHIVE-FLY/cut/out/lab/sam3-run.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="loose"
+     data-q="sam 3 run — 129/129 129/129 shots · 2033 elements · last progress 88458s ago markov_poet_archive-fly/cut/out/lab">
     <span class="noimg"></span>
     <b>SAM 3 RUN — 129/129</b>
+    <s>129/129 shots · 2033 elements · last progress 88458s ago</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/lab</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/op/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/op/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="operator 14 · studio  markov_poet_archive-fly/cut/out/op">
     <span class="noimg"></span>
     <b>OPERATOR 14 · STUDIO</b>
+    
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/op</i>
     <u>1 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/op15/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/op15/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="operator 14 · studio  markov_poet_archive-fly/cut/out/op15">
     <span class="noimg"></span>
     <b>OPERATOR 14 · STUDIO</b>
+    
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/op15</i>
     <u>1 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/op16/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/op16/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="operator 14 · studio  markov_poet_archive-fly/cut/out/op16">
     <span class="noimg"></span>
     <b>OPERATOR 14 · STUDIO</b>
+    
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/op16</i>
     <u>1 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c loose" href="MARKOV_POET_ARCHIVE-FLY/cut/out/op16/partmotion.html" data-g="experiments" data-s="loose">
+  </a><a class="c loose" href="MARKOV_POET_ARCHIVE-FLY/cut/out/op16/partmotion.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="loose"
+     data-q="which parts actually move binding carries a patch on a part's markov_poet_archive-fly/cut/out/op16">
     <span class="noimg"></span>
     <b>which parts actually move</b>
+    <s>Binding carries a patch on a part's</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/op16</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/paste/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/paste/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="paste — the blend table  markov_poet_archive-fly/cut/out/paste">
     <span class="noimg"></span>
     <b>PASTE — the blend table</b>
+    
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/paste</i>
     <u>0 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c loose" href="MARKOV_POET_ARCHIVE-FLY/cut/out/studio/compose.html" data-g="experiments" data-s="loose">
+  </a><a class="c loose" href="MARKOV_POET_ARCHIVE-FLY/cut/out/studio/compose.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="loose"
+     data-q="halfworld composer  markov_poet_archive-fly/cut/out/studio">
     <span class="noimg"></span>
     <b>HALFWORLD COMPOSER</b>
+    
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/studio</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="MARKOV_POET_ARCHIVE-FLY/cut/out/studio/glass.html" data-g="experiments" data-s="loose">
+  </a><a class="c loose" href="MARKOV_POET_ARCHIVE-FLY/cut/out/studio/glass.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="loose"
+     data-q="stained glass — the halfworld as a colouring book  markov_poet_archive-fly/cut/out/studio">
     <img loading="lazy" src="wygwyl/famspec/VOL_glass-06_S01.png" alt="">
     <b>STAINED GLASS — the halfworld as a colouring book</b>
+    
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/studio</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/studio/index.html" data-g="experiments" data-s="orphan">
+  </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/studio/index.html" target="_blank" rel="noopener"
+     data-g="experiments" data-s="orphan"
+     data-q="halfworld studio  markov_poet_archive-fly/cut/out/studio">
     <span class="noimg"></span>
     <b>HALFWORLD STUDIO</b>
+    
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/studio</i>
     <u>1 notes · 1 MB</u>
     <em>ORPHAN — nothing points here</em>
   </a></div></section><section><h2>THE SUITE <span>50 pages · 5 orphaned</span></h2>
-    <p class="note">the fourteen halfworlds and the instruments built around them</p><div class="grid"><a class="c" href="wygwyl/index.html" data-g="suite" data-s="linked">
+    <p class="note">the fourteen halfworlds and the instruments built around them</p><div class="grid"><a class="c" href="wygwyl/index.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="wygwyl — fourteen halfworlds fourteen poems, fourteen halfworlds. wygwyl">
     <img loading="lazy" src="wygwyl/famspec/VOL_mareamemory-02_S10.png" alt="">
     <b>WYGWYL — fourteen halfworlds</b>
+    <s>Fourteen poems, fourteen halfworlds.</s>
     <i>wygwyl</i>
     <u>1072 img · 1 vid · 1402 audio · 30 notes · 537 MB</u>
     
-  </a><a class="c orphan" href="wygwyl/00-title-a.html" data-g="suite" data-s="orphan">
+  </a><a class="c orphan" href="wygwyl/00-title-a.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="orphan"
+     data-q="00-title-a — a wygwyl halfworld  wygwyl">
     <span class="noimg"></span>
     <b>00-title-a — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="wygwyl/00-title-b.html" data-g="suite" data-s="orphan">
+  </a><a class="c orphan" href="wygwyl/00-title-b.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="orphan"
+     data-q="00-title-b — a wygwyl halfworld  wygwyl">
     <span class="noimg"></span>
     <b>00-title-b — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="wygwyl/00-title-c.html" data-g="suite" data-s="orphan">
+  </a><a class="c orphan" href="wygwyl/00-title-c.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="orphan"
+     data-q="00-title-c — a wygwyl halfworld  wygwyl">
     <span class="noimg"></span>
     <b>00-title-c — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="wygwyl/00-title-d.html" data-g="suite" data-s="orphan">
+  </a><a class="c orphan" href="wygwyl/00-title-d.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="orphan"
+     data-q="00-title-d — a wygwyl halfworld  wygwyl">
     <span class="noimg"></span>
     <b>00-title-d — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="wygwyl/00-title-e.html" data-g="suite" data-s="orphan">
+  </a><a class="c orphan" href="wygwyl/00-title-e.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="orphan"
+     data-q="00-title-e — a wygwyl halfworld  wygwyl">
     <span class="noimg"></span>
     <b>00-title-e — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c" href="wygwyl/01-out-of-life.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/01-out-of-life.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="01-out-of-life — a wygwyl halfworld  wygwyl">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/01_01-out-of-life.webp" alt="">
     <b>01-out-of-life — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c loose" href="wygwyl/01b-out-of-life-blend.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/01b-out-of-life-blend.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="01b-out-of-life-blend — a wygwyl halfworld  wygwyl">
     <span class="noimg"></span>
     <b>01b-out-of-life-blend — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/02-flashing-lights.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/02-flashing-lights.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="02-flashing-lights — a wygwyl halfworld  wygwyl">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/02_02-flashing-lights.webp" alt="">
     <b>02-flashing-lights — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/03-how-to-break-off-an-engagement.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/03-how-to-break-off-an-engagement.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="03-how-to-break-off-an-engagement — a wygwyl halfworld  wygwyl">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/03_03-how-to-break-off-an-engagement.webp" alt="">
     <b>03-how-to-break-off-an-engagement — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/04-nevermore.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/04-nevermore.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="04-nevermore — a wygwyl halfworld  wygwyl">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/04_04-nevermore.webp" alt="">
     <b>04-nevermore — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/05-bloodlines.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/05-bloodlines.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="05-bloodlines — a wygwyl halfworld  wygwyl">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/05_05-bloodlines.webp" alt="">
     <b>05-bloodlines — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/06-resurrecting-atlantis.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/06-resurrecting-atlantis.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="06-resurrecting-atlantis — a wygwyl halfworld  wygwyl">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/06_06-resurrecting-atlantis.webp" alt="">
     <b>06-resurrecting-atlantis — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/07-dj-turn-me-up.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/07-dj-turn-me-up.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="07-dj-turn-me-up — a wygwyl halfworld  wygwyl">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/07_07-dj-turn-me-up.webp" alt="">
     <b>07-dj-turn-me-up — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/08-newly-single.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/08-newly-single.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="08-newly-single — a wygwyl halfworld  wygwyl">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/08_08-newly-single.webp" alt="">
     <b>08-newly-single — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/09-yet-heard.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/09-yet-heard.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="09-yet-heard — a wygwyl halfworld  wygwyl">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/09_09-yet-heard.webp" alt="">
     <b>09-yet-heard — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/10-magic-ride.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/10-magic-ride.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="10-magic-ride — a wygwyl halfworld  wygwyl">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/10_10-magic-ride.webp" alt="">
     <b>10-magic-ride — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/11-new-day.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/11-new-day.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="11-new-day — a wygwyl halfworld  wygwyl">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/11_11-new-day.webp" alt="">
     <b>11-new-day — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/12-reunion.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/12-reunion.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="12-reunion — a wygwyl halfworld  wygwyl">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/12_12-reunion.webp" alt="">
     <b>12-reunion — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/13-how-to-win-my-heart.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/13-how-to-win-my-heart.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="13-how-to-win-my-heart — a wygwyl halfworld  wygwyl">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/13_13-how-to-win-my-heart.webp" alt="">
     <b>13-how-to-win-my-heart — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/14-hot-minute.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/14-hot-minute.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="14-hot-minute — a wygwyl halfworld  wygwyl">
     <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/14_14-hot-minute.webp" alt="">
     <b>14-hot-minute — a WYGWYL halfworld</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c" href="wygwyl/atlas.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/atlas.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="wygwyl atlas everything in one place — the films, the voice, the instruments, the data they share · wygwyl">
     <span class="noimg"></span>
     <b>WYGWYL ATLAS</b>
+    <s>everything in one place — the films, the voice, the instruments, the data they share ·</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/butterfly-desk.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/butterfly-desk.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="the pacing desk  wygwyl">
     <span class="noimg"></span>
     <b>THE PACING DESK</b>
+    
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/clap-sketch.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/clap-sketch.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="clap-sketch / the little samples sketch — only the little samples: bar-cut song elements with their own bpm and key, and the voice chops — every one clap-named, nothing else in the library · wygwyl">
     <span class="noimg"></span>
     <b>CLAP-SKETCH / the little samples</b>
+    <s>SKETCH — only the little samples: bar-cut song elements with their own bpm and key, and the voice chops — every one CLAP-named, nothing else in the li</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/codex.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/codex.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="the codex where you go when you leave (codex).mp4 wygwyl">
     <span class="noimg"></span>
     <b>THE CODEX</b>
+    <s>Where you go when you leave (codex).mp4</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/cool-sketch-radio.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/cool-sketch-radio.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="radiodraw — a collage that is a picture and a sound at once one field · 192 columns of time · 144 rows of pitch · eight levels of ink wygwyl">
     <span class="noimg"></span>
     <b>RADIODRAW — a collage that is a picture and a sound at once</b>
+    <s>one field · 192 columns of time · 144 rows of pitch · eight levels of ink</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/dj.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/dj.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="dj — a wygwyl halfworld instrument footage entering the dot law, driven by hand wygwyl">
     <span class="noimg"></span>
     <b>DJ — a WYGWYL halfworld instrument</b>
+    <s>footage entering the dot law, driven by hand</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/families.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/families.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="sound families discovered from the bottom up — every song segmented where its self-similarity breaks, wygwyl">
     <span class="noimg"></span>
     <b>SOUND FAMILIES</b>
+    <s>discovered from the bottom up — every song segmented where its self-similarity breaks,</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/fresco.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/fresco.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="fresco player the bare score player — one clock, everything else is reference · contract: fresco-score v0.1 · wygwyl">
     <span class="noimg"></span>
     <b>FRESCO PLAYER</b>
+    <s>the bare score player — one clock, everything else is reference · contract: fresco-score v0.1 ·</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/genome.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/genome.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="the genome due diligence on the sound experiments of the dig — what each one assumes, what each one wygwyl">
     <span class="noimg"></span>
     <b>THE GENOME</b>
+    <s>due diligence on the sound experiments of the dig — what each one assumes, what each one</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/observatory.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/observatory.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="wygwyl voice observatory one voice, nine lanes — body, pulse, breath, resonance, timbre, speech, rhythm, phrase, meaning — wygwyl">
     <span class="noimg"></span>
     <b>WYGWYL VOICE OBSERVATORY</b>
+    <s>one voice, nine lanes — body, pulse, breath, resonance, timbre, speech, rhythm, phrase, meaning —</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/poemworlds.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/poemworlds.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="poem worlds an entire world of sound for each poem to live in — its exact span of the unified drone as the keynote floor, wygwyl">
     <span class="noimg"></span>
     <b>POEM WORLDS</b>
+    <s>an entire world of sound for each poem to live in — its exact span of the unified drone as the keynote floor,</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/radio-atlantis.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/radio-atlantis.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="radio atlantis fourteen film scores, one per poem — v2, scored from wygwyl">
     <span class="noimg"></span>
     <b>RADIO ATLANTIS</b>
+    <s>fourteen film scores, one per poem — v2, scored from</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/radio-scapes.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/radio-scapes.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="radio-scapes — the water of atlantis, playing itself the water of atlantis, playing itself · her voice whole, everything else is the sea wygwyl">
     <span class="noimg"></span>
     <b>RADIO-SCAPES — the water of atlantis, playing itself</b>
+    <s>the water of atlantis, playing itself · her voice whole, everything else is the sea</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/radio.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/radio.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="wygwyl radio — fourteen films playing themselves fourteen films playing themselves · nothing here is a recording wygwyl">
     <span class="noimg"></span>
     <b>WYGWYL RADIO — fourteen films playing themselves</b>
+    <s>fourteen films playing themselves · nothing here is a recording</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/reconstitute.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/reconstitute.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="wygwyl reconstitute the voice rearranged from its own words — type with the poet's vocabulary, hear it spoken, export it · wygwyl">
     <span class="noimg"></span>
     <b>WYGWYL RECONSTITUTE</b>
+    <s>the voice rearranged from its own words — type with the poet's vocabulary, hear it spoken, export it ·</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/sampler.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/sampler.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="wygwyl voice sampler — dry masters, session ry 2025-06-26 — chopped by line, phrase, word, and power-chop · wygwyl">
     <span class="noimg"></span>
     <b>WYGWYL VOICE SAMPLER</b>
+    <s>— dry masters, session RY 2025-06-26 — chopped by line, phrase, word, and power-chop ·</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/seal-earsketch.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/seal-earsketch.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="es+ seal / atlantis track workshop atlantis seal — the sound library is the corpus: 916 sounds, same-origin, no remote backend · wygwyl">
     <span class="noimg"></span>
     <b>ES+ SEAL / Atlantis Track Workshop</b>
+    <s>ATLANTIS SEAL — the sound library is the corpus: 916 sounds, same-origin, no remote backend ·</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/sketch-radio.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/sketch-radio.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="sketch radio — draw a station, hear it, and measure whether it arrived draw a station · hear it under a prosodic law · watch the sound turn back into a picture wygwyl">
     <span class="noimg"></span>
     <b>SKETCH RADIO — draw a station, hear it, and measure whether it arrived</b>
+    <s>draw a station · hear it under a prosodic law · watch the sound turn back into a picture</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/sketchradio.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/sketchradio.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="sketchradio — word · voice · timed mark · world · score word · voice · timed mark · world · score wygwyl">
     <span class="noimg"></span>
     <b>SKETCHRADIO — word · voice · timed mark · world · score</b>
+    <s>word · voice · timed mark · world · score</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/song-observatory.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/song-observatory.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="song observatory observatory-level understanding of each song — structure · energy · rhythm · harmony · timbre · lyrics · wygwyl">
     <span class="noimg"></span>
     <b>SONG OBSERVATORY</b>
+    <s>observatory-level understanding of each song — structure · energy · rhythm · harmony · timbre · lyrics ·</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/sonicfield.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/sonicfield.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="wygwyl sonic field a topography of sound — every sound drawn as its own envelope, a small mountain on the land. wygwyl">
     <span class="noimg"></span>
     <b>WYGWYL SONIC FIELD</b>
+    <s>a topography of sound — every sound drawn as its own envelope, a small mountain on the land.</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/suite.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/suite.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="wygwyl — the whole suite from one clock  wygwyl">
     <span class="noimg"></span>
     <b>WYGWYL — the whole suite from one clock</b>
+    
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/titles.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/titles.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="titles.html — a wygwyl halfworld four in the manner of john whitney, and the one that plays. wygwyl">
     <span class="noimg"></span>
     <b>titles.html — a WYGWYL halfworld</b>
+    <s>Four in the manner of John Whitney, and the one that plays.</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/transmission.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/transmission.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="the transmission — each poem a station on the dial. the voice is first class: wygwyl">
     <span class="noimg"></span>
     <b>THE TRANSMISSION</b>
+    <s>— each poem a station on the dial. The voice is first class:</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/voicebath.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/voicebath.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="voicebath load a recording, paste its poem, then tap it in wygwyl">
     <span class="noimg"></span>
     <b>VOICEBATH</b>
+    <s>load a recording, paste its poem, then tap it in</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/watertable.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/watertable.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="the water table one substance · one clock · it listens · it costs — the archive is changed by being heard wygwyl">
     <span class="noimg"></span>
     <b>THE WATER TABLE</b>
+    <s>one substance · one clock · it listens · it costs — the archive is changed by being heard</s>
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/worldscore.html" data-g="suite" data-s="linked">
+  </a><a class="c" href="wygwyl/worldscore.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="linked"
+     data-q="world score  wygwyl">
     <span class="noimg"></span>
     <b>WORLD SCORE</b>
+    
     <i>wygwyl</i>
     <u></u>
     
-  </a><a class="c loose" href="wygwyl/zz-gait.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/zz-gait.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="zz-gait — the gait bench  wygwyl">
     <span class="noimg"></span>
     <b>zz-gait — the gait bench</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/zz-over.html" data-g="suite" data-s="loose">
+  </a><a class="c loose" href="wygwyl/zz-over.html" target="_blank" rel="noopener"
+     data-g="suite" data-s="loose"
+     data-q="zz-over — the over bench  wygwyl">
     <span class="noimg"></span>
     <b>zz-over — the over bench</b>
+    
     <i>wygwyl</i>
     <u></u>
     <em>not linked, but named in a script</em>
   </a></div></section><section><h2>TOOLS AND HARNESSES <span>5 pages</span></h2>
-    <p class="note">render rigs, benches and one-off desks</p><div class="grid"><a class="c loose" href="harness/contact-cast.html" data-g="tools" data-s="loose">
+    <p class="note">render rigs, benches and one-off desks</p><div class="grid"><a class="c loose" href="harness/contact-cast.html" target="_blank" rel="noopener"
+     data-g="tools" data-s="loose"
+     data-q="contact — the seven  harness">
     <span class="noimg"></span>
     <b>contact — the seven</b>
+    
     <i>harness</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="harness/render-harness.html" data-g="tools" data-s="loose">
+  </a><a class="c loose" href="harness/render-harness.html" target="_blank" rel="noopener"
+     data-g="tools" data-s="loose"
+     data-q="render-harness  harness">
     <span class="noimg"></span>
     <b>render-harness</b>
+    
     <i>harness</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="harness/render-motion-harness.html" data-g="tools" data-s="loose">
+  </a><a class="c loose" href="harness/render-motion-harness.html" target="_blank" rel="noopener"
+     data-g="tools" data-s="loose"
+     data-q="render-motion-harness  harness">
     <span class="noimg"></span>
     <b>render-motion-harness</b>
+    
     <i>harness</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="harness/render-scene-harness.html" data-g="tools" data-s="loose">
+  </a><a class="c loose" href="harness/render-scene-harness.html" target="_blank" rel="noopener"
+     data-g="tools" data-s="loose"
+     data-q="render-scene-harness  harness">
     <span class="noimg"></span>
     <b>render-scene-harness</b>
+    
     <i>harness</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="harness/strip-harness.html" data-g="tools" data-s="loose">
+  </a><a class="c loose" href="harness/strip-harness.html" target="_blank" rel="noopener"
+     data-g="tools" data-s="loose"
+     data-q="motion strip  harness">
     <span class="noimg"></span>
     <b>motion strip</b>
+    
     <i>harness</i>
     <u></u>
     <em>not linked, but named in a script</em>
   </a></div></section><section><h2>EVERYTHING ELSE <span>10 pages · 3 orphaned</span></h2>
-    <div class="grid"><a class="c orphan" href="wygwyl/pack/index.html" data-g="rest" data-s="orphan">
+    <div class="grid"><a class="c orphan" href="wygwyl/pack/index.html" target="_blank" rel="noopener"
+     data-g="rest" data-s="orphan"
+     data-q="atlantis sound pack segments mined from the whole corpus — loops that prove their seam, beds that hold still, hits that rise from silence, wygwyl/pack">
     <img loading="lazy" src="wygwyl/pack/spec/ATL_LOOP_BGDEEPVINTAGER_50.png" alt="">
     <b>ATLANTIS SOUND PACK</b>
+    <s>segments mined from the whole corpus — loops that prove their seam, beds that hold still, hits that rise from silence,</s>
     <i>wygwyl/pack</i>
     <u>210 img · 433 audio · 81 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c orphan" href="wygwyl/outoflife/index.html" data-g="rest" data-s="orphan">
+  </a><a class="c orphan" href="wygwyl/outoflife/index.html" target="_blank" rel="noopener"
+     data-g="rest" data-s="orphan"
+     data-q="out of life — a test suite how to hide ai crimes with halfworld. wygwyl/outoflife">
     <img loading="lazy" src="wygwyl/outoflife/frames/scrub/f038.jpg" alt="">
     <b>OUT OF LIFE — a test suite</b>
+    <s>How to hide AI crimes with halfworld.</s>
     <i>wygwyl/outoflife</i>
     <u>104 img · 1 notes · 1 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c" href="butterfly-chat.html" data-g="rest" data-s="linked">
+  </a><a class="c" href="butterfly-chat.html" target="_blank" rel="noopener"
+     data-g="rest" data-s="linked"
+     data-q="aster house — memory as a stage nothing has been viewed three times. .">
     <span class="noimg"></span>
     <b>ASTER HOUSE — memory as a stage</b>
+    <s>Nothing has been viewed three times.</s>
     <i>.</i>
     <u></u>
     
-  </a><a class="c orphan" href="hello-world-p5/index.html" data-g="rest" data-s="orphan">
+  </a><a class="c orphan" href="hello-world-p5/index.html" target="_blank" rel="noopener"
+     data-g="rest" data-s="orphan"
+     data-q="hello world: p5.js — theory / text / image / error / prompt theory / text / image / error message / prompt · six sketches you can paste straight into editor.p5js.org hello-world-p5">
     <span class="noimg"></span>
     <b>HELLO WORLD: p5.js — theory / text / image / error / prompt</b>
+    <s>theory / text / image / error message / prompt · six sketches you can paste straight into editor.p5js.org</s>
     <i>hello-world-p5</i>
     <u>1 notes · 1 MB</u>
     <em>ORPHAN — nothing points here</em>
-  </a><a class="c" href="index.html" data-g="rest" data-s="linked">
+  </a><a class="c" href="index.html" target="_blank" rel="noopener"
+     data-g="rest" data-s="linked"
+     data-q="i remember being a butterfly — a halfworld no samples. forty scenes in ordered-dot halftone, a score synthesised at 60hz — the frequency the .">
     <span class="noimg"></span>
     <b>I REMEMBER BEING A BUTTERFLY — a halfworld</b>
+    <s>no samples. Forty scenes in ordered-dot halftone, a score synthesised at 60Hz — the frequency the</s>
     <i>.</i>
     <u>0 MB</u>
     
-  </a><a class="c" href="periodic.html" data-g="rest" data-s="linked">
+  </a><a class="c" href="periodic.html" target="_blank" rel="noopener"
+     data-g="rest" data-s="linked"
+     data-q="i remember being a butterfly · the periodic table  .">
     <span class="noimg"></span>
     <b>I REMEMBER BEING A BUTTERFLY · the periodic table</b>
+    
     <i>.</i>
     <u></u>
     
-  </a><a class="c" href="wygwyl/cut/index.html" data-g="rest" data-s="linked">
+  </a><a class="c" href="wygwyl/cut/index.html" target="_blank" rel="noopener"
+     data-g="rest" data-s="linked"
+     data-q="the cut book — where the doors are where the doors are · audition every point before you trust it wygwyl/cut">
     <span class="noimg"></span>
     <b>THE CUT BOOK — where the doors are</b>
+    <s>where the doors are · audition every point before you trust it</s>
     <i>wygwyl/cut</i>
     <u>1 notes · 0 MB</u>
     
-  </a><a class="c loose" href="wygwyl/icaro/icaro-flow-sp.html" data-g="rest" data-s="loose">
+  </a><a class="c loose" href="wygwyl/icaro/icaro-flow-sp.html" target="_blank" rel="noopener"
+     data-g="rest" data-s="loose"
+     data-q="icaro-pro · spatiotemporal flow engine  wygwyl/icaro">
     <span class="noimg"></span>
     <b>ICARO-PRO · SPATIOTEMPORAL FLOW ENGINE</b>
+    
     <i>wygwyl/icaro</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/icaro/icaro-flow.html" data-g="rest" data-s="loose">
+  </a><a class="c loose" href="wygwyl/icaro/icaro-flow.html" target="_blank" rel="noopener"
+     data-g="rest" data-s="loose"
+     data-q="icaro-pro · flow engine  wygwyl/icaro">
     <span class="noimg"></span>
     <b>ICARO-PRO · FLOW ENGINE</b>
+    
     <i>wygwyl/icaro</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/outoflife/tool.html" data-g="rest" data-s="loose">
+  </a><a class="c loose" href="wygwyl/outoflife/tool.html" target="_blank" rel="noopener"
+     data-g="rest" data-s="loose"
+     data-q="tool — a wygwyl / out of life instrument the thinking tool — build a recipe, audition it against the cut wygwyl/outoflife">
     <span class="noimg"></span>
     <b>TOOL — a WYGWYL / OUT OF LIFE instrument</b>
+    <s>the thinking tool — build a recipe, audition it against the cut</s>
     <i>wygwyl/outoflife</i>
     <u></u>
     <em>not linked, but named in a script</em>
@@ -623,15 +903,18 @@
 <script>
   const cards = [...document.querySelectorAll(".c")];
   let f = "all", g = null;
+  let q = "";
   const apply = () => {
     for (const c of cards) {
       const okF = f === "all" || c.dataset.s === f;
       const okG = !g || c.dataset.g === g;
-      c.classList.toggle("hide", !(okF && okG));
+      const okQ = !q || c.dataset.q.includes(q);
+      c.classList.toggle("hide", !(okF && okG && okQ));
     }
     for (const s of document.querySelectorAll("section"))
       s.classList.toggle("hide", ![...s.querySelectorAll(".c")].some(c => !c.classList.contains("hide")));
   };
+  document.getElementById("q").oninput = (e) => { q = e.target.value.trim().toLowerCase(); apply(); };
   for (const b of document.querySelectorAll("[data-f]")) b.onclick = () => {
     f = b.dataset.f;
     for (const o of document.querySelectorAll("[data-f]")) o.classList.toggle("on", o === b);

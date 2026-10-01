@@ -48,6 +48,16 @@ const lerp = (a, b, t) => a + (b - a) * t;
 
 /* ---- the record, and the poem that runs on it ---------------------------- */
 const BEATS = await fetch("poem/beats.json").then(r => r.json()).catch(() => ({ films: [] }));
+/* THE REAL SPEECH BOUNDARIES, FROM CINEOSIS LAB. The beat map says when a shot
+   starts and what is said in it; it does not say how long the saying took, so
+   this page estimated it at 2.4 words a second. Measured against the forced
+   alignment in cineosis-lab, the totals agreed to 5% — and that agreement was
+   hiding the whole error. A beat is not one utterance: poem 01's first beat
+   covers twenty-eight separate lines with 25.8s of real gaps between them, and
+   across the suite 443 SECONDS OF ACTUAL SILENCE were being called speech.
+   Those gaps are exactly the material ANSWER enters on. Where the alignment
+   exists it wins; the estimate stays as the fallback for anything else. */
+const ALIGNED = await fetch("poem/aligned.json").then(r => r.json()).catch(() => null);
 const SLUGS = ["01-out-of-life", "02-flashing-lights", "03-how-to-break-off-an-engagement",
   "04-nevermore", "05-bloodlines", "06-resurrecting-atlantis", "07-dj-turn-me-up",
   "08-newly-single", "09-yet-heard", "10-magic-ride", "11-new-day", "12-reunion",
@@ -99,7 +109,7 @@ async function analyse(arrayBuf, name) {
             silRatio: sil.reduce((a, c) => a + c, 0) / BINS };
   const own = FILMS.some(f => f.beats);
   state(`${name} · ${fmt(buf.duration)} · ${own
-    ? "speech from the EDL, energy from the wave"
+    ? (ALIGNED ? "speech from the forced alignment, energy from the wave" : "speech estimated from the EDL, energy from the wave")
     : `no beat map — silence from amplitude (${(VOICE.silRatio * 100) | 0}%)`}`, "ok");
 }
 /* SILENCE IS NOT QUIET, AND THE METER SAID SO. Amplitude silence on this
@@ -131,7 +141,10 @@ async function analyse(arrayBuf, name) {
    43.5–54.0, which is a poem with breathing in it. */
 const WORDS_PER_SECOND = 2.4;
 const spokenFor = (b) => Math.min(b.d || 3.4, Math.max(1.2, (b.v || "").trim().split(/\s+/).length / WORDS_PER_SECOND));
+const linesFor = (t) => ALIGNED?.films?.[FILMS[filmAt(t)]?.world?.n] || null;
 function speakingAt(t) {
+  const L = linesFor(t);
+  if (L) { for (const [a, b] of L) if (t >= a && t < b) return true; return false; }
   const f = FILMS[filmAt(t)];
   if (!f?.beats) return !silAtEnv(t);
   for (const b of f.beats.beats) {
@@ -143,13 +156,17 @@ function speakingAt(t) {
 /* how long the voice has been away, and how long until it returns — ANSWER
    needs the first, and anyone performing against a record needs the second */
 function quietSince(t) {
+  const L = linesFor(t);
   const f = FILMS[filmAt(t)];
+  if (L) { let last = f?.beats ? f.beats.container[0] : 0; for (const [, b] of L) if (b <= t && b > last) last = b; return Math.max(0, t - last); }
   if (!f?.beats) return quietForEnv(t);
   let last = f.beats.container[0];
   for (const b of f.beats.beats) { if (!b.v) continue; const e = b.t + spokenFor(b); if (e <= t && e > last) last = e; }
   return Math.max(0, t - last);
 }
 function untilSpeech(t) {
+  const L = linesFor(t);
+  if (L) { for (const [a] of L) if (a > t) return a - t; return 99; }
   const f = FILMS[filmAt(t)];
   if (!f?.beats) return 99;
   for (const b of f.beats.beats) if (b.v && b.t > t) return b.t - t;
@@ -372,7 +389,9 @@ function drawWorld(t) {
     wcx.fillStyle = "rgba(242,160,60,.15)";
     wcx.fillRect(0, 0, W, H);
     wcx.fillStyle = "#150818";
-    for (const b of f.beats.beats) if (b.v) wcx.fillRect(xOf(b.t), 0, Math.max(2, spokenFor(b) / span * W), H);
+    const L = ALIGNED?.films?.[f.world?.n];
+    if (L) for (const [a, b] of L) wcx.fillRect(xOf(a), 0, Math.max(1.5, (b - a) / span * W), H);
+    else for (const b of f.beats.beats) if (b.v) wcx.fillRect(xOf(b.t), 0, Math.max(2, spokenFor(b) / span * W), H);
   } else for (let i = i0; i < i1; i++) if (VOICE.sil[i]) {
     wcx.fillStyle = "rgba(242,160,60,.16)";
     wcx.fillRect(xOf(i / N * VOICE.dur), 0, W / (i1 - i0) + 1, H);
