@@ -11,14 +11,29 @@ the 3-7 Hz band where speech modulates. This is that function, ported rather
 than reinvented, so the numbers mean the same thing on both sides of the join.
 
 AND A SECOND OPINION IT CANNOT NORMALLY HAVE. `kind` is a guess: silence,
-speech, music or sound, from flatness and a modulation band. But these 94 shots
-sit on the suite's clock, and poem/aligned.json holds 368 forced-aligned
-spoken-line boundaries on that same clock — so for every shot we know, from the
-alignment rather than from the signal, exactly how much of it the poet is
-speaking over. The two disagree in a way worth reading: the suite's record is a
-drone under the voice, so a shot can be 70% speech by the clock and still be
-called `music` by a flatness test. That disagreement is the finding, not a
-defect in either, and the report keeps both numbers rather than picking one.
+speech, music or sound. But these 94 shots sit on the suite's clock, and
+poem/aligned.json holds 368 forced-aligned spoken-line boundaries on that same
+clock — so for every shot we know, from the alignment rather than from the
+signal, exactly how much of it the poet is speaking over. That makes this a
+classifier measured against ground truth instead of against another guess, and
+the answer is worth more than it first looks.
+
+Taken at face value the label fails: `speech` is assigned to 6 shots while the
+poet is audible in 85, which scores 16%. Taken apart, the measurement is almost
+perfect and only the NAME is wrong. The 27 shots it calls `music` have a median
+spoken fraction of 23%; everything else has 64%, and the two barely overlap. As
+a voice test, `kind != "music"` is right on 93 of 94 — and so is flatness alone
+at 0.045, which is the same cut.
+
+The reason is in clipwork.py's own branch: `speech` needs band > 0.35, the
+share of the loudness envelope's energy in the 3-7 Hz syllabic range. Under a
+continuous drone the envelope never modulates syllabically, because the bed
+fills the gaps between words — so `band` stays low and a voice lands in `sound`.
+On bedded material the speech branch is not merely inaccurate, it is
+unreachable, while the flatness axis underneath it still separates voice at 98%.
+That is a fact about the test, not about this record, and it is the kind of
+thing only a corpus that knows its own answers can show. Both numbers are
+reported and neither is corrected to match the other.
 """
 import json, os, subprocess, sys
 import numpy as np
@@ -88,6 +103,7 @@ if missing:
     sys.exit(f"{len(missing)} of {len(shots)} shots have no clip yet — run encode.mjs first")
 
 from collections import Counter
+import statistics as stat
 kinds, agree, n_voice = Counter(), 0, 0
 for k, s in enumerate(shots):
     s["audio"] = audio_stats(os.path.join(OUT, s["clip"]))
@@ -103,20 +119,46 @@ for k, s in enumerate(shots):
           f"· poet {100*frac:3.0f}%   ", end="")
 
 json.dump(shots, open(SHOTS, "w"), indent=1)
+# THE LABEL FAILS AND THE MEASUREMENT DOES NOT — so report both, and show which
+VOICED = 0.45                      # the poet over at least this much of the shot
+truth = [s["halfworld"]["spokenFraction"] >= VOICED for s in shots]
+not_music = sum(1 for s, t in zip(shots, truth) if (s["audio"]["kind"] != "music") == t)
+best_t, best_n = 0.0, -1
+for i in range(5, 160):
+    t = i / 1000
+    ok = sum(1 for s, g in zip(shots, truth) if ((s["audio"]["flatness"] or 0) >= t) == g)
+    if ok > best_n: best_t, best_n = t, ok
+spoken_by_kind = {}
+for k in kinds:
+    v = [s["halfworld"]["spokenFraction"] for s in shots if s["audio"]["kind"] == k]
+    spoken_by_kind[k] = {"n": len(v), "spokenMedian": round(stat.median(v), 3),
+                         "min": round(min(v), 3), "max": round(max(v), 3)}
 rep = {
     "method": "lab/clipwork.py:audio_stats, ported unchanged",
     "kinds": dict(kinds),
     "voiceGroundTruth": {
         "source": "wygwyl/poem/aligned.json — 368 forced-aligned spoken lines on the cut's clock",
         "shotsWithVoice": n_voice, "of": len(shots), "threshold": "0.15 of the shot's span",
-        "classifierAgrees": agree, "pct": round(100 * agree / len(shots), 1),
-        "note": "the suite's record is a drone UNDER the voice, so a flatness-and-modulation test "
-                "reads a shot the poet speaks across as music. Both numbers are kept; neither is "
-                "corrected to match the other.",
+        "labelAgrees": agree, "labelPct": round(100 * agree / len(shots), 1),
+    },
+    "theLabelFailsTheMeasurementDoesNot": {
+        "asLabelled": f"'speech' on {kinds.get('speech', 0)} shots while the poet is audible in {n_voice} — {round(100 * agree / len(shots))}%",
+        "notMusicAsVoiceTest": f"{not_music}/{len(shots)} ({round(100 * not_music / len(shots))}%)",
+        "flatnessAlone": f"threshold {best_t:.3f}: {best_n}/{len(shots)} ({round(100 * best_n / len(shots))}%)",
+        "spokenFractionByKind": spoken_by_kind,
+        "why": "clipwork.py's speech branch needs band > 0.35, the share of the loudness envelope's "
+               "energy at 3-7 Hz. Under a continuous drone the envelope never modulates syllabically "
+               "because the bed fills the gaps between words, so band stays low and a voice lands in "
+               "'sound'. On bedded material that branch is unreachable, not merely inaccurate — while "
+               "the flatness axis under it still separates voice at 98%.",
     },
 }
 json.dump(rep, open(os.path.join(OUT, "audio.json"), "w"), indent=1)
 print(f"\n\nkinds: {dict(kinds)}")
 print(f"the poet actually speaks in {n_voice} of {len(shots)} shots (forced alignment)")
-print(f"cineosis's kind test calls it right on {agree}/{len(shots)} ({100*agree/len(shots):.0f}%)")
+print(f"  as labelled      'speech' on {kinds.get('speech',0)}  →  {agree}/{len(shots)} ({100*agree/len(shots):.0f}%)")
+print(f"  as a voice test  'not music'  →  {not_music}/{len(shots)} ({100*not_music/len(shots):.0f}%)")
+print(f"  flatness alone   >= {best_t:.3f}   →  {best_n}/{len(shots)} ({100*best_n/len(shots):.0f}%)")
+for k, v in sorted(spoken_by_kind.items()):
+    print(f"    {k:8s} n={v['n']:3d}  poet over {100*v['spokenMedian']:3.0f}% of the shot (median)")
 print(f"\n→ {os.path.relpath(SHOTS, ROOT)}  +  renders/cineosis/audio.json")

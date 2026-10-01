@@ -1,0 +1,42 @@
+{
+ "method": "lab/clipwork.py:audio_stats, ported unchanged",
+ "kinds": {
+  "music": 27,
+  "sound": 61,
+  "speech": 6
+ },
+ "voiceGroundTruth": {
+  "source": "wygwyl/poem/aligned.json \u2014 368 forced-aligned spoken lines on the cut's clock",
+  "shotsWithVoice": 85,
+  "of": 94,
+  "threshold": "0.15 of the shot's span",
+  "labelAgrees": 15,
+  "labelPct": 16.0
+ },
+ "theLabelFailsTheMeasurementDoesNot": {
+  "asLabelled": "'speech' on 6 shots while the poet is audible in 85 \u2014 16%",
+  "notMusicAsVoiceTest": "93/94 (99%)",
+  "flatnessAlone": "threshold 0.045: 93/94 (99%)",
+  "spokenFractionByKind": {
+   "music": {
+    "n": 27,
+    "spokenMedian": 0.231,
+    "min": 0.0,
+    "max": 0.501
+   },
+   "sound": {
+    "n": 61,
+    "spokenMedian": 0.632,
+    "min": 0.47,
+    "max": 0.82
+   },
+   "speech": {
+    "n": 6,
+    "spokenMedian": 0.66,
+    "min": 0.478,
+    "max": 0.749
+   }
+  },
+  "why": "clipwork.py's speech branch needs band > 0.35, the share of the loudness envelope's energy at 3-7 Hz. Under a continuous drone the envelope never modulates syllabically because the bed fills the gaps between words, so band stays low and a voice lands in 'sound'. On bedded material that branch is unreachable, not merely inaccurate \u2014 while the flatness axis under it still separates voice at 98%."
+ }
+}
