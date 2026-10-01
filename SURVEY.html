@@ -32,6 +32,9 @@
   .c{display:block;text-decoration:none;color:inherit;border:1px solid var(--edge);
      background:#00000038;padding:8px;transition:border-color .12s}
   .c:hover{border-color:var(--hot)}
+  .c figure{margin:0;position:relative}
+  .c figcaption{position:absolute;left:0;right:0;bottom:0;background:#120a16e8;color:#9b8ea6;
+    font:400 9.5px/1.35 ui-monospace,Menlo,monospace;padding:3px 5px;letter-spacing:.02em}
   .c img,.noimg{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#190a1c;
      border:1px solid var(--edge);margin-bottom:7px;image-rendering:auto}
   .c b{display:block;font-weight:400;font-size:12.5px;color:var(--hot);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -64,13 +67,13 @@
   <button data-f="orphan">ORPHANS ONLY</button>
   <button data-f="linked">LINKED ONLY</button>
   <input id="q" placeholder="search titles, descriptions, paths…" style="flex:1;min-width:170px;font:inherit;color:var(--paper);background:#00000055;border:1px solid var(--edge);padding:5px 10px;border-radius:2px">
-  <button data-g="experiments">THE EXPERIMENTS</button><button data-g="suite">THE SUITE</button><button data-g="tools">TOOLS AND HARNESSES</button><button data-g="rest">EVERYTHING ELSE</button>
+  <button data-g="experiments">THE EXPERIMENTS</button><button data-g="suite">THE SUITE</button><button data-g="tools">TOOLS AND HARNESSES</button><button data-g="d:wygwyl/icaro">WYGWYL · ICARO</button><button data-g="d:wygwyl/outoflife">WYGWYL · OUTOFLIFE</button><button data-g="rest">LOOSE PAGES</button>
 </div>
 <main><section><h2>THE EXPERIMENTS <span>26 pages · 21 orphaned</span></h2>
     <p class="note">each arrived as a folder with its own index — this is the first thing that points at them</p><div class="grid"><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/dress/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
      data-q="dress the archive fitted to the halfworld, and held there markov_poet_archive-fly/cut/out/dress">
-    <img loading="lazy" src="survey-covers/MARKOV_POET_ARCHIVE_FLY_cut_out_dress.jpg" alt="">
+    <figure><img loading="lazy" src="survey-covers/MARKOV_POET_ARCHIVE_FLY_cut_out_dress.jpg" alt=""></figure>
     <b>DRESS</b>
     <s>the archive fitted to the halfworld, and held there</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/dress</i>
@@ -79,7 +82,7 @@
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/inhabit/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
      data-q="inhabit the suite's own people, in a world we built for them markov_poet_archive-fly/cut/out/inhabit">
-    <img loading="lazy" src="survey-covers/MARKOV_POET_ARCHIVE_FLY_cut_out_inhabit.jpg" alt="">
+    <figure><img loading="lazy" src="survey-covers/MARKOV_POET_ARCHIVE_FLY_cut_out_inhabit.jpg" alt=""></figure>
     <b>INHABIT</b>
     <s>the suite's own people, in a world we built for them</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/inhabit</i>
@@ -88,7 +91,7 @@
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/previs/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
      data-q="previs the halfworld blocks it, the archive fills it markov_poet_archive-fly/cut/out/previs">
-    <img loading="lazy" src="survey-covers/MARKOV_POET_ARCHIVE_FLY_cut_out_previs.jpg" alt="">
+    <figure><img loading="lazy" src="survey-covers/MARKOV_POET_ARCHIVE_FLY_cut_out_previs.jpg" alt=""></figure>
     <b>PREVIS</b>
     <s>the halfworld blocks it, the archive fills it</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/previs</i>
@@ -97,7 +100,7 @@
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/held/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
      data-q="held draw a region · drop or paste images markov_poet_archive-fly/cut/out/held">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/held/pack/P068.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/held/pack/P068.webp" alt=""></figure>
     <b>HELD</b>
     <s>draw a region · drop or paste images</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/held</i>
@@ -115,7 +118,7 @@
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/collage/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
      data-q="the collages sam 3 was asked sixteen noun phrases of every shot in the archive and returned markov_poet_archive-fly/cut/out/collage">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/collage/poem_14.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/collage/poem_14.webp" alt=""></figure>
     <b>THE COLLAGES</b>
     <s>SAM 3 was asked sixteen noun phrases of every shot in the archive and returned</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/collage</i>
@@ -124,7 +127,7 @@
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/loom/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
      data-q="the loom a weave that moves markov_poet_archive-fly/cut/out/loom">
-    <img loading="lazy" src="survey-covers/MARKOV_POET_ARCHIVE_FLY_cut_out_loom.jpg" alt="">
+    <figure><img loading="lazy" src="survey-covers/MARKOV_POET_ARCHIVE_FLY_cut_out_loom.jpg" alt=""></figure>
     <b>THE LOOM</b>
     <s>a weave that moves</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/loom</i>
@@ -133,7 +136,7 @@
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/lucier/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
      data-q="i am sitting in a room i am recording the sound of my speaking voice and i am going to play it markov_poet_archive-fly/cut/out/lucier">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/lucier/world_06_STRIP.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/lucier/world_06_STRIP.webp" alt=""></figure>
     <b>I AM SITTING IN A ROOM</b>
     <s>I am recording the sound of my speaking voice and I am going to play it</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/lucier</i>
@@ -142,7 +145,7 @@
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/scene/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
      data-q="the sets built, then drawn, then lit markov_poet_archive-fly/cut/out/scene">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/scene/08_08-newly-single.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/scene/08_08-newly-single.webp" alt=""></figure>
     <b>THE SETS</b>
     <s>built, then drawn, then lit</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/scene</i>
@@ -151,7 +154,7 @@
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
      data-q="the city fourteen sheets markov_poet_archive-fly/cut/out/archigram">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/08_08-newly-single.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/08_08-newly-single.webp" alt=""></figure>
     <b>THE CITY</b>
     <s>fourteen sheets</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/archigram</i>
@@ -160,7 +163,7 @@
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/sheets/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
      data-q="the woven sheets . cut-outs sat on paper as discrete objects, markov_poet_archive-fly/cut/out/sheets">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/sheets/08_08-newly-single.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/sheets/08_08-newly-single.webp" alt=""></figure>
     <b>THE WOVEN SHEETS</b>
     <s>. Cut-outs sat on paper as discrete objects,</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/sheets</i>
@@ -169,7 +172,7 @@
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/patchfield/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
      data-q="patchfield carriers of two kinds, skins of many, and layers markov_poet_archive-fly/cut/out/patchfield">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/patchfield/modes.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/patchfield/modes.webp" alt=""></figure>
     <b>PATCHFIELD</b>
     <s>Carriers of two kinds, skins of many, and layers</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/patchfield</i>
@@ -178,7 +181,7 @@
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/lab/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
      data-q="the lab — finding the body the poet kept coming back as an outline around a blank core. the cause was markov_poet_archive-fly/cut/out/lab">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/lab/body_P054.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/lab/body_P054.webp" alt=""></figure>
     <b>THE LAB — finding the body</b>
     <s>The poet kept coming back as an outline around a blank core. The cause was</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/lab</i>
@@ -186,10 +189,10 @@
     <em>ORPHAN — nothing points here</em>
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/BOARD/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
-     data-q="the board — every image, every prompt  markov_poet_archive-fly/board">
+     data-q="the board — every image, every prompt to look at it. markov_poet_archive-fly/board">
     <span class="noimg"></span>
     <b>THE BOARD — every image, every prompt</b>
-    
+    <s>to look at it.</s>
     <i>MARKOV_POET_ARCHIVE-FLY/BOARD</i>
     <u>1 notes · 1 MB</u>
     <em>ORPHAN — nothing points here</em>
@@ -214,7 +217,7 @@
   </a><a class="c loose" href="MARKOV_POET_ARCHIVE-FLY/cut/out/lab/aberrations.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="loose"
      data-q="the aberrations every shot in the archive was parsed and markov_poet_archive-fly/cut/out/lab">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/lab/body_P118.webp" alt=""><figcaption>sample from MARKOV_POET_ARCHIVE-FLY/cut/out/lab — not this page's output</figcaption></figure>
     <b>THE ABERRATIONS</b>
     <s>Every shot in the archive was parsed and</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/lab</i>
@@ -223,7 +226,7 @@
   </a><a class="c loose" href="MARKOV_POET_ARCHIVE-FLY/cut/out/lab/sam3-run.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="loose"
      data-q="sam 3 run — 129/129 129/129 shots · 2033 elements · last progress 88458s ago markov_poet_archive-fly/cut/out/lab">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/lab/body_P084.webp" alt=""><figcaption>sample from MARKOV_POET_ARCHIVE-FLY/cut/out/lab — not this page's output</figcaption></figure>
     <b>SAM 3 RUN — 129/129</b>
     <s>129/129 shots · 2033 elements · last progress 88458s ago</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/lab</i>
@@ -231,28 +234,28 @@
     <em>not linked, but named in a script</em>
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/op/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
-     data-q="operator 14 · studio  markov_poet_archive-fly/cut/out/op">
+     data-q="operator 14 · studio to look at it. markov_poet_archive-fly/cut/out/op">
     <span class="noimg"></span>
     <b>OPERATOR 14 · STUDIO</b>
-    
+    <s>to look at it.</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/op</i>
     <u>1 MB</u>
     <em>ORPHAN — nothing points here</em>
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/op15/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
-     data-q="operator 14 · studio  markov_poet_archive-fly/cut/out/op15">
+     data-q="operator 14 · studio to look at it. markov_poet_archive-fly/cut/out/op15">
     <span class="noimg"></span>
     <b>OPERATOR 14 · STUDIO</b>
-    
+    <s>to look at it.</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/op15</i>
     <u>1 MB</u>
     <em>ORPHAN — nothing points here</em>
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/op16/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
-     data-q="operator 14 · studio  markov_poet_archive-fly/cut/out/op16">
+     data-q="operator 14 · studio to look at it. markov_poet_archive-fly/cut/out/op16">
     <span class="noimg"></span>
     <b>OPERATOR 14 · STUDIO</b>
-    
+    <s>to look at it.</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/op16</i>
     <u>1 MB</u>
     <em>ORPHAN — nothing points here</em>
@@ -267,17 +270,17 @@
     <em>not linked, but named in a script</em>
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/paste/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
-     data-q="paste — the blend table  markov_poet_archive-fly/cut/out/paste">
-    <span class="noimg"></span>
+     data-q="paste — the blend table to look at it. markov_poet_archive-fly/cut/out/paste">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/thumbs/P028_a-bed_0.webp" alt=""></figure>
     <b>PASTE — the blend table</b>
-    
+    <s>to look at it.</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/paste</i>
     <u>0 MB</u>
     <em>ORPHAN — nothing points here</em>
   </a><a class="c loose" href="MARKOV_POET_ARCHIVE-FLY/cut/out/studio/compose.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="loose"
      data-q="halfworld composer  markov_poet_archive-fly/cut/out/studio">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/thumbs/P067_a-light_46.webp" alt=""></figure>
     <b>HALFWORLD COMPOSER</b>
     
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/studio</i>
@@ -286,7 +289,7 @@
   </a><a class="c loose" href="MARKOV_POET_ARCHIVE-FLY/cut/out/studio/glass.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="loose"
      data-q="stained glass — the halfworld as a colouring book  markov_poet_archive-fly/cut/out/studio">
-    <img loading="lazy" src="wygwyl/famspec/VOL_glass-06_S01.png" alt="">
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_glass-06_S01.png" alt=""></figure>
     <b>STAINED GLASS — the halfworld as a colouring book</b>
     
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/studio</i>
@@ -294,10 +297,10 @@
     <em>not linked, but named in a script</em>
   </a><a class="c orphan" href="MARKOV_POET_ARCHIVE-FLY/cut/out/studio/index.html" target="_blank" rel="noopener"
      data-g="experiments" data-s="orphan"
-     data-q="halfworld studio  markov_poet_archive-fly/cut/out/studio">
-    <span class="noimg"></span>
+     data-q="halfworld studio to look at it. markov_poet_archive-fly/cut/out/studio">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/thumbs/P100_a-hand_2.webp" alt=""></figure>
     <b>HALFWORLD STUDIO</b>
-    
+    <s>to look at it.</s>
     <i>MARKOV_POET_ARCHIVE-FLY/cut/out/studio</i>
     <u>1 notes · 1 MB</u>
     <em>ORPHAN — nothing points here</em>
@@ -305,7 +308,7 @@
     <p class="note">the fourteen halfworlds and the instruments built around them</p><div class="grid"><a class="c" href="wygwyl/index.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="wygwyl — fourteen halfworlds fourteen poems, fourteen halfworlds. wygwyl">
-    <img loading="lazy" src="wygwyl/famspec/VOL_mareamemory-02_S10.png" alt="">
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_mareamemory-02_S10.png" alt=""></figure>
     <b>WYGWYL — fourteen halfworlds</b>
     <s>Fourteen poems, fourteen halfworlds.</s>
     <i>wygwyl</i>
@@ -314,7 +317,7 @@
   </a><a class="c orphan" href="wygwyl/00-title-a.html" target="_blank" rel="noopener"
      data-g="suite" data-s="orphan"
      data-q="00-title-a — a wygwyl halfworld  wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_mareamemory-18_S03.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>00-title-a — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -323,7 +326,7 @@
   </a><a class="c orphan" href="wygwyl/00-title-b.html" target="_blank" rel="noopener"
      data-g="suite" data-s="orphan"
      data-q="00-title-b — a wygwyl halfworld  wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_nightbus-03_S21.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>00-title-b — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -332,7 +335,7 @@
   </a><a class="c orphan" href="wygwyl/00-title-c.html" target="_blank" rel="noopener"
      data-g="suite" data-s="orphan"
      data-q="00-title-c — a wygwyl halfworld  wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_dustrest-12_S19.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>00-title-c — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -341,7 +344,7 @@
   </a><a class="c orphan" href="wygwyl/00-title-d.html" target="_blank" rel="noopener"
      data-g="suite" data-s="orphan"
      data-q="00-title-d — a wygwyl halfworld  wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_blackwater-10_S23.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>00-title-d — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -350,7 +353,7 @@
   </a><a class="c orphan" href="wygwyl/00-title-e.html" target="_blank" rel="noopener"
      data-g="suite" data-s="orphan"
      data-q="00-title-e — a wygwyl halfworld  wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_mareamemory-06_S16.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>00-title-e — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -359,7 +362,7 @@
   </a><a class="c" href="wygwyl/01-out-of-life.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="01-out-of-life — a wygwyl halfworld  wygwyl">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/01_01-out-of-life.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/01_01-out-of-life.webp" alt=""></figure>
     <b>01-out-of-life — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -368,7 +371,7 @@
   </a><a class="c loose" href="wygwyl/01b-out-of-life-blend.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="01b-out-of-life-blend — a wygwyl halfworld  wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_mareamemory-20_S15.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>01b-out-of-life-blend — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -377,7 +380,7 @@
   </a><a class="c loose" href="wygwyl/02-flashing-lights.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="02-flashing-lights — a wygwyl halfworld  wygwyl">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/02_02-flashing-lights.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/02_02-flashing-lights.webp" alt=""></figure>
     <b>02-flashing-lights — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -386,7 +389,7 @@
   </a><a class="c loose" href="wygwyl/03-how-to-break-off-an-engagement.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="03-how-to-break-off-an-engagement — a wygwyl halfworld  wygwyl">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/03_03-how-to-break-off-an-engagement.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/03_03-how-to-break-off-an-engagement.webp" alt=""></figure>
     <b>03-how-to-break-off-an-engagement — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -395,7 +398,7 @@
   </a><a class="c loose" href="wygwyl/04-nevermore.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="04-nevermore — a wygwyl halfworld  wygwyl">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/04_04-nevermore.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/04_04-nevermore.webp" alt=""></figure>
     <b>04-nevermore — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -404,7 +407,7 @@
   </a><a class="c loose" href="wygwyl/05-bloodlines.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="05-bloodlines — a wygwyl halfworld  wygwyl">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/05_05-bloodlines.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/05_05-bloodlines.webp" alt=""></figure>
     <b>05-bloodlines — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -413,7 +416,7 @@
   </a><a class="c loose" href="wygwyl/06-resurrecting-atlantis.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="06-resurrecting-atlantis — a wygwyl halfworld  wygwyl">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/06_06-resurrecting-atlantis.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/06_06-resurrecting-atlantis.webp" alt=""></figure>
     <b>06-resurrecting-atlantis — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -422,7 +425,7 @@
   </a><a class="c loose" href="wygwyl/07-dj-turn-me-up.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="07-dj-turn-me-up — a wygwyl halfworld  wygwyl">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/07_07-dj-turn-me-up.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/07_07-dj-turn-me-up.webp" alt=""></figure>
     <b>07-dj-turn-me-up — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -431,7 +434,7 @@
   </a><a class="c loose" href="wygwyl/08-newly-single.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="08-newly-single — a wygwyl halfworld  wygwyl">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/08_08-newly-single.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/08_08-newly-single.webp" alt=""></figure>
     <b>08-newly-single — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -440,7 +443,7 @@
   </a><a class="c loose" href="wygwyl/09-yet-heard.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="09-yet-heard — a wygwyl halfworld  wygwyl">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/09_09-yet-heard.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/09_09-yet-heard.webp" alt=""></figure>
     <b>09-yet-heard — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -449,7 +452,7 @@
   </a><a class="c loose" href="wygwyl/10-magic-ride.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="10-magic-ride — a wygwyl halfworld  wygwyl">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/10_10-magic-ride.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/10_10-magic-ride.webp" alt=""></figure>
     <b>10-magic-ride — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -458,7 +461,7 @@
   </a><a class="c loose" href="wygwyl/11-new-day.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="11-new-day — a wygwyl halfworld  wygwyl">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/11_11-new-day.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/11_11-new-day.webp" alt=""></figure>
     <b>11-new-day — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -467,7 +470,7 @@
   </a><a class="c loose" href="wygwyl/12-reunion.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="12-reunion — a wygwyl halfworld  wygwyl">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/12_12-reunion.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/12_12-reunion.webp" alt=""></figure>
     <b>12-reunion — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -476,7 +479,7 @@
   </a><a class="c loose" href="wygwyl/13-how-to-win-my-heart.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="13-how-to-win-my-heart — a wygwyl halfworld  wygwyl">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/13_13-how-to-win-my-heart.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/13_13-how-to-win-my-heart.webp" alt=""></figure>
     <b>13-how-to-win-my-heart — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -485,7 +488,7 @@
   </a><a class="c loose" href="wygwyl/14-hot-minute.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="14-hot-minute — a wygwyl halfworld  wygwyl">
-    <img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/14_14-hot-minute.webp" alt="">
+    <figure><img loading="lazy" src="MARKOV_POET_ARCHIVE-FLY/cut/out/archigram/14_14-hot-minute.webp" alt=""></figure>
     <b>14-hot-minute — a WYGWYL halfworld</b>
     
     <i>wygwyl</i>
@@ -494,7 +497,7 @@
   </a><a class="c" href="wygwyl/atlas.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="wygwyl atlas everything in one place — the films, the voice, the instruments, the data they share · wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_mareamemory-20_S11.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>WYGWYL ATLAS</b>
     <s>everything in one place — the films, the voice, the instruments, the data they share ·</s>
     <i>wygwyl</i>
@@ -503,7 +506,7 @@
   </a><a class="c" href="wygwyl/butterfly-desk.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="the pacing desk  wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_glass-11_S09.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>THE PACING DESK</b>
     
     <i>wygwyl</i>
@@ -512,7 +515,7 @@
   </a><a class="c" href="wygwyl/clap-sketch.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="clap-sketch / the little samples sketch — only the little samples: bar-cut song elements with their own bpm and key, and the voice chops — every one clap-named, nothing else in the library · wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_mareamemory-06_S10.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>CLAP-SKETCH / the little samples</b>
     <s>SKETCH — only the little samples: bar-cut song elements with their own bpm and key, and the voice chops — every one CLAP-named, nothing else in the li</s>
     <i>wygwyl</i>
@@ -521,7 +524,7 @@
   </a><a class="c" href="wygwyl/codex.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="the codex where you go when you leave (codex).mp4 wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_aeolian-02_S14.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>THE CODEX</b>
     <s>Where you go when you leave (codex).mp4</s>
     <i>wygwyl</i>
@@ -530,7 +533,7 @@
   </a><a class="c" href="wygwyl/cool-sketch-radio.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="radiodraw — a collage that is a picture and a sound at once one field · 192 columns of time · 144 rows of pitch · eight levels of ink wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_dustrest-20_S07.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>RADIODRAW — a collage that is a picture and a sound at once</b>
     <s>one field · 192 columns of time · 144 rows of pitch · eight levels of ink</s>
     <i>wygwyl</i>
@@ -539,7 +542,7 @@
   </a><a class="c" href="wygwyl/dj.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="dj — a wygwyl halfworld instrument footage entering the dot law, driven by hand wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_mareamemory-30_S02.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>DJ — a WYGWYL halfworld instrument</b>
     <s>footage entering the dot law, driven by hand</s>
     <i>wygwyl</i>
@@ -548,7 +551,7 @@
   </a><a class="c" href="wygwyl/families.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="sound families discovered from the bottom up — every song segmented where its self-similarity breaks, wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_mareamemory-06_S25.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>SOUND FAMILIES</b>
     <s>discovered from the bottom up — every song segmented where its self-similarity breaks,</s>
     <i>wygwyl</i>
@@ -557,7 +560,7 @@
   </a><a class="c" href="wygwyl/fresco.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="fresco player the bare score player — one clock, everything else is reference · contract: fresco-score v0.1 · wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_congregation-13_S07.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>FRESCO PLAYER</b>
     <s>the bare score player — one clock, everything else is reference · contract: fresco-score v0.1 ·</s>
     <i>wygwyl</i>
@@ -566,7 +569,7 @@
   </a><a class="c" href="wygwyl/genome.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="the genome due diligence on the sound experiments of the dig — what each one assumes, what each one wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_mallground-27_S02.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>THE GENOME</b>
     <s>due diligence on the sound experiments of the dig — what each one assumes, what each one</s>
     <i>wygwyl</i>
@@ -575,7 +578,7 @@
   </a><a class="c" href="wygwyl/observatory.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="wygwyl voice observatory one voice, nine lanes — body, pulse, breath, resonance, timbre, speech, rhythm, phrase, meaning — wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_cathedral-11_S06.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>WYGWYL VOICE OBSERVATORY</b>
     <s>one voice, nine lanes — body, pulse, breath, resonance, timbre, speech, rhythm, phrase, meaning —</s>
     <i>wygwyl</i>
@@ -584,7 +587,7 @@
   </a><a class="c" href="wygwyl/poemworlds.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="poem worlds an entire world of sound for each poem to live in — its exact span of the unified drone as the keynote floor, wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_aeolian-02_S21.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>POEM WORLDS</b>
     <s>an entire world of sound for each poem to live in — its exact span of the unified drone as the keynote floor,</s>
     <i>wygwyl</i>
@@ -593,7 +596,7 @@
   </a><a class="c" href="wygwyl/radio-atlantis.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="radio atlantis fourteen film scores, one per poem — v2, scored from wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_blackwater-10_S19.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>RADIO ATLANTIS</b>
     <s>fourteen film scores, one per poem — v2, scored from</s>
     <i>wygwyl</i>
@@ -602,7 +605,7 @@
   </a><a class="c" href="wygwyl/radio-scapes.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="radio-scapes — the water of atlantis, playing itself the water of atlantis, playing itself · her voice whole, everything else is the sea wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_dustrest-19_S08.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>RADIO-SCAPES — the water of atlantis, playing itself</b>
     <s>the water of atlantis, playing itself · her voice whole, everything else is the sea</s>
     <i>wygwyl</i>
@@ -611,7 +614,7 @@
   </a><a class="c" href="wygwyl/radio.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="wygwyl radio — fourteen films playing themselves fourteen films playing themselves · nothing here is a recording wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_mallground-19_S19.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>WYGWYL RADIO — fourteen films playing themselves</b>
     <s>fourteen films playing themselves · nothing here is a recording</s>
     <i>wygwyl</i>
@@ -620,7 +623,7 @@
   </a><a class="c" href="wygwyl/reconstitute.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="wygwyl reconstitute the voice rearranged from its own words — type with the poet's vocabulary, hear it spoken, export it · wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_blackwater-10_S02.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>WYGWYL RECONSTITUTE</b>
     <s>the voice rearranged from its own words — type with the poet's vocabulary, hear it spoken, export it ·</s>
     <i>wygwyl</i>
@@ -629,7 +632,7 @@
   </a><a class="c" href="wygwyl/sampler.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="wygwyl voice sampler — dry masters, session ry 2025-06-26 — chopped by line, phrase, word, and power-chop · wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_cathedral-14_S04.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>WYGWYL VOICE SAMPLER</b>
     <s>— dry masters, session RY 2025-06-26 — chopped by line, phrase, word, and power-chop ·</s>
     <i>wygwyl</i>
@@ -638,7 +641,7 @@
   </a><a class="c" href="wygwyl/seal-earsketch.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="es+ seal / atlantis track workshop atlantis seal — the sound library is the corpus: 916 sounds, same-origin, no remote backend · wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_dustrest-10_S10.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>ES+ SEAL / Atlantis Track Workshop</b>
     <s>ATLANTIS SEAL — the sound library is the corpus: 916 sounds, same-origin, no remote backend ·</s>
     <i>wygwyl</i>
@@ -647,7 +650,7 @@
   </a><a class="c" href="wygwyl/sketch-radio.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="sketch radio — draw a station, hear it, and measure whether it arrived draw a station · hear it under a prosodic law · watch the sound turn back into a picture wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_midnightsteppe-17_S10.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>SKETCH RADIO — draw a station, hear it, and measure whether it arrived</b>
     <s>draw a station · hear it under a prosodic law · watch the sound turn back into a picture</s>
     <i>wygwyl</i>
@@ -656,7 +659,7 @@
   </a><a class="c" href="wygwyl/sketchradio.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="sketchradio — word · voice · timed mark · world · score word · voice · timed mark · world · score wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_dustrest-20_S10.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>SKETCHRADIO — word · voice · timed mark · world · score</b>
     <s>word · voice · timed mark · world · score</s>
     <i>wygwyl</i>
@@ -665,7 +668,7 @@
   </a><a class="c" href="wygwyl/song-observatory.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="song observatory observatory-level understanding of each song — structure · energy · rhythm · harmony · timbre · lyrics · wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_aeolian-09_S21.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>SONG OBSERVATORY</b>
     <s>observatory-level understanding of each song — structure · energy · rhythm · harmony · timbre · lyrics ·</s>
     <i>wygwyl</i>
@@ -674,7 +677,7 @@
   </a><a class="c" href="wygwyl/sonicfield.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="wygwyl sonic field a topography of sound — every sound drawn as its own envelope, a small mountain on the land. wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_dustrest-10_S10.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>WYGWYL SONIC FIELD</b>
     <s>a topography of sound — every sound drawn as its own envelope, a small mountain on the land.</s>
     <i>wygwyl</i>
@@ -683,7 +686,7 @@
   </a><a class="c" href="wygwyl/suite.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="wygwyl — the whole suite from one clock  wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_mareamemory-30_S10.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>WYGWYL — the whole suite from one clock</b>
     
     <i>wygwyl</i>
@@ -692,7 +695,7 @@
   </a><a class="c" href="wygwyl/titles.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="titles.html — a wygwyl halfworld four in the manner of john whitney, and the one that plays. wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_inthemiddle-38_S20.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>titles.html — a WYGWYL halfworld</b>
     <s>Four in the manner of John Whitney, and the one that plays.</s>
     <i>wygwyl</i>
@@ -701,7 +704,7 @@
   </a><a class="c" href="wygwyl/transmission.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="the transmission — each poem a station on the dial. the voice is first class: wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_midnightsteppe-17_S16.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>THE TRANSMISSION</b>
     <s>— each poem a station on the dial. The voice is first class:</s>
     <i>wygwyl</i>
@@ -710,7 +713,7 @@
   </a><a class="c" href="wygwyl/voicebath.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="voicebath load a recording, paste its poem, then tap it in wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_dustrest-12_S09.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>VOICEBATH</b>
     <s>load a recording, paste its poem, then tap it in</s>
     <i>wygwyl</i>
@@ -719,7 +722,7 @@
   </a><a class="c" href="wygwyl/watertable.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="the water table one substance · one clock · it listens · it costs — the archive is changed by being heard wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_mareamemory-06_S28.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>THE WATER TABLE</b>
     <s>one substance · one clock · it listens · it costs — the archive is changed by being heard</s>
     <i>wygwyl</i>
@@ -728,7 +731,7 @@
   </a><a class="c" href="wygwyl/worldscore.html" target="_blank" rel="noopener"
      data-g="suite" data-s="linked"
      data-q="world score  wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_mareamemory-14_S16.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>WORLD SCORE</b>
     
     <i>wygwyl</i>
@@ -737,7 +740,7 @@
   </a><a class="c loose" href="wygwyl/zz-gait.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="zz-gait — the gait bench  wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_mareamemory-18_S04.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>zz-gait — the gait bench</b>
     
     <i>wygwyl</i>
@@ -746,7 +749,7 @@
   </a><a class="c loose" href="wygwyl/zz-over.html" target="_blank" rel="noopener"
      data-g="suite" data-s="loose"
      data-q="zz-over — the over bench  wygwyl">
-    <span class="noimg"></span>
+    <figure><img loading="lazy" src="wygwyl/famspec/VOL_dustrest-12_S11.png" alt=""><figcaption>sample from wygwyl/famspec — not this page's output</figcaption></figure>
     <b>zz-over — the over bench</b>
     
     <i>wygwyl</i>
@@ -798,25 +801,54 @@
     <i>harness</i>
     <u></u>
     <em>not linked, but named in a script</em>
-  </a></div></section><section><h2>EVERYTHING ELSE <span>10 pages · 2 orphaned</span></h2>
-    <div class="grid"><a class="c" href="wygwyl/pack/index.html" target="_blank" rel="noopener"
-     data-g="rest" data-s="linked"
-     data-q="atlantis sound pack segments mined from the whole corpus — loops that prove their seam, beds that hold still, hits that rise from silence, wygwyl/pack">
-    <img loading="lazy" src="wygwyl/pack/spec/ATL_LOOP_BGDEEPVINTAGER_50.png" alt="">
-    <b>ATLANTIS SOUND PACK</b>
-    <s>segments mined from the whole corpus — loops that prove their seam, beds that hold still, hits that rise from silence,</s>
-    <i>wygwyl/pack</i>
-    <u>210 img · 433 audio · 81 MB</u>
+  </a></div></section><section><h2>WYGWYL · ICARO <span>2 pages</span></h2>
+    <div class="grid"><a class="c loose" href="wygwyl/icaro/icaro-flow-sp.html" target="_blank" rel="noopener"
+     data-g="d:wygwyl/icaro" data-s="loose"
+     data-q="icaro-pro · spatiotemporal flow engine  wygwyl/icaro">
+    <span class="noimg"></span>
+    <b>ICARO-PRO · SPATIOTEMPORAL FLOW ENGINE</b>
     
-  </a><a class="c orphan" href="wygwyl/outoflife/index.html" target="_blank" rel="noopener"
-     data-g="rest" data-s="orphan"
+    <i>wygwyl/icaro</i>
+    <u></u>
+    <em>not linked, but named in a script</em>
+  </a><a class="c loose" href="wygwyl/icaro/icaro-flow.html" target="_blank" rel="noopener"
+     data-g="d:wygwyl/icaro" data-s="loose"
+     data-q="icaro-pro · flow engine (5140 lines) and wygwyl/icaro">
+    <span class="noimg"></span>
+    <b>ICARO-PRO · FLOW ENGINE</b>
+    <s>(5140 lines) and</s>
+    <i>wygwyl/icaro</i>
+    <u></u>
+    <em>not linked, but named in a script</em>
+  </a></div></section><section><h2>WYGWYL · OUTOFLIFE <span>2 pages · 1 orphaned</span></h2>
+    <div class="grid"><a class="c orphan" href="wygwyl/outoflife/index.html" target="_blank" rel="noopener"
+     data-g="d:wygwyl/outoflife" data-s="orphan"
      data-q="out of life — a test suite how to hide ai crimes with halfworld. wygwyl/outoflife">
-    <img loading="lazy" src="wygwyl/outoflife/frames/scrub/f038.jpg" alt="">
+    <figure><img loading="lazy" src="wygwyl/outoflife/frames/scrub/f038.jpg" alt=""></figure>
     <b>OUT OF LIFE — a test suite</b>
     <s>How to hide AI crimes with halfworld.</s>
     <i>wygwyl/outoflife</i>
     <u>104 img · 1 notes · 1 MB</u>
     <em>ORPHAN — nothing points here</em>
+  </a><a class="c loose" href="wygwyl/outoflife/tool.html" target="_blank" rel="noopener"
+     data-g="d:wygwyl/outoflife" data-s="loose"
+     data-q="tool — a wygwyl / out of life instrument the thinking tool — build a recipe, audition it against the cut wygwyl/outoflife">
+    <figure><img loading="lazy" src="wygwyl/outoflife/frames/scrub/f017.jpg" alt=""></figure>
+    <b>TOOL — a WYGWYL / OUT OF LIFE instrument</b>
+    <s>the thinking tool — build a recipe, audition it against the cut</s>
+    <i>wygwyl/outoflife</i>
+    <u></u>
+    <em>not linked, but named in a script</em>
+  </a></div></section><section><h2>LOOSE PAGES <span>6 pages · 1 orphaned</span></h2>
+    <p class="note">at the top level, or alone in a folder</p><div class="grid"><a class="c" href="wygwyl/pack/index.html" target="_blank" rel="noopener"
+     data-g="rest" data-s="linked"
+     data-q="atlantis sound pack segments mined from the whole corpus — loops that prove their seam, beds that hold still, hits that rise from silence, wygwyl/pack">
+    <figure><img loading="lazy" src="wygwyl/pack/spec/ATL_LOOP_BGDEEPVINTAGER_50.png" alt=""></figure>
+    <b>ATLANTIS SOUND PACK</b>
+    <s>segments mined from the whole corpus — loops that prove their seam, beds that hold still, hits that rise from silence,</s>
+    <i>wygwyl/pack</i>
+    <u>210 img · 433 audio · 81 MB</u>
+    
   </a><a class="c" href="butterfly-chat.html" target="_blank" rel="noopener"
      data-g="rest" data-s="linked"
      data-q="aster house — memory as a stage nothing has been viewed three times. .">
@@ -842,7 +874,7 @@
     <b>I REMEMBER BEING A BUTTERFLY — a halfworld</b>
     <s>no samples. Forty scenes in ordered-dot halftone, a score synthesised at 60Hz — the frequency the</s>
     <i>.</i>
-    <u>0 MB</u>
+    <u>5 notes · 0 MB</u>
     
   </a><a class="c" href="periodic.html" target="_blank" rel="noopener"
      data-g="rest" data-s="linked"
@@ -862,33 +894,6 @@
     <i>wygwyl/cut</i>
     <u>1 notes · 0 MB</u>
     
-  </a><a class="c loose" href="wygwyl/icaro/icaro-flow-sp.html" target="_blank" rel="noopener"
-     data-g="rest" data-s="loose"
-     data-q="icaro-pro · spatiotemporal flow engine  wygwyl/icaro">
-    <span class="noimg"></span>
-    <b>ICARO-PRO · SPATIOTEMPORAL FLOW ENGINE</b>
-    
-    <i>wygwyl/icaro</i>
-    <u></u>
-    <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/icaro/icaro-flow.html" target="_blank" rel="noopener"
-     data-g="rest" data-s="loose"
-     data-q="icaro-pro · flow engine  wygwyl/icaro">
-    <span class="noimg"></span>
-    <b>ICARO-PRO · FLOW ENGINE</b>
-    
-    <i>wygwyl/icaro</i>
-    <u></u>
-    <em>not linked, but named in a script</em>
-  </a><a class="c loose" href="wygwyl/outoflife/tool.html" target="_blank" rel="noopener"
-     data-g="rest" data-s="loose"
-     data-q="tool — a wygwyl / out of life instrument the thinking tool — build a recipe, audition it against the cut wygwyl/outoflife">
-    <span class="noimg"></span>
-    <b>TOOL — a WYGWYL / OUT OF LIFE instrument</b>
-    <s>the thinking tool — build a recipe, audition it against the cut</s>
-    <i>wygwyl/outoflife</i>
-    <u></u>
-    <em>not linked, but named in a script</em>
   </a></div></section></main>
 <footer>
   <b>This page is walked, not written.</b> It finds every page, builds the link

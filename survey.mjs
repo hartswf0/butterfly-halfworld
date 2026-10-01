@@ -96,12 +96,27 @@ for (const p of pages) {
     if (js.trim()) blobs.set(p + "#script", js);
   } catch (_) {}
 }
+/* ONE PASS PER BLOB, NOT ONE PER BLOB PER PAGE. This used to ask, for every
+   page, whether every blob contained its name. cineosis-lab's lab-data.json is
+   26 MB, so 61 pages meant scanning a gigabyte and a half of JSON and the
+   survey never finished. Instead: sweep each blob once for anything shaped like
+   a page name, and keep which blob named it. Same answer, linear. */
+const namedIn = new Map();     // basename → set of blobs that mention it
+for (const [f, txt] of blobs) {
+  for (const m of txt.matchAll(/[\w.\-]+\.html/g)) {
+    const b = m[0];
+    if (!namedIn.has(b)) namedIn.set(b, new Set());
+    namedIn.get(b).add(f);
+  }
+}
 for (const p of pages) {
   const b = path.basename(p);
   if (b === "index.html") continue;
-  for (const [f, txt] of blobs) {
+  const where = namedIn.get(b);
+  if (!where) continue;
+  for (const f of where) {
     if (f === p || f === p + "#script") continue;   // a page naming itself is not a link
-    if (txt.includes(b)) { mentionedElsewhere.add(p); break; }
+    mentionedElsewhere.add(p); break;
   }
 }
 const ROOTS = ["index.html", "wygwyl/index.html"].filter(r => pset.has(r));
@@ -109,8 +124,19 @@ const reach = new Set(); const stack = [...ROOTS];
 while (stack.length) { const c = stack.pop(); if (reach.has(c)) continue; reach.add(c); stack.push(...out.get(c)); }
 
 /* ---- what each folder holds ----------------------------------------------- */
+/* ONE stat PER FILE, NOT ONE PER FILE PER PAGE. folder() was summing sizes with
+   a statSync inside a filter over every file in the repository, for every page:
+   on cineosis-lab's 12,000 files that is three quarters of a million syscalls
+   and the survey stopped finishing. Stat everything once, up front. */
+const SIZE = new Map();
+for (const f of files) { try { SIZE.set(f, fs.statSync(path.join(ROOT, f)).size); } catch (_) { SIZE.set(f, 0); } }
+const BYDIR = new Map();
+for (const f of files) { const d = path.posix.dirname(f); if (!BYDIR.has(d)) BYDIR.set(d, []); BYDIR.get(d).push(f); }
+const under = (dir) => { const acc = [];
+  for (const [d, fl] of BYDIR) if (d === dir || d.startsWith(dir + "/")) acc.push(...fl);
+  return acc; };
 function folder(dir) {
-  const inside = files.filter(f => f === dir || f.startsWith(dir + "/"));
+  const inside = under(dir);
   const img = inside.filter(f => IMG.test(f) && !f.endsWith(".svg"));
   return {
     files: inside.length,
@@ -118,7 +144,7 @@ function folder(dir) {
     vid: inside.filter(f => VID.test(f)).length,
     aud: inside.filter(f => AUD.test(f)).length,
     md: inside.filter(f => f.endsWith(".md")).length,
-    bytes: inside.reduce((a, f) => { try { return a + fs.statSync(path.join(ROOT, f)).size; } catch (_) { return a; } }, 0),
+    bytes: inside.reduce((a, f) => a + (SIZE.get(f) || 0), 0),
     cover: img.sort()[Math.floor(img.length / 2)]
       || poster(dir, inside.filter(f => VID.test(f)).sort()) || null,
   };
@@ -129,15 +155,23 @@ function folder(dir) {
    `wygwyl/08-newly-single.html`. Matching on the stem makes the survey do
    something better than list the two halves — it reconnects them. */
 const allImg = files.filter(f => IMG.test(f) && !f.endsWith(".svg"));
+const pimg = new Set(allImg);
 
 /* A POSTER FOR THE FOLDERS THAT ARE ONLY VIDEO. DRESS, INHABIT, PREVIS,
    TEXTULE and THE LOOM hold nothing but mp4s, so they had no cover at all —
    and they are exactly the video versions this survey exists to show. One
    frame is pulled from each, two seconds in, and cached in `survey-covers/`
    so a re-run costs nothing. */
+/* ffmpeg lives next to THIS SCRIPT, not necessarily under the repository being
+   surveyed — pointing --root at another project found no binary and silently
+   dropped every poster frame. Try the surveyed root first, then our own. */
 const FF = (() => {
-  const p = path.join(ROOT, "node_modules", "ffmpeg-static", "ffmpeg");
-  try { return fs.existsSync(p) ? fs.realpathSync(p) : null; } catch (_) { return null; }
+  const here = path.dirname(new URL(import.meta.url).pathname);
+  for (const base of [ROOT, here, path.join(here, "..")]) {
+    const p = path.join(base, "node_modules", "ffmpeg-static", "ffmpeg");
+    try { if (fs.existsSync(p)) return fs.realpathSync(p); } catch (_) {}
+  }
+  return null;
 })();
 const COVERS = "survey-covers";
 function poster(dir, vids) {
@@ -150,14 +184,77 @@ function poster(dir, vids) {
     "-frames:v", "1", "-vf", "scale=320:-2", "-q:v", "6", path.join(ROOT, rel)], { timeout: 30000 });
   return r.status === 0 && fs.existsSync(path.join(ROOT, rel)) ? rel : null;
 }
+/* AND FAILING THAT, A PICTURE THE PAGE ITSELF NAMES. Stem matching only works
+   where the frames are named after the page, which is this archive's habit and
+   nobody else's: on cineosis-lab, whose 9,219 images sit in four central
+   folders, it found nothing and the survey came out as a page of grey boxes —
+   the one thing it must not be, since the whole claim is that you can tell the
+   experiments apart at a glance. A page's own markup and script name the
+   pictures it draws. Take the first that exists on disk. */
+const imgDirs = (() => { const m = new Map();
+  for (const f of allImg) { const d = path.posix.dirname(f); (m.get(d) || m.set(d, []).get(d)).push(f); }
+  for (const v of m.values()) v.sort(); return m; })();
+/* A STABLE PICK, so a re-run gives the same page the same picture. */
+const pick = (list, key) => { let h = 2166136261;
+  for (let i = 0; i < key.length; i++) { h ^= key.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return list[(h >>> 0) % list.length]; };
+function referenced(p) {
+  let txt = ""; try { txt = fs.readFileSync(path.join(ROOT, p), "utf8"); } catch (_) { return null; }
+  const base = path.posix.dirname(p);
+  const abs = (h) => { let t = path.posix.normalize(path.posix.join(base, h.split("#")[0].split("?")[0]));
+    return t.startsWith("/") ? t.slice(1) : t; };
+  /* first choice: a whole path the page spells out */
+  for (const m of txt.matchAll(/["'`]([^"'`\s>${}]+\.(?:png|webp|jpe?g|gif))["'`]/gi)) {
+    if (/^(https?:)?\/\//.test(m[1]) || m[1].startsWith("data:")) continue;
+    const t = abs(m[1]); if (pimg.has(t)) return t;
+  }
+  /* second: THE FOLDER IT DRAWS FROM. These pages build their paths —
+     `thumbs/${id}.webp` — so no literal ever names a file, but the literal does
+     name the directory, and which archive a page works on is itself the thing
+     worth seeing: a page over `thumbs/` is about shots, one over `cutouts/` is
+     about figures. One image from that folder, chosen by a hash of the page
+     name so it is stable and so sibling pages do not all show the same frame. */
+  /* No regex here on purpose: the obvious pattern for "a quoted string ending
+     in an image extension" needs two lazy quantifiers and backtracks
+     catastrophically on a 400 KB single-file app — it did not finish. Find each
+     extension, walk back to the quote, keep the directory part. */
+  const EXT = /\.(?:png|webp|jpe?g|gif)\b/gi;
+  for (let m; (m = EXT.exec(txt));) {
+    let i = m.index;
+    while (i > 0 && !`"'\`<>`.includes(txt[i - 1]) && !/\s/.test(txt[i - 1])) i--;
+    const frag = txt.slice(i, m.index);
+    const cut = frag.lastIndexOf("/");
+    if (cut <= 0) continue;
+    const dir = frag.slice(0, cut);
+    if (/^(https?:)?\/\//.test(dir) || dir.includes("data:")) continue;
+    const list = imgDirs.get(abs(dir));
+    if (list && list.length) return { src: pick(list, p), from: abs(dir) };
+  }
+  /* third, and clearly marked as such: these pages take their picture paths out
+     of the data they load, so nothing in the source names an image at all.
+     cineosis-lab's 61 pages produced 59 grey boxes. The archive a page sits
+     above is still real information — a page over `thumbs/` works on shots, one
+     over `cutouts/` on figures — so sample it, and say in the card that this is
+     a sample from that archive and not the page's own output. A borrowed
+     picture passed off as the page's own would make the survey lie. */
+  let best = null;
+  for (const [d, list] of imgDirs) {
+    if (d !== base && !d.startsWith(base + "/")) continue;
+    if (!best || list.length > best[1].length) best = [d, list];
+  }
+  return best ? { src: pick(best[1], p), from: best[0], sampled: true } : null;
+}
 function coverFor(p) {
   const stem = path.basename(p, ".html");
-  if (stem.length < 4) return null;
-  const hits = allImg.filter(f => path.basename(f).includes(stem));
-  if (!hits.length) return null;
-  /* prefer a frame from the archive over a QA render */
-  hits.sort((a, b) => (a.includes("MARKOV") ? -1 : 1) - (b.includes("MARKOV") ? -1 : 1) || a.localeCompare(b));
-  return hits[0];
+  if (stem.length >= 4) {
+    const hits = allImg.filter(f => path.basename(f).includes(stem));
+    /* prefer a frame from the archive over a QA render */
+    if (hits.length) {
+      hits.sort((a, b) => (a.includes("MARKOV") ? -1 : 1) - (b.includes("MARKOV") ? -1 : 1) || a.localeCompare(b));
+      return { src: hits[0] };
+    }
+  }
+  return referenced(p);
 }
 
 /* WHAT MAKES THIS ONE DIFFERENT FROM THE OTHERS. A title alone says DRESS and
@@ -187,6 +284,42 @@ function describe(p) {
   }
   return { title: title || path.basename(p, ".html"), sub, prose };
 }
+
+/* WHEN A PAGE SAYS NOTHING ABOUT ITSELF. The nine bet studios are apps: their
+   markup is controls, so describe() finds no prose and the cards came out as a
+   title and nothing else — which is the one thing this survey promises not to
+   do. But a hub almost always describes its children where it lists them, and
+   cineosis-lab's bets index is exactly that: `['P4','audition.html','Audition',
+   'choosing is the work']`. So look where the page is named and take the
+   longest quoted phrase just after it. General, because a manifest that names a
+   page and then says what it is, is the normal shape of a manifest. */
+function fromParent(p) {
+  const b = path.basename(p);
+  const where = namedIn.get(b);
+  if (!where) return "";
+  for (const f of where) {
+    if (f === p || f === p + "#script") continue;
+    const txt = blobs.get(f); if (!txt) continue;
+    const i = txt.indexOf(b); if (i < 0) continue;
+    /* STOP AT THE END OF THE RECORD. A fixed-width window ran straight past the
+       closing bracket into the next entry, and because it then took the longest
+       quoted phrase it found, Concordance was captioned with Voice Clock's line
+       — a caption that reads perfectly and is about a different page. Cut the
+       window at the first thing that ends a record. */
+    const tail = txt.slice(i + b.length, i + b.length + 400);
+    const end = tail.search(/[\]}\n]|<\/a>|<\/li>/);
+    const win = end > 0 ? tail.slice(0, end) : tail;
+    let best = "";
+    for (const m of win.matchAll(/["'`]([^"'`\n]{12,90})["'`]/g)) {
+      const v = m[1].trim();
+      if (/\.(html|js|mjs|json|png|webp|jpe?g|mp4)$/i.test(v)) continue;
+      if (!/[a-z]{3}/.test(v) || /[{}<>;=]/.test(v)) continue;
+      if (v.length > best.length) best = v;
+    }
+    if (best) return best;
+  }
+  return "";
+}
 const title = (p) => describe(p).title;
 
 /* ---- group ---------------------------------------------------------------- */
@@ -202,15 +335,57 @@ const GROUPS = [
     test: (p) => p.startsWith("harness/") || p.includes("/zz-") },
   { id: "rest", name: "EVERYTHING ELSE", note: "", test: () => true },
 ];
+/* AND WHEN THE REPOSITORY IS NOT THIS ONE. Those four groups are this repo's
+   shape, so pointing --root anywhere else drops all 61 of cineosis-lab's pages
+   into EVERYTHING ELSE — one undifferentiated wall, which is the opposite of
+   what a survey is for. Any repository already states its own shape in its
+   directories, so derive the rest of the groups from those: a folder holding
+   two or more pages becomes a section, named after itself, ordered by size. The
+   hand-written groups still win wherever they match, because their notes say
+   something a directory name cannot. */
+function deriveGroups(unclaimed) {
+  const by = new Map();
+  for (const p of unclaimed) {
+    const seg = p.includes("/") ? p.slice(0, p.indexOf("/")) : "";
+    const sub = seg && p.slice(seg.length + 1).includes("/")
+      ? p.slice(0, p.indexOf("/", seg.length + 1)) : seg;
+    const key = sub || "";
+    if (!by.has(key)) by.set(key, []);
+    by.get(key).push(p);
+  }
+  /* deepest first: GROUPS.find takes the first test that matches, so a shallow
+     `lab` listed before `lab/bets` swallows the whole repository into one
+     section — which is exactly what it did. */
+  const depth = (d) => d.split("/").length;
+  const made = [];
+  for (const [dir, ps] of [...by].sort((a, b) => depth(b[0]) - depth(a[0]) || b[1].length - a[1].length)) {
+    if (!dir || ps.length < 2) continue;
+    made.push({ id: "d:" + dir, name: dir.toUpperCase().replace(/[/_-]+/g, " · "),
+      note: "", test: (p) => p === dir || p.startsWith(dir + "/") });
+  }
+  return made;
+}
+{
+  const claimed = new Set();
+  for (const g of GROUPS) if (g.id !== "rest") for (const p of pages) if (g.test(p)) claimed.add(p);
+  const rest = pages.filter(p => !claimed.has(p));
+  GROUPS.splice(GROUPS.length - 1, 0, ...deriveGroups(rest));
+  GROUPS[GROUPS.length - 1].name = "LOOSE PAGES";
+  GROUPS[GROUPS.length - 1].note = "at the top level, or alone in a folder";
+}
+
 const entries = pages.map(p => {
   const dir = path.posix.dirname(p);
   const isIdx = path.basename(p) === "index.html";
   const f = isIdx ? folder(dir) : null;
   return {
-    path: p, dir, ...describe(p),
+    path: p, dir, ...(() => { const d = describe(p);
+      if (!d.sub && !d.prose) d.prose = fromParent(p);
+      return d; })(),
     reachable: reach.has(p), mentioned: mentionedElsewhere.has(p),
     inbound: [...inb.get(p)], outbound: out.get(p).size,
-    isIndex: isIdx, hold: f, cover: (f && f.cover) || coverFor(p),
+    isIndex: isIdx, hold: f, ...(() => { const c = (f && f.cover) ? { src: f.cover } : coverFor(p);
+      return { cover: c && c.src, sampled: !!(c && c.sampled), coverFrom: c && c.from }; })(),
     group: GROUPS.find(g => g.test(p)).id,
   };
 });
@@ -222,7 +397,7 @@ const totals = {
   img: files.filter(f => IMG.test(f) && !f.endsWith(".svg")).length,
   vid: files.filter(f => VID.test(f)).length,
   aud: files.filter(f => AUD.test(f)).length,
-  bytes: files.reduce((a, f) => { try { return a + fs.statSync(path.join(ROOT, f)).size; } catch (_) { return a; } }, 0),
+  bytes: files.reduce((a, f) => a + (SIZE.get(f) || 0), 0),
 };
 const mb = (b) => b > 1 << 30 ? (b / (1 << 30)).toFixed(1) + " GB" : (b / (1 << 20)).toFixed(0) + " MB";
 
@@ -260,7 +435,9 @@ const card = (e) => {
   return `<a class="c${e.reachable ? "" : e.mentioned ? " loose" : " orphan"}" href="${esc(href(e.path))}" target="_blank" rel="noopener"
      data-g="${e.group}" data-s="${e.reachable ? "linked" : e.mentioned ? "loose" : "orphan"}"
      data-q="${esc((e.title + " " + line + " " + e.dir).toLowerCase())}">
-    ${cv ? `<img loading="lazy" src="${cv}" alt="">` : `<span class="noimg"></span>`}
+    ${cv ? `<figure><img loading="lazy" src="${cv}" alt="">${e.sampled
+        ? `<figcaption>sample from ${esc(e.coverFrom || "")} — not this page's output</figcaption>` : ""}</figure>`
+      : `<span class="noimg"></span>`}
     <b>${esc(e.title)}</b>
     ${line ? `<s>${esc(line.slice(0, 150))}</s>` : ""}
     <i>${esc(e.dir || ".")}</i>
@@ -315,6 +492,9 @@ ${BARE ? "" : `<link rel="icon" href="wygwyl/dot.svg">
   .c{display:block;text-decoration:none;color:inherit;border:1px solid var(--edge);
      background:#00000038;padding:8px;transition:border-color .12s}
   .c:hover{border-color:var(--hot)}
+  .c figure{margin:0;position:relative}
+  .c figcaption{position:absolute;left:0;right:0;bottom:0;background:#120a16e8;color:#9b8ea6;
+    font:400 9.5px/1.35 ui-monospace,Menlo,monospace;padding:3px 5px;letter-spacing:.02em}
   .c img,.noimg{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#190a1c;
      border:1px solid var(--edge);margin-bottom:7px;image-rendering:auto}
   .c b{display:block;font-weight:400;font-size:12.5px;color:var(--hot);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -347,7 +527,8 @@ ${BARE ? "" : `<link rel="icon" href="wygwyl/dot.svg">
   <button data-f="orphan">ORPHANS ONLY</button>
   <button data-f="linked">LINKED ONLY</button>
   <input id="q" placeholder="search titles, descriptions, paths…" style="flex:1;min-width:170px;font:inherit;color:var(--paper);background:#00000055;border:1px solid var(--edge);padding:5px 10px;border-radius:2px">
-  ${GROUPS.map(g => `<button data-g="${g.id}">${g.name}</button>`).join("")}
+  ${GROUPS.filter(g => entries.some(e => e.group === g.id))
+      .map(g => `<button data-g="${g.id}">${g.name}</button>`).join("")}
 </div>
 <main>${GROUPS.map(section).join("")}</main>
 <footer>
