@@ -153,19 +153,19 @@ E = [
   ''),
 
  # ---- WATCH: the cuts.
- ('F01','watch','A · THE PQ REEL','cut/out/WYGWYL_A_THE_PQ_REEL.mp4',
+ ('F01','watch','A · THE PQ REEL','cut/out/script/A.html',
   'The reel that never re-encodes: every shot passed through at its real duration, 5.04s to 39.17s, so the HDR is not thrown away by being flattened.',
   '29 MB.'),
- ('F02','watch','B · THE WINDOW AND THE DOOR','cut/out/WYGWYL_B_THE_WINDOW_AND_THE_DOOR.mp4',
+ ('F02','watch','B · THE WINDOW AND THE DOOR','cut/out/script/B.html',
   'The suite cut to its own script — 111 stanzas with screen text, voiceover and an image-function, which no previous cut had ever referenced.',
   '373 MB.'),
- ('F03','watch','C · THE DECK AT 60BPM','cut/out/WYGWYL_C_THE_DECK_60BPM.mp4',
+ ('F03','watch','C · THE DECK AT 60BPM','cut/out/script/C.html',
   'Cut to a grid: one bar per shot at sixty beats per minute, with its own score.',
   '243 MB. A silent version sits beside it.'),
- ('F04','watch','D · THE DOOR','cut/out/WYGWYL_D_THE_DOOR.mp4',
+ ('F04','watch','D · THE DOOR','cut/out/script/D.html',
   'Ends on P014 — the single shot in the whole archive of an open, lit doorway, which had been sitting in the middle of poem 01.',
   '108 MB.'),
- ('F05','watch','E · THE DOOR, SCORED','cut/out/WYGWYL_E_THE_DOOR_mareamemory_06.mp4',
+ ('F05','watch','E · THE DOOR, SCORED','cut/out/script/E.html',
   'D again, carried on mareamemory 06.',
   '125 MB. Silent version beside it.'),
  ('F08','watch','THE SCRIPTS \u2014 ALL FIVE CUTS, READABLE','cut/out/script/index.html',
@@ -218,6 +218,13 @@ E = [
 # because the only image in its folder belongs to something else — a borrowed
 # preview is a small lie told sixteen times.
 MEASURE = {
+ # the card points at the page; the size and date still come from the file
+ 'F01':'cut/out/WYGWYL_A_THE_PQ_REEL.mp4',
+ 'F02':'cut/out/WYGWYL_B_THE_WINDOW_AND_THE_DOOR.mp4',
+ 'F03':'cut/out/WYGWYL_C_THE_DECK_60BPM.mp4',
+ 'F04':'cut/out/WYGWYL_D_THE_DOOR.mp4',
+ 'F05':'cut/out/WYGWYL_E_THE_DOOR_mareamemory_06.mp4',
+
  'F08':'cut/out/script',
  'R08':['cut/out/WYGWYL_A_THE_PQ_REEL.edl','cut/out/WYGWYL_B_THE_WINDOW_AND_THE_DOOR.edl',
         'cut/out/WYGWYL_C_THE_DECK_60BPM.edl','cut/out/WYGWYL_D_THE_DOOR.edl',
@@ -232,7 +239,7 @@ MEASURE = {
  'I23':'cut/index.html',
  'W05':['cut/out/quilt','cut/out/partswap','cut/out/bind'],
  'L01':'BOARD', 'L02':'COLLAGE_AND_VIDEO', 'L03':'COLLAGE_ZETTELS', 'L04':'../audio',
- 'L05':'MARKOV_POET_00',
+ 'L05':['MARKOV_POET','MARKOV_POET_00'],
  'R03':'cut/pf',
 }
 # COUNT: a library's real headline number, read from its own manifest, because

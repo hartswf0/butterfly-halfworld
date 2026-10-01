@@ -43,6 +43,22 @@ CUTS = [
   'D again, carried on mareamemory 06.'),
 ]
 
+
+# The cuts are release assets, because four of the five are over GitHub's 100 MB
+# per-file limit. A release URL answers with Content-Disposition: attachment and
+# application/octet-stream, so a plain LINK to it downloads 113 MB rather than
+# playing it — but a <video> element ignores both and streams it (tested: range
+# requests answer 206, metadata loads, 198.5s at 1280x720). So the player goes
+# on the page, and the page is the one the index points at.
+try:
+    _m = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'media.json')))
+    MEDIA = _m.get('media', {})
+except Exception:
+    MEDIA = {}
+
+def served(rel):
+    return MEDIA.get(rel.replace(os.sep, '/'))
+
 def tc(s):
     s = max(0.0, float(s or 0))
     return f'{int(s//60):d}:{int(s%60):02d}' + f'{s - int(s):.2f}'[1:]
@@ -61,6 +77,11 @@ header{border-bottom:3px solid var(--ink);padding:30px 0 20px;margin-bottom:8px}
  color:var(--accent);text-decoration:none;display:inline-block;margin-bottom:17px}
 h1{font:900 clamp(22px,4.4vw,38px)/1.06 Helvetica,Arial;letter-spacing:.03em;text-transform:uppercase}
 .lede{margin:17px 0 0;max-width:66ch;font-size:16px}
+.play{margin:0 0 22px;border:2px solid var(--ink);background:#000}
+.play video{display:block;width:100%;max-height:72vh;background:#000}
+.pn{background:var(--paper2);border-top:2px solid var(--ink);padding:9px 12px;
+ font:400 11.5px/1.5 ui-monospace,Menlo,monospace;color:var(--dim)}
+.pn a{color:var(--accent)}
 .tot{margin:15px 0 0;font:700 11px/1.7 ui-monospace,monospace;letter-spacing:.06em;color:var(--dim)}
 .bar{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--l3);
  padding:10px 0;display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
@@ -106,6 +127,14 @@ def page(key, stem, title, blurb):
     ev = d['events'] if isinstance(d, dict) else d
     secs = d.get('seconds') if isinstance(d, dict) else sum(e.get('dur', 0) for e in ev)
     up, bar = nav(key)
+    url = served(f'cut/out/{stem}.mp4') or (f'../{stem}.mp4'
+          if os.path.exists(os.path.join(SRC, stem + '.mp4')) else None)
+    player = (f'<div class="play"><video src="{url}" controls preload="metadata" playsinline '
+              f'poster="{FRAMES}/{esc((ev[0] or {}).get("patch") or "P001")}.jpg"></video>'
+              f'<p class="pn">Streaming from the <a href="https://github.com/hartswf0/'
+              f'butterfly-halfworld/releases/tag/media-v1">media-v1 release</a> \u2014 the file is too '
+              f'large to live in the repository. Press play; nothing downloads until you do.</p></div>'
+              ) if url else ''
     # One divider per poem, carrying the richest label that poem ever gets.
     # Keying on `mark` alone broke the suite in two every time a shot happened
     # to be labelled "01" instead of "01 - OUT OF LIFE".
@@ -154,7 +183,7 @@ def page(key, stem, title, blurb):
          f'<header>{up}<h1>{esc(title)}</h1><p class="lede">{esc(blurb)}</p>'
          f'<p class="tot">{len(ev)} SHOTS &middot; {int(secs//60)} MIN {int(secs%60):02d} SEC &middot; '
          f'{nframe} OF {len(ev)} WITH A FRAME ON FILE &middot; {lined} CARRYING WORDS</p></header>'
-         f'{bar}{"".join(rows)}'
+         f'{bar}{player}{"".join(rows)}'
          f'<footer><p><b>This is the film written down, not the film.</b> Every row is one shot: '
          f'where it lands, how long it holds, which shot it is, and the words it carries. The frame '
          f'beside it is a real mid-frame of that shot. The grey line underneath names the source '

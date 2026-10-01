@@ -196,6 +196,23 @@ def git_state():
         print(f'  ! git unreadable ({ex}); repository state will not be shown')
         return None, None
 
+
+# ----------------------------------------------------------------- the media map
+# Four of the five cuts are over GitHub's 100 MB per-file limit, so the video
+# lives on a release instead. cut/pf/media.json maps the path a page already
+# uses to the URL that actually serves it. Nothing here has a release URL typed
+# into it, and with no map every path falls back to local — which is what a copy
+# of the archive on a drive needs. Two ways of holding it, one set of sources.
+try:
+    _m = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'media.json')))
+    MEDIA, MEDIA_TAG = _m.get('media', {}), _m.get('tag', '')
+except Exception:
+    MEDIA, MEDIA_TAG = {}, ''
+
+def served(relpath):
+    """the URL that serves this file, or None if only the disk has it"""
+    return MEDIA.get(os.path.normpath(relpath).replace(os.sep, '/'))
+
 GIT_TOP, GIT_FILES = git_state()
 
 # What each entry should show of itself, and how it differs from the rest —
@@ -318,10 +335,12 @@ def sheet(r, base):
     for k, v in THUMB_MIRROR.items():
         if os.path.normpath(os.path.join(base, k)) in dirs:
             mirror = os.path.normpath(os.path.join(base, v))
-    cards, rows = [], []
+    cards, rows, nserved = [], [], 0
     for i, (rel, fp, sz) in enumerate(items):
         l = rel.lower()
-        href = '/'.join(urlq(x) for x in rel.split(os.sep))
+        _u = served(os.path.relpath(fp, base))
+        if _u: nserved += 1
+        href = _u or '/'.join(urlq(x) for x in rel.split(os.sep))
         if i < SHEET_CAP and l.endswith(IMGX):
             src = href
             if mirror:
@@ -371,6 +390,7 @@ def sheet(r, base):
             + SHEET_JS + '</div></body></html>')
     open(out, 'w').write(html)
     r['sheet'] = (len(items), min(len(items), SHEET_CAP) if cards else 0)
+    r['served'] = nserved
     return out
 
 def urlq(x):
@@ -515,9 +535,13 @@ for r in rows:
     meta = ('<span class="gonetag">LINK DEAD</span>' if not r['ok'] else
             f"<span>{r['n']:,} {r['noun']}{'' if r['noun'].endswith('s') else 's'}</span><span>{human(r['bytes'])}</span>"
             f"<span>{dated(r['t_lo'], r['t_hi'])}</span>"
-            + ('' if r.get('git') is None else
+            + ('<span class="rel">ON THE RELEASE</span>'
+               if (any(served(os.path.relpath(x, BASE)) for x in (r.get('roots') or []))
+                   or (r.get('served') and r['served'] >= 0.8 * r['n'])) else
+               '' if r.get('git') is None else
                ('<span class="disk">DISK ONLY</span>' if r['git'] == 0 else
-                ('<span class="part">PART IN REPO</span>' if r['git'] < r['n'] else ''))))
+                (f'<span class="part">IN REPO {r["git"]:,}/{r["n"]:,}</span>'
+                 if r['git'] < r['n'] else ''))))
     note = r['note']
     if r.get('sheet'):
         n_, shown = r['sheet']
@@ -547,8 +571,9 @@ for r in rows:
             + f'<div class="meta">{meta}</div>'
             f'<div class="where">{where}</div></div>')
     hay = esc((r['id'] + ' ' + r['name'] + ' ' + r['line'] + ' ' + r['note'] + ' ' + r['href']).lower())
+    link = served(r['href']) or r['href']
     if r['ok']:
-        cards.append(f'<a class="{cls}" id="{r["id"]}" href="{esc(r["href"])}" '
+        cards.append(f'<a class="{cls}" id="{r["id"]}" href="{esc(link)}" '
                      f'data-k="{r["kind"]}" data-h="{hay}">{body}</a>')
     else:
         cards.append(f'<div class="{cls}" id="{r["id"]}" data-k="{r["kind"]}" data-h="{hay}">{body}</div>')
@@ -667,6 +692,7 @@ h3{{font:900 14px/1.18 Helvetica,Arial;letter-spacing:.035em;text-transform:uppe
   font:700 10px/1 ui-monospace,monospace;letter-spacing:.06em;color:var(--dim);padding-top:4px}}
 .gone{{opacity:.6}} .gone h3{{text-decoration:line-through}}
 .gonetag{{color:#cf222e;font-weight:900}}
+.meta .rel{{color:var(--accent);font-weight:900}} a.card:hover .meta .rel{{color:#9ab6ff}}
 .meta .disk{{color:#cf222e;font-weight:900}} a.card:hover .meta .disk{{color:#ff8a92}}
 .meta .part{{color:var(--warn);font-weight:900}} a.card:hover .meta .part{{color:#d8c87a}}
 footer{{margin-top:56px;border-top:3px solid var(--ink);padding-top:20px;
@@ -850,7 +876,8 @@ a.card:hover .where{{color:#6a6a68;border-color:#4a4a48}}
     that 404s teaches nothing. */
  cards.filter(function(c){{
    return c.tagName==='A' && (c.getAttribute('href').indexOf('../')===0
-                              || c.querySelector('.meta .disk'));
+                              || (c.querySelector('.meta .disk')
+                                  && !c.querySelector('.meta .rel')));
   }}).forEach(function(c){{
    var up=c.getAttribute('href').indexOf('../')===0;
    fetch(c.getAttribute('href'),{{method:'HEAD'}}).then(function(r){{
