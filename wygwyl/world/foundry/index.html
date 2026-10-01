@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Foundry · WYGWYL</title>
+<style>
+:root{--ink:#f3ead2;--dim:#a99f86;--gold:#ffd23f;--pink:#ff3d6e;--ok:#8fd694;--no:#ff6b5e;--panel:#121820;--edge:rgba(243,234,210,.16);--bg:#0b1118}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 "Iowan Old Style",Palatino,Georgia,serif}
+.sans{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+a{color:var(--gold)}
+main{max-width:1180px;margin:0 auto;padding:28px 16px 80px}
+.k{font:700 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.22em;color:var(--gold);text-transform:uppercase}
+h1{font-size:clamp(28px,5vw,44px);font-weight:400;line-height:1.1;margin:6px 0 14px}
+h2{font-size:22px;font-weight:400;margin:38px 0 6px}
+blockquote{border-left:2px solid var(--gold);padding:2px 0 2px 14px;color:var(--dim);font-style:italic;max-width:760px;margin:14px 0}
+p.lede{max-width:780px;color:#ddd3bb}
+.note{color:var(--dim);font-size:13px;max-width:780px}
+.stats{display:flex;flex-wrap:wrap;gap:8px 22px;margin:16px 0}
+.stats b{font:700 22px "Helvetica Neue",Arial,sans-serif;color:var(--ink);display:block}
+.stats span{font:600 10px "Helvetica Neue",Arial,sans-serif;letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
+.mapwrap{display:grid;grid-template-columns:22px 1fr;gap:6px;margin-top:10px}
+.yax{writing-mode:vertical-rl;transform:rotate(180deg);font:600 10px "Helvetica Neue",Arial,sans-serif;letter-spacing:.16em;color:var(--dim);text-align:center}
+.xax{grid-column:2;font:600 10px "Helvetica Neue",Arial,sans-serif;letter-spacing:.16em;color:var(--dim);text-align:center}
+.niches{display:grid;gap:4px}
+.cell{aspect-ratio:4/3;background:#0f151c;border:1px solid rgba(243,234,210,.06);position:relative;overflow:hidden;cursor:pointer}
+.cell.empty{cursor:default}
+.cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .2s}
+.cell:hover img{transform:scale(1.06)}
+.badge{position:absolute;left:3px;bottom:3px;font:700 10px "Helvetica Neue",Arial,sans-serif;background:rgba(10,12,14,.82);padding:1px 4px;color:var(--gold)}
+.shelf{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
+.shelf .card{flex:0 0 220px;scroll-snap-align:start;cursor:pointer;background:var(--panel);border:1px solid var(--edge)}
+.shelf .card img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover}
+.shelf .card div{padding:6px 8px;font:12px/1.35 "Helvetica Neue",Arial,sans-serif;color:var(--dim)}
+.shelf .card b{color:var(--ink)}
+canvas#scatter{width:100%;height:auto;background:#0f151c;border:1px solid var(--edge);display:block}
+#detail{position:fixed;inset:0;background:#0b1118;display:none;overflow-y:auto;z-index:5}
+#detail.on{display:block}
+#detail .in{max-width:1180px;margin:0 auto;padding:18px 16px 60px}
+#detail .top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+#detail button{background:transparent;color:var(--ink);border:1px solid var(--edge);padding:6px 10px;font:600 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.14em;cursor:pointer}
+#detail button.on{border-color:var(--gold);color:var(--gold)}
+.dgrid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;margin-top:12px}
+@media (max-width:860px){.dgrid{grid-template-columns:1fr}}
+#dimg{width:100%;display:block;border:1px solid var(--edge)}
+.recipe li{margin:2px 0 2px 18px;color:#ddd3bb}
+.poem{border-top:1px solid var(--edge);padding:8px 0}
+.poem h4{font-weight:400;font-size:16px}
+.poem h4 .n{font:700 11px "Helvetica Neue",Arial,sans-serif;color:var(--gold);letter-spacing:.12em;margin-right:6px}
+.poem h4 .z{font:600 10px "Helvetica Neue",Arial,sans-serif;color:var(--dim);letter-spacing:.14em;margin-left:6px;text-transform:uppercase}
+.poem .line{color:var(--dim);font-style:italic;font-size:13px}
+.t{font:13px/1.4 "Helvetica Neue",Arial,sans-serif;margin:2px 0 0 2px}
+.t.ok::before{content:"✓ ";color:var(--ok)}
+.t.no::before{content:"✗ ";color:var(--no)}
+.t .kind{color:var(--dim);font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-left:4px}
+.bar{height:6px;background:#1d252e;margin-top:4px}
+.bar i{display:block;height:100%;background:var(--gold)}
+.abl{font:13px/1.45 "Helvetica Neue",Arial,sans-serif;border-top:1px solid var(--edge);padding:6px 0}
+.abl .d{font-weight:700}
+.abl .d.neg{color:var(--no)}.abl .d.pos{color:var(--ok)}
+.abl .f{color:var(--dim);margin-left:12px}
+.lin{display:flex;gap:6px;flex-wrap:wrap}
+.lin img{width:92px;border:1px solid var(--edge);cursor:pointer}
+.sum{display:flex;gap:16px;flex-wrap:wrap;font:13px "Helvetica Neue",Arial,sans-serif;color:var(--dim);margin:8px 0}
+.sum b{color:var(--ink);font-size:18px;margin-right:4px}
+pre{white-space:pre-wrap;font:11px/1.4 Menlo,monospace;color:var(--dim);background:#0f151c;padding:8px;border:1px solid var(--edge);max-height:220px;overflow:auto}
+.legend{font:12px "Helvetica Neue",Arial,sans-serif;color:var(--dim);display:flex;flex-wrap:wrap;gap:4px 14px;margin:6px 0}
+.legend i{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:4px}
+</style>
+</head>
+<body>
+<main>
+  <div class="k">Where You Go When You Leave · the world</div>
+  <h1>The Foundry — worlds, read against the poems</h1>
+  <blockquote>“Our language can be seen as an ancient city: a maze of little streets and squares, of old and new houses,
+  and of houses with additions from various periods; and this surrounded by a multitude of new boroughs with straight
+  regular streets and uniform houses.” — Wittgenstein, <i>Philosophical Investigations</i> §18</blockquote>
+  <p class="lede">Each world here is grown in the poems’ order, not the map-maker’s. First the <b>narrative</b>: three
+  realms (Baltimere, the Center, Atlantis) and the journey’s links — walk, ride, fall, fly, cut, dissolve. Then the
+  <b>raw grid</b>, laid down as a palimpsest of epochs by different algorithms that cut through, give way to, or lie
+  over each other. Then a <b>topography</b>, either fitted to that grid (mountains rise where the city stops, passes
+  open where roads cross) or laid first from the poems’ needs. Then the poems <b>read the world</b>: is the chapel on a
+  shore, is the temple raised on its ruins, can you walk from the night beach up to the meadow and see the Light Gates,
+  does the Magic Ride climb a mountain road into first light, does the café see Atlantis across the water?</p>
+  <p class="note">No single score is climbed. The map below keeps one world per <i>kind</i> of world; the shelf keeps the
+  strangest ones, including those the poems reject — the step that leads somewhere rarely looks like where it leads.</p>
+  <div class="stats" id="stats"></div>
+  <div class="legend"><span><i style="background:#fff"></i>walk</span><span><i style="background:#ff3d6e"></i>the Magic Ride</span>
+    <span><i style="background:#c8281e"></i>fall · fly</span><span><i style="background:#555"></i>cut · dissolve</span><span><i style="background:#f6cc60;height:4px"></i>highway</span></div>
+
+  <h2>The niches</h2>
+  <p class="note">One world per niche: across, how much the grid is a lattice or a maze; down, how dry or drowned the
+  island is. Within a niche the poems’ reading decides. Tap any world to read it.</p>
+  <div class="mapwrap"><div class="yax">water: dry → drowned</div><div class="niches" id="niches"></div>
+    <div class="xax">grid: lattice → maze</div></div>
+
+  <h2>Stepping stones</h2>
+  <p class="note">The least familiar worlds of the run, kept for being unlike the rest — read them for what they give
+  the poems that the “good” worlds don’t.</p>
+  <div class="shelf" id="shelf"></div>
+
+  <h2>Every world grown</h2>
+  <p class="note">Each dot is a world: position = its niche coordinates, colour = how much of the poems it holds
+  (dark → gold), ring = kept in the archive.</p>
+  <canvas id="scatter" width="1100" height="420"></canvas>
+</main>
+
+<div id="detail"><div class="in">
+  <div class="top"><div><div class="k" id="dk"></div><div id="dt" style="font-size:22px"></div></div>
+    <div><button id="bmap" class="on">MAP</button> <button id="bpal">PALIMPSEST</button> <button id="bclose">CLOSE ✕</button></div></div>
+  <div class="dgrid">
+    <div>
+      <img id="dimg" alt="">
+      <div class="sum" id="dsum"></div>
+      <h3 style="font-weight:400;margin-top:10px">Recipe</h3>
+      <ol class="recipe" id="drec"></ol>
+      <h3 style="font-weight:400;margin-top:16px">Ablation — remove one epoch, regrow, re-read</h3>
+      <div id="dabl"></div>
+      <h3 style="font-weight:400;margin-top:16px">Lineage</h3>
+      <div class="lin" id="dlin"></div>
+      <h3 style="font-weight:400;margin-top:16px">Genome</h3>
+      <pre id="dgen"></pre>
+    </div>
+    <div><h3 style="font-weight:400">The reading</h3><div id="dread"></div></div>
+  </div>
+</div></div>
+
+<script type="module">
+const $ = id => document.getElementById(id);
+const A = await fetch('archive.json').then(r => r.json());
+const Wd = A.worlds;
+const pct = v => Math.round(v * 100) + '%';
+$('stats').innerHTML = [
+  [A.n_worlds, 'worlds grown'], [A.gens, 'generations'], [A.elites.length, 'niches held'], [A.shelf.length, 'stepping stones'],
+  [pct(Math.max(...Object.values(Wd).map(w => w.r.score))), 'best reading']
+].map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join('');
+// niches
+const [BX, BY] = A.bins;
+const ni = $('niches'); ni.style.gridTemplateColumns = `repeat(${BX},1fr)`;
+for (let y = 0; y < BY; y++) for (let x = 0; x < BX; x++) {
+  const key = `${x},${y}`;
+  const id = A.elites.includes(key) ? Object.values(Wd).filter(w => w.cell === key)
+    .sort((a, b) => b.r.score - a.r.score || b.nov - a.nov)[0] : null;
+  const c = document.createElement('div'); c.className = 'cell' + (id ? '' : ' empty');
+  if (id) { c.innerHTML = `<img loading="lazy" src="w/${id.id}.jpg" alt=""><span class="badge">${pct(id.r.score)}</span>`; c.onclick = () => open(id.id); }
+  ni.appendChild(c);
+}
+// shelf
+for (const id of A.shelf) {
+  const w = Wd[id]; if (!w) continue;
+  const c = document.createElement('div'); c.className = 'card';
+  c.innerHTML = `<img loading="lazy" src="w/${id}.jpg" alt=""><div><b>${id}</b> · reads ${pct(w.r.score)} · novelty ${w.nov.toFixed(2)}<br>${w.g.layout} · ${w.g.topo} · ${w.g.layers.map(l => l.alg).join(' / ')}</div>`;
+  c.onclick = () => open(id); $('shelf').appendChild(c);
+}
+// scatter
+{
+  const cv = $('scatter'), x = cv.getContext('2d'), Wc = cv.width, Hc = cv.height;
+  x.fillStyle = '#a99f86'; x.font = '11px Helvetica';
+  x.fillText('lattice', 8, Hc - 8); x.textAlign = 'right'; x.fillText('maze', Wc - 8, Hc - 8); x.textAlign = 'left'; x.fillText('dry', 8, 14); x.fillText('drowned', 8, Hc - 24);
+  const gold = s => `rgb(${40 + 215 * s | 0},${30 + 180 * s | 0},${20 + 43 * s | 0})`;
+  for (const w of A.all) {
+    const px = 20 + (w.organic - 0.35) / 0.65 * (Wc - 40), py = 20 + Math.min(1, w.water / 0.6) * (Hc - 50);
+    x.fillStyle = gold(w.score); x.beginPath(); x.arc(px, py, 3.2, 0, 7); x.fill();
+    if (Wd[w.id]) { x.strokeStyle = '#ffd23f'; x.lineWidth = 1.3; x.beginPath(); x.arc(px, py, 6, 0, 7); x.stroke(); }
+  }
+  cv.onclick = e => {
+    const r = cv.getBoundingClientRect(), mx = (e.clientX - r.left) * Wc / r.width, my = (e.clientY - r.top) * Hc / r.height;
+    let best = null, bd = 14;
+    for (const w of A.all) {
+      if (!Wd[w.id]) continue;
+      const px = 20 + (w.organic - 0.35) / 0.65 * (Wc - 40), py = 20 + Math.min(1, w.water / 0.6) * (Hc - 50);
+      const d = Math.hypot(px - mx, py - my); if (d < bd) { bd = d; best = w.id; }
+    }
+    if (best) open(best);
+  };
+}
+// detail
+let cur = null, view = 'map';
+function setView(v) { view = v; $('bmap').classList.toggle('on', v === 'map'); $('bpal').classList.toggle('on', v === 'pal'); if (cur) $('dimg').src = `w/${cur}${v === 'pal' ? '-p' : ''}.jpg`; }
+$('bmap').onclick = () => setView('map'); $('bpal').onclick = () => setView('pal');
+$('bclose').onclick = () => { $('detail').classList.remove('on'); history.replaceState(null, '', location.pathname); };
+addEventListener('keydown', e => { if (e.key === 'Escape') $('bclose').onclick(); });
+function open(id) {
+  const w = Wd[id]; if (!w) return;
+  cur = id; setView(view);
+  $('dk').textContent = `${id} · generation ${w.gen} · niche ${w.cell}`;
+  $('dt').textContent = `${w.g.layout} · ${w.g.topo === 'gridfit' ? 'grid first' : 'land first'} · ${w.g.layers.length} epochs`;
+  $('dsum').innerHTML = `<span><b>${pct(w.r.score)}</b>of the poems’ needs held</span><span><b>${pct(w.r.kinds.film)}</b>film</span><span><b>${pct(w.r.kinds.game)}</b>game</span><span><b>${pct(w.r.kinds.map)}</b>map</span><span><b>${w.nov.toFixed(2)}</b>novelty</span><span><b>${w.d.street_km}</b>km of street</span>`;
+  $('drec').innerHTML = w.recipe.map(r => `<li>${r}</li>`).join('');
+  $('dread').innerHTML = Object.entries(A.poems).map(([n, p]) => {
+    const ts = w.r.poems[n] || [], held = w.r.by_poem[n];
+    return `<div class="poem"><h4><span class="n">${n}</span>${p.title}<span class="z">${{B: 'Baltimere', C: 'the Center', A: 'Atlantis'}[p.zone]}${p.mode ? ' · then ' + p.mode : ''}</span></h4>
+      ${p.line ? `<div class="line">“${p.line}”</div>` : ''}<div class="bar"><i style="width:${held * 100}%"></i></div>
+      ${ts.map(t => `<div class="t ${t.ok ? 'ok' : 'no'}">${t.text}<span class="kind">${t.kind}</span></div>`).join('')}</div>`;
+  }).join('');
+  $('dabl').innerHTML = (w.ablation && w.ablation.length) ? w.ablation.map(a => {
+    const L = w.g.layers[a.layer], cls = a.score < 0 ? 'neg' : a.score > 0 ? 'pos' : '';
+    return `<div class="abl">without epoch ${a.layer + 1} (${L.alg} over ${{B: 'Baltimere', C: 'the Center', A: 'Atlantis', all: 'the island'}[L.zone]}): <span class="d ${cls}">${a.score > 0 ? '+' : ''}${Math.round(a.score * 100)} pts</span>
+      ${a.flips.slice(0, 5).map(f => `<div class="f">${f.gained ? 'gains' : 'loses'} · poem ${f.poem}: ${f.gained ? f.now : f.was}</div>`).join('')}</div>`;
+  }).join('') : '<div class="note">(ablated only for the best-read worlds)</div>';
+  const chain = []; let p = w;
+  while (p && p.parents && p.parents.length && chain.length < 10) { const q = Wd[p.parents[0]]; if (!q) { chain.push(p.parents[0]); break; } chain.push(q.id); p = q; }
+  $('dlin').innerHTML = chain.length ? chain.map(c => Wd[c] ? `<img src="w/${c}.jpg" title="${c}" onclick="window.__open('${c}')">` : `<span class="note">${c} (not kept)</span>`).join('') : '<span class="note">a first-generation world</span>';
+  $('dgen').textContent = JSON.stringify(w.g, null, 1);
+  $('detail').classList.add('on'); $('detail').scrollTop = 0;
+  history.replaceState(null, '', '#' + id);
+}
+window.__open = open;
+if (location.hash.length > 1) open(location.hash.slice(1));
+</script>
+</body>
+</html>

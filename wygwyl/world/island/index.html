@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>The Island · WYGWYL</title>
+<style>
+:root{--ink:#f3ead2;--dim:#a99f86;--gold:#ffd23f;--pink:#ff3d6e;--panel:rgba(12,14,18,.82);--edge:rgba(243,234,210,.22)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0b1118;color:var(--ink);font:14px/1.45 "Iowan Old Style",Palatino,Georgia,serif;overflow:hidden;touch-action:none}
+.sans{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+canvas#gl{position:fixed;inset:0;width:100%;height:100%;display:block}
+#hud{position:fixed;left:14px;top:12px;pointer-events:none;text-shadow:0 1px 3px #000}
+#hud .place{font-size:20px;letter-spacing:.02em}
+#hud .region{font:600 11px/1.3 "Helvetica Neue",Arial,sans-serif;letter-spacing:.18em;color:var(--gold);text-transform:uppercase}
+#hud .speed{font:600 12px "Helvetica Neue",Arial,sans-serif;color:var(--dim);margin-top:2px}
+#mini{position:fixed;right:14px;bottom:14px;width:200px;height:200px;border-radius:50%;border:2px solid var(--edge);
+  box-shadow:0 4px 20px rgba(0,0,0,.6);background:#123;cursor:pointer}
+#toast{position:fixed;left:50%;top:18%;transform:translateX(-50%);max-width:min(560px,92vw);text-align:center;
+  background:var(--panel);border:1px solid var(--edge);padding:14px 20px;opacity:0;transition:opacity .6s;pointer-events:none}
+#toast.on{opacity:1}
+#toast .n{font:700 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.2em;color:var(--gold)}
+#toast .t{font-size:24px;margin:2px 0}
+#toast .l{color:var(--dim);font-style:italic}
+#labels{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.sp{position:absolute;transform:translate(-50%,-100%);white-space:nowrap;font:600 11px "Helvetica Neue",Arial,sans-serif;
+  color:#fff;background:rgba(150,40,30,.85);padding:2px 6px;border-radius:2px}
+.sp::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-4px;border:4px solid transparent;border-top-color:rgba(150,40,30,.85)}
+.pm{position:absolute;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:#121008;border:2px solid var(--gold);
+  color:var(--gold);font:700 12px/22px "Helvetica Neue",Arial,sans-serif;text-align:center}
+#map{position:fixed;inset:0;background:rgba(6,8,10,.92);display:none;align-items:center;justify-content:center;flex-direction:column;gap:8px;padding:12px}
+#map.on{display:flex}
+#mapwrap{position:relative;max-width:96vw;max-height:84vh}
+#mapimg{display:block;max-width:96vw;max-height:84vh}
+#mapwrap .pm{pointer-events:auto;cursor:pointer;width:22px;height:22px;line-height:18px;font-size:11px}
+#mapwrap .me{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 3px rgba(255,61,110,.35)}
+#map .hint{color:var(--dim);font-size:12px}
+#start{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 40%,rgba(20,24,30,.7),rgba(6,8,10,.96))}
+#start .card{max-width:min(620px,92vw);padding:28px;text-align:center}
+#start h1{font-size:clamp(26px,5vw,40px);font-weight:400;letter-spacing:.02em}
+#start .k{font:700 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.24em;color:var(--gold)}
+#start p{color:var(--dim);margin:12px 0}
+#start button,#bar button{background:transparent;color:var(--ink);border:1px solid var(--ink);padding:10px 22px;font:600 12px "Helvetica Neue",Arial,sans-serif;letter-spacing:.18em;cursor:pointer}
+#start button:disabled{opacity:.4}
+#bar{position:fixed;left:14px;bottom:14px;display:flex;gap:6px}
+#bar button{padding:7px 10px;font-size:10px;background:var(--panel);border-color:var(--edge)}
+#touch{position:fixed;inset:auto 0 0 0;height:42%;display:none;pointer-events:none}
+#touch .b{position:absolute;bottom:24px;width:68px;height:68px;border-radius:50%;border:1px solid var(--edge);background:rgba(12,14,18,.45);
+  pointer-events:auto;color:var(--dim);font:700 18px "Helvetica Neue",Arial,sans-serif;display:flex;align-items:center;justify-content:center;user-select:none}
+.touchy #touch{display:block}
+.touchy #mini{width:130px;height:130px;top:12px;bottom:auto}
+.touchy #bar{bottom:auto;top:84px}
+#credit{position:fixed;right:14px;top:10px;font-size:10px;color:var(--dim);text-align:right;max-width:46vw;text-shadow:0 1px 2px #000}
+.touchy #credit{display:none}
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div id="labels"></div>
+<div id="hud"><div class="region" id="hreg">—</div><div class="place" id="hplace">loading the island…</div><div class="speed sans" id="hspd"></div></div>
+<canvas id="mini" width="400" height="400" title="map (M)"></canvas>
+<div id="toast"><div class="n" id="tn"></div><div class="t" id="tt"></div><div class="l" id="tl"></div></div>
+<div id="bar"><button id="bmap">MAP · M</button><button id="bcam">CAMERA · C</button><button id="bread">READING · R</button></div>
+<div id="credit" class="sans">© OpenStreetMap contributors (ODbL) · elevation Mapzen/AWS Terrain Tiles<br>real places, compressed — the island between them grown</div>
+<div id="touch"><div class="b" id="tl_" style="left:18px">◀</div><div class="b" id="tr_" style="left:100px">▶</div>
+  <div class="b" id="tb_" style="right:100px">▼</div><div class="b" id="tg_" style="right:18px;color:var(--gold)">▲</div></div>
+<div id="map"><div id="mapwrap"><img id="mapimg" alt="the island"></div><div class="hint sans">tap a number to travel there · M or tap outside to close</div></div>
+<div id="start"><div class="card">
+  <div class="k">WHERE YOU GO WHEN YOU LEAVE</div>
+  <h1>The Island</h1>
+  <p>Fourteen poems, ten real places — Baltimore's Mount Vernon and its harbour, a drowned chapel island, an ocean beach,
+  the Avenue of the Dead, the Light Gates of Mexico City, the pass on the Magic Ride — carried here intact. The land, the
+  streets and the valleys between them are the real ones, compressed. Drive the journey.</p>
+  <p class="sans" style="font-size:12px">WASD / arrows to drive · M map · C camera · R replay the reading</p>
+  <button id="go" disabled>LOADING…</button>
+</div></div>
+
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+
+const $ = id => document.getElementById(id);
+const touchy = matchMedia('(pointer:coarse)').matches;
+if (touchy) document.body.classList.add('touchy');
+
+const say = t => { $('hplace').textContent = t; $('go').textContent = t.toUpperCase(); };
+function fail(msg) {
+  say('could not load');
+  $('go').textContent = 'COULD NOT LOAD';
+  const p = document.createElement('p'); p.className = 'sans'; p.style.cssText = 'color:#ff3d6e;font-size:12px';
+  p.textContent = location.protocol === 'file:'
+    ? 'This page reads its data with fetch(), which browsers block on file:// — open it through a web server (the published link, or `python3 -m http.server` in wygwyl/).'
+    : msg;
+  document.querySelector('#start .card').appendChild(p);
+  throw new Error(msg);
+}
+addEventListener('error', e => fail(String(e.message || e)));
+addEventListener('unhandledrejection', e => fail(String(e.reason && e.reason.message || e.reason)));
+let got = 0;
+const load = (u, kind) => fetch(u).then(r => { if (!r.ok) throw new Error(u + ' → ' + r.status); return r[kind](); })
+  .then(v => { say(`loading the island · ${++got}/5`); return v; });
+const [meta, hbuf, blds, trees, roads] = await Promise.all([
+  load('meta.json', 'json'), load('height.bin', 'arrayBuffer'), load('buildings.json', 'json'),
+  load('trees.json', 'json'), load('roads.json', 'json'),
+]).catch(e => fail(e.message));
+say('raising the ground');
+const {W, H, cell: CELL, nx: NX, ny: NY} = meta;
+const HT = new Int16Array(hbuf);
+const hAt = (x, y) => {
+  const fx = x / CELL, fy = y / CELL, i = Math.floor(fx), j = Math.floor(fy);
+  if (i < 0 || j < 0 || i >= NX - 1 || j >= NY - 1) return -40;
+  const tx = fx - i, ty = fy - j, o = j * NX + i;
+  return ((HT[o] * (1 - tx) + HT[o + 1] * tx) * (1 - ty) + (HT[o + NX] * (1 - tx) + HT[o + NX + 1] * tx) * ty) / 10;
+};
+
+// ── renderer, scene ──
+const renderer = new THREE.WebGLRenderer({canvas: $('gl'), antialias: !touchy, powerPreference: 'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio, touchy ? 1.5 : 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+const scene = new THREE.Scene();
+const SKY = new THREE.Color(0xc9d6dc);
+scene.background = SKY;
+scene.fog = new THREE.Fog(SKY, 600, 3200);
+const camera = new THREE.PerspectiveCamera(60, 1, 0.5, 9000);
+scene.add(new THREE.HemisphereLight(0xeef4ff, 0x5a5040, 1.15));
+const sun = new THREE.DirectionalLight(0xfff1d8, 1.6);
+sun.position.set(-0.5, 0.8, -0.35);
+scene.add(sun);
+function resize() {
+  renderer.setSize(innerWidth, innerHeight, false);
+  camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize); resize();
+
+// ── terrain: 16 m mesh draped with the painted ground ──
+const STEP = 2, TX = Math.floor((NX - 1) / STEP) + 1, TY = Math.floor((NY - 1) / STEP) + 1;
+{
+  const pos = new Float32Array(TX * TY * 3), uv = new Float32Array(TX * TY * 2);
+  for (let j = 0; j < TY; j++) for (let i = 0; i < TX; i++) {
+    const k = j * TX + i, x = i * STEP * CELL, y = j * STEP * CELL;
+    pos[k * 3] = x; pos[k * 3 + 1] = HT[(j * STEP) * NX + i * STEP] / 10; pos[k * 3 + 2] = y;
+    uv[k * 2] = x / W; uv[k * 2 + 1] = 1 - y / H;
+  }
+  const idx = new Uint32Array((TX - 1) * (TY - 1) * 6);
+  let n = 0;
+  for (let j = 0; j < TY - 1; j++) for (let i = 0; i < TX - 1; i++) {
+    const a = j * TX + i, b = a + 1, c = a + TX, d = c + 1;
+    idx[n++] = a; idx[n++] = c; idx[n++] = b; idx[n++] = b; idx[n++] = c; idx[n++] = d;
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  g.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+  g.setIndex(new THREE.BufferAttribute(idx, 1));
+  g.computeVertexNormals();
+  const tex = await new THREE.TextureLoader().loadAsync('ground.jpg');
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  scene.add(new THREE.Mesh(g, new THREE.MeshLambertMaterial({map: tex})));
+  $('mapimg').src = 'minimap.jpg';
+}
+// the sea
+{
+  const g = new THREE.PlaneGeometry(W * 3, H * 3); g.rotateX(-Math.PI / 2); g.translate(W / 2, -0.35, H / 2);
+  scene.add(new THREE.Mesh(g, new THREE.MeshLambertMaterial({color: 0x4f8ea6, transparent: true, opacity: 0.82})));
+}
+
+// ── buildings: one merged mesh, walls + roofs ──
+const KCOL = [[0.72, 0.68, 0.62], [0.80, 0.76, 0.69], [0.82, 0.73, 0.62], [0.76, 0.66, 0.55]];
+const grid = new Map(), GC = 40;                  // collision hash
+const polys = [];
+{
+  const P = [], C = [];
+  const push = (x, y, z, c) => { P.push(x, y, z); C.push(c[0], c[1], c[2]); };
+  for (const b of blds) {
+    const h = b[0], col = KCOL[b[1]] || KCOL[0];
+    let pts = [];
+    for (let k = 2; k < b.length; k += 2) pts.push([b[k], b[k + 1]]);
+    if (pts.length > 3 && pts[0][0] === pts.at(-1)[0] && pts[0][1] === pts.at(-1)[1]) pts.pop();
+    if (pts.length < 3) continue;
+    let base = Infinity;
+    for (const [x, y] of pts) base = Math.min(base, hAt(x, y));
+    if (base < -0.5) continue;
+    const top = base + h, bot = base - 3;
+    const area = pts.reduce((s, p, i) => { const q = pts[(i + 1) % pts.length]; return s + p[0] * q[1] - q[0] * p[1]; }, 0);
+    if (area < 0) pts.reverse();
+    const wc = col.map(v => v * 0.86), rc = col.map(v => v * 1.04);
+    for (let i = 0; i < pts.length; i++) {
+      const [x0, y0] = pts[i], [x1, y1] = pts[(i + 1) % pts.length];
+      const s = 0.82 + 0.18 * Math.abs(Math.sin(Math.atan2(y1 - y0, x1 - x0) + 0.6));
+      const c = wc.map(v => v * s);
+      push(x0, bot, y0, c); push(x1, top, y1, c); push(x1, bot, y1, c);
+      push(x0, bot, y0, c); push(x0, top, y0, c); push(x1, top, y1, c);
+    }
+    const tri = THREE.ShapeUtils.triangulateShape(pts.map(p => new THREE.Vector2(p[0], p[1])), []);
+    for (const [a, b2, c2] of tri) {
+      push(pts[a][0], top, pts[a][1], rc); push(pts[c2][0], top, pts[c2][1], rc); push(pts[b2][0], top, pts[b2][1], rc);
+    }
+    const bb = [Infinity, Infinity, -Infinity, -Infinity];
+    for (const [x, y] of pts) { bb[0] = Math.min(bb[0], x); bb[1] = Math.min(bb[1], y); bb[2] = Math.max(bb[2], x); bb[3] = Math.max(bb[3], y); }
+    const id = polys.push({pts, bb}) - 1;
+    for (let gx = Math.floor(bb[0] / GC); gx <= Math.floor(bb[2] / GC); gx++)
+      for (let gy = Math.floor(bb[1] / GC); gy <= Math.floor(bb[3] / GC); gy++) {
+        const key = gx * 10000 + gy; (grid.get(key) || grid.set(key, []).get(key)).push(id);
+      }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(P, 3));
+  g.setAttribute('color', new THREE.Float32BufferAttribute(C, 3));
+  g.computeVertexNormals();
+  scene.add(new THREE.Mesh(g, new THREE.MeshLambertMaterial({vertexColors: true, side: THREE.DoubleSide})));
+}
+const inPoly = (x, y, pts) => {
+  let c = false;
+  for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+    const [xi, yi] = pts[i], [xj, yj] = pts[j];
+    if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) c = !c;
+  }
+  return c;
+};
+const hitsBuilding = (x, y) => {
+  const ids = grid.get(Math.floor(x / GC) * 10000 + Math.floor(y / GC));
+  if (!ids) return false;
+  for (const id of ids) { const p = polys[id]; if (x >= p.bb[0] && x <= p.bb[2] && y >= p.bb[1] && y <= p.bb[3] && inPoly(x, y, p.pts)) return true; }
+  return false;
+};
+
+// ── trees ──
+{
+  const crown = new THREE.ConeGeometry(1, 1, 7); crown.translate(0, 0.5, 0);
+  const m = new THREE.InstancedMesh(crown, new THREE.MeshLambertMaterial({color: 0x4c6a3e}), trees.length);
+  const o = new THREE.Object3D(), c = new THREE.Color();
+  trees.forEach(([x, y, h], i) => {
+    o.position.set(x, hAt(x, y) - 0.5, y); o.scale.set(h * 0.32, h, h * 0.32); o.updateMatrix(); m.setMatrixAt(i, o.matrix);
+    c.setHSL(0.26 + Math.random() * 0.06, 0.32, 0.26 + Math.random() * 0.1); m.setColorAt(i, c);
+  });
+  scene.add(m);
+}
+
+// ── highways as crisp ribbons; bridge decks ──
+function ribbon(pts, zs, w, color, lift) {
+  const P = [], I = [];
+  for (let i = 0; i < pts.length; i++) {
+    const a = pts[Math.max(0, i - 1)], b = pts[Math.min(pts.length - 1, i + 1)];
+    let dx = b[0] - a[0], dy = b[1] - a[1]; const L = Math.hypot(dx, dy) || 1; dx /= L; dy /= L;
+    const [x, y] = pts[i], z = (zs ? zs[i] : hAt(x, y)) + lift;
+    P.push(x - dy * w / 2, z, y + dx * w / 2, x + dy * w / 2, z, y - dx * w / 2);
+    if (i) { const k = i * 2; I.push(k - 2, k, k - 1, k - 1, k, k + 1); }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(P, 3)); g.setIndex(I); g.computeVertexNormals();
+  const mesh = new THREE.Mesh(g, new THREE.MeshLambertMaterial({color, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -2}));
+  scene.add(mesh); return mesh;
+}
+const bridgeSegs = [];
+for (const hw of roads.highways) {
+  const zs = hw.pts.map(([x, y], i) => Math.max(hAt(x, y), Math.min(hw.z[i], hAt(x, y) + 0.3)));
+  ribbon(hw.pts, zs, 15, 0x5b5650, 0.25);
+}
+for (const br of roads.bridges) {
+  const pts = br.map(p => [p[0], p[1]]), zs = br.map(p => p[2]);
+  ribbon(pts, zs, 16, 0x8a7f72, 0.4);
+  for (let i = 0; i < br.length; i += 4) {
+    const [x, y, z] = br[i], g0 = Math.min(hAt(x, y), 0);
+    if (z - g0 > 2) { const m = new THREE.Mesh(new THREE.BoxGeometry(2.5, z - g0, 2.5), new THREE.MeshLambertMaterial({color: 0x6f665c})); m.position.set(x, (z + g0) / 2, y); scene.add(m); }
+  }
+  for (let i = 1; i < br.length; i++) bridgeSegs.push([br[i - 1], br[i]]);
+}
+const onBridge = (x, y) => {
+  for (const [a, b] of bridgeSegs) {
+    const dx = b[0] - a[0], dy = b[1] - a[1], L2 = dx * dx + dy * dy || 1;
+    const t = Math.max(0, Math.min(1, ((x - a[0]) * dx + (y - a[1]) * dy) / L2));
+    if (Math.hypot(x - a[0] - dx * t, y - a[1] - dy * t) < 9) return a[2] + (b[2] - a[2]) * t + 0.4;
+  }
+  return null;
+};
+
+// ── the car ──
+const car = new THREE.Group();
+{
+  const body = new THREE.Mesh(new THREE.BoxGeometry(2, 0.9, 4.4), new THREE.MeshLambertMaterial({color: 0xb5332a}));
+  body.position.y = 0.75; car.add(body);
+  const cab = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.7, 2.2), new THREE.MeshLambertMaterial({color: 0x1d2329}));
+  cab.position.set(0, 1.45, -0.2); car.add(cab);
+  const lamp = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.2, 0.1), new THREE.MeshBasicMaterial({color: 0xfff3c0}));
+  lamp.position.set(0, 0.85, -2.22); car.add(lamp);
+}
+scene.add(car);
+const S = {x: 0, y: 0, hd: 0, v: 0, z: 0, cam: 0, last: [0, 0]};
+
+// ── poems, set pieces, places ──
+const poems = meta.poems;
+const cores = meta.regions.flatMap(r => r.cores.map(c => ({...c, region: r.name})));
+const labels = $('labels');
+const spEls = [];
+for (const p of poems) {
+  const pm = document.createElement('div'); pm.className = 'pm'; pm.textContent = +p.num; labels.appendChild(pm);
+  spEls.push({el: pm, x: p.x, y: p.y, lift: 14, range: 2200});
+  for (const s of p.set_pieces) {
+    const el = document.createElement('div'); el.className = 'sp'; el.textContent = s.name; labels.appendChild(el);
+    spEls.push({el, x: s.x, y: s.y, lift: 6, range: 480});
+  }
+}
+const v3 = new THREE.Vector3();
+function drawLabels() {
+  for (const s of spEls) {
+    const d = Math.hypot(s.x - S.x, s.y - S.y);
+    if (d > s.range) { s.el.style.display = 'none'; continue; }
+    v3.set(s.x, hAt(s.x, s.y) + s.lift, s.y).project(camera);
+    if (v3.z > 1 || Math.abs(v3.x) > 1.1 || Math.abs(v3.y) > 1.1) { s.el.style.display = 'none'; continue; }
+    s.el.style.display = 'block';
+    s.el.style.left = ((v3.x + 1) / 2 * innerWidth) + 'px';
+    s.el.style.top = ((1 - v3.y) / 2 * innerHeight) + 'px';
+    s.el.style.opacity = Math.max(0.25, 1 - d / s.range);
+  }
+}
+
+// readings
+const audio = new Audio(); audio.preload = 'none';
+let current = null, toastT = 0;
+function arrive(p) {
+  current = p;
+  $('tn').textContent = 'POEM ' + p.num + ' · ' + p.place.toUpperCase();
+  $('tt').textContent = p.title;
+  $('tl').textContent = (p.set_pieces[0] && p.set_pieces[0].line) ? '“' + p.set_pieces[0].line + '”' : p.note || '';
+  $('toast').classList.add('on'); toastT = performance.now();
+  if (p.reading) { audio.src = '../../' + p.reading; audio.play().catch(() => {}); }
+}
+let visited = new Set();
+function checkPoems() {
+  for (const p of poems) {
+    const d = Math.hypot(p.x - S.x, p.y - S.y);
+    if (d < 70 && current !== p) arrive(p);
+  }
+  if (current && Math.hypot(current.x - S.x, current.y - S.y) > 400) current = null;
+  if (performance.now() - toastT > 7000) $('toast').classList.remove('on');
+}
+function whereAmI() {
+  let best = null, bd = Infinity;
+  for (const c of cores) { const d = Math.hypot(c.x - S.x, c.y - S.y) - c.r; if (d < bd) { bd = d; best = c; } }
+  let reg = 'THE ISLAND', place = 'the country between';
+  if (best && bd < 0) { reg = best.region; place = best.name.toLowerCase().replace(/(^|[\s,])(\w)/g, (m, a, b) => a + b.toUpperCase()); }
+  else if (best && bd < 900) { reg = best.region; place = 'the in-between · real streets, compressed'; }
+  if (hAt(S.x, S.y) < 0 && !onBridge(S.x, S.y)) place = 'in the water';
+  $('hreg').textContent = reg; $('hplace').textContent = place;
+}
+
+// ── minimap ──
+const mini = $('mini'), mctx = mini.getContext('2d');
+const mimg = new Image(); mimg.src = 'minimap.jpg';
+function drawMini() {
+  const Wp = mini.width, sc = mimg.width / W, zoom = 0.11;   // metres → minimap px, then zoom
+  mctx.save();
+  mctx.clearRect(0, 0, Wp, Wp);
+  mctx.beginPath(); mctx.arc(Wp / 2, Wp / 2, Wp / 2, 0, Math.PI * 2); mctx.clip();
+  mctx.fillStyle = '#3d7d97'; mctx.fillRect(0, 0, Wp, Wp);
+  mctx.translate(Wp / 2, Wp / 2); mctx.rotate(-S.hd - Math.PI);
+  const k = Wp / (zoom * W * sc) / 3.4;
+  mctx.scale(k, k);
+  if (mimg.complete) mctx.drawImage(mimg, -S.x * sc, -S.y * sc);
+  for (const p of poems) {
+    mctx.save(); mctx.translate((p.x - S.x) * sc, (p.y - S.y) * sc); mctx.rotate(S.hd + Math.PI);
+    mctx.fillStyle = '#121008'; mctx.strokeStyle = '#ffd23f'; mctx.lineWidth = 2 / k;
+    mctx.beginPath(); mctx.arc(0, 0, 11 / k, 0, Math.PI * 2); mctx.fill(); mctx.stroke();
+    mctx.fillStyle = '#ffd23f'; mctx.font = `700 ${12 / k}px Helvetica`; mctx.textAlign = 'center'; mctx.textBaseline = 'middle';
+    mctx.fillText(+p.num, 0, 0.5 / k); mctx.restore();
+  }
+  mctx.restore();
+  mctx.fillStyle = '#ff3d6e'; mctx.beginPath();
+  mctx.moveTo(Wp / 2, Wp / 2 - 12); mctx.lineTo(Wp / 2 + 8, Wp / 2 + 9); mctx.lineTo(Wp / 2 - 8, Wp / 2 + 9); mctx.fill();
+  const na = -S.hd - Math.PI;                                // north marker
+  mctx.fillStyle = '#fff'; mctx.font = '700 22px Georgia'; mctx.textAlign = 'center'; mctx.textBaseline = 'middle';
+  mctx.fillText('N', Wp / 2 + Math.sin(-na) * 0 + (Wp / 2 - 22) * Math.sin(na + Math.PI), Wp / 2 - (Wp / 2 - 22) * Math.cos(na + Math.PI) * -1 * -1);
+}
+
+// ── full map + fast travel ──
+const mapEl = $('map'), wrap = $('mapwrap');
+const meDot = document.createElement('div'); meDot.className = 'me'; wrap.appendChild(meDot);
+for (const p of poems) {
+  const b = document.createElement('div'); b.className = 'pm'; b.textContent = +p.num; b.title = p.title + ' — ' + p.place;
+  b.style.left = (p.x / W * 100) + '%'; b.style.top = (p.y / H * 100) + '%';
+  b.onclick = e => { e.stopPropagation(); travel(p); toggleMap(false); };
+  wrap.appendChild(b);
+}
+function toggleMap(on) {
+  on = on ?? !mapEl.classList.contains('on');
+  mapEl.classList.toggle('on', on);
+  meDot.style.left = (S.x / W * 100) + '%'; meDot.style.top = (S.y / H * 100) + '%';
+}
+mapEl.onclick = () => toggleMap(false);
+$('bmap').onclick = () => toggleMap(); mini.onclick = () => toggleMap();
+$('bcam').onclick = () => S.cam = (S.cam + 1) % 3;
+$('bread').onclick = () => { const p = current || nearestPoem(); if (p) arrive(p); };
+const nearestPoem = () => poems.reduce((a, p) => Math.hypot(p.x - S.x, p.y - S.y) < Math.hypot(a.x - S.x, a.y - S.y) ? p : a, poems[0]);
+
+const roadPts = [];
+for (const r of [...roads.streets, ...roads.highways]) {
+  if (r.k === 'lane') continue;
+  for (let i = 1; i < r.pts.length; i++) roadPts.push([r.pts[i - 1], r.pts[i]]);
+}
+function travel(p) {
+  // set down on the nearest street that has room, facing along it
+  let best = null, bd = Infinity;
+  for (const [a, b] of roadPts) {
+    const dx = b[0] - a[0], dy = b[1] - a[1], L2 = dx * dx + dy * dy || 1;
+    const t = Math.max(0, Math.min(1, ((p.x - a[0]) * dx + (p.y - a[1]) * dy) / L2));
+    const x = a[0] + dx * t, y = a[1] + dy * t, d = Math.hypot(x - p.x, y - p.y);
+    if (d < bd && hAt(x, y) > 0.3 && !hitsBuilding(x, y)) { bd = d; best = {x, y, hd: Math.atan2(dx, -dy)}; }
+  }
+  if (!best) best = {x: p.x, y: p.y, hd: 0};
+  S.x = best.x; S.y = best.y; S.hd = best.hd; S.v = 0; S.last = [S.x, S.y];
+  const s = p.set_pieces[1] || p.set_pieces[0];
+  if (s) { const want = Math.atan2(s.x - S.x, -(s.y - S.y)); if (Math.cos(want - S.hd) < 0) S.hd += Math.PI; }
+  current = null;
+}
+
+// ── input ──
+const K = {};
+addEventListener('keydown', e => {
+  K[e.key.toLowerCase()] = true;
+  if (e.key === 'm' || e.key === 'M') toggleMap();
+  if (e.key === 'c' || e.key === 'C') S.cam = (S.cam + 1) % 3;
+  if (e.key === 'r' || e.key === 'R') $('bread').onclick();
+  if (e.key === 'Escape') toggleMap(false);
+});
+addEventListener('keyup', e => K[e.key.toLowerCase()] = false);
+const T = {};
+for (const [id, k] of [['tl_', 'l'], ['tr_', 'r'], ['tg_', 'g'], ['tb_', 'b']]) {
+  const el = $(id);
+  el.addEventListener('pointerdown', e => { T[k] = true; el.setPointerCapture(e.pointerId); });
+  el.addEventListener('pointerup', () => T[k] = false);
+  el.addEventListener('pointercancel', () => T[k] = false);
+}
+
+// ── physics: heading 0 = north (−y); forward = (sin hd, −cos hd) ──
+function step(dt) {
+  const gas = K['w'] || K['arrowup'] || T.g, brake = K['s'] || K['arrowdown'] || T.b;
+  const left = K['a'] || K['arrowleft'] || T.l, right = K['d'] || K['arrowright'] || T.r;
+  const fx = Math.sin(S.hd), fy = -Math.cos(S.hd);
+  const g0 = hAt(S.x, S.y), wet = g0 < 0 && onBridge(S.x, S.y) === null;
+  const slope = (hAt(S.x + fx * 3, S.y + fy * 3) - hAt(S.x - fx * 3, S.y - fy * 3)) / 6;
+  const vmax = wet ? 5 : (K['shift'] ? 60 : 38);
+  if (gas) S.v += (S.v < 0 ? 30 : 14) * dt;
+  if (brake) S.v -= (S.v > 0 ? 30 : 8) * dt;
+  S.v -= slope * 9.8 * dt * 0.6;
+  S.v *= Math.pow(wet ? 0.3 : 0.86, dt);
+  S.v = Math.max(-12, Math.min(vmax, S.v));
+  const steer = (left ? -1 : 0) + (right ? 1 : 0);
+  S.hd += steer * dt * Math.min(1.9, Math.abs(S.v) * 0.12) * Math.sign(S.v || 1) / (1 + Math.abs(S.v) * 0.02);
+  const nx = S.x + fx * S.v * dt, ny = S.y + fy * S.v * dt;
+  const probe = [[nx + fx * 2.2, ny + fy * 2.2], [nx - fx * 2.2, ny - fy * 2.2], [nx + fy * 1, ny - fx * 1], [nx - fy * 1, ny + fx * 1]];
+  if (probe.some(([x, y]) => hitsBuilding(x, y)) && onBridge(nx, ny) === null) { S.v *= -0.25; return; }
+  if (hAt(nx, ny) < -3.5 && onBridge(nx, ny) === null) { S.v = 0; S.x = S.last[0]; S.y = S.last[1]; return; }
+  if (nx < 20 || ny < 20 || nx > W - 20 || ny > H - 20) { S.v = 0; return; }
+  S.x = nx; S.y = ny;
+  if (hAt(S.x, S.y) > 0.5) S.last = [S.x, S.y];
+}
+
+let camPos = new THREE.Vector3(), camLook = new THREE.Vector3(), first = true;
+function place() {
+  const br = onBridge(S.x, S.y);
+  const gz = br !== null ? Math.max(br, hAt(S.x, S.y)) : Math.max(hAt(S.x, S.y), -1.1);
+  S.z += (gz - S.z) * (first ? 1 : 0.35);
+  const fx = Math.sin(S.hd), fy = -Math.cos(S.hd);
+  const pitch = Math.atan2(hAt(S.x + fx * 2, S.y + fy * 2) - hAt(S.x - fx * 2, S.y - fy * 2), 4);
+  const roll = Math.atan2(hAt(S.x - fy, S.y + fx) - hAt(S.x + fy, S.y - fx), 2);
+  car.position.set(S.x, S.z, S.y);
+  car.rotation.set(0, 0, 0); car.rotateY(-S.hd); car.rotateX(br !== null ? 0 : pitch); car.rotateZ(br !== null ? 0 : roll);
+  const [back, up, ahead] = [[13, 5.5, 10], [34, 18, 30], [5, 2.3, 30]][S.cam];
+  const want = new THREE.Vector3(S.x - fx * back, 0, S.y - fy * back);
+  want.y = Math.max(S.z + up, hAt(want.x, want.z) + 2.5);
+  const look = new THREE.Vector3(S.x + fx * ahead, S.z + 1.5, S.y + fy * ahead);
+  if (first) { camPos.copy(want); camLook.copy(look); first = false; }
+  camPos.lerp(want, 0.12); camLook.lerp(look, 0.2);
+  camera.position.copy(camPos); camera.lookAt(camLook);
+}
+
+// ── go ──
+travel(poems[0]);
+say('ready');
+$('go').disabled = false; $('go').textContent = 'DRIVE FROM THE SEVERN';
+let running = false;
+$('go').onclick = () => { $('start').style.display = 'none'; running = true; arrive(poems[0]); };
+let t0 = performance.now(), frame = 0;
+function loop(t) {
+  const dt = Math.min(0.05, (t - t0) / 1000); t0 = t;
+  if (running && !mapEl.classList.contains('on')) step(dt);
+  place();
+  if (running) checkPoems();
+  if (frame++ % 6 === 0) { whereAmI(); $('hspd').textContent = Math.round(Math.abs(S.v) * 3.6) + ' km/h'; }
+  drawLabels(); drawMini();
+  renderer.render(scene, camera);
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+window.__island = {S, travel, poems, hAt, meta};
+</script>
+</body>
+</html>
