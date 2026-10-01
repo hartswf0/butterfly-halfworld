@@ -56,3 +56,9 @@ renders/cut/
 # rather than gitignored, because an atlas with no plates is not an atlas — but
 # if they ever grow past what a repo should carry, this is the line to add:
 # AUDIO/plates/
+
+# merge.mjs builds this by laying our 94 shots on top of cineosis-lab's own
+# 15,149. It is 26MB, it is regenerable in one command, and most of it is
+# another project's data — which belongs in that project, not copied into this
+# one. The 94 records that are ours live in renders/cineosis/halfworld-shots.json.
+renders/cineosis/lab-data.merged.json
