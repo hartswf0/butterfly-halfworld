@@ -1,0 +1,430 @@
+{
+  "total_generations": 58,
+  "total_roots": 37,
+  "total_branches": 21,
+  "lineage_trees": [
+    {
+      "id": "2474f1b5-9758-48c9-b907-53b7efa5c6e7",
+      "prompt": "Establishing shot of POET in Dim Bedroom - Dim bedroom stasis, EX's detachment. POET's initial <You>\u2080.. Focus on the visual impact of: narrative progression. The scene's ambiance is Eerie green fog with a Film-noir grain style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16.",
+      "duration": 5,
+      "has_audio": false,
+      "children": [
+        {
+          "id": "a5a18f9d-b2b0-4a97-9c34-a9dbdf1717d5",
+          "prompt": "Overhead drone shot of POET in an unknown space - External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger.. Focus on the visual impact of: Subjective Frame Recalibration. The scene's ambiance is Pastel sunrise palette with a Lo-fi VHS aesthetic style. Use Smooth drone shot, framed as an asymmetrical composition, aspect ratio 9:16. Add flavor: like digital echoes.",
+          "duration": 9,
+          "has_audio": false,
+          "children": []
+        },
+        {
+          "id": "5321a933-701a-4a60-8931-e65097c00560",
+          "prompt": "[\n  {\n    \"id\": \"POET\",\n    \"type\": \"Character\",\n    \"name\": \"POET\",\n    \"traits\": [\n      \"Protagonist\",\n      \"Ego-Proxy\",\n      \"Transformer\",\n      \"Creator\",\n      \"Observer\"\n    ]\n  },\n  {\n    \"id\": \"EX\",\n    \"type\": \"Character\",\n    \"name\": \"EX\",\n    \"traits\": [\n      \"Antagonist-or-Catalyst\",\n      \"Unreachable\",\n      \"Elusive\",\n      \"Shadow-Projection\",\n      \"Past-Attachment\"\n    ]\n  },\n  {\n    \"id\": \"TV_CHAOS\",\n    \"type\": \"Object\",\n    \"name\": \"Television Screen\",\n    \"traits\": [\n      \"Source-of-External-Chaos\",\n      \"Reflection-of-Inner-Disorder\"\n    ]\n  },\n  {\n    \"id\": \"VAPE_HAZE\",\n    \"type\": \"Concept\",\n    \"name\": \"Vape Haze\",\n    \"traits\": [\n      \"Blurring-Agent\",\n      \"Obscuring-Perception\",\n      \"Symbol-of-Detachment\"\n    ]\n  }\n]",
+          "duration": 9,
+          "has_audio": false,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "7534249f-2feb-4ff5-a2de-c4520a30c9ee",
+      "prompt": "Establishing shot of POET in Dim Bedroom - Dim bedroom stasis, EX's detachment. POET's initial <You>\u2080.. Focus on the visual impact of: narrative progression. The scene's ambiance is Eerie green fog with a Film-noir grain style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16.",
+      "duration": 5,
+      "has_audio": false,
+      "children": [
+        {
+          "id": "e01016b7-73d1-4d6b-a499-f160dd81791b",
+          "prompt": "My journey brings me to Dim Bedroom, as \"External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger.\" unfolds before me. I am undergoing a Subjective Frame Recalibration, as aspects of myself : Disoriented. Through it all, I am becoming You_Falling (Engaging EX).",
+          "duration": 9,
+          "has_audio": false,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "0a69c776-b9de-4d1e-8e0a-cc8e9526baad",
+      "prompt": "Establishing shot of POET in Dim Bedroom - Dim bedroom stasis, EX's detachment. POET's initial <You>\u2080.. Focus on the visual impact of: narrative progression. The scene's ambiance is Eerie green fog with a Film-noir grain style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16. Add flavor:",
+      "duration": 5,
+      "has_audio": false,
+      "children": [
+        {
+          "id": "72b8186d-42df-4b39-b0d4-726de421f7df",
+          "prompt": "Overhead drone shot of POET in an unknown space - External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger.. Focus on the visual impact of: Subjective Frame Recalibration. The scene's ambiance is Pastel sunrise palette with a Lo-fi VHS aesthetic style. Use Smooth drone shot, framed as an asymmetrical composition, aspect ratio 9:16. Add flavor: like digital echoes.",
+          "duration": 9,
+          "has_audio": false,
+          "children": [
+            {
+              "id": "64024978-fee8-43b5-86a3-63f73a994ae3",
+              "prompt": "Overhead drone shot of POET in an unknown space - External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger.. Focus on the visual impact of: Subjective Frame Recalibration. The scene's ambiance is Pastel sunrise palette with a Lo-fi VHS aesthetic style. Use Smooth drone shot, framed as an asymmetrical composition, aspect ratio 9:16. Add flavor: like digital echoes.",
+              "duration": 13,
+              "has_audio": false,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1ea914c8-1dcf-4e11-8f2a-4206ed4c0411",
+      "prompt": "Establishing shot of POET in Dim Bedroom - Dim bedroom stasis, EX's detachment. POET's initial <You>\u2080.. Focus on the visual impact of: narrative progression. The scene's ambiance is Eerie green fog with a Film-noir grain style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16. Add flavor: with graffiti tag 'Turbo Pitch 2026'.",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "9f391a75-9b42-4716-9c1d-51e99daf9c37",
+      "prompt": "Establishing shot of POET in Dim Bedroom - Dim bedroom stasis, EX's detachment. POET's initial <You>\u2080.. Focus on the visual impact of: narrative progression. The scene's ambiance is Eerie green fog with a Film-noir grain style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16. Add flavor: with graffiti tag 'OUT OF LIFE'.",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "bcc4949f-79b9-4c8f-800a-b4e3f4aaa366",
+      "prompt": "Establishing shot of POET in Dim Bedroom - Dim bedroom stasis, EX's detachment. POET's initial <You>\u2080.. Focus on the visual impact of: narrative progression. The scene's ambiance is Eerie green fog with a Film-noir grain style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16. Add flavor:",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "90db999f-41be-4106-af9e-718e7f7b67c7",
+      "prompt": "Establishing shot of POET in Dim Bedroom - Dim bedroom stasis, EX's detachment. POET's initial <You>\u2080.. Focus on the visual impact of: narrative progression. The scene's ambiance is Eerie green fog with a Film-noir grain style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16. Add flavor: with graffiti tag 'Turbo Pitch 2026'.",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "cb195db7-e9a2-41d2-87b7-bd95e19a3059",
+      "prompt": "Interpolated Sequence",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "dc67dc88-5180-4543-851a-e9465469b84f",
+      "prompt": "Interpolated Sequence",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "05df5f1b-df80-43bf-ae32-ae25ad6c75c8",
+      "prompt": "My journey brings me to Dim Bedroom, as \"External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger.\" unfolds before me. I am undergoing a Subjective Frame Recalibration, as aspects of myself : Disoriented. Through it all, I am becoming You_Falling (Engaging EX).",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "7a701277-2916-4143-9fd8-ee86ecd826f7",
+      "prompt": "My journey brings me to Dim Bedroom, as \"External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger.\" unfolds before me. I am undergoing a Subjective Frame Recalibration, as aspects of myself : Disoriented. Through it all, I am becoming You_Falling (Engaging EX).",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "8342f352-7969-4ad9-98f2-ebe30d9aa9b9",
+      "prompt": "My journey brings me to Dim Bedroom, as \"External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger.\" unfolds before me. I am undergoing a Subjective Frame Recalibration, as aspects of myself : Disoriented. Through it all, I am becoming You_Falling (Engaging EX).",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "c42d545f-fd51-4e12-bb19-8d0afdf709df",
+      "prompt": "My journey brings me to Dim Bedroom, as \"External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger.\" unfolds before me. I am undergoing a Subjective Frame Recalibration, as aspects of myself : Disoriented. Through it all, I am becoming You_Falling (Engaging EX).",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "773afeb6-35e3-4273-af54-18b066fd3621",
+      "prompt": "[\n  {\n    \"id\": \"POET\",\n    \"type\": \"Character\",\n    \"name\": \"POET\",\n    \"traits\": [\n      \"Protagonist\",\n      \"Ego-Proxy\",\n      \"Transformer\",\n      \"Creator\",\n      \"Observer\"\n    ]\n  },\n  {\n    \"id\": \"EX\",\n    \"type\": \"Character\",\n    \"name\": \"EX\",\n    \"traits\": [\n      \"Antagonist-or-Catalyst\",\n      \"Unreachable\",\n      \"Elusive\",\n      \"Shadow-Projection\",\n      \"Past-Attachment\"\n    ]\n  },\n  {\n    \"id\": \"TV_CHAOS\",\n    \"type\": \"Object\",\n    \"name\": \"Television Screen\",\n    \"traits\": [\n      \"Source-of-External-Chaos\",\n      \"Reflection-of-Inner-Disorder\"\n    ]\n  },\n  {\n    \"id\": \"VAPE_HAZE\",\n    \"type\": \"Concept\",\n    \"name\": \"Vape Haze\",\n    \"traits\": [\n      \"Blurring-Agent\",\n      \"Obscuring-Perception\",\n      \"Symbol-of-Detachment\"\n    ]\n  }\n]",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "a8922cd9-fa16-4930-9b61-eac9bfc2eaf1",
+      "prompt": "At this point, POET is in a state of You_Falling (Engaging EX), navigating the Dim Bedroom. A key transformation occurring is the Subjective Frame Recalibration, which is intended to address its causes: Blurred Perception (Vape Haze). This leads to the new state: \": Disoriented\".",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "e4c9215f-2e57-45ec-9e5c-605ac8441ffa",
+      "prompt": "[\n  {\n    \"id\": \"POET\",\n    \"type\": \"Character\",\n    \"name\": \"POET\",\n    \"traits\": [\n      \"Protagonist\",\n      \"Ego-Proxy\",\n      \"Transformer\",\n      \"Creator\",\n      \"Observer\"\n    ]\n  },\n  {\n    \"id\": \"EX\",\n    \"type\": \"Character\",\n    \"name\": \"EX\",\n    \"traits\": [\n      \"Antagonist-or-Catalyst\",\n      \"Unreachable\",\n      \"Elusive\",\n      \"Shadow-Projection\",\n      \"Past-Attachment\"\n    ]\n  },\n  {\n    \"id\": \"TV_CHAOS\",\n    \"type\": \"Object\",\n    \"name\": \"Television Screen\",\n    \"traits\": [\n      \"Source-of-External-Chaos\",\n      \"Reflection-of-Inner-Disorder\"\n    ]\n  },\n  {\n    \"id\": \"VAPE_HAZE\",\n    \"type\": \"Concept\",\n    \"name\": \"Vape Haze\",\n    \"traits\": [\n      \"Blurring-Agent\",\n      \"Obscuring-Perception\",\n      \"Symbol-of-Detachment\"\n    ]\n  }\n]",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "db9c23a4-f15b-4751-8db5-c0fe3d93ec76",
+      "prompt": "POET is currently in a state of You_Falling (Engaging EX) at Dim Bedroom. Key goals include: Escape Stagnant Reality, Find Connection (with EX), Reclaim Emotional Core and Agency, Manifest a New Reality (Atlantis/Temple), Integrate Past Relationships (EX, Mother, Father), Achieve Personal Autonomy, Embrace Cyclical Impermanence, Understand the Cyclical Nature of Existence. A major shift, Subjective Frame Recalibration, is transforming the experience, leading to \": Disoriented\".",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "c3da8350-da21-4dee-bdd6-e9cfdd089186",
+      "prompt": "\"timestamp\": \"00:01:03\",\n          \"image_path\": \"/Users/gaia/resurrecting atlantis/CAT/WHISKER/WGY004_PI__Subjective_Frame_Recalibration__A_televi_c6143380-89c4-4c46-b3b0-cf6ee0b53735_0.png\",\n          \"id\": \"WGY004\",\n          \"poem\": \"WHERE YOU GO WHEN YOU LEAVE PART 2\",\n          \"imageType\": \"Perception-Image\",\n          \"syntagmaType\": \"Descriptive Syntagma (DS)\",\n          \"content\": \"TV displays images of world's chaos.\",\n          \"cineosisFunction\": \"Subjective Frame Recalibration\",\n          \"operativeEkphrasis\": \"A television screen cycles through rapid, chaotic world events.\",\n          \"styleConditioning\": \"Photo-realistic, close-up on TV screen, montage of war, protests, natural disasters, flickering chaotic imagery, desaturated tones.\",\n          \"full_prompt\": \"PI \u00b7 Subjective Frame Recalibration \u00b7 A television screen cycles through rapid, chaotic world events \u00b7 Photo-realistic, close-up on TV screen, montage of war, protests, natural disasters, flickering chaotic imagery, desaturated tones.\"\n        },",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "98f0499c-9364-4e79-a15f-d5668a66d6b1",
+      "prompt": "Overhead drone shot of POET in an unknown space - External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger.. Focus on the visual impact of: Subjective Frame Recalibration. The scene's ambiance is Pastel sunrise palette with a Lo-fi VHS aesthetic style. Use Smooth drone shot, framed as an asymmetrical composition, aspect ratio 9:16. Add flavor: like digital echoes.",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "234d5fdb-dfcb-4359-ba11-0085dd68337b",
+      "prompt": "Overhead drone shot of POET in an unknown space - External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger.. Focus on the visual impact of: Subjective Frame Recalibration. The scene's ambiance is Pastel sunrise palette with a Lo-fi VHS aesthetic style. Use Smooth drone shot, framed as an asymmetrical composition, aspect ratio 9:16. Add flavor: like digital echoes.",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "67bef226-5aad-447f-ba01-cbd1dab5f0dd",
+      "prompt": "\"full_prompt\": \"CS \u00b7 Causal Motion Trigger \u00b7 EX, back turned, vapes on a fire escape outside a bedroom window \u00b7 Photo-realistic, wide shot, EX (back to camera, never showing face), vape cloud, gritty fire escape, high-rise window frame, urban backdrop.\"",
+      "duration": 5,
+      "has_audio": false,
+      "children": [
+        {
+          "id": "5b9ec655-7306-4267-a79e-1357e39e908f",
+          "prompt": "POET is currently in a state of You_Falling (Engaging EX) at Inky Abyss. Key goals include: Escape Stagnant Reality, Find Connection (with EX), Reclaim Emotional Core and Agency, Manifest a New Reality (Atlantis/Temple), Integrate Past Relationships (EX, Mother, Father), Achieve Personal Autonomy, Embrace Cyclical Impermanence, Understand the Cyclical Nature of Existence. A major shift, Descent Initiated, is transforming the experience, leading to \": You_Falling\".",
+          "duration": 13,
+          "has_audio": false,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "ebe2426d-1585-4063-ae04-58f35167597a",
+      "prompt": "Interpolated Sequence",
+      "duration": 9,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "67e5b1cb-8b37-432f-8da1-2c0c35fcb7dc",
+      "prompt": "\"full_prompt\": \"DS \u00b7 Mood Environment Stabilizer \u00b7 A dimly lit plain bedroom in a high-rise apartment \u00b7 Photo-realistic, minimalist bedroom, urban high-rise window, blue-grey dim lighting, subtle dust motes in air.\"\n        },\n    {\n\n          \"full_prompt\": \"CS \u00b7 Causal Motion Trigger \u00b7 POET, wearing a black t-shirt, reads a poem aloud \u00b7 Photo-realistic, medium shot, soft internal light on POET (black t-shirt), face focused, expressive reading.\"\n        },\n    {\n      \n          \"full_prompt\": \"CS \u00b7 Causal Motion Trigger \u00b7 EX, back turned, vapes on a fire escape outside a bedroom window \u00b7 Photo-realistic, wide shot, EX (back to camera, never showing face), vape cloud, gritty fire escape, high-rise window frame, urban backdrop.\"\n        },",
+      "duration": 21,
+      "has_audio": false,
+      "children": [
+        {
+          "id": "4c1980ee-1468-438e-a708-b7ebc5276da6",
+          "prompt": "\"full_prompt\": \"DS \u00b7 Mood Environment Stabilizer \u00b7 A dimly lit plain bedroom in a high-rise apartment \u00b7 Photo-realistic, minimalist bedroom, urban high-rise window, blue-grey dim lighting, subtle dust motes in air.\"\n        },\n    {\n\n          \"full_prompt\": \"CS \u00b7 Causal Motion Trigger \u00b7 POET, wearing a black t-shirt, reads a poem aloud \u00b7 Photo-realistic, medium shot, soft internal light on POET (black t-shirt), face focused, expressive reading.\"\n        },\n    {\n      \n          \"full_prompt\": \"CS \u00b7 Causal Motion Trigger \u00b7 EX, back turned, vapes on a fire escape outside a bedroom window \u00b7 Photo-realistic, wide shot, EX (back to camera, never showing face), vape cloud, gritty fire escape, high-rise window frame, urban backdrop.\"\n        },",
+          "duration": 29,
+          "has_audio": false,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "349b41ba-e0e2-4a5a-8a1d-c98921a2b5bb",
+      "prompt": "Interpolated Sequence",
+      "duration": 9,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "445aad93-735b-4c7f-a121-a2271dc8f36a",
+      "prompt": "Interpolated Sequence",
+      "duration": 25,
+      "has_audio": false,
+      "children": [
+        {
+          "id": "bbcdf587-6dcc-4d43-b8de-52341f309bc3",
+          "prompt": "[\n  {\n    \"id\": \"POET\",\n    \"type\": \"Character\",\n    \"name\": \"POET\",\n    \"traits\": [\n      \"Protagonist\",\n      \"Ego-Proxy\",\n      \"Transformer\",\n      \"Creator\",\n      \"Observer\"\n    ]\n  },\n  {\n    \"id\": \"EX\",\n    \"type\": \"Character\",\n    \"name\": \"EX\",\n    \"traits\": [\n      \"Antagonist-or-Catalyst\",\n      \"Unreachable\",\n      \"Elusive\",\n      \"Shadow-Projection\",\n      \"Past-Attachment\"\n    ]\n  },\n  {\n    \"id\": \"TV_CHAOS\",\n    \"type\": \"Object\",\n    \"name\": \"Television Screen\",\n    \"traits\": [\n      \"Source-of-External-Chaos\",\n      \"Reflection-of-Inner-Disorder\"\n    ]\n  },\n  {\n    \"id\": \"VAPE_HAZE\",\n    \"type\": \"Concept\",\n    \"name\": \"Vape Haze\",\n    \"traits\": [\n      \"Blurring-Agent\",\n      \"Obscuring-Perception\",\n      \"Symbol-of-Detachment\"\n    ]\n  }\n]",
+          "duration": 32,
+          "has_audio": false,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "a1e1a8ae-4209-4c49-8544-edc12c251983",
+      "prompt": "\"full_prompt\": \"DS \u00b7 Mood Environment Stabilizer \u00b7 A dimly lit plain bedroom in a high-rise apartment \u00b7 Photo-realistic, minimalist bedroom, urban high-rise window, blue-grey dim lighting, subtle dust motes in air.\"\n        },\n    {\n\n          \"full_prompt\": \"CS \u00b7 Causal Motion Trigger \u00b7 POET, wearing a black t-shirt, reads a poem aloud \u00b7 Photo-realistic, medium shot, soft internal light on POET (black t-shirt), face focused, expressive reading.\"\n        },\n    {\n      \n          \"full_prompt\": \"CS \u00b7 Causal Motion Trigger \u00b7 EX, back turned, vapes on a fire escape outside a bedroom window \u00b7 Photo-realistic, wide shot, EX (back to camera, never showing face), vape cloud, gritty fire escape, high-rise window frame, urban backdrop.\"\n        },",
+      "duration": 29,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "a9a29752-9822-476b-9416-884bc0f62b76",
+      "prompt": "\"full_prompt\": \"DS \u00b7 Mood Environment Stabilizer \u00b7 A dimly lit plain bedroom in a high-rise apartment \u00b7 Photo-realistic, minimalist bedroom, urban high-rise window, blue-grey dim lighting, subtle dust motes in air.\"\n        },\n    {\n\n          \"full_prompt\": \"CS \u00b7 Causal Motion Trigger \u00b7 POET, wearing a black t-shirt, reads a poem aloud \u00b7 Photo-realistic, medium shot, soft internal light on POET (black t-shirt), face focused, expressive reading.\"\n        },\n    {\n      \n          \"full_prompt\": \"CS \u00b7 Causal Motion Trigger \u00b7 EX, back turned, vapes on a fire escape outside a bedroom window \u00b7 Photo-realistic, wide shot, EX (back to camera, never showing face), vape cloud, gritty fire escape, high-rise window frame, urban backdrop.\"\n        },",
+      "duration": 29,
+      "has_audio": false,
+      "children": [
+        {
+          "id": "b3ac7019-b817-41d1-b2d9-0e9ddd7bfe37",
+          "prompt": "Interpolated Sequence",
+          "duration": 33,
+          "has_audio": false,
+          "children": [
+            {
+              "id": "3af36c41-44c7-484c-a524-ce74612ce833",
+              "prompt": "Interpolated Sequence",
+              "duration": 28,
+              "has_audio": false,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4cfa729a-b8d4-4a0a-ba8b-27695912c8be",
+      "prompt": "Interpolated Sequence",
+      "duration": 5,
+      "has_audio": false,
+      "children": [
+        {
+          "id": "8aff03e4-a15d-4067-8a26-60689485fda6",
+          "prompt": "Here in Inky Abyss, a new chapter begins, marked by: \"EX and POET fall into inky abyss; screen blacks out. Entering the deep unconscious.\". The narrative takes a turn with the Descent Initiated, leading to a sense of \": You_Falling\". Through it all, I am becoming You_Falling (Engaging EX).",
+          "duration": 13,
+          "has_audio": false,
+          "children": []
+        },
+        {
+          "id": "d5abc940-54af-4992-b173-cd32e82b1b17",
+          "prompt": "POV shot through a glitching filter of POET in Inky Abyss - EX and POET fall into inky abyss; screen blacks out. Entering the deep unconscious.. Focus on the visual impact of: Descent Initiated. The scene's ambiance is Vibrant, kaleidoscopic light with a Psychedelic, abstract style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16. Add flavor:",
+          "duration": 9,
+          "has_audio": false,
+          "children": []
+        },
+        {
+          "id": "6a9fa071-0440-4648-a91a-4825d383cf3e",
+          "prompt": "Interpolated Sequence",
+          "duration": 33,
+          "has_audio": false,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "8e5ebf2d-9325-4df3-b370-ba040df33148",
+      "prompt": "[\n  {\n    \"id\": \"POET\",\n    \"type\": \"Character\",\n    \"name\": \"POET\",\n    \"traits\": [\n      \"Protagonist\",\n      \"Ego-Proxy\",\n      \"Transformer\",\n      \"Creator\",\n      \"Observer\"\n    ]\n  },\n  {\n    \"id\": \"EX\",\n    \"type\": \"Character\",\n    \"name\": \"EX\",\n    \"traits\": [\n      \"Antagonist-or-Catalyst\",\n      \"Unreachable\",\n      \"Elusive\",\n      \"Shadow-Projection\",\n      \"Past-Attachment\"\n    ]\n  },\n  {\n    \"id\": \"INKY_ABYSS\",\n    \"type\": \"Location\",\n    \"name\": \"Inky Abyss\",\n    \"traits\": [\n      \"Profound-Void\",\n      \"Unconscious-Descent\",\n      \"No-Place\"\n    ],\n    \"fixed_position\": [\n      0.5,\n      0.1\n    ]\n  }\n]",
+      "duration": 5,
+      "has_audio": false,
+      "children": [
+        {
+          "id": "d1dfc1d0-11bf-4d2c-bf07-2953a7ea7e44",
+          "prompt": "Here in Inky Abyss, a new chapter begins, marked by: \"EX and POET fall into inky abyss; screen blacks out. Entering the deep unconscious.\". The narrative takes a turn with the Descent Initiated, leading to a sense of \": You_Falling\". Through it all, I am becoming You_Falling (Engaging EX).",
+          "duration": 9,
+          "has_audio": false,
+          "children": [
+            {
+              "id": "eb298ed7-27f0-453c-b743-5ec0f252157d",
+              "prompt": "Here in Inky Abyss, a new chapter begins, marked by: \"EX and POET fall into inky abyss; screen blacks out. Entering the deep unconscious.\". The narrative takes a turn with the Descent Initiated, leading to a sense of \": You_Falling\". Through it all, I am becoming You_Falling (Engaging EX).",
+              "duration": 13,
+              "has_audio": false,
+              "children": [
+                {
+                  "id": "af9410b7-1687-472a-955e-ddd4798a0e18",
+                  "prompt": "Here in Inky Abyss, a new chapter begins, marked by: \"EX and POET fall into inky abyss; screen blacks out. Entering the deep unconscious.\". The narrative takes a turn with the Descent Initiated, leading to a sense of \": You_Falling\". Through it all, I am becoming You_Falling (Engaging EX).",
+                  "duration": 17,
+                  "has_audio": false,
+                  "children": [
+                    {
+                      "id": "6e80b1bd-7b50-4cc6-921a-1f76d8bee404",
+                      "prompt": "Here in Inky Abyss, a new chapter begins, marked by: \"EX and POET fall into inky abyss; screen blacks out. Entering the deep unconscious.\". The narrative takes a turn with the Descent Initiated, leading to a sense of \": You_Falling\". Through it all, I am becoming You_Falling (Engaging EX).",
+                      "duration": 25,
+                      "has_audio": false,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "cc6917c6-ac49-4a5a-adb5-75f43085d1dc",
+                  "prompt": "Here in Inky Abyss, a new chapter begins, marked by: \"EX and POET fall into inky abyss; screen blacks out. Entering the deep unconscious.\". The narrative takes a turn with the Descent Initiated, leading to a sense of \": You_Falling\". Through it all, I am becoming You_Falling (Engaging EX).",
+                  "duration": 17,
+                  "has_audio": false,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c81cb1b0-52a4-4137-b56f-9b2eb0132d0a",
+      "prompt": "My journey brings me to Dim Bedroom, as \"External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger.\" unfolds before me. I am undergoing a Subjective Frame Recalibration, as aspects of myself : Disoriented. Through it all, I am becoming You_Falling (Engaging EX).",
+      "duration": 26,
+      "has_audio": false,
+      "children": [
+        {
+          "id": "46782136-88da-4bc6-911a-9d5954f0ce08",
+          "prompt": "Interpolated Sequence",
+          "duration": 31,
+          "has_audio": false,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "84592d51-5519-4ef3-9e82-728d1d45d0fa",
+      "prompt": "should feel more abstact this is pre film.  think of this like art film like saul bass and john whitney would make",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "9d16432c-6ef6-4d3e-ab06-8876fe3dbcbd",
+      "prompt": "more minimal and abstract with neon touches more grit and grain",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "e3e52e35-c512-4041-9e21-0a32600b1570",
+      "prompt": "more minimal and abstract with neon touches more grit and grain",
+      "duration": 5,
+      "has_audio": false,
+      "children": [
+        {
+          "id": "8478f997-0b09-41f3-93f2-de5c144d0b8b",
+          "prompt": "more minimal and abstract with neon touches more grit and grain",
+          "duration": 9,
+          "has_audio": false,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "a11b84af-ea36-4e1b-a2a3-4870b3d1da2d",
+      "prompt": "Interpolated Sequence",
+      "duration": 9,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "b072cfc2-6718-457c-ad6f-05cae38d884a",
+      "prompt": "Interpolated Sequence",
+      "duration": 13,
+      "has_audio": false,
+      "children": [
+        {
+          "id": "706766af-c9c4-4f8b-bd21-5849851c3a95",
+          "prompt": "Interpolated Sequence",
+          "duration": 39,
+          "has_audio": false,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "173e50a6-417d-42dc-b48f-22b161ffa83c",
+      "prompt": "Interpolated Sequence",
+      "duration": 22,
+      "has_audio": false,
+      "children": []
+    },
+    {
+      "id": "5880d3a4-dd0a-4958-97bc-96a6cb7c6d5b",
+      "prompt": "Interpolated Sequence",
+      "duration": 5,
+      "has_audio": false,
+      "children": []
+    }
+  ]
+}
