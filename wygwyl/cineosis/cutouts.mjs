@@ -166,7 +166,16 @@ for (const s of SHOTS) {
   process.stdout.write(`\r  ${shotsWith} shots · ${made} cutouts   `);
 }
 await browser.close();
-fs.writeFileSync(path.join(OUT, "halfworld-shots.json"), JSON.stringify(SHOTS, null, 1));
+/* merge rather than overwrite — see the note in encode.mjs; any two of these
+   tools can be in flight at once and the last one to finish must not be the
+   only one whose work survives */
+{
+  let live = SHOTS;
+  try { live = JSON.parse(fs.readFileSync(path.join(OUT, "halfworld-shots.json"), "utf8")); } catch (_) {}
+  const by = new Map(SHOTS.map(s => [s.id, s]));
+  for (const s of live) { const m = by.get(s.id); if (m && m.cutouts !== undefined) s.cutouts = m.cutouts; }
+  fs.writeFileSync(path.join(OUT, "halfworld-shots.json"), JSON.stringify(live, null, 1));
+}
 const byLabel = {};
 for (const s of SHOTS) for (const c of s.cutouts || []) byLabel[c.label] = (byLabel[c.label] || 0) + 1;
 console.log(`\n\n${made} cutouts across ${shotsWith} of ${SHOTS.length} shots`);

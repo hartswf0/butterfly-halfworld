@@ -164,6 +164,24 @@ for (const s of SHOTS) {
     + ` ${nF} frames · ${el.toFixed(0)}s elapsed · ${(frames / Math.max(1, el)).toFixed(0)} fps   `);
 }
 await browser.close();
-fs.writeFileSync(path.join(OUT, "halfworld-shots.json"), JSON.stringify(SHOTS, null, 1));
+
+/* MERGE, DO NOT OVERWRITE. This used to write back the array it read at
+   startup, and the encode runs for half an hour — so when cutouts.mjs wrote
+   its 120 instance masks into the same file partway through, this erased them
+   on the way out. The PNGs were on disk and nothing pointed at them, which is
+   the worst shape for a loss to take: no error, no gap, just a field that is
+   suddenly empty. Re-read the file and write back only the keys this tool
+   owns. */
+const MINE = ["clip", "thumb", "strip", "video", "frames"];
+{
+  let live = SHOTS;
+  try { live = JSON.parse(fs.readFileSync(path.join(OUT, "halfworld-shots.json"), "utf8")); } catch (_) {}
+  const by = new Map(SHOTS.map(s => [s.id, s]));
+  for (const s of live) {
+    const m = by.get(s.id);
+    if (m) for (const k of MINE) if (m[k] !== undefined) s[k] = m[k];
+  }
+  fs.writeFileSync(path.join(OUT, "halfworld-shots.json"), JSON.stringify(live, null, 1));
+}
 console.log(`\n\n${done} shots encoded · ${frames} frames at ${FPS}fps`);
 console.log(`→ renders/cineosis/clips · thumbs · strips   (and the shot records now carry their paths)`);

@@ -33,7 +33,7 @@
    "figureHeight": null,
    "frameRows": 144,
    "truth": "scale and subjects are the film's own draw calls, not a classifier",
-   "spokenFraction": 0.0
+   "spokenFraction": 0
   },
   "video": "https://hartswf0.github.io/butterfly-halfworld/renders/cineosis/clips/77bbd4d1-fd2a-57bf-9643-1929419d75fc.mp4",
   "clip": "clips/77bbd4d1-fd2a-57bf-9643-1929419d75fc.mp4",
@@ -52,7 +52,8 @@
    "flatness": 0.01,
    "speech_band": 0.064,
    "kind": "music"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "4cfa7752-8f18-518a-a6df-61b3defe5e09",
@@ -91,7 +92,7 @@
    "n": "01",
    "movement": 1,
    "label": "THE SEARCH",
-   "line": "What we've made, we don't want. What we've sold \u2014 to the world, to ourselves \u2014 doesn't exist. I look for a way out: through the hallways, within the drawers, and fire escapes.",
+   "line": "What we've made, we don't want. What we've sold — to the world, to ourselves — doesn't exist. I look for a way out: through the hallways, within the drawers, and fire escapes.",
    "accent": "#5aa7ff",
    "engine": "malhun",
    "mode": "bayati",
@@ -117,7 +118,25 @@
    "flatness": 0.008,
    "speech_band": 0.261,
    "kind": "music"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/4cfa7752-8f18-518a-a6df-61b3defe5e09_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.6927,
+     0.5694,
+     0.0469,
+     0.2431
+    ],
+    "area": 0.0078,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 34
+   }
+  ]
  },
  {
   "id": "a8863403-93c7-5c6b-a2a4-6c6fb3327b8e",
@@ -163,7 +182,7 @@
    "n": "01",
    "movement": 2,
    "label": "MORE HAZE",
-   "line": "The vape gathers, inside and out. My vision blurs. I move toward the window \u2014 and you only get further away. More haze.",
+   "line": "The vape gathers, inside and out. My vision blurs. I move toward the window — and you only get further away. More haze.",
    "accent": "#5aa7ff",
    "engine": "malhun",
    "mode": "bayati",
@@ -189,7 +208,25 @@
    "flatness": 0.102,
    "speech_band": 0.251,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/a8863403-93c7-5c6b-a2a4-6c6fb3327b8e_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.3542,
+     0.5694,
+     0.0833,
+     0.25
+    ],
+    "area": 0.0023,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 34
+   }
+  ]
  },
  {
   "id": "ac2c26ad-1fec-51aa-9a07-f3300fc12312",
@@ -235,7 +272,7 @@
    "n": "01",
    "movement": 3,
    "label": "THE FALL",
-   "line": "It was the maze, constructed by a tainted love. You fall off the fire escape, into darkness \u2014 and the city streaks upward like it's leaving too.",
+   "line": "It was the maze, constructed by a tainted love. You fall off the fire escape, into darkness — and the city streaks upward like it's leaving too.",
    "accent": "#5aa7ff",
    "engine": "malhun",
    "mode": "bayati",
@@ -257,11 +294,45 @@
   "audio": {
    "has_audio": true,
    "rms_db": -27.6,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.128,
    "speech_band": 0.256,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/ac2c26ad-1fec-51aa-9a07-f3300fc12312_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3646,
+     0.3889,
+     0.1615,
+     0.1389
+    ],
+    "area": 0.0079,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 30
+   },
+   {
+    "png": "cutouts/ac2c26ad-1fec-51aa-9a07-f3300fc12312_1.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4792,
+     0.1528,
+     0.1875,
+     0.1667
+    ],
+    "area": 0.0102,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 33
+   }
+  ]
  },
  {
   "id": "8846c650-a93f-5a2b-b0df-e23288ed9e75",
@@ -307,7 +378,7 @@
    "n": "01",
    "movement": 4,
    "label": "AS DARK AS BLACK",
-   "line": "I trip on my own words, falling out of life \u2014 and find where you go when you leave. The gap between us breathes, and never closes.",
+   "line": "I trip on my own words, falling out of life — and find where you go when you leave. The gap between us breathes, and never closes.",
    "accent": "#5aa7ff",
    "engine": "malhun",
    "mode": "bayati",
@@ -333,7 +404,41 @@
    "flatness": 0.067,
    "speech_band": 0.301,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/8846c650-a93f-5a2b-b0df-e23288ed9e75_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3906,
+     0.4861,
+     0.125,
+     0.1111
+    ],
+    "area": 0.0056,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 24
+   },
+   {
+    "png": "cutouts/8846c650-a93f-5a2b-b0df-e23288ed9e75_1.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.5156,
+     0.2222,
+     0.1406,
+     0.1667
+    ],
+    "area": 0.0074,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 27
+   }
+  ]
  },
  {
   "id": "a12b5cb7-63ac-533c-a304-d0c80dc607c2",
@@ -388,7 +493,8 @@
    "flatness": 0.009,
    "speech_band": 0.111,
    "kind": "music"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "b3557148-a850-53d1-93e4-c15844e5d7d4",
@@ -449,11 +555,29 @@
   "audio": {
    "has_audio": true,
    "rms_db": -26.6,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.109,
    "speech_band": 0.323,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/b3557148-a850-53d1-93e4-c15844e5d7d4_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.4375,
+     0.5625,
+     0.1302,
+     0.3681
+    ],
+    "area": 0.0186,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 46
+   }
+  ]
  },
  {
   "id": "b21502d1-c92d-57fe-8bb1-df33051902a7",
@@ -493,7 +617,7 @@
    "n": "02",
    "movement": 2,
    "label": "THE MIRROR",
-   "line": "An emergency call while tossing and turning \u2014 the silent call a man makes to the mirror after midnight, to digest a truth.",
+   "line": "An emergency call while tossing and turning — the silent call a man makes to the mirror after midnight, to digest a truth.",
    "accent": "#5aa7ff",
    "engine": "gabay",
    "mode": "phrygian",
@@ -515,11 +639,29 @@
   "audio": {
    "has_audio": true,
    "rms_db": -26.8,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.111,
    "speech_band": 0.229,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/b21502d1-c92d-57fe-8bb1-df33051902a7_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.2552,
+     0.4306,
+     0.1042,
+     0.3889
+    ],
+    "area": 0.0233,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 54
+   }
+  ]
  },
  {
   "id": "fb98b263-5f83-5968-9e76-a23b627ce619",
@@ -550,7 +692,7 @@
    "n": "02",
    "movement": 3,
    "label": "WE GO THROUGH",
-   "line": "A winless insomnia. An epiphany of a road winding down. My eyes dilate \u2014 and we go through.",
+   "line": "A winless insomnia. An epiphany of a road winding down. My eyes dilate — and we go through.",
    "accent": "#5aa7ff",
    "engine": "gabay",
    "mode": "phrygian",
@@ -576,7 +718,8 @@
    "flatness": 0.099,
    "speech_band": 0.34,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "ec8cbff4-921b-5c8c-8bd0-174be20b7ec5",
@@ -642,7 +785,41 @@
    "flatness": 0.075,
    "speech_band": 0.251,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/ec8cbff4-921b-5c8c-8bd0-174be20b7ec5_0.png",
+    "label": "child",
+    "p": 1,
+    "bbox": [
+     0.1823,
+     0.4306,
+     0.099,
+     0.4028
+    ],
+    "area": 0.0236,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 53.9
+   },
+   {
+    "png": "cutouts/ec8cbff4-921b-5c8c-8bd0-174be20b7ec5_1.png",
+    "label": "child",
+    "p": 1,
+    "bbox": [
+     0.5781,
+     0.4931,
+     0.0573,
+     0.3403
+    ],
+    "area": 0.0124,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 46.2
+   }
+  ]
  },
  {
   "id": "71e66e7c-ea68-516b-a4ea-076a07c02815",
@@ -681,7 +858,7 @@
    "n": "02",
    "movement": 5,
    "label": "BLINDS UP",
-   "line": "Curtains pulled, and blinds up as far and as wise as possible \u2014 to see flashing lights, and the whispering screams of two souls on a road winding down.",
+   "line": "Curtains pulled, and blinds up as far and as wise as possible — to see flashing lights, and the whispering screams of two souls on a road winding down.",
    "accent": "#5aa7ff",
    "engine": "gabay",
    "mode": "phrygian",
@@ -703,11 +880,45 @@
   "audio": {
    "has_audio": true,
    "rms_db": -27.5,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.11,
    "speech_band": 0.323,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/71e66e7c-ea68-516b-a4ea-076a07c02815_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3385,
+     0.5486,
+     0.0469,
+     0.1875
+    ],
+    "area": 0.005,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 25.84371021510095
+   },
+   {
+    "png": "cutouts/71e66e7c-ea68-516b-a4ea-076a07c02815_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.5885,
+     0.6458,
+     0.0469,
+     0.1667
+    ],
+    "area": 0.0054,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 21.16371021510095
+   }
+  ]
  },
  {
   "id": "9c0f60aa-aef7-5a6e-aa51-6628be73bd42",
@@ -754,7 +965,7 @@
    "n": "02",
    "movement": 6,
    "label": "THROUGH THE WINDOW",
-   "line": "And no tears, and no fucks, and no love to give. The ghost hands me a tambourine \u2014 and I throw it through the window.",
+   "line": "And no tears, and no fucks, and no love to give. The ghost hands me a tambourine — and I throw it through the window.",
    "accent": "#5aa7ff",
    "engine": "gabay",
    "mode": "phrygian",
@@ -780,7 +991,41 @@
    "flatness": 0.015,
    "speech_band": 0.269,
    "kind": "music"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/9c0f60aa-aef7-5a6e-aa51-6628be73bd42_0.png",
+    "label": "child",
+    "p": 1,
+    "bbox": [
+     0.125,
+     0.4722,
+     0.1146,
+     0.3611
+    ],
+    "area": 0.0196,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 48
+   },
+   {
+    "png": "cutouts/9c0f60aa-aef7-5a6e-aa51-6628be73bd42_1.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4635,
+     0.4514,
+     0.1354,
+     0.3819
+    ],
+    "area": 0.022,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 52
+   }
+  ]
  },
  {
   "id": "a9f6c83f-faf6-5f58-a914-fed2989acef1",
@@ -816,7 +1061,7 @@
    "figureHeight": null,
    "frameRows": 144,
    "truth": "scale and subjects are the film's own draw calls, not a classifier",
-   "spokenFraction": 0.0
+   "spokenFraction": 0
   },
   "video": "https://hartswf0.github.io/butterfly-halfworld/renders/cineosis/clips/a9f6c83f-faf6-5f58-a914-fed2989acef1.mp4",
   "clip": "clips/a9f6c83f-faf6-5f58-a914-fed2989acef1.mp4",
@@ -835,7 +1080,8 @@
    "flatness": 0.008,
    "speech_band": 0.16,
    "kind": "music"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "8ec55f7e-38cf-5856-b947-a3a94846fc94",
@@ -866,7 +1112,7 @@
    "n": "03",
    "movement": 1,
    "label": "ODE TO FOREVER",
-   "line": "Ode to forever \u2014 a tambourine sounds off an empty temple, empty choir stands, empty prayer lines.",
+   "line": "Ode to forever — a tambourine sounds off an empty temple, empty choir stands, empty prayer lines.",
    "accent": "#5aa7ff",
    "engine": "dirge",
    "mode": "penta",
@@ -892,7 +1138,8 @@
    "flatness": 0.053,
    "speech_band": 0.377,
    "kind": "speech"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "840cf3da-a3da-562c-9d53-ddb52b22e19f",
@@ -923,7 +1170,7 @@
    "n": "03",
    "movement": 2,
    "label": "STILL WHOLE",
-   "line": "And abandoned baptism pools. It flies in through the rose window \u2014 still whole.",
+   "line": "And abandoned baptism pools. It flies in through the rose window — still whole.",
    "accent": "#5aa7ff",
    "engine": "dirge",
    "mode": "penta",
@@ -945,11 +1192,12 @@
   "audio": {
    "has_audio": true,
    "rms_db": -26.7,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.094,
    "speech_band": 0.23,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "5a69b08c-71bb-5651-bd02-7bd3505eee0d",
@@ -1001,12 +1249,13 @@
   "frames": 8,
   "audio": {
    "has_audio": true,
-   "rms_db": -27.0,
-   "silence": 0.0,
+   "rms_db": -27,
+   "silence": 0,
    "flatness": 0.1,
    "speech_band": 0.371,
    "kind": "speech"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "1605783b-1723-50c4-b6a0-a3805ebd8dcc",
@@ -1037,7 +1286,7 @@
    "n": "03",
    "movement": 4,
    "label": "UNTIL NOTHING REMAINS",
-   "line": "It thunders. Then rains until nothing remains. What was once love, now goods \u2014 broken and sealed apart by lightning. Daily breads, soaked and delivered rotted by rain; and blankets, soiled by venomous puppeteers.",
+   "line": "It thunders. Then rains until nothing remains. What was once love, now goods — broken and sealed apart by lightning. Daily breads, soaked and delivered rotted by rain; and blankets, soiled by venomous puppeteers.",
    "accent": "#5aa7ff",
    "engine": "dirge",
    "mode": "penta",
@@ -1058,12 +1307,13 @@
   "frames": 8,
   "audio": {
    "has_audio": true,
-   "rms_db": -27.0,
+   "rms_db": -27,
    "silence": 0.002,
    "flatness": 0.076,
    "speech_band": 0.219,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "51b6c0d6-f178-5889-bee1-258c53ec7821",
@@ -1135,7 +1385,41 @@
    "flatness": 0.115,
    "speech_band": 0.323,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/51b6c0d6-f178-5889-bee1-258c53ec7821_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.2552,
+     0.6181,
+     0.0469,
+     0.1667
+    ],
+    "area": 0.0053,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 19.91648228082418
+   },
+   {
+    "png": "cutouts/51b6c0d6-f178-5889-bee1-258c53ec7821_1.png",
+    "label": "turned",
+    "p": 1,
+    "bbox": [
+     0.349,
+     0.6111,
+     0.0365,
+     0.1597
+    ],
+    "area": 0.0044,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 19.15676101130867
+   }
+  ]
  },
  {
   "id": "a70142af-3c00-5da4-9725-9aec4753b406",
@@ -1196,11 +1480,29 @@
   "audio": {
    "has_audio": true,
    "rms_db": -29.4,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.008,
    "speech_band": 0.16,
    "kind": "music"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/a70142af-3c00-5da4-9725-9aec4753b406_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.0677,
+     0.6806,
+     0.0521,
+     0.3056
+    ],
+    "area": 0.0099,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 42
+   }
+  ]
  },
  {
   "id": "e660c3d6-a341-51e3-82ec-809c80f627f6",
@@ -1255,7 +1557,8 @@
    "flatness": 0.011,
    "speech_band": 0.326,
    "kind": "music"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "1e0a459e-6ecd-5996-abf3-7062d492c617",
@@ -1294,7 +1597,7 @@
    "n": "04",
    "movement": 1,
    "label": "WASHED ASHORE",
-   "line": "What if I followed this trail, to where the broken pieces have washed ashore \u2014 and the ashes of expired wildfires cover sands, and debris lifted from the night sea water\u2019s floor.",
+   "line": "What if I followed this trail, to where the broken pieces have washed ashore — and the ashes of expired wildfires cover sands, and debris lifted from the night sea water’s floor.",
    "accent": "#5aa7ff",
    "engine": "izibongo",
    "mode": "penta2",
@@ -1316,11 +1619,29 @@
   "audio": {
    "has_audio": true,
    "rms_db": -26.8,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.113,
    "speech_band": 0.324,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/1e0a459e-6ecd-5996-abf3-7062d492c617_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.3906,
+     0.6042,
+     0.0417,
+     0.1875
+    ],
+    "area": 0.0051,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 26.100292628648198
+   }
+  ]
  },
  {
   "id": "3a75924a-6b35-57db-921b-40c6772ba6bf",
@@ -1359,7 +1680,7 @@
    "n": "04",
    "movement": 2,
    "label": "FOLDED WHISPERS",
-   "line": "The waves calm to folded whispers; the winds mute the trees. The right level of silence, to find a throbbing heart \u2014 it used to be mine. I lift it with care: nevermore.",
+   "line": "The waves calm to folded whispers; the winds mute the trees. The right level of silence, to find a throbbing heart — it used to be mine. I lift it with care: nevermore.",
    "accent": "#5aa7ff",
    "engine": "izibongo",
    "mode": "penta2",
@@ -1381,11 +1702,29 @@
   "audio": {
    "has_audio": true,
    "rms_db": -28.5,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.066,
    "speech_band": 0.276,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/3a75924a-6b35-57db-921b-40c6772ba6bf_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.25,
+     0.7014,
+     0.099,
+     0.2292
+    ],
+    "area": 0.0102,
+    "src": "drawn",
+    "mode": "sit",
+    "face": 1,
+    "heightRows": 38
+   }
+  ]
  },
  {
   "id": "54be94e2-1804-59a6-8fe9-bc0caedbe227",
@@ -1416,7 +1755,7 @@
    "n": "04",
    "movement": 3,
    "label": "MUSTARD SEEDS",
-   "line": "What if I followed this reclaimed heart, to where the puzzle pieces of faith are handcrafted \u2014 scrambled and scattered as mustard seeds into the vast moonlit night\u2019s garden fields.",
+   "line": "What if I followed this reclaimed heart, to where the puzzle pieces of faith are handcrafted — scrambled and scattered as mustard seeds into the vast moonlit night’s garden fields.",
    "accent": "#5aa7ff",
    "engine": "izibongo",
    "mode": "penta2",
@@ -1442,7 +1781,8 @@
    "flatness": 0.127,
    "speech_band": 0.341,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "b038974c-0f8b-537e-918c-2f9044ac5fd8",
@@ -1473,7 +1813,7 @@
    "n": "04",
    "movement": 4,
    "label": "THEY TURN TO FACE ME",
-   "line": "The plants in a golden hue bloom, and face toward me in anticipation. The weeds repel, falling into the shadows where our memories hide \u2014 and mean so little, in a moment of defeat \u2014 as I\u2019m called forward.",
+   "line": "The plants in a golden hue bloom, and face toward me in anticipation. The weeds repel, falling into the shadows where our memories hide — and mean so little, in a moment of defeat — as I’m called forward.",
    "accent": "#5aa7ff",
    "engine": "izibongo",
    "mode": "penta2",
@@ -1495,11 +1835,12 @@
   "audio": {
    "has_audio": true,
    "rms_db": -26.9,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.102,
    "speech_band": 0.304,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "3bf9a0d6-58d4-5ffa-b959-9fbf710b7f7a",
@@ -1538,7 +1879,7 @@
    "n": "04",
    "movement": 5,
    "label": "DEEPEST DARKNESS",
-   "line": "The clouds mute the stars for the deepest level of darkness \u2014 welcoming extra hard work, to search the bare ground for two hands.",
+   "line": "The clouds mute the stars for the deepest level of darkness — welcoming extra hard work, to search the bare ground for two hands.",
    "accent": "#5aa7ff",
    "engine": "izibongo",
    "mode": "penta2",
@@ -1564,7 +1905,25 @@
    "flatness": 0.063,
    "speech_band": 0.273,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/3bf9a0d6-58d4-5ffa-b959-9fbf710b7f7a_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.2448,
+     0.7083,
+     0.0781,
+     0.1806
+    ],
+    "area": 0.0069,
+    "src": "drawn",
+    "mode": "sit",
+    "face": 1,
+    "heightRows": 30
+   }
+  ]
  },
  {
   "id": "20f3186c-d143-54ad-8a17-ebe570251b3d",
@@ -1603,7 +1962,7 @@
    "n": "04",
    "movement": 6,
    "label": "I PUT THEM BACK ON",
-   "line": "Hands that once could touch dust after dusk, and feel good \u2014 they too used to be mine. I put them back on, with the care of my future at stake: nevermore.",
+   "line": "Hands that once could touch dust after dusk, and feel good — they too used to be mine. I put them back on, with the care of my future at stake: nevermore.",
    "accent": "#5aa7ff",
    "engine": "izibongo",
    "mode": "penta2",
@@ -1629,7 +1988,25 @@
    "flatness": 0.123,
    "speech_band": 0.282,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/20f3186c-d143-54ad-8a17-ebe570251b3d_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4063,
+     0.5139,
+     0.1927,
+     0.3889
+    ],
+    "area": 0.0213,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 54
+   }
+  ]
  },
  {
   "id": "9c7f9f74-7aa3-5230-8b65-84044ed01a8c",
@@ -1665,7 +2042,7 @@
    "figureHeight": null,
    "frameRows": 144,
    "truth": "scale and subjects are the film's own draw calls, not a classifier",
-   "spokenFraction": 0.0
+   "spokenFraction": 0
   },
   "video": "https://hartswf0.github.io/butterfly-halfworld/renders/cineosis/clips/9c7f9f74-7aa3-5230-8b65-84044ed01a8c.mp4",
   "clip": "clips/9c7f9f74-7aa3-5230-8b65-84044ed01a8c.mp4",
@@ -1684,7 +2061,8 @@
    "flatness": 0.013,
    "speech_band": 0.113,
    "kind": "music"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "02dfa46b-198a-5bc9-810a-10c5dae085a1",
@@ -1723,7 +2101,7 @@
    "n": "05",
    "movement": 1,
    "label": "NAME MY OWN STARS",
-   "line": "Now go, they tell me. To ask if I can inherit the earth \u2014 to ask if I can name my own stars. Even galaxies, if I may.",
+   "line": "Now go, they tell me. To ask if I can inherit the earth — to ask if I can name my own stars. Even galaxies, if I may.",
    "accent": "#5aa7ff",
    "engine": "jaliya",
    "mode": "mixo",
@@ -1749,7 +2127,25 @@
    "flatness": 0.038,
    "speech_band": 0.306,
    "kind": "music"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/02dfa46b-198a-5bc9-810a-10c5dae085a1_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4583,
+     0.7917,
+     0.0521,
+     0.1181
+    ],
+    "area": 0.003,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 13.912548611529775
+   }
+  ]
  },
  {
   "id": "9bfba878-7cbe-582a-a5c4-1b97c711b0bc",
@@ -1788,7 +2184,7 @@
    "n": "05",
    "movement": 2,
    "label": "SOUTHERN PINE",
-   "line": "The past, too, was waiting for me \u2014 coming of age in the shared rooms of humid basements as bedrooms; mattress pads where the wood beams of Southern pine could comfort my spine. It didn\u2019t. To dream was to prevail.",
+   "line": "The past, too, was waiting for me — coming of age in the shared rooms of humid basements as bedrooms; mattress pads where the wood beams of Southern pine could comfort my spine. It didn’t. To dream was to prevail.",
    "accent": "#5aa7ff",
    "engine": "jaliya",
    "mode": "mixo",
@@ -1810,11 +2206,12 @@
   "audio": {
    "has_audio": true,
    "rms_db": -28.5,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.073,
    "speech_band": 0.237,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "d10b2f8d-d078-598e-876c-a9a8a4cc9f47",
@@ -1853,7 +2250,7 @@
    "n": "05",
    "movement": 3,
    "label": "A NEW UNIVERSE",
-   "line": "They tell me: ask if I can invent a new universe \u2014 if God would let me, little ole me, award a blessing here and there. Even grant miracles.",
+   "line": "They tell me: ask if I can invent a new universe — if God would let me, little ole me, award a blessing here and there. Even grant miracles.",
    "accent": "#5aa7ff",
    "engine": "jaliya",
    "mode": "mixo",
@@ -1879,7 +2276,25 @@
    "flatness": 0.104,
    "speech_band": 0.329,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/d10b2f8d-d078-598e-876c-a9a8a4cc9f47_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4844,
+     0.8194,
+     0.0365,
+     0.1389
+    ],
+    "area": 0.0035,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 16
+   }
+  ]
  },
  {
   "id": "a249fd9e-03ff-548a-bf7c-63de8c3094ae",
@@ -1910,7 +2325,7 @@
    "n": "05",
    "movement": 4,
    "label": "BEWARE OF ME",
-   "line": "In uncertain times, in forsaken times. Their blood flows through my hands \u2014 fingerprints that orchestra great powers \u2014 sun-kissing my skin, deepening my voice to a baritone of a million cries. Beware of me.",
+   "line": "In uncertain times, in forsaken times. Their blood flows through my hands — fingerprints that orchestra great powers — sun-kissing my skin, deepening my voice to a baritone of a million cries. Beware of me.",
    "accent": "#5aa7ff",
    "engine": "jaliya",
    "mode": "mixo",
@@ -1936,7 +2351,8 @@
    "flatness": 0.068,
    "speech_band": 0.267,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "60d854f7-ec6b-5c45-9995-c8396298835b",
@@ -1982,7 +2398,7 @@
    "n": "05",
    "movement": 5,
    "label": "THE GATES OPEN",
-   "line": "The gates open with wings \u2014 gifted from evolution, and made of marble stones kissed by the hymns our Creator composed, with an orchestra of our ancestors\u2019 wildest dreams, to welcome us.",
+   "line": "The gates open with wings — gifted from evolution, and made of marble stones kissed by the hymns our Creator composed, with an orchestra of our ancestors’ wildest dreams, to welcome us.",
    "accent": "#5aa7ff",
    "engine": "jaliya",
    "mode": "mixo",
@@ -2004,11 +2420,45 @@
   "audio": {
    "has_audio": true,
    "rms_db": -29.6,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.038,
    "speech_band": 0.245,
    "kind": "music"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/60d854f7-ec6b-5c45-9995-c8396298835b_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.401,
+     0.7847,
+     0.0469,
+     0.1042
+    ],
+    "area": 0.0024,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 13
+   },
+   {
+    "png": "cutouts/60d854f7-ec6b-5c45-9995-c8396298835b_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.474,
+     0.7778,
+     0.0521,
+     0.1111
+    ],
+    "area": 0.0027,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 14
+   }
+  ]
  },
  {
   "id": "8e37b6bd-2eb7-5b42-8ddf-82a8d9904ebd",
@@ -2059,11 +2509,12 @@
   "audio": {
    "has_audio": true,
    "rms_db": -30.9,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.009,
    "speech_band": 0.32,
    "kind": "music"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "05bb1f34-f734-51fb-a26f-c9331be8e1a4",
@@ -2102,7 +2553,7 @@
    "n": "06",
    "movement": 1,
    "label": "THE COMETS",
-   "line": "Poets, who eased generations down yellow brick roads \u2014 and plucked our souls out of their secret places, to follow comets to the capital city of our collective consciousness.",
+   "line": "Poets, who eased generations down yellow brick roads — and plucked our souls out of their secret places, to follow comets to the capital city of our collective consciousness.",
    "accent": "#5aa7ff",
    "engine": "ahellil",
    "mode": "dorian",
@@ -2124,11 +2575,109 @@
   "audio": {
    "has_audio": true,
    "rms_db": -26.7,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.1,
    "speech_band": 0.361,
    "kind": "speech"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/05bb1f34-f734-51fb-a26f-c9331be8e1a4_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.4688,
+     0.3194,
+     0.0208,
+     0.0625
+    ],
+    "area": 0.0012,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 6.871687110234829
+   },
+   {
+    "png": "cutouts/05bb1f34-f734-51fb-a26f-c9331be8e1a4_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.4896,
+     0.3958,
+     0.0313,
+     0.0903
+    ],
+    "area": 0.0018,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 10.512684776660073
+   },
+   {
+    "png": "cutouts/05bb1f34-f734-51fb-a26f-c9331be8e1a4_2.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.5469,
+     0.4931,
+     0.0365,
+     0.1181
+    ],
+    "area": 0.0028,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 15.06764472302065
+   },
+   {
+    "png": "cutouts/05bb1f34-f734-51fb-a26f-c9331be8e1a4_3.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3906,
+     0.6042,
+     0.0365,
+     0.1667
+    ],
+    "area": 0.0038,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 20.426587260843885
+   },
+   {
+    "png": "cutouts/05bb1f34-f734-51fb-a26f-c9331be8e1a4_4.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.4948,
+     0.7361,
+     0.0365,
+     0.1944
+    ],
+    "area": 0.0051,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 26.515567216988995
+   },
+   {
+    "png": "cutouts/05bb1f34-f734-51fb-a26f-c9331be8e1a4_5.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.6354,
+     0.8819,
+     0.0365,
+     0.1181
+    ],
+    "area": 0.0038,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 33.28014259018347
+   }
+  ]
  },
  {
   "id": "218280c0-f9fd-5568-a0cb-b2f64f097d1a",
@@ -2167,7 +2716,7 @@
    "n": "06",
    "movement": 2,
    "label": "THE WATERLINE FALLS",
-   "line": "Resurrecting Atlantis. Here we are all one \u2014 the pact we've made here with nature, abandoned and hoped for the best, back on life.",
+   "line": "Resurrecting Atlantis. Here we are all one — the pact we've made here with nature, abandoned and hoped for the best, back on life.",
    "accent": "#5aa7ff",
    "engine": "ahellil",
    "mode": "dorian",
@@ -2193,7 +2742,73 @@
    "flatness": 0.102,
    "speech_band": 0.245,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/218280c0-f9fd-5568-a0cb-b2f64f097d1a_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.0417,
+     0.4861,
+     0.0365,
+     0.1181
+    ],
+    "area": 0.0029,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 15.14548
+   },
+   {
+    "png": "cutouts/218280c0-f9fd-5568-a0cb-b2f64f097d1a_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.1458,
+     0.4583,
+     0.0677,
+     0.1458
+    ],
+    "area": 0.0046,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 18.9158
+   },
+   {
+    "png": "cutouts/218280c0-f9fd-5568-a0cb-b2f64f097d1a_2.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3646,
+     0.4792,
+     0.0417,
+     0.125
+    ],
+    "area": 0.0031,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 15.77044
+   },
+   {
+    "png": "cutouts/218280c0-f9fd-5568-a0cb-b2f64f097d1a_3.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.5833,
+     0.4722,
+     0.0625,
+     0.1319
+    ],
+    "area": 0.0038,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 16.95768
+   }
+  ]
  },
  {
   "id": "f3084edd-e6d9-5f62-86e3-306db2e83f47",
@@ -2259,7 +2874,41 @@
    "flatness": 0.096,
    "speech_band": 0.279,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/f3084edd-e6d9-5f62-86e3-306db2e83f47_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3594,
+     0.7083,
+     0.0365,
+     0.1181
+    ],
+    "area": 0.0027,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 15
+   },
+   {
+    "png": "cutouts/f3084edd-e6d9-5f62-86e3-306db2e83f47_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.4115,
+     0.7083,
+     0.0365,
+     0.0903
+    ],
+    "area": 0.0013,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 12
+   }
+  ]
  },
  {
   "id": "31c98ba4-fc7a-5ef3-b054-b940fa970d9d",
@@ -2298,7 +2947,7 @@
    "n": "06",
    "movement": 4,
    "label": "NARROW STREETS",
-   "line": "Where shadows cast from narrow streets beaming with love \u2014 in the joyful noises that color rainbows, and give us infinite time to heal, and set clouds free.",
+   "line": "Where shadows cast from narrow streets beaming with love — in the joyful noises that color rainbows, and give us infinite time to heal, and set clouds free.",
    "accent": "#5aa7ff",
    "engine": "ahellil",
    "mode": "dorian",
@@ -2324,7 +2973,57 @@
    "flatness": 0.091,
    "speech_band": 0.291,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/31c98ba4-fc7a-5ef3-b054-b940fa970d9d_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.0625,
+     0.8819,
+     0.0365,
+     0.1111
+    ],
+    "area": 0.0019,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 14.81532
+   },
+   {
+    "png": "cutouts/31c98ba4-fc7a-5ef3-b054-b940fa970d9d_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3542,
+     0.8681,
+     0.0417,
+     0.125
+    ],
+    "area": 0.0028,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 16.61676
+   },
+   {
+    "png": "cutouts/31c98ba4-fc7a-5ef3-b054-b940fa970d9d_2.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.6927,
+     0.875,
+     0.0417,
+     0.1181
+    ],
+    "area": 0.0031,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 16.1366
+   }
+  ]
  },
  {
   "id": "ffd0e526-781d-5257-8269-0e04dedbd82d",
@@ -2370,7 +3069,7 @@
    "n": "06",
    "movement": 5,
    "label": "CROSSHAIRS TO CONTINUUMS",
-   "line": "I know my soul \u2014 and it could stay here forever. Leaving behind crosshairs for continuums, and strains for serendipity.",
+   "line": "I know my soul — and it could stay here forever. Leaving behind crosshairs for continuums, and strains for serendipity.",
    "accent": "#5aa7ff",
    "engine": "ahellil",
    "mode": "dorian",
@@ -2392,11 +3091,61 @@
   "audio": {
    "has_audio": true,
    "rms_db": -27.4,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.083,
    "speech_band": 0.255,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/ffd0e526-781d-5257-8269-0e04dedbd82d_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.0885,
+     0.8819,
+     0.0417,
+     0.1181
+    ],
+    "area": 0.0029,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 15.056000000000001
+   },
+   {
+    "png": "cutouts/ffd0e526-781d-5257-8269-0e04dedbd82d_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.7552,
+     0.8889,
+     0.0365,
+     0.1111
+    ],
+    "area": 0.0024,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 13.51128
+   },
+   {
+    "png": "cutouts/ffd0e526-781d-5257-8269-0e04dedbd82d_2.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.474,
+     0.75,
+     0.0625,
+     0.25
+    ],
+    "area": 0.0098,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 34
+   }
+  ]
  },
  {
   "id": "3ea096c8-2368-5ef5-b5cf-c024a9795ff3",
@@ -2452,7 +3201,7 @@
    "n": "06",
    "movement": 6,
    "label": "WELCOMING ALL",
-   "line": "A city born in unison, out of the purest of fictions \u2014 welcoming me, and welcoming all.",
+   "line": "A city born in unison, out of the purest of fictions — welcoming me, and welcoming all.",
    "accent": "#5aa7ff",
    "engine": "ahellil",
    "mode": "dorian",
@@ -2473,12 +3222,142 @@
   "frames": 8,
   "audio": {
    "has_audio": true,
-   "rms_db": -27.0,
-   "silence": 0.0,
+   "rms_db": -27,
+   "silence": 0,
    "flatness": 0.044,
    "speech_band": 0.213,
    "kind": "music"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_0.png",
+    "label": "elder",
+    "p": 1,
+    "bbox": [
+     0.3698,
+     0.8333,
+     0.0781,
+     0.1667
+    ],
+    "area": 0.0056,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 20.20985
+   },
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.5625,
+     0.8542,
+     0.0677,
+     0.1458
+    ],
+    "area": 0.0044,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 19.1362
+   },
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_2.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.2708,
+     0.8264,
+     0.0885,
+     0.1736
+    ],
+    "area": 0.0057,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 23.65685
+   },
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_3.png",
+    "label": "elder",
+    "p": 1,
+    "bbox": [
+     0.1771,
+     0.8125,
+     0.0885,
+     0.1875
+    ],
+    "area": 0.0062,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 23.74855
+   },
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_4.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.7448,
+     0.8264,
+     0.0781,
+     0.1736
+    ],
+    "area": 0.0054,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 22.88725
+   },
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_5.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.099,
+     0.8403,
+     0.0781,
+     0.1597
+    ],
+    "area": 0.0053,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 20.6732
+   },
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_6.png",
+    "label": "elder",
+    "p": 1,
+    "bbox": [
+     0.0156,
+     0.8264,
+     0.0781,
+     0.1736
+    ],
+    "area": 0.006,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 21.14235
+   },
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_7.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4427,
+     0.7431,
+     0.1198,
+     0.2569
+    ],
+    "area": 0.0111,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 34
+   }
+  ]
  },
  {
   "id": "c5855715-a5f3-5f76-9504-9a9070a41415",
@@ -2533,7 +3412,8 @@
    "flatness": 0.008,
    "speech_band": 0.198,
    "kind": "music"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "932c051d-5f80-5c4c-a9a9-eb159d85551b",
@@ -2594,11 +3474,29 @@
   "audio": {
    "has_audio": true,
    "rms_db": -27.4,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.092,
    "speech_band": 0.285,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/932c051d-5f80-5c4c-a9a9-eb159d85551b_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.474,
+     0.6736,
+     0.0625,
+     0.2014
+    ],
+    "area": 0.0067,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 26.200000000000003
+   }
+  ]
  },
  {
   "id": "7fb37131-75c4-50fe-8f5b-b9ec89b9c6ef",
@@ -2644,7 +3542,7 @@
    "n": "07",
    "movement": 2,
    "label": "VINEYARD GHOSTS",
-   "line": "I have a love story to tell \u2014 of ghosts, whispering unfolded dilutions, birthed in purity, and dying in the vineyards of sun-soaked evergreen fields, unnourished.",
+   "line": "I have a love story to tell — of ghosts, whispering unfolded dilutions, birthed in purity, and dying in the vineyards of sun-soaked evergreen fields, unnourished.",
    "accent": "#5aa7ff",
    "engine": "taasu",
    "mode": "penta",
@@ -2670,7 +3568,25 @@
    "flatness": 0.115,
    "speech_band": 0.195,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/7fb37131-75c4-50fe-8f5b-b9ec89b9c6ef_0.png",
+    "label": "turned",
+    "p": 1,
+    "bbox": [
+     0.5781,
+     0.3056,
+     0.0208,
+     0.0556
+    ],
+    "area": 0.0009,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 6.459283674548608
+   }
+  ]
  },
  {
   "id": "2d91fbf4-e1ff-52b1-9a51-97911558f13b",
@@ -2710,7 +3626,7 @@
    "n": "07",
    "movement": 3,
    "label": "THOUSAND LIGHT YEARS",
-   "line": "One by one, treasures escaping \u2014 devaluing themselves after unsullied stars diminished their glares. I walked a thousand light years to be heard. So DJ \u2014 please \u2014 turn me up.",
+   "line": "One by one, treasures escaping — devaluing themselves after unsullied stars diminished their glares. I walked a thousand light years to be heard. So DJ — please — turn me up.",
    "accent": "#5aa7ff",
    "engine": "taasu",
    "mode": "penta",
@@ -2732,11 +3648,29 @@
   "audio": {
    "has_audio": true,
    "rms_db": -27.3,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.12,
    "speech_band": 0.323,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/2d91fbf4-e1ff-52b1-9a51-97911558f13b_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.1927,
+     0.7222,
+     0.026,
+     0.1389
+    ],
+    "area": 0.0018,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 27.744000000000003
+   }
+  ]
  },
  {
   "id": "68d810df-ff8d-597e-912b-71102a72b6fe",
@@ -2767,7 +3701,7 @@
    "n": "07",
    "movement": 4,
    "label": "DIVERGING RINGS",
-   "line": "So I can speak: of wedding bands diverging across abstract skies of wounded souls. Of a shared home, boxed and trucked on separate one-way streets \u2014 not built with U-turns, or stop, maybe-we-shouldn't signs.",
+   "line": "So I can speak: of wedding bands diverging across abstract skies of wounded souls. Of a shared home, boxed and trucked on separate one-way streets — not built with U-turns, or stop, maybe-we-shouldn't signs.",
    "accent": "#5aa7ff",
    "engine": "taasu",
    "mode": "penta",
@@ -2789,11 +3723,12 @@
   "audio": {
    "has_audio": true,
    "rms_db": -26.8,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.113,
    "speech_band": 0.279,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "39a76c6f-4471-591c-8a9e-3748cb12f06e",
@@ -2824,7 +3759,7 @@
    "n": "07",
    "movement": 5,
    "label": "ELEVEN PETALS",
-   "line": "A love story of years \u2014 eleven years \u2014 each plunkled off as daisy petals. We love, we not. Of a future gone swiftly, and a past left empty-handed.",
+   "line": "A love story of years — eleven years — each plunkled off as daisy petals. We love, we not. Of a future gone swiftly, and a past left empty-handed.",
    "accent": "#5aa7ff",
    "engine": "taasu",
    "mode": "penta",
@@ -2846,11 +3781,12 @@
   "audio": {
    "has_audio": true,
    "rms_db": -27.1,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.108,
    "speech_band": 0.391,
    "kind": "speech"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "c134d78d-fba2-5f65-98ad-aae2db4a1a18",
@@ -2881,7 +3817,7 @@
    "n": "07",
    "movement": 6,
    "label": "THREE ROADS",
-   "line": "To pick a road: of heavy rain. Or of frontal fog. Or of dimmed night lights under a cloud \u2014 with a silver lining.",
+   "line": "To pick a road: of heavy rain. Or of frontal fog. Or of dimmed night lights under a cloud — with a silver lining.",
    "accent": "#5aa7ff",
    "engine": "taasu",
    "mode": "penta",
@@ -2903,11 +3839,12 @@
   "audio": {
    "has_audio": true,
    "rms_db": -26.7,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.104,
    "speech_band": 0.305,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "4d796f60-c884-525e-9ac1-f7032bb8eb12",
@@ -2946,7 +3883,7 @@
    "n": "07",
    "movement": 7,
    "label": "CHIN HIGH",
-   "line": "Now, turning forth to face delights and shadows \u2014 one night at a time; one tear at a time; one open mic at a time. Chin now nested high, and volume turnt up.",
+   "line": "Now, turning forth to face delights and shadows — one night at a time; one tear at a time; one open mic at a time. Chin now nested high, and volume turnt up.",
    "accent": "#5aa7ff",
    "engine": "taasu",
    "mode": "penta",
@@ -2972,7 +3909,25 @@
    "flatness": 0.018,
    "speech_band": 0.225,
    "kind": "music"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/4d796f60-c884-525e-9ac1-f7032bb8eb12_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4167,
+     0.4792,
+     0.1927,
+     0.3958
+    ],
+    "area": 0.0249,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 53.970000000000006
+   }
+  ]
  },
  {
   "id": "5969c0bb-4210-58db-9706-dc9d35734909",
@@ -3023,11 +3978,12 @@
   "audio": {
    "has_audio": true,
    "rms_db": -36.2,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.008,
    "speech_band": 0.078,
    "kind": "music"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "b8ba7303-bda7-595a-850e-41a927ddf04f",
@@ -3073,7 +4029,7 @@
    "n": "08",
    "movement": 1,
    "label": "PULSING",
-   "line": "Pulsing, and head throbbing from the music \u2014 and empty, on a crowded floor of sweated perfumes and temptations.",
+   "line": "Pulsing, and head throbbing from the music — and empty, on a crowded floor of sweated perfumes and temptations.",
    "accent": "#5aa7ff",
    "engine": "sega",
    "mode": "ionian",
@@ -3095,11 +4051,125 @@
   "audio": {
    "has_audio": true,
    "rms_db": -25.1,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.12,
    "speech_band": 0.338,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/b8ba7303-bda7-595a-850e-41a927ddf04f_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.0885,
+     0.5694,
+     0.0521,
+     0.1528
+    ],
+    "area": 0.0045,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 20.13698
+   },
+   {
+    "png": "cutouts/b8ba7303-bda7-595a-850e-41a927ddf04f_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.5833,
+     0.6944,
+     0.0521,
+     0.1806
+    ],
+    "area": 0.0055,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 24.2399
+   },
+   {
+    "png": "cutouts/b8ba7303-bda7-595a-850e-41a927ddf04f_2.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.7292,
+     0.7708,
+     0.0573,
+     0.1667
+    ],
+    "area": 0.0052,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 21.04346
+   },
+   {
+    "png": "cutouts/b8ba7303-bda7-595a-850e-41a927ddf04f_3.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.1771,
+     0.75,
+     0.0521,
+     0.1806
+    ],
+    "area": 0.006,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 25.14125
+   },
+   {
+    "png": "cutouts/b8ba7303-bda7-595a-850e-41a927ddf04f_4.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.8802,
+     0.6528,
+     0.0469,
+     0.1667
+    ],
+    "area": 0.0047,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 22.213729999999998
+   },
+   {
+    "png": "cutouts/b8ba7303-bda7-595a-850e-41a927ddf04f_5.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.8698,
+     0.5556,
+     0.0573,
+     0.2083
+    ],
+    "area": 0.0045,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 28.366039999999998
+   },
+   {
+    "png": "cutouts/b8ba7303-bda7-595a-850e-41a927ddf04f_6.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4688,
+     0.7222,
+     0.0729,
+     0.25
+    ],
+    "area": 0.0102,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 34
+   }
+  ]
  },
  {
   "id": "9918ab42-fb7d-5bfd-b4bd-25fe82946775",
@@ -3145,7 +4215,7 @@
    "n": "08",
    "movement": 2,
    "label": "THE ESCAPE",
-   "line": "The soul escapes my body, and leaves him on the dance floor \u2014 just flesh and bones. Rejection and heartache hit different, with no feelings afloat.",
+   "line": "The soul escapes my body, and leaves him on the dance floor — just flesh and bones. Rejection and heartache hit different, with no feelings afloat.",
    "accent": "#5aa7ff",
    "engine": "sega",
    "mode": "ionian",
@@ -3167,11 +4237,93 @@
   "audio": {
    "has_audio": true,
    "rms_db": -25.5,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.148,
    "speech_band": 0.327,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/9918ab42-fb7d-5bfd-b4bd-25fe82946775_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.0885,
+     0.6042,
+     0.0521,
+     0.1528
+    ],
+    "area": 0.0048,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 20.13698
+   },
+   {
+    "png": "cutouts/9918ab42-fb7d-5bfd-b4bd-25fe82946775_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.724,
+     0.6944,
+     0.0469,
+     0.1736
+    ],
+    "area": 0.0056,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 24.2399
+   },
+   {
+    "png": "cutouts/9918ab42-fb7d-5bfd-b4bd-25fe82946775_2.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.8073,
+     0.75,
+     0.0521,
+     0.1667
+    ],
+    "area": 0.005,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 21.04346
+   },
+   {
+    "png": "cutouts/9918ab42-fb7d-5bfd-b4bd-25fe82946775_3.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4688,
+     0.7222,
+     0.0677,
+     0.25
+    ],
+    "area": 0.01,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 34
+   },
+   {
+    "png": "cutouts/9918ab42-fb7d-5bfd-b4bd-25fe82946775_4.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.5729,
+     0.2847,
+     0.099,
+     0.2153
+    ],
+    "area": 0.0036,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 29.24981017120908
+   }
+  ]
  },
  {
   "id": "5d2342c9-421f-5db3-946a-b4b32fdb2854",
@@ -3238,12 +4390,158 @@
   "frames": 8,
   "audio": {
    "has_audio": true,
-   "rms_db": -26.0,
+   "rms_db": -26,
    "silence": 0.002,
    "flatness": 0.097,
    "speech_band": 0.257,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.2917,
+     0.7361,
+     0.0365,
+     0.1458
+    ],
+    "area": 0.0023,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 22.481659999999998
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.7031,
+     0.5903,
+     0.0469,
+     0.1736
+    ],
+    "area": 0.0044,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 24.71528
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_2.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.1979,
+     0.6944,
+     0.0469,
+     0.1806
+    ],
+    "area": 0.0057,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 24.42593
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_3.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.6094,
+     0.6528,
+     0.0521,
+     0.1597
+    ],
+    "area": 0.0052,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 20.69435
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_4.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.6979,
+     0.5625,
+     0.0521,
+     0.1944
+    ],
+    "area": 0.0017,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 26.69447
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_5.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.2813,
+     0.5694,
+     0.0521,
+     0.1389
+    ],
+    "area": 0.0039,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 27.83198
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_6.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.2813,
+     0.6597,
+     0.0677,
+     0.1736
+    ],
+    "area": 0.0052,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 23
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_7.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.474,
+     0.7153,
+     0.0625,
+     0.2569
+    ],
+    "area": 0.01,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 34
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_8.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.7969,
+     0.0972,
+     0.0573,
+     0.1181
+    ],
+    "area": 0.0028,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 15
+   }
+  ]
  },
  {
   "id": "f2562745-8502-5420-b1c0-0865122ee591",
@@ -3282,7 +4580,7 @@
    "n": "08",
    "movement": 4,
    "label": "THE EQUATOR",
-   "line": "Now let us put my soul in the middle of an open field \u2014 at the equator of a planet much larger than my own, and much hotter.",
+   "line": "Now let us put my soul in the middle of an open field — at the equator of a planet much larger than my own, and much hotter.",
    "accent": "#5aa7ff",
    "engine": "sega",
    "mode": "ionian",
@@ -3308,7 +4606,25 @@
    "flatness": 0.118,
    "speech_band": 0.268,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/f2562745-8502-5420-b1c0-0865122ee591_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.5573,
+     0.3403,
+     0.0573,
+     0.0972
+    ],
+    "area": 0.0017,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 21.793303376034064
+   }
+  ]
  },
  {
   "id": "f729175b-5786-5941-b1b6-c13eacd44f20",
@@ -3347,7 +4663,7 @@
    "n": "08",
    "movement": 5,
    "label": "COOL ME DOWN",
-   "line": "Cool me down: pouring unfiltered water out of ice baths, salted from the closest moons, from angles of the newest religions \u2014 their graces curse or bless me. Only infinity will tell.",
+   "line": "Cool me down: pouring unfiltered water out of ice baths, salted from the closest moons, from angles of the newest religions — their graces curse or bless me. Only infinity will tell.",
    "accent": "#5aa7ff",
    "engine": "sega",
    "mode": "ionian",
@@ -3373,7 +4689,25 @@
    "flatness": 0.119,
    "speech_band": 0.283,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/f729175b-5786-5941-b1b6-c13eacd44f20_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4583,
+     0.6389,
+     0.0885,
+     0.1944
+    ],
+    "area": 0.0034,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 26
+   }
+  ]
  },
  {
   "id": "02ccffde-15e2-5f9e-951e-96ff095c65a9",
@@ -3419,7 +4753,7 @@
    "n": "08",
    "movement": 6,
    "label": "BACK TO MY BODY",
-   "line": "Now bring my soul back to my body: to lean back, breathe in the smoke that fills the room \u2014 how good it is to finally get acquainted with the night.",
+   "line": "Now bring my soul back to my body: to lean back, breathe in the smoke that fills the room — how good it is to finally get acquainted with the night.",
    "accent": "#5aa7ff",
    "engine": "sega",
    "mode": "ionian",
@@ -3445,7 +4779,57 @@
    "flatness": 0.11,
    "speech_band": 0.319,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/02ccffde-15e2-5f9e-951e-96ff095c65a9_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.1823,
+     0.7083,
+     0.0521,
+     0.1875
+    ],
+    "area": 0.0062,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 25.82741
+   },
+   {
+    "png": "cutouts/02ccffde-15e2-5f9e-951e-96ff095c65a9_1.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4531,
+     0.7222,
+     0.1198,
+     0.25
+    ],
+    "area": 0.0109,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 34
+   },
+   {
+    "png": "cutouts/02ccffde-15e2-5f9e-951e-96ff095c65a9_2.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4531,
+     0.5347,
+     0.1198,
+     0.2431
+    ],
+    "area": 0.0073,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 33.39182962907096
+   }
+  ]
  },
  {
   "id": "30a3dedf-d497-5ed3-90f5-db7b3b7387cb",
@@ -3505,12 +4889,30 @@
   "frames": 8,
   "audio": {
    "has_audio": true,
-   "rms_db": -27.0,
+   "rms_db": -27,
    "silence": 0.002,
    "flatness": 0.019,
    "speech_band": 0.229,
    "kind": "music"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/30a3dedf-d497-5ed3-90f5-db7b3b7387cb_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4792,
+     0.7569,
+     0.0833,
+     0.1736
+    ],
+    "area": 0.0059,
+    "src": "drawn",
+    "mode": "sit",
+    "face": 1,
+    "heightRows": 29
+   }
+  ]
  },
  {
   "id": "b2b899a6-dcfe-5d69-a307-7359faeb6192",
@@ -3565,7 +4967,8 @@
    "flatness": 0.012,
    "speech_band": 0.274,
    "kind": "music"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "62097226-74fb-5039-81fc-5ce2acda445b",
@@ -3611,7 +5014,7 @@
    "n": "09",
    "movement": 1,
    "label": "THE SHARED MOON",
-   "line": "Before I go, we look at the moon the way we used to see it. We talk for years, travel through time \u2014 we grow old together, I believe. Maybe we could have it all.",
+   "line": "Before I go, we look at the moon the way we used to see it. We talk for years, travel through time — we grow old together, I believe. Maybe we could have it all.",
    "accent": "#5aa7ff",
    "engine": "kabary",
    "mode": "dorian",
@@ -3633,11 +5036,45 @@
   "audio": {
    "has_audio": true,
    "rms_db": -25.8,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.108,
    "speech_band": 0.308,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/62097226-74fb-5039-81fc-5ce2acda445b_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.3281,
+     0.3542,
+     0.125,
+     0.5278
+    ],
+    "area": 0.0396,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 72
+   },
+   {
+    "png": "cutouts/62097226-74fb-5039-81fc-5ce2acda445b_1.png",
+    "label": "custom",
+    "p": 1,
+    "bbox": [
+     0.5573,
+     0.3542,
+     0.1302,
+     0.5278
+    ],
+    "area": 0.04,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 72
+   }
+  ]
  },
  {
   "id": "6a18dc0b-29fd-55af-8982-f7fc21addd7c",
@@ -3683,7 +5120,7 @@
    "n": "09",
    "movement": 2,
    "label": "TEARS, AN ABYSS",
-   "line": "Before I go, I call on my mother \u2014 in tears, speaking of an abyss she's never known. We talk for years, re-closet wounds, and re-explain my way of birth. Even after prayer: what isn't mine, I still can not give.",
+   "line": "Before I go, I call on my mother — in tears, speaking of an abyss she's never known. We talk for years, re-closet wounds, and re-explain my way of birth. Even after prayer: what isn't mine, I still can not give.",
    "accent": "#5aa7ff",
    "engine": "kabary",
    "mode": "dorian",
@@ -3709,7 +5146,41 @@
    "flatness": 0.1,
    "speech_band": 0.28,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/6a18dc0b-29fd-55af-8982-f7fc21addd7c_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.349,
+     0.3542,
+     0.1302,
+     0.5278
+    ],
+    "area": 0.04,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 72
+   },
+   {
+    "png": "cutouts/6a18dc0b-29fd-55af-8982-f7fc21addd7c_1.png",
+    "label": "custom",
+    "p": 1,
+    "bbox": [
+     0.526,
+     0.3542,
+     0.1302,
+     0.5278
+    ],
+    "area": 0.0394,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 72
+   }
+  ]
  },
  {
   "id": "7e938b85-56ec-5316-a882-2232df5622ed",
@@ -3755,7 +5226,7 @@
    "n": "09",
    "movement": 3,
    "label": "HIS FOOTSTEPS, RETRACED",
-   "line": "Before I go, I call on my father \u2014 his calming demeanor summoned from the yonders. We walk for years, east toward the sunrises, retracing his footsteps \u2014 my tears falling in the wave shadows of the inner harbor.",
+   "line": "Before I go, I call on my father — his calming demeanor summoned from the yonders. We walk for years, east toward the sunrises, retracing his footsteps — my tears falling in the wave shadows of the inner harbor.",
    "accent": "#5aa7ff",
    "engine": "kabary",
    "mode": "dorian",
@@ -3777,11 +5248,45 @@
   "audio": {
    "has_audio": true,
    "rms_db": -25.7,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.115,
    "speech_band": 0.256,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/7e938b85-56ec-5316-a882-2232df5622ed_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.2031,
+     0.3472,
+     0.1302,
+     0.5347
+    ],
+    "area": 0.04,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 72
+   },
+   {
+    "png": "cutouts/7e938b85-56ec-5316-a882-2232df5622ed_1.png",
+    "label": "elder",
+    "p": 1,
+    "bbox": [
+     0.7917,
+     0.3542,
+     0.1354,
+     0.5278
+    ],
+    "area": 0.0403,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 72
+   }
+  ]
  },
  {
   "id": "1b78a291-9968-5382-a71a-9cd2f78fe946",
@@ -3827,7 +5332,7 @@
    "n": "09",
    "movement": 4,
    "label": "EAST, AT THE HARBOR",
-   "line": "We stroll, father and son, hearted and shaken. Someone borrowed, and someone blue \u2014 yet, broken. Yet, heard.",
+   "line": "We stroll, father and son, hearted and shaken. Someone borrowed, and someone blue — yet, broken. Yet, heard.",
    "accent": "#5aa7ff",
    "engine": "kabary",
    "mode": "dorian",
@@ -3853,7 +5358,41 @@
    "flatness": 0.062,
    "speech_band": 0.203,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/1b78a291-9968-5382-a71a-9cd2f78fe946_0.png",
+    "label": "elder",
+    "p": 1,
+    "bbox": [
+     0.1146,
+     0.3681,
+     0.099,
+     0.5139
+    ],
+    "area": 0.0312,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 70
+   },
+   {
+    "png": "cutouts/1b78a291-9968-5382-a71a-9cd2f78fe946_1.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.2604,
+     0.4028,
+     0.0833,
+     0.4722
+    ],
+    "area": 0.0253,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 65
+   }
+  ]
  },
  {
   "id": "c3a0a8c1-7679-5ab7-b482-16915a545812",
@@ -3908,7 +5447,8 @@
    "flatness": 0.009,
    "speech_band": 0.294,
    "kind": "music"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "a01db976-e942-57b7-9baa-23680bbf9714",
@@ -3948,7 +5488,7 @@
    "n": "10",
    "movement": 1,
    "label": "HOP ON",
-   "line": "I wasn't looking for a ride, but here you are \u2014 blissful, and oddly sensitive. I rub my aggressions into your steel coverings, and hop on.",
+   "line": "I wasn't looking for a ride, but here you are — blissful, and oddly sensitive. I rub my aggressions into your steel coverings, and hop on.",
    "accent": "#5aa7ff",
    "engine": "epic",
    "mode": "bayati",
@@ -3974,7 +5514,25 @@
    "flatness": 0.083,
    "speech_band": 0.273,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/a01db976-e942-57b7-9baa-23680bbf9714_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.0208,
+     0.5764,
+     0.0885,
+     0.3264
+    ],
+    "area": 0.0136,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 46
+   }
+  ]
  },
  {
   "id": "e3ae9965-0d24-55f1-a146-edf338a62cf1",
@@ -4005,7 +5563,7 @@
    "n": "10",
    "movement": 2,
    "label": "HEADS TWIST",
-   "line": "Loneliness is having everything with no one to tell \u2014 being everywhere, with no one to love. I let the noise block the noise. The way I ride: eyes turn, heads twist \u2014 and prove the magic still exists.",
+   "line": "Loneliness is having everything with no one to tell — being everywhere, with no one to love. I let the noise block the noise. The way I ride: eyes turn, heads twist — and prove the magic still exists.",
    "accent": "#5aa7ff",
    "engine": "epic",
    "mode": "bayati",
@@ -4031,7 +5589,8 @@
    "flatness": 0.089,
    "speech_band": 0.205,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "3e1de25f-e79f-5271-bb87-9b6fc34fb839",
@@ -4062,7 +5621,7 @@
    "n": "10",
    "movement": 3,
    "label": "MOON SETTLES",
-   "line": "All preparations to live and dream in darkness, I no longer desire. The moon settles, and the tease of distant stars subsides \u2014 and I can see a morning ahead for me.",
+   "line": "All preparations to live and dream in darkness, I no longer desire. The moon settles, and the tease of distant stars subsides — and I can see a morning ahead for me.",
    "accent": "#5aa7ff",
    "engine": "epic",
    "mode": "bayati",
@@ -4083,12 +5642,13 @@
   "frames": 8,
   "audio": {
    "has_audio": true,
-   "rms_db": -27.0,
+   "rms_db": -27,
    "silence": 0.004,
    "flatness": 0.116,
    "speech_band": 0.371,
    "kind": "speech"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "b0fd6e0d-e867-5f69-9e8a-933026825605",
@@ -4119,7 +5679,7 @@
    "n": "10",
    "movement": 4,
    "label": "NIGHT REPLACED",
-   "line": "It looks like a morning I could believe in \u2014 a morning where loss and life aren't so \u2014 well \u2014 ripe with sunlight that's deceptively warm. The chirping of birds, fueling of nests, spring out of the night that has covered me.",
+   "line": "It looks like a morning I could believe in — a morning where loss and life aren't so — well — ripe with sunlight that's deceptively warm. The chirping of birds, fueling of nests, spring out of the night that has covered me.",
    "accent": "#5aa7ff",
    "engine": "epic",
    "mode": "bayati",
@@ -4141,11 +5701,12 @@
   "audio": {
    "has_audio": true,
    "rms_db": -27.5,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.114,
    "speech_band": 0.231,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "fbb610ec-8e23-57d3-a5d8-e401eafde8d8",
@@ -4176,7 +5737,7 @@
    "n": "10",
    "movement": 5,
    "label": "BLISSFUL, INNOCENT",
-   "line": "With my own curiosities, for a chance at an end wherever everything will be OK. I want to live in this feeling forever \u2014 blissful, and oddly innocent.",
+   "line": "With my own curiosities, for a chance at an end wherever everything will be OK. I want to live in this feeling forever — blissful, and oddly innocent.",
    "accent": "#5aa7ff",
    "engine": "epic",
    "mode": "bayati",
@@ -4202,7 +5763,8 @@
    "flatness": 0.104,
    "speech_band": 0.243,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "3b666380-cb95-55c3-8d48-bc1a674bd8ee",
@@ -4233,7 +5795,7 @@
    "n": "10",
    "movement": 6,
    "label": "CHILLY MORNING",
-   "line": "Riding in a way you can't help but double-click \u2014 and prove the magic still exists. Even here, it's chilly in the morning.",
+   "line": "Riding in a way you can't help but double-click — and prove the magic still exists. Even here, it's chilly in the morning.",
    "accent": "#5aa7ff",
    "engine": "epic",
    "mode": "bayati",
@@ -4255,11 +5817,12 @@
   "audio": {
    "has_audio": true,
    "rms_db": -27.3,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.02,
    "speech_band": 0.213,
    "kind": "music"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "dd4b4f1e-be49-5f29-9e28-3141bcfa1d2f",
@@ -4314,7 +5877,8 @@
    "flatness": 0.009,
    "speech_band": 0.13,
    "kind": "music"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "c0d9ec81-c6ab-551b-aab8-1c49e5ec999b",
@@ -4366,11 +5930,12 @@
   "audio": {
    "has_audio": true,
    "rms_db": -27.5,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.109,
    "speech_band": 0.234,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "8da3e87a-dcf4-5404-9d87-d875bdff7b9e",
@@ -4410,7 +5975,7 @@
    "n": "11",
    "movement": 2,
    "label": "FIRST COURSES",
-   "line": "In the awakening of dawn, in fresh muted colors: we can rebuild this temple. It's a new day \u2014 a catharsis for me to say, with newfound energies and recycled airs.",
+   "line": "In the awakening of dawn, in fresh muted colors: we can rebuild this temple. It's a new day — a catharsis for me to say, with newfound energies and recycled airs.",
    "accent": "#5aa7ff",
    "engine": "qene",
    "mode": "ambassel",
@@ -4436,7 +6001,41 @@
    "flatness": 0.111,
    "speech_band": 0.254,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/8da3e87a-dcf4-5404-9d87-d875bdff7b9e_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.1042,
+     0.75,
+     0.0365,
+     0.1111
+    ],
+    "area": 0.0024,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 14
+   },
+   {
+    "png": "cutouts/8da3e87a-dcf4-5404-9d87-d875bdff7b9e_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.8802,
+     0.7569,
+     0.0417,
+     0.1042
+    ],
+    "area": 0.0021,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 13
+   }
+  ]
  },
  {
   "id": "2029e24b-56ce-510a-ab9d-f1aecaa39282",
@@ -4476,7 +6075,7 @@
    "n": "11",
    "movement": 3,
    "label": "COLUMNS AND BEAMS",
-   "line": "We can rebuild this temple \u2014 under vibrant sun rays of glory, of the wisdoms of morning dews and their winks of luck.",
+   "line": "We can rebuild this temple — under vibrant sun rays of glory, of the wisdoms of morning dews and their winks of luck.",
    "accent": "#5aa7ff",
    "engine": "qene",
    "mode": "ambassel",
@@ -4498,11 +6097,45 @@
   "audio": {
    "has_audio": true,
    "rms_db": -27.4,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.074,
    "speech_band": 0.298,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/2029e24b-56ce-510a-ab9d-f1aecaa39282_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3906,
+     0.6597,
+     0.0417,
+     0.1042
+    ],
+    "area": 0.0027,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 15
+   },
+   {
+    "png": "cutouts/2029e24b-56ce-510a-ab9d-f1aecaa39282_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.8646,
+     0.7569,
+     0.0573,
+     0.1042
+    ],
+    "area": 0.0022,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 13
+   }
+  ]
  },
  {
   "id": "d6d23a1f-5711-5144-a568-4d5854f36b4d",
@@ -4567,7 +6200,25 @@
    "flatness": 0.079,
    "speech_band": 0.281,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/d6d23a1f-5711-5144-a568-4d5854f36b4d_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.4115,
+     0.3472,
+     0.0521,
+     0.1528
+    ],
+    "area": 0.005,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 20
+   }
+  ]
  },
  {
   "id": "e3e81f60-e2e8-5f2f-a5a4-8f43db970532",
@@ -4606,7 +6257,7 @@
    "n": "11",
    "movement": 5,
    "label": "WALKING ON WATER",
-   "line": "And of modern faiths \u2014 that we too can walk on water. Deep breaths, in appreciation of present life, and our present positions.",
+   "line": "And of modern faiths — that we too can walk on water. Deep breaths, in appreciation of present life, and our present positions.",
    "accent": "#5aa7ff",
    "engine": "qene",
    "mode": "ambassel",
@@ -4628,11 +6279,29 @@
   "audio": {
    "has_audio": true,
    "rms_db": -27.5,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.073,
    "speech_band": 0.194,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/e3e81f60-e2e8-5f2f-a5a4-8f43db970532_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.7708,
+     0.5625,
+     0.0625,
+     0.2292
+    ],
+    "area": 0.0071,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 30
+   }
+  ]
  },
  {
   "id": "df6035e0-1cc5-5f7f-9002-b11c35699883",
@@ -4698,7 +6367,25 @@
    "flatness": 0.02,
    "speech_band": 0.242,
    "kind": "music"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/df6035e0-1cc5-5f7f-9002-b11c35699883_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.9375,
+     0.7569,
+     0.0365,
+     0.1042
+    ],
+    "area": 0.0023,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 13
+   }
+  ]
  },
  {
   "id": "3effa499-d28d-54b0-bd42-eb7088b77b91",
@@ -4753,7 +6440,8 @@
    "flatness": 0.008,
    "speech_band": 0.188,
    "kind": "music"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "d9ac5155-6f88-5a45-ae52-ad65bbcc7507",
@@ -4799,7 +6487,7 @@
    "n": "12",
    "movement": 1,
    "label": "HUGS WITH NO REASON",
-   "line": "Decades later, there is less time for words, and more space for laughter \u2014 hugs with no reason, and loud voices, so our hearts can be overheard.",
+   "line": "Decades later, there is less time for words, and more space for laughter — hugs with no reason, and loud voices, so our hearts can be overheard.",
    "accent": "#5aa7ff",
    "engine": "theydinn",
    "mode": "hijaz",
@@ -4821,11 +6509,45 @@
   "audio": {
    "has_audio": true,
    "rms_db": -27.4,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.092,
    "speech_band": 0.237,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/d9ac5155-6f88-5a45-ae52-ad65bbcc7507_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.3958,
+     0.6528,
+     0.1198,
+     0.25
+    ],
+    "area": 0.0103,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 33
+   },
+   {
+    "png": "cutouts/d9ac5155-6f88-5a45-ae52-ad65bbcc7507_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.5052,
+     0.6597,
+     0.099,
+     0.2431
+    ],
+    "area": 0.0096,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 33
+   }
+  ]
  },
  {
   "id": "383c8f21-4b4c-52d5-845e-2f9f89d558bc",
@@ -4896,7 +6618,41 @@
    "flatness": 0.074,
    "speech_band": 0.271,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/383c8f21-4b4c-52d5-845e-2f9f89d558bc_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.3698,
+     0.6806,
+     0.0781,
+     0.2222
+    ],
+    "area": 0.0081,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 27
+   },
+   {
+    "png": "cutouts/383c8f21-4b4c-52d5-845e-2f9f89d558bc_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.5573,
+     0.6736,
+     0.0781,
+     0.2292
+    ],
+    "area": 0.0076,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 27
+   }
+  ]
  },
  {
   "id": "1d4f3297-cff1-54f5-aabd-7e6a2d548c8f",
@@ -4941,7 +6697,7 @@
    "n": "12",
    "movement": 3,
    "label": "ELDERS, NOW PAST",
-   "line": "Reflecting on legacies, and creeds once told \u2014 of elders, now past.",
+   "line": "Reflecting on legacies, and creeds once told — of elders, now past.",
    "accent": "#5aa7ff",
    "engine": "theydinn",
    "mode": "hijaz",
@@ -4967,7 +6723,41 @@
    "flatness": 0.088,
    "speech_band": 0.353,
    "kind": "speech"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/1d4f3297-cff1-54f5-aabd-7e6a2d548c8f_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.3177,
+     0.6806,
+     0.0625,
+     0.2222
+    ],
+    "area": 0.008,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 29
+   },
+   {
+    "png": "cutouts/1d4f3297-cff1-54f5-aabd-7e6a2d548c8f_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.6302,
+     0.6875,
+     0.0573,
+     0.2153
+    ],
+    "area": 0.0076,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 29
+   }
+  ]
  },
  {
   "id": "e74dd521-2dfb-53bb-b780-fdf32762c18a",
@@ -5035,11 +6825,45 @@
   "audio": {
    "has_audio": true,
    "rms_db": -28.4,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.092,
    "speech_band": 0.313,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/e74dd521-2dfb-53bb-b780-fdf32762c18a_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.2917,
+     0.6806,
+     0.0521,
+     0.2222
+    ],
+    "area": 0.0077,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 29
+   },
+   {
+    "png": "cutouts/e74dd521-2dfb-53bb-b780-fdf32762c18a_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.6615,
+     0.6875,
+     0.0573,
+     0.2153
+    ],
+    "area": 0.0076,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 29
+   }
+  ]
  },
  {
   "id": "5a61d4f8-bb06-56da-a3c0-24806eaf664f",
@@ -5085,7 +6909,7 @@
    "n": "12",
    "movement": 5,
    "label": "WINDS PART",
-   "line": "Before our winds part ways \u2014 to a next lifetime. This is brotherhood.",
+   "line": "Before our winds part ways — to a next lifetime. This is brotherhood.",
    "accent": "#5aa7ff",
    "engine": "theydinn",
    "mode": "hijaz",
@@ -5111,7 +6935,41 @@
    "flatness": 0.013,
    "speech_band": 0.284,
    "kind": "music"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/5a61d4f8-bb06-56da-a3c0-24806eaf664f_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.2396,
+     0.6736,
+     0.1094,
+     0.2292
+    ],
+    "area": 0.0092,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 30
+   },
+   {
+    "png": "cutouts/5a61d4f8-bb06-56da-a3c0-24806eaf664f_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.6615,
+     0.6806,
+     0.1042,
+     0.2222
+    ],
+    "area": 0.0086,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 30
+   }
+  ]
  },
  {
   "id": "04bbbf2b-7105-5c69-9d2a-3ed5b18a1bc4",
@@ -5162,11 +7020,12 @@
   "audio": {
    "has_audio": true,
    "rms_db": -29.8,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.01,
    "speech_band": 0.255,
    "kind": "music"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "f2445fa1-eea3-5562-a19e-bb1b5a8b8b13",
@@ -5232,7 +7091,25 @@
    "flatness": 0.078,
    "speech_band": 0.246,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/f2445fa1-eea3-5562-a19e-bb1b5a8b8b13_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.1406,
+     0.6875,
+     0.0573,
+     0.2569
+    ],
+    "area": 0.0084,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 34
+   }
+  ]
  },
  {
   "id": "470c19e1-5841-5801-9d4a-c7b8ac9a8a0d",
@@ -5272,7 +7149,7 @@
    "n": "13",
    "movement": 2,
    "label": "COUNTED ORBITS",
-   "line": "The couples orbit each other the way Jupiter keeps its moons \u2014 close, and counted.",
+   "line": "The couples orbit each other the way Jupiter keeps its moons — close, and counted.",
    "accent": "#5aa7ff",
    "engine": "taarab",
    "mode": "rast",
@@ -5298,7 +7175,25 @@
    "flatness": 0.097,
    "speech_band": 0.254,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/470c19e1-5841-5801-9d4a-c7b8ac9a8a0d_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0,
+     0.7361,
+     0.0365,
+     0.1875
+    ],
+    "area": 0.0038,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 27
+   }
+  ]
  },
  {
   "id": "e7bcbe7e-882b-5256-928c-cb56ba241c8c",
@@ -5337,7 +7232,7 @@
    "n": "13",
    "movement": 3,
    "label": "BURNED STORIES",
-   "line": "The elders clutch their pearls and pray. Life has burned all my love stories \u2014 victory-less seasons.",
+   "line": "The elders clutch their pearls and pray. Life has burned all my love stories — victory-less seasons.",
    "accent": "#5aa7ff",
    "engine": "taarab",
    "mode": "rast",
@@ -5359,11 +7254,45 @@
   "audio": {
    "has_audio": true,
    "rms_db": -27.3,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.084,
    "speech_band": 0.298,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/e7bcbe7e-882b-5256-928c-cb56ba241c8c_0.png",
+    "label": "elder",
+    "p": 1,
+    "bbox": [
+     0.1667,
+     0.6806,
+     0.0833,
+     0.2917
+    ],
+    "area": 0.0055,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 44
+   },
+   {
+    "png": "cutouts/e7bcbe7e-882b-5256-928c-cb56ba241c8c_1.png",
+    "label": "elder",
+    "p": 1,
+    "bbox": [
+     0.3281,
+     0.7222,
+     0.0729,
+     0.2708
+    ],
+    "area": 0.0052,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 39
+   }
+  ]
  },
  {
   "id": "2a739c97-c1b8-55c3-aef0-cbac8fe3fb18",
@@ -5403,7 +7332,7 @@
    "n": "13",
    "movement": 4,
    "label": "HARVESTED POWER",
-   "line": "So I harvest the flowers instead \u2014 scarlet poppies, purple blossoms \u2014 and they become my power.",
+   "line": "So I harvest the flowers instead — scarlet poppies, purple blossoms — and they become my power.",
    "accent": "#5aa7ff",
    "engine": "taarab",
    "mode": "rast",
@@ -5429,7 +7358,25 @@
    "flatness": 0.1,
    "speech_band": 0.339,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/2a739c97-c1b8-55c3-aef0-cbac8fe3fb18_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.5469,
+     0.6042,
+     0.1823,
+     0.375
+    ],
+    "area": 0.0229,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 52
+   }
+  ]
  },
  {
   "id": "6d8dad9f-d6aa-5ca6-95a4-680787f44726",
@@ -5490,11 +7437,29 @@
   "audio": {
    "has_audio": true,
    "rms_db": -26.9,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.092,
    "speech_band": 0.299,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/6d8dad9f-d6aa-5ca6-95a4-680787f44726_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.1823,
+     0.5764,
+     0.1042,
+     0.4097
+    ],
+    "area": 0.0246,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 55.42756727547177
+   }
+  ]
  },
  {
   "id": "0a5cf576-cbcf-5afe-ad16-9816d9e7c264",
@@ -5555,11 +7520,29 @@
   "audio": {
    "has_audio": true,
    "rms_db": -27.3,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.036,
    "speech_band": 0.214,
    "kind": "music"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/0a5cf576-cbcf-5afe-ad16-9816d9e7c264_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.5469,
+     0.7361,
+     0.0938,
+     0.2083
+    ],
+    "area": 0.0079,
+    "src": "drawn",
+    "mode": "sit",
+    "face": 1,
+    "heightRows": 34
+   }
+  ]
  },
  {
   "id": "d159962b-d1cf-5066-b6b4-8d298777f9c7",
@@ -5595,7 +7578,7 @@
    "figureHeight": null,
    "frameRows": 144,
    "truth": "scale and subjects are the film's own draw calls, not a classifier",
-   "spokenFraction": 0.0
+   "spokenFraction": 0
   },
   "video": "https://hartswf0.github.io/butterfly-halfworld/renders/cineosis/clips/d159962b-d1cf-5066-b6b4-8d298777f9c7.mp4",
   "clip": "clips/d159962b-d1cf-5066-b6b4-8d298777f9c7.mp4",
@@ -5614,7 +7597,8 @@
    "flatness": 0.009,
    "speech_band": 0.188,
    "kind": "music"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "0466a0b4-9cf0-5b17-8881-39538a6e6000",
@@ -5645,7 +7629,7 @@
    "n": "14",
    "movement": 1,
    "label": "EVERYTHING I BUILT",
-   "line": "A hot minute. The haze gathers on the water \u2014 and everything I built here learns to be weather: the city, the temple, the harbor.",
+   "line": "A hot minute. The haze gathers on the water — and everything I built here learns to be weather: the city, the temple, the harbor.",
    "accent": "#5aa7ff",
    "engine": "imzad",
    "mode": "penta",
@@ -5666,12 +7650,13 @@
   "frames": 8,
   "audio": {
    "has_audio": true,
-   "rms_db": -27.0,
+   "rms_db": -27,
    "silence": 0.003,
    "flatness": 0.109,
    "speech_band": 0.253,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "ddafcfc2-95a8-50a1-9bf0-1b7f2cf4878b",
@@ -5710,7 +7695,7 @@
    "n": "14",
    "movement": 2,
    "label": "FROM THE GROUND UP",
-   "line": "It takes me last, and from the ground up. I am reluctant \u2014 but I have been weather before.",
+   "line": "It takes me last, and from the ground up. I am reluctant — but I have been weather before.",
    "accent": "#5aa7ff",
    "engine": "imzad",
    "mode": "penta",
@@ -5736,7 +7721,25 @@
    "flatness": 0.115,
    "speech_band": 0.249,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/ddafcfc2-95a8-50a1-9bf0-1b7f2cf4878b_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4063,
+     0.4444,
+     0.2031,
+     0.4167
+    ],
+    "area": 0.0271,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 58
+   }
+  ]
  },
  {
   "id": "82fb7b9c-c1c8-5ae4-a58e-b216d4f4496f",
@@ -5789,11 +7792,12 @@
   "audio": {
    "has_audio": true,
    "rms_db": -28.2,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.122,
    "speech_band": 0.314,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "00e8865b-58e0-5bd2-91fe-3ac632b4456a",
@@ -5846,11 +7850,12 @@
   "audio": {
    "has_audio": true,
    "rms_db": -28.1,
-   "silence": 0.0,
+   "silence": 0,
    "flatness": 0.103,
    "speech_band": 0.332,
    "kind": "sound"
-  }
+  },
+  "cutouts": []
  },
  {
   "id": "51a72536-ea4f-547d-9397-55b0cbd0420f",
@@ -5889,7 +7894,7 @@
    "n": "14",
    "movement": 5,
    "label": "TWO ENTWINED MUSES",
-   "line": "Our dance together is a victory \u2014 two entwined muses, as it ends.",
+   "line": "Our dance together is a victory — two entwined muses, as it ends.",
    "accent": "#5aa7ff",
    "engine": "imzad",
    "mode": "penta",
@@ -5915,7 +7920,41 @@
    "flatness": 0.086,
    "speech_band": 0.226,
    "kind": "sound"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/51a72536-ea4f-547d-9397-55b0cbd0420f_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4635,
+     0.5556,
+     0.1302,
+     0.3264
+    ],
+    "area": 0.0159,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 44.824429495415046
+   },
+   {
+    "png": "cutouts/51a72536-ea4f-547d-9397-55b0cbd0420f_1.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4115,
+     0.4653,
+     0.1354,
+     0.3194
+    ],
+    "area": 0.0154,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 43.175570504584954
+   }
+  ]
  },
  {
   "id": "b41a1b6d-f473-5515-8789-10275cf02f11",
@@ -5961,7 +8000,7 @@
    "n": "14",
    "movement": 6,
    "label": "I CHOOSE THE DOOR",
-   "line": "An old door, from a vintage somewhere. It opens on a slow party \u2014 the kind I once fell out of a window to escape. This time, I choose the door.",
+   "line": "An old door, from a vintage somewhere. It opens on a slow party — the kind I once fell out of a window to escape. This time, I choose the door.",
    "accent": "#5aa7ff",
    "engine": "imzad",
    "mode": "penta",
@@ -5987,6 +8026,40 @@
    "flatness": 0.007,
    "speech_band": 0.169,
    "kind": "music"
-  }
+  },
+  "cutouts": [
+   {
+    "png": "cutouts/b41a1b6d-f473-5515-8789-10275cf02f11_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.2604,
+     0.6806,
+     0.1146,
+     0.2361
+    ],
+    "area": 0.0097,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 32
+   },
+   {
+    "png": "cutouts/b41a1b6d-f473-5515-8789-10275cf02f11_1.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4063,
+     0.625,
+     0.0833,
+     0.2917
+    ],
+    "area": 0.0109,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 40
+   }
+  ]
  }
 ]
