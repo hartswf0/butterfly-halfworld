@@ -1,0 +1,105 @@
+{
+  "num": "04",
+  "title": "Nevermore",
+  "treatment_title": "Nevermore",
+  "location": {
+    "name": "Ruins Shore and the Night Garden Fields (Center zone)",
+    "kind": "night beach strewn with chapel wreckage and ash, a trail up a dune incline to moonlit garden fields",
+    "real_analog": "a Delmarva barrier-beach shore (e.g. Assateague, Maryland) with burned pine behind the dunes and farm fields of sunflowers or mustard just inland",
+    "terrain": "coast",
+    "elevation": "sea level",
+    "near": ["night sea", "dunes / incline", "burned trees", "garden fields", "the chapel remnants"],
+    "zone": "CENTER"
+  },
+  "situation": "The POET, now in a red/black outfit with sunglasses and no heart, hands always in his pockets, walks the night shore past the chapel's shattered remnants and wildfire ash while ravens fly overhead. He finds his heart on the sand; without using his hands it floats up and re-enters him. He follows a trail up to a moonlit field, walks through it, searches the shadows for his hands, finds them, puts them back on, and stands in the field reflecting until 'Now go.'",
+  "time_of_day": "night / twilight, deepening to full dark in the field",
+  "weather_light": "twilight-to-night on the shore, calm waves and still wind; moonlight on the field, then clouds hide the stars for the deepest darkness; golden glow from the plants",
+  "set_pieces": [
+    {
+      "name": "Shore of broken pieces",
+      "what_happens": "POET stands on the shore at night, hands in pockets, no heart; walks looking at the decay and shattered pieces as ravens fly overhead.",
+      "lines": ["What if i followed this / trail", "broken pieces have / washed ashore—", "the ashes of / expired wildfires", "lifted from the night sea / water's floor."],
+      "shots": ["NM001", "NM002", "NM003", "NM004", "NM005", "NM006", "NM007", "NM008"],
+      "camera": "lateral tracking along the tide line, POET in silhouette, ravens crossing; hands never shown",
+      "position": "the beach where the chapel remnants lie, at the waterline"
+    },
+    {
+      "name": "The silence",
+      "what_happens": "Waves calm, wind stops, trees go still: the setting holds its breath.",
+      "lines": ["the waves will / calm to folded whispers", "& the winds / will mute the trees", "level of silence"],
+      "shots": ["NM009", "NM010", "NM011", "NM012", "NM013", "NM014"],
+      "camera": "locked-off wides of sea and tree line, minimal motion",
+      "position": "shore looking out to sea, then back toward the trees"
+    },
+    {
+      "name": "The heart on the sand",
+      "what_happens": "POET finds his heart on the shore; without using his hands it floats and re-enters him.",
+      "lines": ["to find a throbbing heart", "a familiar heart", "& it used to be mine.", "I'll lift it with care, / putting it back in place."],
+      "shots": ["NM015", "NM019", "NM020", "NM024", "NM026", "NM027", "NM028", "NM029", "NM030"],
+      "camera": "low angle from the sand up past the glowing heart to the POET's chest; it rises into frame and in",
+      "position": "on the sand among the debris, near the foot of the incline"
+    },
+    {
+      "name": "Trail up the incline",
+      "what_happens": "POET sees a trail and follows it up from the shore to the field, ravens overhead.",
+      "lines": ["the midlife / corner we turn toward / the incline—", "What if i followed this / reclaimed heart"],
+      "shots": ["NM016", "NM017", "NM018", "NM031", "NM032"],
+      "camera": "crane or drone rising with him up the dune path, sea dropping behind",
+      "position": "dune path between beach and field"
+    },
+    {
+      "name": "Night garden field",
+      "what_happens": "Walking through the moonlit field, hands still in pockets; golden plants turn toward him, weeds recoil into shadow.",
+      "lines": ["into the vast moonlit / night's / garden fields.", "the plants in a golden / hue bloom & faced toward / me", "the weeds repel,", "as I'm called forward."],
+      "shots": ["NM033", "NM035", "NM037", "NM038", "NM039", "NM040", "NM041", "NM042", "NM043", "NM044", "NM045", "NM046", "NM047"],
+      "camera": "wide moonlit field with the POET small in rows; reverse on blooms turning toward lens",
+      "position": "inside the field rows, inland of the dunes"
+    },
+    {
+      "name": "Searching for hands",
+      "what_happens": "Clouds hide the stars; POET searches the bare ground in the shadows for his two hands, finds them and puts them back on.",
+      "lines": ["The clouds mute the stars", "to search the bare ground / for two hands—", "& they too / used to be mine.", "I put them / back on"],
+      "shots": ["NM048", "NM049", "NM050", "NM051", "NM052", "NM053", "NM054", "NM055", "NM056", "NM057", "NM058", "NM059", "NM060", "NM061"],
+      "camera": "near-black low-key shots skimming bare soil; payoff close-up as the hands return (first time hands are seen)",
+      "position": "bare patch / shadows within the field"
+    },
+    {
+      "name": "Standing in the field",
+      "what_happens": "POET stands in the field reflecting, heart and hands restored, then is told to go.",
+      "lines": ["nevermore.", "I have won at the world / & lost my soul—", "I want nothing more / that to just be / myself—", "Now go."],
+      "shots": ["NM062", "NM063", "NM064", "NM065", "NM066", "NM067", "NM068", "NM069", "NM070"],
+      "camera": "static frontal medium-wide, still tree and field behind; slow push in",
+      "position": "center of the field near a still tree"
+    }
+  ],
+  "arrival": {
+    "from_previous": "Treatment: 'Cut to POET' on the same shore where the chapel remnants and shattered tambourine lie.",
+    "mode": "cut",
+    "inferred": false
+  },
+  "departure": {
+    "to_next": "'Now go.' - still night, he walks on through the field into the welcoming parade of afro-futuristic ancestors (Bloodlines).",
+    "mode": "walk",
+    "inferred": false
+  },
+  "motifs": ["hands in pockets", "the missing heart", "ravens", "washed-up wreckage", "ash", "trail / incline", "moonlit field", "nevermore", "silence"],
+  "encoding": "The beach is where the broken engagement washed up, so the POET can only begin recovering among its debris: the heart he finds there is the first thing he takes back. The climb from sea level to the field turns grief into ascent, and the field's soil is where lost hands (his capacity to act and touch) are buried. Inferred: shore = what was lost, field = what is grown back, and leaving the field on foot sets up the ancestors who meet him in Bloodlines.",
+  "evidence": [
+    "treatment: Cut to POET (now in dressed in Red/Black outfit with sunglasses), standing on shore at night/twilight.",
+    "treatment: POET has no heart.",
+    "treatment: never see hands, always in pockets), ravens flying overhead.",
+    "treatment: POET finds heart on shore, without using hands ... heart floats and reenters POET.",
+    "treatment: POET sees trail and follows it up to field, ravens flying overhead.",
+    "treatment: POET finds hands, put them back on, and stands in field reflecting",
+    "spine NM018 (TIGER/NM_assembly): Steep dune climbs into dusk.",
+    "treatment (Bloodlines): Still night, POET walks through field into a welcoming parade"
+  ],
+  "open_questions": [
+    "total-cinome.json NM records have no poem/content (missing_assembly_data); lines were matched from TIGER/NM/NM_assembly.json.",
+    "NM071-NM085 exist in the assembly but not in the spine; NM036 is missing from the spine.",
+    "Spine images show dawn (NM069) while the treatment keeps it night into Bloodlines.",
+    "Spine timestamps put NM (06:33-08:42) before BE (08:44), opposite to the treatment and clock order.",
+    "The map labels no Nevermore node; CENTER is read from RUINS / DESOLATE LANDSCAPE / HEART ABOVE RUINS, but the field could border ATLANTIS.",
+    "The incline: dune, bluff, or the poem's 'midlife corner' crossroads (NM016-017)?"
+  ]
+}

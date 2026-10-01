@@ -1,0 +1,102 @@
+{
+  "num": "10",
+  "title": "Magic Ride",
+  "treatment_title": "Magic Ride",
+  "location": {
+    "name": "Highway Journey Realm — Atlantis city streets out through the mountain pass",
+    "kind": "night-time city streets by motorcycle, opening onto a mountain road at first light",
+    "real_analog": "Mexico City at night by motorcycle (Centro Histórico, Eje Central, Paseo de la Reforma), then the Federal Highway 95 México–Cuernavaca climb through the Ajusco / Sierra del Chichinautzin pass at dawn (inferred route)",
+    "terrain": "city",
+    "elevation": "street",
+    "near": [
+      "the phone-booth sidewalk where the EX vanished (Yet Heard)",
+      "the Atlantis city grid, plazas, tunnels and main avenues (map HIGHWAY/CITY STREETS)",
+      "the mountains around Atlantis (map ATLANTIS RIDGE)",
+      "the shore with the decaying chapel where the new temple is built (map ABANDONED TEMPLE, CENTER ZONE)"
+    ],
+    "zone": "ATLANTIS"
+  },
+  "situation": "Alone on the sidewalk, the POET inspects a motorcycle parked beside him, gets on, and rides through Atlantis, buildings, vehicles and lights flying by, heads turning as he passes. As the moon settles and the sky lightens he rides out of Atlantis and through the mountains around it. The ride ends when he rides back to the shore at the decaying chapel (start of the next poem).",
+  "time_of_day": "midnight through the last of the night to first light / dawn (treatment says 'dusk' but describes the sky getting lighter)",
+  "weather_light": "neon streets with tire spray on wet asphalt, tunnel lights, a setting full moon and fading stars, then a pastel dawn gradient and low, 'deceptively warm' sunlight with a cool blue core",
+  "set_pieces": [
+    {
+      "name": "The bike under the street lamp",
+      "what_happens": "The POET stands alone on the sidewalk and inspects a motorcycle parked beside him, idling under a street lamp, his face caught in the chrome mirror.",
+      "lines": ["I wasn't looking for", "a ride", "but here you are—", "blissful &"],
+      "shots": ["MR002", "MR003", "MR005", "MR006", "WGY064"],
+      "camera": "wide of the empty sidewalk with the bike in lamplight, then a chrome-mirror insert",
+      "position": "the same curb where the EX dissolved (map STREET LAMP IDLE, CHROME MIRROR)"
+    },
+    {
+      "name": "Mounting the machine",
+      "what_happens": "He rubs his aggressions into the steel, thumps the fender, swings a boot over the seat and laughs into the wind as he pulls away.",
+      "lines": ["so i rub my", "aggressions", "into your steel", "& hop on"],
+      "shots": ["MR011", "MR013", "MR014", "MR015", "MR017"],
+      "camera": "tight inserts on gloved palms, fist on fender, boot swing; chrome panels reflecting the city",
+      "position": "curbside, at the start of the road"
+    },
+    {
+      "name": "Loneliness through midnight intersections",
+      "what_happens": "He weaves through empty plazas, tunnels and midnight intersections with no one behind him; the real Mexico City motorcycle material covers this stretch.",
+      "lines": ["loneliness is having", "everything with no", "one to tell—", "with no clear end."],
+      "shots": ["MR018", "MR020", "MR022", "MR023", "MR024", "MR026", "MR027"],
+      "camera": "rear rig framing the empty pillion seat; goggles reflecting tunnel lights",
+      "position": "inner city: empty plaza, tunnel, midnight intersections"
+    },
+    {
+      "name": "Swagger down the avenue",
+      "what_happens": "Riding through crowded streets with a swagger, one hand off the bars; eyes turn and heads twist as he passes.",
+      "lines": ["So the way I ride—", "through the streets", "& eyes turn, heads twist—", "the magic still exists."],
+      "shots": ["MR030", "MR031", "MR032", "MR033", "MR035", "WGY065"],
+      "camera": "low-angle tracking on tire spray, whip-pans across crowd silhouettes, neon blur",
+      "position": "main avenues of the city grid (map HIGHWAY/CITY STREETS, TIRE SPRAY, CROWD SILHOUETTES)"
+    },
+    {
+      "name": "Out of Atlantis as the moon settles",
+      "what_happens": "He rides out of Atlantis as the night turns and the sky lightens; the moon dips behind the skyline and a road sign points to a new dawn.",
+      "lines": ["the moon settles", "& I can see a morning", "ahead for me."],
+      "shots": ["MR040", "MR042", "MR043", "MR044", "MR045", "WGY066"],
+      "camera": "wide from behind the rider leaving the city edge, skyline behind and dawn gradient ahead",
+      "position": "city-edge highway (map ROAD SIGN NEW DAWN, SKY PASTEL)"
+    },
+    {
+      "name": "Mountain road at first light",
+      "what_happens": "He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander's camera flashes.",
+      "lines": ["The chirping of", "birds—fueling", "Riding in a way—", "doubleclick—"],
+      "shots": ["MR050", "MR053", "MR055", "MR057", "MR063", "MR066", "MR067", "MR069", "WGY067"],
+      "camera": "drone chase on mountain switchbacks, then a low side angle on the lean; snap-zoom bystander flash",
+      "position": "the mountain pass around Atlantis (map MOTORCYCLE IMPOSSIBLE CURVE, ROAD FORKS, NESTS SPRING)"
+    }
+  ],
+  "arrival": {
+    "from_previous": "No travel: the EX has just turned to haze on the sidewalk, and the POET is standing alone on that same sidewalk when the poem opens, the motorcycle parked beside him.",
+    "mode": "dissolve",
+    "inferred": false
+  },
+  "departure": {
+    "to_next": "He rides back to the shore at the decaying chapel, where he begins to build a new, clean white temple (New Day / 'Temple').",
+    "mode": "ride",
+    "inferred": false
+  },
+  "motifs": ["the motorcycle and its chrome", "the empty pillion seat", "the setting moon and fading stars", "dawn / 'a morning I could believe in'", "heads turning", "'the magic still exists'", "birds and nests"],
+  "encoding": "Magic Ride is the album's only poem in motion and the exit from Atlantis: the street where love dissolved becomes a road, and a found machine turns loneliness into speed and display. Night-to-morning has to be crossed physically, through the city and over the mountains seen from the rooftop in Newly Single (inferred link), so that he arrives at the ruined shore ready to rebuild.",
+  "evidence": [
+    "treatment: \"[source material: Mexico City photos with motorcycle]\"",
+    "treatment: \"POET stands alone on sidewalk, inspects motorcycle parked beside him.\"",
+    "treatment: \"rides through Atlantis streets, buildings, other vehicles and lights all flying by\"",
+    "treatment: \"POET rides out of Atlantis as night begins to turn to dusk, and the sky get's lighter.\"",
+    "treatment: \"POET rides through mountains around Atlantis during dusk.\"",
+    "treatment: \"POET rides back to shore at decaying chapel and begins to rebuild a new temple\"",
+    "clock.json: Magic Ride spans 950.9-1056.7 s, so the real motorcycle footage (965-979 s) falls on 'hop on' and 'loneliness'",
+    "spine MR003: \"Empty motorcycle idles under street-lamp.\""
+  ],
+  "open_questions": [
+    "Treatment says 'dusk' while describing a lightening sky and a coming morning; this file reads it as dawn.",
+    "'Rides back to shore' implies a shore he has been to before (earlier storyboard shore, WGY035). Is it beyond the mountains, or does the route loop back to the coast below Atlantis?",
+    "Zone straddle: the ride begins in the ATLANTIS zone but ends at the decaying chapel, which the map places in the CENTER ZONE (ABANDONED TEMPLE). The MAGIC RIDE node sits between the two.",
+    "Spine MR041 shows a river surface; no river is named in the treatment.",
+    "Whose motorcycle is it? It is simply 'parked beside him'.",
+    "Spine ids MR004 and MR068 are absent; VO says 'purveying' where the treatment says 'Illuminating'."
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "num": "07",
+  "title": "DJ Turn Me Up",
+  "treatment_title": "DJ Turn Me Up",
+  "location": {
+    "name": "The House (Club / DJ Booth: Midnight Booth), Atlantis",
+    "kind": "packed house party in a city townhouse, with a bar, a DJ booth and an open-mic spot",
+    "real_analog": "a converted casona in Roma Norte / Juarez, Mexico City, used for house parties with a back bar and turntables; restage of the Part 1 poetry-reading venue (POET at the bar)",
+    "terrain": "interior",
+    "elevation": "street",
+    "near": ["Atlantis Narrow Streets", "the open-air rooftop club (Newly Single)", "the city's one-way streets"],
+    "zone": "ATLANTIS"
+  },
+  "situation": "Inside the house he just entered, a DJ is dropped in and starts spinning and scratching. The POET, standing at the bar at the mic, gives a neo-soul performance of his love story to a full house party, with reaction shots and a crowd that answers him. The EX is only spoken about; the ghosts and the boxed-up house appear as projected or imagined images (inferred), never as the EX's face.",
+  "time_of_day": "late night (midnight booth)",
+  "weather_light": "interior: neon, strobe and spotlight, haze creeping across the floor lights, a dark cloud over the dance floor with a moonlit silver rim (spine); photo-realistic cyberpunk grade",
+  "set_pieces": [
+    {
+      "name": "DJ drops in",
+      "what_happens": "Neon title over the booth; the DJ appears, spins, scratches; the fader slides and the crowd hushes waiting for the drop as the POET asks to be turned up.",
+      "lines": ["Dj turn me up, please"],
+      "shots": ["DJ001", "DJ002", "WGY044"],
+      "camera": "whip-pan to the booth, insert on the fader, wide of the hushed room",
+      "position": "DJ booth against the back wall of the main room"
+    },
+    {
+      "name": "Eyes wide shut at the mic",
+      "what_happens": "POET at the bar, eyes closed, chin at the arch of the mic, opens his love story; strobe glints on his eyelids.",
+      "lines": ["With eyes wide shut", "chin nested at the arch of this mic", "I have a love story to tell"],
+      "shots": ["DJ003", "DJ004", "DJ005", "DJ006", "WGY045"],
+      "camera": "tight profile close-up at the mic, slow push; reverse onto faces in the crowd",
+      "position": "the bar, side of the room facing the floor"
+    },
+    {
+      "name": "Ghosts in the speaker mesh",
+      "what_happens": "Transparent silhouettes drift through the speakers; vineyards and evergreen fields wilt in the projected light; treasures escape, stars on a marquee dim.",
+      "lines": ["ghosts whispering unfolded dilutions", "dying in the vineyards", "treasures escaping"],
+      "shots": ["DJ008", "DJ009", "DJ011", "DJ013", "DJ016", "DJ017", "DJ019", "DJ021"],
+      "camera": "macro on speaker mesh with superimposed silhouettes; cutaways to crowd watching",
+      "position": "speaker stacks flanking the dance floor"
+    },
+    {
+      "name": "A thousand light years, into the red",
+      "what_happens": "He has walked across the greatest divide to be heard; on the second plea the VU meter slams into the red and the mic blooms.",
+      "lines": ["i walked 1,000 light years", "across the greatest divide", "Dj please turn me up"],
+      "shots": ["DJ023", "DJ024", "DJ025", "DJ026", "DJ027", "DJ028"],
+      "camera": "cut from galactic insert to VU meter close-up, then low angle on POET as the volume jumps",
+      "position": "between the bar and the booth"
+    },
+    {
+      "name": "Wedding bands and the boxed home",
+      "what_happens": "Rings orbit and drift apart; the shared home folds into a box; two moving vans split at a fork on one-way streets with arrowless signs and a blank billboard.",
+      "lines": ["wedding bands diverging", "a shared home boxed & trucked", "maybe-we-shouldn't signs"],
+      "shots": ["DJ030", "DJ031", "DJ033", "DJ035", "DJ036", "DJ037", "DJ038", "DJ040"],
+      "camera": "projected inserts on the wall behind the POET; crowd silhouettes in the foreground",
+      "position": "projection wall behind the mic"
+    },
+    {
+      "name": "Eleven years in daisy petals",
+      "what_happens": "Calendar pages spin off the turntable for eleven beats; petals fall on the vinyl; the DJ scratches 'love, love, not, not'; the mic is held out to empty space.",
+      "lines": ["years, eleven years", "daisy petals", "maybe we do love we not"],
+      "shots": ["DJ043", "DJ044", "DJ047", "DJ048", "DJ050", "DJ051", "DJ052"],
+      "camera": "overhead on the platter, petals under the needle; cut to the empty space beside POET",
+      "position": "DJ booth platters"
+    },
+    {
+      "name": "Rain, fog, dim lights, then chin high",
+      "what_happens": "The room picks its weather: storm waveform, fog across the floor lights, a dark cloud with a silver lining over the dancers. He turns to face delights and shadows, one night, tear and open mic at a time, chin now high, volume up.",
+      "lines": ["heavy rain, or frontal fog", "dimmed night lights under a cloud", "one open mic at a time", "chin now nested high"],
+      "shots": ["DJ053", "DJ055", "DJ057", "DJ059", "DJ060", "DJ061", "DJ063", "DJ064", "DJ065", "DJ066", "DJ067", "DJ068", "DJ069", "DJ070"],
+      "camera": "wide of the floor in haze with the cloud practical overhead; end on a low-angle close-up, POET's chin raised into the spotlight",
+      "position": "dance floor under the Dark Cloud, ending at the mic"
+    }
+  ],
+  "arrival": {
+    "from_previous": "Wandering Atlantis after the voiceover, he reaches a house people are entering and goes in; the DJ is then dropped into the house.",
+    "mode": "walk",
+    "inferred": false
+  },
+  "departure": {
+    "to_next": "He leaves the house party / poetry reading for an open-air rooftop club; the treatment does not say how he gets there (inferred: up the stairs to a nearby or same-building roof).",
+    "mode": "walk",
+    "inferred": true
+  },
+  "motifs": ["turntable / vinyl", "mic and volume", "eyes wide shut", "ghosts", "wedding bands", "moving vans on one-way streets", "daisy petals and eleven years", "weather indoors (rain, fog, cloud with silver lining)"],
+  "encoding": "This is where the private breakup becomes a public performance: the house is Atlantis's social stage, and the DJ's volume is permission to be heard. It has to be a crowded room with a bar and a booth because the poem's journey is from eyes shut to chin high, from no one listening to one open mic at a time (the Part 1 reading restaged inside the fiction). Weather moves inside, so what he remembers about the breakup plays as the room's atmosphere (inferred).",
+  "evidence": [
+    "treatment: \"[source material: part 1 poetry reading video; specifically Mark standing at bar.]\"",
+    "treatment: \"DJ is dropped into the house and spins/scratches.\"",
+    "treatment: \"POET gives neo-soul inspired performance at full house party—reaction shots, crowd interacting\"",
+    "treatment (Newly Single): \"Leaves gouse party/poetry-reading goes to open-air, rooftop intense club scene.\"",
+    "DJ001: \"Title blazes neon over midnight booth.\"",
+    "DJ057: \"Mist creeps across club floor lights.\"",
+    "DJ060: \"Dark cumulonimbus hovers over dance floor.\"",
+    "wap.svg: \"CLUB / DJ BOOTH (District) ... MIDNIGHT BOOTH ... SPEAKER MESH ... DANCE FLOOR (DJ)\""
+  ],
+  "open_questions": [
+    "The spine stops at DJ070 ('at a time;'); no records cover 'one open mic at a time', 'chin now nested high' or 'a story to tell', and DJ020 is missing.",
+    "Is the rooftop club of Newly Single on top of this house or elsewhere in Atlantis?",
+    "Are the ghosts, vans and daisy petals projected in the room, imagined inserts, or the DJ's visuals? The treatment says only 'as described'.",
+    "The DJ 'is dropped into the house': literal drop (descends from above) or a hard cut?",
+    "Text variants: timings 'eyes wide shut... arc of the weight of these spoken words', 'eleven years... 11 years'; treatment 'arch of this mic'."
+  ]
+}

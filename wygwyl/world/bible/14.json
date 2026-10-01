@@ -1,0 +1,96 @@
+{
+  "num": "14",
+  "title": "Hot Minute",
+  "treatment_title": "Hot Minute",
+  "location": {
+    "name": "The Black, and the Old-Time Vintage Party behind the door",
+    "kind": "black void (floating) that opens through an old vintage door into an old-time vintage party ballroom",
+    "real_analog": "a black-box limbo stage for the floating; a 1920s hotel ballroom (e.g. the Belvedere Hotel, Baltimore) for the party",
+    "terrain": "sky",
+    "elevation": "sky",
+    "near": ["the harbor it dissolves out of", "the fall of poem 1 (same black)", "the vintage party first crashed in poem 1"],
+    "zone": "BALTIMERE"
+  },
+  "situation": "Haze takes the POET at the harbor; he is floating again in all black, cross-cut with B-roll human scenes of life's highs and lows. An old vintage door appears in the black, and he steps through into the same old-time vintage party he crashed in poem 1, guests in romantic slow motion. He disappears into the crowd from the back, the door closes, END.",
+  "time_of_day": "timeless (void); the party reads as night",
+  "weather_light": "pure black with the POET lit alone; B-roll in natural light; warm vintage party light, euphoric light leakage (per poem 1)",
+  "set_pieces": [
+    {
+      "name": "Taken by the haze",
+      "what_happens": "Haze rises from the ground and covers him; he is reluctant at first, then gives in.",
+      "lines": ["Don't make me leave and go where promises, hearts,", "spectrums of light-filled constellations are broken."],
+      "shots": ["WGY078", "WGY079", "HM002", "HM003", "HM008"],
+      "camera": "slow tilt up the body as haze climbs; hand gripping a frame edge in close-up",
+      "position": "harbor edge, dissolving into white"
+    },
+    {
+      "name": "Floating in the black",
+      "what_happens": "He floats alone in black, as after the poem 1 fall.",
+      "lines": ["I escaped here for a reason", "The way you see things felt safe and timeless.", "Whatever has terminated this moment, damn you"],
+      "shots": ["WGY080", "HM009", "HM012", "HM014", "HM015", "HM016"],
+      "camera": "static frame with the POET slowly rotating in black; frame cracks on 'terminated'",
+      "position": "center of the void"
+    },
+    {
+      "name": "Cross-cut: highs and lows of life",
+      "what_happens": "The film cuts back and forth between the floating POET and B-roll human scenes; the machines are unplugged.",
+      "lines": ["let it feel love and lost as we must endure", "absent artificial escapes and machine learning strengths", "for my highs and lows as resource materials"],
+      "shots": ["WGY081", "WGY082", "WGY083", "HM020", "HM021", "HM022", "HM023", "HM024"],
+      "camera": "hard cuts on the beat between void and documentary B-roll",
+      "position": "void / B-roll elsewhere"
+    },
+    {
+      "name": "Battle scars and graytones",
+      "what_happens": "Still floating; light traces his scars; gray brushed into his sight after defeats.",
+      "lines": ["can't leave behind the impulse that comes from battle scars", "the wisdom that brushes gray tones"],
+      "shots": ["HM028", "HM030", "HM034", "HM036", "HM037", "HM038"],
+      "camera": "macro along skin and scars; desaturating grade",
+      "position": "void"
+    },
+    {
+      "name": "The vintage door appears",
+      "what_happens": "Still floating in all black, an old vintage door materializes.",
+      "lines": ["I trust that you'll be fine.", "I escaped here for a reason."],
+      "shots": ["WGY084", "WGY085", "HM039", "HM041"],
+      "camera": "wide of the lone door in black, POET entering frame from behind",
+      "position": "void, before the door"
+    },
+    {
+      "name": "The dance at the vintage party",
+      "what_happens": "He enters the old-time vintage party; guests move in romantic slow motion; a dance.",
+      "lines": ["Our dance together is a victory to entwine muses", "immersed in twisted dons for a hot minute"],
+      "shots": ["WGY086", "HM042", "HM043", "HM044", "HM046", "HM047"],
+      "camera": "Steadicam following through the slow-motion crowd from behind; overhead on two dancers under one spotlight",
+      "position": "ballroom floor beyond the door"
+    },
+    {
+      "name": "Disappears into the crowd; door closes",
+      "what_happens": "He disappears into the crowd from the back; the door closes on the viewer. END.",
+      "lines": ["and a genesis of a New Testament as it ends."],
+      "shots": ["WGY087", "WGY088", "HM049", "HM050"],
+      "camera": "hold on the back of the crowd as he vanishes; reverse from the void as the door swings shut to black",
+      "position": "the doorway, from outside"
+    }
+  ],
+  "arrival": {"from_previous": "Haze gathers over the harbor, swallows Atlantis, the new temple and the harbor, and envelops the POET from the ground up; he is floating in black again.", "mode": "dissolve", "inferred": false},
+  "departure": {"to_next": "THE FILM ENDS: he walks through the old vintage door into the old-time vintage party of poem 1, disappears into the crowd from the back, and the door closes (END). The journey does not return to the high-rise bedroom. The homecoming happened in Reunion; the ending loops back to the party where the fall began.", "mode": "walk", "inferred": false},
+  "motifs": ["haze", "floating in black", "the vintage party and slow-motion guests", "doors and thresholds", "dance", "highs and lows", "machine vs human sources", "battle scars", "constellations broken"],
+  "encoding": "The ending loops the film: the black of the poem 1 fall and the vintage party he crashed while chasing the EX return. This time he enters through a door by choice, does not chase anyone, and dissolves into the crowd. The place has no geography because the poem refuses 'artificial escapes'. What is left is the human party of highs and lows itself. That he chooses to go back is read from the matching wording and the 'Door closes' cue, not stated outright (inferred).",
+  "evidence": [
+    "treatment: \"Haze slowly envelopes POET from ground up body, who is reluctant at first.\"",
+    "treatment: \"POET is floating again in all black.\"",
+    "treatment: \"Cut back and forth from POET floating to B-Roll scenes of life.\"",
+    "treatment: \"Old vintage door appears.\"",
+    "treatment: \"POET enters through door into old-time vintage party, guests are in romantic slow-motion.\"",
+    "treatment: \"POET disappears into crowd from back. ... Door closes. END.\"",
+    "treatment (poem 1): \"POET crashes into old-time vintage party, guests are in romantic slow-motion\"",
+    "storyboard WGY086: \"re-enters the old-time vintage party\"; wap.svg: HOT MINUTE, DOOR CLOSING, DOORWAY FRAME in BALTIMERE ZONE"
+  ],
+  "open_questions": [
+    "Is the EX at the final party? Poem 1 chased the EX there; poem 14's 'our dance together' partner is unnamed, so keep any partner back-turned.",
+    "The film opens with a 'PART 2 OF 3 / FUTURE' title card; the closing door may hand off to part 3 rather than conclude.",
+    "Verse variants: the treatment has 'brushes graytones into our sight' while the recorded reading has 'into our melanin'; the treatment's 'twisted dawns' is read as 'twisted dons'.",
+    "Where the B-roll 'scenes of life' are shot (real locations vs archive) is unspecified.",
+    "Storyboard timestamps (WGY068-088 at 23:48-30:48) do not match the 24-minute album clock (poem 14 = 1353-1440 s); beats were matched by content."
+  ]
+}

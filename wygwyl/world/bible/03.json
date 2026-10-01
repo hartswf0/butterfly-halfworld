@@ -1,0 +1,96 @@
+{
+  "num": "03",
+  "title": "How to Break off an Engagement",
+  "treatment_title": "How to break off an engagement.",
+  "location": {
+    "name": "The Abandoned Temple (Break Engagement node, Center zone)",
+    "kind": "derelict seaside chapel on an eroding shore",
+    "real_analog": "a storm-eaten island chapel in the Chesapeake Bay, like the lost church and graves of Holland Island, Maryland, swallowed by the water",
+    "terrain": "coast",
+    "elevation": "sea level",
+    "near": ["shore", "open water", "storm", "side doors onto ivy and stone threshold"],
+    "zone": "CENTER"
+  },
+  "situation": "No people: the tambourine thrown in Flashing Lights tumbles through black space and flies, still whole, through a chapel window. In time-lapse the empty chapel decays - choir stands, prayer lines, baptism pools, cobwebbed pews, gift boxes left outside the side doors - until a heavy storm takes over and speeds the decay. When the storm ends only remnants of the chapel are left on the shore, and the tambourine finally lands on them and shatters.",
+  "time_of_day": "time-lapse across days or seasons, ending in storm and its aftermath",
+  "weather_light": "dusty single-source interior light, then thunder, lightning and sheets of rain; after the storm a muted wet calm with one sunbeam breaking through (spine BE020)",
+  "set_pieces": [
+    {
+      "name": "Tambourine through the chapel window",
+      "what_happens": "The tambourine falls, flies, tumbles through black space and enters the chapel through a window, still whole.",
+      "lines": ["Ode to forever—", "a tambourine sounds off an / empty temple,"],
+      "shots": ["BE001", "BE002", "BE003"],
+      "camera": "tracking with the tumbling tambourine in black, then a clean pass through the window into the nave",
+      "position": "a nave window on the chapel's seaward side (inferred side)"
+    },
+    {
+      "name": "The empty temple",
+      "what_happens": "Close-ups of an empty sanctuary in time-lapse decay: choir stands, kneelers, a dry baptism pool, pews veiled in cobwebs, ash drifting.",
+      "lines": ["empty choir stands,", "empty prayer lines", "& abandoned baptism / pools.", "pews taken / by cobwebs—"],
+      "shots": ["BE004", "BE005", "BE006", "BE007", "BE008", "BE009", "BE010", "BE011"],
+      "camera": "locked-off time-lapse plates and macro close-ups on wood, stone and web",
+      "position": "nave, choir loft, baptistery"
+    },
+    {
+      "name": "Gifts at the side doors",
+      "what_happens": "Opened gift boxes left outside the side doors; spirits leave; ivy creeps over the cracked threshold.",
+      "lines": ["spirits have / left salvations", "in opened gift / boxes placed / outside the side doors—"],
+      "shots": ["BE012", "BE013", "BE014", "BE015", "BE016"],
+      "camera": "low exterior angle on the threshold, time-lapse of boxes weathering",
+      "position": "side doors and stone threshold, exterior"
+    },
+    {
+      "name": "The storm",
+      "what_happens": "Thunder; a heavy storm takes over and speeds the decay until nothing remains.",
+      "lines": ["it thunders.", "then rains until / nothing remains."],
+      "shots": ["BE017", "BE018", "BE019"],
+      "camera": "wide exterior time-lapse of the chapel silhouette in lightning, pulling back as it is washed away",
+      "position": "exterior, from the beach facing the chapel"
+    },
+    {
+      "name": "Remnants on the shore",
+      "what_happens": "Storm ends; what is left of the chapel lies on the shore with soaked bread, soiled blankets and footprints in mud.",
+      "lines": ["Ode to the storm ending.", "what was once love / now goods—", "broken & sealed apart / by lightning.", "daily breads, / soaked & delivered rotted"],
+      "shots": ["BE020", "BE021", "BE022", "BE023", "BE024", "BE025", "BE026", "BE027", "BE028", "BE029", "BE031", "BE032"],
+      "camera": "still wides of wreckage at the tide line, inserts on bread, blanket and mud prints",
+      "position": "the beach where the chapel stood"
+    },
+    {
+      "name": "Tambourine shatters",
+      "what_happens": "The tambourine finally lands on the ground of the chapel remnants and shatters.",
+      "lines": ["& a tambourine / shattered into pieces."],
+      "shots": ["BE033", "BE034"],
+      "camera": "slow-motion ground-level impact, fragments scattering toward lens",
+      "position": "on the chapel remnants at the shore"
+    }
+  ],
+  "arrival": {
+    "from_previous": "The tambourine Young POET threw through his window tumbles through black space and flies into the chapel window, still whole. The POET does not appear.",
+    "mode": "fly",
+    "inferred": false
+  },
+  "departure": {
+    "to_next": "Cut to the POET standing on the same shore at night among the washed-up broken pieces (Nevermore).",
+    "mode": "cut",
+    "inferred": false
+  },
+  "motifs": ["the tambourine", "empty sacred space", "time-lapse decay", "storm and lightning", "gifts / goods", "the shore", "footprints that diverge"],
+  "encoding": "The engagement is broken off in the building where it would have been sealed: a chapel stripped of choir, prayer and baptism, then erased by weather. Putting the temple on a shore lets the storm finish the job and leaves the pieces exactly where the poet will later walk - the ruin becomes the beach of the next poem. Inferred: the child's tambourine (the ode he was handed) survives the whole decay only to break last, so the breakup is completed by an object from his childhood.",
+  "evidence": [
+    "treatment: Tambourine files into chapel through window, still whole.",
+    "treatment: [style: time-lapse photo-realistic] Chapel decay, close-ups.",
+    "treatment: Heavy storm takes over, speeds decay.",
+    "treatment: Storm ends, remnants of chapel on shore.",
+    "treatment: Tambourine finally lands on ground of chapel remnants and shatters.",
+    "spine BE017: Black sky split by white sound-lines, temple silhouette trembling.",
+    "map wap.svg: BREAK ENGAGEMENT (Node), ABANDONED TEMPLE, STONE THRESHOLD, IVY CREEPING, BAPTISM POOLS - CENTER ZONE",
+    "storyboard WGY030: Storm ends, chapel remnants on shore."
+  ],
+  "open_questions": [
+    "Was the chapel always on the shore, or did the storm carry its remnants there? 'remnants of chapel on shore' allows both.",
+    "The spine and reading include 'ode to two sets of mud imprinted footsteps'; the treatment verse has only 'ode'.",
+    "No human is staged; whether the POET or EX should appear (e.g. the footsteps) is unresolved.",
+    "Which window and which side of the chapel faces the sea is not stated.",
+    "Storyboard beats WGY026-031 cover this poem by content; their timestamps do not match the clock.json span (214-287s)."
+  ]
+}

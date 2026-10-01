@@ -1,0 +1,96 @@
+{
+  "num": "02",
+  "title": "Flashing Lights",
+  "treatment_title": "Flashing Lights",
+  "location": {
+    "name": "The Childhood Window on the Road Winding Down (Baltimere)",
+    "kind": "childhood family house, ground-floor living room with a street-facing window",
+    "real_analog": "a modest brick end-of-row or detached house on a curving, potholed hillside street in inner-ring Baltimore (e.g. Hampden or Woodberry above the Jones Falls valley)",
+    "terrain": "city",
+    "elevation": "street",
+    "near": ["a winding downhill road", "the curb where the car pulls up", "streetlights"],
+    "zone": "BALTIMERE"
+  },
+  "situation": "The adult POET falls or floats in black space with lights flashing while the EX, in distress, floats unreachable; everything stays black as his eyes dilate. The camera goes into and through his eyes into a flashback: Young POET (six) home alone at the living-room window on a winter night watches a car pull up, its headlights sweeping the room over the bumps in the road, his parents arguing inside it. A ghost child appears, hugs him, vanishes, returns and hands him a tambourine, which he throws through the window, shattering it.",
+  "time_of_day": "night (void: 'after midnight'); flashback is a winter night",
+  "weather_light": "pitch black void with intermittent flashing lights; flashback: dark room raked by moving headlights, curtains pulled and blinds up, a strangely warm heavy winter breeze (inferred snow outside from spine FL044)",
+  "set_pieces": [
+    {
+      "name": "Falling with headlights off",
+      "what_happens": "POET in black space, falling or floating, lights flashing; EX in distress floats nearby, unreachable.",
+      "lines": ["I heard a / scream for help", "while falling / with my / headlights / off—", "a pending marriage,", "a set of walls caving inward"],
+      "shots": ["FL001", "FL002", "FL003", "FL004", "FL005", "FL006", "FL009", "FL011", "FL013"],
+      "camera": "floating wide in a black stage, strobing practicals; EX kept back-to-camera at a fixed unreachable distance",
+      "position": "the black void continuing below the Out of Life floor-hole"
+    },
+    {
+      "name": "Eyes dilate",
+      "what_happens": "Everything still black; his eyes dilate trying to see, then the camera pushes into and through them into the flashback.",
+      "lines": ["an emergency call / while tossing & turning—", "the mirror after midnight", "after a day of life / dilated at the sun", "I've accepted that we won't / make it."],
+      "shots": ["FL026", "FL027", "FL028", "FL029", "FL030", "FL031", "FL032"],
+      "camera": "extreme close-up on the POET's eye, pupil opening, macro push-through into the next scene",
+      "position": "void, at the POET's face"
+    },
+    {
+      "name": "Car pulls up",
+      "what_happens": "Young POET at the living-room window watches a car pull up, its lights flashing through the room because of the angle and the bumps in the road.",
+      "lines": ["Heart break revisits / an old scene.", "I was six—", "I recall, when"],
+      "shots": ["FL033", "FL034"],
+      "camera": "from behind the child at the window, headlight beams sweeping across walls and ceiling",
+      "position": "living-room window, ground floor, facing the street and curb"
+    },
+    {
+      "name": "The ghost child",
+      "what_happens": "A ghost kid appears and hugs Young POET, telling him his parents' marriage won't last, then disappears.",
+      "lines": ["the ghost of a dead / & a love-less / seven-year old child", "appeared & shared", "that my parents' / marriage wouldn't / last—"],
+      "shots": ["FL035", "FL036", "FL037", "FL038", "FL039", "FL040", "FL041"],
+      "camera": "soft two-shot at child height, ghost slightly diffused; frost breath on the windowpane insert",
+      "position": "living room, beside the window"
+    },
+    {
+      "name": "Parents arguing in the car",
+      "what_happens": "Ghost gone, Young POET stays at the window watching his parents argue in the car, curtains pulled and blinds up, left home alone.",
+      "lines": ["a child is left / home alone", "with curtains / pulled & blinds up", "to see / flashing lights", "of two souls on / a road winding down"],
+      "shots": ["FL042", "FL043", "FL044", "FL045", "FL046", "FL047", "FL048", "FL049", "FL050", "FL051", "FL052", "FL053", "FL054", "FL055"],
+      "camera": "over-the-shoulder through the glass to the lit car interior; reverse close-up on the child's face in headlight wash",
+      "position": "living-room window looking down to the curb"
+    },
+    {
+      "name": "Tambourine through the window",
+      "what_happens": "The ghost child hands Young POET a tambourine; he throws it through the window, shattering the glass.",
+      "lines": ["and no tears", "and no fucks", "and no love / to give.", "ode to teach."],
+      "shots": ["FL056", "FL057"],
+      "camera": "high-speed glass shatter from outside looking in, tambourine exiting toward camera",
+      "position": "the living-room window itself"
+    }
+  ],
+  "arrival": {
+    "from_previous": "He keeps falling from the Out of Life floor-hole into black space; the camera then goes into and through his eyes to reach the childhood window as a flashback.",
+    "mode": "fall",
+    "inferred": false
+  },
+  "departure": {
+    "to_next": "The tambourine he throws leaves through the shattered window and tumbles through black space toward the chapel; the POET himself does not travel (he is absent from the next poem).",
+    "mode": "fly",
+    "inferred": false
+  },
+  "motifs": ["headlights / flashing lights", "the window", "a road winding down", "falling in black", "the unreachable EX", "the ghost child", "the tambourine", "marriage breaking"],
+  "encoding": "The window is the first place the poet ever watched a love end from inside a room, so the adult fall lands him back there: the high-rise window of poem 01 rhymes with the child's street window. The car's lights are the 'flashing lights' and the road 'winding down' is the marriage; throwing the tambourine through the glass is the child breaking the frame he was made to watch through. Inferred: the street-level house is the origin point (map: 'personal origins') beneath the tower he fell from.",
+  "evidence": [
+    "treatment: POET in black space falling or floating, lights flashing.",
+    "treatment: EX in distress, also floating unreachable.",
+    "treatment: Going into eyes, through eyes, we are in a flashback",
+    "treatment: Young POET at living room window watching car pull up, lights flashing through room",
+    "treatment: watching parents argue in the car.",
+    "treatment: Young POET throws tambourine through window, shattering window.",
+    "poem: It was the type of warm & heavy breeze in winter where a child is left home alone",
+    "map wap.svg: FLASHING LIGHTS (Node), BALTIMERE ZONE - Sea-edge memories, personal origins"
+  ],
+  "open_questions": [
+    "Whose car and whose lights: the treatment says the parents' car lights flash from the road bumps; spine FL052 shows police reds and blues instead.",
+    "House type and floor are not stated; ground floor is inferred from watching the car interior at the curb.",
+    "Where the void ends and the house begins geographically: the flashback is entered through the eyes, not by travel.",
+    "Spine FL images lean on highways (FL005, FL006, FL026) that the treatment does not stage; treat as inserts.",
+    "Storyboard beats WGY017-025 cover this poem by content; their timestamps do not match the clock.json span (123-214s)."
+  ]
+}

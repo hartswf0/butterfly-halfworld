@@ -1,0 +1,95 @@
+{
+  "num": "12",
+  "title": "Reunion",
+  "treatment_title": "Reunion",
+  "location": {
+    "name": "Main Hall of the New Temple (Gathering and Reunion Realm)",
+    "kind": "the harbor temple used as a community gathering hall, plus its grounds at the forest edge and a meadow",
+    "real_analog": "a waterfront church hall turned community hall (Canton/Fells Point, Baltimore) with Canton Waterfront Park lawn for the football; a wooded park edge for the tree beats",
+    "terrain": "coast",
+    "elevation": "sea level",
+    "near": ["the new temple (same building as poem 11)", "the Inner Harbor", "forest on the tree-covered hills", "a meadow for football", "a front porch / home"],
+    "zone": "CENTER"
+  },
+  "situation": "Decades later the POET hosts friends and events in the new temple; archival photos of his circle are reenacted there. The guests are his brothers and friends, laughing, hugging and shouting, then spilling outside to the trees, a meadow and finally a porch light. The EX is absent. The outdoor grounds and porch come from the spine imagery, not the treatment (inferred placement).",
+  "time_of_day": "compressed across decades; the hall in warm light, then the grounds at twilight and dusk, ending at a lit porch",
+  "weather_light": "soft hall light under dim rafters; green twilight through the canopy; cool dusk with visible breath; golden sunset on the meadow",
+  "set_pieces": [
+    {
+      "name": "Welcome home in the hall",
+      "what_happens": "Friends arrive under a welcome-home banner; laughter and hugs with no reason; the circle forms.",
+      "lines": ["Decades later", "less time for words and more space for laughter", "hugs with no reason"],
+      "shots": ["RU001", "RU002", "RU004", "RU005", "WGY069"],
+      "camera": "wide master from the rafters, then handheld into the hugging circle",
+      "position": "main hall floor of the temple"
+    },
+    {
+      "name": "Loud voices, overheard hearts",
+      "what_happens": "Voices peak; a chest-level glow pulses with every shout.",
+      "lines": ["loud voices so our hearts can be overheard"],
+      "shots": ["RU006", "RU007", "RU008"],
+      "camera": "tight chest-height mediums, shallow focus, fast cuts on laughter",
+      "position": "center of the gathering"
+    },
+    {
+      "name": "The empty rooms of the afterlife",
+      "what_happens": "The POET's mind drifts up into the rafters; a back room of empty chairs stands for the friends who are gone.",
+      "lines": ["My mind drifts into the darkness of our afterlives", "and those rooms are empty"],
+      "shots": ["RU009", "RU010", "RU011"],
+      "camera": "tilt up into dim rafters; static wide of the dusty backroom",
+      "position": "rafters and a side backroom of the temple"
+    },
+    {
+      "name": "Hourglasses and the group photo (archival reenactment)",
+      "what_happens": "Everyone freezes for a group photo, each holding an hourglass of burning sand; old photos reenacted, maps of shared routes.",
+      "lines": ["We are all here", "each holding our glasses of burning sands", "and known journeys"],
+      "shots": ["RU012", "RU013", "RU014", "RU015", "RU032", "WGY070"],
+      "camera": "locked frontal group tableau matched to the archival photo; macro on falling grains",
+      "position": "the hall's front, posed like the source photographs"
+    },
+    {
+      "name": "Trees at the forest edge",
+      "what_happens": "Outside, friends touch tree trunks under picnic lights; breath mingles in cool dusk; memories project onto fog.",
+      "lines": ["grateful to every living tree in the forest", "and the shared memories"],
+      "shots": ["RU016", "RU017", "RU018", "RU019"],
+      "camera": "low angle up into the canopy; slow lateral track along the trunks",
+      "position": "temple grounds where the hills' woods begin (inferred)"
+    },
+    {
+      "name": "Brotherhood chain",
+      "what_happens": "Wrists interlock, heads lean together; one ear pressed to the next brother's chest.",
+      "lines": ["This is brotherhood.", "we can place our ears upon the next brother's soul"],
+      "shots": ["RU020", "RU021", "RU022", "RU026", "RU027"],
+      "camera": "profile tracking shot down the listening chain; extreme close-up of an ear on a chest",
+      "position": "a sandy path from the grounds toward the shore"
+    },
+    {
+      "name": "Football in the meadow, then home",
+      "what_happens": "A football spirals across a sunset meadow; polaroids scatter; the group walks up as a porch light switches on.",
+      "lines": ["follow paths of hilltops and canyons", "laughter and football and recollections", "that bring us home every time"],
+      "shots": ["RU028", "RU029", "RU034", "RU035", "RU036"],
+      "camera": "wide golden-hour meadow with the ball arcing through frame; closing shot from behind the group toward a lit porch",
+      "position": "meadow by the temple, ending at a front porch"
+    }
+  ],
+  "arrival": {"from_previous": "No travel: 'Decades later' the temple he rebuilt in poem 11 is full of friends and events.", "mode": "cut", "inferred": false},
+  "departure": {"to_next": "Daytime/sunlight: the POET wanders out of the new temple and around the harbor to a cafe.", "mode": "walk", "inferred": false},
+  "motifs": ["brotherhood", "hourglasses and burning sand", "overheard hearts", "empty rooms of the afterlife", "trees and the forest", "photographs and archives", "home and the porch light", "football"],
+  "encoding": "The temple built on the ruin becomes a home that holds people: the poem answers the empty choir stands and pews of poem 3 with a full hall. This is the film's real homecoming ('brings us home every time'), staged as communion among men rather than romance, which is why it must happen inside the rebuilt sacred place. The outdoor beats are inferred from the spine.",
+  "evidence": [
+    "treatment: \"POET hosts friends and events with friends in new temple as described.\"",
+    "treatment: \"[source material: archival photos reenacted in new temple.]\"",
+    "poem 12: \"This is brotherhood.\"",
+    "poem 12: \"grateful to every living tree in the forest for the shared years\"",
+    "poem 12: \"that bring us home every time\"",
+    "spine RU001: \"Title hangs like a welcome-home banner under soft gym lights.\"",
+    "spine RU036: \"Front-porch light switches on as group approaches.\"",
+    "wap.svg: REUNION (Node) in CENTER ZONE; GATHERING AND REUNION REALM with MAIN HALL, DIM RAFTERS, FRONT PORCH LIGHT"
+  ],
+  "open_questions": [
+    "The spine scatters the reunion across a gym, a ballroom, a forest, a meadow and a porch; the treatment keeps it in the new temple. This bible treats the outdoor beats as temple grounds (inferred).",
+    "Who the friends are (family? the MOTHER and FATHER of poem 9?) is unspecified beyond 'brother'.",
+    "Is 'decades later' a flash-forward from poem 11 or a montage of many reunions? The time of day is therefore loose.",
+    "The map draws the GATHERING AND REUNION REALM on the Baltimere (west) side but puts the REUNION node in CENTER."
+  ]
+}

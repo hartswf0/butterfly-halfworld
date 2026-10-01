@@ -1,0 +1,102 @@
+{
+  "num": "09",
+  "title": "Yet Heard",
+  "treatment_title": "Yet, Heard",
+  "location": {
+    "name": "The phone-booth sidewalk below the club, Atlantis",
+    "kind": "night city sidewalk with a lit phone booth, opening by phone onto a Baltimere living room and the Inner Harbor",
+    "real_analog": "A Centro Histórico, Mexico City sidewalk at night with a street payphone booth (inferred from the Mexico City motorcycle source note at this poem's end); for the father walk, the Baltimore Inner Harbor promenade and piers before dawn",
+    "terrain": "city",
+    "elevation": "street",
+    "near": [
+      "the Dance & Self rooftop club overhead (Newly Single)",
+      "an Atlantis street running toward the moon",
+      "the parked motorcycle at the curb (Magic Ride)",
+      "by phone: mother's living room in Baltimere (map HOME (URBAN) / WINDOW)",
+      "by phone: the Inner Harbor, quiet docks and pier lights in Baltimere"
+    ],
+    "zone": "ATLANTIS"
+  },
+  "situation": "Walking out of the club, the POET sees the EX in the sidewalk crowd (back only, no face) and cannot reach him; then the two walk an Atlantis street together, talking, the moon in the distance. They end up on the sidewalk by a phone booth with suitcases at their feet. The POET calls his MOTHER, who watches the break-up from the booth and then from her living room; he calls his FATHER, who appears and walks with him east along paths toward the sunrise and the inner harbor, the break-up always continuing in the background. Back on the sidewalk, the EX turns to haze and disappears.",
+  "time_of_day": "late night, moon up; the father walk heads toward a pre-dawn sunrise",
+  "weather_light": "moonlight down the street, neon and booth glow, wet pavement with moon reflections in puddles (spine YH010; rain inferred from the Juice Jones 'The Rain' inspo), harbor moonlight on ripples",
+  "set_pieces": [
+    {
+      "name": "The EX in the crowd",
+      "what_happens": "Leaving the club amid fawning crowds, the POET glimpses the EX from behind and reaches for him but cannot get through.",
+      "lines": ["accepting you'll never", "say nor", "ever feel", "my love was real—"],
+      "shots": ["YH002", "YH004", "YH005", "WGY053", "WGY054"],
+      "camera": "handheld follow through the crowd; EX kept back-to-camera, soft focus, reaching hand in foreground",
+      "position": "sidewalk outside the club entrance"
+    },
+    {
+      "name": "Walking toward the moon",
+      "what_happens": "POET and EX walk down the Atlantis street together, talking, the moon at the end of the street; they 'grow old together' in feeling only (aging not literal).",
+      "lines": ["we look at the moon—", "the way we used to see it", "we talk for years", "& travel through time"],
+      "shots": ["YH010", "YH012", "YH013", "YH014", "YH016", "WGY055"],
+      "camera": "long tracking two-shot from behind (EX's face never shown), moon framed at the vanishing point; insert of both reflections in a puddle",
+      "position": "along the street, heading toward the moon"
+    },
+    {
+      "name": "Suitcases at the phone booth",
+      "what_happens": "EX and POET stand on the sidewalk near the phone booth with suitcases at their feet; the EX helps him pack to go.",
+      "lines": ["You help me", "gather my things to go.", "before I go—"],
+      "shots": ["YH008", "YH024", "YH025", "YH026", "WGY056"],
+      "camera": "low shot at suitcase level, booth light spilling on the curb; EX present only as hands and back",
+      "position": "curb beside the phone booth"
+    },
+    {
+      "name": "The call to Mother",
+      "what_happens": "POET enters the booth and calls his MOTHER; they talk while watching the POET and EX break up on the sidewalk; cut to POET and MOTHER in her living room, the break-up still in the background. He hangs up and she disappears.",
+      "lines": ["I call on my mother.", "In tears—", "& re-closet wounds", "maternal ears in tune."],
+      "shots": ["YH027", "YH028", "YH030", "YH032", "YH045", "YH046", "WGY057", "WGY058", "WGY059", "WGY060"],
+      "camera": "through the booth glass with the break-up on the sidewalk behind; in the living room, a window frame holding the sidewalk scene (window inferred)",
+      "position": "inside the phone booth, then mother's living room (Baltimere home)"
+    },
+    {
+      "name": "Father and son to the inner harbor",
+      "what_happens": "POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner harbor, the break-up continuing in the background.",
+      "lines": ["I call on my Father", "& travel east toward the", "of the inner harbor—", "Father & son,"],
+      "shots": ["YH049", "YH051", "YH052", "YH053", "YH057", "YH060", "YH061", "YH062", "YH063", "WGY061", "WGY062"],
+      "camera": "wide walking shot along pier lights from behind, dawn ahead; break-up layered in the background plate",
+      "position": "paths running east from the booth to the harbor promenade and piers"
+    },
+    {
+      "name": "The EX turns to haze",
+      "what_happens": "POET and EX are back on the sidewalk; the EX turns to haze and disappears, leaving the POET alone.",
+      "lines": ["yet, broken—", "yet, heard."],
+      "shots": ["YH067", "YH068", "WGY063"],
+      "camera": "locked-off wide two-shot; the EX dissolves out, hold on the POET alone at the curb",
+      "position": "back at the phone-booth curb"
+    }
+  ],
+  "arrival": {
+    "from_previous": "He leaves the rooftop club and walks down the street below; crowds on the sidewalk fawn over him (no voice-over).",
+    "mode": "walk",
+    "inferred": false
+  },
+  "departure": {
+    "to_next": "He does not travel: the EX turns to haze on the sidewalk, and the POET is left alone on the same sidewalk beside a parked motorcycle where Magic Ride opens.",
+    "mode": "dissolve",
+    "inferred": false
+  },
+  "motifs": ["the moon 'the way we used to'", "suitcases / gathering things to go", "phone calls as summoning", "the break-up looping in the background", "tears in creases", "walking east toward sunrise", "inner harbor water"],
+  "encoding": "The sidewalk is the hinge between the club's escape and the ride out: a public, in-between place where a private break-up must play out with everyone (and both parents) watching. The phone booth works as a portal from Atlantis back to Baltimere, the zone the map glosses as 'sea-edge memories, personal origins'; inferred: calling home collapses the distance so mother and father can witness. The EX can only dissolve here, at the curb, because this is where the luggage stands and leaving begins.",
+  "evidence": [
+    "treatment: \"POET sees EX through crowd (still back of EX, no face shown)\"",
+    "treatment: \"POET and EX walking down Atlantis street together, talking, moon in distance.\"",
+    "treatment: \"standing on sidewalk near phone booth with suitcases at their feet.\"",
+    "treatment: \"Cut to POET and MOTHER in living room talking with POET and EX breaking up in background.\"",
+    "poem: \"& my tears fall between the creases in wave shadows of the inner harbor—\"",
+    "treatment: \"POET and EX on sidewalk again, EX turns to haze and dissapears.\"",
+    "spine YH010: \"Two reflections share a single lunar halo in puddle.\"",
+    "map wap.svg: INNER HARBOR, QUIET DOCKS, PIER LIGHTS, COSMIC PIER in the Baltimere corner (39°N, 76°W)"
+  ],
+  "open_questions": [
+    "Is the father's harbor walk a literal journey to Baltimere/Baltimore's Inner Harbor, or a summoned vision on the Atlantis street? The map's YET HEARD node sits in Atlantis while its harbor landmarks sit in the Baltimere corner.",
+    "Does the living room show the sidewalk through a window, or is the break-up composited in? (window inferred)",
+    "Treatment: 'POET calls MOTHER (enters phonebooth?)' — booth entry itself is marked uncertain.",
+    "Is it raining? Only the Juice Jones 'The Rain' inspo and the spine's puddle support wet streets.",
+    "Storyboard WGY053-063 sit at 1113-1323 s, not inside this poem's clock span (833-951 s); matched by content."
+  ]
+}

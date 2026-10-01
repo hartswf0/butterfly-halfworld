@@ -1,0 +1,104 @@
+{
+  "num": "06",
+  "title": "Resurrecting Atlantis",
+  "treatment_title": "Resurrecting Atlantis",
+  "location": {
+    "name": "Atlantis, the Radiant City (from the Light Gates to the Narrow Streets)",
+    "kind": "walled cyberpunk capital city at night, entered through monumental gates, old-town core of stone alleys",
+    "real_analog": "Centro Historico, Mexico City at night (the treatment's Mexico City wandering footage): Zocalo approach, narrow colonial stone streets, lit windows; a valley city once built on a lake",
+    "terrain": "city",
+    "elevation": "street",
+    "near": ["Light Gates and the ancestors' field outside", "jungle edge (Jungle Interface)", "the sea it rises from / the harbor", "mountains ringing the city"],
+    "zone": "ATLANTIS"
+  },
+  "situation": "Still night. The POET sees the entrance to Atlantis, goes in through the gates, and experiences the city as the verse describes: a welcoming crowd, nature folded into the city, candlelit narrow streets, glowing windows. When the voiceover ends he keeps wandering through Atlantis until he reaches a house that people are entering, and he goes inside.",
+  "time_of_day": "still night",
+  "weather_light": "clear night; photo-realistic cyberpunk grade; flickering candlelight, warm-lit windows, shadows down narrow streets, sound-made rainbows and golden light on the risen city (spine)",
+  "set_pieces": [
+    {
+      "name": "The Light Gates open",
+      "what_happens": "Marble gates with wings swing open to an ancestral orchestra; a line of figures, the POET among them, walks through into the radiant city.",
+      "lines": ["The gates open with wings", "made of marble stones", "an orchestra of our ancestors wildest dreams"],
+      "shots": ["AT003", "AT009", "AT010", "AT011", "AT012", "WGY041"],
+      "camera": "low wide on the gates opening, POET entering frame from behind camera; reverse to the city glowing through",
+      "position": "city boundary, the gate facing the field"
+    },
+    {
+      "name": "Road down, following comets",
+      "what_happens": "Past the gate the road descends into the luminous city under comets; generations of faces line the way.",
+      "lines": ["down yellow brick roads", "to follow comets to the capital city"],
+      "shots": ["AT014", "AT015", "AT021", "AT022", "AT024"],
+      "camera": "drone or crane following POET down the processional road, tilt up to comet streaks",
+      "position": "processional road from the gate down toward the center"
+    },
+    {
+      "name": "The city rises / here we are all one",
+      "what_happens": "Atlantis rises from the depths in golden light; diverse beings gather and look up together.",
+      "lines": ["resurrecting Atlantis", "Here we are all one"],
+      "shots": ["AT025", "AT026"],
+      "camera": "extreme wide establishing as the city lifts, cut to POET in the gathering, faces lit from above",
+      "position": "edge of the city center plaza"
+    },
+    {
+      "name": "Jungle Interface and the heart-scan admission",
+      "what_happens": "Jungle merges into crystalline buildings over overgrown ruins; children and elders draw symbols in sand; a gate scans the POET's heart instead of a pass.",
+      "lines": ["the pact we've made here with nature", "a relearned currency", "the admission"],
+      "shots": ["AT029", "AT030", "AT031", "AT033", "AT034", "AT036"],
+      "camera": "handheld walk-through of vines on stone; insert of the heart-scan gate reading POET's chest",
+      "position": "garden quarter between the gate road and the center"
+    },
+    {
+      "name": "City Center: all safe",
+      "what_happens": "Back at the center, now fully alive; a ring of protective light encircles the community; unknown architecture glows.",
+      "lines": ["But here we are all safe"],
+      "shots": ["AT037", "AT038", "AT039"],
+      "camera": "slow 360 orbit around POET in the plaza",
+      "position": "City Center plaza"
+    },
+    {
+      "name": "Narrow streets by candlelight",
+      "what_happens": "POET walks stone alleys barely two people wide; candle flame blooms, shadows stretch, families gather behind lit windows, children's laughter, clouds set free.",
+      "lines": ["flickering candle light", "shadows cast from narrow streets", "heal & set clouds free"],
+      "shots": ["AT042", "AT044", "AT045", "AT046", "AT047", "AT048", "AT050", "AT051"],
+      "camera": "Steadicam behind POET down the alley (never a face-on EX; none present), candle close-ups, window POVs",
+      "position": "Narrow Streets, old-town core"
+    },
+    {
+      "name": "Could stay forever, then wandering to the house",
+      "what_happens": "He sits a moment as Atlantis shines; voiceover ends ('welcoming me, & welcoming all'), he keeps wandering and arrives at a house where people are entering, and goes in.",
+      "lines": ["I know my soul", "it could stay here forever", "welcoming me, & welcoming all"],
+      "shots": ["AT052", "AT053", "AT054", "AT062", "AT063", "WGY042", "WGY043"],
+      "camera": "seated medium then wide; later documentary-style wandering (Mexico City footage) ending on a doorway with people filing in",
+      "position": "residential street off the Narrow Streets, at the house door"
+    }
+  ],
+  "arrival": {
+    "from_previous": "From the ancestors' parade in the still-night field he sees the entrance to Atlantis and goes in on foot.",
+    "mode": "walk",
+    "inferred": false
+  },
+  "departure": {
+    "to_next": "After the voiceover he wanders the city and finally arrives at a house people are entering; he enters (the DJ Turn Me Up house party).",
+    "mode": "walk",
+    "inferred": false
+  },
+  "motifs": ["gates with wings", "ancestral orchestra", "city rising from the sea", "candlelight and narrow streets", "nature fused with city", "heart as admission", "welcome"],
+  "encoding": "Atlantis is the 'capital city of our collective consciousness', a fiction everyone agrees to live in; the map marks this zone as false heaven and techno-faith, so its warmth is real to him and also a stage. It has to be a walled city with a gate because Nevermore's reclaimed heart and Bloodline's inheritance are what get him in (the spine's heart-scan gate). The candlelit streets lead to the house where he will finally speak his love story aloud.",
+  "evidence": [
+    "treatment: \"Still night, POET sees entrance to Atlantis and goes in, experiences city as described.\"",
+    "treatment: \"[style: photo-realistic cyberpunk]\"",
+    "treatment: \"[source material: Mexico City shoot, wandering)]\"",
+    "treatment: \"Finally arrives at house where people are enter. POET enters.\"",
+    "AT012: \"A line of figures entering through the light gates into a radiant city.\"",
+    "AT036: \"An open gate that scans a heart instead of a pass.\"",
+    "AT045: \"Stone alleys barely wide enough for two people to walk shoulder to shoulder.\"",
+    "wap.svg: \"RADIANT CITY ... LIGHT GATES ... CITY CENTER ... JUNGLE INTERFACE ... NARROW STREETS\""
+  ],
+  "open_questions": [
+    "The spine shows the city rising from the sea (AT025, AT059, AT060) and floating above clouds (AT022); the treatment shows Mexico City streets. Is the rising a one-time vision at entry, or is Atlantis a coastal city? Hot Minute's harbor and Magic Ride's surrounding mountains suggest a harbor city in a mountain ring.",
+    "AT015 'A descent into a luminous underworld': is the city below the field (a downhill approach) or underground?",
+    "Text variants: timings say 'The pack' and 'as a mission'; treatment says 'the pact' and 'as the admission'.",
+    "Which street or house in the Mexico City footage is 'the house'? Not identified.",
+    "Several AT ids repeat with different timestamps (AT009, AT025, AT029, AT059...), so one id may cover several frames."
+  ]
+}

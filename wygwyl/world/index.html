@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WHERE YOU GO WHEN YOU LEAVE — the world</title>
+<link rel="icon" href="../dot.svg">
+<meta property="og:title" content="WHERE YOU GO WHEN YOU LEAVE — the world map">
+<meta property="og:description" content="The journey of the film, staged as a real place: fourteen locations, their set pieces, cameras and routes — a map for shot planning.">
+<style>
+:root{--ink:#f3ead2;--dim:#a99f86;--gold:#ffd23f;--pink:#ff3d6e;--violet:#c58cff;--cyan:#7fe0ff;
+  --panel:rgba(10,13,18,.86);--edge:rgba(255,255,255,.14);--paper:#e9dcc0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0b1118;color:var(--ink);font:14px/1.5 "Iowan Old Style",Palatino,Georgia,serif;overflow:hidden}
+.sans{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+#app{display:grid;grid-template-columns:1fr 380px;grid-template-rows:1fr 132px;height:100vh}
+#mapwrap{position:relative;overflow:hidden;touch-action:none;cursor:grab;background:#0b1e2e}
+#mapwrap.drag{cursor:grabbing}
+#stage{position:absolute;left:0;top:0;transform-origin:0 0}
+#stage img,#stage .ov{position:absolute;left:0;top:0;display:block}
+#stage img{image-rendering:auto}
+.frame{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 7px #1a140c,inset 0 0 0 9px #b49a63,inset 0 0 60px rgba(0,0,0,.55)}
+#cart{position:absolute;left:18px;top:16px;max-width:330px;background:rgba(233,220,192,.93);color:#2a2116;
+  border:1px solid #6f5a33;outline:3px double #6f5a33;outline-offset:3px;padding:10px 14px;pointer-events:none}
+#cart h1{font-size:15px;letter-spacing:.32em;font-weight:normal}
+#cart div{font-size:11.5px;font-style:italic;margin-top:3px;color:#4c3d26}
+#rose{position:absolute;right:18px;top:16px;width:74px;height:74px;pointer-events:none;opacity:.92}
+#scale{position:absolute;left:18px;bottom:16px;background:var(--panel);border:1px solid var(--edge);padding:6px 10px;font-size:11px}
+#scale i{display:inline-block;height:6px;width:60px;border:1px solid var(--ink);margin:0 4px -1px 0;
+  background:linear-gradient(90deg,var(--ink) 50%,transparent 50%)}
+#legend{position:absolute;right:18px;bottom:16px;background:var(--panel);border:1px solid var(--edge);padding:8px 10px;font-size:10.5px;line-height:1.75}
+#legend b{display:inline-block;width:26px;height:0;border-top:3px solid;vertical-align:middle;margin-right:7px}
+#zoom{position:absolute;right:18px;top:104px;display:flex;flex-direction:column;gap:5px}
+#zoom button{width:34px;height:34px;background:var(--panel);color:var(--ink);border:1px solid var(--edge);font-size:17px;cursor:pointer}
+#side{background:#0e1217;border-left:1px solid var(--edge);overflow:auto;grid-row:1/3;grid-column:2}
+#side h2{font-size:11px;letter-spacing:.3em;color:var(--dim);font-weight:normal;padding:14px 16px 6px}
+.mis{display:grid;grid-template-columns:30px 1fr;gap:0 10px;padding:8px 16px;cursor:pointer;border-left:3px solid transparent}
+.mis:hover{background:rgba(255,255,255,.04)} .mis.on{border-left-color:var(--gold);background:rgba(255,210,63,.07)}
+.mis .n{width:26px;height:26px;border-radius:50%;border:2px solid var(--gold);color:var(--gold);display:grid;place-items:center;font-size:12px;font-weight:800}
+.mis .t{font-size:13.5px} .mis .s{font-size:11px;color:var(--dim);font-style:italic}
+#card{padding:6px 16px 30px}
+#card .kick{font-size:10.5px;letter-spacing:.24em;color:var(--gold)}
+#card h3{font-size:19px;font-weight:normal;margin:2px 0 4px;line-height:1.25}
+#card .meta{font-size:12px;color:var(--dim);margin-bottom:8px}
+#card p{font-size:13.5px;margin:7px 0}
+#card h4{font-size:10.5px;letter-spacing:.26em;color:var(--dim);font-weight:normal;margin:16px 0 6px;border-bottom:1px solid var(--edge);padding-bottom:4px}
+.sp{border:1px solid var(--edge);border-left:3px solid var(--gold);padding:8px 10px;margin:7px 0;background:rgba(255,255,255,.02)}
+.sp .h{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.sp .k{background:var(--gold);color:#111;font-weight:800;font-size:11px;padding:0 6px;border-radius:2px}
+.sp .g{font-size:11px;color:var(--cyan)} .sp .nm{font-size:14px}
+.sp .row{font-size:12.5px;margin-top:4px} .sp .row u{text-decoration:none;color:var(--dim);font-size:10.5px;letter-spacing:.14em;margin-right:5px}
+.sp .lines{font-style:italic;color:#e8d9a8}
+.sp .shots{font-size:11px;color:var(--dim);word-break:break-word}
+.tr{font-size:12.5px;padding:6px 10px;border:1px dashed var(--edge);margin:6px 0}
+.tr b{color:var(--violet);font-weight:normal;letter-spacing:.12em;font-size:11px}
+.ev{font-size:11.5px;color:var(--dim);margin:3px 0 3px 12px;text-indent:-12px}
+.oq{font-size:11.5px;color:#f2b38c;margin:3px 0}
+#prof{grid-column:1;background:#0e1217;border-top:1px solid var(--edge);position:relative}
+#prof canvas{width:100%;height:100%;display:block;cursor:pointer}
+#ui{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.mk{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:#0b0f14;border:2px solid var(--gold);
+  color:var(--gold);display:grid;place-items:center;font:800 12px "Helvetica Neue",Arial,sans-serif;pointer-events:auto;cursor:pointer;
+  box-shadow:0 0 0 3px rgba(0,0,0,.35)}
+.mk.on{background:var(--gold);color:#0b0f14;box-shadow:0 0 0 4px rgba(255,210,63,.35),0 0 18px rgba(255,210,63,.6)}
+.lbl{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;text-align:center;pointer-events:none;
+  color:#fff;font:600 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.14em;text-shadow:0 0 3px #000,0 0 6px #000,0 1px 2px #000}
+.lbl i{display:block;font:italic 10.5px Georgia,serif;letter-spacing:.04em;color:var(--gold)}
+.pin{position:absolute;width:17px;height:17px;margin:-8.5px 0 0 -8.5px;border-radius:50%;background:#0b0f14;border:1.5px solid #fff;
+  color:#fff;display:grid;place-items:center;font:800 9.5px "Helvetica Neue",Arial,sans-serif;pointer-events:auto;cursor:pointer}
+.pin.hot{background:var(--gold);color:#111;border-color:var(--gold)}
+.sp.hot{outline:2px solid var(--gold)}
+#hint{position:absolute;left:50%;transform:translateX(-50%);bottom:18px;font-size:11px;color:var(--dim);background:var(--panel);padding:4px 10px;border:1px solid var(--edge);pointer-events:none}
+@media (max-width:820px){
+  #app{grid-template-columns:1fr;grid-template-rows:56vh 96px auto;height:auto;min-height:100vh}
+  html,body{overflow:auto}
+  #side{grid-row:3;grid-column:1;border-left:0;border-top:1px solid var(--edge)}
+  #cart{max-width:190px;padding:5px 8px;left:12px;top:12px} #cart h1{font-size:10.5px;letter-spacing:.22em} #cart div{display:none}
+  #legend{display:none} #rose{width:52px;height:52px} #zoom{top:76px}
+  #hint{display:none}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="mapwrap">
+    <div id="stage"><img id="terrain" src="terrain.webp" alt="terrain"><div class="ov" id="ov"></div></div>
+    <div id="ui"></div>
+    <div class="frame"></div>
+    <div id="cart"><h1>WHERE YOU GO WHEN YOU LEAVE</h1>
+      <div>the world of the film — where each poem happens, and the ways between them · a map for shot planning</div></div>
+    <svg id="rose" viewBox="-50 -50 100 100"><g fill="none" stroke="#ffd23f" stroke-width="1.2">
+      <circle r="44"/><circle r="38" stroke-width=".5"/></g>
+      <g fill="#ffd23f"><path d="M0,-46 L6,0 L0,6 L-6,0Z"/><path d="M0,46 L5,0 L0,-5 L-5,0Z" opacity=".55"/>
+      <path d="M-46,0 L0,-5 L5,0 L0,5Z" opacity=".55"/><path d="M46,0 L0,5 L-5,0 L0,-5Z" opacity=".55"/></g>
+      <text y="-30" text-anchor="middle" font-size="11" fill="#fff" font-family="Georgia">N</text></svg>
+    <div id="zoom"><button id="zi">+</button><button id="zo">−</button><button id="zh" style="font-size:12px">⌂</button></div>
+    <div id="scale" class="sans"><i></i>5 km · 1 grid square ≈ 10 km</div>
+    <div id="legend" class="sans">
+      <div><b style="border-color:#ffd23f"></b>road · ride</div>
+      <div><b style="border-color:#ffd23f;border-top-style:dotted"></b>on foot</div>
+      <div><b style="border-color:#ff3d6e;border-top-style:dashed"></b>a fall</div>
+      <div><b style="border-color:#c58cff;border-top-style:dotted"></b>dissolve · cut</div>
+      <div><b style="border-color:#7fe0ff;border-top-style:dashed"></b>flight (an object, not him)</div>
+      <div><b style="border-color:#fff;border-top-style:dotted"></b>the loop</div>
+      <div style="margin-top:4px">● poem · Ⓐ set piece, wedge = camera</div>
+    </div>
+    <div id="hint" class="sans">drag · scroll or pinch to zoom · tap a marker</div>
+  </div>
+  <div id="prof"><canvas id="pc"></canvas></div>
+  <aside id="side">
+    <div id="card"></div>
+    <h2 class="sans">THE JOURNEY · FOURTEEN LOCATIONS</h2>
+    <div id="list"></div>
+  </aside>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let W = null, view = {x: 0, y: 0, k: 1}, base = 1, sel = null, IMG = {w: 0, h: 0};
+const wrap = $('#mapwrap'), stage = $('#stage');
+
+let MK = [];
+function apply(){ stage.style.transform = `translate(${view.x}px,${view.y}px) scale(${view.k})`; placeUI(); }
+function scr(x, y){ return [view.x + x * W.px * view.k, view.y + y * W.px * view.k]; }
+function buildUI(){
+  const ui = $('#ui'); ui.innerHTML = ''; MK = [];
+  W.sites.forEach(s => {
+    const m = document.createElement('div'); m.className = 'mk'; m.textContent = +s.num; m.dataset.n = s.num;
+    m.onpointerup = e => { e.stopPropagation(); select(s.num); };
+    const n = document.createElement('div'); n.className = 'lbl';
+    n.innerHTML = `${esc(s.short.split(' — ')[0].toUpperCase())}<i>${esc(s.title)}</i>`;
+    const pins = s.set_pieces.map((p, i) => { const d = document.createElement('div'); d.className = 'pin'; d.textContent = p.k;
+      d.title = p.name; d.onpointerup = e => { e.stopPropagation(); if (sel !== s.num) select(s.num, false); hotPin(s.num, p.k); }; ui.appendChild(d); return d; });
+    ui.appendChild(n); ui.appendChild(m);
+    MK.push({s, m, n, pins});
+  });
+}
+function hotPin(num, k){
+  document.querySelectorAll('.pin.hot,.sp.hot').forEach(e => e.classList.remove('hot'));
+  const M = MK.find(q => q.s.num === num); if (!M) return;
+  const i = M.s.set_pieces.findIndex(p => p.k === k); if (i >= 0) M.pins[i].classList.add('hot');
+  const card = document.querySelectorAll('#card .sp')[i]; if (card){ card.classList.add('hot'); card.scrollIntoView({behavior: 'smooth', block: 'center'}); }
+}
+function placeUI(){
+  if (!MK.length) return;
+  const z = view.k / base, placed = [];
+  // markers + names: selected first, then album order; a name hides if it would collide
+  const order = MK.slice().sort((a, b) => (b.s.num === sel) - (a.s.num === sel) || a.s.num.localeCompare(b.s.num));
+  order.forEach(M => {
+    const [x, y] = scr(M.s.x, M.s.y);
+    M.m.style.left = x + 'px'; M.m.style.top = y + 'px'; M.m.classList.toggle('on', M.s.num === sel);
+    const sc = Math.min(1.6, Math.max(.6, z * .55));
+    const lx = x + M.s.lab[0] * W.px * view.k * Math.min(1, 1.6 / z), ly = y + M.s.lab[1] * W.px * view.k * Math.min(1, 1.6 / z);
+    M.n.style.left = lx + 'px'; M.n.style.top = ly + 'px';
+    const w = (M.n.offsetWidth || M.s.short.length * 8.5) + 10, h = (M.n.offsetHeight || 26) + 4;
+    const box = [lx - w / 2, ly - h / 2, lx + w / 2, ly + h / 2];
+    const hit = placed.some(b => !(box[2] < b[0] || box[0] > b[2] || box[3] < b[1] || box[1] > b[3]));
+    const show = !hit || M.s.num === sel;
+    M.n.style.visibility = show ? 'visible' : 'hidden'; if (show) placed.push(box);
+    M.pins.forEach((d, i) => {
+      const p = M.s.set_pieces[i], [px, py] = scr(p.x, p.y);
+      d.style.left = px + 'px'; d.style.top = py + 'px';
+      d.style.display = (z > 2.2 || M.s.num === sel) && z > 1.4 ? '' : 'none';
+    });
+  });
+}
+function fit(){
+  const r = wrap.getBoundingClientRect();
+  base = Math.max(r.width / IMG.w, r.height / IMG.h);
+  view = {k: base, x: (r.width - IMG.w * base) / 2, y: (r.height - IMG.h * base) / 2}; apply();
+}
+function zoomAt(cx, cy, f){
+  const r = wrap.getBoundingClientRect(), k = Math.min(base * 9, Math.max(base * .8, view.k * f));
+  const px = cx - r.left, py = cy - r.top;
+  view.x = px - (px - view.x) * k / view.k; view.y = py - (py - view.y) * k / view.k; view.k = k; apply();
+}
+function flyTo(x, y, k){
+  const r = wrap.getBoundingClientRect(), kk = base * (k || 3);
+  const px = x * W.px, py = y * W.px, t0 = performance.now(), v0 = {...view};
+  const v1 = {k: kk, x: r.width / 2 - px * kk, y: r.height / 2 - py * kk};
+  (function step(now){ const t = Math.min(1, (now - t0) / 650), e = t * t * (3 - 2 * t);
+    view = {k: v0.k + (v1.k - v0.k) * e, x: v0.x + (v1.x - v0.x) * e, y: v0.y + (v1.y - v0.y) * e}; apply();
+    if (t < 1) requestAnimationFrame(step); })(t0);
+}
+function select(num, fly = true){
+  const s = W.sites.find(q => q.num === num); if (!s) return;
+  sel = num;
+  document.querySelectorAll('.mis').forEach(m => m.classList.toggle('on', m.dataset.n === num));
+  const L = s.location;
+  const prevR = W.routes.find(r => r.to === num), nextR = W.routes.find(r => r.from === num);
+  const mm = t => `${String(Math.floor(t / 60)).padStart(2,'0')}:${String(Math.floor(t % 60)).padStart(2,'0')}`;
+  $('#card').innerHTML = `
+    <div class="kick sans">LOCATION ${+num} · GRID ${s.grid} · ${mm(s.clock[0])}–${mm(s.clock[1])} ON THE ALBUM CLOCK</div>
+    <h3>${esc(L.name)}</h3>
+    <div class="meta">${esc(s.title)} · ${esc(L.kind)}<br>scout analog: ${esc(L.real_analog)}<br>
+      ${esc(L.terrain)} · ${esc(L.elevation)} · zone ${esc(L.zone)} · near ${esc((L.near || []).join(', '))}</div>
+    <p>${esc(s.situation)}</p>
+    <div class="meta">⏱ ${esc(s.time_of_day)} · ☁ ${esc(s.weather_light)}</div>
+    <h4 class="sans">ARRIVAL</h4>
+    <div class="tr"><b>${esc((s.arrival.mode || '').toUpperCase())}${s.arrival.inferred ? ' · INFERRED' : ''}</b> — ${esc(s.arrival.from_previous)}</div>
+    <h4 class="sans">SET PIECES · ${s.set_pieces.length}</h4>
+    ${s.set_pieces.map(p => `<div class="sp"><div class="h"><span class="k sans">${p.k}</span><span class="nm">${esc(p.name)}</span>
+      <span class="g sans">GRID ${p.grid} · CAMERA FACING ${p.facing}°</span></div>
+      <div class="row">${esc(p.what_happens)}</div>
+      ${(p.lines || []).length ? `<div class="row lines">“${esc(p.lines.join(' / '))}”</div>` : ''}
+      <div class="row"><u class="sans">CAMERA</u>${esc(p.camera)}</div>
+      <div class="row"><u class="sans">POSITION</u>${esc(p.position)}</div>
+      <div class="row shots sans">SHOTS ${esc((p.shots || []).join(' · '))}</div></div>`).join('')}
+    <h4 class="sans">DEPARTURE</h4>
+    <div class="tr"><b>${esc((s.departure.mode || '').toUpperCase())}${s.departure.inferred ? ' · INFERRED' : ''}</b> — ${esc(s.departure.to_next)}</div>
+    <h4 class="sans">WHY HERE</h4><p>${esc(s.encoding)}</p>
+    <p class="meta">motifs: ${esc((s.motifs || []).join(' · '))}</p>
+    <h4 class="sans">EVIDENCE</h4>${(s.evidence || []).map(e => `<div class="ev">— ${esc(e)}</div>`).join('')}
+    ${(s.open_questions || []).length ? `<h4 class="sans">OPEN QUESTIONS</h4>${s.open_questions.map(q => `<div class="oq">? ${esc(q)}</div>`).join('')}` : ''}`;
+  $('#side').scrollTop = 0;
+  if (fly) flyTo(s.x, s.y, 3.2); else placeUI();
+  drawProfile();
+}
+// route profile: altitude across the clock — every fall made visible
+function drawProfile(){
+  const c = $('#pc'), d = Math.min(devicePixelRatio || 1, 2), r = c.getBoundingClientRect();
+  c.width = r.width * d; c.height = r.height * d;
+  const g = c.getContext('2d'); g.setTransform(d, 0, 0, d, 0, 0);
+  const Wd = r.width, Hd = r.height, T = 1440.1, padL = 54;
+  g.fillStyle = '#0e1217'; g.fillRect(0, 0, Wd, Hd);
+  const X = t => padL + t / T * (Wd - padL - 12), Y = a => Hd * .52 - a * Hd * .34;
+  g.font = '10px Helvetica, Arial'; g.fillStyle = '#6f6a5c';
+  [['SKY', 1], ['HIGH', .7], ['SEA', 0], ['THE BLACK', -1]].forEach(([n, a]) => {
+    g.fillText(n, 6, Y(a) + 3); g.strokeStyle = '#ffffff10'; g.beginPath(); g.moveTo(padL, Y(a)); g.lineTo(Wd, Y(a)); g.stroke(); });
+  const P = W.profile;
+  P.forEach((p, i) => {
+    const alt = p.num === '14' ? -1 : p.alt;
+    g.fillStyle = p.num === sel ? 'rgba(255,210,63,.18)' : 'rgba(255,255,255,.03)';
+    g.fillRect(X(p.t0), 4, X(p.t1) - X(p.t0) - 1, Hd - 8);
+    g.strokeStyle = p.num === sel ? '#ffd23f' : '#f3ead2'; g.lineWidth = p.num === sel ? 3 : 2;
+    g.beginPath(); g.moveTo(X(p.t0), Y(alt)); g.lineTo(X(p.t1), Y(alt)); g.stroke();
+    const nx = P[i + 1];
+    if (nx){
+      const a2 = nx.num === '14' ? -1 : nx.alt, m = p.mode_out || 'walk';
+      g.strokeStyle = m === 'fall' ? '#ff3d6e' : /dissolve|cut|wake/.test(m) ? '#c58cff' : m === 'fly' ? '#7fe0ff' : '#ffd23f';
+      g.setLineDash(m === 'fall' ? [3, 4] : /dissolve|cut/.test(m) ? [1, 4] : []);
+      g.beginPath(); g.moveTo(X(p.t1), Y(alt)); g.lineTo(X(nx.t0), Y(a2)); g.stroke(); g.setLineDash([]);
+      if (m === 'fall'){ g.fillStyle = '#ff3d6e'; g.fillText('FALL', X(p.t1) + 3, (Y(alt) + Y(a2)) / 2); }
+    }
+    g.fillStyle = p.num === sel ? '#ffd23f' : '#a99f86';
+    g.fillText(String(+p.num), (X(p.t0) + X(p.t1)) / 2 - 3, Hd - 8);
+  });
+  g.fillStyle = '#6f6a5c'; g.fillText('ROUTE PROFILE — altitude across the 24-minute album clock', padL, 13);
+}
+$('#pc').addEventListener('click', e => {
+  const r = e.target.getBoundingClientRect(), t = (e.clientX - r.left - 54) / (r.width - 66) * 1440.1;
+  const p = W.profile.find(q => t >= q.t0 && t <= q.t1); if (p) select(p.num);
+});
+// pan / zoom / pinch / tap
+const pts = new Map(); let moved = 0, last = null, pinch = null;
+wrap.addEventListener('pointerdown', e => { pts.set(e.pointerId, e); moved = 0; last = e; wrap.classList.add('drag');
+  try{ wrap.setPointerCapture(e.pointerId); }catch(_){} });
+wrap.addEventListener('pointermove', e => {
+  if (!pts.has(e.pointerId)) return; pts.set(e.pointerId, e);
+  if (pts.size === 2){ const [a, b] = [...pts.values()], dd = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+    if (pinch) zoomAt((a.clientX + b.clientX) / 2, (a.clientY + b.clientY) / 2, dd / pinch); pinch = dd; moved += 10; return; }
+  view.x += e.clientX - last.clientX; view.y += e.clientY - last.clientY;
+  moved += Math.abs(e.clientX - last.clientX) + Math.abs(e.clientY - last.clientY); last = e; apply();
+});
+const up = e => { pts.delete(e.pointerId); pinch = null; wrap.classList.remove('drag');
+  if (e.type === 'pointerup' && moved < 6){
+    const r = wrap.getBoundingClientRect();
+    const mx = (e.clientX - r.left - view.x) / view.k / W.px, my = (e.clientY - r.top - view.y) / view.k / W.px;
+    let best = null, bd = 1e9;
+    W.sites.forEach(s => { const dd = Math.hypot(s.x - mx, s.y - my); if (dd < bd){ bd = dd; best = s; } });
+    if (best && bd < 22) select(best.num);
+  }
+  last = [...pts.values()][0] || null; };
+wrap.addEventListener('pointerup', up); wrap.addEventListener('pointercancel', up);
+wrap.addEventListener('wheel', e => { e.preventDefault(); zoomAt(e.clientX, e.clientY, Math.exp(-e.deltaY * .0015)); }, {passive: false});
+$('#zi').onclick = () => { const r = wrap.getBoundingClientRect(); zoomAt(r.left + r.width / 2, r.top + r.height / 2, 1.5); };
+$('#zo').onclick = () => { const r = wrap.getBoundingClientRect(); zoomAt(r.left + r.width / 2, r.top + r.height / 2, 1 / 1.5); };
+$('#zh').onclick = fit;
+addEventListener('resize', () => { fit(); drawProfile(); });
+
+Promise.all([fetch('world.json').then(r => r.json()), fetch('overlay.svg').then(r => r.text()),
+             new Promise(res => { const im = $('#terrain'); im.complete ? res() : im.onload = res; })]).then(([w, svg]) => {
+  W = w; IMG = {w: $('#terrain').naturalWidth, h: $('#terrain').naturalHeight};
+  const ov = $('#ov'); ov.innerHTML = svg; buildUI();
+  const s = ov.querySelector('svg'); s.setAttribute('width', IMG.w); s.setAttribute('height', IMG.h);
+  $('#list').innerHTML = W.sites.map(s => `<div class="mis" data-n="${s.num}"><span class="n sans">${+s.num}</span>
+    <div><div class="t">${esc(s.location.name.split('(')[0].split(',')[0])}</div><div class="s">${esc(s.title)} · ${esc(s.location.kind)}</div></div></div>`).join('');
+  $('#list').onclick = e => { const m = e.target.closest('.mis'); if (m) select(m.dataset.n); };
+  fit();
+  $('#card').innerHTML = `<p style="margin-top:14px">The film’s journey, staged as a real place. Fourteen locations read out of the assembly treatment,
+    the shot database and the poems — each with a believable real-world analog a location scout could use, its set pieces
+    on the ground with grid references and camera directions, and the ways the poet travels between them: on foot, by road,
+    by falling, by dissolving. The profile below shows the altitude of the journey across the album clock — leaving, in this
+    film, is falling.</p><p class="meta">Choose a location from the list, the map, or the profile.</p>`;
+  drawProfile();
+  const want = (location.hash.match(/#(\d\d)/) || [])[1]; if (want) select(want);
+});
+</script>
+</body>
+</html>

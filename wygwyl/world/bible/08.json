@@ -1,0 +1,101 @@
+{
+  "num": "08",
+  "title": "Newly Single",
+  "treatment_title": "Newly Single",
+  "location": {
+    "name": "Dance & Self — the open-air rooftop club over Atlantis",
+    "kind": "open-air rooftop nightclub on a high-rise, with a soul-only cutaway to an open field on a giant planet",
+    "real_analog": "An open-air rooftop club in central Mexico City (Centro Histórico / Roma), skyline facing the dark ridges of the Sierra de Guadalupe or Ajusco (inferred: the film's Mexico City night material stands in for Atlantis)",
+    "terrain": "city",
+    "elevation": "high",
+    "near": [
+      "the DJ Turn Me Up house party he has just left",
+      "the Atlantis street and sidewalk directly below (Yet Heard)",
+      "unfamiliar mountains on the horizon (later ridden through in Magic Ride)",
+      "the PLANET / OPEN FIELD the soul visits (map: PLANET (NEWLY SINGLE), OPEN FIELD)"
+    ],
+    "zone": "ATLANTIS"
+  },
+  "situation": "The POET leaves the house party for an intense open-air rooftop club; dancing is fast, lights flash, time is shifted. His soul leaves his body and floats above, watching the whole of Atlantis lit blue and pink, while the body keeps dancing among strangers. Angels pour cleansing water on the body in the middle of the floor; haze fills the club, the body inhales it and the soul returns. He ends at the rooftop's edge, staring at distant mountains.",
+  "time_of_day": "deep night, time-shifted (time-lapse feel)",
+  "weather_light": "clear night open to the sky; fast strobes and lasers, blue and pink city glow below, then thickening haze/smoke carved by beams; crescent moon over neon-edged peaks",
+  "set_pieces": [
+    {
+      "name": "The soul leaves the dancer",
+      "what_happens": "Mid-dance, a translucent soul rises out of the POET's chest and floats above; the emptied body keeps moving to the beat alone.",
+      "lines": ["The soul has escaped", "my body for the moment", "& left him on the dance floor—", "flesh & bones—"],
+      "shots": ["NS002", "NS003", "NS004", "NS005", "NS006", "WGY047", "WGY048"],
+      "camera": "medium on the dancer under strobe, then a slow crane up following the soul out of frame",
+      "position": "center of the rooftop dance floor"
+    },
+    {
+      "name": "Strangers collide; the last one to leave",
+      "what_happens": "From the soul's vantage the crowd moves in slow motion, bodies brushing and sparking; the body stays on as the club empties around a lone silhouette.",
+      "lines": ["Let's watch strangers", "collide & spark", "We want him to", "be the last one to leave,"],
+      "shots": ["NS014", "NS017", "NS018", "NS019", "NS022", "NS023"],
+      "camera": "overhead slow-motion panorama (soul POV), then a 360 orbit around the lone dancer as the floor thins",
+      "position": "dance floor, seen from above the crowd"
+    },
+    {
+      "name": "Soul over Atlantis / the open field at the equator",
+      "what_happens": "Cutaway: the soul watches the party from far above, top-down over all of Atlantis lit blue and pink; the verse relocates it to an open field under a stalled sun on a much larger, hotter planet.",
+      "lines": ["Now let us put my soul", "in the middle", "of an open field—", "at the equator of a planet"],
+      "shots": ["NS030", "NS031", "NS032", "NS033", "NS034", "NS035", "WGY049"],
+      "camera": "top-down aerial of the lit city, match-cut to an extreme wide of a curved-horizon prairie with a gas giant in the sky",
+      "position": "high above the rooftop (sky), and the planet field (soul-space only)"
+    },
+    {
+      "name": "Angels' ice-water baptism",
+      "what_happens": "Cut back to the body in the middle of the club: angels dump cleansing, unfiltered ice water over him while the party continues; he sways in trance.",
+      "lines": ["Cool me down", "by pouring", "unfiltered water", "out of ice baths—"],
+      "shots": ["NS036", "NS037", "NS038", "NS039", "NS043", "NS045", "WGY050"],
+      "camera": "high angle looking down the water's arc in slow motion; tight on the face as it hits",
+      "position": "middle of the club floor"
+    },
+    {
+      "name": "Haze and the soul's return",
+      "what_happens": "The club fills with haze; the body leans back, inhales the smoke, and the soul streaks back into the chest.",
+      "lines": ["Now bring my", "soul back to my body", "to lean back—", "breathe in the smoke"],
+      "shots": ["NS050", "NS051", "NS052", "NS053", "NS054", "NS055", "WGY051"],
+      "camera": "push-in to the chest as the soul re-enters; side light through fog beams",
+      "position": "edge of the floor, leaning against the subwoofer wall"
+    },
+    {
+      "name": "Mountains from the rooftop",
+      "what_happens": "The POET stares from the rooftop at unfamiliar yet relatable mountains in the distance, reaching toward something just beyond his fingertips.",
+      "lines": ["Staring into unfamiliar", "yet—relatable", "mountains in the distance", "within reach."],
+      "shots": ["NS060", "NS061", "NS062", "NS065", "WGY052"],
+      "camera": "over-the-shoulder at the parapet, long lens compressing the ridgeline under a crescent moon",
+      "position": "rooftop parapet / edge"
+    }
+  ],
+  "arrival": {
+    "from_previous": "He leaves the DJ Turn Me Up house party/poetry reading and goes to the open-air rooftop club (stated); travelling on foot through Atlantis is inferred.",
+    "mode": "walk",
+    "inferred": true
+  },
+  "departure": {
+    "to_next": "With no voice-over he leaves the club and walks down the street below, crowds on the sidewalk fawning over him — the street where Yet, Heard begins.",
+    "mode": "walk",
+    "inferred": false
+  },
+  "motifs": ["soul leaving and re-entering the body", "strobe / laser light", "water poured by angels", "haze / smoke", "distant mountains", "blue and pink city lights", "being the last one to leave"],
+  "encoding": "The rooftop is Atlantis at its most 'false heaven' (the map's zone gloss: social illusions, techno-faith): the highest, loudest place, where pleasure is an escape with walls and angels of the newest religions baptize a heartbroken body. Only at this height can the soul leave without falling and look down on the whole city; inferred: the mountains he sees from the parapet are the first sight of the way out, which Magic Ride later crosses.",
+  "evidence": [
+    "treatment: \"goes to open-air, rooftop intense club scene.\"",
+    "treatment: \"Soul of POET leaves body and floats above.\"",
+    "treatment: \"top-down of all Atlantis, lit up, blue and pink lights throughout the city.\"",
+    "treatment: \"angels dumping cleansing water on POET's Body in the middle of the club scene.\"",
+    "treatment: \"Club fills with haze, POET's Body inhales it as POET's soul returns.\"",
+    "treatment: \"POET stares into mountains from rooftop.\"",
+    "spine NS062: \"Neon-edged peaks rise under crescent moon.\"",
+    "map wap.svg: NEWLY SINGLE node with DANCE & SELF, OPEN FIELD, PLANET, ROOM inside ATLANTIS ZONE"
+  ],
+  "open_questions": [
+    "The verse puts the soul in an open field on a hotter planet; the staging shows it hovering top-down over Atlantis. Are these the same shot (aerial dissolving into planet) or two separate soul-spaces?",
+    "Treatment reads 'my body trances / in a free bliss' while the recorded VO says 'transiting in a flash of strobe lights'; spine follows neither exactly.",
+    "Which real mountains: the ridge around Atlantis (map ATLANTIS RIDGE) or the separate UNFAMILIAR MOUNTAINS landmark?",
+    "Storyboard WGY timestamps do not sit on clock.json spans (WGY046-052 at 966-1092 s vs Newly Single at 732-833 s); beats were matched by content, not clock.",
+    "Spine NS015 is absent from total-cinome.json."
+  ]
+}

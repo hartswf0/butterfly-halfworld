@@ -1,0 +1,432 @@
+{
+ "note": "Composed from the location bible (poems/NN.json). 1 unit = 100 m. West: the bay and its harbor city (Chesapeake/Baltimore analog). Across the harbor: Chapel Point (chapel 03 -> temple 11, hall 12). Outside the bay mouth: the Nevermore night beach (04), dunes up to the Night Garden Fields (05, Delmarva/Teotihuacan analogs). East: a mountain-ringed highland basin with a lake — Atlantis (06-09, Mexico City/Tenochtitlan analog); the Highway Journey Realm leaves by a southern pass (10) and rides the coast road back to Chapel Point. Off the southwest: THE BLACK, a phantom island reachable only by falling or fading (14; the vintage party of 01).",
+ "size": [
+  1000,
+  750
+ ],
+ "sites": [
+  {
+   "id": "BALTIMERE",
+   "x": 245,
+   "y": 255,
+   "terrain": "city",
+   "r": 78,
+   "elev": 0.05,
+   "urban": true,
+   "block": 8,
+   "grid_rot": -12
+  },
+  {
+   "num": "01",
+   "x": 222,
+   "y": 238,
+   "terrain": "city",
+   "r": 30,
+   "elev": 0.05,
+   "pin_rot": 200,
+   "pin_arc": 200,
+   "lab_dy": -30
+  },
+  {
+   "num": "02",
+   "x": 145,
+   "y": 150,
+   "terrain": "suburb",
+   "r": 32,
+   "elev": 0.2,
+   "urban": true,
+   "town": 0.9,
+   "block": 11,
+   "grid_rot": 25,
+   "pin_rot": 100
+  },
+  {
+   "num": "03",
+   "x": 368,
+   "y": 478,
+   "terrain": "coast",
+   "r": 24,
+   "elev": 0.03,
+   "pin_rot": 120,
+   "pin_arc": 150,
+   "lab_dx": -58,
+   "lab_dy": 6
+  },
+  {
+   "num": "04",
+   "x": 455,
+   "y": 655,
+   "terrain": "coast",
+   "r": 36,
+   "elev": 0.02,
+   "pin_rot": 180,
+   "pin_arc": 160,
+   "lab_dy": 42
+  },
+  {
+   "num": "05",
+   "x": 535,
+   "y": 545,
+   "terrain": "plain",
+   "r": 42,
+   "elev": 0.16,
+   "pin_rot": 210,
+   "pin_arc": 190
+  },
+  {
+   "num": "06",
+   "x": 668,
+   "y": 420,
+   "terrain": "city",
+   "r": 40,
+   "elev": 0.24,
+   "pin_rot": 160,
+   "pin_arc": 200
+  },
+  {
+   "id": "ATLANTIS",
+   "x": 735,
+   "y": 372,
+   "terrain": "city",
+   "r": 80,
+   "elev": 0.24,
+   "urban": true,
+   "block": 7,
+   "grid_rot": 8
+  },
+  {
+   "num": "07",
+   "x": 712,
+   "y": 392,
+   "terrain": "city",
+   "r": 17,
+   "elev": 0.24,
+   "pin_rot": 90,
+   "lab_dx": -32,
+   "lab_dy": 4
+  },
+  {
+   "num": "08",
+   "x": 748,
+   "y": 352,
+   "terrain": "city",
+   "r": 17,
+   "elev": 0.24,
+   "pin_rot": 300,
+   "lab_dy": -16
+  },
+  {
+   "num": "09",
+   "x": 768,
+   "y": 392,
+   "terrain": "city",
+   "r": 17,
+   "elev": 0.24,
+   "pin_rot": 20,
+   "lab_dx": 40,
+   "lab_dy": 6
+  },
+  {
+   "num": "10",
+   "x": 805,
+   "y": 548,
+   "terrain": "mountain",
+   "r": 42,
+   "elev": 0.3,
+   "pin_rot": 270,
+   "pin_arc": 200,
+   "lab_dy": 40
+  },
+  {
+   "num": "11",
+   "x": 374,
+   "y": 470,
+   "terrain": "coast",
+   "r": 24,
+   "elev": 0.03,
+   "pin_rot": 300,
+   "pin_arc": 150,
+   "lab_dx": 52,
+   "lab_dy": -28
+  },
+  {
+   "num": "12",
+   "x": 404,
+   "y": 452,
+   "terrain": "coast",
+   "r": 26,
+   "elev": 0.05,
+   "pin_rot": 330,
+   "pin_arc": 160,
+   "lab_dx": 40,
+   "lab_dy": -14
+  },
+  {
+   "num": "13",
+   "x": 300,
+   "y": 268,
+   "terrain": "city",
+   "r": 18,
+   "elev": 0.04,
+   "pin_rot": 0,
+   "lab_dx": 36,
+   "lab_dy": -6
+  },
+  {
+   "num": "14",
+   "x": 118,
+   "y": 640,
+   "terrain": "void",
+   "r": 34,
+   "pin_rot": 0,
+   "lab_dy": -42
+  }
+ ],
+ "land": [
+  {
+   "x": 560,
+   "y": 330,
+   "r": 430,
+   "h": 0.12
+  },
+  {
+   "x": 230,
+   "y": 230,
+   "r": 200,
+   "h": 0.1
+  },
+  {
+   "x": 760,
+   "y": 380,
+   "r": 210,
+   "h": 0.32
+  },
+  {
+   "x": 480,
+   "y": 560,
+   "r": 170,
+   "h": 0.1
+  }
+ ],
+ "water": [
+  {
+   "points": [
+    [
+     352,
+     760
+    ],
+    [
+     348,
+     650
+    ],
+    [
+     338,
+     560
+    ],
+    [
+     324,
+     470
+    ],
+    [
+     306,
+     385
+    ],
+    [
+     282,
+     318
+    ],
+    [
+     262,
+     298
+    ]
+   ],
+   "width": 46,
+   "depth": 0.16
+  },
+  {
+   "x": 262,
+   "y": 298,
+   "r": 24,
+   "depth": 0.1
+  },
+  {
+   "x": 772,
+   "y": 330,
+   "r": 34,
+   "depth": 0.09
+  }
+ ],
+ "ranges": [
+  {
+   "name": "THE PERCEPTUAL RANGE",
+   "points": [
+    [
+     400,
+     95
+    ],
+    [
+     560,
+     72
+    ],
+    [
+     720,
+     96
+    ],
+    [
+     880,
+     120
+    ]
+   ],
+   "height": 0.95,
+   "width": 82
+  },
+  {
+   "name": "HAMPDEN HILLS",
+   "points": [
+    [
+     90,
+     130
+    ],
+    [
+     170,
+     108
+    ],
+    [
+     230,
+     120
+    ]
+   ],
+   "height": 0.36,
+   "width": 58
+  }
+ ],
+ "labels": [
+  {
+   "text": "BALTIMERE",
+   "x": 190,
+   "y": 330,
+   "size": 17,
+   "ls": 9,
+   "op": 0.92
+  },
+  {
+   "text": "THE INNER HARBOR",
+   "x": 270,
+   "y": 312,
+   "size": 6,
+   "ls": 2.5,
+   "style": "italic",
+   "col": "#d7f2f5",
+   "op": 0.9
+  },
+  {
+   "text": "THE BAY",
+   "x": 328,
+   "y": 590,
+   "size": 9,
+   "ls": 5,
+   "style": "italic",
+   "col": "#d7f2f5",
+   "rot": -84
+  },
+  {
+   "text": "CHAPEL POINT",
+   "x": 410,
+   "y": 500,
+   "size": 7,
+   "ls": 3,
+   "op": 0.85
+  },
+  {
+   "text": "NEVERMORE SHORE",
+   "x": 520,
+   "y": 690,
+   "size": 8,
+   "ls": 4,
+   "style": "italic",
+   "op": 0.9
+  },
+  {
+   "text": "NIGHT GARDEN FIELDS",
+   "x": 545,
+   "y": 478,
+   "size": 8,
+   "ls": 4,
+   "op": 0.85
+  },
+  {
+   "text": "ATLANTIS",
+   "x": 740,
+   "y": 315,
+   "size": 19,
+   "ls": 10,
+   "col": "#ffe9a8",
+   "op": 0.95
+  },
+  {
+   "text": "THE LAKE",
+   "x": 790,
+   "y": 300,
+   "size": 5.5,
+   "ls": 2.5,
+   "style": "italic",
+   "col": "#d7f2f5"
+  },
+  {
+   "text": "THE PERCEPTUAL RANGE",
+   "x": 620,
+   "y": 40,
+   "size": 9,
+   "ls": 7,
+   "op": 0.85
+  },
+  {
+   "text": "THE PASS",
+   "x": 820,
+   "y": 505,
+   "size": 6,
+   "ls": 3,
+   "op": 0.85
+  },
+  {
+   "text": "SOUTHERN OCEAN",
+   "x": 640,
+   "y": 728,
+   "size": 14,
+   "ls": 12,
+   "style": "italic",
+   "col": "#cfe8ee",
+   "op": 0.85
+  },
+  {
+   "text": "THE BLACK",
+   "x": 118,
+   "y": 700,
+   "size": 10,
+   "ls": 7,
+   "style": "italic",
+   "col": "#e9d9ff",
+   "op": 0.85
+  }
+ ],
+ "rings": [
+  {
+   "name": "THE ATLANTIS RIM",
+   "x": 760,
+   "y": 385,
+   "R": 150,
+   "width": 60,
+   "height": 0.85,
+   "gaps": [
+    [
+     66,
+     94
+    ],
+    [
+     143,
+     170
+    ]
+   ]
+  }
+ ]
+}

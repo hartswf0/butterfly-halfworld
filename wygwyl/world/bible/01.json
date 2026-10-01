@@ -1,0 +1,96 @@
+{
+  "num": "01",
+  "title": "Out of Life",
+  "treatment_title": "Out of Life",
+  "location": {
+    "name": "Window Frame Tower, Hometown Skyline (HOME district, Baltimere)",
+    "kind": "high-rise apartment bedroom with an iron fire escape outside the window",
+    "real_analog": "a 12-14 story pre-war brick apartment tower in Baltimore's Mount Vernon, iron fire escapes bolted under the bedroom windows",
+    "terrain": "city",
+    "elevation": "high",
+    "near": ["fire escape", "brick wall", "city skyline", "open air / clouds below the window"],
+    "zone": "BALTIMERE"
+  },
+  "situation": "In a plain, dim high-rise bedroom the POET (black t-shirt) reads the poem aloud to the EX, who sits outside on the fire escape, back to him, vaping, while a TV cycles images of the world's chaos. Vape haze fills the room inside and out; he moves toward the window but the EX recedes, then falls off the fire escape into darkness and he falls after through clouds into black. Mid-fall (title card) he crashes into an old-time vintage party, chases the EX through the slow-motion crowd but the EX keeps vanishing, then trips through a hole in the floor into pure blackness.",
+  "time_of_day": "evening into night (inferred: 'room dim'; spine SH010 places the fire escape at dusk)",
+  "weather_light": "dim interior, TV flicker, thick vape haze blurring vision; then cloud and total black; the party is warm with euphoric light leaks",
+  "set_pieces": [
+    {
+      "name": "The reading",
+      "what_happens": "POET reads the poem aloud to the EX; the TV shows the world's chaos.",
+      "lines": ["What we've made", "we don't want—", "What we've sold / to the world", "/ doesn't exist."],
+      "shots": ["SH001", "SH002", "SH003", "SH004", "SH005", "SH006"],
+      "camera": "static wide of the bare room, POET in the foreground, window and EX's back deep in frame; insert on the TV",
+      "position": "bedroom interior, high floor, POET facing the open window"
+    },
+    {
+      "name": "Haze at the window",
+      "what_happens": "EX vapes on the fire escape, back always turned; haze builds; POET moves toward the window but the EX gets further away.",
+      "lines": ["i look for a way out", "through the hallways,", "within the tunnels,", "& fire escapes—"],
+      "shots": ["SH007", "SH008", "SH010"],
+      "camera": "slow push toward the window that never closes the distance (dolly-zoom feel), haze softening focus",
+      "position": "bedroom window sill onto the iron fire escape, brick facade outside"
+    },
+    {
+      "name": "Off the fire escape",
+      "what_happens": "EX falls off the fire escape into darkness; POET falls behind into the clouds until it is black. Title card.",
+      "lines": ["trip on my own words—", "falling out of life", "where you go when you / leave."],
+      "shots": ["SH011", "SH014"],
+      "camera": "over-the-railing high angle as the EX drops, then POV fall through cloud to black; hold black for title",
+      "position": "fire escape landing, then open air below the tower"
+    },
+    {
+      "name": "The fall montage",
+      "what_happens": "POET falls behind EX through images of world chaos swapping with ways people escape: drugs, partying, TV, media, phones.",
+      "lines": ["It was the maze", "beneath the quicksands of the make-believe / haven—", "overnourished forests / of escapism", "that calls for you—"],
+      "shots": ["SH023", "SH024", "SH026", "SH027", "SH034", "SH035"],
+      "camera": "top-down falling bodies with projected/composited imagery streaming past; EX always seen from behind",
+      "position": "the drop beneath the tower, between sky and ground (no floor)"
+    },
+    {
+      "name": "Crashing the vintage party",
+      "what_happens": "POET crashes into an old-time party in romantic slow motion; he chases the EX through the crowd but the EX keeps vanishing.",
+      "lines": ["crashing the party", "of your evilest instincts", "to find vibrations", "sweet memories— / in photographs, / film & fiction"],
+      "shots": ["SH041", "SH044", "SH057", "SH058", "SH059"],
+      "camera": "handheld through the crowd at overcranked speed, light leaks, EX glimpsed back-to-camera then gone",
+      "position": "a vintage ballroom/party floor met mid-fall (inferred: no address given)"
+    },
+    {
+      "name": "Hole in the floor",
+      "what_happens": "POET stumbles through a hole in the party floor and keeps falling into pure blackness.",
+      "lines": ["as I stumble / on my own words,", "landing into / the secret of—", "& I fall out of life."],
+      "shots": ["SH067", "SH070"],
+      "camera": "low floor-level angle on his feet catching the edge, then overhead as he drops away into black",
+      "position": "center of the party floor"
+    }
+  ],
+  "arrival": {
+    "from_previous": "Film opens here: 'Open on plain bedroom, high rise, room dim.' No previous place.",
+    "mode": "cut",
+    "inferred": false
+  },
+  "departure": {
+    "to_next": "He trips through a hole in the party floor and falls into pure blackness, where Flashing Lights finds him falling or floating.",
+    "mode": "fall",
+    "inferred": false
+  },
+  "motifs": ["the EX's turned back", "vape haze", "window as barrier", "fire escape", "falling", "TV / screens of chaos", "tripping on words", "vanishing in a crowd"],
+  "encoding": "A high window with a fire escape is a built-in exit that is also a ledge: the 'way out' the poem looks for is literally hanging off the bedroom, and the EX is already out on it. The fall from the tower turns the escape route into the poem's thesis - leaving is falling - and every later place (party, void, flashback) is reached by dropping through a floor. Inferred: the high floor is what makes the fall long enough to pass through a whole culture of escapism.",
+  "evidence": [
+    "treatment: Open on plain bedroom, high rise, room dim.",
+    "treatment: EX faced away (never see face always back), on fire escape through bedroom window, vaping.",
+    "treatment: EX falls off fire escape, into darkness, POET fall's behind, into the clouds",
+    "treatment: POET crashes into old-time vintage party, guests are in romantic slow-motion",
+    "treatment: Poet trips through hole in the floor, and continue to fall into pure blackness.",
+    "spine SH010: A side-angle view of a rusty fire escape against a brick wall at dusk.",
+    "map wap.svg: OUT OF LIFE (Node) in BALTIMERE ZONE, with WINDOW FRAME, FIRE ESCAPES, RUSTY FIRE ESCAPE, BRICK WALL",
+    "storyboard WGY001: A dimly lit plain bedroom in a high-rise apartment."
+  ],
+  "open_questions": [
+    "Which floor and which city exactly: the treatment says only 'high rise'; Baltimore is read from the map's BALTIMERE zone (39N 76W).",
+    "Where the vintage party physically sits: met mid-fall, no building or era given.",
+    "The poem reading says 'within the drawers', the treatment verse 'within the tunnels'; no shot covers this line.",
+    "Storyboard WGY timestamps are even 21s beats and do not match the clock.json spans; WGY001-016 belong to this poem by content, not by clock.",
+    "The title card says PART 2 OF 3 / FUTURE: parts 1 and 3 are not located in these sources."
+  ]
+}

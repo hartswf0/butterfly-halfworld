@@ -1,0 +1,88 @@
+{
+  "num": "11",
+  "title": "New Day",
+  "treatment_title": "Temple",
+  "location": {
+    "name": "The New Temple at Chapel Shore (Inner Harbor)",
+    "kind": "harbor-shore temple site: ruins of the decaying chapel rebuilt as a futuristic white temple",
+    "real_analog": "Oslo Opera House roof at dawn (white stone sloping into the harbor) for the temple; Baltimore Inner Harbor shoreline with wooded hills behind for the setting",
+    "terrain": "coast",
+    "elevation": "sea level",
+    "near": ["the Inner Harbor water", "the open sea in the distance", "tree-covered hills (Temple Peaks)", "cobblestone boulevards", "the harbor cafe (poem 13)"],
+    "zone": "CENTER"
+  },
+  "situation": "At first light the POET rides back to the shore where the chapel decayed in poem 3 and its remnants lie in the sun. He begins to rebuild; the temple builds itself with him, not old but futuristic, modern, clean and white. He is alone. The interior beats (choir chords, journal, gospels sung to a mirror) are inferred staging for a poem the treatment marks '[poem unwritten]'.",
+  "time_of_day": "early morning, just after dawn",
+  "weather_light": "chilly morning; low sun revealing the ruins; mist on the distant sea; morning dew burning off into full sunlight",
+  "set_pieces": [
+    {
+      "name": "Arrival on the chilly shore",
+      "what_happens": "The motorcycle comes down out of the hills to the chapel shore; wide view of distant seas and the wooded hills behind.",
+      "lines": ["Even here is chilly in the morning.", "covers the seas in the distance", "hugs the bases of tree-covered hills", "This world is at peace."],
+      "shots": ["WGY067", "WGY068"],
+      "camera": "extreme wide from the water looking inland, bike small against the hills; slow push",
+      "position": "shore road dropping to the waterline beside the chapel ruins"
+    },
+    {
+      "name": "Remnants in the sunlight",
+      "what_happens": "Sun crosses the debris of the storm-wrecked chapel and the shattered tambourine from poem 3 (callback).",
+      "lines": ["All the remnants of the destruction revealed in the sunlight."],
+      "shots": ["WGY030", "WGY031"],
+      "camera": "low macro dolly across debris as light rakes across it; sun flare",
+      "position": "the chapel remnants on the sand"
+    },
+    {
+      "name": "The temple builds itself",
+      "what_happens": "The POET starts to rebuild; the white futuristic temple rises in unison with his movements.",
+      "lines": ["We can rebuild this temple.", "It's a new day."],
+      "shots": ["WGY068"],
+      "camera": "locked-off time-lapse wide plus a tracking medium on the POET as walls assemble around him",
+      "position": "the old chapel footprint at the shoreline"
+    },
+    {
+      "name": "Choir chords in the new nave (inferred)",
+      "what_happens": "Inside the clean white hall the old choir stands and prayer lines return remade; sound calms him.",
+      "lines": ["choir chords calm the nerves of things I can't control", "offer them as keepsakes back to the higher powers"],
+      "shots": [],
+      "camera": "symmetrical wide down the nave; sunbeam shafts; slow crane up",
+      "position": "temple interior, choir stands"
+    },
+    {
+      "name": "Journal and the lonely mirror (inferred)",
+      "what_happens": "He opens a journal stored away and reads aloud; a mirror callback to the midnight solitude of earlier poems.",
+      "lines": ["I can close a chapter and open a journal stored away", "sung alone as gospels to the lonely mirror's midnight hours"],
+      "shots": [],
+      "camera": "close-up on pages and his profile; over-shoulder into a mirror",
+      "position": "a quiet side room or alcove of the temple"
+    },
+    {
+      "name": "Welcoming the new day",
+      "what_happens": "Doors open to full sun over the harbor; the finished temple stands bone-white and calm.",
+      "lines": ["We can embrace a new day.", "is here together in this sacred place", "with this world and a heart at peace."],
+      "shots": ["WGY068"],
+      "camera": "reverse from inside the doors out to the sea, then wide exterior hero shot of the white temple",
+      "position": "temple threshold facing the harbor"
+    }
+  ],
+  "arrival": {"from_previous": "End of Magic Ride: he rides out of Atlantis as the sky lightens, through the mountains around Atlantis, and back to the shore at the decaying chapel.", "mode": "ride", "inferred": false},
+  "departure": {"to_next": "Ellipsis 'Decades later': the same temple fills with friends and events (the treatment's 'Temple (Cont.)' runs straight into Reunion).", "mode": "cut", "inferred": false},
+  "motifs": ["temple/chapel rebuilt", "morning sunlight", "ruins and remnants", "choir and gospel", "sea in the distance", "journal and mirror", "white, washed-clean surfaces"],
+  "encoding": "The temple must rise exactly where the chapel decayed in poem 3: rebuilding on the ruin turns loss into a 'sacred place' rather than escaping it. Putting it on a harbor shore at dawn makes it the film's turn from night to day, the hinge between the escape city (Atlantis) and home. The interior beats are inferred, because the treatment left the poem unwritten.",
+  "evidence": [
+    "treatment: \"POET rides back to shore at decaying chapel and begins to rebuild a new temple\"",
+    "treatment: \"Temple is not old, but futuristic, modern, clean and white.\"",
+    "treatment (poem 3): \"Storm ends, remnants of chapel on shore.\"",
+    "poem 11: \"River rafting fall covers the seas in the distance\"",
+    "poem 11: \"All the remnants of the destruction revealed in the sunlight. We can rebuild this temple.\"",
+    "storyboard WGY068: \"POET rides to shore, rebuilds new, futuristic temple.\"",
+    "treatment (poem 13): \"Haze gathers on water... Atlantis, the new temple and the harbor all slowly become haze.\"",
+    "wap.svg: ABANDONED TEMPLE district beside TEMPLE PEAKS; CHAPEL landmark inside INNER HARBOR REALM"
+  ],
+  "open_questions": [
+    "No total-cinome spine records exist for New Day (no prefix, no content matches); set pieces lean on storyboard WGY067/068 and poem-3 callbacks WGY030/031.",
+    "The treatment marks the Temple section '[poem unwritten]'; the interior beats here are inferred from the later New Day text.",
+    "'River rafting fall' looks like a transcription garble (maybe 'fog'); the mist reading is inferred.",
+    "Sea-side placement is CONFIRMED (the chapel shore, harbor, distant seas), but the site sits on a sheltered harbor shore rather than an open-ocean beach.",
+    "The map puts the abandoned temple in CENTER while CHAPEL also appears in the INNER HARBOR realm (Baltimere side); it is unclear which side of the harbor the temple stands on."
+  ]
+}

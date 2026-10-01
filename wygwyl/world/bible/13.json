@@ -1,0 +1,95 @@
+{
+  "num": "13",
+  "title": "How to Win My Heart",
+  "treatment_title": "How To Win My Heart",
+  "location": {
+    "name": "Corner Cafe at the Harbor of the Heavens (Inner Harbor)",
+    "kind": "harbor-front corner cafe with a window table, and the harbor promenade around it",
+    "real_analog": "a corner cafe on Thames Street, Fells Point, Baltimore: cobblestones, piers and church steeples on the harbor",
+    "terrain": "coast",
+    "elevation": "street",
+    "near": ["the harbor promenade and piers", "the new temple across or along the harbor", "an old church", "cobblestone streets", "Atlantis skyline across the water (visible when it hazes)"],
+    "zone": "BALTIMERE"
+  },
+  "situation": "In daylight the POET walks from the new temple around the harbor to a corner cafe and sits alone, watching romantic couples at other tables. His wishes and losses play as cutaways (a couple at water on Jupiter's moon, an old couple praying in church, flower fields harvested into his power). He keeps watching from a distant window, then stands and walks the harbor as haze rises off the water.",
+  "time_of_day": "daytime",
+  "weather_light": "bright sunlight on the water; calm; haze begins gathering over the harbor at the end",
+  "set_pieces": [
+    {
+      "name": "Walk from the temple around the harbor",
+      "what_happens": "The POET wanders alone from the new temple along the harbor to the cafe.",
+      "lines": ["with every pulsing beat after walking alone"],
+      "shots": ["WGY071", "HT015", "HT016"],
+      "camera": "long lens lateral track along the promenade, water and boats between camera and POET",
+      "position": "harbor promenade between the temple and the cafe"
+    },
+    {
+      "name": "The corner cafe table",
+      "what_happens": "He sits at a corner table and observes couples at other tables, wanting to be noticed.",
+      "lines": ["I want you to notice me in a corner cafe", "at the Harbor of the Heavens, wandering in thought"],
+      "shots": ["WGY072", "HT013", "HT017"],
+      "camera": "static medium on the POET at the corner table, couples soft in the foreground; eyeline cuts to the tables",
+      "position": "corner table by the window inside the cafe"
+    },
+    {
+      "name": "Distances, younger selves, praying elders",
+      "what_happens": "Cutaways: silhouettes on opposite shores, ghost children behind glass, an old couple praying together at church.",
+      "lines": ["with the distances we couldn't avoid", "our younger selves watching and dreaming", "while our elders clutch their pearls"],
+      "shots": ["HT019", "HT022", "WGY073", "HT031"],
+      "camera": "reflections in the cafe window double his face with the ghost children; quiet wide in a church pew for the elders",
+      "position": "window glass of the cafe; an old harbor church (cutaway)"
+    },
+    {
+      "name": "Victory-less seasons (inner montage)",
+      "what_happens": "From his seat: a lone traveler, burning diary, love letters blown away, dusty trophy cases, flowers frozen in ice.",
+      "lines": ["I've journeyed beyond any place you can conceivably be", "life has burned all of my love stories", "victory-less seasons for a man that wanted just one win"],
+      "shots": ["HT032", "HT034", "HT036", "HT037", "HT041", "HT047", "HT050"],
+      "camera": "push in on his still face, then match-cuts into the montage",
+      "position": "the cafe table (mental space)"
+    },
+    {
+      "name": "Harvesting the poppies",
+      "what_happens": "Fields of scarlet poppies and purple blossoms are harvested and become the POET's power.",
+      "lines": ["harvest a wizardry more brilliant", "than the scarlet poppies and purple blossoms"],
+      "shots": ["WGY074", "HT054", "HT057"],
+      "camera": "aerial over flower fields; light flowing into his chest in a close-up",
+      "position": "flower fields (cutaway)"
+    },
+    {
+      "name": "From a distant window",
+      "what_happens": "Still at the cafe watching couples; hope that someone will notice him and meet his eyes.",
+      "lines": ["Yet from a distant window, beautiful and calm", "hope tells me you'll see me", "capture my eyes as you refocus yours"],
+      "shots": ["WGY075", "HT063", "HT065", "HT067", "HT068", "HT069"],
+      "camera": "through-the-glass shot from outside the cafe; rack focus from reflection to his eyes; iris close-up",
+      "position": "the cafe window seen from the harbor"
+    },
+    {
+      "name": "Stands and walks the harbor",
+      "what_happens": "He leaves the cafe and walks around the harbor as haze starts to gather on the water.",
+      "lines": ["all the fatigue of wandering alone in thought", "won't prevent me from sharing a smile worth the promise of my heart"],
+      "shots": ["WGY076", "HT070", "WGY077"],
+      "camera": "follow from behind along the waterline; widen as haze rises off the water",
+      "position": "harbor edge, piers"
+    }
+  ],
+  "arrival": {"from_previous": "Daytime: the POET wanders from the new temple around the harbor to the cafe.", "mode": "walk", "inferred": false},
+  "departure": {"to_next": "Haze gathers on the water and grows; Atlantis, the new temple and the harbor dissolve into haze, which envelops the POET from the ground up while he resists.", "mode": "dissolve", "inferred": false},
+  "motifs": ["being noticed / eyes meeting", "windows and glass", "couples observed", "walking alone", "harbor water", "scarlet poppies", "praying elders", "winless seasons"],
+  "encoding": "After the brotherhood of the temple the POET goes out into public, to the harbor, to risk being seen by a lover; the cafe window is the film's frame of watching without being watched. The poem names its own place, the 'Harbor of the Heavens', which links the hometown Inner Harbor to the sacred temple: home is now somewhere a heart could be won. It is also the last solid ground before everything turns to haze.",
+  "evidence": [
+    "poem 13: \"I want you to notice me in a corner cafe at the Harbor of the Heavens\"",
+    "treatment: \"Daytime/sunlight. POET wanders from new temple around harbor to café.\"",
+    "treatment: \"At the café, POET observes romantic interests at other tables.\"",
+    "treatment: \"B-Roll Inspos: Couple at the water on Jupiter's moon / People walking together on a harbor\"",
+    "treatment: \"POET stands to leave café and starts to walk around harbor.\"",
+    "storyboard WGY073: \"POET observes old couple praying together at church.\"",
+    "wap.svg: HOW TO WIN MY HEART (Node) in BALTIMERE ZONE; OLD CAFE BOOTH in INNER HARBOR REALM"
+  ],
+  "open_questions": [
+    "Who is 'you': the EX or a new love? If it is the EX, HT067 ('light blooming across their face') must stay back-turned or abstract.",
+    "HT016 shows footsteps in sand 'under moonlight', which conflicts with the treatment's daytime; treat it as an inner-image cutaway.",
+    "The total-cinome spine has no HT001-HT012 records (it starts at HT013); the opening lines are covered only by WGY071/072.",
+    "How far is the cafe from the temple (same shore or across the harbor)? Unstated.",
+    "Is the church of the praying elders a real harbor church or a pure cutaway?"
+  ]
+}

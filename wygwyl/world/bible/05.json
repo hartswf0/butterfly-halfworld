@@ -1,0 +1,97 @@
+{
+  "num": "05",
+  "title": "Bloodline",
+  "treatment_title": "Bloodlines",
+  "location": {
+    "name": "Night Garden Field (Ancestors' Parade Ground)",
+    "kind": "open night meadow on the rise above the shore, crossed by a processional path",
+    "real_analog": "grass plain beside the Avenue of the Dead at Teotihuacan at night (processional causeway through open field, a short drive from the Mexico City Atlantis shoot); fallback: any dark rural meadow with a long footpath",
+    "terrain": "plain",
+    "elevation": "high",
+    "near": ["Nevermore shore below (trail leads up from it)", "the Light Gates of Atlantis", "open starfield sky"],
+    "zone": "CENTER"
+  },
+  "situation": "Still night. The POET, heart and hands restored at the end of Nevermore, walks on through the same field and into a welcoming parade of black, afro-futuristic ancestors. They accept him and hand him stars, galaxies and universes as the verse names them. The basement-bedroom childhood is staged only as memory (inferred: insert or tableau carried by the parade); no EX is present.",
+  "time_of_day": "still night (continuous with Nevermore's night garden field)",
+  "weather_light": "windless, muted trees, deep starlight; the gifts (stars, galaxies) are the main light sources; afro-futuristic photo-realistic grade. The verse's 'sun-kissing my skin' is a warm glow from the ancestors, not daylight (inferred)",
+  "set_pieces": [
+    {
+      "name": "The field goes still",
+      "what_happens": "POET stands in the field with his newly restored hands; the parade's first figures appear on the path ahead (inferred blocking).",
+      "lines": ["They tell me to ask if I can inherit the earth"],
+      "shots": ["WGY039", "WGY040"],
+      "camera": "wide static on the field at night, POET small at center, procession lights entering from the far edge",
+      "position": "edge of the field where Nevermore ended"
+    },
+    {
+      "name": "Naming stars",
+      "what_happens": "Ancestors meet and accept the POET and hand him stars, then whole galaxies, as small held lights.",
+      "lines": ["name my own stars", "even galaxies if I may"],
+      "shots": ["WGY040"],
+      "camera": "medium tracking alongside POET as he walks into the parade; inserts of hands passing points of light",
+      "position": "processional path, center of the field"
+    },
+    {
+      "name": "Southern-pine basement (memory)",
+      "what_happens": "The past 'was waiting': a humid basement used as a shared bedroom, mattress pads under pine beams that did not comfort his spine. Staged as memory, not a separate place (inferred).",
+      "lines": ["humid basements as bedrooms", "wood beams of Southern pine", "it didn't"],
+      "shots": ["WGY040"],
+      "camera": "low-angle insert up at exposed pine joists, shallow focus, then match-cut back to the night sky",
+      "position": "memory insert inside the parade passage"
+    },
+    {
+      "name": "Universes and blessings",
+      "what_happens": "The ancestors give him a universe to invent and the right to grant blessings and miracles where the spoken word is needed.",
+      "lines": ["invent a new universe", "award a-blessing here & there", "even grant miracles"],
+      "shots": ["WGY040"],
+      "camera": "slow push-in on POET's face as galaxies are placed in his hands; crowd of ancestors soft behind",
+      "position": "heart of the parade"
+    },
+    {
+      "name": "Blood through the hands",
+      "what_happens": "POET looks at the hands he just recovered in Nevermore; the ancestral blood and fingerprints now run through them. The parade's sound swells (inferred).",
+      "lines": ["their blood flows through my hands", "fingerprints that orchestra great powers"],
+      "shots": ["WGY040"],
+      "camera": "extreme close-up of palms and fingerprints lit by star-glow, rack focus to the ancestors",
+      "position": "far end of the parade, facing toward the city"
+    },
+    {
+      "name": "Baritone and warning",
+      "what_happens": "His voice deepens to a baritone of a million cries; on 'beware' he turns from the parade toward the horizon where the Atlantis entrance waits (inferred).",
+      "lines": ["deepening my voice to a baritone of a million cries", "beware"],
+      "shots": ["WGY040", "WGY041"],
+      "camera": "low-angle hero medium, POET turning out of frame toward the gate light",
+      "position": "far edge of the field, at the trailhead to the gates"
+    }
+  ],
+  "arrival": {
+    "from_previous": "Continuous from Nevermore: he puts his hands back on, stands in the night field, then keeps walking through the same field into the parade.",
+    "mode": "walk",
+    "inferred": false
+  },
+  "departure": {
+    "to_next": "Still night, he sees the entrance to Atlantis and goes in; the stretch from parade to gate is not written (inferred: he walks down the path, possibly escorted).",
+    "mode": "walk",
+    "inferred": true
+  },
+  "motifs": ["stars and galaxies as gifts", "hands (restored in Nevermore, now carrying blood)", "ancestors / lineage", "Southern pine basement", "voice deepening", "still night"],
+  "encoding": "The field where he rebuilt himself becomes the place where he is claimed by lineage: the hands he recovered alone are filled with ancestral blood before he is allowed into the city. It must happen on open ground between shore and city because inheritance is the admission, so the parade is the gatehouse before the Light Gates (inferred). His poor beginnings (the basement) are answered with whole universes.",
+  "evidence": [
+    "treatment: \"Still night, POET walks through field into a welcoming parade of black, afro-futuristic ancestors\"",
+    "treatment: \"accepting the POET, giving him stars, galaxies and universes (as described)\"",
+    "treatment: \"[style: afro-futuristic photo-realistic]\"",
+    "treatment (Nevermore): \"POET finds hands, put them back on, and stands in field reflecting\"",
+    "poem: \"Their blood flows through my hands.\"",
+    "poem: \"Coming of age in the shared rooms of human basements as bedrooms\"",
+    "storyboard WGY040: \"POET enters afro-futuristic ancestors' parade, receives stars, galaxies, universes.\"",
+    "storyboard WGY041: \"In the still night, POET discovers and enters the entrance to Atlantis\""
+  ],
+  "open_questions": [
+    "No Bloodline records exist in total-cinome.json (no BL prefix; no record matches its lines); set pieces lean on storyboard WGY039-WGY041 only.",
+    "Bloodline is not labeled on wap.svg; the zone (CENTER vs ATLANTIS approach) is a reading, not a source fact.",
+    "Is the basement shown on screen (flashback, parade tableau) or only heard? The treatment stages only the parade.",
+    "'Sun-kissing my skin' happens in still night: literal warm light from the ancestors, or a daylight flash?",
+    "Timings text reads 'human basements'; treatment reads 'humid basements'.",
+    "Storyboard WGY040 appears twice (00:13:39 and 00:14:00), so the poem may hold two beats with one id."
+  ]
+}
