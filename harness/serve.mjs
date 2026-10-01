@@ -20,7 +20,14 @@ const PORT = +(process.argv[2] || 8181);
 const MIME = {
   ".html": "text/html; charset=utf-8", ".mjs": "text/javascript; charset=utf-8",
   ".js": "text/javascript; charset=utf-8", ".json": "application/json; charset=utf-8",
-  ".png": "image/png", ".jpg": "image/jpeg", ".gif": "image/gif",
+  /* .webp was missing and this whole archive is webp: 2,000+ images across the
+     experiment folders served as application/octet-stream, which a browser
+     will not render. Every one of those pages has been quietly image-less in
+     local preview. .jpeg and .avif for the same reason. */
+  ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+  ".webp": "image/webp", ".avif": "image/avif", ".gif": "image/gif",
+  ".txt": "text/plain; charset=utf-8", ".md": "text/plain; charset=utf-8",
+  ".csv": "text/csv; charset=utf-8", ".flac": "audio/flac",
   ".webm": "video/webm", ".mp4": "video/mp4", ".wav": "audio/wav",
   ".mp3": "audio/mpeg", ".m4a": "audio/mp4", ".ogg": "audio/ogg",
   ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml",
