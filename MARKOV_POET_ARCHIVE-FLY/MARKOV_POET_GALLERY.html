@@ -1,0 +1,2302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🎬 Markov Poet Visual Archive & Lineage Gallery</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --text-bright: #f0f6fc;
+            --accent: #58a6ff;
+            --audio-bg: #238636;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 24px;
+        }
+        header {
+            max-width: 1400px;
+            margin: 0 auto 24px auto;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px;
+        }
+        h1 { color: var(--text-bright); margin: 0 0 8px 0; font-size: 28px; }
+        .stats { display: flex; gap: 16px; margin-top: 12px; font-size: 14px; color: #8b949e; flex-wrap: wrap; }
+        .stat-item { background: var(--card-bg); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border); }
+        .controls { margin: 16px 0; display: flex; gap: 12px; }
+        button {
+            background: var(--card-bg);
+            color: var(--text-bright);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        button:hover, button.active { background: #1f6feb; border-color: #388bfd; color: white; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+        .card:hover { transform: translateY(-3px); border-color: #58a6ff; }
+        .media-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #000;
+        }
+        .media-container img, .media-container video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .media-container video { opacity: 0; transition: opacity 0.2s; }
+        .media-container:hover video { opacity: 1; }
+        .card-body { padding: 14px; display: flex; flex-direction: column; flex-grow: 1; }
+        .badges { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+        .badge { font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 600; text-transform: uppercase; }
+        .badge-coll { background: #388bfd33; color: #58a6ff; border: 1px solid #388bfd66; }
+        .badge-dur { background: #8b949e22; color: #8b949e; border: 1px solid #8b949e44; }
+        .badge-audio { background: #23863633; color: #3fb950; border: 1px solid #23863666; }
+        .badge-silent { background: #f8514922; color: #f85149; border: 1px solid #f8514944; }
+        .timestamp { font-size: 12px; color: #8b949e; margin-bottom: 8px; }
+        .prompt-container { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; flex-grow: 1; }
+        .vis-prompt { font-size: 13px; line-height: 1.4; color: var(--text-bright); word-break: break-word; }
+        .aud-prompt { font-size: 12px; line-height: 1.4; color: #7ee787; word-break: break-word; background: #2386361a; padding: 4px 8px; border-radius: 4px; border-left: 3px solid #238636; }
+        .clip-id { font-size: 11px; color: #8b949e; margin-bottom: 10px; }
+        .receipt-link { color: var(--accent); font-size: 12px; text-decoration: none; font-weight: 500; }
+        .receipt-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎬 Markov Poet Visual Archive & Deep Lineage Gallery</h1>
+        <div class="stats">
+            <div class="stat-item">📦 Total Curated Clips: <strong>135</strong></div>
+            <div class="stat-item">🔴 MARKOV POET (Oct 2025): <strong>77</strong></div>
+            <div class="stat-item">🔵 MARKOV POET_00 (July 2025): <strong>58</strong></div>
+            <div class="stat-item">🔊 Audio Clips: <strong>18</strong></div>
+        </div>
+        <div class="controls">
+            <button class="active" onclick="filterGrid('all')">All Collections</button>
+            <button onclick="filterGrid('MARKOV_POET')">MARKOV POET (Oct 2025)</button>
+            <button onclick="filterGrid('MARKOV_POET_00')">MARKOV POET_00 (July 2025)</button>
+            <button onclick="filterAudio()">🔊 Audio Only</button>
+        </div>
+    </header>
+
+    <div class="grid">
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_034351_2474f1b5_720p_5s_silent_establishing_shot_of_poet_in_dim_bedroom.jpg" alt="2474f1b5-9758-48c9-b907-53b7efa5c6e7" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_034351_2474f1b5_720p_5s_silent_establishing_shot_of_poet_in_dim_bedroom.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 03:43:51</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> Establishing shot of POET in Dim Bedroom - Dim bedroom stasis, EX's detachment. POET's initial <You>₀.. Focus on the visual impact of: narrative progression. The scene's ambiance is Eerie green fog with a Film-noir grain style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16.</div></div>
+                <div class="clip-id"><code>ID: 2474f1b5</code> | <code>Parent: 488c9fc3</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/2474f1b5-9758-48c9-b907-53b7efa5c6e7.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_034530_7534249f_720p_5s_silent_establishing_shot_of_poet_in_dim_bedroom.jpg" alt="7534249f-2feb-4ff5-a2de-c4520a30c9ee" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_034530_7534249f_720p_5s_silent_establishing_shot_of_poet_in_dim_bedroom.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 03:45:30</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> Establishing shot of POET in Dim Bedroom - Dim bedroom stasis, EX's detachment. POET's initial <You>₀.. Focus on the visual impact of: narrative progression. The scene's ambiance is Eerie green fog with a Film-noir grain style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16.</div></div>
+                <div class="clip-id"><code>ID: 7534249f</code> | <code>Parent: c2d10bdd</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/7534249f-2feb-4ff5-a2de-c4520a30c9ee.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_034822_0a69c776_720p_5s_silent_establishing_shot_of_poet_in_dim_bedroom.jpg" alt="0a69c776-b9de-4d1e-8e0a-cc8e9526baad" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_034822_0a69c776_720p_5s_silent_establishing_shot_of_poet_in_dim_bedroom.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 03:48:22</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> Establishing shot of POET in Dim Bedroom - Dim bedroom stasis, EX's detachment. POET's initial <You>₀.. Focus on the visual impact of: narrative progression. The scene's ambiance is Eerie green fog with a Film-noir grain style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16. Add flavor:</div></div>
+                <div class="clip-id"><code>ID: 0a69c776</code> | <code>Parent: 63c6cf85</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/0a69c776-b9de-4d1e-8e0a-cc8e9526baad.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_035044_1ea914c8_720p_5s_silent_establishing_shot_of_poet_in_dim_bedroom.jpg" alt="1ea914c8-1dcf-4e11-8f2a-4206ed4c0411" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_035044_1ea914c8_720p_5s_silent_establishing_shot_of_poet_in_dim_bedroom.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 03:50:44</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> Establishing shot of POET in Dim Bedroom - Dim bedroom stasis, EX's detachment. POET's initial <You>₀.. Focus on the visual impact of: narrative progression. The scene's ambiance is Eerie green fog with a Film-noir grain style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16. Add flavor: with graffiti tag 'Turbo Pitch 2026'.</div></div>
+                <div class="clip-id"><code>ID: 1ea914c8</code> | <code>Parent: b9d087be</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/1ea914c8-1dcf-4e11-8f2a-4206ed4c0411.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_035126_9f391a75_720p_5s_silent_establishing_shot_of_poet_in_dim_bedroom.jpg" alt="9f391a75-9b42-4716-9c1d-51e99daf9c37" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_035126_9f391a75_720p_5s_silent_establishing_shot_of_poet_in_dim_bedroom.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 03:51:26</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> Establishing shot of POET in Dim Bedroom - Dim bedroom stasis, EX's detachment. POET's initial <You>₀.. Focus on the visual impact of: narrative progression. The scene's ambiance is Eerie green fog with a Film-noir grain style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16. Add flavor: with graffiti tag 'OUT OF LIFE'.</div></div>
+                <div class="clip-id"><code>ID: 9f391a75</code> | <code>Parent: f3ac09e1</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/9f391a75-9b42-4716-9c1d-51e99daf9c37.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_035247_bcc4949f_720p_5s_silent_establishing_shot_of_poet_in_dim_bedroom.jpg" alt="bcc4949f-79b9-4c8f-800a-b4e3f4aaa366" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_035247_bcc4949f_720p_5s_silent_establishing_shot_of_poet_in_dim_bedroom.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 03:52:47</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> Establishing shot of POET in Dim Bedroom - Dim bedroom stasis, EX's detachment. POET's initial <You>₀.. Focus on the visual impact of: narrative progression. The scene's ambiance is Eerie green fog with a Film-noir grain style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16. Add flavor:</div></div>
+                <div class="clip-id"><code>ID: bcc4949f</code> | <code>Parent: ee7e9a2b</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/bcc4949f-79b9-4c8f-800a-b4e3f4aaa366.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_035316_90db999f_720p_5s_silent_establishing_shot_of_poet_in_dim_bedroom.jpg" alt="90db999f-41be-4106-af9e-718e7f7b67c7" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_035316_90db999f_720p_5s_silent_establishing_shot_of_poet_in_dim_bedroom.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 03:53:16</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> Establishing shot of POET in Dim Bedroom - Dim bedroom stasis, EX's detachment. POET's initial <You>₀.. Focus on the visual impact of: narrative progression. The scene's ambiance is Eerie green fog with a Film-noir grain style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16. Add flavor: with graffiti tag 'Turbo Pitch 2026'.</div></div>
+                <div class="clip-id"><code>ID: 90db999f</code> | <code>Parent: ebae2897</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/90db999f-41be-4106-af9e-718e7f7b67c7.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_043437_a5a18f9d_720p_9s_silent_overhead_drone_shot_of_poet_in_an_unknow.jpg" alt="a5a18f9d-b2b0-4a97-9c34-a9dbdf1717d5" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_043437_a5a18f9d_720p_9s_silent_overhead_drone_shot_of_poet_in_an_unknow.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 04:34:37</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> Overhead drone shot of POET in an unknown space - External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger.. Focus on the visual impact of: Subjective Frame Recalibration. The scene's ambiance is Pastel sunrise palette with a Lo-fi VHS aesthetic style. Use Smooth drone shot, framed as an asymmetrical composition, aspect ratio 9:16. Add flavor: like digital echoes.</div></div>
+                <div class="clip-id"><code>ID: a5a18f9d</code> | <code>Parent: 2474f1b5</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/a5a18f9d-b2b0-4a97-9c34-a9dbdf1717d5.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_043529_5321a933_720p_9s_silent_id_poet_type_character_name_poet_traits.jpg" alt="5321a933-701a-4a60-8931-e65097c00560" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_043529_5321a933_720p_9s_silent_id_poet_type_character_name_poet_traits.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 04:35:29</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> [
+  {
+    "id": "POET",
+    "type": "Character",
+    "name": "POET",
+    "traits": [
+      "Protagonist",
+      "Ego-Proxy",
+      "Transformer",
+      "Creator",
+      "Observer"
+    ]
+  },
+  {
+    "id": "EX",
+    "type": "Character",
+    "name": "EX",
+    "traits": [
+      "Antagonist-or-Catalyst",
+      "Unreachable",
+      "Elusive",
+      "Shadow-Projection",
+      "Past-Attachment"
+    ]
+  },
+  {
+    "id": "TV_CHAOS",
+    "type": "Object",
+    "name": "Television Screen",
+    "traits": [
+      "Source-of-External-Chaos",
+      "Reflection-of-Inner-Disorder"
+    ]
+  },
+  {
+    "id": "VAPE_HAZE",
+    "type": "Concept",
+    "name": "Vape Haze",
+    "traits": [
+      "Blurring-Agent",
+      "Obscuring-Perception",
+      "Symbol-of-Detachment"
+    ]
+  }
+]</div></div>
+                <div class="clip-id"><code>ID: 5321a933</code> | <code>Parent: 2474f1b5</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/5321a933-701a-4a60-8931-e65097c00560.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_043826_e01016b7_720p_9s_silent_my_journey_brings_me_to_dim_bedroom_as_e.jpg" alt="e01016b7-73d1-4d6b-a499-f160dd81791b" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_043826_e01016b7_720p_9s_silent_my_journey_brings_me_to_dim_bedroom_as_e.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 04:38:26</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> My journey brings me to Dim Bedroom, as "External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger." unfolds before me. I am undergoing a Subjective Frame Recalibration, as aspects of myself : Disoriented. Through it all, I am becoming You_Falling (Engaging EX).</div></div>
+                <div class="clip-id"><code>ID: e01016b7</code> | <code>Parent: 7534249f</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/e01016b7-73d1-4d6b-a499-f160dd81791b.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_044016_72b8186d_720p_9s_silent_overhead_drone_shot_of_poet_in_an_unknow.jpg" alt="72b8186d-42df-4b39-b0d4-726de421f7df" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_044016_72b8186d_720p_9s_silent_overhead_drone_shot_of_poet_in_an_unknow.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 04:40:16</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> Overhead drone shot of POET in an unknown space - External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger.. Focus on the visual impact of: Subjective Frame Recalibration. The scene's ambiance is Pastel sunrise palette with a Lo-fi VHS aesthetic style. Use Smooth drone shot, framed as an asymmetrical composition, aspect ratio 9:16. Add flavor: like digital echoes.</div></div>
+                <div class="clip-id"><code>ID: 72b8186d</code> | <code>Parent: 0a69c776</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/72b8186d-42df-4b39-b0d4-726de421f7df.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_045257_64024978_720p_13s_silent_overhead_drone_shot_of_poet_in_an_unknow.jpg" alt="64024978-fee8-43b5-86a3-63f73a994ae3" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_045257_64024978_720p_13s_silent_overhead_drone_shot_of_poet_in_an_unknow.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 04:52:57</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> overhead drone shot</div></div>
+                <div class="clip-id"><code>ID: 64024978</code> | <code>Parent: 72b8186d</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/64024978-fee8-43b5-86a3-63f73a994ae3.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_050702_cb195db7_720p_5s_silent_interpolated_sequence.jpg" alt="cb195db7-e9a2-41d2-87b7-bd95e19a3059" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_050702_cb195db7_720p_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:07:02</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: cb195db7</code> | <code>Parent: 7afdca28</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/cb195db7-e9a2-41d2-87b7-bd95e19a3059.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_051147_dc67dc88_720p_5s_silent_interpolated_sequence.jpg" alt="dc67dc88-5180-4543-851a-e9465469b84f" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_051147_dc67dc88_720p_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:11:47</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: dc67dc88</code> | <code>Parent: a3a0bf99</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/dc67dc88-5180-4543-851a-e9465469b84f.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_051359_05df5f1b_720p_5s_silent_my_journey_brings_me_to_dim_bedroom_as_e.jpg" alt="05df5f1b-df80-43bf-ae32-ae25ad6c75c8" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_051359_05df5f1b_720p_5s_silent_my_journey_brings_me_to_dim_bedroom_as_e.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:13:59</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> My journey brings me to Dim Bedroom, as "External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger." unfolds before me. I am undergoing a Subjective Frame Recalibration, as aspects of myself : Disoriented. Through it all, I am becoming You_Falling (Engaging EX).</div></div>
+                <div class="clip-id"><code>ID: 05df5f1b</code> | <code>Parent: affc5183</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/05df5f1b-df80-43bf-ae32-ae25ad6c75c8.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_051506_7a701277_720p_5s_silent_my_journey_brings_me_to_dim_bedroom_as_e.jpg" alt="7a701277-2916-4143-9fd8-ee86ecd826f7" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_051506_7a701277_720p_5s_silent_my_journey_brings_me_to_dim_bedroom_as_e.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:15:06</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> My journey brings me to Dim Bedroom, as "External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger." unfolds before me. I am undergoing a Subjective Frame Recalibration, as aspects of myself : Disoriented. Through it all, I am becoming You_Falling (Engaging EX).</div></div>
+                <div class="clip-id"><code>ID: 7a701277</code> | <code>Parent: 441d3237</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/7a701277-2916-4143-9fd8-ee86ecd826f7.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_051548_8342f352_720p_5s_silent_my_journey_brings_me_to_dim_bedroom_as_e.jpg" alt="8342f352-7969-4ad9-98f2-ebe30d9aa9b9" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_051548_8342f352_720p_5s_silent_my_journey_brings_me_to_dim_bedroom_as_e.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:15:48</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> My journey brings me to Dim Bedroom, as "External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger." unfolds before me. I am undergoing a Subjective Frame Recalibration, as aspects of myself : Disoriented. Through it all, I am becoming You_Falling (Engaging EX).</div></div>
+                <div class="clip-id"><code>ID: 8342f352</code> | <code>Parent: ffbca706</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/8342f352-7969-4ad9-98f2-ebe30d9aa9b9.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_052134_c42d545f_720p_5s_silent_my_journey_brings_me_to_dim_bedroom_as_e.jpg" alt="c42d545f-fd51-4e12-bb19-8d0afdf709df" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_052134_c42d545f_720p_5s_silent_my_journey_brings_me_to_dim_bedroom_as_e.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:21:34</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> My journey brings me to Dim Bedroom, as "External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger." unfolds before me. I am undergoing a Subjective Frame Recalibration, as aspects of myself : Disoriented. Through it all, I am becoming You_Falling (Engaging EX).</div></div>
+                <div class="clip-id"><code>ID: c42d545f</code> | <code>Parent: a92a690e</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/c42d545f-fd51-4e12-bb19-8d0afdf709df.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_052317_773afeb6_720p_5s_silent_id_poet_type_character_name_poet_traits.jpg" alt="773afeb6-35e3-4273-af54-18b066fd3621" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_052317_773afeb6_720p_5s_silent_id_poet_type_character_name_poet_traits.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:23:17</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> [
+  {
+    "id": "POET",
+    "type": "Character",
+    "name": "POET",
+    "traits": [
+      "Protagonist",
+      "Ego-Proxy",
+      "Transformer",
+      "Creator",
+      "Observer"
+    ]
+  },
+  {
+    "id": "EX",
+    "type": "Character",
+    "name": "EX",
+    "traits": [
+      "Antagonist-or-Catalyst",
+      "Unreachable",
+      "Elusive",
+      "Shadow-Projection",
+      "Past-Attachment"
+    ]
+  },
+  {
+    "id": "TV_CHAOS",
+    "type": "Object",
+    "name": "Television Screen",
+    "traits": [
+      "Source-of-External-Chaos",
+      "Reflection-of-Inner-Disorder"
+    ]
+  },
+  {
+    "id": "VAPE_HAZE",
+    "type": "Concept",
+    "name": "Vape Haze",
+    "traits": [
+      "Blurring-Agent",
+      "Obscuring-Perception",
+      "Symbol-of-Detachment"
+    ]
+  }
+]</div></div>
+                <div class="clip-id"><code>ID: 773afeb6</code> | <code>Parent: f5735547</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/773afeb6-35e3-4273-af54-18b066fd3621.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_052634_a8922cd9_720p_5s_silent_at_this_point_poet_is_in_a_state_of_you.jpg" alt="a8922cd9-fa16-4930-9b61-eac9bfc2eaf1" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_052634_a8922cd9_720p_5s_silent_at_this_point_poet_is_in_a_state_of_you.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:26:34</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> At this point, POET is in a state of You_Falling (Engaging EX), navigating the Dim Bedroom. A key transformation occurring is the Subjective Frame Recalibration, which is intended to address its causes: Blurred Perception (Vape Haze). This leads to the new state: ": Disoriented".</div></div>
+                <div class="clip-id"><code>ID: a8922cd9</code> | <code>Parent: a6f7c4a5</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/a8922cd9-fa16-4930-9b61-eac9bfc2eaf1.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_052744_e4c9215f_720p_5s_silent_id_poet_type_character_name_poet_traits.jpg" alt="e4c9215f-2e57-45ec-9e5c-605ac8441ffa" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_052744_e4c9215f_720p_5s_silent_id_poet_type_character_name_poet_traits.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:27:44</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> [
+  {
+    "id": "POET",
+    "type": "Character",
+    "name": "POET",
+    "traits": [
+      "Protagonist",
+      "Ego-Proxy",
+      "Transformer",
+      "Creator",
+      "Observer"
+    ]
+  },
+  {
+    "id": "EX",
+    "type": "Character",
+    "name": "EX",
+    "traits": [
+      "Antagonist-or-Catalyst",
+      "Unreachable",
+      "Elusive",
+      "Shadow-Projection",
+      "Past-Attachment"
+    ]
+  },
+  {
+    "id": "TV_CHAOS",
+    "type": "Object",
+    "name": "Television Screen",
+    "traits": [
+      "Source-of-External-Chaos",
+      "Reflection-of-Inner-Disorder"
+    ]
+  },
+  {
+    "id": "VAPE_HAZE",
+    "type": "Concept",
+    "name": "Vape Haze",
+    "traits": [
+      "Blurring-Agent",
+      "Obscuring-Perception",
+      "Symbol-of-Detachment"
+    ]
+  }
+]</div></div>
+                <div class="clip-id"><code>ID: e4c9215f</code> | <code>Parent: f1d85108</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/e4c9215f-2e57-45ec-9e5c-605ac8441ffa.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_052921_db9c23a4_720p_5s_silent_poet_is_currently_in_a_state_of_you_fall.jpg" alt="db9c23a4-f15b-4751-8db5-c0fe3d93ec76" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_052921_db9c23a4_720p_5s_silent_poet_is_currently_in_a_state_of_you_fall.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:29:21</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> POET is currently in a state of You_Falling (Engaging EX) at Dim Bedroom. Key goals include: Escape Stagnant Reality, Find Connection (with EX), Reclaim Emotional Core and Agency, Manifest a New Reality (Atlantis/Temple), Integrate Past Relationships (EX, Mother, Father), Achieve Personal Autonomy, Embrace Cyclical Impermanence, Understand the Cyclical Nature of Existence. A major shift, Subjective Frame Recalibration, is transforming the experience, leading to ": Disoriented".</div></div>
+                <div class="clip-id"><code>ID: db9c23a4</code> | <code>Parent: a792b720</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/db9c23a4-f15b-4751-8db5-c0fe3d93ec76.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_053713_c3da8350_720p_5s_silent_timestamp_000103_image_path_usersgaiares.jpg" alt="c3da8350-da21-4dee-bdd6-e9cfdd089186" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_053713_c3da8350_720p_5s_silent_timestamp_000103_image_path_usersgaiares.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:37:13</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> "timestamp": "00:01:03",
+          "image_path": "/Users/gaia/resurrecting atlantis/CAT/WHISKER/WGY004_PI__Subjective_Frame_Recalibration__A_televi_c6143380-89c4-4c46-b3b0-cf6ee0b53735_0.png",
+          "id": "WGY004",
+          "poem": "WHERE YOU GO WHEN YOU LEAVE PART 2",
+          "imageType": "Perception-Image",
+          "syntagmaType": "Descriptive Syntagma (DS)",
+          "content": "TV displays images of world's chaos.",
+          "cineosisFunction": "Subjective Frame Recalibration",
+          "operativeEkphrasis": "A television screen cycles through rapid, chaotic world events.",
+          "styleConditioning": "Photo-realistic, close-up on TV screen, montage of war, protests, natural disasters, flickering chaotic imagery, desaturated tones.",
+          "full_prompt": "PI · Subjective Frame Recalibration · A television screen cycles through rapid, chaotic world events · Photo-realistic, close-up on TV screen, montage of war, protests, natural disasters, flickering chaotic imagery, desaturated tones."
+        },</div></div>
+                <div class="clip-id"><code>ID: c3da8350</code> | <code>Parent: 94cb576c</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/c3da8350-da21-4dee-bdd6-e9cfdd089186.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_054051_98f0499c_720p_5s_silent_overhead_drone_shot_of_poet_in_an_unknow.jpg" alt="98f0499c-9364-4e79-a15f-d5668a66d6b1" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_054051_98f0499c_720p_5s_silent_overhead_drone_shot_of_poet_in_an_unknow.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:40:51</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> Overhead drone shot of POET in an unknown space - External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger.. Focus on the visual impact of: Subjective Frame Recalibration. The scene's ambiance is Pastel sunrise palette with a Lo-fi VHS aesthetic style. Use Smooth drone shot, framed as an asymmetrical composition, aspect ratio 9:16. Add flavor: like digital echoes.</div></div>
+                <div class="clip-id"><code>ID: 98f0499c</code> | <code>Parent: be18f17d</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/98f0499c-9364-4e79-a15f-d5668a66d6b1.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_054102_234d5fdb_720p_5s_silent_overhead_drone_shot_of_poet_in_an_unknow.jpg" alt="234d5fdb-dfcb-4359-ba11-0085dd68337b" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_054102_234d5fdb_720p_5s_silent_overhead_drone_shot_of_poet_in_an_unknow.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:41:02</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> Overhead drone shot of POET in an unknown space - External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger.. Focus on the visual impact of: Subjective Frame Recalibration. The scene's ambiance is Pastel sunrise palette with a Lo-fi VHS aesthetic style. Use Smooth drone shot, framed as an asymmetrical composition, aspect ratio 9:16. Add flavor: like digital echoes.</div></div>
+                <div class="clip-id"><code>ID: 234d5fdb</code> | <code>Parent: be18f17d</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/234d5fdb-dfcb-4359-ba11-0085dd68337b.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_055238_67bef226_720p_5s_silent_full_prompt_cs_causal_motion_trigger_ex.jpg" alt="67bef226-5aad-447f-ba01-cbd1dab5f0dd" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_055238_67bef226_720p_5s_silent_full_prompt_cs_causal_motion_trigger_ex.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:52:38</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> "full_prompt": "CS · Causal Motion Trigger · EX, back turned, vapes on a fire escape outside a bedroom window · Photo-realistic, wide shot, EX (back to camera, never showing face), vape cloud, gritty fire escape, high-rise window frame, urban backdrop."</div></div>
+                <div class="clip-id"><code>ID: 67bef226</code> | <code>Parent: de0f0438</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/67bef226-5aad-447f-ba01-cbd1dab5f0dd.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_055329_ebe2426d_720p_9s_silent_interpolated_sequence.jpg" alt="ebe2426d-1585-4063-ae04-58f35167597a" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_055329_ebe2426d_720p_9s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:53:29</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: ebe2426d</code> | <code>Parent: 7a3e62e9</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/ebe2426d-1585-4063-ae04-58f35167597a.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_055841_67e5b1cb_1080p_21s_silent_full_prompt_ds_mood_environment_stabiliz.jpg" alt="67e5b1cb-8b37-432f-8da1-2c0c35fcb7dc" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_055841_67e5b1cb_1080p_21s_silent_full_prompt_ds_mood_environment_stabiliz.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 05:58:41</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> "full_prompt": "DS · Mood Environment Stabilizer · A dimly lit plain bedroom in a high-rise apartment · Photo-realistic, minimalist bedroom, urban high-rise window, blue-grey dim lighting, subtle dust motes in air."
+        },
+    {
+
+          "full_prompt": "CS · Causal Motion Trigger · POET, wearing a black t-shirt, reads a poem aloud · Photo-realistic, medium shot, soft internal light on POET (black t-shirt), face focused, expressive reading."
+        },
+    {
+      
+          "full_prompt": "CS · Causal Motion Trigger · EX, back turned, vapes on a fire escape outside a bedroom window · Photo-realistic, wide shot, EX (back to camera, never showing face), vape cloud, gritty fire escape, high-rise window frame, urban backdrop."
+        },</div></div>
+                <div class="clip-id"><code>ID: 67e5b1cb</code> | <code>Parent: 1a518c63</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/67e5b1cb-8b37-432f-8da1-2c0c35fcb7dc.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_060209_349b41ba_720p_9s_silent_interpolated_sequence.jpg" alt="349b41ba-e0e2-4a5a-8a1d-c98921a2b5bb" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_060209_349b41ba_720p_9s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 06:02:09</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 349b41ba</code> | <code>Parent: 7a3e62e9</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/349b41ba-e0e2-4a5a-8a1d-c98921a2b5bb.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_060638_445aad93_720p_25s_silent_interpolated_sequence.jpg" alt="445aad93-735b-4c7f-a121-a2271dc8f36a" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_060638_445aad93_720p_25s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 06:06:38</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 445aad93</code> | <code>Parent: c7af5ef2</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/445aad93-735b-4c7f-a121-a2271dc8f36a.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_061551_bbcdf587_720p_32s_silent_id_poet_type_character_name_poet_traits.jpg" alt="bbcdf587-6dcc-4d43-b8de-52341f309bc3" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_061551_bbcdf587_720p_32s_silent_id_poet_type_character_name_poet_traits.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 06:15:51</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> [
+  {
+    "id": "POET",
+    "type": "Character",
+    "name": "POET",
+    "traits": [
+      "Protagonist",
+      "Ego-Proxy",
+      "Transformer",
+      "Creator",
+      "Observer"
+    ]
+  },
+  {
+    "id": "EX",
+    "type": "Character",
+    "name": "EX",
+    "traits": [
+      "Antagonist-or-Catalyst",
+      "Unreachable",
+      "Elusive",
+      "Shadow-Projection",
+      "Past-Attachment"
+    ]
+  },
+  {
+    "id": "TV_CHAOS",
+    "type": "Object",
+    "name": "Television Screen",
+    "traits": [
+      "Source-of-External-Chaos",
+      "Reflection-of-Inner-Disorder"
+    ]
+  },
+  {
+    "id": "VAPE_HAZE",
+    "type": "Concept",
+    "name": "Vape Haze",
+    "traits": [
+      "Blurring-Agent",
+      "Obscuring-Perception",
+      "Symbol-of-Detachment"
+    ]
+  }
+]</div></div>
+                <div class="clip-id"><code>ID: bbcdf587</code> | <code>Parent: 445aad93</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/bbcdf587-6dcc-4d43-b8de-52341f309bc3.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_064121_4c1980ee_720p_29s_silent_full_prompt_ds_mood_environment_stabiliz.jpg" alt="4c1980ee-1468-438e-a708-b7ebc5276da6" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_064121_4c1980ee_720p_29s_silent_full_prompt_ds_mood_environment_stabiliz.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 06:41:21</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> full prompt    ds</div></div>
+                <div class="clip-id"><code>ID: 4c1980ee</code> | <code>Parent: 67e5b1cb</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/4c1980ee-1468-438e-a708-b7ebc5276da6.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_065420_a1e1a8ae_720p_29s_silent_full_prompt_ds_mood_environment_stabiliz.jpg" alt="a1e1a8ae-4209-4c49-8544-edc12c251983" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_065420_a1e1a8ae_720p_29s_silent_full_prompt_ds_mood_environment_stabiliz.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 06:54:20</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> "full_prompt": "DS · Mood Environment Stabilizer · A dimly lit plain bedroom in a high-rise apartment · Photo-realistic, minimalist bedroom, urban high-rise window, blue-grey dim lighting, subtle dust motes in air."
+        },
+    {
+
+          "full_prompt": "CS · Causal Motion Trigger · POET, wearing a black t-shirt, reads a poem aloud · Photo-realistic, medium shot, soft internal light on POET (black t-shirt), face focused, expressive reading."
+        },
+    {
+      
+          "full_prompt": "CS · Causal Motion Trigger · EX, back turned, vapes on a fire escape outside a bedroom window · Photo-realistic, wide shot, EX (back to camera, never showing face), vape cloud, gritty fire escape, high-rise window frame, urban backdrop."
+        },</div></div>
+                <div class="clip-id"><code>ID: a1e1a8ae</code> | <code>Parent: 8b14aa65</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/a1e1a8ae-4209-4c49-8544-edc12c251983.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_070045_a9a29752_720p_29s_silent_full_prompt_ds_mood_environment_stabiliz.jpg" alt="a9a29752-9822-476b-9416-884bc0f62b76" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_070045_a9a29752_720p_29s_silent_full_prompt_ds_mood_environment_stabiliz.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 07:00:45</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> "full_prompt": "DS · Mood Environment Stabilizer · A dimly lit plain bedroom in a high-rise apartment · Photo-realistic, minimalist bedroom, urban high-rise window, blue-grey dim lighting, subtle dust motes in air."
+        },
+    {
+
+          "full_prompt": "CS · Causal Motion Trigger · POET, wearing a black t-shirt, reads a poem aloud · Photo-realistic, medium shot, soft internal light on POET (black t-shirt), face focused, expressive reading."
+        },
+    {
+      
+          "full_prompt": "CS · Causal Motion Trigger · EX, back turned, vapes on a fire escape outside a bedroom window · Photo-realistic, wide shot, EX (back to camera, never showing face), vape cloud, gritty fire escape, high-rise window frame, urban backdrop."
+        },</div></div>
+                <div class="clip-id"><code>ID: a9a29752</code> | <code>Parent: ff4e2dd3</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/a9a29752-9822-476b-9416-884bc0f62b76.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_071736_b3ac7019_720p_33s_silent_interpolated_sequence.jpg" alt="b3ac7019-b817-41d1-b2d9-0e9ddd7bfe37" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_071736_b3ac7019_720p_33s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 07:17:36</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> "full_prompt": "DS · Mood Environment Stabilizer · A dimly lit plain bedroom in a high-rise apartment · Photo-realistic, minimalist bedroom, urban high-rise window, blue-grey dim lighting, subtle dust motes in air."
+        },
+    {
+
+          "full_prompt": "CS · Causal Motion Trigger · POET, wearing a black t-shirt, reads a poem aloud · Photo-realistic, medium shot, soft internal light on POET (black t-shirt), face focused, expressive reading."
+        },
+    {
+      
+          "full_prompt": "CS · Causal Motion Trigger · EX, back turned, vapes on a fire escape outside a bedroom window · Photo-realistic, wide shot, EX (back to camera, never showing face), vape cloud, gritty fire escape, high-rise window frame, urban backdrop."
+        },</div></div>
+                <div class="clip-id"><code>ID: b3ac7019</code> | <code>Parent: a9a29752</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/b3ac7019-b817-41d1-b2d9-0e9ddd7bfe37.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_071953_5b9ec655_720p_13s_silent_poet_is_currently_in_a_state_of_you_fall.jpg" alt="5b9ec655-7306-4267-a79e-1357e39e908f" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_071953_5b9ec655_720p_13s_silent_poet_is_currently_in_a_state_of_you_fall.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 07:19:53</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> POET is currently in a state of You_Falling (Engaging EX) at Inky Abyss. Key goals include: Escape Stagnant Reality, Find Connection (with EX), Reclaim Emotional Core and Agency, Manifest a New Reality (Atlantis/Temple), Integrate Past Relationships (EX, Mother, Father), Achieve Personal Autonomy, Embrace Cyclical Impermanence, Understand the Cyclical Nature of Existence. A major shift, Descent Initiated, is transforming the experience, leading to ": You_Falling".</div></div>
+                <div class="clip-id"><code>ID: 5b9ec655</code> | <code>Parent: 67bef226</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/5b9ec655-7306-4267-a79e-1357e39e908f.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_073404_4cfa729a_720p_5s_silent_interpolated_sequence.jpg" alt="4cfa729a-b8d4-4a0a-ba8b-27695912c8be" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_073404_4cfa729a_720p_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 07:34:04</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 4cfa729a</code> | <code>Parent: 1457af04</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/4cfa729a-b8d4-4a0a-ba8b-27695912c8be.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_073830_8aff03e4_720p_13s_silent_here_in_inky_abyss_a_new_chapter_begins.jpg" alt="8aff03e4-a15d-4067-8a26-60689485fda6" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_073830_8aff03e4_720p_13s_silent_here_in_inky_abyss_a_new_chapter_begins.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 07:38:30</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> Here in Inky Abyss, a new chapter begins, marked by: "EX and POET fall into inky abyss; screen blacks out. Entering the deep unconscious.". The narrative takes a turn with the Descent Initiated, leading to a sense of ": You_Falling". Through it all, I am becoming You_Falling (Engaging EX).</div></div>
+                <div class="clip-id"><code>ID: 8aff03e4</code> | <code>Parent: 4cfa729a</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/8aff03e4-a15d-4067-8a26-60689485fda6.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_075124_d5abc940_720p_9s_silent_pov_shot_through_a_glitching_filter_of_p.jpg" alt="d5abc940-54af-4992-b173-cd32e82b1b17" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_075124_d5abc940_720p_9s_silent_pov_shot_through_a_glitching_filter_of_p.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 07:51:24</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> POV shot through a glitching filter of POET in Inky Abyss - EX and POET fall into inky abyss; screen blacks out. Entering the deep unconscious.. Focus on the visual impact of: Descent Initiated. The scene's ambiance is Vibrant, kaleidoscopic light with a Psychedelic, abstract style. Use Camera dollies forward, framed as in a symmetrical layout, aspect ratio 9:16. Add flavor:</div></div>
+                <div class="clip-id"><code>ID: d5abc940</code> | <code>Parent: 4cfa729a</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/d5abc940-54af-4992-b173-cd32e82b1b17.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_075431_8e5ebf2d_720p_5s_silent_id_poet_type_character_name_poet_traits.jpg" alt="8e5ebf2d-9325-4df3-b370-ba040df33148" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_075431_8e5ebf2d_720p_5s_silent_id_poet_type_character_name_poet_traits.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 07:54:31</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> [
+  {
+    "id": "POET",
+    "type": "Character",
+    "name": "POET",
+    "traits": [
+      "Protagonist",
+      "Ego-Proxy",
+      "Transformer",
+      "Creator",
+      "Observer"
+    ]
+  },
+  {
+    "id": "EX",
+    "type": "Character",
+    "name": "EX",
+    "traits": [
+      "Antagonist-or-Catalyst",
+      "Unreachable",
+      "Elusive",
+      "Shadow-Projection",
+      "Past-Attachment"
+    ]
+  },
+  {
+    "id": "INKY_ABYSS",
+    "type": "Location",
+    "name": "Inky Abyss",
+    "traits": [
+      "Profound-Void",
+      "Unconscious-Descent",
+      "No-Place"
+    ],
+    "fixed_position": [
+      0.5,
+      0.1
+    ]
+  }
+]</div></div>
+                <div class="clip-id"><code>ID: 8e5ebf2d</code> | <code>Parent: 6b29a61f</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/8e5ebf2d-9325-4df3-b370-ba040df33148.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_081127_d1dfc1d0_720p_9s_silent_here_in_inky_abyss_a_new_chapter_begins.jpg" alt="d1dfc1d0-11bf-4d2c-bf07-2953a7ea7e44" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_081127_d1dfc1d0_720p_9s_silent_here_in_inky_abyss_a_new_chapter_begins.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 08:11:27</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> Here in Inky Abyss, a new chapter begins, marked by: "EX and POET fall into inky abyss; screen blacks out. Entering the deep unconscious.". The narrative takes a turn with the Descent Initiated, leading to a sense of ": You_Falling". Through it all, I am becoming You_Falling (Engaging EX).</div></div>
+                <div class="clip-id"><code>ID: d1dfc1d0</code> | <code>Parent: 8e5ebf2d</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/d1dfc1d0-11bf-4d2c-bf07-2953a7ea7e44.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_081608_3af36c41_720p_28s_silent_interpolated_sequence.jpg" alt="3af36c41-44c7-484c-a524-ce74612ce833" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_081608_3af36c41_720p_28s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 08:16:08</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> "full_prompt": "DS · Mood Environment Stabilizer · A dimly lit plain bedroom in a high-rise apartment · Photo-realistic, minimalist bedroom, urban high-rise window, blue-grey dim lighting, subtle dust motes in air."
+        },
+    {
+
+          "full_prompt": "CS · Causal Motion Trigger · POET, wearing a black t-shirt, reads a poem aloud · Photo-realistic, medium shot, soft internal light on POET (black t-shirt), face focused, expressive reading."
+        },
+    {
+      
+          "full_prompt": "CS · Causal Motion Trigger · EX, back turned, vapes on a fire escape outside a bedroom window · Photo-realistic, wide shot, EX (back to camera, never showing face), vape cloud, gritty fire escape, high-rise window frame, urban backdrop."
+        },</div></div>
+                <div class="clip-id"><code>ID: 3af36c41</code> | <code>Parent: b3ac7019</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/3af36c41-44c7-484c-a524-ce74612ce833.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_081727_eb298ed7_720p_13s_silent_here_in_inky_abyss_a_new_chapter_begins.jpg" alt="eb298ed7-27f0-453c-b743-5ec0f252157d" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_081727_eb298ed7_720p_13s_silent_here_in_inky_abyss_a_new_chapter_begins.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 08:17:27</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> Here in Inky Abyss, a new chapter begins, marked by: "EX and POET fall into inky abyss; screen blacks out. Entering the deep unconscious.". The narrative takes a turn with the Descent Initiated, leading to a sense of ": You_Falling". Through it all, I am becoming You_Falling (Engaging EX).</div></div>
+                <div class="clip-id"><code>ID: eb298ed7</code> | <code>Parent: d1dfc1d0</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/eb298ed7-27f0-453c-b743-5ec0f252157d.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_082558_af9410b7_720p_17s_silent_here_in_inky_abyss_a_new_chapter_begins.jpg" alt="af9410b7-1687-472a-955e-ddd4798a0e18" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_082558_af9410b7_720p_17s_silent_here_in_inky_abyss_a_new_chapter_begins.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 08:25:58</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> here in inky abyss</div></div>
+                <div class="clip-id"><code>ID: af9410b7</code> | <code>Parent: eb298ed7</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/af9410b7-1687-472a-955e-ddd4798a0e18.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_083133_cc6917c6_720p_17s_silent_here_in_inky_abyss_a_new_chapter_begins.jpg" alt="cc6917c6-ac49-4a5a-adb5-75f43085d1dc" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_083133_cc6917c6_720p_17s_silent_here_in_inky_abyss_a_new_chapter_begins.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 08:31:33</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> here in inky abyss</div></div>
+                <div class="clip-id"><code>ID: cc6917c6</code> | <code>Parent: eb298ed7</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/cc6917c6-ac49-4a5a-adb5-75f43085d1dc.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_083455_6e80b1bd_720p_25s_silent_here_in_inky_abyss_a_new_chapter_begins.jpg" alt="6e80b1bd-7b50-4cc6-921a-1f76d8bee404" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_083455_6e80b1bd_720p_25s_silent_here_in_inky_abyss_a_new_chapter_begins.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 08:34:55</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> here in inky abyss</div></div>
+                <div class="clip-id"><code>ID: 6e80b1bd</code> | <code>Parent: af9410b7</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/6e80b1bd-7b50-4cc6-921a-1f76d8bee404.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_085121_c81cb1b0_720p_26s_silent_my_journey_brings_me_to_dim_bedroom_as_e.jpg" alt="c81cb1b0-52a4-4137-b56f-9b2eb0132d0a" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_085121_c81cb1b0_720p_26s_silent_my_journey_brings_me_to_dim_bedroom_as_e.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 08:51:21</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> My journey brings me to Dim Bedroom, as "External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger." unfolds before me. I am undergoing a Subjective Frame Recalibration, as aspects of myself : Disoriented. Through it all, I am becoming You_Falling (Engaging EX).</div></div>
+                <div class="clip-id"><code>ID: c81cb1b0</code> | <code>Parent: ef144131</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/c81cb1b0-52a4-4137-b56f-9b2eb0132d0a.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_093642_84592d51_1080p_5s_silent_should_feel_more_abstact_this_is_pre_fil.jpg" alt="84592d51-5519-4ef3-9e82-728d1d45d0fa" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_093642_84592d51_1080p_5s_silent_should_feel_more_abstact_this_is_pre_fil.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 09:36:42</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> should feel more abstact this is pre film.  think of this like art film like saul bass and john whitney would make</div></div>
+                <div class="clip-id"><code>ID: 84592d51</code> | <code>Parent: 2d3f48af</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/84592d51-5519-4ef3-9e82-728d1d45d0fa.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_093818_9d16432c_720p_5s_silent_more_minimal_and_abstract_with_neon_touc.jpg" alt="9d16432c-6ef6-4d3e-ab06-8876fe3dbcbd" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_093818_9d16432c_720p_5s_silent_more_minimal_and_abstract_with_neon_touc.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 09:38:18</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> more minimal and abstract with neon touches more grit and grain</div></div>
+                <div class="clip-id"><code>ID: 9d16432c</code> | <code>Parent: 4324c3f9</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/9d16432c-6ef6-4d3e-ab06-8876fe3dbcbd.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_093950_e3e52e35_720p_5s_silent_more_minimal_and_abstract_with_neon_touc.jpg" alt="e3e52e35-c512-4041-9e21-0a32600b1570" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_093950_e3e52e35_720p_5s_silent_more_minimal_and_abstract_with_neon_touc.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 09:39:50</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> more minimal and abstract with neon touches more grit and grain</div></div>
+                <div class="clip-id"><code>ID: e3e52e35</code> | <code>Parent: 4324c3f9</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/e3e52e35-c512-4041-9e21-0a32600b1570.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_094807_a11b84af_720p_9s_silent_interpolated_sequence.jpg" alt="a11b84af-ea36-4e1b-a2a3-4870b3d1da2d" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_094807_a11b84af_720p_9s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 09:48:07</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: a11b84af</code> | <code>Parent: d0eccc44</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/a11b84af-ea36-4e1b-a2a3-4870b3d1da2d.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_095318_b072cfc2_720p_13s_silent_interpolated_sequence.jpg" alt="b072cfc2-6718-457c-ad6f-05cae38d884a" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_095318_b072cfc2_720p_13s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 09:53:18</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: b072cfc2</code> | <code>Parent: c4ea9327</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/b072cfc2-6718-457c-ad6f-05cae38d884a.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_095736_8478f997_720p_9s_silent_more_minimal_and_abstract_with_neon_touc.jpg" alt="8478f997-0b09-41f3-93f2-de5c144d0b8b" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_095736_8478f997_720p_9s_silent_more_minimal_and_abstract_with_neon_touc.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 09:57:36</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> more minimal and</div></div>
+                <div class="clip-id"><code>ID: 8478f997</code> | <code>Parent: e3e52e35</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/8478f997-0b09-41f3-93f2-de5c144d0b8b.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_100245_173e50a6_720p_22s_silent_interpolated_sequence.jpg" alt="173e50a6-417d-42dc-b48f-22b161ffa83c" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_100245_173e50a6_720p_22s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 10:02:45</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> "full_prompt": "DS · Mood Environment Stabilizer · A dimly lit plain bedroom in a high-rise apartment · Photo-realistic, minimalist bedroom, urban high-rise window, blue-grey dim lighting, subtle dust motes in air."
+        },
+    {
+
+          "full_prompt": "CS · Causal Motion Trigger · POET, wearing a black t-shirt, reads a poem aloud · Photo-realistic, medium shot, soft internal light on POET (black t-shirt), face focused, expressive reading."
+        },
+    {
+      
+          "full_prompt": "CS · Causal Motion Trigger · EX, back turned, vapes on a fire escape outside a bedroom window · Photo-realistic, wide shot, EX (back to camera, never showing face), vape cloud, gritty fire escape, high-rise window frame, urban backdrop."
+        },</div></div>
+                <div class="clip-id"><code>ID: 173e50a6</code> | <code>Parent: 8e1b4bd1</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/173e50a6-417d-42dc-b48f-22b161ffa83c.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_101013_706766af_720p_39s_silent_interpolated_sequence.jpg" alt="706766af-c9c4-4f8b-bd21-5849851c3a95" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_101013_706766af_720p_39s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 10:10:13</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 706766af</code> | <code>Parent: b072cfc2</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/706766af-c9c4-4f8b-bd21-5849851c3a95.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_102441_46782136_720p_31s_silent_interpolated_sequence.jpg" alt="46782136-88da-4bc6-911a-9d5954f0ce08" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_102441_46782136_720p_31s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 10:24:41</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> My journey brings me to Dim Bedroom, as "External chaos and blurring vision; EX recedes. Forces the 'LEAVE' trigger." unfolds before me. I am undergoing a Subjective Frame Recalibration, as aspects of myself : Disoriented. Through it all, I am becoming You_Falling (Engaging EX).</div></div>
+                <div class="clip-id"><code>ID: 46782136</code> | <code>Parent: c81cb1b0</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/46782136-88da-4bc6-911a-9d5954f0ce08.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250719_102735_6a9fa071_720p_33s_silent_interpolated_sequence.jpg" alt="6a9fa071-0440-4648-a91a-4825d383cf3e" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250719_102735_6a9fa071_720p_33s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-19 10:27:35</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 6a9fa071</code> | <code>Parent: 4cfa729a</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/6a9fa071-0440-4648-a91a-4825d383cf3e.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET_00" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET_00/thumbnails/20250721_132132_5880d3a4_720p_5s_silent_interpolated_sequence.jpg" alt="5880d3a4-dd0a-4958-97bc-96a6cb7c6d5b" loading="lazy" />
+                <video src="MARKOV_POET_00/videos/20250721_132132_5880d3a4_720p_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET_00</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-07-21 13:21:32</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 5880d3a4</code> | <code>Parent: 180af6f3</code></div>
+                <a class="receipt-link" href="MARKOV_POET_00/receipts/5880d3a4-dd0a-4958-97bc-96a6cb7c6d5b.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_225846_63fd3f15_720p_5s_audio_sound_drone_sound_fire_light_energy_epic.jpg" alt="63fd3f15-2c15-409d-a94a-b07864d46497" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_225846_63fd3f15_720p_5s_audio_sound_drone_sound_fire_light_energy_epic.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-19 22:58:46</div>
+                <div class="prompt-container"><div class="aud-prompt">🔊 <strong>Audio:</strong> epic drone, surreal, blessed, red engergy passion, mood</div></div>
+                <div class="clip-id"><code>ID: 63fd3f15</code> | <code>Parent: 5662ac9b</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/63fd3f15-2c15-409d-a94a-b07864d46497.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_225855_60c4c35f_720p_5s_audio_sound_drone_heavenly_sound_red_fire_echo.jpg" alt="60c4c35f-0841-4469-acd2-f86617b250c5" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_225855_60c4c35f_720p_5s_audio_sound_drone_heavenly_sound_red_fire_echo.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-19 22:58:55</div>
+                <div class="prompt-container"><div class="aud-prompt">🔊 <strong>Audio:</strong> drone, heavenly sound, red fire echo drone, lu,ninous, legend entry deep light</div></div>
+                <div class="clip-id"><code>ID: 60c4c35f</code> | <code>Parent: 897959e2</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/60c4c35f-0841-4469-acd2-f86617b250c5.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_225924_4ed309f2_720p_5s_audio_sound_drone_light_mood_red.jpg" alt="4ed309f2-e28d-4850-9681-b789476934a6" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_225924_4ed309f2_720p_5s_audio_sound_drone_light_mood_red.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-19 22:59:24</div>
+                <div class="prompt-container"><div class="aud-prompt">🔊 <strong>Audio:</strong> drone, light, mood red</div></div>
+                <div class="clip-id"><code>ID: 4ed309f2</code> | <code>Parent: 2b86743e</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/4ed309f2-e28d-4850-9681-b789476934a6.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_230530_e9c18d8d_720p_5s_audio_sound_rain_distant_sounds_echo_of_radio.jpg" alt="e9c18d8d-4282-4dcf-a363-c31074045570" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_230530_e9c18d8d_720p_5s_audio_sound_rain_distant_sounds_echo_of_radio.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-19 23:05:30</div>
+                <div class="prompt-container"><div class="aud-prompt">🔊 <strong>Audio:</strong> rain, distant sounds echo of radio, 80's ambient, drone glow rain</div></div>
+                <div class="clip-id"><code>ID: e9c18d8d</code> | <code>Parent: fedbef68</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/e9c18d8d-4282-4dcf-a363-c31074045570.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_230548_02eba2a1_720p_5s_audio_interpolated_sequence.jpg" alt="02eba2a1-e758-4688-9b7f-7b816ba4ec07" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_230548_02eba2a1_720p_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:05:48</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 02eba2a1</code> | <code>Parent: 9c734df4</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/02eba2a1-e758-4688-9b7f-7b816ba4ec07.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_230706_0b025dc2_draft_5s_audio_sound_drowning_in_red_light_fluid_bubbli.jpg" alt="0b025dc2-a248-44b0-a4d7-b4751d7d3602" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_230706_0b025dc2_draft_5s_audio_sound_drowning_in_red_light_fluid_bubbli.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-19 23:07:06</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the man s head</div><div class="aud-prompt">🔊 <strong>Audio:</strong> drowning in red light fluid, bubbling, textured, mood atmospheric</div></div>
+                <div class="clip-id"><code>ID: 0b025dc2</code> | <code>Parent: c9d310d4</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/0b025dc2-a248-44b0-a4d7-b4751d7d3602.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_231205_f3088dc0_draft_5s_audio_interpolated_sequence.jpg" alt="f3088dc0-e65c-4546-9a1b-063667d5b057" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_231205_f3088dc0_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:12:05</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the man turns his</div></div>
+                <div class="clip-id"><code>ID: f3088dc0</code> | <code>Parent: c55cf001</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/f3088dc0-e65c-4546-9a1b-063667d5b057.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_231210_84c137db_draft_5s_audio_interpolated_sequence.jpg" alt="84c137db-a003-4e03-b26e-40f339b666d4" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_231210_84c137db_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:12:10</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the dj s right hand</div></div>
+                <div class="clip-id"><code>ID: 84c137db</code> | <code>Parent: 24e9edde</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/84c137db-a003-4e03-b26e-40f339b666d4.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_231240_0183fedb_draft_5s_audio_sound_rain_drone_dope_slow_mo_vocoder_mo.jpg" alt="0183fedb-4dd9-4c31-87a8-65f4126f55d4" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_231240_0183fedb_draft_5s_audio_sound_rain_drone_dope_slow_mo_vocoder_mo.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-19 23:12:40</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the man in</div><div class="aud-prompt">🔊 <strong>Audio:</strong> rain, drone, dope slow mo, vocoder, mood</div></div>
+                <div class="clip-id"><code>ID: 0183fedb</code> | <code>Parent: 216b7124</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/0183fedb-4dd9-4c31-87a8-65f4126f55d4.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_231453_6017f123_720p_5s_audio_interpolated_sequence.jpg" alt="6017f123-f493-4fd3-98c7-9b6573ac3596" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_231453_6017f123_720p_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:14:53</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 6017f123</code> | <code>Parent: 668e0515</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/6017f123-f493-4fd3-98c7-9b6573ac3596.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_231512_5bbf08ef_draft_5s_audio_interpolated_sequence.jpg" alt="5bbf08ef-65af-4fc6-9284-458d4f0db21c" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_231512_5bbf08ef_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:15:12</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the vibrant red and</div></div>
+                <div class="clip-id"><code>ID: 5bbf08ef</code> | <code>Parent: d9a2be5f</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/5bbf08ef-65af-4fc6-9284-458d4f0db21c.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_231846_ee2b1d79_720p_5s_audio_interpolated_sequence.jpg" alt="ee2b1d79-4139-4341-872d-9e554ca444a1" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_231846_ee2b1d79_720p_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:18:46</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: ee2b1d79</code> | <code>Parent: 0b27c0ed</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/ee2b1d79-4139-4341-872d-9e554ca444a1.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_231955_222c8cca_draft_5s_audio_interpolated_sequence.jpg" alt="222c8cca-2f7c-492e-8fb7-00bb771cdeb3" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_231955_222c8cca_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:19:55</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the person s visible</div></div>
+                <div class="clip-id"><code>ID: 222c8cca</code> | <code>Parent: 81a48c48</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/222c8cca-2f7c-492e-8fb7-00bb771cdeb3.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_231956_53666716_720p_5s_silent_interpolated_sequence.jpg" alt="53666716-4b11-4103-a4ae-86a53110dd09" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_231956_53666716_720p_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:19:56</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 53666716</code> | <code>Parent: ad1b4ef1</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/53666716-4b11-4103-a4ae-86a53110dd09.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_232034_0b99d0ac_draft_5s_audio_sound_drone_breathing_vocoder_echo_deep.jpg" alt="0b99d0ac-ed91-4c16-a0bc-bb39c320db15" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_232034_0b99d0ac_draft_5s_audio_sound_drone_breathing_vocoder_echo_deep.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-19 23:20:34</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the person s eyelids</div><div class="aud-prompt">🔊 <strong>Audio:</strong> drone, breathing, vocoder, echo, deep space</div></div>
+                <div class="clip-id"><code>ID: 0b99d0ac</code> | <code>Parent: f0fb54b7</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/0b99d0ac-ed91-4c16-a0bc-bb39c320db15.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_232508_9e848953_draft_5s_silent_interpolated_sequence.jpg" alt="9e848953-1c87-475b-acda-8c812d6d4782" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_232508_9e848953_draft_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:25:08</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the person s left</div></div>
+                <div class="clip-id"><code>ID: 9e848953</code> | <code>Parent: 0b27c0ed</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/9e848953-1c87-475b-acda-8c812d6d4782.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_232901_ef876320_draft_5s_silent_interpolated_sequence.jpg" alt="ef876320-8cf7-417c-be61-2d810cfee1ef" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_232901_ef876320_draft_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:29:01</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the man on the red</div></div>
+                <div class="clip-id"><code>ID: ef876320</code> | <code>Parent: 94d625a2</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/ef876320-8cf7-417c-be61-2d810cfee1ef.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_233247_8acad7c0_720p_5s_audio_interpolated_sequence.jpg" alt="8acad7c0-0f12-48a7-bcf5-177308192cae" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_233247_8acad7c0_720p_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:32:47</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 8acad7c0</code> | <code>Parent: 8452a7c5</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/8acad7c0-0f12-48a7-bcf5-177308192cae.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_233913_764b035a_720p_5s_audio_interpolated_sequence.jpg" alt="764b035a-5b9f-4f68-a1b2-5a4836c0391c" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_233913_764b035a_720p_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:39:13</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 764b035a</code> | <code>Parent: ee8ffea8</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/764b035a-5b9f-4f68-a1b2-5a4836c0391c.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_233925_b8d2065c_720p_5s_audio_interpolated_sequence.jpg" alt="b8d2065c-43c1-4a0d-add5-ae23896cb682" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_233925_b8d2065c_720p_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:39:25</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: b8d2065c</code> | <code>Parent: d7828f88</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/b8d2065c-43c1-4a0d-add5-ae23896cb682.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_234018_34051c38_720p_5s_audio_sound_hearbeat_drone_light_skeleton_purp.jpg" alt="34051c38-4ba9-47a8-a756-bdfb255b95a8" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_234018_34051c38_720p_5s_audio_sound_hearbeat_drone_light_skeleton_purp.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-19 23:40:18</div>
+                <div class="prompt-container"><div class="aud-prompt">🔊 <strong>Audio:</strong> hearbeat, drone, light skeleton, purpose, energey</div></div>
+                <div class="clip-id"><code>ID: 34051c38</code> | <code>Parent: 8f4fa883</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/34051c38-4ba9-47a8-a756-bdfb255b95a8.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_234027_516f88fd_720p_5s_silent_interpolated_sequence.jpg" alt="516f88fd-bbeb-4508-8ec7-98c3cc7725a4" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_234027_516f88fd_720p_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:40:27</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 516f88fd</code> | <code>Parent: 53c4e533</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/516f88fd-bbeb-4508-8ec7-98c3cc7725a4.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_234038_80b32fdf_720p_5s_silent_interpolated_sequence.jpg" alt="80b32fdf-1c85-4463-8bd0-969763687db7" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_234038_80b32fdf_720p_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:40:38</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 80b32fdf</code> | <code>Parent: ed7dece0</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/80b32fdf-1c85-4463-8bd0-969763687db7.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_234806_f91d5823_draft_5s_audio_sound_tamborine_echo_waves_ocean_drone_b.jpg" alt="f91d5823-b5c8-44e2-bd2e-c515ff90f15a" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_234806_f91d5823_draft_5s_audio_sound_tamborine_echo_waves_ocean_drone_b.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-19 23:48:06</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the man slowly lifts</div><div class="aud-prompt">🔊 <strong>Audio:</strong> drone, surreal, tamborine, bass beat, bad ass, surreal atlantis psychadelic trap beat</div></div>
+                <div class="clip-id"><code>ID: f91d5823</code> | <code>Parent: 53c4e533</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/f91d5823-b5c8-44e2-bd2e-c515ff90f15a.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_234957_e05d9393_draft_5s_audio_interpolated_sequence.jpg" alt="e05d9393-7f95-45a2-b86c-8af06c3a234b" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_234957_e05d9393_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:49:57</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the flock of dark</div></div>
+                <div class="clip-id"><code>ID: e05d9393</code> | <code>Parent: 7324552e</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/e05d9393-7f95-45a2-b86c-8af06c3a234b.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_235035_08ff0a63_720p_5s_silent_interpolated_sequence.jpg" alt="08ff0a63-d947-4d3f-906e-e61026c3637d" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_235035_08ff0a63_720p_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:50:35</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 08ff0a63</code> | <code>Parent: 4bfac7bd</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/08ff0a63-d947-4d3f-906e-e61026c3637d.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_235513_b71779e4_draft_5s_audio_interpolated_sequence.jpg" alt="b71779e4-0ef1-410a-892b-611281a857d9" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_235513_b71779e4_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:55:13</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the man slowly</div></div>
+                <div class="clip-id"><code>ID: b71779e4</code> | <code>Parent: 71e96d4a</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/b71779e4-0ef1-410a-892b-611281a857d9.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_235726_c1d4e13c_draft_5s_silent_interpolated_sequence.jpg" alt="c1d4e13c-286e-46a3-aed8-574e5ca2fcea" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_235726_c1d4e13c_draft_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:57:26</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> his facial muscles</div></div>
+                <div class="clip-id"><code>ID: c1d4e13c</code> | <code>Parent: 4bfac7bd</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/c1d4e13c-286e-46a3-aed8-574e5ca2fcea.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_235726_5edab801_draft_5s_audio_interpolated_sequence.jpg" alt="5edab801-01ad-44bd-8ba0-678b31ad17a8" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_235726_5edab801_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-19 23:57:26</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> subtle tension</div></div>
+                <div class="clip-id"><code>ID: 5edab801</code> | <code>Parent: 4bfac7bd</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/5edab801-01ad-44bd-8ba0-678b31ad17a8.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251019_235926_d847a1b8_draft_5s_audio_sound_ocean_light_heartbreak_heart_soul.jpg" alt="d847a1b8-c5ee-426f-8af9-3e89f9280b2a" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251019_235926_d847a1b8_draft_5s_audio_sound_ocean_light_heartbreak_heart_soul.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-19 23:59:26</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the glowing red</div><div class="aud-prompt">🔊 <strong>Audio:</strong> ocean, light, heartbreak, heart soul drone, light ocean acceptance, vocoder, echo, caretaker, african hauntology</div></div>
+                <div class="clip-id"><code>ID: d847a1b8</code> | <code>Parent: 0a4855bf</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/d847a1b8-c5ee-426f-8af9-3e89f9280b2a.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_000746_2255ec6b_720p_5s_silent_interpolated_sequence.jpg" alt="2255ec6b-eede-462e-9ac5-8ed9abe075d9" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_000746_2255ec6b_720p_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 00:07:46</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 2255ec6b</code> | <code>Parent: c2c10a79</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/2255ec6b-eede-462e-9ac5-8ed9abe075d9.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_001028_1cdf9a75_draft_5s_audio_interpolated_sequence.jpg" alt="1cdf9a75-9557-4925-9d08-d5072c7bebf0" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_001028_1cdf9a75_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 00:10:28</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the distant figures</div></div>
+                <div class="clip-id"><code>ID: 1cdf9a75</code> | <code>Parent: 8586e8c4</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/1cdf9a75-9557-4925-9d08-d5072c7bebf0.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_001740_5c7f1747_draft_5s_audio_interpolated_sequence.jpg" alt="5c7f1747-09ab-4f1e-a16c-17af2273ac5a" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_001740_5c7f1747_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 00:17:40</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> dense fog drifts</div></div>
+                <div class="clip-id"><code>ID: 5c7f1747</code> | <code>Parent: c20d991f</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/5c7f1747-09ab-4f1e-a16c-17af2273ac5a.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_002206_845aeac2_720p_5s_silent_interpolated_sequence.jpg" alt="845aeac2-de24-451a-aa80-2eb59d566d6b" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_002206_845aeac2_720p_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 00:22:06</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 845aeac2</code> | <code>Parent: 04076a4b</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/845aeac2-de24-451a-aa80-2eb59d566d6b.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_002659_17b996fa_720p_5s_audio_interpolated_sequence.jpg" alt="17b996fa-fbe4-45e5-9ab2-69205a073664" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_002659_17b996fa_720p_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 00:26:59</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 17b996fa</code> | <code>Parent: b02e0790</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/17b996fa-fbe4-45e5-9ab2-69205a073664.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_003144_7dc53bea_720p_5s_silent_interpolated_sequence.jpg" alt="7dc53bea-b860-45c4-bc34-ae11a523b3c4" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_003144_7dc53bea_720p_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 00:31:44</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 7dc53bea</code> | <code>Parent: 2c7a9cd8</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/7dc53bea-b860-45c4-bc34-ae11a523b3c4.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_003624_0107df88_draft_5s_silent_interpolated_sequence.jpg" alt="0107df88-5042-400d-b5e0-0c80632c6e2d" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_003624_0107df88_draft_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 00:36:24</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the luminous</div></div>
+                <div class="clip-id"><code>ID: 0107df88</code> | <code>Parent: 8a808c9a</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/0107df88-5042-400d-b5e0-0c80632c6e2d.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_011907_48a7a55a_draft_5s_silent_interpolated_sequence.jpg" alt="48a7a55a-9be8-4f3a-ab98-21b74cc25b1c" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_011907_48a7a55a_draft_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 01:19:07</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the robed figures</div></div>
+                <div class="clip-id"><code>ID: 48a7a55a</code> | <code>Parent: d7163c74</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/48a7a55a-9be8-4f3a-ab98-21b74cc25b1c.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_012659_2b779f89_draft_5s_audio_interpolated_sequence.jpg" alt="2b779f89-5cd4-41e6-8432-f6d6be922f7e" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_012659_2b779f89_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 01:26:59</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the thick mist</div></div>
+                <div class="clip-id"><code>ID: 2b779f89</code> | <code>Parent: 2b719fef</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/2b779f89-5cd4-41e6-8432-f6d6be922f7e.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_012842_9708bfad_draft_5s_audio_interpolated_sequence.jpg" alt="9708bfad-d99c-4a6e-97e5-dc31bdf7a990" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_012842_9708bfad_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 01:28:42</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the intense light</div></div>
+                <div class="clip-id"><code>ID: 9708bfad</code> | <code>Parent: d8767f02</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/9708bfad-d99c-4a6e-97e5-dc31bdf7a990.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_012957_068f796b_draft_5s_audio_sound_make_it_more_deep_dark_ocean_more.jpg" alt="068f796b-fd7e-40f8-b4d8-9acd673df00b" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_012957_068f796b_draft_5s_audio_sound_make_it_more_deep_dark_ocean_more.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-20 01:29:57</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the luminous</div><div class="aud-prompt">🔊 <strong>Audio:</strong> drone star, light, heavenly chorus drone, tender light, space echo drone, vocoder</div></div>
+                <div class="clip-id"><code>ID: 068f796b</code> | <code>Parent: 42d242a9</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/068f796b-fd7e-40f8-b4d8-9acd673df00b.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_013140_37235c7f_draft_5s_audio_interpolated_sequence.jpg" alt="37235c7f-1334-4953-9398-2a9b747fb48a" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_013140_37235c7f_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 01:31:40</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the woman on the</div></div>
+                <div class="clip-id"><code>ID: 37235c7f</code> | <code>Parent: d3031d62</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/37235c7f-1334-4953-9398-2a9b747fb48a.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_014513_02185971_720p_5s_audio_interpolated_sequence.jpg" alt="02185971-7ee6-469b-a2c6-208f27ed2c2e" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_014513_02185971_720p_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 01:45:13</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 02185971</code> | <code>Parent: edb0a78a</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/02185971-7ee6-469b-a2c6-208f27ed2c2e.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_014733_6ac81cae_720p_5s_audio_interpolated_sequence.jpg" alt="6ac81cae-9d9b-41b7-9d84-fa048b05fa0e" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_014733_6ac81cae_720p_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 01:47:33</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 6ac81cae</code> | <code>Parent: 5d2d0130</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/6ac81cae-9d9b-41b7-9d84-fa048b05fa0e.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_015442_ce4762b5_draft_5s_audio_interpolated_sequence.jpg" alt="ce4762b5-3df4-4188-85dd-ea1ca32d222d" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_015442_ce4762b5_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 01:54:42</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the dense red smoke</div></div>
+                <div class="clip-id"><code>ID: ce4762b5</code> | <code>Parent: 547441a3</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/ce4762b5-3df4-4188-85dd-ea1ca32d222d.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_031806_7e0bd7d0_720p_5s_audio_interpolated_sequence.jpg" alt="7e0bd7d0-cd1b-41ff-a8df-6b9638406ef1" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_031806_7e0bd7d0_720p_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 03:18:06</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 7e0bd7d0</code> | <code>Parent: 6f08d23f</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/7e0bd7d0-cd1b-41ff-a8df-6b9638406ef1.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_032021_badaf97b_720p_5s_audio_sound_dream_surreal_drone_water.jpg" alt="badaf97b-abf5-48af-8986-44966b5aff59" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_032021_badaf97b_720p_5s_audio_sound_dream_surreal_drone_water.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-20 03:20:21</div>
+                <div class="prompt-container"><div class="aud-prompt">🔊 <strong>Audio:</strong> surreal drone, flowers</div></div>
+                <div class="clip-id"><code>ID: badaf97b</code> | <code>Parent: ad2d6445</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/badaf97b-abf5-48af-8986-44966b5aff59.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_032316_653ecfbe_draft_5s_audio_sound_vehicles_zooming_by_light_drone_ti.jpg" alt="653ecfbe-7c37-4986-a452-bd0b2538d7db" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_032316_653ecfbe_draft_5s_audio_sound_vehicles_zooming_by_light_drone_ti.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-20 03:23:16</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> red light trails</div><div class="aud-prompt">🔊 <strong>Audio:</strong> vehicles zooming by, light, drone time lapse</div></div>
+                <div class="clip-id"><code>ID: 653ecfbe</code> | <code>Parent: c927ab80</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/653ecfbe-7c37-4986-a452-bd0b2538d7db.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_032322_fc64e987_draft_5s_audio_sound_magic_ride_light_zooming_by_time_w.jpg" alt="fc64e987-0f4d-4031-a4f0-4ea84af322de" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_032322_fc64e987_draft_5s_audio_sound_magic_ride_light_zooming_by_time_w.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-20 03:23:22</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the streaks of</div><div class="aud-prompt">🔊 <strong>Audio:</strong> magic ride, light zooming by, time warp, morph echo</div></div>
+                <div class="clip-id"><code>ID: fc64e987</code> | <code>Parent: 08170f23</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/fc64e987-0f4d-4031-a4f0-4ea84af322de.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_032325_8a9e7a1e_720p_5s_audio_sound_more_humble_drone_glorious_morph_v.jpg" alt="8a9e7a1e-322f-4088-82bb-e2df137abfc0" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_032325_8a9e7a1e_720p_5s_audio_sound_more_humble_drone_glorious_morph_v.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-20 03:23:25</div>
+                <div class="prompt-container"><div class="aud-prompt">🔊 <strong>Audio:</strong> more humble drone, glorious morph vocoder beach, light</div></div>
+                <div class="clip-id"><code>ID: 8a9e7a1e</code> | <code>Parent: e23a7e25</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/8a9e7a1e-322f-4088-82bb-e2df137abfc0.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_032340_474a21a0_draft_5s_audio_interpolated_sequence.jpg" alt="474a21a0-548d-4004-90d5-664857af5b37" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_032340_474a21a0_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 03:23:40</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> maintain a static</div></div>
+                <div class="clip-id"><code>ID: 474a21a0</code> | <code>Parent: 212052ac</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/474a21a0-548d-4004-90d5-664857af5b37.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_032459_eaea9d0a_720p_5s_audio_interpolated_sequence.jpg" alt="eaea9d0a-4e14-4a55-a48e-8f1976b24155" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_032459_eaea9d0a_720p_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 03:24:59</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: eaea9d0a</code> | <code>Parent: 86b8d083</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/eaea9d0a-4e14-4a55-a48e-8f1976b24155.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_032828_63d387a4_draft_5s_audio_sound_drone_sound_of_morph_vocoder_light.jpg" alt="63d387a4-6525-4aa5-a4ff-e754de08825e" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_032828_63d387a4_draft_5s_audio_sound_drone_sound_of_morph_vocoder_light.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-20 03:28:28</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the two blurred</div><div class="aud-prompt">🔊 <strong>Audio:</strong> drone, sound of morph vocoder, light, gold</div></div>
+                <div class="clip-id"><code>ID: 63d387a4</code> | <code>Parent: 73f87428</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/63d387a4-6525-4aa5-a4ff-e754de08825e.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_033150_8daa2ef0_draft_5s_audio_interpolated_sequence.jpg" alt="8daa2ef0-a269-4a58-9b37-fe40152e7a54" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_033150_8daa2ef0_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 03:31:50</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the chromatic</div></div>
+                <div class="clip-id"><code>ID: 8daa2ef0</code> | <code>Parent: aa0d9307</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/8daa2ef0-a269-4a58-9b37-fe40152e7a54.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_033310_13fee118_720p_5s_audio_interpolated_sequence.jpg" alt="13fee118-d732-4e17-88e9-2b0b065ecf9b" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_033310_13fee118_720p_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 03:33:10</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 13fee118</code> | <code>Parent: 0aac7ac8</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/13fee118-d732-4e17-88e9-2b0b065ecf9b.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_033403_4d3fc262_draft_5s_audio_interpolated_sequence.jpg" alt="4d3fc262-5b5b-4e6a-b408-97af1321b212" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_033403_4d3fc262_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 03:34:03</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> fresh raindrops</div></div>
+                <div class="clip-id"><code>ID: 4d3fc262</code> | <code>Parent: 073b24d2</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/4d3fc262-5b5b-4e6a-b408-97af1321b212.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_033411_5bcf5bf5_draft_5s_audio_interpolated_sequence.jpg" alt="5bcf5bf5-9002-42a3-919b-c7ad33c2ca7c" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_033411_5bcf5bf5_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 03:34:11</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> rain continues to</div></div>
+                <div class="clip-id"><code>ID: 5bcf5bf5</code> | <code>Parent: faf96887</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/5bcf5bf5-9002-42a3-919b-c7ad33c2ca7c.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_033443_7b30f724_720p_5s_silent_interpolated_sequence.jpg" alt="7b30f724-5914-490a-b2a9-d4d2faa6678d" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_033443_7b30f724_720p_5s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 03:34:43</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 7b30f724</code> | <code>Parent: 321e14c0</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/7b30f724-5914-490a-b2a9-d4d2faa6678d.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_033605_afa81d04_draft_5s_audio_interpolated_sequence.jpg" alt="afa81d04-c827-4766-82e9-c1abb76022ca" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_033605_afa81d04_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 03:36:05</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> a lone figure slowly</div></div>
+                <div class="clip-id"><code>ID: afa81d04</code> | <code>Parent: d83197d7</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/afa81d04-c827-4766-82e9-c1abb76022ca.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_033653_c52c52ca_draft_5s_audio_interpolated_sequence.jpg" alt="c52c52ca-9874-4ede-924d-941cd934ac55" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_033653_c52c52ca_draft_5s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 03:36:53</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the numerous red and</div></div>
+                <div class="clip-id"><code>ID: c52c52ca</code> | <code>Parent: 599bd60e</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/c52c52ca-9874-4ede-924d-941cd934ac55.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_033922_6750a5d1_720p_5s_audio_sound_train_arrives_man_runs_down_stairs.jpg" alt="6750a5d1-dcd5-4ece-ad50-6b3297a80952" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_033922_6750a5d1_720p_5s_audio_sound_train_arrives_man_runs_down_stairs.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-20 03:39:22</div>
+                <div class="prompt-container"><div class="aud-prompt">🔊 <strong>Audio:</strong> foot steps running down stairs</div></div>
+                <div class="clip-id"><code>ID: 6750a5d1</code> | <code>Parent: 9ff807e6</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/6750a5d1-dcd5-4ece-ad50-6b3297a80952.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_035846_b7dc3595_720p_9s_audio_interpolated_sequence.jpg" alt="b7dc3595-29af-4f5a-a127-7409cfcc7299" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_035846_b7dc3595_720p_9s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 03:58:46</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the two figures walk</div></div>
+                <div class="clip-id"><code>ID: b7dc3595</code> | <code>Parent: fbc3fd96</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/b7dc3595-29af-4f5a-a127-7409cfcc7299.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_042303_9c7af8fd_720p_9s_audio_interpolated_sequence.jpg" alt="9c7af8fd-b5ee-46a9-96ce-2e05cb333334" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_042303_9c7af8fd_720p_9s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 04:23:03</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 9c7af8fd</code> | <code>Parent: 76b22247</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/9c7af8fd-b5ee-46a9-96ce-2e05cb333334.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_045239_8bc45974_720p_9s_audio_interpolated_sequence.jpg" alt="8bc45974-56d0-448a-8aa8-2ac151b2c9ff" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_045239_8bc45974_720p_9s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 04:52:39</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the man on the red</div></div>
+                <div class="clip-id"><code>ID: 8bc45974</code> | <code>Parent: ef876320</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/8bc45974-56d0-448a-8aa8-2ac151b2c9ff.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_045322_c0323bcf_720p_14s_audio_interpolated_sequence.jpg" alt="c0323bcf-ba3e-42ed-90c2-c118e0d4b49b" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_045322_c0323bcf_720p_14s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 04:53:22</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: c0323bcf</code> | <code>Parent: da1c997e</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/c0323bcf-ba3e-42ed-90c2-c118e0d4b49b.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_050129_4351bc7a_720p_18s_silent_interpolated_sequence.jpg" alt="4351bc7a-23e7-4e74-9136-56dbb3276426" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_050129_4351bc7a_720p_18s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 05:01:29</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 4351bc7a</code> | <code>Parent: c0323bcf</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/4351bc7a-23e7-4e74-9136-56dbb3276426.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="true">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_064257_84c43938_720p_9s_audio_tvs_play_water_ocean_atlantis_lost_city.jpg" alt="84c43938-2b51-45e5-81ac-08065830e752" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_064257_84c43938_720p_9s_audio_tvs_play_water_ocean_atlantis_lost_city.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-audio">🔊 Audio</span></div>
+                <div class="timestamp">📅 2025-10-20 06:42:57</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> tvs play water ocean atlantis, lost city of atlantis, afrofuturism</div><div class="aud-prompt">🔊 <strong>Audio:</strong> drones tatic, harmonies waves, ocean peace gates, drone, calm</div></div>
+                <div class="clip-id"><code>ID: 84c43938</code> | <code>Parent: d69a8a04</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/84c43938-2b51-45e5-81ac-08065830e752.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_064323_b38a6302_720p_9s_audio_interpolated_sequence.jpg" alt="b38a6302-b807-4d04-a680-bf59d1d61b91" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_064323_b38a6302_720p_9s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 06:43:23</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: b38a6302</code> | <code>Parent: c64f8eae</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/b38a6302-b807-4d04-a680-bf59d1d61b91.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_064916_464b4dcc_720p_23s_audio_interpolated_sequence.jpg" alt="464b4dcc-a3ec-4ddb-8606-e5e5ddb4a76b" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_064916_464b4dcc_720p_23s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 06:49:16</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 464b4dcc</code> | <code>Parent: 52bdeacb</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/464b4dcc-a3ec-4ddb-8606-e5e5ddb4a76b.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_065914_d06fff56_720p_29s_audio_interpolated_sequence.jpg" alt="d06fff56-177c-4592-bc05-093cbc919190" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_065914_d06fff56_720p_29s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 06:59:14</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: d06fff56</code> | <code>Parent: 84a456a3</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/d06fff56-177c-4592-bc05-093cbc919190.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_070137_60ea25fc_720p_9s_audio_interpolated_sequence.jpg" alt="60ea25fc-107b-4e33-969a-d58420da0a8f" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_070137_60ea25fc_720p_9s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 07:01:37</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 60ea25fc</code> | <code>Parent: 1ab410bd</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/60ea25fc-107b-4e33-969a-d58420da0a8f.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_071057_c2a64680_720p_14s_audio_interpolated_sequence.jpg" alt="c2a64680-e24f-4062-9880-926b79919d3b" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_071057_c2a64680_720p_14s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 07:10:57</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: c2a64680</code> | <code>Parent: 60ea25fc</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/c2a64680-e24f-4062-9880-926b79919d3b.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_071957_35855d8a_720p_14s_silent_interpolated_sequence.jpg" alt="35855d8a-df5b-495b-95a1-292379da861e" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_071957_35855d8a_720p_14s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 07:19:57</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 35855d8a</code> | <code>Parent: e4d15aa4</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/35855d8a-df5b-495b-95a1-292379da861e.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_072308_447a4780_720p_9s_audio_ocean_light_heartbreak_heart_soul_drone.jpg" alt="447a4780-d3b7-497c-9c2f-14e13baf4f11" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_072308_447a4780_720p_9s_audio_ocean_light_heartbreak_heart_soul_drone.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 07:23:08</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the glowing red</div></div>
+                <div class="clip-id"><code>ID: 447a4780</code> | <code>Parent: d847a1b8</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/447a4780-d3b7-497c-9c2f-14e13baf4f11.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_073316_10440c21_720p_9s_silent_interpolated_sequence.jpg" alt="10440c21-ff0a-44ac-ab9a-50d437940343" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_073316_10440c21_720p_9s_silent_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 07:33:16</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 10440c21</code> | <code>Parent: c9627268</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/10440c21-ff0a-44ac-ab9a-50d437940343.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_073932_92cc2431_720p_9s_audio_interpolated_sequence.jpg" alt="92cc2431-784b-4ed1-a533-0ab517e3ea59" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_073932_92cc2431_720p_9s_audio_interpolated_sequence.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 07:39:32</div>
+                <div class="prompt-container"><div class="vis-prompt">🎞 <em>Keyframed Visual Continuity</em></div></div>
+                <div class="clip-id"><code>ID: 92cc2431</code> | <code>Parent: 80b32fdf</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/92cc2431-784b-4ed1-a533-0ab517e3ea59.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+        <div class="card" data-collection="MARKOV_POET" data-audio="false">
+            <div class="media-container">
+                <img src="MARKOV_POET/thumbnails/20251020_074433_882db957_720p_9s_silent_tamborine_echo_waves_ocean_drone_beat_mi.jpg" alt="882db957-5a5f-4f82-a572-f9564c9b0188" loading="lazy" />
+                <video src="MARKOV_POET/videos/20251020_074433_882db957_720p_9s_silent_tamborine_echo_waves_ocean_drone_beat_mi.mp4" controls preload="none"></video>
+            </div>
+            <div class="card-body">
+                <div class="badges"><span class="badge badge-coll">MARKOV_POET</span> <span class="badge badge-dur">5s</span> <span class="badge badge-silent">🔇 Silent</span></div>
+                <div class="timestamp">📅 2025-10-20 07:44:33</div>
+                <div class="prompt-container"><div class="vis-prompt">👁 <strong>Visual:</strong> the man slowly lifts</div></div>
+                <div class="clip-id"><code>ID: 882db957</code> | <code>Parent: f91d5823</code></div>
+                <a class="receipt-link" href="MARKOV_POET/receipts/882db957-5a5f-4f82-a572-f9564c9b0188.md" target="_blank">View Lineage Receipt 🧾</a>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        function filterGrid(coll) {
+            document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('.card').forEach(card => {
+                if (coll === 'all' || card.dataset.collection === coll) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        function filterAudio() {
+            document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('.card').forEach(card => {
+                card.style.display = card.dataset.audio === 'true' ? 'flex' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

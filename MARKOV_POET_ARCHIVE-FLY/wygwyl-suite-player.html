@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WYGWYL Suite Player & 6-Dimensional LEGOS Linter</title>
+<style>
+  :root {
+    --paper: #ffffff;
+    --ink: #000000;
+    --dim: #5b5b5b;
+    --line: #000000;
+    --blue: #3aa7ff;
+    --soft: #f4f4f4;
+    --panel-bg: #fafafa;
+    --accent-red: #d03535;
+    --green: #238636;
+    --amber: #b07000;
+    --lego-l: #2b5c8f;
+    --lego-e: #853030;
+    --lego-g: #256b38;
+    --lego-o: #825a1b;
+    --lego-s: #5c327a;
+    --lego-u: #1c6868;
+  }
+  * { box-sizing: border-box; border-radius: 0 !important; margin: 0; padding: 0; }
+  html, body {
+    min-height: 100%;
+    background: var(--paper);
+    color: var(--ink);
+    font: 13px/1.42 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: 0;
+  }
+  button, a { font: inherit; color: inherit; }
+  a { text-decoration: none; }
+  button, .btn {
+    border: 1px solid var(--line);
+    background: var(--paper);
+    padding: 5px 9px;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+  button:hover, .btn:hover, button:focus-visible, .btn:focus-visible {
+    background: var(--ink);
+    color: var(--paper);
+    outline: 0;
+  }
+  button.active-btn {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr) auto auto;
+    gap: 12px;
+    align-items: center;
+    border-bottom: 2px solid var(--line);
+    background: var(--paper);
+    padding: 8px 16px;
+  }
+  .brand { font-weight: 900; letter-spacing: .08em; white-space: nowrap; font-size: 14px; }
+  .dot { display: inline-block; width: 6px; height: 6px; background: var(--ink); margin-right: 8px; vertical-align: 1px; }
+  #play { width: 40px; height: 30px; display: grid; place-items: center; font-size: 14px; font-weight: 900; }
+  #title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--dim); font-weight: 700; }
+  .time { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 700; }
+  .state { font-size: 11px; color: var(--dim); white-space: nowrap; }
+
+  /* Filters Toolbar */
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    padding: 6px 12px;
+    background: var(--soft);
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 11px;
+  }
+  .filter-group { display: flex; gap: 4px; align-items: center; }
+  .filter-label { font-weight: 800; color: var(--dim); margin-right: 2px; text-transform: uppercase; }
+
+  main {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(420px, 1fr);
+    min-height: calc(100vh - 84px);
+  }
+
+  #stage {
+    border-right: 1px solid var(--line);
+    padding: 12px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--paper);
+  }
+
+  .player-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: 2px solid var(--line);
+    background: #000;
+    overflow: hidden;
+  }
+
+  #activeVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+    display: block;
+  }
+
+  .under {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+    align-items: center;
+    color: var(--dim);
+    font-size: 12px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 6px;
+  }
+  .under b { color: var(--ink); }
+
+  #timeline {
+    position: relative;
+    height: 36px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    cursor: crosshair;
+    background: var(--soft);
+  }
+  .seg { position: absolute; top: 17px; height: 10px; background: var(--blue); }
+  .poem-seg { position: absolute; top: 7px; height: 16px; background: var(--ink); opacity: 0.85; }
+  .mark { position: absolute; top: 0; bottom: 0; width: 1px; background: #999; }
+  #head { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--accent-red); z-index: 10; }
+
+  #chapters {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .chapter {
+    display: grid;
+    grid-template-columns: 3ch minmax(0, 1fr);
+    gap: 6px;
+    text-align: left;
+    border: 1px solid var(--line);
+    border-top: 0;
+    border-left: 0;
+    background: var(--paper);
+    padding: 6px 8px;
+    cursor: pointer;
+  }
+  .chapter b { font-weight: 800; }
+  .chapter span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--dim); }
+  .chapter.on { background: var(--ink); color: var(--paper); }
+  .chapter.on span:last-child { color: var(--paper); }
+
+  /* Mapped Shot Reel */
+  .reel-section {
+    margin-top: 6px;
+    border-top: 2px solid var(--line);
+    padding-top: 8px;
+    flex-grow: 1;
+  }
+  .reel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .reel-title { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+  .reel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 8px;
+    max-height: 240px;
+    overflow-y: auto;
+    border: 1px solid var(--line);
+    padding: 6px;
+    background: var(--soft);
+  }
+  .shot-card {
+    border: 1px solid var(--line);
+    background: var(--paper);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .shot-card:hover { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
+  .shot-card.active-shot { border: 2px solid var(--ink); background: #eee; }
+  .shot-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    background: #000;
+  }
+  .shot-meta {
+    padding: 5px;
+    font-size: 10px;
+    line-height: 1.3;
+  }
+  .shot-id { font-weight: 800; display: flex; justify-content: space-between; }
+  .shot-prompt-preview {
+    color: var(--dim);
+    margin-top: 2px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .badge-linter {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    font-size: 9px;
+    font-weight: 900;
+    padding: 1px 4px;
+    color: #fff;
+    letter-spacing: 0.05em;
+  }
+  .badge-pass { background: var(--green); }
+  .badge-drift { background: var(--amber); }
+  .badge-fail { background: var(--accent-red); }
+
+  /* Right Column Context */
+  #context {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--panel-bg);
+    max-height: calc(100vh - 84px);
+    overflow-y: auto;
+  }
+  .panel {
+    border-bottom: 1px solid var(--line);
+    padding: 8px 12px;
+  }
+  .panel-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 3px;
+    margin-bottom: 6px;
+  }
+  .panel h2 {
+    font-size: 11px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    border-bottom: 0;
+    margin-bottom: 0;
+  }
+  .toggle-group {
+    display: flex;
+    gap: 3px;
+  }
+  .toggle-btn {
+    padding: 2px 6px;
+    font-size: 10px;
+    font-weight: 800;
+  }
+
+  #fullVerseBox {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 8px;
+    font-size: 12px;
+    line-height: 1.45;
+    margin-bottom: 6px;
+    color: #111;
+    font-style: italic;
+  }
+
+  #voice {
+    font-size: 15px;
+    line-height: 1.3;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+  }
+  #screenText {
+    margin-top: 4px;
+    color: var(--dim);
+    font-weight: 700;
+    font-size: 11px;
+  }
+
+  #poemLines {
+    max-height: 11svh;
+    overflow-y: auto;
+    border: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .line {
+    padding: 4px 6px;
+    color: var(--dim);
+    cursor: pointer;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 11px;
+  }
+  .line:last-child { border-bottom: 0; }
+  .line b { display: block; color: var(--ink); font-size: 11px; }
+  .line.now { background: var(--ink); color: var(--paper); }
+  .line.now b { color: var(--paper); }
+
+  /* LEGOS Grid */
+  .legos-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 11px;
+  }
+  .lego-item {
+    border: 1px solid var(--line);
+    padding: 6px 8px;
+    background: var(--paper);
+  }
+  .lego-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3px;
+  }
+  .lego-tag {
+    font-weight: 900;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 1px 5px;
+    color: var(--paper);
+  }
+  .tag-l { background: var(--lego-l); }
+  .tag-e { background: var(--lego-e); }
+  .tag-g { background: var(--lego-g); }
+  .tag-o { background: var(--lego-o); }
+  .tag-s { background: var(--lego-s); }
+  .tag-u { background: var(--lego-u); }
+  
+  .dim-verdict {
+    font-size: 9px;
+    font-weight: 800;
+    padding: 1px 4px;
+    border: 1px solid var(--line);
+  }
+  .verdict-pass { background: #e6ffec; color: var(--green); border-color: var(--green); }
+  .verdict-drift { background: #fffbe6; color: var(--amber); border-color: var(--amber); }
+  .verdict-mismatch { background: #ffeef0; color: var(--accent-red); border-color: var(--accent-red); }
+
+  .lego-desc { line-height: 1.35; color: var(--ink); }
+
+  /* Linter Verdict Box */
+  #linterScoreCard {
+    border: 1px solid var(--line);
+    background: var(--paper);
+    padding: 6px 8px;
+    margin-bottom: 8px;
+    font-size: 11px;
+  }
+  .score-bar {
+    height: 6px;
+    background: #e0e0e0;
+    margin: 4px 0;
+  }
+  .score-fill {
+    height: 100%;
+    background: var(--green);
+  }
+
+  /* Contact Sheet Preview */
+  .contact-preview-container {
+    margin-top: 6px;
+    border: 1px solid var(--line);
+    background: #000;
+    overflow: hidden;
+  }
+  #contactImg {
+    width: 100%;
+    display: block;
+    object-fit: contain;
+  }
+
+  @media(max-width: 900px) {
+    main { grid-template-columns: 1fr; }
+    #stage { border-right: 0; border-bottom: 1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><span class="dot"></span>WYGWYL 6-DIMENSIONAL LEGOS LINTER SURFACE</div>
+  <a href="wygwyl-directors-cut.html" class="btn" style="background:var(--accent-red); color:#fff;" target="_blank">DIRECTOR'S CUT FILM</a>
+  <a href="wygwyl-coverage-matrix.html" class="btn" style="background:#111; color:#fff;" target="_blank">MAP OF COVERAGE</a>
+  <button id="play" type="button" aria-label="Play">PLAY</button>
+  <div id="title">Loading 14-Poem Suite</div>
+  <div class="time"><span id="clock">00:00.0</span> / <span id="dur">24:00.1</span></div>
+  <div class="state" id="state">initializing mapping</div>
+</header>
+
+<div class="filter-bar">
+  <div class="filter-group">
+    <span class="filter-label">Linter:</span>
+    <button class="active-btn" onclick="setFilter('linter', 'all')">ALL</button>
+    <button onclick="setFilter('linter', 'CANONICAL_FIT')">CANONICAL FIT</button>
+    <button onclick="setFilter('linter', 'METAPHORICAL_DRIFT')">METAPHORICAL</button>
+    <button onclick="setFilter('linter', 'ANACHRONISTIC_OUTLIER')">OUTLIER (FAIL)</button>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Sound:</span>
+    <button class="active-btn" onclick="setFilter('audio', 'all')">ALL</button>
+    <button onclick="setFilter('audio', 'sound')">AUDIO</button>
+    <button onclick="setFilter('audio', 'silent')">SILENT</button>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Duration:</span>
+    <button class="active-btn" onclick="setFilter('duration', 'all')">ALL</button>
+    <button onclick="setFilter('duration', '5')">5S</button>
+    <button onclick="setFilter('duration', 'mid')">9S-14S</button>
+    <button onclick="setFilter('duration', 'long')">15S+</button>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">View:</span>
+    <button class="active-btn" id="viewModeBtn" onclick="toggleViewMode()">THUMBNAIL</button>
+  </div>
+</div>
+
+<main>
+  <section id="stage">
+    <div class="player-wrapper">
+      <video id="activeVideo" controls preload="auto" playsinline></video>
+    </div>
+    <div class="under">
+      <span id="caption">Select a poem suite or shot to begin playback</span>
+      <span>SHOT <b id="shotIndex">0</b> / <b id="shotTotal">0</b></span>
+    </div>
+    <div id="timeline" title="Click to seek timeline"></div>
+    <div id="chapters"></div>
+
+    <div class="reel-section">
+      <div class="reel-header">
+        <span class="reel-title" id="reelTitle">Evaluated Video Shots for Active Chapter</span>
+        <span id="reelCount" style="color:var(--dim); font-size:11px;">0 shots</span>
+      </div>
+      <div class="reel-grid" id="shotReel"></div>
+    </div>
+  </section>
+
+  <aside id="context">
+    <div class="panel">
+      <div class="panel-header-bar">
+        <h2>Active Chapter Poem Verse (Ground Truth)</h2>
+        <span style="font-size:10px; color:var(--dim); font-weight:700;" id="poemNumTitle">-</span>
+      </div>
+      <div id="fullVerseBox">Loading full poem verse...</div>
+      <div id="voice">Tap play or select a poem suite.</div>
+      <div id="screenText">Ground truth verse evaluated across Location, Entity, Goal, Obstacle, Shift, and Solution.</div>
+    </div>
+
+    <div class="panel">
+      <h2>Poem EDL Lines (Click to Seek)</h2>
+      <div id="poemLines">Loading poem stanzas...</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header-bar">
+        <h2>LEGOS Structure & Linter Audit</h2>
+        <div class="toggle-group">
+          <button class="toggle-btn active-btn" id="btnPoemLegos" onclick="switchLegosMode('poem')">POEM GROUND TRUTH</button>
+          <button class="toggle-btn" id="btnShotLegos" onclick="switchLegosMode('shot')">VIDEO SHOT FIT</button>
+        </div>
+      </div>
+
+      <div id="linterScoreCard">
+        <div style="display:flex; justify-content:space-between; font-weight:800;">
+          <span id="linterScoreTitle">LINTER POEM FIT SCORE</span>
+          <span id="linterScoreValue">100%</span>
+        </div>
+        <div class="score-bar"><div class="score-fill" id="linterScoreFill" style="width:100%;"></div></div>
+        <div style="font-size:10px; color:var(--dim); margin-top:2px;" id="linterVerdictLabel">CANONICAL GROUND TRUTH</div>
+      </div>
+
+      <div class="legos-container" id="legosBox">
+        <div class="lego-item">
+          <div class="lego-header-row">
+            <span class="lego-tag tag-l">LOCATION (L)</span>
+            <span class="dim-verdict verdict-pass" id="vL">PASS</span>
+          </div>
+          <div class="lego-desc" id="legoL">-</div>
+        </div>
+        <div class="lego-item">
+          <div class="lego-header-row">
+            <span class="lego-tag tag-e">ENTITY (E)</span>
+            <span class="dim-verdict verdict-pass" id="vE">PASS</span>
+          </div>
+          <div class="lego-desc" id="legoE">-</div>
+        </div>
+        <div class="lego-item">
+          <div class="lego-header-row">
+            <span class="lego-tag tag-g">GOAL (G)</span>
+            <span class="dim-verdict verdict-pass" id="vG">PASS</span>
+          </div>
+          <div class="lego-desc" id="legoG">-</div>
+        </div>
+        <div class="lego-item">
+          <div class="lego-header-row">
+            <span class="lego-tag tag-o">OBSTACLE (O)</span>
+            <span class="dim-verdict verdict-pass" id="vO">PASS</span>
+          </div>
+          <div class="lego-desc" id="legoO">-</div>
+        </div>
+        <div class="lego-item">
+          <div class="lego-header-row">
+            <span class="lego-tag tag-s">SHIFT (S)</span>
+            <span class="dim-verdict verdict-pass" id="vS">PASS</span>
+          </div>
+          <div class="lego-desc" id="legoS">-</div>
+        </div>
+        <div class="lego-item">
+          <div class="lego-header-row">
+            <span class="lego-tag tag-u">SOLUTION (U)</span>
+            <span class="dim-verdict verdict-pass" id="vU">PASS</span>
+          </div>
+          <div class="lego-desc" id="legoU">-</div>
+        </div>
+      </div>
+
+      <div class="contact-preview-container" id="contactBox" style="display:none; margin-top:8px;">
+        <div style="padding:3px 6px; background:#111; color:#aaa; font-size:10px; font-weight:700;">TEMPORAL 8-FRAME CONTACT SHEET (4X2)</div>
+        <img id="contactImg" src="" alt="Contact Sheet" />
+      </div>
+    </div>
+  </aside>
+</main>
+
+<script>
+let SUITE_DATA = null;
+let currentSuiteIdx = 0;
+let activeShotIdx = 0;
+let isPlaying = false;
+let currentTime = 0;
+let TOTAL_DURATION = 1440.07;
+let viewContactSheets = false;
+let legosMode = 'poem'; // 'poem' or 'shot'
+let currentActiveShot = null;
+
+const FILTERS = {
+  linter: 'all',
+  audio: 'all',
+  hdr: 'all',
+  duration: 'all'
+};
+
+const $ = id => document.getElementById(id);
+const videoEl = $("activeVideo");
+
+function fmt(t) {
+  t = Math.max(0, t || 0);
+  const m = Math.floor(t / 60);
+  const s = t - m * 60;
+  return String(m).padStart(2, "0") + ":" + (s < 10 ? "0" : "") + s.toFixed(1);
+}
+
+async function init() {
+  try {
+    const res = await fetch("wygwyl_suite_mapping.json");
+    if (!res.ok) throw new Error("Could not load wygwyl_suite_mapping.json");
+    SUITE_DATA = await res.json();
+    $("state").textContent = SUITE_DATA.suites.length + " suites loaded (" + SUITE_DATA.total_available_shots + " shots)";
+    
+    buildTimeline();
+    buildChapters();
+    selectSuite(0);
+  } catch (err) {
+    $("state").textContent = "Error: " + err.message;
+  }
+}
+
+function setFilter(type, val) {
+  FILTERS[type] = val;
+  const parent = event.target.parentElement;
+  parent.querySelectorAll("button").forEach(b => b.classList.remove("active-btn"));
+  event.target.classList.add("active-btn");
+  buildReel(SUITE_DATA.suites[currentSuiteIdx]);
+}
+
+function toggleViewMode() {
+  viewContactSheets = !viewContactSheets;
+  $("viewModeBtn").textContent = viewContactSheets ? "CONTACT SHEET (4X2)" : "THUMBNAIL";
+  buildReel(SUITE_DATA.suites[currentSuiteIdx]);
+}
+
+function switchLegosMode(mode) {
+  legosMode = mode;
+  $("btnPoemLegos").classList.toggle("active-btn", mode === 'poem');
+  $("btnShotLegos").classList.toggle("active-btn", mode === 'shot');
+  renderLegos();
+}
+
+function setVerdictBadge(elId, verdict) {
+  const el = $(elId);
+  if (!el) return;
+  el.textContent = verdict || "PASS";
+  el.className = "dim-verdict " + (
+    verdict === "PASS" ? "verdict-pass" :
+    verdict === "DRIFT" ? "verdict-drift" : "verdict-mismatch"
+  );
+}
+
+function renderLegos() {
+  const suite = SUITE_DATA.suites[currentSuiteIdx];
+  if (legosMode === 'poem') {
+    $("linterScoreTitle").textContent = "POEM GROUND TRUTH BASELINE";
+    $("linterScoreValue").textContent = "100%";
+    $("linterScoreFill").style.width = "100%";
+    $("linterScoreFill").style.background = "var(--green)";
+    $("linterVerdictLabel").textContent = "GROUND TRUTH: " + suite.number + " " + suite.title;
+
+    setVerdictBadge("vL", "PASS");
+    setVerdictBadge("vE", "PASS");
+    setVerdictBadge("vG", "PASS");
+    setVerdictBadge("vO", "PASS");
+    setVerdictBadge("vS", "PASS");
+    setVerdictBadge("vU", "PASS");
+
+    const pl = suite.poem_legos || {};
+    $("legoL").textContent = pl.location_L || "-";
+    $("legoE").textContent = pl.entity_E || "-";
+    $("legoG").textContent = pl.goal_G || "-";
+    $("legoO").textContent = pl.obstacle_O || "-";
+    $("legoS").textContent = pl.shift_S || "-";
+    $("legoU").textContent = pl.solution_U || "-";
+  } else {
+    const s = currentActiveShot || {};
+    const score = s.linter_score !== undefined ? s.linter_score : 50;
+    const cat = s.linter_verdict || "METAPHORICAL_DRIFT";
+    
+    $("linterScoreTitle").textContent = "SHOT-TO-POEM FIT SCORE";
+    $("linterScoreValue").textContent = score + "%";
+    $("linterScoreFill").style.width = score + "%";
+    $("linterScoreFill").style.background = score >= 65 ? "var(--green)" : (score >= 35 ? "var(--amber)" : "var(--accent-red)");
+    $("linterVerdictLabel").textContent = (s.linter_label || cat) + " · " + (s.visual_category || 'SHOT');
+
+    const d = s.linter_dimensions || {};
+    setVerdictBadge("vL", (d.location_L || {}).verdict || "PASS");
+    setVerdictBadge("vE", (d.entity_E || {}).verdict || "PASS");
+    setVerdictBadge("vG", (d.goal_G || {}).verdict || "PASS");
+    setVerdictBadge("vO", (d.obstacle_O || {}).verdict || "PASS");
+    setVerdictBadge("vS", (d.shift_S || {}).verdict || "PASS");
+    setVerdictBadge("vU", (d.solution_U || {}).verdict || "PASS");
+
+    $("legoL").textContent = s.location_L || "-";
+    $("legoE").textContent = s.entity_E || "-";
+    $("legoG").textContent = s.goal_G || "-";
+    $("legoO").textContent = s.obstacle_O || "-";
+    $("legoS").textContent = s.shift_S || "-";
+    $("legoU").textContent = s.solution_U || "-";
+  }
+}
+
+function buildTimeline() {
+  const tl = $("timeline");
+  tl.innerHTML = '<div id="head"></div>';
+  
+  SUITE_DATA.suites.forEach((s, idx) => {
+    const dur = TOTAL_DURATION;
+    const c0 = s.container[0], c1 = s.container[1];
+    const p0 = s.poem_range[0], p1 = s.poem_range[1];
+
+    const seg = document.createElement("div");
+    seg.className = "seg";
+    seg.style.left = (c0 / dur * 100) + "%";
+    seg.style.width = ((c1 - c0) / dur * 100) + "%";
+    tl.appendChild(seg);
+
+    const poem = document.createElement("div");
+    poem.className = "poem-seg";
+    poem.style.left = (p0 / dur * 100) + "%";
+    poem.style.width = ((p1 - p0) / dur * 100) + "%";
+    tl.appendChild(poem);
+
+    const mark = document.createElement("div");
+    mark.className = "mark";
+    mark.style.left = (c0 / dur * 100) + "%";
+    tl.appendChild(mark);
+  });
+
+  tl.addEventListener("click", e => {
+    const r = tl.getBoundingClientRect();
+    const t = (e.clientX - r.left) / r.width * TOTAL_DURATION;
+    seekTime(t);
+  });
+}
+
+function buildChapters() {
+  const box = $("chapters");
+  box.innerHTML = "";
+  SUITE_DATA.suites.forEach((s, idx) => {
+    const b = document.createElement("button");
+    b.className = "chapter";
+    b.dataset.idx = idx;
+    b.innerHTML = '<b>' + s.number + '</b><span>' + s.title + '</span>';
+    b.onclick = () => {
+      seekTime(s.container[0] + 0.1);
+      selectSuite(idx);
+    };
+    box.appendChild(b);
+  });
+}
+
+function selectSuite(idx) {
+  currentSuiteIdx = idx;
+  const suite = SUITE_DATA.suites[idx];
+  
+  document.querySelectorAll(".chapter").forEach((b, i) => {
+    b.classList.toggle("on", i === idx);
+  });
+
+  $("title").textContent = suite.number + " " + suite.title;
+  $("poemNumTitle").textContent = suite.number + " · " + fmt(suite.container[0]) + " - " + fmt(suite.container[1]);
+  $("fullVerseBox").textContent = suite.full_verse ? `“${suite.full_verse}”` : "(No full verse text available)";
+
+  buildPoem(suite);
+  buildReel(suite);
+  renderLegos();
+}
+
+function buildPoem(suite) {
+  const box = $("poemLines");
+  box.innerHTML = "";
+
+  if (!suite.stanzas || suite.stanzas.length === 0) {
+    box.innerHTML = '<div style="padding:8px; color:var(--dim);">No poem lines found.</div>';
+    return;
+  }
+
+  suite.stanzas.forEach((st, sIdx) => {
+    const d = document.createElement("div");
+    d.className = "line";
+    d.dataset.idx = sIdx;
+    d.innerHTML = (st.screen_text ? '<b>' + st.screen_text + '</b>' : '') + (st.voiceover || '(Visual transition)');
+    d.onclick = () => {
+      document.querySelectorAll("#poemLines .line").forEach(l => l.classList.remove("now"));
+      d.classList.add("now");
+      $("voice").textContent = st.voiceover || st.screen_text || "Visual transition";
+      $("screenText").textContent = st.screen_text ? ("SCREEN: " + st.screen_text) : "Picture leads";
+    };
+    box.appendChild(d);
+  });
+
+  if (box.firstChild) {
+    box.firstChild.classList.add("now");
+    $("voice").textContent = suite.stanzas[0].voiceover || suite.stanzas[0].screen_text || "Visual beat";
+    $("screenText").textContent = suite.stanzas[0].screen_text ? ("SCREEN: " + suite.stanzas[0].screen_text) : "Picture leads";
+  }
+}
+
+function filterShots(shots) {
+  return shots.filter(s => {
+    if (FILTERS.linter !== 'all' && s.linter_verdict !== FILTERS.linter) return false;
+
+    if (FILTERS.audio === 'sound' && !s.has_audio_bool && !s.has_audio) return false;
+    if (FILTERS.audio === 'silent' && (s.has_audio_bool || s.has_audio)) return false;
+
+    const dur = s.duration_num || parseFloat(s.duration_seconds) || 5;
+    if (FILTERS.duration === '5' && dur > 7) return false;
+    if (FILTERS.duration === 'mid' && (dur < 8 || dur > 14)) return false;
+    if (FILTERS.duration === 'long' && dur < 15) return false;
+
+    return true;
+  });
+}
+
+function buildReel(suite) {
+  const box = $("shotReel");
+  box.innerHTML = "";
+  
+  const rawShots = suite.matched_shots || [];
+  const shots = filterShots(rawShots);
+
+  $("reelCount").textContent = shots.length + " / " + rawShots.length + " candidate shots";
+  $("shotTotal").textContent = shots.length;
+
+  if (shots.length === 0) {
+    box.innerHTML = '<div style="padding:12px; color:var(--dim); font-size:11px;">No candidate shots match current linter filter.</div>';
+    return;
+  }
+
+  shots.forEach((s, sIdx) => {
+    const card = document.createElement("div");
+    card.className = "shot-card" + (sIdx === 0 ? " active-shot" : "");
+    card.dataset.idx = sIdx;
+
+    const coll = s.collection_name || "MARKOV_POET";
+    const thumbPath = viewContactSheets && s.contact_sheet_rel ? s.contact_sheet_rel : coll + "/thumbnails/" + s.filename_stem + ".jpg";
+    const vidPath = coll + "/videos/" + s.filename_stem + ".mp4";
+
+    const score = s.linter_score !== undefined ? s.linter_score : 50;
+    const badgeClass = score >= 65 ? "badge-pass" : (score >= 35 ? "badge-drift" : "badge-fail");
+    const badgeText = score >= 65 ? `${score}% FIT` : (score >= 35 ? `${score}% DRIFT` : `${score}% OUTLIER`);
+
+    const soundTag = (s.has_audio_bool || s.has_audio) ? "[SOUND]" : "[SILENT]";
+    const patchTag = s.patch_id || `P${sIdx+1}`;
+
+    card.innerHTML = `
+      <span class="badge-linter ${badgeClass}">${badgeText}</span>
+      <img class="shot-thumb" src="${thumbPath}" alt="${s.id}" loading="lazy" />
+      <div class="shot-meta">
+        <div class="shot-id"><span>${patchTag} · ${s.id ? s.id.substring(0, 8) : 'unknown'}</span> <span>${soundTag}</span></div>
+        <div style="font-weight:700; color:var(--blue); font-size:9px;">${s.visual_category || 'SHOT'} · ${s.duration_seconds || '5'}s</div>
+        <div class="shot-prompt-preview">${s.location_L || s.visual_prompt || 'Visual Continuity'}</div>
+      </div>
+    `;
+
+    card.onclick = () => {
+      document.querySelectorAll(".shot-card").forEach(c => c.classList.remove("active-shot"));
+      card.classList.add("active-shot");
+      loadShot(s, sIdx, vidPath);
+    };
+
+    box.appendChild(card);
+  });
+
+  if (shots.length > 0) {
+    const firstShot = shots[0];
+    const coll = firstShot.collection_name || "MARKOV_POET";
+    loadShot(firstShot, 0, coll + "/videos/" + firstShot.filename_stem + ".mp4");
+  }
+}
+
+function loadShot(shot, sIdx, vidPath) {
+  activeShotIdx = sIdx;
+  currentActiveShot = shot;
+  $("shotIndex").textContent = sIdx + 1;
+  $("activeVideo").src = vidPath;
+  $("caption").innerHTML = `<b>${SUITE_DATA.suites[currentSuiteIdx].title}</b> · [${shot.patch_id || 'P001'}] ${shot.id ? shot.id.substring(0,8) : 'SHOT'} · ${(shot.duration_seconds || 5)}s · ${shot.visual_category || 'SHOT'}`;
+
+  renderLegos();
+
+  if (shot.contact_sheet_rel) {
+    $("contactBox").style.display = "block";
+    $("contactImg").src = shot.contact_sheet_rel;
+  } else {
+    $("contactBox").style.display = "none";
+  }
+
+  if (isPlaying) {
+    videoEl.play().catch(()=>{});
+  }
+}
+
+function seekTime(t) {
+  currentTime = Math.max(0, Math.min(TOTAL_DURATION, t));
+  $("clock").textContent = fmt(currentTime);
+  $("head").style.left = (currentTime / TOTAL_DURATION * 100) + "%";
+
+  for (let i = 0; i < SUITE_DATA.suites.length; i++) {
+    const s = SUITE_DATA.suites[i];
+    if (currentTime >= s.container[0] && currentTime <= s.container[1]) {
+      if (i !== currentSuiteIdx) {
+        selectSuite(i);
+      }
+      break;
+    }
+  }
+}
+
+$("play").onclick = () => {
+  if (videoEl.paused) {
+    videoEl.play().catch(()=>{});
+    $("play").textContent = "PAUSE";
+    isPlaying = true;
+  } else {
+    videoEl.pause();
+    $("play").textContent = "PLAY";
+    isPlaying = false;
+  }
+};
+
+videoEl.onplay = () => { $("play").textContent = "PAUSE"; isPlaying = true; };
+videoEl.onpause = () => { $("play").textContent = "PLAY"; isPlaying = false; };
+
+document.addEventListener("keydown", e => {
+  if (e.code === "Space" && !/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) {
+    e.preventDefault();
+    $("play").click();
+  }
+});
+
+init();
+</script>
+</body>
+</html>

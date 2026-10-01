@@ -3,6 +3,9 @@ __pycache__/
 # 1.1GB of SAM cut-outs and 307MB of tracked masks: derived from the archive by
 # sam3_index.py and bodymask.py, regenerable, and far past what a repo should
 # carry. cut/out/held/pack/ IS committed — that is the web-sized extract.
-cut/out/elements/
+cut/out/elements/*
+# ...except the contact sheet written into it by cut/pf/door.py: without it THE
+# DOOR sends every visitor to a 404. It shows the web-sized twins in cut/out/thumbs.
+!cut/out/elements/index.html
 cut/bodycache/
 cut/.leadtmp/

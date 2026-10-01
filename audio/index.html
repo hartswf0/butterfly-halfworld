@@ -1,0 +1,167 @@
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AUDIO RADIOLOGY — every sound, imaged</title>
+<style>
+:root{--bg:#0a0a0b;--panel:#111114;--line:#26262c;--ink:#e8e6e1;--dim:#7a7a85;
+      --hot:#4ade80;--acc:#8fd8ff;--warn:#e5484d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}
+#bar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 10px;
+  background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:9}
+#bar b{letter-spacing:.22em;margin-right:6px}
+.btn{background:transparent;color:var(--ink);border:1px solid var(--line);padding:5px 9px;
+  font:10px/1 ui-monospace,monospace;letter-spacing:.09em;cursor:pointer;min-height:26px}
+.btn.on{background:var(--ink);color:var(--bg)}
+input,select{background:#000;border:1px solid var(--line);color:var(--ink);padding:5px 7px;
+  font:10px/1 ui-monospace,monospace;min-height:26px}
+#n{color:var(--dim);margin-left:auto}
+#cohort{padding:10px;border-bottom:1px solid var(--line);background:#08080a}
+#cohort canvas{width:100%;height:230px;display:block;background:#0c0c0e;border:1px solid var(--line)}
+.legend{color:var(--dim);font-size:9px;margin-top:5px;display:flex;gap:12px;flex-wrap:wrap}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px;padding:10px}
+.card{border:1px solid var(--line);background:var(--panel);cursor:pointer}
+.card img{width:100%;height:auto;display:block;background:#0c0c0e}
+.card .h{padding:5px 6px;border-top:1px solid var(--line);font-size:9px;word-break:break-all}
+.card .m{color:var(--dim);font-size:8.5px;margin-top:2px}
+.card:hover{border-color:var(--acc)}
+#big{position:fixed;inset:0;background:rgba(6,6,8,.94);z-index:40;display:none;
+  overflow:auto;padding:18px}
+#big.on{display:block}
+#big img{max-width:min(980px,100%);display:block;margin:0 auto;border:1px solid var(--line)}
+#big .meta{max-width:980px;margin:10px auto;color:var(--dim);font-size:10px;line-height:1.8}
+#big .meta b{color:var(--ink)}
+#close{position:fixed;right:16px;top:14px}
+audio{width:100%;max-width:980px;margin:10px auto;display:block}
+</style>
+<div id="bar">
+  <b>AUDIO RADIOLOGY</b>
+  <select id="fam"><option value="">all families</option></select>
+  <input id="q" placeholder="find…" size="14">
+  <select id="sort">
+    <option value="path">by path</option>
+    <option value="seconds">by length</option>
+    <option value="tempo_bpm">by tempo</option>
+    <option value="centroid_hz">by brightness</option>
+    <option value="harmonic_ratio">by harmonic ratio</option>
+    <option value="onsets_per_s">by onset density</option>
+    <option value="flatness">by noisiness</option>
+  </select>
+  <button class="btn" id="rev">▼</button>
+  <span id="n"></span>
+</div>
+<div id="cohort">
+  <canvas id="cv" width="1800" height="460"></canvas>
+  <div class="legend" id="lg"></div>
+</div>
+<div id="grid"></div>
+<div id="big"><button class="btn" id="close">CLOSE</button><div id="body"></div></div>
+<script>
+var R=[], FAM='', Q='', SORT='path', REV=false, COLS={};
+function esc(t){return (t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
+
+// physics and semantics live in separate files so neither pass can clobber the
+// other; the viewer joins them on path, and works fine when labels are absent
+Promise.all([
+  fetch('index.json').then(r=>r.json()),
+  fetch('labels.json').then(r=>r.json()).catch(()=>({}))
+]).then(([j,L])=>{
+  R=j; R.forEach(r=>{ var c=L[r.path]; if(c && !c.error) r.clap=c; });
+  var nl=R.filter(r=>r.clap).length;
+  if(nl) document.getElementById('bar').insertAdjacentHTML('beforeend',
+    '<span style="color:var(--hot);font-size:9px">'+nl+' labelled</span>');
+  var fams=[...new Set(R.map(r=>r.family))].sort();
+  var sel=document.getElementById('fam');
+  fams.forEach(f=>{var o=document.createElement('option');o.value=f;
+    o.textContent=f+' ('+R.filter(r=>r.family===f).length+')';sel.appendChild(o);});
+  // one hue per family, so the cohort plot is readable at a glance
+  fams.forEach((f,i)=>{COLS[f]='hsl('+Math.round(i*360/fams.length)+',70%,62%)';});
+  draw();
+}).catch(()=>{document.getElementById('n').textContent='no index.json — run cut/pf/audio_scan.py';});
+
+function view(){
+  var v=R.filter(r=>(!FAM||r.family===FAM) &&
+    (!Q||(r.path+' '+r.key+' '+(r.clap?(r.clap.earsketch+' '+
+       ['type','genre','character','motion'].map(a=>r.clap[a].label).join(' ')):''))
+       .toLowerCase().indexOf(Q)>=0));
+  v.sort((a,b)=>{var x=a[SORT],y=b[SORT];
+    return (typeof x==='string')?x.localeCompare(y):(x-y);});
+  if(REV) v.reverse();
+  return v;
+}
+function draw(){
+  var v=view();
+  document.getElementById('n').textContent=v.length+' of '+R.length+' imaged';
+  cohort(v);
+  var g=document.getElementById('grid'); g.innerHTML='';
+  v.slice(0,400).forEach(r=>{
+    var d=document.createElement('div'); d.className='card';
+    d.innerHTML='<img loading="lazy" src="'+esc(r.plate)+'" alt="">'
+      +'<div class="h">'+esc(r.name)
+      +'<div class="m">'+r.seconds.toFixed(2)+'s · '+Math.round(r.tempo_bpm)+'bpm · '
+      +esc(r.key)+' · '+Math.round(r.centroid_hz)+'Hz · H'+r.harmonic_ratio.toFixed(2)
+      +(r.truncated?' · TRUNC':'')
+      +(r.clap?('<br><span style="color:var(--hot)">'+esc(r.clap.earsketch||'')+'</span>'):'')
+      +'</div></div>';
+    d.onclick=()=>open_(r); g.appendChild(d);
+  });
+  if(v.length>400){var m=document.createElement('div');m.style.cssText='color:#7a7a85;padding:8px';
+    m.textContent='… '+(v.length-400)+' more — narrow the filter';g.appendChild(m);}
+}
+function cohort(v){
+  // THE POPULATION VIEW. One plate tells you about one sound; the cohort tells
+  // you what kind of library this is — where it clusters and what is an outlier.
+  var c=document.getElementById('cv'), x=c.getContext('2d');
+  x.fillStyle='#0c0c0e'; x.fillRect(0,0,c.width,c.height);
+  if(!v.length) return;
+  var W=c.width,H=c.height,P=44;
+  var bx=r=>Math.log10(Math.max(50,r.centroid_hz));
+  var by=r=>Math.max(0,Math.min(1,r.harmonic_ratio));
+  var x0=Math.min(...v.map(bx)), x1=Math.max(...v.map(bx));
+  x.strokeStyle='#22222a'; x.lineWidth=1;
+  for(var i=0;i<=4;i++){var yy=P+(H-2*P)*i/4; x.beginPath();x.moveTo(P,yy);x.lineTo(W-P,yy);x.stroke();}
+  v.forEach(r=>{
+    var px=P+(W-2*P)*((bx(r)-x0)/((x1-x0)||1));
+    var py=H-P-(H-2*P)*by(r);
+    var rad=Math.max(1.6,Math.min(9,Math.sqrt(r.seconds)*1.5));
+    x.beginPath(); x.arc(px,py,rad,0,6.2832);
+    x.fillStyle=COLS[r.family]||'#8fd8ff'; x.globalAlpha=.55; x.fill();
+    x.globalAlpha=1;
+  });
+  x.fillStyle='#7a7a85'; x.font='16px ui-monospace,monospace';
+  x.fillText('← darker        spectral centroid (log Hz)        brighter →', P, H-14);
+  x.save(); x.translate(16,H/2); x.rotate(-Math.PI/2);
+  x.fillText('← percussive        harmonic ratio        pitched →',0,0); x.restore();
+  x.fillText('radius = duration', W-260, 26);
+  var lg=document.getElementById('lg');
+  lg.innerHTML=Object.keys(COLS).map(f=>'<span style="color:'+COLS[f]+'">■ '+f+'</span>').join('');
+}
+function open_(r){
+  document.getElementById('body').innerHTML=
+    '<img src="'+esc(r.plate)+'" alt="">'
+    +'<audio controls preload="none" src="../'+esc(r.path)+'"></audio>'
+    +'<div class="meta"><b>'+esc(r.path)+'</b><br>'
+    +'length <b>'+r.seconds.toFixed(2)+'s</b>'+(r.truncated?(' of '+r.full_seconds+'s (imaged head only)'):'')
+    +' · peak <b>'+r.peak_dbfs+' dBFS</b> · rms <b>'+r.rms_dbfs+'</b> · crest <b>'+r.crest_db+' dB</b><br>'
+    +'tempo <b>'+r.tempo_bpm+' bpm</b> ('+r.beats+' beats) · key <b>'+esc(r.key)+'</b> (conf '+r.key_conf+')<br>'
+    +'centroid <b>'+r.centroid_hz+' Hz</b> · rolloff '+r.rolloff_hz+' · bandwidth '+r.bandwidth_hz
+    +' · flatness <b>'+r.flatness+'</b> · zcr '+r.zcr+'<br>'
+    +'onsets <b>'+r.onsets+'</b> ('+r.onsets_per_s+'/s) · harmonic ratio <b>'+r.harmonic_ratio
+    +'</b> · silence '+Math.round(r.silence_share*100)+'%'
+    +(r.clap?('<br><br><b style="color:var(--hot)">'+esc(r.clap.earsketch||'')+'</b><br>'
+      +['type','genre','character','motion'].map(function(a){var c=r.clap[a];
+        return a+': <b>'+esc(c.label)+'</b>'+(c.label==='?'?(' (best '+esc(c.best)+')'):'')
+          +' <span style="opacity:.6">cos '+c.cos+' · gap '+c.gap
+          +' · then '+esc(c.runner_up)+'</span>';}).join('<br>')
+      +'<br><span style="opacity:.6">labels are zero-shot: something always wins, '
+      +'so the gap between first and second is the number that matters</span>'):'')
+    +'</div>';
+  document.getElementById('big').classList.add('on');
+}
+document.getElementById('close').onclick=()=>document.getElementById('big').classList.remove('on');
+addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('big').classList.remove('on');});
+document.getElementById('fam').onchange=function(){FAM=this.value;draw();};
+document.getElementById('sort').onchange=function(){SORT=this.value;draw();};
+document.getElementById('rev').onclick=function(){REV=!REV;this.textContent=REV?'▲':'▼';draw();};
+document.getElementById('q').oninput=function(){Q=this.value.trim().toLowerCase();
+  clearTimeout(draw._t);draw._t=setTimeout(draw,160);};
+</script>

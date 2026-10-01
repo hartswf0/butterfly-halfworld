@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WYGWYL Poetic Coverage Matrix & Probabilistic Shot Router</title>
+<style>
+  :root {
+    --paper: #ffffff;
+    --ink: #000000;
+    --dim: #666666;
+    --line: #000000;
+    --blue: #0066cc;
+    --soft: #f5f5f5;
+    --green: #1a7f37;
+    --amber: #9a6700;
+    --red: #cf222e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; border-radius: 0 !important; }
+  body { font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--paper); color: var(--ink); }
+  header { position: sticky; top: 0; z-index: 100; background: var(--paper); border-bottom: 2px solid var(--line); padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; }
+  .title { font-size: 14px; font-weight: 900; letter-spacing: 0.08em; }
+  .metrics { display: flex; gap: 12px; font-size: 11px; font-weight: 700; }
+  .badge { padding: 2px 6px; color: #fff; font-weight: 800; display: inline-block; }
+  .bg-covered { background: var(--green); }
+  .bg-thin { background: var(--amber); }
+  .bg-gap { background: var(--red); }
+
+  main { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(420px, 1fr); min-height: calc(100vh - 50px); }
+  #matrixPanel { border-right: 2px solid var(--line); padding: 16px; overflow-y: auto; max-height: calc(100vh - 50px); }
+  #routerPanel { padding: 16px; background: var(--soft); overflow-y: auto; max-height: calc(100vh - 50px); }
+
+  .suite-block { margin-bottom: 20px; border: 1px solid var(--line); background: var(--paper); }
+  .suite-header { background: var(--ink); color: var(--paper); padding: 6px 10px; font-weight: 900; display: flex; justify-content: space-between; }
+  .stanza-row { padding: 8px 10px; border-bottom: 1px solid #e0e0e0; cursor: pointer; }
+  .stanza-row:hover { background: #f0f7ff; }
+  .stanza-row.selected { background: #e0efff; border-left: 4px solid var(--blue); }
+  .stanza-meta { display: flex; justify-content: space-between; font-size: 10px; color: var(--dim); margin-bottom: 2px; }
+  .stanza-line { font-weight: 700; font-size: 12px; line-height: 1.35; }
+  .stanza-visual { font-size: 11px; color: var(--blue); margin-top: 3px; }
+  .assigned-chips { display: flex; gap: 4px; margin-top: 4px; flex-wrap: wrap; }
+  .shot-chip { border: 1px solid var(--line); background: #fff; padding: 2px 5px; font-size: 10px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+
+  /* Router Inspector */
+  .card { border: 1px solid var(--line); background: var(--paper); padding: 12px; margin-bottom: 12px; }
+  .card h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid var(--line); padding-bottom: 4px; margin-bottom: 8px; }
+  .prob-bar { height: 8px; background: #e0e0e0; margin: 4px 0 8px 0; }
+  .prob-fill { height: 100%; background: var(--green); }
+  .prob-fill.mid { background: var(--amber); }
+  .prob-fill.low { background: var(--red); }
+  .route-item { border: 1px solid #ccc; background: #fafafa; padding: 6px 8px; margin-bottom: 6px; }
+  .thumb-preview { width: 100%; aspect-ratio: 16/9; background: #000; object-fit: contain; display: block; border: 1px solid var(--line); margin: 8px 0; }
+  
+  .filter-tabs { display: flex; gap: 4px; margin-bottom: 12px; }
+  .filter-tabs button { border: 1px solid var(--line); background: #fff; padding: 4px 8px; font-weight: 800; cursor: pointer; font-size: 10px; }
+  .filter-tabs button.active { background: var(--ink); color: #fff; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title">WYGWYL POETIC COVERAGE MATRIX & PROBABILISTIC SHOT ROUTER</div>
+  <div class="metrics" id="headerMetrics"></div>
+</header>
+
+<main>
+  <section id="matrixPanel">
+    <div class="filter-tabs" id="filterTabs"></div>
+    <div id="stanzasContainer"></div>
+  </section>
+
+  <aside id="routerPanel">
+    <div class="card" id="detailCard">
+      <h3>Stanza & Shot Allocation Inspector</h3>
+      <div style="color:var(--dim); font-size:11px;">Select any stanza on the left to view assigned shots, probability scores, alternative routes, and redundancy metrics.</div>
+    </div>
+  </aside>
+</main>
+
+<script>
+async function loadData() {
+  const res = await fetch("WYGWYL_COVERAGE_MAP.json");
+  const DATA = await res.json();
+  let currentFilter = 'all';
+  let selectedStanzaId = null;
+
+  const m = DATA.global_metrics;
+  document.getElementById("headerMetrics").innerHTML = `
+    <span class="badge bg-covered">${m.fully_covered_stanzas} COVERED</span>
+    <span class="badge bg-thin">${m.thin_stanzas} THIN</span>
+    <span class="badge bg-gap">${m.gap_stanzas} GAPS</span>
+    <span style="padding:2px 6px; border:1px solid #000;">COVERAGE: ${m.coverage_percentage}%</span>
+  `;
+
+  document.getElementById("filterTabs").innerHTML = `
+    <button class="active" onclick="setF('all')">ALL STANZAS (${DATA.total_stanzas})</button>
+    <button onclick="setF('COVERED')">COVERED (${m.fully_covered_stanzas})</button>
+    <button onclick="setF('THIN')">THIN (${m.thin_stanzas})</button>
+    <button onclick="setF('GAP')">GAPS / UNCOVERED (${m.gap_stanzas})</button>
+  `;
+
+  window.setF = (f) => {
+    currentFilter = f;
+    document.querySelectorAll(".filter-tabs button").forEach(b => b.classList.remove("active"));
+    event.target.classList.add("active");
+    renderMatrix();
+  };
+
+  function renderMatrix() {
+    const box = document.getElementById("stanzasContainer");
+    box.innerHTML = "";
+
+    const suites = {};
+    DATA.stanza_coverage_matrix.forEach(st => {
+      if (currentFilter !== 'all' && st.coverage_status !== currentFilter) return;
+      if (!suites[st.suite_number]) suites[st.suite_number] = [];
+      suites[st.suite_number].push(st);
+    });
+
+    for (const [sNum, stList] of Object.entries(suites)) {
+      const sTitle = stList[0].suite_title;
+      const block = document.createElement("div");
+      block.className = "suite-block";
+      block.innerHTML = `<div class="suite-header"><span>${sNum} — ${sTitle}</span> <span>${stList.length} stanzas</span></div>`;
+
+      stList.forEach(st => {
+        const row = document.createElement("div");
+        row.className = "stanza-row" + (selectedStanzaId === st.stanza_id ? " selected" : "");
+        
+        const badgeClass = st.coverage_status === 'COVERED' ? 'bg-covered' : (st.coverage_status === 'THIN' ? 'bg-thin' : 'bg-gap');
+        
+        let chipsHtml = "";
+        if (st.allocated_shots.length > 0) {
+          chipsHtml = '<div class="assigned-chips">' + st.allocated_shots.map(ash => 
+            `<span class="shot-chip"><b>${ash.patch_id}</b> ${ash.visual_category} (${ash.probability}%)</span>`
+          ).join('') + '</div>';
+        } else {
+          chipsHtml = '<div style="color:var(--red); font-size:10px; margin-top:3px; font-weight:700;">⚠ UNCOVERED POETIC GAP</div>';
+        }
+
+        row.innerHTML = `
+          <div class="stanza-meta">
+            <span>[${st.stanza_id}]</span>
+            <span class="badge ${badgeClass}">${st.coverage_status} (${st.allocated_shots.length} SHOTS)</span>
+          </div>
+          <div class="stanza-line">“${st.line}”</div>
+          <div class="stanza-visual">TARGET: ${st.target_visual}</div>
+          ${chipsHtml}
+        `;
+
+        row.onclick = () => selectStanza(st);
+        block.appendChild(row);
+      });
+
+      box.appendChild(block);
+    }
+  }
+
+  function selectStanza(st) {
+    selectedStanzaId = st.stanza_id;
+    renderMatrix();
+
+    const card = document.getElementById("detailCard");
+    const badgeClass = st.coverage_status === 'COVERED' ? 'bg-covered' : (st.coverage_status === 'THIN' ? 'bg-thin' : 'bg-gap');
+
+    let shotsDetail = "";
+    if (st.allocated_shots.length > 0) {
+      shotsDetail = st.allocated_shots.map(ash => {
+        const fullShot = DATA.shot_routing_records.find(s => s.shot_id === ash.shot_id) || {};
+        const alts = (fullShot.alternative_allocations || []).map(a => 
+          `<div style="font-size:10px; color:var(--dim);">↳ Alt Route: Suite ${a.number} ${a.title} (${a.probability}%)</div>`
+        ).join('');
+
+        return `
+          <div class="route-item">
+            <div style="display:flex; justify-content:space-between; font-weight:800;">
+              <span>[${ash.patch_id}] ${ash.visual_category}</span>
+              <span style="color:var(--green);">${ash.probability}% MATCH</span>
+            </div>
+            <div class="prob-bar"><div class="prob-fill" style="width:${ash.probability}%;"></div></div>
+            ${ash.contact_sheet_rel ? `<img class="thumb-preview" src="${ash.contact_sheet_rel}" alt="${ash.shot_id}" />` : ''}
+            <div style="font-size:11px; margin-bottom:4px;"><b>Match Reason:</b> ${ash.match_reason}</div>
+            <div style="font-size:10px; color:var(--dim); margin-bottom:4px;"><b>Redundancy:</b> ${fullShot.redundancy_info ? fullShot.redundancy_info.note : 'Unique'}</div>
+            ${alts ? '<div style="margin-top:4px; border-top:1px solid #ddd; padding-top:4px;">' + alts + '</div>' : ''}
+          </div>
+        `;
+      }).join('');
+    } else {
+      shotsDetail = `
+        <div style="padding:12px; background:#fff2f2; border:1px solid var(--red); color:var(--red); font-size:11px; font-weight:700;">
+          ⚠ ZERO SHOTS MATCH THIS STANZA DIRECTLY<br>
+          <span style="font-weight:400; color:#333; margin-top:4px; display:block;">
+            The archive does not currently possess an exact candidate for: <i>"${st.target_visual}"</i>. This requires generation or metaphorical routing.
+          </span>
+        </div>
+      `;
+    }
+
+    card.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line); padding-bottom:6px; margin-bottom:8px;">
+        <h3 style="margin:0; border:0; padding:0;">[${st.stanza_id}] ${st.suite_number} ${st.suite_title}</h3>
+        <span class="badge ${badgeClass}">${st.coverage_status}</span>
+      </div>
+      <div style="font-size:13px; font-weight:800; line-height:1.35; margin-bottom:6px;">“${st.line}”</div>
+      <div style="font-size:11px; color:var(--blue); margin-bottom:12px;"><b>Required Visual:</b> ${st.target_visual}</div>
+      
+      <h3 style="margin-top:12px;">Allocated Candidate Shots (${st.allocated_shots.length})</h3>
+      ${shotsDetail}
+    `;
+  }
+
+  renderMatrix();
+  if (DATA.stanza_coverage_matrix.length > 0) {
+    selectStanza(DATA.stanza_coverage_matrix[0]);
+  }
+}
+loadData();
+</script>
+</body>
+</html>
