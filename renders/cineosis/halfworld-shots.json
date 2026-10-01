@@ -34,15 +34,17 @@
    "frameRows": 144,
    "truth": "scale and subjects are the film's own draw calls, not a classifier"
   },
-  "video": null,
-  "clip": null,
-  "thumb": null,
-  "strip": null,
+  "video": "https://hartswf0.github.io/butterfly-halfworld/renders/cineosis/clips/77bbd4d1-fd2a-57bf-9643-1929419d75fc.mp4",
+  "clip": "clips/77bbd4d1-fd2a-57bf-9643-1929419d75fc.mp4",
+  "thumb": "thumbs/77bbd4d1-fd2a-57bf-9643-1929419d75fc.jpg",
+  "strip": "strips/77bbd4d1-fd2a-57bf-9643-1929419d75fc.jpg",
   "xy": null,
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "frames": 8,
+  "cutouts": []
  },
  {
   "id": "4cfa7752-8f18-518a-a6df-61b3defe5e09",
@@ -89,15 +91,34 @@
    "frameRows": 144,
    "truth": "scale and subjects are the film's own draw calls, not a classifier"
   },
-  "video": null,
-  "clip": null,
-  "thumb": null,
-  "strip": null,
+  "video": "https://hartswf0.github.io/butterfly-halfworld/renders/cineosis/clips/4cfa7752-8f18-518a-a6df-61b3defe5e09.mp4",
+  "clip": "clips/4cfa7752-8f18-518a-a6df-61b3defe5e09.mp4",
+  "thumb": "thumbs/4cfa7752-8f18-518a-a6df-61b3defe5e09.jpg",
+  "strip": "strips/4cfa7752-8f18-518a-a6df-61b3defe5e09.jpg",
   "xy": null,
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "frames": 8,
+  "cutouts": [
+   {
+    "png": "cutouts/4cfa7752-8f18-518a-a6df-61b3defe5e09_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.6927,
+     0.5694,
+     0.0469,
+     0.2431
+    ],
+    "area": 0.0078,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 34
+   }
+  ]
  },
  {
   "id": "a8863403-93c7-5c6b-a2a4-6c6fb3327b8e",
@@ -151,15 +172,34 @@
    "frameRows": 144,
    "truth": "scale and subjects are the film's own draw calls, not a classifier"
   },
-  "video": null,
-  "clip": null,
-  "thumb": null,
-  "strip": null,
+  "video": "https://hartswf0.github.io/butterfly-halfworld/renders/cineosis/clips/a8863403-93c7-5c6b-a2a4-6c6fb3327b8e.mp4",
+  "clip": "clips/a8863403-93c7-5c6b-a2a4-6c6fb3327b8e.mp4",
+  "thumb": "thumbs/a8863403-93c7-5c6b-a2a4-6c6fb3327b8e.jpg",
+  "strip": "strips/a8863403-93c7-5c6b-a2a4-6c6fb3327b8e.jpg",
   "xy": null,
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "frames": 8,
+  "cutouts": [
+   {
+    "png": "cutouts/a8863403-93c7-5c6b-a2a4-6c6fb3327b8e_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.3542,
+     0.5694,
+     0.0833,
+     0.25
+    ],
+    "area": 0.0023,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 34
+   }
+  ]
  },
  {
   "id": "ac2c26ad-1fec-51aa-9a07-f3300fc12312",
@@ -213,15 +253,50 @@
    "frameRows": 144,
    "truth": "scale and subjects are the film's own draw calls, not a classifier"
   },
-  "video": null,
-  "clip": null,
-  "thumb": null,
-  "strip": null,
+  "video": "https://hartswf0.github.io/butterfly-halfworld/renders/cineosis/clips/ac2c26ad-1fec-51aa-9a07-f3300fc12312.mp4",
+  "clip": "clips/ac2c26ad-1fec-51aa-9a07-f3300fc12312.mp4",
+  "thumb": "thumbs/ac2c26ad-1fec-51aa-9a07-f3300fc12312.jpg",
+  "strip": "strips/ac2c26ad-1fec-51aa-9a07-f3300fc12312.jpg",
   "xy": null,
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "frames": 8,
+  "cutouts": [
+   {
+    "png": "cutouts/ac2c26ad-1fec-51aa-9a07-f3300fc12312_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3646,
+     0.3889,
+     0.1615,
+     0.1389
+    ],
+    "area": 0.0079,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 30
+   },
+   {
+    "png": "cutouts/ac2c26ad-1fec-51aa-9a07-f3300fc12312_1.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4792,
+     0.1528,
+     0.1875,
+     0.1667
+    ],
+    "area": 0.0102,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 33
+   }
+  ]
  },
  {
   "id": "8846c650-a93f-5a2b-b0df-e23288ed9e75",
@@ -275,15 +350,50 @@
    "frameRows": 144,
    "truth": "scale and subjects are the film's own draw calls, not a classifier"
   },
-  "video": null,
-  "clip": null,
-  "thumb": null,
-  "strip": null,
+  "video": "https://hartswf0.github.io/butterfly-halfworld/renders/cineosis/clips/8846c650-a93f-5a2b-b0df-e23288ed9e75.mp4",
+  "clip": "clips/8846c650-a93f-5a2b-b0df-e23288ed9e75.mp4",
+  "thumb": "thumbs/8846c650-a93f-5a2b-b0df-e23288ed9e75.jpg",
+  "strip": "strips/8846c650-a93f-5a2b-b0df-e23288ed9e75.jpg",
   "xy": null,
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "frames": 8,
+  "cutouts": [
+   {
+    "png": "cutouts/8846c650-a93f-5a2b-b0df-e23288ed9e75_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3906,
+     0.4861,
+     0.125,
+     0.1111
+    ],
+    "area": 0.0056,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 24
+   },
+   {
+    "png": "cutouts/8846c650-a93f-5a2b-b0df-e23288ed9e75_1.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.5156,
+     0.2222,
+     0.1406,
+     0.1667
+    ],
+    "area": 0.0074,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 27
+   }
+  ]
  },
  {
   "id": "a12b5cb7-63ac-533c-a304-d0c80dc607c2",
@@ -328,7 +438,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "b3557148-a850-53d1-93e4-c15844e5d7d4",
@@ -383,7 +494,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/b3557148-a850-53d1-93e4-c15844e5d7d4_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.4375,
+     0.5625,
+     0.1302,
+     0.3681
+    ],
+    "area": 0.0186,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 46
+   }
+  ]
  },
  {
   "id": "b21502d1-c92d-57fe-8bb1-df33051902a7",
@@ -439,7 +568,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/b21502d1-c92d-57fe-8bb1-df33051902a7_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.2552,
+     0.4306,
+     0.1042,
+     0.3889
+    ],
+    "area": 0.0233,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 54
+   }
+  ]
  },
  {
   "id": "fb98b263-5f83-5968-9e76-a23b627ce619",
@@ -486,7 +633,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "ec8cbff4-921b-5c8c-8bd0-174be20b7ec5",
@@ -542,7 +690,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/ec8cbff4-921b-5c8c-8bd0-174be20b7ec5_0.png",
+    "label": "child",
+    "p": 1,
+    "bbox": [
+     0.1823,
+     0.4306,
+     0.099,
+     0.4028
+    ],
+    "area": 0.0236,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 53.9
+   },
+   {
+    "png": "cutouts/ec8cbff4-921b-5c8c-8bd0-174be20b7ec5_1.png",
+    "label": "child",
+    "p": 1,
+    "bbox": [
+     0.5781,
+     0.4931,
+     0.0573,
+     0.3403
+    ],
+    "area": 0.0124,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 46.2
+   }
+  ]
  },
  {
   "id": "71e66e7c-ea68-516b-a4ea-076a07c02815",
@@ -597,7 +779,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/71e66e7c-ea68-516b-a4ea-076a07c02815_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3385,
+     0.5486,
+     0.0469,
+     0.1875
+    ],
+    "area": 0.005,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 25.84371021510095
+   },
+   {
+    "png": "cutouts/71e66e7c-ea68-516b-a4ea-076a07c02815_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.5885,
+     0.6458,
+     0.0469,
+     0.1667
+    ],
+    "area": 0.0054,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 21.16371021510095
+   }
+  ]
  },
  {
   "id": "9c0f60aa-aef7-5a6e-aa51-6628be73bd42",
@@ -660,7 +876,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/9c0f60aa-aef7-5a6e-aa51-6628be73bd42_0.png",
+    "label": "child",
+    "p": 1,
+    "bbox": [
+     0.125,
+     0.4722,
+     0.1146,
+     0.3611
+    ],
+    "area": 0.0196,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 48
+   },
+   {
+    "png": "cutouts/9c0f60aa-aef7-5a6e-aa51-6628be73bd42_1.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4635,
+     0.4514,
+     0.1354,
+     0.3819
+    ],
+    "area": 0.022,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 52
+   }
+  ]
  },
  {
   "id": "a9f6c83f-faf6-5f58-a914-fed2989acef1",
@@ -705,7 +955,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "8ec55f7e-38cf-5856-b947-a3a94846fc94",
@@ -752,7 +1003,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "840cf3da-a3da-562c-9d53-ddb52b22e19f",
@@ -799,7 +1051,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "5a69b08c-71bb-5651-bd02-7bd3505eee0d",
@@ -846,7 +1099,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "1605783b-1723-50c4-b6a0-a3805ebd8dcc",
@@ -893,7 +1147,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "51b6c0d6-f178-5889-bee1-258c53ec7821",
@@ -955,7 +1210,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/51b6c0d6-f178-5889-bee1-258c53ec7821_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.2552,
+     0.6181,
+     0.0469,
+     0.1667
+    ],
+    "area": 0.0053,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 19.91648228082418
+   },
+   {
+    "png": "cutouts/51b6c0d6-f178-5889-bee1-258c53ec7821_1.png",
+    "label": "turned",
+    "p": 1,
+    "bbox": [
+     0.349,
+     0.6111,
+     0.0365,
+     0.1597
+    ],
+    "area": 0.0044,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 19.15676101130867
+   }
+  ]
  },
  {
   "id": "a70142af-3c00-5da4-9725-9aec4753b406",
@@ -1010,7 +1299,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/a70142af-3c00-5da4-9725-9aec4753b406_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.0677,
+     0.6806,
+     0.0521,
+     0.3056
+    ],
+    "area": 0.0099,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 42
+   }
+  ]
  },
  {
   "id": "e660c3d6-a341-51e3-82ec-809c80f627f6",
@@ -1055,7 +1362,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "1e0a459e-6ecd-5996-abf3-7062d492c617",
@@ -1110,7 +1418,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/1e0a459e-6ecd-5996-abf3-7062d492c617_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.3906,
+     0.6042,
+     0.0417,
+     0.1875
+    ],
+    "area": 0.0051,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 26.100292628648198
+   }
+  ]
  },
  {
   "id": "3a75924a-6b35-57db-921b-40c6772ba6bf",
@@ -1165,7 +1491,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/3a75924a-6b35-57db-921b-40c6772ba6bf_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.25,
+     0.7014,
+     0.099,
+     0.2292
+    ],
+    "area": 0.0102,
+    "src": "drawn",
+    "mode": "sit",
+    "face": 1,
+    "heightRows": 38
+   }
+  ]
  },
  {
   "id": "54be94e2-1804-59a6-8fe9-bc0caedbe227",
@@ -1212,7 +1556,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "b038974c-0f8b-537e-918c-2f9044ac5fd8",
@@ -1259,7 +1604,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "3bf9a0d6-58d4-5ffa-b959-9fbf710b7f7a",
@@ -1314,7 +1660,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/3bf9a0d6-58d4-5ffa-b959-9fbf710b7f7a_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.2448,
+     0.7083,
+     0.0781,
+     0.1806
+    ],
+    "area": 0.0069,
+    "src": "drawn",
+    "mode": "sit",
+    "face": 1,
+    "heightRows": 30
+   }
+  ]
  },
  {
   "id": "20f3186c-d143-54ad-8a17-ebe570251b3d",
@@ -1369,7 +1733,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/20f3186c-d143-54ad-8a17-ebe570251b3d_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4063,
+     0.5139,
+     0.1927,
+     0.3889
+    ],
+    "area": 0.0213,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 54
+   }
+  ]
  },
  {
   "id": "9c7f9f74-7aa3-5230-8b65-84044ed01a8c",
@@ -1414,7 +1796,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "02dfa46b-198a-5bc9-810a-10c5dae085a1",
@@ -1469,7 +1852,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/02dfa46b-198a-5bc9-810a-10c5dae085a1_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4583,
+     0.7917,
+     0.0521,
+     0.1181
+    ],
+    "area": 0.003,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 13.912548611529775
+   }
+  ]
  },
  {
   "id": "9bfba878-7cbe-582a-a5c4-1b97c711b0bc",
@@ -1524,7 +1925,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "d10b2f8d-d078-598e-876c-a9a8a4cc9f47",
@@ -1579,7 +1981,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/d10b2f8d-d078-598e-876c-a9a8a4cc9f47_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4844,
+     0.8194,
+     0.0365,
+     0.1389
+    ],
+    "area": 0.0035,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 16
+   }
+  ]
  },
  {
   "id": "a249fd9e-03ff-548a-bf7c-63de8c3094ae",
@@ -1626,7 +2046,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "60d854f7-ec6b-5c45-9995-c8396298835b",
@@ -1688,7 +2109,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/60d854f7-ec6b-5c45-9995-c8396298835b_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.401,
+     0.7847,
+     0.0469,
+     0.1042
+    ],
+    "area": 0.0024,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 13
+   },
+   {
+    "png": "cutouts/60d854f7-ec6b-5c45-9995-c8396298835b_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.474,
+     0.7778,
+     0.0521,
+     0.1111
+    ],
+    "area": 0.0027,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 14
+   }
+  ]
  },
  {
   "id": "8e37b6bd-2eb7-5b42-8ddf-82a8d9904ebd",
@@ -1733,7 +2188,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "05bb1f34-f734-51fb-a26f-c9331be8e1a4",
@@ -1788,7 +2244,105 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/05bb1f34-f734-51fb-a26f-c9331be8e1a4_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.4688,
+     0.3194,
+     0.0208,
+     0.0625
+    ],
+    "area": 0.0012,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 6.871687110234829
+   },
+   {
+    "png": "cutouts/05bb1f34-f734-51fb-a26f-c9331be8e1a4_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.4896,
+     0.3958,
+     0.0313,
+     0.0903
+    ],
+    "area": 0.0018,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 10.512684776660073
+   },
+   {
+    "png": "cutouts/05bb1f34-f734-51fb-a26f-c9331be8e1a4_2.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.5469,
+     0.4931,
+     0.0365,
+     0.1181
+    ],
+    "area": 0.0028,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 15.06764472302065
+   },
+   {
+    "png": "cutouts/05bb1f34-f734-51fb-a26f-c9331be8e1a4_3.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3906,
+     0.6042,
+     0.0365,
+     0.1667
+    ],
+    "area": 0.0038,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 20.426587260843885
+   },
+   {
+    "png": "cutouts/05bb1f34-f734-51fb-a26f-c9331be8e1a4_4.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.4948,
+     0.7361,
+     0.0365,
+     0.1944
+    ],
+    "area": 0.0051,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 26.515567216988995
+   },
+   {
+    "png": "cutouts/05bb1f34-f734-51fb-a26f-c9331be8e1a4_5.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.6354,
+     0.8819,
+     0.0365,
+     0.1181
+    ],
+    "area": 0.0038,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 33.28014259018347
+   }
+  ]
  },
  {
   "id": "218280c0-f9fd-5568-a0cb-b2f64f097d1a",
@@ -1843,7 +2397,73 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/218280c0-f9fd-5568-a0cb-b2f64f097d1a_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.0417,
+     0.4861,
+     0.0365,
+     0.1181
+    ],
+    "area": 0.0029,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 15.14548
+   },
+   {
+    "png": "cutouts/218280c0-f9fd-5568-a0cb-b2f64f097d1a_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.1458,
+     0.4583,
+     0.0677,
+     0.1458
+    ],
+    "area": 0.0046,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 18.9158
+   },
+   {
+    "png": "cutouts/218280c0-f9fd-5568-a0cb-b2f64f097d1a_2.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3646,
+     0.4792,
+     0.0417,
+     0.125
+    ],
+    "area": 0.0031,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 15.77044
+   },
+   {
+    "png": "cutouts/218280c0-f9fd-5568-a0cb-b2f64f097d1a_3.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.5833,
+     0.4722,
+     0.0625,
+     0.1319
+    ],
+    "area": 0.0038,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 16.95768
+   }
+  ]
  },
  {
   "id": "f3084edd-e6d9-5f62-86e3-306db2e83f47",
@@ -1899,7 +2519,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/f3084edd-e6d9-5f62-86e3-306db2e83f47_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3594,
+     0.7083,
+     0.0365,
+     0.1181
+    ],
+    "area": 0.0027,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 15
+   },
+   {
+    "png": "cutouts/f3084edd-e6d9-5f62-86e3-306db2e83f47_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.4115,
+     0.7083,
+     0.0365,
+     0.0903
+    ],
+    "area": 0.0013,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 12
+   }
+  ]
  },
  {
   "id": "31c98ba4-fc7a-5ef3-b054-b940fa970d9d",
@@ -1954,7 +2608,57 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/31c98ba4-fc7a-5ef3-b054-b940fa970d9d_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.0625,
+     0.8819,
+     0.0365,
+     0.1111
+    ],
+    "area": 0.0019,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 14.81532
+   },
+   {
+    "png": "cutouts/31c98ba4-fc7a-5ef3-b054-b940fa970d9d_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3542,
+     0.8681,
+     0.0417,
+     0.125
+    ],
+    "area": 0.0028,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 16.61676
+   },
+   {
+    "png": "cutouts/31c98ba4-fc7a-5ef3-b054-b940fa970d9d_2.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.6927,
+     0.875,
+     0.0417,
+     0.1181
+    ],
+    "area": 0.0031,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 16.1366
+   }
+  ]
  },
  {
   "id": "ffd0e526-781d-5257-8269-0e04dedbd82d",
@@ -2016,7 +2720,57 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/ffd0e526-781d-5257-8269-0e04dedbd82d_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.0885,
+     0.8819,
+     0.0417,
+     0.1181
+    ],
+    "area": 0.0029,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 15.056000000000001
+   },
+   {
+    "png": "cutouts/ffd0e526-781d-5257-8269-0e04dedbd82d_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.7552,
+     0.8889,
+     0.0365,
+     0.1111
+    ],
+    "area": 0.0024,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 13.51128
+   },
+   {
+    "png": "cutouts/ffd0e526-781d-5257-8269-0e04dedbd82d_2.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.474,
+     0.75,
+     0.0625,
+     0.25
+    ],
+    "area": 0.0098,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 34
+   }
+  ]
  },
  {
   "id": "3ea096c8-2368-5ef5-b5cf-c024a9795ff3",
@@ -2088,7 +2842,137 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_0.png",
+    "label": "elder",
+    "p": 1,
+    "bbox": [
+     0.3698,
+     0.8333,
+     0.0781,
+     0.1667
+    ],
+    "area": 0.0056,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 20.20985
+   },
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.5625,
+     0.8542,
+     0.0677,
+     0.1458
+    ],
+    "area": 0.0044,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 19.1362
+   },
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_2.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.2708,
+     0.8264,
+     0.0885,
+     0.1736
+    ],
+    "area": 0.0057,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 23.65685
+   },
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_3.png",
+    "label": "elder",
+    "p": 1,
+    "bbox": [
+     0.1771,
+     0.8125,
+     0.0885,
+     0.1875
+    ],
+    "area": 0.0062,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 23.74855
+   },
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_4.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.7448,
+     0.8264,
+     0.0781,
+     0.1736
+    ],
+    "area": 0.0054,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 22.88725
+   },
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_5.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.099,
+     0.8403,
+     0.0781,
+     0.1597
+    ],
+    "area": 0.0053,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 20.6732
+   },
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_6.png",
+    "label": "elder",
+    "p": 1,
+    "bbox": [
+     0.0156,
+     0.8264,
+     0.0781,
+     0.1736
+    ],
+    "area": 0.006,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 21.14235
+   },
+   {
+    "png": "cutouts/3ea096c8-2368-5ef5-b5cf-c024a9795ff3_7.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4427,
+     0.7431,
+     0.1198,
+     0.2569
+    ],
+    "area": 0.0111,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 34
+   }
+  ]
  },
  {
   "id": "c5855715-a5f3-5f76-9504-9a9070a41415",
@@ -2133,7 +3017,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "932c051d-5f80-5c4c-a9a9-eb159d85551b",
@@ -2188,7 +3073,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/932c051d-5f80-5c4c-a9a9-eb159d85551b_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.474,
+     0.6736,
+     0.0625,
+     0.2014
+    ],
+    "area": 0.0067,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 26.200000000000003
+   }
+  ]
  },
  {
   "id": "7fb37131-75c4-50fe-8f5b-b9ec89b9c6ef",
@@ -2250,7 +3153,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/7fb37131-75c4-50fe-8f5b-b9ec89b9c6ef_0.png",
+    "label": "turned",
+    "p": 1,
+    "bbox": [
+     0.5781,
+     0.3056,
+     0.0208,
+     0.0556
+    ],
+    "area": 0.0009,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 6.459283674548608
+   }
+  ]
  },
  {
   "id": "2d91fbf4-e1ff-52b1-9a51-97911558f13b",
@@ -2306,7 +3227,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/2d91fbf4-e1ff-52b1-9a51-97911558f13b_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.1927,
+     0.7222,
+     0.026,
+     0.1389
+    ],
+    "area": 0.0018,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 27.744000000000003
+   }
+  ]
  },
  {
   "id": "68d810df-ff8d-597e-912b-71102a72b6fe",
@@ -2353,7 +3292,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "39a76c6f-4471-591c-8a9e-3748cb12f06e",
@@ -2400,7 +3340,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "c134d78d-fba2-5f65-98ad-aae2db4a1a18",
@@ -2447,7 +3388,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "4d796f60-c884-525e-9ac1-f7032bb8eb12",
@@ -2502,7 +3444,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/4d796f60-c884-525e-9ac1-f7032bb8eb12_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4167,
+     0.4792,
+     0.1927,
+     0.3958
+    ],
+    "area": 0.0249,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 53.970000000000006
+   }
+  ]
  },
  {
   "id": "5969c0bb-4210-58db-9706-dc9d35734909",
@@ -2547,7 +3507,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "b8ba7303-bda7-595a-850e-41a927ddf04f",
@@ -2609,7 +3570,121 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/b8ba7303-bda7-595a-850e-41a927ddf04f_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.0885,
+     0.5694,
+     0.0521,
+     0.1528
+    ],
+    "area": 0.0045,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 20.13698
+   },
+   {
+    "png": "cutouts/b8ba7303-bda7-595a-850e-41a927ddf04f_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.5833,
+     0.6944,
+     0.0521,
+     0.1806
+    ],
+    "area": 0.0055,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 24.2399
+   },
+   {
+    "png": "cutouts/b8ba7303-bda7-595a-850e-41a927ddf04f_2.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.7292,
+     0.7708,
+     0.0573,
+     0.1667
+    ],
+    "area": 0.0052,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 21.04346
+   },
+   {
+    "png": "cutouts/b8ba7303-bda7-595a-850e-41a927ddf04f_3.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.1771,
+     0.75,
+     0.0521,
+     0.1806
+    ],
+    "area": 0.006,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 25.14125
+   },
+   {
+    "png": "cutouts/b8ba7303-bda7-595a-850e-41a927ddf04f_4.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.8802,
+     0.6528,
+     0.0469,
+     0.1667
+    ],
+    "area": 0.0047,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 22.213729999999998
+   },
+   {
+    "png": "cutouts/b8ba7303-bda7-595a-850e-41a927ddf04f_5.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.8698,
+     0.5556,
+     0.0573,
+     0.2083
+    ],
+    "area": 0.0045,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 28.366039999999998
+   },
+   {
+    "png": "cutouts/b8ba7303-bda7-595a-850e-41a927ddf04f_6.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4688,
+     0.7222,
+     0.0729,
+     0.25
+    ],
+    "area": 0.0102,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 34
+   }
+  ]
  },
  {
   "id": "9918ab42-fb7d-5bfd-b4bd-25fe82946775",
@@ -2671,7 +3746,89 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/9918ab42-fb7d-5bfd-b4bd-25fe82946775_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.0885,
+     0.6042,
+     0.0521,
+     0.1528
+    ],
+    "area": 0.0048,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 20.13698
+   },
+   {
+    "png": "cutouts/9918ab42-fb7d-5bfd-b4bd-25fe82946775_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.724,
+     0.6944,
+     0.0469,
+     0.1736
+    ],
+    "area": 0.0056,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 24.2399
+   },
+   {
+    "png": "cutouts/9918ab42-fb7d-5bfd-b4bd-25fe82946775_2.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.8073,
+     0.75,
+     0.0521,
+     0.1667
+    ],
+    "area": 0.005,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 21.04346
+   },
+   {
+    "png": "cutouts/9918ab42-fb7d-5bfd-b4bd-25fe82946775_3.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4688,
+     0.7222,
+     0.0677,
+     0.25
+    ],
+    "area": 0.01,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 34
+   },
+   {
+    "png": "cutouts/9918ab42-fb7d-5bfd-b4bd-25fe82946775_4.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.5729,
+     0.2847,
+     0.099,
+     0.2153
+    ],
+    "area": 0.0036,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 29.24981017120908
+   }
+  ]
  },
  {
   "id": "5d2342c9-421f-5db3-946a-b4b32fdb2854",
@@ -2733,7 +3890,153 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.2917,
+     0.7361,
+     0.0365,
+     0.1458
+    ],
+    "area": 0.0023,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 22.481659999999998
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.7031,
+     0.5903,
+     0.0469,
+     0.1736
+    ],
+    "area": 0.0044,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 24.71528
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_2.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.1979,
+     0.6944,
+     0.0469,
+     0.1806
+    ],
+    "area": 0.0057,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 24.42593
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_3.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.6094,
+     0.6528,
+     0.0521,
+     0.1597
+    ],
+    "area": 0.0052,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 20.69435
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_4.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.6979,
+     0.5625,
+     0.0521,
+     0.1944
+    ],
+    "area": 0.0017,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 26.69447
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_5.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.2813,
+     0.5694,
+     0.0521,
+     0.1389
+    ],
+    "area": 0.0039,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 27.83198
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_6.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.2813,
+     0.6597,
+     0.0677,
+     0.1736
+    ],
+    "area": 0.0052,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 23
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_7.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.474,
+     0.7153,
+     0.0625,
+     0.2569
+    ],
+    "area": 0.01,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 34
+   },
+   {
+    "png": "cutouts/5d2342c9-421f-5db3-946a-b4b32fdb2854_8.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.7969,
+     0.0972,
+     0.0573,
+     0.1181
+    ],
+    "area": 0.0028,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 15
+   }
+  ]
  },
  {
   "id": "f2562745-8502-5420-b1c0-0865122ee591",
@@ -2788,7 +4091,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/f2562745-8502-5420-b1c0-0865122ee591_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.5573,
+     0.3403,
+     0.0573,
+     0.0972
+    ],
+    "area": 0.0017,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 21.793303376034064
+   }
+  ]
  },
  {
   "id": "f729175b-5786-5941-b1b6-c13eacd44f20",
@@ -2843,7 +4164,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/f729175b-5786-5941-b1b6-c13eacd44f20_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4583,
+     0.6389,
+     0.0885,
+     0.1944
+    ],
+    "area": 0.0034,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 26
+   }
+  ]
  },
  {
   "id": "02ccffde-15e2-5f9e-951e-96ff095c65a9",
@@ -2905,7 +4244,57 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/02ccffde-15e2-5f9e-951e-96ff095c65a9_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.1823,
+     0.7083,
+     0.0521,
+     0.1875
+    ],
+    "area": 0.0062,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 25.82741
+   },
+   {
+    "png": "cutouts/02ccffde-15e2-5f9e-951e-96ff095c65a9_1.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4531,
+     0.7222,
+     0.1198,
+     0.25
+    ],
+    "area": 0.0109,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 34
+   },
+   {
+    "png": "cutouts/02ccffde-15e2-5f9e-951e-96ff095c65a9_2.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4531,
+     0.5347,
+     0.1198,
+     0.2431
+    ],
+    "area": 0.0073,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 33.39182962907096
+   }
+  ]
  },
  {
   "id": "30a3dedf-d497-5ed3-90f5-db7b3b7387cb",
@@ -2960,7 +4349,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/30a3dedf-d497-5ed3-90f5-db7b3b7387cb_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4792,
+     0.7569,
+     0.0833,
+     0.1736
+    ],
+    "area": 0.0059,
+    "src": "drawn",
+    "mode": "sit",
+    "face": 1,
+    "heightRows": 29
+   }
+  ]
  },
  {
   "id": "b2b899a6-dcfe-5d69-a307-7359faeb6192",
@@ -3005,7 +4412,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "62097226-74fb-5039-81fc-5ce2acda445b",
@@ -3067,7 +4475,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/62097226-74fb-5039-81fc-5ce2acda445b_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.3281,
+     0.3542,
+     0.125,
+     0.5278
+    ],
+    "area": 0.0396,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 72
+   },
+   {
+    "png": "cutouts/62097226-74fb-5039-81fc-5ce2acda445b_1.png",
+    "label": "custom",
+    "p": 1,
+    "bbox": [
+     0.5573,
+     0.3542,
+     0.1302,
+     0.5278
+    ],
+    "area": 0.04,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 72
+   }
+  ]
  },
  {
   "id": "6a18dc0b-29fd-55af-8982-f7fc21addd7c",
@@ -3129,7 +4571,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/6a18dc0b-29fd-55af-8982-f7fc21addd7c_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.349,
+     0.3542,
+     0.1302,
+     0.5278
+    ],
+    "area": 0.04,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 72
+   },
+   {
+    "png": "cutouts/6a18dc0b-29fd-55af-8982-f7fc21addd7c_1.png",
+    "label": "custom",
+    "p": 1,
+    "bbox": [
+     0.526,
+     0.3542,
+     0.1302,
+     0.5278
+    ],
+    "area": 0.0394,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 72
+   }
+  ]
  },
  {
   "id": "7e938b85-56ec-5316-a882-2232df5622ed",
@@ -3191,7 +4667,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/7e938b85-56ec-5316-a882-2232df5622ed_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.2031,
+     0.3472,
+     0.1302,
+     0.5347
+    ],
+    "area": 0.04,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 72
+   },
+   {
+    "png": "cutouts/7e938b85-56ec-5316-a882-2232df5622ed_1.png",
+    "label": "elder",
+    "p": 1,
+    "bbox": [
+     0.7917,
+     0.3542,
+     0.1354,
+     0.5278
+    ],
+    "area": 0.0403,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 72
+   }
+  ]
  },
  {
   "id": "1b78a291-9968-5382-a71a-9cd2f78fe946",
@@ -3253,7 +4763,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/1b78a291-9968-5382-a71a-9cd2f78fe946_0.png",
+    "label": "elder",
+    "p": 1,
+    "bbox": [
+     0.1146,
+     0.3681,
+     0.099,
+     0.5139
+    ],
+    "area": 0.0312,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 70
+   },
+   {
+    "png": "cutouts/1b78a291-9968-5382-a71a-9cd2f78fe946_1.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.2604,
+     0.4028,
+     0.0833,
+     0.4722
+    ],
+    "area": 0.0253,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 65
+   }
+  ]
  },
  {
   "id": "c3a0a8c1-7679-5ab7-b482-16915a545812",
@@ -3298,7 +4842,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "a01db976-e942-57b7-9baa-23680bbf9714",
@@ -3354,7 +4899,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/a01db976-e942-57b7-9baa-23680bbf9714_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.0208,
+     0.5764,
+     0.0885,
+     0.3264
+    ],
+    "area": 0.0136,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 46
+   }
+  ]
  },
  {
   "id": "e3ae9965-0d24-55f1-a146-edf338a62cf1",
@@ -3401,7 +4964,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "3e1de25f-e79f-5271-bb87-9b6fc34fb839",
@@ -3448,7 +5012,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "b0fd6e0d-e867-5f69-9e8a-933026825605",
@@ -3495,7 +5060,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "fbb610ec-8e23-57d3-a5d8-e401eafde8d8",
@@ -3542,7 +5108,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "3b666380-cb95-55c3-8d48-bc1a674bd8ee",
@@ -3589,7 +5156,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "dd4b4f1e-be49-5f29-9e28-3141bcfa1d2f",
@@ -3634,7 +5202,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "c0d9ec81-c6ab-551b-aab8-1c49e5ec999b",
@@ -3680,7 +5249,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "8da3e87a-dcf4-5404-9d87-d875bdff7b9e",
@@ -3736,7 +5306,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/8da3e87a-dcf4-5404-9d87-d875bdff7b9e_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.1042,
+     0.75,
+     0.0365,
+     0.1111
+    ],
+    "area": 0.0024,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 14
+   },
+   {
+    "png": "cutouts/8da3e87a-dcf4-5404-9d87-d875bdff7b9e_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.8802,
+     0.7569,
+     0.0417,
+     0.1042
+    ],
+    "area": 0.0021,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 13
+   }
+  ]
  },
  {
   "id": "2029e24b-56ce-510a-ab9d-f1aecaa39282",
@@ -3792,7 +5396,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/2029e24b-56ce-510a-ab9d-f1aecaa39282_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.3906,
+     0.6597,
+     0.0417,
+     0.1042
+    ],
+    "area": 0.0027,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 15
+   },
+   {
+    "png": "cutouts/2029e24b-56ce-510a-ab9d-f1aecaa39282_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.8646,
+     0.7569,
+     0.0573,
+     0.1042
+    ],
+    "area": 0.0022,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 13
+   }
+  ]
  },
  {
   "id": "d6d23a1f-5711-5144-a568-4d5854f36b4d",
@@ -3847,7 +5485,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/d6d23a1f-5711-5144-a568-4d5854f36b4d_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.4115,
+     0.3472,
+     0.0521,
+     0.1528
+    ],
+    "area": 0.005,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 20
+   }
+  ]
  },
  {
   "id": "e3e81f60-e2e8-5f2f-a5a4-8f43db970532",
@@ -3902,7 +5558,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/e3e81f60-e2e8-5f2f-a5a4-8f43db970532_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.7708,
+     0.5625,
+     0.0625,
+     0.2292
+    ],
+    "area": 0.0071,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 30
+   }
+  ]
  },
  {
   "id": "df6035e0-1cc5-5f7f-9002-b11c35699883",
@@ -3958,7 +5632,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/df6035e0-1cc5-5f7f-9002-b11c35699883_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.9375,
+     0.7569,
+     0.0365,
+     0.1042
+    ],
+    "area": 0.0023,
+    "src": "drawn",
+    "mode": "walk",
+    "face": -1,
+    "heightRows": 13
+   }
+  ]
  },
  {
   "id": "3effa499-d28d-54b0-bd42-eb7088b77b91",
@@ -4003,7 +5695,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "d9ac5155-6f88-5a45-ae52-ad65bbcc7507",
@@ -4065,7 +5758,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/d9ac5155-6f88-5a45-ae52-ad65bbcc7507_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.3958,
+     0.6528,
+     0.1198,
+     0.25
+    ],
+    "area": 0.0103,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 33
+   },
+   {
+    "png": "cutouts/d9ac5155-6f88-5a45-ae52-ad65bbcc7507_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.5052,
+     0.6597,
+     0.099,
+     0.2431
+    ],
+    "area": 0.0096,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 33
+   }
+  ]
  },
  {
   "id": "383c8f21-4b4c-52d5-845e-2f9f89d558bc",
@@ -4126,7 +5853,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/383c8f21-4b4c-52d5-845e-2f9f89d558bc_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.3698,
+     0.6806,
+     0.0781,
+     0.2222
+    ],
+    "area": 0.0081,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 27
+   },
+   {
+    "png": "cutouts/383c8f21-4b4c-52d5-845e-2f9f89d558bc_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.5573,
+     0.6736,
+     0.0781,
+     0.2292
+    ],
+    "area": 0.0076,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 27
+   }
+  ]
  },
  {
   "id": "1d4f3297-cff1-54f5-aabd-7e6a2d548c8f",
@@ -4187,7 +5948,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/1d4f3297-cff1-54f5-aabd-7e6a2d548c8f_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.3177,
+     0.6806,
+     0.0625,
+     0.2222
+    ],
+    "area": 0.008,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 29
+   },
+   {
+    "png": "cutouts/1d4f3297-cff1-54f5-aabd-7e6a2d548c8f_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.6302,
+     0.6875,
+     0.0573,
+     0.2153
+    ],
+    "area": 0.0076,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 29
+   }
+  ]
  },
  {
   "id": "e74dd521-2dfb-53bb-b780-fdf32762c18a",
@@ -4249,7 +6044,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/e74dd521-2dfb-53bb-b780-fdf32762c18a_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.2917,
+     0.6806,
+     0.0521,
+     0.2222
+    ],
+    "area": 0.0077,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 29
+   },
+   {
+    "png": "cutouts/e74dd521-2dfb-53bb-b780-fdf32762c18a_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.6615,
+     0.6875,
+     0.0573,
+     0.2153
+    ],
+    "area": 0.0076,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 29
+   }
+  ]
  },
  {
   "id": "5a61d4f8-bb06-56da-a3c0-24806eaf664f",
@@ -4311,7 +6140,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/5a61d4f8-bb06-56da-a3c0-24806eaf664f_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.2396,
+     0.6736,
+     0.1094,
+     0.2292
+    ],
+    "area": 0.0092,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 30
+   },
+   {
+    "png": "cutouts/5a61d4f8-bb06-56da-a3c0-24806eaf664f_1.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.6615,
+     0.6806,
+     0.1042,
+     0.2222
+    ],
+    "area": 0.0086,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 30
+   }
+  ]
  },
  {
   "id": "04bbbf2b-7105-5c69-9d2a-3ed5b18a1bc4",
@@ -4356,7 +6219,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "f2445fa1-eea3-5562-a19e-bb1b5a8b8b13",
@@ -4412,7 +6276,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/f2445fa1-eea3-5562-a19e-bb1b5a8b8b13_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.1406,
+     0.6875,
+     0.0573,
+     0.2569
+    ],
+    "area": 0.0084,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 34
+   }
+  ]
  },
  {
   "id": "470c19e1-5841-5801-9d4a-c7b8ac9a8a0d",
@@ -4468,7 +6350,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/470c19e1-5841-5801-9d4a-c7b8ac9a8a0d_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0,
+     0.7361,
+     0.0365,
+     0.1875
+    ],
+    "area": 0.0038,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 27
+   }
+  ]
  },
  {
   "id": "e7bcbe7e-882b-5256-928c-cb56ba241c8c",
@@ -4523,7 +6423,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/e7bcbe7e-882b-5256-928c-cb56ba241c8c_0.png",
+    "label": "elder",
+    "p": 1,
+    "bbox": [
+     0.1667,
+     0.6806,
+     0.0833,
+     0.2917
+    ],
+    "area": 0.0055,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 44
+   },
+   {
+    "png": "cutouts/e7bcbe7e-882b-5256-928c-cb56ba241c8c_1.png",
+    "label": "elder",
+    "p": 1,
+    "bbox": [
+     0.3281,
+     0.7222,
+     0.0729,
+     0.2708
+    ],
+    "area": 0.0052,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 39
+   }
+  ]
  },
  {
   "id": "2a739c97-c1b8-55c3-aef0-cbac8fe3fb18",
@@ -4579,7 +6513,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/2a739c97-c1b8-55c3-aef0-cbac8fe3fb18_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.5469,
+     0.6042,
+     0.1823,
+     0.375
+    ],
+    "area": 0.0229,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 52
+   }
+  ]
  },
  {
   "id": "6d8dad9f-d6aa-5ca6-95a4-680787f44726",
@@ -4634,7 +6586,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/6d8dad9f-d6aa-5ca6-95a4-680787f44726_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.1823,
+     0.5764,
+     0.1042,
+     0.4097
+    ],
+    "area": 0.0246,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 55.42756727547177
+   }
+  ]
  },
  {
   "id": "0a5cf576-cbcf-5afe-ad16-9816d9e7c264",
@@ -4689,7 +6659,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/0a5cf576-cbcf-5afe-ad16-9816d9e7c264_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.5469,
+     0.7361,
+     0.0938,
+     0.2083
+    ],
+    "area": 0.0079,
+    "src": "drawn",
+    "mode": "sit",
+    "face": 1,
+    "heightRows": 34
+   }
+  ]
  },
  {
   "id": "d159962b-d1cf-5066-b6b4-8d298777f9c7",
@@ -4734,7 +6722,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "0466a0b4-9cf0-5b17-8881-39538a6e6000",
@@ -4781,7 +6770,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "ddafcfc2-95a8-50a1-9bf0-1b7f2cf4878b",
@@ -4836,7 +6826,25 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/ddafcfc2-95a8-50a1-9bf0-1b7f2cf4878b_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4063,
+     0.4444,
+     0.2031,
+     0.4167
+    ],
+    "area": 0.0271,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 58
+   }
+  ]
  },
  {
   "id": "82fb7b9c-c1c8-5ae4-a58e-b216d4f4496f",
@@ -4883,7 +6891,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "00e8865b-58e0-5bd2-91fe-3ac632b4456a",
@@ -4930,7 +6939,8 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": []
  },
  {
   "id": "51a72536-ea4f-547d-9397-55b0cbd0420f",
@@ -4985,7 +6995,41 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/51a72536-ea4f-547d-9397-55b0cbd0420f_0.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4635,
+     0.5556,
+     0.1302,
+     0.3264
+    ],
+    "area": 0.0159,
+    "src": "drawn",
+    "mode": "stand",
+    "face": -1,
+    "heightRows": 44.824429495415046
+   },
+   {
+    "png": "cutouts/51a72536-ea4f-547d-9397-55b0cbd0420f_1.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4115,
+     0.4653,
+     0.1354,
+     0.3194
+    ],
+    "area": 0.0154,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 43.175570504584954
+   }
+  ]
  },
  {
   "id": "b41a1b6d-f473-5515-8789-10275cf02f11",
@@ -5047,6 +7091,40 @@
   "sim": null,
   "affinity": null,
   "aff_top": null,
-  "signs": null
+  "signs": null,
+  "cutouts": [
+   {
+    "png": "cutouts/b41a1b6d-f473-5515-8789-10275cf02f11_0.png",
+    "label": "everyman",
+    "p": 1,
+    "bbox": [
+     0.2604,
+     0.6806,
+     0.1146,
+     0.2361
+    ],
+    "area": 0.0097,
+    "src": "drawn",
+    "mode": "stand",
+    "face": 1,
+    "heightRows": 32
+   },
+   {
+    "png": "cutouts/b41a1b6d-f473-5515-8789-10275cf02f11_1.png",
+    "label": "poet",
+    "p": 1,
+    "bbox": [
+     0.4063,
+     0.625,
+     0.0833,
+     0.2917
+    ],
+    "area": 0.0109,
+    "src": "drawn",
+    "mode": "walk",
+    "face": 1,
+    "heightRows": 40
+   }
+  ]
  }
 ]
