@@ -53,12 +53,27 @@ const pset = new Set(pages);
 /* ---- the link graph ------------------------------------------------------- */
 const out = new Map(pages.map(p => [p, new Set()]));
 const inb = new Map(pages.map(p => [p, new Set()]));
+/* A LINK TO A DIRECTORY IS A LINK TO ITS INDEX. This used to insist the href
+   ended in `.html`, which misses the commonest way anyone links an index page:
+   `href="lab/bets/"`. On cineosis-lab that one omission reported a nine-studio
+   suite as nine orphans while the front page linked straight to it. So match
+   any local href and resolve it the way a server does — a trailing slash, or a
+   final segment with no dot, means `<dir>/index.html`. */
+const resolveHref = (fromPage, href) => {
+  if (/^(https?:|mailto:|tel:|data:|javascript:)/i.test(href) || href.startsWith("//")) return null;
+  let h = href.split("#")[0].split("?")[0];
+  if (!h) return null;
+  const base = path.posix.dirname(fromPage);
+  let t = path.posix.normalize(path.posix.join(base, h));
+  if (h.endsWith("/") || !path.posix.basename(t).includes(".")) t = path.posix.join(t, "index.html");
+  if (t.startsWith("/")) t = t.slice(1);
+  return t.endsWith(".html") ? t : null;
+};
 for (const p of pages) {
   let txt = ""; try { txt = fs.readFileSync(path.join(ROOT, p), "utf8"); } catch (_) { continue; }
-  for (const m of txt.matchAll(/href\s*=\s*["']([^"'#?]+\.html)(?:[?#][^"']*)?["']/g)) {
-    if (/^(https?:)?\/\//.test(m[1])) continue;
-    const t = path.posix.normalize(path.posix.join(path.posix.dirname(p), m[1]));
-    if (pset.has(t)) { out.get(p).add(t); inb.get(t).add(p); }
+  for (const m of txt.matchAll(/href\s*=\s*["']([^"']+)["']/g)) {
+    const t = resolveHref(p, m[1]);
+    if (t && pset.has(t)) { out.get(p).add(t); inb.get(t).add(p); }
   }
   /* a page can also be named in a sibling script or manifest, which a static
      href scan never sees — that is how the film shells looked orphaned when
@@ -68,10 +83,26 @@ const mentionedElsewhere = new Set();
 const nonHtml = files.filter(f => /\.(mjs|js|json|md|csv)$/i.test(f));
 const blobs = new Map();
 for (const f of nonHtml) { try { blobs.set(f, fs.readFileSync(path.join(ROOT, f), "utf8")); } catch (_) {} }
+/* AND THE SCRIPT INSIDE THE PAGE. These are single-file apps: cineosis-lab's
+   bets index routes its nine studios from a JS array, not from nine hrefs, so
+   a scan of separate .js files finds nothing and all nine read as lost. The
+   inline <script> of a page is a manifest like any other — read it as one. Only
+   the script, never the markup, or a page linked solely from an orphan would
+   get promoted and the distinction this survey draws would mean nothing. */
+for (const p of pages) {
+  try {
+    const txt = fs.readFileSync(path.join(ROOT, p), "utf8");
+    const js = [...txt.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map(m => m[1]).join("\n");
+    if (js.trim()) blobs.set(p + "#script", js);
+  } catch (_) {}
+}
 for (const p of pages) {
   const b = path.basename(p);
   if (b === "index.html") continue;
-  for (const [f, txt] of blobs) if (f !== p && txt.includes(b)) { mentionedElsewhere.add(p); break; }
+  for (const [f, txt] of blobs) {
+    if (f === p || f === p + "#script") continue;   // a page naming itself is not a link
+    if (txt.includes(b)) { mentionedElsewhere.add(p); break; }
+  }
 }
 const ROOTS = ["index.html", "wygwyl/index.html"].filter(r => pset.has(r));
 const reach = new Set(); const stack = [...ROOTS];
