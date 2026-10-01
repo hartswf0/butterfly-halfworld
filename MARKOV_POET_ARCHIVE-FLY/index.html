@@ -80,7 +80,7 @@ footer a{color:var(--accent)}
   from, the finished works, the five cuts, and the record of what went wrong.
   Every count and every byte on this page was measured off the disk when it was built;
   every preview is a real frame from the thing it stands for.</p>
-  <p class="tot">55 ENTRIES &nbsp;·&nbsp; 8,850 FILES &nbsp;·&nbsp; 12.3 GB &nbsp;·&nbsp; BUILT 2026-10-01 17:05</p>
+  <p class="tot">55 ENTRIES &nbsp;·&nbsp; 8,850 FILES &nbsp;·&nbsp; 12.3 GB &nbsp;·&nbsp; BUILT 2026-10-01 17:22</p>
 </header>
 
 <div class="bar">
@@ -145,20 +145,30 @@ footer a{color:var(--accent)}
  });
  apply();
 
- /* Two entries point outside this folder. Whether they resolve depends on where
-    the server's root is, which the page cannot know in advance — so it asks,
-    once, and says so on the card rather than handing anyone a silent 404. */
- cards.filter(function(c){return c.tagName==='A'&&c.getAttribute('href').indexOf('../')===0;})
-  .forEach(function(c){
+ /* Whether an entry resolves depends on where this page is being served from,
+    which it cannot know when it is built. Two entries live above this folder, and
+    the ones marked DISK ONLY are in no repository, so they exist on the machine
+    that made them and nowhere else. Both cases are asked about once, on load, and
+    answered on the card — a card that says DISK ONLY is still a link, and a link
+    that 404s teaches nothing. */
+ cards.filter(function(c){
+   return c.tagName==='A' && (c.getAttribute('href').indexOf('../')===0
+                              || c.querySelector('.meta .disk'));
+  }).forEach(function(c){
+   var up=c.getAttribute('href').indexOf('../')===0;
    fetch(c.getAttribute('href'),{method:'HEAD'}).then(function(r){
     if(r.ok) return; throw 0;
    }).catch(function(){
     c.classList.add('unreach');
     var m=c.querySelector('.meta');
-    if(m) m.insertAdjacentHTML('afterbegin','<span class="disk">OUTSIDE THIS ROOT</span>');
+    if(m) m.insertAdjacentHTML('afterbegin','<span class="disk">NOT ON THIS HOST</span>');
     var t=c.querySelector('.txt');
-    if(t) t.insertAdjacentHTML('beforeend','<p class="note">This entry lives above this folder. '
-      + 'Serve the repository root instead — or run the-door.command, which does.</p>');
+    if(t) t.insertAdjacentHTML('beforeend','<p class="note">'
+      + (up ? 'This entry lives above this folder. Serve the repository root instead — or run '
+            + 'the-door.command, which does.'
+            : 'Not served from here. It is on the disk it was made on; see the foot of this page '
+            + 'for why it is not in the repository.')
+      + '</p>');
    });
   });
 })();
