@@ -1,0 +1,5052 @@
+[
+ {
+  "id": "77bbd4d1-fd2a-57bf-9643-1929419d75fc",
+  "title": "OUT OF LIFE",
+  "slug": "01-out-of-life",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/01-out-of-life.html",
+  "start": 0,
+  "end": 10.603,
+  "match": 2.302,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#c6c4bc"
+  ],
+  "lum": 0.101,
+  "sat": 0.078,
+  "hue": 40.4,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "01",
+   "movement": 0,
+   "label": "TITLE",
+   "line": "",
+   "accent": "#5aa7ff",
+   "engine": "malhun",
+   "mode": "bayati",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "4cfa7752-8f18-518a-a6df-61b3defe5e09",
+  "title": "OUT OF LIFE",
+  "slug": "01-out-of-life",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/01-out-of-life.html",
+  "start": 10.603,
+  "end": 38.169,
+  "match": 34.704,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#1d1c1a",
+   "#4e4d49",
+   "#c6c4bc",
+   "#a4a19b"
+  ],
+  "lum": 0.888,
+  "sat": 0.298,
+  "hue": 45,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0078,
+    "modes": [
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "01",
+   "movement": 1,
+   "label": "THE SEARCH",
+   "line": "What we've made, we don't want. What we've sold — to the world, to ourselves — doesn't exist. I look for a way out: through the hallways, within the drawers, and fire escapes.",
+   "accent": "#5aa7ff",
+   "engine": "malhun",
+   "mode": "bayati",
+   "figureHeight": 34,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "a8863403-93c7-5c6b-a2a4-6c6fb3327b8e",
+  "title": "OUT OF LIFE",
+  "slug": "01-out-of-life",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/01-out-of-life.html",
+  "start": 38.169,
+  "end": 65.736,
+  "match": 47.778,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#e2dfd7",
+   "#c6c4bc",
+   "#a4a19b",
+   "#1d1c1a"
+  ],
+  "lum": 0.847,
+  "sat": 0.203,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0743,
+    "modes": [
+     "walk"
+    ]
+   },
+   {
+    "label": "turned",
+    "p": 0.0724,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "01",
+   "movement": 2,
+   "label": "MORE HAZE",
+   "line": "The vape gathers, inside and out. My vision blurs. I move toward the window — and you only get further away. More haze.",
+   "accent": "#5aa7ff",
+   "engine": "malhun",
+   "mode": "bayati",
+   "figureHeight": 34,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "ac2c26ad-1fec-51aa-9a07-f3300fc12312",
+  "title": "OUT OF LIFE",
+  "slug": "01-out-of-life",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/01-out-of-life.html",
+  "start": 65.736,
+  "end": 93.303,
+  "match": 78.968,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#e2dfd7",
+   "#c6c4bc",
+   "#7b7974",
+   "#a4a19b"
+  ],
+  "lum": 0.839,
+  "sat": 0.218,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0103,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "everyman",
+    "p": 0.0081,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "01",
+   "movement": 3,
+   "label": "THE FALL",
+   "line": "It was the maze, constructed by a tainted love. You fall off the fire escape, into darkness — and the city streaks upward like it's leaving too.",
+   "accent": "#5aa7ff",
+   "engine": "malhun",
+   "mode": "bayati",
+   "figureHeight": 33,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "8846c650-a93f-5a2b-b0df-e23288ed9e75",
+  "title": "OUT OF LIFE",
+  "slug": "01-out-of-life",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/01-out-of-life.html",
+  "start": 93.303,
+  "end": 122.99,
+  "match": 111.454,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#161513",
+   "#a4a19b",
+   "#c6c4bc",
+   "#96c3f5"
+  ],
+  "lum": 0.583,
+  "sat": 0.217,
+  "hue": 44.3,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0075,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "everyman",
+    "p": 0.0056,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "01",
+   "movement": 4,
+   "label": "AS DARK AS BLACK",
+   "line": "I trip on my own words, falling out of life — and find where you go when you leave. The gap between us breathes, and never closes.",
+   "accent": "#5aa7ff",
+   "engine": "malhun",
+   "mode": "bayati",
+   "figureHeight": 27,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "a12b5cb7-63ac-533c-a304-d0c80dc607c2",
+  "title": "FLASHING LIGHTS",
+  "slug": "02-flashing-lights",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/02-flashing-lights.html",
+  "start": 122.987,
+  "end": 128.476,
+  "match": 125.622,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#c6c4bc"
+  ],
+  "lum": 0.104,
+  "sat": 0.079,
+  "hue": 40.5,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "02",
+   "movement": 0,
+   "label": "TITLE",
+   "line": "",
+   "accent": "#5aa7ff",
+   "engine": "gabay",
+   "mode": "phrygian",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "b3557148-a850-53d1-93e4-c15844e5d7d4",
+  "title": "FLASHING LIGHTS",
+  "slug": "02-flashing-lights",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/02-flashing-lights.html",
+  "start": 128.476,
+  "end": 142.748,
+  "match": 129.699,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#1d1c1a",
+   "#c6c4bc",
+   "#161513",
+   "#7b7974"
+  ],
+  "lum": 0.883,
+  "sat": 0.297,
+  "hue": 45,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.0182,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "02",
+   "movement": 1,
+   "label": "SILENT SCREAM",
+   "line": "It was the type of silent scream a trapped lover makes to escape: a pending marriage, a concussion, a set of walls caving inward.",
+   "accent": "#5aa7ff",
+   "engine": "gabay",
+   "mode": "phrygian",
+   "figureHeight": 46,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "b21502d1-c92d-57fe-8bb1-df33051902a7",
+  "title": "FLASHING LIGHTS",
+  "slug": "02-flashing-lights",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/02-flashing-lights.html",
+  "start": 142.748,
+  "end": 155.922,
+  "match": 149.072,
+  "bw": false,
+  "palette": [
+   "#4e4d49",
+   "#f2efe6",
+   "#c6c4bc",
+   "#1d1c1a",
+   "#a4a19b"
+  ],
+  "lum": 0.592,
+  "sat": 0.136,
+  "hue": 44.6,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0168,
+    "modes": [
+     "stand",
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "02",
+   "movement": 2,
+   "label": "THE MIRROR",
+   "line": "An emergency call while tossing and turning — the silent call a man makes to the mirror after midnight, to digest a truth.",
+   "accent": "#5aa7ff",
+   "engine": "gabay",
+   "mode": "phrygian",
+   "figureHeight": 54,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "fb98b263-5f83-5968-9e76-a23b627ce619",
+  "title": "FLASHING LIGHTS",
+  "slug": "02-flashing-lights",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/02-flashing-lights.html",
+  "start": 155.922,
+  "end": 170.194,
+  "match": 162.772,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#4e4d49",
+   "#a4a19b",
+   "#1d1c1a"
+  ],
+  "lum": 0.469,
+  "sat": 0.183,
+  "hue": 43.9,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "02",
+   "movement": 3,
+   "label": "WE GO THROUGH",
+   "line": "A winless insomnia. An epiphany of a road winding down. My eyes dilate — and we go through.",
+   "accent": "#5aa7ff",
+   "engine": "gabay",
+   "mode": "phrygian",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "ec8cbff4-921b-5c8c-8bd0-174be20b7ec5",
+  "title": "FLASHING LIGHTS",
+  "slug": "02-flashing-lights",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/02-flashing-lights.html",
+  "start": 170.194,
+  "end": 185.563,
+  "match": 177.571,
+  "bw": false,
+  "palette": [
+   "#7b7974",
+   "#f2efe6",
+   "#c6c4bc",
+   "#1d1c1a",
+   "#161513"
+  ],
+  "lum": 0.668,
+  "sat": 0.139,
+  "hue": 44.7,
+  "subjects": [
+   {
+    "label": "child",
+    "p": 0.033,
+    "modes": [
+     "stand",
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "02",
+   "movement": 4,
+   "label": "THE GHOST WAS SEVEN",
+   "line": "I was six, I recall, when the ghost of a dead and love-less seven-year-old appeared, and shared that my parents' marriage wouldn't last. A warm, heavy breeze in winter, where a child is left home alone.",
+   "accent": "#5aa7ff",
+   "engine": "gabay",
+   "mode": "phrygian",
+   "figureHeight": 53.9,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "71e66e7c-ea68-516b-a4ea-076a07c02815",
+  "title": "FLASHING LIGHTS",
+  "slug": "02-flashing-lights",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/02-flashing-lights.html",
+  "start": 185.563,
+  "end": 199.835,
+  "match": 190.538,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#161513",
+   "#7b7974",
+   "#a4a19b",
+   "#4e4d49"
+  ],
+  "lum": 0.704,
+  "sat": 0.243,
+  "hue": 44.6,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.0078,
+    "modes": [
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "02",
+   "movement": 5,
+   "label": "BLINDS UP",
+   "line": "Curtains pulled, and blinds up as far and as wise as possible — to see flashing lights, and the whispering screams of two souls on a road winding down.",
+   "accent": "#5aa7ff",
+   "engine": "gabay",
+   "mode": "phrygian",
+   "figureHeight": 31.994285714285734,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "9c0f60aa-aef7-5a6e-aa51-6628be73bd42",
+  "title": "FLASHING LIGHTS",
+  "slug": "02-flashing-lights",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/02-flashing-lights.html",
+  "start": 199.835,
+  "end": 214.107,
+  "match": 210.437,
+  "bw": false,
+  "palette": [
+   "#c6c4bc",
+   "#f2efe6",
+   "#7b7974",
+   "#1d1c1a",
+   "#a4a19b"
+  ],
+  "lum": 0.732,
+  "sat": 0.153,
+  "hue": 44.8,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0209,
+    "modes": [
+     "stand",
+     "walk"
+    ]
+   },
+   {
+    "label": "child",
+    "p": 0.0195,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "02",
+   "movement": 6,
+   "label": "THROUGH THE WINDOW",
+   "line": "And no tears, and no fucks, and no love to give. The ghost hands me a tambourine — and I throw it through the window.",
+   "accent": "#5aa7ff",
+   "engine": "gabay",
+   "mode": "phrygian",
+   "figureHeight": 52,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "a9f6c83f-faf6-5f58-a914-fed2989acef1",
+  "title": "HOW TO BREAK OFF AN ENGAGEMENT",
+  "slug": "03-how-to-break-off-an-engagement",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/03-how-to-break-off-an-engagement.html",
+  "start": 214.108,
+  "end": 218.418,
+  "match": 216.177,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#c6c4bc"
+  ],
+  "lum": 0.109,
+  "sat": 0.08,
+  "hue": 40.6,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "03",
+   "movement": 0,
+   "label": "TITLE",
+   "line": "",
+   "accent": "#5aa7ff",
+   "engine": "dirge",
+   "mode": "penta",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "8ec55f7e-38cf-5856-b947-a3a94846fc94",
+  "title": "HOW TO BREAK OFF AN ENGAGEMENT",
+  "slug": "03-how-to-break-off-an-engagement",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/03-how-to-break-off-an-engagement.html",
+  "start": 218.418,
+  "end": 229.622,
+  "match": 226.741,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#a4a19b",
+   "#7b7974",
+   "#4e4d49",
+   "#c6c4bc"
+  ],
+  "lum": 0.883,
+  "sat": 0.29,
+  "hue": 45,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "03",
+   "movement": 1,
+   "label": "ODE TO FOREVER",
+   "line": "Ode to forever — a tambourine sounds off an empty temple, empty choir stands, empty prayer lines.",
+   "accent": "#5aa7ff",
+   "engine": "dirge",
+   "mode": "penta",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "840cf3da-a3da-562c-9d53-ddb52b22e19f",
+  "title": "HOW TO BREAK OFF AN ENGAGEMENT",
+  "slug": "03-how-to-break-off-an-engagement",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/03-how-to-break-off-an-engagement.html",
+  "start": 229.622,
+  "end": 239.965,
+  "match": 237.306,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#7b7974",
+   "#1d1c1a",
+   "#4e4d49",
+   "#a4a19b"
+  ],
+  "lum": 0.859,
+  "sat": 0.285,
+  "hue": 45,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "03",
+   "movement": 2,
+   "label": "STILL WHOLE",
+   "line": "And abandoned baptism pools. It flies in through the rose window — still whole.",
+   "accent": "#5aa7ff",
+   "engine": "dirge",
+   "mode": "penta",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "5a69b08c-71bb-5651-bd02-7bd3505eee0d",
+  "title": "HOW TO BREAK OFF AN ENGAGEMENT",
+  "slug": "03-how-to-break-off-an-engagement",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/03-how-to-break-off-an-engagement.html",
+  "start": 239.965,
+  "end": 251.17,
+  "match": 246.816,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#c6c4bc",
+   "#a4a19b",
+   "#4e4d49",
+   "#1d1c1a"
+  ],
+  "lum": 0.792,
+  "sat": 0.221,
+  "hue": 44.9,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "03",
+   "movement": 3,
+   "label": "COBWEBS",
+   "line": "Pews taken by cobwebs, and doused in disintegration. Spirits have left salvations in opened gift boxes, placed outside the side doors.",
+   "accent": "#5aa7ff",
+   "engine": "dirge",
+   "mode": "penta",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "1605783b-1723-50c4-b6a0-a3805ebd8dcc",
+  "title": "HOW TO BREAK OFF AN ENGAGEMENT",
+  "slug": "03-how-to-break-off-an-engagement",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/03-how-to-break-off-an-engagement.html",
+  "start": 251.17,
+  "end": 264.098,
+  "match": 252.278,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#161513",
+   "#7b7974",
+   "#a4a19b",
+   "#4e4d49"
+  ],
+  "lum": 0.773,
+  "sat": 0.25,
+  "hue": 44.8,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "03",
+   "movement": 4,
+   "label": "UNTIL NOTHING REMAINS",
+   "line": "It thunders. Then rains until nothing remains. What was once love, now goods — broken and sealed apart by lightning. Daily breads, soaked and delivered rotted by rain; and blankets, soiled by venomous puppeteers.",
+   "accent": "#5aa7ff",
+   "engine": "dirge",
+   "mode": "penta",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "51b6c0d6-f178-5889-bee1-258c53ec7821",
+  "title": "HOW TO BREAK OFF AN ENGAGEMENT",
+  "slug": "03-how-to-break-off-an-engagement",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/03-how-to-break-off-an-engagement.html",
+  "start": 264.098,
+  "end": 275.303,
+  "match": 270.949,
+  "bw": false,
+  "palette": [
+   "#7b7974",
+   "#c6c4bc",
+   "#f2efe6",
+   "#a4a19b",
+   "#1d1c1a"
+  ],
+  "lum": 0.658,
+  "sat": 0.115,
+  "hue": 44.7,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0053,
+    "modes": [
+     "walk"
+    ]
+   },
+   {
+    "label": "turned",
+    "p": 0.0048,
+    "modes": [
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "03",
+   "movement": 5,
+   "label": "TWO SETS OF FOOTSTEPS",
+   "line": "Ode to the storm ending. Ode to two sets of mud-imprinted footsteps, leading away from what the water kept.",
+   "accent": "#5aa7ff",
+   "engine": "dirge",
+   "mode": "penta",
+   "figureHeight": 31.0141265338691,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "a70142af-3c00-5da4-9725-9aec4753b406",
+  "title": "HOW TO BREAK OFF AN ENGAGEMENT",
+  "slug": "03-how-to-break-off-an-engagement",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/03-how-to-break-off-an-engagement.html",
+  "start": 275.303,
+  "end": 286.508,
+  "match": 280.682,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#e2dfd7",
+   "#a4a19b",
+   "#c6c4bc",
+   "#7b7974"
+  ],
+  "lum": 0.78,
+  "sat": 0.192,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0106,
+    "modes": [
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "03",
+   "movement": 6,
+   "label": "SHATTERED",
+   "line": "And a tambourine, shattered into pieces. What if I followed this trail, to where the broken pieces have washed ashore?",
+   "accent": "#5aa7ff",
+   "engine": "dirge",
+   "mode": "penta",
+   "figureHeight": 42,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "e660c3d6-a341-51e3-82ec-809c80f627f6",
+  "title": "NEVERMORE",
+  "slug": "04-nevermore",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/04-nevermore.html",
+  "start": 286.513,
+  "end": 294.47,
+  "match": 289.286,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#c6c4bc"
+  ],
+  "lum": 0.103,
+  "sat": 0.078,
+  "hue": 40.4,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "04",
+   "movement": 0,
+   "label": "TITLE",
+   "line": "",
+   "accent": "#5aa7ff",
+   "engine": "izibongo",
+   "mode": "penta2",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "1e0a459e-6ecd-5996-abf3-7062d492c617",
+  "title": "NEVERMORE",
+  "slug": "04-nevermore",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/04-nevermore.html",
+  "start": 294.47,
+  "end": 315.158,
+  "match": 307.119,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#a4a19b",
+   "#c6c4bc",
+   "#e2dfd7",
+   "#1d1c1a"
+  ],
+  "lum": 0.845,
+  "sat": 0.248,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.006,
+    "modes": [
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "04",
+   "movement": 1,
+   "label": "WASHED ASHORE",
+   "line": "What if I followed this trail, to where the broken pieces have washed ashore — and the ashes of expired wildfires cover sands, and debris lifted from the night sea water’s floor.",
+   "accent": "#5aa7ff",
+   "engine": "izibongo",
+   "mode": "penta2",
+   "figureHeight": 32.89257142857142,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "3a75924a-6b35-57db-921b-40c6772ba6bf",
+  "title": "NEVERMORE",
+  "slug": "04-nevermore",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/04-nevermore.html",
+  "start": 315.158,
+  "end": 337.437,
+  "match": 328.78,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#c6c4bc",
+   "#a4a19b",
+   "#e2dfd7",
+   "#7b7974"
+  ],
+  "lum": 0.838,
+  "sat": 0.247,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0102,
+    "modes": [
+     "sit"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "04",
+   "movement": 2,
+   "label": "FOLDED WHISPERS",
+   "line": "The waves calm to folded whispers; the winds mute the trees. The right level of silence, to find a throbbing heart — it used to be mine. I lift it with care: nevermore.",
+   "accent": "#5aa7ff",
+   "engine": "izibongo",
+   "mode": "penta2",
+   "figureHeight": 38,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "54be94e2-1804-59a6-8fe9-bc0caedbe227",
+  "title": "NEVERMORE",
+  "slug": "04-nevermore",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/04-nevermore.html",
+  "start": 337.437,
+  "end": 358.126,
+  "match": 344.649,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#c6c4bc",
+   "#7b7974",
+   "#1d1c1a",
+   "#a4a19b"
+  ],
+  "lum": 0.797,
+  "sat": 0.2,
+  "hue": 44.9,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "04",
+   "movement": 3,
+   "label": "MUSTARD SEEDS",
+   "line": "What if I followed this reclaimed heart, to where the puzzle pieces of faith are handcrafted — scrambled and scattered as mustard seeds into the vast moonlit night’s garden fields.",
+   "accent": "#5aa7ff",
+   "engine": "izibongo",
+   "mode": "penta2",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "b038974c-0f8b-537e-918c-2f9044ac5fd8",
+  "title": "NEVERMORE",
+  "slug": "04-nevermore",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/04-nevermore.html",
+  "start": 358.126,
+  "end": 380.405,
+  "match": 377.604,
+  "bw": false,
+  "palette": [
+   "#c6c4bc",
+   "#f2efe6",
+   "#161513",
+   "#4e4d49",
+   "#7b7974"
+  ],
+  "lum": 0.699,
+  "sat": 0.158,
+  "hue": 44.6,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "04",
+   "movement": 4,
+   "label": "THEY TURN TO FACE ME",
+   "line": "The plants in a golden hue bloom, and face toward me in anticipation. The weeds repel, falling into the shadows where our memories hide — and mean so little, in a moment of defeat — as I’m called forward.",
+   "accent": "#5aa7ff",
+   "engine": "izibongo",
+   "mode": "penta2",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "3bf9a0d6-58d4-5ffa-b959-9fbf710b7f7a",
+  "title": "NEVERMORE",
+  "slug": "04-nevermore",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/04-nevermore.html",
+  "start": 380.405,
+  "end": 399.502,
+  "match": 384.552,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#1d1c1a",
+   "#a4a19b",
+   "#7b7974"
+  ],
+  "lum": 0.348,
+  "sat": 0.148,
+  "hue": 43.3,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0069,
+    "modes": [
+     "sit"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "04",
+   "movement": 5,
+   "label": "DEEPEST DARKNESS",
+   "line": "The clouds mute the stars for the deepest level of darkness — welcoming extra hard work, to search the bare ground for two hands.",
+   "accent": "#5aa7ff",
+   "engine": "izibongo",
+   "mode": "penta2",
+   "figureHeight": 30,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "20f3186c-d143-54ad-8a17-ebe570251b3d",
+  "title": "NEVERMORE",
+  "slug": "04-nevermore",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/04-nevermore.html",
+  "start": 399.502,
+  "end": 421.782,
+  "match": 418.981,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#a4a19b",
+   "#7b7974",
+   "#4e4d49"
+  ],
+  "lum": 0.261,
+  "sat": 0.121,
+  "hue": 42.6,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0203,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "04",
+   "movement": 6,
+   "label": "I PUT THEM BACK ON",
+   "line": "Hands that once could touch dust after dusk, and feel good — they too used to be mine. I put them back on, with the care of my future at stake: nevermore.",
+   "accent": "#5aa7ff",
+   "engine": "izibongo",
+   "mode": "penta2",
+   "figureHeight": 54,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "9c7f9f74-7aa3-5230-8b65-84044ed01a8c",
+  "title": "BLOODLINES",
+  "slug": "05-bloodlines",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/05-bloodlines.html",
+  "start": 422.184,
+  "end": 428.252,
+  "match": 424.299,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#c6c4bc"
+  ],
+  "lum": 0.101,
+  "sat": 0.078,
+  "hue": 40.4,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "05",
+   "movement": 0,
+   "label": "TITLE",
+   "line": "",
+   "accent": "#5aa7ff",
+   "engine": "jaliya",
+   "mode": "mixo",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "02dfa46b-198a-5bc9-810a-10c5dae085a1",
+  "title": "BLOODLINES",
+  "slug": "05-bloodlines",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/05-bloodlines.html",
+  "start": 428.252,
+  "end": 444.031,
+  "match": 442.047,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#a4a19b",
+   "#c6c4bc",
+   "#e2dfd7",
+   "#4e4d49"
+  ],
+  "lum": 0.754,
+  "sat": 0.16,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0054,
+    "modes": [
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "05",
+   "movement": 1,
+   "label": "NAME MY OWN STARS",
+   "line": "Now go, they tell me. To ask if I can inherit the earth — to ask if I can name my own stars. Even galaxies, if I may.",
+   "accent": "#5aa7ff",
+   "engine": "jaliya",
+   "mode": "mixo",
+   "figureHeight": 33.563591836734695,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "9bfba878-7cbe-582a-a5c4-1b97c711b0bc",
+  "title": "BLOODLINES",
+  "slug": "05-bloodlines",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/05-bloodlines.html",
+  "start": 444.031,
+  "end": 462.237,
+  "match": 457.555,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#c6c4bc",
+   "#4e4d49",
+   "#161513",
+   "#1d1c1a"
+  ],
+  "lum": 0.787,
+  "sat": 0.242,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0163,
+    "modes": [
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "05",
+   "movement": 2,
+   "label": "SOUTHERN PINE",
+   "line": "The past, too, was waiting for me — coming of age in the shared rooms of humid basements as bedrooms; mattress pads where the wood beams of Southern pine could comfort my spine. It didn’t. To dream was to prevail.",
+   "accent": "#5aa7ff",
+   "engine": "jaliya",
+   "mode": "mixo",
+   "figureHeight": 50,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "d10b2f8d-d078-598e-876c-a9a8a4cc9f47",
+  "title": "BLOODLINES",
+  "slug": "05-bloodlines",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/05-bloodlines.html",
+  "start": 462.237,
+  "end": 478.016,
+  "match": 476.032,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#c6c4bc",
+   "#a4a19b",
+   "#1d1c1a",
+   "#4e4d49"
+  ],
+  "lum": 0.877,
+  "sat": 0.289,
+  "hue": 45,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0035,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "05",
+   "movement": 3,
+   "label": "A NEW UNIVERSE",
+   "line": "They tell me: ask if I can invent a new universe — if God would let me, little ole me, award a blessing here and there. Even grant miracles.",
+   "accent": "#5aa7ff",
+   "engine": "jaliya",
+   "mode": "mixo",
+   "figureHeight": 16,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "a249fd9e-03ff-548a-bf7c-63de8c3094ae",
+  "title": "BLOODLINES",
+  "slug": "05-bloodlines",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/05-bloodlines.html",
+  "start": 478.016,
+  "end": 495.008,
+  "match": 488.405,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#c6c4bc",
+   "#a4a19b",
+   "#7b7974",
+   "#161513"
+  ],
+  "lum": 0.786,
+  "sat": 0.209,
+  "hue": 44.9,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "05",
+   "movement": 4,
+   "label": "BEWARE OF ME",
+   "line": "In uncertain times, in forsaken times. Their blood flows through my hands — fingerprints that orchestra great powers — sun-kissing my skin, deepening my voice to a baritone of a million cries. Beware of me.",
+   "accent": "#5aa7ff",
+   "engine": "jaliya",
+   "mode": "mixo",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "60d854f7-ec6b-5c45-9995-c8396298835b",
+  "title": "BLOODLINES",
+  "slug": "05-bloodlines",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/05-bloodlines.html",
+  "start": 495.008,
+  "end": 513.214,
+  "match": 503.747,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#e2dfd7",
+   "#7b7974",
+   "#c6c4bc",
+   "#1d1c1a"
+  ],
+  "lum": 0.854,
+  "sat": 0.238,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.0043,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "elder",
+    "p": 0.002,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "05",
+   "movement": 5,
+   "label": "THE GATES OPEN",
+   "line": "The gates open with wings — gifted from evolution, and made of marble stones kissed by the hymns our Creator composed, with an orchestra of our ancestors’ wildest dreams, to welcome us.",
+   "accent": "#5aa7ff",
+   "engine": "jaliya",
+   "mode": "mixo",
+   "figureHeight": 14,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "8e37b6bd-2eb7-5b42-8ddf-82a8d9904ebd",
+  "title": "RESURRECTING ATLANTIS",
+  "slug": "06-resurrecting-atlantis",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/06-resurrecting-atlantis.html",
+  "start": 513.212,
+  "end": 519.547,
+  "match": 515.42,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#c6c4bc"
+  ],
+  "lum": 0.106,
+  "sat": 0.079,
+  "hue": 40.5,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "06",
+   "movement": 0,
+   "label": "TITLE",
+   "line": "",
+   "accent": "#5aa7ff",
+   "engine": "ahellil",
+   "mode": "dorian",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "05bb1f34-f734-51fb-a26f-c9331be8e1a4",
+  "title": "RESURRECTING ATLANTIS",
+  "slug": "06-resurrecting-atlantis",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/06-resurrecting-atlantis.html",
+  "start": 519.547,
+  "end": 536.02,
+  "match": 533.949,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#e2dfd7",
+   "#c6c4bc",
+   "#a4a19b",
+   "#1d1c1a"
+  ],
+  "lum": 0.816,
+  "sat": 0.196,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.0187,
+    "modes": [
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "06",
+   "movement": 1,
+   "label": "THE COMETS",
+   "line": "Poets, who eased generations down yellow brick roads — and plucked our souls out of their secret places, to follow comets to the capital city of our collective consciousness.",
+   "accent": "#5aa7ff",
+   "engine": "ahellil",
+   "mode": "dorian",
+   "figureHeight": 34,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "218280c0-f9fd-5568-a0cb-b2f64f097d1a",
+  "title": "RESURRECTING ATLANTIS",
+  "slug": "06-resurrecting-atlantis",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/06-resurrecting-atlantis.html",
+  "start": 536.02,
+  "end": 555.027,
+  "match": 552.637,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#1d1c1a",
+   "#c6c4bc",
+   "#4e4d49",
+   "#a4a19b"
+  ],
+  "lum": 0.88,
+  "sat": 0.292,
+  "hue": 45,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.03,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "06",
+   "movement": 2,
+   "label": "THE WATERLINE FALLS",
+   "line": "Resurrecting Atlantis. Here we are all one — the pact we've made here with nature, abandoned and hoped for the best, back on life.",
+   "accent": "#5aa7ff",
+   "engine": "ahellil",
+   "mode": "dorian",
+   "figureHeight": 18.9158,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "f3084edd-e6d9-5f62-86e3-306db2e83f47",
+  "title": "RESURRECTING ATLANTIS",
+  "slug": "06-resurrecting-atlantis",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/06-resurrecting-atlantis.html",
+  "start": 555.027,
+  "end": 572.767,
+  "match": 570.536,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#4e4d49",
+   "#c6c4bc",
+   "#1d1c1a",
+   "#a4a19b"
+  ],
+  "lum": 0.861,
+  "sat": 0.285,
+  "hue": 45,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.0182,
+    "modes": [
+     "stand",
+     "walk"
+    ]
+   }
+  ],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "06",
+   "movement": 3,
+   "label": "ADMISSION",
+   "line": "A relearned currency, we reassess as the admission. But here we are all safe. An unfamiliar, flickering candle light, illuminating smiles at night.",
+   "accent": "#5aa7ff",
+   "engine": "ahellil",
+   "mode": "dorian",
+   "figureHeight": 15,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "31c98ba4-fc7a-5ef3-b054-b940fa970d9d",
+  "title": "RESURRECTING ATLANTIS",
+  "slug": "06-resurrecting-atlantis",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/06-resurrecting-atlantis.html",
+  "start": 572.767,
+  "end": 589.239,
+  "match": 580.673,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#4e4d49",
+   "#c6c4bc",
+   "#1d1c1a",
+   "#7b7974"
+  ],
+  "lum": 0.822,
+  "sat": 0.264,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.0163,
+    "modes": [
+     "walk"
+    ]
+   }
+  ],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "06",
+   "movement": 4,
+   "label": "NARROW STREETS",
+   "line": "Where shadows cast from narrow streets beaming with love — in the joyful noises that color rainbows, and give us infinite time to heal, and set clouds free.",
+   "accent": "#5aa7ff",
+   "engine": "ahellil",
+   "mode": "dorian",
+   "figureHeight": 16.61676,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "ffd0e526-781d-5257-8269-0e04dedbd82d",
+  "title": "RESURRECTING ATLANTIS",
+  "slug": "06-resurrecting-atlantis",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/06-resurrecting-atlantis.html",
+  "start": 589.239,
+  "end": 605.712,
+  "match": 594.981,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#a4a19b",
+   "#4e4d49",
+   "#1d1c1a",
+   "#161513"
+  ],
+  "lum": 0.748,
+  "sat": 0.208,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.01,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "everyman",
+    "p": 0.0098,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "06",
+   "movement": 5,
+   "label": "CROSSHAIRS TO CONTINUUMS",
+   "line": "I know my soul — and it could stay here forever. Leaving behind crosshairs for continuums, and strains for serendipity.",
+   "accent": "#5aa7ff",
+   "engine": "ahellil",
+   "mode": "dorian",
+   "figureHeight": 34,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "3ea096c8-2368-5ef5-b5cf-c024a9795ff3",
+  "title": "RESURRECTING ATLANTIS",
+  "slug": "06-resurrecting-atlantis",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/06-resurrecting-atlantis.html",
+  "start": 605.712,
+  "end": 623.452,
+  "match": 621.222,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#a4a19b",
+   "#c6c4bc",
+   "#e2dfd7",
+   "#4e4d49"
+  ],
+  "lum": 0.722,
+  "sat": 0.173,
+  "hue": 44.8,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.0157,
+    "modes": [
+     "stand",
+     "walk"
+    ]
+   },
+   {
+    "label": "poet",
+    "p": 0.0083,
+    "modes": [
+     "stand",
+     "walk"
+    ]
+   },
+   {
+    "label": "elder",
+    "p": 0.0083,
+    "modes": [
+     "stand",
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "06",
+   "movement": 6,
+   "label": "WELCOMING ALL",
+   "line": "A city born in unison, out of the purest of fictions — welcoming me, and welcoming all.",
+   "accent": "#5aa7ff",
+   "engine": "ahellil",
+   "mode": "dorian",
+   "figureHeight": 34,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "c5855715-a5f3-5f76-9504-9a9070a41415",
+  "title": "DJ TURN ME UP",
+  "slug": "07-dj-turn-me-up",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/07-dj-turn-me-up.html",
+  "start": 623.454,
+  "end": 628.888,
+  "match": 626.063,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#c6c4bc"
+  ],
+  "lum": 0.1,
+  "sat": 0.078,
+  "hue": 40.4,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "07",
+   "movement": 0,
+   "label": "TITLE",
+   "line": "",
+   "accent": "#5aa7ff",
+   "engine": "taasu",
+   "mode": "penta",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "932c051d-5f80-5c4c-a9a9-eb159d85551b",
+  "title": "DJ TURN ME UP",
+  "slug": "07-dj-turn-me-up",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/07-dj-turn-me-up.html",
+  "start": 628.888,
+  "end": 643.017,
+  "match": 631.956,
+  "bw": false,
+  "palette": [
+   "#c6c4bc",
+   "#f2efe6",
+   "#a4a19b",
+   "#e2dfd7",
+   "#1d1c1a"
+  ],
+  "lum": 0.766,
+  "sat": 0.15,
+  "hue": 44.8,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0066,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "07",
+   "movement": 1,
+   "label": "CHIN NESTED",
+   "line": "DJ, turn me up, please. Eyes wide shut, chin nested at the arch of the weight of these spoken words.",
+   "accent": "#5aa7ff",
+   "engine": "taasu",
+   "mode": "penta",
+   "figureHeight": 26.200000000000003,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "7fb37131-75c4-50fe-8f5b-b9ec89b9c6ef",
+  "title": "DJ TURN ME UP",
+  "slug": "07-dj-turn-me-up",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/07-dj-turn-me-up.html",
+  "start": 643.017,
+  "end": 657.145,
+  "match": 655.369,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#e2dfd7",
+   "#c6c4bc",
+   "#a4a19b",
+   "#7b7974"
+  ],
+  "lum": 0.798,
+  "sat": 0.197,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "turned",
+    "p": 0.0046,
+    "modes": [
+     "walk"
+    ]
+   },
+   {
+    "label": "poet",
+    "p": 0.0022,
+    "modes": [
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "07",
+   "movement": 2,
+   "label": "VINEYARD GHOSTS",
+   "line": "I have a love story to tell — of ghosts, whispering unfolded dilutions, birthed in purity, and dying in the vineyards of sun-soaked evergreen fields, unnourished.",
+   "accent": "#5aa7ff",
+   "engine": "taasu",
+   "mode": "penta",
+   "figureHeight": 35.30204981737611,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "2d91fbf4-e1ff-52b1-9a51-97911558f13b",
+  "title": "DJ TURN ME UP",
+  "slug": "07-dj-turn-me-up",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/07-dj-turn-me-up.html",
+  "start": 657.145,
+  "end": 672.36,
+  "match": 658.449,
+  "bw": false,
+  "palette": [
+   "#a4a19b",
+   "#f2efe6",
+   "#c6c4bc",
+   "#e2dfd7",
+   "#161513"
+  ],
+  "lum": 0.718,
+  "sat": 0.126,
+  "hue": 44.8,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.7462,
+    "modes": [
+     "stand",
+     "walk"
+    ]
+   }
+  ],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "07",
+   "movement": 3,
+   "label": "THOUSAND LIGHT YEARS",
+   "line": "One by one, treasures escaping — devaluing themselves after unsullied stars diminished their glares. I walked a thousand light years to be heard. So DJ — please — turn me up.",
+   "accent": "#5aa7ff",
+   "engine": "taasu",
+   "mode": "penta",
+   "figureHeight": 27.744000000000003,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "68d810df-ff8d-597e-912b-71102a72b6fe",
+  "title": "DJ TURN ME UP",
+  "slug": "07-dj-turn-me-up",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/07-dj-turn-me-up.html",
+  "start": 672.36,
+  "end": 687.575,
+  "match": 685.663,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#a4a19b",
+   "#7b7974",
+   "#1d1c1a",
+   "#c6c4bc"
+  ],
+  "lum": 0.844,
+  "sat": 0.262,
+  "hue": 45,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "07",
+   "movement": 4,
+   "label": "DIVERGING RINGS",
+   "line": "So I can speak: of wedding bands diverging across abstract skies of wounded souls. Of a shared home, boxed and trucked on separate one-way streets — not built with U-turns, or stop, maybe-we-shouldn't signs.",
+   "accent": "#5aa7ff",
+   "engine": "taasu",
+   "mode": "penta",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "39a76c6f-4471-591c-8a9e-3748cb12f06e",
+  "title": "DJ TURN ME UP",
+  "slug": "07-dj-turn-me-up",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/07-dj-turn-me-up.html",
+  "start": 687.575,
+  "end": 702.791,
+  "match": 688.88,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#a4a19b",
+   "#1d1c1a",
+   "#7b7974",
+   "#4e4d49"
+  ],
+  "lum": 0.822,
+  "sat": 0.258,
+  "hue": 44.9,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "07",
+   "movement": 5,
+   "label": "ELEVEN PETALS",
+   "line": "A love story of years — eleven years — each plunkled off as daisy petals. We love, we not. Of a future gone swiftly, and a past left empty-handed.",
+   "accent": "#5aa7ff",
+   "engine": "taasu",
+   "mode": "penta",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "c134d78d-fba2-5f65-98ad-aae2db4a1a18",
+  "title": "DJ TURN ME UP",
+  "slug": "07-dj-turn-me-up",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/07-dj-turn-me-up.html",
+  "start": 702.791,
+  "end": 716.919,
+  "match": 715.143,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#7b7974",
+   "#e2dfd7",
+   "#4e4d49",
+   "#a4a19b"
+  ],
+  "lum": 0.794,
+  "sat": 0.232,
+  "hue": 45,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "07",
+   "movement": 6,
+   "label": "THREE ROADS",
+   "line": "To pick a road: of heavy rain. Or of frontal fog. Or of dimmed night lights under a cloud — with a silver lining.",
+   "accent": "#5aa7ff",
+   "engine": "taasu",
+   "mode": "penta",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "4d796f60-c884-525e-9ac1-f7032bb8eb12",
+  "title": "DJ TURN ME UP",
+  "slug": "07-dj-turn-me-up",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/07-dj-turn-me-up.html",
+  "start": 716.919,
+  "end": 732.134,
+  "match": 726.222,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#e2dfd7",
+   "#161513",
+   "#1d1c1a",
+   "#a4a19b"
+  ],
+  "lum": 0.812,
+  "sat": 0.22,
+  "hue": 44.8,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.025,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "07",
+   "movement": 7,
+   "label": "CHIN HIGH",
+   "line": "Now, turning forth to face delights and shadows — one night at a time; one tear at a time; one open mic at a time. Chin now nested high, and volume turnt up.",
+   "accent": "#5aa7ff",
+   "engine": "taasu",
+   "mode": "penta",
+   "figureHeight": 53.970000000000006,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "5969c0bb-4210-58db-9706-dc9d35734909",
+  "title": "NEWLY SINGLE",
+  "slug": "08-newly-single",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/08-newly-single.html",
+  "start": 732.136,
+  "end": 737.25,
+  "match": 734.591,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#c6c4bc"
+  ],
+  "lum": 0.1,
+  "sat": 0.078,
+  "hue": 40.4,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "08",
+   "movement": 0,
+   "label": "TITLE",
+   "line": "",
+   "accent": "#5aa7ff",
+   "engine": "sega",
+   "mode": "ionian",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "b8ba7303-bda7-595a-850e-41a927ddf04f",
+  "title": "NEWLY SINGLE",
+  "slug": "08-newly-single",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/08-newly-single.html",
+  "start": 737.25,
+  "end": 750.546,
+  "match": 747.127,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#e2dfd7",
+   "#a4a19b",
+   "#c6c4bc",
+   "#7b7974"
+  ],
+  "lum": 0.86,
+  "sat": 0.253,
+  "hue": 45,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.036,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "poet",
+    "p": 0.0101,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "08",
+   "movement": 1,
+   "label": "PULSING",
+   "line": "Pulsing, and head throbbing from the music — and empty, on a crowded floor of sweated perfumes and temptations.",
+   "accent": "#5aa7ff",
+   "engine": "sega",
+   "mode": "ionian",
+   "figureHeight": 34,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "9918ab42-fb7d-5bfd-b4bd-25fe82946775",
+  "title": "NEWLY SINGLE",
+  "slug": "08-newly-single",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/08-newly-single.html",
+  "start": 750.546,
+  "end": 764.864,
+  "match": 759.3,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#e2dfd7",
+   "#a4a19b",
+   "#c6c4bc",
+   "#7b7974"
+  ],
+  "lum": 0.867,
+  "sat": 0.257,
+  "hue": 45,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0168,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "everyman",
+    "p": 0.0154,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "08",
+   "movement": 2,
+   "label": "THE ESCAPE",
+   "line": "The soul escapes my body, and leaves him on the dance floor — just flesh and bones. Rejection and heartache hit different, with no feelings afloat.",
+   "accent": "#5aa7ff",
+   "engine": "sega",
+   "mode": "ionian",
+   "figureHeight": 34,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "5d2342c9-421f-5db3-946a-b4b32fdb2854",
+  "title": "NEWLY SINGLE",
+  "slug": "08-newly-single",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/08-newly-single.html",
+  "start": 764.864,
+  "end": 778.159,
+  "match": 766.003,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#e2dfd7",
+   "#a4a19b",
+   "#c6c4bc",
+   "#7b7974"
+  ],
+  "lum": 0.861,
+  "sat": 0.255,
+  "hue": 45,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.0268,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "poet",
+    "p": 0.0133,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "08",
+   "movement": 3,
+   "label": "IMAGINE MY BODY",
+   "line": "I want my soul to imagine my body. Watch strangers collide and spark electric currents that gamut the mood. We want him to be the last to leave.",
+   "accent": "#5aa7ff",
+   "engine": "sega",
+   "mode": "ionian",
+   "figureHeight": 34,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "f2562745-8502-5420-b1c0-0865122ee591",
+  "title": "NEWLY SINGLE",
+  "slug": "08-newly-single",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/08-newly-single.html",
+  "start": 778.159,
+  "end": 791.455,
+  "match": 779.299,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#7b7974",
+   "#4e4d49",
+   "#161513",
+   "#1d1c1a"
+  ],
+  "lum": 0.819,
+  "sat": 0.263,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0058,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "08",
+   "movement": 4,
+   "label": "THE EQUATOR",
+   "line": "Now let us put my soul in the middle of an open field — at the equator of a planet much larger than my own, and much hotter.",
+   "accent": "#5aa7ff",
+   "engine": "sega",
+   "mode": "ionian",
+   "figureHeight": 26,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "f729175b-5786-5941-b1b6-c13eacd44f20",
+  "title": "NEWLY SINGLE",
+  "slug": "08-newly-single",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/08-newly-single.html",
+  "start": 791.455,
+  "end": 805.773,
+  "match": 802.091,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#c6c4bc",
+   "#a4a19b",
+   "#1d1c1a",
+   "#4e4d49"
+  ],
+  "lum": 0.881,
+  "sat": 0.277,
+  "hue": 45,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0065,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "08",
+   "movement": 5,
+   "label": "COOL ME DOWN",
+   "line": "Cool me down: pouring unfiltered water out of ice baths, salted from the closest moons, from angles of the newest religions — their graces curse or bless me. Only infinity will tell.",
+   "accent": "#5aa7ff",
+   "engine": "sega",
+   "mode": "ionian",
+   "figureHeight": 26,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "02ccffde-15e2-5f9e-951e-96ff095c65a9",
+  "title": "NEWLY SINGLE",
+  "slug": "08-newly-single",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/08-newly-single.html",
+  "start": 805.773,
+  "end": 820.091,
+  "match": 818.291,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#e2dfd7",
+   "#a4a19b",
+   "#c6c4bc",
+   "#7b7974"
+  ],
+  "lum": 0.869,
+  "sat": 0.257,
+  "hue": 45,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0186,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "everyman",
+    "p": 0.0061,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "08",
+   "movement": 6,
+   "label": "BACK TO MY BODY",
+   "line": "Now bring my soul back to my body: to lean back, breathe in the smoke that fills the room — how good it is to finally get acquainted with the night.",
+   "accent": "#5aa7ff",
+   "engine": "sega",
+   "mode": "ionian",
+   "figureHeight": 34,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "30a3dedf-d497-5ed3-90f5-db7b3b7387cb",
+  "title": "NEWLY SINGLE",
+  "slug": "08-newly-single",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/08-newly-single.html",
+  "start": 820.091,
+  "end": 833.386,
+  "match": 831.715,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#a4a19b",
+   "#e2dfd7",
+   "#c6c4bc",
+   "#4e4d49"
+  ],
+  "lum": 0.825,
+  "sat": 0.21,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.006,
+    "modes": [
+     "sit"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "08",
+   "movement": 7,
+   "label": "MOUNTAINS IN THE DISTANCE",
+   "line": "Unfamiliar, yet relatable mountains in the distance; wandering thoughts within reach. Accepting you'll never say, nor feel, my love was real. What isn't mine, I still can not give.",
+   "accent": "#5aa7ff",
+   "engine": "sega",
+   "mode": "ionian",
+   "figureHeight": 29,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "b2b899a6-dcfe-5d69-a307-7359faeb6192",
+  "title": "YET, HEARD",
+  "slug": "09-yet-heard",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/09-yet-heard.html",
+  "start": 833.385,
+  "end": 841.328,
+  "match": 836.154,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#c6c4bc"
+  ],
+  "lum": 0.101,
+  "sat": 0.077,
+  "hue": 40.4,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "09",
+   "movement": 0,
+   "label": "TITLE",
+   "line": "",
+   "accent": "#5aa7ff",
+   "engine": "kabary",
+   "mode": "dorian",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "62097226-74fb-5039-81fc-5ce2acda445b",
+  "title": "YET, HEARD",
+  "slug": "09-yet-heard",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/09-yet-heard.html",
+  "start": 841.328,
+  "end": 868.332,
+  "match": 843.642,
+  "bw": false,
+  "palette": [
+   "#c6c4bc",
+   "#a4a19b",
+   "#7b7974",
+   "#4e4d49",
+   "#1d1c1a"
+  ],
+  "lum": 0.475,
+  "sat": 0.065,
+  "hue": 43.4,
+  "subjects": [
+   {
+    "label": "custom",
+    "p": 0.0402,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "poet",
+    "p": 0.0397,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "09",
+   "movement": 1,
+   "label": "THE SHARED MOON",
+   "line": "Before I go, we look at the moon the way we used to see it. We talk for years, travel through time — we grow old together, I believe. Maybe we could have it all.",
+   "accent": "#5aa7ff",
+   "engine": "kabary",
+   "mode": "dorian",
+   "figureHeight": 72,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "6a18dc0b-29fd-55af-8982-f7fc21addd7c",
+  "title": "YET, HEARD",
+  "slug": "09-yet-heard",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/09-yet-heard.html",
+  "start": 868.332,
+  "end": 896.926,
+  "match": 870.783,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#c6c4bc",
+   "#a4a19b",
+   "#4e4d49",
+   "#7b7974"
+  ],
+  "lum": 0.405,
+  "sat": 0.063,
+  "hue": 42.7,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0398,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "custom",
+    "p": 0.0391,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "09",
+   "movement": 2,
+   "label": "TEARS, AN ABYSS",
+   "line": "Before I go, I call on my mother — in tears, speaking of an abyss she's never known. We talk for years, re-closet wounds, and re-explain my way of birth. Even after prayer: what isn't mine, I still can not give.",
+   "accent": "#5aa7ff",
+   "engine": "kabary",
+   "mode": "dorian",
+   "figureHeight": 72,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "7e938b85-56ec-5316-a882-2232df5622ed",
+  "title": "YET, HEARD",
+  "slug": "09-yet-heard",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/09-yet-heard.html",
+  "start": 896.926,
+  "end": 925.519,
+  "match": 921.924,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#c6c4bc",
+   "#a4a19b",
+   "#7b7974",
+   "#4e4d49"
+  ],
+  "lum": 0.411,
+  "sat": 0.063,
+  "hue": 42.8,
+  "subjects": [
+   {
+    "label": "elder",
+    "p": 0.0404,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "poet",
+    "p": 0.0399,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "09",
+   "movement": 3,
+   "label": "HIS FOOTSTEPS, RETRACED",
+   "line": "Before I go, I call on my father — his calming demeanor summoned from the yonders. We walk for years, east toward the sunrises, retracing his footsteps — my tears falling in the wave shadows of the inner harbor.",
+   "accent": "#5aa7ff",
+   "engine": "kabary",
+   "mode": "dorian",
+   "figureHeight": 72,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "1b78a291-9968-5382-a71a-9cd2f78fe946",
+  "title": "YET, HEARD",
+  "slug": "09-yet-heard",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/09-yet-heard.html",
+  "start": 925.519,
+  "end": 950.935,
+  "match": 927.697,
+  "bw": false,
+  "palette": [
+   "#c6c4bc",
+   "#a4a19b",
+   "#7b7974",
+   "#161513",
+   "#4e4d49"
+  ],
+  "lum": 0.48,
+  "sat": 0.064,
+  "hue": 43.4,
+  "subjects": [
+   {
+    "label": "elder",
+    "p": 0.0307,
+    "modes": [
+     "walk"
+    ]
+   },
+   {
+    "label": "poet",
+    "p": 0.0262,
+    "modes": [
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "09",
+   "movement": 4,
+   "label": "EAST, AT THE HARBOR",
+   "line": "We stroll, father and son, hearted and shaken. Someone borrowed, and someone blue — yet, broken. Yet, heard.",
+   "accent": "#5aa7ff",
+   "engine": "kabary",
+   "mode": "dorian",
+   "figureHeight": 70,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "c3a0a8c1-7679-5ab7-b482-16915a545812",
+  "title": "MAGIC RIDE",
+  "slug": "10-magic-ride",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/10-magic-ride.html",
+  "start": 950.937,
+  "end": 957.156,
+  "match": 953.105,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#c6c4bc"
+  ],
+  "lum": 0.101,
+  "sat": 0.078,
+  "hue": 40.4,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "10",
+   "movement": 0,
+   "label": "TITLE",
+   "line": "",
+   "accent": "#5aa7ff",
+   "engine": "epic",
+   "mode": "bayati",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "a01db976-e942-57b7-9baa-23680bbf9714",
+  "title": "MAGIC RIDE",
+  "slug": "10-magic-ride",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/10-magic-ride.html",
+  "start": 957.156,
+  "end": 973.325,
+  "match": 958.542,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#4e4d49",
+   "#161513",
+   "#1d1c1a",
+   "#a4a19b"
+  ],
+  "lum": 0.573,
+  "sat": 0.171,
+  "hue": 44.6,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.012,
+    "modes": [
+     "stand",
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "10",
+   "movement": 1,
+   "label": "HOP ON",
+   "line": "I wasn't looking for a ride, but here you are — blissful, and oddly sensitive. I rub my aggressions into your steel coverings, and hop on.",
+   "accent": "#5aa7ff",
+   "engine": "epic",
+   "mode": "bayati",
+   "figureHeight": 46,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "e3ae9965-0d24-55f1-a146-edf338a62cf1",
+  "title": "MAGIC RIDE",
+  "slug": "10-magic-ride",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/10-magic-ride.html",
+  "start": 973.325,
+  "end": 990.737,
+  "match": 974.817,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#4e4d49",
+   "#1d1c1a",
+   "#161513",
+   "#a4a19b"
+  ],
+  "lum": 0.601,
+  "sat": 0.18,
+  "hue": 44.7,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "10",
+   "movement": 2,
+   "label": "HEADS TWIST",
+   "line": "Loneliness is having everything with no one to tell — being everywhere, with no one to love. I let the noise block the noise. The way I ride: eyes turn, heads twist — and prove the magic still exists.",
+   "accent": "#5aa7ff",
+   "engine": "epic",
+   "mode": "bayati",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "3e1de25f-e79f-5271-bb87-9b6fc34fb839",
+  "title": "MAGIC RIDE",
+  "slug": "10-magic-ride",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/10-magic-ride.html",
+  "start": 990.737,
+  "end": 1005.663,
+  "match": 993.978,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#4e4d49",
+   "#1d1c1a",
+   "#161513",
+   "#e2dfd7"
+  ],
+  "lum": 0.623,
+  "sat": 0.19,
+  "hue": 44.7,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "10",
+   "movement": 3,
+   "label": "MOON SETTLES",
+   "line": "All preparations to live and dream in darkness, I no longer desire. The moon settles, and the tease of distant stars subsides — and I can see a morning ahead for me.",
+   "accent": "#5aa7ff",
+   "engine": "epic",
+   "mode": "bayati",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "b0fd6e0d-e867-5f69-9e8a-933026825605",
+  "title": "MAGIC RIDE",
+  "slug": "10-magic-ride",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/10-magic-ride.html",
+  "start": 1005.663,
+  "end": 1023.075,
+  "match": 1007.155,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#4e4d49",
+   "#1d1c1a",
+   "#161513",
+   "#a4a19b"
+  ],
+  "lum": 0.736,
+  "sat": 0.241,
+  "hue": 44.8,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "10",
+   "movement": 4,
+   "label": "NIGHT REPLACED",
+   "line": "It looks like a morning I could believe in — a morning where loss and life aren't so — well — ripe with sunlight that's deceptively warm. The chirping of birds, fueling of nests, spring out of the night that has covered me.",
+   "accent": "#5aa7ff",
+   "engine": "epic",
+   "mode": "bayati",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "fbb610ec-8e23-57d3-a5d8-e401eafde8d8",
+  "title": "MAGIC RIDE",
+  "slug": "10-magic-ride",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/10-magic-ride.html",
+  "start": 1023.075,
+  "end": 1039.244,
+  "match": 1035.086,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#1d1c1a",
+   "#161513",
+   "#7b7974",
+   "#4e4d49"
+  ],
+  "lum": 0.843,
+  "sat": 0.288,
+  "hue": 44.9,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "10",
+   "movement": 5,
+   "label": "BLISSFUL, INNOCENT",
+   "line": "With my own curiosities, for a chance at an end wherever everything will be OK. I want to live in this feeling forever — blissful, and oddly innocent.",
+   "accent": "#5aa7ff",
+   "engine": "epic",
+   "mode": "bayati",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "3b666380-cb95-55c3-8d48-bc1a674bd8ee",
+  "title": "MAGIC RIDE",
+  "slug": "10-magic-ride",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/10-magic-ride.html",
+  "start": 1039.244,
+  "end": 1056.657,
+  "match": 1054.468,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#1d1c1a",
+   "#161513",
+   "#7b7974",
+   "#a4a19b"
+  ],
+  "lum": 0.84,
+  "sat": 0.285,
+  "hue": 44.9,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "10",
+   "movement": 6,
+   "label": "CHILLY MORNING",
+   "line": "Riding in a way you can't help but double-click — and prove the magic still exists. Even here, it's chilly in the morning.",
+   "accent": "#5aa7ff",
+   "engine": "epic",
+   "mode": "bayati",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "dd4b4f1e-be49-5f29-9e28-3141bcfa1d2f",
+  "title": "NEW DAY",
+  "slug": "11-new-day",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/11-new-day.html",
+  "start": 1056.659,
+  "end": 1063.21,
+  "match": 1058.943,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#c6c4bc"
+  ],
+  "lum": 0.096,
+  "sat": 0.076,
+  "hue": 40.3,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "11",
+   "movement": 0,
+   "label": "TITLE",
+   "line": "",
+   "accent": "#5aa7ff",
+   "engine": "qene",
+   "mode": "ambassel",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "c0d9ec81-c6ab-551b-aab8-1c49e5ec999b",
+  "title": "NEW DAY",
+  "slug": "11-new-day",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/11-new-day.html",
+  "start": 1063.21,
+  "end": 1080.241,
+  "match": 1069.147,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#c6c4bc",
+   "#7b7974",
+   "#a4a19b"
+  ],
+  "lum": 0.841,
+  "sat": 0.216,
+  "hue": 45,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "11",
+   "movement": 1,
+   "label": "MORNING FOG",
+   "line": "Fog covers the seas and hugs the tree-covered hills, floating through the morning as it exhales its introduction. This world is at peace.",
+   "accent": "#5aa7ff",
+   "engine": "qene",
+   "mode": "ambassel",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "8da3e87a-dcf4-5404-9d87-d875bdff7b9e",
+  "title": "NEW DAY",
+  "slug": "11-new-day",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/11-new-day.html",
+  "start": 1080.241,
+  "end": 1097.273,
+  "match": 1088.417,
+  "bw": false,
+  "palette": [
+   "#e2dfd7",
+   "#f2efe6",
+   "#c6c4bc",
+   "#a4a19b",
+   "#161513"
+  ],
+  "lum": 0.753,
+  "sat": 0.161,
+  "hue": 44.7,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.0038,
+    "modes": [
+     "stand",
+     "walk"
+    ]
+   }
+  ],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "11",
+   "movement": 2,
+   "label": "FIRST COURSES",
+   "line": "In the awakening of dawn, in fresh muted colors: we can rebuild this temple. It's a new day — a catharsis for me to say, with newfound energies and recycled airs.",
+   "accent": "#5aa7ff",
+   "engine": "qene",
+   "mode": "ambassel",
+   "figureHeight": 14,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "2029e24b-56ce-510a-ab9d-f1aecaa39282",
+  "title": "NEW DAY",
+  "slug": "11-new-day",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/11-new-day.html",
+  "start": 1097.273,
+  "end": 1115.615,
+  "match": 1103.666,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#e2dfd7",
+   "#161513",
+   "#c6c4bc",
+   "#1d1c1a"
+  ],
+  "lum": 0.776,
+  "sat": 0.226,
+  "hue": 44.8,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.0039,
+    "modes": [
+     "stand",
+     "walk"
+    ]
+   }
+  ],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "11",
+   "movement": 3,
+   "label": "COLUMNS AND BEAMS",
+   "line": "We can rebuild this temple — under vibrant sun rays of glory, of the wisdoms of morning dews and their winks of luck.",
+   "accent": "#5aa7ff",
+   "engine": "qene",
+   "mode": "ambassel",
+   "figureHeight": 15,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "d6d23a1f-5711-5144-a568-4d5854f36b4d",
+  "title": "NEW DAY",
+  "slug": "11-new-day",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/11-new-day.html",
+  "start": 1115.615,
+  "end": 1132.646,
+  "match": 1119.313,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#e2dfd7",
+   "#c6c4bc",
+   "#1d1c1a",
+   "#7b7974"
+  ],
+  "lum": 0.874,
+  "sat": 0.254,
+  "hue": 45,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.0045,
+    "modes": [
+     "walk"
+    ]
+   }
+  ],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "11",
+   "movement": 4,
+   "label": "THE INFINITY POOL",
+   "line": "With laps around infinity pools of edgeless dreams, that reflect the enormity of the skies.",
+   "accent": "#5aa7ff",
+   "engine": "qene",
+   "mode": "ambassel",
+   "figureHeight": 20,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "e3e81f60-e2e8-5f2f-a5a4-8f43db970532",
+  "title": "NEW DAY",
+  "slug": "11-new-day",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/11-new-day.html",
+  "start": 1132.646,
+  "end": 1149.678,
+  "match": 1147.537,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#c6c4bc",
+   "#a4a19b",
+   "#1d1c1a",
+   "#4e4d49"
+  ],
+  "lum": 0.785,
+  "sat": 0.188,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0067,
+    "modes": [
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "11",
+   "movement": 5,
+   "label": "WALKING ON WATER",
+   "line": "And of modern faiths — that we too can walk on water. Deep breaths, in appreciation of present life, and our present positions.",
+   "accent": "#5aa7ff",
+   "engine": "qene",
+   "mode": "ambassel",
+   "figureHeight": 30,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "df6035e0-1cc5-5f7f-9002-b11c35699883",
+  "title": "NEW DAY",
+  "slug": "11-new-day",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/11-new-day.html",
+  "start": 1149.678,
+  "end": 1168.019,
+  "match": 1156.071,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#a4a19b",
+   "#161513",
+   "#7b7974",
+   "#e2dfd7"
+  ],
+  "lum": 0.655,
+  "sat": 0.177,
+  "hue": 44.6,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.0022,
+    "modes": [
+     "stand",
+     "walk"
+    ]
+   }
+  ],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "11",
+   "movement": 6,
+   "label": "A NEW DAY",
+   "line": "We can rebuild this temple. It's a new day. A catharsis. We can welcome a new day.",
+   "accent": "#5aa7ff",
+   "engine": "qene",
+   "mode": "ambassel",
+   "figureHeight": 13,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "3effa499-d28d-54b0-bd42-eb7088b77b91",
+  "title": "REUNION",
+  "slug": "12-reunion",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/12-reunion.html",
+  "start": 1168.019,
+  "end": 1173.615,
+  "match": 1170.705,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#c6c4bc"
+  ],
+  "lum": 0.096,
+  "sat": 0.076,
+  "hue": 40.3,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "12",
+   "movement": 0,
+   "label": "TITLE",
+   "line": "",
+   "accent": "#5aa7ff",
+   "engine": "theydinn",
+   "mode": "hijaz",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "d9ac5155-6f88-5a45-ae52-ad65bbcc7507",
+  "title": "REUNION",
+  "slug": "12-reunion",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/12-reunion.html",
+  "start": 1173.615,
+  "end": 1189.282,
+  "match": 1174.958,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#161513",
+   "#c6c4bc",
+   "#7b7974",
+   "#a4a19b"
+  ],
+  "lum": 0.857,
+  "sat": 0.29,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0104,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "everyman",
+    "p": 0.0095,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "12",
+   "movement": 1,
+   "label": "HUGS WITH NO REASON",
+   "line": "Decades later, there is less time for words, and more space for laughter — hugs with no reason, and loud voices, so our hearts can be overheard.",
+   "accent": "#5aa7ff",
+   "engine": "theydinn",
+   "mode": "hijaz",
+   "figureHeight": 33,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "383c8f21-4b4c-52d5-845e-2f9f89d558bc",
+  "title": "REUNION",
+  "slug": "12-reunion",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/12-reunion.html",
+  "start": 1189.282,
+  "end": 1198.235,
+  "match": 1192.403,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#1d1c1a",
+   "#161513",
+   "#e2dfd7"
+  ],
+  "lum": 0.901,
+  "sat": 0.308,
+  "hue": 45,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0079,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "everyman",
+    "p": 0.0075,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "12",
+   "movement": 2,
+   "label": "LESS TIME, MORE SPACE",
+   "line": "Less time for words. More space for laughter.",
+   "accent": "#5aa7ff",
+   "engine": "theydinn",
+   "mode": "hijaz",
+   "figureHeight": 27,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "1d4f3297-cff1-54f5-aabd-7e6a2d548c8f",
+  "title": "REUNION",
+  "slug": "12-reunion",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/12-reunion.html",
+  "start": 1198.235,
+  "end": 1212.784,
+  "match": 1205.218,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#a4a19b",
+   "#161513",
+   "#1d1c1a"
+  ],
+  "lum": 0.769,
+  "sat": 0.188,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.008,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "everyman",
+    "p": 0.0075,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "12",
+   "movement": 3,
+   "label": "ELDERS, NOW PAST",
+   "line": "Reflecting on legacies, and creeds once told — of elders, now past.",
+   "accent": "#5aa7ff",
+   "engine": "theydinn",
+   "mode": "hijaz",
+   "figureHeight": 29,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "e74dd521-2dfb-53bb-b780-fdf32762c18a",
+  "title": "REUNION",
+  "slug": "12-reunion",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/12-reunion.html",
+  "start": 1212.784,
+  "end": 1228.451,
+  "match": 1214.126,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#c6c4bc",
+   "#7b7974",
+   "#161513",
+   "#1d1c1a"
+  ],
+  "lum": 0.853,
+  "sat": 0.269,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0079,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "everyman",
+    "p": 0.0077,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "12",
+   "movement": 4,
+   "label": "BURNING HOURGLASSES",
+   "line": "And is this a one-time occasion? we ask. Or will we make time, in the sands of burning hourglasses?",
+   "accent": "#5aa7ff",
+   "engine": "theydinn",
+   "mode": "hijaz",
+   "figureHeight": 29,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "5a61d4f8-bb06-56da-a3c0-24806eaf664f",
+  "title": "REUNION",
+  "slug": "12-reunion",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/12-reunion.html",
+  "start": 1228.451,
+  "end": 1242.999,
+  "match": 1229.698,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#7b7974",
+   "#161513",
+   "#1d1c1a",
+   "#96c3f5"
+  ],
+  "lum": 0.893,
+  "sat": 0.302,
+  "hue": 45,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.009,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "everyman",
+    "p": 0.0086,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "12",
+   "movement": 5,
+   "label": "WINDS PART",
+   "line": "Before our winds part ways — to a next lifetime. This is brotherhood.",
+   "accent": "#5aa7ff",
+   "engine": "theydinn",
+   "mode": "hijaz",
+   "figureHeight": 30,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "04bbbf2b-7105-5c69-9d2a-3ed5b18a1bc4",
+  "title": "HOW TO WIN MY HEART",
+  "slug": "13-how-to-win-my-heart",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/13-how-to-win-my-heart.html",
+  "start": 1243.003,
+  "end": 1249.472,
+  "match": 1245.258,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#c6c4bc"
+  ],
+  "lum": 0.102,
+  "sat": 0.078,
+  "hue": 40.4,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "13",
+   "movement": 0,
+   "label": "TITLE",
+   "line": "",
+   "accent": "#5aa7ff",
+   "engine": "taarab",
+   "mode": "rast",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "f2445fa1-eea3-5562-a19e-bb1b5a8b8b13",
+  "title": "HOW TO WIN MY HEART",
+  "slug": "13-how-to-win-my-heart",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/13-how-to-win-my-heart.html",
+  "start": 1249.472,
+  "end": 1266.293,
+  "match": 1250.914,
+  "bw": false,
+  "palette": [
+   "#e2dfd7",
+   "#c6c4bc",
+   "#a4a19b",
+   "#4e4d49",
+   "#7b7974"
+  ],
+  "lum": 0.686,
+  "sat": 0.101,
+  "hue": 44.6,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0086,
+    "modes": [
+     "sit",
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "13",
+   "movement": 1,
+   "label": "SMALL TABLES",
+   "line": "Find me at the harbor, at the small tables, watching.",
+   "accent": "#5aa7ff",
+   "engine": "taarab",
+   "mode": "rast",
+   "figureHeight": 34,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "470c19e1-5841-5801-9d4a-c7b8ac9a8a0d",
+  "title": "HOW TO WIN MY HEART",
+  "slug": "13-how-to-win-my-heart",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/13-how-to-win-my-heart.html",
+  "start": 1266.293,
+  "end": 1284.407,
+  "match": 1267.845,
+  "bw": false,
+  "palette": [
+   "#4e4d49",
+   "#a4a19b",
+   "#7b7974",
+   "#c6c4bc",
+   "#e2dfd7"
+  ],
+  "lum": 0.479,
+  "sat": 0.068,
+  "hue": 43.7,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.034,
+    "modes": [
+     "stand",
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "13",
+   "movement": 2,
+   "label": "COUNTED ORBITS",
+   "line": "The couples orbit each other the way Jupiter keeps its moons — close, and counted.",
+   "accent": "#5aa7ff",
+   "engine": "taarab",
+   "mode": "rast",
+   "figureHeight": 30.686025691848545,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "e7bcbe7e-882b-5256-928c-cb56ba241c8c",
+  "title": "HOW TO WIN MY HEART",
+  "slug": "13-how-to-win-my-heart",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/13-how-to-win-my-heart.html",
+  "start": 1284.407,
+  "end": 1301.228,
+  "match": 1296.902,
+  "bw": false,
+  "palette": [
+   "#4e4d49",
+   "#1d1c1a",
+   "#161513",
+   "#a4a19b",
+   "#7b7974"
+  ],
+  "lum": 0.332,
+  "sat": 0.055,
+  "hue": 42.8,
+  "subjects": [
+   {
+    "label": "elder",
+    "p": 0.0109,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "13",
+   "movement": 3,
+   "label": "BURNED STORIES",
+   "line": "The elders clutch their pearls and pray. Life has burned all my love stories — victory-less seasons.",
+   "accent": "#5aa7ff",
+   "engine": "taarab",
+   "mode": "rast",
+   "figureHeight": 44,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "2a739c97-c1b8-55c3-aef0-cbac8fe3fb18",
+  "title": "HOW TO WIN MY HEART",
+  "slug": "13-how-to-win-my-heart",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/13-how-to-win-my-heart.html",
+  "start": 1301.228,
+  "end": 1319.342,
+  "match": 1317.065,
+  "bw": false,
+  "palette": [
+   "#a4a19b",
+   "#c6c4bc",
+   "#e2dfd7",
+   "#7b7974",
+   "#1d1c1a"
+  ],
+  "lum": 0.65,
+  "sat": 0.081,
+  "hue": 44.4,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0188,
+    "modes": [
+     "stand",
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "13",
+   "movement": 4,
+   "label": "HARVESTED POWER",
+   "line": "So I harvest the flowers instead — scarlet poppies, purple blossoms — and they become my power.",
+   "accent": "#5aa7ff",
+   "engine": "taarab",
+   "mode": "rast",
+   "figureHeight": 52,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "6d8dad9f-d6aa-5ca6-95a4-680787f44726",
+  "title": "HOW TO WIN MY HEART",
+  "slug": "13-how-to-win-my-heart",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/13-how-to-win-my-heart.html",
+  "start": 1319.342,
+  "end": 1337.456,
+  "match": 1335.179,
+  "bw": false,
+  "palette": [
+   "#e2dfd7",
+   "#c6c4bc",
+   "#7b7974",
+   "#a4a19b",
+   "#1d1c1a"
+  ],
+  "lum": 0.708,
+  "sat": 0.107,
+  "hue": 44.7,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0183,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "13",
+   "movement": 5,
+   "label": "REFOCUS",
+   "line": "Then, a distant window. She says: you'll see me. Capture the eyes. Refocus. Step back. Say hello.",
+   "accent": "#5aa7ff",
+   "engine": "taarab",
+   "mode": "rast",
+   "figureHeight": 55.42761202366531,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "0a5cf576-cbcf-5afe-ad16-9816d9e7c264",
+  "title": "HOW TO WIN MY HEART",
+  "slug": "13-how-to-win-my-heart",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/13-how-to-win-my-heart.html",
+  "start": 1337.456,
+  "end": 1352.983,
+  "match": 1340.828,
+  "bw": false,
+  "palette": [
+   "#e2dfd7",
+   "#c6c4bc",
+   "#a4a19b",
+   "#4e4d49",
+   "#161513"
+  ],
+  "lum": 0.693,
+  "sat": 0.1,
+  "hue": 44.6,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0078,
+    "modes": [
+     "sit"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "13",
+   "movement": 6,
+   "label": "WON'T LEAVE",
+   "line": "Don't make me leave. I escaped here for a reason.",
+   "accent": "#5aa7ff",
+   "engine": "taarab",
+   "mode": "rast",
+   "figureHeight": 34,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "d159962b-d1cf-5066-b6b4-8d298777f9c7",
+  "title": "HOT MINUTE",
+  "slug": "14-hot-minute",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/14-hot-minute.html",
+  "start": 1352.982,
+  "end": 1357.767,
+  "match": 1355.279,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#f2efe6",
+   "#c6c4bc"
+  ],
+  "lum": 0.098,
+  "sat": 0.077,
+  "hue": 40.3,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "14",
+   "movement": 0,
+   "label": "TITLE",
+   "line": "",
+   "accent": "#5aa7ff",
+   "engine": "imzad",
+   "mode": "penta",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "0466a0b4-9cf0-5b17-8881-39538a6e6000",
+  "title": "HOT MINUTE",
+  "slug": "14-hot-minute",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/14-hot-minute.html",
+  "start": 1357.767,
+  "end": 1370.209,
+  "match": 1360.469,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#e2dfd7",
+   "#c6c4bc",
+   "#4e4d49",
+   "#a4a19b"
+  ],
+  "lum": 0.819,
+  "sat": 0.206,
+  "hue": 44.9,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "14",
+   "movement": 1,
+   "label": "EVERYTHING I BUILT",
+   "line": "A hot minute. The haze gathers on the water — and everything I built here learns to be weather: the city, the temple, the harbor.",
+   "accent": "#5aa7ff",
+   "engine": "imzad",
+   "mode": "penta",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "ddafcfc2-95a8-50a1-9bf0-1b7f2cf4878b",
+  "title": "HOT MINUTE",
+  "slug": "14-hot-minute",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/14-hot-minute.html",
+  "start": 1370.209,
+  "end": 1382.65,
+  "match": 1381.086,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#c6c4bc",
+   "#e2dfd7",
+   "#a4a19b",
+   "#161513"
+  ],
+  "lum": 0.878,
+  "sat": 0.249,
+  "hue": 45,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0286,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "14",
+   "movement": 2,
+   "label": "FROM THE GROUND UP",
+   "line": "It takes me last, and from the ground up. I am reluctant — but I have been weather before.",
+   "accent": "#5aa7ff",
+   "engine": "imzad",
+   "mode": "penta",
+   "figureHeight": 58,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "82fb7b9c-c1c8-5ae4-a58e-b216d4f4496f",
+  "title": "HOT MINUTE",
+  "slug": "14-hot-minute",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/14-hot-minute.html",
+  "start": 1382.65,
+  "end": 1395.092,
+  "match": 1383.717,
+  "bw": false,
+  "palette": [
+   "#161513",
+   "#1d1c1a",
+   "#f2efe6",
+   "#7b7974",
+   "#4e4d49"
+  ],
+  "lum": 0.098,
+  "sat": 0.073,
+  "hue": 40.3,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "14",
+   "movement": 3,
+   "label": "NO WALLS",
+   "line": "All black again. But no walls this time.",
+   "accent": "#5aa7ff",
+   "engine": "imzad",
+   "mode": "penta",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "00e8865b-58e0-5bd2-91fe-3ac632b4456a",
+  "title": "HOT MINUTE",
+  "slug": "14-hot-minute",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/14-hot-minute.html",
+  "start": 1395.092,
+  "end": 1409.447,
+  "match": 1401.982,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#161513",
+   "#1d1c1a",
+   "#4e4d49",
+   "#c6c4bc"
+  ],
+  "lum": 0.763,
+  "sat": 0.267,
+  "hue": 44.8,
+  "subjects": [],
+  "scale": "extreme long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "14",
+   "movement": 4,
+   "label": "THE REEL",
+   "line": "A life flashes the way a reel does: the window, the tambourine, the field, the stars, the candle, the daisy, the ride, the temple, the hourglass.",
+   "accent": "#5aa7ff",
+   "engine": "imzad",
+   "mode": "penta",
+   "figureHeight": null,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "51a72536-ea4f-547d-9397-55b0cbd0420f",
+  "title": "HOT MINUTE",
+  "slug": "14-hot-minute",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/14-hot-minute.html",
+  "start": 1409.447,
+  "end": 1422.846,
+  "match": 1421.161,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#161513",
+   "#7b7974",
+   "#1d1c1a",
+   "#a4a19b"
+  ],
+  "lum": 0.899,
+  "sat": 0.305,
+  "hue": 45,
+  "subjects": [
+   {
+    "label": "poet",
+    "p": 0.0321,
+    "modes": [
+     "stand"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "14",
+   "movement": 5,
+   "label": "TWO ENTWINED MUSES",
+   "line": "Our dance together is a victory — two entwined muses, as it ends.",
+   "accent": "#5aa7ff",
+   "engine": "imzad",
+   "mode": "penta",
+   "figureHeight": 47.90697397546342,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ },
+ {
+  "id": "b41a1b6d-f473-5515-8789-10275cf02f11",
+  "title": "HOT MINUTE",
+  "slug": "14-hot-minute",
+  "page": "https://hartswf0.github.io/butterfly-halfworld/wygwyl/14-hot-minute.html",
+  "start": 1422.846,
+  "end": 1440.072,
+  "match": 1426.586,
+  "bw": false,
+  "palette": [
+   "#f2efe6",
+   "#1d1c1a",
+   "#4e4d49",
+   "#161513",
+   "#c6c4bc"
+  ],
+  "lum": 0.824,
+  "sat": 0.281,
+  "hue": 44.9,
+  "subjects": [
+   {
+    "label": "everyman",
+    "p": 0.0185,
+    "modes": [
+     "stand"
+    ]
+   },
+   {
+    "label": "poet",
+    "p": 0.0097,
+    "modes": [
+     "walk"
+    ]
+   }
+  ],
+  "scale": "long shot",
+  "collections": [
+   "halfworld",
+   "wygwyl"
+  ],
+  "halfworld": {
+   "n": "14",
+   "movement": 6,
+   "label": "I CHOOSE THE DOOR",
+   "line": "An old door, from a vintage somewhere. It opens on a slow party — the kind I once fell out of a window to escape. This time, I choose the door.",
+   "accent": "#5aa7ff",
+   "engine": "imzad",
+   "mode": "penta",
+   "figureHeight": 40,
+   "frameRows": 144,
+   "truth": "scale and subjects are the film's own draw calls, not a classifier"
+  },
+  "video": null,
+  "clip": null,
+  "thumb": null,
+  "strip": null,
+  "xy": null,
+  "sim": null,
+  "affinity": null,
+  "aff_top": null,
+  "signs": null
+ }
+]

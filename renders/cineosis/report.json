@@ -1,0 +1,64 @@
+{
+ "generated": "2026-10-01",
+ "shots": 94,
+ "samplesPerShot": 7,
+ "clock": {
+  "addressedFrom": "cineosis wygwyl.films[].container",
+  "titleFilmExcluded": "the suite runs 1498.66s and the cut 1440.07s; the difference is the title film, which the cut does not carry",
+  "knownHole": "cineosis's containers hold one 402 ms hole between NEVERMORE and BLOODLINES; addressing from the container carries it, summing durations does not"
+ },
+ "span": [
+  0,
+  1440.072
+ ],
+ "scales": {
+  "extreme long shot": 49,
+  "long shot": 45
+ },
+ "versusArchive": {
+  "archiveShots": 15149,
+  "scale": {
+   "extreme long shot": {
+    "halfworld": 49,
+    "archive": 1811
+   },
+   "long shot": {
+    "halfworld": 45,
+    "archive": 95
+   },
+   "medium shot": {
+    "halfworld": 0,
+    "archive": 10022
+   },
+   "close-up": {
+    "halfworld": 0,
+    "archive": 2382
+   },
+   "extreme close-up": {
+    "halfworld": 0,
+    "archive": 839
+   }
+  },
+  "lumMedian": {
+   "halfworld": 0.769,
+   "archive": 0.377
+  },
+  "satMedian": {
+   "halfworld": 0.2,
+   "archive": 0.166
+  }
+ },
+ "subjects": [
+  "child",
+  "custom",
+  "elder",
+  "everyman",
+  "poet",
+  "turned"
+ ],
+ "stillNeeded": {
+  "video, clip, thumb, strip": "encode. The renderer already draws every frame; this is an ffmpeg pass per shot plus one thumb and one strip, and nothing has to be decided.",
+  "xy, sim, affinity, aff_top": "CLIP ViT-B-32 on the sampled frames, then a PROJECTION INTO cineosis's existing t-SNE and 45-way affinity. Fitting a new map instead puts these shots in a space sharing no axes with the other 15,149 and every neighbour it reports is false.",
+  "signs": "a person. cineosis has them for 253 of 15,149 shots. These 80 come with their own line and label, which is a better starting point than a thumbnail, but the sign is still a reading."
+ }
+}
