@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Imageable City · WYGWYL</title>
+<style>
+:root{--ink:#1b1712;--paper:#f2ece0;--dim:#6f6555;--red:#b8322a;--gold:#c99a1e;--edge:rgba(27,23,18,.18)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font:15px/1.55 "Iowan Old Style",Palatino,Georgia,serif}
+button{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+main{max-width:1280px;margin:0 auto;padding:22px 16px 80px}
+a{color:var(--red)}
+.k{font:700 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.2em;color:var(--red);text-transform:uppercase}
+h1{font-size:clamp(28px,6.5vw,48px);font-weight:400;line-height:1.05;margin:8px 0 10px}
+h2{font-size:clamp(19px,4.5vw,24px);font-weight:400;margin:30px 0 8px}
+.lede{max-width:860px;font-size:16px}
+.note{color:var(--dim);font-size:13px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:12px 0;font:600 12px "Helvetica Neue",Arial,sans-serif}
+.legend button{background:none;border:1px solid var(--edge);border-radius:16px;padding:6px 11px;cursor:pointer;display:flex;align-items:center;gap:6px;min-height:34px}
+.legend button.off{opacity:.35}
+.legend svg{width:26px;height:14px}
+#mapwrap{position:relative;border:1px solid var(--edge);background:#e9e2d2;touch-action:pan-y}
+#map{width:100%;display:block}
+#map text{font-family:"Iowan Old Style",Georgia,serif;paint-order:stroke;stroke:#f2ece0;stroke-width:4px;stroke-linejoin:round}
+#map .el{cursor:pointer}
+#map .el:hover > *, #map .el.sel > *{filter:drop-shadow(0 0 3px #b8322a)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:6px 0;scrollbar-width:none}
+.chip{flex:0 0 auto;border:1px solid var(--edge);background:#fbf7ef;color:var(--ink);padding:7px 12px;min-height:36px;font:600 12px "Helvetica Neue",Arial,sans-serif;cursor:pointer;border-radius:18px}
+.chip.on{border-color:var(--red);color:var(--red)}
+#ev{position:fixed;left:0;right:0;bottom:0;max-height:70vh;background:#fbf7ef;border-top:2px solid var(--ink);transform:translateY(105%);transition:transform .3s;z-index:9;display:flex;flex-direction:column}
+#ev.on{transform:none}
+#ev .hd{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:12px 16px 6px}
+#ev .hd b{font-size:20px;font-weight:400}
+#ev .hd .k{display:block}
+#ev .body{overflow-y:auto;padding:0 16px 24px}
+.btn{background:transparent;color:var(--ink);border:1px solid var(--edge);padding:8px 13px;min-height:38px;border-radius:19px;font:700 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.12em;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+.shot{position:relative;background:#000;border:1px solid var(--edge)}
+.shot img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover}
+.shot .box{position:absolute;border:2px solid #ffd23f;box-shadow:0 0 0 1px #000}
+.shot .c{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#f3ead2;font:11px/1.3 "Helvetica Neue",Arial,sans-serif;padding:14px 6px 4px}
+.foot{margin-top:30px;font:12px "Helvetica Neue",Arial,sans-serif;color:var(--dim);border-top:1px solid var(--edge);padding-top:10px}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:10px 0}
+.summary div{border-left:3px solid var(--ink);padding:3px 10px}
+.summary b{font:700 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;display:block;color:var(--red)}
+</style>
+</head>
+<body>
+<main>
+  <div class="k">Where You Go When You Leave · <a href="../foundry/index.html">the foundry</a> · <a href="../archive/index.html">the archive</a> · the imageable city</div>
+  <h1>The imageable city</h1>
+  <p class="lede">Kevin Lynch asked people to draw their city from memory and found five things in every drawing: the
+  <b>paths</b> they move along, the <b>edges</b> that bound them, the <b>districts</b> they feel inside of, the <b>nodes</b>
+  where they gather, and the <b>landmarks</b> they steer by. We have thousands of shots; each one is a cognitive map. Here the
+  canon — the most iconic shots in the archive, chosen the same way every time — is read for those five things, and the
+  city is drawn back out of them. Every mark on this map is held by the shots that see it: tap it.</p>
+  <div class="summary" id="sum"></div>
+  <div class="legend" id="legend"></div>
+  <div class="chips" id="poems"></div>
+  <div id="mapwrap"><svg id="map" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  <p class="note" style="margin-top:6px">Triangles: landmarks, sized by how many shots hold them (gold: real, named ones). Rings: nodes at the poems’ places. Heavy lines: the journey’s paths. Hatched bands: edges. Dotted rings: districts.</p>
+
+  <h2>The landmarks, by how imageable they are</h2>
+  <div class="chips" id="lmchips"></div>
+
+  <h2>The canon</h2>
+  <p class="note" id="canonnote"></p>
+  <div class="chips" id="cfilter"></div>
+  <div class="grid" id="canon"></div>
+  <div class="foot" id="foot"></div>
+</main>
+<div id="ev"><div class="hd"><div><span class="k" id="evk"></span><b id="evt"></b><div class="note" id="evn"></div></div><button class="btn" id="evx">✕</button></div><div class="body"><div class="grid" id="evg"></div></div></div>
+<script type="module">
+const $ = id => document.getElementById(id);
+const C = await fetch('city.json').then(r => r.json());
+const E = C.elements, SH = Object.fromEntries(C.shots.map(s => [s.cid, s]));
+const S = 1000 / C.W, Wd = 1000, Hd = Math.round(C.H * S);
+const KIND = {landmark: 'landmarks', path: 'paths', edge: 'edges', node: 'nodes', district: 'districts'};
+const on = {landmark: true, path: true, edge: true, node: true, district: true};
+let poemSel = null;
+const LMs = E.filter(e => e.kind === 'landmark').sort((a, b) => b.n - a.n);
+$('sum').innerHTML = [
+  ['landmarks', LMs.slice(0, 5).map(e => e.name).join(', ')],
+  ['districts', E.filter(e => e.kind === 'district').sort((a, b) => b.n - a.n).slice(0, 4).map(e => e.name).join(', ')],
+  ['nodes', E.filter(e => e.kind === 'node').sort((a, b) => b.n - a.n).slice(0, 3).map(e => `${e.name} (${e.poem})`).join(', ')],
+  ['paths', [...new Set(E.filter(e => e.kind === 'path' && e.n).map(e => e.name.split(' · ')[0]))].slice(0, 4).join(', ')],
+  ['edges', [...new Set(E.filter(e => e.kind === 'edge').map(e => e.name))].join(', ')],
+].map(([k, v]) => `<div><b>${k}</b>${v}</div>`).join('');
+const legendSym = {
+  landmark: '<svg viewBox="0 0 26 14"><path d="M13 1 L20 13 L6 13 Z" fill="#1b1712"/></svg>',
+  path: '<svg viewBox="0 0 26 14"><line x1="1" y1="7" x2="25" y2="7" stroke="#1b1712" stroke-width="4"/></svg>',
+  edge: '<svg viewBox="0 0 26 14"><line x1="1" y1="5" x2="25" y2="5" stroke="#1b1712" stroke-width="3"/><path d="M3 5v5M8 5v5M13 5v5M18 5v5M23 5v5" stroke="#1b1712"/></svg>',
+  node: '<svg viewBox="0 0 26 14"><circle cx="13" cy="7" r="5" fill="none" stroke="#1b1712" stroke-width="2.5"/><circle cx="13" cy="7" r="2" fill="#1b1712"/></svg>',
+  district: '<svg viewBox="0 0 26 14"><ellipse cx="13" cy="7" rx="11" ry="5" fill="none" stroke="#1b1712" stroke-dasharray="2 2"/></svg>',
+};
+$('legend').innerHTML = Object.keys(KIND).map(k => `<button data-k="${k}">${legendSym[k]}${KIND[k]} ${E.filter(e => e.kind === k).length}</button>`).join('');
+$('legend').querySelectorAll('button').forEach(b => b.onclick = () => { on[b.dataset.k] = !on[b.dataset.k]; b.classList.toggle('off'); draw(); });
+const poems = [...new Set(E.filter(e => e.poem).map(e => e.poem))].sort();
+$('poems').innerHTML = `<button class="chip on" data-p="">the whole city</button>` + poems.map(p => `<button class="chip" data-p="${p}">${p} ${C.titles[p]}</button>`).join('');
+$('poems').querySelectorAll('.chip').forEach(b => b.onclick = () => { poemSel = b.dataset.p || null; $('poems').querySelectorAll('.chip').forEach(x => x.classList.toggle('on', x === b)); draw(); });
+const touches = (e, p) => !p || e.poem === p || (e.kind === 'path' && e.name.includes(p + '→')) || (e.kind === 'path' && e.name.includes('→' + p)) || e.evidence.some(c => SH[c] && SH[c].poem === p);
+function draw() {
+  const svg = $('map');
+  svg.setAttribute('viewBox', `0 0 ${Wd} ${Hd}`);
+  const labels = [];
+  let h = `<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#1b1712" stroke-width="1" opacity=".35"/></pattern></defs>
+    <image href="ground.webp" x="0" y="0" width="${Wd}" height="${Hd}" opacity=".9"/>`;
+  const vis = e => on[e.kind] && touches(e, poemSel);
+  const dim = e => poemSel && !touches(e, poemSel);
+  for (const e of E.filter(e => e.kind === 'district' && on.district)) {
+    const r = e.r * S;
+    h += `<g class="el" data-id="${e.id}" opacity="${dim(e) ? .2 : 1}"><ellipse cx="${e.x * S}" cy="${e.y * S}" rx="${r}" ry="${r * .78}" fill="${e.natural ? 'none' : 'url(#hatch)'}" stroke="#1b1712" stroke-width="1.2" stroke-dasharray="3 3"/>
+</g>`;
+    labels.push({x: e.x * S, y: e.y * S + r * .78 + 12, t: e.name, size: 12, it: true, pri: 1 + e.n / 100, id: e.id, dim: dim(e)});
+  }
+  for (const e of E.filter(e => e.kind === 'edge' && on.edge)) {
+    const d = 'M' + e.pts.map(p => `${(p[0] * S).toFixed(1)},${(p[1] * S).toFixed(1)}`).join('L') + (e.closed ? 'Z' : '');
+    h += `<g class="el" data-id="${e.id}" opacity="${dim(e) ? .25 : 1}"><path d="${d}" fill="none" stroke="#1b1712" stroke-width="3"/><path d="${d}" fill="none" stroke="#1b1712" stroke-width="9" stroke-dasharray="1 5" opacity=".55"/></g>`;
+  }
+  for (const e of E.filter(e => e.kind === 'path' && on.path)) {
+    const d = 'M' + e.pts.map(p => `${(p[0] * S).toFixed(1)},${(p[1] * S).toFixed(1)}`).join('L');
+    const wdt = e.mode === 'highway' ? 2 : 3 + Math.min(4, e.n / 20);
+    h += `<g class="el" data-id="${e.id}" opacity="${dim(e) ? .15 : 1}"><path d="${d}" fill="none" stroke="#f2ece0" stroke-width="${wdt + 3}" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${e.mode === 'highway' ? '#6f6555' : '#1b1712'}" stroke-width="${wdt}" stroke-linecap="round" ${e.mode === 'ride' ? 'stroke-dasharray="10 4"' : ''}/></g>`;
+  }
+  for (const e of E.filter(e => e.kind === 'node' && on.node)) {
+    const r = 7 + Math.min(10, e.n / 10);
+    h += `<g class="el" data-id="${e.id}" opacity="${dim(e) ? .2 : 1}"><circle cx="${e.x * S}" cy="${e.y * S}" r="${r}" fill="#f2ece0" stroke="#1b1712" stroke-width="3"/><circle cx="${e.x * S}" cy="${e.y * S}" r="3" fill="#1b1712"/>
+</g>`;
+    labels.push({x: e.x * S + r + 4, y: e.y * S + 4, t: `${e.poem} · ${e.name.split(' · ')[0]}`, size: 12, anchor: 'start', pri: 50, id: e.id, dim: dim(e)});
+  }
+  for (const e of LMs.filter(e => on.landmark)) {
+    const s = 6 + Math.sqrt(e.n) * 1.6, x = e.x * S, y = e.y * S;
+    h += `<g class="el" data-id="${e.id}" opacity="${dim(e) ? .15 : 1}"><path d="M${x} ${y - s} L${x + s * .8} ${y + s * .55} L${x - s * .8} ${y + s * .55} Z" fill="${e.named ? '#c99a1e' : '#1b1712'}" stroke="#f2ece0" stroke-width="1.5"/>
+</g>`;
+    labels.push({x, y: y - s - 4, t: e.name, size: e.named ? 12 : 11, bold: e.named, pri: (e.named ? 200 : 10) + e.n, id: e.id, dim: dim(e)});
+  }
+  // labels: most imageable first; a label that would collide is left off the drawing (tap the mark for it)
+  const placed = [];
+  for (const L of labels.sort((a, b) => b.pri - a.pri)) {
+    if (L.dim) continue;
+    const w = L.t.length * L.size * 0.52, x0 = L.anchor === 'start' ? L.x : L.x - w / 2, b = [x0 - 2, L.y - L.size, x0 + w + 2, L.y + 3];
+    if (placed.some(p => !(b[2] < p[0] || b[0] > p[2] || b[3] < p[1] || b[1] > p[3]))) continue;
+    placed.push(b);
+    h += `<text class="lab" data-id="${L.id}" x="${L.x}" y="${L.y}" text-anchor="${L.anchor || 'middle'}" font-size="${L.size}" ${L.it ? 'font-style="italic"' : ''} ${L.bold ? 'font-weight="700"' : ''}>${L.t}</text>`;
+  }
+  svg.innerHTML = h;
+  svg.querySelectorAll('.el, .lab').forEach(g => g.onclick = () => show(g.dataset.id));
+}
+function show(id) {
+  const e = E.find(x => x.id === id);
+  document.querySelectorAll('#map .el').forEach(g => g.classList.toggle('sel', g.dataset.id === id));
+  $('evk').textContent = `${e.kind}${e.poem ? ' · poem ' + e.poem + ' ' + C.titles[e.poem] : ''}`;
+  $('evt').textContent = e.name;
+  $('evn').textContent = e.n ? `held by ${e.n} shots in the canon${e.kind === 'landmark' && e.frame_x != null ? ` · it usually stands ${e.frame_x < .4 ? 'left' : e.frame_x > .6 ? 'right' : 'centre'} of frame` : ''}${e.h ? ` · built here ${e.h} m tall` : ''}` : 'a road of the world, not yet held by a shot';
+  $('evg').innerHTML = e.evidence.map(c => shot(c, e.kind === 'landmark')).join('') || '<p class="note">no shots</p>';
+  $('ev').classList.add('on');
+}
+function shot(c, withBox) {
+  const s = SH[c]; if (!s) return '';
+  const b = withBox && s.box ? `<div class="box" style="left:${(s.box.x - s.box.w / 2) * 100}%;width:${s.box.w * 100}%;top:${s.box.y0 * 100}%;height:${(s.box.y1 - s.box.y0) * 100}%"></div>` : '';
+  return `<div class="shot"><img loading="lazy" src="c/${c}.webp" alt="">${b}<div class="c">${c} · ${s.source} · poem ${s.poem}<br>${s.read.landmark[0] !== '—' ? '▲ ' + s.read.landmark[0] + ' · ' : ''}${s.read.path[0]} · ${s.read.district[0]}</div></div>`;
+}
+$('evx').onclick = () => { $('ev').classList.remove('on'); document.querySelectorAll('#map .el').forEach(g => g.classList.remove('sel')); };
+addEventListener('keydown', ev => { if (ev.key === 'Escape') $('evx').onclick(); });
+$('lmchips').innerHTML = LMs.map(e => `<button class="chip" data-id="${e.id}">${e.named ? '★ ' : '▲ '}${e.name} ${e.n}</button>`).join('');
+$('lmchips').querySelectorAll('.chip').forEach(b => b.onclick = () => show(b.dataset.id));
+// the canon, in its fixed order
+let cf = 'all';
+const cks = ['all', 'landmark', 'path', 'edge', 'node', 'district'];
+$('cfilter').innerHTML = cks.map(k => `<button class="chip ${k === 'all' ? 'on' : ''}" data-k="${k}">${k === 'all' ? 'every evidence shot' : 'reads a ' + k}</button>`).join('');
+$('cfilter').querySelectorAll('.chip').forEach(b => b.onclick = () => { cf = b.dataset.k; $('cfilter').querySelectorAll('.chip').forEach(x => x.classList.toggle('on', x === b)); canon(); });
+function canon() {
+  const xs = C.shots.filter(s => cf === 'all' || (s.read[cf] && s.read[cf][0] !== '—' && s.read[cf][1] >= .3)).sort((a, b) => a.cid < b.cid ? -1 : 1);
+  $('canonnote').textContent = `${xs.length} shots, in canon order (C0001 is the most iconic). Every reader sees the same canon in the same order.`;
+  $('canon').innerHTML = xs.slice(0, 240).map(s => shot(s.cid, cf === 'landmark')).join('');
+}
+$('foot').textContent = `${C.canon} · checksum ${C.canon_checksum} → ${C.version} · checksum ${C.checksum} · drawn on world ${C.world}. Same archive in, same canon, same city out.`;
+draw(); canon();
+</script>
+</body>
+</html>
