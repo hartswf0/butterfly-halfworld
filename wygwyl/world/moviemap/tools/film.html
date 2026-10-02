@@ -131,6 +131,7 @@ function frame(n) {
   return out.toDataURL('image/jpeg', 0.9);
 }
 window.film = {cut, frame, frames: Math.round((cut.duration + cut.credits) * FPS),
-  chapterFrames: [...cut.chapters.map(c => [c.num, Math.round(c.t0 * FPS), Math.round(c.t1 * FPS)]), ['15', Math.round(cut.chapters[cut.chapters.length - 1].t1 * FPS), Math.round((cut.duration + cut.credits) * FPS)]]};
+  // a chapter runs to the next one's start: the record has a breath between some passages (0.4 s after Nevermore), the picture holds through it
+  chapterFrames: [...cut.chapters.map((c, i) => [c.num, Math.round(c.t0 * FPS), Math.round((cut.chapters[i + 1] ? cut.chapters[i + 1].t0 : c.t1) * FPS)]), ['15', Math.round(cut.chapters[cut.chapters.length - 1].t1 * FPS), Math.round((cut.duration + cut.credits) * FPS)]]};
 document.getElementById('s').textContent = 'ready'; window.filmReady = true;
 </script></body></html>

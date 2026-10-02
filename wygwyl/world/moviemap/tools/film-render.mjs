@@ -34,7 +34,9 @@ if (!args.includes('--assemble')) {
 if (args.includes('--assemble') || !only.length) {
   const nums = [...cut.chapters.map(c => c.num), '15'];
   if (!nums.every(n => existsSync(join(TMP, `ch${n}.mp4`)))) { console.log('not every chapter is rendered yet'); process.exit(0); }
-  writeFileSync(join(TMP, 'list.txt'), nums.map(n => `file 'ch${n}.mp4'`).join('\n'));
+  // joined through MPEG-TS (the concat protocol copies every frame; the mp4 concat demuxer dropped one at each join)
+  for (const n of nums) { const ts = join(TMP, `ch${n}.ts`); if (!existsSync(ts)) spawnSync(FF, ['-loglevel', 'error', '-y', '-i', join(TMP, `ch${n}.mp4`), '-c', 'copy', '-bsf:v', 'h264_mp4toannexb', '-f', 'mpegts', ts]); }
+  spawnSync(FF, ['-loglevel', 'error', '-y', '-i', 'concat:' + nums.map(n => join(TMP, `ch${n}.ts`)).join('|'), '-c', 'copy', '-r', String(cut.fps), join(TMP, 'video.mp4')], {stdio: 'inherit'});
   // subtitles (soft, and a .vtt beside the film) and chapters, from the cut
   const ts = (t, sep) => { const h = Math.floor(t / 3600), m = Math.floor(t / 60) % 60, s = t % 60; return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${s.toFixed(3).padStart(6, '0').replace('.', sep)}`; };
   const subs = cut.chapters.flatMap(c => c.lines.map(l => [l.s, l.e + 0.4, l.text]));
@@ -45,11 +47,18 @@ if (args.includes('--assemble') || !only.length) {
     .map(([a, b, t]) => `[CHAPTER]\nTIMEBASE=1/1000\nSTART=${Math.round(a * 1000)}\nEND=${Math.round(b * 1000)}\ntitle=${t}\n`).join('\n'));
   // the record under everything; each reading laid into its passage at the cut's read0
   const ins = ['-i', join(W, cut.drone), ...cut.chapters.flatMap(c => ['-i', join(W, c.reading)])];
-  const fl = [`[0:a]volume=0.62,afade=t=out:st=${(cut.duration - 6).toFixed(2)}:d=6[d]`, ...cut.chapters.map((c, i) => `[${i + 1}:a]adelay=${Math.round(c.read0 * 1000)}|${Math.round(c.read0 * 1000)},volume=1.0[r${i}]`),
-    `[d]${cut.chapters.map((_, i) => `[r${i}]`).join('')}amix=inputs=${cut.chapters.length + 1}:normalize=0:duration=longest,apad=whole_dur=${total.toFixed(2)},atrim=0:${total.toFixed(2)},alimiter=limit=0.95[a]`].join(';');
+  // his readings never overlap, so they are laid end to end with silence between (the ffmpeg here has no un-normalised amix);
+  // then the record and the readings are mixed as two constant streams and the halving is given back
+  const F = 'aformat=sample_rates=48000:channel_layouts=stereo:sample_fmts=fltp', parts = [], segs = [];
+  // each reading gets an exact slot, from its own start to the next one's: padded and trimmed, so nothing can drift
+  parts.push(`aevalsrc=0|0:s=48000:d=${cut.chapters[0].read0.toFixed(4)},${F}[g]`); segs.push('[g]');
+  cut.chapters.forEach((c, i) => { const next = i + 1 < cut.chapters.length ? cut.chapters[i + 1].read0 : total; parts.push(`[${i + 1}:a]${F},apad,atrim=end_sample=${Math.round((next - c.read0) * 48000)}[r${i}]`); segs.push(`[r${i}]`); });
+  const fl = [...parts, `${segs.join('')}concat=n=${segs.length}:v=0:a=1,apad,atrim=0:${total.toFixed(3)}[voice]`,
+    `[0:a]${F},volume=0.62,afade=t=out:st=${(cut.duration - 6).toFixed(2)}:d=6,apad,atrim=0:${total.toFixed(3)}[d]`,
+    `[d][voice]amix=inputs=2:duration=longest:dropout_transition=0,volume=2,alimiter=limit=0.95[a]`].join(';');
   let r = spawnSync(FF, ['-loglevel', 'error', '-y', ...ins, '-filter_complex', fl, '-map', '[a]', '-c:a', 'aac', '-b:a', '192k', join(TMP, 'mix.m4a')], {stdio: 'inherit'}); if (r.status) process.exit(1);
-  r = spawnSync(FF, ['-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', join(TMP, 'list.txt'), '-i', join(TMP, 'mix.m4a'), '-i', join(TMP, 'subs.srt'), '-i', join(TMP, 'chapters.txt'),
-    '-map', '0:v', '-map', '1:a', '-map', '2:s', '-map_metadata', '3', '-map_chapters', '3', '-c:v', 'copy', '-c:a', 'copy', '-c:s', 'mov_text', '-metadata:s:s:0', 'language=eng', '-movflags', '+faststart', '-shortest', OUT], {stdio: 'inherit'});
+  r = spawnSync(FF, ['-loglevel', 'error', '-y', '-i', join(TMP, 'video.mp4'), '-i', join(TMP, 'mix.m4a'), '-i', join(TMP, 'subs.srt'), '-i', join(TMP, 'chapters.txt'),
+    '-map', '0:v', '-map', '1:a', '-map', '2:s', '-map_metadata', '3', '-map_chapters', '3', '-c:v', 'copy', '-c:a', 'copy', '-c:s', 'mov_text', '-metadata:s:s:0', 'language=eng', '-movflags', '+faststart', OUT], {stdio: 'inherit'});
   if (r.status) process.exit(1);
   console.log('film', OUT, (statSync(OUT).size / 1048576).toFixed(0) + ' MB');
 }
