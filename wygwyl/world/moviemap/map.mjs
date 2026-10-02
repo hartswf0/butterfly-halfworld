@@ -86,6 +86,9 @@ export class MapView {
     if (S.trace) { x.strokeStyle = '#ffb35c'; x.lineWidth = Math.max(2.5, Math.min(8, 6 * sc)) * d;
       for (const [ei, flags] of S.trace) { const st = D.steps(ei); let open = false; x.beginPath();
         for (let k = 0; k < st.length; k++) { if (!flags[k]) { open = false; continue; } const [a, b] = this.toScreen(st[k][0], st[k][1]); open ? x.lineTo(a, b) : x.moveTo(a, b); open = true; } x.stroke(); } }
+    // what the city holds: a dot at every address (colour by kind) once the field is a few kilometres or less
+    if (D.holdings && sc > 0.22 && !mini) { const COL = {reading: '#7fd1ff', line: '#f3e6c4', mouth: '#e8a8ff', echo: '#ff8f6b', hook: '#ff3f9f', pack: '#9ad07a', radio: '#ffd24a', screen: '#5fe0ff', poster: '#ffb35c', ref: '#d6c6a0'};
+      for (const h of D.holdings) { if (!h.at || !COL[h.kind]) continue; const [a, b] = this.toScreen(h.at[0], h.at[1]); if (a < -5 || b < -5 || a > W + 5 || b > H + 5) continue; x.fillStyle = COL[h.kind]; x.strokeStyle = 'rgba(0,0,0,.7)'; x.lineWidth = 1 * d; x.beginPath(); x.arc(a, b, (h.kind === 'echo' || h.kind === 'screen' ? 3.6 : 2.6) * d, 0, 7); x.fill(); x.stroke(); } }
     // nodes and landmarks (Lynch), plazas, poem sites
     if (toon) { for (const [k, n] of D.plan.nodes.entries()) { if (n[2] < 3) continue; const big = (D.nodeRank[k] || 0) >= 2; if (!big && sc < 0.6) continue; const [a, b] = this.toScreen(n[0], n[1]);
         x.fillStyle = '#111'; x.beginPath(); x.arc(a, b, (big ? 4 : 2) * d, 0, 7); x.fill(); if (big) { x.strokeStyle = '#111'; x.lineWidth = 1.2 * d; x.beginPath(); x.arc(a, b, 8 * d, 0, 7); x.stroke(); } }

@@ -272,6 +272,9 @@ export async function makeEngine({canvas, width, height, plan, base = '../city3d
       if ((d.kind === 'building' && d.k === hit.k) || (d.kind === 'landmark' && d.i === hit.i) || (d.kind === 'sign' && d.i === hit.i) || ((d.kind === 'cafe' || d.kind === 'stop') && d.item === hit.item)) { img.data[(y * w + x) * 4 + 3] = 255; n++; } }
     return n ? img : null;
   }
+  // how much of the frame each building fills (ID buffer pixels), for the visibility index of the disc
+  function idCounts(w = 160, h = Math.round(160 / camera.aspect)) { const buf = renderIds(w, h), out = new Map();
+    for (let i = 0; i < w * h; i++) { const t = buf[i * 4]; if (t < 1 || t > 3) continue; const d = decode(t, buf[i * 4 + 1] + buf[i * 4 + 2] * 256); if (d && d.k != null) out.set(d.k, (out.get(d.k) || 0) + 1); } return out; }
   // the whole ID frame drawn in false colour (an abstraction of its own)
   function idImage(w = idSize()[0], h = idSize()[1]) { const buf = renderIds(w, h), img = new ImageData(w, h);
     for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const i = ((h - 1 - y) * w + x) * 4, o = (y * w + x) * 4, t = buf[i], id = buf[i + 1] + buf[i + 2] * 256;
@@ -288,6 +291,6 @@ export async function makeEngine({canvas, width, height, plan, base = '../city3d
   setEra(5); setHour(12); setStyle('photo');
   onStep(100, '');
   return {renderer, scene, camera, C, S, meta, U, st, heav, blds, legible, street, lmGroups, lmState,
-    pose, poseFree, advance, setHourFast, setWet, renderFilm, render, resize, setHfov, setEra, setHour, setDoy, setWeather, setSeason, setStyle, pickAt, maskOf, idImage, groundY,
+    pose, poseFree, advance, setHourFast, setWet, renderFilm, render, resize, setHfov, setEra, setHour, setDoy, setWeather, setSeason, setStyle, pickAt, maskOf, idImage, idCounts, groundY,
     buildingState: (k, e) => blds.userData.state(k, e ?? st.era)};
 }

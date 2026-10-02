@@ -46,7 +46,7 @@ button:hover{border-color:rgba(255,255,255,.32)}button.on{background:var(--acc);
 #rose .f{grid-column:2;grid-row:1}#rose .l{grid-column:1;grid-row:2}#rose .b{grid-column:2;grid-row:2}#rose .r{grid-column:3;grid-row:2}
 /* side panel: the city in place */
 #side{position:fixed;right:12px;top:60px;width:300px;max-height:calc(100vh - 160px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px 14px;display:none;backdrop-filter:blur(8px);scrollbar-width:thin}
-#side.open{display:block}
+#side.open{display:block}#side.open~#heard{display:none}
 #side h2,#info h2{font:600 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.16em;color:var(--dim);margin:14px 0 7px;text-transform:uppercase}
 #side h2:first-child{margin-top:2px}
 .chips{display:flex;flex-wrap:wrap;gap:5px}.chips button{padding:5px 9px;font-size:11.5px}
@@ -115,6 +115,15 @@ input[type=range]{flex:1;accent-color:var(--acc)}
 button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 #watch video{position:absolute;inset:0;width:100%;height:100%;background:#000;pointer-events:auto}
 #watch .back{position:absolute;left:14px;top:14px;pointer-events:auto;background:var(--panel)}
+
+/* what is sounding: the city's captions */
+#heard{position:fixed;right:12px;bottom:86px;text-align:right;max-width:min(520px,60vw);font:12px/1.55 ui-sans-serif,-apple-system,Arial;color:#efe6d4;text-shadow:0 1px 3px #000,0 0 10px rgba(0,0,0,.8);pointer-events:none}
+#heard i{font-style:normal;color:var(--acc2);margin-left:4px}
+#btnListen.on{background:var(--acc)!important;color:#1a1208;border-color:var(--acc)}
+#info .holds{display:flex;flex-direction:column;gap:4px}#info .holds .hr{display:flex;gap:7px;align-items:flex-start;font-size:12px}#info .holds .hr b{color:var(--dim);font-weight:500;margin-right:4px}
+#info .holds .hr button{flex:0 0 auto;width:26px;height:26px;padding:0;border-radius:50%}#info .holds img{height:60px;border-radius:4px;cursor:pointer;border:1px solid var(--line);margin:2px 4px 0 0}
+#info img.big{width:100%;border-radius:6px;margin-top:6px}
+@media (max-width:760px), (max-aspect-ratio:1/1){ #heard{bottom:70px;max-width:none;right:8px;left:8px;font-size:11px} }
 kbd{font:10px ui-monospace,Menlo,monospace;border:1px solid var(--line);border-radius:3px;padding:0 4px}
 @media (max-width:760px), (max-aspect-ratio:1/1){
   #nav{left:0;right:0;top:0;transform:none;width:auto;height:92px;border-radius:0;border-width:0 0 1px}
@@ -142,7 +151,7 @@ kbd{font:10px ui-monospace,Menlo,monospace;border:1px solid var(--line);border-r
   <div id="where">—</div>
   <div id="livestate" hidden><span id="badge"></span><button id="toDisc" hidden>↩ back to the disc</button></div>
   </div></div>
-<div id="tools"><button id="btnWatch" title="watch a poem drive the car">◉ watch</button><button id="btnSide" title="the city in place: era, season, hour, weather, rendering">☰ in place</button></div>
+<div id="tools"><button id="btnListen" hidden aria-pressed="false" title="hear what the city holds, where it is">♪ listen</button><button id="btnWatch" title="watch a poem drive the car">◉ watch</button><button id="btnSide" title="the city in place: era, season, hour, weather, rendering">☰ in place</button></div>
 <div id="turns"></div>
 <div id="bar">
   <div class="grp" role="group" aria-label="speed">
@@ -179,8 +188,9 @@ kbd{font:10px ui-monospace,Menlo,monospace;border:1px solid var(--line);border-r
     <div class="grp" id="powers"></div>
   </div>
   <div id="legend"><b>Lynch’s notation</b><br>━ paths (avenues, spines) · ┅ edges (shore, highways)<br>▨ districts (wards) · ● nodes (junctions, squares)<br>▲ landmarks · <span style="color:#c82828">━</span> the disc (filmed streets) · <span style="color:#d98a2a">━</span> your trace</div>
-  <div id="mapnote"><i style="background:#7fd1ff"></i>filmed <i style="background:#ffb35c"></i>your trace · tap a street to go there</div>
+  <div id="mapnote"><i style="background:#7fd1ff"></i>filmed <i style="background:#ffb35c"></i>your trace · dots: what the city holds · tap a street to go there</div>
 </div>
+<div id="heard" hidden aria-live="polite"></div>
 <div id="watch"></div>
 <div id="toast" role="status" aria-live="polite"><span></span><button hidden></button></div>
 <div id="loading"><div>loading the disc …</div><div class="bar"><i id="lbar"></i></div><div id="lmsg" style="font-size:11px"></div></div>

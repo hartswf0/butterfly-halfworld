@@ -42,3 +42,31 @@ One film of the whole album on the album's own clock (`../../clock.json`): the u
 Build it:
 - `node tools/film-plan.mjs` writes `film/cut.json`.
 - `node tools/film-render.mjs` renders `../../../film/WYGWYL-moviemap.mp4`. It needs Playwright and ffmpeg, renders chapter by chapter and resumes where it stopped.
+
+## What the city holds
+
+The city is the index.
+- `node tools/build-holdings.mjs` gives every published item an address in `holdings.json`.
+- Addresses come from rendezvous hashing: each item takes the eligible lot with the highest hash(item@lot), so adding items never moves an existing one. The city grows by infill.
+
+What is held, and where:
+
+| item | where it lives |
+|---|---|
+| his readings | the poem sites |
+| each of 267 lines | a building nearby, with its sung mouth (157) |
+| 140 echoes | corners |
+| 79 hooks | clubs |
+| the 210-piece sound pack | by district: loops in the nightlife, beds by the water, hits in industry, textures in the ruins, risers downtown |
+| 14 radio stations | the mast |
+| the drone record | each district's passage of it is that district's ground tone |
+| 354 canon pictures, 104 foundry references, 16 films | on walls |
+
+- Walls go where the disc actually sees them. `tools/visibility.mjs` counts ID-buffer pixels per building over every disc frame and writes `vis.json`; a holding hangs on whichever face that view sees.
+- `holdings.mjs` projects each wall into the frame through the frame's own camera, so it works on disc frames and live renders alike. It is hidden when the ID buffer sees something else there.
+- `sound.mjs` mixes the audible holdings through the camera with WebAudio:
+  - his words one at a time: a line, then its sung answer;
+  - his nearest reading only;
+  - caps on the pack and the clubs;
+  - the district's drone passage under everything.
+- ♪ listen turns the sound on; the captions say what is sounding, which way, and how far.

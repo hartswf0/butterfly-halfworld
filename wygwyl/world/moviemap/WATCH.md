@@ -84,6 +84,16 @@ PLAYING                                 PAUSED
 | motion | slides, pans, map zooms | instant when reduced motion is asked for |
 | icon buttons | — | labelled for screen readers; focus is visible |
 
+## Listening and the walls
+| element | claim | verdict |
+|---|---|---|
+| ♪ listen | the city can be heard here | shown once the ledger is loaded; pressed state is visible (aria-pressed) |
+| captions (bottom right) | what is sounding now, which way, how far | while listening; hidden behind the in-place panel; read aloud politely |
+| a picture or film on a wall | this building holds it | drawn only where the ID buffer sees that building; touch opens it |
+| "What it holds · A·nn·k" | the building's address and contents | in its sheet, one action per item (play, watch, lay over the frame) |
+| holdings on the map | where everything is | dots once the field is a few km |
+| sound in Watch | — | the street falls silent while a film plays, and resumes after |
+
 ## The film
 `tools/film-plan.mjs` → `film/cut.json`, then `tools/film-render.mjs` → `film/WYGWYL-moviemap.mp4` at the repo root (git-ignored; 1280×720, 24 fps, 2.39 picture in a letterbox, H.264 with AAC, soft English subtitles, 15 chapters) and `film/WYGWYL-moviemap.vtt` here. The watch chooser offers "the whole film" only where that file is served. While it plays, the browser's controls are its Stop, seek and volume. Esc or "↩ back to the street" leaves.
 

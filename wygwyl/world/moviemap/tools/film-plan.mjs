@@ -12,7 +12,7 @@ import {createHash} from 'node:crypto';
 
 const HERE = dirname(fileURLToPath(import.meta.url)), MM = join(HERE, '..'), W = join(MM, '..', '..');
 const J = p => JSON.parse(readFileSync(p, 'utf8'));
-const plan = J(join(MM, 'plan.json')), meta = J(join(MM, '..', 'city3d', 'city.json')), clock = J(join(W, 'clock.json')), world = J(join(W, 'world', 'world.json'));
+const samples = J(join(W, 'samples.json')), plan = J(join(MM, 'plan.json')), meta = J(join(MM, '..', 'city3d', 'city.json')), clock = J(join(W, 'clock.json')), world = J(join(W, 'world', 'world.json'));
 const E = plan.edges, N = plan.nodes, STEP = 3, VMAX = 7;
 const TAU = Math.PI * 2, wrap = a => ((a + Math.PI) % TAU + TAU) % TAU - Math.PI, R2 = v => Math.round(v * 100) / 100, R1 = v => Math.round(v * 10) / 10, R3 = v => Math.round(v * 1000) / 1000;
 const norm = s => s.toLowerCase().replace(/[^a-z ]/g, '').replace(/\s+/g, ' ').trim();
@@ -96,7 +96,8 @@ const ways = []; const wayIx = new Map(); const wid = w => { if (!wayIx.has(w)) 
 const usedShots = new Set(), chapters = [];
 for (const [k, span] of clock.spans.entries()) {
   const p = meta.poems.find(q => q.num === span.num), q = meta.poems[(k + 1) % meta.poems.length], T = J(join(W, 'timings', span.num + '.json')), site = world.sites.find(s => s.num === span.num);
-  const spanDur = span.t1 - span.t0, spare = Math.max(0, spanDur - T.duration), lead = k === 0 ? Math.min(9, spare * 0.4) : Math.min(5, Math.max(1.6, spare * 0.22)), read0 = span.t0 + lead;
+  // the reading sits where the album puts it in its passage (samples.json: the drone's offset_in_container), not where it would be convenient
+  const spanDur = span.t1 - span.t0, lead = samples.tracks.find(t => t.num === span.num).drone.offset_in_container, read0 = span.t0 + lead;
   const vt0 = T.segments.reduce((a, s) => a + s.words.reduce((b, w) => b + Math.max(0, w.e - w.s), 0), 0);
   const {path, startDist} = route(p, q, vt0), Np = path.length - 1;
   const placed = meta.words.filter(w => w.poem === p.num);
@@ -118,7 +119,8 @@ for (const [k, span] of clock.spans.entries()) {
     if (sh && l.e - l.s > 2.5 && !lines.slice(Math.max(0, j - 2), j).some(o => o.shot)) { usedShots.add(sh.cid); l.shot = {cid: sh.cid, source: sh.source, el: sh.el, t: R2((l.s + l.e) / 2 - 1.2), dur: 2.6}; }
     delete l.v;
   }
-  const tail = span.t1 - lines[lines.length - 1].e, coda = tail >= 6 ? {t: R2(span.t1 - Math.min(9, tail - 1)), dur: R2(Math.min(9, tail - 1))} : null;
+  // the tail after his last word: the place flashes through its six eras (at least ~0.5 s an era), or there is no coda
+  const tail = span.t1 - lines[lines.length - 1].e, coda = tail >= 3.2 ? {t: R2(span.t1 - Math.min(9, tail - 0.3)), dur: R2(Math.min(9, tail - 0.3))} : null;
   const L = LIGHT[span.num];
   chapters.push({num: span.num, title: p.title, t0: R3(span.t0), t1: R3(span.t1), read0: R3(read0), reading: span.reading, readDur: T.duration,
     light: {...L, treatment: site ? site.time_of_day : ''}, startDist: Math.round(startDist), metres: Math.round(Np * STEP),

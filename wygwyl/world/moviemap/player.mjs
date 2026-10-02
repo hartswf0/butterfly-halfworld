@@ -4,6 +4,8 @@
 // registered pose is rendered live by the engine. Touch a façade: the ID buffer names the building and the car pulls up to it.
 import {MapView, makeGround, STYLE_N} from './map.mjs';
 import {makeCinema} from './cinema.mjs';
+import {makeHoldings, srcURL} from './holdings.mjs';
+import {makeSound} from './sound.mjs';
 
 const $ = id => document.getElementById(id);
 const MOBILE = matchMedia('(max-width: 760px), (pointer: coarse)').matches;
@@ -124,9 +126,14 @@ let idc = null; function idCanvas(img) { if (!idc) { idc = document.createElemen
   fx.save(); fx.imageSmoothingEnabled = false; fx.drawImage(idc, fit.dx, fit.dy, fit.dw, fit.dh); fx.restore(); $('live').style.display = 'none'; }
 
 // overlay: the turn arrows on the road at a corner, the hovered and the chosen thing outlined from the ID buffer
-let maskC = null, arrowHits = [], cine = null;
+let maskC = null, arrowHits = [], cine = null, wallHits = [], HOLD = null, SND = null, groundH = null, listening = false;
 function drawOver() {
   ox.clearRect(0, 0, overC.width, overC.height);
+  // what the city holds, on its walls (photographic rendering only: the abstractions show the bare city)
+  wallHits = [];
+  if (HOLD && S.style === 'photo' && !(anim && anim.kind === 'slide'))
+    wallHits = HOLD.draw(ox, camNow(anim && anim.kind === 'pan' ? anim.yaw : 0), fit, {era: S.era, night: isNight() ? 1 : 0,
+      idAt: eng && !MOBILE && !anim ? (u, v) => { syncEnginePose(); return eng.pickAt(u, v); } : null});
   for (const [m, col] of [[hover, 'rgba(127,209,255,.35)'], [sel, 'rgba(255,179,92,.5)']]) { if (!m || !m.mask || m.key !== poseKey()) continue;
     if (!maskC) maskC = document.createElement('canvas'); maskC.width = m.mask.width; maskC.height = m.mask.height; const mc = maskC.getContext('2d'); mc.putImageData(m.mask, 0, 0); mc.globalCompositeOperation = 'source-in'; mc.fillStyle = col; mc.fillRect(0, 0, maskC.width, maskC.height); mc.globalCompositeOperation = 'source-over';
     ox.drawImage(maskC, fit.dx, fit.dy, fit.dw, fit.dh); }
@@ -190,7 +197,8 @@ function atCorner(node) {
   out.push({u: true, node, turn: Math.PI, name: 'turn back'});
   choices = out; if (S.speed) { S.speed = 0; }
   const ar = t => '↑↗→↘↓↙←↖'[Math.round(((t * 180 / Math.PI) + 360) % 360 / 45) % 8];
-  $('turns').innerHTML = `<div class="lab">AT THE CORNER · CHOOSE A WAY</div>` + out.map((o, k) => `<button data-k="${k}" class="${o.disc ? 'disc' : ''}" title="${o.u ? '' : o.disc ? 'on the disc' : 'rendered live'}"><b>${o.u ? '⟲' : ar(o.turn)}</b>${o.name}</button>`).join('');
+  const echo = HOLD && HOLD.atNode(node)[0];
+  $('turns').innerHTML = `<div class="lab">AT THE CORNER · CHOOSE A WAY${echo ? `<br><span style="text-transform:none;letter-spacing:0;font:italic 13px Georgia,serif">⟲ an echo meets here: “${echo.title}” — ${echo.sources} recordings carry it</span>` : ''}</div>` + out.map((o, k) => `<button data-k="${k}" class="${o.disc ? 'disc' : ''}" title="${o.u ? '' : o.disc ? 'on the disc' : 'rendered live'}"><b>${o.u ? '⟲' : ar(o.turn)}</b>${o.name}</button>`).join('');
   $('turns').style.display = 'flex'; $('turns').querySelectorAll('button').forEach(b => b.onclick = () => take(out[+b.dataset.k]));
   requestDraw();
 }
@@ -230,6 +238,9 @@ function loop(now) {
     if (!ref || ref.sheet.ready || S.i + S.dir < 0 || S.i + S.dir >= steps(S.e).length) { lastT = now; stepBy(1); }
   }
   if (mapOpen && mapView.step(now)) drawMap();
+  if (SND) { if (cine && cine.active) { if (SND.on) SND.disable(); } else if (listening && !SND.on) SND.enable();
+    if (SND.on && now - (loop.snd || 0) > 200) { loop.snd = now; SND.update(camNow(), {night: isNight(), era: S.era}); } }
+  if (wallHits.some(w => w.h.kind === 'screen') && now - (loop.scr || 0) > 40 && !(cine && cine.active)) { loop.scr = now; drawOver(); }
   requestAnimationFrame(loop);
 }
 
@@ -256,6 +267,7 @@ const sameHit = (a, b) => a && b && a.kind === b.kind && a.k === b.k && a.i === 
 function syncEnginePose() { const p = pose(); eng.pose(p.x, p.y, p.heading, S.view); }
 async function touch(cx, cy) {
   const ah = arrowHits.find(a => Math.hypot(a.x - cx, a.y - cy) < a.r); if (ah && choices) { take(ah.c); return; }
+  const wh = HOLD && wallHits.find(w => HOLD.inPoly([cx * fit.d, cy * fit.d], w.poly)); if (wh) { openHolding(wh.h, wh.k); return; }
   const uv = toUV(cx, cy); if (!uv) return;
   if (!eng) { toast('reading what you touched — raising the city …', 0); await ensureEngine(); }
   syncEnginePose(); const h = eng.pickAt(uv[0], uv[1]);
@@ -313,7 +325,7 @@ function showInfo(h) {
   if (h.kind === 'building') { const B = eng.C.bld, k = h.k, o = k * 14, x = B[o], y = B[o + 1], st = B[o + 6], hgt = B[o + 5], reuse = B[o + 9];
     const ad = address(x + Math.sin(B[o + 4]) * B[o + 3] / 2, y - Math.cos(B[o + 4]) * B[o + 3] / 2), dd = distOf(x, y), [ward, pr, zone] = ad ? ad.e.wz : [0, 0, ''];
     const cafe = plan.cafes.find(c => c.b === k), p = nearPoem(x, y), words = nearWords(x, y);
-    html = `<h3>${ad ? `${ad.num} ${ad.way.name}` : 'a building'}</h3><div class="k">${STYLE_N[st] || 'building'} · ${hgt.toFixed(0)} m · building ${k}${cafe ? ` · <b style="color:var(--acc)">${cafe.name}</b> on the ground floor` : ''}</div>
+    html = `<h3>${ad ? `${ad.num} ${ad.way.name}` : 'a building'}</h3><div class="k">${STYLE_N[st] || 'building'} · ${hgt.toFixed(0)} m · building ${k}${cafe ? ` · <b style="color:var(--acc)">${cafe.name}</b> on the ground floor` : ''}</div>${holdsBlock(k)}
       <div class="k" style="margin-top:3px">now: <b style="color:var(--ink)">${STATE(B, k, S.era)[0]}</b> (${ERA[S.era]})</div>
       <h2>Its life in the six eras</h2>${timeline(e => STATE(B, k, e))}
       ${reuse ? `<h2>Adaptive reuse</h2><div class="k">ruined in the Fall; in Resurrection ${reuse === 1 ? 'rebuilt in white and glass on its own footprint' : 'relit as a club under neon, the old walls kept'}.</div>` : ''}
@@ -340,11 +352,37 @@ function showInfo(h) {
     if (s.k === 'marker' && s.lm != null) { showInfo({kind: 'landmark', i: s.lm}); return; }
     if (s.k === 'cafe') { const c = plan.cafes[s.cafe]; html += `<table>${c.menu.map(([a, b]) => `<tr><td>${a}</td><td>$${b}</td></tr>`).join('')}</table>`; } }
   I.innerHTML = `<button class="x" title="close">×</button>` + html; I.classList.add('open'); $('side').classList.remove('open');
-  I.querySelector('.x').onclick = closeInfo;
+  I.querySelector('.x').onclick = closeInfo; wireHolds(I);
   I.querySelectorAll('img[data-c]').forEach(im => im.onclick = () => showEvidence(im.dataset.c, im.title));
   I.querySelectorAll('button[data-read]').forEach(b => b.onclick = () => { if (!audio.paused && audio.src.endsWith(encodeURI(b.dataset.read))) { audio.pause(); b.textContent = '▶ the reading'; return; } audio.src = '../../' + b.dataset.read; audio.play().catch(() => {}); b.textContent = '❚❚ the reading'; });
 }
-function closeInfo() { $('info').classList.remove('open'); sel = null; audio.pause(); requestDraw(); }
+// ——— what a building holds: its address, and each holding with the one action it allows ———
+const KINDN = {line: 'a line of his reading', mouth: 'the line, sung by another mouth', hook: 'a hook', pack: 'from the sound pack', screen: 'a film', poster: 'a picture from the canon', ref: 'a reference', reading: 'his reading', echo: 'an echo', radio: 'the radio'};
+function holdsBlock(k) {
+  const list = HOLD ? HOLD.forLot(k) : []; if (!list.length) return '';
+  const audioK = new Set(['line', 'mouth', 'hook', 'pack']);
+  return `<h2>What it holds · ${list[0].addr}</h2><div class="holds">${list.map(h => audioK.has(h.kind) ? `<div class="hr"><button data-play="${h.src}" aria-label="play">▶</button><span><b>${KINDN[h.kind]}</b> ${h.title}</span></div>`
+    : h.kind === 'screen' ? `<div class="hr"><button data-film="${h.src}" aria-label="watch">▶</button><span><b>${KINDN[h.kind]}</b> ${h.title}</span></div>`
+    : `<img src="${srcURL(h.src)}" data-${h.kind === 'poster' ? 'c' : 'ref'}="${h.cid || h.src}" title="${h.title.replace(/"/g, '&quot;')}" loading="lazy" alt="">`).join('')}</div>`;
+}
+function wireHolds(I) {
+  I.querySelectorAll('[data-play]').forEach(b => b.onclick = () => { const src = srcURL(b.dataset.play); if (!audio.paused && audio.src.endsWith(encodeURI(src).replace(/^\.\.\/\.\.\//, ''))) { audio.pause(); b.textContent = '▶'; return; }
+    I.querySelectorAll('[data-play]').forEach(q => q.textContent = '▶'); audio.src = src; audio.play().catch(() => {}); b.textContent = '❚❚'; audio.onended = () => b.textContent = '▶'; });
+  I.querySelectorAll('[data-film]').forEach(b => b.onclick = () => { const v = document.createElement('video'); v.src = srcURL(b.dataset.film); v.controls = true; v.autoplay = true; v.playsInline = true; b.closest('.hr').after(v); b.remove(); });
+  I.querySelectorAll('img[data-ref]').forEach(im => im.onclick = () => { $('evid').querySelector('img').src = im.src; $('evid').style.display = 'block'; $('evbar').style.display = 'flex'; $('evcap').textContent = im.title + ' — laid over the frame'; });
+}
+// touching a wall: what hangs or plays there, then the rest of what the building holds
+function openHolding(h, k) {
+  const I = $('info'); let html = '';
+  if (h.kind === 'poster') { const s = meta.shots.find(q => q.cid === h.cid); html = `<h3>${h.cid}</h3><div class="k">a picture from the canon (${s ? s.source : ''}) — hung on the wall that faces where it was taken${s && s.poem ? ` · poem ${s.poem}` : ''}</div><img class="big" src="${srcURL(h.src)}" alt=""><div class="chips" style="margin-top:6px"><button data-lay="${h.cid}">lay it over the frame</button></div>`; }
+  else if (h.kind === 'screen') html = `<h3>${h.title}</h3><div class="k">playing on the wall · ${h.addr}</div><video src="${srcURL(h.src)}" controls autoplay playsinline></video>`;
+  else if (h.kind === 'ref') html = `<h3>${h.title}</h3><div class="k">a reference the foundry read poem ${h.poem} against (${h.source}, ${h.why})</div><img class="big" src="${srcURL(h.src)}" alt="">${h.line ? `<div class="wt">“${h.line}”</div>` : ''}`;
+  I.innerHTML = `<button class="x" title="close" aria-label="close">×</button>` + html + holdsBlock(k); I.classList.add('open'); $('side').classList.remove('open');
+  I.querySelector('.x').onclick = closeInfo; wireHolds(I);
+  I.querySelectorAll('[data-lay]').forEach(b => b.onclick = () => showEvidence(b.dataset.lay, h.title));
+  I.querySelectorAll('img[data-c]').forEach(im => im.onclick = () => showEvidence(im.dataset.c, im.title));
+}
+function closeInfo() { $('info').classList.remove('open'); $('info').querySelectorAll('video').forEach(v => v.pause()); sel = null; audio.pause(); requestDraw(); }
 function showEvidence(cid, cap) { $('evid').querySelector('img').src = thumb(cid); $('evid').style.display = 'block'; $('evbar').style.display = 'flex'; $('evcap').textContent = cap + ' — laid over the frame'; }
 $('evop').oninput = e => $('evid').querySelector('img').style.opacity = e.target.value;
 $('evx').onclick = () => { $('evid').style.display = 'none'; $('evbar').style.display = 'none'; };
@@ -440,6 +478,20 @@ function mapJump(cx, cy) { const r = $('mapc').getBoundingClientRect(), [wx, wy]
 let urlT = 0; function syncURL() { clearTimeout(urlT); urlT = setTimeout(() => { const q = new URLSearchParams({e: S.e, i: S.i, d: S.dir, v: S.view}); if (S.era !== 5) q.set('era', S.era); history.replaceState(null, '', '?' + q); }, 300); }
 if (Q.has('era')) S.era = +Q.get('era');
 
+// ——— the ground under the camera, the camera itself, and the ledger of what the city holds ———
+const isNight = () => S.hour >= 19 || S.hour < 6;
+function groundAt(x, y) { const {nx, ny, cell} = meta, h = groundH, fx = Math.min(Math.max(x / cell, 0), nx - 1.001), fy = Math.min(Math.max(y / cell, 0), ny - 1.001), i = fx | 0, j = fy | 0, a = fx - i, b = fy - j, k = j * nx + i;
+  return a + b <= 1 ? h[k] + a * (h[k + 1] - h[k]) + b * (h[k + nx] - h[k]) : h[k + nx + 1] + (1 - a) * (h[k + nx] - h[k + nx + 1]) + (1 - b) * (h[k + 1] - h[k + nx + 1]); }
+function camNow(yawOff = 0) { const p = pose(), g = groundH ? Math.max(groundAt(p.x, p.y), 0.35) + 0.22 : 1; return {x: p.x, y: p.y, z: g + disc.frame.eye, yaw: p.heading + S.view * Math.PI / 2 + yawOff, hfov: Math.PI / 2, aspect: FW / FH}; }
+async function loadHoldings() {
+  const [L, hb, bb] = await Promise.all(['holdings.json', '../city3d/height.bin', '../city3d/buildings.f32'].map((u, i) => fetch(u).then(r => i ? r.arrayBuffer() : r.json())));
+  groundH = Float32Array.from(new Int16Array(hb), v => v / 10); if (!bldBuf) bldBuf = new Float32Array(bb);
+  HOLD = makeHoldings(L, {bld: D.bld(), onload: () => requestDraw()}); D.holdings = L.holdings;
+  SND = makeSound(L, {captions: html => { $('heard').innerHTML = html; $('heard').hidden = !html; }});
+  $('btnListen').hidden = false; requestDraw();
+}
+$('btnListen').onclick = () => { if (!SND) return; listening = !SND.on; listening ? SND.enable() : SND.disable(); $('btnListen').classList.toggle('on', listening); $('btnListen').textContent = listening ? '♪ listening' : '♪ listen'; $('btnListen').setAttribute('aria-pressed', listening); };
+
 // ——— watch: the poem drives the car ———
 cine = makeCinema({$, disc,
   pose, fit: () => fit, fx, layout, blit, frameRef,
@@ -464,8 +516,9 @@ syncSide(); mark(); prefetch();
 const first = frameRef(S.e, S.i, S.dir, S.view); step(70, 'the first frames off the disc');
 if (first) await first.sheet.p;
 step(100, ''); $('loading').style.display = 'none';
+loadHoldings().catch(e => console.warn('holdings', e));
 draw(); requestAnimationFrame(loop);
 if (!onDisc()) ensureEngine();
 else if (!MOBILE) setTimeout(() => ensureEngine(true), 2500);     // on a desk, raise the city quietly so a touch is answered at once
 if (Q.has('watch')) cine.load().then(fs => { const f = fs.find(x => x.num === Q.get('watch')); if (f) { cine.choose().then(() => cine.play(f)); } });
-window.__mm = {cine, S, plan, disc, steps, draw, ensureEngine, get eng() { return eng; }, stepBy, setView, take, get choices() { return choices; }, openMap, mapView, pullUpTo, touch};
+window.__mm = {wallHits: () => wallHits, get HOLD() { return HOLD; }, get SND() { return SND; }, cine, S, plan, disc, steps, draw, ensureEngine, get eng() { return eng; }, stepBy, setView, take, get choices() { return choices; }, openMap, mapView, pullUpTo, touch};

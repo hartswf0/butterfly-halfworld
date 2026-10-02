@@ -106,7 +106,8 @@ function frame(n) {
   if (!inCoda) {
     pos = step(t);
     // the opening: from ten kilometres up, down to his street, as the record begins
-    if (C === cut.chapters[0] && t < C.read0) { const v = ease(clamp(t / (C.read0 - 0.6), 0, 1)), z = Math.exp(Math.log(4200) + (Math.log(pos.gz) - Math.log(4200)) * v);
+    if (C === cut.chapters[0] && t < C.read0) { const era = Math.min(5, Math.floor(t / (C.read0 * 0.9) * 6)); if (era !== eng.st.era) eng.setEra(era); extra = `${era} · ${ERA_N[era]}`;
+      const v = ease(clamp(t / (C.read0 - 0.6), 0, 1)), z = Math.exp(Math.log(4200) + (Math.log(pos.gz) - Math.log(4200)) * v);
       eng.poseFree(pos.px, pos.py, z, cam.yaw, -Math.PI / 2 * (1 - sstep(0.55, 1, v)) + 0.02 + 0.0105); }
     else eng.poseFree(pos.px, pos.py, pos.gz, cam.yaw, cam.pitch);
     eng.advance(dt); eng.renderFilm(); x.drawImage(gl, 0, TOP);
@@ -114,7 +115,7 @@ function frame(n) {
   } else {
     // the coda: the same place, under a still camera, from the Shore to Resurrection
     if (!codaImgs) { const q = cam.lastPose; codaImgs = []; for (let e = 0; e < 6; e++) { eng.setEra(e); eng.poseFree(q.px, q.py, q.gz, q.yaw, q.pitch); eng.advance(0); eng.renderFilm(); const c = document.createElement('canvas'); c.width = PW; c.height = PH; c.getContext('2d').drawImage(gl, 0, 0); codaImgs.push(c); } eng.setEra(5); }
-    const v = (t - C.coda.t) / C.coda.dur, k = Math.min(5, Math.floor(v * 6)), f = sstep(0, 0.35, v * 6 - k);
+    const v = (t - C.coda.t) / C.coda.dur, k = Math.min(5, Math.floor(v * 6)), f = sstep(0, 0.45, v * 6 - k);
     x.drawImage(codaImgs[Math.max(0, k - 1)], 0, TOP); x.globalAlpha = k === 0 ? f : f; x.drawImage(codaImgs[k], 0, TOP); x.globalAlpha = 1;
     extra = `${k} · ${ERA_N[k]}`;
   }
@@ -126,7 +127,8 @@ function frame(n) {
   bars(t, (inCoda ? null : `${cut.ways[pos.way]}  ·  ${fmtH(eng.st.hour)}`), extra);
   subtitle(t);
   // titles: the film's at the start, each chapter's as its passage opens
-  if (C === cut.chapters[0] && t < C.read0 + 1) card([['Where You Go When You Leave', 'italic 54px Georgia, serif', '#fff6e4'], ['a movie map of Atlantis', '20px Georgia, serif', '#e6dcc6']], sstep(0.8, 2.2, t) * (1 - sstep(C.read0 - 2.2, C.read0 - 0.4, t)));
+  if (C === cut.chapters[0] && t < C.read0 + 1) card([['Where You Go When You Leave', 'italic 54px Georgia, serif', '#fff6e4'], ['a movie map of Atlantis', '20px Georgia, serif', '#e6dcc6']], sstep(2, 5, t) * (1 - sstep(C.read0 - 9, C.read0 - 5, t)));
+  else if (C === cut.chapters[0] && t < C.read0 + 6) card([[C.num, '600 15px ui-monospace, Menlo, monospace', '#9fd8ff'], [C.title, '46px Georgia, serif', '#fff6e4'], [C.light.why, 'italic 16px Georgia, serif', '#e2d6bf']], sstep(C.read0 - 4.5, C.read0 - 3.5, t) * (1 - sstep(C.read0 + 1, C.read0 + 2.4, t)));
   else { const a = sstep(C.t0, C.t0 + 0.7, t) * (1 - sstep(C.t0 + 3.6, C.t0 + 4.6, t)); card([[C.num, '600 15px ui-monospace, Menlo, monospace', '#9fd8ff'], [C.title, '46px Georgia, serif', '#fff6e4'], [C.light.why, 'italic 16px Georgia, serif', '#e2d6bf']], a); }
   return out.toDataURL('image/jpeg', 0.9);
 }
