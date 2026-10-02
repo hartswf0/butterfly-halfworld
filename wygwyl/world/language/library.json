@@ -1,7 +1,7 @@
 {
- "version": "library-v2",
+ "version": "library-v3",
  "cols": 8,
- "rows": 8,
+ "rows": 11,
  "tile": 256,
  "materials": [
   {
@@ -896,6 +896,342 @@
       0.397,
       0.455,
       0.436
+     ]
+    }
+   ]
+  },
+  {
+   "name": "floorboards",
+   "prompt": "worn wooden floorboards",
+   "role": "interior",
+   "base": 64,
+   "variants": [
+    {
+     "src": "generated",
+     "k": "e138ac593884",
+     "fit": 0.346,
+     "mean": [
+      0.656,
+      0.673,
+      0.667
+     ]
+    },
+    {
+     "src": "generated",
+     "k": "e889244814ee",
+     "fit": 0.333,
+     "mean": [
+      0.615,
+      0.402,
+      0.236
+     ]
+    }
+   ]
+  },
+  {
+   "name": "parquet",
+   "prompt": "old herringbone parquet floor",
+   "role": "interior",
+   "base": 66,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "14f9f7e46c11",
+     "fit": 0.277,
+     "mean": [
+      0.54,
+      0.331,
+      0.108
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "859b428276f2",
+     "fit": 0.261,
+     "mean": [
+      0.465,
+      0.326,
+      0.241
+     ]
+    }
+   ]
+  },
+  {
+   "name": "checker floor",
+   "prompt": "black and white checkered tile floor",
+   "role": "interior",
+   "base": 68,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "c493d42ef7a7",
+     "fit": 0.318,
+     "mean": [
+      0.364,
+      0.364,
+      0.364
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "5c9f38575586",
+     "fit": 0.283,
+     "mean": [
+      0.499,
+      0.493,
+      0.504
+     ]
+    }
+   ]
+  },
+  {
+   "name": "terrazzo floor",
+   "prompt": "terrazzo floor",
+   "role": "interior",
+   "base": 70,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "0e507f9a17f1",
+     "fit": 0.309,
+     "mean": [
+      0.568,
+      0.483,
+      0.43
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "7ee9a16e5a75",
+     "fit": 0.309,
+     "mean": [
+      0.568,
+      0.483,
+      0.43
+     ]
+    }
+   ]
+  },
+  {
+   "name": "carpet",
+   "prompt": "worn patterned carpet",
+   "role": "interior",
+   "base": 72,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "b85c64dfd089",
+     "fit": 0.307,
+     "mean": [
+      0.552,
+      0.568,
+      0.551
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "3f3c31165b65",
+     "fit": 0.301,
+     "mean": [
+      0.479,
+      0.333,
+      0.251
+     ]
+    }
+   ]
+  },
+  {
+   "name": "wallpaper",
+   "prompt": "faded peeling floral wallpaper",
+   "role": "interior",
+   "base": 74,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "cf8abf7c19e8",
+     "fit": 0.34,
+     "mean": [
+      0.544,
+      0.464,
+      0.406
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "d7dd4cd0fa23",
+     "fit": 0.286,
+     "mean": [
+      0.434,
+      0.272,
+      0.271
+     ]
+    }
+   ]
+  },
+  {
+   "name": "plaster",
+   "prompt": "cracked plaster interior wall",
+   "role": "interior",
+   "base": 76,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "b5ad6dcf340e",
+     "fit": 0.311,
+     "mean": [
+      0.357,
+      0.363,
+      0.348
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "2748c27efbce",
+     "fit": 0.3,
+     "mean": [
+      0.471,
+      0.474,
+      0.455
+     ]
+    }
+   ]
+  },
+  {
+   "name": "panelling",
+   "prompt": "dark wood wall panelling",
+   "role": "interior",
+   "base": 78,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "e32e53380e83",
+     "fit": 0.316,
+     "mean": [
+      0.154,
+      0.154,
+      0.154
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "27853390d585",
+     "fit": 0.316,
+     "mean": [
+      0.154,
+      0.154,
+      0.154
+     ]
+    }
+   ]
+  },
+  {
+   "name": "tin ceiling",
+   "prompt": "pressed tin ceiling",
+   "role": "interior",
+   "base": 80,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "06464cfd470c",
+     "fit": 0.321,
+     "mean": [
+      0.532,
+      0.449,
+      0.34
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "32f59df5d149",
+     "fit": 0.29,
+     "mean": [
+      0.395,
+      0.319,
+      0.204
+     ]
+    }
+   ]
+  },
+  {
+   "name": "interior brick",
+   "prompt": "exposed brick interior wall",
+   "role": "interior",
+   "base": 82,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "eed569d034eb",
+     "fit": 0.304,
+     "mean": [
+      0.383,
+      0.379,
+      0.36
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "f7e7ad1a3e13",
+     "fit": 0.3,
+     "mean": [
+      0.729,
+      0.729,
+      0.728
+     ]
+    }
+   ]
+  },
+  {
+   "name": "concrete floor",
+   "prompt": "stained concrete floor",
+   "role": "interior",
+   "base": 84,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "fb95d42d4076",
+     "fit": 0.321,
+     "mean": [
+      0.442,
+      0.322,
+      0.199
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "e0655e208b9e",
+     "fit": 0.314,
+     "mean": [
+      0.658,
+      0.53,
+      0.448
+     ]
+    }
+   ]
+  },
+  {
+   "name": "velvet",
+   "prompt": "red velvet theatre seats fabric",
+   "role": "interior",
+   "base": 86,
+   "variants": [
+    {
+     "src": "generated",
+     "k": "047451bea94f",
+     "fit": 0.347,
+     "mean": [
+      0.186,
+      0.016,
+      0.018
+     ]
+    },
+    {
+     "src": "generated",
+     "k": "74eda5f48fe8",
+     "fit": 0.305,
+     "mean": [
+      0.137,
+      0.098,
+      0.128
      ]
     }
    ]

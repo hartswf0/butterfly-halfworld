@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Atlantis Hero Buildings</title>
+<meta name="description" content="WYGWYL · the story's signature buildings as one description each, compiled to exteriors and interiors you can walk through, proved buildable, fitted against references foraged from our own footage.">
+<style>
+:root{--bg:#0e1013;--panel:rgba(16,18,22,.9);--line:rgba(255,255,255,.12);--ink:#ede6d8;--dim:#9b958a;--acc:#ffb35c;--ok:#7fe0a0;--warn:#ffd36b;--bad:#ff6a5a;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:13px/1.45 ui-sans-serif,-apple-system,"Helvetica Neue",Arial,sans-serif;overflow:hidden}
+#gl{position:fixed;inset:0;touch-action:none}#labels{position:fixed;inset:0;pointer-events:none}
+.beat{font:italic 13px/1.3 Georgia,serif;color:#fff5dc;text-shadow:0 1px 3px #000,0 0 10px #000;max-width:240px;text-align:center}
+.beat small{display:block;font:10px ui-monospace,Menlo,monospace;font-style:normal;color:var(--acc)}
+#left{position:fixed;left:10px;top:10px;bottom:10px;width:250px;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px}
+#left h1{font:600 15px Georgia,serif;margin:0 0 2px}#left .k{color:var(--dim);font:10px ui-monospace,Menlo,monospace;margin-bottom:8px}
+.hero{display:block;width:100%;text-align:left;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;padding:7px 9px;margin:5px 0;color:var(--ink);cursor:pointer;font:inherit}
+.hero b{font:600 13px Georgia,serif}.hero span{display:block;color:var(--dim);font-size:11px}.hero.on{border-color:var(--acc);background:rgba(255,179,92,.1)}
+.hero i{float:right;font-style:normal;font:10px ui-monospace,Menlo,monospace}
+#right{position:fixed;right:10px;top:10px;bottom:10px;width:330px;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+h2{font:600 10px ui-monospace,Menlo,monospace;letter-spacing:.15em;color:var(--dim);text-transform:uppercase;margin:12px 0 6px}h2:first-child{margin-top:0}
+.pr{display:grid;grid-template-columns:44px 1fr;gap:6px;padding:4px 0;border-bottom:1px solid var(--line);font-size:12px}.pr b{font:700 10px ui-monospace,Menlo,monospace;padding-top:2px}
+.PASS{color:var(--ok)}.WARN{color:var(--warn)}.FAIL{color:var(--bad)}.pr .r{color:var(--ink)}.pr .d{color:var(--dim);font-size:11px;display:block}
+.fact{font-size:12px;padding:3px 0}.fact i{font-style:normal;font:10px ui-monospace,Menlo,monospace;padding:1px 5px;border-radius:3px;margin-right:6px;background:#2a2d33}
+.fact i.reference{color:#7fd1ff}.fact i.checked{color:var(--ok)}.fact i.inferred{color:var(--warn)}.fact i.invented{color:#d88cff}
+.refs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.refs img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:4px;cursor:zoom-in}
+#bar{position:fixed;left:270px;right:350px;bottom:12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center}
+#bar .grp{display:flex;gap:3px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px}
+button.c{background:transparent;color:var(--ink);border:0;border-radius:999px;padding:5px 10px;font:12px inherit;font-family:inherit;cursor:pointer}button.c.on{background:var(--acc);color:#1c1308}
+#cut{width:110px;accent-color:var(--acc)}
+#title{position:fixed;left:270px;top:12px;right:350px;text-align:center;pointer-events:none}
+#title h2{font:600 22px Georgia,serif;letter-spacing:0;text-transform:none;color:var(--ink);margin:0}#title p{margin:2px 0 0;color:var(--dim);font:italic 13px Georgia,serif}
+#zoom{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:9}#zoom img{max-width:90vw;max-height:86vh;border-radius:8px}
+#hint{position:fixed;left:50%;bottom:58px;transform:translateX(-50%);color:#fff;text-shadow:0 1px 3px #000;font-size:12px;pointer-events:none}
+#loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bg);z-index:10;color:var(--dim);font:13px Georgia,serif}
+@media (max-width:900px){#left{width:auto;right:10px;bottom:auto;max-height:118px;display:flex;gap:6px;overflow-x:auto;padding:6px}#left h1,#left .k{display:none}.hero{min-width:150px;margin:0}
+  #right{top:auto;left:10px;width:auto;height:34vh}#bar{left:10px;right:10px;bottom:calc(34vh + 18px)}#title{left:10px;right:10px;top:136px}#title h2{font-size:17px}#hint{display:none}}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head>
+<body>
+<canvas id="gl"></canvas><div id="labels"></div>
+<div id="title"><h2 id="hname"></h2><p id="hnote"></p></div>
+<aside id="left"><h1>Atlantis · hero buildings</h1><div class="k">one description each → exterior, interior, proof · <a href="../city3d/index.html" style="color:#7fd1ff">city</a> · <a href="../language/index.html" style="color:#7fd1ff">language</a></div><div id="list"></div></aside>
+<aside id="right">
+  <h2>Proofs: is it buildable?</h2><div id="proofs"></div>
+  <h2>Facts register</h2><div id="facts"></div>
+  <h2>Reference wall: exterior</h2><div class="refs" id="rext"></div>
+  <h2>Reference wall: interior</h2><div class="refs" id="rint"></div>
+  <h2>Where it stands</h2><div id="where" style="font-size:12px;color:var(--dim)"></div>
+</aside>
+<div id="bar">
+  <div class="grp" id="views"><button class="c on" data-v="resolved">resolved</button><button class="c" data-v="mass">mass</button><button class="c" data-v="both">both</button></div>
+  <div class="grp"><span style="padding:4px 6px;color:var(--dim);font-size:11px">storeys</span><input type="range" id="cut" min="0" max="5" step="1"><button class="c" id="front">lift the front</button></div>
+  <div class="grp" id="states"></div>
+  <div class="grp"><button class="c" id="night">night</button><button class="c" id="walk">walk inside</button><button class="c" id="beats">the poem</button></div>
+</div>
+<div id="hint"></div><div id="zoom"><img alt=""></div>
+<div id="loading">compiling the buildings …</div>
+<script type="module" src="./heroes.mjs"></script>
+</body>
+</html>

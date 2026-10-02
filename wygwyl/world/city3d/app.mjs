@@ -201,6 +201,7 @@ function showBuilding(k, p) {
   const life = [`built in <b>${ERA[born]}</b>`]; if (ah > 0) life.push(`an addition of ${ah.toFixed(1)} m in ${ERA[Math.min(ab, 5)]}`); if (ruin < 9) life.push(`ruined in the Fall`); if (ruin < 9 && reuse) life.push(reuse === 1 ? 'rebuilt in white and glass' : 'relit as a club');
   const near = SH.map((s, i) => [Math.hypot(s.x - B[o], s.y - B[o + 1]), s.cid]).sort((a, b) => a[0] - b[0]).slice(0, 6).map(a => a[1]);
   $('info').innerHTML = `<h3>${STYLES[st]} · ${B[o + 5].toFixed(0)} m</h3><div class="k">${state} · ${life.join(' · ')}</div>
+    ${st === 1 ? '<div style="margin-top:4px"><a href="../heroes/index.html?h=rowhouse" style="color:var(--acc2)">walk into a rowhouse like this →</a></div>' : ''}
     <div class="k" style="margin-top:4px">${d ? d.name : ''}${w ? ` · ward ${w.ward}` : ''} — used now as <b style="color:var(--acc)">${d && d.use ? d.use[era] : d ? d.type : ''}</b></div>${evid(near)}`;
   $('info').style.display = 'block'; infoK = null; wireEvid();
 }
@@ -210,6 +211,7 @@ function showFound(u) {
   $('info').innerHTML = `<h3>${f.name || 'found'} · ${f.read.kind.replace(/^an? /, '')}</h3><div class="k">${f.read.roof} · ${f.read.material} · ${f.read.state} · raised to ${u.h.toFixed(0)} m</div>
     <img src="../language/found/${f.id}.webp" style="max-width:100%;max-height:150px;margin-top:6px;border-radius:6px;background:#222" alt="">
     <div class="k" style="margin-top:4px">from our own <b style="color:var(--acc)">${f.src}</b> footage · ${Math.round(f.unique * 100)}% unlike anything in the real archive · our footage returns to this kind ${f.size}× · its face is the frame itself, its outline the extrusion</div>
+    ${/NEW SINGLE/.test(f.name || '') ? '<div style="margin-top:6px"><a href="../heroes/index.html?h=marquee" style="color:var(--acc2)">walk into the NEW SINGLE →</a></div>' : ''}
     <div class="chips" style="margin-top:6px">${f.palette.map(c => `<span style="width:20px;height:14px;border-radius:3px;background:${c};display:inline-block"></span>`).join('')}</div>`;
   $('info').style.display = 'block';
 }
@@ -229,6 +231,8 @@ function showLandmark(i) {
     ${p ? `<div class="k">poem ${p.num} · ${p.title}</div>` : ''}<div class="k">${lm.evidence.length} shots read this structure</div>${evid(lm.evidence)}
     <div class="chips" style="margin-top:6px"><button id="lmgo">go there</button>${p ? '<button id="lmpoem">the poem</button>' : ''}</div>`;
   $('info').style.display = 'block'; wireEvid();
+  const hero = {'tower block': 'severn', chapel: 'chapel', 'clock tower': 'clocktower', pier: 'cafe'}[lm.type];
+  if (hero) $('info').insertAdjacentHTML('beforeend', `<div class="chips" style="margin-top:6px"><a href="../heroes/index.html?h=${hero}" style="color:var(--acc2)">walk inside the hero building →</a></div>`);
   $('lmgo').onclick = () => { setMode('orbit'); const R = Math.max(80, (lm.r || 30) * 3.2); goTo(new THREE.Vector3(lm.x + R, Math.max(lm.z, 0) + R * 0.45, lm.y + R * 0.6), new THREE.Vector3(lm.x, Math.max(lm.z, 0) + 15, lm.y)); };
   if (p) $('lmpoem').onclick = () => goPoem(p.num);
 }
