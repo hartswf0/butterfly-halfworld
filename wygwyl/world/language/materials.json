@@ -1,0 +1,91 @@
+{
+ "cols": 4,
+ "rows": 4,
+ "tile": 256,
+ "tiles": [
+  {
+   "name": "peeling paint",
+   "from": "b2f5575e7314.webp",
+   "src": "generated",
+   "fit": 0.3
+  },
+  {
+   "name": "brick",
+   "from": "49e52354f600.webp",
+   "src": "generated",
+   "fit": 0.296
+  },
+  {
+   "name": "stucco",
+   "from": "ecbfce9ab4ea.webp",
+   "src": "archive",
+   "fit": 0.271
+  },
+  {
+   "name": "corrugated",
+   "from": "f52015b8b9b6.webp",
+   "src": "generated",
+   "fit": 0.303
+  },
+  {
+   "name": "rust",
+   "from": "fe91b54f8bc4.webp",
+   "src": "archive",
+   "fit": 0.285
+  },
+  {
+   "name": "tile",
+   "from": "83c004a2fab7.webp",
+   "src": "archive",
+   "fit": 0.285
+  },
+  {
+   "name": "concrete",
+   "from": "992e4a5d2b92.webp",
+   "src": "archive",
+   "fit": 0.284
+  },
+  {
+   "name": "asphalt",
+   "from": "28411a3d237b.webp",
+   "src": "archive",
+   "fit": 0.299
+  },
+  {
+   "name": "wood",
+   "from": "8738dd94ce5e.webp",
+   "src": "generated",
+   "fit": 0.287
+  },
+  {
+   "name": "marble",
+   "from": "82f45973321b.webp",
+   "src": "generated",
+   "fit": 0.299
+  },
+  {
+   "name": "graffiti",
+   "from": "df1ddde4a032.webp",
+   "src": "archive",
+   "fit": 0.261
+  },
+  {
+   "name": "moss",
+   "from": "90d0dd71b0b7.webp",
+   "src": "archive",
+   "fit": 0.286
+  },
+  {
+   "name": "salt line",
+   "from": "7fda9169e9f0.webp",
+   "src": "archive",
+   "fit": 0.316
+  },
+  {
+   "name": "terrazzo",
+   "from": "0e507f9a17f1.webp",
+   "src": "archive",
+   "fit": 0.295
+  }
+ ]
+}

@@ -10,6 +10,7 @@ import {loadCity, sampler, makeTerrain, makeWards, makeRoads, makeBuildings, mak
 import {buildLandmark, tickClocks, MATS, NIGHTLIT} from './landmarks.mjs';
 import {makeHeavens, makeSea} from './heavens.mjs';
 import {makeRising} from './evolved.mjs';
+import {makeDetail} from './detail.mjs';
 
 const $ = id => document.getElementById(id);
 const MOBILE = matchMedia('(max-width: 760px), (pointer: coarse)').matches;
@@ -22,7 +23,10 @@ renderer.shadowMap.enabled = !MOBILE; renderer.shadowMap.type = THREE.PCFSoftSha
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 1, 52000);
 const labels = new CSS2DRenderer({element: $('labels')}); labels.setSize(innerWidth, innerHeight);
-const U = {night: {value: 0}, era: {value: 5}, time: {value: 0}, wet: {value: 0}, pulseO: {value: new THREE.Vector2(-1e5, -1e5)}, pulseT: {value: 99}};
+const U = {night: {value: 0}, era: {value: 5}, time: {value: 0}, wet: {value: 0}, pulseO: {value: new THREE.Vector2(-1e5, -1e5)}, pulseT: {value: 99},
+  matAtlas: {value: null}, matGrid: {value: new THREE.Vector2(4, 4)}};
+// the material atlas: surfaces cut from the archive's own frames (wygwyl/world/language)
+U.matAtlas.value = new THREE.TextureLoader().load('../language/materials.webp'); U.matAtlas.value.colorSpace = THREE.SRGBColorSpace; U.matAtlas.value.anisotropy = 8;
 
 step(8, 'reading the worldtext');
 const C = await loadCity('./').catch(e => { step(0, 'could not load the city: ' + e.message + ' (serve over http)'); throw e; });
@@ -56,6 +60,7 @@ function setLandmarks(e) {
 step(86, 'the evolved structures');
 const rising = makeRising(scene, C, S, heav, U); const RD = await rising.load('structures.json').catch(() => null);
 let vi = RD ? Math.max(0, RD.variants.findIndex(v => v.name === (Q.get('variant') || 'the mixed city'))) : -1;
+const detail = makeDetail(scene, C, S, blds, {radius: MOBILE ? 260 : 420});
 const mats = MATS(); for (const k of NIGHTLIT) mats[k].userData.base = mats[k].emissiveIntensity;
 
 // ——— labels: landmarks, poems, districts (with their use in this era), wards ———
@@ -157,7 +162,8 @@ let playing = null; $('play').onclick = () => { if (playing) { clearInterval(pla
 function setEra(e) {
   era = e; U.era.value = e; $('era').value = e; syncRange($('era'));
   document.querySelectorAll('#eras button').forEach(b => b.classList.toggle('on', +b.dataset.e === e));
-  blds.userData.setExtraClear(rising.footprints(vi)); rising.build(vi, e);
+  const fp = rising.footprints(vi); blds.userData.setExtraClear(fp); rising.build(vi, e);
+  detail.setEra(e, k => fp.some(([cx, cy, r, eb]) => eb <= e && Math.hypot(C.bld[k * 14] - cx, C.bld[k * 14 + 1] - cy) < r));
   const c = blds.userData.setEra(e); trees.userData.setEra(e); street.userData.setEra(e); setLandmarks(e); terrain.userData.paint(e, LAYERS.wards ? wards : null);
   $('lore').innerHTML = `<b>${e} · ${ERA[e]}.</b> ${meta.lore[e]}`;
   $('counts').textContent = `${c.standing.toLocaleString()} standing · ${c.ruins} ruins · ${LM.filter(l => lmState(l, e)).length} landmarks`;
@@ -293,6 +299,7 @@ function declutter() {
     if (placed.some(r => Math.abs(r[0] - x) < r[2] + w && Math.abs(r[1] - y) < r[3] + h)) { o.visible = false; continue; }
     placed.push([x, y, w, h]); o.visible = true; if (placed.length > 40) { o.visible = false; } }
 }
+const perf = {t: 0, n: 0}; function setPR(p) { renderer.setPixelRatio(p); renderer.setSize(innerWidth, innerHeight); composer?.setPixelRatio?.(p); composer?.setSize(innerWidth, innerHeight); }
 const clock = new THREE.Clock(); let stripT = 0, clockMin = -1;
 const V3 = new THREE.Vector3(), fwd = new THREE.Vector3(), right = new THREE.Vector3();
 function frameLoop() {
@@ -337,6 +344,10 @@ function frameLoop() {
   }
   if (ptour) { ptour.t += dt; if (ptour.t > 9) { ptour.t = 0; ptour.k = (ptour.k + 1) % meta.poems.length; goPoem(meta.poems[ptour.k].num); } }
   rising.update(dt, U.time.value);
+  // only where you are: the lived-in layer streams in a ring around the focus, and the resolution follows the frame rate
+  const fz = mode === 'orbit' ? orbit.target : camera.position; detail.visible = LAYERS.lamps && camera.position.y - Math.max(S.ground(camera.position.x, camera.position.z), 0) < 700; detail.update(fz);
+  perf.t += dt; perf.n++; if (perf.t > 2) { const ms = perf.t / perf.n * 1000; const pr = renderer.getPixelRatio(), max = Math.min(devicePixelRatio, MOBILE ? 1.5 : 2);
+    if (ms > 30 && pr > 1) setPR(Math.max(1, pr - 0.25)); else if (ms < 17 && pr < max) setPR(Math.min(max, pr + 0.25)); perf.t = 0; perf.n = 0; }
   if (mode === 'orbit') orbit.update();
   // label culling
   const cp = camera.position;
@@ -349,4 +360,4 @@ function frameLoop() {
 }
 requestAnimationFrame(frameLoop);
 addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); labels.setSize(innerWidth, innerHeight); composer?.setSize(innerWidth, innerHeight); });
-window.__city = {rising, scene, camera, orbit, setEra, setWeather, goPoem, fitShot, heav, setMode, get hour() { return hour; }, set hour(v) { hour = v; setTimeUI(); }, C};
+window.__city = {detail, rising, scene, camera, orbit, setEra, setWeather, goPoem, fitShot, heav, setMode, get hour() { return hour; }, set hour(v) { hour = v; setTimeUI(); }, C};

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlantis Design Language</title>
+<meta name="description" content="WYGWYL · the signature of Atlantis: the flood datum, the kintsugi of the Resurrection, houses that wear their additions, stairs as streets, district skins cut from the footage — and an inventory of the everyday grit the archive holds and lacks.">
+<style>
+:root{--bg:#0d0f12;--card:#15181c;--line:rgba(255,255,255,.1);--ink:#ece6da;--dim:#9a948a;--acc:#ffb35c;--cy:#5fe8ff;--salt:#ecebe4;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Georgia,"Times New Roman",serif}
+a{color:var(--cy);text-decoration:none}a:hover{text-decoration:underline}
+header{padding:56px 24px 26px;max-width:1100px;margin:0 auto}
+header .k{font:11px ui-monospace,Menlo,monospace;letter-spacing:.18em;color:var(--dim);text-transform:uppercase}
+h1{font-size:clamp(30px,5vw,54px);line-height:1.04;margin:10px 0 14px;font-weight:600;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--cy)}
+.lede{max-width:760px;font-size:18px;color:#d9d1c2}
+section{max-width:1100px;margin:0 auto;padding:22px 24px 30px;border-top:1px solid var(--line)}
+h2{font:600 12px ui-monospace,Menlo,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin:6px 0 16px}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.rule{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.rule .ill{height:120px;position:relative;overflow:hidden}
+.rule .tx{padding:12px 14px 14px}.rule h3{margin:0 0 4px;font-size:18px}.rule p{margin:0;color:#cfc7b8;font-size:14px}
+.rule .how{font:11px ui-monospace,Menlo,monospace;color:var(--dim);margin-top:8px}
+/* illustrations, drawn in CSS */
+.flood{background:linear-gradient(180deg,#7a3426 0,#7a3426 46%,var(--salt) 46%,var(--salt) 54%,#3f4a3c 54%,#2f3a30 100%)}
+.flood::after{content:"+4.0 m";position:absolute;right:10px;top:38%;font:11px ui-monospace,Menlo,monospace;color:#111;background:var(--salt);padding:1px 5px;border-radius:3px}
+.kin{background:#8c4030;background-image:radial-gradient(circle at 30% 40%,var(--salt) 0 22%,transparent 23%),radial-gradient(circle at 68% 62%,var(--salt) 0 18%,transparent 19%),radial-gradient(circle at 82% 22%,var(--salt) 0 12%,transparent 13%)}
+.kin::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,transparent 21.5%,var(--cy) 22% 23%,transparent 23.5%),radial-gradient(circle at 68% 62%,transparent 17.5%,var(--cy) 18% 19%,transparent 19.5%);filter:drop-shadow(0 0 4px var(--cy))}
+.add{background:linear-gradient(180deg,#0d0f12 0 30%,transparent 30%),linear-gradient(90deg,transparent 18%,#c9c2b0 18% 44%,transparent 44% 58%,#5f7f86 58% 76%,transparent 76%);}
+.add::after{content:"";position:absolute;left:10%;right:10%;bottom:0;height:62%;background:#7a3426}
+.stairs{background:#6e2e24;background-image:repeating-linear-gradient(135deg,transparent 0 16px,#1e2124 16px 19px),repeating-linear-gradient(0deg,transparent 0 22px,#1e2124 22px 25px)}
+.tide{background:linear-gradient(180deg,#0b1a26,#123447);}
+.tide::before{content:"";position:absolute;left:0;right:0;top:55%;height:3px;background:var(--cy);box-shadow:0 0 12px var(--cy)}
+.tide::after{content:"";position:absolute;left:15%;top:20%;width:70%;height:70%;border:2px solid rgba(95,232,255,.5);border-radius:50%}
+.skin{display:grid;grid-template-columns:repeat(4,1fr)}
+.skin i{display:block}
+.inv{background:linear-gradient(180deg,#e9e6df 0 100%);}
+.inv::before{content:"";position:absolute;left:46%;bottom:0;width:8%;height:92%;background:linear-gradient(#eeebe3,#cfc9bd);clip-path:polygon(30% 0,70% 0,100% 100%,0 100%)}
+.inv::after{content:"";position:absolute;left:6%;bottom:6%;width:14px;height:14px;border-radius:50%;background:var(--acc);box-shadow:200px -40px 0 -3px var(--acc),90px -70px 0 -4px var(--acc)}
+.districts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.d{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
+.d h3{margin:0 0 6px;font-size:17px}.sw{display:flex;height:34px;border-radius:6px;overflow:hidden;margin:6px 0}.sw i{display:block}
+.d .m{display:flex;gap:6px;margin:8px 0}.d .m b{width:44px;height:44px;border-radius:6px;background-size:400% 400%;border:1px solid var(--line)}
+.d .use{font:11px ui-monospace,Menlo,monospace;color:var(--dim)}.d .motif{font-size:13px;color:#d4ccbd;margin-top:6px}
+.mats{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.mat b{display:block;aspect-ratio:1;border-radius:8px;background-size:400% 400%;border:1px solid var(--line)}
+.mat span{display:block;font:11px ui-monospace,Menlo,monospace;color:var(--dim);margin-top:4px}
+.grp{margin:18px 0 6px;font:600 11px ui-monospace,Menlo,monospace;color:var(--dim);letter-spacing:.14em;text-transform:uppercase}
+.el{display:grid;grid-template-columns:150px 120px 1fr;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line)}
+.el .nm{font-size:15px}.el .nm small{display:block;font:10px ui-monospace,Menlo,monospace;color:var(--dim)}
+.bar{display:flex;height:9px;border-radius:3px;overflow:hidden;background:rgba(255,255,255,.06)}.bar i{display:block}
+.cnt{font:11px ui-monospace,Menlo,monospace;color:var(--dim);margin-top:3px}
+.th{display:flex;gap:4px;overflow:hidden}.th img{height:54px;border-radius:4px}.th img.weak{opacity:.45;filter:grayscale(.6)}
+.gap{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:8px}
+.g{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}.g b{color:var(--acc)}.g code{display:block;font:11px/1.5 ui-monospace,Menlo,monospace;color:#cfe9ee;margin-top:5px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font:11px ui-monospace,Menlo,monospace;color:var(--dim)}.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+footer{max-width:1100px;margin:0 auto;padding:20px 24px 50px;color:var(--dim);font-size:13px}
+@media (max-width:640px){.el{grid-template-columns:1fr}.th img{height:44px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="k">WYGWYL · world · W00n</div>
+  <h1>Atlantis: a city that <em>keeps its flood</em>, mends itself in ceramic and light, and is skinned with its own footage.</h1>
+  <p class="lede">Most film cities are a style. This one is a set of rules that a place could have arrived at. Each rule is readable from the street, each is procedural (the city applies it to all 9,668 buildings) and each comes from the archive or the poems. None is a mood board.</p>
+</header>
+
+<section>
+  <h2>The signature: seven rules</h2>
+  <div class="rules">
+    <div class="rule"><div class="ill flood"></div><div class="tx"><h3>The flood datum</h3><p>The water of the Fall stood at four metres. Every building that was there carries the same salt-white line at +4.0 m, damp and green below it. It is one level across the whole city, so you can read the disaster in any street, and its absence tells you a house is new.</p><div class="how">facade shader · born ≤ New Boroughs and low-lying · world height 3.3–4.45 m</div></div></div>
+    <div class="rule"><div class="ill kin"></div><div class="tx"><h3>Kintsugi of the Resurrection</h3><p>Ruins are not replaced, they are repaired: white ceramic plates over the old brick, with their seams drawn in cyan light. A ceramic crown sits on top. It is the same ceramic as the white temple's vault and the evolved towers, so you can tell the new city by its material.</p><div class="how">kind 2 (reuse) · voronoi plates in metres · seams emissive, brighter at night</div></div></div>
+    <div class="rule"><div class="ill add"></div><div class="tx"><h3>Every house wears its additions</h3><p>Lighter, later boxes sit set back on old roofs, in wood or stucco, and arrived eras after the house. Height tells you age; colour tells you which layer.</p><div class="how">3,319 additions · born per era · own material</div></div></div>
+    <div class="rule"><div class="ill stairs"></div><div class="tx"><h3>Stairs are streets</h3><p>Circulation happens outside, where you can see it: marble stoops, iron back stairs, fire escapes, the stepped avenue. He looks for a way out "through the hallways, within the drawers and fire escapes", and the city keeps those exits visible.</p><div class="how">streamed detail · stoops on rowhouses · back stairs on 22% of the tall old houses</div></div></div>
+    <div class="rule"><div class="ill tide"></div><div class="tx"><h3>The tide keeps the time</h3><p>The sea gates rise and fall with a real 12.42-hour tide, and the city's light comes as a pulse. Touch a landmark and a ring of cyan runs out across every facade: the city resonates.</p><div class="how">semidiurnal tide · gate height from tide · pulse ring in the facade shader</div></div></div>
+    <div class="rule"><div class="ill skin" id="skinill"></div><div class="tx"><h3>Skinned with its own footage</h3><p>Brick, peeling paint, stucco, asphalt, marble steps, moss and graffiti are cut from frames in the archive (generated stills first) and made seamless. Each district's colours come from its own evidence images.</p><div class="how">grit.py · 14 surfaces · k-means palettes per district</div></div></div>
+    <div class="rule"><div class="ill inv"></div><div class="tx"><h3>Inverse monuments</h3><p>The sci-fi structures stand where the shots ask for them. Spires, halos, arcologies and sea walls are placed by evolution where they answer the most pictures, so every monument has witnesses.</p><div class="how">structures.py · 33 structures answer 250 of 416 calls · <a href="../city3d/index.html">see them</a></div></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Districts: colours from their own pictures, surfaces from the archive</h2>
+  <div class="districts" id="districts"></div>
+</section>
+
+<section>
+  <h2>The material atlas: cut from the archive</h2>
+  <p style="color:#cfc7b8;max-width:760px;margin-top:-4px">For each surface, the crop that CLIP reads most as that surface is cut from the top archive hits, scaled to 256 px and blended seamless (four-way, each copy weighted to zero at its own seam). The city samples these in metres, mip-safe across tile edges, and fades them out past 700 m so the distance stays calm.</p>
+  <div class="mats" id="mats"></div>
+</section>
+
+<section>
+  <h2>The grit inventory: what the archive holds, and what it lacks</h2>
+  <div class="legend" id="legend"></div>
+  <div id="grit"></div>
+</section>
+
+<section>
+  <h2>Collect next: the gaps</h2>
+  <p style="color:#cfc7b8;max-width:760px;margin-top:-4px">The archive is rich in atmosphere: puddles, bus stops at night, streetlights, floods, doorways. It is poor in the everyday material of a lived-in street. These are the elements with the fewest strong frames, each with a generation prompt written in the city's own language, so new footage arrives already belonging to Atlantis.</p>
+  <div class="gap" id="gap"></div>
+</section>
+
+<footer>Deterministic from the canon (9f1760e5f609) and the archive store. Private shoot material is excluded from every search. · <a href="../city3d/index.html">the city</a> · <a href="../elsewhere/index.html">elsewhere map</a> · <a href="../../atlas.html">atlas</a></footer>
+
+<script>
+const SRC = {'markov·butterfly': '#d88cff', 'generated': '#7fd1ff', 'archive': '#ffb35c', 'film': '#ff5a4a', 'other': '#9a948a', 'halfworld': '#8cff9a', 'generated·butterfly': '#7fd1ff'};
+const MOTIF = {
+  nightlife: 'warehouses relit as clubs; neon bands on the roofline, graffiti at hand height, puddles that carry the colour',
+  industrial: 'rust and concrete, soot at the parapets, tanks and cranes; the flood line runs highest here',
+  waterfront: 'wood and salt; pilings, the pier café, laundry over the back lanes, the sea gates on the horizon',
+  downtown: 'concrete and glass that steps back as it rises; water tanks on the roofs, the white column, the Severn’s fire escapes',
+  'ruin field': 'moss takes the walls; the ruins are kept, planted and walked, boarded windows and the twin pillars',
+  suburb: 'pastel stucco and wood, gardens, fewer wires; the edge where the city thins into the meadow',
+  'old town': 'stucco, peeling paint and tile; cobbled lanes, awnings, the cathedral and the stepped avenue',
+  rowhouses: 'red brick and marble stoops; back alleys, back stairs, laundry, a ceramic crown on every repaired house',
+};
+const MAT_BY_TYPE = {nightlife: ['graffiti', 'tile', 'brick'], industrial: ['rust', 'concrete', 'brick'], waterfront: ['wood', 'salt line', 'rust'], downtown: ['concrete', 'marble'],
+  'ruin field': ['moss', 'marble', 'concrete'], suburb: ['stucco', 'wood'], 'old town': ['stucco', 'peeling paint', 'tile', 'terrazzo'], rowhouses: ['brick', 'peeling paint', 'marble']};
+(async () => {
+  const [grit, pal, mats, city] = await Promise.all(['grit.json', 'palettes.json', 'materials.json', '../city3d/city.json'].map(u => fetch(u).then(r => r.json())));
+  const tilePos = name => { const i = mats.tiles.findIndex(t => t.name === name); if (i < 0) return null; const c = i % mats.cols, r = Math.floor(i / mats.cols);
+    return `background-image:url(materials.webp);background-size:${mats.cols * 100}% ${mats.rows * 100}%;background-position:${c / (mats.cols - 1) * 100}% ${r / (mats.rows - 1) * 100}%`; };
+  document.getElementById('skinill').innerHTML = mats.tiles.slice(0, 8).map(t => `<i style="${tilePos(t.name)}"></i>`).join('');
+  // districts
+  const urban = pal.filter(p => MOTIF[p.type]);
+  document.getElementById('districts').innerHTML = urban.map(p => { const d = city.districts.find(q => q.name === p.name) || {};
+    return `<div class="d"><h3>${p.name.replace(/^the /, '')}</h3>
+      <div class="sw">${p.colors.map((c, i) => `<i style="background:${c};flex:${Math.max(0.4, p.weights[i] * 10)}"></i>`).join('')}</div>
+      <div class="m">${(MAT_BY_TYPE[p.type] || []).map(m => tilePos(m) ? `<b title="${m}" style="${tilePos(m)}"></b>` : '').join('')}</div>
+      <div class="motif">${MOTIF[p.type]}</div>
+      ${d.use ? `<div class="use" style="margin-top:6px">${d.use.map((u, i) => `${city.eras[i].replace('The ', '')}: ${u}`).join(' → ')}</div>` : ''}</div>`; }).join('');
+  // materials
+  document.getElementById('mats').innerHTML = mats.tiles.map(t => `<div class="mat"><b style="${tilePos(t.name)}"></b><span>${t.name} · ${t.src} · fit ${t.fit}</span></div>`).join('');
+  // grit
+  const srcs = [...new Set(Object.values(grit).flatMap(e => Object.keys(e.bysrc)))];
+  document.getElementById('legend').innerHTML = srcs.map(s => `<span><i style="background:${SRC[s] || '#777'}"></i>${s}</span>`).join('') + '<span>faded thumbnails = weak matches, shown because nothing stronger exists</span>';
+  const groups = {}; for (const [k, e] of Object.entries(grit)) (groups[e.group] = groups[e.group] || []).push([k, e]);
+  const max = Math.max(...Object.values(grit).map(e => e.strong));
+  document.getElementById('grit').innerHTML = Object.entries(groups).map(([g, els]) => `<div class="grp">${g}</div>` + els.map(([k, e]) =>
+    `<div class="el"><div class="nm">${k}<small>${e.prompt}</small></div><div><div class="bar">${Object.entries(e.bysrc).map(([s, n]) => `<i style="background:${SRC[s] || '#777'};width:${n / Math.max(1, max) * 100}%"></i>`).join('')}</div><div class="cnt">${e.strong} strong</div></div>
+      <div class="th">${e.items.slice(0, 8).map(it => `<img src="g/${it.f}" class="${it.weak ? 'weak' : ''}" title="${it.src} · ${it.s}" loading="lazy" alt="">`).join('')}</div></div>`).join('')).join('');
+  // gaps
+  const gaps = Object.entries(grit).filter(([, e]) => e.strong < 6).sort((a, b) => a[1].strong - b[1].strong);
+  document.getElementById('gap').innerHTML = gaps.map(([k, e]) => `<div class="g"><b>${k}</b> · ${e.strong} strong frames<code>WYGWYL still, Atlantis, ${e.prompt}, a salt-white flood line at four metres on the walls, white ceramic repairs with thin cyan seams, overcast harbour light, 35mm, lived-in, no people looking at camera</code></div>`).join('');
+})();
+</script>
+</body>
+</html>

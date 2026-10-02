@@ -11,6 +11,10 @@ const PALETTE = [[0x8a3b2a, 0xb9a27e, 0xa14b32, 0xc8b28a, 0x9c7a52], [0x7a3426, 
   [0x3a4652, 0x556270, 0x6a7680, 0xb8b0a0, 0x9a9488, 0xc9c0ae, 0x7a6a5a], [0xd9c7a5, 0xc9d3c4, 0xe0b9a0, 0xb8c4cc], [0x3f6b6b, 0x8a5a3a, 0x6b6f72], [0x5a3a2e, 0x6b6258, 0x4a4844], [0x9a8c70]];
 const FLOOR = [3.4, 3.1, 4.6, 3.7, 3.0, 5.5, 6.5, 4];
 const ROOF_COL = [0x8e3d2c, 0x34373d, 0x5a5650, 0x2c3036, 0x6e5a48, 0x50585a, 0x404040, 0x6a6050];
+// which surfaces each kind of building wears (indices into the archive material atlas: see wygwyl/world/language/materials.json)
+const MAT_BY_STYLE = [[2, 0, 5, 2], [1, 1, 0], [9, 6], [6], [2, 8], [4, 8], [4, 6, 1], [11, 9]];
+const GRIT = [0.8, 0.7, 0.4, 0.3, 0.3, 1.0, 1.0, 0.9];
+let MAT = [6, 0, 0, 0.5];
 const ADD_COL = [0xd8d0b8, 0x5f7f86, 0xb7a68c, 0x9a6a4a, 0xc9c2b0];
 
 export async function loadCity(base) {
@@ -100,12 +104,15 @@ export function makeRoads(C, S, U) {
   geo.setAttribute('uv', new THREE.Float32BufferAttribute(UV, 2)); geo.setAttribute('aRoad', new THREE.Float32BufferAttribute(A, 4)); geo.setIndex(I);
   const m = new THREE.MeshStandardMaterial({color: 0xffffff, roughness: 0.9, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2});
   m.onBeforeCompile = sh => {
-    sh.uniforms.uEra = U.era; sh.uniforms.uNight = U.night; sh.uniforms.uWet = U.wet;
+    sh.uniforms.uEra = U.era; sh.uniforms.uNight = U.night; sh.uniforms.uWet = U.wet; sh.uniforms.uMatAtlas = U.matAtlas; sh.uniforms.uMatGrid = U.matGrid;
     sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nattribute vec4 aRoad; varying vec4 vRoad; varying vec2 vRU;')
       .replace('#include <uv_vertex>', '#include <uv_vertex>\nvRoad = aRoad; vRU = uv;');
     sh.fragmentShader = sh.fragmentShader.replace('#include <common>', `#include <common>
-      uniform float uEra, uNight, uWet; varying vec4 vRoad; varying vec2 vRU;
-      float rh(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }`)
+      uniform float uEra, uNight, uWet; uniform sampler2D uMatAtlas; uniform vec2 uMatGrid; varying vec4 vRoad; varying vec2 vRU;
+      float rh(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+      float rn(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3. - 2. * f); return mix(mix(rh(i), rh(i + vec2(1, 0)), f.x), mix(rh(i + vec2(0, 1)), rh(i + vec2(1, 1)), f.x), f.y); }
+      vec3 matTex(float i, vec2 m) { vec2 cell = vec2(mod(i, uMatGrid.x), floor(i / uMatGrid.x)); vec2 f = fract(m);
+        vec2 uv = vec2((cell.x + f.x) / uMatGrid.x, 1.0 - (cell.y + 1.0 - f.y) / uMatGrid.y); return textureGrad(uMatAtlas, uv, dFdx(m) / uMatGrid, dFdy(m) / uMatGrid).rgb; }`)
       .replace('#include <color_fragment>', `#include <color_fragment>
       if (vRoad.y > uEra + 0.5) discard;
       float cls = vRoad.x, side = vRoad.z, W = vRoad.w; float u = vRU.x, a = vRU.y, x = u * W;
@@ -119,13 +126,21 @@ export function makeRoads(C, S, U) {
         float lane = abs(cx - 3.6); mk = step(lane, 0.07) * step(mod(a, 9.0), 3.0); }
       if (cls > 2.5 && cls < 3.5) { vec2 q = vec2(x * 1.4, a * 1.4); c = vec3(0.47, 0.42, 0.36) * (0.8 + 0.25 * rh(floor(q))); if (abs(x - W * 0.5) < 1.2) c = vec3(0.22, 0.33, 0.16); }
       if (cls > 3.5) { vec2 q = vec2(x / 3.0, a / 3.0); vec2 f = fract(q); c = vec3(0.62, 0.56, 0.48) * (0.85 + 0.2 * rh(floor(q))) * (0.7 + 0.3 * step(0.04, min(f.x, f.y))); }
+      // the asphalt and the slabs are cut from the archive; then the wear: oil, patches, manholes, zebra at the corner, puddles when wet
+      if (!cobble && cls < 2.5) { vec3 at = matTex(7.0, vec2(x, a) / 7.0); c *= 0.55 + 0.9 * dot(at, vec3(0.33)); }
+      if (cls > 3.5) c = mix(c, matTex(13.0, vec2(x, a) / 6.0) * 0.8, 0.6);
+      float oil = smoothstep(0.62, 0.8, rn(vec2(x * 0.35, a * 0.12))) * step(side * W + 0.5, x) * step(x, W - side * W - 0.5); c *= 1.0 - 0.3 * oil;
+      float patchy = step(0.82, rn(vec2(x * 0.09, a * 0.05))); c = mix(c, c * 0.75 + 0.03, patchy * 0.6);
+      if (cls < 1.5) { float m0 = length(vec2(x - W * 0.5 - 1.6, mod(a, 37.0) - 18.0)); c = mix(c, vec3(0.08), (1.0 - smoothstep(0.32, 0.36, m0)) * 0.9 + (step(abs(m0 - 0.28), 0.03)) * 0.5); }
+      if (cls < 1.5 && a < 5.0 && a > 1.2 && x > side * W && x < W - side * W) mk = max(mk, step(fract(x / 1.1), 0.55));
       c = mix(c, vec3(0.92), mk * 0.85);
+      float puddle = smoothstep(0.58, 0.66, rn(vec2(x * 0.22, a * 0.09) + 3.0)) * uWet; c = mix(c, c * 0.45, puddle);
       float sw = side * W, inS = step(x, sw) + step(W - sw, x);
       if (side > 0.0 && inS > 0.0) { float e = min(abs(x - sw), abs(x - (W - sw))); vec2 q = vec2(x * 1.6, a * 1.6); c = vec3(0.6, 0.58, 0.54) * (0.88 + 0.12 * rh(floor(q)));
         if (e < 0.25) c = vec3(0.75, 0.73, 0.7); if (fract(q.y * 0.5) < 0.04) c *= 0.85; }
       c *= 1.0 - uWet * 0.35;
       diffuseColor.rgb = c;`)
-      .replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\nroughnessFactor = mix(roughnessFactor, 0.15, uWet);');
+      .replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\nroughnessFactor = mix(roughnessFactor, 0.15, uWet); roughnessFactor = mix(roughnessFactor, 0.02, smoothstep(0.58, 0.66, rn(vec2(vRU.x * vRoad.w * 0.22, vRU.y * 0.09) + 3.0)) * uWet);');
   };
   const mesh = new THREE.Mesh(geo, m); mesh.receiveShadow = true; return mesh;
 }
@@ -135,7 +150,8 @@ export function facadeMat(U, opts = {}) {
   const m = new THREE.MeshStandardMaterial({color: 0xffffff, roughness: 0.84});
   m.onBeforeCompile = sh => {
     sh.uniforms.uNight = U.night; sh.uniforms.uTime = U.time; sh.uniforms.uWet = U.wet; sh.uniforms.uPulseO = U.pulseO; sh.uniforms.uPulseT = U.pulseT;
-    sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nattribute vec4 aInfo; varying vec4 vInfo; varying vec3 vWP; varying vec3 vWN;')
+    sh.uniforms.uMatAtlas = U.matAtlas; sh.uniforms.uMatGrid = U.matGrid;
+    sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nattribute vec4 aInfo; attribute vec4 aMat; varying vec4 vInfo; varying vec4 vMat; varying vec3 vWP; varying vec3 vWN;')
       .replace('#include <worldpos_vertex>', `#include <worldpos_vertex>
         vec4 q4 = vec4(transformed, 1.0);
         #ifdef USE_INSTANCING
@@ -143,10 +159,15 @@ export function facadeMat(U, opts = {}) {
         #else
           vWN = objectNormal;
         #endif
-        vWP = (modelMatrix * q4).xyz; vInfo = aInfo;`);
+        vWP = (modelMatrix * q4).xyz; vInfo = aInfo; vMat = aMat;`);
     sh.fragmentShader = sh.fragmentShader.replace('#include <common>', `#include <common>
-      uniform float uNight, uTime, uWet, uPulseT; uniform vec2 uPulseO; varying vec4 vInfo; varying vec3 vWP; varying vec3 vWN;
-      float fh(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }`)
+      uniform float uNight, uTime, uWet, uPulseT; uniform vec2 uPulseO; uniform sampler2D uMatAtlas; uniform vec2 uMatGrid; varying vec4 vMat; varying vec4 vInfo; varying vec3 vWP; varying vec3 vWN;
+      float fh(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+      float vn(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3. - 2. * f); return mix(mix(fh(i), fh(i + vec2(1, 0)), f.x), mix(fh(i + vec2(0, 1)), fh(i + vec2(1, 1)), f.x), f.y); }
+      // a surface cut from the archive: tile i of the material atlas, sampled in metres, mip-safe across the tile seam
+      vec3 matTex(float i, vec2 m) { vec2 cell = vec2(mod(i, uMatGrid.x), floor(i / uMatGrid.x)); vec2 f = fract(m);
+        vec2 uv = vec2((cell.x + f.x) / uMatGrid.x, 1.0 - (cell.y + 1.0 - f.y) / uMatGrid.y);
+        return textureGrad(uMatAtlas, uv, dFdx(m) / uMatGrid, dFdy(m) / uMatGrid).rgb; }`)
       .replace('#include <color_fragment>', `#include <color_fragment>
       vec3 bEmis = vec3(0.0);
       {
@@ -154,20 +175,55 @@ export function facadeMat(U, opts = {}) {
         float vert = 1.0 - smoothstep(0.35, 0.7, abs(vWN.y));
         vec2 tg = normalize(vec2(-vWN.z, vWN.x) + 1e-5);
         bool glass = kind > 1.5 && kind < 2.5, ruin = kind > 2.5 && kind < 3.5, club = kind > 0.5 && kind < 1.5, addn = kind > 3.5;
+        float ceramic = kind > 4.5 ? 1.0 : 0.0;
+        float dist0 = length(cameraPosition - vWP), near = 1.0 - smoothstep(250.0, 700.0, dist0);
+        vec2 tg0 = normalize(vec2(-vWN.z, vWN.x) + 1e-5); float uw = dot(vWP.xz, tg0);
+        // 1 · the skin: the district's colour carried by a surface cut from its footage
+        if (near > 0.0 && ceramic < 0.5) {
+          vec2 tm = vert > 0.5 ? vec2(uw, vWP.y) / 4.5 : vWP.xz / 6.0;
+          vec3 tx = matTex(vMat.x, tm); float l = dot(tx, vec3(0.3, 0.59, 0.11));
+          vec3 skin = mix(diffuseColor.rgb * (0.3 + 1.5 * l), tx * (0.7 + 0.6 * diffuseColor.rgb), 0.55);
+          diffuseColor.rgb = mix(diffuseColor.rgb, skin, near * 0.9);
+          if (vMat.y > 0.5 && vert > 0.5 && vWP.y - vInfo.y < 3.2) { vec3 gx = matTex(10.0, vec2(uw, vWP.y) / 3.0);   // graffiti at hand height
+            diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * gx * 1.5, near * 0.65); }
+          if (ruin) diffuseColor.rgb = mix(diffuseColor.rgb, matTex(11.0, tm), near * 0.45 * smoothstep(0.35, 0.75, vn(vWP.xz * 0.3 + vWP.y * 0.2)));   // moss takes the ruins
+        }
+        // 2 · grit: rain streaks under the sills, grime at the foot, soot at the top of industry
+        float streak = smoothstep(0.55, 1.0, vn(vec2(uw * 1.6, vWP.y * 0.07))) * vert * vMat.w;
+        diffuseColor.rgb *= 1.0 - 0.28 * streak - 0.25 * (1.0 - smoothstep(0.0, 1.6, vWP.y - vInfo.y)) * vert;
+        // 3 · the flood datum: every building that stood in the Fall carries the same salt line at +4 m — one level across the whole city
+        if (vMat.z > 0.5 && vert > 0.5) { float y = vWP.y; float wob = (vn(vec2(uw * 0.4, 1.0)) - 0.5) * 0.25;
+          float salt = smoothstep(3.3, 3.5, y + wob) * (1.0 - smoothstep(4.0, 4.45, y + wob)) * (0.75 + 0.25 * vn(vec2(uw * 3.0, y * 9.0)));
+          diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.93, 0.92, 0.87), salt * 0.95);
+          float under = 1.0 - smoothstep(3.25, 3.45, y + wob); diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * vec3(0.42, 0.55, 0.45), under * 0.85); }
         float bay = glass ? 1.8 : (addn ? 2.6 : 3.3);
         float uu = dot(vWP.xz, tg) / bay, vv = (vWP.y - base) / fl;
         vec2 cell = vec2(floor(uu), floor(vv)), f = fract(vec2(uu, vv));
         float win = step(0.24, f.x) * step(f.x, 0.76) * step(0.3, f.y) * step(f.y, 0.85) * step(1.0, vv);
         float shop = step(0.06, vv) * step(vv, 0.8) * step(0.1, f.x) * step(f.x, 0.9) * (addn ? 0.0 : 1.0);
-        if (glass) win = step(0.05, f.x) * step(f.x, 0.95) * step(0.1, f.y) * step(f.y, 0.95) * step(0.0, vv);
         float w = max(win, shop) * vert;
         float dist = length(cameraPosition - vWP), far = smoothstep(450.0, 1500.0, dist);
         float r = fh(cell + seed * 13.1);
         vec3 gl = mix(vec3(0.07, 0.09, 0.12), vec3(0.32, 0.4, 0.48), fh(cell + seed + 3.0) * 0.6);
-        if (glass) gl = vec3(0.42, 0.55, 0.62);
+        if (glass) gl = vec3(0.18, 0.3, 0.34);
         if (ruin) { gl = vec3(0.02); diffuseColor.rgb *= mix(0.45, 1.0, smoothstep(0.0, 1.5, vv)) * 0.8; }
+        // the window as built: a trim, a stone lintel and sill, mullions; the glass takes the sky at a glancing angle
+        vec3 Vv = normalize(cameraPosition - vWP); float fres = pow(1.0 - abs(dot(Vv, normalize(vWN))), 3.0);
+        gl = mix(gl, vec3(0.62, 0.68, 0.74), fres * 0.65 * (1.0 - uNight));
+        float trimZone = step(0.205, f.x) * step(f.x, 0.795) * step(0.255, f.y) * step(f.y, 0.93) * step(1.0, vv) * vert * (1.0 - far) * (glass ? 0.0 : 1.0);
+        float trim = max(0.0, trimZone - win);
+        float mull = win * (step(abs(f.x - 0.5), 0.014) + step(abs(f.y - 0.63), 0.014));
+        vec3 trimC = (vMat.x < 2.5) ? vec3(0.86, 0.82, 0.73) : vec3(0.36, 0.37, 0.38);
+        diffuseColor.rgb = mix(diffuseColor.rgb, trimC, clamp(trim + mull, 0.0, 1.0) * 0.9);
+        w *= 1.0 - clamp(mull, 0.0, 1.0);
         diffuseColor.rgb = mix(diffuseColor.rgb, gl, mix(w, 0.25 * vert, far));
-        if (glass) diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.94), (1.0 - w) * vert);
+        // 4 · kintsugi of the Resurrection: the ruin repaired with white ceramic plates, the seams drawn in cyan light
+        if (glass || ceramic > 0.5) { vec2 kp = vec2(uw, vWP.y) / 3.4; vec2 ki = floor(kp), kf = fract(kp); float d1 = 9.0, d2 = 9.0; vec2 cid = ki;
+          for (int j = -1; j <= 1; j++) for (int i = -1; i <= 1; i++) { vec2 o = vec2(i, j); vec2 r = o + vec2(fh(ki + o), fh(ki + o + 7.1)) - kf; float dd = dot(r, r);
+            if (dd < d1) { d2 = d1; d1 = dd; cid = ki + o; } else if (dd < d2) d2 = dd; }
+          float plate = max(ceramic, step(0.42, fh(cid * 1.7))) * vert, seam = (1.0 - smoothstep(0.0, 0.07, sqrt(d2) - sqrt(d1))) * plate;
+          diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.93, 0.92, 0.88), plate * (1.0 - w) * 0.92);
+          bEmis += vec3(0.37, 0.9, 1.0) * seam * (0.35 + 1.4 * uNight); }
         float cor = step(0.0, vv) * vert * step(fract(vv), 0.05) * (glass ? 0.0 : 1.0); diffuseColor.rgb *= 1.0 - 0.18 * cor;
         diffuseColor.rgb *= mix(1.0, 0.8, step(0.6, vWN.y));
         diffuseColor.rgb *= 1.0 - 0.25 * uWet * vert;
@@ -177,7 +233,6 @@ export function facadeMat(U, opts = {}) {
         bEmis = lc * lit * w * 1.1 * (1.0 - far) + lc * far * 0.07 * uNight * vert * (ruin ? 0.0 : 1.0);
         if (club) { float band = step(0.92, vv) * step(vv, 1.08) * vert; float pulse = 0.6 + 0.4 * sin(uTime * 3.0 + seed * 9.0);
           bEmis += mix(vec3(1.0, 0.1, 0.55), vec3(0.1, 0.9, 1.0), step(0.5, fract(seed * 7.0))) * band * 3.0 * uNight * pulse; diffuseColor.rgb *= 0.55; }
-        if (glass) bEmis += vec3(0.7, 0.85, 1.0) * w * uNight * 0.55;
         { float pd = length(vWP.xz - uPulseO); float ring = exp(-pow((pd - uPulseT * 420.0) / 45.0, 2.0)) * exp(-uPulseT * 0.25);   // the resonance passing through
           bEmis += vec3(0.37, 0.9, 1.0) * ring * (0.6 + 1.6 * w) * (0.4 + uNight); }
       }`)
@@ -196,7 +251,7 @@ function gableGeo() { const s = new THREE.Shape(); s.moveTo(-0.5, 0); s.lineTo(0
 // ——— the buildings ———
 export function makeBuildings(C, U) {
   const B = C.bld, n = B.length / 14, cap = n * 2;
-  const mk = (geo, mat, c) => { geo.setAttribute('aInfo', new THREE.InstancedBufferAttribute(new Float32Array(c * 4), 4)); const m = new THREE.InstancedMesh(geo, mat, c);
+  const mk = (geo, mat, c) => { geo.setAttribute('aInfo', new THREE.InstancedBufferAttribute(new Float32Array(c * 4), 4)); geo.setAttribute('aMat', new THREE.InstancedBufferAttribute(new Float32Array(c * 4), 4)); const m = new THREE.InstancedMesh(geo, mat, c);
     m.castShadow = m.receiveShadow = true; m.instanceMatrix.setUsage(THREE.DynamicDrawUsage); m.setColorAt(0, new THREE.Color()); return m; };
   const fm = facadeMat(U);
   const body = mk(unitBox(), fm, cap), ruins = mk(ruinBox(), fm, n), roofs = new THREE.InstancedMesh(gableGeo(), new THREE.MeshStandardMaterial({roughness: 0.75}), n);
@@ -208,6 +263,7 @@ export function makeBuildings(C, U) {
   function put(mesh, i, x, y, z, rot, sx, sy, sz, info, c) {
     Q.setFromAxisAngle(Y, -rot); M4.compose(V.set(x, y, z), Q, Sc.set(sx, sy, sz)); mesh.setMatrixAt(i, M4); mesh.setColorAt(i, c);
     if (info) mesh.geometry.attributes.aInfo.array.set(info, i * 4);
+    if (info && mesh.geometry.attributes.aMat) mesh.geometry.attributes.aMat.array.set(MAT, i * 4);
   }
   group.userData.state = (k, era) => {                       // what building k is at this era
     const o = k * 14, born = B[o + 7], ruin = B[o + 8], reuse = B[o + 9];
@@ -228,13 +284,15 @@ export function makeBuildings(C, U) {
       if (extra.length && extra.some(([cx, cy, r, eb]) => eb <= era && Math.abs(B[o] - cx) < r && Math.abs(B[o + 1] - cy) < r && Math.hypot(B[o] - cx, B[o + 1] - cy) < r)) continue;
       const seed = hash(k, 3), pal = PALETTE[st] || PALETTE[0]; col.setHex(pal[Math.floor(seed * pal.length)]); col.offsetHSL(0, 0, (hash(k, 9) - 0.5) * 0.06);
       const fl = FLOOR[st] || 3.3, ruined = ruin <= era;
+      const ms = MAT_BY_STYLE[st] || [6], s2 = hash(k, 21);
+      MAT = [ms[Math.floor(s2 * ms.length)], (st === 1 || st >= 5 || ruined) && hash(k, 22) < 0.35 ? 1 : 0, born <= 3 && era >= 4 && gz < 9 ? 1 : 0, GRIT[st] ?? 0.6];
       // the back alley behind rowhouses and the old center: a paved lane the depth of a cart
       // (rot encodes the street side: the back of the lot is (−sin rot, cos rot), the street is the other way)
       if (st <= 1) put(alleys, na++, x - Math.sin(rot) * (d / 2 + 2.4), Math.max(gz, 0.3) + 0.02, y + Math.cos(rot) * (d / 2 + 2.4), rot, w + 0.4, 0.25, 3.6, null, col);
       if (ruined && !(era >= 5 && reuse)) {
         put(ruins, nr, x, gz - 2, y, rot, w, h * (0.35 + 0.3 * seed) + 2, d, [seed, gz, 3, fl], col.multiplyScalar(0.8)); owner.ruins[nr++] = k; continue; }
       let kind = 0, H = st === 3 ? Math.min(h, 22 + h * 0.5) : h;     // the generic towers stay below the hand-modeled skyline
-      if (ruined && reuse === 1) { kind = 2; H = h * 1.35 + 6; col.setHex(0xe8ecee); }
+      if (ruined && reuse === 1) kind = 2;
       if (ruined && reuse === 2) kind = 1;
       if (st === 3 && H > 55 && kind === 0) {                   // a tower steps back as it rises: base, shaft, crown
         const h1 = H * (0.55 + 0.15 * seed), h2 = H - h1; put(body, nb, x, gz - 3, y, rot, w, h1 + 3, d, [seed, gz, kind, fl], col); owner.body[nb++] = k;
@@ -243,7 +301,8 @@ export function makeBuildings(C, U) {
       } else { put(body, nb, x, gz - 3, y, rot, w, H + 3, d, [seed, gz, kind, fl], col); owner.body[nb++] = k; }
       if (!ruined && ah > 0 && ab <= era) {                   // the addition: lighter, later, set back — the house that grew
         const ox = -Math.sin(rot) * d * 0.15, oy = Math.cos(rot) * d * 0.15; col.setHex(ADD_COL[Math.floor(hash(k, 5) * ADD_COL.length)]);
-        put(body, nb, x + ox, gz + h, y + oy, rot, w * 0.72, ah, d * 0.6, [seed + 0.5, gz + h, 4, 2.9], col); owner.body[nb++] = k; }
+        MAT = [hash(k, 23) < 0.5 ? 8 : 2, 0, 0, 0.4]; put(body, nb, x + ox, gz + h, y + oy, rot, w * 0.72, ah, d * 0.6, [seed + 0.5, gz + h, 4, 2.9], col); owner.body[nb++] = k; }
+      if (kind === 2) { col.setHex(0xefece6); put(body, nb, x - Math.sin(rot) * d * 0.1, gz + H, y + Math.cos(rot) * d * 0.1, rot, w * 0.8, 3 + seed * 6, d * 0.7, [seed, gz + H, 5, 3.0], col); owner.body[nb++] = k; }   // the ceramic crown of a repaired house
       if (!ruined && roof === 1 && kind === 0) { col.setHex(ROOF_COL[st] || 0x444444); col.offsetHSL(0, 0, (seed - 0.5) * 0.08);
         put(roofs, nf, x, gz + h, y, rot, w, Math.min(d * 0.38, 6), d, null, col); owner.roofs[nf++] = k; }
     }
