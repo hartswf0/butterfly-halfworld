@@ -88,7 +88,8 @@ function setLamps() {
   lamps.forEach(l => scene.remove(l)); lamps.length = 0; if ((!night && !walking) || !B) return;
   const lvNow = walking ? cur.levels.reduce((b, l, k) => l.z <= P.z + 0.5 ? k : b, 0) : null;   // walking: the storey you are on, and the next ones, are lit
   const rooms = B.rooms.filter(r => walking ? Math.abs(r.level - lvNow) <= 1 : r.level < Math.min(cut, cur.levels.length)).slice(0, 14);
-  for (const r of rooms) { const l = new THREE.PointLight(0xffc98a, 14, Math.max(r.w, r.d) * 1.6, 1.6); l.position.set(r.x + r.w / 2 + B.group.position.x, r.z + r.h - 0.6, r.y + r.d / 2 + B.group.position.z); scene.add(l); lamps.push(l); }
+  const LC = {warm: [0xffc98a, 14], cool: [0xd6e8ff, 12], red: [0xff3848, 22], dim: [0xffd8a8, 5]};
+  for (const r of rooms) { const [lc, li] = LC[r.light] || LC.warm; const l = new THREE.PointLight(lc, li, Math.max(r.w, r.d) * 1.6, 1.6); l.position.set(r.x + r.w / 2 + B.group.position.x, r.z + r.h - 0.6, r.y + r.d / 2 + B.group.position.z); scene.add(l); lamps.push(l); }
 }
 // settings: each hero carries the mood of its references
 const water = new THREE.Mesh(new THREE.PlaneGeometry(600, 600), new THREE.MeshStandardMaterial({color: 0x2a4a52, roughness: 0.08, metalness: 0.3})); water.rotation.x = -Math.PI / 2; water.position.y = -0.7; water.visible = false; scene.add(water);
@@ -172,4 +173,4 @@ function loop() {
 addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); labels.setSize(innerWidth, innerHeight); });
 $('loading').style.display = 'none';
 show(Math.max(0, HD.heroes.findIndex(h => h.id === Q.get('h')))); loop();
-window.__heroes = {get P() { return P; }, get B() { return B; }, PROOFS, show, camera, orbit};
+window.__heroes = {get P() { return P; }, set yaw(v) { yaw = v; }, set pitch(v) { pitch = v; }, get B() { return B; }, PROOFS, show, camera, orbit};

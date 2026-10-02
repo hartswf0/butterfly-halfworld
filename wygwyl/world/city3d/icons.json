@@ -1,0 +1,206 @@
+{
+ "version": "icons-v1",
+ "icons": [
+  {
+   "id": "tide",
+   "name": "The Tide Engine",
+   "kind": "tide engine",
+   "era": [
+    3,
+    4,
+    "restarted"
+   ],
+   "lore": "Six steel hoods stand across the narrows on concrete piers, and between them the sector gates lie on the riverbed. Twice a day, when the spring tide runs over 0.6 m, the gates turn up out of the water and the harbour behind them goes still. The Tide Office keeps the city's clock by them: a day in Atlantis is two gates, not twenty-four hours. In the Fall the gates jammed open, and the flood line on every wall is the height they failed to hold. In the Resurrection they were restarted by hand, and the rising is now a public event; people come down to the piers to watch the water stop.",
+   "institution": "the Tide Office",
+   "site": {
+    "x": 3344.2728913249957,
+    "y": 2108.9058669682818,
+    "rot": 3.0107,
+    "span": 290,
+    "z": 0
+   },
+   "witnesses": [
+    "C1237",
+    "C1677",
+    "C1369",
+    "C1387",
+    "C0814",
+    "C0767",
+    "C2573",
+    "C1010"
+   ]
+  },
+  {
+   "id": "archive",
+   "name": "The Archive",
+   "kind": "archive",
+   "era": [
+    5,
+    9,
+    null
+   ],
+   "lore": "On the hill above downtown stands a spire of turning drums, and every panel on it is a frame. These are the 2,707 iconic shots the city was reversed from, kept where everyone can see them. The drums turn against each other, so the facade is never the same twice, and at night it is the brightest thing on the skyline. The Keepers say the city is only a way of arranging these pictures. They change the order of the panels at each new tide, and people read the facade the way other cities read the weather.",
+   "institution": "the Keepers",
+   "site": {
+    "x": 1800.0,
+    "y": 2040.0,
+    "rot": 0,
+    "z": 27.9
+   },
+   "witnesses": [
+    "C1467",
+    "C2277",
+    "C0057",
+    "C0068",
+    "C1076",
+    "C2413",
+    "C0004",
+    "C0607"
+   ]
+  },
+  {
+   "id": "resonator",
+   "name": "The Resonator",
+   "kind": "resonator",
+   "era": [
+    5,
+    9,
+    null
+   ],
+   "lore": "Sixty copper pipes stand in an arc on the summit, the tallest ninety metres, tuned to the tide. When the gates rise down in the narrows, air is pushed up the old aqueduct and the pipes sound. The note is too low to hear, but you feel it in a stairwell or a cup of coffee. At night the pipe tips light in sequence, and the light runs down into the city as the ring of cyan that crosses every facade. Children call it the city breathing. The Resonance Society says it is the city remembering the water.",
+   "institution": "the Resonance Society",
+   "site": {
+    "x": 7000.0,
+    "y": 2400.0,
+    "rot": 0.6,
+    "z": 148.7
+   },
+   "witnesses": [
+    "C0569",
+    "C0304",
+    "C0487",
+    "C1237",
+    "C0298",
+    "C1641",
+    "C0755",
+    "C0196"
+   ]
+  },
+  {
+   "id": "gate",
+   "name": "The Light Gate",
+   "kind": "light gate",
+   "era": [
+    5,
+    9,
+    null
+   ],
+   "lore": "In the Resurrection, \"the Light Gates opened to Atlantis\". This is the one that stayed: a hundred-metre ring of white ceramic straddling the processional avenue, its seam drawn in cyan. Nothing passes through it but people and the avenue. It marks the line between the old city of the pyramids and the new one, and on the day of the first tide every year the whole avenue walks through it toward the sea.",
+   "institution": "the Avenue Wardens",
+   "site": {
+    "x": 5309.3592592592595,
+    "y": 3577.144444444444,
+    "rot": -0.02199058943097797,
+    "z": 61.1
+   },
+   "witnesses": [
+    "C2393",
+    "C2573",
+    "C2271",
+    "C0633",
+    "C1861",
+    "C1894",
+    "C2634",
+    "C2445"
+   ]
+  },
+  {
+   "id": "drowned",
+   "name": "The Drowned Cathedral",
+   "kind": "drowned cathedral",
+   "era": [
+    1,
+    4,
+    "kept drowned"
+   ],
+   "lore": "It stood on the flat beside the chapel until the Fall, when the ground went out from under it and it settled nine metres into the bay. It was never raised. Its towers stand out of the water at a tilt, and at low tide you can see the tops of the nave windows. Fishermen hang lamps in it, so at night the windows glow under the water. The chapel's bell is rung for it. Divers say the pews are still in rows.",
+   "institution": "nobody \u2014 the bay keeps it",
+   "site": {
+    "x": 3420.0,
+    "y": 3580.0,
+    "rot": 0.4,
+    "z": -9.2
+   },
+   "witnesses": [
+    "C0137",
+    "C0048",
+    "C2006",
+    "C0396",
+    "C0961",
+    "C0972",
+    "C0034",
+    "C1910"
+   ]
+  },
+  {
+   "id": "skywalk",
+   "name": "The Skywalk",
+   "kind": "skywalk",
+   "era": [
+    5,
+    9,
+    null
+   ],
+   "lore": "A ring of glass and white ceramic forty-five metres up, threading the towers of downtown on slender legs. You can walk the whole centre without touching the street. It was built after the Fall, when the streets stood in water for a season and the city learned to live above the line. Its underside is lit cyan, so from below downtown wears a halo.",
+   "institution": "the Boroughs Council",
+   "site": {
+    "x": 1463,
+    "y": 1824,
+    "rot": 0,
+    "r": 250,
+    "z": 21.1
+   },
+   "witnesses": [
+    "C1379",
+    "C0318",
+    "C1250",
+    "C0175",
+    "C0887",
+    "C1387",
+    "C0424",
+    "C0582"
+   ]
+  },
+  {
+   "id": "stair",
+   "name": "The Salt Stair",
+   "kind": "salt stair",
+   "era": [
+    1,
+    9,
+    null
+   ],
+   "lore": "The oldest street in Atlantis is a stair. It climbs from the harbour to the hill where the Archive now stands, in long flights with a landing every storey of rise and a lamp on every landing. The salt carriers used it before there was a road; the stones are worn into hollows. \"Stairs are streets\" begins here. People walk the Salt Stair at the first tide carrying a cup of seawater up to the Archive, so the hill will remember the bay.",
+   "institution": "the Salt Guild",
+   "site": {
+    "x": 1800.0,
+    "y": 2040.0,
+    "x2": 1921.7271693730752,
+    "y2": 1881.3100625861277,
+    "z": 27.9,
+    "z2": 21.4,
+    "rot": -0.9164561405129199
+   },
+   "witnesses": [
+    "C2239",
+    "C1969",
+    "C0746",
+    "C0755",
+    "C2026",
+    "C1155",
+    "C1618",
+    "C0398"
+   ]
+  }
+ ]
+}
