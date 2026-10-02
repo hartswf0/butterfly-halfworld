@@ -2,6 +2,7 @@
 // Everything here has a birth era (and some a death): setEra(e) re-grows the city to that moment in its history.
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
+import {kitGeometry} from './kit.mjs';
 
 export const COVER = ['WATER', 'BEACH', 'MARSH', 'FIELD', 'FOREST', 'ROCK', 'OLD', 'ROW', 'CIVIC', 'RELIC', 'MEADOW', 'BURNED', 'SUBURB', 'PORT', 'INDUSTRY'];
 const COVER_COL = [0x2a3a3a, 0xd8c9a0, 0x6f7a48, 0xa8a060, 0x3c5a2c, 0x8a7f6c, 0x8c7a66, 0x7c6e62, 0x9a948a, 0x9a8c70, 0x7d9a4a, 0x2e2a26, 0x8a9a62, 0x7a7a76, 0x5e5a54];
@@ -139,7 +140,9 @@ export function makeRoads(C, S, U) {
       if (cls > 3.5) c = mix(c, matTex(uLib.y, vec2(x, a) / 6.0) * 0.85, 0.65);
       float oil = smoothstep(0.62, 0.8, rn(vec2(x * 0.35, a * 0.12))) * step(side * W + 0.5, x) * step(x, W - side * W - 0.5); c *= 1.0 - 0.3 * oil;
       float patchy = step(0.82, rn(vec2(x * 0.09, a * 0.05))); c = mix(c, c * 0.75 + 0.03, patchy * 0.6);
-      if (cls < 1.5) { float m0 = length(vec2(x - W * 0.5 - 1.6, mod(a, 37.0) - 18.0)); c = mix(c, vec3(0.08), (1.0 - smoothstep(0.32, 0.36, m0)) * 0.9 + (step(abs(m0 - 0.28), 0.03)) * 0.5); }
+      if (cls < 1.5) { vec2 q = vec2(x - W * 0.5 - 1.6, mod(a, 37.0) - 18.0) / 0.42; float r = length(q);            // the manhole carries the emblem: ring, the Line at 4/10, the seam
+        if (r < 1.06) { c = vec3(0.11, 0.12, 0.13); float ring = 1.0 - smoothstep(0.07, 0.11, abs(r - 0.82)), ln = (1.0 - smoothstep(0.04, 0.07, abs(q.y + 0.2))) * step(r, 0.8), sm = (1.0 - smoothstep(0.035, 0.06, abs(q.x - 0.13 * sin(q.y * 7.0) - 0.06))) * step(r, 0.8);
+          c = mix(c, vec3(0.62, 0.6, 0.56), ring); c = mix(c, vec3(0.8, 0.79, 0.74), ln); c = mix(c, vec3(0.25, 0.62, 0.66), sm); } }
       if (cls < 1.5 && a < 5.0 && a > 1.2 && x > side * W && x < W - side * W) mk = max(mk, step(fract(x / 1.1), 0.55));
       c = mix(c, vec3(0.92), mk * 0.85);
       float puddle = smoothstep(0.58, 0.66, rn(vec2(x * 0.22, a * 0.09) + 3.0)) * uWet; c = mix(c, c * 0.45, puddle);
@@ -402,7 +405,7 @@ export function makeStreetLife(C, S, U) {
     for (let i = 0; i < f.length - 2; i += 2) { const ax = f[i], ay = f[i + 1], bx2 = f[i + 2], by = f[i + 3], L = Math.hypot(bx2 - ax, by - ay); if (!L) continue;
       const tx = (bx2 - ax) / L, ty = (by - ay) / L;
       for (let s = (32 - acc % 32) % 32; s < L; s += 32) { const x = ax + tx * s, y = ay + ty * s, side = ((acc + s) / 32 | 0) % 2 ? 1 : -1, px = x - ty * side * W, py = y + tx * side * W, g = Math.max(S.ground(px, py), 0.4);
-        if (g < 0.5 && S.ground(px, py) < 0) continue; lamps.push({m: place(px, g, py, -Math.atan2(ty, tx)), born: Math.max(born, 1)}); glow.push(px, g + 6.2, py, Math.max(born, 1)); }
+        if (g < 0.5 && S.ground(px, py) < 0) continue; lamps.push({m: place(px, g, py, -Math.atan2(ty, tx)), born: Math.max(born, 1)}); glow.push(px, g + 5.4, py, Math.max(born, 1)); }
       if (cls === 1) { stopAcc -= L; if (stopAcc < 0) { stopAcc = 380; const x = (ax + bx2) / 2 + ty * (W + 1.2), y = (ay + by) / 2 - tx * (W + 1.2), g = S.ground(x, y); if (g > 0.5) stops.push({m: place(x, g, y, -Math.atan2(ty, tx)), born: 3, x, y}); } }
       acc += L; }
   });
@@ -433,8 +436,11 @@ export function makeStreetLife(C, S, U) {
     [bx(14, 2, 1.2), 0xd8a020, 0, 32, -5], [bx(14, 2, 1.2), 0xd8a020, 0, 32, 5], [bx(1.6, 2, 52), 0xd8a020, 0, 36, 14], [bx(3, 3, 4), 0x2a3036, 0, 33, 26]]);
   const boxGeo = kit([[bx(12, 2.6, 2.5), 0x8a3426, 0, 0, -1.3], [bx(12, 2.6, 2.5), 0x2a5a8a, 0, 0, 1.3], [bx(12, 2.6, 2.5), 0x3a7a4a, 0, 2.6, -1.3], [bx(6, 2.6, 2.5), 0xb8a040, -3, 2.6, 1.3]]);
   const tankGeo = kit([[cy(9, 9, 12, 20), 0xd0ccc4], [co(9.2, 2, 20), 0xb8b4ac, 0, 12], [bx(0.4, 12, 0.6), 0x404040, 9, 0, 0]]);
-  for (const [geo, items, sh] of [[lampGeo, lamps, false], [stopGeo, stops, true], [cafeGeo, cafes, true], [dockGeo, docks, true], [bollardGeo, bollards, false], [craneGeo, cranes, true], [boxGeo, boxes, true], [tankGeo, tanks, true]])
+  // the object kit replaces the generic furniture: tide lamps, ceramic shelters, ceramic bollards (one design, see kit.mjs)
+  const KL = kitGeometry('tide lamp'), KS = kitGeometry('shelter'), KB = kitGeometry('bollard'), glowMat = new THREE.MeshBasicMaterial({vertexColors: true});
+  for (const [geo, items, sh] of [[KL.body, lamps, false], [KS.body, stops, true], [cafeGeo, cafes, true], [dockGeo, docks, true], [KB.body, bollards, false], [craneGeo, cranes, true], [boxGeo, boxes, true], [tankGeo, tanks, true]])
     group.add(eraInstanced(geo, vmat, items, sh));
+  for (const [K, items] of [[KL, lamps], [KS, stops]]) if (K.glow) group.add(eraInstanced(K.glow, glowMat, items, false));
   // the lamp glow at night: additive points
   const gg = new THREE.BufferGeometry(), gp = [], gb = []; for (let i = 0; i < glow.length; i += 4) { gp.push(glow[i], glow[i + 1], glow[i + 2]); gb.push(glow[i + 3]); }
   gg.setAttribute('position', new THREE.Float32BufferAttribute(gp, 3)); gg.setAttribute('born', new THREE.Float32BufferAttribute(gb, 1));
@@ -446,7 +452,7 @@ export function makeStreetLife(C, S, U) {
   const pz = new THREE.Group(); group.add(pz);
   for (const p of C.meta.plazas) { const g = Math.max(S.ground(p.x, p.y), 0.3);
     const disc = new THREE.Mesh(new THREE.CylinderGeometry(p.r, p.r + 2, 1.6, 40), new THREE.MeshStandardMaterial({color: 0xa79b88, roughness: 0.9})); disc.position.set(p.x, g - 0.5, p.y); disc.receiveShadow = true; disc.userData.born = p.born; pz.add(disc);
-    if (p.r >= 40) { const f = new THREE.Group(); f.add(new THREE.Mesh(new THREE.CylinderGeometry(6, 6.4, 0.9, 24), new THREE.MeshStandardMaterial({color: 0xc8bea8})));
+    if (false) { const f = new THREE.Group();   // replaced by the kit's salt fountain (streetkit.mjs) f.add(new THREE.Mesh(new THREE.CylinderGeometry(6, 6.4, 0.9, 24), new THREE.MeshStandardMaterial({color: 0xc8bea8})));
       const w = new THREE.Mesh(new THREE.CylinderGeometry(5.5, 5.5, 0.2, 24), new THREE.MeshStandardMaterial({color: 0x3a6a78, roughness: 0.1, metalness: 0.3})); w.position.y = 0.5; f.add(w);
       const jet = new THREE.Mesh(new THREE.ConeGeometry(0.9, 5, 10, 1, true), new THREE.MeshStandardMaterial({color: 0xdfefff, transparent: true, opacity: 0.55})); jet.position.y = 3; f.add(jet);
       f.position.set(p.x + p.r * 0.35, g + 0.4, p.y + p.r * 0.2); f.userData.born = p.born + 1; pz.add(f); } }

@@ -9,6 +9,7 @@ import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
 import {loadCity, sampler, makeTerrain, makeWards, makeRoads, makeBuildings, makeTrees, makeStreetLife, STYLES, COVER, setLibrary} from './city.mjs';
 import {makeFound} from './found3d.mjs';
 import {makeIcons} from './icons.mjs';
+import {makeStreetKit} from './streetkit.mjs';
 import {buildLandmark, tickClocks, MATS, NIGHTLIT} from './landmarks.mjs';
 import {makeHeavens, makeSea} from './heavens.mjs';
 import {makeRising} from './evolved.mjs';
@@ -70,6 +71,8 @@ step(90, 'the found architecture');
 const found = makeFound(scene, C, S, U, {idx: LIBI}); const FD = await found.load('../language/found.json');
 step(94, 'the icons');
 const icons = makeIcons(scene, C, S, U, heav); const ID = await icons.load('icons.json');
+C.stopsForBoards = street.userData.stops; const PAL = await fetch('../language/palettes.json').then(r => r.json()).catch(() => null);
+const skit = makeStreetKit(scene, C, S, U, heav, wards, PAL);
 const mats = MATS(); for (const k of NIGHTLIT) mats[k].userData.base = mats[k].emissiveIntensity;
 
 // ——— labels: landmarks, poems, districts (with their use in this era), wards ———
@@ -172,7 +175,7 @@ let playing = null; $('play').onclick = () => { if (playing) { clearInterval(pla
 function setEra(e) {
   era = e; U.era.value = e; $('era').value = e; syncRange($('era'));
   document.querySelectorAll('#eras button').forEach(b => b.classList.toggle('on', +b.dataset.e === e));
-  const fp = [...rising.footprints(vi), ...found.footprints(), ...icons.footprints()]; icons.setEra(e); blds.userData.setExtraClear(fp); rising.build(vi, e); found.setEra(e);
+  const fp = [...rising.footprints(vi), ...found.footprints(), ...icons.footprints()]; icons.setEra(e); skit.setEra(e); blds.userData.setExtraClear(fp); rising.build(vi, e); found.setEra(e);
   detail.setEra(e, k => fp.some(([cx, cy, r, eb]) => eb <= e && Math.hypot(C.bld[k * 14] - cx, C.bld[k * 14 + 1] - cy) < r));
   const c = blds.userData.setEra(e); trees.userData.setEra(e); street.userData.setEra(e); setLandmarks(e); terrain.userData.paint(e, LAYERS.wards ? wards : null);
   $('lore').innerHTML = `<b>${e} · ${ERA[e]}.</b> ${meta.lore[e]}`;
@@ -377,7 +380,7 @@ function frameLoop() {
     if (V3.distanceTo(camera.position) > 2) camera.lookAt(V3);
   }
   if (ptour) { ptour.t += dt; if (ptour.t > 9) { ptour.t = 0; ptour.k = (ptour.k + 1) % meta.poems.length; goPoem(meta.poems[ptour.k].num); } }
-  rising.update(dt, U.time.value); icons.update(dt, U.time.value);
+  rising.update(dt, U.time.value); icons.update(dt, U.time.value); skit.update(dateOf());
   // only where you are: the lived-in layer streams in a ring around the focus, and the resolution follows the frame rate
   const fz = mode === 'orbit' ? orbit.target : camera.position; detail.visible = LAYERS.lamps && camera.position.y - Math.max(S.ground(camera.position.x, camera.position.z), 0) < 700; detail.update(fz);
   perf.t += dt; perf.n++; if (perf.t > 2) { const ms = perf.t / perf.n * 1000; const pr = renderer.getPixelRatio(), max = Math.min(devicePixelRatio, MOBILE ? 1.5 : 2);
@@ -394,4 +397,4 @@ function frameLoop() {
 }
 requestAnimationFrame(frameLoop);
 addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); labels.setSize(innerWidth, innerHeight); composer?.setSize(innerWidth, innerHeight); });
-window.__city = {icons, found, detail, rising, scene, camera, orbit, setEra, setWeather, goPoem, fitShot, heav, setMode, get hour() { return hour; }, set hour(v) { hour = v; setTimeUI(); }, C};
+window.__city = {skit, icons, found, detail, rising, scene, camera, orbit, setEra, setWeather, goPoem, fitShot, heav, setMode, get hour() { return hour; }, set hour(v) { hour = v; setTimeUI(); }, C};
