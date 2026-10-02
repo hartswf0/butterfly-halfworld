@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Shots · WYGWYL</title>
+<style>
+:root{--ink:#f3ead2;--dim:#a99f86;--gold:#ffd23f;--pink:#ff3d6e;--panel:#121820;--edge:rgba(243,234,210,.16);--bg:#0a0e14;--safe-b:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 "Iowan Old Style",Palatino,Georgia,serif}
+button,input,select{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+main{max-width:1280px;margin:0 auto;padding:22px 16px 80px}
+.k{font:700 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+h1{font-size:clamp(26px,6vw,42px);font-weight:400;line-height:1.1;margin:6px 0 10px}
+h2{font-size:clamp(18px,4.5vw,22px);font-weight:400;margin:28px 0 8px}
+.lede{color:#ddd3bb;max-width:820px}
+.note{color:var(--dim);font-size:13px}
+a{color:var(--gold)}
+#q{width:100%;background:#0f151c;border:1px solid var(--edge);color:var(--ink);font-size:17px;padding:13px 16px;border-radius:26px;margin:14px 0 8px;outline:none}
+#q:focus{border-color:var(--gold)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:3px 0 6px;scrollbar-width:none}
+.chips .lab{flex:0 0 auto;font:700 10px "Helvetica Neue",Arial,sans-serif;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;align-self:center;margin-right:2px;min-width:60px}
+.chip{flex:0 0 auto;border:1px solid var(--edge);background:var(--panel);color:var(--ink);padding:7px 12px;min-height:36px;font:600 12px "Helvetica Neue",Arial,sans-serif;cursor:pointer;border-radius:18px;white-space:nowrap}
+.chip.on{border-color:var(--gold);color:var(--gold);background:rgba(255,210,63,.08)}
+#count{font:600 12px "Helvetica Neue",Arial,sans-serif;color:var(--dim);margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.shot{background:var(--panel);border:1px solid var(--edge);cursor:pointer;overflow:hidden}
+.shot img{width:100%;display:block;aspect-ratio:2.39/1;object-fit:cover;background:#000}
+.shot .c{padding:6px 9px 8px;font:12px/1.4 "Helvetica Neue",Arial,sans-serif;color:var(--dim)}
+.shot .c b{color:var(--gold);font-weight:700}
+.shot .c i{display:block;color:#ddd3bb;font:italic 13px/1.35 "Iowan Old Style",Georgia,serif;margin-top:3px;max-height:2.7em;overflow:hidden}
+.strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.strip .shot{flex:0 0 min(340px,84vw);scroll-snap-align:start}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0}
+select{background:#0f151c;color:var(--ink);border:1px solid var(--edge);border-radius:18px;padding:8px 12px;min-height:38px}
+.btn{background:transparent;color:var(--ink);border:1px solid var(--edge);padding:9px 14px;min-height:40px;border-radius:20px;font:700 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.12em;cursor:pointer}
+.btn.gold{border-color:var(--gold);color:var(--gold)}
+/* the viewer */
+#view{position:fixed;inset:0;background:#000;display:none;z-index:9;flex-direction:column}
+#view.on{display:flex}
+#stage{position:relative;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#vimg{max-width:100%;max-height:100%;width:100%;aspect-ratio:2.39/1;object-fit:contain;transition:opacity .35s}
+#tags{position:absolute;inset:0;pointer-events:none}
+#tags .tg{position:absolute;top:8%;transform:translateX(-50%);font:600 11px "Helvetica Neue",Arial,sans-serif;color:var(--gold);background:rgba(0,0,0,.6);padding:2px 7px;border-radius:10px;white-space:nowrap}
+#tags .tg::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:40px;background:rgba(255,210,63,.5)}
+#tags.off{display:none}
+#vcap{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);width:min(820px,92vw);text-align:center;font-size:clamp(15px,3.4vw,21px);text-shadow:0 1px 3px #000,0 0 14px #000}
+#vslate{position:absolute;left:14px;top:12px;font:12px "Helvetica Neue",Arial,sans-serif;color:var(--ink);text-shadow:0 1px 2px #000;max-width:74vw}
+#vslate b{color:var(--gold)}
+#vbar{background:#0a0e14;border-top:1px solid var(--edge);padding:10px 14px calc(10px + var(--safe-b));display:flex;flex-direction:column;gap:6px}
+#vbar .row{justify-content:space-between}
+#vmeta{font:12px/1.45 "Helvetica Neue",Arial,sans-serif;color:var(--dim)}
+#vmeta b{color:var(--ink)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;--p:0%}
+input[type=range]:focus{outline:none}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(to right,var(--gold) 0,var(--gold) var(--p),#353b44 var(--p))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;margin-top:-9px;border-radius:50%;background:#0a0e14;border:2px solid var(--gold);box-shadow:0 0 0 5px rgba(255,210,63,.14)}
+input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:#353b44}
+input[type=range]::-moz-range-progress{height:4px;border-radius:2px;background:var(--gold)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#0a0e14;border:2px solid var(--gold)}
+#ticks{position:relative;height:8px;margin:-4px 11px 0}
+#ticks i{position:absolute;top:0;width:2px;height:8px;background:rgba(243,234,210,.35)}
+</style>
+</head>
+<body>
+<main>
+  <div class="k">Where You Go When You Leave · <a href="index.html">the foundry</a> · the shots</div>
+  <h1>The shots — the poem steers the camera through the world</h1>
+  <p class="lede">Each poem’s reading is cut into shots. The line decides the camera: the first line opens wide and high;
+  when he names a thing — the forest, the water, the gates, the temple — the camera looks at it where it actually stands
+  in that world; when he names the sky it looks up; when he turns inward it goes close over his shoulder; and if he is
+  walking or riding on, every shot is taken further along his route to the next poem. The light follows the reading
+  (dusk into night in the tower, night into first light on the Magic Ride). Every frame keeps what is measured in it,
+  so you can search for what you need.</p>
+  <input id="q" type="search" placeholder="search the shots — “moon over water”, “close night”, “gates”, “forest wide”, a line he says…" autocomplete="off">
+  <div class="chips" id="c_kind"></div>
+  <div class="chips" id="c_light"></div>
+  <div class="chips" id="c_what"></div>
+  <div class="chips" id="c_poem"></div>
+  <div class="chips" id="c_world"></div>
+  <div id="count"></div>
+  <div class="grid" id="grid"></div>
+
+  <h2>One poem through one world</h2>
+  <div class="row"><select id="sw"></select><select id="sp"></select><button class="btn gold" id="splay">▶ PLAY THE POEM</button></div>
+  <div class="strip" id="strip"></div>
+</main>
+
+<div id="view">
+  <div id="stage"><img id="vimg" alt=""><div id="tags"></div><div id="vslate"></div><div id="vcap"></div></div>
+  <div id="vbar">
+    <div id="vmeta"></div>
+    <div id="scrubwrap"><input type="range" id="scrub" min="0" max="100" step="0.1" value="0"><div id="ticks"></div></div>
+    <div class="row"><div><button class="btn" id="vprev">◀</button> <button class="btn gold" id="vplay">▶ PLAY</button> <button class="btn" id="vnext">▶</button></div>
+      <div><button class="btn" id="vtags">WHAT’S IN FRAME</button> <button class="btn" id="vclose">✕</button></div></div>
+  </div>
+</div>
+
+<script type="module">
+const $ = id => document.getElementById(id);
+const D = await fetch('shots.json').then(r => r.json());
+const SH = D.shots, P = D.poems, WD = D.worlds;
+const fmt = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+const KIND = {establishing: 'establishing wide', pov: 'his point of view', sky: 'the sky', close: 'close · over the shoulder', medium: 'medium', tracking: 'tracking', aerial: 'aerial'};
+// searchable text per shot
+for (const s of SH) {
+  s.text = [s.line, P[s.poem].title, P[s.poem].place, s.kind, KIND[s.kind], s.light.replace('→', ' '), s.subject, ...s.names,
+    ...s.tags.map(t => t.what), s.world, WD[s.world].layout, s.mm + 'mm', s.travel ? 'travelling route journey' : 'still place'].join(' ').toLowerCase();
+}
+const F = {kind: new Set(), light: new Set(), what: new Set(), poem: new Set(), world: new Set()};
+function chips(id, key, label, vals, name = v => v) {
+  $(id).innerHTML = `<span class="lab">${label}</span>` + vals.map(v => `<button class="chip" data-v="${v}">${name(v)}</button>`).join('');
+  $(id).querySelectorAll('.chip').forEach(b => b.onclick = () => { const v = b.dataset.v; F[key].has(v) ? F[key].delete(v) : F[key].add(v); b.classList.toggle('on'); run(); });
+}
+chips('c_kind', 'kind', 'shot', Object.keys(KIND), v => KIND[v]);
+const lights = [...new Set(SH.flatMap(s => s.light.split('→')))];
+chips('c_light', 'light', 'hour', lights);
+const whats = Object.entries(SH.flatMap(s => s.tags.map(t => t.what)).reduce((a, w) => (a[w] = (a[w] || 0) + 1, a), {})).sort((a, b) => b[1] - a[1]).map(x => x[0]).filter(w => w !== 'sky');
+chips('c_what', 'what', 'in frame', ['sky', ...whats]);
+chips('c_poem', 'poem', 'poem', Object.keys(P).sort(), v => `${v} ${P[v].title}`);
+chips('c_world', 'world', 'world', Object.keys(WD), v => `${v} · ${WD[v].layout}`);
+function score(s, toks) {
+  let sc = 0;
+  for (const t of toks) { if (!s.text.includes(t)) return -1; sc += 1; const tg = s.tags.find(x => x.what.startsWith(t)); if (tg) sc += tg.pct / 25; }
+  return sc;
+}
+function pass(s) {
+  if (F.kind.size && !F.kind.has(s.kind)) return false;
+  if (F.light.size && !s.light.split('→').some(l => F.light.has(l))) return false;
+  if (F.what.size && ![...F.what].every(w => s.tags.some(t => t.what === w && t.pct >= 2))) return false;
+  if (F.poem.size && !F.poem.has(s.poem)) return false;
+  if (F.world.size && !F.world.has(s.world)) return false;
+  return true;
+}
+let results = [];
+function card(s) {
+  return `<div class="shot" data-id="${s.id}"><img loading="lazy" src="${s.img}" alt="">
+    <div class="c"><b>${s.poem}</b> ${P[s.poem].title} · ${fmt(s.t0)} · ${KIND[s.kind]} · ${s.mm}mm · ${s.light}<i>“${s.line.slice(0, 140)}”</i></div></div>`;
+}
+function run() {
+  const toks = $('q').value.toLowerCase().split(/\s+/).filter(t => t.length > 1 && !['the', 'and', 'over', 'with', 'of', 'a', 'in', 'on'].includes(t));
+  results = SH.filter(pass).map(s => [s, toks.length ? score(s, toks) : 0]).filter(([s, sc]) => sc >= 0).sort((a, b) => b[1] - a[1]).map(x => x[0]);
+  $('count').textContent = `${results.length} of ${SH.length} shots`;
+  $('grid').innerHTML = results.slice(0, 120).map(card).join('');
+  $('grid').querySelectorAll('.shot').forEach(d => d.onclick = () => openShot(d.dataset.id, results));
+}
+$('q').oninput = run;
+{ const U = new URLSearchParams(location.search);
+  if (U.get('q')) $('q').value = U.get('q');
+  for (const [key, id] of [['poem', 'c_poem'], ['kind', 'c_kind'], ['world', 'c_world']]) {
+    const v = U.get(key); if (!v) continue;
+    F[key].add(v); const b = document.querySelector(`#${id} .chip[data-v="${v}"]`); if (b) b.classList.add('on');
+  } }
+run();
+// storyboard strip
+$('sw').innerHTML = Object.keys(WD).map(w => `<option value="${w}">${w} · ${WD[w].layout} · ${Math.round(WD[w].q * 100)}%</option>`).join('');
+$('sp').innerHTML = Object.keys(P).sort().map(n => `<option value="${n}">${n} ${P[n].title}</option>`).join('');
+$('sp').value = new URLSearchParams(location.search).get('poem') || '10';
+const seq = () => SH.filter(s => s.world === $('sw').value && s.poem === $('sp').value).sort((a, b) => a.t0 - b.t0);
+function strip() { const q = seq(); $('strip').innerHTML = q.map(card).join(''); $('strip').querySelectorAll('.shot').forEach(d => d.onclick = () => openShot(d.dataset.id, q)); }
+$('sw').onchange = strip; $('sp').onchange = strip; strip();
+$('splay').onclick = () => { const q = seq(); if (q.length) { openShot(q[0].id, q); play(); } };
+// viewer + animatic
+let list = [], idx = 0, tagsOn = true, playing = false;
+const audio = new Audio(); audio.preload = 'none';
+let segs = null, segPoem = null;
+async function loadSegs(n) { if (segPoem === n) return; segPoem = n; segs = await fetch(`../../timings/${n}.json`).then(r => r.json()).then(j => j.segments).catch(() => []); }
+function show(s) {
+  $('vimg').src = s.img;
+  $('vslate').innerHTML = `<b>${s.poem}</b> ${P[s.poem].title} · <b>${s.k + 1}/${list.length}</b> · ${KIND[s.kind]} · ${s.mm}mm · ${s.light} · ${s.world}`;
+  if (!playing) $('vcap').textContent = s.line;
+  $('tags').innerHTML = s.tags.filter(t => t.what !== 'sky').map(t => `<span class="tg" style="left:${t.x * 100}%">${t.what} ${t.pct}%${t.near ? ' · ' + (t.near >= 1000 ? (t.near / 1000).toFixed(1) + ' km' : t.near + ' m') : ''}</span>`).join('');
+  $('vmeta').innerHTML = `<b>${fmt(s.t0)}–${fmt(s.t1)}</b> · subject: <b>${s.subject}</b>${s.names.length ? ' · he names: <b>' + s.names.join(', ') + '</b>' : ''}${s.travel ? ' · along his route' : ''} · in frame: ${s.tags.map(t => `${t.what} ${t.pct}%`).join(', ')}`;
+  const dur = list.length ? list[list.length - 1].t1 : 1;
+  $('scrub').max = dur; if (!playing) { $('scrub').value = s.t0; paint(); }
+}
+function openShot(id, from) {
+  list = from.filter(s => s.world === (SH.find(x => x.id === id) || {}).world && s.poem === (SH.find(x => x.id === id) || {}).poem).sort((a, b) => a.t0 - b.t0);
+  if (!list.length) list = from;
+  idx = Math.max(0, list.findIndex(s => s.id === id));
+  $('view').classList.add('on');
+  const dur = list[list.length - 1].t1;
+  $('ticks').innerHTML = list.map(s => `<i style="left:${s.t0 / dur * 100}%"></i>`).join('');
+  show(list[idx]);
+}
+function paint() { const r = $('scrub'); r.style.setProperty('--p', (r.value / (r.max || 1) * 100) + '%'); }
+$('vprev').onclick = () => { idx = (idx - 1 + list.length) % list.length; seek(list[idx].t0); show(list[idx]); };
+$('vnext').onclick = () => { idx = (idx + 1) % list.length; seek(list[idx].t0); show(list[idx]); };
+$('vtags').onclick = () => { tagsOn = !tagsOn; $('tags').classList.toggle('off', !tagsOn); $('vtags').classList.toggle('gold', tagsOn); };
+$('vtags').classList.add('gold');
+$('vclose').onclick = () => { stop(); $('view').classList.remove('on'); };
+addEventListener('keydown', e => { if (!$('view').classList.contains('on')) return; if (e.key === 'Escape') $('vclose').onclick(); if (e.key === 'ArrowRight') $('vnext').onclick(); if (e.key === 'ArrowLeft') $('vprev').onclick(); if (e.key === ' ') { e.preventDefault(); playing ? stop() : play(); } });
+function seek(t) { if (playing) audio.currentTime = t; }
+async function play() {
+  const s = list[idx]; await loadSegs(s.poem);
+  const rd = P[s.poem].reading; if (!rd) return;
+  if (!audio.src.endsWith(encodeURI(rd))) audio.src = '../../' + rd;
+  audio.currentTime = s.t0; playing = true; $('vplay').textContent = '■ STOP';
+  audio.play().catch(() => {}); tick();
+}
+function stop() { playing = false; audio.pause(); $('vplay').textContent = '▶ PLAY'; }
+$('vplay').onclick = () => playing ? stop() : play();
+$('scrub').oninput = e => { const t = +e.target.value; paint(); let k = 0; list.forEach((s, i) => { if (s.t0 <= t) k = i; }); if (k !== idx) { idx = k; show(list[idx]); } if (playing) audio.currentTime = t; };
+function tick() {
+  if (!playing) return;
+  const t = audio.currentTime;
+  let k = 0; list.forEach((s, i) => { if (s.t0 <= t + 0.05) k = i; });
+  if (k !== idx) { idx = k; show(list[idx]); }
+  const sg = segs && segs.find(x => x.start <= t && t <= x.end + 0.3);
+  $('vcap').textContent = sg ? sg.text.trim() : '';
+  $('scrub').value = t; paint();
+  if (audio.ended) { stop(); return; }
+  requestAnimationFrame(tick);
+}
+const h = location.hash.slice(1); if (h && SH.find(s => s.id === h)) openShot(h, SH);
+</script>
+</body>
+</html>

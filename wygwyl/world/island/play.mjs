@@ -425,7 +425,7 @@ function fillPanel(s) {
     $('pplay').onclick = () => sceneStart(s, $('pmode').value);
   }
   if (tab === 'shots') {
-    B.innerHTML = s.pieces.map((p, k) => `<div class="piece"><div class="ph"><b>${k + 1}. ${p.name}</b> <span>${p.t != null ? fmt(p.t) : ''}</span></div>
+    B.innerHTML = `<p class="note">The same poem storyboarded through the foundry's worlds — its reading steering the camera: <a href="../foundry/shots.html?poem=${s.num}" target="_blank" rel="noopener" style="color:var(--gold)">open the shots →</a></p>` + s.pieces.map((p, k) => `<div class="piece"><div class="ph"><b>${k + 1}. ${p.name}</b> <span>${p.t != null ? fmt(p.t) : ''}</span></div>
       <div class="pw">${p.what}</div>${p.lines.length ? `<div class="pl">“${p.lines.join(' / ')}”</div>` : ''}
       <div class="pc">camera: ${p.camera} <i>(${p.stand.dist} m · ${p.stand.h} m high · ${p.stand.move})</i></div>
       <div class="stills">${p.shots.filter(x => x.still).map(x => `<figure><img loading="lazy" src="${x.still}" alt=""><figcaption>${x.id}</figcaption></figure>`).join('')}</div>
