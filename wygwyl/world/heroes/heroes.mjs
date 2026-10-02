@@ -2,6 +2,7 @@
 // ruined, reused; walk inside on its real stairs; read its proofs, its facts, its references; read the poem in its rooms.
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {Reflector} from 'three/addons/objects/Reflector.js';
 import {CSS2DRenderer, CSS2DObject} from 'three/addons/renderers/CSS2DRenderer.js';
 import {build, prove, useLibrary, expand} from './build.mjs';
 
@@ -36,6 +37,7 @@ function show(i) {
   $('hname').textContent = cur.name; $('hnote').textContent = cur.note;
   // proofs, facts, references, siting
   $('proofs').innerHTML = PROOFS[i].map(p => `<div class="pr"><b class="${p.state}">${p.state}</b><div><span class="r">${p.rule}</span><span class="d">${p.detail}</span></div></div>`).join('');
+  $('fit').innerHTML = (cur.fit || []).map(f => `<div class="fit"><b>saw: ${f.saw}</b><span class="${/^open|^partly/.test(f.did) ? 'open' : ''}">${f.did}</span></div>`).join('');
   $('facts').innerHTML = (cur.facts || []).map(f => `<div class="fact"><i class="${f.status}">${f.status}</i>${f.claim}</div>`).join('');
   const R = REFS?.[cur.id] || {}; const th = it => `<img src="ref/${it.f}" title="${it.src} · ${it.s}" loading="lazy" alt="">`;
   $('rext').innerHTML = (R.exterior || []).slice(0, 9).map(th).join(''); $('rint').innerHTML = (R.interior || []).slice(0, 9).map(th).join('');
@@ -45,14 +47,16 @@ function show(i) {
   const st = ['intact', ...(cur.eras.ruined != null ? ['ruin'] : []), ...(cur.eras.reuse ? ['reuse'] : [])];
   $('states').innerHTML = st.map(s => `<button class="c ${s === 'intact' ? 'on' : ''}" data-s="${s}">${s === 'reuse' ? (cur.eras.reuse || 'reused') : s === 'ruin' ? 'after the Fall' : 'as built'}</button>`).join('');
   $('states').querySelectorAll('button').forEach(b => b.onclick = () => { state = b.dataset.s; $('states').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); compile(); });
-  state = 'intact'; cut = 99; $('cut').max = cur.levels.length; $('cut').value = cur.levels.length; compile(true);
+  state = 'intact'; cut = 99; $('cut').max = cur.levels.length; $('cut').value = cur.levels.length; front = false; $('front').classList.remove('on');
+  setting(cur.setting || 'day'); compile(true); $('cmp').classList.remove('on'); $('cmpimg').style.display = 'none';
+  const ref = (REFS?.[cur.id]?.exterior || [])[cur.shot?.ref ?? 0]; $('cmpimg').src = ref ? 'ref/' + ref.f : ''; heroShot();
 }
 function compile(frame) {
   if (B) { scene.remove(B.group); scene.remove(B.mass); B.group.traverse(o => o.geometry?.dispose()); }
   B = build(cur, {state}); scene.add(B.group); scene.add(B.mass);
   const [W, D] = cur.footprint; B.group.position.set(-W / 2, 0, 0); B.mass.position.copy(B.group.position);
   apply(); placeBeats(); setLamps();
-  if (frame) { const r = Math.max(W, D, B.top) * 1.6; camera.position.set(r * 0.7, B.top * 0.7 + 8, -r * 0.9); orbit.target.set(0, B.top * 0.35, D / 2); walking = false; $('walk').classList.remove('on'); orbit.enabled = true; }
+  if (frame) { const r = Math.max(W, D, B.top) * 1.6; camera.fov = 48; camera.updateProjectionMatrix(); camera.position.set(r * 0.7, B.top * 0.7 + 8, -r * 0.9); orbit.target.set(0, B.top * 0.35, D / 2); walking = false; $('walk').classList.remove('on'); orbit.enabled = true; }
 }
 function apply() {
   if (!B) return;
@@ -86,12 +90,36 @@ function setLamps() {
   const rooms = B.rooms.filter(r => walking ? Math.abs(r.level - lvNow) <= 1 : r.level < Math.min(cut, cur.levels.length)).slice(0, 14);
   for (const r of rooms) { const l = new THREE.PointLight(0xffc98a, 14, Math.max(r.w, r.d) * 1.6, 1.6); l.position.set(r.x + r.w / 2 + B.group.position.x, r.z + r.h - 0.6, r.y + r.d / 2 + B.group.position.z); scene.add(l); lamps.push(l); }
 }
+// settings: each hero carries the mood of its references
+const water = new THREE.Mesh(new THREE.PlaneGeometry(600, 600), new THREE.MeshStandardMaterial({color: 0x2a4a52, roughness: 0.08, metalness: 0.3})); water.rotation.x = -Math.PI / 2; water.position.y = -0.7; water.visible = false; scene.add(water);
+const coloured = [new THREE.PointLight(0xff2a3a, 0, 60, 1.4), new THREE.PointLight(0x20d0c8, 0, 60, 1.4)]; coloured.forEach(l => scene.add(l));
+// the wet ground: a real mirror under a thin wet film, so lit things are doubled the way the references double them
+const mirror = new Reflector(new THREE.PlaneGeometry(300, 300), {textureWidth: MOBILE ? 512 : 1024, textureHeight: MOBILE ? 512 : 1024, color: 0x6a6e74});
+mirror.rotation.x = -Math.PI / 2; mirror.position.y = -0.03; mirror.visible = false; scene.add(mirror);
+let SET = 'day';
+function setting(name) {
+  SET = name; const gm = ground.material, sm = street.material; water.visible = false; coloured.forEach(l => l.intensity = 0); mirror.visible = false;
+  gm.transparent = false; gm.opacity = 1; sm.transparent = false; sm.opacity = 1;
+  gm.color.set(0x7a7468); gm.roughness = 1; gm.metalness = 0; sm.roughness = 0.9; sm.color.set(0x3a3a3c); street.visible = true; ground.visible = true;
+  let bg = 0xbfc9cf, hi = 1.1, si = 2.6, sc = 0xfff0dc, sp = [-40, 60, -30], ex = 1.0, nightish = false;
+  if (name === 'tidal') { bg = 0x6d7882; hi = 1.0; si = 1.6; sc = 0xffe2c0; sp = [-50, 22, -10]; gm.color.set(0x8c8678); gm.roughness = 0.12; gm.metalness = 0.35; street.visible = false; }
+  if (name === 'harbour') { bg = 0xa9c8d8; water.visible = true; ground.visible = false; street.visible = false; sp = [-30, 55, -40]; }
+  if (name === 'wetnight' || name === 'redteal') { nightish = true; bg = 0x0a0d12; hi = 0.12; si = 0.05; ex = 1.4; sm.roughness = 0.08; sm.color.set(0x1a1c20); gm.roughness = 0.2; gm.color.set(0x24262a); }
+  if (name === 'redteal') { const [W] = cur.footprint; coloured[0].position.set(-W * 0.2, 4, -6); coloured[0].intensity = 260; coloured[1].position.set(W * 1.2 - W / 2, 9, -7); coloured[1].intensity = 200; }
+  if (['tidal', 'wetnight', 'redteal'].includes(name)) { mirror.visible = true; gm.transparent = true; gm.opacity = name === 'tidal' ? 0.55 : 0.5; sm.transparent = true; sm.opacity = 0.45; gm.needsUpdate = sm.needsUpdate = true; }
+  scene.background = new THREE.Color(bg); scene.fog.color = new THREE.Color(bg); hemi.intensity = hi; sun.intensity = si; sun.color.set(sc); sun.position.set(...sp); renderer.toneMappingExposure = ex;
+  night = nightish; $('night').classList.toggle('on', night);
+}
+function heroShot() { const s = cur.shot; if (!s || !B) return; walking = false; $('walk').classList.remove('on'); orbit.enabled = true;
+  const o = B.group.position; camera.position.set(s.pos[0] + o.x, s.pos[2], s.pos[1] + o.z); orbit.target.set(s.target[0] + o.x, s.target[2], s.target[1] + o.z); camera.fov = s.fov || 40; camera.updateProjectionMatrix(); }
+$('shot').onclick = () => { heroShot(); };
+$('cmp').onclick = () => { const on = !$('cmp').classList.contains('on'); $('cmp').classList.toggle('on', on); $('cmpimg').style.display = on && $('cmpimg').src ? 'block' : 'none'; if (on) { heroShot(); beatsOn = false; $('beats').classList.remove('on'); apply(); } };
+$('cmpo').oninput = e => $('cmpimg').style.opacity = e.target.value;
 // controls
 document.querySelectorAll('#views button').forEach(b => b.onclick = () => { view = b.dataset.v; document.querySelectorAll('#views button').forEach(x => x.classList.toggle('on', x === b)); apply(); });
 $('cut').oninput = e => { cut = +e.target.value; apply(); setLamps(); };
 $('front').onclick = () => { front = !front; $('front').classList.toggle('on', front); apply(); };
-$('night').onclick = () => { night = !night; $('night').classList.toggle('on', night);
-  const c = night ? new THREE.Color(0x0b1018) : new THREE.Color(0xbfc9cf); scene.background = c; scene.fog.color = c; hemi.intensity = night ? 0.15 : 1.1; sun.intensity = night ? 0.05 : 2.6; renderer.toneMappingExposure = night ? 1.3 : 1.0; setLamps(); };
+$('night').onclick = () => { const N = ['wetnight', 'redteal'], home = cur.setting || 'day'; setting(night ? (N.includes(home) ? 'day' : home) : (N.includes(home) ? home : 'wetnight')); setLamps(); };
 $('beats').onclick = () => { beatsOn = !beatsOn; $('beats').classList.toggle('on', beatsOn); apply(); }; $('beats').classList.add('on');
 $('zoom').onclick = () => $('zoom').style.display = 'none';
 

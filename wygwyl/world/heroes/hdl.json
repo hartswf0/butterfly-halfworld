@@ -17,7 +17,8 @@
     "wall": "red brick#1",
     "trim": "cantera",
     "base": "granite",
-    "roof": "concrete"
+    "roof": "concrete",
+    "surround": true
    },
    "levels": [
     {
@@ -1052,6 +1053,38 @@
      "claim": "cast-iron columns carry the shopfront floors",
      "status": "inferred"
     }
+   ],
+   "setting": "redteal",
+   "shot": {
+    "pos": [
+     24,
+     -14,
+     4
+    ],
+    "target": [
+     8,
+     0,
+     9
+    ],
+    "ref": 0
+   },
+   "fit": [
+    {
+     "saw": "the fire escape is one long diagonal flight across the brick between landings",
+     "did": "flights now run the width of the landing, stringers and rails, alternating left and right"
+    },
+    {
+     "saw": "windows sit in carved stone surrounds",
+     "did": "stone surrounds with a keystone on every outside window"
+    },
+    {
+     "saw": "the brick is lit red and teal at night, wet",
+     "did": "a red-and-teal night setting with coloured light raking the facade"
+    },
+    {
+     "saw": "a long hallway of doors (interior reference)",
+     "did": "open: the halls are 4 m stubs; a real corridor needs a deeper plan"
+    }
    ]
   },
   {
@@ -1066,10 +1099,10 @@
    ],
    "party": [],
    "skin": {
-    "wall": "whitewash",
-    "trim": "cantera",
+    "wall": "cantera@8c8e8c",
+    "trim": "cantera@b0b0aa",
     "base": "cantera",
-    "roof": "terracotta"
+    "roof": "slate"
    },
    "levels": [
     {
@@ -1197,8 +1230,9 @@
      "level": 0,
      "a": "street",
      "b": "narthex",
-     "w": 1.8,
-     "h": 3.2
+     "w": 2.0,
+     "h": 3.8,
+     "shape": "lancet"
     },
     {
      "level": 0,
@@ -1223,7 +1257,8 @@
      "n": 4,
      "w": 1.0,
      "h": 3.2,
-     "sill": 2.6
+     "sill": 2.6,
+     "shape": "lancet"
     },
     {
      "level": 0,
@@ -1232,7 +1267,8 @@
      "n": 4,
      "w": 1.0,
      "h": 3.2,
-     "sill": 2.6
+     "sill": 2.6,
+     "shape": "lancet"
     },
     {
      "level": 0,
@@ -1251,7 +1287,8 @@
      "n": 2,
      "w": 0.8,
      "h": 1.8,
-     "sill": 1.8
+     "sill": 1.8,
+     "shape": "lancet"
     }
    ],
    "stairs": [],
@@ -1265,15 +1302,14 @@
      "material": "cantera"
     },
     {
-     "kind": "belfry",
+     "kind": "bellcote",
      "x": 4.5,
-     "y": 2,
-     "h": 9
+     "w": 2.6
     }
    ],
    "roof": {
     "type": "gable",
-    "rise": 3.4,
+    "rise": 5.6,
     "axis": "y",
     "overhang": 0.4
    },
@@ -1289,7 +1325,7 @@
    ],
    "facts": [
     {
-     "claim": "a whitewashed nave with a bell over the door, on the tidal flat",
+     "claim": "a dark stone nave, its bell on the front gable, alone on the tidal flat",
      "status": "reference"
     },
     {
@@ -1307,6 +1343,51 @@
     {
      "claim": "the white temple is vaulted over the ruin, not on it",
      "status": "invented"
+    }
+   ],
+   "setting": "tidal",
+   "shot": {
+    "pos": [
+     -30,
+     -66,
+     1.3
+    ],
+    "target": [
+     4.5,
+     12,
+     6.0
+    ],
+    "ref": 0,
+    "fov": 24
+   },
+   "fit": [
+    {
+     "saw": "dark grey stone, not whitewash",
+     "did": "walls re-skinned in grey cantera"
+    },
+    {
+     "saw": "a steep pointed gable; the bell hangs in a bell-cote on the gable apex, not a tower",
+     "did": "roof raised to 5.6 m; a pierced bell-cote rises from the front gable past the ridge"
+    },
+    {
+     "saw": "tall pointed windows",
+     "did": "lancet arches on the nave and the narthex"
+    },
+    {
+     "saw": "it stands alone on a wet tidal flat under storm cloud, mirrored",
+     "did": "a tidal setting: wet reflecting sand, low storm light"
+    },
+    {
+     "saw": "inside, a shaft of light breaks into colour on a wet floor (interior reference)",
+     "did": "open: needs a light shaft and a wet floor material"
+    },
+    {
+     "saw": "a tall pointed door in the front gable",
+     "did": "the street door is a 3.8 m lancet"
+    },
+    {
+     "saw": "the chapel is small in a wide, low frame; the flat and the sky carry it",
+     "did": "the hero shot pulled back to a 24\u00b0 lens near the ground"
     }
    ]
   },
@@ -1583,6 +1664,18 @@
      "x": 15.6,
      "z": 6,
      "text": "NEW SINGLE"
+    },
+    {
+     "kind": "posters",
+     "x0": 1.0,
+     "x1": 5.0,
+     "n": 3
+    },
+    {
+     "kind": "posters",
+     "x0": 11.0,
+     "x1": 15.0,
+     "n": 3
     }
    ],
    "roof": {
@@ -1616,6 +1709,34 @@
     {
      "claim": "one stair to the foyer; the auditorium exits straight to the street",
      "status": "inferred"
+    }
+   ],
+   "setting": "wetnight",
+   "shot": {
+    "pos": [
+     -12,
+     -16,
+     1.6
+    ],
+    "target": [
+     8,
+     0,
+     3
+    ],
+    "ref": 0
+   },
+   "fit": [
+    {
+     "saw": "a row of glowing poster boxes at street level, doubled in the wet street",
+     "did": "six lit poster cases flank the doors; a wet night street that reflects"
+    },
+    {
+     "saw": "a dark red corridor with benches (interior reference)",
+     "did": "partly: the auditorium is velvet and carpet; the corridor is open"
+    },
+    {
+     "saw": "a ticket hall with a counter under a lit sign",
+     "did": "the lobby booth and ropes; the sign is open"
     }
    ]
   },
@@ -1818,6 +1939,10 @@
     },
     {
      "kind": "piles"
+    },
+    {
+     "kind": "pergola",
+     "d": 4
     }
    ],
    "roof": {
@@ -1848,6 +1973,34 @@
     {
      "claim": "every room has its own window",
      "status": "checked"
+    }
+   ],
+   "setting": "harbour",
+   "shot": {
+    "pos": [
+     -6,
+     -9,
+     1.7
+    ],
+    "target": [
+     9,
+     -2,
+     2.2
+    ],
+    "ref": 1
+   },
+   "fit": [
+    {
+     "saw": "timber posts and beams over the terrace tables, canvas between",
+     "did": "a pergola over the 4 m terrace with a balustrade"
+    },
+    {
+     "saw": "the harbour and masts right behind",
+     "did": "a harbour setting with water around the pier"
+    },
+    {
+     "saw": "looking out to the sea from inside (interior reference)",
+     "did": "the caf\u00e9's front windows face the terrace and the water"
     }
    ]
   },
@@ -1984,8 +2137,9 @@
      "side": "front",
      "n": 1,
      "w": 0.6,
-     "h": 1.4,
-     "sill": 1.6
+     "h": 2.0,
+     "sill": 1.6,
+     "shape": "lancet"
     },
     {
      "level": "1-3",
@@ -1993,8 +2147,9 @@
      "side": "left",
      "n": 1,
      "w": 0.6,
-     "h": 1.4,
-     "sill": 1.6
+     "h": 2.0,
+     "sill": 1.6,
+     "shape": "lancet"
     },
     {
      "level": 4,
@@ -2078,12 +2233,15 @@
    "exterior": [
     {
      "kind": "spire",
-     "h": 8
+     "h": 14
+    },
+    {
+     "kind": "buttress"
     }
    ],
    "roof": {
     "type": "pyramid",
-    "rise": 6
+    "rise": 8
    },
    "eras": {
     "born": 2,
@@ -2108,6 +2266,38 @@
      "claim": "the clock faces are the clock room's windows; you see the hands from behind",
      "status": "invented"
     }
+   ],
+   "setting": "day",
+   "shot": {
+    "pos": [
+     -9,
+     -11,
+     1.6
+    ],
+    "target": [
+     3.5,
+     3.5,
+     14
+    ],
+    "ref": 0
+   },
+   "fit": [
+    {
+     "saw": "stepped buttresses at the corners",
+     "did": "three-stage buttresses on every corner"
+    },
+    {
+     "saw": "tall pointed windows on the shaft",
+     "did": "lancet windows on every shaft storey"
+    },
+    {
+     "saw": "a steep spire, taller than the shaft's width suggests",
+     "did": "pyramid raised to 8 m and a 14 m needle"
+    },
+    {
+     "saw": "gears, chain and the clock seen from behind (interior)",
+     "did": "gears in the clock room; the chain is open"
+    }
    ]
   },
   {
@@ -2125,7 +2315,7 @@
     "right"
    ],
    "skin": {
-    "wall": "red brick#1",
+    "wall": "red brick#1@b8907c",
     "trim": "marble",
     "base": "marble",
     "roof": "concrete"
@@ -2436,6 +2626,13 @@
     },
     {
      "kind": "cornice"
+    },
+    {
+     "kind": "bay",
+     "x": 2.3,
+     "w": 2.4,
+     "from": 0,
+     "to": 1
     }
    ],
    "roof": {
@@ -2469,6 +2666,30 @@
     {
      "claim": "a marble stoop climbs the 1 m to the raised parlour floor",
      "status": "reference"
+    }
+   ],
+   "setting": "day",
+   "shot": {
+    "pos": [
+     -7,
+     -9,
+     1.7
+    ],
+    "target": [
+     2.5,
+     2,
+     3
+    ],
+    "ref": 1
+   },
+   "fit": [
+    {
+     "saw": "a brownstone row: stoops climbing to raised doors, bays pushed out",
+     "did": "brownstone skin and a two-storey bay beside the stoop"
+    },
+    {
+     "saw": "a back porch hung with plants (interior reference)",
+     "did": "the back porch and its stair; plants are open"
     }
    ]
   }

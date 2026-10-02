@@ -6,10 +6,12 @@ import * as THREE from 'three';
 // ——— materials from the archive library, laid in metres ———
 const MAT = new Map(); let LIB = null, ATLAS = null;
 export function useLibrary(lib, atlas) { LIB = lib; ATLAS = atlas; MAT.clear(); }
-const libIdx = name => { const m = LIB.materials.find(m => m.name === name); return m ? m.base : 0; };
+const libIdx = name => { const m = LIB.materials.find(m => m.name === name.split('@')[0].split('#')[0]); return m ? m.base : 0; };
 export function tile(name, opt = {}) {
+  if (name.includes('@')) { const [n, t] = name.split('@'); return tile(n, {...opt, tint: '#' + t}); }   // 'cantera@8a8a88' → tinted
   if (name.includes('#')) { const [n, v] = name.split('#'); return tile(n, {...opt, variant: +v}); }   // 'red brick#1' → the second cut of red brick
   const key = name + (opt.variant || 0) + (opt.scale || 1) + (opt.tint || '');
+  const tintKey = opt.tint || '';
   if (MAT.has(key)) return MAT.get(key);
   const m = new THREE.MeshStandardMaterial({color: opt.tint || 0xffffff, roughness: opt.rough ?? 0.85, metalness: opt.metal ?? 0, side: opt.side ?? THREE.FrontSide});
   const role = LIB.materials.find(m => m.name === name)?.role, idx = libIdx(name) + (opt.variant || 0), sc = opt.scale || (role === 'wall' || role === 'atlantean' ? 3.0 : role === 'roof' ? 2.4 : 2.0);
@@ -20,7 +22,7 @@ export function tile(name, opt = {}) {
       .replace('#include <map_fragment>', `{ vec2 mm = vM / ${sc.toFixed(2)}; vec2 cell = vec2(mod(${idx.toFixed(1)}, uG.x), floor(${idx.toFixed(1)} / uG.x)); vec2 f = fract(mm);
         vec2 uv = vec2((cell.x + f.x) / uG.x, 1.0 - (cell.y + 1.0 - f.y) / uG.y); vec4 t = textureGrad(uA, uv, dFdx(mm) / uG, dFdy(mm) / uG); diffuseColor.rgb *= mix(vec3(dot(t.rgb, vec3(0.33))), t.rgb, 0.85) * 1.12; }`);
   };
-  m.customProgramCacheKey = () => `tile-${idx}-${sc}`;   // the tile index is baked into the shader: without this every tile shares the first one's program
+  m.customProgramCacheKey = () => `tile-${idx}-${sc}-${tintKey}`;   // the tile index is baked into the shader: without this every tile shares the first one's program
   m.map = null; m.userData.lib = name; MAT.set(key, m); return m;
 }
 const flat = (c, o = {}) => new THREE.MeshStandardMaterial({color: c, roughness: o.r ?? 0.6, metalness: o.m ?? 0, emissive: o.e ?? 0, emissiveIntensity: o.ei ?? 1, transparent: !!o.t, opacity: o.t ?? 1, side: o.side ?? THREE.FrontSide});
@@ -86,7 +88,7 @@ function placeOpenings(H, LW, issues) {
     const s = cand[0], w = d.w || 0.9;
     if (!s || s.b - s.a < w + 0.2) { issues.push({rule: 'doors on walls', door: d, msg: `door ${d.a}→${d.b} on level ${d.level} has no wall long enough to sit in`}); continue; }
     const at = d.at != null ? Math.min(Math.max(d.at, s.a + w / 2 + 0.1), s.b - w / 2 - 0.1) : (s.a + s.b) / 2;
-    s.openings.push({s: at, w, z0: 0, z1: d.h || 2.2, kind: 'door', outside: !!outside, door: d});
+    s.openings.push({s: at, w, z0: 0, z1: d.h || 2.2, kind: 'door', outside: !!outside, door: d, shape: d.shape});
     d._seg = s; d._at = at;
   }
   for (const wd of H.windows || []) {
@@ -221,15 +223,17 @@ function prop(kind, x, y, z, rot, g) {
 // ——— the exterior kit ———
 function exterior(H, e, g, top) {
   const [FW, FD] = H.footprint, L = H.levels;
-  if (e.kind === 'fireescape') {                                    // a landing at each storey, a flight between, the drop ladder
+  if (e.kind === 'fireescape') {                                    // landings at every storey; between them one long diagonal flight across the facade, as the shots show it
     for (let k = e.from; k <= e.to; k++) { const z = L[k].z;
       g.add(box(e.x, e.x + e.w, -1.3, -0.15, z - 0.06, z, IRON));
-      g.add(box(e.x, e.x + e.w, -1.33, -1.28, z, z + 1.0, IRON)); for (let i = 0; i <= 8; i++) g.add(box(e.x + i * e.w / 8 - 0.015, e.x + i * e.w / 8 + 0.015, -1.31, -1.29, z, z + 1.0, IRON));
-      if (k < e.to) { const z2 = L[k + 1].z, n = Math.ceil((z2 - z) / 0.22), right = k % 2 === 0;
-        for (let i = 0; i < n; i++) { const f = (i + 0.5) / n, xx = right ? e.x + 0.6 + f * (e.w - 1.6) : e.x + e.w - 0.6 - f * (e.w - 1.6);
-          g.add(box(xx - 0.12, xx + 0.12, -1.25, -0.6, z + (i + 1) * (z2 - z) / n - 0.04, z + (i + 1) * (z2 - z) / n, IRON)); } } }
-    const z = L[e.from].z; for (let i = 0; i < Math.floor(z / 0.3); i++) g.add(box(e.x + 0.3, e.x + 0.8, -1.2, -1.15, z - 0.3 - i * 0.3, z - 0.27 - i * 0.3, IRON));
-    g.add(box(e.x + 0.28, e.x + 0.31, -1.2, -1.15, 1.6, z, IRON)); g.add(box(e.x + 0.79, e.x + 0.82, -1.2, -1.15, 1.6, z, IRON));
+      g.add(box(e.x, e.x + e.w, -1.33, -1.28, z + 0.95, z + 1.0, IRON)); for (let i = 0; i <= 10; i++) g.add(box(e.x + i * e.w / 10 - 0.012, e.x + i * e.w / 10 + 0.012, -1.31, -1.29, z, z + 1.0, IRON));
+      g.add(box(e.x - 0.03, e.x + 0.03, -1.3, -0.15, z + 0.95, z + 1.0, IRON)); g.add(box(e.x + e.w - 0.03, e.x + e.w + 0.03, -1.3, -0.15, z + 0.95, z + 1.0, IRON));
+      if (k < e.to) { const z2 = L[k + 1].z, n = Math.ceil((z2 - z) / 0.2), ltr = k % 2 === 0, x0 = ltr ? e.x + 0.4 : e.x + e.w - 0.4, x1 = ltr ? e.x + e.w - 0.4 : e.x + 0.4;
+        for (let i = 0; i < n; i++) { const f = (i + 0.5) / n, xx = x0 + (x1 - x0) * f, zz = z + (z2 - z) * (i + 1) / n; g.add(box(xx - 0.13, xx + 0.13, -1.0, -0.45, zz - 0.035, zz, IRON)); }
+        const len = Math.hypot(x1 - x0, z2 - z), ang = Math.atan2(z2 - z, x1 - x0);
+        for (const [yy, dz] of [[-1.02, 0.0], [-0.43, 0.0], [-1.02, 0.9], [-0.43, 0.9]]) { const st = new THREE.Mesh(new THREE.BoxGeometry(len, dz ? 0.04 : 0.12, 0.04), IRON); st.position.set((x0 + x1) / 2, (z + z2) / 2 + dz, yy); st.rotation.z = ang; g.add(st); } } }
+    const z = L[e.from].z; for (let i = 0; i < Math.floor((z - 1.8) / 0.3); i++) g.add(box(e.x + 0.3, e.x + 0.8, -1.2, -1.15, z - 0.3 - i * 0.3, z - 0.27 - i * 0.3, IRON));
+    g.add(box(e.x + 0.28, e.x + 0.31, -1.2, -1.15, 1.8, z, IRON)); g.add(box(e.x + 0.79, e.x + 0.82, -1.2, -1.15, 1.8, z, IRON));
   }
   if (e.kind === 'stoop') { const n = Math.ceil(e.rise / 0.17), m = tile(e.material || 'marble', {rough: 0.4});
     for (let i = 0; i < n; i++) g.add(box(e.x, e.x + e.w, -(n - i) * 0.3, 0, 0, (i + 1) * e.rise / n, m)); }
@@ -241,7 +245,16 @@ function exterior(H, e, g, top) {
     for (let i = 0; i < n; i++) { const a = box(e.x + i * e.w / n, e.x + (i + 1) * e.w / n, -1.6, 0, z - 0.04, z, flat(i % 2 && e.stripes !== false ? 0xf1ece0 : 0xb8322a, {side: THREE.DoubleSide})); a.rotation.x = 0; a.geometry.rotateX(0); g.add(a); }
     g.add(box(e.x, e.x + e.w, -1.62, -1.58, z - 0.35, z, flat(0xb8322a))); }
   if (e.kind === 'cornice') { g.add(box(-0.3, FW + 0.3, -0.45, 0.2, top - 0.6, top - 0.2, tile(H.skin.trim))); g.add(box(-0.35, FW + 0.35, -0.55, 0.2, top - 0.2, top, tile(H.skin.trim))); }
-  if (e.kind === 'belfry') { const z = top + 0.2, h = e.h; g.add(box(e.x - 1.4, e.x + 1.4, e.y - 1.4, e.y + 1.4, z - 3, z + h * 0.55, tile(H.skin.wall)));
+  if (e.kind === 'bellcote') {                                      // the bell hung in the front gable itself: a wall rising past the ridge, pierced, capped
+    const zr = top + (H.roof.rise || 0), w = e.w || 2.6, z0 = zr - 2.2, z1 = zr + 2.6, t = 0.7, m = tile(H.skin.wall);
+    g.add(box(e.x - w / 2, e.x - 0.55, -0.2, t - 0.2, z0, z1, m)); g.add(box(e.x + 0.55, e.x + w / 2, -0.2, t - 0.2, z0, z1, m)); g.add(box(e.x - 0.55, e.x + 0.55, -0.2, t - 0.2, z0, zr - 0.2, m));
+    g.add(box(e.x - 0.55, e.x + 0.55, -0.2, t - 0.2, zr + 1.5, z1, m));
+    for (let i = 0; i < 4; i++) { const k = 0.55 * (i + 1) / 4; g.add(box(e.x - 0.55, e.x - 0.55 + k, -0.2, t - 0.2, zr + 1.0 + i * 0.12, zr + 1.12 + i * 0.12, m)); g.add(box(e.x + 0.55 - k, e.x + 0.55, -0.2, t - 0.2, zr + 1.0 + i * 0.12, zr + 1.12 + i * 0.12, m)); }
+    const sh = new THREE.Shape(); sh.moveTo(-w / 2 - 0.15, 0); sh.lineTo(w / 2 + 0.15, 0); sh.lineTo(0, 1.1); sh.closePath();
+    const cap = new THREE.Mesh(new THREE.ExtrudeGeometry(sh, {depth: t + 0.2, bevelEnabled: false}), tile(H.skin.roof)); cap.position.set(e.x, z1, -0.3); g.add(cap);
+    const bell = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.42, 0.7, 16, 1, true), flat(0x8a6a2a, {m: 0.9, r: 0.3, side: THREE.DoubleSide})); bell.position.set(e.x, zr + 0.55, 0.15); g.add(bell);
+    g.add(box(e.x - 0.04, e.x + 0.04, 0.1, 0.2, z1 + 1.1, z1 + 2.1, IRON)); g.add(box(e.x - 0.3, e.x + 0.3, 0.1, 0.2, z1 + 1.65, z1 + 1.75, IRON)); }
+  if (e.kind === 'belfry') { const z = top + 0.2 + (e.onRidge ? (H.roof.rise || 0) - 1.2 : 0), h = e.h; g.add(box(e.x - 1.4, e.x + 1.4, e.y - 1.4, e.y + 1.4, z - 3, z + h * 0.55, tile(H.skin.wall)));
     for (const [a, b] of [[-1.4, -1.4], [1.0, -1.4], [-1.4, 1.0], [1.0, 1.0]]) g.add(box(e.x + a, e.x + a + 0.4, e.y + b, e.y + b + 0.4, z + h * 0.55, z + h * 0.85, tile(H.skin.wall)));
     g.add(box(e.x - 1.6, e.x + 1.6, e.y - 1.6, e.y + 1.6, z + h * 0.85, z + h * 0.9, tile(H.skin.trim)));
     const bell = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.55, 0.8, 16, 1, true), flat(0x8a6a2a, {m: 0.9, r: 0.3, side: THREE.DoubleSide})); bell.position.set(e.x, z + h * 0.7, e.y); g.add(bell);
@@ -264,6 +277,21 @@ function exterior(H, e, g, top) {
   if (e.kind === 'piles') for (let x = 0; x <= FW; x += 3.5) for (let y = -4; y <= FD; y += 3) { const p = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.2, 4, 8), flat(0x2a2420)); p.position.set(x, -2, y); g.add(p); }
   if (e.kind === 'porch') { const z = L[0].z; g.add(box(0, FW, FD - 1.5 - 0.01 - 0, FD - 1.5 + e.d, z - 0.1, z, tile('planks')));
     for (let i = 0; i < 6; i++) g.add(box(FW - 1.2, FW - 0.1, FD - 1.5 + e.d + i * 0.28, FD - 1.5 + e.d + (i + 1) * 0.28, 0, z - (i + 1) * z / 6, tile('planks'))); }
+  if (e.kind === 'pergola') { const z = L[0].z, h = 3.0, d = e.d || 4;               // timber posts and beams over the terrace, canvas between
+    for (let x = 0; x <= FW + 0.01; x += FW / 4) { g.add(box(x - 0.1, x + 0.1, -d - 0.1, -d + 0.1, z, z + h, tile('wood siding'))); }
+    g.add(box(-0.2, FW + 0.2, -d - 0.12, -d + 0.12, z + h, z + h + 0.25, tile('wood siding'))); for (let x = 0; x <= FW + 0.01; x += FW / 8) g.add(box(x - 0.06, x + 0.06, -d - 0.3, 0, z + h + 0.25, z + h + 0.4, tile('wood siding')));
+    for (let x = 0; x < FW; x += 1.2) g.add(box(x, x + 1.0, -d, 0, z + h + 0.4, z + h + 0.42, flat(0xf1ece0, {side: THREE.DoubleSide, t: 0.85})));
+    g.add(box(-0.2, FW + 0.2, -d - 0.05, -d + 0.05, z + 0.9, z + 1.0, tile('wood siding'))); for (let x = 0; x <= FW; x += 0.25) g.add(box(x - 0.02, x + 0.02, -d - 0.02, -d + 0.02, z, z + 0.9, tile('wood siding'))); }
+  if (e.kind === 'posters') { const z = L[0].z; for (let i = 0; i < e.n; i++) { const x = e.x0 + i * (e.x1 - e.x0) / Math.max(1, e.n - 1), c = [0xff3a6a, 0xffb020, 0x40c8ff, 0xff6020, 0xc040ff, 0x40ff9a][i % 6];
+      g.add(box(x - 0.6, x + 0.6, -0.5, -0.3, z + 0.4, z + 2.4, flat(c, {e: c, ei: 1.6}))); g.add(box(x - 0.66, x + 0.66, -0.32, -0.16, z + 0.34, z + 2.46, flat(0x1a1c20, {m: 0.6}))); } }
+  if (e.kind === 'buttress') for (const [x, y] of [[0, 0], [FW, 0], [0, FD], [FW, FD]]) { const sx = x ? 1 : -1, sy = y ? 1 : -1;
+    for (let k = 0; k < 3; k++) g.add(box(x + sx * (0.0 + 0) - (sx < 0 ? 0.7 - k * 0.15 : 0), x + (sx > 0 ? 0.7 - k * 0.15 : 0), y - (sy < 0 ? 0.7 - k * 0.15 : 0), y + (sy > 0 ? 0.7 - k * 0.15 : 0), k * top / 3, (k + 1) * top / 3 - 0.3, tile(H.skin.wall))); }
+  if (e.kind === 'bay') { const z0 = L[e.from].z, z1 = L[e.to].z + L[e.to].h, x = e.x, w = e.w, dd = 0.9;          // a bay window: three faces of glass pushed out from the front
+    g.add(box(x, x + w, -dd, 0, z0 - 0.3, z0, tile(H.skin.trim))); g.add(box(x - 0.05, x + w + 0.05, -dd - 0.05, 0, z1 - 0.25, z1, tile(H.skin.trim)));
+    for (let k = e.from; k <= e.to; k++) { const zb = L[k].z + 0.6, zt = L[k].z + L[k].h - 0.5;
+      g.add(box(x + 0.15, x + w - 0.15, -dd - 0.01, -dd + 0.01, zb, zt, GLASS)); g.add(box(x, x + 0.02, -dd, -0.1, zb, zt, GLASS)); g.add(box(x + w - 0.02, x + w, -dd, -0.1, zb, zt, GLASS));
+      g.add(box(x, x + w, -dd - 0.04, 0, zb - 0.6, zb, tile(H.skin.wall))); g.add(box(x, x + w, -dd - 0.04, 0, zt, L[k].z + L[k].h, tile(H.skin.wall)));
+      for (const xx of [x, x + 0.12, x + w / 2 - 0.05, x + w - 0.12]) g.add(box(xx, xx + 0.1, -dd - 0.03, -dd + 0.03, zb, zt, tile(H.skin.trim))); } }
   if (e.kind === 'spire') { const s = new THREE.Mesh(new THREE.ConeGeometry(0.4, e.h, 8), tile(H.skin.roof)); s.position.set(FW / 2, top + 6 + e.h / 2, FD / 2); g.add(s); }
 }
 
@@ -300,6 +328,17 @@ export function build(Hraw, opt = {}) {
         // the opening itself: frame, glass, a door leaf half open
         const fr = (a0, a1, b0, b1) => lg.add(s.o === 'h' ? box(a0, a1, s.c - (s.ext ? 0.2 : 0.08), s.c + (s.ext ? 0.2 : 0.08), b0, b1, trim) : box(s.c - (s.ext ? 0.2 : 0.08), s.c + (s.ext ? 0.2 : 0.08), a0, a1, b0, b1, trim));
         fr(a - 0.08, a, z0 + o.z0, z0 + o.z1 + 0.08); fr(b, b + 0.08, z0 + o.z0, z0 + o.z1 + 0.08); fr(a - 0.1, b + 0.1, z0 + o.z1, z0 + o.z1 + 0.14);
+        if (o.shape === 'lancet') {                 // a pointed arch: wall wedges fill the top corners of the opening
+          const hh = Math.min(o.w * 0.9, (o.z1 - o.z0) * 0.4), zt = z0 + o.z1, n = 6;
+          for (let i = 0; i < n; i++) { const f0 = i / n, f1 = (i + 1) / n, zA = zt - hh + hh * f0, zB = zt - hh + hh * f1, cut = (o.w / 2) * (1 - Math.sqrt(Math.max(0, 1 - Math.pow(1 - f1, 2) * 0 - f1 * f1)) * 0) * f1;
+            const wl = (o.w / 2) * (1 - Math.sqrt(1 - f1 * f1)) + (o.w / 2) * f1 * 0.0;
+            const ww = (o.w / 2) * (1 - Math.cos(Math.asin(Math.min(1, f1))));
+            const k = (o.w / 2) * f1;                                  // straight pointed: the wedge grows linearly to the apex
+            lg.add(s.o === 'h' ? box(a, a + k, s.c - 0.16, s.c + 0.16, zA, zB, skin) : box(s.c - 0.16, s.c + 0.16, a, a + k, zA, zB, skin));
+            lg.add(s.o === 'h' ? box(b - k, b, s.c - 0.16, s.c + 0.16, zA, zB, skin) : box(s.c - 0.16, s.c + 0.16, b - k, b, zA, zB, skin)); } }
+        if (o.kind === 'window' && H.skin.surround && s.ext && o.shape !== 'lancet' && o.shape !== 'clock') {   // stone surrounds: a deeper frame, a keystone
+          const out = s.P ? -1 : 1, sur = (a0, a1, b0, b1) => lg.add(s.o === 'h' ? box(a0, a1, s.c + out * 0.16, s.c + out * 0.26, b0, b1, trim) : box(s.c + out * 0.16, s.c + out * 0.26, a0, a1, b0, b1, trim));
+          sur(a - 0.25, a - 0.05, z0 + o.z0 - 0.1, z0 + o.z1 + 0.1); sur(b + 0.05, b + 0.25, z0 + o.z0 - 0.1, z0 + o.z1 + 0.1); sur(a - 0.3, b + 0.3, z0 + o.z1 + 0.05, z0 + o.z1 + 0.32); sur(o.s - 0.14, o.s + 0.14, z0 + o.z1 + 0.05, z0 + o.z1 + 0.5); sur(a - 0.3, b + 0.3, z0 + o.z0 - 0.18, z0 + o.z0 - 0.05); }
         if (o.kind === 'window') { fr(a - 0.12, b + 0.12, z0 + o.z0 - 0.08, z0 + o.z0);
           if (!ruin) { const gl = s.o === 'h' ? box(a, b, s.c - 0.01, s.c + 0.01, z0 + o.z0, z0 + o.z1, o.shape === 'rose' ? flat(0x6040a0, {e: 0x8050ff, ei: 0.5, t: 0.75}) : o.shape === 'clock' ? flat(0xf3ecd8, {e: 0xfff0c8, ei: 0.25, t: 0.85}) : GLASS)
               : box(s.c - 0.01, s.c + 0.01, a, b, z0 + o.z0, z0 + o.z1, GLASS); gl.castShadow = false; lg.add(gl);
