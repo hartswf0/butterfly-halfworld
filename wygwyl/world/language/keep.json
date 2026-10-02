@@ -1,0 +1,62 @@
+{
+ "reviewed": 30,
+ "note": "eye-review gate: kept only real buildings and structures; rejected interface frames, abstract shards, duplicates, crowds",
+ "keep": {
+  "Fc5104d82": {
+   "kind": "a monument",
+   "name": "the glowing monoliths"
+  },
+  "F35e0bf70": {
+   "kind": "a temple",
+   "name": "the vaulted arcade"
+  },
+  "F95caa5b8": {
+   "kind": "a futuristic structure",
+   "name": "the ribbed wooden vault"
+  },
+  "F8462fe30": {
+   "kind": "a temple",
+   "name": "the nave of silhouettes"
+  },
+  "F05ac04e8": {
+   "kind": "a temple",
+   "name": "the carved temple"
+  },
+  "F93ca4088": {
+   "kind": "a tower",
+   "name": "the burning tower"
+  },
+  "F38c7d667": {
+   "kind": "a church",
+   "name": "the gothic chapel"
+  },
+  "Fe7d21802": {
+   "kind": "a ruin",
+   "name": "the broken colonnade"
+  },
+  "F09f8a4af": {
+   "kind": "a theater",
+   "name": "the NEW SINGLE marquee"
+  },
+  "F4bd4d78a": {
+   "kind": "a ruin",
+   "name": "the gothic arcade ruin"
+  },
+  "Fc83d4a57": {
+   "kind": "a house",
+   "name": "the stone hut"
+  },
+  "F0c4daf44": {
+   "kind": "a factory",
+   "name": "the drawn chimney works"
+  },
+  "F4859acb0": {
+   "kind": "a ruin",
+   "name": "the drawn white ruin"
+  },
+  "Fb0543ff6": {
+   "kind": "a house",
+   "name": "the teal house"
+  }
+ }
+}

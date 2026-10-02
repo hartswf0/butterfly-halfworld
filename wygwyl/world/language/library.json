@@ -1,0 +1,904 @@
+{
+ "version": "library-v2",
+ "cols": 8,
+ "rows": 8,
+ "tile": 256,
+ "materials": [
+  {
+   "name": "red brick",
+   "prompt": "weathered red brick wall",
+   "role": "wall",
+   "base": 0,
+   "variants": [
+    {
+     "src": "other",
+     "k": "af561d096952",
+     "fit": 0.316,
+     "mean": [
+      0.554,
+      0.165,
+      0.097
+     ]
+    },
+    {
+     "src": "generated",
+     "k": "49e52354f600",
+     "fit": 0.315,
+     "mean": [
+      0.423,
+      0.129,
+      0.082
+     ]
+    }
+   ]
+  },
+  {
+   "name": "yellow brick",
+   "prompt": "old yellow brick wall",
+   "role": "wall",
+   "base": 2,
+   "variants": [
+    {
+     "src": "generated",
+     "k": "252a1958ceb7",
+     "fit": 0.268,
+     "mean": [
+      0.91,
+      0.316,
+      0.317
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "d68f9563e642",
+     "fit": 0.265,
+     "mean": [
+      0.607,
+      0.448,
+      0.394
+     ]
+    }
+   ]
+  },
+  {
+   "name": "whitewash",
+   "prompt": "whitewashed plaster wall",
+   "role": "wall",
+   "base": 4,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "5877f08648ee",
+     "fit": 0.326,
+     "mean": [
+      0.664,
+      0.632,
+      0.618
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "90a596fc0ab1",
+     "fit": 0.311,
+     "mean": [
+      0.84,
+      0.747,
+      0.693
+     ]
+    }
+   ]
+  },
+  {
+   "name": "stucco",
+   "prompt": "cracked pastel stucco wall",
+   "role": "wall",
+   "base": 6,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "0cfa5d573740",
+     "fit": 0.309,
+     "mean": [
+      0.742,
+      0.762,
+      0.795
+     ]
+    },
+    {
+     "src": "generated",
+     "k": "b2f5575e7314",
+     "fit": 0.3,
+     "mean": [
+      0.977,
+      0.511,
+      0.737
+     ]
+    }
+   ]
+  },
+  {
+   "name": "peeling paint",
+   "prompt": "peeling paint on an old wall",
+   "role": "wall",
+   "base": 8,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "393593806403",
+     "fit": 0.302,
+     "mean": [
+      0.598,
+      0.461,
+      0.437
+     ]
+    },
+    {
+     "src": "generated",
+     "k": "8738dd94ce5e",
+     "fit": 0.292,
+     "mean": [
+      0.482,
+      0.416,
+      0.346
+     ]
+    }
+   ]
+  },
+  {
+   "name": "teal paint",
+   "prompt": "weathered teal painted wall",
+   "role": "wall",
+   "base": 10,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "bd4917a04de4",
+     "fit": 0.322,
+     "mean": [
+      0.121,
+      0.458,
+      0.659
+     ]
+    },
+    {
+     "src": "generated",
+     "k": "161a6126acf8",
+     "fit": 0.315,
+     "mean": [
+      0.198,
+      0.372,
+      0.316
+     ]
+    }
+   ]
+  },
+  {
+   "name": "concrete",
+   "prompt": "stained raw concrete wall",
+   "role": "wall",
+   "base": 12,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "a6b8c7754202",
+     "fit": 0.303,
+     "mean": [
+      0.349,
+      0.27,
+      0.24
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "1aa50bc751d8",
+     "fit": 0.296,
+     "mean": [
+      0.649,
+      0.677,
+      0.709
+     ]
+    }
+   ]
+  },
+  {
+   "name": "block",
+   "prompt": "grey concrete block wall",
+   "role": "wall",
+   "base": 14,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "b8928707daa2",
+     "fit": 0.293,
+     "mean": [
+      0.39,
+      0.39,
+      0.389
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "b5d78054156e",
+     "fit": 0.287,
+     "mean": [
+      0.656,
+      0.656,
+      0.656
+     ]
+    }
+   ]
+  },
+  {
+   "name": "corrugated",
+   "prompt": "rusted corrugated metal sheet wall",
+   "role": "wall",
+   "base": 16,
+   "variants": [
+    {
+     "src": "generated",
+     "k": "f52015b8b9b6",
+     "fit": 0.318,
+     "mean": [
+      0.608,
+      0.34,
+      0.201
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "3df3bfd1860d",
+     "fit": 0.298,
+     "mean": [
+      0.605,
+      0.252,
+      0.134
+     ]
+    }
+   ]
+  },
+  {
+   "name": "rust",
+   "prompt": "rusted steel plate with streaks",
+   "role": "wall",
+   "base": 18,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "80044bac2306",
+     "fit": 0.328,
+     "mean": [
+      0.357,
+      0.304,
+      0.213
+     ]
+    },
+    {
+     "src": "generated",
+     "k": "2fa36422bc2a",
+     "fit": 0.315,
+     "mean": [
+      0.503,
+      0.25,
+      0.069
+     ]
+    }
+   ]
+  },
+  {
+   "name": "wood siding",
+   "prompt": "weathered wooden siding boards",
+   "role": "wall",
+   "base": 20,
+   "variants": [
+    {
+     "src": "generated",
+     "k": "0d0a63d429d7",
+     "fit": 0.311,
+     "mean": [
+      0.509,
+      0.385,
+      0.278
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "07b3ebef8970",
+     "fit": 0.308,
+     "mean": [
+      0.668,
+      0.686,
+      0.662
+     ]
+    }
+   ]
+  },
+  {
+   "name": "tile",
+   "prompt": "old cracked ceramic wall tiles",
+   "role": "wall",
+   "base": 22,
+   "variants": [
+    {
+     "src": "generated",
+     "k": "96bb3d8ded37",
+     "fit": 0.295,
+     "mean": [
+      0.313,
+      0.415,
+      0.448
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "08846758b83c",
+     "fit": 0.286,
+     "mean": [
+      0.764,
+      0.811,
+      0.787
+     ]
+    }
+   ]
+  },
+  {
+   "name": "azulejo",
+   "prompt": "blue painted azulejo tiles",
+   "role": "wall",
+   "base": 24,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "ce411294f788",
+     "fit": 0.29,
+     "mean": [
+      0.48,
+      0.455,
+      0.5
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "cf70a1e037e7",
+     "fit": 0.29,
+     "mean": [
+      0.475,
+      0.449,
+      0.495
+     ]
+    }
+   ]
+  },
+  {
+   "name": "tezontle",
+   "prompt": "red volcanic stone wall",
+   "role": "wall",
+   "base": 26,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "2d012ca13b8e",
+     "fit": 0.335,
+     "mean": [
+      0.369,
+      0.175,
+      0.165
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "ae884ca616a1",
+     "fit": 0.307,
+     "mean": [
+      0.561,
+      0.238,
+      0.13
+     ]
+    }
+   ]
+  },
+  {
+   "name": "cantera",
+   "prompt": "carved pale limestone wall",
+   "role": "wall",
+   "base": 28,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "d3674cc1911f",
+     "fit": 0.316,
+     "mean": [
+      0.486,
+      0.433,
+      0.35
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "0e576a99717e",
+     "fit": 0.308,
+     "mean": [
+      0.482,
+      0.409,
+      0.342
+     ]
+    }
+   ]
+  },
+  {
+   "name": "graffiti",
+   "prompt": "a wall covered in graffiti",
+   "role": "wall",
+   "base": 30,
+   "variants": [
+    {
+     "src": "film",
+     "k": "ab8eba53b7a3",
+     "fit": 0.315,
+     "mean": [
+      0.453,
+      0.302,
+      0.338
+     ]
+    },
+    {
+     "src": "film",
+     "k": "0b71bfadb12d",
+     "fit": 0.311,
+     "mean": [
+      0.452,
+      0.302,
+      0.338
+     ]
+    }
+   ]
+  },
+  {
+   "name": "moss",
+   "prompt": "moss and damp stains on old stone",
+   "role": "wall",
+   "base": 32,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "90d0dd71b0b7",
+     "fit": 0.343,
+     "mean": [
+      0.559,
+      0.515,
+      0.253
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "11f5a58e616b",
+     "fit": 0.317,
+     "mean": [
+      0.399,
+      0.401,
+      0.29
+     ]
+    }
+   ]
+  },
+  {
+   "name": "salt",
+   "prompt": "white salt crust stains on a wall",
+   "role": "wall",
+   "base": 34,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "6acc8e7ed3b6",
+     "fit": 0.31,
+     "mean": [
+      0.404,
+      0.256,
+      0.06
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "992e4a5d2b92",
+     "fit": 0.302,
+     "mean": [
+      0.905,
+      0.888,
+      0.902
+     ]
+    }
+   ]
+  },
+  {
+   "name": "soot brick",
+   "prompt": "soot blackened brick wall",
+   "role": "wall",
+   "base": 36,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "2e895f01c380",
+     "fit": 0.328,
+     "mean": [
+      0.326,
+      0.326,
+      0.326
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "11dc17a84bcd",
+     "fit": 0.309,
+     "mean": [
+      0.214,
+      0.214,
+      0.214
+     ]
+    }
+   ]
+  },
+  {
+   "name": "marble",
+   "prompt": "worn white marble",
+   "role": "wall",
+   "base": 38,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "4bf93426be7a",
+     "fit": 0.31,
+     "mean": [
+      0.749,
+      0.799,
+      0.762
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "b81cfcf1437e",
+     "fit": 0.309,
+     "mean": [
+      0.783,
+      0.783,
+      0.783
+     ]
+    }
+   ]
+  },
+  {
+   "name": "asphalt",
+   "prompt": "cracked patched asphalt road",
+   "role": "ground",
+   "base": 40,
+   "variants": [
+    {
+     "src": "generated",
+     "k": "33b1e9366468",
+     "fit": 0.321,
+     "mean": [
+      0.415,
+      0.424,
+      0.385
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "28411a3d237b",
+     "fit": 0.316,
+     "mean": [
+      0.365,
+      0.383,
+      0.36
+     ]
+    }
+   ]
+  },
+  {
+   "name": "wet asphalt",
+   "prompt": "wet black asphalt with reflections",
+   "role": "ground",
+   "base": 42,
+   "variants": [
+    {
+     "src": "other",
+     "k": "866b2ca90706",
+     "fit": 0.343,
+     "mean": [
+      0.151,
+      0.151,
+      0.149
+     ]
+    },
+    {
+     "src": "generated",
+     "k": "b4d599c30391",
+     "fit": 0.335,
+     "mean": [
+      0.104,
+      0.187,
+      0.215
+     ]
+    }
+   ]
+  },
+  {
+   "name": "cobbles",
+   "prompt": "old cobblestone street",
+   "role": "ground",
+   "base": 44,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "5ea8a09b94c4",
+     "fit": 0.306,
+     "mean": [
+      0.405,
+      0.409,
+      0.389
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "377a5bff526d",
+     "fit": 0.305,
+     "mean": [
+      0.404,
+      0.412,
+      0.398
+     ]
+    }
+   ]
+  },
+  {
+   "name": "granite",
+   "prompt": "granite paving slabs",
+   "role": "ground",
+   "base": 46,
+   "variants": [
+    {
+     "src": "generated",
+     "k": "82f45973321b",
+     "fit": 0.277,
+     "mean": [
+      0.594,
+      0.583,
+      0.677
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "4beacb80d8e8",
+     "fit": 0.274,
+     "mean": [
+      0.264,
+      0.228,
+      0.207
+     ]
+    }
+   ]
+  },
+  {
+   "name": "sidewalk",
+   "prompt": "worn concrete sidewalk",
+   "role": "ground",
+   "base": 48,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "8b803df3c138",
+     "fit": 0.325,
+     "mean": [
+      0.403,
+      0.372,
+      0.385
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "275b31008751",
+     "fit": 0.311,
+     "mean": [
+      0.624,
+      0.602,
+      0.528
+     ]
+    }
+   ]
+  },
+  {
+   "name": "planks",
+   "prompt": "wooden pier planks",
+   "role": "ground",
+   "base": 50,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "4bc4a22a88f4",
+     "fit": 0.299,
+     "mean": [
+      0.425,
+      0.425,
+      0.425
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "8042a6f837dd",
+     "fit": 0.293,
+     "mean": [
+      0.519,
+      0.49,
+      0.359
+     ]
+    }
+   ]
+  },
+  {
+   "name": "sand",
+   "prompt": "wet beach sand",
+   "role": "ground",
+   "base": 52,
+   "variants": [
+    {
+     "src": "generated",
+     "k": "342ad12e0760",
+     "fit": 0.33,
+     "mean": [
+      0.59,
+      0.537,
+      0.48
+     ]
+    },
+    {
+     "src": "generated",
+     "k": "1c56fbe71bd3",
+     "fit": 0.316,
+     "mean": [
+      0.323,
+      0.265,
+      0.209
+     ]
+    }
+   ]
+  },
+  {
+   "name": "terracotta",
+   "prompt": "terracotta roof tiles",
+   "role": "roof",
+   "base": 54,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "ced1931378f6",
+     "fit": 0.298,
+     "mean": [
+      0.448,
+      0.203,
+      0.109
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "b47a065bc7f3",
+     "fit": 0.296,
+     "mean": [
+      0.533,
+      0.516,
+      0.483
+     ]
+    }
+   ]
+  },
+  {
+   "name": "slate",
+   "prompt": "grey slate roof tiles",
+   "role": "roof",
+   "base": 56,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "e84d92032f88",
+     "fit": 0.295,
+     "mean": [
+      0.235,
+      0.243,
+      0.216
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "bcda1b2696e2",
+     "fit": 0.293,
+     "mean": [
+      0.464,
+      0.446,
+      0.474
+     ]
+    }
+   ]
+  },
+  {
+   "name": "verdigris",
+   "prompt": "green copper verdigris roof",
+   "role": "roof",
+   "base": 58,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "faf7171a6e40",
+     "fit": 0.317,
+     "mean": [
+      0.406,
+      0.33,
+      0.126
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "cb6a2062e2d3",
+     "fit": 0.298,
+     "mean": [
+      0.128,
+      0.347,
+      0.198
+     ]
+    }
+   ]
+  },
+  {
+   "name": "ceramic",
+   "prompt": "white glazed ceramic tiles",
+   "role": "atlantean",
+   "base": 60,
+   "variants": [
+    {
+     "src": "archive",
+     "k": "4d797709e73b",
+     "fit": 0.275,
+     "mean": [
+      0.705,
+      0.752,
+      0.729
+     ]
+    },
+    {
+     "src": "archive",
+     "k": "c13ec32ff16f",
+     "fit": 0.26,
+     "mean": [
+      0.179,
+      0.174,
+      0.193
+     ]
+    }
+   ]
+  },
+  {
+   "name": "cyan glass",
+   "prompt": "teal blue glass facade",
+   "role": "atlantean",
+   "base": 62,
+   "variants": [
+    {
+     "src": "generated",
+     "k": "4e5620f8d108",
+     "fit": 0.336,
+     "mean": [
+      0.158,
+      0.409,
+      0.514
+     ]
+    },
+    {
+     "src": "generated",
+     "k": "f39bf53fb37d",
+     "fit": 0.328,
+     "mean": [
+      0.397,
+      0.455,
+      0.436
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -40,10 +40,11 @@ h2{font:600 12px ui-monospace,Menlo,monospace;letter-spacing:.18em;text-transfor
 .districts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
 .d{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
 .d h3{margin:0 0 6px;font-size:17px}.sw{display:flex;height:34px;border-radius:6px;overflow:hidden;margin:6px 0}.sw i{display:block}
-.d .m{display:flex;gap:6px;margin:8px 0}.d .m b{width:44px;height:44px;border-radius:6px;background-size:400% 400%;border:1px solid var(--line)}
+.d .m{display:flex;gap:6px;margin:8px 0}.d .m b{width:44px;height:44px;border-radius:6px;background-size:800% 800%;border:1px solid var(--line)}
 .d .use{font:11px ui-monospace,Menlo,monospace;color:var(--dim)}.d .motif{font-size:13px;color:#d4ccbd;margin-top:6px}
+.found{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}.fd{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px}.fd .im{height:130px;display:flex;align-items:flex-end;justify-content:center;background:repeating-conic-gradient(#1a1d21 0 25%,#16191c 0 50%) 0 0/16px 16px;border-radius:6px}.fd img{max-width:100%;max-height:126px}.fd .t{font-size:13px;margin-top:5px}.fd .k2{font:10px ui-monospace,Menlo,monospace;color:var(--dim)}.fd .pl{display:flex;height:6px;margin-top:4px;border-radius:2px;overflow:hidden}.fd .pl i{flex:1}
 .mats{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
-.mat b{display:block;aspect-ratio:1;border-radius:8px;background-size:400% 400%;border:1px solid var(--line)}
+.mat b{display:block;aspect-ratio:1;border-radius:8px;background-size:800% 800%;border:1px solid var(--line)}
 .mat span{display:block;font:11px ui-monospace,Menlo,monospace;color:var(--dim);margin-top:4px}
 .grp{margin:18px 0 6px;font:600 11px ui-monospace,Menlo,monospace;color:var(--dim);letter-spacing:.14em;text-transform:uppercase}
 .el{display:grid;grid-template-columns:150px 120px 1fr;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line)}
@@ -73,7 +74,7 @@ footer{max-width:1100px;margin:0 auto;padding:20px 24px 50px;color:var(--dim);fo
     <div class="rule"><div class="ill add"></div><div class="tx"><h3>Every house wears its additions</h3><p>Lighter, later boxes sit set back on old roofs, in wood or stucco, and arrived eras after the house. Height tells you age; colour tells you which layer.</p><div class="how">3,319 additions · born per era · own material</div></div></div>
     <div class="rule"><div class="ill stairs"></div><div class="tx"><h3>Stairs are streets</h3><p>Circulation happens outside, where you can see it: marble stoops, iron back stairs, fire escapes, the stepped avenue. He looks for a way out "through the hallways, within the drawers and fire escapes", and the city keeps those exits visible.</p><div class="how">streamed detail · stoops on rowhouses · back stairs on 22% of the tall old houses</div></div></div>
     <div class="rule"><div class="ill tide"></div><div class="tx"><h3>The tide keeps the time</h3><p>The sea gates rise and fall with a real 12.42-hour tide, and the city's light comes as a pulse. Touch a landmark and a ring of cyan runs out across every facade: the city resonates.</p><div class="how">semidiurnal tide · gate height from tide · pulse ring in the facade shader</div></div></div>
-    <div class="rule"><div class="ill skin" id="skinill"></div><div class="tx"><h3>Skinned with its own footage</h3><p>Brick, peeling paint, stucco, asphalt, marble steps, moss and graffiti are cut from frames in the archive (generated stills first) and made seamless. Each district's colours come from its own evidence images.</p><div class="how">grit.py · 14 surfaces · k-means palettes per district</div></div></div>
+    <div class="rule"><div class="ill skin" id="skinill"></div><div class="tx"><h3>Skinned with its own footage</h3><p>Brick, peeling paint, stucco, asphalt, marble steps, moss and graffiti are cut from frames in the archive (generated stills first) and made seamless. Each district's colours come from its own evidence images.</p><div class="how">grit.py + library.py · 32 surfaces × 2 variants · k-means palettes per district</div></div></div>
     <div class="rule"><div class="ill inv"></div><div class="tx"><h3>Inverse monuments</h3><p>The sci-fi structures stand where the shots ask for them. Spires, halos, arcologies and sea walls are placed by evolution where they answer the most pictures, so every monument has witnesses.</p><div class="how">structures.py · 33 structures answer 250 of 416 calls · <a href="../city3d/index.html">see them</a></div></div></div>
   </div>
 </section>
@@ -84,9 +85,16 @@ footer{max-width:1100px;margin:0 auto;padding:20px 24px 50px;color:var(--dim);fo
 </section>
 
 <section>
-  <h2>The material atlas: cut from the archive</h2>
+  <h2>Found architecture: buildings that exist only in our footage</h2>
+  <p style="color:#cfc7b8;max-width:760px;margin-top:-4px">I searched every frame that isn't from the real-world archive (our generated stills, the butterfly Markov clips, halfworld frames and renders) for architecture, and ranked each frame by how unlike the 45,000 real archive frames it is. I clustered the best into species. For each species, the most architectural and most unique member is segmented and cut out with its own outline. In the city its outline becomes the extrusion and the frame becomes its face, on a lot in a district that suits what it is. An eye-review gate keeps only real buildings: 14 of 30 cut-outs passed.</p>
+  <div class="found" id="found"></div>
+</section>
+
+<section>
+  <h2>The material library: cut from the archive</h2>
   <p style="color:#cfc7b8;max-width:760px;margin-top:-4px">For each surface, the crop that CLIP reads most as that surface is cut from the top archive hits, scaled to 256 px and blended seamless (four-way, each copy weighted to zero at its own seam). The city samples these in metres, mip-safe across tile edges, and fades them out past 700 m so the distance stays calm.</p>
   <div class="mats" id="mats"></div>
+  <div class="k" id="libver" style="font:11px ui-monospace,Menlo,monospace;color:var(--dim);margin-top:8px"></div>
 </section>
 
 <section>
@@ -115,10 +123,11 @@ const MOTIF = {
   'old town': 'stucco, peeling paint and tile; cobbled lanes, awnings, the cathedral and the stepped avenue',
   rowhouses: 'red brick and marble stoops; back alleys, back stairs, laundry, a ceramic crown on every repaired house',
 };
-const MAT_BY_TYPE = {nightlife: ['graffiti', 'tile', 'brick'], industrial: ['rust', 'concrete', 'brick'], waterfront: ['wood', 'salt line', 'rust'], downtown: ['concrete', 'marble'],
-  'ruin field': ['moss', 'marble', 'concrete'], suburb: ['stucco', 'wood'], 'old town': ['stucco', 'peeling paint', 'tile', 'terrazzo'], rowhouses: ['brick', 'peeling paint', 'marble']};
+const MAT_BY_TYPE = {nightlife: ['graffiti', 'tile', 'red brick', 'wet asphalt'], industrial: ['corrugated', 'rust', 'soot brick', 'block'], waterfront: ['planks', 'salt', 'teal paint', 'rust'], downtown: ['concrete', 'cantera', 'cyan glass'],
+  'ruin field': ['moss', 'cantera', 'tezontle'], suburb: ['stucco', 'wood siding', 'whitewash'], 'old town': ['stucco', 'peeling paint', 'azulejo', 'cobbles'], rowhouses: ['red brick', 'marble', 'slate', 'sidewalk']};
 (async () => {
-  const [grit, pal, mats, city] = await Promise.all(['grit.json', 'palettes.json', 'materials.json', '../city3d/city.json'].map(u => fetch(u).then(r => r.json())));
+  const [grit, pal, lib, city, fnd] = await Promise.all(['grit.json', 'palettes.json', 'library.json', '../city3d/city.json', 'found.json'].map(u => fetch(u).then(r => r.json()).catch(() => null)));
+  const mats = {cols: lib.cols, rows: lib.rows, tiles: lib.materials.flatMap(m => m.variants.map((v, j) => ({name: j ? m.name + ' ·2' : m.name, src: v.src, fit: v.fit, role: m.role})))};
   const tilePos = name => { const i = mats.tiles.findIndex(t => t.name === name); if (i < 0) return null; const c = i % mats.cols, r = Math.floor(i / mats.cols);
     return `background-image:url(materials.webp);background-size:${mats.cols * 100}% ${mats.rows * 100}%;background-position:${c / (mats.cols - 1) * 100}% ${r / (mats.rows - 1) * 100}%`; };
   document.getElementById('skinill').innerHTML = mats.tiles.slice(0, 8).map(t => `<i style="${tilePos(t.name)}"></i>`).join('');
@@ -131,7 +140,13 @@ const MAT_BY_TYPE = {nightlife: ['graffiti', 'tile', 'brick'], industrial: ['rus
       <div class="motif">${MOTIF[p.type]}</div>
       ${d.use ? `<div class="use" style="margin-top:6px">${d.use.map((u, i) => `${city.eras[i].replace('The ', '')}: ${u}`).join(' → ')}</div>` : ''}</div>`; }).join('');
   // materials
-  document.getElementById('mats').innerHTML = mats.tiles.map(t => `<div class="mat"><b style="${tilePos(t.name)}"></b><span>${t.name} · ${t.src} · fit ${t.fit}</span></div>`).join('');
+  document.getElementById('mats').innerHTML = mats.tiles.map(t => `<div class="mat"><b style="${tilePos(t.name)}"></b><span>${t.name} · ${t.role} · ${t.src} · fit ${t.fit}</span></div>`).join('');
+  document.getElementById('libver').textContent = `${lib.version} · ${lib.materials.length} surfaces × 2 variants · walls, ground, roofs and the Atlantean ceramic and glass · ${mats.tiles.filter(t => /generated|butterfly|halfworld/.test(t.src)).length} of ${mats.tiles.length} tiles from our own generated footage`;
+  const keep = await fetch('keep.json').then(r => r.json()).catch(() => null);
+  if (fnd && keep) fnd.found = fnd.found.filter(f => keep.keep[f.id]).map(f => ({...f, read: {...f.read, kind: keep.keep[f.id].kind}, name: keep.keep[f.id].name}));
+  if (fnd) document.getElementById('found').innerHTML = fnd.found.map(f => `<div class="fd"><div class="im"><img src="found/${f.id}.webp" loading="lazy" alt=""></div>
+    <div class="t">${f.name || f.read.kind}</div><div class="k2">${f.read.kind.replace(/^an? /, '')} · ${f.read.roof} · ${f.read.material}<br>${f.src} · ${Math.round(f.unique * 100)}% unlike the archive · ×${f.size}</div>
+    <div class="pl">${f.palette.map(c => `<i style="background:${c}"></i>`).join('')}</div></div>`).join('');
   // grit
   const srcs = [...new Set(Object.values(grit).flatMap(e => Object.keys(e.bysrc)))];
   document.getElementById('legend').innerHTML = srcs.map(s => `<span><i style="background:${SRC[s] || '#777'}"></i>${s}</span>`).join('') + '<span>faded thumbnails = weak matches, shown because nothing stronger exists</span>';

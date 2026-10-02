@@ -6,7 +6,8 @@ import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
 import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
 import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
-import {loadCity, sampler, makeTerrain, makeWards, makeRoads, makeBuildings, makeTrees, makeStreetLife, STYLES, COVER} from './city.mjs';
+import {loadCity, sampler, makeTerrain, makeWards, makeRoads, makeBuildings, makeTrees, makeStreetLife, STYLES, COVER, setLibrary} from './city.mjs';
+import {makeFound} from './found3d.mjs';
 import {buildLandmark, tickClocks, MATS, NIGHTLIT} from './landmarks.mjs';
 import {makeHeavens, makeSea} from './heavens.mjs';
 import {makeRising} from './evolved.mjs';
@@ -24,13 +25,16 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 1, 52000);
 const labels = new CSS2DRenderer({element: $('labels')}); labels.setSize(innerWidth, innerHeight);
 const U = {night: {value: 0}, era: {value: 5}, time: {value: 0}, wet: {value: 0}, pulseO: {value: new THREE.Vector2(-1e5, -1e5)}, pulseT: {value: 99},
-  matAtlas: {value: null}, matGrid: {value: new THREE.Vector2(4, 4)}};
-// the material atlas: surfaces cut from the archive's own frames (wygwyl/world/language)
-U.matAtlas.value = new THREE.TextureLoader().load('../language/materials.webp'); U.matAtlas.value.colorSpace = THREE.SRGBColorSpace; U.matAtlas.value.anisotropy = 8;
+  matAtlas: {value: null}, matGrid: {value: new THREE.Vector2(8, 8)}, libFacade: {value: new THREE.Vector4()}, libRoad: {value: new THREE.Vector4()}};
+// the material library: 32 surfaces × 2 variants cut from the archive's own frames (wygwyl/world/language/library.*)
+const LIB = await fetch('../language/library.json').then(r => r.json());
+U.matAtlas.value = new THREE.TextureLoader().load('../language/library.webp'); U.matAtlas.value.colorSpace = THREE.SRGBColorSpace; U.matAtlas.value.anisotropy = 8;
+U.matGrid.value.set(LIB.cols, LIB.rows);
 
 step(8, 'reading the worldtext');
 const C = await loadCity('./').catch(e => { step(0, 'could not load the city: ' + e.message + ' (serve over http)'); throw e; });
 const S = sampler(C), meta = C.meta;
+const LIBI = setLibrary(LIB); U.libFacade.value.set(LIBI['graffiti'], LIBI['moss'], LIBI['ceramic'], 0); U.libRoad.value.set(LIBI['asphalt'], LIBI['granite'], LIBI['cobbles'], LIBI['sidewalk']);
 $('ver').innerHTML = `${meta.version} · canon ${meta.from.canon_checksum} · city ${meta.from.city_checksum} · ${meta.counts.buildings.toLocaleString()} buildings · ${meta.counts.shots} placed shots · <a href="../iconic/">Lynch map</a> · <a href="../../atlas.html">atlas</a>`;
 
 step(25, 'the ground and the sea');
@@ -61,6 +65,8 @@ step(86, 'the evolved structures');
 const rising = makeRising(scene, C, S, heav, U); const RD = await rising.load('structures.json').catch(() => null);
 let vi = RD ? Math.max(0, RD.variants.findIndex(v => v.name === (Q.get('variant') || 'the mixed city'))) : -1;
 const detail = makeDetail(scene, C, S, blds, {radius: MOBILE ? 260 : 420});
+step(90, 'the found architecture');
+const found = makeFound(scene, C, S, U, {idx: LIBI}); const FD = await found.load('../language/found.json');
 const mats = MATS(); for (const k of NIGHTLIT) mats[k].userData.base = mats[k].emissiveIntensity;
 
 // ——— labels: landmarks, poems, districts (with their use in this era), wards ———
@@ -162,7 +168,7 @@ let playing = null; $('play').onclick = () => { if (playing) { clearInterval(pla
 function setEra(e) {
   era = e; U.era.value = e; $('era').value = e; syncRange($('era'));
   document.querySelectorAll('#eras button').forEach(b => b.classList.toggle('on', +b.dataset.e === e));
-  const fp = rising.footprints(vi); blds.userData.setExtraClear(fp); rising.build(vi, e);
+  const fp = [...rising.footprints(vi), ...found.footprints()]; blds.userData.setExtraClear(fp); rising.build(vi, e); found.setEra(e);
   detail.setEra(e, k => fp.some(([cx, cy, r, eb]) => eb <= e && Math.hypot(C.bld[k * 14] - cx, C.bld[k * 14 + 1] - cy) < r));
   const c = blds.userData.setEra(e); trees.userData.setEra(e); street.userData.setEra(e); setLandmarks(e); terrain.userData.paint(e, LAYERS.wards ? wards : null);
   $('lore').innerHTML = `<b>${e} · ${ERA[e]}.</b> ${meta.lore[e]}`;
@@ -177,10 +183,11 @@ const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(); let infoK = null
 function pick(e) {
   if (e.target !== renderer.domElement) return;
   mouse.set(e.clientX / innerWidth * 2 - 1, -e.clientY / innerHeight * 2 + 1); ray.setFromCamera(mouse, camera);
-  const tgt = [shotMesh, ...lmGroups, ...rising.groups, blds.userData.meshes.body, blds.userData.meshes.ruins].filter(o => o.visible);
+  const tgt = [shotMesh, ...lmGroups, ...rising.groups, ...found.placed, blds.userData.meshes.body, blds.userData.meshes.ruins].filter(o => o.visible);
   const h = ray.intersectObjects(tgt, true)[0]; if (!h) { $('info').style.display = 'none'; infoK = null; return; }
   if (h.object === shotMesh) return fitShot(h.instanceId);
-  let o = h.object; while (o && !o.userData.lm && !o.userData.s) o = o.parent; if (o && o.userData.s) { rising.pulse(o.userData.s.x, o.userData.s.y); return showStructure(o.userData.s); }
+  let o = h.object; while (o && !o.userData.lm && !o.userData.s && !o.userData.found) o = o.parent;
+  if (o && o.userData.found) return showFound(o.userData); if (o && o.userData.s) { rising.pulse(o.userData.s.x, o.userData.s.y); return showStructure(o.userData.s); }
   if (o) { rising.pulse(o.userData.lm.x, o.userData.lm.y); return showLandmark(LM.indexOf(o.userData.lm)); }
   const mesh = h.object, key = mesh === blds.userData.meshes.body ? 'body' : 'ruins', k = blds.userData.owner[key][h.instanceId]; if (k != null) showBuilding(k, h.point);
 }
@@ -198,6 +205,14 @@ function showBuilding(k, p) {
   $('info').style.display = 'block'; infoK = null; wireEvid();
 }
 const TNAME = {spire: 'spire', arcology: 'arcology', ring: 'halo', dish: 'listening dish', dome: 'dome', seawall: 'sea wall', vfarm: 'garden tower', platform: 'sea platform'};
+function showFound(u) {
+  const f = u.found; infoK = null; rising.pulse(u.x, u.y);
+  $('info').innerHTML = `<h3>${f.name || 'found'} · ${f.read.kind.replace(/^an? /, '')}</h3><div class="k">${f.read.roof} · ${f.read.material} · ${f.read.state} · raised to ${u.h.toFixed(0)} m</div>
+    <img src="../language/found/${f.id}.webp" style="max-width:100%;max-height:150px;margin-top:6px;border-radius:6px;background:#222" alt="">
+    <div class="k" style="margin-top:4px">from our own <b style="color:var(--acc)">${f.src}</b> footage · ${Math.round(f.unique * 100)}% unlike anything in the real archive · our footage returns to this kind ${f.size}× · its face is the frame itself, its outline the extrusion</div>
+    <div class="chips" style="margin-top:6px">${f.palette.map(c => `<span style="width:20px;height:14px;border-radius:3px;background:${c};display:inline-block"></span>`).join('')}</div>`;
+  $('info').style.display = 'block';
+}
 function showStructure(s) {
   infoK = null; const dims = s.t === 'ring' ? `radius ${s.R.toFixed(0)} m, lifted ${s.lift.toFixed(0)} m on ${s.legs} legs` : s.t === 'seawall' ? `${s.L.toFixed(0)} m long, ${s.H.toFixed(0)} m high, ${s.gates} tide gates` : s.t === 'dome' ? `${(s.r * 2).toFixed(0)} m across, ${s.ribs} ribs` : `${(s.H || 0).toFixed(0)} m high, ${((s.r || 0) * 2).toFixed(0)} m wide`;
   const [b, r, as] = s.era;
@@ -360,4 +375,4 @@ function frameLoop() {
 }
 requestAnimationFrame(frameLoop);
 addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); labels.setSize(innerWidth, innerHeight); composer?.setSize(innerWidth, innerHeight); });
-window.__city = {detail, rising, scene, camera, orbit, setEra, setWeather, goPoem, fitShot, heav, setMode, get hour() { return hour; }, set hour(v) { hour = v; setTimeUI(); }, C};
+window.__city = {found, detail, rising, scene, camera, orbit, setEra, setWeather, goPoem, fitShot, heav, setMode, get hour() { return hour; }, set hour(v) { hour = v; setTimeUI(); }, C};
