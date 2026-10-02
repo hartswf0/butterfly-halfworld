@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Archive · WYGWYL</title>
+<style>
+:root{--ink:#f3ead2;--dim:#a99f86;--gold:#ffd23f;--pink:#ff3d6e;--panel:#121820;--edge:rgba(243,234,210,.16);--bg:#090c11}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 "Iowan Old Style",Palatino,Georgia,serif;overflow:hidden;height:100vh;display:flex;flex-direction:column}
+button,input{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+header{padding:14px 16px 6px;flex:0 0 auto}
+.k{font:700 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+.k a{color:var(--gold)}
+h1{font-size:clamp(22px,5vw,34px);font-weight:400;line-height:1.1;margin:4px 0 4px}
+.note{color:var(--dim);font-size:13px;max-width:900px}
+#q{width:100%;background:#0f151c;border:1px solid var(--edge);color:var(--ink);font-size:16px;padding:11px 16px;border-radius:24px;margin:10px 0 6px;outline:none}
+#q:focus{border-color:var(--gold)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:3px 0 5px;scrollbar-width:none}
+.chips .lab{flex:0 0 auto;font:700 10px "Helvetica Neue",Arial,sans-serif;letter-spacing:.14em;color:var(--dim);text-transform:uppercase;align-self:center;min-width:52px}
+.chip{flex:0 0 auto;border:1px solid var(--edge);background:var(--panel);color:var(--ink);padding:6px 11px;min-height:34px;font:600 12px "Helvetica Neue",Arial,sans-serif;cursor:pointer;border-radius:17px;white-space:nowrap}
+.chip.on{border-color:var(--gold);color:var(--gold);background:rgba(255,210,63,.08)}
+#bar{display:flex;justify-content:space-between;align-items:center;gap:8px;font:600 12px "Helvetica Neue",Arial,sans-serif;color:var(--dim);padding:4px 0}
+#bar b{color:var(--ink)}
+#wrap{flex:1;position:relative;overflow:hidden}
+#scroller{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+#spacer{width:1px}
+#cv{position:absolute;left:0;top:0;pointer-events:none}
+#lb{position:fixed;inset:0;background:#05070a;display:none;z-index:9;overflow-y:auto}
+#lb.on{display:block}
+#lb .in{max-width:980px;margin:0 auto;padding:14px 16px 60px}
+#lb .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+#lb img.big{width:100%;max-height:62vh;object-fit:contain;display:block;margin:10px 0;background:#000}
+.btn{background:transparent;color:var(--ink);border:1px solid var(--edge);padding:9px 14px;min-height:40px;border-radius:20px;font:700 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.12em;cursor:pointer}
+.btn.gold{border-color:var(--gold);color:var(--gold)}
+#meta{font:13px/1.55 "Helvetica Neue",Arial,sans-serif;color:var(--dim)}
+#meta b{color:var(--ink)}
+.tag{display:inline-block;border:1px solid var(--edge);border-radius:12px;padding:2px 9px;margin:2px 3px 2px 0;font:12px "Helvetica Neue",Arial,sans-serif;color:var(--ink);cursor:pointer}
+.strip{display:flex;gap:6px;overflow-x:auto;margin:8px 0}
+.strip img{height:74px;border:1px solid var(--edge);cursor:pointer}
+.strip img.cur{border-color:var(--gold)}
+h3{font-weight:400;font-size:17px;margin:14px 0 4px}
+</style>
+</head>
+<body>
+<header>
+  <div class="k">Where You Go When You Leave · <a href="../foundry/index.html">the foundry</a> · the archive</div>
+  <h1>The archive — every image, keyframe and video, in one place</h1>
+  <p class="note" id="lede"></p>
+  <input id="q" type="search" placeholder="search by meaning — “night sea”, “a man alone in a city”, “fire”, “a temple”, “first light on a road”…" autocomplete="off">
+  <div class="chips" id="c_src"></div>
+  <div class="chips" id="c_poem"></div>
+  <div class="chips" id="c_kind"></div>
+  <div id="bar"><span id="count"></span><span><button class="chip" id="shuffle">SHUFFLE</button></span></div>
+</header>
+<div id="wrap"><div id="scroller"><div id="spacer"></div></div><canvas id="cv"></canvas></div>
+<div id="lb"><div class="in">
+  <div class="top"><div class="k" id="lk"></div><div><button class="btn gold" id="more">MORE LIKE THIS</button> <button class="btn" id="lclose">✕</button></div></div>
+  <img class="big" id="limg" alt="">
+  <div id="meta"></div>
+  <div id="sib"></div>
+</div></div>
+<script type="module">
+const $ = id => document.getElementById(id);
+const [D, EMB, VS, PS] = await Promise.all([
+  fetch('items.json').then(r => r.json()),
+  fetch('emb.i8').then(r => r.arrayBuffer()).then(b => new Int8Array(b)),
+  fetch('vocab.u8').then(r => r.arrayBuffer()).then(b => new Uint8Array(b)),
+  fetch('poems.u8').then(r => r.arrayBuffer()).then(b => new Uint8Array(b)),
+]);
+const NV = D.vocab.length, NP = D.poems.length;
+const F = Object.fromEntries(D.fields.map((f, i) => [f, i]));
+const IT = D.items, N = IT.length, DIM = D.dims;
+const [CW, CH, COLS, ROWS] = D.cell, PER = COLS * ROWS;
+const TITLES = ['Out of Life', 'Flashing Lights', 'How to Break off an Engagement', 'Nevermore', 'Bloodline', 'Resurrecting Atlantis', 'DJ Turn Me Up', 'Newly Single', 'Yet Heard', 'Magic Ride', 'New Day', 'Reunion', 'How to Win My Heart', 'Hot Minute'];
+const SRC = {archive: 'archive footage', markov: 'MARKOV_POET clips', generated: 'generated stills', halfworld: 'halfworld', film: 'the film', other: 'other', sora: 'sora', desierto: 'el desierto'};
+const st = D.store;
+$('lede').textContent = `${st.unique.toLocaleString()} unique images and videos across the repos (duplicates collapsed), ${st.keyframes.toLocaleString()} keyframes pulled from the videos, ${st.embedded.toLocaleString()} read by CLIP — the ${N.toLocaleString()} most consequential for the poems are here. Shoot photographs of real people are read but never shown.`;
+// state
+const sel = {src: new Set(), poem: new Set(), kind: new Set()};
+let query = null, order = [...Array(N).keys()], scores = null;
+function chips(id, key, label, vals, name) {
+  $(id).innerHTML = `<span class="lab">${label}</span>` + vals.map(v => `<button class="chip" data-v="${v}">${name(v)}</button>`).join('');
+  $(id).querySelectorAll('.chip').forEach(b => b.onclick = () => { sel[key].has(b.dataset.v) ? sel[key].delete(b.dataset.v) : sel[key].add(b.dataset.v); b.classList.toggle('on'); apply(); });
+}
+const cnt = k => IT.reduce((a, it) => (a[it[F[k]]] = (a[it[F[k]]] || 0) + 1, a), {});
+const sc = cnt('source');
+chips('c_src', 'src', 'source', Object.keys(sc).sort((a, b) => sc[b] - sc[a]), v => `${SRC[v] || v} ${sc[v]}`);
+chips('c_poem', 'poem', 'poem', D.poems, v => `${v} ${TITLES[+v - 1]}`);
+chips('c_kind', 'kind', 'kind', ['still', 'keyframe', 'attributed'], v => ({still: 'stills', keyframe: 'video keyframes', attributed: 'tied to a poem'}[v]));
+// vectors
+const dot = (A, ai, B, bi) => { let s = 0; for (let d = 0; d < DIM; d++) s += A[ai * DIM + d] * B[bi * DIM + d]; return s; };
+// words -> the vocabulary terms they touch (and poem titles); each image's exact CLIP score for each term is stored
+function qvec(words) {
+  const toks = words.toLowerCase().split(/\s+/).filter(t => t.length > 2 && !['the', 'and', 'with', 'over', 'into', 'from'].includes(t));
+  if (!toks.length) return null;
+  const tw = new Float32Array(NV), pw = new Float32Array(NP); let n = 0;
+  D.vocab.forEach((p, i) => { const pl = p.toLowerCase(); const hits = toks.filter(t => pl.split(/\W+/).some(w => w.startsWith(t) || t.startsWith(w) && w.length > 3)).length; if (hits) { tw[i] = hits / pl.split(' ').length ** 0.5; n++; } });
+  TITLES.forEach((t, i) => { if (toks.some(x => t.toLowerCase().includes(x))) { pw[i] = 2; n++; } });
+  return n ? {tw, pw} : null;
+}
+function rankBy(q) {
+  const s = new Float32Array(N);
+  if (q instanceof Float32Array) { for (let i = 0; i < N; i++) { let a = 0; for (let d = 0; d < DIM; d++) a += EMB[i * DIM + d] * q[d]; s[i] = a; } return s; }
+  const ti = [], pi = []; q.tw.forEach((w, i) => w && ti.push(i)); q.pw.forEach((w, i) => w && pi.push(i));
+  for (let i = 0; i < N; i++) { let a = 0; for (const t of ti) a += VS[i * NV + t] * q.tw[t]; for (const p of pi) a += PS[i * NP + p] * q.pw[p]; s[i] = a; }
+  return s;
+}
+function pass(i) {
+  const it = IT[i];
+  if (sel.src.size && !sel.src.has(it[F.source])) return false;
+  if (sel.poem.size && !sel.poem.has(it[F.poem]) && !sel.poem.has(it[F.clip_poem])) return false;
+  if (sel.kind.size) {
+    const ks = [it[F.kind]].concat(it[F.poem] ? ['attributed'] : []);
+    if (![...sel.kind].every(k => ks.includes(k))) return false;
+  }
+  return true;
+}
+function apply() {
+  let pv = null;
+  if (sel.poem.size && !query) { const pw = new Float32Array(NP); for (const p of sel.poem) pw[D.poems.indexOf(p)] = 1; pv = {tw: new Float32Array(NV), pw}; }
+  const v = query || pv;
+  scores = v ? rankBy(v) : null;
+  order = [...Array(N).keys()].filter(pass);
+  if (scores) order.sort((a, b) => scores[b] - scores[a]);
+  $('count').innerHTML = `<b>${order.length.toLocaleString()}</b> of ${N.toLocaleString()}${query ? ' · ranked by meaning' : ''}`;
+  layout(); $('scroller').scrollTop = 0; draw();
+}
+let qt = null;
+$('q').oninput = () => { clearTimeout(qt); qt = setTimeout(() => { query = qvec($('q').value); apply(); }, 180); };
+$('shuffle').onclick = () => { for (let i = order.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [order[i], order[j]] = [order[j], order[i]]; } draw(); };
+// the grid: a canvas that draws only what is visible, from sprite sheets
+const cv = $('cv'), ctx = cv.getContext('2d'), sc_ = $('scroller');
+const sheets = new Map();
+function sheet(si) {
+  if (!sheets.has(si)) { const im = new Image(); im.onload = draw; im.src = `s/${si}.webp`; sheets.set(si, im); }
+  return sheets.get(si);
+}
+let cols = 4, cw = 192, ch = 80, gap = 4;
+function layout() {
+  const W = $('wrap').clientWidth;
+  cols = Math.max(2, Math.floor((W - 16) / (W < 600 ? 150 : 200)));
+  cw = Math.floor((W - 16 - gap * (cols - 1)) / cols); ch = Math.round(cw / 2.39);
+  $('spacer').style.height = (Math.ceil(order.length / cols) * (ch + gap) + 20) + 'px';
+  const dpr = Math.min(2, devicePixelRatio);
+  cv.width = W * dpr; cv.height = $('wrap').clientHeight * dpr; cv.style.width = W + 'px'; cv.style.height = $('wrap').clientHeight + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+function draw() {
+  const W = $('wrap').clientWidth, Hh = $('wrap').clientHeight, top = sc_.scrollTop;
+  ctx.fillStyle = '#090c11'; ctx.fillRect(0, 0, W, Hh);
+  const r0 = Math.floor(top / (ch + gap)), r1 = Math.ceil((top + Hh) / (ch + gap));
+  for (let r = r0; r <= r1; r++) for (let c = 0; c < cols; c++) {
+    const k = r * cols + c; if (k >= order.length) break;
+    const i = order[k], si = Math.floor(i / PER), ci = i % PER;
+    const x = 8 + c * (cw + gap), y = r * (ch + gap) - top + 4;
+    const im = sheet(si);
+    if (im.complete && im.naturalWidth) ctx.drawImage(im, (ci % COLS) * CW, Math.floor(ci / COLS) * CH, CW, CH, x, y, cw, ch);
+    else { ctx.fillStyle = '#121820'; ctx.fillRect(x, y, cw, ch); }
+    const it = IT[i];
+    if (it[F.kind] === 'keyframe') { ctx.fillStyle = 'rgba(0,0,0,.6)'; ctx.fillRect(x + 3, y + 3, 16, 11); ctx.fillStyle = '#ffd23f'; ctx.font = '700 9px Helvetica'; ctx.fillText('▶', x + 7, y + 12); }
+    if (it[F.poem]) { ctx.fillStyle = 'rgba(0,0,0,.6)'; ctx.fillRect(x + cw - 21, y + 3, 18, 12); ctx.fillStyle = '#ffd23f'; ctx.font = '700 9px Helvetica'; ctx.fillText(it[F.poem], x + cw - 18, y + 12); }
+  }
+}
+sc_.addEventListener('scroll', () => requestAnimationFrame(draw), {passive: true});
+addEventListener('resize', () => { layout(); draw(); });
+sc_.addEventListener('click', e => {
+  const rct = $('wrap').getBoundingClientRect(), x = e.clientX - rct.left - 8, y = e.clientY - rct.top + sc_.scrollTop - 4;
+  const c = Math.floor(x / (cw + gap)), r = Math.floor(y / (ch + gap)), k = r * cols + c;
+  if (c >= 0 && c < cols && k < order.length) open(order[k]);
+});
+// lightbox
+const fmt = t => t == null ? '' : `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+let cur = null;
+function open(i) {
+  cur = i; const it = IT[i];
+  $('limg').src = `t/${i}.webp`;
+  $('lk').textContent = `${SRC[it[F.source]] || it[F.source]} · ${it[F.kind]}${it[F.kind] === 'keyframe' ? ' at ' + fmt(it[F.t]) + ' of ' + fmt(it[F.dur]) : ''}`;
+  $('meta').innerHTML = `${it[F.poem] ? `tied to <b>poem ${it[F.poem]} · ${TITLES[+it[F.poem] - 1]}</b> by its ${it[F.how]}<br>` : ''}
+    closest poem by meaning: <b>${it[F.clip_poem]} · ${TITLES[+it[F.clip_poem] - 1]}</b> (${it[F.clip]})<br>
+    reads as: ${it[F.tags].map(t => `<span class="tag" data-q="${D.vocab[t]}">${D.vocab[t]}</span>`).join('')}<br>
+    light ${Math.round(it[F.lum] * 100)}% · ${it[F.warm] > 0.05 ? 'warm' : it[F.warm] < -0.03 ? 'cool' : 'neutral'} · ${it[F.copies] > 1 ? it[F.copies] + ' copies in the repos · ' : ''}<span style="opacity:.7">${it[F.path]}</span>`;
+  $('meta').querySelectorAll('.tag').forEach(t => t.onclick = () => { $('lb').classList.remove('on'); $('q').value = t.dataset.q; query = qvec(t.dataset.q); apply(); });
+  const sibs = order.length ? [...Array(N).keys()].filter(j => IT[j][F.group] === it[F.group] && j !== i).slice(0, 12) : [];
+  $('sib').innerHTML = sibs.length ? `<h3>${it[F.kind] === 'keyframe' ? 'the same video' : 'the same file elsewhere'}</h3><div class="strip">${[i, ...sibs].sort((a, b) => (IT[a][F.t] || 0) - (IT[b][F.t] || 0)).map(j => `<img src="t/${j}.webp" data-j="${j}" class="${j === i ? 'cur' : ''}" title="${fmt(IT[j][F.t])}">`).join('')}</div>` : '';
+  $('sib').querySelectorAll('img').forEach(im => im.onclick = () => open(+im.dataset.j));
+  $('lb').classList.add('on');
+}
+$('lclose').onclick = () => $('lb').classList.remove('on');
+addEventListener('keydown', e => { if (e.key === 'Escape') $('lb').classList.remove('on'); });
+$('more').onclick = () => {
+  const v = new Float32Array(DIM); for (let d = 0; d < DIM; d++) v[d] = EMB[cur * DIM + d];
+  query = v; $('q').value = ''; $('lb').classList.remove('on');
+  sel.src.clear(); sel.poem.clear(); sel.kind.clear(); document.querySelectorAll('.chip.on').forEach(c => c.classList.remove('on'));
+  apply(); $('count').innerHTML += ' · <b>more like the one you chose</b>';
+};
+layout(); apply();
+</script>
+</body>
+</html>

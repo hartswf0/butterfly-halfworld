@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Worlds From Shots · WYGWYL</title>
+<style>
+:root{--ink:#f3ead2;--dim:#a99f86;--gold:#ffd23f;--pink:#ff3d6e;--ok:#8fd694;--panel:#121820;--edge:rgba(243,234,210,.16);--bg:#0a0e14}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 "Iowan Old Style",Palatino,Georgia,serif}
+button{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+main{max-width:1280px;margin:0 auto;padding:22px 16px 90px}
+a{color:var(--gold)}
+.k{font:700 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+h1{font-size:clamp(26px,6vw,44px);font-weight:400;line-height:1.08;margin:8px 0 12px}
+h3{font-size:18px;font-weight:400;margin:16px 0 6px}
+.lede{color:#ddd3bb;max-width:880px}
+.note{color:var(--dim);font-size:13px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:6px 0;scrollbar-width:none}
+.chip{flex:0 0 auto;border:1px solid var(--edge);background:var(--panel);color:var(--ink);padding:7px 12px;min-height:36px;font:600 12px "Helvetica Neue",Arial,sans-serif;cursor:pointer;border-radius:18px}
+.chip.on{border-color:var(--gold);color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin-top:10px}
+.card{background:var(--panel);border:1px solid var(--edge);cursor:pointer}
+.card .shots{display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
+.card .shots img{width:100%;aspect-ratio:2.39/1;object-fit:cover;display:block}
+.card .hero{width:100%;aspect-ratio:2.39/1;object-fit:cover;display:block}
+.card .map{width:100%;display:block;aspect-ratio:4/3;object-fit:cover}
+.card .c{padding:7px 10px 10px;font:12px/1.45 "Helvetica Neue",Arial,sans-serif;color:var(--dim)}
+.card .c b{color:var(--ink)}
+.card .two{display:grid;grid-template-columns:1fr 1fr;gap:1px}
+#det{position:fixed;inset:0;background:var(--bg);display:none;overflow-y:auto;z-index:9}
+#det.on{display:block}
+#det .bar{position:sticky;top:0;background:rgba(10,14,20,.96);border-bottom:1px solid var(--edge);padding:10px 16px;z-index:2}
+#det .bar .row{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:8px}
+#det .in{max-width:1180px;margin:0 auto;padding:12px 16px 70px}
+.btn{background:transparent;color:var(--ink);border:1px solid var(--edge);padding:9px 14px;min-height:40px;border-radius:20px;font:700 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.12em;cursor:pointer}
+.why li{margin:3px 0 3px 18px;color:#ddd3bb}
+.imgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px}
+.imgs figure{background:#05070a;border:1px solid var(--edge)}
+.imgs img{width:100%;aspect-ratio:2.39/1;object-fit:cover;display:block}
+.imgs figcaption{font:11px/1.35 "Helvetica Neue",Arial,sans-serif;color:var(--dim);padding:3px 6px}
+.pairs{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.pair{background:var(--panel);border:1px solid var(--edge)}
+.pair .ab{display:grid;grid-template-columns:1fr 1fr;gap:1px}
+.pair img{width:100%;aspect-ratio:2.39/1;object-fit:cover;display:block}
+.pair .c{font:12px/1.45 "Helvetica Neue",Arial,sans-serif;color:var(--dim);padding:6px 8px}
+.pair ul{margin:3px 0 0 16px;color:#cfc6ae}
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
+.duo figure{background:var(--panel);border:1px solid var(--edge)}
+.duo img{width:100%;display:block}
+.duo figcaption{font:12px "Helvetica Neue",Arial,sans-serif;color:var(--dim);padding:5px 8px}
+.vs{display:flex;gap:10px;flex-wrap:wrap;font:12px "Helvetica Neue",Arial,sans-serif;color:var(--dim)}
+.vs span{border:1px solid var(--edge);padding:5px 9px;border-radius:12px}
+.vs span.win{border-color:var(--gold);color:var(--gold)}
+</style>
+</head>
+<body>
+<main>
+  <div class="k">Where You Go When You Leave · <a href="index.html">the foundry</a> · <a href="../archive/index.html">the archive</a> · <a href="inverse.html">inverse topology</a> · worlds from shots</div>
+  <h1>A landscape for every set of shots</h1>
+  <p class="lede">Every set of images in the archive — each poem against each source: the MARKOV_POET clips, the generated
+  stills, the archive footage, the Halfworld renders, the film, everything else — grows a world of its own. What the set
+  shows, taken together, becomes the genome: water decides the coast (a harbour where water meets city, an ocean shore
+  where it meets sand); city and street decide <b>how many more cities</b>, how dense, how tall; rock above the horizon
+  raises the mountains; forest and meadow set the nature. Three worlds are grown and the set chooses the one that best
+  gives its own shots back and that a builder would still build; then that world is sculpted toward each shot and re-shot.</p>
+  <div class="chips" id="cp"></div>
+  <div class="chips" id="cs"></div>
+  <div class="note" id="count"></div>
+  <div class="grid" id="grid"></div>
+</main>
+<div id="det"><div class="bar"><div class="row"><div><div class="k" id="dk"></div><div id="dt" style="font-size:19px"></div></div><button class="btn" id="dx">✕</button></div></div>
+  <div class="in" id="din"></div></div>
+<script type="module">
+const $ = id => document.getElementById(id);
+const S = (await fetch('sets.json').then(r => r.json())).sets;
+const SRC = {markov: 'MARKOV_POET clips', generated: 'generated stills', archive: 'archive footage', halfworld: 'halfworld renders', film: 'the film', other: 'other images'};
+const pct = v => Math.round((v || 0) * 100) + '%';
+const fP = new Set(), fS = new Set();
+const poems = [...new Set(S.map(s => s.poem))].sort(), srcs = [...new Set(S.map(s => s.source))];
+const mk = (id, vals, set, name) => { $(id).innerHTML = vals.map(v => `<button class="chip" data-v="${v}">${name(v)}</button>`).join('');
+  $(id).querySelectorAll('.chip').forEach(b => b.onclick = () => { set.has(b.dataset.v) ? set.delete(b.dataset.v) : set.add(b.dataset.v); b.classList.toggle('on'); draw(); }); };
+mk('cp', poems, fP, v => `${v} ${S.find(s => s.poem === v).title}`);
+mk('cs', srcs, fS, v => SRC[v] || v);
+function draw() {
+  const xs = S.filter(s => (!fP.size || fP.has(s.poem)) && (!fS.size || fS.has(s.source)));
+  $('count').textContent = `${xs.length} worlds, each grown from one set of shots · ${xs.reduce((a, s) => a + s.cities, 0)} new cities between them`;
+  $('grid').innerHTML = xs.map(s => `<div class="card" data-id="${s.id}">
+    <div class="shots">${s.images.slice(0, 4).map(i => `<img loading="lazy" src="${i.img}" alt="">`).join('')}</div>
+    <div class="two"><img class="map" loading="lazy" src="${s.maps[1]}" alt=""><img class="map" loading="lazy" src="${(s.heroes[1] || s.heroes[0] || {}).img || s.maps[1]}" alt="" style="object-fit:cover"></div>
+    <div class="c"><b>${s.poem} ${s.title}</b> · from ${SRC[s.source] || s.source}<br>${s.layout} · ${s.cities} new cities · ${s.urban}% city · builder ${pct(s.builder)}${s.shots.length ? ` · shots given back ${pct(s.shots.reduce((a, x) => a + x.after, 0) / s.shots.length)}` : ''}</div></div>`).join('');
+  $('grid').querySelectorAll('.card').forEach(c => c.onclick = () => open(c.dataset.id));
+}
+function open(id) {
+  const s = S.find(x => x.id === id);
+  $('dk').textContent = `${s.poem} · from ${SRC[s.source] || s.source}`; $('dt').textContent = s.title;
+  $('din').innerHTML = `
+    <h3>The set</h3><div class="imgs">${s.images.map(i => `<figure><img loading="lazy" src="${i.img}" alt=""><figcaption>${i.attributed ? '<b style="color:#ffd23f">tied to the poem</b> · ' : ''}${i.video ? 'video keyframe · ' : ''}fit ${i.clip} · ${i.land ? 'landscape' : 'a set / a body'}</figcaption></figure>`).join('')}</div>
+    <h3>What the set says the land is</h3><ul class="why">${s.why.map(w => `<li>${w}</li>`).join('')}</ul>
+    <div class="vs">${s.variants.map((v, k) => `<span class="${k === s.chosen ? 'win' : ''}">world ${k + 1}: gives shots back ${pct(v.match)} · builder ${pct(v.builder)} · poems ${pct(v.poems)}${k === s.chosen ? ' — chosen' : ''}</span>`).join('')}</div>
+    <h3>The world it grew</h3><div class="duo">
+      <figure><img src="${s.maps[0]}" alt=""><figcaption>as grown from the set</figcaption></figure>
+      <figure><img src="${s.maps[1]}" alt=""><figcaption>after its shots sculpted it (pink: the cameras)</figcaption></figure>
+      ${s.heroes.map(h => `<figure><img src="${h.img}" alt=""><figcaption>aerial · ${h.label}</figcaption></figure>`).join('')}</div>
+    ${s.shots.length ? `<h3>Each shot, given back by its world</h3><div class="pairs">${s.shots.map(x => `<div class="pair"><div class="ab"><img src="${x.img}" alt=""><img src="${x.frame}" alt=""></div>
+      <div class="c">the shot · the world’s frame — match ${pct(x.before)} → <b>${pct(x.after)}</b>${x.grown.length ? `<ul>${x.grown.map(g => `<li>${g}</li>`).join('')}</ul>` : ''}</div></div>`).join('')}</div>` : '<p class="note">No landscape in this set (rooms, bodies, faces) — its world is inferred from the set but there is no horizon to give back.</p>'}`;
+  $('det').classList.add('on'); $('det').scrollTop = 0;
+}
+$('dx').onclick = () => $('det').classList.remove('on');
+addEventListener('keydown', e => { if (e.key === 'Escape') $('dx').onclick(); });
+draw();
+</script>
+</body>
+</html>
