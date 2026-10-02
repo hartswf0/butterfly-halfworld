@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elsewhere Map</title>
+<meta name="description" content="WYGWYL · a movie map recovered from the pictures: each iconic shot folded into a walkable pop-up, linked the Aspen way (forward, left, right, back) and by spatial rhyme; the map is drawn from the walk, contradictions kept.">
+<style>
+:root{--bg:#07080a;--panel:rgba(12,14,17,.84);--line:rgba(255,255,255,.13);--ink:#efe8da;--dim:#9b958a;--acc:#ffb35c;--acc2:#7fd1ff;--rh:#d88cff;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:13px/1.4 ui-sans-serif,-apple-system,"Helvetica Neue",Arial,sans-serif;overflow:hidden;-webkit-tap-highlight-color:transparent}
+#gl{position:fixed;inset:0;touch-action:none}
+#map{position:fixed;left:50%;top:10px;transform:translateX(-50%);width:min(520px,94vw);height:150px;background:var(--panel);border:1px solid var(--line);border-radius:12px;cursor:pointer}
+#map.big{top:0;left:0;transform:none;width:100vw;height:100vh;border-radius:0;z-index:5;cursor:grab}
+#maphint{position:fixed;left:50%;top:164px;transform:translateX(-50%);font:10px ui-monospace,Menlo,monospace;color:var(--dim);pointer-events:none}
+#info{position:fixed;left:12px;top:10px;width:min(300px,44vw);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:9px 11px}
+#info h1{margin:0 0 3px;font:600 15px/1.2 Georgia,serif}#info .k{color:var(--dim);font:11px ui-monospace,Menlo,monospace}
+#info a{color:var(--acc2);text-decoration:none}
+#ph{display:block;margin-top:6px;width:100%;height:46px}
+#side{position:fixed;right:12px;top:10px;width:min(250px,40vw);max-height:calc(100vh - 210px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:9px 11px}
+#side h2{margin:10px 0 6px;font:600 10px ui-monospace,Menlo,monospace;letter-spacing:.15em;color:var(--dim);text-transform:uppercase}#side h2:first-child{margin-top:0}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+button{background:rgba(255,255,255,.06);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 9px;font:12px inherit;font-family:inherit;cursor:pointer}
+button:hover{border-color:rgba(255,255,255,.35)}button.on{background:var(--acc);border-color:var(--acc);color:#1b1206}
+#sp{font-size:11px;color:var(--dim);margin-top:4px;min-height:30px}
+#exits{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:grid;grid-template-columns:repeat(5,auto);gap:8px;align-items:end}
+.ex{width:118px;height:84px;border-radius:10px;overflow:hidden;position:relative;border:1px solid var(--line);background:#000;cursor:pointer;padding:0}
+.ex img{width:100%;height:100%;object-fit:cover;opacity:.85;display:block}.ex:hover img{opacity:1}.ex:hover{border-color:var(--acc)}
+.ex b{position:absolute;left:6px;top:4px;font:700 16px ui-monospace,Menlo,monospace;text-shadow:0 1px 3px #000}
+.ex span{position:absolute;left:0;right:0;bottom:0;font:10px ui-monospace,Menlo,monospace;padding:8px 5px 3px;background:linear-gradient(transparent,rgba(0,0,0,.85))}
+.ex.none{opacity:.25;pointer-events:none}.ex.rh{border-color:rgba(216,140,255,.6)}.ex.rh b{color:var(--rh)}
+#rhy{display:flex;flex-direction:column;gap:4px}#rhy .ex{width:84px;height:52px}
+#cut{position:fixed;inset:0;pointer-events:none;background:#fff;opacity:0}
+#loading{position:fixed;inset:0;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;background:var(--bg);z-index:9;color:var(--dim);font:13px Georgia,serif}
+#tip{position:fixed;left:12px;bottom:14px;max-width:260px;color:var(--dim);font-size:11px}
+@media (max-width:760px){
+  #maphint{display:none}#info{width:auto;right:12px;top:166px;padding:7px 9px}#info h1{font-size:13px}#ph{display:none}
+  #side{top:auto;bottom:118px;right:8px;left:8px;width:auto;max-height:30vh;display:none}#side.open{display:block}
+  #exits{bottom:8px;gap:5px}.ex{width:64px;height:54px}.ex span{display:none}#rhy .ex{width:50px;height:30px}#tip{display:none}
+  #menu{display:block!important}
+}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div id="cut"></div>
+<canvas id="map"></canvas><div id="maphint">the remembered map · tap to open</div>
+<div id="info"><h1 id="title">ELSEWHERE MAP</h1><div class="k" id="meta"></div><canvas id="ph" width="560" height="92"></canvas><div class="k" id="how" style="margin-top:4px"></div></div>
+<aside id="side">
+  <h2>View</h2>
+  <div class="chips" id="views"><button data-v="photo" class="on">photograph</button><button data-v="fold">the fold</button><button data-v="both">both</button></div>
+  <h2>Camera species</h2>
+  <div class="chips" id="species"></div><div id="sp"></div>
+  <h2>Poems · enter at</h2>
+  <div class="chips" id="poems"></div>
+  <h2>About</h2>
+  <p style="font-size:11px;color:var(--dim);margin:0">No city was built first. Each shot is folded from its own segmentation into floor, walls and sky, and you can walk a few steps into it. Its exits are other shots: <b>forward</b> is what the middle of the frame becomes, <b>left/right</b> what continues past its edge, <b>rhyme</b> the same spatial event in an unlike subject. The map above is drawn from walking those links; where two walks disagree the place is kept twice (dashed). <a href="../city3d/index.html" style="color:var(--acc2)">the built city</a> · <a href="../../atlas.html" style="color:var(--acc2)">atlas</a></p>
+  <div class="k" id="ver" style="margin-top:6px;font:10px ui-monospace,Menlo,monospace;color:var(--dim)"></div>
+</aside>
+<button id="menu" style="display:none;position:fixed;right:8px;top:166px;z-index:3">☰</button>
+<div id="exits">
+  <button class="ex" id="xl"><img alt=""><b>←</b><span></span></button>
+  <button class="ex" id="xb"><img alt=""><b>↓</b><span></span></button>
+  <button class="ex" id="xf"><img alt=""><b>↑</b><span></span></button>
+  <button class="ex" id="xr"><img alt=""><b>→</b><span></span></button>
+  <div id="rhy"></div>
+</div>
+<div id="tip">↑ ↓ ← → to travel · W/S to walk into the picture · drag to look · R rhyme · F fold · M map</div>
+<div id="loading">folding the pictures …</div>
+<script type="module" src="./elsewhere.mjs"></script>
+</body>
+</html>
