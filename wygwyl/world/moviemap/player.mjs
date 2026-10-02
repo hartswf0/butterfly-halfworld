@@ -59,7 +59,7 @@ function getSheet(key) {
 const capView = (dir, view) => dir > 0 ? view : (view + 2) % 4;
 function frameRef(e, i, dir, view) { if (!SEG.has(e)) return null; const r = sheetOf(e, capView(dir, view), i); r.sheet = getSheet(r.key); return r; }
 function prefetch() { if (!SEG.has(S.e)) return; const n = steps(S.e).length; for (const ahead of [0, PER]) { const i = S.i + S.dir * ahead; if (i >= 0 && i < n) getSheet(sheetOf(S.e, capView(S.dir, S.view), i).key); }
-  const idle = () => { for (let v = 0; v < 4; v++) getSheet(sheetOf(S.e, v, S.i).key); }; (window.requestIdleCallback || setTimeout)(idle); }
+  const seg = S.e, at = S.i, idle = () => { if (SEG.has(seg)) for (let v = 0; v < 4; v++) getSheet(sheetOf(seg, v, at).key); };   /* the corner may be behind us by then */ (window.requestIdleCallback || setTimeout)(idle); }
 
 // ——— is the disc enough, or must the engine render this pose live? ———
 const onDisc = () => SEG.has(S.e) && S.era === 5 && !S.season && S.hour === 12 && S.weather === 'clear' && S.style === 'photo';
