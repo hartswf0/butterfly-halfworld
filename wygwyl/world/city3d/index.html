@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Atlantis City Across Time</title>
+<meta name="description" content="WYGWYL · the inverse city in 3D: built from 2,707 iconic shots, grown across six eras with ruins and reuse, real sun and stars, weather and tides, footage overlaid where it was seen.">
+<style>
+:root{--bg:#0b0d10;--panel:rgba(14,17,21,.86);--line:rgba(255,255,255,.12);--ink:#ece6da;--dim:#9a958c;--acc:#ffb35c;--acc2:#7fd1ff;--red:#ff5a4a;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:13px/1.4 ui-sans-serif,-apple-system,"Helvetica Neue",Arial,sans-serif;overflow:hidden;-webkit-tap-highlight-color:transparent}
+#gl{position:fixed;inset:0;touch-action:none}
+#labels{position:fixed;inset:0;pointer-events:none}
+.lab{font:600 11px/1.15 ui-sans-serif,-apple-system,Arial;color:#fff;text-shadow:0 1px 3px #000,0 0 8px #000;white-space:nowrap;text-align:center;pointer-events:auto;cursor:pointer;transform:translateY(-8px)}
+.lab small{display:block;font-weight:400;color:#e8d8b8;font-size:10px;opacity:.9}
+.lab.lm::before{content:"◆ ";color:var(--acc)}.lab.poem{color:var(--acc2);font-size:12px}.lab.poem::before{content:"● "}
+.lab.dist{font:500 12px/1.1 Georgia,serif;letter-spacing:.14em;text-transform:uppercase;color:#f5ead0;opacity:.85;pointer-events:none}
+.lab.ward{font:700 10px/1 ui-monospace,Menlo,monospace;color:#fff;background:rgba(0,0,0,.45);padding:2px 5px;border-radius:3px}
+#top{position:fixed;left:12px;top:10px;right:12px;display:flex;gap:10px;align-items:flex-start;pointer-events:none}
+#title{pointer-events:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 12px;max-width:440px;backdrop-filter:blur(6px)}
+#title h1{margin:0;font:600 15px/1.2 Georgia,serif;letter-spacing:.04em}#title .v{color:var(--dim);font:10px ui-monospace,Menlo,monospace;margin-top:2px}
+#title a{color:var(--acc2);text-decoration:none}
+#clock{margin-left:auto;pointer-events:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px 10px;font:12px ui-monospace,Menlo,monospace;text-align:right}
+#clock b{font-size:16px;color:var(--acc)}
+#panel{position:fixed;right:12px;top:70px;bottom:132px;width:330px;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px 14px;backdrop-filter:blur(8px);scrollbar-width:thin}
+#panel.hide{display:none}
+#panel h2{font:600 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.16em;color:var(--dim);margin:14px 0 7px;text-transform:uppercase}
+#panel h2:first-child{margin-top:2px}
+.row{display:flex;align-items:center;gap:8px;margin:5px 0}.row label{width:58px;color:var(--dim);font-size:11px}.row output{width:72px;text-align:right;font:11px ui-monospace,Menlo,monospace}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+button,.chip{background:rgba(255,255,255,.06);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:5px 10px;font:12px inherit;font-family:inherit;cursor:pointer}
+button:hover{border-color:rgba(255,255,255,.3)}button.on{background:var(--acc);color:#1a1208;border-color:var(--acc)}
+input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:22px;background:transparent;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(90deg,var(--acc) var(--p,50%),rgba(255,255,255,.16) var(--p,50%))}
+input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:rgba(255,255,255,.16)}input[type=range]::-moz-range-progress{height:4px;background:var(--acc);border-radius:2px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--acc);margin-top:-6px;box-shadow:0 1px 4px #000}
+input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:#fff;border:2px solid var(--acc)}
+#eras{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin:6px 0}
+#eras button{border-radius:6px;padding:6px 2px;font-size:10px;line-height:1.1}
+#lore{font:13px/1.5 Georgia,serif;color:#e9e0cc;background:rgba(255,255,255,.04);border-left:2px solid var(--acc);padding:8px 10px;border-radius:4px;min-height:84px}
+#counts{color:var(--dim);font:11px ui-monospace,Menlo,monospace;margin-top:5px}
+.list{display:grid;grid-template-columns:1fr 1fr;gap:4px}.list button{border-radius:6px;text-align:left;font-size:11px;padding:5px 7px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chk{display:flex;flex-wrap:wrap;gap:4px 12px}.chk label{display:flex;gap:5px;align-items:center;color:var(--ink);font-size:12px;cursor:pointer}
+#strip{position:fixed;left:12px;right:354px;bottom:12px;height:108px;display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;align-items:flex-end;scrollbar-width:thin}
+#strip .hd{flex:0 0 110px;align-self:stretch;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px;font-size:11px;color:var(--dim)}
+#strip .hd b{display:block;color:var(--ink);font:600 12px Georgia,serif;margin-bottom:3px}
+.shot{flex:0 0 auto;height:100px;position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--line);cursor:pointer;background:#000}
+.shot img{height:100%;display:block}.shot span{position:absolute;left:0;right:0;bottom:0;font:10px ui-monospace,Menlo,monospace;background:linear-gradient(transparent,rgba(0,0,0,.85));padding:10px 5px 3px;color:#fff}
+.shot:hover{border-color:var(--acc)}
+#fit{position:fixed;inset:0;pointer-events:none;display:none}
+#fit img{width:100%;height:100%;object-fit:cover;opacity:.5;mix-blend-mode:normal}
+#fitbar{position:fixed;left:50%;top:70px;transform:translateX(-50%);display:none;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 12px;gap:10px;align-items:center;max-width:min(680px,92vw);flex-wrap:wrap}
+#fitbar .cap{font-size:12px;max-width:340px}#fitbar .cap b{color:var(--acc)}
+#film{position:fixed;left:12px;bottom:132px;width:360px;display:none;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px;max-height:calc(100vh - 220px);overflow:auto}
+#film video{width:100%;border-radius:6px;background:#000;display:block}
+#film h3{margin:2px 0 6px;font:600 14px Georgia,serif}#film .wt{font:13px/1.45 Georgia,serif;color:#eadfc8;margin:6px 0}
+#filmov{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35;pointer-events:none;display:none}
+#info{position:fixed;left:12px;top:86px;max-width:330px;display:none;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+#info h3{margin:0 0 4px;font:600 15px Georgia,serif}#info .k{color:var(--dim);font-size:11px}#info .ev{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}#info .ev img{height:44px;border-radius:4px;cursor:pointer}
+#loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:var(--bg);z-index:10;font:13px Georgia,serif;color:var(--dim)}
+#loading .bar{width:220px;height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}#loading .bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .2s}
+#toggle{display:none}
+#joy{position:fixed;left:24px;bottom:150px;width:110px;height:110px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.2);display:none;touch-action:none}
+#joy i{position:absolute;left:35px;top:35px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.35)}
+#hint{position:fixed;left:50%;bottom:130px;transform:translateX(-50%);color:#fff;text-shadow:0 1px 3px #000;font-size:12px;opacity:.85;pointer-events:none;text-align:center}
+@media (max-width:760px){
+  #panel{left:0;right:0;top:auto;bottom:0;width:auto;max-height:56vh;border-radius:14px 14px 0 0}
+  #toggle{display:block;position:fixed;right:12px;bottom:12px;z-index:3}
+  #strip{left:8px;right:8px;bottom:58px;height:78px}.shot{height:72px}#strip .hd{display:none}
+  #title{max-width:62vw;padding:6px 9px}#title h1{font-size:13px}#title .v{display:none}
+  #film{left:8px;right:8px;width:auto;bottom:146px}#info{left:8px;right:8px;top:64px;max-width:none}
+  #hint{bottom:146px}#joy{bottom:150px}
+}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div id="labels"></div>
+<img id="filmov" alt="">
+<video id="filmovv" style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35;pointer-events:none;display:none" muted playsinline loop></video>
+<div id="fit"><img alt=""></div>
+<div id="top">
+  <div id="title"><h1>ATLANTIS · the city across time</h1>
+    <div class="v" id="ver"></div></div>
+  <div id="clock"><b id="clk">18:45</b><div id="dt"></div><div id="tide"></div></div>
+</div>
+<div id="info"></div>
+<div id="fitbar"><div class="cap" id="fitcap"></div>
+  <div class="row" style="margin:0;min-width:180px"><label>overlay</label><input type="range" id="fitop" min="0" max="1" step="0.01" value="0.5"></div>
+  <button id="fitprev">‹</button><button id="fitnext">›</button><button id="fitx">close</button></div>
+<div id="film"></div>
+<div id="strip"></div>
+<div id="joy"><i></i></div>
+<div id="hint"></div>
+<button id="toggle">☰ tools</button>
+<aside id="panel">
+  <h2>History · six eras</h2>
+  <div id="eras"></div>
+  <div class="row"><input type="range" id="era" min="0" max="5" step="1" value="5"><button id="play">▶ play history</button></div>
+  <div id="lore"></div><div id="counts"></div>
+  <h2>Light</h2>
+  <div class="row"><label>hour</label><input type="range" id="hour" min="0" max="24" step="0.05" value="18.75"><output id="hourO"></output></div>
+  <div class="row"><label>day</label><input type="range" id="doy" min="1" max="365" step="1" value="265"><output id="doyO"></output></div>
+  <div class="chips" id="presets"></div>
+  <div class="row"><label>time</label><button id="run">▶ run the clock</button><select id="speed" style="background:#1a1d22;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:4px"><option value="120">×120</option><option value="600" selected>×600</option><option value="3000">×3000</option></select></div>
+  <h2>Weather · sea</h2>
+  <div class="chips" id="weather"></div>
+  <div class="row"><label>tide</label><output id="tideO" style="width:auto;text-align:left"></output></div>
+  <h2>Move</h2>
+  <div class="chips" id="modes"></div>
+  <div class="row" style="color:var(--dim);font-size:11px" id="modehelp"></div>
+  <h2>Layers</h2>
+  <div class="chk" id="layers"></div>
+  <h2>The fourteen poems</h2>
+  <div class="list" id="poems"></div>
+  <h2>Landmarks</h2>
+  <div class="list" id="lms"></div>
+  <h2>Wards · voting districts</h2>
+  <div id="wards" style="font-size:11px;color:var(--dim)"></div>
+  <p style="color:var(--dim);font-size:11px;margin-top:14px">Deterministic: the same canon and city checksum build the same city every time. Shots are placed where they were read: click one to stand where it was taken and lay the frame over the city. Landmark names are the references the shots were read against; the city is invented.</p>
+</aside>
+<div id="loading"><div>raising the city …</div><div class="bar"><i id="lbar"></i></div><div id="lmsg" style="font-size:11px"></div></div>
+<script type="module" src="./app.mjs"></script>
+</body>
+</html>
