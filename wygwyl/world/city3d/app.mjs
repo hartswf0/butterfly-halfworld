@@ -9,6 +9,7 @@ import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
 import {loadCity, sampler, makeTerrain, makeWards, makeRoads, makeBuildings, makeTrees, makeStreetLife, STYLES, COVER} from './city.mjs';
 import {buildLandmark, tickClocks, MATS, NIGHTLIT} from './landmarks.mjs';
 import {makeHeavens, makeSea} from './heavens.mjs';
+import {makeRising} from './evolved.mjs';
 
 const $ = id => document.getElementById(id);
 const MOBILE = matchMedia('(max-width: 760px), (pointer: coarse)').matches;
@@ -21,7 +22,7 @@ renderer.shadowMap.enabled = !MOBILE; renderer.shadowMap.type = THREE.PCFSoftSha
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 1, 52000);
 const labels = new CSS2DRenderer({element: $('labels')}); labels.setSize(innerWidth, innerHeight);
-const U = {night: {value: 0}, era: {value: 5}, time: {value: 0}, wet: {value: 0}};
+const U = {night: {value: 0}, era: {value: 5}, time: {value: 0}, wet: {value: 0}, pulseO: {value: new THREE.Vector2(-1e5, -1e5)}, pulseT: {value: 99}};
 
 step(8, 'reading the worldtext');
 const C = await loadCity('./').catch(e => { step(0, 'could not load the city: ' + e.message + ' (serve over http)'); throw e; });
@@ -51,6 +52,10 @@ function setLandmarks(e) {
     g.children.forEach(c => c.visible = false); if (!st) continue;
     const c = g.userData.cache[st] || (g.userData.cache[st] = buildLandmark(g.userData.lm, st)); if (!c.parent) g.add(c); c.visible = true; }
 }
+// ——— Atlantis rising: the structures evolved from the shots that ask for them ———
+step(86, 'the evolved structures');
+const rising = makeRising(scene, C, S, heav, U); const RD = await rising.load('structures.json').catch(() => null);
+let vi = RD ? Math.max(0, RD.variants.findIndex(v => v.name === (Q.get('variant') || 'the mixed city'))) : -1;
 const mats = MATS(); for (const k of NIGHTLIT) mats[k].userData.base = mats[k].emissiveIntensity;
 
 // ——— labels: landmarks, poems, districts (with their use in this era), wards ———
@@ -152,6 +157,7 @@ let playing = null; $('play').onclick = () => { if (playing) { clearInterval(pla
 function setEra(e) {
   era = e; U.era.value = e; $('era').value = e; syncRange($('era'));
   document.querySelectorAll('#eras button').forEach(b => b.classList.toggle('on', +b.dataset.e === e));
+  blds.userData.setExtraClear(rising.footprints(vi)); rising.build(vi, e);
   const c = blds.userData.setEra(e); trees.userData.setEra(e); street.userData.setEra(e); setLandmarks(e); terrain.userData.paint(e, LAYERS.wards ? wards : null);
   $('lore').innerHTML = `<b>${e} · ${ERA[e]}.</b> ${meta.lore[e]}`;
   $('counts').textContent = `${c.standing.toLocaleString()} standing · ${c.ruins} ruins · ${LM.filter(l => lmState(l, e)).length} landmarks`;
@@ -165,10 +171,11 @@ const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(); let infoK = null
 function pick(e) {
   if (e.target !== renderer.domElement) return;
   mouse.set(e.clientX / innerWidth * 2 - 1, -e.clientY / innerHeight * 2 + 1); ray.setFromCamera(mouse, camera);
-  const tgt = [shotMesh, ...lmGroups, blds.userData.meshes.body, blds.userData.meshes.ruins].filter(o => o.visible);
+  const tgt = [shotMesh, ...lmGroups, ...rising.groups, blds.userData.meshes.body, blds.userData.meshes.ruins].filter(o => o.visible);
   const h = ray.intersectObjects(tgt, true)[0]; if (!h) { $('info').style.display = 'none'; infoK = null; return; }
   if (h.object === shotMesh) return fitShot(h.instanceId);
-  let o = h.object; while (o && !o.userData.lm) o = o.parent; if (o) return showLandmark(LM.indexOf(o.userData.lm));
+  let o = h.object; while (o && !o.userData.lm && !o.userData.s) o = o.parent; if (o && o.userData.s) { rising.pulse(o.userData.s.x, o.userData.s.y); return showStructure(o.userData.s); }
+  if (o) { rising.pulse(o.userData.lm.x, o.userData.lm.y); return showLandmark(LM.indexOf(o.userData.lm)); }
   const mesh = h.object, key = mesh === blds.userData.meshes.body ? 'body' : 'ruins', k = blds.userData.owner[key][h.instanceId]; if (k != null) showBuilding(k, h.point);
 }
 function nearestDistrict(x, y) { return meta.districts.reduce((b, d) => { const dd = Math.hypot(d.x - x, d.y - y); return dd < b.d ? {d: dd, v: d} : b; }, {d: 1e9}).v; }
@@ -183,6 +190,15 @@ function showBuilding(k, p) {
   $('info').innerHTML = `<h3>${STYLES[st]} · ${B[o + 5].toFixed(0)} m</h3><div class="k">${state} · ${life.join(' · ')}</div>
     <div class="k" style="margin-top:4px">${d ? d.name : ''}${w ? ` · ward ${w.ward}` : ''} — used now as <b style="color:var(--acc)">${d && d.use ? d.use[era] : d ? d.type : ''}</b></div>${evid(near)}`;
   $('info').style.display = 'block'; infoK = null; wireEvid();
+}
+const TNAME = {spire: 'spire', arcology: 'arcology', ring: 'halo', dish: 'listening dish', dome: 'dome', seawall: 'sea wall', vfarm: 'garden tower', platform: 'sea platform'};
+function showStructure(s) {
+  infoK = null; const dims = s.t === 'ring' ? `radius ${s.R.toFixed(0)} m, lifted ${s.lift.toFixed(0)} m on ${s.legs} legs` : s.t === 'seawall' ? `${s.L.toFixed(0)} m long, ${s.H.toFixed(0)} m high, ${s.gates} tide gates` : s.t === 'dome' ? `${(s.r * 2).toFixed(0)} m across, ${s.ribs} ribs` : `${(s.H || 0).toFixed(0)} m high, ${((s.r || 0) * 2).toFixed(0)} m wide`;
+  const [b, r, as] = s.era;
+  $('info').innerHTML = `<h3>${TNAME[s.t]} · ${RD.variants[vi].name}</h3><div class="k">${dims} · raised in <b>${ERA[b]}</b>${r < 9 ? ` · broken in ${ERA[r]} · ${as}` : ''}</div>
+    <div class="k" style="margin-top:4px">called for by <b style="color:var(--acc)">${s.causes.length} shots</b> that read as a ${TNAME[s.t]} and look this way — it stands where it answers the most of them</div>
+    <div class="k" style="margin-top:3px">lineage: ${s.muts.join(' → ') || 'founding'}</div>${evid(s.causes)}`;
+  $('info').style.display = 'block'; wireEvid();
 }
 function showLandmark(i) {
   const lm = LM[i]; infoK = i; const st = lmState(lm, era), [b, r, as] = lm.era;
@@ -231,6 +247,17 @@ function goPoem(num) {
 const audio = new Audio();
 meta.poems.forEach(p => { const b = document.createElement('button'); b.textContent = `${p.num} ${p.title}`; b.onclick = () => goPoem(p.num); $('poems').append(b); });
 LM.forEach((lm, i) => { const b = document.createElement('button'); b.textContent = lm.name.split(' · ')[0].split(',')[0]; b.onclick = () => showLandmark(i); $('lms').append(b); });
+if (RD) {
+  RD.variants.forEach((v, i) => { const b = document.createElement('button'); b.textContent = v.name.replace('the ', ''); b.title = `${v.n} structures answer ${v.structures.reduce((a, s) => a + s.causes.length, 0)} shots · fitness ${v.fitness}`; b.dataset.v = i; b.onclick = () => { vi = i; syncVariant(); setEra(era); }; $('variants').append(b); });
+  const nb = document.createElement('button'); nb.textContent = 'none'; nb.dataset.v = -1; nb.onclick = () => { vi = -1; syncVariant(); setEra(era); }; $('variants').append(nb);
+  $('vver').textContent = `${RD.version} · ${RD.checksum} · ${RD.gens.toLocaleString()} generations · ${RD.calls} calls`;
+}
+function syncVariant() { document.querySelectorAll('#variants button').forEach(b => b.classList.toggle('on', +b.dataset.v === vi));
+  const v = vi >= 0 ? RD.variants[vi] : null; $('vinfo').textContent = v ? `${v.n} structures · answer ${v.structures.reduce((a, s) => a + s.causes.length, 0)} of ${RD.calls} calls · appear in Resurrection (sea walls from the New Boroughs)` : 'the city without the evolved structures'; }
+syncVariant();
+$('resonate').onclick = () => { const t = orbit.enabled ? orbit.target : camera.position; rising.pulse(t.x, t.z); };
+$('causes').onchange = e => rising.setCauses(e.target.checked);
+setInterval(() => { if (U.night.value > 0.5 && rising.groups.length) { const g = rising.groups[(Math.random() * rising.groups.length) | 0]; rising.pulse(g.position.x, g.position.z); } }, 22000);
 $('wards').innerHTML = wards.list.map(d => `<div><b style="color:hsl(${(d.ward - 1) * 0.137 % 1 * 360},65%,60%)">WARD ${d.ward}</b> · ${d.name.replace(/^the /, '')} — ${d.use ? d.use[5] : d.type}</div>`).join('');
 
 // ——— the footage strip: the shots nearest you, facing your way ———
@@ -277,8 +304,8 @@ function frameLoop() {
   const night = heav.state.night; U.night.value = THREE.MathUtils.smoothstep(night, 0.15, 0.7);
   U.wet.value += ((weather === 'rain' || weather === 'storm' ? 1 : 0) - U.wet.value) * dt * 0.3;
   for (const k of NIGHTLIT) mats[k].emissiveIntensity = mats[k].userData.base * (0.08 + 0.92 * U.night.value);
-  const tide = heav.state.tide, rising = Math.cos(2 * Math.PI * (dateOf().getTime() / 36e5) / 12.42) > 0;
-  $('tide').textContent = `tide ${tide >= 0 ? '+' : ''}${tide.toFixed(2)} m ${rising ? '↑' : '↓'}`; $('tideO').textContent = `${tide >= 0 ? '+' : ''}${tide.toFixed(2)} m · ${rising ? 'flooding' : 'ebbing'} · semidiurnal 12.42 h`;
+  const tide = heav.state.tide, flooding = Math.cos(2 * Math.PI * (dateOf().getTime() / 36e5) / 12.42) > 0;
+  $('tide').textContent = `tide ${tide >= 0 ? '+' : ''}${tide.toFixed(2)} m ${flooding ? "↑" : "↓"}`; $('tideO').textContent = `${tide >= 0 ? '+' : ''}${tide.toFixed(2)} m · ${flooding ? "flooding" : "ebbing"} · semidiurnal 12.42 h`;
   const mi = Math.floor(hour * 60); if (mi !== clockMin) { clockMin = mi; tickClocks({getHours: () => Math.floor(hour), getMinutes: () => Math.floor((hour % 1) * 60)}); }
   // animated pieces in the landmarks
   for (const g of lmGroups) g.traverse(o => { if (o.userData.beam) { o.parent.visible && (o.rotation.y += dt * 0.9); o.visible = U.night.value > 0.2; o.material.opacity = 0.1 * U.night.value; }
@@ -309,6 +336,7 @@ function frameLoop() {
     if (V3.distanceTo(camera.position) > 2) camera.lookAt(V3);
   }
   if (ptour) { ptour.t += dt; if (ptour.t > 9) { ptour.t = 0; ptour.k = (ptour.k + 1) % meta.poems.length; goPoem(meta.poems[ptour.k].num); } }
+  rising.update(dt, U.time.value);
   if (mode === 'orbit') orbit.update();
   // label culling
   const cp = camera.position;
@@ -321,4 +349,4 @@ function frameLoop() {
 }
 requestAnimationFrame(frameLoop);
 addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); labels.setSize(innerWidth, innerHeight); composer?.setSize(innerWidth, innerHeight); });
-window.__city = {scene, camera, orbit, setEra, setWeather, goPoem, fitShot, heav, setMode, get hour() { return hour; }, set hour(v) { hour = v; setTimeUI(); }, C};
+window.__city = {rising, scene, camera, orbit, setEra, setWeather, goPoem, fitShot, heav, setMode, get hour() { return hour; }, set hour(v) { hour = v; setTimeUI(); }, C};

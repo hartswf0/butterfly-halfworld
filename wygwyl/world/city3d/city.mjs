@@ -134,7 +134,7 @@ export function makeRoads(C, S, U) {
 export function facadeMat(U, opts = {}) {
   const m = new THREE.MeshStandardMaterial({color: 0xffffff, roughness: 0.84});
   m.onBeforeCompile = sh => {
-    sh.uniforms.uNight = U.night; sh.uniforms.uTime = U.time; sh.uniforms.uWet = U.wet;
+    sh.uniforms.uNight = U.night; sh.uniforms.uTime = U.time; sh.uniforms.uWet = U.wet; sh.uniforms.uPulseO = U.pulseO; sh.uniforms.uPulseT = U.pulseT;
     sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nattribute vec4 aInfo; varying vec4 vInfo; varying vec3 vWP; varying vec3 vWN;')
       .replace('#include <worldpos_vertex>', `#include <worldpos_vertex>
         vec4 q4 = vec4(transformed, 1.0);
@@ -145,7 +145,7 @@ export function facadeMat(U, opts = {}) {
         #endif
         vWP = (modelMatrix * q4).xyz; vInfo = aInfo;`);
     sh.fragmentShader = sh.fragmentShader.replace('#include <common>', `#include <common>
-      uniform float uNight, uTime, uWet; varying vec4 vInfo; varying vec3 vWP; varying vec3 vWN;
+      uniform float uNight, uTime, uWet, uPulseT; uniform vec2 uPulseO; varying vec4 vInfo; varying vec3 vWP; varying vec3 vWN;
       float fh(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }`)
       .replace('#include <color_fragment>', `#include <color_fragment>
       vec3 bEmis = vec3(0.0);
@@ -178,6 +178,8 @@ export function facadeMat(U, opts = {}) {
         if (club) { float band = step(0.92, vv) * step(vv, 1.08) * vert; float pulse = 0.6 + 0.4 * sin(uTime * 3.0 + seed * 9.0);
           bEmis += mix(vec3(1.0, 0.1, 0.55), vec3(0.1, 0.9, 1.0), step(0.5, fract(seed * 7.0))) * band * 3.0 * uNight * pulse; diffuseColor.rgb *= 0.55; }
         if (glass) bEmis += vec3(0.7, 0.85, 1.0) * w * uNight * 0.55;
+        { float pd = length(vWP.xz - uPulseO); float ring = exp(-pow((pd - uPulseT * 420.0) / 45.0, 2.0)) * exp(-uPulseT * 0.25);   // the resonance passing through
+          bEmis += vec3(0.37, 0.9, 1.0) * ring * (0.6 + 1.6 * w) * (0.4 + uNight); }
       }`)
       .replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance += bEmis;');
   };
@@ -215,12 +217,15 @@ export function makeBuildings(C, U) {
   group.userData.owner = owner;
   // the landmarks and squares keep their ground: no generic building stands inside their footprint
   const clear = [...C.meta.landmarks.filter(l => l.r > 0 && l.type !== 'bridge').map(l => [l.x, l.y, l.r * 1.25 + 10]), ...C.meta.plazas.map(p => [p.x, p.y, p.r + 8])];
+  let extra = [];
+  group.userData.setExtraClear = list => { extra = list; };                // the evolved structures take their lots when they are built
   const keep = new Uint8Array(n); for (let k = 0; k < n; k++) { const x = B[k * 14], y = B[k * 14 + 1], w = Math.max(B[k * 14 + 2], B[k * 14 + 3]) / 2; keep[k] = clear.every(([cx, cy, r]) => Math.hypot(x - cx, y - cy) > r + w) ? 1 : 0; }
   group.userData.setEra = era => {
     let nb = 0, nr = 0, nf = 0, na = 0; owner.body.length = owner.ruins.length = owner.roofs.length = 0;
     for (let k = 0; k < n; k++) {
       const o = k * 14, x = B[o], y = B[o + 1], w = B[o + 2], d = B[o + 3], rot = B[o + 4], h = B[o + 5], st = B[o + 6], born = B[o + 7], ruin = B[o + 8], reuse = B[o + 9], roof = B[o + 10], ah = B[o + 11], ab = B[o + 12], gz = B[o + 13];
       if (born > era || !keep[k]) continue;
+      if (extra.length && extra.some(([cx, cy, r, eb]) => eb <= era && Math.abs(B[o] - cx) < r && Math.abs(B[o + 1] - cy) < r && Math.hypot(B[o] - cx, B[o + 1] - cy) < r)) continue;
       const seed = hash(k, 3), pal = PALETTE[st] || PALETTE[0]; col.setHex(pal[Math.floor(seed * pal.length)]); col.offsetHSL(0, 0, (hash(k, 9) - 0.5) * 0.06);
       const fl = FLOOR[st] || 3.3, ruined = ruin <= era;
       // the back alley behind rowhouses and the old center: a paved lane the depth of a cart
