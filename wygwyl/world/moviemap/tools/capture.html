@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Movie Map Capture Rig</title>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<style>html,body{margin:0;background:#000;color:#ccc;font:12px monospace}canvas{display:block}</style></head>
+<body><canvas id="c"></canvas><div id="s">loading…</div>
+<script type="module">
+// The capture rig: the camera car's four cameras on the engine. A driver (tools/capture-run.mjs) calls cap.shoot() step by step.
+import {makeEngine} from '../engine.mjs';
+const Q = new URLSearchParams(location.search), W = +(Q.get('w') || 480), H = +(Q.get('h') || 320);
+const plan = await fetch('../plan.json').then(r => r.json());
+const canvas = document.getElementById('c');
+const eng = await makeEngine({canvas, width: W, height: H, plan, base: '../../city3d/', preserve: true, shadows: Q.get('shadows') !== '0', onStep: (p, m) => document.getElementById('s').textContent = p + '% ' + m});
+const blob = (type, q) => new Promise(r => canvas.toBlob(b => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(b); }, type, q));
+window.cap = {
+  eng,
+  setup({era = 5, hour = 12, doy = 265, weather = 'clear', season = null, style = 'photo'} = {}) { eng.setEra(era); if (season) eng.setSeason(season); else eng.setDoy(doy); eng.setHour(hour); eng.setWeather(weather); eng.setStyle(style); return eng.st; },
+  async shoot(x, y, h, views = [0, 1, 2, 3], type = 'image/png', q = 1) { const out = []; for (const v of views) { eng.pose(x, y, h, v); eng.render(); out.push(await blob(type, q)); } return out; },
+  // the aerial: an orthographic top-down render of a window of the city
+  async aerial(x0, y0, x1, y1, pw, ph, type = 'image/png') {
+    const {OrthographicCamera} = await import('three'); const cam = new OrthographicCamera(x0, x1, -y0, -y1, 1, 4000);
+    cam.position.set(0, 1500, 0); cam.up.set(0, 0, -1); cam.lookAt(0, 0, 0);
+    eng.heav.sun.castShadow = false; eng.resize(pw, ph, 1); eng.heav.update(0, cam, {x: (x0 + x1) / 2, y: 0, z: (y0 + y1) / 2, clone() { return this; }});
+    const fog = eng.scene.fog; eng.scene.fog = null; eng.renderer.render(eng.scene, cam); eng.scene.fog = fog; const d = await blob(type, 0.9); eng.heav.sun.castShadow = true; eng.resize(W, H, 1); return d;
+  },
+};
+document.getElementById('s').textContent = 'ready';
+window.capReady = true;
+</script></body></html>
