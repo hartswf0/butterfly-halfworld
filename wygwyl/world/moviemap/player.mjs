@@ -3,6 +3,7 @@
 // (WebP sheets pressed from the capture); off the disc, or in another era, season, hour, weather or rendering, the same
 // registered pose is rendered live by the engine. Touch a façade: the ID buffer names the building and the car pulls up to it.
 import {MapView, makeGround, STYLE_N} from './map.mjs';
+import {makeCinema} from './cinema.mjs';
 
 const $ = id => document.getElementById(id);
 const MOBILE = matchMedia('(max-width: 760px), (pointer: coarse)').matches;
@@ -84,7 +85,8 @@ function layout() {
   const r = $('stage').getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2), W = Math.round(r.width * d), H = Math.round(r.height * d);
   for (const c of [frameC, overC]) if (c.width !== W || c.height !== H) { c.width = W; c.height = H; }
   // a wide screen is covered by the frame; a tall one gives the frame a band under the map, a little cropped at the sides
-  const tall = r.width / r.height < 1.15, top = tall ? (r.width < 761 ? 92 : 60) * d : 0, bh = tall ? Math.min(H * 0.52, W / FW * FH * 1.35) : H;
+  const tall = r.width / r.height < 1.15, watching = cine && cine.active && cine.state !== 'choose', bh = tall ? Math.min(H * 0.52, W / FW * FH * 1.35) : H;
+  const top = !tall ? 0 : watching ? Math.round(H * 0.42 - bh / 2) : (r.width < 761 ? 92 : 60) * d;   // watching, the frame takes the middle; the words sit under it
   const s = tall ? Math.max(W / FW, bh / FH) : Math.max(W / FW, H / FH), dw = FW * s, dh = FH * s, dx = (W - dw) / 2, dy = tall ? top : (H - dh) / 2;
   fit = {W, H, d, dx, dy, dw, dh, tall};
   const lv = $('live'); Object.assign(lv.style, {left: dx / d + 'px', top: dy / d + 'px', width: dw / d + 'px', height: dh / d + 'px'});
@@ -92,6 +94,7 @@ function layout() {
 }
 function blit(ref, offset = 0) { if (!ref || !ref.sheet.ready) return false; fx.drawImage(ref.sheet.img, ref.sx, ref.sy, FW, FH, fit.dx + offset * fit.dw, fit.dy, fit.dw, fit.dh); return true; }
 function draw() {
+  if (cine && cine.active && cine.state !== 'choose') { cine.draw(); return; }
   layout(); const live = !onDisc(), lv = $('live');
   fx.fillStyle = '#000'; fx.fillRect(0, 0, fit.W, fit.H);
   fx.save(); fx.beginPath(); fx.rect(Math.max(0, fit.dx), fit.dy, Math.min(fit.W, fit.dw), fit.dh); fx.clip();
@@ -116,7 +119,7 @@ let idc = null; function idCanvas(img) { if (!idc) { idc = document.createElemen
   fx.save(); fx.imageSmoothingEnabled = false; fx.drawImage(idc, fit.dx, fit.dy, fit.dw, fit.dh); fx.restore(); $('live').style.display = 'none'; }
 
 // overlay: the turn arrows on the road at a corner, the hovered and the chosen thing outlined from the ID buffer
-let maskC = null, arrowHits = [];
+let maskC = null, arrowHits = [], cine = null;
 function drawOver() {
   ox.clearRect(0, 0, overC.width, overC.height);
   for (const [m, col] of [[hover, 'rgba(127,209,255,.35)'], [sel, 'rgba(255,179,92,.5)']]) { if (!m || !m.mask || m.key !== poseKey()) continue;
@@ -148,9 +151,10 @@ function hud() {
   $('where').innerHTML = `${blockNo(S.e, sAlong)} block of ${w.name}<small>heading ${compass(p.heading)} · looking ${VIEWN[S.view]} (${compass(p.heading + S.view * Math.PI / 2)})${ward ? ` · ward ${ward}, precinct ${ward}-${pr} (${wardName(ward)})` : ''}${zone ? ` · zone ${zone}` : ''}${w.route ? ` · bus ${w.route}` : ''}${cross ? `<br>next corner: ${cross.name} in ${dist} m` : dist ? `<br>block ends in ${dist} m` : ''}</small>`;
   const live = !onDisc(); $('badge').className = live ? 'live' : '';
   $('badge').textContent = live ? `LIVE · ${liveWhy()}` : `DISC · ${ERA[5]} · 12:00 · 22 Sept · clear`;
-  $('fc').textContent = `segment ${S.e} · corners ${e.a}→${e.b} · frame ${S.i + 1}/${st.length} · view ${VIEWN[S.view]}${S.dir < 0 && SEG.has(S.e) ? ' (driven against the capture)' : ''} · ${(p.x).toFixed(1)}, ${(p.y).toFixed(1)}`;
+  $('thisframe').textContent = `this frame: segment ${S.e} · corners ${e.a}→${e.b} · frame ${S.i + 1}/${st.length} · view ${VIEWN[S.view]}${S.dir < 0 && SEG.has(S.e) ? ' (driven against the capture)' : ''} · ${(p.x).toFixed(1)}, ${(p.y).toFixed(1)}`;
   document.querySelectorAll('#rose button').forEach(b => b.classList.toggle('on', +b.dataset.v === S.view));
-  $('bPlay').classList.toggle('on', S.speed === 1); $('bFast').classList.toggle('on', S.speed === 2); $('bStop').classList.toggle('on', S.speed === 0);
+  // the transport shows only what can be done now: stopped — step back, step, drive, drive fast; moving — stop, or the other speed
+  const mv = S.speed > 0; $('bBack').hidden = mv; $('bStep').hidden = mv; $('bStop').hidden = !mv; $('bPlay').hidden = S.speed === 1; $('bFast').hidden = S.speed === 2;
 }
 
 // ——— moving: a step at a time down the centre; at a corner, a choice ———
@@ -214,7 +218,7 @@ function panViews(from, k, then, keepView = false) {
 const RATE = [0, 4, 10];
 let lastT = 0;
 function loop(now) {
-  if (S.speed && !anim && !choices && now - lastT > 1000 / RATE[S.speed]) {
+  if (S.speed && !(cine && cine.active) && !anim && !choices && now - lastT > 1000 / RATE[S.speed]) {
     const ref = onDisc() ? frameRef(S.e, S.i + S.dir, S.dir, S.view) : null;
     if (!ref || ref.sheet.ready || S.i + S.dir < 0 || S.i + S.dir >= steps(S.e).length) { lastT = now; stepBy(1); }
   }
@@ -227,14 +231,15 @@ let drag = null;
 $('stage').addEventListener('pointerdown', e => { drag = {x: e.clientX, y: e.clientY, t: performance.now(), moved: 0}; });
 addEventListener('pointermove', e => {
   if (drag) { drag.moved = Math.max(drag.moved, Math.abs(e.clientX - drag.x) + Math.abs(e.clientY - drag.y)); return; }
-  if (MOBILE || !eng || anim || e.target !== $('stage') && e.target.parentNode !== $('stage')) return;
+  if (MOBILE || !eng || anim || cine.active || e.target !== $('stage') && e.target.parentNode !== $('stage')) return;
   clearTimeout(hoverT); hoverT = setTimeout(() => { const uv = toUV(e.clientX, e.clientY); if (!uv) { hover = null; requestDraw(); return; } syncEnginePose(); const h = eng.pickAt(uv[0], uv[1]);
     if (!h) { if (hover) { hover = null; requestDraw(); } $('stage').style.cursor = 'crosshair'; return; }
     if (hover && sameHit(hover.hit, h)) return; hover = {hit: h, mask: eng.maskOf(h), key: poseKey()}; $('stage').style.cursor = 'pointer'; requestDraw(); }, 90);
 });
 let hoverT = 0;
 addEventListener('pointerup', e => {
-  if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y, dt = performance.now() - drag.t; const d0 = drag; drag = null;
+  if (!drag) return;
+  if (cine.active) { const onStage = e.target === $('stage') || e.target.parentNode === $('stage'); drag = null; if (onStage) cine.tap(); return; } const dx = e.clientX - drag.x, dy = e.clientY - drag.y, dt = performance.now() - drag.t; const d0 = drag; drag = null;
   if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) { setView((S.view + (dx < 0 ? 1 : 3)) % 4); return; }          // swipe: look round
   if (Math.abs(dy) > 60 && Math.abs(dy) > Math.abs(dx) * 1.3 && dt < 600) { dy < 0 ? stepBy(1) : stepBy(-1); return; }        // swipe up: a step on
   if (d0.moved < 8) touch(e.clientX, e.clientY);
@@ -370,6 +375,7 @@ $('bTurn').onclick = () => { if (choices) { take(choices[choices.length - 1]); }
 document.querySelectorAll('#rose button').forEach(b => b.onclick = () => setView(+b.dataset.v));
 addEventListener('keydown', e => {
   if (e.target.tagName === 'INPUT' || e.metaKey || e.ctrlKey) return; const k = e.key;
+  if (cine.active) { if (cine.key(e)) e.preventDefault(); return; }
   if (mapOpen) { if (k === 'Escape' || k === 'm' || k === 'M') closeMap(); return; }
   if (choices && (k === 'ArrowLeft' || k === 'ArrowRight' || k === 'ArrowUp')) { const want = k === 'ArrowLeft' ? -Math.PI / 2 : k === 'ArrowRight' ? Math.PI / 2 : 0;
     take(choices.filter(c => !c.u).reduce((b, c) => !b || Math.abs(wrapA(c.turn - want)) < Math.abs(wrapA(b.turn - want)) ? c : b, null) || choices[0]); e.preventDefault(); return; }
@@ -423,6 +429,24 @@ function mapJump(cx, cy) { const r = $('mapc').getBoundingClientRect(), [wx, wy]
 let urlT = 0; function syncURL() { clearTimeout(urlT); urlT = setTimeout(() => { const q = new URLSearchParams({e: S.e, i: S.i, d: S.dir, v: S.view}); if (S.era !== 5) q.set('era', S.era); history.replaceState(null, '', '?' + q); }, 300); }
 if (Q.has('era')) S.era = +Q.get('era');
 
+// ——— watch: the poem drives the car ———
+cine = makeCinema({$, disc,
+  pose, fit: () => fit, fx, layout, blit, frameRef,
+  clearOver: () => { ox.clearRect(0, 0, overC.width, overC.height); $('turns').style.display = 'none'; },
+  wayOf: seg => WAYS[E[seg].w].name,
+  ensureEngine: q => ensureEngine(q),
+  poseEngine: (seg, i, dir, view) => { const st = steps(seg)[i]; eng.pose(st[0], st[1], dir > 0 ? st[2] : wrapA(st[2] + Math.PI), view); },
+  snapshot: () => ({...S}),
+  // a film plays from the disc: the city as it was filmed, whatever the street was set to; leaving restores it
+  discState: () => { S.speed = 0; choices = null; for (const [k, v] of Object.entries({era: 5, season: null, hour: 12, weather: 'clear', style: 'photo', reg: false})) if (S[k] !== v) setSetting(k, v); },
+  restore: o => { for (const k of ['era', 'season', 'hour', 'weather', 'style']) if (S[k] !== o[k]) setSetting(k, o[k]); Object.assign(S, {e: o.e, i: o.i, dir: o.dir, view: o.view, speed: 0}); arrived(); },
+  goTo: o => { Object.assign(S, o, {speed: 0}); arrived(); },
+  markTrace: path => { for (const [seg, i] of path) { const n = steps(seg).length; if (!trace.has(seg)) trace.set(seg, new Uint8Array(n)); trace.get(seg)[i] = 1; } },
+  chrome: on => { for (const id of ['nav', 'hud', 'bar', 'tools']) $(id).hidden = !on; if (!on) { $('side').classList.remove('open'); closeInfo(); closeMapIfOpen(); $('turns').style.display = 'none'; $('toast').style.display = 'none'; } else requestDraw(); },
+});
+function closeMapIfOpen() { if (mapOpen) closeMap(); }
+$('btnWatch').onclick = () => cine.choose();
+
 // ——— go ———
 addEventListener('resize', () => { requestDraw(); if (mapOpen) drawMap(); });
 syncSide(); mark(); prefetch();
@@ -432,4 +456,5 @@ step(100, ''); $('loading').style.display = 'none';
 draw(); requestAnimationFrame(loop);
 if (!onDisc()) ensureEngine();
 else if (!MOBILE) setTimeout(() => ensureEngine(true), 2500);     // on a desk, raise the city quietly so a touch is answered at once
-window.__mm = {S, plan, disc, steps, draw, ensureEngine, get eng() { return eng; }, stepBy, setView, take, get choices() { return choices; }, openMap, mapView, pullUpTo, touch};
+if (Q.has('watch')) cine.load().then(fs => { const f = fs.find(x => x.num === Q.get('watch')); if (f) { cine.choose().then(() => cine.play(f)); } });
+window.__mm = {cine, S, plan, disc, steps, draw, ensureEngine, get eng() { return eng; }, stepBy, setView, take, get choices() { return choices; }, openMap, mapView, pullUpTo, touch};

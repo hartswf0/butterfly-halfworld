@@ -81,12 +81,38 @@ input[type=range]{flex:1;accent-color:var(--acc)}
 #loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:var(--bg);z-index:10;font:13px Georgia,serif;color:var(--dim)}
 #loading .bar{width:220px;height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}#loading .bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .2s}
 #toast{position:fixed;left:50%;top:136px;transform:translateX(-50%);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:12px;display:none;z-index:4}
+
+/* ——— WATCH: only what is true now ——— */
+[hidden]{display:none!important}
+#watch{position:fixed;inset:0;pointer-events:none;z-index:6}
+#watch.choose{pointer-events:auto;background:rgba(5,7,9,.55);display:flex;align-items:center;justify-content:center}
+#watch .sheet{background:var(--panel);border:1px solid var(--line);border-radius:14px;width:min(560px,94vw);max-height:84vh;overflow:auto;padding:14px 14px 10px;backdrop-filter:blur(8px)}
+#watch .hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:8px;position:relative;padding-right:34px}
+#watch .hd b{font:600 17px Georgia,serif}#watch .hd span{color:var(--dim);font-size:12px}#watch .hd .x{position:absolute;right:0;top:-4px;border:0;background:none;font-size:18px}
+#watch ol{list-style:none;margin:0;padding:0;display:grid;gap:3px}
+#watch ol button{width:100%;display:grid;grid-template-columns:30px 1fr;gap:0 8px;text-align:left;border-radius:9px;padding:8px 10px;background:rgba(255,255,255,.035)}
+#watch ol button .n{grid-row:span 2;font:600 13px ui-monospace,Menlo,monospace;color:var(--acc2);padding-top:2px}#watch ol button .t{font:600 14px Georgia,serif}#watch ol button .m{color:var(--dim);font-size:11px}
+#watch ol button.first{border-color:var(--acc)}#watch ol button:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+#watch .title{position:absolute;left:0;right:0;top:38%;text-align:center;font:600 clamp(22px,4vw,40px)/1.15 Georgia,serif;color:#fff;text-shadow:0 2px 18px #000;transition:opacity 1.2s}
+#watch .title small{display:block;font:600 13px ui-monospace,Menlo,monospace;letter-spacing:.3em;color:var(--acc2);margin-bottom:8px}#watch .title em{display:block;font:italic 14px Georgia,serif;color:#e8dcc4;margin-top:10px}
+#watch .title.gone{opacity:0}
+#watch .line{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);width:min(860px,90vw);text-align:center;font:clamp(17px,2.3vw,25px)/1.4 Georgia,serif;text-shadow:0 1px 3px #000,0 0 14px rgba(0,0,0,.9)}
+#watch .line span{color:rgba(255,248,232,.38);transition:color .12s}#watch .line span.on{color:#fff8e8}
+#watch .trace{position:absolute;left:16px;top:14px;opacity:0;transition:opacity .6s;text-shadow:0 1px 3px #000}#watch .trace.on{opacity:1}
+#watch .trace b{display:block;font:600 17px Georgia,serif;color:#fff}#watch .trace span{font:11px ui-sans-serif,-apple-system,Arial;color:#dcd3c3}
+#watch .fault{position:absolute;left:50%;top:14px;transform:translateX(-50%);background:var(--panel);border:1px solid var(--red);border-radius:999px;padding:5px 12px;font-size:12px}
+#watch .stop{position:absolute;right:14px;bottom:16px;pointer-events:auto;width:40px;height:40px;border-radius:10px;padding:0;background:rgba(8,10,13,.55);opacity:.55}#watch .stop:hover,#watch .stop:focus-visible{opacity:1}
+#watch .bar{position:absolute;left:0;right:0;bottom:0;height:10px;pointer-events:auto;cursor:pointer}
+#watch .bar i{position:absolute;left:0;bottom:0;height:2px;background:var(--acc)}#watch .bar b{position:absolute;bottom:0;width:1px;height:4px;background:rgba(255,255,255,.35)}
+#watch .pause,#watch .end{position:absolute;left:50%;bottom:22%;transform:translateX(-50%);pointer-events:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;text-align:center;width:max-content;max-width:92vw;backdrop-filter:blur(8px)}
+#watch .pt,#watch .em{color:var(--dim);font-size:12px;margin-bottom:9px;max-width:560px}#watch .et{font:600 20px Georgia,serif;margin-bottom:4px}#watch .et small{font:600 12px ui-monospace,Menlo,monospace;color:var(--acc2);margin-right:8px}
+#watch .row{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}#watch .row button.dom{background:var(--acc);color:#1a1208;border-color:var(--acc)}
 kbd{font:10px ui-monospace,Menlo,monospace;border:1px solid var(--line);border-radius:3px;padding:0 4px}
 @media (max-width:760px), (max-aspect-ratio:1/1){
   #nav{left:0;right:0;top:0;transform:none;width:auto;height:92px;border-radius:0;border-width:0 0 1px}
   #hud{left:8px;right:116px;top:auto;bottom:auto;max-width:none}
   #hud .card{padding:6px 9px}#hud h1{display:none}#where{font-size:13px;margin:0}#fc{display:none}
-  #tools{top:auto;right:8px}
+  #tools{top:auto;right:8px;flex-direction:column;align-items:flex-end}
   #side{left:0;right:0;top:auto;bottom:0;width:auto;max-height:58vh;border-radius:14px 14px 0 0;z-index:3}
   #info{left:0;right:0;top:auto;bottom:0;width:auto;max-height:58vh;border-radius:14px 14px 0 0;z-index:3}
   #bar{gap:8px;padding:6px 8px;bottom:8px;width:calc(100vw - 16px);justify-content:space-between}
@@ -107,9 +133,8 @@ kbd{font:10px ui-monospace,Menlo,monospace;border:1px solid var(--line);border-r
   <h1><a href="../../atlas.html">ATLANTIS · MOVIE MAP</a></h1>
   <div id="where">—</div>
   <span id="badge">DISC</span>
-  <div id="fc"></div>
-</div></div>
-<div id="tools"><button id="btnSide" title="the city in place: era, season, hour, weather, rendering">☰ in place</button></div>
+  </div></div>
+<div id="tools"><button id="btnWatch" title="watch a poem drive the car">◉ watch</button><button id="btnSide" title="the city in place: era, season, hour, weather, rendering">☰ in place</button></div>
 <div id="turns"></div>
 <div id="bar">
   <div class="grp"><span class="lbl">SPEED</span>
@@ -135,6 +160,7 @@ kbd{font:10px ui-monospace,Menlo,monospace;border:1px solid var(--line);border-r
   <h2>Rendering · the same frame</h2><div class="chips" id="styles"></div>
   <div class="row" style="margin-top:9px"><label style="width:auto"><input type="checkbox" id="reg"> registration check — the live render laid over the disc frame</label></div>
   <p class="note" id="discnote"></p>
+  <p class="note" id="thisframe" style="font:10px ui-monospace,Menlo,monospace"></p>
   <p class="note"><kbd>↑</kbd> forward · <kbd>↓</kbd> back · <kbd>←</kbd><kbd>→</kbd> look (at a corner: turn) · <kbd>space</kbd> drive · <kbd>M</kbd> map · drag the frame sideways to look round · touch a façade to open it.</p>
 </aside>
 <aside id="info"></aside>
@@ -147,6 +173,7 @@ kbd{font:10px ui-monospace,Menlo,monospace;border:1px solid var(--line);border-r
   <div id="legend"><b>Lynch’s notation</b><br>━ paths (avenues, spines) · ┅ edges (shore, highways)<br>▨ districts (wards) · ● nodes (junctions, squares)<br>▲ landmarks · <span style="color:#c82828">━</span> the disc (filmed streets) · <span style="color:#d98a2a">━</span> your trace</div>
   <div id="mapnote">Blue lines are the streets on the disc (filmed every 3 m); the rest of the plan you can drive too, rendered live. Your trace is in orange. Tap a street to go there. Powers of Ten: each step is ×10.</div>
 </div>
+<div id="watch"></div>
 <div id="toast"></div>
 <div id="loading"><div>loading the disc …</div><div class="bar"><i id="lbar"></i></div><div id="lmsg" style="font-size:11px"></div></div>
 <script type="module" src="./player.mjs"></script>

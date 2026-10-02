@@ -18,3 +18,14 @@ Surrogate travel through the WYGWYL invented city, after the Aspen Movie Map (MI
 - **Live render.** Off the disc, or in another era, season, hour or weather, or in the flat, wireframe or ID-buffer styles, `engine.mjs` renders the same registered pose live from city3d's modules (with `legible.mjs` for the signs).
 - **Touching a façade.** A touch runs an ID-buffer pass to name the building. The car then pulls up to the building's street front.
 - **The map.** `map.mjs` draws the plan, the aerial and Lynch's notation, with a Powers-of-Ten zoom.
+
+## Watch
+
+`node tools/compile-films.mjs` compiles the 14 readings (`../../timings/NN.json`, word timings) into `films.json`. In each film:
+- The car leaves the poem's site down the disc toward the next poem, moving only while he speaks.
+- It jumps at a line's start when the road outruns the reading.
+- Each line looks where it is written into the city, or at a landmark in clear sight.
+- The last line looks back.
+- The coda shows the last frame in all six eras.
+
+`cinema.mjs` plays a film; `WATCH.md` is its interface contract. Link straight to a film with `index.html?watch=06`.
