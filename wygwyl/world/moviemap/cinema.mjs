@@ -7,6 +7,7 @@
 //   a cut or a new street leaves a trace (the street's name, which line, what he looks at) that fades on its own.
 //   paused — resume, take the wheel here, or leave (back to where you were).
 //   end — what was driven; stay here, back to where you were, or again.
+const FILM = '../../../film/WYGWYL-moviemap.mp4';
 const ERA_N = ['The Shore', 'The Old Center', 'Additions', 'The New Boroughs', 'The Fall', 'Resurrection'];
 
 export function makeCinema(P) {
@@ -21,13 +22,20 @@ export function makeCinema(P) {
   // ——— CHOOSE ———
   async function choose() {
     if (state !== 'off') return; await load(); saved = P.snapshot(); state = 'choose'; P.chrome(false);
+    const whole = await fetch(FILM, {method: 'HEAD'}).then(r => r.ok).catch(() => false);   // offered only where the rendered film exists
     const list = nearest(films), mm = s => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`;
     ui.className = 'choose'; ui.innerHTML = `<div class="sheet"><div class="hd"><b>Watch a poem</b><span>his reading drives the car · you can take the wheel at any moment</span><button class="x" data-a="exit" aria-label="close">✕</button></div>
+      ${whole ? `<button class="whole" data-a="whole"><b>Where You Go When You Leave</b><span>the whole film · 24 min · all fourteen, over the drone record</span></button>` : ''}
       <ol>${list.map((f, k) => `<li><button data-n="${f.num}" class="${k ? '' : 'first'}"><span class="n">${f.num}</span><span class="t">${f.title}</span><span class="m">${mm(f.duration)} · ${f.metres >= 1000 ? (f.metres / 1000).toFixed(1) + ' km' : f.metres + ' m'} from ${f.from}${f.cuts ? ` · ${f.cuts} cuts` : ''}</span></button></li>`).join('')}</ol></div>`;
     ui.querySelector('[data-a=exit]').onclick = () => leave();
+    if (whole) ui.querySelector('[data-a=whole]').onclick = () => wholeFilm();
     ui.querySelectorAll('button[data-n]').forEach(b => b.onclick = () => play(films.find(f => f.num === b.dataset.n)));
     ui.querySelector('button.first').focus({preventScroll: true});
   }
+
+  // the rendered film plays in its own player: the browser's controls are its Stop, seek and volume; leaving returns to the street
+  function wholeFilm() { state = 'film'; ui.className = 'playing'; ui.innerHTML = `<video src="${FILM}" controls autoplay playsinline></video><button class="back" data-a="leave">↩ back to the street</button>`;
+    ui.querySelector('[data-a=leave]').onclick = () => leave(); ui.querySelector('video').focus(); }
 
   // ——— TITLE → PLAYING ———
   function play(f) {
@@ -145,14 +153,15 @@ export function makeCinema(P) {
   // take the wheel: drive from the frame you are on (the film's trace stays on the map)
   function wheel() { const a = at(Math.max(0, state === 'paused' ? clock.paused : now())); const [seg, i, dir] = F.path[a.p]; P.markTrace(F.path.slice(0, a.p + 1)); stopAll(); F = null; state = 'off'; ui.className = ''; ui.innerHTML = ''; P.chrome(true); P.goTo({e: seg, i, dir, view: a.view}); }
   // leave: everything as it was before you chose to watch
-  function leave() { stopAll(); F = null; state = 'off'; ui.className = ''; ui.innerHTML = ''; P.chrome(true); if (saved) P.restore(saved); saved = null; }
+  function leave() { ui.querySelector('video')?.pause(); stopAll(); F = null; state = 'off'; ui.className = ''; ui.innerHTML = ''; P.chrome(true); if (saved) P.restore(saved); saved = null; }
   function key(e) {
     if (state === 'off') return false; const k = e.key;
+    if (state === 'film') { if (k === 'Escape') leave(); return k === 'Escape'; }
     if (k === 'Escape') { state === 'choose' || state === 'end' ? leave() : state === 'paused' ? leave() : pause(); return true; }
     if (k === ' ') { state === 'paused' ? resume() : pause(); return true; }
     if ((k === 'ArrowRight' || k === 'ArrowLeft') && F && (state === 'playing' || state === 'paused')) { const t = state === 'paused' ? clock.paused : now(), L = F.lines, j = L.findIndex(l => l.s > t + 0.05);
       const target = k === 'ArrowRight' ? (j >= 0 ? L[j].s : F.duration) : (L[Math.max(0, (j < 0 ? L.length : j) - 2)].s); seek(target); return true; }
     return true;                                                     // while watching, the street's keys sleep
   }
-  return {get active() { return state !== 'off'; }, get state() { return state; }, choose, play, pause, resume, leave, key, draw, tap: () => { state === 'playing' || state === 'title' || state === 'coda' ? pause() : null; }, load};
+  return {get active() { return state !== 'off'; }, get state() { return state; }, choose, play, pause, resume, leave, key, draw, tap: () => { state === 'film' ? null : state === 'playing' || state === 'title' || state === 'coda' ? pause() : null; }, load};
 }

@@ -12,7 +12,10 @@ const step = (p, m) => { $('lbar').style.width = p + '%'; $('lmsg').textContent 
 const TAU = Math.PI * 2, wrapA = a => ((a + Math.PI) % TAU + TAU) % TAU - Math.PI;
 const COMPASS = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'], compass = h => COMPASS[Math.round(((Math.atan2(Math.cos(h), -Math.sin(h)) * 180 / Math.PI) + 360) % 360 / 45) % 8];
 const VIEWN = ['front', 'right', 'back', 'left'];
-const toast = (t, ms = 2200) => { const el = $('toast'); el.textContent = t; el.style.display = 'block'; clearTimeout(toast.h); if (ms) toast.h = setTimeout(() => el.style.display = 'none', ms); };
+// a message names a change; when the change can be undone, its undo sits beside it until the message goes
+const toast = (t, ms = 2200, act = null) => { const el = $('toast'), b = el.querySelector('button'); el.querySelector('span').textContent = t; el.style.display = 'flex';
+  b.hidden = !act; if (act) { b.textContent = act.label; b.onclick = () => { el.style.display = 'none'; act.fn(); }; } clearTimeout(toast.h); if (ms) toast.h = setTimeout(() => el.style.display = 'none', ms); };
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;      // motion only where it reports a change, and none if asked
 
 step(10, 'the street plan and the disc index');
 const [plan, disc, meta] = await Promise.all(['plan.json', 'disc.json', '../city3d/city.json'].map(u => fetch(u).then(r => { if (!r.ok) throw new Error(u + ' ' + r.status); return r.json(); })))
@@ -64,7 +67,9 @@ function prefetch() { if (!SEG.has(S.e)) return; const n = steps(S.e).length; fo
 
 // ——— is the disc enough, or must the engine render this pose live? ———
 const onDisc = () => SEG.has(S.e) && S.era === 5 && !S.season && S.hour === 12 && S.weather === 'clear' && S.style === 'photo';
-const liveWhy = () => !SEG.has(S.e) ? 'off the disc — rendered live' : S.style !== 'photo' ? `${{flat: 'QADAS flat', wire: 'wireframe', id: 'ID buffer'}[S.style]} — rendered live` : 'the city in place — rendered live';
+const liveWhy = () => { const d = []; if (!SEG.has(S.e)) d.push('off the disc'); if (S.era !== 5) d.push(`${S.era} ${ERA[S.era].replace(/^The /, '')}`); if (S.season) d.push(S.season);
+  if (S.hour !== 12) d.push(`${String(Math.floor(S.hour)).padStart(2, '0')}:${String(Math.round((S.hour % 1) * 60)).padStart(2, '0')}`); if (S.weather !== 'clear') d.push(S.weather);
+  if (S.style !== 'photo') d.push({flat: 'QADAS flat', wire: 'wireframe', id: 'ID buffer'}[S.style]); return d.join(' · ') + ' — rendered live'; };
 
 // ——— the engine, raised on first need ———
 let eng = null, engP = null;
@@ -74,7 +79,7 @@ function ensureEngine(quiet = false) {
   const cv = $('live'); cv.width = LW; cv.height = LH; if (!quiet) toast('raising the city for the live render …', 0);
   engP = import('./engine.mjs').then(m => m.makeEngine({canvas: cv, width: LW, height: LH, plan, base: '../city3d/', shadows: !MOBILE, onStep: (p, msg) => { if (!quiet || $('toast').style.display === 'block') toast(`raising the city · ${p}% ${msg}`, 0); }}))
     .then(e => { eng = e; e.setEra(S.era); if (S.season) e.setSeason(S.season); e.setHour(S.hour); e.setWeather(S.weather); e.setStyle(S.style === 'id' ? 'photo' : S.style); $('toast').style.display = 'none'; draw(); return e; })
-    .catch(err => { toast('the live city could not load: ' + err.message, 6000); engP = null; throw err; });
+    .catch(err => { engP = null; toast('the live city could not load — the disc still plays', 0, {label: 'retry', fn: () => ensureEngine()}); throw err; });
   return engP;
 }
 
@@ -149,8 +154,9 @@ function hud() {
   const nextN = S.dir > 0 ? e.b : e.a, cross = (nodeEdges.get(nextN) || []).map(i => WAYS[E[i].w]).filter(o => o.name !== w.name).sort((a, b) => [1, 3, 0, 4, 5][b.cls] - [1, 3, 0, 4, 5][a.cls])[0];
   const dist = Math.round((S.dir > 0 ? st.length - 1 - S.i : S.i) * disc.frame.step);
   $('where').innerHTML = `${blockNo(S.e, sAlong)} block of ${w.name}<small>heading ${compass(p.heading)} · looking ${VIEWN[S.view]} (${compass(p.heading + S.view * Math.PI / 2)})${ward ? ` · ward ${ward}, precinct ${ward}-${pr} (${wardName(ward)})` : ''}${zone ? ` · zone ${zone}` : ''}${w.route ? ` · bus ${w.route}` : ''}${cross ? `<br>next corner: ${cross.name} in ${dist} m` : dist ? `<br>block ends in ${dist} m` : ''}</small>`;
-  const live = !onDisc(); $('badge').className = live ? 'live' : '';
-  $('badge').textContent = live ? `LIVE · ${liveWhy()}` : `DISC · ${ERA[5]} · 12:00 · 22 Sept · clear`;
+  // the disc is the normal state and says nothing; a live render says why, and offers the way back when settings caused it
+  const live = !onDisc(), changed = S.era !== 5 || S.season || S.hour !== 12 || S.weather !== 'clear' || S.style !== 'photo';
+  $('livestate').hidden = !live; $('badge').className = 'live'; $('badge').textContent = live ? `LIVE · ${liveWhy()}` : ''; $('toDisc').hidden = !changed;
   $('thisframe').textContent = `this frame: segment ${S.e} · corners ${e.a}→${e.b} · frame ${S.i + 1}/${st.length} · view ${VIEWN[S.view]}${S.dir < 0 && SEG.has(S.e) ? ' (driven against the capture)' : ''} · ${(p.x).toFixed(1)}, ${(p.y).toFixed(1)}`;
   document.querySelectorAll('#rose button').forEach(b => b.classList.toggle('on', +b.dataset.v === S.view));
   // the transport shows only what can be done now: stopped — step back, step, drive, drive fast; moving — stop, or the other speed
@@ -202,6 +208,7 @@ function turnAround() { const from = {e: S.e, i: S.i, dir: S.dir, view: S.view};
 function setView(v) { if (anim || v === S.view) return; const k = wrapA((v - S.view) * Math.PI / 2) / (Math.PI / 2); const from = {e: S.e, i: S.i, dir: S.dir, view: S.view}; panViews(from, Math.round(k), () => { S.view = v; hover = null; requestDraw(); syncURL(); }, true); }
 // a pan of k quarter turns: on the disc the views slide past each other (they tile 90° each); live, the camera turns
 function panViews(from, k, then, keepView = false) {
+  if (RM) { then(); return; }
   const sgn = Math.sign(k), steps_ = Math.abs(k); let j = 0;
   const live = !onDisc() || !SEG.has(from.e);
   const one = () => {
@@ -258,7 +265,10 @@ async function touch(cx, cy) {
 }
 
 // ——— touch a façade: the car pulls up to the street front of the building and looks at it ———
+const here = () => ({e: S.e, i: S.i, dir: S.dir, view: S.view});
+const undoMove = (from, msg) => toast(msg, 8000, {label: '↩ back', fn: () => { Object.assign(S, from, {speed: 0}); choices = null; sel = null; closeInfo(); arrived(); }});
 function pullUpTo(k) {
+  const from = here();
   const B = eng.C.bld, o = k * 14, bx = B[o], by = B[o + 1], d = B[o + 3], rot = B[o + 4], nx = Math.sin(rot), ny = -Math.cos(rot);
   const fxp = bx + nx * (d / 2), fyp = by + ny * (d / 2);
   let best = null;
@@ -272,7 +282,7 @@ function pullUpTo(k) {
   for (const ei of near) consider(ei, SEG.has(ei) ? 0 : 14);
   const hit = {kind: 'building', k};
   if (best && !(best.e === S.e && best.i === S.i && best.dir === S.dir && best.view === S.view)) {
-    Object.assign(S, {e: best.e, i: best.i, dir: best.dir, view: best.view}); arrived(); toast('pulled up to the façade');
+    Object.assign(S, {e: best.e, i: best.i, dir: best.dir, view: best.view}); arrived(); undoMove(from, 'pulled up to the façade');
   }
   syncEnginePose(); sel = {hit, mask: eng.maskOf(hit), key: poseKey()}; showInfo(hit); requestDraw();
 }
@@ -362,6 +372,7 @@ function syncSide() {
   document.querySelectorAll('#styles button').forEach(b => b.classList.toggle('on', b.dataset.st === S.style));
   $('hour').value = S.hour; $('hourO').textContent = `${String(Math.floor(S.hour)).padStart(2, '0')}:${String(Math.round((S.hour % 1) * 60)).padStart(2, '0')}`; lore();
 }
+$('toDisc').onclick = () => { for (const [k, v] of Object.entries({era: 5, season: null, hour: 12, weather: 'clear', style: 'photo'})) if (S[k] !== v) setSetting(k, v); };
 $('btnSide').onclick = () => { $('side').classList.toggle('open'); $('info').classList.remove('open'); };
 $('discnote').innerHTML = `The disc: ${disc.totals.frames.toLocaleString()} frames (${disc.totals.steps.toLocaleString()} steps × 4 views) over ${disc.totals.km} km — the poet's spines, the processional avenue, the arterials and streets around the fourteen poems — captured at 12:00 on 22 September in ${ERA[5]}, ${FW}×${FH}, 90° each view, ${(disc.totals.bytes / 1048576).toFixed(1)} MB. Anything else is the same pose rendered live.`;
 
@@ -423,7 +434,7 @@ for (const f of [10, 100, 1000, 10000]) { const b = document.createElement('butt
 function mapJump(cx, cy) { const r = $('mapc').getBoundingClientRect(), [wx, wy] = mapView.toWorld((cx - r.left) * mapView.dpr, (cy - r.top) * mapView.dpr); let best = null;
   const tol = 22 * mapView.dpr / mapView.scale;
   for (const [ei, e] of E.entries()) { const bb = e.bb; if (wx < bb[0] - tol || wx > bb[2] + tol || wy < bb[1] - tol || wy > bb[3] + tol) continue; steps(ei).forEach((st, i) => { const d = Math.hypot(st[0] - wx, st[1] - wy) - (SEG.has(ei) ? tol * 0.5 : 0); if (!best || d < best.d) best = {d, ei, i}; }); }
-  if (!best || best.d > tol) return; Object.assign(S, {e: best.ei, i: best.i, dir: 1, view: 0}); choices = null; closeMap(); arrived(); toast(`${WAYS[E[best.ei].w].name}${SEG.has(best.ei) ? '' : ' — off the disc, rendered live'}`); }
+  if (!best || best.d > tol) return; const from = here(); Object.assign(S, {e: best.ei, i: best.i, dir: 1, view: 0}); choices = null; closeMap(); arrived(); undoMove(from, `${WAYS[E[best.ei].w].name}${SEG.has(best.ei) ? '' : ' — off the disc, rendered live'}`); }
 
 // ——— the address bar keeps your place ———
 let urlT = 0; function syncURL() { clearTimeout(urlT); urlT = setTimeout(() => { const q = new URLSearchParams({e: S.e, i: S.i, d: S.dir, v: S.view}); if (S.era !== 5) q.set('era', S.era); history.replaceState(null, '', '?' + q); }, 300); }

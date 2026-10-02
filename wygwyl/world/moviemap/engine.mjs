@@ -137,6 +137,20 @@ export async function makeEngine({canvas, width, height, plan, base = '../city3d
     for (const s of words) { const d = camera.position.distanceTo(s.position); s.visible = d < 160 && st.style === 'photo'; s.material.opacity = THREE.MathUtils.clamp((160 - d) / 80, 0, 1); }
   }
 
+  // ——— the film camera: a free pose (any height, any yaw and pitch), time that passes, light that moves frame by frame ———
+  function poseFree(x, y, z, yaw, pitch = 0) {
+    camera.position.set(x, z, y); camera.lookAt(x + Math.cos(yaw) * Math.cos(pitch), z + Math.sin(pitch), y + Math.sin(yaw) * Math.cos(pitch)); camera.updateMatrixWorld();
+    for (const s of words) { const d = camera.position.distanceTo(s.position); s.visible = d < 160 && st.style === 'photo'; s.material.opacity = THREE.MathUtils.clamp((160 - d) / 80, 0, 1); }
+  }
+  function advance(dt) { U.time.value += dt; heav.setDate(dateOf()); heav.update(dt, camera, camera.position); sea.update(dt); if (st.style !== 'photo') SKY.forEach(o => o.visible = false);
+    // the landmarks' moving parts, as city3d animates them: the lighthouse beam, the stacks' smoke, the neon's stutter
+    for (const g of lmGroups) g.traverse(o => { if (o.userData.beam) { o.parent.visible && (o.rotation.y += dt * 0.9); o.visible = U.night.value > 0.2; o.material.opacity = 0.1 * U.night.value; }
+      if (o.userData.smoke !== undefined) { o.position.y += dt * 4; o.scale.addScalar(dt * 0.25); if (o.position.y > 120) { o.position.y = 80; o.scale.setScalar(1); } }
+      if (o.userData.flicker) o.material.emissiveIntensity = (Math.sin(U.time.value * 17) > -0.7 ? 1.6 : 0.2) * (0.2 + U.night.value); }); }
+  function setHourFast(h) { st.hour = h; heav.setDate(dateOf()); applyNight(); }
+  function setWet(v) { U.wet.value = v; }
+  function renderFilm() { const f = scene.fog; if (styleFog) scene.fog = styleFog === 'none' ? null : styleFog; renderer.render(scene, camera); scene.fog = f; }
+
   // ——— abstraction: QADAS-like flat shading and the hidden-line wireframe of the same frame ———
   const SKY = new Set(); scene.children.forEach(o => { if (o.isSprite || o.isPoints || o.isLineSegments || (o.isMesh && (o.material.isShaderMaterial || o.material.isSpriteMaterial) && !o.isInstancedMesh && o !== terrain && o !== roads)) SKY.add(o); });
   SKY.delete(sea.sea);
@@ -274,6 +288,6 @@ export async function makeEngine({canvas, width, height, plan, base = '../city3d
   setEra(5); setHour(12); setStyle('photo');
   onStep(100, '');
   return {renderer, scene, camera, C, S, meta, U, st, heav, blds, legible, street, lmGroups, lmState,
-    pose, render, resize, setHfov, setEra, setHour, setDoy, setWeather, setSeason, setStyle, pickAt, maskOf, idImage, groundY,
+    pose, poseFree, advance, setHourFast, setWet, renderFilm, render, resize, setHfov, setEra, setHour, setDoy, setWeather, setSeason, setStyle, pickAt, maskOf, idImage, groundY,
     buildingState: (k, e) => blds.userData.state(k, e ?? st.era)};
 }

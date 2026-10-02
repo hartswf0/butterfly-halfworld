@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Movie Map Film Rig</title>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<style>html,body{margin:0;background:#000;color:#ccc;font:12px monospace}canvas{display:block}#gl{position:absolute;left:-99999px}</style></head>
+<body><canvas id="out" width="1280" height="720"></canvas><canvas id="gl"></canvas><div id="s">loading…</div>
+<script type="module">
+// The film rig: renders WHERE YOU GO WHEN YOU LEAVE one frame at a time from film/cut.json (tools/film-plan.mjs).
+// Each frame: the engine's picture (2.39:1) laid in a 16:9 frame; the top bar carries the chapter and the street, the bottom bar his words.
+// Deterministic: the storm's lightning draws from a seeded generator; a chapter's camera starts from rest, so chapters render independently.
+let seed = 20250626; Math.random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+const {makeEngine} = await import('../engine.mjs');
+const cut = await fetch('../film/cut.json').then(r => r.json()), plan = await fetch('../plan.json').then(r => r.json());
+const meta = await fetch('../../city3d/city.json').then(r => r.json());
+const [PW, PH] = cut.picture, W = cut.width, H = cut.height, TOP = (H - PH) / 2, FPS = cut.fps, dt = 1 / FPS, EYE = cut.eye;
+const eng = await makeEngine({canvas: document.getElementById('gl'), width: PW, height: PH, plan, base: '../../city3d/', preserve: true, shadows: true, hfov: cut.hfov,
+  onStep: (p, m) => document.getElementById('s').textContent = p + '% ' + m});
+eng.heav.sun.shadow.mapSize.set(4096, 4096); eng.heav.sun.shadow.map?.dispose(); eng.heav.sun.shadow.map = null;
+const out = document.getElementById('out'), x = out.getContext('2d'), gl = eng.renderer.domElement;
+const ERA_N = meta.eras, TAU = Math.PI * 2, wrap = a => ((a + Math.PI) % TAU + TAU) % TAU - Math.PI, ease = u => u < .5 ? 2 * u * u : 1 - (-2 * u + 2) ** 2 / 2, clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const sstep = (a, b, v) => { const t = clamp((v - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+// the canon's pictures, loaded once
+const pics = new Map(); await Promise.all(cut.chapters.flatMap(c => c.lines.filter(l => l.shot).map(l => l.shot.cid)).map(cid => new Promise(r => { const im = new Image(); im.onload = () => { pics.set(cid, im); r(); }; im.onerror = r; im.src = `../../iconic/c/${cid}.webp`; })));
+const fmtH = h => { h = ((h % 24) + 24) % 24; return `${String(Math.floor(h)).padStart(2, '0')}:${String(Math.floor((h % 1) * 60)).padStart(2, '0')}`; };
+
+// ——— the camera of one chapter: rests, then follows the voice ———
+let C = null, cam = null, codaImgs = null, weatherNow = null;
+function enter(ch) {
+  C = ch; const L = ch.light; eng.setEra(5); eng.setHour(L.hour[0]); weatherNow = L.weather[0]; eng.setWeather(weatherNow); eng.setWet(L.wet ?? (weatherNow === 'rain' || weatherNow === 'storm' ? 1 : 0));
+  const p0 = ch.lines[0].p0; cam = {s: p0, yaw: ch.path[Math.round(p0)][2], pitch: 0.02, line: -1}; codaImgs = null;
+}
+const P = s => { const a = C.path[clamp(Math.floor(s), 0, C.path.length - 1)], b = C.path[clamp(Math.ceil(s), 0, C.path.length - 1)], f = s - Math.floor(s);
+  return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + wrap(b[2] - a[2]) * f, f < 0.5 ? a[3] : b[3]]; };
+function target(t) {
+  const Ls = C.lines; let k = Ls.findIndex(l => t < l.e); if (k < 0) k = Ls.length - 1;
+  const l = Ls[k]; if (t < l.s) { const pr = Ls[k - 1]; return {s: pr ? pr.p1 : l.p0, line: pr ? k - 1 : -1, l: pr || null}; }
+  if (t >= l.e) return {s: l.p1, line: k, l};
+  let spoken = 0, total = 0; for (const [, a, b] of l.words) { total += b - a; spoken += clamp(t - a, 0, b - a); }
+  return {s: l.p0 + (l.p1 - l.p0) * (total ? spoken / total : 1), line: k, l};
+}
+function step(t) {
+  const tg = target(t);
+  if (tg.line !== cam.line) { if (tg.l && tg.l.cut && tg.line > cam.line) cam.s = tg.l.p0; cam.line = tg.line; }
+  cam.s += (tg.s - cam.s) * (1 - Math.exp(-dt / 0.45));
+  const [px, py, hd, w] = P(cam.s), l = tg.l, gz = eng.groundY(px, py) + EYE;
+  let yaw = hd, pitch = 0.02;
+  if (l && l.look) { yaw = Math.atan2(l.look[1] - py, l.look[0] - px); pitch = clamp(Math.atan2(l.look[2] - gz, Math.hypot(l.look[0] - px, l.look[1] - py)) * 0.6, -0.05, 0.3); }
+  else if (l && l.back) yaw = hd + Math.PI;
+  cam.yaw += wrap(yaw - cam.yaw) * (1 - Math.exp(-dt / (l && l.back ? 1.4 : 0.9))); cam.pitch += (pitch - cam.pitch) * (1 - Math.exp(-dt / 0.9));
+  return {px, py, gz, way: w};
+}
+
+// a credits render that starts cold walks the last chapter's camera through without drawing, to stand where it stopped
+function prime(ch) { enter(ch); const end = ch.coda ? ch.coda.t : ch.t1; for (let t = ch.t0; t < end; t += dt) { const p = step(t); cam.lastPose = {px: p.px, py: p.py, gz: p.gz, yaw: cam.yaw, pitch: cam.pitch, way: p.way}; } }
+
+// ——— the letterbox: chapter and street above, his words below ———
+function bars(t, way, extra) {
+  x.fillStyle = '#000'; x.fillRect(0, 0, W, TOP); x.fillRect(0, TOP + PH, W, H - TOP - PH);
+  x.textBaseline = 'middle'; x.font = '600 15px Georgia, serif'; x.fillStyle = '#cdbf9f'; x.textAlign = 'left';
+  if (C) { x.save(); if (x.letterSpacing !== undefined) x.letterSpacing = '0.16em'; x.fillText(`${C.num}  ·  ${C.title.toUpperCase()}`, 36, TOP / 2); x.restore(); }
+  x.textAlign = 'right'; x.font = 'italic 15px Georgia, serif'; x.fillStyle = '#a99f8c'; x.fillText(extra || way || '', W - 36, TOP / 2);
+}
+function subtitle(t) {
+  if (!C) return; const l = C.lines.find(l => t >= l.s - 0.25 && t <= l.e + 0.9); if (!l) return;
+  const a = sstep(l.s - 0.25, l.s + 0.05, t) * (1 - sstep(l.e + 0.5, l.e + 0.9, t));
+  x.font = '25px Georgia, serif'; x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+  // wrap into at most two lines, centred; each word lights as it is spoken
+  const ws = l.words, sp = x.measureText(' ').width, rows = [[]], maxW = W - 180; let wNow = 0;
+  for (const w of ws) { const ww = x.measureText(w[0]).width; if (wNow + ww > maxW && rows[rows.length - 1].length) { rows.push([]); wNow = 0; } rows[rows.length - 1].push(w); wNow += ww + sp; }
+  const base = TOP + PH + (H - TOP - PH) / 2 - (rows.length - 1) * 15 + 8;
+  rows.slice(0, 3).forEach((r, i) => { const tw = r.reduce((s, w) => s + x.measureText(w[0]).width + sp, -sp); let cx = W / 2 - tw / 2;
+    for (const w of r) { x.globalAlpha = a * (t >= w[1] ? 1 : 0.34); x.fillStyle = '#fff6e4'; x.fillText(w[0], cx, base + i * 30); cx += x.measureText(w[0]).width + sp; } });
+  x.globalAlpha = 1;
+}
+function card(lines, alpha) {
+  if (alpha <= 0) return; x.globalAlpha = alpha; x.textAlign = 'center'; x.textBaseline = 'middle';
+  let y = TOP + PH / 2 - (lines.length - 1) * 26; for (const [txt, font, col] of lines) { x.font = font; x.shadowColor = 'rgba(0,0,0,.8)'; x.shadowBlur = 18; x.fillStyle = col; x.fillText(txt, W / 2, y); y += font.includes('54px') || font.includes('46px') ? 60 : 32; }
+  x.shadowBlur = 0; x.globalAlpha = 1;
+}
+
+// ——— one frame of the film at album time t ———
+function frame(n) {
+  const t = n / FPS, ch = cut.chapters.find(c => t >= c.t0 && t < c.t1) || (t >= cut.chapters[cut.chapters.length - 1].t1 ? 'credits' : null);
+  if (ch && ch !== 'credits' && ch !== C) { enter(ch);
+    // entering cold in the middle of a passage: walk the camera there first, so any frame renders as it would in sequence
+    const upto = Math.min(t, ch.coda ? ch.coda.t : t) - dt / 2; for (let tt = ch.t0; tt < upto; tt += dt) { const p = step(tt); cam.lastPose = {px: p.px, py: p.py, gz: p.gz, yaw: cam.yaw, pitch: cam.pitch, way: p.way}; } }
+  let extra = null, pos;
+  if (ch === 'credits') {
+    // rising out of the last place, ten times higher every few seconds: Powers of Ten, backwards
+    if (!cam || !cam.lastPose) prime(cut.chapters[cut.chapters.length - 1]);
+    const u = clamp((t - cut.duration) / cut.credits, 0, 1), last = cam.lastPose;
+    const z = Math.exp(Math.log(last.gz) + (Math.log(5200) - Math.log(last.gz)) * ease(u)), pitch = -Math.PI / 2 * sstep(0, 0.5, u) + 0.02;
+    eng.poseFree(last.px, last.py, z, last.yaw, Math.max(-1.5605, pitch)); eng.advance(dt); eng.renderFilm();
+    x.drawImage(gl, 0, TOP); x.fillStyle = `rgba(0,0,0,${0.55 * sstep(0.1, 0.4, u)})`; x.fillRect(0, TOP, W, PH); bars(t, '', '');
+    const A = sstep(0.12, 0.3, u) * (1 - sstep(0.92, 1, u));
+    card([['Where You Go When You Leave', 'italic 46px Georgia, serif', '#fff6e4'], ['a movie map of Atlantis', '20px Georgia, serif', '#d8ccb4'], ['', '12px Georgia', '#fff'],
+      ['his fourteen readings, over the unified drone record', '16px Georgia, serif', '#cfc4ad'], ['the city: the WYGWYL worldtext, canon ' + cut.from.canon + ' · city ' + cut.from.city, '13px ui-monospace, Menlo, monospace', '#9f978a'],
+      ['pictures from the canon where they were taken · the light of each poem from its treatment', '14px Georgia, serif', '#b7ad99'],
+      ['after the Aspen Movie Map, MIT Architecture Machine Group, 1978', '14px Georgia, serif', '#b7ad99'], ['rendered frame by frame by the movie map engine · cut ' + cut.checksum, '12px ui-monospace, Menlo, monospace', '#8f887d']], A);
+    return out.toDataURL('image/jpeg', 0.9);
+  }
+  const L = C.light, u = (t - C.t0) / (C.t1 - C.t0);
+  eng.setHourFast(L.hour[0] + (L.hour[1] - L.hour[0]) * u);
+  const wNext = L.weather.length > 1 && u >= (L.at ?? 0.6) ? L.weather[1] : L.weather[0];
+  if (wNext !== weatherNow) { weatherNow = wNext; eng.setWeather(weatherNow); eng.setWet(L.wet ?? (weatherNow === 'rain' || weatherNow === 'storm' ? 1 : 0)); }
+  const inCoda = C.coda && t >= C.coda.t;
+  if (!inCoda) {
+    pos = step(t);
+    // the opening: from ten kilometres up, down to his street, as the record begins
+    if (C === cut.chapters[0] && t < C.read0) { const v = ease(clamp(t / (C.read0 - 0.6), 0, 1)), z = Math.exp(Math.log(4200) + (Math.log(pos.gz) - Math.log(4200)) * v);
+      eng.poseFree(pos.px, pos.py, z, cam.yaw, -Math.PI / 2 * (1 - sstep(0.55, 1, v)) + 0.02 + 0.0105); }
+    else eng.poseFree(pos.px, pos.py, pos.gz, cam.yaw, cam.pitch);
+    eng.advance(dt); eng.renderFilm(); x.drawImage(gl, 0, TOP);
+    cam.lastPose = {px: pos.px, py: pos.py, gz: pos.gz, yaw: cam.yaw, pitch: cam.pitch, way: pos.way};
+  } else {
+    // the coda: the same place, under a still camera, from the Shore to Resurrection
+    if (!codaImgs) { const q = cam.lastPose; codaImgs = []; for (let e = 0; e < 6; e++) { eng.setEra(e); eng.poseFree(q.px, q.py, q.gz, q.yaw, q.pitch); eng.advance(0); eng.renderFilm(); const c = document.createElement('canvas'); c.width = PW; c.height = PH; c.getContext('2d').drawImage(gl, 0, 0); codaImgs.push(c); } eng.setEra(5); }
+    const v = (t - C.coda.t) / C.coda.dur, k = Math.min(5, Math.floor(v * 6)), f = sstep(0, 0.35, v * 6 - k);
+    x.drawImage(codaImgs[Math.max(0, k - 1)], 0, TOP); x.globalAlpha = k === 0 ? f : f; x.drawImage(codaImgs[k], 0, TOP); x.globalAlpha = 1;
+    extra = `${k} · ${ERA_N[k]}`;
+  }
+  // a picture from the canon, where it was taken, laid over the street for a breath
+  for (const l of C.lines) { if (!l.shot || t < l.shot.t || t > l.shot.t + l.shot.dur) continue; const im = pics.get(l.shot.cid); if (!im) continue;
+    const a = 0.62 * sstep(0, 0.5, t - l.shot.t) * (1 - sstep(l.shot.dur - 0.6, l.shot.dur, t - l.shot.t)), s = Math.max(PW / im.width, PH / im.height);
+    x.globalAlpha = a; x.drawImage(im, (PW - im.width * s) / 2, TOP + (PH - im.height * s) / 2, im.width * s, im.height * s); x.globalAlpha = 1;
+    extra = `the picture that saw this · ${l.shot.cid} · ${l.shot.source}`; }
+  bars(t, (inCoda ? null : `${cut.ways[pos.way]}  ·  ${fmtH(eng.st.hour)}`), extra);
+  subtitle(t);
+  // titles: the film's at the start, each chapter's as its passage opens
+  if (C === cut.chapters[0] && t < C.read0 + 1) card([['Where You Go When You Leave', 'italic 54px Georgia, serif', '#fff6e4'], ['a movie map of Atlantis', '20px Georgia, serif', '#e6dcc6']], sstep(0.8, 2.2, t) * (1 - sstep(C.read0 - 2.2, C.read0 - 0.4, t)));
+  else { const a = sstep(C.t0, C.t0 + 0.7, t) * (1 - sstep(C.t0 + 3.6, C.t0 + 4.6, t)); card([[C.num, '600 15px ui-monospace, Menlo, monospace', '#9fd8ff'], [C.title, '46px Georgia, serif', '#fff6e4'], [C.light.why, 'italic 16px Georgia, serif', '#e2d6bf']], a); }
+  return out.toDataURL('image/jpeg', 0.9);
+}
+window.film = {cut, frame, frames: Math.round((cut.duration + cut.credits) * FPS),
+  chapterFrames: [...cut.chapters.map(c => [c.num, Math.round(c.t0 * FPS), Math.round(c.t1 * FPS)]), ['15', Math.round(cut.chapters[cut.chapters.length - 1].t1 * FPS), Math.round((cut.duration + cut.credits) * FPS)]]};
+document.getElementById('s').textContent = 'ready'; window.filmReady = true;
+</script></body></html>

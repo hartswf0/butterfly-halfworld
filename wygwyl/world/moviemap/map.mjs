@@ -37,7 +37,7 @@ export class MapView {
   toScreen(x, y) { const [W, H] = [this.cv.width, this.cv.height], c = Math.cos(this.rot), s = Math.sin(this.rot), dx = (x - this.cx) * this.scale, dy = (y - this.cy) * this.scale; return [W / 2 + dx * c - dy * s, H / 2 + dx * s + dy * c]; }
   toWorld(px, py) { const [W, H] = [this.cv.width, this.cv.height], c = Math.cos(-this.rot), s = Math.sin(-this.rot), dx = (px - W / 2), dy = (py - H / 2); return [this.cx + (dx * c - dy * s) / this.scale, this.cy + (dx * s + dy * c) / this.scale]; }
   field() { return this.cv.width / this.scale / this.dpr * (this.dpr); }          // metres across
-  zoomTo(fieldM, cx = this.cx, cy = this.cy, ms = 1400) { const W = this.cv.width || 800; this.anim = {s0: this.scale, s1: W / fieldM, x0: this.cx, y0: this.cy, x1: cx, y1: cy, t0: performance.now(), ms}; }
+  zoomTo(fieldM, cx = this.cx, cy = this.cy, ms = 1400) { if (matchMedia('(prefers-reduced-motion: reduce)').matches) ms = 1; const W = this.cv.width || 800; this.anim = {s0: this.scale, s1: W / fieldM, x0: this.cx, y0: this.cy, x1: cx, y1: cy, t0: performance.now(), ms}; }
   step(now) { const a = this.anim; if (!a) return false; const k = Math.min(1, (now - a.t0) / a.ms), e = k < 0.5 ? 2 * k * k : 1 - (-2 * k + 2) ** 2 / 2;
     this.scale = Math.exp(Math.log(a.s0) + (Math.log(a.s1) - Math.log(a.s0)) * e); this.cx = a.x0 + (a.x1 - a.x0) * e; this.cy = a.y0 + (a.y1 - a.y0) * e; if (k >= 1) this.anim = null; return true; }
   visibleEdges() { const [W, H] = [this.cv.width, this.cv.height], R = Math.hypot(W, H) / 2 / this.scale, out = new Set();

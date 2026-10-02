@@ -29,3 +29,16 @@ Surrogate travel through the WYGWYL invented city, after the Aspen Movie Map (MI
 - The coda shows the last frame in all six eras.
 
 `cinema.mjs` plays a film; `WATCH.md` is its interface contract. Link straight to a film with `index.html?watch=06`.
+
+## The film: Where You Go When You Leave
+
+One film of the whole album on the album's own clock (`../../clock.json`): the unified drone record (1,440 s) is the score, and each reading sits in its poem's passage.
+- **Light.** Each passage keeps its treatment's hour and weather (`../world.json`): 01 dusk into night, 03 a day into storm, 10 the end of night into dawn on wet streets, 11 morning fog, 13 daylight into harbour haze.
+- **The drive.** The car leaves each site through the whole street plan, rendered live, moving while he speaks. It looks at his written lines and at landmarks in clear sight, and looks back on the last line.
+- **Pictures.** The canon's pictures surface where they were taken.
+- **Coda.** Each passage's tail shows the last place in its six eras.
+- **Frame.** Powers of Ten opens and closes it. His words are in the lower letterbox; the chapter, street and local hour are in the upper.
+
+Build it:
+- `node tools/film-plan.mjs` writes `film/cut.json`.
+- `node tools/film-render.mjs` renders `../../../film/WYGWYL-moviemap.mp4`. It needs Playwright and ffmpeg, renders chapter by chapter and resumes where it stopped.

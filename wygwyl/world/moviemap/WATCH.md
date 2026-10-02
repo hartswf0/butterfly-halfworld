@@ -70,6 +70,23 @@ PLAYING                                 PAUSED
 - Where the disc does not reach the site (03, 11), the film opens up to ~300 m away and his first lines cannot be seen.
 - Line of sight is tested on the plan (footprints, landmark ground, terrain), not in the image. A look may still find a tree.
 
+## The street surface, under the same contract
+| element | claim | verdict |
+|---|---|---|
+| DISC badge (always on) | the normal state | cut; the disc says nothing |
+| LIVE badge | why the frame is live: off the disc, era, season, hour, weather, rendering | shown only while true |
+| ↩ back to the disc | recovery from a setting change | beside the LIVE badge, only when a setting caused it |
+| SPEED / VIEW labels | — | cut |
+| transport | stopped: ◂ ▸ ▶ ▶▶; moving: ■ and the other speed | only valid actions |
+| "pulled up to the façade" / map jump | an automatic move happened | names itself with ↩ back beside it (8 s) |
+| map note paragraph | explanation | cut to a one-line key (filmed · your trace · tap to go) |
+| live city failed to load | fault | says the disc still plays, with retry |
+| motion | slides, pans, map zooms | instant when reduced motion is asked for |
+| icon buttons | — | labelled for screen readers; focus is visible |
+
+## The film
+`tools/film-plan.mjs` → `film/cut.json`, then `tools/film-render.mjs` → `film/WYGWYL-moviemap.mp4` at the repo root (git-ignored; 1280×720, 24 fps, 2.39 picture in a letterbox, H.264 with AAC, soft English subtitles, 15 chapters) and `film/WYGWYL-moviemap.vtt` here. The watch chooser offers "the whole film" only where that file is served. While it plays, the browser's controls are its Stop, seek and volume. Esc or "↩ back to the street" leaves.
+
 ## 8. Implementation
 - `cinema.mjs`: state machine, clock, drawing.
 - `player.mjs`: hooks for drawing, keys, taps, chrome, snapshot and restore.
