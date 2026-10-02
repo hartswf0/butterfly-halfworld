@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Inverse Topology · WYGWYL</title>
+<style>
+:root{--ink:#f3ead2;--dim:#a99f86;--gold:#ffd23f;--pink:#ff3d6e;--ok:#8fd694;--panel:#121820;--edge:rgba(243,234,210,.16);--bg:#0a0e14}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 "Iowan Old Style",Palatino,Georgia,serif}
+button{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+main{max-width:1280px;margin:0 auto;padding:22px 16px 90px}
+a{color:var(--gold)}
+.k{font:700 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+h1{font-size:clamp(28px,6.5vw,48px);font-weight:400;line-height:1.05;margin:8px 0 12px}
+h2{font-size:clamp(20px,5vw,26px);font-weight:400;margin:40px 0 6px}
+h3{font-size:18px;font-weight:400;margin:18px 0 6px}
+.lede{color:#ddd3bb;max-width:860px;font-size:16px}
+.note{color:var(--dim);font-size:13px;max-width:860px}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:20px 0}
+.flow div{background:var(--panel);border:1px solid var(--edge);padding:12px;position:relative}
+.flow b{display:block;font:700 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.18em;color:var(--gold);margin-bottom:4px}
+.flow span{font-size:13px;color:#ddd3bb}
+.flow div:not(:last-child)::after{content:"→";position:absolute;right:-9px;top:40%;color:var(--gold);font:700 16px Helvetica;z-index:1}
+.stats{display:flex;flex-wrap:wrap;gap:8px 22px;margin:14px 0}
+.stats b{font:700 22px "Helvetica Neue",Arial,sans-serif;display:block}
+.stats span{font:600 10px "Helvetica Neue",Arial,sans-serif;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+.bigger{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:12px 0}
+.bigger div{border-left:2px solid var(--gold);padding:4px 12px;color:#ddd3bb;font-size:14px}
+.bigger b{color:var(--ink)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:6px 0;position:sticky;top:0;background:var(--bg);z-index:3;scrollbar-width:none}
+.chip{flex:0 0 auto;border:1px solid var(--edge);background:var(--panel);color:var(--ink);padding:8px 12px;min-height:38px;font:600 12px "Helvetica Neue",Arial,sans-serif;cursor:pointer;border-radius:19px}
+.chip.on{border-color:var(--gold);color:var(--gold)}
+.refs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.ref{background:var(--panel);border:1px solid var(--edge)}
+.ref .im{position:relative;cursor:pointer}
+.ref img{width:100%;display:block;aspect-ratio:2.39/1;object-fit:cover}
+.ref .im img.seg{position:absolute;inset:0;opacity:0;transition:opacity .25s}
+.ref .im:hover img.seg,.ref .im.on img.seg{opacity:1}
+.ref .c{padding:6px 9px 8px;font:12px/1.45 "Helvetica Neue",Arial,sans-serif;color:var(--dim)}
+.ref .c b{color:var(--ink)}
+.src{display:inline-block;font:700 10px "Helvetica Neue",Arial,sans-serif;letter-spacing:.12em;padding:1px 6px;border-radius:8px;margin-right:4px;text-transform:uppercase}
+.src.markov{background:#3a2050;color:#e0b8ff}.src.generated{background:#203a50;color:#a8d8ff}.src.archive{background:#4a3a1a;color:#ffd890}.src.halfworld{background:#2a2a2a;color:#ddd}
+.found{color:var(--pink)!important}
+.match{margin:18px 0 26px;border-top:1px solid var(--edge);padding-top:12px}
+.mrow{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:12px;align-items:start}
+@media (max-width:760px){.mrow{grid-template-columns:1fr}}
+.mrow .refbox img{width:100%;display:block;aspect-ratio:2.39/1;object-fit:cover;border:1px solid var(--gold)}
+.mrow .refbox div{font:12px "Helvetica Neue",Arial,sans-serif;color:var(--dim);margin-top:4px}
+.worlds{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.wc{flex:0 0 min(340px,82vw);scroll-snap-align:start;background:var(--panel);border:1px solid var(--edge)}
+.wc .pair{position:relative;cursor:pointer}
+.wc img{width:100%;display:block;aspect-ratio:2.39/1;object-fit:cover}
+.wc .pair img.b{position:absolute;inset:0;opacity:1;transition:opacity .3s}
+.wc .pair.show-a img.b{opacity:0}
+.wc .lab{position:absolute;left:6px;top:6px;font:700 10px "Helvetica Neue",Arial,sans-serif;letter-spacing:.14em;background:rgba(0,0,0,.6);padding:2px 6px;border-radius:8px;color:var(--gold)}
+.wc .c{padding:6px 9px 9px;font:12px/1.45 "Helvetica Neue",Arial,sans-serif;color:var(--dim)}
+.wc .c b{color:var(--ink)}
+.up{color:var(--ok)!important}
+.wc ul{margin:4px 0 0 16px;color:#cfc6ae}
+.maps{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.mapc{background:var(--panel);border:1px solid var(--edge)}
+.mapc .pair{position:relative;cursor:pointer}
+.mapc img{width:100%;display:block}
+.mapc .pair img.b{position:absolute;inset:0;transition:opacity .3s}
+.mapc .pair.show-a img.b{opacity:0}
+.mapc .c{padding:6px 9px;font:12px "Helvetica Neue",Arial,sans-serif;color:var(--dim)}
+</style>
+</head>
+<body>
+<main>
+  <div class="k">Where You Go When You Leave · <a href="index.html">the foundry</a> · <a href="shots.html">the shots</a> · inverse topology</div>
+  <h1>Inverse topology — the shots shape the land</h1>
+  <p class="lede">We already have extraordinary shots for these poems: the generated stills of every shot in the bible,
+  the MARKOV_POET clips routed stanza by stanza, the archive footage the Cineosis forage found for each beat, the
+  Halfworld frames. Forward, a world is grown and then photographed. Here it runs the other way: start from the best
+  images for each poem and ask what the land must be for that frame to exist — then sculpt every world toward it.</p>
+  <div class="flow">
+    <div><b>THE SHOTS</b><span id="pools"></span></div>
+    <div><b>CHOOSE</b><span>CLIP ranks every image against its poem’s place, light and set pieces — and against every other poem, so a strong image in the wrong pool is still found</span></div>
+    <div><b>READ</b><span>a panoptic segmentation into the world’s own classes — sky, water, city, street, forest, meadow, beach, rock — plus horizon and light</span></div>
+    <div><b>FIND</b><span>search each world for the camera that already comes closest: position on the poem’s ground, heading, height</span></div>
+    <div><b>INFER</b><span>every missing region becomes a place: its column a bearing, its row below the horizon a distance, its height above it an elevation</span></div>
+    <div><b>SCULPT</b><span>carve the water, lay the beach, plant the forest, raise the ridge to its angle, stand the city up to its skyline, open the sky</span></div>
+    <div><b>MANY WORLDS</b><span>the same shots pull every world differently — a topology inferred from its photographs</span></div>
+  </div>
+  <div class="stats" id="stats"></div>
+
+  <h2>Bigger than this</h2>
+  <div class="bigger">
+    <div><b>Clips, not stills.</b> A clip is a camera path and a duration. Read its motion (pan, dolly, rise) and the inverse gives a route through the land, not a point — the Magic Ride’s palm promenade becomes a road the world must lay down.</div>
+    <div><b>The reference as a reader.</b> Beside the poems and the builder, a third reader: can this world give back its shots? Evolve against it, and worlds are bred by their photographs.</div>
+    <div><b>Cross-poem finds are places.</b> When CLIP pulls the same chapel image for poem 3 and poem 11, the images are saying what the bible says: one site at two times. Shared images become shared ground.</div>
+    <div><b>Interiors become sets.</b> References with no horizon — the bedroom, the party, the hall — don’t shape terrain; they shape the island’s walk-in sets: their walls, light and lenses.</div>
+    <div><b>Every shot a triple.</b> The found image, the staged set, the rendered world: the film cuts between all three, each matched to the same line.</div>
+    <div><b>A map as a sum of shots.</b> Not a map drawn and then filmed, but a map that is whatever land makes all of its shots true at once — and where two shots disagree, a fork: two worlds.</div>
+  </div>
+
+  <h2>Each world, before and after its shots</h2>
+  <p class="note">Tap a map to compare the world before the references shaped it and after. Pink wedges are the cameras the inverse search found.</p>
+  <div class="maps" id="maps"></div>
+
+  <h2>Poem by poem</h2>
+  <div class="chips" id="pchips"></div>
+  <div id="poems"></div>
+</main>
+<script type="module">
+const $ = id => document.getElementById(id);
+const [R, I] = await Promise.all([fetch('refs.json').then(r => r.json()), fetch('inverse.json').then(r => r.json())]);
+const refs = Object.fromEntries(R.refs.map(r => [r.id, r]));
+const P = R.poems;
+$('pools').textContent = `${R.pool.generated} generated stills · ${R.pool.markov} MARKOV_POET clips · ${R.pool.archive} archive frames · ${R.pool.halfworld} Halfworld frames`;
+const avg = k => I.shots.reduce((s, x) => s + x[k], 0) / Math.max(1, I.shots.length);
+const grownN = I.shots.reduce((s, x) => s + x.grown.length, 0);
+$('stats').innerHTML = [[Object.values(R.pool).reduce((a, b) => a + b, 0), 'images weighed'], [R.refs.length, 'chosen for the poems'], [I.refs.length, 'landscapes that shape land'],
+  [I.worlds.length, 'worlds shaped'], [Math.round(avg('before') * 100) + '%', 'match, found camera'], [Math.round(avg('after') * 100) + '%', 'match, after sculpting'], [grownN, 'things grown']]
+  .map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join('');
+$('maps').innerHTML = I.worlds.map(w => `<div class="mapc"><div class="pair" onclick="this.classList.toggle('show-a')"><img src="inv/${w}/map-a.jpg" alt=""><img class="b" src="inv/${w}/map-b.jpg" alt=""></div>
+  <div class="c"><b>${w}</b> · ${I.shots.filter(s => s.world === w).reduce((a, s) => a + s.grown.length, 0)} things grown for ${I.shots.filter(s => s.world === w).length} shots · tap: before / after</div></div>`).join('');
+const poems = Object.keys(P).sort();
+let pick = poems.find(n => I.shots.some(s => s.poem === n)) || poems[0];
+function chips() {
+  $('pchips').innerHTML = poems.map(n => `<button class="chip ${n === pick ? 'on' : ''}" data-n="${n}">${n} ${P[n].title}</button>`).join('');
+  $('pchips').querySelectorAll('.chip').forEach(b => b.onclick = () => { pick = b.dataset.n; chips(); poem(); });
+}
+const fr = f => Object.entries(f).filter(([k]) => !['other'].includes(k)).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([k, v]) => `${k} ${Math.round(v)}%`).join(' · ');
+function poem() {
+  const n = pick;
+  const rs = R.refs.filter(r => r.poem === n);
+  let h = `<h3>${n} · ${P[n].title}</h3><p class="note">${P[n].text[0]}</p>
+    <div class="refs">${rs.map(r => `<div class="ref"><div class="im" onclick="this.classList.toggle('on')"><img src="${r.img}" alt=""><img class="seg" src="${r.seg}" alt=""></div>
+      <div class="c"><span class="src ${r.source}">${r.source}</span>${r.why !== 'own' ? '<b class="found">found by CLIP</b> · ' : ''}fit ${r.clip} · ${r.hour}${r.horizon != null ? ' · horizon ' + Math.round(r.horizon * 100) + '%' : ' · no horizon'}<br>${fr(r.frac)}<br><i>${(r.desc || '').slice(0, 120)}</i>${I.refs.includes(r.id) ? '' : '<br><b>reads as a set, not a landscape</b>'}</div></div>`).join('')}</div>`;
+  for (const rid of I.refs.filter(id => refs[id].poem === n)) {
+    const r = refs[rid], ms = I.shots.filter(s => s.ref === rid);
+    h += `<div class="match"><div class="mrow"><div class="refbox"><img src="${r.img}" alt=""><div><span class="src ${r.source}">${r.source}</span> ${rid} · ${fr(r.frac)}</div></div>
+      <div class="worlds">${ms.map(m => `<div class="wc"><div class="pair" onclick="this.classList.toggle('show-a')"><img src="${m.a}" alt=""><img class="b" src="${m.b}" alt=""><span class="lab">${m.world} · tap: found / sculpted</span></div>
+        <div class="c">match <b>${Math.round(m.before * 100)}%</b> → <b class="${m.after > m.before ? 'up' : ''}">${Math.round(m.after * 100)}%</b> · camera ${Math.round(m.cam.z)} m up, facing ${Math.round(m.cam.hd) % 360}°
+        ${m.grown.length ? `<ul>${m.grown.map(g => `<li>${g}</li>`).join('')}</ul>` : '<br>the world already held it'}</div></div>`).join('')}</div></div></div>`;
+  }
+  $('poems').innerHTML = h;
+}
+chips(); poem();
+</script>
+</body>
+</html>
