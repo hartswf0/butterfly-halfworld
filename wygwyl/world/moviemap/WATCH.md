@@ -1,13 +1,15 @@
-# Watch — the poem drives the car
+# Watch — Where You Go When You Leave, live
 
-The interface contract for the film mode (`cinema.mjs`). Films are compiled by `tools/compile-films.mjs` into `films.json`: 14 cut lists, deterministic.
+The app's Watch plays the film's own cut through the film's own camera and frame (`filmcam.mjs`, `filmframe.mjs`), live, with the drone record as the clock. It shows what the rendered video shows; the video is the same code rendered offline.
+
+The interface contract for the film mode (`cinema.mjs`).
 
 ## 1. Way
 - **Actor:** a viewer.
-- **Object:** one of his readings, played as a drive through the disc.
+- **Object:** *Where You Go When You Leave*: one passage of it or the whole album, drawn live from the film's own cut.
 - **Operation:** watch. You may stop, take the wheel at the frame you are on, or leave.
 - **Consequence:** the car is moved. Leaving restores where you were and what the street was set to (era, season, hour, weather, rendering).
-- **Completion:** the drive is over and its trace is on the map. Nothing is asked of you.
+- **Completion:** the passage (or the film) is over. Nothing is asked of you.
 
 ## 2. Obstruction found in the street surface
 - Drive chrome would compete with the film: the map, the place card, the transport, the views and the tools.
@@ -19,56 +21,53 @@ The interface contract for the film mode (`cinema.mjs`). Films are compiled by `
 
 | element | claim | verdict |
 |---|---|---|
-| frame | where the car is now | keep: it is the object |
-| line, words lit as spoken | what he is saying now | keep |
-| hairline progress with line ticks | how far through, where the lines fall; seek | keep, 2 px |
+| the film's frame | the film at this moment, with its own letterbox: chapter, street and hour above, his words below | keep: it is the object, and the same frame the video has |
+| hairline progress with passage ticks | how far through; seek | keep, 2 px |
 | ■ Stop | active work can be stopped | keep while playing, faint until hovered |
-| trace (street · line n of N · looking at …) | automation moved you; why the view turned | keep, fades after 2.6 s |
-| title card | which poem, from where | keep for the pre-roll only |
-| SEARCH | the frame is late; the voice goes on | keep only while true |
+| the line being spoken (screen readers only) | what he is saying now | kept in a polite live region; the frame already shows it |
+| "raising the city …" | the engine is loading | only while true; Stop leaves |
 | map above the horizon | position | cut while watching; the trace goes onto it at the end |
 | place card, badge, transport, view rose, tools | driving state and actions | cut while watching (not valid) |
 | frame forensics in the HUD | technical detail | moved to the "in place" panel |
 | Stop in the drive bar while stopped; Play while driving | invalid actions | hidden until valid |
 
 ## 4. State map
-- **CHOOSE:** the street, dimmed, with the 14 films nearest first. Dominant action: the first film. Exit: ✕ or Esc, which changes nothing.
-- **TITLE:** the first frame with the title. The reading starts after 3.2 s. Stop is available.
-- **PLAYING:** frame, words, hairline, Stop. A tap or Space pauses; ← and → move by a line.
+- **CHOOSE:** the street, dimmed. Dominant action: the whole film. Then the 14 passages, each with its length, light and starting street. "The rendered film" appears only where the video is served. Exit: ✕ or Esc, which changes nothing.
+- **LOADING:** "raising the city …". Stop or Esc leaves.
+- **PLAYING:** the film's frame, the hairline, Stop. The drone record is the clock; his reading follows it within 0.15 s. A tap or Space pauses; ← and → move by a line.
 - **PAUSED:** resume (dominant), take the wheel here, or back to where you were. Seeking still works.
-- **CODA:** the last frame in the six eras, rendered live at the same pose. It is skipped if the city cannot be raised in time.
-- **END:** what was driven. Stay here (dominant), back to where you were, or again.
+- **END:** what was played (passages, kilometres, light). Stay here (dominant), back to where you were, or again.
 - **FAULT:**
-  - The reading fails to load: a red pill says so and the words carry the film on a wall clock.
+  - The record fails to load: a red pill says so and the film runs on the wall clock.
   - Autoplay is blocked: PAUSED with "▶ begin".
-  - A frame is late: SEARCH, and the last frame holds.
-- **RECOVERY:** back to where you were restores the position, view and settings. Take the wheel keeps the trace.
+- **RECOVERY:** back to where you were restores the position, view and settings. Take the wheel puts you on the nearest street frame, facing the way the camera faced, in the film's hour and weather; the street then shows LIVE with "↩ back to the disc".
 
 ## 5. Wireframes
 ```
 PLAYING                                 PAUSED
 ┌──────────────────────────────────┐    ┌──────────────────────────────────┐
-│Domino Spine                      │    │                                  │
-│line 4 of 32 · looking at …       │    │            (frame held)          │
-│                                  │    │   ┌──────────────────────────┐   │
-│          (the frame)             │    │   │ 13 … · line 4 of 32      │   │
-│                                  │    │   │ ▶ resume  take the wheel │   │
-│  discovering water on Jupiter's… │    │   │ ↩ back to where you were │   │
-│                               ■  │    │   └──────────────────────────┘   │
+│13 · HOW TO WIN MY HEART  Domino… │    │                                  │
+│▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│    │            (frame held)          │
+│▓▓▓▓▓▓ the 2.39 picture ▓▓▓▓▓▓▓▓▓▓│    │   ┌──────────────────────────┐   │
+│▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│    │   │ 13 … · 1:12 into passage │   │
+│ discovering water on Jupiter's…  │    │   │ ▶ resume  take the wheel │   │
+│                               ■  │    │   │ ↩ back to where you were │   │
+│                                  │    │   └──────────────────────────┘   │
 │▔▔▔▔▔▔▔▔▔╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵│    │▔▔▔▔▔▔▔▔▔╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵╵│
 └──────────────────────────────────┘    └──────────────────────────────────┘
 ```
 
 ## 6. Void contract
 - While a film plays, nothing on screen asks for anything except Stop.
-- Every automatic turn and cut names itself once, then lets go.
+- What the app plays is what the video shows: the same cut, camera and frame.
 - No control is shown that cannot act.
 - Leaving always returns the street exactly as it was.
 
 ## 7. Failure
-- The routes are disc-only, so some poems share a spine: 03, 11 and 12 start on Domino Spine.
-- Where the disc does not reach the site (03, 11), the film opens up to ~300 m away and his first lines cannot be seen.
-- Line of sight is tested on the plan (footprints, landmark ground, terrain), not in the image. A look may still find a tree.
+- The film is drawn live, so on a slow phone it drops frames; the record keeps time and the picture catches up.
+- Where no street reaches a poem's site (03, 11), the passage opens ~270–300 m away.
+- Line of sight for a look is tested on the plan (footprints, landmark ground, terrain), not in the image. A look may still find a tree.
+- Live and rendered differ only where time itself moves: water, clouds, the lamps' glow.
 
 ## The street surface, under the same contract
 | element | claim | verdict |
@@ -92,13 +91,13 @@ PLAYING                                 PAUSED
 | a picture or film on a wall | this building holds it | drawn only where the ID buffer sees that building; touch opens it |
 | "What it holds · A·nn·k" | the building's address and contents | in its sheet, one action per item (play, watch, lay over the frame) |
 | holdings on the map | where everything is | dots once the field is a few km |
-| sound in Watch | — | the street falls silent while a film plays, and resumes after |
+| sound in Watch | the film's own sound | the street's listening layer yields to the film; the film plays the city's sounds near its camera by the same rule as the render |
 
 ## The film
 `tools/film-plan.mjs` → `film/cut.json`, then `tools/film-render.mjs` → `film/WYGWYL-moviemap.mp4` at the repo root (git-ignored; 1280×720, 24 fps, 2.39 picture in a letterbox, H.264 with AAC, soft English subtitles, 15 chapters) and `film/WYGWYL-moviemap.vtt` here. The watch chooser offers "the whole film" only where that file is served. While it plays, the browser's controls are its Stop, seek and volume. Esc or "↩ back to the street" leaves.
 
 ## 8. Implementation
-- `cinema.mjs`: state machine, clock, drawing.
-- `player.mjs`: hooks for drawing, keys, taps, chrome, snapshot and restore.
+- `cinema.mjs`: state machine, the clock (the drone record), his reading kept on it, the street's sound live.
+- `filmcam.mjs`, `filmframe.mjs`: the film's camera and frame, shared with the renderer.
+- `player.mjs`: hooks for the film's lens on the engine, laying the frame into the stage, keys, taps, chrome, snapshot and restore, taking the wheel.
 - `index.html`: `#watch`.
-- `tools/compile-films.mjs`: the cut lists.

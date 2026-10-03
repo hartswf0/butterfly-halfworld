@@ -19,17 +19,6 @@ Surrogate travel through the WYGWYL invented city, after the Aspen Movie Map (MI
 - **Touching a façade.** A touch runs an ID-buffer pass to name the building. The car then pulls up to the building's street front.
 - **The map.** `map.mjs` draws the plan, the aerial and Lynch's notation, with a Powers-of-Ten zoom.
 
-## Watch
-
-`node tools/compile-films.mjs` compiles the 14 readings (`../../timings/NN.json`, word timings) into `films.json`. In each film:
-- The car leaves the poem's site down the disc toward the next poem, moving only while he speaks.
-- It jumps at a line's start when the road outruns the reading.
-- Each line looks where it is written into the city, or at a landmark in clear sight.
-- The last line looks back.
-- The coda shows the last frame in all six eras.
-
-`cinema.mjs` plays a film; `WATCH.md` is its interface contract. Link straight to a film with `index.html?watch=06`.
-
 ## The film: Where You Go When You Leave
 
 One film of the whole album on the album's own clock (`../../clock.json`): the unified drone record (1,440 s) is the score, and each reading sits in its poem's passage.
@@ -39,8 +28,17 @@ One film of the whole album on the album's own clock (`../../clock.json`): the u
 - **Coda.** Each passage's tail shows the last place in its six eras.
 - **Frame.** Powers of Ten opens and closes it. His words are in the lower letterbox; the chapter, street and local hour are in the upper.
 
+**One film, two ways of showing it.** The app's Watch and the rendered video run the same code:
+- `film/cut.json`: the cut;
+- `filmcam.mjs`: the camera, stepped on a fixed 1/24 s lattice so live playback and the render compute the same pose;
+- `filmframe.mjs`: the frame (picture, walls, letterbox, titles, coda, credits);
+- `sound.mjs`: `ambience` and `codaMouth`, the street's sound.
+
+Live in the app, the drone record is the clock, his reading starts at its album offset, and the street plays around the camera. The render draws the same frames offline: films on walls are seeked to each frame's time, and the street sound is walked through the same rule (`tools/film-mix.mjs`) and mixed by `tools/film-mix.py`.
+
 Build it:
 - `node tools/film-plan.mjs` writes `film/cut.json`.
+- `node tools/film-mix.mjs && python3 tools/film-mix.py` writes the street sound.
 - `node tools/film-render.mjs` renders `../../../film/WYGWYL-moviemap.mp4`. It needs Playwright and ffmpeg, renders chapter by chapter and resumes where it stopped.
 
 ## What the city holds

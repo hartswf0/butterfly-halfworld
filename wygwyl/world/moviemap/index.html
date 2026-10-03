@@ -94,13 +94,16 @@ input[type=range]{flex:1;accent-color:var(--acc)}
 #watch ol button{width:100%;display:grid;grid-template-columns:30px 1fr;gap:0 8px;text-align:left;border-radius:9px;padding:8px 10px;background:rgba(255,255,255,.035)}
 #watch ol button .n{grid-row:span 2;font:600 13px ui-monospace,Menlo,monospace;color:var(--acc2);padding-top:2px}#watch ol button .t{font:600 14px Georgia,serif}#watch ol button .m{color:var(--dim);font-size:11px}
 #watch ol button.first{border-color:var(--acc)}#watch ol button:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
-#watch .title{position:absolute;left:0;right:0;top:38%;text-align:center;font:600 clamp(22px,4vw,40px)/1.15 Georgia,serif;color:#fff;text-shadow:0 2px 18px #000;transition:opacity 1.2s}
-#watch .title small{display:block;font:600 13px ui-monospace,Menlo,monospace;letter-spacing:.3em;color:var(--acc2);margin-bottom:8px}#watch .title em{display:block;font:italic 14px Georgia,serif;color:#e8dcc4;margin-top:10px}
-#watch .title.gone{opacity:0}
-#watch .line{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);width:min(860px,90vw);text-align:center;font:clamp(17px,2.3vw,25px)/1.4 Georgia,serif;text-shadow:0 1px 3px #000,0 0 14px rgba(0,0,0,.9)}
-#watch .line span{color:rgba(255,248,232,.38);transition:color .12s}#watch .line span.on{color:#fff8e8}
-#watch .trace{position:absolute;left:16px;top:14px;opacity:0;transition:opacity .6s;text-shadow:0 1px 3px #000}#watch .trace.on{opacity:1}
-#watch .trace b{display:block;font:600 17px Georgia,serif;color:#fff}#watch .trace span{font:11px ui-sans-serif,-apple-system,Arial;color:#dcd3c3}
+
+
+
+
+
+
+
+#watch .loadmsg{position:absolute;left:50%;top:45%;transform:translateX(-50%);font:14px Georgia,serif;color:var(--dim)}
+#watch .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+#watch .whole.alt{border-color:var(--line)}
 #watch .fault{position:absolute;left:50%;top:14px;transform:translateX(-50%);background:var(--panel);border:1px solid var(--red);border-radius:999px;padding:5px 12px;font-size:12px}
 #watch .stop{position:absolute;right:14px;bottom:16px;pointer-events:auto;width:40px;height:40px;border-radius:10px;padding:0;background:rgba(8,10,13,.55);opacity:.55}#watch .stop:hover,#watch .stop:focus-visible{opacity:1}
 #watch .bar{position:absolute;left:0;right:0;bottom:0;height:10px;pointer-events:auto;cursor:pointer}

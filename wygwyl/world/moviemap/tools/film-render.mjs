@@ -53,9 +53,13 @@ if (args.includes('--assemble') || !only.length) {
   // each reading gets an exact slot, from its own start to the next one's: padded and trimmed, so nothing can drift
   parts.push(`aevalsrc=0|0:s=48000:d=${cut.chapters[0].read0.toFixed(4)},${F}[g]`); segs.push('[g]');
   cut.chapters.forEach((c, i) => { const next = i + 1 < cut.chapters.length ? cut.chapters[i + 1].read0 : total; parts.push(`[${i + 1}:a]${F},apad,atrim=end_sample=${Math.round((next - c.read0) * 48000)}[r${i}]`); segs.push(`[r${i}]`); });
+  // the street's own sound (tools/film-mix.mjs + film-mix.py), if rendered: what the city holds near the camera, under his voice
+  const AMB = join(TMP, 'ambience.wav'), amb = existsSync(AMB), ai = cut.chapters.length + 1;
+  if (amb) ins.push('-i', AMB);
   const fl = [...parts, `${segs.join('')}concat=n=${segs.length}:v=0:a=1,apad,atrim=0:${total.toFixed(3)}[voice]`,
     `[0:a]${F},volume=0.62,afade=t=out:st=${(cut.duration - 6).toFixed(2)}:d=6,apad,atrim=0:${total.toFixed(3)}[d]`,
-    `[d][voice]amix=inputs=2:duration=longest:dropout_transition=0,volume=2,alimiter=limit=0.95[a]`].join(';');
+    ...(amb ? [`[${ai}:a]${F},volume=0.8,apad,atrim=0:${total.toFixed(3)}[amb]`, `[d][voice][amb]amix=inputs=3:duration=longest:dropout_transition=0,volume=3,alimiter=limit=0.95[a]`]
+      : [`[d][voice]amix=inputs=2:duration=longest:dropout_transition=0,volume=2,alimiter=limit=0.95[a]`])].join(';');
   let r = spawnSync(FF, ['-loglevel', 'error', '-y', ...ins, '-filter_complex', fl, '-map', '[a]', '-c:a', 'aac', '-b:a', '192k', join(TMP, 'mix.m4a')], {stdio: 'inherit'}); if (r.status) process.exit(1);
   r = spawnSync(FF, ['-loglevel', 'error', '-y', '-i', join(TMP, 'video.mp4'), '-i', join(TMP, 'mix.m4a'), '-i', join(TMP, 'subs.srt'), '-i', join(TMP, 'chapters.txt'),
     '-map', '0:v', '-map', '1:a', '-map', '2:s', '-map_metadata', '3', '-map_chapters', '3', '-c:v', 'copy', '-c:a', 'copy', '-c:s', 'mov_text', '-metadata:s:s:0', 'language=eng', '-movflags', '+faststart', OUT], {stdio: 'inherit'});

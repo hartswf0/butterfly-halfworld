@@ -126,7 +126,7 @@ let idc = null; function idCanvas(img) { if (!idc) { idc = document.createElemen
   fx.save(); fx.imageSmoothingEnabled = false; fx.drawImage(idc, fit.dx, fit.dy, fit.dw, fit.dh); fx.restore(); $('live').style.display = 'none'; }
 
 // overlay: the turn arrows on the road at a corner, the hovered and the chosen thing outlined from the ID buffer
-let maskC = null, arrowHits = [], cine = null, wallHits = [], HOLD = null, SND = null, groundH = null, listening = false;
+let maskC = null, arrowHits = [], cine = null, wallHits = [], HOLD = null, SND = null, groundH = null, listening = false, wallImageHook = () => {};
 function drawOver() {
   ox.clearRect(0, 0, overC.width, overC.height);
   // what the city holds, on its walls (photographic rendering only: the abstractions show the bare city)
@@ -486,26 +486,32 @@ function camNow(yawOff = 0) { const p = pose(), g = groundH ? Math.max(groundAt(
 async function loadHoldings() {
   const [L, hb, bb] = await Promise.all(['holdings.json', '../city3d/height.bin', '../city3d/buildings.f32'].map((u, i) => fetch(u).then(r => i ? r.arrayBuffer() : r.json())));
   groundH = Float32Array.from(new Int16Array(hb), v => v / 10); if (!bldBuf) bldBuf = new Float32Array(bb);
-  HOLD = makeHoldings(L, {bld: D.bld(), onload: () => requestDraw()}); D.holdings = L.holdings;
+  HOLD = makeHoldings(L, {bld: D.bld(), onload: () => { requestDraw(); wallImageHook(); }}); D.holdings = L.holdings;
   SND = makeSound(L, {captions: html => { $('heard').innerHTML = html; $('heard').hidden = !html; }});
   $('btnListen').hidden = false; requestDraw();
 }
 $('btnListen').onclick = () => { if (!SND) return; listening = !SND.on; listening ? SND.enable() : SND.disable(); $('btnListen').classList.toggle('on', listening); $('btnListen').textContent = listening ? '♪ listening' : '♪ listen'; $('btnListen').setAttribute('aria-pressed', listening); };
 
 // ——— watch: the poem drives the car ———
-cine = makeCinema({$, disc,
-  pose, fit: () => fit, fx, layout, blit, frameRef,
-  clearOver: () => { ox.clearRect(0, 0, overC.width, overC.height); $('turns').style.display = 'none'; },
-  wayOf: seg => WAYS[E[seg].w].name,
-  ensureEngine: q => ensureEngine(q),
-  poseEngine: (seg, i, dir, view) => { const st = steps(seg)[i]; eng.pose(st[0], st[1], dir > 0 ? st[2] : wrapA(st[2] + Math.PI), view); },
+cine = makeCinema({$, meta,
+  ensureEngine: q => ensureEngine(q), holdings: () => HOLD, mobile: MOBILE, onWallImage: f => { wallImageHook = f; },
+  stageWidth: () => $('stage').getBoundingClientRect().width,
+  // the film's lens on the engine while it plays (its 2.39 picture and focal length); afterwards the street's own, and its settings
+  filmLens: (on, w, h, hfov) => { if (!eng) return; if (on) { eng.setStyle('photo'); eng.setHfov(hfov); eng.resize(w, h, 1); $('live').style.display = 'none'; }
+    else { eng.setHfov(90); eng.resize(LW, LH, 1); eng.setEra(S.era); if (S.season) eng.setSeason(S.season); else { eng.setSeason('summer'); eng.setDoy(265); eng.U.season.value = 0; } eng.setHour(S.hour); eng.setWeather(S.weather); eng.setStyle(S.style === 'id' ? 'photo' : S.style); requestDraw(); } },
+  // the film's frame, laid whole into the stage (a 16:9 frame: it carries its own letterbox)
+  blitFilm: out => { layout(); const W = fit.W, H = fit.H, s = Math.min(W / out.width, H / out.height), w = out.width * s, h = out.height * s; fx.fillStyle = '#000'; fx.fillRect(0, 0, W, H);
+    fx.drawImage(out, (W - w) / 2, fit.tall ? Math.min((H - h) / 2, 92 * fit.d) : (H - h) / 2, w, h); ox.clearRect(0, 0, overC.width, overC.height); $('live').style.display = 'none'; },
   snapshot: () => ({...S}),
-  // a film plays from the disc: the city as it was filmed, whatever the street was set to; leaving restores it
-  discState: () => { S.speed = 0; choices = null; for (const [k, v] of Object.entries({era: 5, season: null, hour: 12, weather: 'clear', style: 'photo', reg: false})) if (S[k] !== v) setSetting(k, v); },
   restore: o => { for (const k of ['era', 'season', 'hour', 'weather', 'style']) if (S[k] !== o[k]) setSetting(k, o[k]); Object.assign(S, {e: o.e, i: o.i, dir: o.dir, view: o.view, speed: 0}); arrived(); },
-  goTo: o => { Object.assign(S, o, {speed: 0}); arrived(); },
-  markTrace: path => { for (const [seg, i] of path) { const n = steps(seg).length; if (!trace.has(seg)) trace.set(seg, new Uint8Array(n)); trace.get(seg)[i] = 1; } },
-  chrome: on => { for (const id of ['nav', 'hud', 'bar', 'tools']) $(id).hidden = !on; if (!on) { $('side').classList.remove('open'); closeInfo(); closeMapIfOpen(); $('turns').style.display = 'none'; $('toast').style.display = 'none'; } else requestDraw(); },
+  // take the wheel where the film stands: the nearest street frame, facing the way the camera faced, in the film's light
+  goToFilm: (p, L) => { let best = null; for (const [ei, e] of E.entries()) { if (e.cls === 2) continue; const bb = e.bb; if (bb && (p.px < bb[0] - 30 || p.px > bb[2] + 30 || p.py < bb[1] - 30 || p.py > bb[3] + 30)) continue;
+      steps(ei).forEach((st, i) => { const d = Math.hypot(st[0] - p.px, st[1] - p.py); if (!best || d < best.d) best = {d, ei, i, h: st[2]}; }); }
+    if (!best) return; const dir = Math.cos(best.h - p.yaw) >= 0 ? 1 : -1;
+    Object.assign(S, {e: best.ei, i: best.i, dir, view: 0, speed: 0}); choices = null;
+    if (L) { setSetting('hour', Math.round(L.hour * 4) / 4); setSetting('weather', L.weather); }
+    arrived(); toast(`you have the wheel — in the film’s light`, 6000, {label: '↩ back to the disc', fn: () => $('toDisc').click()}); },
+  chrome: on => { for (const id of ['nav', 'hud', 'bar', 'tools']) $(id).hidden = !on; if (!on) { $('side').classList.remove('open'); closeInfo(); closeMapIfOpen(); $('turns').style.display = 'none'; $('toast').style.display = 'none'; $('heard').hidden = true; } else requestDraw(); },
 });
 function closeMapIfOpen() { if (mapOpen) closeMap(); }
 $('btnWatch').onclick = () => cine.choose();
@@ -520,5 +526,5 @@ loadHoldings().catch(e => console.warn('holdings', e));
 draw(); requestAnimationFrame(loop);
 if (!onDisc()) ensureEngine();
 else if (!MOBILE) setTimeout(() => ensureEngine(true), 2500);     // on a desk, raise the city quietly so a touch is answered at once
-if (Q.has('watch')) cine.load().then(fs => { const f = fs.find(x => x.num === Q.get('watch')); if (f) { cine.choose().then(() => cine.play(f)); } });
+if (Q.has('watch')) cine.load().then(cut => { const i = cut.chapters.findIndex(c => c.num === Q.get('watch')); if (i >= 0) cine.choose().then(() => cine.play(cut.chapters[i].t0, cut.chapters[i + 1] ? cut.chapters[i + 1].t0 : cut.duration + cut.credits)); else if (Q.get('watch') === 'all') cine.choose().then(() => cine.play(0, cut.duration + cut.credits)); });
 window.__mm = {wallHits: () => wallHits, get HOLD() { return HOLD; }, get SND() { return SND; }, cine, S, plan, disc, steps, draw, ensureEngine, get eng() { return eng; }, stepBy, setView, take, get choices() { return choices; }, openMap, mapView, pullUpTo, touch};

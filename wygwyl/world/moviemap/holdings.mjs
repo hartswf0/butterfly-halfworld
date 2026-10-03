@@ -4,12 +4,13 @@
 const BASE = '../../';
 export const srcURL = s => /^https?:/.test(s) ? s : BASE + s;
 
-export function makeHoldings(ledger, {bld, onload = () => {}}) {
+export function makeHoldings(ledger, {bld, onload = () => {}, base = BASE, videoSrc = null, exclude = []}) {
+  const url = s => /^https?:/.test(s) ? s : base + s;
   const H = ledger.holdings, byLot = new Map(), byNode = new Map();
   for (const h of H) { if (h.lot != null) (byLot.get(h.lot) || byLot.set(h.lot, []).get(h.lot)).push(h); if (h.node != null) (byNode.get(h.node) || byNode.set(h.node, []).get(h.node)).push(h); }
   // one thing shown per façade: a film over a picture over a reference
   const RANK = {screen: 0, poster: 1, ref: 2};
-  const walls = [...byLot.entries()].map(([k, list]) => { const show = list.filter(h => RANK[h.kind] != null).sort((a, b) => RANK[a.kind] - RANK[b.kind] || (a.id < b.id ? -1 : 1))[0]; return show ? {k, h: show, face: show.face} : null; }).filter(Boolean);
+  const walls = [...byLot.entries()].map(([k, list]) => { const show = list.filter(h => RANK[h.kind] != null && !exclude.includes(h.id)).sort((a, b) => RANK[a.kind] - RANK[b.kind] || (a.id < b.id ? -1 : 1))[0]; return show ? {k, h: show, face: show.face} : null; }).filter(Boolean);
   const WG = new Map(); for (const w of walls) { const key = Math.floor(w.face[0] / 100) + ',' + Math.floor(w.face[1] / 100); (WG.get(key) || WG.set(key, []).get(key)).push(w); }
   // footprints, for a line-of-sight test on the plan
   const BG = new Map(); if (bld) for (let k = 0; k < bld.length / 14; k++) { const o = k * 14, key = Math.floor(bld[o] / 40) + ',' + Math.floor(bld[o + 1] / 40); (BG.get(key) || BG.set(key, []).get(key)).push(k); }
@@ -24,9 +25,9 @@ export function makeHoldings(ledger, {bld, onload = () => {}}) {
   }
   const standing = (k, era) => { if (!bld) return true; const o = k * 14; return bld[o + 7] <= era && (bld[o + 8] > era || (era >= 5 && bld[o + 9] > 0)); };
   // the camera the frame was made with: position, yaw, horizontal field of view 90°, aspect 3:2
-  function projector(cam) { const cy = Math.cos(cam.yaw), sy = Math.sin(cam.yaw), T = Math.tan(cam.hfov / 2), TV = T / cam.aspect;
-    return (X, Y, Z) => { const dx = X - cam.x, dz = Z - cam.y, dy = Y - cam.z, f = dx * cy + dz * sy, r = -dx * sy + dz * cy; if (f < 0.6) return null;
-      return [0.5 + 0.5 * (r / f) / T, 0.5 - 0.5 * (dy / f) / TV, f]; }; }
+  function projector(cam) { const cy = Math.cos(cam.yaw), sy = Math.sin(cam.yaw), cp = Math.cos(cam.pitch || 0), sp = Math.sin(cam.pitch || 0), T = Math.tan(cam.hfov / 2), TV = T / cam.aspect;
+    return (X, Y, Z) => { const dx = X - cam.x, dz = Z - cam.y, dy = Y - cam.z, h = dx * cy + dz * sy, r = -dx * sy + dz * cy, f = h * cp + dy * sp, up = -h * sp + dy * cp; if (f < 0.6) return null;
+      return [0.5 + 0.5 * (r / f) / T, 0.5 - 0.5 * (up / f) / TV, f]; }; }
   // the quad of a holding on its façade, as 3D corners (u from the reader's left, v from the top)
   function quad(w, aspect) {
     const [fx, fy, gz, ang, fw, fh] = w.face, nx = Math.cos(ang), ny = Math.sin(ang), rx = Math.sin(ang), ry = -Math.cos(ang);
@@ -35,9 +36,9 @@ export function makeHoldings(ledger, {bld, onload = () => {}}) {
     return (u, v) => [cx + rx * (u - 0.5) * pw, z0 + (1 - v) * ph, cy2 + ry * (u - 0.5) * pw];
   }
   const imgs = new Map(), vids = new Map();
-  function image(h) { let im = imgs.get(h.id); if (!im) { im = new Image(); im.decoding = 'async'; im.onload = onload; im.src = srcURL(h.src); imgs.set(h.id, im); } return im.complete && im.naturalWidth ? im : null; }
-  function video(h, on) { let v = vids.get(h.id); if (!on) { if (v && !v.paused) v.pause(); return v && v.readyState >= 2 ? v : null; }
-    if (!v) { v = document.createElement('video'); v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'auto'; v.crossOrigin = null; v.src = srcURL(h.src); v.onerror = () => { v.dead = true; }; vids.set(h.id, v); }
+  function image(h) { let im = imgs.get(h.id); if (!im) { im = new Image(); im.decoding = 'async'; im.onload = onload; im.src = url(h.src); imgs.set(h.id, im); } return im.complete && im.naturalWidth ? im : null; }
+  function video(h, on) { let v = vids.get(h.id); if (v && v.offline) return v.readyState >= 2 ? v : null; if (!on) { if (v && !v.paused) v.pause(); return v && v.readyState >= 2 ? v : null; }
+    if (!v) { v = document.createElement('video'); v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'auto'; v.crossOrigin = null; v.src = videoSrc ? videoSrc(h) : url(h.src); v.onerror = () => { v.dead = true; }; vids.set(h.id, v); }
     if (!v.dead && v.paused) v.play().catch(() => {}); return v.readyState >= 2 ? v : null; }
   // a textured quad drawn as a grid of affine triangles (close enough to perspective at this size)
   function texQuad(x, src, sw, sh, P) {
@@ -88,9 +89,23 @@ export function makeHoldings(ledger, {bld, onload = () => {}}) {
       [G[0][0], G[0][4], G[4][4], G[4][0]].forEach((p, i) => p && (i ? x.lineTo(p[0], p[1]) : x.moveTo(p[0], p[1]))); x.closePath(); x.stroke(); x.restore();
       hits.push({poly: [G[0][0], G[0][4], G[4][4], G[4][0]], h, k: w.k});
     }
-    for (const [id, v] of vids) if (!cand.slice(0, 10).some(([, w]) => w.h.id === id) && !v.paused) v.pause();
+    for (const [id, v] of vids) if (!v.offline && !cand.slice(0, 10).some(([, w]) => w.h.id === id) && !v.paused) v.pause();
     return hits;
   }
+  // offline (the film render): the films in view are paused and seeked to the album time, so every frame is reproducible
+  async function prepare(cam, t) {
+    const P = projector(cam), want = [];
+    for (let a = -2; a <= 2; a++) for (let b = -2; b <= 2; b++) for (const w of WG.get((Math.floor(cam.x / 100) + a) + ',' + (Math.floor(cam.y / 100) + b)) || []) {
+      if (w.h.kind !== 'screen') continue; const [fx, fy, gz, ang] = w.face, d = Math.hypot(fx - cam.x, fy - cam.y); if (d > 110 || (cam.x - fx) * Math.cos(ang) + (cam.y - fy) * Math.sin(ang) < 1) continue;
+      const pc = P(fx, gz + 5, fy); if (!pc || pc[0] < -0.3 || pc[0] > 1.3) continue; want.push(w.h); }
+    await Promise.all(want.map(h => new Promise(res => { let v = vids.get(h.id);
+      if (!v) { v = document.createElement('video'); v.muted = true; v.playsInline = true; v.preload = 'auto'; v.src = videoSrc ? videoSrc(h) : url(h.src); v.offline = true; vids.set(h.id, v); }
+      const go = () => { const T = (t % (v.duration || 1)); if (Math.abs(v.currentTime - T) < 0.02 && v.readyState >= 2) return res(); const done = () => res(); v.addEventListener('seeked', done, {once: true}); v.currentTime = T; setTimeout(done, 4000); };
+      if (v.readyState >= 1) go(); else { v.addEventListener('loadedmetadata', go, {once: true}); v.addEventListener('error', () => res(), {once: true}); setTimeout(res, 8000); } })));
+  }
+  // the pictures on every wall near a route, fetched ahead (so a film reaching them, or a seek landing on them, finds them ready)
+  function preload(points, R = 120) { const seen = new Set(); for (const [px, py] of points) for (let a = -2; a <= 2; a++) for (let b = -2; b <= 2; b++) for (const w of WG.get((Math.floor(px / 100) + a) + ',' + (Math.floor(py / 100) + b)) || []) {
+      if (seen.has(w.h.id) || w.h.kind === 'screen') continue; if (Math.hypot(w.face[0] - px, w.face[1] - py) < R) { seen.add(w.h.id); image(w.h); } } return seen.size; }
   const inPoly = (pt, poly) => { let c = false; for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) { const a = poly[i], b = poly[j]; if (!a || !b) return false; if ((a[1] > pt[1]) !== (b[1] > pt[1]) && pt[0] < (b[0] - a[0]) * (pt[1] - a[1]) / (b[1] - a[1]) + a[0]) c = !c; } return c; };
-  return {H, byLot, byNode, walls, draw, inPoly, forLot: k => byLot.get(k) || [], atNode: n => byNode.get(n) || [], counts: ledger.counts};
+  return {H, byLot, byNode, walls, draw, prepare, preload, url, inPoly, forLot: k => byLot.get(k) || [], atNode: n => byNode.get(n) || [], counts: ledger.counts};
 }

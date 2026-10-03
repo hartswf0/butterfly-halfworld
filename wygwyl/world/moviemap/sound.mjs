@@ -12,6 +12,23 @@ const KIND = {reading: {r: 170, loop: 1, w: 1.0, g: 0.9}, line: {r: 40, once: 1,
 const ICON = {reading: '◉', line: '“', mouth: '♫', echo: '⟲', hook: '♪', pack: '≈', radio: '📻', passage: '∿'};
 const MAX = 6;
 
+// ——— the film's street sound: one rule, used live by the Watch and offline by tools/film-mix.mjs ———
+// Under his reading the city keeps playing what it holds near the camera — the pack by district, the clubs' hooks after dark, the
+// radio — ducked while he speaks; his own words come only from the reading (the lines and echoes would double his voice), and
+// in each coda the sung mouth of his last line answers.
+const AMB = {pack: {r: 70, ref: 10, g: 0.42, cap: 2}, hook: {r: 60, ref: 10, g: 0.5, cap: 2, night: 1}, radio: {r: 700, ref: 60, g: 0.3, cap: 1}};
+export function ambience(list, cam, {speaking = false, night = false} = {}) {
+  const out = [], per = {}, lots = new Set();
+  const cand = list.filter(h => AMB[h.kind] && h.at && (!AMB[h.kind].night || night)).map(h => ({h, d: Math.hypot(h.at[0] - cam.x, h.at[1] - cam.y)})).filter(c => c.d < AMB[c.h.kind].r)
+    .sort((a, b) => (1 - a.d / AMB[a.h.kind].r) - (1 - b.d / AMB[b.h.kind].r) > 0 ? -1 : 1);
+  for (const {h, d} of cand) { const A = AMB[h.kind]; if ((per[h.kind] || 0) >= A.cap || (h.lot != null && lots.has(h.lot))) continue; per[h.kind] = (per[h.kind] || 0) + 1; if (h.lot != null) lots.add(h.lot);
+    const rel = Math.atan2(h.at[1] - cam.y, h.at[0] - cam.x) - cam.yaw;
+    out.push({id: h.id, src: h.src, gain: A.g * Math.min(1, A.ref / Math.max(d, 1)) * (speaking ? 0.35 : 1), pan: Math.sin(rel)}); if (out.length >= 4) break; }
+  return out;
+}
+// the sung answer in a coda: the mouth of his last line, or the latest line before it that has one
+export function codaMouth(list, ch) { const ms = list.filter(h => h.kind === 'mouth' && h.poem === ch.num).sort((a, b) => b.n - a.n); return ms.find(m => m.n <= ch.lines.length) || null; }
+
 export function makeSound(ledger, {captions}) {
   const all = ledger.holdings.filter(h => KIND[h.kind] && h.at), passages = ledger.holdings.filter(h => h.kind === 'passage');
   const G = new Map(); for (const h of all) { const key = Math.floor(h.at[0] / 200) + ',' + Math.floor(h.at[1] / 200); (G.get(key) || G.set(key, []).get(key)).push(h); }
