@@ -2,7 +2,7 @@
 // Everything here has a birth era (and some a death): setEra(e) re-grows the city to that moment in its history.
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {kitGeometry} from './kit.mjs';
+import {kitGeometry, drawEmblem} from './kit.mjs';
 
 export const COVER = ['WATER', 'BEACH', 'MARSH', 'FIELD', 'FOREST', 'ROCK', 'OLD', 'ROW', 'CIVIC', 'RELIC', 'MEADOW', 'BURNED', 'SUBURB', 'PORT', 'INDUSTRY'];
 const COVER_COL = [0x2a3a3a, 0xd8c9a0, 0x6f7a48, 0xa8a060, 0x3c5a2c, 0x8a7f6c, 0x8c7a66, 0x7c6e62, 0x9a948a, 0x9a8c70, 0x7d9a4a, 0x2e2a26, 0x8a9a62, 0x7a7a76, 0x5e5a54];
@@ -398,14 +398,15 @@ function eraInstanced(geo, mat, items, shadow = true) {
 const place = (x, y, z, ry = 0, s = 1) => new THREE.Matrix4().compose(new THREE.Vector3(x, y, z), new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), ry), new THREE.Vector3(s, s, s));
 export function makeStreetLife(C, S, U) {
   const group = new THREE.Group(), vmat = new THREE.MeshStandardMaterial({vertexColors: true, roughness: 0.7}), glow = [], R = (k, s) => hash(k * 1.37, s);
-  const lamps = [], stops = [], cafes = [], docks = [], cranes = [], boxes = [], tanks = [], bollards = [];
+  const banners = [], lamps = [], stops = [], cafes = [], docks = [], cranes = [], boxes = [], tanks = [], bollards = [];
   // walk every road once: lamps along spines, arterials and the avenue; bus stops every ~380 m on arterials
   C.roads.forEach(([cls, born, f], ri) => {
     if (cls === 0 || cls === 2) return; const W = RCLS[cls].w / 2 - 0.6; let acc = 0, stopAcc = 120 + R(ri, 1) * 200;
     for (let i = 0; i < f.length - 2; i += 2) { const ax = f[i], ay = f[i + 1], bx2 = f[i + 2], by = f[i + 3], L = Math.hypot(bx2 - ax, by - ay); if (!L) continue;
       const tx = (bx2 - ax) / L, ty = (by - ay) / L;
       for (let s = (32 - acc % 32) % 32; s < L; s += 32) { const x = ax + tx * s, y = ay + ty * s, side = ((acc + s) / 32 | 0) % 2 ? 1 : -1, px = x - ty * side * W, py = y + tx * side * W, g = Math.max(S.ground(px, py), 0.4);
-        if (g < 0.5 && S.ground(px, py) < 0) continue; lamps.push({m: place(px, g, py, -Math.atan2(ty, tx)), born: Math.max(born, 1)}); glow.push(px, g + 5.4, py, Math.max(born, 1)); }
+        if (g < 0.5 && S.ground(px, py) < 0) continue; lamps.push({m: place(px, g, py, -Math.atan2(ty, tx)), born: Math.max(born, 1)}); glow.push(px, g + 5.4, py, Math.max(born, 1));
+        if (cls >= 3) banners.push({m: place(px - ty * side * 0.35, g + 3.0, py + tx * side * 0.35, -Math.atan2(ty, tx) + Math.PI / 2), born: 5}); }
       if (cls === 1) { stopAcc -= L; if (stopAcc < 0) { stopAcc = 380; const x = (ax + bx2) / 2 + ty * (W + 1.2), y = (ay + by) / 2 - tx * (W + 1.2), g = S.ground(x, y); if (g > 0.5) stops.push({m: place(x, g, y, -Math.atan2(ty, tx)), born: 3, x, y}); } }
       acc += L; }
   });
@@ -441,6 +442,10 @@ export function makeStreetLife(C, S, U) {
   for (const [geo, items, sh] of [[KL.body, lamps, false], [KS.body, stops, true], [cafeGeo, cafes, true], [dockGeo, docks, true], [KB.body, bollards, false], [craneGeo, cranes, true], [boxGeo, boxes, true], [tankGeo, tanks, true]])
     group.add(eraInstanced(geo, vmat, items, sh));
   for (const [K, items] of [[KL, lamps], [KS, stops]]) if (K.glow) group.add(eraInstanced(K.glow, glowMat, items, false));
+  { const cv = document.createElement('canvas'); cv.width = 128; cv.height = 320; const x = cv.getContext('2d'); x.fillStyle = '#1c3a44'; x.fillRect(0, 0, 128, 320); drawEmblem(x, 64, 70, 40);   // First Tide banners on the spine lamps
+    x.fillStyle = '#ecebe4'; x.fillRect(0, 320 * 0.6, 128, 5); x.fillStyle = '#ecebe4'; x.font = '600 20px ui-monospace, Menlo, monospace'; x.textAlign = 'center'; x.fillText('FIRST', 64, 150); x.fillText('TIDE', 64, 176);
+    const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; const geo = new THREE.PlaneGeometry(0.62, 1.55); geo.translate(0, 0.78, 0);
+    group.add(eraInstanced(geo, new THREE.MeshStandardMaterial({map: t, side: THREE.DoubleSide, roughness: 0.8}), banners, false)); }
   // the lamp glow at night: additive points
   const gg = new THREE.BufferGeometry(), gp = [], gb = []; for (let i = 0; i < glow.length; i += 4) { gp.push(glow[i], glow[i + 1], glow[i + 2]); gb.push(glow[i + 3]); }
   gg.setAttribute('position', new THREE.Float32BufferAttribute(gp, 3)); gg.setAttribute('born', new THREE.Float32BufferAttribute(gb, 1));

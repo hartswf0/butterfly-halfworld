@@ -45,9 +45,14 @@ export function makeDetail(scene, C, S, blds, opts = {}) {
   const grid = new Map(); for (let k = 0; k < n; k++) { const key = Math.floor(B[k * 14] / CELL) + ',' + Math.floor(B[k * 14 + 1] / CELL); (grid.get(key) || grid.set(key, []).get(key)).push(k); }
   const M4 = new THREE.Matrix4(), Q = new THREE.Quaternion(), V = new THREE.Vector3(), Sc = new THREE.Vector3(), Y = new THREE.Vector3(0, 1, 0);
   const tiles = new Map(); let era = -1, lastKey = '', hidden = () => false;
+  const TL = new THREE.TextureLoader(), TX = new Map(); const texFor = cid => { if (!TX.has(cid)) { const t = TL.load(`../iconic/c/${cid}.webp`); t.colorSpace = THREE.SRGBColorSpace; TX.set(cid, t); } return TX.get(cid); };
+  const frameMat = new THREE.MeshStandardMaterial({color: 0xf1eee7, roughness: 0.4}), saltMat = new THREE.MeshStandardMaterial({color: 0xecebe4, roughness: 0.3});
+  const frames = []; for (let i = 0; i < 24; i++) { const g = new THREE.Group(); g.add(new THREE.Mesh(new THREE.BoxGeometry(1.7, 1.12, 0.06), frameMat));
+    const img = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 0.92), new THREE.MeshBasicMaterial({color: 0xdddddd})); img.position.z = 0.035; g.add(img); g.userData.img = img;
+    const ln = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.03, 0.07), saltMat); ln.position.y = -0.56 + 1.12 * 0.4; ln.position.z = 0.01; g.add(ln); g.visible = false; frames.push(g); scene.add(g); }
   function local(x, y, gz, rot, lx, ly, lz) { const c = Math.cos(-rot), s = Math.sin(-rot); return [x + lx * c + lz * s, gz + ly, y - lx * s + lz * c]; }   // local → world (the buildings' own rotation)
   function tile(key) {
-    const out = {}; for (const k of Object.keys(KITS)) out[k] = []; out.wire = [];
+    const out = {}; for (const k of Object.keys(KITS)) out[k] = []; out.wire = []; out.frames = [];
     for (const k of grid.get(key) || []) {
       const st = blds.userData.state(k, era); if (!st || hidden(k)) continue;
       const o = k * 14, x = B[o], y = B[o + 1], w = B[o + 2], d = B[o + 3], rot = B[o + 4], h = B[o + 5], sty = B[o + 6], gz = B[o + 13];
@@ -67,6 +72,7 @@ export function makeDetail(scene, C, S, blds, opts = {}) {
       if (sty <= 4 && sty !== 2) { const acs = Math.floor(r(8) * Math.min(6, h / 4)); for (let a = 0; a < acs; a++) put('ac', -w / 2 + 0.6 + r(9 + a) * (w - 1.2), fh * (1.4 + Math.floor(r(19 + a) * Math.max(1, h / fh - 1.6))), -d / 2 - 0.3); }
       if ((sty <= 1 && r(10) < 0.12) || (sty === STYLE_TOWER && r(10) < 0.35)) put('tank', (r(11) - 0.5) * w * 0.4, h, (r(12) - 0.5) * d * 0.4);
       if (sty <= 4 && r(13) < 0.35) put('antenna', (r(14) - 0.5) * w * 0.6, h, (r(15) - 0.5) * d * 0.6, r(16) * 6);
+      if ((sty <= 1) && r(31) < 0.06) { const [fx, fy, fz] = local(x, y, gz, rot, (r(32) - 0.5) * w * 0.5, 2.3, -d / 2 - 0.07); out.frames.push({x: fx, y: fz, z: fy, rot}); }   // the Archive on the street
       if (st === 'rebuilt in glass' && r(17) < 0.55) put('scaffold', 0, 0, -d / 2 - 1.0, 0, w / 5.4, Math.min(2.5, (h + 6) / 12), 1);
     }
     return out;
@@ -79,6 +85,10 @@ export function makeDetail(scene, C, S, blds, opts = {}) {
     for (const k of [...tiles.keys()]) if (!want.has(k)) tiles.delete(k);
     for (const k of want) if (!tiles.has(k)) tiles.set(k, tile(k));
     for (const kind of Object.keys(KITS)) { const m = meshes[kind]; let c = 0; for (const t of tiles.values()) for (const mm of t[kind]) { if (c >= 7000) break; m.setMatrixAt(c++, mm); } m.count = c; m.instanceMatrix.needsUpdate = true; }
+    const fr = []; for (const t of tiles.values()) for (const f of t.frames) fr.push(f); fr.sort((a, b) => Math.hypot(a.x - focus.x, a.y - focus.z) - Math.hypot(b.x - focus.x, b.y - focus.z));
+    frames.forEach((g, i) => { const f = fr[i]; if (!f) { g.visible = false; return; } g.visible = true; g.position.set(f.x, f.z, f.y); g.rotation.y = -f.rot + Math.PI;
+      let best = null, bd = 1e12; for (const s of C.meta.shots) { const dd = (s.x - f.x) ** 2 + (s.y - f.y) ** 2; if (dd < bd) { bd = dd; best = s; } }   // the shot taken nearest this wall
+      if (best && g.userData.cid !== best.cid) { g.userData.cid = best.cid; g.userData.img.material.map = texFor(best.cid); g.userData.img.material.needsUpdate = true; } });
     const wp = []; for (const t of tiles.values()) for (const v of t.wire) wp.push(v);
     wires.geometry.dispose(); wires.geometry = new THREE.BufferGeometry(); wires.geometry.setAttribute('position', new THREE.Float32BufferAttribute(wp, 3));
   }
@@ -86,6 +96,6 @@ export function makeDetail(scene, C, S, blds, opts = {}) {
     setEra(e, hide) { era = e; if (hide) hidden = hide; tiles.clear(); lastKey = ''; },
     update(focus) { refresh(focus); },
     count() { return Object.fromEntries(Object.entries(meshes).map(([k, m]) => [k, m.count])); },
-    set visible(v) { Object.values(meshes).forEach(m => m.visible = v); wires.visible = v; },
+    set visible(v) { Object.values(meshes).forEach(m => m.visible = v); wires.visible = v; frames.forEach(f => { if (!v) f.visible = false; }); },
   };
 }

@@ -10,6 +10,8 @@ import {loadCity, sampler, makeTerrain, makeWards, makeRoads, makeBuildings, mak
 import {makeFound} from './found3d.mjs';
 import {makeIcons} from './icons.mjs';
 import {makeStreetKit} from './streetkit.mjs';
+import {makeHeroes} from './heroesInCity.mjs';
+import {makeNames} from './names.mjs';
 import {buildLandmark, tickClocks, MATS, NIGHTLIT} from './landmarks.mjs';
 import {makeHeavens, makeSea} from './heavens.mjs';
 import {makeRising} from './evolved.mjs';
@@ -73,6 +75,9 @@ step(94, 'the icons');
 const icons = makeIcons(scene, C, S, U, heav); const ID = await icons.load('icons.json');
 C.stopsForBoards = street.userData.stops; const PAL = await fetch('../language/palettes.json').then(r => r.json()).catch(() => null);
 const skit = makeStreetKit(scene, C, S, U, heav, wards, PAL);
+step(97, 'the hero buildings');
+const heroes = await makeHeroes(scene, C, S, LIB, U.matAtlas.value, lmGroups, found);
+const names = makeNames(scene, C, S);
 const mats = MATS(); for (const k of NIGHTLIT) mats[k].userData.base = mats[k].emissiveIntensity;
 
 // ——— labels: landmarks, poems, districts (with their use in this era), wards ———
@@ -175,7 +180,7 @@ let playing = null; $('play').onclick = () => { if (playing) { clearInterval(pla
 function setEra(e) {
   era = e; U.era.value = e; $('era').value = e; syncRange($('era'));
   document.querySelectorAll('#eras button').forEach(b => b.classList.toggle('on', +b.dataset.e === e));
-  const fp = [...rising.footprints(vi), ...found.footprints(), ...icons.footprints()]; icons.setEra(e); skit.setEra(e); blds.userData.setExtraClear(fp); rising.build(vi, e); found.setEra(e);
+  const fp = [...rising.footprints(vi), ...found.footprints(), ...icons.footprints(), ...heroes.footprints()]; icons.setEra(e); skit.setEra(e); names.setEra(e); blds.userData.setExtraClear(fp); rising.build(vi, e); found.setEra(e); heroes.setEra(e);
   detail.setEra(e, k => fp.some(([cx, cy, r, eb]) => eb <= e && Math.hypot(C.bld[k * 14] - cx, C.bld[k * 14 + 1] - cy) < r));
   const c = blds.userData.setEra(e); trees.userData.setEra(e); street.userData.setEra(e); setLandmarks(e); terrain.userData.paint(e, LAYERS.wards ? wards : null);
   $('lore').innerHTML = `<b>${e} · ${ERA[e]}.</b> ${meta.lore[e]}`;
@@ -190,10 +195,11 @@ const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(); let infoK = null
 function pick(e) {
   if (e.target !== renderer.domElement) return;
   mouse.set(e.clientX / innerWidth * 2 - 1, -e.clientY / innerHeight * 2 + 1); ray.setFromCamera(mouse, camera);
-  const tgt = [shotMesh, ...lmGroups, ...icons.groups, ...rising.groups, ...found.placed, blds.userData.meshes.body, blds.userData.meshes.ruins].filter(o => o.visible);
+  const tgt = [shotMesh, heroes.root, ...lmGroups.filter(g => !g.userData.heroed), ...icons.groups, ...rising.groups, ...found.placed, blds.userData.meshes.body, blds.userData.meshes.ruins].filter(o => o.visible);
   const h = ray.intersectObjects(tgt, true)[0]; if (!h) { $('info').style.display = 'none'; infoK = null; return; }
   if (h.object === shotMesh) return fitShot(h.instanceId);
-  let o = h.object; while (o && !o.userData.lm && !o.userData.s && !o.userData.found && !o.userData.icon) o = o.parent;
+  let o = h.object; while (o && !o.userData.lm && !o.userData.s && !o.userData.found && !o.userData.icon && !o.userData.hero) o = o.parent;
+  if (o && o.userData.hero) { const hh = o.userData.hero; infoK = null; $('info').innerHTML = `<h3>${hh.name}</h3><div class="k">poem ${hh.poem} · ${hh.note}</div><div style="margin-top:6px"><a href="../heroes/index.html?h=${hh.id}" style="color:var(--acc2)">walk inside · see its proofs →</a></div>`; $('info').style.display = 'block'; return; }
   if (o && o.userData.icon) { rising.pulse(o.userData.icon.site.x, o.userData.icon.site.y); return showIcon(o.userData.icon); }
   if (o && o.userData.found) return showFound(o.userData); if (o && o.userData.s) { rising.pulse(o.userData.s.x, o.userData.s.y); return showStructure(o.userData.s); }
   if (o) { rising.pulse(o.userData.lm.x, o.userData.lm.y); return showLandmark(LM.indexOf(o.userData.lm)); }
@@ -309,8 +315,8 @@ function updateStrip() {
   const R = mode === 'orbit' ? Math.max(350, camera.position.distanceTo(orbit.target) * 0.8) : 400;
   const c = []; SH.forEach((s, i) => { const d = Math.hypot(s.x - p.x, s.y - p.z); if (d > R) return; const a = s.hd * Math.PI / 180, face = Math.cos(a) * dir.x + Math.sin(a) * dir.z; c.push([d / R + (1 - face) * 0.4, i]); });
   c.sort((a, b) => a[0] - b[0]); const top = c.slice(0, 14).map(a => a[1]); const key = top.join(','); if (key === stripKey) return; stripKey = key;
-  const dn = nearestDistrict(p.x, p.z);
-  $('strip').innerHTML = `<div class="hd"><b>${dn ? dn.name.replace(/^the /, '') : ''}</b>${top.length} shots here · facing ${['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'][Math.round(((Math.atan2(dir.x, -dir.z) * 180 / Math.PI) + 360) % 360 / 45) % 8]}</div>` +
+  const dn = nearestDistrict(p.x, p.z), onSt = names.at(p.x, p.z);
+  $('strip').innerHTML = `<div class="hd"><b>${onSt ? onSt.name : dn ? dn.name.replace(/^the /, '') : ''}</b>${onSt && dn ? `<span style="display:block;color:var(--dim)">${dn.name.replace(/^the /, '')}</span>` : ''}${top.length} shots here · facing ${['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'][Math.round(((Math.atan2(dir.x, -dir.z) * 180 / Math.PI) + 360) % 360 / 45) % 8]}</div>` +
     top.map(i => `<div class="shot" data-i="${i}"><img src="${thumb(SH[i].cid)}" loading="lazy" alt=""><span>${SH[i].cid} · ${SH[i].el}</span></div>`).join('');
   $('strip').querySelectorAll('.shot').forEach(d => d.onclick = () => fitShot(+d.dataset.i, top));
 }
@@ -382,14 +388,14 @@ function frameLoop() {
   if (ptour) { ptour.t += dt; if (ptour.t > 9) { ptour.t = 0; ptour.k = (ptour.k + 1) % meta.poems.length; goPoem(meta.poems[ptour.k].num); } }
   rising.update(dt, U.time.value); icons.update(dt, U.time.value); skit.update(dateOf());
   // only where you are: the lived-in layer streams in a ring around the focus, and the resolution follows the frame rate
-  const fz = mode === 'orbit' ? orbit.target : camera.position; detail.visible = LAYERS.lamps && camera.position.y - Math.max(S.ground(camera.position.x, camera.position.z), 0) < 700; detail.update(fz);
+  const fz = mode === 'orbit' ? orbit.target : camera.position; detail.visible = LAYERS.lamps && camera.position.y - Math.max(S.ground(camera.position.x, camera.position.z), 0) < 700; detail.update(fz); if (detail.visible !== false) names.update(fz.x, fz.z);
   perf.t += dt; perf.n++; if (perf.t > 2) { const ms = perf.t / perf.n * 1000; const pr = renderer.getPixelRatio(), max = Math.min(devicePixelRatio, MOBILE ? 1.5 : 2);
     if (ms > 30 && pr > 1) setPR(Math.max(1, pr - 0.25)); else if (ms < 17 && pr < max) setPR(Math.min(max, pr + 0.25)); perf.t = 0; perf.n = 0; }
   if (mode === 'orbit') orbit.update();
   // label culling
   const cp = camera.position;
   declT -= dt; if (declT < 0) { declT = 0.2; declutter(); }
-  words.forEach(s => { const d = cp.distanceTo(s.position); s.visible = LAYERS.words && d < 420; s.material.opacity = THREE.MathUtils.clamp((420 - d) / 200, 0, 1); });
+  words.forEach(s => { const d = cp.distanceTo(s.position); s.visible = LAYERS.words && d < 420 && d > 30; s.material.opacity = THREE.MathUtils.clamp((420 - d) / 200, 0, 1); });
   stripT -= dt; if (stripT < 0) { stripT = 0.5; updateStrip(); }
   if (composer) composer.render(); else renderer.render(scene, camera);
   labels.render(scene, camera);
@@ -397,4 +403,4 @@ function frameLoop() {
 }
 requestAnimationFrame(frameLoop);
 addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); labels.setSize(innerWidth, innerHeight); composer?.setSize(innerWidth, innerHeight); });
-window.__city = {skit, icons, found, detail, rising, scene, camera, orbit, setEra, setWeather, goPoem, fitShot, heav, setMode, get hour() { return hour; }, set hour(v) { hour = v; setTimeUI(); }, C};
+window.__city = {names, heroes, skit, icons, found, detail, rising, scene, camera, orbit, setEra, setWeather, goPoem, fitShot, heav, setMode, get hour() { return hour; }, set hour(v) { hour = v; setTimeUI(); }, C};

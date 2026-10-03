@@ -60,6 +60,6 @@ export function makeFound(scene, C, S, U, lib) {
         const g = build(f, k, i); taken.push([g.userData.x, g.userData.y, g.userData.r]); placed.push(g); });
       return F; },
     footprints() { return placed.map(g => [g.userData.x, g.userData.y, g.userData.r, g.userData.born]); },
-    setEra(e) { placed.forEach(g => g.visible = g.userData.born <= e); },
+    setEra(e) { placed.forEach(g => g.visible = g.userData.born <= e && !g.userData.heroed); },
   };
 }
