@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlantis Gazetteer</title>
+<meta name="description" content="WYGWYL · the world of the city: its six eras, its institutions and calendar kept by the tide, its icons and hero buildings, its districts and what they are used for, its trades, transit, customs and sayings — every entry tied to the shots and models it came from.">
+<style>
+:root{--bg:#0d0f12;--card:#15181c;--line:rgba(255,255,255,.1);--ink:#ece6da;--dim:#9a948a;--acc:#ffb35c;--cy:#5fe8ff;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Georgia,"Times New Roman",serif}
+a{color:var(--cy);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{display:grid;grid-template-columns:220px 1fr;gap:28px;max-width:1180px;margin:0 auto;padding:0 22px}
+nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;padding:28px 0;font:12px/1.9 ui-monospace,Menlo,monospace}
+nav a{display:block;color:var(--dim)}nav a:hover{color:var(--ink)}nav b{display:block;color:var(--acc);margin:12px 0 2px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:10px}
+header{padding:48px 0 10px}header .k{font:11px ui-monospace,Menlo,monospace;letter-spacing:.18em;color:var(--dim);text-transform:uppercase}
+h1{font-size:clamp(32px,5vw,56px);line-height:1.02;margin:8px 0 16px;font-weight:600}h1 em{font-style:normal;color:var(--cy)}
+.lede{font-size:19px;color:#ddd4c4;max-width:760px}
+section{border-top:1px solid var(--line);padding:24px 0}
+h2{font:600 12px ui-monospace,Menlo,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.e{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;scroll-margin-top:16px}
+.e h3{margin:0 0 4px;font-size:20px}.e .m{font:11px ui-monospace,Menlo,monospace;color:var(--dim);margin-bottom:6px}.e p{margin:6px 0;color:#d6cdbd;font-size:15px}
+.th{display:flex;gap:4px;margin-top:8px;overflow:hidden}.th img{height:54px;border-radius:4px}
+.era{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:10px 0;border-bottom:1px solid var(--line)}.era b{font:600 13px ui-monospace,Menlo,monospace;color:var(--acc)}
+.sw{display:flex;height:16px;border-radius:4px;overflow:hidden;margin:6px 0}.sw i{flex:1}
+.uses{font:11px ui-monospace,Menlo,monospace;color:var(--dim)}.uses span{color:var(--ink)}
+.say{display:inline-block;margin:4px 6px 4px 0;padding:4px 10px;border:1px solid var(--line);border-radius:999px;font-style:italic;font-size:14px}
+.tag{font:10px ui-monospace,Menlo,monospace;padding:1px 6px;border-radius:3px;background:#2a2d33;margin-right:6px}
+@media (max-width:820px){.wrap{grid-template-columns:1fr}nav{position:static;height:auto;padding:10px 0;display:flex;flex-wrap:wrap;gap:4px 12px}nav b{width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav id="toc"></nav>
+<main>
+<header><div class="k">WYGWYL · world · W00p · the gazetteer</div>
+<h1>Atlantis keeps its flood, <em>keeps its pictures</em>, and keeps time by the tide.</h1>
+<p class="lede" id="overview"></p>
+<p style="font:12px ui-monospace,Menlo,monospace;color:var(--dim)"><a href="../city3d/index.html">the city in 3D</a> · <a href="../heroes/index.html">hero buildings</a> · <a href="../language/index.html">design language</a> · <a href="../elsewhere/index.html">elsewhere map</a> · <a href="../../atlas.html">atlas</a></p></header>
+<section id="eras"><h2>Six eras</h2><div id="eraList"></div></section>
+<section id="calendar"><h2>The calendar: kept by the tide</h2><div class="grid" id="cal"></div></section>
+<section id="icons"><h2>The icons</h2><div class="grid" id="ico"></div></section>
+<section id="heroes"><h2>Hero buildings: the story's rooms</h2><div class="grid" id="her"></div></section>
+<section id="institutions"><h2>Institutions</h2><div class="grid" id="ins"></div></section>
+<section id="districts"><h2>Districts and wards: what each place is used for, era by era</h2><div class="grid" id="dis"></div></section>
+<section id="landmarks"><h2>Landmarks</h2><div class="grid" id="lms"></div></section>
+<section id="rising"><h2>Atlantis rising: the evolved towers</h2><div id="ris"></div></section>
+<section id="found"><h2>Found architecture</h2><div class="grid" id="fnd"></div></section>
+<section id="trades"><h2>Trades</h2><div class="grid" id="trd"></div></section>
+<section id="transit"><h2>Transit</h2><div class="grid" id="trn"></div></section>
+<section id="customs"><h2>Customs and sayings</h2><div class="grid" id="cus"></div><div id="say" style="margin-top:12px"></div></section>
+<footer style="padding:20px 0 50px;color:var(--dim);font-size:13px">Every place here is built from the canon of 2,707 shots (9f1760e5f609) and the models in this repository. The institutions, calendar and customs are written for the world; the buildings, eras and witnesses are generated and checked. Landmark names are the references the shots were read against; the city is invented.</footer>
+</main></div>
+<script>
+const J = u => fetch(u).then(r => r.json()).catch(() => null);
+(async () => {
+  const [W, C, I, S, H, P, F, K] = await Promise.all(['world.json', '../city3d/city.json', '../city3d/icons.json', '../city3d/structures.json', '../heroes/hdl.json', '../language/palettes.json', '../language/found.json', '../language/keep.json'].map(J));
+  const th = cids => `<div class="th">${(cids || []).slice(0, 8).map(c => `<img src="../iconic/c/${c}.webp" loading="lazy" alt="" title="${c}">`).join('')}</div>`;
+  const $ = id => document.getElementById(id), E = C.eras;
+  $('overview').textContent = W.overview;
+  $('eraList').innerHTML = E.map((n, i) => `<div class="era"><b>${i} · ${n}</b><div>${C.lore[i]}</div></div>`).join('');
+  $('cal').innerHTML = W.calendar.map(c => `<div class="e"><h3>${c.name}</h3><p>${c.text}</p></div>`).join('');
+  $('ico').innerHTML = (I?.icons || []).map(ic => `<div class="e" id="${ic.id}"><h3>${ic.name}</h3><div class="m">${ic.kind} · raised in ${E[ic.era[0]]}${ic.era[1] < 9 ? ' · ' + (ic.era[2] === 'kept drowned' ? 'sunk' : 'broken') + ' in ' + E[ic.era[1]] : ''} · ${ic.institution}</div><p>${ic.lore}</p><div class="m">witnessed by these shots</div>${th(ic.witnesses)}</div>`).join('');
+  $('her').innerHTML = (H?.heroes || []).map(h => `<div class="e" id="h-${h.id}"><h3><a href="../heroes/index.html?h=${h.id}">${h.name}</a></h3><div class="m">poem ${h.poem} · ${h.levels.length} storey${h.levels.length > 1 ? 's' : ''} · ${h.levels.reduce((a, l) => a + l.rooms.length, 0)} rooms · proved buildable</div><p>${h.note}.</p>
+    ${(h.facts || []).slice(0, 3).map(f => `<p style="font-size:13px"><span class="tag">${f.status}</span>${f.claim}</p>`).join('')}</div>`).join('');
+  $('ins').innerHTML = W.institutions.map(x => `<div class="e" id="${x.id}"><h3>${x.name}</h3><p>${x.text}</p></div>`).join('');
+  $('dis').innerHTML = C.districts.filter(d => !d.natural).map(d => { const p = (P || []).find(q => q.name === d.name);
+    return `<div class="e"><h3>${d.name.replace(/^the /, '')}</h3>${p ? `<div class="sw">${p.colors.map(c => `<i style="background:${c}"></i>`).join('')}</div>` : ''}
+      <div class="uses">${d.use ? d.use.map((u, i) => `${E[i].replace('The ', '')}: <span>${u}</span>`).join(' → ') : 'used as <span>' + d.type + '</span>'}</div>${th(d.evidence)}</div>`; }).join('');
+  $('lms').innerHTML = C.landmarks.filter(l => l.evidence && l.evidence.length).map(l => `<div class="e"><h3>${l.name.split(' · ')[0]}</h3><div class="m">poem ${l.poem || '—'} · raised in ${E[l.era[0]]}${l.era[1] < 9 ? ' · ruined in ' + E[l.era[1]] : ''}${l.era[2] ? ' · now ' + l.era[2] : ''} · ${l.evidence.length} shots read it</div>${th(l.evidence)}</div>`).join('');
+  if (S) { const v = S.variants.find(v => v.name === 'the mixed city') || S.variants[0]; const by = {}; v.structures.forEach(s => by[s.t] = (by[s.t] || 0) + 1);
+    $('ris').innerHTML = `<p style="color:#d6cdbd">The Resurrection's towers were not designed. They were evolved over ${S.gens.toLocaleString()} generations: each stands where it answers the most shots that ask for it. ${v.n} structures answer ${v.structures.reduce((a, s) => a + s.causes.length, 0)} of ${S.calls} calls: ${Object.entries(by).map(([k, n]) => `${n} ${k}`).join(', ')}. Other lineages were kept too: ${S.variants.map(x => x.name.replace('the ', '')).join(', ')}.</p>`; }
+  if (F && K) $('fnd').innerHTML = F.found.filter(f => K.keep[f.id]).map(f => `<div class="e"><h3>${K.keep[f.id].name}</h3><div class="m">${K.keep[f.id].kind.replace(/^an? /, '')} · from ${f.src} · ${Math.round(f.unique * 100)}% unlike the real archive</div><img src="../language/found/${f.id}.webp" alt="" style="max-height:120px;max-width:100%;margin-top:6px"></div>`).join('');
+  $('trd').innerHTML = W.trades.map(x => `<div class="e"><h3>${x.name}</h3><p>${x.text}</p></div>`).join('');
+  $('trn').innerHTML = W.transit.map(x => `<div class="e"><h3>${x.name}</h3><p>${x.text}</p></div>`).join('');
+  $('cus').innerHTML = W.customs.map(x => `<div class="e"><h3>${x.name}</h3><p>${x.text}</p></div>`).join('');
+  $('say').innerHTML = W.sayings.map(s => `<span class="say">“${s}”</span>`).join('');
+  const T = [['eras', 'six eras'], ['calendar', 'calendar'], ['icons', 'icons'], ...(I?.icons || []).map(i => [i.id, '· ' + i.name.replace('The ', '')]), ['heroes', 'hero buildings'], ['institutions', 'institutions'], ['districts', 'districts'], ['landmarks', 'landmarks'], ['rising', 'evolved towers'], ['found', 'found architecture'], ['trades', 'trades'], ['transit', 'transit'], ['customs', 'customs']];
+  $('toc').innerHTML = '<b>Atlantis</b>' + T.map(([id, n]) => `<a href="#${id}">${n}</a>`).join('');
+  if (location.hash) document.querySelector(location.hash)?.scrollIntoView();
+})();
+</script>
+</body>
+</html>

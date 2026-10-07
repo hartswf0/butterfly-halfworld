@@ -6,9 +6,16 @@ import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
 import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
 import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
-import {loadCity, sampler, makeTerrain, makeWards, makeRoads, makeBuildings, makeTrees, makeStreetLife, STYLES, COVER} from './city.mjs';
+import {loadCity, sampler, makeTerrain, makeWards, makeRoads, makeBuildings, makeTrees, makeStreetLife, STYLES, COVER, setLibrary} from './city.mjs';
+import {makeFound} from './found3d.mjs';
+import {makeIcons} from './icons.mjs';
+import {makeStreetKit} from './streetkit.mjs';
+import {makeHeroes} from './heroesInCity.mjs';
+import {makeNames} from './names.mjs';
 import {buildLandmark, tickClocks, MATS, NIGHTLIT} from './landmarks.mjs';
 import {makeHeavens, makeSea} from './heavens.mjs';
+import {makeRising} from './evolved.mjs';
+import {makeDetail} from './detail.mjs';
 
 const $ = id => document.getElementById(id);
 const MOBILE = matchMedia('(max-width: 760px), (pointer: coarse)').matches;
@@ -21,11 +28,17 @@ renderer.shadowMap.enabled = !MOBILE; renderer.shadowMap.type = THREE.PCFSoftSha
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 1, 52000);
 const labels = new CSS2DRenderer({element: $('labels')}); labels.setSize(innerWidth, innerHeight);
-const U = {night: {value: 0}, era: {value: 5}, time: {value: 0}, wet: {value: 0}};
+const U = {night: {value: 0}, era: {value: 5}, time: {value: 0}, wet: {value: 0}, pulseO: {value: new THREE.Vector2(-1e5, -1e5)}, pulseT: {value: 99},
+  matAtlas: {value: null}, matGrid: {value: new THREE.Vector2(8, 8)}, libFacade: {value: new THREE.Vector4()}, libRoad: {value: new THREE.Vector4()}};
+// the material library: 32 surfaces × 2 variants cut from the archive's own frames (wygwyl/world/language/library.*)
+const LIB = await fetch('../language/library.json').then(r => r.json());
+U.matAtlas.value = new THREE.TextureLoader().load('../language/library.webp'); U.matAtlas.value.colorSpace = THREE.SRGBColorSpace; U.matAtlas.value.anisotropy = 8;
+U.matGrid.value.set(LIB.cols, LIB.rows);
 
 step(8, 'reading the worldtext');
 const C = await loadCity('./').catch(e => { step(0, 'could not load the city: ' + e.message + ' (serve over http)'); throw e; });
 const S = sampler(C), meta = C.meta;
+const LIBI = setLibrary(LIB); U.libFacade.value.set(LIBI['graffiti'], LIBI['moss'], LIBI['ceramic'], 0); U.libRoad.value.set(LIBI['asphalt'], LIBI['granite'], LIBI['cobbles'], LIBI['sidewalk']);
 $('ver').innerHTML = `${meta.version} · canon ${meta.from.canon_checksum} · city ${meta.from.city_checksum} · ${meta.counts.buildings.toLocaleString()} buildings · ${meta.counts.shots} placed shots · <a href="../iconic/">Lynch map</a> · <a href="../../atlas.html">atlas</a>`;
 
 step(25, 'the ground and the sea');
@@ -51,6 +64,20 @@ function setLandmarks(e) {
     g.children.forEach(c => c.visible = false); if (!st) continue;
     const c = g.userData.cache[st] || (g.userData.cache[st] = buildLandmark(g.userData.lm, st)); if (!c.parent) g.add(c); c.visible = true; }
 }
+// ——— Atlantis rising: the structures evolved from the shots that ask for them ———
+step(86, 'the evolved structures');
+const rising = makeRising(scene, C, S, heav, U); const RD = await rising.load('structures.json').catch(() => null);
+let vi = RD ? Math.max(0, RD.variants.findIndex(v => v.name === (Q.get('variant') || 'the mixed city'))) : -1;
+const detail = makeDetail(scene, C, S, blds, {radius: MOBILE ? 260 : 420});
+step(90, 'the found architecture');
+const found = makeFound(scene, C, S, U, {idx: LIBI}); const FD = await found.load('../language/found.json');
+step(94, 'the icons');
+const icons = makeIcons(scene, C, S, U, heav); const ID = await icons.load('icons.json');
+C.stopsForBoards = street.userData.stops; const PAL = await fetch('../language/palettes.json').then(r => r.json()).catch(() => null);
+const skit = makeStreetKit(scene, C, S, U, heav, wards, PAL);
+step(97, 'the hero buildings');
+const heroes = await makeHeroes(scene, C, S, LIB, U.matAtlas.value, lmGroups, found);
+const names = makeNames(scene, C, S);
 const mats = MATS(); for (const k of NIGHTLIT) mats[k].userData.base = mats[k].emissiveIntensity;
 
 // ——— labels: landmarks, poems, districts (with their use in this era), wards ———
@@ -60,6 +87,7 @@ function label(cls, html, x, y, z, onclick) { const d = document.createElement('
 const lmLabels = LM.map((lm, i) => label('lm', lm.name.split(' · ')[0], lm.x, Math.max(lm.z, 0) + 12, lm.y, () => showLandmark(i)));
 const poemLabels = meta.poems.map(p => label('poem', `${p.num} ${p.title}`, p.x, S.ground(p.x, p.y) + 30, p.y, () => goPoem(p.num)));
 const distLabels = meta.districts.map(d => label('dist', d.name.replace(/^the /, ''), d.x, Math.max(S.ground(d.x, d.y), 0) + 70, d.y));
+const iconLabels = (ID?.icons || []).map((ic, i) => label('lm', ic.name, ic.site.x, Math.max(ic.site.z, 0) + 70, ic.site.y, () => showIcon(ic)));
 const wardLabels = wards.list.map(d => label('ward', `WARD ${d.ward}`, d.x, Math.max(S.ground(d.x, d.y), 0) + 40, d.y + 60));
 
 // ——— the worldtext: what he says, written into the place where he sees it ———
@@ -152,6 +180,8 @@ let playing = null; $('play').onclick = () => { if (playing) { clearInterval(pla
 function setEra(e) {
   era = e; U.era.value = e; $('era').value = e; syncRange($('era'));
   document.querySelectorAll('#eras button').forEach(b => b.classList.toggle('on', +b.dataset.e === e));
+  const fp = [...rising.footprints(vi), ...found.footprints(), ...icons.footprints(), ...heroes.footprints()]; icons.setEra(e); skit.setEra(e); names.setEra(e); blds.userData.setExtraClear(fp); rising.build(vi, e); found.setEra(e); heroes.setEra(e);
+  detail.setEra(e, k => fp.some(([cx, cy, r, eb]) => eb <= e && Math.hypot(C.bld[k * 14] - cx, C.bld[k * 14 + 1] - cy) < r));
   const c = blds.userData.setEra(e); trees.userData.setEra(e); street.userData.setEra(e); setLandmarks(e); terrain.userData.paint(e, LAYERS.wards ? wards : null);
   $('lore').innerHTML = `<b>${e} · ${ERA[e]}.</b> ${meta.lore[e]}`;
   $('counts').textContent = `${c.standing.toLocaleString()} standing · ${c.ruins} ruins · ${LM.filter(l => lmState(l, e)).length} landmarks`;
@@ -165,10 +195,14 @@ const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(); let infoK = null
 function pick(e) {
   if (e.target !== renderer.domElement) return;
   mouse.set(e.clientX / innerWidth * 2 - 1, -e.clientY / innerHeight * 2 + 1); ray.setFromCamera(mouse, camera);
-  const tgt = [shotMesh, ...lmGroups, blds.userData.meshes.body, blds.userData.meshes.ruins].filter(o => o.visible);
+  const tgt = [shotMesh, heroes.root, ...lmGroups.filter(g => !g.userData.heroed), ...icons.groups, ...rising.groups, ...found.placed, blds.userData.meshes.body, blds.userData.meshes.ruins].filter(o => o.visible);
   const h = ray.intersectObjects(tgt, true)[0]; if (!h) { $('info').style.display = 'none'; infoK = null; return; }
   if (h.object === shotMesh) return fitShot(h.instanceId);
-  let o = h.object; while (o && !o.userData.lm) o = o.parent; if (o) return showLandmark(LM.indexOf(o.userData.lm));
+  let o = h.object; while (o && !o.userData.lm && !o.userData.s && !o.userData.found && !o.userData.icon && !o.userData.hero) o = o.parent;
+  if (o && o.userData.hero) { const hh = o.userData.hero; infoK = null; $('info').innerHTML = `<h3>${hh.name}</h3><div class="k">poem ${hh.poem} · ${hh.note}</div><div style="margin-top:6px"><a href="../heroes/index.html?h=${hh.id}" style="color:var(--acc2)">walk inside · see its proofs →</a></div>`; $('info').style.display = 'block'; return; }
+  if (o && o.userData.icon) { rising.pulse(o.userData.icon.site.x, o.userData.icon.site.y); return showIcon(o.userData.icon); }
+  if (o && o.userData.found) return showFound(o.userData); if (o && o.userData.s) { rising.pulse(o.userData.s.x, o.userData.s.y); return showStructure(o.userData.s); }
+  if (o) { rising.pulse(o.userData.lm.x, o.userData.lm.y); return showLandmark(LM.indexOf(o.userData.lm)); }
   const mesh = h.object, key = mesh === blds.userData.meshes.body ? 'body' : 'ruins', k = blds.userData.owner[key][h.instanceId]; if (k != null) showBuilding(k, h.point);
 }
 function nearestDistrict(x, y) { return meta.districts.reduce((b, d) => { const dd = Math.hypot(d.x - x, d.y - y); return dd < b.d ? {d: dd, v: d} : b; }, {d: 1e9}).v; }
@@ -181,8 +215,35 @@ function showBuilding(k, p) {
   const life = [`built in <b>${ERA[born]}</b>`]; if (ah > 0) life.push(`an addition of ${ah.toFixed(1)} m in ${ERA[Math.min(ab, 5)]}`); if (ruin < 9) life.push(`ruined in the Fall`); if (ruin < 9 && reuse) life.push(reuse === 1 ? 'rebuilt in white and glass' : 'relit as a club');
   const near = SH.map((s, i) => [Math.hypot(s.x - B[o], s.y - B[o + 1]), s.cid]).sort((a, b) => a[0] - b[0]).slice(0, 6).map(a => a[1]);
   $('info').innerHTML = `<h3>${STYLES[st]} · ${B[o + 5].toFixed(0)} m</h3><div class="k">${state} · ${life.join(' · ')}</div>
+    ${st === 1 ? '<div style="margin-top:4px"><a href="../heroes/index.html?h=rowhouse" style="color:var(--acc2)">walk into a rowhouse like this →</a></div>' : ''}
     <div class="k" style="margin-top:4px">${d ? d.name : ''}${w ? ` · ward ${w.ward}` : ''} — used now as <b style="color:var(--acc)">${d && d.use ? d.use[era] : d ? d.type : ''}</b></div>${evid(near)}`;
   $('info').style.display = 'block'; infoK = null; wireEvid();
+}
+const TNAME = {spire: 'spire', arcology: 'arcology', ring: 'halo', dish: 'listening dish', dome: 'dome', seawall: 'sea wall', vfarm: 'garden tower', platform: 'sea platform'};
+function showIcon(ic) {
+  infoK = null; const [b, r, as] = ic.era;
+  $('info').innerHTML = `<h3>${ic.name}</h3><div class="k">raised in <b>${ERA[b]}</b>${r < 9 ? ` · ${as === 'kept drowned' ? 'sunk' : 'broken'} in ${ERA[r]}` : ''}${as && as !== 'kept drowned' ? ` · ${as} in Resurrection` : ''} · kept by <b style="color:var(--acc)">${ic.institution}</b></div>
+    <p style="font:13px/1.5 Georgia,serif;color:#e9e0cc;margin:6px 0">${ic.lore}</p>
+    <div class="k">witnessed by ${ic.witnesses.length} shots that look like it</div>${evid(ic.witnesses)}
+    <div style="margin-top:6px"><a href="../gazetteer/index.html#${ic.id}" style="color:var(--acc2)">in the gazetteer →</a></div>`;
+  $('info').style.display = 'block'; wireEvid();
+}
+function showFound(u) {
+  const f = u.found; infoK = null; rising.pulse(u.x, u.y);
+  $('info').innerHTML = `<h3>${f.name || 'found'} · ${f.read.kind.replace(/^an? /, '')}</h3><div class="k">${f.read.roof} · ${f.read.material} · ${f.read.state} · raised to ${u.h.toFixed(0)} m</div>
+    <img src="../language/found/${f.id}.webp" style="max-width:100%;max-height:150px;margin-top:6px;border-radius:6px;background:#222" alt="">
+    <div class="k" style="margin-top:4px">from our own <b style="color:var(--acc)">${f.src}</b> footage · ${Math.round(f.unique * 100)}% unlike anything in the real archive · our footage returns to this kind ${f.size}× · its face is the frame itself, its outline the extrusion</div>
+    ${/NEW SINGLE/.test(f.name || '') ? '<div style="margin-top:6px"><a href="../heroes/index.html?h=marquee" style="color:var(--acc2)">walk into the NEW SINGLE →</a></div>' : ''}
+    <div class="chips" style="margin-top:6px">${f.palette.map(c => `<span style="width:20px;height:14px;border-radius:3px;background:${c};display:inline-block"></span>`).join('')}</div>`;
+  $('info').style.display = 'block';
+}
+function showStructure(s) {
+  infoK = null; const dims = s.t === 'ring' ? `radius ${s.R.toFixed(0)} m, lifted ${s.lift.toFixed(0)} m on ${s.legs} legs` : s.t === 'seawall' ? `${s.L.toFixed(0)} m long, ${s.H.toFixed(0)} m high, ${s.gates} tide gates` : s.t === 'dome' ? `${(s.r * 2).toFixed(0)} m across, ${s.ribs} ribs` : `${(s.H || 0).toFixed(0)} m high, ${((s.r || 0) * 2).toFixed(0)} m wide`;
+  const [b, r, as] = s.era;
+  $('info').innerHTML = `<h3>${TNAME[s.t]} · ${RD.variants[vi].name}</h3><div class="k">${dims} · raised in <b>${ERA[b]}</b>${r < 9 ? ` · broken in ${ERA[r]} · ${as}` : ''}</div>
+    <div class="k" style="margin-top:4px">called for by <b style="color:var(--acc)">${s.causes.length} shots</b> that read as a ${TNAME[s.t]} and look this way — it stands where it answers the most of them</div>
+    <div class="k" style="margin-top:3px">lineage: ${s.muts.join(' → ') || 'founding'}</div>${evid(s.causes)}`;
+  $('info').style.display = 'block'; wireEvid();
 }
 function showLandmark(i) {
   const lm = LM[i]; infoK = i; const st = lmState(lm, era), [b, r, as] = lm.era;
@@ -192,6 +253,8 @@ function showLandmark(i) {
     ${p ? `<div class="k">poem ${p.num} · ${p.title}</div>` : ''}<div class="k">${lm.evidence.length} shots read this structure</div>${evid(lm.evidence)}
     <div class="chips" style="margin-top:6px"><button id="lmgo">go there</button>${p ? '<button id="lmpoem">the poem</button>' : ''}</div>`;
   $('info').style.display = 'block'; wireEvid();
+  const hero = {'tower block': 'severn', chapel: 'chapel', 'clock tower': 'clocktower', pier: 'cafe'}[lm.type];
+  if (hero) $('info').insertAdjacentHTML('beforeend', `<div class="chips" style="margin-top:6px"><a href="../heroes/index.html?h=${hero}" style="color:var(--acc2)">walk inside the hero building →</a></div>`);
   $('lmgo').onclick = () => { setMode('orbit'); const R = Math.max(80, (lm.r || 30) * 3.2); goTo(new THREE.Vector3(lm.x + R, Math.max(lm.z, 0) + R * 0.45, lm.y + R * 0.6), new THREE.Vector3(lm.x, Math.max(lm.z, 0) + 15, lm.y)); };
   if (p) $('lmpoem').onclick = () => goPoem(p.num);
 }
@@ -231,6 +294,18 @@ function goPoem(num) {
 const audio = new Audio();
 meta.poems.forEach(p => { const b = document.createElement('button'); b.textContent = `${p.num} ${p.title}`; b.onclick = () => goPoem(p.num); $('poems').append(b); });
 LM.forEach((lm, i) => { const b = document.createElement('button'); b.textContent = lm.name.split(' · ')[0].split(',')[0]; b.onclick = () => showLandmark(i); $('lms').append(b); });
+if (RD) {
+  RD.variants.forEach((v, i) => { const b = document.createElement('button'); b.textContent = v.name.replace('the ', ''); b.title = `${v.n} structures answer ${v.structures.reduce((a, s) => a + s.causes.length, 0)} shots · fitness ${v.fitness}`; b.dataset.v = i; b.onclick = () => { vi = i; syncVariant(); setEra(era); }; $('variants').append(b); });
+  const nb = document.createElement('button'); nb.textContent = 'none'; nb.dataset.v = -1; nb.onclick = () => { vi = -1; syncVariant(); setEra(era); }; $('variants').append(nb);
+  $('vver').textContent = `${RD.version} · ${RD.checksum} · ${RD.gens.toLocaleString()} generations · ${RD.calls} calls`;
+}
+function syncVariant() { document.querySelectorAll('#variants button').forEach(b => b.classList.toggle('on', +b.dataset.v === vi));
+  const v = vi >= 0 ? RD.variants[vi] : null; $('vinfo').textContent = v ? `${v.n} structures · answer ${v.structures.reduce((a, s) => a + s.causes.length, 0)} of ${RD.calls} calls · appear in Resurrection (sea walls from the New Boroughs)` : 'the city without the evolved structures'; }
+syncVariant();
+$('resonate').onclick = () => { const t = orbit.enabled ? orbit.target : camera.position; rising.pulse(t.x, t.z); };
+$('causes').onchange = e => rising.setCauses(e.target.checked);
+setInterval(() => { if (U.night.value < 0.5) return; const res = icons.groups.find(g => g.userData.icon.kind === 'resonator' && g.visible);   // the Resonator sends the city's pulse
+  if (res) rising.pulse(res.position.x, res.position.z); else if (rising.groups.length) { const g = rising.groups[(Math.random() * rising.groups.length) | 0]; rising.pulse(g.position.x, g.position.z); } }, 22000);
 $('wards').innerHTML = wards.list.map(d => `<div><b style="color:hsl(${(d.ward - 1) * 0.137 % 1 * 360},65%,60%)">WARD ${d.ward}</b> · ${d.name.replace(/^the /, '')} — ${d.use ? d.use[5] : d.type}</div>`).join('');
 
 // ——— the footage strip: the shots nearest you, facing your way ———
@@ -240,8 +315,8 @@ function updateStrip() {
   const R = mode === 'orbit' ? Math.max(350, camera.position.distanceTo(orbit.target) * 0.8) : 400;
   const c = []; SH.forEach((s, i) => { const d = Math.hypot(s.x - p.x, s.y - p.z); if (d > R) return; const a = s.hd * Math.PI / 180, face = Math.cos(a) * dir.x + Math.sin(a) * dir.z; c.push([d / R + (1 - face) * 0.4, i]); });
   c.sort((a, b) => a[0] - b[0]); const top = c.slice(0, 14).map(a => a[1]); const key = top.join(','); if (key === stripKey) return; stripKey = key;
-  const dn = nearestDistrict(p.x, p.z);
-  $('strip').innerHTML = `<div class="hd"><b>${dn ? dn.name.replace(/^the /, '') : ''}</b>${top.length} shots here · facing ${['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'][Math.round(((Math.atan2(dir.x, -dir.z) * 180 / Math.PI) + 360) % 360 / 45) % 8]}</div>` +
+  const dn = nearestDistrict(p.x, p.z), onSt = names.at(p.x, p.z);
+  $('strip').innerHTML = `<div class="hd"><b>${onSt ? onSt.name : dn ? dn.name.replace(/^the /, '') : ''}</b>${onSt && dn ? `<span style="display:block;color:var(--dim)">${dn.name.replace(/^the /, '')}</span>` : ''}${top.length} shots here · facing ${['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'][Math.round(((Math.atan2(dir.x, -dir.z) * 180 / Math.PI) + 360) % 360 / 45) % 8]}</div>` +
     top.map(i => `<div class="shot" data-i="${i}"><img src="${thumb(SH[i].cid)}" loading="lazy" alt=""><span>${SH[i].cid} · ${SH[i].el}</span></div>`).join('');
   $('strip').querySelectorAll('.shot').forEach(d => d.onclick = () => fitShot(+d.dataset.i, top));
 }
@@ -258,6 +333,7 @@ function declutter() {
   const push = (o, pri, maxD, minD = 0) => { const d = cp.distanceTo(o.position); if (d > maxD || d < minD) { o.visible = false; return; } cand.push([pri + d / 20000, o]); };
   poemLabels.forEach(o => LAYERS.labels ? push(o, 0, 9000) : o.visible = false);
   lmLabels.forEach((o, i) => lmState(LM[i], era) && LAYERS.labels ? push(o, 1, mode === 'orbit' ? 4000 : 1600) : o.visible = false);
+  iconLabels.forEach((o, i) => icons.groups[i]?.visible && LAYERS.labels ? push(o, 0.5, 9000) : o.visible = false);
   distLabels.forEach(o => LAYERS.districts ? push(o, 2, 7000, 400) : o.visible = false);
   wardLabels.forEach(o => LAYERS.wards ? push(o, 3, 9000) : o.visible = false);
   cand.sort((a, b) => a[0] - b[0]); const placed = [];
@@ -266,6 +342,7 @@ function declutter() {
     if (placed.some(r => Math.abs(r[0] - x) < r[2] + w && Math.abs(r[1] - y) < r[3] + h)) { o.visible = false; continue; }
     placed.push([x, y, w, h]); o.visible = true; if (placed.length > 40) { o.visible = false; } }
 }
+const perf = {t: 0, n: 0}; function setPR(p) { renderer.setPixelRatio(p); renderer.setSize(innerWidth, innerHeight); composer?.setPixelRatio?.(p); composer?.setSize(innerWidth, innerHeight); }
 const clock = new THREE.Clock(); let stripT = 0, clockMin = -1;
 const V3 = new THREE.Vector3(), fwd = new THREE.Vector3(), right = new THREE.Vector3();
 function frameLoop() {
@@ -277,8 +354,8 @@ function frameLoop() {
   const night = heav.state.night; U.night.value = THREE.MathUtils.smoothstep(night, 0.15, 0.7);
   U.wet.value += ((weather === 'rain' || weather === 'storm' ? 1 : 0) - U.wet.value) * dt * 0.3;
   for (const k of NIGHTLIT) mats[k].emissiveIntensity = mats[k].userData.base * (0.08 + 0.92 * U.night.value);
-  const tide = heav.state.tide, rising = Math.cos(2 * Math.PI * (dateOf().getTime() / 36e5) / 12.42) > 0;
-  $('tide').textContent = `tide ${tide >= 0 ? '+' : ''}${tide.toFixed(2)} m ${rising ? '↑' : '↓'}`; $('tideO').textContent = `${tide >= 0 ? '+' : ''}${tide.toFixed(2)} m · ${rising ? 'flooding' : 'ebbing'} · semidiurnal 12.42 h`;
+  const tide = heav.state.tide, flooding = Math.cos(2 * Math.PI * (dateOf().getTime() / 36e5) / 12.42) > 0;
+  $('tide').textContent = `tide ${tide >= 0 ? '+' : ''}${tide.toFixed(2)} m ${flooding ? "↑" : "↓"}`; $('tideO').textContent = `${tide >= 0 ? '+' : ''}${tide.toFixed(2)} m · ${flooding ? "flooding" : "ebbing"} · semidiurnal 12.42 h`;
   const mi = Math.floor(hour * 60); if (mi !== clockMin) { clockMin = mi; tickClocks({getHours: () => Math.floor(hour), getMinutes: () => Math.floor((hour % 1) * 60)}); }
   // animated pieces in the landmarks
   for (const g of lmGroups) g.traverse(o => { if (o.userData.beam) { o.parent.visible && (o.rotation.y += dt * 0.9); o.visible = U.night.value > 0.2; o.material.opacity = 0.1 * U.night.value; }
@@ -309,11 +386,16 @@ function frameLoop() {
     if (V3.distanceTo(camera.position) > 2) camera.lookAt(V3);
   }
   if (ptour) { ptour.t += dt; if (ptour.t > 9) { ptour.t = 0; ptour.k = (ptour.k + 1) % meta.poems.length; goPoem(meta.poems[ptour.k].num); } }
+  rising.update(dt, U.time.value); icons.update(dt, U.time.value); skit.update(dateOf());
+  // only where you are: the lived-in layer streams in a ring around the focus, and the resolution follows the frame rate
+  const fz = mode === 'orbit' ? orbit.target : camera.position; detail.visible = LAYERS.lamps && camera.position.y - Math.max(S.ground(camera.position.x, camera.position.z), 0) < 700; detail.update(fz); if (detail.visible !== false) names.update(fz.x, fz.z);
+  perf.t += dt; perf.n++; if (perf.t > 2) { const ms = perf.t / perf.n * 1000; const pr = renderer.getPixelRatio(), max = Math.min(devicePixelRatio, MOBILE ? 1.5 : 2);
+    if (ms > 30 && pr > 1) setPR(Math.max(1, pr - 0.25)); else if (ms < 17 && pr < max) setPR(Math.min(max, pr + 0.25)); perf.t = 0; perf.n = 0; }
   if (mode === 'orbit') orbit.update();
   // label culling
   const cp = camera.position;
   declT -= dt; if (declT < 0) { declT = 0.2; declutter(); }
-  words.forEach(s => { const d = cp.distanceTo(s.position); s.visible = LAYERS.words && d < 420; s.material.opacity = THREE.MathUtils.clamp((420 - d) / 200, 0, 1); });
+  words.forEach(s => { const d = cp.distanceTo(s.position); s.visible = LAYERS.words && d < 420 && d > 30; s.material.opacity = THREE.MathUtils.clamp((420 - d) / 200, 0, 1); });
   stripT -= dt; if (stripT < 0) { stripT = 0.5; updateStrip(); }
   if (composer) composer.render(); else renderer.render(scene, camera);
   labels.render(scene, camera);
@@ -321,4 +403,4 @@ function frameLoop() {
 }
 requestAnimationFrame(frameLoop);
 addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); labels.setSize(innerWidth, innerHeight); composer?.setSize(innerWidth, innerHeight); });
-window.__city = {scene, camera, orbit, setEra, setWeather, goPoem, fitShot, heav, setMode, get hour() { return hour; }, set hour(v) { hour = v; setTimeUI(); }, C};
+window.__city = {names, heroes, skit, icons, found, detail, rising, scene, camera, orbit, setEra, setWeather, goPoem, fitShot, heav, setMode, get hour() { return hour; }, set hour(v) { hour = v; setTimeUI(); }, C};

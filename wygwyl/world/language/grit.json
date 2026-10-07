@@ -1,0 +1,3762 @@
+{
+"stoop": {
+"prompt": "front stoop steps of a rowhouse",
+"group": "threshold",
+"strong": 2,
+"bysrc": {
+"archive": 2
+},
+"items": [
+{
+"f": "a7424aba491f.webp",
+"src": "archive",
+"s": 0.275,
+"weak": false
+},
+{
+"f": "0f48438188d0.webp",
+"src": "archive",
+"s": 0.275,
+"weak": false
+},
+{
+"f": "29757f5061fc.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.251,
+"weak": true
+},
+{
+"f": "49e52354f600.webp",
+"src": "generated",
+"s": 0.244,
+"weak": true
+},
+{
+"f": "252a1958ceb7.webp",
+"src": "generated",
+"s": 0.238,
+"weak": true
+},
+{
+"f": "c32662ba2456.webp",
+"src": "halfworld\u00b7butterfly",
+"s": 0.235,
+"weak": true
+},
+{
+"f": "380ac8eb9ea4.webp",
+"src": "halfworld\u00b7butterfly",
+"s": 0.229,
+"weak": true
+},
+{
+"f": "14fde1b2c00c.webp",
+"src": "halfworld\u00b7butterfly",
+"s": 0.215,
+"weak": true
+},
+{
+"f": "83ea3845a29d.webp",
+"src": "archive",
+"s": 0.267,
+"weak": true
+},
+{
+"f": "cf8a0fc272b5.webp",
+"src": "archive",
+"s": 0.258,
+"weak": true
+},
+{
+"f": "3573d6d841e4.webp",
+"src": "archive",
+"s": 0.257,
+"weak": true
+},
+{
+"f": "280e76459c2e.webp",
+"src": "archive",
+"s": 0.251,
+"weak": true
+}
+]
+},
+"stairs": {
+"prompt": "an outdoor concrete staircase between streets",
+"group": "threshold",
+"strong": 5,
+"bysrc": {
+"archive": 3,
+"markov\u00b7butterfly": 2
+},
+"items": [
+{
+"f": "29757f5061fc.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.279,
+"weak": false
+},
+{
+"f": "54d395f3e459.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.274,
+"weak": false
+},
+{
+"f": "9982d2008047.webp",
+"src": "archive",
+"s": 0.282,
+"weak": false
+},
+{
+"f": "a6b1465f845d.webp",
+"src": "archive",
+"s": 0.278,
+"weak": false
+},
+{
+"f": "20727b6dfbb9.webp",
+"src": "archive",
+"s": 0.271,
+"weak": false
+},
+{
+"f": "252a1958ceb7.webp",
+"src": "generated",
+"s": 0.273,
+"weak": true
+},
+{
+"f": "49e52354f600.webp",
+"src": "generated",
+"s": 0.268,
+"weak": true
+},
+{
+"f": "caffe461f254.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.262,
+"weak": true
+},
+{
+"f": "847ec4086fff.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.255,
+"weak": true
+},
+{
+"f": "5b8c7dbc91dd.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.255,
+"weak": true
+},
+{
+"f": "ff8a85e79b37.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.255,
+"weak": true
+},
+{
+"f": "ad348ac5a579.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.255,
+"weak": true
+}
+]
+},
+"fire escape": {
+"prompt": "a metal fire escape on a brick building",
+"group": "threshold",
+"strong": 2,
+"bysrc": {
+"generated": 2
+},
+"items": [
+{
+"f": "49e52354f600.webp",
+"src": "generated",
+"s": 0.337,
+"weak": false
+},
+{
+"f": "252a1958ceb7.webp",
+"src": "generated",
+"s": 0.313,
+"weak": false
+},
+{
+"f": "c32662ba2456.webp",
+"src": "halfworld\u00b7butterfly",
+"s": 0.249,
+"weak": true
+},
+{
+"f": "29757f5061fc.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.24,
+"weak": true
+},
+{
+"f": "f52015b8b9b6.webp",
+"src": "generated",
+"s": 0.225,
+"weak": true
+},
+{
+"f": "65257fc2e558.webp",
+"src": "archive",
+"s": 0.267,
+"weak": true
+},
+{
+"f": "47bcb9806514.webp",
+"src": "archive",
+"s": 0.265,
+"weak": true
+},
+{
+"f": "8d60728d3ac8.webp",
+"src": "archive",
+"s": 0.262,
+"weak": true
+},
+{
+"f": "af561d096952.webp",
+"src": "other",
+"s": 0.261,
+"weak": true
+},
+{
+"f": "fe0e7eff9db9.webp",
+"src": "archive",
+"s": 0.261,
+"weak": true
+},
+{
+"f": "79bb4ad88235.webp",
+"src": "archive",
+"s": 0.26,
+"weak": true
+},
+{
+"f": "dc14794ab426.webp",
+"src": "archive",
+"s": 0.26,
+"weak": true
+}
+]
+},
+"doorway": {
+"prompt": "a worn doorway seen from the street",
+"group": "threshold",
+"strong": 25,
+"bysrc": {
+"other": 2,
+"archive": 17,
+"generated": 4,
+"markov\u00b7butterfly": 2
+},
+"items": [
+{
+"f": "8738dd94ce5e.webp",
+"src": "generated",
+"s": 0.307,
+"weak": false
+},
+{
+"f": "0d0a63d429d7.webp",
+"src": "generated",
+"s": 0.305,
+"weak": false
+},
+{
+"f": "8dbff5944d6d.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.293,
+"weak": false
+},
+{
+"f": "27f0e0142b75.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.293,
+"weak": false
+},
+{
+"f": "a2ae606df9ed.webp",
+"src": "generated",
+"s": 0.289,
+"weak": false
+},
+{
+"f": "8e77c3cc73f9.webp",
+"src": "generated",
+"s": 0.285,
+"weak": false
+},
+{
+"f": "e7d21802dfa0.webp",
+"src": "other",
+"s": 0.315,
+"weak": false
+},
+{
+"f": "e402c7721a23.webp",
+"src": "archive",
+"s": 0.311,
+"weak": false
+},
+{
+"f": "c7fe87f013a4.webp",
+"src": "archive",
+"s": 0.305,
+"weak": false
+},
+{
+"f": "381e6ee94c26.webp",
+"src": "archive",
+"s": 0.301,
+"weak": false
+},
+{
+"f": "6091be19044b.webp",
+"src": "archive",
+"s": 0.296,
+"weak": false
+},
+{
+"f": "c496862a89ce.webp",
+"src": "archive",
+"s": 0.293,
+"weak": false
+}
+]
+},
+"alley": {
+"prompt": "a narrow back alley with bins and pipes",
+"group": "street",
+"strong": 23,
+"bysrc": {
+"archive": 22,
+"generated": 1
+},
+"items": [
+{
+"f": "98ad832b48ca.webp",
+"src": "generated",
+"s": 0.29,
+"weak": false
+},
+{
+"f": "50cae291bbf4.webp",
+"src": "archive",
+"s": 0.316,
+"weak": false
+},
+{
+"f": "ab18fe0b1dd5.webp",
+"src": "archive",
+"s": 0.316,
+"weak": false
+},
+{
+"f": "cc8cfda31730.webp",
+"src": "archive",
+"s": 0.314,
+"weak": false
+},
+{
+"f": "de771f25a599.webp",
+"src": "archive",
+"s": 0.303,
+"weak": false
+},
+{
+"f": "1993ff6e6646.webp",
+"src": "archive",
+"s": 0.296,
+"weak": false
+},
+{
+"f": "2958a5110ecd.webp",
+"src": "archive",
+"s": 0.296,
+"weak": false
+},
+{
+"f": "7c1985cf0d73.webp",
+"src": "archive",
+"s": 0.296,
+"weak": false
+},
+{
+"f": "24d9a36f717e.webp",
+"src": "archive",
+"s": 0.291,
+"weak": false
+},
+{
+"f": "249e59801924.webp",
+"src": "archive",
+"s": 0.279,
+"weak": false
+},
+{
+"f": "79bfd221f1fb.webp",
+"src": "archive",
+"s": 0.279,
+"weak": false
+},
+{
+"f": "af3a89427f0e.webp",
+"src": "archive",
+"s": 0.279,
+"weak": false
+}
+]
+},
+"puddle": {
+"prompt": "a puddle on wet asphalt reflecting lights",
+"group": "street",
+"strong": 153,
+"bysrc": {
+"generated": 34,
+"film": 5,
+"archive": 57,
+"other": 3,
+"markov\u00b7butterfly": 54
+},
+"items": [
+{
+"f": "044ec7eb2789.webp",
+"src": "generated",
+"s": 0.354,
+"weak": false
+},
+{
+"f": "61b7a0aa66b2.webp",
+"src": "generated",
+"s": 0.341,
+"weak": false
+},
+{
+"f": "f890c574da03.webp",
+"src": "generated",
+"s": 0.34,
+"weak": false
+},
+{
+"f": "aed9224e1dc5.webp",
+"src": "generated",
+"s": 0.328,
+"weak": false
+},
+{
+"f": "44bb450a0e2d.webp",
+"src": "generated",
+"s": 0.323,
+"weak": false
+},
+{
+"f": "b66df506b6c5.webp",
+"src": "generated",
+"s": 0.323,
+"weak": false
+},
+{
+"f": "6e83ff78d62f.webp",
+"src": "generated",
+"s": 0.318,
+"weak": false
+},
+{
+"f": "3d254def6ae7.webp",
+"src": "generated",
+"s": 0.313,
+"weak": false
+},
+{
+"f": "ebb5ae01d1dc.webp",
+"src": "generated",
+"s": 0.312,
+"weak": false
+},
+{
+"f": "1c158c9ee8c8.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.311,
+"weak": false
+},
+{
+"f": "a488f2e2f1d7.webp",
+"src": "generated",
+"s": 0.307,
+"weak": false
+},
+{
+"f": "e9607ce96967.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.302,
+"weak": false
+}
+]
+},
+"manhole": {
+"prompt": "a manhole cover in the street",
+"group": "street",
+"strong": 11,
+"bysrc": {
+"archive": 11
+},
+"items": [
+{
+"f": "47c281b15c9f.webp",
+"src": "archive",
+"s": 0.307,
+"weak": false
+},
+{
+"f": "166bb375a3da.webp",
+"src": "archive",
+"s": 0.306,
+"weak": false
+},
+{
+"f": "d43f8705a226.webp",
+"src": "archive",
+"s": 0.306,
+"weak": false
+},
+{
+"f": "03d2393c029f.webp",
+"src": "archive",
+"s": 0.294,
+"weak": false
+},
+{
+"f": "e3b94f7ff89f.webp",
+"src": "archive",
+"s": 0.286,
+"weak": false
+},
+{
+"f": "e7876eaae9c9.webp",
+"src": "archive",
+"s": 0.283,
+"weak": false
+},
+{
+"f": "779cadbda766.webp",
+"src": "archive",
+"s": 0.279,
+"weak": false
+},
+{
+"f": "6a0455ba8739.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "0ed9803babcc.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "cf7f94115609.webp",
+"src": "archive",
+"s": 0.273,
+"weak": false
+},
+{
+"f": "c0e366571516.webp",
+"src": "archive",
+"s": 0.272,
+"weak": false
+}
+]
+},
+"crosswalk": {
+"prompt": "a faded crosswalk painted on asphalt",
+"group": "street",
+"strong": 4,
+"bysrc": {
+"archive": 2,
+"film": 2
+},
+"items": [
+{
+"f": "1d77a84ffe13.webp",
+"src": "archive",
+"s": 0.309,
+"weak": false
+},
+{
+"f": "e2873c21a32d.webp",
+"src": "archive",
+"s": 0.282,
+"weak": false
+},
+{
+"f": "70b16344f31e.webp",
+"src": "film",
+"s": 0.28,
+"weak": false
+},
+{
+"f": "164d4123edd5.webp",
+"src": "film",
+"s": 0.27,
+"weak": false
+},
+{
+"f": "82f45973321b.webp",
+"src": "generated",
+"s": 0.266,
+"weak": true
+},
+{
+"f": "1586e5fdd19b.webp",
+"src": "generated",
+"s": 0.244,
+"weak": true
+},
+{
+"f": "1ffc45dcb08d.webp",
+"src": "generated",
+"s": 0.239,
+"weak": true
+},
+{
+"f": "06569f1778e7.webp",
+"src": "halfworld\u00b7butterfly",
+"s": 0.222,
+"weak": true
+},
+{
+"f": "9586931f6ac4.webp",
+"src": "generated",
+"s": 0.221,
+"weak": true
+},
+{
+"f": "aa000ca45887.webp",
+"src": "generated",
+"s": 0.219,
+"weak": true
+},
+{
+"f": "95e4c7a4063a.webp",
+"src": "generated",
+"s": 0.214,
+"weak": true
+},
+{
+"f": "d43f8705a226.webp",
+"src": "archive",
+"s": 0.288,
+"weak": true
+}
+]
+},
+"cobbles": {
+"prompt": "wet cobblestones in an old street",
+"group": "street",
+"strong": 4,
+"bysrc": {
+"archive": 3,
+"generated": 1
+},
+"items": [
+{
+"f": "1ac97a0a10f8.webp",
+"src": "generated",
+"s": 0.289,
+"weak": false
+},
+{
+"f": "377a5bff526d.webp",
+"src": "archive",
+"s": 0.341,
+"weak": false
+},
+{
+"f": "96d0d16b49e9.webp",
+"src": "archive",
+"s": 0.303,
+"weak": false
+},
+{
+"f": "77676eebe0db.webp",
+"src": "archive",
+"s": 0.294,
+"weak": false
+},
+{
+"f": "197fb12c9dea.webp",
+"src": "generated",
+"s": 0.277,
+"weak": true
+},
+{
+"f": "3d254def6ae7.webp",
+"src": "generated",
+"s": 0.271,
+"weak": true
+},
+{
+"f": "61b7a0aa66b2.webp",
+"src": "generated",
+"s": 0.262,
+"weak": true
+},
+{
+"f": "044ec7eb2789.webp",
+"src": "generated",
+"s": 0.257,
+"weak": true
+},
+{
+"f": "aa3e0f1d1f3d.webp",
+"src": "archive",
+"s": 0.298,
+"weak": true
+},
+{
+"f": "44bf7a8f64cf.webp",
+"src": "archive",
+"s": 0.264,
+"weak": true
+},
+{
+"f": "2e369d72dfd7.webp",
+"src": "archive",
+"s": 0.264,
+"weak": true
+},
+{
+"f": "166bb375a3da.webp",
+"src": "archive",
+"s": 0.26,
+"weak": true
+}
+]
+},
+"curb": {
+"prompt": "a cracked curb and gutter with litter",
+"group": "street",
+"strong": 2,
+"bysrc": {
+"archive": 2
+},
+"items": [
+{
+"f": "431c395fa7aa.webp",
+"src": "archive",
+"s": 0.282,
+"weak": false
+},
+{
+"f": "6dffc315cd73.webp",
+"src": "archive",
+"s": 0.277,
+"weak": false
+},
+{
+"f": "f74961c98dfd.webp",
+"src": "generated",
+"s": 0.254,
+"weak": true
+},
+{
+"f": "33b1e9366468.webp",
+"src": "generated",
+"s": 0.237,
+"weak": true
+},
+{
+"f": "658dee152d90.webp",
+"src": "archive",
+"s": 0.271,
+"weak": true
+},
+{
+"f": "ee43954867f7.webp",
+"src": "archive",
+"s": 0.271,
+"weak": true
+},
+{
+"f": "aa3e0f1d1f3d.webp",
+"src": "archive",
+"s": 0.268,
+"weak": true
+},
+{
+"f": "c6b1da8dddbb.webp",
+"src": "archive",
+"s": 0.266,
+"weak": true
+},
+{
+"f": "36461211093f.webp",
+"src": "archive",
+"s": 0.266,
+"weak": true
+},
+{
+"f": "11c1e6c0b835.webp",
+"src": "archive",
+"s": 0.264,
+"weak": true
+},
+{
+"f": "8b803df3c138.webp",
+"src": "archive",
+"s": 0.263,
+"weak": true
+},
+{
+"f": "5fbe2f4e2e10.webp",
+"src": "archive",
+"s": 0.263,
+"weak": true
+}
+]
+},
+"bus stop": {
+"prompt": "a bus stop shelter at night",
+"group": "street",
+"strong": 105,
+"bysrc": {
+"markov\u00b7butterfly": 51,
+"generated": 5,
+"archive": 49
+},
+"items": [
+{
+"f": "aa2b2292fba5.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.342,
+"weak": false
+},
+{
+"f": "594cb613a48d.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.34,
+"weak": false
+},
+{
+"f": "51c4c346330b.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.338,
+"weak": false
+},
+{
+"f": "601bc696908c.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.338,
+"weak": false
+},
+{
+"f": "5e9d7de465da.webp",
+"src": "generated",
+"s": 0.327,
+"weak": false
+},
+{
+"f": "9ea927e04846.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.325,
+"weak": false
+},
+{
+"f": "155b13538bce.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.324,
+"weak": false
+},
+{
+"f": "b4fce90aeb79.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.319,
+"weak": false
+},
+{
+"f": "2129c8315c55.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.319,
+"weak": false
+},
+{
+"f": "3d0f4340c013.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.316,
+"weak": false
+},
+{
+"f": "599f6bb1483e.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.312,
+"weak": false
+},
+{
+"f": "c05f3f99c12b.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.312,
+"weak": false
+}
+]
+},
+"streetlight": {
+"prompt": "a lonely streetlight at night",
+"group": "street",
+"strong": 65,
+"bysrc": {
+"generated": 7,
+"other": 4,
+"markov\u00b7butterfly": 10,
+"archive": 44
+},
+"items": [
+{
+"f": "0993aa715239.webp",
+"src": "generated",
+"s": 0.329,
+"weak": false
+},
+{
+"f": "eb3c340e2461.webp",
+"src": "generated",
+"s": 0.323,
+"weak": false
+},
+{
+"f": "a36d9adbcdfd.webp",
+"src": "generated",
+"s": 0.306,
+"weak": false
+},
+{
+"f": "48707d3d8077.webp",
+"src": "generated",
+"s": 0.301,
+"weak": false
+},
+{
+"f": "86f5c1e5cdfd.webp",
+"src": "generated",
+"s": 0.299,
+"weak": false
+},
+{
+"f": "c672d8de77a9.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.291,
+"weak": false
+},
+{
+"f": "d788807045d9.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.291,
+"weak": false
+},
+{
+"f": "a615e1d7c464.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.291,
+"weak": false
+},
+{
+"f": "c7b439609493.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.29,
+"weak": false
+},
+{
+"f": "111abc237bb1.webp",
+"src": "generated",
+"s": 0.29,
+"weak": false
+},
+{
+"f": "b5aa4a2715e1.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.288,
+"weak": false
+},
+{
+"f": "6f3f83329779.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.287,
+"weak": false
+}
+]
+},
+"overhead wires": {
+"prompt": "tangled overhead electric wires between buildings",
+"group": "overhead",
+"strong": 17,
+"bysrc": {
+"archive": 17
+},
+"items": [
+{
+"f": "bb98f5bf8f74.webp",
+"src": "archive",
+"s": 0.309,
+"weak": false
+},
+{
+"f": "9044d5accadb.webp",
+"src": "archive",
+"s": 0.299,
+"weak": false
+},
+{
+"f": "acbd763bbb30.webp",
+"src": "archive",
+"s": 0.295,
+"weak": false
+},
+{
+"f": "f88137a71006.webp",
+"src": "archive",
+"s": 0.295,
+"weak": false
+},
+{
+"f": "95a738a97f0d.webp",
+"src": "archive",
+"s": 0.291,
+"weak": false
+},
+{
+"f": "bec41f7d3078.webp",
+"src": "archive",
+"s": 0.287,
+"weak": false
+},
+{
+"f": "a3f7a9fbeba7.webp",
+"src": "archive",
+"s": 0.282,
+"weak": false
+},
+{
+"f": "37fca11399a6.webp",
+"src": "archive",
+"s": 0.281,
+"weak": false
+},
+{
+"f": "1265e71a02c1.webp",
+"src": "archive",
+"s": 0.277,
+"weak": false
+},
+{
+"f": "01bf873e0f0c.webp",
+"src": "archive",
+"s": 0.277,
+"weak": false
+},
+{
+"f": "61ad5336dbe7.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "5c655749dd18.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+}
+]
+},
+"laundry": {
+"prompt": "laundry hanging on a line between windows",
+"group": "overhead",
+"strong": 7,
+"bysrc": {
+"archive": 7
+},
+"items": [
+{
+"f": "741b84235e7a.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "e87337fc5b33.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "6146526f9929.webp",
+"src": "archive",
+"s": 0.275,
+"weak": false
+},
+{
+"f": "e1ae84c18b46.webp",
+"src": "archive",
+"s": 0.273,
+"weak": false
+},
+{
+"f": "fd83a04abcd5.webp",
+"src": "archive",
+"s": 0.272,
+"weak": false
+},
+{
+"f": "d634740de451.webp",
+"src": "archive",
+"s": 0.271,
+"weak": false
+},
+{
+"f": "8acc2379fcfa.webp",
+"src": "archive",
+"s": 0.27,
+"weak": false
+}
+]
+},
+"awning": {
+"prompt": "a torn shop awning over a sidewalk",
+"group": "overhead",
+"strong": 11,
+"bysrc": {
+"archive": 11
+},
+"items": [
+{
+"f": "cbbecc6ebb8b.webp",
+"src": "archive",
+"s": 0.318,
+"weak": false
+},
+{
+"f": "648e7a26b965.webp",
+"src": "archive",
+"s": 0.298,
+"weak": false
+},
+{
+"f": "82a8d9e7ed5f.webp",
+"src": "archive",
+"s": 0.292,
+"weak": false
+},
+{
+"f": "8fd530d98ea1.webp",
+"src": "archive",
+"s": 0.291,
+"weak": false
+},
+{
+"f": "3d9ec48d9e6e.webp",
+"src": "archive",
+"s": 0.287,
+"weak": false
+},
+{
+"f": "9a2a5ceec8fa.webp",
+"src": "archive",
+"s": 0.282,
+"weak": false
+},
+{
+"f": "4de130261c88.webp",
+"src": "archive",
+"s": 0.279,
+"weak": false
+},
+{
+"f": "620b5423a0d5.webp",
+"src": "archive",
+"s": 0.277,
+"weak": false
+},
+{
+"f": "57db49bd90c8.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "14eae0db5b1a.webp",
+"src": "archive",
+"s": 0.271,
+"weak": false
+},
+{
+"f": "27e70a72bd6a.webp",
+"src": "archive",
+"s": 0.271,
+"weak": false
+}
+]
+},
+"neon": {
+"prompt": "a buzzing neon sign in a window",
+"group": "overhead",
+"strong": 7,
+"bysrc": {
+"archive": 5,
+"other": 2
+},
+"items": [
+{
+"f": "1d5b048d84f5.webp",
+"src": "archive",
+"s": 0.338,
+"weak": false
+},
+{
+"f": "3d3e3c432e3c.webp",
+"src": "archive",
+"s": 0.311,
+"weak": false
+},
+{
+"f": "a2b68678cfa3.webp",
+"src": "archive",
+"s": 0.307,
+"weak": false
+},
+{
+"f": "3b6ac7750e5d.webp",
+"src": "other",
+"s": 0.296,
+"weak": false
+},
+{
+"f": "a6621286f7cf.webp",
+"src": "archive",
+"s": 0.284,
+"weak": false
+},
+{
+"f": "8df18a52c5fe.webp",
+"src": "other",
+"s": 0.275,
+"weak": false
+},
+{
+"f": "508a12d7c47b.webp",
+"src": "archive",
+"s": 0.274,
+"weak": false
+}
+]
+},
+"water tank": {
+"prompt": "a rooftop water tank",
+"group": "roof",
+"strong": 32,
+"bysrc": {
+"archive": 32
+},
+"items": [
+{
+"f": "239dfed19a3c.webp",
+"src": "archive",
+"s": 0.337,
+"weak": false
+},
+{
+"f": "4bf9b182b6f1.webp",
+"src": "archive",
+"s": 0.306,
+"weak": false
+},
+{
+"f": "82cf2c87ab68.webp",
+"src": "archive",
+"s": 0.306,
+"weak": false
+},
+{
+"f": "d9073a5c46ad.webp",
+"src": "archive",
+"s": 0.305,
+"weak": false
+},
+{
+"f": "99eef57f3407.webp",
+"src": "archive",
+"s": 0.301,
+"weak": false
+},
+{
+"f": "2e0be9b0b667.webp",
+"src": "archive",
+"s": 0.296,
+"weak": false
+},
+{
+"f": "c34acd927a0f.webp",
+"src": "archive",
+"s": 0.292,
+"weak": false
+},
+{
+"f": "8d261ab204d3.webp",
+"src": "archive",
+"s": 0.292,
+"weak": false
+},
+{
+"f": "4f6dbc99f1d5.webp",
+"src": "archive",
+"s": 0.285,
+"weak": false
+},
+{
+"f": "532b8d6a7e09.webp",
+"src": "archive",
+"s": 0.285,
+"weak": false
+},
+{
+"f": "cb501e9c808e.webp",
+"src": "archive",
+"s": 0.283,
+"weak": false
+},
+{
+"f": "e5f23c8e583c.webp",
+"src": "archive",
+"s": 0.282,
+"weak": false
+}
+]
+},
+"satellite dishes": {
+"prompt": "satellite dishes on apartment balconies",
+"group": "roof",
+"strong": 7,
+"bysrc": {
+"archive": 7
+},
+"items": [
+{
+"f": "5d7f2bef714c.webp",
+"src": "archive",
+"s": 0.326,
+"weak": false
+},
+{
+"f": "862c2a0595d0.webp",
+"src": "archive",
+"s": 0.286,
+"weak": false
+},
+{
+"f": "9923d9dcfe97.webp",
+"src": "archive",
+"s": 0.283,
+"weak": false
+},
+{
+"f": "f3667a06c024.webp",
+"src": "archive",
+"s": 0.283,
+"weak": false
+},
+{
+"f": "12f5640d656b.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "f563dd304df5.webp",
+"src": "archive",
+"s": 0.272,
+"weak": false
+},
+{
+"f": "ba5088362e69.webp",
+"src": "archive",
+"s": 0.271,
+"weak": false
+}
+]
+},
+"antenna": {
+"prompt": "tv antennas on rooftops",
+"group": "roof",
+"strong": 17,
+"bysrc": {
+"archive": 17
+},
+"items": [
+{
+"f": "e6d922bd254b.webp",
+"src": "archive",
+"s": 0.31,
+"weak": false
+},
+{
+"f": "18250e2b2889.webp",
+"src": "archive",
+"s": 0.303,
+"weak": false
+},
+{
+"f": "c206d9112424.webp",
+"src": "archive",
+"s": 0.294,
+"weak": false
+},
+{
+"f": "422ace8f91c0.webp",
+"src": "archive",
+"s": 0.291,
+"weak": false
+},
+{
+"f": "a52197fd330e.webp",
+"src": "archive",
+"s": 0.287,
+"weak": false
+},
+{
+"f": "5a15fbf7d5e3.webp",
+"src": "archive",
+"s": 0.286,
+"weak": false
+},
+{
+"f": "485dad9057bf.webp",
+"src": "archive",
+"s": 0.285,
+"weak": false
+},
+{
+"f": "d59a6bde184e.webp",
+"src": "archive",
+"s": 0.284,
+"weak": false
+},
+{
+"f": "16055641ecac.webp",
+"src": "archive",
+"s": 0.282,
+"weak": false
+},
+{
+"f": "096540fc5e40.webp",
+"src": "archive",
+"s": 0.28,
+"weak": false
+},
+{
+"f": "0ece15e333a8.webp",
+"src": "archive",
+"s": 0.278,
+"weak": false
+},
+{
+"f": "58d4e9c15d15.webp",
+"src": "archive",
+"s": 0.278,
+"weak": false
+}
+]
+},
+"balcony plants": {
+"prompt": "potted plants crowding a small balcony",
+"group": "roof",
+"strong": 1,
+"bysrc": {
+"archive": 1
+},
+"items": [
+{
+"f": "c26b8afb4f3d.webp",
+"src": "archive",
+"s": 0.272,
+"weak": false
+},
+{
+"f": "e910079bf4f2.webp",
+"src": "archive",
+"s": 0.269,
+"weak": true
+},
+{
+"f": "66775f0b6903.webp",
+"src": "archive",
+"s": 0.259,
+"weak": true
+},
+{
+"f": "3ca9a00c185c.webp",
+"src": "archive",
+"s": 0.254,
+"weak": true
+},
+{
+"f": "fea6179c4b15.webp",
+"src": "archive",
+"s": 0.252,
+"weak": true
+},
+{
+"f": "ad9f188d6ff3.webp",
+"src": "archive",
+"s": 0.248,
+"weak": true
+},
+{
+"f": "447496ac8390.webp",
+"src": "archive",
+"s": 0.248,
+"weak": true
+},
+{
+"f": "2fb6036c90c1.webp",
+"src": "archive",
+"s": 0.248,
+"weak": true
+},
+{
+"f": "23bb77e83b2a.webp",
+"src": "archive",
+"s": 0.247,
+"weak": true
+},
+{
+"f": "4630bf73237b.webp",
+"src": "archive",
+"s": 0.246,
+"weak": true
+},
+{
+"f": "c59093fa88ff.webp",
+"src": "archive",
+"s": 0.244,
+"weak": true
+},
+{
+"f": "7f82484f382d.webp",
+"src": "archive",
+"s": 0.24,
+"weak": true
+}
+]
+},
+"ac units": {
+"prompt": "air conditioner units on a building facade",
+"group": "facade",
+"strong": 0,
+"bysrc": {},
+"items": [
+{
+"f": "9cdaea4bd8ac.webp",
+"src": "halfworld\u00b7butterfly",
+"s": 0.241,
+"weak": true
+},
+{
+"f": "5daaff3b9c97.webp",
+"src": "halfworld\u00b7butterfly",
+"s": 0.229,
+"weak": true
+},
+{
+"f": "ed186f3331c2.webp",
+"src": "generated",
+"s": 0.22,
+"weak": true
+},
+{
+"f": "14fde1b2c00c.webp",
+"src": "halfworld\u00b7butterfly",
+"s": 0.214,
+"weak": true
+},
+{
+"f": "7e2bf3cfddb1.webp",
+"src": "halfworld\u00b7butterfly",
+"s": 0.213,
+"weak": true
+},
+{
+"f": "29b3799887db.webp",
+"src": "archive",
+"s": 0.259,
+"weak": true
+},
+{
+"f": "d9073a5c46ad.webp",
+"src": "archive",
+"s": 0.258,
+"weak": true
+},
+{
+"f": "e5eab4e4a4cf.webp",
+"src": "archive",
+"s": 0.256,
+"weak": true
+},
+{
+"f": "f79cd77d138c.webp",
+"src": "archive",
+"s": 0.256,
+"weak": true
+},
+{
+"f": "e10577aef561.webp",
+"src": "archive",
+"s": 0.252,
+"weak": true
+},
+{
+"f": "d62bdf4b5fe6.webp",
+"src": "archive",
+"s": 0.251,
+"weak": true
+},
+{
+"f": "8af0c3a417c6.webp",
+"src": "archive",
+"s": 0.246,
+"weak": true
+}
+]
+},
+"shutters": {
+"prompt": "rolled down metal shop shutters with graffiti",
+"group": "facade",
+"strong": 0,
+"bysrc": {},
+"items": [
+{
+"f": "c09e4d98851b.webp",
+"src": "generated",
+"s": 0.233,
+"weak": true
+},
+{
+"f": "f52015b8b9b6.webp",
+"src": "generated",
+"s": 0.227,
+"weak": true
+},
+{
+"f": "a2768ab31c4e.webp",
+"src": "generated",
+"s": 0.218,
+"weak": true
+},
+{
+"f": "425ce38e28dd.webp",
+"src": "archive",
+"s": 0.281,
+"weak": true
+},
+{
+"f": "2d0c426e9beb.webp",
+"src": "archive",
+"s": 0.268,
+"weak": true
+},
+{
+"f": "32901bb52cdb.webp",
+"src": "archive",
+"s": 0.268,
+"weak": true
+},
+{
+"f": "dc3cefb5e096.webp",
+"src": "archive",
+"s": 0.254,
+"weak": true
+},
+{
+"f": "d2c04a61a464.webp",
+"src": "archive",
+"s": 0.253,
+"weak": true
+},
+{
+"f": "6f8a5028a2c3.webp",
+"src": "archive",
+"s": 0.253,
+"weak": true
+},
+{
+"f": "80a07366fdb7.webp",
+"src": "archive",
+"s": 0.253,
+"weak": true
+},
+{
+"f": "78e09f47db5c.webp",
+"src": "archive",
+"s": 0.252,
+"weak": true
+},
+{
+"f": "bb22e3856984.webp",
+"src": "archive",
+"s": 0.246,
+"weak": true
+}
+]
+},
+"peeling paint": {
+"prompt": "peeling paint on an old wall",
+"group": "surface",
+"strong": 0,
+"bysrc": {},
+"items": [
+{
+"f": "7d4a4c35076b.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.238,
+"weak": true
+},
+{
+"f": "b2f5575e7314.webp",
+"src": "generated",
+"s": 0.236,
+"weak": true
+},
+{
+"f": "4efd1c34d96c.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.233,
+"weak": true
+},
+{
+"f": "0d0a63d429d7.webp",
+"src": "generated",
+"s": 0.227,
+"weak": true
+},
+{
+"f": "121b7fc21807.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.222,
+"weak": true
+},
+{
+"f": "d3674cc1911f.webp",
+"src": "archive",
+"s": 0.267,
+"weak": true
+},
+{
+"f": "992e4a5d2b92.webp",
+"src": "archive",
+"s": 0.263,
+"weak": true
+},
+{
+"f": "6acc8e7ed3b6.webp",
+"src": "archive",
+"s": 0.26,
+"weak": true
+},
+{
+"f": "260d4f9caa4a.webp",
+"src": "archive",
+"s": 0.259,
+"weak": true
+},
+{
+"f": "df1ddde4a032.webp",
+"src": "archive",
+"s": 0.258,
+"weak": true
+},
+{
+"f": "b5ad6dcf340e.webp",
+"src": "archive",
+"s": 0.255,
+"weak": true
+},
+{
+"f": "74e038010779.webp",
+"src": "archive",
+"s": 0.254,
+"weak": true
+}
+]
+},
+"brick": {
+"prompt": "weathered red brick wall",
+"group": "surface",
+"strong": 0,
+"bysrc": {},
+"items": [
+{
+"f": "49e52354f600.webp",
+"src": "generated",
+"s": 0.269,
+"weak": true
+},
+{
+"f": "252a1958ceb7.webp",
+"src": "generated",
+"s": 0.258,
+"weak": true
+},
+{
+"f": "1ac97a0a10f8.webp",
+"src": "generated",
+"s": 0.211,
+"weak": true
+},
+{
+"f": "0d0a63d429d7.webp",
+"src": "generated",
+"s": 0.205,
+"weak": true
+},
+{
+"f": "38378a093d7e.webp",
+"src": "generated",
+"s": 0.204,
+"weak": true
+},
+{
+"f": "df76a1216e90.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.2,
+"weak": true
+},
+{
+"f": "be3841e6e916.webp",
+"src": "halfworld\u00b7butterfly",
+"s": 0.197,
+"weak": true
+},
+{
+"f": "8042a6f837dd.webp",
+"src": "archive",
+"s": 0.243,
+"weak": true
+},
+{
+"f": "e59f11d25d9c.webp",
+"src": "archive",
+"s": 0.243,
+"weak": true
+},
+{
+"f": "af561d096952.webp",
+"src": "other",
+"s": 0.23,
+"weak": true
+},
+{
+"f": "f7e7ad1a3e13.webp",
+"src": "archive",
+"s": 0.229,
+"weak": true
+},
+{
+"f": "f3160b806de1.webp",
+"src": "other",
+"s": 0.224,
+"weak": true
+}
+]
+},
+"stucco": {
+"prompt": "cracked pastel stucco wall",
+"group": "surface",
+"strong": 3,
+"bysrc": {
+"archive": 3
+},
+"items": [
+{
+"f": "ecbfce9ab4ea.webp",
+"src": "archive",
+"s": 0.279,
+"weak": false
+},
+{
+"f": "8320cfb0536e.webp",
+"src": "archive",
+"s": 0.273,
+"weak": false
+},
+{
+"f": "884e7971a4a2.webp",
+"src": "archive",
+"s": 0.271,
+"weak": false
+},
+{
+"f": "7d4a4c35076b.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.266,
+"weak": true
+},
+{
+"f": "5a15026dc984.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.265,
+"weak": true
+},
+{
+"f": "96bb3d8ded37.webp",
+"src": "generated",
+"s": 0.238,
+"weak": true
+},
+{
+"f": "b2f5575e7314.webp",
+"src": "generated",
+"s": 0.231,
+"weak": true
+},
+{
+"f": "ef15e0315eb3.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.23,
+"weak": true
+},
+{
+"f": "261ee53def61.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.226,
+"weak": true
+},
+{
+"f": "28726588a134.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.216,
+"weak": true
+},
+{
+"f": "3fbc9d55a555.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.215,
+"weak": true
+},
+{
+"f": "d3674cc1911f.webp",
+"src": "archive",
+"s": 0.269,
+"weak": true
+}
+]
+},
+"corrugated": {
+"prompt": "rusty corrugated metal sheet",
+"group": "surface",
+"strong": 1,
+"bysrc": {
+"archive": 1
+},
+"items": [
+{
+"f": "8042a6f837dd.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "f52015b8b9b6.webp",
+"src": "generated",
+"s": 0.234,
+"weak": true
+},
+{
+"f": "fe91b54f8bc4.webp",
+"src": "archive",
+"s": 0.271,
+"weak": true
+},
+{
+"f": "e98ca1a14ab5.webp",
+"src": "archive",
+"s": 0.27,
+"weak": true
+},
+{
+"f": "045a653adce8.webp",
+"src": "archive",
+"s": 0.266,
+"weak": true
+},
+{
+"f": "4023035796ed.webp",
+"src": "archive",
+"s": 0.264,
+"weak": true
+},
+{
+"f": "5c860c190b06.webp",
+"src": "archive",
+"s": 0.264,
+"weak": true
+},
+{
+"f": "a1202f43a8b5.webp",
+"src": "archive",
+"s": 0.259,
+"weak": true
+},
+{
+"f": "07b3ebef8970.webp",
+"src": "archive",
+"s": 0.258,
+"weak": true
+},
+{
+"f": "4c911d8d2255.webp",
+"src": "archive",
+"s": 0.257,
+"weak": true
+},
+{
+"f": "7e6dbe6d6f50.webp",
+"src": "archive",
+"s": 0.257,
+"weak": true
+},
+{
+"f": "5fbe45801219.webp",
+"src": "archive",
+"s": 0.254,
+"weak": true
+}
+]
+},
+"rust": {
+"prompt": "rusted steel surface with streaks",
+"group": "surface",
+"strong": 5,
+"bysrc": {
+"archive": 5
+},
+"items": [
+{
+"f": "fe91b54f8bc4.webp",
+"src": "archive",
+"s": 0.295,
+"weak": false
+},
+{
+"f": "dfd56a8f4634.webp",
+"src": "archive",
+"s": 0.287,
+"weak": false
+},
+{
+"f": "fd090328bebd.webp",
+"src": "archive",
+"s": 0.275,
+"weak": false
+},
+{
+"f": "ed627d1e1e58.webp",
+"src": "archive",
+"s": 0.273,
+"weak": false
+},
+{
+"f": "fb95d42d4076.webp",
+"src": "archive",
+"s": 0.272,
+"weak": false
+},
+{
+"f": "2fa36422bc2a.webp",
+"src": "generated",
+"s": 0.26,
+"weak": true
+},
+{
+"f": "1b84bd4d3f2a.webp",
+"src": "generated",
+"s": 0.259,
+"weak": true
+},
+{
+"f": "491f3b26f0cb.webp",
+"src": "generated",
+"s": 0.25,
+"weak": true
+},
+{
+"f": "f52015b8b9b6.webp",
+"src": "generated",
+"s": 0.246,
+"weak": true
+},
+{
+"f": "dd0e8cb0ab6a.webp",
+"src": "generated",
+"s": 0.235,
+"weak": true
+},
+{
+"f": "e733f6905fd2.webp",
+"src": "archive",
+"s": 0.275,
+"weak": true
+},
+{
+"f": "e98ca1a14ab5.webp",
+"src": "archive",
+"s": 0.268,
+"weak": true
+}
+]
+},
+"tile": {
+"prompt": "old cracked ceramic wall tiles",
+"group": "surface",
+"strong": 3,
+"bysrc": {
+"archive": 3
+},
+"items": [
+{
+"f": "83c004a2fab7.webp",
+"src": "archive",
+"s": 0.289,
+"weak": false
+},
+{
+"f": "5663716ed0da.webp",
+"src": "archive",
+"s": 0.273,
+"weak": false
+},
+{
+"f": "1e738356de97.webp",
+"src": "archive",
+"s": 0.271,
+"weak": false
+},
+{
+"f": "042935334aa9.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.269,
+"weak": true
+},
+{
+"f": "a657e7a52542.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.269,
+"weak": true
+},
+{
+"f": "aa803c7d4bd0.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.267,
+"weak": true
+},
+{
+"f": "f72fbb7a3c51.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.267,
+"weak": true
+},
+{
+"f": "a42a712801b3.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.26,
+"weak": true
+},
+{
+"f": "406b0c49f164.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.249,
+"weak": true
+},
+{
+"f": "5a15026dc984.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.248,
+"weak": true
+},
+{
+"f": "61e8d917fbae.webp",
+"src": "halfworld\u00b7butterfly",
+"s": 0.239,
+"weak": true
+},
+{
+"f": "b2f5575e7314.webp",
+"src": "generated",
+"s": 0.238,
+"weak": true
+}
+]
+},
+"concrete": {
+"prompt": "stained raw concrete wall",
+"group": "surface",
+"strong": 2,
+"bysrc": {
+"archive": 2
+},
+"items": [
+{
+"f": "992e4a5d2b92.webp",
+"src": "archive",
+"s": 0.283,
+"weak": false
+},
+{
+"f": "e013d7058c37.webp",
+"src": "archive",
+"s": 0.271,
+"weak": false
+},
+{
+"f": "83896a42cda8.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.246,
+"weak": true
+},
+{
+"f": "38378a093d7e.webp",
+"src": "generated",
+"s": 0.244,
+"weak": true
+},
+{
+"f": "49e52354f600.webp",
+"src": "generated",
+"s": 0.242,
+"weak": true
+},
+{
+"f": "b2f5575e7314.webp",
+"src": "generated",
+"s": 0.237,
+"weak": true
+},
+{
+"f": "e889244814ee.webp",
+"src": "generated",
+"s": 0.235,
+"weak": true
+},
+{
+"f": "83c004a2fab7.webp",
+"src": "archive",
+"s": 0.266,
+"weak": true
+},
+{
+"f": "64c05e69926b.webp",
+"src": "archive",
+"s": 0.262,
+"weak": true
+},
+{
+"f": "ed627d1e1e58.webp",
+"src": "archive",
+"s": 0.262,
+"weak": true
+},
+{
+"f": "5663716ed0da.webp",
+"src": "archive",
+"s": 0.261,
+"weak": true
+},
+{
+"f": "0957aa842b2c.webp",
+"src": "archive",
+"s": 0.26,
+"weak": true
+}
+]
+},
+"asphalt": {
+"prompt": "cracked patched asphalt road surface",
+"group": "surface",
+"strong": 4,
+"bysrc": {
+"archive": 4
+},
+"items": [
+{
+"f": "28411a3d237b.webp",
+"src": "archive",
+"s": 0.296,
+"weak": false
+},
+{
+"f": "658dee152d90.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "ee43954867f7.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "11c1e6c0b835.webp",
+"src": "archive",
+"s": 0.271,
+"weak": false
+},
+{
+"f": "33b1e9366468.webp",
+"src": "generated",
+"s": 0.257,
+"weak": true
+},
+{
+"f": "1bb3bbaea4b6.webp",
+"src": "generated",
+"s": 0.232,
+"weak": true
+},
+{
+"f": "edfac845f139.webp",
+"src": "archive",
+"s": 0.281,
+"weak": true
+},
+{
+"f": "5663716ed0da.webp",
+"src": "archive",
+"s": 0.272,
+"weak": true
+},
+{
+"f": "d1ec183dd9a1.webp",
+"src": "archive",
+"s": 0.268,
+"weak": true
+},
+{
+"f": "e86612127c48.webp",
+"src": "archive",
+"s": 0.268,
+"weak": true
+},
+{
+"f": "1d77a84ffe13.webp",
+"src": "archive",
+"s": 0.267,
+"weak": true
+},
+{
+"f": "201601117e08.webp",
+"src": "archive",
+"s": 0.266,
+"weak": true
+}
+]
+},
+"wood": {
+"prompt": "weathered wooden planks",
+"group": "surface",
+"strong": 2,
+"bysrc": {
+"archive": 2
+},
+"items": [
+{
+"f": "171b4e6cd7d6.webp",
+"src": "archive",
+"s": 0.275,
+"weak": false
+},
+{
+"f": "5e0ffee784b0.webp",
+"src": "archive",
+"s": 0.274,
+"weak": false
+},
+{
+"f": "8738dd94ce5e.webp",
+"src": "generated",
+"s": 0.23,
+"weak": true
+},
+{
+"f": "e889244814ee.webp",
+"src": "generated",
+"s": 0.228,
+"weak": true
+},
+{
+"f": "0d0a63d429d7.webp",
+"src": "generated",
+"s": 0.219,
+"weak": true
+},
+{
+"f": "ddc8f462b055.webp",
+"src": "archive",
+"s": 0.268,
+"weak": true
+},
+{
+"f": "3d7fbd2815e4.webp",
+"src": "archive",
+"s": 0.261,
+"weak": true
+},
+{
+"f": "a6b1465f845d.webp",
+"src": "archive",
+"s": 0.252,
+"weak": true
+},
+{
+"f": "79572118911d.webp",
+"src": "archive",
+"s": 0.25,
+"weak": true
+},
+{
+"f": "07b3ebef8970.webp",
+"src": "archive",
+"s": 0.25,
+"weak": true
+},
+{
+"f": "260d4f9caa4a.webp",
+"src": "archive",
+"s": 0.248,
+"weak": true
+},
+{
+"f": "64c05e69926b.webp",
+"src": "archive",
+"s": 0.247,
+"weak": true
+}
+]
+},
+"marble": {
+"prompt": "worn marble steps",
+"group": "surface",
+"strong": 3,
+"bysrc": {
+"archive": 3
+},
+"items": [
+{
+"f": "5460bba9a8f4.webp",
+"src": "archive",
+"s": 0.281,
+"weak": false
+},
+{
+"f": "83ea3845a29d.webp",
+"src": "archive",
+"s": 0.277,
+"weak": false
+},
+{
+"f": "4beacb80d8e8.webp",
+"src": "archive",
+"s": 0.275,
+"weak": false
+},
+{
+"f": "82f45973321b.webp",
+"src": "generated",
+"s": 0.267,
+"weak": true
+},
+{
+"f": "49e52354f600.webp",
+"src": "generated",
+"s": 0.255,
+"weak": true
+},
+{
+"f": "4a7df550880a.webp",
+"src": "generated",
+"s": 0.245,
+"weak": true
+},
+{
+"f": "720247259c13.webp",
+"src": "generated",
+"s": 0.241,
+"weak": true
+},
+{
+"f": "a6b1465f845d.webp",
+"src": "archive",
+"s": 0.275,
+"weak": true
+},
+{
+"f": "d634895937db.webp",
+"src": "archive",
+"s": 0.269,
+"weak": true
+},
+{
+"f": "e84d92032f88.webp",
+"src": "archive",
+"s": 0.269,
+"weak": true
+},
+{
+"f": "8e073455d80d.webp",
+"src": "archive",
+"s": 0.268,
+"weak": true
+},
+{
+"f": "164d4123edd5.webp",
+"src": "film",
+"s": 0.267,
+"weak": true
+}
+]
+},
+"graffiti": {
+"prompt": "a wall covered in graffiti",
+"group": "surface",
+"strong": 4,
+"bysrc": {
+"other": 1,
+"archive": 3
+},
+"items": [
+{
+"f": "edf01c29b021.webp",
+"src": "other",
+"s": 0.299,
+"weak": false
+},
+{
+"f": "78e09f47db5c.webp",
+"src": "archive",
+"s": 0.293,
+"weak": false
+},
+{
+"f": "df1ddde4a032.webp",
+"src": "archive",
+"s": 0.277,
+"weak": false
+},
+{
+"f": "c97f6f861d53.webp",
+"src": "archive",
+"s": 0.275,
+"weak": false
+},
+{
+"f": "7b56f0749204.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.266,
+"weak": true
+},
+{
+"f": "401bac0bafcc.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.266,
+"weak": true
+},
+{
+"f": "a2768ab31c4e.webp",
+"src": "generated",
+"s": 0.265,
+"weak": true
+},
+{
+"f": "637baa7014e2.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.259,
+"weak": true
+},
+{
+"f": "bad299046876.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.259,
+"weak": true
+},
+{
+"f": "aa95439bddc2.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.258,
+"weak": true
+},
+{
+"f": "42ed767ed815.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.257,
+"weak": true
+},
+{
+"f": "18d1a10a76e5.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.257,
+"weak": true
+}
+]
+},
+"moss": {
+"prompt": "moss and damp stains on old stone",
+"group": "surface",
+"strong": 9,
+"bysrc": {
+"archive": 9
+},
+"items": [
+{
+"f": "2b96867f2099.webp",
+"src": "archive",
+"s": 0.316,
+"weak": false
+},
+{
+"f": "90d0dd71b0b7.webp",
+"src": "archive",
+"s": 0.305,
+"weak": false
+},
+{
+"f": "11f5a58e616b.webp",
+"src": "archive",
+"s": 0.297,
+"weak": false
+},
+{
+"f": "078a63c49563.webp",
+"src": "archive",
+"s": 0.279,
+"weak": false
+},
+{
+"f": "8b803df3c138.webp",
+"src": "archive",
+"s": 0.277,
+"weak": false
+},
+{
+"f": "c0d346ae866c.webp",
+"src": "archive",
+"s": 0.277,
+"weak": false
+},
+{
+"f": "6acc8e7ed3b6.webp",
+"src": "archive",
+"s": 0.277,
+"weak": false
+},
+{
+"f": "01bf08c1ad51.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "d68f9563e642.webp",
+"src": "archive",
+"s": 0.274,
+"weak": false
+}
+]
+},
+"salt line": {
+"prompt": "a white salt tide line stain on a sea wall",
+"group": "surface",
+"strong": 48,
+"bysrc": {
+"archive": 43,
+"markov\u00b7butterfly": 5
+},
+"items": [
+{
+"f": "7d4a4c35076b.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.285,
+"weak": false
+},
+{
+"f": "3b56f1e5b84b.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.275,
+"weak": false
+},
+{
+"f": "003d91425f72.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.275,
+"weak": false
+},
+{
+"f": "8d1c03e0b7f4.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.271,
+"weak": false
+},
+{
+"f": "6e0a081274a3.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.271,
+"weak": false
+},
+{
+"f": "7fda9169e9f0.webp",
+"src": "archive",
+"s": 0.31,
+"weak": false
+},
+{
+"f": "23e7fe8a00e0.webp",
+"src": "archive",
+"s": 0.305,
+"weak": false
+},
+{
+"f": "4505b42994fe.webp",
+"src": "archive",
+"s": 0.304,
+"weak": false
+},
+{
+"f": "887f5c2b0254.webp",
+"src": "archive",
+"s": 0.295,
+"weak": false
+},
+{
+"f": "4526fe494727.webp",
+"src": "archive",
+"s": 0.294,
+"weak": false
+},
+{
+"f": "aab6351dbca9.webp",
+"src": "archive",
+"s": 0.29,
+"weak": false
+},
+{
+"f": "1a4f884fe245.webp",
+"src": "archive",
+"s": 0.29,
+"weak": false
+}
+]
+},
+"terrazzo": {
+"prompt": "a terrazzo floor",
+"group": "surface",
+"strong": 4,
+"bysrc": {
+"archive": 3,
+"generated": 1
+},
+"items": [
+{
+"f": "b5aec162a0b9.webp",
+"src": "generated",
+"s": 0.275,
+"weak": false
+},
+{
+"f": "0e507f9a17f1.webp",
+"src": "archive",
+"s": 0.299,
+"weak": false
+},
+{
+"f": "7ee9a16e5a75.webp",
+"src": "archive",
+"s": 0.299,
+"weak": false
+},
+{
+"f": "ae317039ed89.webp",
+"src": "archive",
+"s": 0.279,
+"weak": false
+},
+{
+"f": "6e83ff78d62f.webp",
+"src": "generated",
+"s": 0.3,
+"weak": true
+},
+{
+"f": "618c25a96c8a.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.249,
+"weak": true
+},
+{
+"f": "b060fb87b894.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.249,
+"weak": true
+},
+{
+"f": "f721332443c9.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.249,
+"weak": true
+},
+{
+"f": "f99822df24fa.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.248,
+"weak": true
+},
+{
+"f": "faa572043309.webp",
+"src": "generated",
+"s": 0.247,
+"weak": true
+},
+{
+"f": "29f62f139a2a.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.245,
+"weak": true
+},
+{
+"f": "fc42cc998628.webp",
+"src": "generated",
+"s": 0.241,
+"weak": true
+}
+]
+},
+"market": {
+"prompt": "a street market stall with tarps",
+"group": "life",
+"strong": 6,
+"bysrc": {
+"archive": 6
+},
+"items": [
+{
+"f": "2d89f5052407.webp",
+"src": "archive",
+"s": 0.295,
+"weak": false
+},
+{
+"f": "889596b9357d.webp",
+"src": "archive",
+"s": 0.284,
+"weak": false
+},
+{
+"f": "c56e31e1b2d4.webp",
+"src": "archive",
+"s": 0.278,
+"weak": false
+},
+{
+"f": "73c2d2238a3a.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "0da42e71e57d.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "3d3073145e45.webp",
+"src": "archive",
+"s": 0.274,
+"weak": false
+}
+]
+},
+"corner store": {
+"prompt": "a corner store at night with lit windows",
+"group": "life",
+"strong": 10,
+"bysrc": {
+"generated": 5,
+"archive": 4,
+"other": 1
+},
+"items": [
+{
+"f": "a31101d807ac.webp",
+"src": "generated",
+"s": 0.354,
+"weak": false
+},
+{
+"f": "7df75f474a95.webp",
+"src": "generated",
+"s": 0.348,
+"weak": false
+},
+{
+"f": "e6f74092a699.webp",
+"src": "generated",
+"s": 0.318,
+"weak": false
+},
+{
+"f": "232ed23ab261.webp",
+"src": "generated",
+"s": 0.317,
+"weak": false
+},
+{
+"f": "ed186f3331c2.webp",
+"src": "generated",
+"s": 0.304,
+"weak": false
+},
+{
+"f": "3c87ffcf9c67.webp",
+"src": "archive",
+"s": 0.278,
+"weak": false
+},
+{
+"f": "159424910353.webp",
+"src": "archive",
+"s": 0.275,
+"weak": false
+},
+{
+"f": "0f3080bf0e13.webp",
+"src": "archive",
+"s": 0.274,
+"weak": false
+},
+{
+"f": "3b3583d93837.webp",
+"src": "archive",
+"s": 0.273,
+"weak": false
+},
+{
+"f": "bdb44299e598.webp",
+"src": "other",
+"s": 0.271,
+"weak": false
+}
+]
+},
+"cafe table": {
+"prompt": "a cafe table on a sidewalk",
+"group": "life",
+"strong": 0,
+"bysrc": {},
+"items": [
+{
+"f": "0ebb80bab185.webp",
+"src": "generated",
+"s": 0.254,
+"weak": true
+},
+{
+"f": "52b894738e82.webp",
+"src": "generated",
+"s": 0.238,
+"weak": true
+},
+{
+"f": "82f45973321b.webp",
+"src": "generated",
+"s": 0.235,
+"weak": true
+},
+{
+"f": "98530e7b8af5.webp",
+"src": "generated",
+"s": 0.226,
+"weak": true
+},
+{
+"f": "1eb309572deb.webp",
+"src": "generated",
+"s": 0.218,
+"weak": true
+},
+{
+"f": "715422403899.webp",
+"src": "generated",
+"s": 0.216,
+"weak": true
+},
+{
+"f": "b600eac97183.webp",
+"src": "generated",
+"s": 0.213,
+"weak": true
+},
+{
+"f": "ffda70549ffc.webp",
+"src": "generated",
+"s": 0.213,
+"weak": true
+},
+{
+"f": "c40931c17ceb.webp",
+"src": "generated",
+"s": 0.211,
+"weak": true
+},
+{
+"f": "48707d3d8077.webp",
+"src": "generated",
+"s": 0.206,
+"weak": true
+},
+{
+"f": "d2e9039e9dfd.webp",
+"src": "generated",
+"s": 0.206,
+"weak": true
+},
+{
+"f": "b490002fac47.webp",
+"src": "archive",
+"s": 0.259,
+"weak": true
+}
+]
+},
+"bench": {
+"prompt": "a bench by the water",
+"group": "life",
+"strong": 5,
+"bysrc": {
+"archive": 5
+},
+"items": [
+{
+"f": "2e56103c34b6.webp",
+"src": "archive",
+"s": 0.287,
+"weak": false
+},
+{
+"f": "828abd370c75.webp",
+"src": "archive",
+"s": 0.277,
+"weak": false
+},
+{
+"f": "18760f204c7a.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "fcc5d25f975d.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "0f6a0bdbddbb.webp",
+"src": "archive",
+"s": 0.271,
+"weak": false
+},
+{
+"f": "d9bd020182ef.webp",
+"src": "generated",
+"s": 0.227,
+"weak": true
+},
+{
+"f": "6dffc315cd73.webp",
+"src": "archive",
+"s": 0.274,
+"weak": true
+},
+{
+"f": "8bdae75f0ce5.webp",
+"src": "archive",
+"s": 0.264,
+"weak": true
+},
+{
+"f": "c133a9c68471.webp",
+"src": "archive",
+"s": 0.263,
+"weak": true
+},
+{
+"f": "3012d13c5a74.webp",
+"src": "archive",
+"s": 0.263,
+"weak": true
+},
+{
+"f": "f6ed1710c8ce.webp",
+"src": "archive",
+"s": 0.262,
+"weak": true
+},
+{
+"f": "cfb867185c88.webp",
+"src": "archive",
+"s": 0.261,
+"weak": true
+}
+]
+},
+"bins": {
+"prompt": "overflowing trash bins on a street",
+"group": "life",
+"strong": 2,
+"bysrc": {
+"archive": 2
+},
+"items": [
+{
+"f": "118f00262473.webp",
+"src": "archive",
+"s": 0.281,
+"weak": false
+},
+{
+"f": "7e28442a301c.webp",
+"src": "archive",
+"s": 0.274,
+"weak": false
+},
+{
+"f": "cb373705d016.webp",
+"src": "generated",
+"s": 0.233,
+"weak": true
+},
+{
+"f": "ebb5ae01d1dc.webp",
+"src": "generated",
+"s": 0.228,
+"weak": true
+},
+{
+"f": "c40931c17ceb.webp",
+"src": "generated",
+"s": 0.206,
+"weak": true
+},
+{
+"f": "ebe15855ad55.webp",
+"src": "archive",
+"s": 0.268,
+"weak": true
+},
+{
+"f": "cc491472abe9.webp",
+"src": "archive",
+"s": 0.264,
+"weak": true
+},
+{
+"f": "fb924c41c0e6.webp",
+"src": "archive",
+"s": 0.264,
+"weak": true
+},
+{
+"f": "ddfac88a9bcc.webp",
+"src": "archive",
+"s": 0.261,
+"weak": true
+},
+{
+"f": "7ca63cf8cc11.webp",
+"src": "archive",
+"s": 0.261,
+"weak": true
+},
+{
+"f": "2471de0145f0.webp",
+"src": "archive",
+"s": 0.256,
+"weak": true
+},
+{
+"f": "34586634d74f.webp",
+"src": "archive",
+"s": 0.248,
+"weak": true
+}
+]
+},
+"parked car": {
+"prompt": "an old car parked on a quiet street",
+"group": "life",
+"strong": 15,
+"bysrc": {
+"archive": 15
+},
+"items": [
+{
+"f": "c435789671e8.webp",
+"src": "archive",
+"s": 0.318,
+"weak": false
+},
+{
+"f": "1e0cc699ad31.webp",
+"src": "archive",
+"s": 0.314,
+"weak": false
+},
+{
+"f": "a9da410182cc.webp",
+"src": "archive",
+"s": 0.301,
+"weak": false
+},
+{
+"f": "8c38df4f3010.webp",
+"src": "archive",
+"s": 0.299,
+"weak": false
+},
+{
+"f": "631badd3a05b.webp",
+"src": "archive",
+"s": 0.289,
+"weak": false
+},
+{
+"f": "a9205fdf7e83.webp",
+"src": "archive",
+"s": 0.286,
+"weak": false
+},
+{
+"f": "c37dc99ee2d3.webp",
+"src": "archive",
+"s": 0.281,
+"weak": false
+},
+{
+"f": "acd684d45244.webp",
+"src": "archive",
+"s": 0.279,
+"weak": false
+},
+{
+"f": "f93e9a0e7416.webp",
+"src": "archive",
+"s": 0.278,
+"weak": false
+},
+{
+"f": "fa40c45c6184.webp",
+"src": "archive",
+"s": 0.275,
+"weak": false
+},
+{
+"f": "72b997589f93.webp",
+"src": "archive",
+"s": 0.274,
+"weak": false
+},
+{
+"f": "ad40f9f469d7.webp",
+"src": "archive",
+"s": 0.273,
+"weak": false
+}
+]
+},
+"scaffolding": {
+"prompt": "scaffolding and tarps on a building",
+"group": "change",
+"strong": 0,
+"bysrc": {},
+"items": [
+{
+"f": "616f883d6fc0.webp",
+"src": "archive",
+"s": 0.27,
+"weak": true
+},
+{
+"f": "25bd7269a7f8.webp",
+"src": "archive",
+"s": 0.261,
+"weak": true
+},
+{
+"f": "ba5088362e69.webp",
+"src": "archive",
+"s": 0.26,
+"weak": true
+},
+{
+"f": "56e75996f088.webp",
+"src": "archive",
+"s": 0.258,
+"weak": true
+},
+{
+"f": "dc7ce9bdc31a.webp",
+"src": "archive",
+"s": 0.258,
+"weak": true
+},
+{
+"f": "90776ac03339.webp",
+"src": "archive",
+"s": 0.258,
+"weak": true
+},
+{
+"f": "8cb3e04f0763.webp",
+"src": "archive",
+"s": 0.257,
+"weak": true
+},
+{
+"f": "3dd01dcd23ba.webp",
+"src": "archive",
+"s": 0.255,
+"weak": true
+},
+{
+"f": "323d99ec6837.webp",
+"src": "archive",
+"s": 0.254,
+"weak": true
+},
+{
+"f": "2933dc746cc8.webp",
+"src": "archive",
+"s": 0.254,
+"weak": true
+},
+{
+"f": "47bcb9806514.webp",
+"src": "archive",
+"s": 0.254,
+"weak": true
+},
+{
+"f": "02d65b641256.webp",
+"src": "archive",
+"s": 0.252,
+"weak": true
+}
+]
+},
+"boarded window": {
+"prompt": "a boarded up window",
+"group": "change",
+"strong": 13,
+"bysrc": {
+"archive": 13
+},
+"items": [
+{
+"f": "109ea4d455a6.webp",
+"src": "archive",
+"s": 0.304,
+"weak": false
+},
+{
+"f": "431fe6943e8b.webp",
+"src": "archive",
+"s": 0.291,
+"weak": false
+},
+{
+"f": "65257fc2e558.webp",
+"src": "archive",
+"s": 0.289,
+"weak": false
+},
+{
+"f": "425ce38e28dd.webp",
+"src": "archive",
+"s": 0.289,
+"weak": false
+},
+{
+"f": "5ade6dd7c296.webp",
+"src": "archive",
+"s": 0.288,
+"weak": false
+},
+{
+"f": "4b482cb166c3.webp",
+"src": "archive",
+"s": 0.288,
+"weak": false
+},
+{
+"f": "c9f31d010867.webp",
+"src": "archive",
+"s": 0.287,
+"weak": false
+},
+{
+"f": "618498cfb69f.webp",
+"src": "archive",
+"s": 0.277,
+"weak": false
+},
+{
+"f": "baa0b1f2511f.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "806647e73fec.webp",
+"src": "archive",
+"s": 0.275,
+"weak": false
+},
+{
+"f": "826e118b8925.webp",
+"src": "archive",
+"s": 0.275,
+"weak": false
+},
+{
+"f": "2d0c426e9beb.webp",
+"src": "archive",
+"s": 0.27,
+"weak": false
+}
+]
+},
+"ruin interior": {
+"prompt": "the inside of a ruined building with sky through the roof",
+"group": "change",
+"strong": 17,
+"bysrc": {
+"archive": 12,
+"generated": 3,
+"markov\u00b7butterfly": 2
+},
+"items": [
+{
+"f": "d20b2d03bef6.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.283,
+"weak": false
+},
+{
+"f": "7d2a2feb064a.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.283,
+"weak": false
+},
+{
+"f": "619b39a50159.webp",
+"src": "generated",
+"s": 0.281,
+"weak": false
+},
+{
+"f": "e41563f69288.webp",
+"src": "generated",
+"s": 0.279,
+"weak": false
+},
+{
+"f": "4246cdbb0b28.webp",
+"src": "generated",
+"s": 0.27,
+"weak": false
+},
+{
+"f": "8dca66ec95c5.webp",
+"src": "archive",
+"s": 0.305,
+"weak": false
+},
+{
+"f": "1a82d06b1991.webp",
+"src": "archive",
+"s": 0.303,
+"weak": false
+},
+{
+"f": "e77aba3bcaf5.webp",
+"src": "archive",
+"s": 0.301,
+"weak": false
+},
+{
+"f": "e1f82089c153.webp",
+"src": "archive",
+"s": 0.299,
+"weak": false
+},
+{
+"f": "d3b24a265b71.webp",
+"src": "archive",
+"s": 0.294,
+"weak": false
+},
+{
+"f": "be7bb7788cac.webp",
+"src": "archive",
+"s": 0.284,
+"weak": false
+},
+{
+"f": "9bab56d3f11d.webp",
+"src": "archive",
+"s": 0.283,
+"weak": false
+}
+]
+},
+"pier": {
+"prompt": "wooden pier pilings at low tide",
+"group": "water",
+"strong": 3,
+"bysrc": {
+"archive": 3
+},
+"items": [
+{
+"f": "fa450e355d71.webp",
+"src": "archive",
+"s": 0.28,
+"weak": false
+},
+{
+"f": "562dd09b65c0.webp",
+"src": "archive",
+"s": 0.277,
+"weak": false
+},
+{
+"f": "8f8cd16d1eda.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "3b56f1e5b84b.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.239,
+"weak": true
+},
+{
+"f": "003d91425f72.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.239,
+"weak": true
+},
+{
+"f": "6e0a081274a3.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.229,
+"weak": true
+},
+{
+"f": "8d1c03e0b7f4.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.229,
+"weak": true
+},
+{
+"f": "11bc1c763be1.webp",
+"src": "generated",
+"s": 0.222,
+"weak": true
+},
+{
+"f": "2cee6f1793bc.webp",
+"src": "generated",
+"s": 0.213,
+"weak": true
+},
+{
+"f": "6485ad5ea89b.webp",
+"src": "archive",
+"s": 0.265,
+"weak": true
+},
+{
+"f": "0339082e62a5.webp",
+"src": "archive",
+"s": 0.265,
+"weak": true
+},
+{
+"f": "f5315c850edc.webp",
+"src": "archive",
+"s": 0.258,
+"weak": true
+}
+]
+},
+"harbor": {
+"prompt": "a working harbor with cranes and containers",
+"group": "water",
+"strong": 8,
+"bysrc": {
+"archive": 8
+},
+"items": [
+{
+"f": "e5ee7e3e898e.webp",
+"src": "archive",
+"s": 0.288,
+"weak": false
+},
+{
+"f": "f5751700db57.webp",
+"src": "archive",
+"s": 0.288,
+"weak": false
+},
+{
+"f": "d214e314c29c.webp",
+"src": "archive",
+"s": 0.287,
+"weak": false
+},
+{
+"f": "93a9b5650c3c.webp",
+"src": "archive",
+"s": 0.276,
+"weak": false
+},
+{
+"f": "762fcf4e5c16.webp",
+"src": "archive",
+"s": 0.273,
+"weak": false
+},
+{
+"f": "b91f55824446.webp",
+"src": "archive",
+"s": 0.272,
+"weak": false
+},
+{
+"f": "66aec867e551.webp",
+"src": "archive",
+"s": 0.272,
+"weak": false
+},
+{
+"f": "32f4d68dd294.webp",
+"src": "archive",
+"s": 0.271,
+"weak": false
+}
+]
+},
+"flood": {
+"prompt": "a flooded street",
+"group": "water",
+"strong": 35,
+"bysrc": {
+"archive": 19,
+"other": 2,
+"generated": 3,
+"markov\u00b7butterfly": 4,
+"film": 7
+},
+"items": [
+{
+"f": "197fb12c9dea.webp",
+"src": "generated",
+"s": 0.291,
+"weak": false
+},
+{
+"f": "5cf7ed2a1734.webp",
+"src": "generated",
+"s": 0.291,
+"weak": false
+},
+{
+"f": "c694df0b4942.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.286,
+"weak": false
+},
+{
+"f": "b57f0bc67f31.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.286,
+"weak": false
+},
+{
+"f": "f9208c4579fe.webp",
+"src": "generated",
+"s": 0.28,
+"weak": false
+},
+{
+"f": "aff537ff5ba6.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.28,
+"weak": false
+},
+{
+"f": "03098a789f36.webp",
+"src": "markov\u00b7butterfly",
+"s": 0.271,
+"weak": false
+},
+{
+"f": "0a92c994f2f0.webp",
+"src": "other",
+"s": 0.305,
+"weak": false
+},
+{
+"f": "e97781d44463.webp",
+"src": "archive",
+"s": 0.304,
+"weak": false
+},
+{
+"f": "bafe93c94f13.webp",
+"src": "archive",
+"s": 0.304,
+"weak": false
+},
+{
+"f": "0578691eb3bc.webp",
+"src": "archive",
+"s": 0.304,
+"weak": false
+},
+{
+"f": "f386c9f4b195.webp",
+"src": "archive",
+"s": 0.297,
+"weak": false
+}
+]
+}
+}
