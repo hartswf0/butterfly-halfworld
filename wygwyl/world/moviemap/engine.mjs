@@ -3,7 +3,7 @@
 // (other eras, seasons, hours, weather, the QADAS-like abstractions and the ID buffer that turns a touch into a building).
 // A pose is (x, y, heading, view): the four views are front, right, back, left, 90° each, at a fixed eye height.
 import * as THREE from 'three';
-import {loadCity, sampler, makeTerrain, makeRoads, makeBuildings, makeTrees, makeStreetLife} from '../city3d/city.mjs';
+import {loadCity, sampler, makeTerrain, makeRoads, makeBuildings, makeTrees, makeStreetLife, setLibrary} from '../city3d/city.mjs';
 import {buildLandmark, tickClocks, MATS, NIGHTLIT} from '../city3d/landmarks.mjs';
 import {makeHeavens, makeSea} from '../city3d/heavens.mjs';
 import {makeLegible} from './legible.mjs';
@@ -33,7 +33,14 @@ export async function makeEngine({canvas, width, height, plan, base = '../city3d
   renderer.shadowMap.enabled = shadows; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(hfovToV(hfov, width / height), width / height, 0.5, 30000);
-  const U = {night: {value: 0}, era: {value: 5}, time: {value: 0}, wet: {value: 0}, snow: {value: 0}, season: {value: 0}};
+  const U = {night: {value: 0}, era: {value: 5}, time: {value: 0}, wet: {value: 0}, snow: {value: 0}, season: {value: 0},
+    pulseO: {value: new THREE.Vector2(-1e5, -1e5)}, pulseT: {value: 99},                  // city3d's resonance ring (never sent here)
+    matAtlas: {value: null}, matGrid: {value: new THREE.Vector2(8, 8)}, libFacade: {value: new THREE.Vector4()}, libRoad: {value: new THREE.Vector4()}};
+  // the material library city3d skins its walls and streets with (wygwyl/world/language/library.*), loaded the way city3d/app.mjs does
+  const LIB = await fetch(base + '../language/library.json').then(r => r.json());
+  await new Promise((ok, no) => { U.matAtlas.value = new THREE.TextureLoader().load(base + '../language/library.webp', ok, undefined, no); });
+  U.matAtlas.value.colorSpace = THREE.SRGBColorSpace; U.matAtlas.value.anisotropy = 8; U.matGrid.value.set(LIB.cols, LIB.rows);
+  { const L = setLibrary(LIB); U.libFacade.value.set(L['graffiti'], L['moss'], L['ceramic'], 0); U.libRoad.value.set(L['asphalt'], L['granite'], L['cobbles'], L['sidewalk']); }
 
   onStep(10, 'reading the worldtext');
   const C = await loadCity(base), S = sampler(C), meta = C.meta;
