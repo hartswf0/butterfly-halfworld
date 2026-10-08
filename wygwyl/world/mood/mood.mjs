@@ -7,7 +7,8 @@ import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
 import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
 import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
-import {PLACES, MOODS, soft} from './places.mjs';
+import {PLACES, MOODS, soft, loadLibrary} from './places.mjs';
+import {makeFolds} from './folds.mjs';
 
 const $ = id => document.getElementById(id), pad = n => String(n).padStart(3, '0');
 const MOBILE = matchMedia('(pointer: coarse)').matches || innerWidth < 720;
@@ -43,6 +44,7 @@ const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth / 2, innerHeight 
 
 // ——— the places ———
 state('loading');
+await loadLibrary('../language/').catch(e => console.warn('material library unavailable; the places stay untextured', e));
 const S = await fetch('../districts/scenes.json').then(r => r.json()).catch(() => null);
 const D = S ? Object.fromEntries(S.districts.map(d => [d.id, d])) : {};
 const title = n => (S?.script.find(c => c.num === n) || {}).title || '';
@@ -60,6 +62,10 @@ for (const P of PLACES) {
 }
 // the transitions between poems, as lines of small lights on the water from one place to the next
 const placeOf = {haze: 'catwalk', hive: 'needles', overseer: 'moon', bay: 'atrium', ascent: 'field', plaza: 'gate', naraka: 'market', ankhu: 'spire', commons: 'dish', arcade: 'canopy', cenotaph: 'viaduct', temple: 'temple', black: 'door'};
+// the folds: every reference stood up as a walk-in pop-up in its place (?mode=sets | folds | both)
+const MODE = new URLSearchParams(location.search).get('mode') || 'both';
+const FOLDS = S && MODE !== 'sets' ? await makeFolds(scene, PLACES, placeOf, Object.fromEntries(S.views.map(v => [v.n, v.d])), './').catch(e => { console.warn('folds unavailable', e); return null; }) : null;
+if (MODE === 'folds') for (const P of PLACES) P.group.visible = false;
 const byId = Object.fromEntries(PLACES.map(p => [p.id, p]));
 const paths = [];
 for (const t of S?.transitions || []) {
@@ -123,6 +129,8 @@ $('bAll').onclick = () => { stopTour(); setCompare(false); cur = -1; $('card').i
 addEventListener('keydown', e => { if (e.key === 'Escape') { if (cmpOn) setCompare(false); else stopTour(); } else if (e.key === 'ArrowRight') { stopTour(); go(cur + 1); } else if (e.key === 'ArrowLeft') { stopTour(); go(cur - 1); } });
 renderer.domElement.addEventListener('pointerdown', () => { if (fly) fly = null; stopTour(); });
 const intro = $('card').innerHTML;
+{ const NEXT = {both: 'sets', sets: 'folds', folds: 'both'}, NAME = {both: 'sets + folds', sets: 'sets only', folds: 'folds only'};
+  $('bMode').textContent = 'showing ' + NAME[MODE] + ' ↻'; $('bMode').onclick = () => { const q = new URLSearchParams(location.search); q.set('mode', NEXT[MODE]); location.search = q; }; }
 
 // the mood map: coloured fields where the places are, the transitions between them, where you are
 const mc = $('map'), mx = mc.getContext('2d');
@@ -162,3 +170,15 @@ renderer.setAnimationLoop(() => {
   if (t - lastMap > 0.25) { drawMap(); lastMap = t; }
 });
 window.__mood = {camera, controls, scene, go, PLACES, get cur() { return cur; }};
+// the frustum search's hook (mood/tools/ → districts/tools/frustum-run.mjs): render a list of cameras and hand back the frames.
+// Only with ?harness=1: the interface is hidden and the animation loop stops, so each frame is exactly the camera asked for.
+if (new URLSearchParams(location.search).get('harness')) {
+  document.body.classList.add('harness'); renderer.setAnimationLoop(null);
+  const placeOfView = {}; for (const P of PLACES) for (const n of P.views) placeOfView[n] = placeOfView[n] || P.id;
+  window.__mood.stations = FOLDS ? FOLDS.stations.map(({mesh, ...s}) => s) : [];
+  window.__mood.places = PLACES.map(P => ({id: P.id, district: P.district, at: P.at, views: P.views, cam: {p: P.cam.p.toArray(), t: P.cam.t.toArray(), fov: P.cam.fov}}));
+  window.__mood.render = (cams, q = 0.85) => cams.map(c => {
+    camera.position.set(...c.p); controls.target.set(...c.t); camera.fov = c.fov; camera.updateProjectionMatrix(); camera.lookAt(controls.target);
+    for (const tk of ticks) tk(10); mood(); composer.render(); return renderer.domElement.toDataURL('image/jpeg', q); });
+  (FOLDS ? FOLDS.ready() : Promise.resolve()).then(() => { window.__moodReady = true; });
+}

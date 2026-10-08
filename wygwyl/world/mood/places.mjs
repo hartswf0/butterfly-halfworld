@@ -4,10 +4,31 @@
 // (../districts/), carries its district's mood, and has a hero shot composed like its reference.
 import * as THREE from 'three';
 
-// ——— a small kit ———
+// ——— surfaces: the material library cut from the archive's own frames (../language/library.*), the same 44 surfaces the
+// generic city wears, mapped triplanar in world metres so any shape (box, column, arch, lathe) takes brick, rust or marble at true scale
+const LIB = {tex: null, idx: {}, cols: 8, rows: 11};
+export async function loadLibrary(base = '../language/') {
+  const L = await fetch(base + 'library.json').then(r => r.json()); LIB.cols = L.cols; LIB.rows = L.rows; for (const m of L.materials) LIB.idx[m.name] = m.base;
+  LIB.tex = await new THREE.TextureLoader().loadAsync(base + 'library.webp'); LIB.tex.colorSpace = THREE.SRGBColorSpace; LIB.tex.anisotropy = 8;
+}
+function skin(m, name, metres = 3, variant = 0, k = 1) {
+  if (!LIB.tex || LIB.idx[name] == null) return m; const i = LIB.idx[name] + variant, col = i % LIB.cols, row = Math.floor(i / LIB.cols);
+  const U = {uLib: {value: LIB.tex}, uTile: {value: new THREE.Vector4(col / LIB.cols, 1 - (row + 1) / LIB.rows, 1 / LIB.cols, 1 / LIB.rows)}, uScale: {value: 1 / metres}, uK: {value: k}};
+  m.onBeforeCompile = sh => { Object.assign(sh.uniforms, U);
+    sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nvarying vec3 vWP; varying vec3 vWN;')
+      .replace('#include <worldpos_vertex>', '#include <worldpos_vertex>\nvWP = (modelMatrix * vec4(transformed, 1.0)).xyz; vWN = normalize(mat3(modelMatrix) * objectNormal);');
+    sh.fragmentShader = sh.fragmentShader.replace('#include <common>', `#include <common>
+      uniform sampler2D uLib; uniform vec4 uTile; uniform float uScale, uK; varying vec3 vWP; varying vec3 vWN;
+      vec3 tileAt(vec2 p) { vec2 f = fract(p) * .96 + .02; return textureGrad(uLib, uTile.xy + f * uTile.zw, dFdx(p) * uTile.zw, dFdy(p) * uTile.zw).rgb; }`)
+      .replace('#include <map_fragment>', `#include <map_fragment>
+      { vec3 w = pow(abs(normalize(vWN)), vec3(4.)); w /= (w.x + w.y + w.z); vec3 q = vWP * uScale;
+        vec3 t = tileAt(q.zy) * w.x + tileAt(q.xz) * w.y + tileAt(q.xy) * w.z;
+        diffuseColor.rgb *= mix(vec3(1.), t * 1.7, uK); }`); };
+  m.customProgramCacheKey = () => 'skin'; return m;
+}
 const C = c => new THREE.Color(c);
-export const mat = (c, o = {}) => new THREE.MeshStandardMaterial({color: c, roughness: o.r ?? 0.85, metalness: o.m ?? 0, emissive: o.e ?? 0x000000, emissiveIntensity: o.ei ?? 1,
-  emissiveMap: o.em || null, map: o.map || null, transparent: !!o.t, opacity: o.o ?? 1, side: o.side ?? THREE.FrontSide, depthWrite: o.dw ?? true});
+export const mat = (c, o = {}) => skin(new THREE.MeshStandardMaterial({color: c, roughness: o.r ?? 0.85, metalness: o.m ?? 0, emissive: o.e ?? 0x000000, emissiveIntensity: o.ei ?? 1,
+  emissiveMap: o.em || null, map: o.map || null, transparent: !!o.t, opacity: o.o ?? 1, side: o.side ?? THREE.FrontSide, depthWrite: o.dw ?? true}), o.s, o.ts ?? 3, o.sv ?? 0, o.sk ?? 1);
 export const glow = (c, i = 1.6, o = {}) => new THREE.MeshBasicMaterial({color: C(c).multiplyScalar(i), toneMapped: false, transparent: !!o.t, opacity: o.o ?? 1, side: o.side ?? THREE.FrontSide,
   blending: o.add ? THREE.AdditiveBlending : THREE.NormalBlending, depthWrite: !o.add});
 function put(g, geo, m, x = 0, y = 0, z = 0, ry = 0, rx = 0, rz = 0) { const o = new THREE.Mesh(geo, m); o.position.set(x, y, z); o.rotation.set(rx, ry, rz); g.add(o); return o; }
@@ -51,7 +72,7 @@ export const PLACES = [
     line: 'a lone figure on a lit catwalk over nothing; the tower he reads in, its spiral escape in the light well',
     shot: {p: [-60, 9, 62], t: [8, 8, -20], fov: 42},
     build(g) {
-      const con = mat(0x3a1a0c, {r: 0.9}), brick = mat(0x4a1c10, {r: 0.95}), iron = mat(0x1a0d08, {r: 0.6, m: 0.6});
+      const con = mat(0x8a6a58, {r: 0.9, s: 'concrete', ts: 4}), brick = mat(0x9a7a6a, {r: 0.95, s: 'soot brick', ts: 2.5}), iron = mat(0x6a4a3a, {r: 0.6, m: 0.5, s: 'rust', ts: 2});
       // the expressway deck on its columns, the undercroft beneath
       box(g, 180, 3, 22, con, 0, 14, -40); for (let i = -80; i <= 80; i += 16) { cyl(g, 1.4, 1.6, 14, con, i, 0, -32); cyl(g, 1.4, 1.6, 14, con, i, 0, -48); }
       for (let i = -76; i <= 76; i += 32) { const l = new THREE.PointLight(0xff7a1a, 300, 60, 1.6); l.position.set(i, 11, -40); g.add(l); }
@@ -65,7 +86,7 @@ export const PLACES = [
       const fig = new THREE.Group(); box(fig, 0.5, 1.75, 0.3, mat(0x080404), 0, 0, 0); fig.position.set(68, 8.4, 0); g.add(fig);
       // the Severn: a brick tower, its light well and the spiral escape with planters
       const T = new THREE.Group(); T.position.set(-40, 0, -8); g.add(T);
-      box(T, 18, 46, 14, mat(0x3a160c, {em: windows(18, 40, ['#ffb070', '#ff8a4a', '#ffd0a0'], 0.18, 11), e: 0xffffff, ei: 0.8, r: 0.9}), 0, 0, 0);
+      box(T, 18, 46, 14, mat(0xa08070, {s: 'red brick', ts: 2.5, em: windows(18, 40, ['#ffb070', '#ff8a4a', '#ffd0a0'], 0.18, 11), e: 0xffffff, ei: 0.8, r: 0.9}), 0, 0, 0);
       for (let i = 0; i < 40; i++) { const a = i * 0.5, y = i * 1.1; box(T, 2.4, 0.15, 1.1, iron, 9 + 2.2 * Math.cos(a), y, 2.2 * Math.sin(a), -a);
         if (i % 7 === 3) put(T, new THREE.SphereGeometry(0.7, 8, 6), mat(0x2f4a1c), 9 + 2.6 * Math.cos(a), y + 0.7, 2.6 * Math.sin(a)); }
       cyl(T, 0.12, 0.12, 44, iron, 9, 0, 0);
@@ -79,7 +100,7 @@ export const PLACES = [
       const R = rng(7), beacons = [];
       for (let i = 0; i < 46; i++) { const h = 50 + R() * 110, w = 5 + R() * 7, x = (R() - .5) * 200, z = (R() - .5) * 160;
         const em = windows(8, Math.round(h / 2.5), ['#4a7dff', '#9fc6ff', '#2a4ab0'], 0.2 + R() * 0.2, 100 + i);
-        box(g, w, h, w, mat(0x0a0f22, {em, e: 0xffffff, ei: 1.0, r: 0.4, m: 0.3}), x, 0, z);
+        box(g, w, h, w, mat(0x3a4058, {em, e: 0xffffff, ei: 1.0, r: 0.4, m: 0.3, s: 'concrete', ts: 6, sv: 1}), x, 0, z);
         put(g, new THREE.ConeGeometry(w * 0.55, h * 0.35, 4), mat(0x0a0f22, {r: 0.4, m: 0.4}), x, h + h * 0.175, z, Math.PI / 4);
         const b = put(g, new THREE.SphereGeometry(0.9, 8, 6), glow(0xff2a2a, 3), x, h * 1.36, z); b.userData.ph = R() * 6; beacons.push(b); }
       return t => beacons.forEach(b => { b.visible = Math.sin(t * 2.2 + b.userData.ph) > 0.2; });
@@ -88,7 +109,7 @@ export const PLACES = [
     line: 'two slabs and the moon exactly between them; below, one warm window over the curb',
     shot: {p: [0, 3, 120], t: [0, 60, -40], fov: 50},
     build(g) {
-      const slab = h => mat(0x06122e, {em: windows(26, Math.round(h / 2.2), ['#7fb0ff', '#c8dcff', '#3060c0'], 0.38, h | 0), e: 0xffffff, ei: 0.9, r: 0.35, m: 0.4});
+      const slab = h => mat(0x2a3a5a, {s: 'block', ts: 5, sv: 1, em: windows(26, Math.round(h / 2.2), ['#7fb0ff', '#c8dcff', '#3060c0'], 0.38, h | 0), e: 0xffffff, ei: 0.9, r: 0.35, m: 0.4});
       box(g, 30, 140, 22, slab(140), -26, 0, -20); box(g, 30, 140, 22, slab(141), 26, 0, -20);
       for (let y = 20; y < 130; y += 18) put(g, new THREE.CylinderGeometry(0.9, 0.9, 22, 10), mat(0x0d3a8a, {r: 0.3, m: 0.7}), 0, y, -8, 0, 0, Math.PI / 2);
       const moon = put(g, new THREE.SphereGeometry(9, 32, 24), glow(0xdfe9ff, 2.2), 0, 160, -300); moon.userData.moon = true;
@@ -96,8 +117,8 @@ export const PLACES = [
       const L = new THREE.DirectionalLight(0x9cc4ff, 1.4); L.position.set(0, 160, -300); L.target.position.set(0, 0, 40); g.add(L, L.target);
       // the child's house at the foot of the canyon: brick, the stoop, one warm ground-floor window
       const H = new THREE.Group(); H.position.set(-6, 0, 50); g.add(H);
-      box(H, 6, 7, 9, mat(0x2a1612, {r: 0.95}), 0, 0, 0); put(H, new THREE.PlaneGeometry(1.8, 1.4), glow(0xffb060, 2.4), 0, 2.2, 4.51);
-      box(H, 1.6, 0.9, 1.4, mat(0x8a8a90), 1.9, 0, 5.2);
+      box(H, 6, 7, 9, mat(0x8a6a60, {r: 0.95, s: 'red brick', ts: 2.5}), 0, 0, 0); put(H, new THREE.PlaneGeometry(1.8, 1.4), glow(0xffb060, 2.4), 0, 2.2, 4.51);
+      box(H, 1.6, 0.9, 1.4, mat(0xd0d0d0, {s: 'marble', ts: 1.5}), 1.9, 0, 5.2);
       const pl = new THREE.PointLight(0xffa050, 20, 20, 2); pl.position.set(0, 2.2, 7); H.add(pl);
       // the car at the curb, its headlights sweeping
       const car = new THREE.Group(); car.position.set(8, 0, 58); g.add(car); box(car, 4.2, 1.3, 1.8, mat(0x101010, {r: 0.3, m: 0.6}), 0, 0.3, 0);
@@ -108,7 +129,7 @@ export const PLACES = [
     line: 'a lobby that stayed flooded: the floor glowing under the water, trees in the planters, the wall that holds the bay back',
     shot: {p: [0, 3.2, 46], t: [0, 4, -10], fov: 50},
     build(g) {
-      const steel = mat(0x1c2a2c, {r: 0.4, m: 0.6}), con = mat(0x2a2f30, {r: 0.95});
+      const steel = mat(0x5a7a70, {r: 0.4, m: 0.5, s: 'verdigris', ts: 2}), con = mat(0x8a9090, {r: 0.95, s: 'concrete', ts: 4, sv: 1});
       // the glass hall's frame (no walls: the glass is the water's reflection)
       for (let x = -30; x <= 30; x += 10) for (let z = -30; z <= 10; z += 10) cyl(g, 0.45, 0.45, 22, steel, x, -2, z, 8);
       for (let z = -30; z <= 10; z += 10) box(g, 62, 0.6, 0.6, steel, 0, 20, z); for (let x = -30; x <= 30; x += 10) box(g, 0.6, 0.6, 42, steel, x, 20, -10);
@@ -130,9 +151,9 @@ export const PLACES = [
     line: 'red soil under the moon where he finds his hands; the ancestors’ vault of light along the avenue',
     shot: {p: [-58, 2.4, 40], t: [10, 10, -10], fov: 46},
     build(g) {
-      put(g, new THREE.CircleGeometry(90, 64), mat(0x3a0a08, {r: 1, e: 0x2a0402, ei: 0.6}), 0, 0.15, 0, 0, -Math.PI / 2);
-      for (let i = -60; i <= 60; i += 4) box(g, 3.6, 0.2, 5, mat(0x5a4a40, {r: 0.9}), i, 0.15, 0);       // the avenue's stones
-      cyl(g, 0.6, 1.4, 18, mat(0xb8b0a0, {r: 0.7}), 30, 0, -14, 4);                                       // the obelisk
+      put(g, new THREE.CircleGeometry(90, 64), mat(0x9a3020, {r: 1, e: 0x2a0402, ei: 0.4, s: 'sand', ts: 6, sv: 1}), 0, 0.15, 0, 0, -Math.PI / 2);
+      for (let i = -60; i <= 60; i += 4) box(g, 3.6, 0.2, 5, mat(0xa09080, {r: 0.9, s: 'granite', ts: 2, sv: 1}), i, 0.15, 0);       // the avenue's stones
+      cyl(g, 0.6, 1.4, 18, mat(0xd8d0c0, {r: 0.7, s: 'cantera', ts: 3}), 30, 0, -14, 4);                                       // the obelisk
       cyl(g, 0.4, 0.6, 6, mat(0x1a1008), -20, 0, 18, 6); put(g, new THREE.IcosahedronGeometry(4, 1), mat(0x0a1810), -20, 8, 18);
       // the parade's vault: arches of held lights over the avenue
       const pts = [], R = rng(3);
@@ -147,7 +168,7 @@ export const PLACES = [
     line: 'a hundred-metre ring of white ceramic across the avenue; the fence of light before it; the round plaza behind',
     shot: {p: [0, 3, 130], t: [0, 30, 0], fov: 48},
     build(g) {
-      const cer = mat(0xb8b4ac, {r: 0.55, e: 0xfff6e8, ei: 0.015});
+      const cer = mat(0xb8b4ac, {r: 0.55, e: 0xfff6e8, ei: 0.015, s: 'ceramic', ts: 6});
       const ring = put(g, new THREE.TorusGeometry(50, 4.2, 24, 160), cer, 0, 52, 0);
       const seam = (a0, a1) => put(g, new THREE.TorusGeometry(50, 4.35, 8, 40, a1 - a0), glow(0x5fe8ff, 3), 0, 52, 0, 0, 0, a0);
       seam(Math.PI * 0.47, Math.PI * 0.53); seam(Math.PI * 1.47, Math.PI * 1.53);
@@ -156,8 +177,8 @@ export const PLACES = [
       dots(g, fp, 0x58e6ff, 0.5);
       for (let i = -70; i <= 70; i += 14) { cyl(g, 0.12, 0.12, 6, mat(0x223338), i, 0, 60 + (i * i) / 260, 6); }
       // the round plaza behind: rose terraces stepping down to a white floor
-      for (let k = 0; k < 6; k++) { const r0 = 40 - k * 5; put(g, new THREE.CylinderGeometry(r0, r0, 1, 64, 1, true), mat(0xc07a86, {r: 0.8, side: THREE.DoubleSide}), 0, 2.5 - k * 0.5, -80); }
-      put(g, new THREE.CircleGeometry(14, 48), mat(0xf2ece0, {e: 0xfff4e0, ei: 0.4}), 0, 0.2, -80, 0, -Math.PI / 2);
+      for (let k = 0; k < 6; k++) { const r0 = 40 - k * 5; put(g, new THREE.CylinderGeometry(r0, r0, 1, 64, 1, true), mat(0xe0a0a8, {r: 0.8, side: THREE.DoubleSide, s: 'terracotta', ts: 3}), 0, 2.5 - k * 0.5, -80); }
+      put(g, new THREE.CircleGeometry(14, 48), mat(0xf2ece0, {e: 0xfff4e0, ei: 0.3, s: 'marble', ts: 4}), 0, 0.2, -80, 0, -Math.PI / 2);
       const crowd = []; const R = rng(4); for (let i = 0; i < 700; i++) { const a = R() * Math.PI * 2, r = 16 + R() * 22; crowd.push(new THREE.Vector3(Math.cos(a) * r, 1.6 + R() * 0.4, -80 + Math.sin(a) * r)); }
       dots(g, crowd, 0xffd0a0, 0.7);
       const pl = new THREE.PointLight(0x9fdcff, 300, 120, 1.6); pl.position.set(0, 20, 40); g.add(pl);
@@ -168,17 +189,18 @@ export const PLACES = [
     shot: {p: [1.5, 1.7, 4], t: [-1, 4.5, -40], fov: 60},
     build(g) {
       const pal = [0x1f6f78, 0x2a8a8a, 0x8a2f4a, 0x3a4a5a, 0x6a3a2a, 0x1a5a6a], R = rng(19);
-      const geo = new THREE.BoxGeometry(12, 2.6, 2.44), lit = [], rib = corrugated();
+      const geo = new THREE.BoxGeometry(12, 2.6, 2.44), lit = [];
       for (const side of [-1, 1]) for (let i = 0; i < 9; i++) for (let k = 0; k < 1 + Math.floor(R() * 4); k++) {
-        const m = mat(pal[Math.floor(R() * pal.length)], {r: 0.5, m: 0.3, map: rib, e: pal[Math.floor(R() * pal.length)], ei: 0.18});
+        const m = mat(pal[Math.floor(R() * pal.length)], {r: 0.5, m: 0.3, s: 'corrugated', ts: 2.5, e: pal[Math.floor(R() * pal.length)], ei: 0.18});
         const o = put(g, geo, m, side * 9, 1.3 + k * 2.6, -60 + i * 6.2 + (R() - .5), Math.PI / 2);
         if (R() < 0.55) { const w = put(g, new THREE.PlaneGeometry(2.2, 1.6), glow(R() < .5 ? 0xffb0c8 : 0xa0f0e8, 0.35 + R() * 0.35), side * 9 - side * 1.25, 1.3 + k * 2.6, -60 + i * 6.2, side > 0 ? -Math.PI / 2 : Math.PI / 2); lit.push(w); } }
+      put(g, new THREE.PlaneGeometry(18, 90), mat(0x34363c, {r: 0.6, m: 0.0, s: 'wet asphalt', ts: 3, t: true, o: 0.7}), 0, 0.04, -30, 0, -Math.PI / 2);   // the street: wet asphalt, the mirror under it
       // string lights over the street
       const R2 = rng(2); for (let i = 0; i < 10; i++) { const z = -56 + i * 6; dots(g, catenary(new THREE.Vector3(-8, 9 + R2() * 3, z), new THREE.Vector3(8, 9 + R2() * 3, z + (R2() - .5) * 6), 1.8, 26), i % 2 ? 0xffd890 : 0xff9ad0, 0.8); }
       const pa = new THREE.PointLight(0xff5aa0, 70, 50, 1.4); pa.position.set(0, 7, -15); const pb = new THREE.PointLight(0x40e0e8, 70, 50, 1.4); pb.position.set(0, 7, -45); g.add(pa, pb);
       for (let i = 0; i < 12; i++) { const side = i % 2 ? 1 : -1; put(g, new THREE.PlaneGeometry(0.3 + R() * 3, 0.5 + R() * 2), glow([0xff3a8a, 0x2ae8ff, 0xffc04a][i % 3], 1.3), side * 7.7, 3 + R() * 6, -55 + i * 4.6, side > 0 ? -Math.PI / 2 : Math.PI / 2); }
       // the underpass shadow-pool at the end of the row: a concrete tube, ankle-deep water, the market's light at the far end
-      const U = new THREE.Group(); U.position.set(0, 0, -78); g.add(U); const con = mat(0x2a2c2c, {r: 0.95});
+      const U = new THREE.Group(); U.position.set(0, 0, -78); g.add(U); const con = mat(0x8a8c8c, {r: 0.95, s: 'concrete', ts: 4});
       box(U, 18, 1, 30, con, 0, 6, -10); box(U, 1, 6.5, 30, con, -9, 0, -10); box(U, 1, 6.5, 30, con, 9, 0, -10);
       put(U, new THREE.PlaneGeometry(14, 6), glow(0xbfefff, 1.1), 0, 3, -25);
       for (let i = 0; i < 5; i++) box(U, 0.4, 1.3, 0.3, mat(0x050505), -4 + i * 2, 0, -8 + (i % 2) * 3);
@@ -190,11 +212,11 @@ export const PLACES = [
     line: 'a hundred-storey shaft lit red, the way up from the House; mushroom-stem platforms in the cloud, gardens and a club on the crowns',
     shot: {p: [-90, 40, 110], t: [0, 90, 0], fov: 50},
     build(g) {
-      const stem = mat(0x1c2440, {r: 0.4, m: 0.5}), deck = mat(0x2a3050, {r: 0.6});
+      const stem = mat(0x5a6688, {r: 0.4, m: 0.4, s: 'concrete', ts: 5, sv: 1}), deck = mat(0x6a7090, {r: 0.6, s: 'tile', ts: 3});
       // the shaft: an open square frame 160 m tall, red inside
       const S = new THREE.Group(); g.add(S);
-      for (const [x, z] of [[-6, -6], [6, -6], [-6, 6], [6, 6]]) box(S, 1.2, 160, 1.2, mat(0x1a0808, {r: 0.5, m: 0.6}), x, 0, z);
-      for (let y = 0; y < 160; y += 4) { box(S, 13, 0.4, 0.4, mat(0x2a0a0a), 0, y, -6); box(S, 13, 0.4, 0.4, mat(0x2a0a0a), 0, y, 6); box(S, 0.4, 0.4, 13, mat(0x2a0a0a), -6, y, 0); box(S, 0.4, 0.4, 13, mat(0x2a0a0a), 6, y, 0); }
+      for (const [x, z] of [[-6, -6], [6, -6], [-6, 6], [6, 6]]) box(S, 1.2, 160, 1.2, mat(0x5a2a2a, {r: 0.5, m: 0.5, s: 'rust', ts: 2}), x, 0, z);
+      for (let y = 0; y < 160; y += 4) { box(S, 13, 0.4, 0.4, mat(0x5a2a2a, {s: 'rust', ts: 2}), 0, y, -6); box(S, 13, 0.4, 0.4, mat(0x5a2a2a, {s: 'rust', ts: 2}), 0, y, 6); box(S, 0.4, 0.4, 13, mat(0x5a2a2a, {s: 'rust', ts: 2}), -6, y, 0); box(S, 0.4, 0.4, 13, mat(0x5a2a2a, {s: 'rust', ts: 2}), 6, y, 0); }
       const red = put(S, new THREE.BoxGeometry(9, 160, 9), glow(0xff1818, 1.6, {t: true, o: 0.35}), 0, 80, 0);
       const cage = box(S, 3, 3.2, 3, glow(0xff6040, 2.4), 0, 20, 0);
       const pl = new THREE.PointLight(0xff2020, 600, 90, 1.4); pl.position.set(0, 70, 0); S.add(pl);
@@ -219,16 +241,16 @@ export const PLACES = [
     line: 'where the city listens: a radio dish turning over the square, the forum’s lit lip, children running under it',
     shot: {p: [38, 4, 46], t: [0, 10, -6], fov: 50},
     build(g) {
-      put(g, new THREE.CircleGeometry(60, 64), mat(0x1a2a3a, {r: 0.25, m: 0.2}), 0, 0.12, 0, 0, -Math.PI / 2);
-      for (let k = 0; k < 6; k++) put(g, new THREE.TorusGeometry(16 - k * 2, 0.5, 6, 64), mat(0xc8ccd0), 14, 0.4 - k * 0.5, 10, 0, Math.PI / 2);
+      put(g, new THREE.CircleGeometry(60, 64), mat(0x4a5a6a, {r: 0.25, m: 0.2, s: 'wet asphalt', ts: 4}), 0, 0.12, 0, 0, -Math.PI / 2);
+      for (let k = 0; k < 6; k++) put(g, new THREE.TorusGeometry(16 - k * 2, 0.5, 6, 64), mat(0xd8dcdc, {s: 'concrete', ts: 3, sv: 1}), 14, 0.4 - k * 0.5, 10, 0, Math.PI / 2);
       put(g, new THREE.TorusGeometry(16.4, 0.14, 6, 96), glow(0xfff0c8, 1.6), 14, 0.65, 10, 0, Math.PI / 2);
       const crowd = [], R = rng(6); for (let i = 0; i < 260; i++) { const a = R() * Math.PI * 2, r = 17 + R() * 4; crowd.push(new THREE.Vector3(14 + Math.cos(a) * r, 1.3, 10 + Math.sin(a) * r)); } dots(g, crowd, 0xffc890, 0.6);
       // the dish: a parabola on a yoke, turning at the gate
-      const D = new THREE.Group(); D.position.set(-14, 0, -14); g.add(D); cyl(D, 2, 3, 8, mat(0x8a9098), 0, 0, 0);
+      const D = new THREE.Group(); D.position.set(-14, 0, -14); g.add(D); cyl(D, 2, 3, 8, mat(0xa8b0b8, {s: 'concrete', ts: 3, sv: 1}), 0, 0, 0);
       const Y = new THREE.Group(); Y.position.y = 10; D.add(Y);
       const pts = []; for (let i = 0; i <= 20; i++) { const r = i / 20 * 13; pts.push(new THREE.Vector2(r, r * r / 30)); }
       const dish = put(Y, new THREE.LatheGeometry(pts, 48), mat(0xa8b0b8, {r: 0.5, m: 0.3, side: THREE.DoubleSide, e: 0x6a8ac8, ei: 0.12}), 0, 0, 0, 0, -0.8);
-      put(Y, new THREE.CylinderGeometry(0.2, 0.2, 9, 6), mat(0x8a9098), 0, 4, 2.6, 0, -0.8);
+      put(Y, new THREE.CylinderGeometry(0.2, 0.2, 9, 6), mat(0xa8b0b8, {s: 'concrete', ts: 3, sv: 1}), 0, 4, 2.6, 0, -0.8);
       const pl = new THREE.PointLight(0x7ab8ff, 260, 50, 1.6); pl.position.set(20, 8, 20); g.add(pl);
       return t => { Y.rotation.y = Math.sin(t * 0.1) * 1.2; };
     }},
@@ -246,9 +268,10 @@ export const PLACES = [
             float px = step(.12, fract(vU.x * 260.)) * step(.12, fract(vU.y * 60.)); gl_FragColor = vec4(c * (.75 + .45 * a) * (.5 + .5 * px), 1.); }`});
       const v = put(g, new THREE.CylinderGeometry(22, 22, 120, 48, 1, true, -Math.PI / 2, Math.PI), vault, 0, 0, -20);
       v.rotation.set(-Math.PI / 2, 0, 0); v.position.set(0, 12, -20); v.scale.set(1, 1, 0.55);                // a low vault resting on the shopfronts
-      const R = rng(12); for (const s of [-1, 1]) for (let i = 0; i < 10; i++) { const h = 12 + R() * 2; box(g, 8, h, 10, mat(0x14101a, {r: 0.7, em: windows(14, 18, ['#ffb070', '#ff5a8a', '#6a9aff'], 0.35, 300 + i * 2 + s), e: 0xffffff, ei: 0.6}), s * 26, 0, -75 + i * 12);
+      const R = rng(12); for (const s of [-1, 1]) for (let i = 0; i < 10; i++) { const h = 12 + R() * 2; box(g, 8, h, 10, mat(0x5a4a50, {r: 0.7, s: 'peeling paint', ts: 3, em: windows(14, 18, ['#ffb070', '#ff5a8a', '#6a9aff'], 0.35, 300 + i * 2 + s), e: 0xffffff, ei: 0.6}), s * 26, 0, -75 + i * 12);
         put(g, new THREE.PlaneGeometry(6, 0.5), glow([0xff3a5a, 0x3a7aff, 0xff7ad0][i % 3], 2.2), s * 21.9, 3 + R() * 3, -75 + i * 12, -s * Math.PI / 2); }
       dots(g, Array.from({length: 900}, () => new THREE.Vector3((R() - .5) * 36, 1.5 + R() * 0.3, -78 + R() * 110)), 0xffd8b8, 0.45, false);              // the crowd under the canopy
+      put(g, new THREE.PlaneGeometry(44, 130), mat(0x34363c, {r: 0.6, m: 0.0, s: 'wet asphalt', ts: 3, t: true, o: 0.7}), 0, 0.04, -20, 0, -Math.PI / 2);   // the street: wet asphalt, the mirror under it
       const pa = new THREE.PointLight(0xff4aa0, 120, 60, 1.4); pa.position.set(0, 10, -10); const pb = new THREE.PointLight(0x4a7aff, 120, 60, 1.4); pb.position.set(0, 10, -50); g.add(pa, pb);
       // the booth on its curb, the suitcases, the bike
       box(g, 1.2, 2.4, 1.2, glow(0xf0f6ff, 0.9, {t: true, o: 0.8}), 7, 0, 54); box(g, 0.7, 0.5, 0.3, mat(0x3a2418), 5.6, 0, 54.5); box(g, 0.6, 0.45, 0.3, mat(0x1a2a3a), 5.6, 0, 55.2);
@@ -262,17 +285,17 @@ export const PLACES = [
     line: 'the broken rail kept as a cenotaph: arches with names below the line, and wet stone steps down to the sea with lanterns',
     shot: {p: [74, 3, 74], t: [0, 9, -8], fov: 40},
     build(g) {
-      const stone = mat(0x4a4448, {r: 0.95}), rust = mat(0x5a2a16, {r: 0.7, m: 0.5});
+      const stone = mat(0x9a9498, {r: 0.95, s: 'soot brick', ts: 3}), rust = mat(0x9a6a56, {r: 0.7, m: 0.4, s: 'rust', ts: 2});
       const ag = archGeo(14, 18, 10, 5, 7);
       for (let i = -6; i <= 6; i++) { if (i === 2) continue; put(g, ag, stone, i * 14, 0, -10); put(g, new THREE.PlaneGeometry(6, 0.5), glow(0xe8e0d0, 0.5), i * 14, 3.2, -2.9); }   // a gap where the Fall broke it
       box(g, 14 * 13, 1.6, 8, stone, 0, 18, -6.5); box(g, 26, 0.5, 6, rust, -70, 19.6, -6.5);
       put(g, new THREE.SphereGeometry(0.6, 8, 6), glow(0xff8a2a, 3), -76, 23, -6.5); cyl(g, 0.1, 0.1, 4, rust, -76, 19.6, -6.5, 6);
       const pl0 = new THREE.PointLight(0xff8a2a, 60, 30, 1.6); pl0.position.set(-76, 22, -6.5); g.add(pl0);
       // the shore steps: wide flights down into the sea, lanterns on the landings
-      const st = stairs(g, 14, 16, 0.32, 0.9, mat(0x3a3a3c, {r: 0.35}), 30, -1.2, 40, Math.PI); const lan = [];
+      const st = stairs(g, 14, 16, 0.32, 0.9, mat(0x8a8a8c, {r: 0.35, s: 'granite', ts: 2, sv: 1}), 30, -1.2, 40, Math.PI); const lan = [];
       for (let i = 0; i < 14; i += 3) for (const s of [-1, 1]) { const p = new THREE.Vector3(30 + s * 7.4, -1.2 + i * 0.32 + 0.9, 40 + i * 0.9); lan.push(p); }
       dots(g, lan, 0xffa860, 0.9); lan.forEach((p, i) => { if (i % 2) return; const l = new THREE.PointLight(0xff9a50, 14, 14, 2); l.position.copy(p); g.add(l); });
-      put(g, new THREE.ConeGeometry(120, 70, 5), mat(0x1a1c22, {r: 1}), 30, 35, -170);                        // the mountain behind
+      put(g, new THREE.ConeGeometry(120, 70, 5), mat(0x3a3c44, {r: 1, s: 'slate', ts: 20}), 30, 35, -170);                        // the mountain behind
       // first light behind the mountain: the hour this district is always seen at
       const sun = new THREE.Sprite(new THREE.SpriteMaterial({map: soft(), color: 0xffa070, transparent: true, opacity: 0.7, depthWrite: false, blending: THREE.AdditiveBlending, fog: false}));
       sun.position.set(-60, 26, -320); sun.scale.set(700, 180, 1); g.add(sun);
@@ -284,7 +307,7 @@ export const PLACES = [
     line: 'a white vault over the chapel’s ruin, a colonnade doubled in a still pool, a black pool that holds the stars',
     shot: {p: [0, 2, 70], t: [0, 9, -20], fov: 44},
     build(g) {
-      const white = mat(0xd8d4cc, {r: 0.5}), stone = mat(0x2a2a2e, {r: 0.95});
+      const white = mat(0xe8e4dc, {r: 0.5, s: 'marble', ts: 3, sv: 1}), stone = mat(0x6a6a6e, {r: 0.95, s: 'cantera', ts: 3});
       // the chapel's dark nave (as built) with its gable, and the white vault over it
       box(g, 9, 6, 22, stone, 0, 0, -30);
       { const sh = new THREE.Shape([new THREE.Vector2(-4.8, 0), new THREE.Vector2(4.8, 0), new THREE.Vector2(0, 5.6)]); put(g, new THREE.ExtrudeGeometry(sh, {depth: 22, bevelEnabled: false}), stone, 0, 6, -41); }
@@ -306,9 +329,9 @@ export const PLACES = [
     line: 'nothing but a vintage door standing in the black, warm light leaking round it: the party behind',
     shot: {p: [0, 1.7, 14], t: [0, 1.9, 0], fov: 40},
     build(g) {
-      const wood = mat(0x2a120a, {r: 0.6});
+      const wood = mat(0x8a5a40, {r: 0.6, s: 'wood siding', ts: 2});
       box(g, 2.6, 0.2, 0.5, wood, 0, 2.7, 0); box(g, 0.2, 2.9, 0.5, wood, -1.2, 0, 0); box(g, 0.2, 2.9, 0.5, wood, 1.2, 0, 0);
-      const leaf = new THREE.Group(); leaf.position.set(-1.05, 0, 0.05); g.add(leaf); box(leaf, 2.1, 2.65, 0.08, mat(0x3a1a10, {r: 0.5}), 1.05, 0.02, 0);
+      const leaf = new THREE.Group(); leaf.position.set(-1.05, 0, 0.05); g.add(leaf); box(leaf, 2.1, 2.65, 0.08, mat(0x9a6a50, {r: 0.5, s: 'panelling', ts: 2}), 1.05, 0.02, 0);
       put(g, new THREE.PlaneGeometry(2.2, 2.7), glow(0xffb070, 1.0), 0, 1.38, -0.2);
       const pl = new THREE.PointLight(0xffa860, 40, 12, 2); pl.position.set(0, 1.5, 1.4); g.add(pl);
       return t => { leaf.rotation.y = -0.18 - 0.12 * Math.sin(t * 0.3); };

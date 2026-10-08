@@ -1,0 +1,25 @@
+{
+  "lede": "No world built from geometry earns better than 43 of 100. The folds are the only frames that are the references, and only because they are the references' own pixels: from the standpoint CLIP picks the right view 79% of the time, but 3–8 m away only 36% of that identity survives (median rank 20), which is worse than the plain sets (12–14). Graded on what survives off the standpoint, they earn 55.",
+  "points": [
+    "You were right about texture. The generic city's surfaces carry 0.80× the references' high-frequency energy; the mood sets carry 0.43×. Putting the archive surfaces on the sets moved that to 0.45×: at hero distance, in fog and at night, the texture is lost.",
+    "Composition is at chance for every built world. The 16×9 luminance layout of the best frame correlates with the reference at 0.03 (mood sets), 0.15 (with surfaces) and 0.17 (the generic city), against 0.26 for two unrelated views. Even with the best camera the search could find, the dark and light masses are not where the references put them.",
+    "The mood colours are not the references' colours. Hue–saturation overlap is 2–3% of the way from chance to a sibling view for the sets and 0% for the generic city. A 'colour mood' that misses the colour distribution is a claim, not a measurement.",
+    "Identity is mostly colour. A blurred 16×9 colour card of the reference alone reaches CLIP's top 5 for 22% of views; the mood sets reach 49–51%, the generic city 43%. They beat colour alone, but by less than the page claimed.",
+    "The authored hero shots, the ones the mood city opens on, rank 33–36 of 100 in median: worse than random frustums the search found in the same place. The claim that each was 'composed like its reference' does not hold.",
+    "Placemaking is not measured by any of these numbers. Coverage (every view has a place) is 100% for every world, because I assigned them; whether the places join up into streets, thresholds and routes is untested, and the folds make it worse: each is a room you see from one spot."
+  ],
+  "next": [
+    "Folds as blueprints, not skins: take each fold's floor and wall depths as the set's massing, build those walls and floors, and skin them with surfaces cut from that same reference (the library method run on the 100 views). Pass: composition ≥ 60 at the standpoint and ≥ 60% of the identity surviving 3–8 m off.",
+    "Fit the light to the references: search each place's lamp, fog and ambient colours with the hue–saturation overlap as the objective, at the frustums found here. Pass: colour ≥ 50.",
+    "Texture that survives distance: surfaces sized to read at the hero distance, fog thinned within 30 m. Pass: ≥ 0.7× the references' texture energy.",
+    "Replace the authored hero shots with the found frustums (grade/grade.json carries every one).",
+    "Measure placemaking: walkable floor from each standpoint to the next and to its transition; a place that cannot be walked into does not count as built.",
+    "Kill criteria: a hero place is not shipped if, at its standpoint, it fails to beat the blurred reference, or if its view leaves CLIP's top 5 within 3 m."
+  ],
+  "audit": [
+    "One CLIP (ViT-B-32, 224 px centre crop): the left and right sixths of every 16:9 frame are not seen; a second model (DINO) and patch-level comparison would make identity harder to fake.",
+    "The generic city's search could also choose its hour and weather (six lights); the mood worlds could not. That favours the city, and it still did not win.",
+    "240 frames per view per world, seeded: a bigger search would raise every built world a little; it would not move composition off chance.",
+    "The structural measures are global (layout grid, edge histogram, texture energy, colour histogram); they cannot see whether a door is where the door is."
+  ]
+}
