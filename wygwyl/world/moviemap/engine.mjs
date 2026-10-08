@@ -291,6 +291,73 @@ export async function makeEngine({canvas, width, height, plan, base = '../city3d
       img.data[o] = c.r * 255; img.data[o + 1] = c.g * 255; img.data[o + 2] = c.b * 255; img.data[o + 3] = 255; }
     return img; }
 
+  // ——— the shared language: every pixel as one of ten classes the photographs are read into too, with its depth ———
+  // 0 sky · 1 facade · 2 roof · 3 ground · 4 water · 5 planting · 6 structure · 7 rock · 8 figure · 9 vehicle (districts/tools/lang.py reads the
+  // references into the same ten). R = class, G·256+B = depth in quarter metres (sky: 65535).
+  const semMat = (cls, slope) => new THREE.ShaderMaterial({uniforms: {uC: {value: cls}}, toneMapped: false, side: THREE.DoubleSide,
+    vertexShader: `varying float vD; varying vec3 vN;
+      void main(){ vec4 p = vec4(position, 1.0); vec3 n = normal;
+        #ifdef USE_INSTANCING
+          p = instanceMatrix * p; n = mat3(instanceMatrix) * n;
+        #endif
+        vec4 w = modelMatrix * p; vN = normalize(mat3(modelMatrix) * n); vec4 mv = viewMatrix * w; vD = -mv.z; gl_Position = projectionMatrix * mv; }`,
+    fragmentShader: `uniform float uC; varying float vD; varying vec3 vN;
+      void main(){ float c = uC; ${slope ? 'if (abs(normalize(vN).y) < 0.75) c = 7.0;' : ''}
+        float q = clamp(floor(vD * 4.0), 0.0, 65534.0); gl_FragColor = vec4(c / 255.0, floor(q / 256.0) / 255.0, mod(q, 256.0) / 255.0, 1.0); }`});
+  const SEM_MATS = new Map(), semRT = new THREE.WebGLRenderTarget(1, 1, {depthBuffer: true});
+  function semClass(o) {
+    const mm = blds.userData.meshes;
+    if (o === mm.body || o === mm.ruins) return [1]; if (o === mm.roofs) return [2]; if (o === mm.alleys) return [3];
+    if (o === roads) return [3]; if (o === terrain) return [3, true]; if (o === sea.sea) return [4];
+    let p = o; while (p) { if (p === trees) return [5];
+      if (p.userData?.lm !== undefined) { const t = (p.userData.lm.type || '').toLowerCase();          // a landmark: a building, or a thing that stands in the street
+        if (t === 'lone tree' || t === 'palm row') return [5];
+        if (/tower|chapel|lighthouse|dome|stadium|cathedral|palace|skyscraper|ruins|pyramid/.test(t)) return [1];
+        return [6]; }
+      p = p.parent; }
+    return [6];
+  }
+  // many poses at once (the pose search's index): the materials are swapped once; each pose → its class grid and a depth byte
+  // (log-spaced: 0 = 1 m … 254 = 3 km, 255 = sky). Poses: {x, y, z, yaw, pitch, hfov} in plan coordinates (y south, z up).
+  function semBatch(poses, w, h) {
+    if (semRT.width !== w || semRT.height !== h) semRT.setSize(w, h);
+    const saved = []; scene.traverse(o => { if (SKY.has(o) || o.isSprite || o.isPoints || o.isLine) { saved.push([o, o.visible, null]); o.visible = false; return; }
+      if (!o.isMesh) return; saved.push([o, o.visible, o.material]); const [c, sl] = semClass(o), k = c + ':' + !!sl;
+      o.material = SEM_MATS.get(k) || SEM_MATS.set(k, semMat(c, !!sl)).get(k); });
+    const bg = scene.background, fog = scene.fog, sm = renderer.shadowMap.autoUpdate, tm = renderer.toneMapping, asp = camera.aspect, fov = camera.fov;
+    scene.background = new THREE.Color(0, 1, 1); scene.fog = null; renderer.shadowMap.autoUpdate = false; renderer.toneMapping = THREE.NoToneMapping;
+    camera.aspect = w / h; const buf = new Uint8Array(w * h * 4), out = new Uint8Array(poses.length * w * h * 2), L3 = Math.log(3000);
+    renderer.setRenderTarget(semRT); renderer.setClearColor(new THREE.Color(0, 1, 1), 1);
+    poses.forEach((p, k) => {
+      camera.fov = hfovToV(p.hfov, w / h); camera.updateProjectionMatrix();
+      camera.position.set(p.x, p.z, p.y); camera.lookAt(p.x + Math.cos(p.yaw) * Math.cos(p.pitch), p.z + Math.sin(p.pitch), p.y + Math.sin(p.yaw) * Math.cos(p.pitch)); camera.updateMatrixWorld();
+      renderer.clear(); renderer.render(scene, camera); renderer.readRenderTargetPixels(semRT, 0, 0, w, h, buf);
+      const o0 = k * w * h * 2;
+      for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const i = ((h - 1 - y) * w + x) * 4, o = o0 + (y * w + x) * 2, q = buf[i + 1] * 256 + buf[i + 2];
+        out[o] = buf[i]; out[o + 1] = q >= 65534 ? 255 : Math.min(254, Math.max(0, Math.round(254 * Math.log(Math.max(1, q / 4)) / L3))); }
+    });
+    renderer.setRenderTarget(null);
+    for (const [o, v, m] of saved) { o.visible = v; if (m) o.material = m; }
+    scene.background = bg; scene.fog = fog; renderer.shadowMap.autoUpdate = sm; renderer.toneMapping = tm; renderer.setClearColor(0x000000, 0);
+    camera.aspect = asp; camera.fov = fov; camera.updateProjectionMatrix();
+    return out;
+  }
+  function semFrame(w, h) {
+    if (semRT.width !== w || semRT.height !== h) semRT.setSize(w, h);
+    const saved = []; scene.traverse(o => { if (SKY.has(o) || o.isSprite || o.isPoints || o.isLine) { saved.push([o, o.visible, null]); o.visible = false; return; }
+      if (!o.isMesh) return; saved.push([o, o.visible, o.material]); const [c, sl] = semClass(o), k = c + ':' + !!sl;
+      o.material = SEM_MATS.get(k) || SEM_MATS.set(k, semMat(c, !!sl)).get(k); });
+    const bg = scene.background, fog = scene.fog, sm = renderer.shadowMap.autoUpdate, tm = renderer.toneMapping;
+    scene.background = new THREE.Color(0, 1, 1); scene.fog = null; renderer.shadowMap.autoUpdate = false; renderer.toneMapping = THREE.NoToneMapping;
+    renderer.setRenderTarget(semRT); renderer.setClearColor(new THREE.Color(0, 1, 1), 1); renderer.clear(); renderer.render(scene, camera); renderer.setRenderTarget(null);
+    const buf = new Uint8Array(w * h * 4); renderer.readRenderTargetPixels(semRT, 0, 0, w, h, buf);
+    for (const [o, v, m] of saved) { o.visible = v; if (m) o.material = m; }
+    scene.background = bg; scene.fog = fog; renderer.shadowMap.autoUpdate = sm; renderer.toneMapping = tm; renderer.setClearColor(0x000000, 0);
+    const cls = new Uint8Array(w * h), dep = new Uint16Array(w * h);         // rows from the top
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const i = ((h - 1 - y) * w + x) * 4, o = y * w + x; cls[o] = buf[i]; dep[o] = buf[i + 1] * 256 + buf[i + 2]; }
+    return {w, h, cls, dep};
+  }
+
   function render() { U.time.value = 0; const f = scene.fog; if (styleFog) scene.fog = styleFog === 'none' ? null : styleFog; renderer.render(scene, camera); scene.fog = f; }
   function resize(w, h, pr = pixelRatio) { renderer.setPixelRatio(pr); renderer.setSize(w, h, false); camera.aspect = w / h; camera.fov = hfovToV(hfov, w / h); camera.updateProjectionMatrix(); }
   function setHfov(d) { hfov = d; camera.fov = hfovToV(hfov, camera.aspect); camera.updateProjectionMatrix(); }
@@ -298,6 +365,6 @@ export async function makeEngine({canvas, width, height, plan, base = '../city3d
   setEra(5); setHour(12); setStyle('photo');
   onStep(100, '');
   return {renderer, scene, camera, C, S, meta, U, st, heav, blds, legible, street, lmGroups, lmState,
-    pose, poseFree, advance, setHourFast, setWet, renderFilm, render, resize, setHfov, setEra, setHour, setDoy, setWeather, setSeason, setStyle, pickAt, maskOf, idImage, idCounts, groundY,
+    pose, poseFree, advance, setHourFast, setWet, renderFilm, render, resize, setHfov, setEra, setHour, setDoy, setWeather, setSeason, setStyle, pickAt, maskOf, idImage, idCounts, groundY, semFrame, semBatch,
     buildingState: (k, e) => blds.userData.state(k, e ?? st.era)};
 }

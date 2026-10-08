@@ -63,7 +63,7 @@ for (const P of PLACES) {
 // the transitions between poems, as lines of small lights on the water from one place to the next
 const placeOf = {haze: 'catwalk', hive: 'needles', overseer: 'moon', bay: 'atrium', ascent: 'field', plaza: 'gate', naraka: 'market', ankhu: 'spire', commons: 'dish', arcade: 'canopy', cenotaph: 'viaduct', temple: 'temple', black: 'door'};
 // the folds: every reference stood up as a walk-in pop-up in its place (?mode=sets | folds | both)
-const MODE = new URLSearchParams(location.search).get('mode') || 'both';
+const MODE = new URLSearchParams(location.search).get('mode') || 'sets';            // the folds stretch the photos off their standpoint: an experiment, not the default
 const FOLDS = S && MODE !== 'sets' ? await makeFolds(scene, PLACES, placeOf, Object.fromEntries(S.views.map(v => [v.n, v.d])), './').catch(e => { console.warn('folds unavailable', e); return null; }) : null;
 if (MODE === 'folds') for (const P of PLACES) P.group.visible = false;
 const byId = Object.fromEntries(PLACES.map(p => [p.id, p]));

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Pose Finder</title>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<style>html,body{margin:0;background:#000;color:#ccc;font:12px monospace}canvas{display:block}</style></head>
+<body><canvas id="c"></canvas><div id="s">loading…</div>
+<script type="module">
+// THE POSE FINDER — where in the city each of the 100 views would have been taken from, found in the shared language
+// (ten classes: sky, facade, roof, ground, water, planting, structure, rock, figure, vehicle) rather than in pixels or CLIP.
+//   1 candidates: where a body can stand — every street of the plan every 30 m, rooftops, high points — × 8 headings × 3 pitches
+//   2 index: each candidate rendered as a 64×36 class frame (engine.semBatch) and scored, in this page, against every view under
+//     the view's own lens and pitch hypotheses (pitch from its horizon), keeping each view's best 40
+//   3 evolution: from the 8 most different good candidates, an evolution strategy over (x, y, height, heading, pitch, lens)
+//     on the full 96×54 grid: class-balanced overlap, never inside a wall
+// A driver (districts/tools/posefind-run.mjs) calls PF.* and saves what comes back.
+import {makeEngine} from '../engine.mjs';
+const Q = new URLSearchParams(location.search), W = +(Q.get('w') || 448), H = +(Q.get('h') || 252);
+const plan = await fetch('../plan.json').then(r => r.json());
+const canvas = document.getElementById('c');
+const eng = await makeEngine({canvas, width: W, height: H, plan, base: '../../city3d/', preserve: true, shadows: false, onStep: (p, m) => document.getElementById('s').textContent = `${p}% ${m}`});
+eng.setEra(5);
+const RJ = await fetch('../../districts/tools/.work/lang/refs.json').then(r => r.json()), RB = new Uint8Array(await fetch('../../districts/tools/.work/lang/refs.bin').then(r => r.arrayBuffer()));
+const RW = RJ.w, RH = RJ.h, NV = RJ.views.length, refCls = n => RB.subarray((n - 1) * RW * RH, n * RW * RH);
+const B = new Float32Array(await fetch('../../city3d/buildings.f32').then(r => r.arrayBuffer()));
+let seed = 11; const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296), gauss = () => Math.sqrt(-2 * Math.log(rnd() + 1e-12)) * Math.cos(2 * Math.PI * rnd());
+const IW = 64, IH = 36, IHF = 90, PITCHES = [-0.45, 0, 0.45], NCLS = 10;
+const vfov = (hf, a = 16 / 9) => 2 * Math.atan(Math.tan(hf * Math.PI / 360) / a);
+const DEEP = Math.round(254 * Math.log(2.5) / Math.log(3000));                           // depth byte of 2.5 m: nearer than this is inside a wall
+
+// ——— 1 candidates ———
+function candidates() {
+  const out = [];
+  for (const e of plan.edges) { const p = e.pts; let acc = 15;
+    for (let i = 0; i + 3 < p.length; i += 2) { const ax = p[i], ay = p[i + 1], bx = p[i + 2], by = p[i + 3], L = Math.hypot(bx - ax, by - ay);
+      while (acc < L) { const f = acc / L; out.push({x: ax + (bx - ax) * f, y: ay + (by - ay) * f, h: 1.7, a0: Math.atan2(by - ay, bx - ax), kind: 'street'}); acc += 30; } acc -= L; } }
+  const nb = B.length / 14, take = Math.min(2000, nb);                                  // rooftops: a stratified sample, tall buildings first
+  const ord = [...Array(nb).keys()].sort((a, b) => B[b * 14 + 5] - B[a * 14 + 5]);
+  for (let k = 0; k < take; k++) { const i = k < 600 ? ord[k] : ord[600 + Math.floor(rnd() * (nb - 600))]; out.push({x: B[i * 14], y: B[i * 14 + 1], h: B[i * 14 + 5] + 1.7, a0: 0, kind: 'roof'}); }
+  for (let k = 0; k < 600; k++) { const c = out[Math.floor(rnd() * out.length)]; out.push({x: c.x, y: c.y, h: 60 + rnd() * 200, a0: 0, kind: 'high'}); }
+  return out;
+}
+// ——— the view's hypotheses: lens × heading offset × pitch (pitch from its horizon when it has one) → a lookup into the index frame ———
+const SW = 16, SH = 9;
+function hypotheses() {
+  const hy = PITCHES.map(() => []);
+  for (const v of RJ.views) {
+    const cls = refCls(v.n), cnt = new Float32Array(NCLS); for (let i = 0; i < RW * RH; i++) cnt[cls[i] & 15]++;
+    for (const Hr of [55, 85]) {
+      const Vr = vfov(Hr), pitches = v.hz != null ? [-Math.atan((1 - 2 * v.hz) * Math.tan(Vr / 2))] : [-0.4, 0, 0.4];
+      for (const pr of pitches) for (const dl of [-0.3, 0, 0.3]) {
+        const q = PITCHES.reduce((b, p, i) => Math.abs(p - pr) < Math.abs(PITCHES[b] - pr) ? i : b, 0), pq = PITCHES[q];
+        const lut = new Int16Array(SW * SH), sc = new Uint8Array(SW * SH), w = new Float32Array(SW * SH); let ok = 0;
+        for (let j = 0; j < SH; j++) for (let i = 0; i < SW; i++) {
+          const u = (i + 0.5) / SW, vv = (j + 0.5) / SH, x = (2 * u - 1) * Math.tan(Hr * Math.PI / 360), y = (1 - 2 * vv) * Math.tan(Vr / 2);
+          // the ray in the view's camera (pitch pr, heading dl), then in the index camera (pitch pq, heading 0)
+          const cp = Math.cos(pr), sp = Math.sin(pr), dx0 = x, dy0 = y * cp + sp, dz0 = -y * sp + cp;          // pitched
+          const cd = Math.cos(dl), sd = Math.sin(dl), dx = dx0 * cd + dz0 * sd, dz = -dx0 * sd + dz0 * cd, dy = dy0;   // turned
+          const cq = Math.cos(pq), sq = Math.sin(pq), yq = dy * cq - dz * sq, zq = dy * sq + dz * cq;
+          const k = j * SW + i, ri = Math.min(RH - 1, Math.floor(vv * RH)) * RW + Math.min(RW - 1, Math.floor(u * RW)); sc[k] = cls[ri] & 15; w[k] = 1 / Math.sqrt(cnt[sc[k]] / (RW * RH) + 0.02);
+          if (zq <= 0.05) { lut[k] = -1; continue; }
+          const uu = 0.5 + 0.5 * dx / (zq * Math.tan(IHF * Math.PI / 360)), vq = 0.5 - 0.5 * yq / (zq * Math.tan(vfov(IHF) / 2));
+          if (uu < 0 || uu >= 1 || vq < 0 || vq >= 1) { lut[k] = -1; continue; } lut[k] = Math.floor(vq * IH) * IW + Math.floor(uu * IW); ok++;
+        }
+        if (ok > 0.8 * SW * SH) hy[q].push({n: v.n, Hr, pr, dl, lut, sc, w});
+      }
+    }
+  }
+  return hy;
+}
+// ——— 2 the index ———
+const PF = window.PF = {eng, ready: true, NV};
+PF.index = async (chunk = 400, keep = 40) => {
+  const C = candidates(), hy = hypotheses(), best = Array.from({length: NV + 1}, () => []), t0 = performance.now(); let n = 0, inside = 0;
+  const push = (arr, it) => { if (arr.length < keep) { arr.push(it); arr.sort((a, b) => b.s - a.s); } else if (it.s > arr[keep - 1].s) { arr[keep - 1] = it; arr.sort((a, b) => b.s - a.s); } };
+  for (let c0 = 0; c0 < C.length; c0 += chunk) {
+    const cs = C.slice(c0, c0 + chunk), poses = [];
+    for (const c of cs) { const gz = eng.groundY(c.x, c.y); for (let a = 0; a < 8; a++) for (const p of PITCHES) poses.push({x: c.x, y: c.y, z: gz + c.h, yaw: c.a0 + a * Math.PI / 4, pitch: p, hfov: IHF, c}); }
+    const buf = eng.semBatch(poses, IW, IH);
+    poses.forEach((ps, k) => { const o = k * IW * IH * 2; let near = 0; for (let i = 0; i < IW * IH; i++) if (buf[o + i * 2 + 1] < DEEP) near++;
+      if (near > 0.4 * IW * IH) { inside++; return; }
+      const q = PITCHES.indexOf(ps.pitch);
+      for (const h of hy[q]) { let s = 0, ws = 0; const L = h.lut; for (let i = 0; i < L.length; i++) { const j = L[i]; if (j < 0) continue; ws += h.w[i]; if (buf[o + j * 2] === h.sc[i]) s += h.w[i]; }
+        s /= ws || 1; const arr = best[h.n]; if (arr.length < keep || s > arr[arr.length - 1].s) push(arr, {s, x: ps.x, y: ps.y, h: ps.c.h, kind: ps.c.kind, yaw: ps.yaw + h.dl, pitch: h.pr, hfov: h.Hr}); } });
+    n += poses.length; document.getElementById('s').textContent = `index ${n} frames · ${((performance.now() - t0) / 1000).toFixed(0)} s`;
+    await new Promise(r => setTimeout(r, 0));
+  }
+  PF.best = best; return {frames: n, inside, candidates: C.length, seconds: (performance.now() - t0) / 1000, hyps: hy.map(h => h.length)};
+};
+// ——— 3 evolution on the full grid ———
+function score96(buf, o, ref) {                            // class-balanced overlap: the mean IoU over the classes in either frame
+  const inter = new Float32Array(NCLS), uni = new Float32Array(NCLS); let near = 0;
+  for (let i = 0; i < RW * RH; i++) { const a = buf[o + i * 2], b = ref[i] & 15; if (buf[o + i * 2 + 1] < DEEP) near++;
+    if (a === b) { inter[a]++; uni[a]++; } else { uni[a]++; uni[b]++; } }
+  if (near > 0.3 * RW * RH) return -1;
+  let s = 0, k = 0; for (let c = 0; c < NCLS; c++) if (uni[c] > 8) { s += inter[c] / uni[c]; k++; } return k ? s / k : 0;
+}
+const toPose = t => ({x: t[0], y: t[1], z: eng.groundY(t[0], t[1]) + Math.max(1.5, t[2]), yaw: t[3], pitch: Math.max(-1.3, Math.min(1.3, t[4])), hfov: Math.max(30, Math.min(110, t[5]))});
+PF.refine = (n, seeds = 8, gens = 14, lam = 12, mu = 4) => {
+  const ref = refCls(n), cand = PF.best[n] || [], picked = [];
+  for (const c of cand) { if (picked.length >= seeds) break; if (picked.every(p => Math.hypot(p.x - c.x, p.y - c.y) > 40 || Math.abs(Math.sin((p.yaw - c.yaw) / 2)) > 0.38)) picked.push(c); }
+  let best = {s: -1}; const runs = [];
+  for (const c of picked) {
+    let m = [c.x, c.y, c.h, c.yaw, c.pitch, c.hfov], sig = [8, 8, Math.max(1, c.h * 0.3), 0.12, 0.08, 8], bs = -1, bt = m;
+    for (let g = 0; g < gens; g++) {
+      const pop = Array.from({length: lam}, () => m.map((v, i) => v + gauss() * sig[i])); if (g === 0) pop[0] = m.slice();
+      const buf = eng.semBatch(pop.map(toPose), RW, RH), sc = pop.map((t, k) => score96(buf, k * RW * RH * 2, ref));
+      const ord = sc.map((s, i) => [s, i]).sort((a, b) => b[0] - a[0]), el = ord.slice(0, mu).map(([, i]) => pop[i]);
+      if (ord[0][0] > bs) { bs = ord[0][0]; bt = pop[ord[0][1]]; }
+      const nm = m.map((_, i) => el.reduce((a, t) => a + t[i], 0) / mu); const moved = ord[0][0] > (g ? runs.at(-1)?.s ?? -1 : -1);
+      sig = sig.map((v, i) => v * (ord[0][0] >= bs - 1e-9 ? 1.05 : 0.8)); m = nm;
+    }
+    runs.push({s: bs, t: bt, from: {s: c.s, kind: c.kind}}); if (bs > best.s) best = {s: bs, t: bt, from: c};
+  }
+  return {n, best: {s: best.s, pose: toPose(best.t), h: best.t[2], from: best.from}, runs: runs.map(r => ({s: r.s, pose: toPose(r.t)})), index: cand.slice(0, 5)};
+};
+// the checks: does the found frame pick its own view among all 100? and what do random poses score?
+PF.check = (n, pose) => { const buf = eng.semBatch([pose], RW, RH), scores = []; for (let m = 1; m <= NV; m++) scores.push(score96(buf, 0, refCls(m)));
+  const own = scores[n - 1]; return {own, rank: scores.filter(s => s > own).length + 1}; };
+PF.nullScores = (n, k = 60) => { const C = PF._C || (PF._C = candidates()), poses = []; for (let i = 0; i < k; i++) { const c = C[Math.floor(rnd() * C.length)]; poses.push({x: c.x, y: c.y, z: eng.groundY(c.x, c.y) + c.h, yaw: rnd() * 6.283, pitch: (rnd() - 0.5) * 0.9, hfov: 55 + rnd() * 30}); }
+  const buf = eng.semBatch(poses, RW, RH), ref = refCls(n), s = poses.map((_, k2) => score96(buf, k2 * RW * RH * 2, ref)).filter(x => x >= 0).sort((a, b) => a - b);
+  return {median: s[s.length >> 1], p95: s[Math.floor(s.length * 0.95)]}; };
+// what the found pose looks like: the city as photographed, and in the shared language
+const COL = [[30, 40, 70], [200, 120, 80], [150, 60, 50], [120, 120, 120], [40, 110, 200], [60, 160, 70], [230, 200, 60], [120, 90, 70], [240, 80, 200], [80, 230, 230]];
+PF.shoot = (pose, hour = 13) => { eng.setHour(hour); eng.setHfov(pose.hfov); eng.poseFree(pose.x, pose.y, pose.z, pose.yaw, pose.pitch); eng.advance(0); eng.render();
+  const photo = eng.renderer.domElement.toDataURL('image/jpeg', 0.85), buf = eng.semBatch([pose], RW, RH), cv = document.createElement('canvas'); cv.width = RW; cv.height = RH;
+  const g = cv.getContext('2d'), im = g.createImageData(RW, RH); for (let i = 0; i < RW * RH; i++) im.data.set([...COL[Math.min(9, buf[i * 2])], 255], i * 4); g.putImageData(im, 0, 0);
+  return {photo, sem: cv.toDataURL('image/png')}; };
+document.getElementById('s').textContent = 'ready'; window.pfReady = true;
+</script></body></html>
