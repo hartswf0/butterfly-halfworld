@@ -20,6 +20,11 @@ const eng = await makeEngine({canvas, width: W, height: H, plan, base: '../../ci
 eng.setEra(5);
 const RJ = await fetch('../../districts/tools/.work/lang/refs.json').then(r => r.json()), RB = new Uint8Array(await fetch('../../districts/tools/.work/lang/refs.bin').then(r => r.arrayBuffer()));
 const RW = RJ.w, RH = RJ.h, NV = RJ.views.length, refCls = n => RB.subarray((n - 1) * RW * RH, n * RW * RH);
+const RD = new Float32Array(await fetch('../../districts/tools/.work/lang/depth.bin').then(r => r.arrayBuffer())), refDep = n => RD.subarray((n - 1) * RW * RH, n * RW * RH);   // 1 = nearest
+// what a view says, and whether it says enough to be placed: a reading that is nearly one class with nearly flat depth carries no place
+const INFO = {}; for (const v of RJ.views) { const c = refCls(v.n), d = refDep(v.n), cnt = new Float32Array(10); let m = 0, q = 0;
+  for (let i = 0; i < RW * RH; i++) { cnt[c[i] & 15]++; m += d[i]; } m /= RW * RH; for (let i = 0; i < RW * RH; i++) q += (d[i] - m) ** 2;
+  const top = Math.max(...cnt) / (RW * RH), sd = Math.sqrt(q / (RW * RH)); INFO[v.n] = {top, sd, placeable: !(top > 0.85 && sd < 0.12)}; }
 const B = new Float32Array(await fetch('../../city3d/buildings.f32').then(r => r.arrayBuffer()));
 let seed = 11; const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296), gauss = () => Math.sqrt(-2 * Math.log(rnd() + 1e-12)) * Math.cos(2 * Math.PI * rnd());
 const IW = 64, IH = 36, IHF = 90, PITCHES = [-0.45, 0, 0.45], NCLS = 10;
@@ -48,19 +53,19 @@ function hypotheses() {
       const Vr = vfov(Hr), pitches = v.hz != null ? [-Math.atan((1 - 2 * v.hz) * Math.tan(Vr / 2))] : [-0.4, 0, 0.4];
       for (const pr of pitches) for (const dl of [-0.3, 0, 0.3]) {
         const q = PITCHES.reduce((b, p, i) => Math.abs(p - pr) < Math.abs(PITCHES[b] - pr) ? i : b, 0), pq = PITCHES[q];
-        const lut = new Int16Array(SW * SH), sc = new Uint8Array(SW * SH), w = new Float32Array(SW * SH); let ok = 0;
+        const lut = new Int16Array(SW * SH), sc = new Uint8Array(SW * SH), w = new Float32Array(SW * SH), sdep = new Float32Array(SW * SH), dep = refDep(v.n); let ok = 0;
         for (let j = 0; j < SH; j++) for (let i = 0; i < SW; i++) {
           const u = (i + 0.5) / SW, vv = (j + 0.5) / SH, x = (2 * u - 1) * Math.tan(Hr * Math.PI / 360), y = (1 - 2 * vv) * Math.tan(Vr / 2);
           // the ray in the view's camera (pitch pr, heading dl), then in the index camera (pitch pq, heading 0)
           const cp = Math.cos(pr), sp = Math.sin(pr), dx0 = x, dy0 = y * cp + sp, dz0 = -y * sp + cp;          // pitched
           const cd = Math.cos(dl), sd = Math.sin(dl), dx = dx0 * cd + dz0 * sd, dz = -dx0 * sd + dz0 * cd, dy = dy0;   // turned
           const cq = Math.cos(pq), sq = Math.sin(pq), yq = dy * cq - dz * sq, zq = dy * sq + dz * cq;
-          const k = j * SW + i, ri = Math.min(RH - 1, Math.floor(vv * RH)) * RW + Math.min(RW - 1, Math.floor(u * RW)); sc[k] = cls[ri] & 15; w[k] = 1 / Math.sqrt(cnt[sc[k]] / (RW * RH) + 0.02);
+          const k = j * SW + i, ri = Math.min(RH - 1, Math.floor(vv * RH)) * RW + Math.min(RW - 1, Math.floor(u * RW)); sc[k] = cls[ri] & 15; sdep[k] = dep[ri]; w[k] = 1 / Math.sqrt(cnt[sc[k]] / (RW * RH) + 0.02);
           if (zq <= 0.05) { lut[k] = -1; continue; }
           const uu = 0.5 + 0.5 * dx / (zq * Math.tan(IHF * Math.PI / 360)), vq = 0.5 - 0.5 * yq / (zq * Math.tan(vfov(IHF) / 2));
           if (uu < 0 || uu >= 1 || vq < 0 || vq >= 1) { lut[k] = -1; continue; } lut[k] = Math.floor(vq * IH) * IW + Math.floor(uu * IW); ok++;
         }
-        if (ok > 0.8 * SW * SH) hy[q].push({n: v.n, Hr, pr, dl, lut, sc, w});
+        if (ok > 0.8 * SW * SH && INFO[v.n].placeable) hy[q].push({n: v.n, Hr, pr, dl, lut, sc, sd: sdep, w});
       }
     }
   }
@@ -68,6 +73,8 @@ function hypotheses() {
 }
 // ——— 2 the index ———
 const PF = window.PF = {eng, ready: true, NV};
+PF.info = INFO;
+PF.loadBest = b => { PF.best = b; return b.length; };
 PF.index = async (chunk = 400, keep = 40) => {
   const C = candidates(), hy = hypotheses(), best = Array.from({length: NV + 1}, () => []), t0 = performance.now(); let n = 0, inside = 0;
   const push = (arr, it) => { if (arr.length < keep) { arr.push(it); arr.sort((a, b) => b.s - a.s); } else if (it.s > arr[keep - 1].s) { arr[keep - 1] = it; arr.sort((a, b) => b.s - a.s); } };
@@ -78,31 +85,70 @@ PF.index = async (chunk = 400, keep = 40) => {
     poses.forEach((ps, k) => { const o = k * IW * IH * 2; let near = 0; for (let i = 0; i < IW * IH; i++) if (buf[o + i * 2 + 1] < DEEP) near++;
       if (near > 0.4 * IW * IH) { inside++; return; }
       const q = PITCHES.indexOf(ps.pitch);
-      for (const h of hy[q]) { let s = 0, ws = 0; const L = h.lut; for (let i = 0; i < L.length; i++) { const j = L[i]; if (j < 0) continue; ws += h.w[i]; if (buf[o + j * 2] === h.sc[i]) s += h.w[i]; }
-        s /= ws || 1; const arr = best[h.n]; if (arr.length < keep || s > arr[arr.length - 1].s) push(arr, {s, x: ps.x, y: ps.y, h: ps.c.h, kind: ps.c.kind, yaw: ps.yaw + h.dl, pitch: h.pr, hfov: h.Hr}); } });
+      for (const h of hy[q]) { let s = 0, ws = 0, n = 0, sa = 0, sb = 0, saa = 0, sbb = 0, sab = 0; const L = h.lut;
+        for (let i = 0; i < L.length; i++) { const j = L[i]; if (j < 0) continue; ws += h.w[i]; if (buf[o + j * 2] === h.sc[i]) s += h.w[i];
+          const b = buf[o + j * 2 + 1]; if (b === 255 || h.sc[i] === 0) continue; const a = h.sd[i], r = 1 - b / 254; n++; sa += a; sb += r; saa += a * a; sbb += r * r; sab += a * r; }
+        const cv = n > 12 ? (sab - sa * sb / n) / Math.sqrt(Math.max(1e-9, (saa - sa * sa / n) * (sbb - sb * sb / n))) : 0;     // depth: does near/far agree?
+        s = 0.5 * s / (ws || 1) + 0.5 * Math.max(0, cv); const arr = best[h.n]; if (arr.length < keep || s > arr[arr.length - 1].s) push(arr, {s, x: ps.x, y: ps.y, h: ps.c.h, kind: ps.c.kind, yaw: ps.yaw + h.dl, pitch: h.pr, hfov: h.Hr}); } });
     n += poses.length; document.getElementById('s').textContent = `index ${n} frames · ${((performance.now() - t0) / 1000).toFixed(0)} s`;
     await new Promise(r => setTimeout(r, 0));
   }
   PF.best = best; return {frames: n, inside, candidates: C.length, seconds: (performance.now() - t0) / 1000, hyps: hy.map(h => h.length)};
 };
 // ——— 3 evolution on the full grid ———
-function score96(buf, o, ref) {                            // class-balanced overlap: the mean IoU over the classes in either frame
-  const inter = new Float32Array(NCLS), uni = new Float32Array(NCLS); let near = 0;
-  for (let i = 0; i < RW * RH; i++) { const a = buf[o + i * 2], b = ref[i] & 15; if (buf[o + i * 2 + 1] < DEEP) near++;
+// boundaries in the language: where the class changes or depth jumps; compared by a chamfer distance (two-pass, in cells)
+function edges(cls, dep, near) { const e = new Uint8Array(RW * RH);
+  for (let y = 0; y < RH; y++) for (let x = 0; x < RW; x++) { const i = y * RW + x;
+    for (const j of [x + 1 < RW ? i + 1 : -1, y + 1 < RH ? i + RW : -1]) if (j >= 0 && ((cls[i] & 15) !== (cls[j] & 15) || Math.abs(near(dep, i) - near(dep, j)) > 0.08)) { e[i] = 1; break; } }
+  return e; }
+function chamfer(e) { const D = new Float32Array(RW * RH).fill(1e3); for (let i = 0; i < D.length; i++) if (e[i]) D[i] = 0;
+  for (let y = 0; y < RH; y++) for (let x = 0; x < RW; x++) { const i = y * RW + x; if (x) D[i] = Math.min(D[i], D[i - 1] + 1); if (y) D[i] = Math.min(D[i], D[i - RW] + 1); if (x && y) D[i] = Math.min(D[i], D[i - RW - 1] + 1.4); if (y && x + 1 < RW) D[i] = Math.min(D[i], D[i - RW + 1] + 1.4); }
+  for (let y = RH - 1; y >= 0; y--) for (let x = RW - 1; x >= 0; x--) { const i = y * RW + x; if (x + 1 < RW) D[i] = Math.min(D[i], D[i + 1] + 1); if (y + 1 < RH) D[i] = Math.min(D[i], D[i + RW] + 1); if (x + 1 < RW && y + 1 < RH) D[i] = Math.min(D[i], D[i + RW + 1] + 1.4); if (x && y + 1 < RH) D[i] = Math.min(D[i], D[i + RW - 1] + 1.4); }
+  return D; }
+const REF = {}; function refPack(n) { if (REF[n]) return REF[n]; const c = refCls(n), d = refDep(n), e = edges(c, d, (a, i) => a[i]);
+  // the view's depth ranks (non-sky) for a rank correlation
+  const idx = []; for (let i = 0; i < RW * RH; i++) if ((c[i] & 15) !== 0) idx.push(i); const rk = new Float32Array(RW * RH); idx.sort((a, b) => d[a] - d[b]).forEach((i, k) => { rk[i] = k / idx.length; });
+  return (REF[n] = {c, d, e, D: chamfer(e), rk, ne: e.reduce((a, b) => a + b, 0)}); }
+const nearOf = b => b === 255 ? 0 : 1 - b / 254;
+function scoreFull(buf, o, n, pose) {
+  const R = refPack(n), inter = new Float32Array(NCLS), uni = new Float32Array(NCLS); let close = 0; const rc = new Uint8Array(RW * RH), rd = new Float32Array(RW * RH);
+  for (let i = 0; i < RW * RH; i++) { const a = buf[o + i * 2], b = R.c[i] & 15, dd = buf[o + i * 2 + 1]; rc[i] = a; rd[i] = nearOf(dd); if (dd < DEEP) close++;
     if (a === b) { inter[a]++; uni[a]++; } else { uni[a]++; uni[b]++; } }
-  if (near > 0.3 * RW * RH) return -1;
-  let s = 0, k = 0; for (let c = 0; c < NCLS; c++) if (uni[c] > 8) { s += inter[c] / uni[c]; k++; } return k ? s / k : 0;
+  if (close > 0.3 * RW * RH) return {s: -1};
+  let iou = 0, k = 0; for (let c = 0; c < NCLS; c++) if (uni[c] > 8) { iou += inter[c] / uni[c]; k++; } iou = k ? iou / k : 0;
+  // depth: Spearman between the view's depth ranks and the frame's, where both see something (not sky)
+  const idx = []; for (let i = 0; i < RW * RH; i++) if ((R.c[i] & 15) !== 0 && rc[i] !== 0) idx.push(i);
+  let rho = 0; if (idx.length > 40) { const rr = new Float32Array(RW * RH); [...idx].sort((a, b) => rd[a] - rd[b]).forEach((i, q) => { rr[i] = q / idx.length; });
+    const ra = new Float32Array(RW * RH); [...idx].sort((a, b) => R.d[a] - R.d[b]).forEach((i, q) => { ra[i] = q / idx.length; });
+    let s = 0; for (const i of idx) s += (ra[i] - rr[i]) ** 2; rho = 1 - 6 * s * idx.length * idx.length / (idx.length * (idx.length ** 2 - 1)) ; }
+  // boundaries: each set of edges against the other's distance field
+  const e = edges(rc, rd, (a, i) => a[i]), De = chamfer(e); let a1 = 0, n1 = 0, a2 = 0, n2 = 0;
+  for (let i = 0; i < RW * RH; i++) { if (e[i]) { a1 += Math.min(R.D[i], 12); n1++; } if (R.e[i]) { a2 += Math.min(De[i], 12); n2++; } }
+  const bnd = n1 && n2 ? Math.exp(-(a1 / n1 + a2 / n2) / 2 / 3) : 0;
+  // the horizon: the view's horizon implies a pitch for this lens
+  const hz = RJ.views[n - 1].hz; let hor = 0.5; if (hz != null && pose) { const pr = -Math.atan((1 - 2 * hz) * Math.tan(vfov(pose.hfov) / 2)); hor = Math.exp(-(((pose.pitch - pr) / 0.12) ** 2)); }
+  const s = 0.3 * iou + 0.35 * Math.max(0, rho) + 0.25 * bnd + 0.1 * hor;
+  return {s, iou, rho, bnd, hor};
 }
 const toPose = t => ({x: t[0], y: t[1], z: eng.groundY(t[0], t[1]) + Math.max(1.5, t[2]), yaw: t[3], pitch: Math.max(-1.3, Math.min(1.3, t[4])), hfov: Math.max(30, Math.min(110, t[5]))});
-PF.refine = (n, seeds = 8, gens = 14, lam = 12, mu = 4) => {
-  const ref = refCls(n), cand = PF.best[n] || [], picked = [];
+const EYE = Q.get('eye') || 'http://127.0.0.1:8232';
+async function likeness(n, buf, k) {                            // DINOv2 on the two language images: shape, not paint
+  const frames = [], near = []; for (let j = 0; j < k; j++) { const o = j * RW * RH * 2, c = new Array(RW * RH), d = new Array(RW * RH);
+    for (let i = 0; i < RW * RH; i++) { c[i] = buf[o + i * 2]; d[i] = +nearOf(buf[o + i * 2 + 1]).toFixed(3); } frames.push(c); near.push(d); }
+  try { return (await (await fetch(EYE + '/likeness', {method: 'POST', body: JSON.stringify({view: n, frames, near})})).json()).dino; } catch (e) { return frames.map(() => null); }
+}
+const dinoN = v => v == null ? 0 : Math.max(0, Math.min(1, (v - 0.45) / 0.4));         // 0.45 ≈ another view's reading; 0.85 ≈ nearly the same
+const blend = (p, dn) => 0.25 * p.iou + 0.25 * Math.max(0, p.rho) + 0.2 * p.bnd + 0.1 * p.hor + 0.2 * dinoN(dn);
+PF.refine = async (n, seeds = 8, gens = 14, lam = 12, mu = 4) => {
+  const cand = PF.best[n] || [], picked = [];
   for (const c of cand) { if (picked.length >= seeds) break; if (picked.every(p => Math.hypot(p.x - c.x, p.y - c.y) > 40 || Math.abs(Math.sin((p.yaw - c.yaw) / 2)) > 0.38)) picked.push(c); }
   let best = {s: -1}; const runs = [];
   for (const c of picked) {
     let m = [c.x, c.y, c.h, c.yaw, c.pitch, c.hfov], sig = [8, 8, Math.max(1, c.h * 0.3), 0.12, 0.08, 8], bs = -1, bt = m;
     for (let g = 0; g < gens; g++) {
       const pop = Array.from({length: lam}, () => m.map((v, i) => v + gauss() * sig[i])); if (g === 0) pop[0] = m.slice();
-      const buf = eng.semBatch(pop.map(toPose), RW, RH), sc = pop.map((t, k) => score96(buf, k * RW * RH * 2, ref));
+      const ps = pop.map(toPose), buf = eng.semBatch(ps, RW, RH), parts = pop.map((t, k) => scoreFull(buf, k * RW * RH * 2, n, ps[k])), dn = await likeness(n, buf, pop.length);
+      const sc = parts.map((p, k) => p.s < 0 ? -1 : blend(p, dn[k]));
       const ord = sc.map((s, i) => [s, i]).sort((a, b) => b[0] - a[0]), el = ord.slice(0, mu).map(([, i]) => pop[i]);
       if (ord[0][0] > bs) { bs = ord[0][0]; bt = pop[ord[0][1]]; }
       const nm = m.map((_, i) => el.reduce((a, t) => a + t[i], 0) / mu); const moved = ord[0][0] > (g ? runs.at(-1)?.s ?? -1 : -1);
@@ -110,13 +156,16 @@ PF.refine = (n, seeds = 8, gens = 14, lam = 12, mu = 4) => {
     }
     runs.push({s: bs, t: bt, from: {s: c.s, kind: c.kind}}); if (bs > best.s) best = {s: bs, t: bt, from: c};
   }
-  return {n, best: {s: best.s, pose: toPose(best.t), h: best.t[2], from: best.from}, runs: runs.map(r => ({s: r.s, pose: toPose(r.t)})), index: cand.slice(0, 5)};
+  if (!INFO[n].placeable || !picked.length) return {n, placeable: false, info: INFO[n]};
+  const bp = toPose(best.t), bb = eng.semBatch([bp], RW, RH), parts = scoreFull(bb, 0, n, bp); parts.dino = (await likeness(n, bb, 1))[0]; parts.s = blend(parts, parts.dino);
+  return {n, placeable: true, info: INFO[n], best: {s: best.s, parts, pose: bp, h: best.t[2], from: best.from}, runs: runs.map(r => ({s: r.s, pose: toPose(r.t)})), index: cand.slice(0, 5)};
 };
 // the checks: does the found frame pick its own view among all 100? and what do random poses score?
-PF.check = (n, pose) => { const buf = eng.semBatch([pose], RW, RH), scores = []; for (let m = 1; m <= NV; m++) scores.push(score96(buf, 0, refCls(m)));
+PF.check = async (n, pose) => { const buf = eng.semBatch([pose], RW, RH), scores = [];
+  for (let m = 1; m <= NV; m++) { if (!INFO[m].placeable) { scores.push(-2); continue; } const p = scoreFull(buf, 0, m, pose); scores.push(p.s < 0 ? -1 : blend(p, (await likeness(m, buf, 1))[0])); }
   const own = scores[n - 1]; return {own, rank: scores.filter(s => s > own).length + 1}; };
-PF.nullScores = (n, k = 60) => { const C = PF._C || (PF._C = candidates()), poses = []; for (let i = 0; i < k; i++) { const c = C[Math.floor(rnd() * C.length)]; poses.push({x: c.x, y: c.y, z: eng.groundY(c.x, c.y) + c.h, yaw: rnd() * 6.283, pitch: (rnd() - 0.5) * 0.9, hfov: 55 + rnd() * 30}); }
-  const buf = eng.semBatch(poses, RW, RH), ref = refCls(n), s = poses.map((_, k2) => score96(buf, k2 * RW * RH * 2, ref)).filter(x => x >= 0).sort((a, b) => a - b);
+PF.nullScores = async (n, k = 60) => { const C = PF._C || (PF._C = candidates()), poses = []; for (let i = 0; i < k; i++) { const c = C[Math.floor(rnd() * C.length)]; poses.push({x: c.x, y: c.y, z: eng.groundY(c.x, c.y) + c.h, yaw: rnd() * 6.283, pitch: (rnd() - 0.5) * 0.9, hfov: 55 + rnd() * 30}); }
+  const buf = eng.semBatch(poses, RW, RH), dn = await likeness(n, buf, poses.length), s = poses.map((p, k2) => { const q = scoreFull(buf, k2 * RW * RH * 2, n, p); return q.s < 0 ? -1 : blend(q, dn[k2]); }).filter(x => x >= 0).sort((a, b) => a - b);
   return {median: s[s.length >> 1], p95: s[Math.floor(s.length * 0.95)]}; };
 // what the found pose looks like: the city as photographed, and in the shared language
 const COL = [[30, 40, 70], [200, 120, 80], [150, 60, 50], [120, 120, 120], [40, 110, 200], [60, 160, 70], [230, 200, 60], [120, 90, 70], [240, 80, 200], [80, 230, 230]];
