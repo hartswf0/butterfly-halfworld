@@ -4,13 +4,13 @@ made one (the scene program's frame: flat shapes in the shot's own colours) and 
 the line she is speaking burnt in, and a small label (scene · role · source · drawn or not) so the cut can be judged while watching.
 Re-run after more shots are drawn and the film fills in with drawings. Writes WYGWYL-CORPUS-ARCH/film/NN.mp4 and film/index.html
 (local, served with the mirror; nothing is published).
-  python3 story_preview.py [01 02 …]"""
+  python3 story_preview.py [01 02 …] [--drawn]      footage by default; --drawn shows each patch's drawing where it exists"""
 import os, sys, json, re, subprocess, tempfile, shutil, html
 
 T = os.path.dirname(os.path.abspath(__file__)); D = os.path.join(T, '.work', 'story'); WY = os.path.join(T, '..', '..', '..')
 OUT = '/Users/gaia/Downloads/WYGWYL-CORPUS-ARCH/film'; os.makedirs(OUT, exist_ok=True)
 FONT = '/System/Library/Fonts/Supplemental/Arial.ttf'; FPS, WD, HT = 24, 1280, 720
-F = json.load(open(os.path.join(D, 'film.json'))); poems = sys.argv[1:] or sorted(F)
+F = json.load(open(os.path.join(D, 'film.json'))); DRAWN = '--drawn' in sys.argv; poems = [a for a in sys.argv[1:] if not a.startswith('--')] or sorted(F)   # --drawn: drawings over footage
 AUDIO = {re.match(r'(\d\d)_', f).group(1): os.path.join(WY, 'audio', f) for f in os.listdir(os.path.join(WY, 'audio')) if re.match(r'\d\d_.*\.mp3$', f)}
 
 def frame_of(s):
@@ -24,13 +24,19 @@ def esc(t): return t.replace('\\', '\\\\').replace(':', '\\:').replace("'", '’
 for p in poems:
     f = F[p]; tmp = tempfile.mkdtemp(); clips = []; drawn = 0
     for i, s in enumerate(f['shots']):
-        d = max(1.0, s['t1'] - s['t0']); n = int(round(d * FPS)); img, dr = frame_of(s); drawn += dr
-        lab = f"{s['scene']} {s['role']} - {s['source']} - {'drawing' if dr else 'source picture'}"
-        vf = (f"scale={WD * 2}:{HT * 2}:force_original_aspect_ratio=increase,crop={WD * 2}:{HT * 2},"
-              f"zoompan=z='1+0.07*on/{n}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={n}:s={WD}x{HT}:fps={FPS},"
-              f"drawtext=fontfile={FONT}:text='{esc(lab)}':x=14:y=12:fontsize=15:fontcolor=white@0.75:box=1:boxcolor=black@0.35:boxborderw=5,format=yuv420p")
-        c = os.path.join(tmp, f'{i:03d}.mp4')
-        r = subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', img, '-vf', vf, '-frames:v', str(n), '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20', c])
+        if not s.get('k'): continue
+        d = max(1.0, s['t1'] - s['t0']); n = int(round(d * FPS)); img, dr = frame_of(s); c = os.path.join(tmp, f'{i:03d}.mp4')
+        mode = 'drawing' if (dr and DRAWN) else 'footage' if s.get('clip') else 'drawing' if dr else 'still'; drawn += mode == 'drawing'
+        lab = f"{s.get('id') or s['scene']} {s.get('role') or ''} - {s['source']} - {mode}{' - GENERATE' if s.get('generate') else ''}"
+        tag = f"drawtext=fontfile={FONT}:text='{esc(lab)}':x=14:y=12:fontsize=15:fontcolor=white@0.75:box=1:boxcolor=black@0.35:boxborderw=5"
+        if mode == 'footage':                                  # the source moving, from its clean in-point; held on its last frame if short
+            cl = s['clip']; vf = f"scale={WD}:{HT}:force_original_aspect_ratio=increase,crop={WD}:{HT},fps={FPS},tpad=stop_mode=clone:stop_duration={d:.2f},{tag},format=yuv420p"
+            cmd = ['ffmpeg', '-loglevel', 'error', '-y', '-ss', f"{cl['in']:.2f}", '-i', cl['path'], '-an', '-vf', vf, '-frames:v', str(n), '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20', c]
+        else:
+            vf = (f"scale={WD * 2}:{HT * 2}:force_original_aspect_ratio=increase,crop={WD * 2}:{HT * 2},"
+                  f"zoompan=z='1+0.07*on/{n}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={n}:s={WD}x{HT}:fps={FPS},{tag},format=yuv420p")
+            cmd = ['ffmpeg', '-loglevel', 'error', '-y', '-i', img, '-vf', vf, '-frames:v', str(n), '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20', c]
+        r = subprocess.run(cmd)
         if r.returncode == 0: clips.append(c)
     open(os.path.join(tmp, 'list.txt'), 'w').write(''.join(f"file '{c}'\n" for c in clips))
     # her lines, burnt in at the times she speaks them
@@ -52,8 +58,8 @@ for p in poems:
 rows = []
 for p in sorted(F):
     if not os.path.exists(os.path.join(OUT, f'{p}.mp4')): continue
-    f = F[p]; li = ''.join(f"<li><b>{s['t0']:.0f}s</b> {html.escape(s['scene'])} {s['role']} · {html.escape(s['source'] or '')}{' · drawn' if s.get('drawn') else ''}"
-                           f"{' · “' + html.escape(s['said'][:70]) + '”' if s['said'] else ''}</li>" for s in f['shots'])
+    f = F[p]; li = ''.join(f"<li><b>{s['t0']:.0f}s</b> {html.escape(s.get('id') or s['scene'])} · {html.escape(s['name'])} · {html.escape((s.get('clip') or {}).get('title') or s.get('source') or '')}{' · GENERATE' if s.get('generate') else ''}{' · drawn' if s.get('drawn') else ''}"
+                           f"{' · “' + html.escape(s['said'][:70]) + '”' if s['said'] else ''}</li>" for s in f['shots'] if s.get('k'))
     rows.append(f"<section><h2>{p} · {html.escape(f['title'])}</h2><video controls preload='metadata' src='{p}.mp4'></video><details><summary>{len(f['shots'])} shots</summary><ol>{li}</ol></details></section>")
 open(os.path.join(OUT, 'index.html'), 'w').write("""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Film, Cut</title>
 <style>:root{color-scheme:dark}body{margin:0;background:#0a0d18;color:#eef0f7;font:15px/1.5 system-ui,sans-serif}main{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
