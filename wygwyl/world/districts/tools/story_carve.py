@@ -54,7 +54,7 @@ def motion_of(k):
 print('pool', len(keys), flush=True)
 
 wts = glob.glob(os.path.expanduser('~/.cache/huggingface/hub/models--laion--CLIP-ViT-B-32-laion2B-s34B-b79K/snapshots/*/open_clip_model.safetensors'))[0]
-model, _, _ = open_clip.create_model_and_transforms('ViT-B-32', pretrained=wts); tok = open_clip.get_tokenizer('ViT-B-32')
+model, _, prep = open_clip.create_model_and_transforms('ViT-B-32', pretrained=wts); tok = open_clip.get_tokenizer('ViT-B-32')
 def enc(ts):
     with torch.no_grad(): t = model.encode_text(tok(ts)).float()
     return (t / t.norm(dim=-1, keepdim=True)).numpy()
@@ -164,9 +164,18 @@ def fhash(path, t):                                      # the frame a patch act
     r = subprocess.run(['ffmpeg', '-v', 'error', '-ss', f'{t:.2f}', '-i', path, '-frames:v', '1', '-vf', 'scale=17:16,format=gray', '-f', 'rawvideo', '-'], capture_output=True, timeout=30)
     if len(r.stdout) < 272: return None
     a = np.frombuffer(r.stdout[:272], np.uint8).reshape(16, 17).astype(np.int16); return (a[:, 1:] > a[:, :-1]).flatten()
+USEDC = []
+def fclip(path, t):                                       # what the shown frame is of, so the same subject at another moment is caught too
+    import io
+    r = subprocess.run(['ffmpeg', '-v', 'error', '-ss', f'{t:.2f}', '-i', path, '-frames:v', '1', '-vf', 'scale=224:-1', '-f', 'image2', '-c:v', 'png', '-'], capture_output=True, timeout=30)
+    if not r.stdout: return None
+    with torch.no_grad(): e = model.encode_image(prep(Image.open(io.BytesIO(r.stdout)).convert('RGB'))[None]).float()[0].numpy()
+    return e / np.linalg.norm(e)
 def seen_before(k, mv=None, wdw=None):
     hs = [dhash(k)] + ([fhash(mv['path'], wdw['in'] + wdw['len'] / 2), fhash(mv['path'], wdw['in'] + 0.3)] if mv and wdw else [])
-    return any(h is not None and any(int((h != u).sum()) < 40 for u in USEDH) for h in hs), [h for h in hs if h is not None]
+    cs = [X[jof[k]]] + ([fclip(mv['path'], wdw['in'] + wdw['len'] / 2)] if mv and wdw else [])
+    dup = any(h is not None and any(int((h != u).sum()) < 40 for u in USEDH) for h in hs) or any(c is not None and USEDC and float(np.max(np.stack(USEDC) @ c)) > 0.88 for c in cs)
+    return dup, ([h for h in hs if h is not None], [c for c in cs if c is not None])
 def fill(P, used, recent, bw_ok_poem):
     q = enc([P['what'], P['what'], P['said'][:200] or P['what'], P['here'][:200]]).mean(0); q /= np.linalg.norm(q); s = X @ q
     s = s - 0.1 * (photo < -0.01) - 0.02 * (photo < 0.01)
@@ -217,7 +226,7 @@ for p in sorted({s['poem'] for s in S['scenes']}):
         c = fill(P, used, recent, bw_ok)
         if not c: out.append({**P, 'id': f'P{p}-{i + 1:03d}', 'k': None, 'generate': True, 'source': 'to make', 'clip': None, 'bw': False, 'lum': 0.0, 'path': None, 'drawn': False, 'analysed': False,
                               'observed': {'detected': [], 'made_of': [], 'clip_tags': [], 'camera': None, 'scale': 'wide' if P['trigger'].startswith('location') else 'medium'}}); continue
-        v, k, mv, src, bw, wdw, hs = c; used.add(k); USEDH.extend(hs); recent.append(src); (USEDWIN[src].append((wdw['in'], wdw['in'] + wdw['len'])) if wdw else None);  usedX = X[jof[k]][None] if usedX is None else np.vstack([usedX, X[jof[k]]]); r = inv[k]; st = stand.get(k); w, col, paper, lum = look(k)
+        v, k, mv, src, bw, wdw, hs = c; used.add(k); USEDH.extend(hs[0]); USEDC.extend(hs[1]); recent.append(src); (USEDWIN[src].append((wdw['in'], wdw['in'] + wdw['len'])) if wdw else None);  usedX = X[jof[k]][None] if usedX is None else np.vstack([usedX, X[jof[k]]]); r = inv[k]; st = stand.get(k); w, col, paper, lum = look(k)
         out.append({**P, 'id': f'P{p}-{i + 1:03d}', 'k': k, 'fit': round(v, 4), 'source': r.get('source'), 'path': r['path'], 'cid': canon.get(k, {}).get('cid'), 'mj': r.get('n'),
                     'clip': ({'path': mv['path'], 'in': wdw['in'], 'len': wdw['len'], 'src': src, 'title': mv.get('title'), 'year': mv.get('year')} if mv and wdw else None),
                     'bw': bool(bw), 'lum': round(lum, 2), 'width': w, 'sid': st and st['sid'], 'root': st and st['root'], 'analysed': bool(st), 'drawn': bool(st and st['drawn']),
