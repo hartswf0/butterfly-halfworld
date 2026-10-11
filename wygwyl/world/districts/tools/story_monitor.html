@@ -44,7 +44,7 @@ async function tick() {
   const done = all.filter(x => x.thumb && x.state === 'drawn').sort((a, b) => (b.secs ? 1 : 0) - (a.secs ? 1 : 0));
   const recent = Object.values(P.poems).flatMap(p => p.patches.filter(x => x.thumb)).slice(-14).reverse();
   $('latest').innerHTML = recent.map(x => `<figure><img src="${x.thumb}?${P.updated | 0}" alt="${esc(x.id)}" loading="lazy"><figcaption>${esc(x.id)} · ${esc(x.name)}</figcaption></figure>`).join('');
-  for (const [n, p] of Object.entries(P.poems)) {                      // a poem redraws only when it changes, and never while its film plays
+  for (const [n, p] of Object.entries(P.poems).sort((a, b) => a[0].localeCompare(b[0]))) {                      // a poem redraws only when it changes, and never while its film plays
     let el = document.getElementById('p' + n); if (!el) { el = document.createElement('div'); el.id = 'p' + n; $('poems').appendChild(el); }
     const sig = p.state + p.patches.map(x => x.state[0]).join('') + (p.film || '') + (p.pushed || ''), v = el.querySelector('video');
     if (shown[n] === sig || (v && !v.paused)) continue; shown[n] = sig; el.innerHTML = poemHTML(n, p);
