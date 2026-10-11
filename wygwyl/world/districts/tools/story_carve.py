@@ -29,7 +29,8 @@ for l in open(f'{ST}/inventory.jsonl'): r = json.loads(l); inv[r['k']] = r
 for l in open(f'{ST}/keyframes.jsonl'):
     r = json.loads(l); v = inv.get(r['video'], {}); inv[r['k']] = {**r, 'source': v.get('source'), 'poem': v.get('poem'), 'kind': 'keyframe', 'video_path': v.get('path')}
 canon = {x['k']: x for x in json.load(open(f'{ST}/canon.json'))['items']}; cid2k = {x['cid']: x['k'] for x in canon.values()}
-def private(r): p = (r.get('video_path') or r.get('path') or ''); return r.get('source') == 'shoot' or '/CAT/' in p or '/cdmx/' in p.lower()
+def private(r): p = (r.get('video_path') or r.get('path') or ''); return r.get('source') == 'shoot' or '/CAT/' in p or '/cdmx/' in p.lower() \
+    or bool(re.search(r'/cuts/|/parts/|/reel/|/strips/|_MASTER_CUT|master_cut', p))      # (and our own rendered cuts: derivatives of footage already in the pool)
 rows = [i for i, k in enumerate(ids) if k in inv and not private(inv[k]) and inv[k].get('kind') in ('image', 'keyframe') and os.path.exists(inv[k]['path'])]
 keys = [ids[i] for i in rows]; X = np.asarray(E[rows], np.float32)
 V = np.load(os.path.join(W, 'emb.npz'))['views'].astype(np.float32); vfiles = json.load(open(os.path.join(T, 'views.json')))
@@ -60,7 +61,7 @@ def enc(ts):
 mx = lambda ts: (X @ enc(ts).T).max(1)
 photo = mx(['a photograph of a place', 'a film still of a room', 'a cinematic photograph of a street at night', 'a photograph of a landscape', 'a film still of a person']) \
       - mx(['a collage', 'a poster with text', 'a line drawing', 'an ink drawing', 'a grid of photographs', 'a screenshot of a user interface', 'a title card', 'a cut-out paper collage',
-            'an audio waveform', 'a diagram', 'a contact sheet of film frames', 'a split screen of several photographs', 'a filmstrip', 'an ink wash painting on white paper', 'film leader with numbers'])
+            'an audio waveform', 'a diagram', 'a contact sheet of film frames', 'a split screen of several photographs', 'a filmstrip', 'an ink wash painting on white paper', 'film leader with numbers', 'a halftone print', 'a dot pattern'])
 person = mx(['a film still of a man', 'a film still of a woman', 'a film still of a child', 'a person in a room']) - mx(['an empty room', 'an empty street', 'a landscape with no people'])
 wide = mx(['a wide establishing shot of a place', 'an aerial view of a city', 'a long shot of a building']) - mx(['a close-up', 'an extreme close-up of a face', 'a close-up of an object'])
 
@@ -155,7 +156,17 @@ def patches_for(p):
                            t0=round(dur, 2), t1=round(dur + 4.0, 2), said='', trigger=f"threshold: {tr['mode']} {tr['from']} → {tr['to']}", figure=False, hero=False, montage=False))
     return out, dur
 
-usedX = None
+usedX = None; USEDWIN = collections.defaultdict(list); USEDH = []
+def dhash(k):                                            # the picture itself, so the same frame from another file is caught
+    try: a = np.asarray(Image.open(inv[k]['path']).convert('L').resize((17, 16)), np.int16); return (a[:, 1:] > a[:, :-1]).flatten()
+    except Exception: return None
+def fhash(path, t):                                      # the frame a patch actually shows
+    r = subprocess.run(['ffmpeg', '-v', 'error', '-ss', f'{t:.2f}', '-i', path, '-frames:v', '1', '-vf', 'scale=17:16,format=gray', '-f', 'rawvideo', '-'], capture_output=True, timeout=30)
+    if len(r.stdout) < 272: return None
+    a = np.frombuffer(r.stdout[:272], np.uint8).reshape(16, 17).astype(np.int16); return (a[:, 1:] > a[:, :-1]).flatten()
+def seen_before(k, mv=None, wdw=None):
+    hs = [dhash(k)] + ([fhash(mv['path'], wdw['in'] + wdw['len'] / 2), fhash(mv['path'], wdw['in'] + 0.3)] if mv and wdw else [])
+    return any(h is not None and any(int((h != u).sum()) < 40 for u in USEDH) for h in hs), [h for h in hs if h is not None]
 def fill(P, used, recent, bw_ok_poem):
     q = enc([P['what'], P['what'], P['said'][:200] or P['what'], P['here'][:200]]).mean(0); q /= np.linalg.norm(q); s = X @ q
     s = s - 0.1 * (photo < -0.01) - 0.02 * (photo < 0.01)
@@ -180,11 +191,15 @@ def fill(P, used, recent, bw_ok_poem):
     for c in C[:10]:                                                                    # probe the leaders' footage for a clean window
         if c[2]:
             wdw = window(c[2], P['t1'] - P['t0'])
+            if wdw and any(min(wdw['in'] + wdw['len'], b) - max(wdw['in'], a) > 0.3 * wdw['len'] for a, b in USEDWIN[c[3]]): wdw = None   # that stretch of the source is already in the film
             if wdw: c.append(wdw); c[0] += 0.01 * min(1, wdw['len'] / max(1, P['t1'] - P['t0']))
             else: c[0] -= 0.05; c.append(None)
         else: c.append(None)
     C = sorted(C[:10], key=lambda c: -c[0])
-    return C[0] if C else None
+    for c in C:
+        dup, hs = seen_before(c[1], c[2], c[5])
+        if not dup: return c + [hs]
+    return None                                                                         # nothing unseen fits: this patch is one to make
 
 smpte = lambda t, base=3600: (lambda f: f"{f // (3600 * FPS):02d}:{f // (60 * FPS) % 60:02d}:{f // FPS % 60:02d}:{f % FPS:02d}")(int(round((t + base) * FPS)))
 def scale_of(st, role_wide):
@@ -200,8 +215,9 @@ for p in sorted({s['poem'] for s in S['scenes']}):
     bw_ok = sum(1 for x in PS if x['montage']) > len(PS) / 2                           # a poem that is mostly memory may be black-and-white
     for i, P in enumerate(PS):
         c = fill(P, used, recent, bw_ok)
-        if not c: out.append({**P, 'k': None, 'generate': True}); continue
-        v, k, mv, src, bw, wdw = c; used.add(k); recent.append(src); usedX = X[jof[k]][None] if usedX is None else np.vstack([usedX, X[jof[k]]]); r = inv[k]; st = stand.get(k); w, col, paper, lum = look(k)
+        if not c: out.append({**P, 'id': f'P{p}-{i + 1:03d}', 'k': None, 'generate': True, 'source': 'to make', 'clip': None, 'bw': False, 'lum': 0.0, 'path': None, 'drawn': False, 'analysed': False,
+                              'observed': {'detected': [], 'made_of': [], 'clip_tags': [], 'camera': None, 'scale': 'wide' if P['trigger'].startswith('location') else 'medium'}}); continue
+        v, k, mv, src, bw, wdw, hs = c; used.add(k); USEDH.extend(hs); recent.append(src); (USEDWIN[src].append((wdw['in'], wdw['in'] + wdw['len'])) if wdw else None);  usedX = X[jof[k]][None] if usedX is None else np.vstack([usedX, X[jof[k]]]); r = inv[k]; st = stand.get(k); w, col, paper, lum = look(k)
         out.append({**P, 'id': f'P{p}-{i + 1:03d}', 'k': k, 'fit': round(v, 4), 'source': r.get('source'), 'path': r['path'], 'cid': canon.get(k, {}).get('cid'), 'mj': r.get('n'),
                     'clip': ({'path': mv['path'], 'in': wdw['in'], 'len': wdw['len'], 'src': src, 'title': mv.get('title'), 'year': mv.get('year')} if mv and wdw else None),
                     'bw': bool(bw), 'lum': round(lum, 2), 'width': w, 'sid': st and st['sid'], 'root': st and st['root'], 'analysed': bool(st), 'drawn': bool(st and st['drawn']),
@@ -240,7 +256,7 @@ def reforge(p, P, prev):
     return dict(base=base, clarified=clar, cinematic=cine, director=dirp, stress=stress, master=master)
 
 for p, f in film.items():
-    sh = [x for x in f['shots'] if x.get('k')]; prev = None
+    sh = [x for x in f['shots'] if x.get('id')]; prev = None
     for x in sh: x['prompts'] = reforge(p, x, prev); prev = x
     scenes = [s for s in S['scenes'] if s['poem'] == p]; units = [scenes[:max(1, len(scenes) // 3)], scenes[max(1, len(scenes) // 3):max(2, 2 * len(scenes) // 3)], scenes[max(2, 2 * len(scenes) // 3):]]
     gen = [x for x in sh if x['generate']]; own = sum(1 for x in sh if x['source'] in OWN); mov = sum(1 for x in sh if x.get('clip'))
@@ -301,7 +317,7 @@ json.dump(PCACHE, open(PCACHE_F, 'w'))
 q = []
 for p, f in film.items():
     for x in f['shots']:
-        if not x.get('k') or x['analysed'] or x['source'] == 'mj': continue
+        if not x.get('k') or x['analysed'] or x['source'] == 'mj': continue   # (patches to make have no shot yet)
         cid = x['cid'] or ('A' + x['k'].replace('-', '_'))
         it = dict(cid=cid, path=x['clip']['path'], kind='keyframe', t=round(x['clip']['in'] + x['clip']['len'] / 2, 2)) if x.get('clip') else dict(cid=cid, path=x['path'], kind='still')
         it.update(source=x['source'], district=x['d'], poem=p, scene=x['scene'], tags=[x['name']]); q.append(it)

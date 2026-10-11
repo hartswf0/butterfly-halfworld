@@ -24,7 +24,12 @@ def esc(t): return t.replace('\\', '\\\\').replace(':', '\\:').replace("'", '’
 for p in poems:
     f = F[p]; tmp = tempfile.mkdtemp(); clips = []; drawn = 0
     for i, s in enumerate(f['shots']):
-        if not s.get('k'): continue
+        if not s.get('k'):                                     # a patch to make: a card for its length, so the cut stays on her clock
+            d = max(1.0, s['t1'] - s['t0']); n = int(round(d * FPS)); c = os.path.join(tmp, f'{i:03d}.mp4'); tf = os.path.join(tmp, f'gen{i:03d}.txt')
+            open(tf, 'w').write(f"TO MAKE  {s.get('id')}  {s['name']}\n{s['what'][:90]}")
+            subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-f', 'lavfi', '-i', f'color=c=0x0b0d14:s={WD}x{HT}:r={FPS}:d={d:.2f}', '-vf',
+                            f"drawtext=fontfile={FONT}:textfile={tf}:x=(w-text_w)/2:y=(h-text_h)/2-40:fontsize=24:line_spacing=10:fontcolor=0xf2a541,format=yuv420p", '-frames:v', str(n),
+                            '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20', c]); clips.append(c); continue
         d = max(1.0, s['t1'] - s['t0']); n = int(round(d * FPS)); img, dr = frame_of(s); c = os.path.join(tmp, f'{i:03d}.mp4')
         mode = 'drawing' if (dr and DRAWN) else 'footage' if s.get('clip') else 'drawing' if dr else 'still'; drawn += mode == 'drawing'
         lab = f"{s.get('id') or s['scene']} {s.get('role') or ''} - {s['source']} - {mode}{' - GENERATE' if s.get('generate') else ''}"
@@ -59,7 +64,7 @@ rows = []
 for p in sorted(F):
     if not os.path.exists(os.path.join(OUT, f'{p}.mp4')): continue
     f = F[p]; li = ''.join(f"<li><b>{s['t0']:.0f}s</b> {html.escape(s.get('id') or s['scene'])} · {html.escape(s['name'])} · {html.escape((s.get('clip') or {}).get('title') or s.get('source') or '')}{' · GENERATE' if s.get('generate') else ''}{' · drawn' if s.get('drawn') else ''}"
-                           f"{' · “' + html.escape(s['said'][:70]) + '”' if s['said'] else ''}</li>" for s in f['shots'] if s.get('k'))
+                           f"{' · “' + html.escape(s['said'][:70]) + '”' if s['said'] else ''}</li>" for s in f['shots'] if s.get('id') or s.get('k'))
     rows.append(f"<section><h2>{p} · {html.escape(f['title'])}</h2><video controls preload='metadata' src='{p}.mp4'></video><details><summary>{len(f['shots'])} shots</summary><ol>{li}</ol></details></section>")
 open(os.path.join(OUT, 'index.html'), 'w').write("""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Film, Cut</title>
 <style>:root{color-scheme:dark}body{margin:0;background:#0a0d18;color:#eef0f7;font:15px/1.5 system-ui,sans-serif}main{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
