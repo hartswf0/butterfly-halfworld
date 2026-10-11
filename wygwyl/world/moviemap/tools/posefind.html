@@ -29,9 +29,13 @@ const INFO = {}; for (const v of RJ.views) { const c = refCls(v.n), d = refDep(v
 // the prompt that made each picture, read as a shot list (districts/tools/prompt_read.py): lens → field of view, vantage → height and pitch,
 // and siblings (pictures from one prompt are one place, different takes). ?prompt=0 turns it off.
 const USEP = Q.get('prompt') !== '0', PR = USEP ? await fetch('../../districts/tools/.work/lang/prompts.json').then(r => r.ok ? r.json() : []).catch(() => []) : [];
+// the measured shot (districts/tools/arch.py, from wygwyl-world-arch: Depth Pro focal, RANSAC ground plane): lens, pitch, and height above
+// the surface the camera stands on. When a view has one it outranks the prompt's lens (Midjourney often ignores the prompted lens).
+const AR = Q.get('arch') === '0' ? {} : await fetch('../../districts/tools/.work/lang/arch.json').then(r => r.ok ? r.json() : {}).catch(() => ({}));
 const PM = {}, SIB = {}; for (const r of PR) { PM[r.n] = r; (SIB[r.prompt] ??= []).push(r.n); }
-function prior(n, pose, h, anchor) { const r = PM[n]; let p = 1; if (!r) return p;
-  if (r.hfov) p *= Math.exp(-(((pose.hfov - Math.max(20, r.hfov)) / 12) ** 2));
+function prior(n, pose, h, anchor) { const r = PM[n] || {vantage: []}; let p = 1;
+  const a = AR[n]; if (a?.fov) { p *= Math.exp(-(((pose.hfov - a.fov) / 6) ** 2)); if (a.pitch != null) p *= Math.exp(-(((pose.pitch - a.pitch * Math.PI / 180) / 0.08) ** 2)); }
+  else if (r.hfov) p *= Math.exp(-(((pose.hfov - Math.max(20, r.hfov)) / 12) ** 2));
   const v = r.vantage[0]; if (v) { const [lo, hi] = v.h, dh = h < lo ? Math.log(lo / Math.max(0.5, h)) : h > hi ? Math.log(h / hi) : 0; p *= Math.exp(-((dh / 0.5) ** 2));
     const [a, b] = v.pitch, dp = pose.pitch < a ? a - pose.pitch : pose.pitch > b ? pose.pitch - b : 0; p *= Math.exp(-((dp / 0.15) ** 2)); }
   if (anchor) p *= Math.exp(-((Math.hypot(pose.x - anchor.x, pose.y - anchor.y) / 120) ** 2));
@@ -84,7 +88,7 @@ function hypotheses() {
 }
 // ——— 2 the index ———
 const PF = window.PF = {eng, ready: true, NV};
-PF.info = INFO; PF.siblings = () => Object.values(SIB).filter(g => g.length > 1); PF.prompt = n => PM[n] || null;
+PF.info = INFO; PF.siblings = () => Object.values(SIB).filter(g => g.length > 1); PF.prompt = n => PM[n] || null; PF.arch = n => AR[n] || null;
 PF.loadBest = b => { PF.best = b; return b.length; };
 PF.index = async (chunk = 400, keep = 40) => {
   const C = candidates(), hy = hypotheses(), best = Array.from({length: NV + 1}, () => []), t0 = performance.now(); let n = 0, inside = 0;
@@ -141,7 +145,12 @@ function scoreFull(buf, o, n, pose) {
   const s = 0.3 * iou + 0.35 * Math.max(0, rho) + 0.25 * bnd + 0.1 * hor;
   return {s, iou, rho, bnd, hor};
 }
-const toPose = t => ({x: t[0], y: t[1], z: eng.groundY(t[0], t[1]) + Math.max(1.5, t[2]), yaw: t[3], pitch: Math.max(-1.3, Math.min(1.3, t[4])), hfov: Math.max(20, Math.min(110, t[5]))});
+function localH(buf, o, pose) { const vf = vfov(pose.hfov), cx = RW >> 1;
+  for (let j = RH - 1; j >= RH - 6; j--) { const b = buf[o + (j * RW + cx) * 2 + 1]; if (b === 255) continue;
+    const d = Math.exp(b / 254 * Math.log(3000)), th = pose.pitch - Math.atan((2 * (j + 0.5) / RH - 1) * Math.tan(vf / 2)); if (th >= -0.02) return null; return d * Math.sin(-th); }
+  return null; }
+const hTerm = (n, buf, o, pose) => { const a = AR[n]; if (!a?.h) return 1; const he = localH(buf, o, pose); if (he == null) return 0.7; return Math.exp(-((Math.log(he / Math.max(0.8, a.h)) / 0.6) ** 2)); };
+const toPose = t => ({x: t[0], y: t[1], z: eng.groundY(t[0], t[1]) + Math.max(1.5, t[2]), yaw: t[3], pitch: Math.max(-1.3, Math.min(1.3, t[4])), hfov: Math.max(6, Math.min(110, t[5]))});
 const EYE = Q.get('eye') || 'http://127.0.0.1:8232';
 async function likeness(n, buf, k) {                            // DINOv2 on the two language images: shape, not paint
   const frames = [], near = []; for (let j = 0; j < k; j++) { const o = j * RW * RH * 2, c = new Array(RW * RH), d = new Array(RW * RH);
@@ -155,11 +164,12 @@ PF.refine = async (n, opt = {}, seeds = 8, gens = 14, lam = 12, mu = 4) => {
   for (const c of cand) { if (picked.length >= seeds) break; if (picked.every(p => Math.hypot(p.x - c.x, p.y - c.y) > 40 || Math.abs(Math.sin((p.yaw - c.yaw) / 2)) > 0.38)) picked.push(c); }
   let best = {s: -1}; const runs = [];
   for (const c of picked) {
-    let m = [c.x, c.y, c.h, c.yaw, c.pitch, PM[n]?.hfov ? Math.max(20, PM[n].hfov) : c.hfov], sig = [8, 8, Math.max(1, c.h * 0.3), 0.12, 0.08, PM[n]?.hfov ? 3 : 8], bs = -1, bt = m;
+    const a = AR[n], f0 = a?.fov || (PM[n]?.hfov ? Math.max(20, PM[n].hfov) : c.hfov);
+    let m = [c.x, c.y, c.h, c.yaw, a?.pitch != null ? a.pitch * Math.PI / 180 : c.pitch, f0], sig = [8, 8, Math.max(1, c.h * 0.3), 0.12, a ? 0.04 : 0.08, a ? 2 : PM[n]?.hfov ? 3 : 8], bs = -1, bt = m;
     for (let g = 0; g < gens; g++) {
       const pop = Array.from({length: lam}, () => m.map((v, i) => v + gauss() * sig[i])); if (g === 0) pop[0] = m.slice();
       const ps = pop.map(toPose), buf = eng.semBatch(ps, RW, RH), parts = pop.map((t, k) => scoreFull(buf, k * RW * RH * 2, n, ps[k])), dn = await likeness(n, buf, pop.length);
-      const sc = parts.map((p, k) => p.s < 0 ? -1 : blend(p, dn[k], n) * (0.5 + 0.5 * prior(n, ps[k], pop[k][2], A)));
+      const sc = parts.map((p, k) => p.s < 0 ? -1 : blend(p, dn[k], n) * (0.5 + 0.5 * prior(n, ps[k], pop[k][2], A) * hTerm(n, buf, k * RW * RH * 2, ps[k])));
       const ord = sc.map((s, i) => [s, i]).sort((a, b) => b[0] - a[0]), el = ord.slice(0, mu).map(([, i]) => pop[i]);
       if (ord[0][0] > bs) { bs = ord[0][0]; bt = pop[ord[0][1]]; }
       const nm = m.map((_, i) => el.reduce((a, t) => a + t[i], 0) / mu); const moved = ord[0][0] > (g ? runs.at(-1)?.s ?? -1 : -1);
@@ -168,7 +178,7 @@ PF.refine = async (n, opt = {}, seeds = 8, gens = 14, lam = 12, mu = 4) => {
     runs.push({s: bs, t: bt, from: {s: c.s, kind: c.kind}}); if (bs > best.s) best = {s: bs, t: bt, from: c};
   }
   if (!INFO[n].placeable || !picked.length) return {n, placeable: false, info: INFO[n]};
-  const bp = toPose(best.t), bb = eng.semBatch([bp], RW, RH), parts = scoreFull(bb, 0, n, bp); parts.dino = (await likeness(n, bb, 1))[0]; parts.s = blend(parts, parts.dino, n); parts.prior = prior(n, bp, best.t[2], A);
+  const bp = toPose(best.t), bb = eng.semBatch([bp], RW, RH), parts = scoreFull(bb, 0, n, bp); parts.dino = (await likeness(n, bb, 1))[0]; parts.s = blend(parts, parts.dino, n); parts.prior = prior(n, bp, best.t[2], A); parts.hloc = localH(bb, 0, bp) ?? -1;
   return {n, placeable: true, info: INFO[n], best: {s: parts.s, fit: best.s, parts, pose: bp, h: best.t[2], from: best.from}, runs: runs.map(r => ({s: r.s, pose: toPose(r.t)})), index: cand.slice(0, 5)};
 };
 // the checks: does the found frame pick its own view among all 100? and what do random poses score?

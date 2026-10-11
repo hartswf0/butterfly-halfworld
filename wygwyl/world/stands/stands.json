@@ -1,0 +1,807 @@
+{
+ "from": "github.com/hartswf0/wygwyl-world-arch shots/out (Depth Pro, SAM 2.1, OneFormer; multiplane.py)",
+ "stands": [
+  {
+   "n": 1,
+   "district": "haze",
+   "title": "4. Orange-Hazed Dystopia Camera: Canon EOS-1D X Mark II, Sig",
+   "fov": 68.6,
+   "aspect": 1.7843,
+   "pitch": 11.0,
+   "roll": 0.7,
+   "height": 0.27,
+   "class": "ground / worm's-eye",
+   "move": "push",
+   "z_hero": 7.672,
+   "sheets": [
+    {
+     "src": "s/001/00-P5.webp",
+     "zm": 27.44,
+     "plane": "P5",
+     "label": "distant background",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/001/01-P4.webp",
+     "zm": 17.06,
+     "plane": "P4",
+     "label": "midground",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/001/02-P2.webp",
+     "zm": 16.49,
+     "plane": "P2",
+     "label": "hero: neon slashes over concrete",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/001/03-P0.webp",
+     "zm": 9.66,
+     "plane": "P0",
+     "label": "camera mask",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/001/04-P1.webp",
+     "zm": 2.71,
+     "plane": "P1",
+     "label": "foreground",
+     "water": false,
+     "sway": false
+    }
+   ],
+   "backdrop": "s/001/backdrop.webp",
+   "pose": {
+    "x": 2070.3316574749806,
+    "y": 3773.725372554274,
+    "z": 35.636636566879496,
+    "yaw": 7.684368024294825,
+    "pitch": 0.19254809626742603,
+    "hfov": 70.09380654708717,
+    "h": 15.029150346990532,
+    "score": 0.3766886111453548,
+    "rank": 3,
+    "clip": 0.445,
+    "found": "a view of a city at night with a full moon",
+    "ref": "a close up of a street with a light in the middle of it"
+   }
+  },
+  {
+   "n": 5,
+   "district": "haze",
+   "title": "4. Orange-Hazed Dystopia Canon EOS-1D X My autofocus failed-",
+   "fov": 61.0,
+   "aspect": 1.7843,
+   "pitch": -1.1,
+   "roll": -0.3,
+   "height": 0.98,
+   "class": "eye-level",
+   "move": "push",
+   "z_hero": 5.174,
+   "sheets": [
+    {
+     "src": "s/005/00-P5.webp",
+     "zm": 9.73,
+     "plane": "P5",
+     "label": "distant background",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/005/01-P4.webp",
+     "zm": 6.04,
+     "plane": "P4",
+     "label": "midground",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/005/02-P0.webp",
+     "zm": 3.54,
+     "plane": "P0",
+     "label": "camera mask",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/005/03-P1.webp",
+     "zm": 3.39,
+     "plane": "P1",
+     "label": "foreground",
+     "water": false,
+     "sway": false
+    }
+   ],
+   "backdrop": "s/005/backdrop.webp",
+   "pose": {
+    "x": 2298.5602717924257,
+    "y": 2822.8498782866623,
+    "z": 15.11305561864688,
+    "yaw": 2.7624514686443833,
+    "pitch": -0.008473800502582405,
+    "hfov": 61.79745832348097,
+    "h": 1.4202800381035856,
+    "score": 0.5415033907078255,
+    "rank": 3,
+    "clip": 0.437,
+    "found": "a view of a street with a few buildings and a bicycle",
+    "ref": "there is a chair sitting in a hallway with a stair way"
+   }
+  },
+  {
+   "n": 26,
+   "district": "haze",
+   "title": "Air burns orange--thick, near-solid. Engines tick beneath sk",
+   "fov": 79.9,
+   "aspect": 1.7843,
+   "pitch": -1.4,
+   "roll": 1.2,
+   "height": 0.77,
+   "class": "eye-level",
+   "move": "push",
+   "z_hero": 3.832,
+   "sheets": [
+    {
+     "src": "s/026/00-P5.webp",
+     "zm": 12.42,
+     "plane": "P5",
+     "label": "distant background",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/026/01-P4.webp",
+     "zm": 3.14,
+     "plane": "P4",
+     "label": "midground",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/026/02-P1.webp",
+     "zm": 1.89,
+     "plane": "P1",
+     "label": "foreground",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/026/03-P0.webp",
+     "zm": 1.58,
+     "plane": "P0",
+     "label": "camera mask",
+     "water": false,
+     "sway": false
+    }
+   ],
+   "backdrop": "s/026/backdrop.webp",
+   "pose": {
+    "x": 6659.56500362602,
+    "y": 2682.602301348867,
+    "z": 17.615831131608694,
+    "yaw": -0.8005840479565413,
+    "pitch": -0.056815306569219175,
+    "hfov": 77.83491521866159,
+    "h": 0.7711136824321436,
+    "score": 0.6943881053667665,
+    "rank": 1,
+    "clip": 0.516,
+    "found": "a view of a street with a building and a street light",
+    "ref": "arafed view of a tall building with a red sky in the background"
+   }
+  },
+  {
+   "n": 64,
+   "district": "haze",
+   "title": "orange haze brutalist cityscape inspired by Blade Runner 204",
+   "fov": 26.1,
+   "aspect": 1.7843,
+   "pitch": 0.2,
+   "roll": -5.3,
+   "height": 5.82,
+   "class": "elevated",
+   "move": "truck",
+   "z_hero": 11.532,
+   "sheets": [
+    {
+     "src": "s/064/00-P6.webp",
+     "zm": 6494.0,
+     "plane": "P6",
+     "label": "sky / atmosphere",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/064/01-P5.webp",
+     "zm": 139.12,
+     "plane": "P5",
+     "label": "distant background",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/064/02-P4.webp",
+     "zm": 64.94,
+     "plane": "P4",
+     "label": "midground",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/064/03-P1.webp",
+     "zm": 26.92,
+     "plane": "P1",
+     "label": "foreground",
+     "water": false,
+     "sway": false
+    }
+   ],
+   "backdrop": "s/064/backdrop.webp",
+   "pose": {
+    "x": 1720.3143017464681,
+    "y": 3766.1288623804016,
+    "z": 38.14308898243762,
+    "yaw": -0.14473726306189266,
+    "pitch": 0.010568973690214051,
+    "hfov": 26.57370980495601,
+    "h": 4.748809321046815,
+    "score": 0.5335586421043154,
+    "rank": 2,
+    "clip": 0.343,
+    "found": "arafed view of a city with a clock tower and a street",
+    "ref": "smoke billows from a factory in a city with a hazy sky"
+   }
+  },
+  {
+   "n": 65,
+   "district": "haze",
+   "title": "orange smog skyway solitude, oppressive scale and human frag",
+   "fov": 89.7,
+   "aspect": 1.7843,
+   "pitch": 5.4,
+   "roll": 1.0,
+   "height": 1.36,
+   "class": "eye-level",
+   "move": "push",
+   "z_hero": 6.307,
+   "sheets": [
+    {
+     "src": "s/065/00-P5.webp",
+     "zm": 15.91,
+     "plane": "P5",
+     "label": "distant background",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/065/01-P4.webp",
+     "zm": 10.73,
+     "plane": "P4",
+     "label": "midground",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/065/02-P2.webp",
+     "zm": 9.73,
+     "plane": "P2",
+     "label": "hero: person",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/065/03-P1.webp",
+     "zm": 4.04,
+     "plane": "P1",
+     "label": "foreground",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/065/04-P0.webp",
+     "zm": 3.54,
+     "plane": "P0",
+     "label": "camera mask",
+     "water": false,
+     "sway": false
+    }
+   ],
+   "backdrop": "s/065/backdrop.webp",
+   "pose": {
+    "x": 6577.104577416273,
+    "y": 2517.9801134424483,
+    "z": 44.58754255818665,
+    "yaw": 3.529295008317829,
+    "pitch": 0.14200262932539423,
+    "hfov": 85.77976706899156,
+    "h": 20.88708829304136,
+    "score": 0.24704769054400302,
+    "rank": 66,
+    "clip": 0.299,
+    "found": "a view of a city with a lot of buildings and a sky full of stars",
+    "ref": "araffe walking on a bridge in a foggy area"
+   }
+  },
+  {
+   "n": 77,
+   "district": "haze",
+   "title": "shadow play beneath solar bridges, sun-bleached asphalt, lig",
+   "fov": 31.0,
+   "aspect": 1.7843,
+   "pitch": -3.1,
+   "roll": -1.8,
+   "height": 0.82,
+   "class": "eye-level",
+   "move": "push",
+   "z_hero": 11.709,
+   "sheets": [
+    {
+     "src": "s/077/00-P6.webp",
+     "zm": 6900.0,
+     "plane": "P6",
+     "label": "sky / atmosphere",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/077/01-P5.webp",
+     "zm": 137.5,
+     "plane": "P5",
+     "label": "distant background",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/077/02-P4.webp",
+     "zm": 70.06,
+     "plane": "P4",
+     "label": "midground",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/077/03-P2.webp",
+     "zm": 69.0,
+     "plane": "P2",
+     "label": "hero: water",
+     "water": true,
+     "sway": false
+    },
+    {
+     "src": "s/077/04-P0.webp",
+     "zm": 14.38,
+     "plane": "P0",
+     "label": "camera mask",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/077/05-P1.webp",
+     "zm": 6.34,
+     "plane": "P1",
+     "label": "foreground",
+     "water": false,
+     "sway": false
+    }
+   ],
+   "backdrop": "s/077/backdrop.webp",
+   "pose": {
+    "x": 6148.692670494357,
+    "y": 3651.1972227471333,
+    "z": 23.44781905142353,
+    "yaw": 1.519443563173404,
+    "pitch": -0.0051323681390111195,
+    "hfov": 29.97747471659557,
+    "h": 1.3725353958642124,
+    "score": 0.6167359609610511,
+    "rank": 1,
+    "clip": 0.463,
+    "found": "a view of a street with a building and a clock on it",
+    "ref": "sunlight shining through a long corridor of concrete pillars"
+   }
+  },
+  {
+   "n": 79,
+   "district": "haze",
+   "title": "silhouette in hazy cityscape, elevated concrete catwalk glow",
+   "fov": 8.1,
+   "aspect": 1.7843,
+   "pitch": -2.1,
+   "roll": 0.0,
+   "height": 2.3,
+   "class": "elevated",
+   "move": "truck",
+   "z_hero": 15.015,
+   "sheets": [
+    {
+     "src": "s/079/00-P6.webp",
+     "zm": 21175.0,
+     "plane": "P6",
+     "label": "sky / atmosphere",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/079/01-P3.webp",
+     "zm": 603.0,
+     "plane": "P3",
+     "label": "smokestack",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/079/02-P5.webp",
+     "zm": 499.5,
+     "plane": "P5",
+     "label": "distant background",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/079/03-P4.webp",
+     "zm": 416.5,
+     "plane": "P4",
+     "label": "midground",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/079/04-P3.webp",
+     "zm": 218.88,
+     "plane": "P3",
+     "label": "street lamp",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/079/05-P2.webp",
+     "zm": 211.75,
+     "plane": "P2",
+     "label": "hero: person",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/079/06-P1.webp",
+     "zm": 158.38,
+     "plane": "P1",
+     "label": "foreground",
+     "water": false,
+     "sway": false
+    }
+   ],
+   "backdrop": "s/079/backdrop.webp",
+   "pose": {
+    "x": 1294.4929248227431,
+    "y": 2417.0260554638103,
+    "z": 27.685061264713596,
+    "yaw": 3.110703479994527,
+    "pitch": -0.04623877575786793,
+    "hfov": 8.20869086189659,
+    "h": 3.031793020371113,
+    "score": 0.32571199270640894,
+    "rank": 14,
+    "clip": 0.357,
+    "found": "there is a cat sitting on a chair in a room",
+    "ref": "people walking across a bridge in the city at sunset"
+   }
+  },
+  {
+   "n": 80,
+   "district": "haze",
+   "title": "silhouette of a lone figure walking on a narrow industrial p",
+   "fov": 20.8,
+   "aspect": 1.7843,
+   "pitch": -7.5,
+   "roll": 0.9,
+   "height": 9.93,
+   "class": "rooftop",
+   "move": "push",
+   "z_hero": 11.845,
+   "sheets": [
+    {
+     "src": "s/080/00-P6.webp",
+     "zm": 7231.0,
+     "plane": "P6",
+     "label": "sky / atmosphere",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/080/01-P2.webp",
+     "zm": 72.31,
+     "plane": "P2",
+     "label": "hero: person",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/080/02-P4.webp",
+     "zm": 70.75,
+     "plane": "P4",
+     "label": "midground",
+     "water": false,
+     "sway": false
+    }
+   ],
+   "backdrop": "s/080/backdrop.webp",
+   "pose": {
+    "x": 4457.1355389989585,
+    "y": 4612.638630822498,
+    "z": 17.936266589429703,
+    "yaw": -0.25413278895804614,
+    "pitch": 0.052665971953727714,
+    "hfov": 20.429706699061754,
+    "h": 3.8595880306821173,
+    "score": 0.34806014112844635,
+    "rank": 37,
+    "clip": 0.481,
+    "found": "a view of a road with a car driving down it",
+    "ref": "araffes walking across a bridge in the fog at sunset"
+   }
+  },
+  {
+   "n": 81,
+   "district": "haze",
+   "title": "silhouette walking on narrow platform, air tasting like meta",
+   "fov": 22.0,
+   "aspect": 1.7843,
+   "pitch": 1.4,
+   "roll": -0.1,
+   "height": 0.94,
+   "class": "eye-level",
+   "move": "push",
+   "z_hero": 10.231,
+   "sheets": [
+    {
+     "src": "s/081/00-P6.webp",
+     "zm": 4138.0,
+     "plane": "P6",
+     "label": "sky / atmosphere",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/081/01-P5.webp",
+     "zm": 293.0,
+     "plane": "P5",
+     "label": "distant background",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/081/02-P4.webp",
+     "zm": 42.69,
+     "plane": "P4",
+     "label": "midground",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/081/03-P2.webp",
+     "zm": 41.38,
+     "plane": "P2",
+     "label": "hero: person",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/081/04-P1.webp",
+     "zm": 34.72,
+     "plane": "P1",
+     "label": "foreground",
+     "water": false,
+     "sway": false
+    }
+   ],
+   "backdrop": "s/081/backdrop.webp",
+   "pose": {
+    "x": 6253.222015853539,
+    "y": 2391.91259745979,
+    "z": 19.4805936878506,
+    "yaw": 2.757789542262102,
+    "pitch": 0.10624022682060787,
+    "hfov": 24.191365872347752,
+    "h": 0.986533289866673,
+    "score": 0.44645516319679496,
+    "rank": 1,
+    "clip": 0.433,
+    "found": "a view of a city with a bridge and a clock tower",
+    "ref": "araffe silhouetted against a red sky with a person walking on a bridge"
+   }
+  },
+  {
+   "n": 84,
+   "district": "haze",
+   "title": "The Orange Catwalk \u2014 walkers into the haze",
+   "fov": 66.0,
+   "aspect": 1.7843,
+   "pitch": 3.5,
+   "roll": 1.6,
+   "height": 0.97,
+   "class": "eye-level",
+   "move": "push",
+   "z_hero": 7.592,
+   "sheets": [
+    {
+     "src": "s/084/00-P3.webp",
+     "zm": 38.41,
+     "plane": "P3",
+     "label": "person",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/084/01-P3.webp",
+     "zm": 36.5,
+     "plane": "P3",
+     "label": "person",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/084/02-P5.webp",
+     "zm": 29.84,
+     "plane": "P5",
+     "label": "distant background",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/084/03-P4.webp",
+     "zm": 16.23,
+     "plane": "P4",
+     "label": "midground",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/084/04-P2.webp",
+     "zm": 16.0,
+     "plane": "P2",
+     "label": "hero: person",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/084/05-P0.webp",
+     "zm": 8.44,
+     "plane": "P0",
+     "label": "camera mask",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/084/06-P1.webp",
+     "zm": 6.8,
+     "plane": "P1",
+     "label": "foreground",
+     "water": false,
+     "sway": false
+    }
+   ],
+   "backdrop": "s/084/backdrop.webp",
+   "pose": {
+    "x": 1843.266734710597,
+    "y": 1520.601122429261,
+    "z": 30.260303117218537,
+    "yaw": 5.794803486544143,
+    "pitch": 0.0529569715865318,
+    "hfov": 67.26013728928613,
+    "h": 10.481294475591913,
+    "score": 0.4430918465892263,
+    "rank": 3,
+    "clip": 0.404,
+    "found": "a view of a city at night with a full moon",
+    "ref": "people walking in a tunnel with fog and light"
+   }
+  },
+  {
+   "n": 85,
+   "district": "haze",
+   "title": "The Orange Catwalk, elevated glowing concrete path pulsing w",
+   "fov": 41.8,
+   "aspect": 1.7843,
+   "pitch": -2.7,
+   "roll": 0.3,
+   "height": 1.62,
+   "class": "eye-level",
+   "move": "push",
+   "z_hero": 10.165,
+   "sheets": [
+    {
+     "src": "s/085/00-P6.webp",
+     "zm": 4043.9999999999995,
+     "plane": "P6",
+     "label": "sky / atmosphere",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/085/01-P3.webp",
+     "zm": 64.22,
+     "plane": "P3",
+     "label": "person",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/085/02-P3.webp",
+     "zm": 63.88,
+     "plane": "P3",
+     "label": "person",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/085/03-P5.webp",
+     "zm": 63.56,
+     "plane": "P5",
+     "label": "distant background",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/085/04-P3.webp",
+     "zm": 53.97,
+     "plane": "P3",
+     "label": "street lamp",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/085/05-P4.webp",
+     "zm": 40.84,
+     "plane": "P4",
+     "label": "midground",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/085/06-P2.webp",
+     "zm": 40.44,
+     "plane": "P2",
+     "label": "hero: person",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/085/07-P1.webp",
+     "zm": 9.07,
+     "plane": "P1",
+     "label": "foreground",
+     "water": false,
+     "sway": false
+    },
+    {
+     "src": "s/085/08-P0.webp",
+     "zm": 8.62,
+     "plane": "P0",
+     "label": "camera mask",
+     "water": false,
+     "sway": false
+    }
+   ],
+   "backdrop": "s/085/backdrop.webp",
+   "pose": {
+    "x": 1924.561950988455,
+    "y": 3456.449241998173,
+    "z": 33.078838877437505,
+    "yaw": 4.305950972319655,
+    "pitch": -0.011603303161331409,
+    "hfov": 39.37348637276391,
+    "h": 14.098630759753801,
+    "score": 0.5337315074172337,
+    "rank": 2,
+    "clip": 0.357,
+    "found": "a view of a city at night with a full moon",
+    "ref": "people walking on a bridge at night with a bright light"
+   }
+  }
+ ]
+}

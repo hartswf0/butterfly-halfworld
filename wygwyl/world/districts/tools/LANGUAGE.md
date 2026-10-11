@@ -64,3 +64,11 @@ Results with the prompt (all 100, `.work/pose-prompt`, published in `../poses.ht
 ## One map of places (`places.py` → `../places.json`)
 
 166 places already in plan space (city3d landmarks, Lynch districts, plazas, poem sites; iconic's 89 Lynch elements; language's palettes) and 767 placed canon shots with their CLIP rows, each given to a scene-book district, and per district what its prompts ask for and what it already has. Position against meaning: the canon shots inside a district's ring rank first or second of 12 for its views' CLIP in hive, bay, naraka, ascent, plaza, arcade; not in overseer, commons, temple, ankhu, cenotaph, haze. Cenotaph and temple have none of their 25 best-matching canon shots inside their rings; hive, overseer and ankhu all point at the one tower cluster by the Severn (2028, 2371).
+
+## The measured shot and the stands (`arch.py`, `../../stands/`)
+
+[wygwyl-world-arch](https://github.com/hartswf0/wygwyl-world-arch) read the same pictures from the inside, with stronger readers (Grounding DINO on the prompt's phrases → SAM 2.1, OneFormer ADE20K, Depth Pro) and recovered each camera from the picture itself: Depth Pro's focal length, a RANSAC ground plane for height, pitch and roll. Then it cut each picture into 6–8 flat sheets at their measured depths, a multiplane stand that recomposes the frame exactly from its own camera. It looks like the references because it is the references; this pipeline tried to make a city produce them.
+
+Its numbers correct one assumption here: Midjourney honoured the prompted lens in only 18 of 47 shots (median miss 17 mm), so the measured lens replaces the prompt's in the search, with the measured pitch, and a height term that reads the frame's bottom row back to a height above whatever surface the camera stands on (the prompt still gives that surface's height: 'platform level' is a deck, and the picture says the camera is 0.27 m above it).
+
+The two are joined in `../../stands/index.html`: each stand hung from the camera the search found for it, so it is exact at the shot and the continuous city carries on around it ('step aside', 'from above'), the city's air taken from the picture's own colour.

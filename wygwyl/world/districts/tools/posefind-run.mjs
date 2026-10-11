@@ -27,8 +27,8 @@ async function place(n, opt = {}) {
   const refURL = 'data:image/webp;base64,' + fs.readFileSync(new URL(`../v/${pad}.webp`, import.meta.url)).toString('base64');
   let words = null; try { const d = await (await fetch('http://127.0.0.1:8232/describe', {method: 'POST', body: JSON.stringify({images: [refURL, sh.photo]})})).json();
     const [a, b] = d.emb; words = {ref: d.caption[0], found: d.caption[1], refTags: d.tags[0], foundTags: d.tags[1], clip: +a.reduce((s, v, i) => s + v * b[i], 0).toFixed(3)}; } catch (e) { words = {error: String(e)}; }
-  const pr = await page.evaluate(n => PF.prompt(n), n);
-  res.views[n] = {district: dist[n], ...r, check: ck, null: nl, words, shot: pr && {hfov: pr.hfov, vantage: pr.vantage[0]?.kind ?? null, said: pr.vantage[0]?.said ?? null, subjects: pr.subjects}, ...(opt.anchor ? {sibling: opt.sibling} : {})};
+  const pr = await page.evaluate(n => PF.prompt(n), n), ar = await page.evaluate(n => PF.arch(n), n);
+  res.views[n] = {district: dist[n], ...r, check: ck, null: nl, words, shot: pr && {hfov: pr.hfov, vantage: pr.vantage[0]?.kind ?? null, said: pr.vantage[0]?.said ?? null, subjects: pr.subjects}, measured: ar && {fov: ar.fov, h: ar.h, pitch: ar.pitch, roll: ar.roll, class: ar.class, conf: ar.conf}, ...(opt.anchor ? {sibling: opt.sibling} : {})};
   fs.writeFileSync(PJ, JSON.stringify(res));
   console.log(n, dist[n], opt.anchor ? `(beside ${opt.sibling.of})` : '', 'score', r.best.s.toFixed(3), JSON.stringify(Object.fromEntries(Object.entries(r.best.parts).map(([k, v]) => [k, +(+v).toFixed(2)]))), 'own rank', ck.rank, 'null median', nl.median?.toFixed(3), 'p95', nl.p95?.toFixed(3), r.best.from.kind, `h ${r.best.h.toFixed(1)} hfov ${r.best.pose.hfov.toFixed(0)}`, `${((Date.now() - t0) / 1000).toFixed(0)}s`);
   if (words?.ref) console.log(`   sees: "${words.ref}"  →  found: "${words.found}"  (clip ${words.clip})`);
