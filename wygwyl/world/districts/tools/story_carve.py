@@ -115,7 +115,7 @@ def window(mv, dur):
         s0 = min(max(x, mv['t'] - dur / 2), y - min(dur, y - x)); L = min(dur, y - x)
         sc = L - 0.2 * abs(s0 + L / 2 - mv['t'])
         if best is None or sc > best[0]: best = (sc, round(s0, 2), round(L, 2))
-    return {'in': best[1], 'len': best[2]} if best else None
+    return {'in': best[1], 'len': best[2]} if best and best[2] >= 1.5 else None          # (a clip shorter than its metadata says gives no window)
 
 def scenes_timed(p):
     Tm = json.load(open(os.path.join(WY, 'timings', f'{p}.json'))); dur = Tm['duration']
