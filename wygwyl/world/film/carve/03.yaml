@@ -1,0 +1,178 @@
+title: How to Break off an Engagement
+seed: 'How to Break off an Engagement: Tambourine through the chapel window; The empty temple; Gifts at the side doors; The storm; Remnants on the shore; Tambourine shatters'
+diegesis:
+  premise: The tambourine falls, flies, tumbles through black space and enters the chapel through a window, still whole.
+  world_rules:
+  - the reading sets the clock
+  - a scene edge is a hard cut
+  - POET is one man throughout
+  core_entities: []
+  core_locations:
+  - the chapel's seaward lancet
+  - the nave, choir loft and baptistery as built
+  - the side doors and stone threshold
+  - the flat, from the beach
+  - the tide line where the chapel stood
+  - the chapel's remnant floor
+macro_structure:
+- unit_id: U1
+  kind: sequence
+  function: Tambourine through the chapel window → The empty temple
+- unit_id: U2
+  kind: sequence
+  function: Gifts at the side doors → The storm
+- unit_id: U3
+  kind: sequence
+  function: Remnants on the shore → Tambourine shatters
+beat_structure:
+- beat_id: '03.0'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: The tambourine falls, flies, tumbles through black space and enters the chapel through a window, still whole.
+- beat_id: '03.1'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: 'Close-ups of an empty sanctuary in time-lapse decay: choir stands, kneelers, a dry baptism pool, pews veiled in cobwebs,'
+- beat_id: '03.2'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: Opened gift boxes left outside the side doors; spirits leave; ivy creeps over the cracked threshold.
+- beat_id: '03.3'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: Thunder; a heavy storm takes over and speeds the decay until nothing remains.
+- beat_id: '03.4'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: Storm ends; what is left of the chapel lies on the shore with soaked bread, soiled blankets and footprints in mud.
+- beat_id: '03.5'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: The tambourine finally lands on the ground of the chapel remnants and shatters.
+patch_timeline:
+- patch_id: P03-001
+  start_time: 01:00:00:00
+  end_time: 01:00:07:14
+  location: the chapel's seaward lancet
+  entities_present: []
+  action_summary: The tambourine falls, flies, tumbles through black space and enters the chapel through a window, still whole.
+  camera_relation: eye-level shot, ~18 mm, camera 1.1 m up, pitch 10°
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “Old to forever, a tambourine sounds off an empty temple,”'
+  patch_trigger: 'location change: the chapel''s seaward lancet'
+  source: other 0.15+4.91s
+  status: moving
+  rehydration_seed: 'no named figure — The tambourine falls, flies, tumbles through black space and enters the chapel through a window, still whole. Place: the chapel''s seaward lancet. eye-level shot,
+    ~18 mm, camera 1.1 m up, pitch 10°; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; luminance 0.21. tracking with the tumbling tambourine
+    in black, then a c'
+- patch_id: P03-002
+  start_time: 01:00:07:14
+  end_time: 01:00:13:18
+  location: the nave, choir loft and baptistery as built
+  entities_present: []
+  action_summary: 'Close-ups of an empty sanctuary in time-lapse decay: choir stands, kneelers, a dry baptism pool, pews veiled in cobwebs, ash drifting.'
+  camera_relation: wide shot
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “empty choir stands, empty prayer lines, and abandoned Baptis”'
+  patch_trigger: 'location change: the nave, choir loft and baptistery as built'
+  source: archive 13.28+6.15s
+  status: moving
+  rehydration_seed: 'no named figure — Close-ups of an empty sanctuary in time-lapse decay: choir stands, kneelers, a dry baptism pool, pews veiled in cobwebs, ash drifting. Place: the nave, choir loft
+    and baptistery as built. wide shot; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; luminance 0.33. locked-off time-lapse plates and macro
+    close-ups on woo'
+- patch_id: P03-003
+  start_time: 01:00:13:18
+  end_time: 01:00:21:13
+  location: the nave, choir loft and baptistery as built
+  entities_present: []
+  action_summary: 'Close-ups of an empty sanctuary in time-lapse decay: choir stands, kneelers, a dry baptism pool, pews veiled in cobwebs, ash drifting.'
+  camera_relation: medium shot
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “pews taken by cobwebs, and doused in disintegration.”'
+  patch_trigger: 'phrase boundary: “pews taken by cobwebs,”'
+  source: archive 0.15+7.79s
+  status: moving
+  rehydration_seed: 'no named figure — Close-ups of an empty sanctuary in time-lapse decay: choir stands, kneelers, a dry baptism pool, pews veiled in cobwebs, ash drifting. Place: the nave, choir loft
+    and baptistery as built. medium shot; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; luminance 0.29. locked-off time-lapse plates and
+    macro close-ups on w'
+- patch_id: P03-004
+  start_time: 01:00:21:13
+  end_time: 01:00:28:11
+  location: the side doors and stone threshold
+  entities_present: []
+  action_summary: Opened gift boxes left outside the side doors; spirits leave; ivy creeps over the cracked threshold.
+  camera_relation: elevated shot, ~33 mm, camera 2.5 m up, pitch -36°
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “Spirits have left salvations and opened gift boxes placed ou”'
+  patch_trigger: 'location change: the side doors and stone threshold'
+  source: other 0.15+4.91s
+  status: moving
+  rehydration_seed: 'no named figure — Opened gift boxes left outside the side doors; spirits leave; ivy creeps over the cracked threshold. Place: the side doors and stone threshold. elevated shot, ~33
+    mm, camera 2.5 m up, pitch -36°; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; luminance 0.30. low exterior angle on the threshold,
+    time-lapse of boxes w'
+- patch_id: P03-005
+  start_time: 01:00:28:11
+  end_time: 01:00:35:16
+  location: the flat, from the beach
+  entities_present: []
+  action_summary: Thunder; a heavy storm takes over and speeds the decay until nothing remains.
+  camera_relation: wide shot
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “It thunders, then it rains until nothing remains.”'
+  patch_trigger: 'location change: the flat, from the beach'
+  source: markov 157.16+7.21s
+  status: moving
+  rehydration_seed: 'no named figure — Thunder; a heavy storm takes over and speeds the decay until nothing remains. Place: the flat, from the beach. wide shot; colour; light: storm daylight (03), chilly
+    dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; luminance 0.24. wide exterior time-lapse of the chapel silhouette in lightning, pulling back as it is washed away wide time-lapse
+    of the silhouette '
+- patch_id: P03-006
+  start_time: 01:00:35:16
+  end_time: 01:00:48:06
+  location: the tide line where the chapel stood
+  entities_present: []
+  action_summary: Storm ends; what is left of the chapel lies on the shore with soaked bread, soiled blankets and footprints in mud.
+  camera_relation: ground / worm's-eye shot, ~28 mm, camera 0.2 m up, pitch 1°
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “Old to the storm ending, what was once love now goods, broke”'
+  patch_trigger: 'location change: the tide line where the chapel stood'
+  source: other 0.15+4.91s
+  status: moving
+  rehydration_seed: 'no named figure — Storm ends; what is left of the chapel lies on the shore with soaked bread, soiled blankets and footprints in mud. Place: the tide line where the chapel stood. ground
+    / worm''s-eye shot, ~28 mm, camera 0.2 m up, pitch 1°; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; luminance 0.44. still wides of
+    wreckage at the ti'
+- patch_id: P03-007
+  start_time: 01:00:48:06
+  end_time: 01:00:58:00
+  location: the tide line where the chapel stood
+  entities_present: []
+  action_summary: Storm ends; what is left of the chapel lies on the shore with soaked bread, soiled blankets and footprints in mud.
+  camera_relation: medium shot
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “and blankets soiled by venomous puppeteers, old to two sets ”'
+  patch_trigger: 'phrase boundary: “and blankets soiled by”'
+  source: Heritage of Splendor 0.98+5.24s
+  status: moving
+  rehydration_seed: 'no named figure — Storm ends; what is left of the chapel lies on the shore with soaked bread, soiled blankets and footprints in mud. Place: the tide line where the chapel stood. medium
+    shot; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; luminance 0.37. still wides of wreckage at the tide line, inserts on bread, blanket
+    and mud print'
+- patch_id: P03-008
+  start_time: 01:00:58:00
+  end_time: 01:01:02:12
+  location: the chapel's remnant floor
+  entities_present: []
+  action_summary: The tambourine finally lands on the ground of the chapel remnants and shatters.
+  camera_relation: ground / worm's-eye shot, ~51 mm, camera 0.3 m up, pitch 7°
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “a tambourine shattered into pieces.”'
+  patch_trigger: 'location change: the chapel''s remnant floor'
+  source: other 0.15+4.50s
+  status: moving
+  rehydration_seed: 'no named figure — The tambourine finally lands on the ground of the chapel remnants and shatters. Place: the chapel''s remnant floor. ground / worm''s-eye shot, ~51 mm, camera 0.3 m
+    up, pitch 7°; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; luminance 0.37. slow-motion ground-level impact, fragments scattering toward
+    lens ground-level'
+- patch_id: P03-009
+  start_time: 01:01:02:12
+  end_time: 01:01:06:12
+  location: the same shore, east of the chapel along the rail, after the storm
+  entities_present: []
+  action_summary: 'time cut: day storm → twilight calm, same tide line'
+  camera_relation: rooftop shot, ~106 mm, camera 10.3 m up, pitch -32°
+  light_sound_state: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading
+  patch_trigger: 'threshold: cut 03 → 04'
+  source: Moonwalk One, ca. 1970 24.11+4.00s
+  status: moving
+  rehydration_seed: 'no named figure — time cut: day storm → twilight calm, same tide line Place: the same shore, east of the chapel along the rail, after the storm. rooftop shot, ~106 mm, camera 10.3 m
+    up, pitch -32°; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; luminance 0.18. time cut: day storm → twilight calm, same tide line the
+    chapel''s wreckage '

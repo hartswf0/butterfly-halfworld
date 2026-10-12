@@ -1,0 +1,236 @@
+title: New Day
+seed: 'New Day: Arrival on the chilly shore; Remnants in the sunlight; The temple builds itself; Choir chords in the new nave (inferred); Journal and the lonely mirror (inferred); Welcoming the ne'
+diegesis:
+  premise: The motorcycle comes down out of the hills to the chapel shore; wide view of distant seas and the wooded hills behind.
+  world_rules:
+  - the reading sets the clock
+  - a scene edge is a hard cut
+  - POET is one man throughout
+  core_entities:
+  - POET
+  core_locations:
+  - the shore steps beneath the mountain
+  - the chapel's remnants in low sun
+  - the old footprint at the waterline
+  - the new nave
+  - the mirror hall
+  - the threshold facing the harbour
+macro_structure:
+- unit_id: U1
+  kind: sequence
+  function: Arrival on the chilly shore → Remnants in the sunlight
+- unit_id: U2
+  kind: sequence
+  function: The temple builds itself → Choir chords in the new nave (inferred)
+- unit_id: U3
+  kind: sequence
+  function: Journal and the lonely mirror (inferred) → Welcoming the new day
+beat_structure:
+- beat_id: '11.0'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: The motorcycle comes down out of the hills to the chapel shore; wide view of distant seas and the wooded hills behind.
+- beat_id: '11.1'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: Sun crosses the debris of the storm-wrecked chapel and the shattered tambourine from poem 3 (callback).
+- beat_id: '11.2'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: The POET starts to rebuild; the white futuristic temple rises in unison with his movements.
+- beat_id: '11.3'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: Inside the clean white hall the old choir stands and prayer lines return remade; sound calms him.
+- beat_id: '11.4'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: He opens a journal stored away and reads aloud; a mirror callback to the midnight solitude of earlier poems.
+- beat_id: '11.5'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: Doors open to full sun over the harbor; the finished temple stands bone-white and calm.
+patch_timeline:
+- patch_id: P11-001
+  start_time: 01:00:00:00
+  end_time: 01:00:10:07
+  location: the shore steps beneath the mountain
+  entities_present: []
+  action_summary: The motorcycle comes down out of the hills to the chapel shore; wide view of distant seas and the wooded hills behind.
+  camera_relation: eye-level shot, ~39 mm, camera 1.0 m up, pitch 1°
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 7.5 fog; her reading: “Even here is chilly in the morning. River rafting fall cover”'
+  patch_trigger: 'location change: the shore steps beneath the mountain'
+  source: '[Amateur film: "Saga of the Happy Wanderers"] 5.87+10.29s'
+  status: moving
+  rehydration_seed: 'no named figure — The motorcycle comes down out of the hills to the chapel shore; wide view of distant seas and the wooded hills behind. Place: the shore steps beneath the mountain.
+    eye-level shot, ~39 mm, camera 1.0 m up, pitch 1°; colour; light: dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 7.5 fog; luminance 0.32. extreme wide from the water looking inland,
+    bike small against'
+- patch_id: P11-002
+  start_time: 01:00:10:07
+  end_time: 01:00:18:13
+  location: the shore steps beneath the mountain
+  entities_present: []
+  action_summary: The motorcycle comes down out of the hills to the chapel shore; wide view of distant seas and the wooded hills behind.
+  camera_relation: elevated shot, ~31 mm, camera 7.4 m up, pitch -39°
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 7.5 fog; her reading: “This world is at peace. In silent resounds, choir chords cal”'
+  patch_trigger: 'phrase boundary: “This world is at peace.”'
+  source: THE PHOTOGRAPHER 1.22+8.24s
+  status: moving
+  rehydration_seed: 'no named figure — The motorcycle comes down out of the hills to the chapel shore; wide view of distant seas and the wooded hills behind. Place: the shore steps beneath the mountain.
+    elevated shot, ~31 mm, camera 7.4 m up, pitch -39°; colour; light: dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 7.5 fog; luminance 0.36. extreme wide from the water looking inland,
+    bike small agains'
+- patch_id: P11-003
+  start_time: 01:00:18:13
+  end_time: 01:00:30:08
+  location: the shore steps beneath the mountain
+  entities_present: []
+  action_summary: The motorcycle comes down out of the hills to the chapel shore; wide view of distant seas and the wooded hills behind.
+  camera_relation: elevated shot, ~60 mm, camera 2.2 m up, pitch 5°
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 7.5 fog; her reading: “and offer them as keepsakes back to the higher powers. Exhau”'
+  patch_trigger: 'phrase boundary: “and offer them as keepsakes back”'
+  source: archive 10.05+11.82s
+  status: moving
+  rehydration_seed: 'no named figure — The motorcycle comes down out of the hills to the chapel shore; wide view of distant seas and the wooded hills behind. Place: the shore steps beneath the mountain.
+    elevated shot, ~60 mm, camera 2.2 m up, pitch 5°; colour; light: dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 7.5 fog; luminance 0.41. extreme wide from the water looking inland,
+    bike small against '
+- patch_id: P11-004
+  start_time: 01:00:30:08
+  end_time: 01:00:35:12
+  location: the chapel's remnants in low sun
+  entities_present: []
+  action_summary: Sun crosses the debris of the storm-wrecked chapel and the shattered tambourine from poem 3 (callback).
+  camera_relation: undetermined (no ground) shot, ~85 mm
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “All the remnants of the destruction revealed in the sunlight”'
+  patch_trigger: 'location change: the chapel''s remnants in low sun'
+  source: archive 6.80+5.17s
+  status: moving
+  rehydration_seed: 'no named figure — Sun crosses the debris of the storm-wrecked chapel and the shattered tambourine from poem 3 (callback). Place: the chapel''s remnants in low sun. undetermined (no
+    ground) shot, ~85 mm; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; luminance 0.18. low macro dolly across debris as light rakes across it; sun
+    flare low macro dolly'
+- patch_id: P11-005
+  start_time: 01:00:35:12
+  end_time: 01:00:42:05
+  location: the old footprint at the waterline
+  entities_present:
+  - POET
+  action_summary: The POET starts to rebuild; the white futuristic temple rises in unison with his movements.
+  camera_relation: overhead shot, ~60 mm, camera 17.1 m up, pitch -85°
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “We can rebuild this temple. It''s a new day. The catharsis ev”'
+  patch_trigger: 'location change: the old footprint at the waterline'
+  source: Herinnering uit het leven van onzen grootsten toneelspeler 4.41+6.69s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — The POET starts to rebuild; the white futuristic temple rises in unison with his movements. Place: the old footprint at the waterline. overhead shot, ~60
+    mm, camera 17.1 m up, pitch -85°; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; luminance 0.61. locked-off time-lapse wide plus a tracking medium
+    on the POET as wal'
+- patch_id: P11-006
+  start_time: 01:00:42:05
+  end_time: 01:00:48:22
+  location: the new nave
+  entities_present: []
+  action_summary: Inside the clean white hall the old choir stands and prayer lines return remade; sound calms him.
+  camera_relation: wide shot
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “by loss in the painful crawl along the cobblestone boulevard”'
+  patch_trigger: 'location change: the new nave'
+  source: archive 4.98+6.69s
+  status: moving
+  rehydration_seed: 'no named figure — Inside the clean white hall the old choir stands and prayer lines return remade; sound calms him. Place: the new nave. wide shot; colour; light: storm daylight (03),
+    chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; luminance 0.36. symmetrical wide down the nave; sunbeam shafts; slow crane up symmetrical wide; sunbeam shafts; crane up 16:9, one continuous
+    shot of 6'
+- patch_id: P11-007
+  start_time: 01:00:48:22
+  end_time: 01:00:57:22
+  location: the mirror hall
+  entities_present: []
+  action_summary: He opens a journal stored away and reads aloud; a mirror callback to the midnight solitude of earlier poems.
+  camera_relation: undetermined (no ground) shot, ~41 mm
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “I can close a chapter and open a journal stored away from mo”'
+  patch_trigger: 'location change: the mirror hall'
+  source: archive 3.75+9.02s
+  status: moving
+  rehydration_seed: 'no named figure — He opens a journal stored away and reads aloud; a mirror callback to the midnight solitude of earlier poems. Place: the mirror hall. undetermined (no ground) shot,
+    ~41 mm; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; luminance 0.19. close-up on pages and his profile; over-shoulder into a mirror close on pages;
+    over the shoul'
+- patch_id: P11-008
+  start_time: 01:00:57:22
+  end_time: 01:01:06:19
+  location: the mirror hall
+  entities_present: []
+  action_summary: He opens a journal stored away and reads aloud; a mirror callback to the midnight solitude of earlier poems.
+  camera_relation: medium shot
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “of keeping faith alive and as majestic. When words are read ”'
+  patch_trigger: 'phrase boundary: “of keeping faith alive and”'
+  source: archive 3.54+8.87s
+  status: moving
+  rehydration_seed: 'no named figure — He opens a journal stored away and reads aloud; a mirror callback to the midnight solitude of earlier poems. Place: the mirror hall. medium shot; colour; light: storm
+    daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; luminance 0.10. close-up on pages and his profile; over-shoulder into a mirror close on pages; over the shoulder into
+    the mirror (42) 1'
+- patch_id: P11-009
+  start_time: 01:01:06:19
+  end_time: 01:01:15:17
+  location: the mirror hall
+  entities_present: []
+  action_summary: He opens a journal stored away and reads aloud; a mirror callback to the midnight solitude of earlier poems.
+  camera_relation: close shot
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “to the lonely mirror''s midnight hours, the left tears drying”'
+  patch_trigger: 'phrase boundary: “to the lonely mirror''s midnight hours,”'
+  source: Going Steady? 6.27+8.92s
+  status: moving
+  rehydration_seed: 'no named figure — He opens a journal stored away and reads aloud; a mirror callback to the midnight solitude of earlier poems. Place: the mirror hall. close shot; colour; light: storm
+    daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; luminance 0.52. close-up on pages and his profile; over-shoulder into a mirror close on pages; over the shoulder into
+    the mirror (42) 16'
+- patch_id: P11-010
+  start_time: 01:01:15:17
+  end_time: 01:01:24:23
+  location: the threshold facing the harbour
+  entities_present: []
+  action_summary: Doors open to full sun over the harbor; the finished temple stands bone-white and calm.
+  camera_relation: undetermined (no ground) shot, ~55 mm
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “We can embrace a new day. We can receive a new day. We can w”'
+  patch_trigger: 'location change: the threshold facing the harbour'
+  source: archive 0.15+9.25s
+  status: GENERATE
+  rehydration_seed: 'no named figure — Doors open to full sun over the harbor; the finished temple stands bone-white and calm. Place: the threshold facing the harbour. undetermined (no ground) shot, ~55
+    mm; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; luminance 0.40. reverse from inside the doors out to the sea, then wide exterior hero shot of
+    the white temple re'
+- patch_id: P11-011
+  start_time: 01:01:24:23
+  end_time: 01:01:33:16
+  location: the threshold facing the harbour
+  entities_present: []
+  action_summary: Doors open to full sun over the harbor; the finished temple stands bone-white and calm.
+  camera_relation: ground / worm's-eye shot, ~44 mm, camera 0.3 m up, pitch -4°
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “every circumference of life we''re celebrating and believing ”'
+  patch_trigger: 'phrase boundary: “every circumference of life we''re”'
+  source: Moonwalk One, ca. 1970 8.72+8.72s
+  status: GENERATE
+  rehydration_seed: 'no named figure — Doors open to full sun over the harbor; the finished temple stands bone-white and calm. Place: the threshold facing the harbour. ground / worm''s-eye shot, ~44 mm,
+    camera 0.3 m up, pitch -4°; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; luminance 0.23. reverse from inside the doors out to the sea, then wide
+    exterior hero shot'
+- patch_id: P11-012
+  start_time: 01:01:33:16
+  end_time: 01:01:41:06
+  location: the threshold facing the harbour
+  entities_present: []
+  action_summary: Doors open to full sun over the harbor; the finished temple stands bone-white and calm.
+  camera_relation: eye-level shot, ~71 mm, camera 0.9 m up, pitch -2°
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “reveling in the sunlight of a new beginning with this world ”'
+  patch_trigger: 'phrase boundary: “reveling in the sunlight of a new”'
+  source: archive 8.76+7.59s
+  status: GENERATE
+  rehydration_seed: 'no named figure — Doors open to full sun over the harbor; the finished temple stands bone-white and calm. Place: the threshold facing the harbour. eye-level shot, ~71 mm, camera 0.9
+    m up, pitch -2°; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; luminance 0.31. reverse from inside the doors out to the sea, then wide exterior
+    hero shot of the wh'
+- patch_id: P11-013
+  start_time: 01:01:41:06
+  end_time: 01:01:45:06
+  location: the same hall, decades later
+  entities_present: []
+  action_summary: ellipsis; same frame, filled
+  camera_relation: close shot
+  light_sound_state: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading
+  patch_trigger: 'threshold: cut 11 → 12'
+  source: archive 5.60+4.00s
+  status: moving
+  rehydration_seed: 'no named figure — ellipsis; same frame, filled Place: the same hall, decades later. close shot; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12)
+    hour 7.5 fog; luminance 0.10. ellipsis; same frame, filled the white vault over the chapel''s walls 16:9, one continuous shot of 4.0 s, no cuts, no text, no title cards, no added figures beyond: no
+    named figure; contin'

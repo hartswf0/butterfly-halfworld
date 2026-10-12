@@ -1,0 +1,218 @@
+title: Newly Single
+seed: 'Newly Single: The soul leaves the dancer; Strangers collide; the last one to leave; Soul over Atlantis / the open field at the equator; Angels'' ice-water baptism; Haze and the soul''s return; Mou'
+diegesis:
+  premise: Mid-dance, a translucent soul rises out of the POET's chest and floats above; the emptied body keeps moving to the beat alone.
+  world_rules:
+  - the reading sets the clock
+  - a scene edge is a hard cut
+  - POET is one man throughout
+  core_entities:
+  - POET
+  - crowd
+  core_locations:
+  - the rooftop club on a spire crown (up the elevator shaft fro
+  - the dance floor from above
+  - the sky over Atlantis; the planet field
+  - the middle of the club floor
+  - the subwoofer wall at the floor's edge
+  - the parapet
+macro_structure:
+- unit_id: U1
+  kind: sequence
+  function: The soul leaves the dancer → Strangers collide; the last one to leave
+- unit_id: U2
+  kind: sequence
+  function: Soul over Atlantis / the open field at the equator → Angels' ice-water baptism
+- unit_id: U3
+  kind: sequence
+  function: Haze and the soul's return → Mountains from the rooftop
+beat_structure:
+- beat_id: '08.0'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: 'Mid-dance, a translucent soul rises out of the POET''s chest and floats above; the emptied body keeps moving to the beat '
+- beat_id: '08.1'
+  parent_unit: U1
+  syntagma_type: accumulative
+  pressure_shift: From the soul's vantage the crowd moves in slow motion, bodies brushing and sparking; the body stays on as the club empt
+- beat_id: '08.2'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: 'Cutaway: the soul watches the party from far above, top-down over all of Atlantis lit blue and pink; the verse relocates'
+- beat_id: '08.3'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: 'Cut back to the body in the middle of the club: angels dump cleansing, unfiltered ice water over him while the party con'
+- beat_id: '08.4'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: The club fills with haze; the body leans back, inhales the smoke, and the soul streaks back into the chest.
+- beat_id: '08.5'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: The POET stares from the rooftop at unfamiliar yet relatable mountains in the distance, reaching toward something just b
+patch_timeline:
+- patch_id: P08-001
+  start_time: 01:00:00:00
+  end_time: 01:00:06:03
+  location: the rooftop club on a spire crown (up the elevator shaft from the House)
+  entities_present:
+  - POET
+  action_summary: Mid-dance, a translucent soul rises out of the POET's chest and floats above; the emptied body keeps moving to the beat alone.
+  camera_relation: medium shot
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “The soul has escaped my body for the moment and left him on ”'
+  patch_trigger: 'location change: the rooftop club on a spire crown (up the elevator shaft from the House)'
+  source: archive 0.15+6.12s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — Mid-dance, a translucent soul rises out of the POET''s chest and floats above; the emptied body keeps moving to the beat alone. Place: the rooftop club on
+    a spire crown (up the elevator shaft from the House). medium shot; colour; light: blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; luminance 0.26. medium on the dancer under
+    strobe, then a slow '
+- patch_id: P08-002
+  start_time: 01:00:06:03
+  end_time: 01:00:16:11
+  location: the rooftop club on a spire crown (up the elevator shaft from the House)
+  entities_present:
+  - POET
+  action_summary: Mid-dance, a translucent soul rises out of the POET's chest and floats above; the emptied body keeps moving to the beat alone.
+  camera_relation: medium shot
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “flesh and bones, rejection and heartache hit differently whe”'
+  patch_trigger: 'phrase boundary: “flesh and bones, rejection and heartache”'
+  source: archive 17.83+10.35s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — Mid-dance, a translucent soul rises out of the POET''s chest and floats above; the emptied body keeps moving to the beat alone. Place: the rooftop club on
+    a spire crown (up the elevator shaft from the House). medium shot; colour; light: blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; luminance 0.10. medium on the dancer under
+    strobe, then a slow '
+- patch_id: P08-003
+  start_time: 01:00:16:11
+  end_time: 01:00:24:17
+  location: the rooftop club on a spire crown (up the elevator shaft from the House)
+  entities_present:
+  - POET
+  action_summary: Mid-dance, a translucent soul rises out of the POET's chest and floats above; the emptied body keeps moving to the beat alone.
+  camera_relation: medium shot
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “and head throbbing from the music and empty on a crowded flo”'
+  patch_trigger: 'phrase boundary: “and head throbbing from the music and”'
+  source: archive 24.47+8.24s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — Mid-dance, a translucent soul rises out of the POET''s chest and floats above; the emptied body keeps moving to the beat alone. Place: the rooftop club on
+    a spire crown (up the elevator shaft from the House). medium shot; colour; light: blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; luminance 0.20. medium on the dancer under
+    strobe, then a slow '
+- patch_id: P08-004
+  start_time: 01:00:24:17
+  end_time: 01:00:34:13
+  location: the dance floor from above
+  entities_present:
+  - crowd
+  action_summary: From the soul's vantage the crowd moves in slow motion, bodies brushing and sparking; the body stays on as the club empties around a lone si
+  camera_relation: medium shot
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “Let''s watch strangers collide and spark electric currents th”'
+  patch_trigger: 'location change: the dance floor from above'
+  source: archive 10.13+7.29s
+  status: moving
+  rehydration_seed: 'crowd — From the soul''s vantage the crowd moves in slow motion, bodies brushing and sparking; the body stays on as the club empties around a lone silhouette. Place: the dance floor
+    from above. medium shot; colour; light: blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; luminance 0.11. overhead slow-motion panorama (soul POV), then a 360 orbit around the
+    lone dancer as the '
+- patch_id: P08-005
+  start_time: 01:00:34:13
+  end_time: 01:00:41:08
+  location: the dance floor from above
+  entities_present:
+  - crowd
+  action_summary: From the soul's vantage the crowd moves in slow motion, bodies brushing and sparking; the body stays on as the club empties around a lone si
+  camera_relation: undetermined (no ground) shot, ~73 mm
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “bitter refraction inside the walls of an escape that few ple”'
+  patch_trigger: 'phrase boundary: “bitter refraction inside the”'
+  source: archive 45.62+6.81s
+  status: moving
+  rehydration_seed: 'crowd — From the soul''s vantage the crowd moves in slow motion, bodies brushing and sparking; the body stays on as the club empties around a lone silhouette. Place: the dance floor
+    from above. undetermined (no ground) shot, ~73 mm; colour; light: blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; luminance 0.09. overhead slow-motion panorama (soul POV),
+    then a 360 orbit arou'
+- patch_id: P08-006
+  start_time: 01:00:41:08
+  end_time: 01:00:49:11
+  location: the sky over Atlantis; the planet field
+  entities_present:
+  - crowd
+  action_summary: 'Cutaway: the soul watches the party from far above, top-down over all of Atlantis lit blue and pink; the verse relocates it to an open field'
+  camera_relation: overhead shot, ~18 mm, camera 2500.0 m up, pitch -90°
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 2.4 clear; her reading: “Now let us put my soul in the middle of an open field at the”'
+  patch_trigger: 'location change: the sky over Atlantis; the planet field'
+  source: markov 96.38+8.10s
+  status: moving
+  rehydration_seed: 'crowd — Cutaway: the soul watches the party from far above, top-down over all of Atlantis lit blue and pink; the verse relocates it to an open field under a stalled sun on a much larger,
+    hotter planet. Place: the sky over Atlantis; the planet field. overhead shot, ~18 mm, camera 2500.0 m up, pitch -90°; colour; light: still night, 21:00 to midnight (04 end, 05); the soul''s view at
+    02:30 (08) hour '
+- patch_id: P08-007
+  start_time: 01:00:49:11
+  end_time: 01:00:59:12
+  location: the middle of the club floor
+  entities_present:
+  - crowd
+  action_summary: 'Cut back to the body in the middle of the club: angels dump cleansing, unfiltered ice water over him while the party continues; he sways in '
+  camera_relation: overhead shot, ~83 mm, camera 28.1 m up, pitch -76°
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “Cool me down by pouring unfiltered water out of the ice bath”'
+  patch_trigger: 'location change: the middle of the club floor'
+  source: NASA Searches for Life from the Moon in Recently Rediscovered Historic Footage 3.95+10.04s
+  status: moving
+  rehydration_seed: 'crowd — Cut back to the body in the middle of the club: angels dump cleansing, unfiltered ice water over him while the party continues; he sways in trance. Place: the middle of the
+    club floor. overhead shot, ~83 mm, camera 28.1 m up, pitch -76°; colour; light: blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; luminance 0.26. high angle looking down the
+    water''s arc in slow m'
+- patch_id: P08-008
+  start_time: 01:00:59:12
+  end_time: 01:01:09:13
+  location: the middle of the club floor
+  entities_present:
+  - crowd
+  action_summary: 'Cut back to the body in the middle of the club: angels dump cleansing, unfiltered ice water over him while the party continues; he sways in '
+  camera_relation: medium shot
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “capturing my body transiting in a flash of strobe lights. Th”'
+  patch_trigger: 'phrase boundary: “capturing my body transiting in a flash”'
+  source: archive 13.03+10.05s
+  status: moving
+  rehydration_seed: 'crowd — Cut back to the body in the middle of the club: angels dump cleansing, unfiltered ice water over him while the party continues; he sways in trance. Place: the middle of the
+    club floor. medium shot; colour; light: blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; luminance 0.14. high angle looking down the water''s arc in slow motion; tight on the
+    face as it hits high'
+- patch_id: P08-009
+  start_time: 01:01:09:13
+  end_time: 01:01:21:10
+  location: the subwoofer wall at the floor's edge
+  entities_present: []
+  action_summary: The club fills with haze; the body leans back, inhales the smoke, and the soul streaks back into the chest.
+  camera_relation: medium shot
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “Now bring my soul back to my body to lean back, breathe in t”'
+  patch_trigger: 'location change: the subwoofer wall at the floor''s edge'
+  source: film 20.27+11.88s
+  status: moving
+  rehydration_seed: 'no named figure — The club fills with haze; the body leans back, inhales the smoke, and the soul streaks back into the chest. Place: the subwoofer wall at the floor''s edge. medium
+    shot; colour; light: blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; luminance 0.41. push-in to the chest as the soul re-enters; side light through fog beams push in to the
+    chest; side light thr'
+- patch_id: P08-010
+  start_time: 01:01:21:10
+  end_time: 01:01:31:13
+  location: the parapet
+  entities_present:
+  - POET
+  action_summary: The POET stares from the rooftop at unfamiliar yet relatable mountains in the distance, reaching toward something just beyond his fingertips
+  camera_relation: medium shot
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “staring into unfamiliar yet relatable mountains in the dista”'
+  patch_trigger: 'location change: the parapet'
+  source: archive 0.15+10.12s
+  status: GENERATE
+  rehydration_seed: 'the poet, a man (he/his) — The POET stares from the rooftop at unfamiliar yet relatable mountains in the distance, reaching toward something just beyond his fingertips. Place: the parapet.
+    medium shot; colour; light: blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; luminance 0.65. over-the-shoulder at the parapet, long lens compressing the ridgeline under a crescent
+    moon o'
+- patch_id: P08-011
+  start_time: 01:01:31:13
+  end_time: 01:01:35:13
+  location: down the shaft and out at the spire's foot onto the avenue
+  entities_present:
+  - crowd
+  action_summary: high to street; the crowd fawns at the door
+  camera_relation: wide shot
+  light_sound_state: blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading
+  patch_trigger: 'threshold: walk 08 → 09'
+  source: archive 10.76+4.00s
+  status: moving
+  rehydration_seed: 'crowd — high to street; the crowd fawns at the door Place: down the shaft and out at the spire''s foot onto the avenue. wide shot; colour; light: blue-hour mist; violet underlights
+    at night (08 at 02:30) hour 2.4 clear; luminance 0.24. high to street; the crowd fawns at the door the club''s street door opens under the canopy 16:9, one continuous shot of 4.0 s, no cuts, no text,
+    no title cards, no ad'

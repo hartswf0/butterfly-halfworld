@@ -14,7 +14,7 @@
   matrices      per poem: O (diagnosis + olog), A (YAML patch genome), B (story map), E (scene blueprint for POET, the EX, the
                 child), F (reforge stack: Base → Master per patch). C/D (EDL, OTIO) only on request.
 Writes .work/story/carve/NN.{md,yaml,json} and .work/story/film.json (for story_preview.py, which renders the moving cut)."""
-import os, re, json, glob, math, subprocess, collections, numpy as np, torch, open_clip
+import os, re, sys, json, glob, math, subprocess, collections, numpy as np, torch, open_clip
 from PIL import Image
 
 T = os.path.dirname(os.path.abspath(__file__)); W = os.path.join(T, '.work'); ST = '/Users/gaia/resurrecting atlantis/_dig/media/store'
@@ -94,20 +94,21 @@ def look(k):
 def tags(k, n=5): return [VOC[i] for i in np.argsort(-(VE @ X[jof[k]]))[:n]]
 
 PCACHE_F = os.path.join(D, 'probe_cache.json'); PCACHE = json.load(open(PCACHE_F)) if os.path.exists(PCACHE_F) else {}
+SCENE_T = 0.32                                           # ffmpeg scene-change threshold; repairs use a stricter 0.15 (montages)
 def cuts_in(path, a, b):                                  # hard cuts inside a stretch of source (ffmpeg scene change), cached
-    key = f'{path}|{a:.2f}|{b:.2f}'
+    key = f'{path}|{a:.2f}|{b:.2f}' + ('' if SCENE_T == 0.32 else f'|{SCENE_T}')
     if key in PCACHE: return PCACHE[key]
     PCACHE[key] = _cuts_in(path, a, b); return PCACHE[key]
 def _cuts_in(path, a, b):
-    r = subprocess.run(['ffmpeg', '-hide_banner', '-ss', f'{max(0, a):.2f}', '-t', f'{b - a:.2f}', '-i', path, '-vf', "scale=160:-1,select='gt(scene,0.32)',showinfo", '-an', '-f', 'null', '-'],
+    r = subprocess.run(['ffmpeg', '-hide_banner', '-ss', f'{max(0, a):.2f}', '-t', f'{b - a:.2f}', '-i', path, '-vf', f"scale=160:-1,select='gt(scene,{SCENE_T})',showinfo", '-an', '-f', 'null', '-'],
                        capture_output=True, text=True, timeout=60)
     return [max(0, a) + float(m) for m in re.findall(r'pts_time:([\d.]+)', r.stderr)]
 def window(mv, dur):
     """a clean window of `dur` s around the matched moment: no hard cut inside, not the first 0.3 s, not the tail"""
     if not mv or mv['dur'] < min(dur, 3): return None
     a, b = max(0.0, mv['t'] - dur - 2), min(mv['dur'], mv['t'] + dur + 2)
-    try: cs = [0.0] + cuts_in(mv['path'], a, b) + [mv['dur']]
-    except Exception: cs = [0.0, mv['dur']]
+    try: cs = [a] + cuts_in(mv['path'], a, b) + [b]                                   # only the stretch actually probed counts as known-clean
+    except Exception: cs = [a, b]
     best = None
     for x, y in zip(cs, cs[1:]):
         x, y = x + 0.15, min(y - 0.1, mv['dur'] - 0.15)
@@ -218,25 +219,53 @@ def scale_of(st, role_wide):
 
 film, used = {}, set()
 FIGL = re.compile(r'person|man|woman|figure|child|boy|girl|silhouette|people|crowd')
-GEN_T = 0.27
-for p in sorted({s['poem'] for s in S['scenes']}):
-    PS, dur = patches_for(p); recent = collections.deque(maxlen=3); out = []
-    bw_ok = sum(1 for x in PS if x['montage']) > len(PS) / 2                           # a poem that is mostly memory may be black-and-white
-    for i, P in enumerate(PS):
-        c = fill(P, used, recent, bw_ok)
-        if not c: out.append({**P, 'id': f'P{p}-{i + 1:03d}', 'k': None, 'generate': True, 'source': 'to make', 'clip': None, 'bw': False, 'lum': 0.0, 'path': None, 'drawn': False, 'analysed': False,
-                              'observed': {'detected': [], 'made_of': [], 'clip_tags': [], 'camera': None, 'scale': 'wide' if P['trigger'].startswith('location') else 'medium'}}); continue
-        v, k, mv, src, bw, wdw, hs = c; used.add(k); USEDH.extend(hs[0]); USEDC.extend(hs[1]); recent.append(src); (USEDWIN[src].append((wdw['in'], wdw['in'] + wdw['len'])) if wdw else None);  usedX = X[jof[k]][None] if usedX is None else np.vstack([usedX, X[jof[k]]]); r = inv[k]; st = stand.get(k); w, col, paper, lum = look(k)
-        out.append({**P, 'id': f'P{p}-{i + 1:03d}', 'k': k, 'fit': round(v, 4), 'source': r.get('source'), 'path': r['path'], 'cid': canon.get(k, {}).get('cid'), 'mj': r.get('n'),
-                    'clip': ({'path': mv['path'], 'in': wdw['in'], 'len': wdw['len'], 'src': src, 'title': mv.get('title'), 'year': mv.get('year')} if mv and wdw else None),
-                    'bw': bool(bw), 'lum': round(lum, 2), 'width': w, 'sid': st and st['sid'], 'root': st and st['root'], 'analysed': bool(st), 'drawn': bool(st and st['drawn']),
-                    'observed': {'detected': (st or {}).get('det') or [], 'made_of': (st or {}).get('stuff') or [], 'clip_tags': tags(k),
-                                 'camera': {x: (st or {}).get('cam', {}).get(x) for x in ('shot_class', 'fov_h_deg', 'height_m', 'pitch_deg')} if st else None,
-                                 'scale': scale_of(st, float(wide[jof[k]]))},
-                    'generate': bool(P['hero'] and person[jof[k]] <= 0 and not any(FIGL.search(d) for d in ((st or {}).get('det') or []))),   # the figure: CLIP or the pipeline's own detection
- 'meaning': round(float(X[jof[k]] @ (lambda q: q / np.linalg.norm(q))(enc([P['what'], P['said'][:200] or P['what']]).mean(0))), 4)})
-    film[p] = {'title': next(s['title'] for s in S['scenes'] if s['poem'] == p), 'dur': dur, 'shots': out}
-    print(p, film[p]['title'], len(out), 'patches ·', sum(1 for x in out if x.get('clip')), 'moving', flush=True)
+def to_make(P, pid): return {**P, 'id': pid, 'k': None, 'generate': True, 'source': 'to make', 'clip': None, 'bw': False, 'lum': 0.0, 'path': None, 'drawn': False, 'analysed': False,
+                             'observed': {'detected': [], 'made_of': [], 'clip_tags': [], 'camera': None, 'scale': 'wide' if P['trigger'].startswith('location') else 'medium'}}
+def register(k, src, wdw, hs):
+    global usedX
+    used.add(k); USEDH.extend(hs[0]); USEDC.extend(hs[1]); (USEDWIN[src].append((wdw['in'], wdw['in'] + wdw['len'])) if wdw else None)
+    usedX = X[jof[k]][None] if usedX is None else np.vstack([usedX, X[jof[k]]])
+def record(P, pid, c):
+    v, k, mv, src, bw, wdw, hs = c; register(k, src, wdw, hs); r = inv[k]; st = stand.get(k); w, col, paper, lum = look(k)
+    return {**P, 'id': pid, 'k': k, 'fit': round(v, 4), 'source': r.get('source'), 'path': r['path'], 'cid': canon.get(k, {}).get('cid'), 'mj': r.get('n'),
+            'clip': ({'path': mv['path'], 'in': wdw['in'], 'len': wdw['len'], 'src': src, 'title': mv.get('title'), 'year': mv.get('year')} if mv and wdw else None),
+            'bw': bool(bw), 'lum': round(lum, 2), 'width': w, 'sid': st and st['sid'], 'root': st and st['root'], 'analysed': bool(st), 'drawn': bool(st and st['drawn']),
+            'observed': {'detected': (st or {}).get('det') or [], 'made_of': (st or {}).get('stuff') or [], 'clip_tags': tags(k),
+                         'camera': {x: (st or {}).get('cam', {}).get(x) for x in ('shot_class', 'fov_h_deg', 'height_m', 'pitch_deg')} if st else None,
+                         'scale': scale_of(st, float(wide[jof[k]]))},
+            'generate': bool(P['hero'] and person[jof[k]] <= 0 and not any(FIGL.search(d) for d in ((st or {}).get('det') or []))),   # the figure: CLIP or the pipeline's own detection
+            'meaning': round(float(X[jof[k]] @ (lambda q: q / np.linalg.norm(q))(enc([P['what'], P['said'][:200] or P['what']]).mean(0))), 4)}
+PKEYS = ('scene', 'name', 'd', 'here', 'what', 'camera', 'block', 't0', 't1', 'said', 'trigger', 'figure', 'hero', 'montage')
+REPAIR = set(sys.argv[sys.argv.index('--repair') + 1].split(',')) if '--repair' in sys.argv else None
+if REPAIR:
+    # repair: only the named patches are carved again (strict cut test); every other patch stays and still counts against reuse
+    SCENE_T = 0.15; film = json.load(open(os.path.join(D, 'film.json')))
+    for f in film.values():
+        for x in f['shots']:
+            if not x.get('k') or x['id'] in REPAIR or x['k'] not in jof: continue
+            c = x.get('clip'); w = {'in': c['in'], 'len': c['len']} if c else None
+            hs = [h for h in [dhash(x['k'])] + ([fhash(c['path'], c['in'] + c['len'] / 2), fhash(c['path'], c['in'] + 0.3)] if c else []) if h is not None]
+            cs = [e for e in [X[jof[x['k']]]] + ([fclip(c['path'], c['in'] + c['len'] / 2)] if c else []) if e is not None]
+            register(x['k'], (c or {}).get('src') or inv[x['k']].get('video') or x['k'], w, (hs, cs))
+    for p, f in film.items():
+        sh = f['shots']; bw_ok = sum(1 for x in sh if x.get('montage')) > len(sh) / 2
+        for i, x in enumerate(sh):
+            if x.get('id') not in REPAIR: continue
+            P = {k: x[k] for k in PKEYS}
+            near = {(y.get('clip') or {}).get('src') or inv.get(y.get('k') or '', {}).get('video') or y.get('k') for y in sh[max(0, i - 3):i + 4] if y is not x and y.get('k')}
+            c = fill(P, used, near, bw_ok)
+            sh[i] = record(P, x['id'], c) if c else to_make(P, x['id'])
+            print('repaired', x['id'], '→', sh[i].get('k'), (sh[i].get('clip') or {}).get('len'), flush=True)
+else:
+    for p in sorted({s['poem'] for s in S['scenes']}):
+        PS, dur = patches_for(p); recent = collections.deque(maxlen=3); out = []
+        bw_ok = sum(1 for x in PS if x['montage']) > len(PS) / 2                           # a poem that is mostly memory may be black-and-white
+        for i, P in enumerate(PS):
+            c = fill(P, used, recent, bw_ok)
+            if not c: out.append(to_make(P, f'P{p}-{i + 1:03d}')); continue
+            out.append(record(P, f'P{p}-{i + 1:03d}', c)); recent.append(c[3])
+        film[p] = {'title': next(s['title'] for s in S['scenes'] if s['poem'] == p), 'dur': dur, 'shots': out}
+        print(p, film[p]['title'], len(out), 'patches ·', sum(1 for x in out if x.get('clip')), 'moving', flush=True)
 # the weakest matches in the whole film are the patches to make: the bottom 15% by meaning, and any POET patch with no figure in it
 _m = np.array([x['meaning'] for f in film.values() for x in f['shots'] if x.get('k')]); GEN_Q = float(np.percentile(_m, 15))
 for f in film.values():

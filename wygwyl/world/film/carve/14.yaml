@@ -1,0 +1,188 @@
+title: Hot Minute
+seed: 'Hot Minute: Taken by the haze; Floating in the black; Cross-cut: highs and lows of life; Battle scars and graytones; The vintage door appears; The dance at the vintage party; Disappears into t'
+diegesis:
+  premise: Haze rises from the ground and covers him; he is reluctant at first, then gives in.
+  world_rules:
+  - the reading sets the clock
+  - a scene edge is a hard cut
+  - POET is one man throughout
+  core_entities:
+  - POET
+  - crowd
+  core_locations:
+  - the harbour edge, then the end of the catwalk
+  - the centre of the void
+  - void and B-roll
+  - void
+  - before the door
+  - the ballroom beyond the door
+  - the doorway, from outside
+macro_structure:
+- unit_id: U1
+  kind: sequence
+  function: Taken by the haze → Floating in the black
+- unit_id: U2
+  kind: sequence
+  function: 'Cross-cut: highs and lows of life → Battle scars and graytones'
+- unit_id: U3
+  kind: sequence
+  function: The vintage door appears → The dance at the vintage party → Disappears into the crowd; door closes
+beat_structure:
+- beat_id: '14.0'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: Haze rises from the ground and covers him; he is reluctant at first, then gives in.
+- beat_id: '14.1'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: He floats alone in black, as after the poem 1 fall.
+- beat_id: '14.2'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: The film cuts back and forth between the floating POET and B-roll human scenes; the machines are unplugged.
+- beat_id: '14.3'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: Still floating; light traces his scars; gray brushed into his sight after defeats.
+- beat_id: '14.4'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: Still floating in all black, an old vintage door materializes.
+- beat_id: '14.5'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: He enters the old-time vintage party; guests move in romantic slow motion; a dance.
+- beat_id: '14.6'
+  parent_unit: U3
+  syntagma_type: accumulative
+  pressure_shift: He disappears into the crowd from the back; the door closes on the viewer. END.
+patch_timeline:
+- patch_id: P14-001
+  start_time: 01:00:00:00
+  end_time: 01:00:08:02
+  location: the harbour edge, then the end of the catwalk
+  entities_present: []
+  action_summary: Haze rises from the ground and covers him; he is reluctant at first, then gives in.
+  camera_relation: undetermined (no ground) shot, ~33 mm
+  light_sound_state: 'dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 22.5 clear; her reading: “Don''t make me leave and go where promises, hearts, spectrums”'
+  patch_trigger: 'location change: the harbour edge, then the end of the catwalk'
+  source: markov (still)
+  status: still → drawing
+  rehydration_seed: 'no named figure — Haze rises from the ground and covers him; he is reluctant at first, then gives in. Place: the harbour edge, then the end of the catwalk. undetermined (no ground)
+    shot, ~33 mm; colour; light: dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 22.5 clear; luminance 0.38. slow tilt up the body as haze climbs; hand gripping a frame edge
+    in close-up slow til'
+- patch_id: P14-002
+  start_time: 01:00:08:02
+  end_time: 01:00:17:18
+  location: the centre of the void
+  entities_present: []
+  action_summary: He floats alone in black, as after the poem 1 fall.
+  camera_relation: eye-level shot, ~33 mm, camera 1.0 m up, pitch -2°
+  light_sound_state: 'timeless hour 22.5 clear; her reading: “I escaped here for a reason, believing this would give me a ”'
+  patch_trigger: 'location change: the centre of the void'
+  source: markov 0.15+4.74s
+  status: GENERATE
+  rehydration_seed: 'no named figure — He floats alone in black, as after the poem 1 fall. Place: the centre of the void. eye-level shot, ~33 mm, camera 1.0 m up, pitch -2°; colour; light: timeless hour
+    22.5 clear; luminance 0.30. static frame with the POET slowly rotating in black; frame cracks on ''terminated'' static, slowly rotating 16:9, one continuous shot of 9.7 s, no cuts, no text, no title
+    cards, no added figur'
+- patch_id: P14-003
+  start_time: 01:00:17:18
+  end_time: 01:00:27:16
+  location: the centre of the void
+  entities_present: []
+  action_summary: He floats alone in black, as after the poem 1 fall.
+  camera_relation: close shot
+  light_sound_state: 'timeless hour 22.5 clear; her reading: “The way you see things felt safe and timeless. Whatever has ”'
+  patch_trigger: 'phrase boundary: “The way you see things felt”'
+  source: archive 7.16+9.91s
+  status: moving
+  rehydration_seed: 'no named figure — He floats alone in black, as after the poem 1 fall. Place: the centre of the void. close shot; colour; light: timeless hour 22.5 clear; luminance 0.11. static frame
+    with the POET slowly rotating in black; frame cracks on ''terminated'' static, slowly rotating 16:9, one continuous shot of 9.9 s, no cuts, no text, no title cards, no added figures beyond: no named
+    figure; continues P1'
+- patch_id: P14-004
+  start_time: 01:00:27:16
+  end_time: 01:00:40:05
+  location: void and B-roll
+  entities_present:
+  - POET
+  action_summary: The film cuts back and forth between the floating POET and B-roll human scenes; the machines are unplugged.
+  camera_relation: close shot
+  light_sound_state: 'timeless hour 22.5 clear; her reading: “let it feel love and lost as we must endure, absent artifici”'
+  patch_trigger: 'location change: void and B-roll'
+  source: RCA 16mm Sound Projector, The 4.50+12.55s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — The film cuts back and forth between the floating POET and B-roll human scenes; the machines are unplugged. Place: void and B-roll. close shot; colour; light:
+    timeless hour 22.5 clear; luminance 0.31. hard cuts on the beat between void and documentary B-roll hard cuts on the beat 16:9, one continuous shot of 12.5 s, no cuts, no text, no title cards, no added
+    figures beyo'
+- patch_id: P14-005
+  start_time: 01:00:40:05
+  end_time: 01:00:52:19
+  location: void
+  entities_present: []
+  action_summary: Still floating; light traces his scars; gray brushed into his sight after defeats.
+  camera_relation: undetermined (no ground) shot, ~59 mm
+  light_sound_state: 'timeless hour 22.5 clear; her reading: “can''t leave behind the impulse that comes from battle scars ”'
+  patch_trigger: 'location change: void'
+  source: markov 0.15+4.74s
+  status: moving
+  rehydration_seed: 'no named figure — Still floating; light traces his scars; gray brushed into his sight after defeats. Place: void. undetermined (no ground) shot, ~59 mm; colour; light: timeless hour
+    22.5 clear; luminance 0.15. macro along skin and scars; desaturating grade macro along scars; desaturating grade 16:9, one continuous shot of 12.6 s, no cuts, no text, no title cards, no added figures
+    beyond: no named '
+- patch_id: P14-006
+  start_time: 01:00:52:19
+  end_time: 01:00:57:01
+  location: before the door
+  entities_present: []
+  action_summary: Still floating in all black, an old vintage door materializes.
+  camera_relation: wide shot
+  light_sound_state: 'timeless hour 22.5 clear; her reading: “I trust that you''ll be fine. I escaped here for a reason.”'
+  patch_trigger: 'location change: before the door'
+  source: archive 10.53+4.27s
+  status: GENERATE
+  rehydration_seed: 'no named figure — Still floating in all black, an old vintage door materializes. Place: before the door. wide shot; colour; light: timeless hour 22.5 clear; luminance 0.18. wide of
+    the lone door in black, POET entering frame from behind wide of the lone door in black, him entering from behind (the Arcade''s chrome door, 6) 16:9, one continuous shot of 4.3 s, no cuts, no text,
+    no title cards, no add'
+- patch_id: P14-007
+  start_time: 01:00:57:01
+  end_time: 01:01:05:12
+  location: the ballroom beyond the door
+  entities_present:
+  - crowd
+  action_summary: He enters the old-time vintage party; guests move in romantic slow motion; a dance.
+  camera_relation: medium shot
+  light_sound_state: 'timeless hour 22.5 clear; her reading: “Our dance together is a victory to entwine muses, immersed i”'
+  patch_trigger: 'location change: the ballroom beyond the door'
+  source: archive 151.86+8.45s
+  status: moving
+  rehydration_seed: 'crowd — He enters the old-time vintage party; guests move in romantic slow motion; a dance. Place: the ballroom beyond the door. medium shot; black-and-white archival film; light: timeless
+    hour 22.5 clear; luminance 0.16. Steadicam following through the slow-motion crowd from behind; overhead on two dancers under one spotlight Steadicam through the slow-motion crowd; overhead on two dancers
+    (36) 1'
+- patch_id: P14-008
+  start_time: 01:01:05:12
+  end_time: 01:01:09:09
+  location: the doorway, from outside
+  entities_present:
+  - crowd
+  action_summary: He disappears into the crowd from the back; the door closes on the viewer. END.
+  camera_relation: overhead shot, ~53 mm, camera 15.1 m up, pitch -89°
+  light_sound_state: 'timeless hour 22.5 clear; her reading: “and a genesis of a New Testament as it ends.”'
+  patch_trigger: 'location change: the doorway, from outside'
+  source: archive 5.90+3.86s
+  status: moving
+  rehydration_seed: 'crowd — He disappears into the crowd from the back; the door closes on the viewer. END. Place: the doorway, from outside. overhead shot, ~53 mm, camera 15.1 m up, pitch -89°; colour;
+    light: timeless hour 22.5 clear; luminance 0.25. hold on the back of the crowd as he vanishes; reverse from the void as the door swings shut to black hold on the back of the crowd; reverse as the door
+    swings shut to b'
+- patch_id: P14-009
+  start_time: 01:01:09:09
+  end_time: 01:01:13:09
+  location: the chrome door → the vintage party
+  entities_present: []
+  action_summary: the door closes on the viewer; the film loops
+  camera_relation: close shot
+  light_sound_state: timeless hour 22.5 clear; her reading
+  patch_trigger: 'threshold: door 14 → 01'
+  source: film 0.15+4.00s
+  status: moving
+  rehydration_seed: 'no named figure — the door closes on the viewer; the film loops Place: the chrome door → the vintage party. close shot; colour; light: timeless hour 22.5 clear; luminance 0.28. the
+    door closes on the viewer; the film loops the Arcade''s chrome door is the door''s only trace in the city 16:9, one continuous shot of 4.0 s, no cuts, no text, no title cards, no added figures beyond:
+    no named figure; con'

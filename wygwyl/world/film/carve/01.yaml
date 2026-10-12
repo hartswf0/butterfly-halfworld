@@ -1,0 +1,252 @@
+title: Out of Life
+seed: 'Out of Life: The reading; Haze at the window; Off the fire escape; The fall montage; Crashing the vintage party; Hole in the floor'
+diegesis:
+  premise: POET reads the poem aloud to the EX; the TV shows the world's chaos.
+  world_rules:
+  - the reading sets the clock
+  - a scene edge is a hard cut
+  - POET is one man throughout
+  core_entities:
+  - EX
+  - POET
+  - crowd
+  core_locations:
+  - the Severn, a high bedroom; the Hive's needles fill the wind
+  - the window and the iron escape; the Orange Catwalk runs 30 m
+  - the escape's top landing over the light well
+  - below the tower, into the black
+  - the vintage party met mid-fall
+  - the hole in the party floor
+macro_structure:
+- unit_id: U1
+  kind: sequence
+  function: The reading → Haze at the window
+- unit_id: U2
+  kind: sequence
+  function: Off the fire escape → The fall montage
+- unit_id: U3
+  kind: sequence
+  function: Crashing the vintage party → Hole in the floor
+beat_structure:
+- beat_id: '01.0'
+  parent_unit: U1
+  syntagma_type: accumulative
+  pressure_shift: POET reads the poem aloud to the EX; the TV shows the world's chaos.
+- beat_id: '01.1'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: EX vapes on the fire escape, back always turned; haze builds; POET moves toward the window but the EX gets further away.
+- beat_id: '01.2'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: EX falls off the fire escape into darkness; POET falls behind into the clouds until it is black. Title card.
+- beat_id: '01.3'
+  parent_unit: U2
+  syntagma_type: accumulative
+  pressure_shift: 'POET falls behind EX through images of world chaos swapping with ways people escape: drugs, partying, TV, media, phones.'
+- beat_id: '01.4'
+  parent_unit: U3
+  syntagma_type: accumulative
+  pressure_shift: POET crashes into an old-time party in romantic slow motion; he chases the EX through the crowd but the EX keeps vanishi
+- beat_id: '01.5'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: POET stumbles through a hole in the party floor and keeps falling into pure blackness.
+patch_timeline:
+- patch_id: P01-001
+  start_time: 01:00:00:00
+  end_time: 01:00:07:20
+  location: the Severn, a high bedroom; the Hive's needles fill the window
+  entities_present:
+  - POET
+  - EX
+  action_summary: POET reads the poem aloud to the EX; the TV shows the world's chaos.
+  camera_relation: medium shot
+  light_sound_state: 'dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear; her reading: “What we''ve made we don''t want, what we''ve sold to the world,”'
+  patch_trigger: 'location change: the Severn, a high bedroom; the Hive''s needles fill the window'
+  source: archive 0.15+7.83s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his); his ex — POET reads the poem aloud to the EX; the TV shows the world''s chaos. Place: the Severn, a high bedroom; the Hive''s needles fill the window. medium
+    shot; colour; light: dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear; luminance 0.28. static wide of the bare room, POET in the foreground, window and EX''s back
+    deep in frame; in'
+- patch_id: P01-002
+  start_time: 01:00:07:20
+  end_time: 01:00:13:05
+  location: the window and the iron escape; the Orange Catwalk runs 30 m below
+  entities_present:
+  - POET
+  - EX
+  action_summary: EX vapes on the fire escape, back always turned; haze builds; POET moves toward the window but the EX gets further away.
+  camera_relation: rooftop shot, ~33 mm, camera 9.8 m up, pitch -27°
+  light_sound_state: 'dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear; her reading: “I look for a way out through the hallways, within the drawer”'
+  patch_trigger: 'location change: the window and the iron escape; the Orange Catwalk runs 30 m below'
+  source: markov 0.15+5.38s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his); his ex — EX vapes on the fire escape, back always turned; haze builds; POET moves toward the window but the EX gets further away. Place: the window and the
+    iron escape; the Orange Catwalk runs 30 m below. rooftop shot, ~33 mm, camera 9.8 m up, pitch -27°; colour; light: dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear;
+    luminance 0.26'
+- patch_id: P01-003
+  start_time: 01:00:13:05
+  end_time: 01:00:20:05
+  location: the escape's top landing over the light well
+  entities_present:
+  - POET
+  - EX
+  action_summary: EX falls off the fire escape into darkness; POET falls behind into the clouds until it is black. Title card.
+  camera_relation: eye-level shot, ~33 mm, camera 1.2 m up, pitch 14°
+  light_sound_state: 'dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear; her reading: “trip on my own words, falling out of life, and find where yo”'
+  patch_trigger: 'location change: the escape''s top landing over the light well'
+  source: other 0.15+4.91s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his); his ex — EX falls off the fire escape into darkness; POET falls behind into the clouds until it is black. Title card. Place: the escape''s top landing over
+    the light well. eye-level shot, ~33 mm, camera 1.2 m up, pitch 14°; colour; light: dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear; luminance 0.33. over-the-railing
+    high angle as '
+- patch_id: P01-004
+  start_time: 01:00:20:05
+  end_time: 01:00:29:07
+  location: below the tower, into the black
+  entities_present:
+  - POET
+  - EX
+  - crowd
+  action_summary: 'POET falls behind EX through images of world chaos swapping with ways people escape: drugs, partying, TV, media, phones.'
+  camera_relation: elevated shot, ~15 mm, camera 2.7 m up, pitch 4°
+  light_sound_state: 'timeless hour 19.2 clear; her reading: “It was the maze constructed by a tainted love, a known yet u”'
+  patch_trigger: 'location change: below the tower, into the black'
+  source: markov 183.90+9.09s
+  status: GENERATE
+  rehydration_seed: 'the poet, a man (he/his); his ex; crowd — POET falls behind EX through images of world chaos swapping with ways people escape: drugs, partying, TV, media, phones. Place: below the tower,
+    into the black. elevated shot, ~15 mm, camera 2.7 m up, pitch 4°; colour; light: timeless hour 19.2 clear; luminance 0.16. top-down falling bodies with projected/composited imagery streaming past; EX
+    always seen f'
+- patch_id: P01-005
+  start_time: 01:00:29:07
+  end_time: 01:00:39:12
+  location: below the tower, into the black
+  entities_present:
+  - POET
+  - EX
+  - crowd
+  action_summary: 'POET falls behind EX through images of world chaos swapping with ways people escape: drugs, partying, TV, media, phones.'
+  camera_relation: elevated shot, ~35 mm, camera 2.7 m up, pitch -28°
+  light_sound_state: 'timeless hour 19.2 clear; her reading: “the overnourished forest of escapism that calls for you. At ”'
+  patch_trigger: 'phrase boundary: “the overnourished forest of escapism tha”'
+  source: markov 8.55+10.19s
+  status: GENERATE
+  rehydration_seed: 'the poet, a man (he/his); his ex; crowd — POET falls behind EX through images of world chaos swapping with ways people escape: drugs, partying, TV, media, phones. Place: below the tower,
+    into the black. elevated shot, ~35 mm, camera 2.7 m up, pitch -28°; colour; light: timeless hour 19.2 clear; luminance 0.21. top-down falling bodies with projected/composited imagery streaming past;
+    EX always seen'
+- patch_id: P01-006
+  start_time: 01:00:39:12
+  end_time: 01:00:47:12
+  location: below the tower, into the black
+  entities_present:
+  - POET
+  - EX
+  - crowd
+  action_summary: 'POET falls behind EX through images of world chaos swapping with ways people escape: drugs, partying, TV, media, phones.'
+  camera_relation: undetermined (no ground) shot, ~28 mm
+  light_sound_state: 'timeless hour 19.2 clear; her reading: “starting anew, to rediscover when love was real. I failed at”'
+  patch_trigger: 'phrase boundary: “starting anew, to rediscover when love”'
+  source: markov 2.90+8.00s
+  status: GENERATE
+  rehydration_seed: 'the poet, a man (he/his); his ex; crowd — POET falls behind EX through images of world chaos swapping with ways people escape: drugs, partying, TV, media, phones. Place: below the tower,
+    into the black. undetermined (no ground) shot, ~28 mm; colour; light: timeless hour 19.2 clear; luminance 0.39. top-down falling bodies with projected/composited imagery streaming past; EX always seen
+    from behind '
+- patch_id: P01-007
+  start_time: 01:00:47:12
+  end_time: 01:00:57:03
+  location: the vintage party met mid-fall
+  entities_present:
+  - POET
+  - EX
+  - crowd
+  action_summary: POET crashes into an old-time party in romantic slow motion; he chases the EX through the crowd but the EX keeps vanishing.
+  camera_relation: wide shot
+  light_sound_state: 'timeless hour 19.2 clear; her reading: “crashing the party of your evilest instincts to find vibrati”'
+  patch_trigger: 'location change: the vintage party met mid-fall'
+  source: archive 12.23+9.64s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his); his ex; crowd — POET crashes into an old-time party in romantic slow motion; he chases the EX through the crowd but the EX keeps vanishing. Place: the vintage
+    party met mid-fall. wide shot; colour; light: timeless hour 19.2 clear; luminance 0.27. handheld through the crowd at overcranked speed, light leaks, EX glimpsed back-to-camera then gone handheld through
+    an overcran'
+- patch_id: P01-008
+  start_time: 01:00:57:03
+  end_time: 01:01:03:14
+  location: the vintage party met mid-fall
+  entities_present:
+  - POET
+  - EX
+  - crowd
+  action_summary: POET crashes into an old-time party in romantic slow motion; he chases the EX through the crowd but the EX keeps vanishing.
+  camera_relation: undetermined (no ground) shot, ~90 mm
+  light_sound_state: 'timeless hour 19.2 clear; her reading: “dripping blood salivating on imminent doubts, fully awakenin”'
+  patch_trigger: 'phrase boundary: “dripping blood salivating on imminent do”'
+  source: markov 0.15+6.44s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his); his ex; crowd — POET crashes into an old-time party in romantic slow motion; he chases the EX through the crowd but the EX keeps vanishing. Place: the vintage
+    party met mid-fall. undetermined (no ground) shot, ~90 mm; colour; light: timeless hour 19.2 clear; luminance 0.30. handheld through the crowd at overcranked speed, light leaks, EX glimpsed back-to-camera
+    then gone '
+- patch_id: P01-009
+  start_time: 01:01:03:14
+  end_time: 01:01:09:15
+  location: the vintage party met mid-fall
+  entities_present:
+  - POET
+  - EX
+  - crowd
+  action_summary: POET crashes into an old-time party in romantic slow motion; he chases the EX through the crowd but the EX keeps vanishing.
+  camera_relation: medium shot
+  light_sound_state: 'timeless hour 19.2 clear; her reading: “Pause for a second, a spectrum of fields will thread needles”'
+  patch_trigger: 'phrase boundary: “Pause for a second, a spectrum”'
+  source: Control Your Emotions 10.57+6.05s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his); his ex; crowd — POET crashes into an old-time party in romantic slow motion; he chases the EX through the crowd but the EX keeps vanishing. Place: the vintage
+    party met mid-fall. medium shot; colour; light: timeless hour 19.2 clear; luminance 0.30. handheld through the crowd at overcranked speed, light leaks, EX glimpsed back-to-camera then gone handheld
+    through an overcr'
+- patch_id: P01-010
+  start_time: 01:01:09:15
+  end_time: 01:01:19:16
+  location: the vintage party met mid-fall
+  entities_present:
+  - POET
+  - EX
+  - crowd
+  action_summary: POET crashes into an old-time party in romantic slow motion; he chases the EX through the crowd but the EX keeps vanishing.
+  camera_relation: undetermined (no ground) shot, ~67 mm
+  light_sound_state: 'timeless hour 19.2 clear; her reading: “and photographs, film and fiction that leave me empty. With ”'
+  patch_trigger: 'phrase boundary: “and photographs, film and”'
+  source: other 0.15+4.91s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his); his ex; crowd — POET crashes into an old-time party in romantic slow motion; he chases the EX through the crowd but the EX keeps vanishing. Place: the vintage
+    party met mid-fall. undetermined (no ground) shot, ~67 mm; colour; light: timeless hour 19.2 clear; luminance 0.34. handheld through the crowd at overcranked speed, light leaks, EX glimpsed back-to-camera
+    then gone '
+- patch_id: P01-011
+  start_time: 01:01:19:16
+  end_time: 01:01:28:09
+  location: the hole in the party floor
+  entities_present:
+  - POET
+  - crowd
+  action_summary: POET stumbles through a hole in the party floor and keeps falling into pure blackness.
+  camera_relation: eye-level shot, ~69 mm, camera 0.7 m up, pitch 1°
+  light_sound_state: 'timeless hour 19.2 clear; her reading: “as I stumble on my own words, landing into the secret of whe”'
+  patch_trigger: 'location change: the hole in the party floor'
+  source: other 0.15+4.91s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his); crowd — POET stumbles through a hole in the party floor and keeps falling into pure blackness. Place: the hole in the party floor. eye-level shot, ~69 mm,
+    camera 0.7 m up, pitch 1°; colour; light: timeless hour 19.2 clear; luminance 0.19. low floor-level angle on his feet catching the edge, then overhead as he drops away into black floor level on his
+    feet catching the edg'
+- patch_id: P01-012
+  start_time: 01:01:28:09
+  end_time: 01:01:32:09
+  location: 'no street: the Severn''s escape → the black → the child''s window, through his eye'
+  entities_present: []
+  action_summary: the drop is vertical and continuous; the cut into 02 is a push through the pupil
+  camera_relation: undetermined (no ground) shot, ~98 mm
+  light_sound_state: dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear; her reading
+  patch_trigger: 'threshold: fall 01 → 02'
+  source: halfworld 123.55+4.00s
+  status: moving
+  rehydration_seed: 'no named figure — the drop is vertical and continuous; the cut into 02 is a push through the pupil Place: no street: the Severn''s escape → the black → the child''s window, through
+    his eye. undetermined (no ground) shot, ~98 mm; black-and-white archival film; light: dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear; luminance 0.19. the drop
+    is vertical and conti'

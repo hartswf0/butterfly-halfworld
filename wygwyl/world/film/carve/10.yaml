@@ -1,0 +1,239 @@
+title: Magic Ride
+seed: 'Magic Ride: The bike under the street lamp; Mounting the machine; Loneliness through midnight intersections; Swagger down the avenue; Out of Atlantis as the moon settles; Mountain road at firs'
+diegesis:
+  premise: The POET stands alone on the sidewalk and inspects a motorcycle parked beside him, idling under a street lamp, his face caught in the chrome mirror.
+  world_rules:
+  - the reading sets the clock
+  - a scene edge is a hard cut
+  - POET is one man throughout
+  core_entities:
+  - POET
+  - crowd
+  core_locations:
+  - the same curb, the bike under the lamp
+  - curbside
+  - empty plazas and the tunnels under the market
+  - the avenue under the LED canopy
+  - the rail viaduct out of the city as the moon sets
+  - the pass under the mountain, the rail beside the road
+macro_structure:
+- unit_id: U1
+  kind: sequence
+  function: The bike under the street lamp → Mounting the machine
+- unit_id: U2
+  kind: sequence
+  function: Loneliness through midnight intersections → Swagger down the avenue
+- unit_id: U3
+  kind: sequence
+  function: Out of Atlantis as the moon settles → Mountain road at first light
+beat_structure:
+- beat_id: '10.0'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: 'The POET stands alone on the sidewalk and inspects a motorcycle parked beside him, idling under a street lamp, his face '
+- beat_id: '10.1'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: He rubs his aggressions into the steel, thumps the fender, swings a boot over the seat and laughs into the wind as he pu
+- beat_id: '10.2'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: He weaves through empty plazas, tunnels and midnight intersections with no one behind him; the real Mexico City motorcyc
+- beat_id: '10.3'
+  parent_unit: U2
+  syntagma_type: accumulative
+  pressure_shift: Riding through crowded streets with a swagger, one hand off the bars; eyes turn and heads twist as he passes.
+- beat_id: '10.4'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: He rides out of Atlantis as the night turns and the sky lightens; the moon dips behind the skyline and a road sign point
+- beat_id: '10.5'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curv
+patch_timeline:
+- patch_id: P10-001
+  start_time: 01:00:00:00
+  end_time: 01:00:13:00
+  location: the same curb, the bike under the lamp
+  entities_present:
+  - POET
+  action_summary: The POET stands alone on the sidewalk and inspects a motorcycle parked beside him, idling under a street lamp, his face caught in the chrome
+  camera_relation: undetermined (no ground) shot, ~45 mm
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; her reading: “I wasn''t looking for a ride, but here you are, blissful and ”'
+  patch_trigger: 'location change: the same curb, the bike under the lamp'
+  source: halfworld 193.89+12.99s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — The POET stands alone on the sidewalk and inspects a motorcycle parked beside him, idling under a street lamp, his face caught in the chrome mirror. Place:
+    the same curb, the bike under the lamp. undetermined (no ground) shot, ~45 mm; black-and-white archival film; light: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear;
+    luminance 0.1'
+- patch_id: P10-002
+  start_time: 01:00:13:00
+  end_time: 01:00:20:21
+  location: curbside
+  entities_present: []
+  action_summary: He rubs his aggressions into the steel, thumps the fender, swings a boot over the seat and laughs into the wind as he pulls away.
+  camera_relation: medium shot
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; her reading: “So I rub my aggressions into your steel coverings and hop on”'
+  patch_trigger: 'location change: curbside'
+  source: Muller en co n.v. Rotterdam 1.22+7.87s
+  status: moving
+  rehydration_seed: 'no named figure — He rubs his aggressions into the steel, thumps the fender, swings a boot over the seat and laughs into the wind as he pulls away. Place: curbside. medium shot; colour;
+    light: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; luminance 0.03. tight inserts on gloved palms, fist on fender, boot swing; chrome panels reflecting the
+    city inserts on '
+- patch_id: P10-003
+  start_time: 01:00:20:21
+  end_time: 01:00:27:19
+  location: empty plazas and the tunnels under the market
+  entities_present: []
+  action_summary: He weaves through empty plazas, tunnels and midnight intersections with no one behind him; the real Mexico City motorcycle material covers t
+  camera_relation: eye-level shot, ~40 mm, camera 1.5 m up, pitch 0°
+  light_sound_state: 'dusk and blue hour; empty at 5 a.m. (10) hour 4.6 clear; her reading: “Loneliness is having everything with no one to tell, being e”'
+  patch_trigger: 'location change: empty plazas and the tunnels under the market'
+  source: markov 7.82+6.93s
+  status: moving
+  rehydration_seed: 'no named figure — He weaves through empty plazas, tunnels and midnight intersections with no one behind him; the real Mexico City motorcycle material covers this stretch. Place: empty
+    plazas and the tunnels under the market. eye-level shot, ~40 mm, camera 1.5 m up, pitch 0°; colour; light: dusk and blue hour; empty at 5 a.m. (10) hour 4.6 clear; luminance 0.11. rear rig framing the
+    empty pillion s'
+- patch_id: P10-004
+  start_time: 01:00:27:19
+  end_time: 01:00:37:22
+  location: empty plazas and the tunnels under the market
+  entities_present: []
+  action_summary: He weaves through empty plazas, tunnels and midnight intersections with no one behind him; the real Mexico City motorcycle material covers t
+  camera_relation: wide shot
+  light_sound_state: 'dusk and blue hour; empty at 5 a.m. (10) hour 4.6 clear; her reading: “wide -eyed and stone but alive and well, wandering with no c”'
+  patch_trigger: 'phrase boundary: “wide -eyed and stone but alive”'
+  source: Opening tramlijn naar Wassenaar 9.68+10.11s
+  status: moving
+  rehydration_seed: 'no named figure — He weaves through empty plazas, tunnels and midnight intersections with no one behind him; the real Mexico City motorcycle material covers this stretch. Place: empty
+    plazas and the tunnels under the market. wide shot; colour; light: dusk and blue hour; empty at 5 a.m. (10) hour 4.6 clear; luminance 0.05. rear rig framing the empty pillion seat; goggles reflecting
+    tunnel lights re'
+- patch_id: P10-005
+  start_time: 01:00:37:22
+  end_time: 01:00:46:04
+  location: the avenue under the LED canopy
+  entities_present:
+  - crowd
+  action_summary: Riding through crowded streets with a swagger, one hand off the bars; eyes turn and heads twist as he passes.
+  camera_relation: eye-level shot, ~40 mm, camera 1.5 m up, pitch -4°
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; her reading: “so the way I ride through the streets with the swag and eyes”'
+  patch_trigger: 'location change: the avenue under the LED canopy'
+  source: '''Till It Helps! 17.19+8.26s'
+  status: moving
+  rehydration_seed: 'crowd — Riding through crowded streets with a swagger, one hand off the bars; eyes turn and heads twist as he passes. Place: the avenue under the LED canopy. eye-level shot, ~40 mm,
+    camera 1.5 m up, pitch -4°; colour; light: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; luminance 0.32. low-angle tracking on tire spray, whip-pans across crowd
+    silhouettes, ne'
+- patch_id: P10-006
+  start_time: 01:00:46:04
+  end_time: 01:00:53:08
+  location: the avenue under the LED canopy
+  entities_present:
+  - crowd
+  action_summary: Riding through crowded streets with a swagger, one hand off the bars; eyes turn and heads twist as he passes.
+  camera_relation: medium shot
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; her reading: “All preparations to live and dream in darkness I no longer d”'
+  patch_trigger: 'phrase boundary: “All preparations to”'
+  source: markov 19.23+5.75s
+  status: moving
+  rehydration_seed: 'crowd — Riding through crowded streets with a swagger, one hand off the bars; eyes turn and heads twist as he passes. Place: the avenue under the LED canopy. medium shot; colour; light:
+    late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; luminance 0.26. low-angle tracking on tire spray, whip-pans across crowd silhouettes, neon blur low tracking on
+    tyre spray; whi'
+- patch_id: P10-007
+  start_time: 01:00:53:08
+  end_time: 01:00:54:13
+  location: the rail viaduct out of the city as the moon sets
+  entities_present: []
+  action_summary: He rides out of Atlantis as the night turns and the sky lightens; the moon dips behind the skyline and a road sign points to a new dawn.
+  camera_relation: wide shot
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; her reading: “The moon settles and”'
+  patch_trigger: 'location change: the rail viaduct out of the city as the moon sets'
+  source: archive 22.58+1.20s
+  status: moving
+  rehydration_seed: 'no named figure — He rides out of Atlantis as the night turns and the sky lightens; the moon dips behind the skyline and a road sign points to a new dawn. Place: the rail viaduct out
+    of the city as the moon sets. wide shot; colour; light: dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; luminance 0.24. wide from behind the rider leaving the city edge,
+    skyline behind and '
+- patch_id: P10-008
+  start_time: 01:00:54:13
+  end_time: 01:01:03:11
+  location: the pass under the mountain, the rail beside the road
+  entities_present: []
+  action_summary: He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander'
+  camera_relation: wide shot
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; her reading: “the tease of distant stars subsides and I can see a morning ”'
+  patch_trigger: 'location change: the pass under the mountain, the rail beside the road'
+  source: archive 13.36+8.91s
+  status: moving
+  rehydration_seed: 'no named figure — He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander''s camera flashes. Place:
+    the pass under the mountain, the rail beside the road. wide shot; colour; light: dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; luminance 0.24. drone chase on mountain switchbacks,
+    then a '
+- patch_id: P10-009
+  start_time: 01:01:03:11
+  end_time: 01:01:09:23
+  location: the pass under the mountain, the rail beside the road
+  entities_present: []
+  action_summary: He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander'
+  camera_relation: medium shot
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; her reading: “a morning where loss and life aren''t so well, ripe with sunl”'
+  patch_trigger: 'phrase boundary: “a morning where loss and life aren''t”'
+  source: to make (still)
+  status: GENERATE
+  rehydration_seed: 'no named figure — He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander''s camera flashes. Place:
+    the pass under the mountain, the rail beside the road. medium shot; colour; light: dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; luminance 0.00. drone chase on mountain
+    switchbacks, then '
+- patch_id: P10-010
+  start_time: 01:01:09:23
+  end_time: 01:01:21:12
+  location: the pass under the mountain, the rail beside the road
+  entities_present: []
+  action_summary: He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander'
+  camera_relation: medium shot
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; her reading: “The tripping of birds, feeling of nests, spring out of the n”'
+  patch_trigger: 'phrase boundary: “The tripping of birds,”'
+  source: archive 29.07+11.57s
+  status: GENERATE
+  rehydration_seed: 'no named figure — He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander''s camera flashes. Place:
+    the pass under the mountain, the rail beside the road. medium shot; colour; light: dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; luminance 0.07. drone chase on mountain
+    switchbacks, then '
+- patch_id: P10-011
+  start_time: 01:01:21:12
+  end_time: 01:01:27:16
+  location: the pass under the mountain, the rail beside the road
+  entities_present: []
+  action_summary: He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander'
+  camera_relation: wide shot
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; her reading: “I want to live in this feeling forever, blissful and oddly i”'
+  patch_trigger: 'phrase boundary: “I want to live in this feeling”'
+  source: markov (still)
+  status: still → drawing
+  rehydration_seed: 'no named figure — He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander''s camera flashes. Place:
+    the pass under the mountain, the rail beside the road. wide shot; colour; light: dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; luminance 0.16. drone chase on mountain switchbacks,
+    then a '
+- patch_id: P10-012
+  start_time: 01:01:27:16
+  end_time: 01:01:36:03
+  location: the pass under the mountain, the rail beside the road
+  entities_present: []
+  action_summary: He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander'
+  camera_relation: elevated shot, ~35 mm, camera 2.2 m up, pitch -19°
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; her reading: “riding in a way you can''t help but double -click, improve, y”'
+  patch_trigger: 'phrase boundary: “riding in a way you”'
+  source: film (still)
+  status: still → drawing
+  rehydration_seed: 'no named figure — He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander''s camera flashes. Place:
+    the pass under the mountain, the rail beside the road. elevated shot, ~35 mm, camera 2.2 m up, pitch -19°; colour; light: dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear;
+    luminance 0.20. dro'
+- patch_id: P10-013
+  start_time: 01:01:36:03
+  end_time: 01:01:40:03
+  location: the canopy → the empty commons and the underpass → the rail viaduct out → the pa
+  entities_present: []
+  action_summary: 'the album''s only travelling poem: neon to dawn in one direction'
+  camera_relation: wide shot
+  light_sound_state: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; her reading
+  patch_trigger: 'threshold: ride 10 → 11'
+  source: other 96.25+4.00s
+  status: moving
+  rehydration_seed: 'no named figure — the album''s only travelling poem: neon to dawn in one direction Place: the canopy → the empty commons and the underpass → the rail viaduct out → the pass under the
+    mountain → the shore steps. wide shot; colour; light: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; luminance 0.17. the album''s only travelling poem: neon to
+    dawn in one directi'
