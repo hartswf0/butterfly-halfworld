@@ -5,13 +5,14 @@ the line she is speaking burnt in, and a small label (scene · role · source ·
 Re-run after more shots are drawn and the film fills in with drawings. Writes WYGWYL-CORPUS-ARCH/film/NN.mp4 and film/index.html
 (local, served with the mirror; nothing is published).
   python3 story_preview.py [01 02 …] [--drawn]      footage by default; --drawn shows each patch's drawing where it exists
+  python3 story_preview.py [01 02 …] --cels --clean the cels with no captions and no audio (for the Cineosis Lab suite, which brings its own)
   python3 story_preview.py [01 02 …] --cels         the film itself: each patch's moving cartoon cel (story_cels.py), no labels → film/NN_cel.mp4"""
 import os, sys, json, re, subprocess, tempfile, shutil, html
 
 T = os.path.dirname(os.path.abspath(__file__)); D = os.path.join(T, '.work', 'story'); WY = os.path.join(T, '..', '..', '..')
 OUT = '/Users/gaia/Downloads/WYGWYL-CORPUS-ARCH/film'; os.makedirs(OUT, exist_ok=True)
 FONT = '/System/Library/Fonts/Supplemental/Arial.ttf'; FPS, WD, HT = 24, 1280, 720
-F = json.load(open(os.path.join(D, 'film.json'))); DRAWN = '--drawn' in sys.argv; CELS = '--cels' in sys.argv; VD = '/Users/gaia/Downloads/WYGWYL-CORPUS-ARCH/shots/video'; poems = [a for a in sys.argv[1:] if not a.startswith('--')] or sorted(F)   # --drawn: drawings over footage
+F = json.load(open(os.path.join(D, 'film.json'))); DRAWN = '--drawn' in sys.argv; CELS = '--cels' in sys.argv; CLEAN = '--clean' in sys.argv; VD = '/Users/gaia/Downloads/WYGWYL-CORPUS-ARCH/shots/video'; poems = [a for a in sys.argv[1:] if not a.startswith('--')] or sorted(F)   # --drawn: drawings over footage
 AUDIO = {re.match(r'(\d\d)_', f).group(1): os.path.join(WY, 'audio', f) for f in os.listdir(os.path.join(WY, 'audio')) if re.match(r'\d\d_.*\.mp3$', f)}
 
 def frame_of(s):
@@ -61,9 +62,9 @@ for p in poems:
             else: cur = (cur + ' ' + w).strip()
         lines.append(cur); tf = os.path.join(tmp, f'cap{k:03d}.txt'); open(tf, 'w').write('\n'.join(lines))
         caps.append(f"drawtext=fontfile={FONT}:textfile={tf}:x=(w-text_w)/2:y=h-text_h-38:fontsize=26:line_spacing=6:fontcolor=white:box=1:boxcolor=black@0.45:boxborderw=10:enable='between(t,{sg['start']:.2f},{sg['end']:.2f})'")
-    out = os.path.join(OUT, f'{p}_cel.mp4' if CELS else f'{p}.mp4'); cmd = ['ffmpeg', '-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', os.path.join(tmp, 'list.txt')]
-    if p in AUDIO: cmd += ['-i', AUDIO[p], '-map', '0:v', '-map', '1:a', '-c:a', 'aac', '-b:a', '160k']
-    cmd += ['-vf', ','.join(caps) if caps else 'null', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '21', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out]
+    out = os.path.join(OUT, f'{p}_cel_clean.mp4' if CLEAN else f'{p}_cel.mp4' if CELS else f'{p}.mp4'); cmd = ['ffmpeg', '-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', os.path.join(tmp, 'list.txt')]
+    if p in AUDIO and not CLEAN: cmd += ['-i', AUDIO[p], '-map', '0:v', '-map', '1:a', '-c:a', 'aac', '-b:a', '160k']
+    cmd += ['-vf', ','.join(caps) if caps and not CLEAN else 'null', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '21', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out]
     subprocess.run(cmd, check=True); shutil.rmtree(tmp)
     print(p, f['title'], len(f['shots']), 'shots', drawn, 'drawn', out, flush=True)
 

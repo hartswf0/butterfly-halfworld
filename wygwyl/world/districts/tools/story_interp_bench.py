@@ -8,6 +8,9 @@ wygwyl-world-arch's scene program already made (raster frame0.png, vector scene.
   D planes  the multiplane way: the background planes (P4–P6) of one drawing per shot moved rigidly by the camera's motion
             (a homography fitted to the footage's flow on the background); the figure and foreground planes (P1–P3) carried by
             the dense flow from the nearest drawing, composited over it
+  F ebsynth every frame re-synthesised from the neighbouring keyframe cels by EbSynth (patch-based, guided by the footage: the
+            keyframe's footage → this frame's footage, plus their edges), both directions blended by time
+  G rife    a learned interpolator (RIFE v4.6, ncnn/Vulkan) between consecutive keyframe cels: smooth, but blind to the footage between
   E morph   an animator's in-between: every polygon of a drawing matched to its partner in the next (same plane, nearby once the
             camera's motion is taken out, similar colour and size; Hungarian), vertices resampled and interpolated, colours too;
             unmatched shapes fade; every frame rendered fresh from the vectors, so no raster ghost is possible
@@ -16,7 +19,7 @@ compensated change), ghost (edge density / the drawings' own), track (correlatio
 the footage's — a drawing that freezes while the footage moves scores low).
 Writes WYGWYL-CORPUS-ARCH/bench/<patch>/{A..E}.mp4, grid.mp4 (footage + five methods, labelled), metrics.json, and bench/index.html.
   python3 story_interp_bench.py P08-006 P01-002 …"""
-import os, re, sys, json, glob, subprocess, numpy as np, cv2
+import os, re, sys, json, glob, shutil, subprocess, numpy as np, cv2
 from scipy.optimize import linear_sum_assignment
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import story_inbetween as IB
@@ -140,6 +143,40 @@ def m_morph(F, G, K, seg):
         out.append(render(sh, h, w))
     return out
 
+TOOLS = '/Users/gaia/Downloads/wygwyl-interp-tools'; EB = f'{TOOLS}/ebsynth-src/bin/ebsynth'
+RIFE = glob.glob(f'{TOOLS}/rife/rife-ncnn-vulkan-*-macos')[0] if glob.glob(f'{TOOLS}/rife/rife-ncnn-vulkan-*-macos') else None
+def m_ebsynth(F, G, K, seg, tmp, W=512):
+    os.makedirs(tmp, exist_ok=True); h, w = G[0].shape; H = int(W * h / w); sm = lambda im: cv2.resize(im, (W, H), interpolation=cv2.INTER_AREA)
+    edge = lambda g: cv2.cvtColor(cv2.Canny(cv2.GaussianBlur(g, (0, 0), 1.2), 50, 120), cv2.COLOR_GRAY2BGR)
+    for k in K:
+        cv2.imwrite(f'{tmp}/s{k}.png', sm(K[k]['cel'])); cv2.imwrite(f'{tmp}/g{k}.png', sm(F[k])); cv2.imwrite(f'{tmp}/e{k}.png', sm(edge(G[k])))
+    out = []
+    for i in range(len(F)):
+        a, b = keys_around(K, seg, i)
+        if i in K: out.append(K[i]['cel']); continue
+        cv2.imwrite(f'{tmp}/t.png', sm(F[i])); cv2.imwrite(f'{tmp}/te.png', sm(edge(G[i]))); ims = []
+        for k in sorted({a, b}):
+            subprocess.run([EB, '-style', f'{tmp}/s{k}.png', '-guide', f'{tmp}/g{k}.png', f'{tmp}/t.png', '-weight', '2', '-guide', f'{tmp}/e{k}.png', f'{tmp}/te.png', '-weight', '1',
+                            '-output', f'{tmp}/o{k}.png'], capture_output=True)
+            ims.append(cv2.resize(cv2.imread(f'{tmp}/o{k}.png'), (w, h), interpolation=cv2.INTER_CUBIC))
+        if len(ims) == 2: t = (i - a) / (b - a); out.append(cv2.addWeighted(ims[0], 1 - t, ims[1], t, 0))
+        else: out.append(ims[0])
+    return out
+def m_rife(F, G, K, seg, tmp):
+    h, w = G[0].shape; out = [None] * len(F); ks = sorted(K)
+    for i in range(len(F)):
+        if i in K: out[i] = K[i]['cel']
+    for a, b in zip(ks, ks[1:]):
+        if seg[a] != seg[b] or b - a < 2: continue
+        d = os.path.join(tmp, f'r{a}'); shutil.rmtree(d, ignore_errors=True); os.makedirs(d + '/in'); os.makedirs(d + '/out')
+        cv2.imwrite(f'{d}/in/00000001.png', K[a]['cel']); cv2.imwrite(f'{d}/in/00000002.png', K[b]['cel'])
+        subprocess.run([f'{RIFE}/rife-ncnn-vulkan', '-i', f'{d}/in', '-o', f'{d}/out', '-n', str(b - a + 1), '-m', f'{RIFE}/rife-v4.6'], capture_output=True)
+        fs = sorted(glob.glob(f'{d}/out/*.png'))
+        for j, f in enumerate(fs[: b - a + 1]): out[a + j] = cv2.resize(cv2.imread(f), (w, h))
+    for i in range(len(F)):                                                             # frames outside any pair hold the nearest drawing
+        if out[i] is None: a, b = keys_around(K, seg, i); out[i] = K[a if abs(a - i) <= abs(b - i) else b]['cel']
+    return out
+
 def measure(seq, G, seg, K):
     FM = {i: IB.flow_map(G[i - 1], G[i]) for i in range(1, len(G)) if seg[i] == seg[i - 1]}
     res, d_cel, d_src = [], [], []
@@ -156,23 +193,25 @@ def write(seq, path):
     for i, x in enumerate(seq): cv2.imwrite(os.path.join(d, f'{i + 1:05d}.png'), x)
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-framerate', str(FPS), '-i', os.path.join(d, '%05d.png'), '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', path + '.mp4'], check=True)
 
-LABEL = {'F': 'footage', 'A': 'A blend (theirs)', 'B': 'B carry', 'C': 'C hold', 'D': 'D planes', 'E': 'E morph'}
+LABEL = {'S': 'footage', 'A': 'A blend (theirs)', 'B': 'B carry', 'C': 'C hold', 'D': 'D planes', 'E': 'E morph', 'F': 'F ebsynth', 'G': 'G rife'}
 if __name__ == '__main__':
     allm = {}
     for pid in [a for a in sys.argv[1:] if not a.startswith('--')]:
         work, F, G, K, seg = load(pid); h, w = G[0].shape; od = os.path.join(BD, pid); os.makedirs(od, exist_ok=True)
         IB.run(pid)                                                                     # B, written beside theirs
-        S = {'F': F, 'A': [cv2.resize(cv2.imread(f), (w, h)) for f in sorted(glob.glob(os.path.join(work, 'cel_frames', '*.png')))][:len(F)],
+        S = {'S': F, 'A': [cv2.resize(cv2.imread(f), (w, h)) for f in sorted(glob.glob(os.path.join(work, 'cel_frames', '*.png')))][:len(F)],
              'B': [cv2.imread(f) for f in sorted(glob.glob(os.path.join(work, 'cel2_frames', '*.png')))][:len(F)],
-             'C': m_hold(F, G, K, seg), 'D': m_planes(F, G, K, seg), 'E': m_morph(F, G, K, seg)}
-        M = {m: measure(S[m], G, seg, K) for m in 'ABCDE' if len(S[m]) == len(F)}
-        for m in 'ABCDE': write(S[m], os.path.join(od, m))
+             'C': m_hold(F, G, K, seg), 'D': m_planes(F, G, K, seg), 'E': m_morph(F, G, K, seg),
+             'F': m_ebsynth(F, G, K, seg, os.path.join(od, 'tmp_eb')), 'G': m_rife(F, G, K, seg, os.path.join(od, 'tmp_rife'))}
+        M = {m: measure(S[m], G, seg, K) for m in 'ABCDEFG' if len(S[m]) == len(F)}
+        for m in 'ABCDEFG': write(S[m], os.path.join(od, m))
         tiles = []
         for i in range(len(F)):
             row = []
-            for m in 'FABCDE':
+            for m in 'SABCDEFG':
                 t = cv2.resize(S[m][i], (480, 270)); cv2.rectangle(t, (0, 0), (480, 24), (0, 0, 0), -1); cv2.putText(t, LABEL[m], (8, 17), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (240, 240, 240), 1, cv2.LINE_AA); row.append(t)
-            tiles.append(np.vstack([np.hstack(row[:3]), np.hstack(row[3:])]))
+            row.append(np.zeros((270, 480, 3), np.uint8))
+            tiles.append(np.vstack([np.hstack(row[:3]), np.hstack(row[3:6]), np.hstack(row[6:9])]))
         write(tiles, os.path.join(od, 'grid'))
         json.dump({'pid': pid, 'drawings': len(K), 'frames': len(F), 'cuts': seg[-1], 'metrics': M}, open(os.path.join(od, 'metrics.json'), 'w'), indent=1); allm[pid] = M
         print(pid, len(K), 'drawings', len(F), 'frames', json.dumps(M), flush=True)
@@ -181,6 +220,6 @@ if __name__ == '__main__':
     open(os.path.join(BD, 'index.html'), 'w').write("""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>In-between Bench</title>
 <style>:root{color-scheme:dark}body{margin:0;background:#0a0d18;color:#eef0f7;font:14px/1.5 system-ui,sans-serif}main{max-width:1500px;margin:0 auto;padding:20px 16px 60px}h1{font:500 12px ui-monospace,Menlo,monospace;letter-spacing:.2em;text-transform:uppercase;color:#8b93ad}
 h2{font-weight:500;margin:26px 0 8px}video{width:100%;border-radius:6px;background:#000}table{border-collapse:collapse;margin-top:8px;font:12px ui-monospace,Menlo,monospace}td{padding:3px 12px;border-top:1px solid rgba(255,255,255,.1)}</style></head><body><main>
-<h1>In-between bench · the same keyframe drawings, five ways to make the frames between · footage | A blend | B carry / C hold | D planes | E morph</h1>
+<h1>In-between bench · the same keyframe drawings, seven ways to make the frames between · footage | A blend | B carry / C hold | D planes | E morph / F ebsynth | G rife</h1>
 <p style="color:#8b93ad">pops/s: jumps beyond the footage's motion (lower is calmer) · residual: motion-compensated change · ghost: edge density against the drawings' own (1.0 = none doubled) · track: does the drawing move when the footage does (higher follows better)</p>""" + rows + '</main></body></html>')
     print('bench', os.path.join(BD, 'index.html'))
