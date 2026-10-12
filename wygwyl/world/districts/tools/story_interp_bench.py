@@ -19,7 +19,7 @@ compensated change), ghost (edge density / the drawings' own), track (correlatio
 the footage's — a drawing that freezes while the footage moves scores low).
 Writes WYGWYL-CORPUS-ARCH/bench/<patch>/{A..E}.mp4, grid.mp4 (footage + five methods, labelled), metrics.json, and bench/index.html.
   python3 story_interp_bench.py P08-006 P01-002 …"""
-import os, re, sys, json, glob, shutil, subprocess, numpy as np, cv2
+import os, re, sys, json, glob, time, shutil, subprocess, numpy as np, cv2
 from scipy.optimize import linear_sum_assignment
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import story_inbetween as IB
@@ -47,6 +47,21 @@ def load(pid):
 def keys_around(K, seg, i):
     ks = sorted(k for k in K if seg[k] == seg[i]) or sorted(K, key=lambda k: abs(k - i))[:1]
     a = max([k for k in ks if k <= i], default=ks[0]); b = min([k for k in ks if k >= i], default=ks[-1]); return a, b
+
+def m_blend(F, G, K, seg, tau=14.0):                    # theirs (cartoon_video.propagate), re-implemented so it can run on fewer keyframes
+    out = []
+    for i in range(len(F)):
+        a, b = keys_around(K, seg, i)
+        if i in K: out.append(K[i]['cel']); continue
+        cs, ws = [], []
+        for k in sorted({a, b}):
+            m = IB.flow_map(G[k], G[i]); err = cv2.GaussianBlur(np.abs(IB.warp(F[k], m).astype(np.float32) - F[i].astype(np.float32)).mean(2), (0, 0), 6)
+            wt = 1.0 if a == b else ((b - i) / (b - a) if k == a else (i - a) / (b - a)); cs.append(IB.warp(K[k]['cel'], m).astype(np.float32)); ws.append(wt * np.exp(-err / tau) + 1e-4)
+        out.append(cs[0].astype(np.uint8) if len(cs) == 1 else ((cs[0] * (ws[0] / (ws[0] + ws[1]))[..., None]) + cs[1] * (ws[1] / (ws[0] + ws[1]))[..., None]).astype(np.uint8))
+    return out
+def sparse(K, seg, every=3):                             # every third drawing, and always the first of each shot
+    ks = sorted(K); keep = set(ks[::every]) | {k for k in ks if k == min(x for x in ks if seg[x] == seg[k])}
+    return {k: K[k] for k in keep}
 
 def m_hold(F, G, K, seg, dissolve=2):
     out = []
@@ -193,25 +208,30 @@ def write(seq, path):
     for i, x in enumerate(seq): cv2.imwrite(os.path.join(d, f'{i + 1:05d}.png'), x)
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-framerate', str(FPS), '-i', os.path.join(d, '%05d.png'), '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', path + '.mp4'], check=True)
 
-LABEL = {'S': 'footage', 'A': 'A blend (theirs)', 'B': 'B carry', 'C': 'C hold', 'D': 'D planes', 'E': 'E morph', 'F': 'F ebsynth', 'G': 'G rife'}
+LABEL = {'S': 'footage', 'A': 'A blend (theirs)', 'B': 'B carry', 'C': 'C hold', 'D': 'D planes', 'E': 'E morph', 'F': 'F ebsynth', 'G': 'G rife',
+         'A3': 'A3 blend, 1 key / 3 s', 'F3': 'F3 ebsynth, 1 key / 3 s', 'G3': 'G3 rife, 1 key / 3 s'}
+KEY_COST = 25.0                                           # seconds to draw one keyframe through the whole stack (from the cel job's logs)
 if __name__ == '__main__':
     allm = {}
-    for pid in [a for a in sys.argv[1:] if not a.startswith('--')]:
+    for pid in [a for i, a in enumerate(sys.argv[1:], 1) if not a.startswith('--') and sys.argv[i - 1] != '--methods']:
         work, F, G, K, seg = load(pid); h, w = G[0].shape; od = os.path.join(BD, pid); os.makedirs(od, exist_ok=True)
-        IB.run(pid)                                                                     # B, written beside theirs
-        S = {'S': F, 'A': [cv2.resize(cv2.imread(f), (w, h)) for f in sorted(glob.glob(os.path.join(work, 'cel_frames', '*.png')))][:len(F)],
-             'B': [cv2.imread(f) for f in sorted(glob.glob(os.path.join(work, 'cel2_frames', '*.png')))][:len(F)],
-             'C': m_hold(F, G, K, seg), 'D': m_planes(F, G, K, seg), 'E': m_morph(F, G, K, seg),
-             'F': m_ebsynth(F, G, K, seg, os.path.join(od, 'tmp_eb')), 'G': m_rife(F, G, K, seg, os.path.join(od, 'tmp_rife'))}
-        M = {m: measure(S[m], G, seg, K) for m in 'ABCDEFG' if len(S[m]) == len(F)}
-        for m in 'ABCDEFG': write(S[m], os.path.join(od, m))
+        METHODS = (sys.argv[sys.argv.index('--methods') + 1].split(',') if '--methods' in sys.argv else ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+        K3 = sparse(K, seg); RUN = {'A': lambda: m_blend(F, G, K, seg), 'B': lambda: (IB.run(pid), [cv2.imread(f) for f in sorted(glob.glob(os.path.join(work, 'cel2_frames', '*.png')))][:len(F)])[1],
+               'C': lambda: m_hold(F, G, K, seg), 'D': lambda: m_planes(F, G, K, seg), 'E': lambda: m_morph(F, G, K, seg),
+               'F': lambda: m_ebsynth(F, G, K, seg, os.path.join(od, 'tmp_eb')), 'G': lambda: m_rife(F, G, K, seg, os.path.join(od, 'tmp_rife')),
+               'A3': lambda: m_blend(F, G, K3, seg), 'F3': lambda: m_ebsynth(F, G, K3, seg, os.path.join(od, 'tmp_eb3')), 'G3': lambda: m_rife(F, G, K3, seg, os.path.join(od, 'tmp_rife3'))}
+        S, M, film_s = {'S': F}, {}, len(F) / FPS
+        for m in METHODS:
+            t0 = time.perf_counter(); S[m] = RUN[m](); dt = time.perf_counter() - t0; kk = len(K3) if m.endswith('3') else len(K)
+            M[m] = {**measure(S[m], G, seg, K), 'between_s_per_s': round(dt / film_s, 1), 'keys': kk, 'total_s_per_s': round((dt + kk * KEY_COST) / film_s, 1)}
+            write(S[m], os.path.join(od, m))
         tiles = []
         for i in range(len(F)):
             row = []
-            for m in 'SABCDEFG':
+            for m in ['S'] + METHODS:
                 t = cv2.resize(S[m][i], (480, 270)); cv2.rectangle(t, (0, 0), (480, 24), (0, 0, 0), -1); cv2.putText(t, LABEL[m], (8, 17), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (240, 240, 240), 1, cv2.LINE_AA); row.append(t)
-            row.append(np.zeros((270, 480, 3), np.uint8))
-            tiles.append(np.vstack([np.hstack(row[:3]), np.hstack(row[3:6]), np.hstack(row[6:9])]))
+            while len(row) % 4: row.append(np.zeros((270, 480, 3), np.uint8))
+            tiles.append(np.vstack([np.hstack(row[r:r + 4]) for r in range(0, len(row), 4)]))
         write(tiles, os.path.join(od, 'grid'))
         json.dump({'pid': pid, 'drawings': len(K), 'frames': len(F), 'cuts': seg[-1], 'metrics': M}, open(os.path.join(od, 'metrics.json'), 'w'), indent=1); allm[pid] = M
         print(pid, len(K), 'drawings', len(F), 'frames', json.dumps(M), flush=True)
