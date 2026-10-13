@@ -8,14 +8,15 @@ Poem by poem: when a poem's patches are drawn its cel film is rendered with her 
 repository (wygwyl/world/film/NN.mp4 + poster) and pushed, so each poem can be watched as it lands. Progress for the monitor
 (WYGWYL-CORPUS-ARCH/monitor.html) is written to WYGWYL-CORPUS-ARCH/progress.json after every patch.
 Resumable: a patch is redrawn only if the carve gave it another window.
-  python3 story_cels.py [01 02 …] [--push]      --push: commit and push each finished poem (off by default)"""
+  python3 story_cels.py [01 02 …] [--push]      --push: commit and push each finished poem (off by default)
+  python3 story_cels.py [01 02 …] --v2 [--push] the second way (story_cels2.py): a drawing every 3 s, consistent drawings, EbSynth"""
 import os, sys, json, subprocess, shutil, time, html
 
 T = os.path.dirname(os.path.abspath(__file__)); D = os.path.join(T, '.work', 'story'); REPO = os.path.abspath(os.path.join(T, '..', '..', '..', '..'))
 C = '/Users/gaia/Downloads/WYGWYL-CORPUS-ARCH'; PY = '/Users/gaia/Downloads/WYGWYL-WORLD-ARCH/.venv-shots/bin/python'
 PD = os.path.join(C, 'shots', 'patches'); VD = os.path.join(C, 'shots', 'video'); TH = os.path.join(C, 'monitor', 'thumbs'); os.makedirs(PD, exist_ok=True); os.makedirs(TH, exist_ok=True)
 PUB = os.path.join(REPO, 'wygwyl', 'world', 'film'); os.makedirs(PUB, exist_ok=True)
-F = json.load(open(os.path.join(D, 'film.json'))); args = [a for a in sys.argv[1:] if not a.startswith('--')]; poems = args or sorted(F); PUSH = '--push' in sys.argv          # pushing to the public repository only when asked for explicitly
+F = json.load(open(os.path.join(D, 'film.json'))); args = [a for a in sys.argv[1:] if not a.startswith('--')]; poems = args or sorted(F); PUSH = '--push' in sys.argv; V2 = '--v2' in sys.argv          # pushing to the public repository only when asked for explicitly
 env = dict(os.environ, PYTORCH_ENABLE_MPS_FALLBACK='1')
 BRANCH = subprocess.run(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], cwd=REPO, capture_output=True, text=True).stdout.strip()
 
@@ -70,6 +71,14 @@ for p in poems:
         d = s['t1'] - s['t0']; c = s.get('clip')
         sig = f"{c['path']}|{c['in']:.2f}|{c['len']:.2f}" if c else f"{s['path']}|still"
         work = os.path.join(VD, pid); sigf = os.path.join(work, 'patch.sig'); thumb = os.path.join(TH, f'{pid}.jpg')
+        if V2:                                                                 # the second way, on the keyframes the first pass read
+            ok = os.path.exists(os.path.join(work, 'cartoon_v2.mp4')) or (os.path.exists(os.path.join(work, 'cartoon.mp4')) and
+                 subprocess.run([PY, os.path.join(T, 'story_cels2.py'), pid], capture_output=True).returncode == 0 and os.path.exists(os.path.join(work, 'cartoon_v2.mp4')))
+            if ok:
+                subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-ss', f'{min(d, 4) / 2:.2f}', '-i', os.path.join(work, 'cartoon_v2.mp4'), '-frames:v', '1', '-vf', 'scale=320:-1', thumb])
+                done += 1; patch_state(p, pid, state='drawn', thumb=f'monitor/thumbs/{pid}.jpg'); print(p, pid, 'v2', f'{time.time() - t0:.0f}s', flush=True)
+            else: patch_state(p, pid, state='failed'); print(pid, 'v2 failed', flush=True)
+            continue
         if os.path.exists(os.path.join(work, 'cartoon.mp4')) and os.path.exists(sigf) and open(sigf).read() == sig:
             done += 1; patch_state(p, pid, state='drawn', thumb=f'monitor/thumbs/{pid}.jpg' if os.path.exists(thumb) else None); continue
         patch_state(p, pid, state='drawing', started=time.time())
@@ -89,7 +98,7 @@ for p in poems:
         print(p, pid, f'{d:.1f}s', s['name'][:40], f'{time.time() - t0:.0f}s', flush=True)
     print(p, F[p]['title'], done, 'cels', flush=True)
     PG['poems'][p]['state'] = 'rendering'; save()
-    subprocess.run([sys.executable, os.path.join(T, 'story_preview.py'), p, '--cels'])
+    subprocess.run([sys.executable, os.path.join(T, 'story_preview.py'), p, '--cels'] + (['--v2'] if V2 else []))
     PG['poems'][p]['film'] = f'film/{p}_cel.mp4' if os.path.exists(os.path.join(C, 'film', f'{p}_cel.mp4')) else None
     PG['poems'][p]['pushed'] = publish(p); PG['poems'][p]['state'] = 'done'; save()
     print(p, 'published', PG['poems'][p]['pushed'], flush=True)
