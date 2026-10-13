@@ -39,14 +39,25 @@ def bench_rows(pids):
     return out
 own = [p for p in B if fam_of.get(p) != 'archive']; arch = [p for p in B if fam_of.get(p) == 'archive']
 hdr = '<tr><th></th><th>pops/s ↓</th><th>ghost (1 = none)</th><th>track ↑</th><th>between-frames compute, s per film s</th><th>total with drawings, s per film s</th></tr>'
-# frames: one moment of each patch's grid
+# players: every bench patch, playable — the grid (footage + every method, in sync) and each method alone, small enough to publish
+VD = '/Users/gaia/Downloads/WYGWYL-CORPUS-ARCH/shots/video'
+def enc(src, dst, w, crf):
+    if os.path.exists(dst) and os.path.getmtime(dst) >= os.path.getmtime(src): return True
+    return subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-vf', f'scale={w}:-2', '-c:v', 'libx264', '-crf', str(crf), '-preset', 'slow', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-an', dst]).returncode == 0
 figs = ''
 for p in sorted(B):
-    g = os.path.join(BD, p, 'grid.mp4')
-    if not os.path.exists(g): continue
-    o = os.path.join(IMG, f'{p}.jpg'); subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', '3', '-i', g, '-frames:v', '1', '-vf', 'scale=1440:-1', o])
-    if os.path.exists(o): figs += f"<figure><img src='compare/{p}.jpg' alt='{p}: footage and each way, one frame' loading='lazy'><figcaption>{E(p)} · {E(fam_of.get(p) or '')} · footage, then {', '.join(B[p]['metrics'])}</figcaption></figure>"
-
+    od = os.path.join(IMG, p); os.makedirs(od, exist_ok=True); have = []
+    if os.path.exists(os.path.join(BD, p, 'grid.mp4')) and enc(os.path.join(BD, p, 'grid.mp4'), os.path.join(od, 'grid.mp4'), 1440, 27): have.append(('grid', 'all side by side'))
+    fr = os.path.join(VD, p, 'frames')                                                    # the footage itself, as the drawings saw it
+    if os.path.isdir(fr) and not os.path.exists(os.path.join(od, 'S.mp4')):
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-framerate', '12', '-i', os.path.join(fr, '%05d.png'), '-vf', 'scale=720:-2', '-c:v', 'libx264', '-crf', '26', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', os.path.join(od, 'S.mp4')])
+    if os.path.exists(os.path.join(od, 'S.mp4')): have.append(('S', 'footage'))
+    for m in B[p]['metrics']:
+        if os.path.exists(os.path.join(BD, p, f'{m}.mp4')) and enc(os.path.join(BD, p, f'{m}.mp4'), os.path.join(od, f'{m}.mp4'), 720, 26): have.append((m, LAB.get(m, m)))
+    btn = ''.join(f"<button data-src='compare/{p}/{k}.mp4'{' class=on' if k == 'grid' else ''}>{E(l)}</button>" for k, l in have)
+    mt = B[p]['metrics']
+    figs += (f"<figure class='pl'><video controls loop muted playsinline preload='metadata' src='compare/{p}/grid.mp4'></video><div class='btns'>{btn}</div>"
+             f"<figcaption>{E(p)} · {E(fam_of.get(p) or '')} · " + ' · '.join(f"{E(m)}: track {v['track']}, pops {v['pops_per_s']}/s" for m, v in mt.items() if v.get('track') is not None) + "</figcaption></figure>")
 # 3 · affordances (each grounded in the numbers above)
 def m(meth, k, pids=list(B)):
     v = [B[p]['metrics'][meth][k] for p in pids if meth in B[p]['metrics'] and B[p]['metrics'][meth].get(k) is not None]; return float(np.mean(v)) if v else float('nan')
@@ -72,7 +83,8 @@ page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name
 .k{{font:500 12px ui-monospace,Menlo,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}}h1{{font-weight:500;font-size:clamp(26px,4.4vw,42px);line-height:1.1;margin:8px 0 14px}}
 h2{{font:600 12px ui-monospace,Menlo,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin:0 0 12px}}section{{border-top:1px solid var(--line);padding:24px 0}}p{{max-width:880px}}
 .scroll{{overflow-x:auto}}table{{border-collapse:collapse;font-size:14px;min-width:100%}}th,td{{border-top:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}}th{{color:var(--mute);font-weight:500;font-size:12.5px}}
-figure{{margin:0 0 16px}}figure img{{width:100%;border-radius:6px;display:block;background:#000}}figcaption{{font-size:13px;color:var(--mute)}}</style></head><body><main>
+figure{{margin:0 0 22px}}figure img,figure video{{width:100%;border-radius:6px;display:block;background:#000}}figcaption{{font-size:13px;color:var(--mute)}}
+.btns{{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}}.btns button{{font:500 12px ui-monospace,Menlo,monospace;padding:5px 9px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}}.btns button.on{{background:var(--acc);color:#111;border-color:var(--acc)}}</style></head><body><main>
 <div class="k">WYGWYL · the film in cels · compared</div><h1>Found film against our footage, and seven ways to make the frames between drawings.</h1>
 <p>Every number here is measured on the film itself: {len(Q)} drawn patches for the first table, {len(B)} patches run every way for the second. <a href="process.html">How each frame is made</a> · <a href="index.html">the films</a>.</p>
 <section><h2>1 · Found film and our footage, as cels</h2>
@@ -81,7 +93,13 @@ figure{{margin:0 0 16px}}figure img{{width:100%;border-radius:6px;display:block;
 <section><h2>2 · The frames between drawings</h2><p>The same keyframe drawings, made into in-betweens seven ways. Compute counts the in-betweens and the drawings (about 25 s of the full stack per drawing).</p>
 <h3>our footage · {len(own)} patches</h3><div class="scroll"><table>{hdr}{bench_rows(own)}</table></div>
 <h3>found film · {len(arch)} patches</h3><div class="scroll"><table>{hdr}{bench_rows(arch)}</table></div>
-<div style="margin-top:18px">{figs}</div></section>
+<p>Each player: the grid first (footage, then every way, labelled, in sync); the buttons play any one alone at the same moment.</p><div style="margin-top:12px">{figs}</div></section>
 <section><h2>3 · What each way allows</h2><div class="scroll"><table>{t3}</table></div></section>
-</main></body></html>"""
+</main><script>
+// each player switches between the grid and any single method, keeping its place in time
+document.querySelectorAll('figure.pl').forEach(f => {{ const v = f.querySelector('video');
+  f.querySelectorAll('.btns button').forEach(b => b.onclick = () => {{ const t = v.currentTime, play = !v.paused; v.src = b.dataset.src;
+    v.addEventListener('loadedmetadata', () => {{ try {{ v.currentTime = Math.min(t, v.duration - 0.05); }} catch (e) {{}} if (play) v.play(); }}, {{ once: true }});
+    f.querySelectorAll('.btns button').forEach(x => x.classList.toggle('on', x === b)); }}); }});
+</script></body></html>"""
 open(os.path.join(PUB, 'compare.html'), 'w').write(page); print('wrote compare.html ·', len(Q), 'patches ·', len(B), 'bench patches', '· own', own, '· archive', arch)
