@@ -35,7 +35,7 @@ const $ = id => document.getElementById(id), esc = s => String(s ?? '').replace(
 const dur = s => s == null ? '–' : s > 3600 ? (s / 3600).toFixed(1) + ' h' : s > 60 ? Math.round(s / 60) + ' min' : Math.round(s) + ' s';
 let shown = {};
 async function tick() {
-  let P; try { P = await (await fetch('progress.json?' + Date.now())).json(); } catch (e) { $('top').textContent = 'waiting for the job to start…'; return; }
+  let P; try { P = await (await fetch((new URLSearchParams(location.search).get('f') || 'progress.json') + '?' + Date.now())).json(); } catch (e) { $('top').textContent = 'waiting for the job to start…'; return; }
   const all = Object.values(P.poems).flatMap(p => p.patches), drawn = all.filter(x => x.state === 'drawn').length, todo = all.filter(x => x.state !== 'to make').length;
   const films = Object.values(P.poems).filter(p => p.film).length;
   $('top').innerHTML = [[`${drawn} / ${todo}`, 'patches drawn'], [`${films} / 14`, 'poems finished'], [dur(P.eta), 'left at the current rate'], [P.rate ? P.rate.toFixed(0) + '×' : '–', 'work per second of film'],

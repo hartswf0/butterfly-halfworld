@@ -12,7 +12,7 @@ import os, sys, json, re, subprocess, tempfile, shutil, html
 T = os.path.dirname(os.path.abspath(__file__)); D = os.path.join(T, '.work', 'story'); WY = os.path.join(T, '..', '..', '..')
 OUT = '/Users/gaia/Downloads/WYGWYL-CORPUS-ARCH/film'; os.makedirs(OUT, exist_ok=True)
 FONT = '/System/Library/Fonts/Supplemental/Arial.ttf'; FPS, WD, HT = 24, 1280, 720
-F = json.load(open(os.path.join(D, 'film.json'))); DRAWN = '--drawn' in sys.argv; CELS = '--cels' in sys.argv; CLEAN = '--clean' in sys.argv; VD = '/Users/gaia/Downloads/WYGWYL-CORPUS-ARCH/shots/video'; poems = [a for a in sys.argv[1:] if not a.startswith('--')] or sorted(F)   # --drawn: drawings over footage
+F = json.load(open(os.path.join(D, 'film.json'))); DRAWN = '--drawn' in sys.argv; CELS = '--cels' in sys.argv; CLEAN = '--clean' in sys.argv; V2 = '--v2' in sys.argv; VD = '/Users/gaia/Downloads/WYGWYL-CORPUS-ARCH/shots/video'; poems = [a for a in sys.argv[1:] if not a.startswith('--')] or sorted(F)   # --drawn: drawings over footage
 AUDIO = {re.match(r'(\d\d)_', f).group(1): os.path.join(WY, 'audio', f) for f in os.listdir(os.path.join(WY, 'audio')) if re.match(r'\d\d_.*\.mp3$', f)}
 
 def frame_of(s):
@@ -36,7 +36,7 @@ for p in poems:
         mode = 'drawing' if (dr and DRAWN) else 'footage' if s.get('clip') else 'drawing' if dr else 'still'; drawn += mode == 'drawing'
         lab = f"{s.get('id') or s['scene']} {s.get('role') or ''} - {s['source']} - {mode}{' - GENERATE' if s.get('generate') else ''}"
         tag = f"drawtext=fontfile={FONT}:text='{esc(lab)}':x=14:y=12:fontsize=15:fontcolor=white@0.75:box=1:boxcolor=black@0.35:boxborderw=5"
-        cel = os.path.join(VD, s.get('id') or '-', 'cartoon.mp4')
+        cel = os.path.join(VD, s.get('id') or '-', 'cartoon_v2.mp4' if V2 and os.path.exists(os.path.join(VD, s.get('id') or '-', 'cartoon_v2.mp4')) else 'cartoon.mp4')
         if CELS and os.path.exists(cel):                       # the cel, fitted to the patch: its own 12 fps drawings, held on twos at 24
             drawn += 1; vf = f"scale={WD}:{HT}:force_original_aspect_ratio=increase,crop={WD}:{HT},fps={FPS},tpad=stop_mode=clone:stop_duration={d:.2f},format=yuv420p"
             r = subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', cel, '-an', '-vf', vf, '-frames:v', str(n), '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '18', c])
