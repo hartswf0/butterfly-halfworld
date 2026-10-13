@@ -1,0 +1,199 @@
+title: Reunion
+seed: 'Reunion: Welcome home in the hall; Loud voices, overheard hearts; The empty rooms of the afterlife; Hourglasses and the group photo (archival reenactment); Trees at the forest edge; Brother'
+diegesis:
+  premise: Friends arrive under a welcome-home banner; laughter and hugs with no reason; the circle forms.
+  world_rules:
+  - the reading sets the clock
+  - a scene edge is a hard cut
+  - POET is one man throughout
+  core_entities:
+  - POET
+  core_locations:
+  - the hall under its rafters
+  - the centre of the gathering
+  - the rafters and a back room of empty chairs
+  - the hall's front, posed like the photographs
+  - the grounds where the hill's woods begin
+  - the sandy path to the shore
+  - the meadow, ending at a porch
+macro_structure:
+- unit_id: U1
+  kind: sequence
+  function: Welcome home in the hall → Loud voices, overheard hearts
+- unit_id: U2
+  kind: sequence
+  function: The empty rooms of the afterlife → Hourglasses and the group photo (archival reenactment)
+- unit_id: U3
+  kind: sequence
+  function: Trees at the forest edge → Brotherhood chain → Football in the meadow, then home
+beat_structure:
+- beat_id: '12.0'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: Friends arrive under a welcome-home banner; laughter and hugs with no reason; the circle forms.
+- beat_id: '12.1'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: Voices peak; a chest-level glow pulses with every shout.
+- beat_id: '12.2'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: The POET's mind drifts up into the rafters; a back room of empty chairs stands for the friends who are gone.
+- beat_id: '12.3'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: Everyone freezes for a group photo, each holding an hourglass of burning sand; old photos reenacted, maps of shared rout
+- beat_id: '12.4'
+  parent_unit: U3
+  syntagma_type: accumulative
+  pressure_shift: Outside, friends touch tree trunks under picnic lights; breath mingles in cool dusk; memories project onto fog.
+- beat_id: '12.5'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: Wrists interlock, heads lean together; one ear pressed to the next brother's chest.
+- beat_id: '12.6'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: A football spirals across a sunset meadow; polaroids scatter; the group walks up as a porch light switches on.
+patch_timeline:
+- patch_id: P12-001
+  start_time: 01:00:00:00
+  end_time: 01:00:08:13
+  location: the hall under its rafters
+  entities_present: []
+  action_summary: Friends arrive under a welcome-home banner; laughter and hugs with no reason; the circle forms.
+  camera_relation: undetermined (no ground) shot, ~50 mm
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “Decades later, there was less time for words and more space ”'
+  patch_trigger: 'location change: the hall under its rafters'
+  source: archive 39.79+8.56s
+  status: GENERATE
+  rehydration_seed: 'no named figure — Friends arrive under a welcome-home banner; laughter and hugs with no reason; the circle forms. Place: the hall under its rafters. undetermined (no ground) shot, ~50
+    mm; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; luminance 0.40. wide master from the rafters, then handheld into the hugging circle wide from
+    the rafters, t'
+- patch_id: P12-002
+  start_time: 01:00:08:13
+  end_time: 01:00:12:14
+  location: the centre of the gathering
+  entities_present: []
+  action_summary: Voices peak; a chest-level glow pulses with every shout.
+  camera_relation: close shot
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “loud voices so our hearts can be overheard.”'
+  patch_trigger: 'location change: the centre of the gathering'
+  source: archive 0.48+4.04s
+  status: moving
+  rehydration_seed: 'no named figure — Voices peak; a chest-level glow pulses with every shout. Place: the centre of the gathering. close shot; colour; light: storm daylight (03), chilly dawn (11), warm
+    hall into a dusk porch (12) hour 17.6 clear; luminance 0.30. tight chest-height mediums, shallow focus, fast cuts on laughter chest-height mediums, fast cuts 16:9, one continuous shot of 4.0 s, no cuts,
+    no text, no tit'
+- patch_id: P12-003
+  start_time: 01:00:12:14
+  end_time: 01:00:19:18
+  location: the rafters and a back room of empty chairs
+  entities_present:
+  - POET
+  action_summary: The POET's mind drifts up into the rafters; a back room of empty chairs stands for the friends who are gone.
+  camera_relation: medium shot
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “My mind drifts into the darkness of our afterlives, and thos”'
+  patch_trigger: 'location change: the rafters and a back room of empty chairs'
+  source: archive 4.08+7.15s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — The POET''s mind drifts up into the rafters; a back room of empty chairs stands for the friends who are gone. Place: the rafters and a back room of empty
+    chairs. medium shot; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; luminance 0.25. tilt up into dim rafters; static wide of the dusty backroom
+    tilt into the dark;'
+- patch_id: P12-004
+  start_time: 01:00:19:18
+  end_time: 01:00:26:12
+  location: the hall's front, posed like the photographs
+  entities_present: []
+  action_summary: Everyone freezes for a group photo, each holding an hourglass of burning sand; old photos reenacted, maps of shared routes.
+  camera_relation: undetermined (no ground) shot, ~48 mm
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “We are all here, each holding our glasses of burning sands a”'
+  patch_trigger: 'location change: the hall''s front, posed like the photographs'
+  source: archive 14.88+6.76s
+  status: GENERATE
+  rehydration_seed: 'no named figure — Everyone freezes for a group photo, each holding an hourglass of burning sand; old photos reenacted, maps of shared routes. Place: the hall''s front, posed like the
+    photographs. undetermined (no ground) shot, ~48 mm; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; luminance 0.19. locked frontal group tableau
+    matched to the ar'
+- patch_id: P12-005
+  start_time: 01:00:26:12
+  end_time: 01:00:32:17
+  location: the grounds where the hill's woods begin
+  entities_present: []
+  action_summary: Outside, friends touch tree trunks under picnic lights; breath mingles in cool dusk; memories project onto fog.
+  camera_relation: elevated shot, ~52 mm, camera 5.5 m up, pitch -7°
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “grateful to every living tree in the forest for the shared y”'
+  patch_trigger: 'location change: the grounds where the hill''s woods begin'
+  source: other 0.15+4.91s
+  status: moving
+  rehydration_seed: 'no named figure — Outside, friends touch tree trunks under picnic lights; breath mingles in cool dusk; memories project onto fog. Place: the grounds where the hill''s woods begin. elevated
+    shot, ~52 mm, camera 5.5 m up, pitch -7°; colour; light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; luminance 0.31. low angle up into the canopy; slow lateral
+    track a'
+- patch_id: P12-006
+  start_time: 01:00:32:17
+  end_time: 01:00:39:22
+  location: the sandy path to the shore
+  entities_present: []
+  action_summary: Wrists interlock, heads lean together; one ear pressed to the next brother's chest.
+  camera_relation: close shot
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “This is brotherhood. Smiles with no reason, narrow differenc”'
+  patch_trigger: 'location change: the sandy path to the shore'
+  source: archive 3.39+7.20s
+  status: moving
+  rehydration_seed: 'no named figure — Wrists interlock, heads lean together; one ear pressed to the next brother''s chest. Place: the sandy path to the shore. close shot; colour; light: storm daylight
+    (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; luminance 0.56. profile tracking shot down the listening chain; extreme close-up of an ear on a chest profile track down the
+    chain 16:9, one conti'
+- patch_id: P12-007
+  start_time: 01:00:39:22
+  end_time: 01:00:47:03
+  location: the sandy path to the shore
+  entities_present: []
+  action_summary: Wrists interlock, heads lean together; one ear pressed to the next brother's chest.
+  camera_relation: close shot
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “Decades later, we can place our ears upon the next brother''s”'
+  patch_trigger: 'phrase boundary: “Decades later,”'
+  source: All My Babies 0.74+7.20s
+  status: moving
+  rehydration_seed: 'no named figure — Wrists interlock, heads lean together; one ear pressed to the next brother''s chest. Place: the sandy path to the shore. close shot; colour; light: storm daylight
+    (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; luminance 0.31. profile tracking shot down the listening chain; extreme close-up of an ear on a chest profile track down the
+    chain 16:9, one conti'
+- patch_id: P12-008
+  start_time: 01:00:47:03
+  end_time: 01:00:54:10
+  location: the meadow, ending at a porch
+  entities_present: []
+  action_summary: A football spirals across a sunset meadow; polaroids scatter; the group walks up as a porch light switches on.
+  camera_relation: wide shot
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “follow paths of hilltops and canyons, of blinding lights and”'
+  patch_trigger: 'location change: the meadow, ending at a porch'
+  source: archive 8.86+7.30s
+  status: moving
+  rehydration_seed: 'no named figure — A football spirals across a sunset meadow; polaroids scatter; the group walks up as a porch light switches on. Place: the meadow, ending at a porch. wide shot; colour;
+    light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; luminance 0.27. wide golden-hour meadow with the ball arcing through frame; closing shot from behind the
+    group toward '
+- patch_id: P12-009
+  start_time: 01:00:54:10
+  end_time: 01:01:04:19
+  location: the meadow, ending at a porch
+  entities_present: []
+  action_summary: A football spirals across a sunset meadow; polaroids scatter; the group walks up as a porch light switches on.
+  camera_relation: medium shot
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “all too familiar and create the type of space for laughter a”'
+  patch_trigger: 'phrase boundary: “all too familiar and”'
+  source: '[Amateur films: Ivan Besse collection: Britton, South Dakota 1938-39] (Part II) 7.32+10.39s'
+  status: moving
+  rehydration_seed: 'no named figure — A football spirals across a sunset meadow; polaroids scatter; the group walks up as a porch light switches on. Place: the meadow, ending at a porch. medium shot; colour;
+    light: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; luminance 0.48. wide golden-hour meadow with the ball arcing through frame; closing shot from behind the
+    group towar'
+- patch_id: P12-010
+  start_time: 01:01:04:19
+  end_time: 01:01:08:19
+  location: out of the temple and round the harbour to the café, past the drowned atria
+  entities_present: []
+  action_summary: daylight; the long lateral along the water
+  camera_relation: wide shot
+  light_sound_state: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading
+  patch_trigger: 'threshold: walk 12 → 13'
+  source: archive 5.43+4.00s
+  status: moving
+  rehydration_seed: 'no named figure — daylight; the long lateral along the water Place: out of the temple and round the harbour to the café, past the drowned atria. wide shot; colour; light: storm daylight
+    (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; luminance 0.68. daylight; the long lateral along the water the CLIP bridge between the temple''s pools and the bay''s drowned
+    gardens is this '

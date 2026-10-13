@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frustum Grade</title>
+<meta name="description" content="WYGWYL · every one of the 100 world views against the closest frame each 3D world can make of it: a camera searched by CLIP in the mood city and in the generic city, graded against baselines that try to embarrass it (a flat colour card, the blurred reference, the sibling views), with composition, edges, texture and colour measured beside CLIP.">
+<style>
+:root{--bg:#0d0f12;--card:#15181c;--line:rgba(255,255,255,.1);--ink:#ece6da;--dim:#9a948a;--acc:#ffb35c;--cy:#5fe8ff;--bad:#ff7a6a;--ok:#9be38a;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Georgia,"Times New Roman",serif}
+a{color:var(--cy);text-decoration:none}main{max-width:1240px;margin:0 auto;padding:0 18px 60px}
+.k{font:11px ui-monospace,Menlo,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}.m{font:11.5px/1.6 ui-monospace,Menlo,monospace;color:var(--dim)}
+h1{font-size:clamp(28px,4.4vw,48px);line-height:1.05;margin:8px 0 14px;font-weight:600}h1 em{font-style:normal;color:var(--bad)}
+h2{font:600 12px ui-monospace,Menlo,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin:0 0 12px}
+section{border-top:1px solid var(--line);padding:22px 0}
+.big{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.big .e{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.big b{display:block;font:600 52px/1 Georgia,serif}.big .cap{color:var(--bad);font-size:13.5px;margin:4px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}td,th{border-bottom:1px solid var(--line);padding:7px 8px 7px 0;vertical-align:top;text-align:left}th{font:11px ui-monospace,Menlo,monospace;color:var(--dim);font-weight:400;text-transform:uppercase}
+td.n{font:600 15px ui-monospace,Menlo,monospace;white-space:nowrap}.scroll{overflow-x:auto}
+.v p{margin:6px 0;color:#ddd4c4;max-width:880px}.v ul{margin:6px 0 6px 18px;padding:0;color:#ddd4c4;max-width:880px}.v li{margin:4px 0}
+.ctl{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 14px}.ctl button{font:12px ui-monospace,Menlo,monospace;background:#1a1d22;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer}.ctl button[aria-pressed=true]{background:var(--ink);color:#111}
+.row{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:6px;padding:10px 0;border-bottom:1px solid var(--line)}
+.row figure{margin:0}.row img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:5px;background:#000}
+.row figcaption{font:11px/1.5 ui-monospace,Menlo,monospace;color:var(--dim);margin-top:3px}.row figcaption b{color:var(--ink)}
+.good{color:var(--ok)!important}.bad{color:var(--bad)!important}.none{display:grid;place-items:center;aspect-ratio:16/9;border:1px dashed var(--line);border-radius:5px;font:12px ui-monospace,Menlo,monospace;color:var(--dim)}
+@media (max-width:700px){.row{grid-template-columns:1fr 1fr}.row figure:first-child{grid-column:1/-1}}
+</style>
+</head>
+<body><main>
+<header style="padding:40px 0 8px"><div class="k">WYGWYL · world · the frustum grade</div>
+<h1>Each view against the closest frame <em>our worlds can actually make of it</em>.</h1>
+<p class="m"><a href="index.html">the mood city</a> · <a href="../city3d/index.html">the generic city</a> · <a href="../districts/index.html">the scene book</a> · <a href="../../atlas.html">atlas</a> · data: <a href="grade/grade.json">grade.json</a></p></header>
+<section id="verdict"><h2>Verdict</h2><div class="big" id="big"></div><div class="v" id="vtext"></div></section>
+<section id="rubric"><h2>Rubric</h2><div class="scroll"><table id="rub"></table></div><p class="m" id="base"></p></section>
+<section id="views"><h2>All 100: the reference, and the best frame each world could find for it</h2>
+<div class="ctl" id="ctl"></div><div id="rows"></div></section>
+</main>
+<script>
+const $ = id => document.getElementById(id), pad = n => String(n).padStart(3, '0'), esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+(async () => {
+  const [G, S] = await Promise.all(['grade/grade.json', '../districts/scenes.json'].map(u => fetch(u).then(r => r.json())));
+  const D = Object.fromEntries(S.districts.map(d => [d.id, d])), dist = Object.fromEntries(S.views.map(v => [v.n, v.d]));
+  const W = {mood: 'mood city: sets, untextured', mood2: 'mood city: sets with archive surfaces', mood3: 'mood city: the references folded', city: 'the generic city'};
+  $('big').innerHTML = Object.entries(G.grades).filter(([, g]) => g).map(([w, g]) => `<div class="e"><div class="k">${W[w]}</div><b>${g.grade}</b><div class="m">of 100 · weighted ${g.weighted} before caps · median rank ${g.median_rank} of 100 · median CLIP ${g.median_cos.toFixed(3)}</div>${g.caps.map(([why, c]) => `<div class="cap">capped at ${c}: ${esc(why)}</div>`).join('')}</div>`).join('');
+  if (G.verdict) $('vtext').innerHTML = `<p>${esc(G.verdict.lede)}</p><ul>${G.verdict.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul>${G.verdict.next ? `<p class="m">upgrade path and kill criteria</p><ul>${G.verdict.next.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}${G.verdict.audit ? `<p class="m">the grader's own limits</p><ul>${G.verdict.audit.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}`;
+  const ws = Object.keys(G.grades).filter(w => G.grades[w]), crit = Object.keys(G.grades[ws[0]].criteria);
+  $('rub').innerHTML = `<tr><th>criterion</th><th>weight</th>${ws.map(w => `<th>${W[w]}</th>`).join('')}</tr>` + crit.map(c => `<tr><td>${esc(c)}</td><td class="n">${G.grades[ws[0]].criteria[c].w}</td>${ws.map(w => { const x = G.grades[w].criteria[c]; return `<td><span class="n ${x.score >= 60 ? 'good' : x.score < 35 ? 'bad' : ''}">${x.score}</span><div class="m">${esc(x.measure)}</div></td>`; }).join('')}</tr>`).join('');
+  const B = G.baseline_summary;
+  $('base').textContent = `Baselines over the 100 views: a flat card of the reference's mean colour scores median CLIP ${B.flat_median_cos.toFixed(3)} (median rank ${B.flat_median_rank}); the reference blurred to 16×9 colour scores ${B.blur_median_cos.toFixed(3)} (median rank ${B.blur_median_rank}, top-5 ${Math.round(B.blur_top5 * 100)}%); the closest sibling view of the same district ${B.sibling_median_cos.toFixed(3)}. A render has to beat the blurred reference to show anything colour alone does not.`;
+  let filt = 'all', sort = 'n';
+  const ids = ['all', ...S.districts.map(d => d.id)];
+  function ctl() { $('ctl').innerHTML = ids.map(id => `<button data-f="${id}" aria-pressed="${filt === id}">${id === 'all' ? 'all' : esc(D[id].name.replace(/^The /, ''))}</button>`).join('') + ` <button data-s="n" aria-pressed="${sort === 'n'}">by number</button><button data-s="worst" aria-pressed="${sort === 'worst'}">worst first</button>`; }
+  $('ctl').onclick = e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.f) filt = b.dataset.f; if (b.dataset.s) sort = b.dataset.s; ctl(); rows(); };
+  const fig = (w, n) => { const r = G.worlds[w]?.[n]; if (!r) return `<figure><div class="none">not searched</div></figure>`; if (r.none) return `<figure><div class="none">no place in ${W[w]}</div></figure>`;
+    const f = r.frustum || {}, rk = r.rank <= 5 ? 'good' : r.rank > 20 ? 'bad' : '';
+    return `<figure><img src="grade/${{mood: 'm', mood2: 'm2', mood3: 'm3', city: 'c'}[w]}/${pad(n)}.webp" loading="lazy" alt="${W[w]}, best frame for view ${n}"><figcaption><b class="${rk}">rank ${r.rank}</b> · CLIP ${r.cos.toFixed(3)} <span class="${r.beats_blur ? 'good' : 'bad'}">${r.gain_over_blur >= 0 ? '+' : ''}${r.gain_over_blur.toFixed(3)} vs blur</span><br>layout ${r.layout.toFixed(2)} · edges ${r.edges.toFixed(2)} · texture ${r.texture.toFixed(2)}× · colour ${r.colour.toFixed(2)}${r.near ? `<br>off the frustum: median rank ${r.near.rank}, top-5 ${Math.round(r.near.top5 * 100)}%` : ''}${r.hero ? `<br>${w === 'mood3' ? 'its station' : 'authored hero shot'}: rank ${r.hero.rank}, CLIP ${r.hero.cos.toFixed(3)}` : ''}${r.light ? `<br>${r.light.hour}:00 ${r.light.weather}` : ''}<br>at (${f.x}, ${f.z}) ${f.h} m up · fov ${f.fov}°</figcaption></figure>`; };
+  function rows() {
+    let ns = S.views.map(v => v.n).filter(n => filt === 'all' || dist[n] === filt);
+    if (sort === 'worst') ns.sort((a, b) => Math.min(...Object.values(G.worlds).map(w => w[a]?.rank ?? 999)) < Math.min(...Object.values(G.worlds).map(w => w[b]?.rank ?? 999)) ? 1 : -1);
+    $('rows').innerHTML = ns.map(n => { const b = G.baselines[n]; return `<div class="row"><figure><img src="../districts/t/${pad(n)}.webp" loading="lazy" alt="reference ${n}"><figcaption><b>${n}</b> · ${esc(D[dist[n]].name)}<br>flat card ${b.flat.toFixed(3)} (rank ${b.r_flat}) · blurred ${b.blur.toFixed(3)} (rank ${b.r_blur}) · sibling ${b.sibling.toFixed(3)}</figcaption></figure>${['mood', 'mood2', 'mood3', 'city'].filter(w => G.worlds[w]).map(w => fig(w, n)).join('')}</div>`; }).join(''); }
+  document.documentElement.style.setProperty('--cols', 1 + ['mood', 'mood2', 'mood3', 'city'].filter(w => G.worlds[w]).length);
+  ctl(); rows();
+})();
+</script>
+</body></html>

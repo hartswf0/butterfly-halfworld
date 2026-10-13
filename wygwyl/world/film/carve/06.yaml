@@ -1,0 +1,232 @@
+title: Resurrecting Atlantis
+seed: 'Resurrecting Atlantis: The Light Gates open; Road down, following comets; The city rises / here we are all one; Jungle Interface and the heart-scan admission; City Center: all safe; Narrow streets
+  by can'
+diegesis:
+  premise: Marble gates with wings swing open to an ancestral orchestra; a line of figures, the POET among them, walks through into the radiant city.
+  world_rules:
+  - the reading sets the clock
+  - a scene edge is a hard cut
+  - POET is one man throughout
+  core_entities:
+  - POET
+  core_locations:
+  - the Light Gate, from the field
+  - the processional road descending from the gate into the mark
+  - the round plaza
+  - the hall of crystal trees
+  - the cathedral square, under the dish
+  - the hidden stairwells, two people wide
+  - the Container Rows to the House door
+macro_structure:
+- unit_id: U1
+  kind: sequence
+  function: The Light Gates open → Road down, following comets
+- unit_id: U2
+  kind: sequence
+  function: The city rises / here we are all one → Jungle Interface and the heart-scan admission
+- unit_id: U3
+  kind: sequence
+  function: 'City Center: all safe → Narrow streets by candlelight → Could stay forever, then wandering to the house'
+beat_structure:
+- beat_id: '06.0'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: Marble gates with wings swing open to an ancestral orchestra; a line of figures, the POET among them, walks through into
+- beat_id: '06.1'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: Past the gate the road descends into the luminous city under comets; generations of faces line the way.
+- beat_id: '06.2'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: Atlantis rises from the depths in golden light; diverse beings gather and look up together.
+- beat_id: '06.3'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: Jungle merges into crystalline buildings over overgrown ruins; children and elders draw symbols in sand; a gate scans th
+- beat_id: '06.4'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: Back at the center, now fully alive; a ring of protective light encircles the community; unknown architecture glows.
+- beat_id: '06.5'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: POET walks stone alleys barely two people wide; candle flame blooms, shadows stretch, families gather behind lit windows
+- beat_id: '06.6'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: He sits a moment as Atlantis shines; voiceover ends ('welcoming me, & welcoming all'), he keeps wandering and arrives at
+patch_timeline:
+- patch_id: P06-001
+  start_time: 01:00:00:00
+  end_time: 01:00:08:05
+  location: the Light Gate, from the field
+  entities_present:
+  - POET
+  action_summary: Marble gates with wings swing open to an ancestral orchestra; a line of figures, the POET among them, walks through into the radiant city.
+  camera_relation: elevated shot, ~27 mm, camera 6.7 m up, pitch -16°
+  light_sound_state: 'midnight (06 opens at 00:24) hour 0.4 clear; her reading: “The gates open with wings gifted from evolution, and made of”'
+  patch_trigger: 'location change: the Light Gate, from the field'
+  source: markov 8.15+7.75s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — Marble gates with wings swing open to an ancestral orchestra; a line of figures, the POET among them, walks through into the radiant city. Place: the Light
+    Gate, from the field. elevated shot, ~27 mm, camera 6.7 m up, pitch -16°; colour; light: midnight (06 opens at 00:24) hour 0.4 clear; luminance 0.51. low wide on the gates opening, POET entering frame
+    from behind came'
+- patch_id: P06-002
+  start_time: 01:00:08:05
+  end_time: 01:00:16:11
+  location: the Light Gate, from the field
+  entities_present:
+  - POET
+  action_summary: Marble gates with wings swing open to an ancestral orchestra; a line of figures, the POET among them, walks through into the radiant city.
+  camera_relation: ground / worm's-eye shot, ~27 mm, camera 0.6 m up, pitch 10°
+  light_sound_state: 'midnight (06 opens at 00:24) hour 0.4 clear; her reading: “with an orchestra of our ancestors wildest dreams to welcome”'
+  patch_trigger: 'phrase boundary: “with an orchestra of our ancestors”'
+  source: markov 8.15+8.22s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — Marble gates with wings swing open to an ancestral orchestra; a line of figures, the POET among them, walks through into the radiant city. Place: the Light
+    Gate, from the field. ground / worm''s-eye shot, ~27 mm, camera 0.6 m up, pitch 10°; colour; light: midnight (06 opens at 00:24) hour 0.4 clear; luminance 0.34. low wide on the gates opening, POET entering
+    frame from b'
+- patch_id: P06-003
+  start_time: 01:00:16:11
+  end_time: 01:00:27:13
+  location: the processional road descending from the gate into the market
+  entities_present: []
+  action_summary: Past the gate the road descends into the luminous city under comets; generations of faces line the way.
+  camera_relation: ground / worm's-eye shot, ~87 mm, camera 0.5 m up, pitch -5°
+  light_sound_state: 'midnight (06 opens at 00:24) hour 0.4 clear; her reading: “down yellow brick roads and plucked our souls out of their s”'
+  patch_trigger: 'location change: the processional road descending from the gate into the market'
+  source: film 97.91+9.83s
+  status: moving
+  rehydration_seed: 'no named figure — Past the gate the road descends into the luminous city under comets; generations of faces line the way. Place: the processional road descending from the gate into
+    the market. ground / worm''s-eye shot, ~87 mm, camera 0.5 m up, pitch -5°; colour; light: midnight (06 opens at 00:24) hour 0.4 clear; luminance 0.24. drone or crane following POET down the processional
+    road, tilt up to '
+- patch_id: P06-004
+  start_time: 01:00:27:13
+  end_time: 01:00:32:18
+  location: the round plaza
+  entities_present: []
+  action_summary: Atlantis rises from the depths in golden light; diverse beings gather and look up together.
+  camera_relation: wide shot
+  light_sound_state: 'midnight (06 opens at 00:24) hour 0.4 clear; her reading: “resurrecting Atlantis. Here we are all one.”'
+  patch_trigger: 'location change: the round plaza'
+  source: markov 161.50+5.19s
+  status: moving
+  rehydration_seed: 'no named figure — Atlantis rises from the depths in golden light; diverse beings gather and look up together. Place: the round plaza. wide shot; colour; light: midnight (06 opens at
+    00:24) hour 0.4 clear; luminance 0.39. extreme wide establishing as the city lifts, cut to POET in the gathering, faces lit from above the aerial over the terraces (33), then him in the crowd lit from
+    above 16:9, one c'
+- patch_id: P06-005
+  start_time: 01:00:32:18
+  end_time: 01:00:44:10
+  location: the hall of crystal trees
+  entities_present:
+  - POET
+  action_summary: Jungle merges into crystalline buildings over overgrown ruins; children and elders draw symbols in sand; a gate scans the POET's heart inste
+  camera_relation: wide shot
+  light_sound_state: 'midnight (06 opens at 00:24) hour 0.4 clear; her reading: “The pack we''ve made here with nature abandon and hope for th”'
+  patch_trigger: 'location change: the hall of crystal trees'
+  source: film 32.36+11.69s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — Jungle merges into crystalline buildings over overgrown ruins; children and elders draw symbols in sand; a gate scans the POET''s heart instead of a pass.
+    Place: the hall of crystal trees. wide shot; colour; light: midnight (06 opens at 00:24) hour 0.4 clear; luminance 0.30. handheld walk-through of vines on stone; insert of the heart-scan gate reading
+    POET''s chest handhe'
+- patch_id: P06-006
+  start_time: 01:00:44:10
+  end_time: 01:00:52:01
+  location: the cathedral square, under the dish
+  entities_present: []
+  action_summary: Back at the center, now fully alive; a ring of protective light encircles the community; unknown architecture glows.
+  camera_relation: eye-level shot, ~67 mm, camera 1.0 m up, pitch -6°
+  light_sound_state: 'dusk and blue hour; empty at 5 a.m. (10) hour 0.4 clear; her reading: “but here we are all safe. Here we are all one. The pack we''v”'
+  patch_trigger: 'location change: the cathedral square, under the dish'
+  source: archive 9.29+7.62s
+  status: GENERATE
+  rehydration_seed: 'no named figure — Back at the center, now fully alive; a ring of protective light encircles the community; unknown architecture glows. Place: the cathedral square, under the dish. eye-level
+    shot, ~67 mm, camera 1.0 m up, pitch -6°; colour; light: dusk and blue hour; empty at 5 a.m. (10) hour 0.4 clear; luminance 0.12. slow 360 orbit around POET in the plaza slow 360 orbit with him at the
+    centre; t'
+- patch_id: P06-007
+  start_time: 01:00:52:01
+  end_time: 01:01:03:16
+  location: the cathedral square, under the dish
+  entities_present: []
+  action_summary: Back at the center, now fully alive; a ring of protective light encircles the community; unknown architecture glows.
+  camera_relation: elevated shot, ~23 mm, camera 3.3 m up, pitch -6°
+  light_sound_state: 'dusk and blue hour; empty at 5 a.m. (10) hour 0.4 clear; her reading: “abandon and hope for the best back on life. A relearned curr”'
+  patch_trigger: 'phrase boundary: “abandon and hope for the best back”'
+  source: mj (still)
+  status: GENERATE
+  rehydration_seed: 'no named figure — Back at the center, now fully alive; a ring of protective light encircles the community; unknown architecture glows. Place: the cathedral square, under the dish. elevated
+    shot, ~23 mm, camera 3.3 m up, pitch -6°; colour; light: dusk and blue hour; empty at 5 a.m. (10) hour 0.4 clear; luminance 0.30. slow 360 orbit around POET in the plaza slow 360 orbit with him at the
+    centre; th'
+- patch_id: P06-008
+  start_time: 01:01:03:16
+  end_time: 01:01:15:16
+  location: the hidden stairwells, two people wide
+  entities_present:
+  - POET
+  action_summary: POET walks stone alleys barely two people wide; candle flame blooms, shadows stretch, families gather behind lit windows, children's laughte
+  camera_relation: eye-level shot, ~44 mm, camera 1.2 m up, pitch -1°
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 0.4 clear; her reading: “An unfamiliar flickering candlelight illuminating smiles at ”'
+  patch_trigger: 'location change: the hidden stairwells, two people wide'
+  source: film (still)
+  status: still → drawing
+  rehydration_seed: 'the poet, a man (he/his) — POET walks stone alleys barely two people wide; candle flame blooms, shadows stretch, families gather behind lit windows, children''s laughter, clouds set
+    free. Place: the hidden stairwells, two people wide. eye-level shot, ~44 mm, camera 1.2 m up, pitch -1°; colour; light: kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 0.4
+    clear; luminance 0'
+- patch_id: P06-009
+  start_time: 01:01:15:16
+  end_time: 01:01:22:22
+  location: the hidden stairwells, two people wide
+  entities_present:
+  - POET
+  action_summary: POET walks stone alleys barely two people wide; candle flame blooms, shadows stretch, families gather behind lit windows, children's laughte
+  camera_relation: ground / worm's-eye shot, ~34 mm, camera 0.6 m up, pitch 6°
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 0.4 clear; her reading: “color rainbows, and give us infinite time to heal and set cl”'
+  patch_trigger: 'phrase boundary: “color rainbows, and give”'
+  source: markov 126.26+7.26s
+  status: GENERATE
+  rehydration_seed: 'the poet, a man (he/his) — POET walks stone alleys barely two people wide; candle flame blooms, shadows stretch, families gather behind lit windows, children''s laughter, clouds set
+    free. Place: the hidden stairwells, two people wide. ground / worm''s-eye shot, ~34 mm, camera 0.6 m up, pitch 6°; colour; light: kept at twilight by its own light even at 1 a.m. (06 streets, 07 house)
+    hour 0.4 clear; lu'
+- patch_id: P06-010
+  start_time: 01:01:22:22
+  end_time: 01:01:31:13
+  location: the Container Rows to the House door
+  entities_present: []
+  action_summary: He sits a moment as Atlantis shines; voiceover ends ('welcoming me, & welcoming all'), he keeps wandering and arrives at a house where peopl
+  camera_relation: ground / worm's-eye shot, ~74 mm, camera 0.4 m up, pitch -3°
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 0.4 clear; her reading: “I know my soul and it could stay here forever, leaving behin”'
+  patch_trigger: 'location change: the Container Rows to the House door'
+  source: film (still)
+  status: still → drawing
+  rehydration_seed: 'no named figure — He sits a moment as Atlantis shines; voiceover ends (''welcoming me, & welcoming all''), he keeps wandering and arrives at a house where people are entering, and goes
+    in. Place: the Container Rows to the House door. ground / worm''s-eye shot, ~74 mm, camera 0.4 m up, pitch -3°; colour; light: kept at twilight by its own light even at 1 a.m. (06 streets, 07 house)
+    hour 0.4 clear; lum'
+- patch_id: P06-011
+  start_time: 01:01:31:13
+  end_time: 01:01:40:12
+  location: the Container Rows to the House door
+  entities_present: []
+  action_summary: He sits a moment as Atlantis shines; voiceover ends ('welcoming me, & welcoming all'), he keeps wandering and arrives at a house where peopl
+  camera_relation: ground / worm's-eye shot, ~24 mm, camera 0.3 m up, pitch 1°
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 0.4 clear; her reading: “serendipity. A city born in unison out of the purest of fict”'
+  patch_trigger: 'phrase boundary: “serendipity. A city born”'
+  source: markov 29.93+8.93s
+  status: moving
+  rehydration_seed: 'no named figure — He sits a moment as Atlantis shines; voiceover ends (''welcoming me, & welcoming all''), he keeps wandering and arrives at a house where people are entering, and goes
+    in. Place: the Container Rows to the House door. ground / worm''s-eye shot, ~24 mm, camera 0.3 m up, pitch 1°; colour; light: kept at twilight by its own light even at 1 a.m. (06 streets, 07 house)
+    hour 0.4 clear; lumi'
+- patch_id: P06-012
+  start_time: 01:01:40:12
+  end_time: 01:01:44:12
+  location: the processional road down from the gate into the market; the hidden stairwells;
+  entities_present: []
+  action_summary: 'down and in: from aerial to Steadicam to a doorway'
+  camera_relation: eye-level shot, ~50 mm, camera 0.7 m up, pitch 5°
+  light_sound_state: midnight (06 opens at 00:24) hour 0.4 clear; her reading
+  patch_trigger: 'threshold: walk 06 → 07'
+  source: halfworld 63.72+4.00s
+  status: moving
+  rehydration_seed: 'no named figure — down and in: from aerial to Steadicam to a doorway Place: the processional road down from the gate into the market; the hidden stairwells; the House door. eye-level
+    shot, ~50 mm, camera 0.7 m up, pitch 5°; black-and-white archival film; light: midnight (06 opens at 00:24) hour 0.4 clear; luminance 0.29. down and in: from aerial to Steadicam to a doorway the avenue
+    descends some 3'

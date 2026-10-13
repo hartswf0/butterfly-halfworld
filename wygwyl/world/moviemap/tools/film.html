@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Movie Map Film Rig</title>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<style>html,body{margin:0;background:#000;color:#ccc;font:12px monospace}canvas{display:block}#gl{position:absolute;left:-99999px}</style></head>
+<body><canvas id="out" width="1280" height="720"></canvas><canvas id="gl"></canvas><div id="s">loading…</div>
+<script type="module">
+// The film rig: WHERE YOU GO WHEN YOU LEAVE, one frame at a time, through the same camera (filmcam.mjs) and compositor
+// (filmframe.mjs) that the app's Watch plays live — with what the city holds on its walls. The films on the walls are local copies
+// (film/.tmp/moviemap/films, fetched from the release) seeked to each frame's time; the storm's lightning is seeded.
+let seed = 20250626; Math.random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+const {makeEngine} = await import('../engine.mjs'), {makeFilmRig} = await import('../filmframe.mjs'), {makeHoldings} = await import('../holdings.mjs');
+const cut = await fetch('../film/cut.json').then(r => r.json()), plan = await fetch('../plan.json').then(r => r.json());
+const meta = await fetch('../../city3d/city.json').then(r => r.json()), ledger = await fetch('../holdings.json').then(r => r.json());
+const [PW, PH] = cut.picture, FPS = cut.fps;
+const eng = await makeEngine({canvas: document.getElementById('gl'), width: PW, height: PH, plan, base: '../../city3d/', preserve: true, shadows: true, hfov: cut.hfov,
+  onStep: (p, m) => document.getElementById('s').textContent = p + '% ' + m});
+eng.heav.sun.shadow.mapSize.set(4096, 4096); eng.heav.sun.shadow.map?.dispose(); eng.heav.sun.shadow.map = null;
+const holdings = makeHoldings(ledger, {bld: eng.C.bld, base: '../../../', exclude: ['film:moviemap'],
+  videoSrc: h => /^https?:/.test(h.src) ? '/film/.tmp/moviemap/films/' + h.src.split('/').pop() : '../../../' + h.src});
+const out = document.getElementById('out');
+const rig = makeFilmRig({eng, cut, meta, out, holdings, offline: true});
+window.film = {cut, frames: Math.round((cut.duration + cut.credits) * FPS),
+  async frame(n) { await rig.frame(n / FPS); return out.toDataURL('image/jpeg', 0.9); },
+  async probe(n) { return rig.frame(n / FPS).then(r => ({t: r.t, walls: r.walls || []})); },
+  // a chapter runs to the next one's start: the record has a breath between some passages (0.4 s after Nevermore), the picture holds through it
+  chapterFrames: [...cut.chapters.map((c, i) => [c.num, Math.round(c.t0 * FPS), Math.round((cut.chapters[i + 1] ? cut.chapters[i + 1].t0 : c.t1) * FPS)]), ['15', Math.round(cut.chapters[cut.chapters.length - 1].t1 * FPS), Math.round((cut.duration + cut.credits) * FPS)]]};
+document.getElementById('s').textContent = 'ready'; window.filmReady = true;
+</script></body></html>

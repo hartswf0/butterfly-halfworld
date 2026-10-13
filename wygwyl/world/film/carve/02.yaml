@@ -1,0 +1,228 @@
+title: Flashing Lights
+seed: 'Flashing Lights: Falling with headlights off; Eyes dilate; Car pulls up; The ghost child; Parents arguing in the car; Tambourine through the window'
+diegesis:
+  premise: POET in black space, falling or floating, lights flashing; EX in distress floats nearby, unreachable.
+  world_rules:
+  - the reading sets the clock
+  - a scene edge is a hard cut
+  - POET is one man throughout
+  core_entities:
+  - EX
+  - POET
+  - Young POET
+  - ghost child
+  core_locations:
+  - the black below the floor
+  - his eye
+  - the child's living-room window over the curb, the road windi
+  - beside the window
+  - the window looking down to the curb
+  - the window itself
+macro_structure:
+- unit_id: U1
+  kind: sequence
+  function: Falling with headlights off → Eyes dilate
+- unit_id: U2
+  kind: sequence
+  function: Car pulls up → The ghost child
+- unit_id: U3
+  kind: sequence
+  function: Parents arguing in the car → Tambourine through the window
+beat_structure:
+- beat_id: '02.0'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: POET in black space, falling or floating, lights flashing; EX in distress floats nearby, unreachable.
+- beat_id: '02.1'
+  parent_unit: U1
+  syntagma_type: accumulative
+  pressure_shift: Everything still black; his eyes dilate trying to see, then the camera pushes into and through them into the flashback.
+- beat_id: '02.2'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: Young POET at the living-room window watches a car pull up, its lights flashing through the room because of the angle an
+- beat_id: '02.3'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: A ghost kid appears and hugs Young POET, telling him his parents' marriage won't last, then disappears.
+- beat_id: '02.4'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: Ghost gone, Young POET stays at the window watching his parents argue in the car, curtains pulled and blinds up, left ho
+- beat_id: '02.5'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: The ghost child hands Young POET a tambourine; he throws it through the window, shattering the glass.
+patch_timeline:
+- patch_id: P02-001
+  start_time: 01:00:00:00
+  end_time: 01:00:09:09
+  location: the black below the floor
+  entities_present:
+  - POET
+  - EX
+  action_summary: POET in black space, falling or floating, lights flashing; EX in distress floats nearby, unreachable.
+  camera_relation: undetermined (no ground) shot, ~89 mm
+  light_sound_state: 'timeless hour 1.0 clear; her reading: “I heard a scream for help while falling with my headlights o”'
+  patch_trigger: 'location change: the black below the floor'
+  source: archive 4.52+9.36s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his); his ex — POET in black space, falling or floating, lights flashing; EX in distress floats nearby, unreachable. Place: the black below the floor. undetermined
+    (no ground) shot, ~89 mm; colour; light: timeless hour 1.0 clear; luminance 0.32. floating wide in a black stage, strobing practicals; EX kept back-to-camera at a fixed unreachable distance floating
+    wide in a black s'
+- patch_id: P02-002
+  start_time: 01:00:09:09
+  end_time: 01:00:20:16
+  location: the black below the floor
+  entities_present:
+  - POET
+  - EX
+  action_summary: POET in black space, falling or floating, lights flashing; EX in distress floats nearby, unreachable.
+  camera_relation: medium shot
+  light_sound_state: 'timeless hour 1.0 clear; her reading: “a concussion, a set of walls caving inward, seething and sim”'
+  patch_trigger: 'phrase boundary: “a concussion, a set of”'
+  source: markov 0.82+11.32s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his); his ex — POET in black space, falling or floating, lights flashing; EX in distress floats nearby, unreachable. Place: the black below the floor. medium shot;
+    colour; light: timeless hour 1.0 clear; luminance 0.23. floating wide in a black stage, strobing practicals; EX kept back-to-camera at a fixed unreachable distance floating wide in a black stage, strobing
+    practicals '
+- patch_id: P02-003
+  start_time: 01:00:20:16
+  end_time: 01:00:27:22
+  location: his eye
+  entities_present: []
+  action_summary: Everything still black; his eyes dilate trying to see, then the camera pushes into and through them into the flashback.
+  camera_relation: undetermined (no ground) shot, ~57 mm
+  light_sound_state: 'timeless hour 1.0 clear; her reading: “an emergency call while tossing and turning. It was a type o”'
+  patch_trigger: 'location change: his eye'
+  source: archive 3.54+7.24s
+  status: moving
+  rehydration_seed: 'no named figure — Everything still black; his eyes dilate trying to see, then the camera pushes into and through them into the flashback. Place: his eye. undetermined (no ground) shot,
+    ~57 mm; black-and-white archival film; light: timeless hour 1.0 clear; luminance 0.18. extreme close-up on the POET''s eye, pupil opening, macro push-through into the next scene extreme close-up, the
+    pupil opening in'
+- patch_id: P02-004
+  start_time: 01:00:27:22
+  end_time: 01:00:34:07
+  location: his eye
+  entities_present: []
+  action_summary: Everything still black; his eyes dilate trying to see, then the camera pushes into and through them into the flashback.
+  camera_relation: close shot
+  light_sound_state: 'timeless hour 1.0 clear; her reading: “To digest the truth, a windless insomnia and epiphany of a”'
+  patch_trigger: 'phrase boundary: “To digest the truth,”'
+  source: archive 0.15+6.37s
+  status: moving
+  rehydration_seed: 'no named figure — Everything still black; his eyes dilate trying to see, then the camera pushes into and through them into the flashback. Place: his eye. close shot; colour; light:
+    timeless hour 1.0 clear; luminance 0.25. extreme close-up on the POET''s eye, pupil opening, macro push-through into the next scene extreme close-up, the pupil opening into the flashback 16:9, one continuous
+    shot of 6.4 '
+- patch_id: P02-005
+  start_time: 01:00:34:07
+  end_time: 01:00:41:02
+  location: the child's living-room window over the curb, the road winding down past the tow
+  entities_present:
+  - Young POET
+  - POET
+  action_summary: Young POET at the living-room window watches a car pull up, its lights flashing through the room because of the angle and the bumps in the r
+  camera_relation: eye-level shot, ~20 mm, camera 1.1 m up, pitch -33°
+  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; her reading: “road winding down. After a day of life dilated at the sun as”'
+  patch_trigger: 'location change: the child''s living-room window over the curb, the road winding down past the towers'
+  source: other 0.15+4.91s
+  status: moving
+  rehydration_seed: 'Young POET; the poet, a man (he/his) — Young POET at the living-room window watches a car pull up, its lights flashing through the room because of the angle and the bumps in the road.
+    Place: the child''s living-room window over the curb, the road winding down past the towers. eye-level shot, ~20 mm, camera 1.1 m up, pitch -33°; colour; light: after midnight in winter (02) hour 1.0
+    clear; luminance '
+- patch_id: P02-006
+  start_time: 01:00:41:02
+  end_time: 01:00:47:22
+  location: the child's living-room window over the curb, the road winding down past the tow
+  entities_present:
+  - Young POET
+  - POET
+  action_summary: Young POET at the living-room window watches a car pull up, its lights flashing through the room because of the angle and the bumps in the r
+  camera_relation: medium shot
+  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; her reading: “as wise as possible, we won''t make it. I was six I recall wh”'
+  patch_trigger: 'phrase boundary: “as wise as possible, we”'
+  source: markov 12.03+6.81s
+  status: moving
+  rehydration_seed: 'Young POET; the poet, a man (he/his) — Young POET at the living-room window watches a car pull up, its lights flashing through the room because of the angle and the bumps in the road.
+    Place: the child''s living-room window over the curb, the road winding down past the towers. medium shot; colour; light: after midnight in winter (02) hour 1.0 clear; luminance 0.25. from behind the
+    child at the windo'
+- patch_id: P02-007
+  start_time: 01:00:47:22
+  end_time: 01:01:00:03
+  location: beside the window
+  entities_present:
+  - Young POET
+  - POET
+  - ghost child
+  action_summary: A ghost kid appears and hugs Young POET, telling him his parents' marriage won't last, then disappears.
+  camera_relation: undetermined (no ground) shot, ~61 mm
+  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; her reading: “the ghost of a dead and loveless seven -year -old child appe”'
+  patch_trigger: 'location change: beside the window'
+  source: other 0.15+4.91s
+  status: moving
+  rehydration_seed: 'Young POET; the poet, a man (he/his); the ghost child — A ghost kid appears and hugs Young POET, telling him his parents'' marriage won''t last, then disappears. Place: beside the window.
+    undetermined (no ground) shot, ~61 mm; colour; light: after midnight in winter (02) hour 1.0 clear; luminance 0.16. soft two-shot at child height, ghost slightly diffused; frost breath on the windowpane
+    insert two-'
+- patch_id: P02-008
+  start_time: 01:01:00:03
+  end_time: 01:01:07:12
+  location: the window looking down to the curb
+  entities_present:
+  - Young POET
+  - POET
+  action_summary: Ghost gone, Young POET stays at the window watching his parents argue in the car, curtains pulled and blinds up, left home alone.
+  camera_relation: undetermined (no ground) shot, ~45 mm
+  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; her reading: “a child is left home alone. With curtains pulled and blinds ”'
+  patch_trigger: 'location change: the window looking down to the curb'
+  source: other 0.15+4.91s
+  status: moving
+  rehydration_seed: 'Young POET; the poet, a man (he/his) — Ghost gone, Young POET stays at the window watching his parents argue in the car, curtains pulled and blinds up, left home alone. Place: the window
+    looking down to the curb. undetermined (no ground) shot, ~45 mm; colour; light: after midnight in winter (02) hour 1.0 clear; luminance 0.09. over-the-shoulder through the glass to the lit car interior;
+    reverse cl'
+- patch_id: P02-009
+  start_time: 01:01:07:12
+  end_time: 01:01:14:21
+  location: the window looking down to the curb
+  entities_present:
+  - Young POET
+  - POET
+  action_summary: Ghost gone, Young POET stays at the window watching his parents argue in the car, curtains pulled and blinds up, left home alone.
+  camera_relation: medium shot
+  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; her reading: “to see flashing lights and the whispering screams of two sou”'
+  patch_trigger: 'phrase boundary: “to see flashing lights and the”'
+  source: archive 24.94+7.38s
+  status: moving
+  rehydration_seed: 'Young POET; the poet, a man (he/his) — Ghost gone, Young POET stays at the window watching his parents argue in the car, curtains pulled and blinds up, left home alone. Place: the window
+    looking down to the curb. medium shot; colour; light: after midnight in winter (02) hour 1.0 clear; luminance 0.17. over-the-shoulder through the glass to the lit car interior; reverse close-up on the
+    child''s face'
+- patch_id: P02-010
+  start_time: 01:01:14:21
+  end_time: 01:01:21:14
+  location: the window itself
+  entities_present:
+  - Young POET
+  - POET
+  - ghost child
+  action_summary: The ghost child hands Young POET a tambourine; he throws it through the window, shattering the glass.
+  camera_relation: undetermined (no ground) shot, ~43 mm
+  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; her reading: “And no tears and no fucks, no love to give, old to teach.”'
+  patch_trigger: 'location change: the window itself'
+  source: markov 9.21+6.69s
+  status: moving
+  rehydration_seed: 'Young POET; the poet, a man (he/his); the ghost child — The ghost child hands Young POET a tambourine; he throws it through the window, shattering the glass. Place: the window itself.
+    undetermined (no ground) shot, ~43 mm; colour; light: after midnight in winter (02) hour 1.0 clear; luminance 0.33. high-speed glass shatter from outside looking in, tambourine exiting toward camera
+    high-speed shatte'
+- patch_id: P02-011
+  start_time: 01:01:21:14
+  end_time: 01:01:25:14
+  location: 'the tambourine''s flight: out of the hill''s window, through black, into the chape'
+  entities_present: []
+  action_summary: one tracking object across two places; no people
+  camera_relation: close shot
+  light_sound_state: after midnight in winter (02) hour 1.0 clear; her reading
+  patch_trigger: 'threshold: fly 02 → 03'
+  source: archive 19.52+4.00s
+  status: moving
+  rehydration_seed: 'no named figure — one tracking object across two places; no people Place: the tambourine''s flight: out of the hill''s window, through black, into the chapel’s lancet 3.2 km to the
+    southeast. close shot; colour; light: after midnight in winter (02) hour 1.0 clear; luminance 0.05. one tracking object across two places; no people seen on the map, the line from the house to the chapel
+    crosses the whole'

@@ -1,0 +1,287 @@
+title: Yet Heard
+seed: 'Yet Heard: The EX in the crowd; Walking toward the moon; Suitcases at the phone booth; The call to Mother; Father and son to the inner harbor; The EX turns to haze'
+diegesis:
+  premise: Leaving the club amid fawning crowds, the POET glimpses the EX from behind and reaches for him but cannot get through.
+  world_rules:
+  - the reading sets the clock
+  - a scene edge is a hard cut
+  - POET is one man throughout
+  core_entities:
+  - EX
+  - POET
+  - crowd
+  core_locations:
+  - the sidewalk at the foot of the spire
+  - the avenue toward the moon
+  - the booth curb
+  - 'inside the booth (by phone: the mother''s living room, the Ov'
+  - 'by phone: the Inner Harbour before dawn'
+  - back at the booth curb
+macro_structure:
+- unit_id: U1
+  kind: sequence
+  function: The EX in the crowd → Walking toward the moon
+- unit_id: U2
+  kind: sequence
+  function: Suitcases at the phone booth → The call to Mother
+- unit_id: U3
+  kind: sequence
+  function: Father and son to the inner harbor → The EX turns to haze
+beat_structure:
+- beat_id: '09.0'
+  parent_unit: U1
+  syntagma_type: accumulative
+  pressure_shift: Leaving the club amid fawning crowds, the POET glimpses the EX from behind and reaches for him but cannot get through.
+- beat_id: '09.1'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: POET and EX walk down the Atlantis street together, talking, the moon at the end of the street; they 'grow old together'
+- beat_id: '09.2'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: EX and POET stand on the sidewalk near the phone booth with suitcases at their feet; the EX helps him pack to go.
+- beat_id: '09.3'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: POET enters the booth and calls his MOTHER; they talk while watching the POET and EX break up on the sidewalk; cut to PO
+- beat_id: '09.4'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise an
+- beat_id: '09.5'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: POET and EX are back on the sidewalk; the EX turns to haze and disappears, leaving the POET alone.
+patch_timeline:
+- patch_id: P09-001
+  start_time: 01:00:00:00
+  end_time: 01:00:12:15
+  location: the sidewalk at the foot of the spire
+  entities_present:
+  - POET
+  - EX
+  - crowd
+  action_summary: Leaving the club amid fawning crowds, the POET glimpses the EX from behind and reaches for him but cannot get through.
+  camera_relation: medium shot
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; her reading: “Accepting you''ll never say nor ever feel, my love was real. ”'
+  patch_trigger: 'location change: the sidewalk at the foot of the spire'
+  source: markov 16.96+12.63s
+  status: GENERATE
+  rehydration_seed: 'the poet, a man (he/his); his ex; crowd — Leaving the club amid fawning crowds, the POET glimpses the EX from behind and reaches for him but cannot get through. Place: the sidewalk
+    at the foot of the spire. medium shot; colour; light: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; luminance 0.31. handheld follow through the crowd; EX kept
+    back-to-camera, so'
+- patch_id: P09-002
+  start_time: 01:00:12:15
+  end_time: 01:00:24:18
+  location: the avenue toward the moon
+  entities_present:
+  - POET
+  - EX
+  action_summary: POET and EX walk down the Atlantis street together, talking, the moon at the end of the street; they 'grow old together' in feeling only (ag
+  camera_relation: eye-level shot, ~34 mm, camera 2.2 m up, pitch 6°
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; her reading: “we look at the moon the way we used to see it and settle dow”'
+  patch_trigger: 'location change: the avenue toward the moon'
+  source: archive 7.52+12.10s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his); his ex — POET and EX walk down the Atlantis street together, talking, the moon at the end of the street; they ''grow old together'' in feeling only (aging
+    not literal). Place: the avenue toward the moon. eye-level shot, ~34 mm, camera 2.2 m up, pitch 6°; colour; light: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy;
+    luminance 0.26. lo'
+- patch_id: P09-003
+  start_time: 01:00:24:18
+  end_time: 01:00:35:02
+  location: the avenue toward the moon
+  entities_present:
+  - POET
+  - EX
+  action_summary: POET and EX walk down the Atlantis street together, talking, the moon at the end of the street; they 'grow old together' in feeling only (ag
+  camera_relation: eye-level shot, ~47 mm, camera 1.0 m up, pitch -38°
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; her reading: “I believe maybe we could have it all, or swing in my humbled”'
+  patch_trigger: 'phrase boundary: “I believe maybe we could have it”'
+  source: archive 0.15+7.72s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his); his ex — POET and EX walk down the Atlantis street together, talking, the moon at the end of the street; they ''grow old together'' in feeling only (aging
+    not literal). Place: the avenue toward the moon. eye-level shot, ~47 mm, camera 1.0 m up, pitch -38°; colour; light: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy;
+    luminance 0.28. '
+- patch_id: P09-004
+  start_time: 01:00:35:02
+  end_time: 01:00:38:18
+  location: the booth curb
+  entities_present:
+  - POET
+  - EX
+  action_summary: EX and POET stand on the sidewalk near the phone booth with suitcases at their feet; the EX helps him pack to go.
+  camera_relation: rooftop shot, ~80 mm, camera 13.6 m up, pitch -43°
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; her reading: “You help me gather my things to go. Before I go,”'
+  patch_trigger: 'location change: the booth curb'
+  source: archive 37.37+3.64s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his); his ex — EX and POET stand on the sidewalk near the phone booth with suitcases at their feet; the EX helps him pack to go. Place: the booth curb. rooftop shot,
+    ~80 mm, camera 13.6 m up, pitch -43°; colour; light: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; luminance 0.10. low shot at suitcase level, booth light spilling
+    on the c'
+- patch_id: P09-005
+  start_time: 01:00:38:18
+  end_time: 01:00:38:18
+  location: 'inside the booth (by phone: the mother''s living room, the Overseer)'
+  entities_present:
+  - POET
+  - EX
+  action_summary: POET enters the booth and calls his MOTHER; they talk while watching the POET and EX break up on the sidewalk; cut to POET and MOTHER in her
+  camera_relation: medium shot
+  light_sound_state: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; her reading
+  patch_trigger: 'location change: inside the booth (by phone: the mother''s living room, the Overseer)'
+  source: markov (still)
+  status: still → drawing
+  rehydration_seed: 'the poet, a man (he/his); his ex — POET enters the booth and calls his MOTHER; they talk while watching the POET and EX break up on the sidewalk; cut to POET and MOTHER in her living
+    room, the break-up still in the background. He hangs up and she disappears. Place: inside the booth (by phone: the mother''s living room, the Overseer). medium shot; colour; light: late night to the
+    last of the night ('
+- patch_id: P09-006
+  start_time: 01:00:38:18
+  end_time: 01:00:47:13
+  location: 'by phone: the Inner Harbour before dawn'
+  entities_present:
+  - POET
+  action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
+  camera_relation: elevated shot, ~116 mm, camera 3.2 m up, pitch -6°
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “I call on my mother. In tears, speaking of an abyss, she''s n”'
+  patch_trigger: 'location change: by phone: the Inner Harbour before dawn'
+  source: Bosque del Apache National Wildlife Refuge 0.15+6.87s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner harbor, the break-up
+    continuing in the background. Place: by phone: the Inner Harbour before dawn. elevated shot, ~116 mm, camera 3.2 m up, pitch -6°; colour; light: daytime (13), then the haze; at night the bioluminescence
+    hour 3.5 c'
+- patch_id: P09-007
+  start_time: 01:00:47:13
+  end_time: 01:00:56:00
+  location: 'by phone: the Inner Harbour before dawn'
+  entities_present:
+  - POET
+  action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
+  camera_relation: elevated shot, ~96 mm, camera 2.8 m up, pitch 0°
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “and we explain my way of birth then and even after prayer. W”'
+  patch_trigger: 'phrase boundary: “and we explain my way of birth”'
+  source: other (still)
+  status: GENERATE
+  rehydration_seed: 'the poet, a man (he/his) — POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner harbor, the break-up
+    continuing in the background. Place: by phone: the Inner Harbour before dawn. elevated shot, ~96 mm, camera 2.8 m up, pitch 0°; colour; light: daytime (13), then the haze; at night the bioluminescence
+    hour 3.5 clo'
+- patch_id: P09-008
+  start_time: 01:00:56:00
+  end_time: 01:01:04:17
+  location: 'by phone: the Inner Harbour before dawn'
+  entities_present:
+  - POET
+  action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
+  camera_relation: medium shot
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “We grow old together with the moon looking at us the way we ”'
+  patch_trigger: 'phrase boundary: “We grow old together with”'
+  source: archive 8.07+8.73s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner harbor, the break-up
+    continuing in the background. Place: by phone: the Inner Harbour before dawn. medium shot; colour; light: daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; luminance 0.47. wide
+    walking sho'
+- patch_id: P09-009
+  start_time: 01:01:04:17
+  end_time: 01:01:12:19
+  location: 'by phone: the Inner Harbour before dawn'
+  entities_present:
+  - POET
+  action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
+  camera_relation: medium shot
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “dancing on my own, maternal ears in tune. She watches us gat”'
+  patch_trigger: 'phrase boundary: “dancing on my own,”'
+  source: other 0.15+4.91s
+  status: GENERATE
+  rehydration_seed: 'the poet, a man (he/his) — POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner harbor, the break-up
+    continuing in the background. Place: by phone: the Inner Harbour before dawn. medium shot; colour; light: daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; luminance 0.23. wide
+    walking sho'
+- patch_id: P09-010
+  start_time: 01:01:12:19
+  end_time: 01:01:19:01
+  location: 'by phone: the Inner Harbour before dawn'
+  entities_present:
+  - POET
+  action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
+  camera_relation: medium shot
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “Before I go, I call on my father. Summon his calming demeano”'
+  patch_trigger: 'phrase boundary: “Before I go, I call on my father.”'
+  source: markov 3.78+6.27s
+  status: GENERATE
+  rehydration_seed: 'the poet, a man (he/his) — POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner harbor, the break-up
+    continuing in the background. Place: by phone: the Inner Harbour before dawn. medium shot; colour; light: daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; luminance 0.10. wide
+    walking sho'
+- patch_id: P09-011
+  start_time: 01:01:19:01
+  end_time: 01:01:27:14
+  location: 'by phone: the Inner Harbour before dawn'
+  entities_present:
+  - POET
+  action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
+  camera_relation: elevated shot, ~17 mm, camera 5.0 m up, pitch 6°
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “and we walk for years and travel east toward the sunrises an”'
+  patch_trigger: 'phrase boundary: “and we walk for years and”'
+  source: markov 94.82+8.52s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner harbor, the break-up
+    continuing in the background. Place: by phone: the Inner Harbour before dawn. elevated shot, ~17 mm, camera 5.0 m up, pitch 6°; colour; light: daytime (13), then the haze; at night the bioluminescence
+    hour 3.5 clo'
+- patch_id: P09-012
+  start_time: 01:01:27:14
+  end_time: 01:01:37:04
+  location: 'by phone: the Inner Harbour before dawn'
+  entities_present:
+  - POET
+  action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
+  camera_relation: elevated shot, ~43 mm, camera 2.5 m up, pitch 4°
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “Guiding a settling down moon the way it used to leave and my”'
+  patch_trigger: 'phrase boundary: “Guiding a settling down moon”'
+  source: Gouda 5.67+9.61s
+  status: GENERATE
+  rehydration_seed: 'the poet, a man (he/his) — POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner harbor, the break-up
+    continuing in the background. Place: by phone: the Inner Harbour before dawn. elevated shot, ~43 mm, camera 2.5 m up, pitch 4°; colour; light: daytime (13), then the haze; at night the bioluminescence
+    hour 3.5 clo'
+- patch_id: P09-013
+  start_time: 01:01:37:04
+  end_time: 01:01:46:09
+  location: 'by phone: the Inner Harbour before dawn'
+  entities_present:
+  - POET
+  action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
+  camera_relation: medium shot
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “We stroll, father and son, hearted and shaken. Someone borro”'
+  patch_trigger: 'phrase boundary: “We stroll, father”'
+  source: Four in the Cosmos 0.18+5.57s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner harbor, the break-up
+    continuing in the background. Place: by phone: the Inner Harbour before dawn. medium shot; colour; light: daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; luminance 0.39. wide
+    walking sho'
+- patch_id: P09-014
+  start_time: 01:01:46:09
+  end_time: 01:01:48:20
+  location: back at the booth curb
+  entities_present:
+  - POET
+  - EX
+  action_summary: POET and EX are back on the sidewalk; the EX turns to haze and disappears, leaving the POET alone.
+  camera_relation: eye-level shot, ~20 mm, camera 1.7 m up, pitch -34°
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; her reading: “Yet broken, yet hurt.”'
+  patch_trigger: 'location change: back at the booth curb'
+  source: other (still)
+  status: still → drawing
+  rehydration_seed: 'the poet, a man (he/his); his ex — POET and EX are back on the sidewalk; the EX turns to haze and disappears, leaving the POET alone. Place: back at the booth curb. eye-level shot,
+    ~20 mm, camera 1.7 m up, pitch -34°; colour; light: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; luminance 0.24. locked-off wide two-shot; the EX dissolves
+    out, hold on the POE'
+- patch_id: P09-015
+  start_time: 01:01:48:20
+  end_time: 01:01:52:20
+  location: the same curb
+  entities_present:
+  - EX
+  action_summary: the EX dissolves; the bike was always there
+  camera_relation: medium shot
+  light_sound_state: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; her reading
+  patch_trigger: 'threshold: dissolve 09 → 10'
+  source: archive 0.65+4.00s
+  status: moving
+  rehydration_seed: 'his ex — the EX dissolves; the bike was always there Place: the same curb. medium shot; colour; light: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5
+    cloudy; luminance 0.21. the EX dissolves; the bike was always there the booth and the bike share one lamp 16:9, one continuous shot of 4.0 s, no cuts, no text, no title cards, no added figures beyond:
+    EX; continues P0'

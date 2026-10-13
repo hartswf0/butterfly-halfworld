@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cel Film Monitor</title>
+<meta name="description" content="Live progress of the WYGWYL cel film: every patch of every poem being redrawn as moving angular cels, poem by poem.">
+<style>
+:root{--bg:#0a0d18;--panel:#11152a;--line:rgba(255,255,255,.1);--ink:#eef0f7;--mute:#8b93ad;--acc:#f2a541;--ok:#7fd88f;--bad:#ff7a6a;--run:#5fe8ff;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,sans-serif}
+main{max-width:1200px;margin:0 auto;padding:20px 16px 60px}
+h1{font:500 12px ui-monospace,Menlo,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin:0 0 10px}
+.top{display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline;margin-bottom:10px}.top b{font:600 26px system-ui;color:var(--ink);display:block}.top div{color:var(--mute);font-size:12px}
+.bar{height:8px;background:var(--panel);border-radius:4px;overflow:hidden;margin:6px 0 18px}.bar i{display:block;height:100%;background:var(--acc);transition:width .6s}
+.poem{border-top:1px solid var(--line);padding:12px 0;display:grid;grid-template-columns:260px 1fr;gap:14px}
+.poem h2{font-size:15px;font-weight:500;margin:0}.st{font:11px ui-monospace,Menlo,monospace;color:var(--mute)}.st.done{color:var(--ok)}.st.drawing,.st.rendering{color:var(--run)}
+.chips{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px}.chips i{width:14px;height:14px;border-radius:3px;background:#262b45;display:inline-block}
+.chips i.drawn{background:var(--ok)}.chips i.drawing{background:var(--run);animation:p 1s infinite alternate}.chips i.failed{background:var(--bad)}.chips i.tomake{background:transparent;border:1px dashed var(--acc)}
+@keyframes p{to{opacity:.35}}
+video{width:100%;max-width:640px;border-radius:6px;background:#000;display:block}a{color:var(--run)}
+.strip{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}.strip figure{margin:0;flex:0 0 160px}.strip img{width:160px;aspect-ratio:16/9;object-fit:cover;border-radius:4px;display:block;background:#000}
+.strip figcaption{font:10px ui-monospace,Menlo,monospace;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#latest{margin:6px 0 16px}
+@media (max-width:760px){.poem{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<h1>Where you go when you leave · the film in cels · live</h1>
+<div class="top" id="top"></div><div class="bar"><i id="bar" style="width:0"></i></div>
+<div class="st">newest cels</div><div class="strip" id="latest"></div>
+<div id="poems"></div>
+</main>
+<script>
+const $ = id => document.getElementById(id), esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const dur = s => s == null ? '–' : s > 3600 ? (s / 3600).toFixed(1) + ' h' : s > 60 ? Math.round(s / 60) + ' min' : Math.round(s) + ' s';
+let shown = {};
+async function tick() {
+  let P; try { P = await (await fetch('progress.json?' + Date.now())).json(); } catch (e) { $('top').textContent = 'waiting for the job to start…'; return; }
+  const all = Object.values(P.poems).flatMap(p => p.patches), drawn = all.filter(x => x.state === 'drawn').length, todo = all.filter(x => x.state !== 'to make').length;
+  const films = Object.values(P.poems).filter(p => p.film).length;
+  $('top').innerHTML = [[`${drawn} / ${todo}`, 'patches drawn'], [`${films} / 14`, 'poems finished'], [dur(P.eta), 'left at the current rate'], [P.rate ? P.rate.toFixed(0) + '×' : '–', 'work per second of film'],
+    [all.filter(x => x.state === 'failed').length, 'failed'], [new Date(P.updated * 1000).toLocaleTimeString(), 'last update']].map(([b, l]) => `<div><b>${b}</b>${l}</div>`).join('');
+  $('bar').style.width = (100 * drawn / Math.max(1, todo)).toFixed(1) + '%';
+  const done = all.filter(x => x.thumb && x.state === 'drawn').sort((a, b) => (b.secs ? 1 : 0) - (a.secs ? 1 : 0));
+  const recent = Object.values(P.poems).flatMap(p => p.patches.filter(x => x.thumb)).slice(-14).reverse();
+  $('latest').innerHTML = recent.map(x => `<figure><img src="${x.thumb}?${P.updated | 0}" alt="${esc(x.id)}" loading="lazy"><figcaption>${esc(x.id)} · ${esc(x.name)}</figcaption></figure>`).join('');
+  for (const [n, p] of Object.entries(P.poems).sort((a, b) => a[0].localeCompare(b[0]))) {                      // a poem redraws only when it changes, and never while its film plays
+    let el = document.getElementById('p' + n); if (!el) { el = document.createElement('div'); el.id = 'p' + n; $('poems').appendChild(el); }
+    const sig = p.state + p.patches.map(x => x.state[0]).join('') + (p.film || '') + (p.pushed || ''), v = el.querySelector('video');
+    if (shown[n] === sig || (v && !v.paused)) continue; shown[n] = sig; el.innerHTML = poemHTML(n, p);
+  }
+}
+function poemHTML(n, p) {
+  return [[n, p]].map(([n, p]) => {
+    const d = p.patches.filter(x => x.state === 'drawn').length, t = p.patches.filter(x => x.state !== 'to make').length;
+    return `<div class="poem"><div><h2>${n} · ${esc(p.title)}</h2><div class="st ${p.state}">${p.state} · ${d}/${t} cels${p.patches.some(x => x.state === 'to make') ? ' · ' + p.patches.filter(x => x.state === 'to make').length + ' to make' : ''}</div>
+      <div class="chips">${p.patches.map(x => `<i class="${x.state === 'to make' ? 'tomake' : x.state}" title="${esc(x.id)} ${esc(x.name)} · ${x.len}s · ${x.state}${x.secs ? ' · ' + x.secs + 's' : ''}"></i>`).join('')}</div>
+      ${p.pushed ? `<div class="st" style="margin-top:6px">${p.pushed.startsWith('http') ? `<a href="${esc(p.pushed)}">pushed to GitHub</a>` : esc(p.pushed)}</div>` : ''}</div>
+      <div>${p.film ? `<video controls preload="none" src="${p.film}?${n}${p.state}"></video>` : `<div class="strip">${p.patches.filter(x => x.thumb).map(x => `<figure><img src="${x.thumb}" alt="" loading="lazy"><figcaption>${esc(x.id)}</figcaption></figure>`).join('')}</div>`}</div></div>`;
+  }).join('');
+}
+tick(); setInterval(tick, 5000);
+</script>
+</body></html>

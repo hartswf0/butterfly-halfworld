@@ -1,0 +1,2502 @@
+{
+ "01": [
+  {
+   "patch": "P01-001",
+   "time": "0.0-7.8",
+   "scene": "01.0",
+   "name": "The reading",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "d2d2a17a-3857-5b04-9d46-ebe2869a39d8.mp4",
+   "window": [
+    0.15,
+    7.83
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P01-002",
+   "time": "7.8-13.2",
+   "scene": "01.1",
+   "name": "Haze at the window",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "20250719_071953_5b9ec655_720p_13s_silent_poet_is_currently_in_a_state_of_you_fall.mp4",
+   "window": [
+    0.15,
+    5.38
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P01-003",
+   "time": "13.2-20.2",
+   "scene": "01.2",
+   "name": "Off the fire escape",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY006_CS__Causal_Motion_Trigger__EX_tumbles_from_t_3ca7d9a6-4a21-4627-9980-3cc1118fd971_2.mp4",
+   "window": [
+    0.15,
+    4.91
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P01-004",
+   "time": "20.2-29.3",
+   "scene": "01.3",
+   "name": "The fall montage",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "WYGWYL_S04_THE_UNDERGROUND.mp4",
+   "window": [
+    183.9,
+    9.09
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P01-005",
+   "time": "29.3-39.5",
+   "scene": "01.3",
+   "name": "The fall montage",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "20250719_102735_6a9fa071_720p_33s_silent_interpolated_sequence.mp4",
+   "window": [
+    8.55,
+    10.19
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P01-006",
+   "time": "39.5-47.5",
+   "scene": "01.3",
+   "name": "The fall montage",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "WYGWYL_E_THE_DOOR_mareamemory_06_SILENT.mp4",
+   "window": [
+    2.9,
+    8.0
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P01-007",
+   "time": "47.5-57.1",
+   "scene": "01.4",
+   "name": "Crashing the vintage party",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "fe240298-c077-53a8-a45b-ac2dc12417ca.mp4",
+   "window": [
+    12.23,
+    9.64
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P01-008",
+   "time": "57.1-63.6",
+   "scene": "01.4",
+   "name": "Crashing the vintage party",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "12-reunion-lead.mp4",
+   "window": [
+    0.15,
+    6.44
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P01-009",
+   "time": "63.6-69.6",
+   "scene": "01.4",
+   "name": "Crashing the vintage party",
+   "family": "archive",
+   "title": "Control Your Emotions",
+   "year": 1950,
+   "file": "512cd1d8-7550-5b7e-b318-2f4039407725.mp4",
+   "window": [
+    10.57,
+    6.05
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P01-010",
+   "time": "69.6-79.7",
+   "scene": "01.4",
+   "name": "Crashing the vintage party",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY025_CS__Causal_Motion_Trigger__The_young_POET_th_1d37a20e-291b-499c-8672-34d6dc6a7f25_3.mp4",
+   "window": [
+    0.15,
+    4.91
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P01-011",
+   "time": "79.7-88.4",
+   "scene": "01.5",
+   "name": "Hole in the floor",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY031_CS__Causal_Motion_Trigger__The_tambourine_fi_58bd6598-302f-4927-863d-b42e6ece84b3_1.mp4",
+   "window": [
+    0.15,
+    4.91
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P01-012",
+   "time": "88.4-92.4",
+   "scene": "T01-02",
+   "name": "fall into 02",
+   "family": "halfworld",
+   "title": null,
+   "year": null,
+   "file": "KILL_CALL_MY_BODY_BACK.mp4",
+   "window": [
+    123.55,
+    4.0
+   ],
+   "status": "cel"
+  }
+ ],
+ "02": [
+  {
+   "patch": "P02-001",
+   "time": "0.0-9.4",
+   "scene": "02.0",
+   "name": "Falling with headlights off",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "8f2b07fc-a832-53fb-87ba-5d87094ef228.mp4",
+   "window": [
+    4.52,
+    9.36
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P02-002",
+   "time": "9.4-20.7",
+   "scene": "02.0",
+   "name": "Falling with headlights off",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "20250719_073830_8aff03e4_720p_13s_silent_here_in_inky_abyss_a_new_chapter_begins.mp4",
+   "window": [
+    0.82,
+    11.32
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P02-003",
+   "time": "20.7-27.9",
+   "scene": "02.1",
+   "name": "Eyes dilate",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "19112ce1-e20f-5e62-b210-7bf651cbe79d.mp4",
+   "window": [
+    3.54,
+    7.24
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P02-004",
+   "time": "27.9-34.3",
+   "scene": "02.1",
+   "name": "Eyes dilate",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "12c2bfef-621e-5b54-9077-e065a0a240e3.mp4",
+   "window": [
+    0.15,
+    6.37
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P02-005",
+   "time": "34.3-41.1",
+   "scene": "02.2",
+   "name": "Car pulls up",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY023_RI__Memory_Storage_Retrieval__The_ghost_chil_1a7285a0-569f-4ede-aca6-caa36bc81699_2.mp4",
+   "window": [
+    0.15,
+    4.91
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P02-006",
+   "time": "41.1-47.9",
+   "scene": "02.2",
+   "name": "Car pulls up",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "CHURN_11_CATHEDRAL_OF_GLASS.mp4",
+   "window": [
+    12.03,
+    6.81
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P02-007",
+   "time": "47.9-60.1",
+   "scene": "02.3",
+   "name": "The ghost child",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY024_CS__Causal_Motion_Trigger__The_ghost_child_r_b3c99e19-b3c2-484b-bc8b-dbf3d36f4f6c_1.mp4",
+   "window": [
+    0.15,
+    4.91
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P02-008",
+   "time": "60.1-67.5",
+   "scene": "02.4",
+   "name": "Parents arguing in the car",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY021_RI__Memory_Storage_Retrieval__A_young_POET_w_e026f598-fb3b-4e64-811a-a1da556d9afe_2.mp4",
+   "window": [
+    0.15,
+    4.91
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P02-009",
+   "time": "67.5-74.9",
+   "scene": "02.4",
+   "name": "Parents arguing in the car",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "3f9d9185-c6f4-5e45-a835-0c51bcbc31c1.mp4",
+   "window": [
+    24.94,
+    7.38
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P02-010",
+   "time": "74.9-81.6",
+   "scene": "02.5",
+   "name": "Tambourine through the window",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "09-yet-heard-lead.mp4",
+   "window": [
+    9.21,
+    6.69
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P02-011",
+   "time": "81.6-85.6",
+   "scene": "T02-03",
+   "name": "fly into 03",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "8bf13139-19d6-587d-be6e-b5205d01ca87.mp4",
+   "window": [
+    19.52,
+    4.0
+   ],
+   "status": "cel"
+  }
+ ],
+ "03": [
+  {
+   "patch": "P03-001",
+   "time": "0.0-7.6",
+   "scene": "03.0",
+   "name": "Tambourine through the chapel window",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY029_CS__Causal_Motion_Trigger__A_violent_storm_a_e23a4c7d-fe2e-4651-8f21-884d30a73dd2_3.mp4",
+   "window": [
+    0.15,
+    4.91
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P03-002",
+   "time": "7.6-13.7",
+   "scene": "03.1",
+   "name": "The empty temple",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "acb645a4-2e2e-5808-a9ba-00544bfca055.mp4",
+   "window": [
+    13.28,
+    6.15
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P03-003",
+   "time": "13.7-21.5",
+   "scene": "03.1",
+   "name": "The empty temple",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "10c897d3-37a0-5876-a431-c92e54d53e27.mp4",
+   "window": [
+    0.15,
+    7.79
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P03-004",
+   "time": "21.5-28.5",
+   "scene": "03.2",
+   "name": "Gifts at the side doors",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY028_DS__Mood_Environment_Stabilizer__A_time-laps_f9a7cb67-e7b2-4997-8cd7-42d9847194f2_3.mp4",
+   "window": [
+    0.15,
+    4.91
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P03-005",
+   "time": "28.5-35.7",
+   "scene": "03.3",
+   "name": "The storm",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "WYGWYL_14POEM_DIRECTORS_CUT.mp4",
+   "window": [
+    157.16,
+    7.21
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P03-006",
+   "time": "35.7-48.2",
+   "scene": "03.4",
+   "name": "Remnants on the shore",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY030_DS__Mood_Environment_Stabilizer__The_storm_c_cd66401a-ca56-4ddb-af8a-584dd1f24bac_2.mp4",
+   "window": [
+    0.15,
+    4.91
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P03-007",
+   "time": "48.2-58.0",
+   "scene": "03.4",
+   "name": "Remnants on the shore",
+   "family": "archive",
+   "title": "Heritage of Splendor",
+   "year": 1963,
+   "file": "43961de1-02ab-5027-bb98-f40df90d188d.mp4",
+   "window": [
+    0.98,
+    5.24
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P03-008",
+   "time": "58.0-62.5",
+   "scene": "03.5",
+   "name": "Tambourine shatters",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY027_CS__Causal_Motion_Trigger__The_tambourine_mi_40ccfbeb-f74d-43e1-b82e-4fe88273021b_1.mp4",
+   "window": [
+    0.15,
+    4.5
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P03-009",
+   "time": "62.5-66.5",
+   "scene": "T03-04",
+   "name": "cut into 04",
+   "family": "archive",
+   "title": "Moonwalk One, ca. 1970",
+   "year": 1970,
+   "file": "1d5f1026-d28d-533a-b621-2023523dac38.mp4",
+   "window": [
+    24.11,
+    4.0
+   ],
+   "status": "cel"
+  }
+ ],
+ "04": [
+  {
+   "patch": "P04-001",
+   "time": "0.0-8.1",
+   "scene": "04.0",
+   "name": "Shore of broken pieces",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "04-nevermore-lead.mp4",
+   "window": [
+    12.15,
+    8.09
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P04-002",
+   "time": "8.1-14.6",
+   "scene": "04.0",
+   "name": "Shore of broken pieces",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "CHURN_18_SALTWATER_STATIC__THE_LAST_SHANTY.mp4",
+   "window": [
+    22.86,
+    6.54
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P04-003",
+   "time": "14.6-21.1",
+   "scene": "04.1",
+   "name": "The silence",
+   "family": "archive",
+   "title": "Watershed wildfire",
+   "year": 1958,
+   "file": "608f2683-528e-5c6a-951c-fe0a5c5a9a0f.mp4",
+   "window": [
+    15.1,
+    6.52
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P04-004",
+   "time": "21.1-24.2",
+   "scene": "04.2",
+   "name": "The heart on the sand",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY035_CS__Causal_Motion_Trigger__A_luminous_heart__0e602c22-8441-49bc-a0d9-9745dd3f76d5_1.mp4",
+   "window": [
+    0.15,
+    3.1
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P04-005",
+   "time": "24.2-33.5",
+   "scene": "04.3",
+   "name": "Trail up the incline",
+   "family": "archive",
+   "title": "Fantastic Yellowstone",
+   "year": 1997,
+   "file": "f095006e-ffb9-5967-9585-e502fd3b7b7f.mp4",
+   "window": [
+    17.86,
+    9.28
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P04-006",
+   "time": "33.5-44.7",
+   "scene": "04.3",
+   "name": "Trail up the incline",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY036_CS__Causal_Motion_Trigger__POET_follows_a_di_c690a297-a6b5-4a54-be55-3076f7d849ec_2.mp4",
+   "window": [
+    0.15,
+    4.91
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P04-007",
+   "time": "44.7-54.2",
+   "scene": "04.3",
+   "name": "Trail up the incline",
+   "family": "archive",
+   "title": "Moonwalk One, ca. 1970",
+   "year": 1970,
+   "file": "5d62ea84-a8ab-5812-b432-2bbf90222573.mp4",
+   "window": [
+    0.15,
+    7.32
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P04-008",
+   "time": "54.2-62.1",
+   "scene": "04.4",
+   "name": "Night garden field",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "20251020_032021_badaf97b_720p_5s_audio_sound_dream_surreal_drone_water.mp4",
+   "window": [
+    0.15,
+    4.74
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P04-009",
+   "time": "62.1-73.1",
+   "scene": "04.4",
+   "name": "Night garden field",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY039_CS__Causal_Motion_Trigger__POET_finds_and_re_fd7be4c9-4c67-4aae-83e6-3470b6b1b76c_0.mp4",
+   "window": [
+    0.15,
+    4.91
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P04-010",
+   "time": "73.1-82.7",
+   "scene": "04.5",
+   "name": "Searching for hands",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "0034.mp4",
+   "window": [
+    0.15,
+    9.64
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P04-011",
+   "time": "82.7-92.6",
+   "scene": "04.5",
+   "name": "Searching for hands",
+   "family": "archive",
+   "title": "Eagle Has Landed: The Flight of Apollo 11",
+   "year": 1969,
+   "file": "6bb6d333-facb-5c4e-b540-0c150f87833b.mp4",
+   "window": [
+    0.15,
+    9.85
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P04-012",
+   "time": "92.6-102.0",
+   "scene": "04.5",
+   "name": "Searching for hands",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "8cfad037-81b3-52c9-8b2e-c08684323247.mp4",
+   "window": [
+    0.15,
+    9.43
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P04-013",
+   "time": "102.0-113.7",
+   "scene": "04.6",
+   "name": "Standing in the field",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY039_CS__Causal_Motion_Trigger__POET_finds_and_re_39260151-2b06-4dca-9a37-359380edbb97_1.mp4",
+   "window": [
+    0.15,
+    4.91
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P04-014",
+   "time": "113.7-121.8",
+   "scene": "04.6",
+   "name": "Standing in the field",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "11-new-day-lead.mp4",
+   "window": [
+    12.15,
+    8.16
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P04-015",
+   "time": "121.8-130.9",
+   "scene": "04.6",
+   "name": "Standing in the field",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "63092ea7-641d-5054-b856-5ffa901f91a5.mp4",
+   "window": [
+    11.52,
+    9.11
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P04-016",
+   "time": "130.9-134.9",
+   "scene": "T04-05",
+   "name": "walk into 05",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "3f9d9185-c6f4-5e45-a835-0c51bcbc31c1.mp4",
+   "window": [
+    13.9,
+    4.0
+   ],
+   "status": "cel"
+  }
+ ],
+ "05": [
+  {
+   "patch": "P05-001",
+   "time": "0.0-4.7",
+   "scene": "05.0",
+   "name": "The field goes still",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "WYGWYL_S04_THE_UNDERGROUND.mp4",
+   "window": [
+    116.53,
+    4.66
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P05-002",
+   "time": "4.7-13.9",
+   "scene": "05.1",
+   "name": "Naming stars",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "097_P046.mp4",
+   "window": [
+    0.15,
+    9.2
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P05-003",
+   "time": "13.9-23.2",
+   "scene": "05.2",
+   "name": "Southern-pine basement (memory)",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "8cfad037-81b3-52c9-8b2e-c08684323247.mp4",
+   "window": [
+    8.7,
+    9.34
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P05-004",
+   "time": "23.2-29.8",
+   "scene": "05.2",
+   "name": "Southern-pine basement (memory)",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "5b550c27-5073-53ff-a673-9265a61d6a8b.mp4",
+   "window": [
+    10.19,
+    6.57
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P05-005",
+   "time": "29.8-39.0",
+   "scene": "05.3",
+   "name": "Universes and blessings",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "boy_video.mp4",
+   "window": [
+    209.59,
+    9.2
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P05-006",
+   "time": "39.0-49.4",
+   "scene": "05.3",
+   "name": "Universes and blessings",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY040_DS__Narrative_Modifier__In_the_still_night_P_4af46903-cf86-4cfa-97d4-8806868f235c_1.mp4",
+   "window": [
+    0.15,
+    4.91
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P05-007",
+   "time": "49.4-57.4",
+   "scene": "05.3",
+   "name": "Universes and blessings",
+   "family": "film",
+   "title": null,
+   "year": null,
+   "file": "WhereYouGoWhenYouLeave_RESTORED_VOICE.mp4",
+   "window": [
+    39.25,
+    7.99
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P05-008",
+   "time": "57.4-66.2",
+   "scene": "05.4",
+   "name": "Blood through the hands",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "9d71ee79-dc2f-5d62-a958-e17715c14330.mp4",
+   "window": [
+    0.15,
+    7.42
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P05-009",
+   "time": "66.2-74.1",
+   "scene": "05.5",
+   "name": "Baritone and warning",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "131834cc-9116-5c50-8e57-d91a7dc0c537.mp4",
+   "window": [
+    23.04,
+    7.88
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P05-010",
+   "time": "74.1-78.1",
+   "scene": "T05-06",
+   "name": "walk into 06",
+   "family": "archive",
+   "title": "Moonwalk One, ca. 1970",
+   "year": 1970,
+   "file": "1b138e1b-c698-5964-b538-2c3dae65b569.mp4",
+   "window": [
+    21.31,
+    4.0
+   ],
+   "status": "cel"
+  }
+ ],
+ "06": [
+  {
+   "patch": "P06-001",
+   "time": "0.0-8.2",
+   "scene": "06.0",
+   "name": "The Light Gates open",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "05-bloodlines-lead.mp4",
+   "window": [
+    8.15,
+    7.75
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P06-002",
+   "time": "8.2-16.4",
+   "scene": "06.0",
+   "name": "The Light Gates open",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "03-how-to-break-off-an-engagement-lead.mp4",
+   "window": [
+    8.15,
+    8.22
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P06-003",
+   "time": "16.4-27.6",
+   "scene": "06.1",
+   "name": "Road down, following comets",
+   "family": "film",
+   "title": null,
+   "year": null,
+   "file": "WhereYouGoWhenYouLeave_Version_5.mp4",
+   "window": [
+    97.91,
+    9.83
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P06-004",
+   "time": "27.6-32.7",
+   "scene": "06.2",
+   "name": "The city rises / here we are all one",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "ACCUMULATION.mp4",
+   "window": [
+    161.5,
+    5.19
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P06-005",
+   "time": "32.7-44.4",
+   "scene": "06.3",
+   "name": "Jungle Interface and the heart-scan admission",
+   "family": "film",
+   "title": null,
+   "year": null,
+   "file": "WhereYouGoWhenYouLeave_MORE_DELAY.mp4",
+   "window": [
+    32.36,
+    11.69
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P06-006",
+   "time": "44.4-52.0",
+   "scene": "06.4",
+   "name": "City Center: all safe",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "b1ec80f0-d8e5-5c39-931a-34facfd664ee.mp4",
+   "window": [
+    9.29,
+    7.62
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P06-007",
+   "time": "52.0-63.7",
+   "scene": "06.4",
+   "name": "City Center: all safe",
+   "family": "mj",
+   "title": null,
+   "year": null,
+   "file": "014.webp",
+   "window": null,
+   "status": "generate"
+  },
+  {
+   "patch": "P06-008",
+   "time": "63.7-75.7",
+   "scene": "06.5",
+   "name": "Narrow streets by candlelight",
+   "family": "film",
+   "title": null,
+   "year": null,
+   "file": "6028c77a894376be-4.jpg",
+   "window": null,
+   "status": "cel"
+  },
+  {
+   "patch": "P06-009",
+   "time": "75.7-82.9",
+   "scene": "06.5",
+   "name": "Narrow streets by candlelight",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "WYGWYL_S05_THE_ROOM.mp4",
+   "window": [
+    126.26,
+    7.26
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P06-010",
+   "time": "82.9-91.5",
+   "scene": "06.6",
+   "name": "Could stay forever, then wandering to the house",
+   "family": "film",
+   "title": null,
+   "year": null,
+   "file": "9f9badfe9c6b323b-2.jpg",
+   "window": null,
+   "status": "cel"
+  },
+  {
+   "patch": "P06-011",
+   "time": "91.5-100.5",
+   "scene": "06.6",
+   "name": "Could stay forever, then wandering to the house",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "CHURN_02_NON_ABIDING_FLOW__1.mp4",
+   "window": [
+    29.93,
+    8.93
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P06-012",
+   "time": "100.5-104.5",
+   "scene": "T06-07",
+   "name": "walk into 07",
+   "family": "halfworld",
+   "title": null,
+   "year": null,
+   "file": "SET_02_CUT_02_QUIET_COMES_THROUGH_THE_BODY.mp4",
+   "window": [
+    63.72,
+    4.0
+   ],
+   "status": "cel"
+  }
+ ],
+ "07": [
+  {
+   "patch": "P07-001",
+   "time": "0.0-3.0",
+   "scene": "07.0",
+   "name": "DJ drops in",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "P066_contrary_WORLD_SUBJECT.mp4",
+   "window": [
+    0.19,
+    3.0
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P07-002",
+   "time": "3.0-11.9",
+   "scene": "07.1",
+   "name": "Eyes wide shut at the mic",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "8bd7cc91-5bda-57cf-96b9-c1af39e8ef7a.mp4",
+   "window": [
+    14.18,
+    8.89
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P07-003",
+   "time": "11.9-19.4",
+   "scene": "07.2",
+   "name": "Ghosts in the speaker mesh",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "6b0de8eb-ef15-52db-bed8-aba78bf9d883.mp4",
+   "window": [
+    28.32,
+    7.56
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P07-004",
+   "time": "19.4-27.0",
+   "scene": "07.2",
+   "name": "Ghosts in the speaker mesh",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "223ce855-b8c6-5152-b147-4f8907dc161f.mp4",
+   "window": [
+    8.08,
+    7.55
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P07-005",
+   "time": "27.0-34.6",
+   "scene": "07.3",
+   "name": "A thousand light years, into the red",
+   "family": "archive",
+   "title": "Belmont High School Graduation 06/04/1995",
+   "year": 1995,
+   "file": "427df750-e95b-5c37-8d71-3c1474700a62.mp4",
+   "window": [
+    23.17,
+    7.56
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P07-006",
+   "time": "34.6-42.1",
+   "scene": "07.3",
+   "name": "A thousand light years, into the red",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "da69b1ba-1eb8-5072-8cf7-19fc272eba0f.mp4",
+   "window": [
+    0.15,
+    7.56
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P07-007",
+   "time": "42.1-50.7",
+   "scene": "07.4",
+   "name": "Wedding bands and the boxed home",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "b89776e6-454a-5cf4-8e9e-20df4be7434c.mp4",
+   "window": [
+    11.91,
+    8.55
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P07-008",
+   "time": "50.7-59.2",
+   "scene": "07.4",
+   "name": "Wedding bands and the boxed home",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "0005.mp4",
+   "window": [
+    2.06,
+    8.55
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P07-009",
+   "time": "59.2-70.5",
+   "scene": "07.5",
+   "name": "Eleven years in daisy petals",
+   "family": "archive",
+   "title": "Sound And The Story",
+   "year": 1956,
+   "file": "8f72662b-935a-528c-80a0-52830e8424b3.mp4",
+   "window": [
+    3.86,
+    11.27
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P07-010",
+   "time": "70.5-79.9",
+   "scene": "07.6",
+   "name": "Rain, fog, dim lights, then chin high",
+   "family": "film",
+   "title": null,
+   "year": null,
+   "file": "WhereYouGoWhenYouLeave_Final_WithTitles.mp4",
+   "window": [
+    50.93,
+    9.43
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P07-011",
+   "time": "79.9-88.5",
+   "scene": "07.6",
+   "name": "Rain, fog, dim lights, then chin high",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "WYGWYL_S03_THE_FOG.mp4",
+   "window": [
+    13.14,
+    8.61
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P07-012",
+   "time": "88.5-98.8",
+   "scene": "07.6",
+   "name": "Rain, fog, dim lights, then chin high",
+   "family": "archive",
+   "title": "Modesta",
+   "year": null,
+   "file": "ef364c61-586e-5a2d-8f40-114e6395d421.mp4",
+   "window": [
+    23.66,
+    10.23
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P07-013",
+   "time": "98.8-102.8",
+   "scene": "T07-08",
+   "name": "lift into 08",
+   "family": "archive",
+   "title": "Moonwalk One, ca. 1970",
+   "year": 1970,
+   "file": "a75d29ae-14bc-566b-b44d-c44fa51cb74e.mp4",
+   "window": [
+    6.36,
+    4.0
+   ],
+   "status": "cel"
+  }
+ ],
+ "08": [
+  {
+   "patch": "P08-001",
+   "time": "0.0-6.1",
+   "scene": "08.0",
+   "name": "The soul leaves the dancer",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "0087.mp4",
+   "window": [
+    0.15,
+    6.12
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P08-002",
+   "time": "6.1-16.5",
+   "scene": "08.0",
+   "name": "The soul leaves the dancer",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "75721915-a67b-5934-9d4c-961908399960.mp4",
+   "window": [
+    17.83,
+    10.35
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P08-003",
+   "time": "16.5-24.7",
+   "scene": "08.0",
+   "name": "The soul leaves the dancer",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "9cb98c3d-63ac-5319-a5f3-13ac453f24f4.mp4",
+   "window": [
+    24.47,
+    8.24
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P08-004",
+   "time": "24.7-34.5",
+   "scene": "08.1",
+   "name": "Strangers collide; the last one to leave",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "482ef3c2-7967-504a-a664-8e6fbeaebe21.mp4",
+   "window": [
+    10.13,
+    7.29
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P08-005",
+   "time": "34.5-41.3",
+   "scene": "08.1",
+   "name": "Strangers collide; the last one to leave",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "8cfad037-81b3-52c9-8b2e-c08684323247.mp4",
+   "window": [
+    45.62,
+    6.81
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P08-006",
+   "time": "41.3-49.4",
+   "scene": "08.2",
+   "name": "Soul over Atlantis / the open field at the equator",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "CHURN_08_DIAL_TONE_ECHOES.mp4",
+   "window": [
+    96.38,
+    8.1
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P08-007",
+   "time": "49.4-59.5",
+   "scene": "08.3",
+   "name": "Angels' ice-water baptism",
+   "family": "archive",
+   "title": "NASA Searches for Life from the Moon in Recently Rediscovered Historic Footage",
+   "year": 1969,
+   "file": "b4571edd-2f72-5e2e-b095-cd95c8d29583.mp4",
+   "window": [
+    3.95,
+    10.04
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P08-008",
+   "time": "59.5-69.5",
+   "scene": "08.3",
+   "name": "Angels' ice-water baptism",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "9c11c901-90c5-5aca-abdb-45bab8e67e74.mp4",
+   "window": [
+    13.03,
+    10.05
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P08-009",
+   "time": "69.5-81.4",
+   "scene": "08.4",
+   "name": "Haze and the soul's return",
+   "family": "film",
+   "title": null,
+   "year": null,
+   "file": "WhereYouGoWhenYouLeave_Final_WithTitles.mp4",
+   "window": [
+    20.27,
+    11.88
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P08-010",
+   "time": "81.4-91.5",
+   "scene": "08.5",
+   "name": "Mountains from the rooftop",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "80b5da26-cee5-5312-b280-9891a435b36a.mp4",
+   "window": [
+    0.15,
+    10.12
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P08-011",
+   "time": "91.5-95.5",
+   "scene": "T08-09",
+   "name": "walk into 09",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "48dea439-49b0-5cc0-b34a-67e02a833937.mp4",
+   "window": [
+    10.76,
+    4.0
+   ],
+   "status": "cel"
+  }
+ ],
+ "09": [
+  {
+   "patch": "P09-001",
+   "time": "0.0-12.6",
+   "scene": "09.0",
+   "name": "The EX in the crowd",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "20250719_102441_46782136_720p_31s_silent_interpolated_sequence.mp4",
+   "window": [
+    16.96,
+    12.63
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P09-002",
+   "time": "12.6-24.7",
+   "scene": "09.1",
+   "name": "Walking toward the moon",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "47e48483-d729-5560-9f3f-563f172c12ca.mp4",
+   "window": [
+    7.52,
+    12.1
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P09-003",
+   "time": "24.7-35.1",
+   "scene": "09.1",
+   "name": "Walking toward the moon",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "db650a47-b19a-53ff-a12f-c394742879da.mp4",
+   "window": [
+    0.15,
+    7.72
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P09-004",
+   "time": "35.1-38.7",
+   "scene": "09.2",
+   "name": "Suitcases at the phone booth",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "1d5f1026-d28d-533a-b621-2023523dac38.mp4",
+   "window": [
+    37.37,
+    3.64
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P09-005",
+   "time": "38.7-38.7",
+   "scene": "09.3",
+   "name": "The call to Mother",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "b3498275841eddb5-0.jpg",
+   "window": null,
+   "status": "cel"
+  },
+  {
+   "patch": "P09-006",
+   "time": "38.7-47.5",
+   "scene": "09.4",
+   "name": "Father and son to the inner harbor",
+   "family": "archive",
+   "title": "Bosque del Apache National Wildlife Refuge",
+   "year": 2005,
+   "file": "584a8272-e567-5238-8411-aa6286aeec90.mp4",
+   "window": [
+    0.15,
+    6.87
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P09-007",
+   "time": "47.5-56.0",
+   "scene": "09.4",
+   "name": "Father and son to the inner harbor",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "0b4d831cefce13c9-0.jpg",
+   "window": null,
+   "status": "generate"
+  },
+  {
+   "patch": "P09-008",
+   "time": "56.0-64.7",
+   "scene": "09.4",
+   "name": "Father and son to the inner harbor",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "25b8bdc1-827e-5fe6-89ed-0910afdf92ce.mp4",
+   "window": [
+    8.07,
+    8.73
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P09-009",
+   "time": "64.7-72.8",
+   "scene": "09.4",
+   "name": "Father and son to the inner harbor",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY032_DS__Mood_Environment_Stabilizer__POET_now_in_94f1c33e-4c75-40da-97da-bbdd26800bea_2.mp4",
+   "window": [
+    0.15,
+    4.91
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P09-010",
+   "time": "72.8-79.0",
+   "scene": "09.4",
+   "name": "Father and son to the inner harbor",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "20251020_071057_c2a64680_720p_14s_audio_interpolated_sequence.mp4",
+   "window": [
+    3.78,
+    6.27
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P09-011",
+   "time": "79.0-87.6",
+   "scene": "09.4",
+   "name": "Father and son to the inner harbor",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "WYGWYL_J3_TRIUMPH_A_LITTLE_DARK_SILENT.mp4",
+   "window": [
+    94.82,
+    8.52
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P09-012",
+   "time": "87.6-97.2",
+   "scene": "09.4",
+   "name": "Father and son to the inner harbor",
+   "family": "archive",
+   "title": "Gouda",
+   "year": 1923,
+   "file": "b1ec80f0-d8e5-5c39-931a-34facfd664ee.mp4",
+   "window": [
+    5.67,
+    9.61
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P09-013",
+   "time": "97.2-106.4",
+   "scene": "09.4",
+   "name": "Father and son to the inner harbor",
+   "family": "archive",
+   "title": "Four in the Cosmos",
+   "year": 1969,
+   "file": "27ef5094-3012-5442-9bd4-9f7a0eaff22e.mp4",
+   "window": [
+    0.18,
+    5.57
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P09-014",
+   "time": "106.4-108.8",
+   "scene": "09.5",
+   "name": "The EX turns to haze",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "dd50826d09d10fe2-1.jpg",
+   "window": null,
+   "status": "cel"
+  },
+  {
+   "patch": "P09-015",
+   "time": "108.8-112.8",
+   "scene": "T09-10",
+   "name": "dissolve into 10",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "c1e30693-35b6-5d39-9540-a8e1b574c71a.mp4",
+   "window": [
+    0.65,
+    4.0
+   ],
+   "status": "cel"
+  }
+ ],
+ "10": [
+  {
+   "patch": "P10-001",
+   "time": "0.0-13.0",
+   "scene": "10.0",
+   "name": "The bike under the street lamp",
+   "family": "halfworld",
+   "title": null,
+   "year": null,
+   "file": "KILL_WRONG_SIDE_OF_THE_BAR.mp4",
+   "window": [
+    193.89,
+    12.99
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P10-002",
+   "time": "13.0-20.9",
+   "scene": "10.1",
+   "name": "Mounting the machine",
+   "family": "archive",
+   "title": "Muller en co n.v. Rotterdam",
+   "year": 1928,
+   "file": "9e4c6e92-65c7-58dd-869b-f66e9178a5f1.mp4",
+   "window": [
+    1.22,
+    7.87
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P10-003",
+   "time": "20.9-27.8",
+   "scene": "10.2",
+   "name": "Loneliness through midnight intersections",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "20251020_064916_464b4dcc_720p_23s_audio_interpolated_sequence.mp4",
+   "window": [
+    7.82,
+    6.93
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P10-004",
+   "time": "27.8-37.9",
+   "scene": "10.2",
+   "name": "Loneliness through midnight intersections",
+   "family": "archive",
+   "title": "Opening tramlijn naar Wassenaar",
+   "year": 1923,
+   "file": "e6a44602-9b01-5030-8818-bf84c347a851.mp4",
+   "window": [
+    9.68,
+    10.11
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P10-005",
+   "time": "37.9-46.2",
+   "scene": "10.3",
+   "name": "Swagger down the avenue",
+   "family": "archive",
+   "title": "'Till It Helps!",
+   "year": 1959,
+   "file": "89edb74e-a728-5ca5-8bcf-f53a711f0694.mp4",
+   "window": [
+    17.19,
+    8.26
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P10-006",
+   "time": "46.2-53.3",
+   "scene": "10.3",
+   "name": "Swagger down the avenue",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "WYGWYL_S06_THE_STILL_WORLD.mp4",
+   "window": [
+    19.23,
+    5.75
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P10-007",
+   "time": "53.3-54.5",
+   "scene": "10.4",
+   "name": "Out of Atlantis as the moon settles",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "f6c6c21d-1106-542d-8369-95adfed426c3.mp4",
+   "window": [
+    22.58,
+    1.2
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P10-008",
+   "time": "54.5-63.5",
+   "scene": "10.5",
+   "name": "Mountain road at first light",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "49e405d4-738a-5e32-8875-8196a59e7f46.mp4",
+   "window": [
+    13.36,
+    8.91
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P10-009",
+   "time": "63.5-70.0",
+   "scene": "10.5",
+   "name": "Mountain road at first light",
+   "family": "to make",
+   "title": null,
+   "year": null,
+   "file": null,
+   "window": null,
+   "status": "to make"
+  },
+  {
+   "patch": "P10-010",
+   "time": "70.0-81.5",
+   "scene": "10.5",
+   "name": "Mountain road at first light",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "8bf13139-19d6-587d-be6e-b5205d01ca87.mp4",
+   "window": [
+    29.07,
+    11.57
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P10-011",
+   "time": "81.5-87.7",
+   "scene": "10.5",
+   "name": "Mountain road at first light",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "a3885e68c26745e3-0.jpg",
+   "window": null,
+   "status": "cel"
+  },
+  {
+   "patch": "P10-012",
+   "time": "87.7-96.1",
+   "scene": "10.5",
+   "name": "Mountain road at first light",
+   "family": "film",
+   "title": null,
+   "year": null,
+   "file": "454630af943cdcdb-4.jpg",
+   "window": null,
+   "status": "cel"
+  },
+  {
+   "patch": "P10-013",
+   "time": "96.1-100.1",
+   "scene": "T10-11",
+   "name": "ride into 11",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "HT_header_prompt_with_audio_MISFIT.mp4",
+   "window": [
+    96.25,
+    4.0
+   ],
+   "status": "cel"
+  }
+ ],
+ "11": [
+  {
+   "patch": "P11-001",
+   "time": "0.0-10.3",
+   "scene": "11.0",
+   "name": "Arrival on the chilly shore",
+   "family": "archive",
+   "title": "[Amateur film: \"Saga of the Happy Wanderers\"]",
+   "year": 1957,
+   "file": "269fcb6c-5faf-5986-b65a-8b1696ef0495.mp4",
+   "window": [
+    5.87,
+    10.29
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P11-002",
+   "time": "10.3-18.5",
+   "scene": "11.0",
+   "name": "Arrival on the chilly shore",
+   "family": "archive",
+   "title": "THE PHOTOGRAPHER",
+   "year": 1948,
+   "file": "39f40354-a37b-5c4e-a419-29797c1fb2b9.mp4",
+   "window": [
+    1.22,
+    8.24
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P11-003",
+   "time": "18.5-30.4",
+   "scene": "11.0",
+   "name": "Arrival on the chilly shore",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "269fcb6c-5faf-5986-b65a-8b1696ef0495.mp4",
+   "window": [
+    10.05,
+    11.82
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P11-004",
+   "time": "30.4-35.5",
+   "scene": "11.1",
+   "name": "Remnants in the sunlight",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "d2dacadd-3794-5fcf-ab34-1843914afb45.mp4",
+   "window": [
+    6.8,
+    5.17
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P11-005",
+   "time": "35.5-42.2",
+   "scene": "11.2",
+   "name": "The temple builds itself",
+   "family": "archive",
+   "title": "Herinnering uit het leven van onzen grootsten toneelspeler",
+   "year": 1919,
+   "file": "90888279-3d92-5380-b891-83a2a0504f53.mp4",
+   "window": [
+    4.41,
+    6.69
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P11-006",
+   "time": "42.2-48.9",
+   "scene": "11.3",
+   "name": "Choir chords in the new nave (inferred)",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "82d6404d-f451-531a-a3f2-0e4eea6fea48.mp4",
+   "window": [
+    4.98,
+    6.69
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P11-007",
+   "time": "48.9-57.9",
+   "scene": "11.4",
+   "name": "Journal and the lonely mirror (inferred)",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "242ff926-624f-534c-9eef-5f671072d426.mp4",
+   "window": [
+    3.75,
+    9.02
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P11-008",
+   "time": "57.9-66.8",
+   "scene": "11.4",
+   "name": "Journal and the lonely mirror (inferred)",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "8bd7cc91-5bda-57cf-96b9-c1af39e8ef7a.mp4",
+   "window": [
+    3.54,
+    8.87
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P11-009",
+   "time": "66.8-75.7",
+   "scene": "11.4",
+   "name": "Journal and the lonely mirror (inferred)",
+   "family": "archive",
+   "title": "Going Steady?",
+   "year": 1951,
+   "file": "a63266ad-9ff3-55ba-a3d8-368b6b946fa2.mp4",
+   "window": [
+    6.27,
+    8.92
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P11-010",
+   "time": "75.7-85.0",
+   "scene": "11.5",
+   "name": "Welcoming the new day",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "41700b15-cd0c-51bd-9885-a81456c8ddff.mp4",
+   "window": [
+    0.15,
+    9.25
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P11-011",
+   "time": "85.0-93.7",
+   "scene": "11.5",
+   "name": "Welcoming the new day",
+   "family": "archive",
+   "title": "Moonwalk One, ca. 1970",
+   "year": 1970,
+   "file": "98ef04be-af1a-520c-990f-9bd8091f2e2f.mp4",
+   "window": [
+    8.72,
+    8.72
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P11-012",
+   "time": "93.7-101.3",
+   "scene": "11.5",
+   "name": "Welcoming the new day",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "e22008d8-4bd5-526d-8391-a9b123128837.mp4",
+   "window": [
+    8.76,
+    7.59
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P11-013",
+   "time": "101.3-105.3",
+   "scene": "T11-12",
+   "name": "cut into 12",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "7cd6e21b-3ba8-5fe2-a150-3d1d091d5982.mp4",
+   "window": [
+    5.6,
+    4.0
+   ],
+   "status": "cel"
+  }
+ ],
+ "12": [
+  {
+   "patch": "P12-001",
+   "time": "0.0-8.6",
+   "scene": "12.0",
+   "name": "Welcome home in the hall",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "14954698-d902-595a-ad99-dbc55658e6b1.mp4",
+   "window": [
+    39.79,
+    8.56
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P12-002",
+   "time": "8.6-12.6",
+   "scene": "12.1",
+   "name": "Loud voices, overheard hearts",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "0154.mp4",
+   "window": [
+    0.48,
+    4.04
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P12-003",
+   "time": "12.6-19.8",
+   "scene": "12.2",
+   "name": "The empty rooms of the afterlife",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "f67c5db9-b613-5e25-8855-f624d193016e.mp4",
+   "window": [
+    4.08,
+    7.15
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P12-004",
+   "time": "19.8-26.5",
+   "scene": "12.3",
+   "name": "Hourglasses and the group photo (archival reenactment)",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "6f819430-9f47-569e-93aa-5a5ccf94d723.mp4",
+   "window": [
+    14.88,
+    6.76
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P12-005",
+   "time": "26.5-32.7",
+   "scene": "12.4",
+   "name": "Trees at the forest edge",
+   "family": "other",
+   "title": null,
+   "year": null,
+   "file": "WGY007_DS__Mood_Environment_Stabilizer__A_complete__6544427d-77ab-4c12-a7db-df745a7e6af4_2.mp4",
+   "window": [
+    0.15,
+    4.91
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P12-006",
+   "time": "32.7-39.9",
+   "scene": "12.5",
+   "name": "Brotherhood chain",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "8f85abaf-5c23-5d0c-9024-e3d41de5364c.mp4",
+   "window": [
+    3.39,
+    7.2
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P12-007",
+   "time": "39.9-47.1",
+   "scene": "12.5",
+   "name": "Brotherhood chain",
+   "family": "archive",
+   "title": "All My Babies",
+   "year": 1953,
+   "file": "6edf45d5-1aba-5f3b-8e09-8ff6ce297c4e.mp4",
+   "window": [
+    0.74,
+    7.2
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P12-008",
+   "time": "47.1-54.4",
+   "scene": "12.6",
+   "name": "Football in the meadow, then home",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "e4afd423-11d6-534a-bd39-bbdf6608f65e.mp4",
+   "window": [
+    8.86,
+    7.3
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P12-009",
+   "time": "54.4-64.8",
+   "scene": "12.6",
+   "name": "Football in the meadow, then home",
+   "family": "archive",
+   "title": "[Amateur films: Ivan Besse collection: Britton, South Dakota 1938-39] (Part II)",
+   "year": 1938,
+   "file": "2faca583-f0f1-5436-a776-3a80b5a4a36b.mp4",
+   "window": [
+    7.32,
+    10.39
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P12-010",
+   "time": "64.8-68.8",
+   "scene": "T12-13",
+   "name": "walk into 13",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "bb5b6b1c-afd1-5923-ab19-bfc7e7ebbaff.mp4",
+   "window": [
+    5.43,
+    4.0
+   ],
+   "status": "cel"
+  }
+ ],
+ "13": [
+  {
+   "patch": "P13-001",
+   "time": "0.0-9.6",
+   "scene": "13.0",
+   "name": "Walk from the temple around the harbor",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "c94f7bb9-078a-578f-ada9-24b9ec4bf571.mp4",
+   "window": [
+    9.21,
+    9.56
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P13-002",
+   "time": "9.6-19.3",
+   "scene": "13.0",
+   "name": "Walk from the temple around the harbor",
+   "family": "archive",
+   "title": "De Joodsche invalide",
+   "year": 1939,
+   "file": "51865303-297c-540e-97fe-0fdd59024058.mp4",
+   "window": [
+    0.43,
+    9.78
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P13-003",
+   "time": "19.3-21.4",
+   "scene": "13.1",
+   "name": "The corner cafe table",
+   "family": "archive",
+   "title": "Family Life",
+   "year": 1949,
+   "file": "cb6d95da-e002-57ae-97a4-248c8d142beb.mp4",
+   "window": [
+    5.15,
+    2.04
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P13-004",
+   "time": "21.4-29.5",
+   "scene": "13.2",
+   "name": "Distances, younger selves, praying elders",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "0151.mp4",
+   "window": [
+    5.03,
+    4.63
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P13-005",
+   "time": "29.5-35.9",
+   "scene": "13.2",
+   "name": "Distances, younger selves, praying elders",
+   "family": "archive",
+   "title": "Lens, Hollands dorp in Frankrijk",
+   "year": 1921,
+   "file": "251c8b8b-c672-57cf-91dd-a6af4fc2ea47.mp4",
+   "window": [
+    3.14,
+    6.37
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P13-006",
+   "time": "35.9-44.0",
+   "scene": "13.3",
+   "name": "Victory-less seasons (inner montage)",
+   "family": "film",
+   "title": null,
+   "year": null,
+   "file": "03_How_to_break_off_an_engagement.mp4",
+   "window": [
+    63.82,
+    8.16
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P13-007",
+   "time": "44.0-56.1",
+   "scene": "13.3",
+   "name": "Victory-less seasons (inner montage)",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "6c23e59a-a049-5e52-b0a8-72bb89e1c2c7.mp4",
+   "window": [
+    39.02,
+    12.05
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P13-008",
+   "time": "56.1-63.9",
+   "scene": "13.3",
+   "name": "Victory-less seasons (inner montage)",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "8a88c574-10a6-5067-a17d-aca1b9624886.mp4",
+   "window": [
+    31.11,
+    7.82
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P13-009",
+   "time": "63.9-72.8",
+   "scene": "13.4",
+   "name": "Harvesting the poppies",
+   "family": "archive",
+   "title": "This Is My Railroad (Part I)",
+   "year": 1940,
+   "file": "9ee9b8d8-dbdc-55e5-9103-ab7b93b4609b.mp4",
+   "window": [
+    21.53,
+    8.94
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P13-010",
+   "time": "72.8-80.2",
+   "scene": "13.5",
+   "name": "From a distant window",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "b8374da1-714b-5fdf-9aa2-13530b94a5c6.mp4",
+   "window": [
+    0.15,
+    7.41
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P13-011",
+   "time": "80.2-87.7",
+   "scene": "13.5",
+   "name": "From a distant window",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "0157.mp4",
+   "window": [
+    0.15,
+    7.41
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P13-012",
+   "time": "87.7-100.7",
+   "scene": "13.6",
+   "name": "Stands and walks the harbor",
+   "family": "archive",
+   "title": "Muller en co n.v. Rotterdam",
+   "year": 1928,
+   "file": "e5d504ea-4e6e-5e29-a5fc-2401f96f9c74.mp4",
+   "window": [
+    14.06,
+    13.07
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P13-013",
+   "time": "100.7-104.7",
+   "scene": "T13-14",
+   "name": "dissolve into 14",
+   "family": "to make",
+   "title": null,
+   "year": null,
+   "file": null,
+   "window": null,
+   "status": "to make"
+  }
+ ],
+ "14": [
+  {
+   "patch": "P14-001",
+   "time": "0.0-8.1",
+   "scene": "14.0",
+   "name": "Taken by the haze",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "173377838e39acdf-0.jpg",
+   "window": null,
+   "status": "cel"
+  },
+  {
+   "patch": "P14-002",
+   "time": "8.1-17.8",
+   "scene": "14.1",
+   "name": "Floating in the black",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "20251020_001028_1cdf9a75_draft_5s_audio_interpolated_sequence.mp4",
+   "window": [
+    0.15,
+    4.74
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P14-003",
+   "time": "17.8-27.7",
+   "scene": "14.1",
+   "name": "Floating in the black",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "69e96a5f-32b3-54ab-8230-bc23c7c07d8d.mp4",
+   "window": [
+    7.16,
+    9.91
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P14-004",
+   "time": "27.7-40.2",
+   "scene": "14.2",
+   "name": "Cross-cut: highs and lows of life",
+   "family": "archive",
+   "title": "RCA 16mm Sound Projector, The",
+   "year": 1958,
+   "file": "a134989d-5295-5292-ac58-db9d4fa601cb.mp4",
+   "window": [
+    4.5,
+    12.55
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P14-005",
+   "time": "40.2-52.8",
+   "scene": "14.3",
+   "name": "Battle scars and graytones",
+   "family": "markov",
+   "title": null,
+   "year": null,
+   "file": "20251019_232034_0b99d0ac_draft_5s_audio_sound_drone_breathing_vocoder_echo_deep.mp4",
+   "window": [
+    0.15,
+    4.74
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P14-006",
+   "time": "52.8-57.0",
+   "scene": "14.4",
+   "name": "The vintage door appears",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "b01a2151-c5b2-5036-baeb-3eb63ccb084e.mp4",
+   "window": [
+    10.53,
+    4.27
+   ],
+   "status": "generate"
+  },
+  {
+   "patch": "P14-007",
+   "time": "57.0-65.5",
+   "scene": "14.5",
+   "name": "The dance at the vintage party",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "feast.mp4",
+   "window": [
+    151.86,
+    8.45
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P14-008",
+   "time": "65.5-69.4",
+   "scene": "14.6",
+   "name": "Disappears into the crowd; door closes",
+   "family": "archive",
+   "title": null,
+   "year": null,
+   "file": "147f497d-6457-5bcd-a1a1-ed98ff0f2505.mp4",
+   "window": [
+    5.9,
+    3.86
+   ],
+   "status": "cel"
+  },
+  {
+   "patch": "P14-009",
+   "time": "69.4-73.4",
+   "scene": "T14-01",
+   "name": "door into 01",
+   "family": "film",
+   "title": null,
+   "year": null,
+   "file": "trimmed_14_HM_HotMinute_261200_20250528_2220_Blend Video_blend_01jwcxeddkehsae18pnwgh2hq2.mp4",
+   "window": [
+    0.15,
+    4.0
+   ],
+   "status": "cel"
+  }
+ ]
+}

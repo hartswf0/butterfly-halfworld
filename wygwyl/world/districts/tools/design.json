@@ -1,0 +1,2531 @@
+{
+ "version": "scenebook-v1",
+ "thesis": "Not one city but three films that share a map. Baltimere is the city he leaves: intimate, sodium-orange, seen through glass, a city of exits. Atlantis is the city he is let into: a night that is a stage, warm below and cold above, built in layers so that every move is up or down. The Shore is the city he rebuilds: weather, ruin and morning, where time-lapse is the native tense. Each district inside them has one mood, one hour it is seen at, one light technology and one way of moving the camera. The poems happen in particular rooms, stairs and curbs of particular districts, and the cuts between poems are physical places too: an elevator shaft, a perimeter fence, a rail viaduct, a haze on the water.",
+ "realms": [
+  {
+   "id": "B",
+   "name": "Baltimere — the city he leaves",
+   "where": "the old harbour city, west (realm B of the plan)",
+   "poems": [
+    "01",
+    "02",
+    "13",
+    "14"
+   ],
+   "tone": "memory under sodium light; solitary; every important thing is seen through a window",
+   "camera": "long lenses and static wides with one figure; frames within frames (the bedroom window, the child's window, the café window); haze softens focus",
+   "sound": "engines ticking under the expressway, the TV, a foghorn, the harbour slapping the piles",
+   "light": "dusk into night in the towers, after midnight in winter on the hill, flat noon on the harbour until the haze comes",
+   "districts": [
+    "haze",
+    "hive",
+    "overseer",
+    "bay"
+   ]
+  },
+  {
+   "id": "A",
+   "name": "Atlantis — the city he is let into",
+   "where": "the high city, east (realm A): the field, the gate, the market under the spire, the heights",
+   "poems": [
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10"
+   ],
+   "tone": "a false heaven that is also real to him: welcome, crowd, spectacle, and above it a cold order that watches",
+   "camera": "vertical: cranes and tilts, lifts and falls; Steadicam behind him in the streets, top-down from the soul; the crowd is the subject",
+   "sound": "the ancestral orchestra at the gate, the market's many radios, the DJ through the walls, the Resonator's pulse felt not heard",
+   "light": "one long night, 23:00 to first light: gold at the gate, teal and pink below, violet and blue above, neon on wet stone at the end",
+   "districts": [
+    "ascent",
+    "plaza",
+    "naraka",
+    "ankhu",
+    "commons",
+    "arcade"
+   ]
+  },
+  {
+   "id": "C",
+   "name": "The Shore — the city he rebuilds",
+   "where": "the tidal flat, the ruin field and the rail along the water, south (realm C and the ruin field of B)",
+   "poems": [
+    "03",
+    "04",
+    "11",
+    "12"
+   ],
+   "tone": "weather and time: decay in time-lapse, the storm, the cold morning, then a hall full of people decades later",
+   "camera": "locked-off plates, time-lapse, macro on debris; the one moving camera is the motorcycle arriving",
+   "sound": "wind, rain on stone, the bell that is gone, choir chords, laughter in a hall",
+   "light": "storm daylight, twilight to moonlit dark, chilly dawn with mist on the sea, warm hall light into a dusk porch",
+   "districts": [
+    "cenotaph",
+    "temple"
+   ]
+  },
+  {
+   "id": "X",
+   "name": "The Black — no geography",
+   "where": "nowhere on the plan, on purpose",
+   "poems": [
+    "01",
+    "02",
+    "14"
+   ],
+   "tone": "falling, floating, and the party behind the door",
+   "camera": "a black stage; the figure lit alone; a door is the only architecture",
+   "sound": "the drone record and nothing else",
+   "light": "black, flashing lights, then the warm leak of the vintage party",
+   "districts": [
+    "black"
+   ]
+  }
+ ],
+ "districts": {
+  "haze": {
+   "name": "The Orange Haze",
+   "realm": "B",
+   "site": {
+    "x": 2450,
+    "y": 2250,
+    "r": 520,
+    "on": "the industrial district and the expressway ring that ties the realms, with the Severn on its west edge (2126, 2367)",
+    "absorbs": [
+     "The Severn · the tower and its fire escapes",
+     "smokestacks",
+     "the expressways",
+     "Domino Sugars sign"
+    ]
+   },
+   "mood": "suffocating, solitary, sublime: air that burns orange, scale that dwarfs a body",
+   "tone": "the New Boroughs' sodium light that was never replaced; a way out that is always a catwalk over nothing",
+   "hour": "dusk into night (01), and the haze that rises off the harbour (13 → 14)",
+   "weather": "dense orange fog at every hour; the sun is a disc or nothing",
+   "sound": "engines ticking under the decks, a far train, your own steps on concrete",
+   "camera": "a lone silhouette small in frame on a catwalk or stair; deep perspective down undercrofts; never a close-up outside",
+   "light_tech": "low-pressure sodium (the New Boroughs): a single orange wavelength that greys every other colour",
+   "by_era": [
+    "field and mill race, no light",
+    "field",
+    "mills by oil lamp",
+    "sodium: the expressways and sheds go up, orange arrives",
+    "the Fall: the sheds burn; the haze is smoke",
+    "the Resurrection kept the sodium and the smoke became fog; the catwalks are the city's escape routes"
+   ],
+   "arch": "brutalist decks on piers; undercrofts; stairs cast in one piece with their landings; elevated catwalks with lit edges; smokestacks; the Severn's iron fire escapes and spiral stairs hung on brick",
+   "language": "the salt line runs along every catwalk rail at 4/10 of its height; cyan seams are rare here and read as alarms; ceramic only on the handrails",
+   "institution": "the Boroughs Council (it built the expressways) — argued with in every café",
+   "places": [
+    {
+     "name": "the Severn's escapes",
+     "views": [
+      66,
+      26
+     ],
+     "what": "the tower he reads in: iron spiral and switchback fire escapes hung on wet brick, planters on the landings, the haze standing in the light well"
+    },
+    {
+     "name": "the Orange Catwalk",
+     "views": [
+      84,
+      85,
+      79,
+      80,
+      81
+     ],
+     "what": "an elevated concrete path with a glowing kerb, crossing the industrial district at deck height between the Severn and the harbour; at its end a platform that stops over nothing"
+    },
+    {
+     "name": "the Undercroft",
+     "views": [
+      1,
+      2,
+      3,
+      4,
+      77
+     ],
+     "what": "the space under the expressway decks: columns in rows, stairs climbing into the deck, the orange light coming in sideways"
+    },
+    {
+     "name": "the stair with one chair",
+     "views": [
+      5
+     ],
+     "what": "a lit stair in a bare concrete hall with a single chair at its foot: where someone waits for him who isn't there"
+    },
+    {
+     "name": "the Skyway",
+     "views": [
+      65,
+      64
+     ],
+     "what": "a footbridge in smog beside a wall of trees, smokestacks behind; the city's skyline as a burning silhouette"
+    }
+   ],
+   "vignettes": [
+    {
+     "name": "a chair at the foot of the stair",
+     "views": [
+      5
+     ],
+     "what": "nobody sits in it in the whole film"
+    },
+    {
+     "name": "three figures walk the lit catwalk away from camera",
+     "views": [
+      84,
+      85
+     ],
+     "what": "the same three who are in the vintage party crowd"
+    },
+    {
+     "name": "the man at the end of the platform",
+     "views": [
+      81
+     ],
+     "what": "the catwalk ends in air; he stands at the rail until the haze takes him (14)"
+    },
+    {
+     "name": "rainbow on the undercroft floor",
+     "views": [
+      77
+     ],
+     "what": "oil on wet asphalt under the deck, the only other colour in the district"
+    }
+   ]
+  },
+  "hive": {
+   "name": "The Hive",
+   "realm": "B",
+   "site": {
+    "x": 1550,
+    "y": 1900,
+    "r": 420,
+    "on": "downtown: the towers (to 144 m), the Skywalk's ring 45 m up, the Archive's drums on the hill above at (1800, 2040)",
+    "absorbs": [
+     "the Skywalk",
+     "the Archive",
+     "skyscraper",
+     "the downtown arcologies"
+    ]
+   },
+   "mood": "cold grandeur; a city that breeds upward",
+   "tone": "seen, not entered: the skyline in the Severn's window and the needles the haze swallows",
+   "hour": "night only, mist, red beacons pulsing on the tide",
+   "weather": "low cloud through the spires; drizzle",
+   "sound": "aircraft warning tones, the hot minute when the gates rise and every window brightens",
+   "camera": "from below (worm's-eye into converging spires) or from far away (the skyline as a field of needles); never at street level",
+   "light_tech": "aircraft-warning red and cold LED white, timed to the tide",
+   "by_era": [
+    "shore",
+    "the old centre's lanes",
+    "the clock tower, the column in the square",
+    "the towers and the mast: steel and glass",
+    "the Fall flooded the lobbies; the towers stood",
+    "the Skywalk threaded through them; the Archive's drums turning on the hill; the spires crowned with lattices"
+   ],
+   "arch": "needle spires with lattice crowns, signal masts, glass curtain walls crusted at the base, the Skywalk's ceramic ring",
+   "language": "the salt line in every lobby at +4 m; the Skywalk is all Seam and ceramic: the line the city learned to live above",
+   "institution": "the Keepers (the Archive is the Hive's crown)",
+   "places": [
+    {
+     "name": "the needle field",
+     "views": [
+      12,
+      70
+     ],
+     "what": "seen from the Severn's roof: a field of indigo spires with blue windows, red underlit at the base"
+    },
+    {
+     "name": "the signal lattices",
+     "views": [
+      46,
+      48
+     ],
+     "what": "red and blue warning masts on the crowns; at the tide they blink together"
+    },
+    {
+     "name": "the converging canyon",
+     "views": [
+      10,
+      38
+     ],
+     "what": "looking straight up between towers into a skylight of mist"
+    },
+    {
+     "name": "the hive walls",
+     "views": [
+      39,
+      40
+     ],
+     "what": "towers in fog, bases crusted, the old town's roofs under them"
+    }
+   ],
+   "vignettes": [
+    {
+     "name": "the hot minute",
+     "views": [
+      48
+     ],
+     "what": "when the gates rise, every window in the Hive brightens for a minute; he sees it from his bed in 01"
+    },
+    {
+     "name": "the TV's chaos is the Hive's skyline",
+     "views": [
+      12
+     ],
+     "what": "the screen in his room and the window behind it show the same lights"
+    }
+   ]
+  },
+  "overseer": {
+   "name": "The Overseer",
+   "realm": "B",
+   "site": {
+    "x": 1850,
+    "y": 1350,
+    "r": 480,
+    "on": "the rowhouses on the hill north of downtown and the tallest towers behind them (to 142 m); the child's house at the foot of the hill (1546, 1261, 3 m above the sea), where the road from the rows (23 m) winds down",
+    "absorbs": [
+     "neon sign (02's house)",
+     "the rowhouses",
+     "the radio mast"
+    ]
+   },
+   "mood": "watched; cold; symmetrical; a moon that is a lamp",
+   "tone": "the order that looks down on a childhood: towers over a winter street, one warm window",
+   "hour": "after midnight in winter (02)",
+   "weather": "clear and cold; frost on glass; snow inferred",
+   "sound": "the car idling at the curb, the argument muffled by glass, the radiator",
+   "camera": "symmetry and one-point perspective; the moon on the axis; from inside the child's window looking down at the curb",
+   "light_tech": "no street lamps on the towers' side: moonlight and the blue of screens; one crimson beacon; headlights sweeping",
+   "by_era": [
+    "shore",
+    "lanes",
+    "rowhouses with marble stoops",
+    "the towers rise behind the rows",
+    "the Fall did not reach the hill",
+    "the towers keep watch; the rows keep their stoops"
+   ],
+   "arch": "slab towers in symmetry, blue pipework, a roofless palace on the ridge; below, the brick rowhouse (the hero) with its stoop and its street-facing window",
+   "language": "few ruins, so few plates: the hill is under no line; a clean wall here is honest",
+   "institution": "the Boroughs Council's offices (elected by ward, never seen)",
+   "places": [
+    {
+     "name": "the child's window on the road winding down",
+     "views": [
+      87
+     ],
+     "what": "a brick house on a curving street, the ground-floor window facing the curb; the palace and the towers behind under the moon"
+    },
+    {
+     "name": "the moon canyon",
+     "views": [
+      88,
+      86
+     ],
+     "what": "two slabs and the moon exactly between them"
+    },
+    {
+     "name": "the reflecting skyline",
+     "views": [
+      25,
+      49
+     ],
+     "what": "the towers doubled in a black basin; a glass gallery along the ridge looking down on it"
+    }
+   ],
+   "vignettes": [
+    {
+     "name": "headlights sweep the ceiling",
+     "views": [
+      87
+     ],
+     "what": "the car takes the bumps of the winding road and its lights cross the room twice"
+    },
+    {
+     "name": "frost breath on the pane",
+     "views": [
+      86
+     ],
+     "what": "the ghost child's breath, not his"
+    }
+   ]
+  },
+  "bay": {
+   "name": "Mirror Thread Bay",
+   "realm": "B",
+   "site": {
+    "x": 2300,
+    "y": 2600,
+    "r": 700,
+    "on": "the waterfront and the Inner Harbour from the old piers to the palm row and the pier café (2700, 2540), down to the Drowned Cathedral (3420, 3580)",
+    "absorbs": [
+     "the pier",
+     "palm row",
+     "the pier café (hero)",
+     "the Drowned Cathedral",
+     "the Tide Engine (narrows)",
+     "seawalls"
+    ]
+   },
+   "mood": "water first: reflection, drowning, tenderness",
+   "tone": "the harbour that kept its flood: by day turquoise and calm, by night a garden under the water",
+   "hour": "daytime (13), then the haze; at night the bioluminescence",
+   "weather": "calm, bright; haze gathering off the water",
+   "sound": "the harbour slapping the piles, gulls, a café's cups, the sleep-dam pumping",
+   "camera": "low over water; reflections first, subject second; through glass from the harbour side",
+   "light_tech": "daylight on water; at night the drowned gardens' own light (bioluminescent), fishermen's lamps in the cathedral",
+   "by_era": [
+    "shore and fishing",
+    "fishing",
+    "harbour",
+    "harbour",
+    "flooded: the Fall stood here for a season",
+    "promenade: the drowned rooms kept and lit, the sleep-dam holds the rest back"
+   ],
+   "arch": "promenades on the old quay, pier decks, drowned atria with glowing floors, the sleep-dam's concrete wall with its graffiti, footbridges over the canals",
+   "language": "the line at +4 m is everywhere and in the drowned rooms it is underwater; benches face the water; tide boards at every pier",
+   "institution": "the Tide Office (its notices on every pier) and the Ferrymen",
+   "places": [
+    {
+     "name": "the Harbour of the Heavens",
+     "views": [
+      23,
+      24
+     ],
+     "what": "the turquoise basin seen from above with its garden quays; a woman at the rail looking at the bridge"
+    },
+    {
+     "name": "the drowned atrium",
+     "views": [
+      53,
+      54,
+      55,
+      56
+     ],
+     "what": "lobbies that stayed flooded, their floors glowing under the water, trees growing out of planters into the light"
+    },
+    {
+     "name": "the submerged corridor",
+     "views": [
+      57,
+      58
+     ],
+     "what": "inside the Drowned Cathedral: the nave under nine metres of water, handprints on the glass, the fishermen's lamps on the floor"
+    },
+    {
+     "name": "the sleep-dam wall",
+     "views": [
+      75,
+      76
+     ],
+     "what": "the concrete wall that holds the bay back, saltwater graffiti 'REMEMBER THE …' on it; a gate through it to the water"
+    },
+    {
+     "name": "the oil-slick canal",
+     "views": [
+      63
+     ],
+     "what": "a canal under a radio bridge at night, every lamp doubled"
+    }
+   ],
+   "vignettes": [
+    {
+     "name": "handprints on the glass",
+     "views": [
+      57
+     ],
+     "what": "on the cathedral's drowned windows; the tide boards say they are from the Fall"
+    },
+    {
+     "name": "the woman at the rail",
+     "views": [
+      24
+     ],
+     "what": "one of the couples he watches from the café (13)"
+    },
+    {
+     "name": "clouds in the floor",
+     "views": [
+      54
+     ],
+     "what": "the atrium floor reflects a sky that isn't there"
+    }
+   ]
+  },
+  "ascent": {
+   "name": "The Night Field & the Ascent",
+   "realm": "A",
+   "site": {
+    "x": 5100,
+    "y": 3560,
+    "r": 420,
+    "on": "the field outside the Light Gate where the avenue begins: the wreck that came ashore, the obelisk, the ruins (04 and 05 stand here); and the sky over Atlantis",
+    "absorbs": [
+     "wreck",
+     "obelisk",
+     "ruins",
+     "lone tree",
+     "the processional avenue"
+    ]
+   },
+   "mood": "awe, inheritance; stillness",
+   "tone": "the heavens as a stage: the ancestors' parade, the stars handed over, the soul looking down",
+   "hour": "still night, 21:00 to midnight (04 end, 05); the soul's view at 02:30 (08)",
+   "weather": "windless; deep starlight; moon",
+   "sound": "the parade's orchestra arriving from the far edge; no wind",
+   "camera": "static wides with him small; inserts of hands and lights; top-down from the soul; the credits' rise",
+   "light_tech": "none: stars, the gifts in their hands, the moon",
+   "by_era": [
+    "stones stood up on the field",
+    "the avenue laid",
+    "the obelisk",
+    "a road",
+    "the ship came ashore and stayed",
+    "the field kept dark on purpose so the parade can be seen"
+   ],
+   "arch": "almost none: the avenue's stones, the obelisk, the beached wreck, a lone tree; the gate's ring on the horizon",
+   "language": "the only place without lamps; the emblem is laid in the avenue's stones",
+   "institution": "the Avenue Wardens (who keep the field dark)",
+   "places": [
+    {
+     "name": "the Night Garden Field",
+     "views": [
+      71,
+      78
+     ],
+     "what": "the field on the rise: red soil under the moon where he finds his hands; blue blossoms at the edge"
+    },
+    {
+     "name": "the Parade Ground",
+     "views": [
+      68
+     ],
+     "what": "the avenue through the field where the ancestors meet him under a vault of light and hand him galaxies"
+    },
+    {
+     "name": "the sky over Atlantis",
+     "views": [
+      69,
+      35,
+      41,
+      67
+     ],
+     "what": "the city from above as the soul sees it, the skyline mirrored in the sea, spires under the Milky Way, the moon"
+    }
+   ],
+   "vignettes": [
+    {
+     "name": "hands in the dark soil",
+     "views": [
+      71
+     ],
+     "what": "the first time his hands are seen"
+    },
+    {
+     "name": "a galaxy passed hand to hand",
+     "views": [
+      68
+     ],
+     "what": "the gifts are the only light"
+    }
+   ]
+  },
+  "plaza": {
+   "name": "The Light Gate & Central Plaza",
+   "realm": "A",
+   "site": {
+    "x": 5300,
+    "y": 3570,
+    "r": 300,
+    "on": "the Light Gate's hundred-metre ring across the avenue (5309, 3577), the palace and the pyramids behind it",
+    "absorbs": [
+     "the Light Gate",
+     "gates",
+     "palace",
+     "pyramid",
+     "Pyramid of the Sun"
+    ]
+   },
+   "mood": "admission; arrival; collective joy",
+   "tone": "the moment the city opens: white glare, marble wings, a crowd that is one body",
+   "hour": "midnight (06 opens at 00:24)",
+   "weather": "clear",
+   "sound": "the ancestral orchestra; the heart-scan's tone; ten thousand people breathing",
+   "camera": "low wide on the gate with him entering from behind camera; the reverse into the glow; the aerial over the round plaza; a 360 orbit",
+   "light_tech": "the gate's white ceramic lit from inside; fences of light at the perimeter (cyan, high-frequency)",
+   "by_era": [
+    "stones on the field",
+    "the pyramids",
+    "the palace",
+    "a fence and a checkpoint",
+    "the Fall broke the fence",
+    "the Light Gate opened; the fence became light"
+   ],
+   "arch": "the ceramic ring; the perimeter of light (a fence you can see through); the round plaza with its terraces; the hall of crystal trees (the Jungle Interface)",
+   "language": "the gate is the city's largest ring: a threshold; its seam drawn in cyan top to bottom",
+   "institution": "the Avenue Wardens",
+   "places": [
+    {
+     "name": "the Perimeter",
+     "views": [
+      89,
+      90
+     ],
+     "what": "a fence of light along the field's edge, wet ground, lamps behind the mesh: the gate seen from outside before it opens"
+    },
+    {
+     "name": "the round plaza",
+     "views": [
+      33
+     ],
+     "what": "from above: a ring of rose terraces packed with people around a white floor"
+    },
+    {
+     "name": "the hall of crystal trees",
+     "views": [
+      34
+     ],
+     "what": "the Jungle Interface: trees of light over a reflecting floor, where the gate scans his heart"
+    }
+   ],
+   "vignettes": [
+    {
+     "name": "the heart-scan",
+     "views": [
+      34
+     ],
+     "what": "the gate reads his chest instead of a pass; the tone it plays is the first note of 06"
+    },
+    {
+     "name": "children drawing in the sand",
+     "views": [
+      33
+     ],
+     "what": "symbols in the plaza's white floor, swept every gate"
+    }
+   ]
+  },
+  "naraka": {
+   "name": "Naraka Market",
+   "realm": "A",
+   "site": {
+    "x": 5800,
+    "y": 3100,
+    "r": 380,
+    "on": "the dense low centre of Atlantis (2,500 buildings, none over 40 m) from the Monumento (5602, 3231) to the cathedral square; the underworld under the spire",
+    "absorbs": [
+     "Monumento a la Revolución (the House, 07)",
+     "Angel of Independence",
+     "the evolved ring and dome over the market"
+    ]
+   },
+   "mood": "humid, crowded, devotional, improvised",
+   "tone": "Atlantis from below: the warm underworld the spires stand on; twilight that never ends",
+   "hour": "kept at twilight by its own light even at 1 a.m. (06 streets, 07 house)",
+   "weather": "light rain, steam, teal haze",
+   "sound": "many radios, a kettle, the DJ through the walls, rain on corrugated roofs",
+   "camera": "Steadicam behind him down alleys two people wide; candle and window close-ups; the crowd at chest height",
+   "light_tech": "the Relighting: neon and string lights, candles in the alleys; teal and pink",
+   "by_era": [
+    "shore",
+    "the old centre's maze",
+    "houses leaning together",
+    "warehouses and containers",
+    "the Fall emptied it",
+    "relit: containers stacked into shops and rooms, the alleys lit by candle"
+   ],
+   "arch": "shipping containers stacked two to four high into shops and rooms; corrugated awnings; cable webs and string lights; hidden stairwells between walls; the underpass flooded into a shadow-pool; the teahouse",
+   "language": "rust plated in ceramic, seams drawn by Glaziers at every container door; the salt line is chalked here, not painted (Night of the Line)",
+   "institution": "the Salt Guild's stalls; the Glaziers' workshops",
+   "places": [
+    {
+     "name": "the Container Rows",
+     "views": [
+      17,
+      18,
+      19,
+      20
+     ],
+     "what": "the market street: teal and pink containers, string lights, wet asphalt"
+    },
+    {
+     "name": "the House",
+     "views": [
+      36,
+      59
+     ],
+     "what": "a casona built into the containers with a back bar, a DJ booth and an open mic: the party of 07"
+    },
+    {
+     "name": "the hidden stairwells",
+     "views": [
+      44,
+      45,
+      61
+     ],
+     "what": "stairs climbing between walls under AC units and painted plaster; the candlelit narrow streets of 06"
+    },
+    {
+     "name": "the underpass shadow-pool",
+     "views": [
+      92,
+      93
+     ],
+     "what": "the underpass flooded ankle-deep; children stand in the reflection; the market's light at the far end"
+    },
+    {
+     "name": "the Teahouse of Saints",
+     "views": [
+      96
+     ],
+     "what": "a street teahouse breathing blue vapour into the night"
+    }
+   ],
+   "vignettes": [
+    {
+     "name": "the shadow-pool ritual",
+     "views": [
+      93
+     ],
+     "what": "children stand still in the water until the reflection settles"
+    },
+    {
+     "name": "vapour bloom",
+     "views": [
+      96
+     ],
+     "what": "the teahouse's kettles vent at the gate; the street turns blue"
+    },
+    {
+     "name": "a market at dusk forever",
+     "views": [
+      60
+     ],
+     "what": "the stalls on the flooded square never close"
+    }
+   ]
+  },
+  "ankhu": {
+   "name": "Ankhu Spires",
+   "realm": "A",
+   "site": {
+    "x": 6300,
+    "y": 2700,
+    "r": 520,
+    "on": "the spire that stands out of the market (the Torre at 5998, 2953) and the heights beyond it: the mountains of realm A, the Resonator's summit (7000, 2400), the water tower",
+    "absorbs": [
+     "Torre Latinoamericana",
+     "the Resonator",
+     "water tower",
+     "lone peak",
+     "the evolved spires and arcologies of realm A"
+    ]
+   },
+   "mood": "aspiration, height, gardens in the air",
+   "tone": "Atlantis from above: sky platforms on mushroom stems, laundry under the stars, a rooftop club where the soul leaves the body",
+   "hour": "blue-hour mist; violet underlights at night (08 at 02:30)",
+   "weather": "cloud below the platforms; clear above",
+   "sound": "wind; the club's bass carried up the shaft; the skiffs",
+   "camera": "cranes up; over the parapet; the long lens compressing the ridge; inside the shaft looking straight up",
+   "light_tech": "violet and blue underlights on the stems; warm lamps on the platforms; the shaft's red",
+   "by_era": [
+    "the lone peak and its tree",
+    "goat paths",
+    "the water tower",
+    "the mast",
+    "the Fall did not reach the heights",
+    "the spires and their platforms evolved where the shots asked for them; skiffs between the crowns"
+   ],
+   "arch": "mushroom-stem towers with platform crowns; open platforms joined by bridges; gardens on the platforms; the red Spire Elevator Shaft; glass filament walkways; rooftop laundry",
+   "language": "ceramic crowns; the salt line on the stems at 4/10 of their height, far above any flood: memory carried up",
+   "institution": "the Resonance Society (the summit's pipes) and the Ferrymen (the skiffs)",
+   "places": [
+    {
+     "name": "the Spire Elevator Shaft",
+     "views": [
+      82,
+      83
+     ],
+     "what": "a hundred-storey shaft lit red: the way up from the House to the rooftop club"
+    },
+    {
+     "name": "Dance & Self, the rooftop club",
+     "views": [
+      11,
+      47,
+      28
+     ],
+     "what": "an open platform on a spire crown, violet underlit, bridges to the next crowns"
+    },
+    {
+     "name": "the sky gardens",
+     "views": [
+      29,
+      30,
+      31,
+      32
+     ],
+     "what": "trees on platforms in the cloud; the city's lights far below"
+    },
+    {
+     "name": "the laundry roofs",
+     "views": [
+      73,
+      74
+     ],
+     "what": "lines of coloured cloth across a roof terrace under the stars"
+    },
+    {
+     "name": "the observation deck",
+     "views": [
+      27,
+      99
+     ],
+     "what": "a rail at the edge of the cloud; a glass filament walkway over the city"
+    },
+    {
+     "name": "the old spire quarter",
+     "views": [
+      8,
+      9,
+      13
+     ],
+     "what": "terracotta towers and mushroom domes at the foot of the heights; a lamp-ringed dome from inside"
+    }
+   ],
+   "vignettes": [
+    {
+     "name": "the soul rises out of the dancer",
+     "views": [
+      47
+     ],
+     "what": "seen from the next crown"
+    },
+    {
+     "name": "laundry snapping in the bass",
+     "views": [
+      73
+     ],
+     "what": "the club is two crowns over"
+    },
+    {
+     "name": "the mountains within reach",
+     "views": [
+      27
+     ],
+     "what": "from the parapet: the ridge he will ride through (10)"
+    }
+   ]
+  },
+  "commons": {
+   "name": "Cortex Commons",
+   "realm": "A",
+   "site": {
+    "x": 6017,
+    "y": 2861,
+    "r": 220,
+    "on": "the cathedral square in the centre of Atlantis (the zócalo of the market): the radio dish set in it, the sunken forum beside it",
+    "absorbs": [
+     "cathedral",
+     "statue",
+     "the evolved dish"
+    ]
+   },
+   "mood": "listening; safety; the city as one ear",
+   "tone": "where the city gathers to hear itself: dishes in the squares turned to the sky and to the poems",
+   "hour": "dusk and blue hour; empty at 5 a.m. (10)",
+   "weather": "humid blue; puddles",
+   "sound": "the dishes hum when they turn; children running on the lit floor",
+   "camera": "the slow 360 orbit (06 'all safe'); the empty square from a high corner at dawn",
+   "light_tech": "warm windows around a blue square; the forum's floor lit from below",
+   "by_era": [
+    "shore",
+    "the cathedral and its square",
+    "the column",
+    "a parking square",
+    "the Fall",
+    "the dishes set in the squares; the forum sunk into the old car park"
+   ],
+   "arch": "radio-telescope dishes on plinths in the squares; a sunken amphitheatre forum; the cathedral; towers of glass beyond",
+   "language": "the dishes are rings (thresholds of listening); WYGWYL radio is broadcast from here",
+   "institution": "the Keepers (they listen as well as look)",
+   "places": [
+    {
+     "name": "the sunken forum",
+     "views": [
+      14
+     ],
+     "what": "a stepped oval sunk in the square, its lip lit, people sitting all round"
+    },
+    {
+     "name": "the listening dishes",
+     "views": [
+      15,
+      16
+     ],
+     "what": "a dish turning over the square in the evening; children running across the lit floor under it"
+    },
+    {
+     "name": "the canopy square",
+     "views": [
+      21,
+      22
+     ],
+     "what": "a great luminous canopy over the crowd; the square in rain at night"
+    },
+    {
+     "name": "the cathedral under the towers",
+     "views": [
+      51
+     ],
+     "what": "the old cathedral's spire among the new glass, the moon above"
+    }
+   ],
+   "vignettes": [
+    {
+     "name": "children race the dish",
+     "views": [
+      16
+     ],
+     "what": "they run when it turns"
+    },
+    {
+     "name": "the forum at dawn",
+     "views": [
+      14
+     ],
+     "what": "empty, the lip still lit, as he rides past (10)"
+    }
+   ]
+  },
+  "arcade": {
+   "name": "The Shrouded Arcade",
+   "realm": "A",
+   "site": {
+    "x": 5850,
+    "y": 3050,
+    "r": 320,
+    "on": "the avenue from the Monumento past the Angel to the phone booth (6090, 2874) and the curb where the motorcycle waits (5902, 2945)",
+    "absorbs": [
+     "phone booth",
+     "motorcycle",
+     "the avenue"
+    ]
+   },
+   "mood": "nostalgia, exposure, someone else's rain",
+   "tone": "memory as a street: the LED canyon, the dead mall, the neon corridor; where the past is replayed in public",
+   "hour": "late night to the last of the night (09 at 03:30, 10 leaving at 04:30)",
+   "weather": "rain; wet pavement mirrors everything",
+   "sound": "neon hum, the booth's dial tone, a moped, the canopy's advertisements",
+   "camera": "handheld through the crowd; the long two-shot from behind with the moon at the vanishing point; through the booth glass",
+   "light_tech": "LED canopies and neon: red-blue, pink; the booth's white",
+   "by_era": [
+    "shore",
+    "the avenue planted",
+    "the arcades and their shops",
+    "the mall",
+    "the Fall closed the mall",
+    "the canopy lit over the avenue; the mall kept dark and walked"
+   ],
+   "arch": "an LED canopy over the avenue; glass arcades; the dead mall's escalators; a neon corridor; a chrome door; the phone booth on its curb",
+   "language": "the canopy never crosses the flood line (+4 m is kept clear under it); the booth is ceramic, its door a ring",
+   "institution": "nobody: it is the only place in Atlantis without one",
+   "places": [
+    {
+     "name": "the LED canyon",
+     "views": [
+      94,
+      95
+     ],
+     "what": "the avenue under its canopy: a crowd, palms, a sky of moving colour (10 'swagger down the avenue')"
+    },
+    {
+     "name": "the booth curb",
+     "views": [
+      100,
+      7
+     ],
+     "what": "a rain-soaked street with the booth's light, the glass corridor of shopfronts behind"
+    },
+    {
+     "name": "the memory corridor",
+     "views": [
+      62
+     ],
+     "what": "a neon alley reflected in a puddle as long as the street"
+    },
+    {
+     "name": "the dead mall",
+     "views": [
+      91
+     ],
+     "what": "escalators that stopped in the Fall, still lit"
+    },
+    {
+     "name": "the chrome door",
+     "views": [
+      6
+     ],
+     "what": "a red-lit door at the end of an alley: the door that, in the black, opens on the vintage party (14)"
+    }
+   ],
+   "vignettes": [
+    {
+     "name": "suitcases at the curb",
+     "views": [
+      100
+     ],
+     "what": "two cases in the rain by the booth"
+    },
+    {
+     "name": "the escalators still running",
+     "views": [
+      91
+     ],
+     "what": "nobody rides them"
+    },
+    {
+     "name": "the chrome door is always shut",
+     "views": [
+      6
+     ],
+     "what": "except once, in the black"
+    }
+   ]
+  },
+  "cenotaph": {
+   "name": "Cenotaph Rail",
+   "realm": "C",
+   "site": {
+    "x": 3700,
+    "y": 3450,
+    "r": 900,
+    "on": "the old elevated rail of the New Boroughs, broken in the Fall and kept as a monument: from the ruin field (2107, 3201) along the shore past the chapel to the beached wreck below the gate; the steps down to the shore",
+    "absorbs": [
+     "the ruin field district (ruins walked as a monument)",
+     "bridge",
+     "the Salt Stair's lower flights"
+    ]
+   },
+   "mood": "memorial, endurance, passage",
+   "tone": "the line he rides out on: arches carved with the names of the drowned, rusted platforms, wet steps under the mountain",
+   "hour": "dawn and dusk only (10 → 11 at first light; 04 at twilight)",
+   "weather": "wet stone, mist on the sea, a low sun",
+   "sound": "the motorcycle; water dripping in the arches; birds at first light",
+   "camera": "the drone chase along the viaduct; the wide from the water as he arrives; the platform from behind a figure",
+   "light_tech": "none of its own: dawn and dusk; a few lanterns on the steps; one sodium platform lamp left from the New Boroughs",
+   "by_era": [
+    "field",
+    "village",
+    "quarter",
+    "the elevated rail",
+    "the rail broke; the quarter ruined",
+    "the rail kept as a cenotaph; names carved in the arches; the platforms walked"
+   ],
+   "arch": "gothic viaduct arches; rusted steel platforms high over the city; wet stone stairs down to the water; a train tunnel mouth",
+   "language": "every arch carries the line at +4 m and a name below it; Glaziers plate the broken spans but leave the gaps",
+   "institution": "the Glaziers (they keep the names)",
+   "places": [
+    {
+     "name": "the named viaduct",
+     "views": [
+      43
+     ],
+     "what": "an ornate arch under the elevated rail, names carved into the stone"
+    },
+    {
+     "name": "the high platform",
+     "views": [
+      37
+     ],
+     "what": "a rusted platform over the city at dusk, a figure at the rail"
+    },
+    {
+     "name": "the shore steps",
+     "views": [
+      97
+     ],
+     "what": "wet stone steps down to the water beneath the mountain, lanterns on them: where he arrives at dawn (11)"
+    },
+    {
+     "name": "the platform in the orange",
+     "views": [
+      50
+     ],
+     "what": "the last platform still under a New Boroughs lamp: someone running for a train that does not come"
+    },
+    {
+     "name": "the drones' line",
+     "views": [
+      98
+     ],
+     "what": "the rail into the city with the cleaning drones overhead"
+    }
+   ],
+   "vignettes": [
+    {
+     "name": "he reads a name",
+     "views": [
+      43
+     ],
+     "what": "the engine stops under an arch for one beat"
+    },
+    {
+     "name": "lanterns on the steps",
+     "views": [
+      97
+     ],
+     "what": "lit by the Wardens at dusk, still burning at dawn"
+    }
+   ]
+  },
+  "temple": {
+   "name": "The White Temple & its Pools",
+   "realm": "C",
+   "site": {
+    "x": 3420,
+    "y": 3950,
+    "r": 350,
+    "on": "the chapel on the tidal flat (3420, 3880) and the white temple vaulted over its ruin, the clock tower beside it, the dome (12) and the grounds to the meadow",
+    "absorbs": [
+     "the chapel · the white temple (hero)",
+     "clock tower (hero)",
+     "dome",
+     "stadium",
+     "the meadow"
+    ]
+   },
+   "mood": "sacred, washed, communal",
+   "tone": "the one place built twice: a chapel ruined by weather and a white temple raised over it; later a hall full of people",
+   "hour": "storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12)",
+   "weather": "storm then calm; mist on the sea; dew burning off",
+   "sound": "the bell that is gone, rain on stone, choir chords, laughter",
+   "camera": "locked-off time-lapse plates; macro on debris; symmetrical wides down the nave; the reverse from inside the doors to the sea",
+   "light_tech": "the white ceramic itself, lit by the sky; mirror pools that hold the stars",
+   "by_era": [
+    "the chapel alone on the flat",
+    "a lighthouse for the boats",
+    "the clock tower beside it",
+    "the dome and the stadium",
+    "the Fall took the roof and the bell",
+    "the white temple vaulted over the ruin, not on it; the pools laid where the floor was"
+   ],
+   "arch": "a dark stone nave with lancets (as built); over it a white vault; a portico on a mirror pool; a pool cut to hold the stars; a hall of white piers on black water",
+   "language": "the temple is the city's purest ceramic; its seam is the brightest in the city; the chapel's old walls keep the line under the vault",
+   "institution": "the Glaziers (the vault) and the Wardens (the bell)",
+   "places": [
+    {
+     "name": "the portico pool",
+     "views": [
+      52
+     ],
+     "what": "a colonnaded portico doubled in a still pool among old trees: the temple by day"
+    },
+    {
+     "name": "the pool of stars",
+     "views": [
+      72
+     ],
+     "what": "a black stone pool that holds the night sky exactly"
+    },
+    {
+     "name": "the mirror hall",
+     "views": [
+      42
+     ],
+     "what": "white piers on black water, the city lights far off: where he sings to the mirror (11)"
+    }
+   ],
+   "vignettes": [
+    {
+     "name": "the tambourine's pieces kept",
+     "views": [
+      52
+     ],
+     "what": "set into the pool's edge like plates"
+    },
+    {
+     "name": "a porch light",
+     "views": [
+      72
+     ],
+     "what": "the last light of 12, reflected"
+    }
+   ]
+  },
+  "black": {
+   "name": "The Black",
+   "realm": "X",
+   "site": {
+    "x": null,
+    "y": null,
+    "r": 0,
+    "on": "nowhere: the fall below the Severn, the void of 02, the float of 14, and the vintage party behind the door",
+    "absorbs": []
+   },
+   "mood": "suspension",
+   "tone": "a place with no geography because the poems refuse one; kept black on purpose",
+   "hour": "timeless",
+   "weather": "none",
+   "sound": "the drone record",
+   "camera": "a black stage, the figure lit alone; the door is the only architecture",
+   "light_tech": "flashing lights, then the warm leak of the vintage party",
+   "by_era": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "arch": "a vintage door; a ballroom with a hole in its floor",
+   "language": "none: no line, no seam",
+   "institution": "",
+   "places": [],
+   "vignettes": []
+  }
+ },
+ "scenes": {
+  "01.0": [
+   "haze",
+   "the Severn, a high bedroom; the Hive's needles fill the window",
+   "35 mm locked from the bedroom door at 1.2 m; the window is a lit rectangle in the back third; the TV's colours match the beacons outside (Hive 46, 48)"
+  ],
+  "01.1": [
+   "haze",
+   "the window and the iron escape; the Orange Catwalk runs 30 m below",
+   "slow push from the bed to the sill that never arrives; the escape and the haze in the light well (66)"
+  ],
+  "01.2": [
+   "haze",
+   "the escape's top landing over the light well",
+   "over the rail, straight down into the haze (26); then POV down through it"
+  ],
+  "01.3": [
+   "black",
+   "below the tower, into the black",
+   "top-down bodies falling; the images of escape stream past"
+  ],
+  "01.4": [
+   "black",
+   "the vintage party met mid-fall",
+   "handheld through an overcranked crowd, light leaks (36)"
+  ],
+  "01.5": [
+   "black",
+   "the hole in the party floor",
+   "floor level on his feet catching the edge; overhead as he drops (the shadow-pool's black water, 93, is the hole's rhyme)"
+  ],
+  "02.0": [
+   "black",
+   "the black below the floor",
+   "floating wide in a black stage, strobing practicals"
+  ],
+  "02.1": [
+   "black",
+   "his eye",
+   "extreme close-up, the pupil opening into the flashback"
+  ],
+  "02.2": [
+   "overseer",
+   "the child's living-room window over the curb, the road winding down past the towers",
+   "from behind the child at the window; headlights sweep the ceiling twice on the bumps"
+  ],
+  "02.3": [
+   "overseer",
+   "beside the window",
+   "two-shot at child height; frost breath on the pane"
+  ],
+  "02.4": [
+   "overseer",
+   "the window looking down to the curb",
+   "over his shoulder through the glass to the lit car; reverse on his face in headlight wash; the moon on the axis between the towers (88)"
+  ],
+  "02.5": [
+   "overseer",
+   "the window itself",
+   "high-speed shatter from outside looking in; the tambourine leaves toward camera and the black"
+  ],
+  "03.0": [
+   "temple",
+   "the chapel's seaward lancet",
+   "tracking with the tambourine in black, then a clean pass through the lancet into the nave"
+  ],
+  "03.1": [
+   "temple",
+   "the nave, choir loft and baptistery as built",
+   "locked-off time-lapse plates; macro on wood, stone and web"
+  ],
+  "03.2": [
+   "temple",
+   "the side doors and stone threshold",
+   "low exterior on the threshold; the boxes weather in time-lapse"
+  ],
+  "03.3": [
+   "temple",
+   "the flat, from the beach",
+   "wide time-lapse of the silhouette in lightning; pull back as it washes away; the Drowned Cathedral's towers tilt out of the bay behind"
+  ],
+  "03.4": [
+   "temple",
+   "the tide line where the chapel stood",
+   "still wides of wreckage; inserts on bread, blanket, mud prints"
+  ],
+  "03.5": [
+   "temple",
+   "the chapel's remnant floor",
+   "ground-level slow motion as the tambourine shatters toward lens"
+  ],
+  "04.0": [
+   "cenotaph",
+   "the shore below the rail, where the chapel's pieces washed east",
+   "lateral track along the tide line, he is a silhouette, ravens cross; the viaduct's broken spans above (43)"
+  ],
+  "04.1": [
+   "cenotaph",
+   "the shore looking out, then back to the trees",
+   "locked-off wides; nothing moves"
+  ],
+  "04.2": [
+   "cenotaph",
+   "on the sand at the foot of the shore steps",
+   "low from the sand up past the glowing heart to his chest (97's steps behind)"
+  ],
+  "04.3": [
+   "cenotaph",
+   "the trail up the steps and the incline to the field",
+   "crane rising with him; the sea drops behind; the wreck's hull at the top"
+  ],
+  "04.4": [
+   "ascent",
+   "the Night Garden Field",
+   "wide moonlit field, him small in the rows; reverse on blooms turning to lens (78)"
+  ],
+  "04.5": [
+   "ascent",
+   "a bare patch in the field",
+   "near-black, low-key, skimming red soil (71); the hands return"
+  ],
+  "04.6": [
+   "ascent",
+   "the centre of the field by the lone tree",
+   "static frontal medium-wide, slow push"
+  ],
+  "05.0": [
+   "ascent",
+   "the field's edge where 04 ended",
+   "wide static; the procession's lights enter from the far edge"
+  ],
+  "05.1": [
+   "ascent",
+   "the avenue through the field",
+   "medium tracking alongside him into the parade; inserts of hands passing lights (68)"
+  ],
+  "05.2": [
+   "black",
+   "memory: the Southern-pine basement",
+   "low insert up at pine joists, match-cut back to the sky"
+  ],
+  "05.3": [
+   "ascent",
+   "the heart of the parade",
+   "slow push on his face as galaxies are placed in his hands"
+  ],
+  "05.4": [
+   "ascent",
+   "the far end of the parade, facing the city",
+   "extreme close-up on palms lit by star-glow; rack to the ancestors"
+  ],
+  "05.5": [
+   "plaza",
+   "the trailhead at the Perimeter",
+   "low-angle hero medium; he turns toward the gate's light; the fence of light behind him (89, 90)"
+  ],
+  "06.0": [
+   "plaza",
+   "the Light Gate, from the field",
+   "low wide on the ring opening, him entering from behind camera; reverse into the glow"
+  ],
+  "06.1": [
+   "plaza",
+   "the processional road descending from the gate into the market",
+   "crane following him down; tilt up to the comets; the market's lights below"
+  ],
+  "06.2": [
+   "plaza",
+   "the round plaza",
+   "the aerial over the terraces (33), then him in the crowd lit from above"
+  ],
+  "06.3": [
+   "plaza",
+   "the hall of crystal trees",
+   "handheld through vines on stone; insert of the heart-scan (34)"
+  ],
+  "06.4": [
+   "commons",
+   "the cathedral square, under the dish",
+   "slow 360 orbit with him at the centre; the forum lit, children under the dish (14, 16)"
+  ],
+  "06.5": [
+   "naraka",
+   "the hidden stairwells, two people wide",
+   "Steadicam behind him; candle close-ups; window POVs (45, 61, 44)"
+  ],
+  "06.6": [
+   "naraka",
+   "the Container Rows to the House door",
+   "seated medium then wide; ends on the doorway with people filing in (19, 20)"
+  ],
+  "07.0": [
+   "naraka",
+   "the House: the booth on the back wall",
+   "whip-pan to the booth; insert on the fader; wide of the hushed room (59)"
+  ],
+  "07.1": [
+   "naraka",
+   "the bar, facing the floor",
+   "tight profile at the mic, slow push; reverse onto faces"
+  ],
+  "07.2": [
+   "naraka",
+   "the speaker stacks",
+   "macro on the mesh with silhouettes"
+  ],
+  "07.3": [
+   "naraka",
+   "between bar and booth",
+   "VU meter insert, then low angle as the volume jumps"
+  ],
+  "07.4": [
+   "naraka",
+   "the projection wall: the container's steel side",
+   "the boxed home and the vans projected on rust; crowd silhouettes in front"
+  ],
+  "07.5": [
+   "naraka",
+   "the platters",
+   "overhead, petals under the needle"
+  ],
+  "07.6": [
+   "naraka",
+   "the dance floor under the dark cloud",
+   "wide in haze with the cloud practical; end low on his raised chin (36)"
+  ],
+  "08.0": [
+   "ankhu",
+   "the rooftop club on a spire crown (up the elevator shaft from the House)",
+   "medium on the dancer under strobe, crane up with the soul (47)"
+  ],
+  "08.1": [
+   "ankhu",
+   "the dance floor from above",
+   "overhead slow motion (soul POV), then a 360 around the lone dancer"
+  ],
+  "08.2": [
+   "ascent",
+   "the sky over Atlantis; the planet field",
+   "top-down aerial of the lit city (69), match-cut to the curved horizon"
+  ],
+  "08.3": [
+   "ankhu",
+   "the middle of the club floor",
+   "high angle down the water's arc"
+  ],
+  "08.4": [
+   "ankhu",
+   "the subwoofer wall at the floor's edge",
+   "push in to the chest; side light through fog"
+  ],
+  "08.5": [
+   "ankhu",
+   "the parapet",
+   "over the shoulder, long lens compressing the ridge under a crescent moon (27)"
+  ],
+  "09.0": [
+   "arcade",
+   "the sidewalk at the foot of the spire",
+   "handheld follow through the crowd; the EX's back, soft"
+  ],
+  "09.1": [
+   "arcade",
+   "the avenue toward the moon",
+   "long tracking two-shot from behind, the moon at the vanishing point; the canopy dark at this hour; puddle insert (62)"
+  ],
+  "09.2": [
+   "arcade",
+   "the booth curb",
+   "low at suitcase level, the booth's light on the curb (100)"
+  ],
+  "09.3": [
+   "arcade",
+   "inside the booth (by phone: the mother's living room, the Overseer)",
+   "through the booth glass, the break-up behind; then her window holds the sidewalk"
+  ],
+  "09.4": [
+   "bay",
+   "by phone: the Inner Harbour before dawn",
+   "wide walking shot along the pier lights from behind, dawn ahead; the break-up in the background plate"
+  ],
+  "09.5": [
+   "arcade",
+   "back at the booth curb",
+   "locked-off two-shot; the EX dissolves; hold on him alone"
+  ],
+  "10.0": [
+   "arcade",
+   "the same curb, the bike under the lamp",
+   "wide of the empty sidewalk, then the chrome mirror"
+  ],
+  "10.1": [
+   "arcade",
+   "curbside",
+   "inserts on palms, fender, boot"
+  ],
+  "10.2": [
+   "commons",
+   "empty plazas and the tunnels under the market",
+   "rear rig on the empty pillion; the forum's lit lip at 5 a.m.; the shadow-pool underpass (92)"
+  ],
+  "10.3": [
+   "arcade",
+   "the avenue under the LED canopy",
+   "low tracking on tyre spray; whip-pans across the crowd (94, 95)"
+  ],
+  "10.4": [
+   "cenotaph",
+   "the rail viaduct out of the city as the moon sets",
+   "wide from behind the rider; skyline behind, dawn ahead (37, 98)"
+  ],
+  "10.5": [
+   "cenotaph",
+   "the pass under the mountain, the rail beside the road",
+   "drone chase on the switchbacks; low side angle on the lean"
+  ],
+  "11.0": [
+   "cenotaph",
+   "the shore steps beneath the mountain",
+   "extreme wide from the water looking inland; the bike small against the hills (97)"
+  ],
+  "11.1": [
+   "temple",
+   "the chapel's remnants in low sun",
+   "low macro dolly across debris; flare"
+  ],
+  "11.2": [
+   "temple",
+   "the old footprint at the waterline",
+   "locked-off time-lapse as the white vault rises over the ruin"
+  ],
+  "11.3": [
+   "temple",
+   "the new nave",
+   "symmetrical wide; sunbeam shafts; crane up"
+  ],
+  "11.4": [
+   "temple",
+   "the mirror hall",
+   "close on pages; over the shoulder into the mirror (42)"
+  ],
+  "11.5": [
+   "temple",
+   "the threshold facing the harbour",
+   "reverse from inside the doors to the sea; then the hero exterior on the portico pool (52)"
+  ],
+  "12.0": [
+   "temple",
+   "the hall under its rafters",
+   "wide from the rafters, then handheld into the circle"
+  ],
+  "12.1": [
+   "temple",
+   "the centre of the gathering",
+   "chest-height mediums, fast cuts"
+  ],
+  "12.2": [
+   "temple",
+   "the rafters and a back room of empty chairs",
+   "tilt into the dark; static wide of the back room"
+  ],
+  "12.3": [
+   "temple",
+   "the hall's front, posed like the photographs",
+   "locked frontal tableau; macro on grains"
+  ],
+  "12.4": [
+   "temple",
+   "the grounds where the hill's woods begin",
+   "low into the canopy; lateral track along trunks"
+  ],
+  "12.5": [
+   "temple",
+   "the sandy path to the shore",
+   "profile track down the chain"
+  ],
+  "12.6": [
+   "temple",
+   "the meadow, ending at a porch",
+   "golden-hour wide with the ball; from behind toward the porch light (72's reflection)"
+  ],
+  "13.0": [
+   "bay",
+   "the promenade from the temple round the harbour",
+   "long-lens lateral, water and boats between camera and him (23)"
+  ],
+  "13.1": [
+   "bay",
+   "the pier café's corner table",
+   "static medium; couples soft in the foreground"
+  ],
+  "13.2": [
+   "bay",
+   "the café glass; a harbour church",
+   "reflections double his face with the ghost children"
+  ],
+  "13.3": [
+   "bay",
+   "the table (mental space)",
+   "push on his still face; match-cuts into the montage"
+  ],
+  "13.4": [
+   "ascent",
+   "the Night Garden Field by day, harvested",
+   "aerial over poppies; light into his chest"
+  ],
+  "13.5": [
+   "bay",
+   "the café window from the harbour",
+   "through-the-glass from outside; rack focus to his eyes (24)"
+  ],
+  "13.6": [
+   "bay",
+   "the harbour edge and piers, the haze rising",
+   "follow from behind along the waterline; widen as the haze comes off the water (80, 65)"
+  ],
+  "14.0": [
+   "haze",
+   "the harbour edge, then the end of the catwalk",
+   "slow tilt up the body as haze climbs; hand gripping a rail (81)"
+  ],
+  "14.1": [
+   "black",
+   "the centre of the void",
+   "static, slowly rotating"
+  ],
+  "14.2": [
+   "black",
+   "void and B-roll",
+   "hard cuts on the beat"
+  ],
+  "14.3": [
+   "black",
+   "void",
+   "macro along scars; desaturating grade"
+  ],
+  "14.4": [
+   "black",
+   "before the door",
+   "wide of the lone door in black, him entering from behind (the Arcade's chrome door, 6)"
+  ],
+  "14.5": [
+   "black",
+   "the ballroom beyond the door",
+   "Steadicam through the slow-motion crowd; overhead on two dancers (36)"
+  ],
+  "14.6": [
+   "black",
+   "the doorway, from outside",
+   "hold on the back of the crowd; reverse as the door swings shut to black"
+  ]
+ },
+ "transitions": [
+  {
+   "from": "01",
+   "to": "02",
+   "mode": "fall",
+   "a": "haze",
+   "b": "overseer",
+   "zone": "no street: the Severn's escape → the black → the child's window, through his eye",
+   "views": [
+    26,
+    93
+   ],
+   "grammar": "the drop is vertical and continuous; the cut into 02 is a push through the pupil",
+   "physical": "the Severn's light well is the only place in the city where you can see straight down to black water (the shadow-pool rhymes it)"
+  },
+  {
+   "from": "02",
+   "to": "03",
+   "mode": "fly",
+   "a": "overseer",
+   "b": "temple",
+   "zone": "the tambourine's flight: out of the hill's window, through black, into the chapel’s lancet 3.2 km to the southeast",
+   "views": [
+    87,
+    58
+   ],
+   "grammar": "one tracking object across two places; no people",
+   "physical": "seen on the map, the line from the house to the chapel crosses the whole old city and the harbour"
+  },
+  {
+   "from": "03",
+   "to": "04",
+   "mode": "cut",
+   "a": "temple",
+   "b": "cenotaph",
+   "zone": "the same shore, east of the chapel along the rail, after the storm",
+   "views": [
+    97,
+    76
+   ],
+   "grammar": "time cut: day storm → twilight calm, same tide line",
+   "physical": "the chapel's wreckage drifts east under the broken viaduct"
+  },
+  {
+   "from": "04",
+   "to": "05",
+   "mode": "walk",
+   "a": "cenotaph",
+   "b": "ascent",
+   "zone": "the shore steps and the dune incline up to the field below the gate",
+   "views": [
+    97,
+    71
+   ],
+   "grammar": "the climb is the poem's ascent; crane rising with him",
+   "physical": "the stair from the water to the field is the rail's old station stair"
+  },
+  {
+   "from": "05",
+   "to": "06",
+   "mode": "walk",
+   "a": "ascent",
+   "b": "plaza",
+   "zone": "the avenue from the parade to the Perimeter and the Light Gate",
+   "views": [
+    89,
+    90,
+    33
+   ],
+   "grammar": "dark field → fence of light → white glare; he enters frame from behind camera",
+   "physical": "the Perimeter's fence runs the field's edge; the heart-scan is in the hall of crystal trees inside the ring"
+  },
+  {
+   "from": "06",
+   "to": "07",
+   "mode": "walk",
+   "a": "plaza",
+   "b": "naraka",
+   "zone": "the processional road down from the gate into the market; the hidden stairwells; the House door",
+   "views": [
+    61,
+    45,
+    19,
+    20
+   ],
+   "grammar": "down and in: from aerial to Steadicam to a doorway",
+   "physical": "the avenue descends some 30 m from the gate into the market"
+  },
+  {
+   "from": "07",
+   "to": "08",
+   "mode": "lift",
+   "a": "naraka",
+   "b": "ankhu",
+   "zone": "the Spire Elevator Shaft from the House's back stair to the rooftop club",
+   "views": [
+    82,
+    83,
+    99,
+    47,
+    10
+   ],
+   "grammar": "a vertical cut: the red shaft is one shot looking up; the doors open on violet",
+   "physical": "the strongest bridge in the views: five images sit between the Hive's towers and Ankhu's platforms (CLIP)"
+  },
+  {
+   "from": "08",
+   "to": "09",
+   "mode": "walk",
+   "a": "ankhu",
+   "b": "arcade",
+   "zone": "down the shaft and out at the spire's foot onto the avenue",
+   "views": [
+    99,
+    100,
+    7
+   ],
+   "grammar": "high to street; the crowd fawns at the door",
+   "physical": "the club's street door opens under the canopy"
+  },
+  {
+   "from": "09",
+   "to": "10",
+   "mode": "dissolve",
+   "a": "arcade",
+   "b": "arcade",
+   "zone": "the same curb",
+   "views": [
+    100
+   ],
+   "grammar": "the EX dissolves; the bike was always there",
+   "physical": "the booth and the bike share one lamp"
+  },
+  {
+   "from": "10",
+   "to": "11",
+   "mode": "ride",
+   "a": "arcade",
+   "b": "cenotaph",
+   "zone": "the canopy → the empty commons and the underpass → the rail viaduct out → the pass under the mountain → the shore steps",
+   "views": [
+    94,
+    92,
+    43,
+    37,
+    98,
+    97
+   ],
+   "grammar": "the album's only travelling poem: neon to dawn in one direction",
+   "physical": "the route crosses four districts; the moon sets behind the spire as he reaches the viaduct"
+  },
+  {
+   "from": "11",
+   "to": "12",
+   "mode": "cut",
+   "a": "temple",
+   "b": "temple",
+   "zone": "the same hall, decades later",
+   "views": [
+    42,
+    52
+   ],
+   "grammar": "ellipsis; same frame, filled",
+   "physical": "the white vault over the chapel's walls"
+  },
+  {
+   "from": "12",
+   "to": "13",
+   "mode": "walk",
+   "a": "temple",
+   "b": "bay",
+   "zone": "out of the temple and round the harbour to the café, past the drowned atria",
+   "views": [
+    53,
+    54
+   ],
+   "grammar": "daylight; the long lateral along the water",
+   "physical": "the CLIP bridge between the temple's pools and the bay's drowned gardens is this walk"
+  },
+  {
+   "from": "13",
+   "to": "14",
+   "mode": "dissolve",
+   "a": "bay",
+   "b": "black",
+   "zone": "the haze rises off the harbour, takes the Hive's skyline, then him",
+   "views": [
+    80,
+    65,
+    81
+   ],
+   "grammar": "white-out from the ground up; the Orange Haze arrives at the harbour",
+   "physical": "the Haze and the Bay meet at the harbour edge; the catwalk ends over the water"
+  },
+  {
+   "from": "14",
+   "to": "01",
+   "mode": "door",
+   "a": "black",
+   "b": "black",
+   "zone": "the chrome door → the vintage party",
+   "views": [
+    6,
+    36
+   ],
+   "grammar": "the door closes on the viewer; the film loops",
+   "physical": "the Arcade's chrome door is the door's only trace in the city"
+  }
+ ],
+ "heroes": [
+  {
+   "id": "shaft",
+   "name": "The Spire Elevator Shaft",
+   "district": "ankhu",
+   "poems": [
+    "07",
+    "08"
+   ],
+   "views": [
+    82,
+    83
+   ],
+   "brief": "a 100-storey open shaft lit red, rising from the House's back stair to the rooftop club; cars are open cages; a landing every 4 m with a lamp",
+   "beats": [
+    "the House's back stair",
+    "the cage",
+    "looking up the shaft",
+    "the doors open on violet"
+   ],
+   "facts": [
+    [
+     "reference",
+     "a square shaft with red light raking the floors, rails and cross-bracing (82, 83)"
+    ],
+    [
+     "inferred",
+     "it is how 07 reaches 08: the treatment says only that he leaves for a rooftop club"
+    ],
+    [
+     "invented",
+     "a landing every 4 m carries the salt line at 4/10 of its rail"
+    ],
+    [
+     "open",
+     "structural bay and car size against the spire's stem"
+    ]
+   ],
+   "setting": "redshaft",
+   "builds_on": "the Severn's stair compiler (flights, landings, rails) in heroes/build.mjs"
+  },
+  {
+   "id": "house",
+   "name": "The House",
+   "district": "naraka",
+   "poems": [
+    "06",
+    "07"
+   ],
+   "views": [
+    19,
+    20,
+    36,
+    59
+   ],
+   "brief": "a casona built into stacked containers on the market street: front room, back bar with an open mic, DJ booth on the back wall, a container's steel side as the projection wall, a back stair to the shaft",
+   "beats": [
+    "the door with people filing in",
+    "the bar",
+    "the booth",
+    "the floor under the dark cloud"
+   ],
+   "facts": [
+    [
+     "reference",
+     "teal and pink containers with lit openings and string lights (19, 20)"
+    ],
+    [
+     "reference",
+     "a crowd in warm haze, light leaks (36, 59)"
+    ],
+    [
+     "inferred",
+     "a converted casona (treatment: Roma Norte / Juárez) inside Naraka's containers"
+    ],
+    [
+     "invented",
+     "the projection wall is a container's rusted side, plated where it broke"
+    ]
+   ],
+   "setting": "wetnight",
+   "builds_on": "the NEW SINGLE's lobby and house (heroes)"
+  },
+  {
+   "id": "teahouse",
+   "name": "The Teahouse of Saints",
+   "district": "naraka",
+   "poems": [
+    "06"
+   ],
+   "views": [
+    96
+   ],
+   "brief": "a street teahouse in a container, its kettles venting blue vapour at every gate",
+   "beats": [
+    "the vapour bloom",
+    "a seat at the counter"
+   ],
+   "facts": [
+    [
+     "reference",
+     "a lit stall breathing blue vapour into the street (96)"
+    ],
+    [
+     "invented",
+     "it vents on the tide: the hot minute is visible here"
+    ]
+   ],
+   "setting": "wetnight",
+   "builds_on": "the pier café (heroes)"
+  },
+  {
+   "id": "shadowpool",
+   "name": "The Underpass Shadow-Pool",
+   "district": "naraka",
+   "poems": [
+    "01",
+    "10"
+   ],
+   "views": [
+    92,
+    93
+   ],
+   "brief": "an underpass under the market flooded ankle-deep, its ceiling patched, the market's light at the far end",
+   "beats": [
+    "the children standing still",
+    "the bike through the water (10)"
+   ],
+   "facts": [
+    [
+     "reference",
+     "a flooded underpass with figures standing in the reflection (93)"
+    ],
+    [
+     "inferred",
+     "the hole in the party floor (01) rhymes it"
+    ],
+    [
+     "invented",
+     "the water stands exactly at the flood line's 4/10 of the underpass height"
+    ]
+   ],
+   "setting": "wetnight",
+   "builds_on": "city3d puddles and the mirror under wet ground (heroes)"
+  },
+  {
+   "id": "perimeter",
+   "name": "The Perimeter and the heart-scan",
+   "district": "plaza",
+   "poems": [
+    "05",
+    "06"
+   ],
+   "views": [
+    89,
+    90,
+    34
+   ],
+   "brief": "a fence of light along the field's edge leading to the Light Gate; inside the ring the hall of crystal trees where the gate scans his heart",
+   "beats": [
+    "the fence from the field",
+    "the gate opening",
+    "the scan"
+   ],
+   "facts": [
+    [
+     "reference",
+     "chain-link lit cyan with lamps behind, wet ground (89, 90)"
+    ],
+    [
+     "reference",
+     "trees of light over a reflecting floor (34)"
+    ],
+    [
+     "exists",
+     "the Light Gate icon (city3d/icons.mjs)"
+    ],
+    [
+     "invented",
+     "the fence became light in the Resurrection"
+    ]
+   ],
+   "setting": "gate",
+   "builds_on": "the Light Gate icon"
+  },
+  {
+   "id": "forum",
+   "name": "The Sunken Forum and the Dish",
+   "district": "commons",
+   "poems": [
+    "06",
+    "10"
+   ],
+   "views": [
+    14,
+    15,
+    16
+   ],
+   "brief": "a stepped oval sunk in the cathedral square, lit at the lip; beside it a radio dish on a plinth that turns at each gate",
+   "beats": [
+    "all safe: the orbit",
+    "children under the dish",
+    "empty at dawn"
+   ],
+   "facts": [
+    [
+     "reference",
+     "a sunken lit oval ringed by people (14)"
+    ],
+    [
+     "reference",
+     "a radio telescope dish over a square, children running (15, 16)"
+    ],
+    [
+     "exists",
+     "an evolved dish structure (city3d structures)"
+    ],
+    [
+     "invented",
+     "WYGWYL radio broadcasts from it"
+    ]
+   ],
+   "setting": "bluehour",
+   "builds_on": "evolved.mjs (dish), city3d plazas"
+  },
+  {
+   "id": "canopy",
+   "name": "The LED Canopy and the booth curb",
+   "district": "arcade",
+   "poems": [
+    "09",
+    "10"
+   ],
+   "views": [
+    94,
+    95,
+    100
+   ],
+   "brief": "a 300 m canopy of moving light over the avenue, never lower than +4 m; at its end the phone booth on its curb under one lamp",
+   "beats": [
+    "the crowd at the club door",
+    "the booth",
+    "the bike",
+    "the swagger"
+   ],
+   "facts": [
+    [
+     "reference",
+     "an LED vault over a crowded avenue with palms (94, 95)"
+    ],
+    [
+     "reference",
+     "a rain-soaked street, neon doubled (100)"
+    ],
+    [
+     "exists",
+     "phone booth and motorcycle landmarks at (6090, 2874) and (5902, 2945)"
+    ],
+    [
+     "invented",
+     "the canopy keeps the flood line clear"
+    ]
+   ],
+   "setting": "wetnight",
+   "builds_on": "kit.mjs (the shelter, the lamp), city3d landmarks"
+  },
+  {
+   "id": "catwalk",
+   "name": "The Orange Catwalk",
+   "district": "haze",
+   "poems": [
+    "01",
+    "13",
+    "14"
+   ],
+   "views": [
+    84,
+    85,
+    79,
+    80,
+    81
+   ],
+   "brief": "an elevated concrete path with a glowing kerb, from the Severn's foot across the industrial district at deck height to the harbour, ending in a platform over the water",
+   "beats": [
+    "seen from the Severn's window",
+    "three figures walking away",
+    "the end of the platform"
+   ],
+   "facts": [
+    [
+     "reference",
+     "an elevated path with a lit edge in orange fog (84, 85)"
+    ],
+    [
+     "reference",
+     "a figure at the rail of a platform over nothing (81)"
+    ],
+    [
+     "invented",
+     "it ends over the harbour, where the haze takes him (14)"
+    ],
+    [
+     "open",
+     "its line across the plan; it should follow the expressway ring"
+    ]
+   ],
+   "setting": "haze",
+   "builds_on": "city3d roads (the expressways) and kit.mjs (rails)"
+  },
+  {
+   "id": "severnescape",
+   "name": "The Severn's spiral escape",
+   "district": "haze",
+   "poems": [
+    "01"
+   ],
+   "views": [
+    66,
+    26
+   ],
+   "brief": "an addition to the existing hero: the light well's spiral stair with planters, seen from the top landing straight down into the haze",
+   "beats": [
+    "haze at the window",
+    "off the fire escape"
+   ],
+   "facts": [
+    [
+     "exists",
+     "the Severn and its fire escapes (heroes/hdl.json)"
+    ],
+    [
+     "reference",
+     "a spiral iron stair with planters in an orange light well (66)"
+    ],
+    [
+     "invented",
+     "the light well opens to the black water of the undercroft"
+    ]
+   ],
+   "setting": "redteal",
+   "builds_on": "the Severn (heroes)"
+  },
+  {
+   "id": "atrium",
+   "name": "The Drowned Atrium",
+   "district": "bay",
+   "poems": [
+    "13",
+    "03"
+   ],
+   "views": [
+    53,
+    54,
+    55,
+    56
+   ],
+   "brief": "a tower lobby that stayed flooded after the Fall: water to +4 m, floor glowing beneath, trees in planters rising into the light, a walkway across",
+   "beats": [
+    "the walk from the temple to the café passes through it"
+   ],
+   "facts": [
+    [
+     "reference",
+     "lit floors under still water, trees, glass walls (53–56)"
+    ],
+    [
+     "invented",
+     "kept, not drained: 'the bay keeps it'"
+    ]
+   ],
+   "setting": "tidal",
+   "builds_on": "city3d flood datum, heroes mirror"
+  },
+  {
+   "id": "drowned",
+   "name": "Inside the Drowned Cathedral",
+   "district": "bay",
+   "poems": [
+    "03",
+    "02"
+   ],
+   "views": [
+    57,
+    58
+   ],
+   "brief": "the nave nine metres under the bay: handprints on the windows, the fishermen's lamps on the floor",
+   "beats": [
+    "the tambourine's flight passes it",
+    "the void's floating has its light"
+   ],
+   "facts": [
+    [
+     "exists",
+     "the Drowned Cathedral icon at (3420, 3580), sunk 9.2 m"
+    ],
+    [
+     "reference",
+     "a submerged corridor with handprints on glass (57) and scattered lights on the floor (58)"
+    ]
+   ],
+   "setting": "tidal",
+   "builds_on": "the Drowned Cathedral icon"
+  },
+  {
+   "id": "sleepdam",
+   "name": "The Sleep-Dam Wall",
+   "district": "bay",
+   "poems": [
+    "13",
+    "14"
+   ],
+   "views": [
+    75,
+    76
+   ],
+   "brief": "the concrete wall that holds the bay back, with a gate through it to the water; saltwater graffiti 'REMEMBER THE …'",
+   "beats": [
+    "the harbour walk passes it",
+    "the haze comes over it"
+   ],
+   "facts": [
+    [
+     "reference",
+     "a wall at night with graffiti and a lit opening onto water (75, 76)"
+    ],
+    [
+     "exists",
+     "seawalls (city3d structures)"
+    ],
+    [
+     "invented",
+     "the graffiti is rewritten every Night of the Line"
+    ]
+   ],
+   "setting": "harbour",
+   "builds_on": "evolved.mjs seawalls"
+  },
+  {
+   "id": "viaduct",
+   "name": "The Named Viaduct",
+   "district": "cenotaph",
+   "poems": [
+    "10",
+    "04"
+   ],
+   "views": [
+    43,
+    37,
+    50,
+    98
+   ],
+   "brief": "the New Boroughs' elevated rail kept as a cenotaph: gothic arches with names carved below the line, rusted platforms, one sodium lamp left",
+   "beats": [
+    "the ride out under the arches",
+    "he reads a name",
+    "the platform at dusk"
+   ],
+   "facts": [
+    [
+     "reference",
+     "an ornate arch under an elevated rail (43); a rusted platform over the city (37)"
+    ],
+    [
+     "inferred",
+     "the ruin field's 'ruins walked as a monument' (city3d)"
+    ],
+    [
+     "invented",
+     "names of the drowned below the +4 m line"
+    ]
+   ],
+   "setting": "dawn",
+   "builds_on": "city3d bridge landmark and ruins"
+  },
+  {
+   "id": "steps",
+   "name": "The Shore Steps",
+   "district": "cenotaph",
+   "poems": [
+    "04",
+    "11"
+   ],
+   "views": [
+    97
+   ],
+   "brief": "wet stone steps from the rail's old station down to the water beneath the mountain, lanterns on the landings",
+   "beats": [
+    "the heart on the sand",
+    "the arrival at dawn"
+   ],
+   "facts": [
+    [
+     "reference",
+     "wet stone steps with lanterns down to water at dusk (97)"
+    ],
+    [
+     "inferred",
+     "the station stair of the broken rail"
+    ],
+    [
+     "exists",
+     "the Salt Stair's grammar: a landing every storey of rise"
+    ]
+   ],
+   "setting": "dawn",
+   "builds_on": "the Salt Stair icon"
+  },
+  {
+   "id": "pools",
+   "name": "The Temple's Pools",
+   "district": "temple",
+   "poems": [
+    "11",
+    "12"
+   ],
+   "views": [
+    52,
+    72,
+    42
+   ],
+   "brief": "the white temple's portico on a mirror pool, the black pool that holds the stars, and the mirror hall of white piers on black water",
+   "beats": [
+    "welcoming the new day",
+    "the journal and the mirror",
+    "the porch light reflected"
+   ],
+   "facts": [
+    [
+     "exists",
+     "the chapel and the white temple (heroes/hdl.json)"
+    ],
+    [
+     "reference",
+     "a colonnade doubled in a still pool (52); a black pool full of stars (72); white piers on black water (42)"
+    ],
+    [
+     "invented",
+     "the pools are laid where the chapel's floor was"
+    ]
+   ],
+   "setting": "tidal",
+   "builds_on": "the chapel hero (white temple state)"
+  },
+  {
+   "id": "childhouse",
+   "name": "The Child's House",
+   "district": "overseer",
+   "poems": [
+    "02"
+   ],
+   "views": [
+    87
+   ],
+   "brief": "the Atlantis rowhouse at the bottom of the road that winds down from the hill's rows: the ground-floor window over the curb, the towers behind",
+   "beats": [
+    "the car pulls up",
+    "the ghost child",
+    "the tambourine through the glass"
+   ],
+   "facts": [
+    [
+     "exists",
+     "the Atlantis rowhouse (heroes/hdl.json)"
+    ],
+    [
+     "reference",
+     "an old house under the moon with towers behind (87)"
+    ],
+    [
+     "open",
+     "no view shows the room: a valley to fill"
+    ]
+   ],
+   "setting": "winternight",
+   "builds_on": "the rowhouse hero"
+  }
+ ],
+ "prompts": {
+  "02.2": "Atlantis rowhouse living room at night in winter, a six-year-old at the ground-floor window, headlights from a car on a curving hill street sweeping the ceiling, slab towers and a moon behind, frost on the glass, Baltimore brick, 35mm, still",
+  "02.3": "a ghost child, slightly diffused, hugging a small boy beside a dark window, headlight wash, winter night, frost breath on the pane",
+  "03.1": "the inside of a dark stone chapel on a tidal flat, empty choir stands, a dry baptism pool, pews veiled in cobwebs, one shaft of dusty light, lancet windows, time-lapse decay",
+  "03.3": "a lone stone chapel with a bell-cote on a tidal flat in a lightning storm, sheets of rain, the tilted towers of a drowned cathedral in the bay behind",
+  "07.0": "a DJ booth on the back wall of a house party built inside stacked shipping containers, teal and pink neon, haze over the floor, a projection on rusted steel",
+  "12.4": "friends touching tree trunks at a forest edge at dusk under picnic lights beside a white temple on a harbour, breath in cool air",
+  "12.6": "a football spiralling across a golden meadow at sunset, men walking toward a lit porch, a white temple and the sea behind",
+  "13.1": "a corner café on a pier in daylight, teal boards and white trim, striped awnings, a man alone at a window table watching couples, the turquoise harbour outside, Atlantis towers across the water in haze",
+  "04.3": "a man in red and black climbing wet stone steps from a night beach up a dune incline toward a moonlit field, ravens overhead, a broken elevated viaduct above",
+  "10.5": "a motorcycle leaning into a mountain switchback at first light, an old elevated rail running beside the road, pastel dawn, mist below",
+  "07.1": "a man with eyes closed at a microphone at the bar of a house party built inside stacked shipping containers, strobe glinting on his eyelids, faces in the crowd behind, teal and pink neon, Atlantis, 50mm",
+  "07.3": "a VU meter needle slamming into the red on a mixer in a DJ booth, the microphone's grille blooming with light, a crowd in haze beyond",
+  "07.5": "overhead on a turntable platter with daisy petals falling on the spinning vinyl, the DJ's hand on the record, neon reflection on the plinth",
+  "12.5": "a chain of men walking a sandy path from a white temple toward the sea at dusk, wrists interlocked, one with his ear on the next man's chest, profile",
+  "13.4": "an aerial over a field of scarlet poppies and purple blossoms being harvested in daylight on the rise above the sea, an old obelisk and a beached ship's hull at the field's edge",
+  "04.1": "a night beach under a broken elevated stone viaduct, waves calmed to whispers, a still tree line, no wind, moonlight, long exposure",
+  "04.2": "a glowing heart lying on wet sand among chapel wreckage and ash at night at the foot of lantern-lit stone steps, low angle",
+  "04.6": "a man standing alone at the centre of a moonlit field beside a single still tree, golden plants turned toward him, a white ring gate faint on the horizon",
+  "05.0": "a dark field at night with a procession of lights entering from the far edge along a stone avenue, a lone man small at the centre, an obelisk, deep starlight",
+  "09.3": "inside a ceramic phone booth on a rain-soaked Atlantis avenue at 3 a.m., a man on the phone, through the glass a couple breaking up on the curb with suitcases, LED canopy dark overhead",
+  "10.0": "a motorcycle idling under a single street lamp at the curb beside a phone booth on a wet empty avenue, the man's face in the chrome mirror, neon doubled in puddles",
+  "02.4": "a six-year-old's face lit by headlights through a frosted ground-floor window, his parents arguing in a lit car at the curb below, winter night, slab towers and a moon behind",
+  "02.5": "a tambourine bursting outward through a shattering ground-floor window toward the camera, high-speed, a dark winter street and a car's headlights, glass suspended in the air"
+ },
+ "joins": [
+  {
+   "id": "archive",
+   "name": "The archive",
+   "href": "../archive/index.html",
+   "is": "58,141 images and keyframes read by CLIP (ViT-B-32): search by meaning, by poem, by source",
+   "here": "the same model now reads the 100 views, the poems' 90 set pieces and 149 frames of the movie map's disc, so all of them sit in one space",
+   "finds": "the views are a new continent: on average their nearest canon shot is at cos 0.62, where canon shots sit at 0.81 from each other; only view 71 lands inside the canon",
+   "next": "publish the views as an archive source so search finds them; every new generation joins the same space"
+  },
+  {
+   "id": "iconic",
+   "name": "The imageable city",
+   "href": "../iconic/index.html",
+   "is": "2,707 canon shots read as Lynch's five elements and drawn back into a plan",
+   "here": "each view's nearest canon shots are its witnesses; where the canon placed those shots in the city is evidence for where a district belongs",
+   "finds": "the canon reads almost everything as nightlife, industrial or downtown: it has no words yet for platforms in the cloud, drowned atria or fences of light",
+   "next": "add the views' own Lynch reading (landmark, path, edge, node, district) so they can be placed by the same rule"
+  },
+  {
+   "id": "foundry",
+   "name": "The foundry",
+   "href": "../foundry/index.html",
+   "is": "1,632 islands grown grid-first by MAP-Elites and read against the poems; camera stands that turn to what he names",
+   "here": "the islands score on how well they hold the poems; they never score on mood",
+   "finds": "the grid epochs (L-system, tensor, radial) already give each district a street grammar: Naraka is the maze, the Overseer the regular grid, the Haze the expressway ring",
+   "next": "add a mood niche: render each poem's camera stand and score it against its district's centroid in CLIP, so the evolution keeps worlds that look like the views"
+  },
+  {
+   "id": "inverse",
+   "name": "Inverse topology",
+   "href": "../foundry/inverse.html",
+   "is": "28 reference landscapes: the best camera is searched in each world, then the missing regions (water, ridge, city) are grown and re-shot",
+   "here": "about fifteen of the views are legible landscapes the same method can answer: 23 and 33 (aerials), 12 and 70 (spire fields), 25 (towers over a basin), 35 (skyline over the sea), 64 (haze skyline), 69 (the city from above)",
+   "finds": "most views are interiors and close streets: they ask for buildings, not land, which is what the heroes compiler is for",
+   "next": "run inverse.py on those fifteen against city3d's plan: grow the basin under the Overseer, the cloud deck under Ankhu, the haze volume over the industrial district"
+  },
+  {
+   "id": "gazetteer",
+   "name": "The gazetteer",
+   "href": "../gazetteer/index.html#eras",
+   "is": "the world bible: six eras, the tide calendar, institutions, icons, districts by use per era",
+   "here": "every district here carries its six-era history in the gazetteer's terms, its institution, and the light technology of the era that made it, which is how colour maps onto time",
+   "finds": "the gazetteer's districts are land uses; these are moods; both are kept: the use says what the stones are for, the mood says how the film sees them",
+   "next": "add mood, hour and the views to each district entry; the Night of the Line and Relighting become shots"
+  },
+  {
+   "id": "heroes",
+   "name": "Hero buildings",
+   "href": "../heroes/index.html",
+   "is": "six story buildings described once (HDL), compiled inside and out, proved buildable, staged with the poem's beats",
+   "here": "sixteen new heroes are written in the same form: brief, beats (set pieces), facts tagged reference / inferred / invented / exists / open, a setting and what they build on",
+   "finds": "the existing six already sit in these districts: the Severn (Haze), the chapel and white temple (Temple), the NEW SINGLE (Naraka's neighbour), the pier café (Bay), the clock tower (Temple), the rowhouse (Overseer)",
+   "next": "compile the shaft, the House and the Orange Catwalk first: they carry three transitions"
+  },
+  {
+   "id": "language",
+   "name": "The design language",
+   "href": "../language/index.html",
+   "is": "the rules: the flood datum, kintsugi, additions, stairs are streets, the tide, skinned with its own footage, the Line and the Seam",
+   "here": "its district palettes are measured from archive evidence and come out grey; the views give each district its glow; a district's colour is two layers: body from the archive, light from the views",
+   "finds": "every rule holds in every district: the line rides the catwalk rails, the shaft's landings, the canopy's clearance, the names on the viaduct",
+   "next": "the colour tokens gain a district layer: haze sodium, Naraka teal and pink, Ankhu violet, Overseer moon blue, Arcade red-blue, Temple white"
+  },
+  {
+   "id": "moviemap",
+   "name": "The movie map and its film",
+   "href": "../moviemap/index.html",
+   "is": "the city filmed every 3 m at noon in four views; the film's camera driven by his voice",
+   "here": "149 frames of the disc in the same space: they look like each other (0.92) and like neither the canon (0.64) nor the views (0.45)",
+   "finds": "the city we render is a third island: one mood everywhere; 120 of 149 street frames read as Mirror Thread Bay's pale water light",
+   "next": "district light in the engine (fog, lamp colour, neon, hour), then re-shoot the disc and measure it again: the target is for the disc to spread across the districts and move toward the views"
+  }
+ ]
+}

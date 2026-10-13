@@ -1,0 +1,196 @@
+title: Bloodline
+seed: 'Bloodline: The field goes still; Naming stars; Southern-pine basement (memory); Universes and blessings; Blood through the hands; Baritone and warning'
+diegesis:
+  premise: POET stands in the field with his newly restored hands; the parade's first figures appear on the path ahead (inferred blocking).
+  world_rules:
+  - the reading sets the clock
+  - a scene edge is a hard cut
+  - POET is one man throughout
+  core_entities:
+  - POET
+  core_locations:
+  - the field's edge where 04 ended
+  - the avenue through the field
+  - 'memory: the Southern-pine basement'
+  - the heart of the parade
+  - the far end of the parade, facing the city
+  - the trailhead at the Perimeter
+macro_structure:
+- unit_id: U1
+  kind: sequence
+  function: The field goes still → Naming stars
+- unit_id: U2
+  kind: sequence
+  function: Southern-pine basement (memory) → Universes and blessings
+- unit_id: U3
+  kind: sequence
+  function: Blood through the hands → Baritone and warning
+beat_structure:
+- beat_id: '05.0'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: POET stands in the field with his newly restored hands; the parade's first figures appear on the path ahead (inferred bl
+- beat_id: '05.1'
+  parent_unit: U1
+  syntagma_type: continuous
+  pressure_shift: Ancestors meet and accept the POET and hand him stars, then whole galaxies, as small held lights.
+- beat_id: '05.2'
+  parent_unit: U2
+  syntagma_type: accumulative
+  pressure_shift: 'The past ''was waiting'': a humid basement used as a shared bedroom, mattress pads under pine beams that did not comfort h'
+- beat_id: '05.3'
+  parent_unit: U2
+  syntagma_type: continuous
+  pressure_shift: The ancestors give him a universe to invent and the right to grant blessings and miracles where the spoken word is neede
+- beat_id: '05.4'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: POET looks at the hands he just recovered in Nevermore; the ancestral blood and fingerprints now run through them. The p
+- beat_id: '05.5'
+  parent_unit: U3
+  syntagma_type: continuous
+  pressure_shift: His voice deepens to a baritone of a million cries; on 'beware' he turns from the parade toward the horizon where the At
+patch_timeline:
+- patch_id: P05-001
+  start_time: 01:00:00:00
+  end_time: 01:00:04:16
+  location: the field's edge where 04 ended
+  entities_present:
+  - POET
+  action_summary: POET stands in the field with his newly restored hands; the parade's first figures appear on the path ahead (inferred blocking).
+  camera_relation: elevated shot, ~30 mm, camera 3.5 m up, pitch -33°
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; her reading: “They tell me to ask if I can inherit the earth, to ask if I ”'
+  patch_trigger: 'location change: the field''s edge where 04 ended'
+  source: markov 116.53+4.66s
+  status: GENERATE
+  rehydration_seed: 'the poet, a man (he/his) — POET stands in the field with his newly restored hands; the parade''s first figures appear on the path ahead (inferred blocking). Place: the field''s edge
+    where 04 ended. elevated shot, ~30 mm, camera 3.5 m up, pitch -33°; colour; light: still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; luminance 0.32. wide static
+    on the field at n'
+- patch_id: P05-002
+  start_time: 01:00:04:16
+  end_time: 01:00:13:21
+  location: the avenue through the field
+  entities_present:
+  - POET
+  action_summary: Ancestors meet and accept the POET and hand him stars, then whole galaxies, as small held lights.
+  camera_relation: medium shot
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; her reading: “name my own stars, even galaxies if I may. The past too was ”'
+  patch_trigger: 'location change: the avenue through the field'
+  source: markov 0.15+9.20s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — Ancestors meet and accept the POET and hand him stars, then whole galaxies, as small held lights. Place: the avenue through the field. medium shot; colour;
+    light: still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; luminance 0.11. medium tracking alongside POET as he walks into the parade; inserts of hands passing
+    points of light m'
+- patch_id: P05-003
+  start_time: 01:00:13:21
+  end_time: 01:00:23:06
+  location: 'memory: the Southern-pine basement'
+  entities_present: []
+  action_summary: 'The past ''was waiting'': a humid basement used as a shared bedroom, mattress pads under pine beams that did not comfort his spine. Staged as '
+  camera_relation: overhead shot, ~48 mm, camera 15.2 m up, pitch -64°
+  light_sound_state: 'timeless hour 23.2 clear; her reading: “human basements as bedrooms, mattress pads where the wood be”'
+  patch_trigger: 'location change: memory: the Southern-pine basement'
+  source: archive 8.70+9.34s
+  status: moving
+  rehydration_seed: 'no named figure — The past ''was waiting'': a humid basement used as a shared bedroom, mattress pads under pine beams that did not comfort his spine. Staged as memory, not a separate
+    place (inferred). Place: memory: the Southern-pine basement. overhead shot, ~48 mm, camera 15.2 m up, pitch -64°; colour; light: timeless hour 23.2 clear; luminance 0.09. low-angle insert up at exposed
+    pine joists, shal'
+- patch_id: P05-004
+  start_time: 01:00:23:06
+  end_time: 01:00:29:19
+  location: 'memory: the Southern-pine basement'
+  entities_present: []
+  action_summary: 'The past ''was waiting'': a humid basement used as a shared bedroom, mattress pads under pine beams that did not comfort his spine. Staged as '
+  camera_relation: medium shot
+  light_sound_state: 'timeless hour 23.2 clear; her reading: “To dream was to prevail. They tell me to ask if I can”'
+  patch_trigger: 'phrase boundary: “To dream was to”'
+  source: archive 10.19+6.57s
+  status: moving
+  rehydration_seed: 'no named figure — The past ''was waiting'': a humid basement used as a shared bedroom, mattress pads under pine beams that did not comfort his spine. Staged as memory, not a separate
+    place (inferred). Place: memory: the Southern-pine basement. medium shot; black-and-white archival film; light: timeless hour 23.2 clear; luminance 0.28. low-angle insert up at exposed pine joists,
+    shallow focus, then m'
+- patch_id: P05-005
+  start_time: 01:00:29:19
+  end_time: 01:00:39:00
+  location: the heart of the parade
+  entities_present: []
+  action_summary: The ancestors give him a universe to invent and the right to grant blessings and miracles where the spoken word is needed.
+  camera_relation: close shot
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; her reading: “invent a new universe, to ask if God would let me, little ol”'
+  patch_trigger: 'location change: the heart of the parade'
+  source: other 209.59+9.20s
+  status: moving
+  rehydration_seed: 'no named figure — The ancestors give him a universe to invent and the right to grant blessings and miracles where the spoken word is needed. Place: the heart of the parade. close shot;
+    colour; light: still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; luminance 0.23. slow push-in on POET''s face as galaxies are placed in his hands; crowd of
+    ancestors soft beh'
+- patch_id: P05-006
+  start_time: 01:00:39:00
+  end_time: 01:00:49:11
+  location: the heart of the parade
+  entities_present: []
+  action_summary: The ancestors give him a universe to invent and the right to grant blessings and miracles where the spoken word is needed.
+  camera_relation: ground / worm's-eye shot, ~27 mm, camera 0.5 m up, pitch 11°
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; her reading: “of the spoken word exists. In uncertain times, in forsaken t”'
+  patch_trigger: 'phrase boundary: “of the spoken word exists.”'
+  source: other 0.15+4.91s
+  status: moving
+  rehydration_seed: 'no named figure — The ancestors give him a universe to invent and the right to grant blessings and miracles where the spoken word is needed. Place: the heart of the parade. ground /
+    worm''s-eye shot, ~27 mm, camera 0.5 m up, pitch 11°; colour; light: still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; luminance 0.27. slow push-in on POET''s
+    face as galaxies ar'
+- patch_id: P05-007
+  start_time: 01:00:49:11
+  end_time: 01:00:57:10
+  location: the heart of the parade
+  entities_present: []
+  action_summary: The ancestors give him a universe to invent and the right to grant blessings and miracles where the spoken word is needed.
+  camera_relation: elevated shot, ~24 mm, camera 2.8 m up, pitch -18°
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; her reading: “or a history too battered and bruised to travel. To dream wa”'
+  patch_trigger: 'phrase boundary: “or a history too battered and”'
+  source: film 39.25+7.99s
+  status: moving
+  rehydration_seed: 'no named figure — The ancestors give him a universe to invent and the right to grant blessings and miracles where the spoken word is needed. Place: the heart of the parade. elevated
+    shot, ~24 mm, camera 2.8 m up, pitch -18°; black-and-white archival film; light: still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; luminance 0.28. slow push-in
+    on POET''s face a'
+- patch_id: P05-008
+  start_time: 01:00:57:10
+  end_time: 01:01:06:05
+  location: the far end of the parade, facing the city
+  entities_present:
+  - POET
+  action_summary: POET looks at the hands he just recovered in Nevermore; the ancestral blood and fingerprints now run through them. The parade's sound swells
+  camera_relation: overhead shot, ~88 mm, camera 39.8 m up, pitch -59°
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; her reading: “Their blood flows through my hands. Fingerprints that orches”'
+  patch_trigger: 'location change: the far end of the parade, facing the city'
+  source: archive 0.15+7.42s
+  status: moving
+  rehydration_seed: 'the poet, a man (he/his) — POET looks at the hands he just recovered in Nevermore; the ancestral blood and fingerprints now run through them. The parade''s sound swells (inferred).
+    Place: the far end of the parade, facing the city. overhead shot, ~88 mm, camera 39.8 m up, pitch -59°; colour; light: still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour
+    23.2 clear; luminance'
+- patch_id: P05-009
+  start_time: 01:01:06:05
+  end_time: 01:01:14:02
+  location: the trailhead at the Perimeter
+  entities_present: []
+  action_summary: His voice deepens to a baritone of a million cries; on 'beware' he turns from the parade toward the horizon where the Atlantis entrance wait
+  camera_relation: medium shot
+  light_sound_state: 'midnight (06 opens at 00:24) hour 23.2 clear; her reading: “deepening my voice to a baritone of a million cries, to an u”'
+  patch_trigger: 'location change: the trailhead at the Perimeter'
+  source: archive 23.04+7.88s
+  status: moving
+  rehydration_seed: 'no named figure — His voice deepens to a baritone of a million cries; on ''beware'' he turns from the parade toward the horizon where the Atlantis entrance waits (inferred). Place:
+    the trailhead at the Perimeter. medium shot; colour; light: midnight (06 opens at 00:24) hour 23.2 clear; luminance 0.07. low-angle hero medium, POET turning out of frame toward the gate light low-angle
+    hero medium; he tu'
+- patch_id: P05-010
+  start_time: 01:01:14:02
+  end_time: 01:01:18:02
+  location: the avenue from the parade to the Perimeter and the Light Gate
+  entities_present: []
+  action_summary: dark field → fence of light → white glare; he enters frame from behind camera
+  camera_relation: overhead shot, ~32 mm, camera 48.0 m up, pitch -85°
+  light_sound_state: still night, 21:00 to midnight (04 end, 05); the soul's view at 02:30 (08) hour 23.2 clear; her reading
+  patch_trigger: 'threshold: walk 05 → 06'
+  source: Moonwalk One, ca. 1970 21.31+4.00s
+  status: moving
+  rehydration_seed: 'no named figure — dark field → fence of light → white glare; he enters frame from behind camera Place: the avenue from the parade to the Perimeter and the Light Gate. overhead shot,
+    ~32 mm, camera 48.0 m up, pitch -85°; colour; light: still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; luminance 0.20. dark field → fence of light → white
+    glare; he enters fram'
