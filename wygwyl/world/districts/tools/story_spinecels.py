@@ -10,7 +10,9 @@ patch of the cel cut:
               EbSynth for the frames between
   the cut     every section at its place on the suite clock, on the suite's audio → WYGWYL-CORPUS-ARCH/film/spinecut_cels.mp4
 Resumable (a section is redone only if its clip or window changed); progress for the monitor in WYGWYL-CORPUS-ARCH/progress_spine.json.
-Run with wygwyl-world-arch's venv:  …/.venv-shots/bin/python story_spinecels.py [--only 0-50] [--assemble]"""
+Each chapter is joined as soon as its last section is drawn (film/spine_NN.mp4, shown on the monitor) and with --push committed to
+wygwyl/world/film/spine/, pushed and merged into main.
+Run with wygwyl-world-arch's venv:  …/.venv-shots/bin/python story_spinecels.py [--only 0-50] [--assemble] [--push]"""
 import os, re, sys, json, glob, time, shutil, subprocess, numpy as np, cv2
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import story_warm as W
@@ -97,29 +99,66 @@ def section(p):
     json.dump({'keys': len(keys), 'cuts': seg[-1], 'dE': round(float(np.mean([x['dE'] for x in scores])), 2), **measure(seq, G, seg, {k: {'cel': cel[k]} for k in keys})}, open(os.path.join(work, 'v2.json'), 'w'))
     open(sigf, 'w').write(sig); return 'drawn'
 
-def assemble():
-    """the cut: every section's cel at its place on the suite clock, held or trimmed to its exact length, on the suite's audio"""
-    tmp = f'{C}/film/_spine'; os.makedirs(tmp, exist_ok=True); parts = []; t = 0.0
-    for p in plan:
-        cel = os.path.join(VD, p['pid'], 'cartoon_v2.mp4'); dur = p['t1'] - p['t0']; o = f"{tmp}/{p['pid']}.mp4"
-        if p['t0'] > t + 0.01: dur += p['t0'] - t                                   # a gap before the first section: held
+REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '..')); PUB = os.path.join(REPO, 'wygwyl', 'world', 'film', 'spine')
+BRANCH = 'claude/hungry-cori-d982c1'; PUSH = '--push' in sys.argv
+
+def render(ps, t0, t1, out):
+    """sections on the suite clock from t0 to t1: each cel held or trimmed to its exact length, gaps held dark, on the suite's audio"""
+    tmp = out + '_parts'; os.makedirs(tmp, exist_ok=True); parts = []; t = t0
+    for p in ps:
+        cel = os.path.join(VD, p['pid'], 'cartoon_v2.mp4'); dur = min(p['t1'], t1) - p['t0']; o = f"{tmp}/{p['pid']}.mp4"
+        if p['t0'] > t + 0.01: dur += p['t0'] - t                                   # a gap before the section: held
         src = ['-i', cel] if os.path.exists(cel) else ['-f', 'lavfi', '-i', f'color=c=0x0b0d14:s=1280x720:r=24:d={dur:.3f}']
         subprocess.run(['ffmpeg', '-v', 'error', '-y', *src, '-an', '-vf', f'scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720,fps=24,tpad=stop_mode=clone:stop_duration={dur:.3f},trim=duration={dur:.3f},format=yuv420p',
-                        '-c:v', 'libx264', '-crf', '20', '-preset', 'veryfast', o], check=True); parts.append(o); t = p['t1']
+                        '-c:v', 'libx264', '-crf', '20', '-preset', 'veryfast', o], check=True); parts.append(o); t = min(p['t1'], t1)
     open(f'{tmp}/list.txt', 'w').write(''.join(f"file '{x}'\n" for x in parts))
-    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', f'{tmp}/list.txt', '-i', f'{LAB}/wygwyl/WYGWYL_Suite_Audio.mp3', '-map', '0:v', '-map', '1:a',
-                    '-c:v', 'libx264', '-crf', '23', '-preset', 'veryfast', '-c:a', 'aac', '-b:a', '160k', '-shortest', '-movflags', '+faststart', f'{C}/film/spinecut_cels.mp4'], check=True)
-    shutil.rmtree(tmp); print('assembled', f'{C}/film/spinecut_cels.mp4', flush=True)
+    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', f'{tmp}/list.txt', '-ss', f'{t0:.3f}', '-t', f'{t - t0:.3f}', '-i', f'{LAB}/wygwyl/WYGWYL_Suite_Audio.mp3', '-map', '0:v', '-map', '1:a',
+                    '-c:v', 'libx264', '-crf', '23', '-preset', 'veryfast', '-c:a', 'aac', '-b:a', '160k', '-shortest', '-movflags', '+faststart', out], check=True)
+    shutil.rmtree(tmp)
+
+def assemble():
+    render(plan, 0.0, plan[-1]['t1'], f'{C}/film/spinecut_cels.mp4'); print('assembled', f'{C}/film/spinecut_cels.mp4', flush=True)
+
+def chapter(f):
+    """one poem's stretch of the spine-cut cel cut, as soon as its sections are drawn: joined, shown on the monitor, and (--push)
+    committed to the branch, pushed and merged into main"""
+    ps = [p for p in plan if p['film'] == f]; fl = next(x for x in FILMS if x['n'] == f); t0 = min(fl['t0'], ps[0]['t0']); t1 = ps[-1]['t1']
+    out = f'{C}/film/spine_{f}.mp4'; render(ps, t0, t1, out)
+    P = PG['poems'][f]; P.update(film=f'film/spine_{f}.mp4', state='done'); save()
+    os.makedirs(PUB, exist_ok=True); shutil.copy(out, os.path.join(PUB, f'{f}.mp4'))
+    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', '3', '-i', out, '-frames:v', '1', '-vf', 'scale=640:-1', os.path.join(PUB, f'{f}.jpg')])
+    have = sorted(x[:2] for x in os.listdir(PUB) if x.endswith('.mp4'))
+    rows = ''.join(f"<section><h2>{q} · {next(x['title'].title() for x in FILMS if x['n'] == q)}</h2><video controls preload='none' poster='{q}.jpg' src='{q}.mp4'></video></section>" for q in have)
+    open(os.path.join(PUB, 'index.html'), 'w').write(f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spine-Cut in Cels</title><meta name="description" content="WYGWYL · Spine-Cut's reviewed picks redrawn as cartoon cels, on the suite's clock and audio, chapter by chapter.">
+<style>:root{{color-scheme:dark;--bg:#0a0d18;--ink:#eef0f7;--mute:#8b93ad}}body{{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,sans-serif}}main{{max-width:1100px;margin:0 auto;padding:24px 16px 60px}}
+h1{{font:500 12px ui-monospace,Menlo,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}}h2{{font-weight:400;margin:28px 0 8px}}video{{width:100%;border-radius:8px;background:#000}}p{{color:var(--mute)}}</style></head>
+<body><main><h1>Spine-Cut in cels · {len(have)} of 14 chapters</h1><p>Every spine section plays the archive shot Spine-Cut's editor reviewed for that line, redrawn as angular cels: a drawing every 3 s and at every cut, each started from the one before, EbSynth between. Chapters appear as they are drawn.</p>{rows}</main></body></html>""")
+    if not PUSH: print('chapter', f, out, flush=True); return
+    rel = [os.path.relpath(os.path.join(PUB, x), REPO) for x in (f'{f}.mp4', f'{f}.jpg', 'index.html')]
+    subprocess.run(['git', 'add', '--', *rel], cwd=REPO, check=True)
+    msg = f"WYGWYL spine-cut in cels: {f} {fl['title'].title()}\n\nSpine-Cut's reviewed picks for the chapter redrawn as cels, on the suite's clock and audio.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+    if subprocess.run(['git', 'commit', '-q', '-m', msg, '--', *rel], cwd=REPO).returncode: return
+    r = subprocess.run(['git', 'push', '-q', 'origin', BRANCH], cwd=REPO, capture_output=True, text=True)
+    if r.returncode: P['pushed'] = 'push failed: ' + r.stderr[-200:]; save(); return
+    subprocess.run(['gh', 'pr', 'create', '--base', 'main', '--head', BRANCH, '--title', msg.split('\n')[0], '--body', "Merged as the chapter landed.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)"], cwd=REPO, capture_output=True)
+    m = subprocess.run(['gh', 'pr', 'merge', BRANCH, '--merge'], cwd=REPO, capture_output=True, text=True)
+    P['pushed'] = f"https://github.com/hartswf0/butterfly-halfworld/blob/main/wygwyl/world/film/spine/{f}.mp4" if m.returncode == 0 else f"https://github.com/hartswf0/butterfly-halfworld/blob/{BRANCH}/wygwyl/world/film/spine/{f}.mp4"
+    save(); print('chapter', f, 'pushed', 'merged' if m.returncode == 0 else 'merge failed: ' + m.stderr[-200:], flush=True)
 
 if __name__ == '__main__':
     if '--assemble' not in sys.argv or rng:
         save()
         for p in plan[lo:hi + 1]:
-            t0 = time.time(); mark(p['pid'], state='drawing')
+            t0 = time.time(); mark(p['pid'], state='drawing'); PG['poems'][p['film']]['state'] = 'drawing'
             try: r = section(p)
             except Exception as e: r = f'failed: {e}'
             cel = os.path.join(VD, p['pid'], 'cartoon_v2.mp4'); th = f"{C}/monitor/thumbs/{p['pid']}.jpg"
             if os.path.exists(cel) and not os.path.exists(th): subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', '0.5', '-i', cel, '-frames:v', '1', '-vf', 'scale=320:-1', th])
             mark(p['pid'], state='drawn' if r in ('drawn', 'kept') else 'failed', secs=round(time.time() - t0, 1) if r == 'drawn' else None, thumb=f"monitor/thumbs/{p['pid']}.jpg" if os.path.exists(th) else None)
             print(p['pid'], r, f"{time.time() - t0:.0f}s", p['line'][:50], flush=True)
+            nx = plan[p['i'] + 1] if p['i'] + 1 < len(plan) else None
+            if nx is None or nx['film'] != p['film']:                                  # the chapter's last section: join it, show it, publish it
+                try: chapter(p['film'])
+                except Exception as e: print('chapter', p['film'], 'failed:', e, flush=True)
     if '--assemble' in sys.argv: assemble()
