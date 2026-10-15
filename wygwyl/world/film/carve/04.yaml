@@ -64,7 +64,7 @@ patch_timeline:
   - POET
   action_summary: POET stands on the shore at night, hands in pockets, no heart; walks looking at the decay and shattered pieces as ravens fly overhead.
   camera_relation: rooftop shot, ~34 mm, camera 11.6 m up, pitch -46°
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; her reading: “What if I follow this trail to where the broken pieces have ”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; his reading: “What if I follow this trail to where the broken pieces have ”'
   patch_trigger: 'location change: the shore below the rail, where the chapel''s pieces washed east'
   source: markov 12.15+8.09s
   status: moving
@@ -79,7 +79,7 @@ patch_timeline:
   - POET
   action_summary: POET stands on the shore at night, hands in pockets, no heart; walks looking at the decay and shattered pieces as ravens fly overhead.
   camera_relation: eye-level shot, ~85 mm, camera 0.7 m up, pitch 3°
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; her reading: “cover sands and debris lift it from the night seawater''s flo”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; his reading: “cover sands and debris lift it from the night seawater''s flo”'
   patch_trigger: 'phrase boundary: “cover sands and debris”'
   source: markov 22.86+6.54s
   status: moving
@@ -93,7 +93,7 @@ patch_timeline:
   entities_present: []
   action_summary: 'Waves calm, wind stops, trees go still: the setting holds its breath.'
   camera_relation: eye-level shot, ~83 mm, camera 1.6 m up, pitch -12°
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; her reading: “The waves will calm to fold it whispers and the winds will m”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; his reading: “The waves will calm to fold it whispers and the winds will m”'
   patch_trigger: 'location change: the shore looking out, then back to the trees'
   source: Watershed wildfire 15.10+6.52s
   status: moving
@@ -108,7 +108,7 @@ patch_timeline:
   - POET
   action_summary: POET finds his heart on the shore; without using his hands it floats and re-enters him.
   camera_relation: overhead shot, ~51 mm, camera 2500.0 m up, pitch -90°
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; her reading: “to find a throbbing heart left at”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; his reading: “to find a throbbing heart left at”'
   patch_trigger: 'location change: on the sand at the foot of the shore steps'
   source: other 0.15+3.10s
   status: moving
@@ -123,7 +123,7 @@ patch_timeline:
   - POET
   action_summary: POET sees a trail and follows it up from the shore to the field, ravens overhead.
   camera_relation: wide shot
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; her reading: “the midlife corner returned toward the incline. A familiar h”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; his reading: “the midlife corner returned toward the incline. A familiar h”'
   patch_trigger: 'location change: the trail up the steps and the incline to the field'
   source: Fantastic Yellowstone 17.86+9.28s
   status: moving
@@ -138,7 +138,7 @@ patch_timeline:
   - POET
   action_summary: POET sees a trail and follows it up from the shore to the field, ravens overhead.
   camera_relation: wide shot
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; her reading: “to overcome and spread inspiration and it used to be mine. I”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; his reading: “to overcome and spread inspiration and it used to be mine. I”'
   patch_trigger: 'phrase boundary: “to overcome and spread inspiration”'
   source: other 0.15+4.91s
   status: GENERATE
@@ -153,7 +153,7 @@ patch_timeline:
   - POET
   action_summary: POET sees a trail and follows it up from the shore to the field, ravens overhead.
   camera_relation: wide shot
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; her reading: “What if I follow this reclaimed heart to where the puzzle pi”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; his reading: “What if I follow this reclaimed heart to where the puzzle pi”'
   patch_trigger: 'phrase boundary: “What if I follow this reclaimed”'
   source: Moonwalk One, ca. 1970 0.15+7.32s
   status: moving
@@ -167,7 +167,7 @@ patch_timeline:
   entities_present: []
   action_summary: Walking through the moonlit field, hands still in pockets; golden plants turn toward him, weeds recoil into shadow.
   camera_relation: eye-level shot, ~23 mm, camera 2.0 m up, pitch 8°
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; her reading: “into the vast moonlight night''s field. The plants in a golde”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; his reading: “into the vast moonlight night''s field. The plants in a golde”'
   patch_trigger: 'location change: the Night Garden Field'
   source: markov 0.15+4.74s
   status: moving
@@ -181,7 +181,7 @@ patch_timeline:
   entities_present: []
   action_summary: Walking through the moonlit field, hands still in pockets; golden plants turn toward him, weeds recoil into shadow.
   camera_relation: elevated shot, ~176 mm, camera 2.3 m up, pitch -4°
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; her reading: “The weeds repel falling into the shadows where our memories ”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; his reading: “The weeds repel falling into the shadows where our memories ”'
   patch_trigger: 'phrase boundary: “The weeds repel falling”'
   source: other 0.15+4.91s
   status: moving
@@ -196,7 +196,7 @@ patch_timeline:
   - POET
   action_summary: Clouds hide the stars; POET searches the bare ground in the shadows for his two hands, finds them and puts them back on.
   camera_relation: medium shot
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; her reading: “The clouds meet the stars for the deepest level of darkness ”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; his reading: “The clouds meet the stars for the deepest level of darkness ”'
   patch_trigger: 'location change: a bare patch in the field'
   source: archive 0.15+9.64s
   status: moving
@@ -211,7 +211,7 @@ patch_timeline:
   - POET
   action_summary: Clouds hide the stars; POET searches the bare ground in the shadows for his two hands, finds them and puts them back on.
   camera_relation: medium shot
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; her reading: “once could tusk dusk after dusk find and celebrate a new lif”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; his reading: “once could tusk dusk after dusk find and celebrate a new lif”'
   patch_trigger: 'phrase boundary: “once could tusk dusk after dusk”'
   source: 'Eagle Has Landed: The Flight of Apollo 11 0.15+9.85s'
   status: moving
@@ -226,7 +226,7 @@ patch_timeline:
   - POET
   action_summary: Clouds hide the stars; POET searches the bare ground in the shadows for his two hands, finds them and puts them back on.
   camera_relation: close shot
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; her reading: “I put them back on with the care of my future at stake and s”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; his reading: “I put them back on with the care of my future at stake and s”'
   patch_trigger: 'phrase boundary: “I put them”'
   source: archive 0.15+9.43s
   status: moving
@@ -241,7 +241,7 @@ patch_timeline:
   - POET
   action_summary: POET stands in the field reflecting, heart and hands restored, then is told to go.
   camera_relation: ground / worm's-eye shot, ~26 mm, camera 0.2 m up, pitch 12°
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; her reading: “I''ve wanted the world and lost my soul. I want nothing more ”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; his reading: “I''ve wanted the world and lost my soul. I want nothing more ”'
   patch_trigger: 'location change: the centre of the field by the lone tree'
   source: other 0.15+4.91s
   status: moving
@@ -256,7 +256,7 @@ patch_timeline:
   - POET
   action_summary: POET stands in the field reflecting, heart and hands restored, then is told to go.
   camera_relation: eye-level shot, ~27 mm, camera 1.1 m up, pitch -1°
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; her reading: “This reclaimed and dust settled heart rediscovered but duste”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; his reading: “This reclaimed and dust settled heart rediscovered but duste”'
   patch_trigger: 'phrase boundary: “This reclaimed”'
   source: markov 12.15+8.16s
   status: GENERATE
@@ -271,7 +271,7 @@ patch_timeline:
   - POET
   action_summary: POET stands in the field reflecting, heart and hands restored, then is told to go.
   camera_relation: medium shot
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; her reading: “but say to me in this still muted tree in night garden feels”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 19.4 clear; his reading: “but say to me in this still muted tree in night garden feels”'
   patch_trigger: 'phrase boundary: “but say to me in this still muted tree”'
   source: archive 11.52+9.11s
   status: moving
@@ -285,7 +285,7 @@ patch_timeline:
   entities_present: []
   action_summary: the climb is the poem's ascent; crane rising with him
   camera_relation: elevated shot, ~74 mm, camera 7.1 m up, pitch -40°
-  light_sound_state: dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; her reading
+  light_sound_state: dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 19.4 clear; his reading
   patch_trigger: 'threshold: walk 04 → 05'
   source: archive 13.90+4.00s
   status: moving

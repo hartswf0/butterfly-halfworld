@@ -59,7 +59,7 @@ patch_timeline:
   - POET
   action_summary: POET stands in the field with his newly restored hands; the parade's first figures appear on the path ahead (inferred blocking).
   camera_relation: elevated shot, ~30 mm, camera 3.5 m up, pitch -33°
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; her reading: “They tell me to ask if I can inherit the earth, to ask if I ”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; his reading: “They tell me to ask if I can inherit the earth, to ask if I ”'
   patch_trigger: 'location change: the field''s edge where 04 ended'
   source: markov 116.53+4.66s
   status: GENERATE
@@ -74,7 +74,7 @@ patch_timeline:
   - POET
   action_summary: Ancestors meet and accept the POET and hand him stars, then whole galaxies, as small held lights.
   camera_relation: medium shot
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; her reading: “name my own stars, even galaxies if I may. The past too was ”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; his reading: “name my own stars, even galaxies if I may. The past too was ”'
   patch_trigger: 'location change: the avenue through the field'
   source: markov 0.15+9.20s
   status: moving
@@ -88,7 +88,7 @@ patch_timeline:
   entities_present: []
   action_summary: 'The past ''was waiting'': a humid basement used as a shared bedroom, mattress pads under pine beams that did not comfort his spine. Staged as '
   camera_relation: overhead shot, ~48 mm, camera 15.2 m up, pitch -64°
-  light_sound_state: 'timeless hour 23.2 clear; her reading: “human basements as bedrooms, mattress pads where the wood be”'
+  light_sound_state: 'timeless hour 23.2 clear; his reading: “human basements as bedrooms, mattress pads where the wood be”'
   patch_trigger: 'location change: memory: the Southern-pine basement'
   source: archive 8.70+9.34s
   status: moving
@@ -102,7 +102,7 @@ patch_timeline:
   entities_present: []
   action_summary: 'The past ''was waiting'': a humid basement used as a shared bedroom, mattress pads under pine beams that did not comfort his spine. Staged as '
   camera_relation: medium shot
-  light_sound_state: 'timeless hour 23.2 clear; her reading: “To dream was to prevail. They tell me to ask if I can”'
+  light_sound_state: 'timeless hour 23.2 clear; his reading: “To dream was to prevail. They tell me to ask if I can”'
   patch_trigger: 'phrase boundary: “To dream was to”'
   source: archive 10.19+6.57s
   status: moving
@@ -116,7 +116,7 @@ patch_timeline:
   entities_present: []
   action_summary: The ancestors give him a universe to invent and the right to grant blessings and miracles where the spoken word is needed.
   camera_relation: close shot
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; her reading: “invent a new universe, to ask if God would let me, little ol”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; his reading: “invent a new universe, to ask if God would let me, little ol”'
   patch_trigger: 'location change: the heart of the parade'
   source: other 209.59+9.20s
   status: moving
@@ -130,7 +130,7 @@ patch_timeline:
   entities_present: []
   action_summary: The ancestors give him a universe to invent and the right to grant blessings and miracles where the spoken word is needed.
   camera_relation: ground / worm's-eye shot, ~27 mm, camera 0.5 m up, pitch 11°
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; her reading: “of the spoken word exists. In uncertain times, in forsaken t”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; his reading: “of the spoken word exists. In uncertain times, in forsaken t”'
   patch_trigger: 'phrase boundary: “of the spoken word exists.”'
   source: other 0.15+4.91s
   status: moving
@@ -144,7 +144,7 @@ patch_timeline:
   entities_present: []
   action_summary: The ancestors give him a universe to invent and the right to grant blessings and miracles where the spoken word is needed.
   camera_relation: elevated shot, ~24 mm, camera 2.8 m up, pitch -18°
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; her reading: “or a history too battered and bruised to travel. To dream wa”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; his reading: “or a history too battered and bruised to travel. To dream wa”'
   patch_trigger: 'phrase boundary: “or a history too battered and”'
   source: film 39.25+7.99s
   status: moving
@@ -159,7 +159,7 @@ patch_timeline:
   - POET
   action_summary: POET looks at the hands he just recovered in Nevermore; the ancestral blood and fingerprints now run through them. The parade's sound swells
   camera_relation: overhead shot, ~88 mm, camera 39.8 m up, pitch -59°
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; her reading: “Their blood flows through my hands. Fingerprints that orches”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 23.2 clear; his reading: “Their blood flows through my hands. Fingerprints that orches”'
   patch_trigger: 'location change: the far end of the parade, facing the city'
   source: archive 0.15+7.42s
   status: moving
@@ -173,7 +173,7 @@ patch_timeline:
   entities_present: []
   action_summary: His voice deepens to a baritone of a million cries; on 'beware' he turns from the parade toward the horizon where the Atlantis entrance wait
   camera_relation: medium shot
-  light_sound_state: 'midnight (06 opens at 00:24) hour 23.2 clear; her reading: “deepening my voice to a baritone of a million cries, to an u”'
+  light_sound_state: 'midnight (06 opens at 00:24) hour 23.2 clear; his reading: “deepening my voice to a baritone of a million cries, to an u”'
   patch_trigger: 'location change: the trailhead at the Perimeter'
   source: archive 23.04+7.88s
   status: moving
@@ -187,7 +187,7 @@ patch_timeline:
   entities_present: []
   action_summary: dark field → fence of light → white glare; he enters frame from behind camera
   camera_relation: overhead shot, ~32 mm, camera 48.0 m up, pitch -85°
-  light_sound_state: still night, 21:00 to midnight (04 end, 05); the soul's view at 02:30 (08) hour 23.2 clear; her reading
+  light_sound_state: still night, 21:00 to midnight (04 end, 05); the soul's view at 02:30 (08) hour 23.2 clear; his reading
   patch_trigger: 'threshold: walk 05 → 06'
   source: Moonwalk One, ca. 1970 21.31+4.00s
   status: moving

@@ -63,7 +63,7 @@ patch_timeline:
   - EX
   action_summary: POET in black space, falling or floating, lights flashing; EX in distress floats nearby, unreachable.
   camera_relation: undetermined (no ground) shot, ~89 mm
-  light_sound_state: 'timeless hour 1.0 clear; her reading: “I heard a scream for help while falling with my headlights o”'
+  light_sound_state: 'timeless hour 1.0 clear; his reading: “I heard a scream for help while falling with my headlights o”'
   patch_trigger: 'location change: the black below the floor'
   source: archive 4.52+9.36s
   status: moving
@@ -79,7 +79,7 @@ patch_timeline:
   - EX
   action_summary: POET in black space, falling or floating, lights flashing; EX in distress floats nearby, unreachable.
   camera_relation: medium shot
-  light_sound_state: 'timeless hour 1.0 clear; her reading: “a concussion, a set of walls caving inward, seething and sim”'
+  light_sound_state: 'timeless hour 1.0 clear; his reading: “a concussion, a set of walls caving inward, seething and sim”'
   patch_trigger: 'phrase boundary: “a concussion, a set of”'
   source: markov 0.82+11.32s
   status: moving
@@ -93,7 +93,7 @@ patch_timeline:
   entities_present: []
   action_summary: Everything still black; his eyes dilate trying to see, then the camera pushes into and through them into the flashback.
   camera_relation: undetermined (no ground) shot, ~57 mm
-  light_sound_state: 'timeless hour 1.0 clear; her reading: “an emergency call while tossing and turning. It was a type o”'
+  light_sound_state: 'timeless hour 1.0 clear; his reading: “an emergency call while tossing and turning. It was a type o”'
   patch_trigger: 'location change: his eye'
   source: archive 3.54+7.24s
   status: moving
@@ -107,7 +107,7 @@ patch_timeline:
   entities_present: []
   action_summary: Everything still black; his eyes dilate trying to see, then the camera pushes into and through them into the flashback.
   camera_relation: close shot
-  light_sound_state: 'timeless hour 1.0 clear; her reading: “To digest the truth, a windless insomnia and epiphany of a”'
+  light_sound_state: 'timeless hour 1.0 clear; his reading: “To digest the truth, a windless insomnia and epiphany of a”'
   patch_trigger: 'phrase boundary: “To digest the truth,”'
   source: archive 0.15+6.37s
   status: moving
@@ -123,7 +123,7 @@ patch_timeline:
   - POET
   action_summary: Young POET at the living-room window watches a car pull up, its lights flashing through the room because of the angle and the bumps in the r
   camera_relation: eye-level shot, ~20 mm, camera 1.1 m up, pitch -33°
-  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; her reading: “road winding down. After a day of life dilated at the sun as”'
+  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; his reading: “road winding down. After a day of life dilated at the sun as”'
   patch_trigger: 'location change: the child''s living-room window over the curb, the road winding down past the towers'
   source: other 0.15+4.91s
   status: moving
@@ -139,7 +139,7 @@ patch_timeline:
   - POET
   action_summary: Young POET at the living-room window watches a car pull up, its lights flashing through the room because of the angle and the bumps in the r
   camera_relation: medium shot
-  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; her reading: “as wise as possible, we won''t make it. I was six I recall wh”'
+  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; his reading: “as wise as possible, we won''t make it. I was six I recall wh”'
   patch_trigger: 'phrase boundary: “as wise as possible, we”'
   source: markov 12.03+6.81s
   status: moving
@@ -156,7 +156,7 @@ patch_timeline:
   - ghost child
   action_summary: A ghost kid appears and hugs Young POET, telling him his parents' marriage won't last, then disappears.
   camera_relation: undetermined (no ground) shot, ~61 mm
-  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; her reading: “the ghost of a dead and loveless seven -year -old child appe”'
+  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; his reading: “the ghost of a dead and loveless seven -year -old child appe”'
   patch_trigger: 'location change: beside the window'
   source: other 0.15+4.91s
   status: moving
@@ -172,7 +172,7 @@ patch_timeline:
   - POET
   action_summary: Ghost gone, Young POET stays at the window watching his parents argue in the car, curtains pulled and blinds up, left home alone.
   camera_relation: undetermined (no ground) shot, ~45 mm
-  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; her reading: “a child is left home alone. With curtains pulled and blinds ”'
+  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; his reading: “a child is left home alone. With curtains pulled and blinds ”'
   patch_trigger: 'location change: the window looking down to the curb'
   source: other 0.15+4.91s
   status: moving
@@ -188,7 +188,7 @@ patch_timeline:
   - POET
   action_summary: Ghost gone, Young POET stays at the window watching his parents argue in the car, curtains pulled and blinds up, left home alone.
   camera_relation: medium shot
-  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; her reading: “to see flashing lights and the whispering screams of two sou”'
+  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; his reading: “to see flashing lights and the whispering screams of two sou”'
   patch_trigger: 'phrase boundary: “to see flashing lights and the”'
   source: archive 24.94+7.38s
   status: moving
@@ -205,7 +205,7 @@ patch_timeline:
   - ghost child
   action_summary: The ghost child hands Young POET a tambourine; he throws it through the window, shattering the glass.
   camera_relation: undetermined (no ground) shot, ~43 mm
-  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; her reading: “And no tears and no fucks, no love to give, old to teach.”'
+  light_sound_state: 'after midnight in winter (02) hour 1.0 clear; his reading: “And no tears and no fucks, no love to give, old to teach.”'
   patch_trigger: 'location change: the window itself'
   source: markov 9.21+6.69s
   status: moving
@@ -219,7 +219,7 @@ patch_timeline:
   entities_present: []
   action_summary: one tracking object across two places; no people
   camera_relation: close shot
-  light_sound_state: after midnight in winter (02) hour 1.0 clear; her reading
+  light_sound_state: after midnight in winter (02) hour 1.0 clear; his reading
   patch_trigger: 'threshold: fly 02 → 03'
   source: archive 19.52+4.00s
   status: moving

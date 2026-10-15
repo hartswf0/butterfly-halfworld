@@ -63,7 +63,7 @@ patch_timeline:
   entities_present: []
   action_summary: Friends arrive under a welcome-home banner; laughter and hugs with no reason; the circle forms.
   camera_relation: undetermined (no ground) shot, ~50 mm
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “Decades later, there was less time for words and more space ”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; his reading: “Decades later, there was less time for words and more space ”'
   patch_trigger: 'location change: the hall under its rafters'
   source: archive 39.79+8.56s
   status: GENERATE
@@ -77,7 +77,7 @@ patch_timeline:
   entities_present: []
   action_summary: Voices peak; a chest-level glow pulses with every shout.
   camera_relation: close shot
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “loud voices so our hearts can be overheard.”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; his reading: “loud voices so our hearts can be overheard.”'
   patch_trigger: 'location change: the centre of the gathering'
   source: archive 0.48+4.04s
   status: moving
@@ -92,7 +92,7 @@ patch_timeline:
   - POET
   action_summary: The POET's mind drifts up into the rafters; a back room of empty chairs stands for the friends who are gone.
   camera_relation: medium shot
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “My mind drifts into the darkness of our afterlives, and thos”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; his reading: “My mind drifts into the darkness of our afterlives, and thos”'
   patch_trigger: 'location change: the rafters and a back room of empty chairs'
   source: archive 4.08+7.15s
   status: moving
@@ -106,7 +106,7 @@ patch_timeline:
   entities_present: []
   action_summary: Everyone freezes for a group photo, each holding an hourglass of burning sand; old photos reenacted, maps of shared routes.
   camera_relation: undetermined (no ground) shot, ~48 mm
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “We are all here, each holding our glasses of burning sands a”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; his reading: “We are all here, each holding our glasses of burning sands a”'
   patch_trigger: 'location change: the hall''s front, posed like the photographs'
   source: archive 14.88+6.76s
   status: GENERATE
@@ -120,7 +120,7 @@ patch_timeline:
   entities_present: []
   action_summary: Outside, friends touch tree trunks under picnic lights; breath mingles in cool dusk; memories project onto fog.
   camera_relation: elevated shot, ~52 mm, camera 5.5 m up, pitch -7°
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “grateful to every living tree in the forest for the shared y”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; his reading: “grateful to every living tree in the forest for the shared y”'
   patch_trigger: 'location change: the grounds where the hill''s woods begin'
   source: other 0.15+4.91s
   status: moving
@@ -134,7 +134,7 @@ patch_timeline:
   entities_present: []
   action_summary: Wrists interlock, heads lean together; one ear pressed to the next brother's chest.
   camera_relation: close shot
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “This is brotherhood. Smiles with no reason, narrow differenc”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; his reading: “This is brotherhood. Smiles with no reason, narrow differenc”'
   patch_trigger: 'location change: the sandy path to the shore'
   source: archive 3.39+7.20s
   status: moving
@@ -148,7 +148,7 @@ patch_timeline:
   entities_present: []
   action_summary: Wrists interlock, heads lean together; one ear pressed to the next brother's chest.
   camera_relation: close shot
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “Decades later, we can place our ears upon the next brother''s”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; his reading: “Decades later, we can place our ears upon the next brother''s”'
   patch_trigger: 'phrase boundary: “Decades later,”'
   source: All My Babies 0.74+7.20s
   status: moving
@@ -162,7 +162,7 @@ patch_timeline:
   entities_present: []
   action_summary: A football spirals across a sunset meadow; polaroids scatter; the group walks up as a porch light switches on.
   camera_relation: wide shot
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “follow paths of hilltops and canyons, of blinding lights and”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; his reading: “follow paths of hilltops and canyons, of blinding lights and”'
   patch_trigger: 'location change: the meadow, ending at a porch'
   source: archive 8.86+7.30s
   status: moving
@@ -176,7 +176,7 @@ patch_timeline:
   entities_present: []
   action_summary: A football spirals across a sunset meadow; polaroids scatter; the group walks up as a porch light switches on.
   camera_relation: medium shot
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading: “all too familiar and create the type of space for laughter a”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; his reading: “all too familiar and create the type of space for laughter a”'
   patch_trigger: 'phrase boundary: “all too familiar and”'
   source: '[Amateur films: Ivan Besse collection: Britton, South Dakota 1938-39] (Part II) 7.32+10.39s'
   status: moving
@@ -190,7 +190,7 @@ patch_timeline:
   entities_present: []
   action_summary: daylight; the long lateral along the water
   camera_relation: wide shot
-  light_sound_state: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; her reading
+  light_sound_state: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 17.6 clear; his reading
   patch_trigger: 'threshold: walk 12 → 13'
   source: archive 5.43+4.00s
   status: moving

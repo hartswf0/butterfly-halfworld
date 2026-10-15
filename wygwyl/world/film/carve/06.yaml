@@ -65,7 +65,7 @@ patch_timeline:
   - POET
   action_summary: Marble gates with wings swing open to an ancestral orchestra; a line of figures, the POET among them, walks through into the radiant city.
   camera_relation: elevated shot, ~27 mm, camera 6.7 m up, pitch -16°
-  light_sound_state: 'midnight (06 opens at 00:24) hour 0.4 clear; her reading: “The gates open with wings gifted from evolution, and made of”'
+  light_sound_state: 'midnight (06 opens at 00:24) hour 0.4 clear; his reading: “The gates open with wings gifted from evolution, and made of”'
   patch_trigger: 'location change: the Light Gate, from the field'
   source: markov 8.15+7.75s
   status: moving
@@ -80,7 +80,7 @@ patch_timeline:
   - POET
   action_summary: Marble gates with wings swing open to an ancestral orchestra; a line of figures, the POET among them, walks through into the radiant city.
   camera_relation: ground / worm's-eye shot, ~27 mm, camera 0.6 m up, pitch 10°
-  light_sound_state: 'midnight (06 opens at 00:24) hour 0.4 clear; her reading: “with an orchestra of our ancestors wildest dreams to welcome”'
+  light_sound_state: 'midnight (06 opens at 00:24) hour 0.4 clear; his reading: “with an orchestra of our ancestors wildest dreams to welcome”'
   patch_trigger: 'phrase boundary: “with an orchestra of our ancestors”'
   source: markov 8.15+8.22s
   status: moving
@@ -94,7 +94,7 @@ patch_timeline:
   entities_present: []
   action_summary: Past the gate the road descends into the luminous city under comets; generations of faces line the way.
   camera_relation: ground / worm's-eye shot, ~87 mm, camera 0.5 m up, pitch -5°
-  light_sound_state: 'midnight (06 opens at 00:24) hour 0.4 clear; her reading: “down yellow brick roads and plucked our souls out of their s”'
+  light_sound_state: 'midnight (06 opens at 00:24) hour 0.4 clear; his reading: “down yellow brick roads and plucked our souls out of their s”'
   patch_trigger: 'location change: the processional road descending from the gate into the market'
   source: film 97.91+9.83s
   status: moving
@@ -108,7 +108,7 @@ patch_timeline:
   entities_present: []
   action_summary: Atlantis rises from the depths in golden light; diverse beings gather and look up together.
   camera_relation: wide shot
-  light_sound_state: 'midnight (06 opens at 00:24) hour 0.4 clear; her reading: “resurrecting Atlantis. Here we are all one.”'
+  light_sound_state: 'midnight (06 opens at 00:24) hour 0.4 clear; his reading: “resurrecting Atlantis. Here we are all one.”'
   patch_trigger: 'location change: the round plaza'
   source: markov 161.50+5.19s
   status: moving
@@ -123,7 +123,7 @@ patch_timeline:
   - POET
   action_summary: Jungle merges into crystalline buildings over overgrown ruins; children and elders draw symbols in sand; a gate scans the POET's heart inste
   camera_relation: wide shot
-  light_sound_state: 'midnight (06 opens at 00:24) hour 0.4 clear; her reading: “The pack we''ve made here with nature abandon and hope for th”'
+  light_sound_state: 'midnight (06 opens at 00:24) hour 0.4 clear; his reading: “The pack we''ve made here with nature abandon and hope for th”'
   patch_trigger: 'location change: the hall of crystal trees'
   source: film 32.36+11.69s
   status: moving
@@ -137,7 +137,7 @@ patch_timeline:
   entities_present: []
   action_summary: Back at the center, now fully alive; a ring of protective light encircles the community; unknown architecture glows.
   camera_relation: eye-level shot, ~67 mm, camera 1.0 m up, pitch -6°
-  light_sound_state: 'dusk and blue hour; empty at 5 a.m. (10) hour 0.4 clear; her reading: “but here we are all safe. Here we are all one. The pack we''v”'
+  light_sound_state: 'dusk and blue hour; empty at 5 a.m. (10) hour 0.4 clear; his reading: “but here we are all safe. Here we are all one. The pack we''v”'
   patch_trigger: 'location change: the cathedral square, under the dish'
   source: archive 9.29+7.62s
   status: GENERATE
@@ -151,7 +151,7 @@ patch_timeline:
   entities_present: []
   action_summary: Back at the center, now fully alive; a ring of protective light encircles the community; unknown architecture glows.
   camera_relation: elevated shot, ~23 mm, camera 3.3 m up, pitch -6°
-  light_sound_state: 'dusk and blue hour; empty at 5 a.m. (10) hour 0.4 clear; her reading: “abandon and hope for the best back on life. A relearned curr”'
+  light_sound_state: 'dusk and blue hour; empty at 5 a.m. (10) hour 0.4 clear; his reading: “abandon and hope for the best back on life. A relearned curr”'
   patch_trigger: 'phrase boundary: “abandon and hope for the best back”'
   source: mj (still)
   status: GENERATE
@@ -166,7 +166,7 @@ patch_timeline:
   - POET
   action_summary: POET walks stone alleys barely two people wide; candle flame blooms, shadows stretch, families gather behind lit windows, children's laughte
   camera_relation: eye-level shot, ~44 mm, camera 1.2 m up, pitch -1°
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 0.4 clear; her reading: “An unfamiliar flickering candlelight illuminating smiles at ”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 0.4 clear; his reading: “An unfamiliar flickering candlelight illuminating smiles at ”'
   patch_trigger: 'location change: the hidden stairwells, two people wide'
   source: film (still)
   status: still → drawing
@@ -181,7 +181,7 @@ patch_timeline:
   - POET
   action_summary: POET walks stone alleys barely two people wide; candle flame blooms, shadows stretch, families gather behind lit windows, children's laughte
   camera_relation: ground / worm's-eye shot, ~34 mm, camera 0.6 m up, pitch 6°
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 0.4 clear; her reading: “color rainbows, and give us infinite time to heal and set cl”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 0.4 clear; his reading: “color rainbows, and give us infinite time to heal and set cl”'
   patch_trigger: 'phrase boundary: “color rainbows, and give”'
   source: markov 126.26+7.26s
   status: GENERATE
@@ -195,7 +195,7 @@ patch_timeline:
   entities_present: []
   action_summary: He sits a moment as Atlantis shines; voiceover ends ('welcoming me, & welcoming all'), he keeps wandering and arrives at a house where peopl
   camera_relation: ground / worm's-eye shot, ~74 mm, camera 0.4 m up, pitch -3°
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 0.4 clear; her reading: “I know my soul and it could stay here forever, leaving behin”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 0.4 clear; his reading: “I know my soul and it could stay here forever, leaving behin”'
   patch_trigger: 'location change: the Container Rows to the House door'
   source: film (still)
   status: still → drawing
@@ -209,7 +209,7 @@ patch_timeline:
   entities_present: []
   action_summary: He sits a moment as Atlantis shines; voiceover ends ('welcoming me, & welcoming all'), he keeps wandering and arrives at a house where peopl
   camera_relation: ground / worm's-eye shot, ~24 mm, camera 0.3 m up, pitch 1°
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 0.4 clear; her reading: “serendipity. A city born in unison out of the purest of fict”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 0.4 clear; his reading: “serendipity. A city born in unison out of the purest of fict”'
   patch_trigger: 'phrase boundary: “serendipity. A city born”'
   source: markov 29.93+8.93s
   status: moving
@@ -223,7 +223,7 @@ patch_timeline:
   entities_present: []
   action_summary: 'down and in: from aerial to Steadicam to a doorway'
   camera_relation: eye-level shot, ~50 mm, camera 0.7 m up, pitch 5°
-  light_sound_state: midnight (06 opens at 00:24) hour 0.4 clear; her reading
+  light_sound_state: midnight (06 opens at 00:24) hour 0.4 clear; his reading
   patch_trigger: 'threshold: walk 06 → 07'
   source: halfworld 63.72+4.00s
   status: moving

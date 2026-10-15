@@ -61,7 +61,7 @@ for m in glob.glob(os.path.join(D, 'carve', '*.md')) + glob.glob(os.path.join(D,
 # ---------- the page ----------
 fig = lambda key, cap: f"<figure><img src='{A[key]}' alt='{E(cap)}' loading='lazy'><figcaption>{cap}</figcaption></figure>" if A.get(key) else ''
 STAGES = [('Story', 'the scene book: 90 scenes, 14 transitions; who, what, where, how blocked', 'scenes.json'),
-          ('Clock', 'her reading: 14 recordings, 2,799 timed words; each scene found on it', 'timings/NN.json'),
+          ('Clock', 'his reading: 14 recordings, 2,799 timed words; each scene found on it', 'timings/NN.json'),
           ('Carve', 'patches of 6–12 s; a scene edge is a hard cut, inside a scene cuts fall on her breaths', 'patches + triggers'),
           ('Pool', f'53,303 pictures and keyframes in one CLIP space; never the shoot, CAT or cdmx, nor our rendered cuts', 'emb + inventory'),
           ('Cast', 'meaning (action, words spoken, place) · a photographed place · the figure · our footage for POET · one register · no reuse (stretch, frame, subject)', 'one shot per patch'),
@@ -71,7 +71,7 @@ STAGES = [('Story', 'the scene book: 90 scenes, 14 transitions; who, what, where
           ('Planes', 'the picture cut into flat sheets at measured depths: P6 sky … P1 foreground, P0 mask', 'multiplane'),
           ('Draw', 'the scene program: polygons in the shot’s own colours per plane, refined by render-and-compare (colour ΔE, value SSIM, edges, simplicity)', 'keyframe cel'),
           ('Carry', 'the frames between: keyframe cels carried along the footage’s optical flow, on twos (12 fps)', 'cel frames'),
-          ('Assemble', 'patches in order on her clock, her voice, her line on screen; a card where a patch is still to be made', 'NN.mp4')]
+          ('Assemble', 'patches in order on his clock, his voice, his line on screen; a card where a patch is still to be made', 'NN.mp4')]
 svg_w, bw_, bh, gap = 1180, 180, 74, 16
 svg = [f'<svg viewBox="0 0 {svg_w} 360" role="img" aria-label="the system model: twelve stages from the scene book to the film" class="model">']
 for i, (t, d, o) in enumerate(STAGES):
@@ -81,7 +81,7 @@ for i, (t, d, o) in enumerate(STAGES):
 svg.append(f'<path d="M{10 + 5 * (bw_ + 16) + bw_ / 2} {20 + bh} v40 H{10 + bw_ / 2} v{120 - 40}" class="ar"/></svg>')
 stage_rows = ''.join(f'<tr><td><b>{i + 1:02d} {E(t)}</b></td><td>{E(d)}</td><td><code>{E(o)}</code></td></tr>' for i, (t, d, o) in enumerate(STAGES))
 povs = [('The viewer', 'Can it be watched? Three things broke it: boiling (each keyframe drawn on its own re-cuts the shapes every second), ghosting (in-betweens blended two different drawings), and hidden cuts (montage footage inside one patch). The cuts are fixed: windows are judged only on the stretch actually probed, with a strict test, and the 20 montage patches were re-cast. For boiling and ghosting a second in-betweener carries one drawing at a time and re-keys only when the footage stops fitting (story_inbetween.py); the measures do not yet separate it from the original, so it is compared by eye.'),
-        ('The editor', f'One patch, one moving shot, on her clock: {N["patches"]} patches averaging {N["mean"]:.1f} s. A shot is never used twice: not the same stretch of a source, not the same frame from another file (our edits re-contain their clips), not the same subject at another moment (CLIP of the frame shown). A source does not return within three patches; colour and black-and-white do not flip inside a poem.'),
+        ('The editor', f'One patch, one moving shot, on his clock: {N["patches"]} patches averaging {N["mean"]:.1f} s. A shot is never used twice: not the same stretch of a source, not the same frame from another file (our edits re-contain their clips), not the same subject at another moment (CLIP of the frame shown). A source does not return within three patches; colour and black-and-white do not flip inside a poem.'),
         ('The poem', 'Every scene is found on the reading by its first line (85 of 90 exactly, the rest between their neighbours); a patch is cast for the words spoken while it is on screen, so the picture follows the line. Transitions carry each poem into the next.'),
         ('The animator', f'Cels in the angular style of wygwyl-world-arch: flat polygons in the shot’s own colours, one light, no outlines, cut into planes so they can move at different speeds. {N["keys"]} keyframes drawn, the frames between carried by the footage’s motion on twos; a patch with no clean moving footage is a held drawing.'),
         ('The archivist', f'{N["own"]} patches from our own footage (Markov, generated, film, halfworld, Midjourney views), {N["found"]} from found film through Cineosis Lab; credits.json lists every patch’s source file, window, and for found film its title and year. Nothing from the shoot, CAT or cdmx is in the pool.'),
@@ -104,18 +104,18 @@ table{{width:100%;border-collapse:collapse;font-size:14px}}td{{border-top:1px so
 .scroll{{overflow-x:auto}}</style></head><body><main>
 <div class="k">WYGWYL · where you go when you leave · the film in cels</div>
 <h1>How each frame is made, from the poem to the cel.</h1>
-<p>Fourteen poems, read aloud; a scene book that says what happens in each; an archive of found film and our own footage; and wygwyl-world-arch’s drawing pipeline. Each poem is carved into short patches on her reading’s clock, each patch is cast one moving shot that means what she is saying, and every frame of that shot is redrawn as an angular cel. <a href="index.html">Watch the films</a>.</p>
+<p>Fourteen poems, read aloud; a scene book that says what happens in each; an archive of found film and our own footage; and wygwyl-world-arch’s drawing pipeline. Each poem is carved into short patches on his reading’s clock, each patch is cast one moving shot that means what she is saying, and every frame of that shot is redrawn as an angular cel. <a href="index.html">Watch the films</a>.</p>
 <div class="nums">{''.join(f'<div><b>{b}</b>{l}</div>' for b, l in [(N['poems'], 'poems'), (f"{N['mins']:.0f} min", 'of film'), (N['patches'], 'patches'), (f"{N['mean']:.1f} s", 'mean patch'), (N['moving'], 'moving shots'), (N['still'], 'held drawings'), (N['make'], 'still to make'), (N['keys'], 'keyframes drawn')])}</div>
 <section><h2>The system model</h2>{''.join(svg)}<div class="scroll"><table>{stage_rows}</table></div></section>
 <section><h2>One frame, every stage · {E(PID)} · {E(S['name'])}</h2>
-<p>{E(S['what'])} Her words while it is on screen: “{E(S['said'][:160])}”. Source: {E(S.get('source') or '')}, {E(os.path.basename((S.get('clip') or {}).get('path') or S.get('path') or ''))}, {(S.get('clip') or {}).get('len', 0):.1f} s from {(S.get('clip') or {}).get('in', 0):.2f} s. Keyframe {k} of {len(keys)} keys; the in-between shown is frame {mid}.</p>
+<p>{E(S['what'])} His words while it is on screen: “{E(S['said'][:160])}”. Source: {E(S.get('source') or '')}, {E(os.path.basename((S.get('clip') or {}).get('path') or S.get('path') or ''))}, {(S.get('clip') or {}).get('len', 0):.1f} s from {(S.get('clip') or {}).get('in', 0):.2f} s. Keyframe {k} of {len(keys)} keys; the in-between shown is frame {mid}.</p>
 <div class="grid">{fig('source', '1 · the footage at the keyframe')}{fig('read', '2 · read: Grounding DINO boxes on the scene’s words, SAM 2.1 masks, the horizon — ' + E(', '.join(dets)))}
 {fig('depth', f"3 · Depth Pro: metric depth; camera {cam.get('height_m')} m up, pitch {cam.get('pitch_deg')}°, lens {cam.get('fov_h_deg')}° ({E(str(cam.get('shot_class')))})")}
 {fig('planes', '4 · the planes: every pixel assigned P6 sky … P1 foreground')}{fig('exploded', '5 · the multiplane: sheets at their measured depths — ' + E(', '.join(f'{a} {b} {c:.1f} m' if isinstance(c, (int, float)) else f'{a} {b}' for a, b, c in sheets)))}
 <div class="wide">{fig('program', f"6 · the scene program: original · drawing · end of camera move · colour error. ΔE {sc.get('dE')}, value SSIM {sc.get('value_ssim')}, edges F {sc.get('edge_f')}, {sc.get('shapes')} shapes")}</div>
 {fig('cel', '7 · the keyframe cel')}{fig('flow', f'8 · the footage’s motion from keyframe {k} to frame {mid} (hue = direction, brightness = speed)')}
 {fig('between_src', f'9 · the footage at frame {mid}')}{fig('between', f'10 · the cel at frame {mid}: the keyframe drawings carried along that motion')}
-<div class="wide">{fig('film', '11 · the frame in the film: on her clock, her line on screen')}</div></div>
+<div class="wide">{fig('film', '11 · the frame in the film: on his clock, his line on screen')}</div></div>
 {('<p>In-between measures for this patch: ' + E(json.dumps(IB['this'])) + ' (one drawing carried) against ' + E(json.dumps(IB['theirs'])) + ' (two drawings blended).</p>') if IB and IB.get('theirs') else ''}</section>
 <section><h2>Six points of view</h2><div class="povs">{pov_html}</div></section>
 <section><h2>Provenance · every patch</h2><p>Families: {E(', '.join(f'{k} {v}' for k, v in fam.most_common()))}. The carve matrices for each poem (diagnosis and olog, patch genome, story map, reforge stack with each patch’s Master Patch Prompt) are in <a href="carve/">carve/</a>; every patch’s source is in <a href="credits.json">credits.json</a>.</p>

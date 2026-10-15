@@ -60,7 +60,7 @@ patch_timeline:
   - POET
   action_summary: Mid-dance, a translucent soul rises out of the POET's chest and floats above; the emptied body keeps moving to the beat alone.
   camera_relation: medium shot
-  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “The soul has escaped my body for the moment and left him on ”'
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; his reading: “The soul has escaped my body for the moment and left him on ”'
   patch_trigger: 'location change: the rooftop club on a spire crown (up the elevator shaft from the House)'
   source: archive 0.15+6.12s
   status: moving
@@ -75,7 +75,7 @@ patch_timeline:
   - POET
   action_summary: Mid-dance, a translucent soul rises out of the POET's chest and floats above; the emptied body keeps moving to the beat alone.
   camera_relation: medium shot
-  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “flesh and bones, rejection and heartache hit differently whe”'
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; his reading: “flesh and bones, rejection and heartache hit differently whe”'
   patch_trigger: 'phrase boundary: “flesh and bones, rejection and heartache”'
   source: archive 17.83+10.35s
   status: moving
@@ -90,7 +90,7 @@ patch_timeline:
   - POET
   action_summary: Mid-dance, a translucent soul rises out of the POET's chest and floats above; the emptied body keeps moving to the beat alone.
   camera_relation: medium shot
-  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “and head throbbing from the music and empty on a crowded flo”'
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; his reading: “and head throbbing from the music and empty on a crowded flo”'
   patch_trigger: 'phrase boundary: “and head throbbing from the music and”'
   source: archive 24.47+8.24s
   status: moving
@@ -105,7 +105,7 @@ patch_timeline:
   - crowd
   action_summary: From the soul's vantage the crowd moves in slow motion, bodies brushing and sparking; the body stays on as the club empties around a lone si
   camera_relation: medium shot
-  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “Let''s watch strangers collide and spark electric currents th”'
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; his reading: “Let''s watch strangers collide and spark electric currents th”'
   patch_trigger: 'location change: the dance floor from above'
   source: archive 10.13+7.29s
   status: moving
@@ -120,7 +120,7 @@ patch_timeline:
   - crowd
   action_summary: From the soul's vantage the crowd moves in slow motion, bodies brushing and sparking; the body stays on as the club empties around a lone si
   camera_relation: undetermined (no ground) shot, ~73 mm
-  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “bitter refraction inside the walls of an escape that few ple”'
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; his reading: “bitter refraction inside the walls of an escape that few ple”'
   patch_trigger: 'phrase boundary: “bitter refraction inside the”'
   source: archive 45.62+6.81s
   status: moving
@@ -135,7 +135,7 @@ patch_timeline:
   - crowd
   action_summary: 'Cutaway: the soul watches the party from far above, top-down over all of Atlantis lit blue and pink; the verse relocates it to an open field'
   camera_relation: overhead shot, ~18 mm, camera 2500.0 m up, pitch -90°
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 2.4 clear; her reading: “Now let us put my soul in the middle of an open field at the”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 2.4 clear; his reading: “Now let us put my soul in the middle of an open field at the”'
   patch_trigger: 'location change: the sky over Atlantis; the planet field'
   source: markov 96.38+8.10s
   status: moving
@@ -150,7 +150,7 @@ patch_timeline:
   - crowd
   action_summary: 'Cut back to the body in the middle of the club: angels dump cleansing, unfiltered ice water over him while the party continues; he sways in '
   camera_relation: overhead shot, ~83 mm, camera 28.1 m up, pitch -76°
-  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “Cool me down by pouring unfiltered water out of the ice bath”'
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; his reading: “Cool me down by pouring unfiltered water out of the ice bath”'
   patch_trigger: 'location change: the middle of the club floor'
   source: NASA Searches for Life from the Moon in Recently Rediscovered Historic Footage 3.95+10.04s
   status: moving
@@ -165,7 +165,7 @@ patch_timeline:
   - crowd
   action_summary: 'Cut back to the body in the middle of the club: angels dump cleansing, unfiltered ice water over him while the party continues; he sways in '
   camera_relation: medium shot
-  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “capturing my body transiting in a flash of strobe lights. Th”'
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; his reading: “capturing my body transiting in a flash of strobe lights. Th”'
   patch_trigger: 'phrase boundary: “capturing my body transiting in a flash”'
   source: archive 13.03+10.05s
   status: moving
@@ -179,7 +179,7 @@ patch_timeline:
   entities_present: []
   action_summary: The club fills with haze; the body leans back, inhales the smoke, and the soul streaks back into the chest.
   camera_relation: medium shot
-  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “Now bring my soul back to my body to lean back, breathe in t”'
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; his reading: “Now bring my soul back to my body to lean back, breathe in t”'
   patch_trigger: 'location change: the subwoofer wall at the floor''s edge'
   source: film 20.27+11.88s
   status: moving
@@ -194,7 +194,7 @@ patch_timeline:
   - POET
   action_summary: The POET stares from the rooftop at unfamiliar yet relatable mountains in the distance, reaching toward something just beyond his fingertips
   camera_relation: medium shot
-  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading: “staring into unfamiliar yet relatable mountains in the dista”'
+  light_sound_state: 'blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; his reading: “staring into unfamiliar yet relatable mountains in the dista”'
   patch_trigger: 'location change: the parapet'
   source: archive 0.15+10.12s
   status: GENERATE
@@ -209,7 +209,7 @@ patch_timeline:
   - crowd
   action_summary: high to street; the crowd fawns at the door
   camera_relation: wide shot
-  light_sound_state: blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; her reading
+  light_sound_state: blue-hour mist; violet underlights at night (08 at 02:30) hour 2.4 clear; his reading
   patch_trigger: 'threshold: walk 08 → 09'
   source: archive 10.76+4.00s
   status: moving

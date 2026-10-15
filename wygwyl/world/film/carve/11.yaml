@@ -58,7 +58,7 @@ patch_timeline:
   entities_present: []
   action_summary: The motorcycle comes down out of the hills to the chapel shore; wide view of distant seas and the wooded hills behind.
   camera_relation: eye-level shot, ~39 mm, camera 1.0 m up, pitch 1°
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 7.5 fog; her reading: “Even here is chilly in the morning. River rafting fall cover”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 7.5 fog; his reading: “Even here is chilly in the morning. River rafting fall cover”'
   patch_trigger: 'location change: the shore steps beneath the mountain'
   source: '[Amateur film: "Saga of the Happy Wanderers"] 5.87+10.29s'
   status: moving
@@ -72,7 +72,7 @@ patch_timeline:
   entities_present: []
   action_summary: The motorcycle comes down out of the hills to the chapel shore; wide view of distant seas and the wooded hills behind.
   camera_relation: elevated shot, ~31 mm, camera 7.4 m up, pitch -39°
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 7.5 fog; her reading: “This world is at peace. In silent resounds, choir chords cal”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 7.5 fog; his reading: “This world is at peace. In silent resounds, choir chords cal”'
   patch_trigger: 'phrase boundary: “This world is at peace.”'
   source: THE PHOTOGRAPHER 1.22+8.24s
   status: moving
@@ -86,7 +86,7 @@ patch_timeline:
   entities_present: []
   action_summary: The motorcycle comes down out of the hills to the chapel shore; wide view of distant seas and the wooded hills behind.
   camera_relation: elevated shot, ~60 mm, camera 2.2 m up, pitch 5°
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 7.5 fog; her reading: “and offer them as keepsakes back to the higher powers. Exhau”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 7.5 fog; his reading: “and offer them as keepsakes back to the higher powers. Exhau”'
   patch_trigger: 'phrase boundary: “and offer them as keepsakes back”'
   source: archive 10.05+11.82s
   status: moving
@@ -100,7 +100,7 @@ patch_timeline:
   entities_present: []
   action_summary: Sun crosses the debris of the storm-wrecked chapel and the shattered tambourine from poem 3 (callback).
   camera_relation: undetermined (no ground) shot, ~85 mm
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “All the remnants of the destruction revealed in the sunlight”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; his reading: “All the remnants of the destruction revealed in the sunlight”'
   patch_trigger: 'location change: the chapel''s remnants in low sun'
   source: archive 6.80+5.17s
   status: moving
@@ -115,7 +115,7 @@ patch_timeline:
   - POET
   action_summary: The POET starts to rebuild; the white futuristic temple rises in unison with his movements.
   camera_relation: overhead shot, ~60 mm, camera 17.1 m up, pitch -85°
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “We can rebuild this temple. It''s a new day. The catharsis ev”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; his reading: “We can rebuild this temple. It''s a new day. The catharsis ev”'
   patch_trigger: 'location change: the old footprint at the waterline'
   source: Herinnering uit het leven van onzen grootsten toneelspeler 4.41+6.69s
   status: moving
@@ -129,7 +129,7 @@ patch_timeline:
   entities_present: []
   action_summary: Inside the clean white hall the old choir stands and prayer lines return remade; sound calms him.
   camera_relation: wide shot
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “by loss in the painful crawl along the cobblestone boulevard”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; his reading: “by loss in the painful crawl along the cobblestone boulevard”'
   patch_trigger: 'location change: the new nave'
   source: archive 4.98+6.69s
   status: moving
@@ -143,7 +143,7 @@ patch_timeline:
   entities_present: []
   action_summary: He opens a journal stored away and reads aloud; a mirror callback to the midnight solitude of earlier poems.
   camera_relation: undetermined (no ground) shot, ~41 mm
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “I can close a chapter and open a journal stored away from mo”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; his reading: “I can close a chapter and open a journal stored away from mo”'
   patch_trigger: 'location change: the mirror hall'
   source: archive 3.75+9.02s
   status: moving
@@ -157,7 +157,7 @@ patch_timeline:
   entities_present: []
   action_summary: He opens a journal stored away and reads aloud; a mirror callback to the midnight solitude of earlier poems.
   camera_relation: medium shot
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “of keeping faith alive and as majestic. When words are read ”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; his reading: “of keeping faith alive and as majestic. When words are read ”'
   patch_trigger: 'phrase boundary: “of keeping faith alive and”'
   source: archive 3.54+8.87s
   status: moving
@@ -171,7 +171,7 @@ patch_timeline:
   entities_present: []
   action_summary: He opens a journal stored away and reads aloud; a mirror callback to the midnight solitude of earlier poems.
   camera_relation: close shot
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “to the lonely mirror''s midnight hours, the left tears drying”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; his reading: “to the lonely mirror''s midnight hours, the left tears drying”'
   patch_trigger: 'phrase boundary: “to the lonely mirror''s midnight hours,”'
   source: Going Steady? 6.27+8.92s
   status: moving
@@ -185,7 +185,7 @@ patch_timeline:
   entities_present: []
   action_summary: Doors open to full sun over the harbor; the finished temple stands bone-white and calm.
   camera_relation: undetermined (no ground) shot, ~55 mm
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “We can embrace a new day. We can receive a new day. We can w”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; his reading: “We can embrace a new day. We can receive a new day. We can w”'
   patch_trigger: 'location change: the threshold facing the harbour'
   source: archive 0.15+9.25s
   status: GENERATE
@@ -199,7 +199,7 @@ patch_timeline:
   entities_present: []
   action_summary: Doors open to full sun over the harbor; the finished temple stands bone-white and calm.
   camera_relation: ground / worm's-eye shot, ~44 mm, camera 0.3 m up, pitch -4°
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “every circumference of life we''re celebrating and believing ”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; his reading: “every circumference of life we''re celebrating and believing ”'
   patch_trigger: 'phrase boundary: “every circumference of life we''re”'
   source: Moonwalk One, ca. 1970 8.72+8.72s
   status: GENERATE
@@ -213,7 +213,7 @@ patch_timeline:
   entities_present: []
   action_summary: Doors open to full sun over the harbor; the finished temple stands bone-white and calm.
   camera_relation: eye-level shot, ~71 mm, camera 0.9 m up, pitch -2°
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading: “reveling in the sunlight of a new beginning with this world ”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; his reading: “reveling in the sunlight of a new beginning with this world ”'
   patch_trigger: 'phrase boundary: “reveling in the sunlight of a new”'
   source: archive 8.76+7.59s
   status: GENERATE
@@ -227,7 +227,7 @@ patch_timeline:
   entities_present: []
   action_summary: ellipsis; same frame, filled
   camera_relation: close shot
-  light_sound_state: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; her reading
+  light_sound_state: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 7.5 fog; his reading
   patch_trigger: 'threshold: cut 11 → 12'
   source: archive 5.60+4.00s
   status: moving

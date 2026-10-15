@@ -66,7 +66,7 @@ patch_timeline:
   - crowd
   action_summary: 'Neon title over the booth; the DJ appears, spins, scratches; the fader slides and the crowd hushes waiting for the drop as the POET asks to '
   camera_relation: medium shot
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; her reading: “DJ turn me up please.”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; his reading: “DJ turn me up please.”'
   patch_trigger: 'location change: the House: the booth on the back wall'
   source: markov 0.19+3.00s
   status: moving
@@ -81,7 +81,7 @@ patch_timeline:
   - POET
   action_summary: POET at the bar, eyes closed, chin at the arch of the mic, opens his love story; strobe glints on his eyelids.
   camera_relation: medium shot
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; her reading: “With eyes wide shut and my chin nested at the arc of the wei”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; his reading: “With eyes wide shut and my chin nested at the arc of the wei”'
   patch_trigger: 'location change: the bar, facing the floor'
   source: archive 14.18+8.89s
   status: moving
@@ -95,7 +95,7 @@ patch_timeline:
   entities_present: []
   action_summary: Transparent silhouettes drift through the speakers; vineyards and evergreen fields wilt in the projected light; treasures escape, stars on a
   camera_relation: rooftop shot, ~84 mm, camera 9.5 m up, pitch -40°
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; her reading: “ghosts whispering unfolded delusions, birthed in purity and ”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; his reading: “ghosts whispering unfolded delusions, birthed in purity and ”'
   patch_trigger: 'location change: the speaker stacks'
   source: archive 28.32+7.56s
   status: moving
@@ -109,7 +109,7 @@ patch_timeline:
   entities_present: []
   action_summary: Transparent silhouettes drift through the speakers; vineyards and evergreen fields wilt in the projected light; treasures escape, stars on a
   camera_relation: wide shot
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; her reading: “are nourished. A love story of one by one treasures escaping”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; his reading: “are nourished. A love story of one by one treasures escaping”'
   patch_trigger: 'phrase boundary: “are nourished. A”'
   source: archive 8.08+7.55s
   status: GENERATE
@@ -123,7 +123,7 @@ patch_timeline:
   entities_present: []
   action_summary: He has walked across the greatest divide to be heard; on the second plea the VU meter slams into the red and the mic blooms.
   camera_relation: wide shot
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; her reading: “after defamed unsalted stars diminish their glares. And I''ve”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; his reading: “after defamed unsalted stars diminish their glares. And I''ve”'
   patch_trigger: 'location change: between bar and booth'
   source: Belmont High School Graduation 06/04/1995 23.17+7.56s
   status: GENERATE
@@ -137,7 +137,7 @@ patch_timeline:
   entities_present: []
   action_summary: He has walked across the greatest divide to be heard; on the second plea the VU meter slams into the red and the mic blooms.
   camera_relation: undetermined (no ground) shot, ~40 mm
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; her reading: “years across the greatest divide to be heard. So DJ please t”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; his reading: “years across the greatest divide to be heard. So DJ please t”'
   patch_trigger: 'phrase boundary: “years across the greatest divide to”'
   source: archive 0.15+7.56s
   status: moving
@@ -151,7 +151,7 @@ patch_timeline:
   entities_present: []
   action_summary: Rings orbit and drift apart; the shared home folds into a box; two moving vans split at a fork on one-way streets with arrowless signs and a
   camera_relation: wide shot
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; her reading: “wedding bands diverging across abstract skies of wounded sou”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; his reading: “wedding bands diverging across abstract skies of wounded sou”'
   patch_trigger: 'location change: the projection wall: the container''s steel side'
   source: archive 11.91+8.55s
   status: moving
@@ -165,7 +165,7 @@ patch_timeline:
   entities_present: []
   action_summary: Rings orbit and drift apart; the shared home folds into a box; two moving vans split at a fork on one-way streets with arrowless signs and a
   camera_relation: wide shot
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; her reading: “one -way streets not built with u -turns or stop. Maybe we s”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; his reading: “one -way streets not built with u -turns or stop. Maybe we s”'
   patch_trigger: 'phrase boundary: “one -way streets not built with”'
   source: archive 2.06+8.55s
   status: moving
@@ -179,7 +179,7 @@ patch_timeline:
   entities_present: []
   action_summary: Calendar pages spin off the turntable for eleven beats; petals fall on the vinyl; the DJ scratches 'love, love, not, not'; the mic is held o
   camera_relation: close shot
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; her reading: “years 11 years each plucked off as daisy pedals we love we n”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; his reading: “years 11 years each plucked off as daisy pedals we love we n”'
   patch_trigger: 'location change: the platters'
   source: Sound And The Story 3.86+11.27s
   status: moving
@@ -193,7 +193,7 @@ patch_timeline:
   entities_present: []
   action_summary: 'The room picks its weather: storm waveform, fog across the floor lights, a dark cloud with a silver lining over the dancers. He turns to fac'
   camera_relation: eye-level shot, ~32 mm, camera 1.3 m up, pitch 0°
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; her reading: “heavy rain or a frontal fog or of dim night lights under a c”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; his reading: “heavy rain or a frontal fog or of dim night lights under a c”'
   patch_trigger: 'location change: the dance floor under the dark cloud'
   source: film 50.93+9.43s
   status: moving
@@ -207,7 +207,7 @@ patch_timeline:
   entities_present: []
   action_summary: 'The room picks its weather: storm waveform, fog across the floor lights, a dark cloud with a silver lining over the dancers. He turns to fac'
   camera_relation: medium shot
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; her reading: “forth to face the lights and shadows one night at a time, on”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; his reading: “forth to face the lights and shadows one night at a time, on”'
   patch_trigger: 'phrase boundary: “forth to face the lights and shadows”'
   source: markov 13.14+8.61s
   status: moving
@@ -221,7 +221,7 @@ patch_timeline:
   entities_present: []
   action_summary: 'The room picks its weather: storm waveform, fog across the floor lights, a dark cloud with a silver lining over the dancers. He turns to fac'
   camera_relation: close shot
-  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; her reading: “at a time. One open mic at a time. Chin now nested high and ”'
+  light_sound_state: 'kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; his reading: “at a time. One open mic at a time. Chin now nested high and ”'
   patch_trigger: 'phrase boundary: “at a time. One open mic”'
   source: Modesta 23.66+10.23s
   status: moving
@@ -235,7 +235,7 @@ patch_timeline:
   entities_present: []
   action_summary: 'a vertical cut: the red shaft is one shot looking up; the doors open on violet'
   camera_relation: overhead shot, ~95 mm, camera 36.9 m up, pitch -76°
-  light_sound_state: kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; her reading
+  light_sound_state: kept at twilight by its own light even at 1 a.m. (06 streets, 07 house) hour 1.5 clear; his reading
   patch_trigger: 'threshold: lift 07 → 08'
   source: Moonwalk One, ca. 1970 6.36+4.00s
   status: moving
