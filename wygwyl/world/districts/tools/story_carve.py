@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """CARVE THE FILM (the CUTBASTARD-1 patch law, applied to our story and our pipeline).
-  patch law     each poem is carved into patches of 6–12 s (target 9) on her reading's clock. A new patch starts where the scene
+  patch law     each poem is carved into patches of 6–12 s (target 9) on his reading's clock. A new patch starts where the scene
                 changes (location, action, entities: the scene book's scenes) and otherwise on a phrase end (her breath). SMPTE
                 timecodes from 01:00:00:00, 24 fps.
   one shot      a patch is one MOVING shot: our own videos at the keyframe's moment (Markov, halfworld, film, generated, other),
@@ -311,7 +311,7 @@ for p, f in film.items():
         for e in ents({'what': s['what']}): rel.append(f"<{e}> [acts in] <beat {s['key']}>")
     for x in sh[:40]:
         rel += [f"<{x['id']}> [is part of] <beat {x['scene']}>", f"<{x['id']}> [is triggered by] <{x['trigger'][:70]}>", f"<{x['id']}> [is conformed from] <{(x['clip'] or {}).get('src') or x['k']}" + (f" @ {x['clip']['in']:.2f}s>" if x.get('clip') else '>'),
-                f"<{x['id']}> [camera relation] <{x['observed']['scale']}>", f"<{x['id']}> [sound state] <her reading{': “' + x['said'][:40] + '”' if x['said'] else ': silence / drone'}>"]
+                f"<{x['id']}> [camera relation] <{x['observed']['scale']}>", f"<{x['id']}> [sound state] <his reading{': “' + x['said'][:40] + '”' if x['said'] else ': silence / drone'}>"]
     tr = next((t for t in S['transitions'] if t['from'] == p), None)
     if tr: rel.append(f"<{f['title']}> [crosses threshold] <{tr['zone'][:70]}> "), rel.append(f"<threshold> [leads to] <poem {tr['to']}>")
     O += [f"- {r}" for r in rel] + ['', '## Structural Consequences', '- Segmentation follows the scene book: a scene edge is a hard cut; inside a scene, patches cut on her breaths.',
@@ -323,7 +323,7 @@ for p, f in film.items():
          'beat_structure': [{'beat_id': s['key'], 'parent_unit': f"U{1 + next(i for i, u in enumerate(units) if s in u)}", 'syntagma_type': 'accumulative' if MONT.search(s['what']) else 'continuous',
                              'pressure_shift': s['what'][:120]} for s in scenes],
          'patch_timeline': [{'patch_id': x['id'], 'start_time': smpte(x['t0']), 'end_time': smpte(x['t1']), 'location': x['here'][:80], 'entities_present': ents(x),
-                             'action_summary': x['what'][:140], 'camera_relation': x['prompts']['cinematic'].split(';')[0], 'light_sound_state': f"{light(p, x)}; her reading" + (f": “{x['said'][:60]}”" if x['said'] else ''),
+                             'action_summary': x['what'][:140], 'camera_relation': x['prompts']['cinematic'].split(';')[0], 'light_sound_state': f"{light(p, x)}; his reading" + (f": “{x['said'][:60]}”" if x['said'] else ''),
                              'patch_trigger': x['trigger'], 'source': ((x['clip'] or {}).get('title') or x['source']) + (f" {x['clip']['in']:.2f}+{x['clip']['len']:.2f}s" if x.get('clip') else ' (still)'),
                              'status': 'GENERATE' if x['generate'] else ('moving' if x.get('clip') else 'still → drawing'), 'rehydration_seed': x['prompts']['master'][:400]} for x in sh]}
     B = [f"# Diegesis\n{scenes[0]['what']}\n", '# Macro Structure']

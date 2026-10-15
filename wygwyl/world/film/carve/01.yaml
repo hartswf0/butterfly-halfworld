@@ -62,7 +62,7 @@ patch_timeline:
   - EX
   action_summary: POET reads the poem aloud to the EX; the TV shows the world's chaos.
   camera_relation: medium shot
-  light_sound_state: 'dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear; her reading: “What we''ve made we don''t want, what we''ve sold to the world,”'
+  light_sound_state: 'dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear; his reading: “What we''ve made we don''t want, what we''ve sold to the world,”'
   patch_trigger: 'location change: the Severn, a high bedroom; the Hive''s needles fill the window'
   source: archive 0.15+7.83s
   status: moving
@@ -78,7 +78,7 @@ patch_timeline:
   - EX
   action_summary: EX vapes on the fire escape, back always turned; haze builds; POET moves toward the window but the EX gets further away.
   camera_relation: rooftop shot, ~33 mm, camera 9.8 m up, pitch -27°
-  light_sound_state: 'dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear; her reading: “I look for a way out through the hallways, within the drawer”'
+  light_sound_state: 'dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear; his reading: “I look for a way out through the hallways, within the drawer”'
   patch_trigger: 'location change: the window and the iron escape; the Orange Catwalk runs 30 m below'
   source: markov 0.15+5.38s
   status: moving
@@ -94,7 +94,7 @@ patch_timeline:
   - EX
   action_summary: EX falls off the fire escape into darkness; POET falls behind into the clouds until it is black. Title card.
   camera_relation: eye-level shot, ~33 mm, camera 1.2 m up, pitch 14°
-  light_sound_state: 'dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear; her reading: “trip on my own words, falling out of life, and find where yo”'
+  light_sound_state: 'dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear; his reading: “trip on my own words, falling out of life, and find where yo”'
   patch_trigger: 'location change: the escape''s top landing over the light well'
   source: other 0.15+4.91s
   status: moving
@@ -111,7 +111,7 @@ patch_timeline:
   - crowd
   action_summary: 'POET falls behind EX through images of world chaos swapping with ways people escape: drugs, partying, TV, media, phones.'
   camera_relation: elevated shot, ~15 mm, camera 2.7 m up, pitch 4°
-  light_sound_state: 'timeless hour 19.2 clear; her reading: “It was the maze constructed by a tainted love, a known yet u”'
+  light_sound_state: 'timeless hour 19.2 clear; his reading: “It was the maze constructed by a tainted love, a known yet u”'
   patch_trigger: 'location change: below the tower, into the black'
   source: markov 183.90+9.09s
   status: GENERATE
@@ -128,7 +128,7 @@ patch_timeline:
   - crowd
   action_summary: 'POET falls behind EX through images of world chaos swapping with ways people escape: drugs, partying, TV, media, phones.'
   camera_relation: elevated shot, ~35 mm, camera 2.7 m up, pitch -28°
-  light_sound_state: 'timeless hour 19.2 clear; her reading: “the overnourished forest of escapism that calls for you. At ”'
+  light_sound_state: 'timeless hour 19.2 clear; his reading: “the overnourished forest of escapism that calls for you. At ”'
   patch_trigger: 'phrase boundary: “the overnourished forest of escapism tha”'
   source: markov 8.55+10.19s
   status: GENERATE
@@ -145,7 +145,7 @@ patch_timeline:
   - crowd
   action_summary: 'POET falls behind EX through images of world chaos swapping with ways people escape: drugs, partying, TV, media, phones.'
   camera_relation: undetermined (no ground) shot, ~28 mm
-  light_sound_state: 'timeless hour 19.2 clear; her reading: “starting anew, to rediscover when love was real. I failed at”'
+  light_sound_state: 'timeless hour 19.2 clear; his reading: “starting anew, to rediscover when love was real. I failed at”'
   patch_trigger: 'phrase boundary: “starting anew, to rediscover when love”'
   source: markov 2.90+8.00s
   status: GENERATE
@@ -162,7 +162,7 @@ patch_timeline:
   - crowd
   action_summary: POET crashes into an old-time party in romantic slow motion; he chases the EX through the crowd but the EX keeps vanishing.
   camera_relation: wide shot
-  light_sound_state: 'timeless hour 19.2 clear; her reading: “crashing the party of your evilest instincts to find vibrati”'
+  light_sound_state: 'timeless hour 19.2 clear; his reading: “crashing the party of your evilest instincts to find vibrati”'
   patch_trigger: 'location change: the vintage party met mid-fall'
   source: archive 12.23+9.64s
   status: moving
@@ -179,7 +179,7 @@ patch_timeline:
   - crowd
   action_summary: POET crashes into an old-time party in romantic slow motion; he chases the EX through the crowd but the EX keeps vanishing.
   camera_relation: undetermined (no ground) shot, ~90 mm
-  light_sound_state: 'timeless hour 19.2 clear; her reading: “dripping blood salivating on imminent doubts, fully awakenin”'
+  light_sound_state: 'timeless hour 19.2 clear; his reading: “dripping blood salivating on imminent doubts, fully awakenin”'
   patch_trigger: 'phrase boundary: “dripping blood salivating on imminent do”'
   source: markov 0.15+6.44s
   status: moving
@@ -196,7 +196,7 @@ patch_timeline:
   - crowd
   action_summary: POET crashes into an old-time party in romantic slow motion; he chases the EX through the crowd but the EX keeps vanishing.
   camera_relation: medium shot
-  light_sound_state: 'timeless hour 19.2 clear; her reading: “Pause for a second, a spectrum of fields will thread needles”'
+  light_sound_state: 'timeless hour 19.2 clear; his reading: “Pause for a second, a spectrum of fields will thread needles”'
   patch_trigger: 'phrase boundary: “Pause for a second, a spectrum”'
   source: Control Your Emotions 10.57+6.05s
   status: moving
@@ -213,7 +213,7 @@ patch_timeline:
   - crowd
   action_summary: POET crashes into an old-time party in romantic slow motion; he chases the EX through the crowd but the EX keeps vanishing.
   camera_relation: undetermined (no ground) shot, ~67 mm
-  light_sound_state: 'timeless hour 19.2 clear; her reading: “and photographs, film and fiction that leave me empty. With ”'
+  light_sound_state: 'timeless hour 19.2 clear; his reading: “and photographs, film and fiction that leave me empty. With ”'
   patch_trigger: 'phrase boundary: “and photographs, film and”'
   source: other 0.15+4.91s
   status: moving
@@ -229,7 +229,7 @@ patch_timeline:
   - crowd
   action_summary: POET stumbles through a hole in the party floor and keeps falling into pure blackness.
   camera_relation: eye-level shot, ~69 mm, camera 0.7 m up, pitch 1°
-  light_sound_state: 'timeless hour 19.2 clear; her reading: “as I stumble on my own words, landing into the secret of whe”'
+  light_sound_state: 'timeless hour 19.2 clear; his reading: “as I stumble on my own words, landing into the secret of whe”'
   patch_trigger: 'location change: the hole in the party floor'
   source: other 0.15+4.91s
   status: moving
@@ -243,7 +243,7 @@ patch_timeline:
   entities_present: []
   action_summary: the drop is vertical and continuous; the cut into 02 is a push through the pupil
   camera_relation: undetermined (no ground) shot, ~98 mm
-  light_sound_state: dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear; her reading
+  light_sound_state: dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 19.2 clear; his reading
   patch_trigger: 'threshold: fall 01 → 02'
   source: halfworld 123.55+4.00s
   status: moving

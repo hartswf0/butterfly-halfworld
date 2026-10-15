@@ -63,7 +63,7 @@ patch_timeline:
   - crowd
   action_summary: Leaving the club amid fawning crowds, the POET glimpses the EX from behind and reaches for him but cannot get through.
   camera_relation: medium shot
-  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; her reading: “Accepting you''ll never say nor ever feel, my love was real. ”'
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; his reading: “Accepting you''ll never say nor ever feel, my love was real. ”'
   patch_trigger: 'location change: the sidewalk at the foot of the spire'
   source: markov 16.96+12.63s
   status: GENERATE
@@ -79,7 +79,7 @@ patch_timeline:
   - EX
   action_summary: POET and EX walk down the Atlantis street together, talking, the moon at the end of the street; they 'grow old together' in feeling only (ag
   camera_relation: eye-level shot, ~34 mm, camera 2.2 m up, pitch 6°
-  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; her reading: “we look at the moon the way we used to see it and settle dow”'
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; his reading: “we look at the moon the way we used to see it and settle dow”'
   patch_trigger: 'location change: the avenue toward the moon'
   source: archive 7.52+12.10s
   status: moving
@@ -95,7 +95,7 @@ patch_timeline:
   - EX
   action_summary: POET and EX walk down the Atlantis street together, talking, the moon at the end of the street; they 'grow old together' in feeling only (ag
   camera_relation: eye-level shot, ~47 mm, camera 1.0 m up, pitch -38°
-  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; her reading: “I believe maybe we could have it all, or swing in my humbled”'
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; his reading: “I believe maybe we could have it all, or swing in my humbled”'
   patch_trigger: 'phrase boundary: “I believe maybe we could have it”'
   source: archive 0.15+7.72s
   status: moving
@@ -111,7 +111,7 @@ patch_timeline:
   - EX
   action_summary: EX and POET stand on the sidewalk near the phone booth with suitcases at their feet; the EX helps him pack to go.
   camera_relation: rooftop shot, ~80 mm, camera 13.6 m up, pitch -43°
-  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; her reading: “You help me gather my things to go. Before I go,”'
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; his reading: “You help me gather my things to go. Before I go,”'
   patch_trigger: 'location change: the booth curb'
   source: archive 37.37+3.64s
   status: moving
@@ -127,7 +127,7 @@ patch_timeline:
   - EX
   action_summary: POET enters the booth and calls his MOTHER; they talk while watching the POET and EX break up on the sidewalk; cut to POET and MOTHER in her
   camera_relation: medium shot
-  light_sound_state: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; her reading
+  light_sound_state: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; his reading
   patch_trigger: 'location change: inside the booth (by phone: the mother''s living room, the Overseer)'
   source: markov (still)
   status: still → drawing
@@ -142,7 +142,7 @@ patch_timeline:
   - POET
   action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
   camera_relation: elevated shot, ~116 mm, camera 3.2 m up, pitch -6°
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “I call on my mother. In tears, speaking of an abyss, she''s n”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; his reading: “I call on my mother. In tears, speaking of an abyss, she''s n”'
   patch_trigger: 'location change: by phone: the Inner Harbour before dawn'
   source: Bosque del Apache National Wildlife Refuge 0.15+6.87s
   status: moving
@@ -157,7 +157,7 @@ patch_timeline:
   - POET
   action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
   camera_relation: elevated shot, ~96 mm, camera 2.8 m up, pitch 0°
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “and we explain my way of birth then and even after prayer. W”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; his reading: “and we explain my way of birth then and even after prayer. W”'
   patch_trigger: 'phrase boundary: “and we explain my way of birth”'
   source: other (still)
   status: GENERATE
@@ -172,7 +172,7 @@ patch_timeline:
   - POET
   action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
   camera_relation: medium shot
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “We grow old together with the moon looking at us the way we ”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; his reading: “We grow old together with the moon looking at us the way we ”'
   patch_trigger: 'phrase boundary: “We grow old together with”'
   source: archive 8.07+8.73s
   status: moving
@@ -187,7 +187,7 @@ patch_timeline:
   - POET
   action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
   camera_relation: medium shot
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “dancing on my own, maternal ears in tune. She watches us gat”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; his reading: “dancing on my own, maternal ears in tune. She watches us gat”'
   patch_trigger: 'phrase boundary: “dancing on my own,”'
   source: other 0.15+4.91s
   status: GENERATE
@@ -202,7 +202,7 @@ patch_timeline:
   - POET
   action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
   camera_relation: medium shot
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “Before I go, I call on my father. Summon his calming demeano”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; his reading: “Before I go, I call on my father. Summon his calming demeano”'
   patch_trigger: 'phrase boundary: “Before I go, I call on my father.”'
   source: markov 3.78+6.27s
   status: GENERATE
@@ -217,7 +217,7 @@ patch_timeline:
   - POET
   action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
   camera_relation: elevated shot, ~17 mm, camera 5.0 m up, pitch 6°
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “and we walk for years and travel east toward the sunrises an”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; his reading: “and we walk for years and travel east toward the sunrises an”'
   patch_trigger: 'phrase boundary: “and we walk for years and”'
   source: markov 94.82+8.52s
   status: moving
@@ -232,7 +232,7 @@ patch_timeline:
   - POET
   action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
   camera_relation: elevated shot, ~43 mm, camera 2.5 m up, pitch 4°
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “Guiding a settling down moon the way it used to leave and my”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; his reading: “Guiding a settling down moon the way it used to leave and my”'
   patch_trigger: 'phrase boundary: “Guiding a settling down moon”'
   source: Gouda 5.67+9.61s
   status: GENERATE
@@ -247,7 +247,7 @@ patch_timeline:
   - POET
   action_summary: POET calls his FATHER, who appears from the yonders and watches the break-up; they walk paths east toward the sunrise and stroll the inner h
   camera_relation: medium shot
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; her reading: “We stroll, father and son, hearted and shaken. Someone borro”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 3.5 cloudy; his reading: “We stroll, father and son, hearted and shaken. Someone borro”'
   patch_trigger: 'phrase boundary: “We stroll, father”'
   source: Four in the Cosmos 0.18+5.57s
   status: moving
@@ -263,7 +263,7 @@ patch_timeline:
   - EX
   action_summary: POET and EX are back on the sidewalk; the EX turns to haze and disappears, leaving the POET alone.
   camera_relation: eye-level shot, ~20 mm, camera 1.7 m up, pitch -34°
-  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; her reading: “Yet broken, yet hurt.”'
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; his reading: “Yet broken, yet hurt.”'
   patch_trigger: 'location change: back at the booth curb'
   source: other (still)
   status: still → drawing
@@ -278,7 +278,7 @@ patch_timeline:
   - EX
   action_summary: the EX dissolves; the bike was always there
   camera_relation: medium shot
-  light_sound_state: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; her reading
+  light_sound_state: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 3.5 cloudy; his reading
   patch_trigger: 'threshold: dissolve 09 → 10'
   source: archive 0.65+4.00s
   status: moving

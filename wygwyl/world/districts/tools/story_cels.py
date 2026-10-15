@@ -4,7 +4,7 @@ Each patch's exact window of footage is trimmed and passed to their own shots/ca
 about every second and at every cut go through the whole stack (Grounding DINO + SAM 2.1 + OneFormer + Depth Pro → multiplane →
 the scene program's angular filled-region drawing), and the frames between are the neighbouring cels carried along the footage's
 own optical flow, on twos (12 fps). The scene's words go to the detector as hints. A still patch is drawn from a 2 s hold.
-Poem by poem: when a poem's patches are drawn its cel film is rendered with her reading (story_preview.py --cels), copied into the
+Poem by poem: when a poem's patches are drawn its cel film is rendered with his reading (story_preview.py --cels), copied into the
 repository (wygwyl/world/film/NN.mp4 + poster) and pushed, so each poem can be watched as it lands. Progress for the monitor
 (WYGWYL-CORPUS-ARCH/monitor.html) is written to WYGWYL-CORPUS-ARCH/progress.json after every patch.
 Resumable: a patch is redrawn only if the carve gave it another window.
@@ -51,14 +51,14 @@ def publish(p):
     have = sorted(x[:2] for x in os.listdir(PUB) if x.endswith('.mp4'))
     rows = ''.join(f"<section><h2>{q} · {html.escape(F[q]['title'])}</h2><video controls preload='none' poster='{q}.jpg' src='{q}.mp4'></video></section>" for q in have)
     open(os.path.join(PUB, 'index.html'), 'w').write(f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Where You Go When You Leave</title><meta name="description" content="WYGWYL · the film as cartoon cels, poem by poem: each patch of footage redrawn in the angular multiplane style and carried by its own motion, under her reading.">
+<title>Where You Go When You Leave</title><meta name="description" content="WYGWYL · the film as cartoon cels, poem by poem: each patch of footage redrawn in the angular multiplane style and carried by its own motion, under his reading.">
 <style>:root{{color-scheme:dark;--bg:#0a0d18;--ink:#eef0f7;--mute:#8b93ad}}body{{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,sans-serif}}main{{max-width:1100px;margin:0 auto;padding:24px 16px 60px}}
 h1{{font:500 12px ui-monospace,Menlo,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}}h2{{font-weight:400;margin:28px 0 8px}}video{{width:100%;border-radius:8px;background:#000}}p{{color:var(--mute)}}</style></head>
-<body><main><h1>Where you go when you leave · the film in cels · {len(have)} of 14 poems</h1><p>Each poem carved into 6–12 s patches on her reading's clock; every patch's footage redrawn as angular cels (wygwyl-world-arch's scene program) and carried by its own motion, on twos. Poems appear as they are drawn.</p>{rows}</main></body></html>""")
+<body><main><h1>Where you go when you leave · the film in cels · {len(have)} of 14 poems</h1><p>Each poem carved into 6–12 s patches on his reading's clock; every patch's footage redrawn as angular cels (wygwyl-world-arch's scene program) and carried by its own motion, on twos. Poems appear as they are drawn.</p>{rows}</main></body></html>""")
     if not PUSH: return None
     rel = [os.path.relpath(x, REPO) for x in (dst, os.path.join(PUB, f'{p}.jpg'), os.path.join(PUB, 'index.html'))]
     subprocess.run(['git', 'add', '--', *rel], cwd=REPO, check=True)
-    msg = f"WYGWYL film in cels: {p} {F[p]['title']}\n\nEach patch of the poem's carved cut redrawn as moving angular cels, under her reading.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+    msg = f"WYGWYL film in cels: {p} {F[p]['title']}\n\nEach patch of the poem's carved cut redrawn as moving angular cels, under his reading.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
     if subprocess.run(['git', 'commit', '-q', '-m', msg, '--', *rel], cwd=REPO).returncode: return None
     r = subprocess.run(['git', 'push', '-q', 'origin', BRANCH], cwd=REPO, capture_output=True, text=True)
     return f"https://github.com/hartswf0/butterfly-halfworld/blob/{BRANCH}/wygwyl/world/film/{p}.mp4" if r.returncode == 0 else 'push failed: ' + r.stderr[-200:]

@@ -64,7 +64,7 @@ patch_timeline:
   entities_present: []
   action_summary: Haze rises from the ground and covers him; he is reluctant at first, then gives in.
   camera_relation: undetermined (no ground) shot, ~33 mm
-  light_sound_state: 'dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 22.5 clear; her reading: “Don''t make me leave and go where promises, hearts, spectrums”'
+  light_sound_state: 'dusk into night (01), and the haze that rises off the harbour (13 → 14) hour 22.5 clear; his reading: “Don''t make me leave and go where promises, hearts, spectrums”'
   patch_trigger: 'location change: the harbour edge, then the end of the catwalk'
   source: markov (still)
   status: still → drawing
@@ -78,7 +78,7 @@ patch_timeline:
   entities_present: []
   action_summary: He floats alone in black, as after the poem 1 fall.
   camera_relation: eye-level shot, ~33 mm, camera 1.0 m up, pitch -2°
-  light_sound_state: 'timeless hour 22.5 clear; her reading: “I escaped here for a reason, believing this would give me a ”'
+  light_sound_state: 'timeless hour 22.5 clear; his reading: “I escaped here for a reason, believing this would give me a ”'
   patch_trigger: 'location change: the centre of the void'
   source: markov 0.15+4.74s
   status: GENERATE
@@ -92,7 +92,7 @@ patch_timeline:
   entities_present: []
   action_summary: He floats alone in black, as after the poem 1 fall.
   camera_relation: close shot
-  light_sound_state: 'timeless hour 22.5 clear; her reading: “The way you see things felt safe and timeless. Whatever has ”'
+  light_sound_state: 'timeless hour 22.5 clear; his reading: “The way you see things felt safe and timeless. Whatever has ”'
   patch_trigger: 'phrase boundary: “The way you see things felt”'
   source: archive 7.16+9.91s
   status: moving
@@ -107,7 +107,7 @@ patch_timeline:
   - POET
   action_summary: The film cuts back and forth between the floating POET and B-roll human scenes; the machines are unplugged.
   camera_relation: close shot
-  light_sound_state: 'timeless hour 22.5 clear; her reading: “let it feel love and lost as we must endure, absent artifici”'
+  light_sound_state: 'timeless hour 22.5 clear; his reading: “let it feel love and lost as we must endure, absent artifici”'
   patch_trigger: 'location change: void and B-roll'
   source: RCA 16mm Sound Projector, The 4.50+12.55s
   status: moving
@@ -121,7 +121,7 @@ patch_timeline:
   entities_present: []
   action_summary: Still floating; light traces his scars; gray brushed into his sight after defeats.
   camera_relation: undetermined (no ground) shot, ~59 mm
-  light_sound_state: 'timeless hour 22.5 clear; her reading: “can''t leave behind the impulse that comes from battle scars ”'
+  light_sound_state: 'timeless hour 22.5 clear; his reading: “can''t leave behind the impulse that comes from battle scars ”'
   patch_trigger: 'location change: void'
   source: markov 0.15+4.74s
   status: moving
@@ -135,7 +135,7 @@ patch_timeline:
   entities_present: []
   action_summary: Still floating in all black, an old vintage door materializes.
   camera_relation: wide shot
-  light_sound_state: 'timeless hour 22.5 clear; her reading: “I trust that you''ll be fine. I escaped here for a reason.”'
+  light_sound_state: 'timeless hour 22.5 clear; his reading: “I trust that you''ll be fine. I escaped here for a reason.”'
   patch_trigger: 'location change: before the door'
   source: archive 10.53+4.27s
   status: GENERATE
@@ -150,7 +150,7 @@ patch_timeline:
   - crowd
   action_summary: He enters the old-time vintage party; guests move in romantic slow motion; a dance.
   camera_relation: medium shot
-  light_sound_state: 'timeless hour 22.5 clear; her reading: “Our dance together is a victory to entwine muses, immersed i”'
+  light_sound_state: 'timeless hour 22.5 clear; his reading: “Our dance together is a victory to entwine muses, immersed i”'
   patch_trigger: 'location change: the ballroom beyond the door'
   source: archive 151.86+8.45s
   status: moving
@@ -165,7 +165,7 @@ patch_timeline:
   - crowd
   action_summary: He disappears into the crowd from the back; the door closes on the viewer. END.
   camera_relation: overhead shot, ~53 mm, camera 15.1 m up, pitch -89°
-  light_sound_state: 'timeless hour 22.5 clear; her reading: “and a genesis of a New Testament as it ends.”'
+  light_sound_state: 'timeless hour 22.5 clear; his reading: “and a genesis of a New Testament as it ends.”'
   patch_trigger: 'location change: the doorway, from outside'
   source: archive 5.90+3.86s
   status: moving
@@ -179,7 +179,7 @@ patch_timeline:
   entities_present: []
   action_summary: the door closes on the viewer; the film loops
   camera_relation: close shot
-  light_sound_state: timeless hour 22.5 clear; her reading
+  light_sound_state: timeless hour 22.5 clear; his reading
   patch_trigger: 'threshold: door 14 → 01'
   source: film 0.15+4.00s
   status: moving

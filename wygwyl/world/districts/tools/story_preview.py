@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""WATCH IT: each poem's cut (story_film.py) as a film timed to her reading. Every shot shows its drawing when the pipeline has
+"""WATCH IT: each poem's cut (story_film.py) as a film timed to his reading. Every shot shows its drawing when the pipeline has
 made one (the scene program's frame: flat shapes in the shot's own colours) and its source picture until then, with a slow push,
 the line she is speaking burnt in, and a small label (scene · role · source · drawn or not) so the cut can be judged while watching.
 Re-run after more shots are drawn and the film fills in with drawings. Writes WYGWYL-CORPUS-ARCH/film/NN.mp4 and film/index.html
@@ -26,7 +26,7 @@ def esc(t): return t.replace('\\', '\\\\').replace(':', '\\:').replace("'", '’
 for p in poems:
     f = F[p]; tmp = tempfile.mkdtemp(); clips = []; drawn = 0
     for i, s in enumerate(f['shots']):
-        if not s.get('k'):                                     # a patch to make: a card for its length, so the cut stays on her clock
+        if not s.get('k'):                                     # a patch to make: a card for its length, so the cut stays on his clock
             d = max(1.0, s['t1'] - s['t0']); n = int(round(d * FPS)); c = os.path.join(tmp, f'{i:03d}.mp4'); tf = os.path.join(tmp, f'gen{i:03d}.txt')
             open(tf, 'w').write(f"TO MAKE  {s.get('id')}  {s['name']}\n{s['what'][:90]}")
             subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-f', 'lavfi', '-i', f'color=c=0x0b0d14:s={WD}x{HT}:r={FPS}:d={d:.2f}', '-vf',
@@ -53,7 +53,7 @@ for p in poems:
         r = subprocess.run(cmd)
         if r.returncode == 0: clips.append(c)
     open(os.path.join(tmp, 'list.txt'), 'w').write(''.join(f"file '{c}'\n" for c in clips))
-    # her lines, burnt in at the times she speaks them
+    # his lines, burnt in at the times he speaks them
     Tm = json.load(open(os.path.join(WY, 'timings', f'{p}.json'))); caps = []
     for k, sg in enumerate(Tm['segments']):
         txt = re.sub(r'\s+', ' ', sg['text']).strip(); lines, cur = [], ''

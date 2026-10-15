@@ -60,7 +60,7 @@ patch_timeline:
   - POET
   action_summary: The POET stands alone on the sidewalk and inspects a motorcycle parked beside him, idling under a street lamp, his face caught in the chrome
   camera_relation: undetermined (no ground) shot, ~45 mm
-  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; her reading: “I wasn''t looking for a ride, but here you are, blissful and ”'
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; his reading: “I wasn''t looking for a ride, but here you are, blissful and ”'
   patch_trigger: 'location change: the same curb, the bike under the lamp'
   source: halfworld 193.89+12.99s
   status: moving
@@ -74,7 +74,7 @@ patch_timeline:
   entities_present: []
   action_summary: He rubs his aggressions into the steel, thumps the fender, swings a boot over the seat and laughs into the wind as he pulls away.
   camera_relation: medium shot
-  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; her reading: “So I rub my aggressions into your steel coverings and hop on”'
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; his reading: “So I rub my aggressions into your steel coverings and hop on”'
   patch_trigger: 'location change: curbside'
   source: Muller en co n.v. Rotterdam 1.22+7.87s
   status: moving
@@ -88,7 +88,7 @@ patch_timeline:
   entities_present: []
   action_summary: He weaves through empty plazas, tunnels and midnight intersections with no one behind him; the real Mexico City motorcycle material covers t
   camera_relation: eye-level shot, ~40 mm, camera 1.5 m up, pitch 0°
-  light_sound_state: 'dusk and blue hour; empty at 5 a.m. (10) hour 4.6 clear; her reading: “Loneliness is having everything with no one to tell, being e”'
+  light_sound_state: 'dusk and blue hour; empty at 5 a.m. (10) hour 4.6 clear; his reading: “Loneliness is having everything with no one to tell, being e”'
   patch_trigger: 'location change: empty plazas and the tunnels under the market'
   source: markov 7.82+6.93s
   status: moving
@@ -102,7 +102,7 @@ patch_timeline:
   entities_present: []
   action_summary: He weaves through empty plazas, tunnels and midnight intersections with no one behind him; the real Mexico City motorcycle material covers t
   camera_relation: wide shot
-  light_sound_state: 'dusk and blue hour; empty at 5 a.m. (10) hour 4.6 clear; her reading: “wide -eyed and stone but alive and well, wandering with no c”'
+  light_sound_state: 'dusk and blue hour; empty at 5 a.m. (10) hour 4.6 clear; his reading: “wide -eyed and stone but alive and well, wandering with no c”'
   patch_trigger: 'phrase boundary: “wide -eyed and stone but alive”'
   source: Opening tramlijn naar Wassenaar 9.68+10.11s
   status: moving
@@ -117,7 +117,7 @@ patch_timeline:
   - crowd
   action_summary: Riding through crowded streets with a swagger, one hand off the bars; eyes turn and heads twist as he passes.
   camera_relation: eye-level shot, ~40 mm, camera 1.5 m up, pitch -4°
-  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; her reading: “so the way I ride through the streets with the swag and eyes”'
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; his reading: “so the way I ride through the streets with the swag and eyes”'
   patch_trigger: 'location change: the avenue under the LED canopy'
   source: '''Till It Helps! 17.19+8.26s'
   status: moving
@@ -132,7 +132,7 @@ patch_timeline:
   - crowd
   action_summary: Riding through crowded streets with a swagger, one hand off the bars; eyes turn and heads twist as he passes.
   camera_relation: medium shot
-  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; her reading: “All preparations to live and dream in darkness I no longer d”'
+  light_sound_state: 'late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; his reading: “All preparations to live and dream in darkness I no longer d”'
   patch_trigger: 'phrase boundary: “All preparations to”'
   source: markov 19.23+5.75s
   status: moving
@@ -146,7 +146,7 @@ patch_timeline:
   entities_present: []
   action_summary: He rides out of Atlantis as the night turns and the sky lightens; the moon dips behind the skyline and a road sign points to a new dawn.
   camera_relation: wide shot
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; her reading: “The moon settles and”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; his reading: “The moon settles and”'
   patch_trigger: 'location change: the rail viaduct out of the city as the moon sets'
   source: archive 22.58+1.20s
   status: moving
@@ -160,7 +160,7 @@ patch_timeline:
   entities_present: []
   action_summary: He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander'
   camera_relation: wide shot
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; her reading: “the tease of distant stars subsides and I can see a morning ”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; his reading: “the tease of distant stars subsides and I can see a morning ”'
   patch_trigger: 'location change: the pass under the mountain, the rail beside the road'
   source: archive 13.36+8.91s
   status: moving
@@ -174,7 +174,7 @@ patch_timeline:
   entities_present: []
   action_summary: He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander'
   camera_relation: medium shot
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; her reading: “a morning where loss and life aren''t so well, ripe with sunl”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; his reading: “a morning where loss and life aren''t so well, ripe with sunl”'
   patch_trigger: 'phrase boundary: “a morning where loss and life aren''t”'
   source: to make (still)
   status: GENERATE
@@ -188,7 +188,7 @@ patch_timeline:
   entities_present: []
   action_summary: He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander'
   camera_relation: medium shot
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; her reading: “The tripping of birds, feeling of nests, spring out of the n”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; his reading: “The tripping of birds, feeling of nests, spring out of the n”'
   patch_trigger: 'phrase boundary: “The tripping of birds,”'
   source: archive 29.07+11.57s
   status: GENERATE
@@ -202,7 +202,7 @@ patch_timeline:
   entities_present: []
   action_summary: He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander'
   camera_relation: wide shot
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; her reading: “I want to live in this feeling forever, blissful and oddly i”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; his reading: “I want to live in this feeling forever, blissful and oddly i”'
   patch_trigger: 'phrase boundary: “I want to live in this feeling”'
   source: markov (still)
   status: still → drawing
@@ -216,7 +216,7 @@ patch_timeline:
   entities_present: []
   action_summary: He rides through the mountains around Atlantis at first light, birdsong rising, leaning the bike into an impossible curve while a bystander'
   camera_relation: elevated shot, ~35 mm, camera 2.2 m up, pitch -19°
-  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; her reading: “riding in a way you can''t help but double -click, improve, y”'
+  light_sound_state: 'dawn and dusk only (10 → 11 at first light; 04 at twilight) hour 4.6 clear; his reading: “riding in a way you can''t help but double -click, improve, y”'
   patch_trigger: 'phrase boundary: “riding in a way you”'
   source: film (still)
   status: still → drawing
@@ -230,7 +230,7 @@ patch_timeline:
   entities_present: []
   action_summary: 'the album''s only travelling poem: neon to dawn in one direction'
   camera_relation: wide shot
-  light_sound_state: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; her reading
+  light_sound_state: late night to the last of the night (09 at 03:30, 10 leaving at 04:30) hour 4.6 clear; his reading
   patch_trigger: 'threshold: ride 10 → 11'
   source: other 96.25+4.00s
   status: moving

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""A CEL CUT ON SPINE-CUT'S REVIEWED PICKS. Spine-Cut (Cineosis Lab) aligned 506 spine sections to her words and an editor reviewed
+"""A CEL CUT ON SPINE-CUT'S REVIEWED PICKS. Spine-Cut (Cineosis Lab) aligned 506 spine sections to his words and an editor reviewed
 every row (137 machine picks switched): the best human judgement of which archive shot plays under which line. Each section becomes a
 patch of the cel cut:
   the clip    the reviewed pick ('clean'), at Spine-Cut's own in-point (read_t − 0.6 s) for the section's length; only where the pick

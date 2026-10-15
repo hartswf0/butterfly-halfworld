@@ -57,7 +57,7 @@ patch_timeline:
   entities_present: []
   action_summary: The tambourine falls, flies, tumbles through black space and enters the chapel through a window, still whole.
   camera_relation: eye-level shot, ~18 mm, camera 1.1 m up, pitch 10°
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “Old to forever, a tambourine sounds off an empty temple,”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; his reading: “Old to forever, a tambourine sounds off an empty temple,”'
   patch_trigger: 'location change: the chapel''s seaward lancet'
   source: other 0.15+4.91s
   status: moving
@@ -71,7 +71,7 @@ patch_timeline:
   entities_present: []
   action_summary: 'Close-ups of an empty sanctuary in time-lapse decay: choir stands, kneelers, a dry baptism pool, pews veiled in cobwebs, ash drifting.'
   camera_relation: wide shot
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “empty choir stands, empty prayer lines, and abandoned Baptis”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; his reading: “empty choir stands, empty prayer lines, and abandoned Baptis”'
   patch_trigger: 'location change: the nave, choir loft and baptistery as built'
   source: archive 13.28+6.15s
   status: moving
@@ -85,7 +85,7 @@ patch_timeline:
   entities_present: []
   action_summary: 'Close-ups of an empty sanctuary in time-lapse decay: choir stands, kneelers, a dry baptism pool, pews veiled in cobwebs, ash drifting.'
   camera_relation: medium shot
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “pews taken by cobwebs, and doused in disintegration.”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; his reading: “pews taken by cobwebs, and doused in disintegration.”'
   patch_trigger: 'phrase boundary: “pews taken by cobwebs,”'
   source: archive 0.15+7.79s
   status: moving
@@ -99,7 +99,7 @@ patch_timeline:
   entities_present: []
   action_summary: Opened gift boxes left outside the side doors; spirits leave; ivy creeps over the cracked threshold.
   camera_relation: elevated shot, ~33 mm, camera 2.5 m up, pitch -36°
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “Spirits have left salvations and opened gift boxes placed ou”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; his reading: “Spirits have left salvations and opened gift boxes placed ou”'
   patch_trigger: 'location change: the side doors and stone threshold'
   source: other 0.15+4.91s
   status: moving
@@ -113,7 +113,7 @@ patch_timeline:
   entities_present: []
   action_summary: Thunder; a heavy storm takes over and speeds the decay until nothing remains.
   camera_relation: wide shot
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “It thunders, then it rains until nothing remains.”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; his reading: “It thunders, then it rains until nothing remains.”'
   patch_trigger: 'location change: the flat, from the beach'
   source: markov 157.16+7.21s
   status: moving
@@ -127,7 +127,7 @@ patch_timeline:
   entities_present: []
   action_summary: Storm ends; what is left of the chapel lies on the shore with soaked bread, soiled blankets and footprints in mud.
   camera_relation: ground / worm's-eye shot, ~28 mm, camera 0.2 m up, pitch 1°
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “Old to the storm ending, what was once love now goods, broke”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; his reading: “Old to the storm ending, what was once love now goods, broke”'
   patch_trigger: 'location change: the tide line where the chapel stood'
   source: other 0.15+4.91s
   status: moving
@@ -141,7 +141,7 @@ patch_timeline:
   entities_present: []
   action_summary: Storm ends; what is left of the chapel lies on the shore with soaked bread, soiled blankets and footprints in mud.
   camera_relation: medium shot
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “and blankets soiled by venomous puppeteers, old to two sets ”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; his reading: “and blankets soiled by venomous puppeteers, old to two sets ”'
   patch_trigger: 'phrase boundary: “and blankets soiled by”'
   source: Heritage of Splendor 0.98+5.24s
   status: moving
@@ -155,7 +155,7 @@ patch_timeline:
   entities_present: []
   action_summary: The tambourine finally lands on the ground of the chapel remnants and shatters.
   camera_relation: ground / worm's-eye shot, ~51 mm, camera 0.3 m up, pitch 7°
-  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading: “a tambourine shattered into pieces.”'
+  light_sound_state: 'storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; his reading: “a tambourine shattered into pieces.”'
   patch_trigger: 'location change: the chapel''s remnant floor'
   source: other 0.15+4.50s
   status: moving
@@ -169,7 +169,7 @@ patch_timeline:
   entities_present: []
   action_summary: 'time cut: day storm → twilight calm, same tide line'
   camera_relation: rooftop shot, ~106 mm, camera 10.3 m up, pitch -32°
-  light_sound_state: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; her reading
+  light_sound_state: storm daylight (03), chilly dawn (11), warm hall into a dusk porch (12) hour 10.0 cloudy, storm; his reading
   patch_trigger: 'threshold: cut 03 → 04'
   source: Moonwalk One, ca. 1970 24.11+4.00s
   status: moving

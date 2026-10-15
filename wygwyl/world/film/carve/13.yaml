@@ -66,7 +66,7 @@ patch_timeline:
   - POET
   action_summary: The POET wanders alone from the new temple along the harbor to the cafe.
   camera_relation: medium shot
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; her reading: “I want you to notice me in a corner cafe at the Harbor of th”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; his reading: “I want you to notice me in a corner cafe at the Harbor of th”'
   patch_trigger: 'location change: the promenade from the temple round the harbour'
   source: archive 9.21+9.56s
   status: moving
@@ -81,7 +81,7 @@ patch_timeline:
   - POET
   action_summary: The POET wanders alone from the new temple along the harbor to the cafe.
   camera_relation: elevated shot, ~38 mm, camera 3.7 m up, pitch -50°
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; her reading: “healing the sick with silent prayers and molding a better wo”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; his reading: “healing the sick with silent prayers and molding a better wo”'
   patch_trigger: 'phrase boundary: “healing the sick with silent prayers”'
   source: De Joodsche invalide 0.43+9.78s
   status: GENERATE
@@ -95,7 +95,7 @@ patch_timeline:
   entities_present: []
   action_summary: He sits at a corner table and observes couples at other tables, wanting to be noticed.
   camera_relation: medium shot
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; her reading: “I want you to really notice me”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; his reading: “I want you to really notice me”'
   patch_trigger: 'location change: the pier café''s corner table'
   source: Family Life 5.15+2.04s
   status: moving
@@ -110,7 +110,7 @@ patch_timeline:
   - ghost child
   action_summary: 'Cutaways: silhouettes on opposite shores, ghost children behind glass, an old couple praying together at church.'
   camera_relation: medium shot
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; her reading: “with the distances we couldn''t avoid and our younger selves ”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; his reading: “with the distances we couldn''t avoid and our younger selves ”'
   patch_trigger: 'location change: the café glass; a harbour church'
   source: archive 5.03+4.63s
   status: moving
@@ -125,7 +125,7 @@ patch_timeline:
   - ghost child
   action_summary: 'Cutaways: silhouettes on opposite shores, ghost children behind glass, an old couple praying together at church.'
   camera_relation: ground / worm's-eye shot, ~47 mm, camera 0.1 m up, pitch -15°
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; her reading: “hold their faith and breath closely, freeing their worries p”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; his reading: “hold their faith and breath closely, freeing their worries p”'
   patch_trigger: 'phrase boundary: “hold their faith and breath closely,”'
   source: Lens, Hollands dorp in Frankrijk 3.14+6.37s
   status: moving
@@ -139,7 +139,7 @@ patch_timeline:
   entities_present: []
   action_summary: 'From his seat: a lone traveler, burning diary, love letters blown away, dusty trophy cases, flowers frozen in ice.'
   camera_relation: ground / worm's-eye shot, ~70 mm, camera 0.3 m up, pitch -11°
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; her reading: “I''ve journeyed beyond any place you can conceivably be. So I”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; his reading: “I''ve journeyed beyond any place you can conceivably be. So I”'
   patch_trigger: 'location change: the table (mental space)'
   source: film 63.82+8.16s
   status: moving
@@ -153,7 +153,7 @@ patch_timeline:
   entities_present: []
   action_summary: 'From his seat: a lone traveler, burning diary, love letters blown away, dusty trophy cases, flowers frozen in ice.'
   camera_relation: close shot
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; her reading: “All ends led to losses, victory -less seasons for a man that”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; his reading: “All ends led to losses, victory -less seasons for a man that”'
   patch_trigger: 'phrase boundary: “All ends led to losses,”'
   source: archive 39.02+12.05s
   status: moving
@@ -167,7 +167,7 @@ patch_timeline:
   entities_present: []
   action_summary: 'From his seat: a lone traveler, burning diary, love letters blown away, dusty trophy cases, flowers frozen in ice.'
   camera_relation: ground / worm's-eye shot, ~88 mm, camera 0.4 m up, pitch -5°
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; her reading: “friendships in death and departure. I''ve learned to love mys”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; his reading: “friendships in death and departure. I''ve learned to love mys”'
   patch_trigger: 'phrase boundary: “friendships in death and departure.”'
   source: archive 31.11+7.82s
   status: moving
@@ -182,7 +182,7 @@ patch_timeline:
   - POET
   action_summary: Fields of scarlet poppies and purple blossoms are harvested and become the POET's power.
   camera_relation: eye-level shot, ~58 mm, camera 2.0 m up, pitch -16°
-  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 12.6 clear, fog; her reading: “harvest a wizardry more brilliant than the scarlet poppies a”'
+  light_sound_state: 'still night, 21:00 to midnight (04 end, 05); the soul''s view at 02:30 (08) hour 12.6 clear, fog; his reading: “harvest a wizardry more brilliant than the scarlet poppies a”'
   patch_trigger: 'location change: the Night Garden Field by day, harvested'
   source: This Is My Railroad (Part I) 21.53+8.94s
   status: moving
@@ -196,7 +196,7 @@ patch_timeline:
   entities_present: []
   action_summary: Still at the cafe watching couples; hope that someone will notice him and meet his eyes.
   camera_relation: wide shot
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; her reading: “Yet from a distant window, beautiful and calm, hope tells me”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; his reading: “Yet from a distant window, beautiful and calm, hope tells me”'
   patch_trigger: 'location change: the café window from the harbour'
   source: archive 0.15+7.41s
   status: GENERATE
@@ -210,7 +210,7 @@ patch_timeline:
   entities_present: []
   action_summary: Still at the cafe watching couples; hope that someone will notice him and meet his eyes.
   camera_relation: close shot
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; her reading: “and capture my eyes as you refocus yours, stepping back and ”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; his reading: “and capture my eyes as you refocus yours, stepping back and ”'
   patch_trigger: 'phrase boundary: “and capture my eyes as”'
   source: archive 0.15+7.41s
   status: moving
@@ -224,7 +224,7 @@ patch_timeline:
   entities_present: []
   action_summary: He leaves the cafe and walks around the harbor as haze starts to gather on the water.
   camera_relation: elevated shot, ~89 mm, camera 6.4 m up, pitch -0°
-  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; her reading: “all the fatigue of wandering alone in thought, in windless s”'
+  light_sound_state: 'daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; his reading: “all the fatigue of wandering alone in thought, in windless s”'
   patch_trigger: 'location change: the harbour edge and piers, the haze rising'
   source: Muller en co n.v. Rotterdam 14.06+13.07s
   status: moving
@@ -238,7 +238,7 @@ patch_timeline:
   entities_present: []
   action_summary: white-out from the ground up; the Orange Haze arrives at the harbour
   camera_relation: medium shot
-  light_sound_state: daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; her reading
+  light_sound_state: daytime (13), then the haze; at night the bioluminescence hour 12.6 clear, fog; his reading
   patch_trigger: 'threshold: dissolve 13 → 14'
   source: to make (still)
   status: GENERATE
