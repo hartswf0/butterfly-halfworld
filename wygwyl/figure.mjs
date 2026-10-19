@@ -469,6 +469,35 @@ function drawSmall(K, x, y, h, pose, contour) {
 }
 
 /* --------------------------------------------------------------- the draw */
+/* ============================================================================
+   THE GROUND CONTRACT.
+
+   A walking foot sits at sin(phase*TAU)*stride in BODY-LOCAL space, with
+   stride = 0.15h. Foot A is on the ground while cos > 0 is false — q from
+   pi/2 to 3pi/2 — and across that half-cycle its local x sweeps +stride to
+   -stride. So the foot is pinned in the WORLD if and only if the body advances
+   exactly 2*stride across that same half-cycle:
+
+       dq/dx = pi / (2*stride)      ->      phase = face*(x - x0) / (4*stride)
+
+   which at stride = 0.15h is phase = face*(x - x0) / (0.6h). Measured on the
+   bench (wygwyl/scion/stride.mjs) the real screen excursion is 0.1479h against
+   the nominal 0.15h, so 0.6h is right to one and a half percent and the
+   remainder is the lattice.
+
+   PHASE IS THEREFORE NOT A FREE PARAMETER. It is a function of where the body
+   is. Every film in this suite authored the two independently — 01 moves the
+   body on a smoothstep ping-pong while phase runs linearly off u — and the
+   measured result is that 27 of 34 travelling shots never plant a foot at all.
+   Nothing was ever going to make an independently authored phase agree with an
+   independently authored speed.
+
+   x0 is the x the leg started from; any constant only decides which foot leads.
+   `face` must be the direction of travel, not the direction the author had in
+   mind: in 01 they disagreed on 20 of 22 intervals and the poet moonwalked.
+   ========================================================================= */
+export const gaitPhase = (x, x0, h, face = 1) => (face * (x - x0)) / (0.6 * h);
+
 export function drawFigure(K, x, y, h, pose = {}, level = 7) {
   if (h < 4) return;
   const contour = clamp(level, 1, 7);

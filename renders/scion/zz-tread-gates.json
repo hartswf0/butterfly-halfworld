@@ -1,0 +1,144 @@
+{
+ "sampledAt": "20 fps inside each shot",
+ "shots": 4,
+ "withBodies": 4,
+ "gate3": {
+  "travelled": 3,
+  "aliasedAndNotJudged": 0,
+  "meanPlantRatio": 0.893,
+  "planted": 2,
+  "skating": 0
+ },
+ "results": [
+  {
+   "shot": "zz-tread:0",
+   "film": "zz-tread",
+   "label": "DECOUPLED · PHASE FROM TIME",
+   "frames": 78,
+   "guise": "everyman",
+   "mode": "walk",
+   "bodies": 78,
+   "g1": {
+    "solidity": 0.792,
+    "holes": 0.27,
+    "contamination": 0.011
+   },
+   "g2": {
+    "vol": 0.1667,
+    "cv": 0.0642,
+    "flicker": 0.0535
+   },
+   "g3": {
+    "plant": 6.33,
+    "ratio": 0.537,
+    "runSamples": 3,
+    "amplitude": 5.9,
+    "grossTravel": 240.7,
+    "cellsPerSample": 3.13,
+    "alias": 0.265,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.329,
+    "lagFrames": 0,
+    "r": 0.946
+   }
+  },
+  {
+   "shot": "zz-tread:1",
+   "film": "zz-tread",
+   "label": "PINNED · PHASE FROM DISTANCE",
+   "frames": 78,
+   "guise": "everyman",
+   "mode": "walk",
+   "bodies": 78,
+   "g1": {
+    "solidity": 0.795,
+    "holes": 0.29,
+    "contamination": 0.011
+   },
+   "g2": {
+    "vol": 0.167,
+    "cv": 0.0686,
+    "flicker": 0.085
+   },
+   "g3": {
+    "plant": 12.67,
+    "ratio": 1.088,
+    "runSamples": 5,
+    "amplitude": 5.82,
+    "grossTravel": 240.7,
+    "cellsPerSample": 3.13,
+    "alias": 0.268,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.4592,
+    "lagFrames": 0,
+    "r": 0.961
+   }
+  },
+  {
+   "shot": "zz-tread:2",
+   "film": "zz-tread",
+   "label": "PINNED · THE OTHER WAY",
+   "frames": 78,
+   "guise": "everyman",
+   "mode": "walk",
+   "bodies": 78,
+   "g1": {
+    "solidity": 0.794,
+    "holes": 0.21,
+    "contamination": 0.011
+   },
+   "g2": {
+    "vol": 0.1667,
+    "cv": 0.0654,
+    "flicker": 0.0807
+   },
+   "g3": {
+    "plant": 12.67,
+    "ratio": 1.055,
+    "runSamples": 5,
+    "amplitude": 6,
+    "grossTravel": 240.7,
+    "cellsPerSample": 3.13,
+    "alias": 0.26,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.4294,
+    "lagFrames": 0,
+    "r": 0.961
+   }
+  },
+  {
+   "shot": "zz-tread:3",
+   "film": "zz-tread",
+   "label": "PROBE · FIXED BODY, ONE CYCLE",
+   "frames": 78,
+   "guise": "everyman",
+   "mode": "walk",
+   "bodies": 78,
+   "g1": {
+    "solidity": 0.795,
+    "holes": 0.37,
+    "contamination": 0.011
+   },
+   "g2": {
+    "vol": 0.1683,
+    "cv": 0.0652,
+    "flicker": 0.0094
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0.9686,
+    "lagFrames": 0,
+    "r": 0
+   }
+  }
+ ]
+}

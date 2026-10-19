@@ -7,6 +7,7 @@
    him as tumbling dashes; the last light in the film is the vape ember.
    ========================================================================= */
 import { TAU, lerp, clamp01, smooth, ss, win } from "../halfworld.mjs";
+import { gaitPhase } from "../figure.mjs";
 
 /* the apartment, drawn the same way in M1 and M2 so the haze has something
    real to take. breathe: the walls move under 1% of frame — a HOLD, deniable */
@@ -74,12 +75,29 @@ export default {
            cues are what he startles at — a drawer, a latch — and the head
            catches the sound a beat before the body would, which is what
            makes it a reaction instead of a coincidence of timing. */
-        const p = smooth(Math.abs(((u * 2.2) % 2) - 1));
+        /* TWO THINGS WERE WRONG HERE AND NEITHER IS VISIBLE IN A FRAME.
+
+           THE FEET SKATED. `phase: u * 7.35` advances with time while the body
+           advances on a smoothstep ping-pong, and nothing couples them, so no
+           foot was ever planted: the gate measured a plant of a third of a
+           stride where a walk needs a whole one. gaitPhase derives the phase
+           from the distance travelled, which is the only way the two can agree.
+
+           AND HE WALKED BACKWARDS. `face` came from `tau < 1` while x comes
+           from `smooth(|tau - 1|)`, and those disagree: x DECREASES while tau
+           is under 1. Measured, the facing opposed the travel on 20 of 22
+           intervals — he moonwalked the length of the room and back, through
+           four passes of work and a gait bench, because a still frame cannot
+           show it and the bench never moved the body. Face where you are
+           going. */
+        const tau = (u * 2.2) % 2;
+        const p = smooth(Math.abs(tau - 1));
         const x = lerp(34, 140, p);
-        const face = ((u * 2.2) % 2) < 1 ? 1 : -1;
+        const face = tau < 1 ? -1 : 1;              // x falls while tau < 1
+        const legStart = tau < 1 ? 140 : 34;        // the x this leg set off from
         const startle = Math.max(Math.exp(-(((u - 0.28) / 0.045) ** 2)), Math.exp(-(((u - 0.62) / 0.045) ** 2)));
         F.fig(x, FLOOR, 34, {
-          mode: "walk", phase: u * 7.35, face, lean: face * 0.06, guise: "poet",
+          mode: "walk", phase: gaitPhase(x, legStart, 34, face), face, lean: face * 0.06, guise: "poet",
           /* scanning while he walks, then a sharp glance at the startle */
           headTurn: Math.max(-1, Math.min(1, face * (0.45 + 0.30 * Math.sin(u * TAU * 4.4)) - startle * face * 0.9)),
           headTilt: startle * 0.5,

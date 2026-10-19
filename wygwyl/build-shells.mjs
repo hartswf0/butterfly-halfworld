@@ -10,7 +10,15 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 const HERE = path.dirname(new URL(import.meta.url).pathname);
-const files = fs.readdirSync(path.join(HERE, "worlds")).filter(f => /^\d\d-.*\.mjs$/.test(f)).sort();
+/* THE BENCHES NEED SHELLS TOO. This matched only `NN-` worlds, so a new
+   zz- bench mounted nowhere and could not be shot or measured — while
+   zz-gait.html and zz-over.html sat in the directory as proof that somebody
+   had already hand-written the shell this script refused to make. A bench you
+   have to hand-build is a bench you do not build, and the one defect that got
+   through fourteen films got through because the bench that would have caught
+   it did not exist. They stay out of the running-order table below: a bench is
+   not a film. */
+const files = fs.readdirSync(path.join(HERE, "worlds")).filter(f => /^(\d\d|zz)-.*\.mjs$/.test(f)).sort();
 
 for (const f of files) {
   const slug = f.replace(/\.mjs$/, "");

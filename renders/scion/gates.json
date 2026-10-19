@@ -1,0 +1,2098 @@
+{
+ "sampledAt": "24 fps inside each shot",
+ "shots": 94,
+ "withBodies": 59,
+ "gate3": {
+  "travelled": 36,
+  "aliasedAndNotJudged": 1,
+  "meanPlantRatio": 0.684,
+  "planted": 13,
+  "skating": 8
+ },
+ "results": [
+  {
+   "shot": "77bbd4d1-fd2a-57bf-9643-1929419d75fc",
+   "film": "01",
+   "label": "TITLE",
+   "bodies": 0
+  },
+  {
+   "shot": "4cfa7752-8f18-518a-a6df-61b3defe5e09",
+   "film": "01",
+   "label": "THE SEARCH",
+   "frames": 208,
+   "guise": "poet",
+   "mode": "walk",
+   "bodies": 208,
+   "g1": {
+    "solidity": 0.821,
+    "holes": 0.16,
+    "contamination": 0.04
+   },
+   "g2": {
+    "vol": 0.1926,
+    "cv": 0.0641,
+    "flicker": 0.0309
+   },
+   "g3": {
+    "plant": 6.98,
+    "ratio": 0.548,
+    "runSamples": 9,
+    "amplitude": 6.37,
+    "grossTravel": 213.7,
+    "cellsPerSample": 1.03,
+    "alias": 0.081,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.448,
+    "lagFrames": 0,
+    "r": 0.972
+   }
+  },
+  {
+   "shot": "a8863403-93c7-5c6b-a2a4-6c6fb3327b8e",
+   "film": "01",
+   "label": "MORE HAZE",
+   "frames": 204,
+   "guise": "poet",
+   "mode": "walk",
+   "bodies": 204,
+   "g1": {
+    "solidity": 0.205,
+    "holes": 0.01,
+    "contamination": 0.723
+   },
+   "g2": {
+    "vol": 0.0532,
+    "cv": 0.3187,
+    "flicker": 0.079
+   },
+   "g3": {
+    "plant": 3.35,
+    "ratio": 0.279,
+    "runSamples": 6,
+    "amplitude": 6.01,
+    "grossTravel": 97.3,
+    "cellsPerSample": 0.48,
+    "alias": 0.04,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 1.4314,
+    "lagFrames": 6,
+    "r": 0.011
+   }
+  },
+  {
+   "shot": "ac2c26ad-1fec-51aa-9a07-f3300fc12312",
+   "film": "01",
+   "label": "THE FALL",
+   "frames": 208,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 208,
+   "g1": {
+    "solidity": 0.642,
+    "holes": 1,
+    "contamination": 0.014
+   },
+   "g2": {
+    "vol": 0.2657,
+    "cv": 0.0212,
+    "flicker": 0.012
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 1.3344,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "8846c650-a93f-5a2b-b0df-e23288ed9e75",
+   "film": "01",
+   "label": "AS DARK AS BLACK",
+   "frames": 209,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 209,
+   "g1": {
+    "solidity": 0.609,
+    "holes": 0,
+    "contamination": 0.469
+   },
+   "g2": {
+    "vol": 0.2846,
+    "cv": 0.0155,
+    "flicker": 0.0009
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0.0607,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "a12b5cb7-63ac-533c-a304-d0c80dc607c2",
+   "film": "02",
+   "label": "TITLE",
+   "bodies": 0
+  },
+  {
+   "shot": "b3557148-a850-53d1-93e4-c15844e5d7d4",
+   "film": "02",
+   "label": "SILENT SCREAM",
+   "frames": 197,
+   "guise": "everyman",
+   "mode": "stand",
+   "bodies": 197,
+   "g1": {
+    "solidity": 0.517,
+    "holes": 0.07,
+    "contamination": 0.077
+   },
+   "g2": {
+    "vol": 0.2193,
+    "cv": 0.1628,
+    "flicker": 0.0465
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 1.0522,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "b21502d1-c92d-57fe-8bb1-df33051902a7",
+   "film": "02",
+   "label": "THE MIRROR",
+   "frames": 131,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 131,
+   "g1": {
+    "solidity": 0.716,
+    "holes": 0.25,
+    "contamination": 0.279
+   },
+   "g2": {
+    "vol": 0.1884,
+    "cv": 0.1461,
+    "flicker": 0.0181
+   },
+   "g3": {
+    "plant": 11.18,
+    "ratio": 0.359,
+    "runSamples": 16,
+    "amplitude": 15.59,
+    "grossTravel": 48.2,
+    "cellsPerSample": 0.37,
+    "alias": 0.012,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.4441,
+    "lagFrames": 2,
+    "r": 0.883
+   }
+  },
+  {
+   "shot": "fb98b263-5f83-5968-9e76-a23b627ce619",
+   "film": "02",
+   "label": "WE GO THROUGH",
+   "bodies": 0
+  },
+  {
+   "shot": "ec8cbff4-921b-5c8c-8bd0-174be20b7ec5",
+   "film": "02",
+   "label": "THE GHOST WAS SEVEN",
+   "frames": 199,
+   "guise": "child",
+   "mode": "stand",
+   "bodies": 199,
+   "g1": {
+    "solidity": 0.802,
+    "holes": 2.71,
+    "contamination": 0.366
+   },
+   "g2": {
+    "vol": 0.2251,
+    "cv": 0.0041,
+    "flicker": 0.0003
+   },
+   "g3": {
+    "plant": 0,
+    "ratio": 0,
+    "runSamples": 0,
+    "amplitude": 3.94,
+    "grossTravel": 126,
+    "cellsPerSample": 0.64,
+    "alias": 0.081,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.0496,
+    "lagFrames": 0,
+    "r": 1
+   }
+  },
+  {
+   "shot": "71e66e7c-ea68-516b-a4ea-076a07c02815",
+   "film": "02",
+   "label": "BLINDS UP",
+   "frames": 197,
+   "guise": "everyman",
+   "mode": "walk",
+   "bodies": 197,
+   "g1": {
+    "solidity": 0.936,
+    "holes": 0.11,
+    "contamination": 0.134
+   },
+   "g2": {
+    "vol": 0.2469,
+    "cv": 0.2757,
+    "flicker": 0.035
+   },
+   "g3": {
+    "plant": 2.82,
+    "ratio": 0.287,
+    "runSamples": 24,
+    "amplitude": 4.91,
+    "grossTravel": 24.1,
+    "cellsPerSample": 0.12,
+    "alias": 0.012,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.9296,
+    "lagFrames": 2,
+    "r": 0
+   }
+  },
+  {
+   "shot": "9c0f60aa-aef7-5a6e-aa51-6628be73bd42",
+   "film": "02",
+   "label": "THROUGH THE WINDOW",
+   "frames": 197,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 197,
+   "g1": {
+    "solidity": 0.631,
+    "holes": 1.62,
+    "contamination": 0.52
+   },
+   "g2": {
+    "vol": 0.2156,
+    "cv": 0.098,
+    "flicker": 0.0066
+   },
+   "g3": {
+    "plant": 4.23,
+    "ratio": 0.277,
+    "runSamples": 6,
+    "amplitude": 7.63,
+    "grossTravel": 30,
+    "cellsPerSample": 0.15,
+    "alias": 0.01,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.5606,
+    "lagFrames": 0,
+    "r": 0.756
+   }
+  },
+  {
+   "shot": "a9f6c83f-faf6-5f58-a914-fed2989acef1",
+   "film": "03",
+   "label": "TITLE",
+   "bodies": 0
+  },
+  {
+   "shot": "8ec55f7e-38cf-5856-b947-a3a94846fc94",
+   "film": "03",
+   "label": "ODE TO FOREVER",
+   "bodies": 0
+  },
+  {
+   "shot": "840cf3da-a3da-562c-9d53-ddb52b22e19f",
+   "film": "03",
+   "label": "STILL WHOLE",
+   "bodies": 0
+  },
+  {
+   "shot": "5a69b08c-71bb-5651-bd02-7bd3505eee0d",
+   "film": "03",
+   "label": "COBWEBS",
+   "bodies": 0
+  },
+  {
+   "shot": "1605783b-1723-50c4-b6a0-a3805ebd8dcc",
+   "film": "03",
+   "label": "UNTIL NOTHING REMAINS",
+   "bodies": 0
+  },
+  {
+   "shot": "51b6c0d6-f178-5889-bee1-258c53ec7821",
+   "film": "03",
+   "label": "TWO SETS OF FOOTSTEPS",
+   "frames": 191,
+   "guise": "poet",
+   "mode": "walk",
+   "bodies": 191,
+   "g1": {
+    "solidity": 0.898,
+    "holes": 0.09,
+    "contamination": 0.342
+   },
+   "g2": {
+    "vol": 0.2761,
+    "cv": 0.2753,
+    "flicker": 0.0482
+   },
+   "g3": {
+    "plant": 7.38,
+    "ratio": 0.764,
+    "runSamples": 14,
+    "amplitude": 4.83,
+    "grossTravel": 102.1,
+    "cellsPerSample": 0.54,
+    "alias": 0.056,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.6574,
+    "lagFrames": 0,
+    "r": 0.619
+   }
+  },
+  {
+   "shot": "a70142af-3c00-5da4-9725-9aec4753b406",
+   "film": "03",
+   "label": "SHATTERED",
+   "frames": 191,
+   "guise": "poet",
+   "mode": "walk",
+   "bodies": 191,
+   "g1": {
+    "solidity": 0.792,
+    "holes": 0.32,
+    "contamination": 0.416
+   },
+   "g2": {
+    "vol": 0.1693,
+    "cv": 0.1241,
+    "flicker": 0.0348
+   },
+   "g3": {
+    "plant": 1.26,
+    "ratio": 0.101,
+    "runSamples": 8,
+    "amplitude": 6.21,
+    "grossTravel": 31.9,
+    "cellsPerSample": 0.17,
+    "alias": 0.014,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 1.0532,
+    "lagFrames": 0,
+    "r": 0.345
+   }
+  },
+  {
+   "shot": "e660c3d6-a341-51e3-82ec-809c80f627f6",
+   "film": "04",
+   "label": "TITLE",
+   "bodies": 0
+  },
+  {
+   "shot": "1e0a459e-6ecd-5996-abf3-7062d492c617",
+   "film": "04",
+   "label": "WASHED ASHORE",
+   "frames": 204,
+   "guise": "poet",
+   "mode": "walk",
+   "bodies": 204,
+   "g1": {
+    "solidity": 0.865,
+    "holes": 0.12,
+    "contamination": 0.161
+   },
+   "g2": {
+    "vol": 0.2103,
+    "cv": 0.0796,
+    "flicker": 0.0284
+   },
+   "g3": {
+    "plant": 5.7,
+    "ratio": 0.575,
+    "runSamples": 12,
+    "amplitude": 4.95,
+    "grossTravel": 105.2,
+    "cellsPerSample": 0.52,
+    "alias": 0.052,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.5767,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "3a75924a-6b35-57db-921b-40c6772ba6bf",
+   "film": "04",
+   "label": "FOLDED WHISPERS",
+   "frames": 205,
+   "guise": "poet",
+   "mode": "sit",
+   "bodies": 205,
+   "g1": {
+    "solidity": 0.627,
+    "holes": 0.11,
+    "contamination": 0.282
+   },
+   "g2": {
+    "vol": 0.1949,
+    "cv": 0.0087,
+    "flicker": 0.0004
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0.03,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "54be94e2-1804-59a6-8fe9-bc0caedbe227",
+   "film": "04",
+   "label": "MUSTARD SEEDS",
+   "bodies": 0
+  },
+  {
+   "shot": "b038974c-0f8b-537e-918c-2f9044ac5fd8",
+   "film": "04",
+   "label": "THEY TURN TO FACE ME",
+   "bodies": 0
+  },
+  {
+   "shot": "3bf9a0d6-58d4-5ffa-b959-9fbf710b7f7a",
+   "film": "04",
+   "label": "DEEPEST DARKNESS",
+   "frames": 203,
+   "guise": "poet",
+   "mode": "sit",
+   "bodies": 203,
+   "g1": {
+    "solidity": 0.679,
+    "holes": 1.38,
+    "contamination": 0.078
+   },
+   "g2": {
+    "vol": 0.2115,
+    "cv": 0.0202,
+    "flicker": 0.0129
+   },
+   "g3": {
+    "plant": 2.45,
+    "ratio": 1.776,
+    "runSamples": 5,
+    "amplitude": 0.69,
+    "grossTravel": 134.6,
+    "cellsPerSample": 0.67,
+    "alias": 0.484,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.7699,
+    "lagFrames": 0,
+    "r": 0.812
+   }
+  },
+  {
+   "shot": "20f3186c-d143-54ad-8a17-ebe570251b3d",
+   "film": "04",
+   "label": "I PUT THEM BACK ON",
+   "frames": 205,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 205,
+   "g1": {
+    "solidity": 0.468,
+    "holes": 3.6,
+    "contamination": 0.169
+   },
+   "g2": {
+    "vol": 0.1908,
+    "cv": 0.0573,
+    "flicker": 0.0042
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 1.1549,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "9c7f9f74-7aa3-5230-8b65-84044ed01a8c",
+   "film": "05",
+   "label": "TITLE",
+   "bodies": 0
+  },
+  {
+   "shot": "02dfa46b-198a-5bc9-810a-10c5dae085a1",
+   "film": "05",
+   "label": "NAME MY OWN STARS",
+   "frames": 199,
+   "guise": "poet",
+   "mode": "walk",
+   "bodies": 199,
+   "g1": {
+    "solidity": 0.718,
+    "holes": 0.12,
+    "contamination": 0.155
+   },
+   "g2": {
+    "vol": 0.2698,
+    "cv": 0.2783,
+    "flicker": 0.0302
+   },
+   "g3": {
+    "plant": 8.95,
+    "ratio": 0.895,
+    "runSamples": 26,
+    "amplitude": 5,
+    "grossTravel": 50.1,
+    "cellsPerSample": 0.25,
+    "alias": 0.025,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 1.0136,
+    "lagFrames": 1,
+    "r": 0.207
+   }
+  },
+  {
+   "shot": "9bfba878-7cbe-582a-a5c4-1b97c711b0bc",
+   "film": "05",
+   "label": "SOUTHERN PINE",
+   "bodies": 0
+  },
+  {
+   "shot": "d10b2f8d-d078-598e-876c-a9a8a4cc9f47",
+   "film": "05",
+   "label": "A NEW UNIVERSE",
+   "frames": 199,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 199,
+   "g1": {
+    "solidity": 0.873,
+    "holes": 0,
+    "contamination": 0.017
+   },
+   "g2": {
+    "vol": 0.3784,
+    "cv": 0.0055,
+    "flicker": 0.0006
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0.0638,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "a249fd9e-03ff-548a-bf7c-63de8c3094ae",
+   "film": "05",
+   "label": "BEWARE OF ME",
+   "bodies": 0
+  },
+  {
+   "shot": "60d854f7-ec6b-5c45-9995-c8396298835b",
+   "film": "05",
+   "label": "THE GATES OPEN",
+   "frames": 120,
+   "guise": "everyman",
+   "mode": "stand",
+   "bodies": 120,
+   "g1": {
+    "solidity": 0.725,
+    "holes": 0,
+    "contamination": 0.019
+   },
+   "g2": {
+    "vol": 0.3827,
+    "cv": 0,
+    "flicker": 0
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "8e37b6bd-2eb7-5b42-8ddf-82a8d9904ebd",
+   "film": "06",
+   "label": "TITLE",
+   "bodies": 0
+  },
+  {
+   "shot": "05bb1f34-f734-51fb-a26f-c9331be8e1a4",
+   "film": "06",
+   "label": "THE COMETS",
+   "frames": 200,
+   "guise": "everyman",
+   "mode": "walk",
+   "bodies": 200,
+   "g1": {
+    "solidity": 0.977,
+    "holes": 0.14,
+    "contamination": 0.325
+   },
+   "g2": {
+    "vol": 0.1562,
+    "cv": 0.2472,
+    "flicker": 0.0487
+   },
+   "g3": {
+    "plant": 2.95,
+    "ratio": 0.337,
+    "runSamples": 18,
+    "amplitude": 4.38,
+    "grossTravel": 183.7,
+    "cellsPerSample": 0.92,
+    "alias": 0.105,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.7912,
+    "lagFrames": 0,
+    "r": 1
+   }
+  },
+  {
+   "shot": "218280c0-f9fd-5568-a0cb-b2f64f097d1a",
+   "film": "06",
+   "label": "THE WATERLINE FALLS",
+   "frames": 203,
+   "guise": "everyman",
+   "mode": "stand",
+   "bodies": 203,
+   "g1": {
+    "solidity": 0.669,
+    "holes": 0,
+    "contamination": 0.078
+   },
+   "g2": {
+    "vol": 0.3531,
+    "cv": 0.0171,
+    "flicker": 0.0203
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0.9514,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "f3084edd-e6d9-5f62-86e3-306db2e83f47",
+   "film": "06",
+   "label": "ADMISSION",
+   "frames": 201,
+   "guise": "everyman",
+   "mode": "walk",
+   "bodies": 201,
+   "g1": {
+    "solidity": 1.013,
+    "holes": 0.09,
+    "contamination": 0.133
+   },
+   "g2": {
+    "vol": 0.31,
+    "cv": 0.1154,
+    "flicker": 0.0407
+   },
+   "g3": {
+    "plant": 7.02,
+    "ratio": 1.07,
+    "runSamples": 27,
+    "amplitude": 3.28,
+    "grossTravel": 53.9,
+    "cellsPerSample": 0.27,
+    "alias": 0.041,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 1.0177,
+    "lagFrames": 0,
+    "r": 0.047
+   }
+  },
+  {
+   "shot": "31c98ba4-fc7a-5ef3-b054-b940fa970d9d",
+   "film": "06",
+   "label": "NARROW STREETS",
+   "frames": 200,
+   "guise": "everyman",
+   "mode": "walk",
+   "bodies": 200,
+   "g1": {
+    "solidity": 0.998,
+    "holes": 0,
+    "contamination": 0.12
+   },
+   "g2": {
+    "vol": 0.2783,
+    "cv": 0.0997,
+    "flicker": 0.028
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 1.4557,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "ffd0e526-781d-5257-8269-0e04dedbd82d",
+   "film": "06",
+   "label": "CROSSHAIRS TO CONTINUUMS",
+   "frames": 200,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 200,
+   "g1": {
+    "solidity": 0.799,
+    "holes": 0.53,
+    "contamination": 0.148
+   },
+   "g2": {
+    "vol": 0.2385,
+    "cv": 0.0251,
+    "flicker": 0.0015
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0.2012,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "3ea096c8-2368-5ef5-b5cf-c024a9795ff3",
+   "film": "06",
+   "label": "WELCOMING ALL",
+   "frames": 179,
+   "guise": "poet",
+   "mode": "walk",
+   "bodies": 179,
+   "g1": {
+    "solidity": 0.716,
+    "holes": 0.08,
+    "contamination": 0.227
+   },
+   "g2": {
+    "vol": 0.2263,
+    "cv": 0.2003,
+    "flicker": 0.0169
+   },
+   "g3": {
+    "plant": 5.95,
+    "ratio": 0.574,
+    "runSamples": 7,
+    "amplitude": 5.19,
+    "grossTravel": 99.9,
+    "cellsPerSample": 0.56,
+    "alias": 0.054,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.3337,
+    "lagFrames": 3,
+    "r": 0.972
+   }
+  },
+  {
+   "shot": "c5855715-a5f3-5f76-9504-9a9070a41415",
+   "film": "07",
+   "label": "TITLE",
+   "bodies": 0
+  },
+  {
+   "shot": "932c051d-5f80-5c4c-a9a9-eb159d85551b",
+   "film": "07",
+   "label": "CHIN NESTED",
+   "frames": 197,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 197,
+   "g1": {
+    "solidity": 0.856,
+    "holes": 0.98,
+    "contamination": 0.02
+   },
+   "g2": {
+    "vol": 0.2664,
+    "cv": 0.0148,
+    "flicker": 0.0025
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0.291,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "7fb37131-75c4-50fe-8f5b-b9ec89b9c6ef",
+   "film": "07",
+   "label": "VINEYARD GHOSTS",
+   "frames": 197,
+   "guise": "turned",
+   "mode": "walk",
+   "bodies": 197,
+   "g1": {
+    "solidity": 0.962,
+    "holes": 0.07,
+    "contamination": 0.33
+   },
+   "g2": {
+    "vol": 0.3263,
+    "cv": 0.4467,
+    "flicker": 0.0337
+   },
+   "g3": {
+    "plant": 4.69,
+    "ratio": 0.438,
+    "runSamples": 28,
+    "amplitude": 5.35,
+    "grossTravel": 27.8,
+    "cellsPerSample": 0.14,
+    "alias": 0.013,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.7746,
+    "lagFrames": 0,
+    "r": 0.187
+   }
+  },
+  {
+   "shot": "2d91fbf4-e1ff-52b1-9a51-97911558f13b",
+   "film": "07",
+   "label": "THOUSAND LIGHT YEARS",
+   "frames": 165,
+   "guise": "poet",
+   "mode": "walk",
+   "bodies": 165,
+   "g1": {
+    "solidity": 0.653,
+    "holes": 0,
+    "contamination": 0.437
+   },
+   "g2": {
+    "vol": 0.062,
+    "cv": 0.1762,
+    "flicker": 0.0864
+   },
+   "g3": {
+    "plant": 5.4,
+    "ratio": 0.605,
+    "runSamples": 8,
+    "amplitude": 4.46,
+    "grossTravel": 125.3,
+    "cellsPerSample": 0.76,
+    "alias": 0.086,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.5826,
+    "lagFrames": 0,
+    "r": 0.142
+   }
+  },
+  {
+   "shot": "68d810df-ff8d-597e-912b-71102a72b6fe",
+   "film": "07",
+   "label": "DIVERGING RINGS",
+   "bodies": 0
+  },
+  {
+   "shot": "39a76c6f-4471-591c-8a9e-3748cb12f06e",
+   "film": "07",
+   "label": "ELEVEN PETALS",
+   "bodies": 0
+  },
+  {
+   "shot": "c134d78d-fba2-5f65-98ad-aae2db4a1a18",
+   "film": "07",
+   "label": "THREE ROADS",
+   "bodies": 0
+  },
+  {
+   "shot": "4d796f60-c884-525e-9ac1-f7032bb8eb12",
+   "film": "07",
+   "label": "CHIN HIGH",
+   "frames": 198,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 198,
+   "g1": {
+    "solidity": 0.531,
+    "holes": 0.07,
+    "contamination": 0.431
+   },
+   "g2": {
+    "vol": 0.2302,
+    "cv": 0.019,
+    "flicker": 0.0179
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 1.9769,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "5969c0bb-4210-58db-9706-dc9d35734909",
+   "film": "08",
+   "label": "TITLE",
+   "bodies": 0
+  },
+  {
+   "shot": "b8ba7303-bda7-595a-850e-41a927ddf04f",
+   "film": "08",
+   "label": "PULSING",
+   "frames": 195,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 195,
+   "g1": {
+    "solidity": 0.801,
+    "holes": 1.07,
+    "contamination": 0.336
+   },
+   "g2": {
+    "vol": 0.2417,
+    "cv": 0.0137,
+    "flicker": 0.0038
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0.9147,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "9918ab42-fb7d-5bfd-b4bd-25fe82946775",
+   "film": "08",
+   "label": "THE ESCAPE",
+   "frames": 197,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 197,
+   "g1": {
+    "solidity": 0.787,
+    "holes": 0.21,
+    "contamination": 0.357
+   },
+   "g2": {
+    "vol": 0.2317,
+    "cv": 0.0888,
+    "flicker": 0.0027
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0.4076,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "5d2342c9-421f-5db3-946a-b4b32fdb2854",
+   "film": "08",
+   "label": "IMAGINE MY BODY",
+   "frames": 195,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 195,
+   "g1": {
+    "solidity": 0.812,
+    "holes": 0.49,
+    "contamination": 0.292
+   },
+   "g2": {
+    "vol": 0.2392,
+    "cv": 0.0095,
+    "flicker": 0.0039
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0.971,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "f2562745-8502-5420-b1c0-0865122ee591",
+   "film": "08",
+   "label": "THE EQUATOR",
+   "frames": 179,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 179,
+   "g1": {
+    "solidity": 0.37,
+    "holes": 12.56,
+    "contamination": 0.04
+   },
+   "g2": {
+    "vol": 0.1367,
+    "cv": 0.4484,
+    "flicker": 0.0367
+   },
+   "g3": {
+    "plant": 2.56,
+    "ratio": 0.322,
+    "runSamples": 9,
+    "amplitude": 3.97,
+    "grossTravel": 14.9,
+    "cellsPerSample": 0.08,
+    "alias": 0.011,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 1.0009,
+    "lagFrames": 2,
+    "r": 0.594
+   }
+  },
+  {
+   "shot": "f729175b-5786-5941-b1b6-c13eacd44f20",
+   "film": "08",
+   "label": "COOL ME DOWN",
+   "frames": 197,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 197,
+   "g1": {
+    "solidity": 0.352,
+    "holes": 13.49,
+    "contamination": 0.058
+   },
+   "g2": {
+    "vol": 0.1398,
+    "cv": 0.4083,
+    "flicker": 0.0219
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0.9678,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "02ccffde-15e2-5f9e-951e-96ff095c65a9",
+   "film": "08",
+   "label": "BACK TO MY BODY",
+   "frames": 197,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 197,
+   "g1": {
+    "solidity": 0.6,
+    "holes": 0.49,
+    "contamination": 0.429
+   },
+   "g2": {
+    "vol": 0.2667,
+    "cv": 0.0142,
+    "flicker": 0.0008
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0.1243,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "30a3dedf-d497-5ed3-90f5-db7b3b7387cb",
+   "film": "08",
+   "label": "MOUNTAINS IN THE DISTANCE",
+   "frames": 195,
+   "guise": "poet",
+   "mode": "sit",
+   "bodies": 195,
+   "g1": {
+    "solidity": 0.733,
+    "holes": 0.84,
+    "contamination": 0.405
+   },
+   "g2": {
+    "vol": 0.1966,
+    "cv": 0.0074,
+    "flicker": 0.0003
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "b2b899a6-dcfe-5d69-a307-7359faeb6192",
+   "film": "09",
+   "label": "TITLE",
+   "bodies": 0
+  },
+  {
+   "shot": "62097226-74fb-5039-81fc-5ce2acda445b",
+   "film": "09",
+   "label": "THE SHARED MOON",
+   "frames": 208,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 208,
+   "g1": {
+    "solidity": 0.751,
+    "holes": 0,
+    "contamination": 0.39
+   },
+   "g2": {
+    "vol": 0.2123,
+    "cv": 0.0039,
+    "flicker": 0.004
+   },
+   "g3": {
+    "plant": 1.8,
+    "ratio": 0.168,
+    "runSamples": 15,
+    "amplitude": 5.37,
+    "grossTravel": 41.6,
+    "cellsPerSample": 0.2,
+    "alias": 0.019,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.5392,
+    "lagFrames": 0,
+    "r": 0.767
+   }
+  },
+  {
+   "shot": "6a18dc0b-29fd-55af-8982-f7fc21addd7c",
+   "film": "09",
+   "label": "TEARS, AN ABYSS",
+   "frames": 208,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 208,
+   "g1": {
+    "solidity": 0.749,
+    "holes": 0,
+    "contamination": 0.399
+   },
+   "g2": {
+    "vol": 0.2124,
+    "cv": 0.0033,
+    "flicker": 0.0032
+   },
+   "g3": {
+    "plant": 1.8,
+    "ratio": 0.167,
+    "runSamples": 12,
+    "amplitude": 5.37,
+    "grossTravel": 31.7,
+    "cellsPerSample": 0.15,
+    "alias": 0.014,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.7215,
+    "lagFrames": 0,
+    "r": 0.688
+   }
+  },
+  {
+   "shot": "7e938b85-56ec-5316-a882-2232df5622ed",
+   "film": "09",
+   "label": "HIS FOOTSTEPS, RETRACED",
+   "frames": 208,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 208,
+   "g1": {
+    "solidity": 0.747,
+    "holes": 0,
+    "contamination": 0.403
+   },
+   "g2": {
+    "vol": 0.2132,
+    "cv": 0.0045,
+    "flicker": 0.0037
+   },
+   "g3": {
+    "plant": 1.79,
+    "ratio": 0.166,
+    "runSamples": 10,
+    "amplitude": 5.37,
+    "grossTravel": 31.7,
+    "cellsPerSample": 0.15,
+    "alias": 0.014,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.7301,
+    "lagFrames": 0,
+    "r": 0.778
+   }
+  },
+  {
+   "shot": "1b78a291-9968-5382-a71a-9cd2f78fe946",
+   "film": "09",
+   "label": "EAST, AT THE HARBOR",
+   "frames": 207,
+   "guise": "elder",
+   "mode": "walk",
+   "bodies": 207,
+   "g1": {
+    "solidity": 0.714,
+    "holes": 0.41,
+    "contamination": 0.467
+   },
+   "g2": {
+    "vol": 0.1734,
+    "cv": 0.0658,
+    "flicker": 0.0253
+   },
+   "g3": {
+    "plant": 4.2,
+    "ratio": 0.203,
+    "runSamples": 8,
+    "amplitude": 10.35,
+    "grossTravel": 96.9,
+    "cellsPerSample": 0.47,
+    "alias": 0.023,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.5464,
+    "lagFrames": 0,
+    "r": 0.821
+   }
+  },
+  {
+   "shot": "c3a0a8c1-7679-5ab7-b482-16915a545812",
+   "film": "10",
+   "label": "TITLE",
+   "bodies": 0
+  },
+  {
+   "shot": "a01db976-e942-57b7-9baa-23680bbf9714",
+   "film": "10",
+   "label": "HOP ON",
+   "frames": 182,
+   "guise": "everyman",
+   "mode": "walk",
+   "bodies": 182,
+   "g1": {
+    "solidity": 0.728,
+    "holes": 4,
+    "contamination": 0.153
+   },
+   "g2": {
+    "vol": 0.1782,
+    "cv": 0.1272,
+    "flicker": 0.0183
+   },
+   "g3": {
+    "plant": 13.55,
+    "ratio": 1.001,
+    "runSamples": 10,
+    "amplitude": 6.77,
+    "grossTravel": 94.7,
+    "cellsPerSample": 0.52,
+    "alias": 0.039,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.4631,
+    "lagFrames": 0,
+    "r": 0.972
+   }
+  },
+  {
+   "shot": "e3ae9965-0d24-55f1-a146-edf338a62cf1",
+   "film": "10",
+   "label": "HEADS TWIST",
+   "bodies": 0
+  },
+  {
+   "shot": "3e1de25f-e79f-5271-bb87-9b6fc34fb839",
+   "film": "10",
+   "label": "MOON SETTLES",
+   "bodies": 0
+  },
+  {
+   "shot": "b0fd6e0d-e867-5f69-9e8a-933026825605",
+   "film": "10",
+   "label": "NIGHT REPLACED",
+   "bodies": 0
+  },
+  {
+   "shot": "fbb610ec-8e23-57d3-a5d8-e401eafde8d8",
+   "film": "10",
+   "label": "BLISSFUL, INNOCENT",
+   "bodies": 0
+  },
+  {
+   "shot": "3b666380-cb95-55c3-8d48-bc1a674bd8ee",
+   "film": "10",
+   "label": "CHILLY MORNING",
+   "bodies": 0
+  },
+  {
+   "shot": "dd4b4f1e-be49-5f29-9e28-3141bcfa1d2f",
+   "film": "11",
+   "label": "TITLE",
+   "bodies": 0
+  },
+  {
+   "shot": "c0d9ec81-c6ab-551b-aab8-1c49e5ec999b",
+   "film": "11",
+   "label": "MORNING FOG",
+   "bodies": 0
+  },
+  {
+   "shot": "8da3e87a-dcf4-5404-9d87-d875bdff7b9e",
+   "film": "11",
+   "label": "FIRST COURSES",
+   "frames": 201,
+   "guise": "everyman",
+   "mode": "stand",
+   "bodies": 201,
+   "g1": {
+    "solidity": 0.836,
+    "holes": 0,
+    "contamination": 0.458
+   },
+   "g2": {
+    "vol": 0.3339,
+    "cv": 0.1119,
+    "flicker": 0.0191
+   },
+   "g3": {
+    "plant": 3.95,
+    "ratio": 0.637,
+    "runSamples": 12,
+    "amplitude": 3.1,
+    "grossTravel": 202.1,
+    "cellsPerSample": 1.01,
+    "alias": 0.163,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.2337,
+    "lagFrames": 0,
+    "r": 1
+   }
+  },
+  {
+   "shot": "2029e24b-56ce-510a-ab9d-f1aecaa39282",
+   "film": "11",
+   "label": "COLUMNS AND BEAMS",
+   "frames": 202,
+   "guise": "everyman",
+   "mode": "walk",
+   "bodies": 202,
+   "g1": {
+    "solidity": 1.214,
+    "holes": 0,
+    "contamination": 0.169
+   },
+   "g2": {
+    "vol": 0.2373,
+    "cv": 0.3802,
+    "flicker": 0.1436
+   },
+   "g3": {
+    "plant": 4.15,
+    "ratio": 0.662,
+    "runSamples": 8,
+    "amplitude": 3.14,
+    "grossTravel": 986.2,
+    "cellsPerSample": 4.91,
+    "alias": 0.782,
+    "aliased": true
+   },
+   "g4": {
+    "curvePerFrame": 0.6628,
+    "lagFrames": 0,
+    "r": 1
+   }
+  },
+  {
+   "shot": "d6d23a1f-5711-5144-a568-4d5854f36b4d",
+   "film": "11",
+   "label": "THE INFINITY POOL",
+   "frames": 201,
+   "guise": "everyman",
+   "mode": "walk",
+   "bodies": 201,
+   "g1": {
+    "solidity": 0.984,
+    "holes": 0,
+    "contamination": 0.044
+   },
+   "g2": {
+    "vol": 0.317,
+    "cv": 0.0928,
+    "flicker": 0.0306
+   },
+   "g3": {
+    "plant": 5.21,
+    "ratio": 0.624,
+    "runSamples": 5,
+    "amplitude": 4.17,
+    "grossTravel": 264.5,
+    "cellsPerSample": 1.32,
+    "alias": 0.159,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.3277,
+    "lagFrames": 0,
+    "r": 0.93
+   }
+  },
+  {
+   "shot": "e3e81f60-e2e8-5f2f-a5a4-8f43db970532",
+   "film": "11",
+   "label": "WALKING ON WATER",
+   "frames": 201,
+   "guise": "poet",
+   "mode": "walk",
+   "bodies": 201,
+   "g1": {
+    "solidity": 0.839,
+    "holes": 0.11,
+    "contamination": 0.073
+   },
+   "g2": {
+    "vol": 0.2035,
+    "cv": 0.0618,
+    "flicker": 0.0254
+   },
+   "g3": {
+    "plant": 9.67,
+    "ratio": 1.056,
+    "runSamples": 15,
+    "amplitude": 4.58,
+    "grossTravel": 138.2,
+    "cellsPerSample": 0.69,
+    "alias": 0.075,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.4131,
+    "lagFrames": 1,
+    "r": 0
+   }
+  },
+  {
+   "shot": "df6035e0-1cc5-5f7f-9002-b11c35699883",
+   "film": "11",
+   "label": "A NEW DAY",
+   "frames": 144,
+   "guise": "everyman",
+   "mode": "walk",
+   "bodies": 144,
+   "g1": {
+    "solidity": 0.804,
+    "holes": 0,
+    "contamination": 0.115
+   },
+   "g2": {
+    "vol": 0.3477,
+    "cv": 0.1159,
+    "flicker": 0.0171
+   },
+   "g3": {
+    "plant": 6.14,
+    "ratio": 1.034,
+    "runSamples": 14,
+    "amplitude": 2.97,
+    "grossTravel": 14.3,
+    "cellsPerSample": 0.1,
+    "alias": 0.017,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.1928,
+    "lagFrames": 4,
+    "r": 0.927
+   }
+  },
+  {
+   "shot": "3effa499-d28d-54b0-bd42-eb7088b77b91",
+   "film": "12",
+   "label": "TITLE",
+   "bodies": 0
+  },
+  {
+   "shot": "d9ac5155-6f88-5a45-ae52-ad65bbcc7507",
+   "film": "12",
+   "label": "HUGS WITH NO REASON",
+   "frames": 199,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 199,
+   "g1": {
+    "solidity": 0.585,
+    "holes": 0.55,
+    "contamination": 0.097
+   },
+   "g2": {
+    "vol": 0.2574,
+    "cv": 0.0755,
+    "flicker": 0.0332
+   },
+   "g3": {
+    "plant": 1.27,
+    "ratio": 0.207,
+    "runSamples": 34,
+    "amplitude": 3.06,
+    "grossTravel": 5.8,
+    "cellsPerSample": 0.03,
+    "alias": 0.005,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 1.5308,
+    "lagFrames": 1,
+    "r": 0.199
+   }
+  },
+  {
+   "shot": "383c8f21-4b4c-52d5-845e-2f9f89d558bc",
+   "film": "12",
+   "label": "LESS TIME, MORE SPACE",
+   "frames": 179,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 179,
+   "g1": {
+    "solidity": 0.688,
+    "holes": 1.45,
+    "contamination": 0.031
+   },
+   "g2": {
+    "vol": 0.3007,
+    "cv": 0.0116,
+    "flicker": 0.0074
+   },
+   "g3": {
+    "plant": 1.95,
+    "ratio": 0.44,
+    "runSamples": 21,
+    "amplitude": 2.21,
+    "grossTravel": 11.5,
+    "cellsPerSample": 0.06,
+    "alias": 0.015,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 1.6806,
+    "lagFrames": 0,
+    "r": 0.207
+   }
+  },
+  {
+   "shot": "1d4f3297-cff1-54f5-aabd-7e6a2d548c8f",
+   "film": "12",
+   "label": "ELDERS, NOW PAST",
+   "frames": 197,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 197,
+   "g1": {
+    "solidity": 0.838,
+    "holes": 1.19,
+    "contamination": 0.301
+   },
+   "g2": {
+    "vol": 0.2612,
+    "cv": 0.0141,
+    "flicker": 0.0058
+   },
+   "g3": {
+    "plant": 1.77,
+    "ratio": 4.232,
+    "runSamples": 69,
+    "amplitude": 0.21,
+    "grossTravel": 8.7,
+    "cellsPerSample": 0.04,
+    "alias": 0.106,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 1.3296,
+    "lagFrames": 2,
+    "r": 0.485
+   }
+  },
+  {
+   "shot": "e74dd521-2dfb-53bb-b780-fdf32762c18a",
+   "film": "12",
+   "label": "BURNING HOURGLASSES",
+   "frames": 199,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 199,
+   "g1": {
+    "solidity": 0.796,
+    "holes": 0.63,
+    "contamination": 0.042
+   },
+   "g2": {
+    "vol": 0.2534,
+    "cv": 0.0713,
+    "flicker": 0.0351
+   },
+   "g3": {
+    "plant": 1.7,
+    "ratio": 0.289,
+    "runSamples": 35,
+    "amplitude": 2.95,
+    "grossTravel": 8,
+    "cellsPerSample": 0.04,
+    "alias": 0.007,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 1.4904,
+    "lagFrames": 0,
+    "r": 0.118
+   }
+  },
+  {
+   "shot": "5a61d4f8-bb06-56da-a3c0-24806eaf664f",
+   "film": "12",
+   "label": "WINDS PART",
+   "frames": 197,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 197,
+   "g1": {
+    "solidity": 0.623,
+    "holes": 0.85,
+    "contamination": 0.046
+   },
+   "g2": {
+    "vol": 0.2759,
+    "cv": 0.0151,
+    "flicker": 0.0105
+   },
+   "g3": {
+    "plant": 1.95,
+    "ratio": 2.495,
+    "runSamples": 25,
+    "amplitude": 0.39,
+    "grossTravel": 20.4,
+    "cellsPerSample": 0.1,
+    "alias": 0.133,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 1.3533,
+    "lagFrames": 1,
+    "r": 0.362
+   }
+  },
+  {
+   "shot": "04bbbf2b-7105-5c69-9d2a-3ed5b18a1bc4",
+   "film": "13",
+   "label": "TITLE",
+   "bodies": 0
+  },
+  {
+   "shot": "f2445fa1-eea3-5562-a19e-bb1b5a8b8b13",
+   "film": "13",
+   "label": "SMALL TABLES",
+   "frames": 200,
+   "guise": "poet",
+   "mode": "walk",
+   "bodies": 200,
+   "g1": {
+    "solidity": 0.767,
+    "holes": 0.04,
+    "contamination": 0.525
+   },
+   "g2": {
+    "vol": 0.2031,
+    "cv": 0.0509,
+    "flicker": 0.0231
+   },
+   "g3": {
+    "plant": 8.33,
+    "ratio": 0.559,
+    "runSamples": 4,
+    "amplitude": 7.45,
+    "grossTravel": 99,
+    "cellsPerSample": 0.5,
+    "alias": 0.033,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.2667,
+    "lagFrames": 0,
+    "r": 0.995
+   }
+  },
+  {
+   "shot": "470c19e1-5841-5801-9d4a-c7b8ac9a8a0d",
+   "film": "13",
+   "label": "COUNTED ORBITS",
+   "frames": 185,
+   "guise": "everyman",
+   "mode": "walk",
+   "bodies": 185,
+   "g1": {
+    "solidity": 0.689,
+    "holes": 1.22,
+    "contamination": 0.555
+   },
+   "g2": {
+    "vol": 0.2287,
+    "cv": 0.1246,
+    "flicker": 0.0219
+   },
+   "g3": {
+    "plant": 7.82,
+    "ratio": 0.973,
+    "runSamples": 5,
+    "amplitude": 4.02,
+    "grossTravel": 127.7,
+    "cellsPerSample": 0.69,
+    "alias": 0.086,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 1.0673,
+    "lagFrames": 0,
+    "r": 0.967
+   }
+  },
+  {
+   "shot": "e7bcbe7e-882b-5256-928c-cb56ba241c8c",
+   "film": "13",
+   "label": "BURNED STORIES",
+   "frames": 200,
+   "guise": "elder",
+   "mode": "stand",
+   "bodies": 200,
+   "g1": {
+    "solidity": 0.335,
+    "holes": 4.79,
+    "contamination": 0.769
+   },
+   "g2": {
+    "vol": 0.0829,
+    "cv": 0.0614,
+    "flicker": 0.0063
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 1.028,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "2a739c97-c1b8-55c3-aef0-cbac8fe3fb18",
+   "film": "13",
+   "label": "HARVESTED POWER",
+   "frames": 202,
+   "guise": "poet",
+   "mode": "walk",
+   "bodies": 202,
+   "g1": {
+    "solidity": 0.679,
+    "holes": 2.21,
+    "contamination": 0.522
+   },
+   "g2": {
+    "vol": 0.1835,
+    "cv": 0.2029,
+    "flicker": 0.0445
+   },
+   "g3": {
+    "plant": 2.9,
+    "ratio": 0.174,
+    "runSamples": 3,
+    "amplitude": 8.32,
+    "grossTravel": 124,
+    "cellsPerSample": 0.62,
+    "alias": 0.037,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.7799,
+    "lagFrames": 0,
+    "r": 0.906
+   }
+  },
+  {
+   "shot": "6d8dad9f-d6aa-5ca6-95a4-680787f44726",
+   "film": "13",
+   "label": "REFOCUS",
+   "frames": 202,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 202,
+   "g1": {
+    "solidity": 0.776,
+    "holes": 0.48,
+    "contamination": 0.428
+   },
+   "g2": {
+    "vol": 0.2246,
+    "cv": 0.0091,
+    "flicker": 0.0012
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0.1725,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "0a5cf576-cbcf-5afe-ad16-9816d9e7c264",
+   "film": "13",
+   "label": "WON'T LEAVE",
+   "frames": 199,
+   "guise": "poet",
+   "mode": "sit",
+   "bodies": 199,
+   "g1": {
+    "solidity": 0.705,
+    "holes": 1,
+    "contamination": 0.596
+   },
+   "g2": {
+    "vol": 0.1877,
+    "cv": 0.0099,
+    "flicker": 0.0004
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 0.0103,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "d159962b-d1cf-5066-b6b4-8d298777f9c7",
+   "film": "14",
+   "label": "TITLE",
+   "bodies": 0
+  },
+  {
+   "shot": "0466a0b4-9cf0-5b17-8881-39538a6e6000",
+   "film": "14",
+   "label": "EVERYTHING I BUILT",
+   "bodies": 0
+  },
+  {
+   "shot": "ddafcfc2-95a8-50a1-9bf0-1b7f2cf4878b",
+   "film": "14",
+   "label": "FROM THE GROUND UP",
+   "frames": 193,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 193,
+   "g1": {
+    "solidity": 0.511,
+    "holes": 0.07,
+    "contamination": 0.363
+   },
+   "g2": {
+    "vol": 0.2271,
+    "cv": 0.0266,
+    "flicker": 0.0046
+   },
+   "g3": {
+    "plant": null,
+    "why": "the body never travelled"
+   },
+   "g4": {
+    "curvePerFrame": 1.5089,
+    "lagFrames": 0,
+    "r": 0
+   }
+  },
+  {
+   "shot": "82fb7b9c-c1c8-5ae4-a58e-b216d4f4496f",
+   "film": "14",
+   "label": "NO WALLS",
+   "bodies": 0
+  },
+  {
+   "shot": "00e8865b-58e0-5bd2-91fe-3ac632b4456a",
+   "film": "14",
+   "label": "THE REEL",
+   "bodies": 0
+  },
+  {
+   "shot": "51a72536-ea4f-547d-9397-55b0cbd0420f",
+   "film": "14",
+   "label": "TWO ENTWINED MUSES",
+   "frames": 195,
+   "guise": "poet",
+   "mode": "stand",
+   "bodies": 195,
+   "g1": {
+    "solidity": 0.599,
+    "holes": 0.24,
+    "contamination": 0.045
+   },
+   "g2": {
+    "vol": 0.224,
+    "cv": 0.0562,
+    "flicker": 0.0185
+   },
+   "g3": {
+    "plant": 7.44,
+    "ratio": 0.487,
+    "runSamples": 3,
+    "amplitude": 7.64,
+    "grossTravel": 295.4,
+    "cellsPerSample": 1.52,
+    "alias": 0.1,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.4444,
+    "lagFrames": 0,
+    "r": 0.923
+   }
+  },
+  {
+   "shot": "b41a1b6d-f473-5515-8789-10275cf02f11",
+   "film": "14",
+   "label": "I CHOOSE THE DOOR",
+   "frames": 201,
+   "guise": "poet",
+   "mode": "walk",
+   "bodies": 201,
+   "g1": {
+    "solidity": 0.739,
+    "holes": 0.67,
+    "contamination": 0.142
+   },
+   "g2": {
+    "vol": 0.1649,
+    "cv": 0.1455,
+    "flicker": 0.031
+   },
+   "g3": {
+    "plant": 6.63,
+    "ratio": 0.488,
+    "runSamples": 15,
+    "amplitude": 6.8,
+    "grossTravel": 66.5,
+    "cellsPerSample": 0.33,
+    "alias": 0.024,
+    "aliased": false
+   },
+   "g4": {
+    "curvePerFrame": 0.8411,
+    "lagFrames": 0,
+    "r": 0.652
+   }
+  }
+ ]
+}
