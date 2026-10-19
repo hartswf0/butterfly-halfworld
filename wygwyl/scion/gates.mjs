@@ -88,6 +88,22 @@ if (!WORLD) {
       .wygwyl.films.map(f => [f.n, f.container]));
 }
 
+/* --report re-reads a finished run and prints the judgement again. The
+   sampling pass drives a browser for half an hour; the judgement on top of it
+   is arithmetic. Three versions of GATE 3 have now been wrong about the same
+   samples — two estimators with a noise floor, and one that scored standing
+   figures as walks — and re-deriving a verdict should not cost another half
+   hour each time. */
+const REPORT = opt("report", "");
+const mean = (a) => a.reduce((x, y) => x + y, 0) / Math.max(1, a.length);
+const sd = (a) => { const m = mean(a); return Math.sqrt(mean(a.map(x => (x - m) ** 2))); };
+let results = [];
+
+if (REPORT) {
+  results = JSON.parse(fs.readFileSync(REPORT, "utf8")).results;
+  console.log(`re-reading ${results.length} shots from ${path.relative(ROOT, REPORT)}\n`);
+} else {
+
 const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium" });
 const page = await browser.newPage({ viewport: { width: 900, height: 700 } });
 page.on("pageerror", e => console.error("page error: " + e.message));
@@ -234,10 +250,6 @@ await page.evaluate(() => {
 });
 
 /* ---- sample every shot, then judge the series ----------------------------- */
-const mean = (a) => a.reduce((x, y) => x + y, 0) / Math.max(1, a.length);
-const sd = (a) => { const m = mean(a); return Math.sqrt(mean(a.map(x => (x - m) ** 2))); };
-
-const results = [];
 for (const s of SHOTS) {
   const n = s.halfworld.n;
   if (ONLY && n !== ONLY) continue;
@@ -365,18 +377,40 @@ for (const s of SHOTS) {
   process.stdout.write(`\r  ${results.length}/${SHOTS.length}  ${n} ${s.halfworld.label.slice(0, 20).padEnd(22)}`);
 }
 await browser.close();
+}
 
+/* GATE 3 JUDGES A WALK, AND ONLY A WALK. The first summary pooled every body
+   that travelled, which is a category error with two faces. A standing figure
+   whose anchor is slid across frame never moves its foot at all, so it scores
+   a plant ratio above 1 and reads as the best walk in the suite — ELDERS, NOW
+   PAST came back at 4.23. And `face` on a standing figure was authored for the
+   shot, not for the travel, so testing it against direction reported two films
+   "walking backwards" that are not walking. Scoped to mode "walk", every
+   walking shot in the suite faces its travel; THE SEARCH was the only
+   moonwalker and it is fixed.
+
+   A standing figure that translates is still worth naming — it is a drawing
+   being slid rather than a body being moved — so it is counted separately
+   instead of being scored as a gait. */
+const WALKMIN = 8;                      // intervals, below which facing is noise
 const withBody = results.filter(r => r.bodies);
-const walked = withBody.filter(r => r.g3.plant != null && !r.g3.aliased);
-const aliased = withBody.filter(r => r.g3.aliased).length;
-fs.writeFileSync(path.join(OUT, (WORLD ? WORLD + "-" : "") + "gates.json"), JSON.stringify({
+const walking = withBody.filter(r => r.mode === "walk");
+const walked = walking.filter(r => r.g3.plant != null && !r.g3.aliased);
+const aliased = walking.filter(r => r.g3.aliased).length;
+const slid = withBody.filter(r => r.mode !== "walk" && r.g3.plant != null && r.g3.grossTravel > 6);
+const faced = walked.filter(r => r.g3b.facesTravel != null && r.g3b.n >= WALKMIN);
+const summary = {
   sampledAt: `${FPS} fps inside each shot`, shots: results.length, withBodies: withBody.length,
-  gate3: { travelled: walked.length, aliasedAndNotJudged: aliased,
+  gate3: { scope: "mode walk only", walkingShots: walking.length, judged: walked.length,
+    aliasedAndNotJudged: aliased, slidStandingFigures: slid.length,
+    backwards: faced.filter(r => r.g3b.facesTravel < 0.5).map(r => r.label),
     meanPlantRatio: walked.length ? +mean(walked.map(r => r.g3.ratio)).toFixed(3) : null,
+    facesTravel: faced.length ? +mean(faced.map(r => r.g3b.facesTravel)).toFixed(3) : null,
     planted: walked.filter(r => r.g3.ratio >= 0.6).length,
     skating: walked.filter(r => r.g3.ratio < 0.25).length },
   results,
-}, null, 1));
+};
+if (!REPORT) fs.writeFileSync(path.join(OUT, (WORLD ? WORLD + "-" : "") + "gates.json"), JSON.stringify(summary, null, 1));
 
 console.log(`\n\n${withBody.length} of ${results.length} shots have a body the gates can read\n`);
 const row = (k, v) => console.log(`  ${k.padEnd(34)} ${v}`);
@@ -389,23 +423,23 @@ row("mean area/h^2", mean(withBody.map(r => r.g2.vol)).toFixed(4));
 row("coefficient of variation", mean(withBody.map(r => r.g2.cv)).toFixed(4));
 row("frame-to-frame flicker", mean(withBody.map(r => r.g2.flicker)).toFixed(4));
 console.log("\nGATE 3 · CONTACT PINNING");
-row("shots where the body travelled", `${walked.length}`);
+row("walking shots judged", walked.length + "  (of " + walking.length + " with a walk)");
 row("too aliased to judge (not counted)", `${aliased}`);
+row("standing figures slid across frame", slid.length + "  — not a gait, counted apart");
 if (walked.length) {
   row("mean plant ratio (1 = full stance)", mean(walked.map(r => r.g3.ratio)).toFixed(3));
   row("shots that plant a foot (>=0.6)", walked.filter(r => r.g3.ratio >= 0.6).length);
   row("shots that skate (<0.25)", walked.filter(r => r.g3.ratio < 0.25).length);
 }
-const faced = withBody.filter(r => r.g3b.facesTravel != null);
 if (faced.length) {
-  row("shots where facing was testable", faced.length);
+  row("facing testable (min " + WALKMIN + " intervals)", faced.length);
   row("mean agreement with direction", mean(faced.map(r => r.g3b.facesTravel)).toFixed(3));
   row("shots walking backwards (<0.5)", faced.filter(r => r.g3b.facesTravel < 0.5).length);
 }
 console.log("\nGATE 4 · ARCS AND LAG");
 row("mean head curvature per frame", mean(withBody.map(r => r.g4.curvePerFrame)).toFixed(4));
 row("shots where the head lags (>0)", withBody.filter(r => r.g4.lagFrames > 0).length + " / " + withBody.length);
-console.log(`\n→ renders/scion/${WORLD ? WORLD + "-" : ""}gates.json`);
+if (!REPORT) console.log(`\n→ renders/scion/${WORLD ? WORLD + "-" : ""}gates.json`);
 if (WORLD) for (const r of results) console.log(`  ${String(r.label).padEnd(34)}`
   + ` plant ${String(r.g3.plant ?? "—").padStart(6)} cells · ratio ${String(r.g3.ratio ?? "—").padStart(5)}`
   + `${r.g3.aliased ? "  ALIASED" : ""}`);

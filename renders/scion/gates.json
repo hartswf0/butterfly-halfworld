@@ -1,13 +1,18 @@
 {
- "sampledAt": "24 fps inside each shot",
+ "sampledAt": "8 fps inside each shot",
  "shots": 94,
  "withBodies": 59,
  "gate3": {
-  "travelled": 36,
+  "scope": "mode walk only",
+  "walkingShots": 23,
+  "judged": 21,
   "aliasedAndNotJudged": 1,
-  "meanPlantRatio": 0.684,
-  "planted": 13,
-  "skating": 8
+  "slidStandingFigures": 14,
+  "backwards": [],
+  "meanPlantRatio": 0.603,
+  "facesTravel": 0.995,
+  "planted": 12,
+  "skating": 4
  },
  "results": [
   {
@@ -25,27 +30,31 @@
    "mode": "walk",
    "bodies": 208,
    "g1": {
-    "solidity": 0.821,
-    "holes": 0.16,
-    "contamination": 0.04
+    "solidity": 0.834,
+    "holes": 0.15,
+    "contamination": 0.036
    },
    "g2": {
-    "vol": 0.1926,
-    "cv": 0.0641,
-    "flicker": 0.0309
+    "vol": 0.1914,
+    "cv": 0.063,
+    "flicker": 0.042
    },
    "g3": {
-    "plant": 6.98,
-    "ratio": 0.548,
-    "runSamples": 9,
-    "amplitude": 6.37,
+    "plant": 11.5,
+    "ratio": 0.897,
+    "runSamples": 10,
+    "amplitude": 6.41,
     "grossTravel": 213.7,
     "cellsPerSample": 1.03,
-    "alias": 0.081,
+    "alias": 0.08,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 185
+   },
    "g4": {
-    "curvePerFrame": 0.448,
+    "curvePerFrame": 0.5377,
     "lagFrames": 0,
     "r": 0.972
    }
@@ -78,6 +87,10 @@
     "alias": 0.04,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 164
+   },
    "g4": {
     "curvePerFrame": 1.4314,
     "lagFrames": 6,
@@ -105,6 +118,10 @@
    "g3": {
     "plant": null,
     "why": "the body never travelled"
+   },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
    },
    "g4": {
     "curvePerFrame": 1.3344,
@@ -134,6 +151,10 @@
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
     "curvePerFrame": 0.0607,
     "lagFrames": 0,
@@ -150,26 +171,30 @@
    "shot": "b3557148-a850-53d1-93e4-c15844e5d7d4",
    "film": "02",
    "label": "SILENT SCREAM",
-   "frames": 197,
+   "frames": 102,
    "guise": "everyman",
    "mode": "stand",
-   "bodies": 197,
+   "bodies": 102,
    "g1": {
-    "solidity": 0.517,
-    "holes": 0.07,
-    "contamination": 0.077
+    "solidity": 0.519,
+    "holes": 0.09,
+    "contamination": 0.076
    },
    "g2": {
-    "vol": 0.2193,
-    "cv": 0.1628,
-    "flicker": 0.0465
+    "vol": 0.2195,
+    "cv": 0.1623,
+    "flicker": 0.0471
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 1.0522,
+    "curvePerFrame": 1.174,
     "lagFrames": 0,
     "r": 0
    }
@@ -178,34 +203,38 @@
    "shot": "b21502d1-c92d-57fe-8bb1-df33051902a7",
    "film": "02",
    "label": "THE MIRROR",
-   "frames": 131,
+   "frames": 63,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 131,
+   "bodies": 63,
    "g1": {
-    "solidity": 0.716,
-    "holes": 0.25,
-    "contamination": 0.279
+    "solidity": 0.713,
+    "holes": 0.24,
+    "contamination": 0.281
    },
    "g2": {
-    "vol": 0.1884,
-    "cv": 0.1461,
-    "flicker": 0.0181
+    "vol": 0.1885,
+    "cv": 0.1515,
+    "flicker": 0.0325
    },
    "g3": {
-    "plant": 11.18,
-    "ratio": 0.359,
-    "runSamples": 16,
-    "amplitude": 15.59,
-    "grossTravel": 48.2,
-    "cellsPerSample": 0.37,
-    "alias": 0.012,
+    "plant": 10.79,
+    "ratio": 0.342,
+    "runSamples": 8,
+    "amplitude": 15.76,
+    "grossTravel": 48.5,
+    "cellsPerSample": 0.78,
+    "alias": 0.025,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 42
+   },
    "g4": {
-    "curvePerFrame": 0.4441,
-    "lagFrames": 2,
-    "r": 0.883
+    "curvePerFrame": 0.5165,
+    "lagFrames": 1,
+    "r": 0.9
    }
   },
   {
@@ -218,19 +247,19 @@
    "shot": "ec8cbff4-921b-5c8c-8bd0-174be20b7ec5",
    "film": "02",
    "label": "THE GHOST WAS SEVEN",
-   "frames": 199,
+   "frames": 111,
    "guise": "child",
    "mode": "stand",
-   "bodies": 199,
+   "bodies": 111,
    "g1": {
     "solidity": 0.802,
-    "holes": 2.71,
-    "contamination": 0.366
+    "holes": 2.7,
+    "contamination": 0.365
    },
    "g2": {
-    "vol": 0.2251,
-    "cv": 0.0041,
-    "flicker": 0.0003
+    "vol": 0.2252,
+    "cv": 0.0042,
+    "flicker": 0.0004
    },
    "g3": {
     "plant": 0,
@@ -238,12 +267,16 @@
     "runSamples": 0,
     "amplitude": 3.94,
     "grossTravel": 126,
-    "cellsPerSample": 0.64,
-    "alias": 0.081,
+    "cellsPerSample": 1.15,
+    "alias": 0.145,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 0,
+    "n": 1
+   },
    "g4": {
-    "curvePerFrame": 0.0496,
+    "curvePerFrame": 0.1755,
     "lagFrames": 0,
     "r": 1
    }
@@ -252,33 +285,37 @@
    "shot": "71e66e7c-ea68-516b-a4ea-076a07c02815",
    "film": "02",
    "label": "BLINDS UP",
-   "frames": 197,
+   "frames": 102,
    "guise": "everyman",
    "mode": "walk",
-   "bodies": 197,
+   "bodies": 102,
    "g1": {
-    "solidity": 0.936,
-    "holes": 0.11,
-    "contamination": 0.134
+    "solidity": 0.933,
+    "holes": 0.07,
+    "contamination": 0.133
    },
    "g2": {
-    "vol": 0.2469,
-    "cv": 0.2757,
-    "flicker": 0.035
+    "vol": 0.2477,
+    "cv": 0.276,
+    "flicker": 0.0586
    },
    "g3": {
-    "plant": 2.82,
-    "ratio": 0.287,
-    "runSamples": 24,
-    "amplitude": 4.91,
-    "grossTravel": 24.1,
-    "cellsPerSample": 0.12,
-    "alias": 0.012,
+    "plant": 2.37,
+    "ratio": 0.237,
+    "runSamples": 11,
+    "amplitude": 5,
+    "grossTravel": 23.9,
+    "cellsPerSample": 0.24,
+    "alias": 0.024,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 0.9296,
-    "lagFrames": 2,
+    "curvePerFrame": 0.6287,
+    "lagFrames": 6,
     "r": 0
    }
   },
@@ -286,34 +323,38 @@
    "shot": "9c0f60aa-aef7-5a6e-aa51-6628be73bd42",
    "film": "02",
    "label": "THROUGH THE WINDOW",
-   "frames": 197,
+   "frames": 102,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 197,
+   "bodies": 102,
    "g1": {
     "solidity": 0.631,
-    "holes": 1.62,
-    "contamination": 0.52
+    "holes": 1.72,
+    "contamination": 0.521
    },
    "g2": {
-    "vol": 0.2156,
-    "cv": 0.098,
-    "flicker": 0.0066
+    "vol": 0.2155,
+    "cv": 0.0983,
+    "flicker": 0.0106
    },
    "g3": {
-    "plant": 4.23,
-    "ratio": 0.277,
-    "runSamples": 6,
-    "amplitude": 7.63,
+    "plant": 4.09,
+    "ratio": 0.272,
+    "runSamples": 45,
+    "amplitude": 7.51,
     "grossTravel": 30,
-    "cellsPerSample": 0.15,
-    "alias": 0.01,
+    "cellsPerSample": 0.3,
+    "alias": 0.02,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 0.96,
+    "n": 25
+   },
    "g4": {
-    "curvePerFrame": 0.5606,
+    "curvePerFrame": 0.5759,
     "lagFrames": 0,
-    "r": 0.756
+    "r": 0.849
    }
   },
   {
@@ -350,68 +391,76 @@
    "shot": "51b6c0d6-f178-5889-bee1-258c53ec7821",
    "film": "03",
    "label": "TWO SETS OF FOOTSTEPS",
-   "frames": 191,
+   "frames": 78,
    "guise": "poet",
    "mode": "walk",
-   "bodies": 191,
+   "bodies": 78,
    "g1": {
-    "solidity": 0.898,
+    "solidity": 0.899,
     "holes": 0.09,
-    "contamination": 0.342
+    "contamination": 0.341
    },
    "g2": {
-    "vol": 0.2761,
-    "cv": 0.2753,
-    "flicker": 0.0482
+    "vol": 0.2768,
+    "cv": 0.275,
+    "flicker": 0.0825
    },
    "g3": {
-    "plant": 7.38,
-    "ratio": 0.764,
-    "runSamples": 14,
-    "amplitude": 4.83,
-    "grossTravel": 102.1,
-    "cellsPerSample": 0.54,
-    "alias": 0.056,
+    "plant": 6.94,
+    "ratio": 0.724,
+    "runSamples": 6,
+    "amplitude": 4.79,
+    "grossTravel": 101.5,
+    "cellsPerSample": 1.32,
+    "alias": 0.138,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 73
+   },
    "g4": {
-    "curvePerFrame": 0.6574,
+    "curvePerFrame": 0.6252,
     "lagFrames": 0,
-    "r": 0.619
+    "r": 0.875
    }
   },
   {
    "shot": "a70142af-3c00-5da4-9725-9aec4753b406",
    "film": "03",
    "label": "SHATTERED",
-   "frames": 191,
+   "frames": 78,
    "guise": "poet",
    "mode": "walk",
-   "bodies": 191,
+   "bodies": 78,
    "g1": {
-    "solidity": 0.792,
-    "holes": 0.32,
-    "contamination": 0.416
+    "solidity": 0.79,
+    "holes": 0.28,
+    "contamination": 0.42
    },
    "g2": {
     "vol": 0.1693,
-    "cv": 0.1241,
-    "flicker": 0.0348
+    "cv": 0.1253,
+    "flicker": 0.0676
    },
    "g3": {
-    "plant": 1.26,
-    "ratio": 0.101,
-    "runSamples": 8,
+    "plant": 0.88,
+    "ratio": 0.071,
+    "runSamples": 3,
     "amplitude": 6.21,
-    "grossTravel": 31.9,
-    "cellsPerSample": 0.17,
-    "alias": 0.014,
+    "grossTravel": 31.7,
+    "cellsPerSample": 0.41,
+    "alias": 0.033,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 72
+   },
    "g4": {
-    "curvePerFrame": 1.0532,
-    "lagFrames": 0,
-    "r": 0.345
+    "curvePerFrame": 1.2533,
+    "lagFrames": 1,
+    "r": 0.629
    }
   },
   {
@@ -424,33 +473,37 @@
    "shot": "1e0a459e-6ecd-5996-abf3-7062d492c617",
    "film": "04",
    "label": "WASHED ASHORE",
-   "frames": 204,
+   "frames": 154,
    "guise": "poet",
    "mode": "walk",
-   "bodies": 204,
+   "bodies": 154,
    "g1": {
-    "solidity": 0.865,
+    "solidity": 0.863,
     "holes": 0.12,
-    "contamination": 0.161
+    "contamination": 0.163
    },
    "g2": {
-    "vol": 0.2103,
-    "cv": 0.0796,
-    "flicker": 0.0284
+    "vol": 0.2105,
+    "cv": 0.0794,
+    "flicker": 0.0312
    },
    "g3": {
-    "plant": 5.7,
-    "ratio": 0.575,
-    "runSamples": 12,
-    "amplitude": 4.95,
-    "grossTravel": 105.2,
-    "cellsPerSample": 0.52,
-    "alias": 0.052,
+    "plant": 6.18,
+    "ratio": 0.63,
+    "runSamples": 10,
+    "amplitude": 4.91,
+    "grossTravel": 105.1,
+    "cellsPerSample": 0.69,
+    "alias": 0.07,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 153
+   },
    "g4": {
-    "curvePerFrame": 0.5767,
-    "lagFrames": 0,
+    "curvePerFrame": 0.4977,
+    "lagFrames": 1,
     "r": 0
    }
   },
@@ -458,10 +511,10 @@
    "shot": "3a75924a-6b35-57db-921b-40c6772ba6bf",
    "film": "04",
    "label": "FOLDED WHISPERS",
-   "frames": 205,
+   "frames": 166,
    "guise": "poet",
    "mode": "sit",
-   "bodies": 205,
+   "bodies": 166,
    "g1": {
     "solidity": 0.627,
     "holes": 0.11,
@@ -469,15 +522,19 @@
    },
    "g2": {
     "vol": 0.1949,
-    "cv": 0.0087,
-    "flicker": 0.0004
+    "cv": 0.0086,
+    "flicker": 0.0006
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 0.03,
+    "curvePerFrame": 0.0296,
     "lagFrames": 0,
     "r": 0
    }
@@ -498,60 +555,68 @@
    "shot": "3bf9a0d6-58d4-5ffa-b959-9fbf710b7f7a",
    "film": "04",
    "label": "DEEPEST DARKNESS",
-   "frames": 203,
+   "frames": 141,
    "guise": "poet",
    "mode": "sit",
-   "bodies": 203,
+   "bodies": 141,
    "g1": {
-    "solidity": 0.679,
-    "holes": 1.38,
+    "solidity": 0.68,
+    "holes": 1.34,
     "contamination": 0.078
    },
    "g2": {
-    "vol": 0.2115,
-    "cv": 0.0202,
-    "flicker": 0.0129
+    "vol": 0.2117,
+    "cv": 0.0191,
+    "flicker": 0.0122
    },
    "g3": {
-    "plant": 2.45,
-    "ratio": 1.776,
-    "runSamples": 5,
-    "amplitude": 0.69,
-    "grossTravel": 134.6,
-    "cellsPerSample": 0.67,
-    "alias": 0.484,
-    "aliased": false
+    "plant": 2.57,
+    "ratio": 2.053,
+    "runSamples": 3,
+    "amplitude": 0.62,
+    "grossTravel": 134.2,
+    "cellsPerSample": 0.96,
+    "alias": 0.767,
+    "aliased": true
+   },
+   "g3b": {
+    "facesTravel": 0.789,
+    "n": 114
    },
    "g4": {
-    "curvePerFrame": 0.7699,
+    "curvePerFrame": 0.6795,
     "lagFrames": 0,
-    "r": 0.812
+    "r": 0.883
    }
   },
   {
    "shot": "20f3186c-d143-54ad-8a17-ebe570251b3d",
    "film": "04",
    "label": "I PUT THEM BACK ON",
-   "frames": 205,
+   "frames": 166,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 205,
+   "bodies": 166,
    "g1": {
     "solidity": 0.468,
-    "holes": 3.6,
+    "holes": 3.59,
     "contamination": 0.169
    },
    "g2": {
     "vol": 0.1908,
-    "cv": 0.0573,
-    "flicker": 0.0042
+    "cv": 0.0574,
+    "flicker": 0.0046
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 1.1549,
+    "curvePerFrame": 1.239,
     "lagFrames": 0,
     "r": 0
    }
@@ -566,34 +631,38 @@
    "shot": "02dfa46b-198a-5bc9-810a-10c5dae085a1",
    "film": "05",
    "label": "NAME MY OWN STARS",
-   "frames": 199,
+   "frames": 114,
    "guise": "poet",
    "mode": "walk",
-   "bodies": 199,
+   "bodies": 114,
    "g1": {
-    "solidity": 0.718,
+    "solidity": 0.719,
     "holes": 0.12,
     "contamination": 0.155
    },
    "g2": {
-    "vol": 0.2698,
-    "cv": 0.2783,
-    "flicker": 0.0302
+    "vol": 0.2703,
+    "cv": 0.2778,
+    "flicker": 0.04
    },
    "g3": {
-    "plant": 8.95,
-    "ratio": 0.895,
-    "runSamples": 26,
-    "amplitude": 5,
+    "plant": 8.75,
+    "ratio": 0.897,
+    "runSamples": 15,
+    "amplitude": 4.88,
     "grossTravel": 50.1,
-    "cellsPerSample": 0.25,
-    "alias": 0.025,
+    "cellsPerSample": 0.44,
+    "alias": 0.045,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 88
+   },
    "g4": {
-    "curvePerFrame": 1.0136,
-    "lagFrames": 1,
-    "r": 0.207
+    "curvePerFrame": 0.8598,
+    "lagFrames": 0,
+    "r": 0.278
    }
   },
   {
@@ -606,26 +675,30 @@
    "shot": "d10b2f8d-d078-598e-876c-a9a8a4cc9f47",
    "film": "05",
    "label": "A NEW UNIVERSE",
-   "frames": 199,
+   "frames": 114,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 199,
+   "bodies": 114,
    "g1": {
     "solidity": 0.873,
     "holes": 0,
-    "contamination": 0.017
+    "contamination": 0.015
    },
    "g2": {
     "vol": 0.3784,
-    "cv": 0.0055,
-    "flicker": 0.0006
+    "cv": 0.0051,
+    "flicker": 0.0009
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 0.0638,
+    "curvePerFrame": 0.1122,
     "lagFrames": 0,
     "r": 0
    }
@@ -640,10 +713,10 @@
    "shot": "60d854f7-ec6b-5c45-9995-c8396298835b",
    "film": "05",
    "label": "THE GATES OPEN",
-   "frames": 120,
+   "frames": 79,
    "guise": "everyman",
    "mode": "stand",
-   "bodies": 120,
+   "bodies": 79,
    "g1": {
     "solidity": 0.725,
     "holes": 0,
@@ -657,6 +730,10 @@
    "g3": {
     "plant": null,
     "why": "the body never travelled"
+   },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
    },
    "g4": {
     "curvePerFrame": 0,
@@ -674,32 +751,36 @@
    "shot": "05bb1f34-f734-51fb-a26f-c9331be8e1a4",
    "film": "06",
    "label": "THE COMETS",
-   "frames": 200,
+   "frames": 120,
    "guise": "everyman",
    "mode": "walk",
-   "bodies": 200,
+   "bodies": 120,
    "g1": {
-    "solidity": 0.977,
-    "holes": 0.14,
-    "contamination": 0.325
+    "solidity": 0.975,
+    "holes": 0.08,
+    "contamination": 0.326
    },
    "g2": {
-    "vol": 0.1562,
-    "cv": 0.2472,
-    "flicker": 0.0487
+    "vol": 0.1567,
+    "cv": 0.2411,
+    "flicker": 0.0722
    },
    "g3": {
-    "plant": 2.95,
-    "ratio": 0.337,
-    "runSamples": 18,
-    "amplitude": 4.38,
-    "grossTravel": 183.7,
-    "cellsPerSample": 0.92,
-    "alias": 0.105,
+    "plant": 2.62,
+    "ratio": 0.297,
+    "runSamples": 10,
+    "amplitude": 4.41,
+    "grossTravel": 182.8,
+    "cellsPerSample": 1.54,
+    "alias": 0.174,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 0.952,
+    "n": 21
+   },
    "g4": {
-    "curvePerFrame": 0.7912,
+    "curvePerFrame": 0.5738,
     "lagFrames": 0,
     "r": 1
    }
@@ -708,26 +789,30 @@
    "shot": "218280c0-f9fd-5568-a0cb-b2f64f097d1a",
    "film": "06",
    "label": "THE WATERLINE FALLS",
-   "frames": 203,
+   "frames": 140,
    "guise": "everyman",
    "mode": "stand",
-   "bodies": 203,
+   "bodies": 140,
    "g1": {
     "solidity": 0.669,
     "holes": 0,
-    "contamination": 0.078
+    "contamination": 0.079
    },
    "g2": {
-    "vol": 0.3531,
-    "cv": 0.0171,
-    "flicker": 0.0203
+    "vol": 0.353,
+    "cv": 0.017,
+    "flicker": 0.0259
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 0.9514,
+    "curvePerFrame": 1.0028,
     "lagFrames": 0,
     "r": 0
    }
@@ -736,60 +821,68 @@
    "shot": "f3084edd-e6d9-5f62-86e3-306db2e83f47",
    "film": "06",
    "label": "ADMISSION",
-   "frames": 201,
+   "frames": 130,
    "guise": "everyman",
    "mode": "walk",
-   "bodies": 201,
+   "bodies": 130,
    "g1": {
-    "solidity": 1.013,
-    "holes": 0.09,
-    "contamination": 0.133
+    "solidity": 1.011,
+    "holes": 0.08,
+    "contamination": 0.131
    },
    "g2": {
-    "vol": 0.31,
-    "cv": 0.1154,
-    "flicker": 0.0407
+    "vol": 0.3098,
+    "cv": 0.1142,
+    "flicker": 0.0526
    },
    "g3": {
-    "plant": 7.02,
-    "ratio": 1.07,
-    "runSamples": 27,
-    "amplitude": 3.28,
-    "grossTravel": 53.9,
-    "cellsPerSample": 0.27,
-    "alias": 0.041,
+    "plant": 7.11,
+    "ratio": 1.094,
+    "runSamples": 18,
+    "amplitude": 3.25,
+    "grossTravel": 53.8,
+    "cellsPerSample": 0.42,
+    "alias": 0.064,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 128
+   },
    "g4": {
-    "curvePerFrame": 1.0177,
+    "curvePerFrame": 0.7578,
     "lagFrames": 0,
-    "r": 0.047
+    "r": 0.078
    }
   },
   {
    "shot": "31c98ba4-fc7a-5ef3-b054-b940fa970d9d",
    "film": "06",
    "label": "NARROW STREETS",
-   "frames": 200,
+   "frames": 120,
    "guise": "everyman",
    "mode": "walk",
-   "bodies": 200,
+   "bodies": 120,
    "g1": {
-    "solidity": 0.998,
+    "solidity": 0.995,
     "holes": 0,
     "contamination": 0.12
    },
    "g2": {
-    "vol": 0.2783,
-    "cv": 0.0997,
-    "flicker": 0.028
+    "vol": 0.2782,
+    "cv": 0.0998,
+    "flicker": 0.0398
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 1.4557,
+    "curvePerFrame": 1.6773,
     "lagFrames": 0,
     "r": 0
    }
@@ -798,10 +891,10 @@
    "shot": "ffd0e526-781d-5257-8269-0e04dedbd82d",
    "film": "06",
    "label": "CROSSHAIRS TO CONTINUUMS",
-   "frames": 200,
+   "frames": 120,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 200,
+   "bodies": 120,
    "g1": {
     "solidity": 0.799,
     "holes": 0.53,
@@ -809,15 +902,19 @@
    },
    "g2": {
     "vol": 0.2385,
-    "cv": 0.0251,
-    "flicker": 0.0015
+    "cv": 0.0252,
+    "flicker": 0.0022
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 0.2012,
+    "curvePerFrame": 0.4911,
     "lagFrames": 0,
     "r": 0
    }
@@ -826,34 +923,38 @@
    "shot": "3ea096c8-2368-5ef5-b5cf-c024a9795ff3",
    "film": "06",
    "label": "WELCOMING ALL",
-   "frames": 179,
+   "frames": 116,
    "guise": "poet",
    "mode": "walk",
-   "bodies": 179,
+   "bodies": 116,
    "g1": {
     "solidity": 0.716,
-    "holes": 0.08,
-    "contamination": 0.227
+    "holes": 0.06,
+    "contamination": 0.225
    },
    "g2": {
-    "vol": 0.2263,
-    "cv": 0.2003,
-    "flicker": 0.0169
+    "vol": 0.2261,
+    "cv": 0.2045,
+    "flicker": 0.0235
    },
    "g3": {
-    "plant": 5.95,
-    "ratio": 0.574,
-    "runSamples": 7,
-    "amplitude": 5.19,
+    "plant": 5.07,
+    "ratio": 0.491,
+    "runSamples": 8,
+    "amplitude": 5.16,
     "grossTravel": 99.9,
-    "cellsPerSample": 0.56,
-    "alias": 0.054,
+    "cellsPerSample": 0.87,
+    "alias": 0.084,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 54
+   },
    "g4": {
-    "curvePerFrame": 0.3337,
-    "lagFrames": 3,
-    "r": 0.972
+    "curvePerFrame": 0.3325,
+    "lagFrames": 2,
+    "r": 0.982
    }
   },
   {
@@ -866,26 +967,30 @@
    "shot": "932c051d-5f80-5c4c-a9a9-eb159d85551b",
    "film": "07",
    "label": "CHIN NESTED",
-   "frames": 197,
+   "frames": 101,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 197,
+   "bodies": 101,
    "g1": {
     "solidity": 0.856,
     "holes": 0.98,
     "contamination": 0.02
    },
    "g2": {
-    "vol": 0.2664,
-    "cv": 0.0148,
-    "flicker": 0.0025
+    "vol": 0.2663,
+    "cv": 0.0149,
+    "flicker": 0.0042
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 0.291,
+    "curvePerFrame": 0.5217,
     "lagFrames": 0,
     "r": 0
    }
@@ -894,68 +999,76 @@
    "shot": "7fb37131-75c4-50fe-8f5b-b9ec89b9c6ef",
    "film": "07",
    "label": "VINEYARD GHOSTS",
-   "frames": 197,
+   "frames": 101,
    "guise": "turned",
    "mode": "walk",
-   "bodies": 197,
+   "bodies": 101,
    "g1": {
-    "solidity": 0.962,
-    "holes": 0.07,
-    "contamination": 0.33
+    "solidity": 0.965,
+    "holes": 0.08,
+    "contamination": 0.333
    },
    "g2": {
-    "vol": 0.3263,
-    "cv": 0.4467,
-    "flicker": 0.0337
+    "vol": 0.3246,
+    "cv": 0.4441,
+    "flicker": 0.0545
    },
    "g3": {
-    "plant": 4.69,
-    "ratio": 0.438,
-    "runSamples": 28,
-    "amplitude": 5.35,
-    "grossTravel": 27.8,
-    "cellsPerSample": 0.14,
-    "alias": 0.013,
+    "plant": 4.32,
+    "ratio": 0.405,
+    "runSamples": 14,
+    "amplitude": 5.33,
+    "grossTravel": 27.7,
+    "cellsPerSample": 0.28,
+    "alias": 0.026,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 52
+   },
    "g4": {
-    "curvePerFrame": 0.7746,
+    "curvePerFrame": 0.6295,
     "lagFrames": 0,
-    "r": 0.187
+    "r": 0.239
    }
   },
   {
    "shot": "2d91fbf4-e1ff-52b1-9a51-97911558f13b",
    "film": "07",
    "label": "THOUSAND LIGHT YEARS",
-   "frames": 165,
+   "frames": 92,
    "guise": "poet",
    "mode": "walk",
-   "bodies": 165,
+   "bodies": 92,
    "g1": {
-    "solidity": 0.653,
+    "solidity": 0.64,
     "holes": 0,
-    "contamination": 0.437
+    "contamination": 0.439
    },
    "g2": {
-    "vol": 0.062,
-    "cv": 0.1762,
-    "flicker": 0.0864
+    "vol": 0.0623,
+    "cv": 0.1805,
+    "flicker": 0.1237
    },
    "g3": {
-    "plant": 5.4,
-    "ratio": 0.605,
-    "runSamples": 8,
+    "plant": 5.57,
+    "ratio": 0.624,
+    "runSamples": 5,
     "amplitude": 4.46,
-    "grossTravel": 125.3,
-    "cellsPerSample": 0.76,
-    "alias": 0.086,
+    "grossTravel": 125,
+    "cellsPerSample": 1.37,
+    "alias": 0.154,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 90
+   },
    "g4": {
-    "curvePerFrame": 0.5826,
-    "lagFrames": 0,
-    "r": 0.142
+    "curvePerFrame": 0.5995,
+    "lagFrames": 2,
+    "r": 0.001
    }
   },
   {
@@ -980,26 +1093,30 @@
    "shot": "4d796f60-c884-525e-9ac1-f7032bb8eb12",
    "film": "07",
    "label": "CHIN HIGH",
-   "frames": 198,
+   "frames": 110,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 198,
+   "bodies": 110,
    "g1": {
     "solidity": 0.531,
-    "holes": 0.07,
-    "contamination": 0.431
+    "holes": 0.06,
+    "contamination": 0.432
    },
    "g2": {
-    "vol": 0.2302,
-    "cv": 0.019,
-    "flicker": 0.0179
+    "vol": 0.2298,
+    "cv": 0.0188,
+    "flicker": 0.0186
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 1.9769,
+    "curvePerFrame": 1.9814,
     "lagFrames": 0,
     "r": 0
    }
@@ -1014,26 +1131,30 @@
    "shot": "b8ba7303-bda7-595a-850e-41a927ddf04f",
    "film": "08",
    "label": "PULSING",
-   "frames": 195,
+   "frames": 94,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 195,
+   "bodies": 94,
    "g1": {
-    "solidity": 0.801,
-    "holes": 1.07,
-    "contamination": 0.336
+    "solidity": 0.802,
+    "holes": 1.05,
+    "contamination": 0.337
    },
    "g2": {
     "vol": 0.2417,
     "cv": 0.0137,
-    "flicker": 0.0038
+    "flicker": 0.0055
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 0.9147,
+    "curvePerFrame": 1.5501,
     "lagFrames": 0,
     "r": 0
    }
@@ -1042,26 +1163,30 @@
    "shot": "9918ab42-fb7d-5bfd-b4bd-25fe82946775",
    "film": "08",
    "label": "THE ESCAPE",
-   "frames": 197,
+   "frames": 103,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 197,
+   "bodies": 103,
    "g1": {
     "solidity": 0.787,
-    "holes": 0.21,
+    "holes": 0.2,
     "contamination": 0.357
    },
    "g2": {
-    "vol": 0.2317,
-    "cv": 0.0888,
-    "flicker": 0.0027
+    "vol": 0.2318,
+    "cv": 0.0885,
+    "flicker": 0.0042
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 0.4076,
+    "curvePerFrame": 0.4514,
     "lagFrames": 0,
     "r": 0
    }
@@ -1070,26 +1195,30 @@
    "shot": "5d2342c9-421f-5db3-946a-b4b32fdb2854",
    "film": "08",
    "label": "IMAGINE MY BODY",
-   "frames": 195,
+   "frames": 94,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 195,
+   "bodies": 94,
    "g1": {
-    "solidity": 0.812,
+    "solidity": 0.811,
     "holes": 0.49,
     "contamination": 0.292
    },
    "g2": {
     "vol": 0.2392,
     "cv": 0.0095,
-    "flicker": 0.0039
+    "flicker": 0.0054
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 0.971,
+    "curvePerFrame": 1.3379,
     "lagFrames": 0,
     "r": 0
    }
@@ -1098,60 +1227,68 @@
    "shot": "f2562745-8502-5420-b1c0-0865122ee591",
    "film": "08",
    "label": "THE EQUATOR",
-   "frames": 179,
+   "frames": 86,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 179,
+   "bodies": 86,
    "g1": {
-    "solidity": 0.37,
+    "solidity": 0.368,
     "holes": 12.56,
-    "contamination": 0.04
+    "contamination": 0.039
    },
    "g2": {
-    "vol": 0.1367,
-    "cv": 0.4484,
-    "flicker": 0.0367
+    "vol": 0.137,
+    "cv": 0.446,
+    "flicker": 0.0646
    },
    "g3": {
-    "plant": 2.56,
-    "ratio": 0.322,
-    "runSamples": 9,
-    "amplitude": 3.97,
-    "grossTravel": 14.9,
-    "cellsPerSample": 0.08,
-    "alias": 0.011,
+    "plant": 2.45,
+    "ratio": 0.327,
+    "runSamples": 5,
+    "amplitude": 3.75,
+    "grossTravel": 14.6,
+    "cellsPerSample": 0.17,
+    "alias": 0.023,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 0,
+    "n": 23
+   },
    "g4": {
-    "curvePerFrame": 1.0009,
-    "lagFrames": 2,
-    "r": 0.594
+    "curvePerFrame": 0.9957,
+    "lagFrames": 3,
+    "r": 0.661
    }
   },
   {
    "shot": "f729175b-5786-5941-b1b6-c13eacd44f20",
    "film": "08",
    "label": "COOL ME DOWN",
-   "frames": 197,
+   "frames": 103,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 197,
+   "bodies": 103,
    "g1": {
-    "solidity": 0.352,
-    "holes": 13.49,
+    "solidity": 0.353,
+    "holes": 13.51,
     "contamination": 0.058
    },
    "g2": {
-    "vol": 0.1398,
-    "cv": 0.4083,
-    "flicker": 0.0219
+    "vol": 0.1397,
+    "cv": 0.4102,
+    "flicker": 0.0406
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 0.9678,
+    "curvePerFrame": 1.341,
     "lagFrames": 0,
     "r": 0
    }
@@ -1160,10 +1297,10 @@
    "shot": "02ccffde-15e2-5f9e-951e-96ff095c65a9",
    "film": "08",
    "label": "BACK TO MY BODY",
-   "frames": 197,
+   "frames": 103,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 197,
+   "bodies": 103,
    "g1": {
     "solidity": 0.6,
     "holes": 0.49,
@@ -1172,14 +1309,18 @@
    "g2": {
     "vol": 0.2667,
     "cv": 0.0142,
-    "flicker": 0.0008
+    "flicker": 0.0011
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 0.1243,
+    "curvePerFrame": 0.2478,
     "lagFrames": 0,
     "r": 0
    }
@@ -1188,10 +1329,10 @@
    "shot": "30a3dedf-d497-5ed3-90f5-db7b3b7387cb",
    "film": "08",
    "label": "MOUNTAINS IN THE DISTANCE",
-   "frames": 195,
+   "frames": 94,
    "guise": "poet",
    "mode": "sit",
-   "bodies": 195,
+   "bodies": 94,
    "g1": {
     "solidity": 0.733,
     "holes": 0.84,
@@ -1199,15 +1340,19 @@
    },
    "g2": {
     "vol": 0.1966,
-    "cv": 0.0074,
-    "flicker": 0.0003
+    "cv": 0.0072,
+    "flicker": 0.0008
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 0,
+    "curvePerFrame": 0.0204,
     "lagFrames": 0,
     "r": 0
    }
@@ -1222,10 +1367,10 @@
    "shot": "62097226-74fb-5039-81fc-5ce2acda445b",
    "film": "09",
    "label": "THE SHARED MOON",
-   "frames": 208,
+   "frames": 204,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 208,
+   "bodies": 204,
    "g1": {
     "solidity": 0.751,
     "holes": 0,
@@ -1233,23 +1378,27 @@
    },
    "g2": {
     "vol": 0.2123,
-    "cv": 0.0039,
-    "flicker": 0.004
+    "cv": 0.0041,
+    "flicker": 0.0043
    },
    "g3": {
-    "plant": 1.8,
-    "ratio": 0.168,
-    "runSamples": 15,
+    "plant": 1.79,
+    "ratio": 0.166,
+    "runSamples": 10,
     "amplitude": 5.37,
     "grossTravel": 41.6,
     "cellsPerSample": 0.2,
     "alias": 0.019,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 0.5392,
+    "curvePerFrame": 0.5841,
     "lagFrames": 0,
-    "r": 0.767
+    "r": 0.759
    }
   },
   {
@@ -1279,6 +1428,10 @@
     "cellsPerSample": 0.15,
     "alias": 0.014,
     "aliased": false
+   },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
    },
    "g4": {
     "curvePerFrame": 0.7215,
@@ -1314,6 +1467,10 @@
     "alias": 0.014,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
     "curvePerFrame": 0.7301,
     "lagFrames": 0,
@@ -1324,34 +1481,38 @@
    "shot": "1b78a291-9968-5382-a71a-9cd2f78fe946",
    "film": "09",
    "label": "EAST, AT THE HARBOR",
-   "frames": 207,
+   "frames": 191,
    "guise": "elder",
    "mode": "walk",
-   "bodies": 207,
+   "bodies": 191,
    "g1": {
     "solidity": 0.714,
-    "holes": 0.41,
-    "contamination": 0.467
+    "holes": 0.45,
+    "contamination": 0.466
    },
    "g2": {
     "vol": 0.1734,
-    "cv": 0.0658,
-    "flicker": 0.0253
+    "cv": 0.0657,
+    "flicker": 0.0269
    },
    "g3": {
-    "plant": 4.2,
-    "ratio": 0.203,
-    "runSamples": 8,
-    "amplitude": 10.35,
+    "plant": 4.27,
+    "ratio": 0.207,
+    "runSamples": 7,
+    "amplitude": 10.33,
     "grossTravel": 96.9,
-    "cellsPerSample": 0.47,
-    "alias": 0.023,
+    "cellsPerSample": 0.51,
+    "alias": 0.025,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 156
+   },
    "g4": {
-    "curvePerFrame": 0.5464,
+    "curvePerFrame": 0.5337,
     "lagFrames": 0,
-    "r": 0.821
+    "r": 0.852
    }
   },
   {
@@ -1364,34 +1525,38 @@
    "shot": "a01db976-e942-57b7-9baa-23680bbf9714",
    "film": "10",
    "label": "HOP ON",
-   "frames": 182,
+   "frames": 106,
    "guise": "everyman",
    "mode": "walk",
-   "bodies": 182,
+   "bodies": 106,
    "g1": {
-    "solidity": 0.728,
-    "holes": 4,
+    "solidity": 0.729,
+    "holes": 4.1,
     "contamination": 0.153
    },
    "g2": {
-    "vol": 0.1782,
-    "cv": 0.1272,
-    "flicker": 0.0183
+    "vol": 0.179,
+    "cv": 0.1071,
+    "flicker": 0.026
    },
    "g3": {
-    "plant": 13.55,
-    "ratio": 1.001,
-    "runSamples": 10,
+    "plant": 12.84,
+    "ratio": 0.948,
+    "runSamples": 6,
     "amplitude": 6.77,
-    "grossTravel": 94.7,
-    "cellsPerSample": 0.52,
-    "alias": 0.039,
+    "grossTravel": 92.2,
+    "cellsPerSample": 0.88,
+    "alias": 0.065,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 39
+   },
    "g4": {
-    "curvePerFrame": 0.4631,
+    "curvePerFrame": 0.4874,
     "lagFrames": 0,
-    "r": 0.972
+    "r": 0.988
    }
   },
   {
@@ -1440,32 +1605,36 @@
    "shot": "8da3e87a-dcf4-5404-9d87-d875bdff7b9e",
    "film": "11",
    "label": "FIRST COURSES",
-   "frames": 201,
+   "frames": 124,
    "guise": "everyman",
    "mode": "stand",
-   "bodies": 201,
+   "bodies": 124,
    "g1": {
-    "solidity": 0.836,
+    "solidity": 0.839,
     "holes": 0,
-    "contamination": 0.458
+    "contamination": 0.45
    },
    "g2": {
-    "vol": 0.3339,
-    "cv": 0.1119,
-    "flicker": 0.0191
+    "vol": 0.3335,
+    "cv": 0.1089,
+    "flicker": 0.0289
    },
    "g3": {
-    "plant": 3.95,
-    "ratio": 0.637,
-    "runSamples": 12,
-    "amplitude": 3.1,
-    "grossTravel": 202.1,
-    "cellsPerSample": 1.01,
-    "alias": 0.163,
+    "plant": 5.28,
+    "ratio": 0.92,
+    "runSamples": 6,
+    "amplitude": 2.87,
+    "grossTravel": 201.6,
+    "cellsPerSample": 1.64,
+    "alias": 0.286,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 0.969,
+    "n": 32
+   },
    "g4": {
-    "curvePerFrame": 0.2337,
+    "curvePerFrame": 0.2045,
     "lagFrames": 0,
     "r": 1
    }
@@ -1474,32 +1643,36 @@
    "shot": "2029e24b-56ce-510a-ab9d-f1aecaa39282",
    "film": "11",
    "label": "COLUMNS AND BEAMS",
-   "frames": 202,
+   "frames": 135,
    "guise": "everyman",
    "mode": "walk",
-   "bodies": 202,
+   "bodies": 135,
    "g1": {
-    "solidity": 1.214,
+    "solidity": 1.229,
     "holes": 0,
-    "contamination": 0.169
+    "contamination": 0.168
    },
    "g2": {
-    "vol": 0.2373,
-    "cv": 0.3802,
-    "flicker": 0.1436
+    "vol": 0.2354,
+    "cv": 0.3893,
+    "flicker": 0.2122
    },
    "g3": {
-    "plant": 4.15,
-    "ratio": 0.662,
-    "runSamples": 8,
-    "amplitude": 3.14,
-    "grossTravel": 986.2,
-    "cellsPerSample": 4.91,
-    "alias": 0.782,
+    "plant": 5.86,
+    "ratio": 0.965,
+    "runSamples": 9,
+    "amplitude": 3.04,
+    "grossTravel": 984.6,
+    "cellsPerSample": 7.35,
+    "alias": 1.209,
     "aliased": true
    },
+   "g3b": {
+    "facesTravel": 0.87,
+    "n": 92
+   },
    "g4": {
-    "curvePerFrame": 0.6628,
+    "curvePerFrame": 0.6336,
     "lagFrames": 0,
     "r": 1
    }
@@ -1508,67 +1681,75 @@
    "shot": "d6d23a1f-5711-5144-a568-4d5854f36b4d",
    "film": "11",
    "label": "THE INFINITY POOL",
-   "frames": 201,
+   "frames": 124,
    "guise": "everyman",
    "mode": "walk",
-   "bodies": 201,
+   "bodies": 124,
    "g1": {
-    "solidity": 0.984,
+    "solidity": 0.988,
     "holes": 0,
-    "contamination": 0.044
+    "contamination": 0.045
    },
    "g2": {
-    "vol": 0.317,
-    "cv": 0.0928,
-    "flicker": 0.0306
+    "vol": 0.3162,
+    "cv": 0.0948,
+    "flicker": 0.0461
    },
    "g3": {
-    "plant": 5.21,
-    "ratio": 0.624,
-    "runSamples": 5,
-    "amplitude": 4.17,
-    "grossTravel": 264.5,
-    "cellsPerSample": 1.32,
-    "alias": 0.159,
+    "plant": 5.79,
+    "ratio": 0.692,
+    "runSamples": 3,
+    "amplitude": 4.18,
+    "grossTravel": 263.7,
+    "cellsPerSample": 2.14,
+    "alias": 0.256,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 119
+   },
    "g4": {
-    "curvePerFrame": 0.3277,
+    "curvePerFrame": 0.2271,
     "lagFrames": 0,
-    "r": 0.93
+    "r": 0.981
    }
   },
   {
    "shot": "e3e81f60-e2e8-5f2f-a5a4-8f43db970532",
    "film": "11",
    "label": "WALKING ON WATER",
-   "frames": 201,
+   "frames": 124,
    "guise": "poet",
    "mode": "walk",
-   "bodies": 201,
+   "bodies": 124,
    "g1": {
     "solidity": 0.839,
-    "holes": 0.11,
-    "contamination": 0.073
+    "holes": 0.1,
+    "contamination": 0.072
    },
    "g2": {
-    "vol": 0.2035,
-    "cv": 0.0618,
-    "flicker": 0.0254
+    "vol": 0.2036,
+    "cv": 0.0632,
+    "flicker": 0.0363
    },
    "g3": {
-    "plant": 9.67,
-    "ratio": 1.056,
-    "runSamples": 15,
-    "amplitude": 4.58,
-    "grossTravel": 138.2,
-    "cellsPerSample": 0.69,
-    "alias": 0.075,
+    "plant": 5.59,
+    "ratio": 0.617,
+    "runSamples": 6,
+    "amplitude": 4.53,
+    "grossTravel": 137.5,
+    "cellsPerSample": 1.12,
+    "alias": 0.123,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 123
+   },
    "g4": {
-    "curvePerFrame": 0.4131,
-    "lagFrames": 1,
+    "curvePerFrame": 0.4004,
+    "lagFrames": 2,
     "r": 0
    }
   },
@@ -1576,34 +1757,38 @@
    "shot": "df6035e0-1cc5-5f7f-9002-b11c35699883",
    "film": "11",
    "label": "A NEW DAY",
-   "frames": 144,
+   "frames": 96,
    "guise": "everyman",
    "mode": "walk",
-   "bodies": 144,
+   "bodies": 96,
    "g1": {
-    "solidity": 0.804,
+    "solidity": 0.798,
     "holes": 0,
-    "contamination": 0.115
+    "contamination": 0.114
    },
    "g2": {
     "vol": 0.3477,
-    "cv": 0.1159,
-    "flicker": 0.0171
+    "cv": 0.1108,
+    "flicker": 0.0242
    },
    "g3": {
-    "plant": 6.14,
-    "ratio": 1.034,
-    "runSamples": 14,
-    "amplitude": 2.97,
-    "grossTravel": 14.3,
-    "cellsPerSample": 0.1,
-    "alias": 0.017,
+    "plant": 6.53,
+    "ratio": 1.163,
+    "runSamples": 10,
+    "amplitude": 2.81,
+    "grossTravel": 13.9,
+    "cellsPerSample": 0.15,
+    "alias": 0.026,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 20
+   },
    "g4": {
-    "curvePerFrame": 0.1928,
-    "lagFrames": 4,
-    "r": 0.927
+    "curvePerFrame": 0.1744,
+    "lagFrames": 3,
+    "r": 0.971
    }
   },
   {
@@ -1616,170 +1801,190 @@
    "shot": "d9ac5155-6f88-5a45-ae52-ad65bbcc7507",
    "film": "12",
    "label": "HUGS WITH NO REASON",
-   "frames": 199,
+   "frames": 113,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 199,
+   "bodies": 113,
    "g1": {
     "solidity": 0.585,
-    "holes": 0.55,
-    "contamination": 0.097
+    "holes": 0.57,
+    "contamination": 0.095
    },
    "g2": {
-    "vol": 0.2574,
-    "cv": 0.0755,
-    "flicker": 0.0332
+    "vol": 0.2579,
+    "cv": 0.0725,
+    "flicker": 0.0336
    },
    "g3": {
-    "plant": 1.27,
-    "ratio": 0.207,
-    "runSamples": 34,
-    "amplitude": 3.06,
+    "plant": 1.3,
+    "ratio": 0.228,
+    "runSamples": 27,
+    "amplitude": 2.85,
     "grossTravel": 5.8,
-    "cellsPerSample": 0.03,
-    "alias": 0.005,
+    "cellsPerSample": 0.05,
+    "alias": 0.009,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 1.5308,
-    "lagFrames": 1,
-    "r": 0.199
+    "curvePerFrame": 1.465,
+    "lagFrames": 3,
+    "r": 0.104
    }
   },
   {
    "shot": "383c8f21-4b4c-52d5-845e-2f9f89d558bc",
    "film": "12",
    "label": "LESS TIME, MORE SPACE",
-   "frames": 179,
+   "frames": 60,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 179,
+   "bodies": 60,
    "g1": {
     "solidity": 0.688,
-    "holes": 1.45,
+    "holes": 1.37,
     "contamination": 0.031
    },
    "g2": {
-    "vol": 0.3007,
-    "cv": 0.0116,
-    "flicker": 0.0074
+    "vol": 0.3004,
+    "cv": 0.0132,
+    "flicker": 0.0141
    },
    "g3": {
-    "plant": 1.95,
-    "ratio": 0.44,
-    "runSamples": 21,
-    "amplitude": 2.21,
-    "grossTravel": 11.5,
-    "cellsPerSample": 0.06,
-    "alias": 0.015,
+    "plant": 1.94,
+    "ratio": 0.441,
+    "runSamples": 10,
+    "amplitude": 2.2,
+    "grossTravel": 11.4,
+    "cellsPerSample": 0.19,
+    "alias": 0.044,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 0,
+    "n": 5
+   },
    "g4": {
-    "curvePerFrame": 1.6806,
-    "lagFrames": 0,
-    "r": 0.207
+    "curvePerFrame": 1.2644,
+    "lagFrames": 4,
+    "r": 0.266
    }
   },
   {
    "shot": "1d4f3297-cff1-54f5-aabd-7e6a2d548c8f",
    "film": "12",
    "label": "ELDERS, NOW PAST",
-   "frames": 197,
+   "frames": 104,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 197,
+   "bodies": 104,
    "g1": {
-    "solidity": 0.838,
-    "holes": 1.19,
+    "solidity": 0.839,
+    "holes": 1.2,
     "contamination": 0.301
    },
    "g2": {
-    "vol": 0.2612,
-    "cv": 0.0141,
-    "flicker": 0.0058
+    "vol": 0.2614,
+    "cv": 0.0135,
+    "flicker": 0.0078
    },
    "g3": {
-    "plant": 1.77,
-    "ratio": 4.232,
-    "runSamples": 69,
+    "plant": 1.78,
+    "ratio": 4.239,
+    "runSamples": 47,
     "amplitude": 0.21,
     "grossTravel": 8.7,
-    "cellsPerSample": 0.04,
-    "alias": 0.106,
+    "cellsPerSample": 0.08,
+    "alias": 0.201,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 1.3296,
-    "lagFrames": 2,
-    "r": 0.485
+    "curvePerFrame": 1.2388,
+    "lagFrames": 0,
+    "r": 0.539
    }
   },
   {
    "shot": "e74dd521-2dfb-53bb-b780-fdf32762c18a",
    "film": "12",
    "label": "BURNING HOURGLASSES",
-   "frames": 199,
+   "frames": 113,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 199,
+   "bodies": 113,
    "g1": {
-    "solidity": 0.796,
-    "holes": 0.63,
-    "contamination": 0.042
+    "solidity": 0.797,
+    "holes": 0.65,
+    "contamination": 0.04
    },
    "g2": {
-    "vol": 0.2534,
-    "cv": 0.0713,
-    "flicker": 0.0351
+    "vol": 0.2545,
+    "cv": 0.0667,
+    "flicker": 0.0408
    },
    "g3": {
-    "plant": 1.7,
-    "ratio": 0.289,
-    "runSamples": 35,
-    "amplitude": 2.95,
+    "plant": 1.85,
+    "ratio": 0.337,
+    "runSamples": 26,
+    "amplitude": 2.74,
     "grossTravel": 8,
-    "cellsPerSample": 0.04,
-    "alias": 0.007,
+    "cellsPerSample": 0.07,
+    "alias": 0.013,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 1.4904,
-    "lagFrames": 0,
-    "r": 0.118
+    "curvePerFrame": 1.6318,
+    "lagFrames": 1,
+    "r": 0.272
    }
   },
   {
    "shot": "5a61d4f8-bb06-56da-a3c0-24806eaf664f",
    "film": "12",
    "label": "WINDS PART",
-   "frames": 197,
+   "frames": 104,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 197,
+   "bodies": 104,
    "g1": {
     "solidity": 0.623,
-    "holes": 0.85,
+    "holes": 0.84,
     "contamination": 0.046
    },
    "g2": {
-    "vol": 0.2759,
+    "vol": 0.2758,
     "cv": 0.0151,
-    "flicker": 0.0105
+    "flicker": 0.0131
    },
    "g3": {
-    "plant": 1.95,
-    "ratio": 2.495,
-    "runSamples": 25,
+    "plant": 1.97,
+    "ratio": 2.502,
+    "runSamples": 14,
     "amplitude": 0.39,
-    "grossTravel": 20.4,
-    "cellsPerSample": 0.1,
-    "alias": 0.133,
+    "grossTravel": 20.3,
+    "cellsPerSample": 0.2,
+    "alias": 0.251,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 1.3533,
-    "lagFrames": 1,
-    "r": 0.362
+    "curvePerFrame": 1.176,
+    "lagFrames": 2,
+    "r": 0.443
    }
   },
   {
@@ -1792,94 +1997,106 @@
    "shot": "f2445fa1-eea3-5562-a19e-bb1b5a8b8b13",
    "film": "13",
    "label": "SMALL TABLES",
-   "frames": 200,
+   "frames": 123,
    "guise": "poet",
    "mode": "walk",
-   "bodies": 200,
+   "bodies": 123,
    "g1": {
-    "solidity": 0.767,
-    "holes": 0.04,
-    "contamination": 0.525
+    "solidity": 0.765,
+    "holes": 0.08,
+    "contamination": 0.524
    },
    "g2": {
-    "vol": 0.2031,
-    "cv": 0.0509,
-    "flicker": 0.0231
+    "vol": 0.2046,
+    "cv": 0.0387,
+    "flicker": 0.0127
    },
    "g3": {
-    "plant": 8.33,
-    "ratio": 0.559,
-    "runSamples": 4,
-    "amplitude": 7.45,
+    "plant": 9.94,
+    "ratio": 0.671,
+    "runSamples": 3,
+    "amplitude": 7.41,
     "grossTravel": 99,
-    "cellsPerSample": 0.5,
-    "alias": 0.033,
+    "cellsPerSample": 0.81,
+    "alias": 0.055,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 28
+   },
    "g4": {
-    "curvePerFrame": 0.2667,
+    "curvePerFrame": 0.1856,
     "lagFrames": 0,
-    "r": 0.995
+    "r": 0.997
    }
   },
   {
    "shot": "470c19e1-5841-5801-9d4a-c7b8ac9a8a0d",
    "film": "13",
    "label": "COUNTED ORBITS",
-   "frames": 185,
+   "frames": 122,
    "guise": "everyman",
    "mode": "walk",
-   "bodies": 185,
+   "bodies": 122,
    "g1": {
-    "solidity": 0.689,
-    "holes": 1.22,
+    "solidity": 0.692,
+    "holes": 1.19,
     "contamination": 0.555
    },
    "g2": {
-    "vol": 0.2287,
-    "cv": 0.1246,
-    "flicker": 0.0219
+    "vol": 0.2283,
+    "cv": 0.1323,
+    "flicker": 0.0305
    },
    "g3": {
-    "plant": 7.82,
-    "ratio": 0.973,
-    "runSamples": 5,
-    "amplitude": 4.02,
-    "grossTravel": 127.7,
-    "cellsPerSample": 0.69,
-    "alias": 0.086,
+    "plant": 8.41,
+    "ratio": 1.071,
+    "runSamples": 3,
+    "amplitude": 3.92,
+    "grossTravel": 127.4,
+    "cellsPerSample": 1.05,
+    "alias": 0.134,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 0.966,
+    "n": 29
+   },
    "g4": {
-    "curvePerFrame": 1.0673,
+    "curvePerFrame": 0.9888,
     "lagFrames": 0,
-    "r": 0.967
+    "r": 0.968
    }
   },
   {
    "shot": "e7bcbe7e-882b-5256-928c-cb56ba241c8c",
    "film": "13",
    "label": "BURNED STORIES",
-   "frames": 200,
+   "frames": 123,
    "guise": "elder",
    "mode": "stand",
-   "bodies": 200,
+   "bodies": 123,
    "g1": {
     "solidity": 0.335,
-    "holes": 4.79,
-    "contamination": 0.769
+    "holes": 4.8,
+    "contamination": 0.77
    },
    "g2": {
     "vol": 0.0829,
-    "cv": 0.0614,
-    "flicker": 0.0063
+    "cv": 0.062,
+    "flicker": 0.0089
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 1.028,
+    "curvePerFrame": 0.9879,
     "lagFrames": 0,
     "r": 0
    }
@@ -1888,44 +2105,48 @@
    "shot": "2a739c97-c1b8-55c3-aef0-cbac8fe3fb18",
    "film": "13",
    "label": "HARVESTED POWER",
-   "frames": 202,
+   "frames": 133,
    "guise": "poet",
    "mode": "walk",
-   "bodies": 202,
+   "bodies": 133,
    "g1": {
-    "solidity": 0.679,
-    "holes": 2.21,
-    "contamination": 0.522
+    "solidity": 0.68,
+    "holes": 2.01,
+    "contamination": 0.521
    },
    "g2": {
-    "vol": 0.1835,
-    "cv": 0.2029,
-    "flicker": 0.0445
+    "vol": 0.1837,
+    "cv": 0.2019,
+    "flicker": 0.0564
    },
    "g3": {
-    "plant": 2.9,
-    "ratio": 0.174,
-    "runSamples": 3,
-    "amplitude": 8.32,
+    "plant": 2.2,
+    "ratio": 0.134,
+    "runSamples": 2,
+    "amplitude": 8.19,
     "grossTravel": 124,
-    "cellsPerSample": 0.62,
-    "alias": 0.037,
+    "cellsPerSample": 0.94,
+    "alias": 0.057,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 0.988,
+    "n": 86
+   },
    "g4": {
-    "curvePerFrame": 0.7799,
+    "curvePerFrame": 0.9676,
     "lagFrames": 0,
-    "r": 0.906
+    "r": 0.935
    }
   },
   {
    "shot": "6d8dad9f-d6aa-5ca6-95a4-680787f44726",
    "film": "13",
    "label": "REFOCUS",
-   "frames": 202,
+   "frames": 133,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 202,
+   "bodies": 133,
    "g1": {
     "solidity": 0.776,
     "holes": 0.48,
@@ -1933,15 +2154,19 @@
    },
    "g2": {
     "vol": 0.2246,
-    "cv": 0.0091,
-    "flicker": 0.0012
+    "cv": 0.0094,
+    "flicker": 0.0018
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 0.1725,
+    "curvePerFrame": 0.1863,
     "lagFrames": 0,
     "r": 0
    }
@@ -1950,26 +2175,30 @@
    "shot": "0a5cf576-cbcf-5afe-ad16-9816d9e7c264",
    "film": "13",
    "label": "WON'T LEAVE",
-   "frames": 199,
+   "frames": 112,
    "guise": "poet",
    "mode": "sit",
-   "bodies": 199,
+   "bodies": 112,
    "g1": {
     "solidity": 0.705,
     "holes": 1,
-    "contamination": 0.596
+    "contamination": 0.595
    },
    "g2": {
     "vol": 0.1877,
-    "cv": 0.0099,
-    "flicker": 0.0004
+    "cv": 0.01,
+    "flicker": 0.0007
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 0.0103,
+    "curvePerFrame": 0.0267,
     "lagFrames": 0,
     "r": 0
    }
@@ -1990,26 +2219,30 @@
    "shot": "ddafcfc2-95a8-50a1-9bf0-1b7f2cf4878b",
    "film": "14",
    "label": "FROM THE GROUND UP",
-   "frames": 193,
+   "frames": 88,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 193,
+   "bodies": 88,
    "g1": {
     "solidity": 0.511,
-    "holes": 0.07,
-    "contamination": 0.363
+    "holes": 0.08,
+    "contamination": 0.364
    },
    "g2": {
-    "vol": 0.2271,
-    "cv": 0.0266,
-    "flicker": 0.0046
+    "vol": 0.2268,
+    "cv": 0.0271,
+    "flicker": 0.0069
    },
    "g3": {
     "plant": null,
     "why": "the body never travelled"
    },
+   "g3b": {
+    "facesTravel": null,
+    "n": 0
+   },
    "g4": {
-    "curvePerFrame": 1.5089,
+    "curvePerFrame": 1.3643,
     "lagFrames": 0,
     "r": 0
    }
@@ -2030,68 +2263,76 @@
    "shot": "51a72536-ea4f-547d-9397-55b0cbd0420f",
    "film": "14",
    "label": "TWO ENTWINED MUSES",
-   "frames": 195,
+   "frames": 95,
    "guise": "poet",
    "mode": "stand",
-   "bodies": 195,
+   "bodies": 95,
    "g1": {
-    "solidity": 0.599,
-    "holes": 0.24,
+    "solidity": 0.597,
+    "holes": 0.18,
     "contamination": 0.045
    },
    "g2": {
-    "vol": 0.224,
-    "cv": 0.0562,
-    "flicker": 0.0185
+    "vol": 0.2237,
+    "cv": 0.0565,
+    "flicker": 0.0294
    },
    "g3": {
-    "plant": 7.44,
-    "ratio": 0.487,
-    "runSamples": 3,
-    "amplitude": 7.64,
-    "grossTravel": 295.4,
-    "cellsPerSample": 1.52,
-    "alias": 0.1,
+    "plant": 7.94,
+    "ratio": 0.555,
+    "runSamples": 2,
+    "amplitude": 7.15,
+    "grossTravel": 295,
+    "cellsPerSample": 3.14,
+    "alias": 0.219,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 0.575,
+    "n": 80
+   },
    "g4": {
-    "curvePerFrame": 0.4444,
+    "curvePerFrame": 0.4486,
     "lagFrames": 0,
-    "r": 0.923
+    "r": 0.858
    }
   },
   {
    "shot": "b41a1b6d-f473-5515-8789-10275cf02f11",
    "film": "14",
    "label": "I CHOOSE THE DOOR",
-   "frames": 201,
+   "frames": 126,
    "guise": "poet",
    "mode": "walk",
-   "bodies": 201,
+   "bodies": 126,
    "g1": {
     "solidity": 0.739,
-    "holes": 0.67,
-    "contamination": 0.142
+    "holes": 0.77,
+    "contamination": 0.14
    },
    "g2": {
-    "vol": 0.1649,
-    "cv": 0.1455,
-    "flicker": 0.031
+    "vol": 0.1655,
+    "cv": 0.1459,
+    "flicker": 0.041
    },
    "g3": {
-    "plant": 6.63,
-    "ratio": 0.488,
-    "runSamples": 15,
-    "amplitude": 6.8,
-    "grossTravel": 66.5,
-    "cellsPerSample": 0.33,
-    "alias": 0.024,
+    "plant": 6.85,
+    "ratio": 0.507,
+    "runSamples": 9,
+    "amplitude": 6.75,
+    "grossTravel": 66.3,
+    "cellsPerSample": 0.53,
+    "alias": 0.039,
     "aliased": false
    },
+   "g3b": {
+    "facesTravel": 1,
+    "n": 95
+   },
    "g4": {
-    "curvePerFrame": 0.8411,
+    "curvePerFrame": 0.702,
     "lagFrames": 0,
-    "r": 0.652
+    "r": 0.892
    }
   }
  ]
