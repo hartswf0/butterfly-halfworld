@@ -1,0 +1,9642 @@
+{
+ "about": "each halfworld shot's depth budget, inherited from the cel cut's measured multiplane stack",
+ "celShots": 164,
+ "halfworldShots": 94,
+ "covered": 91,
+ "shots": [
+  {
+   "id": "77bbd4d1-fd2a-57bf-9643-1929419d75fc",
+   "cover": 0,
+   "planes": null
+  },
+  {
+   "id": "4cfa7752-8f18-518a-a6df-61b3defe5e09",
+   "film": "01",
+   "label": "THE SEARCH",
+   "start": 10.603,
+   "end": 38.169,
+   "cover": 0.305,
+   "from": [
+    {
+     "id": "P01-001",
+     "name": "The reading",
+     "seconds": 7.83
+    },
+    {
+     "id": "P01-002",
+     "name": "Haze at the window",
+     "seconds": 0.58
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 8.41
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 3.75,
+     "Z": 0.79,
+     "parallax": 1.257,
+     "area": 0.286,
+     "present": 0.284,
+     "contents": [
+      "floor",
+      "tv"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 4.72,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.033,
+     "present": 0.305,
+     "contents": [
+      "person",
+      "wall",
+      "floor",
+      "tv",
+      "back always turned"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 13.01,
+     "Z": 3.93,
+     "parallax": 0.255,
+     "area": 0.161,
+     "present": 0.021,
+     "contents": [
+      "cloud",
+      "haze builds",
+      "wall",
+      "building",
+      "rail",
+      "stairway"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 5.66,
+     "Z": 1.2,
+     "parallax": 0.833,
+     "area": 0.677,
+     "present": 0.305,
+     "contents": [
+      "wall",
+      "stairs",
+      "floor",
+      "ceiling",
+      "cloud",
+      "iron escape",
+      "railing",
+      "window",
+      "building"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 6.29,
+     "Z": 1.33,
+     "parallax": 0.75,
+     "area": 0.003,
+     "present": 0.305,
+     "contents": [
+      "wall",
+      "floor",
+      "iron escape",
+      "stairs",
+      "window",
+      "building",
+      "rail"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "a8863403-93c7-5c6b-a2a4-6c6fb3327b8e",
+   "film": "01",
+   "label": "MORE HAZE",
+   "start": 38.169,
+   "end": 65.736,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P01-004",
+     "name": "The fall montage",
+     "seconds": 9.09
+    },
+    {
+     "id": "P01-003",
+     "name": "Off the fire escape",
+     "seconds": 7.01
+    },
+    {
+     "id": "P01-005",
+     "name": "The fall montage",
+     "seconds": 6.66
+    },
+    {
+     "id": "P01-002",
+     "name": "Haze at the window",
+     "seconds": 4.8
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 27.57
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 3.32,
+     "Z": 0.78,
+     "parallax": 1.275,
+     "area": 0.009,
+     "present": 0.496,
+     "contents": [
+      "wall",
+      "ceiling",
+      "water"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.93,
+     "Z": 0.69,
+     "parallax": 1.449,
+     "area": 0.01,
+     "present": 0.826,
+     "contents": [
+      "person",
+      "earth",
+      "wall",
+      "stairway",
+      "sky",
+      "water",
+      "ceiling"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 3.31,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.156,
+     "present": 1,
+     "contents": [
+      "person",
+      "water",
+      "back always turned"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 9.56,
+     "Z": 5.69,
+     "parallax": 0.176,
+     "area": 0.011,
+     "present": 0.504,
+     "contents": [
+      "person",
+      "earth",
+      "sea",
+      "cloud",
+      "haze builds",
+      "wall",
+      "building",
+      "rail",
+      "stairway"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 8.5,
+     "Z": 2.57,
+     "parallax": 0.39,
+     "area": 0.27,
+     "present": 1,
+     "contents": [
+      "person",
+      "water",
+      "building",
+      "wall",
+      "earth",
+      "car",
+      "sea",
+      "stairway",
+      "cloud",
+      "iron escape",
+      "railing",
+      "window"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 42.62,
+     "Z": 11.02,
+     "parallax": 0.091,
+     "area": 0.126,
+     "present": 0.758,
+     "contents": [
+      "building",
+      "wall",
+      "vehicle",
+      "earth",
+      "water",
+      "sea",
+      "boat",
+      "person",
+      "iron escape",
+      "stairs",
+      "window",
+      "rail"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ac2c26ad-1fec-51aa-9a07-f3300fc12312",
+   "film": "01",
+   "label": "THE FALL",
+   "start": 65.736,
+   "end": 93.303,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P01-007",
+     "name": "Crashing the vintage party",
+     "seconds": 9.64
+    },
+    {
+     "id": "P01-006",
+     "name": "The fall montage",
+     "seconds": 8
+    },
+    {
+     "id": "P01-008",
+     "name": "Crashing the vintage party",
+     "seconds": 6.4
+    },
+    {
+     "id": "P01-005",
+     "name": "The fall montage",
+     "seconds": 3.53
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 27.57
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.82,
+     "Z": 0.2,
+     "parallax": 1.431,
+     "area": 0.306,
+     "present": 0.71,
+     "contents": [
+      "building",
+      "tree",
+      "grass",
+      "person",
+      "ceiling",
+      "water"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 3.22,
+     "Z": 0.54,
+     "parallax": 1.835,
+     "area": 0.337,
+     "present": 0.768,
+     "contents": [
+      "floor",
+      "grass",
+      "bed",
+      "person",
+      "sky",
+      "water",
+      "ceiling"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 6.64,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.059,
+     "present": 0.768,
+     "contents": [
+      "person",
+      "vintage party met mid-fall",
+      "grass",
+      "house",
+      "water"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 26.39,
+     "Z": 2.62,
+     "parallax": 0.467,
+     "area": 0.313,
+     "present": 0.64,
+     "contents": [
+      "person",
+      "street lamp",
+      "building",
+      "tree",
+      "grass",
+      "plant",
+      "wall",
+      "poster"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 6.75,
+     "Z": 2.29,
+     "parallax": 0.91,
+     "area": 0.288,
+     "present": 1,
+     "contents": [
+      "wall",
+      "grass",
+      "floor",
+      "bed",
+      "person",
+      "book",
+      "water"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 16.97,
+     "Z": 5.75,
+     "parallax": 0.362,
+     "area": 0.201,
+     "present": 0.872,
+     "contents": [
+      "plant",
+      "wall",
+      "ceiling",
+      "building",
+      "tree",
+      "grass",
+      "house",
+      "window",
+      "bed",
+      "window ",
+      "person"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "8846c650-a93f-5a2b-b0df-e23288ed9e75",
+   "film": "01",
+   "label": "AS DARK AS BLACK",
+   "start": 93.303,
+   "end": 122.99,
+   "cover": 0.97,
+   "from": [
+    {
+     "id": "P01-010",
+     "name": "Crashing the vintage party",
+     "seconds": 10.03
+    },
+    {
+     "id": "P01-011",
+     "name": "Hole in the floor",
+     "seconds": 8.72
+    },
+    {
+     "id": "P01-009",
+     "name": "Crashing the vintage party",
+     "seconds": 6.05
+    },
+    {
+     "id": "P01-012",
+     "name": "fall into 02",
+     "seconds": 4
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 28.8
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 6.08,
+     "Z": 0.5,
+     "parallax": 1.895,
+     "area": 0.345,
+     "present": 0.294,
+     "contents": [
+      "floor",
+      "rock",
+      "box"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 5.62,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.243,
+     "present": 0.542,
+     "contents": [
+      "person"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 9.97,
+     "Z": 1.6,
+     "parallax": 0.631,
+     "area": 0.174,
+     "present": 0.204,
+     "contents": [
+      "person",
+      "tree",
+      "earth",
+      "car"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 9.1,
+     "Z": 1.58,
+     "parallax": 0.685,
+     "area": 0.338,
+     "present": 0.97,
+     "contents": [
+      "person",
+      "wall",
+      "floor",
+      "vintage party met mid-fall",
+      "box",
+      "tree",
+      "earth",
+      "table",
+      "car",
+      "continuous",
+      "drop is vertical",
+      "through his eye",
+      "door",
+      "curtain"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 16.86,
+     "Z": 2.71,
+     "parallax": 0.435,
+     "area": 0.373,
+     "present": 0.835,
+     "contents": [
+      "wall",
+      "plant",
+      "door",
+      "street lamp",
+      "tree",
+      "earth"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "a12b5cb7-63ac-533c-a304-d0c80dc607c2",
+   "film": "02",
+   "label": "TITLE",
+   "start": 122.987,
+   "end": 128.476,
+   "cover": 0.153,
+   "from": [
+    {
+     "id": "P02-001",
+     "name": "Falling with headlights off",
+     "seconds": 0.84
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 0.84
+   },
+   "planes": [
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 36.62,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.143,
+     "present": 0.153,
+     "contents": [
+      "person",
+      "wall"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 36.66,
+     "Z": 1,
+     "parallax": 0.999,
+     "area": 0.857,
+     "present": 0.153,
+     "contents": [
+      "black below the floor",
+      "floor",
+      "wall"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b3557148-a850-53d1-93e4-c15844e5d7d4",
+   "film": "02",
+   "label": "SILENT SCREAM",
+   "start": 128.476,
+   "end": 142.748,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P02-001",
+     "name": "Falling with headlights off",
+     "seconds": 8.52
+    },
+    {
+     "id": "P02-002",
+     "name": "Falling with headlights off",
+     "seconds": 5.75
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 8.52
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.59,
+     "Z": 0.79,
+     "parallax": 1.257,
+     "area": 0.097,
+     "present": 0.403,
+     "contents": [
+      "black below the floor",
+      "wall"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 36.62,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.143,
+     "present": 1,
+     "contents": [
+      "person",
+      "wall",
+      "poet in black space"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 36.66,
+     "Z": 1,
+     "parallax": 0.999,
+     "area": 0.857,
+     "present": 1,
+     "contents": [
+      "floor",
+      "wall",
+      "black below the floor",
+      "cloud",
+      "building",
+      "person",
+      "water"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 17.12,
+     "Z": 5.25,
+     "parallax": 0.19,
+     "area": 0.144,
+     "present": 0.403,
+     "contents": [
+      "wall",
+      "building",
+      "person"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b21502d1-c92d-57fe-8bb1-df33051902a7",
+   "film": "02",
+   "label": "THE MIRROR",
+   "start": 142.748,
+   "end": 155.922,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P02-003",
+     "name": "Eyes dilate",
+     "seconds": 7.24
+    },
+    {
+     "id": "P02-002",
+     "name": "Falling with headlights off",
+     "seconds": 5.57
+    },
+    {
+     "id": "P02-004",
+     "name": "Eyes dilate",
+     "seconds": 0.37
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 13.17
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.59,
+     "Z": 0.79,
+     "parallax": 1.257,
+     "area": 0.097,
+     "present": 0.423,
+     "contents": [
+      "black below the floor",
+      "wall"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 3.26,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.218,
+     "present": 0.423,
+     "contents": [
+      "person",
+      "poet in black space"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 0.18,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 1,
+     "present": 1,
+     "contents": [
+      "wall",
+      "his eye",
+      "cloud",
+      "building",
+      "floor",
+      "person",
+      "water"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 17.12,
+     "Z": 5.25,
+     "parallax": 0.19,
+     "area": 0.144,
+     "present": 0.423,
+     "contents": [
+      "wall",
+      "building",
+      "person"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "fb98b263-5f83-5968-9e76-a23b627ce619",
+   "film": "02",
+   "label": "WE GO THROUGH",
+   "start": 155.922,
+   "end": 170.194,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P02-005",
+     "name": "Car pulls up",
+     "seconds": 6.8
+    },
+    {
+     "id": "P02-004",
+     "name": "Eyes dilate",
+     "seconds": 6
+    },
+    {
+     "id": "P02-006",
+     "name": "Car pulls up",
+     "seconds": 1.47
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 14.27
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.18,
+     "Z": 0.51,
+     "parallax": 1.96,
+     "area": 0.455,
+     "present": 0.579,
+     "contents": [
+      "wall",
+      "person",
+      "vehicle",
+      "window",
+      "window ",
+      "car",
+      "ceiling"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 1.55,
+     "Z": 0.67,
+     "parallax": 1.495,
+     "area": 0.174,
+     "present": 0.476,
+     "contents": [
+      "street lamp",
+      "wall",
+      "floor",
+      "window "
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 2.31,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.034,
+     "present": 0.579,
+     "contents": [
+      "street lamp",
+      "window ",
+      "person",
+      "wall"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 2.39,
+     "Z": 1.3,
+     "parallax": 0.968,
+     "area": 0.429,
+     "present": 1,
+     "contents": [
+      "wall",
+      "vehicle",
+      "window",
+      "window ",
+      "car",
+      "his eye",
+      "ceiling"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 3.37,
+     "Z": 1.46,
+     "parallax": 0.687,
+     "area": 0.127,
+     "present": 0.579,
+     "contents": [
+      "wall",
+      "window "
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ec8cbff4-921b-5c8c-8bd0-174be20b7ec5",
+   "film": "02",
+   "label": "THE GHOST WAS SEVEN",
+   "start": 170.194,
+   "end": 185.563,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P02-007",
+     "name": "The ghost child",
+     "seconds": 10.03
+    },
+    {
+     "id": "P02-006",
+     "name": "Car pulls up",
+     "seconds": 5.34
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 15.37
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.37,
+     "Z": 0.73,
+     "parallax": 1.363,
+     "area": 0.177,
+     "present": 0.348,
+     "contents": [
+      "wall",
+      "ceiling"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 1.63,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.206,
+     "present": 1,
+     "contents": [
+      "person",
+      "wall",
+      "ghost kid appears",
+      "hugs young poet"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 1.87,
+     "Z": 1.15,
+     "parallax": 0.875,
+     "area": 0.239,
+     "present": 0.652,
+     "contents": [
+      "hugs poet",
+      "hugs young poet",
+      "person"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 3.03,
+     "Z": 1.86,
+     "parallax": 0.54,
+     "area": 0.554,
+     "present": 1,
+     "contents": [
+      "wall",
+      "person",
+      "box",
+      "ceiling"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 8.73,
+     "Z": 4.67,
+     "parallax": 0.215,
+     "area": 0.188,
+     "present": 0.348,
+     "contents": [
+      "wall"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "71e66e7c-ea68-516b-a4ea-076a07c02815",
+   "film": "02",
+   "label": "BLINDS UP",
+   "start": 185.563,
+   "end": 199.835,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P02-008",
+     "name": "Parents arguing in the car",
+     "seconds": 7.38
+    },
+    {
+     "id": "P02-009",
+     "name": "Parents arguing in the car",
+     "seconds": 4.69
+    },
+    {
+     "id": "P02-007",
+     "name": "The ghost child",
+     "seconds": 2.2
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 14.27
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 2.24,
+     "Z": 0.52,
+     "parallax": 1.923,
+     "area": 0.081,
+     "present": 0.846,
+     "contents": [
+      "sofa",
+      "wall"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 4.82,
+     "Z": 0.5,
+     "parallax": 1.053,
+     "area": 0.067,
+     "present": 0.329,
+     "contents": [
+      "wall",
+      "floor"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 4.3,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.169,
+     "present": 0.671,
+     "contents": [
+      "person",
+      "sofa",
+      "ghost kid appears",
+      "hugs young poet",
+      "wall"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 10.34,
+     "Z": 2.4,
+     "parallax": 0.416,
+     "area": 0.147,
+     "present": 0.671,
+     "contents": [
+      "curtains blinds",
+      "curtain",
+      "hugs poet",
+      "hugs young poet",
+      "person"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 6.6,
+     "Z": 1.53,
+     "parallax": 0.651,
+     "area": 0.092,
+     "present": 1,
+     "contents": [
+      "wall",
+      "person",
+      "sofa",
+      "window",
+      "window ",
+      "box"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 11.22,
+     "Z": 2.61,
+     "parallax": 0.383,
+     "area": 0.511,
+     "present": 0.517,
+     "contents": [
+      "window",
+      "wall",
+      "window ",
+      "table",
+      "plant",
+      "painting"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "9c0f60aa-aef7-5a6e-aa51-6628be73bd42",
+   "film": "02",
+   "label": "THROUGH THE WINDOW",
+   "start": 199.835,
+   "end": 214.107,
+   "cover": 0.938,
+   "from": [
+    {
+     "id": "P02-010",
+     "name": "Tambourine through the window",
+     "seconds": 6.69
+    },
+    {
+     "id": "P02-011",
+     "name": "fly into 03",
+     "seconds": 4
+    },
+    {
+     "id": "P02-009",
+     "name": "Parents arguing in the car",
+     "seconds": 2.69
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 9.38
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 4.86,
+     "Z": 0.2,
+     "parallax": 1.045,
+     "area": 0.608,
+     "present": 0.188,
+     "contents": [
+      "wall"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.86,
+     "Z": 0.5,
+     "parallax": 1.338,
+     "area": 0.012,
+     "present": 0.938,
+     "contents": [
+      "wall",
+      "person",
+      "plant",
+      "tent",
+      "floor"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 3.83,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.218,
+     "present": 0.749,
+     "contents": [
+      "person"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 5.66,
+     "Z": 1.48,
+     "parallax": 0.677,
+     "area": 0.171,
+     "present": 0.469,
+     "contents": [
+      "person"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 4.48,
+     "Z": 1.17,
+     "parallax": 0.855,
+     "area": 0.322,
+     "present": 0.938,
+     "contents": [
+      "person",
+      "wall",
+      "tree",
+      "road",
+      "plant",
+      "runway",
+      "window",
+      "window "
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 8.52,
+     "Z": 2.22,
+     "parallax": 0.45,
+     "area": 0.146,
+     "present": 0.749,
+     "contents": [
+      "wall",
+      "person",
+      "light",
+      "road",
+      "car",
+      "rail",
+      "tent"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "a9f6c83f-faf6-5f58-a914-fed2989acef1",
+   "cover": 0,
+   "planes": null
+  },
+  {
+   "id": "8ec55f7e-38cf-5856-b947-a3a94846fc94",
+   "film": "03",
+   "label": "ODE TO FOREVER",
+   "start": 218.418,
+   "end": 229.622,
+   "cover": 0.903,
+   "from": [
+    {
+     "id": "P03-001",
+     "name": "Tambourine through the chapel window",
+     "seconds": 7.59
+    },
+    {
+     "id": "P03-002",
+     "name": "The empty temple",
+     "seconds": 2.52
+    }
+   ],
+   "camera": {
+    "move": "truck",
+    "seconds": 7.59
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 3.27,
+     "Z": 0.76,
+     "parallax": 1.321,
+     "area": 0.041,
+     "present": 0.903,
+     "contents": [
+      "tree",
+      "wall",
+      "chair"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.49,
+     "Z": 0.58,
+     "parallax": 1.736,
+     "area": 0.11,
+     "present": 0.903,
+     "contents": [
+      "floor",
+      "building",
+      "tree",
+      "earth",
+      "plant",
+      "stairway",
+      "wall",
+      "column",
+      "bannister"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 4.32,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.2,
+     "present": 0.903,
+     "contents": [
+      "building",
+      "chapel seaward lancet",
+      "chapel's seaward lancet",
+      "door",
+      "stairs",
+      "stairway",
+      "pews veiled in cobwebs",
+      "rail",
+      "bench",
+      "bannister"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 5.06,
+     "Z": 1.17,
+     "parallax": 0.853,
+     "area": 0.157,
+     "present": 0.903,
+     "contents": [
+      "street",
+      "building",
+      "tree",
+      "earth",
+      "plant",
+      "wall",
+      "bench",
+      "bannister"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 10.53,
+     "Z": 2.44,
+     "parallax": 0.41,
+     "area": 0.113,
+     "present": 0.903,
+     "contents": [
+      "street",
+      "building",
+      "tree",
+      "door",
+      "window",
+      "wall",
+      "window ",
+      "column",
+      "bench"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "840cf3da-a3da-562c-9d53-ddb52b22e19f",
+   "film": "03",
+   "label": "STILL WHOLE",
+   "start": 229.622,
+   "end": 239.965,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P03-003",
+     "name": "The empty temple",
+     "seconds": 6.72
+    },
+    {
+     "id": "P03-002",
+     "name": "The empty temple",
+     "seconds": 3.63
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 10.34
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 3.94,
+     "Z": 0.78,
+     "parallax": 1.288,
+     "area": 0.684,
+     "present": 1,
+     "contents": [
+      "wall",
+      "pews veiled in cobwebs",
+      "floor",
+      "seat",
+      "chair"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 3.89,
+     "Z": 0.77,
+     "parallax": 1.305,
+     "area": 0.144,
+     "present": 1,
+     "contents": [
+      "wall",
+      "floor",
+      "seat",
+      "column",
+      "bannister"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 5.07,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.005,
+     "present": 1,
+     "contents": [
+      "person",
+      "wall",
+      "pews veiled in cobwebs",
+      "rail",
+      "bench",
+      "bannister"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 5.85,
+     "Z": 1.15,
+     "parallax": 0.867,
+     "area": 0.074,
+     "present": 1,
+     "contents": [
+      "wall",
+      "seat",
+      "bench",
+      "bannister"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 7.26,
+     "Z": 1.43,
+     "parallax": 0.698,
+     "area": 0.092,
+     "present": 1,
+     "contents": [
+      "door",
+      "wall",
+      "window",
+      "window ",
+      "column",
+      "bench"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "5a69b08c-71bb-5651-bd02-7bd3505eee0d",
+   "film": "03",
+   "label": "COBWEBS",
+   "start": 239.965,
+   "end": 251.17,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P03-004",
+     "name": "Gifts at the side doors",
+     "seconds": 6.94
+    },
+    {
+     "id": "P03-005",
+     "name": "The storm",
+     "seconds": 3.19
+    },
+    {
+     "id": "P03-003",
+     "name": "The empty temple",
+     "seconds": 1.07
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 8.01
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.87,
+     "Z": 0.2,
+     "parallax": 1.367,
+     "area": 0.355,
+     "present": 0.715,
+     "contents": [
+      "tree",
+      "plant",
+      "house",
+      "pews veiled in cobwebs",
+      "wall",
+      "floor",
+      "seat"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.76,
+     "Z": 0.5,
+     "parallax": 1.517,
+     "area": 0.076,
+     "present": 0.381,
+     "contents": [
+      "road",
+      "sand",
+      "floor",
+      "wall",
+      "seat"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 5.07,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.005,
+     "present": 0.096,
+     "contents": [
+      "person",
+      "wall"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 4.43,
+     "Z": 1.2,
+     "parallax": 0.803,
+     "area": 0.004,
+     "present": 0.285,
+     "contents": [
+      "street",
+      "street lamp",
+      "tree",
+      "earth",
+      "mountain",
+      "palm"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 2.56,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.254,
+     "present": 1,
+     "contents": [
+      "plant",
+      "house",
+      "from the beach",
+      "street",
+      "vehicle",
+      "road",
+      "earth",
+      "mountain",
+      "wall",
+      "seat"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 3.97,
+     "Z": 6,
+     "parallax": 0.645,
+     "area": 0.391,
+     "present": 1,
+     "contents": [
+      "side doors",
+      "window",
+      "house",
+      "street",
+      "street lamp",
+      "tree",
+      "road",
+      "earth",
+      "mountain",
+      "wall",
+      "door"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1605783b-1723-50c4-b6a0-a3805ebd8dcc",
+   "film": "03",
+   "label": "UNTIL NOTHING REMAINS",
+   "start": 251.17,
+   "end": 264.098,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P03-006",
+     "name": "Remnants on the shore",
+     "seconds": 8.91
+    },
+    {
+     "id": "P03-005",
+     "name": "The storm",
+     "seconds": 4.02
+    }
+   ],
+   "camera": {
+    "move": "truck",
+    "seconds": 12.93
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 0.85,
+     "Z": 0.6,
+     "parallax": 1.677,
+     "area": 0.053,
+     "present": 1,
+     "contents": [
+      "sand",
+      "sea",
+      "rock",
+      "road"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 1.42,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.241,
+     "present": 0.689,
+     "contents": [
+      "footprints in mud",
+      "street",
+      "water",
+      "sea",
+      "sand"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 4.43,
+     "Z": 1.2,
+     "parallax": 0.803,
+     "area": 0.004,
+     "present": 0.311,
+     "contents": [
+      "street",
+      "street lamp",
+      "tree",
+      "earth",
+      "mountain",
+      "palm"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 1.85,
+     "Z": 1.3,
+     "parallax": 0.772,
+     "area": 0.105,
+     "present": 1,
+     "contents": [
+      "sea",
+      "rock",
+      "sand",
+      "from the beach",
+      "street",
+      "vehicle",
+      "road",
+      "earth",
+      "mountain"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 5.63,
+     "Z": 3.96,
+     "parallax": 0.253,
+     "area": 0.118,
+     "present": 1,
+     "contents": [
+      "building",
+      "window",
+      "house",
+      "sea",
+      "rock",
+      "sand",
+      "street",
+      "street lamp",
+      "tree",
+      "road",
+      "earth",
+      "mountain"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "51b6c0d6-f178-5889-bee1-258c53ec7821",
+   "film": "03",
+   "label": "TWO SETS OF FOOTSTEPS",
+   "start": 264.098,
+   "end": 275.303,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P03-007",
+     "name": "Remnants on the shore",
+     "seconds": 7.55
+    },
+    {
+     "id": "P03-006",
+     "name": "Remnants on the shore",
+     "seconds": 3.65
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 7.55
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.64,
+     "Z": 0.64,
+     "parallax": 1.567,
+     "area": 0.414,
+     "present": 1,
+     "contents": [
+      "rock",
+      "sand",
+      "vehicle",
+      "sea"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 4.14,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.336,
+     "present": 1,
+     "contents": [
+      "water",
+      "sea",
+      "sand",
+      "footprints in mud",
+      "street"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 4.34,
+     "Z": 1.05,
+     "parallax": 0.954,
+     "area": 0.15,
+     "present": 1,
+     "contents": [
+      "sea",
+      "rock",
+      "sand",
+      "vehicle"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 5.98,
+     "Z": 1.44,
+     "parallax": 0.692,
+     "area": 0.1,
+     "present": 1,
+     "contents": [
+      "sea",
+      "rock",
+      "sand",
+      "##ed",
+      "street",
+      "building",
+      "window",
+      "house"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "a70142af-3c00-5da4-9725-9aec4753b406",
+   "film": "03",
+   "label": "SHATTERED",
+   "start": 275.303,
+   "end": 286.508,
+   "cover": 0.957,
+   "from": [
+    {
+     "id": "P03-008",
+     "name": "Tambourine shatters",
+     "seconds": 4.5
+    },
+    {
+     "id": "P03-009",
+     "name": "cut into 04",
+     "seconds": 4
+    },
+    {
+     "id": "P03-007",
+     "name": "Remnants on the shore",
+     "seconds": 2.23
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 10.73
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.64,
+     "Z": 0.5,
+     "parallax": 1.567,
+     "area": 0.248,
+     "present": 0.957,
+     "contents": [
+      "chapel remnant floor",
+      "floor",
+      "shatters",
+      "wall",
+      "box",
+      "sconce",
+      "water",
+      "earth",
+      "sea",
+      "truck",
+      "vehicle",
+      "rock",
+      "sand"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 4.14,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.336,
+     "present": 0.199,
+     "contents": [
+      "water",
+      "sea",
+      "sand"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 4.96,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.15,
+     "present": 0.957,
+     "contents": [
+      "vehicle",
+      "sea",
+      "window",
+      "wall",
+      "floor",
+      "window ",
+      "box",
+      "building",
+      "earth",
+      "car",
+      "truck",
+      "rock",
+      "sand"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 6.05,
+     "Z": 6,
+     "parallax": 0.692,
+     "area": 0.232,
+     "present": 0.957,
+     "contents": [
+      "sea",
+      "window",
+      "wall",
+      "floor",
+      "window ",
+      "building",
+      "truck",
+      "land",
+      "##ed",
+      "street",
+      "rock",
+      "sand"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "e660c3d6-a341-51e3-82ec-809c80f627f6",
+   "film": "04",
+   "label": "TITLE",
+   "start": 286.513,
+   "end": 294.47,
+   "cover": 0.384,
+   "from": [
+    {
+     "id": "P04-001",
+     "name": "Shore of broken pieces",
+     "seconds": 3.06
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 3.06
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 2.33,
+     "Z": 0.81,
+     "parallax": 1.23,
+     "area": 0.212,
+     "present": 0.384,
+     "contents": [
+      "wall"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.37,
+     "Z": 0.83,
+     "parallax": null,
+     "area": 0,
+     "present": 0.384,
+     "contents": [
+      "wall"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 2.86,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.14,
+     "present": 0.384,
+     "contents": [
+      "hands in pockets",
+      "person",
+      "wall"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 3.46,
+     "Z": 1.21,
+     "parallax": 0.828,
+     "area": 0.202,
+     "present": 0.384,
+     "contents": [
+      "shore below the rail",
+      "wall",
+      "floor",
+      "person",
+      "flower"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 5.14,
+     "Z": 1.8,
+     "parallax": 0.557,
+     "area": 0.445,
+     "present": 0.384,
+     "contents": [
+      "wall"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1e0a459e-6ecd-5996-abf3-7062d492c617",
+   "film": "04",
+   "label": "WASHED ASHORE",
+   "start": 294.47,
+   "end": 315.158,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P04-002",
+     "name": "Shore of broken pieces",
+     "seconds": 6.54
+    },
+    {
+     "id": "P04-003",
+     "name": "The silence",
+     "seconds": 6.52
+    },
+    {
+     "id": "P04-001",
+     "name": "Shore of broken pieces",
+     "seconds": 5.03
+    },
+    {
+     "id": "P04-004",
+     "name": "The heart on the sand",
+     "seconds": 2.6
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 11.55
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 4.39,
+     "Z": 0.38,
+     "parallax": 2.601,
+     "area": 0.745,
+     "present": 0.558,
+     "contents": [
+      "shore looking out",
+      "mountain",
+      "wall"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 7.32,
+     "Z": 0.83,
+     "parallax": 1.561,
+     "area": 0.007,
+     "present": 1,
+     "contents": [
+      "person",
+      "sea",
+      "mountain",
+      "wall"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 11.43,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.204,
+     "present": 0.875,
+     "contents": [
+      "person",
+      "wall",
+      "water",
+      "waves calm",
+      "sea",
+      "hands in pockets"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 10.16,
+     "Z": 1.21,
+     "parallax": 0.828,
+     "area": 0.202,
+     "present": 1,
+     "contents": [
+      "wall",
+      "floor",
+      "person",
+      "sea",
+      "car",
+      "light",
+      "mountain",
+      "shore below the rail",
+      "flower",
+      "sand"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 16.94,
+     "Z": 1.8,
+     "parallax": 0.557,
+     "area": 0.445,
+     "present": 0.684,
+     "contents": [
+      "sea",
+      "wall",
+      "water",
+      "rock"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "3a75924a-6b35-57db-921b-40c6772ba6bf",
+   "film": "04",
+   "label": "FOLDED WHISPERS",
+   "start": 315.158,
+   "end": 337.437,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P04-006",
+     "name": "Trail up the incline",
+     "seconds": 11.14
+    },
+    {
+     "id": "P04-005",
+     "name": "Trail up the incline",
+     "seconds": 9.28
+    },
+    {
+     "id": "P04-007",
+     "name": "Trail up the incline",
+     "seconds": 1.36
+    },
+    {
+     "id": "P04-004",
+     "name": "The heart on the sand",
+     "seconds": 0.5
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 12.5
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.63,
+     "Z": 0.53,
+     "parallax": 1.903,
+     "area": 0.178,
+     "present": 0.583,
+     "contents": [
+      "sea",
+      "floor",
+      "incline to the field",
+      "street",
+      "trail up the steps",
+      "field",
+      "building",
+      "sidewalk",
+      "water",
+      "bridge",
+      "pole",
+      "person"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 5,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.008,
+     "present": 0.977,
+     "contents": [
+      "water",
+      "sea",
+      "field",
+      "person",
+      "tree",
+      "earth",
+      "sidewalk"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 20.38,
+     "Z": 3.46,
+     "parallax": 0.293,
+     "area": 0.022,
+     "present": 0.061,
+     "contents": [
+      "person",
+      "street lamp",
+      "building",
+      "road",
+      "sidewalk",
+      "trash can"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 5.63,
+     "Z": 1.13,
+     "parallax": 0.888,
+     "area": 0.036,
+     "present": 1,
+     "contents": [
+      "field",
+      "dirt track",
+      "incline to the field",
+      "street",
+      "vehicle",
+      "water",
+      "railing",
+      "tree",
+      "building",
+      "person",
+      "sea",
+      "sand"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 8.81,
+     "Z": 1.76,
+     "parallax": 0.567,
+     "area": 0.064,
+     "present": 0.583,
+     "contents": [
+      "street",
+      "tree",
+      "mountain",
+      "field",
+      "building",
+      "window",
+      "awning",
+      "water",
+      "sea",
+      "rock"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "54be94e2-1804-59a6-8fe9-bc0caedbe227",
+   "film": "04",
+   "label": "MUSTARD SEEDS",
+   "start": 337.437,
+   "end": 358.126,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P04-007",
+     "name": "Trail up the incline",
+     "seconds": 8.19
+    },
+    {
+     "id": "P04-008",
+     "name": "Night garden field",
+     "seconds": 7.84
+    },
+    {
+     "id": "P04-009",
+     "name": "Night garden field",
+     "seconds": 4.65
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 20.69
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 12.66,
+     "Z": 0.2,
+     "parallax": 1.97,
+     "area": 0.453,
+     "present": 0.225,
+     "contents": [
+      "hands still in pockets",
+      "person"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.69,
+     "Z": 0.46,
+     "parallax": 2.186,
+     "area": 0.006,
+     "present": 0.621,
+     "contents": [
+      "building",
+      "sidewalk",
+      "water",
+      "bridge",
+      "pole",
+      "person",
+      "plant",
+      "field"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 5.89,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.034,
+     "present": 0.775,
+     "contents": [
+      "person",
+      "sidewalk",
+      "field"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 20.38,
+     "Z": 3.46,
+     "parallax": 0.293,
+     "area": 0.022,
+     "present": 0.396,
+     "contents": [
+      "person",
+      "street lamp",
+      "building",
+      "road",
+      "sidewalk",
+      "trash can"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 21,
+     "Z": 2.5,
+     "parallax": 0.65,
+     "area": 0.418,
+     "present": 1,
+     "contents": [
+      "street",
+      "field",
+      "building",
+      "incline to the field",
+      "person",
+      "vehicle",
+      "water",
+      "night garden field",
+      "wall",
+      "shelf"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 42.69,
+     "Z": 6,
+     "parallax": 0.423,
+     "area": 0.109,
+     "present": 1,
+     "contents": [
+      "building",
+      "window",
+      "awning",
+      "weeds recoil into shadow",
+      "wall",
+      "floor",
+      "ceiling",
+      "shelf",
+      "tree",
+      "field"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b038974c-0f8b-537e-918c-2f9044ac5fd8",
+   "film": "04",
+   "label": "THEY TURN TO FACE ME",
+   "start": 358.126,
+   "end": 380.405,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P04-010",
+     "name": "Searching for hands",
+     "seconds": 9.64
+    },
+    {
+     "id": "P04-009",
+     "name": "Night garden field",
+     "seconds": 6.37
+    },
+    {
+     "id": "P04-011",
+     "name": "Searching for hands",
+     "seconds": 6.27
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 9.64
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 12.66,
+     "Z": 0.2,
+     "parallax": 1.97,
+     "area": 0.453,
+     "present": 0.567,
+     "contents": [
+      "person",
+      "hands still in pockets"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 14.52,
+     "Z": 0.5,
+     "parallax": 1.719,
+     "area": 0.255,
+     "present": 0.286,
+     "contents": [
+      "person",
+      "plant",
+      "field"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 54.94,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.089,
+     "present": 0.714,
+     "contents": [
+      "person",
+      "sand"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 24.95,
+     "Z": 1.01,
+     "parallax": 1,
+     "area": 0.164,
+     "present": 1,
+     "contents": [
+      "sea",
+      "water",
+      "mountain",
+      "rock",
+      "sand",
+      "field",
+      "person"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 42.69,
+     "Z": 6,
+     "parallax": 0.585,
+     "area": 0.109,
+     "present": 0.567,
+     "contents": [
+      "tree",
+      "field",
+      "wall",
+      "ceiling",
+      "person"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "3bf9a0d6-58d4-5ffa-b959-9fbf710b7f7a",
+   "film": "04",
+   "label": "DEEPEST DARKNESS",
+   "start": 380.405,
+   "end": 399.502,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P04-012",
+     "name": "Searching for hands",
+     "seconds": 9.43
+    },
+    {
+     "id": "P04-013",
+     "name": "Standing in the field",
+     "seconds": 6.08
+    },
+    {
+     "id": "P04-011",
+     "name": "Searching for hands",
+     "seconds": 3.59
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 15.51
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 0.48,
+     "Z": 0.2,
+     "parallax": 1.067,
+     "area": 0.147,
+     "present": 0.682,
+     "contents": [
+      "wall",
+      "person"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.32,
+     "Z": 0.78,
+     "parallax": 1.285,
+     "area": 0.023,
+     "present": 0.318,
+     "contents": [
+      "field"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 2.99,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.124,
+     "present": 0.506,
+     "contents": [
+      "person",
+      "hands restored"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 0.51,
+     "Z": 1.34,
+     "parallax": 1,
+     "area": 0.126,
+     "present": 1,
+     "contents": [
+      "person",
+      "sky",
+      "ceiling",
+      "field",
+      "sea"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 7.26,
+     "Z": 2.43,
+     "parallax": 0.411,
+     "area": 0.009,
+     "present": 0.506,
+     "contents": [
+      "person",
+      "field",
+      "wall",
+      "ceiling"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "20f3186c-d143-54ad-8a17-ebe570251b3d",
+   "film": "04",
+   "label": "I PUT THEM BACK ON",
+   "start": 399.502,
+   "end": 421.782,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P04-015",
+     "name": "Standing in the field",
+     "seconds": 8.53
+    },
+    {
+     "id": "P04-014",
+     "name": "Standing in the field",
+     "seconds": 8.16
+    },
+    {
+     "id": "P04-013",
+     "name": "Standing in the field",
+     "seconds": 5.59
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 13.75
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 9.25,
+     "Z": 0.5,
+     "parallax": 2.736,
+     "area": 0.348,
+     "present": 0.634,
+     "contents": [
+      "hands restored",
+      "person",
+      "tree",
+      "field"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 3.74,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.394,
+     "present": 0.617,
+     "contents": [
+      "water",
+      "rock",
+      "hands restored",
+      "person"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 10.48,
+     "Z": 2.5,
+     "parallax": 0.744,
+     "area": 0.575,
+     "present": 1,
+     "contents": [
+      "street lamp",
+      "tree",
+      "earth",
+      "cloud",
+      "sky",
+      "water",
+      "rock",
+      "person",
+      "field"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 11.66,
+     "Z": 3.12,
+     "parallax": 0.367,
+     "area": 0.03,
+     "present": 1,
+     "contents": [
+      "tree",
+      "water",
+      "rock",
+      "person",
+      "field"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "9c7f9f74-7aa3-5230-8b65-84044ed01a8c",
+   "film": "05",
+   "label": "TITLE",
+   "start": 422.184,
+   "end": 428.252,
+   "cover": 0.689,
+   "from": [
+    {
+     "id": "P04-016",
+     "name": "walk into 05",
+     "seconds": 4
+    },
+    {
+     "id": "P04-015",
+     "name": "Standing in the field",
+     "seconds": 0.18
+    }
+   ],
+   "camera": {
+    "move": "truck",
+    "seconds": 4
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 9.25,
+     "Z": 0.5,
+     "parallax": 2.736,
+     "area": 0.348,
+     "present": 0.029,
+     "contents": [
+      "hands restored",
+      "person",
+      "tree"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 9.12,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.018,
+     "present": 0.659,
+     "contents": [
+      "person"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 9.06,
+     "Z": 0.99,
+     "parallax": 1.006,
+     "area": 0.372,
+     "present": 0.689,
+     "contents": [
+      "sky",
+      "wall",
+      "ceiling",
+      "person",
+      "pole",
+      "street lamp",
+      "tree",
+      "earth"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 13.8,
+     "Z": 1.51,
+     "parallax": 0.661,
+     "area": 0.058,
+     "present": 0.689,
+     "contents": [
+      "ceiling",
+      "person",
+      "tree"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "02dfa46b-198a-5bc9-810a-10c5dae085a1",
+   "film": "05",
+   "label": "NAME MY OWN STARS",
+   "start": 428.252,
+   "end": 444.031,
+   "cover": 0.635,
+   "from": [
+    {
+     "id": "P05-002",
+     "name": "Naming stars",
+     "seconds": 5.36
+    },
+    {
+     "id": "P05-001",
+     "name": "The field goes still",
+     "seconds": 4.66
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 5.36
+   },
+   "planes": [
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 4.23,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.104,
+     "present": 0.635,
+     "contents": [
+      "person",
+      "accept the poet",
+      "hand him stars",
+      "ceiling",
+      "field"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 4.18,
+     "Z": 0.99,
+     "parallax": 1.014,
+     "area": 0.896,
+     "present": 0.635,
+     "contents": [
+      "ceiling",
+      "building",
+      "earth",
+      "field"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "9bfba878-7cbe-582a-a5c4-1b97c711b0bc",
+   "film": "05",
+   "label": "SOUTHERN PINE",
+   "start": 444.031,
+   "end": 462.237,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P05-003",
+     "name": "Southern-pine basement (memory)",
+     "seconds": 9.34
+    },
+    {
+     "id": "P05-004",
+     "name": "Southern-pine basement (memory)",
+     "seconds": 5
+    },
+    {
+     "id": "P05-002",
+     "name": "Naming stars",
+     "seconds": 3.87
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 9.34
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.92,
+     "Z": 0.2,
+     "parallax": 1.192,
+     "area": 0.484,
+     "present": 0.274,
+     "contents": [
+      "person",
+      "wall"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 6.26,
+     "Z": 0.5,
+     "parallax": 1.072,
+     "area": 0.223,
+     "present": 0.787,
+     "contents": [
+      "wall",
+      "floor",
+      "person",
+      "table"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 4.23,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.104,
+     "present": 0.213,
+     "contents": [
+      "accept the poet",
+      "hand him stars",
+      "person",
+      "ceiling"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 6.71,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.777,
+     "present": 1,
+     "contents": [
+      "wall",
+      "floor",
+      "person",
+      "table",
+      "ceiling"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 3.37,
+     "Z": 6,
+     "parallax": 0.679,
+     "area": 0.102,
+     "present": 0.274,
+     "contents": [
+      "wall",
+      "floor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d10b2f8d-d078-598e-876c-a9a8a4cc9f47",
+   "film": "05",
+   "label": "A NEW UNIVERSE",
+   "start": 462.237,
+   "end": 478.016,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P05-005",
+     "name": "Universes and blessings",
+     "seconds": 9.2
+    },
+    {
+     "id": "P05-006",
+     "name": "Universes and blessings",
+     "seconds": 5
+    },
+    {
+     "id": "P05-004",
+     "name": "Southern-pine basement (memory)",
+     "seconds": 1.57
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 15.78
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.79,
+     "Z": 0.23,
+     "parallax": 4.415,
+     "area": 0.403,
+     "present": 0.417,
+     "contents": [
+      "person",
+      "wall"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 6.2,
+     "Z": 0.78,
+     "parallax": 1.274,
+     "area": 0.005,
+     "present": 0.417,
+     "contents": [
+      "person",
+      "wall",
+      "floor",
+      "table"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 0.91,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.228,
+     "present": 0.9,
+     "contents": [
+      "person"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 2.89,
+     "Z": 3.18,
+     "parallax": 0.298,
+     "area": 0.352,
+     "present": 0.583,
+     "contents": [
+      "person",
+      "right to grant blessings",
+      "street lamp",
+      "tree",
+      "ball"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 9.53,
+     "Z": 10.47,
+     "parallax": 0.095,
+     "area": 0.257,
+     "present": 1,
+     "contents": [
+      "person",
+      "ball",
+      "wall",
+      "floor",
+      "table"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 14.34,
+     "Z": 15.76,
+     "parallax": 0.063,
+     "area": 0.163,
+     "present": 1,
+     "contents": [
+      "tree",
+      "ball",
+      "wall",
+      "person",
+      "mountain",
+      "floor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "a249fd9e-03ff-548a-bf7c-63de8c3094ae",
+   "film": "05",
+   "label": "BEWARE OF ME",
+   "start": 478.016,
+   "end": 495.008,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P05-007",
+     "name": "Universes and blessings",
+     "seconds": 7.99
+    },
+    {
+     "id": "P05-006",
+     "name": "Universes and blessings",
+     "seconds": 5.44
+    },
+    {
+     "id": "P05-008",
+     "name": "Blood through the hands",
+     "seconds": 3.57
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 16.99
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.79,
+     "Z": 0.23,
+     "parallax": 4.415,
+     "area": 0.403,
+     "present": 0.32,
+     "contents": [
+      "person"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 3.14,
+     "Z": 0.68,
+     "parallax": 1.478,
+     "area": 0.153,
+     "present": 0.79,
+     "contents": [
+      "street",
+      "earth",
+      "bicycle",
+      "person"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 4.64,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.065,
+     "present": 1,
+     "contents": [
+      "person",
+      "vehicle",
+      "wall",
+      "earth",
+      "bicycle",
+      "floor"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 7.73,
+     "Z": 1.67,
+     "parallax": 0.593,
+     "area": 0.014,
+     "present": 0.47,
+     "contents": [
+      "person",
+      "vehicle",
+      "wall",
+      "earth",
+      "bicycle"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 4.98,
+     "Z": 1.07,
+     "parallax": 0.933,
+     "area": 0.131,
+     "present": 1,
+     "contents": [
+      "person",
+      "vehicle",
+      "earth",
+      "bicycle",
+      "floor"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 9.14,
+     "Z": 4.01,
+     "parallax": 0.249,
+     "area": 0.321,
+     "present": 1,
+     "contents": [
+      "wall",
+      "person",
+      "vehicle",
+      "earth",
+      "bicycle",
+      "mountain",
+      "floor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "60d854f7-ec6b-5c45-9995-c8396298835b",
+   "film": "05",
+   "label": "THE GATES OPEN",
+   "start": 495.008,
+   "end": 513.214,
+   "cover": 0.938,
+   "from": [
+    {
+     "id": "P05-009",
+     "name": "Baritone and warning",
+     "seconds": 7.88
+    },
+    {
+     "id": "P05-008",
+     "name": "Blood through the hands",
+     "seconds": 5.19
+    },
+    {
+     "id": "P05-010",
+     "name": "walk into 06",
+     "seconds": 4
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 17.07
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.24,
+     "Z": 0.2,
+     "parallax": 3.52,
+     "area": 0.007,
+     "present": 0.22,
+     "contents": [
+      "field"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.31,
+     "Z": 0.5,
+     "parallax": 1.885,
+     "area": 0.412,
+     "present": 0.22,
+     "contents": [
+      "floor",
+      "field"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 1.62,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.109,
+     "present": 0.285,
+     "contents": [
+      "person",
+      "floor"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 11.1,
+     "Z": 1.2,
+     "parallax": 0.392,
+     "area": 0.002,
+     "present": 0.22,
+     "contents": [
+      "street lamp",
+      "tree",
+      "field"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 2.52,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.209,
+     "present": 0.938,
+     "contents": [
+      "plane",
+      "floor",
+      "person",
+      "field"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 6.59,
+     "Z": 4.07,
+     "parallax": 0.246,
+     "area": 0.321,
+     "present": 0.505,
+     "contents": [
+      "wall",
+      "floor",
+      "street lamp",
+      "building",
+      "field"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "8e37b6bd-2eb7-5b42-8ddf-82a8d9904ebd",
+   "film": "06",
+   "label": "TITLE",
+   "start": 513.212,
+   "end": 519.547,
+   "cover": 0.231,
+   "from": [
+    {
+     "id": "P06-001",
+     "name": "The Light Gates open",
+     "seconds": 1.47
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 1.47
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 5.26,
+     "Z": 0.5,
+     "parallax": 1.734,
+     "area": 0.327,
+     "present": 0.231,
+     "contents": [
+      "person",
+      "poet among them"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 12.98,
+     "Z": 6,
+     "parallax": 0.703,
+     "area": 0.259,
+     "present": 0.231,
+     "contents": [
+      "from the field",
+      "building",
+      "road",
+      "car",
+      "street lamp"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "05bb1f34-f734-51fb-a26f-c9331be8e1a4",
+   "film": "06",
+   "label": "THE COMETS",
+   "start": 519.547,
+   "end": 536.02,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P06-002",
+     "name": "The Light Gates open",
+     "seconds": 8.22
+    },
+    {
+     "id": "P06-001",
+     "name": "The Light Gates open",
+     "seconds": 6.75
+    },
+    {
+     "id": "P06-003",
+     "name": "Road down, following comets",
+     "seconds": 1.5
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 9.72
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 3.91,
+     "Z": 0.2,
+     "parallax": 8,
+     "area": 0.416,
+     "present": 0.499,
+     "contents": [
+      "person",
+      "poet among them"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 5.26,
+     "Z": 0.5,
+     "parallax": 1.734,
+     "area": 0.327,
+     "present": 0.501,
+     "contents": [
+      "person",
+      "poet among them",
+      "earth"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 6.08,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.024,
+     "present": 0.091,
+     "contents": [
+      "person",
+      "wall",
+      "earth",
+      "bicycle"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 14.95,
+     "Z": 2.46,
+     "parallax": 0.387,
+     "area": 0.042,
+     "present": 0.091,
+     "contents": [
+      "person",
+      "vehicle",
+      "wall",
+      "earth",
+      "bicycle"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 39.19,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.234,
+     "present": 0.59,
+     "contents": [
+      "wall",
+      "person",
+      "lamp",
+      "ball",
+      "floor",
+      "vehicle",
+      "earth",
+      "bicycle"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 19.72,
+     "Z": 6,
+     "parallax": 0.703,
+     "area": 0.259,
+     "present": 1,
+     "contents": [
+      "wall",
+      "ceiling",
+      "from the field",
+      "building",
+      "road",
+      "car",
+      "street lamp",
+      "vehicle",
+      "person",
+      "earth",
+      "bicycle"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "218280c0-f9fd-5568-a0cb-b2f64f097d1a",
+   "film": "06",
+   "label": "THE WATERLINE FALLS",
+   "start": 536.02,
+   "end": 555.027,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P06-003",
+     "name": "Road down, following comets",
+     "seconds": 9.61
+    },
+    {
+     "id": "P06-004",
+     "name": "The city rises / here we are all one",
+     "seconds": 5.19
+    },
+    {
+     "id": "P06-005",
+     "name": "Jungle Interface and the heart-scan admission",
+     "seconds": 4.21
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 19.01
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 2.02,
+     "Z": 0.2,
+     "parallax": 1,
+     "area": 1,
+     "present": 0.273,
+     "contents": [
+      "sky",
+      "wall",
+      "building"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 4.86,
+     "Z": 0.8,
+     "parallax": 1.251,
+     "area": 0.057,
+     "present": 0.727,
+     "contents": [
+      "earth",
+      "sky",
+      "water"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 6.08,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.024,
+     "present": 0.506,
+     "contents": [
+      "person",
+      "wall",
+      "earth",
+      "bicycle"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 14.95,
+     "Z": 2.46,
+     "parallax": 0.387,
+     "area": 0.042,
+     "present": 0.506,
+     "contents": [
+      "person",
+      "vehicle",
+      "wall",
+      "earth",
+      "bicycle"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 7.56,
+     "Z": 1.24,
+     "parallax": 0.804,
+     "area": 0.288,
+     "present": 0.727,
+     "contents": [
+      "floor",
+      "vehicle",
+      "earth",
+      "bicycle",
+      "water"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 19.72,
+     "Z": 3.24,
+     "parallax": 0.308,
+     "area": 0.097,
+     "present": 0.727,
+     "contents": [
+      "vehicle",
+      "wall",
+      "person",
+      "earth",
+      "bicycle",
+      "water"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "f3084edd-e6d9-5f62-86e3-306db2e83f47",
+   "film": "06",
+   "label": "ADMISSION",
+   "start": 555.027,
+   "end": 572.767,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P06-006",
+     "name": "City Center: all safe",
+     "seconds": 7.62
+    },
+    {
+     "id": "P06-005",
+     "name": "Jungle Interface and the heart-scan admission",
+     "seconds": 7.48
+    },
+    {
+     "id": "P06-007",
+     "name": "City Center: all safe",
+     "seconds": 2.64
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 10.12
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 10.98,
+     "Z": 0.5,
+     "parallax": 1.475,
+     "area": 0.368,
+     "present": 0.57,
+     "contents": [
+      "sky",
+      "water",
+      "sidewalk"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 21.02,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.006,
+     "present": 0.578,
+     "contents": [
+      "person",
+      "water",
+      "pier",
+      "sidewalk"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 20.75,
+     "Z": 2.06,
+     "parallax": 0.432,
+     "area": 0.017,
+     "present": 0.149,
+     "contents": [
+      "person",
+      "sidewalk",
+      "bag"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 25.92,
+     "Z": 2.5,
+     "parallax": 0.708,
+     "area": 0.215,
+     "present": 1,
+     "contents": [
+      "water",
+      "pole",
+      "pier",
+      "back at the center",
+      "person",
+      "street",
+      "wall",
+      "building",
+      "tree"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 50.62,
+     "Z": 5.04,
+     "parallax": 0.34,
+     "area": 0.428,
+     "present": 1,
+     "contents": [
+      "building",
+      "street",
+      "cathedral square",
+      "railing",
+      "the dish",
+      "vehicle",
+      "water",
+      "person",
+      "street lamp",
+      "window",
+      "tree"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "31c98ba4-fc7a-5ef3-b054-b940fa970d9d",
+   "film": "06",
+   "label": "NARROW STREETS",
+   "start": 572.767,
+   "end": 589.239,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P06-007",
+     "name": "City Center: all safe",
+     "seconds": 8.99
+    },
+    {
+     "id": "P06-008",
+     "name": "Narrow streets by candlelight",
+     "seconds": 7.48
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 16.47
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.15,
+     "Z": 0.61,
+     "parallax": 1.643,
+     "area": 0.222,
+     "present": 0.454,
+     "contents": [
+      "wall"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 7.81,
+     "Z": 0.78,
+     "parallax": 1.286,
+     "area": 0.075,
+     "present": 1,
+     "contents": [
+      "sidewalk",
+      "wall"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 10.05,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.018,
+     "present": 1,
+     "contents": [
+      "person",
+      "sidewalk",
+      "candle flame blooms",
+      "children laughter",
+      "wall"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 20.75,
+     "Z": 2.06,
+     "parallax": 0.432,
+     "area": 0.017,
+     "present": 1,
+     "contents": [
+      "person",
+      "sidewalk",
+      "bag",
+      "candle flame blooms",
+      "two people wide",
+      "wall"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 25.92,
+     "Z": 2.58,
+     "parallax": 0.388,
+     "area": 0.463,
+     "present": 1,
+     "contents": [
+      "wall",
+      "back at the center",
+      "person",
+      "street",
+      "building",
+      "tree",
+      "floor",
+      "shadows stretch",
+      "ceiling",
+      "sidewalk",
+      "runway"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 50.62,
+     "Z": 5.04,
+     "parallax": 0.198,
+     "area": 0.428,
+     "present": 1,
+     "contents": [
+      "person",
+      "street lamp",
+      "building",
+      "street",
+      "window",
+      "tree",
+      "wall",
+      "ceiling",
+      "road",
+      "sidewalk"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ffd0e526-781d-5257-8269-0e04dedbd82d",
+   "film": "06",
+   "label": "CROSSHAIRS TO CONTINUUMS",
+   "start": 589.239,
+   "end": 605.712,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P06-009",
+     "name": "Narrow streets by candlelight",
+     "seconds": 7.26
+    },
+    {
+     "id": "P06-010",
+     "name": "Could stay forever, then wandering to the house",
+     "seconds": 4.7
+    },
+    {
+     "id": "P06-008",
+     "name": "Narrow streets by candlelight",
+     "seconds": 4.51
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 16.47
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 3.23,
+     "Z": 0.2,
+     "parallax": 1.643,
+     "area": 0.245,
+     "present": 1,
+     "contents": [
+      "wall",
+      "bench"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.66,
+     "Z": 0.5,
+     "parallax": 2.473,
+     "area": 0.138,
+     "present": 1,
+     "contents": [
+      "wall",
+      "floor",
+      "bench",
+      "voiceover ends  'welcoming me"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 1.89,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.14,
+     "present": 0.274,
+     "contents": [
+      "candle flame blooms",
+      "children laughter",
+      "wall"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 17,
+     "Z": 8.99,
+     "parallax": 0.557,
+     "area": 0.07,
+     "present": 0.274,
+     "contents": [
+      "candle flame blooms",
+      "person",
+      "two people wide",
+      "wall",
+      "sidewalk"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 5.27,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.322,
+     "present": 1,
+     "contents": [
+      "floor",
+      "wall",
+      "hidden stairwells",
+      "stairs",
+      "stairway",
+      "bannister",
+      "shadows stretch",
+      "ceiling",
+      "sidewalk",
+      "runway"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 16.27,
+     "Z": 6,
+     "parallax": 0.423,
+     "area": 0.195,
+     "present": 1,
+     "contents": [
+      "wall",
+      "ceiling",
+      "sky",
+      "stairway",
+      "bannister",
+      "floor",
+      "street lamp",
+      "road",
+      "sidewalk",
+      "person"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "3ea096c8-2368-5ef5-b5cf-c024a9795ff3",
+   "film": "06",
+   "label": "WELCOMING ALL",
+   "start": 605.712,
+   "end": 623.452,
+   "cover": 0.95,
+   "from": [
+    {
+     "id": "P06-011",
+     "name": "Could stay forever, then wandering to the house",
+     "seconds": 8.93
+    },
+    {
+     "id": "P06-012",
+     "name": "walk into 07",
+     "seconds": 4
+    },
+    {
+     "id": "P06-010",
+     "name": "Could stay forever, then wandering to the house",
+     "seconds": 3.92
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 16.85
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.87,
+     "Z": 0.48,
+     "parallax": 2.088,
+     "area": 0.46,
+     "present": 0.724,
+     "contents": [
+      "wall",
+      "goes in",
+      "person"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 5.77,
+     "Z": 0.5,
+     "parallax": 1.177,
+     "area": 0.084,
+     "present": 0.446,
+     "contents": [
+      "floor",
+      "wall",
+      "voiceover ends  'welcoming me"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 3.91,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.173,
+     "present": 0.503,
+     "contents": [
+      "person",
+      "wall"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 3.89,
+     "Z": 0.99,
+     "parallax": 1.005,
+     "area": 0.367,
+     "present": 0.95,
+     "contents": [
+      "wall",
+      "ceiling",
+      "person",
+      "house door",
+      "door",
+      "floor"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 8.23,
+     "Z": 6,
+     "parallax": 0.825,
+     "area": 0.485,
+     "present": 0.446,
+     "contents": [
+      "wall",
+      "floor",
+      "ceiling",
+      "sky",
+      "window",
+      "window "
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c5855715-a5f3-5f76-9504-9a9070a41415",
+   "film": "07",
+   "label": "TITLE",
+   "start": 623.454,
+   "end": 628.888,
+   "cover": 0.106,
+   "from": [
+    {
+     "id": "P07-001",
+     "name": "DJ drops in",
+     "seconds": 0.58
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 0.58
+   },
+   "planes": [
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 9.45,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.212,
+     "present": 0.106,
+     "contents": [
+      "dj appears",
+      "person"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 9.51,
+     "Z": 1.01,
+     "parallax": 0.994,
+     "area": 0.788,
+     "present": 0.106,
+     "contents": [
+      "wall",
+      "floor",
+      "ceiling",
+      "person",
+      "conveyer belt"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "932c051d-5f80-5c4c-a9a9-eb159d85551b",
+   "film": "07",
+   "label": "CHIN NESTED",
+   "start": 628.888,
+   "end": 643.017,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P07-002",
+     "name": "Eyes wide shut at the mic",
+     "seconds": 8.89
+    },
+    {
+     "id": "P07-003",
+     "name": "Ghosts in the speaker mesh",
+     "seconds": 2.82
+    },
+    {
+     "id": "P07-001",
+     "name": "DJ drops in",
+     "seconds": 2.42
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 11.31
+   },
+   "planes": [
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 25.17,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.158,
+     "present": 0.801,
+     "contents": [
+      "person",
+      "eyes closed",
+      "wall",
+      "floor",
+      "seat",
+      "dj appears"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 26.38,
+     "Z": 1.05,
+     "parallax": 0.954,
+     "area": 0.842,
+     "present": 1,
+     "contents": [
+      "wall",
+      "floor",
+      "person",
+      "seat",
+      "lamp",
+      "bookcase",
+      "ceiling",
+      "conveyer belt"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 7.17,
+     "Z": 6,
+     "parallax": 0.9,
+     "area": 0.181,
+     "present": 0.199,
+     "contents": [
+      "window",
+      "wall"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "7fb37131-75c4-50fe-8f5b-b9ec89b9c6ef",
+   "film": "07",
+   "label": "VINEYARD GHOSTS",
+   "start": 643.017,
+   "end": 657.145,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P07-004",
+     "name": "Ghosts in the speaker mesh",
+     "seconds": 7.55
+    },
+    {
+     "id": "P07-003",
+     "name": "Ghosts in the speaker mesh",
+     "seconds": 4.74
+    },
+    {
+     "id": "P07-005",
+     "name": "A thousand light years, into the red",
+     "seconds": 1.83
+    }
+   ],
+   "camera": {
+    "move": "truck",
+    "seconds": 7.55
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 3.65,
+     "Z": 0.48,
+     "parallax": 2.066,
+     "area": 0.01,
+     "present": 0.13,
+     "contents": [
+      "wall"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 5.39,
+     "Z": 0.71,
+     "parallax": 1.399,
+     "area": 0.275,
+     "present": 0.13,
+     "contents": [
+      "between bar",
+      "wall",
+      "floor",
+      "chair",
+      "base"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 0.25,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.004,
+     "present": 0.664,
+     "contents": [
+      "person",
+      "wall",
+      "floor",
+      "chair",
+      "base"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 4.73,
+     "Z": 0.63,
+     "parallax": 0.85,
+     "area": 0.062,
+     "present": 0.13,
+     "contents": [
+      "person",
+      "wall",
+      "floor",
+      "base"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 0.28,
+     "Z": 1.12,
+     "parallax": 0.879,
+     "area": 0.445,
+     "present": 1,
+     "contents": [
+      "person",
+      "wall",
+      "floor",
+      "desk",
+      "base"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 0.41,
+     "Z": 1.64,
+     "parallax": 0.604,
+     "area": 0.119,
+     "present": 1,
+     "contents": [
+      "person",
+      "wall",
+      "window",
+      "floor",
+      "base"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2d91fbf4-e1ff-52b1-9a51-97911558f13b",
+   "film": "07",
+   "label": "THOUSAND LIGHT YEARS",
+   "start": 657.145,
+   "end": 672.36,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P07-006",
+     "name": "A thousand light years, into the red",
+     "seconds": 7.56
+    },
+    {
+     "id": "P07-005",
+     "name": "A thousand light years, into the red",
+     "seconds": 5.73
+    },
+    {
+     "id": "P07-007",
+     "name": "Wedding bands and the boxed home",
+     "seconds": 1.93
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 13.29
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 3.65,
+     "Z": 0.48,
+     "parallax": 2.066,
+     "area": 0.01,
+     "present": 0.376,
+     "contents": [
+      "wall"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 5.39,
+     "Z": 0.71,
+     "parallax": 1.399,
+     "area": 0.275,
+     "present": 0.503,
+     "contents": [
+      "between bar",
+      "wall",
+      "floor",
+      "chair",
+      "base",
+      "street",
+      "building"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 1.74,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.033,
+     "present": 0.873,
+     "contents": [
+      "person",
+      "wall",
+      "floor",
+      "chair",
+      "base"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 4.73,
+     "Z": 0.63,
+     "parallax": 0.85,
+     "area": 0.062,
+     "present": 0.376,
+     "contents": [
+      "person",
+      "wall",
+      "floor",
+      "base"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 7.8,
+     "Z": 1.03,
+     "parallax": 0.979,
+     "area": 0.758,
+     "present": 1,
+     "contents": [
+      "wall",
+      "tank",
+      "floor",
+      "person",
+      "desk",
+      "base",
+      "cloud",
+      "street",
+      "building",
+      "road",
+      "sidewalk"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 12.05,
+     "Z": 1.6,
+     "parallax": 0.626,
+     "area": 0.155,
+     "present": 0.503,
+     "contents": [
+      "person",
+      "wall",
+      "floor",
+      "base",
+      "street",
+      "building",
+      "plant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "68d810df-ff8d-597e-912b-71102a72b6fe",
+   "film": "07",
+   "label": "DIVERGING RINGS",
+   "start": 672.36,
+   "end": 687.575,
+   "cover": 0.997,
+   "from": [
+    {
+     "id": "P07-008",
+     "name": "Wedding bands and the boxed home",
+     "seconds": 8.55
+    },
+    {
+     "id": "P07-007",
+     "name": "Wedding bands and the boxed home",
+     "seconds": 6.62
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 8.55
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 2.46,
+     "Z": 0.2,
+     "parallax": 1.271,
+     "area": 0.262,
+     "present": 0.562,
+     "contents": [
+      "person",
+      "wall"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 22.39,
+     "Z": 0.5,
+     "parallax": 1.04,
+     "area": 0.141,
+     "present": 0.435,
+     "contents": [
+      "street",
+      "building"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 3.12,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.614,
+     "present": 0.997,
+     "contents": [
+      "door",
+      "rings orbit",
+      "wall",
+      "cloud",
+      "street",
+      "building",
+      "road",
+      "sidewalk"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 3.92,
+     "Z": 6,
+     "parallax": 0.798,
+     "area": 0.124,
+     "present": 0.997,
+     "contents": [
+      "wall",
+      "person",
+      "door",
+      "street",
+      "building",
+      "plant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "39a76c6f-4471-591c-8a9e-3748cb12f06e",
+   "film": "07",
+   "label": "ELEVEN PETALS",
+   "start": 687.575,
+   "end": 702.791,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P07-009",
+     "name": "Eleven years in daisy petals",
+     "seconds": 11.23
+    },
+    {
+     "id": "P07-010",
+     "name": "Rain, fog, dim lights, then chin high",
+     "seconds": 3.99
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 15.22
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.12,
+     "Z": 0.2,
+     "parallax": 1.746,
+     "area": 0.758,
+     "present": 0.738,
+     "contents": [
+      "stove"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 3.68,
+     "Z": 0.76,
+     "parallax": 1.315,
+     "area": 0.028,
+     "present": 0.262,
+     "contents": [
+      "road",
+      "person",
+      "bicycle"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 4.84,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.06,
+     "present": 0.262,
+     "contents": [
+      "person"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 2.92,
+     "Z": 0.6,
+     "parallax": 1.655,
+     "area": 0.006,
+     "present": 0.262,
+     "contents": [
+      "person",
+      "road"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 13.38,
+     "Z": 2.76,
+     "parallax": 0.361,
+     "area": 0.521,
+     "present": 0.262,
+     "contents": [
+      "floor",
+      "vehicle",
+      "road",
+      "person",
+      "bicycle"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 2.8,
+     "Z": 6,
+     "parallax": 0.701,
+     "area": 0.242,
+     "present": 1,
+     "contents": [
+      "wall",
+      "floor",
+      "water",
+      "road"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c134d78d-fba2-5f65-98ad-aae2db4a1a18",
+   "film": "07",
+   "label": "THREE ROADS",
+   "start": 702.791,
+   "end": 716.919,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P07-011",
+     "name": "Rain, fog, dim lights, then chin high",
+     "seconds": 8.61
+    },
+    {
+     "id": "P07-010",
+     "name": "Rain, fog, dim lights, then chin high",
+     "seconds": 5.44
+    },
+    {
+     "id": "P07-012",
+     "name": "Rain, fog, dim lights, then chin high",
+     "seconds": 0.08
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 14.13
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 2.54,
+     "Z": 0.56,
+     "parallax": 1.777,
+     "area": 0.283,
+     "present": 0.615,
+     "contents": [
+      "wall",
+      "floor",
+      "box",
+      "bench",
+      "bannister",
+      "earth"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.51,
+     "Z": 0.56,
+     "parallax": 1.801,
+     "area": 0.17,
+     "present": 1,
+     "contents": [
+      "floor",
+      "box",
+      "bench",
+      "road",
+      "person",
+      "bicycle",
+      "earth",
+      "rock"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 4.52,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.04,
+     "present": 1,
+     "contents": [
+      "person",
+      "wall",
+      "floor",
+      "earth"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 2.92,
+     "Z": 0.6,
+     "parallax": 1.655,
+     "area": 0.006,
+     "present": 0.391,
+     "contents": [
+      "person",
+      "road",
+      "street lamp",
+      "tree",
+      "grass",
+      "plant"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 4.85,
+     "Z": 1.07,
+     "parallax": 0.933,
+     "area": 0.38,
+     "present": 1,
+     "contents": [
+      "floor",
+      "window",
+      "wall",
+      "ceiling",
+      "window ",
+      "door",
+      "person",
+      "vehicle",
+      "road",
+      "bicycle",
+      "chin now high",
+      "one night",
+      "earth",
+      "rock"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 6.51,
+     "Z": 1.44,
+     "parallax": 0.695,
+     "area": 0.127,
+     "present": 1,
+     "contents": [
+      "window",
+      "wall",
+      "ceiling",
+      "floor",
+      "water",
+      "road",
+      "grass",
+      "person",
+      "earth",
+      "path"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "4d796f60-c884-525e-9ac1-f7032bb8eb12",
+   "film": "07",
+   "label": "CHIN HIGH",
+   "start": 716.919,
+   "end": 732.134,
+   "cover": 0.93,
+   "from": [
+    {
+     "id": "P07-012",
+     "name": "Rain, fog, dim lights, then chin high",
+     "seconds": 10.15
+    },
+    {
+     "id": "P07-013",
+     "name": "lift into 08",
+     "seconds": 4
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 14.15
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.66,
+     "Z": 0.3,
+     "parallax": 3.371,
+     "area": 0.251,
+     "present": 0.93,
+     "contents": [
+      "wall",
+      "earth",
+      "ceiling"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 4.71,
+     "Z": 0.84,
+     "parallax": 1.187,
+     "area": 0.014,
+     "present": 0.667,
+     "contents": [
+      "earth",
+      "rock"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 5.59,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.094,
+     "present": 0.667,
+     "contents": [
+      "person",
+      "earth"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 21.28,
+     "Z": 3.81,
+     "parallax": 0.263,
+     "area": 0.149,
+     "present": 0.667,
+     "contents": [
+      "street lamp",
+      "tree",
+      "grass",
+      "plant"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 5.87,
+     "Z": 1.05,
+     "parallax": 0.953,
+     "area": 0.314,
+     "present": 0.93,
+     "contents": [
+      "chin now high",
+      "one night",
+      "person",
+      "earth",
+      "rock",
+      "sky",
+      "wall"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 13.15,
+     "Z": 2.35,
+     "parallax": 0.425,
+     "area": 0.178,
+     "present": 0.93,
+     "contents": [
+      "grass",
+      "person",
+      "earth",
+      "path",
+      "wall"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "5969c0bb-4210-58db-9706-dc9d35734909",
+   "film": "08",
+   "label": "TITLE",
+   "start": 732.136,
+   "end": 737.25,
+   "cover": 0.039,
+   "from": [
+    {
+     "id": "P08-001",
+     "name": "The soul leaves the dancer",
+     "seconds": 0.2
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 0.2
+   },
+   "planes": [
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 23.36,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.193,
+     "present": 0.039,
+     "contents": [
+      "person",
+      "road"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 37.72,
+     "Z": 1.61,
+     "parallax": 0.619,
+     "area": 0.238,
+     "present": 0.039,
+     "contents": [
+      "road",
+      "person",
+      "car"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 38.22,
+     "Z": 1.64,
+     "parallax": 0.611,
+     "area": 0.468,
+     "present": 0.039,
+     "contents": [
+      "street lamp",
+      "wall",
+      "building",
+      "road",
+      "car"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b8ba7303-bda7-595a-850e-41a927ddf04f",
+   "film": "08",
+   "label": "PULSING",
+   "start": 737.25,
+   "end": 750.546,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P08-002",
+     "name": "The soul leaves the dancer",
+     "seconds": 7.37
+    },
+    {
+     "id": "P08-001",
+     "name": "The soul leaves the dancer",
+     "seconds": 5.92
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 7.37
+   },
+   "planes": [
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 11.8,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.039,
+     "present": 1,
+     "contents": [
+      "person",
+      "cloud",
+      "road"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 11.76,
+     "Z": 1,
+     "parallax": 0.619,
+     "area": 0,
+     "present": 1,
+     "contents": [
+      "person",
+      "road",
+      "car"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 38.22,
+     "Z": 1.64,
+     "parallax": 0.611,
+     "area": 0.468,
+     "present": 0.445,
+     "contents": [
+      "street lamp",
+      "wall",
+      "building",
+      "road",
+      "car"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "9918ab42-fb7d-5bfd-b4bd-25fe82946775",
+   "film": "08",
+   "label": "THE ESCAPE",
+   "start": 750.546,
+   "end": 764.864,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P08-003",
+     "name": "The soul leaves the dancer",
+     "seconds": 8.24
+    },
+    {
+     "id": "P08-004",
+     "name": "Strangers collide; the last one to leave",
+     "seconds": 3.1
+    },
+    {
+     "id": "P08-002",
+     "name": "The soul leaves the dancer",
+     "seconds": 2.98
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 8.24
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 10.32,
+     "Z": 0.84,
+     "parallax": 1.185,
+     "area": 0.064,
+     "present": 0.575,
+     "contents": [
+      "wall",
+      "person",
+      "stool"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 12.23,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.268,
+     "present": 0.783,
+     "contents": [
+      "person",
+      "wall",
+      "floor",
+      "cloud"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 19.78,
+     "Z": 1.62,
+     "parallax": 0.618,
+     "area": 0.044,
+     "present": 0.575,
+     "contents": [
+      "person",
+      "wall",
+      "floor"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 10.93,
+     "Z": 0.89,
+     "parallax": 1.119,
+     "area": 0.342,
+     "present": 1,
+     "contents": [
+      "person",
+      "wall",
+      "floor",
+      "stool",
+      "bodies brushing",
+      "stage",
+      "animal"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 20.8,
+     "Z": 1.7,
+     "parallax": 0.588,
+     "area": 0.282,
+     "present": 0.792,
+     "contents": [
+      "wall",
+      "floor",
+      "person",
+      "stage"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "5d2342c9-421f-5db3-946a-b4b32fdb2854",
+   "film": "08",
+   "label": "IMAGINE MY BODY",
+   "start": 764.864,
+   "end": 778.159,
+   "cover": 0.505,
+   "from": [
+    {
+     "id": "P08-004",
+     "name": "Strangers collide; the last one to leave",
+     "seconds": 6.72
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 6.72
+   },
+   "planes": [
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 1.36,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.998,
+     "present": 0.505,
+     "contents": [
+      "bodies brushing",
+      "wall",
+      "person",
+      "stage",
+      "animal"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 1.41,
+     "Z": 6,
+     "parallax": 0.966,
+     "area": 0.002,
+     "present": 0.505,
+     "contents": [
+      "wall",
+      "person",
+      "stage"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "f2562745-8502-5420-b1c0-0865122ee591",
+   "film": "08",
+   "label": "THE EQUATOR",
+   "start": 778.159,
+   "end": 791.455,
+   "cover": 0.982,
+   "from": [
+    {
+     "id": "P08-006",
+     "name": "Soul over Atlantis / the open field at the equator",
+     "seconds": 8.1
+    },
+    {
+     "id": "P08-007",
+     "name": "Angels' ice-water baptism",
+     "seconds": 4.96
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 8.1
+   },
+   "planes": [
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 3.2,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.185,
+     "present": 0.982,
+     "contents": [
+      "wall",
+      "person",
+      "water",
+      "sink"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 5.47,
+     "Z": 1.71,
+     "parallax": 0.585,
+     "area": 0.361,
+     "present": 0.982,
+     "contents": [
+      "wall",
+      "bed"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 11.5,
+     "Z": 3.59,
+     "parallax": 0.278,
+     "area": 0.453,
+     "present": 0.609,
+     "contents": [
+      "window",
+      "wall",
+      "window ",
+      "table",
+      "chair",
+      "lamp"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "f729175b-5786-5941-b1b6-c13eacd44f20",
+   "film": "08",
+   "label": "COOL ME DOWN",
+   "start": 791.455,
+   "end": 805.773,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P08-008",
+     "name": "Angels' ice-water baptism",
+     "seconds": 9.24
+    },
+    {
+     "id": "P08-007",
+     "name": "Angels' ice-water baptism",
+     "seconds": 5.08
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 9.24
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 1.04,
+     "Z": 0.5,
+     "parallax": 1.027,
+     "area": 0.42,
+     "present": 0.645,
+     "contents": [
+      "person",
+      "wall"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 35.72,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.313,
+     "present": 0.355,
+     "contents": [
+      "water",
+      "wall",
+      "sink"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 1.07,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.58,
+     "present": 1,
+     "contents": [
+      "wall"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "02ccffde-15e2-5f9e-951e-96ff095c65a9",
+   "film": "08",
+   "label": "BACK TO MY BODY",
+   "start": 805.773,
+   "end": 820.091,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P08-009",
+     "name": "Haze and the soul's return",
+     "seconds": 11.88
+    },
+    {
+     "id": "P08-010",
+     "name": "Mountains from the rooftop",
+     "seconds": 1.63
+    },
+    {
+     "id": "P08-008",
+     "name": "Angels' ice-water baptism",
+     "seconds": 0.81
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 12.69
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.07,
+     "Z": 0.2,
+     "parallax": 1.953,
+     "area": 0.354,
+     "present": 0.83,
+     "contents": [
+      "street",
+      "building",
+      "tree",
+      "plant",
+      "water"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 1,
+     "Z": 0.5,
+     "parallax": 2.104,
+     "area": 0.191,
+     "present": 0.886,
+     "contents": [
+      "street",
+      "tree",
+      "water",
+      "person",
+      "wall"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 12.94,
+     "Z": 1.2,
+     "parallax": 0.935,
+     "area": 0.016,
+     "present": 0.114,
+     "contents": [
+      "street lamp",
+      "building"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 2.1,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.294,
+     "present": 1,
+     "contents": [
+      "building",
+      "street",
+      "tree",
+      "plant",
+      "wall",
+      "window"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 7.57,
+     "Z": 6,
+     "parallax": 0.277,
+     "area": 0.11,
+     "present": 0.943,
+     "contents": [
+      "building",
+      "tree",
+      "street lamp"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "30a3dedf-d497-5ed3-90f5-db7b3b7387cb",
+   "film": "08",
+   "label": "MOUNTAINS IN THE DISTANCE",
+   "start": 820.091,
+   "end": 833.386,
+   "cover": 0.94,
+   "from": [
+    {
+     "id": "P08-010",
+     "name": "Mountains from the rooftop",
+     "seconds": 8.49
+    },
+    {
+     "id": "P08-011",
+     "name": "walk into 09",
+     "seconds": 4
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 8.49
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 3.97,
+     "Z": 0.72,
+     "parallax": 1.384,
+     "area": 0.194,
+     "present": 0.301,
+     "contents": [
+      "vehicle",
+      "window",
+      "building",
+      "bus",
+      "pole"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 4.46,
+     "Z": 0.81,
+     "parallax": 1.233,
+     "area": 0.005,
+     "present": 0.301,
+     "contents": [
+      "building"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 5.5,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.086,
+     "present": 0.301,
+     "contents": [
+      "person",
+      "railing",
+      "building"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 12.94,
+     "Z": 1.2,
+     "parallax": 0.935,
+     "area": 0.016,
+     "present": 0.94,
+     "contents": [
+      "building",
+      "street lamp",
+      "person",
+      "road",
+      "sidewalk"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 12.09,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.677,
+     "present": 0.94,
+     "contents": [
+      "wall",
+      "building",
+      "window",
+      "door",
+      "floor",
+      "high to street",
+      "person"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 13.77,
+     "Z": 6,
+     "parallax": 0.37,
+     "area": 0,
+     "present": 0.94,
+     "contents": [
+      "street lamp",
+      "person",
+      "window",
+      "building",
+      "road",
+      "sidewalk",
+      "car"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b2b899a6-dcfe-5d69-a307-7359faeb6192",
+   "film": "09",
+   "label": "TITLE",
+   "start": 833.385,
+   "end": 841.328,
+   "cover": 0.451,
+   "from": [
+    {
+     "id": "P09-001",
+     "name": "The EX in the crowd",
+     "seconds": 3.59
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 3.59
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 8.24,
+     "Z": 0.73,
+     "parallax": 1.37,
+     "area": 0.209,
+     "present": 0.451,
+     "contents": [
+      "floor",
+      "wall",
+      "cabinet",
+      "ottoman",
+      "bottle"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 11.29,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.053,
+     "present": 0.451,
+     "contents": [
+      "person",
+      "wall"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 11.47,
+     "Z": 1.02,
+     "parallax": 0.984,
+     "area": 0.493,
+     "present": 0.451,
+     "contents": [
+      "wall",
+      "floor",
+      "ceiling",
+      "person"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 17.16,
+     "Z": 1.52,
+     "parallax": 0.658,
+     "area": 0.245,
+     "present": 0.451,
+     "contents": [
+      "cloud",
+      "sky",
+      "wall",
+      "window",
+      "ceiling"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "62097226-74fb-5039-81fc-5ce2acda445b",
+   "film": "09",
+   "label": "THE SHARED MOON",
+   "start": 841.328,
+   "end": 868.332,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P09-002",
+     "name": "Walking toward the moon",
+     "seconds": 12.1
+    },
+    {
+     "id": "P09-001",
+     "name": "The EX in the crowd",
+     "seconds": 9.04
+    },
+    {
+     "id": "P09-003",
+     "name": "Walking toward the moon",
+     "seconds": 5.86
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 21.14
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 3.81,
+     "Z": 0.68,
+     "parallax": 1.466,
+     "area": 0.303,
+     "present": 1,
+     "contents": [
+      "floor",
+      "sky",
+      "street",
+      "tree",
+      "wall",
+      "cabinet",
+      "ottoman",
+      "bottle",
+      "water",
+      "earth"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 11.29,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.053,
+     "present": 0.552,
+     "contents": [
+      "person",
+      "wall",
+      "poet",
+      "earth"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 7.29,
+     "Z": 1.04,
+     "parallax": 0.984,
+     "area": 0.259,
+     "present": 1,
+     "contents": [
+      "person",
+      "building",
+      "tree",
+      "wall",
+      "floor",
+      "ceiling",
+      "earth",
+      "flag"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 12.58,
+     "Z": 1.95,
+     "parallax": 0.58,
+     "area": 0.295,
+     "present": 1,
+     "contents": [
+      "sky",
+      "window",
+      "building",
+      "street",
+      "tree",
+      "cloud",
+      "wall",
+      "ceiling",
+      "person",
+      "earth",
+      "clothes"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "6a18dc0b-29fd-55af-8982-f7fc21addd7c",
+   "film": "09",
+   "label": "TEARS, AN ABYSS",
+   "start": 868.332,
+   "end": 896.926,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P09-006",
+     "name": "Father and son to the inner harbor",
+     "seconds": 8.79
+    },
+    {
+     "id": "P09-007",
+     "name": "Father and son to the inner harbor",
+     "seconds": 8.46
+    },
+    {
+     "id": "P09-003",
+     "name": "Walking toward the moon",
+     "seconds": 4.51
+    },
+    {
+     "id": "P09-004",
+     "name": "Suitcases at the phone booth",
+     "seconds": 3.64
+    },
+    {
+     "id": "P09-008",
+     "name": "Father and son to the inner harbor",
+     "seconds": 3.19
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 25.4
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 3.07,
+     "Z": 0.47,
+     "parallax": 2.144,
+     "area": 0.007,
+     "present": 0.603,
+     "contents": [
+      "sea",
+      "rail",
+      "rock"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 3.81,
+     "Z": 0.68,
+     "parallax": 1.475,
+     "area": 0.048,
+     "present": 0.761,
+     "contents": [
+      "sea",
+      "mountain",
+      "rail",
+      "rock",
+      "floor",
+      "water",
+      "earth"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 19.19,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.046,
+     "present": 1,
+     "contents": [
+      "person",
+      "sea",
+      "by phone",
+      "rail",
+      "poet calls his father",
+      "poet",
+      "earth",
+      "road",
+      "mountain"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 20.7,
+     "Z": 1.04,
+     "parallax": 0.966,
+     "area": 0.523,
+     "present": 1,
+     "contents": [
+      "sea",
+      "person",
+      "floor",
+      "railing",
+      "rail",
+      "earth",
+      "flag",
+      "street",
+      "vehicle",
+      "window",
+      "wall",
+      "road",
+      "car",
+      "water",
+      "mountain"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 31.78,
+     "Z": 4.84,
+     "parallax": 0.207,
+     "area": 0.39,
+     "present": 0.465,
+     "contents": [
+      "stroll the inner harbor",
+      "water",
+      "mountain",
+      "sea",
+      "sand",
+      "person",
+      "earth",
+      "clothes"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "7e938b85-56ec-5316-a882-2232df5622ed",
+   "film": "09",
+   "label": "HIS FOOTSTEPS, RETRACED",
+   "start": 896.926,
+   "end": 925.519,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P09-011",
+     "name": "Father and son to the inner harbor",
+     "seconds": 8.52
+    },
+    {
+     "id": "P09-009",
+     "name": "Father and son to the inner harbor",
+     "seconds": 8.06
+    },
+    {
+     "id": "P09-010",
+     "name": "Father and son to the inner harbor",
+     "seconds": 6.27
+    },
+    {
+     "id": "P09-008",
+     "name": "Father and son to the inner harbor",
+     "seconds": 5.54
+    },
+    {
+     "id": "P09-012",
+     "name": "Father and son to the inner harbor",
+     "seconds": 0.21
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 11.81
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 0.94,
+     "Z": 0.78,
+     "parallax": 1.189,
+     "area": 0,
+     "present": 0.58,
+     "contents": [
+      "person",
+      "sea",
+      "rock"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 4.14,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.189,
+     "present": 1,
+     "contents": [
+      "person",
+      "poet father",
+      "the break - up",
+      "poet calls his father",
+      "rock",
+      "mountain",
+      "sea",
+      "water",
+      "boat"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 9.4,
+     "Z": 1.93,
+     "parallax": 0.519,
+     "area": 0.292,
+     "present": 1,
+     "contents": [
+      "person",
+      "water",
+      "sea",
+      "mountain",
+      "building",
+      "earth",
+      "stroll the inner harbor",
+      "rock",
+      "land",
+      "by phone",
+      "wall",
+      "floor",
+      "car",
+      "vehicle",
+      "boat"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 20.27,
+     "Z": 4.9,
+     "parallax": 0.032,
+     "area": 0.049,
+     "present": 0.806,
+     "contents": [
+      "building",
+      "mountain",
+      "sea",
+      "vehicle",
+      "earth",
+      "boat",
+      "street",
+      "land",
+      "person",
+      "street lamp",
+      "window",
+      "tree",
+      "water"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1b78a291-9968-5382-a71a-9cd2f78fe946",
+   "film": "09",
+   "label": "EAST, AT THE HARBOR",
+   "start": 925.519,
+   "end": 950.935,
+   "cover": 0.985,
+   "from": [
+    {
+     "id": "P09-012",
+     "name": "Father and son to the inner harbor",
+     "seconds": 9.4
+    },
+    {
+     "id": "P09-013",
+     "name": "Father and son to the inner harbor",
+     "seconds": 9.19
+    },
+    {
+     "id": "P09-015",
+     "name": "dissolve into 10",
+     "seconds": 4
+    },
+    {
+     "id": "P09-014",
+     "name": "The EX turns to haze",
+     "seconds": 2.45
+    }
+   ],
+   "camera": {
+    "move": "truck",
+    "seconds": 18.59
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 0.33,
+     "Z": 0.2,
+     "parallax": 1.416,
+     "area": 0.301,
+     "present": 0.096,
+     "contents": [
+      "leaving the poet alone",
+      "person"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 4.09,
+     "Z": 0.5,
+     "parallax": 1,
+     "area": 0.451,
+     "present": 0.615,
+     "contents": [
+      "person",
+      "poet calls his father",
+      "sculpture",
+      "wall",
+      "floor",
+      "minibike",
+      "street",
+      "building",
+      "tree",
+      "road",
+      "earth"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 17.62,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.006,
+     "present": 0.37,
+     "contents": [
+      "person",
+      "poet calls his father",
+      "water",
+      "boat"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 28.92,
+     "Z": 1.64,
+     "parallax": 0.609,
+     "area": 0.147,
+     "present": 0.624,
+     "contents": [
+      "vehicle",
+      "by phone",
+      "stroll the inner harbor",
+      "water",
+      "person",
+      "boat",
+      "minibike",
+      "building",
+      "street",
+      "window",
+      "tree",
+      "road"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 40.03,
+     "Z": 6,
+     "parallax": 0.346,
+     "area": 0.101,
+     "present": 0.985,
+     "contents": [
+      "building",
+      "street",
+      "window",
+      "tree",
+      "street lamp",
+      "water",
+      "wall",
+      "minibike",
+      "window ",
+      "curtain"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c3a0a8c1-7679-5ab7-b482-16915a545812",
+   "film": "10",
+   "label": "TITLE",
+   "start": 950.937,
+   "end": 957.156,
+   "cover": 0.186,
+   "from": [
+    {
+     "id": "P10-001",
+     "name": "The bike under the street lamp",
+     "seconds": 1.15
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 1.15
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 2.28,
+     "Z": 0.69,
+     "parallax": 1.447,
+     "area": 0.127,
+     "present": 0.186,
+     "contents": [
+      "table",
+      "book"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.69,
+     "Z": 0.82,
+     "parallax": null,
+     "area": 0.001,
+     "present": 0.186,
+     "contents": [
+      "person"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 3.3,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.174,
+     "present": 0.186,
+     "contents": [
+      "person",
+      "wall"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 7.27,
+     "Z": 2.2,
+     "parallax": 0.454,
+     "area": 0.099,
+     "present": 0.186,
+     "contents": [
+      "person",
+      "wall",
+      "stairs"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 6.14,
+     "Z": 1.86,
+     "parallax": 0.538,
+     "area": 0.378,
+     "present": 0.186,
+     "contents": [
+      "stairs",
+      "wall",
+      "person",
+      "bannister"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 9.42,
+     "Z": 2.85,
+     "parallax": 0.351,
+     "area": 0.221,
+     "present": 0.186,
+     "contents": [
+      "wall",
+      "person",
+      "tv",
+      "bannister"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "a01db976-e942-57b7-9baa-23680bbf9714",
+   "film": "10",
+   "label": "HOP ON",
+   "start": 957.156,
+   "end": 973.325,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P10-001",
+     "name": "The bike under the street lamp",
+     "seconds": 11.84
+    },
+    {
+     "id": "P10-002",
+     "name": "Mounting the machine",
+     "seconds": 4.33
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 16.17
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 2.28,
+     "Z": 0.69,
+     "parallax": 1.447,
+     "area": 0.127,
+     "present": 1,
+     "contents": [
+      "table",
+      "book",
+      "railing",
+      "thumps the fender",
+      "wall",
+      "person",
+      "seat",
+      "bannister"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.69,
+     "Z": 0.82,
+     "parallax": null,
+     "area": 0.001,
+     "present": 1,
+     "contents": [
+      "person",
+      "floor",
+      "bar"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 3.3,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.174,
+     "present": 1,
+     "contents": [
+      "person",
+      "wall"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 7.27,
+     "Z": 2.2,
+     "parallax": 0.454,
+     "area": 0.099,
+     "present": 0.732,
+     "contents": [
+      "person",
+      "wall",
+      "stairs"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 6.14,
+     "Z": 1.86,
+     "parallax": 0.538,
+     "area": 0.378,
+     "present": 1,
+     "contents": [
+      "wall",
+      "person",
+      "stairs",
+      "bannister",
+      "window",
+      "floor",
+      "window ",
+      "seat"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 9.42,
+     "Z": 2.85,
+     "parallax": 0.351,
+     "area": 0.221,
+     "present": 1,
+     "contents": [
+      "wall",
+      "person",
+      "tv",
+      "bannister",
+      "tree"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "e3ae9965-0d24-55f1-a146-edf338a62cf1",
+   "film": "10",
+   "label": "HEADS TWIST",
+   "start": 973.325,
+   "end": 990.737,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P10-004",
+     "name": "Loneliness through midnight intersections",
+     "seconds": 6.94
+    },
+    {
+     "id": "P10-003",
+     "name": "Loneliness through midnight intersections",
+     "seconds": 6.93
+    },
+    {
+     "id": "P10-002",
+     "name": "Mounting the machine",
+     "seconds": 3.54
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 17.41
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.1,
+     "Z": 0.13,
+     "parallax": 7.582,
+     "area": 0.463,
+     "present": 0.602,
+     "contents": [
+      "wall",
+      "person",
+      "tree",
+      "earth",
+      "door",
+      "fence",
+      "railing",
+      "thumps the fender",
+      "seat",
+      "bannister"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 4.29,
+     "Z": 0.51,
+     "parallax": 1.949,
+     "area": 0.15,
+     "present": 0.602,
+     "contents": [
+      "street",
+      "earth",
+      "fence",
+      "floor",
+      "bar"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 3.74,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.034,
+     "present": 1,
+     "contents": [
+      "person",
+      "wall",
+      "earth",
+      "sidewalk",
+      "bag"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 13.41,
+     "Z": 1.61,
+     "parallax": 0.623,
+     "area": 0.001,
+     "present": 0.797,
+     "contents": [
+      "street lamp",
+      "tree",
+      "person",
+      "wall",
+      "road",
+      "sidewalk"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 9.01,
+     "Z": 1.15,
+     "parallax": 0.873,
+     "area": 0.706,
+     "present": 1,
+     "contents": [
+      "wall",
+      "railing",
+      "window",
+      "empty plazas",
+      "tunnels under the market",
+      "building",
+      "sky",
+      "ceiling",
+      "road",
+      "sidewalk",
+      "person",
+      "floor",
+      "window ",
+      "seat"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 14.34,
+     "Z": 3.86,
+     "parallax": 0.582,
+     "area": 0.156,
+     "present": 1,
+     "contents": [
+      "tree",
+      "wall",
+      "street",
+      "tunnels under the market",
+      "building",
+      "earth",
+      "sky",
+      "ceiling",
+      "road",
+      "sidewalk",
+      "fence"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "3e1de25f-e79f-5271-bb87-9b6fc34fb839",
+   "film": "10",
+   "label": "MOON SETTLES",
+   "start": 990.737,
+   "end": 1005.663,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P10-005",
+     "name": "Swagger down the avenue",
+     "seconds": 8.26
+    },
+    {
+     "id": "P10-006",
+     "name": "Swagger down the avenue",
+     "seconds": 3.5
+    },
+    {
+     "id": "P10-004",
+     "name": "Loneliness through midnight intersections",
+     "seconds": 3.17
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 8.26
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.1,
+     "Z": 0.13,
+     "parallax": 7.582,
+     "area": 0.463,
+     "present": 0.212,
+     "contents": [
+      "wall",
+      "tree",
+      "person",
+      "earth",
+      "door",
+      "fence"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 3.92,
+     "Z": 0.5,
+     "parallax": 2.283,
+     "area": 0.364,
+     "present": 1,
+     "contents": [
+      "wall",
+      "person",
+      "eyes turn",
+      "street",
+      "earth",
+      "fence"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 8.35,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.002,
+     "present": 0.212,
+     "contents": [
+      "person",
+      "wall",
+      "earth"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 13.41,
+     "Z": 1.61,
+     "parallax": 0.623,
+     "area": 0.001,
+     "present": 0.212,
+     "contents": [
+      "street lamp",
+      "tree"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 8.95,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.194,
+     "present": 1,
+     "contents": [
+      "wall",
+      "person",
+      "floor",
+      "ceiling",
+      "empty plazas",
+      "railing",
+      "tunnels under the market",
+      "window",
+      "building"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 16.23,
+     "Z": 6,
+     "parallax": 0.551,
+     "area": 0.442,
+     "present": 1,
+     "contents": [
+      "wall",
+      "ceiling",
+      "person",
+      "column",
+      "light",
+      "street",
+      "tunnels under the market",
+      "building",
+      "tree",
+      "earth"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b0fd6e0d-e867-5f69-9e8a-933026825605",
+   "film": "10",
+   "label": "NIGHT REPLACED",
+   "start": 1005.663,
+   "end": 1023.075,
+   "cover": 0.792,
+   "from": [
+    {
+     "id": "P10-008",
+     "name": "Mountain road at first light",
+     "seconds": 8.91
+    },
+    {
+     "id": "P10-006",
+     "name": "Swagger down the avenue",
+     "seconds": 3.68
+    },
+    {
+     "id": "P10-007",
+     "name": "Out of Atlantis as the moon settles",
+     "seconds": 1.2
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 8.91
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 3.03,
+     "Z": 0.5,
+     "parallax": 2.16,
+     "area": 0.28,
+     "present": 0.28,
+     "contents": [
+      "eyes turn",
+      "person",
+      "wall",
+      "building",
+      "tree",
+      "earth",
+      "mountain",
+      "sea",
+      "land"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 0.74,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.486,
+     "present": 0.792,
+     "contents": [
+      "mountain",
+      "pass under the mountain",
+      "street",
+      "earth",
+      "wall",
+      "ceiling",
+      "person",
+      "cloud",
+      "water",
+      "land"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 8.79,
+     "Z": 6,
+     "parallax": 0.744,
+     "area": 0.473,
+     "present": 0.28,
+     "contents": [
+      "wall",
+      "ceiling",
+      "column",
+      "light",
+      "land"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "fbb610ec-8e23-57d3-a5d8-e401eafde8d8",
+   "film": "10",
+   "label": "BLISSFUL, INNOCENT",
+   "start": 1023.075,
+   "end": 1039.244,
+   "cover": 0.822,
+   "from": [
+    {
+     "id": "P10-010",
+     "name": "Mountain road at first light",
+     "seconds": 11.57
+    },
+    {
+     "id": "P10-011",
+     "name": "Mountain road at first light",
+     "seconds": 1.72
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 11.57
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 8.4,
+     "Z": 0.5,
+     "parallax": 1.119,
+     "area": 0.827,
+     "present": 0.822,
+     "contents": [
+      "vehicle",
+      "wall",
+      "floor",
+      "building",
+      "road",
+      "sidewalk",
+      "earth"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 0.92,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.006,
+     "present": 0.107,
+     "contents": [
+      "street lamp",
+      "building",
+      "palm"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 1,
+     "Z": 1.09,
+     "parallax": 0.914,
+     "area": 0.445,
+     "present": 0.107,
+     "contents": [
+      "building",
+      "floor",
+      "rail beside the road",
+      "sky",
+      "street",
+      "wall"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 10.39,
+     "Z": 6,
+     "parallax": 0.904,
+     "area": 0.173,
+     "present": 0.822,
+     "contents": [
+      "wall",
+      "floor",
+      "street",
+      "building",
+      "tree",
+      "road",
+      "sidewalk"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "3b666380-cb95-55c3-8d48-bc1a674bd8ee",
+   "film": "10",
+   "label": "CHILLY MORNING",
+   "start": 1039.244,
+   "end": 1056.657,
+   "cover": 0.97,
+   "from": [
+    {
+     "id": "P10-012",
+     "name": "Mountain road at first light",
+     "seconds": 8.48
+    },
+    {
+     "id": "P10-011",
+     "name": "Mountain road at first light",
+     "seconds": 4.42
+    },
+    {
+     "id": "P10-013",
+     "name": "ride into 11",
+     "seconds": 4
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 8.48
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 0.94,
+     "Z": 0.62,
+     "parallax": 1.618,
+     "area": 0.013,
+     "present": 0.487,
+     "contents": [
+      "road",
+      "person",
+      "bicycle"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 0.73,
+     "Z": 0.79,
+     "parallax": 1.249,
+     "area": 0.059,
+     "present": 0.254,
+     "contents": [
+      "building",
+      "road",
+      "sidewalk",
+      "earth"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 1.52,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.051,
+     "present": 0.97,
+     "contents": [
+      "person",
+      "street lamp",
+      "building",
+      "palm",
+      "field"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 17.14,
+     "Z": 1.03,
+     "parallax": 0.974,
+     "area": 0.025,
+     "present": 0.23,
+     "contents": [
+      "street lamp",
+      "tree",
+      "field"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 3.47,
+     "Z": 2.28,
+     "parallax": 0.436,
+     "area": 0.554,
+     "present": 0.97,
+     "contents": [
+      "floor",
+      "street",
+      "rail beside the road",
+      "wall",
+      "vehicle",
+      "road",
+      "building",
+      "sky",
+      "field",
+      "flag"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 9.09,
+     "Z": 5.98,
+     "parallax": 0.167,
+     "area": 0.383,
+     "present": 0.741,
+     "contents": [
+      "street",
+      "road",
+      "floor",
+      "pass under the mountain",
+      "wall",
+      "building",
+      "tree",
+      "sidewalk"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "dd4b4f1e-be49-5f29-9e28-3141bcfa1d2f",
+   "film": "11",
+   "label": "TITLE",
+   "start": 1056.659,
+   "end": 1063.21,
+   "cover": 0.189,
+   "from": [
+    {
+     "id": "P11-001",
+     "name": "Arrival on the chilly shore",
+     "seconds": 1.24
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 1.24
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 5.05,
+     "Z": 0.49,
+     "parallax": 2.042,
+     "area": 0.243,
+     "present": 0.189,
+     "contents": [
+      "floor",
+      "grass"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 10.3,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.019,
+     "present": 0.189,
+     "contents": [
+      "person",
+      "tree",
+      "grass"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 16.22,
+     "Z": 1.57,
+     "parallax": 0.729,
+     "area": 0.34,
+     "present": 0.189,
+     "contents": [
+      "street lamp",
+      "tree"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 10.26,
+     "Z": 1,
+     "parallax": 1.005,
+     "area": 0.032,
+     "present": 0.189,
+     "contents": [
+      "tree",
+      "grass",
+      "person",
+      "field"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 17.72,
+     "Z": 1.72,
+     "parallax": 0.582,
+     "area": 0.197,
+     "present": 0.189,
+     "contents": [
+      "tree",
+      "grass",
+      "mountain"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c0d9ec81-c6ab-551b-aab8-1c49e5ec999b",
+   "film": "11",
+   "label": "MORNING FOG",
+   "start": 1063.21,
+   "end": 1080.241,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P11-001",
+     "name": "Arrival on the chilly shore",
+     "seconds": 9.05
+    },
+    {
+     "id": "P11-002",
+     "name": "Arrival on the chilly shore",
+     "seconds": 7.98
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 9.05
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 5.05,
+     "Z": 0.49,
+     "parallax": 2.042,
+     "area": 0.243,
+     "present": 1,
+     "contents": [
+      "floor",
+      "grass",
+      "wall",
+      "wooded hills behind",
+      "road",
+      "mountain"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 10.3,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.019,
+     "present": 0.532,
+     "contents": [
+      "person",
+      "tree",
+      "grass"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 16.22,
+     "Z": 1.57,
+     "parallax": 0.729,
+     "area": 0.34,
+     "present": 0.532,
+     "contents": [
+      "street lamp",
+      "tree"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 10.26,
+     "Z": 1,
+     "parallax": 1.005,
+     "area": 0.032,
+     "present": 1,
+     "contents": [
+      "tree",
+      "grass",
+      "person",
+      "field",
+      "vehicle",
+      "mountain",
+      "car"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 17.72,
+     "Z": 1.72,
+     "parallax": 0.582,
+     "area": 0.197,
+     "present": 1,
+     "contents": [
+      "mountain",
+      "tree",
+      "grass",
+      "wall",
+      "wooded hills behind"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "8da3e87a-dcf4-5404-9d87-d875bdff7b9e",
+   "film": "11",
+   "label": "FIRST COURSES",
+   "start": 1080.241,
+   "end": 1097.273,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P11-003",
+     "name": "Arrival on the chilly shore",
+     "seconds": 11.82
+    },
+    {
+     "id": "P11-004",
+     "name": "Remnants in the sunlight",
+     "seconds": 4.95
+    },
+    {
+     "id": "P11-002",
+     "name": "Arrival on the chilly shore",
+     "seconds": 0.26
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 17.03
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 3.4,
+     "Z": 0.5,
+     "parallax": 1.229,
+     "area": 0.341,
+     "present": 0.015,
+     "contents": [
+      "floor",
+      "wall",
+      "wooded hills behind",
+      "road",
+      "mountain"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 11.16,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.021,
+     "present": 0.985,
+     "contents": [
+      "person",
+      "tree",
+      "grass",
+      "wall",
+      "table"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 18.55,
+     "Z": 1.66,
+     "parallax": 0.819,
+     "area": 0.296,
+     "present": 0.694,
+     "contents": [
+      "street lamp",
+      "tree",
+      "mountain"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 17.36,
+     "Z": 1.56,
+     "parallax": 0.643,
+     "area": 0.472,
+     "present": 1,
+     "contents": [
+      "floor",
+      "mountain",
+      "cloud",
+      "street lamp",
+      "tree",
+      "grass",
+      "sky",
+      "wall",
+      "window",
+      "window ",
+      "door",
+      "vehicle",
+      "car"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 63.5,
+     "Z": 5.69,
+     "parallax": 0.176,
+     "area": 0.05,
+     "present": 0.709,
+     "contents": [
+      "wooded hills behind",
+      "mountain",
+      "tree",
+      "land",
+      "wall"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2029e24b-56ce-510a-ab9d-f1aecaa39282",
+   "film": "11",
+   "label": "COLUMNS AND BEAMS",
+   "start": 1097.273,
+   "end": 1115.615,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P11-005",
+     "name": "The temple builds itself",
+     "seconds": 6.69
+    },
+    {
+     "id": "P11-006",
+     "name": "Choir chords in the new nave (inferred)",
+     "seconds": 6.69
+    },
+    {
+     "id": "P11-007",
+     "name": "Journal and the lonely mirror (inferred)",
+     "seconds": 4.74
+    },
+    {
+     "id": "P11-004",
+     "name": "Remnants in the sunlight",
+     "seconds": 0.22
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 18.12
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 3.35,
+     "Z": 0.59,
+     "parallax": 1.548,
+     "area": 0.212,
+     "present": 0.988,
+     "contents": [
+      "wall",
+      "column",
+      "stairs",
+      "sky",
+      "window",
+      "ceiling",
+      "window ",
+      "door",
+      "person",
+      "bannister"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.96,
+     "Z": 0.5,
+     "parallax": 1.451,
+     "area": 0.284,
+     "present": 0.988,
+     "contents": [
+      "floor",
+      "stairs",
+      "street",
+      "wall",
+      "person",
+      "bannister"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 12.23,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.006,
+     "present": 0.635,
+     "contents": [
+      "person",
+      "wall",
+      "floor",
+      "door",
+      "table"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 4.04,
+     "Z": 1,
+     "parallax": 1.004,
+     "area": 0.258,
+     "present": 1,
+     "contents": [
+      "floor",
+      "wall",
+      "sky",
+      "window",
+      "window ",
+      "column",
+      "stairs",
+      "ceiling",
+      "bed",
+      "person",
+      "door"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 5.57,
+     "Z": 1.72,
+     "parallax": 0.698,
+     "area": 0.14,
+     "present": 0.988,
+     "contents": [
+      "wall",
+      "floor",
+      "column",
+      "window",
+      "ceiling",
+      "door",
+      "person"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d6d23a1f-5711-5144-a568-4d5854f36b4d",
+   "film": "11",
+   "label": "THE INFINITY POOL",
+   "start": 1115.615,
+   "end": 1132.646,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P11-008",
+     "name": "Journal and the lonely mirror (inferred)",
+     "seconds": 8.87
+    },
+    {
+     "id": "P11-007",
+     "name": "Journal and the lonely mirror (inferred)",
+     "seconds": 4.28
+    },
+    {
+     "id": "P11-009",
+     "name": "Journal and the lonely mirror (inferred)",
+     "seconds": 3.88
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 17.03
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 0.94,
+     "Z": 0.59,
+     "parallax": 1.67,
+     "area": 0.212,
+     "present": 0.251,
+     "contents": [
+      "wall",
+      "person",
+      "bannister"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 1.09,
+     "Z": 0.69,
+     "parallax": 1.451,
+     "area": 0.02,
+     "present": 0.251,
+     "contents": [
+      "floor",
+      "person",
+      "bannister"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 1.55,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.01,
+     "present": 1,
+     "contents": [
+      "person",
+      "wall",
+      "floor"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 8.19,
+     "Z": 3.25,
+     "parallax": 0.308,
+     "area": 0.114,
+     "present": 0.228,
+     "contents": [
+      "person",
+      "painting"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 1.53,
+     "Z": 0.99,
+     "parallax": 1.013,
+     "area": 0.99,
+     "present": 1,
+     "contents": [
+      "person",
+      "wall",
+      "sky",
+      "floor",
+      "bed",
+      "mirror hall",
+      "window",
+      "painting"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 2.26,
+     "Z": 1.43,
+     "parallax": 0.698,
+     "area": 0.14,
+     "present": 0.479,
+     "contents": [
+      "wall",
+      "floor",
+      "person"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "e3e81f60-e2e8-5f2f-a5a4-8f43db970532",
+   "film": "11",
+   "label": "WALKING ON WATER",
+   "start": 1132.646,
+   "end": 1149.678,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P11-010",
+     "name": "Welcoming the new day",
+     "seconds": 9.25
+    },
+    {
+     "id": "P11-009",
+     "name": "Journal and the lonely mirror (inferred)",
+     "seconds": 5.04
+    },
+    {
+     "id": "P11-011",
+     "name": "Welcoming the new day",
+     "seconds": 2.75
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 14.29
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 0.6,
+     "Z": 0.5,
+     "parallax": 1.114,
+     "area": 0.933,
+     "present": 0.161,
+     "contents": [
+      "sky",
+      "street",
+      "wall",
+      "field"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 11.44,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.015,
+     "present": 0.839,
+     "contents": [
+      "person",
+      "building",
+      "floor"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 14.91,
+     "Z": 1.3,
+     "parallax": 0.767,
+     "area": 0.002,
+     "present": 0.839,
+     "contents": [
+      "street lamp",
+      "building",
+      "person",
+      "painting"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 12.73,
+     "Z": 1.11,
+     "parallax": 0.898,
+     "area": 0.815,
+     "present": 0.839,
+     "contents": [
+      "building",
+      "finished temple stands bone-white",
+      "railing",
+      "sky",
+      "threshold facing the harbour",
+      "floor",
+      "mirror hall",
+      "window",
+      "wall",
+      "painting"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 14.84,
+     "Z": 1.3,
+     "parallax": 0.771,
+     "area": 0.048,
+     "present": 1,
+     "contents": [
+      "window",
+      "building",
+      "wall",
+      "grass",
+      "earth"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "df6035e0-1cc5-5f7f-9002-b11c35699883",
+   "film": "11",
+   "label": "A NEW DAY",
+   "start": 1149.678,
+   "end": 1168.019,
+   "cover": 0.958,
+   "from": [
+    {
+     "id": "P11-012",
+     "name": "Welcoming the new day",
+     "seconds": 7.59
+    },
+    {
+     "id": "P11-011",
+     "name": "Welcoming the new day",
+     "seconds": 5.97
+    },
+    {
+     "id": "P11-013",
+     "name": "cut into 12",
+     "seconds": 4
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 7.59
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.73,
+     "Z": 0.2,
+     "parallax": 1.03,
+     "area": 0.507,
+     "present": 0.218,
+     "contents": [
+      "building",
+      "wall"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 1.83,
+     "Z": 0.5,
+     "parallax": 1.114,
+     "area": 0.268,
+     "present": 0.958,
+     "contents": [
+      "floor",
+      "earth",
+      "sky",
+      "street",
+      "wall",
+      "field",
+      "building",
+      "tower"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 8.59,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.065,
+     "present": 0.414,
+     "contents": [
+      "person",
+      "building",
+      "earth"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 9.2,
+     "Z": 1.07,
+     "parallax": 0.934,
+     "area": 0.31,
+     "present": 0.414,
+     "contents": [
+      "finished temple stands bone-white",
+      "street",
+      "building",
+      "tree",
+      "earth",
+      "stairs"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 1.83,
+     "Z": 6,
+     "parallax": 0.726,
+     "area": 0.022,
+     "present": 0.958,
+     "contents": [
+      "building",
+      "wall",
+      "grass",
+      "earth",
+      "mountain",
+      "tower"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "3effa499-d28d-54b0-bd42-eb7088b77b91",
+   "film": "12",
+   "label": "TITLE",
+   "start": 1168.019,
+   "end": 1173.615,
+   "cover": 0.079,
+   "from": [
+    {
+     "id": "P12-001",
+     "name": "Welcome home in the hall",
+     "seconds": 0.44
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 0.44
+   },
+   "planes": [
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 1.34,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.115,
+     "present": 0.079,
+     "contents": [
+      "person",
+      "wall",
+      "poster"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 1.37,
+     "Z": 1.02,
+     "parallax": 0.976,
+     "area": 0.885,
+     "present": 0.079,
+     "contents": [
+      "wall",
+      "window",
+      "lamp"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d9ac5155-6f88-5a45-ae52-ad65bbcc7507",
+   "film": "12",
+   "label": "HUGS WITH NO REASON",
+   "start": 1173.615,
+   "end": 1189.282,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P12-001",
+     "name": "Welcome home in the hall",
+     "seconds": 8.12
+    },
+    {
+     "id": "P12-002",
+     "name": "Loud voices, overheard hearts",
+     "seconds": 4.04
+    },
+    {
+     "id": "P12-003",
+     "name": "The empty rooms of the afterlife",
+     "seconds": 3.51
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 15.67
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.6,
+     "Z": 0.5,
+     "parallax": 1.18,
+     "area": 0.077,
+     "present": 0.224,
+     "contents": [
+      "floor",
+      "chair"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 1.34,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.115,
+     "present": 0.776,
+     "contents": [
+      "person",
+      "wall",
+      "poster"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 1.37,
+     "Z": 1.02,
+     "parallax": 0.976,
+     "area": 0.885,
+     "present": 1,
+     "contents": [
+      "wall",
+      "window",
+      "lamp",
+      "door",
+      "floor",
+      "bed"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 3.49,
+     "Z": 6,
+     "parallax": 0.879,
+     "area": 0.457,
+     "present": 0.224,
+     "contents": [
+      "wall",
+      "painting",
+      "shelf",
+      "chest of drawers"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "383c8f21-4b4c-52d5-845e-2f9f89d558bc",
+   "film": "12",
+   "label": "LESS TIME, MORE SPACE",
+   "start": 1189.282,
+   "end": 1198.235,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P12-004",
+     "name": "Hourglasses and the group photo (archival reenactment)",
+     "seconds": 5.31
+    },
+    {
+     "id": "P12-003",
+     "name": "The empty rooms of the afterlife",
+     "seconds": 3.64
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 5.31
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.6,
+     "Z": 0.5,
+     "parallax": 1.18,
+     "area": 0.077,
+     "present": 0.407,
+     "contents": [
+      "floor",
+      "chair"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 20.81,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.967,
+     "present": 1,
+     "contents": [
+      "old photos reenacted",
+      "street",
+      "wall",
+      "window",
+      "door",
+      "floor",
+      "bed"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 23.97,
+     "Z": 6,
+     "parallax": 0.868,
+     "area": 0.033,
+     "present": 1,
+     "contents": [
+      "wall",
+      "window",
+      "painting",
+      "shelf",
+      "chest of drawers"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1d4f3297-cff1-54f5-aabd-7e6a2d548c8f",
+   "film": "12",
+   "label": "ELDERS, NOW PAST",
+   "start": 1198.235,
+   "end": 1212.784,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P12-006",
+     "name": "Brotherhood chain",
+     "seconds": 6.89
+    },
+    {
+     "id": "P12-005",
+     "name": "Trees at the forest edge",
+     "seconds": 6.21
+    },
+    {
+     "id": "P12-004",
+     "name": "Hourglasses and the group photo (archival reenactment)",
+     "seconds": 1.45
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 13.1
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 2.29,
+     "Z": 0.61,
+     "parallax": 1.631,
+     "area": 0.444,
+     "present": 0.427,
+     "contents": [
+      "sky",
+      "street lamp",
+      "window",
+      "wall",
+      "tree",
+      "ceiling"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 1.68,
+     "Z": 0.45,
+     "parallax": 2.226,
+     "area": 0.284,
+     "present": 0.427,
+     "contents": [
+      "floor",
+      "wall"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 3.73,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.043,
+     "present": 0.427,
+     "contents": [
+      "street lamp",
+      "wall",
+      "tree"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 3.79,
+     "Z": 1.02,
+     "parallax": 0.985,
+     "area": 0.037,
+     "present": 0.427,
+     "contents": [
+      "street lamp",
+      "tree"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 5.77,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.791,
+     "present": 1,
+     "contents": [
+      "wall",
+      "person",
+      "floor",
+      "tree",
+      "window ",
+      "old photos reenacted",
+      "street",
+      "window"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 13.11,
+     "Z": 6,
+     "parallax": 0.44,
+     "area": 0.209,
+     "present": 0.573,
+     "contents": [
+      "wall",
+      "person",
+      "table",
+      "window"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "e74dd521-2dfb-53bb-b780-fdf32762c18a",
+   "film": "12",
+   "label": "BURNING HOURGLASSES",
+   "start": 1212.784,
+   "end": 1228.451,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P12-008",
+     "name": "Football in the meadow, then home",
+     "seconds": 7.3
+    },
+    {
+     "id": "P12-007",
+     "name": "Brotherhood chain",
+     "seconds": 7.2
+    },
+    {
+     "id": "P12-009",
+     "name": "Football in the meadow, then home",
+     "seconds": 0.86
+    },
+    {
+     "id": "P12-006",
+     "name": "Brotherhood chain",
+     "seconds": 0.31
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 15.67
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 3.14,
+     "Z": 0.2,
+     "parallax": 1.183,
+     "area": 0.46,
+     "present": 0.46,
+     "contents": [
+      "heads lean together",
+      "person",
+      "wall"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 7.24,
+     "Z": 0.64,
+     "parallax": 1.55,
+     "area": 0.137,
+     "present": 0.521,
+     "contents": [
+      "earth",
+      "road",
+      "wall",
+      "person"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 11.23,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.005,
+     "present": 0.521,
+     "contents": [
+      "earth",
+      "street lamp",
+      "tree",
+      "road",
+      "person"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 28.41,
+     "Z": 1.49,
+     "parallax": 0.673,
+     "area": 0.017,
+     "present": 0.055,
+     "contents": [
+      "person",
+      "earth"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 15.02,
+     "Z": 1.34,
+     "parallax": 0.942,
+     "area": 0.224,
+     "present": 1,
+     "contents": [
+      "earth",
+      "wall",
+      "building",
+      "tree",
+      "road",
+      "person",
+      "floor",
+      "ball"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 21.52,
+     "Z": 2.82,
+     "parallax": 0.522,
+     "area": 0.203,
+     "present": 1,
+     "contents": [
+      "person",
+      "wall",
+      "street",
+      "tree",
+      "earth",
+      "table"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "5a61d4f8-bb06-56da-a3c0-24806eaf664f",
+   "film": "12",
+   "label": "WINDS PART",
+   "start": 1228.451,
+   "end": 1242.999,
+   "cover": 0.93,
+   "from": [
+    {
+     "id": "P12-009",
+     "name": "Football in the meadow, then home",
+     "seconds": 9.53
+    },
+    {
+     "id": "P12-010",
+     "name": "walk into 13",
+     "seconds": 4
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 13.53
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 15.09,
+     "Z": 0.79,
+     "parallax": 1.268,
+     "area": 0.093,
+     "present": 0.93,
+     "contents": [
+      "earth",
+      "wall",
+      "person",
+      "water",
+      "grass"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 19.12,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.234,
+     "present": 0.93,
+     "contents": [
+      "person",
+      "earth",
+      "street lamp",
+      "tree"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 28.41,
+     "Z": 1.49,
+     "parallax": 0.673,
+     "area": 0.017,
+     "present": 0.93,
+     "contents": [
+      "person",
+      "earth",
+      "sign",
+      "signboard"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 20.31,
+     "Z": 1.06,
+     "parallax": 0.942,
+     "area": 0.224,
+     "present": 0.93,
+     "contents": [
+      "person",
+      "floor",
+      "earth",
+      "ball",
+      "vehicle",
+      "water",
+      "tree",
+      "grass",
+      "boat"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 53.88,
+     "Z": 2.82,
+     "parallax": 0.355,
+     "area": 0.082,
+     "present": 0.655,
+     "contents": [
+      "person",
+      "earth"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "04bbbf2b-7105-5c69-9d2a-3ed5b18a1bc4",
+   "film": "13",
+   "label": "TITLE",
+   "start": 1243.003,
+   "end": 1249.472,
+   "cover": 0.255,
+   "from": [
+    {
+     "id": "P13-001",
+     "name": "Walk from the temple around the harbor",
+     "seconds": 1.65
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 1.65
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 2.18,
+     "Z": 0.78,
+     "parallax": 1.284,
+     "area": 0.043,
+     "present": 0.255,
+     "contents": [
+      "wall",
+      "fence"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.1,
+     "Z": 0.75,
+     "parallax": 1.333,
+     "area": 0.004,
+     "present": 0.255,
+     "contents": [
+      "building",
+      "road",
+      "mountain"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 2.79,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.126,
+     "present": 0.255,
+     "contents": [
+      "person",
+      "wall",
+      "building"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 7.17,
+     "Z": 2.57,
+     "parallax": 0.306,
+     "area": 0.189,
+     "present": 0.255,
+     "contents": [
+      "floor",
+      "street lamp",
+      "wall",
+      "road",
+      "mountain"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 3.16,
+     "Z": 1.13,
+     "parallax": 0.883,
+     "area": 0.16,
+     "present": 0.255,
+     "contents": [
+      "railing",
+      "wall",
+      "road",
+      "fence"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 15.45,
+     "Z": 5.54,
+     "parallax": 0.181,
+     "area": 0.251,
+     "present": 0.255,
+     "contents": [
+      "building",
+      "street lamp",
+      "vehicle",
+      "wall",
+      "tree",
+      "road"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "f2445fa1-eea3-5562-a19e-bb1b5a8b8b13",
+   "film": "13",
+   "label": "SMALL TABLES",
+   "start": 1249.472,
+   "end": 1266.293,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P13-002",
+     "name": "Walk from the temple around the harbor",
+     "seconds": 8.91
+    },
+    {
+     "id": "P13-001",
+     "name": "Walk from the temple around the harbor",
+     "seconds": 7.91
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 16.82
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 0.63,
+     "Z": 0.39,
+     "parallax": 2.579,
+     "area": 0.274,
+     "present": 1,
+     "contents": [
+      "person",
+      "table",
+      "base",
+      "wall",
+      "fence"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.1,
+     "Z": 0.75,
+     "parallax": 1.333,
+     "area": 0.004,
+     "present": 0.47,
+     "contents": [
+      "building",
+      "road",
+      "mountain"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 1.63,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.245,
+     "present": 1,
+     "contents": [
+      "person",
+      "wall",
+      "building"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 3.5,
+     "Z": 2.15,
+     "parallax": 0.467,
+     "area": 0.015,
+     "present": 1,
+     "contents": [
+      "person",
+      "table",
+      "floor",
+      "street lamp",
+      "wall",
+      "road",
+      "mountain"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 2.51,
+     "Z": 1.54,
+     "parallax": 0.651,
+     "area": 0.237,
+     "present": 1,
+     "contents": [
+      "person",
+      "building",
+      "floor",
+      "ceiling",
+      "table",
+      "base",
+      "railing",
+      "wall",
+      "road",
+      "fence"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 6.36,
+     "Z": 3.9,
+     "parallax": 0.257,
+     "area": 0.229,
+     "present": 1,
+     "contents": [
+      "building",
+      "ceiling",
+      "person",
+      "plant",
+      "base",
+      "street lamp",
+      "vehicle",
+      "wall",
+      "tree",
+      "road"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "470c19e1-5841-5801-9d4a-c7b8ac9a8a0d",
+   "film": "13",
+   "label": "COUNTED ORBITS",
+   "start": 1266.293,
+   "end": 1284.407,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P13-004",
+     "name": "Distances, younger selves, praying elders",
+     "seconds": 8.12
+    },
+    {
+     "id": "P13-005",
+     "name": "Distances, younger selves, praying elders",
+     "seconds": 6.37
+    },
+    {
+     "id": "P13-003",
+     "name": "The corner cafe table",
+     "seconds": 2.04
+    },
+    {
+     "id": "P13-002",
+     "name": "Walk from the temple around the harbor",
+     "seconds": 0.87
+    },
+    {
+     "id": "P13-006",
+     "name": "Victory-less seasons (inner montage)",
+     "seconds": 0.71
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 18.11
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 2.45,
+     "Z": 0.53,
+     "parallax": 1.89,
+     "area": 0.049,
+     "present": 0.439,
+     "contents": [
+      "door",
+      "person",
+      "table",
+      "base",
+      "wall",
+      "stairway"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 2.67,
+     "Z": 0.58,
+     "parallax": 1.731,
+     "area": 0.006,
+     "present": 0.391,
+     "contents": [
+      "person",
+      "door",
+      "lone traveler",
+      "wall",
+      "earth",
+      "mountain",
+      "rock"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 4.27,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.14,
+     "present": 0.961,
+     "contents": [
+      "person",
+      "wall",
+      "ghost children behind glass",
+      "railing",
+      "window",
+      "water",
+      "silhouette ghost children",
+      "floor",
+      "door",
+      "wanting to be noticed",
+      "chair"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 4.25,
+     "Z": 1,
+     "parallax": 1.003,
+     "area": 0.014,
+     "present": 0.496,
+     "contents": [
+      "person",
+      "wall",
+      "table"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 4.29,
+     "Z": 1.19,
+     "parallax": 0.835,
+     "area": 0.752,
+     "present": 1,
+     "contents": [
+      "wall",
+      "floor",
+      "ghost children behind glass",
+      "window",
+      "window ",
+      "door",
+      "table",
+      "pier cafe corner table",
+      "chair",
+      "painting",
+      "flower",
+      "person",
+      "building",
+      "ceiling",
+      "base",
+      "earth",
+      "mountain"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 14.01,
+     "Z": 3.03,
+     "parallax": 0.33,
+     "area": 0.28,
+     "present": 0.439,
+     "contents": [
+      "ghost children behind glass",
+      "window",
+      "window ",
+      "door",
+      "building",
+      "ceiling",
+      "person",
+      "plant",
+      "base",
+      "wall",
+      "earth",
+      "mountain"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "e7bcbe7e-882b-5256-928c-cb56ba241c8c",
+   "film": "13",
+   "label": "BURNED STORIES",
+   "start": 1284.407,
+   "end": 1301.228,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P13-007",
+     "name": "Victory-less seasons (inner montage)",
+     "seconds": 9.38
+    },
+    {
+     "id": "P13-006",
+     "name": "Victory-less seasons (inner montage)",
+     "seconds": 7.45
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 16.82
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 0.54,
+     "Z": 0.2,
+     "parallax": 2.221,
+     "area": 0.268,
+     "present": 0.443,
+     "contents": [
+      "wall",
+      "stairway"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 3.52,
+     "Z": 0.5,
+     "parallax": 2.208,
+     "area": 0.292,
+     "present": 1,
+     "contents": [
+      "dusty trophy cases",
+      "vehicle",
+      "floor",
+      "base",
+      "lone traveler",
+      "wall",
+      "earth",
+      "mountain",
+      "rock"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 7.77,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.347,
+     "present": 1,
+     "contents": [
+      "lone traveler",
+      "floor",
+      "person",
+      "base",
+      "wall",
+      "earth",
+      "mountain"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 17.92,
+     "Z": 6,
+     "parallax": 0.434,
+     "area": 0.361,
+     "present": 1,
+     "contents": [
+      "wall",
+      "person",
+      "base",
+      "earth",
+      "mountain"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2a739c97-c1b8-55c3-aef0-cbac8fe3fb18",
+   "film": "13",
+   "label": "HARVESTED POWER",
+   "start": 1301.228,
+   "end": 1319.342,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P13-008",
+     "name": "Victory-less seasons (inner montage)",
+     "seconds": 7.82
+    },
+    {
+     "id": "P13-009",
+     "name": "Harvesting the poppies",
+     "seconds": 7.62
+    },
+    {
+     "id": "P13-007",
+     "name": "Victory-less seasons (inner montage)",
+     "seconds": 2.67
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 10.29
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 3.22,
+     "Z": 0.82,
+     "parallax": 1.223,
+     "area": 0.027,
+     "present": 0.568,
+     "contents": [
+      "earth",
+      "dusty trophy cases",
+      "vehicle",
+      "floor",
+      "base"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 11.76,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.142,
+     "present": 0.852,
+     "contents": [
+      "from his seat",
+      "tray",
+      "person",
+      "earth"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 8.2,
+     "Z": 2.09,
+     "parallax": 0.445,
+     "area": 0.085,
+     "present": 0.421,
+     "contents": [
+      "person",
+      "earth"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 7.77,
+     "Z": 1.36,
+     "parallax": 0.999,
+     "area": 0.483,
+     "present": 1,
+     "contents": [
+      "floor",
+      "person",
+      "burning diary",
+      "dusty cases",
+      "dusty trophy cases",
+      "flowers ice",
+      "love letters blown away",
+      "tree",
+      "earth",
+      "lone traveler",
+      "base"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 27.94,
+     "Z": 7.11,
+     "parallax": 0.141,
+     "area": 0.196,
+     "present": 0.568,
+     "contents": [
+      "person",
+      "tree",
+      "earth",
+      "fence",
+      "wall",
+      "base"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "6d8dad9f-d6aa-5ca6-95a4-680787f44726",
+   "film": "13",
+   "label": "REFOCUS",
+   "start": 1319.342,
+   "end": 1337.456,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P13-011",
+     "name": "From a distant window",
+     "seconds": 7.41
+    },
+    {
+     "id": "P13-010",
+     "name": "From a distant window",
+     "seconds": 7.41
+    },
+    {
+     "id": "P13-012",
+     "name": "Stands and walks the harbor",
+     "seconds": 1.97
+    },
+    {
+     "id": "P13-009",
+     "name": "Harvesting the poppies",
+     "seconds": 1.32
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 18.11
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.04,
+     "Z": 0.2,
+     "parallax": 1.051,
+     "area": 0.012,
+     "present": 0.818,
+     "contents": [
+      "wall",
+      "person",
+      "building",
+      "chair"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 11.5,
+     "Z": 0.75,
+     "parallax": 1.345,
+     "area": 0,
+     "present": 0.591,
+     "contents": [
+      "building",
+      "floor",
+      "vehicle",
+      "water",
+      "bridge",
+      "boat",
+      "earth"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 15.27,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.01,
+     "present": 0.591,
+     "contents": [
+      "building",
+      "person",
+      "haze rising",
+      "sky",
+      "bridge",
+      "earth"
+     ]
+    },
+    {
+     "id": "P3",
+     "name": "secondary / FX",
+     "z_m": 8.2,
+     "Z": 2.09,
+     "parallax": 0.445,
+     "area": 0.085,
+     "present": 0.073,
+     "contents": [
+      "person",
+      "earth"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 10.82,
+     "Z": 1.11,
+     "parallax": 0.921,
+     "area": 0.343,
+     "present": 1,
+     "contents": [
+      "person",
+      "water",
+      "meet his eyes",
+      "wall",
+      "floor",
+      "sky",
+      "window",
+      "building",
+      "tree",
+      "vehicle",
+      "bridge",
+      "boat",
+      "earth"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 13.77,
+     "Z": 2.42,
+     "parallax": 0.724,
+     "area": 0.055,
+     "present": 1,
+     "contents": [
+      "wall",
+      "building",
+      "person",
+      "earth",
+      "water",
+      "bridge",
+      "boat",
+      "tree",
+      "fence"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "0a5cf576-cbcf-5afe-ad16-9816d9e7c264",
+   "film": "13",
+   "label": "WON'T LEAVE",
+   "start": 1337.456,
+   "end": 1352.983,
+   "cover": 0.715,
+   "from": [
+    {
+     "id": "P13-012",
+     "name": "Stands and walks the harbor",
+     "seconds": 11.1
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 11.1
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 7.41,
+     "Z": 0.74,
+     "parallax": 1.345,
+     "area": 0.174,
+     "present": 0.715,
+     "contents": [
+      "vehicle",
+      "water",
+      "bridge",
+      "boat"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 9.97,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.021,
+     "present": 0.715,
+     "contents": [
+      "haze rising",
+      "sky",
+      "building",
+      "bridge"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 10.82,
+     "Z": 1.09,
+     "parallax": 0.921,
+     "area": 0.311,
+     "present": 0.715,
+     "contents": [
+      "vehicle",
+      "water",
+      "tree",
+      "bridge",
+      "boat"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 13.77,
+     "Z": 1.38,
+     "parallax": 0.724,
+     "area": 0.055,
+     "present": 0.715,
+     "contents": [
+      "wall",
+      "building",
+      "earth",
+      "water",
+      "bridge",
+      "boat"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d159962b-d1cf-5066-b6b4-8d298777f9c7",
+   "cover": 0,
+   "planes": null
+  },
+  {
+   "id": "0466a0b4-9cf0-5b17-8881-39538a6e6000",
+   "film": "14",
+   "label": "EVERYTHING I BUILT",
+   "start": 1357.767,
+   "end": 1370.209,
+   "cover": 0.992,
+   "from": [
+    {
+     "id": "P14-001",
+     "name": "Taken by the haze",
+     "seconds": 8.08
+    },
+    {
+     "id": "P14-002",
+     "name": "Floating in the black",
+     "seconds": 4.27
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 12.35
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 3.45,
+     "Z": 0.5,
+     "parallax": 1.793,
+     "area": 0.242,
+     "present": 0.343,
+     "contents": [
+      "street",
+      "water",
+      "wall"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 0.79,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.147,
+     "present": 0.649,
+     "contents": [
+      "covers him",
+      "person",
+      "wall",
+      "window "
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 0.81,
+     "Z": 1.03,
+     "parallax": 0.979,
+     "area": 0.853,
+     "present": 0.992,
+     "contents": [
+      "wall",
+      "sky",
+      "water"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 10.67,
+     "Z": 6,
+     "parallax": 0.58,
+     "area": 0.601,
+     "present": 0.343,
+     "contents": [
+      "street lamp",
+      "wall",
+      "water"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ddafcfc2-95a8-50a1-9bf0-1b7f2cf4878b",
+   "film": "14",
+   "label": "FROM THE GROUND UP",
+   "start": 1370.209,
+   "end": 1382.65,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P14-003",
+     "name": "Floating in the black",
+     "seconds": 7.03
+    },
+    {
+     "id": "P14-002",
+     "name": "Floating in the black",
+     "seconds": 5.41
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 12.44
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 3.45,
+     "Z": 0.5,
+     "parallax": 1.793,
+     "area": 0.242,
+     "present": 0.435,
+     "contents": [
+      "street",
+      "water",
+      "wall"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 0.7,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.101,
+     "present": 1,
+     "contents": [
+      "plane",
+      "wall",
+      "water"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 0.82,
+     "Z": 6,
+     "parallax": 0.58,
+     "area": 0,
+     "present": 1,
+     "contents": [
+      "plane",
+      "street lamp",
+      "wall",
+      "water"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "82fb7b9c-c1c8-5ae4-a58e-b216d4f4496f",
+   "film": "14",
+   "label": "NO WALLS",
+   "start": 1382.65,
+   "end": 1395.092,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P14-004",
+     "name": "Cross-cut: highs and lows of life",
+     "seconds": 9.56
+    },
+    {
+     "id": "P14-003",
+     "name": "Floating in the black",
+     "seconds": 2.88
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 12.44
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 2.66,
+     "Z": 0.2,
+     "parallax": 1.052,
+     "area": 0.765,
+     "present": 0.768,
+     "contents": [
+      "door",
+      "wall"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 2.8,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.152,
+     "present": 1,
+     "contents": [
+      "wall",
+      "door",
+      "plane"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 4.72,
+     "Z": 6,
+     "parallax": 0.592,
+     "area": 0.083,
+     "present": 1,
+     "contents": [
+      "wall",
+      "door",
+      "plane"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "00e8865b-58e0-5bd2-91fe-3ac632b4456a",
+   "film": "14",
+   "label": "THE REEL",
+   "start": 1395.092,
+   "end": 1409.447,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P14-005",
+     "name": "Battle scars and graytones",
+     "seconds": 11.36
+    },
+    {
+     "id": "P14-004",
+     "name": "Cross-cut: highs and lows of life",
+     "seconds": 2.99
+    }
+   ],
+   "camera": {
+    "move": "push",
+    "seconds": 14.35
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.38,
+     "Z": 0.2,
+     "parallax": 3.073,
+     "area": 0.578,
+     "present": 1,
+     "contents": [
+      "person",
+      "door",
+      "wall"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 2.8,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.152,
+     "present": 0.208,
+     "contents": [
+      "wall",
+      "door"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 7.11,
+     "Z": 6,
+     "parallax": 0.597,
+     "area": 0.422,
+     "present": 1,
+     "contents": [
+      "wall",
+      "door"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "51a72536-ea4f-547d-9397-55b0cbd0420f",
+   "film": "14",
+   "label": "TWO ENTWINED MUSES",
+   "start": 1409.447,
+   "end": 1422.846,
+   "cover": 1,
+   "from": [
+    {
+     "id": "P14-007",
+     "name": "The dance at the vintage party",
+     "seconds": 7.93
+    },
+    {
+     "id": "P14-006",
+     "name": "The vintage door appears",
+     "seconds": 4.27
+    },
+    {
+     "id": "P14-005",
+     "name": "Battle scars and graytones",
+     "seconds": 1.2
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 7.93
+   },
+   "planes": [
+    {
+     "id": "P0",
+     "name": "camera mask",
+     "z_m": 1.38,
+     "Z": 0.2,
+     "parallax": 3.073,
+     "area": 0.578,
+     "present": 0.089,
+     "contents": [
+      "person"
+     ]
+    },
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 32.59,
+     "Z": 0.5,
+     "parallax": 1.017,
+     "area": 0.33,
+     "present": 0.592,
+     "contents": [
+      "wall",
+      "floor",
+      "person"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 3.41,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.192,
+     "present": 0.319,
+     "contents": [
+      "person",
+      "wall",
+      "door"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 33.16,
+     "Z": 2.5,
+     "parallax": 1,
+     "area": 0.606,
+     "present": 0.911,
+     "contents": [
+      "wall",
+      "floor",
+      "person",
+      "door",
+      "window",
+      "sconce"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 33.81,
+     "Z": 6,
+     "parallax": 0.981,
+     "area": 0.064,
+     "present": 1,
+     "contents": [
+      "wall",
+      "floor",
+      "person",
+      "table",
+      "flower",
+      "ceiling",
+      "door"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b41a1b6d-f473-5515-8789-10275cf02f11",
+   "film": "14",
+   "label": "I CHOOSE THE DOOR",
+   "start": 1422.846,
+   "end": 1440.072,
+   "cover": 0.486,
+   "from": [
+    {
+     "id": "P14-009",
+     "name": "door into 01",
+     "seconds": 4
+    },
+    {
+     "id": "P14-008",
+     "name": "Disappears into the crowd; door closes",
+     "seconds": 3.86
+    },
+    {
+     "id": "P14-007",
+     "name": "The dance at the vintage party",
+     "seconds": 0.52
+    }
+   ],
+   "camera": {
+    "move": "crane_push",
+    "seconds": 4.38
+   },
+   "planes": [
+    {
+     "id": "P1",
+     "name": "foreground",
+     "z_m": 32.59,
+     "Z": 0.5,
+     "parallax": 1.017,
+     "area": 0.33,
+     "present": 0.03,
+     "contents": [
+      "wall",
+      "floor",
+      "person"
+     ]
+    },
+    {
+     "id": "P2",
+     "name": "character action",
+     "z_m": 1.59,
+     "Z": 1,
+     "parallax": 1,
+     "area": 0.165,
+     "present": 0.456,
+     "contents": [
+      "person",
+      "door",
+      "tree"
+     ]
+    },
+    {
+     "id": "P4",
+     "name": "midground",
+     "z_m": 15.5,
+     "Z": 1.05,
+     "parallax": 1,
+     "area": 0.606,
+     "present": 0.486,
+     "contents": [
+      "wall",
+      "door",
+      "street",
+      "tree",
+      "grass",
+      "earth",
+      "floor",
+      "person"
+     ]
+    },
+    {
+     "id": "P5",
+     "name": "distant background",
+     "z_m": 3.93,
+     "Z": 2.47,
+     "parallax": 0.405,
+     "area": 0.298,
+     "present": 0.262,
+     "contents": [
+      "wall",
+      "window",
+      "door",
+      "floor",
+      "person",
+      "table",
+      "flower"
+     ]
+    }
+   ]
+  }
+ ]
+}
