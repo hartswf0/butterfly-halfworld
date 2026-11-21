@@ -11,10 +11,9 @@ What is verified and what is not
               {"event_type": "user_action", "action": "key_down"|"key_up"|"key_click", "input": "key_w"|...}
     - client.aio.interactions.connect(id) -> async context; .send(), .receive(), .complete(), .cancel()
     - closing the socket does NOT end the session server-side; complete() or cancel() does.
-  CONFIRMED on the live endpoint: the socket opens through this environment's proxy, and a session is created by
-    sending {"event_type": "interaction.create", "model": "genie-4"} on it. A free-tier key is refused there (quota 0).
-  NOT VERIFIED (no generation has run): the shape of a mid-session text event and of the video and audio events
-    that come back. Those live in Session.send() and record(); expect to adjust them on the first real run.
+  CONFIRMED by a real 18-second session (poem 03): session creation, world setup with a seed image, mid-session
+    text, key events, the video and audio that come back, and a clean completion. See live() for the shapes.
+  NOT YET SEEN: a session longer than 18 s, the director's corrections taking effect, and reseeding a second session.
   The key is read from GEMINI_API_KEY in the environment and is never written to a file.
 
 Reads prompts.json (build_prompts.py). Writes a plan and, when live, a log under runs/."""
@@ -24,6 +23,8 @@ RATE = 0.10          # dollars a second, the preview figure quoted to us; unveri
 GAP = 4.0            # seconds between anything we send as text
 LEAD = 0.8           # send a cue this long before the patch starts, so it lands as he speaks
 SESSION = 90.0       # reseed before this
+WALK = 2.0           # seconds of walking after a change of place
+STALE = 6.0          # a director's answer older than this is thrown away
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 EYES = {
@@ -90,11 +91,11 @@ def plan(ch, p, eye='film', max_seconds=None):
             acts.append(dict(t=round(t, 1), do='say', text=x['cue'], patch=x['id'], delta=delta)); last_text = t
         else:
             acts.append(dict(t=round(t, 1), do='hold', patch=x['id'], delta=delta, note='nothing sent; his voice carries it'))
-        # walk through the patch, but stand still for the last second and a half so the next change lands in view
-        still = 'stills' in x['water']
-        if not still and x['end'] - x['t'] > 4:
-            acts.append(dict(t=round(x['t'] + 1.0, 1), do='key', action='key_down', input='key_w', patch=x['id']))
-            acts.append(dict(t=round(x['end'] - 1.5, 1), do='key', action='key_up', input='key_w', patch=x['id']))
+        # LEARNED from the first full take: walking all the way through every patch drove the camera into a wall and
+        # the later cues never registered. So: a short walk only when the place has just changed, then stand.
+        if x['kind'] != 'HOLD' and 'stills' not in x['water'] and x['end'] - x['t'] > 5:
+            acts.append(dict(t=round(x['t'] + 1.5, 1), do='key', action='key_down', input='key_w', patch=x['id']))
+            acts.append(dict(t=round(x['t'] + 1.5 + WALK, 1), do='key', action='key_up', input='key_w', patch=x['id']))
         # the director looks once per patch, after the world has had time to resolve the cue
         acts.append(dict(t=round(min(x['end'] - 1.0, x['t'] + 4.5), 1), do='watch', patch=x['id'],
                          prompt=DIRECTOR.format(hold='\n'.join('- ' + h for h in hold), vary='\n'.join('- ' + v for v in vary), operation=x['operation'])))
@@ -144,82 +145,104 @@ def show(p, seed, acts, img):
 
 # ---------------------------------------------------------------------------------------------- live
 URL = 'wss://generativelanguage.googleapis.com/v1beta/interactions/live'
-
-
-class Session:
-    """A raw socket to the live endpoint. CONFIRMED on the real service: the socket opens through this environment's
-    proxy with the key in the x-goog-api-key header, and the first event is {"event_type": "interaction.create", "model": ...}.
-    The service answered that create with a quota error on a free-tier key, so nothing past it has been seen."""
-    async def __aenter__(self):
-        import ssl, websockets
-        ctx = ssl.create_default_context(cafile=os.environ.get('SSL_CERT_FILE'))
-        self.ws = await websockets.connect(URL, additional_headers={'x-goog-api-key': os.environ['GEMINI_API_KEY']}, ssl=ctx, open_timeout=25, max_size=None)
-        return self
-    async def __aexit__(self, *a): await self.ws.close()
-    async def send(self, ev): await self.ws.send(json.dumps(ev if isinstance(ev, dict) else {'event_type': 'input', 'input': ev}))   # text shape NOT VERIFIED
-    async def receive(self):
-        async for raw in self.ws: yield json.loads(raw) if isinstance(raw, str) else {'event_type': 'binary', 'bytes': len(raw)}
-    async def complete(self): await self.ws.send(json.dumps({'event_type': 'interaction.complete'}))
-    async def cancel(self): await self.ws.send(json.dumps({'event_type': 'interaction.cancel'}))
-
-
-def record(event, log, state):
-    """NOT VERIFIED event shapes: keep everything raw, and remember the most recent thing that looks like a frame."""
-    d = event
-    kind = d.get('event_type', '?')
-    blob = json.dumps(d)
-    if 'image' in blob[:400] or 'video' in blob[:400]: state['frame'] = d
-    log.write(json.dumps(dict(at=round(time.monotonic() - state['t0'], 2), kind=kind, size=len(blob))) + '\n')
-    return kind
+REST = 'https://generativelanguage.googleapis.com/v1beta/models/{}:generateContent'
 
 
 async def live(ch, p, seed, acts, img, args):
-    from google import genai
-    client = genai.Client()                                  # key comes from the environment / proxy, never from this file
-    os.makedirs(os.path.join(HERE, 'runs'), exist_ok=True)
-    name = os.path.join(HERE, 'runs', f"{p['num']}-{args.eye}-{time.strftime('%Y%m%d-%H%M%S')}")
-    state = dict(t0=time.monotonic(), frame=None, sent=0.0, corrections=0)
-    hard_stop = args.max_seconds + 5
-    async with Session() as conn, open(name + '.events.jsonl', 'w') as log:
-        await conn.send(dict(event_type='interaction.create', model=args.model))
+    """One session. CONFIRMED on the live service (poem 03, 18 s): frames arrive as bytes holding JSON; a session is
+    opened with interaction.create; world_setup starts generation about 4 s later; video comes as step.delta events of
+    type "video" (one 1280x720 JPEG 2000 frame each, 24 a second) and type "audio" (48 kHz stereo 16-bit PCM);
+    mid-session text is {"event_type": "input", "content": [{"type": "text", "text": ...}]}; interaction.complete
+    ends it and returns token usage."""
+    import ssl, websockets
+    key = os.environ['GEMINI_API_KEY']; ctx = ssl.create_default_context(cafile=os.environ.get('SSL_CERT_FILE'))
+    run = os.path.join(HERE, 'runs', f"{p['num']}-{args.eye}-{time.strftime('%Y%m%d-%H%M%S')}"); os.makedirs(run + '/jp2')
+    st = dict(t0=None, frames=0, last=None, sent=-99.0, corrections=0, usage=None, notes=[])
+    pcm = open(run + '/world.pcm', 'wb'); log = open(run + '/log.jsonl', 'w')
+    note = lambda **k: (log.write(json.dumps(dict(at=round(time.monotonic() - (st['t0'] or time.monotonic()), 2), **k), ensure_ascii=False) + '\n'), log.flush())
+    async with websockets.connect(URL, additional_headers={'x-goog-api-key': key}, ssl=ctx, open_timeout=25, max_size=None) as ws:
+        send = lambda ev: ws.send(json.dumps(ev))
         async def pump():
-            async for ev in conn.receive():
-                if record(ev, log, state) in ('interaction.completed', 'interaction.canceled'): return
-        reader = asyncio.create_task(pump())
+            async for raw in ws:
+                d = json.loads(raw.decode() if isinstance(raw, bytes) else raw)
+                for e in (d.get('events') or [d]):
+                    k = e.get('event_type'); dl = e.get('delta') or {}
+                    if k == 'step.delta' and dl.get('type') == 'video':
+                        st['frames'] += 1; st['last'] = base64.b64decode(dl['data'])
+                        open(f"{run}/jp2/{st['frames']:05d}.jp2", 'wb').write(st['last'])
+                        if st['frames'] == 1: note(event='first frame')
+                    elif k == 'step.delta' and dl.get('type') == 'audio': pcm.write(base64.b64decode(dl['data']))
+                    elif k == 'interaction.completed': st['usage'] = e.get('usage'); note(event=k, usage=e.get('usage')); return
+                    elif k in ('interaction.cancelled', 'error'): note(event=k, body=e); return
+                    elif k not in ('step.delta',): note(event=k)
+        async def direct(a):
+            """One look at the newest frame; at most one short correction; never within GAP of another line."""
+            asked = time.monotonic()
+            try:
+                from PIL import Image
+                im = Image.open(io.BytesIO(st['last'])).convert('RGB'); im.thumbnail((512, 512)); buf = io.BytesIO(); im.save(buf, 'JPEG', quality=75)
+                body = dict(contents=[dict(parts=[dict(text=a['prompt']), dict(inline_data=dict(mime_type='image/jpeg', data=base64.b64encode(buf.getvalue()).decode()))])],
+                            generationConfig=dict(responseMimeType='application/json', temperature=0))
+                def call():
+                    import urllib.request
+                    rq = urllib.request.Request(REST.format(args.director), data=json.dumps(body).encode(), headers={'x-goog-api-key': key, 'content-type': 'application/json'})
+                    return json.load(urllib.request.urlopen(rq, timeout=20, context=ctx))
+                r = await asyncio.get_running_loop().run_in_executor(None, call)
+                v = json.loads(re.search(r'\{.*\}', r['candidates'][0]['content']['parts'][0]['text'], re.S).group(0))
+                acted = False; age = time.monotonic() - asked
+                # LEARNED: answers took 10-15 s and arrived about a patch late; one stale correction removed the choir.
+                if age > STALE: note(event='director stale', patch=a['patch'], age=round(age, 1), would_have_sent=v.get('correction')); return
+                if v.get('ok') is False and v.get('correction') and time.monotonic() - st['sent'] >= GAP and st['corrections'] < args.max_corrections and st['t0']:
+                    await send(dict(event_type='input', content=[dict(type='text', text=v['correction'])])); st['sent'] = time.monotonic(); st['corrections'] += 1; acted = True
+                note(event='director', patch=a['patch'], ok=v.get('ok'), missing=v.get('missing'), correction=v.get('correction'), sent=acted)
+            except Exception as e:
+                note(event='director skipped', patch=a['patch'], why=f'{type(e).__name__}: {str(e)[:120]}')
+        await send(dict(event_type='interaction.create', model=args.model))
+        reader = asyncio.create_task(pump()); tasks = []
         try:
+            await asyncio.sleep(0.8)
             for a in acts:
-                wait = a['t'] - (time.monotonic() - state['t0'])
-                if wait > 0: await asyncio.sleep(wait)
-                if time.monotonic() - state['t0'] > hard_stop: break
+                if st['t0']:
+                    w = a['t'] - (time.monotonic() - st['t0'])
+                    if w > 0: await asyncio.sleep(w)
+                    if reader.done() or time.monotonic() - st['t0'] > args.max_seconds + 3: break
                 if a['do'] == 'world_setup':
                     ev = dict(event_type='world_setup', world_prompt=a['text'])
                     if img[0]: ev['reference_image'] = dict(data=base64.b64encode(img[0]).decode(), mime_type='image/jpeg')
-                    await conn.send(ev)
+                    await send(ev); st['t0'] = time.monotonic(); note(event='world_setup', words=len(a['text'].split()), image=img[1])
                 elif a['do'] == 'say':
-                    await conn.send(a['text']); state['sent'] = time.monotonic()
-                elif a['do'] == 'key':
-                    await conn.send(dict(event_type='user_action', action=a['action'], input=a['input']))
-                elif a['do'] == 'watch' and state['frame'] is not None and not args.no_director:
-                    asyncio.create_task(direct(client, conn, a, state, args))
-                elif a['do'] in ('complete', 'reseed'):
-                    break                                    # one session per run; reseeding is a second run from the saved last frame
+                    await send(dict(event_type='input', content=[dict(type='text', text=a['text'])])); st['sent'] = time.monotonic(); note(event='say', patch=a['patch'], text=a['text'])
+                elif a['do'] == 'key': await send(dict(event_type='user_action', action=a['action'], input=a['input']))
+                elif a['do'] == 'watch' and st['last'] and not args.no_director: tasks.append(asyncio.create_task(direct(a)))
+                elif a['do'] in ('complete', 'reseed'): break
         finally:
             try:
-                await conn.complete(); await asyncio.wait_for(reader, 10)
+                await send(dict(event_type='interaction.complete')); await asyncio.wait_for(reader, 15)
             except Exception:
-                await conn.cancel()                          # never leave a session billing
-    print('log:', name + '.events.jsonl')
+                try: await send(dict(event_type='interaction.cancel'))          # never leave a session billing
+                except Exception: pass
+            for t in tasks:
+                if not t.done(): t.cancel()
+    pcm.close(); log.close()
+    print(f"\nframes {st['frames']} ({st['frames'] / 24:.1f} s) · corrections sent {st['corrections']} · usage {json.dumps(st['usage'])[:200]}")
+    finish(run, p, st['frames'])
 
 
-async def direct(client, conn, a, state, args):
-    """One look, at most one correction, and never within GAP of another text."""
-    try:
-        r = await client.aio.models.generate_content(model=args.director, contents=[a['prompt'], json.dumps(state['frame'])[:200_000]])
-        m = re.search(r'\{.*\}', r.text or '', re.S); v = json.loads(m.group(0)) if m else {}
-        if v.get('ok') is False and v.get('correction') and time.monotonic() - state['sent'] >= GAP and state['corrections'] < args.max_corrections:
-            await conn.send(v['correction']); state['sent'] = time.monotonic(); state['corrections'] += 1
-    except Exception as e:
-        print('director skipped:', type(e).__name__, e)
+def finish(run, p, frames):
+    """Turn the saved frames and sound into two films: the world alone, and the world under his reading."""
+    import subprocess
+    from PIL import Image
+    os.makedirs(run + '/f', exist_ok=True)
+    for f in sorted(os.listdir(run + '/jp2')):
+        Image.open(f'{run}/jp2/{f}').convert('RGB').save(f"{run}/f/{f[:-4]}.jpg", quality=90)
+    q = ['ffmpeg', '-y', '-loglevel', 'error', '-framerate', '24', '-i', run + '/f/%05d.jpg', '-f', 's16le', '-ar', '48000', '-ac', '2', '-i', run + '/world.pcm']
+    subprocess.run(q + ['-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-c:a', 'aac', '-shortest', run + '/world.mp4'])
+    voice = os.path.normpath(os.path.join(HERE, '../..', json.load(open(os.path.join(HERE, 'tide.json')))['poems'][int(p['num']) - 1]['audio']))
+    if os.path.exists(voice):          # generation starts about four seconds after setup, so the film's zero is the reading's zero
+        subprocess.run(q + ['-i', voice, '-filter_complex', '[1:a]volume=0.45[w];[w][2:a]amix=inputs=2:duration=first:normalize=0[a]', '-map', '0:v', '-map', '[a]',
+                            '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-c:a', 'aac', '-shortest', run + '/with_voice.mp4'])
+    import shutil; shutil.rmtree(run + '/jp2')
+    print('take:', run)
 
 
 def main():
