@@ -196,7 +196,8 @@ async def live(ch, p, seed, acts, img, args):
                     if k == 'step.delta' and dl.get('type') == 'video':
                         st['frames'] += 1; st['last'] = base64.b64decode(dl['data'])
                         open(f"{run}/jp2/{st['frames']:05d}.jp2", 'wb').write(st['last'])
-                        if st['frames'] == 1: note(event='first frame')
+                        if st['frames'] == 1: note(event='first frame'); st['f0'] = time.monotonic()
+                        st['f1'] = time.monotonic()
                     elif k == 'step.delta' and dl.get('type') == 'audio': pcm.write(base64.b64decode(dl['data']))
                     elif k == 'interaction.completed': st['usage'] = e.get('usage'); note(event=k, usage=e.get('usage')); return
                     elif k in ('interaction.cancelled', 'error'): note(event=k, body=e); return
@@ -251,7 +252,10 @@ async def live(ch, p, seed, acts, img, args):
                 if not t.done(): t.cancel()
     pcm.close(); log.close()
     print(f"\nframes {st['frames']} ({st['frames'] / 24:.1f} s) · corrections sent {st['corrections']} · usage {json.dumps(st['usage'])[:200]}")
-    finish(run, p, st['frames'])
+    # LEARNED: frames do not arrive at 24 a second (17.3 and 22.4 in the first takes). Encode at the rate they came.
+    fps = max(1.0, (st['frames'] - 1) / max(.1, st.get('f1', 1) - st.get('f0', 0)))
+    print(f'delivered at {fps:.1f} frames a second')
+    finish(run, p, fps)
 
 
 def finish(run, p, frames):
@@ -261,11 +265,11 @@ def finish(run, p, frames):
     os.makedirs(run + '/f', exist_ok=True)
     for f in sorted(os.listdir(run + '/jp2')):
         Image.open(f'{run}/jp2/{f}').convert('RGB').save(f"{run}/f/{f[:-4]}.jpg", quality=90)
-    q = ['ffmpeg', '-y', '-loglevel', 'error', '-framerate', '24', '-i', run + '/f/%05d.jpg', '-f', 's16le', '-ar', '48000', '-ac', '2', '-i', run + '/world.pcm']
-    subprocess.run(q + ['-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-c:a', 'aac', '-shortest', run + '/world.mp4'])
+    q = ['ffmpeg', '-y', '-loglevel', 'error', '-framerate', f'{frames:.3f}', '-i', run + '/f/%05d.jpg', '-f', 's16le', '-ar', '48000', '-ac', '2', '-i', run + '/world.pcm']
+    subprocess.run(q + ['-r', '24', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-c:a', 'aac', '-shortest', run + '/world.mp4'])
     voice = os.path.normpath(os.path.join(HERE, '../..', json.load(open(os.path.join(HERE, 'tide.json')))['poems'][int(p['num']) - 1]['audio']))
     if os.path.exists(voice):          # generation starts about four seconds after setup, so the film's zero is the reading's zero
-        subprocess.run(q + ['-i', voice, '-filter_complex', '[1:a]volume=0.45[w];[w][2:a]amix=inputs=2:duration=first:normalize=0[a]', '-map', '0:v', '-map', '[a]',
+        subprocess.run(q + ['-i', voice, '-filter_complex', '[1:a]volume=0.45[w];[w][2:a]amix=inputs=2:duration=first:normalize=0[a]', '-map', '0:v', '-map', '[a]', '-r', '24',
                             '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-c:a', 'aac', '-shortest', run + '/with_voice.mp4'])
     import shutil; shutil.rmtree(run + '/jp2')
     print('take:', run)
