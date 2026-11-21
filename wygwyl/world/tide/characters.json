@@ -1,16 +1,44 @@
 {
-  "note": "DRAFT character and style locks, written to be edited. Every thick prompt is regenerated from this file by build_prompts.py. The colour logic follows the scene book: Baltimere, the city he leaves, is sodium orange; Atlantis is white ceramic seamed with light.",
-  "style": "Afrofuturist Atlantis: a Black harbour city that kept its flood. Old walls carry a salt line at four metres. Ruins are mended in white ceramic seamed with light. Rusted teal steel, painted plywood, wet asphalt as a mirror. Photographic, 35mm, practical light sources, humid air. The future here is repaired and inherited, never chrome or sterile. Everyone in the city is Black, of every age; elders are present and honoured.",
-  "skin": "Deep brown skin lit with full tonal range: a warm key, a rim light in the district's glow colour. Never crushed to a flat silhouette unless the beat asks for one.",
-  "cast": {
-    "POET": {
-      "lock": "THE POET: a Black man in his thirties, the one who speaks. Close-cropped hair, short beard. Always in matte black: fitted mock-neck long sleeve, black trousers, black boots. A thin seam of white light runs from his collar to over his heart, like mended ceramic; it brightens when he speaks. Unhurried, hands open.",
-      "holds": ["matte black mock-neck", "seam of light over the heart", "close-cropped hair, short beard"]
-    },
-    "EX": {
-      "lock": "THE EX: a Black man of the same age, the man he loved and is leaving. Leaner and taller. Locs gathered at the nape. A long sodium-orange coat with a teal lining. A vape whose ember pulses cyan-white in his hand. Seen from behind or in profile; he turns his face to camera only when a beat says so.",
-      "holds": ["long sodium-orange coat, teal lining", "locs gathered at the nape", "cyan-white vape ember", "back or profile to camera"]
-    },
-    "PAIR": "The two men were lovers. Their intimacy is shown by distance closing or opening, by hands, by foreheads, by who turns away. Tender and adult, never a spectacle, never a joke."
-  }
+  "note": "DRAFT locks, written to be edited. Every prompt is rebuilt from this file by build_prompts.py. RULE: every human being who appears in any prompt is stated with gender, race and outfit; the build fails its own check if a person is named without a tag. Colour logic follows the scene book: Baltimere, the city he leaves, is sodium orange; Atlantis is white ceramic seamed with light.",
+  "style": "Afrofuturist Atlantis: a Black harbour city that kept its flood. Old walls carry a salt line at four metres. Ruins are mended in white ceramic seamed with light. Rusted teal steel, painted plywood, wet asphalt as a mirror. Photographic, practical light sources, humid air. The future here is repaired and inherited, never chrome or sterile.",
+  "skin": "Deep brown skin lit with full tonal range: a warm key and a rim light in the district's glow colour. Never crushed to a flat silhouette unless the beat asks for one.",
+  "pair": "The Poet and the Ex were lovers: two Black gay men. Their intimacy is shown by distance closing or opening, by hands, by foreheads, by who turns away. Tender and adult, never a spectacle, never a joke.",
+  "people": [
+    {"id": "POET", "match": "poet", "name": "the Poet", "gender": "man", "race": "Black", "age": "thirties",
+     "outfit": "matte black fitted mock-neck long sleeve, black trousers, black boots; a thin seam of white light from collar to heart that brightens when he speaks",
+     "body": "close-cropped hair, short beard; unhurried, hands open"},
+    {"id": "EX", "match": "\\bex\\b|lover", "name": "the Ex", "gender": "man", "race": "Black", "age": "thirties",
+     "outfit": "long sodium-orange coat with teal lining over a charcoal knit, dark jeans, white trainers; a vape whose ember pulses cyan-white",
+     "body": "leaner and taller than the Poet, locs gathered at the nape; seen from behind or in profile unless a beat says he turns"},
+    {"id": "MOTHER", "match": "mother", "name": "the Mother", "gender": "woman", "race": "Black", "age": "sixties",
+     "outfit": "indigo wrap dress, gold hoop earrings, cream cardigan, house slippers", "body": "silver-streaked hair pinned up"},
+    {"id": "FATHER", "match": "father", "name": "the Father", "gender": "man", "race": "Black", "age": "sixties",
+     "outfit": "pressed white shirt with sleeves rolled, brown wool trousers, braces, reading glasses", "body": "grey beard, shaved head"},
+    {"id": "PARENTS", "match": "parents", "name": "the Parents", "gender": "a woman and a man", "race": "Black", "age": "sixties",
+     "outfit": "she in an indigo wrap dress and cream cardigan; he in a white shirt, brown trousers and braces", "body": "standing close together"},
+    {"id": "CHILD", "match": "child|boy\\b", "name": "the Child", "gender": "boy", "race": "Black", "age": "about eight",
+     "outfit": "yellow raincoat over striped pyjamas, bare feet", "body": "short curls; the Poet as a child"},
+    {"id": "ANCESTORS", "match": "ancestor|generation", "name": "the Ancestors", "gender": "women and men", "race": "Black", "age": "every age",
+     "outfit": "white ceramic-plate collars over long indigo and ochre robes, cowrie and brass at the wrists, bare feet", "body": "walking in procession, faces calm"},
+    {"id": "ELDERS", "match": "elder", "name": "the Elders", "gender": "women and men", "race": "Black", "age": "seventies and older",
+     "outfit": "layered white linen, wide-brimmed hats, carved canes, gold rings", "body": "seated or standing still"},
+    {"id": "FRIENDS", "match": "friend|guest|queue", "name": "the Friends", "gender": "men and women, among them gay couples", "race": "Black", "age": "twenties to forties",
+     "outfit": "going-out clothes: mesh tops, silk shirts open at the collar, tailored shorts, bright sneakers, gold chains", "body": "laughing, arms around each other"},
+    {"id": "DJ", "match": "\\bdj\\b", "name": "the DJ", "gender": "woman", "race": "Black", "age": "forties",
+     "outfit": "silver bomber jacket, black bodysuit, headphones at her neck, long box braids", "body": "one hand on the fader"},
+    {"id": "DANCERS", "match": "dancer|crowd|people|bodies|party|congregation", "name": "the Crowd", "gender": "men and women", "race": "Black", "age": "every age",
+     "outfit": "club and street clothes in teal, orange and white: vests, wide trousers, head wraps, sneakers", "body": "moving together"},
+    {"id": "ANGELS", "match": "angel", "name": "the Angels", "gender": "men", "race": "Black", "age": "ageless",
+     "outfit": "white ceramic breastplates seamed with light over bare arms, long white skirts", "body": "tall, shaved heads, hands open"},
+    {"id": "CHOIR", "match": "choir|chapel", "name": "the Choir", "gender": "women and men", "race": "Black", "age": "every age",
+     "outfit": "deep blue choir robes with white stoles", "body": "standing in rows, swaying"},
+    {"id": "BYSTANDERS", "match": "bystander|stranger|passer", "name": "the Bystanders", "gender": "men and women", "race": "Black", "age": "every age",
+     "outfit": "commuter clothes: rain jackets, work uniforms, backpacks", "body": "looking on, not stepping in"},
+    {"id": "MUSE", "match": "muse", "name": "the Muse", "gender": "man", "race": "Black", "age": "twenties",
+     "outfit": "open white linen shirt, gold chain, loose cream trousers, bare feet", "body": "shaved head; half turned away"},
+    {"id": "COUPLE", "match": "couple|\\bpair\\b", "name": "the Couple", "gender": "two men", "race": "Black", "age": "thirties",
+     "outfit": "one in the Poet's matte black, one in the Ex's sodium-orange coat", "body": "close, foreheads nearly touching"},
+    {"id": "FIGURES", "match": "figure|silhouette|\\bsoul\\b|\\bman\\b|\\bmen\\b|\\bwoman\\b|\\bwomen\\b|person|citizen", "name": "the Figures", "gender": "men and women", "race": "Black", "age": "every age",
+     "outfit": "long coats and wraps in rusted teal and white", "body": "seen at a distance"}
+  ]
 }
