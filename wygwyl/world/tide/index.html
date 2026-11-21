@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Tideline · WYGWYL</title>
+<link rel="icon" href="../../dot.svg">
+<meta property="og:title" content="The Tideline — words to water to worlds">
+<meta property="og:description" content="The poet reads; each word is a drop, each line a wave, and what the wave leaves on the shore is the city. Fourteen poems, ring by ring.">
+<style>
+:root{--ink:#eaf2ff;--dim:#93a7cc;--gold:#ffd23f;--pink:#ff3d6e;--bg:#061433;--panel:#0b1e47;--edge:rgba(234,242,255,.16)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 "Iowan Old Style",Palatino,Georgia,serif}
+main{max-width:1240px;margin:0 auto;padding:18px 16px 70px}
+.k,.lab,button,select,th{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+.k{font-weight:700;font-size:11px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+.k a{color:inherit}
+h1{font-size:clamp(26px,5vw,42px);font-weight:400;line-height:1.08;margin:6px 0 6px}
+.note{color:var(--dim);max-width:800px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 10px}
+select,button{background:var(--panel);color:var(--ink);border:1px solid var(--edge);border-radius:18px;padding:8px 14px;min-height:38px;font-weight:600;font-size:13px;cursor:pointer}
+button.go{border-color:var(--gold);color:var(--gold);min-width:92px}
+button.on{border-color:var(--gold);color:var(--gold)}
+input[type=range]{flex:1;min-width:140px;accent-color:var(--gold)}
+#clock{font:600 12px "Helvetica Neue",Arial,sans-serif;color:var(--dim);min-width:84px;text-align:right}
+.stage{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;align-items:start}
+@media(max-width:860px){.stage{grid-template-columns:1fr}}
+#cv{width:100%;aspect-ratio:1;display:block;background:#04102b;border:1px solid var(--edge);border-radius:50%}
+.card{background:var(--panel);border:1px solid var(--edge);padding:12px 14px;margin-bottom:10px}
+.lab{font-weight:800;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+#line{font-size:19px;line-height:1.35;min-height:78px}
+#line span{opacity:.28;transition:opacity .15s}
+#line span.s{opacity:1}
+#place{font-size:17px}
+#what{font-size:13.5px;color:#c9d6f2;margin-top:3px}
+.kv{display:grid;grid-template-columns:74px 1fr;gap:3px 10px;font-size:13px;margin-top:8px}
+.kv b{font:700 10px "Helvetica Neue",Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);padding-top:2px}
+.chips{display:flex;gap:4px;flex-wrap:wrap}
+.chips i{width:22px;height:22px;border-radius:50%;border:1px solid var(--edge)}
+#prompt{font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace;color:#d8e6ff;white-space:pre-wrap}
+#log{list-style:none;font-size:13px;max-height:190px;overflow:auto}
+#log li{display:flex;gap:8px;padding:3px 0;border-bottom:1px solid var(--edge)}
+#log li b{font:700 10px "Helvetica Neue",Arial,sans-serif;color:var(--gold);min-width:44px;padding-top:3px}
+h2{font-size:24px;font-weight:400;margin:34px 0 6px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:10px}
+.three .card{margin:0;border-top:3px solid var(--c)}
+.three h3{font-size:18px;font-weight:400}
+.three p{font-size:13.5px;margin-top:4px;color:#c9d6f2}
+.tw{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:560px}
+th{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-align:left;font-weight:800}
+th,td{padding:7px 10px 7px 0;border-bottom:1px solid var(--edge);vertical-align:top}
+td:first-child{white-space:nowrap}
+code{font:12px ui-monospace,Menlo,monospace;color:#bcd0f5}
+</style>
+</head>
+<body>
+<main>
+<div class="k"><a href="../survey/index.html">The Survey</a> · <a href="../survey/genie.html">Through the Door</a> · The Tideline</div>
+<h1>The Tideline — words to water to worlds</h1>
+<p class="note">Press play. He reads from the centre. Each word is a drop, each line is a wave, and each wave pushes the earlier ones further up the shore. What stays behind when the water pulls back is the city, ring by ring.</p>
+
+<div class="bar">
+  <select id="poem" aria-label="Poem"></select>
+  <button class="go" id="play">▶ Play</button>
+  <input type="range" id="seek" min="0" max="100" step="0.05" value="0" aria-label="Position in the reading">
+  <span id="clock">0:00 / 0:00</span>
+  <button data-style="silt" class="on">Silt</button><button data-style="halftone">Halftone</button><button data-style="pixel">Pixel</button>
+</div>
+
+<div class="stage">
+  <canvas id="cv"></canvas>
+  <div>
+    <div class="card"><div class="lab">He is saying</div><div id="line">—</div></div>
+    <div class="card"><div class="lab" id="carrylab">This wave carries</div><div id="place">—</div><div id="what"></div>
+      <div class="kv">
+        <b>District</b><span id="dist"></span>
+        <b>Mood</b><span id="mood"></span>
+        <b>Hour</b><span id="hour"></span>
+        <b>Weather</b><span id="wx"></span>
+        <b>Sound</b><span id="snd"></span>
+        <b>Colour</b><span class="chips" id="chips"></span>
+        <b>Seen as</b><span id="seen"></span>
+      </div></div>
+    <div class="card"><div class="lab">The event this line would send to a world model</div><div id="prompt">—</div></div>
+    <div class="card"><div class="lab">Left on the shore so far</div><ul id="log"></ul></div>
+  </div>
+</div>
+
+<h2>Three states of what he says</h2>
+<div class="three">
+  <div class="card" style="--c:#eaf2ff"><h3>Foam — the words</h3><p>Written along the newest wave in the order he speaks them. They last two waves and evaporate. A line the scene book cannot place leaves only foam and colour.</p></div>
+  <div class="card" style="--c:#4f8fd0"><h3>Silt — colour and material</h3><p>Every word drops grains in its district's measured palette. Silt never leaves; it only dries and pales as later waves push it outward. Long words and slow delivery leave more.</p></div>
+  <div class="card" style="--c:#ffd23f"><h3>Stones — the places</h3><p>When a line names a scene, the wave carries that scene's archive views and sets them down. These are the buildings. The first line of the poem ends up as the outermost ring: the wall.</p></div>
+</div>
+<p class="note" style="margin-top:12px">Read the finished shore from the centre outward and it runs backwards through the poem, like a core sample. Read it as a plan and it is Plato's Atlantis: rings of land and water around a centre.</p>
+
+<h2>What every line already has</h2>
+<p class="note">Nothing here was written for this page. It joins what is already in the repository on one key: the moment he says the line.</p>
+<div class="tw"><table>
+<tr><th>Layer</th><th>What it gives a line</th><th>Count</th><th>Where</th></tr>
+<tr><td>His voice</td><td>Start and end of every line and every word, and the silences between</td><td>14 readings, 267 lines</td><td><code>timings/NN.json</code></td></tr>
+<tr><td>Scene</td><td>Named set piece, what happens, camera, position, and the line fragments that trigger it</td><td>90 scenes</td><td><code>world/districts/scenes.json</code></td></tr>
+<tr><td>District</td><td>Mood, hour, weather, sound, light technique, architecture</td><td>13 districts</td><td>same, and <code>_city/districts.json</code></td></tr>
+<tr><td>Colour</td><td>Measured body and glow palettes per district</td><td>12 palettes</td><td><code>_city/palettes.json</code></td></tr>
+<tr><td>Views</td><td>Archive images tied to each scene, each with its describing words</td><td>100 views</td><td><code>scenes.json → views</code></td></tr>
+<tr><td>Sound</td><td>Poem mood, a described sound, the drone span, loops labelled by type and mood</td><td>698 labelled sounds</td><td><code>poemworlds.json</code>, <code>labels.json</code></td></tr>
+<tr><td>Other mouths</td><td>Sung versions of the same lines, and every place a phrase recurs</td><td>80 voices, 7,021 echoes</td><td><code>cast.json</code>, <code>echoes.json</code></td></tr>
+<tr><td>Material</td><td>Textures and street grit sorted by kind: stoop, puddle, cobbles, doorway</td><td>14 materials + grit sets</td><td><code>world/language/</code></td></tr>
+<tr><td>Place</td><td>Location, terrain, set pieces, arrival and departure for each poem</td><td>14 sites</td><td><code>world/bible/NN.json</code></td></tr>
+</table></div>
+</main>
+
+<audio id="au" preload="metadata"></audio>
+<script>
+const $=s=>document.querySelector(s),cv=$('#cv'),g=cv.getContext('2d'),au=$('#au');
+let T,P,parts=[],stones=[],style='silt',fake=0,fakeOn=false,lastTick=0,imgs={},shownLine=-2,noAudio=false;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),ease=x=>1-Math.pow(1-clamp(x),3),sm=x=>{x=clamp(x);return x*x*(3-2*x)};
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const hex=(h,a,l=0)=>{const n=parseInt(h.slice(1),16),m=v=>Math.round(v+(255-v)*l);return`rgba(${m(n>>16)},${m(n>>8&255)},${m(n&255)},${a})`};
+const now=()=>noAudio||fakeOn&&au.paused&&!au.currentTime?fake:au.currentTime;
+const playing=()=>noAudio?fakeOn:!au.paused;
+
+function load(i){
+  P=T.poems[i];au.src='../../'+encodeURI(P.audio);noAudio=false;fake=0;fakeOn=false;shownLine=-2;
+  $('#seek').max=P.dur;$('#seek').value=0;$('#play').textContent='▶ Play';
+  const r=rng(1000+i*77);parts=[];stones=[];const seen=new Set();
+  P.lines.forEach((L,li)=>{
+    const D=T.districts[P.scenes[L.scene].d],span=Math.max(.2,L.t1-L.t0);
+    let ws=L.words.length?L.words:L.text.split(/\s+/).map((w,j,a)=>[w,L.t0+span*j/a.length,L.t0+span*(j+1)/a.length]);
+    L.ws=ws.map(w=>({w:w[0].trim(),s:w[1],e:w[2],th:-Math.PI/2+2*Math.PI*((w[1]+w[2])/2-L.t0)/span*.94}));
+    L.ws.forEach(w=>{const m=Math.round(5+(w.e-w.s)*26);
+      for(let q=0;q<m;q++){const glow=r()<.16;
+        parts.push({li,s:w.s+r()*(w.e-w.s),th:w.th+(r()-.5)*.34,j:(r()+r()+r()-1.5)*.62,
+          c:glow?D.glow[Math.floor(r()*D.glow.length)]:D.body[Math.floor(r()*D.body.length)],glow,z:.7+r()*1.5})}});
+    if(L.hit&&!seen.has(L.scene)){seen.add(L.scene);
+      P.scenes[L.scene].views.forEach((v,q,a)=>{stones.push({li,sc:L.scene,v,s:L.t0+span*(q+1)/(a.length+1),th:-Math.PI/2+2*Math.PI*(q+.5)/a.length+li*.9});
+        if(!imgs[v]){const im=new Image();im.src='../districts/t/'+String(v).padStart(3,'0')+'.webp';imgs[v]=im}})}
+  });
+}
+
+function draw(){
+  const t=now(),dpr=Math.min(2,devicePixelRatio||1),S=cv.clientWidth;
+  if(cv.width!==Math.round(S*dpr)){cv.width=cv.height=Math.round(S*dpr)}
+  g.setTransform(dpr,0,0,dpr,0,0);
+  const c=S/2,R=S/2-10,r0=S*.1,N=P.lines.length,step=(R-r0)/(N+.4);
+  let cur=-1;for(let i=0;i<N;i++)if(P.lines[i].t0<=t)cur=i;
+  const L=cur>=0?P.lines[cur]:null,k=cur<0?0:cur+ease((t-L.t0)/(L.t1-L.t0));
+  const rad=i=>r0+(k-i)*step;
+  const D=T.districts[P.scenes[(L||P.lines[0]).scene].d];
+  // the dry shore
+  g.fillStyle='#04102b';g.fillRect(0,0,S,S);
+  // water: the wet disc out to the newest wave, pulling back in silence
+  const speaking=L&&t<=L.t1,wet=cur<0?r0:rad(cur)+step*(speaking?.55:.55-.3*sm((t-L.t1)/1.2));
+  const gr=g.createRadialGradient(c,c,0,c,c,wet);
+  gr.addColorStop(0,hex(D.glow[0],.55));gr.addColorStop(.7,hex(D.glow[0],.22));gr.addColorStop(1,hex(D.glow[0],0));
+  g.fillStyle=gr;g.beginPath();g.arc(c,c,wet,0,7);g.fill();
+  g.lineWidth=1;for(let n=0;n<4;n++){const rr=(t*26+n*wet/4)%Math.max(1,wet);g.strokeStyle=hex(D.glow[1]||D.glow[0],.34*(1-rr/wet));g.beginPath();g.arc(c,c,rr,0,7);g.stroke()}
+  // old strandlines
+  g.strokeStyle='rgba(234,242,255,.07)';for(let i=0;i<cur;i++){g.beginPath();g.arc(c,c,rad(i),0,7);g.stroke()}
+  // silt
+  const grid=style==='halftone'?S/90:style==='pixel'?S/70:0;
+  for(const p of parts){if(p.s>t)continue;
+    const age=(k-p.li)/N,rr=(rad(p.li)+p.j*step)*ease((t-p.s)/.9),a=(p.glow?.95:.8)*(1-.55*age);
+    let x=c+Math.cos(p.th)*rr,y=c+Math.sin(p.th)*rr;
+    g.fillStyle=hex(p.c,a,p.glow?.15:.42);
+    if(grid){x=Math.round(x/grid)*grid;y=Math.round(y/grid)*grid;
+      if(style==='pixel')g.fillRect(x-grid/2,y-grid/2,grid,grid);else{g.beginPath();g.arc(x,y,grid*.24*p.z,0,7);g.fill()}}
+    else{g.beginPath();g.arc(x,y,p.z*S/620,0,7);g.fill()}}
+  // stones: the places
+  const sr=Math.max(9,S*.026);
+  for(const s of stones){if(s.s>t)continue;const u=ease((t-s.s)/1.2),rr=rad(s.li)*u,x=c+Math.cos(s.th)*rr,y=c+Math.sin(s.th)*rr,im=imgs[s.v];
+    g.save();g.globalAlpha=.55+.45*(1-(k-s.li)/N);g.beginPath();g.arc(x,y,sr,0,7);g.closePath();
+    if(im&&im.complete&&im.naturalWidth){g.save();g.clip();const z=Math.max(sr*2/im.naturalWidth,sr*2/im.naturalHeight);g.drawImage(im,x-im.naturalWidth*z/2,y-im.naturalHeight*z/2,im.naturalWidth*z,im.naturalHeight*z);g.restore()}
+    else{g.fillStyle='#1d3a7a';g.fill()}
+    g.lineWidth=1.5;g.strokeStyle='#ffd23f';g.beginPath();g.arc(x,y,sr,0,7);g.stroke();g.restore()}
+  // foam: the words of the newest two waves
+  g.textAlign='center';g.textBaseline='middle';g.font=`600 ${Math.max(8,S*.0145)}px "Helvetica Neue",Arial,sans-serif`;
+  for(const i of[cur-1,cur]){if(i<0)continue;const fade=i===cur?1:clamp(1-(k-cur)*1.1);if(fade<=0)continue;
+    for(const w of P.lines[i].ws){if(w.s>t)continue;const rr=rad(i)*ease((t-w.s)/.7);
+      g.save();g.translate(c+Math.cos(w.th)*rr,c+Math.sin(w.th)*rr);let a=w.th+Math.PI/2;if(Math.sin(w.th)>0)a+=Math.PI;g.rotate(a);
+      g.fillStyle=`rgba(255,255,255,${.95*fade*clamp((t-w.s)/.2)})`;g.fillText(w.w,0,0);g.restore()}}
+  // the lectern
+  g.fillStyle='#04102b';g.beginPath();g.arc(c,c,r0*.3,0,7);g.fill();g.strokeStyle='#eaf2ff';g.lineWidth=1.5;g.stroke();
+  g.fillStyle='#eaf2ff';g.fillRect(c-r0*.15,c-r0*.06,r0*.3,r0*.1);g.fillRect(c-1,c+r0*.04,2,r0*.15);
+  panel(cur,t);
+  const f=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+  $('#clock').textContent=f(t)+' / '+f(P.dur);if(playing())$('#seek').value=t;
+}
+
+function panel(cur,t){
+  if(cur<0){if(shownLine!==-1){shownLine=-1;$('#line').textContent='—';$('#place').textContent='Slack water';$('#what').textContent='Nothing has been said yet.';
+    ['dist','mood','hour','wx','snd','seen'].forEach(i=>$('#'+i).textContent='');$('#chips').innerHTML='';$('#prompt').textContent='—';$('#log').innerHTML=''}return}
+  const L=P.lines[cur];
+  if(shownLine!==cur){shownLine=cur;const sc=P.scenes[L.scene],D=T.districts[sc.d];
+    $('#line').innerHTML=L.ws.map(w=>`<span>${w.w.replace(/</g,'&lt;')}</span>`).join(' ');
+    $('#carrylab').textContent=L.hit?'This wave carries a place':'This wave is foam only';
+    $('#place').textContent=L.hit?sc.name:'No place named — colour and sound only';
+    $('#what').textContent=L.hit?sc.what:'The line stays in “'+sc.name+'” and deepens it.';
+    $('#dist').textContent=D.name;$('#mood').textContent=D.mood;$('#hour').textContent=P.why;$('#wx').textContent=D.weather;$('#snd').textContent=D.sound;
+    $('#chips').innerHTML=[...D.body,...D.glow].map(h=>`<i style="background:${h}" title="${h}"></i>`).join('');
+    $('#seen').textContent=[...new Set(sc.views.flatMap(v=>T.views[v]||[]))].slice(0,7).join(' · ');
+    $('#prompt').textContent=L.hit
+      ?`${sc.what}\nWhere: ${sc.here}.\nLight: ${D.light}.\nWeather: ${D.weather}. Mood: ${D.mood}.\nSound: ${D.sound}.`
+      :`Hold the place (${sc.here}). No new object.\nLet the water and light move: ${D.mood}.\nSound: ${D.sound}.`;
+    const done=[];P.lines.slice(0,cur+1).forEach((l,i)=>{if(l.hit&&!done.some(d=>d.s===l.scene))done.push({s:l.scene,i})});
+    $('#log').innerHTML=done.reverse().map(d=>`<li><b>RING ${d.i+1}</b><span>${P.scenes[d.s].name} <span style="color:var(--dim)">· ${T.districts[P.scenes[d.s].d].name}</span></span></li>`).join('')}
+  const sp=$('#line').children;L.ws.forEach((w,j)=>sp[j]&&sp[j].classList.toggle('s',w.s<=t));
+}
+
+function loop(ts){if(fakeOn&&noAudio){fake=Math.min(P.dur,fake+(ts-lastTick)/1000);if(fake>=P.dur)fakeOn=false}lastTick=ts;draw();requestAnimationFrame(loop)}
+
+$('#play').onclick=async()=>{
+  if(noAudio){fakeOn=!fakeOn;if(fake>=P.dur)fake=0}
+  else if(au.paused){try{await au.play()}catch(e){noAudio=true;fakeOn=true;fake=+$('#seek').value}}else au.pause();
+  $('#play').textContent=playing()?'❚❚ Pause':'▶ Play'};
+au.onended=()=>$('#play').textContent='▶ Play';
+au.onerror=()=>{noAudio=true};
+$('#seek').oninput=e=>{const v=+e.target.value;fake=v;if(!noAudio){try{au.currentTime=v}catch(_){}}if(!playing()&&!noAudio&&!au.currentTime)fakeOn=true;shownLine=-2};
+$('#poem').onchange=e=>{au.pause();load(+e.target.value)};
+document.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>{style=b.dataset.style;document.querySelectorAll('[data-style]').forEach(x=>x.classList.toggle('on',x===b))});
+
+fetch('tide.json').then(r=>r.json()).then(d=>{T=d;
+  $('#poem').innerHTML=T.poems.map((p,i)=>`<option value="${i}">${p.num} · ${p.title}</option>`).join('');
+  const q=new URLSearchParams(location.search),pi=Math.max(0,T.poems.findIndex(p=>p.num===(q.get('p')||'06')));
+  $('#poem').value=pi;load(pi);
+  if(q.get('t')){noAudio=true;fake=+q.get('t');$('#seek').value=fake}
+  if(q.get('style'))document.querySelector(`[data-style=${q.get('style')}]`)?.click();
+  requestAnimationFrame(loop)});
+</script>
+</body>
+</html>
