@@ -109,6 +109,32 @@ def plan(ch, p, eye='film', max_seconds=None):
     return seed, acts
 
 
+STARTUP = 3.6        # MEASURED: seconds from world_setup to the first frame; the film's zero, and the reading's zero
+LATENCY = 3.0        # MEASURED on one cue in the first take: seconds from sending a line to the world visibly changing
+MINGAP = 3.5
+
+
+def plan_sheet(p, sheet, max_seconds=None):
+    """Stage a hand-written cue sheet: each cue lands on the word that names it; walking follows his speech."""
+    L = json.load(open(os.path.join(HERE, 'tide.json')))['poems'][int(p['num']) - 1]['lines']
+    acts = [dict(t=0.0, do='world_setup', text=sheet['seed'], patch='seed')]; last = -99.0; rows = []
+    for c in sheet['cues']:
+        l = L[c['line']]; ws = [w for w in l['words'] if re.sub(r'\W', '', w[0].lower()).startswith(c['word'].lower())]
+        land = ws[0][1] if ws else l['t0']                       # reading clock
+        t = max(land + STARTUP - LATENCY, last + MINGAP, 0.6); last = t
+        late = (t - STARTUP + LATENCY) - land
+        acts.append(dict(t=round(t, 1), do='say', text=c['send'], patch=f"L{c['line']}", delta=[]))
+        rows.append(dict(line=c['line'], word=c['word'], land=round(land, 1), sent=round(t, 1), late=round(late, 1), send=c['send'], intent=c['intent']))
+    for l in L:                                                  # walk while he speaks, stand in his silences
+        d = l['t1'] - l['t0']; w = min(3.0, 0.4 * d)
+        acts.append(dict(t=round(l['t0'] + STARTUP, 1), do='key', action='key_down', input='key_w', patch=''))
+        acts.append(dict(t=round(l['t0'] + STARTUP + w, 1), do='key', action='key_up', input='key_w', patch=''))
+    end = min(max_seconds or 1e9, p['dur'] + STARTUP + 1.5)
+    acts = [a for a in acts if a['t'] < end]; acts.append(dict(t=round(end, 1), do='complete', note='end the session'))
+    acts.sort(key=lambda a: a['t'])
+    return acts, rows
+
+
 def seed_image(p, limit=48_000):
     """First foundry reference, cropped to 16:9 and squeezed under the size the docs give for a seed image."""
     from PIL import Image
@@ -252,9 +278,27 @@ def main():
     ap.add_argument('--live', action='store_true'); ap.add_argument('--i-accept-the-cost', action='store_true')
     ap.add_argument('--model', default='genie-4'); ap.add_argument('--director', default='gemini-3.8-flash')
     ap.add_argument('--no-director', action='store_true'); ap.add_argument('--max-corrections', type=int, default=3)
+    ap.add_argument('--sheet', action='store_true', help='use the hand-written cue sheet in cues/NN.json')
     ap.add_argument('--json', help='write the staged plan to this file')
     args = ap.parse_args()
     ch, p = load(args.poem)
+    sp = os.path.join(HERE, 'cues', args.poem + '.json')
+    if args.sheet and os.path.exists(sp):
+        sheet = json.load(open(sp)); acts, rows = plan_sheet(p, sheet, args.max_seconds if args.live else None)
+        img = (open(os.path.join(HERE, sheet['seed_image']), 'rb').read(), sheet['seed_image']); seed = sheet['seed']; args.no_director = True
+        if len(img[0]) > 48_000:
+            from PIL import Image
+            im = Image.open(io.BytesIO(img[0]))
+            for q in range(80, 15, -5):
+                b = io.BytesIO(); im.save(b, 'JPEG', quality=q)
+                if b.tell() <= 48_000: break
+            img = (b.getvalue(), sheet['seed_image'])
+        print(f"POEM {p['num']} · {p['title']} · cue sheet · lead {LATENCY}s · {acts[-1]['t']:.0f}s · about ${acts[-1]['t'] * RATE:.2f}\n")
+        for r in rows: print(f"  line {r['line']} · lands on “{r['word']}” at {r['land']:5.1f}s · sent {r['sent']:5.1f}" + (f" · {r['late']}s late" if r['late'] > .3 else '') + f"\n      SEND   {r['send']}\n      INTENT {r['intent']}")
+        json.dump(rows, open(os.path.join(HERE, 'cues', args.poem + '.staged.json'), 'w'), ensure_ascii=False, indent=1)
+        if not args.live: print('\nDRY RUN. Nothing was sent and nothing was spent.'); return
+        if not args.i_accept_the_cost: sys.exit('Refusing to go live without --i-accept-the-cost.')
+        args.eye = 'sheet'; asyncio.run(live(ch, p, seed, acts, img, args)); return
     seed, acts = plan(ch, p, args.eye, None if (args.full and not args.live) else args.max_seconds)
     img = seed_image(p)
     show(p, seed, acts, img)
