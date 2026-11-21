@@ -11,9 +11,11 @@ What is verified and what is not
               {"event_type": "user_action", "action": "key_down"|"key_up"|"key_click", "input": "key_w"|...}
     - client.aio.interactions.connect(id) -> async context; .send(), .receive(), .complete(), .cancel()
     - closing the socket does NOT end the session server-side; complete() or cancel() does.
-  NOT VERIFIED (no key, no session has been run): how a genie interaction is created, the shape of the
-    video and audio events that come back, and whether the WebSocket passes this environment's proxy.
-    Those three live in open_session() and record(); expect to adjust them on the first real run.
+  CONFIRMED on the live endpoint: the socket opens through this environment's proxy, and a session is created by
+    sending {"event_type": "interaction.create", "model": "genie-4"} on it. A free-tier key is refused there (quota 0).
+  NOT VERIFIED (no generation has run): the shape of a mid-session text event and of the video and audio events
+    that come back. Those live in Session.send() and record(); expect to adjust them on the first real run.
+  The key is read from GEMINI_API_KEY in the environment and is never written to a file.
 
 Reads prompts.json (build_prompts.py). Writes a plan and, when live, a log under runs/."""
 import argparse, asyncio, base64, io, json, os, re, sys, time
@@ -109,9 +111,11 @@ def plan(ch, p, eye='film', max_seconds=None):
 def seed_image(p, limit=48_000):
     """First foundry reference, cropped to 16:9 and squeezed under the size the docs give for a seed image."""
     from PIL import Image
-    refs = p['seeds']['refs']
-    if not refs: return None, None
-    path = os.path.normpath(os.path.join(HERE, refs[0]))
+    refs = p['seeds']['refs']; pk = os.path.join(HERE, 'seed_picks.json')
+    picks = json.load(open(pk)) if os.path.exists(pk) else {}
+    best = picks.get(p['num'], {}).get('paths', {}).get(picks.get(p['num'], {}).get('best'))
+    if not best and not refs: return None, None
+    path = os.path.normpath(os.path.join(HERE, best or refs[0]))
     im = Image.open(path).convert('RGB'); w, h = im.size; tw = min(w, int(h * 16 / 9)); th = int(tw * 9 / 16)
     im = im.crop(((w - tw) // 2, (h - th) // 2, (w + tw) // 2, (h + th) // 2)).resize((1280, 720), Image.LANCZOS)
     for q in range(80, 15, -5):
@@ -139,16 +143,29 @@ def show(p, seed, acts, img):
 
 
 # ---------------------------------------------------------------------------------------------- live
-async def open_session(client, model):
-    """NOT VERIFIED. The package shows connect(id) for an existing interaction but this file's author has not
-    seen how a world-model interaction is created. Adjust here on the first real run."""
-    created = await client.aio.interactions.create(model=model, background=True)       # assumption
-    return created.id
+URL = 'wss://generativelanguage.googleapis.com/v1beta/interactions/live'
+
+
+class Session:
+    """A raw socket to the live endpoint. CONFIRMED on the real service: the socket opens through this environment's
+    proxy with the key in the x-goog-api-key header, and the first event is {"event_type": "interaction.create", "model": ...}.
+    The service answered that create with a quota error on a free-tier key, so nothing past it has been seen."""
+    async def __aenter__(self):
+        import ssl, websockets
+        ctx = ssl.create_default_context(cafile=os.environ.get('SSL_CERT_FILE'))
+        self.ws = await websockets.connect(URL, additional_headers={'x-goog-api-key': os.environ['GEMINI_API_KEY']}, ssl=ctx, open_timeout=25, max_size=None)
+        return self
+    async def __aexit__(self, *a): await self.ws.close()
+    async def send(self, ev): await self.ws.send(json.dumps(ev if isinstance(ev, dict) else {'event_type': 'input', 'input': ev}))   # text shape NOT VERIFIED
+    async def receive(self):
+        async for raw in self.ws: yield json.loads(raw) if isinstance(raw, str) else {'event_type': 'binary', 'bytes': len(raw)}
+    async def complete(self): await self.ws.send(json.dumps({'event_type': 'interaction.complete'}))
+    async def cancel(self): await self.ws.send(json.dumps({'event_type': 'interaction.cancel'}))
 
 
 def record(event, log, state):
     """NOT VERIFIED event shapes: keep everything raw, and remember the most recent thing that looks like a frame."""
-    d = event.model_dump(exclude_none=True) if hasattr(event, 'model_dump') else dict(event)
+    d = event
     kind = d.get('event_type', '?')
     blob = json.dumps(d)
     if 'image' in blob[:400] or 'video' in blob[:400]: state['frame'] = d
@@ -162,9 +179,9 @@ async def live(ch, p, seed, acts, img, args):
     os.makedirs(os.path.join(HERE, 'runs'), exist_ok=True)
     name = os.path.join(HERE, 'runs', f"{p['num']}-{args.eye}-{time.strftime('%Y%m%d-%H%M%S')}")
     state = dict(t0=time.monotonic(), frame=None, sent=0.0, corrections=0)
-    sid = await open_session(client, args.model)
     hard_stop = args.max_seconds + 5
-    async with client.aio.interactions.connect(sid) as conn, open(name + '.events.jsonl', 'w') as log:
+    async with Session() as conn, open(name + '.events.jsonl', 'w') as log:
+        await conn.send(dict(event_type='interaction.create', model=args.model))
         async def pump():
             async for ev in conn.receive():
                 if record(ev, log, state) in ('interaction.completed', 'interaction.canceled'): return

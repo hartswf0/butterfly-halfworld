@@ -1,0 +1,731 @@
+{
+ "01": {
+  "ranking": [
+   {
+    "id": "ref:01-00.jpg",
+    "place": 6,
+    "style": 7,
+    "people": 6,
+    "clean": 7,
+    "seedable": 6,
+    "total": 32,
+    "note": "Matches the dim bedroom setting with TV chaos, rising vapour, and silhouette of a Black man."
+   },
+   {
+    "id": "ref:01-01.jpg",
+    "place": 6,
+    "style": 6,
+    "people": 6,
+    "clean": 7,
+    "seedable": 6,
+    "total": 31,
+    "note": "Strong atmospheric depth showing fire escape stairs, rear figure, and rising mist."
+   },
+   {
+    "id": "ref:01-07.jpg",
+    "place": 5,
+    "style": 6,
+    "people": 6,
+    "clean": 7,
+    "seedable": 6,
+    "total": 30,
+    "note": "Good character framing from behind with heavy vapour, but slightly flatter ground depth."
+   },
+   {
+    "id": "view:093",
+    "place": 6,
+    "style": 6,
+    "people": 5,
+    "clean": 6,
+    "seedable": 6,
+    "total": 29,
+    "note": "Captures the flooded city water floor and practical light well, though silhouettes are distant children."
+   },
+   {
+    "id": "view:061",
+    "place": 6,
+    "style": 5,
+    "people": 4,
+    "clean": 6,
+    "seedable": 6,
+    "total": 27,
+    "note": "Evocative warm alley staircase with practical smoke, but lacks specific characters."
+   },
+   {
+    "id": "view:059",
+    "place": 6,
+    "style": 5,
+    "people": 5,
+    "clean": 6,
+    "seedable": 5,
+    "total": 27,
+    "note": "Shows a crowded nighttime street with depth and humidity, though styling leans contemporary Asian market."
+   },
+   {
+    "id": "ref:01-02.jpg",
+    "place": 5,
+    "style": 6,
+    "people": 3,
+    "clean": 6,
+    "seedable": 6,
+    "total": 26,
+    "note": "Rich sodium-orange window lighting and smoke in an interior, but no people are present."
+   },
+   {
+    "id": "view:042",
+    "place": 5,
+    "style": 4,
+    "people": 3,
+    "clean": 7,
+    "seedable": 6,
+    "total": 25,
+    "note": "Reflective flooded hall offers good depth, but aesthetic is sterile rather than repaired Afrofuturist."
+   },
+   {
+    "id": "ref:01-06.jpg",
+    "place": 4,
+    "style": 5,
+    "people": 5,
+    "clean": 6,
+    "seedable": 4,
+    "total": 24,
+    "note": "Moody teal silhouette behind translucent panel, but lacks ground depth to step into."
+   },
+   {
+    "id": "view:045",
+    "place": 5,
+    "style": 4,
+    "people": 3,
+    "clean": 6,
+    "seedable": 6,
+    "total": 24,
+    "note": "Grayscale street stairs with haze, missing the required sodium and teal palette and subjects."
+   },
+   {
+    "id": "view:098",
+    "place": 5,
+    "style": 4,
+    "people": 4,
+    "clean": 6,
+    "seedable": 5,
+    "total": 24,
+    "note": "Monochrome conceptual landscape that lacks photographic practical lighting and character specifics."
+   },
+   {
+    "id": "ref:01-03.jpg",
+    "place": 4,
+    "style": 5,
+    "people": 3,
+    "clean": 6,
+    "seedable": 5,
+    "total": 23,
+    "note": "Good brick fire-escape textures and warm light, but functions as a flat surface without characters."
+   },
+   {
+    "id": "view:036",
+    "place": 4,
+    "style": 4,
+    "people": 4,
+    "clean": 5,
+    "seedable": 4,
+    "total": 21,
+    "note": "Heavy motion blur disrupts model seedability despite representing crowded indoor motion."
+   },
+   {
+    "id": "view:099",
+    "place": 4,
+    "style": 4,
+    "people": 3,
+    "clean": 6,
+    "seedable": 4,
+    "total": 21,
+    "note": "Steep downward aerial angle through window lacks eye-level walkability and warm lighting."
+   },
+   {
+    "id": "view:026",
+    "place": 4,
+    "style": 5,
+    "people": 3,
+    "clean": 6,
+    "seedable": 3,
+    "total": 21,
+    "note": "Strong vertical low-angle orange smog view, but impossible to seed a forward walkable ground plane."
+   },
+   {
+    "id": "ref:01-04.jpg",
+    "place": 4,
+    "style": 3,
+    "people": 4,
+    "clean": 6,
+    "seedable": 4,
+    "total": 21,
+    "note": "Bitmap diagram indicating perspective lines and figure, lacking photographic rendering."
+   },
+   {
+    "id": "halfworld:01-1.png",
+    "place": 4,
+    "style": 3,
+    "people": 4,
+    "clean": 6,
+    "seedable": 4,
+    "total": 21,
+    "note": "Abstract 1-bit line art layout of the room, failing the photographic requirement."
+   },
+   {
+    "id": "ref:01-05.jpg",
+    "place": 3,
+    "style": 3,
+    "people": 4,
+    "clean": 6,
+    "seedable": 4,
+    "total": 20,
+    "note": "Dithered 1-bit room outline with window figure, lacking realistic texture and tonal lighting."
+   },
+   {
+    "id": "halfworld:01-2.png",
+    "place": 3,
+    "style": 3,
+    "people": 4,
+    "clean": 6,
+    "seedable": 4,
+    "total": 20,
+    "note": "Monochrome pixel abstraction showing window framing without spatial volume."
+   },
+   {
+    "id": "halfworld:01-3.png",
+    "place": 3,
+    "style": 3,
+    "people": 3,
+    "clean": 6,
+    "seedable": 3,
+    "total": 18,
+    "note": "Abstract segmented 1-bit glyphs lacking an environmental ground plane."
+   },
+   {
+    "id": "halfworld:01-4.png",
+    "place": 3,
+    "style": 3,
+    "people": 3,
+    "clean": 6,
+    "seedable": 3,
+    "total": 18,
+    "note": "Radial halftone graphic without scenic information or walkable elements."
+   },
+   {
+    "id": "halfworld:01-0.png",
+    "place": 3,
+    "style": 3,
+    "people": 3,
+    "clean": 5,
+    "seedable": 3,
+    "total": 17,
+    "note": "Graphic text title card unsuitable for generating a walkable spatial world."
+   }
+  ],
+  "best": "ref:01-00.jpg",
+  "runner_up": "ref:01-01.jpg",
+  "gap": "It obscures character facial detail and skin highlights in deep silhouette while omitting the visible second figure.",
+  "paths": {
+   "ref:01-00.jpg": "../foundry/refs/01-00.jpg",
+   "ref:01-01.jpg": "../foundry/refs/01-01.jpg"
+  },
+  "judge": "gemini-flash-latest",
+  "candidates": 23
+ },
+ "03": {
+  "ranking": [
+   {
+    "id": "ref:03-06.jpg",
+    "place": 7,
+    "style": 6,
+    "people": 4,
+    "clean": 7,
+    "seedable": 7,
+    "total": 31,
+    "note": "Depicts an isolated chapel on a flooded shore with excellent depth and mood, though lacking people."
+   },
+   {
+    "id": "view:097",
+    "place": 6,
+    "style": 6,
+    "people": 4,
+    "clean": 7,
+    "seedable": 7,
+    "total": 30,
+    "note": "Shows a walkable wet stone quay with warm practical lights and clear grounding, but no chapel or people."
+   },
+   {
+    "id": "view:093",
+    "place": 6,
+    "style": 6,
+    "people": 6,
+    "clean": 6,
+    "seedable": 6,
+    "total": 30,
+    "note": "Features flooded urban stone ruins with standing water and figures, though it lacks chapel architecture."
+   },
+   {
+    "id": "view:013",
+    "place": 6,
+    "style": 6,
+    "people": 4,
+    "clean": 7,
+    "seedable": 5,
+    "total": 28,
+    "note": "Atmospheric chapel-like ceiling with practical lighting, but the upward tilt lacks a walkable ground plane."
+   },
+   {
+    "id": "ref:03-01.jpg",
+    "place": 5,
+    "style": 6,
+    "people": 4,
+    "clean": 7,
+    "seedable": 6,
+    "total": 28,
+    "note": "Strong mood and wet reflections in a concrete vault, but missing chapel cues and characters."
+   },
+   {
+    "id": "ref:03-04.jpg",
+    "place": 5,
+    "style": 6,
+    "people": 6,
+    "clean": 7,
+    "seedable": 4,
+    "total": 28,
+    "note": "Portrays the poet figure with an illuminated chest on a shore, but lacks navigable spatial depth."
+   },
+   {
+    "id": "view:001",
+    "place": 5,
+    "style": 5,
+    "people": 4,
+    "clean": 7,
+    "seedable": 6,
+    "total": 27,
+    "note": "Good perspective under an overpass with light ribbons, though diverging from the chapel narrative."
+   },
+   {
+    "id": "view:006",
+    "place": 5,
+    "style": 5,
+    "people": 4,
+    "clean": 6,
+    "seedable": 5,
+    "total": 25,
+    "note": "Symmetrical street doorway with reflections, but the motion blur impairs world stability."
+   },
+   {
+    "id": "ref:03-00.jpg",
+    "place": 5,
+    "style": 5,
+    "people": 4,
+    "clean": 6,
+    "seedable": 4,
+    "total": 24,
+    "note": "Stone colonnade with floating particles, but the extreme upward angle provides no floor plane."
+   },
+   {
+    "id": "view:014",
+    "place": 5,
+    "style": 4,
+    "people": 5,
+    "clean": 6,
+    "seedable": 4,
+    "total": 24,
+    "note": "Sunken urban plaza with crowds, but the aesthetic is modern rather than Afrofuturist coastal ruins."
+   },
+   {
+    "id": "ref:03-05.jpg",
+    "place": 4,
+    "style": 5,
+    "people": 6,
+    "clean": 6,
+    "seedable": 3,
+    "total": 24,
+    "note": "Intimate portrait lighting matching the prompt tone, but the close framing prevents world navigation."
+   },
+   {
+    "id": "view:057",
+    "place": 4,
+    "style": 5,
+    "people": 4,
+    "clean": 6,
+    "seedable": 4,
+    "total": 23,
+    "note": "Close downward perspective into murky water provides little horizon or space to walk into."
+   },
+   {
+    "id": "view:033",
+    "place": 4,
+    "style": 4,
+    "people": 4,
+    "clean": 6,
+    "seedable": 3,
+    "total": 21,
+    "note": "Overhead bird's-eye view of a pink plaza that mismatches the low eye-level camera specification."
+   },
+   {
+    "id": "ref:03-07.jpg",
+    "place": 4,
+    "style": 4,
+    "people": 4,
+    "clean": 6,
+    "seedable": 3,
+    "total": 21,
+    "note": "Ground crater with spectral refraction lacks architectural presence and navigability."
+   },
+   {
+    "id": "halfworld:03-5.png",
+    "place": 4,
+    "style": 4,
+    "people": 4,
+    "clean": 5,
+    "seedable": 4,
+    "total": 21,
+    "note": "Coarse 1-bit bitmap showing walking figures along a shore beneath an abstract shape."
+   },
+   {
+    "id": "halfworld:03-6.png",
+    "place": 4,
+    "style": 4,
+    "people": 4,
+    "clean": 5,
+    "seedable": 4,
+    "total": 21,
+    "note": "Pixelated graphic of a lone figure by a shoreline with an abstract motif."
+   },
+   {
+    "id": "ref:03-02.jpg",
+    "place": 4,
+    "style": 4,
+    "people": 4,
+    "clean": 5,
+    "seedable": 4,
+    "total": 21,
+    "note": "Cropped version of the shoreline pixel art with minimal world context."
+   },
+   {
+    "id": "halfworld:03-3.png",
+    "place": 4,
+    "style": 4,
+    "people": 4,
+    "clean": 5,
+    "seedable": 4,
+    "total": 21,
+    "note": "Stylized 1-bit line drawing of structures under geometric celestial motifs."
+   },
+   {
+    "id": "ref:03-03.jpg",
+    "place": 4,
+    "style": 4,
+    "people": 4,
+    "clean": 5,
+    "seedable": 4,
+    "total": 21,
+    "note": "Cropped 1-bit landscape pattern lacking photographic realism."
+   },
+   {
+    "id": "halfworld:03-1.png",
+    "place": 4,
+    "style": 4,
+    "people": 4,
+    "clean": 5,
+    "seedable": 3,
+    "total": 20,
+    "note": "Abstract schematic diagram rather than a photographic environment."
+   },
+   {
+    "id": "halfworld:03-2.png",
+    "place": 3,
+    "style": 4,
+    "people": 4,
+    "clean": 5,
+    "seedable": 3,
+    "total": 19,
+    "note": "Flat circular rosette icon without environmental depth."
+   },
+   {
+    "id": "halfworld:03-4.png",
+    "place": 3,
+    "style": 4,
+    "people": 4,
+    "clean": 4,
+    "seedable": 3,
+    "total": 18,
+    "note": "Heavy 1-bit noise pattern lacking identifiable structures or ground planes."
+   },
+   {
+    "id": "halfworld:03-0.png",
+    "place": 3,
+    "style": 3,
+    "people": 4,
+    "clean": 4,
+    "seedable": 3,
+    "total": 17,
+    "note": "Text-only title card offering no visual world data to seed."
+   }
+  ],
+  "best": "ref:03-06.jpg",
+  "runner_up": "view:097",
+  "gap": "It lacks the visible Poet, choir, and luminescent white ceramic repairs described in the prompt.",
+  "paths": {
+   "ref:03-06.jpg": "../foundry/refs/03-06.jpg",
+   "view:097": "../../../../wygwyl-world-arch/shots/out/ef9f6c7e-e507-421d-b028-2d76f14d0c11_3/image.jpg"
+  },
+  "judge": "gemini-3.8-flash",
+  "candidates": 25
+ },
+ "02": {
+  "ranking": [
+   {
+    "id": "view:093",
+    "place": 7,
+    "style": 6,
+    "people": 6,
+    "clean": 7,
+    "seedable": 7,
+    "total": 33,
+    "note": "Presents strong flooded urban depth and atmospheric reflections, though the silhouettes lack specific Afrofuturist costume details."
+   },
+   {
+    "id": "ref:02-07.jpg",
+    "place": 5,
+    "style": 6,
+    "people": 7,
+    "clean": 7,
+    "seedable": 6,
+    "total": 31,
+    "note": "Features a well-lit Black male protagonist in moody teal lighting, but the domestic interior lacks flooded city depth."
+   },
+   {
+    "id": "view:075",
+    "place": 7,
+    "style": 6,
+    "people": 3,
+    "clean": 7,
+    "seedable": 7,
+    "total": 30,
+    "note": "Offers excellent water depth and rusted teal coastal ambiance, though no people are visible."
+   },
+   {
+    "id": "ref:02-06.jpg",
+    "place": 5,
+    "style": 6,
+    "people": 6,
+    "clean": 7,
+    "seedable": 6,
+    "total": 30,
+    "note": "Captures a poignant silhouette of a child against surreal light, though the interior setting limits walkable ground plane depth."
+   },
+   {
+    "id": "view:061",
+    "place": 6,
+    "style": 6,
+    "people": 3,
+    "clean": 7,
+    "seedable": 6,
+    "total": 28,
+    "note": "Warm practical firelight and textured alley steps evoke tactile decay, but people are absent."
+   },
+   {
+    "id": "view:096",
+    "place": 6,
+    "style": 5,
+    "people": 5,
+    "clean": 7,
+    "seedable": 5,
+    "total": 28,
+    "note": "Features practical night illumination and mist, though heavy smoke obscures depth and the architectural style diverges."
+   },
+   {
+    "id": "ref:02-05.jpg",
+    "place": 6,
+    "style": 5,
+    "people": 3,
+    "clean": 7,
+    "seedable": 6,
+    "total": 27,
+    "note": "Strong spatial perspective through sodium-orange light, though people are absent and the palette is monochromatic."
+   },
+   {
+    "id": "view:042",
+    "place": 6,
+    "style": 4,
+    "people": 3,
+    "clean": 7,
+    "seedable": 6,
+    "total": 26,
+    "note": "Provides reflective water surfaces and clean architectural depth, but feels too sterile for the rusted, repaired aesthetic."
+   },
+   {
+    "id": "view:013",
+    "place": 5,
+    "style": 5,
+    "people": 3,
+    "clean": 7,
+    "seedable": 5,
+    "total": 25,
+    "note": "Atmospheric practical lighting in fog, but upward framing lacks a walkable ground plane."
+   },
+   {
+    "id": "view:045",
+    "place": 5,
+    "style": 4,
+    "people": 3,
+    "clean": 7,
+    "seedable": 5,
+    "total": 24,
+    "note": "Detailed architectural staircase, but monochrome rendering loses the required teal and sodium color palette."
+   },
+   {
+    "id": "ref:02-01.jpg",
+    "place": 5,
+    "style": 4,
+    "people": 3,
+    "clean": 6,
+    "seedable": 5,
+    "total": 23,
+    "note": "Fisheye lens distortion and low floor perspective hinder world-model stability, with no people present."
+   },
+   {
+    "id": "view:057",
+    "place": 4,
+    "style": 5,
+    "people": 3,
+    "clean": 6,
+    "seedable": 4,
+    "total": 22,
+    "note": "Murky water and textured grime fit thematic elements, but downward framing offers no walkable forward depth."
+   },
+   {
+    "id": "ref:02-02.jpg",
+    "place": 4,
+    "style": 4,
+    "people": 3,
+    "clean": 7,
+    "seedable": 4,
+    "total": 22,
+    "note": "Shallow depth of field focuses on foreground fabric rather than a navigable environment."
+   },
+   {
+    "id": "view:026",
+    "place": 4,
+    "style": 4,
+    "people": 3,
+    "clean": 7,
+    "seedable": 4,
+    "total": 22,
+    "note": "Extreme vertical tilt against orange haze provides no usable ground plane."
+   },
+   {
+    "id": "halfworld:02-6.png",
+    "place": 4,
+    "style": 3,
+    "people": 5,
+    "clean": 6,
+    "seedable": 4,
+    "total": 22,
+    "note": "Pixel art storyboard provides staging reference rather than photographic environmental seeding."
+   },
+   {
+    "id": "halfworld:02-4.png",
+    "place": 4,
+    "style": 3,
+    "people": 5,
+    "clean": 6,
+    "seedable": 4,
+    "total": 22,
+    "note": "Diagrammatic pixel storyboard conveys character distance but lacks photographic realism."
+   },
+   {
+    "id": "halfworld:02-2.png",
+    "place": 4,
+    "style": 3,
+    "people": 5,
+    "clean": 6,
+    "seedable": 4,
+    "total": 22,
+    "note": "Low-resolution graphic mockup outlines characters schematically without photographic depth."
+   },
+   {
+    "id": "ref:02-00.jpg",
+    "place": 4,
+    "style": 3,
+    "people": 5,
+    "clean": 6,
+    "seedable": 4,
+    "total": 22,
+    "note": "Cropped pixel diagram functions as a schematic rather than a photographic seed."
+   },
+   {
+    "id": "halfworld:02-5.png",
+    "place": 4,
+    "style": 3,
+    "people": 4,
+    "clean": 6,
+    "seedable": 4,
+    "total": 21,
+    "note": "Minimal pixelated lines indicate movement but do not constitute a continuous photographic space."
+   },
+   {
+    "id": "ref:02-03.jpg",
+    "place": 4,
+    "style": 3,
+    "people": 4,
+    "clean": 6,
+    "seedable": 4,
+    "total": 21,
+    "note": "Abstract striped bitmap reference lacks navigable environment and photographic tone."
+   },
+   {
+    "id": "halfworld:02-1.png",
+    "place": 3,
+    "style": 3,
+    "people": 4,
+    "clean": 6,
+    "seedable": 4,
+    "total": 20,
+    "note": "Concentric circle pixel illustration functions symbolically rather than as a spatial environment."
+   },
+   {
+    "id": "halfworld:02-3.png",
+    "place": 3,
+    "style": 3,
+    "people": 3,
+    "clean": 6,
+    "seedable": 4,
+    "total": 19,
+    "note": "Abstract monochrome disc graphic lacks environmental detail, perspective, and visible figures."
+   },
+   {
+    "id": "ref:02-04.jpg",
+    "place": 3,
+    "style": 3,
+    "people": 3,
+    "clean": 5,
+    "seedable": 3,
+    "total": 17,
+    "note": "Extreme macro blur is unreadable as a walkable world seed."
+   },
+   {
+    "id": "halfworld:02-0.png",
+    "place": 3,
+    "style": 3,
+    "people": 3,
+    "clean": 4,
+    "seedable": 3,
+    "total": 16,
+    "note": "Title card graphic consisting entirely of pixel text over a black background."
+   }
+  ],
+  "best": "view:093",
+  "runner_up": "ref:02-07.jpg",
+  "gap": "The best image lacks clear Afrofuturist repaired ceramic detailing and distinct foreground character costuming.",
+  "paths": {
+   "view:093": "../../../../wygwyl-world-arch/shots/out/d3d25411-5610-40fd-ad76-e36a25eca80c_1/image.jpg",
+   "ref:02-07.jpg": "../foundry/refs/02-07.jpg"
+  },
+  "judge": "gemini-3.8-flash",
+  "candidates": 26
+ }
+}
