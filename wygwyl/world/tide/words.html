@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Word Water · WYGWYL</title>
+<link rel="icon" href="../../dot.svg">
+<meta property="og:title" content="Word Water — every picture of the poem, written in its own words">
+<meta property="og:description" content="A dry sea of scrambled letters. As he reads, the water rises and the letters become the picture: sky written in SKY, water in WATER, and everything unnamed in his line.">
+<style>
+:root{--bg:#00087a;--ink:#fff;--grey:#aab4ff;--edge:rgba(255,255,255,.28);--btn:#00087a}
+body.paper{--bg:#ece7dc;--ink:#15130f;--grey:#7a7468;--edge:rgba(0,0,0,.3);--btn:#ece7dc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 ui-monospace,"Lucida Console","DejaVu Sans Mono",Menlo,Consolas,monospace}
+main{max-width:1280px;margin:0 auto;padding:16px 16px 60px}
+a{color:inherit}
+.k{font-size:12px;letter-spacing:.08em;color:var(--grey)}
+h1{font-size:clamp(20px,4vw,30px);font-weight:400;margin:10px 0 4px}
+.note{color:var(--grey);max-width:880px;font-size:14px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 10px}
+select,button{background:var(--btn);color:var(--ink);border:1px solid var(--edge);padding:8px 12px;min-height:38px;font:inherit;font-size:13px;cursor:pointer}
+button.go,button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button.go{min-width:96px;font-weight:700}
+input[type=range]{flex:1;min-width:140px;accent-color:var(--ink)}
+#clock{font-size:12px;color:var(--grey);min-width:96px;text-align:right}
+.sep{width:1px;height:26px;background:var(--edge)}
+#cv{display:block;width:100%;border:1px solid var(--edge);background:var(--bg)}
+.under{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:16px;margin-top:12px;align-items:start}
+@media(max-width:700px){.under{grid-template-columns:1fr}}
+#say{font-size:16px;min-height:52px}
+#why{color:var(--grey);font-size:13.5px;margin-top:6px}
+#nouns{color:var(--grey);font-size:12.5px;margin-top:8px}
+#orig{width:100%;display:block;border:1px solid var(--edge)}
+.cap{font-size:11px;color:var(--grey);margin-top:3px}
+h2{font-size:18px;font-weight:400;margin:30px 0 6px}
+.ideas{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px 26px;font-size:13.5px}
+.ideas b{display:block;font-weight:400}
+.ideas b::before{content:"*  "}
+.ideas p{color:var(--grey);padding-left:3ch}
+</style>
+</head>
+<body>
+<main>
+<div class="k"><a href="../survey/index.html">SURVEY</a> / <a href="index.html">TIDELINE</a> / <a href="scan.html">SCAN</a> / WORD WATER</div>
+<h1>Word Water</h1>
+<p class="note">Each poem already has eight pictures, and a machine has already named what is in them. Here the picture is drawn only in letters. Dry letters drift as noise. As he reads, the water rises and the wet letters become the picture, in the picture's own colours.</p>
+
+<div class="bar">
+  <select id="poem" aria-label="Poem"></select>
+  <button class="go" id="play">&gt; PLAY</button>
+  <input type="range" id="seek" min="0" max="100" step="0.05" value="0" aria-label="Position in the reading">
+  <span id="clock">0:00 / 0:00</span>
+  <span class="sep"></span>
+  <button data-mode="nouns" class="on">NOUNS</button><button data-mode="line">HIS LINE</button>
+  <span class="sep"></span>
+  <button data-theme="blue" class="on">BLUE</button><button data-theme="paper">PAPER</button>
+</div>
+<canvas id="cv"></canvas>
+<div class="under">
+  <div><div id="say">_</div><div id="why"></div><div id="nouns"></div></div>
+  <div><img id="orig" alt="The original picture for this passage"><div class="cap" id="cap">the original</div></div>
+</div>
+
+<h2>How to read it</h2>
+<div class="ideas">
+  <div><b>NOUNS</b><p>What the segmenter could name is written in its name: SKY, WATER, CITY, PERSON. What it could not name is written in the line he is saying. The machine supplies the nouns; he supplies the rest.</p></div>
+  <div><b>HIS LINE</b><p>The whole picture is written in the line that produced it, over and over, like a typewriter filling a page.</p></div>
+  <div><b>The waterline</b><p>Rises through each picture while its passage is read. Above it: dry noise from the picture before. Below it: the new picture, legible.</p></div>
+  <div><b>Colour</b><p>Every wet letter takes the colour of the pixel under it. Brighter pixels are set bolder. In PAPER the same data is typed in ink: dark areas heavy, light areas blank.</p></div>
+</div>
+</main>
+
+<audio id="au" preload="metadata"></audio>
+<script>
+const $=s=>document.querySelector(s),cv=$('#cv'),g=cv.getContext('2d'),au=$('#au');
+let T,P,mode='nouns',paper=false,fake=0,fakeOn=false,noAudio=false,lastTick=0,shown=-2,pix={},COLS=0,ROWS=0;
+const hash=(c,r)=>{let h=(c*374761393+r*668265263)|0;h=(h^h>>>13)*1274126177|0;return((h^h>>>16)>>>0)/4294967296};
+const NOISE='aeiourstlnmdhcgpbfywvk,;/|-_='.split(''),clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const NAME={interior:'ROOM',city:'CITY',sky:'SKY',person:'HIM',water:'WATER',forest:'TREES',street:'STREET',rock:'STONE',beach:'SHORE',meadow:'GRASS'};
+const now=()=>noAudio?fake:au.currentTime,playing=()=>noAudio?fakeOn:!au.paused;
+const off=document.createElement('canvas'),og=off.getContext('2d',{willReadFrequently:true});
+
+function size(){const W=cv.clientWidth;COLS=Math.max(44,Math.min(132,Math.floor(W/9.2)));const cw=W/COLS,ch=cw*1.72;ROWS=Math.round(W*(201/480)/ch);cv.style.height=ROWS*ch+'px';pix={}}
+function sample(ri){ // the picture at letter resolution, cached per reference
+  if(pix[ri])return pix[ri];const r=P.refs[ri];if(!r.im){r.im=new Image();r.im.src=r.img}
+  if(!r.im.complete||!r.im.naturalWidth)return null;
+  off.width=COLS;off.height=ROWS;og.drawImage(r.im,0,0,COLS,ROWS);
+  try{return pix[ri]=og.getImageData(0,0,COLS,ROWS).data}catch(e){return null}}
+function load(i){P=T.poems[i];au.src='../../'+encodeURI(P.audio);noAudio=false;fake=0;fakeOn=false;shown=-2;pix={};
+  $('#seek').max=P.dur;$('#seek').value=0;$('#play').textContent='> PLAY';P.refs.forEach(r=>{r.im=new Image();r.im.src=r.img;r.txt=(r.line||r.desc).replace(/\s+/g,' ')+' '})}
+function glyph(r,c,ri){const R=P.refs[ri];
+  if(mode==='nouns'){const lab=R.grid[Math.min(R.grid.length-1,Math.floor(r/ROWS*R.grid.length))][Math.min(11,Math.floor(c/COLS*12))],w=NAME[lab];
+    if(w){const s=w+' ';return s[(c+r*2)%s.length]}}
+  return R.txt[(r*COLS+c)%R.txt.length]}
+
+function draw(){
+  const t=now(),dpr=Math.min(2,devicePixelRatio||1),W=cv.clientWidth,H=cv.clientHeight;
+  if(cv.width!==Math.round(W*dpr)||cv.height!==Math.round(H*dpr)){cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr)}
+  g.setTransform(dpr,0,0,dpr,0,0);g.fillStyle=paper?'#ece7dc':'#00087a';g.fillRect(0,0,W,H);
+  let ri=0;for(let i=0;i<P.refs.length;i++)if(P.refs[i].t<=t)ri=i;
+  const R=P.refs[ri],u=clamp((t-R.t)/((R.t1-R.t)*.7)),level=u*1.12-.06,A=sample(ri),B=ri>0?sample(ri-1):null;
+  const cw=W/COLS,ch=H/ROWS,fs=Math.floor(ch*.86);
+  g.textAlign='center';g.textBaseline='middle';let lw='';
+  for(let r=0;r<ROWS;r++){const up=1-(r+.5)/ROWS; // 0 at the bottom, 1 at the top
+    for(let c=0;c<COLS;c++){
+      const front=level+.035*Math.sin(c*.21+t*1.7)+.02*Math.sin(c*.07-t*.9),wet=up<front,edge=wet&&front-up<.05;
+      const src=wet?A:B,si=wet?ri:ri-1,x=(c+.5)*cw+(wet?0:Math.sin(r*.6+t*.8)*cw*.9),y=(r+.5)*ch;
+      if(!wet&&hash(c,r)>.2+.3*(.5+.5*Math.sin(r*.55+c*.06+t*.5)))continue;
+      let chr,col,wt='400';
+      if(src&&(wet||B)){const k=(r*COLS+c)*4,pr=src[k],pg=src[k+1],pb=src[k+2],l=(pr*.3+pg*.59+pb*.11)/255;
+        if(wet){chr=edge?NOISE[(c*7+r*3+Math.floor(t*12))%NOISE.length]:glyph(r,c,si);wt=l>.42?'700':'400';
+          if(paper){const d=1-l;if(d<.16)continue;col=`rgba(21,19,15,${clamp(d*1.15)})`;wt=d>.6?'700':'400'}
+          else{const mx=Math.max(pr,pg,pb,1),k2=(150+105*clamp(l*1.5))/mx;g.fillStyle=`rgba(${pr},${pg},${pb},.5)`;g.fillRect(c*cw,r*ch,cw+.5,ch+.5);
+            col=edge?'#fff':`rgb(${Math.min(255,Math.round(pr*k2))},${Math.min(255,Math.round(pg*k2))},${Math.min(255,Math.round(pb*k2))})`}}
+        else{ // the picture before, drying out: its letters slip back into noise
+          chr=NOISE[(c*5+r*11+Math.floor(t*1.3+c*.1))%NOISE.length];col=paper?`rgba(21,19,15,${.1+.22*(1-l)})`:`rgba(${Math.round(120+pr*.3)},${Math.round(130+pg*.3)},255,.3)`}}
+      else{chr=NOISE[(c*5+r*11+Math.floor(t*1.3+c*.1))%NOISE.length];col=paper?'rgba(21,19,15,.16)':'rgba(170,180,255,.34)'}
+      if(chr===' ')continue;if(wt!==lw){g.font=`${wt} ${fs}px ui-monospace,"DejaVu Sans Mono",Menlo,Consolas,monospace`;lw=wt}
+      g.fillStyle=col;g.fillText(chr,x,y)}}
+  const f=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+  $('#clock').textContent=f(t)+' / '+f(P.dur);if(playing())$('#seek').value=t;
+  const li=P.lines.findIndex(l=>t>=l[0]&&t<=l[1]+.4);$('#say').textContent=li>=0?P.lines[li][2]:'_';
+  if(shown!==ri){shown=ri;$('#orig').src=R.img;$('#cap').textContent=`picture ${ri+1} of ${P.refs.length} · the original`;
+    $('#why').textContent=(R.own?'Answers the line: “'+R.line+'”':'No single line. Chosen by likeness: '+R.desc);
+    const n={};R.grid.flat().forEach(l=>n[l]=(n[l]||0)+1);const tot=R.grid.flat().length;
+    $('#nouns').textContent='The machine sees: '+Object.entries(n).sort((a,b)=>b[1]-a[1]).map(([l,v])=>`${NAME[l]||'UNNAMED'} ${Math.round(100*v/tot)}%`).join(' · ')}
+}
+function loop(ts){if(fakeOn&&noAudio){fake=Math.min(P.dur,fake+(ts-lastTick)/1000);if(fake>=P.dur)fakeOn=false}lastTick=ts;if(P)draw();requestAnimationFrame(loop)}
+$('#play').onclick=async()=>{
+  if(noAudio){fakeOn=!fakeOn;if(fake>=P.dur)fake=0}
+  else if(au.paused){try{await au.play()}catch(e){noAudio=true;fakeOn=true;fake=+$('#seek').value}}else au.pause();
+  $('#play').textContent=playing()?'|| PAUSE':'> PLAY'};
+au.onended=()=>$('#play').textContent='> PLAY';au.onerror=()=>{noAudio=true};
+$('#seek').oninput=e=>{const v=+e.target.value;fake=v;if(!noAudio){try{au.currentTime=v}catch(_){}}};
+$('#poem').onchange=e=>{au.pause();load(+e.target.value)};
+const pick=(attr,fn)=>document.querySelectorAll(`[data-${attr}]`).forEach(b=>b.onclick=()=>{document.querySelectorAll(`[data-${attr}]`).forEach(x=>x.classList.toggle('on',x===b));fn(b.dataset[attr])});
+pick('mode',v=>mode=v);pick('theme',v=>{paper=v==='paper';document.body.classList.toggle('paper',paper)});
+addEventListener('resize',size);
+fetch('words.json').then(r=>r.json()).then(d=>{T=d;size();
+  $('#poem').innerHTML=T.poems.map((p,i)=>`<option value="${i}">${p.num} ${p.title}</option>`).join('');
+  const q=new URLSearchParams(location.search),pi=Math.max(0,T.poems.findIndex(p=>p.num===(q.get('p')||'06')));
+  $('#poem').value=pi;load(pi);if(q.get('t')){noAudio=true;fake=+q.get('t');$('#seek').value=fake}
+  if(q.get('mode'))document.querySelector(`[data-mode=${q.get('mode')}]`)?.click();
+  if(q.get('theme'))document.querySelector(`[data-theme=${q.get('theme')}]`)?.click();
+  requestAnimationFrame(loop)});
+</script>
+</body>
+</html>
