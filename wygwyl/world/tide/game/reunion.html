@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Reunion · WYGWYL</title>
+<link rel="icon" href="data:,">
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#120d0a;color:#fbf3e8;font:15px/1.4 ui-monospace,"SF Mono",Menlo,Consolas,monospace;-webkit-user-select:none;user-select:none;touch-action:none}
+canvas{display:block;width:100vw;height:100vh}
+#veil{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 55%,transparent 52%,rgba(0,0,0,.55));mix-blend-mode:multiply}
+#grain{position:fixed;inset:-50%;pointer-events:none;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:g .5s steps(3) infinite}
+@keyframes g{to{transform:translate(4%,-3%)}}
+#line{position:fixed;left:0;right:0;bottom:calc(18px + env(safe-area-inset-bottom));text-align:center;padding:0 18px;font:italic 18px/1.35 "Iowan Old Style",Palatino,Georgia,serif;text-shadow:0 1px 6px #000;pointer-events:none}
+#line span{opacity:.35}#line span.on{opacity:1}#line span.got{color:#8fdcff;opacity:1}
+#top{position:fixed;left:14px;right:14px;top:calc(12px + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#d8c8b4;pointer-events:none;z-index:2}
+#top button{pointer-events:auto;font:11px ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:#fbf3e8;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.3);min-height:38px;padding:0 12px}
+#title{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;background:rgba(18,13,10,.74);padding:24px;z-index:3}
+#title h1{font:400 clamp(34px,9vw,64px)/1 ui-monospace,Menlo,monospace;letter-spacing:-.03em;margin:0}
+#title p{margin:0;color:#d8c8b4;max-width:540px}#title a{color:#8fdcff}
+#title button{font:14px ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;background:#fbf3e8;color:#120d0a;border:0;min-height:48px;padding:0 26px;margin-top:8px}
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+</head>
+<body>
+<div id="veil"></div><div id="grain"></div>
+<div id="top"><span id="hyd">the hall</span><button id="mode" aria-label="Switch between colour and lidar view">lidar</button></div>
+<div id="line"></div>
+<div id="title"><h1>Reunion</h1>
+<p>Four old friends, decades later. Each line he reads carries them to another place on a wave of blue water made of his words: the hall, the room of empty chairs, the forest, the meadow, the dunes, the ridge, the porch light.</p>
+<p>Steer ← → or A D · hold ↑ / W to hurry · L lidar<br>On a phone: touch and drag left or right.</p>
+<button id="go">Walk</button><p><a href="index.html">Magic Ride</a> · <a href="naraka.html">Naraka Market</a> · <a href="gates.html">The Light Gates</a></p></div>
+<script type="module">
+import * as THREE from 'three';
+const Q = new URLSearchParams(location.search);
+let seed = +(Q.get('seed') || 5); const rand = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+const P = await (await fetch('reunion.json')).json();
+const WORDS = P.lines.flatMap((l, li) => l.words.map(([w, t]) => ({ w, t, li })));
+// nine places, one per line, from the nine shots of the Reunion take; colours are sky top, horizon, fog, ground
+const PLACES = [
+ { name: 'the hall', top: 0x2a1c14, hor: 0x5a3a24, fog: 0x3a281c, ground: 0x4a3122, far: 60, indoor: 1, warm: 1 },
+ { name: 'the hall, laughing', top: 0x2a1c14, hor: 0x5a3a24, fog: 0x3a281c, ground: 0x4a3122, far: 50, indoor: 1, warm: 1 },
+ { name: 'the room of empty chairs', top: 0x0c0a0a, hor: 0x1a1513, fog: 0x0f0c0b, ground: 0x1c1612, far: 34, indoor: 1, warm: .3 },
+ { name: 'the forest edge', top: 0x101c2c, hor: 0x3a4d5c, fog: 0x34444c, ground: 0x1d261c, far: 70, indoor: 0, warm: .2 },
+ { name: 'the meadow', top: 0x5b7fae, hor: 0xf1c58a, fog: 0xc9ab84, ground: 0x6b7a3a, far: 240, indoor: 0, warm: .8 },
+ { name: 'the dunes', top: 0x3a4c76, hor: 0xe4a77a, fog: 0x9b8a86, ground: 0xb79e78, far: 200, indoor: 0, warm: .6 },
+ { name: 'the ridge at night', top: 0x05060f, hor: 0x161a34, fog: 0x0a0c1a, ground: 0x15151a, far: 260, indoor: 0, warm: .1 },
+ { name: 'the meadow at sunset', top: 0x47577e, hor: 0xf6a35c, fog: 0xc98a62, ground: 0x6d6c30, far: 240, indoor: 0, warm: 1 },
+ { name: 'home', top: 0x1d2440, hor: 0x8a6a7a, fog: 0x3c3448, ground: 0x2e3a26, far: 120, indoor: 0, warm: .6 }];
+const placeAt = t => { let z = 0; P.lines.forEach((l, i) => { if (l.t0 - .4 <= t) z = i }); return z };
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75)); renderer.setSize(innerWidth, innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1; document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const camera = new THREE.PerspectiveCamera(58, innerWidth / innerHeight, 0.1, 1200);
+addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix() });
+const U = { uTop: { value: new THREE.Color() }, uHor: { value: new THREE.Color() }, uFog: { value: new THREE.Color() }, uGround: { value: new THREE.Color() },
+  uFar: { value: 60 }, uLidar: { value: 0 }, uTime: { value: 0 }, uCam: { value: new THREE.Vector3() }, uWarm: { value: 1 }, uPulse: { value: 0 } };
+const LIB = `uniform vec3 uFog,uTop,uHor,uGround; uniform float uLidar,uTime,uFar,uWarm,uPulse; uniform vec3 uCam;
+vec3 ramp(float h){ h=clamp(h,0.,1.); vec3 a=vec3(.12,.25,1.),b=vec3(.1,.85,.95),c=vec3(.2,1.,.35),d=vec3(1.,.85,.1),e=vec3(1.,.25,.1);
+  return h<.25?mix(a,b,h*4.):h<.5?mix(b,c,(h-.25)*4.):h<.75?mix(c,d,(h-.5)*4.):mix(d,e,(h-.75)*4.); }
+float hh(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}
+vec3 finish(vec3 col, vec3 wp){ float d=distance(wp,uCam); float f=smoothstep(uFar*.12,uFar,d); vec3 grey=mix(col,uFog,f);
+  float scan=step(.55,fract(wp.y*3.))*step(.35,fract(d*1.1-uTime*3.)); vec3 lid=ramp(wp.y/14.)*(.25+.95*scan)*(1.-smoothstep(uFar*.4,uFar,d)*.85);
+  return mix(grey,lid,uLidar); }`;
+const VS = `varying vec3 vW; varying vec3 vN; varying vec3 vC;
+void main(){ vec4 p=vec4(position,1.); vec3 n=normal; vC=vec3(1.);
+ #ifdef USE_INSTANCING
+  p=instanceMatrix*p; n=mat3(instanceMatrix)*n;
+ #endif
+ #ifdef USE_INSTANCING_COLOR
+  vC=instanceColor;
+ #endif
+ vec4 w=modelMatrix*p; vW=w.xyz; vN=normalize(mat3(modelMatrix)*n); gl_Position=projectionMatrix*viewMatrix*w; }`;
+const mat = (frag, extra) => new THREE.ShaderMaterial({ uniforms: U, vertexShader: VS, fragmentShader: LIB + frag, ...extra });
+const FLAT = mat(`varying vec3 vW; varying vec3 vN; varying vec3 vC;
+void main(){ float sh=.5+.45*max(0.,dot(normalize(vN),normalize(vec3(.3,.9,.45)))); vec3 c=vC*sh*(.8+.3*uWarm);
+ gl_FragColor=vec4(finish(c,vW),1.); }`);
+const GLOW = mat(`varying vec3 vW; varying vec3 vC; void main(){ gl_FragColor=vec4(finish(vC*1.7,vW),1.); }`);
+const GROUND = mat(`varying vec3 vW; void main(){ float n=hh(floor(vW.xz*2.)); float boards=step(.06,fract(vW.x*.7))*.12;
+ vec3 c=uGround*(.85+.25*n)+vec3(.04)*boards*step(.5,uWarm); gl_FragColor=vec4(finish(c,vW),1.); }`);
+const sky = new THREE.Mesh(new THREE.SphereGeometry(800, 24, 12), new THREE.ShaderMaterial({ uniforms: U, side: THREE.BackSide, depthWrite: false,
+  vertexShader: 'varying vec3 vP; void main(){ vP=normalize(position); gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.); }',
+  fragmentShader: `uniform vec3 uTop,uHor; uniform float uLidar; varying vec3 vP; float h(vec2 p){return fract(sin(dot(p,vec2(12.9,78.2)))*43758.5);}
+   void main(){ float y=max(vP.y,0.); vec3 c=mix(uHor,uTop,pow(y,.55)); vec2 s=floor(vP.xz/max(vP.y,.05)*90.); c+=step(.996,h(s))*smoothstep(.1,.4,y)*(1.-dot(uTop,vec3(.6)));
+   gl_FragColor=vec4(mix(c,vec3(0.),uLidar*.94),1.); }` }));
+scene.add(sky);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(900, 900), GROUND); ground.rotation.x = -Math.PI / 2; scene.add(ground);
+
+// ---- one pool of boxes and one of lights, rebuilt for each place around where the friends stand
+const box = new THREE.BoxGeometry(1, 1, 1), M = new THREE.Matrix4(), Qn = new THREE.Quaternion(), V1 = new THREE.Vector3(), V2 = new THREE.Vector3(), Y = new THREE.Vector3(0, 1, 0), HIDE = new THREE.Matrix4().makeScale(0, 0, 0), EU = new THREE.Euler();
+const inst = (geo, m, n) => { const o = new THREE.InstancedMesh(geo, m, n); o.frustumCulled = false; o.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(n * 3), 3); scene.add(o); return o };
+const props = inst(box, FLAT, 700), lights = inst(new THREE.SphereGeometry(.08, 6, 4), GLOW, 400), cyl = inst(new THREE.CylinderGeometry(1, 1.15, 1, 9), FLAT, 160);
+let nP = 0, nL = 0, nC = 0;
+const B = (x, y, z, sx, sy, sz, c, ry = 0, rx = 0) => { if (nP >= 700) return; Qn.setFromEuler(EU.set(rx, ry, 0)); M.compose(V1.set(x, y, z), Qn, V2.set(sx, sy, sz)); props.setMatrixAt(nP, M); props.setColorAt(nP++, new THREE.Color(...c)) };
+const L = (x, y, z, c = [1, .78, .45], s = 1) => { if (nL >= 400) return; M.compose(V1.set(x, y, z), Qn.identity(), V2.setScalar(s)); lights.setMatrixAt(nL, M); lights.setColorAt(nL++, new THREE.Color(...c)) };
+const C = (x, y, z, r, h, c) => { if (nC >= 160) return; M.compose(V1.set(x, y, z), Qn.identity(), V2.set(r, h, r)); cyl.setMatrixAt(nC, M); cyl.setColorAt(nC++, new THREE.Color(...c)) };
+const banner = new THREE.Mesh(new THREE.PlaneGeometry(8, 1.4), new THREE.MeshBasicMaterial({ map: (() => { const c = document.createElement('canvas'); c.width = 1024; c.height = 180; const x = c.getContext('2d');
+  x.fillStyle = '#e9dcc2'; x.fillRect(0, 0, 1024, 180); x.fillStyle = '#5a2a18'; x.font = '700 108px Georgia,serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('WELCOME HOME', 512, 96); return new THREE.CanvasTexture(c) })() }));
+scene.add(banner); const ball = new THREE.Mesh(new THREE.SphereGeometry(.17, 10, 8), new THREE.MeshBasicMaterial({ color: 0x6b3a1c })); ball.scale.set(1, .7, .7); scene.add(ball);
+function build(pl, z0) {
+  nP = nL = nC = 0; banner.visible = false; ball.visible = false; seed = 101 + pl * 31;
+  if (pl <= 1) {                                                         // the hall: white ceramic walls, timber rafters, long tables, string lights, the banner
+    for (let k = 0; k < 9; k++) { const z = z0 - k * 6; B(-7, 3.5, z, .4, 7, 6.05, [.88, .86, .82]); B(7, 3.5, z, .4, 7, 6.05, [.88, .86, .82]); B(0, 7.6, z, 14.6, .35, .35, [.35, .22, .12]);
+      B(-3.5, 6.8, z, .3, .3, 6, [.38, .24, .13], 0, 0); B(3.5, 6.8, z, .3, .3, 6, [.38, .24, .13]);
+      for (let j = 0; j < 9; j++) L(-6 + j * 1.5, 5.4 - Math.sin(j / 8 * Math.PI) * .7, z - 3) }
+    for (let k = 0; k < 5; k++) { B(-4.6, .75, z0 - 6 - k * 9, 1.4, .08, 6, [.45, .3, .18]); B(4.6, .75, z0 - 6 - k * 9, 1.4, .08, 6, [.45, .3, .18]);
+      for (let j = 0; j < 4; j++) { B(-3.6, .45, z0 - 4 - k * 9 - j * 1.5, .45, .9, .45, [.3, .2, .13]); B(3.6, .45, z0 - 4 - k * 9 - j * 1.5, .45, .9, .45, [.3, .2, .13]) } }
+    B(0, 3.5, z0 - 54, 14.6, 7, .4, [.88, .86, .82]); B(0, 2.2, z0 - 53.7, 3, 4.4, .1, [1, .9, .7]);   // far wall and its open doors
+    banner.visible = true; banner.position.set(0, 5.4, z0 - 16);
+  } else if (pl === 2) {                                                 // the room of empty chairs, lit only by the embers they carry
+    for (let k = 0; k < 6; k++) { B(-5, 3, z0 - k * 6, .4, 6, 6.05, [.25, .23, .22]); B(5, 3, z0 - k * 6, .4, 6, 6.05, [.25, .23, .22]); B(0, 6, z0 - k * 6, 10.4, .3, 6.05, [.18, .16, .15]) }
+    for (let r = 0; r < 6; r++) for (let c = 0; c < 7; c++) { const x = -3.6 + c * 1.2, z = z0 - 8 - r * 2.2; if (Math.abs(x) < .8) continue; B(x, .45, z, .5, .08, .5, [.34, .24, .16]); B(x, .85, z + .23, .5, .8, .06, [.34, .24, .16]) }
+    B(0, 3.4, z0 - 26, 1.6, 2.6, .1, [.5, .55, .62]);                       // the one tall window
+  } else if (pl === 3) {                                                 // the forest edge: huge trunks, mist between them
+    for (let k = 0; k < 46; k++) { const side = k % 2 ? 1 : -1, x = side * (2.6 + rand() * 18), z = z0 - rand() * 70; C(x, 12, z, .7 + rand() * 1.1, 24, [.22, .16, .12]); B(x, 23, z, 4 + rand() * 4, 3, 4 + rand() * 4, [.12, .22, .14]) }
+    for (let k = 0; k < 40; k++) L((rand() - .5) * 20, 3 + rand() * 3, z0 - rand() * 60, [.9, .85, .7], .7);   // the picnic lights
+  } else if (pl === 4 || pl === 7) {                                     // the meadow, with the white temple far off
+    for (let k = 0; k < 200; k++) { const x = (rand() - .5) * 60, z = z0 - rand() * 90; if (Math.abs(x) < 1.6) continue; B(x, .25, z, .05, .5 + rand() * .4, .05, pl === 7 ? [.62, .55, .22] : [.45, .55, .25], rand() * 3, (rand() - .5) * .4) }
+    for (let k = 0; k < 7; k++) B(-30 + k * .9, 4 + k * 3, z0 - 160, 9 - k * 1.2, 6, 9 - k * 1.2, [.92, .92, .95]);
+    if (pl === 7) ball.visible = true;
+    for (let k = 0; k < 14; k++) L(-6 + k, 3.2 - Math.sin(k / 13 * Math.PI) * .6, z0 - 10, [1, .8, .5]);
+  } else if (pl === 5) {                                                 // the dunes, the path down to the shore
+    for (let k = 0; k < 14; k++) { const side = k % 2 ? 1 : -1; { const w = 10 + rand() * 10; B(side * (6 + w / 2 + rand() * 16), 0, z0 - rand() * 80, w, 2 + rand() * 3, 8 + rand() * 6, [.72, .62, .46], (rand() - .5) * .5) } }
+    for (let k = 0; k < 160; k++) { const x = (rand() - .5) * 30, z = z0 - rand() * 70; if (Math.abs(x) < 1.6) continue; B(x, .35, z, .04, .7 + rand() * .4, .04, [.55, .55, .3], rand() * 3, (rand() - .5) * .6) }
+    B(0, -.4, z0 - 140, 400, .5, 120, [.18, .3, .45]);                     // the sea
+  } else if (pl === 6) {                                                 // the ridge: a narrow path, a drop, the city lights far below
+    for (let k = 0; k < 30; k++) { B(-3.4 - rand() * 2, rand() * 3, z0 - k * 3, 2.5, 2 + rand() * 4, 3, [.12, .12, .14]); B(3.2 + rand(), -6, z0 - k * 3, 2, 12, 3, [.1, .1, .12]) }
+    for (let k = 0; k < 220; k++) L(10 + rand() * 120, -30 - rand() * 6, z0 - 20 - rand() * 160, rand() < .7 ? [1, .78, .45] : [.6, .8, 1], 1.6);
+    for (let k = 0; k < 18; k++) { L(-1.6, 2.4, z0 - k * 6, [1, .8, .5]); B(-1.6, 1.2, z0 - k * 6, .06, 2.4, .06, [.3, .25, .2]) }
+  } else {                                                               // home: a small white house up the meadow, the porch light on
+    const z = z0 - 40; B(0, 2.4, z, 9, 4.8, 7, [.9, .9, .88]); B(0, 5.6, z, 9.6, 1.8, 7.6, [.35, .32, .34], 0, 0);
+    B(0, 1.1, z + 3.6, 1.2, 2.2, .1, [.4, .25, .15]); B(-2.6, 2.4, z + 3.6, 1.2, 1.2, .1, [1, .82, .5]); B(2.6, 2.4, z + 3.6, 1.2, 1.2, .1, [1, .82, .5]);
+    L(0, 2.6, z + 4.2, [1, .85, .55], 4); for (let k = 0; k < 80; k++) { const x = (rand() - .5) * 40, zz = z0 - rand() * 36; if (Math.abs(x) < 1.6) continue; B(x, .25, zz, .05, .5, .05, [.35, .45, .25], rand() * 3) }
+    for (let k = 0; k < 12; k++) L(-1.8, .15, z0 - 4 - k * 3, [1, .8, .5], .8), L(1.8, .15, z0 - 4 - k * 3, [1, .8, .5], .8);
+  }
+  for (let i = nP; i < 700; i++) props.setMatrixAt(i, HIDE); for (let i = nL; i < 400; i++) lights.setMatrixAt(i, HIDE); for (let i = nC; i < 160; i++) cyl.setMatrixAt(i, HIDE);
+  [props, lights, cyl].forEach(o => { o.instanceMatrix.needsUpdate = true; o.instanceColor.needsUpdate = true });
+}
+
+// ---- the four friends: he wears matte black; the others rust corduroy over a white tee, sky-blue linen, a green football jersey and flat cap
+const FC = c => new THREE.ShaderMaterial({ uniforms: U, vertexShader: VS, fragmentShader: LIB + `varying vec3 vW; varying vec3 vN;
+  void main(){ float sh=.55+.45*max(0.,dot(normalize(vN),normalize(vec3(.3,.9,.4)))); gl_FragColor=vec4(finish(vec3(${c.map(v => v.toFixed(3)).join(',')})*sh,vW),1.); }` });
+function figure(top, legs, skin, hair, opts = {}) {
+  const g = new THREE.Group(), add = (c, s, p, parent = g) => { const o = new THREE.Mesh(box, FC(c)); o.scale.set(...s); o.position.set(...p); parent.add(o); return o };
+  const f = { g, torso: add(top, [.5, .66, .3], [0, 1.22, 0]), head: add(skin, [.21, .24, .22], [0, 1.69, 0]), legL: add(legs, [.17, .82, .18], [-.12, .44, 0]), legR: add(legs, [.17, .82, .18], [.12, .44, 0]),
+    armL: add(top, [.12, .6, .13], [-.32, 1.2, 0]), armR: add(top, [.12, .6, .13], [.32, 1.2, 0]) };
+  add(hair, opts.cap ? [.25, .07, .3] : [.22, .08, .23], [0, opts.cap ? 1.84 : 1.82, opts.cap ? -.04 : 0]);
+  if (opts.tee) add([.95, .95, .92], [.22, .5, .02], [0, 1.24, -.16]);
+  if (opts.locs) add(hair, [.12, .34, .1], [0, 1.58, .14]);
+  const glass = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0xff8a3a, toneMapped: false })); glass.scale.set(.09, .16, .09); glass.position.set(0, -.32, -.05); f.armR.add(glass); glass.scale.divide(f.armR.scale);
+  scene.add(g); return f }
+const SK = [.33, .22, .16];
+const friends = [figure([.06, .06, .07], [.05, .05, .06], SK, [.12, .12, .12]), figure([.62, .3, .16], [.2, .2, .22], [.27, .18, .13], [.05, .05, .05], { tee: 1 }),
+  figure([.48, .68, .86], [.85, .82, .74], [.36, .24, .17], [.25, .25, .25], { locs: 1 }), figure([.1, .45, .25], [.15, .17, .3], [.3, .2, .14], [.15, .15, .14], { cap: 1 })];
+const OFF = [[0, -.6], [-1.25, .25], [1.25, .25], [2.4, .6]];   // he leads, a little ahead, so nobody stands between him and us
+
+// ---- the wave of word-water that carries them from one place to the next
+const WT = (() => { const c = document.createElement('canvas'); c.width = c.height = 512; const x = c.getContext('2d'); x.fillStyle = '#062a7a'; x.fillRect(0, 0, 512, 512);
+  x.font = '600 28px ui-monospace,Menlo,monospace'; x.fillStyle = '#cfeeff'; const s = P.lines.map(l => l.text).join(' ');
+  for (let r = 0; r < 17; r++) x.fillText(s.slice(r * 34, r * 34 + 34), 6, r * 30 + 24); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; return t })();
+const wave = new THREE.Mesh(new THREE.PlaneGeometry(60, 30), new THREE.MeshBasicMaterial({ map: WT, transparent: true, opacity: .92, side: THREE.DoubleSide, toneMapped: false, depthWrite: false })); scene.add(wave); wave.visible = false;
+const words = [], tex = {}, glyph = w => { const c = document.createElement('canvas'), x = c.getContext('2d'); c.width = 512; c.height = 128; x.font = '700 84px ui-monospace,Menlo,monospace';
+  x.textAlign = 'center'; x.textBaseline = 'middle'; x.shadowColor = '#3fb4ff'; x.shadowBlur = 24; x.fillStyle = '#eef8ff'; x.fillText(w, 256, 66); const t = new THREE.CanvasTexture(c); t.anisotropy = 4; return t };
+const spl = new THREE.InstancedMesh(new THREE.SphereGeometry(.07, 6, 4), new THREE.MeshBasicMaterial({ color: 0x8fdcff, toneMapped: false }), 300); spl.frustumCulled = false; scene.add(spl); const sps = []; let spI = 0;
+
+const key = {}; addEventListener('keydown', e => { key[e.code] = 1; if (e.code === 'KeyL') toggle(); if (e.code === 'KeyR' && phase === 'end') location.reload(); if (e.code.startsWith('Arrow') || e.code === 'Space') e.preventDefault() });
+addEventListener('keyup', e => key[e.code] = 0);
+let touchX = null; addEventListener('pointerdown', e => { if (!e.target.closest('button,a')) touchX = e.clientX / innerWidth }); addEventListener('pointermove', e => { if (touchX !== null) touchX = e.clientX / innerWidth }); addEventListener('pointerup', () => touchX = null);
+const modeBtn = document.getElementById('mode'); let lidarT = 0; const toggle = () => { lidarT = lidarT ? 0 : 1; modeBtn.textContent = lidarT ? 'colour' : 'lidar' }; modeBtn.onclick = toggle;
+const audio = new Audio('../../../' + P.audio.split('/').map(encodeURIComponent).join('/')); audio.preload = 'auto';
+let phase = 'title', t = 0, s = 0, x = 0, vx = 0, speed = 2.4, caught = 0, missed = 0, nextWord = 0, place = -1, shownPlace = -1, waveT = -9, clock0 = 0, stride = 0, z0 = 0;
+window.__game = { get state() { return { phase, t: +t.toFixed(2), s: +s.toFixed(1), x: +x.toFixed(2), place, placeName: PLACES[Math.max(0, shownPlace)].name, caught, missed, total: WORDS.length,
+  next: words.filter(g => !g.done).map(g => ({ w: g.w, x: +g.x.toFixed(2), ahead: +(-g.z - s).toFixed(1) })).sort((a, b) => a.ahead - b.ahead)[0] || null } } };
+function start() { phase = 'walk'; const from = +(Q.get('t') || 0); clock0 = performance.now() - from * 1000; nextWord = Math.max(0, WORDS.findIndex(w => w.t >= from)); audio.currentTime = from; audio.play().catch(() => {}); document.getElementById('title').style.display = 'none' }
+document.getElementById('go').onclick = start; if (Q.has('autostart')) start();
+build(0, 6); shownPlace = 0;
+const lineEl = document.getElementById('line'), hydEl = document.getElementById('hyd'); let shown = -1, last = performance.now(); const cA = new THREE.Color();
+const walk = (f, ph, a) => { f.legL.rotation.x = Math.sin(ph) * a; f.legR.rotation.x = -Math.sin(ph) * a; f.armL.rotation.x = -Math.sin(ph) * a * .8; f.armR.rotation.x = Math.sin(ph) * a * .8 };
+function frame(now) {
+  requestAnimationFrame(frame); const dt = Math.min(.05, (now - last) / 1000); last = now; U.uTime.value = now / 1000;
+  if (phase === 'walk') {
+    t = !audio.paused && audio.currentTime > 0 ? audio.currentTime : (now - clock0) / 1000;
+    const steer = (key.ArrowRight || key.KeyD ? 1 : 0) - (key.ArrowLeft || key.KeyA ? 1 : 0) + (touchX !== null ? (touchX - .5) * 3 : 0) + (navigator.getGamepads?.()[0]?.axes[0] || 0);
+    const want = 2.4 + ((key.ArrowUp || key.KeyW) ? 2 : 0) - ((key.ArrowDown || key.KeyS) ? 1.6 : 0);
+    speed += (want - speed) * (1 - Math.exp(-3 * dt)); vx += (Math.max(-1, Math.min(1, steer)) * 3 - vx) * (1 - Math.exp(-8 * dt)); x = Math.max(-2.2, Math.min(2.2, x + vx * dt)); s += speed * dt;
+    if (t > P.dur + 1.5) { phase = 'end'; audio.pause() }
+  }
+  // on each new line a wave of word-water comes toward them; when it passes, they stand somewhere else
+  const pl = placeAt(t); if (pl !== place) { place = pl; if (pl > 0) waveT = 0 }
+  if (waveT >= 0) { waveT += dt; const wz = -s - 26 + waveT * 30; wave.visible = true; wave.position.set(0, 8, wz); WT.offset.y = -now / 4000;
+    if (wz > -s + 3 && shownPlace !== place) { z0 = -s + 6; build(place, z0); shownPlace = place }
+    if (wz > -s + 12) { waveT = -9; wave.visible = false } }
+  const Z = PLACES[shownPlace], k = 1 - Math.exp(-3 * dt);
+  U.uTop.value.lerp(cA.set(Z.top), k); U.uHor.value.lerp(cA.set(Z.hor), k); U.uFog.value.lerp(cA.set(Z.fog), k); U.uGround.value.lerp(cA.set(Z.ground), k); U.uFar.value += (Z.far - U.uFar.value) * k; U.uWarm.value += (Z.warm - U.uWarm.value) * k;
+  U.uLidar.value += (lidarT - U.uLidar.value) * (1 - Math.exp(-5 * dt));
+  // words
+  while (phase === 'walk' && nextWord < WORDS.length && WORDS[nextWord].t - t < 3.6) {
+    const W = WORDS[nextWord++], lead = Math.max(.7, W.t - t), lane = ((nextWord % 5) - 2) * 1.0, lift = [1.3, 1.75, 2.2][nextWord % 3];
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(1.4, .35), new THREE.MeshBasicMaterial({ map: tex[W.w] || (tex[W.w] = glyph(W.w)), transparent: true, depthWrite: false, toneMapped: false })); scene.add(m);
+    words.push({ w: W.w, li: W.li, x: lane, y: lift, z: -(s + speed * lead + 1), mesh: m, done: false });
+  }
+  for (const g of words) {
+    if (!g.done) { g.mesh.position.set(g.x, g.y + Math.sin(now / 350 + g.z) * .05, g.z);
+      if (-g.z < s + .25 && -g.z > s - .8 && Math.abs(g.x - x) < .9) { g.done = 'got'; caught++; for (let i = 0; i < 10; i++) sps[spI++ % 300] = { p: new THREE.Vector3(g.x, g.y, g.z), v: new THREE.Vector3((rand() - .5) * 3, 1 + rand() * 3, (rand() - .5) * 2), life: .9 } }
+      else if (-g.z < s - .8) { g.done = 'miss'; missed++ } }
+    else { g.age = (g.age || 0) + dt; g.mesh.position.y += g.done === 'got' ? dt * 4 : -dt; g.mesh.material.opacity = Math.max(0, (g.done === 'got' ? 1 : .6) - g.age * 1.3); if (g.age > 2.5) { scene.remove(g.mesh); g.gone = true } }
+  }
+  for (let i = words.length - 1; i >= 0; i--) if (words[i].gone) words.splice(i, 1);
+  for (let i = 0; i < sps.length; i++) { const d = sps[i]; if (!d) continue; d.v.y -= 9 * dt; d.p.addScaledVector(d.v, dt); d.life -= dt; M.compose(d.p, Qn.identity(), V2.setScalar(Math.max(0, d.life))); spl.setMatrixAt(i, d.life > 0 ? M : HIDE) }
+  spl.instanceMatrix.needsUpdate = true;
+  // the friends, and what each place has them do
+  stride += speed * dt * 2.6; const laugh = shownPlace === 1 || shownPlace === 7, listen = shownPlace === 5, hug = shownPlace === 0 && t < 6, photo = shownPlace === 4;
+  friends.forEach((f, i) => { const o = OFF[i], fx = (i ? x * .6 : x) + o[0] * (hug ? .55 : 1), fz = -s + o[1] * (hug ? .5 : 1) + (listen ? i * .2 : 0);
+    f.g.position.set(fx, laugh ? Math.abs(Math.sin(now / 160 + i)) * .07 : 0, fz); f.g.rotation.y = photo ? Math.PI : (listen && i ? Math.atan2(friends[i - 1].g.position.x - fx, friends[i - 1].g.position.z - fz) + Math.PI : 0);
+    walk(f, stride + i, photo ? 0 : .5); f.armL.rotation.z = hug ? -1.1 : 0; f.armR.rotation.z = hug ? 1.1 : 0; f.head.rotation.x = laugh ? -.35 : (listen && i ? .5 : 0) });
+  if (ball.visible) { const u = (now / 1000 % 2.2) / 2.2, a = friends[3].g.position, b = friends[1].g.position; ball.position.set(a.x + (b.x - a.x) * u, 1.6 + Math.sin(u * Math.PI) * 6, a.z + (b.z - a.z) * u - 4 * Math.sin(u * Math.PI)); ball.rotation.z += dt * 9 }
+  U.uPulse.value = Math.max(0, Math.sin(now / 250)) * (laugh ? 1 : 0);
+  const behind = V1.set(x * .5, 2.4, -s + 5.4), front = V2.set(x * .5, 1.9, -s - 6.5), pf = photo ? 1 : 0;
+  camera.position.lerp(behind.lerp(front, pf), 1 - Math.exp(-4 * dt)); camera.lookAt(x * .6, 1.5, -s - (photo ? -.5 : 8));
+  U.uCam.value.copy(camera.position); sky.position.copy(camera.position); ground.position.set(0, 0, -s); renderer.render(scene, camera);
+  const li = P.lines.findIndex(l => t >= l.t0 - .3 && t <= l.t1 + .8);
+  if (li !== shown) { shown = li; lineEl.innerHTML = li < 0 ? '' : P.lines[li].words.map(([w]) => `<span>${w.replace(/</g, '&lt;')}</span>`).join(' ') }
+  if (li >= 0) { const sp = lineEl.children; P.lines[li].words.forEach(([w, wt], j) => { if (!sp[j]) return; sp[j].classList.toggle('on', wt <= t); if (words.some(g => g.li === li && g.w === w && g.done === 'got')) sp[j].classList.add('got') }) }
+  hydEl.textContent = phase === 'end' ? `${caught} of ${caught + missed} words became water · R to walk again` : `${caught} words · ${Z.name}`;
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

@@ -52,3 +52,14 @@ waterfalls · "nature" vines climb · "safe" windows wake in blue and pink and t
 "currency" the windows pulse together · "candlelight" candles · "narrow" the towers lean in · "rainbows" the sky ·
 "continuums" a ring of light widens from his feet · "welcoming" he turns to face us and opens his arms.
 Same controls and lidar mode. Checked: full 100 s headless, zero console errors, a frame at each key word.
+
+## Reunion (`reunion.html`)
+
+Poem 12, on foot, with the other three: four Black men in their fifties, he in matte black at the front; the others in
+a rust corduroy jacket over a white tee, a sky-blue linen shirt with grey locs, and a green football jersey with a flat
+cap, each carrying a glowing hourglass. Nine places, one per spoken line, taken from the nine shots of the Reunion take:
+the hall under WELCOME HOME, the hall laughing, the room of empty chairs, the forest edge, the meadow (the camera swings
+round for the group photograph), the dunes (each listens at the next one's chest), the ridge at night above the city
+lights, the meadow at sunset (a football arcs between them), and home with the porch light on. On each new line a wave
+of blue water printed with his words comes toward them, and when it passes they are somewhere else. Checked: full 65 s
+headless, zero console errors, a frame in each place.
