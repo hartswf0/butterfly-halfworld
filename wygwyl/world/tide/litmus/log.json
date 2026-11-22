@@ -1,0 +1,158 @@
+[
+ {
+  "id": "probe-sheet",
+  "date": "2026-11-22 00:10",
+  "question": "Can a contact sheet of four views be given as one seed, so the model builds one territory from all four?",
+  "hypothesis": "Probably not: it takes exactly one starting frame, so I expect it to treat the sheet as a picture of four panels, or to enter one panel and discard the rest.",
+  "seed_image": "seeds/sheet_naraka.jpg",
+  "text_sent": "This picture is a reference sheet: four views of the same district of one city, a night market built from shipping containers with alleys and a flooded underpass. Begin standing inside that district at eye level, in a single continuous place that contains all four views nearby. Do not show panels or borders.",
+  "keys": [
+   "1s key_down key_w",
+   "10s key_up key_w"
+  ],
+  "seconds": 12.3,
+  "frames": 296,
+  "checks": {
+   "one_scene": "The frame shows one continuous scene, not a grid of separate panels with borders."
+  },
+  "judged": [
+   {
+    "t": 0.5,
+    "frame": 1,
+    "one_scene": false
+   },
+   {
+    "t": 6.2,
+    "frame": 2,
+    "one_scene": false
+   },
+   {
+    "t": 11.8,
+    "frame": 3,
+    "one_scene": false
+   }
+  ],
+  "first_vs_last": 39.4,
+  "first_vs_middle": 32.7,
+  "video": "out/probe-sheet.mp4",
+  "strip": "out/probe-sheet.jpg"
+ },
+ {
+  "id": "probe-plan",
+  "date": "2026-11-22 00:11",
+  "question": "Can a map of the territory be the seed, with the camera dropped into it?",
+  "hypothesis": "Unlikely to become street level; I expect it to stay a map and slide over it like a flat picture.",
+  "seed_image": "seeds/plan.jpg",
+  "text_sent": "This picture is a map of an island city seen from above. Begin standing on the ground inside this city at eye level, on a street near the harbour, looking along the street. Do not show the map.",
+  "keys": [
+   "1s key_down key_w",
+   "10s key_up key_w"
+  ],
+  "seconds": 12.3,
+  "frames": 296,
+  "checks": {
+   "street_level": "The camera is at ground level among buildings or terrain, not looking down at a map."
+  },
+  "judged": [
+   {
+    "t": 0.5,
+    "frame": 1,
+    "street_level": true
+   },
+   {
+    "t": 6.2,
+    "frame": 2,
+    "street_level": true
+   },
+   {
+    "t": 11.8,
+    "frame": 3,
+    "street_level": true
+   }
+  ],
+  "first_vs_last": 38.2,
+  "first_vs_middle": 30.9,
+  "video": "out/probe-plan.mp4",
+  "strip": "out/probe-plan.jpg"
+ },
+ {
+  "id": "probe-life",
+  "date": "2026-11-22 00:13",
+  "question": "If the seed text demands exaggerated life, does the street fill with action without any mid-take cue?",
+  "hypothesis": "Yes: the seed text is the strongest lever we have found, so crowd, motion and weather asked for here should appear and persist.",
+  "seed_image": "seeds/street020.jpg",
+  "text_sent": "A Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots walks away from us down the middle of a night market street built from shipping containers; the camera follows behind him at eye level. The street is wildly alive: a dense crowd of Black women and men of every age in bright teal, orange and white wraps and coats dancing and carrying baskets, children running, banners snapping overhead, sparks rising from grills, flocks of birds wheeling, lanterns swinging, water running down the gutters. Everything moves, all the time.",
+  "keys": [
+   "1s key_down key_w",
+   "12s key_up key_w"
+  ],
+  "seconds": 14.3,
+  "frames": 344,
+  "checks": {
+   "crowd": "There is a dense crowd of many people (more than ten) in the street.",
+   "man_from_behind": "A man in black seen from behind is the main figure."
+  },
+  "judged": [
+   {
+    "t": 0.5,
+    "frame": 1,
+    "crowd": true,
+    "man_from_behind": false
+   },
+   {
+    "t": 7.2,
+    "frame": 2,
+    "crowd": true,
+    "man_from_behind": false
+   },
+   {
+    "t": 13.8,
+    "frame": 3,
+    "crowd": false,
+    "man_from_behind": false
+   }
+  ],
+  "first_vs_last": 33.2,
+  "first_vs_middle": 30.7,
+  "video": "out/probe-life.mp4",
+  "strip": "out/probe-life.jpg"
+ },
+ {
+  "id": "probe-spin",
+  "date": "2026-11-22 00:15",
+  "question": "If the camera turns steadily in one direction, does it come back round to the place it started?",
+  "hypothesis": "It will keep inventing new city rather than close the circle: nothing we have seen suggests it remembers what is behind it.",
+  "seed_image": "seeds/plaza008.jpg",
+  "text_sent": "A wet stone plaza in an Afrofuturist harbour city, with a tall terracotta temple and an arched doorway. The camera stands still at eye level in the middle of the plaza and only turns.",
+  "keys": [
+   "1s key_down arrow_left",
+   "21s key_up arrow_left"
+  ],
+  "seconds": 22.5,
+  "frames": 532,
+  "checks": {
+   "temple_visible": "A tall orange or terracotta building with a large arched doorway is visible."
+  },
+  "judged": [
+   {
+    "t": 0.5,
+    "frame": 1,
+    "temple_visible": true
+   },
+   {
+    "t": 11.2,
+    "frame": 2,
+    "temple_visible": true
+   },
+   {
+    "t": 22.0,
+    "frame": 3,
+    "temple_visible": false
+   }
+  ],
+  "first_vs_last": 53.9,
+  "first_vs_middle": 48.2,
+  "video": "out/probe-spin.mp4",
+  "strip": "out/probe-spin.jpg"
+ }
+]
