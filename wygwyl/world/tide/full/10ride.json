@@ -5,17 +5,51 @@
  "character": "HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light.",
  "styles": {
   "grey": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism.",
-  "cel": "STYLE: a flat cel-shaded cartoon. Large flat colour shapes with dark outlines, no texture, no photographic detail. Keep this exact look."
+  "cel": "STYLE: a flat cel-shaded cartoon. Large flat colour shapes with dark outlines, no texture, no photographic detail. Keep this exact look.",
+  "greyfig": "STYLE: a grey-box video game world. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground. Keep this exact flat blocky look; add no texture or realism. The rider in the starting picture is him: keep him exactly where he is in the frame, seen from behind."
  },
- "start_lines": [0, 2, 3, 6, 9, 13, 15, 17],
+ "start_lines": [
+  0,
+  2,
+  3,
+  6,
+  9,
+  13,
+  15,
+  17
+ ],
  "shots": [
-  {"action": "He stands on the kerb with his back to us beside the parked motorcycle under one street lamp, and runs his hand along its tank.", "key": null},
-  {"action": "He swings a leg over the motorcycle, the headlight comes on, and he pulls away down the street.", "key": "key_w"},
-  {"action": "He rides the motorcycle alone through a huge empty plaza and into a tunnel. Nobody else anywhere.", "key": "key_w"},
-  {"action": "He rides the motorcycle down a crowded avenue, one hand off the bars; Black women and men in bright teal, orange and white coats and wraps on both pavements turn their heads to watch him pass.", "key": "key_w"},
-  {"action": "He rides the motorcycle out of the city along a raised road; ahead the moon sinks behind the skyline and the sky turns from violet to gold.", "key": "key_w"},
-  {"action": "He rides the motorcycle up a mountain road in the first sunlight, leaning hard into a long curve; birds burst up from the roadside.", "key": "key_w"},
-  {"action": "He rides the motorcycle along the mountain ridge in warm morning light with both arms stretched out wide.", "key": "key_w"},
-  {"action": "He stops the motorcycle at the top of the pass and looks out over the sunlit city below.", "key": null}
+  {
+   "action": "Night. He sits on the parked motorcycle under one street lamp with his back to us and runs his hand along its tank.",
+   "key": null
+  },
+  {
+   "action": "Night. He swings a leg over the motorcycle, the headlight comes on, and he pulls away down the street.",
+   "key": "key_w"
+  },
+  {
+   "action": "Night. He rides the motorcycle alone through a huge empty plaza and into a tunnel. Nobody else anywhere.",
+   "key": "key_w"
+  },
+  {
+   "action": "Night. He rides down a crowded avenue, one hand off the bars. Both pavements are full of Black women and men in bright teal, orange and white coats and wraps, who turn their heads to watch him pass.",
+   "key": "key_w"
+  },
+  {
+   "action": "The sky is turning from violet to gold; the moon is setting. He rides the motorcycle out of the city along a raised road; ahead the moon sinks behind the skyline and the sky turns from violet to gold.",
+   "key": "key_w"
+  },
+  {
+   "action": "First sunlight. He rides the motorcycle up a mountain road leaning hard into a long curve; birds burst up from the roadside.",
+   "key": "key_w"
+  },
+  {
+   "action": "Bright warm morning. He rides the motorcycle along the mountain ridge with both arms stretched out wide.",
+   "key": "key_w"
+  },
+  {
+   "action": "Full morning sun. He stops the motorcycle at the top of the pass and looks out over the sunlit city below.",
+   "key": null
+  }
  ]
 }

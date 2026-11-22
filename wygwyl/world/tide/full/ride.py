@@ -7,7 +7,7 @@ from PIL import Image
 T = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); KEY = os.environ['GEMINI_API_KEY']
 URL = 'wss://generativelanguage.googleapis.com/v1beta/interactions/live'; CTX = ssl.create_default_context(cafile=os.environ.get('SSL_CERT_FILE'))
 num, style, nshots = sys.argv[1], sys.argv[2], int(sys.argv[3]); S = json.load(open(f'{T}/full/{num}ride.json')); S['shots'] = S['shots'][:nshots]; P = json.load(open(T + '/tide.json'))['poems'][int(num) - 1]; L = P['lines']
-VOICE = os.path.normpath(os.path.join(T, '../..', P['audio'])); sl = S['start_lines']; cuts = [0.0] + [L[i]['t0'] for i in sl[1:nshots]] + [L[sl[nshots]]['t0'] if nshots < len(sl) else P['dur']]
+VOICE = os.path.normpath(os.path.join(T, '../..', P['audio'])); sl = S['start_lines']; cuts = [0.0] + [L[i]['t0'] for i in sl[1:]] + [P['dur']]
 async def shot(i, secs, out):
     s = S['shots'][i]; text = f"{S['styles'][style]} {S['third_person']} {S['character']} ACTION: {s['action']}"; img = open(f'{T}/full/seeds10/{style}{i + 1}.jpg', 'rb').read()
     if len(img) > 48000:
@@ -52,16 +52,16 @@ async def shot(i, secs, out):
     mid = Image.open(io.BytesIO(min(fr, key=lambda f: abs(f[0] - secs * .6))[1])).convert('RGB'); mid.save(f'{out}/mid{i}.jpg', quality=88)
     shutil.rmtree(d); os.remove(d + '.pcm'); print(f'shot {i + 1}: {len(fr)} frames, {fps:.1f} fps, {secs:.1f}s', flush=True)
     return dict(shot=i + 1, seed_image=f'full/seeds10/{style}{i + 1}.jpg', line=' '.join(l['text'] for l in L[sl[i]:(sl[i + 1] if i + 1 < len(sl) else len(L))]), t0=round(cuts[i], 2), seconds=round(secs, 2), seed_text=text, key=s['key'], frames=len(fr), delivered_fps=round(fps, 1))
-out = f"{T}/full/out/{num}ride-{style}-{time.strftime('%m%d-%H%M')}"; os.makedirs(out); man = []
-for i in range(len(S['shots'])):
-    if i: time.sleep(31)
+out = f"{T}/full/out/{num}ride-{style}-{time.strftime('%m%d-%H%M')}"; os.makedirs(out); man = []; idx = [int(x) for x in os.environ.get('ONLY', '').split(',') if x] or list(range(len(S['shots'])))
+for n_, i in enumerate(idx):
+    if n_: time.sleep(31)
     man.append(asyncio.run(shot(i, cuts[i + 1] - cuts[i], out)))
 for tag, name in (('', 'film'), ('v', 'verify')):
-    open(out + '/list.txt', 'w').write(''.join(f"file 's{i}{tag}.mp4'\n" for i in range(len(man))))
+    open(out + '/list.txt', 'w').write(''.join(f"file 's{i}{tag}.mp4'\n" for i in idx))
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', out + '/list.txt', '-i', VOICE, '-filter_complex',
                     "[0:a]volume=0.4[w];[w][1:a]amix=inputs=2:duration=first:normalize=0[a]" + (";[0:v]drawtext=text='%{pts\\:hms}':x=w-150:y=16:fontsize=20:fontcolor=white:box=1:boxcolor=black@0.55[v]" if tag else ''),
                     '-map', '[v]' if tag else '0:v', '-map', '[a]', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '24', '-c:a', 'aac', out + f'/{name}.mp4'])
-pics = [Image.open(f'{out}/mid{i}.jpg') for i in range(len(man))]; sh = Image.new('RGB', (4 * 484, 2 * 274), '#061433')
+pics = [Image.open(f'{out}/mid{i}.jpg') for i in idx]; sh = Image.new('RGB', (4 * 484, 2 * 274), '#061433')
 for i, im in enumerate(pics): sh.paste(im.resize((480, 270)), ((i % 4) * 484, (i // 4) * 274))
 sh.save(out + '/sheet.jpg', quality=85)
 parts = [{'text': "You are reviewing a short film made of several shots. You have not seen how it was made. For each shot answer: seen = one plain sentence; "

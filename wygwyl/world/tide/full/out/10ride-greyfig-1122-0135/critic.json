@@ -1,0 +1,24 @@
+{
+ "shots": [
+  {
+   "shot": 1,
+   "seen": "A man in dark clothing sits on a motorcycle on a rooftop overlooking blocky city buildings at night.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 2
+  },
+  {
+   "shot": 2,
+   "seen": "A man on a motorcycle looks out over a body of water, a distant city, and mountains under a starry dawn sky.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "digital painting",
+   "enacts": 3
+  }
+ ],
+ "overall": "Neither the third-person view nor the visual style is consistent across the shots, as the framing zooms in to crop the man's lower legs and the environment shifts from blocky low-poly shapes to a detailed landscape. The biggest weakness is the jarring visual transition between a rudimentary 3D grey-box city and a semi-realistic mountain backdrop.",
+ "critic_model": "gemini-4-argon"
+}
