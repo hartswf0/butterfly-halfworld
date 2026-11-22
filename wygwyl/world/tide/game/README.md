@@ -39,3 +39,16 @@ can never be reached. Six zones on his lines: the Container Rows, the crush unde
 two people wide, the underpass shadow-pool (roofed, standing water, children in it), vapour outside the teahouse, the
 Severn with its fire escapes. The crowd turns to look as he passes. His words hang at three heights across the alley.
 Ends in black on "out of life". Same lidar mode (L). Checked the same way: full 88 s, zero console errors, all zones.
+
+## The Light Gates (`gates.html`)
+
+Poem 06, Resurrecting Atlantis, on foot. He walks with the ancestors across a night field to two marble pillars and
+closed winged gates; the closed gate stops him. After a 5.5-second walk in, his reading starts, and every image is
+pinned to the word that causes it:
+"open" the wings swing open · "hymns" bright blue water made of the poem's own letters spreads over the lake ·
+"yellow" a road of yellow bricks rises out of the water ahead of him · "comets" comets fall and throw up the first
+towers · "resurrecting" the water drains and the white ceramic city, mended with seams of light, rises out of it with
+waterfalls · "nature" vines climb · "safe" windows wake in blue and pink and the city's people come out ·
+"currency" the windows pulse together · "candlelight" candles · "narrow" the towers lean in · "rainbows" the sky ·
+"continuums" a ring of light widens from his feet · "welcoming" he turns to face us and opens his arms.
+Same controls and lidar mode. Checked: full 100 s headless, zero console errors, a frame at each key word.

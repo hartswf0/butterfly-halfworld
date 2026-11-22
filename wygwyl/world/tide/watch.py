@@ -31,6 +31,6 @@ h2{{font:700 12px Helvetica,Arial,sans-serif;letter-spacing:.16em;text-transform
 h3{{font-size:19px;font-weight:400;margin-top:10px}}.t,.l,summary{{font:13px Helvetica,Arial,sans-serif;color:var(--dim)}}.l{{margin-top:8px}}
 .bar{{display:flex;height:4px;gap:2px;margin-top:6px;border-radius:2px;overflow:hidden}}.bar s{{display:block}}s.yes{{background:var(--yes)}}s.partly{{background:var(--partly)}}s.no{{background:var(--no)}}
 details{{margin-top:8px}}summary{{cursor:pointer;min-height:36px;display:flex;align-items:center}}pre{{white-space:pre-wrap;font:12px/1.5 ui-monospace,Menlo,monospace;color:#cfdcff;border-left:2px solid var(--line);padding-left:12px;max-height:420px;overflow:auto}}</style></head><body><main>
-<h1>Screening</h1><p class="lede"><a href='game/index.html'>Play Magic Ride</a> · <a href='game/naraka.html'>Play Naraka Market</a> · Every take, playable, with his reading and the world's sound. Under each: how many of the things we asked for happened, and where one was extracted, the patch-by-patch storymap.</p>
+<h1>Screening</h1><p class="lede"><a href='game/index.html'>Play Magic Ride</a> · <a href='game/naraka.html'>Play Naraka Market</a> · <a href='game/gates.html'>Play The Light Gates</a> · Every take, playable, with his reading and the world's sound. Under each: how many of the things we asked for happened, and where one was extracted, the patch-by-patch storymap.</p>
 {''.join(out)}</main></body></html>""")
 print('watch.html', sum(len(i) for _, i in V), 'videos')
