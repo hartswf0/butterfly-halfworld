@@ -29,3 +29,13 @@ hand.
 
 **Differs from the take:** a straight road instead of the take's changing ground; the rider is blocky; the crowd is
 coloured boxes; the moon and sun are only sky colour.
+
+## Naraka Market (`naraka.html`)
+
+Poem 01, Out of Life, on foot. He walks down through the container stalls of Naraka Market: containers stacked two to
+five high in rusted teal, turquoise and rust, corrugated awnings, lit stall openings, neon, string lights across the
+street, AC units, light rain on wet asphalt, teal haze. A man in an orange coat walks ahead with his back turned and
+can never be reached. Six zones on his lines: the Container Rows, the crush under the string lights, the stair alley
+two people wide, the underpass shadow-pool (roofed, standing water, children in it), vapour outside the teahouse, the
+Severn with its fire escapes. The crowd turns to look as he passes. His words hang at three heights across the alley.
+Ends in black on "out of life". Same lidar mode (L). Checked the same way: full 88 s, zero console errors, all zones.
