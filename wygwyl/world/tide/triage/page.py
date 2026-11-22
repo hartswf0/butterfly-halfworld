@@ -21,68 +21,85 @@ def words(rid, t):
     if rid not in POEM: return None
     if rid == 'ride-greyfig' and t > 13: t = 53.3 + (t - 13)
     L = TIDE[POEM[rid] - 1]['lines']; c = [l for l in L if l['t0'] - .5 <= t <= l['t1'] + 1.5] or [min(L, key=lambda l: abs((l['t0'] + l['t1']) / 2 - t))]; return c[-1]['text']
-e = html.escape; n = dict(yes=0, partly=0, no=0); secs = []
-for r in R:
-    tally = {h: sum(a.get('happened') == h for a in r['asks']) for h in n}
+
+FILM = {'03-film-': 'litmus/out/poem03-take1.mp4', '03-sheet': 'litmus/out/poem03-take2.mp4'}
+for k, (kind, p) in SRC.items():
+    if kind == 'v': FILM[k] = p
+e = html.escape; n = dict(yes=0, partly=0, no=0); lanes = []; panes = []
+for li, r in enumerate(R):
+    dur = r['dur'] or 20; tally = {h: sum(a.get('happened') == h for a in r['asks']) for h in n}
     for h in n: n[h] += tally[h]
+    bands = ''.join(f"<i class='hold' style='top:{k['a'] / dur * 100:.1f}%;height:{max(1.2, (k['b'] - k['a']) / dur * 100):.1f}%'></i>" for k in r['key_rows'])
     cards = []
-    for a in r['asks']:
+    for i, a in enumerate(r['asks']):
         sx = r['sent'][a['ref']] if 'ref' in a else None; snd = sound(r['id'], a['t']); w = words(r['id'], a['t'])
-        when = (f"sent at {sx['t']} s" + (f" for “{e(sx['word'])}”" if 'word' in sx else '') + (f" · {e(sx['by'])}" if sx['by'] != 'script' else '')) if sx else 'asked in the opening text'
-        claim = a['claim'] if not (sx and len(sx['text']) > 500) else a['claim']
-        cards.append(f"""<article class="c {a['happened']}"><div class="f"><img loading="lazy" src="{pic(T + '/triage/' + a['kf'])}" alt="Frame at {a['t']:.0f} seconds"><b>{a['happened']}</b><i>{a['t']:.0f} s</i>{f'<button data-a="{snd}" aria-label="Play four seconds of sound from this moment">▶ sound</button>' if snd else ''}</div>
-<dl>{f'<dt>He says</dt><dd class="w">“{e(w)}”</dd>' if w else ''}<dt>Asked · {when}</dt><dd>{e(claim)}</dd><dt>Seen</dt><dd>{e(a['seen'])}</dd></dl></article>""")
+        when = (f"sent {sx['t']} s" + (f" for “{e(sx['word'])}”" if 'word' in sx else '') + (f" · {e(sx['by'])}" if sx['by'] != 'script' else '')) if sx else 'in the opening text'
+        bands += f"<button class='b {a['happened']}' style='top:{min(96, a['t'] / dur * 100):.1f}%' data-l='{li}' data-i='{i}' data-t='{a['t']:.1f}' aria-label='{e(r['title'])}, {a['t']:.0f} seconds: {a['happened']}'></button>"
+        cards.append(f"""<article class="c {a['happened']}" id="c{li}-{i}"><div class="f"><img loading="lazy" src="{pic(T + '/triage/' + a['kf'])}" alt="Frame at {a['t']:.0f} seconds"><b>{a['happened']}</b><button class="go" data-t="{a['t']:.1f}" aria-label="Play the video from this moment">{a['t']:.0f} s ▶</button>{f'<button class="snd" data-a="{snd}" aria-label="Play four seconds of sound from this moment">sound</button>' if snd else ''}</div>
+<dl>{f'<dt>he says</dt><dd class="w">“{e(w)}”</dd>' if w else ''}<dt>asked · {when}</dt><dd>{e(a['claim'])}</dd><dt>seen</dt><dd>{e(a['seen'])}</dd></dl></article>""")
     for pr in r.get('prior') or []:
         cards.append(f"""<article class="c wide"><div class="f"><img loading="lazy" src="{pic(T + '/triage/' + pr['strip'], 1100, 55)}" alt="Frames from this take"></div><dl>{''.join(f"<dt>{e(str(x['t']))} s · {e(str(x['claim']))}</dt><dd>{e(str(x['verdict']))}</dd>" for x in pr['rows'])}</dl></article>""")
+    if not r['asks']: bands += "<i class='none'></i>"
     kr = [k for k in r['key_rows'] if k['motion'] is not None]; st = r.get('still'); keys = ''
     if kr:
-        fw = [k for k in kr if k['key'] == 'key_w']; tu = [k for k in kr if k['key'] != 'key_w']
-        bits = []
-        if fw: bits.append(f"forward held {len(fw)}×" + (f": {sum(k['motion'] > st * 1.25 for k in fw)} moved more than the still stretches" if st else ' (no still stretch to compare with)'))
-        if tu: bits.append(f"other keys {len(tu)}×, movement {', '.join(str(k['motion']) for k in tu)}" + (f" against {st} when still" if st else ''))
-        keys = f"<p class='k'>Keys · {'; '.join(bits)}.</p>"
-    seedimg = ''
-    if r['seed_image'] and os.path.exists(T + '/' + r['seed_image']): seedimg = f"<img class='seed' loading='lazy' src='{pic(T + '/' + r['seed_image'], 300)}' alt='Starting picture'>"
-    bar = ''.join(f"<s class='{h}' style='flex:{tally[h]}'></s>" for h in n if tally[h])
-    secs.append(f"""<details class="run" data-y="{tally['yes']}" data-p="{tally['partly']}" data-n="{tally['no']}"><summary><h2>{e(r['title'])}</h2><span class="t">{(f"{tally['yes']} yes · {tally['partly']} partly · {tally['no']} no") if r['asks'] else 'frames and original results only; no video was kept'}{f" · {r['dur']:.0f} s" if r['dur'] else ''}</span><span class="bar">{bar}</span></summary>
-{f"<p class='k'>{e(r['note'])}</p>" if r['note'] else ''}{keys}<details class="o"><summary>Opening text{' and picture' if seedimg else ''}</summary>{seedimg}<pre>{e(r['seed_text'])}</pre></details><div class="g">{''.join(cards)}</div></details>""")
+        fw = [k for k in kr if k['key'] == 'key_w']; tu = [k for k in kr if k['key'] != 'key_w']; bits = []
+        if fw: bits.append(f"forward ×{len(fw)}" + (f", {sum(k['motion'] > st * 1.25 for k in fw)} moved more than still" if st else ''))
+        if tu: bits.append(f"other keys ×{len(tu)}, movement {', '.join(str(k['motion']) for k in tu)}" + (f" vs {st} still" if st else ''))
+        keys = f"<p class='k'><i class='sw'></i>keys held · {'; '.join(bits)}</p>"
+    seedimg = f"<img class='seed' loading='lazy' src='{pic(T + '/' + r['seed_image'], 300)}' alt='Starting picture'>" if r['seed_image'] and os.path.exists(T + '/' + r['seed_image']) else ''
+    vid = f"<video controls playsinline preload='none' src='../{FILM[r['id']]}'></video><p class='k vn'>Plays when this page is opened from the site. Tap a band or a frame's time to jump there.</p>" if r['id'] in FILM else ''
+    lanes.append(f"<div class='lane' data-l='{li}'>{bands}<span>{li + 1:02d}</span></div>")
+    panes.append(f"""<section class="pane" id="p{li}" hidden><p class="no">{li + 1:02d}</p><h2>{e(r['title'])}</h2><p class="t">{(f"{tally['yes']} yes · {tally['partly']} partly · {tally['no']} no") if r['asks'] else 'frames and first results only'}{f" · {r['dur']:.0f} s" if r['dur'] else ''}</p>
+{vid}{f"<p class='k'>{e(r['note'])}</p>" if r['note'] else ''}{keys}<details class="o"><summary>opening text{' + picture' if seedimg else ''}</summary>{seedimg}<pre>{e(r['seed_text'])}</pre></details><div class="g">{''.join(cards)}</div></section>""")
 tot = sum(n.values())
-page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Triage · WYGWYL</title>
+page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>The Gel · WYGWYL</title>
 <style>
-:root{{--bg:#050d24;--ink:#eef3ff;--dim:#8fa1c7;--line:rgba(238,243,255,.13);--yes:#8fe39a;--partly:#ffd24a;--no:#ff6f8c}}
-*{{box-sizing:border-box;margin:0;padding:0}}body{{background:var(--bg);color:var(--ink);font:16px/1.5 "Iowan Old Style",Palatino,Georgia,serif;-webkit-text-size-adjust:100%}}
-main{{max-width:1180px;margin:0 auto;padding:28px 16px 90px}}
-h1{{font-size:clamp(30px,7vw,52px);font-weight:400;line-height:1.05;letter-spacing:-.01em}}
-.lede{{color:var(--dim);max-width:640px;margin-top:10px}}
-.sum{{display:flex;gap:26px;margin:26px 0 8px;font-family:Helvetica,Arial,sans-serif}}.sum b{{display:block;font:300 44px/1 Helvetica,Arial,sans-serif}}.sum span{{font-size:12px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase}}
-.bar{{display:flex;height:4px;gap:2px;border-radius:2px;overflow:hidden}}.bar s{{display:block}}s.yes,.c.yes b{{background:var(--yes)}}s.partly,.c.partly b{{background:var(--partly)}}s.no,.c.no b{{background:var(--no)}}
-nav{{position:sticky;top:0;z-index:3;background:rgba(5,13,36,.94);backdrop-filter:blur(8px);display:flex;gap:8px;padding:12px 0;margin-top:14px;border-bottom:1px solid var(--line)}}
-nav button{{font:600 13px Helvetica,Arial,sans-serif;color:var(--ink);background:none;border:1px solid var(--line);border-radius:20px;padding:8px 14px;min-height:40px;cursor:pointer}}nav button[aria-pressed=true]{{background:var(--ink);color:var(--bg);border-color:var(--ink)}}
-.run{{border-bottom:1px solid var(--line)}}.run>summary{{list-style:none;cursor:pointer;padding:20px 0 16px;display:grid;gap:6px}}.run>summary::-webkit-details-marker{{display:none}}
-h2{{font-size:22px;font-weight:400;line-height:1.2}}h2::after{{content:" +";color:var(--dim)}}.run[open] h2::after{{content:" –"}}
-.t,.k,dt,.f i,.o summary{{font-family:Helvetica,Arial,sans-serif}}.t{{font-size:12.5px;color:var(--dim)}}.k{{font-size:13px;color:var(--dim);max-width:760px;margin-bottom:8px}}
-.o{{margin:6px 0 16px}}.o summary{{font-size:13px;color:var(--dim);cursor:pointer;min-height:36px;display:flex;align-items:center}}.seed{{display:block;width:220px;margin:8px 0;border-radius:4px}}
-pre{{white-space:pre-wrap;font:12.5px/1.55 ui-monospace,Menlo,monospace;color:#cfdcff;border-left:2px solid var(--line);padding-left:12px;max-width:820px}}
-.g{{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px 18px;padding-bottom:28px}}.c.wide{{grid-column:1/-1}}
-.f{{position:relative}}.f img{{display:block;width:100%;border-radius:4px;background:#000}}
-.f b{{position:absolute;left:8px;top:8px;font:800 11px Helvetica,Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#06102a;padding:3px 9px;border-radius:12px}}
-.f i{{position:absolute;right:8px;top:8px;font-style:normal;font-size:11px;background:rgba(0,0,0,.6);padding:2px 7px;border-radius:10px}}
-.f button{{position:absolute;right:8px;bottom:8px;font:600 12px Helvetica,Arial,sans-serif;color:var(--ink);background:rgba(0,0,0,.66);border:1px solid rgba(255,255,255,.35);border-radius:16px;padding:6px 12px;min-height:34px;cursor:pointer}}.f button.on{{background:var(--ink);color:var(--bg)}}
-dl{{margin-top:10px}}dt{{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:9px}}dd{{font-size:14.5px}}dd.w{{font-style:italic;font-size:16px}}
+:root{{--bg:#000;--ink:#f4f6ff;--dim:#8b93b5;--line:rgba(255,255,255,.16);--yes:#19e36a;--partly:#ffd400;--no:#ff2a2a;--hold:#1f4dff;--m:ui-monospace,"SF Mono",Menlo,Consolas,monospace}}
+*{{box-sizing:border-box;margin:0;padding:0}}html{{-webkit-text-size-adjust:100%}}body{{background:var(--bg);color:var(--ink);font:15px/1.5 var(--m)}}
+main{{max-width:1100px;margin:0 auto;padding:18px 12px 110px}}
+.top{{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}}.top a{{color:var(--ink)}}
+h1{{font:400 clamp(34px,11vw,72px)/.95 var(--m);letter-spacing:-.04em;margin:14px 0 8px}}
+.sum{{display:flex;gap:18px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);flex-wrap:wrap}}.sum b{{font-weight:400;font-size:20px;margin-right:5px}}
+.gel{{position:relative;display:flex;gap:3px;height:min(56vh,460px);margin:16px -12px 0;padding:0 12px 22px;background:#000;overflow:hidden}}
+.gel::after{{content:"";position:absolute;inset:0 0 22px;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.42) 0 1px,transparent 1px 3px)}}
+.lane{{position:relative;flex:1;min-width:0;background:linear-gradient(#05081c,#02030c);cursor:pointer}}.lane span{{position:absolute;bottom:-20px;left:0;right:0;text-align:center;font-size:9px;color:var(--dim)}}
+.lane.on{{box-shadow:-2px 0 0 #fff,2px 0 0 #fff;z-index:2}}.lane.on span{{color:#fff}}
+.b{{position:absolute;left:0;right:0;height:4.2%;min-height:9px;border:0;padding:0;cursor:pointer;border-radius:1px}}
+.b.yes{{background:var(--yes);box-shadow:0 0 9px var(--yes)}}.b.partly{{background:var(--partly);box-shadow:0 0 9px rgba(255,212,0,.7)}}.b.no{{background:var(--no);box-shadow:0 0 9px rgba(255,42,42,.8)}}
+.b.cur{{outline:2px solid #fff;z-index:3}}.hold{{position:absolute;left:18%;right:18%;background:var(--hold);opacity:.75}}.none{{position:absolute;inset:8% 30% 8%;background:repeating-linear-gradient(0deg,#1a2148 0 4px,transparent 4px 12px)}}
+.gel.f-yes .b:not(.yes),.gel.f-partly .b:not(.partly),.gel.f-no .b:not(.no){{opacity:.1;box-shadow:none}}
+nav{{position:sticky;top:0;z-index:5;background:rgba(0,0,0,.92);backdrop-filter:blur(6px);display:flex;gap:6px;padding:10px 0;border-bottom:1px solid var(--line);overflow-x:auto}}
+nav button{{flex:0 0 auto;font:12px var(--m);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:none;border:1px solid var(--line);padding:0 12px;min-height:42px;cursor:pointer}}
+nav button[aria-pressed=true]{{background:var(--ink);color:#000}}nav button i{{display:inline-block;width:9px;height:9px;margin-right:6px;vertical-align:middle}}
+.hint{{color:var(--dim);font-size:12.5px;margin-top:16px}}.pane{{padding-top:18px}}.no{{font-size:11px;color:var(--dim);letter-spacing:.14em}}
+h2{{font:400 22px/1.15 var(--m);letter-spacing:-.02em;margin:2px 0 4px}}.t{{font-size:12px;color:var(--dim);letter-spacing:.06em;text-transform:uppercase}}
+video{{display:block;width:100%;aspect-ratio:16/9;background:#05081c;margin-top:12px}}.k{{font-size:12.5px;color:var(--dim);margin-top:8px;max-width:760px}}.sw{{display:inline-block;width:9px;height:9px;background:var(--hold);margin-right:7px}}
+.o{{margin:8px 0 4px}}.o summary{{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);cursor:pointer;min-height:40px;display:flex;align-items:center}}.seed{{display:block;width:200px;margin:6px 0}}
+pre{{white-space:pre-wrap;font:12px/1.55 var(--m);color:#c9d2f5;border-left:2px solid var(--hold);padding-left:10px}}
+.g{{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:26px 16px;margin-top:16px}}.c.wide{{grid-column:1/-1}}.c{{scroll-margin-top:70px}}
+.f{{position:relative;border-top:5px solid var(--line)}}.c.yes .f{{border-color:var(--yes)}}.c.partly .f{{border-color:var(--partly)}}.c.no .f{{border-color:var(--no)}}.f img{{display:block;width:100%;background:#05081c}}
+.f b{{position:absolute;left:0;top:0;font:700 11px var(--m);letter-spacing:.12em;text-transform:uppercase;color:#000;padding:3px 8px}}.c.yes b{{background:var(--yes)}}.c.partly b{{background:var(--partly)}}.c.no b{{background:var(--no)}}
+.f button{{position:absolute;bottom:6px;font:12px var(--m);color:#fff;background:rgba(0,0,0,.72);border:1px solid rgba(255,255,255,.4);padding:0 10px;min-height:36px;cursor:pointer}}.go{{left:6px}}.snd{{right:6px}}.snd.on{{background:#fff;color:#000}}
+dl{{margin-top:8px}}dt{{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:9px}}dd{{font-size:13.5px}}dd.w{{font:italic 16px/1.4 "Iowan Old Style",Palatino,Georgia,serif}}
 .hide{{display:none}}
 </style></head><body><main>
-<p style="font:13px Helvetica,Arial,sans-serif;color:var(--dim);margin-bottom:10px"><a style="color:#9fd0ff" href="../watch.html">Watch the videos</a></p><h1>Did it happen?</h1>
-<p class="lede">Every thing we asked the world model for, across {len(R)} runs. Each card is one ask: the frame from when it should be visible, an independent verdict from that frame alone, his words at that moment, and four seconds of the take's sound.</p>
-<div class="sum"><div><b style="color:var(--yes)">{n['yes']}</b><span>yes</span></div><div><b style="color:var(--partly)">{n['partly']}</b><span>partly</span></div><div><b style="color:var(--no)">{n['no']}</b><span>no</span></div><div><b>{tot}</b><span>asks</span></div></div>
-<div class="bar"><s class="yes" style="flex:{n['yes']}"></s><s class="partly" style="flex:{n['partly']}"></s><s class="no" style="flex:{n['no']}"></s></div>
-<nav aria-label="Show"><button data-f="all" aria-pressed="true">All</button><button data-f="yes" aria-pressed="false">Yes</button><button data-f="partly" aria-pressed="false">Partly</button><button data-f="no" aria-pressed="false">No</button></nav>
-{''.join(secs)}
+<div class="top"><span>WYGWYL · the gel</span><a href="../watch.html">all videos</a></div>
+<h1>Did it happen?</h1>
+<div class="sum"><span><b style="color:var(--yes)">{n['yes']}</b>yes</span><span><b style="color:var(--partly)">{n['partly']}</b>partly</span><span><b style="color:var(--no)">{n['no']}</b>no</span><span><b>{tot}</b>asks · {len(R)} runs</span></div>
+<div class="gel" id="gel">{''.join(lanes)}</div>
+<nav aria-label="Show"><button data-f="all" aria-pressed="true">all</button><button data-f="yes" aria-pressed="false"><i style="background:var(--yes)"></i>yes</button><button data-f="partly" aria-pressed="false"><i style="background:var(--partly)"></i>partly</button><button data-f="no" aria-pressed="false"><i style="background:var(--no)"></i>no</button></nav>
+<p class="hint" id="hint">Each lane is one run, read top to bottom in time. Each band is one thing we asked for, coloured by whether it happened. Blue is a key being held. Tap a lane or a band.</p>
+{''.join(panes)}
 </main><script>
-const au=new Audio();let cur=null;
-document.addEventListener('click',e=>{{const b=e.target.closest('button[data-a]');if(b){{if(cur===b&&!au.paused){{au.pause();return}}if(cur)cur.classList.remove('on');cur=b;au.src=b.dataset.a;au.play();b.classList.add('on');return}}
- const f=e.target.closest('nav button');if(!f)return;document.querySelectorAll('nav button').forEach(x=>x.setAttribute('aria-pressed',x===f));const k=f.dataset.f;
- document.querySelectorAll('.c').forEach(c=>c.classList.toggle('hide',k!=='all'&&!c.classList.contains(k)));
- document.querySelectorAll('.run').forEach(r=>{{const any=r.querySelector('.c:not(.hide)');r.classList.toggle('hide',!any);if(k!=='all'&&any)r.open=true}})}});
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],au=new Audio();let cur=null,open=-1;
+function show(l){{if(open===l)return;open=l;$$('.pane').forEach((p,i)=>p.hidden=i!==l);$$('.lane').forEach((x,i)=>x.classList.toggle('on',i===l));$('#hint').hidden=true}}
+function seek(l,t){{const v=$('#p'+l+' video');if(v){{const go=()=>{{v.currentTime=Math.max(0,t-1.5);v.play().catch(()=>{{}})}};v.readyState?go():(v.addEventListener('loadedmetadata',go,{{once:true}}),v.load())}}}}
+document.addEventListener('click',e=>{{
+ const s=e.target.closest('.snd');if(s){{if(cur===s&&!au.paused){{au.pause();return}}cur&&cur.classList.remove('on');cur=s;au.src=s.dataset.a;au.play();s.classList.add('on');return}}
+ const g=e.target.closest('.go');if(g){{seek(open,+g.dataset.t);$('#p'+open+' video')?.scrollIntoView({{block:'center',behavior:'smooth'}});return}}
+ const b=e.target.closest('.b');if(b){{show(+b.dataset.l);$$('.b.cur').forEach(x=>x.classList.remove('cur'));b.classList.add('cur');$('#c'+b.dataset.l+'-'+b.dataset.i).scrollIntoView({{block:'start',behavior:'smooth'}});return}}
+ const l=e.target.closest('.lane');if(l){{show(+l.dataset.l);$('#p'+l.dataset.l).scrollIntoView({{block:'start',behavior:'smooth'}});return}}
+ const f=e.target.closest('nav button');if(f){{$$('nav button').forEach(x=>x.setAttribute('aria-pressed',x===f));const k=f.dataset.f;$('#gel').className='gel'+(k==='all'?'':' f-'+k);$$('.c').forEach(c=>c.classList.toggle('hide',k!=='all'&&!c.classList.contains(k)&&!c.classList.contains('wide')))}}}});
 au.onended=au.onpause=()=>cur&&cur.classList.remove('on');
 </script></body></html>"""
-open(T + '/triage/index.html', 'w').write(page); print(len(R), 'runs', tot, 'asks', os.path.getsize(T + '/triage/index.html') // 1024, 'KB', page.count('data:audio'), 'sound clips', page.count('data:image'), 'pictures')
+open(T + '/triage/index.html', 'w').write(page); print(len(R), 'lanes', tot, 'bands', os.path.getsize(T + '/triage/index.html') // 1024, 'KB')
