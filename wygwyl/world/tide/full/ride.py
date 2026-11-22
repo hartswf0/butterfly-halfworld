@@ -15,7 +15,8 @@ async def shot(i, secs, out):
         for q in range(80, 15, -5):
             b = io.BytesIO(); im.save(b, 'JPEG', quality=q)
             if b.tell() <= 48000: break
-        img = b.getvalue(); fr = []; t0 = [None]; pcm = bytearray()
+        img = b.getvalue()
+    fr = []; t0 = [None]; pcm = bytearray()
     async with websockets.connect(URL, additional_headers={'x-goog-api-key': KEY}, ssl=CTX, max_size=None) as ws:
         send = lambda e: ws.send(json.dumps(e))
         async def pump():

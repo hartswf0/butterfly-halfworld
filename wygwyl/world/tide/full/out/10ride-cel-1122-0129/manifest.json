@@ -1,0 +1,50 @@
+{
+ "poem": "10",
+ "style": "cel",
+ "shots": [
+  {
+   "shot": 1,
+   "seed_image": "full/seeds10/cel1.jpg",
+   "line": "I wasn't looking for a ride, but here you are, blissful and oddly sensitive, withering a soul purveying both the dark and the light worlds I've known.",
+   "t0": 0.0,
+   "seconds": 12.99,
+   "seed_text": "STYLE: a flat cel-shaded cartoon. Large flat colour shapes with dark outlines, no texture, no photographic detail. Keep this exact look. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He stands on the kerb with his back to us beside the parked motorcycle under one street lamp, and runs his hand along its tank.",
+   "key": null,
+   "frames": 328,
+   "delivered_fps": 24.0
+  },
+  {
+   "shot": 2,
+   "seed_image": "full/seeds10/cel2.jpg",
+   "line": "So I rub my aggressions into your steel coverings and hop on to amuse myself.",
+   "t0": 12.99,
+   "seconds": 7.87,
+   "seed_text": "STYLE: a flat cel-shaded cartoon. Large flat colour shapes with dark outlines, no texture, no photographic detail. Keep this exact look. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He swings a leg over the motorcycle, the headlight comes on, and he pulls away down the street.",
+   "key": "key_w",
+   "frames": 204,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 3,
+   "seed_image": "full/seeds10/cel3.jpg",
+   "line": "Loneliness is having everything with no one to tell, being everywhere with no one to love and escape, wide-eyed and stone but alive and well, wandering with no clear end.",
+   "t0": 20.86,
+   "seconds": 15.24,
+   "seed_text": "STYLE: a flat cel-shaded cartoon. Large flat colour shapes with dark outlines, no texture, no photographic detail. Keep this exact look. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He rides the motorcycle alone through a huge empty plaza and into a tunnel. Nobody else anywhere.",
+   "key": "key_w",
+   "frames": 380,
+   "delivered_fps": 24.0
+  },
+  {
+   "shot": 4,
+   "seed_image": "full/seeds10/cel4.jpg",
+   "line": "I let the noise block the noise so the way I ride through the streets with the swag and eyes turn, has twists, improve, yeah, the magic still exists. All preparations to live and dream in darkness I no longer desire.",
+   "t0": 36.1,
+   "seconds": 17.24,
+   "seed_text": "STYLE: a flat cel-shaded cartoon. Large flat colour shapes with dark outlines, no texture, no photographic detail. Keep this exact look. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He rides the motorcycle down a crowded avenue, one hand off the bars; Black women and men in bright teal, orange and white coats and wraps on both pavements turn their heads to watch him pass.",
+   "key": "key_w",
+   "frames": 428,
+   "delivered_fps": 24.0
+  }
+ ]
+}

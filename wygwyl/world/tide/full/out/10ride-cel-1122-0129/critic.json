@@ -1,0 +1,42 @@
+{
+ "shots": [
+  {
+   "shot": 1,
+   "seen": "A man in dark clothing stands beside a motorcycle on a quiet street at night under a streetlight.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "cel cartoon",
+   "enacts": 2
+  },
+  {
+   "shot": 2,
+   "seen": "A man rides a motorcycle down a wet street lined with glowing storefronts at dusk.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "cel cartoon",
+   "enacts": 1
+  },
+  {
+   "shot": 3,
+   "seen": "Seen from directly behind, a man rides a motorcycle through a foggy, grey city intersection.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 3
+  },
+  {
+   "shot": 4,
+   "seen": "Seen from behind, a man rides a motorcycle down a street lined with watching pedestrians and hanging lanterns.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "cel cartoon",
+   "enacts": 3
+  }
+ ],
+ "overall": "Neither the third-person perspective nor the visual style is fully consistent across all four shots, as the camera angles vary early on and shot 3 looks like an untextured 3D blockout compared to the cel-shaded cartoon style of the others. The biggest weakness is the abrupt shift to a rough grey-box aesthetic in the third shot and the failure of the second shot to visually depict the specific action of getting on the bike.",
+ "critic_model": "gemini-4-argon"
+}
