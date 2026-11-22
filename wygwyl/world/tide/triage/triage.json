@@ -1,0 +1,2353 @@
+[
+ {
+  "id": "03-film-",
+  "title": "Poem 03 take 1: generated patch cues + director",
+  "seed_text": "STYLE. Afrofuturist Atlantis: a Black harbour city that kept its flood. Old walls carry a salt line at four metres. Ruins are mended in white ceramic seamed with light. Rusted teal steel, painted plywood, wet asphalt as a mirror. Photographic, practical light sources, humid air. The future here is repaired and inherited, never chrome or sterile.\nEYE. 22mm equivalent, camera 0.8 m off the ground, eye-level, measured across 18 of this poem's shots. Tracking with the tumbling tambourine in black, then a clean pass through the window into the nave.\nLIGHT. A time-lapse across a day, ending in storm. Storm then calm; mist on the sea; dew burning off. The white ceramic itself, lit by the sky; mirror pools that hold the stars. Deep brown skin lit with full tonal range: a warm key and a rim light in the district's glow colour. Never crushed to a flat silhouette unless the beat asks for one.\nPLACE. Tambourine tumbles in black. The tambourine falls, flies, tumbles through black space and enters the chapel through a window, still whole. The chapel's seaward lancet.\nPEOPLE. Everyone here is Black. The Poet (Black man, thirties; matte black fitted mock-neck long sleeve, black trousers, black boots; a thin seam of white light from collar to heart that brightens when he speaks); close-cropped hair, short beard; unhurried, hands open. The Choir (Black women and men, every age; deep blue choir robes with white stoles); standing in rows, swaying.\nWATER. His words become rain. When he speaks, rain rises from where he stands; when he is silent it stills and mirrors the light. It runs thick as honey. It starts first drops and ends a standing flood. It never puts out a light and never hides a face.\nSOUND. The bell that is gone, rain on stone, choir chords, laughter. Under it, room for one man's speaking voice.\nMOOD. Disillusionment, Emptiness, Desolation, Cleansing, Resignation, Sadness. Abandoned ceremonial space; decay gives way to a pale, emptied shore.",
+  "seed_image": "../foundry/refs/03-06.jpg",
+  "sent": [
+   {
+    "t": 10.5,
+    "text": "Empty chapel: pews, choir, baptism pool. Rain pools, steady. In frame: the Choir (Black women and men, deep blue choir robes with white stoles).",
+    "by": "script"
+   },
+   {
+    "t": 16.2,
+    "text": "Black women and men in deep blue robes with white stoles face the lancet.",
+    "by": "director model"
+   },
+   {
+    "t": 17.1,
+    "text": "Gifts at the side doors. Rain runs, sheeting. In frame: the Choir (Black women and men, deep blue choir robes with white stoles).",
+    "by": "script"
+   },
+   {
+    "t": 24.1,
+    "text": "Accelerated chapel decay. Rain flows, pooling ankle-deep. In frame: the Choir (Black women and men, deep blue choir robes with white stoles).",
+    "by": "script"
+   },
+   {
+    "t": 30.2,
+    "text": "Black women and men in deep blue choir robes with white stoles depart.",
+    "by": "director model"
+   },
+   {
+    "t": 36.3,
+    "text": "Thunderstorm consumes the chapel. Rain flows, pooling ankle-deep. In frame: the Choir (Black women and men, deep blue choir robes with white stoles).",
+    "by": "script"
+   },
+   {
+    "t": 42.1,
+    "text": "Show the beach flat with broken pillars, rubble, and a tilting cross.",
+    "by": "director model"
+   },
+   {
+    "t": 44.9,
+    "text": "Storm clears onto shoreline ruins. Rain runs, a standing flood. In frame: the Choir (Black women and men, deep blue choir robes with white stoles).",
+    "by": "script"
+   },
+   {
+    "t": 52.0,
+    "text": "Tambourine shatters. Rain pools, a standing flood. In frame: the Choir (Black women and men, deep blue choir robes with white stoles).",
+    "by": "script"
+   }
+  ],
+  "asks": [
+   {
+    "t": 15.5,
+    "claim": "Empty chapel: pews, choir, baptism pool. Rain pools, steady. In frame: the Choir (Black women and men, deep blue choir robes with white stoles).",
+    "ref": 0,
+    "kf": "kf/03-film--00.jpg",
+    "happened": "partly",
+    "seen": "A choir in blue robes with white stoles stands inside a misty, flooded stone chapel with a rocky exterior composite on the right."
+   },
+   {
+    "t": 21.2,
+    "claim": "Black women and men in deep blue robes with white stoles face the lancet.",
+    "ref": 1,
+    "kf": "kf/03-film--01.jpg",
+    "happened": "yes",
+    "seen": "Black men and women in blue choir robes with white stoles stand in a flooded stone chapel facing toward the altar and lancet windows."
+   },
+   {
+    "t": 22.1,
+    "claim": "Gifts at the side doors. Rain runs, sheeting. In frame: the Choir (Black women and men, deep blue choir robes with white stoles).",
+    "ref": 2,
+    "kf": "kf/03-film--02.jpg",
+    "happened": "partly",
+    "seen": "The choir in blue robes stands in the flooded chapel, with no gifts, side doors, or sheeting rain visible."
+   },
+   {
+    "t": 29.1,
+    "claim": "Accelerated chapel decay. Rain flows, pooling ankle-deep. In frame: the Choir (Black women and men, deep blue choir robes with white stoles).",
+    "ref": 3,
+    "kf": "kf/03-film--03.jpg",
+    "happened": "partly",
+    "seen": "The camera moves closer to the choir in blue robes standing by the pews and altar inside the stone chapel."
+   },
+   {
+    "t": 35.2,
+    "claim": "Black women and men in deep blue choir robes with white stoles depart.",
+    "ref": 4,
+    "kf": "kf/03-film--04.jpg",
+    "happened": "partly",
+    "seen": "As the camera zooms in toward the altar, the choir members remain standing at the sides rather than walking away to depart."
+   },
+   {
+    "t": 41.3,
+    "claim": "Thunderstorm consumes the chapel. Rain flows, pooling ankle-deep. In frame: the Choir (Black women and men, deep blue choir robes with white stoles).",
+    "ref": 5,
+    "kf": "kf/03-film--05.jpg",
+    "happened": "partly",
+    "seen": "A closer view of the altar with candles and a cross, with a few choir members still visible at the edges of the frame."
+   },
+   {
+    "t": 47.1,
+    "claim": "Show the beach flat with broken pillars, rubble, and a tilting cross.",
+    "ref": 6,
+    "kf": "kf/03-film--06.jpg",
+    "happened": "no",
+    "seen": "A close view of the stone wall, lattice window, altar cross, and four candles inside the chapel."
+   },
+   {
+    "t": 49.9,
+    "claim": "Storm clears onto shoreline ruins. Rain runs, a standing flood. In frame: the Choir (Black women and men, deep blue choir robes with white stoles).",
+    "ref": 7,
+    "kf": "kf/03-film--07.jpg",
+    "happened": "no",
+    "seen": "The camera zooms closer to the lattice window, upright altar cross, and four candles."
+   },
+   {
+    "t": 57.0,
+    "claim": "Tambourine shatters. Rain pools, a standing flood. In frame: the Choir (Black women and men, deep blue choir robes with white stoles).",
+    "ref": 8,
+    "kf": "kf/03-film--08.jpg",
+    "happened": "no",
+    "seen": "A close-up of the lattice window with a lit candle on the left and the top of the cross below."
+   }
+  ],
+  "keys": [],
+  "keys_logged": false,
+  "note": "W held for most of every patch (as scheduled; individual presses were not logged in this run)",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [],
+  "dur": 63.4
+ },
+ {
+  "id": "03-sheet",
+  "title": "Poem 03 take 2: from the lectern, hand-written cues",
+  "seed_text": "A Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve and black trousers, stands reading at a clear acrylic lectern. Behind him is a painted wall. Blue water moves in from both sides of the frame along the ground. Photographic, soft practical light, humid air. The camera is at eye level, a few steps in front of him, and will walk forward past his left shoulder toward the wall. He stays where he is and keeps reading. Nobody else is here. Sound: a quiet room, water moving slowly, room for one man's speaking voice. Rain is the water of this place: it falls slowly and thickly, and it never hides a face.",
+  "seed_image": "seeds/lectern.jpg",
+  "sent": [
+   {
+    "t": 2.5,
+    "text": "The painted wall behind the man parts like a curtain onto an empty stone temple. We walk in past him. Nobody inside.",
+    "by": "script"
+   },
+   {
+    "t": 9.7,
+    "text": "Ahead in the empty nave: bare choir stands, and a sunken baptism pool, dry and cracked. Nobody.",
+    "by": "script"
+   },
+   {
+    "t": 13.2,
+    "text": "Cobwebs hang thick over the wooden pews. Dust falls. The wood is soft and crumbling.",
+    "by": "script"
+   },
+   {
+    "t": 22.0,
+    "text": "A side door stands open ahead. On its stone step: opened gift boxes, lids off, ribbons loose, empty. Nobody.",
+    "by": "script"
+   },
+   {
+    "t": 28.7,
+    "text": "Thunder. Heavy slow rain pours through the roof and washes the walls away until only open wet shore remains.",
+    "by": "script"
+   },
+   {
+    "t": 35.9,
+    "text": "The storm clears. On the wet sand, household goods laid out in rows like a yard sale: chairs, lamps, folded clothes.",
+    "by": "script"
+   },
+   {
+    "t": 39.8,
+    "text": "A black scorched crack from lightning splits the sand, dividing the rows of goods into two halves.",
+    "by": "script"
+   },
+   {
+    "t": 43.3,
+    "text": "Loaves of bread lie on the sand, soaked through and falling apart in the rain.",
+    "by": "script"
+   },
+   {
+    "t": 46.8,
+    "text": "Stained blankets lie in a heap. Thin puppet strings hang down onto them from the grey sky.",
+    "by": "script"
+   },
+   {
+    "t": 52.4,
+    "text": "Two sets of men's footprints, side by side, lead away across the wet sand toward the water. Nobody in sight.",
+    "by": "script"
+   },
+   {
+    "t": 55.9,
+    "text": "Where the footprints end, a tambourine lies broken in pieces on the sand.",
+    "by": "script"
+   }
+  ],
+  "asks": [
+   {
+    "t": 7.5,
+    "claim": "The painted wall behind the man parts like a curtain onto an empty stone temple. We walk in past him. Nobody inside.",
+    "ref": 0,
+    "kf": "kf/03-sheet-00.jpg",
+    "happened": "partly",
+    "seen": "A man stands at a music stand while a graffiti wall behind him begins to split open to reveal a stone hall."
+   },
+   {
+    "t": 14.7,
+    "claim": "Ahead in the empty nave: bare choir stands, and a sunken baptism pool, dry and cracked. Nobody.",
+    "ref": 1,
+    "kf": "kf/03-sheet-01.jpg",
+    "happened": "partly",
+    "seen": "The graffiti walls part further behind the man, revealing a stone hall with pillars and a pool filled with blue water on the floor."
+   },
+   {
+    "t": 18.2,
+    "claim": "Cobwebs hang thick over the wooden pews. Dust falls. The wood is soft and crumbling.",
+    "ref": 2,
+    "kf": "kf/03-sheet-02.jpg",
+    "happened": "partly",
+    "seen": "The man stands in front of the stone hall where faint benches are visible along the sides, with no clear cobwebs or crumbling wood."
+   },
+   {
+    "t": 27.0,
+    "claim": "A side door stands open ahead. On its stone step: opened gift boxes, lids off, ribbons loose, empty. Nobody.",
+    "ref": 3,
+    "kf": "kf/03-sheet-03.jpg",
+    "happened": "partly",
+    "seen": "The camera moves closer to the man in the torch-lit stone hall with wooden pews on the sides, but no open side door or gift boxes are visible."
+   },
+   {
+    "t": 33.7,
+    "claim": "Thunder. Heavy slow rain pours through the roof and washes the walls away until only open wet shore remains.",
+    "ref": 4,
+    "kf": "kf/03-sheet-04.jpg",
+    "happened": "no",
+    "seen": "The man speaks at his stand inside the intact stone hall with torches burning on the pillars."
+   },
+   {
+    "t": 40.9,
+    "claim": "The storm clears. On the wet sand, household goods laid out in rows like a yard sale: chairs, lamps, folded clothes.",
+    "ref": 5,
+    "kf": "kf/03-sheet-05.jpg",
+    "happened": "no",
+    "seen": "A closer view of the man speaking inside the dry stone hall with no sand or household goods visible."
+   },
+   {
+    "t": 44.8,
+    "claim": "A black scorched crack from lightning splits the sand, dividing the rows of goods into two halves.",
+    "ref": 6,
+    "kf": "kf/03-sheet-06.jpg",
+    "happened": "no",
+    "seen": "A chest-up shot of the man inside the stone temple with no sand, lightning crack, or goods."
+   },
+   {
+    "t": 48.3,
+    "claim": "Loaves of bread lie on the sand, soaked through and falling apart in the rain.",
+    "ref": 7,
+    "kf": "kf/03-sheet-07.jpg",
+    "happened": "partly",
+    "seen": "Behind the man in the stone hall, piles of boxes and clutter are visible on the floor along the sides, without sand or rain."
+   },
+   {
+    "t": 51.8,
+    "claim": "Stained blankets lie in a heap. Thin puppet strings hang down onto them from the grey sky.",
+    "ref": 8,
+    "kf": "kf/03-sheet-08.jpg",
+    "happened": "partly",
+    "seen": "Loaves of bread are visible in the bottom left corner behind the man in the stone hall, without blankets, puppet strings, or sky."
+   },
+   {
+    "t": 57.4,
+    "claim": "Two sets of men's footprints, side by side, lead away across the wet sand toward the water. Nobody in sight.",
+    "ref": 9,
+    "kf": "kf/03-sheet-09.jpg",
+    "happened": "no",
+    "seen": "A close-up of the man in the stone hall with thin vertical lines or strings hanging behind his head, and no sand or footprints."
+   },
+   {
+    "t": 60.9,
+    "claim": "Where the footprints end, a tambourine lies broken in pieces on the sand.",
+    "ref": 10,
+    "kf": "kf/03-sheet-10.jpg",
+    "happened": "no",
+    "seen": "A tight close-up of the man's face and shoulders in the stone hall with no sand, footprints, or tambourine."
+   }
+  ],
+  "keys": [],
+  "keys_logged": false,
+  "note": "W held for the first 40% of each spoken line, at most 3 s (as scheduled; not logged)",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [],
+  "dur": 63.6
+ },
+ {
+  "id": "litmus-door",
+  "title": "Litmus: door (2 takes)",
+  "seed_text": "A wet stone plaza at dusk in an Afrofuturist harbour city. Ahead stands a tall terracotta temple with a great arched doorway, open and dark inside. The camera is at eye level on the plaza, facing the doorway. Photographic, practical light. Nobody in the foreground.",
+  "seed_image": null,
+  "sent": [
+   {
+    "t": 6.0,
+    "text": "We walk through the great arched doorway into the temple hall: stone columns, candlelight, a long empty nave.",
+    "by": "script"
+   }
+  ],
+  "asks": [],
+  "keys": [],
+  "keys_logged": false,
+  "note": "W held 0.5–14 s (as scheduled). No video was kept; only three frames per take.",
+  "prior": [
+   {
+    "strip": "../litmus/out/door-233815-1.jpg",
+    "rows": [
+     {
+      "t": 1.5,
+      "claim": "outside",
+      "verdict": "yes"
+     },
+     {
+      "t": 7.0,
+      "claim": "doorway closer",
+      "verdict": "yes"
+     },
+     {
+      "t": 16.0,
+      "claim": "inside",
+      "verdict": "no"
+     }
+    ]
+   },
+   {
+    "strip": "../litmus/out/door-233846-2.jpg",
+    "rows": [
+     {
+      "t": 1.5,
+      "claim": "outside",
+      "verdict": "yes"
+     },
+     {
+      "t": 7.0,
+      "claim": "doorway closer",
+      "verdict": "yes"
+     },
+     {
+      "t": 16.0,
+      "claim": "inside",
+      "verdict": "yes"
+     }
+    ]
+   }
+  ],
+  "judge": null,
+  "key_rows": [],
+  "dur": null
+ },
+ {
+  "id": "litmus-walker",
+  "title": "Litmus: walker (2 takes)",
+  "seed_text": "A wet stone plaza at dusk in an Afrofuturist harbour city. Ahead stands a tall terracotta temple with a great arched doorway, open and dark inside. A Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, stands a few steps ahead of the camera with his back to us, facing the doorway. The camera is at eye level behind him and follows him. Photographic, practical light. Nobody else nearby.",
+  "seed_image": null,
+  "sent": [
+   {
+    "t": 6.0,
+    "text": "The Black man in the black mock-neck walks ahead of us through the great arched doorway into the temple hall: stone columns, candlelight. We follow behind him.",
+    "by": "script"
+   }
+  ],
+  "asks": [],
+  "keys": [],
+  "keys_logged": false,
+  "note": "W held 0.5–14 s (as scheduled). No video was kept; only three frames per take.",
+  "prior": [
+   {
+    "strip": "../litmus/out/walker-233936-1.jpg",
+    "rows": [
+     {
+      "t": 1.5,
+      "claim": "man from behind",
+      "verdict": "yes"
+     },
+     {
+      "t": 7.0,
+      "claim": "man from behind",
+      "verdict": "yes"
+     },
+     {
+      "t": 16.0,
+      "claim": "inside",
+      "verdict": "no"
+     },
+     {
+      "t": 16.0,
+      "claim": "man from behind",
+      "verdict": "yes"
+     }
+    ]
+   },
+   {
+    "strip": "../litmus/out/walker-234005-2.jpg",
+    "rows": [
+     {
+      "t": 1.5,
+      "claim": "man from behind",
+      "verdict": "yes"
+     },
+     {
+      "t": 7.0,
+      "claim": "man from behind",
+      "verdict": "yes"
+     },
+     {
+      "t": 16.0,
+      "claim": "inside",
+      "verdict": "no"
+     },
+     {
+      "t": 16.0,
+      "claim": "man from behind",
+      "verdict": "yes"
+     }
+    ]
+   }
+  ],
+  "judge": null,
+  "key_rows": [],
+  "dur": null
+ },
+ {
+  "id": "litmus-controls",
+  "title": "Key test, first person (4 takes, no text)",
+  "seed_text": "A wet stone plaza at dusk in an Afrofuturist harbour city. Ahead stands a tall terracotta temple with a great arched doorway, open and dark inside. The camera is at eye level on the plaza, facing the doorway. Photographic, practical light. Nobody in the foreground.",
+  "seed_image": null,
+  "sent": [],
+  "asks": [],
+  "keys": [],
+  "keys_logged": true,
+  "note": "One key held 1–7 s per take. Measured: overall change and sideways shift between the first and last frame.",
+  "prior": [
+   {
+    "strip": "../litmus/out/controls.jpg",
+    "rows": [
+     {
+      "t": "1–7",
+      "claim": "key none",
+      "verdict": "change 23.6, shift 0 px"
+     },
+     {
+      "t": "1–7",
+      "claim": "key key_w",
+      "verdict": "change 38.5, shift 53 px"
+     },
+     {
+      "t": "1–7",
+      "claim": "key key_a",
+      "verdict": "change 60.2, shift -54 px"
+     },
+     {
+      "t": "1–7",
+      "claim": "key arrow_left",
+      "verdict": "change 58.4, shift -307 px"
+     }
+    ]
+   }
+  ],
+  "judge": null,
+  "key_rows": [],
+  "dur": null
+ },
+ {
+  "id": "street-020",
+  "title": "Street walk, zone 020",
+  "seed_text": "Afrofuturist twilight market: Naraka Market district, alley only open at sunset and vanished by dawn, architecture made of bent shipping containers and melted billboard plastics, locals speaking in proverbs and sealing deals with songs, flickering neon light r. A Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, stands a few steps ahead of the camera with his back to us. He walks away from us down the middle of this street at an easy pace. The camera is at eye level behind him and follows him, keeping his whole body in frame. Keep the look of the starting picture exactly. Sound: his footsteps and the street.",
+  "seed_image": null,
+  "sent": [],
+  "asks": [
+   {
+    "t": 6,
+    "claim": "A Black man in black clothing, seen from behind, is walking away from the camera.",
+    "kf": "kf/street-020-00.jpg",
+    "happened": "yes",
+    "seen": "A man in dark clothing is seen from behind walking down a street lined with neon-lit shops."
+   },
+   {
+    "t": 10,
+    "claim": "He has moved further into the place than at the start (walking has carried him forward).",
+    "kf": "kf/street-020-01.jpg",
+    "happened": "yes",
+    "seen": "The man in dark clothing has walked further down the street past the first storefront."
+   },
+   {
+    "t": 18,
+    "claim": "After the camera turned, the same man is still in frame.",
+    "kf": "kf/street-020-02.jpg",
+    "happened": "yes",
+    "seen": "The man in dark clothing is seen from behind in a closer view, facing the storefronts on the left."
+   }
+  ],
+  "keys": [
+   [
+    1,
+    11,
+    "key_w"
+   ],
+   [
+    12,
+    19.5,
+    "arrow_left"
+   ]
+  ],
+  "keys_logged": false,
+  "note": "Keys as scheduled (not individually logged).",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [
+   {
+    "a": 1,
+    "b": 11,
+    "key": "key_w",
+    "motion": 9.99
+   },
+   {
+    "a": 12,
+    "b": 19.5,
+    "key": "arrow_left",
+    "motion": 31.54
+   }
+  ],
+  "still": null,
+  "dur": 20.3
+ },
+ {
+  "id": "street-091",
+  "title": "Street walk, zone 091",
+  "seed_text": "The Shrouded Arcade (Abandoned Consumer District), nostalgic and glitching atmosphere, escalators looping endlessly with no passengers, broken vending kiosks glowing with out-of-date ads, ambient speaker voice glitching between sale announcements and poetry, s. A Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, stands a few steps ahead of the camera with his back to us. He walks away from us down the middle of this street at an easy pace. The camera is at eye level behind him and follows him, keeping his whole body in frame. Keep the look of the starting picture exactly. Sound: his footsteps and the street.",
+  "seed_image": null,
+  "sent": [],
+  "asks": [
+   {
+    "t": 6,
+    "claim": "A Black man in black clothing, seen from behind, is walking away from the camera.",
+    "kf": "kf/street-091-00.jpg",
+    "happened": "yes",
+    "seen": "A man in dark clothing is seen from behind walking toward a set of escalators in a dimly lit mall."
+   },
+   {
+    "t": 10,
+    "claim": "He has moved further into the place than at the start (walking has carried him forward).",
+    "kf": "kf/street-091-01.jpg",
+    "happened": "yes",
+    "seen": "The man has walked closer to the bottom of the right escalator."
+   },
+   {
+    "t": 18,
+    "claim": "After the camera turned, the same man is still in frame.",
+    "kf": "kf/street-091-02.jpg",
+    "happened": "no",
+    "seen": "The camera faces the storefronts and the side of the escalator, with no person visible in the frame."
+   }
+  ],
+  "keys": [
+   [
+    1,
+    11,
+    "key_w"
+   ],
+   [
+    12,
+    19.5,
+    "arrow_left"
+   ]
+  ],
+  "keys_logged": false,
+  "note": "Keys as scheduled (not individually logged).",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [
+   {
+    "a": 1,
+    "b": 11,
+    "key": "key_w",
+    "motion": 5.71
+   },
+   {
+    "a": 12,
+    "b": 19.5,
+    "key": "arrow_left",
+    "motion": 23.59
+   }
+  ],
+  "still": null,
+  "dur": 20.1
+ },
+ {
+  "id": "street-098",
+  "title": "Street walk, zone 098",
+  "seed_text": "You live in a cleaning drone's last dying memory. The moon? A corporate logo, shattered and hovering. Glass scrapes glass in high-altitude wind. Elevators wheeze like iron lungs. Skybridges shudder under synthetic footfall. Below: streetlights sync to heartbea. A Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, stands a few steps ahead of the camera with his back to us. He walks away from us down the middle of this street at an easy pace. The camera is at eye level behind him and follows him, keeping his whole body in frame. Keep the look of the starting picture exactly. Sound: his footsteps and the street.",
+  "seed_image": null,
+  "sent": [],
+  "asks": [
+   {
+    "t": 6,
+    "claim": "A Black man in black clothing, seen from behind, is walking away from the camera.",
+    "kf": "kf/street-098-00.jpg",
+    "happened": "partly",
+    "seen": "A man in dark clothing is seen walking along an elevated track, though he appears to be facing toward the camera rather than walking away."
+   },
+   {
+    "t": 10,
+    "claim": "He has moved further into the place than at the start (walking has carried him forward).",
+    "kf": "kf/street-098-01.jpg",
+    "happened": "no",
+    "seen": "The man has actually moved closer to the camera compared to the previous frame, walking forward toward the viewer."
+   },
+   {
+    "t": 18,
+    "claim": "After the camera turned, the same man is still in frame.",
+    "kf": "kf/street-098-02.jpg",
+    "happened": "no",
+    "seen": "The camera has panned left toward the railings and city skyline, and the man is no longer visible in the frame."
+   }
+  ],
+  "keys": [
+   [
+    1,
+    11,
+    "key_w"
+   ],
+   [
+    12,
+    19.5,
+    "arrow_left"
+   ]
+  ],
+  "keys_logged": false,
+  "note": "Keys as scheduled (not individually logged).",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [
+   {
+    "a": 1,
+    "b": 11,
+    "key": "key_w",
+    "motion": 3.14
+   },
+   {
+    "a": 12,
+    "b": 19.5,
+    "key": "arrow_left",
+    "motion": 24.2
+   }
+  ],
+  "still": null,
+  "dur": 20.3
+ },
+ {
+  "id": "poemwalk-greybox",
+  "title": "Word to world, poem 06 (greybox)",
+  "seed_text": "A simple grey-box model of a harbour city at night: flat untextured blocks, a few lit yellow windows, a pale path leading down to dark water, moonlight on the water. A Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, stands a few steps ahead of the camera with his back to us and walks away from us at an easy pace. The camera is at eye level behind him and follows, keeping his whole body in frame. Keep the flat blocky untextured look until the water changes it. Ahead at the end of the path stand tall closed gates.",
+  "seed_image": "litmus/seeds/greybox.jpg",
+  "sent": [
+   {
+    "t": 0.3,
+    "text": "Ahead of him, the tall gates swing open. They are white marble and have wings.",
+    "by": "script",
+    "word": "gates",
+    "word_at": 0.3
+   },
+   {
+    "t": 3.8,
+    "text": "Bright blue water made of small glowing white letters pours out through the open gates and runs down the path to his feet.",
+    "by": "script",
+    "word": "hymns",
+    "word_at": 6.8
+   },
+   {
+    "t": 14.0,
+    "text": "Where the blue water touches the ground, the ground becomes a road of yellow bricks, laid one by one ahead of him as he walks.",
+    "by": "script",
+    "word": "yellow",
+    "word_at": 17.0
+   },
+   {
+    "t": 19.8,
+    "text": "Comets cross the night sky above him, and their light runs in lines across the water.",
+    "by": "script",
+    "word": "comets",
+    "word_at": 22.8
+   },
+   {
+    "t": 24.6,
+    "text": "The blue water rises to his knees. Towers rise up out of the water on both sides of him, water streaming off them.",
+    "by": "script",
+    "word": "resurrecting",
+    "word_at": 27.6
+   },
+   {
+    "t": 31.4,
+    "text": "Vines and trees grow up the wet towers. Everything the water has touched now has colour and detail.",
+    "by": "script",
+    "word": "nature",
+    "word_at": 34.4
+   },
+   {
+    "t": 42.7,
+    "text": "Windows light up one by one in blue and pink. In the doorways stand Black women and men of every age in long indigo and ochre robes, arms open to him.",
+    "by": "script",
+    "word": "safe",
+    "word_at": 45.7
+   }
+  ],
+  "asks": [
+   {
+    "t": 2.8,
+    "claim": "Ahead of him, the tall gates swing open. They are white marble and have wings.",
+    "ref": 0,
+    "kf": "kf/poemwalk-greybox-00.jpg",
+    "happened": "partly",
+    "seen": "Tall white marble gates are open ahead of the walking man, though they do not have wings."
+   },
+   {
+    "t": 9.3,
+    "claim": "Bright blue water made of small glowing white letters pours out through the open gates and runs down the path to his feet.",
+    "ref": 1,
+    "kf": "kf/poemwalk-greybox-01.jpg",
+    "happened": "yes",
+    "seen": "A glowing blue ground pattern made of white letters spreads from the open gates to the man's feet."
+   },
+   {
+    "t": 19.5,
+    "claim": "Where the blue water touches the ground, the ground becomes a road of yellow bricks, laid one by one ahead of him as he walks.",
+    "ref": 2,
+    "kf": "kf/poemwalk-greybox-02.jpg",
+    "happened": "partly",
+    "seen": "A yellow glowing brick pattern appears underneath the man's feet amidst the blue glowing letters."
+   },
+   {
+    "t": 25.3,
+    "claim": "Comets cross the night sky above him, and their light runs in lines across the water.",
+    "ref": 3,
+    "kf": "kf/poemwalk-greybox-03.jpg",
+    "happened": "partly",
+    "seen": "A faint dotted streak appears in the sky above the mountain, without light lines running across the water."
+   },
+   {
+    "t": 30.1,
+    "claim": "The blue water rises to his knees. Towers rise up out of the water on both sides of him, water streaming off them.",
+    "ref": 4,
+    "kf": "kf/poemwalk-greybox-04.jpg",
+    "happened": "yes",
+    "seen": "Blue water rises around the man's legs as stone towers with water cascading down them appear on both sides."
+   },
+   {
+    "t": 36.9,
+    "claim": "Vines and trees grow up the wet towers. Everything the water has touched now has colour and detail.",
+    "ref": 5,
+    "kf": "kf/poemwalk-greybox-05.jpg",
+    "happened": "yes",
+    "seen": "Green vines cover the stone towers on both sides while a bright comet streaks across the sky above the yellow brick path."
+   },
+   {
+    "t": 48.2,
+    "claim": "Windows light up one by one in blue and pink. In the doorways stand Black women and men of every age in long indigo and ochre robes, arms open to him.",
+    "ref": 6,
+    "kf": "kf/poemwalk-greybox-06.jpg",
+    "happened": "partly",
+    "seen": "People in indigo and ochre robes stand along the ledges with open arms while warm yellow windows glow and comets streak overhead."
+   }
+  ],
+  "keys": [
+   [
+    0.2,
+    3.516,
+    "key_w"
+   ],
+   [
+    6.0600000000000005,
+    9.844,
+    "key_w"
+   ],
+   [
+    12.7,
+    17.204,
+    "key_w"
+   ],
+   [
+    20.54,
+    23.663999999999998,
+    "key_w"
+   ],
+   [
+    27.75,
+    31.912,
+    "key_w"
+   ],
+   [
+    35.86,
+    40.316,
+    "key_w"
+   ],
+   [
+    44.63,
+    49.001999999999995,
+    "key_w"
+   ],
+   [
+    52.89,
+    57.07,
+    "key_w"
+   ]
+  ],
+  "keys_logged": false,
+  "note": "W for the first 60% of each line (as scheduled).",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [
+   {
+    "a": 0.2,
+    "b": 3.5,
+    "key": "key_w",
+    "motion": 2.99
+   },
+   {
+    "a": 6.1,
+    "b": 9.8,
+    "key": "key_w",
+    "motion": 3.18
+   },
+   {
+    "a": 12.7,
+    "b": 17.2,
+    "key": "key_w",
+    "motion": 4.77
+   },
+   {
+    "a": 20.5,
+    "b": 23.7,
+    "key": "key_w",
+    "motion": 8.2
+   },
+   {
+    "a": 27.8,
+    "b": 31.9,
+    "key": "key_w",
+    "motion": 6.94
+   },
+   {
+    "a": 35.9,
+    "b": 40.3,
+    "key": "key_w",
+    "motion": 4.65
+   },
+   {
+    "a": 44.6,
+    "b": 49.0,
+    "key": "key_w",
+    "motion": 6.35
+   },
+   {
+    "a": 52.9,
+    "b": 57.1,
+    "key": "key_w",
+    "motion": 2.95
+   }
+  ],
+  "still": 3.7,
+  "dur": 62.2
+ },
+ {
+  "id": "poemwalk-cel020",
+  "title": "Word to world, poem 06 (cel020)",
+  "seed_text": "A flat cel-shaded cartoon street at dusk: large flat colour shapes with dark outlines, market stalls, soft pink and orange lights. A Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, stands a few steps ahead of the camera with his back to us and walks away from us at an easy pace. The camera is at eye level behind him and follows, keeping his whole body in frame. Keep the flat cel-shaded cartoon look with outlines throughout. Ahead at the end of the street stand tall closed gates.",
+  "seed_image": "litmus/seeds/cel020.jpg",
+  "sent": [
+   {
+    "t": 0.3,
+    "text": "Ahead of him, the tall gates swing open. They are white marble and have wings.",
+    "by": "script",
+    "word": "gates",
+    "word_at": 0.3
+   },
+   {
+    "t": 3.8,
+    "text": "Bright blue water made of small glowing white letters pours out through the open gates and runs down the path to his feet.",
+    "by": "script",
+    "word": "hymns",
+    "word_at": 6.8
+   },
+   {
+    "t": 14.0,
+    "text": "Where the blue water touches the ground, the ground becomes a road of yellow bricks, laid one by one ahead of him as he walks.",
+    "by": "script",
+    "word": "yellow",
+    "word_at": 17.0
+   },
+   {
+    "t": 19.8,
+    "text": "Comets cross the night sky above him, and their light runs in lines across the water.",
+    "by": "script",
+    "word": "comets",
+    "word_at": 22.8
+   },
+   {
+    "t": 24.6,
+    "text": "The blue water rises to his knees. Towers rise up out of the water on both sides of him, water streaming off them.",
+    "by": "script",
+    "word": "resurrecting",
+    "word_at": 27.6
+   },
+   {
+    "t": 31.4,
+    "text": "Vines and trees grow up the wet towers. Everything the water has touched now has colour and detail.",
+    "by": "script",
+    "word": "nature",
+    "word_at": 34.4
+   },
+   {
+    "t": 42.7,
+    "text": "Windows light up one by one in blue and pink. In the doorways stand Black women and men of every age in long indigo and ochre robes, arms open to him.",
+    "by": "script",
+    "word": "safe",
+    "word_at": 45.7
+   }
+  ],
+  "asks": [
+   {
+    "t": 2.8,
+    "claim": "Ahead of him, the tall gates swing open. They are white marble and have wings.",
+    "ref": 0,
+    "kf": "kf/poemwalk-cel020-00.jpg",
+    "happened": "no",
+    "seen": "A man walks along a street at dusk toward closed wooden gates."
+   },
+   {
+    "t": 9.3,
+    "claim": "Bright blue water made of small glowing white letters pours out through the open gates and runs down the path to his feet.",
+    "ref": 1,
+    "kf": "kf/poemwalk-cel020-01.jpg",
+    "happened": "yes",
+    "seen": "A waterfall of bright blue water containing glowing white letters pours over the gateway and flows around the man's feet."
+   },
+   {
+    "t": 19.5,
+    "claim": "Where the blue water touches the ground, the ground becomes a road of yellow bricks, laid one by one ahead of him as he walks.",
+    "ref": 2,
+    "kf": "kf/poemwalk-cel020-02.jpg",
+    "happened": "partly",
+    "seen": "Two figures stand at the edge of a yellow brick path facing a wall of blue water."
+   },
+   {
+    "t": 25.3,
+    "claim": "Comets cross the night sky above him, and their light runs in lines across the water.",
+    "ref": 3,
+    "kf": "kf/poemwalk-cel020-03.jpg",
+    "happened": "no",
+    "seen": "Two men walk down a yellow brick road toward closed gates behind white vertical lines under a blue tint."
+   },
+   {
+    "t": 30.1,
+    "claim": "The blue water rises to his knees. Towers rise up out of the water on both sides of him, water streaming off them.",
+    "ref": 4,
+    "kf": "kf/poemwalk-cel020-04.jpg",
+    "happened": "no",
+    "seen": "Two men stand on a yellow brick path in front of large closed gates with white vertical bars in the foreground."
+   },
+   {
+    "t": 36.9,
+    "claim": "Vines and trees grow up the wet towers. Everything the water has touched now has colour and detail.",
+    "ref": 5,
+    "kf": "kf/poemwalk-cel020-05.jpg",
+    "happened": "partly",
+    "seen": "Green vines grow along the sides of the wooden gates and stone pillars while glowing letters float in a circle."
+   },
+   {
+    "t": 48.2,
+    "claim": "Windows light up one by one in blue and pink. In the doorways stand Black women and men of every age in long indigo and ochre robes, arms open to him.",
+    "ref": 6,
+    "kf": "kf/poemwalk-cel020-06.jpg",
+    "happened": "partly",
+    "seen": "People in blue and yellow robes stand by market stalls with open hands while a blue waterfall with letters flows over the gate."
+   }
+  ],
+  "keys": [
+   [
+    0.2,
+    3.516,
+    "key_w"
+   ],
+   [
+    6.0600000000000005,
+    9.844,
+    "key_w"
+   ],
+   [
+    12.7,
+    17.204,
+    "key_w"
+   ],
+   [
+    20.54,
+    23.663999999999998,
+    "key_w"
+   ],
+   [
+    27.75,
+    31.912,
+    "key_w"
+   ],
+   [
+    35.86,
+    40.316,
+    "key_w"
+   ],
+   [
+    44.63,
+    49.001999999999995,
+    "key_w"
+   ],
+   [
+    52.89,
+    57.07,
+    "key_w"
+   ]
+  ],
+  "keys_logged": false,
+  "note": "W for the first 60% of each line (as scheduled).",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [
+   {
+    "a": 0.2,
+    "b": 3.5,
+    "key": "key_w",
+    "motion": 4.73
+   },
+   {
+    "a": 6.1,
+    "b": 9.8,
+    "key": "key_w",
+    "motion": 11.82
+   },
+   {
+    "a": 12.7,
+    "b": 17.2,
+    "key": "key_w",
+    "motion": 11.2
+   },
+   {
+    "a": 20.5,
+    "b": 23.7,
+    "key": "key_w",
+    "motion": 20.52
+   },
+   {
+    "a": 27.8,
+    "b": 31.9,
+    "key": "key_w",
+    "motion": 29.92
+   },
+   {
+    "a": 35.9,
+    "b": 40.3,
+    "key": "key_w",
+    "motion": 26.56
+   },
+   {
+    "a": 44.6,
+    "b": 49.0,
+    "key": "key_w",
+    "motion": 15.08
+   },
+   {
+    "a": 52.9,
+    "b": 57.1,
+    "key": "key_w",
+    "motion": 23.0
+   }
+  ],
+  "still": 10.44,
+  "dur": 62.2
+ },
+ {
+  "id": "probe-sheet",
+  "title": "Probe: Can a contact sheet of four views be given as one seed, so the model builds one territory from all four?",
+  "seed_text": "This picture is a reference sheet: four views of the same district of one city, a night market built from shipping containers with alleys and a flooded underpass. Begin standing inside that district at eye level, in a single continuous place that contains all four views nearby. Do not show panels or borders.",
+  "seed_image": "litmus/seeds/sheet_naraka.jpg",
+  "sent": [],
+  "asks": [
+   {
+    "t": 6.2,
+    "claim": "The frame shows one continuous scene, not a grid of separate panels with borders.",
+    "kf": "kf/probe-sheet-00.jpg",
+    "happened": "no",
+    "seen": "The frame is divided into a 2x2 grid of four separate panels separated by white borders."
+   },
+   {
+    "t": 11.8,
+    "claim": "The frame shows one continuous scene, not a grid of separate panels with borders.",
+    "kf": "kf/probe-sheet-01.jpg",
+    "happened": "no",
+    "seen": "The frame shows a 2x2 grid of four separate scenes divided by white borders."
+   }
+  ],
+  "keys": [
+   [
+    1.0,
+    10.0,
+    "key_w"
+   ]
+  ],
+  "keys_logged": false,
+  "note": "Hypothesis written before the run: Probably not: it takes exactly one starting frame, so I expect it to treat the sheet as a picture of four panels, or to enter one panel and discard the rest.",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [
+   {
+    "a": 1.0,
+    "b": 10.0,
+    "key": "key_w",
+    "motion": 9.52
+   }
+  ],
+  "still": 5.13,
+  "dur": 12.3
+ },
+ {
+  "id": "probe-plan",
+  "title": "Probe: Can a map of the territory be the seed, with the camera dropped into it?",
+  "seed_text": "This picture is a map of an island city seen from above. Begin standing on the ground inside this city at eye level, on a street near the harbour, looking along the street. Do not show the map.",
+  "seed_image": "litmus/seeds/plan.jpg",
+  "sent": [],
+  "asks": [
+   {
+    "t": 6.2,
+    "claim": "The camera is at ground level among buildings or terrain, not looking down at a map.",
+    "kf": "kf/probe-plan-00.jpg",
+    "happened": "yes",
+    "seen": "A first-person ground-level view of a cobblestone street beside a harbor with old buildings on the left and ship masts on the right."
+   },
+   {
+    "t": 11.8,
+    "claim": "The camera is at ground level among buildings or terrain, not looking down at a map.",
+    "kf": "kf/probe-plan-01.jpg",
+    "happened": "yes",
+    "seen": "A ground-level view moving further down the cobblestone harbor street with timber-framed buildings on the left and docked ships on the right."
+   }
+  ],
+  "keys": [
+   [
+    1.0,
+    10.0,
+    "key_w"
+   ]
+  ],
+  "keys_logged": false,
+  "note": "Hypothesis written before the run: Unlikely to become street level; I expect it to stay a map and slide over it like a flat picture.",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [
+   {
+    "a": 1.0,
+    "b": 10.0,
+    "key": "key_w",
+    "motion": 10.52
+   }
+  ],
+  "still": 3.12,
+  "dur": 12.3
+ },
+ {
+  "id": "probe-life",
+  "title": "Probe: If the seed text demands exaggerated life, does the street fill with action without any mid-take cue?",
+  "seed_text": "A Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots walks away from us down the middle of a night market street built from shipping containers; the camera follows behind him at eye level. The street is wildly alive: a dense crowd of Black women and men of every age in bright teal, orange and white wraps and coats dancing and carrying baskets, children running, banners snapping overhead, sparks rising from grills, flocks of birds wheeling, lanterns swinging, water running down the gutters. Everything moves, all the time.",
+  "seed_image": "litmus/seeds/street020.jpg",
+  "sent": [],
+  "asks": [
+   {
+    "t": 7.2,
+    "claim": "There is a dense crowd of many people (more than ten) in the street.",
+    "kf": "kf/probe-life-00.jpg",
+    "happened": "partly",
+    "seen": "About ten or eleven people are standing in small groups along the illuminated street, rather than a dense crowd."
+   },
+   {
+    "t": 7.2,
+    "claim": "A man in black seen from behind is the main figure.",
+    "kf": "kf/probe-life-01.jpg",
+    "happened": "partly",
+    "seen": "Several people are seen from behind in dark clothing, including a figure in a long black coat on the right, though none is clearly the single main figure."
+   },
+   {
+    "t": 13.8,
+    "claim": "There is a dense crowd of many people (more than ten) in the street.",
+    "kf": "kf/probe-life-02.jpg",
+    "happened": "no",
+    "seen": "Around six people are visible in the street, mostly gathered on the left side."
+   },
+   {
+    "t": 13.8,
+    "claim": "A man in black seen from behind is the main figure.",
+    "kf": "kf/probe-life-03.jpg",
+    "happened": "partly",
+    "seen": "A man in a dark jacket is seen from behind on the left and a man in a black coat and hat stands on the right, with neither being the sole main figure."
+   }
+  ],
+  "keys": [
+   [
+    1.0,
+    12.0,
+    "key_w"
+   ]
+  ],
+  "keys_logged": false,
+  "note": "Hypothesis written before the run: Yes: the seed text is the strongest lever we have found, so crowd, motion and weather asked for here should appear and persist.",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [
+   {
+    "a": 1.0,
+    "b": 12.0,
+    "key": "key_w",
+    "motion": 11.57
+   }
+  ],
+  "still": 5.37,
+  "dur": 14.3
+ },
+ {
+  "id": "probe-spin",
+  "title": "Probe: If the camera turns steadily in one direction, does it come back round to the place it started?",
+  "seed_text": "A wet stone plaza in an Afrofuturist harbour city, with a tall terracotta temple and an arched doorway. The camera stands still at eye level in the middle of the plaza and only turns.",
+  "seed_image": "litmus/seeds/plaza008.jpg",
+  "sent": [],
+  "asks": [
+   {
+    "t": 11.2,
+    "claim": "A tall orange or terracotta building with a large arched doorway is visible.",
+    "kf": "kf/probe-spin-00.jpg",
+    "happened": "yes",
+    "seen": "A tall terracotta building with arched doorways, palm trees, and market stalls in a courtyard."
+   },
+   {
+    "t": 22.0,
+    "claim": "A tall orange or terracotta building with a large arched doorway is visible.",
+    "kf": "kf/probe-spin-01.jpg",
+    "happened": "yes",
+    "seen": "A tall terracotta building with an arched doorway, palm trees, and market stalls near the water."
+   }
+  ],
+  "keys": [
+   [
+    1.0,
+    21.0,
+    "arrow_left"
+   ]
+  ],
+  "keys_logged": false,
+  "note": "Hypothesis written before the run: It will keep inventing new city rather than close the circle: nothing we have seen suggests it remembers what is behind it.",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [
+   {
+    "a": 1.0,
+    "b": 21.0,
+    "key": "arrow_left",
+    "motion": 17.19
+   }
+  ],
+  "still": null,
+  "dur": 22.2
+ },
+ {
+  "id": "full-06",
+  "title": "Poem 06, one continuous take",
+  "seed_text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with light. Everyone here is Black. Keep the look of the starting picture. Night. A great crowd of Black women and men of every age, in long indigo and ochre robes with brass at their wrists, stands with their backs to us facing an enormous vaulted opening full of stars and firelight. In the middle of the crowd, a few steps ahead of the camera with his back to us, is a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots. He walks forward through the crowd toward the opening and the camera follows him at eye level, keeping his whole body in frame. The world changes violently and fluidly around him whenever something new is described. Sound: a crowd humming, fire, deep drums.",
+  "seed_image": "full/seed06.jpg",
+  "sent": [
+   {
+    "t": 0.3,
+    "text": "The ground ahead of him splits open and two enormous white marble wings unfold upward out of it, forming a gate. The crowd parts to let him through.",
+    "by": "script",
+    "word": "gates",
+    "word_at": 0.3
+   },
+   {
+    "t": 4.3,
+    "text": "A wall of bright blue water full of glowing letters bursts through the marble gate and floods the ground, rising past his knees to his waist. He keeps walking through it.",
+    "by": "script",
+    "word": "hymns",
+    "word_at": 6.8
+   },
+   {
+    "t": 13.5,
+    "text": "A road of yellow bricks heaves up out of the blue flood under his feet and lifts him above the water, carrying him forward.",
+    "by": "script",
+    "word": "yellow",
+    "word_at": 17.0
+   },
+   {
+    "t": 19.3,
+    "text": "Comets fall out of the sky and smash into the water ahead. Where each one lands, a tall white tower shoots up out of the flood.",
+    "by": "script",
+    "word": "comets",
+    "word_at": 22.8
+   },
+   {
+    "t": 24.1,
+    "text": "All the water drains away at once, pouring in waterfalls off a vast white city that was hidden under it: towers, bridges and stairs on every side of him, streaming wet.",
+    "by": "script",
+    "word": "resurrecting",
+    "word_at": 27.6
+   },
+   {
+    "t": 33.1,
+    "text": "Trees, vines and flowers burst out of every wet wall and climb the towers in seconds, blooming as he passes.",
+    "by": "script",
+    "word": "hope",
+    "word_at": 36.6
+   },
+   {
+    "t": 42.2,
+    "text": "Doors fly open along the street and hundreds of Black women and men of every age in indigo and ochre robes pour out, walking and dancing beside him.",
+    "by": "script",
+    "word": "safe",
+    "word_at": 45.7
+   },
+   {
+    "t": 53.9,
+    "text": "A blue light pulses in every chest and every window together, in one slow rhythm, brightening with each step he takes.",
+    "by": "script",
+    "word": "currency",
+    "word_at": 57.4
+   },
+   {
+    "t": 62.7,
+    "text": "Thousands of candles light at once, in the windows and in the hands of the robed Black women and men around him. Their faces glow and smile.",
+    "by": "script",
+    "word": "candlelight",
+    "word_at": 66.2
+   },
+   {
+    "t": 67.1,
+    "text": "The towers lean in overhead and the street squeezes into a warm stone alley only two people wide, long shadows running ahead of him.",
+    "by": "script",
+    "word": "narrow",
+    "word_at": 70.6
+   },
+   {
+    "t": 72.8,
+    "text": "Bands of rainbow colour ripple outward from the singing crowd across the walls and the sky, and the clouds tear loose and float upward.",
+    "by": "script",
+    "word": "rainbows",
+    "word_at": 76.3
+   },
+   {
+    "t": 85.5,
+    "text": "A ring of white light opens on the ground around his feet and widens in every direction until it passes the horizon.",
+    "by": "script",
+    "word": "continuums",
+    "word_at": 89.0
+   },
+   {
+    "t": 93.2,
+    "text": "The Black man in the black mock-neck stops, turns to face us, and opens his arms. Behind him the whole white city is lit and full of people.",
+    "by": "script",
+    "word": "welcoming",
+    "word_at": 96.7
+   }
+  ],
+  "asks": [
+   {
+    "t": 2.8,
+    "claim": "The ground ahead of him splits open and two enormous white marble wings unfold upward out of it, forming a gate. The crowd parts to let him through.",
+    "ref": 0,
+    "kf": "kf/full-06-00.jpg",
+    "happened": "yes",
+    "seen": "Two huge white wing structures rise ahead of a parted crowd as a man stands in the middle facing a fire between them."
+   },
+   {
+    "t": 9.3,
+    "claim": "A wall of bright blue water full of glowing letters bursts through the marble gate and floods the ground, rising past his knees to his waist. He keeps walking through it.",
+    "ref": 1,
+    "kf": "kf/full-06-01.jpg",
+    "happened": "partly",
+    "seen": "Blue water spreads across the ground behind the man and around the base of the giant white wings, without glowing letters or reaching his waist."
+   },
+   {
+    "t": 19.5,
+    "claim": "A road of yellow bricks heaves up out of the blue flood under his feet and lifts him above the water, carrying him forward.",
+    "ref": 2,
+    "kf": "kf/full-06-02.jpg",
+    "happened": "yes",
+    "seen": "A yellow brick path appears under the man's feet leading toward the fire and giant white wings while the water recedes around it."
+   },
+   {
+    "t": 25.3,
+    "claim": "Comets fall out of the sky and smash into the water ahead. Where each one lands, a tall white tower shoots up out of the flood.",
+    "ref": 3,
+    "kf": "kf/full-06-03.jpg",
+    "happened": "partly",
+    "seen": "Three tall white lattice towers rise from the blue water in front of the wings, though no falling comets are visible."
+   },
+   {
+    "t": 30.1,
+    "claim": "All the water drains away at once, pouring in waterfalls off a vast white city that was hidden under it: towers, bridges and stairs on every side of him, streaming wet.",
+    "ref": 4,
+    "kf": "kf/full-06-04.jpg",
+    "happened": "partly",
+    "seen": "A background city with waterfalls pouring down its walls appears between the giant wings and white towers."
+   },
+   {
+    "t": 39.1,
+    "claim": "Trees, vines and flowers burst out of every wet wall and climb the towers in seconds, blooming as he passes.",
+    "ref": 5,
+    "kf": "kf/full-06-05.jpg",
+    "happened": "yes",
+    "seen": "Green vines with pink flowers grow up along the giant white wings in the foreground in front of the city and waterfalls."
+   },
+   {
+    "t": 48.2,
+    "claim": "Doors fly open along the street and hundreds of Black women and men of every age in indigo and ochre robes pour out, walking and dancing beside him.",
+    "ref": 6,
+    "kf": "kf/full-06-06.jpg",
+    "happened": "partly",
+    "seen": "A small distant crowd gathers at the base of the waterfalls between the wings and flowering vines, without doors or robed dancers near the man."
+   },
+   {
+    "t": 59.9,
+    "claim": "A blue light pulses in every chest and every window together, in one slow rhythm, brightening with each step he takes.",
+    "ref": 7,
+    "kf": "kf/full-06-07.jpg",
+    "happened": "no",
+    "seen": "The camera tilts up toward the starry sky and tall flame between the white spire, castle, and flowering wings."
+   },
+   {
+    "t": 68.7,
+    "claim": "Thousands of candles light at once, in the windows and in the hands of the robed Black women and men around him. Their faces glow and smile.",
+    "ref": 8,
+    "kf": "kf/full-06-08.jpg",
+    "happened": "partly",
+    "seen": "A few lit candles appear at the bottom left near the castle and flame, with blue light streaks in the sky but no people visible."
+   },
+   {
+    "t": 73.1,
+    "claim": "The towers lean in overhead and the street squeezes into a warm stone alley only two people wide, long shadows running ahead of him.",
+    "ref": 9,
+    "kf": "kf/full-06-09.jpg",
+    "happened": "no",
+    "seen": "A tall column of fire rises between gothic spires covered in vines and flowers against a starry night sky."
+   },
+   {
+    "t": 78.8,
+    "claim": "Bands of rainbow colour ripple outward from the singing crowd across the walls and the sky, and the clouds tear loose and float upward.",
+    "ref": 10,
+    "kf": "kf/full-06-10.jpg",
+    "happened": "partly",
+    "seen": "Blue mist swirls behind the vine-covered spires and central flame against the starry sky, with no rainbow bands or crowd."
+   },
+   {
+    "t": 91.5,
+    "claim": "A ring of white light opens on the ground around his feet and widens in every direction until it passes the horizon.",
+    "ref": 11,
+    "kf": "kf/full-06-11.jpg",
+    "happened": "no",
+    "seen": "A crowd of people in robes stands near a stone building and palm tree behind the central flame and white lattice spires."
+   },
+   {
+    "t": 99.2,
+    "claim": "The Black man in the black mock-neck stops, turns to face us, and opens his arms. Behind him the whole white city is lit and full of people.",
+    "ref": 12,
+    "kf": "kf/full-06-12.jpg",
+    "happened": "partly",
+    "seen": "A Black man in a black top faces the camera with his arms down, standing next to the flame with a robed crowd and dark city behind him."
+   }
+  ],
+  "keys": [
+   [
+    0.2,
+    3.22,
+    "key_w"
+   ],
+   [
+    6.06,
+    9.51,
+    "key_w"
+   ],
+   [
+    12.7,
+    16.81,
+    "key_w"
+   ],
+   [
+    20.54,
+    23.39,
+    "key_w"
+   ],
+   [
+    27.75,
+    31.55,
+    "key_w"
+   ],
+   [
+    35.86,
+    39.93,
+    "key_w"
+   ],
+   [
+    44.63,
+    48.62,
+    "key_w"
+   ],
+   [
+    52.89,
+    56.71,
+    "key_w"
+   ],
+   [
+    61.66,
+    65.39,
+    "key_w"
+   ],
+   [
+    68.8,
+    72.49,
+    "key_w"
+   ],
+   [
+    75.87,
+    80.46,
+    "key_w"
+   ],
+   [
+    84.57,
+    88.32,
+    "key_w"
+   ]
+  ],
+  "keys_logged": true,
+  "note": "",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [
+   {
+    "a": 0.2,
+    "b": 3.2,
+    "key": "key_w",
+    "motion": 4.01
+   },
+   {
+    "a": 6.1,
+    "b": 9.5,
+    "key": "key_w",
+    "motion": 11.18
+   },
+   {
+    "a": 12.7,
+    "b": 16.8,
+    "key": "key_w",
+    "motion": 9.2
+   },
+   {
+    "a": 20.5,
+    "b": 23.4,
+    "key": "key_w",
+    "motion": 11.1
+   },
+   {
+    "a": 27.8,
+    "b": 31.6,
+    "key": "key_w",
+    "motion": 11.94
+   },
+   {
+    "a": 35.9,
+    "b": 39.9,
+    "key": "key_w",
+    "motion": 11.01
+   },
+   {
+    "a": 44.6,
+    "b": 48.6,
+    "key": "key_w",
+    "motion": 14.81
+   },
+   {
+    "a": 52.9,
+    "b": 56.7,
+    "key": "key_w",
+    "motion": 17.49
+   },
+   {
+    "a": 61.7,
+    "b": 65.4,
+    "key": "key_w",
+    "motion": 23.8
+   },
+   {
+    "a": 68.8,
+    "b": 72.5,
+    "key": "key_w",
+    "motion": 25.95
+   },
+   {
+    "a": 75.9,
+    "b": 80.5,
+    "key": "key_w",
+    "motion": 36.55
+   },
+   {
+    "a": 84.6,
+    "b": 88.3,
+    "key": "key_w",
+    "motion": 22.05
+   }
+  ],
+  "still": 12.66,
+  "dur": 102.5
+ },
+ {
+  "id": "full-12",
+  "title": "Poem 12, text only, no cues, no keys",
+  "seed_text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with light. Everyone here is Black. PLACE. Evening inside a rebuilt temple hall of white ceramic, its cracks mended with seams of soft light. Timber rafters overhead, a hand-painted WELCOME HOME banner hung between them. Tall doors stand open at the far end onto a meadow at sunset, a line of trees, and a small house with its porch light on. Long tables, mismatched chairs, picnic lights on strings.\n\nPEOPLE. Four Black men in their fifties, old friends, stand close together in the middle of the hall. One wears a matte black mock-neck long sleeve and black trousers and has close-cropped greying hair and a short beard: he is the poet. One wears a rust-orange corduroy jacket over a white tee and has a shaved head. One wears a sky-blue linen shirt with rolled sleeves and has grey locs tied back. One wears a green football jersey and a flat cap. Each holds a small glass hourglass in which the sand glows like embers. Behind them, faint as breath on glass, stand three Black elders, two women and a man in their eighties, in white linen and wide hats; they are not solid and nobody looks at them directly. Along the back wall is a row of empty chairs.\n\nWHAT THEY DO. They laugh loudly and often. They pull each other into hugs for no reason, slap shoulders, lean foreheads together. One presses his ear to another's chest to listen, and they pass that gesture down the line. Each time they laugh, a warm light pulses once in all four chests together, and the seams of light in the walls pulse with it. Nobody is ever alone in frame for long.\n\nHOW THE ROOM CHANGES. Slowly through the whole scene the daylight in the doorway deepens from gold to rose to blue dusk. The embers in the hourglasses brighten as the room dims. Near the end the four men turn the hourglasses over together, walk out through the tall doors side by side into the meadow, where a football arcs across the last light, and go up toward the lit porch with their backs to us.\n\nCAMERA. One unbroken handheld shot at chest height, inside the circle of friends, close enough to see hands and faces. It drifts gently from face to face, favouring hands on shoulders, wrists, the ear on the chest. It tilts up once to the rafters and the empty chairs and comes back. It never rushes forward and never leaves the men; at the end it follows them out through the doors from behind.\n\nLIGHT. Warm tungsten picnic bulbs against cool dusk from the doors. Deep brown skin lit with full tonal range, a warm key and a blue rim. Soft halation on the bulbs, gentle film grain.\n\nSOUND. Overlapping laughter, glasses set down, chairs scraping, crickets beginning outside. Leave room under it for one man's speaking voice.\n\nFEELING. Nostalgia, joy, comfort, belonging, gratitude: decades later, less time for words and more space for laughter.",
+  "seed_image": null,
+  "sent": [],
+  "asks": [
+   {
+    "t": 8,
+    "claim": "Four Black men in their fifties in a hall with a WELCOME HOME banner, each holding a glowing hourglass.",
+    "kf": "kf/full-12-00.jpg",
+    "happened": "yes",
+    "seen": "Four Black men stand together in a hall under a WELCOME HOME banner, each holding a red hourglass-shaped glass."
+   },
+   {
+    "t": 14,
+    "claim": "The men are hugging or laughing with heads thrown back.",
+    "kf": "kf/full-12-01.jpg",
+    "happened": "no",
+    "seen": "The four men stand in a circle holding their hourglasses and smiling mildly as the camera pulls back."
+   },
+   {
+    "t": 25,
+    "claim": "The camera is close, at chest height, inside the group of men.",
+    "kf": "kf/full-12-02.jpg",
+    "happened": "no",
+    "seen": "A wide shot shows the four men standing in the middle of the large hall."
+   },
+   {
+    "t": 36,
+    "claim": "One man presses his ear to another man's chest.",
+    "kf": "kf/full-12-03.jpg",
+    "happened": "no",
+    "seen": "A wider shot of the hall shows the four men still standing in the same pose holding their hourglasses."
+   },
+   {
+    "t": 46,
+    "claim": "The daylight in the doorway has turned to blue dusk, clearly darker than at the start.",
+    "kf": "kf/full-12-04.jpg",
+    "happened": "no",
+    "seen": "An even wider shot shows the hall with bright white daylight still shining through the open doorway behind the men."
+   },
+   {
+    "t": 58,
+    "claim": "The men have turned their hourglasses over or are walking out through the tall doors.",
+    "kf": "kf/full-12-05.jpg",
+    "happened": "no",
+    "seen": "From very far back in the hall, the four men are still standing in the same spot in front of the doorway."
+   },
+   {
+    "t": 65,
+    "claim": "The men are outside, walking toward a house with a lit porch, backs to camera.",
+    "kf": "kf/full-12-06.jpg",
+    "happened": "no",
+    "seen": "An extremely wide interior shot of the hall shows the four men still standing near the far doorway."
+   }
+  ],
+  "keys": [],
+  "keys_logged": true,
+  "note": "Everything asked for was in the opening text; nothing was sent afterwards.",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [],
+  "dur": 67.0
+ },
+ {
+  "id": "shots-12",
+  "title": "Poem 12 as nine shots",
+  "seed_text": "(each shot has its own opening text; see the rows below)",
+  "seed_image": null,
+  "sent": [
+   {
+    "t": 0,
+    "text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: Evening inside a white ceramic temple hall with timber rafters and a hand-painted WELCOME HOME banner. ACTION: The four men pull each other into one big laughing hug in the middle of the hall. CAMERA: Chest height, close, slowly circling them.",
+    "by": "new session, shot 1",
+    "img": null
+   },
+   {
+    "t": 8.6,
+    "text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: The same hall, very close. ACTION: The four men throw their heads back laughing; a warm light pulses in each of their chests at the same moment. CAMERA: Tight on faces and chests, handheld, shallow focus.",
+    "by": "new session, shot 2",
+    "img": null
+   },
+   {
+    "t": 16.8,
+    "text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: A dim, dusty back room with rows of empty wooden chairs and one tall window. ACTION: The four men stand still in the doorway looking in, each holding up his glowing hourglass; the only light is the embers. CAMERA: Wide and still from inside the room, the men small in the doorway.",
+    "by": "new session, shot 3",
+    "img": null
+   },
+   {
+    "t": 24.5,
+    "text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: The edge of a forest at blue dusk, huge old trees, mist between the trunks. ACTION: The four men walk among the trees and each lays a hand flat on a trunk as he passes. CAMERA: Low, tracking beside them along the trunks.",
+    "by": "new session, shot 4",
+    "img": null
+   },
+   {
+    "t": 29.9,
+    "text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: A meadow in front of the white temple at golden hour. ACTION: The four men stand shoulder to shoulder facing us, arms around each other, grinning as if for a photograph. CAMERA: Frontal, still, full bodies in frame.",
+    "by": "new session, shot 5",
+    "img": null
+   },
+   {
+    "t": 37.5,
+    "text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: A sandy path through dune grass down to the shore, last light. ACTION: The four men stand in a line; each one presses his ear to the chest of the next man and listens with eyes closed. CAMERA: Profile, sliding slowly down the line.",
+    "by": "new session, shot 6",
+    "img": null
+   },
+   {
+    "t": 45.2,
+    "text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: A high ridge path above a deep canyon at night under a sky crowded with stars; far below, city lights. ACTION: The four men walk single file along the ridge away from us, their hourglasses glowing like lanterns. CAMERA: Behind them at eye level, following.",
+    "by": "new session, shot 7",
+    "img": null
+   },
+   {
+    "t": 54.4,
+    "text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: A wide meadow at sunset, long grass, low sun. ACTION: The man in the green jersey throws a football in a high arc; the other three run laughing to catch it. CAMERA: Wide, the ball crossing the sun.",
+    "by": "new session, shot 8",
+    "img": null
+   },
+   {
+    "t": 59.8,
+    "text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: Dusk. A small white house at the top of the meadow with its porch light on. ACTION: The four men walk up toward the lit porch side by side with their backs to us. CAMERA: Behind them at eye level, following.",
+    "by": "new session, shot 9",
+    "img": null
+   }
+  ],
+  "asks": [
+   {
+    "t": 5.136,
+    "claim": "The four men pull each other into one big laughing hug in the middle of the hall.",
+    "ref": 0,
+    "kf": "kf/shots-12-00.jpg",
+    "happened": "partly",
+    "seen": "Four men stand close together smiling and putting hands on shoulders in a hall with a Welcome Home banner, holding hourglasses rather than in a full big hug."
+   },
+   {
+    "t": 13.474,
+    "claim": "The four men throw their heads back laughing; a warm light pulses in each of their chests at the same moment.",
+    "ref": 1,
+    "kf": "kf/shots-12-01.jpg",
+    "happened": "no",
+    "seen": "Four men stand facing forward smiling calmly while holding hourglasses in front of their chests."
+   },
+   {
+    "t": 21.406,
+    "claim": "The four men stand still in the doorway looking in, each holding up his glowing hourglass; the only light is the embers.",
+    "ref": 2,
+    "kf": "kf/shots-12-02.jpg",
+    "happened": "partly",
+    "seen": "Four men stand in a doorway inside a dimly lit room with string lights overhead, three of them visibly holding glowing hourglasses."
+   },
+   {
+    "t": 27.738,
+    "claim": "The four men walk among the trees and each lays a hand flat on a trunk as he passes.",
+    "ref": 3,
+    "kf": "kf/shots-12-03.jpg",
+    "happened": "partly",
+    "seen": "Four men walk together through the woods holding glowing hourglasses without touching any tree trunks."
+   },
+   {
+    "t": 34.474,
+    "claim": "The four men stand shoulder to shoulder facing us, arms around each other, grinning as if for a photograph.",
+    "ref": 4,
+    "kf": "kf/shots-12-04.jpg",
+    "happened": "yes",
+    "seen": "Four men stand shoulder to shoulder in a field with arms around each other's shoulders, smiling for the camera while holding hourglasses."
+   },
+   {
+    "t": 42.12599999999999,
+    "claim": "The four men stand in a line; each one presses his ear to the chest of the next man and listens with eyes closed.",
+    "ref": 5,
+    "kf": "kf/shots-12-05.jpg",
+    "happened": "partly",
+    "seen": "Four men stand closely in a single-file line on a beach with their eyes closed, facing forward rather than pressing their ears to each other's chests."
+   },
+   {
+    "t": 50.727999999999994,
+    "claim": "The four men walk single file along the ridge away from us, their hourglasses glowing like lanterns.",
+    "ref": 6,
+    "kf": "kf/shots-12-06.jpg",
+    "happened": "partly",
+    "seen": "Three men walk in single file toward the camera along a ridge at night while carrying glowing hourglasses."
+   },
+   {
+    "t": 57.63,
+    "claim": "The man in the green jersey throws a football in a high arc; the other three run laughing to catch it.",
+    "ref": 7,
+    "kf": "kf/shots-12-07.jpg",
+    "happened": "no",
+    "seen": "Four men walk side by side through tall grass at sunset holding hourglasses, with no football visible."
+   },
+   {
+    "t": 62.794000000000004,
+    "claim": "The four men walk up toward the lit porch side by side with their backs to us.",
+    "ref": 8,
+    "kf": "kf/shots-12-08.jpg",
+    "happened": "yes",
+    "seen": "Four men walk side by side with their backs to the camera up a grassy path toward a lit white house."
+   }
+  ],
+  "keys": [
+   [
+    25.509999999999998,
+    28.689999999999998,
+    "key_d"
+   ],
+   [
+    38.529999999999994,
+    43.989999999999995,
+    "key_d"
+   ],
+   [
+    46.19,
+    53.22,
+    "key_w"
+   ],
+   [
+    60.77,
+    63.61,
+    "key_w"
+   ]
+  ],
+  "keys_logged": false,
+  "note": "Keys as scheduled: held from 1 s into the shot until 1.2 s before its end.",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [
+   {
+    "a": 25.5,
+    "b": 28.7,
+    "key": "key_d",
+    "motion": 8.05
+   },
+   {
+    "a": 38.5,
+    "b": 44.0,
+    "key": "key_d",
+    "motion": 10.19
+   },
+   {
+    "a": 46.2,
+    "b": 53.2,
+    "key": "key_w",
+    "motion": 6.68
+   },
+   {
+    "a": 60.8,
+    "b": 63.6,
+    "key": "key_w",
+    "motion": 5.33
+   }
+  ],
+  "still": 9.13,
+  "dur": 65.0
+ },
+ {
+  "id": "ride-grey",
+  "title": "Magic Ride, grey-box, eight shots",
+  "seed_text": "(each shot has its own opening text; see the rows below)",
+  "seed_image": null,
+  "sent": [
+   {
+    "t": 0,
+    "text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He stands on the kerb with his back to us beside the parked motorcycle under one street lamp, and runs his hand along its tank.",
+    "by": "new session, shot 1",
+    "img": "full/seeds10/grey1.jpg"
+   },
+   {
+    "t": 13.0,
+    "text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He swings a leg over the motorcycle, the headlight comes on, and he pulls away down the street.",
+    "by": "new session, shot 2",
+    "img": "full/seeds10/grey2.jpg"
+   },
+   {
+    "t": 20.9,
+    "text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He rides the motorcycle alone through a huge empty plaza and into a tunnel. Nobody else anywhere.",
+    "by": "new session, shot 3",
+    "img": "full/seeds10/grey3.jpg"
+   },
+   {
+    "t": 36.1,
+    "text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He rides the motorcycle down a crowded avenue, one hand off the bars; Black women and men in bright teal, orange and white coats and wraps on both pavements turn their heads to watch him pass.",
+    "by": "new session, shot 4",
+    "img": "full/seeds10/grey4.jpg"
+   },
+   {
+    "t": 53.3,
+    "text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He rides the motorcycle out of the city along a raised road; ahead the moon sinks behind the skyline and the sky turns from violet to gold.",
+    "by": "new session, shot 5",
+    "img": "full/seeds10/grey5.jpg"
+   },
+   {
+    "t": 70.7,
+    "text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He rides the motorcycle up a mountain road in the first sunlight, leaning hard into a long curve; birds burst up from the roadside.",
+    "by": "new session, shot 6",
+    "img": "full/seeds10/grey6.jpg"
+   },
+   {
+    "t": 82.7,
+    "text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He rides the motorcycle along the mountain ridge in warm morning light with both arms stretched out wide.",
+    "by": "new session, shot 7",
+    "img": "full/seeds10/grey7.jpg"
+   },
+   {
+    "t": 92.9,
+    "text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He stops the motorcycle at the top of the pass and looks out over the sunlit city below.",
+    "by": "new session, shot 8",
+    "img": "full/seeds10/grey8.jpg"
+   }
+  ],
+  "asks": [
+   {
+    "t": 7.794,
+    "claim": "He stands on the kerb with his back to us beside the parked motorcycle under one street lamp, and runs his hand along its tank.",
+    "ref": 0,
+    "kf": "kf/ride-grey-00.jpg",
+    "happened": "partly",
+    "seen": "A man sits straddling a parked motorcycle under a street lamp in profile view with his hands on the handlebars."
+   },
+   {
+    "t": 7.794,
+    "claim": "Third person: the man is seen from behind with his whole body and the motorcycle visible in the lower half of the frame.",
+    "ref": 0,
+    "kf": "kf/ride-grey-01.jpg",
+    "happened": "partly",
+    "seen": "A man sits on a motorcycle in right profile view in the lower right half of the frame."
+   },
+   {
+    "t": 17.712,
+    "claim": "He swings a leg over the motorcycle, the headlight comes on, and he pulls away down the street.",
+    "ref": 1,
+    "kf": "kf/ride-grey-02.jpg",
+    "happened": "yes",
+    "seen": "A man rides a motorcycle with its headlight on down a street away from the camera."
+   },
+   {
+    "t": 17.712,
+    "claim": "Third person: the man is seen from behind with his whole body and the motorcycle visible in the lower half of the frame.",
+    "ref": 1,
+    "kf": "kf/ride-grey-03.jpg",
+    "happened": "yes",
+    "seen": "A man on a motorcycle is seen from behind in the lower center of the frame."
+   },
+   {
+    "t": 30.003999999999998,
+    "claim": "He rides the motorcycle alone through a huge empty plaza and into a tunnel. Nobody else anywhere.",
+    "ref": 2,
+    "kf": "kf/ride-grey-04.jpg",
+    "happened": "yes",
+    "seen": "A man rides a motorcycle alone into a dark tunnel entrance."
+   },
+   {
+    "t": 30.003999999999998,
+    "claim": "Third person: the man is seen from behind with his whole body and the motorcycle visible in the lower half of the frame.",
+    "ref": 2,
+    "kf": "kf/ride-grey-05.jpg",
+    "happened": "yes",
+    "seen": "A man on a motorcycle is seen from behind in the lower center of the frame entering a tunnel."
+   },
+   {
+    "t": 46.444,
+    "claim": "He rides the motorcycle down a crowded avenue, one hand off the bars; Black women and men in bright teal, orange and white coats and wraps on both pavements turn their heads to watch him pass.",
+    "ref": 3,
+    "kf": "kf/ride-grey-06.jpg",
+    "happened": "partly",
+    "seen": "A man rides a motorcycle with both hands on the handlebars down a street with three distant glowing figures on the pavements."
+   },
+   {
+    "t": 46.444,
+    "claim": "Third person: the man is seen from behind with his whole body and the motorcycle visible in the lower half of the frame.",
+    "ref": 3,
+    "kf": "kf/ride-grey-07.jpg",
+    "happened": "yes",
+    "seen": "A man on a motorcycle is seen from behind in the lower center of the frame riding down a street."
+   },
+   {
+    "t": 63.762,
+    "claim": "He rides the motorcycle out of the city along a raised road; ahead the moon sinks behind the skyline and the sky turns from violet to gold.",
+    "ref": 4,
+    "kf": "kf/ride-grey-08.jpg",
+    "happened": "partly",
+    "seen": "A man rides a motorcycle along a road by the water under a starry dusk sky with mountains and city lights in the distance."
+   },
+   {
+    "t": 63.762,
+    "claim": "Third person: the man is seen from behind with his whole body and the motorcycle visible in the lower half of the frame.",
+    "ref": 4,
+    "kf": "kf/ride-grey-09.jpg",
+    "happened": "yes",
+    "seen": "A man on a motorcycle is seen from behind in the lower center of the frame."
+   },
+   {
+    "t": 77.892,
+    "claim": "He rides the motorcycle up a mountain road in the first sunlight, leaning hard into a long curve; birds burst up from the roadside.",
+    "ref": 5,
+    "kf": "kf/ride-grey-10.jpg",
+    "happened": "partly",
+    "seen": "A man rides a motorcycle upright up a dark grassy hillside at night under a starry sky."
+   },
+   {
+    "t": 77.892,
+    "claim": "Third person: the man is seen from behind with his whole body and the motorcycle visible in the lower half of the frame.",
+    "ref": 5,
+    "kf": "kf/ride-grey-11.jpg",
+    "happened": "yes",
+    "seen": "A man on a motorcycle is seen from behind in the lower center of the frame riding up a hill."
+   },
+   {
+    "t": 88.824,
+    "claim": "He rides the motorcycle along the mountain ridge in warm morning light with both arms stretched out wide.",
+    "ref": 6,
+    "kf": "kf/ride-grey-12.jpg",
+    "happened": "partly",
+    "seen": "A man rides a motorcycle up a dark hillside under a starry night sky with his hands near the handlebars."
+   },
+   {
+    "t": 88.824,
+    "claim": "Third person: the man is seen from behind with his whole body and the motorcycle visible in the lower half of the frame.",
+    "ref": 6,
+    "kf": "kf/ride-grey-13.jpg",
+    "happened": "yes",
+    "seen": "A man on a motorcycle is seen from behind in the lower center of the frame on a dark hillside."
+   },
+   {
+    "t": 94.852,
+    "claim": "He stops the motorcycle at the top of the pass and looks out over the sunlit city below.",
+    "ref": 7,
+    "kf": "kf/ride-grey-14.jpg",
+    "happened": "partly",
+    "seen": "A man on a stopped motorcycle sits on a dark mountainside at night under a starry sky overlooking water and a few faint distant lights."
+   },
+   {
+    "t": 94.852,
+    "claim": "Third person: the man is seen from behind with his whole body and the motorcycle visible in the lower half of the frame.",
+    "ref": 7,
+    "kf": "kf/ride-grey-15.jpg",
+    "happened": "yes",
+    "seen": "A man sitting on a motorcycle is viewed from behind in the lower center of the frame against a dark mountain and starry sky."
+   }
+  ],
+  "keys": [
+   [
+    13.99,
+    19.66,
+    "key_w"
+   ],
+   [
+    21.86,
+    34.9,
+    "key_w"
+   ],
+   [
+    37.1,
+    52.14,
+    "key_w"
+   ],
+   [
+    54.34,
+    69.50999999999999,
+    "key_w"
+   ],
+   [
+    71.71,
+    81.48,
+    "key_w"
+   ],
+   [
+    83.68,
+    91.72,
+    "key_w"
+   ]
+  ],
+  "keys_logged": false,
+  "note": "Keys as scheduled: held from 1 s into the shot until 1.2 s before its end.",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [
+   {
+    "a": 14.0,
+    "b": 19.7,
+    "key": "key_w",
+    "motion": 6.69
+   },
+   {
+    "a": 21.9,
+    "b": 34.9,
+    "key": "key_w",
+    "motion": 7.66
+   },
+   {
+    "a": 37.1,
+    "b": 52.1,
+    "key": "key_w",
+    "motion": 4.78
+   },
+   {
+    "a": 54.3,
+    "b": 69.5,
+    "key": "key_w",
+    "motion": 2.23
+   },
+   {
+    "a": 71.7,
+    "b": 81.5,
+    "key": "key_w",
+    "motion": 2.91
+   },
+   {
+    "a": 83.7,
+    "b": 91.7,
+    "key": "key_w",
+    "motion": 5.07
+   }
+  ],
+  "still": 7.29,
+  "dur": 96.2
+ },
+ {
+  "id": "ride-cel",
+  "title": "Magic Ride, cel-shaded, four shots",
+  "seed_text": "(each shot has its own opening text; see the rows below)",
+  "seed_image": null,
+  "sent": [
+   {
+    "t": 0,
+    "text": "STYLE: a flat cel-shaded cartoon. Large flat colour shapes with dark outlines, no texture, no photographic detail. Keep this exact look. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He stands on the kerb with his back to us beside the parked motorcycle under one street lamp, and runs his hand along its tank.",
+    "by": "new session, shot 1",
+    "img": "full/seeds10/cel1.jpg"
+   },
+   {
+    "t": 13.0,
+    "text": "STYLE: a flat cel-shaded cartoon. Large flat colour shapes with dark outlines, no texture, no photographic detail. Keep this exact look. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He swings a leg over the motorcycle, the headlight comes on, and he pulls away down the street.",
+    "by": "new session, shot 2",
+    "img": "full/seeds10/cel2.jpg"
+   },
+   {
+    "t": 20.9,
+    "text": "STYLE: a flat cel-shaded cartoon. Large flat colour shapes with dark outlines, no texture, no photographic detail. Keep this exact look. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He rides the motorcycle alone through a huge empty plaza and into a tunnel. Nobody else anywhere.",
+    "by": "new session, shot 3",
+    "img": "full/seeds10/cel3.jpg"
+   },
+   {
+    "t": 36.1,
+    "text": "STYLE: a flat cel-shaded cartoon. Large flat colour shapes with dark outlines, no texture, no photographic detail. Keep this exact look. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: He rides the motorcycle down a crowded avenue, one hand off the bars; Black women and men in bright teal, orange and white coats and wraps on both pavements turn their heads to watch him pass.",
+    "by": "new session, shot 4",
+    "img": "full/seeds10/cel4.jpg"
+   }
+  ],
+  "asks": [
+   {
+    "t": 7.794,
+    "claim": "He stands on the kerb with his back to us beside the parked motorcycle under one street lamp, and runs his hand along its tank.",
+    "ref": 0,
+    "kf": "kf/ride-cel-00.jpg",
+    "happened": "partly",
+    "seen": "A man stands on the road beside a parked motorcycle under a street lamp with his hand touching the fuel tank."
+   },
+   {
+    "t": 7.794,
+    "claim": "Third person: the man is seen from behind with his whole body and the motorcycle visible in the lower half of the frame.",
+    "ref": 0,
+    "kf": "kf/ride-cel-01.jpg",
+    "happened": "partly",
+    "seen": "A man is seen from behind from the thighs up standing next to a motorcycle in the lower half of the frame."
+   },
+   {
+    "t": 17.712,
+    "claim": "He swings a leg over the motorcycle, the headlight comes on, and he pulls away down the street.",
+    "ref": 1,
+    "kf": "kf/ride-cel-02.jpg",
+    "happened": "partly",
+    "seen": "A man is riding a motorcycle with its headlight on down a city street toward the camera."
+   },
+   {
+    "t": 17.712,
+    "claim": "Third person: the man is seen from behind with his whole body and the motorcycle visible in the lower half of the frame.",
+    "ref": 1,
+    "kf": "kf/ride-cel-03.jpg",
+    "happened": "no",
+    "seen": "A man is seen from the front riding a motorcycle down a street in the distance."
+   },
+   {
+    "t": 30.003999999999998,
+    "claim": "He rides the motorcycle alone through a huge empty plaza and into a tunnel. Nobody else anywhere.",
+    "ref": 2,
+    "kf": "kf/ride-cel-04.jpg",
+    "happened": "partly",
+    "seen": "A man rides a motorcycle alone away from the camera across a wide empty foggy plaza, with no tunnel visible."
+   },
+   {
+    "t": 30.003999999999998,
+    "claim": "Third person: the man is seen from behind with his whole body and the motorcycle visible in the lower half of the frame.",
+    "ref": 2,
+    "kf": "kf/ride-cel-05.jpg",
+    "happened": "yes",
+    "seen": "A man is seen from behind riding a motorcycle in the lower center of the frame."
+   },
+   {
+    "t": 46.444,
+    "claim": "He rides the motorcycle down a crowded avenue, one hand off the bars; Black women and men in bright teal, orange and white coats and wraps on both pavements turn their heads to watch him pass.",
+    "ref": 3,
+    "kf": "kf/ride-cel-06.jpg",
+    "happened": "partly",
+    "seen": "A man rides a motorcycle with both hands on the handlebars down a lantern-lit street lined with light-skinned pedestrians in teal, orange, and white clothes."
+   },
+   {
+    "t": 46.444,
+    "claim": "Third person: the man is seen from behind with his whole body and the motorcycle visible in the lower half of the frame.",
+    "ref": 3,
+    "kf": "kf/ride-cel-07.jpg",
+    "happened": "yes",
+    "seen": "A man is seen from behind riding a motorcycle in the lower center of the frame down a street lined with people."
+   }
+  ],
+  "keys": [
+   [
+    13.99,
+    19.66,
+    "key_w"
+   ],
+   [
+    21.86,
+    34.9,
+    "key_w"
+   ],
+   [
+    37.1,
+    52.14,
+    "key_w"
+   ]
+  ],
+  "keys_logged": false,
+  "note": "Keys as scheduled: held from 1 s into the shot until 1.2 s before its end.",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [
+   {
+    "a": 14.0,
+    "b": 19.7,
+    "key": "key_w",
+    "motion": 11.18
+   },
+   {
+    "a": 21.9,
+    "b": 34.9,
+    "key": "key_w",
+    "motion": 5.01
+   },
+   {
+    "a": 37.1,
+    "b": 52.1,
+    "key": "key_w",
+    "motion": 11.2
+   }
+  ],
+  "still": 12.7,
+  "dur": 53.4
+ },
+ {
+  "id": "ride-greyfig",
+  "title": "Magic Ride, grey-box with rider in the seed, two shots",
+  "seed_text": "(each shot has its own opening text; see the rows below)",
+  "seed_image": null,
+  "sent": [
+   {
+    "t": 0,
+    "text": "STYLE: a grey-box video game world. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground. Keep this exact flat blocky look; add no texture or realism. The rider in the starting picture is him: keep him exactly where he is in the frame, seen from behind. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: Night. He sits on the parked motorcycle under one street lamp with his back to us and runs his hand along its tank.",
+    "by": "new session, shot 1",
+    "img": "full/seeds10/greyfig1.jpg"
+   },
+   {
+    "t": 13.0,
+    "text": "STYLE: a grey-box video game world. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground. Keep this exact flat blocky look; add no texture or realism. The rider in the starting picture is him: keep him exactly where he is in the frame, seen from behind. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: The sky is turning from violet to gold; the moon is setting. He rides the motorcycle out of the city along a raised road; ahead the moon sinks behind the skyline and the sky turns from violet to gold.",
+    "by": "new session, shot 5",
+    "img": "full/seeds10/greyfig5.jpg"
+   }
+  ],
+  "asks": [
+   {
+    "t": 7.794,
+    "claim": "Night. He sits on the parked motorcycle under one street lamp with his back to us and runs his hand along its tank.",
+    "ref": 0,
+    "kf": "kf/ride-greyfig-00.jpg",
+    "happened": "partly",
+    "seen": "A man sits on a parked motorcycle at night with his back to us, his hands on the handlebars and the headlight shining ahead, with no street lamp visible."
+   },
+   {
+    "t": 7.794,
+    "claim": "Third person: the man is seen from behind with his whole body and the motorcycle visible in the lower half of the frame.",
+    "ref": 0,
+    "kf": "kf/ride-greyfig-01.jpg",
+    "happened": "yes",
+    "seen": "A man on a motorcycle is seen from behind in the lower half of the frame against a city backdrop at night."
+   },
+   {
+    "t": 23.412,
+    "claim": "The sky is turning from violet to gold; the moon is setting. He rides the motorcycle out of the city along a raised road; ahead the moon sinks behind the skyline and the sky turns from violet to gold.",
+    "ref": 1,
+    "kf": "kf/ride-greyfig-02.jpg",
+    "happened": "partly",
+    "seen": "A man sits on a motorcycle overlooking water, a distant city, and mountains under a starry dawn-tinted sky, without a setting moon or raised road."
+   },
+   {
+    "t": 23.412,
+    "claim": "Third person: the man is seen from behind with his whole body and the motorcycle visible in the lower half of the frame.",
+    "ref": 1,
+    "kf": "kf/ride-greyfig-03.jpg",
+    "happened": "partly",
+    "seen": "A man on a motorcycle is seen from behind in the lower half of the frame, cropped at the mid-legs and upper rear of the bike."
+   }
+  ],
+  "keys": [
+   [
+    13.99,
+    29.16,
+    "key_w"
+   ]
+  ],
+  "keys_logged": false,
+  "note": "Keys as scheduled: held from 1 s into the shot until 1.2 s before its end.",
+  "prior": null,
+  "judge": "gemini-4-argon",
+  "key_rows": [
+   {
+    "a": 14.0,
+    "b": 29.2,
+    "key": "key_w",
+    "motion": 0.91
+   }
+  ],
+  "still": 2.8,
+  "dur": 30.4
+ }
+]
