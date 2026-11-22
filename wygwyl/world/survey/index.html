@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Survey · WYGWYL</title>
+<link rel="icon" href="../../dot.svg">
+<meta property="og:title" content="The Survey — everything built so far, sorted and judged">
+<meta property="og:description" content="Every WYGWYL world tool in one place: what it is, what it is good for, what is wrong with it, and what gets built next.">
+<style>
+:root{--ink:#f3ead2;--dim:#a99f86;--gold:#ffd23f;--pink:#ff3d6e;--cyan:#7fe0ff;--green:#9fe08a;--violet:#c58cff;--panel:#121820;--edge:rgba(243,234,210,.16);--bg:#090c11}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 "Iowan Old Style",Palatino,Georgia,serif}
+a{color:inherit}
+.sans,.k,.st,nav a,.f button,.card .u,.why b{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+main{max-width:1240px;margin:0 auto;padding:18px 16px 80px}
+.k{font-weight:700;font-size:11px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+h1{font-size:clamp(26px,5vw,40px);font-weight:400;line-height:1.1;margin:6px 0 8px}
+.note{color:var(--dim);max-width:820px}
+nav{position:sticky;top:0;z-index:5;background:rgba(9,12,17,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--edge);margin:14px -16px 0;padding:8px 16px}
+nav .row{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;align-items:center}
+nav .row+.row{margin-top:6px}
+nav a,.f button{flex:0 0 auto;border:1px solid var(--edge);background:var(--panel);color:var(--ink);padding:6px 11px;min-height:32px;font-weight:600;font-size:12px;border-radius:16px;white-space:nowrap;text-decoration:none;cursor:pointer}
+.f button.on{border-color:var(--gold);color:var(--gold);background:rgba(255,210,63,.08)}
+nav .lab{flex:0 0 auto;font:700 10px "Helvetica Neue",Arial,sans-serif;letter-spacing:.14em;color:var(--dim);text-transform:uppercase;min-width:44px}
+section{padding-top:34px;scroll-margin-top:90px}
+section>h2{font-size:24px;font-weight:400;margin:3px 0 4px}
+section>p{color:var(--dim);max-width:820px;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--edge);border-top:3px solid var(--c,var(--edge));display:flex;flex-direction:column;text-decoration:none}
+.card:hover{border-color:var(--c,var(--gold))}
+.card .im{aspect-ratio:16/10;background:#05070a center/cover no-repeat;border-bottom:1px solid var(--edge);display:grid;place-items:center;color:var(--dim);font:italic 13px Georgia,serif}
+.card .b{padding:10px 12px 12px;display:flex;flex-direction:column;gap:5px;flex:1}
+.card h3{font-size:17px;font-weight:400;line-height:1.2}
+.st{align-self:flex-start;font-weight:800;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--c);border:1px solid var(--c);border-radius:10px;padding:1px 8px}
+.card p{font-size:13.5px}
+.card p.fix{color:#f2b38c}
+.card p.fix::before{content:"needs — ";font:700 10px "Helvetica Neue",Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.card .u{font-size:10.5px;color:var(--dim);margin-top:auto;padding-top:4px;word-break:break-all}
+.s-floor{--c:var(--gold)}.s-keep{--c:var(--green)}.s-dev{--c:var(--cyan)}.s-remake{--c:var(--pink)}.s-ref{--c:var(--violet)}
+.hide{display:none}
+.next{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px;counter-reset:n}
+.why{background:var(--panel);border:1px solid var(--edge);border-left:3px solid var(--gold);padding:12px 14px;counter-increment:n}
+.why h3{font-size:18px;font-weight:400;margin-bottom:4px}
+.why h3::before{content:counter(n) " · ";color:var(--gold)}
+.why p{font-size:13.5px;margin-top:5px}
+.why b{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-right:4px}
+.why a{color:var(--cyan)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font:12px "Helvetica Neue",Arial,sans-serif;color:var(--dim)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-right:5px}
+</style>
+</head>
+<body>
+<main>
+<div class="k"><a href="../index.html">Where You Go When You Leave</a> · <a href="../foundry/index.html">The Foundry</a> · <a href="../archive/index.html">The Archive</a> · The Survey · <a href="genie.html">Through the Door (cartoon)</a> · <a href="../tide/index.html">The Tideline</a></div>
+<h1>The Survey — everything built so far, sorted and judged</h1>
+<p class="note">Thirty-two tools across four repositories, grouped by what they are for. Each card carries the verdict from the walk-through: what it is good for and what it still needs. The last section turns those verdicts into the next passes.</p>
+<div class="legend">
+<span class="s-floor"><i></i>quality floor — nothing lower than this</span>
+<span class="s-keep"><i></i>keep — works, use as is</span>
+<span class="s-dev"><i></i>develop — promising, push further</span>
+<span class="s-remake"><i></i>remake — idea right, execution off</span>
+<span class="s-ref"><i></i>reference — material to build from</span>
+</div>
+<nav>
+<div class="row" id="jump"><span class="lab">Go to</span></div>
+<div class="row f" id="filt"><span class="lab">Show</span></div>
+</nav>
+<div id="out"></div>
+
+<section id="next">
+<div class="k">What the verdicts add up to</div>
+<h2>Next passes</h2>
+<p>Nine pieces of work, each traced to the tools it starts from.</p>
+<div class="next">
+<div class="why"><h3>Evolve the interiors</h3>
+<p>Every foundry shot assumes the character is outside a building. The city was evolved; the rooms never were. Run the same evolutionary pass per building: genome = room programme, light source, threshold, furniture, who is there; fitness = the poem's lines and the archive's interior frames.</p>
+<p><b>From</b><a href="../foundry/shots.html">Shots</a>, <a href="../heroes/index.html">Hero buildings</a>, <a href="../archive/index.html">Archive</a></p></div>
+<div class="why"><h3>Inverse tomography</h3>
+<p>Inverse topology reads the land back from the shots. Turn it inward: from the shots that look into or out of a structure (windows, doorways, light spill), reconstruct the section of the building — what must be inside for that frame to exist. The output is a needs-list per interior.</p>
+<p><b>From</b><a href="../foundry/inverse.html">Inverse topology</a>, <a href="https://hartswf0.github.io/wygwyl-world-arch/shots/pointcloud.html">Point clouds</a></p></div>
+<div class="why"><h3>Dress the sets</h3>
+<p>The landscape per shot is bare: no people, cars, neighbouring buildings, interiors, aura or lights. Add a dressing layer to every set, and mock scenes up faster by compositing cutouts over the clips we already have instead of regenerating.</p>
+<p><b>From</b><a href="../foundry/sets.html">Sets</a>, <a href="../../index.html">Fourteen halfworlds</a> (cutout source), <a href="https://hartswf0.github.io/wygwyl-world-arch/shots/weave.html">The Weave</a> (registration)</p></div>
+<div class="why"><h3>One believable city, built from the foundry</h3>
+<p>Five 3D cities, none convincing: oversized buildings, heavy shaders, grain, bad ground. Stop patching them separately. Take the Island as the base, generate its fabric from the foundry and inverse work, and port the best feature of each other map into it — movie-map routes, imageable-city structure, mood lighting.</p>
+<p><b>From</b><a href="../island/index.html">Island</a>, <a href="../moviemap/index.html">Movie map</a>, <a href="../iconic/index.html">Imageable city</a>, <a href="../city3d/index.html">City across time</a></p></div>
+<div class="why"><h3>Inspect every building</h3>
+<p>Hero buildings have lights and shaders that are sometimes off, and no aura. Give each building an inspection sheet — scale, material, light, aura, matching archive references, interior status — and fail the ones that don't pass before they enter the city.</p>
+<p><b>From</b><a href="../heroes/index.html">Hero buildings</a>, <a href="../language/index.html">Design language</a></p></div>
+<div class="why"><h3>Sound, time, swappability</h3>
+<p>The world is silent, has no clock, and is hard to re-skin. Give each district a sound bed and a day cycle driven by one shared clock, with sound and look loaded from data so a world can be swapped. Source ambiences from Freesound (API, Creative Commons — keep the attribution list). Start from the duets; avoid the deep echoed voice and the busyness of the radio and poem worlds.</p>
+<p><b>From</b><a href="../../codex.html#duets">Duets</a>, <a href="../../observatory.html">Observatory</a>, <a href="https://freesound.org/">Freesound</a></p></div>
+<div class="why"><h3>Invisible Cities as the frame</h3>
+<p>Calvino's fifty-five cities are one city, Venice, redescribed. Fourteen poems redescribing one Atlantis is the same device. The foundry is Polo reporting to the Khan; the gazetteer is the Khan's atlas; Calvino's eleven rubrics (memory, desire, signs, thin, trading, eyes, names, the dead, sky, continuous, hidden) are a ready tagging scheme for districts and shots. Inverse topology already has its Calvino city: Eusapia, which keeps an underground copy of itself, and Valdrada, built on its reflection.</p>
+<p><b>From</b><a href="../foundry/index.html">Foundry</a>, <a href="../gazetteer/index.html">Gazetteer</a>, <a href="../districts/index.html">Scene book</a></p></div>
+<div class="why"><h3>Verne's Atlantis</h3>
+<p>In <i>Twenty Thousand Leagues Under the Seas</i> (part two, chapter nine) Nemo walks Aronnax across the seabed at night to a drowned city lit by an erupting volcano, and writes its name on a rock. Plato gives the ring plan; Verne gives the approach: on foot, underwater, by firelight. A second reading to lay over the Nolli plan.</p>
+<p><b>From</b><a href="../../city/index.html">Nolli plan</a></p></div>
+<div class="why"><h3>Animate the plan into the screening room</h3>
+<p>Fly through the Nolli plan in its own drawn style and arrive in the Oulipo screening room — the map becomes the title sequence, each ring a rule.</p>
+<p><b>From</b><a href="../../city/index.html">Nolli plan</a>, <a href="https://hartswf0.github.io/bolas/paeleo/scion/oulipo/screening/">Oulipo screening</a></p></div>
+</div>
+</section>
+</main>
+<script>
+const BH='../../',W='../',ARCH='https://hartswf0.github.io/wygwyl-world-arch/',BOL='https://hartswf0.github.io/bolas/',MP='https://hartswf0.github.io/make-photo/';
+const ST={floor:'quality floor',keep:'keep',dev:'develop',remake:'remake',ref:'reference'};
+// [thumb, title, url, status, verdict, needs]
+const S=[
+['foundry','The Foundry','Shots, sets and the inverse reading: worlds assembled from the poems and the archive.',[
+ ['foundry','The Foundry',W+'foundry/index.html','dev','Good behind-the-scenes piece, and the idea is bigger than the page.','The videos are basic. Frame it with Invisible Cities.'],
+ ['shots','The Shots',W+'foundry/shots.html','keep','Really nice shots.','Every one is an exterior. Evolve the insides of buildings the way the city was evolved.'],
+ ['inverse','Inverse Topology',W+'foundry/inverse.html','dev','The shots shape the land.','Apply it to interiors — an inverse tomography of each structure.'],
+ ['sets','Worlds From Shots',W+'foundry/sets.html','remake','A landscape for every set of shots.','Not good enough per shot: no people, cars, buildings, insides, aura or lights. Mock up with cutouts over existing clips.'],
+ ['archive','The Archive',W+'archive/index.html','keep','Generally useful — every image, keyframe and video in one place.',''],
+]],
+['worldtext','Worldtext','The world bible: gazetteer, language, districts, production design.',[
+ ['gazetteer','Atlantis Gazetteer',W+'gazetteer/index.html','keep','Really valuable for blank-slate worldbuilding; world-bible grade.',''],
+ ['language','Atlantis Design Language',W+'language/index.html','floor','Top-shelf example of what top-level worldbuilding produces.',''],
+ ['districts','Atlantis Scene Book',W+'districts/index.html','keep','A really good worldtext system.',''],
+ ['arch-city','Atlantis Districts',ARCH+'_city/index.html','keep','Great world-bible material.',''],
+ ['poem01','Poem production design',ARCH+'shots/poems/01.html','ref','Very good reference for worldtext.',''],
+]],
+['city','City maps · 3D','Five attempts at the city in three dimensions, plus the hero buildings.',[
+ ['island','The Island',W+'island/index.html','dev','The best city base — enough to build an open-world driving game on.','The ground looks bad. Better tree tools. Bring in the critical features of the other worlds.'],
+ ['moviemap','Atlantis Movie Map',W+'moviemap/index.html?e=761&i=10&d=1&v=3','dev','Great promise as an idea.','City is grainy and not believable; the integration is slightly off.'],
+ ['iconic','The Imageable City',W+'iconic/','dev','Nice for design.','Advance it further.'],
+ ['','Atlantis City Across Time',W+'city3d/index.html','remake','Cool model; a candidate for development or a remake.','Oversized buildings and the whole-scene shaders make it unbelievable.'],
+ ['','Atlantis Mood City',W+'mood/index.html','remake','Interesting map.','3D modelling and shaders are not good.'],
+ ['','Elsewhere Map',W+'elsewhere/index.html?s=C0156','remake','Cool and experimental.','Very hard to use.'],
+ ['','Hero Buildings',W+'heroes/index.html?h=severn','dev','Good hero buildings.','Shaders and lights sometimes off; no aura; not tied to the references. Each building needs inspection.'],
+ ['pointcloud','Point Clouds & Splats',ARCH+'shots/pointcloud.html','dev','Super-powerful 2D to 3D.','We can do better.'],
+]],
+['2d','2D','The strongest work. Treat this quality as the starting place.',[
+ ['weave','The Weave',ARCH+'shots/weave.html','floor','Really good. This is the floor — nothing lower than this.',''],
+ ['spine','WAG-STACK · spine',ARCH+'shots/wag_stack.html#spine','floor','The best view in the workbench.',''],
+ ['worldscore','WAG-STACK · worldscore',ARCH+'shots/wag_stack.html#worldscore','keep','A great place for 2D.',''],
+ ['shotlab','Shot Lab',ARCH+'shots/index.html','keep','Great, and visually interesting.',''],
+ ['map','Cartography & Camera Map',ARCH+'shots/map.html','keep','A pretty good map.',''],
+ ['halfworlds','Fourteen Halfworlds',BH,'ref','Build with these; use as the reference for cutouts.',''],
+ ['studio','Game ↔ Video Studio',MP+'study/studio.html','keep','Good.',''],
+]],
+['atlantis','Atlantis','The city fourteen poems built — a Nolli plan generated from the readings, on Plato’s ring plan.',[
+ ['nolli','Atlantis · Nolli plan',BH+'city/index.html','keep','A good map of Atlantis.','Animate through this style toward the Oulipo screening room. Read Verne’s Atlantis against it.'],
+ ['screening','Oulipo Screening Room',BOL+'paeleo/scion/oulipo/screening/','ref','Destination for the animated plan.',''],
+ ['oulipo','Oulipo SCION',BOL+'paeleo/scion/oulipo/','ref','The rule system behind the screening room.',''],
+]],
+['sound','Finding sound','The world and its sound should make each other feel alive. Source: Freesound.',[
+ ['duets','Codex · duets',BH+'codex.html#duets','keep','The duets are nice.',''],
+ ['observatory','Voice Observatory',BH+'observatory.html','keep','Useful for analysis.',''],
+ ['poemworlds','Poem Worlds',BH+'poemworlds.html','dev','Getting there.','Too busy.'],
+ ['radio','Radio Atlantis',BH+'radio-atlantis.html','remake','','The deeper voice is bad; the echo is too chaotic.'],
+ ['','Freesound',' https://freesound.org/'.trim(),'ref','Where the world’s ambience comes from.',''],
+]],
+];
+const out=document.getElementById('out'),jump=document.getElementById('jump'),filt=document.getElementById('filt');
+const e=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+out.innerHTML=S.map(([id,name,sub,items])=>`<section id="${id}"><div class="k">${items.length} tools</div><h2>${name}</h2><p>${sub}</p><div class="grid">${
+ items.map(([t,ti,u,s,v,n])=>`<a class="card s-${s}" data-s="${s}" href="${u}"><div class="im"${t?` style="background-image:url(t/${t}.jpg)"`:''}>${t?'':u.startsWith('https://freesound')?'external':'3D · open to view'}</div><div class="b"><span class="st">${ST[s]}</span><h3>${e(ti)}</h3>${v?`<p>${e(v)}</p>`:''}${n?`<p class="fix">${e(n)}</p>`:''}<span class="u">${e(u.replace('https://hartswf0.github.io/','').replace(/^(\.\.\/)+/,''))}</span></div></a>`).join('')}</div></section>`).join('');
+jump.insertAdjacentHTML('beforeend',S.map(s=>`<a href="#${s[0]}">${s[1]}</a>`).join('')+'<a href="#next">Next passes</a>');
+filt.insertAdjacentHTML('beforeend',['all',...Object.keys(ST)].map((k,i)=>`<button data-k="${k}"${i?'':' class="on"'}>${k=='all'?'everything':ST[k]}</button>`).join(''));
+filt.onclick=ev=>{const b=ev.target.closest('button');if(!b)return;filt.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x==b));
+ document.querySelectorAll('.card').forEach(c=>c.classList.toggle('hide',b.dataset.k!='all'&&c.dataset.s!=b.dataset.k));
+ document.querySelectorAll('#out section').forEach(s=>s.classList.toggle('hide',!s.querySelector('.card:not(.hide)')))};
+</script>
+</body>
+</html>

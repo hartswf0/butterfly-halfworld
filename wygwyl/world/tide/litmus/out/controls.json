@@ -1,0 +1,40 @@
+{
+ "identity": {
+  "interaction_id": "v1_ChdieXdDYTVXRUtzV3QxTWtQcl9TVjhRNBIXYnl3Q2E1V0VLc1d0MU1rUHJfU1Y4UTQ",
+  "event_type": "interaction.created"
+ },
+ "takes": [
+  {
+   "key": "none",
+   "frames": 200,
+   "change": 23.6,
+   "shift_px": 0,
+   "video_tokens": 48000,
+   "tokens_per_frame": 240.0
+  },
+  {
+   "key": "key_w",
+   "frames": 180,
+   "change": 38.5,
+   "shift_px": 53,
+   "video_tokens": 43200,
+   "tokens_per_frame": 240.0
+  },
+  {
+   "key": "key_a",
+   "frames": 200,
+   "change": 60.2,
+   "shift_px": -54,
+   "video_tokens": 48000,
+   "tokens_per_frame": 240.0
+  },
+  {
+   "key": "arrow_left",
+   "frames": 200,
+   "change": 58.4,
+   "shift_px": -307,
+   "video_tokens": 48000,
+   "tokens_per_frame": 240.0
+  }
+ ]
+}

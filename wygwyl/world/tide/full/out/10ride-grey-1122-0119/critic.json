@@ -1,0 +1,78 @@
+{
+ "shots": [
+  {
+   "shot": 1,
+   "seen": "A man in dark clothing sits on a stationary motorcycle in profile against a backdrop of simple dark buildings with glowing yellow windows at dusk.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 2
+  },
+  {
+   "shot": 2,
+   "seen": "Seen from directly behind, a man rides a motorcycle down a street between blocky buildings toward the ocean and mountains under a dusk sky.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 2
+  },
+  {
+   "shot": 3,
+   "seen": "Seen from behind, the man rides his motorcycle into a dark, boxy concrete structure beside the water at night.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 1
+  },
+  {
+   "shot": 4,
+   "seen": "Seen from behind, the man rides down a long street lined with simple grey buildings and a few glowing human figures.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 2
+  },
+  {
+   "shot": 5,
+   "seen": "Seen from behind, the man rides his motorcycle across a flat expanse of water toward a distant city and mountain range under a starry sky.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 2
+  },
+  {
+   "shot": 6,
+   "seen": "Seen from behind, the man rides up a grassy hill away from a simple building and water under a starry dusk sky.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 1
+  },
+  {
+   "shot": 7,
+   "seen": "Seen from behind, the man rides his motorcycle along a dark, rocky hillside under a starry sky overlooking the ocean.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 2
+  },
+  {
+   "shot": 8,
+   "seen": "Seen from behind, the man sits on his motorcycle atop a dark mountain ridge looking out at the ocean and a starry night sky.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 1
+  }
+ ],
+ "overall": "The low-poly grey-box visual style is completely consistent across all shots, and the third-person video-game perspective is maintained in every shot except the first one, which uses a side profile angle. The biggest weakness is the primitive, untextured 3D geometry—such as riding directly on water or into empty concrete boxes—which fails to visually convey the rich poetic imagery of the narration.",
+ "critic_model": "gemini-4-argon"
+}

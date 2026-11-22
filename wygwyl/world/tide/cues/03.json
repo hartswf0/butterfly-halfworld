@@ -1,0 +1,30 @@
+{
+ "poem": "03",
+ "rule": "One cue per image the poem names. Each cue is sent early by the measured latency so the image arrives on its word. Each cue states why it is there. We begin at the lectern and walk in; we walk while he speaks and stand in his silences.",
+ "seed_image": "seeds/lectern.jpg",
+ "seed": "A Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve and black trousers, stands reading at a clear acrylic lectern. Behind him is a painted wall. Blue water moves in from both sides of the frame along the ground. Photographic, soft practical light, humid air. The camera is at eye level, a few steps in front of him, and will walk forward past his left shoulder toward the wall. He stays where he is and keeps reading. Nobody else is here. Sound: a quiet room, water moving slowly, room for one man's speaking voice. Rain is the water of this place: it falls slowly and thickly, and it never hides a face.",
+ "cues": [
+  {"line": 0, "word": "temple", "send": "The painted wall behind the man parts like a curtain onto an empty stone temple. We walk in past him. Nobody inside.",
+   "intent": "He says 'an empty temple'. The world must open at that word, and it must be empty: the poem's first claim is absence."},
+  {"line": 0, "word": "pools", "send": "Ahead in the empty nave: bare choir stands, and a sunken baptism pool, dry and cracked. Nobody.",
+   "intent": "He lists what is empty: choir stands, prayer lines, Baptist pools. The first take put a choir here, which contradicts the line."},
+  {"line": 1, "word": "cobwebs", "send": "Cobwebs hang thick over the wooden pews. Dust falls. The wood is soft and crumbling.",
+   "intent": "'Pews taken by cobwebs, doused in disintegration': time, not people, has taken the seats."},
+  {"line": 2, "word": "gift", "send": "A side door stands open ahead. On its stone step: opened gift boxes, lids off, ribbons loose, empty. Nobody.",
+   "intent": "'Opened gift boxes placed outside the side doors': the gifts were taken and the givers left. It also gives us a door to walk out through."},
+  {"line": 3, "word": "rains", "send": "Thunder. Heavy slow rain pours through the roof and washes the walls away until only open wet shore remains.",
+   "intent": "'It thunders, then it rains until nothing remains': the building has to go, and the rain has to be what removes it."},
+  {"line": 4, "word": "goods", "send": "The storm clears. On the wet sand, household goods laid out in rows like a yard sale: chairs, lamps, folded clothes.",
+   "intent": "'What was once love now goods': a shared home reduced to things with no one to own them."},
+  {"line": 5, "word": "lightning", "send": "A black scorched crack from lightning splits the sand, dividing the rows of goods into two halves.",
+   "intent": "'Broken and sealed apart by lightning': the split is between two people, so the goods divide in two."},
+  {"line": 6, "word": "breads", "send": "Loaves of bread lie on the sand, soaked through and falling apart in the rain.",
+   "intent": "'Daily breads soaked and delivered rotted by rain': what fed them daily has spoiled."},
+  {"line": 7, "word": "blankets", "send": "Stained blankets lie in a heap. Thin puppet strings hang down onto them from the grey sky.",
+   "intent": "'Blankets soiled by venomous puppeteers': the bed, and someone else's hands on it. Strings, no puppeteer shown."},
+  {"line": 8, "word": "footsteps", "send": "Two sets of men's footprints, side by side, lead away across the wet sand toward the water. Nobody in sight.",
+   "intent": "'Two sets of button-printed footsteps': the two men appear only as what they left. This is the couple, by absence."},
+  {"line": 9, "word": "shattered", "send": "Where the footprints end, a tambourine lies broken in pieces on the sand.",
+   "intent": "'A tambourine shattered into pieces': the sound that opened the poem ends as an object. The walk stops here."}
+ ]
+}

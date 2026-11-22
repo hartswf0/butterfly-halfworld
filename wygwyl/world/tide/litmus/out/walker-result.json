@@ -1,0 +1,85 @@
+{
+ "test": "walker",
+ "claim": "The same walk-in works with the Poet in frame, seen from behind, entering ahead of us and staying the same man.",
+ "runs": [
+  {
+   "take": 1,
+   "frames": 360,
+   "seconds": 18.5,
+   "fps": 19.4,
+   "judge": "gemini-3.8-flash",
+   "checks": [
+    {
+     "t": 1.5,
+     "q": "man_from_behind",
+     "want": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "t": 7.0,
+     "q": "man_from_behind",
+     "want": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "t": 16.0,
+     "q": "inside",
+     "want": true,
+     "got": false,
+     "ok": false
+    },
+    {
+     "t": 16.0,
+     "q": "man_from_behind",
+     "want": true,
+     "got": true,
+     "ok": true
+    }
+   ],
+   "strip": "walker-233936-1.jpg",
+   "passed": false
+  },
+  {
+   "take": 2,
+   "frames": 440,
+   "seconds": 18.3,
+   "fps": 24.0,
+   "judge": "gemini-3.8-flash",
+   "checks": [
+    {
+     "t": 1.5,
+     "q": "man_from_behind",
+     "want": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "t": 7.0,
+     "q": "man_from_behind",
+     "want": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "t": 16.0,
+     "q": "inside",
+     "want": true,
+     "got": false,
+     "ok": false
+    },
+    {
+     "t": 16.0,
+     "q": "man_from_behind",
+     "want": true,
+     "got": true,
+     "ok": true
+    }
+   ],
+   "strip": "walker-234005-2.jpg",
+   "passed": false
+  }
+ ],
+ "pass_rate": "0/2"
+}

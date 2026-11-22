@@ -1,0 +1,31 @@
+{
+ "poem": "12",
+ "title": "Reunion",
+ "model": "genie-4",
+ "seed_image": null,
+ "seed_image_sha256": null,
+ "seed_why": "None on purpose. Every earlier take was dominated by its starting picture; this one removes it to see what the text is worth.",
+ "seed_text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with light. Everyone here is Black. PLACE. Evening inside a rebuilt temple hall of white ceramic, its cracks mended with seams of soft light. Timber rafters overhead, a hand-painted WELCOME HOME banner hung between them. Tall doors stand open at the far end onto a meadow at sunset, a line of trees, and a small house with its porch light on. Long tables, mismatched chairs, picnic lights on strings.\n\nPEOPLE. Four Black men in their fifties, old friends, stand close together in the middle of the hall. One wears a matte black mock-neck long sleeve and black trousers and has close-cropped greying hair and a short beard: he is the poet. One wears a rust-orange corduroy jacket over a white tee and has a shaved head. One wears a sky-blue linen shirt with rolled sleeves and has grey locs tied back. One wears a green football jersey and a flat cap. Each holds a small glass hourglass in which the sand glows like embers. Behind them, faint as breath on glass, stand three Black elders, two women and a man in their eighties, in white linen and wide hats; they are not solid and nobody looks at them directly. Along the back wall is a row of empty chairs.\n\nWHAT THEY DO. They laugh loudly and often. They pull each other into hugs for no reason, slap shoulders, lean foreheads together. One presses his ear to another's chest to listen, and they pass that gesture down the line. Each time they laugh, a warm light pulses once in all four chests together, and the seams of light in the walls pulse with it. Nobody is ever alone in frame for long.\n\nHOW THE ROOM CHANGES. Slowly through the whole scene the daylight in the doorway deepens from gold to rose to blue dusk. The embers in the hourglasses brighten as the room dims. Near the end the four men turn the hourglasses over together, walk out through the tall doors side by side into the meadow, where a football arcs across the last light, and go up toward the lit porch with their backs to us.\n\nCAMERA. One unbroken handheld shot at chest height, inside the circle of friends, close enough to see hands and faces. It drifts gently from face to face, favouring hands on shoulders, wrists, the ear on the chest. It tilts up once to the rafters and the empty chairs and comes back. It never rushes forward and never leaves the men; at the end it follows them out through the doors from behind.\n\nLIGHT. Warm tungsten picnic bulbs against cool dusk from the doors. Deep brown skin lit with full tonal range, a warm key and a blue rim. Soft halation on the bulbs, gentle film grain.\n\nSOUND. Overlapping laughter, glasses set down, chairs scraping, crickets beginning outside. Leave room under it for one man's speaking voice.\n\nFEELING. Nostalgia, joy, comfort, belonging, gratitude: decades later, less time for words and more space for laughter.",
+ "events_sent": [],
+ "frames": 1608,
+ "seconds": 67.2,
+ "delivered_fps": 23.93,
+ "usage": {
+  "total_tokens": 386558,
+  "total_input_tokens": 638,
+  "input_tokens_by_modality": [
+   {
+    "modality": "text",
+    "tokens": 638
+   }
+  ],
+  "total_output_tokens": 385920,
+  "output_tokens_by_modality": [
+   {
+    "modality": "video",
+    "tokens": 385920
+   }
+  ]
+ },
+ "reading": "audio/12_Reunion_mixdown_RY_250626.mp3"
+}

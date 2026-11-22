@@ -1,0 +1,19 @@
+{
+ "note": "A litmus test is one seed frame, one short seed text, one fixed script of keys and cues, and yes/no checks at fixed times. It is run several times unchanged; the pass rate is the result.",
+ "tests": {
+  "door": {
+   "claim": "From an exterior frame with a doorway, walking forward plus one cue takes us through the door into an interior.",
+   "frame": "../../../../wygwyl-world-arch/shots/out/{id8}/image.jpg", "view": 8, "seconds": 18,
+   "seed": "A wet stone plaza at dusk in an Afrofuturist harbour city. Ahead stands a tall terracotta temple with a great arched doorway, open and dark inside. The camera is at eye level on the plaza, facing the doorway. Photographic, practical light. Nobody in the foreground.",
+   "script": [{"t": 0.5, "key": "down"}, {"t": 6.0, "say": "We walk through the great arched doorway into the temple hall: stone columns, candlelight, a long empty nave."}, {"t": 14.0, "key": "up"}],
+   "checks": [{"t": 1.5, "q": "outside", "want": true}, {"t": 7.0, "q": "doorway_closer", "want": true}, {"t": 16.0, "q": "inside", "want": true}]
+  },
+  "walker": {
+   "claim": "The same walk-in works with the Poet in frame, seen from behind, entering ahead of us and staying the same man.",
+   "frame": "../../../../wygwyl-world-arch/shots/out/{id8}/image.jpg", "view": 8, "seconds": 18,
+   "seed": "A wet stone plaza at dusk in an Afrofuturist harbour city. Ahead stands a tall terracotta temple with a great arched doorway, open and dark inside. A Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, stands a few steps ahead of the camera with his back to us, facing the doorway. The camera is at eye level behind him and follows him. Photographic, practical light. Nobody else nearby.",
+   "script": [{"t": 0.5, "key": "down"}, {"t": 6.0, "say": "The Black man in the black mock-neck walks ahead of us through the great arched doorway into the temple hall: stone columns, candlelight. We follow behind him."}, {"t": 14.0, "key": "up"}],
+   "checks": [{"t": 1.5, "q": "man_from_behind", "want": true}, {"t": 7.0, "q": "man_from_behind", "want": true}, {"t": 16.0, "q": "inside", "want": true}, {"t": 16.0, "q": "man_from_behind", "want": true}]
+  }
+ }
+}

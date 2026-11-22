@@ -1,0 +1,28 @@
+{
+ "poem": "10",
+ "style": "greyfig",
+ "shots": [
+  {
+   "shot": 1,
+   "seed_image": "full/seeds10/greyfig1.jpg",
+   "line": "I wasn't looking for a ride, but here you are, blissful and oddly sensitive, withering a soul purveying both the dark and the light worlds I've known.",
+   "t0": 0.0,
+   "seconds": 12.99,
+   "seed_text": "STYLE: a grey-box video game world. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground. Keep this exact flat blocky look; add no texture or realism. The rider in the starting picture is him: keep him exactly where he is in the frame, seen from behind. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: Night. He sits on the parked motorcycle under one street lamp with his back to us and runs his hand along its tank.",
+   "key": null,
+   "frames": 328,
+   "delivered_fps": 24.0
+  },
+  {
+   "shot": 5,
+   "seed_image": "full/seeds10/greyfig5.jpg",
+   "line": "The moon settles and the tease of distant stars subsides and I can see a morning ahead for me. It looks like a morning I could believe in, a morning where loss and life aren't so well, ripe with sunlight that's deceptively warm.",
+   "t0": 53.34,
+   "seconds": 17.37,
+   "seed_text": "STYLE: a grey-box video game world. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground. Keep this exact flat blocky look; add no texture or realism. The rider in the starting picture is him: keep him exactly where he is in the frame, seen from behind. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body and the whole motorcycle visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots, no helmet. HIS MOTORCYCLE: a low black motorcycle with one round white headlight and one red tail light. ACTION: The sky is turning from violet to gold; the moon is setting. He rides the motorcycle out of the city along a raised road; ahead the moon sinks behind the skyline and the sky turns from violet to gold.",
+   "key": "key_w",
+   "frames": 432,
+   "delivered_fps": 24.0
+  }
+ ]
+}

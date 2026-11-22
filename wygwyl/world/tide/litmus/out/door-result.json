@@ -1,0 +1,71 @@
+{
+ "test": "door",
+ "claim": "From an exterior frame with a doorway, walking forward plus one cue takes us through the door into an interior.",
+ "runs": [
+  {
+   "take": 1,
+   "frames": 440,
+   "seconds": 18.4,
+   "fps": 24.0,
+   "judge": "gemini-3.8-flash",
+   "checks": [
+    {
+     "t": 1.5,
+     "q": "outside",
+     "want": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "t": 7.0,
+     "q": "doorway_closer",
+     "want": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "t": 16.0,
+     "q": "inside",
+     "want": true,
+     "got": false,
+     "ok": false
+    }
+   ],
+   "strip": "door-233815-1.jpg",
+   "passed": false
+  },
+  {
+   "take": 2,
+   "frames": 440,
+   "seconds": 18.3,
+   "fps": 24.0,
+   "judge": "gemini-3.8-flash",
+   "checks": [
+    {
+     "t": 1.5,
+     "q": "outside",
+     "want": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "t": 7.0,
+     "q": "doorway_closer",
+     "want": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "t": 16.0,
+     "q": "inside",
+     "want": true,
+     "got": true,
+     "ok": true
+    }
+   ],
+   "strip": "door-233846-2.jpg",
+   "passed": true
+  }
+ ],
+ "pass_rate": "1/2"
+}
