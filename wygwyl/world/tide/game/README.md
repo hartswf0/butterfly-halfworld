@@ -29,3 +29,37 @@ hand.
 
 **Differs from the take:** a straight road instead of the take's changing ground; the rider is blocky; the crowd is
 coloured boxes; the moon and sun are only sky colour.
+
+## Naraka Market (`naraka.html`)
+
+Poem 01, Out of Life, on foot. He walks down through the container stalls of Naraka Market: containers stacked two to
+five high in rusted teal, turquoise and rust, corrugated awnings, lit stall openings, neon, string lights across the
+street, AC units, light rain on wet asphalt, teal haze. A man in an orange coat walks ahead with his back turned and
+can never be reached. Six zones on his lines: the Container Rows, the crush under the string lights, the stair alley
+two people wide, the underpass shadow-pool (roofed, standing water, children in it), vapour outside the teahouse, the
+Severn with its fire escapes. The crowd turns to look as he passes. His words hang at three heights across the alley.
+Ends in black on "out of life". Same lidar mode (L). Checked the same way: full 88 s, zero console errors, all zones.
+
+## The Light Gates (`gates.html`)
+
+Poem 06, Resurrecting Atlantis, on foot. He walks with the ancestors across a night field to two marble pillars and
+closed winged gates; the closed gate stops him. After a 5.5-second walk in, his reading starts, and every image is
+pinned to the word that causes it:
+"open" the wings swing open · "hymns" bright blue water made of the poem's own letters spreads over the lake ·
+"yellow" a road of yellow bricks rises out of the water ahead of him · "comets" comets fall and throw up the first
+towers · "resurrecting" the water drains and the white ceramic city, mended with seams of light, rises out of it with
+waterfalls · "nature" vines climb · "safe" windows wake in blue and pink and the city's people come out ·
+"currency" the windows pulse together · "candlelight" candles · "narrow" the towers lean in · "rainbows" the sky ·
+"continuums" a ring of light widens from his feet · "welcoming" he turns to face us and opens his arms.
+Same controls and lidar mode. Checked: full 100 s headless, zero console errors, a frame at each key word.
+
+## Reunion (`reunion.html`)
+
+Poem 12, on foot, with the other three: four Black men in their fifties, he in matte black at the front; the others in
+a rust corduroy jacket over a white tee, a sky-blue linen shirt with grey locs, and a green football jersey with a flat
+cap, each carrying a glowing hourglass. Nine places, one per spoken line, taken from the nine shots of the Reunion take:
+the hall under WELCOME HOME, the hall laughing, the room of empty chairs, the forest edge, the meadow (the camera swings
+round for the group photograph), the dunes (each listens at the next one's chest), the ridge at night above the city
+lights, the meadow at sunset (a football arcs between them), and home with the porch light on. On each new line a wave
+of blue water printed with his words comes toward them, and when it passes they are somewhere else. Checked: full 65 s
+headless, zero console errors, a frame in each place.

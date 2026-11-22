@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Naraka Market · WYGWYL</title>
+<link rel="icon" href="data:,">
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#0b1114;color:#eef4f4;font:15px/1.4 ui-monospace,"SF Mono",Menlo,Consolas,monospace;-webkit-user-select:none;user-select:none;touch-action:none}
+canvas{display:block;width:100vw;height:100vh}
+#veil{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 55%,transparent 50%,rgba(0,0,0,.6));mix-blend-mode:multiply}
+#grain{position:fixed;inset:-50%;pointer-events:none;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:g .5s steps(3) infinite}
+@keyframes g{to{transform:translate(4%,-3%)}}
+#fade{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity 2.5s}
+#line{position:fixed;left:0;right:0;bottom:calc(18px + env(safe-area-inset-bottom));text-align:center;padding:0 18px;font:italic 18px/1.35 "Iowan Old Style",Palatino,Georgia,serif;text-shadow:0 1px 6px #000;pointer-events:none}
+#line span{opacity:.35}#line span.on{opacity:1}#line span.got{color:#7fe6ff;opacity:1}
+#top{position:fixed;left:14px;right:14px;top:calc(12px + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#a9c4c8;pointer-events:none;z-index:2}
+#top button{pointer-events:auto;font:11px ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:#eef4f4;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.3);min-height:38px;padding:0 12px}
+#title{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;background:rgba(8,14,16,.74);padding:24px;z-index:3}
+#title h1{font:400 clamp(34px,9vw,64px)/1 ui-monospace,Menlo,monospace;letter-spacing:-.03em;margin:0}
+#title p{margin:0;color:#a9c4c8;max-width:520px}#title a{color:#7fe6ff}
+#title button{font:14px ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;background:#eef4f4;color:#0b1114;border:0;min-height:48px;padding:0 26px;margin-top:8px}
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+</head>
+<body>
+<div id="veil"></div><div id="grain"></div><div id="fade"></div>
+<div id="top"><span id="hyd">0 words</span><button id="mode" aria-label="Switch between market and lidar view">lidar</button></div>
+<div id="line"></div>
+<div id="title"><h1>Naraka Market</h1>
+<p>Out of Life. He walks down through the container stalls looking for a way out, after a man in an orange coat who never turns round. Walk through his words to turn them into water.</p>
+<p>Steer ← → or A D · hold ↑ / W to hurry · L lidar<br>On a phone: touch and drag left or right.</p>
+<button id="go">Walk</button><p><a href="index.html">Magic Ride</a> · <a href="gates.html">The Light Gates</a> · <a href="reunion.html">Reunion</a></p></div>
+<script type="module">
+import * as THREE from 'three';
+const Q = new URLSearchParams(location.search);
+let seed = +(Q.get('seed') || 11); const rand = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+const P = await (await fetch('naraka.json')).json();
+const WORDS = P.lines.flatMap((l, li) => l.words.map(([w, t]) => ({ w, t, li })));
+// Naraka Market, from the district notes: containers two to four high, rusted teal and turquoise steel, painted plywood,
+// wet asphalt as a mirror, string lights and cable webs across the street, light rain, teal haze, kept at twilight by its own light.
+const ZONES = [ // street half-width, stack height, crowd, roof (underpass), fog colour, haze density, vapour
+ { half: 4.2, stack: [2, 4], crowd: 10, roof: 0, fog: 0x1d3a42, far: 120, vapour: 0 },    // the Container Rows
+ { half: 4.0, stack: [2, 4], crowd: 22, roof: 0, fog: 0x2a3a46, far: 95, vapour: 0 },     // string lights and the crush
+ { half: 2.4, stack: [3, 5], crowd: 4, roof: 0, fog: 0x162c33, far: 80, vapour: 0 },      // the stair alley, two people wide
+ { half: 4.6, stack: [1, 2], crowd: 6, roof: 1, fog: 0x0e2a33, far: 70, vapour: 0 },      // the underpass shadow-pool
+ { half: 4.0, stack: [2, 3], crowd: 12, roof: 0, fog: 0x8aa3a6, far: 55, vapour: 1 },     // vapour outside the teahouse
+ { half: 4.2, stack: [3, 5], crowd: 6, roof: 0, fog: 0x3b2c3a, far: 110, vapour: 0 }];    // the Severn, the fire escape
+const zoneAt = t => { let z = 0; P.zones.forEach((q, i) => { if (P.lines[q.line].t0 - .6 <= t) z = i }); return z };
+const STEEL = [[.18, .48, .5], [.13, .38, .42], [.24, .55, .55], [.55, .27, .17], [.42, .23, .17], [.33, .31, .29], [.62, .52, .32], [.18, .3, .36]];
+const NEON = [[1, .3, .62], [.25, .9, 1], [1, .55, .2], [.55, .95, .6], [.9, .9, 1]];
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75)); renderer.setSize(innerWidth, innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.15; document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 500);
+addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix() });
+const U = { uFog: { value: new THREE.Color(0x1d3a42) }, uFar: { value: 120 }, uLidar: { value: 0 }, uTime: { value: 0 }, uCam: { value: new THREE.Vector3() }, uHyd: { value: 0 }, uWet: { value: 1 } };
+const LIB = `uniform vec3 uFog; uniform float uLidar,uTime,uFar,uHyd,uWet; uniform vec3 uCam;
+vec3 ramp(float h){ h=clamp(h,0.,1.); vec3 a=vec3(.12,.25,1.),b=vec3(.1,.85,.95),c=vec3(.2,1.,.35),d=vec3(1.,.85,.1),e=vec3(1.,.25,.1);
+  return h<.25?mix(a,b,h*4.):h<.5?mix(b,c,(h-.25)*4.):h<.75?mix(c,d,(h-.5)*4.):mix(d,e,(h-.75)*4.); }
+float hh(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}
+vec3 finish(vec3 col, vec3 wp){ float d=distance(wp,uCam); float f=smoothstep(uFar*.08,uFar,d); vec3 grey=mix(col,uFog,f);
+  float scan=step(.55,fract(wp.y*3.))*step(.35,fract(d*1.2-uTime*3.)); vec3 lid=ramp(wp.y/14.)*(.25+.95*scan)*(1.-smoothstep(uFar*.4,uFar,d)*.85);
+  return mix(grey,lid,uLidar); }`;
+const VS = `varying vec3 vW; varying vec3 vN; varying vec3 vC; varying vec3 vL;
+void main(){ vec4 p=vec4(position,1.); vec3 n=normal; vC=vec3(1.); vL=position;
+ #ifdef USE_INSTANCING
+  p=instanceMatrix*p; n=mat3(instanceMatrix)*n;
+ #endif
+ #ifdef USE_INSTANCING_COLOR
+  vC=instanceColor;
+ #endif
+ vec4 w=modelMatrix*p; vW=w.xyz; vN=normalize(mat3(modelMatrix)*n); gl_Position=projectionMatrix*viewMatrix*w; }`;
+const mat = (frag, o = {}) => new THREE.ShaderMaterial({ uniforms: U, vertexShader: VS, fragmentShader: LIB + frag, ...o });
+// containers: corrugated steel, rust streaks, and a lit stall opening at street level on the face toward the street
+const CONT = mat(`varying vec3 vW; varying vec3 vN; varying vec3 vC; varying vec3 vL;
+void main(){ vec3 n=normalize(vN); float sh=.42+.4*max(0.,dot(n,normalize(vec3(.2,.7,.5))));
+ float along=abs(n.x)>.5?vW.z:vW.x; float rib=.82+.18*smoothstep(.2,.8,abs(sin(along*7.)));
+ float rust=hh(floor(vec2(along*1.3,vW.y*3.)))*.25*smoothstep(.6,0.,fract(vW.y/2.6));
+ vec3 c=vC*sh*rib*(1.-rust)+vec3(.2,.08,.03)*rust;
+ float street=step(0.,-n.x*sign(vW.x))*step(.5,abs(n.x));                               // face looks at the street
+ float stall=street*step(vW.y,2.15)*step(.3,vW.y)*step(.18,fract(vW.z/6.+.09))*step(fract(vW.z/6.+.09),.82);
+ float lit=step(hh(vec2(floor(vW.z/6.),sign(vW.x))),.55+.4*uHyd);
+ vec3 shop=mix(vec3(1.,.62,.3),vec3(.4,.9,1.),hh(vec2(floor(vW.z/6.),3.)))*(.75+.25*sin(uTime*2.+vW.z))*.85*(.55+.45*step(.12,fract(vW.y*1.6)));
+ c=mix(c,shop*lit+vec3(.05,.04,.03)*(1.-lit),stall);
+ gl_FragColor=vec4(finish(c,vW),1.); }`);
+const GLOW = mat(`varying vec3 vW; varying vec3 vC; void main(){ gl_FragColor=vec4(finish(vC*1.6,vW),1.); }`);
+const FLAT = mat(`varying vec3 vW; varying vec3 vN; varying vec3 vC;
+void main(){ float sh=.5+.45*max(0.,dot(normalize(vN),normalize(vec3(.3,.9,.4)))); gl_FragColor=vec4(finish(vC*sh,vW),1.); }`);
+// wet asphalt: dark, with neon smeared into it, ripples from the rain; in the underpass it is standing water
+const GROUND = mat(`varying vec3 vW; uniform float uPool;
+void main(){ float ripple=hh(floor(vW.xz*3.)+floor(uTime*8.))*.6+.4*sin(vW.x*1.7+vW.z*.9+uTime*2.);
+ vec3 refl=vec3(1.,.3,.62)*smoothstep(.6,1.,sin(vW.z*.33+1.))+vec3(.25,.9,1.)*smoothstep(.6,1.,sin(vW.z*.21+4.))+vec3(1.,.6,.25)*smoothstep(.7,1.,sin(vW.z*.47));
+ refl*=smoothstep(4.5,0.,abs(vW.x))*(.16+.05*ripple)*uWet;
+ vec3 c=vec3(.035,.045,.05)+refl+vec3(.02,.07,.09)*uPool*(.6+.4*ripple);
+ float stripe=step(abs(vW.x),.06)*step(.6,fract(vW.z*.15))*(1.-uPool);
+ gl_FragColor=vec4(finish(c+stripe*.12,vW),1.); }`);
+GROUND.uniforms = { ...U, uPool: { value: 0 } };
+const sky = new THREE.Mesh(new THREE.SphereGeometry(300, 16, 8), new THREE.ShaderMaterial({ uniforms: U, side: THREE.BackSide, depthWrite: false,
+  vertexShader: 'varying vec3 vP; void main(){ vP=normalize(position); gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.); }',
+  fragmentShader: 'uniform vec3 uFog; uniform float uLidar; varying vec3 vP; void main(){ vec3 c=mix(uFog*1.15,vec3(.05,.08,.12),pow(max(vP.y,0.),.5)); gl_FragColor=vec4(mix(c,vec3(0.),uLidar*.95),1.); }' }));
+scene.add(sky);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), GROUND); ground.rotation.x = -Math.PI / 2; scene.add(ground);
+
+// ---- the market ahead: 30-unit chunks recycled in front of him and rebuilt in the zone of the moment
+const CH = 30, NCH = 7, box = new THREE.BoxGeometry(1, 1, 1);
+const inst = (geo, m, n) => { const o = new THREE.InstancedMesh(geo, m, n); o.frustumCulled = false; o.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(n * 3), 3); scene.add(o); return o };
+const PER = { cont: 40, awn: 10, neon: 8, bulb: 36, ac: 10, ppl: 26, roof: 6 };
+const cont = inst(box, CONT, NCH * PER.cont), awn = inst(box, FLAT, NCH * PER.awn), neon = inst(box, GLOW, NCH * PER.neon), bulbs = inst(new THREE.SphereGeometry(.09, 6, 4), GLOW, NCH * PER.bulb),
+  acs = inst(box, FLAT, NCH * PER.ac), ppl = inst(box, FLAT, NCH * PER.ppl), heads = inst(box, FLAT, NCH * PER.ppl), roof = inst(box, FLAT, NCH * PER.roof);
+const HIDE = new THREE.Matrix4().makeScale(0, 0, 0), M = new THREE.Matrix4(), Qn = new THREE.Quaternion(), V1 = new THREE.Vector3(), V2 = new THREE.Vector3(), Y = new THREE.Vector3(0, 1, 0), EUL = new THREE.Euler();
+const put = (o, i, x, y, z, sx, sy, sz, c, ry = 0, rx = 0) => { Qn.setFromEuler(EUL.set(rx, ry, 0)); M.compose(V1.set(x, y, z), Qn, V2.set(sx, sy, sz)); o.setMatrixAt(i, M); if (c) o.setColorAt(i, new THREE.Color(...c)) };
+const chunks = [], people = [];
+const CLOTH = [[.18, .62, .66], [.93, .52, .22], [.95, .93, .88], [.12, .45, .55], [.85, .35, .2], [.2, .2, .22], [.6, .2, .3]], SKIN = [[.33, .22, .16], [.26, .17, .12], [.4, .27, .19]];
+function build(ci, z0, zone) {
+  const Z = ZONES[zone]; chunks[ci] = { z0, zone }; let k;
+  for (k = 0; k < PER.cont; k++) {                                                 // containers, stacked along both sides
+    const i = ci * PER.cont + k, side = k < PER.cont / 2 ? -1 : 1, col = k % 5, lvl = Math.floor((k % (PER.cont / 2)) / 5);
+    const tall = Z.stack[0] + Math.floor(rand() * (Z.stack[1] - Z.stack[0] + 1));
+    if (lvl >= tall || col * 6 >= CH) { ppl.setMatrixAt; cont.setMatrixAt(i, HIDE); continue }
+    const off = lvl ? (rand() - .5) * .8 : 0;
+    put(cont, i, side * (Z.half + 1.25 + off + (lvl ? rand() * .4 : 0)), 1.3 + lvl * 2.6, z0 - col * 6 - 3 - (lvl ? (rand() - .5) * 1.5 : 0), 2.45, 2.6, 6.05, STEEL[Math.floor(rand() * STEEL.length)]);
+  }
+  for (k = 0; k < PER.awn; k++) {                                                  // corrugated awnings over the stalls
+    const i = ci * PER.awn + k, side = k % 2 ? 1 : -1, on = rand() < .8 && !Z.roof;
+    on ? put(awn, i, side * (Z.half - .2), 2.5, z0 - Math.floor(k / 2) * 6 - 3, 1.9, .08, 5, rand() < .5 ? [.15, .45, .48] : [.6, .2, .18], 0, 0) : awn.setMatrixAt(i, HIDE);
+    if (on) { awn.getMatrixAt(i, M); M.multiply(new THREE.Matrix4().makeRotationZ(side * .25)); awn.setMatrixAt(i, M) }
+  }
+  for (k = 0; k < PER.neon; k++) {                                                 // neon signs on the upper boxes
+    const i = ci * PER.neon + k, side = k % 2 ? 1 : -1;
+    rand() < .7 ? put(neon, i, side * (Z.half + .05), 3.4 + rand() * 4, z0 - rand() * CH, .06, .35 + rand() * .5, 1 + rand() * 1.8, NEON[Math.floor(rand() * NEON.length)]) : neon.setMatrixAt(i, HIDE);
+  }
+  for (k = 0; k < PER.bulb; k++) {                                                 // string lights sagging across the street
+    const i = ci * PER.bulb + k, line = Math.floor(k / 12), u = (k % 12) / 11, x = (u - .5) * 2 * Z.half, sag = 4.6 - Math.sin(u * Math.PI) * .9;
+    (Z.roof || line > (zone === 1 ? 2 : 1)) ? bulbs.setMatrixAt(i, HIDE) : put(bulbs, i, x, sag, z0 - 5 - line * 11 - u * 1.5, 1, 1, 1, k % 3 ? [1, .78, .45] : [.5, .95, 1]);
+  }
+  for (k = 0; k < PER.ac; k++) { const i = ci * PER.ac + k, side = k % 2 ? 1 : -1; rand() < .6 ? put(acs, i, side * (Z.half + .2), 3.2 + Math.floor(rand() * 3) * 2.6, z0 - rand() * CH, .45, .55, .75, [.62, .62, .6]) : acs.setMatrixAt(i, HIDE) }
+  for (k = 0; k < PER.roof; k++) { const i = ci * PER.roof + k;
+    if (Z.roof) put(roof, i, 0, 5.4, z0 - k * 5 - 2.5, Z.half * 2 + 6, .6, 4.6, [.16, .17, .18]);
+    else if (zone === 5) put(roof, i, -(Z.half + .45), 2.9 + (k % 3) * 2.6, z0 - 8 - Math.floor(k / 3) * 14, .9, .08, 3.2, [.12, .12, .13]);   // fire escape landings
+    else roof.setMatrixAt(i, HIDE) }
+  for (k = 0; k < PER.ppl; k++) {                                                  // people: Black women and men of every age, in teal, orange and white
+    const i = ci * PER.ppl + k, on = k < Z.crowd; let x = (rand() < .5 ? -1 : 1) * (Z.half - .4 - rand() * 1.4); if (Z.roof && k < 4) x = (rand() - .5) * 6;
+    const z = z0 - rand() * CH, h = (Z.roof && k < 4 ? 1.05 : 1.5) + rand() * .35, c = CLOTH[Math.floor(rand() * CLOTH.length)], s = SKIN[Math.floor(rand() * 3)];
+    people[i] = on ? { x, z, h, walk: rand() < .4 ? (rand() - .5) * 2.4 : 0 } : null;
+    if (on) { put(ppl, i, x, h * .42, z, .5, h * .84, .32, c); put(heads, i, x, h * .9, z, .2, .22, .21, s) } else { ppl.setMatrixAt(i, HIDE); heads.setMatrixAt(i, HIDE) }
+  }
+  [cont, awn, neon, bulbs, acs, ppl, heads, roof].forEach(o => { o.instanceMatrix.needsUpdate = true; o.instanceColor.needsUpdate = true });
+}
+
+// ---- him: walking, from behind, matte black; and the man in the orange coat, ahead, back turned, never reached
+function figure(coat, skin, hair) {
+  const g = new THREE.Group(), add = (c, s, p) => { const o = new THREE.Mesh(box, FLATC(c)); o.scale.set(...s); o.position.set(...p); g.add(o); return o };
+  const parts = { torso: add(coat, [.48, .66, .28], [0, 1.22, 0]), head: add(skin, [.2, .24, .22], [0, 1.68, 0]), hair: add(hair, [.21, .08, .23], [0, 1.81, 0]),
+    legL: add([.05, .05, .06], [.17, .82, .18], [-.12, .44, 0]), legR: add([.05, .05, .06], [.17, .82, .18], [.12, .44, 0]),
+    armL: add(coat, [.12, .6, .13], [-.31, 1.2, 0]), armR: add(coat, [.12, .6, .13], [.31, 1.2, 0]) };
+  scene.add(g); return { g, ...parts };
+}
+const FLATC = c => { const m = FLAT.clone(); m.uniforms = U; m.vertexShader = VS; m.fragmentShader = LIB + `varying vec3 vW; varying vec3 vN;
+  void main(){ float sh=.55+.45*max(0.,dot(normalize(vN),normalize(vec3(.3,.9,.4)))); gl_FragColor=vec4(finish(vec3(${c.map(v => v.toFixed(3)).join(',')})*sh,vW),1.); }`; return m };
+const him = figure([.06, .06, .07], [.33, .22, .16], [.04, .04, .04]);
+const ex = figure([.9, .42, .12], [.3, .2, .14], [.05, .04, .04]); ex.coat = ex.torso; ex.torso.scale.set(.5, 1.05, .32); ex.torso.position.y = 1.02; ex.g.scale.setScalar(1.06);
+const vape = new THREE.Mesh(new THREE.SphereGeometry(.035, 6, 4), new THREE.MeshBasicMaterial({ color: 0x9ff6ff, toneMapped: false })); ex.g.add(vape); vape.position.set(.34, 1.0, -.12);
+
+// rain, words, water
+const RAIN = 700, rain = new THREE.InstancedMesh(box, new THREE.MeshBasicMaterial({ color: 0x9fc6cf, transparent: true, opacity: .35, toneMapped: false }), RAIN); rain.frustumCulled = false; scene.add(rain);
+const drops = []; for (let i = 0; i < RAIN; i++) drops.push({ x: (rand() - .5) * 16, y: rand() * 9, z: -rand() * 26 });
+const tex = {}; const glyph = w => { const c = document.createElement('canvas'), x = c.getContext('2d'); c.width = 512; c.height = 128; x.font = '700 84px ui-monospace,Menlo,monospace';
+  x.textAlign = 'center'; x.textBaseline = 'middle'; x.shadowColor = '#2fd0ff'; x.shadowBlur = 24; x.fillStyle = '#e9fbff'; x.fillText(w, 256, 66); const t = new THREE.CanvasTexture(c); t.anisotropy = 4; return t };
+const glyphs = []; const splashM = new THREE.InstancedMesh(new THREE.SphereGeometry(.07, 6, 4), new THREE.MeshBasicMaterial({ color: 0x7fe6ff, toneMapped: false }), 300); splashM.frustumCulled = false; scene.add(splashM);
+const spl = []; let splI = 0;
+
+const key = {}; addEventListener('keydown', e => { key[e.code] = 1; if (e.code === 'KeyL') toggle(); if (e.code === 'KeyR' && phase === 'end') start(); if (e.code.startsWith('Arrow') || e.code === 'Space') e.preventDefault() });
+addEventListener('keyup', e => key[e.code] = 0);
+let touchX = null; addEventListener('pointerdown', e => { if (!e.target.closest('button,a')) touchX = e.clientX / innerWidth }); addEventListener('pointermove', e => { if (touchX !== null) touchX = e.clientX / innerWidth }); addEventListener('pointerup', () => touchX = null);
+const modeBtn = document.getElementById('mode'); let lidarT = 0; const toggle = () => { lidarT = lidarT ? 0 : 1; modeBtn.textContent = lidarT ? 'market' : 'lidar' }; modeBtn.onclick = toggle;
+const audio = new Audio('../../../' + P.audio.split('/').map(encodeURIComponent).join('/')); audio.preload = 'auto';
+let phase = 'title', t = 0, s = 0, x = 0, vx = 0, speed = 3.6, caught = 0, missed = 0, nextWord = 0, zone = -1, clock0 = 0, endT = 0, stride = 0, exS = 14;
+window.__game = { get state() { return { phase, t: +t.toFixed(2), s: +s.toFixed(1), x: +x.toFixed(2), speed: +speed.toFixed(1), zone, caught, missed, total: WORDS.length, exAhead: +(exS - s).toFixed(1),
+  next: glyphs.filter(g => !g.done).map(g => ({ w: g.w, x: +g.x.toFixed(2), ahead: +(-g.z - s).toFixed(1) })).sort((a, b) => a.ahead - b.ahead)[0] || null } } };
+function start() { phase = 'walk'; s = 0; x = 0; speed = 3.6; caught = missed = 0; zone = -1; exS = 14; glyphs.forEach(g => scene.remove(g.mesh)); glyphs.length = 0; document.getElementById('fade').style.opacity = 0;
+  for (let i = 0; i < NCH; i++) build(i, -i * CH + 12, 0); const from = +(Q.get('t') || 0); nextWord = Math.max(0, WORDS.findIndex(w => w.t >= from));
+  audio.currentTime = from; audio.play().catch(() => {}); clock0 = performance.now() - from * 1000; document.getElementById('title').style.display = 'none' }
+document.getElementById('go').onclick = start;
+if (Q.has('autostart')) start(); else for (let i = 0; i < NCH; i++) build(i, -i * CH + 12, 0);
+const lineEl = document.getElementById('line'), hydEl = document.getElementById('hyd'); let shown = -1, last = performance.now(); const cA = new THREE.Color();
+function walk(f, ph, amp) { f.legL.rotation.x = Math.sin(ph) * amp; f.legR.rotation.x = -Math.sin(ph) * amp; f.armL.rotation.x = -Math.sin(ph) * amp * .8; f.armR.rotation.x = Math.sin(ph) * amp * .8 }
+function frame(now) {
+  requestAnimationFrame(frame); const dt = Math.min(.05, (now - last) / 1000); last = now; U.uTime.value = now / 1000;
+  if (phase === 'walk') {
+    t = !audio.paused && audio.currentTime > 0 ? audio.currentTime : (now - clock0) / 1000;
+    const steer = (key.ArrowRight || key.KeyD ? 1 : 0) - (key.ArrowLeft || key.KeyA ? 1 : 0) + (touchX !== null ? (touchX - .5) * 3 : 0) + (navigator.getGamepads?.()[0]?.axes[0] || 0);
+    const want = 3.6 + ((key.ArrowUp || key.KeyW) ? 2.6 : 0) - ((key.ArrowDown || key.KeyS) ? 2 : 0);
+    speed += (want - speed) * (1 - Math.exp(-3 * dt)); vx += (Math.max(-1, Math.min(1, steer)) * 3.4 - vx) * (1 - Math.exp(-8 * dt));
+    const half = ZONES[Math.max(0, zone)].half - .5; x = Math.max(-half, Math.min(half, x + vx * dt)); s += speed * dt;
+    if (t > P.dur + 1) { phase = 'end'; endT = now / 1000; audio.pause(); document.getElementById('fade').style.opacity = 1 }
+  } else if (phase === 'end') { speed *= Math.exp(-2 * dt); s += speed * dt }
+  const zt = zoneAt(t); if (zt !== zone) { zone = zt; for (let i = 0; i < NCH; i++) if (chunks[i].z0 < -s - 40) build(i, chunks[i].z0, zone) }
+  const Z = ZONES[zone], k = 1 - Math.exp(-1.2 * dt);
+  U.uFog.value.lerp(cA.set(Z.fog), k); U.uFar.value += (Z.far - U.uFar.value) * k; U.uLidar.value += (lidarT - U.uLidar.value) * (1 - Math.exp(-5 * dt));
+  U.uHyd.value += (caught / Math.max(1, caught + missed + 4) - U.uHyd.value) * k; GROUND.uniforms.uPool.value += ((Z.roof ? 1 : 0) - GROUND.uniforms.uPool.value) * k;
+  for (let i = 0; i < NCH; i++) if (chunks[i].z0 - CH > -s + 14) build(i, chunks[i].z0 - NCH * CH, zone);
+  // his words hang at head height in the alley; walk through them as he says them
+  while (phase === 'walk' && nextWord < WORDS.length && WORDS[nextWord].t - t < 3.4) {
+    const W = WORDS[nextWord++], lead = Math.max(.7, W.t - t), lane = Math.max(-Z.half + .7, Math.min(Z.half - .7, (nextWord % 5 - 2) * 1.05 + (rand() - .5) * .3)), lift = [1.25, 1.7, 2.15][nextWord % 3];
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(1.5, .38), new THREE.MeshBasicMaterial({ map: tex[W.w] || (tex[W.w] = glyph(W.w)), transparent: true, depthWrite: false, toneMapped: false })); scene.add(m);
+    glyphs.push({ w: W.w, li: W.li, x: lane, y: lift, z: -(s + speed * lead + 1.2), mesh: m, done: false });
+  }
+  for (const g of glyphs) {
+    if (!g.done) { g.mesh.position.set(g.x, g.y + Math.sin(now / 350 + g.z) * .05, g.z);
+      if (-g.z < s + .25 && -g.z > s - .8 && Math.abs(g.x - x) < .95) { g.done = 'got'; caught++; for (let i = 0; i < 12; i++) spl[splI++ % 300] = { p: new THREE.Vector3(g.x, 1.5, g.z), v: new THREE.Vector3((rand() - .5) * 3, 1 + rand() * 3, (rand() - .5) * 2), life: .9 } }
+      else if (-g.z < s - .8) { g.done = 'miss'; missed++ } }
+    else { g.age = (g.age || 0) + dt; if (g.done === 'got') { g.mesh.position.y += dt * 4; g.mesh.material.opacity = Math.max(0, 1 - g.age * 1.6) } else { g.mesh.position.y = Math.max(.03, g.mesh.position.y - dt * 1.5); g.mesh.material.color.setRGB(.3, .32, .34); g.mesh.material.opacity = Math.max(0, .7 - g.age * .3) }
+      if (g.age > 3) { scene.remove(g.mesh); g.gone = true } }
+  }
+  for (let i = glyphs.length - 1; i >= 0; i--) if (glyphs[i].gone) glyphs.splice(i, 1);
+  for (let i = 0; i < spl.length; i++) { const d = spl[i]; if (!d) continue; d.v.y -= 9 * dt; d.p.addScaledVector(d.v, dt); d.life -= dt; M.compose(d.p, Qn.identity(), V2.setScalar(Math.max(0, d.life))); splashM.setMatrixAt(i, d.life > 0 ? M : HIDE) }
+  splashM.instanceMatrix.needsUpdate = true;
+  // rain around the camera
+  for (let i = 0; i < RAIN; i++) { const d = drops[i]; d.y -= 14 * dt; if (d.y < 0) { d.y = 9; d.x = (rand() - .5) * 16; d.z = -rand() * 26 } M.compose(V1.set(d.x + x, d.y, d.z - s + 4), Qn.identity(), V2.set(.012, .32, .012)); rain.setMatrixAt(i, M) }
+  rain.instanceMatrix.needsUpdate = true; rain.visible = !ZONES[zone].roof;
+  // the crowd: some walk, all turn to look as he passes
+  for (let i = 0; i < people.length; i++) { const p = people[i]; if (!p) continue; p.z += p.walk * dt; const near = Math.abs(-s - p.z) < 8, yaw = near ? Math.atan2(x - p.x, -s - p.z) : (p.walk > 0 ? 0 : Math.PI);
+    Qn.setFromAxisAngle(Y, yaw); M.compose(V1.set(p.x, p.h * .42, p.z), Qn, V2.set(.5, p.h * .84, .32)); ppl.setMatrixAt(i, M); M.compose(V1.set(p.x, p.h * .9, p.z), Qn, V2.set(.2, .22, .21)); heads.setMatrixAt(i, M) }
+  ppl.instanceMatrix.needsUpdate = heads.instanceMatrix.needsUpdate = true;
+  stride += speed * dt * 2.6; him.g.position.set(x, 0, -s); him.g.rotation.y = -vx * .08; walk(him, stride, .55);
+  exS = Math.min(s + 20, Math.max(s + 10, exS + 3.4 * dt));   // always ahead, never reachable
+  ex.g.position.set(Math.sin(exS * .07) * 1.2, 0, -exS); walk(ex, exS * 2.6, .45); vape.material.color.setHSL(.52, 1, .55 + .3 * Math.sin(now / 400));
+  const up = phase === 'end' ? Math.min(9, (now / 1000 - endT) * 2) : 0;
+  camera.position.lerp(V1.set(x * .6, 2.15 + up, -s + 3.6), 1 - Math.exp(-6 * dt)); camera.lookAt(x * .8, 1.45 + up * .4, -s - 8);
+  U.uCam.value.copy(camera.position); sky.position.copy(camera.position); ground.position.set(0, 0, -s); renderer.render(scene, camera);
+  const li = P.lines.findIndex(l => t >= l.t0 - .3 && t <= l.t1 + .8);
+  if (li !== shown) { shown = li; lineEl.innerHTML = li < 0 ? '' : P.lines[li].words.map(([w]) => `<span>${w.replace(/</g, '&lt;')}</span>`).join(' ') }
+  if (li >= 0) { const sp = lineEl.children; P.lines[li].words.forEach(([w, wt], j) => { if (!sp[j]) return; sp[j].classList.toggle('on', wt <= t); if (glyphs.some(g => g.li === li && g.w === w && g.done === 'got')) sp[j].classList.add('got') }) }
+  hydEl.textContent = phase === 'end' ? `${caught} of ${caught + missed} words became water · R to walk again` : `${caught} words · ${P.zones[zone].name}`;
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

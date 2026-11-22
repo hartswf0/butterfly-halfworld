@@ -1,2 +1,8 @@
 runs/
 __pycache__/
+seg/*.pt
+atlas/**/*.ply
+atlas/**/__pycache__/
+atlas/ride-cel/site/data/
+atlas/ride-cel/site/words.json
+atlas/ride-cel/site/voice.mp3

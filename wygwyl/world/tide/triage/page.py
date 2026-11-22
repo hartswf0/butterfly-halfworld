@@ -83,7 +83,7 @@ pre{{white-space:pre-wrap;font:12px/1.55 var(--m);color:#c9d2f5;border-left:2px 
 dl{{margin-top:8px}}dt{{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:9px}}dd{{font-size:13.5px}}dd.w{{font:italic 16px/1.4 "Iowan Old Style",Palatino,Georgia,serif}}
 .hide{{display:none}}
 </style></head><body><main>
-<div class="top"><span>WYGWYL · the gel</span><a href="../watch.html">all videos</a></div>
+<div class="top"><span>WYGWYL · the gel</span><span><a href="../seg/index.html">cut-outs</a> · <a href="../watch.html">all videos</a></span></div>
 <h1>Did it happen?</h1>
 <div class="sum"><span><b style="color:var(--yes)">{n['yes']}</b>yes</span><span><b style="color:var(--partly)">{n['partly']}</b>partly</span><span><b style="color:var(--no)">{n['no']}</b>no</span><span><b>{tot}</b>asks · {len(R)} runs</span></div>
 <div class="gel" id="gel">{''.join(lanes)}</div>

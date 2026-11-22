@@ -1,0 +1,24 @@
+{
+ "id": "639cc268648b47e7aee85d0800a090c7",
+ "ownerId": "acct_8133938019c54911b8caddb015860e2b",
+ "metadata": {
+  "@type": "type.worldlabs.ai/wlt.marble.v2.posedImages2Splats.metadata",
+  "state": "SUCCEEDED",
+  "status": "SUCCEEDED",
+  "surface": "DEVELOPER_API",
+  "task": "posedImages2Splats",
+  "taskVersion": "v1"
+ },
+ "done": true,
+ "error": null,
+ "expiresAtSecs": null,
+ "createdAtSecs": 1795324995,
+ "response": {
+  "draftSplat": {
+   "assetId": "asset_34ee487a3ddad78987a25b71c22dd3be",
+   "url": "https://storage.googleapis.com/wlt-marble-outputs-prod/us1/acct_8133938019c54911b8caddb015860e2b/proj_153d35d7984d422d87849eebf53e450f/asset_34ee487a3ddad78987a25b71c22dd3be?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=marble-api-server-prod%40wlt-marble.iam.gserviceaccount.com%2F20261122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261122T052406Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&response-content-disposition=inline%3B%20filename%3D%22asset_34ee487a3ddad78987a25b71c22dd3be.spz%22&X-Goog-Signature=89a550282def2aaa22d1a4c68bc696460274a0062811dded300f8ca6d306e19e4d24e4c9d804332ea923e4eeef2c00fdf009864eee9e423c3a5948bc8f2bb8ff5f767b2d1e6b6cfd9ab55319d0456483cfe2231e6ac780ef917bfd84ea40e8d6694dcff7cf2d9f7253dd94fa1de48ef6980737823e30519c581a080a2f91c425d5eddb2102e5e9e4deb2ce9aaf3680c0906cbf0061fede3151d1a7fc6f1b0df14372f8713ea54723a4e497d8603656e78b9877d253bfad0074089a56c24012c4fa2fca06cf0c17eb821a0718de7a2e519864172c56153a623a98f6fb353c0e3be584423fe253d5748cc016931b85893398d887baf463c434e5d8983dde1acc3d"
+  },
+  "refinedSplats": {}
+ },
+ "name": "accounts/acct_8133938019c54911b8caddb015860e2b/projects/proj_153d35d7984d422d87849eebf53e450f/operations/639cc268648b47e7aee85d0800a090c7"
+}
