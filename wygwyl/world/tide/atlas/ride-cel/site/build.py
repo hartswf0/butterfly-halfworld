@@ -1,22 +1,35 @@
-"""Collect the five Magic Ride places (cel take) into site/scenes.json for the viewer. Camera keys carry the take's own times."""
-import json, os, sys
-D = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, os.path.dirname(D))
-from ride_cel import SCN
-po = lambda s: json.load(open(f'{D}/{s}/pose_op.json'))['response']['frames']
-go = lambda s: json.load(open(f'{D}/{s}/gen_op.json'))['response']['frames']
+"""Build the viewer's reels.json and data files.
+Two reels: Magic Ride (five places, his voice, his words) and the Arcade walk (one place, the take's own sound).
+Binary files go as base64 text split into parts under 12 MB (artifacts serve only web types, 16 MB a file)."""
+import base64, glob, json, os, sys
+SITE = os.path.dirname(os.path.abspath(__file__)); A = os.path.dirname(os.path.dirname(SITE)); D = f'{A}/ride-cel'
+sys.path.insert(0, A); from ride_cel import SCN
+DATA = f'{SITE}/data'; os.makedirs(DATA, exist_ok=True); PART = 12_000_000
+def pack(src, name):
+    if not os.path.exists(src): return None
+    for f in glob.glob(f'{DATA}/{name}.p*.txt'): os.remove(f)
+    b = base64.b64encode(open(src, 'rb').read()).decode(); parts = []
+    for i in range(0, len(b), PART): p = f'data/{name}.p{i // PART}.txt'; open(f'{SITE}/{p}', 'w').write(b[i:i + PART]); parts.append(p)
+    return parts
+po = lambda d: json.load(open(f'{d}/pose_op.json'))['response']['frames']
+go = lambda d: json.load(open(f'{d}/gen_op.json'))['response']['frames']
 K = lambda c, t: {'t': round(t, 3), 'p': c['extrinsics']['position'], 'q': c['extrinsics']['quaternion']}
-def spread(cams, t0, t1): return [K(c, t0 + (t1 - t0) * i / (len(cams) - 1)) for i, c in enumerate(cams)]
-def timed(s): return [K(f['camera'], t) for f, t in zip(po(s), SCN[s]['times'])]
-kp, kg, np_, ng = po('kerb')[0]['camera'], go('kerb'), po('neon')[0]['camera'], go('neon')
-places = [
- ('kerb', 'Kerb, under the one lamp', 0, 13.04, spread([kg[1]['camera'], kg[2]['camera'], kp, kg[3]['camera'], kg[4]['camera']], 0, 13.04), kp),
- ('neon', 'Wet neon road', 13.04, 20.92, spread([np_, ng[0]['camera'], ng[1]['camera'], ng[2]['camera']], 13.04, 20.92), np_),
- ('tunnel', 'Grey tunnel', 20.92, 27.9, timed('tunnel'), po('tunnel')[0]['camera']),
- ('fog', 'Into the fog', 27.9, 36.17, timed('fog'), po('fog')[0]['camera']),
- ('lanterns', 'Lantern street', 36.17, 53.4, timed('lanterns'), po('lanterns')[0]['camera'])]
-out = []
-for name, title, t0, t1, keys, c0 in places:
-    e = {'name': name, 'title': title, 't0': t0, 't1': t1, 'spz': f'data/{name}.spz.txt', 'keys': keys, 'fy': c0['intrinsics']['fy'], 'h': c0['intrinsics']['height']}
-    if os.path.exists(f'{D}/{name}/{name}_mesh.glb'): e['glb'] = f'data/{name}_mesh.glb.txt'
-    out.append(e)
-json.dump(out, open(f'{D}/site/scenes.json', 'w'), separators=(',', ':')); print([ (o['name'], len(o['keys']), 'glb' in o) for o in out])
+spread = lambda cams, t0, t1: [K(c, t0 + (t1 - t0) * i / (len(cams) - 1)) for i, c in enumerate(cams)]
+timed = lambda d, times: [K(f['camera'], t) for f, t in zip(po(d), times)]
+LID = json.load(open(f'{SITE}/lidar.json'))
+def place(name, title, t0, t1, keys, c0, d, splat):
+    return {'name': name, 'title': title, 't0': t0, 't1': t1, 'keys': keys, 'fy': c0['intrinsics']['fy'], 'h': c0['intrinsics']['height'],
+            'splat': pack(splat, f'{name}.spz'), 'mesh': pack(f'{d}/{name}_mesh.glb', f'{name}.glb'), 'lidar': f'data/{name}.lidar.txt', 'lidarMeta': LID[name]}
+kp, kg, np_, ng = po(f'{D}/kerb')[0]['camera'], go(f'{D}/kerb'), po(f'{D}/neon')[0]['camera'], go(f'{D}/neon')
+ride = [
+ place('kerb', 'Kerb, under the one lamp', 0, 13.04, spread([kg[1]['camera'], kg[2]['camera'], kp, kg[3]['camera'], kg[4]['camera']], 0, 13.04), kp, f'{D}/kerb', f'{D}/kerb/kerb_draft.spz'),
+ place('neon', 'Wet neon road', 13.04, 20.92, spread([np_, ng[0]['camera'], ng[1]['camera'], ng[2]['camera']], 13.04, 20.92), np_, f'{D}/neon', f'{D}/neon/neon_draft.spz')]
+for name, title, t0, t1 in (('tunnel', 'Grey tunnel', 20.92, 27.9), ('fog', 'Into the fog', 27.9, 36.17), ('lanterns', 'Lantern street', 36.17, 53.4)):
+    ride.append(place(name, title, t0, t1, timed(f'{D}/{name}', SCN[name]['times']), po(f'{D}/{name}')[0]['camera'], f'{D}/{name}', f'{D}/{name}/{name}_draft.spz'))
+AR = f'{A}/arcade'; times = json.load(open(f'{AR}/prep.json'))['times']
+arcade = [place('arcade', 'Arcade, zone 091', 0, 20.1, timed(AR, times), po(AR)[0]['camera'], AR, f'{AR}/arcade_draft.spz')]
+reels = {
+ 'ride': {'title': 'Magic Ride', 'about': 'Poem 10, the cel-shaded Genie take, rebuilt by Atlas in five places. His voice; his words as he says them.', 'audio': 'voice.mp3', 'words': 'words.json', 'end': 53.4, 'places': ride},
+ 'arcade': {'title': 'Arcade walk', 'about': 'Genie street test, zone 091: he walks to the twin escalators, then the camera turns along the shopfronts. Rebuilt by Atlas from 18 frames, the man masked out. The take’s own sound.', 'audio': 'arcade.mp3', 'words': None, 'end': 20.1, 'places': arcade}}
+json.dump(reels, open(f'{SITE}/reels.json', 'w'), separators=(',', ':'))
+for r in reels.values(): print(r['title'], [(p['name'], len(p['splat'] or []), len(p['mesh'] or [])) for p in r['places']])

@@ -40,5 +40,7 @@
   "asset_bd0119335c7e49c290a37a6fb139108d",
   "asset_b21397f662504d669740c579ee63883f"
  ],
- "draft_op": "7a55d1f6e3a141068b63f5eefb9fd951"
+ "draft_op": "7a55d1f6e3a141068b63f5eefb9fd951",
+ "mesh_op": "2d195d49fce348608aa1875486c25304",
+ "mesh_src": "asset_219ad0d92db8208df0963a5c9d63017a"
 }
