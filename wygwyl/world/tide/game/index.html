@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Magic Ride · WYGWYL</title>
+<link rel="icon" href="data:,">
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#07060a;color:#f2eef8;font:15px/1.4 ui-monospace,"SF Mono",Menlo,Consolas,monospace;-webkit-user-select:none;user-select:none;touch-action:none}
+canvas{display:block;width:100vw;height:100vh}
+#veil{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 55%,transparent 55%,rgba(0,0,0,.55));mix-blend-mode:multiply}
+#grain{position:fixed;inset:-50%;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:g .5s steps(3) infinite}
+@keyframes g{to{transform:translate(4%,-3%)}}
+#line{position:fixed;left:0;right:0;bottom:calc(18px + env(safe-area-inset-bottom));text-align:center;padding:0 18px;font:italic 18px/1.35 "Iowan Old Style",Palatino,Georgia,serif;text-shadow:0 1px 6px #000;pointer-events:none}
+#line span{opacity:.35;transition:opacity .2s}#line span.on{opacity:1}#line span.got{color:#7fd8ff;opacity:1}
+#top{position:fixed;left:14px;right:14px;top:calc(12px + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#b9aec8;pointer-events:none}
+#top button{pointer-events:auto;font:11px ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:#f2eef8;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.3);min-height:38px;padding:0 12px}
+#title{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;background:rgba(7,6,10,.72);padding:24px}
+#title h1{font:400 clamp(34px,9vw,64px)/1 ui-monospace,Menlo,monospace;letter-spacing:-.03em;margin:0}
+#title p{margin:0;color:#b9aec8;max-width:520px}
+#title button{font:14px ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;background:#f2eef8;color:#07060a;border:0;min-height:48px;padding:0 26px;margin-top:8px}
+#end{display:none}
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+} }
+</script>
+</head>
+<body>
+<div id="veil"></div><div id="grain"></div>
+<div id="top"><span id="hyd">0 words</span><button id="mode" aria-label="Switch between grey-box and lidar view">lidar</button></div>
+<div id="line"></div>
+<div id="title"><h1>Magic Ride</h1>
+<p>His reading is the clock. Ride through his words: every word you catch turns to water and wakes the city.</p>
+<p>Steer ← → or A D · hold ↑ / W to go faster · Space opens your arms · L lidar<br>On a phone: touch and drag left or right.</p>
+<button id="go">Ride</button></div>
+<script type="module">
+import * as THREE from 'three';
+const Q = new URLSearchParams(location.search);
+let seed = +(Q.get('seed') || 7); const rand = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+const P = await (await fetch('poem.json')).json();
+const WORDS = P.lines.flatMap((l, li) => l.words.map(([w, t]) => ({ w, t, li })));
+
+// ---- look: sampled from the grey-box take (study/study.json) and the Magic Ride sky, night to morning
+const ZONES = [ // one per shot of the take; colours are sky top, horizon, fog, ground
+ { top: 0x1a1426, hor: 0x5d4757, fog: 0x2a2130, ground: 0x0c0b11, city: 1, crowd: 0, water: 0, hills: 0, light: 0.0 },
+ { top: 0x1a1426, hor: 0x6b5160, fog: 0x2d2333, ground: 0x0c0b11, city: 1, crowd: 0, water: 0, hills: 0, light: 0.05 },
+ { top: 0x120f1c, hor: 0x433848, fog: 0x1c1822, ground: 0x09080d, city: 2, crowd: 0, water: 0, hills: 0, light: 0.05 },
+ { top: 0x1c1428, hor: 0x7c6269, fog: 0x30243a, ground: 0x0c0b11, city: 1, crowd: 1, water: 0, hills: 0, light: 0.1 },
+ { top: 0x2a2140, hor: 0xc7895a, fog: 0x5a4256, ground: 0x0a1830, city: 0, crowd: 0, water: 1, hills: 1, light: 0.35 },
+ { top: 0x5d6f9c, hor: 0xf2b779, fog: 0x9a8070, ground: 0x2e3a2c, city: 0, crowd: 0, water: 0, hills: 2, light: 0.7 },
+ { top: 0x7fa0cc, hor: 0xf7d39a, fog: 0xc7ad8d, ground: 0x3a4732, city: 0, crowd: 0, water: 0, hills: 2, light: 0.9 },
+ { top: 0x8fb3dc, hor: 0xfbe2b0, fog: 0xd8c2a0, ground: 0x3f4c36, city: 0, crowd: 0, water: 0, hills: 2, light: 1.0 }];
+const zoneAt = t => { let z = 0; P.zones.forEach((q, i) => { if (P.lines[q.line].t0 - 0.6 <= t) z = i }); return z };
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75)); renderer.setSize(innerWidth, innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); const camera = new THREE.PerspectiveCamera(58, innerWidth / innerHeight, 0.1, 900);
+addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix() });
+
+// one shared set of uniforms drives every shader: the zone colours, how much of the poem has been caught, and lidar
+const U = { uTop: { value: new THREE.Color() }, uHor: { value: new THREE.Color() }, uFog: { value: new THREE.Color() }, uGround: { value: new THREE.Color() },
+  uLight: { value: 0 }, uHyd: { value: 0 }, uLidar: { value: 0 }, uTime: { value: 0 }, uCam: { value: new THREE.Vector3() }, uFar: { value: 260 } };
+const LIB = `
+uniform vec3 uFog; uniform float uLidar, uTime, uFar, uLight, uHyd; uniform vec3 uCam;
+vec3 ramp(float h){ h=clamp(h,0.,1.); vec3 a=vec3(.12,.25,1.),b=vec3(.1,.85,.95),c=vec3(.2,1.,.35),d=vec3(1.,.85,.1),e=vec3(1.,.25,.1);
+  return h<.25?mix(a,b,h*4.):h<.5?mix(b,c,(h-.25)*4.):h<.75?mix(c,d,(h-.5)*4.):mix(d,e,(h-.75)*4.); }
+vec3 finish(vec3 col, vec3 wp){ float d=distance(wp,uCam); float f=smoothstep(uFar*.18,uFar,d);
+  vec3 grey=mix(col,uFog,f);
+  float scan=step(.55,fract(wp.y*2.2))*step(.35,fract(d*.9-uTime*3.));                 // lidar: rings out from the rider, banded by height
+  vec3 lid=ramp(wp.y/34.)*(.25+.95*scan)*(1.-smoothstep(uFar*.35,uFar,d)*.85);
+  return mix(grey,lid,uLidar); }`;
+const VS = `varying vec3 vW; varying vec3 vN; varying vec3 vL; varying vec3 vC;
+void main(){ vec4 p=vec4(position,1.); vec3 n=normal; vC=vec3(1.);
+ #ifdef USE_INSTANCING_COLOR
+  vC=instanceColor;
+ #endif
+ #ifdef USE_INSTANCING
+  p=instanceMatrix*p; n=mat3(instanceMatrix)*n;
+ #endif
+ vL=position; vec4 w=modelMatrix*p; vW=w.xyz; vN=normalize(mat3(modelMatrix)*n); gl_Position=projectionMatrix*viewMatrix*w; }`;
+const mat = (frag, extra = {}) => new THREE.ShaderMaterial({ uniforms: { ...U, ...extra }, vertexShader: VS, fragmentShader: LIB + frag });
+// buildings: flat grey-box blocks with a window grid computed in the shader; caught words switch more windows on
+const BUILD = mat(`varying vec3 vW; varying vec3 vN; uniform vec3 uTop;
+float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}
+void main(){ vec3 n=normalize(vN); float sh=.38+.32*max(0.,dot(n,normalize(vec3(.4,.8,.3))))+.12*uLight;
+ vec3 base=mix(vec3(.10,.095,.12),vec3(.42,.40,.44),uLight)*sh;
+ vec2 fc=abs(n.x)>.5?vec2(vW.z,vW.y):vec2(vW.x,vW.y); vec2 g=fract(fc*vec2(.55,.42)); vec2 id=floor(fc*vec2(.55,.42));
+ float win=step(.28,g.x)*step(g.x,.72)*step(.3,g.y)*step(g.y,.7)*step(.5,1.-abs(n.y))*step(1.2,vW.y);
+ float on=step(h(id+floor(vW.x*.02)*7.),.12+.55*uHyd)*(1.-uLight*.85);
+ vec3 c=base+win*on*mix(vec3(1.,.78,.35),vec3(.55,.85,1.),uHyd*.7)*1.25;
+ gl_FragColor=vec4(finish(c,vW),1.); }`);
+const GROUND = mat(`varying vec3 vW; uniform vec3 uGround;
+void main(){ float road=1.-smoothstep(5.6,6.,abs(vW.x)); float dash=step(.5,fract(vW.z*.12))*step(abs(vW.x),.12);
+ float edge=step(abs(abs(vW.x)-5.4),.08);
+ vec3 c=mix(uGround,vec3(.16,.15,.18)+uLight*.25,road)+dash*vec3(.55)+edge*vec3(.3);
+ gl_FragColor=vec4(finish(c,vW),1.); }`);
+const WATER = mat(`varying vec3 vW; uniform vec3 uHor;
+void main(){ float r=.5+.5*sin(vW.z*.35+uTime*1.6+sin(vW.x*.2)*2.); vec3 c=mix(vec3(.02,.07,.2),uHor*.7,.25+.35*r*smoothstep(0.,1.,uLight+.2));
+ gl_FragColor=vec4(finish(c,vW),1.); }`);
+const HILL = mat(`varying vec3 vW; varying vec3 vN; uniform vec3 uHor;
+void main(){ float sh=.35+.4*max(0.,dot(normalize(vN),normalize(vec3(-.5,.6,.3)))); vec3 c=mix(vec3(.06,.06,.08),vec3(.30,.32,.24),uLight)*sh+uHor*.06*uLight;
+ gl_FragColor=vec4(finish(c,vW),1.); }`);
+const PLAIN = (r, g, b, e = 0) => mat(`varying vec3 vW; varying vec3 vN;
+void main(){ float sh=.45+.45*max(0.,dot(normalize(vN),normalize(vec3(.3,.9,.4)))); vec3 c=vec3(${(+r).toFixed(3)},${(+g).toFixed(3)},${(+b).toFixed(3)})*(${e ? '1.' : 'sh*(.55+.6*uLight)'});
+ gl_FragColor=vec4(finish(c,vW),1.); }`);
+const SKY = new THREE.Mesh(new THREE.SphereGeometry(600, 24, 12), new THREE.ShaderMaterial({ uniforms: U, side: THREE.BackSide, depthWrite: false,
+  vertexShader: 'varying vec3 vP; void main(){ vP=normalize(position); gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.); }',
+  fragmentShader: `uniform vec3 uTop,uHor; uniform float uLidar,uTime; varying vec3 vP;
+   float h(vec2 p){return fract(sin(dot(p,vec2(12.9,78.2)))*43758.5);}
+   void main(){ float y=max(vP.y,0.); vec3 c=mix(uHor,uTop,pow(y,.6)); vec2 s=floor(vP.xz/max(vP.y,.05)*80.); float st=step(.996,h(s))*smoothstep(.1,.5,y);
+   c+=st*(1.-dot(uTop,vec3(.33)))*.9; gl_FragColor=vec4(mix(c,vec3(0.),uLidar*.94),1.); }` }));
+scene.add(SKY);
+
+// ground and water follow the rider
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(900, 900), GROUND); ground.rotation.x = -Math.PI / 2; scene.add(ground);
+const water = new THREE.Mesh(new THREE.PlaneGeometry(900, 900), WATER); water.rotation.x = -Math.PI / 2; water.position.y = -0.05; water.visible = false; scene.add(water);
+
+// ---- the world ahead: chunks of 40 units recycled in front of the rider, rebuilt in the zone of the moment
+const CH = 40, NCH = 8, box = new THREE.BoxGeometry(1, 1, 1);
+const blocks = new THREE.InstancedMesh(box, BUILD, NCH * 26); blocks.frustumCulled = false; scene.add(blocks);
+const hills = new THREE.InstancedMesh(new THREE.ConeGeometry(1, 1, 5), HILL, NCH * 6); hills.frustumCulled = false; scene.add(hills);
+const crowd = new THREE.InstancedMesh(box, mat(`varying vec3 vW; varying vec3 vN; varying vec3 vC;
+void main(){ float sh=.55+.45*max(0.,dot(normalize(vN),normalize(vec3(.3,.9,.4)))); gl_FragColor=vec4(finish(vC*sh*(.75+.4*uLight),vW),1.); }`), NCH * 18); crowd.frustumCulled = false; scene.add(crowd);
+crowd.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(NCH * 18 * 3), 3);
+const lamps = new THREE.InstancedMesh(box, PLAIN(1., .85, .55, 1), NCH * 4); lamps.frustumCulled = false; scene.add(lamps);
+const pillars = new THREE.InstancedMesh(box, PLAIN(.22, .21, .25), NCH * 4); pillars.frustumCulled = false; scene.add(pillars);
+const HIDE = new THREE.Matrix4().makeScale(0, 0, 0), M4 = new THREE.Matrix4(), Q4 = new THREE.Quaternion(), V1 = new THREE.Vector3(), V2 = new THREE.Vector3(), Y = new THREE.Vector3(0, 1, 0);
+const CROWD = [[.18, .62, .66], [.93, .52, .22], [.95, .93, .88], [.12, .45, .55], [.85, .35, .2]];
+const chunks = []; const people = [];
+function build(ci, z0, zone) {
+  const Z = ZONES[zone], hide = HIDE; chunks[ci] = { z0, zone };
+  for (let k = 0; k < 26; k++) {
+    let on = false;
+    if (Z.city && k < (Z.city === 2 ? 12 : 22)) {
+      const side = k % 2 ? 1 : -1, x = side * (Z.city === 2 ? 22 + rand() * 30 : 11 + rand() * 18), w = 5 + rand() * 9, d = 5 + rand() * 9, h = (Z.city === 2 ? 6 : 8) + rand() * rand() * 40;
+      M4.compose(V1.set(x, h / 2, z0 - rand() * CH), Q4.identity(), V2.set(w, h, d)); on = true;
+    }
+    if (Z.city === 2 && k >= 12 && k < 16) { const i = k - 12; M4.compose(V1.set(i < 2 ? -6.5 : 6.5, 4, z0 - 8 - (i % 2) * 20), Q4.identity(), V2.set(1.2, 8, 3)); on = true }        // tunnel walls
+    if (Z.city === 2 && k >= 16 && k < 18) { M4.compose(V1.set(0, 8.4, z0 - 8 - (k - 16) * 20), Q4.identity(), V2.set(14.2, 1, 3)); on = true }                                   // tunnel roof
+    blocks.setMatrixAt(ci * 26 + k, on ? M4 : hide);
+  }
+  for (let k = 0; k < 6; k++) {
+    const on = Z.hills > 0, side = k % 2 ? 1 : -1, s = Z.hills === 2 ? 40 + rand() * 70 : 30 + rand() * 40;
+    M4.compose(V1.set(side * (s * 1.45 + 16 + rand() * 70), s * .45, z0 - rand() * CH), Q4.setFromAxisAngle(Y, rand() * 6), V2.set(s * 1.4, s * (Z.hills === 2 ? 1 : .6), s * 1.4));
+    hills.setMatrixAt(ci * 6 + k, on ? M4 : hide);
+  }
+  for (let k = 0; k < 18; k++) {
+    const i = ci * 18 + k, on = !!Z.crowd, side = k % 2 ? 1 : -1, x = side * (7.2 + rand() * 2.8), z = z0 - rand() * CH, hgt = 1.55 + rand() * .35;
+    people[i] = on ? { x, z, h: hgt } : null;
+    M4.compose(V1.set(x, hgt / 2, z), Q4.identity(), V2.set(.55, hgt, .38)); crowd.setMatrixAt(i, on ? M4 : hide);
+    const c = CROWD[Math.floor(rand() * CROWD.length)]; crowd.instanceColor.setXYZ(i, c[0], c[1], c[2]);
+  }
+  for (let k = 0; k < 4; k++) {
+    const on = Z.city === 1 && k < 2; M4.compose(V1.set(k ? 6.2 : -6.2, 5.2, z0 - 10 - k * 20), Q4.identity(), V2.set(.35, .25, .35)); lamps.setMatrixAt(ci * 4 + k, on ? M4 : hide);
+    const pon = !!Z.water; M4.compose(V1.set(k % 2 ? 6.3 : -6.3, -2, z0 - 5 - Math.floor(k / 2) * 20), Q4.identity(), V2.set(1.2, 4.5, 1.2)); pillars.setMatrixAt(ci * 4 + k, pon ? M4 : hide);
+  }
+  [blocks, hills, crowd, lamps, pillars].forEach(m => { m.instanceMatrix.needsUpdate = true }); crowd.instanceColor.needsUpdate = true;
+}
+
+// ---- the rider: blocky, from behind, matte black, round white headlight, red tail light
+const rider = new THREE.Group(); scene.add(rider);
+const part = (m, s, p) => { const o = new THREE.Mesh(box, m); o.scale.set(...s); o.position.set(...p); rider.add(o); return o };
+const BLACK = PLAIN(.06, .06, .07), SKIN = PLAIN(.33, .22, .16), TYRE = PLAIN(.03, .03, .035), CHROME = PLAIN(.4, .4, .44);
+const wheelG = new THREE.CylinderGeometry(.42, .42, .22, 14); wheelG.rotateZ(Math.PI / 2);
+const wheels = [0.78, -0.78].map(z => { const w = new THREE.Mesh(wheelG, TYRE); w.position.set(0, .42, z); rider.add(w); return w });
+part(BLACK, [.4, .32, 1.5], [0, .78, 0]); part(CHROME, [.3, .22, .5], [0, .62, .05]); part(BLACK, [.38, .14, .7], [0, .98, .3]);
+part(PLAIN(1, .12, .1, 1), [.18, .08, .04], [0, .93, .78]); part(PLAIN(1, .97, .85, 1), [.16, .16, .05], [0, 1.0, -.9]);
+const bars = part(CHROME, [.9, .05, .05], [0, 1.22, -.62]);
+const torso = part(BLACK, [.5, .62, .3], [0, 1.42, .12]); const head = part(SKIN, [.22, .25, .24], [0, 1.86, .06]); part(BLACK, [.235, .09, .25], [0, 1.99, .07]);
+const armL = part(BLACK, [.12, .12, .62], [-.26, 1.45, -.2]), armR = part(BLACK, [.12, .12, .62], [.26, 1.45, -.2]);
+part(BLACK, [.14, .14, .55], [-.18, .98, .05]); part(BLACK, [.14, .14, .55], [.18, .98, .05]);
+const beam = new THREE.SpotLight(0xfff1d8, 0, 40, .45, .5); beam.position.set(0, 1, -1); rider.add(beam, beam.target); beam.target.position.set(0, 0, -12);
+
+// ---- words on the road: each one arrives at the rider as he says it
+const glyphs = []; const tex = {};
+function glyph(word) {
+  const c = document.createElement('canvas'), x = c.getContext('2d'); c.width = 512; c.height = 128;
+  x.font = '700 84px ui-monospace,Menlo,monospace'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.shadowColor = '#3fb4ff'; x.shadowBlur = 22;
+  x.fillStyle = '#e9f6ff'; x.fillText(word, 256, 66); const t = new THREE.CanvasTexture(c); t.anisotropy = 4; return t;
+}
+const gMat = w => new THREE.MeshBasicMaterial({ map: tex[w] || (tex[w] = glyph(w)), transparent: true, depthWrite: false, toneMapped: false });
+const drops = new THREE.InstancedMesh(new THREE.SphereGeometry(.09, 6, 4), new THREE.MeshBasicMaterial({ color: 0x7fd8ff, toneMapped: false }), 400); drops.frustumCulled = false; scene.add(drops);
+const dropState = []; let dropI = 0;
+
+// ---- input: keyboard, touch drag, gamepad
+const key = {}; addEventListener('keydown', e => { key[e.code] = 1; if (e.code === 'KeyL') toggleLidar(); if (e.code === 'KeyR' && phase === 'end') restart(); if (['Space', 'ArrowUp', 'ArrowDown'].includes(e.code)) e.preventDefault() });
+addEventListener('keyup', e => key[e.code] = 0);
+let touchX = null, touchArms = false;
+addEventListener('pointerdown', e => { if (e.target.closest('button')) return; touchX = e.clientX / innerWidth; touchArms = e.isPrimary === false });
+addEventListener('pointermove', e => { if (touchX !== null) touchX = e.clientX / innerWidth });
+addEventListener('pointerup', () => touchX = null);
+const modeBtn = document.getElementById('mode'); const toggleLidar = () => { lidarT = lidarT ? 0 : 1; modeBtn.textContent = lidarT ? 'grey-box' : 'lidar' }; modeBtn.onclick = toggleLidar;
+
+// ---- state
+const audio = new Audio('../../../' + P.audio.split('/').map(encodeURIComponent).join('/')); audio.preload = 'auto';
+let phase = 'title', t = 0, s = 0, x = 0, vx = 0, speed = 14, caught = 0, missed = 0, lidarT = 0, nextWord = 0, zone = -1, lean = 0, arms = 0, clock0 = 0, endT = 0;
+const G = window.__game = { get state() { return { phase, t: +t.toFixed(2), s: +s.toFixed(1), x: +x.toFixed(2), speed: +speed.toFixed(1), zone, caught, missed, total: WORDS.length,
+  next: glyphs.filter(g => !g.done).map(g => ({ w: g.w, x: +g.x.toFixed(2), ahead: +(s - g.z).toFixed(1) })).sort((a, b) => a.ahead - b.ahead)[0] || null } } };
+function restart() { phase = 'ride'; t = 0; s = 0; x = 0; speed = 14; caught = missed = 0; nextWord = 0; zone = -1; glyphs.forEach(g => scene.remove(g.mesh)); glyphs.length = 0;
+  for (let i = 0; i < NCH; i++) build(i, -i * CH + 20, 0); const from = +(Q.get('t') || 0); nextWord = WORDS.findIndex(w => w.t >= from + 3); audio.currentTime = from; audio.play().catch(() => {}); clock0 = performance.now() - from * 1000; document.getElementById('title').style.display = 'none' }
+document.getElementById('go').onclick = restart;
+if (Q.has('autostart')) restart(); else for (let i = 0; i < NCH; i++) build(i, -i * CH + 20, 0);
+
+const lineEl = document.getElementById('line'), hydEl = document.getElementById('hyd'); let shownLine = -1;
+const cA = new THREE.Color(), cB = new THREE.Color(); let last = performance.now();
+function frame(now) {
+  requestAnimationFrame(frame); const dt = Math.min(.05, (now - last) / 1000); last = now; U.uTime.value = now / 1000;
+  if (phase === 'ride') {
+    t = !audio.paused && audio.currentTime > 0 ? audio.currentTime : (now - clock0) / 1000;           // his voice is the clock; a timer stands in if audio is blocked
+    const steer = (key.ArrowRight || key.KeyD ? 1 : 0) - (key.ArrowLeft || key.KeyA ? 1 : 0) + (touchX !== null ? (touchX - .5) * 3 : 0) + (navigator.getGamepads?.()[0]?.axes[0] || 0);
+    const want = 14 + ((key.ArrowUp || key.KeyW || navigator.getGamepads?.()[0]?.buttons[7]?.pressed) ? 12 : 0) - ((key.ArrowDown || key.KeyS) ? 8 : 0);
+    speed += (want - speed) * (1 - Math.exp(-2 * dt)); vx += (Math.max(-1, Math.min(1, steer)) * 9 - vx) * (1 - Math.exp(-6 * dt));
+    x = Math.max(-4.6, Math.min(4.6, x + vx * dt)); s += speed * dt; arms += ((key.Space || touchArms ? 1 : 0) - arms) * (1 - Math.exp(-6 * dt));
+    if (t > P.dur + 1.5) { phase = 'end'; endT = now / 1000; audio.pause(); lidarT = 1; modeBtn.textContent = 'grey-box'; for (let i = 0; i < NCH; i++) if (chunks[i].z0 < -s - 30) build(i, chunks[i].z0, 1) }
+  } else if (phase === 'end') { speed *= Math.exp(-1.2 * dt); s += speed * dt; vx *= .9 }
+  // zone of the moment drives sky, fog and what the next chunks are built from
+  const zt = zoneAt(t); if (zt !== zone) { zone = zt; if (zone === 5) burst(); for (let i = 0; i < NCH; i++) if (chunks[i].z0 < -s - 110) build(i, chunks[i].z0, zone) }
+  const Z = ZONES[zone], k = 1 - Math.exp(-1.4 * dt);
+  U.uTop.value.lerp(cA.set(Z.top), k); U.uHor.value.lerp(cA.set(Z.hor), k); U.uFog.value.lerp(cA.set(Z.fog), k); U.uGround.value.lerp(cA.set(Z.ground), k);
+  U.uLight.value += (Z.light - U.uLight.value) * k; U.uLidar.value += (lidarT - U.uLidar.value) * (1 - Math.exp(-5 * dt));
+  U.uHyd.value += (caught / Math.max(1, caught + missed + 4) - U.uHyd.value) * k;
+  water.visible = !!Z.water || U.uLight.value < 0 && false; ground.visible = !Z.water;
+  for (let i = 0; i < NCH; i++) if (chunks[i].z0 - CH > -s + 30) build(i, chunks[i].z0 - NCH * CH, zone);
+  // words: spawn each one so it reaches the rider about when he says it
+  while (phase === 'ride' && nextWord < WORDS.length && WORDS[nextWord].t - t < 3.2) {
+    const W = WORDS[nextWord++], lead = Math.max(.6, W.t - t), lane = Math.round((rand() - .5) * 4) * 2.1;
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(3.4, .85), gMat(W.w)); scene.add(m);
+    glyphs.push({ w: W.w, li: W.li, x: lane, z: -(s + speed * lead + 2), mesh: m, done: false, born: t });
+  }
+  for (const g of glyphs) {
+    if (!g.done) {
+      g.mesh.position.set(g.x, 1.15 + Math.sin(now / 300 + g.z) * .08, g.z);
+      if (-g.z < s + .3 && -g.z > s - 1.2) {
+        if (Math.abs(g.x - x) < 1.4) { g.done = 'got'; caught++; splash(g.x, g.z) } }
+      if (-g.z < s - 1.2) { g.done = 'miss'; missed++ }
+    } else {
+      g.age = (g.age || 0) + dt; const m = g.mesh;
+      if (g.done === 'got') { m.position.y += dt * 9; m.material.opacity = Math.max(0, 1 - g.age * 1.6) } else { m.position.y = Math.max(.02, m.position.y - dt * 2); m.material.color.setRGB(.35, .33, .38); m.material.opacity = Math.max(0, .7 - g.age * .3) }
+      if (g.age > 3) { scene.remove(m); g.gone = true }
+    }
+  }
+  for (let i = glyphs.length - 1; i >= 0; i--) if (glyphs[i].gone) glyphs.splice(i, 1);
+  // drops: caught words fall as water and rise into the nearest buildings' windows (uHyd)
+  for (let i = 0; i < dropState.length; i++) { const d = dropState[i]; if (!d) continue; d.vy -= 18 * dt; d.p.addScaledVector(d.v.set(d.vx, d.vy, d.vz), dt); d.life -= dt;
+    M4.compose(d.p, Q4.identity(), V2.setScalar(Math.max(0, d.life))); drops.setMatrixAt(i, d.life > 0 ? M4 : HIDE) }
+  drops.instanceMatrix.needsUpdate = true;
+  // crowd turns to watch him pass
+  if (Z.crowd) for (let i = 0; i < people.length; i++) { const p = people[i]; if (!p) continue; const dz = -s - p.z;
+    if (Math.abs(dz) < 25) { M4.compose(V1.set(p.x, p.h / 2, p.z), Q4.setFromAxisAngle(Y, Math.atan2(x - p.x, -s - p.z)), V2.set(.55, p.h, .38)); crowd.setMatrixAt(i, M4) } }
+  crowd.instanceMatrix.needsUpdate = true;
+  // rider and camera: third person, behind and a little above, damped
+  lean += (-vx * .045 - lean) * (1 - Math.exp(-8 * dt)); rider.position.set(x, 0, -s); rider.rotation.set(0, 0, lean);
+  wheels.forEach(w => w.rotation.x -= speed * dt / .42); armL.rotation.z = -arms * 1.3; armR.rotation.z = arms * 1.3;
+  armL.position.set(-.26 - arms * .38, 1.45 + arms * .18, -.2 + arms * .3); armR.position.set(.26 + arms * .38, 1.45 + arms * .18, -.2 + arms * .3);
+  beam.intensity = 25 * (1 - U.uLight.value) * (1 - U.uLidar.value);
+  const camBack = phase === 'end' ? 6.5 + Math.min(14, (now / 1000 - endT) * 3) : 6.5, camUp = phase === 'end' ? 2.6 + Math.min(16, (now / 1000 - endT) * 3.2) : 2.6;
+  camera.position.lerp(V1.set(x * .55, camUp, -s + camBack), 1 - Math.exp(-5 * dt)); camera.lookAt(x * .8, phase === 'end' ? 4 : 1.3, -s - (phase === 'end' ? 60 : 9));
+  U.uCam.value.copy(camera.position); SKY.position.copy(camera.position); ground.position.set(0, 0, -s); water.position.set(0, -.05, -s);
+  ground.position.x = 0; renderer.render(scene, camera);
+  // his line, word by word; caught words in blue
+  const li = P.lines.findIndex(l => t >= l.t0 - .3 && t <= l.t1 + .8);
+  if (li !== shownLine) { shownLine = li; lineEl.innerHTML = li < 0 ? '' : P.lines[li].words.map(([w], j) => `<span data-j="${j}">${w.replace(/</g, '&lt;')}</span>`).join(' ') }
+  if (li >= 0) { const sp = lineEl.children; P.lines[li].words.forEach(([w, wt], j) => { if (sp[j]) { sp[j].classList.toggle('on', wt <= t); if (glyphs.some(g => g.li === li && g.w === w && g.done === 'got')) sp[j].classList.add('got') } }) }
+  hydEl.textContent = phase === 'end' ? `${caught} of ${caught + missed} words became water · R to ride again` : `${caught} words · zone ${zone + 1}/8`;
+}
+function splash(gx, gz) { for (let i = 0; i < 14; i++) { const k = dropI++ % 400; dropState[k] = { p: new THREE.Vector3(gx, 1, gz), v: new THREE.Vector3(), vx: (rand() - .5) * 6, vy: 4 + rand() * 6, vz: (rand() - .5) * 4 - speed * .3, life: .9 + rand() * .5 } } }
+function burst() { for (let i = 0; i < 60; i++) { const k = dropI++ % 400; dropState[k] = { p: new THREE.Vector3((rand() - .5) * 20, 1 + rand() * 3, -s - 15 - rand() * 20), v: new THREE.Vector3(), vx: (rand() - .5) * 8, vy: 10 + rand() * 8, vz: -rand() * 6, life: 2 + rand() } } }
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
