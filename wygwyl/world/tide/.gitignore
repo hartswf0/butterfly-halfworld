@@ -1,3 +1,5 @@
 runs/
 __pycache__/
 seg/*.pt
+atlas/**/*.ply
+atlas/**/__pycache__/

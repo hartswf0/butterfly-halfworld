@@ -1,0 +1,47 @@
+{
+ "frame_assets": [
+  "asset_8967d2378842476aa2c4773f08c3cd83",
+  "asset_3bcb784b0ab94b9cbd91c7f3c4b1200b",
+  "asset_eb09ef4bcf7a4ca1a7c72d9adaac05b3",
+  "asset_fa711d4ee20f45bfb90b9faa0d4288d7",
+  "asset_5eb0e81f56bb462a91e2ea7fd64e63f9",
+  "asset_1bd34a70039a412997555a9052ae1e44",
+  "asset_0a76941e18ad438486d1954b01c6cb88",
+  "asset_f53ec3b7ccb046e090446a353470f330",
+  "asset_bc97870b03a140e59b3c2d038a0382bc",
+  "asset_eeb63fa328c2440085848f9b9f804d80",
+  "asset_24d7a34df1bf429ea98261e0b2c0ee8a",
+  "asset_62a4163b1781473387916c9147e688e3"
+ ],
+ "pose_op": "7640554eb952458182da066d117cc126",
+ "mask_assets": [
+  "asset_fa47ecfea3674b86a79f91f7a02e5e79",
+  "asset_b7bf72844ddc4a38a35804106baec579",
+  "asset_c10a90f1a6fb4f2bb82827b36e7e0b50",
+  "asset_55d8a9784f7b4fbaa76509a4608ca5d3",
+  "asset_c84571b49bcd45e49f3104c8aba6556b",
+  "asset_831a6d8e8328434b849c48c0e35e2aca",
+  "asset_e26cbbed77bb40b38a36b67382d240fe",
+  "asset_d13ccd1f7053462bba41733d4771b28f",
+  "asset_4bb338aa0fd946fcb1e7ca2f2bc084fa",
+  "asset_fd034ff1ec2343c79b2097329df8bb90",
+  "asset_b653cddc04ee47d4b4e3e79e6d327076",
+  "asset_df217de1502e451ca799fb4d8699c5a5"
+ ],
+ "draft_op": "681eb32cf2a14990841952361d797e5e",
+ "masked_depth_assets": {
+  "0": "asset_bdbd6aa105e541e09c9925ab2c5690b9",
+  "1": "asset_bf443ee71ac74f4f9c1d42425fd90636",
+  "2": "asset_50b668d34daa40df828329a7e97d16fa",
+  "3": "asset_caa30128877b4d57be68c4d3da77fe15",
+  "4": "asset_974cf214dc8148d2b2746984eca720c3",
+  "5": "asset_e720768073e043308a8f8863aae34dec",
+  "6": "asset_affe405f34fa4c28b52b203043aa2d86",
+  "7": "asset_51299d864d764abb875be8ead0c963f5",
+  "8": "asset_07b18091ce3048db90a33eb02205b03f",
+  "9": "asset_691cf85ec9174eac8231362bb0ff0b73",
+  "10": "asset_8ca01e0d373f4f528cda213531a5e932",
+  "11": "asset_29f0319e539142ada736220de649759b"
+ },
+ "draft_ver": "v2"
+}

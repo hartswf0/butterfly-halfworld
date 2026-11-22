@@ -1,0 +1,68 @@
+{
+ "id": "5498319f276c4d5a8cc9b2f5414cf74e",
+ "ownerId": "acct_8133938019c54911b8caddb015860e2b",
+ "metadata": {
+  "@type": "type.worldlabs.ai/wlt.marble.v2.images2PosedRGBD.metadata",
+  "state": "SUCCEEDED",
+  "status": "SUCCEEDED",
+  "surface": "DEVELOPER_API",
+  "task": "images2PosedRGBD",
+  "taskVersion": "v1"
+ },
+ "done": true,
+ "error": null,
+ "expiresAtSecs": null,
+ "createdAtSecs": 1795324936,
+ "response": {
+  "frames": [
+   {
+    "camera": {
+     "extrinsics": {
+      "coordinateSystem": "rub",
+      "position": [
+       0.0,
+       1.3493928909301758,
+       0.0
+      ],
+      "quaternion": [
+       0.05116034509360061,
+       4.0420286209362345e-05,
+       -0.0007890357883194954,
+       0.9986901395721441
+      ]
+     },
+     "intrinsics": {
+      "cx": 640.0,
+      "cy": 360.0,
+      "fx": 1204.0848388671875,
+      "fy": 1204.0848388671875,
+      "height": 720,
+      "width": 1280
+     }
+    },
+    "centroidWorld": [
+     -2.1454899311065674,
+     0.0,
+     -28.13945198059082
+    ],
+    "depth": {
+     "confidenceAsset": {
+      "assetId": "asset_5744b0876db7355b7ff256fa744ad077",
+      "url": "https://storage.googleapis.com/wlt-marble-outputs-prod/us1/acct_8133938019c54911b8caddb015860e2b/proj_153d35d7984d422d87849eebf53e450f/asset_5744b0876db7355b7ff256fa744ad077?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=marble-api-server-prod%40wlt-marble.iam.gserviceaccount.com%2F20261122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261122T052227Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&response-content-disposition=inline%3B%20filename%3D%22asset_5744b0876db7355b7ff256fa744ad077.png%22&X-Goog-Signature=54ef1f6b927ed41a08f3d36e1e7c17794676742f9a9af7982c3551f95d94b07676a17baf9905ed66e347e5e3c561c90ecef1bacb9a32983cc77ae962e7cb79490e88f04823646ad830a6968bd338e76a42c504b627c58d1b24089c81d631e52d09807e64f8323d23efe3f0a40cc9ccac37cbafaa647ee978cac785c1cca0efa97ce64604a2f53c34269cc85a0eb2806bc3e2867041ec1ee2199ec21b941126cb7d1dba13641d5ddf70c37bb1a62b2561c92ff762fc5962a2cb4b5c53664df7c9431ed43ff5c34cc3b46c80a844b2d3cd64e80a60c18467fd8bf72ab38ef09c69d7d00a7425641ee18705e338ecc3062df39b857498c8ce8efff81d1045d985c9"
+     },
+     "depthAsset": {
+      "assetId": "asset_e584ef23416745c73a014b139b8f07b2",
+      "url": "https://storage.googleapis.com/wlt-marble-outputs-prod/us1/acct_8133938019c54911b8caddb015860e2b/proj_153d35d7984d422d87849eebf53e450f/asset_e584ef23416745c73a014b139b8f07b2?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=marble-api-server-prod%40wlt-marble.iam.gserviceaccount.com%2F20261122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261122T052227Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&response-content-disposition=inline%3B%20filename%3D%22asset_e584ef23416745c73a014b139b8f07b2.exr%22&X-Goog-Signature=15eb7ed290436679d4c497b34621242af0a02432a97cb40e6e636c5a0cfea399b5da3c36cab8e1d56c799a2007ca50be2e0513463dbe41d716f2b607178092f86b250eed0de31f961f0bdcf77d11938a9c70c3d9ad5f303ce3d3bb3ff9882acb83d10d15ae20147b853660959f86d2d231eaa7f7fcbe41a2039562cfe59cde90f2e3d473584258f01a7c18bba4d8da8b793a5276b0b7165cc6f03abdd423fdac5a5bbb2266224172364074808ebde959807cdf29839da3e94372d9ef2b9660318b3cdce7e86e5a4a3f7e104be4e8d0c0592394a35de294d2bb3ba84cae7b75a9e69a6cf7a98ae77c58258a87ad849460101b0a97f38d250c3ccf39cc435ec606"
+     }
+    },
+    "imageAsset": {
+     "assetId": "asset_35d9c8aa80aa498c8cb37d5bf36ce8d2",
+     "url": "https://storage.googleapis.com/wlt-marble-upload-prod/us1/acct_8133938019c54911b8caddb015860e2b/proj_153d35d7984d422d87849eebf53e450f/asset_35d9c8aa80aa498c8cb37d5bf36ce8d2?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=marble-api-server-prod%40wlt-marble.iam.gserviceaccount.com%2F20261122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261122T052227Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&response-content-disposition=inline%3B%20filename%3D%22asset_35d9c8aa80aa498c8cb37d5bf36ce8d2.jpg%22&X-Goog-Signature=442015352bcb64df3b7af47647d76437b0303ac912c1d595fd342081ab5b184e5edd0ad124a5fd3ac29de7fe8faf97e33a710c896ea061e06bebdbe1a34df6a8e2b94c969011748e466aa6f6e190a75824d152e56ab76f992b8418a11c0cba7084d9a0fe5deafeb356d5ee365d15a8665e3fa55da31ce0090a7f3e154e3cf3fbdcbd3c256dea933fb6798a88c06b1150e896fe8d645819478afacd7eb3046058aba389dec084c5916e38b709da0830b2e2600bfac926fc4765e2874cbefcb6814e5c1e0d947fac368abfc160cd15f3a84b9a86c0cdea8724b79c758f291f04ec229b669d23a8ed8a00707860422b4c78ab2e3173c5ef894876838bc1a38c72be"
+    },
+    "maskAsset": null
+   }
+  ],
+  "poseRefinementAccepted": null
+ },
+ "name": "accounts/acct_8133938019c54911b8caddb015860e2b/projects/proj_153d35d7984d422d87849eebf53e450f/operations/5498319f276c4d5a8cc9b2f5414cf74e"
+}

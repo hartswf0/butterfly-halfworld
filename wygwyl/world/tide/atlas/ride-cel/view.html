@@ -1,0 +1,72 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Magic Ride Splats</title>
+<style>
+:root{--bg:#02030c;--ink:#f4f6ff;--dim:#8b93b5;--blue:#1f4dff;--m:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%;background:var(--bg);color:var(--ink);font:13px/1.4 var(--m);overflow:hidden}
+canvas{display:block;width:100vw;height:100vh;touch-action:none}
+.hud{position:fixed;left:16px;right:16px;top:14px;display:flex;justify-content:space-between;gap:10px;pointer-events:none;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.hud a{color:var(--ink);pointer-events:auto}
+#line{position:fixed;left:16px;right:16px;bottom:64px;max-width:760px;font-size:clamp(15px,2.4vw,22px);line-height:1.35;text-shadow:0 1px 12px #000,0 0 2px #000;pointer-events:none}
+#line small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9fb3ff;margin-bottom:6px}
+.bar{position:fixed;left:16px;right:16px;bottom:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button{font:inherit;font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:rgba(0,0,0,.55);color:var(--ink);border:1px solid rgba(255,255,255,.25);padding:8px 12px;cursor:pointer}
+button.on{background:var(--blue);border-color:var(--blue)}#msg{color:var(--dim);font-size:11px;margin-left:auto}
+#fade{position:fixed;inset:0;background:radial-gradient(#1f4dff,#02030c 70%);opacity:0;pointer-events:none;transition:opacity .5s}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/","@sparkjsdev/spark":"https://cdn.jsdelivr.net/npm/@sparkjsdev/spark@2.4.0/dist/spark.module.js"}}</script>
+</head><body>
+<div class="hud"><span>WYGWYL · Poem 10, Magic Ride · cel take, first half · Atlas splats</span><span><a href="../../game/index.html">game</a> · <a href="../../watch.html">watch</a></span></div>
+<div id="fade"></div><div id="line"></div>
+<div class="bar" id="bar"><button id="b-play" class="on">Ride</button><button id="b-free">Free look</button><span id="msg">loading splats…</span></div>
+<script type="module">
+import * as THREE from 'three';
+import { SparkRenderer, SplatMesh } from '@sparkjsdev/spark';
+const renderer = new THREE.WebGLRenderer({ antialias: false, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.setSize(innerWidth, innerHeight); document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x02030c); scene.add(new SparkRenderer({ renderer }));
+const S = await (await fetch('scenes.json')).json();
+const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.05, 500);
+// each scene lives in its own world; only the current one is shown
+for (const s of S) {
+  s.PT = s.cams.map(c => new THREE.Vector3(...c.p)); s.QT = s.cams.map(c => new THREE.Quaternion(...c.q));
+  s.curve = new THREE.CatmullRomCurve3(s.PT.length > 1 ? s.PT : [s.PT[0], s.PT[0].clone().add(new THREE.Vector3(0, 0, -.01))], false, 'centripetal');
+  s.fov = 2 * Math.atan(s.cams[0].h / 2 / s.cams[0].fy) * 180 / Math.PI;
+  const b = document.createElement('button'); b.textContent = s.name; b.onclick = () => { go(S.indexOf(s), true); mode = 'free'; tog(); }; document.getElementById('bar').insertBefore(b, document.getElementById('msg')); s.btn = b;
+}
+const fade = document.getElementById('fade');
+let cur = -1, mode = 'play', t0 = 0, yaw = 0, pitch = 0, drag = null;
+async function prep(s) { if (!s.mesh) { s.mesh = new SplatMesh({ url: s.spz }); await s.mesh.initialized; s.mesh.visible = false; scene.add(s.mesh); } }
+function pose(s, u) { const n = s.cams.length, f = u * (n - 1), i = Math.min(n - 2, Math.max(0, Math.floor(f))), a = n > 1 ? f - i : 0;
+  camera.position.copy(s.curve.getPoint(u)); if (n > 1) camera.quaternion.slerpQuaternions(s.QT[i], s.QT[i + 1], a); else camera.quaternion.copy(s.QT[0]);
+  if (camera.fov !== s.fov) { camera.fov = s.fov; camera.updateProjectionMatrix(); } }
+function go(i, now) {
+  S.forEach((s, k) => { if (s.mesh) s.mesh.visible = k === i; s.btn.classList.toggle('on', k === i); });
+  cur = i; t0 = performance.now(); const s = S[i]; pose(s, 0); const e = new THREE.Euler().setFromQuaternion(camera.quaternion, 'YXZ'); yaw = e.y; pitch = e.x;
+  document.getElementById('line').innerHTML = `<small>${s.title}</small>${s.line}`;
+}
+window.__shot = (i, u) => { mode = 'manual'; fade.style.transition = 'none'; fade.style.opacity = 0; if (cur !== i) go(i); pose(S[i], u); window.__frames = 12; };
+document.getElementById('b-play').onclick = () => { mode = 'play'; go(0); tog(); };
+document.getElementById('b-free').onclick = () => { mode = 'free'; tog(); };
+function tog() { document.getElementById('b-play').classList.toggle('on', mode === 'play'); document.getElementById('b-free').classList.toggle('on', mode === 'free'); }
+const keys = {}; addEventListener('keydown', e => keys[e.key.toLowerCase()] = 1); addEventListener('keyup', e => keys[e.key.toLowerCase()] = 0);
+renderer.domElement.addEventListener('pointerdown', e => { if (mode === 'play') { mode = 'free'; tog(); } drag = [e.clientX, e.clientY]; });
+addEventListener('pointerup', () => drag = null);
+addEventListener('pointermove', e => { if (!drag) return; yaw -= (e.clientX - drag[0]) * .004; pitch = Math.max(-1.3, Math.min(1.3, pitch - (e.clientY - drag[1]) * .004)); drag = [e.clientX, e.clientY]; });
+addEventListener('wheel', e => { camera.position.addScaledVector(new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion), -e.deltaY * .004); }, { passive: true });
+addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); });
+const _f = 0;
+renderer.setAnimationLoop(() => {
+  if (cur < 0) return;
+  if (mode === 'play') { const s = S[cur], u = (performance.now() - t0) / 1000 / s.dur;
+    fade.style.opacity = u > .93 ? 1 : 0;
+    if (u >= 1) go((cur + 1) % S.length); else pose(s, u); }
+  else if (mode === 'free') { fade.style.opacity = 0; camera.quaternion.setFromEuler(new THREE.Euler(pitch, yaw, 0, 'YXZ'));
+    const f = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion), r = new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion);
+    camera.position.addScaledVector(f, ((keys.w || keys.arrowup) - (keys.s || keys.arrowdown) || 0) * .05).addScaledVector(r, ((keys.d || keys.arrowright) - (keys.a || keys.arrowleft) || 0) * .05); }
+  if (mode !== 'manual') renderer.render(scene, camera);
+  else if (window.__frames > 0) { renderer.render(scene, camera); window.__frames--; }
+});
+await prep(S[0]); go(0); document.getElementById('msg').textContent = 'loading the other scenes…';
+for (const s of S.slice(1)) await prep(s);
+document.getElementById('msg').textContent = 'draft splats · 3 scenes'; window.__ready = true;
+</script></body></html>
