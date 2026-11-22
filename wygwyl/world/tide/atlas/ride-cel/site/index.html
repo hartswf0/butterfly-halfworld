@@ -1,0 +1,160 @@
+<title>Magic Ride</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@1&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* One stage. The world fills it; his words sit low; one control row sits beside the time it changes. */
+:root{
+  --stage:#030409;      /* the dark before the world */
+  --ink:#f2f3fb;        /* words */
+  --dim:#8890ad;        /* labels, time */
+  --water:#1f4dff;      /* word-water blue: progress, the active control */
+  --line:rgba(242,243,251,.22);
+  --word:"IM Fell English",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{margin:0;background:var(--stage);color:var(--ink);font:13px/1.4 var(--mono);overflow:hidden;-webkit-tap-highlight-color:transparent}
+canvas{position:fixed;inset:0;width:100vw;height:100vh;display:block;touch-action:none;outline:none}
+#veil{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 60%,var(--water),var(--stage) 72%);opacity:0;pointer-events:none;transition:opacity .45s ease}
+#words{position:fixed;left:0;right:0;bottom:calc(96px + env(safe-area-inset-bottom,0px));padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));
+  text-align:center;font:italic 400 clamp(19px,3.1vw,32px)/1.32 var(--word);text-wrap:balance;text-shadow:0 1px 14px rgba(0,0,0,.85),0 0 2px #000;pointer-events:none;min-height:1em}
+#words span{opacity:0;transition:opacity .22s ease}#words span.on{opacity:1}
+.bar{position:fixed;left:0;right:0;bottom:0;padding:12px max(16px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  display:grid;gap:10px;background:linear-gradient(transparent,rgba(3,4,9,.72) 40%)}
+.row{display:flex;align-items:center;gap:12px;min-width:0}
+button{all:unset;cursor:pointer;font:600 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);border:1px solid var(--line);padding:10px 14px;min-height:16px}
+button:focus-visible{outline:2px solid var(--water);outline-offset:2px}
+button.go{background:var(--water);border-color:var(--water)}
+#time{color:var(--dim);font-variant-numeric:tabular-nums;font-size:11px;letter-spacing:.06em}
+#place{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));top:calc(14px + env(safe-area-inset-top,0px));color:var(--ink);opacity:.72;font-size:11px;letter-spacing:.16em;text-transform:uppercase;pointer-events:none}
+.row .gap{flex:1}
+[hidden]{display:none!important}
+#seek{position:relative;height:22px;cursor:pointer;touch-action:none}
+#seek::before{content:"";position:absolute;left:0;right:0;top:10px;height:1px;background:var(--line)}
+#fill{position:absolute;left:0;top:9px;height:3px;background:var(--water);width:0}
+#seek i{position:absolute;top:6px;width:1px;height:10px;background:var(--dim)}
+#note{position:fixed;left:max(16px,env(safe-area-inset-left,0px));top:calc(34px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));color:var(--dim);font-size:11px;letter-spacing:.12em;text-transform:uppercase;pointer-events:none}
+#fault{position:fixed;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--ink);font:italic 22px/1.4 var(--word)}
+@media (prefers-reduced-motion:reduce){#veil,#words span{transition:none}}
+</style>
+
+<canvas id="c" tabindex="0" aria-label="The reconstructed world of the ride. Drag to look around while paused."></canvas>
+<div id="veil"></div>
+<div id="place"></div>
+<div id="note" aria-live="polite">Loading the kerb…</div>
+<div id="words" aria-live="polite"></div>
+<div class="bar">
+  <div id="seek" role="slider" aria-label="Position in the ride" aria-valuemin="0" aria-valuemax="53" aria-valuenow="0" tabindex="0"><div id="fill"></div></div>
+  <div class="row">
+    <button id="play" class="go" type="button">Play with sound</button>
+    <span id="time">0:00 / 0:53</span>
+    <span class="gap"></span>
+    <button id="geo" type="button" hidden>Mesh</button>
+  </div>
+</div>
+<div id="fault" hidden></div>
+<audio id="voice" src="voice.mp3" preload="auto"></audio>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/","@sparkjsdev/spark":"https://cdn.jsdelivr.net/npm/@sparkjsdev/spark@2.4.0/dist/spark.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { SparkRenderer, SplatMesh } from '@sparkjsdev/spark';
+const $ = id => document.getElementById(id);
+const fault = m => { $('fault').hidden = false; $('fault').textContent = m; $('note').textContent = ''; };
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ canvas: $('c'), antialias: false, preserveDrawingBuffer: true }); }
+catch (e) { fault('This browser could not start WebGL, so the world cannot be drawn here. The film of the ride plays anywhere.'); throw e; }
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75)); renderer.setSize(innerWidth, innerHeight);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x030409); scene.add(new SparkRenderer({ renderer }));
+scene.add(new THREE.HemisphereLight(0xdfe6ff, 0x202030, 2.2));
+const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.05, 600);
+const [S, L] = await Promise.all([fetch('scenes.json').then(r => r.json()), fetch('words.json').then(r => r.json())]);
+const voice = $('voice'), END = S[S.length - 1].t1;
+$('seek').setAttribute('aria-valuemax', END.toFixed(0));
+for (const s of S) {   // place ticks on the seek line
+  if (s.t0 > 0) { const i = document.createElement('i'); i.style.left = (s.t0 / END * 100) + '%'; $('seek').appendChild(i); }
+  s.QT = s.keys.map(k => new THREE.Quaternion(...k.q)); s.PT = s.keys.map(k => new THREE.Vector3(...k.p));
+  s.fov = 2 * Math.atan(s.h / 2 / s.fy) * 180 / Math.PI;
+}
+// load each place's splats in order; the first one is enough to begin
+let loaded = 0;
+// files travel as base64 text (artifacts serve only web types); decode to bytes here
+async function bytes(url) {
+  const r = await fetch(url); if (!r.ok) throw new Error(url + ' ' + r.status); const b64 = (await r.text()).trim();
+  if (Uint8Array.fromBase64) return Uint8Array.fromBase64(b64);
+  const bin = atob(b64), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u;
+}
+async function load(s) { s.mesh = new SplatMesh({ fileBytes: await bytes(s.spz), fileType: 'spz' }); await s.mesh.initialized; s.mesh.visible = false; scene.add(s.mesh); loaded++; }
+// camera at time t: keys carry their own times (the take's camera); eased between them
+function camAt(s, t) {
+  const k = s.keys; let i = 0; while (i < k.length - 2 && t > k[i + 1].t) i++;
+  const a = k.length < 2 ? 0 : THREE.MathUtils.clamp((t - k[i].t) / Math.max(1e-3, k[i + 1].t - k[i].t), 0, 1), e = a * a * (3 - 2 * a);
+  camera.position.copy(s.PT[i]).lerp(s.PT[Math.min(i + 1, k.length - 1)], e);
+  camera.quaternion.copy(s.QT[i]).slerp(s.QT[Math.min(i + 1, k.length - 1)], e);
+  if (camera.fov !== s.fov) { camera.fov = s.fov; camera.updateProjectionMatrix(); }
+}
+const sceneAt = t => S.find(s => t < s.t1) || S[S.length - 1];
+let cur = null, look = null, showMesh = false;
+function enter(s) {
+  if (cur === s) return; cur = s; look = null;
+  for (const x of S) { if (x.mesh) x.mesh.visible = x === s && !(showMesh && x.glb); if (x.glbObj) x.glbObj.visible = x === s && showMesh; }
+  $('place').textContent = s.title; $('geo').hidden = !s.glb; $('geo').textContent = showMesh ? 'Splats' : 'Mesh';
+}
+// words: the line being spoken, each word lit as it is said
+let lineShown = -1;
+function words(t) {
+  const n = L.findIndex(l => t >= l.t0 - .05 && t <= l.t1 + 1.3), box = $('words');
+  if (n !== lineShown) { lineShown = n; box.innerHTML = n < 0 ? '' : L[n].w.map(([w]) => `<span>${w.replace(/</g, '&lt;')}</span>`).join(' '); }
+  if (n >= 0) { const sp = box.children; L[n].w.forEach(([, wt], k) => sp[k].classList.toggle('on', t >= wt - .02 && t <= L[n].t1 + 1.3)); }
+}
+const fmt = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+let playing = false, tPaused = 0;
+const now = () => playing ? voice.currentTime : tPaused;
+function setPlay(p) {
+  playing = p; $('play').textContent = p ? 'Pause' : (now() > 0 && now() < END - .1 ? 'Play' : 'Play with sound'); $('play').classList.toggle('go', !p);
+  if (p) { if (now() >= END - .1) voice.currentTime = 0; voice.play().catch(() => { playing = false; $('play').textContent = 'Play with sound'; }); }
+  else { tPaused = voice.currentTime; voice.pause(); }
+}
+$('play').onclick = () => setPlay(!playing);
+voice.addEventListener('ended', () => { setPlay(false); tPaused = END; });
+function seekTo(x) { const r = $('seek').getBoundingClientRect(), t = THREE.MathUtils.clamp((x - r.left) / r.width, 0, 1) * END; voice.currentTime = t; tPaused = t; look = null; }
+let seeking = false;
+$('seek').addEventListener('pointerdown', e => { seeking = true; $('seek').setPointerCapture(e.pointerId); seekTo(e.clientX); });
+$('seek').addEventListener('pointermove', e => { if (seeking) seekTo(e.clientX); });
+$('seek').addEventListener('pointerup', () => seeking = false);
+$('seek').addEventListener('keydown', e => { const d = e.key === 'ArrowRight' ? 3 : e.key === 'ArrowLeft' ? -3 : 0; if (d) { const t = THREE.MathUtils.clamp(now() + d, 0, END); voice.currentTime = t; tPaused = t; } });
+$('geo').onclick = () => { showMesh = !showMesh; const s = cur; cur = null; enter(s); };
+// look around while paused: drag turns the head, pinch or wheel moves along the view
+let drag = null, pinch = 0; const ptrs = new Map();
+$('c').addEventListener('pointerdown', e => { ptrs.set(e.pointerId, e); if (playing) setPlay(false); if (!look) { const E = new THREE.Euler().setFromQuaternion(camera.quaternion, 'YXZ'); look = { yaw: E.y, pitch: E.x, pos: camera.position.clone() }; } drag = [e.clientX, e.clientY]; });
+addEventListener('pointerup', e => { ptrs.delete(e.pointerId); drag = null; pinch = 0; });
+addEventListener('pointermove', e => {
+  if (!ptrs.has(e.pointerId) || !look) return; ptrs.set(e.pointerId, e);
+  if (ptrs.size === 2) { const [a, b] = [...ptrs.values()], d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY); if (pinch) move((d - pinch) * .02); pinch = d; return; }
+  if (!drag) return; look.yaw -= (e.clientX - drag[0]) * .005; look.pitch = THREE.MathUtils.clamp(look.pitch - (e.clientY - drag[1]) * .005, -1.2, 1.2); drag = [e.clientX, e.clientY];
+});
+function move(d) { if (!look) return; look.pos.addScaledVector(new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion), d); }
+addEventListener('wheel', e => { if (!look) { const E = new THREE.Euler().setFromQuaternion(camera.quaternion, 'YXZ'); look = { yaw: E.y, pitch: E.x, pos: camera.position.clone() }; if (playing) setPlay(false); } move(-e.deltaY * .004); }, { passive: true });
+addEventListener('keydown', e => { if (e.key === ' ' && document.activeElement !== $('play')) { e.preventDefault(); setPlay(!playing); } });
+addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); });
+window.__at = t => { tPaused = t; voice.currentTime = t; look = null; };   // for checks
+renderer.setAnimationLoop(() => {
+  const t = now(), s = sceneAt(t);
+  if (s.mesh) enter(s); else { $('place').textContent = s.title + ' · loading'; }
+  if (look) { camera.quaternion.setFromEuler(new THREE.Euler(look.pitch, look.yaw, 0, 'YXZ')); camera.position.copy(look.pos); }
+  else camAt(s, t);
+  const cut = (s.t0 > 0 && t - s.t0 < .45) || (s.t1 < END && s.t1 - t < .45); $('veil').style.opacity = cut && !look ? 1 : 0;   // the world drains to blue at each cut
+  words(t); $('fill').style.width = (t / END * 100) + '%'; $('time').textContent = `${fmt(t)} / ${fmt(END)}`; $('seek').setAttribute('aria-valuenow', t.toFixed(1));
+  renderer.render(scene, camera);
+});
+try {
+  await load(S[0]); enter(S[0]); camAt(S[0], 0);
+  $('note').textContent = loaded < S.length ? `${loaded} of ${S.length} places loaded` : '';
+  for (const s of S.slice(1)) { try { await load(s); } catch (e) { console.warn('place not loaded', s.name, e); } $('note').textContent = loaded < S.length ? `${loaded} of ${S.length} places loaded` : ''; }
+  for (const s of S.filter(s => s.glb)) { try { const g = await new GLTFLoader().parseAsync((await bytes(s.glb)).buffer, ''); s.glbObj = g.scene; s.glbObj.visible = false; scene.add(s.glbObj); } catch (e) { s.glb = null; console.warn('mesh not loaded', e); } }
+  window.__ready = true;
+} catch (e) { fault('A place could not be loaded. Reload the page to try again.'); console.error(e); }
+</script>

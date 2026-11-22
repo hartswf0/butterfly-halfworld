@@ -87,8 +87,9 @@ def words_layer(lines, t):
         y += 50
     return lay
 
-def ride_cel():
-    D = f'{A}/ride-cel'; L = json.load(open(f'{T}/game/poem.json'))['lines']; END = 27.9
+def ride_cel(full=False):
+    D = f'{A}/ride-cel'; L = json.load(open(f'{T}/game/poem.json'))['lines']; END = 53.4 if full else 27.9
+    sys.path.insert(0, A); from ride_cel import SCN
     lines = [l for l in L if l['t0'] < END]
     po = lambda s: json.load(open(f'{D}/{s}/pose_op.json'))['response']['frames']
     go = lambda s: json.load(open(f'{D}/{s}/gen_op.json'))['response']['frames']
@@ -101,17 +102,25 @@ def ride_cel():
     v = [(f'{D}/neon/posed/00_rgb.jpg', f'{D}/neon/posed/00_depth.exr', np_[0]['camera'])] + [(f'{D}/neon/gen/{n:02d}_rgb.jpg', f'{D}/neon/gen/{n:02d}_depth.exr', ng[n]['camera']) for n in range(8)]
     scenes.append({'t0': 13.04, 't1': 20.92, 'cloud': cloud(v), 'K': np_[0]['camera']['intrinsics'], 'keys': [E(np_[0]['camera']), E(ng[0]['camera']), E(ng[1]['camera']), E(ng[2]['camera'])]})
     v = [(f'{D}/tunnel/posed/{n:02d}_rgb.jpg', f'{D}/tunnel/posed/{n:02d}_depth_masked.exr', tp[n]['camera']) for n in range(12)]
-    scenes.append({'t0': 20.92, 't1': END, 'cloud': cloud(v), 'K': tp[0]['camera']['intrinsics'], 'keys': [E(tp[n]['camera']) for n in range(3, 12)]})
+    scenes.append({'t0': 20.92, 't1': 27.9 if full else END, 'cloud': cloud(v), 'K': tp[0]['camera']['intrinsics'], 'keys': [E(tp[n]['camera']) for n in range(3, 12)]})
+    if full:
+        for name, t0, t1 in (('fog', 27.9, 36.17), ('lanterns', 36.17, END)):
+            fp = po(name); v = [(f'{D}/{name}/posed/{n:02d}_rgb.jpg', f'{D}/{name}/posed/{n:02d}_depth_masked.exr', fp[n]['camera']) for n in range(len(fp))]
+            scenes.append({'t0': t0, 't1': t1, 'cloud': cloud(v), 'K': fp[0]['camera']['intrinsics'], 'keys': [E(f['camera']) for f in fp], 'times': SCN[name]['times']})
     for s in scenes:
         P, C = s['cloud']; y = P[:, 1]; g, top = np.percentile(y, 1), np.percentile(y, 99)
         lum = (C.mean(1) / 255)[:, None]; s['col'] = ramp((y - g) / (top - g)) * (.45 + .75 * lum); print('points', len(P))
-    out = f'{D}/magic-ride-first-half.mp4'
+    out = f'{D}/magic-ride.mp4' if full else f'{D}/magic-ride-first-half.mp4'
     ff = subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'bgr24', '-s', f'{W}x{H}', '-r', str(FPS), '-i', '-',
                            '-ss', '0', '-t', f'{END}', '-i', f'{T}/full/out/10ride-cel-1122-0129/film.mp4', '-map', '0:v', '-map', '1:a',
-                           '-c:v', 'libx264', '-crf', '18', '-preset', 'medium', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', out], stdin=subprocess.PIPE)
+                           '-c:v', 'libx264', '-crf', '27', '-preset', 'slow', '-tune', 'grain', '-movflags', '+faststart', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', out], stdin=subprocess.PIPE)
     for n in range(int(END * FPS)):
         t = n / FPS; s = next(x for x in scenes if x['t0'] <= t < x['t1'] or x is scenes[-1])
-        u = (t - s['t0']) / (s['t1'] - s['t0']); pos, q = path_at(s['keys'], min(1, max(0, u)))
+        if 'times' in s:
+            ts = s['times']; i = max(0, min(len(ts) - 2, int(np.searchsorted(ts, t) - 1))); a = min(1, max(0, (t - ts[i]) / (ts[i + 1] - ts[i]))); a = a * a * (3 - 2 * a)
+            pos = np.array(s['keys'][i][0]) * (1 - a) + np.array(s['keys'][i + 1][0]) * a; q = slerp(s['keys'][i][1], s['keys'][i + 1][1], a)
+        else:
+            u = (t - s['t0']) / (s['t1'] - s['t0']); pos, q = path_at(s['keys'], min(1, max(0, u)))
         img = draw(s['cloud'][0], s['col'], pos, q, s['K'])
         # between places the world drains to blue and fills again
         e = min(t - s['t0'], s['t1'] - t); w = 0 if e > .6 else (1 - e / .6) ** 1.5
@@ -124,4 +133,4 @@ def ride_cel():
     ff.stdin.close(); ff.wait(); print('wrote', out)
 
 if __name__ == '__main__':
-    globals()[sys.argv[1].replace('-', '_')]()
+    globals()[sys.argv[1].replace('-', '_')](*(['--full'] == sys.argv[2:3] and [True] or []))

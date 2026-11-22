@@ -13,8 +13,11 @@ CLIP = os.path.join(T, 'full/out/10ride-cel-1122-0129/film.mp4')
 PROMPT = {
  'kerb': 'Cel-shaded animation, night. A quiet residential street: a single street lamp casts a cone of light on wet grey asphalt and a kerb; dark trees and low houses behind. A Black man in a black turtleneck, black trousers and black boots stands beside a parked black motorcycle with a round headlight and a red tail light.',
  'neon': 'Cel-shaded animation, dusk after rain. A wide wet commercial road with yellow centre lines and white lane dashes mirroring neon; two-storey shopfronts with glowing pink, yellow and white signs, telephone poles and power lines against a teal sky.',
- 'tunnel': 'Cel-shaded animation. A long monochrome grey concrete tunnel with an arched mouth opening onto bright fog; smooth concrete walls and floor, soft diffuse light.'}
-SCN = {'kerb': {'times': [4.0]}, 'neon': {'times': [20.6]}, 'tunnel': {'times': [21.2 + 0.56 * i for i in range(12)]}}
+ 'tunnel': 'Cel-shaded animation. A long monochrome grey concrete tunnel with an arched mouth opening onto bright fog; smooth concrete walls and floor, soft diffuse light.',
+ 'fog': 'Cel-shaded animation. A wide pale grey concrete plaza and road in thick fog; faint grey tower blocks, street lamps and a ramp dissolve into the white haze; flat diffuse light.',
+ 'lanterns': 'Cel-shaded animation, dusk. A long straight street under a teal sky hung with rows of glowing yellow paper lanterns on wires; dark two- and three-storey shophouses with awnings and lit windows; East and Southeast Asian men and women in teal, green and orange garments stand along both pavements watching.'}
+SCN = {'kerb': {'times': [4.0]}, 'neon': {'times': [20.6]}, 'tunnel': {'times': [21.2 + 0.56 * i for i in range(12)]},
+       'fog': {'times': [28.2 + 0.66 * i for i in range(12)]}, 'lanterns': {'times': [36.5 + 0.5 * i for i in range(11)] + [43.0, 46.0, 49.0, 52.5]}}
 FPS = 6
 
 def st(s):
