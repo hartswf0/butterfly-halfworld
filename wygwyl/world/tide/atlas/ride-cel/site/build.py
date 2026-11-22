@@ -18,8 +18,10 @@ spread = lambda cams, t0, t1: [K(c, t0 + (t1 - t0) * i / (len(cams) - 1)) for i,
 timed = lambda d, times: [K(f['camera'], t) for f, t in zip(po(d), times)]
 LID = json.load(open(f'{SITE}/lidar.json'))
 def place(name, title, t0, t1, keys, c0, d, splat):
+    rel = lambda f: os.path.relpath(f, SITE) if f and os.path.exists(f) else None   # the original file, served directly where the repo is published (GitHub Pages)
     return {'name': name, 'title': title, 't0': t0, 't1': t1, 'keys': keys, 'fy': c0['intrinsics']['fy'], 'h': c0['intrinsics']['height'],
-            'splat': pack(splat, f'{name}.spz'), 'mesh': pack(f'{d}/{name}_mesh.glb', f'{name}.glb'), 'lidar': f'data/{name}.lidar.txt', 'lidarMeta': LID[name]}
+            'splat': pack(splat, f'{name}.spz'), 'mesh': pack(f'{d}/{name}_mesh.glb', f'{name}.glb'), 'lidar': f'data/{name}.lidar.txt', 'lidarMeta': LID[name],
+            'raw': {'splat': rel(splat), 'mesh': rel(f'{d}/{name}_mesh.glb'), 'lidar': rel(f'{d}/{name}.lidar.bin')}}
 kp, kg, np_, ng = po(f'{D}/kerb')[0]['camera'], go(f'{D}/kerb'), po(f'{D}/neon')[0]['camera'], go(f'{D}/neon')
 ride = [
  place('kerb', 'Kerb, under the one lamp', 0, 13.04, spread([kg[1]['camera'], kg[2]['camera'], kp, kg[3]['camera'], kg[4]['camera']], 0, 13.04), kp, f'{D}/kerb', f'{D}/kerb/kerb_draft.spz'),
@@ -32,4 +34,8 @@ reels = {
  'ride': {'title': 'Magic Ride', 'about': 'Poem 10, the cel-shaded Genie take, rebuilt by Atlas in five places. His voice; his words as he says them.', 'audio': 'voice.mp3', 'words': 'words.json', 'end': 53.4, 'places': ride},
  'arcade': {'title': 'Arcade walk', 'about': 'Genie street test, zone 091: he walks to the twin escalators, then the camera turns along the shopfronts. Rebuilt by Atlas from 18 frames, the man masked out. The take’s own sound.', 'audio': 'arcade.mp3', 'words': None, 'end': 20.1, 'places': arcade}}
 json.dump(reels, open(f'{SITE}/reels.json', 'w'), separators=(',', ':'))
+# GitHub Pages copy of the page: the same page with the document head the artifact host normally adds
+page = open(f'{SITE}/index.html').read()
+open(f'{SITE}/play.html', 'w').write('<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
+    '<!-- generated from index.html by build.py: the GitHub Pages copy of the viewer -->\n</head><body>\n' + page + '\n</body></html>\n')
 for r in reels.values(): print(r['title'], [(p['name'], len(p['splat'] or []), len(p['mesh'] or [])) for p in r['places']])

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!-- generated from index.html by build.py: the GitHub Pages copy of the viewer -->
+</head><body>
+<title>Magic Ride</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@1&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* One stage. The world fills it. Top: which reel, which place. Low: his words. Bottom: time, and the three ways to see. */
+:root{
+  --stage:#030409; --ink:#f2f3fb; --dim:#8a92b0; --water:#1f4dff; --line:rgba(242,243,251,.2);
+  --word:"IM Fell English",Georgia,"Times New Roman",serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{margin:0;background:var(--stage);color:var(--ink);font:13px/1.4 var(--mono);overflow:hidden;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+canvas{position:fixed;inset:0;width:100vw;height:100vh;display:block;touch-action:none;outline:none}
+#veil{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 60%,var(--water),var(--stage) 72%);opacity:0;pointer-events:none;transition:opacity .45s ease}
+.top{position:fixed;left:0;right:0;top:0;padding:calc(12px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 28px max(16px,env(safe-area-inset-left,0px));
+  display:grid;gap:6px;background:linear-gradient(rgba(3,4,9,.7),transparent);pointer-events:none}
+.reels{display:flex;gap:18px;pointer-events:auto}
+.reels a{color:var(--dim);text-decoration:none;font:600 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;padding:6px 0;border-bottom:2px solid transparent}
+.reels a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--water)}
+.reels a:focus-visible{outline:2px solid var(--water);outline-offset:3px}
+#about{color:var(--dim);font-size:11px;line-height:1.45;max-width:60ch}
+#place{color:var(--ink);font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.8}
+#words{position:fixed;left:0;right:0;bottom:calc(150px + env(safe-area-inset-bottom,0px));padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));
+  text-align:center;font:italic 400 clamp(19px,3.1vw,32px)/1.32 var(--word);text-wrap:balance;text-shadow:0 1px 14px rgba(0,0,0,.9),0 0 2px #000;pointer-events:none}
+#words span{opacity:0;transition:opacity .22s ease}#words span.on{opacity:1}
+.bar{position:fixed;left:0;right:0;bottom:0;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  display:grid;gap:8px;background:linear-gradient(transparent,rgba(3,4,9,.78) 38%)}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-width:0}
+button{all:unset;cursor:pointer;font:600 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);border:1px solid var(--line);padding:10px 13px}
+button:focus-visible{outline:2px solid var(--water);outline-offset:2px}
+button.go{background:var(--water);border-color:var(--water)}
+#time{color:var(--dim);font-variant-numeric:tabular-nums;font-size:11px;letter-spacing:.06em;margin-right:auto}
+.see{display:flex}.see button{border-right-width:0}.see button:last-child{border-right-width:1px}
+.see button[aria-pressed="true"]{background:var(--ink);color:var(--stage)}
+.see button:disabled{opacity:.35;cursor:default}
+#seek{position:relative;height:22px;cursor:pointer;touch-action:none}
+#seek::before{content:"";position:absolute;left:0;right:0;top:10px;height:1px;background:var(--line)}
+#fill{position:absolute;left:0;top:9px;height:3px;background:var(--water);width:0}
+#seek i{position:absolute;top:6px;width:1px;height:10px;background:var(--dim)}
+#note{color:var(--dim);font-size:11px;letter-spacing:.1em;text-transform:uppercase;min-height:1em}
+#fault{position:fixed;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--ink);font:italic 22px/1.4 var(--word);background:var(--stage)}
+@media (prefers-reduced-motion:reduce){#veil,#words span{transition:none}}
+</style>
+
+<canvas id="c" tabindex="0" aria-label="The rebuilt world. Pause, then drag to look around; pinch or scroll to move."></canvas>
+<div id="veil"></div>
+<header class="top">
+  <nav class="reels" aria-label="Reels"><a href="#ride" id="r-ride">Magic Ride</a><a href="#arcade" id="r-arcade">Arcade walk</a></nav>
+  <div id="about"></div>
+  <div id="place"></div>
+</header>
+<div id="words" aria-live="polite"></div>
+<div class="bar">
+  <div id="note" aria-live="polite">Loading…</div>
+  <div id="seek" role="slider" aria-label="Position" aria-valuemin="0" aria-valuemax="53" aria-valuenow="0" tabindex="0"><div id="fill"></div></div>
+  <div class="row">
+    <button id="play" class="go" type="button">Play with sound</button>
+    <span id="time">0:00 / 0:00</span>
+    <div class="see" role="group" aria-label="How to see the world">
+      <button type="button" data-mode="lidar" aria-pressed="true">LiDAR</button><button type="button" data-mode="splat" aria-pressed="false">Splats</button><button type="button" data-mode="mesh" aria-pressed="false">Mesh</button>
+    </div>
+  </div>
+</div>
+<div id="fault" hidden></div>
+<audio id="voice" preload="auto"></audio>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/","@sparkjsdev/spark":"https://cdn.jsdelivr.net/npm/@sparkjsdev/spark@2.4.0/dist/spark.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { SparkRenderer, SplatMesh } from '@sparkjsdev/spark';
+const $ = id => document.getElementById(id);
+const fault = m => { $('fault').hidden = false; $('fault').textContent = m; };
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ canvas: $('c'), antialias: false, preserveDrawingBuffer: true }); }
+catch (e) { fault('This browser could not start WebGL, so the world cannot be drawn here.'); throw e; }
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75)); renderer.setSize(innerWidth, innerHeight);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x030409); scene.add(new SparkRenderer({ renderer }));
+scene.add(new THREE.HemisphereLight(0xdfe6ff, 0x202030, 2.4));
+const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.05, 600);
+const R = await fetch('reels.json').then(r => r.json());
+const voice = $('voice');
+
+// files travel as base64 text in parts (artifacts serve only web types); join and decode here
+async function raw(url) { try { const r = await fetch(url); if (!r.ok || /text\/html/.test(r.headers.get('content-type') || '')) return null; const b = new Uint8Array(await r.arrayBuffer()); return b.length > 1024 ? b : null; } catch { return null; } }
+async function fileOf(p, kind) { return (p.raw && p.raw[kind] && await raw(p.raw[kind])) || bytes(p[kind]); }   // the original file where it is served (GitHub Pages), else the text copy
+async function bytes(parts) {
+  const txt = (await Promise.all([].concat(parts).map(p => fetch(p).then(r => { if (!r.ok) throw new Error(p + ' ' + r.status); return r.text(); })))).join('').trim();
+  if (Uint8Array.fromBase64) return Uint8Array.fromBase64(txt);
+  const bin = atob(txt), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u;
+}
+// LiDAR: the fused Atlas depth as points, coloured by height (blue ground to red top), brightness from the image
+const LIDAR_VS = `attribute float lum; uniform float g, top, px; varying vec3 vC;
+vec3 ramp(float h){ h=clamp(h,0.,1.)*5.; vec3 s0=vec3(.04,.16,1.),s1=vec3(0.,.75,1.),s2=vec3(.16,.9,.31),s3=vec3(1.,.9,0.),s4=vec3(1.,.55,0.),s5=vec3(.9,.16,.16);
+  return h<1.?mix(s0,s1,h):h<2.?mix(s1,s2,h-1.):h<3.?mix(s2,s3,h-2.):h<4.?mix(s3,s4,h-3.):mix(s4,s5,h-4.); }
+void main(){ vec4 mv=modelViewMatrix*vec4(position,1.); gl_Position=projectionMatrix*mv;
+  float d=-mv.z; vC=ramp((position.y-g)/(top-g))*(.45+.8*lum)*clamp(1.2-d/70.,.3,1.); gl_PointSize=clamp(px*.8/d,1.,3.); }`;
+const LIDAR_FS = `varying vec3 vC; void main(){ vec2 c=gl_PointCoord-.5; if(dot(c,c)>.25) discard; gl_FragColor=vec4(vC,1.); }`;
+async function loadLidar(p) {
+  const b = await fileOf(p, 'lidar'), m = p.lidarMeta, n = m.n, q = new Int16Array(b.buffer, b.byteOffset, n * 3), lum = b.subarray(n * 6, n * 7);
+  const pos = new Float32Array(n * 3), L = new Float32Array(n);
+  for (let i = 0; i < n; i++) { for (let k = 0; k < 3; k++) pos[i * 3 + k] = m.lo[k] + (q[i * 3 + k] + 32768) / 65535 * (m.hi[k] - m.lo[k]); L[i] = lum[i] / 255; }
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('lum', new THREE.BufferAttribute(L, 1));
+  p.lidarObj = new THREE.Points(g, new THREE.ShaderMaterial({ vertexShader: LIDAR_VS, fragmentShader: LIDAR_FS, uniforms: { g: { value: m.ground }, top: { value: m.top }, px: { value: innerHeight } } }));
+  p.lidarObj.frustumCulled = false; p.lidarObj.visible = false; scene.add(p.lidarObj);
+}
+async function loadSplat(p) { p.splatObj = new SplatMesh({ fileBytes: await fileOf(p, 'splat'), fileType: 'spz' }); await p.splatObj.initialized; p.splatObj.visible = false; scene.add(p.splatObj); }
+async function loadMesh(p) { const g = await new GLTFLoader().parseAsync((await fileOf(p, 'mesh')).slice().buffer, ''); p.meshObj = g.scene; p.meshObj.visible = false; scene.add(p.meshObj); }
+
+let reel = null, cur = null, mode = 'lidar', playing = false, tPaused = 0, look = null, lineShown = -1, W = [];
+const now = () => playing ? voice.currentTime : tPaused;
+const placeAt = t => reel.places.find(p => t < p.t1) || reel.places[reel.places.length - 1];
+const pending = new Map();   // place+mode -> promise, so each file loads once
+function need(p, m) {
+  const key = p.name + m; if (p[m + 'Obj'] || !p[m]) return Promise.resolve();
+  if (!pending.has(key)) pending.set(key, ({ lidar: loadLidar, splat: loadSplat, mesh: loadMesh })[m](p).catch(e => { console.warn(m, p.name, e); p[m] = null; }));
+  return pending.get(key);
+}
+function show() {   // the one object that is true now: this place, seen this way
+  for (const r of Object.values(R)) for (const p of r.places) for (const m of ['lidar', 'splat', 'mesh']) if (p[m + 'Obj']) p[m + 'Obj'].visible = p === cur && m === mode;
+  const has = cur[mode + 'Obj'];
+  $('note').textContent = has ? '' : cur[mode] ? `Loading ${cur.title.toLowerCase()} as ${mode === 'splat' ? 'splats' : mode}…` : `No ${mode} for this place`;
+  document.querySelectorAll('.see button').forEach(b => { b.setAttribute('aria-pressed', b.dataset.mode === mode); b.disabled = !cur[b.dataset.mode] && !cur[b.dataset.mode + 'Obj']; });
+}
+function enter(p) { if (cur === p) return; cur = p; look = null; $('place').textContent = p.title; need(p, mode).then(show); show(); }
+document.querySelectorAll('.see button').forEach(b => b.onclick = () => { mode = b.dataset.mode; need(cur, mode).then(show); show(); });
+
+function camAt(p, t) {
+  const k = p.keys; let i = 0; while (i < k.length - 2 && t > k[i + 1].t) i++;
+  const j = Math.min(i + 1, k.length - 1), a = k.length < 2 ? 0 : THREE.MathUtils.clamp((t - k[i].t) / Math.max(1e-3, k[j].t - k[i].t), 0, 1), e = a * a * (3 - 2 * a);
+  camera.position.set(...k[i].p).lerp(new THREE.Vector3(...k[j].p), e);
+  camera.quaternion.set(...k[i].q).slerp(new THREE.Quaternion(...k[j].q), e);
+  const fov = 2 * Math.atan(p.h / 2 / p.fy) * 180 / Math.PI; if (camera.fov !== fov) { camera.fov = fov; camera.updateProjectionMatrix(); }
+}
+function words(t) {
+  const box = $('words'), n = W.findIndex(l => t >= l.t0 - .05 && t <= l.t1 + 1.3);
+  if (n !== lineShown) { lineShown = n; box.innerHTML = n < 0 ? '' : W[n].w.map(([w]) => `<span>${w.replace(/</g, '&lt;')}</span>`).join(' '); }
+  if (n >= 0) W[n].w.forEach(([, wt], k) => box.children[k].classList.toggle('on', t >= wt - .02));
+}
+const fmt = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+function setPlay(p) {
+  playing = p; $('play').classList.toggle('go', !p);
+  if (p) { if (tPaused >= reel.end - .1) tPaused = 0; voice.currentTime = tPaused; voice.play().then(() => {}, () => { playing = false; label(); }); look = null; }
+  else { tPaused = voice.currentTime || tPaused; voice.pause(); }
+  label();
+}
+const label = () => $('play').textContent = playing ? 'Pause' : (tPaused > 0 && tPaused < reel.end - .1 ? 'Play' : 'Play with sound');
+$('play').onclick = () => setPlay(!playing);
+voice.addEventListener('ended', () => { setPlay(false); tPaused = reel.end; label(); });
+function seekTo(x) { const r = $('seek').getBoundingClientRect(); tPaused = THREE.MathUtils.clamp((x - r.left) / r.width, 0, 1) * reel.end; if (playing) voice.currentTime = tPaused; look = null; label(); }
+let seeking = false;
+$('seek').addEventListener('pointerdown', e => { seeking = true; $('seek').setPointerCapture(e.pointerId); seekTo(e.clientX); });
+$('seek').addEventListener('pointermove', e => { if (seeking) seekTo(e.clientX); });
+$('seek').addEventListener('pointerup', () => seeking = false);
+$('seek').addEventListener('keydown', e => { const d = e.key === 'ArrowRight' ? 3 : e.key === 'ArrowLeft' ? -3 : 0; if (d) { tPaused = THREE.MathUtils.clamp(now() + d, 0, reel.end); if (playing) voice.currentTime = tPaused; } });
+
+async function openReel(id) {
+  const r = R[id] || R.ride; if (reel === r) return;
+  if (playing) setPlay(false); reel = r; tPaused = 0; cur = null; lineShown = -1;
+  $('r-ride').toggleAttribute('aria-current', r === R.ride); $('r-arcade').toggleAttribute('aria-current', r === R.arcade);
+  $('r-ride').setAttribute('aria-current', r === R.ride ? 'page' : 'false'); $('r-arcade').setAttribute('aria-current', r === R.arcade ? 'page' : 'false');
+  $('about').textContent = r.about; voice.src = r.audio; W = r.words ? await fetch(r.words).then(x => x.json()) : []; $('words').innerHTML = '';
+  $('seek').querySelectorAll('i').forEach(i => i.remove()); $('seek').setAttribute('aria-valuemax', r.end.toFixed(0));
+  for (const p of r.places) if (p.t0 > 0) { const i = document.createElement('i'); i.style.left = (p.t0 / r.end * 100) + '%'; $('seek').appendChild(i); }
+  label(); enter(r.places[0]);
+  for (const p of r.places) need(p, 'lidar').then(show);   // every place's LiDAR first: it is light
+  for (const p of r.places) await need(p, 'splat'); show();
+}
+addEventListener('hashchange', () => openReel(location.hash.slice(1)));
+
+// look around while paused: drag turns, pinch or wheel moves along the view
+let drag = null, pinch = 0; const ptrs = new Map();
+const grab = () => { if (!look) { const E = new THREE.Euler().setFromQuaternion(camera.quaternion, 'YXZ'); look = { yaw: E.y, pitch: E.x, pos: camera.position.clone() }; } if (playing) setPlay(false); };
+const move = d => { if (look) look.pos.addScaledVector(new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion), d); };
+$('c').addEventListener('pointerdown', e => { ptrs.set(e.pointerId, e); grab(); drag = [e.clientX, e.clientY]; });
+addEventListener('pointerup', e => { ptrs.delete(e.pointerId); drag = null; pinch = 0; });
+addEventListener('pointermove', e => {
+  if (!ptrs.has(e.pointerId) || !look) return; ptrs.set(e.pointerId, e);
+  if (ptrs.size === 2) { const [a, b] = [...ptrs.values()], d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY); if (pinch) move((d - pinch) * .02); pinch = d; return; }
+  if (!drag) return; look.yaw -= (e.clientX - drag[0]) * .005; look.pitch = THREE.MathUtils.clamp(look.pitch - (e.clientY - drag[1]) * .005, -1.2, 1.2); drag = [e.clientX, e.clientY];
+});
+addEventListener('wheel', e => { grab(); move(-e.deltaY * .004); }, { passive: true });
+addEventListener('keydown', e => { if (e.key === ' ' && !(document.activeElement instanceof HTMLButtonElement)) { e.preventDefault(); setPlay(!playing); } });
+addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+  for (const r of Object.values(R)) for (const p of r.places) if (p.lidarObj) p.lidarObj.material.uniforms.px.value = innerHeight; });
+window.__at = t => { tPaused = t; look = null; };   // for checks
+window.__mode = m => { mode = m; need(cur, m).then(show); show(); };
+
+renderer.setAnimationLoop(() => {
+  if (!reel) return;
+  const t = now(), p = placeAt(t); enter(p);
+  if (look) { camera.quaternion.setFromEuler(new THREE.Euler(look.pitch, look.yaw, 0, 'YXZ')); camera.position.copy(look.pos); } else camAt(p, t);
+  const cut = (p.t0 > 0 && t - p.t0 < .45) || (p.t1 < reel.end && p.t1 - t < .45); $('veil').style.opacity = cut && !look ? 1 : 0;   // the world drains to blue at each cut
+  words(t); $('fill').style.width = (t / reel.end * 100) + '%'; $('time').textContent = `${fmt(t)} / ${fmt(reel.end)}`; $('seek').setAttribute('aria-valuenow', t.toFixed(1));
+  renderer.render(scene, camera);
+});
+try { await openReel(location.hash.slice(1) || 'ride'); window.__ready = true; }
+catch (e) { fault('A file could not be loaded. Reload the page to try again.'); console.error(e); }
+</script>
+
+</body></html>
