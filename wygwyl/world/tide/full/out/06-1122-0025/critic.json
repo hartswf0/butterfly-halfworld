@@ -1,0 +1,97 @@
+{
+ "frames": [
+  {
+   "line": 0,
+   "seen": "A crowd in a vaulted hall gathers around a fire framed by giant marble wings beneath a starry sky.",
+   "enacts": 2,
+   "changed": false,
+   "man": true
+  },
+  {
+   "line": 1,
+   "seen": "Mist covers the ground around the fire and wings as an aurora glows in the night sky.",
+   "enacts": 1,
+   "changed": false,
+   "man": true
+  },
+  {
+   "line": 2,
+   "seen": "A yellow brick road extends forward to the fire between the massive wings and gathered onlookers.",
+   "enacts": 2,
+   "changed": false,
+   "man": true
+  },
+  {
+   "line": 3,
+   "seen": "Tall crystalline spires rise around the central bonfire and wings before the crowd.",
+   "enacts": 1,
+   "changed": false,
+   "man": true
+  },
+  {
+   "line": 4,
+   "seen": "A close view shows waterfalls cascading from a grand citadel between the spires and wings.",
+   "enacts": 2,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 5,
+   "seen": "Flowering green vines climb along the white wings and spires framing the waterfalls.",
+   "enacts": 0,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 6,
+   "seen": "The camera zooms closer to the fire flanked by flowering vines on the spires and wings.",
+   "enacts": 1,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 7,
+   "seen": "A glowing blue light appears above the waterfall and citadel framed by spires and vines.",
+   "enacts": 0,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 8,
+   "seen": "Candles illuminate the base of the distant buildings behind the central fire and spire.",
+   "enacts": 1,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 9,
+   "seen": "A tall plume of flame rises between two slender flower-wrapped spires under a starry sky.",
+   "enacts": 0,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 10,
+   "seen": "The twisting flame flickers brightly against the night sky between the two ornate towers.",
+   "enacts": 0,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 11,
+   "seen": "The flame burns in front of an assembled crowd standing before an ancient city at night.",
+   "enacts": 0,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 12,
+   "seen": "A Black man dressed in black stands with arms outstretched behind the fire before the city crowd.",
+   "enacts": 2,
+   "changed": false,
+   "man": true
+  }
+ ],
+ "overall": "The world attempts to reflect the spoken lines through literal visual additions like the yellow brick road and rising citadel, yet these elements manifest as layered composite props rather than a fluid environmental metamorphosis. The biggest weakness is that the camera zooms entirely past the walking protagonist for most of the poem, abandoning the character before abruptly cutting him back into frame at the end.",
+ "critic_model": "gemini-3.8-flash"
+}

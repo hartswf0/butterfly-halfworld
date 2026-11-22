@@ -1,0 +1,203 @@
+{
+ "poem": "06",
+ "title": "Resurrecting Atlantis",
+ "model": "genie-4",
+ "seed_image": "full/seed06.jpg",
+ "seed_image_sha256": "1cfd4720931ddd217edd167287d7d434f12f226ca649ee7ed24eb3944723482a",
+ "seed_why": "Shot-lab view 068, 'Poet entering the Ancestors' parade': the treatment's last image before this poem. It is at eye level, already full of people and fire, and its vaulted opening is a gate. The probes showed the starting picture sets how alive the world is, so we start alive.",
+ "seed_text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with light. Everyone here is Black. Keep the look of the starting picture. Night. A great crowd of Black women and men of every age, in long indigo and ochre robes with brass at their wrists, stands with their backs to us facing an enormous vaulted opening full of stars and firelight. In the middle of the crowd, a few steps ahead of the camera with his back to us, is a Black man in his thirties with close-cropped hair, wearing a matte black mock-neck long sleeve, black trousers and black boots. He walks forward through the crowd toward the opening and the camera follows him at eye level, keeping his whole body in frame. The world changes violently and fluidly around him whenever something new is described. Sound: a crowd humming, fire, deep drums.",
+ "events_sent": [
+  {
+   "at": 0.2,
+   "key": "key_down"
+  },
+  {
+   "at": 0.3,
+   "text": "The ground ahead of him splits open and two enormous white marble wings unfold upward out of it, forming a gate. The crowd parts to let him through.",
+   "for_word": "gates",
+   "word_at": 0.3,
+   "line": 0
+  },
+  {
+   "at": 3.22,
+   "key": "key_up"
+  },
+  {
+   "at": 4.3,
+   "text": "A wall of bright blue water full of glowing letters bursts through the marble gate and floods the ground, rising past his knees to his waist. He keeps walking through it.",
+   "for_word": "hymns",
+   "word_at": 6.8,
+   "line": 1
+  },
+  {
+   "at": 6.06,
+   "key": "key_down"
+  },
+  {
+   "at": 9.51,
+   "key": "key_up"
+  },
+  {
+   "at": 12.7,
+   "key": "key_down"
+  },
+  {
+   "at": 13.5,
+   "text": "A road of yellow bricks heaves up out of the blue flood under his feet and lifts him above the water, carrying him forward.",
+   "for_word": "yellow",
+   "word_at": 17.0,
+   "line": 2
+  },
+  {
+   "at": 16.81,
+   "key": "key_up"
+  },
+  {
+   "at": 19.3,
+   "text": "Comets fall out of the sky and smash into the water ahead. Where each one lands, a tall white tower shoots up out of the flood.",
+   "for_word": "comets",
+   "word_at": 22.8,
+   "line": 3
+  },
+  {
+   "at": 20.54,
+   "key": "key_down"
+  },
+  {
+   "at": 23.39,
+   "key": "key_up"
+  },
+  {
+   "at": 24.1,
+   "text": "All the water drains away at once, pouring in waterfalls off a vast white city that was hidden under it: towers, bridges and stairs on every side of him, streaming wet.",
+   "for_word": "resurrecting",
+   "word_at": 27.6,
+   "line": 4
+  },
+  {
+   "at": 27.75,
+   "key": "key_down"
+  },
+  {
+   "at": 31.55,
+   "key": "key_up"
+  },
+  {
+   "at": 33.1,
+   "text": "Trees, vines and flowers burst out of every wet wall and climb the towers in seconds, blooming as he passes.",
+   "for_word": "hope",
+   "word_at": 36.6,
+   "line": 5
+  },
+  {
+   "at": 35.86,
+   "key": "key_down"
+  },
+  {
+   "at": 39.93,
+   "key": "key_up"
+  },
+  {
+   "at": 42.2,
+   "text": "Doors fly open along the street and hundreds of Black women and men of every age in indigo and ochre robes pour out, walking and dancing beside him.",
+   "for_word": "safe",
+   "word_at": 45.7,
+   "line": 6
+  },
+  {
+   "at": 44.63,
+   "key": "key_down"
+  },
+  {
+   "at": 48.62,
+   "key": "key_up"
+  },
+  {
+   "at": 52.89,
+   "key": "key_down"
+  },
+  {
+   "at": 53.9,
+   "text": "A blue light pulses in every chest and every window together, in one slow rhythm, brightening with each step he takes.",
+   "for_word": "currency",
+   "word_at": 57.4,
+   "line": 7
+  },
+  {
+   "at": 56.71,
+   "key": "key_up"
+  },
+  {
+   "at": 61.66,
+   "key": "key_down"
+  },
+  {
+   "at": 62.7,
+   "text": "Thousands of candles light at once, in the windows and in the hands of the robed Black women and men around him. Their faces glow and smile.",
+   "for_word": "candlelight",
+   "word_at": 66.2,
+   "line": 8
+  },
+  {
+   "at": 65.39,
+   "key": "key_up"
+  },
+  {
+   "at": 67.1,
+   "text": "The towers lean in overhead and the street squeezes into a warm stone alley only two people wide, long shadows running ahead of him.",
+   "for_word": "narrow",
+   "word_at": 70.6,
+   "line": 9
+  },
+  {
+   "at": 68.8,
+   "key": "key_down"
+  },
+  {
+   "at": 72.49,
+   "key": "key_up"
+  },
+  {
+   "at": 72.8,
+   "text": "Bands of rainbow colour ripple outward from the singing crowd across the walls and the sky, and the clouds tear loose and float upward.",
+   "for_word": "rainbows",
+   "word_at": 76.3,
+   "line": 10
+  },
+  {
+   "at": 75.87,
+   "key": "key_down"
+  },
+  {
+   "at": 80.46,
+   "key": "key_up"
+  },
+  {
+   "at": 84.57,
+   "key": "key_down"
+  },
+  {
+   "at": 85.5,
+   "text": "A ring of white light opens on the ground around his feet and widens in every direction until it passes the horizon.",
+   "for_word": "continuums",
+   "word_at": 89.0,
+   "line": 11
+  },
+  {
+   "at": 88.32,
+   "key": "key_up"
+  },
+  {
+   "at": 93.2,
+   "text": "The Black man in the black mock-neck stops, turns to face us, and opens his arms. Behind him the whole white city is lit and full of people.",
+   "for_word": "welcoming",
+   "word_at": 96.7,
+   "line": 12
+  }
+ ],
+ "frames": 2460,
+ "seconds": 102.7,
+ "delivered_fps": 23.96,
+ "usage": null,
+ "reading": "audio/06_Resurrecting Atlantis_mixdown_RY_250626.mp3"
+}
