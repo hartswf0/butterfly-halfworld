@@ -43,5 +43,7 @@
   "11": "asset_07cec9574c224403bffb2a53433d7dfa"
  },
  "draft_op": "88e8bd5f5be3487ebff3abe701702e0f",
- "draft_ver": "v2"
+ "draft_ver": "v2",
+ "mesh_op": "47d7d868c4b24910aa69b427f37cd0ee",
+ "mesh_src": "asset_6ac60c9336b86a5981e667a6ab9fe9df"
 }

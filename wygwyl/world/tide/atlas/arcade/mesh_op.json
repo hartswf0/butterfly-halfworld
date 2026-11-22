@@ -1,0 +1,57 @@
+{
+ "id": "2d195d49fce348608aa1875486c25304",
+ "ownerId": "acct_8133938019c54911b8caddb015860e2b",
+ "metadata": {
+  "@type": "type.worldlabs.ai/wlt.marble.v2.splats2Mesh.metadata",
+  "state": "SUCCEEDED",
+  "status": "SUCCEEDED",
+  "surface": "DEVELOPER_API",
+  "task": "splats2Mesh",
+  "taskVersion": "v1"
+ },
+ "done": true,
+ "error": null,
+ "expiresAtSecs": null,
+ "createdAtSecs": 1795360390,
+ "response": {
+  "anchorPositions": [
+   [
+    -4.95500373840332,
+    6.086584091186523,
+    -2.4538097381591797
+   ],
+   [
+    -4.151617050170898,
+    4.62697696685791,
+    -0.5733394622802734
+   ],
+   [
+    1.8801288604736328,
+    2.7077980041503906,
+    1.7209582328796387
+   ],
+   [
+    -13.002008438110352,
+    1.7656679153442383,
+    2.3557186126708984
+   ]
+  ],
+  "colliderBoxes": {
+   "assetId": "asset_3b6287728820bd24faad010cbf1cd686",
+   "url": "https://storage.googleapis.com/wlt-marble-outputs-prod/us1/acct_8133938019c54911b8caddb015860e2b/proj_153d35d7984d422d87849eebf53e450f/asset_3b6287728820bd24faad010cbf1cd686?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=marble-api-server-prod%40wlt-marble.iam.gserviceaccount.com%2F20261122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261122T151427Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&response-content-disposition=inline%3B%20filename%3D%22asset_3b6287728820bd24faad010cbf1cd686.glb%22&X-Goog-Signature=909075d0d36e186e0c654bce31c771054c06ee030d70811d59987731f3998cb6d76bfce8c9387b8fb84b326381f2e0e1cafb9fb2ea67afbbe6365848c87a1c588d019bafff9fe655eac5e3a303203676c67c790aa44df17f9cc3a8ac7a4a30e4393e926a6c3bb12075a6666b50c0dbdf30468ae7efc6a66755444d08e8de07365d2672d00d7df4ce6239b751cb6c1232ab5f2786e6f4f5fa8a56590223427cf2df9ce66900f175866b3aca52676610f3b776ad5ba5686d0edfac7f7fffa2ca7c94ab47b88ced14f896876ced9e88534c97340115e21634797c3980294b4eea46a3d2bf6c67eabf00cb8176a429a83d868a5515e1ebb0794a052c4cc9e8ff5b35"
+  },
+  "mesh": {
+   "assetId": "asset_bec5de92f5806fe3c43001592bbd962b",
+   "url": "https://storage.googleapis.com/wlt-marble-outputs-prod/us1/acct_8133938019c54911b8caddb015860e2b/proj_153d35d7984d422d87849eebf53e450f/asset_bec5de92f5806fe3c43001592bbd962b?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=marble-api-server-prod%40wlt-marble.iam.gserviceaccount.com%2F20261122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261122T151427Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&response-content-disposition=inline%3B%20filename%3D%22asset_bec5de92f5806fe3c43001592bbd962b.glb%22&X-Goog-Signature=44295eafe6ffdba1e50d6478bf75a22cc9bbbe7865bbc0025c412741c15082e78be4bd52f7f7b39e574c5af4d928fb224491e340542c6bed1c33164426eedc54e20fa045af4e0099a1031d61b6a39dfc55446d02b66e25568ba1e35e80f07dba21351bd0e88a7b6b410dfd78dc624baf7c01adb968c65fda869efd04b914118786d335b8a7e45c5856fa56afaf53120a97bb0caacec62dab8edd892311f5b0ec0f5e34d5718608339e1c399b28878b798aa9009ae41e3de2f6d40cb2234fd957529445784baf10a53bc6ae8c4a1c07de1c7765b076c0da0eef4f39ff43733ed00b2b2a6123dc47f41843be9c34f69a6b034be24b4aa25556dab59cc0f88a3e65"
+  },
+  "metadata": {
+   "inference_s": "59.17",
+   "input_load_s": "0.51",
+   "num_collider_boxes": "1000",
+   "num_faces": "438594",
+   "num_vertices": "234859",
+   "total_s": "64.89"
+  }
+ },
+ "name": "accounts/acct_8133938019c54911b8caddb015860e2b/projects/proj_153d35d7984d422d87849eebf53e450f/operations/2d195d49fce348608aa1875486c25304"
+}
