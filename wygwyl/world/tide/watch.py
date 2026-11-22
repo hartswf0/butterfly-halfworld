@@ -19,7 +19,7 @@ for group, items in V:
         bar = ''.join(f"<s class='{h}' style='flex:{ty[h]}'></s>" for h in ty if ty[h])
         sm = f'{T}/{p}/storymap.md' if not p.endswith('.mp4') else ''; extra = ''
         if sm and os.path.exists(sm): extra += f"<details><summary>Storymap (patches, camera, rebuild seeds)</summary><pre>{e(open(sm).read())}</pre><p><a href='{p}/genome.yaml'>Patch genome (YAML)</a></p></details>"
-        links = f"<a href='triage/index.html'>Triage</a>" + (f" · <a href='{ver}'>Version with timecode and sent lines</a>" if ver else '') + (f" · <a href='{p}/manifest.json'>Everything sent</a>" if ver else '')
+        links = f"<a href='triage/index.html'>Triage</a> · <a href='seg/index.html#{e(rid)}'>Cut-outs</a>" + (f" · <a href='{ver}'>Version with timecode and sent lines</a>" if ver else '') + (f" · <a href='{p}/manifest.json'>Everything sent</a>" if ver else '')
         cards.append(f"""<article><video controls playsinline preload="none" poster="{poster}" src="{film}"></video><h3>{e(title)}</h3><p class="t">{dur:.0f} s · {ty['yes']} of {n} asks happened, {ty['partly']} partly, {ty['no']} not</p><div class="bar">{bar}</div><p class="l">{links}</p>{extra}</article>""")
     out.append(f"<h2>{group}</h2><div class='g'>{''.join(cards)}</div>")
 open(T + '/watch.html', 'w').write(f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Screening · WYGWYL</title>
