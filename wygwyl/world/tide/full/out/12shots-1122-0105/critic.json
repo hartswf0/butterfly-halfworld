@@ -1,0 +1,114 @@
+{
+ "shots": [
+  {
+   "shot": 1,
+   "seen": "Four middle-aged Black men embrace and smile under a welcome home banner while holding hourglasses.",
+   "enacts": 3,
+   "men": 4,
+   "same_four": true,
+   "black_top": true,
+   "orange_jacket": true,
+   "blue_shirt": true,
+   "green_jersey": true
+  },
+  {
+   "shot": 2,
+   "seen": "The four men stand in a row holding hourglasses under string lights near a body of water.",
+   "enacts": 1,
+   "men": 4,
+   "same_four": true,
+   "black_top": true,
+   "orange_jacket": true,
+   "blue_shirt": true,
+   "green_jersey": true
+  },
+  {
+   "shot": 3,
+   "seen": "The four men stand in a doorway holding glowing hourglasses inside a dark room with empty rows of chairs and a camera on a tripod.",
+   "enacts": 3,
+   "men": 4,
+   "same_four": true,
+   "black_top": true,
+   "orange_jacket": true,
+   "blue_shirt": true,
+   "green_jersey": true
+  },
+  {
+   "shot": 4,
+   "seen": "The four men walk together through a redwood forest carrying glowing hourglasses behind a low white wall repaired with gold.",
+   "enacts": 3,
+   "men": 4,
+   "same_four": true,
+   "black_top": true,
+   "orange_jacket": true,
+   "blue_shirt": true,
+   "green_jersey": true
+  },
+  {
+   "shot": 5,
+   "seen": "The four men stand arm-in-arm in a grassy field smiling at the camera while holding glowing hourglasses with a white temple-like building in the background.",
+   "enacts": 3,
+   "men": 4,
+   "same_four": true,
+   "black_top": true,
+   "orange_jacket": true,
+   "blue_shirt": true,
+   "green_jersey": true
+  },
+  {
+   "shot": 6,
+   "seen": "The four men stand closely in profile on a beach with their eyes closed while holding glowing red hourglasses.",
+   "enacts": 2,
+   "men": 4,
+   "same_four": true,
+   "black_top": true,
+   "orange_jacket": true,
+   "blue_shirt": true,
+   "green_jersey": true
+  },
+  {
+   "shot": 7,
+   "seen": "Three of the men walk along a hillside path at night under string lights while carrying glowing hourglasses.",
+   "enacts": 2,
+   "men": 3,
+   "same_four": false,
+   "black_top": false,
+   "orange_jacket": true,
+   "blue_shirt": true,
+   "green_jersey": true
+  },
+  {
+   "shot": 8,
+   "seen": "The four men walk and laugh together across a grassy waterfront at sunset beneath overhead string lights.",
+   "enacts": 2,
+   "men": 4,
+   "same_four": true,
+   "black_top": true,
+   "orange_jacket": true,
+   "blue_shirt": true,
+   "green_jersey": true
+  },
+  {
+   "shot": 9,
+   "seen": "Seen from behind, the four men walk along a lit path across a lawn toward a white house at dusk.",
+   "enacts": 2,
+   "men": 4,
+   "same_four": true,
+   "black_top": true,
+   "orange_jacket": true,
+   "blue_shirt": true,
+   "green_jersey": true
+  }
+ ],
+ "recurring": [
+  "four older Black men",
+  "hourglasses",
+  "overhead string lights",
+  "black long-sleeve top",
+  "rust-orange jacket over white t-shirt",
+  "light blue button-down shirt and dreadlocks",
+  "green sports jersey and flat cap"
+ ],
+ "overall": "This clearly reads as a single cohesive film about the same four men due to the remarkably consistent character designs, costuming, and visual motifs across every shot. Its biggest weakness is the rigid, repetitive staging where the men awkwardly carry hourglasses and stand under string lights regardless of the environment or action described.",
+ "critic_model": "gemini-4-argon"
+}

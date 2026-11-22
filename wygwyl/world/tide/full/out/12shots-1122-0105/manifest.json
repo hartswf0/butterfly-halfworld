@@ -1,0 +1,96 @@
+{
+ "poem": "12",
+ "lock": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers.",
+ "shots": [
+  {
+   "shot": 1,
+   "line": "Decades later, there was less time for words and more space for laughter, hugs with no reason,",
+   "t0": 0.0,
+   "seconds": 8.56,
+   "seed_text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: Evening inside a white ceramic temple hall with timber rafters and a hand-painted WELCOME HOME banner. ACTION: The four men pull each other into one big laughing hug in the middle of the hall. CAMERA: Chest height, close, slowly circling them.",
+   "key": null,
+   "frames": 220,
+   "delivered_fps": 23.7
+  },
+  {
+   "shot": 2,
+   "line": "loud voices so our hearts can be overheard. My mind drifts into the darkness of our afterlives,",
+   "t0": 8.56,
+   "seconds": 8.19,
+   "seed_text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: The same hall, very close. ACTION: The four men throw their heads back laughing; a warm light pulses in each of their chests at the same moment. CAMERA: Tight on faces and chests, handheld, shallow focus.",
+   "key": null,
+   "frames": 212,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 3,
+   "line": "and those rooms are empty. We are all here, each holding our glasses of burning sands",
+   "t0": 16.75,
+   "seconds": 7.76,
+   "seed_text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: A dim, dusty back room with rows of empty wooden chairs and one tall window. ACTION: The four men stand still in the doorway looking in, each holding up his glowing hourglass; the only light is the embers. CAMERA: Wide and still from inside the room, the men small in the doorway.",
+   "key": null,
+   "frames": 204,
+   "delivered_fps": 23.8
+  },
+  {
+   "shot": 4,
+   "line": "and known journeys, and grateful to every living tree in the forest for the shared years",
+   "t0": 24.51,
+   "seconds": 5.38,
+   "seed_text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: The edge of a forest at blue dusk, huge old trees, mist between the trunks. ACTION: The four men walk among the trees and each lays a hand flat on a trunk as he passes. CAMERA: Low, tracking beside them along the trunks.",
+   "key": "key_d",
+   "frames": 144,
+   "delivered_fps": 24.2
+  },
+  {
+   "shot": 5,
+   "line": "and the shared memories. This is brotherhood. Smiles with no reason,",
+   "t0": 29.89,
+   "seconds": 7.64,
+   "seed_text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: A meadow in front of the white temple at golden hour. ACTION: The four men stand shoulder to shoulder facing us, arms around each other, grinning as if for a photograph. CAMERA: Frontal, still, full bodies in frame.",
+   "key": null,
+   "frames": 200,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 6,
+   "line": "narrow differences so our hearts can be overheard. Decades later, we can place our ears upon the next",
+   "t0": 37.53,
+   "seconds": 7.66,
+   "seed_text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: A sandy path through dune grass down to the shore, last light. ACTION: The four men stand in a line; each one presses his ear to the chest of the next man and listens with eyes closed. CAMERA: Profile, sliding slowly down the line.",
+   "key": "key_d",
+   "frames": 200,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 7,
+   "line": "brother's soul and follow paths of hilltops and canyons, of blinding lights and infinite nights,",
+   "t0": 45.19,
+   "seconds": 9.23,
+   "seed_text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: A high ridge path above a deep canyon at night under a sky crowded with stars; far below, city lights. ACTION: The four men walk single file along the ridge away from us, their hourglasses glowing like lanterns. CAMERA: Behind them at eye level, following.",
+   "key": "key_w",
+   "frames": 236,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 8,
+   "line": "all too familiar and create the type of space for laughter",
+   "t0": 54.42,
+   "seconds": 5.35,
+   "seed_text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: A wide meadow at sunset, long grass, low sun. ACTION: The man in the green jersey throws a football in a high arc; the other three run laughing to catch it. CAMERA: Wide, the ball crossing the sun.",
+   "key": null,
+   "frames": 144,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 9,
+   "line": "and football and recollections that bring us home every time.",
+   "t0": 59.77,
+   "seconds": 5.04,
+   "seed_text": "Afrofuturist Atlantis: a Black harbour city that kept its flood, mended in white ceramic seamed with soft light. Photographic, warm tungsten bulbs against cool dusk, gentle film grain. IN EVERY SHOT: a string of warm picnic bulbs hangs somewhere in frame, and white ceramic with glowing seams appears somewhere in frame. THE FOUR MEN, always together, all Black men in their fifties: (1) the poet, close-cropped greying hair and short beard, matte black mock-neck long sleeve and black trousers; (2) shaved head, rust-orange corduroy jacket over a white tee; (3) grey locs tied back, sky-blue linen shirt with rolled sleeves; (4) flat cap, green football jersey. Each carries a small glass hourglass whose sand glows like embers. PLACE: Dusk. A small white house at the top of the meadow with its porch light on. ACTION: The four men walk up toward the lit porch side by side with their backs to us. CAMERA: Behind them at eye level, following.",
+   "key": "key_w",
+   "frames": 136,
+   "delivered_fps": 24.1
+  }
+ ]
+}
