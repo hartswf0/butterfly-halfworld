@@ -1,0 +1,58 @@
+[
+ {
+  "t": 0.3,
+  "land": 0.3,
+  "say": "Ahead of him, the tall gates swing open. They are white marble and have wings.",
+  "label": "gates open, marble wings",
+  "word": "gates",
+  "why": "the poem's first image; the world opens on its first word"
+ },
+ {
+  "t": 3.8,
+  "land": 6.8,
+  "say": "Bright blue water made of small glowing white letters pours out through the open gates and runs down the path to his feet.",
+  "label": "blue water of letters pours out",
+  "word": "hymns",
+  "why": "words become water: what comes through the gate is language, as liquid"
+ },
+ {
+  "t": 14.0,
+  "land": 17.0,
+  "say": "Where the blue water touches the ground, the ground becomes a road of yellow bricks, laid one by one ahead of him as he walks.",
+  "label": "water lays a yellow brick road",
+  "word": "yellow",
+  "why": "'eased generations down yellow brick roads': the water is what builds the road"
+ },
+ {
+  "t": 19.8,
+  "land": 22.8,
+  "say": "Comets cross the night sky above him, and their light runs in lines across the water.",
+  "label": "comets overhead",
+  "word": "comets",
+  "why": "'to follow comets to the capital city'"
+ },
+ {
+  "t": 24.6,
+  "land": 27.6,
+  "say": "The blue water rises to his knees. Towers rise up out of the water on both sides of him, water streaming off them.",
+  "label": "towers rise out of the water",
+  "word": "resurrecting",
+  "why": "'resurrecting Atlantis': the city is what the water was hiding"
+ },
+ {
+  "t": 31.4,
+  "land": 34.4,
+  "say": "Vines and trees grow up the wet towers. Everything the water has touched now has colour and detail.",
+  "label": "nature climbs the towers",
+  "word": "nature",
+  "why": "'the pack we've made here with nature'"
+ },
+ {
+  "t": 42.7,
+  "land": 45.7,
+  "say": "Windows light up one by one in blue and pink. In the doorways stand Black women and men of every age in long indigo and ochre robes, arms open to him.",
+  "label": "windows light, people welcome him",
+  "word": "safe",
+  "why": "'here we are all safe, here we are all one': the city is finished when it is inhabited"
+ }
+]
