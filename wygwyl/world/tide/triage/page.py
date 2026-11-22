@@ -71,7 +71,7 @@ pre{{white-space:pre-wrap;font:12.5px/1.55 ui-monospace,Menlo,monospace;color:#c
 dl{{margin-top:10px}}dt{{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:9px}}dd{{font-size:14.5px}}dd.w{{font-style:italic;font-size:16px}}
 .hide{{display:none}}
 </style></head><body><main>
-<h1>Did it happen?</h1>
+<p style="font:13px Helvetica,Arial,sans-serif;color:var(--dim);margin-bottom:10px"><a style="color:#9fd0ff" href="../watch.html">Watch the videos</a></p><h1>Did it happen?</h1>
 <p class="lede">Every thing we asked the world model for, across {len(R)} runs. Each card is one ask: the frame from when it should be visible, an independent verdict from that frame alone, his words at that moment, and four seconds of the take's sound.</p>
 <div class="sum"><div><b style="color:var(--yes)">{n['yes']}</b><span>yes</span></div><div><b style="color:var(--partly)">{n['partly']}</b><span>partly</span></div><div><b style="color:var(--no)">{n['no']}</b><span>no</span></div><div><b>{tot}</b><span>asks</span></div></div>
 <div class="bar"><s class="yes" style="flex:{n['yes']}"></s><s class="partly" style="flex:{n['partly']}"></s><s class="no" style="flex:{n['no']}"></s></div>

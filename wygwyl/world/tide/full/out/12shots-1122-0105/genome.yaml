@@ -1,0 +1,463 @@
+# extracted by gemini-4-carbon from one frame every 2 s of film.mp4 plus the reading's timed lines; world sound was not heard
+title: Poem 12 as Nine Shots
+seed: Four older Black men carrying glowing hourglasses traverse nine string-lit interior and coastal spaces while a male voice recites a poem.
+source_profile:
+  source_type: poetic_short_film
+  runtime_mode: discrete_nine_shot_montage
+  patch_target_duration: 6-8s
+diegesis:
+  premise: Four older Black men appear across nine distinct locations united by overhead string lights and handheld hourglasses.
+  world_rules:
+    - Overhead warm bulb string lights appear in every interior and exterior space.
+    - Handheld glass hourglasses contain red or yellow sand that frequently emits internal light.
+    - Jersey details on the capped man shift across cuts while core outfits remain constant.
+  core_entities:
+    - Black_Man_Black_Shirt: older Black man, graying short hair and beard, black long-sleeve mock-neck shirt, black pants.
+    - Black_Man_Rust_Jacket: older Black man, bald, beard, rust-brown overshirt over white t-shirt, brown pants.
+    - Black_Man_Blue_Shirt: older Black man, gray-streaked locs and beard, light-blue button-up shirt, dark jeans or tan pants.
+    - Black_Man_Cap_Jersey: older Black man, beard, flat cap, green sports jersey (varying white numbers or stripes), khaki or dark pants.
+  core_locations:
+    - Wooden hall with Welcome Home banner
+    - Waterside stone pavilion
+    - Dim auditorium with empty wooden seats
+    - Forest with kintsugi-veined white border
+    - Coastal meadow near white spired building
+    - Beach dune path
+    - Night hilltop path overlooking lit harbor
+    - Sunset harbor lawn with pier
+    - Grassy path leading to white house
+  temporal_regime: Non-linear spatial montage spanning interiors, daylight, sunset, twilight, and night.
+  sensory_regime:
+    - Warm practical bulb lighting against varied ambient skies
+    - Single male voiceover track; world sound not observed
+macro_structure:
+  - unit_id: U1
+    kind: sequence
+    label: Interior and Pavilion Gatherings
+    start_time: "00:00:00"
+    end_time: "00:00:24"
+    function: Establish the four men, string lights, and hourglasses across enclosed architectural spaces.
+    dominant_syntagmas:
+      - bracket_syntagma
+  - unit_id: U2
+    kind: sequence
+    label: Natural and Coastal Thresholds
+    start_time: "00:00:24"
+    end_time: "00:00:46"
+    function: Move the quartet through forest and shoreline tableaux.
+    dominant_syntagmas:
+      - descriptive_syntagma
+  - unit_id: U3
+    kind: sequence
+    label: Night Ascent to Homeward Arrival
+    start_time: "00:00:46"
+    end_time: "00:01:05"
+    function: Transition from single-file night walking to waterfront play and final approach to a house.
+    dominant_syntagmas:
+      - episodic_sequence
+beat_structure:
+  - beat_id: B1
+    parent_unit: U1
+    label: Embrace and Laughter
+    function: Show close physical contact and shared laughter.
+    syntagma_type: bracket_syntagma
+    start_time: "00:00:00"
+    end_time: "00:00:16"
+    pressure_shift: Warm group huddle shifts to frontal open laughter.
+  - beat_id: B2
+    parent_unit: U1
+    label: Empty Room Stillness
+    function: Contrast prior warmth with static posture in a dark hall.
+    syntagma_type: autonomous_shot
+    start_time: "00:00:16"
+    end_time: "00:00:24"
+    pressure_shift: High-contrast drop into stillness and distance.
+  - beat_id: B3
+    parent_unit: U2
+    label: Forest Walk and Coastal Portrait
+    function: Reintroduce forward motion and frontal camaraderie outdoors.
+    syntagma_type: bracket_syntagma
+    start_time: "00:00:24"
+    end_time: "00:00:38"
+    pressure_shift: Shadowed movement opens into bright twilight portrait.
+  - beat_id: B4
+    parent_unit: U2
+    label: Dune Alignment
+    function: Align bodies in closed-eye profile along the coast.
+    syntagma_type: autonomous_shot
+    start_time: "00:00:38"
+    end_time: "00:00:46"
+    pressure_shift: Frontal openness shifts to inward stillness.
+  - beat_id: B5
+    parent_unit: U3
+    label: Nocturnal Procession
+    function: Advance the four men single-file past the lens at night.
+    syntagma_type: autonomous_shot
+    start_time: "00:00:46"
+    end_time: "00:00:54"
+    pressure_shift: Static profile converts to forward nocturnal march.
+  - beat_id: B6
+    parent_unit: U3
+    label: Waterfront Catch and Homeward Walk
+    function: Conclude with tossing a football and walking toward a lit house.
+    syntagma_type: episodic_sequence
+    start_time: "00:00:54"
+    end_time: "00:01:05"
+    pressure_shift: Golden-hour play resolves into dusk departure from camera.
+patch_timeline:
+  - patch_id: P01
+    parent_unit: U1
+    parent_beat: B1
+    patch_title: Embrace Under Welcome Banner
+    start_time: "00:00:00"
+    end_time: "00:00:08"
+    duration_seconds: 8
+    location: Wooden hall interior
+    spatial_condition: Symmetrical wooden nave with pews, white pillars, overhead string lights, and WELCOME HOME banner.
+    entities_present:
+      - Older Black man in black long-sleeve shirt
+      - Older Black man in rust jacket over white t-shirt
+      - Older Black man with locs in light-blue shirt
+      - Older Black man in black flat cap and green number 32 jersey
+    props_or_objects:
+      - Four hourglasses with red sand
+      - String lights
+      - Welcome Home cloth banner
+    action_summary: The four Black men stand in a tight circle embracing and smiling while holding red-sand hourglasses.
+    state_before: Quartet huddled with arms around shoulders; blue-shirted man reaches across left.
+    state_after: Blue-shirted man lowers arm to waist level as all four smile inward.
+    key_change: Mutual chest embrace settles into a relaxed shoulder-to-shoulder circle.
+    camera_relation: Medium shot, eye level, centered frontal angle.
+    movement_behavior: Locked static frame.
+    light_state: Warm interior tungsten glow from overhead string lights.
+    sound_state: "Male voice reads: 'Decades later, there was less time for words and more space for laughter, hugs with no reason,'; world sound not observed."
+    continuity_anchors:
+      - Overhead string lights
+      - Four hourglasses
+      - Core outfits
+    promptability: high
+    rehydration_seed: Medium static shot inside a warm wooden hall with overhead string lights and a WELCOME HOME banner, where four older Black men (in black shirt, rust jacket, light-blue shirt with locs, and flat cap with green 32 jersey) hug in a circle holding red-sand hourglasses.
+  - patch_id: P02
+    parent_unit: U1
+    parent_beat: B1
+    patch_title: Laughing in Waterside Pavilion
+    start_time: "00:00:08"
+    end_time: "00:00:16"
+    duration_seconds: 8
+    location: Stone waterside pavilion
+    spatial_condition: Semi-enclosed beige stone archways open to gray water on the left, strung with lit bulbs.
+    entities_present:
+      - Older Black man in black mock-neck shirt and black pants
+      - Older Black man in rust jacket, white t-shirt, brown pants
+      - Older Black man with locs in light-blue shirt and dark pants
+      - Older Black man in flat cap and green striped soccer jersey
+    props_or_objects:
+      - Four hourglasses with glowing yellow sand
+      - Overhead string lights
+    action_summary: Standing four abreast facing forward, the men tilt their heads back laughing, then lower their chins to smile at the camera.
+    state_before: Heads tilted upward with open mouths and brightly glowing hourglasses.
+    state_after: Heads level, smiling directly into lens as hourglass glow softens.
+    key_change: Upward open-mouthed laughter transitions to level eye contact.
+    camera_relation: Medium four-shot, eye level, frontal.
+    movement_behavior: Static camera.
+    light_state: Cool overcast daylight from water mixed with warm string lights and yellow hourglass glow.
+    sound_state: "Male voice reads: 'loud voices so our hearts can be overheard. My mind drifts into the darkness of our afterlives,'; world sound not observed."
+    continuity_anchors:
+      - String lights
+      - Four older Black men
+      - Hourglasses
+    promptability: high
+    rehydration_seed: Frontal medium four-shot under a stone pavilion by overcast water with overhead string lights; four older Black men (black shirt, rust jacket, blue shirt with locs, flat cap with green striped jersey) hold glowing yellow hourglasses, tilting heads back in laughter before smiling at camera.
+  - patch_id: P03
+    parent_unit: U1
+    parent_beat: B2
+    patch_title: Stillness in Empty Auditorium
+    start_time: "00:00:16"
+    end_time: "00:00:24"
+    duration_seconds: 8
+    location: Dim auditorium
+    spatial_condition: Dark room with empty wooden folding seats, arched window, foreground tripod camera, and wide doorway.
+    entities_present:
+      - Older Black man in black shirt and black pants
+      - Older Black man in rust jacket, white t-shirt, brown pants
+      - Older Black man with locs in light-blue shirt and blue jeans
+      - Older Black man in flat cap and green number 12 jersey
+    props_or_objects:
+      - Three glowing hourglasses
+      - Camera on black tripod
+      - Empty wooden auditorium chairs
+      - String lights
+    action_summary: The four Black men stand motionless facing forward in the doorway behind a tripod-mounted camera while three hold glowing hourglasses.
+    state_before: Quartet stands still in doorway; blue-shirted man holds hourglass near waist.
+    state_after: Blue-shirted man holds hourglass slightly higher at chest level; others remain still.
+    key_change: Subtle upward raise of the blue-shirted man's hourglass in an otherwise static tableau.
+    camera_relation: Wide shot, eye level, shooting past foreground tripod toward doorway.
+    movement_behavior: Static frame.
+    light_state: Low-key dim daylight from arched windows, sparse overhead bulbs, and warm glow from three hourglasses.
+    sound_state: "Male voice reads: 'and those rooms are empty. We are all here, each holding our glasses of burning sands'; world sound not observed."
+    continuity_anchors:
+      - String lights
+      - Glowing hourglasses
+      - Quartet outfits
+    promptability: high
+    rehydration_seed: Dim wide shot across rows of empty wooden auditorium seats and a foreground tripod camera toward four older Black men standing motionless in a doorway under string lights, three holding glowing hourglasses.
+  - patch_id: P04
+    parent_unit: U2
+    parent_beat: B3
+    patch_title: Walking Through Kintsugi Forest
+    start_time: "00:00:24"
+    end_time: "00:00:30"
+    duration_seconds: 6
+    location: Misty redwood-like forest
+    spatial_condition: Tall tree trunks, ferns, overhead string lights, and a low white stone border with gold veins across the foreground.
+    entities_present:
+      - Older Black man in black shirt and black pants
+      - Older Black man in rust jacket, white t-shirt, brown pants
+      - Older Black man with locs in light-blue shirt and blue jeans
+      - Older Black man in flat cap, green number 10/80 jersey, khaki pants
+    props_or_objects:
+      - Three visible glowing hourglasses
+      - White ceramic/stone border with gold kintsugi seams
+      - String lights
+    action_summary: The four Black men walk slowly forward side-by-side over forest dirt while conversing and carrying glowing hourglasses.
+    state_before: Quartet positioned mid-right near large tree trunk.
+    state_after: Quartet advances slightly forward and left behind the gold-veined white border.
+    key_change: Forward group progression toward the kintsugi-veined threshold.
+    camera_relation: Wide shot, low-to-eye level, static composition.
+    movement_behavior: Slow leftward pan/reframe or static wide frame as subjects advance.
+    light_state: Cool misty forest shade accented by warm string bulbs and glowing hourglasses.
+    sound_state: "Male voice reads: 'and known journeys, and grateful to every living tree in the forest for the shared years'; world sound not observed."
+    continuity_anchors:
+      - String lights
+      - Glowing hourglasses
+      - Gold-veined white wall motif introduced
+    promptability: high
+    rehydration_seed: Wide shot in a misty evergreen forest with string lights and a low white kintsugi-veined border in the foreground, as four older Black men in their signature outfits walk forward side-by-side holding glowing hourglasses.
+  - patch_id: P05
+    parent_unit: U2
+    parent_beat: B3
+    patch_title: Coastal Meadow Brotherhood Portrait
+    start_time: "00:00:30"
+    end_time: "00:00:38"
+    duration_seconds: 8
+    location: Grassy coastal headland
+    spatial_condition: Wildflower meadow before an ocean inlet with a white pointed petal-like building on the right shore and string lights overhead.
+    entities_present:
+      - Older Black man in black shirt and black pants
+      - Older Black man in rust jacket, white t-shirt, dark pants
+      - Older Black man with locs in light-blue shirt and blue jeans
+      - Older Black man in flat cap, plain green v-neck jersey, dark pants
+    props_or_objects:
+      - Four glowing yellow hourglasses
+      - Overhead string lights
+    action_summary: Standing four abreast in tall grass with arms resting on adjacent shoulders, the men smile steadily directly into the camera.
+    state_before: Quartet linked at the shoulders smiling forward, holding glowing hourglasses at stomach height.
+    state_after: Posture and broad smiles remain steady.
+    key_change: Sustained motionless portrait pose.
+    camera_relation: Medium four-shot, eye level, frontal.
+    movement_behavior: Static camera.
+    light_state: Soft dusk sky light, warm interior glow from distant white structure, lit overhead bulbs, and glowing hourglasses.
+    sound_state: "Male voice reads: 'and the shared memories. This is brotherhood. Smiles with no reason,' followed by 'narrow differences'; world sound not observed."
+    continuity_anchors:
+      - String lights
+      - Four glowing hourglasses
+      - Quartet outfits
+    promptability: high
+    rehydration_seed: Medium frontal portrait at twilight in a coastal wildflower meadow under string lights with a white lotus-spired building across the water; four older Black men stand linked at the shoulders smiling at the camera while holding glowing hourglasses.
+  - patch_id: P06
+    parent_unit: U2
+    parent_beat: B4
+    patch_title: Eyes Closed on Dune
+    start_time: "00:00:38"
+    end_time: "00:00:46"
+    duration_seconds: 8
+    location: Sandy beach dune path
+    spatial_condition: Grassy sand dunes beside open ocean with a white gold-seam barrier on the left shore and string lights overhead.
+    entities_present:
+      - Older Black man in black shirt
+      - Older Black man in rust jacket
+      - Older Black man with locs in light-blue shirt
+      - Older Black man in flat cap and green white-trimmed jersey
+    props_or_objects:
+      - Glowing red-sand hourglasses
+      - Overhead string lights
+      - Distant white gold-seamed shore structure
+    action_summary: Standing closely single-file in right profile with eyes closed, the four men hold glowing red hourglasses while the camera tracks right.
+    state_before: All four men visible in diagonal profile column on the left half of frame.
+    state_after: Camera pans/trucks right toward the sandy dune path, leaving only the front two men at frame left.
+    key_change: Lateral camera movement shifts framing from the four men to the open dune path ahead of them.
+    camera_relation: Medium profile shot, eye level, lateral rightward pan/truck.
+    movement_behavior: Smooth rightward pan/truck.
+    light_state: Cool twilight coastal light with warm overhead bulbs and red hourglass glow.
+    sound_state: "Male voice reads: 'narrow differences so our hearts can be overheard. Decades later, we can place our ears upon the next'; world sound not observed."
+    continuity_anchors:
+      - String lights
+      - Red glowing hourglasses
+      - Quartet outfits
+    promptability: high
+    rehydration_seed: Medium right-profile shot on a twilight beach dune path under string lights as four older Black men stand closely single-file with eyes closed holding glowing red hourglasses, while the camera smoothly pans right toward the empty grassy path.
+  - patch_id: P07
+    parent_unit: U3
+    parent_beat: B5
+    patch_title: Night Hilltop Single-File Walk
+    start_time: "00:00:46"
+    end_time: "00:00:54"
+    duration_seconds: 8
+    location: Night hilltop path
+    spatial_condition: Dirt path bordered by a curved white kintsugi-veined wall and wooden posts with string lights, overlooking a lit coastal town under stars.
+    entities_present:
+      - Older Black man in black shirt and black pants
+      - Older Black man with locs in light-blue shirt and dark pants
+      - Older Black man in rust jacket, white t-shirt, brown pants
+      - Older Black man in flat cap, green number 16 jersey, dark pants
+    props_or_objects:
+      - Four glowing yellow hourglasses
+      - Curved white wall with gold veins
+      - Wooden posts with string lights
+    action_summary: The four Black men walk forward in single file along the curved night path, passing exits on the right side of the frame one by one.
+    state_before: All four men visible in single file led by the black-shirted man.
+    state_after: Black-shirted and blue-shirted men exit frame right, leaving the rust-jacketed and green-16-jerseyed men in medium close-up.
+    key_change: Progressive exit of lead walkers past the stationary camera.
+    camera_relation: Medium-wide to medium shot as subjects approach, eye level.
+    movement_behavior: Static or slight push-in as column walks past frame right.
+    light_state: Starry night sky, distant harbor lights, warm string bulbs on posts, and low yellow lantern glow from hourglasses.
+    sound_state: "Male voice reads: 'brother's soul and follow paths of hilltops and canyons, of blinding lights and infinite nights,'; world sound not observed."
+    continuity_anchors:
+      - String lights
+      - Kintsugi-veined wall
+      - Glowing hourglasses
+    promptability: high
+    rehydration_seed: Night shot on a starry hilltop path beside a curved white gold-veined wall and string lights overlooking a lit harbor; four older Black men walk single-file carrying glowing hourglasses like lanterns, passing out of frame right.
+  - patch_id: P08
+    parent_unit: U3
+    parent_beat: B6
+    patch_title: Sunset Waterfront Football Toss
+    start_time: "00:00:54"
+    end_time: "00:01:00"
+    duration_seconds: 6
+    location: Sunset waterfront lawn
+    spatial_condition: Grassy bank with stone seawall, wooden pier, hillside buildings across an inlet, low sun on horizon, and overhead string lights.
+    entities_present:
+      - Older Black man in flat cap, green number 15 jersey, tan pants
+      - Older Black man in rust jacket, white t-shirt, brown pants
+      - Older Black man with locs in light-blue shirt and tan pants
+      - Older Black man in black shirt and black pants
+    props_or_objects:
+      - Brown football
+      - Glowing hourglasses held at hips
+      - Overhead string lights
+    action_summary: The man in the green 15 jersey tosses a football off-frame left, and all four men walk forward smiling across the sunset grass.
+    state_before: Quartet stands in a row; green-jerseyed man tosses football mid-air to the left.
+    state_after: Football exits left; all four men walk forward abreast smiling while carrying hourglasses at their sides.
+    key_change: Stationary ball toss transitions into synchronized forward walking.
+    camera_relation: Wide shot, eye level, frontal.
+    movement_behavior: Slow backward dolly or static wide frame as men walk forward.
+    light_state: Golden-hour backlit sunset over water with warm string lights overhead.
+    sound_state: "Male voice reads: 'all too familiar and create the type of space for laughter'; world sound not observed."
+    continuity_anchors:
+      - String lights
+      - Hourglasses
+      - Quartet outfits
+    promptability: high
+    rehydration_seed: Wide backlit golden-hour shot on a grassy harbor lawn with a wooden pier and overhead string lights; an older Black man in a flat cap and green 15 jersey tosses a football left before walking forward alongside three older Black men carrying hourglasses.
+  - patch_id: P09
+    parent_unit: U3
+    parent_beat: B6
+    patch_title: Walking Home at Dusk
+    start_time: "00:01:00"
+    end_time: "00:01:05"
+    duration_seconds: 5
+    location: Grassy hill path before white house
+    spatial_condition: Green lawn with a stone-lined path leading up to a white single-story gable house with warm lit windows and string lights.
+    entities_present:
+      - Older Black man in black shirt and black pants
+      - Older Black man in rust jacket and brown pants
+      - Older Black man with locs in light-blue shirt and dark jeans
+      - Older Black man in flat cap, green white-striped shirt, dark pants
+    props_or_objects:
+      - Four hourglasses held at sides
+      - Stone path borders
+      - Overhead string lights
+    action_summary: Seen from behind, the four Black men walk abreast up the stone-lined grassy path toward the warm-lit white house.
+    state_before: Quartet in medium-back view near bottom of path.
+    state_after: Quartet walks several paces closer to the white house.
+    key_change: Distance between the quartet and the lit house decreases.
+    camera_relation: Medium-wide rear view, eye level, following/static behind subjects.
+    movement_behavior: Slow forward follow or static frame as men recede.
+    light_state: Cool dusk ambient light contrasted with warm house windows and overhead string bulbs.
+    sound_state: "Male voice reads: 'and football and recollections that bring us home every time.'; world sound not observed."
+    continuity_anchors:
+      - String lights
+      - Four hourglasses
+      - Quartet outfits
+    promptability: high
+    rehydration_seed: Medium-wide rear shot at dusk following four older Black men (in black shirt, rust jacket, light-blue shirt with locs, and flat cap with green shirt) holding hourglasses at their sides as they walk abreast up a stone-lined grassy path toward a warm-lit white house under string lights.
+transitions:
+  - from_patch: P01
+    to_patch: P02
+    transition_type: straight_cut
+    carried_elements:
+      - Four older Black men
+      - Overhead string lights
+      - Hourglasses
+  - from_patch: P02
+    to_patch: P03
+    transition_type: straight_cut
+    carried_elements:
+      - Four older Black men
+      - Overhead string lights
+      - Glowing hourglasses
+  - from_patch: P03
+    to_patch: P04
+    transition_type: straight_cut
+    carried_elements:
+      - Four older Black men
+      - Overhead string lights
+      - Glowing hourglasses
+  - from_patch: P04
+    to_patch: P05
+    transition_type: straight_cut
+    carried_elements:
+      - Four older Black men
+      - Overhead string lights
+      - Glowing hourglasses
+  - from_patch: P05
+    to_patch: P06
+    transition_type: straight_cut
+    carried_elements:
+      - Four older Black men
+      - Overhead string lights
+      - Hourglasses
+  - from_patch: P06
+    to_patch: P07
+    transition_type: straight_cut
+    carried_elements:
+      - Single-file arrangement
+      - Four older Black men
+      - Overhead string lights
+      - Hourglasses
+  - from_patch: P07
+    to_patch: P08
+    transition_type: straight_cut
+    carried_elements:
+      - Four older Black men
+      - Overhead string lights
+      - Hourglasses
+  - from_patch: P08
+    to_patch: P09
+    transition_type: straight_cut
+    carried_elements:
+      - Forward walking motion
+      - Four older Black men
+      - Overhead string lights
+      - Hourglasses
+rehydration_axes:
+  image_generation_ready: true
+  video_generation_ready: true
+  strongest_patch_seeds:
+    - P01
+    - P05
+    - P07
+    - P09
+tagline: Four brothers carry glowing sands beneath unbroken string lights from empty halls to home.
+ttl: 1
