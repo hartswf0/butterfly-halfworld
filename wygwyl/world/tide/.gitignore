@@ -6,3 +6,4 @@ atlas/**/__pycache__/
 atlas/ride-cel/site/data/
 atlas/takes/*/s*/posed/
 atlas/takes/*/lidar.mp4
+atlas/takes/*/lidar-*.mp4

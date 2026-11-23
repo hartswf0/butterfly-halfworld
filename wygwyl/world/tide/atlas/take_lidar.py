@@ -63,6 +63,32 @@ def pose(take, D, man):
     with ThreadPoolExecutor(2) as ex:
         for r in ex.map(one, man['shots']): print('pose shot %s %s refined=%s travel=%sm' % r, flush=True)
 
+BONES = [(5,6),(5,7),(6,8),(7,62),(8,41),(5,9),(6,10),(9,10),(9,11),(10,12),(11,13),(12,14),(13,15),(14,18),(13,17),(14,20),(0,1),(0,2),(1,3),(2,4)]
+def skeletons(img, B, shot, t, ts):
+    """Draw the shot's Sapiens2 bodies at time t: each person matched between the two tracked frames around t and blended."""
+    if not B: return img
+    i = max(0, min(len(ts) - 2, int(np.searchsorted(ts, t) - 1))); a = min(1, max(0, (t - ts[i]) / (ts[i + 1] - ts[i])))
+    A0, A1 = B.get(f's{shot}/{i:02d}', []), B.get(f's{shot}/{i + 1:02d}', [])
+    cen = lambda p: np.array([p['bbox'][0] + p['bbox'][2] / 2, p['bbox'][1] + p['bbox'][3] / 2])
+    lay = np.zeros_like(img); used = set(); bodies = []
+    for p in A0:
+        j = min(range(len(A1)), key=lambda j: np.linalg.norm(cen(A1[j]) - cen(p)), default=None)
+        if j is not None and j not in used and np.linalg.norm(cen(A1[j]) - cen(p)) < 220:
+            used.add(j); q = A1[j]
+            bodies.append((np.array(p['kp']) * (1 - a) + np.array(q['kp']) * a, np.minimum(p['sc'], q['sc'])))
+        elif a < .5: bodies.append((np.array(p['kp']), np.array(p['sc'])))
+    for j, q in enumerate(A1):
+        if j not in used and a >= .5: bodies.append((np.array(q['kp']), np.array(q['sc'])))
+    for kp, sc in bodies:
+        if (sc[:21] > .3).sum() < 6: continue
+        h = max(1, float(np.ptp(kp[sc > .3][:, 1]))); w = int(np.clip(h / 90, 2, 6))
+        for x, y in BONES:
+            if sc[x] > .3 and sc[y] > .3: cv2.line(lay, tuple(kp[x].astype(int)), tuple(kp[y].astype(int)), (255, 245, 225), w, cv2.LINE_AA)
+        for n, (x, y) in enumerate(kp):
+            if sc[n] > .35: cv2.circle(lay, (int(x), int(y)), max(1, w // 2) if n > 20 else w, (255, 255, 255), -1, cv2.LINE_AA)
+    glow = cv2.GaussianBlur(lay, (0, 0), 6)
+    return np.clip(img + lay * .9 + glow * np.array([2.2, 1.6, .9]), 0, 255)
+
 def film(take, D, man):
     import film as F
     from PIL import Image
@@ -76,14 +102,18 @@ def film(take, D, man):
         places.append({'t0': s['t0'], 't1': s['t0'] + s['seconds'], 'P': P_, 'col': col, 'K': fr[0]['camera']['intrinsics'], 'ts': ts,
                        'keys': [(f['camera']['extrinsics']['position'], f['camera']['extrinsics']['quaternion']) for f in fr]})
         print('cloud shot', s['shot'], len(P_), flush=True)
-    END = places[-1]['t1']; out = f'{D}/lidar.mp4'; W, H, FPS = F.W, F.H, F.FPS
-    ff = subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'bgr24', '-s', f'{W}x{H}', '-r', str(FPS), '-i', '-', '-i', os.path.join(T, take, 'film.mp4'),
+    END = places[-1]['t1']; W, H, FPS = F.W, F.H, F.FPS
+    B = json.load(open(f'{D}/bodies.json')) if os.path.exists(f'{D}/bodies.json') else {}
+    only = [int(x) for x in os.environ.get('SHOTS', '').split(',') if x]   # preview: render only these shots
+    span = (places[min(only) - 1]['t0'], places[max(only) - 1]['t1']) if only else (0, END)
+    out = f"{D}/lidar{'-bodies' if B else ''}{'-s' + '-'.join(map(str, only)) if only else ''}.mp4"
+    ff = subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'bgr24', '-s', f'{W}x{H}', '-r', str(FPS), '-i', '-', '-ss', f'{span[0]:.3f}', '-t', f'{span[1] - span[0]:.3f}', '-i', os.path.join(T, take, 'film.mp4'),
                            '-map', '0:v', '-map', '1:a', '-c:v', 'libx264', '-crf', '27', '-preset', 'slow', '-tune', 'grain', '-movflags', '+faststart', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-shortest', out], stdin=subprocess.PIPE)
-    for n in range(int(END * FPS)):
+    for n in range(int(span[0] * FPS), int(span[1] * FPS)):
         t = n / FPS; s = next((p for p in places if p['t0'] <= t < p['t1']), places[-1]); ts = s['ts']
         i = max(0, min(len(ts) - 2, int(np.searchsorted(ts, t) - 1))); a = min(1, max(0, (t - ts[i]) / (ts[i + 1] - ts[i]))); a = a * a * (3 - 2 * a)
         pos = np.array(s['keys'][i][0]) * (1 - a) + np.array(s['keys'][i + 1][0]) * a; q = F.slerp(s['keys'][i][1], s['keys'][i + 1][1], a)
-        img = F.draw(s['P'], s['col'], pos, q, s['K'])
+        img = skeletons(F.draw(s['P'], s['col'], pos, q, s['K']), B, places.index(s) + 1, t, ts)
         e = min(t - s['t0'], s['t1'] - t); w = 0 if e > .45 else (1 - e / .45) ** 1.5
         if w > 0: img = img * (1 - w) + (F.BLUE * (.35 + .65 * w)) * w * (img.mean(2, keepdims=True) / 255 * .6 + .4)
         fr = Image.fromarray(img.astype(np.uint8)[..., ::-1]).convert('RGBA'); lay = F.words_layer(lines, t)
