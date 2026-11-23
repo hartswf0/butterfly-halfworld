@@ -1,0 +1,78 @@
+{
+ "shots": [
+  {
+   "shot": 1,
+   "seen": "A man in dark clothing stands on a beach at night looking toward mountains and distant lights across the water.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "low-poly 3D",
+   "enacts": 2
+  },
+  {
+   "shot": 2,
+   "seen": "The man walks along a dark, blocky path with stepped walls and mountains in the background.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 1
+  },
+  {
+   "shot": 3,
+   "seen": "The man stands on a flat grey surface holding a glowing object to his face while facing a large blocky building.",
+   "third_person": true,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 2
+  },
+  {
+   "shot": 4,
+   "seen": "The man walks across a flat plane covered in glowing yellow squares toward blocky towers and mountains under a purple night sky.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "low-poly 3D",
+   "enacts": 2
+  },
+  {
+   "shot": 5,
+   "seen": "The man walks along the gridded roof of a blocky structure overlooking a city of simple lit buildings under a starry pink sky.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "low-poly 3D",
+   "enacts": 1
+  },
+  {
+   "shot": 6,
+   "seen": "The man walks past a dark wall with glowing square windows under a cloudy night sky.",
+   "third_person": false,
+   "on_bike": false,
+   "same_man": true,
+   "style": "low-poly 3D",
+   "enacts": 1
+  },
+  {
+   "shot": 7,
+   "seen": "The man stands on a rooftop ledge overlooking a vast city of blocky buildings and hills covered in small squares.",
+   "third_person": true,
+   "on_bike": false,
+   "same_man": true,
+   "style": "low-poly 3D",
+   "enacts": 2
+  },
+  {
+   "shot": 8,
+   "seen": "The man walks along a grey and yellow ground between tall black buildings with glowing yellow windows.",
+   "third_person": false,
+   "on_bike": false,
+   "same_man": true,
+   "style": "low-poly 3D",
+   "enacts": 1
+  }
+ ],
+ "overall": "The low-poly grey-box visual style and the over-the-shoulder camera angle are very consistent across all shots, though the framing frequently cuts off the man's lower legs rather than showing his full body. The biggest weakness is that the bare, abstract geometric environments fail to enact the rich natural imagery of the spoken lines, such as plants, trees, ashes, and hands.",
+ "critic_model": "gemini-4-argon"
+}

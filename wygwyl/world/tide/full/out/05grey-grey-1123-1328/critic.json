@@ -1,0 +1,78 @@
+{
+ "shots": [
+  {
+   "shot": 1,
+   "seen": "A man in dark clothing stands on a hill overlooking a blocky city under a starry purple sky.",
+   "third_person": true,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 2
+  },
+  {
+   "shot": 2,
+   "seen": "A man in dark clothes walks along a striped rooftop path next to blocky apartment buildings with lit yellow windows.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 1
+  },
+  {
+   "shot": 3,
+   "seen": "A man in dark clothes stands on an open concrete structure with mattresses on the floor, looking out at a lit city at night.",
+   "third_person": true,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 2
+  },
+  {
+   "shot": 4,
+   "seen": "Seen from the knees up, a man in dark clothes stands between blocky apartment buildings under a starry night sky.",
+   "third_person": false,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 1
+  },
+  {
+   "shot": 5,
+   "seen": "Seen from the knees up, a man in dark clothes raises both arms toward a pink starry sky on a grey concrete rooftop.",
+   "third_person": false,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 2
+  },
+  {
+   "shot": 6,
+   "seen": "Seen from the knees up, a man in dark clothes walks down a wide empty street between dark blocky buildings.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 1
+  },
+  {
+   "shot": 7,
+   "seen": "Seen from the thighs up, a man in dark clothes stands facing calm water and dark mountains as the sun rises or sets.",
+   "third_person": false,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 2
+  },
+  {
+   "shot": 8,
+   "seen": "Seen from the thighs up, a man in dark clothes stands in the middle of a wide street flanked by low grey buildings at dusk.",
+   "third_person": false,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 1
+  }
+ ],
+ "overall": "The low-poly grey-box visual style is very consistent across all shots, though the third-person framing crops off the man's lower legs in the second half of the film. The biggest weakness is the sparse, repetitive environment that fails to visually enact the rich, specific imagery of the spoken poetry.",
+ "critic_model": "gemini-4-argon"
+}
