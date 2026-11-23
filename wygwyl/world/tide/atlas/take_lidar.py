@@ -60,7 +60,7 @@ def pose(take, D, man):
             dep[mk] = np.nan; OpenEXR.File(ex.header(), {'Y': dep}).write(f'{d}/posed/{k:02d}_depth_masked.exr')
         p = [f['camera']['extrinsics']['position'] for f in op['response']['frames']]
         return s['shot'], op['metadata'].get('state'), op['response'].get('poseRefinementAccepted'), round(float(np.linalg.norm(np.array(p[-1]) - np.array(p[0]))), 2)
-    with ThreadPoolExecutor(4) as ex:
+    with ThreadPoolExecutor(2) as ex:
         for r in ex.map(one, man['shots']): print('pose shot %s %s refined=%s travel=%sm' % r, flush=True)
 
 def film(take, D, man):
