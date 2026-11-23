@@ -1,0 +1,78 @@
+{
+ "shots": [
+  {
+   "shot": 1,
+   "seen": "A man in dark clothing walks from behind toward a large dark block structure in a low-poly city at dusk.",
+   "third_person": true,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 1
+  },
+  {
+   "shot": 2,
+   "seen": "A man seen from behind walks along a grey street past blocky dark buildings with glowing yellow windows.",
+   "third_person": true,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 0
+  },
+  {
+   "shot": 3,
+   "seen": "A man stands facing the camera from the waist up outside a grey building with three yellow cubes by a doorway.",
+   "third_person": false,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 2
+  },
+  {
+   "shot": 4,
+   "seen": "A man seen from the thighs up from behind walks in the rain beside the sea and white apartment buildings.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "photoreal",
+   "enacts": 2
+  },
+  {
+   "shot": 5,
+   "seen": "A man seen from behind walks across an open grey plaza toward a large dark building with lit yellow windows.",
+   "third_person": true,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 0
+  },
+  {
+   "shot": 6,
+   "seen": "A man stands from behind on a grey concrete structure overlooking green hills under an overcast sky.",
+   "third_person": true,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 0
+  },
+  {
+   "shot": 7,
+   "seen": "A man seen from the knees up from behind walks along a dark shoreline near a blocky building with a glowing window.",
+   "third_person": false,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 0
+  },
+  {
+   "shot": 8,
+   "seen": "A man seen from the knees up from behind walks along a path of orange tiles under a starry night sky.",
+   "third_person": false,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 1
+  }
+ ],
+ "overall": "Neither the third-person view nor the visual style is fully consistent, as several shots crop the man's legs or turn him toward the camera, and shot 4 shifts from low-poly grey-box to a more realistic look. The biggest weakness is that the barren geometric environments rarely depict the rich, specific imagery described in the spoken lines.",
+ "critic_model": "gemini-4-argon"
+}
