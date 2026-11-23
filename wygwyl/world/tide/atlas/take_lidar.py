@@ -79,8 +79,12 @@ BONES = [(5,6),(5,7),(6,8),(7,62),(8,41),(5,9),(6,10),(9,10),(9,11),(10,12),(11,
 def skeletons(img, B, shot, t, ts):
     """Draw the shot's Sapiens2 bodies at time t: each person matched between the two tracked frames around t and blended."""
     if not B: return img
-    i = max(0, min(len(ts) - 2, int(np.searchsorted(ts, t) - 1))); a = min(1, max(0, (t - ts[i]) / (ts[i + 1] - ts[i])))
-    A0, A1 = B.get(f's{shot}/{i:02d}', []), B.get(f's{shot}/{i + 1:02d}', [])
+    have = [k for k in range(len(ts)) if f's{shot}/{k:02d}' in B]   # only some frames are tracked: blend the nearest tracked ones on each side
+    if not have: return img
+    before = [k for k in have if ts[k] <= t]; after = [k for k in have if ts[k] > t]
+    i = before[-1] if before else have[0]; j = after[0] if after else have[-1]
+    a = 0 if i == j else min(1, max(0, (t - ts[i]) / (ts[j] - ts[i])))
+    A0, A1 = B.get(f's{shot}/{i:02d}', []), B.get(f's{shot}/{j:02d}', [])
     cen = lambda p: np.array([p['bbox'][0] + p['bbox'][2] / 2, p['bbox'][1] + p['bbox'][3] / 2])
     lay = np.zeros_like(img); used = set(); bodies = []
     for p in A0:
