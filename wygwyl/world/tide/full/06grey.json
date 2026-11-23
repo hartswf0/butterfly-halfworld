@@ -49,6 +49,17 @@
  ],
  "third_person": "THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him.",
  "styles": {
-  "greyfig": "STYLE: a grey-box video game world. Flat untextured blocks, small lit yellow squares for windows, flat ground, simple block figures. Keep this exact flat blocky look; add no texture or realism. The man walking away from us in the lower middle of the starting picture is him: keep him exactly there, seen from behind."
+  "greyfig": "STYLE: a grey-box video game world. Flat untextured blocks, small lit yellow squares for windows, flat ground, simple block figures. Keep this exact flat blocky look; add no texture or realism. The man walking away from us in the lower middle of the starting picture is him: keep him exactly there, seen from behind.",
+  "grey": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism."
+ },
+ "seeds_from": {
+  "grey1.jpg": "foundry/inv/w0746/10-00-b.jpg",
+  "grey2.jpg": "foundry/inv/w0746/10-07-b.jpg",
+  "grey3.jpg": "foundry/inv/w1165/01-07-b.jpg",
+  "grey4.jpg": "foundry/inv/w0889/10-06-b.jpg",
+  "grey5.jpg": "foundry/inv/w0889/12-00-b.jpg",
+  "grey6.jpg": "foundry/inv/w1623/10-07-b.jpg",
+  "grey7.jpg": "foundry/inv/w1578/01-07-b.jpg",
+  "grey8.jpg": "foundry/inv/w1623/01-07-b.jpg"
  }
 }

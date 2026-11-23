@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """A poem as grey-box third-person shots cut on his lines: the recipe of the best Magic Ride take (10ride-grey), seeded from the poem's own level.
-    GEMINI_API_KEY=... python3 full/greybox.py 06 greyfig 8   (spec full/06grey.json, seeds full/seeds06/greyfig1..8.jpg)
+    GEMINI_API_KEY=... python3 full/greybox.py 06 grey 8   (spec full/06grey.json; seeds full/seeds06/grey1..8.jpg, cropped from the inverse foundry renders listed in the spec's seeds_from)
 Writes film.mp4, verify.mp4 (shot number + timecode burned in), manifest.json (every seed text), critic.json, sheet.jpg."""
 import asyncio, base64, io, json, os, re, shutil, ssl, subprocess, sys, time, urllib.request, websockets
 from PIL import Image

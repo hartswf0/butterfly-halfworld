@@ -15,40 +15,51 @@
  ],
  "shots": [
   {
-   "action": "Night. He stands at the top of a long corridor of stacked shipping-container stalls and looks down it.",
+   "action": "Night. He stands at the top of a long narrow passage between dark blocks with lit windows and looks down it.",
    "key": null
   },
   {
-   "action": "He walks down between the container stalls looking for a way out, past fire escapes and lit hatches.",
+   "action": "He walks down between the dark blocks looking for a way out, past fire escapes and lit windows.",
    "key": "key_w"
   },
   {
-   "action": "He walks into a crowd under strings of light; far ahead the man in the orange coat walks away from him.",
+   "action": "He walks into a crowd under strings of light between the blocks; far ahead the man in the orange coat walks away from him.",
    "key": "key_w"
   },
   {
-   "action": "He follows the man in the orange coat down a narrow stair alley between the containers.",
+   "action": "He follows the man in the orange coat down a narrow stepped alley between the blocks.",
    "key": "key_w"
   },
   {
-   "action": "He walks into a dark underpass; the man in the orange coat is ahead of him and the shadows pool on the ground.",
+   "action": "He walks into a dark underpass beneath the blocks; the man in the orange coat is ahead of him and the shadows pool on the ground.",
    "key": "key_w"
   },
   {
-   "action": "He pauses in drifting vapour outside a lit teahouse; photographs hang on strings across the alley.",
+   "action": "He pauses in drifting vapour outside a lit doorway; photographs hang on strings across the alley.",
    "key": null
   },
   {
-   "action": "The man in the orange coat walks ahead with his back to him, toward a fire escape; he follows.",
+   "action": "The man in the orange coat walks ahead with his back to him, toward a fire escape on a tall block; he follows.",
    "key": "key_w"
   },
   {
-   "action": "He climbs the fire escape after him and steps off the top into the dark.",
+   "action": "He climbs the fire escape after him and steps off the top into the dark above the water.",
    "key": "key_w"
   }
  ],
  "third_person": "THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him.",
  "styles": {
-  "greyfig": "STYLE: a grey-box video game world. Flat untextured blocks, small lit yellow squares for windows, flat ground, simple block figures. Keep this exact flat blocky look; add no texture or realism. The man walking away from us in the lower middle of the starting picture is him: keep him exactly there, seen from behind."
+  "greyfig": "STYLE: a grey-box video game world. Flat untextured blocks, small lit yellow squares for windows, flat ground, simple block figures. Keep this exact flat blocky look; add no texture or realism. The man walking away from us in the lower middle of the starting picture is him: keep him exactly there, seen from behind.",
+  "grey": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism."
+ },
+ "seeds_from": {
+  "grey1.jpg": "foundry/inv/w1623/10-05-b.jpg",
+  "grey2.jpg": "foundry/inv/w1623/10-07-b.jpg",
+  "grey3.jpg": "foundry/inv/w0746/01-07-b.jpg",
+  "grey4.jpg": "foundry/inv/w1165/01-07-b.jpg",
+  "grey5.jpg": "foundry/inv/w1578/10-07-b.jpg",
+  "grey6.jpg": "foundry/inv/w1165/10-07-b.jpg",
+  "grey7.jpg": "foundry/inv/w0889/12-00-b.jpg",
+  "grey8.jpg": "foundry/inv/w1623/10-04-b.jpg"
  }
 }
