@@ -1,0 +1,54 @@
+{
+ "poem": 12,
+ "game": "reunion",
+ "thesis": "Reunion: four old friends, decades later, carried from place to place.",
+ "character": "HIM: a Black man in his fifties with close-cropped greying hair and a short grey beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. HIS FRIENDS: three Black men in their fifties walking with him: one in a rust corduroy jacket over a white tee, one in sky-blue linen, one in a green football jersey and a flat cap.",
+ "start_lines": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7
+ ],
+ "shots": [
+  {
+   "action": "Evening in a white hall with timber rafters and a WELCOME HOME banner; he and his three friends walk in, laughing, and hug.",
+   "key": "key_w"
+  },
+  {
+   "action": "The four friends stand close together in the hall, talking loudly, arms round each other's shoulders.",
+   "key": null
+  },
+  {
+   "action": "He walks alone through a dim back room of empty wooden chairs toward one tall window.",
+   "key": "key_w"
+  },
+  {
+   "action": "Blue dusk. The four friends walk out of the edge of a forest of huge old trees, mist between the trunks.",
+   "key": "key_w"
+  },
+  {
+   "action": "Golden hour. The four friends walk across a meadow toward a white temple.",
+   "key": "key_w"
+  },
+  {
+   "action": "Last light. The four friends walk down a sandy path through dune grass to the shore.",
+   "key": "key_w"
+  },
+  {
+   "action": "Night. The four friends walk along a dark path past a single lamp post, under a sky full of stars.",
+   "key": "key_w"
+  },
+  {
+   "action": "Sunset over an open meadow, two low suns on the horizon; the four friends walk on together, laughing.",
+   "key": null
+  }
+ ],
+ "third_person": "THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him.",
+ "styles": {
+  "greyfig": "STYLE: a grey-box video game world. Flat untextured blocks, small lit yellow squares for windows, flat ground, simple block figures. Keep this exact flat blocky look; add no texture or realism. The man walking away from us in the lower middle of the starting picture is him: keep him exactly there, seen from behind."
+ }
+}
