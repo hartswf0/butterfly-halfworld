@@ -24,6 +24,17 @@ def boxes(jpg):
         except Exception: pass
     return []
 
+def save_boxes(jobs, B):
+    """Per-person boxes (Gemini, 0-1000 ymin xmin ymax xmax) per frame, kept so Sapiens2 can read every body separately."""
+    by = {}
+    for (d, k), bx in zip(jobs, B): by.setdefault(d, {})[f'{k:02d}'] = bx
+    for d, v in by.items(): json.dump(v, open(f'{d}/boxes.json', 'w'))
+
+def boxes_stage(take, D, man):
+    jobs = [(f"{D}/s{s['shot']}", k) for s in man['shots'] for k in range(N)]
+    with ThreadPoolExecutor(8) as ex: B = list(ex.map(lambda j: boxes(f'{j[0]}/frames/{j[1]:02d}.jpg'), jobs))
+    save_boxes(jobs, B); print('boxes', sum(len(b) for b in B), 'people in', len(jobs), 'frames', flush=True)
+
 def prep(take, D, man):
     from ultralytics.models.sam import SAM
     sam = SAM(os.path.join(T, 'seg', 'sam2.1_s.pt')); film = os.path.join(T, take, 'film.mp4')
@@ -35,6 +46,7 @@ def prep(take, D, man):
             subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', f'{t:.3f}', '-i', film, '-frames:v', '1', '-vf', 'scale=1280:720', '-q:v', '2', f'{d}/frames/{k:02d}.jpg'], check=True)
             jobs.append((d, k))
     with ThreadPoolExecutor(8) as ex: B = list(ex.map(lambda j: boxes(f'{j[0]}/frames/{j[1]:02d}.jpg'), jobs))
+    save_boxes(jobs, B)
     for (d, k), bx in zip(jobs, B):
         m = np.zeros((720, 1280), bool)
         if bx:
@@ -124,4 +136,4 @@ def film(take, D, man):
 if __name__ == '__main__':
     take = sys.argv[1].rstrip('/'); man = json.load(open(os.path.join(T, take, 'manifest.json')))
     D = f'{A}/takes/{os.path.basename(take)}'; os.makedirs(D, exist_ok=True)
-    for st in sys.argv[2:]: globals()[st](take, D, man)
+    for st in sys.argv[2:]: globals()['boxes_stage' if st == 'boxes' else st](take, D, man)

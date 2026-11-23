@@ -12,12 +12,16 @@ def people(mask):
     m_ = cv2.erode((cv2.imread(mask, 0) < 128).astype(np.uint8), np.ones((27, 27), np.uint8))
     _, _, st, _ = cv2.connectedComponentsWithStats(m_)
     return [[float(max(0, x - 10)), float(max(0, y - 10)), float(w + 20), float(h + 20)] for x, y, w, h, a in st[1:] if a > 400 and h > 40]
-out_p = f'{D}/bodies.json'; out = json.load(open(out_p)) if os.path.exists(out_p) else {}
+out_p = f'{D}/bodies.json' if not os.environ.get('REDO') else f'{D}/bodies.json'; out = json.load(open(out_p)) if os.path.exists(out_p) else {}
 for sd in sorted(d for d in os.listdir(D) if d.startswith('s') and os.path.isdir(f'{D}/{d}')):
     for k in range(len(os.listdir(f'{D}/{sd}/frames'))):
         key = f'{sd}/{k:02d}'
         if key in out: continue
-        bx = people(f'{D}/{sd}/masks/{k:02d}.png'); t = time.time(); res = []
+        bf = f'{D}/{sd}/boxes.json'
+        if os.path.exists(bf):   # every person Gemini found, as COCO x, y, w, h with a small margin
+            bx = [[max(0, b[1] * 1.28 - 8), max(0, b[0] * .72 - 8), (b[3] - b[1]) * 1.28 + 16, (b[2] - b[0]) * .72 + 16] for b in json.load(open(bf)).get(f'{k:02d}', []) if (b[2] - b[0]) * .72 > 25]
+        else: bx = people(f'{D}/{sd}/masks/{k:02d}.png')
+        t = time.time(); res = []
         if bx:
             with torch.inference_mode():
                 im = Image.open(f'{D}/{sd}/frames/{k:02d}.jpg').convert('RGB'); o = m(**pp(im, boxes=[bx], return_tensors='pt'))
