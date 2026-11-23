@@ -1,0 +1,78 @@
+{
+ "shots": [
+  {
+   "shot": 1,
+   "seen": "A man in dark clothing walks down a path flanked by blocky figures toward large white winged gates under a starry sky.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "low-poly 3D",
+   "enacts": 3
+  },
+  {
+   "shot": 2,
+   "seen": "The man stands on a platform facing a bright blue ocean under a starry night sky with floating text.",
+   "third_person": true,
+   "on_bike": false,
+   "same_man": true,
+   "style": "low-poly 3D",
+   "enacts": 1
+  },
+  {
+   "shot": 3,
+   "seen": "The man walks up a pyramid of glowing yellow cubes toward simple grey block buildings under a night sky.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "low-poly 3D",
+   "enacts": 1
+  },
+  {
+   "shot": 4,
+   "seen": "A blocky voxel man walks down a yellow brick road between grey buildings covered in green pixel patches.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": false,
+   "style": "voxel",
+   "enacts": 1
+  },
+  {
+   "shot": 5,
+   "seen": "The blocky man continues walking down the yellow brick road surrounded by grey buildings and floating white words.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": false,
+   "style": "voxel",
+   "enacts": 1
+  },
+  {
+   "shot": 6,
+   "seen": "The blocky man walks further down the yellow brick road between tall pixel-textured buildings at night.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": false,
+   "style": "voxel",
+   "enacts": 2
+  },
+  {
+   "shot": 7,
+   "seen": "The blocky man walks along the yellow brick road while a colorful rainbow streak appears in the night sky between the buildings.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": false,
+   "style": "voxel",
+   "enacts": 2
+  },
+  {
+   "shot": 8,
+   "seen": "The blocky man walks down the yellow brick road into the distance flanked by blocky figures and grey buildings.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": false,
+   "style": "voxel",
+   "enacts": 2
+  }
+ ],
+ "overall": "The third-person view is mostly consistent across the shots, though the character's legs are cropped in the first shot and his design shifts from a smooth 3D model to a blocky voxel avatar starting in shot four. The biggest weakness is the repetitive visual scenery in the second half and the garbled, misspelled floating text that fails to meaningfully enact the poetic lines.",
+ "critic_model": "gemini-4-argon"
+}

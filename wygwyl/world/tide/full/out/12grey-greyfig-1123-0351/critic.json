@@ -1,0 +1,78 @@
+{
+ "shots": [
+  {
+   "shot": 1,
+   "seen": "Four blocky characters walk away from the camera inside a large wooden hall lit by string lights.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "blocky 3D",
+   "enacts": 1
+  },
+  {
+   "shot": 2,
+   "seen": "Four blocky characters walk down the aisle of a long hall beneath a 'WELCOME HOME' banner toward a dark end with floating text.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "blocky 3D",
+   "enacts": 2
+  },
+  {
+   "shot": 3,
+   "seen": "A single blocky man in dark clothes stands in a dark room with brown chairs and floating white words.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "blocky 3D",
+   "enacts": 2
+  },
+  {
+   "shot": 4,
+   "seen": "Four blocky figures walk together through a dark forest with large brown tree trunks and floating words.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "blocky 3D",
+   "enacts": 3
+  },
+  {
+   "shot": 5,
+   "seen": "Four blocky figures walk across a flat green plain toward an orange horizon under an arc of white dots.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "blocky 3D",
+   "enacts": 1
+  },
+  {
+   "shot": 6,
+   "seen": "Four blocky figures walk across a brown tiled desert landscape with scattered green stalks and floating scrambled text.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "blocky 3D",
+   "enacts": 1
+  },
+  {
+   "shot": 7,
+   "seen": "Four blocky figures walk along a dark path lined with streetlamp poles and blocky structures under a starry sky.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "blocky 3D",
+   "enacts": 2
+  },
+  {
+   "shot": 8,
+   "seen": "Four blocky figures walk in the distance across a green field dotted with small posts under a red sky with large white polygonal spheres.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "blocky 3D",
+   "enacts": 1
+  }
+ ],
+ "overall": "The third-person view and blocky low-poly 3D style are very consistent across all shots, though the camera distance varies slightly and the main character in shot 1 is slightly less blocky than in later shots. The biggest weakness is that the visuals rely heavily on literal floating text fragments rather than expressive animation or rich environmental storytelling to enact the poetic lines.",
+ "critic_model": "gemini-4-argon"
+}

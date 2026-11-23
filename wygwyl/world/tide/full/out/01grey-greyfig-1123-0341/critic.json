@@ -1,0 +1,78 @@
+{
+ "shots": [
+  {
+   "shot": 1,
+   "seen": "A man in black walks down a dark alley made of colorful shipping containers with glowing white words floating around him.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "low-poly 3D",
+   "enacts": 1
+  },
+  {
+   "shot": 2,
+   "seen": "A man in black seen from the hips up walks down a grey container alley toward garbled floating text.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "semi-realistic 3D",
+   "enacts": 1
+  },
+  {
+   "shot": 3,
+   "seen": "A man in black walks through a grey shipping container alley behind two figures in orange coats amid floating gibberish words.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "low-poly 3D",
+   "enacts": 2
+  },
+  {
+   "shot": 4,
+   "seen": "A man in black seen from the waist up walks down a colorful container alley behind a distant figure in orange surrounded by floating text.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "low-poly 3D",
+   "enacts": 2
+  },
+  {
+   "shot": 5,
+   "seen": "A man in black walks down a container alley past low-poly bystanders and large floating text fragments.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "low-poly 3D",
+   "enacts": 1
+  },
+  {
+   "shot": 6,
+   "seen": "A man in black seen from the waist up stands in a grey alley looking toward two figures in orange and floating words from the previous line.",
+   "third_person": false,
+   "on_bike": false,
+   "same_man": true,
+   "style": "low-poly 3D",
+   "enacts": 1
+  },
+  {
+   "shot": 7,
+   "seen": "A man in black walks down a colorful container alley behind a figure in an orange coat with floating text around them.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "low-poly 3D",
+   "enacts": 2
+  },
+  {
+   "shot": 8,
+   "seen": "An empty container alley in the rain filled with floating white words and a glowing blue beam in the distance, with no man visible.",
+   "third_person": false,
+   "on_bike": false,
+   "same_man": false,
+   "style": "low-poly 3D",
+   "enacts": 1
+  }
+ ],
+ "overall": "The low-poly 3D style is mostly consistent except for a more textured look in shot 2, while the third-person view is inconsistent because the framing frequently cuts off the man's legs or omits him entirely in the final shot. The biggest weakness is that every shot repeats the exact same container-alley setting with garbled, out-of-sync floating text rather than visually enacting the rich imagery of the spoken lines.",
+ "critic_model": "gemini-4-argon"
+}
