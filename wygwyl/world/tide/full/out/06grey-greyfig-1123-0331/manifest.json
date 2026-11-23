@@ -1,0 +1,94 @@
+{
+ "poem": "06",
+ "style": "greyfig",
+ "shots": [
+  {
+   "shot": 1,
+   "seed_image": "full/seeds06/greyfig1.jpg",
+   "line": "The gates open with wings gifted from evolution, and made of marble stones kissed by the hymns our creator composed with an orchestra of our ancestors wildest dreams to",
+   "t0": 0.0,
+   "seconds": 12.5,
+   "seed_text": "STYLE: a grey-box video game world. Flat untextured blocks, small lit yellow squares for windows, flat ground, simple block figures. Keep this exact flat blocky look; add no texture or realism. The man walking away from us in the lower middle of the starting picture is him: keep him exactly there, seen from behind. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE ANCESTORS: Black women and men of every age walking with him, in long robes of deep indigo, ochre, blue, gold and white. ACTION: Dusk. He walks along a long straight road toward two tall white gates; the gates swing open like wings.",
+   "key": "key_w",
+   "frames": 128,
+   "delivered_fps": 9.4
+  },
+  {
+   "shot": 2,
+   "seed_image": "full/seeds06/greyfig2.jpg",
+   "line": "welcome us. Poets who eased generations down yellow brick roads and plucked our souls out of their secret places to follow comets to the capital city of our collective consciousness,",
+   "t0": 12.5,
+   "seconds": 15.05,
+   "seed_text": "STYLE: a grey-box video game world. Flat untextured blocks, small lit yellow squares for windows, flat ground, simple block figures. Keep this exact flat blocky look; add no texture or realism. The man walking away from us in the lower middle of the starting picture is him: keep him exactly there, seen from behind. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE ANCESTORS: Black women and men of every age walking with him, in long robes of deep indigo, ochre, blue, gold and white. ACTION: He walks up a yellow road through the open gates; the ancestors walk beside him on both sides.",
+   "key": "key_w",
+   "frames": 384,
+   "delivered_fps": 24.5
+  },
+  {
+   "shot": 3,
+   "seed_image": "full/seeds06/greyfig3.jpg",
+   "line": "resurrecting Atlantis. Here we are all one. The pack we've made here with nature abandon and hope for the best back on life. A relearned currency we reassess as a mission,",
+   "t0": 27.55,
+   "seconds": 16.88,
+   "seed_text": "STYLE: a grey-box video game world. Flat untextured blocks, small lit yellow squares for windows, flat ground, simple block figures. Keep this exact flat blocky look; add no texture or realism. The man walking away from us in the lower middle of the starting picture is him: keep him exactly there, seen from behind. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE ANCESTORS: Black women and men of every age walking with him, in long robes of deep indigo, ochre, blue, gold and white. ACTION: Tall blocks rise out of the ground on both sides of the road as he and the ancestors walk into the city.",
+   "key": "key_w",
+   "frames": 420,
+   "delivered_fps": 23.8
+  },
+  {
+   "shot": 4,
+   "seed_image": "full/seeds06/greyfig4.jpg",
+   "line": "but here we are all safe. Here we are all one. The pack we've made here with nature abandon and hope for the best back on life. A relearned currency we reassess as a mission,",
+   "t0": 44.43,
+   "seconds": 17.03,
+   "seed_text": "STYLE: a grey-box video game world. Flat untextured blocks, small lit yellow squares for windows, flat ground, simple block figures. Keep this exact flat blocky look; add no texture or realism. The man walking away from us in the lower middle of the starting picture is him: keep him exactly there, seen from behind. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE ANCESTORS: Black women and men of every age walking with him, in long robes of deep indigo, ochre, blue, gold and white. ACTION: He walks through a wide plaza among the ancestors; shallow water flows across the ground around their feet.",
+   "key": "key_w",
+   "frames": 412,
+   "delivered_fps": 23.1
+  },
+  {
+   "shot": 5,
+   "seed_image": "full/seeds06/greyfig5.jpg",
+   "line": "but here we are all safe. An unfamiliar flickering candlelight illuminating smiles",
+   "t0": 61.46,
+   "seconds": 7.14,
+   "seed_text": "STYLE: a grey-box video game world. Flat untextured blocks, small lit yellow squares for windows, flat ground, simple block figures. Keep this exact flat blocky look; add no texture or realism. The man walking away from us in the lower middle of the starting picture is him: keep him exactly there, seen from behind. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE ANCESTORS: Black women and men of every age walking with him, in long robes of deep indigo, ochre, blue, gold and white. ACTION: Night. A candle burns in every window; he walks slowly while people stand in the doorways smiling.",
+   "key": "key_w",
+   "frames": 188,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 6,
+   "seed_image": "full/seeds06/greyfig6.jpg",
+   "line": "at night where shadows cast from narrow streets beaming with love, and the joyful noises that",
+   "t0": 68.6,
+   "seconds": 7.07,
+   "seed_text": "STYLE: a grey-box video game world. Flat untextured blocks, small lit yellow squares for windows, flat ground, simple block figures. Keep this exact flat blocky look; add no texture or realism. The man walking away from us in the lower middle of the starting picture is him: keep him exactly there, seen from behind. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE ANCESTORS: Black women and men of every age walking with him, in long robes of deep indigo, ochre, blue, gold and white. ACTION: He walks down a narrow street between tall blocks, strings of light overhead and people on both sides.",
+   "key": "key_w",
+   "frames": 184,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 7,
+   "seed_image": "full/seeds06/greyfig7.jpg",
+   "line": "color rainbows, and give us infinite time to heal and set clouds free. I know my soul and it could stay here forever, leaving behind crosshairs for continuums and strains for",
+   "t0": 75.67,
+   "seconds": 15.88,
+   "seed_text": "STYLE: a grey-box video game world. Flat untextured blocks, small lit yellow squares for windows, flat ground, simple block figures. Keep this exact flat blocky look; add no texture or realism. The man walking away from us in the lower middle of the starting picture is him: keep him exactly there, seen from behind. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE ANCESTORS: Black women and men of every age walking with him, in long robes of deep indigo, ochre, blue, gold and white. ACTION: Bands of rainbow light arc over the city and the clouds lift away; he stops and looks up.",
+   "key": null,
+   "frames": 396,
+   "delivered_fps": 24.0
+  },
+  {
+   "shot": 8,
+   "seed_image": "full/seeds06/greyfig8.jpg",
+   "line": "serendipity. A city born in unison out of the purest of fictions welcoming me and welcoming all.",
+   "t0": 91.55,
+   "seconds": 8.93,
+   "seed_text": "STYLE: a grey-box video game world. Flat untextured blocks, small lit yellow squares for windows, flat ground, simple block figures. Keep this exact flat blocky look; add no texture or realism. The man walking away from us in the lower middle of the starting picture is him: keep him exactly there, seen from behind. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE ANCESTORS: Black women and men of every age walking with him, in long robes of deep indigo, ochre, blue, gold and white. ACTION: He stands in the middle of the plaza, the whole city lit around him, the ancestors gathered round him.",
+   "key": null,
+   "frames": 232,
+   "delivered_fps": 24.1
+  }
+ ]
+}
