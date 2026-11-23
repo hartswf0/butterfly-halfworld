@@ -1,0 +1,78 @@
+{
+ "shots": [
+  {
+   "shot": 1,
+   "seen": "A man in black clothes walks from behind along a dark path with yellow markings towards white monolithic gates, accompanied by people in colorful robes under a starry dusk sky.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "cel cartoon",
+   "enacts": 2
+  },
+  {
+   "shot": 2,
+   "seen": "The man in black and others in robes walk forward towards the camera alongside a yellow path and simple grey buildings.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "cel cartoon",
+   "enacts": 2
+  },
+  {
+   "shot": 3,
+   "seen": "Seen from behind from the knees up, the man in black walks with robed figures down a street lined with plain grey box buildings.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "cel cartoon",
+   "enacts": 1
+  },
+  {
+   "shot": 4,
+   "seen": "Seen from behind from the hips up, the man in black walks with robed companions towards a calm body of water under a starry sky.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "cel cartoon",
+   "enacts": 1
+  },
+  {
+   "shot": 5,
+   "seen": "The man in black is seen full-body from behind walking up wide dark steps towards boxy buildings with glowing yellow windows.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "cel cartoon",
+   "enacts": 1
+  },
+  {
+   "shot": 6,
+   "seen": "Seen from the hips up from behind, the man in black walks down steps overlooking a city and bay under strings of overhead lights.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "cel cartoon",
+   "enacts": 2
+  },
+  {
+   "shot": 7,
+   "seen": "Seen from behind from the knees up, the man in black stands in shallow water with robed figures raising their hands beneath a rainbow in the night sky.",
+   "third_person": false,
+   "on_bike": false,
+   "same_man": true,
+   "style": "cel cartoon",
+   "enacts": 2
+  },
+  {
+   "shot": 8,
+   "seen": "Seen from behind from the knees up, the man in black stands on a ledge overlooking a sprawling boxy city with lit windows and robed people gathered below.",
+   "third_person": false,
+   "on_bike": false,
+   "same_man": true,
+   "style": "cel cartoon",
+   "enacts": 2
+  }
+ ],
+ "overall": "The cel-shaded cartoon style is very consistent across all shots, though the strict full-body third-person view frequently crops in to medium shots from the hips or knees up (and reverses angle in Shot 2). The biggest weakness is the rudimentary, untextured grey-box architecture that fails to capture the rich poetic imagery of the narration.",
+ "critic_model": "gemini-4-argon"
+}

@@ -1,0 +1,94 @@
+{
+ "poem": "01",
+ "style": "grey",
+ "shots": [
+  {
+   "shot": 1,
+   "seed_image": "full/seeds01/grey1.jpg",
+   "line": "What we've made we don't want, what we've sold to the world, to ourselves, doesn't exist.",
+   "t0": 0.0,
+   "seconds": 7.83,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE OTHER MAN: a tall Black man in his thirties in a long orange coat, dark trousers and boots, always walking ahead with his back to us, never turning round. THE CROWD: Black women and men in everyday clothes, standing at the stalls. ACTION: Night. He stands at the top of a long narrow passage between dark blocks with lit windows and looks down it.",
+   "key": null,
+   "frames": 204,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 2,
+   "seed_image": "full/seeds01/grey2.jpg",
+   "line": "I look for a way out through the hallways, within the drawers and fire escapes, trip on my own words, falling out of life, and find where you go when you leave.",
+   "t0": 7.83,
+   "seconds": 12.39,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE OTHER MAN: a tall Black man in his thirties in a long orange coat, dark trousers and boots, always walking ahead with his back to us, never turning round. THE CROWD: Black women and men in everyday clothes, standing at the stalls. ACTION: He walks down between the dark blocks looking for a way out, past fire escapes and lit windows.",
+   "key": "key_w",
+   "frames": 312,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 3,
+   "seed_image": "full/seeds01/grey3.jpg",
+   "line": "It was the maze constructed by a tainted love, a known yet unknown pit beneath the quicksands of the make-believe haven, and hidden in the overnourished forest of escapism that calls for you.",
+   "t0": 20.22,
+   "seconds": 12.96,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE OTHER MAN: a tall Black man in his thirties in a long orange coat, dark trousers and boots, always walking ahead with his back to us, never turning round. THE CROWD: Black women and men in everyday clothes, standing at the stalls. ACTION: He walks into a crowd under strings of light between the blocks; far ahead the man in the orange coat walks away from him.",
+   "key": "key_w",
+   "frames": 328,
+   "delivered_fps": 24.0
+  },
+  {
+   "shot": 4,
+   "seed_image": "full/seeds01/grey4.jpg",
+   "line": "At this age, I'll follow, following the full distance between us almost having it all and starting anew, to rediscover when love was real.",
+   "t0": 33.18,
+   "seconds": 10.78,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE OTHER MAN: a tall Black man in his thirties in a long orange coat, dark trousers and boots, always walking ahead with his back to us, never turning round. THE CROWD: Black women and men in everyday clothes, standing at the stalls. ACTION: He follows the man in the orange coat down a narrow stepped alley between the blocks.",
+   "key": "key_w",
+   "frames": 276,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 5,
+   "seed_image": "full/seeds01/grey5.jpg",
+   "line": "I failed at protecting you from your own vices, crashing the party of your evilest instincts to find vibrations that echo in silence, love and hate languages that translate and slow dripping blood salivating on imminent doubts, fully awakening to our darkest nights.",
+   "t0": 43.96,
+   "seconds": 20.07,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE OTHER MAN: a tall Black man in his thirties in a long orange coat, dark trousers and boots, always walking ahead with his back to us, never turning round. THE CROWD: Black women and men in everyday clothes, standing at the stalls. ACTION: He walks into a dark underpass beneath the blocks; the man in the orange coat is ahead of him and the shadows pool on the ground.",
+   "key": "key_w",
+   "frames": 496,
+   "delivered_fps": 24.0
+  },
+  {
+   "shot": 6,
+   "seed_image": "full/seeds01/grey6.jpg",
+   "line": "Pause for a second, a spectrum of fields will thread needles of garments made of sweet memories and photographs, film and fiction that leave me empty.",
+   "t0": 64.03,
+   "seconds": 11.41,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE OTHER MAN: a tall Black man in his thirties in a long orange coat, dark trousers and boots, always walking ahead with his back to us, never turning round. THE CROWD: Black women and men in everyday clothes, standing at the stalls. ACTION: He pauses in drifting vapour outside a lit doorway; photographs hang on strings across the alley.",
+   "key": null,
+   "frames": 288,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 7,
+   "seed_image": "full/seeds01/grey7.jpg",
+   "line": "With your back faced against me, you offer me a new pursuit of happiness as I stumble",
+   "t0": 75.44,
+   "seconds": 5.48,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE OTHER MAN: a tall Black man in his thirties in a long orange coat, dark trousers and boots, always walking ahead with his back to us, never turning round. THE CROWD: Black women and men in everyday clothes, standing at the stalls. ACTION: The man in the orange coat walks ahead with his back to him, toward a fire escape on a tall block; he follows.",
+   "key": "key_w",
+   "frames": 148,
+   "delivered_fps": 24.2
+  },
+  {
+   "shot": 8,
+   "seed_image": "full/seeds01/grey8.jpg",
+   "line": "on my own words, landing into the secret of where you go when you leave, and I fall out of life.",
+   "t0": 80.92,
+   "seconds": 7.46,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. THE OTHER MAN: a tall Black man in his thirties in a long orange coat, dark trousers and boots, always walking ahead with his back to us, never turning round. THE CROWD: Black women and men in everyday clothes, standing at the stalls. ACTION: He climbs the fire escape after him and steps off the top into the dark above the water.",
+   "key": "key_w",
+   "frames": 196,
+   "delivered_fps": 24.1
+  }
+ ]
+}

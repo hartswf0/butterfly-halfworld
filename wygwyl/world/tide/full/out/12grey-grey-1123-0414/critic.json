@@ -1,0 +1,78 @@
+{
+ "shots": [
+  {
+   "shot": 1,
+   "seen": "A man in black stands on a rooftop facing a small group of men with blocky city buildings and mountains under a starry twilight sky behind them.",
+   "third_person": false,
+   "on_bike": false,
+   "same_man": true,
+   "style": "3D render",
+   "enacts": 1
+  },
+  {
+   "shot": 2,
+   "seen": "Four men stand from the knees up with arms around each other looking out at dark blocky buildings with lit windows.",
+   "third_person": false,
+   "on_bike": false,
+   "same_man": true,
+   "style": "3D render",
+   "enacts": 2
+  },
+  {
+   "shot": 3,
+   "seen": "The man in black walks alone across a dark empty room with wooden chairs toward a tall rectangular window.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "3D render",
+   "enacts": 2
+  },
+  {
+   "shot": 4,
+   "seen": "Four men walk away from the camera across a misty field toward a dark hillside lined with trees under a starry sky.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "3D render",
+   "enacts": 3
+  },
+  {
+   "shot": 5,
+   "seen": "Four men walk away across dark open ground under a starry pinkish twilight sky.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "3D render",
+   "enacts": 2
+  },
+  {
+   "shot": 6,
+   "seen": "Four men walk along a dark desert landscape marked with glowing yellow lines on the ground near a sand dune.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "photoreal",
+   "enacts": 2
+  },
+  {
+   "shot": 7,
+   "seen": "Four men walk down a dark path toward a single streetlight under a starry sky with jagged peaks on the right.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "photoreal",
+   "enacts": 3
+  },
+  {
+   "shot": 8,
+   "seen": "Four men walk away across a dark plain toward a rocky cliff and distant water under a starry sky.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "photoreal",
+   "enacts": 2
+  }
+ ],
+ "overall": "The third-person framing is mostly consistent after the first two medium-cropped shots, while the visual style shifts from blocky low-poly 3D environments in the early shots to more photorealistic landscapes later on. The biggest weakness is the repetitive composition of four men walking away from the camera, which fails to enact specific imagery in the narration like holding glasses of burning sands, laughter, or football.",
+ "critic_model": "gemini-4-argon"
+}

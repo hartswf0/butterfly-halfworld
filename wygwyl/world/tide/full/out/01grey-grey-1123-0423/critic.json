@@ -1,0 +1,78 @@
+{
+ "shots": [
+  {
+   "shot": 1,
+   "seen": "A man in dark clothes stands on a rooftop staircase overlooking a city at dusk while holding an orange coat.",
+   "third_person": true,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 1
+  },
+  {
+   "shot": 2,
+   "seen": "The man in dark clothes walks down long outdoor stairs toward a bay, following another figure in an orange coat.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 1
+  },
+  {
+   "shot": 3,
+   "seen": "The man follows the figure in the orange coat across an open plaza strung with lights and filled with grey figures.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 1
+  },
+  {
+   "shot": 4,
+   "seen": "The man in dark clothes follows the orange-coated figure down a stepped alleyway lined with empty market stalls.",
+   "third_person": false,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 2
+  },
+  {
+   "shot": 5,
+   "seen": "The man trails the figure in the orange coat across a vast terrain of glowing low blocks toward massive brutalist structures.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 1
+  },
+  {
+   "shot": 6,
+   "seen": "The man walks behind the orange-coated figure through a grey courtyard where Polaroid-like frames hang on overhead lines.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 2
+  },
+  {
+   "shot": 7,
+   "seen": "The man follows the back of the figure in the orange coat across an empty square toward a building with a fire escape.",
+   "third_person": true,
+   "on_bike": true,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 2
+  },
+  {
+   "shot": 8,
+   "seen": "The man stands on a metal balcony overlooking the water at night as the figure in the orange coat walks off to the right.",
+   "third_person": true,
+   "on_bike": false,
+   "same_man": true,
+   "style": "grey-box",
+   "enacts": 1
+  }
+ ],
+ "overall": "The grey-box visual style is completely consistent across all shots, and the third-person camera view is maintained throughout except for shots 2 and 4 where the main character's legs are cropped out at the bottom. The biggest weakness is that the repetitive action of simply walking behind another figure rarely enacts the dense, abstract imagery of the spoken lines.",
+ "critic_model": "gemini-4-argon"
+}
