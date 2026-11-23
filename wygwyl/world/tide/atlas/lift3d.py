@@ -32,13 +32,13 @@ for sd in sorted(d for d in os.listdir(D) if d.startswith('s') and os.path.isdir
             # a body is thin: every joint stays within a hand's depth of the torso (feet otherwise read the ground behind them)
             z = np.where(np.isfinite(z), ref + np.clip(z - ref, -.25, .25), ref)
             X = np.stack([(kp[:, 0] - K['cx']) / K['fx'] * z, -(kp[:, 1] - K['cy']) / K['fy'] * z, -z], 1) @ Rw.T + tw
-            cen = X[[5, 6, 9, 10]].mean(0)
-            people.append({'c': cen, 'X': X, 'ok': ok})
+            cen = X[[5, 6, 9, 10]].mean(0); hgt = float(np.ptp(X[ok][:, 1])) if ok.sum() > 3 else 1.7
+            people.append({'c': cen, 'X': X, 'ok': ok, 'h': hgt})
         # carry ids: nearest torso centre in the previous frame, within 1.2 m
         used = set()
         for p in people:
             best = min(((np.linalg.norm(q['c'] - p['c']), q['id']) for q in prev if q['id'] not in used), default=(9e9, None))
-            if best[0] < 1.2: p['id'] = best[1]; used.add(best[1])
+            if best[0] < max(1.2, .8 * p['h']): p['id'] = best[1]; used.add(best[1])   # within most of a body's height (scene units vary by shot)
             else: p['id'] = nid; nid += 1
         prev = people
         shot.append({'t': round(ts[k], 3), 'people': [{'id': p['id'], 'X': np.round(p['X'], 3).tolist(), 'ok': p['ok'].astype(int).tolist()} for p in people]})

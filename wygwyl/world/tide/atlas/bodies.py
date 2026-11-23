@@ -14,7 +14,9 @@ def people(mask):
     return [[float(max(0, x - 10)), float(max(0, y - 10)), float(w + 20), float(h + 20)] for x, y, w, h, a in st[1:] if a > 400 and h > 40]
 out_p = f'{D}/bodies.json' if not os.environ.get('REDO') else f'{D}/bodies.json'; out = json.load(open(out_p)) if os.path.exists(out_p) else {}
 for sd in sorted(d for d in os.listdir(D) if d.startswith('s') and os.path.isdir(f'{D}/{d}')):
+    KF = [int(x) for x in os.environ.get('KF', '').split(',') if x]   # track only these frames of each shot (the viewer blends between them)
     for k in range(len(os.listdir(f'{D}/{sd}/frames'))):
+        if KF and k not in KF: continue
         key = f'{sd}/{k:02d}'
         if key in out: continue
         bf = f'{D}/{sd}/boxes.json'

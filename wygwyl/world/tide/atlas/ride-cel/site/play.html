@@ -20,7 +20,7 @@ canvas{position:fixed;inset:0;width:100vw;height:100vh;display:block;touch-actio
 #veil{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 60%,var(--water),var(--stage) 72%);opacity:0;pointer-events:none;transition:opacity .45s ease}
 .top{position:fixed;left:0;right:0;top:0;padding:calc(12px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 28px max(16px,env(safe-area-inset-left,0px));
   display:grid;gap:6px;background:linear-gradient(rgba(3,4,9,.7),transparent);pointer-events:none}
-.reels{display:flex;gap:18px;pointer-events:auto}
+.reels{display:flex;gap:18px;pointer-events:auto;overflow-x:auto;white-space:nowrap;scrollbar-width:none;max-width:100%}.reels::-webkit-scrollbar{display:none}
 .reels a{color:var(--dim);text-decoration:none;font:600 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;padding:6px 0;border-bottom:2px solid transparent}
 .reels a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--water)}
 .reels a:focus-visible{outline:2px solid var(--water);outline-offset:3px}
@@ -51,7 +51,7 @@ button.go{background:var(--water);border-color:var(--water)}
 <canvas id="c" tabindex="0" aria-label="The rebuilt world. Pause, then drag to look around; pinch or scroll to move."></canvas>
 <div id="veil"></div>
 <header class="top">
-  <nav class="reels" aria-label="Reels"><a href="#ride" id="r-ride">Magic Ride</a><a href="#arcade" id="r-arcade">Arcade walk</a></nav>
+  <nav class="reels" id="reels" aria-label="Reels"></nav>
   <div id="about"></div>
   <div id="place"></div>
 </header>
@@ -86,6 +86,35 @@ scene.add(new THREE.HemisphereLight(0xdfe6ff, 0x202030, 2.4));
 const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.05, 600);
 const R = await fetch('reels.json').then(r => r.json());
 const voice = $('voice');
+for (const [id, r] of Object.entries(R)) { const a = document.createElement('a'); a.href = '#' + id; a.id = 'r-' + id; a.textContent = r.title + (id.includes('grey') ? (id.includes('greyfig') ? ' · level' : ' · foundry') : ''); $('reels').appendChild(a); }
+// Sapiens2 bodies lifted into Atlas's world: bones as light, interpolated between the tracked frames by person id
+const BONES = [[5,6],[5,7],[6,8],[7,62],[8,41],[5,9],[6,10],[9,10],[9,11],[10,12],[11,13],[12,14],[13,15],[14,18],[13,17],[14,20],[0,1],[0,2],[1,3],[2,4],[0,5],[0,6]];
+const MAXP = 24;
+function makeBodies(p) {
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(MAXP * BONES.length * 6), 3));
+  const lines = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: 0xfff6e8, transparent: true, opacity: .95, blending: THREE.AdditiveBlending, depthTest: false }));
+  const gj = new THREE.BufferGeometry(); gj.setAttribute('position', new THREE.BufferAttribute(new Float32Array(MAXP * 308 * 3), 3));
+  const dots = new THREE.Points(gj, new THREE.PointsMaterial({ color: 0xbfe6ff, size: 3, sizeAttenuation: false, transparent: true, opacity: .85, blending: THREE.AdditiveBlending, depthTest: false }));
+  lines.frustumCulled = dots.frustumCulled = false; lines.renderOrder = dots.renderOrder = 10; const o = new THREE.Group(); o.add(lines, dots); o.visible = false; scene.add(o);
+  p.bodyObj = { o, lines, dots };
+}
+function poseBodies(p, t) {
+  const F = p.bodies; if (!F || !F.length || !p.bodyObj) return; let i = 0; while (i < F.length - 2 && t > F[i + 1].t) i++;
+  const A = F[i], B = F[Math.min(i + 1, F.length - 1)], a = THREE.MathUtils.clamp((t - A.t) / Math.max(1e-3, B.t - A.t), 0, 1);
+  const L = p.bodyObj.lines.geometry.attributes.position.array, J = p.bodyObj.dots.geometry.attributes.position.array; let nl = 0, nj = 0;
+  for (const pa of A.people.slice(0, MAXP)) {
+    const pb = B.people.find(q => q.id === pa.id); if (!pb && a > .5) continue;
+    const X = k => { const x = pa.X[k]; if (!pb) return x; const y = pb.X[k]; return [x[0] + (y[0] - x[0]) * a, x[1] + (y[1] - x[1]) * a, x[2] + (y[2] - x[2]) * a]; };
+    const ok = k => pa.ok[k] && (!pb || pb.ok[k]);
+    for (const [u, v] of BONES) if (ok(u) && ok(v)) { L.set(X(u), nl); L.set(X(v), nl + 3); nl += 6; }
+    for (let k = 0; k < pa.X.length; k++) if (ok(k)) { J.set(X(k), nj); nj += 3; }
+  }
+  for (const q of B.people) if (a > .5 && !A.people.some(x => x.id === q.id)) {
+    for (const [u, v] of BONES) if (q.ok[u] && q.ok[v]) { L.set(q.X[u], nl); L.set(q.X[v], nl + 3); nl += 6; }
+  }
+  p.bodyObj.lines.geometry.setDrawRange(0, nl / 3); p.bodyObj.lines.geometry.attributes.position.needsUpdate = true;
+  p.bodyObj.dots.geometry.setDrawRange(0, nj / 3); p.bodyObj.dots.geometry.attributes.position.needsUpdate = true;
+}
 
 // files travel as base64 text in parts (artifacts serve only web types); join and decode here
 async function raw(url) { try { const r = await fetch(url); if (!r.ok || /text\/html/.test(r.headers.get('content-type') || '')) return null; const b = new Uint8Array(await r.arrayBuffer()); return b.length > 1024 ? b : null; } catch { return null; } }
@@ -123,7 +152,7 @@ function need(p, m) {
   return pending.get(key);
 }
 function show() {   // the one object that is true now: this place, seen this way
-  for (const r of Object.values(R)) for (const p of r.places) for (const m of ['lidar', 'splat', 'mesh']) if (p[m + 'Obj']) p[m + 'Obj'].visible = p === cur && m === mode;
+  for (const r of Object.values(R)) for (const p of r.places) { for (const m of ['lidar', 'splat', 'mesh']) if (p[m + 'Obj']) p[m + 'Obj'].visible = p === cur && m === mode; if (p.bodyObj) p.bodyObj.o.visible = p === cur; }
   const has = cur[mode + 'Obj'];
   $('note').textContent = has ? '' : cur[mode] ? `Loading ${cur.title.toLowerCase()} as ${mode === 'splat' ? 'splats' : mode}…` : `No ${mode} for this place`;
   document.querySelectorAll('.see button').forEach(b => { b.setAttribute('aria-pressed', b.dataset.mode === mode); b.disabled = !cur[b.dataset.mode] && !cur[b.dataset.mode + 'Obj']; });
@@ -163,8 +192,8 @@ $('seek').addEventListener('keydown', e => { const d = e.key === 'ArrowRight' ? 
 async function openReel(id) {
   const r = R[id] || R.ride; if (reel === r) return;
   if (playing) setPlay(false); reel = r; tPaused = 0; cur = null; lineShown = -1;
-  $('r-ride').toggleAttribute('aria-current', r === R.ride); $('r-arcade').toggleAttribute('aria-current', r === R.arcade);
-  $('r-ride').setAttribute('aria-current', r === R.ride ? 'page' : 'false'); $('r-arcade').setAttribute('aria-current', r === R.arcade ? 'page' : 'false');
+  for (const [id, x] of Object.entries(R)) $('r-' + id).setAttribute('aria-current', x === r ? 'page' : 'false');
+  for (const p of r.places) if (p.bodies && p.bodies.length && !p.bodyObj) makeBodies(p);
   $('about').textContent = r.about; voice.src = r.audio; W = r.words ? await fetch(r.words).then(x => x.json()) : []; $('words').innerHTML = '';
   $('seek').querySelectorAll('i').forEach(i => i.remove()); $('seek').setAttribute('aria-valuemax', r.end.toFixed(0));
   for (const p of r.places) if (p.t0 > 0) { const i = document.createElement('i'); i.style.left = (p.t0 / r.end * 100) + '%'; $('seek').appendChild(i); }
@@ -197,6 +226,7 @@ renderer.setAnimationLoop(() => {
   const t = now(), p = placeAt(t); enter(p);
   if (look) { camera.quaternion.setFromEuler(new THREE.Euler(look.pitch, look.yaw, 0, 'YXZ')); camera.position.copy(look.pos); } else camAt(p, t);
   const cut = (p.t0 > 0 && t - p.t0 < .45) || (p.t1 < reel.end && p.t1 - t < .45); $('veil').style.opacity = cut && !look ? 1 : 0;   // the world drains to blue at each cut
+  if (cur && cur.bodies) poseBodies(cur, t);
   words(t); $('fill').style.width = (t / reel.end * 100) + '%'; $('time').textContent = `${fmt(t)} / ${fmt(reel.end)}`; $('seek').setAttribute('aria-valuenow', t.toFixed(1));
   renderer.render(scene, camera);
 });
