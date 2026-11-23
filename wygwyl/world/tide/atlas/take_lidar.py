@@ -36,8 +36,11 @@ def boxes_stage(take, D, man):
     save_boxes(jobs, B); print('boxes', sum(len(b) for b in B), 'people in', len(jobs), 'frames', flush=True)
 
 def prep(take, D, man):
-    from ultralytics.models.sam import SAM
-    sam = SAM(os.path.join(T, 'seg', 'sam2.1_s.pt')); film = os.path.join(T, take, 'film.mp4')
+    BOX = os.environ.get('MASK') == 'box'   # MASK=box: blank people by their Gemini boxes (no SAM, no local GPU or CPU load)
+    if not BOX:
+        from ultralytics.models.sam import SAM
+        sam = SAM(os.path.join(T, 'seg', 'sam2.1_s.pt'))
+    film = os.path.join(T, take, 'film.mp4')
     jobs = []
     for s in man['shots']:
         d = f"{D}/s{s['shot']}"; os.makedirs(f'{d}/frames', exist_ok=True); os.makedirs(f'{d}/masks', exist_ok=True)
@@ -49,7 +52,9 @@ def prep(take, D, man):
     save_boxes(jobs, B)
     for (d, k), bx in zip(jobs, B):
         m = np.zeros((720, 1280), bool)
-        if bx:
+        if bx and BOX:
+            for b in bx: m[int(b[0] * .72):int(b[2] * .72), int(b[1] * 1.28):int(b[3] * 1.28)] = True
+        elif bx:
             bb = [[b[1] * 1.28, b[0] * .72, b[3] * 1.28, b[2] * .72] for b in bx]
             r = sam(f'{d}/frames/{k:02d}.jpg', bboxes=bb, verbose=False)[0]
             if r.masks is not None: m = (r.masks.data.cpu().numpy() > .5).any(0)

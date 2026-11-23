@@ -6,8 +6,12 @@ import numpy as np, cv2, torch
 from PIL import Image
 from transformers import AutoImageProcessor, Sapiens2ForPoseEstimation
 torch.set_num_threads(int(os.environ.get('SAP_THREADS', '3')))
+# the Mac's GPU (Apple silicon, Metal) when there is one, else CUDA, else the CPU
+DEV = 'mps' if torch.backends.mps.is_available() else 'cuda' if torch.cuda.is_available() else 'cpu'
+print('device', DEV, flush=True)
 D = os.path.join(os.path.dirname(os.path.abspath(__file__)), sys.argv[1]) if not sys.argv[1].startswith('/') else sys.argv[1]
-NAME = 'facebook/sapiens2-pose-0.4b'; pp = AutoImageProcessor.from_pretrained(NAME); m = Sapiens2ForPoseEstimation.from_pretrained(NAME).eval()
+if not os.path.isdir(D): sys.exit(f'no such take: {D}')
+NAME = 'facebook/sapiens2-pose-0.4b'; pp = AutoImageProcessor.from_pretrained(NAME); m = Sapiens2ForPoseEstimation.from_pretrained(NAME).eval().to(DEV)
 def people(mask):
     m_ = cv2.erode((cv2.imread(mask, 0) < 128).astype(np.uint8), np.ones((27, 27), np.uint8))
     _, _, st, _ = cv2.connectedComponentsWithStats(m_)
@@ -26,7 +30,9 @@ for sd in sorted(d for d in os.listdir(D) if d.startswith('s') and os.path.isdir
         t = time.time(); res = []
         if bx:
             with torch.inference_mode():
-                im = Image.open(f'{D}/{sd}/frames/{k:02d}.jpg').convert('RGB'); o = m(**pp(im, boxes=[bx], return_tensors='pt'))
+                im = Image.open(f'{D}/{sd}/frames/{k:02d}.jpg').convert('RGB'); inp = pp(im, boxes=[bx], return_tensors='pt')
+                o = m(**{kk: v.to(DEV) if hasattr(v, 'to') else v for kk, v in inp.items()})
+                if DEV != 'cpu': o.heatmaps = o.heatmaps.float().cpu()
                 for p in pp.post_process_pose_estimation(o, boxes=[bx])[0]:
                     res.append({'bbox': [round(v, 1) for v in p['bbox'].tolist()], 'kp': np.round(p['keypoints'].numpy(), 1).tolist(), 'sc': np.round(p['scores'].numpy(), 3).tolist()})
         out[key] = res; json.dump(out, open(out_p, 'w'))
