@@ -1,0 +1,73 @@
+{
+ "poem": 3,
+ "thesis": "How to Break off an Engagement: he walks alone through an empty temple quarter as the storm takes everything.",
+ "character": "HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots.",
+ "third_person": "THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him.",
+ "styles": {
+  "grey": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines."
+ },
+ "start_lines": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  8
+ ],
+ "shots": [
+  {
+   "action": "Dusk. He walks alone toward a tall dark block standing by itself, an empty temple, every window unlit.",
+   "key": "key_w"
+  },
+  {
+   "action": "He walks along its side past rows of empty doorways; nothing moves anywhere.",
+   "key": "key_w"
+  },
+  {
+   "action": "He walks past a side door where small lit boxes have been left on the ground.",
+   "key": "key_w"
+  },
+  {
+   "action": "A storm breaks: hard rain falls over the dark blocks and the water while he keeps walking.",
+   "key": "key_w"
+  },
+  {
+   "action": "He walks across an empty plaza in the rain as the lit windows go out one by one.",
+   "key": "key_w"
+  },
+  {
+   "action": "Lightning splits the sky over the ridge; he stops and stands still.",
+   "key": null
+  },
+  {
+   "action": "He walks along the wet shore of the dark water past soaked heaps on the ground.",
+   "key": "key_w"
+  },
+  {
+   "action": "Two lines of footprints run ahead of him along the empty shore at night; he follows them.",
+   "key": "key_w"
+  }
+ ],
+ "seeds_from": {
+  "grey1.jpg": "foundry/w/w1191-v10.jpg",
+  "grey2.jpg": "foundry/w/w0025-v10.jpg",
+  "grey3.jpg": "foundry/inv/w1165/05-05-b.jpg",
+  "grey4.jpg": "foundry/w/w0677-v03.jpg",
+  "grey5.jpg": "foundry/w/w1170-v10.jpg",
+  "grey6.jpg": "foundry/w/w0134-v03.jpg",
+  "grey7.jpg": "foundry/inv/w0889/10-06-b.jpg",
+  "grey8.jpg": "foundry/w/w0457-v02.jpg"
+ },
+ "seed_scores": {
+  "grey1.jpg": 0.281,
+  "grey2.jpg": 0.2982,
+  "grey3.jpg": 0.2974,
+  "grey4.jpg": 0.3141,
+  "grey5.jpg": 0.2995,
+  "grey6.jpg": 0.287,
+  "grey7.jpg": 0.3012,
+  "grey8.jpg": 0.2939
+ }
+}
