@@ -1,0 +1,94 @@
+{
+ "poem": "05",
+ "style": "grey",
+ "shots": [
+  {
+   "shot": 1,
+   "seed_image": "full/seeds05/grey1.jpg",
+   "line": "They tell me to ask if I can inherit the earth, to ask if I can name my own stars, even galaxies if I may. The past too was waiting for me.",
+   "t0": 0.0,
+   "seconds": 11.57,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: Night. He stands on high ground looking up at a sky crowded with stars above the city.",
+   "key": null,
+   "frames": 292,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 2,
+   "seed_image": "full/seeds05/grey2.jpg",
+   "line": "Coming of age in the shared rooms of human basements as bedrooms, mattress pads where the wood beams of southern pine could comfort my spine, it didn't.",
+   "t0": 11.57,
+   "seconds": 12.66,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: He walks down a narrow stair between dark blocks toward a low basement doorway.",
+   "key": "key_w",
+   "frames": 320,
+   "delivered_fps": 24.0
+  },
+  {
+   "shot": 3,
+   "seed_image": "full/seeds05/grey3.jpg",
+   "line": "To dream was to prevail.",
+   "t0": 24.23,
+   "seconds": 4.01,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: He stands in a dim low room among old mattress pads under bare wooden beams.",
+   "key": null,
+   "frames": 112,
+   "delivered_fps": 24.3
+  },
+  {
+   "shot": 4,
+   "seed_image": "full/seeds05/grey4.jpg",
+   "line": "They tell me to ask if I can invent a new universe, to ask if God would let me, little old me, award a blessing here or there.",
+   "t0": 28.24,
+   "seconds": 8.82,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: He walks out onto a rooftop under the stars, the whole city lit below him.",
+   "key": "key_w",
+   "frames": 228,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 5,
+   "seed_image": "full/seeds05/grey5.jpg",
+   "line": "Even grant miracles where the needs of the spoken word exists.",
+   "t0": 37.06,
+   "seconds": 4.69,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: He stands on the rooftop and raises both hands toward the sky.",
+   "key": null,
+   "frames": 128,
+   "delivered_fps": 24.2
+  },
+  {
+   "shot": 6,
+   "seed_image": "full/seeds05/grey6.jpg",
+   "line": "In uncertain times, in forsaken times, in tears that spoke in lieu of forbidden lines, or a history too battered and bruised to travel. To dream was to prevail.",
+   "t0": 41.75,
+   "seconds": 15.68,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: He walks along an empty road at the edge of the city in the dark, past the old blocks.",
+   "key": "key_w",
+   "frames": 392,
+   "delivered_fps": 24.0
+  },
+  {
+   "shot": 7,
+   "seed_image": "full/seeds05/grey7.jpg",
+   "line": "Their blood flows through my hands. Fingerprints that orchestra great powers, they tell me, sun kissing my skin",
+   "t0": 57.43,
+   "seconds": 8.44,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: First sunlight. He walks toward the sunrise over the water.",
+   "key": "key_w",
+   "frames": 220,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 8,
+   "seed_image": "full/seeds05/grey8.jpg",
+   "line": "and deepening my voice to a baritone of a million cries, to an unanswered plight. Beware of me.",
+   "t0": 65.87,
+   "seconds": 8.2,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: Sunrise. He stands at the end of the road, the sun rising ahead of him and the city behind.",
+   "key": null,
+   "frames": 216,
+   "delivered_fps": 24.3
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "poem": 4,
+ "thesis": "Nevermore: he follows a trail to the shore, lifts back his own heart, and walks on into the moonlit field.",
+ "character": "HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots.",
+ "third_person": "THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him.",
+ "styles": {
+  "grey": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines."
+ },
+ "start_lines": [
+  0,
+  4,
+  8,
+  10,
+  13,
+  16,
+  20,
+  23
+ ],
+ "shots": [
+  {
+   "action": "Night. He walks along a dark shore toward the water; ash and debris lie on the sand.",
+   "key": "key_w"
+  },
+  {
+   "action": "He walks up a gentle slope from the shore toward the corner of a dark block at the top.",
+   "key": "key_w"
+  },
+  {
+   "action": "At the corner he kneels, lifts something softly glowing from the ground in both hands, and stands.",
+   "key": null
+  },
+  {
+   "action": "Moonlight. He walks out into a vast open field under a full night sky, small lights scattered across the ground like seeds.",
+   "key": "key_w"
+  },
+  {
+   "action": "He walks through the field; low shapes on the ground glow gold and turn toward him.",
+   "key": "key_w"
+  },
+  {
+   "action": "Clouds cover the stars and it grows very dark; he walks on toward bare open ground.",
+   "key": "key_w"
+  },
+  {
+   "action": "He stands at the edge of the high ground above the city lights and looks out.",
+   "key": null
+  },
+  {
+   "action": "He walks into a still, silent night garden of dark trees and keeps going.",
+   "key": "key_w"
+  }
+ ],
+ "seeds_from": {
+  "grey1.jpg": "foundry/w/w0003-v04.jpg",
+  "grey2.jpg": "foundry/inv/w1623/04-00-b.jpg",
+  "grey3.jpg": "foundry/w/w1104-v03.jpg",
+  "grey4.jpg": "foundry/w/w0969-v08.jpg",
+  "grey5.jpg": "foundry/w/w1307-v01.jpg",
+  "grey6.jpg": "foundry/inv/w1165/10-07-b.jpg",
+  "grey7.jpg": "foundry/w/w0086-v01.jpg",
+  "grey8.jpg": "foundry/w/w0506-v10.jpg"
+ },
+ "seed_scores": {
+  "grey1.jpg": 0.3,
+  "grey2.jpg": 0.3102,
+  "grey3.jpg": 0.2765,
+  "grey4.jpg": 0.2918,
+  "grey5.jpg": 0.2924,
+  "grey6.jpg": 0.2781,
+  "grey7.jpg": 0.3079,
+  "grey8.jpg": 0.258
+ }
+}

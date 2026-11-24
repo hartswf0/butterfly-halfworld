@@ -1,0 +1,94 @@
+{
+ "poem": "03",
+ "style": "grey",
+ "shots": [
+  {
+   "shot": 1,
+   "seed_image": "full/seeds03/grey1.jpg",
+   "line": "Old to forever, a tambourine sounds off an empty temple, empty choir stands, empty prayer lines, and abandoned Baptist pools,",
+   "t0": 0.0,
+   "seconds": 14.94,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: Dusk. He walks alone toward a tall dark block standing by itself, an empty temple, every window unlit.",
+   "key": "key_w",
+   "frames": 332,
+   "delivered_fps": 21.0
+  },
+  {
+   "shot": 2,
+   "seed_image": "full/seeds03/grey2.jpg",
+   "line": "pews taken by cobwebs, and doused in disintegration.",
+   "t0": 14.94,
+   "seconds": 6.59,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: He walks along its side past rows of empty doorways; nothing moves anywhere.",
+   "key": "key_w",
+   "frames": 176,
+   "delivered_fps": 23.7
+  },
+  {
+   "shot": 3,
+   "seed_image": "full/seeds03/grey3.jpg",
+   "line": "Spirits have left salvations and opened gift boxes placed outside the side doors.",
+   "t0": 21.53,
+   "seconds": 6.94,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: He walks past a side door where small lit boxes have been left on the ground.",
+   "key": "key_w",
+   "frames": 184,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 4,
+   "seed_image": "full/seeds03/grey4.jpg",
+   "line": "It thunders, then it rains until nothing remains.",
+   "t0": 28.47,
+   "seconds": 7.21,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: A storm breaks: hard rain falls over the dark blocks and the water while he keeps walking.",
+   "key": "key_w",
+   "frames": 188,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 5,
+   "seed_image": "full/seeds03/grey5.jpg",
+   "line": "Old to the storm ending, what was once love now goods,",
+   "t0": 35.68,
+   "seconds": 5.0,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: He walks across an empty plaza in the rain as the lit windows go out one by one.",
+   "key": "key_w",
+   "frames": 136,
+   "delivered_fps": 23.5
+  },
+  {
+   "shot": 6,
+   "seed_image": "full/seeds03/grey6.jpg",
+   "line": "broken and sealed apart by lightning,",
+   "t0": 40.68,
+   "seconds": 3.84,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: Lightning splits the sky over the ridge; he stops and stands still.",
+   "key": null,
+   "frames": 108,
+   "delivered_fps": 24.2
+  },
+  {
+   "shot": 7,
+   "seed_image": "full/seeds03/grey7.jpg",
+   "line": "daily breads soaked and delivered rotted by rain, and blankets soiled by venomous puppeteers,",
+   "t0": 44.52,
+   "seconds": 9.0,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: He walks along the wet shore of the dark water past soaked heaps on the ground.",
+   "key": "key_w",
+   "frames": 232,
+   "delivered_fps": 24.1
+  },
+  {
+   "shot": 8,
+   "seed_image": "full/seeds03/grey8.jpg",
+   "line": "old to two sets of button-printed footsteps, and a tambourine shattered into pieces.",
+   "t0": 53.52,
+   "seconds": 9.0,
+   "seed_text": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines. THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him. HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots. ACTION: Two lines of footprints run ahead of him along the empty shore at night; he follows them.",
+   "key": "key_w",
+   "frames": 232,
+   "delivered_fps": 24.1
+  }
+ ]
+}

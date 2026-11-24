@@ -1,0 +1,73 @@
+{
+ "poem": 5,
+ "thesis": "Bloodline: from the shared basements to the stars; to dream was to prevail.",
+ "character": "HIM: a Black man in his thirties with close-cropped hair and a short beard, wearing a matte black mock-neck long sleeve, black trousers and black boots.",
+ "third_person": "THIRD PERSON, like an open-world video game. The camera floats two metres behind him and a little above his shoulders. He is centred in the lower half of the frame, his whole body visible from behind, about one third of the frame's height. The camera follows him and never passes him or looks away from him.",
+ "styles": {
+  "grey": "STYLE: a grey-box video game world at dusk. Flat untextured blocks for buildings, small lit yellow squares for windows, flat ground, a pink-violet sky with stars. Keep this exact flat blocky look; add no texture or realism. No cartoon shading or outlines."
+ },
+ "start_lines": [
+  0,
+  3,
+  6,
+  7,
+  10,
+  12,
+  16,
+  19
+ ],
+ "shots": [
+  {
+   "action": "Night. He stands on high ground looking up at a sky crowded with stars above the city.",
+   "key": null
+  },
+  {
+   "action": "He walks down a narrow stair between dark blocks toward a low basement doorway.",
+   "key": "key_w"
+  },
+  {
+   "action": "He stands in a dim low room among old mattress pads under bare wooden beams.",
+   "key": null
+  },
+  {
+   "action": "He walks out onto a rooftop under the stars, the whole city lit below him.",
+   "key": "key_w"
+  },
+  {
+   "action": "He stands on the rooftop and raises both hands toward the sky.",
+   "key": null
+  },
+  {
+   "action": "He walks along an empty road at the edge of the city in the dark, past the old blocks.",
+   "key": "key_w"
+  },
+  {
+   "action": "First sunlight. He walks toward the sunrise over the water.",
+   "key": "key_w"
+  },
+  {
+   "action": "Sunrise. He stands at the end of the road, the sun rising ahead of him and the city behind.",
+   "key": null
+  }
+ ],
+ "seeds_from": {
+  "grey1.jpg": "foundry/w/w1496-v08.jpg",
+  "grey2.jpg": "foundry/w/w0889-v09.jpg",
+  "grey3.jpg": "foundry/inv/w1578/05-05-b.jpg",
+  "grey4.jpg": "foundry/w/w1170-v07.jpg",
+  "grey5.jpg": "foundry/w/w0134-v11.jpg",
+  "grey6.jpg": "foundry/w/w1191-v09.jpg",
+  "grey7.jpg": "foundry/w/w0633-v11.jpg",
+  "grey8.jpg": "foundry/inv/w0889/12-01-b.jpg"
+ },
+ "seed_scores": {
+  "grey1.jpg": 0.3032,
+  "grey2.jpg": 0.2972,
+  "grey3.jpg": 0.2613,
+  "grey4.jpg": 0.324,
+  "grey5.jpg": 0.2865,
+  "grey6.jpg": 0.3082,
+  "grey7.jpg": 0.2836,
+  "grey8.jpg": 0.2764
+ }
+}

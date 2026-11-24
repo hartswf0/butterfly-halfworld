@@ -7,11 +7,14 @@ KEY = os.environ.get('WLT_API_KEY', 'proxy-injected')
 def call(method, path, body=None, idem=None, timeout=120):
     h = {'WLT-Api-Key': KEY, 'Content-Type': 'application/json'}
     if idem: h['Idempotency-Key'] = idem
-    rq = urllib.request.Request(B + path, method=method, data=None if body is None else json.dumps(body).encode(), headers=h)
-    try:
-        return json.load(urllib.request.urlopen(rq, timeout=timeout, context=CTX))
-    except urllib.error.HTTPError as e:
-        raise RuntimeError(f'{method} {path} -> HTTP {e.code}: {e.read().decode()[:1500]}')
+    for attempt in range(10):   # back off on the rate limit (429) and brief server errors; the idempotency key makes a retried submit safe
+        rq = urllib.request.Request(B + path, method=method, data=None if body is None else json.dumps(body).encode(), headers=h)
+        try:
+            return json.load(urllib.request.urlopen(rq, timeout=timeout, context=CTX))
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 502, 503, 504) and attempt < 9:
+                time.sleep(float(e.headers.get('Retry-After') or min(60, 4 * 2 ** attempt))); continue
+            raise RuntimeError(f'{method} {path} -> HTTP {e.code}: {e.read().decode()[:1500]}')
 
 def upload(path, name=None):
     b = base64.b64encode(open(path, 'rb').read()).decode()
