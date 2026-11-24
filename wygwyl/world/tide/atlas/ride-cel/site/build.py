@@ -38,11 +38,12 @@ import numpy as np, subprocess
 from film import cloud
 TITLES = {'01': 'Out of Life', '03': 'How to Break off an Engagement', '04': 'Nevermore', '05': 'Bloodline', '06': 'Resurrecting Atlantis', '12': 'Reunion'}
 TP = json.load(open(f'{os.path.dirname(A)}/tide.json'))['poems']
-def pack_cloud(P, C, name, n_max=160000):
+def pack_cloud(P, C, name, n_max=160000, bin_path=None):
     lo, hi = np.percentile(P, .5, 0), np.percentile(P, 99.5, 0); ok = np.all((P >= lo) & (P <= hi), 1); P, C = P[ok], C[ok]
     if len(P) > n_max: i = np.random.default_rng(0).choice(len(P), n_max, replace=False); P, C = P[i], C[i]
     q = np.round((P - lo) / np.maximum(hi - lo, 1e-6) * 65535 - 32768).astype(np.int16); raw = q.tobytes() + C.mean(1).astype(np.uint8).tobytes()
     open(f'{DATA}/{name}.lidar.txt', 'w').write(base64.b64encode(raw).decode()); y = P[:, 1]
+    if bin_path: open(bin_path, 'wb').write(raw)   # the same cloud as a plain file, committed, for GitHub Pages
     return {'n': int(len(P)), 'lo': lo.round(4).tolist(), 'hi': hi.round(4).tolist(), 'ground': round(float(np.percentile(y, 1)), 3), 'top': round(float(np.percentile(y, 99)), 3)}
 for tk in sorted(glob.glob(f'{A}/takes/*/bodies3d.json')):
     TD = os.path.dirname(tk); take = os.path.basename(TD); man = json.load(open(f'{os.path.dirname(A)}/full/out/{take}/manifest.json')); poem = man['poem']
@@ -50,10 +51,10 @@ for tk in sorted(glob.glob(f'{A}/takes/*/bodies3d.json')):
     for s in man['shots']:
         sd = f"s{s['shot']}"; fr = po(f'{TD}/{sd}'); ts = json.load(open(f'{TD}/{sd}/times.json'))
         P, C = cloud([(f'{TD}/{sd}/posed/{k:02d}_rgb.jpg', f'{TD}/{sd}/posed/{k:02d}_depth_masked.exr', f['camera']) for k, f in enumerate(fr)], step=3)
-        meta = pack_cloud(P, C, f'{take}-{sd}')
+        meta = pack_cloud(P, C, f'{take}-{sd}', bin_path=f'{TD}/{sd}/lidar.bin')
         places.append({'name': f'{take}-{sd}', 'title': f"Shot {s['shot']}", 't0': s['t0'], 't1': s['t0'] + s['seconds'], 'keys': timed(f'{TD}/{sd}', ts),
                        'fy': fr[0]['camera']['intrinsics']['fy'], 'h': fr[0]['camera']['intrinsics']['height'], 'splat': None, 'mesh': None,
-                       'lidar': f'data/{take}-{sd}.lidar.txt', 'lidarMeta': meta, 'raw': {}, 'bodies': B3.get(sd, [])})
+                       'lidar': f'data/{take}-{sd}.lidar.txt', 'lidarMeta': meta, 'raw': {'lidar': os.path.relpath(f'{TD}/{sd}/lidar.bin', SITE)}, 'bodies': B3.get(sd, [])})
     aud = f'{take}.mp3'; subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', f'{os.path.dirname(A)}/full/out/{take}/film.mp4', '-vn', '-ac', '1', '-c:a', 'libmp3lame', '-b:a', '96k', f'{SITE}/{aud}'], check=True)
     wf = f'{take}.words.json'; json.dump([{'t0': l['t0'], 't1': l['t1'], 'w': [[w[0], w[1]] for w in l['words']]} for l in TP[int(poem) - 1]['lines']], open(f'{SITE}/{wf}', 'w'), separators=(',', ':'))
     seed = 'inverse foundry' if '-grey-' in take else 'its own level'
@@ -72,3 +73,5 @@ json.dump({k: takes[k] for k in sorted(takes, key=lambda k: (k[:2], 'greyfig' in
 tp = open(f'{SITE}/index.html').read().replace('<title>Magic Ride</title>', '<title>Grey-box Takes</title>')
 tp = tp.replace("await openReel(location.hash.slice(1) || 'ride');", "await openReel(location.hash.slice(1) || Object.keys(R)[0]);").replace("const r = R[id] || R.ride;", "const r = R[id] || R.ride || Object.values(R)[0];")
 open(f'{SITE}/takes.html', 'w').write(tp)
+open(f'{SITE}/play-takes.html', 'w').write('<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
+    '<!-- generated from takes.html by build.py: the GitHub Pages copy of the grey-box takes viewer -->\n</head><body>\n' + tp + '\n</body></html>\n')
