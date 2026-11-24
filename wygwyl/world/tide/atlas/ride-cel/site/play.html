@@ -44,11 +44,15 @@ button.go{background:var(--water);border-color:var(--water)}
 #fill{position:absolute;left:0;top:9px;height:3px;background:var(--water);width:0}
 #seek i{position:absolute;top:6px;width:1px;height:10px;background:var(--dim)}
 #note{color:var(--dim);font-size:11px;letter-spacing:.1em;text-transform:uppercase;min-height:1em}
+#hint{position:fixed;left:0;right:0;top:calc(118px + env(safe-area-inset-top,0px));text-align:center;color:var(--ink);opacity:.7;font-size:11px;letter-spacing:.1em;text-transform:uppercase;pointer-events:none}
+#stick{position:fixed;width:110px;height:110px;margin:-55px 0 0 -55px;border:1px solid var(--line);border-radius:50%;pointer-events:none}
+#stick i{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:var(--water);opacity:.8}
+#drive[aria-pressed="true"]{background:var(--ink);color:var(--stage)}
 #fault{position:fixed;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--ink);font:italic 22px/1.4 var(--word);background:var(--stage)}
 @media (prefers-reduced-motion:reduce){#veil,#words span{transition:none}}
 </style>
 
-<canvas id="c" tabindex="0" aria-label="The rebuilt world. Pause, then drag to look around; pinch or scroll to move."></canvas>
+<canvas id="c" tabindex="0" aria-label="The rebuilt world. Drag to look and W A S D to move while the take plays; on a phone the left thumb moves and the right looks. Follow returns to the take's camera."></canvas>
 <div id="veil"></div>
 <header class="top">
   <nav class="reels" id="reels" aria-label="Reels"></nav>
@@ -62,11 +66,15 @@ button.go{background:var(--water);border-color:var(--water)}
   <div class="row">
     <button id="play" class="go" type="button">Play with sound</button>
     <span id="time">0:00 / 0:00</span>
+    <button id="drive" type="button" aria-pressed="false" title="Move freely while the take plays">Drive</button>
+    <button id="bstyle" type="button" title="What stands on the tracked skeletons">Skeleton</button>
     <div class="see" role="group" aria-label="How to see the world">
       <button type="button" data-mode="lidar" aria-pressed="true">LiDAR</button><button type="button" data-mode="splat" aria-pressed="false">Splats</button><button type="button" data-mode="mesh" aria-pressed="false">Mesh</button>
     </div>
   </div>
 </div>
+<div id="hint" hidden>W A S D or arrows to move · drag to look · Q / E down / up · Shift faster</div>
+<div id="stick" hidden><i></i></div>
 <div id="fault" hidden></div>
 <audio id="voice" preload="auto"></audio>
 
@@ -82,7 +90,7 @@ try { renderer = new THREE.WebGLRenderer({ canvas: $('c'), antialias: false, pre
 catch (e) { fault('This browser could not start WebGL, so the world cannot be drawn here.'); throw e; }
 renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75)); renderer.setSize(innerWidth, innerHeight);
 const scene = new THREE.Scene(); scene.background = new THREE.Color(0x030409); scene.add(new SparkRenderer({ renderer }));
-scene.add(new THREE.HemisphereLight(0xdfe6ff, 0x202030, 2.4));
+scene.add(new THREE.HemisphereLight(0xdfe6ff, 0x202030, 2.4)); const sun = new THREE.DirectionalLight(0xfff1dd, 1.6); sun.position.set(.4, 1, .3); scene.add(sun);
 const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.05, 600);
 const R = await fetch('reels.json').then(r => r.json());
 const voice = $('voice');
@@ -98,8 +106,56 @@ function makeBodies(p) {
   lines.frustumCulled = dots.frustumCulled = false; lines.renderOrder = dots.renderOrder = 10; const o = new THREE.Group(); o.add(lines, dots); o.visible = false; scene.add(o);
   p.bodyObj = { o, lines, dots };
 }
+// geometry on the skeletons: one InstancedMesh of limbs, one of heads, one of torsos, posed from the joints each frame
+const MAXB = MAXP * BONES.length, UP = new THREE.Vector3(0, 1, 0), _m = new THREE.Matrix4(), _q = new THREE.Quaternion(), _s = new THREE.Vector3(), _a = new THREE.Vector3(), _b = new THREE.Vector3(), _c = new THREE.Color();
+const LIMB = { mannequin: new THREE.CylinderGeometry(1, 1, 1, 10), blocks: new THREE.BoxGeometry(1.6, 1, 1.6) };
+const HEAD = { mannequin: new THREE.SphereGeometry(1, 16, 12), blocks: new THREE.BoxGeometry(1.7, 2, 1.7) };
+const TORSO = new THREE.BoxGeometry(1, 1, 1);
+let bstyle = 'skeleton';
+function makeSolid(p) {
+  const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: .55, metalness: 0, emissive: 0x2a3550, flatShading: bstyle === 'blocks' });
+  const mk = (g, n) => { const m = new THREE.InstancedMesh(g, mat, n); m.instanceMatrix.setUsage(THREE.DynamicDrawUsage); m.frustumCulled = false; m.count = 0; return m; };
+  const limbs = mk(LIMB[bstyle], MAXB), heads = mk(HEAD[bstyle], MAXP), torsos = mk(TORSO, MAXP), o = new THREE.Group(); o.add(limbs, heads, torsos); scene.add(o);
+  p.solid = { o, limbs, heads, torsos, style: bstyle };
+}
+function people(p, t) {   // the bodies at time t, blended between the tracked frames by person id
+  const F = p.bodies; if (!F || !F.length) return []; let i = 0; while (i < F.length - 2 && t > F[i + 1].t) i++;
+  const A = F[i], B = F[Math.min(i + 1, F.length - 1)], a = THREE.MathUtils.clamp((t - A.t) / Math.max(1e-3, B.t - A.t), 0, 1), out = [];
+  for (const pa of A.people.slice(0, MAXP)) {
+    const pb = B.people.find(q => q.id === pa.id); if (!pb && a > .5) continue;
+    out.push({ id: pa.id, X: k => { const x = pa.X[k]; if (!pb) return x; const y = pb.X[k]; return [x[0] + (y[0] - x[0]) * a, x[1] + (y[1] - x[1]) * a, x[2] + (y[2] - x[2]) * a]; }, ok: k => pa.ok[k] && (!pb || pb.ok[k]) });
+  }
+  for (const q of B.people) if (a > .5 && !A.people.some(x => x.id === q.id) && out.length < MAXP) out.push({ id: q.id, X: k => q.X[k], ok: k => q.ok[k] });
+  return out;
+}
+function poseSolid(p, ps) {
+  if (!p.solid || p.solid.style !== bstyle) { if (p.solid) { scene.remove(p.solid.o); } makeSolid(p); }
+  const S = p.solid; let nl = 0, nh = 0, nt = 0;
+  for (const b of ps) {
+    const V = k => new THREE.Vector3(...b.X(k)); if (!(b.ok(5) && b.ok(6))) continue;
+    const sh = V(5).distanceTo(V(6)) || .4, th = sh * (bstyle === 'blocks' ? .16 : .13);   // limb thickness from shoulder width
+    _c.setHSL((b.id * .137) % 1, .25, .82);
+    for (const [u, v] of BONES) {
+      if (u <= 4 || v <= 4 || !b.ok(u) || !b.ok(v)) continue;   // face links: the head covers them
+      _a.set(...b.X(u)); _b.set(...b.X(v)); const L = _a.distanceTo(_b); if (L < 1e-3) continue;
+      _q.setFromUnitVectors(UP, _s.subVectors(_b, _a).normalize()); _m.compose(_a.clone().add(_b).multiplyScalar(.5), _q, new THREE.Vector3(th, L, th));
+      S.limbs.setMatrixAt(nl, _m); S.limbs.setColorAt(nl, _c); nl++;
+    }
+    if (b.ok(0)) { _m.compose(V(0), new THREE.Quaternion(), new THREE.Vector3(sh * .32, sh * .38, sh * .32)); S.heads.setMatrixAt(nh, _m); S.heads.setColorAt(nh, _c); nh++; }
+    if (b.ok(9) && b.ok(10)) {   // torso: a box from the shoulders to the hips, facing across the shoulders
+      const s0 = V(5).add(V(6)).multiplyScalar(.5), h0 = V(9).add(V(10)).multiplyScalar(.5), up = s0.clone().sub(h0), len = up.length(); up.normalize();
+      const across = V(6).sub(V(5)).normalize(), fwd = new THREE.Vector3().crossVectors(across, up).normalize(); across.crossVectors(up, fwd);
+      _m.makeBasis(across, up, fwd); _q.setFromRotationMatrix(_m); _m.compose(s0.add(h0).multiplyScalar(.5), _q, new THREE.Vector3(sh * 1.05, len, sh * .42));
+      S.torsos.setMatrixAt(nt, _m); S.torsos.setColorAt(nt, _c); nt++;
+    }
+  }
+  for (const [m, n] of [[S.limbs, nl], [S.heads, nh], [S.torsos, nt]]) { m.count = n; m.instanceMatrix.needsUpdate = true; if (m.instanceColor) m.instanceColor.needsUpdate = true; }
+}
 function poseBodies(p, t) {
-  const F = p.bodies; if (!F || !F.length || !p.bodyObj) return; let i = 0; while (i < F.length - 2 && t > F[i + 1].t) i++;
+  if (!p.bodyObj) return; const ps = people(p, t);
+  p.bodyObj.o.visible = bstyle === 'skeleton' && p === cur; if (p.solid) p.solid.o.visible = bstyle !== 'skeleton' && p === cur;
+  if (bstyle !== 'skeleton') { poseSolid(p, ps); return; }
+  const F = p.bodies; if (!F || !F.length) return; let i = 0; while (i < F.length - 2 && t > F[i + 1].t) i++;
   const A = F[i], B = F[Math.min(i + 1, F.length - 1)], a = THREE.MathUtils.clamp((t - A.t) / Math.max(1e-3, B.t - A.t), 0, 1);
   const L = p.bodyObj.lines.geometry.attributes.position.array, J = p.bodyObj.dots.geometry.attributes.position.array; let nl = 0, nj = 0;
   for (const pa of A.people.slice(0, MAXP)) {
@@ -142,7 +198,7 @@ async function loadLidar(p) {
 async function loadSplat(p) { p.splatObj = new SplatMesh({ fileBytes: await fileOf(p, 'splat'), fileType: 'spz' }); await p.splatObj.initialized; p.splatObj.visible = false; scene.add(p.splatObj); }
 async function loadMesh(p) { const g = await new GLTFLoader().parseAsync((await fileOf(p, 'mesh')).slice().buffer, ''); p.meshObj = g.scene; p.meshObj.visible = false; scene.add(p.meshObj); }
 
-let reel = null, cur = null, mode = 'lidar', playing = false, tPaused = 0, look = null, lineShown = -1, W = [];
+let reel = null, cur = null, mode = 'lidar', playing = false, tPaused = 0, look = null, lineShown = -1, W = [], last = performance.now();
 const now = () => playing ? voice.currentTime : tPaused;
 const placeAt = t => reel.places.find(p => t < p.t1) || reel.places[reel.places.length - 1];
 const pending = new Map();   // place+mode -> promise, so each file loads once
@@ -152,14 +208,26 @@ function need(p, m) {
   return pending.get(key);
 }
 function show() {   // the one object that is true now: this place, seen this way
-  for (const r of Object.values(R)) for (const p of r.places) { for (const m of ['lidar', 'splat', 'mesh']) if (p[m + 'Obj']) p[m + 'Obj'].visible = p === cur && m === mode; if (p.bodyObj) p.bodyObj.o.visible = p === cur; }
+  for (const r of Object.values(R)) for (const p of r.places) { for (const m of ['lidar', 'splat', 'mesh']) if (p[m + 'Obj']) p[m + 'Obj'].visible = p === cur && m === mode; if (p.bodyObj) p.bodyObj.o.visible = p === cur && bstyle === 'skeleton'; if (p.solid) p.solid.o.visible = p === cur && bstyle !== 'skeleton'; }
   const has = cur[mode + 'Obj'];
   $('note').textContent = has ? '' : cur[mode] ? `Loading ${cur.title.toLowerCase()} as ${mode === 'splat' ? 'splats' : mode}…` : `No ${mode} for this place`;
   document.querySelectorAll('.see button').forEach(b => { b.setAttribute('aria-pressed', b.dataset.mode === mode); b.disabled = !cur[b.dataset.mode] && !cur[b.dataset.mode + 'Obj']; });
 }
-function enter(p) { if (cur === p) return; cur = p; look = null; $('place').textContent = p.title; need(p, mode).then(show); show(); }
+function enter(p, t) {
+  if (cur === p) return; cur = p; $('place').textContent = p.title; need(p, mode).then(show); show();
+  if (drive && t !== undefined) { const c = poseAt(p, t), E = new THREE.Euler().setFromQuaternion(c.q, 'YXZ'); look = { yaw: E.y, pitch: E.x, pos: c.pos }; } else if (!drive) look = null;
+}
 document.querySelectorAll('.see button').forEach(b => b.onclick = () => { mode = b.dataset.mode; need(cur, mode).then(show); show(); });
 
+function poseAt(p, t) {   // the take's camera at time t, without moving the view
+  const k = p.keys; let i = 0; while (i < k.length - 2 && t > k[i + 1].t) i++;
+  const j = Math.min(i + 1, k.length - 1), a = k.length < 2 ? 0 : THREE.MathUtils.clamp((t - k[i].t) / Math.max(1e-3, k[j].t - k[i].t), 0, 1), e = a * a * (3 - 2 * a);
+  return { pos: new THREE.Vector3(...k[i].p).lerp(new THREE.Vector3(...k[j].p), e), q: new THREE.Quaternion(...k[i].q).slerp(new THREE.Quaternion(...k[j].q), e) };
+}
+const ghost = (() => { const g = new THREE.BufferGeometry(), s = .6, w = s * 16 / 9 / 2, h = s / 2, z = -s * 1.1;
+  const P = [[0,0,0],[-w,-h,z],[0,0,0],[w,-h,z],[0,0,0],[w,h,z],[0,0,0],[-w,h,z],[-w,-h,z],[w,-h,z],[w,-h,z],[w,h,z],[w,h,z],[-w,h,z],[-w,h,z],[-w,-h,z],[-w*.4,h,z],[0,h*1.6,z],[0,h*1.6,z],[w*.4,h,z]];
+  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(P.flat()), 3));
+  const m = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: 0x6f8cff, depthTest: false, transparent: true, opacity: .95 })); m.renderOrder = 11; m.visible = false; scene.add(m); return m; })();
 function camAt(p, t) {
   const k = p.keys; let i = 0; while (i < k.length - 2 && t > k[i + 1].t) i++;
   const j = Math.min(i + 1, k.length - 1), a = k.length < 2 ? 0 : THREE.MathUtils.clamp((t - k[i].t) / Math.max(1e-3, k[j].t - k[i].t), 0, 1), e = a * a * (3 - 2 * a);
@@ -175,14 +243,14 @@ function words(t) {
 const fmt = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 function setPlay(p) {
   playing = p; $('play').classList.toggle('go', !p);
-  if (p) { if (tPaused >= reel.end - .1) tPaused = 0; voice.currentTime = tPaused; voice.play().then(() => {}, () => { playing = false; label(); }); look = null; }
+  if (p) { if (tPaused >= reel.end - .1) tPaused = 0; voice.currentTime = tPaused; voice.play().then(() => {}, () => { playing = false; label(); }); }
   else { tPaused = voice.currentTime || tPaused; voice.pause(); }
   label();
 }
 const label = () => $('play').textContent = playing ? 'Pause' : (tPaused > 0 && tPaused < reel.end - .1 ? 'Play' : 'Play with sound');
 $('play').onclick = () => setPlay(!playing);
 voice.addEventListener('ended', () => { setPlay(false); tPaused = reel.end; label(); });
-function seekTo(x) { const r = $('seek').getBoundingClientRect(); tPaused = THREE.MathUtils.clamp((x - r.left) / r.width, 0, 1) * reel.end; if (playing) voice.currentTime = tPaused; look = null; label(); }
+function seekTo(x) { const r = $('seek').getBoundingClientRect(); tPaused = THREE.MathUtils.clamp((x - r.left) / r.width, 0, 1) * reel.end; if (playing) voice.currentTime = tPaused; label(); }
 let seeking = false;
 $('seek').addEventListener('pointerdown', e => { seeking = true; $('seek').setPointerCapture(e.pointerId); seekTo(e.clientX); });
 $('seek').addEventListener('pointermove', e => { if (seeking) seekTo(e.clientX); });
@@ -191,7 +259,7 @@ $('seek').addEventListener('keydown', e => { const d = e.key === 'ArrowRight' ? 
 
 async function openReel(id) {
   const r = R[id] || R.ride; if (reel === r) return;
-  if (playing) setPlay(false); reel = r; tPaused = 0; cur = null; lineShown = -1;
+  if (playing) setPlay(false); setDrive(false); reel = r; tPaused = 0; cur = null; lineShown = -1;
   for (const [id, x] of Object.entries(R)) $('r-' + id).setAttribute('aria-current', x === r ? 'page' : 'false');
   for (const p of r.places) if (p.bodies && p.bodies.length && !p.bodyObj) makeBodies(p);
   $('about').textContent = r.about; voice.src = r.audio; W = r.words ? await fetch(r.words).then(x => x.json()) : []; $('words').innerHTML = '';
@@ -203,13 +271,34 @@ async function openReel(id) {
 }
 addEventListener('hashchange', () => openReel(location.hash.slice(1)));
 
-// look around while paused: drag turns, pinch or wheel moves along the view
-let drag = null, pinch = 0; const ptrs = new Map();
-const grab = () => { if (!look) { const E = new THREE.Euler().setFromQuaternion(camera.quaternion, 'YXZ'); look = { yaw: E.y, pitch: E.x, pos: camera.position.clone() }; } if (playing) setPlay(false); };
-const move = d => { if (look) look.pos.addScaledVector(new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion), d); };
-$('c').addEventListener('pointerdown', e => { ptrs.set(e.pointerId, e); grab(); drag = [e.clientX, e.clientY]; });
-addEventListener('pointerup', e => { ptrs.delete(e.pointerId); drag = null; pinch = 0; });
+// drive: the take keeps playing (voice, words, bodies) while you move through the place; Follow returns to the take's camera
+let drag = null, pinch = 0, drive = false; const ptrs = new Map(), keys = {}, stick = { id: null, x0: 0, y0: 0, dx: 0, dy: 0 };
+const grab = () => { if (!look) { const E = new THREE.Euler().setFromQuaternion(camera.quaternion, 'YXZ'); look = { yaw: E.y, pitch: E.x, pos: camera.position.clone() }; } setDrive(true); };
+function setDrive(d) { drive = d; if (!d) look = null; $('drive').setAttribute('aria-pressed', d); $('drive').textContent = d ? 'Follow' : 'Drive'; $('hint').hidden = !d || matchMedia('(pointer: coarse)').matches; ghost.visible = d; }
+$('drive').onclick = () => { if (drive) setDrive(false); else grab(); };
+const STY = ['skeleton', 'mannequin', 'blocks'];
+$('bstyle').onclick = () => { bstyle = STY[(STY.indexOf(bstyle) + 1) % 3]; $('bstyle').textContent = bstyle[0].toUpperCase() + bstyle.slice(1); show(); };
+addEventListener('keydown', e => { if (e.target instanceof HTMLInputElement) return; const k = e.key.toLowerCase(); if ('wasdqe'.includes(k) || k.startsWith('arrow')) { keys[k] = 1; if (!drive) grab(); } if (k === 'shift') keys.shift = 1; });
+addEventListener('keyup', e => { const k = e.key.toLowerCase(); keys[k] = 0; if (k === 'shift') keys.shift = 0; });
+const scale = () => { const m = cur && cur.lidarMeta; return m ? Math.max(1, Math.hypot(m.hi[0] - m.lo[0], m.hi[2] - m.lo[2])) : 20; };
+function steer(dt) {   // keys and the touch stick move along the view; up and down with Q / E
+  if (!drive || !look) return; const f = new THREE.Vector3(0, 0, -1).applyAxisAngle(UP, look.yaw), r = new THREE.Vector3(1, 0, 0).applyAxisAngle(UP, look.yaw);
+  let fw = (keys.w || keys.arrowup ? 1 : 0) - (keys.s || keys.arrowdown ? 1 : 0) - stick.dy, st = (keys.d || keys.arrowright ? 1 : 0) - (keys.a || keys.arrowleft ? 1 : 0) + stick.dx, ud = (keys.e ? 1 : 0) - (keys.q ? 1 : 0);
+  const v = scale() * .045 * (keys.shift ? 3 : 1) * dt;   // about a body length a second in most places; Shift for three look.pos.addScaledVector(f, fw * v).addScaledVector(r, st * v).addScaledVector(UP, ud * v);
+}
+const move = d => { if (look) look.pos.addScaledVector(new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion), d * scale() / 40); };
+$('c').addEventListener('pointerdown', e => {
+  grab();
+  if (e.pointerType === 'touch' && e.clientX < innerWidth * .42 && stick.id === null) {   // left thumb: a stick where it lands
+    Object.assign(stick, { id: e.pointerId, x0: e.clientX, y0: e.clientY, dx: 0, dy: 0 }); const el = $('stick'); el.hidden = false; el.style.left = e.clientX + 'px'; el.style.top = e.clientY + 'px'; return;
+  }
+  ptrs.set(e.pointerId, e); drag = [e.clientX, e.clientY];
+});
+addEventListener('pointerup', e => { if (e.pointerId === stick.id) { stick.id = null; stick.dx = stick.dy = 0; $('stick').hidden = true; } ptrs.delete(e.pointerId); drag = null; pinch = 0; });
+addEventListener('pointercancel', e => { if (e.pointerId === stick.id) { stick.id = null; stick.dx = stick.dy = 0; $('stick').hidden = true; } ptrs.delete(e.pointerId); });
 addEventListener('pointermove', e => {
+  if (e.pointerId === stick.id) { const dx = e.clientX - stick.x0, dy = e.clientY - stick.y0, r = Math.min(1, Math.hypot(dx, dy) / 50), a = Math.atan2(dy, dx);
+    stick.dx = Math.cos(a) * r; stick.dy = Math.sin(a) * r; $('stick').firstChild.style.transform = `translate(${stick.dx * 33}px,${stick.dy * 33}px)`; return; }
   if (!ptrs.has(e.pointerId) || !look) return; ptrs.set(e.pointerId, e);
   if (ptrs.size === 2) { const [a, b] = [...ptrs.values()], d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY); if (pinch) move((d - pinch) * .02); pinch = d; return; }
   if (!drag) return; look.yaw -= (e.clientX - drag[0]) * .005; look.pitch = THREE.MathUtils.clamp(look.pitch - (e.clientY - drag[1]) * .005, -1.2, 1.2); drag = [e.clientX, e.clientY];
@@ -218,14 +307,18 @@ addEventListener('wheel', e => { grab(); move(-e.deltaY * .004); }, { passive: t
 addEventListener('keydown', e => { if (e.key === ' ' && !(document.activeElement instanceof HTMLButtonElement)) { e.preventDefault(); setPlay(!playing); } });
 addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
   for (const r of Object.values(R)) for (const p of r.places) if (p.lidarObj) p.lidarObj.material.uniforms.px.value = innerHeight; });
-window.__at = t => { tPaused = t; look = null; };   // for checks
+window.__at = t => { tPaused = t; if (!drive) look = null; };   // for checks
+window.__drive = (dx, dz, yaw) => { grab(); look.yaw += yaw || 0; look.pos.addScaledVector(new THREE.Vector3(1, 0, 0).applyAxisAngle(UP, look.yaw), dx * scale() / 10).addScaledVector(new THREE.Vector3(0, 0, -1).applyAxisAngle(UP, look.yaw), dz * scale() / 10); };
+window.__style = s => { bstyle = s; $('bstyle').textContent = s[0].toUpperCase() + s.slice(1); show(); };
+window.__dbg = () => ({ cam: camera.position.toArray().map(v => +v.toFixed(2)), scale: +scale().toFixed(1), drive, style: bstyle, solids: cur && cur.solid ? [cur.solid.limbs.count, cur.solid.torsos.count] : null, lidar: !!(cur && cur.lidarObj && cur.lidarObj.visible) });
 window.__mode = m => { mode = m; need(cur, m).then(show); show(); };
 
 renderer.setAnimationLoop(() => {
   if (!reel) return;
-  const t = now(), p = placeAt(t); enter(p);
+  const t = now(), p = placeAt(t), dt = Math.min(.1, (performance.now() - last) / 1000); last = performance.now(); enter(p, t); steer(dt);
+  if (drive) { const c = poseAt(p, t); ghost.position.copy(c.pos); ghost.quaternion.copy(c.q); ghost.scale.setScalar(scale() / 30); }
   if (look) { camera.quaternion.setFromEuler(new THREE.Euler(look.pitch, look.yaw, 0, 'YXZ')); camera.position.copy(look.pos); } else camAt(p, t);
-  const cut = (p.t0 > 0 && t - p.t0 < .45) || (p.t1 < reel.end && p.t1 - t < .45); $('veil').style.opacity = cut && !look ? 1 : 0;   // the world drains to blue at each cut
+  const cut = (p.t0 > 0 && t - p.t0 < .45) || (p.t1 < reel.end && p.t1 - t < .45); $('veil').style.opacity = cut && !drive ? 1 : 0;   // the world drains to blue at each cut
   if (cur && cur.bodies) poseBodies(cur, t);
   words(t); $('fill').style.width = (t / reel.end * 100) + '%'; $('time').textContent = `${fmt(t)} / ${fmt(reel.end)}`; $('seek').setAttribute('aria-valuenow', t.toFixed(1));
   renderer.render(scene, camera);
