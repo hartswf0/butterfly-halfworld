@@ -110,9 +110,10 @@ renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75)); renderer.setSize(inner
 const scene = new THREE.Scene(); scene.background = new THREE.Color(0x030409); scene.add(new SparkRenderer({ renderer }));
 scene.add(new THREE.HemisphereLight(0xdfe6ff, 0x202030, 2.4)); const sun = new THREE.DirectionalLight(0xfff1dd, 1.6); sun.position.set(.4, 1, .3); scene.add(sun);
 const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.05, 600);
-const R = await fetch(document.title === 'Grey-box Takes' ? 'reels-takes.json' : 'reels.json').then(r => r.ok ? r.json() : fetch('reels.json').then(x => x.json())).catch(() => fetch('reels.json').then(x => x.json()));   // the takes page reads its own list where it is served (GitHub Pages)
+const R = await fetch(window.REEL_FILE || (document.title === 'Grey-box Takes' ? 'reels-takes.json' : 'reels.json')).then(r => r.ok ? r.json() : fetch('reels.json').then(x => x.json())).catch(() => fetch('reels.json').then(x => x.json()));   // the takes page reads its own list where it is served (GitHub Pages)
 const voice = $('voice');
-for (const [id, r] of Object.entries(R)) { const a = document.createElement('a'); a.href = '#' + id; a.id = 'r-' + id; a.textContent = r.title + (id.includes('grey') ? (id.includes('greyfig') ? ' · level' : ' · foundry') : ''); $('reels').appendChild(a); }
+if (window.REEL_FILE) { const a = document.createElement('a'); a.href = 'reels.html'; a.textContent = '← All reels'; $('reels').appendChild(a); }
+else for (const [id, r] of Object.entries(R)) { const a = document.createElement('a'); a.href = '#' + id; a.id = 'r-' + id; a.textContent = r.title + (id.includes('grey') ? (id.includes('greyfig') ? ' · level' : ' · foundry') : ''); $('reels').appendChild(a); }
 // Sapiens2 bodies lifted into Atlas's world: bones as light, interpolated between the tracked frames by person id
 const BONES = [[5,6],[5,7],[6,8],[7,62],[8,41],[5,9],[6,10],[9,10],[9,11],[10,12],[11,13],[12,14],[13,15],[14,18],[13,17],[14,20],[0,1],[0,2],[1,3],[2,4],[0,5],[0,6]];
 const MAXP = 24;
@@ -328,7 +329,7 @@ $('seek').addEventListener('keydown', e => { const d = e.key === 'ArrowRight' ? 
 async function openReel(id) {
   const r = R[id] || R.ride || Object.values(R)[0]; if (reel === r) return;
   if (playing) setPlay(false); setDrive(false); reel = r; tPaused = 0; cur = null; lineShown = -1;
-  for (const [id, x] of Object.entries(R)) $('r-' + id).setAttribute('aria-current', x === r ? 'page' : 'false');
+  for (const [id, x] of Object.entries(R)) { const el = $('r-' + id); if (el) el.setAttribute('aria-current', x === r ? 'page' : 'false'); }
   if (r.bodiesFile && !r.bodiesLoaded) { try { const B = await fetch(r.bodiesFile).then(x => x.json()); for (const p of r.places) if (B[p.name]) p.bodies = B[p.name]; } catch (e) { console.warn('bodies', e); } r.bodiesLoaded = true; }
   for (const p of r.places) if (p.bodies && p.bodies.length && !p.bodyObj) makeBodies(p);
   $('about').textContent = r.about; voice.src = r.audio; W = r.words ? await fetch(r.words).then(x => x.json()) : []; $('words').innerHTML = '';
