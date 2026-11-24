@@ -22,7 +22,8 @@ for sd in sorted(d for d in os.listdir(D) if d.startswith('s') and os.path.isdir
     for k in range(len(os.listdir(f'{D}/{sd}/frames'))):
         if KF and k not in KF: continue
         key = f'{sd}/{k:02d}'
-        if key in out: continue
+        weak = key in out and out[key] and max(max(p['sc'][:21]) for p in out[key]) < .3   # tracked, but every body too dark to read
+        if key in out and not weak: continue
         bf = f'{D}/{sd}/boxes.json'
         if os.path.exists(bf):   # every person Gemini found, as COCO x, y, w, h with a small margin
             bx = [[max(0, b[1] * 1.28 - 8), max(0, b[0] * .72 - 8), (b[3] - b[1]) * 1.28 + 16, (b[2] - b[0]) * .72 + 16] for b in json.load(open(bf)).get(f'{k:02d}', []) if (b[2] - b[0]) * .72 > 25]
@@ -30,7 +31,12 @@ for sd in sorted(d for d in os.listdir(D) if d.startswith('s') and os.path.isdir
         t = time.time(); res = []
         if bx:
             with torch.inference_mode():
-                im = Image.open(f'{D}/{sd}/frames/{k:02d}.jpg').convert('RGB'); inp = pp(im, boxes=[bx], return_tensors='pt')
+                im = Image.open(f'{D}/{sd}/frames/{k:02d}.jpg').convert('RGB')
+                a = np.asarray(im).astype(np.float32)
+                if a.mean() < 70:   # night and dim rooms: lift the shadows so the dark figures' joints can be read (boxes and keypoints keep the same pixels)
+                    a = 255 * (a / 255) ** .45; lab = cv2.cvtColor(np.clip(a, 0, 255).astype(np.uint8), cv2.COLOR_RGB2LAB)
+                    lab[..., 0] = cv2.createCLAHE(2.5, (8, 8)).apply(lab[..., 0]); im = Image.fromarray(cv2.cvtColor(lab, cv2.COLOR_LAB2RGB))
+                inp = pp(im, boxes=[bx], return_tensors='pt')
                 o = m(**{kk: v.to(DEV) if hasattr(v, 'to') else v for kk, v in inp.items()})
                 if DEV != 'cpu': o.heatmaps = o.heatmaps.float().cpu()
                 for p in pp.post_process_pose_estimation(o, boxes=[bx])[0]:
