@@ -36,7 +36,7 @@ reels = {
 # ---- the grey-box Genie takes: each shot a place (LiDAR from Atlas, people removed), with the Sapiens2 bodies lifted into it
 import numpy as np, subprocess
 from film import cloud
-TITLES = {'01': 'Out of Life', '06': 'Resurrecting Atlantis', '12': 'Reunion'}
+TITLES = {'01': 'Out of Life', '03': 'How to Break off an Engagement', '04': 'Nevermore', '05': 'Bloodline', '06': 'Resurrecting Atlantis', '12': 'Reunion'}
 TP = json.load(open(f'{os.path.dirname(A)}/tide.json'))['poems']
 def pack_cloud(P, C, name, n_max=160000):
     lo, hi = np.percentile(P, .5, 0), np.percentile(P, 99.5, 0); ok = np.all((P >= lo) & (P <= hi), 1); P, C = P[ok], C[ok]
