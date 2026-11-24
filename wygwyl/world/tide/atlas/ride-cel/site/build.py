@@ -66,3 +66,9 @@ page = open(f'{SITE}/index.html').read()
 open(f'{SITE}/play.html', 'w').write('<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
     '<!-- generated from index.html by build.py: the GitHub Pages copy of the viewer -->\n</head><body>\n' + page + '\n</body></html>\n')
 for r in reels.values(): print(r['title'], [(p['name'], len(p['splat'] or []), len(p['mesh'] or [])) for p in r['places']])
+# the grey-box takes also go to a viewer of their own (one artifact holds at most 256 MB, and Magic Ride's splats and meshes fill most of it)
+takes = {k: v for k, v in reels.items() if 'grey' in k}
+json.dump({k: takes[k] for k in sorted(takes, key=lambda k: (k[:2], 'greyfig' in k))}, open(f'{SITE}/reels-takes.json', 'w'), separators=(',', ':'))
+tp = open(f'{SITE}/index.html').read().replace('<title>Magic Ride</title>', '<title>Grey-box Takes</title>')
+tp = tp.replace("await openReel(location.hash.slice(1) || 'ride');", "await openReel(location.hash.slice(1) || Object.keys(R)[0]);").replace("const r = R[id] || R.ride;", "const r = R[id] || R.ride || Object.values(R)[0];")
+open(f'{SITE}/takes.html', 'w').write(tp)
