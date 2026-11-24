@@ -54,11 +54,15 @@ button.go{background:var(--water);border-color:var(--water)}
 #boot b{font:italic 400 24px/1.3 var(--word)}#boot span{color:var(--dim);font-size:11px;letter-spacing:.08em;line-height:1.5}
 #boot i{display:block;height:2px;background:var(--line)}#boot u{display:block;height:2px;width:4%;background:var(--water);transition:width .3s}
 #boot.bad u{background:#ff5a5a;width:100%}
+#chip{position:fixed;left:0;top:0;display:flex;align-items:center;gap:6px;padding:5px 5px 5px 11px;background:rgba(3,4,9,.82);border:1px solid var(--line);white-space:nowrap;transform:translate(-50%,-130%);z-index:5}
+#chip span{color:var(--dim);font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-right:2px}
+#chip button{padding:8px 10px;font-size:10px}#chip button[aria-pressed="true"]{background:var(--ink);color:var(--stage)}
+#paths[aria-pressed="true"]{background:var(--ink);color:var(--stage)}
 #fault{position:fixed;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--ink);font:italic 22px/1.4 var(--word);background:var(--stage)}
 @media (prefers-reduced-motion:reduce){#veil,#words span{transition:none}}
 </style>
 
-<canvas id="c" tabindex="0" aria-label="The rebuilt world. Drag to look and W A S D to move while the take plays; on a phone the left thumb moves and the right looks. Follow returns to the take's camera."></canvas>
+<canvas id="c" tabindex="0" aria-label="The rebuilt world. Tap a body to choose it. Drag to look and W A S D to move while the take plays; on a phone the left thumb moves and the right looks. Follow returns to the take's camera."></canvas>
 <div id="veil"></div>
 <header class="top">
   <nav class="reels" id="reels" aria-label="Reels"></nav>
@@ -74,6 +78,8 @@ button.go{background:var(--water);border-color:var(--water)}
     <span id="time">0:00 / 0:00</span>
     <button id="drive" type="button" aria-pressed="false" title="Move freely while the take plays">Drive</button>
     <button id="bstyle" type="button" title="What stands on the tracked skeletons">Skeleton</button>
+    <button id="lookb" type="button" title="How the LiDAR feels: height, water, rain, shore, memory, pulse">Height</button>
+    <button id="paths" type="button" aria-pressed="false" title="Lines of flight: the camera's path and every body's path through the place">Paths</button>
     <div class="see" role="group" aria-label="How to see the world">
       <button type="button" data-mode="lidar" aria-pressed="true">LiDAR</button><button type="button" data-mode="splat" aria-pressed="false">Splats</button><button type="button" data-mode="mesh" aria-pressed="false">Mesh</button>
     </div>
@@ -81,6 +87,7 @@ button.go{background:var(--water);border-color:var(--water)}
 </div>
 <div id="hint" hidden>W A S D or arrows to move · drag to look · Q / E down / up · Shift faster</div>
 <div id="stick" hidden><i></i></div>
+<div id="chip" hidden><span id="chip-t">Person</span><button id="can" type="button" aria-pressed="false" title="Give this person a jerrycan, carried at the tracked wrists">Jerrycan</button><button id="become" type="button" aria-pressed="false" title="Ride behind this person">Become</button><button id="unsel" type="button" aria-label="Let go of this person">×</button></div>
 <div id="fault" hidden></div>
 <div id="boot" role="status" aria-live="polite"><div><b id="boot-t">Loading the world</b><span id="boot-s">Starting…</span><i><u id="boot-bar"></u></i></div></div>
 <script>
@@ -250,18 +257,42 @@ async function bytes(parts) {
   const bin = atob(txt), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u;
 }
 // LiDAR: the fused Atlas depth as points, coloured by height (blue ground to red top), brightness from the image
-const LIDAR_VS = `attribute float lum; uniform float g, top, px; varying vec3 vC;
+// Look: the same points felt six ways. Height (the survey), Water (a swell, caustic light), Rain (the place falls into being over the shot),
+// Shore (a tide line washes in toward you), Memory (sepia, fading with distance and time), Pulse (the points breathe with his voice and beat on each word)
+const LOOKS = ['Height', 'Water', 'Rain', 'Shore', 'Memory', 'Pulse'];
+const LIDAR_VS = `attribute float lum; attribute float rnd; uniform float g, top, px, uMode, uTime, uU, uLevel, uBeat, uS; varying vec3 vC; varying float vA;
 vec3 ramp(float h){ h=clamp(h,0.,1.)*5.; vec3 s0=vec3(.04,.16,1.),s1=vec3(0.,.75,1.),s2=vec3(.16,.9,.31),s3=vec3(1.,.9,0.),s4=vec3(1.,.55,0.),s5=vec3(.9,.16,.16);
   return h<1.?mix(s0,s1,h):h<2.?mix(s1,s2,h-1.):h<3.?mix(s2,s3,h-2.):h<4.?mix(s3,s4,h-3.):mix(s4,s5,h-4.); }
-void main(){ vec4 mv=modelViewMatrix*vec4(position,1.); gl_Position=projectionMatrix*mv;
-  float d=-mv.z; vC=ramp((position.y-g)/(top-g))*(.45+.8*lum)*clamp(1.2-d/70.,.3,1.); gl_PointSize=clamp(px*.8/d,1.,3.); }`;
-const LIDAR_FS = `varying vec3 vC; void main(){ vec2 c=gl_PointCoord-.5; if(dot(c,c)>.25) discard; gl_FragColor=vec4(vC,1.); }`;
+void main(){
+  vec3 p=position; float H=max(top-g,1e-3), h=clamp((p.y-g)/H,0.,1.), d0=-(modelViewMatrix*vec4(p,1.)).z, A=1., sz=1., k=37.7/uS;
+  vec3 base=ramp(h)*(.45+.8*lum), C=base;
+  if(uMode>.5&&uMode<1.5){ // water
+    float w=sin(p.x*k+uTime*1.3)*.5+sin(p.z*k*1.3-uTime*.9)*.35+sin((p.x+p.z)*k*2.1+uTime*2.)*.15;
+    p.y+=w*uS*.006*(1.+3.*uLevel)*(1.-.6*h);
+    float c=pow(abs(sin(p.x*k*1.7+uTime)*sin(p.z*k*2.3-uTime*.7)),3.);
+    C=mix(vec3(.01,.05,.25),vec3(.1,.55,1.),lum)*(.55+.7*h)+c*vec3(.55,.9,1.)*(.7+uBeat);
+  } else if(uMode<2.5&&uMode>1.5){ // rain: ground first, then up; each point falls from above and lands
+    float at=(h*.5+rnd*.42)*.82, f=1.-clamp((uU-at)/.14,0.,1.);
+    p.y+=f*f*H*1.6+uBeat*rnd*H*.01; A=smoothstep(-.06,0.,uU-at+.06); C=mix(base,vec3(.72,.84,1.),f*.85); sz=1.+f*1.4;
+  } else if(uMode<3.5&&uMode>2.5){ // shore: a front sweeps from far to near; behind it the world is wet, at it, foam
+    float fd=uS*1.5*(1.-fract(uTime*.06)), b=d0-fd, wet=smoothstep(0.,uS*.06,b), foam=exp(-abs(b)/(uS*.014))*(1.-.7*h);
+    C=mix(base*.3,mix(vec3(.01,.08,.3),vec3(.12,.5,.95),lum)*(1.-.4*h),wet)+foam*vec3(1.)*(1.+uBeat); p.y+=foam*uS*.006;
+  } else if(uMode<4.5&&uMode>3.5){ // memory
+    C=vec3(1.,.8,.58)*(.18+.95*lum); p.y+=sin(uTime*.4+rnd*30.)*uS*.002;
+    A=(1.-smoothstep(uS*.15,uS*.85,d0))*mix(1.,.55+.45*sin(uTime*(.6+rnd*1.2)+rnd*40.),.7)*(1.-.55*uU*rnd);
+  } else if(uMode>4.5){ // pulse
+    C=base*(.55+uLevel*2.6+uBeat*.9); sz=1.+uLevel*3.+uBeat*1.6; p.y+=uBeat*(rnd-.5)*uS*.006;
+  }
+  vec4 mv=modelViewMatrix*vec4(p,1.); gl_Position=projectionMatrix*mv; float d=-mv.z;
+  vC=C*(uMode>3.5&&uMode<4.5?1.:clamp(1.2-d/70.,.3,1.)); vA=A; gl_PointSize=clamp(px*.8/d,1.,3.)*sz; }`;
+const LIDAR_FS = `varying vec3 vC; varying float vA; void main(){ vec2 c=gl_PointCoord-.5; if(dot(c,c)>.25||vA<.02) discard; gl_FragColor=vec4(vC,vA); }`;
 async function loadLidar(p) {
   const b = await fileOf(p, 'lidar'), m = p.lidarMeta, n = m.n, q = new Int16Array(b.buffer, b.byteOffset, n * 3), lum = b.subarray(n * 6, n * 7);
-  const pos = new Float32Array(n * 3), L = new Float32Array(n);
-  for (let i = 0; i < n; i++) { for (let k = 0; k < 3; k++) pos[i * 3 + k] = m.lo[k] + (q[i * 3 + k] + 32768) / 65535 * (m.hi[k] - m.lo[k]); L[i] = lum[i] / 255; }
-  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('lum', new THREE.BufferAttribute(L, 1));
-  p.lidarObj = new THREE.Points(g, new THREE.ShaderMaterial({ vertexShader: LIDAR_VS, fragmentShader: LIDAR_FS, uniforms: { g: { value: m.ground }, top: { value: m.top }, px: { value: innerHeight } } }));
+  const pos = new Float32Array(n * 3), L = new Float32Array(n), RN = new Float32Array(n);
+  for (let i = 0; i < n; i++) { for (let k = 0; k < 3; k++) pos[i * 3 + k] = m.lo[k] + (q[i * 3 + k] + 32768) / 65535 * (m.hi[k] - m.lo[k]); L[i] = lum[i] / 255; RN[i] = ((i * 2654435761) >>> 0) / 4294967296; }
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('lum', new THREE.BufferAttribute(L, 1)); g.setAttribute('rnd', new THREE.BufferAttribute(RN, 1));
+  p.lidarObj = new THREE.Points(g, new THREE.ShaderMaterial({ vertexShader: LIDAR_VS, fragmentShader: LIDAR_FS, transparent: true, uniforms: { g: { value: m.ground }, top: { value: m.top }, px: { value: innerHeight },
+    uMode: { value: 0 }, uTime: { value: 0 }, uU: { value: 1 }, uLevel: { value: 0 }, uBeat: { value: 0 }, uS: { value: Math.max(4, Math.hypot(m.hi[0] - m.lo[0], m.hi[2] - m.lo[2])) } } }));
   p.lidarObj.frustumCulled = false; p.lidarObj.visible = false; scene.add(p.lidarObj);
 }
 async function loadSplat(p) { p.splatObj = new SplatMesh({ fileBytes: await fileOf(p, 'splat'), fileType: 'spz' }); await p.splatObj.initialized; p.splatObj.visible = false; scene.add(p.splatObj); }
@@ -278,6 +309,8 @@ function need(p, m) {
 }
 function show() {   // the one object that is true now: this place, seen this way
   for (const r of Object.values(R)) for (const p of r.places) { for (const m of ['lidar', 'splat', 'mesh']) if (p[m + 'Obj']) p[m + 'Obj'].visible = p === cur && m === mode; if (p.bodyObj) p.bodyObj.o.visible = p === cur && bstyle === 'skeleton'; if (p.solid) p.solid.o.visible = p === cur && (bstyle === 'mannequin' || bstyle === 'blocks'); }
+  if (paths && cur && !cur.pathObj) pathsFor(cur);
+  for (const r of Object.values(R)) for (const p of r.places) if (p.pathObj) p.pathObj.visible = paths && p === cur;
   const has = cur[mode + 'Obj'];
   $('note').textContent = has ? '' : cur[mode] ? `Loading ${cur.title.toLowerCase()} as ${mode === 'splat' ? 'splats' : mode}…` : `No ${mode} for this place`;
   document.querySelectorAll('.see button').forEach(b => { b.setAttribute('aria-pressed', b.dataset.mode === mode); b.disabled = !cur[b.dataset.mode] && !cur[b.dataset.mode + 'Obj']; });
@@ -307,12 +340,13 @@ function camAt(p, t) {
 function words(t) {
   const box = $('words'), n = W.findIndex(l => t >= l.t0 - .05 && t <= l.t1 + 1.3);
   if (n !== lineShown) { lineShown = n; box.innerHTML = n < 0 ? '' : W[n].w.map(([w]) => `<span>${w.replace(/</g, '&lt;')}</span>`).join(' '); }
-  if (n >= 0) W[n].w.forEach(([, wt], k) => box.children[k].classList.toggle('on', t >= wt - .02));
+  if (n >= 0) W[n].w.forEach(([, wt], k) => { box.children[k].classList.toggle('on', t >= wt - .02); if (t >= wt && wt > lastOn) { lastOn = wt; if (playing) beatAt = performance.now(); } });
+  if (t < lastOn) lastOn = -9;
 }
 const fmt = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 function setPlay(p) {
   playing = p; $('play').classList.toggle('go', !p);
-  if (p) { if (tPaused >= reel.end - .1) tPaused = 0; voice.currentTime = tPaused; voice.play().then(() => {}, () => { playing = false; label(); }); }
+  if (p) { hear(); if (tPaused >= reel.end - .1) tPaused = 0; voice.currentTime = tPaused; voice.play().then(() => {}, () => { playing = false; label(); }); }
   else { tPaused = voice.currentTime || tPaused; voice.pause(); }
   label();
 }
@@ -335,7 +369,7 @@ async function openReel(id) {
   $('about').textContent = r.about; voice.src = r.audio; W = r.words ? await fetch(r.words).then(x => x.json()) : []; $('words').innerHTML = '';
   $('seek').querySelectorAll('i').forEach(i => i.remove()); $('seek').setAttribute('aria-valuemax', r.end.toFixed(0));
   for (const p of r.places) if (p.t0 > 0) { const i = document.createElement('i'); i.style.left = (p.t0 / r.end * 100) + '%'; $('seek').appendChild(i); }
-  label(); enter(r.places[0]);
+  recall(); label(); enter(r.places[0]);
   boot('Loading ' + r.places[0].title.toLowerCase(), .05);
   need(r.places[0], 'lidar').then(() => { show(); document.getElementById('boot').classList.add('done'); });
   for (const p of r.places) need(p, 'lidar').then(show);   // every place's LiDAR first: it is light
@@ -345,7 +379,7 @@ addEventListener('hashchange', () => openReel(location.hash.slice(1)));
 
 // drive: the take keeps playing (voice, words, bodies) while you move through the place; Follow returns to the take's camera
 let drag = null, pinch = 0, drive = false; const ptrs = new Map(), keys = {}, stick = { id: null, x0: 0, y0: 0, dx: 0, dy: 0 };
-const grab = () => { if (!look) { const E = new THREE.Euler().setFromQuaternion(camera.quaternion, 'YXZ'); look = { yaw: E.y, pitch: E.x, pos: camera.position.clone() }; } setDrive(true); };
+const grab = () => { if (become) setBecome(false); if (!look) { const E = new THREE.Euler().setFromQuaternion(camera.quaternion, 'YXZ'); look = { yaw: E.y, pitch: E.x, pos: camera.position.clone() }; } setDrive(true); };
 function setDrive(d) { drive = d; if (!d) look = null; $('drive').setAttribute('aria-pressed', d); $('drive').textContent = d ? 'Follow' : 'Drive'; $('hint').hidden = !d || matchMedia('(pointer: coarse)').matches; ghost.visible = d; }
 $('drive').onclick = () => { if (drive) setDrive(false); else grab(); };
 const STY = ['skeleton', 'mannequin', 'blocks', 'figure'];
@@ -360,18 +394,21 @@ function steer(dt) {   // keys and the touch stick move along the view; up and d
 }
 const move = d => { if (look) look.pos.addScaledVector(new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion), d * scale() / 40); };
 $('c').addEventListener('pointerdown', e => {
-  grab();
+  tap = { id: e.pointerId, x: e.clientX, y: e.clientY, t: performance.now() };
   if (e.pointerType === 'touch' && e.clientX < innerWidth * .42 && stick.id === null) {   // left thumb: a stick where it lands
-    Object.assign(stick, { id: e.pointerId, x0: e.clientX, y0: e.clientY, dx: 0, dy: 0 }); const el = $('stick'); el.hidden = false; el.style.left = e.clientX + 'px'; el.style.top = e.clientY + 'px'; return;
+    grab(); Object.assign(stick, { id: e.pointerId, x0: e.clientX, y0: e.clientY, dx: 0, dy: 0 }); const el = $('stick'); el.hidden = false; el.style.left = e.clientX + 'px'; el.style.top = e.clientY + 'px'; return;
   }
   ptrs.set(e.pointerId, e); drag = [e.clientX, e.clientY];
 });
-addEventListener('pointerup', e => { if (e.pointerId === stick.id) { stick.id = null; stick.dx = stick.dy = 0; $('stick').hidden = true; } ptrs.delete(e.pointerId); drag = null; pinch = 0; });
+addEventListener('pointerup', e => { if (tap && tap.id === e.pointerId && Math.hypot(e.clientX - tap.x, e.clientY - tap.y) < 8 && performance.now() - tap.t < 450 && e.target === $('c')) pick(e.clientX, e.clientY); tap = null;
+  if (e.pointerId === stick.id) { stick.id = null; stick.dx = stick.dy = 0; $('stick').hidden = true; } ptrs.delete(e.pointerId); drag = null; pinch = 0; });
 addEventListener('pointercancel', e => { if (e.pointerId === stick.id) { stick.id = null; stick.dx = stick.dy = 0; $('stick').hidden = true; } ptrs.delete(e.pointerId); });
 addEventListener('pointermove', e => {
   if (e.pointerId === stick.id) { const dx = e.clientX - stick.x0, dy = e.clientY - stick.y0, r = Math.min(1, Math.hypot(dx, dy) / 50), a = Math.atan2(dy, dx);
     stick.dx = Math.cos(a) * r; stick.dy = Math.sin(a) * r; $('stick').firstChild.style.transform = `translate(${stick.dx * 33}px,${stick.dy * 33}px)`; return; }
-  if (!ptrs.has(e.pointerId) || !look) return; ptrs.set(e.pointerId, e);
+  if (!ptrs.has(e.pointerId)) return;
+  if (!look) { if (tap && ptrs.size < 2 && Math.hypot(e.clientX - tap.x, e.clientY - tap.y) < 8) return; grab(); }
+  ptrs.set(e.pointerId, e);
   if (ptrs.size === 2) { const [a, b] = [...ptrs.values()], d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY); if (pinch) move((d - pinch) * .02); pinch = d; return; }
   if (!drag) return; look.yaw -= (e.clientX - drag[0]) * .005; look.pitch = THREE.MathUtils.clamp(look.pitch - (e.clientY - drag[1]) * .005, -1.2, 1.2); drag = [e.clientX, e.clientY];
 });
@@ -385,17 +422,118 @@ window.__style = s => { bstyle = s; if (s === 'figure') loadAnny(); $('bstyle').
 window.__dbg = () => ({ cam: camera.position.toArray().map(v => +v.toFixed(2)), scale: +scale().toFixed(1), drive, style: bstyle, solids: cur && cur.solid ? [cur.solid.limbs.count, cur.solid.torsos.count] : null, lidar: !!(cur && cur.lidarObj && cur.lidarObj.visible) });
 window.__mode = m => { mode = m; need(cur, m).then(show); show(); };
 
+// ---- Look, Paths, a chosen body: a jerrycan at its wrists, or ride behind it ----
+let lookMode = 0, paths = false, sel = null, become = false, tap = null, lastOn = -9, beatAt = -1e9, an = null, abuf = null, level = 0;
+const cans = new Set();   // place:person keys that carry a jerrycan
+const key = (p, id) => p.name + ':' + id;
+function hear() {   // the voice level, for Water and Pulse; same-origin audio only
+  if (an !== null) { if (an && an.context.state !== 'running') an.context.resume(); return; }
+  try { const C = new (window.AudioContext || window.webkitAudioContext)(), src = C.createMediaElementSource(voice); an = C.createAnalyser(); an.fftSize = 1024; src.connect(an); an.connect(C.destination); abuf = new Float32Array(an.fftSize); C.resume(); }
+  catch (e) { an = false; }
+}
+function voiceLevel() { if (!an || !playing) return level *= .9; an.getFloatTimeDomainData(abuf); let q = 0; for (const v of abuf) q += v * v; const rms = Math.sqrt(q / abuf.length); return level += (Math.min(1, rms * 5) - level) * .25; }
+const store = () => 'wygwyl-view:' + (window.REEL_FILE || document.title) + ':' + (reel && reel.title);
+function save() { try { localStorage.setItem(store(), JSON.stringify({ look: lookMode, paths, cans: [...cans] })); } catch (e) {} }
+function recall() {
+  let v = null; try { v = JSON.parse(localStorage.getItem(store()) || 'null'); } catch (e) {}
+  setLook(v ? v.look | 0 : 0, true); setPaths(!!(v && v.paths), true); cans.clear(); if (v && v.cans) v.cans.forEach(k => cans.add(k)); choose(null);
+}
+function setLook(i, quiet) { lookMode = ((i % LOOKS.length) + LOOKS.length) % LOOKS.length; $('lookb').textContent = LOOKS[lookMode]; if (lookMode === 1 || lookMode === 5) hear(); if (!quiet) save(); }
+function setPaths(on, quiet) { paths = on; $('paths').setAttribute('aria-pressed', on); if (cur) show(); if (!quiet) save(); }
+$('lookb').onclick = () => setLook(lookMode + 1);
+$('paths').onclick = () => setPaths(!paths);
+
+// lines of flight: the take's camera through the place, and each tracked body's hips through time, dim to bright as time runs
+function pathsFor(p) {
+  const g = new THREE.Group(), mat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: .9, depthTest: false }), dot = new THREE.PointsMaterial({ vertexColors: true, size: 5, sizeAttenuation: false, transparent: true, opacity: .95, depthTest: false });
+  const line = (pts, hue, sat) => { if (pts.length < 2) return; const P = new Float32Array(pts.length * 3), Cc = new Float32Array(pts.length * 3), c = new THREE.Color();
+    pts.forEach((x, i) => { P.set(x, i * 3); c.setHSL(hue, sat, .22 + .58 * i / (pts.length - 1)); Cc.set([c.r, c.g, c.b], i * 3); });
+    const gg = new THREE.BufferGeometry(); gg.setAttribute('position', new THREE.BufferAttribute(P, 3)); gg.setAttribute('color', new THREE.BufferAttribute(Cc, 3)); const l = new THREE.Line(gg, mat), d = new THREE.Points(gg, dot); l.renderOrder = d.renderOrder = 9; l.frustumCulled = d.frustumCulled = false; g.add(l, d); };
+  line(p.keys.map(k => k.p), .63, .9);
+  const tr = new Map();
+  for (const f of p.bodies || []) for (const q of f.people) if (q.ok[9] && q.ok[10]) { if (!tr.has(q.id)) tr.set(q.id, []); tr.get(q.id).push([0, 1, 2].map(k => (q.X[9][k] + q.X[10][k]) / 2)); }
+  for (const [id, pts] of tr) line(pts, (id * .137) % 1, .75);
+  g.visible = false; scene.add(g); return (p.pathObj = g);
+}
+
+// choosing a body: a tap near its hips or head
+const _pv = new THREE.Vector3();
+function onScreen(x) { _pv.set(...x).project(camera); return _pv.z < 1 ? [(_pv.x + 1) / 2 * innerWidth, (1 - _pv.y) / 2 * innerHeight] : null; }
+function pick(x, y) {
+  if (!cur) return; let best = null, bd = 72;
+  for (const b of people(cur, now())) for (const j of [0, 9, 10, 5, 6]) if (b.ok(j)) { const s = onScreen(b.X(j)); if (s) { const d = Math.hypot(s[0] - x, s[1] - y); if (d < bd) { bd = d; best = b.id; } } }
+  choose(best === null ? null : key(cur, best));
+}
+function choose(k) {
+  sel = k; $('chip').hidden = k === null; if (k === null) { if (become) setBecome(false); return; }
+  $('chip-t').textContent = 'Person ' + (+k.split(':').pop() + 1); $('can').setAttribute('aria-pressed', cans.has(k)); $('become').setAttribute('aria-pressed', become);
+}
+$('can').onclick = () => { if (!sel) return; cans.has(sel) ? cans.delete(sel) : cans.add(sel); $('can').setAttribute('aria-pressed', cans.has(sel)); save(); };
+$('become').onclick = () => setBecome(!become);
+$('unsel').onclick = () => choose(null);
+function setBecome(on) { become = on && !!sel; if (become) { setDrive(false); } $('become').setAttribute('aria-pressed', become); }
+
+// a body's frame: hips, up, forward (the way the figure faces), height
+function frameOf(b) {
+  const V = k => new THREE.Vector3(...b.X(k)); if (!(b.ok(5) && b.ok(6) && b.ok(9) && b.ok(10))) return null;
+  const hip = V(9).add(V(10)).multiplyScalar(.5), sh = V(5).add(V(6)).multiplyScalar(.5), up = sh.clone().sub(hip).normalize();
+  const fwd = new THREE.Vector3().crossVectors(V(9).sub(V(10)).normalize(), up).normalize();
+  const tall = b.ok(0) && b.ok(13) ? V(0).distanceTo(V(13)) / .9 : sh.distanceTo(hip) / .3;
+  return { hip, sh, up, fwd, tall, wide: V(5).distanceTo(V(6)) || .4 };
+}
+
+// the jerrycan: 20 litres, 47 x 35 x 16.5 cm, handle on top, carried at the wrists (both hands if they are close, else the lower hand)
+const CAN = (() => { const m = new THREE.MeshStandardMaterial({ color: 0xd8a11c, roughness: .55, metalness: .05, emissive: 0x2a1c00 }), g = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.BoxGeometry(.165, .35, .47), m); body.position.y = -.175 - .05;
+  const grip = new THREE.Mesh(new THREE.BoxGeometry(.03, .03, .2), m); grip.position.y = -.015;
+  const posts = [-.08, .08].map(z => { const q = new THREE.Mesh(new THREE.BoxGeometry(.03, .05, .03), m); q.position.set(0, -.04, z); return q; });
+  const spout = new THREE.Mesh(new THREE.CylinderGeometry(.022, .022, .06, 10), m); spout.position.set(0, -.02, .2);
+  g.add(body, grip, ...posts, spout); return g; })();
+const canPool = [];
+function poseCans(p, ps) {
+  let n = 0;
+  if (p === cur) for (const b of ps) {
+    if (!cans.has(key(p, b.id))) continue; const f = frameOf(b); if (!f || !(b.ok(62) || b.ok(41))) continue;
+    const L = b.ok(62) ? new THREE.Vector3(...b.X(62)) : null, Rw = b.ok(41) ? new THREE.Vector3(...b.X(41)) : null;
+    const hand = L && Rw ? (L.distanceTo(Rw) < f.wide * .6 ? L.clone().add(Rw).multiplyScalar(.5) : (L.y < Rw.y ? L : Rw)) : (L || Rw);
+    const c = canPool[n] || (canPool[n] = (() => { const o = CAN.clone(); o.traverse(x => x.frustumCulled = false); scene.add(o); return o; })()); n++;
+    const fl = f.fwd.clone().sub(f.up.clone().multiplyScalar(f.fwd.dot(f.up))).normalize(), ac = new THREE.Vector3().crossVectors(f.up, fl);
+    _m.makeBasis(ac, f.up, fl); c.quaternion.setFromRotationMatrix(_m); c.scale.setScalar(f.wide / .4); c.position.copy(hand); c.visible = true;
+  }
+  for (let i = n; i < canPool.length; i++) canPool[i].visible = false;
+}
+const _cam = new THREE.PerspectiveCamera();
+function ride(b) {   // behind and a little above the chosen body, looking where it faces
+  const f = frameOf(b); if (!f) return;
+  _cam.position.copy(f.hip).addScaledVector(f.fwd, -f.tall * 2.4).addScaledVector(UP, f.tall * .75);
+  _cam.lookAt(f.hip.clone().addScaledVector(f.fwd, f.tall * 3).addScaledVector(UP, f.tall * .15));
+  camera.position.lerp(_cam.position, .12); camera.quaternion.slerp(_cam.quaternion, .12);
+}
+function chipAt(ps) {
+  if (!sel) return; const b = cur && sel.startsWith(cur.name + ':') ? ps.find(q => key(cur, q.id) === sel) : null, el = $('chip');
+  if (!b) { el.style.opacity = .55; return; } el.style.opacity = 1;
+  const top = b.ok(0) ? b.X(0) : b.X(5), s = onScreen(top); if (!s) return;
+  el.style.left = Math.max(90, Math.min(innerWidth - 90, s[0])) + 'px'; el.style.top = Math.max(150, Math.min(innerHeight - 200, s[1])) + 'px';
+}
+window.__look = i => setLook(i); window.__paths = b => setPaths(b); window.__pick = (x, y) => pick(x, y);
+window.__choose = id => choose(id === null ? null : key(cur, id)); window.__can = () => $('can').click(); window.__become = on => setBecome(on);
+window.__people = () => cur ? people(cur, now()).map(b => b.id) : [];
+
 renderer.setAnimationLoop(() => {
   if (!reel) return;
   const t = now(), p = placeAt(t), dt = Math.min(.1, (performance.now() - last) / 1000); last = performance.now(); enter(p, t); steer(dt);
   if (drive) { const c = poseAt(p, t); ghost.position.copy(c.pos); ghost.quaternion.copy(c.q); ghost.scale.setScalar(scale() / 30); }
-  if (look) { camera.quaternion.setFromEuler(new THREE.Euler(look.pitch, look.yaw, 0, 'YXZ')); camera.position.copy(look.pos); } else camAt(p, t);
+  const ps = cur && cur.bodies ? people(cur, t) : [], rb = become && sel ? ps.find(q => key(cur, q.id) === sel) : null;
+  if (look) { camera.quaternion.setFromEuler(new THREE.Euler(look.pitch, look.yaw, 0, 'YXZ')); camera.position.copy(look.pos); } else if (become) { if (rb) ride(rb); } else camAt(p, t);
   const cut = (p.t0 > 0 && t - p.t0 < .45) || (p.t1 < reel.end && p.t1 - t < .45); $('veil').style.opacity = cut && !drive ? 1 : 0;   // the world drains to blue at each cut
   if (cur && cur.bodies) poseBodies(cur, t);
-  words(t); $('fill').style.width = (t / reel.end * 100) + '%'; $('time').textContent = `${fmt(t)} / ${fmt(reel.end)}`; $('seek').setAttribute('aria-valuenow', t.toFixed(1));
+  poseCans(cur, ps); chipAt(ps);
+  words(t);
+  if (cur && cur.lidarObj) { const u = cur.lidarObj.material.uniforms; u.uMode.value = lookMode; u.uTime.value = performance.now() / 1000; u.uU.value = THREE.MathUtils.clamp((t - cur.t0) / Math.max(.1, cur.t1 - cur.t0), 0, 1);
+    u.uLevel.value = voiceLevel(); u.uBeat.value = Math.exp(-(performance.now() - beatAt) / 1000 * 6); } $('fill').style.width = (t / reel.end * 100) + '%'; $('time').textContent = `${fmt(t)} / ${fmt(reel.end)}`; $('seek').setAttribute('aria-valuenow', t.toFixed(1));
   renderer.render(scene, camera);
 });
-try { await openReel(location.hash.slice(1) || Object.keys(R)[0]); window.__ready = true; }
+try { await openReel(location.hash.slice(1) || (R.ride ? 'ride' : Object.keys(R)[0])); window.__ready = true; }
 catch (e) { window.__bootFail ? window.__bootFail('A file could not be loaded (' + (e.message || e) + '). Reload the page to try again.') : fault('A file could not be loaded. Reload the page to try again.'); console.error(e); }
 </script>
 
