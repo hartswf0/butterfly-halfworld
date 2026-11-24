@@ -61,6 +61,11 @@ for tk in sorted(glob.glob(f'{A}/takes/*/bodies3d.json')):
     reels[take] = {'title': TITLES.get(poem.zfill(2), take), 'about': f"Poem {poem.zfill(2)}, a grey-box Genie 4 take seeded from {seed}, rebuilt by Atlas shot by shot. The people are cut out of the world; Sapiens2 tracks their bodies and Atlas depth sets them back in 3D. Pause and drag to walk round them.",
                    'audio': aud, 'words': wf, 'end': places[-1]['t1'], 'places': places}
     print(take, len(places), 'shots;', sum(len(f['people']) for p in places for f in p['bodies']), 'bodies')
+# bodies travel in one file per take, fetched when the take is opened (keeps the reel list small for phones)
+os.makedirs(f'{SITE}/bodies', exist_ok=True)
+for k, r in reels.items():
+    B = {p['name']: p.pop('bodies') for p in r['places'] if 'bodies' in p}
+    if B: json.dump(B, open(f'{SITE}/bodies/{k}.json', 'w'), separators=(',', ':')); r['bodiesFile'] = f'bodies/{k}.json'
 json.dump(reels, open(f'{SITE}/reels.json', 'w'), separators=(',', ':'))
 # GitHub Pages copy of the page: the same page with the document head the artifact host normally adds
 page = open(f'{SITE}/index.html').read()

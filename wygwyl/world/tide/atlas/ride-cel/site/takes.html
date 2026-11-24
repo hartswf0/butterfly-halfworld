@@ -44,6 +44,12 @@ button.go{background:var(--water);border-color:var(--water)}
 #stick{position:fixed;width:110px;height:110px;margin:-55px 0 0 -55px;border:1px solid var(--line);border-radius:50%;pointer-events:none}
 #stick i{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:var(--water);opacity:.8}
 #drive[aria-pressed="true"]{background:var(--ink);color:var(--stage)}
+#boot{position:fixed;inset:0;display:grid;place-items:center;background:var(--stage);z-index:50;padding:24px;transition:opacity .5s}
+#boot.done{opacity:0;pointer-events:none}
+#boot div{display:grid;gap:10px;width:min(320px,80vw);text-align:center}
+#boot b{font:italic 400 24px/1.3 var(--word)}#boot span{color:var(--dim);font-size:11px;letter-spacing:.08em;line-height:1.5}
+#boot i{display:block;height:2px;background:var(--line)}#boot u{display:block;height:2px;width:4%;background:var(--water);transition:width .3s}
+#boot.bad u{background:#ff5a5a;width:100%}
 #fault{position:fixed;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--ink);font:italic 22px/1.4 var(--word);background:var(--stage)}
 @media (prefers-reduced-motion:reduce){#veil,#words span{transition:none}}
 </style>
@@ -72,6 +78,17 @@ button.go{background:var(--water);border-color:var(--water)}
 <div id="hint" hidden>W A S D or arrows to move · drag to look · Q / E down / up · Shift faster</div>
 <div id="stick" hidden><i></i></div>
 <div id="fault" hidden></div>
+<div id="boot" role="status" aria-live="polite"><div><b id="boot-t">Loading the world</b><span id="boot-s">Starting…</span><i><u id="boot-bar"></u></i></div></div>
+<script>
+// before any module runs: if the viewer cannot start, say so instead of a black screen
+(function () {
+  var s = document.getElementById('boot-s');
+  window.__bootFail = function (m) { var b = document.getElementById('boot'); if (b) { b.classList.add('bad'); document.getElementById('boot-t').textContent = 'This viewer could not start'; s.textContent = m; } };
+  if (!(HTMLScriptElement.supports && HTMLScriptElement.supports('importmap'))) window.__bootFail('This browser is too old for it. Open it in a current Chrome, Firefox or Edge, or Safari 16.4 or newer.');
+  addEventListener('error', function (e) { if (!window.__ready && e.message) window.__bootFail(e.message); });
+  setTimeout(function () { if (!window.__ready && !document.getElementById('boot').classList.contains('bad')) s.textContent = 'Still loading. A slow connection takes a minute; the first place is about 15 MB.'; }, 20000);
+})();
+</script>
 <audio id="voice" preload="auto"></audio>
 
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/","@sparkjsdev/spark":"https://cdn.jsdelivr.net/npm/@sparkjsdev/spark@2.4.0/dist/spark.module.js"}}</script>
@@ -213,10 +230,17 @@ function poseBodies(p, t) {
 }
 
 // files travel as base64 text in parts (artifacts serve only web types); join and decode here
-async function raw(url) { try { const r = await fetch(url); if (!r.ok || /text\/html/.test(r.headers.get('content-type') || '')) return null; const b = new Uint8Array(await r.arrayBuffer()); return b.length > 1024 ? b : null; } catch { return null; } }
+async function raw(url) { try { const r = await fetch(url); if (!r.ok || /text\/html/.test(r.headers.get('content-type') || '')) return null; const b = await readWithProgress(r, 'Loading the world'); return b.length > 1024 ? b : null; } catch { return null; } }
 async function fileOf(p, kind) { return (p.raw && p.raw[kind] && await raw(p.raw[kind])) || bytes(p[kind]); }   // the original file where it is served (GitHub Pages), else the text copy
+const boot = (msg, frac) => { const s = document.getElementById('boot-s'); if (s && msg) s.textContent = msg; if (frac !== undefined) document.getElementById('boot-bar').style.width = Math.max(4, Math.min(100, frac * 100)) + '%'; };
+async function readWithProgress(r, label) {   // stream a response, reporting how much has arrived
+  const total = +r.headers.get('content-length') || 0; if (!r.body || !total) return new Uint8Array(await r.arrayBuffer());
+  const rd = r.body.getReader(), parts = []; let got = 0;
+  for (;;) { const { done, value } = await rd.read(); if (done) break; parts.push(value); got += value.length; if (!window.__ready) boot(`${label} · ${(got / 1e6).toFixed(1)} of ${(total / 1e6).toFixed(1)} MB`, got / total); }
+  const out = new Uint8Array(got); let o = 0; for (const p of parts) { out.set(p, o); o += p.length; } return out;
+}
 async function bytes(parts) {
-  const txt = (await Promise.all([].concat(parts).map(p => fetch(p).then(r => { if (!r.ok) throw new Error(p + ' ' + r.status); return r.text(); })))).join('').trim();
+  const txt = (await Promise.all([].concat(parts).map(p => fetch(p).then(async r => { if (!r.ok) throw new Error(p + ' ' + r.status); return new TextDecoder().decode(await readWithProgress(r, 'Loading the world')); })))).join('').trim();
   if (Uint8Array.fromBase64) return Uint8Array.fromBase64(txt);
   const bin = atob(txt), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u;
 }
@@ -301,11 +325,14 @@ async function openReel(id) {
   const r = R[id] || R.ride || Object.values(R)[0]; if (reel === r) return;
   if (playing) setPlay(false); setDrive(false); reel = r; tPaused = 0; cur = null; lineShown = -1;
   for (const [id, x] of Object.entries(R)) $('r-' + id).setAttribute('aria-current', x === r ? 'page' : 'false');
+  if (r.bodiesFile && !r.bodiesLoaded) { try { const B = await fetch(r.bodiesFile).then(x => x.json()); for (const p of r.places) if (B[p.name]) p.bodies = B[p.name]; } catch (e) { console.warn('bodies', e); } r.bodiesLoaded = true; }
   for (const p of r.places) if (p.bodies && p.bodies.length && !p.bodyObj) makeBodies(p);
   $('about').textContent = r.about; voice.src = r.audio; W = r.words ? await fetch(r.words).then(x => x.json()) : []; $('words').innerHTML = '';
   $('seek').querySelectorAll('i').forEach(i => i.remove()); $('seek').setAttribute('aria-valuemax', r.end.toFixed(0));
   for (const p of r.places) if (p.t0 > 0) { const i = document.createElement('i'); i.style.left = (p.t0 / r.end * 100) + '%'; $('seek').appendChild(i); }
   label(); enter(r.places[0]);
+  boot('Loading ' + r.places[0].title.toLowerCase(), .05);
+  need(r.places[0], 'lidar').then(() => { show(); document.getElementById('boot').classList.add('done'); });
   for (const p of r.places) need(p, 'lidar').then(show);   // every place's LiDAR first: it is light
   for (const p of r.places) await need(p, 'splat'); show();
 }
@@ -364,5 +391,5 @@ renderer.setAnimationLoop(() => {
   renderer.render(scene, camera);
 });
 try { await openReel(location.hash.slice(1) || Object.keys(R)[0]); window.__ready = true; }
-catch (e) { fault('A file could not be loaded. Reload the page to try again.'); console.error(e); }
+catch (e) { window.__bootFail ? window.__bootFail('A file could not be loaded (' + (e.message || e) + '). Reload the page to try again.') : fault('A file could not be loaded. Reload the page to try again.'); console.error(e); }
 </script>
