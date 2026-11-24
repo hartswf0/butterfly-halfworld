@@ -78,6 +78,7 @@ button.go{background:var(--water);border-color:var(--water)}
 <script type="module">
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import * as SkeletonUtils from 'three/addons/utils/SkeletonUtils.js';
 import { SparkRenderer, SplatMesh } from '@sparkjsdev/spark';
 const $ = id => document.getElementById(id);
 const fault = m => { $('fault').hidden = false; $('fault').textContent = m; };
@@ -147,10 +148,53 @@ function poseSolid(p, ps) {
   }
   for (const [m, n] of [[S.limbs, nl], [S.heads, nh], [S.torsos, nt]]) { m.count = n; m.instanceMatrix.needsUpdate = true; if (m.instanceColor) m.instanceColor.needsUpdate = true; }
 }
+// Figure: Anny (CC0, 104-bone rigged human, from make-photo's motion pipeline) on every tracked body.
+// Placed at the hips, turned across the shoulders, scaled to the tracked height; each limb bone is aimed at its tracked joint.
+let annyBase = null, annyLoading = null; const FIG = [];
+const CHAINS = [['spine05', 'neck01', 'sh'], ['upperarm01.L', 'lowerarm01.L', 7], ['lowerarm01.L', 'wrist.L', 62], ['upperarm01.R', 'lowerarm01.R', 8], ['lowerarm01.R', 'wrist.R', 41],
+  ['upperleg01.L', 'lowerleg01.L', 11], ['lowerleg01.L', 'foot.L', 13], ['upperleg01.R', 'lowerleg01.R', 12], ['lowerleg01.R', 'foot.R', 14], ['neck01', 'head', 0]];
+async function loadAnny() {
+  if (annyBase || annyLoading) return annyLoading;
+  annyLoading = (async () => {
+    const b = (await raw('figures/anny_adult_m.glb')) || await bytes(['data/anny_adult_m.glb.txt']);
+    annyBase = (await new GLTFLoader().parseAsync(b.slice().buffer, '')).scene;
+  })().catch(e => console.warn('figure', e)); return annyLoading;
+}
+function figure(i) {
+  if (FIG[i]) return FIG[i];
+  const o = SkeletonUtils.clone(annyBase), bones = new Map(), rest = new Map();
+  const c = new THREE.Color().setHSL(.055 + ((i * .37) % 1) * .03, .45, .085 + ((i * .61) % 1) * .05);   // deep brown skin, a little different per person
+  o.traverse(n => { if (n.isBone) { bones.set(n.name.replace(/[.\s]/g, ''), n); rest.set(n.name.replace(/[.\s]/g, ''), n.quaternion.clone()); } if (n.isMesh) { n.material = new THREE.MeshStandardMaterial({ color: c, roughness: .5, metalness: .05, emissive: 0x06080e }); n.frustumCulled = false; } });
+  scene.add(o); return (FIG[i] = { o, bones, rest });
+}
+const _w1 = new THREE.Vector3(), _w2 = new THREE.Vector3(), _qa = new THREE.Quaternion(), _qb = new THREE.Quaternion(), _qp = new THREE.Quaternion();
+function aim(F, bone, child, target) {   // turn one bone so its child lands on the tracked joint's direction
+  const b = F.bones.get(bone.replace(/\./g, '')), c = F.bones.get(child.replace(/\./g, '')); if (!b || !c) return;   // the loader strips dots from bone names
+  b.getWorldPosition(_w1); c.getWorldPosition(_w2); const cur = _w2.sub(_w1).normalize(), want = target.clone().sub(_w1).normalize(); if (!isFinite(want.x)) return;
+  _qa.setFromUnitVectors(cur, want); b.getWorldQuaternion(_qb); _qb.premultiply(_qa); b.parent.getWorldQuaternion(_qp); b.quaternion.copy(_qp.invert().multiply(_qb)); b.updateMatrixWorld(true);
+}
+function poseFigures(p, ps) {
+  if (!annyBase) { loadAnny().then(show); return; }
+  let n = 0;
+  for (const b of ps) {
+    const V = k => new THREE.Vector3(...b.X(k)); if (!(b.ok(5) && b.ok(6) && b.ok(9) && b.ok(10))) continue;
+    const F = figure(n++); F.o.visible = true; for (const [k, q] of F.rest) F.bones.get(k).quaternion.copy(q);
+    const hip = V(9).add(V(10)).multiplyScalar(.5), sh = V(5).add(V(6)).multiplyScalar(.5), up = sh.clone().sub(hip).normalize();
+    const across = V(9).sub(V(10)).normalize(), fwd = new THREE.Vector3().crossVectors(across, up).normalize(); across.crossVectors(up, fwd);
+    _m.makeBasis(across, up, fwd); F.o.quaternion.setFromRotationMatrix(_m);
+    const tall = b.ok(0) && b.ok(13) ? V(0).distanceTo(V(13)) / .9 : sh.distanceTo(hip) / .3;   // nose to ankle is about nine tenths of stature
+    F.o.scale.setScalar(tall / 1.725); F.o.position.copy(hip); F.o.updateMatrixWorld(true);
+    F.bones.get('root').getWorldPosition(_w1); F.o.position.add(hip.clone().sub(_w1)); F.o.updateMatrixWorld(true);   // pelvis exactly on the tracked hips
+    for (const [bn, cn, j] of CHAINS) { const tgt = j === 'sh' ? sh : (b.ok(j) ? V(j) : null); if (tgt) aim(F, bn, cn, tgt); }
+  }
+  for (let i = n; i < FIG.length; i++) FIG[i].o.visible = false;
+}
 function poseBodies(p, t) {
   if (!p.bodyObj) return; const ps = people(p, t);
+  for (const F of FIG) if (bstyle !== 'figure' || p !== cur) F.o.visible = false;
+  if (bstyle === 'figure') { p.bodyObj.o.visible = false; if (p.solid) p.solid.o.visible = false; if (p === cur) poseFigures(p, ps); return; }
   p.bodyObj.o.visible = bstyle === 'skeleton' && p === cur; if (p.solid) p.solid.o.visible = bstyle !== 'skeleton' && p === cur;
-  if (bstyle !== 'skeleton') { poseSolid(p, ps); return; }
+  if (bstyle !== 'skeleton') { if (p.solid) p.solid.o.visible = p === cur; poseSolid(p, ps); return; }
   const F = p.bodies; if (!F || !F.length) return; let i = 0; while (i < F.length - 2 && t > F[i + 1].t) i++;
   const A = F[i], B = F[Math.min(i + 1, F.length - 1)], a = THREE.MathUtils.clamp((t - A.t) / Math.max(1e-3, B.t - A.t), 0, 1);
   const L = p.bodyObj.lines.geometry.attributes.position.array, J = p.bodyObj.dots.geometry.attributes.position.array; let nl = 0, nj = 0;
@@ -204,7 +248,7 @@ function need(p, m) {
   return pending.get(key);
 }
 function show() {   // the one object that is true now: this place, seen this way
-  for (const r of Object.values(R)) for (const p of r.places) { for (const m of ['lidar', 'splat', 'mesh']) if (p[m + 'Obj']) p[m + 'Obj'].visible = p === cur && m === mode; if (p.bodyObj) p.bodyObj.o.visible = p === cur && bstyle === 'skeleton'; if (p.solid) p.solid.o.visible = p === cur && bstyle !== 'skeleton'; }
+  for (const r of Object.values(R)) for (const p of r.places) { for (const m of ['lidar', 'splat', 'mesh']) if (p[m + 'Obj']) p[m + 'Obj'].visible = p === cur && m === mode; if (p.bodyObj) p.bodyObj.o.visible = p === cur && bstyle === 'skeleton'; if (p.solid) p.solid.o.visible = p === cur && (bstyle === 'mannequin' || bstyle === 'blocks'); }
   const has = cur[mode + 'Obj'];
   $('note').textContent = has ? '' : cur[mode] ? `Loading ${cur.title.toLowerCase()} as ${mode === 'splat' ? 'splats' : mode}…` : `No ${mode} for this place`;
   document.querySelectorAll('.see button').forEach(b => { b.setAttribute('aria-pressed', b.dataset.mode === mode); b.disabled = !cur[b.dataset.mode] && !cur[b.dataset.mode + 'Obj']; });
@@ -272,8 +316,8 @@ let drag = null, pinch = 0, drive = false; const ptrs = new Map(), keys = {}, st
 const grab = () => { if (!look) { const E = new THREE.Euler().setFromQuaternion(camera.quaternion, 'YXZ'); look = { yaw: E.y, pitch: E.x, pos: camera.position.clone() }; } setDrive(true); };
 function setDrive(d) { drive = d; if (!d) look = null; $('drive').setAttribute('aria-pressed', d); $('drive').textContent = d ? 'Follow' : 'Drive'; $('hint').hidden = !d || matchMedia('(pointer: coarse)').matches; ghost.visible = d; }
 $('drive').onclick = () => { if (drive) setDrive(false); else grab(); };
-const STY = ['skeleton', 'mannequin', 'blocks'];
-$('bstyle').onclick = () => { bstyle = STY[(STY.indexOf(bstyle) + 1) % 3]; $('bstyle').textContent = bstyle[0].toUpperCase() + bstyle.slice(1); show(); };
+const STY = ['skeleton', 'mannequin', 'blocks', 'figure'];
+$('bstyle').onclick = () => { bstyle = STY[(STY.indexOf(bstyle) + 1) % STY.length]; if (bstyle === 'figure') loadAnny(); $('bstyle').textContent = bstyle[0].toUpperCase() + bstyle.slice(1); show(); };
 addEventListener('keydown', e => { if (e.target instanceof HTMLInputElement) return; const k = e.key.toLowerCase(); if ('wasdqe'.includes(k) || k.startsWith('arrow')) { keys[k] = 1; if (!drive) grab(); } if (k === 'shift') keys.shift = 1; });
 addEventListener('keyup', e => { const k = e.key.toLowerCase(); keys[k] = 0; if (k === 'shift') keys.shift = 0; });
 const scale = () => { const m = cur && cur.lidarMeta; return m ? Math.max(1, Math.hypot(m.hi[0] - m.lo[0], m.hi[2] - m.lo[2])) : 20; };
@@ -305,7 +349,7 @@ addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeight); ca
   for (const r of Object.values(R)) for (const p of r.places) if (p.lidarObj) p.lidarObj.material.uniforms.px.value = innerHeight; });
 window.__at = t => { tPaused = t; if (!drive) look = null; };   // for checks
 window.__drive = (dx, dz, yaw) => { grab(); look.yaw += yaw || 0; look.pos.addScaledVector(new THREE.Vector3(1, 0, 0).applyAxisAngle(UP, look.yaw), dx * scale() / 10).addScaledVector(new THREE.Vector3(0, 0, -1).applyAxisAngle(UP, look.yaw), dz * scale() / 10); };
-window.__style = s => { bstyle = s; $('bstyle').textContent = s[0].toUpperCase() + s.slice(1); show(); };
+window.__style = s => { bstyle = s; if (s === 'figure') loadAnny(); $('bstyle').textContent = s[0].toUpperCase() + s.slice(1); show(); };
 window.__dbg = () => ({ cam: camera.position.toArray().map(v => +v.toFixed(2)), scale: +scale().toFixed(1), drive, style: bstyle, solids: cur && cur.solid ? [cur.solid.limbs.count, cur.solid.torsos.count] : null, lidar: !!(cur && cur.lidarObj && cur.lidarObj.visible) });
 window.__mode = m => { mode = m; need(cur, m).then(show); show(); };
 
