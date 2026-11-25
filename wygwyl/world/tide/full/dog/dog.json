@@ -1,0 +1,17 @@
+{
+ "about": "My dog, my best friend for three years, from college until I joined the army. One Genie 4 session. First person as the dog: the camera is the dog's eyes, low, its snout and paws at the bottom of the frame, so the man it loves is always a full-body figure in the landscape. Kurosawa's staging (deep wide frames, small figures, wind and weather doing the acting) with Deakins's light (backlit silhouettes, layered mist, one warm light far away).",
+ "seed_image": "full/dog/seed.jpg",
+ "seed_prompt": "full/dog/prompt.txt",
+ "seconds": 42,
+ "hold_w": [19.0, 25.5],
+ "keys": [[33.0, 41.0, "key_w"]],
+ "world": "First-person view of a dog: the camera is a black-and-tan German Shepherd's eyes, sixty centimetres above the wet grass, its snout and front paws at the bottom of the frame; it never rises to human height and never cuts. Dawn in a remote mountain valley by a still lake. Thirty metres ahead on the stony shore stands its best friend: a lone young Black man in his early twenties, full body, back to us, a dark silhouette against bright mist, in a dark wool peacoat over a grey hooded college sweatshirt, jeans and work boots, an olive army duffel bag at his feet. On the left a small secluded log cabin, dark and empty: his family is gone. Across the lake under steep pine mountains, a small town with a church steeple and a few warm lights, half lost in mist. Wide, deep-focus, still, like Akira Kurosawa; soft backlight, layered mist and restrained cool colour like Roger Deakins. Wind in the grass, birds, lapping water.",
+ "beats": [
+  [2.0, "Mist drifts slowly across the lake; the man stands perfectly still at the water's edge, a dark silhouette, his back to the dog."],
+  [8.0, "Wind rises off the lake: the tall grass bends in waves and the mist tears open, revealing the small town and its church steeple across the water."],
+  [14.0, "The man turns his head and looks back at the empty cabin, its dark windows and the cold porch; nobody is there."],
+  [19.5, "The man turns around, kneels on one knee in the grass and opens his arms; the dog runs to him across the wet grass."],
+  [26.0, "Close in the dog's view: the man's hands hold the dog's head, his face in silhouette against the pale sky, breath steaming."],
+  [32.0, "The man stands, lifts the olive army duffel onto his shoulder and walks away along the shore toward the distant town; the dog follows at his side, both small full-body silhouettes in the mist."]
+ ]
+}
