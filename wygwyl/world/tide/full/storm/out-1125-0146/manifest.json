@@ -1,0 +1,101 @@
+{
+ "spec": {
+  "seed_image": "full/storm/seed2.jpg",
+  "seconds": 34,
+  "hold_w": [
+   0.5,
+   33.0
+  ],
+  "world": "Third-person action game, camera following just behind and above the rider the whole time. A young Black Ethiopian man in his twenties gallops a grey horse across a vast desert of red sand and black volcanic rock in the medieval Ethiopian highlands, around the twelfth century. He wears a white cotton shamma cloak with a woven red border flying behind him, a white head wrap, a leather round shield and a long spear. Ahead, a salt caravan of camels led by Black Ethiopian men in white cotton, a small rock-hewn stone church and round thatched huts on a ridge. Straight ahead a colossal red sandstorm, a haboob wall of dust hundreds of metres high, rolls toward him and is about to swallow the desert. Golden afternoon, wide Leone landscape, dust from the hooves, fine grain.",
+  "beats": [
+   [
+    1.5,
+    "The colossal sandstorm crashes over the caravan and races at the rider; the dust wall swallows the camels one by one."
+   ],
+   [
+    5.5,
+    "The rider gallops into the sandstorm: swirling red dust fills the entire frame, the sun is gone, only his white cloak shows in the orange haze."
+   ],
+   [
+    10.0,
+    "Deep inside the storm the dust glows; tall shining shapes loom faintly through it ahead of the rider."
+   ],
+   [
+    14.0,
+    "The sandstorm thins and blows past behind the rider. The dust clears to reveal the far future: gleaming silver towers, glass domes over a green oasis city, fields of solar mirrors, a train gliding on tall pylons across the plain."
+   ],
+   [
+    19.0,
+    "Clear bright sky now. The rider on his grey horse gallops toward an Afrofuturist Ethiopian city: white and copper towers carved like rock-hewn churches, banners woven with tibeb patterns, green terraces with water channels."
+   ],
+   [
+    25.0,
+    "Black Ethiopian people in white cotton and silver cloth wave from the terraces as the rider arrives; drones carry water over the green fields."
+   ]
+  ]
+ },
+ "events_sent": [
+  {
+   "at": 0.5,
+   "key": "down"
+  },
+  {
+   "at": 1.5,
+   "text": "The colossal sandstorm crashes over the caravan and races at the rider; the dust wall swallows the camels one by one."
+  },
+  {
+   "at": 5.5,
+   "text": "The rider gallops into the sandstorm: swirling red dust fills the entire frame, the sun is gone, only his white cloak shows in the orange haze."
+  },
+  {
+   "at": 10.0,
+   "text": "Deep inside the storm the dust glows; tall shining shapes loom faintly through it ahead of the rider."
+  },
+  {
+   "at": 14.0,
+   "text": "The sandstorm thins and blows past behind the rider. The dust clears to reveal the far future: gleaming silver towers, glass domes over a green oasis city, fields of solar mirrors, a train gliding on tall pylons across the plain."
+  },
+  {
+   "at": 19.0,
+   "text": "Clear bright sky now. The rider on his grey horse gallops toward an Afrofuturist Ethiopian city: white and copper towers carved like rock-hewn churches, banners woven with tibeb patterns, green terraces with water channels."
+  },
+  {
+   "at": 25.0,
+   "text": "Black Ethiopian people in white cotton and silver cloth wave from the terraces as the rider arrives; drones carry water over the green fields."
+  },
+  {
+   "at": 33.0,
+   "key": "up"
+  },
+  {
+   "at": null,
+   "server": {
+    "usage": {
+     "total_tokens": 197228,
+     "total_input_tokens": 428,
+     "input_tokens_by_modality": [
+      {
+       "modality": "text",
+       "tokens": 362
+      },
+      {
+       "modality": "image",
+       "tokens": 66
+      }
+     ],
+     "total_output_tokens": 196800,
+     "output_tokens_by_modality": [
+      {
+       "modality": "video",
+       "tokens": 196800
+      }
+     ]
+    },
+    "event_type": "interaction.completed"
+   }
+  }
+ ],
+ "frames": 820,
+ "seconds": 35.6,
+ "fps": 23.01
+}

@@ -1,0 +1,13 @@
+{
+ "seed_image": "full/storm/seed.jpg",
+ "seconds": 32,
+ "hold_w": [1.0, 31.0],
+ "world": "Third-person action game, camera following just behind and above the rider the whole time. A young Black Ethiopian man in his twenties gallops a grey horse across a vast desert of red sand and black volcanic rock in the medieval Ethiopian highlands, around the twelfth century. He wears a white cotton shamma cloak with a woven red border flying behind him, a white head wrap, a leather round shield and a long spear. Ahead, a salt caravan of camels led by Black Ethiopian men in white cotton, a small rock-hewn stone church and round thatched huts on a ridge. On the horizon a low brown wall of dust is rising. Golden afternoon, wide Leone landscape, dust from the hooves, fine grain.",
+ "beats": [
+  [4.0, "A colossal red sandstorm, a wall of dust hundreds of metres high, rolls across the desert toward the rider, swallowing the horizon."],
+  [9.0, "The sandstorm sweeps over the rider and the caravan: swirling red dust fills the whole sky and everything vanishes into orange haze except the rider's white cloak."],
+  [14.0, "Deep inside the storm, tall shapes glimmer faintly through the dust ahead of the rider."],
+  [18.0, "The sandstorm passes and the dust clears: the desert is now the far future. Gleaming silver towers, glass domes over a green oasis city, fields of solar mirrors, a train gliding on tall pylons across the plain; the rider gallops on toward it."],
+  [24.0, "An Afrofuturist Ethiopian city rises ahead: white and copper towers carved like rock-hewn churches, banners woven with tibeb patterns, Black Ethiopian people in white cotton and silver cloth on wide terraces."]
+ ]
+}

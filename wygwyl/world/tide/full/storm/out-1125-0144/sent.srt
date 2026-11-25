@@ -1,0 +1,19 @@
+1
+00:00:04,000 --> 00:00:09,000
+sent 4.0s: A colossal red sandstorm, a wall of dust hundreds of metres high, rolls across the desert toward the rider, swallowing the horizon.
+
+2
+00:00:09,000 --> 00:00:14,000
+sent 9.0s: The sandstorm sweeps over the rider and the caravan: swirling red dust fills the whole sky and everything vanishes into orange haze except the rider's white cloak.
+
+3
+00:00:14,000 --> 00:00:18,000
+sent 14.0s: Deep inside the storm, tall shapes glimmer faintly through the dust ahead of the rider.
+
+4
+00:00:18,000 --> 00:00:24,000
+sent 18.0s: The sandstorm passes and the dust clears: the desert is now the far future. Gleaming silver towers, glass domes over a green oasis city, fields of solar mirrors, a train gliding on tall pylons across the plain; the rider gallops on toward it.
+
+5
+00:00:24,000 --> 00:00:33,583
+sent 24.0s: An Afrofuturist Ethiopian city rises ahead: white and copper towers carved like rock-hewn churches, banners woven with tibeb patterns, Black Ethiopian people in white cotton and silver cloth on wide terraces.
