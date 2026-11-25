@@ -1,0 +1,69 @@
+{
+ "frames": [
+  {
+   "line": 0,
+   "seen": "A man in black clothing and a white shawl walks toward a stone doorway from an arid landscape alongside companions and pack donkeys.",
+   "enacts": 1,
+   "changed": false,
+   "man": true
+  },
+  {
+   "line": 1,
+   "seen": "The man steps further into the shadowed stone doorway as the others follow behind him.",
+   "enacts": 1,
+   "changed": false,
+   "man": true
+  },
+  {
+   "line": 2,
+   "seen": "Inside the stone room, the man holds glowing hourglasses with companions standing nearby.",
+   "enacts": 2,
+   "changed": false,
+   "man": true
+  },
+  {
+   "line": 3,
+   "seen": "The man in black holds two hourglasses and a cane while facing the camera inside the rustic stone room.",
+   "enacts": 0,
+   "changed": false,
+   "man": true
+  },
+  {
+   "line": 4,
+   "seen": "The man holds his hourglasses as another man smiles directly behind him inside the stone room.",
+   "enacts": 2,
+   "changed": false,
+   "man": true
+  },
+  {
+   "line": 5,
+   "seen": "The man stands holding hourglasses in the sparsely furnished stone room with wooden chairs and tables.",
+   "enacts": 0,
+   "changed": false,
+   "man": true
+  },
+  {
+   "line": 6,
+   "seen": "The man looks forward with a somber expression while holding his hourglasses and walking stick.",
+   "enacts": 0,
+   "changed": false,
+   "man": true
+  },
+  {
+   "line": 7,
+   "seen": "The man and his companion smile inside the stone room against a starry night sky visible through the doorway.",
+   "enacts": 2,
+   "changed": false,
+   "man": true
+  },
+  {
+   "line": 8,
+   "seen": "The man stands in the room near a woman by a table and a round football resting on the floor.",
+   "enacts": 2,
+   "changed": false,
+   "man": true
+  }
+ ],
+ "overall": "The world fails to meaningfully transform in response to the spoken poetry, remaining confined to the interior and threshold of a single stone house that merely shifts from day to night. Its biggest weakness is the static, repetitive staging that substitutes literal props like hourglasses and a ball for dynamic visual metamorphosis.",
+ "critic_model": "gemini-3.8-flash"
+}

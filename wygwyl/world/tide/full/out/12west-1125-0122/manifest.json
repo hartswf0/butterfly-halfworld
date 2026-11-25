@@ -1,0 +1,143 @@
+{
+ "poem": "12",
+ "title": "Reunion",
+ "model": "genie-4",
+ "seed_image": "full/seeds12west/seed.jpg",
+ "seed_image_sha256": "befe76e5acdd68d728f08ad104b211f5ca78c0383d514689039ad22019e3e4ec",
+ "seed_why": "Made for this take with gemini-3-pro-image (prompt in full/seeds12west/prompt.txt), because Genie builds the shot from the picture. Candidate b of two: the darker doorway gives the western's silhouette frame, and the low sun lets the night in line 6 arrive.",
+ "seed_text": "An Ethiopian science-fiction western in the Tigray highlands, near-future: stone farmhouses, flat-topped amba mesas and canyons, donkeys carrying yellow jerrycans of water, a silver fog-harvesting tower on a mesa. Everyone here is Black and Ethiopian. Shot like Sergio Leone (wide anamorphic landscapes, long silences, slow push-ins, faces and hands) crossed with Haile Gerima (real farm life, elders, earth, dignity, natural light). PLACE. Late afternoon turning to sunset. We are inside a dark stone farmhouse, looking out through its rough doorway at a red-earth plain, amba mesas on the horizon, one sycamore tree on a ridge, a tall silver fog-harvesting tower with mesh sails on the right.\n\nPEOPLE. Four Black Ethiopian men in their fifties, old friends coming home, walk toward the doorway through the dust leading grey donkeys loaded with yellow plastic jerrycans of water. The poet walks in front: close-cropped greying hair, short beard, black long-sleeved top, black trousers, a white cotton gabi shawl over one shoulder, a wooden staff. Beside him: a man in a rust-orange corduroy jacket with a grey tee; a bald man in a sky-blue shirt; a man in a green football jersey and a grey flat cap. Each has a white gabi shawl. In the dark foreground at the left of the doorway, an elderly Black Ethiopian woman in her seventies in a white cotton netela with an embroidered tibeb border stands with one hand on the doorframe, waiting for them.\n\nWHAT HAPPENS. They come slowly, laughing, shoulders bumping, the donkeys' bells clinking. The water sloshes in the jerrycans. The light goes from gold to copper to blue night over the minute.\n\nCAMERA. Held still inside the doorway at standing height, a long patient frame, the doorway's black stone edges always around the bright land. Later it pushes slowly forward toward the men.\n\nLIGHT. Low sun behind them, long shadows toward us, dust glowing, deep brown skin with full tonal range, warm grade, fine grain.\n\nSOUND. Wind, donkey bells, footsteps on stony earth, distant laughter. Leave room for one man's speaking voice.",
+ "events_sent": [
+  {
+   "at": 1.0,
+   "text": "Far off in the sun the four men throw their heads back and laugh out loud; a donkey brays.",
+   "for_word": "laughter",
+   "word_at": 4.5,
+   "line": 0
+  },
+  {
+   "at": 6.9,
+   "text": "The elder woman in the white netela steps into the doorway light, her eyes squinting into the glare, her hand still on the stone.",
+   "for_word": "overheard",
+   "word_at": 10.4,
+   "line": 1
+  },
+  {
+   "at": 10.9,
+   "text": "A dust storm rolls over the plain and the sun turns copper; the land darkens.",
+   "for_word": "darkness",
+   "word_at": 14.1,
+   "line": 1
+  },
+  {
+   "at": 14.9,
+   "text": "Inside the house behind the doorway: a row of empty wooden chairs and a cold clay jebena coffee pot.",
+   "for_word": "empty",
+   "word_at": 17.9,
+   "line": 2
+  },
+  {
+   "at": 19.7,
+   "text": "Each man lifts a small glass hourglass whose sand glows like burning embers in his hand.",
+   "for_word": "burning",
+   "word_at": 23.2,
+   "line": 2
+  },
+  {
+   "at": 24.3,
+   "text": "Wind moves through the lone sycamore tree on the ridge; its leaves shine.",
+   "for_word": "tree",
+   "word_at": 27.8,
+   "line": 3
+  },
+  {
+   "at": 29.7,
+   "text": "The four men stop in a line facing the house, a long silent western standoff in the dust, then break into an embrace.",
+   "for_word": "brotherhood",
+   "word_at": 33.2,
+   "line": 4
+  },
+  {
+   "at": 30.2,
+   "key": "key_down"
+  },
+  {
+   "at": 33.4,
+   "key": "key_up"
+  },
+  {
+   "at": 40.4,
+   "text": "One man rests his ear on his brother's chest to listen to his heart.",
+   "for_word": "ears",
+   "word_at": 43.9,
+   "line": 5
+  },
+  {
+   "at": 44.6,
+   "key": "key_down"
+  },
+  {
+   "at": 45.5,
+   "text": "Beyond them the hilltops and canyons of the mesas glow; blinding light flares from the silver fog tower.",
+   "for_word": "hilltops",
+   "word_at": 49.0,
+   "line": 6
+  },
+  {
+   "at": 48.4,
+   "key": "key_up"
+  },
+  {
+   "at": 50.3,
+   "text": "Night falls fast: stars over the mesas, the fog tower glowing blue, a fire lit in front of the house.",
+   "for_word": "nights",
+   "word_at": 53.8,
+   "line": 6
+  },
+  {
+   "at": 55.1,
+   "text": "Around the fire they laugh together while the elder woman pours coffee from the jebena.",
+   "for_word": "laughter",
+   "word_at": 58.6,
+   "line": 7
+  },
+  {
+   "at": 59.1,
+   "text": "A worn football is kicked across the dirt yard in the firelight; a donkey watches.",
+   "for_word": "football",
+   "word_at": 60.1,
+   "line": 8
+  },
+  {
+   "at": 63.1,
+   "text": "The men walk in through the doorway past the elder woman, home.",
+   "for_word": "home",
+   "word_at": 63.4,
+   "line": 8
+  }
+ ],
+ "frames": 1584,
+ "seconds": 67.1,
+ "delivered_fps": 23.61,
+ "usage": {
+  "total_tokens": 380957,
+  "total_input_tokens": 797,
+  "input_tokens_by_modality": [
+   {
+    "modality": "text",
+    "tokens": 731
+   },
+   {
+    "modality": "image",
+    "tokens": 66
+   }
+  ],
+  "total_output_tokens": 380160,
+  "output_tokens_by_modality": [
+   {
+    "modality": "video",
+    "tokens": 380160
+   }
+  ]
+ },
+ "reading": "audio/12_Reunion_mixdown_RY_250626.mp3"
+}

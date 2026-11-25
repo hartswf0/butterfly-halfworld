@@ -10,7 +10,7 @@ import asyncio, base64, hashlib, io, json, os, re, shutil, ssl, subprocess, sys,
 from PIL import Image
 T = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); KEY = os.environ['GEMINI_API_KEY']; LEAD = 3.5
 URL = 'wss://generativelanguage.googleapis.com/v1beta/interactions/live'; CTX = ssl.create_default_context(cafile=os.environ.get('SSL_CERT_FILE'))
-num = sys.argv[1]; S = json.load(open(f'{T}/full/{num}.json')); P = json.load(open(T + '/tide.json'))['poems'][int(num) - 1]; L = P['lines']
+num = sys.argv[1]; SPEC = sys.argv[2] if len(sys.argv) > 2 else num; S = json.load(open(f'{T}/full/{SPEC}.json')); P = json.load(open(T + '/tide.json'))['poems'][int(num) - 1]; L = P['lines']
 VOICE = os.path.normpath(os.path.join(T, '../..', P['audio'])); SECS = min(116.0, P['dur'] + 2)
 def stage():
     acts = []; last = -9
@@ -18,6 +18,7 @@ def stage():
         ws = [w for w in L[c['line']]['words'] if re.sub(r'\W', '', w[0].lower()).startswith(c['word'])]; land = ws[0][1] if ws else L[c['line']]['t0']
         t = max(0.3, land - LEAD, last + 4.0); last = t; acts.append(dict(t=round(t, 1), land=round(land, 1), word=c['word'], line=c['line'], say=c['send']))
     for i, l in enumerate(L[:-1] if S.get('walk', True) else []): acts += [dict(t=l['t0'] + .2, key='key_down'), dict(t=l['t0'] + .55 * (l['t1'] - l['t0']), key='key_up')]
+    for d, u in S.get('keys', []): acts += [dict(t=d, key='key_down'), dict(t=u, key='key_up')]   # held pushes at set seconds (a slow dolly in)
     return sorted(acts, key=lambda a: a['t'])
 async def take(out):
     img = open(f'{T}/{S["seed_image"]}', 'rb').read() if S.get('seed_image') else b''
@@ -94,7 +95,7 @@ def critic(fr, dur, out):
             json.dump(v, open(out + '/critic.json', 'w'), indent=1, ensure_ascii=False); return v
         except Exception as e: err = f'{type(e).__name__} {str(e)[:100]}'; time.sleep(4)
     return dict(frames=[], overall='critic unavailable: ' + err)
-out = f"{T}/full/out/{num}-{time.strftime('%m%d-%H%M')}"; os.makedirs(out); fr, dur, cues = asyncio.run(take(out))
+out = f"{T}/full/out/{SPEC}-{time.strftime('%m%d-%H%M')}"; os.makedirs(out); fr, dur, cues = asyncio.run(take(out))
 print(f"{len(fr)} frames, {dur:.1f}s, {len(cues)} lines sent"); v = critic(fr, dur, out)
 subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', out + '/film.mp4', '-vf', f'fps=14/{dur:.2f},scale=320:180,tile=7x2', '-frames:v', '1', out + '/sheet.jpg'])
 shutil.rmtree(out + '/f'); os.remove(out + '/w.pcm')

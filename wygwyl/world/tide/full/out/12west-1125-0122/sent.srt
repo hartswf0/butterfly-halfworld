@@ -1,0 +1,51 @@
+1
+00:00:01,000 --> 00:00:06,900
+sent 1.0s for “laughter” (4.5s): Far off in the sun the four men throw their heads back and laugh out loud; a donkey brays.
+
+2
+00:00:06,900 --> 00:00:10,900
+sent 6.9s for “overheard” (10.4s): The elder woman in the white netela steps into the doorway light, her eyes squinting into the glare, her hand still on the stone.
+
+3
+00:00:10,900 --> 00:00:14,900
+sent 10.9s for “darkness” (14.1s): A dust storm rolls over the plain and the sun turns copper; the land darkens.
+
+4
+00:00:14,900 --> 00:00:19,700
+sent 14.9s for “empty” (17.9s): Inside the house behind the doorway: a row of empty wooden chairs and a cold clay jebena coffee pot.
+
+5
+00:00:19,700 --> 00:00:24,300
+sent 19.7s for “burning” (23.2s): Each man lifts a small glass hourglass whose sand glows like burning embers in his hand.
+
+6
+00:00:24,300 --> 00:00:29,700
+sent 24.3s for “tree” (27.8s): Wind moves through the lone sycamore tree on the ridge; its leaves shine.
+
+7
+00:00:29,700 --> 00:00:40,400
+sent 29.7s for “brotherhood” (33.2s): The four men stop in a line facing the house, a long silent western standoff in the dust, then break into an embrace.
+
+8
+00:00:40,400 --> 00:00:45,500
+sent 40.4s for “ears” (43.9s): One man rests his ear on his brother's chest to listen to his heart.
+
+9
+00:00:45,500 --> 00:00:50,300
+sent 45.5s for “hilltops” (49.0s): Beyond them the hilltops and canyons of the mesas glow; blinding light flares from the silver fog tower.
+
+10
+00:00:50,300 --> 00:00:55,100
+sent 50.3s for “nights” (53.8s): Night falls fast: stars over the mesas, the fog tower glowing blue, a fire lit in front of the house.
+
+11
+00:00:55,100 --> 00:00:59,100
+sent 55.1s for “laughter” (58.6s): Around the fire they laugh together while the elder woman pours coffee from the jebena.
+
+12
+00:00:59,100 --> 00:01:03,100
+sent 59.1s for “football” (60.1s): A worn football is kicked across the dirt yard in the firelight; a donkey watches.
+
+13
+00:01:03,100 --> 00:01:07,103
+sent 63.1s for “home” (63.4s): The men walk in through the doorway past the elder woman, home.
