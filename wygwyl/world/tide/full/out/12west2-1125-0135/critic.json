@@ -1,0 +1,69 @@
+{
+ "frames": [
+  {
+   "line": 0,
+   "seen": "A person in white robes stands in a stone doorway looking out at an arid landscape with distant figures and donkeys.",
+   "enacts": 0,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 1,
+   "seen": "The camera pulls back slightly into the dark room as the robed figure continues looking out the doorway at the desert.",
+   "enacts": 1,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 2,
+   "seen": "The camera pulls further back to reveal a dark, mostly empty stone room with two chairs and a pot on the floor.",
+   "enacts": 2,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 3,
+   "seen": "Two men holding glowing hourglasses stand outside the doorway facing the person in white robes.",
+   "enacts": 1,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 4,
+   "seen": "Two men holding glowing hourglasses stand outside the doorway facing the person in white robes.",
+   "enacts": 1,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 5,
+   "seen": "Two men holding glowing hourglasses stand outside the doorway facing the person in white robes.",
+   "enacts": 0,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 6,
+   "seen": "Two men holding glowing hourglasses stand outside the doorway facing the person in white robes.",
+   "enacts": 1,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 7,
+   "seen": "Two men holding glowing hourglasses stand outside the doorway facing the person in white robes.",
+   "enacts": 0,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 8,
+   "seen": "Two men holding glowing hourglasses stand outside the doorway facing the person in white robes.",
+   "enacts": 1,
+   "changed": false,
+   "man": false
+  }
+ ],
+ "overall": "The world does not transform with the words, only pulling back slightly to reveal an interior room and introducing two men holding hourglasses before freezing completely. The biggest weakness is that the video becomes entirely static from the fourth frame onward and completely lacks the walking Black man in black clothing.",
+ "critic_model": "gemini-4-argon"
+}

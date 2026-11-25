@@ -1,0 +1,51 @@
+1
+00:00:01,000 --> 00:00:06,900
+sent 1.0s for “laughter” (4.5s): Far off on the plain the four men throw their heads back and laugh; the sound carries to her across the dust.
+
+2
+00:00:06,900 --> 00:00:10,900
+sent 6.9s for “overheard” (10.4s): The woman in the doorway lifts her hand from the stone and raises it to shade her eyes, watching them come.
+
+3
+00:00:10,900 --> 00:00:14,900
+sent 10.9s for “darkness” (14.1s): The sun sinks behind the mesas and the sky turns deep copper; long shadows race across the plain toward the house.
+
+4
+00:00:14,900 --> 00:00:19,700
+sent 14.9s for “empty” (17.9s): Behind her the dark room is still: empty wooden chairs, a cold clay jebena coffee pot on the floor.
+
+5
+00:00:19,700 --> 00:00:24,300
+sent 19.7s for “burning” (23.2s): Out on the plain each man lifts a small glass hourglass whose sand glows like burning embers in the dusk.
+
+6
+00:00:24,300 --> 00:00:29,700
+sent 24.3s for “tree” (27.8s): The men pass the lone sycamore tree; wind moves through its leaves.
+
+7
+00:00:29,700 --> 00:00:40,400
+sent 29.7s for “brotherhood” (33.2s): The four men stop in a line in the dust, a long silent western standoff facing the house, then pull each other into an embrace.
+
+8
+00:00:40,400 --> 00:00:45,500
+sent 40.4s for “ears” (43.9s): One man rests his ear on his brother's chest; the donkeys wait.
+
+9
+00:00:45,500 --> 00:00:50,300
+sent 45.5s for “hilltops” (49.0s): Beyond them the hilltops and canyons of the mesas catch the last blinding light; the silver fog tower flares.
+
+10
+00:00:50,300 --> 00:00:55,100
+sent 50.3s for “nights” (53.8s): Night falls: stars spread over the mesas, the fog tower glows soft blue, the men are lit by their glowing hourglasses.
+
+11
+00:00:55,100 --> 00:00:59,100
+sent 55.1s for “laughter” (58.6s): The men are close now, laughing; she lights a fire in a clay brazier at the doorstep.
+
+12
+00:00:59,100 --> 00:01:03,100
+sent 59.1s for “football” (60.1s): A worn football is kicked through the firelight in the yard in front of her.
+
+13
+00:01:03,100 --> 00:01:07,086
+sent 63.1s for “home” (63.4s): The men reach the doorway and she embraces the poet; they are home.

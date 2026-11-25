@@ -41,13 +41,14 @@ async def take(out):
                         fr.append((time.monotonic() - t0[0], base64.b64decode(dl['data'])))
                     elif dl.get('type') == 'audio': pcm.extend(base64.b64decode(dl['data']))
                     elif e.get('event_type') == 'interaction.completed': usage[0] = e.get('usage'); return
-                    elif e.get('event_type') in ('interaction.cancelled', 'error'): sent.append(dict(at=None, server=e)); return
+                    elif e.get('event_type') in ('interaction.cancelled', 'error'): sent.append(dict(at=None, server=e)); print('SERVER', json.dumps(e)[:400], flush=True); return
         await send({'event_type': 'interaction.create', 'model': 'genie-4'}); rd = asyncio.create_task(pump()); await asyncio.sleep(.8)
         ws_ev = {'event_type': 'world_setup', 'world_prompt': seed}
         if img: ws_ev['reference_image'] = {'data': base64.b64encode(img).decode(), 'mime_type': 'image/jpeg'}
         await send(ws_ev)
         try:
             while t0[0] is None and not rd.done(): await asyncio.sleep(.05)
+            if t0[0] is None: raise SystemExit('no video from Genie: ' + json.dumps(sent)[:400])
             for a in stage():
                 w = a['t'] - (time.monotonic() - t0[0])
                 if w > 0: await asyncio.sleep(w)

@@ -1,0 +1,69 @@
+{
+ "frames": [
+  {
+   "line": 0,
+   "seen": "A person in white traditional garments stands in a stone doorway looking out at an arid landscape where people walk with donkeys.",
+   "enacts": 0,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 1,
+   "seen": "The person in white stands in the doorway as people and donkeys walk closer across the dirt landscape.",
+   "enacts": 0,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 2,
+   "seen": "Floating hourglasses appear near the people and donkeys outside while the person in white watches from the doorway.",
+   "enacts": 2,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 3,
+   "seen": "The person in the doorway is gone, and a large green tree now stands in the foreground with people and donkeys beneath it.",
+   "enacts": 2,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 4,
+   "seen": "A small group of people and donkeys gather in the shade under the green tree.",
+   "enacts": 1,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 5,
+   "seen": "The camera pans slightly right, showing two people with a donkey under the tree next to the dark interior wall.",
+   "enacts": 1,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 6,
+   "seen": "A bright light shines on the distant mesh tower behind the tree while one person stands with a donkey.",
+   "enacts": 2,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 7,
+   "seen": "Inside the dark room on the right, a woman in a headscarf lights a small fire in a bowl while people gather by the tree outside.",
+   "enacts": 0,
+   "changed": false,
+   "man": false
+  },
+  {
+   "line": 8,
+   "seen": "A man in white robes walks past a ball on the ground outside while the woman tends the fire inside.",
+   "enacts": 2,
+   "changed": false,
+   "man": false
+  }
+ ],
+ "overall": "The world does not truly transform into new places, instead just dropping literal props like floating hourglasses, a tree, and a ball into the same static doorway view. The biggest weakness is the complete absence of the central walking Black man in black clothing and the lack of genuine environmental transitions.",
+ "critic_model": "gemini-4-argon"
+}
