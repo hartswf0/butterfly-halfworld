@@ -8,7 +8,7 @@ S = json.load(open(sys.argv[1])); im = Image.open(f"{T}/{S['seed_image']}").conv
 for q in range(85, 15, -5):
     b = io.BytesIO(); im.save(b, 'JPEG', quality=q)
     if b.tell() <= 48000: break
-img = b.getvalue(); out = f"{T}/full/storm/out-{time.strftime('%m%d-%H%M')}"; os.makedirs(out + '/f')
+img = b.getvalue(); out = f"{os.path.dirname(os.path.abspath(sys.argv[1]))}/out-{time.strftime('%m%d-%H%M')}"; os.makedirs(out + '/f')
 async def go():
     fr, pcm, sent, t0 = [], bytearray(), [], [None]
     async with websockets.connect('wss://generativelanguage.googleapis.com/v1beta/interactions/live', additional_headers={'x-goog-api-key': K}, ssl=CTX, max_size=None) as ws:
@@ -27,14 +27,14 @@ async def go():
         await send({'event_type': 'world_setup', 'world_prompt': S['world'], 'reference_image': {'data': base64.b64encode(img).decode(), 'mime_type': 'image/jpeg'}})
         while t0[0] is None and not rd.done(): await asyncio.sleep(.05)
         if t0[0] is None: raise SystemExit('no video: ' + json.dumps(sent)[:300])
-        acts = sorted([(S['hold_w'][0], 'down'), (S['hold_w'][1], 'up')] + [(t, x) for t, x in S['beats']])
+        acts = sorted([(S['hold_w'][0], 'down:key_w'), (S['hold_w'][1], 'up:key_w')] + [(d, 'down:' + k) for d, u, k in S.get('keys', [])] + [(u, 'up:' + k) for d, u, k in S.get('keys', [])] + [(t, x) for t, x in S['beats']])
         try:
             for t, a in acts:
                 w = t - (time.monotonic() - t0[0])
                 if w > 0: await asyncio.sleep(w)
                 if rd.done(): break
                 at = round(time.monotonic() - t0[0], 2)
-                if a in ('down', 'up'): await send({'event_type': 'user_action', 'action': 'key_' + a, 'input': 'key_w'}); sent.append(dict(at=at, key=a))
+                if a.split(':')[0] in ('down', 'up') and a.startswith(('down:key_', 'up:key_')): d_, k_ = a.split(':'); await send({'event_type': 'user_action', 'action': 'key_' + d_, 'input': k_}); sent.append(dict(at=at, key=k_, action=d_))
                 else: await send({'event_type': 'input', 'content': [{'type': 'text', 'text': a}]}); sent.append(dict(at=at, text=a))
             await asyncio.sleep(max(0, S['seconds'] - (time.monotonic() - t0[0])))
         finally:

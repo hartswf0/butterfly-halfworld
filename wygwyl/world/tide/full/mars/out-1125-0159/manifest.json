@@ -1,0 +1,150 @@
+{
+ "spec": {
+  "seed_image": "full/mars/seed.jpg",
+  "seconds": 38,
+  "hold_w": [
+   0.5,
+   37.0
+  ],
+  "keys": [
+   [
+    6.0,
+    7.6,
+    "key_a"
+   ],
+   [
+    14.0,
+    15.4,
+    "key_d"
+   ],
+   [
+    24.0,
+    25.2,
+    "key_a"
+   ]
+  ],
+  "world": "Photoreal open-world western video game. The third-person camera is locked just behind and slightly above the player the whole time, never cutting, never turning to face him. The player is Tex Lexington, a Black Ethiopian-Texan cowboy in his thirties riding a grey horse: weathered tan cowboy hat, white cotton Ethiopian shamma cloak with a red tibeb border over a brown leather duster, denim, boots with spurs, a revolver on his hip, a lasso on the saddle. Ethiopia on Mars: a frontier town on the rust-red Martian desert under a pink sky with two small moons, red mesas like West Texas, wooden saloon fronts and a windmill beside round stone tukul houses, tall carved Aksum stelae, glass greenhouse domes. Black Ethiopian settlers in white cotton, donkeys with yellow water jerrycans. A towering Martian dust storm on the horizon. Golden low sun.",
+  "beats": [
+   [
+    2.0,
+    "Tex Lexington canters down the main street of the Mars frontier town; settlers in white cotton look up; a donkey carrying yellow jerrycans crosses in front of him."
+   ],
+   [
+    8.0,
+    "The towering Martian dust storm rolls into town, swallowing the mesas, the saloons and the stelae; red dust swirls around Tex and his horse."
+   ],
+   [
+    13.0,
+    "Red dust fills the entire frame; only Tex's white shamma cloak and his hat show through the storm."
+   ],
+   [
+    18.0,
+    "The storm blows past behind him and the dust clears: the frontier town has become a gleaming future city of Ethiopia on Mars, with copper towers carved like rock-hewn churches, green fields under glass domes, water channels and a train on tall pylons."
+   ],
+   [
+    24.0,
+    "Tex rides on through a wide plaza of the future city; Black Ethiopian settlers in white cotton and silver suits wave to him; drones carry water overhead."
+   ],
+   [
+    31.0,
+    "Under the two moons Tex slows his horse in front of a church carved into the red rock in the shape of a cross, glowing at dusk, the camera locked behind him."
+   ]
+  ]
+ },
+ "events_sent": [
+  {
+   "at": 0.5,
+   "key": "key_w",
+   "action": "down"
+  },
+  {
+   "at": 2.0,
+   "text": "Tex Lexington canters down the main street of the Mars frontier town; settlers in white cotton look up; a donkey carrying yellow jerrycans crosses in front of him."
+  },
+  {
+   "at": 6.0,
+   "key": "key_a",
+   "action": "down"
+  },
+  {
+   "at": 7.6,
+   "key": "key_a",
+   "action": "up"
+  },
+  {
+   "at": 8.0,
+   "text": "The towering Martian dust storm rolls into town, swallowing the mesas, the saloons and the stelae; red dust swirls around Tex and his horse."
+  },
+  {
+   "at": 13.0,
+   "text": "Red dust fills the entire frame; only Tex's white shamma cloak and his hat show through the storm."
+  },
+  {
+   "at": 14.0,
+   "key": "key_d",
+   "action": "down"
+  },
+  {
+   "at": 15.4,
+   "key": "key_d",
+   "action": "up"
+  },
+  {
+   "at": 18.0,
+   "text": "The storm blows past behind him and the dust clears: the frontier town has become a gleaming future city of Ethiopia on Mars, with copper towers carved like rock-hewn churches, green fields under glass domes, water channels and a train on tall pylons."
+  },
+  {
+   "at": 24.0,
+   "text": "Tex rides on through a wide plaza of the future city; Black Ethiopian settlers in white cotton and silver suits wave to him; drones carry water overhead."
+  },
+  {
+   "at": 24.0,
+   "key": "key_a",
+   "action": "down"
+  },
+  {
+   "at": 25.2,
+   "key": "key_a",
+   "action": "up"
+  },
+  {
+   "at": 31.0,
+   "text": "Under the two moons Tex slows his horse in front of a church carved into the red rock in the shape of a cross, glowing at dusk, the camera locked behind him."
+  },
+  {
+   "at": 37.0,
+   "key": "key_w",
+   "action": "up"
+  },
+  {
+   "at": null,
+   "server": {
+    "usage": {
+     "total_tokens": 221249,
+     "total_input_tokens": 449,
+     "input_tokens_by_modality": [
+      {
+       "modality": "text",
+       "tokens": 383
+      },
+      {
+       "modality": "image",
+       "tokens": 66
+      }
+     ],
+     "total_output_tokens": 220800,
+     "output_tokens_by_modality": [
+      {
+       "modality": "video",
+       "tokens": 220800
+      }
+     ]
+    },
+    "event_type": "interaction.completed"
+   }
+  }
+ ],
+ "frames": 920,
+ "seconds": 40.5,
+ "fps": 22.74
+}

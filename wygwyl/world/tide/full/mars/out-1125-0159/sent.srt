@@ -1,0 +1,23 @@
+1
+00:00:02,000 --> 00:00:08,000
+sent 2.0s: Tex Lexington canters down the main street of the Mars frontier town; settlers in white cotton look up; a donkey carrying yellow jerrycans crosses in front of him.
+
+2
+00:00:08,000 --> 00:00:13,000
+sent 8.0s: The towering Martian dust storm rolls into town, swallowing the mesas, the saloons and the stelae; red dust swirls around Tex and his horse.
+
+3
+00:00:13,000 --> 00:00:18,000
+sent 13.0s: Red dust fills the entire frame; only Tex's white shamma cloak and his hat show through the storm.
+
+4
+00:00:18,000 --> 00:00:24,000
+sent 18.0s: The storm blows past behind him and the dust clears: the frontier town has become a gleaming future city of Ethiopia on Mars, with copper towers carved like rock-hewn churches, green fields under glass domes, water channels and a train on tall pylons.
+
+5
+00:00:24,000 --> 00:00:31,000
+sent 24.0s: Tex rides on through a wide plaza of the future city; Black Ethiopian settlers in white cotton and silver suits wave to him; drones carry water overhead.
+
+6
+00:00:31,000 --> 00:00:40,458
+sent 31.0s: Under the two moons Tex slows his horse in front of a church carved into the red rock in the shape of a cross, glowing at dusk, the camera locked behind him.
